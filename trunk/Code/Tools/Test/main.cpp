@@ -1,6 +1,7 @@
 #include <Windows.h>
 #include <Engine.h>
 //#include "GameProcess.h"
+#include "Enemies\EnemyManager.h"
 
 #define APPLICATION_NAME	"VIDEOGAME"
 
@@ -50,7 +51,11 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
   HWND hWnd = CreateWindow(	APPLICATION_NAME, APPLICATION_NAME, WS_OVERLAPPEDWINDOW, 100, 100, 800, 600, NULL, NULL, wc.hInstance, NULL );
 
 
-  // Añadir aquí el Init de la applicacioón
+  // Añadir aquí el Init de la applicación
+  CEnemyManager l_EnemyManager;
+  l_EnemyManager.Init("enemigos.xml");
+
+
   CEngine l_engine;
   //CProcess* l_game = new CGameProcess();
 
