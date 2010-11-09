@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="RenderManager">
+      <UniqueIdentifier>{615848bf-0cbe-47d7-a219-7f941ea3c4ec}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>RenderManager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\RenderManager.h">
+      <Filter>RenderManager</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

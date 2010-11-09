@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="include\Math\MathUtils.inl">
+      <Filter>Math</Filter>
+    </None>
+    <None Include="include\Math\Matrix33.inl">
+      <Filter>Math</Filter>
+    </None>
+    <None Include="include\Math\Matrix34.inl">
+      <Filter>Math</Filter>
+    </None>
+    <None Include="include\Math\Matrix44.inl">
+      <Filter>Math</Filter>
+    </None>
+    <None Include="include\Math\Vector2.inl">
+      <Filter>Math</Filter>
+    </None>
+    <None Include="include\Math\Vector3.inl">
+      <Filter>Math</Filter>
+    </None>
+    <None Include="include\Math\Vector4.inl">
+      <Filter>Math</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Math">
+      <UniqueIdentifier>{13d0725d-84e6-4e05-828a-96496af3df7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XML">
+      <UniqueIdentifier>{fb009b7e-bf8c-4ab4-a713-79b657863608}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{aac0a4ba-a7fe-4093-b81b-109606b819b4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Math\MathConstants.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="XML\XMLTreeNode.cpp">
+      <Filter>XML</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Math\MathTypes.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\MathUtils.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\Matrix33.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\Matrix34.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\Matrix44.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\Vector2.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\Vector3.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\Vector4.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\XML\XMLTreeNode.h">
+      <Filter>XML</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\Types.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
