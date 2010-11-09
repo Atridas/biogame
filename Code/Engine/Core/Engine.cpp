@@ -21,12 +21,18 @@ CEngine::~CEngine(void)
 
 void CEngine::Update()
 {
-	m_pProcess->Update();
+	if(m_pProcess != NULL)
+	{
+		m_pProcess->Update();
+	}
 }
 
 void CEngine::Render()
 {
-	m_pProcess->Render();
+	if(m_pProcess != NULL)
+	{
+		m_pProcess->Render();
+	}
 }
 
 void CEngine::SetProcess(CProcess* _pProcess)
