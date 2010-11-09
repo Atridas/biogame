@@ -11,7 +11,23 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Enemies\Camera.cpp" />
+    <ClCompile Include="Enemies\EnemyInstance.cpp" />
+    <ClCompile Include="Enemies\EnemyManager.cpp" />
+    <ClCompile Include="Enemies\EnemyResource.cpp" />
+    <ClCompile Include="Enemies\Patroller.cpp" />
+    <ClCompile Include="Enemies\Sniper.cpp" />
+    <ClCompile Include="Enemies\Turret.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Enemies\Camera.h" />
+    <ClInclude Include="Enemies\EnemyInstance.h" />
+    <ClInclude Include="Enemies\EnemyManager.h" />
+    <ClInclude Include="Enemies\EnemyResource.h" />
+    <ClInclude Include="Enemies\Patroller.h" />
+    <ClInclude Include="Enemies\Sniper.h" />
+    <ClInclude Include="Enemies\Turret.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{52606329-0594-4B34-879A-B11B8787A7F1}</ProjectGuid>
