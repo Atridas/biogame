@@ -12,8 +12,8 @@
 #define _XML_TREE_NODE_H_
 
 // Includes
-#include "libxml/parser.h"
-#include "libxml/xmlwriter.h"
+#include <libxml/parser.h>
+#include <libxml/xmlwriter.h>
 #include <string>
 #include "Math/Vector4.h"
 
