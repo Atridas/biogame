@@ -1,9 +1,10 @@
 #include <Windows.h>
-#include <Engine.h>
-//#include "GameProcess.h"
-#include "Enemies\EnemyManager.h"
 
-#define APPLICATION_NAME	"VIDEOGAME"
+#include <Engine.h>
+
+#include "TestProcess.h"
+
+#define APPLICATION_NAME	"TEST"
 
 //-----------------------------------------------------------------------------
 // Name: MsgProc()
@@ -52,14 +53,12 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 
 
   // Añadir aquí el Init de la applicación
-  CEnemyManager l_EnemyManager;
-  l_EnemyManager.Init("enemigos.xml");
-
-
   CEngine l_engine;
-  //CProcess* l_game = new CGameProcess();
+  CProcess* l_Test = new CTestProcess();
+  l_engine.SetProcess(l_Test);
 
-  //l_engine.SetProcess(l_game);
+  l_engine.Init("");
+
 
   ShowWindow( hWnd, SW_SHOWDEFAULT );
   UpdateWindow( hWnd );
@@ -78,8 +77,8 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
     else
     {
        // Main loop: Añadir aquí el Update y Render de la aplicación principal
-		//l_engine.Update();
-		//l_engine.Render();
+	     l_engine.Update();
+		   l_engine.Render();
     }
   }
   UnregisterClass( APPLICATION_NAME, wc.hInstance );

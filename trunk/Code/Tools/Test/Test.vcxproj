@@ -19,6 +19,7 @@
     <ClCompile Include="Enemies\Sniper.cpp" />
     <ClCompile Include="Enemies\Turret.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="TestProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemies\Camera.h" />
@@ -28,6 +29,7 @@
     <ClInclude Include="Enemies\Patroller.h" />
     <ClInclude Include="Enemies\Sniper.h" />
     <ClInclude Include="Enemies\Turret.h" />
+    <ClInclude Include="TestProcess.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{52606329-0594-4B34-879A-B11B8787A7F1}</ProjectGuid>
@@ -80,7 +82,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)Bin\lib\;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Core_d.lib;Base_d.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Graphics_d.lib;Core_d.lib;Base_d.lib;d3dx9d.lib;d3d9.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -100,7 +102,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>$(SolutionDir)Bin\lib\;</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Core.lib;Base.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Graphics.lib;Core.lib;Base.lib;d3dx9d.lib;d3d9.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

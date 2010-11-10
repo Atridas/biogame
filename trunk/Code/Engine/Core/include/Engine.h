@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 //---forward-declarations---
 class CProcess;
@@ -14,9 +15,17 @@ typedef vector<CProcess*> VectorProcessPtr;
 
 class CEngine
 {
+  void                  Relase();
+  
+	bool                  m_bIsOk;
 public:
-	CEngine(void);
-	~CEngine(void);
+	CEngine(void):m_bIsOk(false),m_pProcess(0),m_pCore(0){};
+  virtual ~CEngine(void) {Done();};
+
+  bool                  Init(const string& _PathXML);
+
+  void                  Done() {if(IsOk()) Relase(); m_bIsOk=false;};
+  bool                  IsOk() const {return m_bIsOk;};
 
 	void	Update();
 	void	Render();

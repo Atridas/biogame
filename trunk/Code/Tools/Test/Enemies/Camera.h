@@ -10,7 +10,7 @@ private:
 	bool                  m_bIsOk;
 public:
   CCamera(void);
-  ~CCamera(void) {Done();};
+  virtual ~CCamera(void) {Done();};
 
   bool                  Init( const Vect3f&   _vPos, 
                               const Vect3f&   _vRot, 
