@@ -7,7 +7,7 @@ class CGameProcess :
 {
 public:
 	CGameProcess(void);
-	~CGameProcess(void);
+	virtual ~CGameProcess(void);
 
 	void Update();
 	void Render();

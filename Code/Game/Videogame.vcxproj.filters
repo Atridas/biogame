@@ -21,10 +21,10 @@
     <ClCompile Include="Sniper.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
-    <ClCompile Include="GameProcess.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Game</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="GameProcess.cpp">
       <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>

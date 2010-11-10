@@ -23,6 +23,7 @@
     <ClCompile Include="Enemies\Turret.cpp">
       <Filter>Enemies</Filter>
     </ClCompile>
+    <ClCompile Include="TestProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemies">
@@ -51,5 +52,6 @@
     <ClInclude Include="Enemies\Turret.h">
       <Filter>Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="TestProcess.h" />
   </ItemGroup>
 </Project>

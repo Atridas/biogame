@@ -3,20 +3,21 @@
 #include <Core.h>
 #include <Process.h>
 
-CEngine::CEngine(void)
+#include <base.h>
+
+bool CEngine::Init(const string& _PathXML)
 {
-	m_pCore = NULL;
-	m_pProcess = NULL;
+  //m_pProcess->Init();
+  m_pCore = CCore::GetInstance();
+  m_pCore->Init(); //TODO passar els paràmetres
+
+  return m_bIsOk = true;
 }
 
-
-CEngine::~CEngine(void)
+void CEngine::Relase()
 {
-	if(m_pProcess != NULL)
-	{
-		delete m_pProcess;
-		m_pProcess = NULL;
-	}
+  CHECKED_DELETE(m_pProcess);
+  //CCore::GetInstance()->Done();
 }
 
 void CEngine::Update()

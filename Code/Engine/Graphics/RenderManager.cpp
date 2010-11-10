@@ -1,13 +1,30 @@
 #include "RenderManager.h"
 
 
-CRenderManager::CRenderManager(void)
+bool CRenderManager::Init(void)
+{
+
+  return m_bIsOk = true;
+}
+
+
+void CRenderManager::Relase(void)
 {
 
 }
 
 
-CRenderManager::~CRenderManager(void)
+void CRenderManager::BeginRendering  ()
+{
+
+}
+
+void CRenderManager::EndRendering    ()
+{
+
+}
+
+void CRenderManager::SetUpMatrices   ()
 {
 
 }
