@@ -24,7 +24,8 @@ public:
   void                  SetupMatrices   ();
 	
 	//----DebugRender Functions-------------------------------------------
-	void								DrawLine					(const Vect3f &PosA, const Vect3f &PosB, CColor Color);
+	void								  DrawLine					(const Vect3f &PosA, const Vect3f &PosB, CColor Color);
+  void                  DrawAxis          ();
 	//--------------------------------------------------------------------
 
 private:
