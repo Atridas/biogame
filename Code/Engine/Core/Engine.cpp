@@ -44,7 +44,8 @@ void CEngine::RenderScene (CRenderManager* rm)
 	{
 		m_pProcess->Render();
 		CColor color(1.f,1.f,1.f);
-		rm->DrawLine(Vect3f(0.f,0.f,0.f), Vect3f(0.f,100.f,0.f), color );
+		//rm->DrawLine(Vect3f(0.f,0.f,0.f), Vect3f(0.f,100.f,0.f), color );
+    rm->DrawAxis();
 	}
 }
 void CEngine::SetProcess(CProcess* _pProcess)
