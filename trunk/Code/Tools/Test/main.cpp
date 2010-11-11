@@ -57,7 +57,7 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
   CProcess* l_Test = new CTestProcess();
   l_engine.SetProcess(l_Test);
 
-  l_engine.Init("");
+  l_engine.Init("", hWnd);
 
 
   ShowWindow( hWnd, SW_SHOWDEFAULT );

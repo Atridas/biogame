@@ -3,9 +3,12 @@
 #include <vector>
 #include <string>
 
+#include <Windows.h>
+
 //---forward-declarations---
 class CProcess;
 class CCore;
+class CRenderManager;
 //--------------------------
 
 
@@ -22,14 +25,13 @@ public:
 	CEngine(void):m_bIsOk(false),m_pProcess(0),m_pCore(0){};
   virtual ~CEngine(void) {Done();};
 
-  bool                  Init(const string& _PathXML);
-
-  void                  Done() {if(IsOk()) Relase(); m_bIsOk=false;};
-  bool                  IsOk() const {return m_bIsOk;};
-
-	void	Update();
-	void	Render();
-	void	SetProcess(CProcess* _pProcess);
+  bool        Init					(const string& _PathXML, HWND hWnd);
+  void        Done					() {if(IsOk()) Relase(); m_bIsOk=false;};
+  bool        IsOk					() const {return m_bIsOk;};
+	void				Update				();
+	void				Render				();
+	void				RenderScene		(CRenderManager* rm);
+	void				SetProcess		(CProcess* _pProcess);
 
 private:
 

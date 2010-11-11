@@ -101,6 +101,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="include\Math\Color.inl" />
     <None Include="include\Math\MathUtils.inl" />
     <None Include="include\Math\Matrix33.inl" />
     <None Include="include\Math\Matrix34.inl" />
@@ -116,6 +117,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\base.h" />
+    <ClInclude Include="include\Math\Color.h" />
     <ClInclude Include="include\Math\MathTypes.h" />
     <ClInclude Include="include\Math\MathUtils.h" />
     <ClInclude Include="include\Math\Matrix33.h" />

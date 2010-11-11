@@ -23,6 +23,9 @@
     <None Include="include\Math\Vector4.inl">
       <Filter>Math</Filter>
     </None>
+    <None Include="include\Math\Color.inl">
+      <Filter>Math</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Math">
@@ -75,5 +78,8 @@
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="include\base.h" />
+    <ClInclude Include="include\Math\Color.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

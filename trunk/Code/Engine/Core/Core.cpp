@@ -4,12 +4,12 @@
 
 #include "RenderManager.h"
 
-bool CCore::Init()
+bool CCore::Init(HWND hWnd)
 {
   m_pRenderManager = new CRenderManager();
 
 
-  m_pRenderManager->Init();
+  m_pRenderManager->Init(hWnd);
 
   return m_bIsOk = true;
 }
