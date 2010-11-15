@@ -21,3 +21,14 @@ void CGameProcess::Render()
 {
 
 }
+
+bool CGameProcess::Init()
+{
+	
+  return m_bIsOk = true;
+}
+
+void CGameProcess::Relase()
+{
+	// ----
+}
