@@ -3,7 +3,7 @@
 #include <d3dx9.h>
 #include <string>
 #include "Base.h"
-#include "Math\Color.h"
+#include "Math/Color.h"
 
 class CRenderManager
 {

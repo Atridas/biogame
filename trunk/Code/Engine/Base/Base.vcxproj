@@ -113,6 +113,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathConstants.cpp" />
+    <ClCompile Include="Utils\CountDownTimer.cpp" />
+    <ClCompile Include="Utils\LerpAnimator1D.cpp" />
+    <ClCompile Include="Utils\LerpAnimator2D.cpp" />
+    <ClCompile Include="Utils\LerpAnimator3D.cpp" />
+    <ClCompile Include="Utils\Logger.cpp" />
     <ClCompile Include="XML\XMLTreeNode.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +131,14 @@
     <ClInclude Include="include\Math\Vector2.h" />
     <ClInclude Include="include\Math\Vector3.h" />
     <ClInclude Include="include\Math\Vector4.h" />
+    <ClInclude Include="include\Utils\BaseUtils.h" />
+    <ClInclude Include="include\Utils\CountDownTimer.h" />
+    <ClInclude Include="include\Utils\LerpAnimator1D.h" />
+    <ClInclude Include="include\Utils\LerpAnimator2D.h" />
+    <ClInclude Include="include\Utils\LerpAnimator3D.h" />
+    <ClInclude Include="include\Utils\Logger.h" />
+    <ClInclude Include="include\Utils\MapManager.h" />
+    <ClInclude Include="include\Utils\Singleton.h" />
     <ClInclude Include="include\Utils\Types.h" />
     <ClInclude Include="include\XML\XMLTreeNode.h" />
   </ItemGroup>

@@ -1,3 +1,4 @@
+#include "Utils/Logger.h"
 #include "RenderManager.h"
 
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
@@ -15,7 +16,7 @@ struct CUSTOMVERTEX
 bool CRenderManager::Init(HWND hWnd)
 {
 
-	//LOGGER->AddNewLog(ELL_INFORMATION, "RenderManager:: Inicializando la libreria Direct3D");
+	LOGGER->AddNewLog(ELL_INFORMATION, "RenderManager:: Inicializando la libreria Direct3D");
 
 	// Create the D3D object.
 	m_pD3D = Direct3DCreate9( D3D_SDK_VERSION );
@@ -63,12 +64,12 @@ bool CRenderManager::Init(HWND hWnd)
 
 			if (m_bIsOk)
 			{
-				//LOGGER->AddNewLog(ELL_INFORMATION, "RenderManager:: D3DCREATE_SOFTWARE_VERTEXPROCESSING");
+				LOGGER->AddNewLog(ELL_INFORMATION, "RenderManager:: D3DCREATE_SOFTWARE_VERTEXPROCESSING");
 			}
 		}
 		else
 		{
-			//LOGGER->AddNewLog(ELL_INFORMATION, "RenderManager:: D3DCREATE_HARDWARE_VERTEXPROCESSING");
+			LOGGER->AddNewLog(ELL_INFORMATION, "RenderManager:: D3DCREATE_HARDWARE_VERTEXPROCESSING");
 		}
 
 
@@ -110,7 +111,7 @@ bool CRenderManager::Init(HWND hWnd)
 			{
 				GetWindowRect(hWnd);
 			}
-			//LOGGER->AddNewLog(ELL_INFORMATION, "RenderManager:: La resolucion de pantalla es (%dx%d)",m_uWidth,m_uHeight);
+			LOGGER->AddNewLog(ELL_INFORMATION, "RenderManager:: La resolucion de pantalla es (%dx%d)",m_uWidth,m_uHeight);
 			
 		}
 	}
@@ -118,7 +119,7 @@ bool CRenderManager::Init(HWND hWnd)
 	if (!m_bIsOk)
 	{
 		std::string msg_error = "Rendermanager::Init-> Error al inicializar Direct3D";
-		//LOGGER->AddNewLog(ELL_ERROR, msg_error.c_str());
+		LOGGER->AddNewLog(ELL_ERROR, msg_error.c_str());
 		Relase();
 		//throw CException(__FILE__, __LINE__, msg_error);
 	}
@@ -202,7 +203,7 @@ void CRenderManager::SetupMatrices   ()
 		//Set default view and projection matrix
 
 		//Setup Matrix view
-		D3DXVECTOR3 l_Eye(5.0f,5.0f,-5.0f), l_LookAt(0.0f,0.0f,0.0f), l_VUP(0.0f,1.0f,0.0f);
+		D3DXVECTOR3 l_Eye(5.0f,2.0f,-1.0f), l_LookAt(0.0f,0.0f,0.0f), l_VUP(0.0f,1.0f,0.0f);
 		D3DXMatrixLookAtLH( &m_matView, &l_Eye, &l_LookAt, &l_VUP);
 
 		//Setup Matrix projection
@@ -246,14 +247,9 @@ void CRenderManager::DrawLine ( const Vect3f &PosA, const Vect3f &PosB, CColor C
 
 void CRenderManager::DrawAxis ()
 {
-  //TODO açó és una guarrada, caldrà arreglar-ho
-  CColor red(1.f,0.f,0.f);
-  CColor green(0.f,1.f,0.f);
-  CColor blue(1.f,0.f,1.f);
-
-	DWORD color_red   = red  .GetUint32Argb();
-	DWORD color_green = green.GetUint32Argb();
-	DWORD color_blue  = blue .GetUint32Argb();
+	DWORD color_red   = colRED.GetUint32Argb();
+	DWORD color_green = colGREEN.GetUint32Argb();
+	DWORD color_blue  = colBLUE.GetUint32Argb();
 
 	CUSTOMVERTEX v[6] =
 	{
