@@ -18,7 +18,7 @@ public:
 
 private:
 
-	virtual void          Relase() = 0;
+	virtual void          Relase();
 
 
 };

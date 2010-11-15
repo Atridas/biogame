@@ -151,7 +151,7 @@ void CRenderManager::BeginRendering ()
 {
 
 #ifdef _DEBUG // Clear the backbuffer to a blue color in a Debug mode
-	uint32 red		= (uint32) (0.f * 255);
+	uint32 red		= (uint32) (1.f * 255);
 	uint32 green	= (uint32) (0.f * 255);
 	uint32 blue		= (uint32) (1.f * 255);
 	m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET|D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(red, green, blue), 1.0f, 0 );

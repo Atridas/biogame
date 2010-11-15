@@ -9,7 +9,10 @@ public:
 	CGameProcess(void);
 	virtual ~CGameProcess(void);
 
+  virtual bool          Init();
 	void Update();
 	void Render();
+private:
+  virtual void          Relase();
 };
 
