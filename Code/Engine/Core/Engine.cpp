@@ -8,7 +8,8 @@
 bool CEngine::Init(const string& _PathXML,  HWND hWnd)
 {
   //m_pProcess->Init();
-  m_pCore = CCore::GetInstance();
+  new CLogger();
+  m_pCore = new CCore();
   m_pCore->Init(hWnd); //TODO passar els paràmetres
 
   return m_bIsOk = true;
@@ -17,7 +18,11 @@ bool CEngine::Init(const string& _PathXML,  HWND hWnd)
 void CEngine::Relase()
 {
   CHECKED_DELETE(m_pProcess);
-  //CCore::GetInstance()->Done();
+  CHECKED_DELETE(m_pCore);
+
+  CLogger *pLogger = LOGGER;
+  pLogger->SaveLogsInFile();
+  CHECKED_DELETE(pLogger);
 }
 
 void CEngine::Update()
@@ -34,18 +39,15 @@ void CEngine::Render()
 	rm->BeginRendering();
 	rm->SetupMatrices();
 	{
-		RenderScene(rm);
+		RenderScene();
 	}
 	rm->EndRendering();
 }
-void CEngine::RenderScene (CRenderManager* rm)
+void CEngine::RenderScene()
 {
 	if(m_pProcess != NULL)
 	{
 		m_pProcess->Render();
-		CColor color(1.f,1.f,1.f);
-		//rm->DrawLine(Vect3f(0.f,0.f,0.f), Vect3f(0.f,100.f,0.f), color );
-    rm->DrawAxis();
 	}
 }
 void CEngine::SetProcess(CProcess* _pProcess)

@@ -4,19 +4,22 @@
 
 class CTestProcess: public CProcess
 {
-	void                  Relase();
-  
-	bool                  m_bIsOk;
+
 public:
-	CTestProcess(void):m_bIsOk(false){};
+	CTestProcess(void){};
   virtual ~CTestProcess(void) {Done();};
 
-  bool                  Init();
+  virtual bool      Init();
 
-  void                  Done() {if(IsOk()) Relase(); m_bIsOk=false;};
-  bool                  IsOk() const {return m_bIsOk;};
+  void              Done() {if(IsOk()) Relase(); m_bIsOk=false;};
 
 	void Update();
 	void Render();
+
+private:
+
+	virtual void          Relase() = 0;
+
+
 };
 

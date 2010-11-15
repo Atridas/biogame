@@ -30,7 +30,7 @@ public:
   bool        IsOk					() const {return m_bIsOk;};
 	void				Update				();
 	void				Render				();
-	void				RenderScene		(CRenderManager* rm);
+	void				RenderScene		();
 	void				SetProcess		(CProcess* _pProcess);
 
 private:

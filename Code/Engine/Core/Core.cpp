@@ -8,7 +8,6 @@ bool CCore::Init(HWND hWnd)
 {
   m_pRenderManager = new CRenderManager();
 
-
   m_pRenderManager->Init(hWnd);
 
   return m_bIsOk = true;
