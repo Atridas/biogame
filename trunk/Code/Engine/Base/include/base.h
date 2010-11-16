@@ -7,6 +7,7 @@
 #include <assert.h>
 #include "Utils/Logger.h"
 #include "Utils/Types.h"
+#include "Utils/BonesManeres.h"
 #include "Math/Matrix33.h"
 #include "Math/Matrix34.h"
 #include "Math/Matrix44.h"

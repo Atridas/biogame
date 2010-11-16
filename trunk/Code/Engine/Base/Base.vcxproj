@@ -132,6 +132,7 @@
     <ClInclude Include="include\Math\Vector3.h" />
     <ClInclude Include="include\Math\Vector4.h" />
     <ClInclude Include="include\Utils\BaseUtils.h" />
+    <ClInclude Include="include\Utils\BonesManeres.h" />
     <ClInclude Include="include\Utils\CountDownTimer.h" />
     <ClInclude Include="include\Utils\LerpAnimator1D.h" />
     <ClInclude Include="include\Utils\LerpAnimator2D.h" />

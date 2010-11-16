@@ -120,5 +120,8 @@
     <ClInclude Include="include\Utils\Logger.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="include\Utils\BonesManeres.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
