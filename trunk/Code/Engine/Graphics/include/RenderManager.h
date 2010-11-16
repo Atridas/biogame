@@ -25,6 +25,9 @@ public:
   void                  DrawAxis          ();
 	//--------------------------------------------------------------------
 
+  //----Getters / Setters ----------------------------------------------
+  LPDIRECT3DDEVICE9     GetDevice         () {return m_pD3DDevice;};
+
 public:
 	void                  Release					  ();
 

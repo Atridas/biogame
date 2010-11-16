@@ -5,6 +5,7 @@
 
 bool CTestProcess::Init()
 {
+  LOGGER->AddNewLog(ELL_INFORMATION,"TestProcess::Init");
   // ---
   SetOk(true);
   return IsOk();
@@ -12,6 +13,7 @@ bool CTestProcess::Init()
 
 void CTestProcess::Release()
 {
+  LOGGER->AddNewLog(ELL_INFORMATION,"TestProcess::Release");
 	// ----
 }
 

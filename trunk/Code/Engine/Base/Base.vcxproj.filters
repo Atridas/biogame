@@ -37,6 +37,24 @@
     <Filter Include="Utils">
       <UniqueIdentifier>{aac0a4ba-a7fe-4093-b81b-109606b819b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils\LanguageManager">
+      <UniqueIdentifier>{f70f4da3-320a-409f-9b42-b9d69aaf45e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\CountDownTimer">
+      <UniqueIdentifier>{d59a394e-cd0c-4308-bc13-b9390d438714}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Exception">
+      <UniqueIdentifier>{4c1952a8-e476-4f64-89c7-ca05608db221}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\LerpAnimator">
+      <UniqueIdentifier>{d7021e1f-d08f-47eb-8b15-483ab80ef8f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Logger">
+      <UniqueIdentifier>{39d7cec7-3e96-4acf-8f3d-fe8fdba3dde5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\MemLeaks">
+      <UniqueIdentifier>{cf6693b7-6f65-4cf6-a42b-445c96ab07fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathConstants.cpp">
@@ -45,26 +63,29 @@
     <ClCompile Include="XML\XMLTreeNode.cpp">
       <Filter>XML</Filter>
     </ClCompile>
-    <ClCompile Include="Utils\LerpAnimator3D.cpp">
-      <Filter>Utils</Filter>
+    <ClCompile Include="Utils\LanguageManager.cpp">
+      <Filter>Utils\LanguageManager</Filter>
     </ClCompile>
     <ClCompile Include="Utils\CountDownTimer.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Utils\LerpAnimator1D.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Utils\LerpAnimator2D.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Utils\Logger.cpp">
-      <Filter>Utils</Filter>
+      <Filter>Utils\CountDownTimer</Filter>
     </ClCompile>
     <ClCompile Include="Utils\Exception.cpp">
-      <Filter>Utils</Filter>
+      <Filter>Utils\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\LerpAnimator1D.cpp">
+      <Filter>Utils\LerpAnimator</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\LerpAnimator2D.cpp">
+      <Filter>Utils\LerpAnimator</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\LerpAnimator3D.cpp">
+      <Filter>Utils\LerpAnimator</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Logger.cpp">
+      <Filter>Utils\Logger</Filter>
     </ClCompile>
     <ClCompile Include="Utils\MemLeaks.cpp">
-      <Filter>Utils</Filter>
+      <Filter>Utils\MemLeaks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -105,35 +126,38 @@
     <ClInclude Include="include\Utils\Singleton.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="include\Utils\LerpAnimator1D.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Utils\LerpAnimator2D.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Utils\LerpAnimator3D.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="include\Utils\MapManager.h">
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="include\Utils\BaseUtils.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="include\Utils\CountDownTimer.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Utils\Logger.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="include\Utils\BaseControl.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="include\Utils\LanguageManager.h">
+      <Filter>Utils\LanguageManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\CountDownTimer.h">
+      <Filter>Utils\CountDownTimer</Filter>
+    </ClInclude>
     <ClInclude Include="include\Utils\Exception.h">
-      <Filter>Utils</Filter>
+      <Filter>Utils\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\LerpAnimator3D.h">
+      <Filter>Utils\LerpAnimator</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\LerpAnimator1D.h">
+      <Filter>Utils\LerpAnimator</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\LerpAnimator2D.h">
+      <Filter>Utils\LerpAnimator</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\Logger.h">
+      <Filter>Utils\Logger</Filter>
     </ClInclude>
     <ClInclude Include="include\Utils\MemLeaks.h">
-      <Filter>Utils</Filter>
+      <Filter>Utils\MemLeaks</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
