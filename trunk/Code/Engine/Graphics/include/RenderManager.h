@@ -6,29 +6,31 @@
 #include "Math/Color.h"
 
 class CRenderManager:
-  public CBonesManeres
+  public CBaseControl
 {
  
 public:
-	CRenderManager(void):	m_pD3D(0), m_pD3DDevice(0),
-												m_uWidth(0), m_uHeight(0) {};
+	                      CRenderManager    (void):	m_pD3D(0), m_pD3DDevice(0),
+												                          m_uWidth(0), m_uHeight(0)       {};
+  virtual               ~CRenderManager   (void)                                  {Done();};
 
   bool                  Init(HWND hWnd);
 
-  void                  BeginRendering  ();
-  void                  EndRendering    ();
-  void                  SetupMatrices   ();
+  void                  BeginRendering    ();
+  void                  EndRendering      ();
+  void                  SetupMatrices     ();
 	
 	//----DebugRender Functions-------------------------------------------
 	void								  DrawLine					(const Vect3f &PosA, const Vect3f &PosB, CColor Color);
   void                  DrawAxis          ();
 	//--------------------------------------------------------------------
 
-private:
-	virtual void          Relase					();
-	void									GetWindowRect		(HWND hWnd);
+public:
+	void                  Relase					  ();
 
 private:
+	void									GetWindowRect		  (HWND hWnd);
+
 	LPDIRECT3D9						m_pD3D; // direct3d interface
 	LPDIRECT3DDEVICE9	  	m_pD3DDevice;	   					 // direct3d device
 

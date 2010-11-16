@@ -6,8 +6,8 @@
 bool CTestProcess::Init()
 {
   // ---
-
-  return m_bIsOk = true;
+  SetOk(true);
+  return IsOk();
 }
 
 void CTestProcess::Relase()

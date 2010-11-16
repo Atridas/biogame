@@ -2,24 +2,22 @@
 
 #include "Process.h"
 
-class CTestProcess: public CProcess
+class CTestProcess:
+  public CProcess
 {
 
 public:
-	CTestProcess(void){};
-  virtual ~CTestProcess(void) {Done();};
+	                      CTestProcess            ()          {};
+  virtual               ~CTestProcess           ()          {Done();};
 
-  virtual bool      Init();
+  virtual bool          Init();
 
-  void              Done() {if(IsOk()) Relase(); m_bIsOk=false;};
-
-	void Update();
-	void Render();
+	void                  Update                  ();
+	void                  Render                  ();
 
 private:
 
-	virtual void          Relase();
-
+	void                  Relase                  ();
 
 };
 

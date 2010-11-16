@@ -60,6 +60,12 @@
     <ClCompile Include="Utils\Logger.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Utils\Exception.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\MemLeaks.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Math\MathTypes.h">
@@ -120,7 +126,13 @@
     <ClInclude Include="include\Utils\Logger.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="include\Utils\BonesManeres.h">
+    <ClInclude Include="include\Utils\BaseControl.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\Exception.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\MemLeaks.h">
       <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>

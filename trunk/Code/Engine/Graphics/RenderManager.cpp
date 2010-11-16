@@ -1,4 +1,5 @@
 #include "Utils/Logger.h"
+#include "Utils/Exception.h"
 #include "RenderManager.h"
 
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
@@ -21,9 +22,9 @@ bool CRenderManager::Init(HWND hWnd)
 	// Create the D3D object.
 	m_pD3D = Direct3DCreate9( D3D_SDK_VERSION );
 	
-	m_bIsOk = m_pD3D != NULL;
+  SetOk(m_pD3D != NULL);
 
-	if (m_bIsOk)
+  if (IsOk())
 	{
 		// Set up the structure used to create the D3DDevice
 		D3DPRESENT_PARAMETERS d3dpp;
@@ -54,15 +55,15 @@ bool CRenderManager::Init(HWND hWnd)
 		d3dpp.PresentationInterval		= D3DPRESENT_INTERVAL_IMMEDIATE;
 
 		// Create the D3DDevice
-		m_bIsOk = !FAILED(	m_pD3D->CreateDevice(	D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,
-												D3DCREATE_HARDWARE_VERTEXPROCESSING, &d3dpp, &m_pD3DDevice ) );
+		SetOk(!FAILED(	m_pD3D->CreateDevice(	D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,
+												D3DCREATE_HARDWARE_VERTEXPROCESSING, &d3dpp, &m_pD3DDevice ) ));
 
-		if (!m_bIsOk)
+		if (!IsOk())
 		{
-			m_bIsOk = !FAILED(	m_pD3D->CreateDevice(	D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,
-													D3DCREATE_SOFTWARE_VERTEXPROCESSING, &d3dpp, &m_pD3DDevice ) );
+			SetOk(!FAILED(	m_pD3D->CreateDevice(	D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,
+													D3DCREATE_SOFTWARE_VERTEXPROCESSING, &d3dpp, &m_pD3DDevice ) ));
 
-			if (m_bIsOk)
+			if (IsOk())
 			{
 				LOGGER->AddNewLog(ELL_INFORMATION, "RenderManager:: D3DCREATE_SOFTWARE_VERTEXPROCESSING");
 			}
@@ -75,7 +76,7 @@ bool CRenderManager::Init(HWND hWnd)
 
 		
 
-		if (m_bIsOk)
+		if (IsOk())
 		{
 			// Turn off culling, so we see the front and back of the triangle
 			m_pD3DDevice->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
@@ -116,16 +117,15 @@ bool CRenderManager::Init(HWND hWnd)
 		}
 	}
 
-	if (!m_bIsOk)
+	if (!IsOk())
 	{
 		std::string msg_error = "Rendermanager::Init-> Error al inicializar Direct3D";
 		LOGGER->AddNewLog(ELL_ERROR, msg_error.c_str());
 		Relase();
-		//throw CException(__FILE__, __LINE__, msg_error);
+		throw CException(__FILE__, __LINE__, msg_error);
 	}
-
 	
-	return m_bIsOk;
+	return IsOk();
 }
 
 

@@ -6,13 +6,13 @@ class CGameProcess :
 	public CProcess
 {
 public:
-	CGameProcess(void);
-	virtual ~CGameProcess(void);
+                        CGameProcess      ()                        {};
+  virtual               ~CGameProcess     ()                        {Done();};
 
-  virtual bool          Init();
-	void Update();
-	void Render();
+  virtual bool          Init              ();
+	void                  Update            ();
+	void                  Render            ();
 private:
-  virtual void          Relase();
+  void                  Relase            ();
 };
 
