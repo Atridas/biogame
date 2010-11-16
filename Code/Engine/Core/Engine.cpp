@@ -12,7 +12,9 @@ bool CEngine::Init(const string& _PathXML,  HWND hWnd)
   m_pCore = new CCore();
   m_pCore->Init(hWnd); //TODO passar els paràmetres
 
-  return m_bIsOk = true;
+  SetOk(true);
+
+  return IsOk();
 }
 
 void CEngine::Relase()

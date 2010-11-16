@@ -10,7 +10,9 @@ bool CCore::Init(HWND hWnd)
 
   m_pRenderManager->Init(hWnd);
 
-  return m_bIsOk = true;
+  SetOk(true);
+
+  return IsOk();
 }
 
 void CCore::Relase()
