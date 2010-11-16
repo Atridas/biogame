@@ -26,7 +26,7 @@ public:
 	//--------------------------------------------------------------------
 
 public:
-	void                  Relase					  ();
+	void                  Release					  ();
 
 private:
 	void									GetWindowRect		  (HWND hWnd);

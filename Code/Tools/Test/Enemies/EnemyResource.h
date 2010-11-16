@@ -5,7 +5,7 @@
 class CEnemyResource
 {
 private:
-  void                  Relase();
+  void                  Release();
   
 	bool                  m_bIsOk;
 public:
@@ -13,7 +13,7 @@ public:
   ~CEnemyResource(void) {Done();};
 
   bool                  Init(const char* _pcId, const char* _pcPathMalla);
-  void                  Done() {if(IsOk()) Relase(); m_bIsOk=false;};
+  void                  Done() {if(IsOk()) Release(); m_bIsOk=false;};
   bool                  IsOk() const {return m_bIsOk;};
 
 

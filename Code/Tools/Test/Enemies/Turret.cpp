@@ -6,7 +6,7 @@ CTurret::CTurret(void)
 }
 
 
-void CTurret::Relase(void)
+void CTurret::Release(void)
 {
   // ----
 }

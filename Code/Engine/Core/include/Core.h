@@ -33,7 +33,7 @@ private:
 
   CRenderManager*      m_pRenderManager;
 
-  void                 Relase             ();
+  void                 Release             ();
 
 };
 

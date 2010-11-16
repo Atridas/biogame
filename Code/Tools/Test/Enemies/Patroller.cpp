@@ -6,7 +6,7 @@ CPatroller::CPatroller(void)
 }
 
 
-void CPatroller::Relase(void)
+void CPatroller::Release(void)
 {
   // ----
 }

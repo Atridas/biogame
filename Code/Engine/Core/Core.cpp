@@ -15,7 +15,7 @@ bool CCore::Init(HWND hWnd)
   return IsOk();
 }
 
-void CCore::Relase()
+void CCore::Release()
 {
   CHECKED_DELETE(m_pRenderManager);
 }

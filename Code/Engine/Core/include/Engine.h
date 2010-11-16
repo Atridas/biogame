@@ -33,7 +33,7 @@ public:
 
 private:
 
-  void                      Relase              ();
+  void                      Release              ();
 
 	CProcess*			            m_pProcess; //Temporal
 	CCore*				            m_pCore;

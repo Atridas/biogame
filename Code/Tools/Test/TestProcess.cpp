@@ -10,7 +10,7 @@ bool CTestProcess::Init()
   return IsOk();
 }
 
-void CTestProcess::Relase()
+void CTestProcess::Release()
 {
 	// ----
 }

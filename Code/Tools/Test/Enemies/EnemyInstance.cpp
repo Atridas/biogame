@@ -7,7 +7,7 @@ CEnemyInstance::CEnemyInstance(void)
 }
 
 
-void CEnemyInstance::Relase(void)
+void CEnemyInstance::Release(void)
 {
   // ----
 }

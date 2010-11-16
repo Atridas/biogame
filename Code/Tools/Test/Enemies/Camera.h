@@ -5,7 +5,7 @@
 class CCamera: public CEnemyInstance
 {
 private:
-  void                  Relase();
+  void                  Release();
   
 	bool                  m_bIsOk;
 public:
@@ -20,7 +20,7 @@ public:
                               const Vect3f&   _vMaxAngle,
                               const Vect3f&   _vMinAngle);
 
-  void                  Done() {if(IsOk()) Relase(); m_bIsOk=false;};
+  void                  Done() {if(IsOk()) Release(); m_bIsOk=false;};
   bool                  IsOk() const {return m_bIsOk;};
 
 

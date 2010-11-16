@@ -121,7 +121,7 @@ bool CRenderManager::Init(HWND hWnd)
 	{
 		std::string msg_error = "Rendermanager::Init-> Error al inicializar Direct3D";
 		LOGGER->AddNewLog(ELL_ERROR, msg_error.c_str());
-		Relase();
+		Release();
 		throw CException(__FILE__, __LINE__, msg_error);
 	}
 	
@@ -138,9 +138,9 @@ void CRenderManager::GetWindowRect( HWND hwnd )
 }
 
 
-void CRenderManager::Relase(void)
+void CRenderManager::Release(void)
 {
-	//Relase main devices of render
+	//Release main devices of render
 	CHECKED_RELEASE(m_pD3DDevice);
 	CHECKED_RELEASE(m_pD3D);
 }

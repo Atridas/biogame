@@ -17,7 +17,7 @@ public:
 
 private:
 
-	void                  Relase                  ();
+	void                  Release                  ();
 
 };
 

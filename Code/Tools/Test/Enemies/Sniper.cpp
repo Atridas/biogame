@@ -7,7 +7,7 @@ CSniper::CSniper(void)
 }
 
 
-void CSniper::Relase(void)
+void CSniper::Release(void)
 {
   // ----
 }

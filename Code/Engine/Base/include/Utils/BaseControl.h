@@ -9,13 +9,13 @@ public:
                         CBaseControl():m_bIsOk    (false)         {};
   virtual               ~CBaseControl             ()              {};
  
-  void                  Done                      ()              {if(IsOk()) {this->Relase(); m_bIsOk=false;}};
+  void                  Done                      ()              {if(IsOk()) {this->Release(); m_bIsOk=false;}};
   bool                  IsOk                      () const        {return m_bIsOk;};
  
 private:
   bool                  m_bIsOk;
 protected:
-  virtual void          Relase                              ()=0;
+  virtual void          Release                   ()=0;
   void                  SetOk                     (bool _bIsOk)   {m_bIsOk = _bIsOk;};
 };
 
