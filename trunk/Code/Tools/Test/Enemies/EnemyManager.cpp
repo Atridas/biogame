@@ -13,7 +13,7 @@ CEnemyManager::CEnemyManager(void)
 }
 
 
-void CEnemyManager::Relase(void)
+void CEnemyManager::Release(void)
 {
   {
     tInstances::iterator It  = m_Instances.begin();

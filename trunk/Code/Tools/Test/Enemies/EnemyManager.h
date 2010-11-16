@@ -13,7 +13,7 @@ public:
   typedef std::vector<CEnemyInstance*>           tInstances;
 private:
 
-  void                  Relase();
+  void                  Release();
   
 	bool                  m_bIsOk;
 
@@ -22,7 +22,7 @@ public:
   virtual ~CEnemyManager(void) {Done();};
 
   bool                  Init(const char* _pcFile);
-  void                  Done() {if(IsOk()) Relase(); m_bIsOk=false;};
+  void                  Done() {if(IsOk()) Release(); m_bIsOk=false;};
   bool                  IsOk() const {return m_bIsOk;};
 
 private:

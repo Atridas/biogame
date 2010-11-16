@@ -13,6 +13,6 @@ public:
 	void                  Update            ();
 	void                  Render            ();
 private:
-  void                  Relase            ();
+  void                  Release           ();
 };
 

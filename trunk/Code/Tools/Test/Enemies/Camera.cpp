@@ -6,7 +6,7 @@ CCamera::CCamera(void)
 }
 
 
-void CCamera::Relase(void)
+void CCamera::Release(void)
 {
   // ----
 }

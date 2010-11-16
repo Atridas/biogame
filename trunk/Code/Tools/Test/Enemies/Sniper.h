@@ -5,7 +5,7 @@
 class CSniper: public CEnemyInstance
 {
 private:
-  void                  Relase();
+  void                  Release();
   
 	bool                  m_bIsOk;
 public:
@@ -19,7 +19,7 @@ public:
                               const float     _fHealth, 
                               const float     _fAimDistance);
 
-  void                  Done() {if(IsOk()) Relase(); m_bIsOk=false;};
+  void                  Done() {if(IsOk()) Release(); m_bIsOk=false;};
   bool                  IsOk() const {return m_bIsOk;};
 
 

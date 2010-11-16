@@ -7,7 +7,7 @@ CEnemyResource::CEnemyResource(void)
 }
 
 
-void CEnemyResource::Relase(void)
+void CEnemyResource::Release(void)
 {
   // ----
 }

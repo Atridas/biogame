@@ -17,7 +17,7 @@ bool CEngine::Init(const string& _PathXML,  HWND hWnd)
   return IsOk();
 }
 
-void CEngine::Relase()
+void CEngine::Release()
 {
   CHECKED_DELETE(m_pProcess);
   CHECKED_DELETE(m_pCore);

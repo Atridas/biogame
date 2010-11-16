@@ -16,7 +16,7 @@ bool CGameProcess::Init()
   return IsOk();
 }
 
-void CGameProcess::Relase()
+void CGameProcess::Release()
 {
 	// ----
 }
