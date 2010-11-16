@@ -7,8 +7,8 @@
 
 bool CEngine::Init(const string& _PathXML,  HWND hWnd)
 {
+  LOGGER->AddNewLog(ELL_INFORMATION,"Engine::Init");
   //m_pProcess->Init();
-  new CLogger();
   m_pCore = new CCore();
   m_pCore->Init(hWnd); //TODO passar els paràmetres
 
@@ -19,12 +19,11 @@ bool CEngine::Init(const string& _PathXML,  HWND hWnd)
 
 void CEngine::Release()
 {
+  LOGGER->AddNewLog(ELL_INFORMATION,"Engine::Release");
+
   CHECKED_DELETE(m_pProcess);
   CHECKED_DELETE(m_pCore);
-
-  CLogger *pLogger = LOGGER;
-  pLogger->SaveLogsInFile();
-  CHECKED_DELETE(pLogger);
+  LOGGER->SaveLogsInFile();
 }
 
 void CEngine::Update()

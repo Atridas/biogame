@@ -16,6 +16,9 @@
 #include "Math/Vector4.h"
 #include "Math/MathTypes.h"
 
+#if defined( _DEBUG )  
+#include "Utils/MemLeaks.h" 
+#endif
 
 #ifndef NULL
 #define NULL 0

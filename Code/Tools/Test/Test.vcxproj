@@ -18,7 +18,7 @@
     <ClCompile Include="Enemies\Patroller.cpp" />
     <ClCompile Include="Enemies\Sniper.cpp" />
     <ClCompile Include="Enemies\Turret.cpp" />
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="mainTest.cpp" />
     <ClCompile Include="TestProcess.cpp" />
   </ItemGroup>
   <ItemGroup>

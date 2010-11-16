@@ -4,6 +4,9 @@
     <Filter Include="RenderManager">
       <UniqueIdentifier>{615848bf-0cbe-47d7-a219-7f941ea3c4ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="FontManager">
+      <UniqueIdentifier>{cebecdda-b9fc-4c4c-a8fe-2998b8af51e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -12,10 +15,16 @@
     <ClCompile Include="RenderManager.cpp">
       <Filter>RenderManager</Filter>
     </ClCompile>
+    <ClCompile Include="FontManager.cpp">
+      <Filter>FontManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RenderManager.h">
       <Filter>RenderManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FontManager.h">
+      <Filter>FontManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

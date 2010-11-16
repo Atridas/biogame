@@ -140,6 +140,7 @@ void CRenderManager::GetWindowRect( HWND hwnd )
 
 void CRenderManager::Release(void)
 {
+  LOGGER->AddNewLog(ELL_INFORMATION, "RenderManager::Release",m_uWidth,m_uHeight);
 	//Release main devices of render
 	CHECKED_RELEASE(m_pD3DDevice);
 	CHECKED_RELEASE(m_pD3D);
