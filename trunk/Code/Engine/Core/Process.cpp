@@ -7,7 +7,7 @@
 void CProcess::DebugInformation(float _FPS)
 {
 	CColor col = colBLUE;
-	CORE->GetFontManager()->DrawText(0,0,col,0,"FPS: %f",_FPS);
+  CORE->GetFontManager()->DrawText(0,0,col,CORE->GetFontManager()->GetTTF_Id("xfiles"),"FPS: %.f",_FPS);
 }
 
 

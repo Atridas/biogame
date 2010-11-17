@@ -9,14 +9,10 @@
 #ifndef INC_FONT_MANAGER_H_
 #define INC_FONT_MANAGER_H_
 
-#include "base.h"
-#include "Math\MathTypes.h"
-#include "Math\Color.h"
+#include <base.h>
+#include <Math/Color.h>
 
 #include <d3dx9.h>
-
-#include <map>
-#include <vector>
 
 //---Forward Declarations--
 class CRenderManager;
@@ -29,11 +25,10 @@ public:
 	CFontManager(): m_bIsOk(false), m_sPathFile("") {}
 	virtual ~CFontManager() { Done(); } 
 
-	bool		            Init			        (CRenderManager* rm);
+	bool		            Init			        (CRenderManager* rm, const string& _PathFile);
 	void		            Done			        ();
 	bool		            IsOk			        () const { return m_bIsOk; }
 
-	//void								Init											();
 	bool								ReloadTTFs								();
 	bool								LoadTTFs									(const std::string& pathFile);
 	int32								GetTTF_Id									(const std::string& name);
@@ -53,7 +48,7 @@ private:
 	std::vector<std::string>			m_vTTFsFiles;								// TTF Files loaded
 	std::map<std::string, uint32>	m_TTFs;											// Id of TTFs
 	LPDIRECT3DDEVICE9	  					m_pD3DDevice;								// direct3d device
-	std::string										m_sPathFile;
+	std::string										m_sPathFile;                // font configuration path
 };
 
 #endif //INC_FONT_MANAGER_H_
