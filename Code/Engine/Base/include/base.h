@@ -19,6 +19,8 @@
 #include "Math/Vector4.h"
 #include "Math/MathTypes.h"
 
+using namespace std;
+
 #if defined( _DEBUG )  
 #include "Utils/MemLeaks.h" 
 #endif

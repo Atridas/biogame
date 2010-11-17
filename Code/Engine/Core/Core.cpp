@@ -16,7 +16,7 @@ bool CCore::Init(HWND hWnd)
 
   m_pRenderManager->Init(hWnd);
   m_pLanguageManager->Init();
-  m_pFontManager->Init(m_pRenderManager);
+  m_pFontManager->Init(m_pRenderManager,"data/fonts/fonts.xml");
 
   SetOk(true);
 

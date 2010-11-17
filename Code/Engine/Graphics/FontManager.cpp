@@ -7,7 +7,6 @@
 #include "RenderManager.h"
 #include "XML/XMLTreeNode.h"
 
-
 void CFontManager::Done ()
 {
 	if (IsOk())
@@ -17,15 +16,17 @@ void CFontManager::Done ()
 	}
 }
 
-bool CFontManager::Init(CRenderManager* rm)
+bool CFontManager::Init(CRenderManager* rm, const string& _PathFile)
 {
 	LOGGER->AddNewLog(ELL_INFORMATION, "CFontManager:: Inicializando FontManager");
 	m_pD3DDevice = rm->GetDevice();
 	m_bIsOk = (m_pD3DDevice!=NULL);
+  m_sPathFile = _PathFile;
 	if (m_bIsOk)
 	{
 		//Como mínimo creamos una fuente por defecto, la que estara en la posición m_Fonts[0]
 		CreateFont(17,true,false,"Times New Roman");
+    LoadTTFs(m_sPathFile);
 	}
 
 	return m_bIsOk;
