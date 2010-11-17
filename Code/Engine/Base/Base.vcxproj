@@ -121,6 +121,7 @@
     <ClCompile Include="Utils\LerpAnimator3D.cpp" />
     <ClCompile Include="Utils\Logger.cpp" />
     <ClCompile Include="Utils\MemLeaks.cpp" />
+    <ClCompile Include="Utils\Timer.cpp" />
     <ClCompile Include="XML\XMLTreeNode.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +147,7 @@
     <ClInclude Include="include\Utils\MapManager.h" />
     <ClInclude Include="include\Utils\MemLeaks.h" />
     <ClInclude Include="include\Utils\Singleton.h" />
+    <ClInclude Include="include\Utils\Timer.h" />
     <ClInclude Include="include\Utils\Types.h" />
     <ClInclude Include="include\XML\XMLTreeNode.h" />
   </ItemGroup>

@@ -1,6 +1,7 @@
 #include "TestProcess.h"
 #include "Core.h"
 #include "RenderManager.h"
+#include "FontManager.h"
 
 
 bool CTestProcess::Init()
@@ -17,7 +18,7 @@ void CTestProcess::Release()
 	// ----
 }
 
-void CTestProcess::Update()
+void CTestProcess::Update(float elapsedTime)
 {
 
 }
@@ -26,4 +27,9 @@ void CTestProcess::Render()
 {
   CRenderManager* pRM = CORE->GetRenderManager();
   pRM->DrawAxis();
+
+  /*CColor col = colBLUE;
+  CORE->GetFontManager()->DrawText(0,0,col,0,"BioGame");*/
+  
 }
+

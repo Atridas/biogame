@@ -10,7 +10,7 @@ public:
   virtual               ~CGameProcess     ()                        {Done();};
 
   virtual bool          Init              ();
-	void                  Update            ();
+	void                  Update            (float elT);
 	void                  Render            ();
 private:
   void                  Release           ();

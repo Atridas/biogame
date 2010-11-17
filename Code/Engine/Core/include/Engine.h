@@ -10,6 +10,7 @@
 class CProcess;
 class CCore;
 class CRenderManager;
+class CTimer;
 //--------------------------
 
 
@@ -37,6 +38,7 @@ private:
 
 	CProcess*			            m_pProcess; //Temporal
 	CCore*				            m_pCore;
+	CTimer*							m_pTimer;
 	VectorProcessPtr	        m_vProcesses;
 };
 

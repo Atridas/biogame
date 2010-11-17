@@ -1,6 +1,6 @@
 #include "GameProcess.h"
 
-void CGameProcess::Update()
+void CGameProcess::Update(float elT)
 {
 
 }
@@ -20,3 +20,4 @@ void CGameProcess::Release()
 {
 	// ----
 }
+

@@ -24,7 +24,7 @@ public:
 
   bool                Init(HWND hWnd);
 
-	void Update();
+	void Update(float elapsedTime);
 	void Render();
   
   CRenderManager*     GetRenderManager      () const                        {return m_pRenderManager;};
