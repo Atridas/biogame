@@ -12,7 +12,8 @@ public:
 
   virtual bool          Init();
 
-	void                  Update                  ();
+	void                  Update                  (float elapsedTime);
+	void					DebugInformation(float FPS);
 	void                  Render                  ();
 
 private:

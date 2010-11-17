@@ -34,7 +34,7 @@ void CCore::Release()
   CHECKED_DELETE(m_pRenderManager);
 }
 
-void CCore::Update()
+void CCore::Update(float elapsedTime)
 {
 
 }

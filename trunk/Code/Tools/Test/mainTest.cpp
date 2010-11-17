@@ -94,7 +94,7 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
       {
          // Main loop: Añadir aquí el Update y Render de la aplicación principal
 	       l_engine.Update();
-		     l_engine.Render();
+		   l_engine.Render();
       }
     }
   } catch(CException& e)

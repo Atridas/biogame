@@ -55,6 +55,9 @@
     <Filter Include="Utils\MemLeaks">
       <UniqueIdentifier>{cf6693b7-6f65-4cf6-a42b-445c96ab07fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils\Timer">
+      <UniqueIdentifier>{e972d8c3-d4e7-4dd9-ab71-033a599d7ef1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathConstants.cpp">
@@ -86,6 +89,9 @@
     </ClCompile>
     <ClCompile Include="Utils\MemLeaks.cpp">
       <Filter>Utils\MemLeaks</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Timer.cpp">
+      <Filter>Utils\Timer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +164,9 @@
     </ClInclude>
     <ClInclude Include="include\Utils\MemLeaks.h">
       <Filter>Utils\MemLeaks</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\Timer.h">
+      <Filter>Utils\Timer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
