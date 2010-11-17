@@ -4,6 +4,9 @@
 #define NULL 0
 #endif
 
+#include <vector>
+#include <map>
+#include <string>
 #include <assert.h>
 #include "Utils/Logger.h"
 #include "Utils/Types.h"

@@ -52,9 +52,9 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
 //-----------------------------------------------------------------------
 int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCmdLine, int _nCmdShow)
 {
-#if defined( _DEBUG )
-  MemLeaks::MemoryBegin();
-#endif //defined(_DEBUG)
+  #if defined( _DEBUG )
+    MemLeaks::MemoryBegin();
+  #endif //defined(_DEBUG)
 
   CLogger* l_pLogger = new CLogger();
 
