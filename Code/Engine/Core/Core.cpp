@@ -2,11 +2,13 @@
 
 #include <base.h>
 
+#include "params.h"
+
 #include "RenderManager.h"
 #include "FontManager.h"
 #include "Utils/LanguageManager.h"
 
-bool CCore::Init(HWND hWnd)
+bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"Core::Init");
 

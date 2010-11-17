@@ -10,6 +10,9 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{2eb45707-28e2-440a-be8c-5c9b27a9b125}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Params">
+      <UniqueIdentifier>{564e9ceb-cb7f-4553-9bd7-4200cec4771d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -34,6 +37,9 @@
     </ClInclude>
     <ClInclude Include="include\Engine.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\params.h">
+      <Filter>Params</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

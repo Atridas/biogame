@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Config>
-  <ScreenResolution width="1024" height="768"/>
-  <!--ScreenResolution width="800" height="550"/-->
-  <WindowsPosition position="0 0"/>
-  <Rendermode fullscreenMode="false"/>
+  <RenderManager>
+    <!--<ScreenResolution width="1024" height="768"/>-->
+    <ScreenResolution width="800" height="600"/>
+    <WindowsPosition positionWidth="0" positionHeight="0"/>
+    <Rendermode fullscreenMode="false"/>
+  </RenderManager>
+  
   <Console_Logger activateConsole="true" Log_Level="INFORMATION" activateLogger="true" linesPerPageInLogger="20"/>
   <Mouse exclusiveModeinMouse="true" drawPointerMouse="true"/>
   <ActionToInput fileXML="./Data/actions.xml"/>

@@ -29,6 +29,9 @@
     <Filter Include="Enemies">
       <UniqueIdentifier>{ecbf3abb-75dd-47a6-80e0-e07c5b43a358}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{7588f414-7ba8-4c90-acf6-522a536d7926}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemies\Camera.h">
@@ -53,5 +56,10 @@
       <Filter>Enemies</Filter>
     </ClInclude>
     <ClInclude Include="TestProcess.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Run\Test\init_test.xml">
+      <Filter>Data</Filter>
+    </None>
   </ItemGroup>
 </Project>
