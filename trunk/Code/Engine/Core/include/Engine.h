@@ -24,7 +24,7 @@ class CEngine:
   
 public:
 	                          CEngine(void):m_pProcess(0),m_pCore(0)                      {};
-  virtual                   ~CEngine(void)                                              {Done();};
+  virtual					          ~CEngine(void)                                              {Done();};
 
   bool                      Init					      (const string& _PathXML, HWND hWnd);
 	void				              Update				      ();

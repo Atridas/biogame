@@ -8,6 +8,8 @@
 class CRenderManager;
 class CLanguageManager;
 class CFontManager;
+class CXMLTreeNode;
+struct SInitParams;
 // --------------------------
 
 
@@ -22,7 +24,7 @@ public:
                                                   {};
   virtual             ~CCore              (void)                          {Done();};
 
-  bool                Init(HWND hWnd);
+  bool                Init(HWND hWnd, const SInitParams& _InitParams);
 
 	void Update(float elapsedTime);
 	void Render();
