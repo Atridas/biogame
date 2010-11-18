@@ -1,6 +1,7 @@
 #include "Utils/Logger.h"
 #include "Utils/Exception.h"
 #include "RenderManager.h"
+#include "params.h"
 
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 struct CUSTOMVERTEX
@@ -14,7 +15,7 @@ struct CUSTOMVERTEX
 };
 
 
-bool CRenderManager::Init(HWND hWnd)
+bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
 {
 
 	LOGGER->AddNewLog(ELL_INFORMATION, "RenderManager:: Inicializando la libreria Direct3D");
@@ -32,13 +33,11 @@ bool CRenderManager::Init(HWND hWnd)
 
 
 		//if(fullscreenMode)
-		if(false)
+    if(_params.m_bFullscreen)
 		{
 			d3dpp.Windowed          = FALSE;
-			/*d3dpp.BackBufferWidth   = widthScreen;
-			d3dpp.BackBufferHeight  = heightScreen;*/
-			d3dpp.BackBufferWidth   = 800;
-			d3dpp.BackBufferHeight  = 600;
+      d3dpp.BackBufferWidth   = _params.m_uiWidth;
+      d3dpp.BackBufferHeight  = _params.m_uiHeight;
 			d3dpp.BackBufferFormat = D3DFMT_R5G6B5;
 		}
 		else
@@ -55,12 +54,12 @@ bool CRenderManager::Init(HWND hWnd)
 		d3dpp.PresentationInterval		= D3DPRESENT_INTERVAL_IMMEDIATE;
 
 		// Create the D3DDevice
-		SetOk(!FAILED(	m_pD3D->CreateDevice(	D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,
+		SetOk(!FAILED(	m_pD3D->CreateDevice(	D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, _hWnd,
 												D3DCREATE_HARDWARE_VERTEXPROCESSING, &d3dpp, &m_pD3DDevice ) ));
 
 		if (!IsOk())
 		{
-			SetOk(!FAILED(	m_pD3D->CreateDevice(	D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,
+			SetOk(!FAILED(	m_pD3D->CreateDevice(	D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, _hWnd,
 													D3DCREATE_SOFTWARE_VERTEXPROCESSING, &d3dpp, &m_pD3DDevice ) ));
 
 			if (IsOk())
@@ -103,14 +102,14 @@ bool CRenderManager::Init(HWND hWnd)
 		
 
 			//if (fullscreenMode)
-			if(false)
+      if(_params.m_bFullscreen)
 			{
-				m_uWidth	= 800;
-				m_uHeight	= 600;
+        m_uWidth	= _params.m_uiWidth;
+        m_uHeight	= _params.m_uiHeight;
 			}
 			else
 			{
-				GetWindowRect(hWnd);
+				GetWindowRect(_hWnd);
 			}
 			LOGGER->AddNewLog(ELL_INFORMATION, "RenderManager:: La resolucion de pantalla es (%dx%d)",m_uWidth,m_uHeight);
 			
@@ -208,7 +207,13 @@ void CRenderManager::SetupMatrices   ()
 		D3DXMatrixLookAtLH( &m_matView, &l_Eye, &l_LookAt, &l_VUP);
 
 		//Setup Matrix projection
-		D3DXMatrixPerspectiveFovLH( &m_matProject, 45.0f * D3DX_PI / 180.0f, 1.0f, 1.0f, 100.0f );
+		D3DXMatrixPerspectiveFovLH( 
+      &m_matProject, 
+      45.0f * D3DX_PI / 180.0f,               //angle de visió
+      ((float)m_uWidth)/((float)m_uHeight),   //aspect ratio
+      1.0f,                                   //z near
+      100.0f                                  //z far
+      );
 	}
 	else
 	{
@@ -231,14 +236,14 @@ void CRenderManager::SetupMatrices   ()
 	m_pD3DDevice->SetTransform( D3DTS_PROJECTION, &m_matProject );
 }
 
-void CRenderManager::DrawLine ( const Vect3f &PosA, const Vect3f &PosB, CColor Color)
+void CRenderManager::DrawLine ( const Vect3f &_PosA, const Vect3f &_PosB, const CColor& _Color)
 {
-	DWORD color_aux = Color.GetUint32Argb();
+	DWORD l_color_aux = _Color.GetUint32Argb();
 
 	CUSTOMVERTEX v[2] =
 	{
-		{PosA.x, PosA.y, PosA.z, color_aux},
-		{PosB.x, PosB.y, PosB.z, color_aux},
+		{_PosA.x, _PosA.y, _PosA.z, l_color_aux},
+		{_PosB.x, _PosB.y, _PosB.z, l_color_aux},
 	};
 
 	m_pD3DDevice->SetTexture(0,NULL);
@@ -267,4 +272,60 @@ void CRenderManager::DrawAxis ()
 	m_pD3DDevice->SetTexture(0,NULL);
 	m_pD3DDevice->SetFVF(CUSTOMVERTEX::getFlags());
 	m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST,3, v,sizeof(CUSTOMVERTEX));
+}
+
+
+void CRenderManager::DrawCube(const Vect3f &_Pos, float _fSize, const CColor& _Color)
+{
+  float l_fC = _fSize/2.f;
+  DWORD l_Color   = _Color.GetUint32Argb();
+
+  CUSTOMVERTEX v[24] =
+	{
+		{_Pos.x - l_fC,_Pos.y - l_fC,_Pos.z - l_fC, l_Color},
+		{_Pos.x + l_fC,_Pos.y - l_fC,_Pos.z - l_fC, l_Color},
+
+		{_Pos.x - l_fC,_Pos.y - l_fC,_Pos.z - l_fC, l_Color},
+		{_Pos.x - l_fC,_Pos.y + l_fC,_Pos.z - l_fC, l_Color},
+
+		{_Pos.x - l_fC,_Pos.y - l_fC,_Pos.z - l_fC, l_Color},
+		{_Pos.x - l_fC,_Pos.y - l_fC,_Pos.z + l_fC, l_Color},
+    
+    //---------------------------------------------------
+		{_Pos.x + l_fC,_Pos.y - l_fC,_Pos.z - l_fC, l_Color},
+		{_Pos.x + l_fC,_Pos.y + l_fC,_Pos.z - l_fC, l_Color},
+    
+		{_Pos.x + l_fC,_Pos.y - l_fC,_Pos.z - l_fC, l_Color},
+		{_Pos.x + l_fC,_Pos.y - l_fC,_Pos.z + l_fC, l_Color},
+    
+    //---------------------------------------------------
+		{_Pos.x - l_fC,_Pos.y + l_fC,_Pos.z - l_fC, l_Color},
+		{_Pos.x + l_fC,_Pos.y + l_fC,_Pos.z - l_fC, l_Color},
+
+		{_Pos.x - l_fC,_Pos.y + l_fC,_Pos.z - l_fC, l_Color},
+		{_Pos.x - l_fC,_Pos.y + l_fC,_Pos.z + l_fC, l_Color},
+    
+    //---------------------------------------------------
+		{_Pos.x - l_fC,_Pos.y - l_fC,_Pos.z + l_fC, l_Color},
+		{_Pos.x + l_fC,_Pos.y - l_fC,_Pos.z + l_fC, l_Color},
+    
+		{_Pos.x - l_fC,_Pos.y - l_fC,_Pos.z + l_fC, l_Color},
+		{_Pos.x - l_fC,_Pos.y + l_fC,_Pos.z + l_fC, l_Color},
+    
+    //---------------------------------------------------
+		{_Pos.x + l_fC,_Pos.y + l_fC,_Pos.z - l_fC, l_Color},
+		{_Pos.x + l_fC,_Pos.y + l_fC,_Pos.z + l_fC, l_Color},
+    
+    //---------------------------------------------------
+		{_Pos.x + l_fC,_Pos.y - l_fC,_Pos.z + l_fC, l_Color},
+		{_Pos.x + l_fC,_Pos.y + l_fC,_Pos.z + l_fC, l_Color},
+    
+    //---------------------------------------------------
+		{_Pos.x - l_fC,_Pos.y + l_fC,_Pos.z + l_fC, l_Color},
+		{_Pos.x + l_fC,_Pos.y + l_fC,_Pos.z + l_fC, l_Color},
+	};
+  
+	m_pD3DDevice->SetTexture(0,NULL);
+	m_pD3DDevice->SetFVF(CUSTOMVERTEX::getFlags());
+	m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST,12, v,sizeof(CUSTOMVERTEX));
 }

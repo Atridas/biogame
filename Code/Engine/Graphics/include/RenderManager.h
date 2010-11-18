@@ -5,6 +5,10 @@
 #include "Base.h"
 #include "Math/Color.h"
 
+//forward declarations ----------------------------------------------
+struct SRenderManagerParams;
+//-------------------------------------------------------------------
+
 class CRenderManager:
   public CBaseControl
 {
@@ -14,15 +18,16 @@ public:
 												                          m_uWidth(0), m_uHeight(0)       {};
   virtual               ~CRenderManager   (void)                                  {Done();};
 
-  bool                  Init(HWND hWnd);
+  bool                  Init(HWND hWnd, const SRenderManagerParams& _params);
 
   void                  BeginRendering    ();
   void                  EndRendering      ();
   void                  SetupMatrices     ();
 	
 	//----DebugRender Functions-------------------------------------------
-	void								  DrawLine					(const Vect3f &PosA, const Vect3f &PosB, CColor Color);
+	void								  DrawLine					(const Vect3f &_PosA, const Vect3f &_PosB, const CColor& _Color);
   void                  DrawAxis          ();
+  void                  DrawCube          (const Vect3f &_Pos, float _fSize, const CColor& _Color);
 	//--------------------------------------------------------------------
 
   //----Getters / Setters ----------------------------------------------
