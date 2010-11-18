@@ -17,7 +17,7 @@ void CLanguageManager::Release()
   //--
 }
 
-void CLanguageManager::LoadXMLs ()
+void CLanguageManager::LoadXMLs()
 {
 	//Tener en cuenta que se puede hacer un reload!
 	std::map<std::string, TLanguage>::iterator it_1			= m_Languages.begin();
