@@ -32,7 +32,7 @@
     <ClInclude Include="TestProcess.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Run\Test\init_test.xml" />
+    <None Include="..\..\..\Run\Test\Data\XML\init_test.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{52606329-0594-4B34-879A-B11B8787A7F1}</ProjectGuid>
