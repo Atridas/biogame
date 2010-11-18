@@ -8,8 +8,8 @@ class CProcess:
 public:
                         CProcess()              {};
   
-	virtual void          Update(float elapsedTime) = 0;
-	void				  DebugInformation(float FPS);
+	virtual void          Update(float _fElapsedTime) = 0;
+	void				          DebugInformation(float FPS);
 	virtual void          Render() = 0;
 	virtual bool          Init() = 0;
 

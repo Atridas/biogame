@@ -31,6 +31,9 @@ public:
 	//--------------------------------------------------------------------
 
   //----Getters / Setters ----------------------------------------------
+  uint32                GetScreenWidth    () {return m_uWidth;};
+  uint32                GetScreenHeight   () {return m_uHeight;};
+
   LPDIRECT3DDEVICE9     GetDevice         () {return m_pD3DDevice;};
 
 public:
