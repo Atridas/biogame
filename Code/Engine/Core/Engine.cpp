@@ -18,7 +18,7 @@ bool CEngine::Init(const string& _PathXML,  HWND hWnd)
   string msg = "Engine:: load XML :";
   msg += _PathXML;
   LOGGER->AddNewLog(ELL_INFORMATION,msg.c_str());
-  //m_pProcess->Init();
+
   m_pTimer = new CTimer(30);
   m_pCore = new CCore();
 
@@ -68,6 +68,10 @@ bool CEngine::Init(const string& _PathXML,  HWND hWnd)
   }
 
   m_pCore->Init(hWnd, l_InitParams); //TODO passar els paràmetres
+
+  if(m_pProcess) //TODO: Comprovar excepcio m_pProcess == NULL i logejar
+    m_pProcess->Init(); 
+
 
   SetOk(true);
 
@@ -123,7 +127,8 @@ void CEngine::RenderScene()
 	{
 		m_pProcess->Render();
 		//Mostrem la informació de Debug (en aquest cas els FPS del timer)
-		m_pProcess->DebugInformation(m_pTimer->GetFPS());
+    float l_fFrameRate = m_pTimer->GetFPS();
+		m_pProcess->DebugInformation(l_fFrameRate);
 	}
 
 	

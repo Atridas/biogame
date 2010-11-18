@@ -37,3 +37,5 @@ using namespace std;
 
 #define CORE CCore::GetSingletonPtr()
 #define LOGGER CLogger::GetSingletonPtr()
+#define FONT_MANAGER CORE->GetFontManager()
+#define RENDER_MANAGER CORE->GetRenderManager()
