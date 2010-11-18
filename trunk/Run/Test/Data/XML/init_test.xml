@@ -1,13 +1,16 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="iso-8859-1"?>
 <Config>
-  <ScreenResolution width="1024" height="768"/>
-  <!--ScreenResolution width="800" height="550"/-->
-  <WindowsPosition position="0 0"/>
-  <Rendermode fullscreenMode="false"/>
-  <Console_Logger activateConsole="true" Log_Level="INFORMATION" activateLogger="true" linesPerPageInLogger="20"/>
+  <RenderManager>
+    <ScreenResolution width="800" height="600"/>
+    <WindowsPosition positionWidth="0" positionHeight="0"/>
+    <Rendermode fullscreenMode="false"/>
+  </RenderManager>
+  <FontManager fontsXML="./Data/Fonts/Fonts.xml"/>
+
+  
+  <!--<Console_Logger activateConsole="true" Log_Level="INFORMATION" activateLogger="true" linesPerPageInLogger="20"/>
   <Mouse exclusiveModeinMouse="true" drawPointerMouse="true"/>
   <ActionToInput fileXML="./Data/actions.xml"/>
-  <Fonts fontsXML="./Data/Fonts/fonts.xml"/>
   <Languages default="spanish">
     <Language languageXML="./Data/Language/spanish.xml"/>
     <Language languageXML="./Data/Language/catalan.xml"/>
@@ -36,7 +39,7 @@
     <Script action="_physXTest     = getPhysXTest();"/>
     <Script action="_spriteTest    = getSpriteTest();"/>
     <Script action="_partSystTest  = getPartSystTest();"/>
-  </InitScripts>
+  </InitScripts>-->
 
   <!--<Process initProcess="AVITest"/>-->
   <!--<Process initProcess="PhysXTest"/>-->
@@ -45,6 +48,6 @@
   <!--<Process initProcess="SpriteTest"/>-->
   <!--<Process initProcess="ParticleSystemTest"/>-->
   <!--<Process initProcess=""/>-->
-  <Process initProcess="AVITest"/>
-  
+  <!--<Process initProcess="AVITest"/>-->
+
 </Config>

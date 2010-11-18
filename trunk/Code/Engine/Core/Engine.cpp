@@ -32,8 +32,11 @@ bool CEngine::Init(const string& _PathXML,  HWND hWnd)
   } else 
   {
     //llegir XML
+    LOGGER->AddNewLog(ELL_INFORMATION,"Engine:: Llegint XML");
     
+    //---------------------------------------------------------------
     //Render Manager ------------------------------------------------
+    //---------------------------------------------------------------
     CXMLTreeNode l_TreeRenderManager = l_TreeConfig["RenderManager"];
     
     CXMLTreeNode l_TreeScreenResolution = l_TreeRenderManager["ScreenResolution"];
@@ -43,12 +46,25 @@ bool CEngine::Init(const string& _PathXML,  HWND hWnd)
     l_InitParams.m_RenderManagerParams.m_uiWidth = l_TreeScreenResolution.GetIntProperty("width",l_InitParams.m_RenderManagerParams.m_uiWidth);
     l_InitParams.m_RenderManagerParams.m_uiHeight = l_TreeScreenResolution.GetIntProperty("height",l_InitParams.m_RenderManagerParams.m_uiHeight);
 
+    LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: Screen resolution: %dx%d",l_InitParams.m_RenderManagerParams.m_uiWidth,l_InitParams.m_RenderManagerParams.m_uiHeight);
+
     l_InitParams.m_RenderManagerParams.m_uiPositionWidth = l_TreeWindowsPosition.GetIntProperty("positionWidth",l_InitParams.m_RenderManagerParams.m_uiPositionWidth);
     l_InitParams.m_RenderManagerParams.m_uiPositionHeight = l_TreeWindowsPosition.GetIntProperty("positionHeight",l_InitParams.m_RenderManagerParams.m_uiPositionHeight);
     
-    l_InitParams.m_RenderManagerParams.m_bFullscreen = l_TreeRendermode.GetBoolProperty("fullscreenMode",l_InitParams.m_RenderManagerParams.m_bFullscreen);
+    LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: Screen position: %dx%d",l_InitParams.m_RenderManagerParams.m_uiPositionWidth,l_InitParams.m_RenderManagerParams.m_uiPositionHeight);
 
-   
+    l_InitParams.m_RenderManagerParams.m_bFullscreen = l_TreeRendermode.GetBoolProperty("fullscreenMode",l_InitParams.m_RenderManagerParams.m_bFullscreen);
+    
+    LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: Fullscreen: %s",l_InitParams.m_RenderManagerParams.m_bFullscreen? "true":"false");
+    
+    //---------------------------------------------------------------
+    //Font Manager --------------------------------------------------
+    //---------------------------------------------------------------
+    CXMLTreeNode l_TreeFontManager = l_TreeConfig["FontManager"];
+    l_InitParams.m_FontManagerParams.m_pcFontsXML = l_TreeFontManager.GetPszProperty("fontsXML",l_InitParams.m_FontManagerParams.m_pcFontsXML);
+
+    LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: Fonts: %s", l_InitParams.m_FontManagerParams.m_pcFontsXML);
+
   }
 
   m_pCore->Init(hWnd, l_InitParams); //TODO passar els paràmetres

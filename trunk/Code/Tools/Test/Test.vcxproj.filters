@@ -58,7 +58,7 @@
     <ClInclude Include="TestProcess.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Run\Test\init_test.xml">
+    <None Include="..\..\..\Run\Test\Data\XML\init_test.xml">
       <Filter>Data</Filter>
     </None>
   </ItemGroup>

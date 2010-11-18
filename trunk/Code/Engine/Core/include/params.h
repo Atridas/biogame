@@ -14,6 +14,8 @@ struct SRenderManagerParams
 
   bool m_bFullscreen;
 
+
+  //Default params
   SRenderManagerParams():
     m_uiWidth(800),
     m_uiHeight(600),
@@ -25,12 +27,21 @@ struct SRenderManagerParams
   {};
 };
 
+struct SFontManagerParams
+{
+  const char* m_pcFontsXML;
+
+  //Default Params
+  SFontManagerParams():
+    m_pcFontsXML("./Data/Fonts/Fonts.xml")
+  {};
+};
 
 
 struct SInitParams
 {
   SRenderManagerParams m_RenderManagerParams;
-
+  SFontManagerParams m_FontManagerParams;
 };
 
 #endif
