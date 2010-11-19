@@ -14,6 +14,10 @@
 #include <vector>
 #include <map>
 
+// Forward Declarations -----------------------------------------------
+struct SLanguageManagerParams;
+// --------------------------------------------------------------------
+
 struct SLiteral
 {
 	std::string	m_sFontId;
@@ -29,7 +33,7 @@ public:
   CLanguageManager():m_sCurrentLanguage(""){};
 	virtual ~CLanguageManager(void) {Done();}
 
-  bool Init();
+  bool Init(const SLanguageManagerParams&);
 
 	void						LoadXMLs						();																//se puede hacer un reload
 	void						SetXmlFile					(const std::string& pathFile);

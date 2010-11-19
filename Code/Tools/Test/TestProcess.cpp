@@ -23,7 +23,7 @@ void CTestProcess::Release()
 
 void CTestProcess::Update(float _fElapsedTime)
 {
-  float l_fVelX = 1100;
+  float l_fVelX = 400;
   
   m_vPos.x += l_fVelX*_fElapsedTime;
 

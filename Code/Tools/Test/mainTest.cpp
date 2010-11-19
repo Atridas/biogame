@@ -1,6 +1,7 @@
 #include <Windows.h>
 
 #include <Engine.h>
+#include <params.h>
 
 #include "base.h"
 #include "TestProcess.h"
@@ -64,16 +65,28 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
   RegisterClassEx( &wc );
 
   try {
+    CEngine l_Engine;
+    SInitParams l_InitParams;
+
+    l_Engine.ReadXMLInitParams(l_InitParams,"./Data/XML/init_test.xml");
+
     // Create the application's window
-    HWND hWnd = CreateWindow(	APPLICATION_NAME, APPLICATION_NAME, WS_OVERLAPPEDWINDOW, 100, 100, 800, 600, NULL, NULL, wc.hInstance, NULL );
+    HWND hWnd = CreateWindow(	
+                    APPLICATION_NAME, 
+                    APPLICATION_NAME, 
+                    WS_OVERLAPPEDWINDOW, 
+                    l_InitParams.RenderManagerParams.uiPosX, 
+                    l_InitParams.RenderManagerParams.uiPosY, 
+                    l_InitParams.RenderManagerParams.uiWidth,
+                    l_InitParams.RenderManagerParams.uiHeight,
+                    NULL, NULL, wc.hInstance, NULL );
 
 
     // Añadir aquí el Init de la applicación
-    CEngine l_engine;
     CProcess* l_Test = new CTestProcess();
-    l_engine.SetProcess(l_Test);
+    l_Engine.SetProcess(l_Test);
 
-    l_engine.Init("Data/XML/init_test.xml", hWnd);
+    l_Engine.Init(l_InitParams, hWnd);
 
 
     ShowWindow( hWnd, SW_SHOWDEFAULT );
@@ -92,9 +105,8 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
       }
       else
       {
-         // Main loop: Añadir aquí el Update y Render de la aplicación principal
-	       l_engine.Update();
-		   l_engine.Render();
+        l_Engine.Update();
+		    l_Engine.Render();
       }
     }
   } catch(CException& e)

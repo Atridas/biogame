@@ -11,6 +11,7 @@ class CProcess;
 class CCore;
 class CRenderManager;
 class CTimer;
+struct SInitParams;
 //--------------------------
 
 
@@ -26,7 +27,8 @@ public:
 	                          CEngine(void):m_pProcess(0),m_pCore(0)                      {};
   virtual					          ~CEngine(void)                                              {Done();};
 
-  bool                      Init					      (const string& _PathXML, HWND hWnd);
+  bool                      Init					      (const SInitParams& _InitParams, HWND hWnd);
+  void                      ReadXMLInitParams    (SInitParams& InitParams_, const char* _pcPathXML);
 	void				              Update				      ();
 	void				              Render				      ();
 	void				              RenderScene		      ();
@@ -35,6 +37,8 @@ public:
 private:
 
   void                      Release              ();
+
+
 
 	CProcess*			            m_pProcess; //Temporal
 	CCore*				            m_pCore;

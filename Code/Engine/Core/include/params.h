@@ -6,42 +6,52 @@
 
 struct SRenderManagerParams
 {
-  uint32 m_uiWidth;
-  uint32 m_uiHeight;
+  uint32 uiWidth;
+  uint32 uiHeight;
   
-  uint32 m_uiPositionWidth;
-  uint32 m_uiPositionHeight;
+  uint32 uiPosX;
+  uint32 uiPosY;
 
-  bool m_bFullscreen;
+  bool bFullscreen;
 
 
   //Default params
   SRenderManagerParams():
-    m_uiWidth(800),
-    m_uiHeight(600),
+    uiWidth(800),
+    uiHeight(600),
 
-    m_uiPositionWidth(0),
-    m_uiPositionHeight(0),
+    uiPosX(0),
+    uiPosY(0),
 
-    m_bFullscreen(false)
+    bFullscreen(false)
   {};
 };
 
 struct SFontManagerParams
 {
-  const char* m_pcFontsXML;
+  const char* pcFontsXML;
 
   //Default Params
   SFontManagerParams():
-    m_pcFontsXML("./Data/Fonts/Fonts.xml")
+    pcFontsXML("./Data/Fonts/Fonts.xml")
   {};
 };
 
+struct SLanguageManagerParams
+{
+  const char* pcDefault;
+  vector<string> vXMLFiles;
+
+  SLanguageManagerParams():
+  pcDefault("eng")
+  {}
+};
 
 struct SInitParams
 {
-  SRenderManagerParams m_RenderManagerParams;
-  SFontManagerParams m_FontManagerParams;
+  SRenderManagerParams RenderManagerParams;
+  SFontManagerParams FontManagerParams;
+  SLanguageManagerParams LanguageManagerParams;
 };
 
 #endif
