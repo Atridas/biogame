@@ -16,9 +16,9 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pLanguageManager  = new CLanguageManager();
   m_pFontManager      = new CFontManager();
 
-  m_pRenderManager->Init(hWnd,_InitParams.m_RenderManagerParams);
-  m_pLanguageManager->Init();
-  m_pFontManager->Init(m_pRenderManager,_InitParams.m_FontManagerParams.m_pcFontsXML);
+  m_pRenderManager->Init(hWnd,_InitParams.RenderManagerParams);
+  m_pLanguageManager->Init(_InitParams.LanguageManagerParams);
+  m_pFontManager->Init(m_pRenderManager,_InitParams.FontManagerParams.pcFontsXML);
 
   SetOk(true);
 

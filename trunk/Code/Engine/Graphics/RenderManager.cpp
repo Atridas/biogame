@@ -33,11 +33,11 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
 
 
 		//if(fullscreenMode)
-    if(_params.m_bFullscreen)
+    if(_params.bFullscreen)
 		{
 			d3dpp.Windowed          = FALSE;
-      d3dpp.BackBufferWidth   = _params.m_uiWidth;
-      d3dpp.BackBufferHeight  = _params.m_uiHeight;
+      d3dpp.BackBufferWidth   = _params.uiWidth;
+      d3dpp.BackBufferHeight  = _params.uiHeight;
 			d3dpp.BackBufferFormat = D3DFMT_R5G6B5;
 		}
 		else
@@ -102,10 +102,10 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
 		
 
 			//if (fullscreenMode)
-      if(_params.m_bFullscreen)
+      if(_params.bFullscreen)
 			{
-        m_uWidth	= _params.m_uiWidth;
-        m_uHeight	= _params.m_uiHeight;
+        m_uWidth	= _params.uiWidth;
+        m_uHeight	= _params.uiHeight;
 			}
 			else
 			{

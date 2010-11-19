@@ -3,10 +3,23 @@
 #include "XML/XMLTreeNode.h"
 #include "Utils/Exception.h"
 #include "Utils/Logger.h"
+#include <params.h>
 
-bool CLanguageManager::Init()
+bool CLanguageManager::Init(const SLanguageManagerParams& _params)
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"LanguageManager::Init");
+
+  vector<string>::const_iterator it  = _params.vXMLFiles.cbegin();
+  vector<string>::const_iterator end = _params.vXMLFiles.cend();
+  while(it != end)
+  {
+    SetXmlFile(*it);
+    ++it;
+  }
+
+  LoadXMLs();
+  
+  SetCurrentLanguage(_params.pcDefault);
 
   SetOk(true);
   return IsOk();

@@ -2,20 +2,19 @@
 <Config>
   <RenderManager>
     <ScreenResolution width="800" height="600"/>
-    <WindowsPosition positionWidth="0" positionHeight="0"/>
+    <WindowsPosition x="50" y="5"/>
     <Rendermode fullscreenMode="false"/>
   </RenderManager>
-  <FontManager fontsXML="./Data/Fonts/Fonts.xml"/>
-
-  
-  <!--<Console_Logger activateConsole="true" Log_Level="INFORMATION" activateLogger="true" linesPerPageInLogger="20"/>
-  <Mouse exclusiveModeinMouse="true" drawPointerMouse="true"/>
-  <ActionToInput fileXML="./Data/actions.xml"/>
-  <Languages default="spanish">
+  <FontManager fontsXML="./Data/XML/Fonts.xml"/>
+  <Languages default="cat">
     <Language languageXML="./Data/Language/spanish.xml"/>
     <Language languageXML="./Data/Language/catalan.xml"/>
     <Language languageXML="./Data/Language/english.xml"/>
   </Languages>
+  
+  <!--<Console_Logger activateConsole="true" Log_Level="INFORMATION" activateLogger="true" linesPerPageInLogger="20"/>
+  <Mouse exclusiveModeinMouse="true" drawPointerMouse="true"/>
+  <ActionToInput fileXML="./Data/actions.xml"/>
   <GUI initGuiXML="./Data/GUI/initGui_tests.xml"/>
   <Sound soundXML="./Data/Sounds/Sounds.xml"/>
   <Avi aviXML="./Data/AviFiles/aviFiles.xml"/>
