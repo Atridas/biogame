@@ -47,11 +47,21 @@ struct SLanguageManagerParams
   {}
 };
 
+struct SInputManagerParams
+{
+  bool bExclusiveMouse;
+
+  SInputManagerParams():
+  bExclusiveMouse(false)
+  {}
+};
+
 struct SInitParams
 {
   SRenderManagerParams RenderManagerParams;
   SFontManagerParams FontManagerParams;
   SLanguageManagerParams LanguageManagerParams;
+  SInputManagerParams InputManagerParams;
 };
 
 #endif

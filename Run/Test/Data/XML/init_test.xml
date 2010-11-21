@@ -11,6 +11,7 @@
     <Language languageXML="./Data/Language/catalan.xml"/>
     <Language languageXML="./Data/Language/english.xml"/>
   </Languages>
+  <InputManager exclusiveMouse="true"/>
   
   <!--<Console_Logger activateConsole="true" Log_Level="INFORMATION" activateLogger="true" linesPerPageInLogger="20"/>
   <Mouse exclusiveModeinMouse="true" drawPointerMouse="true"/>
