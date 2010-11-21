@@ -103,6 +103,18 @@ void CEngine::ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML
     } else {
       LOGGER->AddNewLog(ELL_WARNING, "Engine:: No s'ha trobat element \"Languages\". Usant valors per defecte.");
     }
+
+    //---------------------------------------------------------------
+    //Input Manager -------------------------------------------------
+    //---------------------------------------------------------------
+    CXMLTreeNode l_TreeInputManager = l_TreeConfig["InputManager"];
+    if(l_TreeLanguages.Exists())
+    {
+      InitParams_.InputManagerParams.bExclusiveMouse = l_TreeInputManager.GetBoolProperty("exclusiveMouse", InitParams_.InputManagerParams.bExclusiveMouse);
+      LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: Mouse exclusiu: %s", (InitParams_.InputManagerParams.bExclusiveMouse)?"cert":"falç");
+    } else {
+      LOGGER->AddNewLog(ELL_WARNING, "Engine:: No s'ha trobat element \"InputManager\". Usant valors per defecte.");
+    }
   }
 }
 
@@ -113,7 +125,7 @@ bool CEngine::Init(const SInitParams& _InitParams,  HWND hWnd)
   m_pTimer = new CTimer(30);
   m_pCore = new CCore();
 
-  m_pCore->Init(hWnd, _InitParams); //TODO passar els paràmetres
+  m_pCore->Init(hWnd, _InitParams);
 
   if(m_pProcess) //TODO: Comprovar excepcio m_pProcess == NULL i logejar
     m_pProcess->Init(); 

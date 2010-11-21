@@ -9,6 +9,7 @@ class CRenderManager;
 class CLanguageManager;
 class CFontManager;
 class CXMLTreeNode;
+class CInputManager;
 struct SInitParams;
 // --------------------------
 
@@ -20,7 +21,7 @@ class CCore:
 
 public:
 
-                      CCore               (void): m_pRenderManager(0),m_pLanguageManager(0),m_pFontManager(0)
+                      CCore               (void): m_pRenderManager(0),m_pLanguageManager(0),m_pFontManager(0),m_pInputManager(0)
                                                   {};
   virtual             ~CCore              (void)                          {Done();};
 
@@ -46,6 +47,7 @@ private:
   CRenderManager*       m_pRenderManager;
   CLanguageManager*     m_pLanguageManager;
   CFontManager*         m_pFontManager;
+  CInputManager*        m_pInputManager;
 
 };
 

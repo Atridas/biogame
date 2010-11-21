@@ -4,9 +4,10 @@
 
 #include "params.h"
 
-#include "RenderManager.h"
-#include "FontManager.h"
-#include "Utils/LanguageManager.h"
+#include <RenderManager.h>
+#include <FontManager.h>
+#include <Utils/LanguageManager.h>
+#include <InputManager.h>
 
 bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
 {
@@ -15,10 +16,12 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pRenderManager    = new CRenderManager();
   m_pLanguageManager  = new CLanguageManager();
   m_pFontManager      = new CFontManager();
+  m_pInputManager     = new CInputManager();
 
   m_pRenderManager->Init(hWnd,_InitParams.RenderManagerParams);
   m_pLanguageManager->Init(_InitParams.LanguageManagerParams);
   m_pFontManager->Init(m_pRenderManager,_InitParams.FontManagerParams.pcFontsXML);
+  m_pInputManager->Init(hWnd,Vect2i(_InitParams.RenderManagerParams.uiWidth,_InitParams.RenderManagerParams.uiWidth),_InitParams.InputManagerParams.bExclusiveMouse);
 
   SetOk(true);
 
@@ -31,6 +34,7 @@ void CCore::Release()
   
 
   //delete a l'inrevès de com s'ha fet l'init
+  CHECKED_DELETE(m_pInputManager);
   CHECKED_DELETE(m_pFontManager);
   CHECKED_DELETE(m_pLanguageManager);
   CHECKED_DELETE(m_pRenderManager);
