@@ -21,7 +21,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pRenderManager->Init(hWnd,_InitParams.RenderManagerParams);
   m_pLanguageManager->Init(_InitParams.LanguageManagerParams);
   m_pFontManager->Init(m_pRenderManager,_InitParams.FontManagerParams.pcFontsXML);
-  m_pInputManager->Init(hWnd,Vect2i(_InitParams.RenderManagerParams.uiWidth,_InitParams.RenderManagerParams.uiWidth),_InitParams.InputManagerParams.bExclusiveMouse);
+  m_pInputManager->Init(hWnd,Vect2i(_InitParams.RenderManagerParams.uiWidth,_InitParams.RenderManagerParams.uiHeight),_InitParams.InputManagerParams.bExclusiveMouse);
 
   SetOk(true);
 

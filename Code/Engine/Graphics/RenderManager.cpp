@@ -236,6 +236,21 @@ void CRenderManager::SetupMatrices   ()
 	m_pD3DDevice->SetTransform( D3DTS_PROJECTION, &m_matProject );
 }
 
+void CRenderManager::SetTransform(D3DXMATRIX& matrix)
+{
+  m_pD3DDevice->SetTransform(D3DTS_WORLD, &matrix);
+}
+
+void CRenderManager::SetTransform(Mat44f& m)
+{
+  D3DXMATRIX aux(    m.m00, m.m10, m.m20, m.m30    , m.m01, m.m11, m.m21, m.m31
+                   , m.m02, m.m12, m.m22, m.m32    , m.m03, m.m13, m.m23, m.m33);
+  m_pD3DDevice->SetTransform(D3DTS_WORLD, &aux);
+}
+
+
+// Draw functions
+
 void CRenderManager::DrawLine ( const Vect3f &_PosA, const Vect3f &_PosB, const CColor& _Color)
 {
 	DWORD l_color_aux = _Color.GetUint32Argb();
@@ -323,6 +338,62 @@ void CRenderManager::DrawCube(const Vect3f &_Pos, float _fSize, const CColor& _C
     //---------------------------------------------------
 		{_Pos.x - l_fC,_Pos.y + l_fC,_Pos.z + l_fC, l_Color},
 		{_Pos.x + l_fC,_Pos.y + l_fC,_Pos.z + l_fC, l_Color},
+	};
+  
+	m_pD3DDevice->SetTexture(0,NULL);
+	m_pD3DDevice->SetFVF(CUSTOMVERTEX::getFlags());
+	m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST,12, v,sizeof(CUSTOMVERTEX));
+}
+
+
+void CRenderManager::DrawCube(float _fSize, const CColor& _Color)
+{
+  float l_fC = _fSize/2.f;
+  DWORD l_Color   = _Color.GetUint32Argb();
+
+  CUSTOMVERTEX v[24] =
+	{
+		{- l_fC, - l_fC, - l_fC, l_Color},
+		{+ l_fC, - l_fC, - l_fC, l_Color},
+
+		{- l_fC, - l_fC, - l_fC, l_Color},
+		{- l_fC, + l_fC, - l_fC, l_Color},
+
+		{- l_fC, - l_fC, - l_fC, l_Color},
+		{- l_fC, - l_fC, + l_fC, l_Color},
+    
+    //---------------------------------------------------
+		{+ l_fC, - l_fC, - l_fC, l_Color},
+		{+ l_fC, + l_fC, - l_fC, l_Color},
+    
+		{+ l_fC, - l_fC, - l_fC, l_Color},
+		{+ l_fC, - l_fC, + l_fC, l_Color},
+    
+    //---------------------------------------------------
+		{- l_fC, + l_fC, - l_fC, l_Color},
+		{+ l_fC, + l_fC, - l_fC, l_Color},
+
+		{- l_fC, + l_fC, - l_fC, l_Color},
+		{- l_fC, + l_fC, + l_fC, l_Color},
+    
+    //---------------------------------------------------
+		{- l_fC, - l_fC, + l_fC, l_Color},
+		{+ l_fC, - l_fC, + l_fC, l_Color},
+    
+		{- l_fC, - l_fC, + l_fC, l_Color},
+		{- l_fC, + l_fC, + l_fC, l_Color},
+    
+    //---------------------------------------------------
+		{+ l_fC, + l_fC, - l_fC, l_Color},
+		{+ l_fC, + l_fC, + l_fC, l_Color},
+    
+    //---------------------------------------------------
+		{+ l_fC, - l_fC, + l_fC, l_Color},
+		{+ l_fC, + l_fC, + l_fC, l_Color},
+    
+    //---------------------------------------------------
+		{- l_fC, + l_fC, + l_fC, l_Color},
+		{+ l_fC, + l_fC, + l_fC, l_Color},
 	};
   
 	m_pD3DDevice->SetTexture(0,NULL);

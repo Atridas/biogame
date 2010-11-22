@@ -7,6 +7,21 @@
     <Filter Include="FontManager">
       <UniqueIdentifier>{cebecdda-b9fc-4c4c-a8fe-2998b8af51e5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Frustum">
+      <UniqueIdentifier>{ab4a0200-a9d8-440e-85d2-4c3681967061}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{73f14994-50ac-4c20-89e7-61c9bb7bc307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FPSCamera">
+      <UniqueIdentifier>{4f4b678d-5d1e-4fe7-82e7-8860bd92e792}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThPSCamera">
+      <UniqueIdentifier>{4cf3c62b-31fc-477e-8c26-8c88fa970f94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object3D">
+      <UniqueIdentifier>{c99d736e-6a0c-4651-a61a-5966427dabc3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -18,6 +33,21 @@
     <ClCompile Include="FontManager.cpp">
       <Filter>FontManager</Filter>
     </ClCompile>
+    <ClCompile Include="Frustum.cpp">
+      <Filter>Frustum</Filter>
+    </ClCompile>
+    <ClCompile Include="ThPSCamera.cpp">
+      <Filter>ThPSCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="FPSCamera.cpp">
+      <Filter>FPSCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Object3D.cpp">
+      <Filter>Object3D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RenderManager.h">
@@ -25,6 +55,21 @@
     </ClInclude>
     <ClInclude Include="include\FontManager.h">
       <Filter>FontManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FPSCamera.h">
+      <Filter>FPSCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Frustum.h">
+      <Filter>Frustum</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ThPSCamera.h">
+      <Filter>ThPSCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Camera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Object3D.h">
+      <Filter>Object3D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

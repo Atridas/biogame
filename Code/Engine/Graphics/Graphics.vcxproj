@@ -90,12 +90,22 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="FontManager.cpp" />
+    <ClCompile Include="FPSCamera.cpp" />
+    <ClCompile Include="Frustum.cpp" />
+    <ClCompile Include="Object3D.cpp" />
     <ClCompile Include="RenderManager.cpp" />
+    <ClCompile Include="ThPSCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\FontManager.h" />
+    <ClInclude Include="include\FPSCamera.h" />
+    <ClInclude Include="include\Frustum.h" />
+    <ClInclude Include="include\Object3D.h" />
     <ClInclude Include="include\RenderManager.h" />
+    <ClInclude Include="include\ThPSCamera.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
