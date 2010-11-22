@@ -1,6 +1,7 @@
 #include "Utils/Logger.h"
 #include "Utils/Exception.h"
 #include "RenderManager.h"
+#include "Camera.h"
 #include "params.h"
 
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
@@ -150,12 +151,12 @@ void CRenderManager::Release(void)
 void CRenderManager::BeginRendering ()
 {
 
-#ifdef _DEBUG // Clear the backbuffer to a blue color in a Debug mode
+#ifdef _DEBUG // Clear the backbuffer to magenta color in a Debug mode
 	uint32 red		= (uint32) (1.f * 255);
 	uint32 green	= (uint32) (0.f * 255);
 	uint32 blue		= (uint32) (1.f * 255);
 	m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET|D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(red, green, blue), 1.0f, 0 );
-#else // Clear the backbuffer to a black color in a Release mode
+#else // Clear the backbuffer to black color in a Release mode
 	uint32 red		= (uint32) (0.f * 255);
 	uint32 green	= (uint32) (0.f * 255);
 	uint32 blue		= (uint32) (0.f * 255);
@@ -192,13 +193,12 @@ void CRenderManager::EndRendering    ()
 	m_pD3DDevice->Present( NULL, NULL, NULL, NULL );
 }
 
-void CRenderManager::SetupMatrices   ()
+void CRenderManager::SetupMatrices(CCamera* _pCamera)
 {
 	D3DXMATRIX m_matView;
 	D3DXMATRIX m_matProject;
 
-	//if(!camera)
-	if(true)
+	if(!_pCamera)
 	{
 		//Set default view and projection matrix
 
@@ -217,18 +217,18 @@ void CRenderManager::SetupMatrices   ()
 	}
 	else
 	{
-		//Vect3f eye = camera->GetEye();
-		//D3DXVECTOR3 l_Eye(eye.x, eye.y, eye.z);
-		//Vect3f lookat = camera->GetLookAt();
-		//D3DXVECTOR3 l_LookAt(lookat.x, lookat.y, lookat.z);
-		//Vect3f vup = camera->GetVecUp();
-		//D3DXVECTOR3 l_VUP(vup.x, vup.y, vup.z);
-		////Setup Matrix view
-		//D3DXMatrixLookAtLH( &m_matView, &l_Eye, &l_LookAt, &l_VUP);
+		Vect3f eye = _pCamera->GetEye();
+		D3DXVECTOR3 l_Eye(eye.x, eye.y, eye.z);
+		Vect3f lookat = _pCamera->GetLookAt();
+		D3DXVECTOR3 l_LookAt(lookat.x, lookat.y, lookat.z);
+		Vect3f vup = _pCamera->GetVecUp();
+		D3DXVECTOR3 l_VUP(vup.x, vup.y, vup.z);
+		//Setup Matrix view
+		D3DXMatrixLookAtLH( &m_matView, &l_Eye, &l_LookAt, &l_VUP);
 
-		////Setup Matrix projection
-		//D3DXMatrixPerspectiveFovLH(	&m_matProject, camera->GetFov(), camera->GetAspectRatio(),
-		//	camera->GetZn(), camera->GetZf());
+		//Setup Matrix projection
+		D3DXMatrixPerspectiveFovLH(	&m_matProject, _pCamera->GetFov(), _pCamera->GetAspectRatio(),
+			_pCamera->GetZn(), _pCamera->GetZf());
 	}
 
 
@@ -238,18 +238,17 @@ void CRenderManager::SetupMatrices   ()
 
 void CRenderManager::SetTransform(D3DXMATRIX& matrix)
 {
-  m_pD3DDevice->SetTransform(D3DTS_WORLD, &matrix);
+    m_pD3DDevice->SetTransform(D3DTS_WORLD, &matrix);
 }
 
 void CRenderManager::SetTransform(Mat44f& m)
 {
-  D3DXMATRIX aux(    m.m00, m.m10, m.m20, m.m30    , m.m01, m.m11, m.m21, m.m31
-                   , m.m02, m.m12, m.m22, m.m32    , m.m03, m.m13, m.m23, m.m33);
-  m_pD3DDevice->SetTransform(D3DTS_WORLD, &aux);
+    D3DXMATRIX aux(m.m00, m.m10, m.m20, m.m30, m.m01, m.m11, m.m21, m.m31,
+                    m.m02, m.m12, m.m22, m.m32, m.m03, m.m13, m.m23, m.m33);
+
+    m_pD3DDevice->SetTransform(D3DTS_WORLD, &aux);
+
 }
-
-
-// Draw functions
 
 void CRenderManager::DrawLine ( const Vect3f &_PosA, const Vect3f &_PosB, const CColor& _Color)
 {
@@ -338,62 +337,6 @@ void CRenderManager::DrawCube(const Vect3f &_Pos, float _fSize, const CColor& _C
     //---------------------------------------------------
 		{_Pos.x - l_fC,_Pos.y + l_fC,_Pos.z + l_fC, l_Color},
 		{_Pos.x + l_fC,_Pos.y + l_fC,_Pos.z + l_fC, l_Color},
-	};
-  
-	m_pD3DDevice->SetTexture(0,NULL);
-	m_pD3DDevice->SetFVF(CUSTOMVERTEX::getFlags());
-	m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST,12, v,sizeof(CUSTOMVERTEX));
-}
-
-
-void CRenderManager::DrawCube(float _fSize, const CColor& _Color)
-{
-  float l_fC = _fSize/2.f;
-  DWORD l_Color   = _Color.GetUint32Argb();
-
-  CUSTOMVERTEX v[24] =
-	{
-		{- l_fC, - l_fC, - l_fC, l_Color},
-		{+ l_fC, - l_fC, - l_fC, l_Color},
-
-		{- l_fC, - l_fC, - l_fC, l_Color},
-		{- l_fC, + l_fC, - l_fC, l_Color},
-
-		{- l_fC, - l_fC, - l_fC, l_Color},
-		{- l_fC, - l_fC, + l_fC, l_Color},
-    
-    //---------------------------------------------------
-		{+ l_fC, - l_fC, - l_fC, l_Color},
-		{+ l_fC, + l_fC, - l_fC, l_Color},
-    
-		{+ l_fC, - l_fC, - l_fC, l_Color},
-		{+ l_fC, - l_fC, + l_fC, l_Color},
-    
-    //---------------------------------------------------
-		{- l_fC, + l_fC, - l_fC, l_Color},
-		{+ l_fC, + l_fC, - l_fC, l_Color},
-
-		{- l_fC, + l_fC, - l_fC, l_Color},
-		{- l_fC, + l_fC, + l_fC, l_Color},
-    
-    //---------------------------------------------------
-		{- l_fC, - l_fC, + l_fC, l_Color},
-		{+ l_fC, - l_fC, + l_fC, l_Color},
-    
-		{- l_fC, - l_fC, + l_fC, l_Color},
-		{- l_fC, + l_fC, + l_fC, l_Color},
-    
-    //---------------------------------------------------
-		{+ l_fC, + l_fC, - l_fC, l_Color},
-		{+ l_fC, + l_fC, + l_fC, l_Color},
-    
-    //---------------------------------------------------
-		{+ l_fC, - l_fC, + l_fC, l_Color},
-		{+ l_fC, + l_fC, + l_fC, l_Color},
-    
-    //---------------------------------------------------
-		{- l_fC, + l_fC, + l_fC, l_Color},
-		{+ l_fC, + l_fC, + l_fC, l_Color},
 	};
   
 	m_pD3DDevice->SetTexture(0,NULL);

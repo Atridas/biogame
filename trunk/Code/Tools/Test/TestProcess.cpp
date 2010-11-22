@@ -2,6 +2,7 @@
 #include "Core.h"
 #include "RenderManager.h"
 #include "FontManager.h"
+#include "FPSCamera.h"
 
 
 bool CTestProcess::Init()
@@ -10,7 +11,12 @@ bool CTestProcess::Init()
   // ---
 
   m_vPos = Vect2f(-150,0);
-  m_fRotation = 0;
+  m_vCubePos = Vect3f(0,0,0);
+  m_vCubeRot = Vect3f(0,0,0);
+
+  m_pObject = new CObject3D();
+  m_pObject->SetPosition(Vect3f(-3,0,0));
+  m_pCamera = new CFPSCamera(0.1f,100.0f,45.0f * FLOAT_PI_VALUE/180.0f,1.0f,m_pObject);
 
   SetOk(true);
   return IsOk();
@@ -19,19 +25,21 @@ bool CTestProcess::Init()
 void CTestProcess::Release()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"TestProcess::Release");
+  CHECKED_DELETE(m_pCamera);
+  CHECKED_DELETE(m_pObject);
 	// ----
 }
 
 void CTestProcess::Update(float _fElapsedTime)
 {
   float l_fVelX = 400;
-  m_fRotation += 1.f * _fElapsedTime;
+  float l_fCubeVelRotY = 0.5;
+  float l_fCubeVelRotZ = 1;
 
-  while(m_fRotation > 2.f*FLOAT_PI_VALUE) {
-    m_fRotation -= 2.f*FLOAT_PI_VALUE;
-  }
-  
   m_vPos.x += l_fVelX*_fElapsedTime;
+
+  m_vCubeRot.y += l_fCubeVelRotY*_fElapsedTime;
+  m_vCubeRot.z += l_fCubeVelRotZ*_fElapsedTime;
 
   if(m_vPos.x > RENDER_MANAGER->GetScreenWidth())
     m_vPos.x = -150;
@@ -45,33 +53,33 @@ void CTestProcess::Render()
 
   CRenderManager* pRM = RENDER_MANAGER;
 
-  Mat44f i;
-  i.SetIdentity();
-  pRM->SetTransform(i);
-  pRM->DrawAxis();
+  Mat44f r, t, s, identity, total;
 
-  
-  Mat44f r, t, s, r2, total;
+  identity.SetIdentity();
   r.SetIdentity();
-  r2.SetIdentity();
   t.SetIdentity();
   s.SetIdentity();
 
-  t.Translate(Vect3f(0,0.8f,0));
-  r.RotByAnglesYXZ(0.f, m_fRotation, 0.f);
-  r2.RotByAnglesYXZ(0.f, 0, m_fRotation);
-  s.Scale(0.3f,0.3f,0.3f);
-  total = r*t*r2*s;
+  t.Translate(Vect3f(m_vCubePos.x,m_vCubePos.y,m_vCubePos.z));
+  r.RotByAnglesYXZ(m_vCubeRot.x,m_vCubeRot.y,m_vCubeRot.z);
+  s.Scale(1.5f,1.5f,1.5f);
+
+  total = t*r*s;
+
+  pRM->SetTransform(identity);
+
+  pRM->DrawAxis();
 
   pRM->SetTransform(total);
 
-  pRM->DrawCube(1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(0.0f,0.0f,0.0f),1.0f,l_CubeCol);
   
   uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");
   string l_szMsg("Biogame");
 
   FONT_MANAGER->DrawText((uint32)m_vPos.x,(uint32)m_vPos.y,col,l_uiFontType,l_szMsg.c_str());
-  //FONT_MANAGER->DrawText(0,0,col,l_uiFontType,l_szMsg.c_str());
   
 }
+
+
 

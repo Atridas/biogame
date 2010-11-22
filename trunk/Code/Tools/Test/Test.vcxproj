@@ -11,24 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Enemies\Camera.cpp" />
-    <ClCompile Include="Enemies\EnemyInstance.cpp" />
-    <ClCompile Include="Enemies\EnemyManager.cpp" />
-    <ClCompile Include="Enemies\EnemyResource.cpp" />
-    <ClCompile Include="Enemies\Patroller.cpp" />
-    <ClCompile Include="Enemies\Sniper.cpp" />
-    <ClCompile Include="Enemies\Turret.cpp" />
     <ClCompile Include="mainTest.cpp" />
     <ClCompile Include="TestProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Enemies\Camera.h" />
-    <ClInclude Include="Enemies\EnemyInstance.h" />
-    <ClInclude Include="Enemies\EnemyManager.h" />
-    <ClInclude Include="Enemies\EnemyResource.h" />
-    <ClInclude Include="Enemies\Patroller.h" />
-    <ClInclude Include="Enemies\Sniper.h" />
-    <ClInclude Include="Enemies\Turret.h" />
     <ClInclude Include="TestProcess.h" />
   </ItemGroup>
   <ItemGroup>

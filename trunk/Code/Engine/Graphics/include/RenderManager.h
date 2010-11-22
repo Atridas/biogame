@@ -20,17 +20,17 @@ public:
                                                   m_pCamera(0) {};
   virtual               ~CRenderManager   (void)                                  {Done();};
 
-  bool                  Init(HWND hWnd, const SRenderManagerParams& _params);
+  bool                  Init              (HWND hWnd, const SRenderManagerParams& _params);
 
   void                  BeginRendering    ();
   void                  EndRendering      ();
-  void                  SetupMatrices     ();
 
   //----Matrix Functions-----------------------------------------------
-  void                  SetTransform(D3DXMATRIX& matrix);
-  void                  SetTransform(Mat44f& m);
+  void                  SetupMatrices     (CCamera* _pCamera);
+  void                  SetTransform      (D3DXMATRIX& matrix);
+  void                  SetTransform      (Mat44f& m);
   //-------------------------------------------------------------------
-	
+
 	//----DebugRender Functions-------------------------------------------
 	void								  DrawLine					(const Vect3f &_PosA, const Vect3f &_PosB, const CColor& _Color);
   void                  DrawAxis          ();
