@@ -69,7 +69,6 @@ bool CInputManager::Init (HWND hWnd, const Vect2i& screenRes, bool exclusiveMode
 
 			if (m_bIsOk)
 			{
-				m_pGamePad = new CGamePad();
         m_bIsOk = m_pGamePad->Init(screenRes);
 				m_pGamePad->Update();
 				if (m_pGamePad->IsConnected() )

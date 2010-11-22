@@ -22,5 +22,6 @@ private:
 	void                  Release                 ();
 
   Vect2f                m_vPos;
+  float                 m_fRotation;
 };
 
