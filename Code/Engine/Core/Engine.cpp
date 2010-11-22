@@ -170,7 +170,7 @@ void CEngine::Render()
 {
 	CRenderManager * rm = m_pCore->GetRenderManager();
 	rm->BeginRendering();
-	rm->SetupMatrices();
+  rm->SetupMatrices(m_pProcess->GetCamera());
 	{
 		RenderScene();
 	}

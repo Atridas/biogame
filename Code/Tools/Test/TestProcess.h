@@ -3,6 +3,8 @@
 #include "Process.h"
 #include <base.h>
 
+class CObject3D;
+
 class CTestProcess:
   public CProcess
 {
@@ -21,7 +23,9 @@ private:
 
 	void                  Release                 ();
 
+  CObject3D*            m_pObject;
   Vect2f                m_vPos;
-  float                 m_fRotation;
+  Vect3f                m_vCubePos;
+  Vect3f                m_vCubeRot;
 };
 

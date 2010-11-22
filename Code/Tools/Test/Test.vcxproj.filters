@@ -1,60 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Enemies\Camera.cpp">
-      <Filter>Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemies\EnemyInstance.cpp">
-      <Filter>Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemies\EnemyManager.cpp">
-      <Filter>Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemies\EnemyResource.cpp">
-      <Filter>Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemies\Patroller.cpp">
-      <Filter>Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemies\Sniper.cpp">
-      <Filter>Enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="Enemies\Turret.cpp">
-      <Filter>Enemies</Filter>
-    </ClCompile>
     <ClCompile Include="TestProcess.cpp" />
     <ClCompile Include="mainTest.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Enemies">
-      <UniqueIdentifier>{ecbf3abb-75dd-47a6-80e0-e07c5b43a358}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Data">
       <UniqueIdentifier>{7588f414-7ba8-4c90-acf6-522a536d7926}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Enemies\Camera.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemies\EnemyInstance.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemies\EnemyManager.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemies\EnemyResource.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemies\Patroller.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemies\Sniper.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="Enemies\Turret.h">
-      <Filter>Enemies</Filter>
-    </ClInclude>
     <ClInclude Include="TestProcess.h" />
   </ItemGroup>
   <ItemGroup>
