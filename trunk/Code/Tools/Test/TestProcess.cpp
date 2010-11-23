@@ -56,7 +56,9 @@ void CTestProcess::Update(float _fElapsedTime)
   
 
   //Actualitze el pitch i el yaw segons els delta del mouse
-  float l_fPitch, l_fYaw;
+  float l_fPitch, l_fYaw, l_fVelocity;
+
+  l_fVelocity = 1;
   Vect3i l_vVec = INPUT_MANAGER->GetMouseDelta();
 
   l_fPitch = m_pObject->GetPitch();
@@ -69,31 +71,36 @@ void CTestProcess::Update(float _fElapsedTime)
   //Movem el objecte per l'escenari segons les tecles WSAD.
   Vect3f l_vPos = m_pObject->GetPosition();
 
+  if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_LSHIFT))
+  {
+    l_fVelocity = 3;
+  }
+
   if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_W))
   {
-    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw())*_fElapsedTime;
-    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw())*_fElapsedTime;
+    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw())*_fElapsedTime*l_fVelocity;
+    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw())*_fElapsedTime*l_fVelocity;
     m_pObject->SetPosition(l_vPos);
   }
   
   if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_S))
   {
-    l_vPos.x = l_vPos.x - cos(m_pObject->GetYaw())*_fElapsedTime;
-    l_vPos.z = l_vPos.z - sin(m_pObject->GetYaw())*_fElapsedTime;
+    l_vPos.x = l_vPos.x - cos(m_pObject->GetYaw())*_fElapsedTime*l_fVelocity;
+    l_vPos.z = l_vPos.z - sin(m_pObject->GetYaw())*_fElapsedTime*l_fVelocity;
     m_pObject->SetPosition(l_vPos);
   }
 
   if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_A))
   {
-    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fElapsedTime;
-    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fElapsedTime;
+    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fElapsedTime*l_fVelocity;
+    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fElapsedTime*l_fVelocity;
     m_pObject->SetPosition(l_vPos);
   }
 
   if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_D))
   {
-    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fElapsedTime;
-    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fElapsedTime;
+    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fElapsedTime*l_fVelocity;
+    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fElapsedTime*l_fVelocity;
     m_pObject->SetPosition(l_vPos);
   }
   
