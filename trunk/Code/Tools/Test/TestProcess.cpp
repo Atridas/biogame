@@ -16,7 +16,14 @@ bool CTestProcess::Init()
 
   m_pObject = new CObject3D();
   m_pObject->SetPosition(Vect3f(-3,0,0));
-  m_pCamera = new CFPSCamera(0.1f,100.0f,45.0f * FLOAT_PI_VALUE/180.0f,1.0f,m_pObject);
+  m_pCamera = new CFPSCamera(
+    0.1f,
+    100.0f,
+    45.0f * FLOAT_PI_VALUE/180.0f,
+    ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
+    m_pObject);
+
+
 
   SetOk(true);
   return IsOk();
