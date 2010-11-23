@@ -46,54 +46,55 @@ void CTestProcess::Update(float _fElapsedTime)
   m_vPos.x += l_fVelX*_fElapsedTime;
 
   //Codi que fa rotar el CUB!!!!!
-  /*m_vCubeRot.y += l_fCubeVelRotY*_fElapsedTime;
-  m_vCubeRot.z += l_fCubeVelRotZ*_fElapsedTime;*/
+  m_vCubeRot.y += l_fCubeVelRotY*_fElapsedTime;
+  m_vCubeRot.z += l_fCubeVelRotZ*_fElapsedTime;
 
   if(m_vPos.x > RENDER_MANAGER->GetScreenWidth())
     m_vPos.x = -150;
 
-  Vect3i vec = INPUT_MANAGER->GetMouseDelta();
+  
   
 
   //Actualitze el pitch i el yaw segons els delta del mouse
-  float pitch, yaw;
+  float l_fPitch, l_fYaw;
+  Vect3i l_vVec = INPUT_MANAGER->GetMouseDelta();
 
-  pitch = m_pObject->GetPitch();
-  yaw = m_pObject->GetYaw();
+  l_fPitch = m_pObject->GetPitch();
+  l_fYaw = m_pObject->GetYaw();
   
-  m_pObject->SetYaw(yaw-vec.x*_fElapsedTime);
-  m_pObject->SetPitch(pitch-vec.y*_fElapsedTime);
+  m_pObject->SetYaw(l_fYaw-l_vVec.x*_fElapsedTime);
+  m_pObject->SetPitch(l_fPitch-l_vVec.y*_fElapsedTime);
 
 
   //Movem el objecte per l'escenari segons les tecles WSAD.
-  Vect3f pos = m_pObject->GetPosition();
+  Vect3f l_vPos = m_pObject->GetPosition();
 
   if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_W))
   {
-    pos.x = pos.x + cos(m_pObject->GetYaw())*_fElapsedTime;
-    pos.z = pos.z + sin(m_pObject->GetYaw())*_fElapsedTime;
-    m_pObject->SetPosition(pos);
+    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw())*_fElapsedTime;
+    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw())*_fElapsedTime;
+    m_pObject->SetPosition(l_vPos);
   }
   
   if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_S))
   {
-    pos.x = pos.x - cos(m_pObject->GetYaw())*_fElapsedTime;
-    pos.z = pos.z - sin(m_pObject->GetYaw())*_fElapsedTime;
-    m_pObject->SetPosition(pos);
+    l_vPos.x = l_vPos.x - cos(m_pObject->GetYaw())*_fElapsedTime;
+    l_vPos.z = l_vPos.z - sin(m_pObject->GetYaw())*_fElapsedTime;
+    m_pObject->SetPosition(l_vPos);
   }
 
   if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_A))
   {
-    pos.x = pos.x + cos(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fElapsedTime;
-    pos.z = pos.z + sin(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fElapsedTime;
-    m_pObject->SetPosition(pos);
+    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fElapsedTime;
+    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fElapsedTime;
+    m_pObject->SetPosition(l_vPos);
   }
 
   if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_D))
   {
-    pos.x = pos.x + cos(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fElapsedTime;
-    pos.z = pos.z + sin(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fElapsedTime;
-    m_pObject->SetPosition(pos);
+    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fElapsedTime;
+    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fElapsedTime;
+    m_pObject->SetPosition(l_vPos);
   }
   
 
@@ -113,7 +114,7 @@ void CTestProcess::Render()
   t.SetIdentity();
   s.SetIdentity();
 
-  t.Translate(Vect3f(m_vCubePos.x,m_vCubePos.y,m_vCubePos.z));
+  t.Translate(m_vCubePos);
   r.RotByAnglesYXZ(m_vCubeRot.x,m_vCubeRot.y,m_vCubeRot.z);
   s.Scale(1.5f,1.5f,1.5f);
 
@@ -122,6 +123,15 @@ void CTestProcess::Render()
   pRM->SetTransform(identity);
 
   pRM->DrawAxis();
+  pRM->DrawCube(Vect3f(2.0f,0.0f,0.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,0.0f,2.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,0.0f,-2.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,2.0f,0.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,2.0f,2.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,2.0f,-2.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,-2.0f,0.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,-2.0f,2.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,-2.0f,-2.0f),1.0f,l_CubeCol);
 
   pRM->SetTransform(total);
 
