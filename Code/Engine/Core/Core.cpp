@@ -42,7 +42,7 @@ void CCore::Release()
 
 void CCore::Update(float elapsedTime)
 {
-
+  m_pInputManager->Update();
 }
 
 void CCore::Render()

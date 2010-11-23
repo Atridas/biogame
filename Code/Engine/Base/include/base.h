@@ -39,3 +39,4 @@ using namespace std;
 #define LOGGER CLogger::GetSingletonPtr()
 #define FONT_MANAGER CORE->GetFontManager()
 #define RENDER_MANAGER CORE->GetRenderManager()
+#define INPUT_MANAGER CORE->GetInputManager()
