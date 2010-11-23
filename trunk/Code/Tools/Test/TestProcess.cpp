@@ -3,7 +3,7 @@
 #include "RenderManager.h"
 #include "FontManager.h"
 #include "FPSCamera.h"
-
+#include "InputManager.h"
 
 bool CTestProcess::Init()
 {
@@ -45,11 +45,57 @@ void CTestProcess::Update(float _fElapsedTime)
 
   m_vPos.x += l_fVelX*_fElapsedTime;
 
-  m_vCubeRot.y += l_fCubeVelRotY*_fElapsedTime;
-  m_vCubeRot.z += l_fCubeVelRotZ*_fElapsedTime;
+  //Codi que fa rotar el CUB!!!!!
+  /*m_vCubeRot.y += l_fCubeVelRotY*_fElapsedTime;
+  m_vCubeRot.z += l_fCubeVelRotZ*_fElapsedTime;*/
 
   if(m_vPos.x > RENDER_MANAGER->GetScreenWidth())
     m_vPos.x = -150;
+
+  Vect3i vec = INPUT_MANAGER->GetMouseDelta();
+  
+
+  //Actualitze el pitch i el yaw segons els delta del mouse
+  float pitch, yaw;
+
+  pitch = m_pObject->GetPitch();
+  yaw = m_pObject->GetYaw();
+  
+  m_pObject->SetYaw(yaw-vec.x*_fElapsedTime);
+  m_pObject->SetPitch(pitch-vec.y*_fElapsedTime);
+
+
+  //Movem el objecte per l'escenari segons les tecles WSAD.
+  Vect3f pos = m_pObject->GetPosition();
+
+  if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_W))
+  {
+    pos.x = pos.x + cos(m_pObject->GetYaw())*_fElapsedTime;
+    pos.z = pos.z + sin(m_pObject->GetYaw())*_fElapsedTime;
+    m_pObject->SetPosition(pos);
+  }
+  
+  if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_S))
+  {
+    pos.x = pos.x - cos(m_pObject->GetYaw())*_fElapsedTime;
+    pos.z = pos.z - sin(m_pObject->GetYaw())*_fElapsedTime;
+    m_pObject->SetPosition(pos);
+  }
+
+  if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_A))
+  {
+    pos.x = pos.x + cos(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fElapsedTime;
+    pos.z = pos.z + sin(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fElapsedTime;
+    m_pObject->SetPosition(pos);
+  }
+
+  if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_D))
+  {
+    pos.x = pos.x + cos(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fElapsedTime;
+    pos.z = pos.z + sin(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fElapsedTime;
+    m_pObject->SetPosition(pos);
+  }
+  
 
 }
 

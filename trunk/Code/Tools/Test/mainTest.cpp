@@ -105,8 +105,9 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
       }
       else
       {
-        l_Engine.Update();
+			l_Engine.Update();
 		    l_Engine.Render();
+
       }
     }
   } catch(CException& e)

@@ -35,6 +35,7 @@ public:
   CLanguageManager*   GetLanguageManager    () const                        {return m_pLanguageManager;};
   //void                SetLanguageManager    (CLanguageManager* _pLm)        {m_pLanguageManager = _pLm;};
   CFontManager*       GetFontManager        () const                        {return m_pFontManager;}
+  CInputManager*		  GetInputManager       () const                        {return m_pInputManager;}
 
 private:
 

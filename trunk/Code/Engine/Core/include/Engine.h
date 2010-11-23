@@ -43,6 +43,6 @@ private:
 	CProcess*			            m_pProcess; //Temporal
 	CCore*				            m_pCore;
 	CTimer*							      m_pTimer;
-	VectorProcessPtr	        m_vProcesses;
+	VectorProcessPtr				m_vProcesses;
 };
 
