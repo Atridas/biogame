@@ -22,6 +22,9 @@
     <Filter Include="Object3D">
       <UniqueIdentifier>{c99d736e-6a0c-4651-a61a-5966427dabc3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Texture">
+      <UniqueIdentifier>{21842c9d-8f5a-4376-b635-ffc94bfcb203}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -48,6 +51,9 @@
     <ClCompile Include="Object3D.cpp">
       <Filter>Object3D</Filter>
     </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Texture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RenderManager.h">
@@ -70,6 +76,9 @@
     </ClInclude>
     <ClInclude Include="include\Object3D.h">
       <Filter>Object3D</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Texture.h">
+      <Filter>Texture</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
