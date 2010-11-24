@@ -96,6 +96,7 @@
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="Object3D.cpp" />
     <ClCompile Include="RenderManager.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="ThPSCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +106,7 @@
     <ClInclude Include="include\Frustum.h" />
     <ClInclude Include="include\Object3D.h" />
     <ClInclude Include="include\RenderManager.h" />
+    <ClInclude Include="include\Texture.h" />
     <ClInclude Include="include\ThPSCamera.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
