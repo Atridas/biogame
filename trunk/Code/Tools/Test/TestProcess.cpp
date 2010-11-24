@@ -3,6 +3,7 @@
 #include "RenderManager.h"
 #include "FontManager.h"
 #include "FPSCamera.h"
+#include "ThPSCamera.h"
 #include "InputManager.h"
 
 bool CTestProcess::Init()
@@ -11,8 +12,28 @@ bool CTestProcess::Init()
   // ---
 
   m_vPos = Vect2f(-150,0);
-  m_vCubePos = Vect3f(0,0,0);
-  m_vCubeRot = Vect3f(0,0,0);
+
+  //m_vCubePos = Vect3f(0,0,0);
+  //m_vCubeRot = Vect3f(0,0,0);
+  
+  m_pCube = new CObject3D();
+  m_pCube->SetPosition(Vect3f(0,0,-1));
+
+  //Init CubeCamera with the same m_pCamera parameters
+  //m_pCubeCamera = new CThPSCamera(
+  //                          0.1f,
+  //                          100.0f,
+  //                          45.0f * FLOAT_PI_VALUE/180.0f,
+  //                          ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
+  //                          m_pCube,
+  //                          3.0f);
+
+    m_pCubeCamera = new CFPSCamera(
+                            0.1f,
+                            100.0f,
+                            45.0f * FLOAT_PI_VALUE/180.0f,
+                            ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
+                            m_pCube);
 
   m_pObject = new CObject3D();
   m_pObject->SetPosition(Vect3f(-3,0,0));
@@ -34,6 +55,8 @@ void CTestProcess::Release()
   LOGGER->AddNewLog(ELL_INFORMATION,"TestProcess::Release");
   CHECKED_DELETE(m_pCamera);
   CHECKED_DELETE(m_pObject);
+  CHECKED_DELETE(m_pCube);
+  CHECKED_DELETE(m_pCubeCamera);
 	// ----
 }
 
@@ -46,8 +69,11 @@ void CTestProcess::Update(float _fElapsedTime)
   m_vPos.x += l_fVelX*_fElapsedTime;
 
   //Codi que fa rotar el CUB!!!!!
-  m_vCubeRot.y += l_fCubeVelRotY*_fElapsedTime;
-  m_vCubeRot.z += l_fCubeVelRotZ*_fElapsedTime;
+  float l_fCubeRotY = m_pCube->GetYaw();
+  float l_fCubeRotZ = m_pCube->GetPitch();
+  m_pCube->SetPitch(l_fCubeRotZ + l_fCubeVelRotZ*_fElapsedTime);
+  m_pCube->SetYaw(l_fCubeRotY + l_fCubeVelRotY*_fElapsedTime);
+
 
   if(m_vPos.x > RENDER_MANAGER->GetScreenWidth())
     m_vPos.x = -150;
@@ -73,7 +99,7 @@ void CTestProcess::Update(float _fElapsedTime)
 
   if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_LSHIFT))
   {
-    l_fVelocity = 3;
+    l_fVelocity = 10;
   }
 
   if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_W))
@@ -103,7 +129,13 @@ void CTestProcess::Update(float _fElapsedTime)
     l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fElapsedTime*l_fVelocity;
     m_pObject->SetPosition(l_vPos);
   }
-  
+
+  if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_Z))
+  {
+    m_pCamera->SetObject3D(m_pCube);
+  }else{
+    m_pCamera->SetObject3D(m_pObject);
+  }
 
 }
 
@@ -121,15 +153,16 @@ void CTestProcess::Render()
   t.SetIdentity();
   s.SetIdentity();
 
-  t.Translate(m_vCubePos);
-  r.RotByAnglesYXZ(m_vCubeRot.x,m_vCubeRot.y,m_vCubeRot.z);
+  pRM->SetTransform(identity);
+
+  t.Translate(m_pCube->GetPosition());
+  r.SetFromAnglesYXZ(m_pCube->GetYaw(),m_pCube->GetRoll(),m_pCube->GetPitch());
   s.Scale(1.5f,1.5f,1.5f);
 
   total = t*r*s;
 
-  pRM->SetTransform(identity);
-
   pRM->DrawAxis();
+
   pRM->DrawCube(Vect3f(2.0f,0.0f,0.0f),1.0f,l_CubeCol);
   pRM->DrawCube(Vect3f(2.0f,0.0f,2.0f),1.0f,l_CubeCol);
   pRM->DrawCube(Vect3f(2.0f,0.0f,-2.0f),1.0f,l_CubeCol);
@@ -142,7 +175,9 @@ void CTestProcess::Render()
 
   pRM->SetTransform(total);
 
-  pRM->DrawCube(Vect3f(0.0f,0.0f,0.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(1.0f,l_CubeCol);
+ 
+  pRM->DrawCamera(m_pCubeCamera);
   
   uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");
   string l_szMsg("Biogame");

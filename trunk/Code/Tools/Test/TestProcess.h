@@ -24,8 +24,10 @@ private:
 	void                  Release                 ();
 
   CObject3D*            m_pObject;
+  CObject3D*            m_pCube;
   Vect2f                m_vPos;
-  Vect3f                m_vCubePos;
-  Vect3f                m_vCubeRot;
+  CCamera*              m_pCubeCamera;
+  //Vect3f                m_vCubePos;
+  //Vect3f                m_vCubeRot;
 };
 

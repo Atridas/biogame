@@ -36,6 +36,7 @@ public:
   void                  DrawAxis          ();
   void                  DrawCube          (const Vect3f &_Pos, float _fSize, const CColor& _Color);
   void                  DrawCube          (float _fSize, const CColor& _Color);
+  void                  DrawCamera        (CCamera* camera);
 	//--------------------------------------------------------------------
 
   //----Getters / Setters ----------------------------------------------
