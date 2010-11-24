@@ -5,9 +5,19 @@
 #include "params.h"
 
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
+#define D3DFVF_CUSTOMVERTEX2 (D3DFVF_XYZ|D3DFVF_TEX1)
 struct CUSTOMVERTEX
 {
 	float x, y, z;
+	DWORD color;
+	static unsigned int getFlags()
+	{
+		return D3DFVF_CUSTOMVERTEX;
+	}
+};
+struct CUSTOMVERTEX2
+{
+	D3DXVECTOR3 pos;
 	DWORD color;
 	static unsigned int getFlags()
 	{
@@ -288,6 +298,10 @@ void CRenderManager::DrawAxis ()
 	m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST,3, v,sizeof(CUSTOMVERTEX));
 }
 
+void CRenderManager::DrawCube(float _fSize, const CColor& _Color)
+{
+  DrawCube(Vect3f(0.0f,0.0f,0.0f),_fSize,_Color);
+}
 
 void CRenderManager::DrawCube(const Vect3f &_Pos, float _fSize, const CColor& _Color)
 {
@@ -342,4 +356,123 @@ void CRenderManager::DrawCube(const Vect3f &_Pos, float _fSize, const CColor& _C
 	m_pD3DDevice->SetTexture(0,NULL);
 	m_pD3DDevice->SetFVF(CUSTOMVERTEX::getFlags());
 	m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST,12, v,sizeof(CUSTOMVERTEX));
+}
+
+void CRenderManager::DrawCamera(CCamera* camera)
+{
+
+	D3DXMATRIX matrix;
+	D3DXMATRIX translation;
+	if (camera->GetTypeCamera() == CCamera::TC_THPS)
+	{
+		Vect3f camera_CenterPos = camera->GetObject3D()->GetPosition();
+		D3DXMatrixTranslation( &translation, camera_CenterPos.x ,camera_CenterPos.y ,camera_CenterPos.z );
+		m_pD3DDevice->SetTransform( D3DTS_WORLD, &translation );
+
+		DrawCube(0.5f,colCYAN);
+		D3DXMatrixTranslation( &matrix, 0, 0, 0 );
+		m_pD3DDevice->SetTransform( D3DTS_WORLD, &matrix );
+	}
+
+	//---------PINTAMOS EL FRUSTUM-------------//
+	D3DXMATRIX translation2;
+	Vect3f eye_aux = camera->GetEye();
+	D3DXVECTOR3 eye(eye_aux.x, eye_aux.y, eye_aux.z);
+	D3DXMatrixTranslation( &translation, eye.x ,eye.y ,eye.z );
+
+	D3DXMATRIX rotation;
+	D3DXMATRIX rotation2;
+
+	float yaw = camera->GetObject3D()->GetYaw();
+	float pitch = camera->GetObject3D()->GetPitch();
+	D3DXMatrixRotationY ( &rotation,  -yaw);
+	D3DXMatrixRotationZ ( &rotation2, +pitch);
+
+	matrix = rotation2 * rotation * translation;
+
+	// Cambiar el sistema de coordenadas
+	m_pD3DDevice->SetTransform( D3DTS_WORLD, &matrix );
+	
+	CUSTOMVERTEX2 pts[9];
+
+	float fov = camera->GetFov();
+	float aspect = camera->GetAspectRatio();
+	float d = camera->GetViewD();
+	float zNear = camera->GetZn();
+	float zFar = camera->GetZf();
+
+
+
+	float h_near = zNear * tan ( fov * 0.5f );
+	float k_near = h_near * aspect;
+
+	float h_far = d * tan ( fov * 0.5f );
+	float k_far = h_far * aspect;
+
+	pts[ 0 ].pos = D3DXVECTOR3( 0, 0,0 );
+	pts[ 0 ].color = 0xffffffff;
+
+	pts[ 1 ].pos = D3DXVECTOR3( d, h_far, k_far );
+	pts[ 1 ].color = 0xffffffff;
+	pts[ 2 ].pos = D3DXVECTOR3( d, h_far, -k_far );
+	pts[ 2 ].color = 0xffffffff;
+	pts[ 3 ].pos = D3DXVECTOR3( d,-h_far, -k_far );
+	pts[ 3 ].color = 0xffffffff;
+	pts[ 4 ].pos = D3DXVECTOR3( d, -h_far, k_far );
+	pts[ 4 ].color = 0xffffffff;
+
+	pts[ 5 ].pos = D3DXVECTOR3( zNear, h_near, k_near );
+	pts[ 5 ].color = 0xffffffff;
+	pts[ 6 ].pos = D3DXVECTOR3( zNear, h_near, -k_near );
+	pts[ 6 ].color = 0xffffffff;
+	pts[ 7 ].pos = D3DXVECTOR3( zNear,-h_near, -k_near );
+	pts[ 7 ].color = 0xffffffff;
+	pts[ 8 ].pos = D3DXVECTOR3( zNear, -h_near, k_near );
+	pts[ 8 ].color = 0xffffffff;
+
+	// Decimos el tipo de vertice que vamos a proporcionar...
+	m_pD3DDevice->SetFVF( CUSTOMVERTEX2::getFlags() );
+
+	// Desactivar la textura
+	m_pD3DDevice->SetTexture (0, NULL);
+
+	m_pD3DDevice->DrawPrimitiveUP( D3DPT_POINTLIST, 9, pts, sizeof( CUSTOMVERTEX2 ) );
+	static short int indexes[] =  {
+		0,1, 0,2, 0,3, 0,4,
+		1,2, 2,3, 3,4, 4,1,
+		5,6, 6,7, 7,8, 8,5
+	};
+	m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_LINELIST, 0, 9, 12, indexes, D3DFMT_INDEX16, pts, sizeof( CUSTOMVERTEX2 ) );
+
+	D3DXMatrixTranslation( &matrix, 0, 0, 0 );
+	m_pD3DDevice->SetTransform( D3DTS_WORLD, &matrix );
+
+
+
+	//---------PINTAMOS LA BOX Y LOS EJES------------------//
+	D3DXMatrixTranslation( &translation2, -1.0f, 0.0f, 0.0f );
+	matrix = translation2 * rotation2 * rotation * translation;
+	m_pD3DDevice->SetTransform( D3DTS_WORLD, &matrix );
+
+	CUSTOMVERTEX v[6] =
+	{
+		//EJE X
+		{0, 0, 0, 0xffff0000},
+		{3, 0, 0, 0xffff0000},
+		//EJE Y
+		{0, 0, 0, 0xff00ff00},
+		{0, 3, 0, 0xff00ff00},
+		//EJE Z
+		{0, 0, 0, 0xff0000ff},
+		{0, 0, 3, 0xff0000ff},
+	};
+
+	m_pD3DDevice->SetTexture(0,NULL);
+	m_pD3DDevice->SetFVF(CUSTOMVERTEX::getFlags());
+	m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST, 3, v,sizeof(CUSTOMVERTEX));
+
+	DrawCube(0.5f,colWHITE);
+
+	D3DXMatrixTranslation( &matrix, 0, 0, 0 );
+	m_pD3DDevice->SetTransform( D3DTS_WORLD, &matrix );
 }
