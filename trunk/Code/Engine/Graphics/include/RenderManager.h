@@ -37,6 +37,8 @@ public:
   void                  DrawCube          (const Vect3f &_Pos, float _fSize, const CColor& _Color);
   void                  DrawCube          (float _fSize, const CColor& _Color);
   void                  DrawCamera        (CCamera* camera);
+ 	void									DrawGrid				  (float Size, CColor Color=colWHITE, int GridX=10, int32 GridZ=10 );
+
 	//--------------------------------------------------------------------
 
   //----Getters / Setters ----------------------------------------------

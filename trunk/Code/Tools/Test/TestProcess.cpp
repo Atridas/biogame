@@ -17,7 +17,7 @@ bool CTestProcess::Init()
   //m_vCubeRot = Vect3f(0,0,0);
   
   m_pCube = new CObject3D();
-  m_pCube->SetPosition(Vect3f(0,0,-1));
+  m_pCube->SetPosition(Vect3f(0,0.5,0));
 
   //Init CubeCamera with the same m_pCamera parameters
   m_pCubeCamera = new CThPSCamera(
@@ -26,7 +26,7 @@ bool CTestProcess::Init()
                             45.0f * FLOAT_PI_VALUE/180.0f,
                             ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
                             m_pCube,
-                            8.0f);
+                            6.0f);
 
     //m_pCubeCamera = new CFPSCamera(
     //                        0.1f,
@@ -36,7 +36,7 @@ bool CTestProcess::Init()
     //                        m_pCube);
 
   m_pObject = new CObject3D();
-  m_pObject->SetPosition(Vect3f(-3,0,0));
+  m_pObject->SetPosition(Vect3f(-6,2,0));
   m_pObjectCamera = new CFPSCamera(
     0.1f,
     100.0f,
@@ -172,15 +172,17 @@ void CTestProcess::Render()
 
   pRM->DrawAxis();
 
-  pRM->DrawCube(Vect3f(2.0f,0.0f,0.0f),1.0f,l_CubeCol);
-  pRM->DrawCube(Vect3f(2.0f,0.0f,2.0f),1.0f,l_CubeCol);
-  pRM->DrawCube(Vect3f(2.0f,0.0f,-2.0f),1.0f,l_CubeCol);
-  pRM->DrawCube(Vect3f(2.0f,2.0f,0.0f),1.0f,l_CubeCol);
-  pRM->DrawCube(Vect3f(2.0f,2.0f,2.0f),1.0f,l_CubeCol);
-  pRM->DrawCube(Vect3f(2.0f,2.0f,-2.0f),1.0f,l_CubeCol);
-  pRM->DrawCube(Vect3f(2.0f,-2.0f,0.0f),1.0f,l_CubeCol);
-  pRM->DrawCube(Vect3f(2.0f,-2.0f,2.0f),1.0f,l_CubeCol);
-  pRM->DrawCube(Vect3f(2.0f,-2.0f,-2.0f),1.0f,l_CubeCol);
+  pRM->DrawGrid(30.0f,colCYAN,30,30);
+
+  pRM->DrawCube(Vect3f(2.0f,0.5f,0.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,0.5f,2.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,0.5f,-2.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,2.5f,0.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,2.5f,2.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,2.5f,-2.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,4.5f,0.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,4.5f,2.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,4.5f,-2.0f),1.0f,l_CubeCol);
 
   pRM->SetTransform(total);
 
