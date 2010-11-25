@@ -476,3 +476,48 @@ void CRenderManager::DrawCamera(CCamera* camera)
 	D3DXMatrixTranslation( &matrix, 0, 0, 0 );
 	m_pD3DDevice->SetTransform( D3DTS_WORLD, &matrix );
 }
+
+void CRenderManager::DrawGrid(float Size, CColor Color, int GridX, int32 GridZ )
+{
+	D3DXMATRIX matrix;
+	D3DXMatrixIdentity(&matrix);
+	m_pD3DDevice->SetTransform(D3DTS_WORLD, &matrix);		
+
+	if(GridX <= 0)
+		GridX = 1;
+
+	if(GridZ <= 0)
+		GridZ = 1;
+
+	float l_fSliceX = Size/(float)GridX;
+	float l_fSliceZ = Size/(float)GridZ;
+
+	Vect3f l_vTopLeft = Vect3f(-Size/2,0,-Size/2);
+	Vect3f l_vTopRight = Vect3f(Size/2,0,-Size/2);
+	Vect3f l_vBottomLeft = Vect3f(-Size/2,0,Size/2);
+
+	Vect3f l_vIncX = Vect3f(l_fSliceX,0,0);
+	Vect3f l_vIncZ = Vect3f(0,0,l_fSliceZ);
+
+	Vect3f l_vCurrentLeft = l_vTopLeft;
+	Vect3f l_vCurrentRight = l_vTopRight;
+
+	int l_iCount = 0;
+	for(l_iCount = 0; l_iCount <= GridZ;l_iCount++)
+	{
+		DrawLine(l_vCurrentLeft,l_vCurrentRight,Color);
+		l_vCurrentLeft += l_vIncZ;
+		l_vCurrentRight += l_vIncZ;
+	}
+
+	l_vCurrentLeft = l_vTopLeft;
+	l_vCurrentRight = l_vBottomLeft;
+
+	for(l_iCount = 0; l_iCount <= GridX;l_iCount++)
+	{
+		DrawLine(l_vCurrentLeft,l_vCurrentRight,Color);
+		l_vCurrentLeft += l_vIncX;
+		l_vCurrentRight += l_vIncX;
+	}
+
+}
