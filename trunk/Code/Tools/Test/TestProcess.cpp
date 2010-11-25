@@ -20,31 +20,38 @@ bool CTestProcess::Init()
   m_pCube->SetPosition(Vect3f(0,0,-1));
 
   //Init CubeCamera with the same m_pCamera parameters
-  //m_pCubeCamera = new CThPSCamera(
-  //                          0.1f,
-  //                          100.0f,
-  //                          45.0f * FLOAT_PI_VALUE/180.0f,
-  //                          ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
-  //                          m_pCube,
-  //                          3.0f);
-
-    m_pCubeCamera = new CFPSCamera(
+  m_pCubeCamera = new CThPSCamera(
                             0.1f,
                             100.0f,
                             45.0f * FLOAT_PI_VALUE/180.0f,
                             ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
-                            m_pCube);
+                            m_pCube,
+                            8.0f);
+
+    //m_pCubeCamera = new CFPSCamera(
+    //                        0.1f,
+    //                        100.0f,
+    //                        45.0f * FLOAT_PI_VALUE/180.0f,
+    //                        ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
+    //                        m_pCube);
 
   m_pObject = new CObject3D();
   m_pObject->SetPosition(Vect3f(-3,0,0));
-  m_pCamera = new CFPSCamera(
+  m_pObjectCamera = new CFPSCamera(
     0.1f,
     100.0f,
     45.0f * FLOAT_PI_VALUE/180.0f,
     ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
     m_pObject);
 
+  //m_pObjectCamera = new CThPSCamera(
+  //  0.1f,
+  //  100.0f,
+  //  45.0f * FLOAT_PI_VALUE/180.0f,
+  //  ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
+  //  m_pObject,6.0f);
 
+  m_pCamera = m_pObjectCamera;
 
   SetOk(true);
   return IsOk();
@@ -53,7 +60,7 @@ bool CTestProcess::Init()
 void CTestProcess::Release()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"TestProcess::Release");
-  CHECKED_DELETE(m_pCamera);
+  CHECKED_DELETE(m_pObjectCamera);
   CHECKED_DELETE(m_pObject);
   CHECKED_DELETE(m_pCube);
   CHECKED_DELETE(m_pCubeCamera);
@@ -132,9 +139,9 @@ void CTestProcess::Update(float _fElapsedTime)
 
   if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_Z))
   {
-    m_pCamera->SetObject3D(m_pCube);
+    m_pCamera = m_pCubeCamera;
   }else{
-    m_pCamera->SetObject3D(m_pObject);
+    m_pCamera = m_pObjectCamera;
   }
 
 }
@@ -146,20 +153,22 @@ void CTestProcess::Render()
 
   CRenderManager* pRM = RENDER_MANAGER;
 
-  Mat44f r, t, s, identity, total;
+  Mat44f r,r2, t, s, identity, total;
 
   identity.SetIdentity();
   r.SetIdentity();
+  r2.SetIdentity();
   t.SetIdentity();
   s.SetIdentity();
 
   pRM->SetTransform(identity);
 
   t.Translate(m_pCube->GetPosition());
-  r.SetFromAnglesYXZ(m_pCube->GetYaw(),m_pCube->GetRoll(),m_pCube->GetPitch());
+  r.SetFromAngleY(-m_pCube->GetYaw());
+  r2.SetFromAngleZ(m_pCube->GetPitch());
   s.Scale(1.5f,1.5f,1.5f);
 
-  total = t*r*s;
+  total = t*r*r2*s;
 
   pRM->DrawAxis();
 
