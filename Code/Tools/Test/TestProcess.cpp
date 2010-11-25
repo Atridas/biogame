@@ -6,6 +6,33 @@
 #include "ThPSCamera.h"
 #include "InputManager.h"
 
+#include "Texture.h"
+
+#define D3DFVF_CUSTOMVERTEX2 (D3DFVF_XYZ|D3DFVF_TEX1)
+
+struct TTEXTURED_VERTEX
+{
+	float x, y, z, u, v;
+	static unsigned int getFlags()
+	{
+		return D3DFVF_CUSTOMVERTEX2;
+	}
+};
+
+LPDIRECT3DVERTEXBUFFER9 g_vertex_buffer;
+LPDIRECT3DINDEXBUFFER9 g_index_buffer;
+
+TTEXTURED_VERTEX g_vertex[4] = {
+	{-1.5f,3.0f,0.0f,0.0f,0.0f},
+	{1.5f,3.0f,0.0f,1.0f,0.0f},
+	{-1.5f,0.0f,0.0f,0.0f,1.0f},
+	{1.5f,0.0f,0.0f,1.0f,1.0f}
+};
+
+uint16 g_index[6] = {0,1,2,2,1,3};
+
+CTexture* g_tex;
+
 bool CTestProcess::Init()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"TestProcess::Init");
@@ -53,6 +80,21 @@ bool CTestProcess::Init()
 
   m_pCamera = m_pObjectCamera;
 
+  g_tex = new CTexture();
+  g_tex->Load("Data/Assets/Textures/gohan.png");
+
+  RENDER_MANAGER->GetDevice()->CreateVertexBuffer(sizeof(g_vertex),0,TTEXTURED_VERTEX::getFlags(),D3DPOOL_DEFAULT,&g_vertex_buffer,NULL);
+  RENDER_MANAGER->GetDevice()->CreateIndexBuffer(sizeof(g_index),0,D3DFMT_INDEX16,D3DPOOL_DEFAULT,&g_index_buffer,NULL);
+
+  void* l_p;
+  g_vertex_buffer->Lock(0,sizeof(g_vertex),&l_p,0);
+  memcpy(l_p,g_vertex,sizeof(g_vertex));
+  g_vertex_buffer->Unlock();
+
+  g_index_buffer->Lock(0,sizeof(g_index),&l_p,0);
+  memcpy(l_p,g_index,sizeof(g_index));
+  g_index_buffer->Unlock();
+
   SetOk(true);
   return IsOk();
 }
@@ -64,6 +106,9 @@ void CTestProcess::Release()
   CHECKED_DELETE(m_pObject);
   CHECKED_DELETE(m_pCube);
   CHECKED_DELETE(m_pCubeCamera);
+  CHECKED_DELETE(g_tex);
+  CHECKED_RELEASE(g_vertex_buffer);
+  CHECKED_RELEASE(g_index_buffer);
 	// ----
 }
 
@@ -169,10 +214,10 @@ void CTestProcess::Render()
   s.Scale(1.5f,1.5f,1.5f);
 
   total = t*r*r2*s;
+  
+  pRM->DrawGrid(30.0f,colCYAN,30,30);
 
   pRM->DrawAxis();
-
-  pRM->DrawGrid(30.0f,colCYAN,30,30);
 
   pRM->DrawCube(Vect3f(2.0f,0.5f,0.0f),1.0f,l_CubeCol);
   pRM->DrawCube(Vect3f(2.0f,0.5f,2.0f),1.0f,l_CubeCol);
@@ -189,6 +234,24 @@ void CTestProcess::Render()
   pRM->DrawCube(1.0f,l_CubeCol);
  
   pRM->DrawCamera(m_pCubeCamera);
+
+  pRM->SetTransform(t.Translate(Vect3f(-2.0f,0.0f,0.0f)) * r.SetFromAngleY(FLOAT_PI_VALUE/2.0f));
+
+  g_tex->Activate(0);
+  pRM->GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE,TRUE);
+  pRM->GetDevice()->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+  pRM->GetDevice()->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+  pRM->GetDevice()->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+
+  pRM->GetDevice()->SetIndices(g_index_buffer);
+  pRM->GetDevice()->SetStreamSource(0,g_vertex_buffer,0,sizeof(TTEXTURED_VERTEX));
+  pRM->GetDevice()->SetFVF(TTEXTURED_VERTEX::getFlags());
+  pRM->GetDevice()->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, // PrimitiveType
+                                          0,                  // BaseVertexIndex
+                                          0,                  // MinIndex
+                                          4,                  // NumVertices
+                                          0,                  // StartIndex
+                                          2 );
   
   uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");
   string l_szMsg("Biogame");
