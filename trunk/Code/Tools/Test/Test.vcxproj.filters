@@ -16,5 +16,8 @@
     <None Include="..\..\..\Run\Test\Data\XML\init_test.xml">
       <Filter>Data</Filter>
     </None>
+    <None Include="..\..\..\Run\Test\Data\XML\actions.xml">
+      <Filter>Data</Filter>
+    </None>
   </ItemGroup>
 </Project>

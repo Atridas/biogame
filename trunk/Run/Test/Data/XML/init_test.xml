@@ -12,6 +12,7 @@
     <Language languageXML="./Data/Language/english.xml"/>
   </Languages>
   <InputManager exclusiveMouse="true"/>
+  <ActionToInput file="./Data/XML/actions.xml"/>
   
   <!--<Console_Logger activateConsole="true" Log_Level="INFORMATION" activateLogger="true" linesPerPageInLogger="20"/>
   <Mouse exclusiveModeinMouse="true" drawPointerMouse="true"/>

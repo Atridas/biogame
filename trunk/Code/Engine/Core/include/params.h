@@ -56,12 +56,23 @@ struct SInputManagerParams
   {}
 };
 
+struct SActionToInputParams
+{
+  const char* pcFile;
+
+  //Default Params
+  SActionToInputParams():
+    pcFile("./Data/XML/actions.xml")
+  {};
+};
+
 struct SInitParams
 {
-  SRenderManagerParams RenderManagerParams;
-  SFontManagerParams FontManagerParams;
-  SLanguageManagerParams LanguageManagerParams;
-  SInputManagerParams InputManagerParams;
+  SRenderManagerParams    RenderManagerParams;
+  SFontManagerParams      FontManagerParams;
+  SLanguageManagerParams  LanguageManagerParams;
+  SInputManagerParams     InputManagerParams;
+  SActionToInputParams    ActionToInputParams;
 };
 
 #endif

@@ -5,6 +5,7 @@
 #include "FPSCamera.h"
 #include "ThPSCamera.h"
 #include "InputManager.h"
+#include "Texture.h"
 
 #include "Texture.h"
 
@@ -208,6 +209,16 @@ void CTestProcess::Render()
 
   pRM->SetTransform(identity);
 
+  /*pRM->DrawCube(Vect3f(2.0f,0.5f,0.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,0.5f,2.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,0.5f,-2.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,2.5f,0.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,2.5f,2.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,2.5f,-2.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,4.5f,0.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,4.5f,2.0f),1.0f,l_CubeCol);
+  pRM->DrawCube(Vect3f(2.0f,4.5f,-2.0f),1.0f,l_CubeCol);*/
+
   t.Translate(m_pCube->GetPosition());
   r.SetFromAngleY(-m_pCube->GetYaw());
   r2.SetFromAngleZ(m_pCube->GetPitch());
@@ -219,20 +230,11 @@ void CTestProcess::Render()
 
   pRM->DrawAxis();
 
-  pRM->DrawCube(Vect3f(2.0f,0.5f,0.0f),1.0f,l_CubeCol);
-  pRM->DrawCube(Vect3f(2.0f,0.5f,2.0f),1.0f,l_CubeCol);
-  pRM->DrawCube(Vect3f(2.0f,0.5f,-2.0f),1.0f,l_CubeCol);
-  pRM->DrawCube(Vect3f(2.0f,2.5f,0.0f),1.0f,l_CubeCol);
-  pRM->DrawCube(Vect3f(2.0f,2.5f,2.0f),1.0f,l_CubeCol);
-  pRM->DrawCube(Vect3f(2.0f,2.5f,-2.0f),1.0f,l_CubeCol);
-  pRM->DrawCube(Vect3f(2.0f,4.5f,0.0f),1.0f,l_CubeCol);
-  pRM->DrawCube(Vect3f(2.0f,4.5f,2.0f),1.0f,l_CubeCol);
-  pRM->DrawCube(Vect3f(2.0f,4.5f,-2.0f),1.0f,l_CubeCol);
-
   pRM->SetTransform(total);
 
   pRM->DrawCube(1.0f,l_CubeCol);
  
+  pRM->SetTransform(identity);
   pRM->DrawCamera(m_pCubeCamera);
 
   pRM->SetTransform(t.Translate(Vect3f(-2.0f,0.0f,0.0f)) * r.SetFromAngleY(FLOAT_PI_VALUE/2.0f));
@@ -257,7 +259,6 @@ void CTestProcess::Render()
   string l_szMsg("Biogame");
 
   FONT_MANAGER->DrawText((uint32)m_vPos.x,(uint32)m_vPos.y,col,l_uiFontType,l_szMsg.c_str());
-  
 }
 
 

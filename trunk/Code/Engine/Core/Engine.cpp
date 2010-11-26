@@ -115,6 +115,18 @@ void CEngine::ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML
     } else {
       LOGGER->AddNewLog(ELL_WARNING, "Engine:: No s'ha trobat element \"InputManager\". Usant valors per defecte.");
     }
+
+    //---------------------------------------------------------------
+    //Action to input -----------------------------------------------
+    //---------------------------------------------------------------
+    CXMLTreeNode l_TreeActionToInput = l_TreeConfig["ActionToInput"];
+    if(l_TreeActionToInput.Exists())
+    {
+      InitParams_.ActionToInputParams.pcFile = l_TreeActionToInput.GetPszProperty("file", InitParams_.ActionToInputParams.pcFile);
+      LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: Action To input: %s", InitParams_.ActionToInputParams.pcFile);
+    } else {
+      LOGGER->AddNewLog(ELL_WARNING, "Engine:: No s'ha trobat element \"ActionToInput\". Usant valors per defecte.");
+    }
   }
 }
 

@@ -27,6 +27,8 @@ bool CTexture::LoadFile()
     LOGGER->AddNewLog(ELL_ERROR, "CTexture::Load D3DERR_INVALIDDATA");
   } else if(l_Result == E_OUTOFMEMORY) {
     LOGGER->AddNewLog(ELL_ERROR, "CTexture::Load E_OUTOFMEMORY");
+  } else {
+    LOGGER->AddNewLog(ELL_ERROR, "CTexture::Load unrecognized error");
   }
 
   return false;
