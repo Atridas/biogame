@@ -92,6 +92,7 @@
   <ItemGroup>
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="params.cpp" />
     <ClCompile Include="Process.cpp" />
   </ItemGroup>
   <ItemGroup>

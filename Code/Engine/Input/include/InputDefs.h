@@ -191,6 +191,10 @@ typedef enum MOUSE_BUTTON
 
 #define KEY_PAUSE           0xC5    /* Pause */
 #define KEY_SCROLL          0x46    /* Scroll Lock */
+
+//afegida personalment
+#define KEY_NULL            0x00
+
 //------------------------------------------
 
 
