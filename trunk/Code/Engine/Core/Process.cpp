@@ -22,3 +22,12 @@ void CProcess::DebugInformation(float _FPS)
 }
 
 
+bool CProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const string& _szAction)
+{
+  //TODO fer les accions per defecte del Engine
+  return false;
+}
+bool CProcess::ExecuteScript(float _fDeltaSeconds, float _fDelta, const string& _szScript)
+{
+  return false;
+}

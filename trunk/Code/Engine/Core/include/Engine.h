@@ -28,7 +28,6 @@ public:
   virtual					          ~CEngine(void)                                              {Done();};
 
   bool                      Init					      (const SInitParams& _InitParams, HWND hWnd);
-  void                      ReadXMLInitParams    (SInitParams& InitParams_, const char* _pcPathXML);
 	void				              Update				      ();
 	void				              Render				      ();
 	void				              RenderScene		      ();

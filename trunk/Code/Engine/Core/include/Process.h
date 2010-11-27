@@ -15,7 +15,10 @@ public:
 	virtual void          Render() = 0;
 	virtual bool          Init() = 0;
 
-  virtual CCamera*      GetCamera()                          {return m_pCamera;};
+  virtual CCamera*      GetCamera                 ()         {return m_pCamera;};
+
+  virtual bool          ExecuteAction             (float _fDeltaSeconds, float _fDelta, const string& _szAction);
+  virtual bool          ExecuteScript             (float _fDeltaSeconds, float _fDelta, const string& _szScript);
 
 protected:
 

@@ -75,4 +75,6 @@ struct SInitParams
   SActionToInputParams    ActionToInputParams;
 };
 
+void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML);
+
 #endif

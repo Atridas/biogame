@@ -1,6 +1,8 @@
 #include "ActionToInput.h"
 
 #include <XML/XMLTreeNode.h>
+#include "InputManager.h"
+#include "Process.h"
 
 #define HARDCODED_ACTION_PROPERTY "name"
 #define SCRIPTED_ACTION_PROPERTY  "script"
@@ -17,14 +19,26 @@
 #define AXIS_DEFAULT              "AXIS_NOTHING"
 #define EVENT_DEFAULT             "EVENT_NOTHING"
 #define DELTA_DEFAULT             1.0f
-#define CODE_DEFAULT              "KEY_SPACE"
+#define CODE_DEFAULT              "KEY_NULL"
+
+/*struct SInputInfo {
+  INPUT_DEVICE_TYPE device;
+  INPUT_AXIS_TYPE   axis;
+  INPUT_EVENT_TYPE  eventType;
+  uint32            code;
+  float             delta;
+
+  //bool operator<(const SInputInfo& rhs) const{if(device == rhs.device){if(axis == rhs.axis){if(eventType == rhs.eventType){return code < rhs.code;} else {return eventType < rhs.eventType;}} else {return axis < rhs.axis;}} else {return device < rhs.device;}}
+};*/
 
 
-bool CActionToInput::Init(const char* _pcXMLFile)
+bool CActionToInput::Init(CInputManager* _pInputManager, const char* _pcXMLFile)
 {
+  m_pInputManager = _pInputManager;
   LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput::Init");
   m_szXMLFile = _pcXMLFile;
   InitString2Input();
+  m_pActionToTriggers = new TActionToTriggers;
   Load();
 
   SetOk(true);
@@ -34,6 +48,8 @@ bool CActionToInput::Init(const char* _pcXMLFile)
 void CActionToInput::Release()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput::Release");
+  Unload();
+  CHECKED_DELETE(m_pActionToTriggers);
 }
 
 void CActionToInput::Load()
@@ -53,7 +69,10 @@ void CActionToInput::Load()
       CXMLTreeNode l_XMLAction = l_XMLActions(i);
       if(strcmp(l_XMLAction.GetName(),ACTION_ELEMENT) != 0)
       {
-        LOGGER->AddNewLog(ELL_WARNING,"CActionToInput:: Error de format a l'xml, hi ha un element invàlid \"%s\"", l_XMLAction.GetName());
+        if(!l_XMLAction.IsComment())
+        {
+          LOGGER->AddNewLog(ELL_WARNING,"CActionToInput:: Error de format a l'xml, hi ha un element invàlid \"%s\"", l_XMLAction.GetName());
+        }
       } else {
         //agafa l'acció
         SAction l_Action;
@@ -64,10 +83,10 @@ void CActionToInput::Load()
           LOGGER->AddNewLog(ELL_WARNING,"CActionToInput:: Hi ha una acció sense script ni res assignat. La nº%d", i);
         } else {
 
-          LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput:: Action \"%s\" script \"%s\"",l_Action.hardCodedAction.c_str(),l_Action.script.c_str());
+          LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput::  Action \"%s\" script \"%s\"",l_Action.hardCodedAction.c_str(),l_Action.script.c_str());
 
           int l_iNumTriggers = l_XMLAction.GetNumChildren();
-          TInputTriggers l_Triggers(l_iNumTriggers);
+          TInputTriggers* l_Triggers = new TInputTriggers(l_iNumTriggers);
           for(int j = 0; j < l_iNumTriggers; j++)
           {
             CXMLTreeNode l_XMLInput = l_XMLAction(j);
@@ -87,20 +106,23 @@ void CActionToInput::Load()
               l_Trigger.code      =                     m_String2Code[l_szCode  ];
               l_Trigger.delta     = l_fDelta;
 
-              l_Triggers[j] = l_Trigger;
+              (*l_Triggers)[j] = l_Trigger;
               
-              LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput:: Device %s, Axis %s, Event %s, Code %s, Delta %f",
+              LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput::   Device %s, Axis %s, Event %s, Code %s, Delta %f",
                                                       l_szDevice.c_str(),
                                                       l_szAxis.c_str(),
                                                       l_szEvent.c_str(),
                                                       l_szCode.c_str(),
                                                       l_fDelta);
+              if(l_Trigger.axis == AXIS_NOTHING && l_Trigger.eventType == EVENT_NOTHING)
+              {
+                LOGGER->AddNewLog(ELL_WARNING,"CActionToInput:: trigger sense axis ni event!");
+              }
             } else {
               LOGGER->AddNewLog(ELL_WARNING,"CActionToInput:: Error de format a l'xml, hi ha un element invàlid \"%s\"", l_XMLInput.GetName());
             }
           }
-          m_TriggerToAction[l_Triggers] = l_Action;
-          //m_TriggerToAction.insert(TTriggerToActionPair(l_Action,l_Triggers));
+          m_pActionToTriggers->insert(TActionToTriggersPair(l_Action,l_Triggers));
         }
       }
     }
@@ -110,22 +132,136 @@ void CActionToInput::Load()
 void CActionToInput::Unload()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput::Unload");
-  m_TriggerToAction.clear();
+  TActionToTriggersIterator l_End = m_pActionToTriggers->end();
+  for(TActionToTriggersIterator l_It = m_pActionToTriggers->begin(); l_It != l_End; ++l_It)
+  {
+    TInputTriggers* l_Triggers = l_It->second;
+    delete l_Triggers;
+  }
+  m_pActionToTriggers->clear();
 }
 
-void CActionToInput::Update(float deltaSeconds)
+void CActionToInput::Update(float _fDeltaSeconds)
 {
-
+  TActionToTriggersIterator l_End = m_pActionToTriggers->end();
+  //per totes les accions
+  for(TActionToTriggersIterator l_It = m_pActionToTriggers->begin(); l_It != l_End; ++l_It)
+  {
+    TInputTriggers* l_Triggers = l_It->second;
+    TInputTriggersIterator l_EndTriggers = l_Triggers->end();
+    //per tots els triggers
+    float l_fDelta = 1.0f;
+    for(TInputTriggersIterator l_ItTriggers = l_Triggers->begin(); l_ItTriggers != l_EndTriggers; ++l_ItTriggers)
+    {
+      float l_Res = IsTriggered(*l_ItTriggers);
+      if(l_Res == 0.f) 
+      {
+        l_fDelta = 0.f;
+        break;
+      } else {
+        l_fDelta *= l_Res;
+      }
+    }
+    if(l_fDelta != 0.f)
+    {
+      const SAction& l_Action = l_It->first;
+      if(l_Action.hardCodedAction != "")
+        ExecuteAction(_fDeltaSeconds,l_fDelta,l_Action.hardCodedAction);
+      if(l_Action.script != "")
+        ExecuteAction(_fDeltaSeconds,l_fDelta,l_Action.script);
+    }
+  }
 }
 
-void CActionToInput::ExecuteAction(const string& _szAction)
+float CActionToInput::IsTriggered(const SInputInfo& _Trigger)
 {
-  //TODO aqui la feina de veritat
+  float x, y;
+  switch(_Trigger.axis)
+  {
+  //Moviment del mouse ---------------------------------
+  case AXIS_MOUSE_X:
+    return (float)m_pInputManager->GetMouseDelta().x;
+    break;
+  case AXIS_MOUSE_Y:
+    return (float)m_pInputManager->GetMouseDelta().y;
+    break;
+  case AXIS_MOUSE_Z:
+    return (float)m_pInputManager->GetMouseDelta().z;
+    break;
+  //Polzes del gamepad
+  case AXIS_LEFT_THUMB_X:
+    if(!m_pInputManager->GetGamePadLeftThumbDeflection(&x,&y,_Trigger.device))
+    {
+      //TODO error? log?
+    }// else {
+      return x;
+    //}
+    break;
+  case AXIS_LEFT_THUMB_Y:
+    m_pInputManager->GetGamePadLeftThumbDeflection(&x,&y,_Trigger.device);
+    return y;
+    break;
+
+
+  case AXIS_RIGHT_THUMB_X:
+    m_pInputManager->GetGamePadRightThumbDeflection(&x,&y,_Trigger.device);
+    return x;
+    break;
+  case AXIS_RIGHT_THUMB_Y:
+    m_pInputManager->GetGamePadRightThumbDeflection(&x,&y,_Trigger.device);
+    return y;
+    break;
+
+    
+  case AXIS_DELTA_TRIGGER_LEFT:
+    m_pInputManager->GetGamePadDeltaTriggers(&x,&y,_Trigger.device);
+    return x;
+    break;
+  case AXIS_DELTA_TRIGGER_RIGHT:
+    m_pInputManager->GetGamePadDeltaTriggers(&x,&y,_Trigger.device);
+    return y;
+    break;
+  //Tecles ---------------------------------------------
+  case AXIS_NOTHING:
+    switch(_Trigger.eventType)
+    {
+    case EVENT_DOWN:
+      return (m_pInputManager->IsDown(_Trigger.device,_Trigger.code)? 1.f:0.f);
+      break;
+    case EVENT_UP_DOWN:
+      return (m_pInputManager->IsUpDown(_Trigger.device,_Trigger.code)? 1.f:0.f);
+      break;
+    case EVENT_DOWN_UP:
+      return (m_pInputManager->IsDownUp(_Trigger.device,_Trigger.code)? 1.f:0.f);
+      break;
+    case EVENT_NOTHING:
+    default:
+      //TODO error?
+      break;
+    }
+    break;
+  }
+  return 0.f;
 }
 
-void CActionToInput::ExecuteScript(const string& _szScript)
+void CActionToInput::ExecuteAction(float _fDeltaSeconds, float _fDelta, const string& _szAction)
 {
-  //TODO aqui la feina de veritat (però quan tinguem el scripting fet)
+  if(m_pProcess)
+  {
+    if(m_pProcess->ExecuteAction(_fDeltaSeconds, _fDelta, _szAction))
+      return;
+  }
+  LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput:: Action \"%s\" delta[%f] seconds[%f]", _szAction.c_str(), _fDelta, _fDeltaSeconds);
+}
+
+void CActionToInput::ExecuteScript(float _fDeltaSeconds, float _fDelta, const string& _szScript)
+{
+  if(m_pProcess)
+  {
+    if(m_pProcess->ExecuteScript(_fDeltaSeconds, _fDelta, _szScript))
+      return;
+  }
+  LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput:: Script \"%s\" delta[%f] seconds[%f]", _szScript.c_str(), _fDelta, _fDeltaSeconds);
 }
 
 
@@ -286,4 +422,5 @@ void CActionToInput::InitString2Input ()
   m_String2Code.insert( PairString2Code("KEY_PGUP", KEY_PGUP) );
   m_String2Code.insert( PairString2Code("KEY_PAUSE", KEY_PAUSE) );
   m_String2Code.insert( PairString2Code("KEY_SCROLL", KEY_SCROLL) );
+  m_String2Code.insert( PairString2Code("KEY_NULL", KEY_NULL) );
 }
