@@ -7,14 +7,14 @@
 #include "InputManager.h"
 #include "Texture.h"
 
-#include "Texture.h"
+#include <IndexedVertexs.h>
 
 #define D3DFVF_CUSTOMVERTEX2 (D3DFVF_XYZ|D3DFVF_TEX1)
 
 struct TTEXTURED_VERTEX
 {
 	float x, y, z, u, v;
-	static unsigned int getFlags()
+	static unsigned int GetFVF()
 	{
 		return D3DFVF_CUSTOMVERTEX2;
 	}
@@ -33,6 +33,8 @@ TTEXTURED_VERTEX g_vertex[4] = {
 uint16 g_index[6] = {0,1,2,2,1,3};
 
 CTexture* g_tex;
+
+CIndexedVertexs<TTEXTURED_VERTEX>* g_pIndexedVertexs;
 
 bool CTestProcess::Init()
 {
@@ -84,7 +86,7 @@ bool CTestProcess::Init()
   g_tex = new CTexture();
   g_tex->Load("Data/Assets/Textures/gohan.png");
 
-  RENDER_MANAGER->GetDevice()->CreateVertexBuffer(sizeof(g_vertex),0,TTEXTURED_VERTEX::getFlags(),D3DPOOL_DEFAULT,&g_vertex_buffer,NULL);
+  RENDER_MANAGER->GetDevice()->CreateVertexBuffer(sizeof(g_vertex),0,TTEXTURED_VERTEX::GetFVF(),D3DPOOL_DEFAULT,&g_vertex_buffer,NULL);
   RENDER_MANAGER->GetDevice()->CreateIndexBuffer(sizeof(g_index),0,D3DFMT_INDEX16,D3DPOOL_DEFAULT,&g_index_buffer,NULL);
 
   void* l_p;
@@ -95,6 +97,8 @@ bool CTestProcess::Init()
   g_index_buffer->Lock(0,sizeof(g_index),&l_p,0);
   memcpy(l_p,g_index,sizeof(g_index));
   g_index_buffer->Unlock();
+
+  g_pIndexedVertexs = new CIndexedVertexs<TTEXTURED_VERTEX>(RENDER_MANAGER, g_vertex, g_index, 4, 6);
 
   SetOk(true);
   return IsOk();
@@ -110,6 +114,7 @@ void CTestProcess::Release()
   CHECKED_DELETE(g_tex);
   CHECKED_RELEASE(g_vertex_buffer);
   CHECKED_RELEASE(g_index_buffer);
+  CHECKED_DELETE(g_pIndexedVertexs);
 	// ----
 }
 
@@ -245,15 +250,17 @@ void CTestProcess::Render()
   pRM->GetDevice()->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
   pRM->GetDevice()->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 
-  pRM->GetDevice()->SetIndices(g_index_buffer);
+  /*pRM->GetDevice()->SetIndices(g_index_buffer);
   pRM->GetDevice()->SetStreamSource(0,g_vertex_buffer,0,sizeof(TTEXTURED_VERTEX));
-  pRM->GetDevice()->SetFVF(TTEXTURED_VERTEX::getFlags());
+  pRM->GetDevice()->SetFVF(TTEXTURED_VERTEX::GetFVF());
   pRM->GetDevice()->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, // PrimitiveType
                                           0,                  // BaseVertexIndex
                                           0,                  // MinIndex
                                           4,                  // NumVertices
                                           0,                  // StartIndex
-                                          2 );
+                                          2 );*/
+
+  g_pIndexedVertexs->Render(pRM);
   
   uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");
   string l_szMsg("Biogame");

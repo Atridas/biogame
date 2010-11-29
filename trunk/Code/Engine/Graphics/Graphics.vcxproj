@@ -105,7 +105,9 @@
     <ClInclude Include="include\FontManager.h" />
     <ClInclude Include="include\FPSCamera.h" />
     <ClInclude Include="include\Frustum.h" />
+    <ClInclude Include="include\IndexedVertexs.h" />
     <ClInclude Include="include\Object3D.h" />
+    <ClInclude Include="include\RenderableVertexs.h" />
     <ClInclude Include="include\RenderManager.h" />
     <ClInclude Include="include\Texture.h" />
     <ClInclude Include="include\TextureManager.h" />
