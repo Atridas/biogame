@@ -8,7 +8,8 @@ class CProcess:
 {
 
 public:
-                        CProcess():m_pCamera(0)              {};
+                        CProcess(const string& _szProcessName):m_pCamera(0),m_szProcessName(_szProcessName),m_bRenderInfo(false)
+                                                                          {};
   
 	virtual void          Update(float _fElapsedTime) = 0;
 	void				          DebugInformation(float FPS);
@@ -23,5 +24,10 @@ public:
 protected:
 
   CCamera*              m_pCamera;
+
+private:
+
+  string                m_szProcessName;
+  bool                  m_bRenderInfo;
 };
 
