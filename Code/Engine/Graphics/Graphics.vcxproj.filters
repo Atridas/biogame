@@ -28,6 +28,12 @@
     <Filter Include="TextureManager">
       <UniqueIdentifier>{3f3fdabc-e06f-4485-b1eb-201001e4132e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="RenderableVertexs">
+      <UniqueIdentifier>{8feee727-1829-413f-94c1-815584a2657f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IndexedVertexs">
+      <UniqueIdentifier>{7c0d44b5-3c41-4c82-88f6-fe8f8ca448f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -88,6 +94,12 @@
     </ClInclude>
     <ClInclude Include="include\TextureManager.h">
       <Filter>TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RenderableVertexs.h">
+      <Filter>RenderableVertexs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IndexedVertexs.h">
+      <Filter>IndexedVertexs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
