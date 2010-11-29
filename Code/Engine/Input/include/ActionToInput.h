@@ -54,7 +54,7 @@ public:
   ~CActionToInput(void)                                           {Release();};
 
   bool                  Init                      (CInputManager* _pInputManager, const char* _pcXMLFile);
-  bool                  Reload                    ()                        {Unload();Load();};
+  void                  Reload                    ()                        {Unload();Load();};
   bool                  SetFile                   (const char* _pcXMLFile)  {m_szXMLFile = _pcXMLFile;};
   
   void                  SetProcess                (CProcess* _pProcess)     {m_pProcess = _pProcess;};

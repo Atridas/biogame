@@ -10,8 +10,8 @@ class CTestProcess:
 {
 
 public:
-	                      CTestProcess            ()                      {};
-  virtual               ~CTestProcess           ()                      {Done();};
+	                      CTestProcess            ():CProcess("CTestProcess") {};
+  virtual               ~CTestProcess           ()                          {Done();};
 
   virtual bool          Init();
 

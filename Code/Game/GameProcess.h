@@ -6,8 +6,8 @@ class CGameProcess :
 	public CProcess
 {
 public:
-                        CGameProcess      ()                        {};
-  virtual               ~CGameProcess     ()                        {Done();};
+                        CGameProcess      ():CProcess("CGameProcess") {};
+  virtual               ~CGameProcess     ()                          {Done();};
 
   virtual bool          Init              ();
 	void                  Update            (float elT);
