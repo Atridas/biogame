@@ -27,8 +27,8 @@ public:
   virtual inline size_t GetVertexsCount() const         {return m_iVertexCount;};
 
   virtual inline unsigned short GetVertexType() const   = 0;
-  virtual inline size_t GetVertexSize()                 = 0;
-  virtual inline size_t GetIndexSize()                  = 0;
+  virtual inline size_t GetVertexSize() const           = 0;
+  virtual inline size_t GetIndexSize() const            = 0;
 };
 
 #endif
