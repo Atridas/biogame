@@ -34,6 +34,9 @@
     <Filter Include="IndexedVertexs">
       <UniqueIdentifier>{7c0d44b5-3c41-4c82-88f6-fe8f8ca448f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Vertex Structs">
+      <UniqueIdentifier>{db8c6700-9040-4636-8328-0fb316a65dab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -100,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="include\IndexedVertexs.h">
       <Filter>IndexedVertexs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VertexsStructs.h">
+      <Filter>Vertex Structs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
