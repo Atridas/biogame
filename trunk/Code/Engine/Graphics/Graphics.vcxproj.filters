@@ -37,6 +37,9 @@
     <Filter Include="Vertex Structs">
       <UniqueIdentifier>{db8c6700-9040-4636-8328-0fb316a65dab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="StaticMesh">
+      <UniqueIdentifier>{cdc76e40-6e6b-4649-bbfe-0683ecafa07d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -68,6 +71,9 @@
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
       <Filter>TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticMesh.cpp">
+      <Filter>StaticMesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="include\VertexsStructs.h">
       <Filter>Vertex Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\StaticMesh.h">
+      <Filter>StaticMesh</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
