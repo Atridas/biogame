@@ -19,7 +19,7 @@
 struct SDIFFUSEVERTEX
 {
 	float x, y, z;
-  unsigned long cr, cg, cb, ca;
+  unsigned long color;
 
   static inline unsigned short GetVertexType()
   {
@@ -36,7 +36,7 @@ struct SNORMALDIFSSUSEVERTEX
 {
 	float x, y, z;
   float nx, ny, nz;
-  unsigned long cr, cg, cb, ca;
+  unsigned long color;
 
   static inline unsigned short GetVertexType()
   {
@@ -53,7 +53,7 @@ struct SNORMALDIFFUSETEXTUREDVERTEX
 {
 	float x, y, z;
   float nx, ny, nz;
-  unsigned long cr, cg, cb, ca;
+  unsigned long color;
   float u1, v1;
 
   static inline unsigned short GetVertexType()
@@ -71,7 +71,7 @@ struct SNORMALDIFFUSEDTEXTURED2VERTEX
 {
 	float x, y, z;
   float nx, ny, nz;
-  unsigned long cr, cg, cb, ca;
+  unsigned long color;
   float u1, v1;
   float u2, v2;
 
