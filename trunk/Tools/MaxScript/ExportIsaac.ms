@@ -25,6 +25,12 @@ fn RHVectorToLH vector =
 	return point3 vector.x vector.z vector.y
 )
 
+fn ChangeUVCoords UV =
+(
+	local v = 1-Uv.y
+	return point3 UV.x v UV.z
+)
+
 function GetVertexType _material =
 (
 	local mascara = bit.or VERTEX_TYPE_GEOMETRY VERTEX_TYPE_NORMAL
@@ -50,6 +56,31 @@ function GetVertexType _material =
 
 function ExportMaterial _material _file = 
 (
+	local l_cont = 0
+	if _material.diffuseMapEnable == true and  _material.diffuseMap != undefined then
+	(
+		l_cont = l_cont + 1
+	)
+	
+	if _material.bumpMapEnable == true and  _material.bumpMap != undefined then
+	(
+		l_cont = l_cont + 1
+	)
+	
+	if _material.selfIllumMapEnable == true and  _material.selfIllumMap != undefined then
+	(
+		l_cont = l_cont + 1
+	)
+	
+	if _material.reflectionMapEnable == true and  _material.reflectionMap != undefined then
+	(
+		l_cont = l_cont + 1
+	)
+	
+	--- lo mismo
+	
+	WriteShort _file l_cont #unsigned
+	
 	if _material.diffuseMapEnable == true and  _material.diffuseMap != undefined then
 	(
 		WriteShort _file _material.diffuseMap.filename.count
@@ -75,10 +106,71 @@ function ExportMaterial _material _file =
 	)
 )
 
+--global VERTEX_TYPE_GEOMETRY =0x0001
+--global VERTEX_TYPE_NORMAL     =0x0002
+--global VERTEX_TYPE_TANGENT    =0x0004
+--global VERTEX_TYPE_BINORMAL  =0x0008
+--global VERTEX_TYPE_TEXTURE1   =0x0010
+--global VERTEX_TYPE_TEXTURE2   =0x0020
+--global VERTEX_TYPE_DIFFUSE      =0x0040
+
 function CreateVertex _Pos _Normal _TUV1 _TUV2 _DiffuseColor _VertexType VertexOut_ =
 (
-	local Vtx= #(_Pos.x, _Pos.y, _Pos.z, _Normal.x, _Normal.y, _Normal.z, _DiffuseColor, _TUV1.x, _TUV1.y, _TUV2.x, _TUV2.y)
+	--local Vtx= #(_Pos.x, _Pos.y, _Pos.z, _Normal.x, _Normal.y, _Normal.z, _DiffuseColor, _TUV1.x, _TUV1.y, _TUV2.x, _TUV2.y)
+	local Vtx= #(_Pos.x, _Pos.y, _Pos.z, _Normal.x, _Normal.y, _Normal.z, _TUV1.x, _TUV1.y)
 	join VertexOut_ Vtx
+)
+
+function WriteVertexs _File _VertexList _VertexType =
+(
+	WriteLong _File _VertexList.count #unsigned
+	for i= 1 to _VertexList.count do
+	(
+		local l_vertex = _VertexList[i]
+		
+		local l_result =  bit.and _VertexType VERTEX_TYPE_GEOMETRY
+		
+		for j= 1 to l_vertex.count do
+		(
+			WriteFloat _File l_vertex[j]
+		)
+		
+		/*
+		if bit.and _VertexType VERTEX_TYPE_GEOMETRY > 0 then
+		(
+			WriteFloat _File l_vertex[1]
+			WriteFloat _File l_vertex[2]
+			WriteFloat _File l_vertex[3]
+		)
+		if bit.and _VertexType VERTEX_TYPE_NORMAL > 0 then
+		(
+			WriteFloat _File l_vertex[4]
+			WriteFloat _File l_vertex[5]
+			WriteFloat _File l_vertex[6]
+		)
+		if bit.and _VertexType VERTEX_TYPE_TEXTURE1 > 0 then
+		(
+			WriteFloat _File l_vertex[8]
+			WriteFloat _File l_vertex[9]
+		) else if bit.and _VertexType VERTEX_TYPE_TEXTURE2 > 0 then
+		(
+			WriteFloat _File l_vertex[8]
+			WriteFloat _File l_vertex[9]
+			WriteFloat _File l_vertex[10]
+			WriteFloat _File l_vertex[11]
+		) else if bit.and _VertexType VERTEX_TYPE_DIFFUSE > 0 then
+		(
+			WriteLong _File l_vertex[7] #unsigned
+		)*/
+	)
+)
+function WriteIndexs _File _IndexList =
+(
+	WriteLong _File _IndexList.count #unsigned
+	for i= 1 to _IndexList.count do
+	(
+		WriteShort _File _IndexList[i] #unsigned
+	)
 )
 
 function SameVertex _Vertex1 _Vertex2=
@@ -132,10 +224,11 @@ function VertexList _Obj _VertexType VertexList_ IndexList_ =
 		local normal =  getNormal _Obj face.x
 		normal = RHVectorToLH normal
 		local TUV =  meshop.getMapVert _Obj 1 IdxsMap.x
+		TUV = ChangeUVCoords TUV
 		
 		
 		CreateVertex pos normal TUV TUV 0 _VertexType VertexOut1
-		format "%\n" VertexOut1
+		--format "%\n" VertexOut1
 
 		-- vertex 2
 		pos =  GetVert _Obj face.y
@@ -143,9 +236,10 @@ function VertexList _Obj _VertexType VertexList_ IndexList_ =
 		normal =  getNormal _Obj face.y
 		normal = RHVectorToLH normal
 		TUV =  meshop.getMapVert _Obj 1 IdxsMap.y
+		TUV = ChangeUVCoords TUV
 
 		CreateVertex pos normal TUV TUV 0 _VertexType VertexOut2
-		format "%\n" VertexOut2
+		--format "%\n" VertexOut2
 
 		-- vertex 3
 		pos =  GetVert _Obj face.z
@@ -153,20 +247,22 @@ function VertexList _Obj _VertexType VertexList_ IndexList_ =
 		normal =  getNormal _Obj face.z
 		normal = RHVectorToLH normal
 		TUV =  meshop.getMapVert _Obj 1 IdxsMap.z
+		TUV = ChangeUVCoords TUV
 
 		CreateVertex pos normal TUV TUV 0 _VertexType VertexOut3
-		format "%\n" VertexOut3
+		--format "%\n" VertexOut3
 		
-		local index
+		local index1
+		local index2
+		local index3
 		
-		index = AddVertex VertexList_ VertexOut1
-		AddIndex IndexList_ index
+		index1 = AddVertex VertexList_ VertexOut1
+		index2 = AddVertex VertexList_ VertexOut2
+		index3 = AddVertex VertexList_ VertexOut3
 		
-		index = AddVertex VertexList_ VertexOut2
-		AddIndex IndexList_ index
-		
-		index = AddVertex VertexList_ VertexOut3
-		AddIndex IndexList_ index
+		AddIndex IndexList_ index1
+		AddIndex IndexList_ index3
+		AddIndex IndexList_ index2
 	)
 )
 
@@ -182,6 +278,7 @@ function ExportMesh _object _filename =
 	
 	local l_vertexType = GetVertexType l_material
 	
+	WriteShort l_file l_vertexType #unsigned
 	ExportMaterial l_material l_file 
 	
 	local l_VertexList =#()
@@ -189,7 +286,9 @@ function ExportMesh _object _filename =
 	
 	VertexList _object l_vertexType l_VertexList l_IndexList
 	
-	format "Vertex Buffer %\nIndex Buffer %\n" l_VertexList l_IndexList
+	--format "Vertex Buffer %\nIndex Buffer %\n" l_VertexList l_IndexList
+	WriteVertexs l_file l_VertexList l_vertexType 
+	WriteIndexs l_file l_IndexList
 	
 	WriteShort l_file l_footer #unsigned
 	
@@ -197,8 +296,8 @@ function ExportMesh _object _filename =
 	fclose l_file
 )
 
-ExportMesh $ "D:/Temp/a.mesh"
-
+ExportMesh $ "D:\Temp/b.mesh"
+/*
 list = #()
 
 --VertexList $ 0 list
@@ -217,3 +316,4 @@ TUV =  meshop.getMapVert $ 1 IdxsMap.x
 --format face
 --format pos
 
+*/
