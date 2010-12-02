@@ -35,7 +35,7 @@ function ExportMaterial _material _file =
 
 function CreateVertex _pos _normal _tuv1 _tuv2 _diffuseColor _vertexType vertexOut_ =
 (
-	local l_vertexOut = #(_pos.x,_pos.y,_pos.z,_normal.x,_normal.y,_normal.z,_diffuseColor,_tuv1.x,_tuv1.y,_tuv2.x,_tuv2.y)
+	local l_vertexOut = #(_pos.x,_pos.y,_pos.z,_normal.x,_normal.y,_normal.z,_tuv1.x,1.0-_tuv1.y)
 	join vertexOut_ l_vertexOut
 )
 
@@ -128,7 +128,7 @@ function ExportMesh _object _filename =
 	WriteShort l_file l_header #unsigned
 	
 	local l_material = _object.material
-	ExportMaterial l_material l_file
+	--ExportMaterial l_material l_file
 	
 	local l_vertexCount = getNumVerts _object
 	local l_facesCount = getNumFaces _object
@@ -174,14 +174,43 @@ function ExportMesh _object _filename =
 		CreateVertex l_vtx2 l_norm2 l_tuv12 l_tuv22 l_diffuse2 l_vertexType l_outVert2
 		CreateVertex l_vtx3 l_norm3 l_tuv13 l_tuv23 l_diffuse3 l_vertexType l_outVert3
 		
-		format "%\n" l_outVert1
-		format "%\n" l_outVert2
-		format "%\n\n" l_outVert3
+		--format "%\n" l_outVert1
+		--format "%\n" l_outVert2
+		--format "%\n\n" l_outVert3
 		
-		--append l_vertexList l_outVert1
-		--append l_vertexList l_outVert2
-		--append l_vertexList l_outVert3
+		local l_indexVert1 = AddVertex l_vertexList l_outVert1
+		local l_indexVert2 = AddVertex l_vertexList l_outVert2
+		local l_indexVert3 = AddVertex l_vertexList l_outVert3
+		
+		AddIndex l_indexList l_indexVert1
+		AddIndex l_indexList l_indexVert3
+		AddIndex l_indexList l_indexVert2
 	)
+	
+	WriteShort l_file l_vertexList.count #unsigned
+	
+	--Exportem la llista de vertexs
+	for l_vertexIterator = 1 to l_vertexList.count do
+	(
+		for l_iterator = 1 to l_vertexList[l_vertexIterator].count do
+		(
+			WriteFloat l_file (l_vertexList[l_vertexIterator])[l_iterator]
+		)
+		
+	)
+	
+	WriteShort l_file l_indexList.count #unsigned
+	
+	--Exportem la llista de index
+	for l_indexIterator = 1 to l_indexList.count do
+	(
+		WriteShort l_file l_indexList[l_indexIterator]
+	)
+	
+	format "%\n" l_indexList.count
+	format "%\n" l_indexList
+	format "%\n" l_vertexList.count
+	format "%\n" l_vertexList
 	
 	WriteShort l_file l_footer #unsigned
 	
@@ -189,4 +218,4 @@ function ExportMesh _object _filename =
 	fclose l_file
 )
 
-ExportMesh $ "D:/a.txt"
+ExportMesh $ "D:/a.mesh"

@@ -17,13 +17,13 @@ protected:
   vector<vector<CTexture *>> m_Textures;
   string m_szFileName;
   unsigned int m_iNumVertexs, m_iNumFaces;
-  void Unload();
+  void Unload() {Release();};
 public:
   CStaticMesh(): m_iNumVertexs(0),m_iNumFaces(0),m_szFileName(""){};
   ~CStaticMesh() {Done();};
   virtual void Release();
   bool Load (const string &_szFileName);
-  bool ReLoad () {Unload();Load(m_szFileName);};
+  bool ReLoad () {Unload();Load(m_szFileName);return true;};
   void Render (CRenderManager *_pRM) const;
 };
 
