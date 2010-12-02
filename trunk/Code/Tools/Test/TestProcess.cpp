@@ -6,6 +6,7 @@
 #include "ThPSCamera.h"
 #include "InputManager.h"
 #include "Texture.h"
+#include "StaticMesh.h"
 
 #include <IndexedVertexs.h>
 #include "VertexsStructs.h"
@@ -22,6 +23,8 @@ uint16 g_index[6] = {0,1,2,2,1,3};
 CTexture* g_tex = 0;
 
 CIndexedVertexs<STEXTUREDVERTEX>* g_pIndexedVertexs = 0;
+
+CStaticMesh* g_SM;
 
 bool CTestProcess::Init()
 {
@@ -75,6 +78,9 @@ bool CTestProcess::Init()
 
   g_pIndexedVertexs = new CIndexedVertexs<STEXTUREDVERTEX>(RENDER_MANAGER, g_vertex, g_index, 4, 6);
 
+  g_SM = new CStaticMesh();
+  g_SM->Load("D:/a.mesh");
+
   SetOk(true);
   return IsOk();
 }
@@ -87,7 +93,7 @@ void CTestProcess::Release()
   CHECKED_DELETE(m_pCube);
   CHECKED_DELETE(m_pCubeCamera);
   CHECKED_DELETE(g_tex);
-
+  CHECKED_DELETE(g_SM);
   CHECKED_DELETE(g_pIndexedVertexs);
 	// ----
 }
@@ -162,6 +168,11 @@ void CTestProcess::Update(float _fElapsedTime)
     m_pObject->SetPosition(l_vPos);
   }
 
+  if (INPUT_MANAGER->IsDownUp(IDV_KEYBOARD,KEY_R))
+  {
+    g_SM->ReLoad();
+  }
+
   if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_Z))
   {
     m_pCamera = m_pCubeCamera;
@@ -211,10 +222,10 @@ void CTestProcess::Render()
 
   pRM->SetTransform(total);
 
-  pRM->DrawCube(1.0f,l_CubeCol);
+  //pRM->DrawCube(1.0f,l_CubeCol);
  
   pRM->SetTransform(identity);
-  pRM->DrawCamera(m_pCubeCamera);
+  //pRM->DrawCamera(m_pCubeCamera);
 
   pRM->SetTransform(t.Translate(Vect3f(-2.0f,0.0f,0.0f)) * r.SetFromAngleY(FLOAT_PI_VALUE/2.0f));
 
@@ -224,14 +235,18 @@ void CTestProcess::Render()
   pRM->GetDevice()->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
   pRM->GetDevice()->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 
-  g_pIndexedVertexs->Render(pRM);
+  //g_pIndexedVertexs->Render(pRM);
 
   t.SetIdentity();
   r.SetIdentity();
   pRM->SetTransform(t.Translate(Vect3f(-2.0f,0.0f,3.0f)) * r.SetFromAngleY(FLOAT_PI_VALUE/2.0f));
 
-  g_pIndexedVertexs->Render(pRM);
+  //g_pIndexedVertexs->Render(pRM);
   
+  //pRM->SetTransform(s.Scale(0.1f,0.1f,0.1f));
+
+  g_SM->Render(pRM);
+
   uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");
   string l_szMsg("Biogame");
 
