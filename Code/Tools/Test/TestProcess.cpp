@@ -24,7 +24,7 @@ CTexture* g_tex = 0;
 
 CIndexedVertexs<STEXTUREDVERTEX>* g_pIndexedVertexs = 0;
 
-CStaticMesh* g_SM;
+CStaticMesh* g_pMesh = 0;
 
 bool CTestProcess::Init()
 {
@@ -78,8 +78,8 @@ bool CTestProcess::Init()
 
   g_pIndexedVertexs = new CIndexedVertexs<STEXTUREDVERTEX>(RENDER_MANAGER, g_vertex, g_index, 4, 6);
 
-  g_SM = new CStaticMesh();
-  g_SM->Load("D:/a.mesh");
+  g_pMesh = new CStaticMesh();
+  g_pMesh->LoadIsaac("Data/Assets/Meshes/b.mesh");
 
   SetOk(true);
   return IsOk();
@@ -93,8 +93,9 @@ void CTestProcess::Release()
   CHECKED_DELETE(m_pCube);
   CHECKED_DELETE(m_pCubeCamera);
   CHECKED_DELETE(g_tex);
-  CHECKED_DELETE(g_SM);
+  
   CHECKED_DELETE(g_pIndexedVertexs);
+  CHECKED_DELETE(g_pMesh);
 	// ----
 }
 
@@ -170,7 +171,7 @@ void CTestProcess::Update(float _fElapsedTime)
 
   if (INPUT_MANAGER->IsDownUp(IDV_KEYBOARD,KEY_R))
   {
-    g_SM->ReLoad();
+    g_pMesh->ReLoad();
   }
 
   if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_Z))
@@ -228,8 +229,11 @@ void CTestProcess::Render()
   //pRM->DrawCamera(m_pCubeCamera);
 
   pRM->SetTransform(t.Translate(Vect3f(-2.0f,0.0f,0.0f)) * r.SetFromAngleY(FLOAT_PI_VALUE/2.0f));
-
   g_tex->Activate(0);
+  pRM->GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE,FALSE);
+  g_pMesh->Render(pRM);
+
+ 
   pRM->GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE,TRUE);
   pRM->GetDevice()->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
   pRM->GetDevice()->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
@@ -245,7 +249,7 @@ void CTestProcess::Render()
   
   //pRM->SetTransform(s.Scale(0.1f,0.1f,0.1f));
 
-  g_SM->Render(pRM);
+  //g_pMesh->Render(pRM);
 
   uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");
   string l_szMsg("Biogame");
