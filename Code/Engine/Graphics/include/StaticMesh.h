@@ -23,7 +23,7 @@ public:
   ~CStaticMesh() {Done();};
   virtual void Release();
   bool Load (const string &_szFileName);
-  bool LoadIsaac (const string &_szFileName);
+  bool LoadSergi(const string &_szFileName);
   bool ReLoad () {Unload(); return Load(m_szFileName);};
   void Render (CRenderManager *_pRM) const;
 };
