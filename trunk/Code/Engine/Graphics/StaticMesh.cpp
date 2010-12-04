@@ -9,7 +9,7 @@
 #define HEADER 0xAAAA
 #define FOOTER 0xFFFF
 
-bool CStaticMesh::Load (const string &_szFileName)
+bool CStaticMesh::LoadSergi(const string &_szFileName)
 {
   unsigned short l_header = 0;
   unsigned short l_footer = 0;
@@ -53,7 +53,7 @@ bool CStaticMesh::Load (const string &_szFileName)
 }
 
 
-bool CStaticMesh::LoadIsaac(const string &_szFileName)
+bool CStaticMesh::Load(const string &_szFileName)
 {
   
   fstream l_File;

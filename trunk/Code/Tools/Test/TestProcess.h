@@ -19,6 +19,8 @@ public:
 	void					        DebugInformation        (float FPS);
 	void                  Render                  ();
 
+  virtual bool          ExecuteAction           (float _fDeltaSeconds, float _fDelta, const string& _szAction);
+
 private:
 
 	void                  Release                 ();

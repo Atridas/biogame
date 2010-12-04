@@ -79,7 +79,7 @@ bool CTestProcess::Init()
   g_pIndexedVertexs = new CIndexedVertexs<STEXTUREDVERTEX>(RENDER_MANAGER, g_vertex, g_index, 4, 6);
 
   g_pMesh = new CStaticMesh();
-  g_pMesh->LoadIsaac("Data/Assets/Meshes/b.mesh");
+  g_pMesh->Load("Data/Assets/Meshes/b.mesh");
 
   SetOk(true);
   return IsOk();
@@ -257,5 +257,15 @@ void CTestProcess::Render()
   FONT_MANAGER->DrawText((uint32)m_vPos.x,(uint32)m_vPos.y,col,l_uiFontType,l_szMsg.c_str());
 }
 
+bool CTestProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const string& _szAction)
+{
+  if(_szAction == "Reload Test Cube")
+  {
+    g_pMesh->ReLoad();
+    return true;
+  }
 
+  //cridar les accions per defecte
+  return CProcess::ExecuteAction(_fDeltaSeconds,_fDelta,_szAction);
+}
 

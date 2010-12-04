@@ -86,8 +86,11 @@
   </action>
   
 
-
-
+  <!--.......TEST ACTIONS.........................................-->
+  <action name="Reload Test Cube">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_R"/>
+  </action>
+  
   <!--.......VIEWER CAMERA CONTROL: GAMEPAD.......................
   <action name="MoveXViewerCam">
     <input deviceType="IDV_GAMEPAD1" EventType="EVENT_DOWN"         Code="PAD_BUTTON_RIGHT_THUMB"/>
