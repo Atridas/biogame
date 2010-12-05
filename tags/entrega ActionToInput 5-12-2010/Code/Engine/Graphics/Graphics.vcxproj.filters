@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="RenderManager">
+      <UniqueIdentifier>{615848bf-0cbe-47d7-a219-7f941ea3c4ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FontManager">
+      <UniqueIdentifier>{cebecdda-b9fc-4c4c-a8fe-2998b8af51e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Frustum">
+      <UniqueIdentifier>{ab4a0200-a9d8-440e-85d2-4c3681967061}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{73f14994-50ac-4c20-89e7-61c9bb7bc307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FPSCamera">
+      <UniqueIdentifier>{4f4b678d-5d1e-4fe7-82e7-8860bd92e792}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThPSCamera">
+      <UniqueIdentifier>{4cf3c62b-31fc-477e-8c26-8c88fa970f94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object3D">
+      <UniqueIdentifier>{c99d736e-6a0c-4651-a61a-5966427dabc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Texture">
+      <UniqueIdentifier>{21842c9d-8f5a-4376-b635-ffc94bfcb203}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextureManager">
+      <UniqueIdentifier>{3f3fdabc-e06f-4485-b1eb-201001e4132e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderableVertexs">
+      <UniqueIdentifier>{8feee727-1829-413f-94c1-815584a2657f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IndexedVertexs">
+      <UniqueIdentifier>{7c0d44b5-3c41-4c82-88f6-fe8f8ca448f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vertex Structs">
+      <UniqueIdentifier>{db8c6700-9040-4636-8328-0fb316a65dab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StaticMesh">
+      <UniqueIdentifier>{cdc76e40-6e6b-4649-bbfe-0683ecafa07d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>RenderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="FontManager.cpp">
+      <Filter>FontManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Frustum.cpp">
+      <Filter>Frustum</Filter>
+    </ClCompile>
+    <ClCompile Include="ThPSCamera.cpp">
+      <Filter>ThPSCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="FPSCamera.cpp">
+      <Filter>FPSCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Object3D.cpp">
+      <Filter>Object3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticMesh.cpp">
+      <Filter>StaticMesh</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\RenderManager.h">
+      <Filter>RenderManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FontManager.h">
+      <Filter>FontManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FPSCamera.h">
+      <Filter>FPSCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Frustum.h">
+      <Filter>Frustum</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ThPSCamera.h">
+      <Filter>ThPSCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Camera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Object3D.h">
+      <Filter>Object3D</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Texture.h">
+      <Filter>Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TextureManager.h">
+      <Filter>TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RenderableVertexs.h">
+      <Filter>RenderableVertexs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IndexedVertexs.h">
+      <Filter>IndexedVertexs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VertexsStructs.h">
+      <Filter>Vertex Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\StaticMesh.h">
+      <Filter>StaticMesh</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
