@@ -49,7 +49,7 @@ bool CProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const string& 
     CORE->GetActionToInput()->Reload();
     return true;
   }
-  return false;
+  return ExecuteProcessAction(_fDeltaSeconds,_fDelta,_szAction);
 }
 bool CProcess::ExecuteScript(float _fDeltaSeconds, float _fDelta, const string& _szScript)
 {

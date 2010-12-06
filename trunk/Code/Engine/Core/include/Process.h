@@ -21,6 +21,8 @@ public:
   virtual bool          ExecuteAction             (float _fDeltaSeconds, float _fDelta, const string& _szAction);
   virtual bool          ExecuteScript             (float _fDeltaSeconds, float _fDelta, const string& _szScript);
 
+  virtual bool          ExecuteProcessAction      (float _fDeltaSeconds, float _fDelta, const string& _szAction) = 0;
+
 protected:
 
   CCamera*              m_pCamera;

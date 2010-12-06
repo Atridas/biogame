@@ -32,6 +32,7 @@ bool CTestProcess::Init()
   // ---
 
   m_vPos = Vect2f(-150,0);
+  m_fVelocity = 1;
 
   //m_vCubePos = Vect3f(0,0,0);
   //m_vCubeRot = Vect3f(0,0,0);
@@ -121,9 +122,8 @@ void CTestProcess::Update(float _fElapsedTime)
   
 
   //Actualitze el pitch i el yaw segons els delta del mouse
-  float l_fPitch, l_fYaw, l_fVelocity;
+  float l_fPitch, l_fYaw;
 
-  l_fVelocity = 1;
   Vect3i l_vVec = INPUT_MANAGER->GetMouseDelta();
 
   l_fPitch = m_pObject->GetPitch();
@@ -131,55 +131,6 @@ void CTestProcess::Update(float _fElapsedTime)
   
   m_pObject->SetYaw(l_fYaw-l_vVec.x*_fElapsedTime);
   m_pObject->SetPitch(l_fPitch-l_vVec.y*_fElapsedTime);
-
-
-  //Movem el objecte per l'escenari segons les tecles WSAD.
-  Vect3f l_vPos = m_pObject->GetPosition();
-
-  if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_LSHIFT))
-  {
-    l_fVelocity = 10;
-  }
-
-  if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_W))
-  {
-    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw())*_fElapsedTime*l_fVelocity;
-    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw())*_fElapsedTime*l_fVelocity;
-    m_pObject->SetPosition(l_vPos);
-  }
-  
-  if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_S))
-  {
-    l_vPos.x = l_vPos.x - cos(m_pObject->GetYaw())*_fElapsedTime*l_fVelocity;
-    l_vPos.z = l_vPos.z - sin(m_pObject->GetYaw())*_fElapsedTime*l_fVelocity;
-    m_pObject->SetPosition(l_vPos);
-  }
-
-  if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_A))
-  {
-    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fElapsedTime*l_fVelocity;
-    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fElapsedTime*l_fVelocity;
-    m_pObject->SetPosition(l_vPos);
-  }
-
-  if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_D))
-  {
-    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fElapsedTime*l_fVelocity;
-    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fElapsedTime*l_fVelocity;
-    m_pObject->SetPosition(l_vPos);
-  }
-
-  if (INPUT_MANAGER->IsDownUp(IDV_KEYBOARD,KEY_R))
-  {
-    g_pMesh->ReLoad();
-  }
-
-  if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_Z))
-  {
-    m_pCamera = m_pCubeCamera;
-  }else{
-    m_pCamera = m_pObjectCamera;
-  }
 
 }
 
@@ -223,10 +174,10 @@ void CTestProcess::Render()
 
   pRM->SetTransform(total);
 
-  //pRM->DrawCube(1.0f,l_CubeCol);
+  pRM->DrawCube(1.0f,l_CubeCol);
  
   pRM->SetTransform(identity);
-  //pRM->DrawCamera(m_pCubeCamera);
+  pRM->DrawCamera(m_pCubeCamera);
 
   pRM->SetTransform(t.Translate(Vect3f(-2.0f,0.0f,0.0f)) * r.SetFromAngleY(FLOAT_PI_VALUE/2.0f));
   g_tex->Activate(0);
@@ -257,7 +208,7 @@ void CTestProcess::Render()
   FONT_MANAGER->DrawText((uint32)m_vPos.x,(uint32)m_vPos.y,col,l_uiFontType,l_szMsg.c_str());
 }
 
-bool CTestProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const string& _szAction)
+bool CTestProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const string& _szAction)
 {
   if(_szAction == "Reload Test Cube")
   {
@@ -265,7 +216,66 @@ bool CTestProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const stri
     return true;
   }
 
-  //cridar les accions per defecte
-  return CProcess::ExecuteAction(_fDeltaSeconds,_fDelta,_szAction);
+ if(_szAction == "Run")
+  {
+    m_fVelocity = 10;
+    return true;
+  }
+
+ if(_szAction == "Walk")
+  {
+    m_fVelocity = 1;
+    return true;
+  }
+
+  if(_szAction == "MoveFwd")
+  {
+    Vect3f l_vPos = m_pObject->GetPosition();
+    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
+    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
+    m_pObject->SetPosition(l_vPos);
+    return true;
+  }
+
+ if(_szAction == "MoveBack")
+  {
+    Vect3f l_vPos = m_pObject->GetPosition();
+    l_vPos.x = l_vPos.x - cos(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
+    l_vPos.z = l_vPos.z - sin(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
+    m_pObject->SetPosition(l_vPos);
+    return true;
+  }
+
+ if(_szAction == "MoveLeft")
+  {
+    Vect3f l_vPos = m_pObject->GetPosition();
+    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
+    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
+    m_pObject->SetPosition(l_vPos);
+    return true;
+  }
+
+ if(_szAction == "MoveRight")
+  {
+    Vect3f l_vPos = m_pObject->GetPosition();
+    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
+    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
+    m_pObject->SetPosition(l_vPos);
+    return true;
+  }
+
+  if(_szAction == "SetCameraCube")
+  {
+    m_pCamera = m_pCubeCamera;
+    return true;
+  }
+  
+  if(_szAction == "SetCameraFPS")
+  {
+    m_pCamera = m_pObjectCamera;
+    return true;
+  }
+
+  return false;
 }
 
