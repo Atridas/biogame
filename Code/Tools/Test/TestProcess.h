@@ -19,7 +19,7 @@ public:
 	void					        DebugInformation        (float FPS);
 	void                  Render                  ();
 
-  virtual bool          ExecuteAction           (float _fDeltaSeconds, float _fDelta, const string& _szAction);
+  virtual bool          ExecuteProcessAction      (float _fDeltaSeconds, float _fDelta, const string& _szAction);
 
 private:
 
@@ -32,5 +32,6 @@ private:
   CCamera*              m_pObjectCamera;
   //Vect3f                m_vCubePos;
   //Vect3f                m_vCubeRot;
+  float                 m_fVelocity;
 };
 
