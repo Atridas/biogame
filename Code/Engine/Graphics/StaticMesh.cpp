@@ -13,6 +13,11 @@ bool CStaticMesh::LoadSergi(const string &_szFileName)
 {
   unsigned short l_header = 0;
   unsigned short l_footer = 0;
+  unsigned short l_materialCount = 0;
+  unsigned short l_propertiesCount = 0;
+  unsigned short l_pathCount = 0;
+  char* l_pathString = 0;
+  unsigned short* l_pVertexType;
   unsigned short l_vertexCount = 0;
   unsigned short l_indexCount = 0;
 
@@ -26,26 +31,57 @@ bool CStaticMesh::LoadSergi(const string &_szFileName)
     m_szFileName=_szFileName;
 
     l_file.read((char*)&l_header,sizeof(unsigned short));
-    l_file.read((char*)&l_vertexCount,sizeof(unsigned short));
+	l_file.read((char*)&l_materialCount,sizeof(unsigned short));
 
-    l_vertex = new SNORMALTEXTUREDVERTEX[l_vertexCount];
+	l_pVertexType = new unsigned short[l_materialCount];
+
+	for(int i = 0; i < l_materialCount; i++)
+	{
+		l_file.read((char*)&(l_pVertexType[i]),sizeof(unsigned short));
+
+		l_file.read((char*)&l_propertiesCount,sizeof(unsigned short));
+
+		for(int j = 0; j < l_propertiesCount;j++)
+		{
+			l_file.read((char*)&l_pathCount,sizeof(unsigned short));
+			
+			l_pathCount++;
+			
+			l_pathString = new char[l_pathCount];
+
+			l_file.read(l_pathString,sizeof(char)*l_pathCount);
+
+			CHECKED_DELETE(l_pathString);
+		}
+		
+
+	}
+
+	for(int i = 0; i < l_materialCount; i++)
+	{
+
+		l_file.read((char*)&l_vertexCount,sizeof(unsigned short));
+
+		l_vertex = new SNORMALTEXTUREDVERTEX[l_vertexCount];
   
-    l_file.read((char*)l_vertex,sizeof(SNORMALTEXTUREDVERTEX)*l_vertexCount);
+		l_file.read((char*)l_vertex,sizeof(SNORMALTEXTUREDVERTEX)*l_vertexCount);
 
-    l_file.read((char*)&l_indexCount,sizeof(unsigned short));
+		l_file.read((char*)&l_indexCount,sizeof(unsigned short));
 
-    l_index = new uint16[l_indexCount];
+		l_index = new uint16[l_indexCount];
 
-    l_file.read((char*)l_index,sizeof(uint16)*l_indexCount);
+		l_file.read((char*)l_index,sizeof(uint16)*l_indexCount);
+
+		m_RVs.push_back(new CIndexedVertexs<SNORMALTEXTUREDVERTEX>(RENDER_MANAGER, l_vertex, l_index, l_vertexCount, l_indexCount));
+	}
 
     l_file.read((char*)&l_footer,sizeof(unsigned short));
 
     l_file.close();
 
-    m_RVs.push_back(new CIndexedVertexs<SNORMALTEXTUREDVERTEX>(RENDER_MANAGER, l_vertex, l_index, l_vertexCount, l_indexCount));
-
     CHECKED_DELETE(l_vertex);
     CHECKED_DELETE(l_index);
+	CHECKED_DELETE(l_pVertexType);
   
     return l_footer==0xffff;
   }

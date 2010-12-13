@@ -21,3 +21,7 @@ void CGameProcess::Release()
 	// ----
 }
 
+bool CGameProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const string& _szAction)
+{
+	return false;
+}
