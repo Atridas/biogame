@@ -8,27 +8,52 @@ global VERTEX_TYPE_DIFFUSE = 0x0040
 
 function ExportMaterial _material _file = 
 (
+	local l_cont = 0
+	if _material.diffuseMapEnable == true and  _material.diffuseMap != undefined then
+	(
+		l_cont = l_cont + 1
+	)
+	
+	if _material.bumpMapEnable == true and  _material.bumpMap != undefined then
+	(
+		l_cont = l_cont + 1
+	)
+	
+	if _material.selfIllumMapEnable == true and  _material.selfIllumMap != undefined then
+	(
+		l_cont = l_cont + 1
+	)
+	
+	if _material.reflectionMapEnable == true and  _material.reflectionMap != undefined then
+	(
+		l_cont = l_cont + 1
+	)
+	
+	--- lo mismo
+	
+	WriteShort _file l_cont #unsigned
+	
 	if _material.diffuseMapEnable and  _material.diffuseMap != undefined then
 	(
-		WriteShort _file _material.diffuseMap.filename.count
+		WriteShort _file _material.diffuseMap.filename.count #unsigned
 		WriteString _file _material.diffuseMap.filename
 	)
 	
 	if _material.bumpMapEnable and  _material.bumpMap != undefined then
 	(
-		WriteShort _file _material.bumpMap.filename.count
+		WriteShort _file _material.bumpMap.filename.count #unsigned
 		WriteString _file _material.bumpMap.filename
 	)
 	
 	if _material.selfIllumMapEnable and  _material.selfIllumMap != undefined then
 	(
-		WriteShort _file _material.selfIllumMap.filename.count
+		WriteShort _file _material.selfIllumMap.filename.count #unsigned
 		WriteString _file _material.selfIllumMap.filename
 	)
 	
 	if _material.reflectionMapEnable and  _material.reflectionMap != undefined then
 	(
-		WriteShort _file _material.reflectionMap.filename.count
+		WriteShort _file _material.reflectionMap.filename.count #unsigned
 		WriteString _file _material.reflectionMap.filename
 	)
 )
@@ -128,19 +153,52 @@ function ExportMesh _object _filename =
 	WriteShort l_file l_header #unsigned
 	
 	local l_material = _object.material
-	--ExportMaterial l_material l_file
+	local l_materialCount = 1
+	local l_multimaterial = false
+	
+	local l_vertexList = #()
+	local l_indexList = #()
+	local l_vertexType = #()
+		
+
+	if classof(l_material) == Multimaterial then
+	(
+		l_multimaterial = true
+		l_materialCount = l_material.count
+	)
+	
+	WriteShort l_file l_materialCount #unsigned
+	
+	for i = 1 to l_materialCount do
+	(
+		
+		if l_multimaterial then
+-		(
+			WriteShort l_file (GetVertexType l_material[i]) #unsigned
+			ExportMaterial l_material[i] l_file
+			append l_vertexType (GetVertexType l_material[i])
+		) else (
+			WriteShort l_file (GetVertexType l_material) #unsigned
+			ExportMaterial l_material l_file
+			append l_vertexType (GetVertexType l_material)
+		)
+		
+		append l_vertexList #()
+		append l_indexList #()
+	)
 	
 	local l_vertexCount = getNumVerts _object
 	local l_facesCount = getNumFaces _object
 	
-	local l_vertexList = #()
-	local l_indexList = #()
-	
-	local l_vertexType = GetVertexType l_material
-	
 	for l_faceIterator = 1 to l_facesCount do
 	(
-		local l_idxsFace=getFace _object l_faceIterator
+		local l_idxsFace = getFace _object l_faceIterator
+		local l_materialID = 1
+		
+		if l_multimaterial then
+		(
+			l_materialID = getFaceMatID _object l_idxsFace
+		)
 		
 		local l_vtx1 = RHTranslationToLH (getVert _object l_idxsFace.x)
 		local l_vtx2 = RHTranslationToLH (getVert _object l_idxsFace.y)
@@ -170,48 +228,51 @@ function ExportMesh _object _filename =
 		local l_outVert2 = #()
 		local l_outVert3 = #()
 		
-		CreateVertex l_vtx1 l_norm1 l_tuv11 l_tuv21 l_diffuse1 l_vertexType l_outVert1
-		CreateVertex l_vtx2 l_norm2 l_tuv12 l_tuv22 l_diffuse2 l_vertexType l_outVert2
-		CreateVertex l_vtx3 l_norm3 l_tuv13 l_tuv23 l_diffuse3 l_vertexType l_outVert3
+		CreateVertex l_vtx1 l_norm1 l_tuv11 l_tuv21 l_diffuse1 l_vertexType[l_materialID] l_outVert1
+		CreateVertex l_vtx2 l_norm2 l_tuv12 l_tuv22 l_diffuse2 l_vertexType[l_materialID] l_outVert2
+		CreateVertex l_vtx3 l_norm3 l_tuv13 l_tuv23 l_diffuse3 l_vertexType[l_materialID] l_outVert3
 		
 		--format "%\n" l_outVert1
 		--format "%\n" l_outVert2
 		--format "%\n\n" l_outVert3
 		
-		local l_indexVert1 = AddVertex l_vertexList l_outVert1
-		local l_indexVert2 = AddVertex l_vertexList l_outVert2
-		local l_indexVert3 = AddVertex l_vertexList l_outVert3
+		local l_indexVert1 = AddVertex l_vertexList[l_materialID] l_outVert1
+		local l_indexVert2 = AddVertex l_vertexList[l_materialID] l_outVert2
+		local l_indexVert3 = AddVertex l_vertexList[l_materialID] l_outVert3
 		
-		AddIndex l_indexList l_indexVert1
-		AddIndex l_indexList l_indexVert3
-		AddIndex l_indexList l_indexVert2
+		AddIndex l_indexList[l_materialID] l_indexVert1
+		AddIndex l_indexList[l_materialID] l_indexVert3
+		AddIndex l_indexList[l_materialID] l_indexVert2
+		
 	)
-	
-	WriteShort l_file l_vertexList.count #unsigned
-	
-	--Exportem la llista de vertexs
-	for l_vertexIterator = 1 to l_vertexList.count do
+
+	for l_materialIterator = 1 to l_materialCount do
 	(
-		for l_iterator = 1 to l_vertexList[l_vertexIterator].count do
+		WriteShort l_file l_vertexList[l_materialIterator].count #unsigned
+		
+		for l_vertexIterator = 1 to l_vertexList[l_materialIterator].count do
 		(
-			WriteFloat l_file (l_vertexList[l_vertexIterator])[l_iterator]
+			for l_iterator = 1 to l_vertexList[l_materialIterator][l_vertexIterator].count do
+			(
+				WriteFloat l_file (l_vertexList[l_materialIterator][l_vertexIterator])[l_iterator]
+			)
+			
+		)
+	
+		WriteShort l_file l_indexList[l_materialIterator].count #unsigned
+		
+		--Exportem la llista de index
+		for l_indexIterator = 1 to l_indexList[l_materialIterator].count do
+		(
+			WriteShort l_file l_indexList[l_materialIterator][l_indexIterator]
 		)
 		
+		format "%\n" l_indexList[l_materialIterator].count
+		format "%\n" l_indexList[l_materialIterator]
+		format "%\n" l_vertexList[l_materialIterator].count
+		format "%\n" l_vertexList[l_materialIterator]		
 	)
-	
-	WriteShort l_file l_indexList.count #unsigned
-	
-	--Exportem la llista de index
-	for l_indexIterator = 1 to l_indexList.count do
-	(
-		WriteShort l_file l_indexList[l_indexIterator]
-	)
-	
-	format "%\n" l_indexList.count
-	format "%\n" l_indexList
-	format "%\n" l_vertexList.count
-	format "%\n" l_vertexList
-	
+		
 	WriteShort l_file l_footer #unsigned
 	
 	fflush l_file
