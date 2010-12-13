@@ -80,7 +80,8 @@ bool CTestProcess::Init()
   g_pIndexedVertexs = new CIndexedVertexs<STEXTUREDVERTEX>(RENDER_MANAGER, g_vertex, g_index, 4, 6);
 
   g_pMesh = new CStaticMesh();
-  g_pMesh->LoadSergi("D:/a.mesh");
+  //g_pMesh->LoadSergi("D:/a.mesh");
+  g_pMesh->Load("Data/Assets/Meshes/b.mesh");
 
   SetOk(true);
   return IsOk();

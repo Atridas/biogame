@@ -10,9 +10,9 @@ public:
   virtual               ~CGameProcess     ()                          {Done();};
 
   virtual bool          Init              ();
-	void                  Update            (float elT);
-	void                  Render            ();
-	bool				ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const string& _szAction);
+  void                  Update            (float elT);
+  void                  Render            ();
+  bool                  ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const string& _szAction);
 private:
   void                  Release           ();
 };
