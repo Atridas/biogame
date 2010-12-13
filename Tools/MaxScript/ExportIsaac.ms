@@ -207,8 +207,19 @@ function AddIndex _IndexList_ _Index =
 	append _IndexList_ _Index
 )
 
-function VertexList _Obj _VertexType VertexList_ IndexList_ =
+--construim les llistes de vertexos i indexos
+function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 (
+	-- si tenim un multi material, creem les llistes de vertexos i indexos, sino, en creem només una
+	-- per simplificar les coses després a l'hora d'escriure'ls
+	for i=1 to _numMaterials do
+	(
+		append VertexList_ #()
+		append IndexList_ #()
+	)
+	
+	local l_materialID
+	
 	local numFaces = getNumFaces _Obj
 	for i = 1 to numFaces do
 	(
@@ -217,6 +228,14 @@ function VertexList _Obj _VertexType VertexList_ IndexList_ =
 		local VertexOut1=#()
 		local VertexOut2=#()
 		local VertexOut3=#()
+		if _numMaterials > 1 then -- agafem el material, en cas de ser multimaterial
+		(
+			l_materialID = getFaceMatID _Obj i
+		)
+		else
+		(
+			l_materialID = 1
+		)
 
 		-- vertex 1
 		local pos =  GetVert _Obj face.x
@@ -256,13 +275,13 @@ function VertexList _Obj _VertexType VertexList_ IndexList_ =
 		local index2
 		local index3
 		
-		index1 = AddVertex VertexList_ VertexOut1
-		index2 = AddVertex VertexList_ VertexOut2
-		index3 = AddVertex VertexList_ VertexOut3
+		index1 = AddVertex VertexList_[l_materialID] VertexOut1
+		index2 = AddVertex VertexList_[l_materialID] VertexOut2
+		index3 = AddVertex VertexList_[l_materialID] VertexOut3
 		
-		AddIndex IndexList_ index1
-		AddIndex IndexList_ index3
-		AddIndex IndexList_ index2
+		AddIndex IndexList_[l_materialID] index1
+		AddIndex IndexList_[l_materialID] index3
+		AddIndex IndexList_[l_materialID] index2
 	)
 )
 
@@ -276,19 +295,49 @@ function ExportMesh _object _filename =
 	
 	local l_material = _object.material
 	
-	local l_vertexType = GetVertexType l_material
+	local l_numMaterials --nombre de materials
+	local l_vertexType = #() -- llista de vertexTypes, amb un sol element si no és un multimaterial
 	
-	WriteShort l_file l_vertexType #unsigned
-	ExportMaterial l_material l_file 
-	
+	if classof(l_material) == Multimaterial then
+	(
+		--definim coses que necessitarem quan fem els vertexos
+		l_numMaterials = l_material.numsubs
+		WriteShort l_file l_numMaterials #unsigned
+		
+		for i = 1 to l_numMaterials do
+		(
+			--afegim a la llista el tipus de vertex
+			local l_vertexType2 = GetVertexType l_material[i]
+			append l_vertexType l_vertexType2
+		
+			--tipus de vertex i material en si
+			WriteShort l_file l_vertexType2 #unsigned
+			ExportMaterial l_material[i] l_file 
+		)
+	)
+	else
+	(
+		
+		--nombre de materials
+		l_numMaterials = 1
+		WriteShort l_file l_numMaterials #unsigned
+		local l_vertexType2 = GetVertexType l_material
+		append l_vertexType l_vertexType2
+		
+		--tipus de vertex i material en si
+		WriteShort l_file l_vertexType2 #unsigned
+		ExportMaterial l_material l_file 
+	)
 	local l_VertexList =#()
 	local l_IndexList =#()
 	
-	VertexList _object l_vertexType l_VertexList l_IndexList
+	VertexList _object l_vertexType l_numMaterials l_VertexList l_IndexList
 	
-	--format "Vertex Buffer %\nIndex Buffer %\n" l_VertexList l_IndexList
-	WriteVertexs l_file l_VertexList l_vertexType 
-	WriteIndexs l_file l_IndexList
+	for i = 1 to l_numMaterials do
+	(
+		WriteVertexs l_file l_VertexList[i] l_vertexType[i] 
+		WriteIndexs l_file l_IndexList[i]
+	)
 	
 	WriteShort l_file l_footer #unsigned
 	

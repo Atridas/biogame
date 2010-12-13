@@ -2,6 +2,7 @@
 #include "RenderManager.h"
 #include "StaticMesh.h"
 #include "VertexsStructs.h"
+#include "Texture.h"
 #include <IndexedVertexs.h>
 #include <base.h>
 #include <fstream>
@@ -91,65 +92,101 @@ bool CStaticMesh::LoadSergi(const string &_szFileName)
 
 bool CStaticMesh::Load(const string &_szFileName)
 {
+  LOGGER->AddNewLog(ELL_INFORMATION, "CStaticMesh::Load \"%s\"", _szFileName.c_str());
   
   fstream l_File;
   uint16 l_usHelper = 0;
-  uint16 l_usVertexType = 0;
-  uint16 l_usTextureNum = 0;
+  uint16 l_usNumMaterials = 0;
+  uint16* l_pusVertexType = 0;
+  uint16* l_pusTextureNum = 0;
   
   l_File.open(_szFileName, fstream::in | fstream::binary );
   if(!l_File.is_open())
   {
     LOGGER->AddNewLog(ELL_WARNING, "CStaticMesh::Load no s'ha pogut obrir el fitxer.");
+    CHECKED_DELETE_ARRAY(l_pusVertexType);
+    CHECKED_DELETE_ARRAY(l_pusTextureNum);
     return false;
   }
 
-
+  // ----------------------------- HEADER -----------------------------------------
   l_File.read((char*)&l_usHelper, sizeof(uint16));
 
   if(l_usHelper != HEADER)
   {
     LOGGER->AddNewLog(ELL_WARNING, "CStaticMesh::Load reading file with incorrect header");
+    CHECKED_DELETE_ARRAY(l_pusVertexType);
+    CHECKED_DELETE_ARRAY(l_pusTextureNum);
     l_File.close();
     return false;
   }
+  
+  // ----------------------------- MATERIALS --------------------------------------
+  //num materials
+  l_File.read((char*)&l_usNumMaterials, sizeof(uint16));
+  
+  l_pusVertexType = new uint16[l_usNumMaterials];
+  l_pusTextureNum = new uint16[l_usNumMaterials];
 
-  //Vertex Type
-  l_File.read((char*)&l_usVertexType, sizeof(uint16));
-  l_File.read((char*)&l_usTextureNum, sizeof(uint16));
 
-  for(int i = 0; i < l_usTextureNum; i++)
+  for(int i = 0; i < l_usNumMaterials; i++)
   {
-    uint16 l_usTextLen = 0;
-    l_File.read((char*)&l_usTextLen, sizeof(uint16));
-    char* l_pcTexture = new char[++l_usTextLen];
     
-    l_File.read(l_pcTexture, sizeof(char) * l_usTextLen);
+    m_Textures.push_back(vector<CTexture*>());
+    //Vertex Type
+    l_File.read((char*)&(l_pusVertexType[i]), sizeof(uint16));
+    l_File.read((char*)&(l_pusTextureNum[i]), sizeof(uint16));
+
+    for(int j = 0; j < l_pusTextureNum[i]; j++)
+    {
+      uint16 l_usTextLen = 0;
+      l_File.read((char*)&l_usTextLen, sizeof(uint16));
+      char* l_pcTexture = new char[++l_usTextLen];
     
-    //TODO algo
-    delete l_pcTexture;
+      l_File.read(l_pcTexture, sizeof(char) * l_usTextLen);
+
+      m_Textures[i].push_back(new CTexture());
+      if(!m_Textures[i][j]->Load(string(l_pcTexture)))
+      {
+        //No hi ha logger ja que ja el posa la textura
+        CHECKED_DELETE_ARRAY(l_pusVertexType);
+        CHECKED_DELETE_ARRAY(l_pusTextureNum);
+        delete l_pcTexture;
+        l_File.close();
+        return false;
+      }
+
+
+      delete l_pcTexture;
+    }
+
   }
 
-  uint32 l_VertexCount;
   
-  l_File.read((char*)&l_VertexCount, sizeof(uint32));
+  // ----------------------------- BUFFERS ----------------------------------------
+  for(int i = 0; i < l_usNumMaterials; i++)
+  {
+    uint32 l_VertexCount;
+  
+    l_File.read((char*)&l_VertexCount, sizeof(uint32));
 
-  SNORMALTEXTUREDVERTEX* l_pVertexBuffer = new SNORMALTEXTUREDVERTEX[l_VertexCount];
-  l_File.read((char *)&l_pVertexBuffer[0], sizeof(SNORMALTEXTUREDVERTEX)*l_VertexCount);
+    SNORMALTEXTUREDVERTEX* l_pVertexBuffer = new SNORMALTEXTUREDVERTEX[l_VertexCount];
+    l_File.read((char *)&l_pVertexBuffer[0], sizeof(SNORMALTEXTUREDVERTEX)*l_VertexCount);
   
   
-  uint32 l_IndexCount;
+    uint32 l_IndexCount;
   
-  l_File.read((char*)&l_IndexCount, sizeof(uint32));
+    l_File.read((char*)&l_IndexCount, sizeof(uint32));
 
-  uint16 * l_pIndexList = new uint16[l_IndexCount];
-  l_File.read((char *)&l_pIndexList[0], sizeof(uint16)*l_IndexCount);
+    uint16 * l_pIndexList = new uint16[l_IndexCount];
+    l_File.read((char *)&l_pIndexList[0], sizeof(uint16)*l_IndexCount);
 
-  CIndexedVertexs<SNORMALTEXTUREDVERTEX> *l_IndexedVertexs=new CIndexedVertexs<SNORMALTEXTUREDVERTEX>(RENDER_MANAGER, l_pVertexBuffer, l_pIndexList, l_VertexCount, l_IndexCount);
-  m_RVs.push_back(l_IndexedVertexs);
+    CIndexedVertexs<SNORMALTEXTUREDVERTEX> *l_IndexedVertexs=new CIndexedVertexs<SNORMALTEXTUREDVERTEX>(RENDER_MANAGER, l_pVertexBuffer, l_pIndexList, l_VertexCount, l_IndexCount);
+    m_RVs.push_back(l_IndexedVertexs);
   
-  delete l_pVertexBuffer;
-  delete l_pIndexList;
+    delete l_pVertexBuffer;
+    delete l_pIndexList;
+  }
 
 
   l_File.read((char*)&l_usHelper, sizeof(uint16));
@@ -157,12 +194,16 @@ bool CStaticMesh::Load(const string &_szFileName)
   if(l_usHelper != FOOTER)
   {
     LOGGER->AddNewLog(ELL_WARNING, "CStaticMesh::Load reading file with incorrect header");
+    CHECKED_DELETE_ARRAY(l_pusVertexType);
+    CHECKED_DELETE_ARRAY(l_pusTextureNum);
     l_File.close();
     return false;
   }
   
   l_File.close();
   m_szFileName = _szFileName;
+  CHECKED_DELETE_ARRAY(l_pusVertexType);
+  CHECKED_DELETE_ARRAY(l_pusTextureNum);
 
   SetOk(true);
   return IsOk();
@@ -170,12 +211,26 @@ bool CStaticMesh::Load(const string &_szFileName)
 
 void CStaticMesh::Render(CRenderManager *_pRM) const
 {
-    vector<CRenderableVertexs*>::const_iterator l_It = m_RVs.begin();
-    vector<CRenderableVertexs*>::const_iterator l_End = m_RVs.end();
-    while(l_It != l_End) 
+    vector<CRenderableVertexs*>::const_iterator l_ItRV = m_RVs.begin();
+    vector<CRenderableVertexs*>::const_iterator l_EndRV = m_RVs.end();
+
+    vector<vector<CTexture*>>::const_iterator l_ItTextureArray = m_Textures.begin();
+
+    while(l_ItRV != l_EndRV) 
     {
-      (*l_It)->Render(_pRM);
-      ++l_It;
+      vector<CTexture*>::const_iterator l_ItTexture = (*l_ItTextureArray).begin();
+      vector<CTexture*>::const_iterator l_EndTexture = (*l_ItTextureArray).end();
+      int stage = 0;
+      while(l_ItTexture != l_EndTexture)
+      {
+        (*l_ItTexture)->Activate(stage);
+        ++l_ItTexture;
+        ++stage;
+      }
+
+      (*l_ItRV)->Render(_pRM);
+      ++l_ItRV;
+      ++l_ItTextureArray;
     }
 }
 
@@ -186,8 +241,16 @@ void CStaticMesh::Release()
 
     while(l_It != l_End) 
     {
-      CHECKED_DELETE(*l_It);
+      CHECKED_DELETE(*l_It)
       ++l_It;
+    }
+
+    for(uint32 i = 0; i < m_Textures.size(); i++)
+    {
+      for(uint32 j = 0; j < m_Textures[i].size(); j++)
+      {
+        CHECKED_DELETE(m_Textures[i][j])
+      }
     }
 
     m_RVs.clear();
