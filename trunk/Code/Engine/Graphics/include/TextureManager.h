@@ -10,7 +10,7 @@
 //nota: hi ha problemes si no s'inclou CTexture, així que simplement l'inclourem aquí
 #include "Texture.h"
 
-class CTextureManager : public CMapManager<CTexture>
+class CTextureManager : private CMapManager<CTexture>
 {
 public:
   CTextureManager() {};
