@@ -20,14 +20,14 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
 
     if(l_TreeRenderManager.Exists())
     {
-      CXMLTreeNode l_TreeScreenResolution = l_TreeRenderManager["ScreenResolution"];
+      /*CXMLTreeNode l_TreeScreenResolution = l_TreeRenderManager["ScreenResolution"];
       CXMLTreeNode l_TreeWindowsPosition = l_TreeRenderManager["WindowsPosition"];
       CXMLTreeNode l_TreeRendermode = l_TreeRenderManager["Rendermode"];
     
       if(l_TreeScreenResolution.Exists())
       {
-        InitParams_.RenderManagerParams.uiWidth = l_TreeScreenResolution.GetIntProperty("width",InitParams_.RenderManagerParams.uiWidth);
-        InitParams_.RenderManagerParams.uiHeight = l_TreeScreenResolution.GetIntProperty("height",InitParams_.RenderManagerParams.uiHeight);
+        //InitParams_.RenderManagerParams.uiWidth = l_TreeScreenResolution.GetIntProperty("width",InitParams_.RenderManagerParams.uiWidth);
+        //InitParams_.RenderManagerParams.uiHeight = l_TreeScreenResolution.GetIntProperty("height",InitParams_.RenderManagerParams.uiHeight);
 
         LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: Screen resolution: %dx%d",InitParams_.RenderManagerParams.uiWidth,InitParams_.RenderManagerParams.uiHeight);
       } else {
@@ -51,7 +51,17 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
         LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: Fullscreen: %s",InitParams_.RenderManagerParams.bFullscreen? "true":"false");
       } else {
         LOGGER->AddNewLog(ELL_WARNING, "Engine:: No s'ha trobat element \"RenderManager::Rendermode\". Usant valors per defecte.");
-      }
+      }*/
+
+      InitParams_.RenderManagerParams.v2iResolution = l_TreeRenderManager.GetVect2iProperty("resolution",InitParams_.RenderManagerParams.v2iResolution);
+      LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: Screen resolution: %dx%d",InitParams_.RenderManagerParams.v2iResolution.x,InitParams_.RenderManagerParams.v2iResolution.y);
+
+      InitParams_.RenderManagerParams.v2iPosition = l_TreeRenderManager.GetVect2iProperty("position",InitParams_.RenderManagerParams.v2iPosition);
+      LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: Screen position: %dx%d",InitParams_.RenderManagerParams.v2iPosition.x,InitParams_.RenderManagerParams.v2iPosition.y);
+      
+      InitParams_.RenderManagerParams.bFullscreen = l_TreeRenderManager.GetBoolProperty("fullscreenMode",InitParams_.RenderManagerParams.bFullscreen);
+      LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: Fullscreen: %s",InitParams_.RenderManagerParams.bFullscreen? "true":"false");
+
     } else {
       LOGGER->AddNewLog(ELL_WARNING, "Engine:: No s'ha trobat element \"RenderManager\". Usant valors per defecte.");
     }
