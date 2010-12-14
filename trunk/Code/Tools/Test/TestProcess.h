@@ -19,7 +19,7 @@ public:
 	void					        DebugInformation        (float FPS);
 	void                  Render                  ();
 
-  virtual bool          ExecuteProcessAction      (float _fDeltaSeconds, float _fDelta, const string& _szAction);
+  virtual bool          ExecuteProcessAction      (float _fDeltaSeconds, float _fDelta, const char* _pcAction);
 
 private:
 

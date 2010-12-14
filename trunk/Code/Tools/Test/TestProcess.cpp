@@ -211,27 +211,27 @@ void CTestProcess::Render()
   FONT_MANAGER->DrawText((uint32)m_vPos.x,(uint32)m_vPos.y,col,l_uiFontType,l_szMsg.c_str());
 }
 
-bool CTestProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const string& _szAction)
+bool CTestProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
 {
-  if(_szAction == "Reload Test Cube")
+  if(strcmp(_pcAction, "Reload Test Cube") == 0 )
   {
     g_pMesh->ReLoad();
     return true;
   }
 
- if(_szAction == "Run")
+  if(strcmp(_pcAction, "Run") == 0)
   {
     m_fVelocity = 10;
     return true;
   }
 
- if(_szAction == "Walk")
+  if(strcmp(_pcAction, "Walk") == 0)
   {
     m_fVelocity = 1;
     return true;
   }
 
-  if(_szAction == "MoveFwd")
+  if(strcmp(_pcAction, "MoveFwd") == 0)
   {
     Vect3f l_vPos = m_pObject->GetPosition();
     l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
@@ -240,7 +240,7 @@ bool CTestProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, con
     return true;
   }
 
- if(_szAction == "MoveBack")
+ if(strcmp(_pcAction, "MoveBack") == 0)
   {
     Vect3f l_vPos = m_pObject->GetPosition();
     l_vPos.x = l_vPos.x - cos(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
@@ -249,7 +249,7 @@ bool CTestProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, con
     return true;
   }
 
- if(_szAction == "MoveLeft")
+  if(strcmp(_pcAction, "MoveLeft") == 0)
   {
     Vect3f l_vPos = m_pObject->GetPosition();
     l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
@@ -258,7 +258,7 @@ bool CTestProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, con
     return true;
   }
 
- if(_szAction == "MoveRight")
+  if(strcmp(_pcAction, "MoveRight") == 0)
   {
     Vect3f l_vPos = m_pObject->GetPosition();
     l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
@@ -267,13 +267,13 @@ bool CTestProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, con
     return true;
   }
 
-  if(_szAction == "SetCameraCube")
+  if(strcmp(_pcAction, "SetCameraCube") == 0)
   {
     m_pCamera = m_pCubeCamera;
     return true;
   }
   
-  if(_szAction == "SetCameraFPS")
+  if(strcmp(_pcAction, "SetCameraFPS") == 0)
   {
     m_pCamera = m_pObjectCamera;
     return true;
