@@ -29,38 +29,71 @@ function ExportMaterial _material _file =
 		l_cont = l_cont + 1
 	)
 	
-	--- lo mismo
-	
 	WriteShort _file l_cont #unsigned
 	
 	if _material.diffuseMapEnable and  _material.diffuseMap != undefined then
 	(
-		WriteShort _file _material.diffuseMap.filename.count #unsigned
-		WriteString _file _material.diffuseMap.filename
+		WriteShort _file (filenameFromPath (openBitmap _material.diffuseMap.bitmap.filename).filename).count #unsigned
+		WriteString _file (filenameFromPath (openBitmap _material.diffuseMap.bitmap.filename).filename)
 	)
 	
 	if _material.bumpMapEnable and  _material.bumpMap != undefined then
 	(
-		WriteShort _file _material.bumpMap.filename.count #unsigned
-		WriteString _file _material.bumpMap.filename
+		WriteShort _file (filenameFromPath (openBitmap _material.bumpMap.bitmap.filename).filename).count #unsigned
+		WriteString _file (filenameFromPath (openBitmap _material.bumpMap.bitmap.filename).filename)
 	)
 	
 	if _material.selfIllumMapEnable and  _material.selfIllumMap != undefined then
 	(
-		WriteShort _file _material.selfIllumMap.filename.count #unsigned
-		WriteString _file _material.selfIllumMap.filename
+		WriteShort _file (filenameFromPath (openBitmap _material.selfIllumMap.bitmap.filename).filename).count #unsigned
+		WriteString _file (filenameFromPath (openBitmap _material.selfIllumMap.bitmap.filename).filename)
 	)
 	
 	if _material.reflectionMapEnable and  _material.reflectionMap != undefined then
 	(
-		WriteShort _file _material.reflectionMap.filename.count #unsigned
-		WriteString _file _material.reflectionMap.filename
+		WriteShort _file (filenameFromPath (openBitmap _material.reflectionMap.bitmap.filename).filename).count #unsigned
+		WriteString _file (filenameFromPath (openBitmap _material.reflectionMap.bitmap.filename).filename)
 	)
 )
 
 function CreateVertex _pos _normal _tuv1 _tuv2 _diffuseColor _vertexType vertexOut_ =
 (
-	local l_vertexOut = #(_pos.x,_pos.y,_pos.z,_normal.x,_normal.y,_normal.z,_tuv1.x,1.0-_tuv1.y)
+	--local l_vertexOut = #(_pos.x,_pos.y,_pos.z,_normal.x,_normal.y,_normal.z,_tuv1.x,1.0-_tuv1.y)
+	local l_vertexOut = #()
+	
+	if (bit.and _vertexType VERTEX_TYPE_GEOMETRY) > 0 then
+	(
+		append l_vertexOut _pos.x
+		append l_vertexOut _pos.y
+		append l_vertexOut _pos.z
+	)
+	
+	if (bit.and _vertexType VERTEX_TYPE_NORMAL) > 0 then
+	(
+		append l_vertexOut _normal.x
+		append l_vertexOut _normal.y
+		append l_vertexOut _normal.z
+	)
+	
+	if (bit.and _vertexType VERTEX_TYPE_TEXTURE1) > 0 then
+	(
+		append l_vertexOut _tuv1.x
+		append l_vertexOut (1.0-_tuv1.y)
+	)
+	
+	if (bit.and _vertexType VERTEX_TYPE_TEXTURE2) > 0 then
+	(
+		append l_vertexOut _tuv1.x
+		append l_vertexOut (1.0-_tuv1.y)
+		append l_vertexOut _tuv2.x
+		append l_vertexOut (1.0-_tuv2.y)
+	)
+	
+	if (bit.and _vertexType VERTEX_TYPE_DIFFUSE) > 0 then
+	(
+		append l_vertexOut _diffuseColor
+	)
+	
 	join vertexOut_ l_vertexOut
 )
 
@@ -87,7 +120,7 @@ function GetVertexType _material =
 			l_vertexType = bit.or l_vertexType VERTEX_TYPE_BINORMAL
 		)
 		
-	)else	(
+	) else (
 		l_vertexType = bit.or l_vertexType VERTEX_TYPE_DIFFUSE
 	)
 	
@@ -171,20 +204,23 @@ function ExportMesh _object _filename =
 	
 	for i = 1 to l_materialCount do
 	(
-		
 		if l_multimaterial then
--		(
-			WriteShort l_file (GetVertexType l_material[i]) #unsigned
+		(
+			local l_VertexTypeSingle = GetVertexType l_material[i]
+			WriteShort l_file l_VertexTypeSingle #unsigned
 			ExportMaterial l_material[i] l_file
-			append l_vertexType (GetVertexType l_material[i])
+			append l_vertexType l_VertexTypeSingle
 		) else (
 			WriteShort l_file (GetVertexType l_material) #unsigned
 			ExportMaterial l_material l_file
 			append l_vertexType (GetVertexType l_material)
 		)
 		
-		append l_vertexList #()
-		append l_indexList #()
+		local new_vertex_list=#()
+		local new_index_list=#()
+		
+		append l_vertexList new_vertex_list
+		append l_indexList new_index_list
 	)
 	
 	local l_vertexCount = getNumVerts _object
@@ -197,7 +233,7 @@ function ExportMesh _object _filename =
 		
 		if l_multimaterial then
 		(
-			l_materialID = getFaceMatID _object l_idxsFace
+			l_materialID = getFaceMatID _object l_faceIterator
 		)
 		
 		local l_vtx1 = RHTranslationToLH (getVert _object l_idxsFace.x)
@@ -231,10 +267,6 @@ function ExportMesh _object _filename =
 		CreateVertex l_vtx1 l_norm1 l_tuv11 l_tuv21 l_diffuse1 l_vertexType[l_materialID] l_outVert1
 		CreateVertex l_vtx2 l_norm2 l_tuv12 l_tuv22 l_diffuse2 l_vertexType[l_materialID] l_outVert2
 		CreateVertex l_vtx3 l_norm3 l_tuv13 l_tuv23 l_diffuse3 l_vertexType[l_materialID] l_outVert3
-		
-		--format "%\n" l_outVert1
-		--format "%\n" l_outVert2
-		--format "%\n\n" l_outVert3
 		
 		local l_indexVert1 = AddVertex l_vertexList[l_materialID] l_outVert1
 		local l_indexVert2 = AddVertex l_vertexList[l_materialID] l_outVert2

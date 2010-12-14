@@ -24,8 +24,10 @@ public:
   virtual void Release();
   bool Load (const string &_szFileName);
   bool LoadSergi(const string &_szFileName);
-  bool ReLoad () {Unload(); return Load(m_szFileName);};
+  bool ReLoad () {Unload(); return LoadSergi(m_szFileName);};
   void Render (CRenderManager *_pRM) const;
+private:
+  int GetVertexSize(unsigned short _uiVertexType);
 };
 //-----------------Format dels fitxers .mesh----------------
 //  [] Designa opcional.
