@@ -83,25 +83,25 @@ function ExportMaterial _material _file =
 	
 	if _material.diffuseMapEnable == true and  _material.diffuseMap != undefined then
 	(
-		WriteShort _file _material.diffuseMap.filename.count
+		WriteShort _file _material.diffuseMap.filename.count #unsigned
 		WriteString _file _material.diffuseMap.filename
 	)
 	
 	if _material.bumpMapEnable == true and  _material.bumpMap != undefined then
 	(
-		WriteShort _file _material.bumpMap.filename.count
+		WriteShort _file _material.bumpMap.filename.count #unsigned
 		WriteString _file _material.bumpMap.filename
 	)
 	
 	if _material.selfIllumMapEnable == true and  _material.selfIllumMap != undefined then
 	(
-		WriteShort _file _material.selfIllumMap.filename.count
+		WriteShort _file _material.selfIllumMap.filename.count #unsigned
 		WriteString _file _material.selfIllumMap.filename
 	)
 	
 	if _material.reflectionMapEnable == true and  _material.reflectionMap != undefined then
 	(
-		WriteShort _file _material.reflectionMap.filename.count
+		WriteShort _file _material.reflectionMap.filename.count #unsigned
 		WriteString _file _material.reflectionMap.filename
 	)
 )
@@ -117,13 +117,41 @@ function ExportMaterial _material _file =
 function CreateVertex _Pos _Normal _TUV1 _TUV2 _DiffuseColor _VertexType VertexOut_ =
 (
 	--local Vtx= #(_Pos.x, _Pos.y, _Pos.z, _Normal.x, _Normal.y, _Normal.z, _DiffuseColor, _TUV1.x, _TUV1.y, _TUV2.x, _TUV2.y)
-	local Vtx= #(_Pos.x, _Pos.y, _Pos.z, _Normal.x, _Normal.y, _Normal.z, _TUV1.x, _TUV1.y)
+	local Vtx = #()
+	if bit.and _VertexType VERTEX_TYPE_GEOMETRY > 0 then
+	(
+		append VertexOut_ _Pos.x
+		append VertexOut_ _Pos.y
+		append VertexOut_ _Pos.z
+	)
+	if bit.and _VertexType VERTEX_TYPE_NORMAL > 0 then
+	(
+		append VertexOut_ _Normal.x
+		append VertexOut_ _Normal.y
+		append VertexOut_ _Normal.z
+	)
+	if bit.and _VertexType VERTEX_TYPE_TEXTURE1 > 0 then
+	(
+		append VertexOut_ _TUV1.x
+		append VertexOut_ _TUV1.y
+	)
+	if bit.and _VertexType VERTEX_TYPE_TEXTURE2 > 0 then
+	(
+		append VertexOut_ _TUV1.x
+		append VertexOut_ _TUV1.y
+		append VertexOut_ _TUV2.x
+		append VertexOut_ _TUV2.y
+	)
+	if bit.and _VertexType VERTEX_TYPE_DIFFUSE > 0 then
+	(
+		append VertexOut_ _DiffuseColor
+	)
 	join VertexOut_ Vtx
 )
 
 function WriteVertexs _File _VertexList _VertexType =
 (
-	WriteLong _File _VertexList.count #unsigned
+	WriteShort _File _VertexList.count #unsigned
 	for i= 1 to _VertexList.count do
 	(
 		local l_vertex = _VertexList[i]
@@ -166,7 +194,7 @@ function WriteVertexs _File _VertexList _VertexType =
 )
 function WriteIndexs _File _IndexList =
 (
-	WriteLong _File _IndexList.count #unsigned
+	WriteShort _File _IndexList.count #unsigned
 	for i= 1 to _IndexList.count do
 	(
 		WriteShort _File _IndexList[i] #unsigned
@@ -246,7 +274,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		TUV = ChangeUVCoords TUV
 		
 		
-		CreateVertex pos normal TUV TUV 0 _VertexType VertexOut1
+		CreateVertex pos normal TUV TUV 0 _VertexType[l_materialID] VertexOut1
 		--format "%\n" VertexOut1
 
 		-- vertex 2
@@ -257,7 +285,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		TUV =  meshop.getMapVert _Obj 1 IdxsMap.y
 		TUV = ChangeUVCoords TUV
 
-		CreateVertex pos normal TUV TUV 0 _VertexType VertexOut2
+		CreateVertex pos normal TUV TUV 0 _VertexType[l_materialID] VertexOut2
 		--format "%\n" VertexOut2
 
 		-- vertex 3
@@ -268,7 +296,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		TUV =  meshop.getMapVert _Obj 1 IdxsMap.z
 		TUV = ChangeUVCoords TUV
 
-		CreateVertex pos normal TUV TUV 0 _VertexType VertexOut3
+		CreateVertex pos normal TUV TUV 0 _VertexType[l_materialID] VertexOut3
 		--format "%\n" VertexOut3
 		
 		local index1

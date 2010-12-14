@@ -50,7 +50,7 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
 			d3dpp.Windowed          = FALSE;
       d3dpp.BackBufferWidth   = _params.v2iResolution.x;
       d3dpp.BackBufferHeight  = _params.v2iResolution.y;
-			d3dpp.BackBufferFormat = D3DFMT_R5G6B5;
+			d3dpp.BackBufferFormat  = D3DFMT_R5G6B5;
 		}
 		else
 		{

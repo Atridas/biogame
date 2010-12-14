@@ -16,6 +16,30 @@
 #define VERTEX_TYPE_DIFFUSE  0x0040
 
 
+inline uint16 GetVertexSize(uint16 _usVertexType)
+{
+  uint16 size = 0;
+  if(_usVertexType & VERTEX_TYPE_GEOMETRY)
+  {
+    size += 3 * sizeof(float);
+  }
+  if(_usVertexType & VERTEX_TYPE_NORMAL)
+  {
+    size += 3 * sizeof(float);
+  }
+  if(_usVertexType & VERTEX_TYPE_TEXTURE1)
+  {
+    size += 2 * sizeof(float);
+  } else if(_usVertexType & VERTEX_TYPE_TEXTURE2)
+  {
+    size += 4 * sizeof(float);
+  } else if(_usVertexType & VERTEX_TYPE_DIFFUSE)
+  {
+    size += sizeof(unsigned long);
+  }
+  return size;
+}
+
 struct SDIFFUSEVERTEX
 {
 	float x, y, z;

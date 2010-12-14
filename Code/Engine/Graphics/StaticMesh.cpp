@@ -74,7 +74,7 @@ bool CStaticMesh::LoadSergi(const string &_szFileName)
 
 		l_file.read((char*)l_index,sizeof(uint16)*l_indexCount);
 
-		m_RVs.push_back(new CIndexedVertexs<SNORMALTEXTUREDVERTEX>(RENDER_MANAGER, l_vertex, l_index, l_vertexCount, l_indexCount));
+		m_RVs.push_back(new CIndexedVertexs<SNORMALTEXTUREDVERTEX>(RENDER_MANAGER, (char*)l_vertex, l_index, l_vertexCount, l_indexCount));
 	}
 
     l_file.read((char*)&l_footer,sizeof(unsigned short));
@@ -101,7 +101,9 @@ bool CStaticMesh::Load(const string &_szFileName)
   uint16* l_pusVertexType = 0;
   uint16* l_pusTextureNum = 0;
 
-  CTextureManager* l_pTextureManager = CORE->GetRenderManager()->GetTextureManager();
+  CRenderManager* l_pRenderManager = CORE->GetRenderManager();
+
+  CTextureManager* l_pTextureManager = l_pRenderManager->GetTextureManager();
   
   l_File.open(_szFileName, fstream::in | fstream::binary );
   if(!l_File.is_open())
@@ -170,23 +172,35 @@ bool CStaticMesh::Load(const string &_szFileName)
   // ----------------------------- BUFFERS ----------------------------------------
   for(int i = 0; i < l_usNumMaterials; i++)
   {
-    uint32 l_VertexCount;
+    uint16 l_VertexCount;
+    uint16 l_usVertexSize = GetVertexSize(l_pusVertexType[i]);
   
-    l_File.read((char*)&l_VertexCount, sizeof(uint32));
+    l_File.read((char*)&l_VertexCount, sizeof(uint16));
 
-    SNORMALTEXTUREDVERTEX* l_pVertexBuffer = new SNORMALTEXTUREDVERTEX[l_VertexCount];
-    l_File.read((char *)&l_pVertexBuffer[0], sizeof(SNORMALTEXTUREDVERTEX)*l_VertexCount);
+    char* l_pVertexBuffer = new char[l_VertexCount*l_usVertexSize];
+    l_File.read(&l_pVertexBuffer[0], l_usVertexSize*l_VertexCount);
   
   
-    uint32 l_IndexCount;
+    uint16 l_IndexCount;
   
-    l_File.read((char*)&l_IndexCount, sizeof(uint32));
+    l_File.read((char*)&l_IndexCount, sizeof(uint16));
 
     uint16 * l_pIndexList = new uint16[l_IndexCount];
     l_File.read((char *)&l_pIndexList[0], sizeof(uint16)*l_IndexCount);
 
-    CIndexedVertexs<SNORMALTEXTUREDVERTEX> *l_IndexedVertexs=new CIndexedVertexs<SNORMALTEXTUREDVERTEX>(RENDER_MANAGER, l_pVertexBuffer, l_pIndexList, l_VertexCount, l_IndexCount);
-    m_RVs.push_back(l_IndexedVertexs);
+    //CIndexedVertexs<SNORMALTEXTUREDVERTEX> *l_IndexedVertexs=new CIndexedVertexs<SNORMALTEXTUREDVERTEX>(RENDER_MANAGER, (SNORMALTEXTUREDVERTEX*)l_pVertexBuffer, l_pIndexList, l_VertexCount, l_IndexCount);
+    CRenderableVertexs* l_RenderableVertexs = 0;
+
+    if(l_pusVertexType[i] == SNORMALTEXTUREDVERTEX::GetVertexType())
+    {
+      l_RenderableVertexs = new CIndexedVertexs<SNORMALTEXTUREDVERTEX>( l_pRenderManager,
+                                                                        l_pVertexBuffer,
+                                                                        l_pIndexList,
+                                                                        l_VertexCount, 
+                                                                        l_IndexCount);
+    }
+    
+    m_RVs.push_back(l_RenderableVertexs);
   
     delete l_pVertexBuffer;
     delete l_pIndexList;

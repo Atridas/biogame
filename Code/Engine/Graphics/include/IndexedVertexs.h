@@ -13,7 +13,7 @@ protected:
   inline size_t GetVertexSize() const {return sizeof(T);}
   inline size_t GetIndexSize() const {return sizeof(unsigned short);}
 public:
-  CIndexedVertexs(CRenderManager *_pRM, T *_pVertexAddress, uint16 *_pIndexAddres, size_t _iVertexCount, size_t _iIndexCount);
+  CIndexedVertexs(CRenderManager *_pRM, char *_pVertexAddress, uint16 *_pIndexAddres, size_t _iVertexCount, size_t _iIndexCount);
   virtual ~CIndexedVertexs(){};
   virtual bool Render(CRenderManager *_pRM) const;
   virtual inline unsigned short GetVertexType() const {return T::GetFVF();}
@@ -21,7 +21,7 @@ public:
 
 
 template<class T>
-CIndexedVertexs<T>::CIndexedVertexs(CRenderManager *_pRM, T *_pVertexAddress, uint16 *_pIndexAddres, size_t _iVertexCount, size_t _iIndexCount)
+CIndexedVertexs<T>::CIndexedVertexs(CRenderManager *_pRM, char *_pVertexAddress, uint16 *_pIndexAddres, size_t _iVertexCount, size_t _iIndexCount)
 {
   m_iIndexCount   = _iIndexCount;
   m_iVertexCount  = _iVertexCount;

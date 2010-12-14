@@ -73,11 +73,11 @@ public:
 //    [unsigned short, string]                                -> Environment. u16: Longitud de la cadena u16. string: path.
 //
 //  for MaterialCount
-//  	unsigned long                                           -> VertexCount. Nombre de vèrtexs.
+//  	unsigned short                                          -> VertexCount. Nombre de vèrtexs.
 //    for VertexCount
 //      VERTEX_STRUCT                                         -> Vèrtexs. Llista de vèrtexs. Format depenent de VERTEX_TYPE.
 //
-//  	unsigned long                                           -> IndexCount. Nombre d'índexs.
+//  	unsigned short                                          -> IndexCount. Nombre d'índexs.
 //  	for IndexCount
 //  		unsigned short                                        -> Índexs. Llista d'índexs de vèrtexs.
 //  
