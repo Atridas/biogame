@@ -33,7 +33,8 @@ inline uint16 GetVertexSize(uint16 _usVertexType)
   } else if(_usVertexType & VERTEX_TYPE_TEXTURE2)
   {
     size += 4 * sizeof(float);
-  } else if(_usVertexType & VERTEX_TYPE_DIFFUSE)
+  }
+  if(_usVertexType & VERTEX_TYPE_DIFFUSE)
   {
     size += sizeof(unsigned long);
   }
@@ -43,7 +44,7 @@ inline uint16 GetVertexSize(uint16 _usVertexType)
 struct SDIFFUSEVERTEX
 {
 	float x, y, z;
-  unsigned long color;
+  uint32 color;
 
   static inline unsigned short GetVertexType()
   {
@@ -60,7 +61,7 @@ struct SNORMALDIFSSUSEVERTEX
 {
 	float x, y, z;
   float nx, ny, nz;
-  unsigned long color;
+  uint32 color;
 
   static inline unsigned short GetVertexType()
   {
@@ -73,11 +74,12 @@ struct SNORMALDIFSSUSEVERTEX
 	}
 };
 
+/*
 struct SNORMALDIFFUSETEXTUREDVERTEX
 {
 	float x, y, z;
   float nx, ny, nz;
-  unsigned long color;
+  uint32 color;
   float u1, v1;
 
   static inline unsigned short GetVertexType()
@@ -95,7 +97,7 @@ struct SNORMALDIFFUSEDTEXTURED2VERTEX
 {
 	float x, y, z;
   float nx, ny, nz;
-  unsigned long color;
+  uint32 color;
   float u1, v1;
   float u2, v2;
 
@@ -109,6 +111,7 @@ struct SNORMALDIFFUSEDTEXTURED2VERTEX
 		return D3DFVF_XYZ|D3DFVF_NORMAL|D3DFVF_DIFFUSE|D3DFVF_TEX4;
 	}
 };
+*/
 
 struct STEXTUREDVERTEX
 {

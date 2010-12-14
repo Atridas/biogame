@@ -6,6 +6,9 @@ global VERTEX_TYPE_TEXTURE1   =0x0010
 global VERTEX_TYPE_TEXTURE2   =0x0020
 global VERTEX_TYPE_DIFFUSE      =0x0040
 
+
+global GAME_PATH = "Data/Assets/Textures/"
+
 fn GetYaw transform =
 (
 	return (transform as eulerangles).z
@@ -80,29 +83,42 @@ function ExportMaterial _material _file =
 	--- lo mismo
 	
 	WriteShort _file l_cont #unsigned
+	local l_texture
 	
 	if _material.diffuseMapEnable == true and  _material.diffuseMap != undefined then
 	(
-		WriteShort _file _material.diffuseMap.filename.count #unsigned
-		WriteString _file _material.diffuseMap.filename
+		l_texture = _material.diffuseMap.filename
+		l_texture = filenameFromPath (OpenBitmap l_texture).filename
+		l_texture = GAME_PATH + l_texture
+		WriteShort _file l_texture.count #unsigned
+		WriteString _file l_texture
 	)
 	
 	if _material.bumpMapEnable == true and  _material.bumpMap != undefined then
 	(
-		WriteShort _file _material.bumpMap.filename.count #unsigned
-		WriteString _file _material.bumpMap.filename
+		l_texture = _material.bumpMap.filename
+		l_texture = filenameFromPath (OpenBitmap l_texture).filename
+		l_texture = GAME_PATH + l_texture
+		WriteShort _file l_texture.count #unsigned
+		WriteString _file l_texture
 	)
 	
 	if _material.selfIllumMapEnable == true and  _material.selfIllumMap != undefined then
 	(
-		WriteShort _file _material.selfIllumMap.filename.count #unsigned
-		WriteString _file _material.selfIllumMap.filename
+		l_texture = _material.selfIllumMap.filename
+		l_texture = filenameFromPath (OpenBitmap l_texture).filename
+		l_texture = GAME_PATH + l_texture
+		WriteShort _file l_texture.count #unsigned
+		WriteString _file l_texture
 	)
 	
 	if _material.reflectionMapEnable == true and  _material.reflectionMap != undefined then
 	(
-		WriteShort _file _material.reflectionMap.filename.count #unsigned
-		WriteString _file _material.reflectionMap.filename
+		l_texture = _material.reflectionMap.filename
+		l_texture = filenameFromPath (OpenBitmap l_texture).filename
+		l_texture = GAME_PATH + l_texture
+		WriteShort _file l_texture.count #unsigned
+		WriteString _file l_texture
 	)
 )
 
@@ -130,22 +146,22 @@ function CreateVertex _Pos _Normal _TUV1 _TUV2 _DiffuseColor _VertexType VertexO
 		append VertexOut_ _Normal.y
 		append VertexOut_ _Normal.z
 	)
+	
 	if bit.and _VertexType VERTEX_TYPE_TEXTURE1 > 0 then
 	(
 		append VertexOut_ _TUV1.x
 		append VertexOut_ _TUV1.y
-	)
-	if bit.and _VertexType VERTEX_TYPE_TEXTURE2 > 0 then
+	) else if bit.and _VertexType VERTEX_TYPE_TEXTURE2 > 0 then
 	(
 		append VertexOut_ _TUV1.x
 		append VertexOut_ _TUV1.y
 		append VertexOut_ _TUV2.x
 		append VertexOut_ _TUV2.y
-	)
-	if bit.and _VertexType VERTEX_TYPE_DIFFUSE > 0 then
+	) else if bit.and _VertexType VERTEX_TYPE_DIFFUSE > 0 then
 	(
 		append VertexOut_ _DiffuseColor
 	)
+	
 	join VertexOut_ Vtx
 )
 
@@ -158,38 +174,20 @@ function WriteVertexs _File _VertexList _VertexType =
 		
 		local l_result =  bit.and _VertexType VERTEX_TYPE_GEOMETRY
 		
-		for j= 1 to l_vertex.count do
+		if bit.and _VertexType VERTEX_TYPE_DIFFUSE > 0 then
 		(
-			WriteFloat _File l_vertex[j]
+			for j= 1 to l_vertex.count-1 do
+			(
+				WriteFloat _File l_vertex[j]
+			)
+			WriteLong _File l_vertex[l_vertex.count] #unsigned
+		) else (
+			for j= 1 to l_vertex.count do
+			(
+				WriteFloat _File l_vertex[j]
+			)
 		)
 		
-		/*
-		if bit.and _VertexType VERTEX_TYPE_GEOMETRY > 0 then
-		(
-			WriteFloat _File l_vertex[1]
-			WriteFloat _File l_vertex[2]
-			WriteFloat _File l_vertex[3]
-		)
-		if bit.and _VertexType VERTEX_TYPE_NORMAL > 0 then
-		(
-			WriteFloat _File l_vertex[4]
-			WriteFloat _File l_vertex[5]
-			WriteFloat _File l_vertex[6]
-		)
-		if bit.and _VertexType VERTEX_TYPE_TEXTURE1 > 0 then
-		(
-			WriteFloat _File l_vertex[8]
-			WriteFloat _File l_vertex[9]
-		) else if bit.and _VertexType VERTEX_TYPE_TEXTURE2 > 0 then
-		(
-			WriteFloat _File l_vertex[8]
-			WriteFloat _File l_vertex[9]
-			WriteFloat _File l_vertex[10]
-			WriteFloat _File l_vertex[11]
-		) else if bit.and _VertexType VERTEX_TYPE_DIFFUSE > 0 then
-		(
-			WriteLong _File l_vertex[7] #unsigned
-		)*/
 	)
 )
 function WriteIndexs _File _IndexList =
@@ -247,6 +245,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 	)
 	
 	local l_materialID
+	local l_invTransform = inverse _Obj.transform
 	
 	local numFaces = getNumFaces _Obj
 	for i = 1 to numFaces do
@@ -267,6 +266,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 
 		-- vertex 1
 		local pos =  GetVert _Obj face.x
+		pos = pos * l_invTransform
 		pos = RHVectorToLH pos
 		local normal =  getNormal _Obj face.x
 		normal = RHVectorToLH normal
@@ -279,6 +279,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 
 		-- vertex 2
 		pos =  GetVert _Obj face.y
+		pos = pos * l_invTransform
 		pos = RHVectorToLH pos
 		normal =  getNormal _Obj face.y
 		normal = RHVectorToLH normal
@@ -290,6 +291,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 
 		-- vertex 3
 		pos =  GetVert _Obj face.z
+		pos = pos * l_invTransform
 		pos = RHVectorToLH pos
 		normal =  getNormal _Obj face.z
 		normal = RHVectorToLH normal
@@ -373,24 +375,21 @@ function ExportMesh _object _filename =
 	fclose l_file
 )
 
-ExportMesh $ "D:\Temp/b.mesh"
-/*
-list = #()
+function ExportPop =
+(
+	local l_outName = GetSaveFileName caption:"Selecciona on guardar la malla" types:"mesh(*.mesh)|*.mesh|All Files(*.*)|*.*|"
+	if l_outName != undefined then
+	(
+		ExportMesh $ l_outName
+	)
+	
+)
 
---VertexList $ 0 list
-
-format "%\n" list
+--messageBox "Ha aparegut un error" title:"ERROR!!"
 
 
-getNumFaces $
+ExportPop()
 
-face = GetFace $ 1
-pos =  GetVert $ face.x
-normal =  getNormal $ face.x
-IdxsMap=meshop.getMapFace $ 1 1
-TUV =  meshop.getMapVert $ 1 IdxsMap.x
+--ExportMesh $ "D:\Temp/b.mesh"
 
---format face
---format pos
 
-*/

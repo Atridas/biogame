@@ -90,6 +90,7 @@ bool CStaticMesh::LoadSergi(const string &_szFileName)
         m_RVs.push_back(new CIndexedVertexs<SNORMALDIFSSUSEVERTEX>(RENDER_MANAGER, (SNORMALDIFSSUSEVERTEX*) l_vertex, l_index, l_vertexCount, l_indexCount));
       }
 
+      /*
       if(l_pVertexType[i] == SNORMALDIFFUSETEXTUREDVERTEX::GetVertexType())
       {
         m_RVs.push_back(new CIndexedVertexs<SNORMALDIFFUSETEXTUREDVERTEX>(RENDER_MANAGER, (SNORMALDIFFUSETEXTUREDVERTEX*) l_vertex, l_index, l_vertexCount, l_indexCount));
@@ -99,6 +100,7 @@ bool CStaticMesh::LoadSergi(const string &_szFileName)
       {
         m_RVs.push_back(new CIndexedVertexs<SNORMALDIFFUSEDTEXTURED2VERTEX>(RENDER_MANAGER, (SNORMALDIFFUSEDTEXTURED2VERTEX*) l_vertex, l_index, l_vertexCount, l_indexCount));
       }
+      */
 
       if(l_pVertexType[i] == STEXTUREDVERTEX::GetVertexType())
       {
@@ -133,51 +135,6 @@ bool CStaticMesh::LoadSergi(const string &_szFileName)
     return l_footer==0xffff;
   }
   return false;
-}
-
-int CStaticMesh::GetVertexSize(unsigned short _uiVertexType)
-{
-  if(_uiVertexType == SDIFFUSEVERTEX::GetVertexType())
-  {
-    return sizeof(SDIFFUSEVERTEX);
-  }
-
-  if(_uiVertexType == SNORMALDIFSSUSEVERTEX::GetVertexType())
-  {
-    return sizeof(SNORMALDIFSSUSEVERTEX);
-  }
-
-  if(_uiVertexType == SNORMALDIFFUSETEXTUREDVERTEX::GetVertexType())
-  {
-    return sizeof(SNORMALDIFFUSETEXTUREDVERTEX);
-  }
-
-  if(_uiVertexType == SNORMALDIFFUSEDTEXTURED2VERTEX::GetVertexType())
-  {
-    return sizeof(SNORMALDIFFUSEDTEXTURED2VERTEX);
-  }
-
-  if(_uiVertexType == STEXTUREDVERTEX::GetVertexType())
-  {
-    return sizeof(STEXTUREDVERTEX);
-  }
-
-  if(_uiVertexType == STEXTURED2VERTEX::GetVertexType())
-  {
-    return sizeof(STEXTURED2VERTEX);
-  }
-
-  if(_uiVertexType == SNORMALTEXTUREDVERTEX::GetVertexType())
-  {
-    return sizeof(SNORMALTEXTUREDVERTEX);
-  }
-
-  if(_uiVertexType == SNORMALTEXTURED2VERTEX::GetVertexType())
-  {
-    return sizeof(SNORMALTEXTURED2VERTEX);
-  }
-
-  return 0;
 }
 
 bool CStaticMesh::Load(const string &_szFileName)
@@ -287,6 +244,28 @@ bool CStaticMesh::Load(const string &_szFileName)
                                                                         l_pIndexList,
                                                                         l_VertexCount, 
                                                                         l_IndexCount);
+    } else if(l_pusVertexType[i] == SNORMALTEXTURED2VERTEX::GetVertexType())
+    {
+      l_RenderableVertexs = new CIndexedVertexs<SNORMALTEXTURED2VERTEX>(  l_pRenderManager,
+                                                                          l_pVertexBuffer,
+                                                                          l_pIndexList,
+                                                                          l_VertexCount, 
+                                                                          l_IndexCount);
+    } else if(l_pusVertexType[i] == SNORMALDIFSSUSEVERTEX::GetVertexType())
+    {
+      l_RenderableVertexs = new CIndexedVertexs<SNORMALDIFSSUSEVERTEX>( l_pRenderManager,
+                                                                        l_pVertexBuffer,
+                                                                        l_pIndexList,
+                                                                        l_VertexCount, 
+                                                                        l_IndexCount);
+    } else {
+      LOGGER->AddNewLog(ELL_WARNING, "CStaticMesh::Load unrecognized vertex type %#hx", l_pusVertexType[i]);
+      CHECKED_DELETE_ARRAY(l_pusVertexType);
+      CHECKED_DELETE_ARRAY(l_pusTextureNum);
+      l_File.close();
+      delete l_pVertexBuffer;
+      delete l_pIndexList;
+      return false;
     }
     
     m_RVs.push_back(l_RenderableVertexs);

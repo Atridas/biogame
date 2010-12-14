@@ -24,6 +24,7 @@ CTexture* CTextureManager::GetResource(const std::string &_szName)
   if(!l_pTexture->Load(_szName))
   {
     LOGGER->AddNewLog(ELL_WARNING, "CTextureManager::GetResource -> veure log anterior.");
+    delete l_pTexture;
     return 0;
   }
   CMapManager::AddResource(_szName,l_pTexture);
