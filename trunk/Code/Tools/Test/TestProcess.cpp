@@ -79,11 +79,11 @@ bool CTestProcess::Init()
   //g_tex->Load("Data/Assets/Textures/gohan.png");
   g_tex = CORE->GetRenderManager()->GetTextureManager()->GetResource("Data/Assets/Textures/gohan.png");
 
-  g_pIndexedVertexs = new CIndexedVertexs<STEXTUREDVERTEX>(RENDER_MANAGER, g_vertex, g_index, 4, 6);
+  g_pIndexedVertexs = new CIndexedVertexs<STEXTUREDVERTEX>(RENDER_MANAGER, (char*)g_vertex, g_index, 4, 6);
 
   g_pMesh = new CStaticMesh();
   //g_pMesh->LoadSergi("D:/a.mesh");
-  g_pMesh->Load("Data/Assets/Meshes/b.mesh");
+  g_pMesh->Load("Data/Assets/Meshes/bmulti.mesh");
 
   SetOk(true);
   return IsOk();
