@@ -5,8 +5,10 @@
 #include <Utils/MapManager.h>
 
 //---- forward declarations ----
-class CTexture;
+//class CTexture;
 //-------------------------------
+//nota: hi ha problemes si no s'inclou CTexture, així que simplement l'inclourem aquí
+#include "Texture.h"
 
 class CTextureManager : public CMapManager<CTexture>
 {
@@ -14,6 +16,7 @@ public:
   CTextureManager() {};
   ~CTextureManager() {Destroy();};
   void Reload ();
+  virtual CTexture* GetResource(const std::string &_szName);
 };
 
 #endif

@@ -3,6 +3,7 @@
 #include "StaticMesh.h"
 #include "VertexsStructs.h"
 #include "Texture.h"
+#include "TextureManager.h"
 #include <IndexedVertexs.h>
 #include <base.h>
 #include <fstream>
@@ -99,6 +100,8 @@ bool CStaticMesh::Load(const string &_szFileName)
   uint16 l_usNumMaterials = 0;
   uint16* l_pusVertexType = 0;
   uint16* l_pusTextureNum = 0;
+
+  CTextureManager* l_pTextureManager = CORE->GetRenderManager()->GetTextureManager();
   
   l_File.open(_szFileName, fstream::in | fstream::binary );
   if(!l_File.is_open())
@@ -145,8 +148,8 @@ bool CStaticMesh::Load(const string &_szFileName)
     
       l_File.read(l_pcTexture, sizeof(char) * l_usTextLen);
 
-      m_Textures[i].push_back(new CTexture());
-      if(!m_Textures[i][j]->Load(string(l_pcTexture)))
+      m_Textures[i].push_back(l_pTextureManager->GetResource(l_pcTexture));
+      if(m_Textures[i][j] == 0)
       {
         //No hi ha logger ja que ja el posa la textura
         CHECKED_DELETE_ARRAY(l_pusVertexType);
@@ -155,6 +158,7 @@ bool CStaticMesh::Load(const string &_szFileName)
         l_File.close();
         return false;
       }
+
 
 
       delete l_pcTexture;
@@ -245,13 +249,8 @@ void CStaticMesh::Release()
       ++l_It;
     }
 
-    for(uint32 i = 0; i < m_Textures.size(); i++)
-    {
-      for(uint32 j = 0; j < m_Textures[i].size(); j++)
-      {
-        CHECKED_DELETE(m_Textures[i][j])
-      }
-    }
+    //el texture manager ja s'encarregarà de petar les textures
+    m_Textures.clear();
 
     m_RVs.clear();
 }

@@ -11,3 +11,21 @@ void CTextureManager::Reload ()
     l_It->second->Reload();
   }
 }
+
+
+CTexture* CTextureManager::GetResource(const std::string &_szName)
+{
+  CTexture* l_pTexture = CMapManager::GetResource(_szName);
+  if(l_pTexture != 0)
+    return l_pTexture;
+
+
+  l_pTexture = new CTexture();
+  if(!l_pTexture->Load(_szName))
+  {
+    LOGGER->AddNewLog(ELL_WARNING, "CTextureManager::GetResource -> veure log anterior.");
+    return 0;
+  }
+  CMapManager::AddResource(_szName,l_pTexture);
+  return l_pTexture;
+}
