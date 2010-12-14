@@ -6,6 +6,7 @@
 #include "ThPSCamera.h"
 #include "InputManager.h"
 #include "Texture.h"
+#include "TextureManager.h"
 #include "StaticMesh.h"
 
 #include <IndexedVertexs.h>
@@ -74,8 +75,9 @@ bool CTestProcess::Init()
 
   m_pCamera = m_pObjectCamera;
 
-  g_tex = new CTexture();
-  g_tex->Load("Data/Assets/Textures/gohan.png");
+  //g_tex = new CTexture();
+  //g_tex->Load("Data/Assets/Textures/gohan.png");
+  g_tex = CORE->GetRenderManager()->GetTextureManager()->GetResource("Data/Assets/Textures/gohan.png");
 
   g_pIndexedVertexs = new CIndexedVertexs<STEXTUREDVERTEX>(RENDER_MANAGER, g_vertex, g_index, 4, 6);
 
@@ -94,7 +96,7 @@ void CTestProcess::Release()
   CHECKED_DELETE(m_pObject);
   CHECKED_DELETE(m_pCube);
   CHECKED_DELETE(m_pCubeCamera);
-  CHECKED_DELETE(g_tex);
+  //CHECKED_DELETE(g_tex); ja ho fa el texture manager
   
   CHECKED_DELETE(g_pIndexedVertexs);
   CHECKED_DELETE(g_pMesh);

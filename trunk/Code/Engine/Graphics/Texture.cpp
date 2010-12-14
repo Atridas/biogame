@@ -12,9 +12,10 @@ bool CTexture::LoadFile()
 
   HRESULT l_Result = D3DXCreateTextureFromFile( l_pDevice, m_szFileName.c_str(), &m_pTexture);
 
-  if(l_Result == D3D_OK )
-    return true;
-
+  if(l_Result == D3D_OK ) {
+    SetOk(true);
+    return IsOk();
+  }
   //TODO fer logs més millors
 
   if(l_Result == D3DERR_NOTAVAILABLE) {
@@ -34,7 +35,7 @@ bool CTexture::LoadFile()
   return false;
 }
 
-void CTexture::Unload()
+void CTexture::Release()
 {
    LOGGER->AddNewLog(ELL_INFORMATION, "CTexture::Unload");
 
@@ -46,7 +47,7 @@ bool CTexture::Load(const std::string &_szFileName)
   if(m_szFileName != "")
   {
     LOGGER->AddNewLog(ELL_WARNING, "CTexture::Load carregant \"%s\" quan ja hi ha \"%s\" carregada",_szFileName.c_str(),m_szFileName.c_str());
-    Unload();
+    Release();
   }
   m_szFileName = _szFileName;
   return LoadFile();
@@ -54,7 +55,7 @@ bool CTexture::Load(const std::string &_szFileName)
 
 bool CTexture::Reload()
 {
-  Unload();
+  Release();
   return LoadFile();
 }
 

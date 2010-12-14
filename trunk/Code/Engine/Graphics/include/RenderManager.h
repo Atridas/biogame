@@ -8,6 +8,7 @@
 //forward declarations ----------------------------------------------
 struct SRenderManagerParams;
 class CCamera;
+class CTextureManager;
 //-------------------------------------------------------------------
 
 class CRenderManager:
@@ -17,7 +18,7 @@ class CRenderManager:
 public:
 	                      CRenderManager    (void):	m_pD3D(0), m_pD3DDevice(0),
 												                          m_uWidth(0), m_uHeight(0),
-                                                  m_pCamera(0) {};
+                                                  m_pCamera(0), m_pTextureManager(0) {};
   virtual               ~CRenderManager   (void)                                  {Done();};
 
   bool                  Init              (HWND hWnd, const SRenderManagerParams& _params);
@@ -42,10 +43,11 @@ public:
 	//--------------------------------------------------------------------
 
   //----Getters / Setters ----------------------------------------------
-  uint32                GetScreenWidth    () {return m_uWidth;};
-  uint32                GetScreenHeight   () {return m_uHeight;};
+  uint32                GetScreenWidth    () const {return m_uWidth;};
+  uint32                GetScreenHeight   () const {return m_uHeight;};
 
-  LPDIRECT3DDEVICE9     GetDevice         () {return m_pD3DDevice;};
+  LPDIRECT3DDEVICE9     GetDevice         () const {return m_pD3DDevice;};
+  CTextureManager*      GetTextureManager () const {return m_pTextureManager;};
 
 public:
 	void                  Release					  ();
@@ -60,5 +62,6 @@ private:
 	uint32								m_uHeight;
 
   CCamera*              m_pCamera;
+  CTextureManager*      m_pTextureManager;
 };
 
