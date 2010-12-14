@@ -12,7 +12,7 @@ public:
   virtual bool          Init              ();
   void                  Update            (float elT);
   void                  Render            ();
-  bool                  ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const string& _szAction);
+  bool                  ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction);
 private:
   void                  Release           ();
 };

@@ -21,15 +21,15 @@
 #define DELTA_DEFAULT             1.0f
 #define CODE_DEFAULT              "KEY_NULL"
 
-/*struct SInputInfo {
-  INPUT_DEVICE_TYPE device;
-  INPUT_AXIS_TYPE   axis;
-  INPUT_EVENT_TYPE  eventType;
-  uint32            code;
-  float             delta;
+struct SActionTuple {
+  float m_fDelta;
+  const char* m_pcAction;
+  const char* m_pcScript;
 
-  //bool operator<(const SInputInfo& rhs) const{if(device == rhs.device){if(axis == rhs.axis){if(eventType == rhs.eventType){return code < rhs.code;} else {return eventType < rhs.eventType;}} else {return axis < rhs.axis;}} else {return device < rhs.device;}}
-};*/
+  SActionTuple(float _fDelta, const char* _pcAction, const char* _pcScript):
+  m_fDelta(m_fDelta), m_pcAction(_pcAction), m_pcScript(_pcScript)
+  {};
+};
 
 
 bool CActionToInput::Init(CInputManager* _pInputManager, const char* _pcXMLFile)
@@ -144,6 +144,8 @@ void CActionToInput::Unload()
 void CActionToInput::Update(float _fDeltaSeconds)
 {
   TActionToTriggersIterator l_End = m_pActionToTriggers->end();
+  static vector<SActionTuple> actions;
+  actions.clear();
   //per totes les accions
   for(TActionToTriggersIterator l_It = m_pActionToTriggers->begin(); l_It != l_End; ++l_It)
   {
@@ -165,12 +167,24 @@ void CActionToInput::Update(float _fDeltaSeconds)
     if(l_fDelta != 0.f)
     {
       const SAction& l_Action = l_It->first;
-      if(l_Action.hardCodedAction != "")
+      /*if(l_Action.hardCodedAction != "")
         ExecuteAction(_fDeltaSeconds,l_fDelta,l_Action.hardCodedAction);
       if(l_Action.script != "")
-        ExecuteAction(_fDeltaSeconds,l_fDelta,l_Action.script);
+        ExecuteAction(_fDeltaSeconds,l_fDelta,l_Action.script);*/
+      actions.push_back(SActionTuple(l_fDelta,l_Action.hardCodedAction.c_str(),l_Action.script.c_str()));
     }
   }
+
+  vector<SActionTuple>::iterator l_enditActionsExecuted = actions.end();
+  for(vector<SActionTuple>::iterator l_itActionsExecuted = actions.begin();l_itActionsExecuted!=l_enditActionsExecuted;++l_itActionsExecuted)
+  {
+    SActionTuple& l_Action = *l_itActionsExecuted;
+    if(strlen(l_Action.m_pcAction) > 0)
+      ExecuteAction(_fDeltaSeconds,l_Action.m_fDelta,l_Action.m_pcAction);
+    if(strlen(l_Action.m_pcScript) > 0)
+      ExecuteAction(_fDeltaSeconds,l_Action.m_fDelta,l_Action.m_pcScript);
+  }
+
 }
 
 float CActionToInput::IsTriggered(const SInputInfo& _Trigger)
@@ -244,24 +258,24 @@ float CActionToInput::IsTriggered(const SInputInfo& _Trigger)
   return 0.f;
 }
 
-void CActionToInput::ExecuteAction(float _fDeltaSeconds, float _fDelta, const string& _szAction)
+void CActionToInput::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
 {
   if(m_pProcess)
   {
-    if(m_pProcess->ExecuteAction(_fDeltaSeconds, _fDelta, _szAction))
+    if(m_pProcess->ExecuteAction(_fDeltaSeconds, _fDelta, _pcAction))
       return;
   }
-  LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput:: Action \"%s\" delta[%f] seconds[%f]", _szAction.c_str(), _fDelta, _fDeltaSeconds);
+  LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput:: Action \"%s\" delta[%f] seconds[%f]", _pcAction, _fDelta, _fDeltaSeconds);
 }
 
-void CActionToInput::ExecuteScript(float _fDeltaSeconds, float _fDelta, const string& _szScript)
+void CActionToInput::ExecuteScript(float _fDeltaSeconds, float _fDelta, const char* _pcScript)
 {
   if(m_pProcess)
   {
-    if(m_pProcess->ExecuteScript(_fDeltaSeconds, _fDelta, _szScript))
+    if(m_pProcess->ExecuteScript(_fDeltaSeconds, _fDelta, _pcScript))
       return;
   }
-  LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput:: Script \"%s\" delta[%f] seconds[%f]", _szScript.c_str(), _fDelta, _fDeltaSeconds);
+  LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput:: Script \"%s\" delta[%f] seconds[%f]", _pcScript, _fDelta, _fDeltaSeconds);
 }
 
 

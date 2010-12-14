@@ -25,33 +25,33 @@ void CProcess::DebugInformation(float _FPS)
 }
 
 
-bool CProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const string& _szAction)
+bool CProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
 {
   //TODO fer les accions per defecte del Engine
-  if(_szAction == "ProcessInfo")
+  if(strcmp(_pcAction, "ProcessInfo") == 0)
   {
     m_bRenderInfo = !m_bRenderInfo;
     return true;
-  } else if(_szAction == "SaveLogsInFile")
+  } else if(strcmp(_pcAction, "SaveLogsInFile") == 0)
   {
     LOGGER->SaveLogsInFile();
     return true;
-  } else if(_szAction == "ReloadTTFs")
+  } else if(strcmp(_pcAction, "ReloadTTFs") == 0)
   {
     CORE->GetFontManager()->ReloadTTFs();
     return true;
-  } else if(_szAction == "ReloadLanguageXMLs")
+  } else if(strcmp(_pcAction, "ReloadLanguageXMLs") == 0)
   {
     CORE->GetLanguageManager()->LoadXMLs();
     return true;
-  } else if(_szAction == "ReloadActions")
+  } else if(strcmp(_pcAction, "ReloadActions") == 0)
   {
     CORE->GetActionToInput()->Reload();
     return true;
   }
-  return ExecuteProcessAction(_fDeltaSeconds,_fDelta,_szAction);
+  return ExecuteProcessAction(_fDeltaSeconds,_fDelta,_pcAction);
 }
-bool CProcess::ExecuteScript(float _fDeltaSeconds, float _fDelta, const string& _szScript)
+bool CProcess::ExecuteScript(float _fDeltaSeconds, float _fDelta, const char* _pcScript)
 {
   return false;
 }

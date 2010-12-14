@@ -18,10 +18,10 @@ public:
 
   virtual CCamera*      GetCamera                 ()         {return m_pCamera;};
 
-  virtual bool          ExecuteAction             (float _fDeltaSeconds, float _fDelta, const string& _szAction);
-  virtual bool          ExecuteScript             (float _fDeltaSeconds, float _fDelta, const string& _szScript);
+  bool                  ExecuteAction             (float _fDeltaSeconds, float _fDelta, const char* _pcAction);
+  bool                  ExecuteScript             (float _fDeltaSeconds, float _fDelta, const char* _pcScript);
 
-  virtual bool          ExecuteProcessAction      (float _fDeltaSeconds, float _fDelta, const string& _szAction) = 0;
+  virtual bool          ExecuteProcessAction      (float _fDeltaSeconds, float _fDelta, const char* _pcAction) = 0;
 
 protected:
 

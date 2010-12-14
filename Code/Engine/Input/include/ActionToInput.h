@@ -67,8 +67,8 @@ private:
   void                  InitString2Input          ();
   void                  Load                      ();
   void                  Unload                    ();
-  void                  ExecuteAction             (float _fDeltaSeconds, float _fDelta, const string& _szAction);
-  void                  ExecuteScript             (float _fDeltaSeconds, float _fDelta, const string& _szScript);
+  void                  ExecuteAction             (float _fDeltaSeconds, float _fDelta, const char* _pcAction);
+  void                  ExecuteScript             (float _fDeltaSeconds, float _fDelta, const char* _pcScript);
   float                 IsTriggered               (const SInputInfo& _Trigger);
 
   string                m_szXMLFile;
