@@ -75,10 +75,10 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
                     APPLICATION_NAME, 
                     APPLICATION_NAME, 
                     WS_OVERLAPPEDWINDOW, 
-                    l_InitParams.RenderManagerParams.uiPosX, 
-                    l_InitParams.RenderManagerParams.uiPosY, 
-                    l_InitParams.RenderManagerParams.uiWidth,
-                    l_InitParams.RenderManagerParams.uiHeight,
+                    l_InitParams.RenderManagerParams.v2iPosition.x, 
+                    l_InitParams.RenderManagerParams.v2iPosition.y, 
+                    l_InitParams.RenderManagerParams.v2iResolution.x,
+                    l_InitParams.RenderManagerParams.v2iResolution.y,
                     NULL, NULL, wc.hInstance, NULL );
 
 

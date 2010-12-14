@@ -6,22 +6,18 @@
 
 struct SRenderManagerParams
 {
-  uint32 uiWidth;
-  uint32 uiHeight;
+  Vect2i v2iResolution;
   
-  uint32 uiPosX;
-  uint32 uiPosY;
+  Vect2i v2iPosition;
 
   bool bFullscreen;
 
 
   //Default params
   SRenderManagerParams():
-    uiWidth(800),
-    uiHeight(600),
+    v2iResolution(800,600),
 
-    uiPosX(0),
-    uiPosY(0),
+    v2iPosition(0,0),
 
     bFullscreen(false)
   {};
