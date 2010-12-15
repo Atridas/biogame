@@ -84,17 +84,24 @@ utility UABUtility "UAB Utility" width:160 height:312
 		if $ != undefined then
 		(
 			local l_meshPath = getMeshPath()
+			makeDir l_meshPath all:true
 			local l_outName=GetSaveFileName fileName:(l_meshPath + $.name + ".mesh") caption:"Select output file to export file" types:" mesh(*.mesh)|*.mesh|All Files(*.*)|*.*|"
 			if l_outName != undefined then
 			(
-				makeDir l_meshPath all:true
 				
-				ExportMesh $ l_outName getRelativeTexturePath()
+				
+				local l_relativeTexPath = getRelativeTexturePath()
+				
+				if (ExportMesh $ l_outName l_relativeTexPath) == true then
+				(
+					ShowMessage "File Saved"
+				)
 				
 				-- copiar textures
 				if checkTextures.checked == true then
 				(
-					makeDir getTexturePath() all:true
+					local l_TextureTotalPath = getTexturePath()
+					makeDir l_TextureTotalPath all:true
 					local l_textures = TextureList $
 					for i=1 to l_textures.count do
 					(
