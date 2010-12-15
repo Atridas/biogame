@@ -432,6 +432,8 @@ function ExportMesh _object _filename _relativeTexturePath =
 	
 	fflush l_file
 	fclose l_file
+	
+	return true;
 )
 
 function ExportPop =
@@ -447,6 +449,11 @@ function ExportPop =
 function ShowError _text =
 (
 	messageBox _text title:"Attention"
+)
+
+function ShowMessage _text =
+(
+	messageBox _text title:"Fine"
 )
 
 --messageBox "Ha aparegut un error" title:"ERROR!!"
