@@ -7,7 +7,7 @@ global VERTEX_TYPE_TEXTURE2   =0x0020
 global VERTEX_TYPE_DIFFUSE      =0x0040
 
 
-global GAME_PATH = "Data/Assets/Textures/"
+--global GAME_PATH = "Data/Assets/Textures/"
 
 fn GetYaw transform =
 (
@@ -57,7 +57,7 @@ function GetVertexType _material =
 	return mascara
 )
 
-function ExportMaterial _material _file = 
+function ExportMaterial _material _file _relativePath = 
 (
 	local l_cont = 0
 	if _material.diffuseMapEnable == true and  _material.diffuseMap != undefined then
@@ -89,7 +89,7 @@ function ExportMaterial _material _file =
 	(
 		l_texture = _material.diffuseMap.filename
 		l_texture = filenameFromPath (OpenBitmap l_texture).filename
-		l_texture = GAME_PATH + l_texture
+		l_texture = _relativePath + l_texture
 		WriteShort _file l_texture.count #unsigned
 		WriteString _file l_texture
 	)
@@ -98,7 +98,7 @@ function ExportMaterial _material _file =
 	(
 		l_texture = _material.bumpMap.filename
 		l_texture = filenameFromPath (OpenBitmap l_texture).filename
-		l_texture = GAME_PATH + l_texture
+		l_texture = _relativePath + l_texture
 		WriteShort _file l_texture.count #unsigned
 		WriteString _file l_texture
 	)
@@ -107,7 +107,7 @@ function ExportMaterial _material _file =
 	(
 		l_texture = _material.selfIllumMap.filename
 		l_texture = filenameFromPath (OpenBitmap l_texture).filename
-		l_texture = GAME_PATH + l_texture
+		l_texture = _relativePath + l_texture
 		WriteShort _file l_texture.count #unsigned
 		WriteString _file l_texture
 	)
@@ -116,9 +116,68 @@ function ExportMaterial _material _file =
 	(
 		l_texture = _material.reflectionMap.filename
 		l_texture = filenameFromPath (OpenBitmap l_texture).filename
-		l_texture = GAME_PATH + l_texture
+		l_texture = _relativePath + l_texture
 		WriteShort _file l_texture.count #unsigned
 		WriteString _file l_texture
+	)
+)
+
+function TextureListOne _material = 
+(
+	local l_texture
+	local l_paths = #()
+	
+	if _material.diffuseMapEnable == true and  _material.diffuseMap != undefined then
+	(
+		l_texture = _material.diffuseMap.filename
+		l_texture = (OpenBitmap l_texture).filename
+		append l_paths l_texture
+	)
+	
+	if _material.bumpMapEnable == true and  _material.bumpMap != undefined then
+	(
+		l_texture = _material.bumpMap.filename
+		l_texture = (OpenBitmap l_texture).filename
+		append l_paths l_texture
+	)
+	
+	if _material.selfIllumMapEnable == true and  _material.selfIllumMap != undefined then
+	(
+		l_texture = _material.selfIllumMap.filename
+		l_texture = (OpenBitmap l_texture).filename
+		append l_paths l_texture
+	)
+	
+	if _material.reflectionMapEnable == true and  _material.reflectionMap != undefined then
+	(
+		l_texture = _material.reflectionMap.filename
+		l_texture = (OpenBitmap l_texture).filename
+		append l_paths l_texture
+	)
+	return l_paths
+)
+
+function TextureList _object =
+(
+	local l_material = _object.material
+	
+	if classof(l_material) == Multimaterial then
+	(
+		--definim coses que necessitarem quan fem els vertexos
+		local l_numMaterials = l_material.numsubs
+		
+		local l_textures = #() 
+		
+		for i = 1 to l_numMaterials do
+		(
+			local l_texTemp = TextureListOne l_material[i]
+			join l_textures l_texTemp
+		)
+		return l_textures
+	)
+	else
+	(
+		return TextureListOne l_material
 	)
 )
 
@@ -315,7 +374,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 	)
 )
 
-function ExportMesh _object _filename = 
+function ExportMesh _object _filename _relativeTexturePath = 
 (
 	local l_header = 0xAAAA
 	local l_footer  =  0xFFFF
@@ -342,7 +401,7 @@ function ExportMesh _object _filename =
 		
 			--tipus de vertex i material en si
 			WriteShort l_file l_vertexType2 #unsigned
-			ExportMaterial l_material[i] l_file 
+			ExportMaterial l_material[i] l_file _relativeTexturePath
 		)
 	)
 	else
@@ -385,11 +444,16 @@ function ExportPop =
 	
 )
 
+function ShowError _text =
+(
+	messageBox _text title:"Attention"
+)
+
 --messageBox "Ha aparegut un error" title:"ERROR!!"
 
 
-ExportPop()
+--ExportPop()
 
 --ExportMesh $ "D:\Temp/b.mesh"
 
-
+--format "%\n" l_textures
