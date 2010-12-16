@@ -11,7 +11,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 	GroupBox grp1 "Export" pos:[11,170] width:131 height:126
 	button buttonMesh "Mesh" pos:[23,188] width:100 height:19
 	button buttonMeshManager "Mesh Manager" pos:[24,212] width:98 height:22
-	button btn6 "Scene" pos:[26,241] width:94 height:22
+	button buttonScene "Scene" pos:[26,241] width:94 height:22
 	-- Contenido de la utility
 	
 	on BioUtility open do
@@ -55,7 +55,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 	)
 	function getXMLPath =
 	(
-		local l_path = labelPath.text + "/XML/StaticMeshes/"
+		local l_path = labelPath.text + "/XML/"
 		
 		return l_path
 	)
@@ -73,7 +73,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		
 		l_path = substring l_path l_index (l_path.count-l_index+1)
 		
-		l_path = l_path + "/XML/StaticMeshes/"
+		l_path = l_path + "/XML/"
 		
 		return l_path
 	)
@@ -135,7 +135,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 						path1 = l_textures[i]
 						path2 = getTexturePath() + (filenameFromPath path1)
 						
-						if stricmp path1 path2 != 0 then
+						if stricmp (getFilenamePath path1) (getFilenamePath path2) != 0 then
 						(
 							deleteFile path2
 							
@@ -149,10 +149,8 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		)
 	)
 	
-	on buttonMeshManager pressed do
+	function ExportMeshManager _objects =
 	(
-		local l_objects = $*
-		
 		local l_MeshTotalPath = getMeshPath()
 		local l_TextureTotalPath = getTexturePath()
 		local l_relativeTexPath = getRelativeTexturePath()
@@ -160,7 +158,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		local l_level = dropNivell.items[dropNivell.selection]
 		
 		local l_pathToFile = getXMLPath() 
-		l_pathToFile = l_pathToFile + "StaticMeshes" + l_level + ".xml"
+		l_pathToFile = l_pathToFile + "StaticMeshes/" + l_level + "Data.xml"
 		
 		local l_file = createfile l_pathToFile
 		
@@ -172,9 +170,9 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		
 		format "%" (OpenTagXML "meshes") to:l_file
 		
-		for i=1 to l_objects.count do
+		for i=1 to _objects.count do
 		(
-			local l_object = l_objects[i]
+			local l_object = _objects[i]
 			
 			local l_relPath = getRelativeMeshPath() + l_object.name + ".mesh"
 			
@@ -203,7 +201,6 @@ utility BioUtility "Eon-Utility" width:160 height:312
 					
 					if stricmp (getFilenamePath path1) (getFilenamePath path2) != 0 then
 					(
-						ShowMessage (path1 + "\n" +path2)
 						deleteFile path2
 						
 						copyFile path1 path2
@@ -218,7 +215,90 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		format "\n" to:l_file
 		
 		close l_file
-
-		ShowMessage "Export finalitzat"
+		
+		return true
+	)
+	
+	function ExportRenderableObjectsManager _objects =
+	(
+			
+		local l_level = dropNivell.items[dropNivell.selection]
+		
+		local l_pathToFile = getXMLPath() 
+		l_pathToFile = l_pathToFile + "RenderableObjects/" + l_level + "Data.xml"
+		
+		local l_file = createfile l_pathToFile
+		
+		local l_header = GetInitTagXML()
+		
+		format "%" l_header to:l_file
+		
+		format "\n" to:l_file
+		
+		format "%" (OpenTagXML "RenderableObjects") to:l_file
+		
+		for i=1 to _objects.count do
+		(
+			local l_object = _objects[i]
+			
+			l_params = #(#("name",l_object.name))
+		
+				
+			local l_aux = "" as stringStream
+			
+				
+			local l_translation = RHVectorToLH l_object.transform.translation
+			format "% % %" l_translation.x l_translation.y l_translation.z to:l_aux
+			append l_params #("position",l_aux)
+			
+			l_aux = "" as stringStream
+			local l_yaw = GetYaw l_object.transform
+			format "%" l_yaw to:l_aux
+			append l_params #("yaw",l_aux)
+			
+			l_aux = "" as stringStream
+			local l_pitch = GetPitch l_object.transform
+			format "%" l_pitch to:l_aux
+			append l_params #("pitch",l_aux)
+			
+			l_aux = "" as stringStream
+			local l_roll = GetRoll l_object.transform
+			format "%" l_roll to:l_aux
+			append l_params #("roll",l_aux)
+			
+			format "\n\t" to:l_file
+			format "%" (InlineTagParamXML "RenderableObject" l_params) to:l_file
+				
+			
+		)
+		
+		format "\n" to:l_file
+		format "%" (CloseTagXML "RenderableObjects") to:l_file
+		
+		format "\n" to:l_file
+		
+		close l_file
+		
+		return true
+	)
+	
+	on buttonMeshManager pressed do
+	(
+		if ExportMeshManager $* then
+		(
+			ShowMessage "Export finalitzat"
+		)
+	)
+	
+	on buttonScene pressed do
+	(
+		if ExportMeshManager $* then
+		(
+			ShowMessage "Export mesh manager finalitzat"
+		)
+		if ExportRenderableObjectsManager $* then
+		(
+			ShowMessage "Export scene finalitzat"
+		)
 	)
 )
