@@ -40,6 +40,9 @@
     <Filter Include="StaticMesh">
       <UniqueIdentifier>{cdc76e40-6e6b-4649-bbfe-0683ecafa07d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="StaticMeshManager">
+      <UniqueIdentifier>{fc572106-303d-4ba5-9b42-417814b133b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -74,6 +77,9 @@
     </ClCompile>
     <ClCompile Include="StaticMesh.cpp">
       <Filter>StaticMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticMeshManager.cpp">
+      <Filter>StaticMeshManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="include\StaticMesh.h">
       <Filter>StaticMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="include\StaticMeshManager.h">
+      <Filter>StaticMeshManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

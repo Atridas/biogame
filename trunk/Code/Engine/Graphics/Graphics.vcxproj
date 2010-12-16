@@ -97,6 +97,7 @@
     <ClCompile Include="Object3D.cpp" />
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="StaticMesh.cpp" />
+    <ClCompile Include="StaticMeshManager.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="ThPSCamera.cpp" />
@@ -111,6 +112,7 @@
     <ClInclude Include="include\RenderableVertexs.h" />
     <ClInclude Include="include\RenderManager.h" />
     <ClInclude Include="include\StaticMesh.h" />
+    <ClInclude Include="include\StaticMeshManager.h" />
     <ClInclude Include="include\Texture.h" />
     <ClInclude Include="include\TextureManager.h" />
     <ClInclude Include="include\ThPSCamera.h" />
