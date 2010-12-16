@@ -1,6 +1,11 @@
 --nota isaac: Els parametres "simples" surten a la especificació de l'XML? No estic molt segur que siguin estàndards.
 --D'altra banda, no passa res, el codi el trobo molt correcte i eficaç.
 
+function GetInitTagXML = 
+(
+	return "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>"
+)
+
 function OpenTagXML _Name =
 (
 	return "<" + _Name + ">"
@@ -64,7 +69,7 @@ function InlineTagParamXML _Name _Params =
 	return l_Output
 )
 
-
+/*
 --Variables per fer proves
 g_Nom = "Nom_del_Tag"
 g_ParamSimple = "ParamSimple"
@@ -110,3 +115,4 @@ CloseTagXML g_Nom
 CloseTagXML g_Nom
 --Tancar tag
 CloseTagXML g_Nom
+*/
