@@ -84,7 +84,7 @@ bool CTestProcess::Init()
   g_pMesh = new CStaticMesh();
   //g_pMesh->LoadSergi("D:/a.mesh");
   //g_pMesh->Load("Data/Assets/Meshes/bmultiTex.mesh");
-  g_pMesh->Load("Data/Assets/Meshes/Box01.mesh");
+  g_pMesh->Load("Data/Assets/Meshes/bmultiTex.mesh");
   //g_pMesh->LoadSergi("D:/a.mesh");
 
   SetOk(true);
