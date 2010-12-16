@@ -415,7 +415,7 @@ function ExportMesh _object _filename _relativeTexturePath =
 		
 		--tipus de vertex i material en si
 		WriteShort l_file l_vertexType2 #unsigned
-		ExportMaterial l_material l_file 
+		ExportMaterial l_material l_file  _relativeTexturePath
 	)
 	local l_VertexList =#()
 	local l_IndexList =#()
@@ -453,7 +453,7 @@ function ShowError _text =
 
 function ShowMessage _text =
 (
-	messageBox _text title:"Fine"
+	messageBox _text title:"Fine" beep:false
 )
 
 --messageBox "Ha aparegut un error" title:"ERROR!!"
