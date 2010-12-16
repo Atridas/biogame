@@ -95,6 +95,7 @@
     <ClCompile Include="FPSCamera.cpp" />
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="Object3D.cpp" />
+    <ClCompile Include="RenderableObjectsManager.cpp" />
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="StaticMesh.cpp" />
     <ClCompile Include="StaticMeshManager.cpp" />
@@ -109,6 +110,8 @@
     <ClInclude Include="include\Frustum.h" />
     <ClInclude Include="include\IndexedVertexs.h" />
     <ClInclude Include="include\Object3D.h" />
+    <ClInclude Include="include\RenderableObject.h" />
+    <ClInclude Include="include\RenderableObjectsManager.h" />
     <ClInclude Include="include\RenderableVertexs.h" />
     <ClInclude Include="include\RenderManager.h" />
     <ClInclude Include="include\StaticMesh.h" />
