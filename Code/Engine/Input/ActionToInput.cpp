@@ -59,7 +59,7 @@ void CActionToInput::Load()
   CXMLTreeNode l_XMLActions;
   if(!l_XMLActions.LoadFile(m_szXMLFile.c_str()))
   {
-    LOGGER->AddNewLog(ELL_WARNING,"CActionToInput:: No s'ha trobat el XML \"%s\"", m_szXMLFile);
+    LOGGER->AddNewLog(ELL_WARNING,"CActionToInput:: No s'ha trobat el XML \"%s\"", m_szXMLFile.c_str());
   }
   else
   {
