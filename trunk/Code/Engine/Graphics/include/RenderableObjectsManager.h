@@ -15,7 +15,7 @@ public:
   CRenderableObjectsManager() : m_szFileName("") {};
   ~CRenderableObjectsManager() {CleanUp();};
 
-  void Update(float ElapsedTime);
+  void Update(float _fElapsedTime);
   void Render(CRenderManager *RM);
 
   CRenderableObject* AddMeshInstance(const string& _szCoreMeshName, const string& _szInstanceName, const Vect3f& _vPosition);
