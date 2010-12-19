@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<meshes>
+	<mesh name="BOX_Lightmap" path="Data/Hangar/Meshes/BOX_Lightmap.mesh"/>
+	<mesh name="BoxGohan" path="Data/Hangar/Meshes/BoxGohan.mesh"/>
+	<mesh name="BoxGohan01" path="Data/Hangar/Meshes/BoxGohan01.mesh"/>
+	<mesh name="BoxGohan02" path="Data/Hangar/Meshes/BoxGohan02.mesh"/>
+</meshes>

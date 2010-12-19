@@ -147,9 +147,25 @@ uint32 CFontManager::CreateFont (uint32 size, bool bold, bool italica, const std
 	else
 		weight = FW_NORMAL;
 
-	D3DXCreateFont(	m_pD3DDevice, size, 0, weight, 1, italica, DEFAULT_CHARSET,				
-									OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,	
-									fontName.c_str(),	&font);	
+	HRESULT l_Result = D3DXCreateFont(m_pD3DDevice, size, 0, weight, 1, italica, DEFAULT_CHARSET,				
+									                  OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,	
+									                  fontName.c_str(),	&font);	
+
+  if(l_Result != S_OK)
+  {
+    if(l_Result == D3DERR_INVALIDCALL)
+    {
+      LOGGER->AddNewLog(ELL_WARNING, "CFontManager:: invalid call al crear la font \"%s\"", fontName.c_str());
+    } else if(l_Result == D3DXERR_INVALIDDATA)
+    {
+      LOGGER->AddNewLog(ELL_WARNING, "CFontManager:: invalid data al crear la font \"%s\"", fontName.c_str());
+    } else if(l_Result == E_OUTOFMEMORY)
+    {
+      LOGGER->AddNewLog(ELL_ERROR, "CFontManager:: error OUT OF MEMORY al crear la font \"%s\"", fontName.c_str());
+    } else {
+      LOGGER->AddNewLog(ELL_WARNING, "CFontManager:: error al crear la font \"%s\"", fontName.c_str());
+    }
+  }
 
 	uint32 id = 0;
 	if (replaceDefault)

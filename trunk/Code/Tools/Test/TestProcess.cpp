@@ -81,7 +81,7 @@ bool CTestProcess::Init()
 
   //g_tex = new CTexture();
   //g_tex->Load("Data/Assets/Textures/gohan.png");
-  g_tex = CORE->GetRenderManager()->GetTextureManager()->GetResource("Data/Assets/Textures/gohan.png");
+  g_tex = CORE->GetRenderManager()->GetTextureManager()->GetResource("Data/Textures/gohan.png");
 
   g_pIndexedVertexs = new CIndexedVertexs<STEXTUREDVERTEX>(RENDER_MANAGER, (char*)g_vertex, g_index, 4, 6);
 
@@ -97,7 +97,9 @@ bool CTestProcess::Init()
   g_pMesh = RENDER_MANAGER->GetStaticMeshManager()->GetResource("BoxGohan");
 
   g_pRenderableObjectsManager = new CRenderableObjectsManager();
-  g_pRenderableObjectsManager->Load("Data/XML/RenderableObjects/Data.xml");
+  g_pRenderableObjectsManager->Load("Data/XML/RenderableObjects.xml");
+
+  LOGGER->SaveLogsInFile();
 
   SetOk(true);
   return IsOk();

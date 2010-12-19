@@ -17,17 +17,17 @@ utility BioUtility "Eon-Utility" width:160 height:312
 	on BioUtility open do
 	(
 		--labelPath.text = "D:/treballs/master/biogame/Run/Test/Data"
-		labelPath.text = "C:/Treballs/biogame/Run/Test/Data"
+		labelPath.text = "C:/Treballs/Directoris v2/Run/Test/Data"
 		dropNivell.items = #("","Level -2","Level -1", "Hangar")
 	)
 	
 	function getDataPath =
 	(
-		local l_path = labelPath.text + "/Assets/"
+		local l_path = labelPath.text + "/"
 		
 		if dropNivell.selection != 1 then
 		(
-			l_path = l_path + dropNivell.items[dropNivell.selection] + "/"
+			l_path = l_path + "Levels/" + dropNivell.items[dropNivell.selection] + "/"
 		)
 		return l_path
 	)
@@ -45,7 +45,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		
 		l_path = substring l_path l_index (l_path.count-l_index+1)
 		
-		l_path = l_path + "/Assets/"
+		l_path = l_path + "/"
 		
 		if dropNivell.selection != 1 then
 		(
@@ -54,27 +54,19 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		
 		return l_path
 	)
+	
 	function getXMLPath =
 	(
-		local l_path = labelPath.text + "/XML/"
+		local l_path = getDataPath()
+		l_path = l_path + "XML/"
 		
 		return l_path
 	)
 	
 	function getRelativeXMLPath =
 	(
-		local l_path = labelPath.text
-		local l_index = l_path.count
-		while l_path[l_index] != "/" and l_path[l_index] != "\\" and l_index > 1 do
-		(
-			l_index = l_index - 1
-		)
-		
-		l_index = l_index + 1
-		
-		l_path = substring l_path l_index (l_path.count-l_index+1)
-		
-		l_path = l_path + "/XML/"
+		local l_path = getRelativePath()
+		l_path = l_path + "XML/"
 		
 		return l_path
 	)
@@ -112,7 +104,9 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		if $ != undefined then
 		(
 			local l_meshPath = getMeshPath()
+			local l_TextureTotalPath = getTexturePath()
 			makeDir l_meshPath all:true
+			makeDir l_TextureTotalPath all:true
 			local l_outName=GetSaveFileName fileName:(l_meshPath + $.name + ".mesh") caption:"Select output file to export file" types:" mesh(*.mesh)|*.mesh|All Files(*.*)|*.*|"
 			if l_outName != undefined then
 			(
@@ -128,8 +122,6 @@ utility BioUtility "Eon-Utility" width:160 height:312
 				-- copiar textures
 				if checkTextures.checked == true then
 				(
-					local l_TextureTotalPath = getTexturePath()
-					makeDir l_TextureTotalPath all:true
 					local l_textures = TextureList $
 					for i=1 to l_textures.count do
 					(
@@ -159,7 +151,9 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		local l_level = dropNivell.items[dropNivell.selection]
 		
 		local l_pathToFile = getXMLPath() 
-		l_pathToFile = l_pathToFile + "StaticMeshes/" + l_level + "Data.xml"
+		makeDir l_pathToFile all:true
+		
+		l_pathToFile = l_pathToFile + "StaticMeshes.xml"
 		
 		local l_file = createfile l_pathToFile
 		
@@ -226,7 +220,10 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		local l_level = dropNivell.items[dropNivell.selection]
 		
 		local l_pathToFile = getXMLPath() 
-		l_pathToFile = l_pathToFile + "RenderableObjects/" + l_level + "Data.xml"
+		makeDir l_pathToFile all:true
+		
+		l_pathToFile = l_pathToFile + "RenderableObjects.xml"
+		
 		
 		local l_file = createfile l_pathToFile
 		
