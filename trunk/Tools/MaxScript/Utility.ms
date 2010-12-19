@@ -1,4 +1,4 @@
-fileIn "ExportIsaac.ms"
+fileIn "Export.ms"
 fileIn "XML.ms"
 
 utility BioUtility "Eon-Utility" width:160 height:312
@@ -16,7 +16,8 @@ utility BioUtility "Eon-Utility" width:160 height:312
 	
 	on BioUtility open do
 	(
-		labelPath.text = "D:/treballs/master/biogame/Run/Test/Data"
+		--labelPath.text = "D:/treballs/master/biogame/Run/Test/Data"
+		labelPath.text = "C:/Treballs/biogame/Run/Test/Data"
 		dropNivell.items = #("","Level -2","Level -1", "Hangar")
 	)
 	
@@ -35,7 +36,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 	(
 		local l_path = labelPath.text
 		local l_index = l_path.count
-		while l_path[l_index] != "/" and l_index > 1 do
+		while l_path[l_index] != "/" and l_path[l_index] != "\\" and l_index > 1 do
 		(
 			l_index = l_index - 1
 		)
@@ -64,7 +65,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 	(
 		local l_path = labelPath.text
 		local l_index = l_path.count
-		while l_path[l_index] != "/" and l_index > 1 do
+		while l_path[l_index] != "/" and l_path[l_index] != "\\" and l_index > 1 do
 		(
 			l_index = l_index - 1
 		)
@@ -241,7 +242,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		(
 			local l_object = _objects[i]
 			
-			l_params = #(#("name",l_object.name))
+			l_params = #(#("name",l_object.name),#("class","StaticMesh"),#("resource",l_object.name))
 		
 				
 			local l_aux = "" as stringStream

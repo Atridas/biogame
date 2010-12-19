@@ -39,7 +39,7 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
       {
         CXMLTreeNode l_TreeChild = l_TreeRenderManager(i);
 
-        if(strcmp(l_TreeChild.GetName(), "\tStaticMeshManager") == 0)
+        if(strcmp(l_TreeChild.GetName(), "StaticMeshManager") == 0)
         {
           const char* l_pcXML = l_TreeChild.GetPszProperty("xml",0);
           if(l_pcXML == 0)
@@ -47,7 +47,7 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
             LOGGER->AddNewLog(ELL_WARNING, "\tParametre \"StaticMeshManager\" sense parametre \"xml\"");
           } else {
             InitParams_.RenderManagerParams.vRenderableMeshes.push_back(string(l_pcXML));
-            LOGGER->AddNewLog(ELL_INFORMATION, "StaticMeshes \"%s\"",l_pcXML);
+            LOGGER->AddNewLog(ELL_INFORMATION, "\tStaticMeshes \"%s\"",l_pcXML);
           }
         } else {
           LOGGER->AddNewLog(ELL_WARNING, "\tParametre del RenderManager desconegut : %s", l_TreeChild.GetName());

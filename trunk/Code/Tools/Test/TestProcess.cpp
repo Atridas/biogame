@@ -9,6 +9,7 @@
 #include "TextureManager.h"
 #include "StaticMesh.h"
 #include "StaticMeshManager.h"
+#include "RenderableObjectsManager.h"
 
 #include <IndexedVertexs.h>
 #include "VertexsStructs.h"
@@ -28,7 +29,7 @@ CIndexedVertexs<STEXTUREDVERTEX>* g_pIndexedVertexs = 0;
 
 CStaticMesh* g_pMesh = 0;
 
-//CStaticMeshManager* g_pStaticMeshManager = 0;
+CRenderableObjectsManager* g_pRenderableObjectsManager = 0;
 
 bool CTestProcess::Init()
 {
@@ -84,16 +85,19 @@ bool CTestProcess::Init()
 
   g_pIndexedVertexs = new CIndexedVertexs<STEXTUREDVERTEX>(RENDER_MANAGER, (char*)g_vertex, g_index, 4, 6);
 
-  g_pMesh = new CStaticMesh();
+  //g_pMesh = new CStaticMesh();
   //g_pMesh->LoadSergi("D:/a.mesh");
-  g_pMesh->Load("Data/Assets/Meshes/bmultiTex.mesh");
+  //g_pMesh->Load("Data/Assets/Meshes/bmultiTex.mesh");
 
   //g_pStaticMeshManager = new CStaticMeshManager();
   //g_pStaticMeshManager->Load("Data/XML/StaticMeshes/Data.xml");
 
   //g_pMesh = g_pStaticMeshManager->GetResource("BoxGohan");
 
-  //g_pMesh = RENDER_MANAGER->GetStaticMeshManager()->GetResource("BoxGohan");
+  g_pMesh = RENDER_MANAGER->GetStaticMeshManager()->GetResource("BoxGohan");
+
+  g_pRenderableObjectsManager = new CRenderableObjectsManager();
+  g_pRenderableObjectsManager->Load("Data/XML/RenderableObjects/Data.xml");
 
   SetOk(true);
   return IsOk();
@@ -109,7 +113,8 @@ void CTestProcess::Release()
   //CHECKED_DELETE(g_tex); ja ho fa el texture manager
   
   CHECKED_DELETE(g_pIndexedVertexs)
-  CHECKED_DELETE(g_pMesh)
+  CHECKED_DELETE(g_pRenderableObjectsManager)
+  //CHECKED_DELETE(g_pMesh)
   //CHECKED_DELETE(g_pStaticMeshManager)
 	// ----
 }
@@ -153,7 +158,7 @@ void CTestProcess::Render()
   CColor col = colBLUE;
   CColor l_CubeCol = colWHITE;
 
-  CRenderManager* pRM = RENDER_MANAGER;
+  CRenderManager* l_pRM = RENDER_MANAGER;
 
   Mat44f r,r2, t, s, identity, total;
 
@@ -163,7 +168,7 @@ void CTestProcess::Render()
   t.SetIdentity();
   s.SetIdentity();
 
-  pRM->SetTransform(identity);
+  l_pRM->SetTransform(identity);
 
   /*pRM->DrawCube(Vect3f(2.0f,0.5f,0.0f),1.0f,l_CubeCol);
   pRM->DrawCube(Vect3f(2.0f,0.5f,2.0f),1.0f,l_CubeCol);
@@ -182,33 +187,35 @@ void CTestProcess::Render()
 
   total = t*r*r2*s;
   
-  pRM->DrawGrid(30.0f,colCYAN,30,30);
+  l_pRM->DrawGrid(30.0f,colCYAN,30,30);
 
-  pRM->DrawAxis();
+  l_pRM->DrawAxis();
 
-  pRM->SetTransform(total);
+  l_pRM->SetTransform(total);
 
-  pRM->DrawCube(1.0f,l_CubeCol);
+  l_pRM->DrawCube(1.0f,l_CubeCol);
  
-  pRM->SetTransform(identity);
-  pRM->DrawCamera(m_pCubeCamera);
+  l_pRM->SetTransform(identity);
+  l_pRM->DrawCamera(m_pCubeCamera);
 
-  pRM->SetTransform(t.Translate(Vect3f(-2.0f,0.0f,0.0f)) * r.SetFromAngleY(FLOAT_PI_VALUE/2.0f));
+  l_pRM->SetTransform(t.Translate(Vect3f(-2.0f,0.0f,0.0f)) * r.SetFromAngleY(FLOAT_PI_VALUE/2.0f));
   g_tex->Activate(0);
-  pRM->GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE,FALSE);
-  g_pMesh->Render(pRM);
+  l_pRM->GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE,FALSE);
+  //g_pMesh->Render(l_pRM);
 
+
+  g_pRenderableObjectsManager->Render(l_pRM);
  
-  pRM->GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE,TRUE);
-  pRM->GetDevice()->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
-  pRM->GetDevice()->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-  pRM->GetDevice()->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+  l_pRM->GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE,TRUE);
+  l_pRM->GetDevice()->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+  l_pRM->GetDevice()->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+  l_pRM->GetDevice()->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 
   //g_pIndexedVertexs->Render(pRM);
 
   t.SetIdentity();
   r.SetIdentity();
-  pRM->SetTransform(t.Translate(Vect3f(-2.0f,0.0f,3.0f)) * r.SetFromAngleY(FLOAT_PI_VALUE/2.0f));
+  l_pRM->SetTransform(t.Translate(Vect3f(-2.0f,0.0f,3.0f)) * r.SetFromAngleY(FLOAT_PI_VALUE/2.0f));
 
   //g_pIndexedVertexs->Render(pRM);
   

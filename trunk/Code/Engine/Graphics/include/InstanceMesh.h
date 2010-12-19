@@ -5,10 +5,10 @@
 
 #include "base.h"
 #include "RenderableObject.h"
-#include "StaticMesh.h"
 
 //forward declarations-------------
 class CRenderManager;
+class CStaticMesh;
 //---------------------------------
 
 
@@ -16,11 +16,16 @@ class CInstanceMesh : public CRenderableObject
 {
 public:
   //Constructor / Destructor
-  CInstanceMesh(const string& _szName, const string& _szCoreName);
-  ~CInstanceMesh()                                                      {CHECKED_DELETE(m_StaticMesh);};
+  CInstanceMesh(const string& _szName);
+  virtual ~CInstanceMesh() {Done();};
+
+  bool          Init      (const string& _szCoreName);
 
   //Methods
-  void Render(CRenderManager* _pRM);
+  virtual void  RenderRenderableObject(CRenderManager* _pRM);
+
+protected:
+  virtual void          Release                   ();
 
 private:
   CStaticMesh *m_StaticMesh;

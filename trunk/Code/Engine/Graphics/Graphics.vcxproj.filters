@@ -96,6 +96,9 @@
     <ClCompile Include="InstanceMesh.cpp">
       <Filter>InstanceMesh</Filter>
     </ClCompile>
+    <ClCompile Include="RenderableObject.cpp">
+      <Filter>RenderableObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RenderManager.h">

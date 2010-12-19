@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <RenderableObjects>
-	<RenderableObject name="BOX_Lightmap" position="3.04889 1.89282 0.0" yaw="0.0" pitch="0.0" roll="0.0"/>
-	<RenderableObject name="BoxGohan" position="9.96006 0.0 2.30399" yaw="0.0" pitch="0.0" roll="0.0"/>
-	<RenderableObject name="BoxGohan01" position="9.96006 0.0 -3.63864" yaw="0.0" pitch="0.0" roll="0.0"/>
-	<RenderableObject name="BoxGohan02" position="14.6755 0.0 -3.63864" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="BOX_Lightmap" class="StaticMesh" resource="BOX_Lightmap" position="3.04889 1.89282 0.0" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="BoxGohan" class="StaticMesh" resource="BoxGohan" position="9.96006 0.0 2.30399" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="BoxGohan01" class="StaticMesh" resource="BoxGohan01" position="3.1168 0.0 -7.59243" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="BoxGohan02" class="StaticMesh" resource="BoxGohan02" position="-2.00033 0.0 -18.0805" yaw="0.0" pitch="0.0" roll="0.0"/>
 </RenderableObjects>

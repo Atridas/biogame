@@ -9,7 +9,7 @@
 #ifndef INC_OBJECT_3D_H_
 #define INC_OBJECT_3D_H_
 
-#include "Math\MathTypes.h"
+#include "base.h"
 
 class CObject3D
 {
