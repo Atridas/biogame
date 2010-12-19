@@ -4,10 +4,11 @@
 #define __MESH_INSTANCE_H__
 
 #include "base.h"
+#include "RenderableObject.h"
+#include "StaticMesh.h"
 
 //forward declarations-------------
 class CRenderManager;
-class CStaticMesh;
 //---------------------------------
 
 
