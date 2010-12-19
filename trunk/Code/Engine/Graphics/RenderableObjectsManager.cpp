@@ -4,13 +4,13 @@
 
 void CRenderableObjectsManager::Update(float _fElapsedTime)
 {
-  for(int i=0; i < m_RenderableObjects.size() ; i++)
+  for(size_t i=0; i < m_RenderableObjects.size() ; i++)
     m_RenderableObjects[i]->Update(_fElapsedTime);
 }
 
 void CRenderableObjectsManager::Render(CRenderManager *RM)
 {
-  for(int i=0; i < m_RenderableObjects.size() ; i++)
+  for(size_t i=0; i < m_RenderableObjects.size() ; i++)
     m_RenderableObjects[i]->Render(RM);
 }
 
