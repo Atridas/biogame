@@ -8,14 +8,17 @@
 class CRenderManager;
 //---------------------------------
 
-class CRenderableObject : public CObject3D//, public CNamed
+class CRenderableObject : 
+  public CObject3D,//public CNamed,
+  public CBaseControl
 {
 public:
-  CRenderableObject();
-  virtual ~CRenderableObject() {};
+  CRenderableObject() {};
   virtual void Update(float ElapsedTime) {};
-  virtual void Render(CRenderManager *RM) = 0;
+  void Render(CRenderManager *RM);
 
+protected:
+  virtual void RenderRenderableObject(CRenderManager *RM) = 0;
 };
 
 #endif

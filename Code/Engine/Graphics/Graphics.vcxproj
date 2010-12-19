@@ -97,6 +97,7 @@
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="InstanceMesh.cpp" />
     <ClCompile Include="Object3D.cpp" />
+    <ClCompile Include="RenderableObject.cpp" />
     <ClCompile Include="RenderableObjectsManager.cpp" />
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="StaticMesh.cpp" />
