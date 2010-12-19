@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Config>
   <RenderManager resolution="800 600" position="50 5" fullscreenMode="false">
-    <StaticMeshManager xml="Data/XML/StaticMeshes/Data.xml"/>
+    <StaticMeshManager xml="Data/XML/StaticMeshes.xml"/>
   </RenderManager>
   <FontManager fontsXML="./Data/XML/Fonts.xml"/>
   <Languages default="cat">
