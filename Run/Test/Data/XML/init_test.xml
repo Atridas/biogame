@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Config>
-  <RenderManager resolution="800 600" position="50 5" fullscreenMode="false" />
-    <!-- ScreenResolution width="800" height="600"/>
-    <ScreenResolution width="800" height="600"/>
-    <WindowsPosition x="50" y="5"/>
-    <Rendermode fullscreenMode="false"/>
-  </RenderManager-->
+  <RenderManager resolution="800 600" position="50 5" fullscreenMode="false">
+    <StaticMeshManager xml="Data/XML/StaticMeshes/Data.xml"/>
+  </RenderManager>
   <FontManager fontsXML="./Data/XML/Fonts.xml"/>
   <Languages default="cat">
     <Language languageXML="./Data/Language/spanish.xml"/>

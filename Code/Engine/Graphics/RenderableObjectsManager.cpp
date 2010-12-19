@@ -25,7 +25,7 @@ CRenderableObject* CRenderableObjectsManager::AddMeshInstance(
 
 void CRenderableObjectsManager::AddResource(const string& _szName, CRenderableObject* _pRenderableObject)
 {
-  m_Resources[_szName] = &_pRenderableObject;
+  m_Resources[_szName] = _pRenderableObject;
   m_RenderableObjects.push_back(_pRenderableObject);
 }
 

@@ -10,12 +10,12 @@ bool CStaticMeshManager::Load(const string &_szFileName, bool _bReload)
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "CStaticMeshManager::Load");
 
-  m_szFileName = _szFileName;
+  m_vXMLFiles.insert( _szFileName );
 
   CXMLTreeNode l_XMLMeshes;
-  if(!l_XMLMeshes.LoadFile(m_szFileName.c_str()))
+  if(!l_XMLMeshes.LoadFile(_szFileName.c_str()))
   {
-    LOGGER->AddNewLog(ELL_WARNING,"CStaticMeshManager:: No s'ha trobat el XML \"%s\"", m_szFileName.c_str());
+    LOGGER->AddNewLog(ELL_WARNING,"CStaticMeshManager:: No s'ha trobat el XML \"%s\"", _szFileName.c_str());
     return false;
   }
 
@@ -50,9 +50,37 @@ bool CStaticMeshManager::Load(const string &_szFileName, bool _bReload)
   return true;
 }
 
+
+bool CStaticMeshManager::Load(const vector<string>& _XMLs)
+{
+  LOGGER->AddNewLog(ELL_INFORMATION, "CStaticMeshManager::Load (Multi)");
+
+  bool l_res = true;
+  
+  vector<string>::const_iterator l_end = _XMLs.cend();
+  for(vector<string>::const_iterator l_it = _XMLs.cbegin(); l_it != l_end; ++l_it)
+  {
+    if(!Load(*l_it, false))
+    {
+      l_res = false;
+    }
+  }
+  return l_res;
+}
+
 bool CStaticMeshManager::Reload()
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "CStaticMeshManager::Reload");
 
-  return Load(m_szFileName, true);
+  bool l_res = true;
+  
+  set<string>::iterator l_end = m_vXMLFiles.end();
+  for(set<string>::iterator l_it = m_vXMLFiles.begin(); l_it != l_end; ++l_it)
+  {
+    if(!Load(*l_it, true))
+    {
+      l_res = false;
+    }
+  }
+  return l_res;
 }

@@ -3,18 +3,20 @@
 #define __STATICMESH_MANAGER_H__
 
 #include <Utils/MapManager.h>
+#include <set>
 #include "StaticMesh.h"
 
 class CStaticMeshManager : public CMapManager<CStaticMesh>
 {
 public:
-  CStaticMeshManager() : m_szFileName("") {};
+  CStaticMeshManager()  {};
   ~CStaticMeshManager() {Destroy();};
   bool Load(const string &_szFileName);
+  bool Load(const vector<string>& _XMLs);
   bool Reload();
 
 protected:
-  string m_szFileName;
+  set<string> m_vXMLFiles;
 
 private:
   bool Load(const string &_szFileName, bool _bReload);
