@@ -10,8 +10,10 @@ void CRenderableObjectsManager::Update(float _fElapsedTime)
 
 void CRenderableObjectsManager::Render(CRenderManager *RM)
 {
+  //renderitzar només els visibles
   for(size_t i=0; i < m_RenderableObjects.size() ; i++)
-    m_RenderableObjects[i]->Render(RM);
+    if(m_RenderableObjects[i]->GetVisible())
+      m_RenderableObjects[i]->Render(RM);
 }
 
 //TODO
@@ -61,8 +63,9 @@ bool CRenderableObjectsManager::Load(const string& _szFileName)
 
     if(!GetResource(l_szName))
     {
-      //TODO: uncomment
-      //l_pRenderableObject = new CRenderableObject(l_vPos, l_fYaw, l_fPitch, l_fRoll);
+      //TODO: object type
+      //switch type, instanciar type (de moment només tenim InstanceMesh)
+      //l_pRenderableObject = new CInstanceMesh(l_vPos, l_fYaw, l_fPitch, l_fRoll);
 
       LOGGER->AddNewLog(ELL_INFORMATION,"CRenderableObjectsManager:: Adding object: \"%s\"", l_szName.c_str());
       //AddResource(l_szName,l_pRenderableObject);

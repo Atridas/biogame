@@ -49,6 +49,9 @@
     <Filter Include="RenderableObject">
       <UniqueIdentifier>{2ab488b0-47e1-4df3-9f94-830f04a08180}</UniqueIdentifier>
     </Filter>
+    <Filter Include="InstanceMesh">
+      <UniqueIdentifier>{8fe22f16-e6eb-4c9d-a12d-38b678b78575}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -89,6 +92,9 @@
     </ClCompile>
     <ClCompile Include="RenderableObjectsManager.cpp">
       <Filter>RenderableObjectsManager</Filter>
+    </ClCompile>
+    <ClCompile Include="InstanceMesh.cpp">
+      <Filter>InstanceMesh</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +145,9 @@
     </ClInclude>
     <ClInclude Include="include\RenderableObject.h">
       <Filter>RenderableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InstanceMesh.h">
+      <Filter>InstanceMesh</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
