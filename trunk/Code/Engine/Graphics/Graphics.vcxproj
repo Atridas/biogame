@@ -95,6 +95,7 @@
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="FPSCamera.cpp" />
     <ClCompile Include="Frustum.cpp" />
+    <ClCompile Include="InstanceMesh.cpp" />
     <ClCompile Include="Object3D.cpp" />
     <ClCompile Include="RenderableObjectsManager.cpp" />
     <ClCompile Include="RenderManager.cpp" />
@@ -110,6 +111,7 @@
     <ClInclude Include="include\FPSCamera.h" />
     <ClInclude Include="include\Frustum.h" />
     <ClInclude Include="include\IndexedVertexs.h" />
+    <ClInclude Include="include\InstanceMesh.h" />
     <ClInclude Include="include\Object3D.h" />
     <ClInclude Include="include\RenderableObject.h" />
     <ClInclude Include="include\RenderableObjectsManager.h" />
