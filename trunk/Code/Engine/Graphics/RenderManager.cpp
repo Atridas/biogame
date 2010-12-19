@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "params.h"
 #include "TextureManager.h"
+#include "StaticMeshManager.h"
 
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 #define D3DFVF_CUSTOMVERTEX2 (D3DFVF_XYZ|D3DFVF_TEX1)
@@ -132,6 +133,14 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
   {
     //altres sistemes
     m_pTextureManager = new CTextureManager();
+
+    m_pStaticMeshManager = new CStaticMeshManager();
+
+    if(! m_pStaticMeshManager->Load(_params.vRenderableMeshes) )
+    {
+      LOGGER->AddNewLog(ELL_ERROR,"RenderManager:: Error al manager de Static Meshes.");
+      SetOk(false);
+    }
   }
 
 	if (!IsOk())
@@ -158,7 +167,8 @@ void CRenderManager::GetWindowRect( HWND hwnd )
 void CRenderManager::Release(void)
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "RenderManager::Release",m_uWidth,m_uHeight);
-
+  
+  CHECKED_DELETE(m_pStaticMeshManager)
   CHECKED_DELETE(m_pTextureManager);
 	//Release main devices of render
 	CHECKED_RELEASE(m_pD3DDevice);

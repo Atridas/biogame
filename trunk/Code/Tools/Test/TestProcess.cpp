@@ -8,6 +8,7 @@
 #include "Texture.h"
 #include "TextureManager.h"
 #include "StaticMesh.h"
+#include "StaticMeshManager.h"
 
 #include <IndexedVertexs.h>
 #include "VertexsStructs.h"
@@ -26,6 +27,8 @@ CTexture* g_tex = 0;
 CIndexedVertexs<STEXTUREDVERTEX>* g_pIndexedVertexs = 0;
 
 CStaticMesh* g_pMesh = 0;
+
+//CStaticMeshManager* g_pStaticMeshManager = 0;
 
 bool CTestProcess::Init()
 {
@@ -83,9 +86,14 @@ bool CTestProcess::Init()
 
   g_pMesh = new CStaticMesh();
   //g_pMesh->LoadSergi("D:/a.mesh");
-  //g_pMesh->Load("Data/Assets/Meshes/bmultiTex.mesh");
   g_pMesh->Load("Data/Assets/Meshes/bmultiTex.mesh");
-  //g_pMesh->LoadSergi("D:/a.mesh");
+
+  //g_pStaticMeshManager = new CStaticMeshManager();
+  //g_pStaticMeshManager->Load("Data/XML/StaticMeshes/Data.xml");
+
+  //g_pMesh = g_pStaticMeshManager->GetResource("BoxGohan");
+
+  //g_pMesh = RENDER_MANAGER->GetStaticMeshManager()->GetResource("BoxGohan");
 
   SetOk(true);
   return IsOk();
@@ -94,14 +102,15 @@ bool CTestProcess::Init()
 void CTestProcess::Release()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"TestProcess::Release");
-  CHECKED_DELETE(m_pObjectCamera);
-  CHECKED_DELETE(m_pObject);
-  CHECKED_DELETE(m_pCube);
-  CHECKED_DELETE(m_pCubeCamera);
+  CHECKED_DELETE(m_pObjectCamera)
+  CHECKED_DELETE(m_pObject)
+  CHECKED_DELETE(m_pCube)
+  CHECKED_DELETE(m_pCubeCamera)
   //CHECKED_DELETE(g_tex); ja ho fa el texture manager
   
-  CHECKED_DELETE(g_pIndexedVertexs);
-  CHECKED_DELETE(g_pMesh);
+  CHECKED_DELETE(g_pIndexedVertexs)
+  CHECKED_DELETE(g_pMesh)
+  //CHECKED_DELETE(g_pStaticMeshManager)
 	// ----
 }
 

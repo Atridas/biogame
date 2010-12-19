@@ -9,7 +9,7 @@
 class CRenderManager;
 //---------------------------------
 
-class CRenderableObjectsManager : public CMapManager<CRenderableObject *>
+class CRenderableObjectsManager : public CMapManager<CRenderableObject>
 {
 public:
   CRenderableObjectsManager() : m_szFileName("") {};

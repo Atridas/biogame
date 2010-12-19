@@ -4,14 +4,17 @@
 
 void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
 {
+  LOGGER->AddNewLog(ELL_INFORMATION, "Carregant el fitxer de configuració de l'Engine \"%s\"", _pcPathXML);
+
+
   CXMLTreeNode l_TreeConfig;
   if(!l_TreeConfig.LoadFile(_pcPathXML))
   {
-    LOGGER->AddNewLog(ELL_WARNING,"Engine:: No s'ha trobat el XML \"%s\"", _pcPathXML);
+    LOGGER->AddNewLog(ELL_WARNING,"\tNo s'ha trobat el Fitxer");
   } else 
   {
     //llegir XML
-    LOGGER->AddNewLog(ELL_INFORMATION,"Engine:: Llegint XML \"%s\"", _pcPathXML);
+    LOGGER->AddNewLog(ELL_INFORMATION,"\tLlegint XML");
 
     //---------------------------------------------------------------
     //Render Manager ------------------------------------------------
@@ -20,50 +23,39 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
 
     if(l_TreeRenderManager.Exists())
     {
-      /*CXMLTreeNode l_TreeScreenResolution = l_TreeRenderManager["ScreenResolution"];
-      CXMLTreeNode l_TreeWindowsPosition = l_TreeRenderManager["WindowsPosition"];
-      CXMLTreeNode l_TreeRendermode = l_TreeRenderManager["Rendermode"];
-    
-      if(l_TreeScreenResolution.Exists())
-      {
-        //InitParams_.RenderManagerParams.uiWidth = l_TreeScreenResolution.GetIntProperty("width",InitParams_.RenderManagerParams.uiWidth);
-        //InitParams_.RenderManagerParams.uiHeight = l_TreeScreenResolution.GetIntProperty("height",InitParams_.RenderManagerParams.uiHeight);
-
-        LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: Screen resolution: %dx%d",InitParams_.RenderManagerParams.uiWidth,InitParams_.RenderManagerParams.uiHeight);
-      } else {
-        LOGGER->AddNewLog(ELL_WARNING, "Engine:: No s'ha trobat element \"RenderManager::ScreenResolution\". Usant valors per defecte.");
-      }
-
-      if(l_TreeWindowsPosition.Exists())
-      {
-        InitParams_.RenderManagerParams.uiPosX = l_TreeWindowsPosition.GetIntProperty("x",InitParams_.RenderManagerParams.uiPosX);
-        InitParams_.RenderManagerParams.uiPosY = l_TreeWindowsPosition.GetIntProperty("y",InitParams_.RenderManagerParams.uiPosY);
-        
-        LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: Screen position: %dx%d",InitParams_.RenderManagerParams.uiPosX,InitParams_.RenderManagerParams.uiPosY);
-      } else {
-        LOGGER->AddNewLog(ELL_WARNING, "Engine:: No s'ha trobat element \"RenderManager::WindowsPosition\". Usant valors per defecte.");
-      }
-
-      if(l_TreeRendermode.Exists())
-      {
-        InitParams_.RenderManagerParams.bFullscreen = l_TreeRendermode.GetBoolProperty("fullscreenMode",InitParams_.RenderManagerParams.bFullscreen);
-    
-        LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: Fullscreen: %s",InitParams_.RenderManagerParams.bFullscreen? "true":"false");
-      } else {
-        LOGGER->AddNewLog(ELL_WARNING, "Engine:: No s'ha trobat element \"RenderManager::Rendermode\". Usant valors per defecte.");
-      }*/
 
       InitParams_.RenderManagerParams.v2iResolution = l_TreeRenderManager.GetVect2iProperty("resolution",InitParams_.RenderManagerParams.v2iResolution);
-      LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: Screen resolution: %dx%d",InitParams_.RenderManagerParams.v2iResolution.x,InitParams_.RenderManagerParams.v2iResolution.y);
+      LOGGER->AddNewLog(ELL_INFORMATION, "\tScreen resolution: %dx%d",InitParams_.RenderManagerParams.v2iResolution.x,InitParams_.RenderManagerParams.v2iResolution.y);
 
       InitParams_.RenderManagerParams.v2iPosition = l_TreeRenderManager.GetVect2iProperty("position",InitParams_.RenderManagerParams.v2iPosition);
-      LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: Screen position: %dx%d",InitParams_.RenderManagerParams.v2iPosition.x,InitParams_.RenderManagerParams.v2iPosition.y);
+      LOGGER->AddNewLog(ELL_INFORMATION, "\tScreen position: %dx%d",InitParams_.RenderManagerParams.v2iPosition.x,InitParams_.RenderManagerParams.v2iPosition.y);
       
       InitParams_.RenderManagerParams.bFullscreen = l_TreeRenderManager.GetBoolProperty("fullscreenMode",InitParams_.RenderManagerParams.bFullscreen);
-      LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: Fullscreen: %s",InitParams_.RenderManagerParams.bFullscreen? "true":"false");
+      LOGGER->AddNewLog(ELL_INFORMATION, "\tFullscreen: %s",InitParams_.RenderManagerParams.bFullscreen? "true":"false");
+
+
+      int l_iNumChildren = l_TreeRenderManager.GetNumChildren();
+      for(int i = 0; i < l_iNumChildren; i++)
+      {
+        CXMLTreeNode l_TreeChild = l_TreeRenderManager(i);
+
+        if(strcmp(l_TreeChild.GetName(), "\tStaticMeshManager") == 0)
+        {
+          const char* l_pcXML = l_TreeChild.GetPszProperty("xml",0);
+          if(l_pcXML == 0)
+          {
+            LOGGER->AddNewLog(ELL_WARNING, "\tParametre \"StaticMeshManager\" sense parametre \"xml\"");
+          } else {
+            InitParams_.RenderManagerParams.vRenderableMeshes.push_back(string(l_pcXML));
+            LOGGER->AddNewLog(ELL_INFORMATION, "StaticMeshes \"%s\"",l_pcXML);
+          }
+        } else {
+          LOGGER->AddNewLog(ELL_WARNING, "\tParametre del RenderManager desconegut : %s", l_TreeChild.GetName());
+        }
+      }
 
     } else {
-      LOGGER->AddNewLog(ELL_WARNING, "Engine:: No s'ha trobat element \"RenderManager\". Usant valors per defecte.");
+      LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat element \"RenderManager\". Usant valors per defecte.");
     }
     //---------------------------------------------------------------
     //Font Manager --------------------------------------------------
@@ -73,9 +65,9 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
     {
       InitParams_.FontManagerParams.pcFontsXML = l_TreeFontManager.GetPszProperty("fontsXML",InitParams_.FontManagerParams.pcFontsXML);
 
-      LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: Fonts: \"%s\"", InitParams_.FontManagerParams.pcFontsXML);
+      LOGGER->AddNewLog(ELL_INFORMATION, "\tFonts: \"%s\"", InitParams_.FontManagerParams.pcFontsXML);
     } else {
-      LOGGER->AddNewLog(ELL_WARNING, "Engine:: No s'ha trobat element \"FontManager\". Usant valors per defecte.");
+      LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat element \"FontManager\". Usant valors per defecte.");
     }
   
     //---------------------------------------------------------------
@@ -86,7 +78,7 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
     {
       InitParams_.LanguageManagerParams.pcDefault = l_TreeLanguages.GetPszProperty("default", InitParams_.LanguageManagerParams.pcDefault);
 
-      LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: Default Language: \"%s\"", InitParams_.LanguageManagerParams.pcDefault);
+      LOGGER->AddNewLog(ELL_INFORMATION, "\tDefault Language: \"%s\"", InitParams_.LanguageManagerParams.pcDefault);
 
       int l_iNumLanguages = l_TreeLanguages.GetNumChildren();
       for(int i = 0; i < l_iNumLanguages; i++)
@@ -95,13 +87,13 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
         if(l_szXMLFile != "")
         {
           InitParams_.LanguageManagerParams.vXMLFiles.push_back(l_szXMLFile);
-          LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: XML Language file: \"%s\"", l_szXMLFile.c_str());
+          LOGGER->AddNewLog(ELL_INFORMATION, "\tXML Language file: \"%s\"", l_szXMLFile.c_str());
         } else {
-          LOGGER->AddNewLog(ELL_WARNING, "Engine:: Error reading %d xml language entry. No file is added to the list.", i);
+          LOGGER->AddNewLog(ELL_WARNING, "\tError reading %d xml language entry. No file is added to the list.", i);
         }
       }
     } else {
-      LOGGER->AddNewLog(ELL_WARNING, "Engine:: No s'ha trobat element \"Languages\". Usant valors per defecte.");
+      LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat element \"Languages\". Usant valors per defecte.");
     }
 
     //---------------------------------------------------------------
@@ -111,9 +103,9 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
     if(l_TreeLanguages.Exists())
     {
       InitParams_.InputManagerParams.bExclusiveMouse = l_TreeInputManager.GetBoolProperty("exclusiveMouse", InitParams_.InputManagerParams.bExclusiveMouse);
-      LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: Mouse exclusiu: %s", (InitParams_.InputManagerParams.bExclusiveMouse)?"cert":"falç");
+      LOGGER->AddNewLog(ELL_INFORMATION, "\tMouse exclusiu: %s", (InitParams_.InputManagerParams.bExclusiveMouse)?"cert":"falç");
     } else {
-      LOGGER->AddNewLog(ELL_WARNING, "Engine:: No s'ha trobat element \"InputManager\". Usant valors per defecte.");
+      LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat element \"InputManager\". Usant valors per defecte.");
     }
 
     //---------------------------------------------------------------
@@ -123,9 +115,11 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
     if(l_TreeActionToInput.Exists())
     {
       InitParams_.ActionToInputParams.pcFile = l_TreeActionToInput.GetPszProperty("file", InitParams_.ActionToInputParams.pcFile);
-      LOGGER->AddNewLog(ELL_INFORMATION, "Engine:: Action To input: %s", InitParams_.ActionToInputParams.pcFile);
+      LOGGER->AddNewLog(ELL_INFORMATION, "\tAction To input: %s", InitParams_.ActionToInputParams.pcFile);
     } else {
-      LOGGER->AddNewLog(ELL_WARNING, "Engine:: No s'ha trobat element \"ActionToInput\". Usant valors per defecte.");
+      LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"ActionToInput\". Usant valors per defecte.");
     }
   }
+  
+  LOGGER->AddNewLog(ELL_INFORMATION, "Fi carregar configuració");
 }

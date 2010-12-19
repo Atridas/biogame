@@ -16,8 +16,6 @@ public:
   virtual void Update(float ElapsedTime) {};
   virtual void Render(CRenderManager *RM) = 0;
 
-//};<-----aqui hi ha un caracter invisible lol
-
 };
 
 #endif
