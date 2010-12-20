@@ -15,7 +15,7 @@ class CObject3D
 {
 public:
 	CObject3D(const Vect3f& pos, float yaw, float pitch, float roll = 0);
-	CObject3D();
+  CObject3D();
 	virtual ~CObject3D(void) {/*Nothing*/;}
 
 	//---Get Functions
