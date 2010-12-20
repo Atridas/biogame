@@ -64,13 +64,19 @@ struct SActionToInputParams
   {};
 };
 
+struct SRenderableObjectsManager
+{
+  vector<string> vXMLFiles;
+};
+
 struct SInitParams
 {
-  SRenderManagerParams    RenderManagerParams;
-  SFontManagerParams      FontManagerParams;
-  SLanguageManagerParams  LanguageManagerParams;
-  SInputManagerParams     InputManagerParams;
-  SActionToInputParams    ActionToInputParams;
+  SRenderManagerParams      RenderManagerParams;
+  SFontManagerParams        FontManagerParams;
+  SLanguageManagerParams    LanguageManagerParams;
+  SInputManagerParams       InputManagerParams;
+  SActionToInputParams      ActionToInputParams;
+  SRenderableObjectsManager RenderableObjectsManager;
 };
 
 void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML);

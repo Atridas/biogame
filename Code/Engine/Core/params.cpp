@@ -16,9 +16,9 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
     //llegir XML
     LOGGER->AddNewLog(ELL_INFORMATION,"\tLlegint XML");
 
-    //---------------------------------------------------------------
-    //Render Manager ------------------------------------------------
-    //---------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Render Manager -----------------------------------------------------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------------------------------------------------------------------
     CXMLTreeNode l_TreeRenderManager = l_TreeConfig["RenderManager"];
 
     if(l_TreeRenderManager.Exists())
@@ -44,7 +44,7 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
           const char* l_pcXML = l_TreeChild.GetPszProperty("xml",0);
           if(l_pcXML == 0)
           {
-            LOGGER->AddNewLog(ELL_WARNING, "\tParametre \"StaticMeshManager\" sense parametre \"xml\"");
+            LOGGER->AddNewLog(ELL_WARNING, "\tElement \"StaticMeshManager\" sense parametre \"xml\"");
           } else {
             InitParams_.RenderManagerParams.vRenderableMeshes.push_back(string(l_pcXML));
             LOGGER->AddNewLog(ELL_INFORMATION, "\tStaticMeshes \"%s\"",l_pcXML);
@@ -57,9 +57,10 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
     } else {
       LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat element \"RenderManager\". Usant valors per defecte.");
     }
-    //---------------------------------------------------------------
-    //Font Manager --------------------------------------------------
-    //---------------------------------------------------------------
+
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+    //Font Manager ---------------------------------------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------------------------
     CXMLTreeNode l_TreeFontManager = l_TreeConfig["FontManager"];
     if(l_TreeFontManager.Exists())
     {
@@ -70,9 +71,9 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
       LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat element \"FontManager\". Usant valors per defecte.");
     }
   
-    //---------------------------------------------------------------
-    //Language Manager ----------------------------------------------
-    //---------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Language Manager -------------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------------------------------------------
     CXMLTreeNode l_TreeLanguages = l_TreeConfig["Languages"];
     if(l_TreeLanguages.Exists())
     {
@@ -96,9 +97,9 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
       LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat element \"Languages\". Usant valors per defecte.");
     }
 
-    //---------------------------------------------------------------
-    //Input Manager -------------------------------------------------
-    //---------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Input Manager ----------------------------------------------------------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------------------------------------------------------
     CXMLTreeNode l_TreeInputManager = l_TreeConfig["InputManager"];
     if(l_TreeLanguages.Exists())
     {
@@ -108,9 +109,9 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
       LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat element \"InputManager\". Usant valors per defecte.");
     }
 
-    //---------------------------------------------------------------
-    //Action to input -----------------------------------------------
-    //---------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Action to input ---------------------------------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
     CXMLTreeNode l_TreeActionToInput = l_TreeConfig["ActionToInput"];
     if(l_TreeActionToInput.Exists())
     {
@@ -118,6 +119,47 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
       LOGGER->AddNewLog(ELL_INFORMATION, "\tAction To input: %s", InitParams_.ActionToInputParams.pcFile);
     } else {
       LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"ActionToInput\". Usant valors per defecte.");
+    }
+
+
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Renderable Objects Manager ----------------------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
+    CXMLTreeNode l_TreeRenderableObjectsManager = l_TreeConfig["RenderableObjectsManager"];
+    if(l_TreeRenderableObjectsManager.Exists())
+    {
+      const char* l_pcFile = l_TreeRenderableObjectsManager.GetPszProperty("file", 0);
+
+      if(l_pcFile == 0)
+      {
+        LOGGER->AddNewLog(ELL_WARNING, "\tNo hi ha fitxer base del RenderableObjectsManager.");
+      } else {
+        InitParams_.RenderableObjectsManager.vXMLFiles.push_back(string(l_pcFile));
+        LOGGER->AddNewLog(ELL_INFORMATION, "\tRenderableObjectsManager base \"%s\"",l_pcFile);
+      }
+
+      int l_iNumChildren = l_TreeRenderableObjectsManager.GetNumChildren();
+      for(int i = 0; i < l_iNumChildren; i++)
+      {
+        CXMLTreeNode l_TreeChild = l_TreeRenderableObjectsManager(i);
+
+        if(strcmp(l_TreeChild.GetName(), "Level") == 0)
+        {
+          l_pcFile = l_TreeChild.GetPszProperty("xml",0);
+          if(l_pcFile == 0)
+          {
+            LOGGER->AddNewLog(ELL_WARNING, "\tElement \"Level\" sense parametre \"xml\"");
+          } else {
+            InitParams_.RenderableObjectsManager.vXMLFiles.push_back(string(l_pcFile));
+            LOGGER->AddNewLog(ELL_INFORMATION, "\tRenderableObjectsManager \"%s\"",l_pcFile);
+          }
+        } else if(!l_TreeChild.IsComment()) {
+          LOGGER->AddNewLog(ELL_WARNING, "\tParametre del RenderableObjectsManager desconegut : %s", l_TreeChild.GetName());
+        }
+      }
+
+    } else {
+      LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"RenderableObjectsManager\". Usant valors per defecte [Res].");
     }
   }
   

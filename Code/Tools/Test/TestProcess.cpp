@@ -206,7 +206,7 @@ void CTestProcess::Render()
   //g_pMesh->Render(l_pRM);
 
 
-  g_pRenderableObjectsManager->Render(l_pRM);
+  //g_pRenderableObjectsManager->Render(l_pRM);
  
   l_pRM->GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE,TRUE);
   l_pRM->GetDevice()->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);

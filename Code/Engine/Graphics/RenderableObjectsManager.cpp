@@ -41,16 +41,24 @@ void CRenderableObjectsManager::AddResource(const string& _szName, CRenderableOb
   m_RenderableObjects.push_back(_pRenderableObject);
 }
 
-bool CRenderableObjectsManager::Load(const string& _szFileName)
+bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "CRenderableObjectsManager::Load");
 
-  m_szFileName = _szFileName;
+  if(m_vXMLFiles.find(_szFileName) != m_vXMLFiles.end())
+  {
+    if(!_bReload)
+    {
+      LOGGER->AddNewLog(ELL_WARNING,"CRenderableObjectsManager:: Carregant \"%s\" 2 vegades", _szFileName.c_str());
+    }
+  } else {
+    m_vXMLFiles.insert( _szFileName );
+  }
 
   CXMLTreeNode l_XMLObjects;
-  if(!l_XMLObjects.LoadFile(m_szFileName.c_str()))
+  if(!l_XMLObjects.LoadFile(_szFileName.c_str()))
   {
-    LOGGER->AddNewLog(ELL_WARNING,"CRenderableObjectsManager:: No s'ha trobat el XML \"%s\"", m_szFileName.c_str());
+    LOGGER->AddNewLog(ELL_WARNING,"CRenderableObjectsManager:: No s'ha trobat el XML \"%s\"", _szFileName.c_str());
     return false;
   }
 
@@ -100,9 +108,46 @@ bool CRenderableObjectsManager::Load(const string& _szFileName)
 
 
     }else{
-      LOGGER->AddNewLog(ELL_WARNING,"CRenderableObjectsManager:: Repeated object \"%s\"", l_szName.c_str());
+      if(!_bReload)
+      {
+        LOGGER->AddNewLog(ELL_WARNING,"CRenderableObjectsManager:: Repeated object \"%s\"", l_szName.c_str());
+      }
+      l_pRenderableObject->SetPosition(l_vPos);
+      l_pRenderableObject->SetYaw     (l_fYaw);
+      l_pRenderableObject->SetPitch   (l_fPitch);
+      l_pRenderableObject->SetRoll    (l_fRoll);
     }
   }
 
   return true;
+}
+
+
+
+bool CRenderableObjectsManager::Load(const vector<string>& _vXMLFiles)
+{
+  bool l_bResult = true;
+  vector<string>::const_iterator l_end = _vXMLFiles.cend();
+  for(vector<string>::const_iterator l_it = _vXMLFiles.cbegin(); l_it != l_end; ++l_it)
+  {
+    if(!Load(*l_it, false))
+    {
+      l_bResult = false;
+    }
+  }
+  return l_bResult;
+}
+
+bool CRenderableObjectsManager::Load(const set<string>& _vXMLFiles)
+{
+  bool l_bResult = true;
+  set<string>::const_iterator l_end = _vXMLFiles.cend();
+  for(set<string>::const_iterator l_it = _vXMLFiles.cbegin(); l_it != l_end; ++l_it)
+  {
+    if(!Load(*l_it, true))
+    {
+      l_bResult = false;
+    }
+  }
+  return l_bResult;
 }

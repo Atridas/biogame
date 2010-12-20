@@ -66,6 +66,8 @@ void CEngine::Render()
 	CRenderManager * rm = m_pCore->GetRenderManager();
 	rm->BeginRendering();
   rm->SetupMatrices(m_pProcess->GetCamera());
+
+  m_pCore->Render();
 	{
 		RenderScene();
 	}
