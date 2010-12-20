@@ -1,0 +1,12 @@
+<actor name="bot" radius_bs="2.0" pos_bs="0.0 1.0 0.0" effect="cal3d" technique="cal3dTechnique">
+	<skeleton filename="Data/Animated Models/bot.csf"/>
+	<mesh filename="Data/Animated Models/bot.CMF"/>
+	<texture filename="Data/Textures/rocketl.jpg"/>
+	<texture filename="Data/Textures/ranger.jpg"/>
+	<texture filename="Data/Textures/ranger_h.jpg"/>
+	<animation name="idle" filename="Data/Animated Models/idle.CAF"/>
+	<animation name="run" filename="Data/Animated Models/run.CAF"/>
+	<animation name="hit" filename="Data/Animated Models/hit.CAF"/>
+	<animation name="die" filename="Data/Animated Models/die.CAF"/>
+	<animation name="shoot" filename="Data/Animated Models/shoot.CAF"/>
+</actor>
