@@ -4,9 +4,8 @@
 #include "StaticMeshManager.h"
 
 
-CInstanceMesh::CInstanceMesh(const string& _szName)
+CInstanceMesh::CInstanceMesh(const string& _szName): CRenderableObject(_szName)
 {
-  //_szName deu ser de CNamed
   
 }
 
