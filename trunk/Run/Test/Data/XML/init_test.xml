@@ -11,6 +11,14 @@
   </Languages>
   <InputManager exclusiveMouse="true"/>
   <ActionToInput file="./Data/XML/actions.xml"/>
+
+  <RenderableObjectsManager file="Data/XML/RenderableObjects.xml">
+    <!--
+    <Level xml="Data/Hangar/XML/RenderableObjects.xml"/>
+    <Level xml="Data/Level -1/XML/RenderableObjects.xml"/>
+    <Level xml="Data/Level -2/XML/RenderableObjects.xml"/>
+    -->
+  </RenderableObjectsManager>
   
   <!--<Console_Logger activateConsole="true" Log_Level="INFORMATION" activateLogger="true" linesPerPageInLogger="20"/>
   <Mouse exclusiveModeinMouse="true" drawPointerMouse="true"/>
