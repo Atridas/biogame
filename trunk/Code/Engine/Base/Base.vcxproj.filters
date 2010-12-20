@@ -61,6 +61,9 @@
     <Filter Include="Utils\MapManager">
       <UniqueIdentifier>{ac963d84-2254-46ef-ade9-6c86aecb0c39}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils\Named">
+      <UniqueIdentifier>{b3718a1d-da8a-4b0b-9496-0f76a2aee4e2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathConstants.cpp">
@@ -170,6 +173,9 @@
     </ClInclude>
     <ClInclude Include="include\Utils\MapManager.h">
       <Filter>Utils\MapManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Named.h">
+      <Filter>Utils\Named</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

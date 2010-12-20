@@ -135,6 +135,7 @@
     <ClInclude Include="include\Math\Vector2.h" />
     <ClInclude Include="include\Math\Vector3.h" />
     <ClInclude Include="include\Math\Vector4.h" />
+    <ClInclude Include="include\Named.h" />
     <ClInclude Include="include\Utils\BaseControl.h" />
     <ClInclude Include="include\Utils\BaseUtils.h" />
     <ClInclude Include="include\Utils\CountDownTimer.h" />
