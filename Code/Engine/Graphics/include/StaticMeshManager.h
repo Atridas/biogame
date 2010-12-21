@@ -15,11 +15,10 @@ public:
   bool Load(const vector<string>& _XMLs);
   bool Reload();
 
-protected:
-  set<string> m_vXMLFiles;
-
 private:
   bool Load(const string &_szFileName, bool _bReload);
+
+  set<string> m_vXMLFiles;
 };
 
 #endif
