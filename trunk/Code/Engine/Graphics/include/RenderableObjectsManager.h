@@ -14,8 +14,8 @@ class CRenderManager;
 class CRenderableObjectsManager : public CMapManager<CRenderableObject>
 {
 public:
-  CRenderableObjectsManager() {};
-  ~CRenderableObjectsManager() {CleanUp();};
+  CRenderableObjectsManager() {SetOk(true);};
+  ~CRenderableObjectsManager() {Done();};
 
   void Update(float _fElapsedTime);
   void Render(CRenderManager *RM);
@@ -24,7 +24,7 @@ public:
 
 
   void AddResource(const string& _szName, CRenderableObject* _pRenderableObject);
-  void CleanUp()                        {Destroy();m_RenderableObjects.clear();};
+  void CleanUp()                        {Release();m_RenderableObjects.clear();};
 
   bool Load(const string& _szFileName)  {return Load(_szFileName,false);};
   bool Load(const vector<string>& _vXMLFiles);

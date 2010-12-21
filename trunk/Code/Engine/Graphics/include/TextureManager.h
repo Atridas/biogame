@@ -13,8 +13,8 @@
 class CTextureManager : private CMapManager<CTexture>
 {
 public:
-  CTextureManager() {};
-  ~CTextureManager() {Destroy();};
+  CTextureManager() {SetOk(true);};
+  ~CTextureManager() {Done();};
   void Reload ();
   virtual CTexture* GetResource(const std::string &_szName);
 };

@@ -52,6 +52,18 @@
     <Filter Include="InstanceMesh">
       <UniqueIdentifier>{8fe22f16-e6eb-4c9d-a12d-38b678b78575}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AnimatedModel">
+      <UniqueIdentifier>{393ff171-639d-4bb7-b91e-5afa57554a24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AnimatedModel\AnimatedCoreModel">
+      <UniqueIdentifier>{94707ca1-3968-45c8-b406-0a018414e440}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AnimatedModel\AnimatedModelManager">
+      <UniqueIdentifier>{c52e837d-037d-4ea7-a9a7-be14ebfb2f5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AnimatedModel\AnimatedInstanceModel">
+      <UniqueIdentifier>{ced25332-831b-4e63-b82c-281f95d60c99}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -98,6 +110,15 @@
     </ClCompile>
     <ClCompile Include="RenderableObject.cpp">
       <Filter>RenderableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedCoreModel.cpp">
+      <Filter>AnimatedModel\AnimatedCoreModel</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedInstanceModel.cpp">
+      <Filter>AnimatedModel\AnimatedInstanceModel</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedModelManager.cpp">
+      <Filter>AnimatedModel\AnimatedModelManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +172,15 @@
     </ClInclude>
     <ClInclude Include="include\InstanceMesh.h">
       <Filter>InstanceMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AnimatedCoreModel.h">
+      <Filter>AnimatedModel\AnimatedCoreModel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AnimatedInstanceModel.h">
+      <Filter>AnimatedModel\AnimatedInstanceModel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AnimatedModelManager.h">
+      <Filter>AnimatedModel\AnimatedModelManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

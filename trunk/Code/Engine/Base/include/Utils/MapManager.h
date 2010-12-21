@@ -15,7 +15,8 @@
 #include <map>
 
 template<class T>
-class CMapManager
+class CMapManager:
+  public CBaseControl
 {
 protected:
   typedef std::map<std::string, T*> TMapResource;
@@ -37,7 +38,7 @@ public:
     m_Resources[Name] = Resource;
   }
 
-  void Destroy() 
+  virtual void Release() 
   {
     TMapResource::iterator l_It = m_Resources.begin();
     TMapResource::iterator l_End = m_Resources.end();
