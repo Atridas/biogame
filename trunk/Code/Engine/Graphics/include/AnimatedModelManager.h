@@ -16,8 +16,8 @@ class CAnimatedModelManager:
   public CMapManager<CAnimatedCoreModel>
 {
 public:
-  CAnimatedModelManager(void);
-  ~CAnimatedModelManager(void);
+  CAnimatedModelManager(void)   {SetOk(true);};
+  ~CAnimatedModelManager(void)  {Done();};
 
   CAnimatedCoreModel*     GetCore(const std::string &Name, const std::string &Path);
   CAnimatedInstanceModel* GetInstance(const std::string &Name);
