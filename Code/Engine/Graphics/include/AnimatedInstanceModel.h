@@ -34,8 +34,8 @@ public:
   void ExecuteAction          (int Id, float Time);
   void BlendCycle             (int Id, float Time);
   void ClearCycle             (float Time);
-  int GetCurrentCycle         () const;
-  int GetCurrentAction        () const;
+  int GetCurrentCycle         () const              { return m_iCurrentCycle; };
+  int GetCurrentAction        () const              { return m_iCurrentAnimationId; };
 
 private:
   bool LoadVertexBuffer(CRenderManager *RM);

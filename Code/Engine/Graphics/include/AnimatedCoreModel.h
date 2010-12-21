@@ -13,14 +13,16 @@ class CAnimatedCoreModel:
   public CBaseControl
 {
 public:
-  CAnimatedCoreModel(void):m_pCalCoreModel(0) 
+  CAnimatedCoreModel(void): m_pCalCoreModel(0),
+                            m_szName(""),m_szMeshFilename(""),
+                            m_szSkeletonFilename(""),m_szPath("")
                                         {};
   ~CAnimatedCoreModel(void)             {Done();};
 
   CalCoreModel *GetCoreModel      ( )                         { return m_pCalCoreModel; };
   const string & GetTextureName   ( size_t id ) const         { return m_vTextureFilenameList[id]; };
   size_t GetNumTextures           ( ) const                   { return m_vTextureFilenameList.size(); };
-  void Load                       (const std::string &Path);
+  bool Load                       (const std::string &_szPath);
 
 private:
   bool LoadMesh();
@@ -28,6 +30,7 @@ private:
   bool LoadAnimation(const string& _szName, const std::string& _szFilename);
 
   CalCoreModel*             m_pCalCoreModel;
+  string                    m_szName;
   string                    m_szMeshFilename;
   string                    m_szSkeletonFilename;
   vector<std::string>       m_vTextureFilenameList;
