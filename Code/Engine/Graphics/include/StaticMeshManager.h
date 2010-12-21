@@ -9,8 +9,8 @@
 class CStaticMeshManager : public CMapManager<CStaticMesh>
 {
 public:
-  CStaticMeshManager()  {};
-  ~CStaticMeshManager() {Destroy();};
+  CStaticMeshManager()  {SetOk(true);};
+  ~CStaticMeshManager() {Done();};
   bool Load(const string &_szFileName);
   bool Load(const vector<string>& _XMLs);
   bool Reload();

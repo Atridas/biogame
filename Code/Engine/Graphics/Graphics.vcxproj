@@ -91,6 +91,9 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="AnimatedCoreModel.cpp" />
+    <ClCompile Include="AnimatedInstanceModel.cpp" />
+    <ClCompile Include="AnimatedModelManager.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="FPSCamera.cpp" />
@@ -107,6 +110,9 @@
     <ClCompile Include="ThPSCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\AnimatedCoreModel.h" />
+    <ClInclude Include="include\AnimatedInstanceModel.h" />
+    <ClInclude Include="include\AnimatedModelManager.h" />
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\FontManager.h" />
     <ClInclude Include="include\FPSCamera.h" />
