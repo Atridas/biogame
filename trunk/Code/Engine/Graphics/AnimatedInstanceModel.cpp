@@ -41,7 +41,7 @@ void CAnimatedInstanceModel::InitD3D(CRenderManager *RM)
   //TODO
 }
 
-void CAnimatedInstanceModel::Destroy()
+void CAnimatedInstanceModel::Release()
 {
   //TODO
 }

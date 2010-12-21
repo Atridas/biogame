@@ -97,8 +97,18 @@ CAnimatedCoreModel* CAnimatedModelManager::GetCore(const std::string &_szName, c
   return l_pAnimatedCoreModel;
 }
 
-CAnimatedInstanceModel* CAnimatedModelManager::GetInstance(const std::string &Name)
+CAnimatedInstanceModel* CAnimatedModelManager::GetInstance(const std::string &_szName)
 {
-  //TODO
-  return 0;
+  CAnimatedCoreModel* l_pCore = GetResource(_szName);
+  if(!l_pCore)
+  {
+    LOGGER->AddNewLog(ELL_WARNING, "CAnimatedModelManager::GetInstance  No s'ha trobat la core \"%s\"", _szName.c_str());
+    return 0;
+  }
+  CAnimatedInstanceModel* l_pInstance = new CAnimatedInstanceModel();
+  l_pInstance->Initialize(l_pCore);
+
+  LOGGER->AddNewLog(ELL_INFORMATION, "CAnimatedModelManager::GetInstance  S'ha creat una instància de la core \"%s\"", _szName.c_str());
+
+  return l_pInstance;
 }

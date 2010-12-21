@@ -30,7 +30,7 @@ public:
   void Update                 (float ElapsedTime);
   void Initialize             (CAnimatedCoreModel *AnimatedCoreModel);
   void InitD3D                (CRenderManager *RM);
-  void Destroy                ();
+  void Release                ();
   void ExecuteAction          (int Id, float Time);
   void BlendCycle             (int Id, float Time);
   void ClearCycle             (float Time);
