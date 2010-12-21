@@ -25,21 +25,21 @@ public:
                                 {};
   ~CAnimatedInstanceModel(void) {Done();};
 
-  void Render                 (CRenderManager *RM);
-  void RenderModelBySoftware  (CRenderManager *RM);
-  void Update                 (float ElapsedTime);
-  void Initialize             (CAnimatedCoreModel *AnimatedCoreModel);
-  void InitD3D                (CRenderManager *RM);
+  void Render                 (CRenderManager *_pRM);
+  void RenderModelBySoftware  (CRenderManager *_pRM);
+  void Update                 (float _fElapsedTime);
+  void Initialize             (CAnimatedCoreModel *_pAnimatedCoreModel);
+  void InitD3D                (CRenderManager *_pRM);
   void Release                ();
-  void ExecuteAction          (int Id, float Time);
-  void BlendCycle             (int Id, float Time);
-  void ClearCycle             (float Time);
+  void ExecuteAction          (int _iId, float _fTime);
+  void BlendCycle             (int _iId, float _fTime);
+  void ClearCycle             (float _fTime);
   int GetCurrentCycle         () const              { return m_iCurrentCycle; };
   int GetCurrentAction        () const              { return m_iCurrentAnimationId; };
 
 private:
-  bool LoadVertexBuffer(CRenderManager *RM);
-  void LoadTextures();
+  bool LoadVertexBuffer(CRenderManager *_pRM);
+  void LoadTextures(CRenderManager *_pRM);
 
   CalModel*                 m_pCalModel;
   CAnimatedCoreModel*       m_pAnimatedCoreModel;
