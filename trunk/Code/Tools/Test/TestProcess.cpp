@@ -10,6 +10,7 @@
 #include "StaticMesh.h"
 #include "StaticMeshManager.h"
 #include "RenderableObjectsManager.h"
+#include "AnimatedModelManager.h"
 
 #include <IndexedVertexs.h>
 #include "VertexsStructs.h"
@@ -30,6 +31,8 @@ CIndexedVertexs<STEXTUREDVERTEX>* g_pIndexedVertexs = 0;
 CStaticMesh* g_pMesh = 0;
 
 CRenderableObjectsManager* g_pRenderableObjectsManager = 0;
+
+CAnimatedModelManager* g_pAnimatedModelManager = 0;
 
 bool CTestProcess::Init()
 {
@@ -96,10 +99,14 @@ bool CTestProcess::Init()
 
   g_pMesh = RENDER_MANAGER->GetStaticMeshManager()->GetResource("BoxGohan");
 
-  g_pRenderableObjectsManager = new CRenderableObjectsManager();
-  g_pRenderableObjectsManager->Load("Data/XML/RenderableObjects.xml");
+  //g_pRenderableObjectsManager = new CRenderableObjectsManager();
+  //g_pRenderableObjectsManager->Load("Data/XML/RenderableObjects.xml");
 
-  LOGGER->SaveLogsInFile();
+
+  g_pAnimatedModelManager = new CAnimatedModelManager();
+  g_pAnimatedModelManager->Load("Data/XML/AnimatedModels.xml");
+
+  //LOGGER->SaveLogsInFile();
 
   SetOk(true);
   return IsOk();
@@ -116,6 +123,7 @@ void CTestProcess::Release()
   
   CHECKED_DELETE(g_pIndexedVertexs)
   CHECKED_DELETE(g_pRenderableObjectsManager)
+  CHECKED_DELETE(g_pAnimatedModelManager)
   //CHECKED_DELETE(g_pMesh)
   //CHECKED_DELETE(g_pStaticMeshManager)
 	// ----

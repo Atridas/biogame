@@ -3,29 +3,39 @@
 #include <cal3d/cal3d.h>
 #include <XML/XMLTreeNode.h>
 
+void CAnimatedCoreModel::Release()
+{
+  CHECKED_DELETE(m_pCalCoreModel)
+  m_szMeshFilename      = "";
+  m_szSkeletonFilename  = "";
+  m_vTextureFilenameList.clear();
+}
 
 bool CAnimatedCoreModel::Load(const std::string &_szPath)
 {
   m_szPath = _szPath;
   LOGGER->AddNewLog(ELL_INFORMATION, "CAnimatedCoreModel::Load Carregant el Animated Model \"%s\"", _szPath.c_str());
 
+  SetOk(false);
+
   CXMLTreeNode l_treeActor;
   if(l_treeActor.LoadFile(_szPath.c_str()))
   {
+    const char* l_pcAux = l_treeActor.GetPszProperty("name",0);
+
+    if(l_pcAux != 0)
+    {
+      SetName(string(l_pcAux));
+    } else {
+      LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load No s'ha trobat la propietat \"name\"");
+      return IsOk();
+    }
+
+    m_pCalCoreModel = new CalCoreModel(GetName().c_str());
+
     int l_iNumChildren = l_treeActor.GetNumChildren();
     for(int i = 0; i < l_iNumChildren; i++)
     {
-      const char* l_pcAux = l_treeActor.GetPszProperty("name",0);
-
-      if(l_pcAux != 0)
-      {
-        m_szName = l_pcAux;
-      } else {
-        LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load No s'ha trobat la propietat \"name\", posant nom \"dummy\"");
-        m_szName = "dummy";
-      }
-
-      m_pCalCoreModel = new CalCoreModel(m_szName.c_str());
 
       CXMLTreeNode l_treeChild = l_treeActor(i);
       if(strcmp(l_treeChild.GetName(),"skeleton") == 0)
@@ -33,6 +43,7 @@ bool CAnimatedCoreModel::Load(const std::string &_szPath)
         if(m_szSkeletonFilename != "")
         {
           LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load Esquelet repetit!");
+          Release();
           return IsOk();
         }
 
@@ -43,11 +54,13 @@ bool CAnimatedCoreModel::Load(const std::string &_szPath)
           m_szSkeletonFilename = l_pcFileName;
         } else {
           LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load No s'ha trobat la propietat \"filename\" a l'esquelet.");
+          Release();
           return IsOk();
         }
 
         if(!LoadSkeleton())
         {
+          Release();
           return IsOk();
         }
 
@@ -56,6 +69,7 @@ bool CAnimatedCoreModel::Load(const std::string &_szPath)
         if(m_szMeshFilename != "")
         {
           LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load Mesh repetit!");
+          Release();
           return IsOk();
         }
 
@@ -66,11 +80,13 @@ bool CAnimatedCoreModel::Load(const std::string &_szPath)
           m_szMeshFilename = l_pcFileName;
         } else {
           LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load No s'ha trobat la propietat \"filename\" al mesh.");
+          Release();
           return IsOk();
         }
 
         if(!LoadMesh())
         {
+          Release();
           return IsOk();
         }
 
@@ -119,9 +135,9 @@ bool CAnimatedCoreModel::LoadMesh()
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "CAnimatedCoreModel::LoadMesh Carregant el Mesh \"%s\"", m_szMeshFilename.c_str());
 
-  if(!m_pCalCoreModel->loadCoreMesh(m_szMeshFilename.c_str()))
+  if(m_pCalCoreModel->loadCoreMesh(m_szMeshFilename.c_str()) < 0)
   {
-    LOGGER->AddNewLog(ELL_INFORMATION, "CAnimatedCoreModel::LoadMesh Error al Cal3D \"%s\"", CalError::getLastErrorText().c_str());
+    LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::LoadMesh Error al Cal3D \"%s\"", CalError::getLastErrorText().c_str());
     return false;
   } else {
     return true;
@@ -134,7 +150,7 @@ bool CAnimatedCoreModel::LoadSkeleton()
 
   if(!m_pCalCoreModel->loadCoreSkeleton(m_szSkeletonFilename.c_str()))
   {
-    LOGGER->AddNewLog(ELL_INFORMATION, "CAnimatedCoreModel::LoadSkeleton Error al Cal3D \"%s\"", CalError::getLastErrorText().c_str());
+    LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::LoadSkeleton Error al Cal3D \"%s\"", CalError::getLastErrorText().c_str());
     return false;
   } else {
     return true;
@@ -145,9 +161,9 @@ bool CAnimatedCoreModel::LoadAnimation(const string& _szName, const std::string&
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "CAnimatedCoreModel::LoadAnimation Carregant l'animació \"%s\"", _szFilename.c_str());
 
-  if(!m_pCalCoreModel->loadCoreAnimation(_szFilename,_szName))
+  if(m_pCalCoreModel->loadCoreAnimation(_szFilename,_szName) < 0)
   {
-    LOGGER->AddNewLog(ELL_INFORMATION, "CAnimatedCoreModel::LoadAnimation Error al Cal3D \"%s\"", CalError::getLastErrorText().c_str());
+    LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::LoadAnimation Error al Cal3D \"%s\"", CalError::getLastErrorText().c_str());
     return false;
   } else {
     return true;
