@@ -12,6 +12,8 @@
 #include "RenderableObjectsManager.h"
 #include "AnimatedModelManager.h"
 
+#include "AnimatedInstanceModel.h"
+
 #include <IndexedVertexs.h>
 #include "VertexsStructs.h"
 
@@ -33,6 +35,7 @@ CStaticMesh* g_pMesh = 0;
 CRenderableObjectsManager* g_pRenderableObjectsManager = 0;
 
 CAnimatedModelManager* g_pAnimatedModelManager = 0;
+CAnimatedInstanceModel* g_pAnimatedInstanceModel = 0;
 
 bool CTestProcess::Init()
 {
@@ -84,7 +87,7 @@ bool CTestProcess::Init()
 
   //g_tex = new CTexture();
   //g_tex->Load("Data/Assets/Textures/gohan.png");
-  g_tex = CORE->GetRenderManager()->GetTextureManager()->GetResource("Data/Textures/gohan.png");
+  g_tex = CORE->GetRenderManager()->GetTextureManager()->GetResource("Data/Textures/rocketl.jpg");
 
   g_pIndexedVertexs = new CIndexedVertexs<STEXTUREDVERTEX>(RENDER_MANAGER, (char*)g_vertex, g_index, 4, 6);
 
@@ -106,6 +109,9 @@ bool CTestProcess::Init()
   g_pAnimatedModelManager = new CAnimatedModelManager();
   g_pAnimatedModelManager->Load("Data/XML/AnimatedModels.xml");
 
+  g_pAnimatedInstanceModel = g_pAnimatedModelManager->GetInstance("bot");
+  g_pAnimatedInstanceModel->BlendCycle(0,0);
+
   //LOGGER->SaveLogsInFile();
 
   SetOk(true);
@@ -124,6 +130,7 @@ void CTestProcess::Release()
   CHECKED_DELETE(g_pIndexedVertexs)
   CHECKED_DELETE(g_pRenderableObjectsManager)
   CHECKED_DELETE(g_pAnimatedModelManager)
+  CHECKED_DELETE(g_pAnimatedInstanceModel)
   //CHECKED_DELETE(g_pMesh)
   //CHECKED_DELETE(g_pStaticMeshManager)
 	// ----
@@ -161,6 +168,7 @@ void CTestProcess::Update(float _fElapsedTime)
   m_pObject->SetYaw(l_fYaw-l_vVec.x*_fElapsedTime);
   m_pObject->SetPitch(l_fPitch-l_vVec.y*_fElapsedTime);
 
+  g_pAnimatedInstanceModel->Update(_fElapsedTime);
 }
 
 void CTestProcess::Render()
@@ -211,6 +219,8 @@ void CTestProcess::Render()
   l_pRM->SetTransform(t.Translate(Vect3f(-2.0f,0.0f,0.0f)) * r.SetFromAngleY(FLOAT_PI_VALUE/2.0f));
   g_tex->Activate(0);
   l_pRM->GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE,FALSE);
+
+
   //g_pMesh->Render(l_pRM);
 
 
@@ -220,14 +230,17 @@ void CTestProcess::Render()
   l_pRM->GetDevice()->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
   l_pRM->GetDevice()->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
   l_pRM->GetDevice()->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-
+  
   //g_pIndexedVertexs->Render(pRM);
 
   t.SetIdentity();
   r.SetIdentity();
-  l_pRM->SetTransform(t.Translate(Vect3f(-2.0f,0.0f,3.0f)) * r.SetFromAngleY(FLOAT_PI_VALUE/2.0f));
+  l_pRM->SetTransform(t.Translate(Vect3f(-2.0f,2.0f,3.0f)));
+  
+  g_pAnimatedInstanceModel->Render(l_pRM);
 
-  //g_pIndexedVertexs->Render(pRM);
+  //g_tex->Activate(0);
+  //g_pIndexedVertexs->Render(l_pRM);
   
   //pRM->SetTransform(s.Scale(0.1f,0.1f,0.1f));
 

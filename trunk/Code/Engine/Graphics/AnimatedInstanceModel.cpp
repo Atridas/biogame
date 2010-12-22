@@ -13,8 +13,11 @@
 bool CAnimatedInstanceModel::LoadVertexBuffer(CRenderManager *_pRM)
 {
   LPDIRECT3DDEVICE9 l_pDevice = _pRM->GetDevice();
-  l_pDevice->CreateVertexBuffer(sizeof(SNORMALTEXTUREDVERTEX)*m_iNumVtxs,0,SNORMALTEXTUREDVERTEX::GetVertexType(),D3DPOOL_DEFAULT,&m_pVB,NULL);
-  l_pDevice->CreateIndexBuffer(sizeof(unsigned short)*m_iNumFaces*3,0,D3DFMT_INDEX16,D3DPOOL_DEFAULT,&m_pIB,NULL);
+  l_pDevice->CreateVertexBuffer(sizeof(SNORMALTEXTUREDVERTEX)*m_iNumVtxs,D3DUSAGE_WRITEONLY|D3DUSAGE_DYNAMIC,SNORMALTEXTUREDVERTEX::GetVertexType(),D3DPOOL_DEFAULT,&m_pVB,NULL);
+
+  _D3DFORMAT l_IndexFormat = (sizeof(CalIndex) == 2)? D3DFMT_INDEX16 : D3DFMT_INDEX32;
+
+  l_pDevice->CreateIndexBuffer(sizeof(CalIndex)*m_iNumFaces*3,0,l_IndexFormat,D3DPOOL_DEFAULT,&m_pIB,NULL);
 
   return false;
 }
@@ -28,7 +31,8 @@ void CAnimatedInstanceModel::LoadTextures(CRenderManager *_pRM)
   for(int l_iTexId = 0; l_iTexId < l_iNumTextures; l_iTexId++)
   {
     const string& l_szTexName = m_pAnimatedCoreModel->GetTextureName(l_iTexId);
-    m_vTextureList.push_back(l_pTM->GetResource(l_szTexName));
+    CTexture* tex = l_pTM->GetResource(l_szTexName);
+    m_vTextureList.push_back(tex);
   }
 
 }
@@ -64,6 +68,9 @@ void CAnimatedInstanceModel::RenderModelBySoftware(CRenderManager *_pRM)
   int l_iMeshCount;
   l_iMeshCount = pCalRenderer->getMeshCount();
 
+  //Això pot petar!!!
+  vector<CTexture *>::iterator l_itTexture = m_vTextureList.begin();
+
   // render all meshes of the model
   int l_iMeshId;
   for(l_iMeshId = 0; l_iMeshId < l_iMeshCount; l_iMeshId++)
@@ -79,6 +86,8 @@ void CAnimatedInstanceModel::RenderModelBySoftware(CRenderManager *_pRM)
       // select mesh and submesh for further data access
       if(pCalRenderer->selectMeshSubmesh(l_iMeshId, l_iSubmeshId))
       {
+        (*l_itTexture)->Activate(0);
+        l_itTexture++;
 		   
 		    // Get vertexbuffer from the model		  		  
 		    SNORMALTEXTUREDVERTEX* l_pVertices;
@@ -88,18 +97,17 @@ void CAnimatedInstanceModel::RenderModelBySoftware(CRenderManager *_pRM)
         int l_iVertexCount = pCalRenderer->getVerticesNormalsAndTexCoords((float*)l_pVertices);
 		    m_pVB->Unlock();
 		  
-		    CalIndex *meshFaces;
+		    CalIndex *l_pMeshFaces;
 
         int l_iFaceCount;
 
-		    m_pIB->Lock(l_iIBCursor* 3*sizeof(CalIndex), pCalRenderer->getFaceCount()*3* sizeof(CalIndex), (void**)&meshFaces,dwIBLockFlags);
+		    m_pIB->Lock(l_iIBCursor* 3*sizeof(CalIndex), pCalRenderer->getFaceCount()*3* sizeof(CalIndex), (void**)&l_pMeshFaces,dwIBLockFlags);
 
-		    l_iFaceCount = pCalRenderer->getFaces(meshFaces);
+		    l_iFaceCount = pCalRenderer->getFaces(l_pMeshFaces);
 		    m_pIB->Unlock();
 
 
         l_pDevice->SetRenderState(D3DRS_CULLMODE,D3DCULL_NONE);
-        l_pDevice->SetTexture(0,(LPDIRECT3DTEXTURE9)pCalRenderer->getMapUserData(0));
           
 		    l_pDevice->DrawIndexedPrimitive(
 			    D3DPT_TRIANGLELIST,
@@ -162,7 +170,7 @@ void CAnimatedInstanceModel::InitD3D(CRenderManager *_pRM)
   {
     LOGGER->AddNewLog(ELL_WARNING,"CAnimatedInstanceModel:: LoadVertexBuffer retorna false.");
   }
-
+  LoadTextures(_pRM);
 }
 
 void CAnimatedInstanceModel::Release()
