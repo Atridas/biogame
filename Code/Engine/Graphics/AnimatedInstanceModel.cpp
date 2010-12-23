@@ -170,6 +170,8 @@ void CAnimatedInstanceModel::Initialize(CAnimatedCoreModel *_pAnimatedCoreModel)
   }
 
   InitD3D(RENDER_MANAGER);
+
+  SetOk(true);
 }
 
 void CAnimatedInstanceModel::InitD3D(CRenderManager *_pRM)
