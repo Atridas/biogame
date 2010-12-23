@@ -41,6 +41,23 @@ inline uint16 GetVertexSize(uint16 _usVertexType)
   return size;
 }
 
+inline uint16 GetTextureNum(uint16 _usVertexType)
+{
+  uint16 num = 0;
+  if(_usVertexType & VERTEX_TYPE_TEXTURE1)
+  {
+    num += 1;
+  } else if(_usVertexType & VERTEX_TYPE_TEXTURE2)
+  {
+    num += 2;
+  }
+  if(_usVertexType & (VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL) )
+  {
+    num += 2;
+  }
+  return num;
+}
+
 struct SDIFFUSEVERTEX
 {
 	float x, y, z;

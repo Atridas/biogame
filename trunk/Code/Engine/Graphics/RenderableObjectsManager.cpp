@@ -25,7 +25,7 @@ CRenderableObject* CRenderableObjectsManager::AddMeshInstance(
   CInstanceMesh* l_pInstanceMesh = new CInstanceMesh(_szInstanceName);
   if(!l_pInstanceMesh->Init(_szCoreMeshName))
   {
-    LOGGER->AddNewLog(ELL_WARNING, "CRenderableObjectsManager:: No s'ha pogut carregar el CInstanceMesh \"%s\" de la core \"%s\"", _szInstanceName, _szCoreMeshName);
+    LOGGER->AddNewLog(ELL_WARNING, "CRenderableObjectsManager:: No s'ha pogut carregar el CInstanceMesh \"%s\" de la core \"%s\"", _szInstanceName.c_str(), _szCoreMeshName.c_str());
     delete l_pInstanceMesh;
     return 0;
   }

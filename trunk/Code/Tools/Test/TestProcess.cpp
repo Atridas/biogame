@@ -110,7 +110,7 @@ bool CTestProcess::Init()
   g_pAnimatedModelManager->Load("Data/XML/AnimatedModels.xml");
 
   g_pAnimatedInstanceModel = g_pAnimatedModelManager->GetInstance("bot");
-  g_pAnimatedInstanceModel->BlendCycle(0,0);
+  g_pAnimatedInstanceModel->BlendCycle(1,0);
 
   //LOGGER->SaveLogsInFile();
 
@@ -235,7 +235,8 @@ void CTestProcess::Render()
 
   t.SetIdentity();
   r.SetIdentity();
-  l_pRM->SetTransform(t.Translate(Vect3f(-2.0f,2.0f,3.0f)));
+  r.RotByAngleX(-FLOAT_PI_VALUE/2);
+  l_pRM->SetTransform(t.Translate(Vect3f(-2.0f,0.0f,3.0f)) * r);
   
   g_pAnimatedInstanceModel->Render(l_pRM);
 

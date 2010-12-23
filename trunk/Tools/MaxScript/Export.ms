@@ -59,6 +59,7 @@ function GetVertexType _material =
 
 function ExportMaterial _material _file _relativePath = 
 (
+	/*
 	local l_cont = 0
 	if _material.diffuseMapEnable == true and  _material.diffuseMap != undefined then
 	(
@@ -83,6 +84,7 @@ function ExportMaterial _material _file _relativePath =
 	--- lo mismo
 	
 	WriteShort _file l_cont #unsigned
+	*/
 	local l_texture
 	
 	if _material.diffuseMapEnable == true and  _material.diffuseMap != undefined then
@@ -251,7 +253,7 @@ function WriteVertexs _File _VertexList _VertexType =
 )
 function WriteIndexs _File _IndexList =
 (
-	WriteShort _File _IndexList.count #unsigned
+	WriteLong _File _IndexList.count #unsigned
 	for i= 1 to _IndexList.count do
 	(
 		WriteShort _File _IndexList[i] #unsigned
@@ -274,17 +276,24 @@ function SameVertex _Vertex1 _Vertex2=
 	return true
 )
 
-function AddVertex _VertexList_ _Vertex =
+function AddVertex _VertexList_ _MaterialID _Vertex =
 (
+	/*
 	for i = 1 to _VertexList_.count do
 	(
 		if SameVertex _VertexList_[i] _Vertex then
 		(
 			return i-1
 		)
+	)*/
+	
+	local l_index = uab_add_vtx_on_vertex_buffer _MaterialID _Vertex
+	
+	if l_index == _VertexList_[_MaterialID].count then
+	(
+		append _VertexList_[_MaterialID] _Vertex
 	)
-	append _VertexList_ _Vertex
-	return _VertexList_.count - 1
+	return l_index
 )
 
 function AddIndex _IndexList_ _Index =
@@ -294,7 +303,7 @@ function AddIndex _IndexList_ _Index =
 
 --construim les llistes de vertexos i indexos
 function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
-(
+(	
 	-- si tenim un multi material, creem les llistes de vertexos i indexos, sino, en creem només una
 	-- per simplificar les coses després a l'hora d'escriure'ls
 	for i=1 to _numMaterials do
@@ -302,6 +311,9 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		append VertexList_ #()
 		append IndexList_ #()
 	)
+	
+	-- netejem els vertex buffers del plug-in
+	uab_clear_vertex_buffer()
 	
 	local l_materialID
 	local l_invTransform = inverse _Obj.transform
@@ -364,18 +376,26 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		local index2
 		local index3
 		
-		index1 = AddVertex VertexList_[l_materialID] VertexOut1
-		index2 = AddVertex VertexList_[l_materialID] VertexOut2
-		index3 = AddVertex VertexList_[l_materialID] VertexOut3
+		index1 = AddVertex VertexList_ l_materialID VertexOut1
+		index2 = AddVertex VertexList_ l_materialID VertexOut2
+		index3 = AddVertex VertexList_ l_materialID VertexOut3
 		
 		AddIndex IndexList_[l_materialID] index1
 		AddIndex IndexList_[l_materialID] index3
 		AddIndex IndexList_[l_materialID] index2
 	)
+	
+	-- tornem a netejar els vertex buffers del plug-in
+	uab_clear_vertex_buffer()
 )
 
-function ExportMesh _object _filename _relativeTexturePath = 
+function ExportMesh _object0 _filename _relativeTexturePath = 
 (
+	
+	_object = copy _object0
+	convertToMesh _object
+	
+	
 	local l_header = 0xAAAA
 	local l_footer  =  0xFFFF
 	local l_file = fopen _filename "wb"
@@ -432,6 +452,8 @@ function ExportMesh _object _filename _relativeTexturePath =
 	
 	fflush l_file
 	fclose l_file
+	
+	delete _object
 	
 	return true;
 )
