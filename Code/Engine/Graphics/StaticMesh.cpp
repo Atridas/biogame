@@ -186,7 +186,8 @@ bool CStaticMesh::Load(const string &_szFileName)
     m_Textures.push_back(vector<CTexture*>());
     //Vertex Type
     l_File.read((char*)&(l_pusVertexType[i]), sizeof(uint16));
-    l_File.read((char*)&(l_pusTextureNum[i]), sizeof(uint16));
+    //l_File.read((char*)&(l_pusTextureNum[i]), sizeof(uint16));
+    l_pusTextureNum[i] = GetTextureNum(l_pusVertexType[i]);
 
     for(int j = 0; j < l_pusTextureNum[i]; j++)
     {
@@ -227,9 +228,9 @@ bool CStaticMesh::Load(const string &_szFileName)
     l_File.read(&l_pVertexBuffer[0], l_usVertexSize*l_VertexCount);
   
   
-    uint16 l_IndexCount;
+    uint32 l_IndexCount;
   
-    l_File.read((char*)&l_IndexCount, sizeof(uint16));
+    l_File.read((char*)&l_IndexCount, sizeof(uint32));
 
     uint16 * l_pIndexList = new uint16[l_IndexCount];
     l_File.read((char *)&l_pIndexList[0], sizeof(uint16)*l_IndexCount);
@@ -279,7 +280,7 @@ bool CStaticMesh::Load(const string &_szFileName)
 
   if(l_usHelper != FOOTER)
   {
-    LOGGER->AddNewLog(ELL_WARNING, "CStaticMesh::Load reading file with incorrect header");
+    LOGGER->AddNewLog(ELL_WARNING, "CStaticMesh::Load reading file with incorrect footer");
     CHECKED_DELETE_ARRAY(l_pusVertexType);
     CHECKED_DELETE_ARRAY(l_pusTextureNum);
     l_File.close();
