@@ -14,8 +14,8 @@
   <InputManager exclusiveMouse="true"/>
   <ActionToInput file="./Data/XML/actions.xml"/>
 
-  <!-- RenderableObjectsManager file="Data/XML/RenderableObjects.xml" -->
-  <RenderableObjectsManager file="Data/Levels/Level -2/XML/RenderableObjects.xml">
+  <RenderableObjectsManager file="Data/XML/RenderableObjects.xml">
+  <!-- RenderableObjectsManager file="Data/Levels/Level -2/XML/RenderableObjects.xml" -->
   <!-- RenderableObjectsManager file="Data/Levels/Hangar/XML/RenderableObjects.xml" -->
     <!--
     <Level xml="Data/Hangar/XML/RenderableObjects.xml"/>

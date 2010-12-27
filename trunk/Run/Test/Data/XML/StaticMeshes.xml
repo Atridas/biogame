@@ -2,6 +2,4 @@
 <meshes>
 	<mesh name="BOX_Lightmap" path="Data/Meshes/BOX_Lightmap.mesh"/>
 	<mesh name="BoxGohan" path="Data/Meshes/BoxGohan.mesh"/>
-	<mesh name="BoxGohan01" path="Data/Meshes/BoxGohan01.mesh"/>
-	<mesh name="BoxGohan02" path="Data/Meshes/BoxGohan02.mesh"/>
 </meshes>
