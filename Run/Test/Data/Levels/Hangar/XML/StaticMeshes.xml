@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <meshes>
-	<mesh name="Parteno" path="Data/Levels/Hangar/Meshes/Parteno.mesh"/>
-</meshes>
+	<mesh name="Base Hangar" path="Data/Levels/Hangar/Meshes/Base Hangar.mesh"/>
+	<mesh name="Referencia" path="Data/Levels/Hangar/Meshes/Referencia.mesh"/>
+	<mesh name="Pasarela superior" path="Data/Levels/Hangar/Meshes/Pasarela superior.mesh"/>
+	<mesh name="Container" path="Data/Levels/Hangar/Meshes/Container.mesh"/>
+	<mesh name="Container01" path="Data/Levels/Hangar/Meshes/Container01.mesh"/>
+	<mesh name="Container02" path="Data/Levels/Hangar/Meshes/Container02.mesh"/>
+	<mesh name="Container04" path="Data/Levels/Hangar/Meshes/Container04.mesh"/>
+	<mesh name="Container05" path="Data/Levels/Hangar/Meshes/Container05.mesh"/>
+	<mesh name="Container06" path="Data/Levels/Hangar/Meshes/Container06.mesh"/>
+	<mesh name="Container07" path="Data/Levels/Hangar/Meshes/Container07.mesh"/>
+	<mesh name="Container08" path="Data/Levels/Hangar/Meshes/Container08.mesh"/>
+	<mesh name="Container09" path="Data/Levels/Hangar/Meshes/Container09.mesh"/>
+	<mesh name="Monta-carregas" path="Data/Levels/Hangar/Meshes/Monta-carregas.mesh"/>

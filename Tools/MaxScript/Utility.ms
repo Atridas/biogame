@@ -142,6 +142,18 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		)
 	)
 	
+	function GetCore _cores _object =
+	(
+		for i=1 to _cores.count do
+		(
+			if areNodesInstances _cores[i] _object then
+			(
+				return _cores[i]
+			)
+		)
+		return undefined
+	)
+	
 	function ExportMeshManager _objects =
 	(
 		local l_MeshTotalPath = getMeshPath()
@@ -214,7 +226,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		return true
 	)
 	
-	function ExportRenderableObjectsManager _objects =
+	function ExportRenderableObjectsManager _objects _cores =
 	(
 			
 		local l_level = dropNivell.items[dropNivell.selection]
@@ -239,7 +251,9 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		(
 			local l_object = _objects[i]
 			
-			l_params = #(#("name",l_object.name),#("class","StaticMesh"),#("resource",l_object.name))
+			local l_core = GetCore _cores l_object
+			
+			l_params = #(#("name",l_object.name),#("class","StaticMesh"),#("resource",l_core.name))
 		
 				
 			local l_aux = "" as stringStream
@@ -282,7 +296,16 @@ utility BioUtility "Eon-Utility" width:160 height:312
 	
 	on buttonMeshManager pressed do
 	(
-		if ExportMeshManager $* then
+		l_cores = #()
+		for i=1 to $*.count do
+		(
+			if GetCore l_cores $*[i] == undefined then
+			(
+				append l_cores $*[i]
+			)
+		)
+		
+		if ExportMeshManager l_cores then
 		(
 			ShowMessage "Export finalitzat"
 		)
@@ -290,11 +313,20 @@ utility BioUtility "Eon-Utility" width:160 height:312
 	
 	on buttonScene pressed do
 	(
-		if ExportMeshManager $* then
+		l_cores = #()
+		for i=1 to $*.count do
+		(
+			if GetCore l_cores $*[i] == undefined then
+			(
+				append l_cores $*[i]
+			)
+		)
+		
+		if ExportMeshManager l_cores then
 		(
 			ShowMessage "Export mesh manager finalitzat"
 		)
-		if ExportRenderableObjectsManager $* then
+		if ExportRenderableObjectsManager $* l_cores then
 		(
 			ShowMessage "Export scene finalitzat"
 		)
