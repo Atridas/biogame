@@ -75,6 +75,12 @@ bool CAnimatedModelManager::Reload()
   return l_res;
 }
 
+CAnimatedCoreModel* CAnimatedModelManager::GetCore(const std::string &_szName)
+{
+  LOGGER->AddNewLog(ELL_INFORMATION,"CAnimatedModelManager::GetCore Cercant la core \"%s\"",_szName.c_str());
+  return GetResource(_szName);
+}
+
 CAnimatedCoreModel* CAnimatedModelManager::GetCore(const std::string &_szName, const std::string &_szPath)
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"CAnimatedModelManager::GetCore Carregant la core \"%s\" a \"%s\"",_szName.c_str(),_szPath.c_str());
