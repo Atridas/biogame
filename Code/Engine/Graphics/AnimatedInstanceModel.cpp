@@ -149,29 +149,39 @@ void CAnimatedInstanceModel::Update(float _fElapsedTime)
 
 void CAnimatedInstanceModel::Initialize(CAnimatedCoreModel *_pAnimatedCoreModel)
 {
-  m_pAnimatedCoreModel = _pAnimatedCoreModel;
-  CalCoreModel* l_pCoreModel = m_pAnimatedCoreModel->GetCoreModel();
-  m_pCalModel = new CalModel(l_pCoreModel);
-
-  m_iNumVtxs = 0;
-  m_iNumFaces = 0;
-
-  int l_iMeshId;
-  for(l_iMeshId = 0; l_iMeshId < l_pCoreModel->getCoreMeshCount(); l_iMeshId++)
+  if(_pAnimatedCoreModel != NULL)
   {
-    m_pCalModel->attachMesh(l_iMeshId);
-    CalCoreMesh* l_pCoreMesh = l_pCoreModel->getCoreMesh(l_iMeshId);
+    LOGGER->AddNewLog(ELL_INFORMATION,"CAnimatedInstanceModel::Initialize Inicialitzant un AnimatedCoreModel.");
 
-    for(int l_iSubMeshId = 0; l_iSubMeshId < l_pCoreMesh->getCoreSubmeshCount(); l_iSubMeshId++)
+    m_pAnimatedCoreModel = _pAnimatedCoreModel;
+    CalCoreModel* l_pCoreModel = m_pAnimatedCoreModel->GetCoreModel();
+    m_pCalModel = new CalModel(l_pCoreModel);
+
+    m_iNumVtxs = 0;
+    m_iNumFaces = 0;
+
+    int l_iMeshCount = l_pCoreModel->getCoreMeshCount();
+    for(int l_iMeshId = 0; l_iMeshId < l_iMeshCount; l_iMeshId++)
     {
-      m_iNumVtxs += l_pCoreMesh->getCoreSubmesh(l_iSubMeshId)->getVertexCount();
-      m_iNumFaces += l_pCoreMesh->getCoreSubmesh(l_iSubMeshId)->getFaceCount();
+      LOGGER->AddNewLog(ELL_INFORMATION,"CAnimatedInstanceModel::Initialize Afegint mesh %d.", l_iMeshId);
+
+      m_pCalModel->attachMesh(l_iMeshId);
+      CalCoreMesh* l_pCoreMesh = l_pCoreModel->getCoreMesh(l_iMeshId);
+
+      int l_iSubmeshCount = l_pCoreMesh->getCoreSubmeshCount();
+      for(int l_iSubMeshId = 0; l_iSubMeshId < l_iSubmeshCount; l_iSubMeshId++)
+      {
+        m_iNumVtxs += l_pCoreMesh->getCoreSubmesh(l_iSubMeshId)->getVertexCount();
+        m_iNumFaces += l_pCoreMesh->getCoreSubmesh(l_iSubMeshId)->getFaceCount();
+      }
     }
-  }
 
-  InitD3D(RENDER_MANAGER);
+    InitD3D(RENDER_MANAGER);
 
-  SetOk(true);
+    SetOk(true);
+
+  }else
+    LOGGER->AddNewLog(ELL_WARNING,"CAnimatedInstanceModel::Initialize L'AnimatedCoreModel proporcionat es NULL.");
 }
 
 void CAnimatedInstanceModel::InitD3D(CRenderManager *_pRM)
