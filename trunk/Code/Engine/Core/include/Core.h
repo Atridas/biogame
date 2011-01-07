@@ -13,6 +13,7 @@ class CInputManager;
 struct SInitParams;
 class CActionToInput;
 class CRenderableObjectsManager;
+class CAnimatedModelManager;
 // --------------------------
 
 /**
@@ -91,6 +92,7 @@ public:
    * @return L'ActionToInput.
   **/
   CActionToInput*     GetActionToInput      () const                        {return m_pActionToInput;}
+  //CAnimatedModelManager*  GetAnimatedModelManager      () const             {return m_pAnimatedModelManager;}
 
 private:
 
@@ -130,5 +132,9 @@ private:
    * RenderableObjectsManager.
   **/
   CRenderableObjectsManager*  m_pRenderableObjectsManager;
+  /**
+   * AnimatedModelManager.
+  **/
+  //CAnimatedModelManager*  m_pAnimatedModelManager;
 };
 

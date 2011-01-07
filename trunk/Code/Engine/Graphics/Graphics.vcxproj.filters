@@ -64,6 +64,9 @@
     <Filter Include="AnimatedModel\AnimatedInstanceModel">
       <UniqueIdentifier>{ced25332-831b-4e63-b82c-281f95d60c99}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AnimatedModel\RenderableAnimatedInstanceModel">
+      <UniqueIdentifier>{aada233b-7012-4223-bb63-9fac627959df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -119,6 +122,9 @@
     </ClCompile>
     <ClCompile Include="AnimatedModelManager.cpp">
       <Filter>AnimatedModel\AnimatedModelManager</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableAnimatedInstanceModel.cpp">
+      <Filter>AnimatedModel\RenderableAnimatedInstanceModel</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="include\AnimatedModelManager.h">
       <Filter>AnimatedModel\AnimatedModelManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RenderableAnimatedInstanceModel.h">
+      <Filter>AnimatedModel\RenderableAnimatedInstanceModel</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

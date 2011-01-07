@@ -10,6 +10,7 @@ struct SRenderManagerParams;
 class CCamera;
 class CTextureManager;
 class CStaticMeshManager;
+class CAnimatedModelManager;
 //-------------------------------------------------------------------
 
 class CRenderManager:
@@ -20,7 +21,7 @@ public:
 	                      CRenderManager    (void):	m_pD3D(0), m_pD3DDevice(0),
 												                          m_uWidth(0), m_uHeight(0),
                                                   m_pCamera(0), m_pTextureManager(0),
-                                                  m_pStaticMeshManager(0)
+                                                  m_pStaticMeshManager(0),m_pAnimatedModelManager(0)
                                                                                   {};
 
 
@@ -54,6 +55,7 @@ public:
   LPDIRECT3DDEVICE9     GetDevice           () const {return m_pD3DDevice;};
   CTextureManager*      GetTextureManager   () const {return m_pTextureManager;};
   CStaticMeshManager*   GetStaticMeshManager() const {return m_pStaticMeshManager;};
+  CAnimatedModelManager*  GetAnimatedModelManager() const {return m_pAnimatedModelManager;};
 
 public:
 	void                  Release					  ();
@@ -70,5 +72,6 @@ private:
   CCamera*              m_pCamera;
   CTextureManager*      m_pTextureManager;
   CStaticMeshManager*   m_pStaticMeshManager;
+  CAnimatedModelManager*  m_pAnimatedModelManager;
 };
 

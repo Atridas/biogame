@@ -23,6 +23,9 @@
     <Level xml="Data/Level -2/XML/RenderableObjects.xml"/>
     -->
   </RenderableObjectsManager>
+
+  <!--<AnimatedModelManager file="Data/XML/AnimatedModels.xml">
+  </AnimatedModelManager>-->
   
   <!--<Console_Logger activateConsole="true" Log_Level="INFORMATION" activateLogger="true" linesPerPageInLogger="20"/>
   <Mouse exclusiveModeinMouse="true" drawPointerMouse="true"/>

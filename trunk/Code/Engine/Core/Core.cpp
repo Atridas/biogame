@@ -10,6 +10,7 @@
 #include <InputManager.h>
 #include <ActionToInput.h>
 #include <RenderableObjectsManager.h>
+#include <AnimatedModelManager.h>
 
 bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
 {
@@ -20,7 +21,8 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pFontManager              = new CFontManager();
   m_pInputManager             = new CInputManager();
   m_pActionToInput            = new CActionToInput();
-  m_pRenderableObjectsManager  = new CRenderableObjectsManager();
+  m_pRenderableObjectsManager = new CRenderableObjectsManager();
+  //m_pAnimatedModelManager     = new CAnimatedModelManager();
 
   m_pRenderManager->Init(hWnd,_InitParams.RenderManagerParams);
   m_pLanguageManager->Init(_InitParams.LanguageManagerParams);
@@ -29,6 +31,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pActionToInput->Init(m_pInputManager,_InitParams.ActionToInputParams.pcFile);
 
   m_pRenderableObjectsManager->Load(_InitParams.RenderableObjectsManager.vXMLFiles);
+  //m_pAnimatedModelManager->Load(_InitParams.);
 
   SetOk(true);
 
@@ -48,6 +51,7 @@ void CCore::Release()
   CHECKED_DELETE(m_pFontManager);
   CHECKED_DELETE(m_pLanguageManager);
   CHECKED_DELETE(m_pRenderManager);
+  //CHECKED_DELETE(m_pAnimatedModelManager);
 }
 
 void CCore::Update(float elapsedTime)

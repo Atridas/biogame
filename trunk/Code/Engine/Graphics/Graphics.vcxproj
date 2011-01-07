@@ -100,6 +100,7 @@
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="InstanceMesh.cpp" />
     <ClCompile Include="Object3D.cpp" />
+    <ClCompile Include="RenderableAnimatedInstanceModel.cpp" />
     <ClCompile Include="RenderableObject.cpp" />
     <ClCompile Include="RenderableObjectsManager.cpp" />
     <ClCompile Include="RenderManager.cpp" />
@@ -120,6 +121,7 @@
     <ClInclude Include="include\IndexedVertexs.h" />
     <ClInclude Include="include\InstanceMesh.h" />
     <ClInclude Include="include\Object3D.h" />
+    <ClInclude Include="include\RenderableAnimatedInstanceModel.h" />
     <ClInclude Include="include\RenderableObject.h" />
     <ClInclude Include="include\RenderableObjectsManager.h" />
     <ClInclude Include="include\RenderableVertexs.h" />
