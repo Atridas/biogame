@@ -35,8 +35,8 @@ void CRenderableAnimatedInstanceModel::RenderRenderableObject(CRenderManager* _p
 
 
 
-//void CRenderableAnimatedInstanceModel::Release()
-//{
-//  //CHECKED_DELETE(m_);
-//}
+void CRenderableAnimatedInstanceModel::Release()
+{
+  CHECKED_DELETE(m_pAnimatedInstanceModel);
+}
 

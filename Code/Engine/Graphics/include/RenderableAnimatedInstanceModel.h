@@ -19,7 +19,7 @@ class CRenderableAnimatedInstanceModel: public CRenderableObject
     virtual void  RenderRenderableObject(CRenderManager* _pRM);
 
   protected:
-    virtual void          Release                   (){};
+    virtual void          Release                   ();
 
   private:
     CAnimatedInstanceModel * m_pAnimatedInstanceModel;

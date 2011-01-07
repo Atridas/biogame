@@ -10,7 +10,7 @@
 #include <InputManager.h>
 #include <ActionToInput.h>
 #include <RenderableObjectsManager.h>
-#include <AnimatedModelManager.h>
+//#include <AnimatedModelManager.h>
 
 bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
 {
