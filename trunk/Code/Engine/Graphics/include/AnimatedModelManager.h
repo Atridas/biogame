@@ -65,8 +65,9 @@ public:
   /**
    * Mètode d'obtenció d'AnimatedInstanceModel.
    * Aquest mètode cercarà l'AnimatedCoreModel del nom especificat, i en cas d'existir en retornarà un AnimatedInstanceModel d'aquest.
+   * Important tenir en compte que aquesta instància NO s'allivera al manager i cal que l'usuari l'alliveri.
    * @param _szName Identificador de l'AnimatedCoreModel a buscar.
-   * @return L'AnimatedInstanceModel si existeix, NULL sino.
+   * @return L'AnimatedInstanceModel si existeix la core, NULL sino.
   **/
   CAnimatedInstanceModel* GetInstance(const std::string& _szName);
   

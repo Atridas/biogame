@@ -130,6 +130,7 @@ void CTestProcess::Release()
   CHECKED_DELETE(g_pRenderableObjectsManager)
   CHECKED_DELETE(g_pAnimatedModelManager)
   CHECKED_DELETE(g_pAnimatedInstanceModel)
+  CHECKED_DELETE(g_pRenderableAIModel)
   //CHECKED_DELETE(g_pMesh)
   //CHECKED_DELETE(g_pStaticMeshManager)
 	// ----
