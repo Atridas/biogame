@@ -79,3 +79,7 @@ using namespace std;
  * @define Macro d'accés a l'Input Manager.
 **/
 #define INPUT_MANAGER CORE->GetInputManager()
+/**
+ * @define Macro d'accés a Animated Model Manager.
+**/
+#define ANIMATED_MANAGER RENDER_MANAGER->GetAnimatedModelManager()

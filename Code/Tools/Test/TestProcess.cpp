@@ -13,6 +13,7 @@
 #include "AnimatedModelManager.h"
 
 #include "AnimatedInstanceModel.h"
+#include "RenderableAnimatedInstanceModel.h"
 
 #include <IndexedVertexs.h>
 #include "VertexsStructs.h"
@@ -36,6 +37,7 @@ CRenderableObjectsManager* g_pRenderableObjectsManager = 0;
 
 CAnimatedModelManager* g_pAnimatedModelManager = 0;
 CAnimatedInstanceModel* g_pAnimatedInstanceModel = 0;
+CRenderableAnimatedInstanceModel* g_pRenderableAIModel = 0;
 
 bool CTestProcess::Init()
 {
@@ -105,14 +107,11 @@ bool CTestProcess::Init()
   //g_pRenderableObjectsManager = new CRenderableObjectsManager();
   //g_pRenderableObjectsManager->Load("Data/XML/RenderableObjects.xml");
 
-
-  g_pAnimatedModelManager = new CAnimatedModelManager();
-  g_pAnimatedModelManager->Load("Data/XML/AnimatedModels.xml");
-
-  g_pAnimatedInstanceModel = g_pAnimatedModelManager->GetInstance("bot");
-  g_pAnimatedInstanceModel->BlendCycle(1,0);
-
-  //LOGGER->SaveLogsInFile();
+  ANIMATED_MANAGER->Load("Data/XML/AnimatedModels.xml");
+ 
+  g_pRenderableAIModel = new CRenderableAnimatedInstanceModel("Model Bot");
+  g_pRenderableAIModel->Init("bot");
+  g_pRenderableAIModel->GetAnimatedInstanceModel()->BlendCycle(1,0);
 
   SetOk(true);
   return IsOk();
@@ -168,7 +167,8 @@ void CTestProcess::Update(float _fElapsedTime)
   m_pObject->SetYaw(l_fYaw-l_vVec.x*_fElapsedTime);
   m_pObject->SetPitch(l_fPitch-l_vVec.y*_fElapsedTime);
 
-  g_pAnimatedInstanceModel->Update(_fElapsedTime);
+  //g_pAnimatedInstanceModel->Update(_fElapsedTime);
+  g_pRenderableAIModel->GetAnimatedInstanceModel()->Update(_fElapsedTime);
 }
 
 void CTestProcess::Render()
@@ -238,7 +238,8 @@ void CTestProcess::Render()
   r.RotByAngleX(-FLOAT_PI_VALUE/2);
   l_pRM->SetTransform(t.Translate(Vect3f(-2.0f,0.0f,3.0f)) * r);
   
-  g_pAnimatedInstanceModel->Render(l_pRM);
+  //g_pAnimatedInstanceModel->Render(l_pRM);
+  g_pRenderableAIModel->GetAnimatedInstanceModel()->Render(l_pRM);
 
   //g_tex->Activate(0);
   //g_pIndexedVertexs->Render(l_pRM);
