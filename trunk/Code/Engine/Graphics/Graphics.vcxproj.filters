@@ -67,6 +67,21 @@
     <Filter Include="AnimatedModel\RenderableAnimatedInstanceModel">
       <UniqueIdentifier>{aada233b-7012-4223-bb63-9fac627959df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Lights">
+      <UniqueIdentifier>{1e8f55d6-65d4-48a1-9679-20a345809126}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights\LightManager">
+      <UniqueIdentifier>{f3955089-6989-41a9-9564-72b249e2412c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights\DirectionalLight">
+      <UniqueIdentifier>{d8de0390-5cef-487d-8425-bfb590c8a424}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights\OmniLight">
+      <UniqueIdentifier>{ded3d3d6-496e-4049-b1b4-a8e000bcf984}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights\SpotLight">
+      <UniqueIdentifier>{6128b30f-f93f-4f4d-8a5a-075a90330764}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -125,6 +140,21 @@
     </ClCompile>
     <ClCompile Include="RenderableAnimatedInstanceModel.cpp">
       <Filter>AnimatedModel\RenderableAnimatedInstanceModel</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="LightManager.cpp">
+      <Filter>Lights\LightManager</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionalLight.cpp">
+      <Filter>Lights\DirectionalLight</Filter>
+    </ClCompile>
+    <ClCompile Include="OmniLight.cpp">
+      <Filter>Lights\OmniLight</Filter>
+    </ClCompile>
+    <ClCompile Include="SpotLight.cpp">
+      <Filter>Lights\SpotLight</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +220,21 @@
     </ClInclude>
     <ClInclude Include="include\RenderableAnimatedInstanceModel.h">
       <Filter>AnimatedModel\RenderableAnimatedInstanceModel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Light.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LightManager.h">
+      <Filter>Lights\LightManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DirectionalLight.h">
+      <Filter>Lights\DirectionalLight</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OmniLight.h">
+      <Filter>Lights\OmniLight</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SpotLight.h">
+      <Filter>Lights\SpotLight</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -301,6 +301,15 @@ function AddIndex _IndexList_ _Index =
 	append _IndexList_ _Index
 )
 
+function CreateColorLong _Color =
+(
+	local l_r = (floor _Color.r) as Integer64
+	local l_g = (floor _Color.g) as Integer64
+	local l_b = (floor _Color.b) as Integer64
+	local l_a = (floor _Color.a) as Integer64
+	return l_r * 256 * 256 * 256 + l_g * 256 * 256 + l_b * 256 + l_a
+)
+
 --construim les llistes de vertexos i indexos
 function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 (	
@@ -316,6 +325,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 	uab_clear_vertex_buffer()
 	
 	local l_materialID
+	local l_Color
 	local l_invTransform = inverse _Obj.transform
 	
 	local numFaces = getNumFaces _Obj
@@ -329,10 +339,12 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		if _numMaterials > 1 then -- agafem el material, en cas de ser multimaterial
 		(
 			l_materialID = getFaceMatID _Obj i
+			l_Color = CreateColorLong _Obj.material[l_materialID].diffuse
 		)
 		else
 		(
 			l_materialID = 1
+			l_Color = CreateColorLong _Obj.material.diffuse
 		)
 
 		-- vertex 1
@@ -345,7 +357,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		TUV = ChangeUVCoords TUV
 		
 		
-		CreateVertex pos normal TUV TUV 0 _VertexType[l_materialID] VertexOut1
+		CreateVertex pos normal TUV TUV l_Color _VertexType[l_materialID] VertexOut1
 		--format "%\n" VertexOut1
 
 		-- vertex 2
@@ -357,7 +369,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		TUV =  meshop.getMapVert _Obj 1 IdxsMap.y
 		TUV = ChangeUVCoords TUV
 
-		CreateVertex pos normal TUV TUV 0 _VertexType[l_materialID] VertexOut2
+		CreateVertex pos normal TUV TUV l_Color _VertexType[l_materialID] VertexOut2
 		--format "%\n" VertexOut2
 
 		-- vertex 3
@@ -369,7 +381,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		TUV =  meshop.getMapVert _Obj 1 IdxsMap.z
 		TUV = ChangeUVCoords TUV
 
-		CreateVertex pos normal TUV TUV 0 _VertexType[l_materialID] VertexOut3
+		CreateVertex pos normal TUV TUV l_Color _VertexType[l_materialID] VertexOut3
 		--format "%\n" VertexOut3
 		
 		local index1
