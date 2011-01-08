@@ -70,7 +70,7 @@ bool CTestProcess::Init()
     //                        m_pCube);
 
   m_pObject = new CObject3D();
-  m_pObject->SetPosition(Vect3f(-6,2,0));
+  m_pObject->SetPosition(Vect3f(-6,1.7f,0));
   m_pObjectCamera = new CFPSCamera(
     0.1f,
     100.0f,

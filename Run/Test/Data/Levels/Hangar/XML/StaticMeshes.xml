@@ -13,3 +13,13 @@
 	<mesh name="Container08" path="Data/Levels/Hangar/Meshes/Container08.mesh"/>
 	<mesh name="Container09" path="Data/Levels/Hangar/Meshes/Container09.mesh"/>
 	<mesh name="Monta-carregas" path="Data/Levels/Hangar/Meshes/Monta-carregas.mesh"/>
+	<mesh name="Container10" path="Data/Levels/Hangar/Meshes/Container10.mesh"/>
+	<mesh name="Container11" path="Data/Levels/Hangar/Meshes/Container11.mesh"/>
+	<mesh name="Container12" path="Data/Levels/Hangar/Meshes/Container12.mesh"/>
+	<mesh name="Container13" path="Data/Levels/Hangar/Meshes/Container13.mesh"/>
+	<mesh name="Container14" path="Data/Levels/Hangar/Meshes/Container14.mesh"/>
+	<mesh name="Container15" path="Data/Levels/Hangar/Meshes/Container15.mesh"/>
+	<mesh name="Container16" path="Data/Levels/Hangar/Meshes/Container16.mesh"/>
+	<mesh name="Monta-carregas01" path="Data/Levels/Hangar/Meshes/Monta-carregas01.mesh"/>
+	<mesh name="Base Hangar01" path="Data/Levels/Hangar/Meshes/Base Hangar01.mesh"/>
+</meshes>
