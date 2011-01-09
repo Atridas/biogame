@@ -5,24 +5,67 @@
 #include "RenderableVertexs.h"
 #include "RenderManager.h"
 
+/**
+ * Classe template d'Indexed Vertexs.
+ * Classe template que conté un Vèrtex Buffer i un Índex Buffer i els gestiona internament per facilitar-ne l'us.
+**/
 template<class T>
 class CIndexedVertexs:
   public CRenderableVertexs
 {
 protected:
+  /**
+   * Getter del tamany de vèrtex.
+   * @return El tamany del vèrtex en bytes.
+  **/
   inline size_t GetVertexSize() const {return sizeof(T);}
+  /**
+   * Getter del tamany de l'índex.
+   * @return El tamany de l'índex en bytes.
+  **/
   inline size_t GetIndexSize() const {return sizeof(unsigned short);}
+
 public:
-  CIndexedVertexs(CRenderManager *_pRM, char *_pVertexAddress, uint16 *_pIndexAddres, size_t _iVertexCount, size_t _iIndexCount);
+  /**
+   * Constructor.
+   * @param _pRM Render Manager.
+   * @param _pVertexAddress Adreça d'inici d'on s'allotgen els vèrtexs.
+   * @param _pIndexAddress Adreça d'inici d'on s'allotgen els índexs.
+   * @param _iVertexCount Nombre de vèrtexs allotjats.
+   * @param _iIndexCount Nombre d'índexs allotjats.
+  **/
+  CIndexedVertexs(CRenderManager *_pRM, char *_pVertexAddress, uint16 *_pIndexAddress, size_t _iVertexCount, size_t _iIndexCount);
+  /**
+   * Constructor.
+   * @param _pRM Render Manager.
+   * @param _pVertexAddress Adreça d'inici d'on s'allotgen els vèrtexs.
+   * @param _pIndexAddress Adreça d'inici d'on s'allotgen els índexs.
+   * @param _iVertexCount Nombre de vèrtexs allotjats.
+   * @param _iIndexCount Nombre d'índexs allotjats.
+  **/
   CIndexedVertexs(CRenderManager *_pRM, T *_pVertexAddress, uint16 *_pIndexAddres, size_t _iVertexCount, size_t _iIndexCount);
+  /**
+   * Destructor.
+   * Allibera els recursos abans de destruir-se.
+  **/
   virtual ~CIndexedVertexs(){};
+  /**
+   * Mètode de render.
+   * Aquest mètode renderitza els vèrtexs segons l'índex buffer especificat.
+   * @param _pRM Render Manager.
+   * @return True si s'ha renderitzat correctament, false sino.
+  **/
   virtual bool Render(CRenderManager *_pRM) const;
+  /**
+   * Getter del tipus de vèrtex.
+   * @return El tipus del vèrtex segons la codificació de DirectX9.
+  **/
   virtual inline unsigned short GetVertexType() const {return T::GetFVF();}
 };
 
 
 template<class T>
-CIndexedVertexs<T>::CIndexedVertexs(CRenderManager *_pRM, T *_pVertexAddress, uint16 *_pIndexAddres, size_t _iVertexCount, size_t _iIndexCount)
+CIndexedVertexs<T>::CIndexedVertexs(CRenderManager *_pRM, T *_pVertexAddress, uint16 *_pIndexAddress, size_t _iVertexCount, size_t _iIndexCount)
 {
   m_iIndexCount   = _iIndexCount;
   m_iVertexCount  = _iVertexCount;
@@ -36,12 +79,12 @@ CIndexedVertexs<T>::CIndexedVertexs(CRenderManager *_pRM, T *_pVertexAddress, ui
   m_pVB->Unlock();
 
   m_pIB->Lock (0,   GetIndexSize()*_iIndexCount,    &l_p,0);
-  memcpy      (l_p, _pIndexAddres,                  GetIndexSize()*_iIndexCount);
+  memcpy      (l_p, _pIndexAddress,                 GetIndexSize()*_iIndexCount);
   m_pIB->Unlock();
 };
 
 template<class T>
-CIndexedVertexs<T>::CIndexedVertexs(CRenderManager *_pRM, char *_pVertexAddress, uint16 *_pIndexAddres, size_t _iVertexCount, size_t _iIndexCount)
+CIndexedVertexs<T>::CIndexedVertexs(CRenderManager *_pRM, char *_pVertexAddress, uint16 *_pIndexAddress, size_t _iVertexCount, size_t _iIndexCount)
 {
   m_iIndexCount   = _iIndexCount;
   m_iVertexCount  = _iVertexCount;
@@ -55,7 +98,7 @@ CIndexedVertexs<T>::CIndexedVertexs(CRenderManager *_pRM, char *_pVertexAddress,
   m_pVB->Unlock();
 
   m_pIB->Lock (0,   GetIndexSize()*_iIndexCount,    &l_p,0);
-  memcpy      (l_p, _pIndexAddres,                  GetIndexSize()*_iIndexCount);
+  memcpy      (l_p, _pIndexAddress,                 GetIndexSize()*_iIndexCount);
   m_pIB->Unlock();
 };
 
