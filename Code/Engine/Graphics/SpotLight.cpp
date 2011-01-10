@@ -1,11 +1,7 @@
 #include "SpotLight.h"
 
 
-void CSpotLight::SetAngle(float Angle)
+void CSpotLight::Render(CRenderManager *RM)
 {
-}
 
-float CSpotLight::GetAngle() const
-{
-  return m_Angle; 
 }

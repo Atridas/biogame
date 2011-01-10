@@ -3,19 +3,20 @@
 #ifndef __DIRECTIONAL_LIGHT_H__
 #define __DIRECTIONAL_LIGHT_H__
 
+#include "base.h"
 #include "Light.h"
-#include "Object3D.h"
 
 class CDirectionalLight : public CLight
 {
 protected:
-  CObject3D m_Direction;
+  Vect3f m_vDirection;
   
 public:
-  CDirectionalLight() : CLight() {};
-  ~CDirectionalLight(){};
-  void SetDirection(const CObject3D &Direction);
-  CObject3D GetDirection() const;
+  CDirectionalLight() : m_vDirection(0) {};
+
+  ~CDirectionalLight() {};
+  void SetDirection(const Vect3f& _vDirection) {m_vDirection = _vDirection;};
+  Vect3f GetDirection() const {return m_vDirection;};
   virtual void Render(CRenderManager *RM);
 };
 #endif
