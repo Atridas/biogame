@@ -58,6 +58,7 @@ public:
    * Mètode de recàrrega.
    * Aquest mètode recarregarà la textura especificada anteriorment.
    * @return True si s'ha carregat correctament, false sino.
+   * @see Load(const std::string &_szFileName)
   **/
   bool Reload();
   /**
