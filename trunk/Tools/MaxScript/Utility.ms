@@ -7,19 +7,14 @@ utility BioUtility "Eon-Utility" width:160 height:312
 	label labelPath "Marian" pos:[8,52] width:137 height:24
 	checkbox checkMeshes "Export Mesh" pos:[13,74] width:114 height:16
 	checkbox checkTextures "Export Textures" pos:[13,98] width:115 height:16
-	dropDownList dropNivell "Nivell" pos:[11,125] width:131 height:40
+	dropdownList dropNivell "Nivell" pos:[11,125] width:131 height:40
 	GroupBox grp1 "Export" pos:[11,170] width:131 height:126
 	button buttonMesh "Mesh" pos:[23,188] width:100 height:19
 	button buttonMeshManager "Mesh Manager" pos:[24,212] width:98 height:22
 	button buttonScene "Scene" pos:[26,241] width:94 height:22
+	button buttonLight "Light" pos:[27,271] width:93 height:18
 	-- Contenido de la utility
 	
-	on BioUtility open do
-	(
-		labelPath.text = "D:/treballs/master/biogame/Run/Test/Data"
-		--labelPath.text = "C:/Treballs/Directoris v2/Run/Test/Data"
-		dropNivell.items = #("","Level -2","Level -1", "Hangar")
-	)
 	
 	function getDataPath =
 	(
@@ -90,57 +85,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 	)
 	
 
-	on buttonPath pressed do
-	(
-		local l_outPath=GetSavePath initialDir:labelPath.text caption:"Select output file to export file" types:" mesh(*.mesh)|*.mesh|All Files(*.*)|*.*|"
-		if l_outPath!=undefined then
-		(
-			labelPath.text = l_outPath
-		)
-	)
 	
-	on buttonMesh pressed do
-	(
-		if $ != undefined then
-		(
-			local l_meshPath = getMeshPath()
-			local l_TextureTotalPath = getTexturePath()
-			makeDir l_meshPath all:true
-			makeDir l_TextureTotalPath all:true
-			local l_outName=GetSaveFileName fileName:(l_meshPath + $.name + ".mesh") caption:"Select output file to export file" types:" mesh(*.mesh)|*.mesh|All Files(*.*)|*.*|"
-			if l_outName != undefined then
-			(
-				
-				
-				local l_relativeTexPath = getRelativeTexturePath()
-				
-				if (ExportMesh $ l_outName l_relativeTexPath) == true then
-				(
-					ShowMessage "File Saved"
-				)
-				
-				-- copiar textures
-				if checkTextures.checked == true then
-				(
-					local l_textures = TextureList $
-					for i=1 to l_textures.count do
-					(
-						path1 = l_textures[i]
-						path2 = getTexturePath() + (filenameFromPath path1)
-						
-						if stricmp (getFilenamePath path1) (getFilenamePath path2) != 0 then
-						(
-							deleteFile path2
-							
-							copyFile path1 path2
-						)
-					)
-				)
-			)
-		) else (
-			ShowError "No hi ha cap objecte seleccionat"
-		)
-	)
 	
 	function GetCore _cores _object =
 	(
@@ -294,6 +239,155 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		return true
 	)
 	
+	
+	
+	on buttonLight pressed do
+	(			
+		local l_pathToFile = getXMLPath() 
+		makeDir l_pathToFile all:true
+		
+		l_pathToFile = l_pathToFile + "Lights.xml"
+		
+		
+		local l_file = createfile l_pathToFile
+		
+		local l_header = GetInitTagXML()
+		
+		format "%" l_header to:l_file
+		
+		format "\n" to:l_file
+		
+		format "%\n" (OpenTagXML "lights") to:l_file
+		
+		for i=1 to $*.count do
+		(
+			local l_light = $*[i]
+			local l_params = #()
+			
+			local l_position = "" as StringStream
+			local l_color = "" as StringStream 
+			local l_translation = "" as StringStream 
+			local l_aux = "" as StringStream
+			
+			if classof l_light == TargetDirectionallight then
+			(
+				--llum direccional
+				append l_params #("type","directional")
+				
+				local l_dir = $.target.pos - $.pos
+				local l_direction
+				l_translation = RHVectorToLH l_light.pos
+				format "% % %" l_translation.x l_translation.y l_translation.z to:l_aux
+				append l_params #("direction",l_aux)
+			) else if classof l_light == Omnilight then
+			(
+				--omni
+				append l_params #("type","omni")
+			) else if classof l_light == targetSpot then
+			(
+				-- spot
+				append l_params #("type","spot")
+				
+				local l_dir = $.target.pos - $.pos
+				local l_direction
+				l_translation = RHVectorToLH l_light.pos
+				format "% % %" l_translation.x l_translation.y l_translation.z to:l_aux
+				append l_params #("direction",l_aux)
+				
+				format "%" l_light.hotspot to:l_aux
+				append l_params #("angle",l_aux)
+				
+				format "%" l_light.falloff to:l_aux
+				append l_params #("fall_of",l_aux)
+			) else
+			(
+				--res, és un mesh o algu així
+				continue
+			)
+			
+			append l_params #("name",l_light.name)
+			
+			l_translation = RHVectorToLH l_light.pos
+			format "% % %" l_translation.x l_translation.y l_translation.z to:l_position
+			append l_params #("pos",l_position)
+			format "% % %" (l_light.rgb.r/255) (l_light.rgb.g/255) (l_light.rgb.b/255)  to:l_color
+			append l_params #("color",l_color)
+			
+			format "%" l_light.farAttenStart to:l_aux
+			append l_params #("att_start_range",l_aux)
+			format "%" l_light.farAttenEnd to:l_aux
+			append l_params #("att_end_range",l_aux)
+			
+			append l_params #("render_shadows","false")
+			
+			format "\t%\n" (InlineTagParamXML "light" l_params) to:l_file
+		)
+		format "%" (CloseTagXML "lights") to:l_file
+		
+		format "\n" to:l_file
+		
+		close l_file
+		
+		ShowMessage "Export finalitzat"
+	)
+	
+	
+	on BioUtility open do
+	(
+		labelPath.text = "D:/treballs/master/biogame/Run/Test/Data"
+		--labelPath.text = "C:/Treballs/Directoris v2/Run/Test/Data"
+		dropNivell.items = #("","Level -2","Level -1", "Hangar")
+	)
+	on buttonPath pressed do
+	(
+		local l_outPath=GetSavePath initialDir:labelPath.text caption:"Select output file to export file" types:" mesh(*.mesh)|*.mesh|All Files(*.*)|*.*|"
+		if l_outPath!=undefined then
+		(
+			labelPath.text = l_outPath
+		)
+	)
+	on buttonMesh pressed do
+	(
+		if $ != undefined then
+		(
+			local l_meshPath = getMeshPath()
+			local l_TextureTotalPath = getTexturePath()
+			makeDir l_meshPath all:true
+			makeDir l_TextureTotalPath all:true
+			local l_outName=GetSaveFileName fileName:(l_meshPath + $.name + ".mesh") caption:"Select output file to export file" types:" mesh(*.mesh)|*.mesh|All Files(*.*)|*.*|"
+			if l_outName != undefined then
+			(
+				
+				
+				local l_relativeTexPath = getRelativeTexturePath()
+				
+				if (ExportMesh $ l_outName l_relativeTexPath) == true then
+				(
+					ShowMessage "File Saved"
+				)
+				
+				-- copiar textures
+				if checkTextures.checked == true then
+				(
+					local l_textures = TextureList $
+					for i=1 to l_textures.count do
+					(
+						path1 = l_textures[i]
+						path2 = getTexturePath() + (filenameFromPath path1)
+						
+						if stricmp (getFilenamePath path1) (getFilenamePath path2) != 0 then
+						(
+							deleteFile path2
+							
+							copyFile path1 path2
+						)
+					)
+				)
+			)
+		) else (
+			ShowError "No hi ha cap objecte seleccionat"
+		)
+	)
 	on buttonMeshManager pressed do
 	(
 		l_cores = #()
