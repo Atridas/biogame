@@ -1,4 +1,5 @@
 #pragma once
+
 #ifndef __LIGHT_MANAGER_H__
 #define __LIGHT_MANAGER_H__
 
@@ -12,10 +13,12 @@ class CRenderManager;
 
 class CLightManager : public CMapManager<CLight>
 {
+  string m_szFileName;
 public:
-  CLightManager()   {SetOk(true);};
+  CLightManager() : m_szFileName("") {SetOk(true);};
   ~CLightManager()  {Done();};
-  void Load(const std::string &FileName);
-  void Render(CRenderManager *RenderManager);
+  bool Load(const string& _szFileName);
+  void Render(CRenderManager* _pRM);
 };
+
 #endif

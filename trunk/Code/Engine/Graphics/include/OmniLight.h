@@ -9,6 +9,9 @@ class COmniLight : public CLight
 {
 public:
   COmniLight() : CLight(){};
+
   ~COmniLight(void){};
+
+  virtual void Render(CRenderManager* _pRM);
 };
 #endif
