@@ -10,77 +10,68 @@ class CTexture;
 class CRenderManager;
 //---------------------------------
 
-class CStaticMesh: public CBaseControl
+/**
+ * Classe de Malla estàtica.
+ * Classe que conté i controla una malla estàtica carregada des d'un fitxer mesh.
+**/
+class CStaticMesh:
+  public CBaseControl
 {
 protected:
+  /**
+   * Vector de Vèrtexs pels diferents conjunts de vèrtexs que formen la malla.
+  **/
   vector<CRenderableVertexs*> m_RVs;
+  /**
+   * Vector de Textures que conté la malla.
+  **/
   vector<vector<CTexture *>> m_Textures;
+  /**
+   * Path relatiu al fitxer mesh.
+  **/
   string m_szFileName;
+  /**
+   * Nombre de vèrtexs i triangles de la malla.
+  **/
   unsigned int m_iNumVertexs, m_iNumFaces;
+  /**
+   * Mètode d'alliberament de recursos.
+  **/
   void Unload() {Release();};
 public:
+  /**
+   * Constructor per defecte.
+  **/
   CStaticMesh(): m_iNumVertexs(0),m_iNumFaces(0),m_szFileName(""){};
+  /**
+   * Destructor.
+   * Allibera els recursos abans de destruir-se.
+  **/
   ~CStaticMesh() {Done();};
+  /**
+   * Mètode d'alliberament de recursos.
+  **/
   virtual void Release();
-  bool Load (const string &_szFileName);
-  bool LoadSergi(const string &_szFileName);
-  bool ReLoad () {Unload(); return LoadSergi(m_szFileName);};
-  void Render (CRenderManager *_pRM) const;
+  /**
+   * Mètode de càrrega.
+   * Aquest mètode carrega una malla d'un fitxer mesh i la instancia.
+   * @param _szFileName Path relatiu al fitxer mesh.
+   * @return True si s'ha carregat correctament, false sino.
+  **/
+  bool Load(const string &_szFileName);
+  /**
+   * Mètode de recàrrega.
+   * Aquest mètode recarrega la malla del fitxer especificat anteriorment.
+   * @return True si s'ha carregat correctament, false sino.
+   * @see Load (const string &_szFileName)
+  **/
+  bool ReLoad() {Unload(); return Load(m_szFileName);};
+  /**
+   * Mètode de render.
+   * Aquest mètode renderitza la malla.
+   * @param _pRM Render Manager.
+  **/
+  void Render(CRenderManager *_pRM) const;
+  //bool LoadSergi(const string &_szFileName);
 };
-//-----------------Format dels fitxers .mesh----------------
-//  [] Designa opcional.
-//
-//  VERTEX_TYPE fa servir el mateix format que a VertexsStructs.h
-//
-//  VERTEX_STRUCT segueix el format de VertexsStructs.h. depenent del VERTEX_TYPE.
-//
-//  Per facilitar la lectura s'han afegit for, comes, espais i intros.
-//    Al fitxer, però, simplement hi apareix el contingut sense separacions.
-//-----------------Format fitxer Sergi----------------------
-//  unsigned short                                            -> HEADER(MASK = 0xAAAA)
-//  unsigned short                                            -> MaterialCount. nombre de materials
-//
-//  for MaterialCount
-//  	unsigned short                                          -> VERTEX_TYPE.
-//    unsigned short                                          -> nombre de propietats a llegir
-//    [unsigned short, string]                                -> Diffuse. u16: Longitud de la cadena u16. string: path.
-//    [unsigned short, string]                                -> Bumpmap. u16: Longitud de la cadena u16. string: path.
-//    [unsigned short, string]                                -> Lightmap. u16: Longitud de la cadena u16. string: path.
-//    [unsigned short, string]                                -> Environment. u16: Longitud de la cadena u16. string: path.
-//
-//  for MaterialCount
-//  	unsigned short                                          -> VertexCount. Nombre de vèrtexs.
-//    for VertexCount
-//      VERTEX_STRUCT                                         -> Vèrtexs. Llista de vèrtexs. Format depenent de VERTEX_TYPE.
-//
-//  	unsigned short                                          -> IndexCount. Nombre d'índexs.
-//  	for IndexCount
-//  		unsigned short                                        -> Índexs. Llista d'índexs de vèrtexs.
-//  
-//  unsigned short                                            -> FOOTER(MASK = 0xFFFF)
-//------------------Fi Format fitxer Sergi------------------
-//
-//------------------Format fitxer Isaac---------------------
-//  unsigned short                                            -> HEADER(MASK = 0xAAAA)
-//  unsigned short                                            -> MaterialCount. nombre de materials
-//
-//  for MaterialCount
-//  	unsigned short                                          -> VERTEX_TYPE.
-//    unsigned short                                          -> nombre de propietats a llegir
-//    [unsigned short, string]                                -> Diffuse. u16: Longitud de la cadena u16. string: path.
-//    [unsigned short, string]                                -> Bumpmap. u16: Longitud de la cadena u16. string: path.
-//    [unsigned short, string]                                -> Lightmap. u16: Longitud de la cadena u16. string: path.
-//    [unsigned short, string]                                -> Environment. u16: Longitud de la cadena u16. string: path.
-//
-//  for MaterialCount
-//  	unsigned short                                          -> VertexCount. Nombre de vèrtexs.
-//    for VertexCount
-//      VERTEX_STRUCT                                         -> Vèrtexs. Llista de vèrtexs. Format depenent de VERTEX_TYPE.
-//
-//  	unsigned short                                          -> IndexCount. Nombre d'índexs.
-//  	for IndexCount
-//  		unsigned short                                        -> Índexs. Llista d'índexs de vèrtexs.
-//  
-//  unsigned short                                            -> FOOTER(MASK = 0xFFFF)
-//------------------Fi Format fitxer Isaac------------------
 #endif

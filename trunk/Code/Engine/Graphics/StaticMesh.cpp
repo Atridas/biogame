@@ -11,134 +11,34 @@
 #define HEADER 0xAAAA
 #define FOOTER 0xFFFF
 
-bool CStaticMesh::LoadSergi(const string &_szFileName)
-{
-  unsigned short l_header = 0;
-  unsigned short l_footer = 0;
-  unsigned short l_materialCount = 0;
-  unsigned short l_propertiesCount = 0;
-  unsigned short l_pathCount = 0;
-  char* l_pathString = 0;
-  unsigned short* l_pVertexType;
-  unsigned short l_vertexCount = 0;
-  unsigned short l_indexCount = 0;
-
-  char* l_vertex = 0;
-  uint16* l_index = 0;
-
-  ifstream  l_file;
-  l_file.open(_szFileName,ios::binary);
-  if(l_file.is_open())
-  {
-    m_szFileName=_szFileName;
-
-    l_file.read((char*)&l_header,sizeof(unsigned short));
-	  l_file.read((char*)&l_materialCount,sizeof(unsigned short));
-
-	  l_pVertexType = new unsigned short[l_materialCount];
-
-    vector<CTexture *> l_vTextures;
-
-	  for(int i = 0; i < l_materialCount; i++)
-	  {
-      l_vTextures.clear();
-
-		  l_file.read((char*)&(l_pVertexType[i]),sizeof(unsigned short));
-
-		  l_file.read((char*)&l_propertiesCount,sizeof(unsigned short));
-
-		  for(int j = 0; j < l_propertiesCount;j++)
-		  {
-			  l_file.read((char*)&l_pathCount,sizeof(unsigned short));
-			  l_pathCount++;
-			  l_pathString = new char[l_pathCount];
-			  l_file.read(l_pathString,sizeof(char)*l_pathCount);
-
-        l_vTextures.push_back(RENDER_MANAGER->GetTextureManager()->GetResource(string("D:/Max/").append(string(l_pathString))));
-
-			  CHECKED_DELETE(l_pathString);
-		  }
-		
-      m_Textures.push_back(l_vTextures);
-	  }
-
-	  for(int i = 0; i < l_materialCount; i++)
-	  {
-
-		  l_file.read((char*)&l_vertexCount,sizeof(unsigned short));
-
-      int l_iSize = GetVertexSize(l_pVertexType[i]);
-      l_vertex = new char[l_iSize*l_vertexCount];
-      l_file.read(l_vertex,l_iSize*l_vertexCount);
-
-      l_file.read((char*)&l_indexCount,sizeof(unsigned short));
-		  l_index = new uint16[l_indexCount];
-		  l_file.read((char*)l_index,sizeof(uint16)*l_indexCount);
-
-      if(l_pVertexType[i] == STEXTUREDVERTEX::GetVertexType())
-      {
-        m_RVs.push_back(new CIndexedVertexs<STEXTUREDVERTEX>(RENDER_MANAGER, (STEXTUREDVERTEX*) l_vertex, l_index, l_vertexCount, l_indexCount));
-      }
-
-      if(l_pVertexType[i] == SDIFFUSEVERTEX::GetVertexType())
-      {
-        m_RVs.push_back(new CIndexedVertexs<SDIFFUSEVERTEX>(RENDER_MANAGER, (SDIFFUSEVERTEX*) l_vertex, l_index, l_vertexCount, l_indexCount));
-      }
-
-      if(l_pVertexType[i] == SNORMALDIFSSUSEVERTEX::GetVertexType())
-      {
-        m_RVs.push_back(new CIndexedVertexs<SNORMALDIFSSUSEVERTEX>(RENDER_MANAGER, (SNORMALDIFSSUSEVERTEX*) l_vertex, l_index, l_vertexCount, l_indexCount));
-      }
-
-      /*
-      if(l_pVertexType[i] == SNORMALDIFFUSETEXTUREDVERTEX::GetVertexType())
-      {
-        m_RVs.push_back(new CIndexedVertexs<SNORMALDIFFUSETEXTUREDVERTEX>(RENDER_MANAGER, (SNORMALDIFFUSETEXTUREDVERTEX*) l_vertex, l_index, l_vertexCount, l_indexCount));
-      }
-
-      if(l_pVertexType[i] == SNORMALDIFFUSEDTEXTURED2VERTEX::GetVertexType())
-      {
-        m_RVs.push_back(new CIndexedVertexs<SNORMALDIFFUSEDTEXTURED2VERTEX>(RENDER_MANAGER, (SNORMALDIFFUSEDTEXTURED2VERTEX*) l_vertex, l_index, l_vertexCount, l_indexCount));
-      }
-      */
-
-      if(l_pVertexType[i] == STEXTUREDVERTEX::GetVertexType())
-      {
-        m_RVs.push_back(new CIndexedVertexs<STEXTUREDVERTEX>(RENDER_MANAGER, (STEXTUREDVERTEX*) l_vertex, l_index, l_vertexCount, l_indexCount));
-      }
-
-      if(l_pVertexType[i] == STEXTURED2VERTEX::GetVertexType())
-      {
-        m_RVs.push_back(new CIndexedVertexs<STEXTURED2VERTEX>(RENDER_MANAGER, (STEXTURED2VERTEX*) l_vertex, l_index, l_vertexCount, l_indexCount));
-      }
-
-      if(l_pVertexType[i] == SNORMALTEXTUREDVERTEX::GetVertexType())
-      {
-        m_RVs.push_back(new CIndexedVertexs<SNORMALTEXTUREDVERTEX>(RENDER_MANAGER, (SNORMALTEXTUREDVERTEX*) l_vertex, l_index, l_vertexCount, l_indexCount));
-      }
-
-      if(l_pVertexType[i] == SNORMALTEXTURED2VERTEX::GetVertexType())
-      {
-        m_RVs.push_back(new CIndexedVertexs<SNORMALTEXTURED2VERTEX>(RENDER_MANAGER, (SNORMALTEXTURED2VERTEX*) l_vertex, l_index, l_vertexCount, l_indexCount));
-      }
-
-	  }
-
-    l_file.read((char*)&l_footer,sizeof(unsigned short));
-
-    l_file.close();
-
-    CHECKED_DELETE(l_vertex);
-    CHECKED_DELETE(l_index);
-	  CHECKED_DELETE(l_pVertexType);
-  
-    return l_footer==0xffff;
-  }
-  return false;
-}
-
 bool CStaticMesh::Load(const string &_szFileName)
 {
+  /** Format fitxer
+    *
+    *  unsigned short              -> HEADER(MASK = 0xAAAA)
+    *  unsigned short              -> MaterialCount. nombre de materials
+    *
+    *  for MaterialCount
+    *  	unsigned short            -> VERTEX_TYPE.
+    *   unsigned short            -> nombre de propietats a llegir
+    *   [unsigned short, string]  -> Diffuse. u16: Longitud de la cadena u16. string: path.
+    *   [unsigned short, string]  -> Bumpmap. u16: Longitud de la cadena u16. string: path.
+    *   [unsigned short, string]  -> Lightmap. u16: Longitud de la cadena u16. string: path.
+    *   [unsigned short, string]  -> Environment. u16: Longitud de la cadena u16. string: path.
+    *
+    *  for MaterialCount
+    *  	unsigned short            -> VertexCount. Nombre de vèrtexs.
+    *   for VertexCount
+    *     VERTEX_STRUCT           -> Vèrtexs. Llista de vèrtexs. Format depenent de VERTEX_TYPE.
+    *
+    *  	unsigned short            -> IndexCount. Nombre d'índexs.
+    *  	for IndexCount
+    *  		unsigned short          -> Índexs. Llista d'índexs de vèrtexs.
+    *  
+    *  unsigned short             -> FOOTER(MASK = 0xFFFF)
+    *
+    * Fi Format fitxer
+   **/
   LOGGER->AddNewLog(ELL_INFORMATION, "CStaticMesh::Load \"%s\"", _szFileName.c_str());
   
   fstream l_File;
