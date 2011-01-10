@@ -20,6 +20,4 @@
 	<mesh name="Container14" path="Data/Levels/Hangar/Meshes/Container14.mesh"/>
 	<mesh name="Container15" path="Data/Levels/Hangar/Meshes/Container15.mesh"/>
 	<mesh name="Container16" path="Data/Levels/Hangar/Meshes/Container16.mesh"/>
-	<mesh name="Monta-carregas01" path="Data/Levels/Hangar/Meshes/Monta-carregas01.mesh"/>
-	<mesh name="Base Hangar01" path="Data/Levels/Hangar/Meshes/Base Hangar01.mesh"/>
 </meshes>
