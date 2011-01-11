@@ -2,6 +2,11 @@
 
 #include "RenderManager.h"
 
+void CDirectionalLight::Init(CXMLTreeNode& _XMLParams)
+{
+  CLight::Init(_XMLParams);
+  m_vDirection = _XMLParams.GetVect3fProperty("direction",Vect3f(1.0f)).GetNormalized();
+}
 
 void CDirectionalLight::Render(CRenderManager *_pRM) const
 {

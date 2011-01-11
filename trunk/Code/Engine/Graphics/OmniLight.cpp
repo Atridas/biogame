@@ -2,6 +2,13 @@
 
 #include "RenderManager.h"
 
+void COmniLight::Init(CXMLTreeNode& _XMLParams)
+{
+  CLight::Init(_XMLParams);
+
+
+}
+
 void COmniLight::Render(CRenderManager* _pRM) const
 {
     Mat44f t;
