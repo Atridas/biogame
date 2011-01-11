@@ -8,12 +8,11 @@
 
 class CSpotLight : public CDirectionalLight
 {
-protected:
-  float m_fAngle;
-  float m_fFallOff;
-
 public:
-  CSpotLight() : m_fAngle(0.0f), m_fFallOff(0.0f) {m_Type = CLight::SPOT;};
+  CSpotLight(const string& _name) : 
+      CDirectionalLight(_name),
+      m_fAngle(0.0f), 
+      m_fFallOff(0.0f) {m_Type = CLight::SPOT;};
 
   ~CSpotLight(){};
 
@@ -23,6 +22,12 @@ public:
   float GetAngle() const {return m_fAngle;};
   void SetFallOff(const float _fFallOff) {m_fFallOff = _fFallOff;};
   float GetFallOff() const {return m_fFallOff;};
+  
+protected:
+  void Release() {};
+
+  float m_fAngle;
+  float m_fFallOff;
 };
 
 #endif

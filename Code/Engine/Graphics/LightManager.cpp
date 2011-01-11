@@ -21,6 +21,10 @@ bool CLightManager::Load(const string& _szFileName)
   int l_iNumMeshesLights = l_XMLLights.GetNumChildren();
   for(int i = 0; i < l_iNumMeshesLights; i++)
   {
+    if(l_XMLLights.IsComment()) {
+      continue;
+    }
+
     string l_szName = "";
     string l_szType = "";
 
@@ -30,19 +34,19 @@ bool CLightManager::Load(const string& _szFileName)
 
     if(l_szType.compare("omni") == 0)
     {
-      COmniLight* l_pOmniLight = new COmniLight();
+      COmniLight* l_pOmniLight = new COmniLight(l_szName);
       l_pOmniLight->Init(l_XMLLight);
       AddResource(l_pOmniLight->GetName(),l_pOmniLight);
 
     }else if(l_szType.compare("directional") == 0)
     {
-      CDirectionalLight* l_pDirectionalLight = new CDirectionalLight();
+      CDirectionalLight* l_pDirectionalLight = new CDirectionalLight(l_szName);
       l_pDirectionalLight->Init(l_XMLLight);
       AddResource(l_pDirectionalLight->GetName(),l_pDirectionalLight);
 
     }else if(l_szType.compare("spot") == 0)
     {
-      CSpotLight* l_pSpotLight = new CSpotLight();
+      CSpotLight* l_pSpotLight = new CSpotLight(l_szName);
       l_pSpotLight->Init(l_XMLLight);
       AddResource(l_pSpotLight->GetName(),l_pSpotLight);
     }else{
