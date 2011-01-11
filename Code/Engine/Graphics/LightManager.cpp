@@ -7,9 +7,9 @@
 
 bool CLightManager::Load(const string& _szFileName)
 {
-  LOGGER->AddNewLog(ELL_INFORMATION, "CLightManager::Load");
+  LOGGER->AddNewLog(ELL_INFORMATION, "CLightManager::Load \"%s\"", _szFileName.c_str());
 
-   m_szFileName = _szFileName;
+  m_szFileName = _szFileName;
 
   CXMLTreeNode l_XMLLights;
   if(!l_XMLLights.LoadFile(_szFileName.c_str()))
@@ -39,13 +39,13 @@ bool CLightManager::Load(const string& _szFileName)
     l_fStartRangeAttenuation = l_XMLLight.GetFloatProperty("att_start_range",false);
     l_fEndRangeAttenuation = l_XMLLight.GetFloatProperty("att_end_range",false);
 
-    if(l_szType.compare("omni"))
+    if(l_szType.compare("omni") == 0)
     {
       COmniLight* l_pOmniLight = new COmniLight();
       l_type = CLight::OMNI;
       AddResource(l_szName,l_pOmniLight);
 
-    }else if(l_szType.compare("directional"))
+    }else if(l_szType.compare("directional") == 0)
     {
       CDirectionalLight* l_pDirectionalLight = new CDirectionalLight();
       l_type = CLight::DIRECTIONAL;
@@ -53,7 +53,7 @@ bool CLightManager::Load(const string& _szFileName)
       l_pDirectionalLight->SetDirection(l_vDirection);
       AddResource(l_szName,l_pDirectionalLight);
 
-    }else if(l_szType.compare("spot"))
+    }else if(l_szType.compare("spot") == 0)
     {
       CSpotLight* l_pSpotLight = new CSpotLight();
       l_type = CLight::SPOT;
@@ -95,8 +95,13 @@ bool CLightManager::Load(const string& _szFileName)
   return true;
 }
 
-void CLightManager::Render(CRenderManager *RenderManager)
+void CLightManager::Render(CRenderManager *_pRM) const
 {
-
+  TMapResource::const_iterator l_it = m_Resources.cbegin();
+  TMapResource::const_iterator l_end = m_Resources.cend();
+  for(;l_it != l_end; ++l_it)
+  {
+    l_it->second->Render(_pRM);
+  }
 }
 

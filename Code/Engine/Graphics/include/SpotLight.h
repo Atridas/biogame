@@ -20,7 +20,6 @@ public:
   float GetAngle() const {return m_fAngle;};
   void SetFallOff(const float _fFallOff) {m_fFallOff = _fFallOff;};
   float GetFallOff() const {return m_fFallOff;};
-  virtual void Render(CRenderManager *RM);
 };
 
 #endif

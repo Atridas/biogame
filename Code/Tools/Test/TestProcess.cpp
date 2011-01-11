@@ -18,6 +18,8 @@
 #include <IndexedVertexs.h>
 #include "VertexsStructs.h"
 
+#include <LightManager.h>
+
 STEXTUREDVERTEX g_vertex[4] = {
 	{-1.5f,3.0f,0.0f,0.0f,0.0f},
 	{1.5f,3.0f,0.0f,1.0f,0.0f},
@@ -38,6 +40,8 @@ CRenderableObjectsManager* g_pRenderableObjectsManager = 0;
 CAnimatedModelManager* g_pAnimatedModelManager = 0;
 CAnimatedInstanceModel* g_pAnimatedInstanceModel = 0;
 CRenderableAnimatedInstanceModel* g_pRenderableAIModel = 0;
+
+CLightManager* g_pLightManager = 0;
 
 bool CTestProcess::Init()
 {
@@ -113,6 +117,10 @@ bool CTestProcess::Init()
   g_pRenderableAIModel->Init("bot");
   g_pRenderableAIModel->GetAnimatedInstanceModel()->BlendCycle(1,0);
 
+  //lights
+  g_pLightManager = new CLightManager();
+  g_pLightManager->Load("Data/Levels/Hangar/XML/Lights.xml");
+
   SetOk(true);
   return IsOk();
 }
@@ -120,12 +128,15 @@ bool CTestProcess::Init()
 void CTestProcess::Release()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"TestProcess::Release");
+
   CHECKED_DELETE(m_pObjectCamera)
   CHECKED_DELETE(m_pObject)
   CHECKED_DELETE(m_pCube)
   CHECKED_DELETE(m_pCubeCamera)
   //CHECKED_DELETE(g_tex); ja ho fa el texture manager
   
+  CHECKED_DELETE(g_pLightManager)
+
   CHECKED_DELETE(g_pIndexedVertexs)
   CHECKED_DELETE(g_pRenderableObjectsManager)
   CHECKED_DELETE(g_pAnimatedModelManager)
@@ -241,6 +252,8 @@ void CTestProcess::Render()
   
   //g_pAnimatedInstanceModel->Render(l_pRM);
   g_pRenderableAIModel->GetAnimatedInstanceModel()->Render(l_pRM);
+
+  g_pLightManager->Render(l_pRM);
 
   //g_tex->Activate(0);
   //g_pIndexedVertexs->Render(l_pRM);

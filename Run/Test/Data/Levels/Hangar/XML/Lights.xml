@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <lights>
 	<light type="omni" name="Omni01" pos="-17.3921 2.55115 -5.02444" color="1.0 1.0 1.0" att_start_range="80.0" att_end_range="200.0" render_shadows="false"/>
-	<light type="directional" direction="39.7163 4.67285 2.92148" name="Direct01" pos="39.7163 4.67285 2.92148" color="1.0 1.0 1.0" att_start_range="80.0" att_end_range="200.0" render_shadows="false"/>
-	<light type="spot" direction="-22.7659 8.50635 4.29499" angle="43.0" fall_of="45.0" name="Spot01" pos="-22.7659 8.50635 4.29499" color="1.0 1.0 1.0" att_start_range="80.0" att_end_range="200.0" render_shadows="false"/>
+	<light type="directional" direction="-27.9961 -2.43799 -2.35188" name="Direct01" pos="39.7163 4.67285 2.92148" color="1.0 1.0 1.0" att_start_range="80.0" att_end_range="200.0" render_shadows="false"/>
+	<light type="spot" direction="0.0682335 -8.50635 2.00174" angle="43.0" fall_of="45.0" name="Spot01" pos="-22.7659 8.50635 4.29499" color="1.0 1.0 1.0" att_start_range="80.0" att_end_range="200.0" render_shadows="false"/>
 </lights>

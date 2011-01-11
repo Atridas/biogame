@@ -22,18 +22,18 @@ public:
 	float						GetYaw			() const {return m_fYaw;}
 	float						GetRoll			() const {return m_fRoll;}
 	float						GetPitch		() const {return m_fPitch;}
-	const Vect3f&		GetPosition	() const {return m_Position;}
+	const Vect3f&		GetPosition	() const {return m_vPosition;}
   bool						GetVisible	() const {return m_bVisible;}
 
 	//---Set Functions
-	void		SetPosition	( const Vect3f& pos )		{m_Position = pos;}
+	void		SetPosition	( const Vect3f& pos )		{m_vPosition = pos;}
 	void		SetYaw			( float yaw )						{m_fYaw = yaw;}
 	void		SetPitch		( float pitch )					{m_fPitch = pitch;}
 	void		SetRoll			( float roll )					{m_fRoll = roll;}
   void		SetVisible	( bool  visible )				{m_bVisible = visible;}
 
 protected:
-	Vect3f	m_Position;
+	Vect3f	m_vPosition;
 	float		m_fYaw;
 	float		m_fPitch;
 	float		m_fRoll;

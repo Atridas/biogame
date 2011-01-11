@@ -276,7 +276,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 				
 				local l_dir = l_light.target.pos - l_light.pos
 				local l_direction
-				l_translation = RHVectorToLH l_light.pos
+				l_translation = RHVectorToLH l_dir
 				l_aux = "" as StringStream
 				format "% % %" l_translation.x l_translation.y l_translation.z to:l_aux
 				append l_params #("direction",l_aux)
@@ -291,7 +291,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 				
 				local l_dir = l_light.target.pos - l_light.pos
 				local l_direction
-				l_translation = RHVectorToLH l_light.pos
+				l_translation = RHVectorToLH l_dir
 				l_aux = "" as StringStream
 				format "% % %" l_translation.x l_translation.y l_translation.z to:l_aux
 				append l_params #("direction",l_aux)

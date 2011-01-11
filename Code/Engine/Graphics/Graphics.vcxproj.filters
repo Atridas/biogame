@@ -141,20 +141,17 @@
     <ClCompile Include="RenderableAnimatedInstanceModel.cpp">
       <Filter>AnimatedModel\RenderableAnimatedInstanceModel</Filter>
     </ClCompile>
-    <ClCompile Include="Light.cpp">
-      <Filter>Lights</Filter>
-    </ClCompile>
     <ClCompile Include="LightManager.cpp">
       <Filter>Lights\LightManager</Filter>
-    </ClCompile>
-    <ClCompile Include="DirectionalLight.cpp">
-      <Filter>Lights\DirectionalLight</Filter>
     </ClCompile>
     <ClCompile Include="OmniLight.cpp">
       <Filter>Lights\OmniLight</Filter>
     </ClCompile>
     <ClCompile Include="SpotLight.cpp">
       <Filter>Lights\SpotLight</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionalLight.cpp">
+      <Filter>Lights\DirectionalLight</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -18,7 +18,7 @@ public:
   CLightManager() : m_szFileName("") {SetOk(true);};
   ~CLightManager()  {Done();};
   bool Load(const string& _szFileName);
-  void Render(CRenderManager* _pRM);
+  void Render(CRenderManager* _pRM) const;
 };
 
 #endif
