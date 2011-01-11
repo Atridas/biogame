@@ -13,10 +13,10 @@ void CRenderableObject::Render(CRenderManager* _pRM)
     r2.SetIdentity();
     r3.SetIdentity();
 
-    t.Translate(m_Position);
+    t.Translate(m_vPosition);
     r.SetFromAngleY(-m_fYaw);
     r2.SetFromAngleZ(m_fPitch);
-    r3.SetFromAngleZ(m_fRoll);
+    r3.SetFromAngleX(m_fRoll);
     //s.Scale(1.5f,1.5f,1.5f);
 
     total = t*r*r2*r3;

@@ -25,7 +25,6 @@ public:
 protected:
   CColor m_colColor;
   //float m_fSpecular;
-  Vect3f m_vPosition;
   TLightType m_Type;
   string m_szName;
   bool m_bRenderShadows;
@@ -40,8 +39,7 @@ public:
               m_Type(OMNI),
               m_bRenderShadows(false),
               m_fStartRangeAttenuation(0.0f),
-              m_fEndRangeAttenuation(0.0f),
-              m_vPosition(0.0f) {};
+              m_fEndRangeAttenuation(0.0f)    {};
 
   virtual ~CLight(){};
   void SetName(const string& _szName) {m_szName = _szName;};
@@ -62,7 +60,9 @@ public:
 
   void SetType(const TLightType _Type) {m_Type = _Type;};
   TLightType GetType() const {return m_Type;};
-  virtual void Render(CRenderManager* _pRM);
+
+
+  virtual void Render(CRenderManager* _pRM) const = 0;
  
  
 };

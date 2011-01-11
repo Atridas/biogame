@@ -12,6 +12,6 @@ public:
 
   ~COmniLight(void){};
 
-  virtual void Render(CRenderManager* _pRM);
+  virtual void Render(CRenderManager* _pRM) const;
 };
 #endif

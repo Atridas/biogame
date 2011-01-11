@@ -15,8 +15,8 @@ public:
   CDirectionalLight() : m_vDirection(0) {};
 
   ~CDirectionalLight() {};
-  void SetDirection(const Vect3f& _vDirection) {m_vDirection = _vDirection;};
+  void SetDirection(const Vect3f& _vDirection);
   Vect3f GetDirection() const {return m_vDirection;};
-  virtual void Render(CRenderManager *RM);
+  virtual void Render(CRenderManager *RM) const;
 };
 #endif
