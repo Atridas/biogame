@@ -6,13 +6,17 @@
 #include "base.h"
 #include "Object3D.h"
 #include <XML/XMLTreeNode.h>
+#include "Named.h"
 
 // Forward declarations -------------
 class CRenderManager;
 class CColor;
 //-----------------------------------
 
-class CLight : public CObject3D
+class CLight : 
+  public CObject3D,
+  public CNamed,
+  public CBaseControl
 {
 public:
   
@@ -23,31 +27,17 @@ public:
 	  SPOT
   };
 
-protected:
-  CColor m_colColor;
-  //float m_fSpecular;
-  TLightType m_Type;
-  string m_szName;
-  bool m_bRenderShadows;
-  float m_fStartRangeAttenuation;
-  float m_fEndRangeAttenuation;
-
-  static TLightType GetLightTypeByName(const string& _szLightType);
-
 public:
-  CLight() :  m_colColor(colWHITE),
-              m_szName(""),
+  CLight(const string& _name) :  
+              CNamed(_name),
+              m_colColor(colWHITE),
               m_Type(OMNI),
               m_bRenderShadows(false),
               m_fStartRangeAttenuation(0.0f),
               m_fEndRangeAttenuation(0.0f)    {};
 
   virtual ~CLight(){};
-
   virtual void Init(CXMLTreeNode& _XMLParams);
-
-  void SetName(const string& _szName) {m_szName = _szName;};
-  const string& GetName() {return m_szName;};
   void SetColor(const CColor& _colColor) {m_colColor = _colColor;};
   const CColor& GetColor() const {return m_colColor;};
   void SetPosition(Vect3f& _vPosition) {m_vPosition = _vPosition;};
@@ -65,9 +55,21 @@ public:
   void SetType(const TLightType _Type) {m_Type = _Type;};
   TLightType GetType() const {return m_Type;};
 
+  void SetName(const string& _name) {CNamed::SetName(_name);};
+
 
   virtual void Render(CRenderManager* _pRM) const = 0;
  
+
+protected:
+  static TLightType GetLightTypeByName(const string& _szLightType);
+
+  CColor m_colColor;
+  //float m_fSpecular;
+  TLightType m_Type;
+  bool m_bRenderShadows;
+  float m_fStartRangeAttenuation;
+  float m_fEndRangeAttenuation;
  
 };
 #endif

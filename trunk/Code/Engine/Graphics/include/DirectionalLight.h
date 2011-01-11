@@ -8,11 +8,11 @@
 
 class CDirectionalLight : public CLight
 {
-protected:
-  Vect3f m_vDirection;
-  
 public:
-  CDirectionalLight() : m_vDirection(0) {m_Type = CLight::DIRECTIONAL;};
+  CDirectionalLight(const string& _name) : 
+      CLight(_name),
+      m_vDirection(0) 
+      {m_Type = CLight::DIRECTIONAL;};
 
   ~CDirectionalLight() {};
 
@@ -21,5 +21,10 @@ public:
   void SetDirection(const Vect3f& _vDirection);
   Vect3f GetDirection() const {return m_vDirection;};
   virtual void Render(CRenderManager *RM) const;
+
+protected:
+  void Release() {};
+
+  Vect3f m_vDirection;
 };
 #endif
