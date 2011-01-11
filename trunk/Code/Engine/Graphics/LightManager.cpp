@@ -64,32 +64,22 @@ bool CLightManager::Load(const string& _szFileName)
       l_pSpotLight->SetAngle(l_fAngle);
       l_pSpotLight->SetFallOff(l_fFallOff);
       AddResource(l_szName,l_pSpotLight);
+    }else{
+      LOGGER->AddNewLog(ELL_WARNING,"CLightManager:: Unknown light type: \"%s\".", l_szType.c_str());
     }
 
     CLight* l_pLight = GetResource(l_szName);
-    l_pLight->SetName(l_szName);
-    l_pLight->SetType(l_type);
-    l_pLight->SetColor(l_colColor);
-    l_pLight->SetPosition(l_vPosition);
-    l_pLight->SetRenderShadows(l_bRenderShadows);
-    l_pLight->SetStartRangeAttenuation(l_fStartRangeAttenuation);
-    l_pLight->SetEndRangeAttenuation(l_fEndRangeAttenuation);
 
-    /*if(!GetResource(l_szName))
+    if(l_pLight)
     {
-      l_pStaticMesh = new CStaticMesh();
-
-      if(l_pStaticMesh->Load(l_szPath))
-      {
-        LOGGER->AddNewLog(ELL_INFORMATION,"CStaticMeshManager:: Adding mesh: \"%s\"", l_szName.c_str());
-        AddResource(l_szName,l_pStaticMesh);
-      }else{
-        CHECKED_DELETE(l_pStaticMesh);
-      }
-    }else{
-      if(!_bReload)
-        LOGGER->AddNewLog(ELL_WARNING,"CStaticMeshManager:: Mesh \"%s\" repetit", l_szName.c_str());
-    }*/
+      l_pLight->SetName(l_szName);
+      l_pLight->SetType(l_type);
+      l_pLight->SetColor(l_colColor);
+      l_pLight->SetPosition(l_vPosition);
+      l_pLight->SetRenderShadows(l_bRenderShadows);
+      l_pLight->SetStartRangeAttenuation(l_fStartRangeAttenuation);
+      l_pLight->SetEndRangeAttenuation(l_fEndRangeAttenuation);
+    }
   }
 
   return true;
