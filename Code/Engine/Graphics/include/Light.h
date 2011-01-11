@@ -5,6 +5,7 @@
 
 #include "base.h"
 #include "Object3D.h"
+#include <XML/XMLTreeNode.h>
 
 // Forward declarations -------------
 class CRenderManager;
@@ -42,6 +43,9 @@ public:
               m_fEndRangeAttenuation(0.0f)    {};
 
   virtual ~CLight(){};
+
+  virtual void Init(CXMLTreeNode& _XMLParams);
+
   void SetName(const string& _szName) {m_szName = _szName;};
   const string& GetName() {return m_szName;};
   void SetColor(const CColor& _colColor) {m_colColor = _colColor;};

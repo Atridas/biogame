@@ -13,9 +13,12 @@ protected:
   float m_fFallOff;
 
 public:
-  CSpotLight() : m_fAngle(0.0f), m_fFallOff(0.0f) {};
+  CSpotLight() : m_fAngle(0.0f), m_fFallOff(0.0f) {m_Type = CLight::SPOT;};
 
   ~CSpotLight(){};
+
+  virtual void Init(CXMLTreeNode& _XMLParams);
+
   void SetAngle(float _fAngle) {m_fAngle = _fAngle;};
   float GetAngle() const {return m_fAngle;};
   void SetFallOff(const float _fFallOff) {m_fFallOff = _fFallOff;};

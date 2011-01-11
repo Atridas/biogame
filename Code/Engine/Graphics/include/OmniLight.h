@@ -8,9 +8,11 @@
 class COmniLight : public CLight
 {
 public:
-  COmniLight() : CLight(){};
+  COmniLight() : CLight(){m_Type = CLight::OMNI;};
 
   ~COmniLight(void){};
+
+  virtual void Init(CXMLTreeNode& _XMLParams);
 
   virtual void Render(CRenderManager* _pRM) const;
 };

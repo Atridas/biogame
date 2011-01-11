@@ -12,9 +12,12 @@ protected:
   Vect3f m_vDirection;
   
 public:
-  CDirectionalLight() : m_vDirection(0) {};
+  CDirectionalLight() : m_vDirection(0) {m_Type = CLight::DIRECTIONAL;};
 
   ~CDirectionalLight() {};
+
+  virtual void Init(CXMLTreeNode& _XMLParams);
+
   void SetDirection(const Vect3f& _vDirection);
   Vect3f GetDirection() const {return m_vDirection;};
   virtual void Render(CRenderManager *RM) const;
