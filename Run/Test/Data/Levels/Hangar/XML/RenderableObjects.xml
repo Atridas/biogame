@@ -20,4 +20,70 @@
 	<RenderableObject name="Container14" class="StaticMesh" resource="Container14" position="-12.8973 0.0 -7.38" yaw="90.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Container15" class="StaticMesh" resource="Container15" position="-25.88 3.0 5.83578" yaw="90.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Container16" class="StaticMesh" resource="Container16" position="-4.5 3.0 -13.38" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="maquina exploradora" class="StaticMesh" resource="maquina exploradora" position="15.8349 0.0 -7.74956" yaw="-5.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="maquina exploradora01" class="StaticMesh" resource="maquina exploradora01" position="19.1755 0.0 5.08185" yaw="-25.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes" class="StaticMesh" resource="Caixes" position="6.49051 0.0 6.40033" yaw="-15.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes01" class="StaticMesh" resource="Caixes" position="6.23169 0.0 5.4344" yaw="-15.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes02" class="StaticMesh" resource="Caixes" position="5.97287 0.0 4.46848" yaw="-15.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes03" class="StaticMesh" resource="Caixes" position="5.97287 1.0 4.46848" yaw="-15.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes04" class="StaticMesh" resource="Caixes" position="9.74745 0.0 1.97725" yaw="-15.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes05" class="StaticMesh" resource="Caixes" position="9.74745 1.0 1.97725" yaw="-15.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes06" class="StaticMesh" resource="Caixes" position="10.0063 0.0 2.94318" yaw="-15.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes07" class="StaticMesh" resource="Caixes" position="11.9381 0.0 2.42554" yaw="75.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes08" class="StaticMesh" resource="Caixes" position="10.9722 0.0 2.68436" yaw="75.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes09" class="StaticMesh" resource="Caixes" position="10.2651 0.0 3.9091" yaw="-15.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes10" class="StaticMesh" resource="Caixes" position="0.00169623 0.0 -3.53032" yaw="-160.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes11" class="StaticMesh" resource="Caixes" position="-0.340324 0.0 -2.59062" yaw="-160.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes12" class="StaticMesh" resource="Caixes" position="-0.340324 1.0 -2.59062" yaw="-160.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes13" class="StaticMesh" resource="Caixes" position="0.343717 0.0 -4.47001" yaw="-160.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes14" class="StaticMesh" resource="Caixes" position="5.7134 1.0 -0.959679" yaw="-25.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes15" class="StaticMesh" resource="Caixes" position="5.29078 1.0 -1.86599" yaw="-25.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes16" class="StaticMesh" resource="Caixes" position="5.29078 0.0 -1.86599" yaw="-25.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes17" class="StaticMesh" resource="Caixes" position="5.7134 0.0 -0.959679" yaw="-25.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes18" class="StaticMesh" resource="Caixes" position="6.13602 0.0 -0.0533708" yaw="-25.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes19" class="StaticMesh" resource="Caixes" position="10.3346 0.0 -4.01765" yaw="15.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes20" class="StaticMesh" resource="Caixes" position="10.3346 1.0 -4.01765" yaw="15.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes21" class="StaticMesh" resource="Caixes" position="10.5934 0.0 -4.98357" yaw="15.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes22" class="StaticMesh" resource="Caixes" position="10.0758 0.0 -3.05172" yaw="15.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes23" class="StaticMesh" resource="Caixes" position="11.3005 0.0 -3.75883" yaw="15.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="mur divisor" class="StaticMesh" resource="mur divisor" position="-3.47563 0.0 1.95046" yaw="-19.1276" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="mur divisor01" class="StaticMesh" resource="mur divisor" position="18.4336 0.0 -6.03519" yaw="-25.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="mur divisor02" class="StaticMesh" resource="mur divisor" position="-3.14796 0.0 2.89525" yaw="-19.1276" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="mur divisor03" class="StaticMesh" resource="mur divisor" position="1.42536 0.0 4.07119" yaw="-1.4746" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="mur divisor04" class="StaticMesh" resource="mur divisor" position="1.39962 0.0 3.07153" yaw="-1.4746" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes24" class="StaticMesh" resource="Caixes" position="10.6928 7.15256e-007 13.3781" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes25" class="StaticMesh" resource="Caixes" position="10.6928 7.15256e-007 14.3781" yaw="-90.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes26" class="StaticMesh" resource="Caixes" position="11.6928 7.15256e-007 14.3781" yaw="-90.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes27" class="StaticMesh" resource="Caixes" position="10.6928 7.15256e-007 12.3781" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes28" class="StaticMesh" resource="Caixes" position="9.69279 1.0 14.3781" yaw="-90.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes29" class="StaticMesh" resource="Caixes" position="9.69279 7.15256e-007 14.3781" yaw="-90.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes30" class="StaticMesh" resource="Caixes" position="12.6928 7.15256e-007 14.3781" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes31" class="StaticMesh" resource="Caixes" position="10.6928 1.0 14.3781" yaw="-90.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes32" class="StaticMesh" resource="Caixes" position="10.6928 1.0 13.3781" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes33" class="StaticMesh" resource="Caixes" position="11.6928 1.0 14.3781" yaw="-90.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes34" class="StaticMesh" resource="Caixes" position="14.6928 7.15256e-007 13.3781" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes35" class="StaticMesh" resource="Caixes" position="14.6928 7.15256e-007 14.3781" yaw="-90.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes36" class="StaticMesh" resource="Caixes" position="15.6928 7.15256e-007 14.3781" yaw="-90.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes37" class="StaticMesh" resource="Caixes" position="14.6928 7.15256e-007 12.3781" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes38" class="StaticMesh" resource="Caixes" position="13.6928 1.0 14.3781" yaw="-90.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes39" class="StaticMesh" resource="Caixes" position="13.6928 7.15256e-007 14.3781" yaw="-90.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes40" class="StaticMesh" resource="Caixes" position="16.6928 7.15256e-007 14.3781" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes41" class="StaticMesh" resource="Caixes" position="14.6928 1.0 14.3781" yaw="-90.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes42" class="StaticMesh" resource="Caixes" position="14.6928 1.0 13.3781" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes43" class="StaticMesh" resource="Caixes" position="15.6928 1.0 14.3781" yaw="-90.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes44" class="StaticMesh" resource="Caixes" position="13.6928 7.15256e-007 12.3781" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes45" class="StaticMesh" resource="Caixes" position="13.6928 7.15256e-007 13.3781" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes46" class="StaticMesh" resource="Caixes" position="13.6928 1.0 13.3781" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes47" class="StaticMesh" resource="Caixes" position="13.6928 7.15256e-007 11.3781" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes48" class="StaticMesh" resource="Caixes" position="13.6928 2.0 14.3781" yaw="-90.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="mur divisor05" class="StaticMesh" resource="mur divisor" position="6.48966 0.0 -7.39289" yaw="-1.4746" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="mur divisor06" class="StaticMesh" resource="mur divisor" position="6.46393 0.0 -8.39256" yaw="-1.4746" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="mur divisor07" class="StaticMesh" resource="mur divisor" position="18.711 0.0 -5.00007" yaw="-5.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes49" class="StaticMesh" resource="Caixes49" position="6.49051 0.0 6.40033" yaw="-15.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="mur divisor08" class="StaticMesh" resource="mur divisor08" position="-3.47563 0.0 1.95046" yaw="-19.1276" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="mur divisor09" class="StaticMesh" resource="mur divisor09" position="-3.47563 0.0 1.95046" yaw="-19.1276" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="mur divisor10" class="StaticMesh" resource="mur divisor10" position="-3.47563 0.0 1.95046" yaw="-19.1276" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="mur divisor11" class="StaticMesh" resource="mur divisor11" position="-3.47563 0.0 1.95046" yaw="-19.1276" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes50" class="StaticMesh" resource="Caixes50" position="6.49051 0.0 6.40033" yaw="-15.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixes51" class="StaticMesh" resource="Caixes51" position="6.49051 0.0 6.40033" yaw="-15.0" pitch="0.0" roll="0.0"/>
 </RenderableObjects>
