@@ -88,6 +88,18 @@
     <Filter Include="Vertex\IndexedVertexs">
       <UniqueIdentifier>{7c0d44b5-3c41-4c82-88f6-fe8f8ca448f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shaders">
+      <UniqueIdentifier>{51bb03c5-84b1-4b60-b4af-af4af7200f82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\EffectManager">
+      <UniqueIdentifier>{1c2f5331-69db-4c8e-8720-9fadc4bc6db4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Effect">
+      <UniqueIdentifier>{eda2b12d-d43f-4ee2-859e-7caa3cc0a90c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shaders\Technique">
+      <UniqueIdentifier>{f098f314-b479-4d8d-93f3-1b4402ab780a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -161,6 +173,15 @@
     </ClCompile>
     <ClCompile Include="Light.cpp">
       <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>Shaders\EffectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Shaders\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectTechnique.cpp">
+      <Filter>Shaders\Technique</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +262,15 @@
     </ClInclude>
     <ClInclude Include="include\SpotLight.h">
       <Filter>Lights\SpotLight</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectManager.h">
+      <Filter>Shaders\EffectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>Shaders\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="EffectTechnique.h">
+      <Filter>Shaders\Technique</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
