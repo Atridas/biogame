@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="RenderManager">
+      <UniqueIdentifier>{615848bf-0cbe-47d7-a219-7f941ea3c4ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FontManager">
+      <UniqueIdentifier>{cebecdda-b9fc-4c4c-a8fe-2998b8af51e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object3D">
+      <UniqueIdentifier>{c99d736e-6a0c-4651-a61a-5966427dabc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Texture">
+      <UniqueIdentifier>{21842c9d-8f5a-4376-b635-ffc94bfcb203}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TextureManager">
+      <UniqueIdentifier>{3f3fdabc-e06f-4485-b1eb-201001e4132e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StaticMesh">
+      <UniqueIdentifier>{cdc76e40-6e6b-4649-bbfe-0683ecafa07d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StaticMeshManager">
+      <UniqueIdentifier>{fc572106-303d-4ba5-9b42-417814b133b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights">
+      <UniqueIdentifier>{1e8f55d6-65d4-48a1-9679-20a345809126}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights\LightManager">
+      <UniqueIdentifier>{f3955089-6989-41a9-9564-72b249e2412c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights\DirectionalLight">
+      <UniqueIdentifier>{d8de0390-5cef-487d-8425-bfb590c8a424}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights\OmniLight">
+      <UniqueIdentifier>{ded3d3d6-496e-4049-b1b4-a8e000bcf984}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights\SpotLight">
+      <UniqueIdentifier>{6128b30f-f93f-4f4d-8a5a-075a90330764}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vertex">
+      <UniqueIdentifier>{483096e6-c696-44d6-a564-80e5aae8de6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vertex\Vertex Structs">
+      <UniqueIdentifier>{db8c6700-9040-4636-8328-0fb316a65dab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vertex\RenderableVertexs">
+      <UniqueIdentifier>{8feee727-1829-413f-94c1-815584a2657f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras">
+      <UniqueIdentifier>{97e95f05-6983-4920-9f00-9e2b25c95ec7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras\Camera">
+      <UniqueIdentifier>{73f14994-50ac-4c20-89e7-61c9bb7bc307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras\FPSCamera">
+      <UniqueIdentifier>{4f4b678d-5d1e-4fe7-82e7-8860bd92e792}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras\ThPSCamera">
+      <UniqueIdentifier>{4cf3c62b-31fc-477e-8c26-8c88fa970f94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras\Frustum">
+      <UniqueIdentifier>{ab4a0200-a9d8-440e-85d2-4c3681967061}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderableObject">
+      <UniqueIdentifier>{2ab488b0-47e1-4df3-9f94-830f04a08180}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderableObject\RenderableObjectsManager">
+      <UniqueIdentifier>{1026726e-05f0-438f-a546-7904101a1ad0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderableObject\InstanceMesh">
+      <UniqueIdentifier>{8fe22f16-e6eb-4c9d-a12d-38b678b78575}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderableObject\AnimatedModel">
+      <UniqueIdentifier>{393ff171-639d-4bb7-b91e-5afa57554a24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderableObject\AnimatedModel\AnimatedCoreModel">
+      <UniqueIdentifier>{94707ca1-3968-45c8-b406-0a018414e440}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderableObject\AnimatedModel\AnimatedModelManager">
+      <UniqueIdentifier>{c52e837d-037d-4ea7-a9a7-be14ebfb2f5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderableObject\AnimatedModel\AnimatedInstanceModel">
+      <UniqueIdentifier>{ced25332-831b-4e63-b82c-281f95d60c99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderableObject\AnimatedModel\RenderableAnimatedInstanceModel">
+      <UniqueIdentifier>{aada233b-7012-4223-bb63-9fac627959df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vertex\IndexedVertexs">
+      <UniqueIdentifier>{7c0d44b5-3c41-4c82-88f6-fe8f8ca448f8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>RenderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="FontManager.cpp">
+      <Filter>FontManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Frustum.cpp">
+      <Filter>Cameras\Frustum</Filter>
+    </ClCompile>
+    <ClCompile Include="ThPSCamera.cpp">
+      <Filter>Cameras\ThPSCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="FPSCamera.cpp">
+      <Filter>Cameras\FPSCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Cameras\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Object3D.cpp">
+      <Filter>Object3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticMesh.cpp">
+      <Filter>StaticMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticMeshManager.cpp">
+      <Filter>StaticMeshManager</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableObjectsManager.cpp">
+      <Filter>RenderableObject\RenderableObjectsManager</Filter>
+    </ClCompile>
+    <ClCompile Include="InstanceMesh.cpp">
+      <Filter>RenderableObject\InstanceMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableObject.cpp">
+      <Filter>RenderableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedCoreModel.cpp">
+      <Filter>RenderableObject\AnimatedModel\AnimatedCoreModel</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedInstanceModel.cpp">
+      <Filter>RenderableObject\AnimatedModel\AnimatedInstanceModel</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedModelManager.cpp">
+      <Filter>RenderableObject\AnimatedModel\AnimatedModelManager</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableAnimatedInstanceModel.cpp">
+      <Filter>RenderableObject\AnimatedModel\RenderableAnimatedInstanceModel</Filter>
+    </ClCompile>
+    <ClCompile Include="LightManager.cpp">
+      <Filter>Lights\LightManager</Filter>
+    </ClCompile>
+    <ClCompile Include="OmniLight.cpp">
+      <Filter>Lights\OmniLight</Filter>
+    </ClCompile>
+    <ClCompile Include="SpotLight.cpp">
+      <Filter>Lights\SpotLight</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionalLight.cpp">
+      <Filter>Lights\DirectionalLight</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\RenderManager.h">
+      <Filter>RenderManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FontManager.h">
+      <Filter>FontManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FPSCamera.h">
+      <Filter>Cameras\FPSCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Frustum.h">
+      <Filter>Cameras\Frustum</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ThPSCamera.h">
+      <Filter>Cameras\ThPSCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Camera.h">
+      <Filter>Cameras\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Object3D.h">
+      <Filter>Object3D</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Texture.h">
+      <Filter>Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TextureManager.h">
+      <Filter>TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RenderableVertexs.h">
+      <Filter>Vertex\RenderableVertexs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IndexedVertexs.h">
+      <Filter>Vertex\IndexedVertexs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VertexsStructs.h">
+      <Filter>Vertex\Vertex Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\StaticMesh.h">
+      <Filter>StaticMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="include\StaticMeshManager.h">
+      <Filter>StaticMeshManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RenderableObjectsManager.h">
+      <Filter>RenderableObject\RenderableObjectsManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RenderableObject.h">
+      <Filter>RenderableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InstanceMesh.h">
+      <Filter>RenderableObject\InstanceMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AnimatedCoreModel.h">
+      <Filter>RenderableObject\AnimatedModel\AnimatedCoreModel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AnimatedInstanceModel.h">
+      <Filter>RenderableObject\AnimatedModel\AnimatedInstanceModel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AnimatedModelManager.h">
+      <Filter>RenderableObject\AnimatedModel\AnimatedModelManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RenderableAnimatedInstanceModel.h">
+      <Filter>RenderableObject\AnimatedModel\RenderableAnimatedInstanceModel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Light.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LightManager.h">
+      <Filter>Lights\LightManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DirectionalLight.h">
+      <Filter>Lights\DirectionalLight</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OmniLight.h">
+      <Filter>Lights\OmniLight</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SpotLight.h">
+      <Filter>Lights\SpotLight</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
