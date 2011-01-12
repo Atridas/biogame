@@ -416,6 +416,12 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 	
 	local l_material = _object.material
 	
+	if l_material == undefined then
+	(
+		ShowError ("No hi ha material a " + _object.name)
+		return false
+	)
+	
 	local l_numMaterials --nombre de materials
 	local l_vertexType = #() -- llista de vertexTypes, amb un sol element si no és un multimaterial
 	

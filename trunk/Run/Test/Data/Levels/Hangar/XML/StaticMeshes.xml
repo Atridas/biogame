@@ -20,4 +20,15 @@
 	<mesh name="Container14" path="Data/Levels/Hangar/Meshes/Container14.mesh"/>
 	<mesh name="Container15" path="Data/Levels/Hangar/Meshes/Container15.mesh"/>
 	<mesh name="Container16" path="Data/Levels/Hangar/Meshes/Container16.mesh"/>
+	<mesh name="maquina exploradora" path="Data/Levels/Hangar/Meshes/maquina exploradora.mesh"/>
+	<mesh name="maquina exploradora01" path="Data/Levels/Hangar/Meshes/maquina exploradora01.mesh"/>
+	<mesh name="Caixes" path="Data/Levels/Hangar/Meshes/Caixes.mesh"/>
+	<mesh name="mur divisor" path="Data/Levels/Hangar/Meshes/mur divisor.mesh"/>
+	<mesh name="Caixes49" path="Data/Levels/Hangar/Meshes/Caixes49.mesh"/>
+	<mesh name="mur divisor08" path="Data/Levels/Hangar/Meshes/mur divisor08.mesh"/>
+	<mesh name="mur divisor09" path="Data/Levels/Hangar/Meshes/mur divisor09.mesh"/>
+	<mesh name="mur divisor10" path="Data/Levels/Hangar/Meshes/mur divisor10.mesh"/>
+	<mesh name="mur divisor11" path="Data/Levels/Hangar/Meshes/mur divisor11.mesh"/>
+	<mesh name="Caixes50" path="Data/Levels/Hangar/Meshes/Caixes50.mesh"/>
+	<mesh name="Caixes51" path="Data/Levels/Hangar/Meshes/Caixes51.mesh"/>
 </meshes>

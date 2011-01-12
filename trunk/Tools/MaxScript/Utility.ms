@@ -139,7 +139,11 @@ utility BioUtility "Eon-Utility" width:160 height:312
 				
 				local l_outName = l_MeshTotalPath + l_object.name + ".mesh"
 				
-				ExportMesh l_object l_outName l_relativeTexPath
+				if ExportMesh l_object l_outName l_relativeTexPath == false then
+				(
+					close l_file
+					return false
+				)
 			)
 			
 			if checkTextures.checked then
