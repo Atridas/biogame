@@ -11,6 +11,7 @@ class CCamera;
 class CTextureManager;
 class CStaticMeshManager;
 class CAnimatedModelManager;
+class CEffectManager;
 //-------------------------------------------------------------------
 
 class CRenderManager:
@@ -73,5 +74,6 @@ private:
   CTextureManager*        m_pTextureManager;
   CStaticMeshManager*     m_pStaticMeshManager;
   CAnimatedModelManager*  m_pAnimatedModelManager;
+  CEffectManager*       m_pEffectManager;
 };
 

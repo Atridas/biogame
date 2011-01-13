@@ -49,7 +49,7 @@ public:
   CEffect * GetEffect(const string& _szName);
   
   void ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _mProjectionMatrix, const Vect3f& _vCameraEye);
-  void Load(const string& _szFileName);
+  bool Load(const string& _szFileName);
   void Reload();
   
   
