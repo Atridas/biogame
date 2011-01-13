@@ -94,6 +94,12 @@
     <Filter Include="Effects\Effect">
       <UniqueIdentifier>{b77dbc03-72bb-4ff3-b6d3-98a6e58cf77d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Effects\EffectTechnique">
+      <UniqueIdentifier>{1816bafa-d930-40be-b363-64a8670e72fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effects\EffectManager">
+      <UniqueIdentifier>{3760ea8b-bd5a-40a6-b073-d5f95085f5c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -168,7 +174,15 @@
     <ClCompile Include="Light.cpp">
       <Filter>Lights</Filter>
     </ClCompile>
-    <ClCompile Include="Effect.cpp" />
+    <ClCompile Include="EffectTechnique.cpp">
+      <Filter>Effects\EffectTechnique</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Effects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>Effects\EffectManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RenderManager.h">
@@ -249,6 +263,14 @@
     <ClInclude Include="include\SpotLight.h">
       <Filter>Lights\SpotLight</Filter>
     </ClInclude>
-    <ClInclude Include="include\Effect.h" />
+    <ClInclude Include="include\EffectTechnique.h">
+      <Filter>Effects\EffectTechnique</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Effect.h">
+      <Filter>Effects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EffectManager.h">
+      <Filter>Effects\EffectManager</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

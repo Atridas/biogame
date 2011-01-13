@@ -16,40 +16,40 @@ public:
   CEffect(void);
   virtual ~CEffect(void) {Done();};
 
-  bool SetLights(size_t NumOfLights);
-  bool Load(const std::string &FileName);
+  bool SetLights(size_t _iNumOfLights);
+  bool Load(const string& _szFileName);
   bool Reload();
   //DirectX Methods Interface
   LPD3DXEFFECT GetD3DEffect() const;
-  D3DXHANDLE GetTechniqueByName(const std::string &TechniqueName);
+  D3DXHANDLE GetTechniqueByName(const string& _szTechniqueName);
   
 protected:
   void Release();
 private:
   void SetNullParameters();
-  void GetParameterBySemantic(const std::string &SemanticName, D3DXHANDLE &l_Handle);
+  void GetParameterBySemantic(const string& _szSemanticName, D3DXHANDLE& _pHandle);
   bool LoadEffect();
 
 
-  std::string m_FileName;
-  LPD3DXEFFECT m_Effect;
-  BOOL m_LightsEnabled[MAX_LIGHTS_BY_SHADER];
-  int m_LightsType[MAX_LIGHTS_BY_SHADER];
-  float m_LightsAngle[MAX_LIGHTS_BY_SHADER];
-  float m_LightsFallOff[MAX_LIGHTS_BY_SHADER];
-  float m_LightsStartRangeAttenuation[MAX_LIGHTS_BY_SHADER];
-  float m_LightsEndRangeAttenuation[MAX_LIGHTS_BY_SHADER];
-  Vect3f m_LightsPosition[MAX_LIGHTS_BY_SHADER];
-  Vect3f m_LightsDirection[MAX_LIGHTS_BY_SHADER];
-  Vect3f m_LightsColor[MAX_LIGHTS_BY_SHADER];
-  D3DXHANDLE m_WorldMatrixParameter, m_ViewMatrixParameter, m_ProjectionMatrixParameter;
-  D3DXHANDLE m_WorldViewMatrixParameter,  m_ViewProjectionMatrixParameter, m_WorldViewProjectionMatrixParameter;
-  D3DXHANDLE m_ViewToLightProjectionMatrixParameter;
-  D3DXHANDLE m_LightEnabledParameter, m_LightsTypeParameter, m_LightsPositionParameter, m_LightsDirectionParameter, m_LightsAngleParameter, m_LightsColorParameter;
-  D3DXHANDLE m_LightsFallOffParameter, m_LightsStartRangeAttenuationParameter, m_LightsEndRangeAttenuationParameter;
-  D3DXHANDLE m_CameraPositionParameter;
-  D3DXHANDLE m_BonesParameter;
-  D3DXHANDLE m_TimeParameter;
+  string m_szFileName;
+  LPD3DXEFFECT m_pEffect;
+  BOOL m_aLightsEnabled[MAX_LIGHTS_BY_SHADER];
+  int m_aLightsType[MAX_LIGHTS_BY_SHADER];
+  float m_aLightsAngle[MAX_LIGHTS_BY_SHADER];
+  float m_aLightsFallOff[MAX_LIGHTS_BY_SHADER];
+  float m_aLightsStartRangeAttenuation[MAX_LIGHTS_BY_SHADER];
+  float m_aLightsEndRangeAttenuation[MAX_LIGHTS_BY_SHADER];
+  Vect3f m_aLightsPosition[MAX_LIGHTS_BY_SHADER];
+  Vect3f m_aLightsDirection[MAX_LIGHTS_BY_SHADER];
+  Vect3f m_aLightsColor[MAX_LIGHTS_BY_SHADER];
+  D3DXHANDLE m_pWorldMatrixParameter, m_pViewMatrixParameter, m_pProjectionMatrixParameter;
+  D3DXHANDLE m_pWorldViewMatrixParameter,  m_pViewProjectionMatrixParameter, m_pWorldViewProjectionMatrixParameter;
+  D3DXHANDLE m_pViewToLightProjectionMatrixParameter;
+  D3DXHANDLE m_pLightEnabledParameter, m_pLightsTypeParameter, m_pLightsPositionParameter, m_pLightsDirectionParameter, m_pLightsAngleParameter, m_pLightsColorParameter;
+  D3DXHANDLE m_pLightsFallOffParameter, m_pLightsStartRangeAttenuationParameter, m_pLightsEndRangeAttenuationParameter;
+  D3DXHANDLE m_pCameraPositionParameter;
+  D3DXHANDLE m_pBonesParameter;
+  D3DXHANDLE m_pTimeParameter;
 };
 
 #endif
