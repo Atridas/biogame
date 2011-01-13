@@ -144,6 +144,14 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
       SetOk(false);
     }
 
+    if(! m_pAnimatedModelManager->Load(_params.vAnimatedModels) )
+    {
+      LOGGER->AddNewLog(ELL_ERROR,"RenderManager:: Error al manager de Animated Models.");
+      SetOk(false);
+    }
+
+    //vAnimatedModels
+
     /*if(! m_pAnimatedModelManager->Load("Data/XML/AnimatedModels.xml") )
     {
       LOGGER->AddNewLog(ELL_ERROR,"RenderManager:: Error al manager de Animated Models Manager.");

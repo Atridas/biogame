@@ -25,6 +25,7 @@ struct SRenderManagerParams
   bool bFullscreen;
 
   vector<string> vRenderableMeshes;
+  vector<string> vAnimatedModels;
 
 
   //Default params
