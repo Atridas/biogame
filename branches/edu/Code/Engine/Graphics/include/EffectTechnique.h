@@ -1,5 +1,10 @@
 #pragma once
+
+#ifndef __EFFECT_TECHNIQUE_H__
+#define __EFFECT_TECHNIQUE_H__
+
 #include "Effect.h"
+#include <d3dx9.h>
 
 class CEffectTechnique
 {
@@ -23,7 +28,22 @@ private:
 	D3DXHANDLE m_D3DTechnique;
 	std::string m_TechniqueName;
 public:
-	CEffectTechnique ();
+	CEffectTechnique ():
+                      m_UseCameraPosition(),
+	                    m_UseInverseProjMatrix(),
+	                    m_UseInverseViewMatrix(),
+	                    m_UseInverseWorldMatrix(),
+	                    m_UseLights(),
+	                    m_NumOfLights(),
+	                    m_UseLightAmbientColor(),
+	                    m_UseProjMatrix(),
+	                    m_UseViewMatrix(),
+	                    m_UseWorldMatrix(),
+	                    m_UseWorldViewMatrix(),
+	                    m_UseWorldViewProjectionMatrix(),
+	                    m_UseViewProjectionMatrix(),
+	                    m_UseViewToLightProjectionMatrix(),
+                      m_UseTime()     {};
 	~CEffectTechnique ();
 	inline CEffect * GetEffect() const {return m_Effect;}
 	bool BeginRender();
@@ -31,3 +51,4 @@ public:
 	//DirectX Methods Interface
 	D3DXHANDLE GetD3DTechnique();
 };
+#endif
