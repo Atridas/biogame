@@ -73,9 +73,11 @@ void CEffect::SetNullParameters()
 }
 void CEffect::GetParameterBySemantic(const string& _szSemanticName, D3DXHANDLE& _pHandle)
 {
- //TODO 
-
+  _pHandle=m_pD3DEffect->GetParameterBySemantic(NULL,_szSemanticName.c_str());
+  if(_pHandle==NULL)
+    LOGGER->AddNewLog(ELL_WARNING,"CEffect::GetParameterBySemantic Parameter by semantic '%s' wasn't found on effect '%s'", _szSemanticName.c_str(),m_szFileName.c_str());
 }
+
 bool CEffect::LoadEffect()
 {
  //TODO 
