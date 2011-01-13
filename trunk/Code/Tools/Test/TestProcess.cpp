@@ -111,7 +111,7 @@ bool CTestProcess::Init()
   //g_pRenderableObjectsManager = new CRenderableObjectsManager();
   //g_pRenderableObjectsManager->Load("Data/XML/RenderableObjects.xml");
 
-  ANIMATED_MANAGER->Load("Data/XML/AnimatedModels.xml");
+  //ANIMATED_MANAGER->Load("Data/XML/AnimatedModels.xml");
  
   g_pRenderableAIModel = new CRenderableAnimatedInstanceModel("Model Bot");
   g_pRenderableAIModel->Init("bot");

@@ -4,6 +4,7 @@
     <StaticMeshManager xml="Data/Levels/Level -2/XML/StaticMeshes.xml"/>
     <StaticMeshManager xml="Data/Levels/Hangar/XML/StaticMeshes.xml"/>
     <StaticMeshManager xml="Data/XML/StaticMeshes.xml"/>
+    <AnimatedModelManager xml="Data/XML/AnimatedModels.xml"/>
   </RenderManager>
   <FontManager fontsXML="./Data/XML/Fonts.xml"/>
   <Languages default="cat">

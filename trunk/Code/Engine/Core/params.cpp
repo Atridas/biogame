@@ -49,7 +49,20 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
             InitParams_.RenderManagerParams.vRenderableMeshes.push_back(string(l_pcXML));
             LOGGER->AddNewLog(ELL_INFORMATION, "\tStaticMeshes \"%s\"",l_pcXML);
           }
-        } else {
+        } 
+        else if (strcmp(l_TreeChild.GetName(), "AnimatedModelManager") == 0)
+        {
+          const char* l_pcXML = l_TreeChild.GetPszProperty("xml",0);
+          if(l_pcXML == 0)
+          {
+            LOGGER->AddNewLog(ELL_WARNING, "\tElement \"AnimatedModelManager\" sense parametre \"xml\"");
+          } else {
+            InitParams_.RenderManagerParams.vAnimatedModels.push_back(string(l_pcXML));
+            LOGGER->AddNewLog(ELL_INFORMATION, "\tStaticMeshes \"%s\"",l_pcXML);
+          }
+        } 
+        else 
+        {
           LOGGER->AddNewLog(ELL_WARNING, "\tParametre del RenderManager desconegut : %s", l_TreeChild.GetName());
         }
       }
