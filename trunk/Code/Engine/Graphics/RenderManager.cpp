@@ -156,7 +156,8 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
     if(!m_pEffectManager->Load(_params.szEffectsXML))
     {
       LOGGER->AddNewLog(ELL_ERROR,"RenderManager:: Error al manager d'Effects.");
-      SetOk(false);
+      //TODO
+      //SetOk(false);
     }
 
   }
@@ -186,6 +187,7 @@ void CRenderManager::Release(void)
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "RenderManager::Release",m_uWidth,m_uHeight);
   
+  CHECKED_DELETE(m_pEffectManager);
   CHECKED_DELETE(m_pAnimatedModelManager)
   CHECKED_DELETE(m_pStaticMeshManager)
   CHECKED_DELETE(m_pTextureManager)
