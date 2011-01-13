@@ -7,6 +7,10 @@
 
 #include <d3d9.h>
 
+//Forward declarations-------------
+class CEffectTechnique;
+//---------------------------------
+
 
 #define MAX_LIGHTS_BY_SHADER 4
 
@@ -52,6 +56,8 @@ private:
   D3DXHANDLE m_pCameraPositionParameter;
   D3DXHANDLE m_pBonesParameter;
   D3DXHANDLE m_pTimeParameter;
+
+  friend CEffectTechnique;
 };
 
 #endif
