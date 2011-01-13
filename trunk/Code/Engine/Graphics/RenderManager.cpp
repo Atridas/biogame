@@ -6,6 +6,7 @@
 #include "TextureManager.h"
 #include "StaticMeshManager.h"
 #include "AnimatedModelManager.h"
+#include "EffectManager.h"
 
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 #define D3DFVF_CUSTOMVERTEX2 (D3DFVF_XYZ|D3DFVF_TEX1)
@@ -138,25 +139,25 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
     m_pStaticMeshManager = new CStaticMeshManager();
     m_pAnimatedModelManager = new CAnimatedModelManager();
 
-    if(! m_pStaticMeshManager->Load(_params.vRenderableMeshes) )
+    m_pEffectManager = new CEffectManager();
+
+    if(!m_pStaticMeshManager->Load(_params.vRenderableMeshes))
     {
       LOGGER->AddNewLog(ELL_ERROR,"RenderManager:: Error al manager de Static Meshes.");
       SetOk(false);
     }
 
-    if(! m_pAnimatedModelManager->Load(_params.vAnimatedModels) )
+    if(!m_pAnimatedModelManager->Load(_params.vAnimatedModels))
     {
-      LOGGER->AddNewLog(ELL_ERROR,"RenderManager:: Error al manager de Animated Models.");
+      LOGGER->AddNewLog(ELL_ERROR,"RenderManager:: Error al manager d'Animated Models.");
       SetOk(false);
     }
 
-    //vAnimatedModels
-
-    /*if(! m_pAnimatedModelManager->Load("Data/XML/AnimatedModels.xml") )
+    if(!m_pEffectManager->Load(_params.szEffectsXML))
     {
-      LOGGER->AddNewLog(ELL_ERROR,"RenderManager:: Error al manager de Animated Models Manager.");
+      LOGGER->AddNewLog(ELL_ERROR,"RenderManager:: Error al manager d'Effects.");
       SetOk(false);
-    }*/
+    }
 
   }
 

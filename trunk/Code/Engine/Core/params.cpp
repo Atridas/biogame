@@ -58,9 +58,19 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
             LOGGER->AddNewLog(ELL_WARNING, "\tElement \"AnimatedModelManager\" sense parametre \"xml\"");
           } else {
             InitParams_.RenderManagerParams.vAnimatedModels.push_back(string(l_pcXML));
-            LOGGER->AddNewLog(ELL_INFORMATION, "\tStaticMeshes \"%s\"",l_pcXML);
+            LOGGER->AddNewLog(ELL_INFORMATION, "\tAnimatedModels \"%s\"",l_pcXML);
           }
-        } 
+        } else if (strcmp(l_TreeChild.GetName(), "EffectManager") == 0)
+        {
+          const char* l_pcXML = l_TreeChild.GetPszProperty("xml",0);
+          if(l_pcXML == 0)
+          {
+            LOGGER->AddNewLog(ELL_WARNING, "\tElement \"EffectManager\" sense parametre \"xml\"");
+          } else {
+            InitParams_.RenderManagerParams.szEffectsXML = string(l_pcXML);
+            LOGGER->AddNewLog(ELL_INFORMATION, "\tEffects \"%s\"",l_pcXML);
+          }
+        }
         else 
         {
           LOGGER->AddNewLog(ELL_WARNING, "\tParametre del RenderManager desconegut : %s", l_TreeChild.GetName());

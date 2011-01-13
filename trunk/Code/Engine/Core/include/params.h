@@ -27,6 +27,7 @@ struct SRenderManagerParams
   vector<string> vRenderableMeshes;
   vector<string> vAnimatedModels;
 
+  string szEffectsXML;
 
   //Default params
   SRenderManagerParams():

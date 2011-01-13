@@ -37,6 +37,7 @@ bool CAnimatedModelManager::Load(const string &_szFileName)
   } else {
     LOGGER->AddNewLog(ELL_WARNING, "CAnimatedModelManager::Load No s'ha trobat el fitxer");
   }
+  SetOk(true);
   return IsOk();
 }
 
