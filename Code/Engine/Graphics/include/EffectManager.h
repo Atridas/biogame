@@ -4,11 +4,12 @@
 
 #include "base.h"
 #include "Effect.h"
+#include "EffectTechnique.h"
 #include "Utils/MapManager.h"
 
 //forward declarations ----------------------------------------------
 //class CEffect;
-class CEffectTechnique;
+//class CEffectTechnique;
 //-------------------------------------------------------------------
 
 class CEffectManager:
