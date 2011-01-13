@@ -414,7 +414,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 	function IsMesh _object =
 	(
 		-- TODO acceptar més coses
-		if classof _object == Editable_Poly or classof _object == Box or classof _object == Editable_mesh then
+		if classof _object == Editable_Poly or classof _object == Box or classof _object == Editable_mesh or classof _object == Cylinder then
 		(
 			return true
 		) else (

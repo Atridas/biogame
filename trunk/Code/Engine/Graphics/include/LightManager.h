@@ -19,6 +19,8 @@ public:
   ~CLightManager()  {Done();};
   bool Load(const string& _szFileName);
   void Render(CRenderManager* _pRM) const;
+
+  CLight* GetLight(int _i) const;
 };
 
 #endif

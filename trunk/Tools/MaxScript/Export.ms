@@ -403,6 +403,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 
 function ExportMesh _object0 _filename _relativeTexturePath = 
 (
+	format "Exporting % \n" _object0.name
 	
 	_object = copy _object0
 	convertToMesh _object

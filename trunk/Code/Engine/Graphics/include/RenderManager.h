@@ -49,29 +49,29 @@ public:
 	//--------------------------------------------------------------------
 
   //----Getters / Setters ----------------------------------------------
-  uint32                GetScreenWidth      () const {return m_uWidth;};
-  uint32                GetScreenHeight     () const {return m_uHeight;};
+  uint32                  GetScreenWidth          () const {return m_uWidth;};
+  uint32                  GetScreenHeight         () const {return m_uHeight;};
 
-  LPDIRECT3DDEVICE9     GetDevice           () const {return m_pD3DDevice;};
-  CTextureManager*      GetTextureManager   () const {return m_pTextureManager;};
-  CStaticMeshManager*   GetStaticMeshManager() const {return m_pStaticMeshManager;};
-  CAnimatedModelManager*  GetAnimatedModelManager() const {return m_pAnimatedModelManager;};
+  LPDIRECT3DDEVICE9       GetDevice               () const {return m_pD3DDevice;};
+  CTextureManager*        GetTextureManager       () const {return m_pTextureManager;};
+  CStaticMeshManager*     GetStaticMeshManager    () const {return m_pStaticMeshManager;};
+  CAnimatedModelManager*  GetAnimatedModelManager () const {return m_pAnimatedModelManager;};
 
 public:
-	void                  Release					  ();
+	void                    Release					  ();
 
 private:
-	void									GetWindowRect		  (HWND hWnd);
+	void									  GetWindowRect		  (HWND hWnd);
 
-	LPDIRECT3D9						m_pD3D; // direct3d interface
-	LPDIRECT3DDEVICE9	  	m_pD3DDevice;	   					 // direct3d device
+	LPDIRECT3D9						  m_pD3D; // direct3d interface
+	LPDIRECT3DDEVICE9	  	  m_pD3DDevice;	   					 // direct3d device
 
-	uint32								m_uWidth;
-	uint32								m_uHeight;
+	uint32								  m_uWidth;
+	uint32								  m_uHeight;
 
-  CCamera*              m_pCamera;
-  CTextureManager*      m_pTextureManager;
-  CStaticMeshManager*   m_pStaticMeshManager;
+  CCamera*                m_pCamera;
+  CTextureManager*        m_pTextureManager;
+  CStaticMeshManager*     m_pStaticMeshManager;
   CAnimatedModelManager*  m_pAnimatedModelManager;
 };
 

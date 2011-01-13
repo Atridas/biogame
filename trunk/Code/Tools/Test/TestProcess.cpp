@@ -41,7 +41,7 @@ CAnimatedModelManager* g_pAnimatedModelManager = 0;
 CAnimatedInstanceModel* g_pAnimatedInstanceModel = 0;
 CRenderableAnimatedInstanceModel* g_pRenderableAIModel = 0;
 
-CLightManager* g_pLightManager = 0;
+//CLightManager* g_pLightManager = 0;
 
 bool CTestProcess::Init()
 {
@@ -118,8 +118,9 @@ bool CTestProcess::Init()
   g_pRenderableAIModel->GetAnimatedInstanceModel()->BlendCycle(1,0);
 
   //lights
-  g_pLightManager = new CLightManager();
-  g_pLightManager->Load("Data/Levels/Hangar/XML/Lights.xml");
+  //g_pLightManager = new CLightManager();
+  //g_pLightManager->Load("Data/Levels/Hangar/XML/Lights.xml");
+  CORE->SetRenderLights(true);
 
   SetOk(true);
   return IsOk();
@@ -135,7 +136,7 @@ void CTestProcess::Release()
   CHECKED_DELETE(m_pCubeCamera)
   //CHECKED_DELETE(g_tex); ja ho fa el texture manager
   
-  CHECKED_DELETE(g_pLightManager)
+  //CHECKED_DELETE(g_pLightManager)
 
   CHECKED_DELETE(g_pIndexedVertexs)
   CHECKED_DELETE(g_pRenderableObjectsManager)
@@ -253,7 +254,7 @@ void CTestProcess::Render()
   //g_pAnimatedInstanceModel->Render(l_pRM);
   g_pRenderableAIModel->GetAnimatedInstanceModel()->Render(l_pRM);
 
-  g_pLightManager->Render(l_pRM);
+  //g_pLightManager->Render(l_pRM);
 
   //g_tex->Activate(0);
   //g_pIndexedVertexs->Render(l_pRM);

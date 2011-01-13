@@ -68,3 +68,24 @@ void CLightManager::Render(CRenderManager *_pRM) const
   }
 }
 
+
+CLight* CLightManager::GetLight(int _i) const
+{
+  TMapResource::const_iterator l_it = m_Resources.cbegin();
+  TMapResource::const_iterator l_end = m_Resources.cend();
+
+  if(l_it == l_end)
+  {
+    return 0;
+  }
+  for(int i = 0; i<_i; ++i)
+  {
+    ++l_it;
+    if(l_it == l_end)
+    {
+      return 0;
+    }
+  }
+  return l_it->second;
+}
+

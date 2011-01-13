@@ -174,6 +174,27 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
     } else {
       LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"RenderableObjectsManager\". Usant valors per defecte [Res].");
     }
+
+
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Lights Manager ----------------------------------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
+    CXMLTreeNode l_TreeLightsManager = l_TreeConfig["LightsManager"];
+    if(l_TreeRenderableObjectsManager.Exists())
+    {
+      const char* l_pcFile = l_TreeLightsManager.GetPszProperty("file", 0);
+
+      if(l_pcFile == 0)
+      {
+        LOGGER->AddNewLog(ELL_WARNING, "\tNo hi ha fitxer base del LightsManager.");
+      } else {
+        InitParams_.LightsManager.szFile = l_pcFile;
+        LOGGER->AddNewLog(ELL_INFORMATION, "\tLightsManager base \"%s\"",l_pcFile);
+      }
+
+    } else {
+      LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"LightsManager\". Usant valors per defecte [Res].");
+    }
   }
   
   LOGGER->AddNewLog(ELL_INFORMATION, "Fi carregar configuració");

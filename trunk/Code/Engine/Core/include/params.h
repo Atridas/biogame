@@ -108,6 +108,12 @@ struct SRenderableObjectsManager
   vector<string> vXMLFiles;
 };
 
+
+struct SLightsManager
+{
+  string szFile;
+};
+
 /**
  * Paràmetres d'inicialització del procés.
  * Estructura que conté els paràmetres de configuració que es poden trobar al config del procés.
@@ -132,6 +138,7 @@ struct SInitParams
   SInputManagerParams       InputManagerParams;
   SActionToInputParams      ActionToInputParams;
   SRenderableObjectsManager RenderableObjectsManager;
+  SLightsManager            LightsManager;
 };
 
 void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML);
