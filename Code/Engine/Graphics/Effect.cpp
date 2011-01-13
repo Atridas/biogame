@@ -2,39 +2,39 @@
 
 
 CEffect::CEffect(void):
-  m_FileName(""),
-  m_Effect(0),
-  m_WorldMatrixParameter(0),
-  m_ViewMatrixParameter(0),
-  m_ProjectionMatrixParameter(0),
-  m_WorldViewMatrixParameter(0),
-  m_ViewProjectionMatrixParameter(0),
-  m_WorldViewProjectionMatrixParameter(0),
-  m_ViewToLightProjectionMatrixParameter(0),
-  m_LightEnabledParameter(0),
-  m_LightsTypeParameter(0),
-  m_LightsPositionParameter(0),
-  m_LightsDirectionParameter(0),
-  m_LightsAngleParameter(0),
-  m_LightsColorParameter(0),
-  m_LightsFallOffParameter(0),
-  m_LightsStartRangeAttenuationParameter(0),
-  m_LightsEndRangeAttenuationParameter(0),
-  m_CameraPositionParameter(0),
-  m_BonesParameter(0),
-  m_TimeParameter(0)
+  m_szFileName(""),
+  m_pEffect(0),
+  m_pWorldMatrixParameter(0),
+  m_pViewMatrixParameter(0),
+  m_pProjectionMatrixParameter(0),
+  m_pWorldViewMatrixParameter(0),
+  m_pViewProjectionMatrixParameter(0),
+  m_pWorldViewProjectionMatrixParameter(0),
+  m_pViewToLightProjectionMatrixParameter(0),
+  m_pLightEnabledParameter(0),
+  m_pLightsTypeParameter(0),
+  m_pLightsPositionParameter(0),
+  m_pLightsDirectionParameter(0),
+  m_pLightsAngleParameter(0),
+  m_pLightsColorParameter(0),
+  m_pLightsFallOffParameter(0),
+  m_pLightsStartRangeAttenuationParameter(0),
+  m_pLightsEndRangeAttenuationParameter(0),
+  m_pCameraPositionParameter(0),
+  m_pBonesParameter(0),
+  m_pTimeParameter(0)
 {
   for(int i = 0; i < MAX_LIGHTS_BY_SHADER; i++)
   {
-    m_LightsEnabled[i] = 0;
-    m_LightsType[i] = 0;
-    m_LightsAngle[i] = 0;
-    m_LightsFallOff[i] = 0;
-    m_LightsStartRangeAttenuation[i] = 0;
-    m_LightsEndRangeAttenuation[i] = 0;
-    m_LightsPosition[i] = Vect3f(0.0f);
-    m_LightsDirection[i] = Vect3f(0.0f);
-    m_LightsColor[i] = Vect3f(0.0f);
+    m_aLightsEnabled[i] = 0;
+    m_aLightsType[i] = 0;
+    m_aLightsAngle[i] = 0;
+    m_aLightsFallOff[i] = 0;
+    m_aLightsStartRangeAttenuation[i] = 0;
+    m_aLightsEndRangeAttenuation[i] = 0;
+    m_aLightsPosition[i] = Vect3f(0.0f);
+    m_aLightsDirection[i] = Vect3f(0.0f);
+    m_aLightsColor[i] = Vect3f(0.0f);
   }
 }
 
@@ -47,7 +47,7 @@ void CEffect::SetNullParameters(){
  //TODO 
   
 }
-void CEffect::GetParameterBySemantic(const std::string &SemanticName, D3DXHANDLE &l_Handle){
+void CEffect::GetParameterBySemantic(const string& _szSemanticName, D3DXHANDLE& _pHandle){
  //TODO 
   
 }
@@ -55,11 +55,11 @@ bool CEffect::LoadEffect(){
  //TODO 
   return 0;
 }
-bool CEffect::SetLights(size_t NumOfLights){
+bool CEffect::SetLights(size_t _iNumOfLights){
  //TODO 
   return 0;
 }
-bool CEffect::Load(const std::string &FileName){
+bool CEffect::Load(const string& _szFileName){
  //TODO 
   return 0;
 }
@@ -72,7 +72,7 @@ LPD3DXEFFECT CEffect::GetD3DEffect() const {
  //TODO 
   return 0;
 }
-D3DXHANDLE CEffect::GetTechniqueByName(const std::string &TechniqueName){
+D3DXHANDLE CEffect::GetTechniqueByName(const string& _szTechniqueName){
  //TODO 
   return 0;
 }
