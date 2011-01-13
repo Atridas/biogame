@@ -25,6 +25,8 @@
     -->
   </RenderableObjectsManager>
 
+  <LightsManager file="Data/Levels/Hangar/XML/Lights.xml"/>
+    
   <!--<AnimatedModelManager file="Data/XML/AnimatedModels.xml">
   </AnimatedModelManager>-->
   

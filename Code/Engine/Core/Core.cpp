@@ -10,6 +10,7 @@
 #include <InputManager.h>
 #include <ActionToInput.h>
 #include <RenderableObjectsManager.h>
+#include <LightManager.h>
 //#include <AnimatedModelManager.h>
 
 bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
@@ -22,6 +23,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pInputManager             = new CInputManager();
   m_pActionToInput            = new CActionToInput();
   m_pRenderableObjectsManager = new CRenderableObjectsManager();
+  m_pLightManager             = new CLightManager();
   //m_pAnimatedModelManager     = new CAnimatedModelManager();
 
   m_pRenderManager->Init(hWnd,_InitParams.RenderManagerParams);
@@ -31,6 +33,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pActionToInput->Init(m_pInputManager,_InitParams.ActionToInputParams.pcFile);
 
   m_pRenderableObjectsManager->Load(_InitParams.RenderableObjectsManager.vXMLFiles);
+  m_pLightManager->Load(_InitParams.LightsManager.szFile);
   //m_pAnimatedModelManager->Load(_InitParams.);
 
   SetOk(true);
@@ -44,7 +47,8 @@ void CCore::Release()
   
 
   //delete a l'inrevès de com s'ha fet l'init
-  CHECKED_DELETE(m_pRenderableObjectsManager)
+  CHECKED_DELETE(m_pLightManager);
+  CHECKED_DELETE(m_pRenderableObjectsManager);
 
   CHECKED_DELETE(m_pActionToInput);
   CHECKED_DELETE(m_pInputManager);
@@ -63,4 +67,6 @@ void CCore::Update(float elapsedTime)
 void CCore::Render()
 {
   m_pRenderableObjectsManager->Render(m_pRenderManager);
+  if(m_bRenderLights)
+    m_pLightManager->Render(m_pRenderManager);
 }
