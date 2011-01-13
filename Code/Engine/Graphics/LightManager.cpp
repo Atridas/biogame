@@ -21,14 +21,14 @@ bool CLightManager::Load(const string& _szFileName)
   int l_iNumMeshesLights = l_XMLLights.GetNumChildren();
   for(int i = 0; i < l_iNumMeshesLights; i++)
   {
-    if(l_XMLLights.IsComment()) {
+    CXMLTreeNode l_XMLLight = l_XMLLights(i);
+    if(l_XMLLight.IsComment()) {
       continue;
     }
 
     string l_szName = "";
     string l_szType = "";
 
-    CXMLTreeNode l_XMLLight = l_XMLLights(i);
     l_szName = l_XMLLight.GetPszProperty("name" ,"");
     l_szType = l_XMLLight.GetPszProperty("type" ,"");
 
