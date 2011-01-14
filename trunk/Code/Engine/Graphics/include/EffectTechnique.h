@@ -52,12 +52,9 @@ protected:
   void Release();
 
 private:
-  bool m_bUseCameraPosition;
   bool m_bUseInverseProjMatrix;
   bool m_bUseInverseViewMatrix;
   bool m_bUseInverseWorldMatrix;
-  bool m_bUseLights;
-  bool m_bUseLightAmbientColor;
   bool m_bUseProjMatrix;
   bool m_bUseViewMatrix;
   bool m_bUseWorldMatrix;
@@ -65,8 +62,14 @@ private:
   bool m_bUseWorldViewProjectionMatrix;
   bool m_bUseViewProjectionMatrix;
   bool m_bUseViewToLightProjectionMatrix;
-  bool m_bUseTime;
+
   int m_iNumOfLights;
+  bool m_bUseLights;
+  bool m_bUseLightAmbientColor;
+
+  bool m_bUseCameraPosition;
+  bool m_bUseTime;
+
   CEffect* m_pEffect;
   D3DXHANDLE m_pD3DTechnique;
 };
