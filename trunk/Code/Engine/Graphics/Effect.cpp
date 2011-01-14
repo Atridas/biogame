@@ -149,11 +149,14 @@ bool CEffect::SetLights(size_t _iNumOfLights){
   return true;
 }
 
-bool CEffect::Load(const CXMLTreeNode& _xmlEffect){
+bool CEffect::Init(const CXMLTreeNode& _xmlEffect){
   SetNullParameters();
   m_szFileName = _xmlEffect.GetPszISOProperty("file","");
   SetName(_xmlEffect.GetPszISOProperty("name","")); 
-  return LoadEffect();
+  if(! LoadEffect() )
+    return false;
+  SetOk(true);
+  return true;
 }
 
 bool CEffect::Reload()

@@ -1,6 +1,9 @@
 #include "XML/XMLTreeNode.h"
 #include "EffectTechnique.h"
 #include "Effect.h"
+#include "RenderManager.h"
+#include "EffectManager.h"
+#include <Core.h>
 
 
 void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
@@ -32,9 +35,10 @@ void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
   m_iNumOfLights= _XMLParams.GetIntProperty("nom_of_lights",0);
 
   //non XML dependant
-  //RENDER_MANAGER->GetEffectManager()->GetEffect(l_szEffectName);
+  m_pEffect = RENDER_MANAGER->GetEffectManager()->GetEffect(l_szEffectName);
+  m_pD3DTechnique = m_pEffect->GetTechniqueByName(l_szEffectName);
   
-  if(m_pEffect)
+  if(m_pEffect && m_pD3DTechnique)
     SetOk(true);
   else
     SetOk(false);
@@ -71,5 +75,5 @@ void CEffectTechnique::Release()
   //self
   CHECKED_DELETE(m_pEffect);
   //d3d9
-  CHECKED_DELETE(m_pD3DTechnique);
+  //CHECKED_DELETE(m_pD3DTechnique); Els handles NO s'alliveren.
 }
