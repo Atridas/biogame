@@ -25,66 +25,68 @@ void CEffectManager::ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _m
 */
 bool CEffectManager::Load(const string& _szFileName)
 {
-  LOGGER->AddNewLog(ELL_INFORMATION, "CEffectManager::Load Carregant el fitxer \"%s\"", _szFileName.c_str());
+  m_szFileName = _szFileName;
+  return Load();
+}
 
-  CXMLTreeNode l_treeEffects;
-  if(l_treeEffects.LoadFile(_szFileName.c_str()))
+bool CEffectManager::Load()
+{
+  LOGGER->AddNewLog(ELL_INFORMATION, "CEffectManager::Load Carregant el fitxer \"%s\"", m_szFileName.c_str());
+
+  CXMLTreeNode l_treeShaders;
+  if(!l_treeShaders.LoadFile(m_szFileName.c_str()))
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"CEffectManager:: No s'ha trobat el XML \"%s\"", m_szFileName.c_str());
+    return false;
+  }
+
+  if(strcmp(l_treeShaders.GetName(),"shaders") == 0)
   {
 
-
-
-  }
- /*   if(strcmp(l_treeEffects.GetName(),"animatedModel") == 0)
-    {
-
+    //--------Effects-------------
+    CXMLTreeNode l_treeEffects = l_treeShaders["effects"];
     int l_iNumChildren = l_treeEffects.GetNumChildren();
     for(int i = 0; i < l_iNumChildren; i++)
     {
-      CXMLTreeNode l_treeAnimatedModel = l_treeAnimatedModels(i);
-      if(strcmp(l_treeAnimatedModel.GetName(),"animatedModel") == 0)
-      {
-        const char* l_pcPath = l_treeAnimatedModel.GetPszProperty("path",0);
-        const char* l_pcName = l_treeAnimatedModel.GetPszProperty("name",0);
+      CXMLTreeNode l_treeEffect = l_treeEffects(i);
+      
+      CEffect* l_pEffect = new CEffect();
+      l_pEffect->Load(l_treeEffect);
 
-        if(l_pcPath == 0)
-        {
-          LOGGER->AddNewLog(ELL_WARNING, "CAnimatedModelManager::Load No s'ha trobat la propietat \"path\" a una animatedModel.");
-        } else if(l_pcName == 0)
-        {
-          LOGGER->AddNewLog(ELL_WARNING, "CAnimatedModelManager::Load No s'ha trobat la propietat \"name\" a una animatedModel.");
-        } else {
-          GetCore(l_pcName, l_pcPath);
-        }
-      } else if(!l_treeAnimatedModel.IsComment())
-      {
-        LOGGER->AddNewLog(ELL_WARNING, "CAnimatedModelManager::Load S'ha trobat un element desconegut \"%s\"", l_treeAnimatedModel.GetName());
-      }
+      m_Effects.AddResource(l_pEffect->GetName(),l_pEffect);
     }
-  } else {
-    LOGGER->AddNewLog(ELL_WARNING, "CAnimatedModelManager::Load No s'ha trobat el fitxer");
-  }
-  SetOk(true);*/
+    //----------------------------
 
-  return IsOk();
+    //TODO: default techniques
+
+    //--------Techniques-----------
+    CXMLTreeNode l_treeTechniques = l_treeShaders["techniques"];
+    l_iNumChildren = l_treeTechniques.GetNumChildren();
+    for(int i = 0; i < l_iNumChildren; i++)
+    {
+      CXMLTreeNode l_treeTechnique = l_treeTechniques(i);
+
+      CEffectTechnique* l_pTechnique = new CEffectTechnique();
+      l_pTechnique->Init(l_treeTechnique);
+
+      AddResource(l_pTechnique->GetName(),l_pTechnique);
+    }
+    //-----------------------------
+  }
+
+  return true;
 }
 
 void CEffectManager::Reload()
 {
-
-}
-
-CEffect* CEffectManager::GetEffect(const string& _szName)
-{
-  return 0;
-}
-
-CEffectTechnique* CEffectManager::GetEffectTechnique(const string& _szName)
-{
-  return 0;
+  Release();
+  Load();
 }
 
 void CEffectManager::Release()
 {
+  CMapManager::Release();
+
   //map
   m_DefaultTechniqueEffectMap.clear();
   //mapmanager
