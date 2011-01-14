@@ -9,29 +9,32 @@
 
 //Forward declarations-------------
 class CEffectTechnique;
+class CXMLTreeNode;
 //---------------------------------
 
 
 #define MAX_LIGHTS_BY_SHADER 4
 
 class CEffect :
-  public CBaseControl
+  public CBaseControl,
+  public CNamed
 {
 public:
   CEffect(void);
   virtual ~CEffect(void) {Done();};
 
   bool SetLights(size_t _iNumOfLights);
-  bool Load(const string& _szFileName);
+  bool Load(const CXMLTreeNode& _xmlEffect);
   bool Reload();
   //DirectX Methods Interface
   LPD3DXEFFECT GetD3DEffect() const {return m_pD3DEffect;};
-  D3DXHANDLE GetTechniqueByName(const string& _szTechniqueName);
+  D3DXHANDLE GetTechniqueByName(const string& _szTechniqueName) const {return m_pD3DEffect->GetTechniqueByName(_szTechniqueName.c_str());};
   
 protected:
   void Release();
 private:
   void SetNullParameters();
+  bool InitParameters();
   void GetParameterBySemantic(const string& _szSemanticName, D3DXHANDLE& _pHandle);
   bool LoadEffect();
 
@@ -51,8 +54,10 @@ private:
   D3DXHANDLE m_pWorldMatrixParameter, m_pViewMatrixParameter, m_pProjectionMatrixParameter;
   D3DXHANDLE m_pWorldViewMatrixParameter,  m_pViewProjectionMatrixParameter, m_pWorldViewProjectionMatrixParameter;
   D3DXHANDLE m_pViewToLightProjectionMatrixParameter;
-  D3DXHANDLE m_pLightEnabledParameter, m_pLightsTypeParameter, m_pLightsPositionParameter, m_pLightsDirectionParameter, m_pLightsAngleParameter, m_pLightsColorParameter;
+
+  D3DXHANDLE m_pLightsEnabledParameter, m_pLightsTypeParameter, m_pLightsPositionParameter, m_pLightsDirectionParameter, m_pLightsAngleParameter, m_pLightsColorParameter;
   D3DXHANDLE m_pLightsFallOffParameter, m_pLightsStartRangeAttenuationParameter, m_pLightsEndRangeAttenuationParameter;
+
   D3DXHANDLE m_pCameraPositionParameter;
   D3DXHANDLE m_pBonesParameter;
   D3DXHANDLE m_pTimeParameter;

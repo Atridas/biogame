@@ -89,3 +89,25 @@ CLight* CLightManager::GetLight(int _i) const
   return l_it->second;
 }
 
+vector<CLight*> CLightManager::GetLights(int _num) const
+{
+  vector<CLight*> l_vOut;
+  TMapResource::const_iterator l_it = m_Resources.cbegin();
+  TMapResource::const_iterator l_end = m_Resources.cend();
+
+  if(l_it == l_end)
+  {
+    return l_vOut;
+  }
+  for(int i = 0; i<_num; ++i)
+  {
+    l_vOut.push_back(l_it->second);
+    ++l_it;
+    if(l_it == l_end)
+    {
+      return l_vOut;
+    }
+  }
+  return l_vOut;
+}
+
