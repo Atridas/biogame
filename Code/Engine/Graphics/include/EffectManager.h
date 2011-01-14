@@ -8,8 +8,7 @@
 #include "Utils/MapManager.h"
 
 //forward declarations ----------------------------------------------
-//class CEffect;
-//class CEffectTechnique;
+
 //-------------------------------------------------------------------
 
 class CEffectManager:
@@ -21,8 +20,9 @@ private:
 public:
   CEffectManager(): m_vCameraEye(0.0f),
                     m_pStaticMeshTechnique(0),
-                    m_pAnimatedModelTechnique(0)
-                {};
+                    m_pAnimatedModelTechnique(0),
+                    m_szFileName("")
+                {SetOk(true);};
   ~CEffectManager() {Done();};
   
   void SetWorldMatrix(const Mat44f& _mMatrix) { m_mWorldMatrix = _mMatrix; };
@@ -46,8 +46,8 @@ public:
   string GetTechniqueEffectNameByVertexDefault(unsigned short _sVertexType);
   CEffectTechnique * GetStaticMeshTechnique() const { return m_pStaticMeshTechnique; };
   CEffectTechnique * GetAnimatedModelTechnique() const { m_pAnimatedModelTechnique; };
-  CEffectTechnique * GetEffectTechnique(const string& _szName);
-  CEffect * GetEffect(const string& _szName);
+  CEffectTechnique * GetEffectTechnique(const string& _szName) {return GetResource(_szName);};
+  CEffect * GetEffect(const string& _szName) {return m_Effects.GetResource(_szName);};
   
   void ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _mProjectionMatrix, const Vect3f& _vCameraEye);
   bool Load(const string& _szFileName);
@@ -60,6 +60,11 @@ protected:
   void Release();
 
 private:
+
+  bool Load();
+
+  string m_szFileName;
+
   TDefaultTechniqueEffectMap m_DefaultTechniqueEffectMap;
   Mat44f m_mWorldMatrix, m_mProjectionMatrix, m_mViewMatrix, m_mViewProjectionMatrix;
   Mat44f m_mLightViewMatrix, m_mShadowProjectionMatrix;

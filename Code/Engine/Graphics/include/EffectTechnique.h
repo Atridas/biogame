@@ -17,8 +17,8 @@ class CEffectTechnique:
   public CNamed
 {
 public:
-  CEffectTechnique(string& _szName):
-                      CNamed(_szName),
+  CEffectTechnique():
+                      CNamed(""),
                       m_bUseCameraPosition(false),
                       m_bUseInverseProjMatrix(false),
                       m_bUseInverseViewMatrix(false),
