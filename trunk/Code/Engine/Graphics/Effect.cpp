@@ -107,6 +107,7 @@ void CEffect::GetParameterBySemantic(const string& _szSemanticName, D3DXHANDLE& 
 bool CEffect::SetLights(size_t _iNumOfLights){
   if(_iNumOfLights > MAX_LIGHTS_BY_SHADER)
   {
+    assert(false);
     LOGGER->AddNewLog(ELL_ERROR, "CEffect::SetLights Es volen iniciar %d llums, però com a màxim n'hi ha %d", _iNumOfLights, MAX_LIGHTS_BY_SHADER);
     return false;
   }
@@ -117,6 +118,7 @@ bool CEffect::SetLights(size_t _iNumOfLights){
     CLight* l_pLight = l_vLights[i];
     if(!l_pLight)
     {
+      assert(false);
       LOGGER->AddNewLog(ELL_ERROR, "CEffect::SetLights Light manager no té %d llums.", i);
       return false;
     }
