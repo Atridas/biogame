@@ -66,13 +66,30 @@ bool CEffectTechnique::BeginRender()
     //Lights
     if(m_bUseLights)
     {
-      BOOL l_iLight = true;
-      l_pD3DEffect->GetBool(m_pEffect->m_pLightsEnabledParameter,&l_iLight);
+      //BOOL l_iLight = true;
+      //l_pD3DEffect->GetBool(m_pEffect->m_pLightsEnabledParameter,l_iLight);
+
+      if(m_pEffect->SetLights(m_iNumOfLights))
+      {
+        l_pD3DEffect->SetBoolArray    (m_pEffect->m_pLightsEnabledParameter,      (BOOL*) m_pEffect->m_aLightsEnabled,                m_iNumOfLights);
+        l_pD3DEffect->SetIntArray     (m_pEffect->m_pLightsTypeParameter,                 m_pEffect->m_aLightsType,                   m_iNumOfLights);
+        l_pD3DEffect->SetFloatArray   (m_pEffect->m_pLightsAngleParameter,                m_pEffect->m_aLightsAngle,                  m_iNumOfLights);
+
+        l_pD3DEffect->SetFloatArray   (m_pEffect->m_pLightsFallOffParameter,              m_pEffect->m_aLightsFallOff,                m_iNumOfLights);
+        l_pD3DEffect->SetFloatArray   (m_pEffect->m_pLightsStartRangeAttenuationParameter,m_pEffect->m_aLightsStartRangeAttenuation,  m_iNumOfLights);
+        l_pD3DEffect->SetFloatArray   (m_pEffect->m_pLightsEndRangeAttenuationParameter,  m_pEffect->m_aLightsEndRangeAttenuation,    m_iNumOfLights);
+      
+        l_pD3DEffect->SetFloatArray   (m_pEffect->m_pLightsPositionParameter,     (float*)m_pEffect->m_aLightsPosition,               m_iNumOfLights * 3);
+        l_pD3DEffect->SetFloatArray   (m_pEffect->m_pLightsDirectionParameter,    (float*)m_pEffect->m_aLightsDirection,              m_iNumOfLights * 3);
+      
+        l_pD3DEffect->SetFloatArray   (m_pEffect->m_pLightsColorParameter,        (float*)m_pEffect->m_aLightsColor,                  m_iNumOfLights * 4);
+      }
     }
     //TODO LightManager()->GetAmbientLight();
     //if(m_bUseLightAmbientColor)
-    //  l_pD3DEffect->SetMatrix(m_pEffect->m_pLightsColorParameter,RENDER_MANAGER->GetLightManager().GetD3DXMatrix());
-
+    //{
+    //  l_pD3DEffect->SetFloatArray(m_pEffect->m_pLightsColorParameter,CORE->GetLightManager());
+    //}
     //TODO GetElapsedTime() El podem propagar com a tots els renders.
     //Time
     //if(m_bUseTime)
