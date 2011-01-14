@@ -41,13 +41,73 @@ void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
   if(m_pEffect && m_pD3DTechnique)
     SetOk(true);
   else
+  {
+    LOGGER->AddNewLog(ELL_ERROR, "CEffectTechnique::Init()  Effect and/or D3DTechnique not loaded.");
     SetOk(false);
+  }
 
 }
 
 bool CEffectTechnique::BeginRender()
 {
+  if(m_pEffect)
+  {
+    CEffectManager* l_pEM = RENDER_MANAGER->GetEffectManager();
+    LPD3DXEFFECT l_pD3DEffect = m_pEffect->GetD3DEffect();
 
+    //Position
+    if(m_bUseCameraPosition)
+    {
+      Vect3f l_vPos = l_pEM->GetCameraEye();
+      const float l_vfPos[3] = {l_vPos.x,l_vPos.y,l_vPos.z};
+      l_pD3DEffect->SetFloatArray(m_pEffect->m_pCameraPositionParameter,l_vfPos,3);
+    }
+
+    //Lights
+    if(m_bUseLights)
+    {
+      BOOL l_iLight = true;
+      l_pD3DEffect->GetBool(m_pEffect->m_pLightsEnabledParameter,&l_iLight);
+    }
+    //TODO LightManager()->GetAmbientLight();
+    //if(m_bUseLightAmbientColor)
+    //  l_pD3DEffect->SetMatrix(m_pEffect->m_pLightsColorParameter,RENDER_MANAGER->GetLightManager().GetD3DXMatrix());
+
+    //TODO GetElapsedTime() El podem propagar com a tots els renders.
+    //Time
+    //if(m_bUseTime)
+    //  l_pD3DEffect->SetFloat(m_pEffect->m_pTimeParameter,&_fElapsedTime);
+    
+    //Matrix
+    //Projection
+    if(m_bUseProjMatrix)
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pProjectionMatrixParameter,&l_pEM->GetProjectionMatrix().GetD3DXMatrix());
+    if(m_bUseInverseProjMatrix)
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pProjectionMatrixParameter,&l_pEM->GetProjectionMatrix().GetInverted().GetD3DXMatrix());
+    //World
+    if(m_bUseWorldMatrix)
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldMatrixParameter,&l_pEM->GetWorldMatrix().GetD3DXMatrix());
+    if(m_bUseInverseWorldMatrix)
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldMatrixParameter,&l_pEM->GetWorldMatrix().GetInverted().GetD3DXMatrix());
+    //View
+    if(m_bUseViewMatrix)
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pViewMatrixParameter,&l_pEM->GetViewMatrix().GetD3DXMatrix());
+    if(m_bUseInverseViewMatrix)
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pViewMatrixParameter,&l_pEM->GetViewMatrix().GetInverted().GetD3DXMatrix());
+    //Composed
+    if(m_bUseViewProjectionMatrix)
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pViewProjectionMatrixParameter,&l_pEM->GetViewProjectionMatrix().GetD3DXMatrix());
+    if(m_bUseWorldViewMatrix)
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldViewMatrixParameter,&(l_pEM->GetWorldMatrix()*l_pEM->GetViewMatrix()).GetD3DXMatrix());
+    if(m_bUseWorldViewProjectionMatrix)
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldViewProjectionMatrixParameter,&(l_pEM->GetWorldMatrix()*l_pEM->GetViewMatrix()*l_pEM->GetProjectionMatrix()).GetD3DXMatrix());
+    //Light
+    if(m_bUseViewToLightProjectionMatrix)
+      //LightView, no LightViewProjection
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pViewToLightProjectionMatrixParameter,&l_pEM->GetLightViewMatrix().GetD3DXMatrix());
+
+  }
+  LOGGER->AddNewLog(ELL_WARNING, "CEffectTechnique::BeginRender()  No effect specified.");
   return false;
 }
 
