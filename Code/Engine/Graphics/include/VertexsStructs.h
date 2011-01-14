@@ -102,6 +102,41 @@ struct SDIFFUSEVERTEX
 	{
 		return D3DFVF_XYZ|D3DFVF_DIFFUSE;
 	}
+
+  static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration()
+  {
+    if(s_VertexDeclaration==NULL)
+    {
+      D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+      {
+        { 0, 
+          0 , 
+          D3DDECLTYPE_FLOAT3,     //type
+          D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+          D3DDECLUSAGE_POSITION,  //ús de les dades
+          0 
+        },
+        { 0, 
+          12 ,                    //desplaçament 
+          D3DDECLTYPE_D3DCOLOR,   //type
+          D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+          D3DDECLUSAGE_COLOR,     //ús de les dades
+          0 
+        },
+        D3DDECL_END()
+      };
+      RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    }
+    return s_VertexDeclaration;
+  }
+
+  static void ReleaseVertexDeclaration()
+  {
+    CHECKED_RELEASE(s_VertexDeclaration);
+  }
+
+private:
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
 };
 
 /**
@@ -139,6 +174,48 @@ struct SNORMALDIFSSUSEVERTEX
 	{
 		return D3DFVF_XYZ|D3DFVF_NORMAL|D3DFVF_DIFFUSE;
 	}
+
+  static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration()
+  {
+    if(s_VertexDeclaration==NULL)
+    {
+      D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+      {
+        { 0, 
+          0 , 
+          D3DDECLTYPE_FLOAT3,     //type
+          D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+          D3DDECLUSAGE_POSITION,  //ús de les dades
+          0 
+        },
+        { 0, 
+          12 ,                    //desplaçament 
+          D3DDECLTYPE_FLOAT3,     //type
+          D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+          D3DDECLUSAGE_NORMAL,    //ús de les dades
+          0 
+        },
+        { 0, 
+          24 ,                    //desplaçament 
+          D3DDECLTYPE_D3DCOLOR,   //type
+          D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+          D3DDECLUSAGE_COLOR,     //ús de les dades
+          0 
+        },
+        D3DDECL_END()
+      };
+      RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    }
+    return s_VertexDeclaration;
+  }
+
+  static void ReleaseVertexDeclaration()
+  {
+    CHECKED_RELEASE(s_VertexDeclaration);
+  }
+
+private:
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
 };
 
 /*
@@ -214,6 +291,41 @@ struct STEXTUREDVERTEX
 	{
 		return D3DFVF_XYZ|D3DFVF_TEX2;
 	}
+
+  static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration()
+  {
+    if(s_VertexDeclaration==NULL)
+    {
+      D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+      {
+        { 0, 
+          0 , 
+          D3DDECLTYPE_FLOAT3,     //type
+          D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+          D3DDECLUSAGE_POSITION,  //ús de les dades
+          0 
+        },
+        { 0, 
+          12 ,                    //desplaçament 
+          D3DDECLTYPE_FLOAT2,     //type
+          D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+          D3DDECLUSAGE_TEXCOORD,  //ús de les dades
+          0 
+        },
+        D3DDECL_END()
+      };
+      RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    }
+    return s_VertexDeclaration;
+  }
+
+  static void ReleaseVertexDeclaration()
+  {
+    CHECKED_RELEASE(s_VertexDeclaration);
+  }
+
+private:
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
 };
 
 /**
@@ -251,6 +363,48 @@ struct STEXTURED2VERTEX
 	{
 		return D3DFVF_XYZ|D3DFVF_TEX4;
 	}
+
+  static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration()
+  {
+    if(s_VertexDeclaration==NULL)
+    {
+      D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+      {
+        { 0, 
+          0 , 
+          D3DDECLTYPE_FLOAT3,     //type
+          D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+          D3DDECLUSAGE_POSITION,  //ús de les dades
+          0 
+        },
+        { 0, 
+          12 ,                    //desplaçament
+          D3DDECLTYPE_FLOAT2,     //type
+          D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+          D3DDECLUSAGE_TEXCOORD,  //ús de les dades
+          0 
+        },
+        { 0, 
+          20 ,                    //desplaçament
+          D3DDECLTYPE_FLOAT2,     //type
+          D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+          D3DDECLUSAGE_TEXCOORD,  //ús de les dades
+          0 
+        },
+        D3DDECL_END()
+      };
+      RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    }
+    return s_VertexDeclaration;
+  }
+
+  static void ReleaseVertexDeclaration()
+  {
+    CHECKED_RELEASE(s_VertexDeclaration);
+  }
+
+private:
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
 };
 
 /**
@@ -288,6 +442,48 @@ struct SNORMALTEXTUREDVERTEX
 	{
 		return D3DFVF_XYZ|D3DFVF_NORMAL|D3DFVF_TEX2;
 	}
+
+  static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration()
+  {
+    if(s_VertexDeclaration==NULL)
+    {
+      D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+      {
+        { 0, 
+          0 , 
+          D3DDECLTYPE_FLOAT3,     //type
+          D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+          D3DDECLUSAGE_POSITION,  //ús de les dades
+          0 
+        },
+        { 0, 
+          12 ,                    //desplaçament
+          D3DDECLTYPE_FLOAT3,     //type
+          D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+          D3DDECLUSAGE_NORMAL,    //ús de les dades
+          0 
+        },
+        { 0, 
+          24 ,                    //desplaçament
+          D3DDECLTYPE_FLOAT2,     //type
+          D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+          D3DDECLUSAGE_TEXCOORD,  //ús de les dades
+          0 
+        },
+        D3DDECL_END()
+      };
+      RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    }
+    return s_VertexDeclaration;
+  }
+
+  static void ReleaseVertexDeclaration()
+  {
+    CHECKED_RELEASE(s_VertexDeclaration);
+  }
+
+private:
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
 };
 
 /**
@@ -326,6 +522,55 @@ struct SNORMALTEXTURED2VERTEX
 	{
 		return D3DFVF_XYZ|D3DFVF_NORMAL|D3DFVF_TEX4;
 	}
+
+  static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration()
+  {
+    if(s_VertexDeclaration==NULL)
+    {
+      D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+      {
+        { 0, 
+          0 , 
+          D3DDECLTYPE_FLOAT3,     //type
+          D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+          D3DDECLUSAGE_POSITION,  //ús de les dades
+          0 
+        },
+        { 0, 
+          12 ,                    //desplaçament
+          D3DDECLTYPE_FLOAT3,     //type
+          D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+          D3DDECLUSAGE_NORMAL,    //ús de les dades
+          0 
+        },
+        { 0, 
+          24 ,                    //desplaçament
+          D3DDECLTYPE_FLOAT2,     //type
+          D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+          D3DDECLUSAGE_TEXCOORD,  //ús de les dades
+          0 
+        },
+        { 0, 
+          32 ,                    //desplaçament
+          D3DDECLTYPE_FLOAT2,     //type
+          D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+          D3DDECLUSAGE_TEXCOORD,  //ús de les dades
+          0 
+        },
+        D3DDECL_END()
+      };
+      RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    }
+    return s_VertexDeclaration;
+  }
+
+  static void ReleaseVertexDeclaration()
+  {
+    CHECKED_RELEASE(s_VertexDeclaration);
+  }
+
+private:
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
 };
 
 #endif
