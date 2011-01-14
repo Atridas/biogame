@@ -27,8 +27,8 @@ bool CStaticMeshManager::Load(const string &_szFileName, bool _bReload)
     CStaticMesh* l_pStaticMesh = 0;
 
     CXMLTreeNode l_XMLMesh = l_XMLMeshes(i);
-    l_szName = l_XMLMesh.GetPszProperty("name" ,"");
-    l_szPath = l_XMLMesh.GetPszProperty("path" ,"");
+    l_szName = l_XMLMesh.GetPszISOProperty("name" ,"");
+    l_szPath = l_XMLMesh.GetPszISOProperty("path" ,"");
 
     if(!GetResource(l_szName))
     {
