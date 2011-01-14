@@ -5,8 +5,11 @@
 #include "DirectionalLight.h"
 #include "SpotLight.h"
 #include <Core.h>
+#include "RenderManager.h"
+#include <XML/XMLTreeNode.h>
 
 CEffect::CEffect(void):
+  CNamed(""),
   m_szFileName(""),
   m_pD3DEffect(0),
   m_pWorldMatrixParameter(0),
@@ -16,7 +19,7 @@ CEffect::CEffect(void):
   m_pViewProjectionMatrixParameter(0),
   m_pWorldViewProjectionMatrixParameter(0),
   m_pViewToLightProjectionMatrixParameter(0),
-  m_pLightEnabledParameter(0),
+  m_pLightsEnabledParameter(0),
   m_pLightsTypeParameter(0),
   m_pLightsPositionParameter(0),
   m_pLightsDirectionParameter(0),
@@ -58,7 +61,7 @@ void CEffect::SetNullParameters()
   m_pViewProjectionMatrixParameter = 0;
   m_pWorldViewProjectionMatrixParameter = 0;
   m_pViewToLightProjectionMatrixParameter = 0;
-  m_pLightEnabledParameter = 0;
+  m_pLightsEnabledParameter = 0;
   m_pLightsTypeParameter = 0;
   m_pLightsPositionParameter = 0;
   m_pLightsDirectionParameter = 0;
@@ -71,17 +74,34 @@ void CEffect::SetNullParameters()
   m_pBonesParameter = 0;
   m_pTimeParameter = 0;
 }
+
+bool CEffect::LoadEffect()
+{
+  LPD3DXBUFFER l_ErrorBuffer=NULL;
+  HRESULT l_HR = D3DXCreateEffectFromFile(
+                          RENDER_MANAGER->GetDevice(),
+                          m_szFileName.c_str(),
+                          NULL,
+                          NULL,
+                          D3DXSHADER_USE_LEGACY_D3DX9_31_DLL,
+                          NULL,
+                          &m_pD3DEffect,
+                          &l_ErrorBuffer);
+  if(l_ErrorBuffer)
+  {
+    LOGGER->AddNewLog(ELL_ERROR,"Error creating effect '%s':\n%s", m_szFileName.c_str(), l_ErrorBuffer->GetBufferPointer());
+    CHECKED_RELEASE(l_ErrorBuffer);
+    return false;
+  }
+
+  return InitParameters();
+}
+
 void CEffect::GetParameterBySemantic(const string& _szSemanticName, D3DXHANDLE& _pHandle)
 {
   _pHandle=m_pD3DEffect->GetParameterBySemantic(NULL,_szSemanticName.c_str());
   if(_pHandle==NULL)
     LOGGER->AddNewLog(ELL_WARNING,"CEffect::GetParameterBySemantic Parameter by semantic '%s' wasn't found on effect '%s'", _szSemanticName.c_str(),m_szFileName.c_str());
-}
-
-bool CEffect::LoadEffect()
-{
- //TODO 
-  return 0;
 }
 
 bool CEffect::SetLights(size_t _iNumOfLights){
@@ -91,9 +111,10 @@ bool CEffect::SetLights(size_t _iNumOfLights){
     return false;
   }
   CLightManager* l_pLightManager = CORE->GetLightManager();
+  vector<CLight*> l_vLights = l_pLightManager->GetLights(_iNumOfLights);
   for(size_t i = 0; i < _iNumOfLights; i++)
   {
-    CLight* l_pLight = l_pLightManager->GetLight(i);
+    CLight* l_pLight = l_vLights[i];
     if(!l_pLight)
     {
       LOGGER->AddNewLog(ELL_ERROR, "CEffect::SetLights Light manager no té %d llums.", i);
@@ -125,26 +146,48 @@ bool CEffect::SetLights(size_t _iNumOfLights){
   {
     m_aLightsEnabled[i] = false;
   }
-  return 0;
+  return true;
 }
 
-bool CEffect::Load(const string& _szFileName){
+bool CEffect::Load(const CXMLTreeNode& _xmlEffect){
   SetNullParameters();
-  m_szFileName = _szFileName;
-  LoadEffect();
-
-  return 0;
+  m_szFileName = _xmlEffect.GetPszISOProperty("file","");
+  SetName(_xmlEffect.GetPszISOProperty("name","")); 
+  return LoadEffect();
 }
 
 bool CEffect::Reload()
 {
   Release();
-  return Load(m_szFileName);
+  return LoadEffect();
 }
 
-//DirectX Methods Interface
-D3DXHANDLE CEffect::GetTechniqueByName(const string& _szTechniqueName)
+bool CEffect::InitParameters()
 {
- //TODO 
-  return 0;
+  //matrixes
+  GetParameterBySemantic("WORLD_MATRIX", m_pWorldMatrixParameter);
+  GetParameterBySemantic("VIEW_MATRIX", m_pViewMatrixParameter);
+  GetParameterBySemantic("PROJECTION_MATRIX", m_pProjectionMatrixParameter);
+  GetParameterBySemantic("WORLD_VIEW_MATRIX", m_pWorldViewMatrixParameter);
+  GetParameterBySemantic("VIEW_PROJECTION_MATRIX", m_pViewProjectionMatrixParameter);
+  GetParameterBySemantic("WORLD_VIEW_PROJECTION_MATRIX", m_pWorldViewProjectionMatrixParameter);
+  GetParameterBySemantic("WORLD_TO_LIGHT_PROJECTION_MATRIX", m_pViewToLightProjectionMatrixParameter);
+
+  //lights
+  GetParameterBySemantic("LIGHTS_ENABLED", m_pLightsEnabledParameter);
+  GetParameterBySemantic("LIGHTS_TYPE", m_pLightsTypeParameter);
+  GetParameterBySemantic("LIGHTS_POSITION", m_pLightsPositionParameter);
+  GetParameterBySemantic("LIGHTS_DIRECTION", m_pLightsDirectionParameter);
+  GetParameterBySemantic("LIGHTS_ANGLE", m_pLightsAngleParameter);
+  GetParameterBySemantic("LIGHTS_COLOR", m_pLightsColorParameter);
+  GetParameterBySemantic("LIGHTS_FALL_OFF", m_pLightsFallOffParameter);
+  GetParameterBySemantic("LIGHTS_START_RANGE_ATTENUATION", m_pLightsStartRangeAttenuationParameter);
+  GetParameterBySemantic("LIGHTS_END_RANGE_ATTENUATION", m_pLightsEndRangeAttenuationParameter);
+
+  //Altres
+  GetParameterBySemantic("CAMERA_POSITION", m_pCameraPositionParameter);
+  GetParameterBySemantic("BONES", m_pBonesParameter);
+  GetParameterBySemantic("TIME", m_pTimeParameter);
+
+  return true;
 }
