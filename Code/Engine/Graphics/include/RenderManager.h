@@ -57,6 +57,7 @@ public:
   CTextureManager*        GetTextureManager       () const {return m_pTextureManager;};
   CStaticMeshManager*     GetStaticMeshManager    () const {return m_pStaticMeshManager;};
   CAnimatedModelManager*  GetAnimatedModelManager () const {return m_pAnimatedModelManager;};
+  CEffectManager*         GetEffectManager        () const {return m_pEffectManager;};
 
 public:
 	void                    Release					  ();
@@ -74,6 +75,6 @@ private:
   CTextureManager*        m_pTextureManager;
   CStaticMeshManager*     m_pStaticMeshManager;
   CAnimatedModelManager*  m_pAnimatedModelManager;
-  CEffectManager*       m_pEffectManager;
+  CEffectManager*         m_pEffectManager;
 };
 

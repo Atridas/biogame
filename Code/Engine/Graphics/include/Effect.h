@@ -24,7 +24,7 @@ public:
   virtual ~CEffect(void) {Done();};
 
   bool SetLights(size_t _iNumOfLights);
-  bool Load(const CXMLTreeNode& _xmlEffect);
+  bool Init(const CXMLTreeNode& _xmlEffect);
   bool Reload();
   //DirectX Methods Interface
   LPD3DXEFFECT GetD3DEffect() const {return m_pD3DEffect;};

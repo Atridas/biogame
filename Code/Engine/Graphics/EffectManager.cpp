@@ -49,9 +49,11 @@ bool CEffectManager::Load()
     for(int i = 0; i < l_iNumChildren; i++)
     {
       CXMLTreeNode l_treeEffect = l_treeEffects(i);
+      if(l_treeEffect.IsComment())
+        continue;
       
       CEffect* l_pEffect = new CEffect();
-      l_pEffect->Load(l_treeEffect);
+      l_pEffect->Init(l_treeEffect);
 
       m_Effects.AddResource(l_pEffect->GetName(),l_pEffect);
     }
@@ -65,6 +67,8 @@ bool CEffectManager::Load()
     for(int i = 0; i < l_iNumChildren; i++)
     {
       CXMLTreeNode l_treeTechnique = l_treeTechniques(i);
+      if(l_treeTechnique.IsComment())
+        continue;
 
       CEffectTechnique* l_pTechnique = new CEffectTechnique();
       l_pTechnique->Init(l_treeTechnique);
