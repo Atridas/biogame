@@ -20,6 +20,7 @@ class CRenderableAnimatedInstanceModel: public CRenderableObject
 
   protected:
     virtual void          Release                   ();
+    void                  Update                    (float _fElapsedTime);
 
   private:
     CAnimatedInstanceModel * m_pAnimatedInstanceModel;
