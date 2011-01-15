@@ -106,16 +106,24 @@ bool CTestProcess::Init()
 
   //g_pMesh = g_pStaticMeshManager->GetResource("BoxGohan");
 
-  g_pMesh = RENDER_MANAGER->GetStaticMeshManager()->GetResource("BoxGohan");
+  //g_pMesh = RENDER_MANAGER->GetStaticMeshManager()->
 
   //g_pRenderableObjectsManager = new CRenderableObjectsManager();
   //g_pRenderableObjectsManager->Load("Data/XML/RenderableObjects.xml");
 
   //ANIMATED_MANAGER->Load("Data/XML/AnimatedModels.xml");
  
-  g_pRenderableAIModel = new CRenderableAnimatedInstanceModel("Model Bot");
-  g_pRenderableAIModel->Init("bot");
-  g_pRenderableAIModel->GetAnimatedInstanceModel()->BlendCycle(1,0);
+  //g_pRenderableAIModel = new CRenderableAnimatedInstanceModel("Model Bot");
+  //g_pRenderableAIModel->Init("bot");
+  //g_pRenderableAIModel->GetAnimatedInstanceModel()->BlendCycle(1,0);
+
+  //g_pAnimatedInstanceModel = ANIMATED_MANAGER->GetResource("bot");
+  
+  g_pAnimatedInstanceModel = ANIMATED_MANAGER->GetInstance("bot");
+  g_pAnimatedInstanceModel->BlendCycle(1,0);
+
+  //CORE->GetRenderableObjectsManager()->GetResource("bot")
+
 
   //lights
   //g_pLightManager = new CLightManager();
@@ -181,7 +189,7 @@ void CTestProcess::Update(float _fElapsedTime)
   m_pObject->SetPitch(l_fPitch-l_vVec.y*_fElapsedTime);
 
   //g_pAnimatedInstanceModel->Update(_fElapsedTime);
-  g_pRenderableAIModel->GetAnimatedInstanceModel()->Update(_fElapsedTime);
+  //g_pRenderableAIModel->GetAnimatedInstanceModel()->Update(_fElapsedTime);
 }
 
 void CTestProcess::Render()
@@ -252,8 +260,10 @@ void CTestProcess::Render()
   l_pRM->SetTransform(t.Translate(Vect3f(-2.0f,0.0f,3.0f)) * r);
   
   //g_pAnimatedInstanceModel->Render(l_pRM);
-  g_pRenderableAIModel->GetAnimatedInstanceModel()->Render(l_pRM);
+  //g_pRenderableAIModel->GetAnimatedInstanceModel()->Render(l_pRM);
 
+  //CORE->GetRenderableObjectsManager()->GetResource("bot")->Render(l_pRM);
+  //g_pAnimatedInstanceModel->Render(l_pRM);
   //g_pLightManager->Render(l_pRM);
 
   //g_tex->Activate(0);

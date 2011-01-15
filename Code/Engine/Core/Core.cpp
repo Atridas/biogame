@@ -62,6 +62,7 @@ void CCore::Update(float elapsedTime)
 {
   m_pInputManager->Update();
   m_pActionToInput->Update(elapsedTime);
+  m_pRenderableObjectsManager->Update(elapsedTime);
 }
 
 void CCore::Render()

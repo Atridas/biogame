@@ -2,6 +2,7 @@
 #include "RenderManager.h"
 #include "InstanceMesh.h"
 #include <XML/XMLTreeNode.h>
+#include "RenderableAnimatedInstanceModel.h"
 
 void CRenderableObjectsManager::Update(float _fElapsedTime)
 {
@@ -33,6 +34,25 @@ CRenderableObject* CRenderableObjectsManager::AddMeshInstance(
   AddResource(_szInstanceName, l_pInstanceMesh);
 
   return l_pInstanceMesh;
+}
+
+
+//Add AnimatedModel
+CRenderableObject* CRenderableObjectsManager::AddAnimatedModel(
+                                                      const string& _szCoreModelName,
+                                                      const string& _szInstanceName)
+{
+  CRenderableAnimatedInstanceModel* l_pAnimatedModel = new CRenderableAnimatedInstanceModel(_szInstanceName);
+  if(!l_pAnimatedModel->Init(_szCoreModelName))
+  {
+    LOGGER->AddNewLog(ELL_WARNING, "CRenderableObjectsManager:: No s'ha pogut carregar el CRenderableAnimatedInstanceModel \"%s\" de la core \"%s\"", _szInstanceName.c_str(), _szCoreModelName.c_str());
+    delete l_pAnimatedModel;
+    return 0;
+  }
+
+  AddResource(_szInstanceName, l_pAnimatedModel);
+
+  return l_pAnimatedModel;
 }
 
 void CRenderableObjectsManager::AddResource(const string& _szName, CRenderableObject* _pRenderableObject)
@@ -74,9 +94,9 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
 
     CXMLTreeNode l_XMLObject = l_XMLObjects(i);
 
-    l_szName      = l_XMLObject.GetPszISOProperty("name" ,"");
-    l_szClass     = l_XMLObject.GetPszISOProperty("class" ,"");
-    l_szResource  = l_XMLObject.GetPszISOProperty("resource" ,"");
+    l_szName      = l_XMLObject.GetPszProperty("name" ,"");
+    l_szClass     = l_XMLObject.GetPszProperty("class" ,"");
+    l_szResource  = l_XMLObject.GetPszProperty("resource" ,"");
 
     l_vPos        = l_XMLObject.GetVect3fProperty("position",Vect3f(0.0f));
     l_fYaw        = l_XMLObject.GetFloatProperty("yaw");
@@ -88,8 +108,9 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
       CRenderableObject* l_pRenderableObject = 0;
       if(l_szClass == "StaticMesh") {
         l_pRenderableObject = AddMeshInstance(l_szResource, l_szName);
-      } else if(l_szClass == "") {
-        LOGGER->AddNewLog(ELL_WARNING,"CRenderableObjectsManager:: Object: \"%s\" has no class", l_szName.c_str());
+      } else if(l_szClass == "AnimatedModel") {
+        l_pRenderableObject = AddAnimatedModel(l_szResource, l_szName);
+        //LOGGER->AddNewLog(ELL_WARNING,"CRenderableObjectsManager:: Object: \"%s\" has no class", l_szName.c_str());
       } else {
         LOGGER->AddNewLog(ELL_WARNING,"CRenderableObjectsManager:: Object: \"%s\" has unknown \"%s\" class", l_szName.c_str(), l_szClass.c_str());
       }

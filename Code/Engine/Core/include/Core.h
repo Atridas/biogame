@@ -97,6 +97,7 @@ public:
   //CAnimatedModelManager*  GetAnimatedModelManager      () const             {return m_pAnimatedModelManager;}
 
   CLightManager*      GetLightManager       () const                        {return m_pLightManager;}
+  CRenderableObjectsManager*  GetRenderableObjectsManager      () const                        {return m_pRenderableObjectsManager;}
 
   bool                GetRenderLights       () const                        {return m_bRenderLights;};
 
