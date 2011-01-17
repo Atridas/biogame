@@ -170,13 +170,13 @@ bool CEffect::Reload()
 bool CEffect::InitParameters()
 {
   //matrixes
-  GetParameterBySemantic("WORLD_MATRIX", m_pWorldMatrixParameter);
-  GetParameterBySemantic("VIEW_MATRIX", m_pViewMatrixParameter);
-  GetParameterBySemantic("PROJECTION_MATRIX", m_pProjectionMatrixParameter);
-  GetParameterBySemantic("WORLD_VIEW_MATRIX", m_pWorldViewMatrixParameter);
-  GetParameterBySemantic("VIEW_PROJECTION_MATRIX", m_pViewProjectionMatrixParameter);
-  GetParameterBySemantic("WORLD_VIEW_PROJECTION_MATRIX", m_pWorldViewProjectionMatrixParameter);
-  GetParameterBySemantic("WORLD_TO_LIGHT_PROJECTION_MATRIX", m_pViewToLightProjectionMatrixParameter);
+  GetParameterBySemantic("World", m_pWorldMatrixParameter);
+  GetParameterBySemantic("View", m_pViewMatrixParameter);
+  GetParameterBySemantic("Projection", m_pProjectionMatrixParameter);
+  GetParameterBySemantic("WorldView", m_pWorldViewMatrixParameter);
+  GetParameterBySemantic("ViewProjection", m_pViewProjectionMatrixParameter);
+  GetParameterBySemantic("WorldViewProjection", m_pWorldViewProjectionMatrixParameter);
+  GetParameterBySemantic("ViewToLightProjection", m_pViewToLightProjectionMatrixParameter);
 
   //lights
   GetParameterBySemantic("LIGHTS_ENABLED", m_pLightsEnabledParameter);
@@ -190,7 +190,7 @@ bool CEffect::InitParameters()
   GetParameterBySemantic("LIGHTS_END_RANGE_ATTENUATION", m_pLightsEndRangeAttenuationParameter);
 
   //Altres
-  GetParameterBySemantic("CAMERA_POSITION", m_pCameraPositionParameter);
+  GetParameterBySemantic("CameraPosition", m_pCameraPositionParameter);
   GetParameterBySemantic("BONES", m_pBonesParameter);
   GetParameterBySemantic("TIME", m_pTimeParameter);
 
