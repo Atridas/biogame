@@ -4,6 +4,8 @@
 
 #include "RenderableVertexs.h"
 #include "RenderManager.h"
+#include "Effect.h"
+#include "EffectTechnique.h"
 
 /**
  * Classe template d'Indexed Vertexs.
@@ -56,11 +58,20 @@ public:
    * @return True si s'ha renderitzat correctament, false sino.
   **/
   virtual bool Render(CRenderManager *_pRM) const;
+
+  /**
+   * Mètode de renderització dels vèrtexs usant shaders.
+   * @param _pRM Render Manager.
+   * @param _pEffectTechnique Tècnica.
+   * @return True si s'ha renderitzat correctament, false sino.
+  **/
+  virtual bool Render(CRenderManager *_pRM, CEffectTechnique *_pEffectTechnique) const;
+
   /**
    * Getter del tipus de vèrtex.
-   * @return El tipus del vèrtex segons la codificació de DirectX9.
+   * @return El tipus del vèrtex segons la nostra codificació.
   **/
-  virtual inline unsigned short GetVertexType() const {return T::GetFVF();}
+  virtual inline unsigned short GetVertexType() const {return T::GetVertexType();}
 };
 
 
@@ -117,6 +128,36 @@ bool CIndexedVertexs<T>::Render(CRenderManager *_pRM) const
                                   GetFacesCount() );
 
   return true;
-}
+};
+
+template<class T>
+bool CIndexedVertexs<T>::Render(CRenderManager *_pRM, CEffectTechnique *_pEffectTechnique) const
+{
+  LPDIRECT3DDEVICE9 l_pDevice = _pRM->GetDevice();
+
+  uint32 l_iNumPasses;
+  LPD3DXEFFECT l_pD3DEffect=_pEffectTechnique->GetEffect()->GetD3DEffect();
+  l_pD3DEffect->SetTechnique(_pEffectTechnique->GetD3DTechnique());
+  if(SUCCEEDED(l_pD3DEffect->Begin(&l_iNumPasses,0)))
+  {
+    l_pDevice->SetVertexDeclaration(T::GetVertexDeclaration());
+    l_pDevice->SetIndices(m_pIB);
+    l_pDevice->SetStreamSource(0,m_pVB,0,GetVertexSize());
+    for(uint32 i = 0; i < l_iNumPasses; i++)
+    {
+      l_pD3DEffect->BeginPass(i);
+      l_pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, // PrimitiveType
+                                      0,                  // BaseVertexIndex
+                                      0,                  // MinIndex
+                                      GetVertexsCount(),  // NumVertices
+                                      0,                  // StartIndex
+                                      GetFacesCount() );
+      l_pD3DEffect->EndPass();
+    }
+    return true;
+  } else {
+    return false;
+  }
+};
 
 #endif

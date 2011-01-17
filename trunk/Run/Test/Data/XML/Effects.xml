@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <shaders>
   <effects>
+    <effect name="Test Effects" file="Data/Effects/Efectillo2.fx"/>
     <!-- effect name=.../-->
     <!-- effect name=.../-->
   </effects>
@@ -11,5 +12,14 @@
   </default_techniques>
   <techniques>
     <!-- technique name=.../-->
+    <technique name="NormalTexturedTechnique" effect="Test Effects" use_world_matrix="true"
+               use_world_view_matrix="true" use_camera_position="true" use_world_view_projection_matrix="true"
+               />
+    <technique name="NormalTextured2Technique" effect="Test Effects" use_world_matrix="true"
+               use_world_view_matrix="true" use_camera_position="true" use_world_view_projection_matrix="true"
+               />
+    <technique name="NormalDiffusedTechnique" effect="Test Effects" use_world_matrix="true"
+               use_world_view_matrix="true" use_camera_position="true" use_world_view_projection_matrix="true"
+               />
   </techniques>
 </shaders>

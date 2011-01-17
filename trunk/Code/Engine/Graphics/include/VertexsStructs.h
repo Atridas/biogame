@@ -6,6 +6,9 @@
 
 #include <d3dx9.h>
 
+#include <base.h>
+#include <Core.h>
+#include "RenderManager.h"
 
 #define VERTEX_TYPE_GEOMETRY 0x0001
 #define VERTEX_TYPE_NORMAL   0x0002

@@ -189,6 +189,9 @@
     <ClCompile Include="EffectManager.cpp">
       <Filter>Effects\EffectManager</Filter>
     </ClCompile>
+    <ClCompile Include="VertexStructs.cpp">
+      <Filter>Vertex\Vertex Structs</Filter>
+    </ClCompile>
     <ClCompile Include="SceneEffectManager.cpp" />
   </ItemGroup>
   <ItemGroup>

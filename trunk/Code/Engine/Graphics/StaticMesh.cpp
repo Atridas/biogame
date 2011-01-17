@@ -4,6 +4,8 @@
 #include "VertexsStructs.h"
 #include "Texture.h"
 #include "TextureManager.h"
+#include "EffectManager.h"
+#include "EffectTechnique.h"
 #include <IndexedVertexs.h>
 #include <base.h>
 #include <fstream>
@@ -219,9 +221,28 @@ void CStaticMesh::Render(CRenderManager *_pRM) const
         ++l_ItTextureArray;
       }
 
-      (*l_ItRV)->Render(_pRM);
+      //(*l_ItRV)->Render(_pRM);  // Fixed Pipeline render
+
+      //---------------------------- shaders -----------------------
+      CEffectManager* l_pEffectManager = _pRM->GetEffectManager();
+      uint16 l_iVertexType = (*l_ItRV)->GetVertexType();
+      string l_szName = l_pEffectManager->GetTechniqueEffectNameByVertexDefault(l_iVertexType);
+      CEffectTechnique* l_pEffectTechnique = l_pEffectManager->GetEffectTechnique(l_szName);
+      if(l_pEffectTechnique)
+      {
+        if(l_pEffectTechnique->BeginRender())
+        {
+          (*l_ItRV)->Render(_pRM,l_pEffectTechnique);
+        } else {
+          (*l_ItRV)->Render(_pRM);
+        }
+      } else {
+        (*l_ItRV)->Render(_pRM);
+      }
+
+      //------------------------------------------------------------
+
       ++l_ItRV;
-      
     }
 }
 

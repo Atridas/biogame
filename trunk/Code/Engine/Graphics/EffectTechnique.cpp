@@ -15,6 +15,8 @@ void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
   SetName(_XMLParams.GetPszProperty("name" ,""));
   string l_szEffectName = _XMLParams.GetPszProperty("effect" ,"");
 
+  LOGGER->AddNewLog(ELL_INFORMATION, "CEffectTechnique::Init  Effect \"%s\" Technique \"%s\".",GetName().c_str(), l_szEffectName.c_str());
+
   //booleans
   m_bUseCameraPosition = _XMLParams.GetBoolProperty("use_camera_position");
   m_bUseInverseProjMatrix = _XMLParams.GetBoolProperty("use_inverse_proj_matrix");
@@ -36,7 +38,7 @@ void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
 
   //non XML dependant
   m_pEffect = RENDER_MANAGER->GetEffectManager()->GetEffect(l_szEffectName);
-  m_pD3DTechnique = m_pEffect->GetTechniqueByName(l_szEffectName);
+  m_pD3DTechnique = m_pEffect->GetTechniqueByName(GetName());
   
   if(m_pEffect && m_pD3DTechnique)
     SetOk(true);
@@ -121,15 +123,24 @@ bool CEffectTechnique::BeginRender()
     if(m_bUseWorldViewMatrix)
       l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldViewMatrixParameter,&(l_pEM->GetWorldMatrix()*l_pEM->GetViewMatrix()).GetD3DXMatrix());
     if(m_bUseWorldViewProjectionMatrix)
-      l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldViewProjectionMatrixParameter,&(l_pEM->GetWorldMatrix()*l_pEM->GetViewMatrix()*l_pEM->GetProjectionMatrix()).GetD3DXMatrix());
+    {
+      D3DXMATRIX l_World=l_pEM->GetWorldMatrix().GetD3DXMatrix();
+      D3DXMATRIX l_View=l_pEM->GetViewMatrix().GetD3DXMatrix();
+      D3DXMATRIX l_Projection=l_pEM->GetProjectionMatrix().GetD3DXMatrix();
+      D3DXMATRIX l_WorldViewProjection=l_World*l_View*l_Projection;
+
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldViewProjectionMatrixParameter,&l_WorldViewProjection);
+    }
     //Light
     if(m_bUseViewToLightProjectionMatrix)
       //LightView, no LightViewProjection
       l_pD3DEffect->SetMatrix(m_pEffect->m_pViewToLightProjectionMatrixParameter,&l_pEM->GetLightViewMatrix().GetD3DXMatrix());
 
+  } else {
+    LOGGER->AddNewLog(ELL_WARNING, "CEffectTechnique::BeginRender  No effect specified.");
+    return false;
   }
-  LOGGER->AddNewLog(ELL_WARNING, "CEffectTechnique::BeginRender  No effect specified.");
-  return false;
+  return true;
 }
 
 bool CEffectTechnique::Refresh()
