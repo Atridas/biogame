@@ -28,7 +28,7 @@ public:
   bool Reload();
   //DirectX Methods Interface
   LPD3DXEFFECT GetD3DEffect() const {return m_pD3DEffect;};
-  D3DXHANDLE GetTechniqueByName(const string& _szTechniqueName) const {return m_pD3DEffect->GetTechniqueByName(_szTechniqueName.c_str());};
+  D3DXHANDLE GetTechniqueByName(const string& _szTechniqueName) const;
   
 protected:
   void Release();

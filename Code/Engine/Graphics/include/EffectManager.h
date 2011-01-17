@@ -43,7 +43,7 @@ public:
   const Mat44f& GetShadowProjectionMatrix() {return m_mShadowProjectionMatrix;};
   const Vect3f& GetCameraEye() {return m_vCameraEye;};
   size_t GetMaxLights() const { return MAX_LIGHTS_BY_SHADER; }; //de Effect.h
-  string GetTechniqueEffectNameByVertexDefault(unsigned short _sVertexType);
+  string GetTechniqueEffectNameByVertexDefault(unsigned short _sVertexType) const;
   CEffectTechnique * GetStaticMeshTechnique() const { return m_pStaticMeshTechnique; };
   CEffectTechnique * GetAnimatedModelTechnique() const { m_pAnimatedModelTechnique; };
   CEffectTechnique * GetEffectTechnique(const string& _szName) {return GetResource(_szName);};

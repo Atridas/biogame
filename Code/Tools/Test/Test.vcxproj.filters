@@ -19,5 +19,8 @@
     <None Include="..\..\..\Run\Test\Data\XML\actions.xml">
       <Filter>Data</Filter>
     </None>
+    <None Include="..\..\..\Run\Test\Data\XML\Effects.xml">
+      <Filter>Data</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -8,6 +8,7 @@
 
 //forward declarations ------------------------
 class CRenderManager;
+class CEffectTechnique;
 //---------------------------------------------
 
 /**
@@ -48,6 +49,14 @@ public:
    * @return True si s'ha renderitzat correctament, false sino.
   **/
   virtual bool Render(CRenderManager *_pRM) const         = 0;
+
+  /**
+   * Mètode de renderització dels vèrtexs usant shaders.
+   * @param _pRM Render Manager.
+   * @param _pEffectTechnique Tècnica.
+   * @return True si s'ha renderitzat correctament, false sino.
+  **/
+  virtual bool Render(CRenderManager *_pRM, CEffectTechnique *_pEffectTechnique) const         = 0;
 
   /**
    * Getter del nombre de triangles.

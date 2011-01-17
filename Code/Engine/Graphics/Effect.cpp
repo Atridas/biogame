@@ -89,9 +89,27 @@ bool CEffect::LoadEffect()
                           &l_ErrorBuffer);
   if(l_ErrorBuffer)
   {
-    LOGGER->AddNewLog(ELL_ERROR,"Error creating effect '%s':\n%s", m_szFileName.c_str(), l_ErrorBuffer->GetBufferPointer());
+    LOGGER->AddNewLog(ELL_ERROR,"CEffect::LoadEffect Error creating effect '%s':\n%s", m_szFileName.c_str(), l_ErrorBuffer->GetBufferPointer());
     CHECKED_RELEASE(l_ErrorBuffer);
     return false;
+  }
+  if(l_HR != D3D_OK)
+  {
+    if(l_HR == D3DERR_INVALIDCALL)
+    {
+      LOGGER->AddNewLog(ELL_ERROR,"CEffect::LoadEffect Error crida invàlida");
+      return false;
+    }
+    else if(l_HR == D3DXERR_INVALIDDATA)
+    {
+      LOGGER->AddNewLog(ELL_ERROR,"CEffect::LoadEffect Error invalid data");
+      return false;
+    }
+    else if(l_HR == E_OUTOFMEMORY)
+    {
+      LOGGER->AddNewLog(ELL_ERROR,"CEffect::LoadEffect Error out of memory");
+      return false;
+    }
   }
 
   return InitParameters();
@@ -195,4 +213,9 @@ bool CEffect::InitParameters()
   GetParameterBySemantic("TIME", m_pTimeParameter);
 
   return true;
+}
+
+D3DXHANDLE CEffect::GetTechniqueByName(const string& _szTechniqueName) const 
+{
+  return m_pD3DEffect->GetTechniqueByName(_szTechniqueName.c_str());
 }

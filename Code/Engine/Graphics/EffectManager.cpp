@@ -6,7 +6,9 @@
 
 void CEffectManager::ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _mProjectionMatrix, const Vect3f& _vCameraEye)
 {
-
+  m_mProjectionMatrix=_mProjectionMatrix;
+  m_mViewMatrix=_mViewMatrix;
+  m_vCameraEye=_vCameraEye;
 }
 
 /* format inventat de Effects.xml:
@@ -129,4 +131,13 @@ void CEffectManager::Release()
   //pointers
   CHECKED_DELETE(m_pStaticMeshTechnique);
   CHECKED_DELETE(m_pAnimatedModelTechnique);
+}
+
+string CEffectManager::GetTechniqueEffectNameByVertexDefault(unsigned short _sVertexType) const
+{
+  TDefaultTechniqueEffectMap::const_iterator l_it = m_DefaultTechniqueEffectMap.find((int)_sVertexType);
+  if(l_it != m_DefaultTechniqueEffectMap.cend())
+    return l_it->second;
+
+  return "";
 }
