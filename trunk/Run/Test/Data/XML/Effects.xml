@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<shaders>
+  <effects>
+    <!-- effect name=.../-->
+    <!-- effect name=.../-->
+  </effects>
+  <default_techniques>
+    <default_technique vertex_type="19" technique="NormalTexturedTechnique"/>
+    <default_technique vertex_type="35" technique="NormalTextured2Technique"/>
+    <default_technique vertex_type="67" technique="NormalDiffusedTechnique"/>
+  </default_techniques>
+  <techniques>
+    <!-- technique name=.../-->
+  </techniques>
+</shaders>

@@ -15,7 +15,11 @@ void CEffectManager::ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _m
     <effect name=".../>
     <effect name=".../>
   </effects>
-  <default_technique .../>
+  <default_techniques>
+    <default_technique .../>
+    <default_technique .../>
+    <default_technique .../>
+  </default_techniques>
   <techniques>
     <technique name=".../>
     <technique name=".../>
@@ -31,12 +35,12 @@ bool CEffectManager::Load(const string& _szFileName)
 
 bool CEffectManager::Load()
 {
-  LOGGER->AddNewLog(ELL_INFORMATION, "CEffectManager::Load Carregant el fitxer \"%s\"", m_szFileName.c_str());
+  LOGGER->AddNewLog(ELL_INFORMATION, "CEffectManager::Load() Carregant el fitxer \"%s\"", m_szFileName.c_str());
 
   CXMLTreeNode l_treeShaders;
   if(!l_treeShaders.LoadFile(m_szFileName.c_str()))
   {
-    LOGGER->AddNewLog(ELL_WARNING,"CEffectManager:: No s'ha trobat el XML \"%s\"", m_szFileName.c_str());
+    LOGGER->AddNewLog(ELL_WARNING,"CEffectManager::Load() No s'ha trobat el XML \"%s\"", m_szFileName.c_str());
     return false;
   }
 
@@ -46,6 +50,9 @@ bool CEffectManager::Load()
     //--------Effects-------------
     CXMLTreeNode l_treeEffects = l_treeShaders["effects"];
     int l_iNumChildren = l_treeEffects.GetNumChildren();
+
+    LOGGER->AddNewLog(ELL_INFORMATION,"CEffectManager::Load() Loading %d effects.", l_iNumChildren);
+
     for(int i = 0; i < l_iNumChildren; i++)
     {
       CXMLTreeNode l_treeEffect = l_treeEffects(i);
@@ -59,11 +66,34 @@ bool CEffectManager::Load()
     }
     //----------------------------
 
-    //TODO: default techniques
+    //--------Default techniques-------------
+    CXMLTreeNode l_treeDefTechniques = l_treeShaders["default_techniques"];
+    l_iNumChildren = l_treeDefTechniques.GetNumChildren();
+
+    LOGGER->AddNewLog(ELL_INFORMATION,"CEffectManager::Load() Loading %d default_techniques.", l_iNumChildren);
+
+    for(int i = 0; i < l_iNumChildren; i++)
+    {
+      CXMLTreeNode l_treeDefTechnique = l_treeDefTechniques(i);
+      if(l_treeDefTechnique.IsComment())
+        continue;
+      
+      int l_iVertexType = l_treeDefTechnique.GetIntProperty("vertex_type");
+      string l_szTechniqueName = l_treeDefTechnique.GetPszISOProperty("technique","");
+
+      if(l_iVertexType == 0)
+        LOGGER->AddNewLog(ELL_WARNING,"CEffectManager::Load() Default technique \"%s\" amb vertex_type = 0.", l_szTechniqueName.c_str());
+
+      m_DefaultTechniqueEffectMap[l_iVertexType] = l_szTechniqueName;
+    }
+    //---------------------------------------
 
     //--------Techniques-----------
     CXMLTreeNode l_treeTechniques = l_treeShaders["techniques"];
     l_iNumChildren = l_treeTechniques.GetNumChildren();
+
+    LOGGER->AddNewLog(ELL_INFORMATION,"CEffectManager::Load() Loading %d techniques.", l_iNumChildren);
+
     for(int i = 0; i < l_iNumChildren; i++)
     {
       CXMLTreeNode l_treeTechnique = l_treeTechniques(i);
