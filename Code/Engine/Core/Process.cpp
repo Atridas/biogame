@@ -6,6 +6,7 @@
 #include <sstream>
 #include <Utils/LanguageManager.h>
 #include <ActionToInput.h>
+#include <RenderableObjectsManager.h>
 
 void CProcess::DebugInformation(float _FPS)
 {
@@ -47,6 +48,7 @@ bool CProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _p
   } else if(strcmp(_pcAction, "ReloadActions") == 0)
   {
     CORE->GetActionToInput()->Reload();
+    CORE->GetRenderableObjectsManager()->Reload();
     return true;
   }
   return ExecuteProcessAction(_fDeltaSeconds,_fDelta,_pcAction);

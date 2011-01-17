@@ -87,5 +87,6 @@
 	<RenderableObject name="Caixes50" class="StaticMesh" resource="Caixes50" position="6.49051 0.0 6.40033" yaw="-15.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Caixes51" class="StaticMesh" resource="Caixes51" position="6.49051 0.0 6.40033" yaw="-15.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="bot" class="AnimatedModel" resource="bot" position="-2.0 0.0 3.0" yaw="0.0" pitch="0.0" roll="-1.5707"/>
-	<RenderableObject name="bot2" class="AnimatedModel" resource="bot" position="2.0 0.0 3.0" yaw="1.0" pitch="0.0" roll="-1.5707"/>
+	<RenderableObject name="bot2" class="AnimatedModel" resource="bot" position="-2.0 0.0 2.7" yaw="0.0" pitch="0.0" roll="-1.5707"/>
+  <RenderableObject name="bot3" class="AnimatedModel" resource="bot" position="-2.0 0.0 3.4" yaw="-3.1415" pitch="0.0" roll="-1.5707"/>
 </RenderableObjects>
