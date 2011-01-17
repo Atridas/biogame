@@ -100,6 +100,12 @@
     <Filter Include="AnimatedModelManager">
       <UniqueIdentifier>{c52e837d-037d-4ea7-a9a7-be14ebfb2f5f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SceneEffects">
+      <UniqueIdentifier>{f103fe91-1e9f-42d7-a3a5-ffeea6e10be4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneEffects\SceneEffectManager">
+      <UniqueIdentifier>{2a874a02-1265-4e7f-b786-22284aafc705}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -183,6 +189,7 @@
     <ClCompile Include="EffectManager.cpp">
       <Filter>Effects\EffectManager</Filter>
     </ClCompile>
+    <ClCompile Include="SceneEffectManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RenderManager.h">
@@ -272,5 +279,6 @@
     <ClInclude Include="include\EffectManager.h">
       <Filter>Effects\EffectManager</Filter>
     </ClInclude>
+    <ClInclude Include="SceneEffectManager.h" />
   </ItemGroup>
 </Project>
