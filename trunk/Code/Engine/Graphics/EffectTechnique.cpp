@@ -9,7 +9,7 @@
 void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
 {
   Release();
-  LOGGER->AddNewLog(ELL_INFORMATION, "CEffectTechnique::Init()  Initializing params from XML.");
+  LOGGER->AddNewLog(ELL_INFORMATION, "CEffectTechnique::Init  Initializing params from XML.");
 
   //strings
   SetName(_XMLParams.GetPszProperty("name" ,""));
@@ -42,7 +42,11 @@ void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
     SetOk(true);
   else
   {
-    LOGGER->AddNewLog(ELL_ERROR, "CEffectTechnique::Init()  Effect and/or D3DTechnique not loaded.");
+    if(!m_pEffect)
+      LOGGER->AddNewLog(ELL_ERROR, "CEffectTechnique::Init  Effect not loaded.");
+    if(!m_pD3DTechnique)
+      LOGGER->AddNewLog(ELL_ERROR, "CEffectTechnique::Init  D3DTechnique not loaded.");
+
     SetOk(false);
   }
 
@@ -124,7 +128,7 @@ bool CEffectTechnique::BeginRender()
       l_pD3DEffect->SetMatrix(m_pEffect->m_pViewToLightProjectionMatrixParameter,&l_pEM->GetLightViewMatrix().GetD3DXMatrix());
 
   }
-  LOGGER->AddNewLog(ELL_WARNING, "CEffectTechnique::BeginRender()  No effect specified.");
+  LOGGER->AddNewLog(ELL_WARNING, "CEffectTechnique::BeginRender  No effect specified.");
   return false;
 }
 
@@ -137,12 +141,12 @@ bool CEffectTechnique::Refresh()
       if(m_pD3DTechnique)
         return true;
 
-      LOGGER->AddNewLog(ELL_ERROR, "CEffectTechnique::Refresh()  Technique not found.");
+      LOGGER->AddNewLog(ELL_ERROR, "CEffectTechnique::Refresh  Technique not found.");
       return false;
 
   }else{
 
-    LOGGER->AddNewLog(ELL_ERROR, "CEffectTechnique::Refresh()  Uninitialized Effect.");
+    LOGGER->AddNewLog(ELL_ERROR, "CEffectTechnique::Refresh  Uninitialized Effect.");
     return false;
   }
 }
