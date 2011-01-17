@@ -172,12 +172,12 @@ technique NormalTexturedTechnique {
 		PixelShader = compile ps_3_0 mainPSNormalTextured();
 	}
 }
-/*
+
 technique NormalTextured2Technique {
 	pass p0 {
 		CullMode = None;
-		VertexShader = compile vs_3_0 mainVSNormalTextured2();
-		PixelShader = compile ps_3_0 mainPSNormalTextured2();
+		VertexShader = compile vs_3_0 mainVSNormalTextured();
+		PixelShader = compile ps_3_0 mainPSNormalTextured();
 	}
 }
 
@@ -185,7 +185,6 @@ technique NormalDiffusedTechnique {
 	pass p0 {
 		CullMode = None;
 		VertexShader = compile vs_3_0 mainVSNormalTextured();
-		PixelShader = compile ps_3_0 mainPS2();
+		PixelShader = compile ps_3_0 mainPSNormalTextured();
 	}
 }
-*/
