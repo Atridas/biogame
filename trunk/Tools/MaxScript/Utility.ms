@@ -422,6 +422,18 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		)
 	)
 	
+	function isAnimatedModel _object =
+	(
+		
+		-- TODO acceptar més coses
+		if classof _object == Point then
+		(
+			return true
+		) else (
+			return false
+		)
+	)
+	
 	on buttonMeshManager pressed do
 	(
 		l_cores = #()
@@ -464,6 +476,8 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		local l_cores = #()
 		local l_instances = #()
 		local l_lights = #()
+		local l_AnimatedModels = #()
+		
 		for i=1 to $*.count do
 		(
 			if IsLight $*[i] then
@@ -476,6 +490,9 @@ utility BioUtility "Eon-Utility" width:160 height:312
 				(
 					append l_cores $*[i]
 				)
+			) else if isAnimatedModel $*[i] then
+			(
+				ShowMessage "Tenim un AnimatedModel"
 			)
 		)
 		
