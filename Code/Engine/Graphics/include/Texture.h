@@ -4,13 +4,14 @@
 
 #include <base.h>
 #include <d3dx9.h>
+#include "Named.h"
 
 /**
  * Classe Texture.
  * Classe que s'encarrega d'administrar una textura. En aquest cas s'ha implementat per a DirectX9.
 **/
 class CTexture:
-  public CBaseControl
+  public CBaseControl, CNamed
 {
 protected:
   /**
@@ -20,7 +21,13 @@ protected:
   /**
    * Path relatiu a la textura.
   **/
-  std::string m_szFileName;
+  string m_szFileName;
+
+  uint32 m_uiWidth;
+
+  uint32 m_uiHeight;
+
+  LPDIRECT3DSURFACE9 m_pDepthStencilRenderTargetTexture;
 
   /**
    * Mètode de càrrega.
@@ -36,7 +43,11 @@ public:
   /**
    * Constructor per defecte.
   **/
-  CTexture():m_pTexture(0),m_szFileName(""){};
+  CTexture(): CNamed(""),m_pTexture(0),
+                         m_pDepthStencilRenderTargetTexture(0),
+                         m_uiWidth(0),
+                         m_uiHeight(0),
+                         m_szFileName("") {};
   /**
    * Destructor.
    * Allibera els recursos abans de destruir-se.
@@ -46,14 +57,14 @@ public:
    * Getter del path de la textura.
    * @return Path relatiu al fitxer de textura.
   **/
-  const std::string & GetFileName() const {m_szFileName;};
+  const string & GetFileName() const {m_szFileName;};
   /**
    * Mètode de càrrega.
    * Aquest mètode instanciarà i carregarà la textura especificada.
    * @param _szFileName Path relatiu al fitxer de textura.
    * @return True si s'ha carregat correctament, false sino.
   **/
-  bool Load(const std::string &_szFileName);
+  bool Load(const string &_szFileName);
   /**
    * Mètode de recàrrega.
    * Aquest mètode recarregarà la textura especificada anteriorment.
@@ -67,6 +78,42 @@ public:
    * @param _StageId.
   **/
   void Activate(size_t _StageId);
+
+  enum TPoolType {
+    DEFAULT=0,
+    SYSTEMMEM
+  };
+
+  enum TUsageType {
+    DYNAMIC=0,
+    RENDERTARGET
+  };
+
+  enum TTextureType {
+    TGA=0,
+    JPG,
+    BMP
+  };
+
+  enum TFormatType {
+    A8R8G8B8=0,
+    R8G8B8,
+    X8R8G8B8,
+    R32F
+  };
+
+  bool Create(const string& _szName,
+              unsigned int _uiWidth,
+              unsigned int _uiHeight,
+              unsigned int _uiMipMaps,
+              TUsageType _UsageType,
+              TPoolType _PoolType,
+              TFormatType _FormatType);
+
+  void Deactivate(size_t Stage);
+  bool SetAsRenderTarget();
+  void UnsetAsRenderTarget();
+  CTexture::TFormatType GetFormatTypeFromString(const string &FormatType);
 };
 
 #endif
