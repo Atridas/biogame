@@ -220,7 +220,27 @@ struct SNORMALDIFSSUSEVERTEX
 private:
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
 };
+// codi afegit
 
+struct TNORMALTANGENTBINORMALTEXTUREDVERTEX
+{
+  float x, y, z;
+  float nx, ny, nz, nw;
+  float tangentx, tangenty, tangentz, tangentw;
+  float binormalx, binormaly, binormalz, binormalw;
+  float tu,tv;
+  static inline unsigned short GetVertexType();
+  static inline unsigned int GetFVF()
+  {
+    return 0;
+  }
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+  static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+  static void ReleaseVertexDeclaration()
+  {
+    CHECKED_RELEASE(s_VertexDeclaration);
+  }
+};
 /*
 struct SNORMALDIFFUSETEXTUREDVERTEX
 {
