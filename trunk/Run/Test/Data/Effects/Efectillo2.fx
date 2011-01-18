@@ -80,12 +80,12 @@ struct TNORMAL_TEXTURED2_VERTEX_PS {
 struct TNORMAL_DIFFUSED_VERTEX_VS {
 	float3 Position : POSITION;
 	float3 Normal : NORMAL;
-	float4 Color : COLOR0;
+	float3 Color : COLOR0;
 };
 
 struct TNORMAL_DIFFUSED_VERTEX_PS {
 	float4 Hposition : POSITION;
-	float4 Color : COLOR0;
+	float3 Color : COLOR0;
 	float3 WorldNormal : TEXCOORD1;
 	float3 WorldPosition : TEXCOORD2;
 };
@@ -174,7 +174,7 @@ float4 mainPSNormalDiffused(TNORMAL_DIFFUSED_VERTEX_PS _in) : COLOR {
 	//float4 l_lightColor = clamp(l_light0Color, float4(g_LightAmbient,1.0), 1.0);
 	
 	return l_texColor * l_light0NonSpecular + l_light0Specular;*/
-	return _in.Color;
+	return float4(_in.Color, 1.0);
 }
 
 float4 mainPSNormalTextured(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
@@ -201,7 +201,7 @@ float4 mainPSNormalTextured2(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
 
 technique NormalTexturedTechnique {
 	pass p0 {
-		CullMode = None;
+		CullMode = CCW;
 		VertexShader = compile vs_3_0 mainVSNormalTextured();
 		PixelShader = compile ps_3_0 mainPSNormalTextured();
 	}
@@ -209,7 +209,7 @@ technique NormalTexturedTechnique {
 
 technique NormalTextured2Technique {
 	pass p0 {
-		CullMode = None;
+		CullMode = CCW;
 		VertexShader = compile vs_3_0 mainVSNormalTextured();
 		PixelShader = compile ps_3_0 mainPSNormalTextured();
 	}
@@ -217,7 +217,7 @@ technique NormalTextured2Technique {
 
 technique NormalDiffusedTechnique {
 	pass p0 {
-		CullMode = None;
+		CullMode = CCW;
 		VertexShader = compile vs_3_0 mainVSNormalDiffused();
 		PixelShader = compile ps_3_0 mainPSNormalDiffused();
 	}
