@@ -192,7 +192,9 @@
     <ClCompile Include="VertexStructs.cpp">
       <Filter>Vertex\Vertex Structs</Filter>
     </ClCompile>
-    <ClCompile Include="SceneEffectManager.cpp" />
+    <ClCompile Include="SceneEffectManager.cpp">
+      <Filter>SceneEffects\SceneEffectManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RenderManager.h">
@@ -282,6 +284,8 @@
     <ClInclude Include="include\EffectManager.h">
       <Filter>Effects\EffectManager</Filter>
     </ClInclude>
-    <ClInclude Include="SceneEffectManager.h" />
+    <ClInclude Include="include\SceneEffectManager.h">
+      <Filter>SceneEffects\SceneEffectManager</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
