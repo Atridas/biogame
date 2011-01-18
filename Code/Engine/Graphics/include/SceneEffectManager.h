@@ -7,7 +7,7 @@
 class CXMLTreeNode;
 class CSceneEffect;
 class CRenderManager;
-class CProc;
+class CProcess;
 //---------------------------------
 
 
@@ -15,23 +15,25 @@ class CSceneEffectManager :
   public CBaseControl
 {
 
-public:
-  vector<CSceneEffect *> m_PreRenderSceneEffects;
-  vector<CSceneEffect *> m_RenderSceneEffects;
-  vector<CSceneEffect *> m_CaptureFrameBufferSceneEffects;
-  vector<CSceneEffect *> m_CaptureFrameBufferSceneEffectsAfterPostRender;
-  vector<CSceneEffect *> m_PostRenderSceneEffects;
+public:/*private:?*/
+
+  vector<CSceneEffect*> m_vPreRenderSceneEffects;
+  vector<CSceneEffect*> m_vRenderSceneEffects;
+  vector<CSceneEffect*> m_vCaptureFrameBufferSceneEffects;
+  vector<CSceneEffect*> m_vCaptureFrameBufferSceneEffectsAfterPostRender;
+  vector<CSceneEffect*> m_vPostRenderSceneEffects;
 
 public:
   CSceneEffectManager();
   ~CSceneEffectManager(){Done();};
 
   void Release();
-  void LoadXML(const std::string &FileName);
-  void PreRender(CRenderManager *RM, CProc *Proc);
+  void LoadXML(const string& _szFileName);
+  void PreRender(CRenderManager* _pRM, CProcess* _pProc);
   void ActivateRenderSceneEffects();
-  void CaptureFrameBuffers(CRenderManager *RM);
-  void PostRender(CRenderManager *RM);
-  void CaptureFrameBuffersAfterPostRender(CRenderManager *RM);
+  void CaptureFrameBuffers(CRenderManager* _pRM);
+  void PostRender(CRenderManager* _pRM);
+  void CaptureFrameBuffersAfterPostRender(CRenderManager* _pRM);
 };
+
 #endif

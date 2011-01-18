@@ -1,12 +1,10 @@
 #include "SceneEffectManager.h"
+#include "Process.h"
+#include "RenderManager.h"
+#include "SceneEffect.h"
+#include "XML/XMLTreeNode.h"
 
-
-CSceneEffectManager::CSceneEffectManager(void):
-  m_PreRenderSceneEffects(0),
-  m_RenderSceneEffects(0),
-  m_CaptureFrameBufferSceneEffects(0),
-  m_CaptureFrameBufferSceneEffectsAfterPostRender(0),
-  m_PostRenderSceneEffects(0)
+CSceneEffectManager::CSceneEffectManager(void)
 {
   SetOk(true);
 }
@@ -19,11 +17,10 @@ void CSceneEffectManager::Release()
   
 void CSceneEffectManager::LoadXML(const string &_szFileName)
 {
-  //StaticMeshManager
 
 }
   
-void CSceneEffectManager::PreRender(CRenderManager *RM, CProc *Proc)
+void CSceneEffectManager::PreRender(CRenderManager* _pRM, CProcess* _pProc)
 {
 
 }
@@ -33,17 +30,17 @@ void CSceneEffectManager::ActivateRenderSceneEffects()
 
 }
   
-void CSceneEffectManager::CaptureFrameBuffers(CRenderManager *RM)
+void CSceneEffectManager::CaptureFrameBuffers(CRenderManager* _pRM)
 {
 
 }
   
-void CSceneEffectManager::PostRender(CRenderManager *RM)
+void CSceneEffectManager::PostRender(CRenderManager* _pRM)
 {
 
 }
   
-void CSceneEffectManager::CaptureFrameBuffersAfterPostRender(CRenderManager *RM)
+void CSceneEffectManager::CaptureFrameBuffersAfterPostRender(CRenderManager* _pRM)
 {
 
 }
