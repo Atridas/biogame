@@ -109,6 +109,9 @@
     <Filter Include="SceneEffects\SceneEffect">
       <UniqueIdentifier>{f3be4292-7da7-40a3-9a52-e311d48c885e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SceneEffects\RenderToTextureSceneEffect">
+      <UniqueIdentifier>{5848d5dd-7322-450b-b0bb-cae4a275fdaa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -200,6 +203,9 @@
     </ClCompile>
     <ClCompile Include="SceneEffect.cpp">
       <Filter>SceneEffects\SceneEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderToTextureSceneEffect.cpp">
+      <Filter>SceneEffects\RenderToTextureSceneEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -295,6 +301,9 @@
     </ClInclude>
     <ClInclude Include="include\SceneEffectManager.h">
       <Filter>SceneEffects\SceneEffectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RenderToTextureSceneEffect.h">
+      <Filter>SceneEffects\RenderToTextureSceneEffect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

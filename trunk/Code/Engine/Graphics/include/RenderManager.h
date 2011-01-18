@@ -54,6 +54,7 @@ public:
   uint32                  GetScreenHeight         () const {return m_uHeight;};
 
   LPDIRECT3DDEVICE9       GetDevice               () const {return m_pD3DDevice;};
+  CCamera*                GetCamera               () const {return m_pCamera;};
   CTextureManager*        GetTextureManager       () const {return m_pTextureManager;};
   CStaticMeshManager*     GetStaticMeshManager    () const {return m_pStaticMeshManager;};
   CAnimatedModelManager*  GetAnimatedModelManager () const {return m_pAnimatedModelManager;};
