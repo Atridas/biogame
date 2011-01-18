@@ -79,6 +79,14 @@
 	<RenderableObject name="mur divisor05" class="StaticMesh" resource="mur divisor" position="6.48966 0.0 -7.39289" yaw="-1.4746" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="mur divisor06" class="StaticMesh" resource="mur divisor" position="6.46393 0.0 -8.39256" yaw="-1.4746" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="mur divisor07" class="StaticMesh" resource="mur divisor" position="18.711 0.0 -5.00007" yaw="-5.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Bidó" class="StaticMesh" resource="Bidó" position="14.8958 0.0 10.8947" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Bidó01" class="StaticMesh" resource="Bidó" position="6.54122 0.0 3.22164" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Bidó02" class="StaticMesh" resource="Bidó" position="5.44174 0.0 -3.18138" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Bidó03" class="StaticMesh" resource="Bidó" position="10.1168 0.0 5.03802" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Bidó04" class="StaticMesh" resource="Bidó" position="0.229994 0.0 -5.59128" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Bidó05" class="StaticMesh" resource="Bidó" position="11.2535 0.0 -5.98055" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Bidó06" class="StaticMesh" resource="Bidó" position="-18.2866 0.0 1.96918" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Bidó07" class="StaticMesh" resource="Bidó" position="0.707596 0.0 -12.3783" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Caixes49" class="StaticMesh" resource="Caixes49" position="6.49051 0.0 6.40033" yaw="-15.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="mur divisor08" class="StaticMesh" resource="mur divisor08" position="-3.47563 0.0 1.95046" yaw="-19.1276" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="mur divisor09" class="StaticMesh" resource="mur divisor09" position="-3.47563 0.0 1.95046" yaw="-19.1276" pitch="0.0" roll="0.0"/>
@@ -86,7 +94,12 @@
 	<RenderableObject name="mur divisor11" class="StaticMesh" resource="mur divisor11" position="-3.47563 0.0 1.95046" yaw="-19.1276" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Caixes50" class="StaticMesh" resource="Caixes50" position="6.49051 0.0 6.40033" yaw="-15.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Caixes51" class="StaticMesh" resource="Caixes51" position="6.49051 0.0 6.40033" yaw="-15.0" pitch="0.0" roll="0.0"/>
-	<RenderableObject name="bot" class="AnimatedModel" resource="bot" position="-2.0 0.0 3.0" yaw="0.0" pitch="0.0" roll="-1.5707"/>
-	<RenderableObject name="bot2" class="AnimatedModel" resource="bot" position="-2.0 0.0 2.7" yaw="0.0" pitch="0.0" roll="-1.5707"/>
-  <RenderableObject name="bot3" class="AnimatedModel" resource="bot" position="-2.0 0.0 3.4" yaw="-3.1415" pitch="0.0" roll="-1.5707"/>
+	<RenderableObject name="Bidó08" class="StaticMesh" resource="Bidó08" position="14.8958 0.0 10.8947" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Base Hangar01" class="StaticMesh" resource="Base Hangar01" position="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Base Hangar02" class="StaticMesh" resource="Base Hangar02" position="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Base Hangar03" class="StaticMesh" resource="Base Hangar03" position="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Base Hangar04" class="StaticMesh" resource="Base Hangar04" position="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Base Hangar05" class="StaticMesh" resource="Base Hangar05" position="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Base Hangar06" class="StaticMesh" resource="Base Hangar06" position="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Base Hangar07" class="StaticMesh" resource="Base Hangar07" position="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0"/>
 </RenderableObjects>
