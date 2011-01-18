@@ -106,6 +106,9 @@
     <Filter Include="SceneEffects\SceneEffectManager">
       <UniqueIdentifier>{2a874a02-1265-4e7f-b786-22284aafc705}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SceneEffects\SceneEffect">
+      <UniqueIdentifier>{f3be4292-7da7-40a3-9a52-e311d48c885e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -195,6 +198,9 @@
     <ClCompile Include="SceneEffectManager.cpp">
       <Filter>SceneEffects\SceneEffectManager</Filter>
     </ClCompile>
+    <ClCompile Include="SceneEffect.cpp">
+      <Filter>SceneEffects\SceneEffect</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RenderManager.h">
@@ -283,6 +289,9 @@
     </ClInclude>
     <ClInclude Include="include\EffectManager.h">
       <Filter>Effects\EffectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SceneEffect.h">
+      <Filter>SceneEffects\SceneEffect</Filter>
     </ClInclude>
     <ClInclude Include="include\SceneEffectManager.h">
       <Filter>SceneEffects\SceneEffectManager</Filter>
