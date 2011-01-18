@@ -7,6 +7,7 @@
 #include "StaticMeshManager.h"
 #include "AnimatedModelManager.h"
 #include "EffectManager.h"
+#include "VertexsStructs.h"
 
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 #define D3DFVF_CUSTOMVERTEX2 (D3DFVF_XYZ|D3DFVF_TEX1)
@@ -170,6 +171,14 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
 		throw CException(__FILE__, __LINE__, msg_error);
 	}
 	
+  STEXTUREDVERTEX::GetVertexDeclaration();
+  STEXTURED2VERTEX::GetVertexDeclaration();
+  SNORMALTEXTUREDVERTEX::GetVertexDeclaration();
+  SNORMALTEXTURED2VERTEX::GetVertexDeclaration();
+  SDIFFUSEVERTEX::GetVertexDeclaration();
+  SNORMALDIFSSUSEVERTEX::GetVertexDeclaration();
+  TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetVertexDeclaration();
+
 	return IsOk();
 }
 
@@ -186,6 +195,14 @@ void CRenderManager::GetWindowRect( HWND hwnd )
 void CRenderManager::Release(void)
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "RenderManager::Release",m_uWidth,m_uHeight);
+
+  STEXTUREDVERTEX::ReleaseVertexDeclaration();
+  STEXTURED2VERTEX::ReleaseVertexDeclaration();
+  SNORMALTEXTUREDVERTEX::ReleaseVertexDeclaration();
+  SNORMALTEXTURED2VERTEX::ReleaseVertexDeclaration();
+  SDIFFUSEVERTEX::ReleaseVertexDeclaration();
+  SNORMALDIFSSUSEVERTEX::ReleaseVertexDeclaration();
+  TNORMALTANGENTBINORMALTEXTUREDVERTEX::ReleaseVertexDeclaration();
   
   CHECKED_DELETE(m_pEffectManager);
   CHECKED_DELETE(m_pAnimatedModelManager)
