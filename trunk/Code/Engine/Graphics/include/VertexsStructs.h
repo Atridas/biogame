@@ -64,7 +64,7 @@ inline uint16 GetTextureNum(uint16 _usVertexType)
   {
     num += 2;
   }
-  if(_usVertexType & (VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL) )
+  if(_usVertexType & VERTEX_TYPE_TANGENT & VERTEX_TYPE_BINORMAL )
   {
     num += 2;
   }
@@ -234,12 +234,42 @@ struct TNORMALTANGENTBINORMALTEXTUREDVERTEX
   {
     return 0;
   }
-  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
-  static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
   static void ReleaseVertexDeclaration()
   {
     CHECKED_RELEASE(s_VertexDeclaration);
   }
+
+  //TODO!!!!!!!!!
+  static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration()
+  {
+    if(s_VertexDeclaration==NULL)
+    {
+      D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+      {
+        { 0, 
+          0 , 
+          D3DDECLTYPE_FLOAT3,     //type
+          D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+          D3DDECLUSAGE_POSITION,  //ús de les dades
+          0 
+        },
+        { 0, 
+          12 ,                    //desplaçament 
+          D3DDECLTYPE_FLOAT2,     //type
+          D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+          D3DDECLUSAGE_TEXCOORD,  //ús de les dades
+          0 
+        },
+        D3DDECL_END()
+      };
+      RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    }
+    return s_VertexDeclaration;
+  }
+
+private:
+  
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
 };
 /*
 struct SNORMALDIFFUSETEXTUREDVERTEX

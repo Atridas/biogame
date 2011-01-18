@@ -44,6 +44,12 @@ void CLogger::AddNewLog( ELOG_LEVEL ll, const char* format, ... )
 
 		m_vLogs.push_back(newLog);
 	}
+
+  if(ELL_ERROR == ll)
+  {
+    MessageBox(NULL,buffer,"ATTENTION",MB_OK);
+  }
+
 	delete buffer;
 }
 

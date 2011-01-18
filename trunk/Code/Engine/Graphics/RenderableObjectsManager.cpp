@@ -94,14 +94,14 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
 
     CXMLTreeNode l_XMLObject = l_XMLObjects(i);
 
-    l_szName      = l_XMLObject.GetPszProperty("name" ,"");
-    l_szClass     = l_XMLObject.GetPszProperty("class" ,"");
-    l_szResource  = l_XMLObject.GetPszProperty("resource" ,"");
+    l_szName      = l_XMLObject.GetPszISOProperty("name" ,"");
+    l_szClass     = l_XMLObject.GetPszISOProperty("class" ,"");
+    l_szResource  = l_XMLObject.GetPszISOProperty("resource" ,"");
 
     l_vPos        = l_XMLObject.GetVect3fProperty("position",Vect3f(0.0f));
-    l_fYaw        = l_XMLObject.GetFloatProperty("yaw");
-    l_fPitch      = l_XMLObject.GetFloatProperty("pitch");
-    l_fRoll       = l_XMLObject.GetFloatProperty("roll");
+    l_fYaw        = l_XMLObject.GetFloatProperty("yaw") * FLOAT_PI_VALUE / 180.0f;
+    l_fPitch      = l_XMLObject.GetFloatProperty("pitch") * FLOAT_PI_VALUE / 180.0f;
+    l_fRoll       = l_XMLObject.GetFloatProperty("roll") * FLOAT_PI_VALUE / 180.0f;
 
     if(!GetResource(l_szName))
     {

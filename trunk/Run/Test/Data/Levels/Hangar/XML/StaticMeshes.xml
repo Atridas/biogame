@@ -34,10 +34,4 @@
 	<mesh name="Caixes51" path="Data/Levels/Hangar/Meshes/Caixes51.mesh"/>
 	<mesh name="Bidó08" path="Data/Levels/Hangar/Meshes/Bidó08.mesh"/>
 	<mesh name="Base Hangar01" path="Data/Levels/Hangar/Meshes/Base Hangar01.mesh"/>
-	<mesh name="Base Hangar02" path="Data/Levels/Hangar/Meshes/Base Hangar02.mesh"/>
-	<mesh name="Base Hangar03" path="Data/Levels/Hangar/Meshes/Base Hangar03.mesh"/>
-	<mesh name="Base Hangar04" path="Data/Levels/Hangar/Meshes/Base Hangar04.mesh"/>
-	<mesh name="Base Hangar05" path="Data/Levels/Hangar/Meshes/Base Hangar05.mesh"/>
-	<mesh name="Base Hangar06" path="Data/Levels/Hangar/Meshes/Base Hangar06.mesh"/>
-	<mesh name="Base Hangar07" path="Data/Levels/Hangar/Meshes/Base Hangar07.mesh"/>
 </meshes>
