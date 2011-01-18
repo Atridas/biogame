@@ -145,14 +145,16 @@ bool CIndexedVertexs<T>::Render(CRenderManager *_pRM, CEffectTechnique *_pEffect
     l_pDevice->SetStreamSource(0,m_pVB,0,GetVertexSize());
     for(uint32 i = 0; i < l_iNumPasses; i++)
     {
-      l_pD3DEffect->BeginPass(i);
-      l_pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, // PrimitiveType
-                                      0,                  // BaseVertexIndex
-                                      0,                  // MinIndex
-                                      GetVertexsCount(),  // NumVertices
-                                      0,                  // StartIndex
-                                      GetFacesCount() );
-      l_pD3DEffect->EndPass();
+      if(SUCCEEDED(l_pD3DEffect->BeginPass(i)))
+      {
+        l_pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, // PrimitiveType
+                                        0,                  // BaseVertexIndex
+                                        0,                  // MinIndex
+                                        GetVertexsCount(),  // NumVertices
+                                        0,                  // StartIndex
+                                        GetFacesCount() );
+        l_pD3DEffect->EndPass();
+      }
     }
     return true;
   } else {
