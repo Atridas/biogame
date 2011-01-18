@@ -333,6 +333,9 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 	(
 		local face = GetFace _Obj i
 		local IdxsMap=meshop.getMapFace _Obj 1 i
+		local l_FaceNormal =  GetFaceNormal _Obj i
+		l_FaceNormal = RHVectorToLH l_FaceNormal
+		local l_SmoothValue = getFaceSmoothGroup _Obj i
 		local VertexOut1=#()
 		local VertexOut2=#()
 		local VertexOut3=#()
@@ -351,13 +354,14 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		local pos =  GetVert _Obj face.x
 		pos = pos * l_invTransform
 		pos = RHVectorToLH pos
-		local normal =  getNormal _Obj face.x
-		normal = RHVectorToLH normal
 		local TUV =  meshop.getMapVert _Obj 1 IdxsMap.x
 		TUV = ChangeUVCoords TUV
+		-- normals
+		--UABGetVertexNormal obj IdVertex SmoothValue FaceNormal
+		local l_Normal = UABGetVertexNormal _Obj face.x l_SmoothValue l_FaceNormal
 		
 		
-		CreateVertex pos normal TUV TUV l_Color _VertexType[l_materialID] VertexOut1
+		CreateVertex pos l_Normal TUV TUV l_Color _VertexType[l_materialID] VertexOut1
 		--format "%\n" VertexOut1
 
 		-- vertex 2
@@ -368,8 +372,9 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		normal = RHVectorToLH normal
 		TUV =  meshop.getMapVert _Obj 1 IdxsMap.y
 		TUV = ChangeUVCoords TUV
+		local l_Normal = UABGetVertexNormal _Obj face.y l_SmoothValue l_FaceNormal
 
-		CreateVertex pos normal TUV TUV l_Color _VertexType[l_materialID] VertexOut2
+		CreateVertex pos l_Normal TUV TUV l_Color _VertexType[l_materialID] VertexOut2
 		--format "%\n" VertexOut2
 
 		-- vertex 3
@@ -380,8 +385,9 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		normal = RHVectorToLH normal
 		TUV =  meshop.getMapVert _Obj 1 IdxsMap.z
 		TUV = ChangeUVCoords TUV
+		local l_Normal = UABGetVertexNormal _Obj face.z l_SmoothValue l_FaceNormal
 
-		CreateVertex pos normal TUV TUV l_Color _VertexType[l_materialID] VertexOut3
+		CreateVertex pos l_Normal TUV TUV l_Color _VertexType[l_materialID] VertexOut3
 		--format "%\n" VertexOut3
 		
 		local index1
@@ -538,6 +544,8 @@ function UABGetVertexNormal obj IdVertex SmoothValue FaceNormal =
 
 function UABCalcVertexsNormals obj =
 (
+	format "Calculant Normals...\n"
+	
 	UABClearNormalsArray()
 	local NumVtxs=getNumVerts obj
 	for b=1 to NumVtxs do
