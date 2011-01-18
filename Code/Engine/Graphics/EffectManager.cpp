@@ -9,6 +9,8 @@ void CEffectManager::ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _m
   m_mProjectionMatrix=_mProjectionMatrix;
   m_mViewMatrix=_mViewMatrix;
   m_vCameraEye=_vCameraEye;
+  
+  m_bInverseProjectionUpdated = m_bInverseViewUpdated = m_bInverseWorldUpdated = m_bViewProjectionUpdated = m_bWorldViewUpdated = m_bWorldViewProjectionUpdated = false;
 }
 
 /* format inventat de Effects.xml:
@@ -141,3 +143,65 @@ string CEffectManager::GetTechniqueEffectNameByVertexDefault(unsigned short _sVe
 
   return "";
 }
+
+
+const Mat44f& CEffectManager::GetInverseProjectionMatrix()
+{
+  if(!m_bInverseProjectionUpdated)
+  {
+    m_mInverseProjectionMatrix = m_mProjectionMatrix.GetInverted();
+    m_bInverseProjectionUpdated = true;
+  }
+  return m_mInverseProjectionMatrix;
+}
+
+const Mat44f& CEffectManager::GetInverseViewMatrix()
+{
+  if(!m_bInverseViewUpdated)
+  {
+    m_mInverseViewMatrix = m_mViewMatrix.GetInverted();
+    m_bInverseViewUpdated = true;
+  }
+  return m_mInverseViewMatrix;
+}
+
+const Mat44f& CEffectManager::GetInverseWorldMatrix()
+{
+  if(!m_bInverseWorldUpdated)
+  {
+    m_mInverseWorldMatrix = m_mWorldMatrix.GetInverted();
+    m_bInverseWorldUpdated = true;
+  }
+  return m_mInverseWorldMatrix;
+}
+
+const Mat44f& CEffectManager::GetViewProjectionMatrix()
+{
+  if(!m_bViewProjectionUpdated)
+  {
+    m_mViewProjectionMatrix = m_mProjectionMatrix * m_mViewMatrix;
+    m_bViewProjectionUpdated = true;
+  }
+  return m_mViewProjectionMatrix;
+}
+
+const Mat44f& CEffectManager::GetWorldViewMatrix()
+{
+  if(!m_bWorldViewUpdated)
+  {
+    m_mWorldViewMatrix = m_mViewMatrix * m_mWorldMatrix;
+    m_bWorldViewUpdated = true;
+  }
+  return m_mWorldViewMatrix;
+}
+
+const Mat44f& CEffectManager::GetWorldViewProjectionMatrix()
+{
+  if(!m_bInverseProjectionUpdated)
+  {
+    m_mWorldViewProjectionMatrix = m_mProjectionMatrix * m_mViewMatrix * m_mWorldMatrix;
+    m_bWorldViewProjectionUpdated = true;
+  }
+  return m_mWorldViewProjectionMatrix;
+}
+

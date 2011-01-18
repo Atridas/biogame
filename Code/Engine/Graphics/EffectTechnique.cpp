@@ -106,30 +106,31 @@ bool CEffectTechnique::BeginRender()
     if(m_bUseProjMatrix)
       l_pD3DEffect->SetMatrix(m_pEffect->m_pProjectionMatrixParameter,&l_pEM->GetProjectionMatrix().GetD3DXMatrix());
     if(m_bUseInverseProjMatrix)
-      l_pD3DEffect->SetMatrix(m_pEffect->m_pProjectionMatrixParameter,&l_pEM->GetProjectionMatrix().GetInverted().GetD3DXMatrix());
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pProjectionMatrixParameter,&l_pEM->GetInverseProjectionMatrix().GetD3DXMatrix());
     //World
     if(m_bUseWorldMatrix)
       l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldMatrixParameter,&l_pEM->GetWorldMatrix().GetD3DXMatrix());
     if(m_bUseInverseWorldMatrix)
-      l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldMatrixParameter,&l_pEM->GetWorldMatrix().GetInverted().GetD3DXMatrix());
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldMatrixParameter,&l_pEM->GetInverseWorldMatrix().GetD3DXMatrix());
     //View
     if(m_bUseViewMatrix)
       l_pD3DEffect->SetMatrix(m_pEffect->m_pViewMatrixParameter,&l_pEM->GetViewMatrix().GetD3DXMatrix());
     if(m_bUseInverseViewMatrix)
-      l_pD3DEffect->SetMatrix(m_pEffect->m_pViewMatrixParameter,&l_pEM->GetViewMatrix().GetInverted().GetD3DXMatrix());
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pViewMatrixParameter,&l_pEM->GetInverseViewMatrix().GetD3DXMatrix());
     //Composed
     if(m_bUseViewProjectionMatrix)
       l_pD3DEffect->SetMatrix(m_pEffect->m_pViewProjectionMatrixParameter,&l_pEM->GetViewProjectionMatrix().GetD3DXMatrix());
     if(m_bUseWorldViewMatrix)
-      l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldViewMatrixParameter,&(l_pEM->GetWorldMatrix()*l_pEM->GetViewMatrix()).GetD3DXMatrix());
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldViewMatrixParameter,&(l_pEM->GetWorldViewMatrix()).GetD3DXMatrix());
     if(m_bUseWorldViewProjectionMatrix)
     {
-      D3DXMATRIX l_World=l_pEM->GetWorldMatrix().GetD3DXMatrix();
-      D3DXMATRIX l_View=l_pEM->GetViewMatrix().GetD3DXMatrix();
-      D3DXMATRIX l_Projection=l_pEM->GetProjectionMatrix().GetD3DXMatrix();
-      D3DXMATRIX l_WorldViewProjection=l_World*l_View*l_Projection;
-
-      l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldViewProjectionMatrixParameter,&l_WorldViewProjection);
+      //D3DXMATRIX l_World=l_pEM->GetWorldMatrix().GetD3DXMatrix();
+      //D3DXMATRIX l_View=l_pEM->GetViewMatrix().GetD3DXMatrix();
+      //D3DXMATRIX l_Projection=l_pEM->GetProjectionMatrix().GetD3DXMatrix();
+      //D3DXMATRIX l_WorldViewProjection=l_World*l_View*l_Projection;
+      
+      //l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldViewProjectionMatrixParameter,&l_WorldViewProjection);
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldViewProjectionMatrixParameter,&(l_pEM->GetWorldViewProjectionMatrix()).GetD3DXMatrix());
     }
     //Light
     if(m_bUseViewToLightProjectionMatrix)
