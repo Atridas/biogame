@@ -9,86 +9,9 @@ date: YYMMDD
 
 */
 
-//------------------------------------------------------------------
-// Samplers
-//------------------------------------------------------------------
-texture Tex1  <
-	string ResourceName = "";//Optional default file name
-	string UIName =  "Tex1 Texture";
-	string ResourceType = "2D";
->;
-
-sampler2D Tex1Sampler = sampler_state {
-	Texture = <Tex1>;
-	MinFilter = Linear;
-	MagFilter = Linear;
-	MipFilter = Linear;
-	AddressU = Wrap;
-	AddressV = Wrap;
-};
-
-
-texture Lightmap  <
-	string ResourceName = "";//Optional default file name
-	string UIName =  "Lightmap Texture";
-	string ResourceType = "2D";
->;
-
-sampler2D LightmapSampler = sampler_state {
-	Texture = <Lightmap>;
-	MinFilter = Linear;
-	MagFilter = Linear;
-	MipFilter = Linear;
-	AddressU = Wrap;
-	AddressV = Wrap;
-};
-
-//--------------------------------------------------------------------------------
-// Structs
-
-//Para declarer una estructura de vértice que utilizaremos como entrada para el Vertex Shader
-struct TNORMAL_TEXTURED_VERTEX_VS {
-	float3 Position : POSITION;
-	float3 Normal : NORMAL;
-	float4 UV : TEXCOORD0;
-};
-//Para declarar una estructura de vértice que utilizaremos como salida para el Vertex Shader y
-//entrada para el Píxel Shader
-struct TNORMAL_TEXTURED_VERTEX_PS {
-	float4 Hposition : POSITION;
-	float2 UV : TEXCOORD0;
-	float3 WorldNormal : TEXCOORD1;
-	float3 WorldPosition : TEXCOORD2;
-};
-
-struct TNORMAL_TEXTURED2_VERTEX_VS {
-	float3 Position : POSITION;
-	float3 Normal : NORMAL;
-	float4 UV : TEXCOORD0;
-	float4 UV2 : TEXCOORD1;
-};
-
-struct TNORMAL_TEXTURED2_VERTEX_PS {
-	float4 Hposition : POSITION;
-	float2 UV : TEXCOORD0;
-	float2 UV2 : TEXCOORD1;
-	float3 WorldNormal : TEXCOORD2;
-	float3 WorldPosition : TEXCOORD3;
-};
-
-
-struct TNORMAL_DIFFUSED_VERTEX_VS {
-	float3 Position : POSITION;
-	float3 Normal : NORMAL;
-	float3 Color : COLOR0;
-};
-
-struct TNORMAL_DIFFUSED_VERTEX_PS {
-	float4 Hposition : POSITION;
-	float3 Color : COLOR0;
-	float3 WorldNormal : TEXCOORD1;
-	float3 WorldPosition : TEXCOORD2;
-};
+#include "Globals.fx"
+#include "Samplers.fx"
+#include "VertexType.fx"
 
 //------------------------------------------------------------------------------
 // Lights
@@ -109,9 +32,6 @@ float3 g_LightAmbient : COLOR;
 float g_SpecularReflection;
 
 //Matrixes
-float4x4 g_WorldViewProjMatrix : WorldViewProjection;
-float4x4 g_WorldMatrix : World;
-float4 g_CameraPosition: CameraPosition;
 
 TNORMAL_DIFFUSED_VERTEX_PS mainVSNormalDiffused(TNORMAL_DIFFUSED_VERTEX_VS _in) {
 	TNORMAL_DIFFUSED_VERTEX_PS out_ = (TNORMAL_DIFFUSED_VERTEX_PS)0;
