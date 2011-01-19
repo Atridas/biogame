@@ -36,10 +36,11 @@ fn ChangeUVCoords UV =
 
 function GetVertexType _material =
 (
-	local mascara = VERTEX_TYPE_GEOMETRY
-	if _material.bumpMapEnable == false then
+	local mascara = bit.or VERTEX_TYPE_GEOMETRY VERTEX_TYPE_NORMAL
+	if _material.bumpMapEnable == true then
 	(
-		mascara = bit.or mascara VERTEX_TYPE_NORMAL
+		mascara = bit.or mascara VERTEX_TYPE_TANGENT
+		mascara = bit.or mascara VERTEX_TYPE_BINORMAL
 	)
 	if _material.diffuseMapEnable then
 	(
@@ -206,6 +207,17 @@ function CreateVertex _Pos _Normal _TUV1 _TUV2 _DiffuseColor _VertexType VertexO
 		append VertexOut_ _Normal.x
 		append VertexOut_ _Normal.y
 		append VertexOut_ _Normal.z
+	)
+	
+	if bit.and _VertexType VERTEX_TYPE_TANGENT > 0 then
+	(
+		append VertexOut_ 0.0
+		append VertexOut_ 0.0
+		append VertexOut_ 0.0
+		
+		append VertexOut_ 0.0
+		append VertexOut_ 0.0
+		append VertexOut_ 0.0
 	)
 	
 	if bit.and _VertexType VERTEX_TYPE_TEXTURE1 > 0 then

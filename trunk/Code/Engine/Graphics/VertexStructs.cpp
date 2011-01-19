@@ -13,6 +13,7 @@ LPDIRECT3DVERTEXDECLARATION9 SNORMALTEXTUREDVERTEX::s_VertexDeclaration = 0;
 LPDIRECT3DVERTEXDECLARATION9 SNORMALTEXTURED2VERTEX::s_VertexDeclaration = 0;
 LPDIRECT3DVERTEXDECLARATION9 TNORMALTANGENTBINORMALTEXTUREDVERTEX::s_VertexDeclaration=0;
 
+LPDIRECT3DVERTEXDECLARATION9 TCAL3D_HW_VERTEX::s_VertexDeclaration=0;
 
 //---------------------------------------------------------------------------------------------
 
@@ -103,7 +104,7 @@ uint16 GetTextureNum(uint16 _usVertexType)
     return 2;
   } else if(_usVertexType == TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetVertexType())
   {
-    return 4;
+    return 2;
   } else {
     return 0;
   }
@@ -214,7 +215,7 @@ LPDIRECT3DVERTEXDECLARATION9& SNORMALDIFFUSEVERTEX::GetVertexDeclaration()
 // Normal Tangent Binormal Textured --------------------------------------------------------------------------------
 unsigned short TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetVertexType()
 {
-  return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_TEXTURE1;
+  return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL | VERTEX_TYPE_TEXTURE1;
 }
 
 unsigned int TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetFVF()
@@ -224,11 +225,11 @@ unsigned int TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetFVF()
 
 bool TNORMALTANGENTBINORMALTEXTUREDVERTEX::ActivateTextures(const vector<CTexture*>& _TextureArray)
 {
-  assert(_TextureArray.size() == 4);
+  assert(_TextureArray.size() == 2);
   _TextureArray[0]->Activate(0); // diffuse
   _TextureArray[1]->Activate(1); // normal
-  _TextureArray[2]->Activate(2); // lightmap
-  _TextureArray[3]->Activate(3); // enviroment
+  //_TextureArray[2]->Activate(2); // lightmap
+  //_TextureArray[3]->Activate(3); // enviroment
   return true;
 }
 
@@ -490,6 +491,70 @@ LPDIRECT3DVERTEXDECLARATION9& SNORMALTEXTURED2VERTEX::GetVertexDeclaration()
         D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
         D3DDECLUSAGE_TEXCOORD,  //ús de les dades
         1 
+      },
+      D3DDECL_END()
+    };
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    assert(result == D3D_OK);
+  }
+  return s_VertexDeclaration;
+}
+
+
+// Cal 3D Vertex ---------------------------------------------------------------------------------------------------
+unsigned short TCAL3D_HW_VERTEX::GetVertexType()
+{
+  return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_NORMAL|VERTEX_TYPE_TEXTURE1;//TODO
+}
+
+bool TCAL3D_HW_VERTEX::ActivateTextures(const vector<CTexture*>& _TextureArray)
+{
+  //assert(_TextureArray.size() == 2);
+  //_TextureArray[0]->Activate(0); // diffuse
+  //_TextureArray[1]->Activate(2); // lightmap
+  return true; // TODO
+}
+
+LPDIRECT3DVERTEXDECLARATION9& TCAL3D_HW_VERTEX::GetVertexDeclaration()
+{
+  if(s_VertexDeclaration==NULL)
+  {
+    D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+    {
+      { 0, 
+        0 , 
+        D3DDECLTYPE_FLOAT3,     //type
+        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+        D3DDECLUSAGE_POSITION,  //ús de les dades
+        0 
+      },
+      { 0, 
+        sizeof(float)*3 ,        //desplaçament
+        D3DDECLTYPE_FLOAT4,      //type
+        D3DDECLMETHOD_DEFAULT,   //---- sempre default (per meshes)
+        D3DDECLUSAGE_BLENDWEIGHT,//ús de les dades
+        0 
+      },
+      { 0, 
+        sizeof(float)*7 ,         //desplaçament
+        D3DDECLTYPE_FLOAT4,       //type
+        D3DDECLMETHOD_DEFAULT,    //---- sempre default (per meshes)
+        D3DDECLUSAGE_BLENDINDICES,//ús de les dades
+        0 
+      },
+      { 0, 
+        sizeof(float)*11 ,      //desplaçament
+        D3DDECLTYPE_FLOAT3,     //type
+        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+        D3DDECLUSAGE_NORMAL,    //ús de les dades
+        0 
+      },
+      { 0, 
+        sizeof(float)*14 ,      //desplaçament
+        D3DDECLTYPE_FLOAT2,     //type
+        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+        D3DDECLUSAGE_TEXCOORD,  //ús de les dades
+        0 
       },
       D3DDECL_END()
     };

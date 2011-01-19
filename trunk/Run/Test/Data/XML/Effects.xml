@@ -10,7 +10,9 @@
     <default_technique vertex_type="19" technique="ShowNormalsTechnique"/>
     <default_technique vertex_type="35" technique="ShowNormalsTechnique"/>
     <default_technique vertex_type="67" technique="ShowNormalsTechnique"/>
-    <default_technique vertex_type="33" technique="ShowNormalmapTechnique"/>
+    <default_technique vertex_type="33" technique="LightmapTechnique"/>
+    <default_technique vertex_type="31" technique="ShowNormalsTechnique"/>
+    <!--default_technique vertex_type="31" technique="ShowNormalmapTechnique"/-->
   </default_techniques>
   <techniques>
     <!-- technique name=.../-->
