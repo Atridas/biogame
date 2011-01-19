@@ -176,7 +176,7 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
   SNORMALTEXTUREDVERTEX::GetVertexDeclaration();
   SNORMALTEXTURED2VERTEX::GetVertexDeclaration();
   SDIFFUSEVERTEX::GetVertexDeclaration();
-  SNORMALDIFSSUSEVERTEX::GetVertexDeclaration();
+  SNORMALDIFFUSEVERTEX::GetVertexDeclaration();
   TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetVertexDeclaration();
 
 	return IsOk();
@@ -201,7 +201,7 @@ void CRenderManager::Release(void)
   SNORMALTEXTUREDVERTEX::ReleaseVertexDeclaration();
   SNORMALTEXTURED2VERTEX::ReleaseVertexDeclaration();
   SDIFFUSEVERTEX::ReleaseVertexDeclaration();
-  SNORMALDIFSSUSEVERTEX::ReleaseVertexDeclaration();
+  SNORMALDIFFUSEVERTEX::ReleaseVertexDeclaration();
   TNORMALTANGENTBINORMALTEXTUREDVERTEX::ReleaseVertexDeclaration();
   
   CHECKED_DELETE(m_pEffectManager);

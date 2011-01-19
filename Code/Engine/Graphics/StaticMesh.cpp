@@ -154,13 +154,41 @@ bool CStaticMesh::Load(const string &_szFileName)
                                                                           l_pIndexList,
                                                                           l_VertexCount, 
                                                                           l_IndexCount);
-    } else if(l_pusVertexType[i] == SNORMALDIFSSUSEVERTEX::GetVertexType())
+    } else if(l_pusVertexType[i] == SDIFFUSEVERTEX::GetVertexType())
     {
-      l_RenderableVertexs = new CIndexedVertexs<SNORMALDIFSSUSEVERTEX>( l_pRenderManager,
+      l_RenderableVertexs = new CIndexedVertexs<SDIFFUSEVERTEX>(  l_pRenderManager,
+                                                                  l_pVertexBuffer,
+                                                                  l_pIndexList,
+                                                                  l_VertexCount, 
+                                                                  l_IndexCount);
+    } else if(l_pusVertexType[i] == STEXTUREDVERTEX::GetVertexType())
+    {
+      l_RenderableVertexs = new CIndexedVertexs<STEXTUREDVERTEX>( l_pRenderManager,
                                                                         l_pVertexBuffer,
                                                                         l_pIndexList,
                                                                         l_VertexCount, 
                                                                         l_IndexCount);
+    } else if(l_pusVertexType[i] == STEXTURED2VERTEX::GetVertexType())
+    {
+      l_RenderableVertexs = new CIndexedVertexs<STEXTURED2VERTEX>(  l_pRenderManager,
+                                                                    l_pVertexBuffer,
+                                                                    l_pIndexList,
+                                                                    l_VertexCount, 
+                                                                    l_IndexCount);
+    } else if(l_pusVertexType[i] == SDIFFUSEVERTEX::GetVertexType())
+    {
+      l_RenderableVertexs = new CIndexedVertexs<SDIFFUSEVERTEX>(  l_pRenderManager,
+                                                                  l_pVertexBuffer,
+                                                                  l_pIndexList,
+                                                                  l_VertexCount, 
+                                                                  l_IndexCount);
+    } else if(l_pusVertexType[i] == TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetVertexType())
+    {
+      l_RenderableVertexs = new CIndexedVertexs<TNORMALTANGENTBINORMALTEXTUREDVERTEX>(  l_pRenderManager,
+                                                                                        l_pVertexBuffer,
+                                                                                        l_pIndexList,
+                                                                                        l_VertexCount, 
+                                                                                        l_IndexCount);
     } else {
       LOGGER->AddNewLog(ELL_WARNING, "CStaticMesh::Load unrecognized vertex type %#hx", l_pusVertexType[i]);
       CHECKED_DELETE_ARRAY(l_pusVertexType);
@@ -170,6 +198,9 @@ bool CStaticMesh::Load(const string &_szFileName)
       delete l_pIndexList;
       return false;
     }
+
+    m_iNumVertexs += l_VertexCount;
+    m_iNumFaces   += l_IndexCount / 3;
     
     m_RVs.push_back(l_RenderableVertexs);
   
@@ -207,7 +238,7 @@ void CStaticMesh::Render(CRenderManager *_pRM) const
 
     while(l_ItRV != l_EndRV) 
     {
-      if(l_ItTextureArray != m_Textures.end())
+      /*if(l_ItTextureArray != m_Textures.end())
       {
         vector<CTexture*>::const_iterator l_ItTexture = (*l_ItTextureArray).begin();
         vector<CTexture*>::const_iterator l_EndTexture = (*l_ItTextureArray).end();
@@ -219,7 +250,8 @@ void CStaticMesh::Render(CRenderManager *_pRM) const
           ++stage;
         }
         ++l_ItTextureArray;
-      }
+      }*/
+      (*l_ItRV)->ActivateTextures(*l_ItTextureArray);
 
       //(*l_ItRV)->Render(_pRM);  // Fixed Pipeline render
 

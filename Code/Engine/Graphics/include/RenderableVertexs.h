@@ -9,6 +9,7 @@
 //forward declarations ------------------------
 class CRenderManager;
 class CEffectTechnique;
+class CTexture;
 //---------------------------------------------
 
 /**
@@ -57,6 +58,8 @@ public:
    * @return True si s'ha renderitzat correctament, false sino.
   **/
   virtual bool Render(CRenderManager *_pRM, CEffectTechnique *_pEffectTechnique) const         = 0;
+
+  virtual bool ActivateTextures(const vector<CTexture*>& _TextureArray) const = 0;
 
   /**
    * Getter del nombre de triangles.
