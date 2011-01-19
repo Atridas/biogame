@@ -343,6 +343,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 	local numFaces = getNumFaces _Obj
 	for i = 1 to numFaces do
 	(
+		local UV2
 		local face = GetFace _Obj i
 		local IdxsMap=meshop.getMapFace _Obj 1 i
 		local l_FaceNormal =  GetFaceNormal _Obj i
@@ -368,8 +369,12 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		pos = RHVectorToLH pos
 		local TUV =  meshop.getMapVert _Obj 1 IdxsMap.x
 		TUV = ChangeUVCoords TUV
-		local TUV2 =  meshop.getMapVert _Obj 2 IdxsMap.x
-		TUV2 = ChangeUVCoords TUV2
+		--format "Num maps: %\n" (meshop.getNumMaps _Obj)
+		if bit.and _VertexType[l_materialID] VERTEX_TYPE_TEXTURE2 != 0 then
+		(
+			TUV2 =  meshop.getMapVert _Obj 2 IdxsMap.x
+			TUV2 = ChangeUVCoords TUV2
+		)
 		local l_Normal = UABGetVertexNormal _Obj face.x l_SmoothValue l_FaceNormal
 		
 		
@@ -384,8 +389,11 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		normal = RHVectorToLH normal
 		TUV =  meshop.getMapVert _Obj 1 IdxsMap.y
 		TUV = ChangeUVCoords TUV
-		local TUV2 =  meshop.getMapVert _Obj 2 IdxsMap.y
-		TUV2 = ChangeUVCoords TUV2
+		if bit.and _VertexType[l_materialID] VERTEX_TYPE_TEXTURE2 != 0 then
+		(
+			TUV2 =  meshop.getMapVert _Obj 2 IdxsMap.y
+			TUV2 = ChangeUVCoords TUV2
+		)
 		local l_Normal = UABGetVertexNormal _Obj face.y l_SmoothValue l_FaceNormal
 
 		CreateVertex pos l_Normal TUV TUV2 l_Color _VertexType[l_materialID] VertexOut2
@@ -399,8 +407,11 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		normal = RHVectorToLH normal
 		TUV =  meshop.getMapVert _Obj 1 IdxsMap.z
 		TUV = ChangeUVCoords TUV
-		local TUV2 =  meshop.getMapVert _Obj 2 IdxsMap.z
-		TUV2 = ChangeUVCoords TUV2
+		if bit.and _VertexType[l_materialID] VERTEX_TYPE_TEXTURE2 != 0 then
+		(
+			TUV2 =  meshop.getMapVert _Obj 2 IdxsMap.z
+			TUV2 = ChangeUVCoords TUV2
+		)
 		local l_Normal = UABGetVertexNormal _Obj face.z l_SmoothValue l_FaceNormal
 
 		CreateVertex pos l_Normal TUV TUV2 l_Color _VertexType[l_materialID] VertexOut3
@@ -410,10 +421,10 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		local index2
 		local index3
 		
-		format "Face\n"
-		format "Vert %\n" VertexOut1
-		format "Vert %\n" VertexOut2
-		format "Vert %\n" VertexOut3
+		--format "Face\n"
+		--format "Vert %\n" VertexOut1
+		--format "Vert %\n" VertexOut2
+		--format "Vert %\n" VertexOut3
 		
 		index1 = AddVertex VertexList_ l_materialID VertexOut1
 		index2 = AddVertex VertexList_ l_materialID VertexOut2
@@ -432,6 +443,13 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 (
 	format "Exporting % \n" _object0.name
 	
+	
+	if _object0.material == undefined then
+	(
+		ShowError ("No hi ha material a " + _object0.name)
+		return false
+	)
+	
 	_object = copy _object0
 	convertToMesh _object
 	UABCalcVertexsNormals _object
@@ -443,12 +461,6 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 	WriteShort l_file l_header #unsigned
 	
 	local l_material = _object.material
-	
-	if l_material == undefined then
-	(
-		ShowError ("No hi ha material a " + _object.name)
-		return false
-	)
 	
 	local l_numMaterials --nombre de materials
 	local l_vertexType = #() -- llista de vertexTypes, amb un sol element si no és un multimaterial
@@ -490,6 +502,7 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 	
 	for i = 1 to l_numMaterials do
 	(
+		--format "Vertex Type %\n" l_vertexType[i] 
 		WriteVertexs l_file l_VertexList[i] l_vertexType[i] 
 		WriteIndexs l_file l_IndexList[i]
 	)

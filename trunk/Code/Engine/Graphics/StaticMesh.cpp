@@ -181,13 +181,13 @@ bool CStaticMesh::Load(const string &_szFileName)
                                                                     l_pIndexList,
                                                                     l_VertexCount, 
                                                                     l_IndexCount);
-    } else if(l_pusVertexType[i] == SDIFFUSEVERTEX::GetVertexType())
+    } else if(l_pusVertexType[i] == SNORMALDIFFUSEVERTEX::GetVertexType())
     {
-      l_RenderableVertexs = new CIndexedVertexs<SDIFFUSEVERTEX>(  l_pRenderManager,
-                                                                  l_pVertexBuffer,
-                                                                  l_pIndexList,
-                                                                  l_VertexCount, 
-                                                                  l_IndexCount);
+      l_RenderableVertexs = new CIndexedVertexs<SNORMALDIFFUSEVERTEX>(  l_pRenderManager,
+                                                                        l_pVertexBuffer,
+                                                                        l_pIndexList,
+                                                                        l_VertexCount, 
+                                                                        l_IndexCount);
     } else if(l_pusVertexType[i] == TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetVertexType())
     {
       l_RenderableVertexs = new CIndexedVertexs<TNORMALTANGENTBINORMALTEXTUREDVERTEX>(  l_pRenderManager,
