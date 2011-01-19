@@ -32,7 +32,7 @@ TNORMAL_TEXTURED2_VERTEX_PS NormalTextured2VS(TNORMAL_TEXTURED2_VERTEX_VS _in) {
 float4 LightmapPS(TNORMAL_TEXTURED2_VERTEX_PS _in) : COLOR {
 	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
 	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2);
-	return l_DiffuseColor * l_LightmapColor * 2;
+	return l_DiffuseColor*l_LightmapColor * 2;
 }
 
 float4 ShowNormalsPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
