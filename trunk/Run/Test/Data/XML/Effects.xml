@@ -10,6 +10,7 @@
     <default_technique vertex_type="19" technique="ShowNormalsTechnique"/>
     <default_technique vertex_type="35" technique="ShowNormalsTechnique"/>
     <default_technique vertex_type="67" technique="ShowNormalsTechnique"/>
+    <default_technique vertex_type="33" technique="ShowNormalmapTechnique"/>
   </default_techniques>
   <techniques>
     <!-- technique name=.../-->
@@ -22,8 +23,10 @@
     <technique name="NormalDiffusedTechnique" effect="Test Effects" use_world_matrix="true"
                use_world_view_matrix="true" use_camera_position="true" use_world_view_projection_matrix="true"
                /-->
-    
+
     <technique name="ShowNormalsTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
+    <technique name="LightmapTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
+    <technique name="ShowNormalmapTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
     
   </techniques>
 </shaders>

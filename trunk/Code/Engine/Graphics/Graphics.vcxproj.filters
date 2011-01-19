@@ -19,9 +19,6 @@
     <Filter Include="StaticMesh">
       <UniqueIdentifier>{cdc76e40-6e6b-4649-bbfe-0683ecafa07d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StaticMeshManager">
-      <UniqueIdentifier>{fc572106-303d-4ba5-9b42-417814b133b3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Lights">
       <UniqueIdentifier>{1e8f55d6-65d4-48a1-9679-20a345809126}</UniqueIdentifier>
     </Filter>
@@ -112,6 +109,9 @@
     <Filter Include="SceneEffects\RenderToTextureSceneEffect">
       <UniqueIdentifier>{5848d5dd-7322-450b-b0bb-cae4a275fdaa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="StaticMesh\StaticMeshManager">
+      <UniqueIdentifier>{fc572106-303d-4ba5-9b42-417814b133b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -148,7 +148,7 @@
       <Filter>StaticMesh</Filter>
     </ClCompile>
     <ClCompile Include="StaticMeshManager.cpp">
-      <Filter>StaticMeshManager</Filter>
+      <Filter>StaticMesh\StaticMeshManager</Filter>
     </ClCompile>
     <ClCompile Include="RenderableObjectsManager.cpp">
       <Filter>RenderableObject\RenderableObjectsManager</Filter>
@@ -249,7 +249,7 @@
       <Filter>StaticMesh</Filter>
     </ClInclude>
     <ClInclude Include="include\StaticMeshManager.h">
-      <Filter>StaticMeshManager</Filter>
+      <Filter>StaticMesh\StaticMeshManager</Filter>
     </ClInclude>
     <ClInclude Include="include\RenderableObjectsManager.h">
       <Filter>RenderableObject\RenderableObjectsManager</Filter>

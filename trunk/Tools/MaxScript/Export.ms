@@ -36,7 +36,11 @@ fn ChangeUVCoords UV =
 
 function GetVertexType _material =
 (
-	local mascara = bit.or VERTEX_TYPE_GEOMETRY VERTEX_TYPE_NORMAL
+	local mascara = VERTEX_TYPE_GEOMETRY
+	if _material.bumpMapEnable == false then
+	(
+		mascara = bit.or mascara VERTEX_TYPE_NORMAL
+	)
 	if _material.diffuseMapEnable then
 	(
 		if _material.selfIllumMapEnable then
@@ -44,11 +48,6 @@ function GetVertexType _material =
 			mascara = bit.or mascara VERTEX_TYPE_TEXTURE2
 		) else (
 			mascara = bit.or mascara VERTEX_TYPE_TEXTURE1
-		)
-		if _material.bumpMapEnable then
-		(
-			mascara = bit.or mascara VERTEX_TYPE_TANGENT
-			mascara = bit.or mascara VERTEX_TYPE_BINORMAL
 		)
 	) else (
 		mascara = bit.or mascara VERTEX_TYPE_DIFFUSE
@@ -84,8 +83,9 @@ function ExportMaterial _material _file _relativePath =
 	--- lo mismo
 	
 	WriteShort _file l_cont #unsigned
-	*/
+	
 	local l_texture
+	*/
 	
 	if _material.diffuseMapEnable == true and  _material.diffuseMap != undefined then
 	(
@@ -356,12 +356,12 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		pos = RHVectorToLH pos
 		local TUV =  meshop.getMapVert _Obj 1 IdxsMap.x
 		TUV = ChangeUVCoords TUV
-		-- normals
-		--UABGetVertexNormal obj IdVertex SmoothValue FaceNormal
+		local TUV2 =  meshop.getMapVert _Obj 2 IdxsMap.x
+		TUV2 = ChangeUVCoords TUV
 		local l_Normal = UABGetVertexNormal _Obj face.x l_SmoothValue l_FaceNormal
 		
 		
-		CreateVertex pos l_Normal TUV TUV l_Color _VertexType[l_materialID] VertexOut1
+		CreateVertex pos l_Normal TUV TUV2 l_Color _VertexType[l_materialID] VertexOut1
 		--format "%\n" VertexOut1
 
 		-- vertex 2
@@ -372,9 +372,11 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		normal = RHVectorToLH normal
 		TUV =  meshop.getMapVert _Obj 1 IdxsMap.y
 		TUV = ChangeUVCoords TUV
+		local TUV2 =  meshop.getMapVert _Obj 2 IdxsMap.y
+		TUV2 = ChangeUVCoords TUV
 		local l_Normal = UABGetVertexNormal _Obj face.y l_SmoothValue l_FaceNormal
 
-		CreateVertex pos l_Normal TUV TUV l_Color _VertexType[l_materialID] VertexOut2
+		CreateVertex pos l_Normal TUV TUV2 l_Color _VertexType[l_materialID] VertexOut2
 		--format "%\n" VertexOut2
 
 		-- vertex 3
@@ -385,9 +387,11 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		normal = RHVectorToLH normal
 		TUV =  meshop.getMapVert _Obj 1 IdxsMap.z
 		TUV = ChangeUVCoords TUV
+		local TUV2 =  meshop.getMapVert _Obj 2 IdxsMap.z
+		TUV2 = ChangeUVCoords TUV
 		local l_Normal = UABGetVertexNormal _Obj face.z l_SmoothValue l_FaceNormal
 
-		CreateVertex pos l_Normal TUV TUV l_Color _VertexType[l_materialID] VertexOut3
+		CreateVertex pos l_Normal TUV TUV2 l_Color _VertexType[l_materialID] VertexOut3
 		--format "%\n" VertexOut3
 		
 		local index1

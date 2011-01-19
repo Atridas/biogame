@@ -41,18 +41,56 @@ float4 ShowNormalsPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
 	//return float4(l_normal,1.0);
 }
 
+float4 ShowNormalmapPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
+	float4 l_DiffuseColor = tex2D(NormalTextureSampler,_in.UV);
+	return l_DiffuseColor;
+	//return float4(l_normal,1.0);
+}
+
 
 technique ShowNormalsTechnique {
 	pass p0 {
-		CullMode = CCW;
+		//Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar
+    ZEnable = true;
+    ZWriteEnable = true;
+    ZFunc = LessEqual;
+    //Deshabilitamos el alphablend
+    AlphaBlendEnable = false;
+    //Tipo de culling que queremos utilizar
+    CullMode = CCW;
+    //Vertex / Pixel shader
 		VertexShader = compile vs_3_0 NormalTexturedVS();
 		PixelShader = compile ps_3_0 ShowNormalsPS();
 	}
 }
 
+technique ShowNormalmapTechnique {
+	pass p0 {
+		//Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar
+    ZEnable = true;
+    ZWriteEnable = true;
+    ZFunc = LessEqual;
+    //Deshabilitamos el alphablend
+    AlphaBlendEnable = false;
+    //Tipo de culling que queremos utilizar
+    CullMode = CCW;
+    //Vertex / Pixel shader
+		VertexShader = compile vs_3_0 NormalTexturedVS();
+		PixelShader = compile ps_3_0 ShowNormalmapPS();
+	}
+}
+
 technique LightmapTechnique {
 	pass p0 {
-		CullMode = CCW;
+		//Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar
+    ZEnable = true;
+    ZWriteEnable = true;
+    ZFunc = LessEqual;
+    //Deshabilitamos el alphablend
+    AlphaBlendEnable = false;
+    //Tipo de culling que queremos utilizar
+    CullMode = CCW;
+    //Vertex / Pixel shader
 		VertexShader = compile vs_3_0 NormalTextured2VS();
 		PixelShader = compile ps_3_0 LightmapPS();
 	}
