@@ -371,4 +371,31 @@ private:
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
 };
 
+struct TCAL3D_HW_VERTEX
+{
+  float x, y, z;
+  float weights[4];
+  float indices[4];
+  float nx, ny, nz;
+  float tu,tv;
+
+  static unsigned short GetVertexType();
+
+  static inline unsigned int GetFVF()
+  {
+    return 0;
+  }
+
+  static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+
+  static bool ActivateTextures(const vector<CTexture*>& _TextureArray);
+
+  static void ReleaseVertexDeclaration()
+  {
+    CHECKED_RELEASE(s_VertexDeclaration);
+  }
+private:
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+};
+
 #endif
