@@ -3,6 +3,7 @@
 #define __RENDER_TEXTURE_SCENE_EFFECT_H__
 
 #include "base.h"
+#include "SceneEffect.h"
 #include <d3d9.h>
 
 //Forward declarations-------------
@@ -11,9 +12,8 @@ class CRenderManager;
 class CTexture;
 //---------------------------------
 
-class CRenderTextureSceneEffect:
-  public  CBaseControl,
-          CSceneEffect
+class CRenderTextureSceneEffect :
+  public  CBaseControl, CSceneEffect
 {
 public:
   CRenderTextureSceneEffect(MKeyValue& _Atts);

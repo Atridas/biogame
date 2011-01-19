@@ -30,7 +30,7 @@ void CRenderTextureSceneEffect::CaptureFrameBuffers(CRenderManager* _pRM)
 {
   if(IsOk())
   {
-    LPDIRECT3DSURFACE9 l_pRenderTarget;
+    LPDIRECT3DSURFACE9 l_pRenderTarget = 0;
 
     //PSRender.GetDevice()->GetRenderTarget(0,&l_pRenderTarget);
     //PSRender.GetDevice()->StretchRect( l_pRenderTarget, NULL, m_pSurface, NULL, D3DTEXF_NONE);
