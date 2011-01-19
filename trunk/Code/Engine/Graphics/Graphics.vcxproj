@@ -111,6 +111,7 @@
     <ClCompile Include="RenderableObject.cpp" />
     <ClCompile Include="RenderableObjectsManager.cpp" />
     <ClCompile Include="RenderManager.cpp" />
+    <ClCompile Include="RenderTextureSceneEffect.cpp" />
     <ClCompile Include="RenderToTextureSceneEffect.cpp" />
     <ClCompile Include="SceneEffect.cpp" />
     <ClCompile Include="SceneEffectManager.cpp" />
@@ -145,6 +146,7 @@
     <ClInclude Include="include\RenderableObjectsManager.h" />
     <ClInclude Include="include\RenderableVertexs.h" />
     <ClInclude Include="include\RenderManager.h" />
+    <ClInclude Include="include\RenderTextureSceneEffect.h" />
     <ClInclude Include="include\RenderToTextureSceneEffect.h" />
     <ClInclude Include="include\SceneEffect.h" />
     <ClInclude Include="include\SceneEffectManager.h" />

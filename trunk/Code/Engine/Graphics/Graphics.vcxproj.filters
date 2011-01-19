@@ -112,6 +112,9 @@
     <Filter Include="StaticMesh\StaticMeshManager">
       <UniqueIdentifier>{fc572106-303d-4ba5-9b42-417814b133b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SceneEffects\CRenderTextureSceneEffect">
+      <UniqueIdentifier>{26e1cfa2-0558-4de2-a0f5-d481c053b5a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -206,6 +209,9 @@
     </ClCompile>
     <ClCompile Include="RenderToTextureSceneEffect.cpp">
       <Filter>SceneEffects\RenderToTextureSceneEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderTextureSceneEffect.cpp">
+      <Filter>SceneEffects\CRenderTextureSceneEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -304,6 +310,9 @@
     </ClInclude>
     <ClInclude Include="include\RenderToTextureSceneEffect.h">
       <Filter>SceneEffects\RenderToTextureSceneEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RenderTextureSceneEffect.h">
+      <Filter>SceneEffects\CRenderTextureSceneEffect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

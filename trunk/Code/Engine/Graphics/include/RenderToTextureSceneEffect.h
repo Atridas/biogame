@@ -3,8 +3,7 @@
 #define __RENDER_TO_TEXTURE_SCENE_EFFECT_H__
 
 #include "base.h"
-//TODO: UNCOMMENT
-//#include "RenderTextureSceneEffect.h"
+#include "RenderTextureSceneEffect.h"
 
 //Forward declarations-------------
 class MKeyValue;
@@ -13,13 +12,12 @@ class CProcess;
 class CEffectTechnique;
 //---------------------------------
 
-//TODO: UNCOMMENT
-class CRenderToTextureSceneEffect//:
-//  public CRenderTextureSceneEffect
+class CRenderToTextureSceneEffect:
+  public CRenderTextureSceneEffect
 {
 public:
   CRenderToTextureSceneEffect(MKeyValue& _Atts):
-//                CRenderTextureSceneEffect::CRenderTextureSceneEffect(_Atts),
+                CRenderTextureSceneEffect::CRenderTextureSceneEffect(_Atts),
                 m_pAnimatedModelTechnique(0),
                 m_pStaticMeshTechnique(0)
                 {};
