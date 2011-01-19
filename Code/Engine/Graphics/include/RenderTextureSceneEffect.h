@@ -17,7 +17,7 @@ class CRenderTextureSceneEffect :
 {
 public:
   CRenderTextureSceneEffect(MKeyValue& _Atts);
-  ~CRenderTextureSceneEffect();
+  ~CRenderTextureSceneEffect() {Done();};
 
   void CaptureFrameBuffers(CRenderManager* _pRM);
 
