@@ -12,12 +12,12 @@ class CProcess;
 class CEffectTechnique;
 //---------------------------------
 
-class CRenderToTextureSceneEffect:
+class CRenderToTextureSceneEffect :
   public CRenderTextureSceneEffect
 {
 public:
   CRenderToTextureSceneEffect(MKeyValue& _Atts):
-                CRenderTextureSceneEffect::CRenderTextureSceneEffect(_Atts),
+                CRenderTextureSceneEffect(_Atts),
                 m_pAnimatedModelTechnique(0),
                 m_pStaticMeshTechnique(0)
                 {};
