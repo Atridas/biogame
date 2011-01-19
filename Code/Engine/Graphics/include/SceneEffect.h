@@ -15,18 +15,6 @@ class CTexture;
 
 class CSceneEffect : public /*CActive,*/ CNamed
 {
-protected:
-  class CStageTexture
-  {
-    public:
-    int m_iStageId;
-    CTexture* m_pTexture;
-    CStageTexture(int _iStageId, CTexture* _pTexture);
-    void Activate();
-  };
-
-  vector<CStageTexture> m_vStageTextures;
-  
 public:
 
   CSceneEffect(/*MKeyValue &atts*/) : CNamed("") {};
@@ -38,6 +26,18 @@ public:
   virtual void PostRender(CRenderManager* _pRM);
   virtual void CaptureFrameBuffers(CRenderManager* _pRM);
 
+protected:
+  class CStageTexture
+  {
+    public:
+    CStageTexture(int _iStageId, CTexture* _pTexture);
+    void Activate();
+
+    int m_iStageId;
+    CTexture* m_pTexture;
+  };
+
+  vector<CStageTexture> m_vStageTextures;
 };
 
 #endif
