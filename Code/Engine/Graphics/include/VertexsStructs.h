@@ -160,6 +160,45 @@ private:
   
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
 };
+
+struct TNORMALTANGENTBINORMALTEXTURED2VERTEX
+{
+  float x, y, z;
+  float nx, ny, nz;
+  float tangentx, tangenty, tangentz;
+  float binormalx, binormaly, binormalz;
+  float tu,tv;
+  float tu2,tv2;
+
+  /**
+   * Getter del tipus de vèrtex.
+   * Els tipus de vèrtex és una màscara donada pel següent conjunt d'elements:
+   *  - VERTEX_TYPE_GEOMETRY 0x0001
+   *  - VERTEX_TYPE_NORMAL   0x0002
+   *  - VERTEX_TYPE_TANGENT  0x0004
+   *  - VERTEX_TYPE_BINORMAL 0x0008
+   *  - VERTEX_TYPE_TEXTURE1 0x0010
+   *  - VERTEX_TYPE_TEXTURE2 0x0020
+   *  - VERTEX_TYPE_DIFFUSE  0x0040
+   * @return El tipus del vèrtex.
+  **/
+  static unsigned short GetVertexType();
+
+  static unsigned int GetFVF();
+
+  static void ReleaseVertexDeclaration()
+  {
+    CHECKED_RELEASE(s_VertexDeclaration);
+  }
+
+  static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+
+  static bool ActivateTextures(const vector<CTexture*>& _TextureArray);
+
+private:
+  
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+};
 /*
 struct SNORMALDIFFUSETEXTUREDVERTEX
 {

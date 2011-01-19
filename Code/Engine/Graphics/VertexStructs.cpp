@@ -12,6 +12,7 @@ LPDIRECT3DVERTEXDECLARATION9 SNORMALDIFFUSEVERTEX::s_VertexDeclaration = 0;
 LPDIRECT3DVERTEXDECLARATION9 SNORMALTEXTUREDVERTEX::s_VertexDeclaration = 0;
 LPDIRECT3DVERTEXDECLARATION9 SNORMALTEXTURED2VERTEX::s_VertexDeclaration = 0;
 LPDIRECT3DVERTEXDECLARATION9 TNORMALTANGENTBINORMALTEXTUREDVERTEX::s_VertexDeclaration=0;
+LPDIRECT3DVERTEXDECLARATION9 TNORMALTANGENTBINORMALTEXTURED2VERTEX::s_VertexDeclaration=0;
 
 LPDIRECT3DVERTEXDECLARATION9 TCAL3D_HW_VERTEX::s_VertexDeclaration=0;
 
@@ -62,6 +63,9 @@ uint16 GetVertexSize(uint16 _usVertexType)
   } else if(_usVertexType == TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetVertexType())
   {
     return sizeof(TNORMALTANGENTBINORMALTEXTUREDVERTEX);
+  } else if(_usVertexType == TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetVertexType())
+  {
+    return sizeof(TNORMALTANGENTBINORMALTEXTURED2VERTEX);
   } else {
     return 0;
   }
@@ -105,6 +109,9 @@ uint16 GetTextureNum(uint16 _usVertexType)
   } else if(_usVertexType == TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetVertexType())
   {
     return 2;
+  } else if(_usVertexType == TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetVertexType())
+  {
+    return 3;
   } else {
     return 0;
   }
@@ -273,6 +280,82 @@ LPDIRECT3DVERTEXDECLARATION9& TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetVertexDec
         D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
         D3DDECLUSAGE_TEXCOORD,  //ús de les dades
         0 
+      },
+      D3DDECL_END()
+    };
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    assert(result == D3D_OK);
+  }
+  return s_VertexDeclaration;
+}
+// Normal Tangent Binormal Textured 2-------------------------------------------------------------------------------
+unsigned short TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetVertexType()
+{
+  return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TANGENT | VERTEX_TYPE_BINORMAL | VERTEX_TYPE_TEXTURE2;
+}
+
+unsigned int TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetFVF()
+{
+  return D3DFVF_XYZ|D3DFVF_NORMAL|D3DFVF_TEX2; //TODO?
+}
+
+bool TNORMALTANGENTBINORMALTEXTURED2VERTEX::ActivateTextures(const vector<CTexture*>& _TextureArray)
+{
+  assert(_TextureArray.size() == 3);
+  _TextureArray[0]->Activate(0); // diffuse
+  _TextureArray[1]->Activate(1); // normal
+  _TextureArray[2]->Activate(2); // lightmap
+  //_TextureArray[3]->Activate(3); // enviroment
+  return true;
+}
+
+LPDIRECT3DVERTEXDECLARATION9& TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetVertexDeclaration()
+{
+  if(s_VertexDeclaration==NULL)
+  {
+    D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+    {
+      { 0, 
+        0 , 
+        D3DDECLTYPE_FLOAT3,     //type
+        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+        D3DDECLUSAGE_POSITION,  //ús de les dades
+        0 
+      },
+      { 0, 
+        sizeof(float)*3 ,       //desplaçament 
+        D3DDECLTYPE_FLOAT3,     //type
+        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+        D3DDECLUSAGE_NORMAL,    //ús de les dades
+        0 
+      },
+      { 0, 
+        sizeof(float)*6 ,       //desplaçament 
+        D3DDECLTYPE_FLOAT3,     //type
+        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+        D3DDECLUSAGE_TANGENT,   //ús de les dades
+        0 
+      },
+      { 0, 
+        sizeof(float)*9 ,       //desplaçament 
+        D3DDECLTYPE_FLOAT3,     //type
+        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+        D3DDECLUSAGE_BINORMAL,  //ús de les dades
+        0 
+      },
+      { 0, 
+        sizeof(float)*12 ,      //desplaçament 
+        D3DDECLTYPE_FLOAT2,     //type
+        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+        D3DDECLUSAGE_TEXCOORD,  //ús de les dades
+        0 
+      },
+      { 0, 
+        sizeof(float)*14 ,      //desplaçament 
+        D3DDECLTYPE_FLOAT2,     //type
+        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+        D3DDECLUSAGE_TEXCOORD,  //ús de les dades
+        1 
       },
       D3DDECL_END()
     };

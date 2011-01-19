@@ -131,8 +131,14 @@ bool CStaticMesh::Load(const string &_szFileName)
   
   
     uint32 l_IndexCount;
-  
+
     l_File.read((char*)&l_IndexCount, sizeof(uint32));
+
+    /*TNORMALTANGENTBINORMALTEXTURED2VERTEX aux[24], *aux2 = (TNORMALTANGENTBINORMALTEXTURED2VERTEX*)l_pVertexBuffer;
+    for(int k = 0; k < 24; k++)
+    {
+      aux[k] = aux2[k];
+    }*/
 
     uint16 * l_pIndexList = new uint16[l_IndexCount];
     l_File.read((char *)&l_pIndexList[0], sizeof(uint16)*l_IndexCount);
@@ -185,6 +191,13 @@ bool CStaticMesh::Load(const string &_szFileName)
     } else if(l_pusVertexType[i] == TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetVertexType())
     {
       l_RenderableVertexs = new CIndexedVertexs<TNORMALTANGENTBINORMALTEXTUREDVERTEX>(  l_pRenderManager,
+                                                                                        l_pVertexBuffer,
+                                                                                        l_pIndexList,
+                                                                                        l_VertexCount, 
+                                                                                        l_IndexCount);
+    } else if(l_pusVertexType[i] == TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetVertexType())
+    {
+      l_RenderableVertexs = new CIndexedVertexs<TNORMALTANGENTBINORMALTEXTURED2VERTEX>( l_pRenderManager,
                                                                                         l_pVertexBuffer,
                                                                                         l_pIndexList,
                                                                                         l_VertexCount, 

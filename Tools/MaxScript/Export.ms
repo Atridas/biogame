@@ -369,7 +369,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		local TUV =  meshop.getMapVert _Obj 1 IdxsMap.x
 		TUV = ChangeUVCoords TUV
 		local TUV2 =  meshop.getMapVert _Obj 2 IdxsMap.x
-		TUV2 = ChangeUVCoords TUV
+		TUV2 = ChangeUVCoords TUV2
 		local l_Normal = UABGetVertexNormal _Obj face.x l_SmoothValue l_FaceNormal
 		
 		
@@ -385,7 +385,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		TUV =  meshop.getMapVert _Obj 1 IdxsMap.y
 		TUV = ChangeUVCoords TUV
 		local TUV2 =  meshop.getMapVert _Obj 2 IdxsMap.y
-		TUV2 = ChangeUVCoords TUV
+		TUV2 = ChangeUVCoords TUV2
 		local l_Normal = UABGetVertexNormal _Obj face.y l_SmoothValue l_FaceNormal
 
 		CreateVertex pos l_Normal TUV TUV2 l_Color _VertexType[l_materialID] VertexOut2
@@ -400,7 +400,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		TUV =  meshop.getMapVert _Obj 1 IdxsMap.z
 		TUV = ChangeUVCoords TUV
 		local TUV2 =  meshop.getMapVert _Obj 2 IdxsMap.z
-		TUV2 = ChangeUVCoords TUV
+		TUV2 = ChangeUVCoords TUV2
 		local l_Normal = UABGetVertexNormal _Obj face.z l_SmoothValue l_FaceNormal
 
 		CreateVertex pos l_Normal TUV TUV2 l_Color _VertexType[l_materialID] VertexOut3
@@ -409,6 +409,11 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		local index1
 		local index2
 		local index3
+		
+		format "Face\n"
+		format "Vert %\n" VertexOut1
+		format "Vert %\n" VertexOut2
+		format "Vert %\n" VertexOut3
 		
 		index1 = AddVertex VertexList_ l_materialID VertexOut1
 		index2 = AddVertex VertexList_ l_materialID VertexOut2

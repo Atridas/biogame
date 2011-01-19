@@ -178,6 +178,7 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
   SDIFFUSEVERTEX::GetVertexDeclaration();
   SNORMALDIFFUSEVERTEX::GetVertexDeclaration();
   TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetVertexDeclaration();
+  TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetVertexDeclaration();
   TCAL3D_HW_VERTEX::GetVertexDeclaration();
 
 	return IsOk();
@@ -204,6 +205,7 @@ void CRenderManager::Release(void)
   SDIFFUSEVERTEX::ReleaseVertexDeclaration();
   SNORMALDIFFUSEVERTEX::ReleaseVertexDeclaration();
   TNORMALTANGENTBINORMALTEXTUREDVERTEX::ReleaseVertexDeclaration();
+  TNORMALTANGENTBINORMALTEXTURED2VERTEX::ReleaseVertexDeclaration();
   TCAL3D_HW_VERTEX::ReleaseVertexDeclaration();
   
   CHECKED_DELETE(m_pEffectManager);
