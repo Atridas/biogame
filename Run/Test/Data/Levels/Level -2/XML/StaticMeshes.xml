@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <meshes>
-	<mesh name="BOX_Lightmap" path="Data/Levels/Level -2/Meshes/BOX_Lightmap.mesh"/>
+	<mesh name="Referencia" path="Data/Levels/Level -2/Meshes/Referencia.mesh"/>
+	<mesh name="Base" path="Data/Levels/Level -2/Meshes/Base.mesh"/>
+	<mesh name="Rigglef" path="Data/Levels/Level -2/Meshes/Rigglef.mesh"/>
 </meshes>

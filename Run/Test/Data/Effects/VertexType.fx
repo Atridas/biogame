@@ -36,7 +36,7 @@ struct appdata
 {
 	float3 Position : POSITION;
 	float4 Weight : BLENDWEIGHT;
-	float4 Indices : BLENDINDICES;
+	float4 Indices : BLENDINDICES;
 	float3 Normal : NORMAL;
 	float2 TexCoord : TEXCOORD0;
 };
