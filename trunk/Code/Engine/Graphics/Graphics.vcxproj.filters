@@ -112,8 +112,11 @@
     <Filter Include="StaticMesh\StaticMeshManager">
       <UniqueIdentifier>{fc572106-303d-4ba5-9b42-417814b133b3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SceneEffects\CRenderTextureSceneEffect">
+    <Filter Include="SceneEffects\RenderTextureSceneEffect">
       <UniqueIdentifier>{26e1cfa2-0558-4de2-a0f5-d481c053b5a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneEffects\DrawQuadSceneEffect">
+      <UniqueIdentifier>{645f202a-97ec-4bf9-a968-52306fbcce33}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -211,7 +214,10 @@
       <Filter>SceneEffects\RenderToTextureSceneEffect</Filter>
     </ClCompile>
     <ClCompile Include="RenderTextureSceneEffect.cpp">
-      <Filter>SceneEffects\CRenderTextureSceneEffect</Filter>
+      <Filter>SceneEffects\RenderTextureSceneEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawQuadSceneEffect.cpp">
+      <Filter>SceneEffects\DrawQuadSceneEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -312,7 +318,10 @@
       <Filter>SceneEffects\RenderToTextureSceneEffect</Filter>
     </ClInclude>
     <ClInclude Include="include\RenderTextureSceneEffect.h">
-      <Filter>SceneEffects\CRenderTextureSceneEffect</Filter>
+      <Filter>SceneEffects\RenderTextureSceneEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DrawQuadSceneEffect.h">
+      <Filter>SceneEffects\DrawQuadSceneEffect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

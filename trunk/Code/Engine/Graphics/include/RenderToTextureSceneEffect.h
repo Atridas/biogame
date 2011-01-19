@@ -21,7 +21,7 @@ public:
                 m_pAnimatedModelTechnique(0),
                 m_pStaticMeshTechnique(0)
                 {};
-  ~CRenderToTextureSceneEffect();
+  ~CRenderToTextureSceneEffect() {Done();};
 
   void PreRender(CRenderManager* _pRM, CProcess* _pProc);
 
