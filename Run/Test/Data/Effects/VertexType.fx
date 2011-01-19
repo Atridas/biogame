@@ -29,3 +29,14 @@ struct TNORMAL_TEXTURED2_VERTEX_PS {
 	float2 UV2 : TEXCOORD1;
 	float3 WorldNormal : TEXCOORD2;
 };
+
+// Cal3d --------------------------------------------------------------------------------------------------------------------------
+
+struct appdata
+{
+	float3 Position : POSITION;
+	float4 Weight : BLENDWEIGHT;
+	float4 Indices : BLENDINDICES;
+	float3 Normal : NORMAL;
+	float2 TexCoord : TEXCOORD0;
+};
