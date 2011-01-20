@@ -8,29 +8,31 @@ float3 ComputeLight(float3 _Normal,          //Normal of the pixel
                     float3 _HalfPlaneVector, //Vector intermig camera-llum
                     float3 _LightColor,
                     float3 _MaterialColor,
-                    float  _MaterialSpecular
+                    float  _MaterialSpecularPow,
+                    float  _MaterialSpotlightFactor
                     )
 {
   float3 _out;
   
   float ndotl = saturate(dot(_Normal, _LightDirection));
-  float ndoth = saturate(dot(_Normal, _HalfPlaneVector));
+  float ndoth = dot(_Normal, _HalfPlaneVector);
   
   float3 l_AuxColor = _LightColor * _MaterialColor;
   _out = ndotl * l_AuxColor;
   
   if(ndoth > 0.0)
   {
-    _out += pow(ndoth, _MaterialSpecular) * l_AuxColor;
+    _out += pow(ndoth, _MaterialSpecularPow) * l_AuxColor * _MaterialSpotlightFactor;
   }
   
   return _out;
 }
 
 // normal & eyeDirection han d'estar normalitzades
-float3 ComputeAllLights(float3 _Normal, float3 _WorltPosition, float3 _EyeDirection, float _DiffuseColor)
+float3 ComputeAllLights(float3 _Normal, float3 _WorltPosition, float3 _DiffuseColor)
 {
-  float3 out_ = float3(0.0, 0.0, 0.0);
+  float3 out_ = _DiffuseColor * g_AmbientLight;
+  float3 l_EyeDirection = normalize(g_CameraPosition - _WorltPosition);
   for(int i = 0; i < MAXLIGHTS; i++)
   {
     if(g_LightsEnabled[i])
@@ -39,26 +41,29 @@ float3 ComputeAllLights(float3 _Normal, float3 _WorltPosition, float3 _EyeDirect
       float  l_Attenuation = 1.0;
       if(g_LightsType[i] == LIGHT_OMNI)
       {
-        l_LightDirection = normalize(g_LightsPosition[i] - _WorltPosition);
+        l_LightDirection = g_LightsPosition[i] - _WorltPosition;
+        l_LightDirection = mul(l_LightDirection,(float3x3)g_WorldMatrix);
         //TODO
       } else if(g_LightsType[i] == LIGHT_DIRECTIONAL)
       {
-        l_LightDirection = -g_LightsDirection[i];
+        l_LightDirection = mul(-g_LightsDirection[i],(float3x3)g_WorldMatrix);
         //TODO
       } else if(g_LightsType[i] == LIGHT_SPOT)
       {
-        l_LightDirection = -g_LightsDirection[i];
+        l_LightDirection = mul(-g_LightsDirection[i],(float3x3)g_WorldMatrix);
         //TODO
       }
       if(l_Attenuation > 0.0)
       {
-        float3 l_HalfWayVector = normalize(_EyeDirection+l_LightDirection);
+        l_LightDirection = normalize(l_LightDirection);
+        float3 l_HalfWayVector = normalize(l_EyeDirection+l_LightDirection);
         out_ += ComputeLight( _Normal, 
                               l_LightDirection, 
                               l_HalfWayVector, 
                               g_LightsColor[i] * l_Attenuation, 
                               _DiffuseColor, 
-                              g_SpecularFactor);
+                              g_SpecularPow,
+                              g_SpotlightFactor);
       }
     }
   }

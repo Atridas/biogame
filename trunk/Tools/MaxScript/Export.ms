@@ -380,7 +380,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 			TUV2 = ChangeUVCoords TUV2
 		)
 		local l_Normal = UABGetVertexNormal _Obj face.x l_SmoothValue l_FaceNormal
-		
+		l_Normal = RHVectorToLH l_Normal
 		
 		CreateVertex pos l_Normal TUV TUV2 l_Color _VertexType[l_materialID] VertexOut1
 		--format "%\n" VertexOut1
@@ -389,8 +389,6 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		pos =  GetVert _Obj face.y
 		pos = pos * l_invTransform
 		pos = RHVectorToLH pos
-		normal =  getNormal _Obj face.y
-		normal = RHVectorToLH normal
 		TUV =  meshop.getMapVert _Obj 1 IdxsMap.y
 		TUV = ChangeUVCoords TUV
 		if bit.and _VertexType[l_materialID] VERTEX_TYPE_TEXTURE2 != 0 then
@@ -399,6 +397,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 			TUV2 = ChangeUVCoords TUV2
 		)
 		local l_Normal = UABGetVertexNormal _Obj face.y l_SmoothValue l_FaceNormal
+		l_Normal = RHVectorToLH l_Normal
 
 		CreateVertex pos l_Normal TUV TUV2 l_Color _VertexType[l_materialID] VertexOut2
 		--format "%\n" VertexOut2
@@ -407,8 +406,6 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		pos =  GetVert _Obj face.z
 		pos = pos * l_invTransform
 		pos = RHVectorToLH pos
-		normal =  getNormal _Obj face.z
-		normal = RHVectorToLH normal
 		TUV =  meshop.getMapVert _Obj 1 IdxsMap.z
 		TUV = ChangeUVCoords TUV
 		if bit.and _VertexType[l_materialID] VERTEX_TYPE_TEXTURE2 != 0 then
@@ -417,6 +414,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 			TUV2 = ChangeUVCoords TUV2
 		)
 		local l_Normal = UABGetVertexNormal _Obj face.z l_SmoothValue l_FaceNormal
+		l_Normal = RHVectorToLH l_Normal
 
 		CreateVertex pos l_Normal TUV TUV2 l_Color _VertexType[l_materialID] VertexOut3
 		--format "%\n" VertexOut3

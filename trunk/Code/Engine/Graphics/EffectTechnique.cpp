@@ -82,7 +82,7 @@ bool CEffectTechnique::BeginRender()
       {
         l_pD3DEffect->SetFloatArray   (m_pEffect->m_pAmbientLight,                        m_pEffect->m_aAmbientLight,                 3);
 
-        l_pD3DEffect->SetBoolArray    (m_pEffect->m_pLightsEnabledParameter,      (BOOL*) m_pEffect->m_aLightsEnabled,                m_iNumOfLights);
+        l_pD3DEffect->SetBoolArray    (m_pEffect->m_pLightsEnabledParameter,      (BOOL*) m_pEffect->m_aLightsEnabled,                MAX_LIGHTS_BY_SHADER);
         l_pD3DEffect->SetIntArray     (m_pEffect->m_pLightsTypeParameter,                 m_pEffect->m_aLightsType,                   m_iNumOfLights);
         l_pD3DEffect->SetFloatArray   (m_pEffect->m_pLightsAngleParameter,                m_pEffect->m_aLightsAngle,                  m_iNumOfLights);
 

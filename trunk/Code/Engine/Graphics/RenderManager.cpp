@@ -315,6 +315,7 @@ void CRenderManager::SetupMatrices(CCamera* _pCamera)
 
 void CRenderManager::SetTransform(D3DXMATRIX& matrix)
 {
+  assert(!"Method not supported setworldmatrix needs mat44f no d3dxmatrix");
     m_pD3DDevice->SetTransform(D3DTS_WORLD, &matrix);
 
     m_pEffectManager->SetWorldMatrix(matrix);
@@ -327,7 +328,7 @@ void CRenderManager::SetTransform(Mat44f& m)
 
     m_pD3DDevice->SetTransform(D3DTS_WORLD, &matrix);
     
-    m_pEffectManager->SetWorldMatrix(matrix);
+    m_pEffectManager->SetWorldMatrix(m);
 }
 
 void CRenderManager::DrawLine ( const Vect3f &_PosA, const Vect3f &_PosB, const CColor& _Color)

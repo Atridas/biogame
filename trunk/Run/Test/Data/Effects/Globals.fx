@@ -18,7 +18,8 @@ float g_BumpMinHeight = -0.3;
 //float g_BumpDiff = g_BumpMinHeight - g_BumpMaxHeight;
 float g_BumpDiff = 0.6;
 
-float g_SpecularFactor = 30;
+float g_SpecularPow = 30;
+float g_SpotlightFactor = 0.5;
 
 //Lights
 #define LIGHT_OMNI        0
