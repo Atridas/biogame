@@ -7,6 +7,9 @@
 #include "VertexsStructs.h"
 #include <cal3d/cal3d.h>
 
+#include "RenderableVertexs.h"
+#include "EffectManager.h"
+
 
 bool CAnimatedInstanceModel::LoadVertexBuffer(CRenderManager *_pRM)
 {
@@ -49,6 +52,59 @@ void CAnimatedInstanceModel::Render(CRenderManager *_pRM)
 {
   //TODO
   RenderModelBySoftware(_pRM);
+
+  return;
+
+  CEffectManager* l_pEffectManager = _pRM->GetEffectManager();
+  CEffectTechnique* l_pEffectTechnique = 0;//l_pEffectManager->GetAnimatedModelTechnique();
+
+  //if(l_pEffectTechnique==NULL)
+  //  l_pEffectTechnique = m_pEffectTechnique;
+
+  if(l_pEffectTechnique==NULL)
+    return;
+
+//  l_pEffectManager->SetWorldMatrix(GetTransform());
+  CEffect* m_pEffect = l_pEffectTechnique->GetEffect();
+  
+  if(m_pEffect==NULL)
+    return;
+
+  LPD3DXEFFECT l_pEffect = m_pEffect->GetD3DEffect();
+  if(l_pEffect)
+  {
+    l_pEffectTechnique->BeginRender();
+    CalHardwareModel* l_pCalHardwareModel = m_pAnimatedCoreModel->GetCalHardwareModel();
+
+    D3DXMATRIX l_mTransformation[MAXBONES];
+
+    for(int l_iHardwareMeshId=0; l_iHardwareMeshId < l_pCalHardwareModel->getHardwareMeshCount(); l_iHardwareMeshId++)
+    {
+      l_pCalHardwareModel->selectHardwareMesh(l_iHardwareMeshId);
+
+      for(int l_iBoneId = 0; l_iBoneId < l_pCalHardwareModel->getBoneCount(); l_iBoneId++)
+      {
+        D3DXMatrixRotationQuaternion(&l_mTransformation[l_iBoneId],(CONST D3DXQUATERNION*)& l_pCalHardwareModel->getRotationBoneSpace(l_iBoneId, m_pCalModel->getSkeleton()));
+        CalVector l_vTranslationBoneSpace = l_pCalHardwareModel->getTranslationBoneSpace(l_iBoneId, m_pCalModel->getSkeleton());
+        l_mTransformation[l_iBoneId]._14 = l_vTranslationBoneSpace.x;
+        l_mTransformation[l_iBoneId]._24 = l_vTranslationBoneSpace.y;
+        l_mTransformation[l_iBoneId]._34 = l_vTranslationBoneSpace.z;
+      }
+
+      float l_mMatrix[MAXBONES*3*4];
+
+      for(int l_iB = 0; l_iB < l_pCalHardwareModel->getBoneCount(); ++l_iB)
+      {
+        memcpy(&l_mMatrix[l_iB*3*4], &l_mTransformation[l_iB],sizeof(float)*3*4);
+      }
+
+//      l_pEffect->SetFloatArray(m_pEffect->m_pBonesParameter, (float *)l_mMatrix,(l_pCalHardwareModel->getBoneCount())*3*4);
+//      m_pTextureList[0]->Activate(0);
+//      m_pNormalTextureList[0]->Activate(1);
+//      m_pAnimatedCoreModel->GetRenderableVertexs()->Render(l_pEffectTechnique, l_pCalHardwareModel->getBaseVertexIndex(), 0, l_pCalHardwareModel->getVertexCount(), l_pCalHardwareModel->getStartIndex(),l_pCalHardwareModel->getFaceCount());
+
+    }
+  }
 }
 
 void CAnimatedInstanceModel::RenderModelBySoftware(CRenderManager *_pRM)
