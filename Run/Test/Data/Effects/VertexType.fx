@@ -1,5 +1,19 @@
 
 
+// Normal Diffused --------------------------------------------------------------------------------------------------------------
+
+struct TNORMAL_DIFFUSED_VERTEX_VS {
+	float3 Position : POSITION;
+	float3 Normal : NORMAL;
+	float4 Color : COLOR;
+};
+
+struct TNORMAL_DIFFUSED_VERTEX_PS {
+	float4 HPosition : POSITION;
+	float4 Color : COLOR;
+	float3 WorldNormal : TEXCOORD0;
+  float3 WorldPosition : TEXCOORD1;
+};
 // Normal Textured --------------------------------------------------------------------------------------------------------------
 
 struct TNORMAL_TEXTURED_VERTEX_VS {
@@ -78,7 +92,7 @@ struct CAL3D_HW_VERTEX_VS {
 	float3 Position : POSITION;
 	float4 Weight : BLENDWEIGHT;
 	float4 Indices : BLENDINDICES;
-	float4 Normal : NORMAL;
+	float4 Normal : NORMAL;
 	float4 Tangent : TANGENT0;
 	float4 BiNormal : BINORMAL0;
 	float2 TexCoord : TEXCOORD0;

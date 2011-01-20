@@ -122,6 +122,7 @@
     <ClCompile Include="Utils\Logger.cpp" />
     <ClCompile Include="Utils\MemLeaks.cpp" />
     <ClCompile Include="Utils\Timer.cpp" />
+    <ClCompile Include="VertexCalculations.cpp" />
     <ClCompile Include="XML\XMLTreeNode.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +151,7 @@
     <ClInclude Include="include\Utils\Singleton.h" />
     <ClInclude Include="include\Utils\Timer.h" />
     <ClInclude Include="include\Utils\Types.h" />
+    <ClInclude Include="include\VertexCalculations.h" />
     <ClInclude Include="include\XML\XMLTreeNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

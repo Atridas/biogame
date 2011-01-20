@@ -64,6 +64,9 @@
     <Filter Include="Utils\Named">
       <UniqueIdentifier>{b3718a1d-da8a-4b0b-9496-0f76a2aee4e2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils\VertexCalculations">
+      <UniqueIdentifier>{2b032600-1b86-4728-b59a-1b2be9b4d09e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathConstants.cpp">
@@ -98,6 +101,9 @@
     </ClCompile>
     <ClCompile Include="Utils\Timer.cpp">
       <Filter>Utils\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexCalculations.cpp">
+      <Filter>Utils\VertexCalculations</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +182,9 @@
     </ClInclude>
     <ClInclude Include="include\Named.h">
       <Filter>Utils\Named</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VertexCalculations.h">
+      <Filter>Utils\VertexCalculations</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

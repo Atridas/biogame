@@ -7,10 +7,22 @@
 
 
 
+TNORMAL_DIFFUSED_VERTEX_PS NormalDiffusedVS(TNORMAL_DIFFUSED_VERTEX_VS _in) {
+	TNORMAL_DIFFUSED_VERTEX_PS out_ = (TNORMAL_DIFFUSED_VERTEX_PS)0;
+	
+	out_.WorldNormal = mul(_in.Normal,(float3x3)g_WorldMatrix);
+	out_.WorldPosition = mul(_in.Position,(float3x3)g_WorldMatrix);
+	out_.Color = _in.Color;
+	out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
+	//out_.WorldPosition=mul(float4(_in.Position,1.0),g_WorldMatrix).xyz;
+	
+	return out_;
+}
+
 TNORMAL_TEXTURED_VERTEX_PS NormalTexturedVS(TNORMAL_TEXTURED_VERTEX_VS _in) {
 	TNORMAL_TEXTURED_VERTEX_PS out_ = (TNORMAL_TEXTURED_VERTEX_PS)0;
 	
-	out_.WorldNormal = mul(_in.Normal,(float3x3)g_WorldMatrix);
+	out_.WorldNormal = normalize(mul(_in.Normal,(float3x3)g_WorldMatrix));
 	out_.WorldPosition = mul(_in.Position,(float3x3)g_WorldMatrix);
 	out_.UV = _in.UV.xy;
 	out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
@@ -26,6 +38,20 @@ TNORMAL_TEXTURED2_VERTEX_PS NormalTextured2VS(TNORMAL_TEXTURED2_VERTEX_VS _in) {
 	out_.WorldPosition = mul(_in.Position,(float3x3)g_WorldMatrix);
 	out_.UV  = _in.UV.xy;
 	out_.UV2 = _in.UV2.xy;
+	out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
+	//out_.WorldPosition=mul(float4(_in.Position,1.0),g_WorldMatrix).xyz;
+	
+	return out_;
+}
+
+TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS TangentBinormalNormalTexturedVS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_VS _in) {
+	TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS out_ = (TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS)0;
+	
+	out_.WorldNormal   = mul(_in.Normal,(float3x3)g_WorldMatrix);
+	out_.WorldPosition = mul(_in.Position,(float3x3)g_WorldMatrix);
+	out_.WorldTangent  = mul(_in.Tangent,(float3x3)g_WorldMatrix);
+	out_.WorldBinormal = mul(_in.Binormal,(float3x3)g_WorldMatrix);
+	out_.UV  = _in.UV.xy;
 	out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
 	//out_.WorldPosition=mul(float4(_in.Position,1.0),g_WorldMatrix).xyz;
 	
@@ -70,18 +96,55 @@ float4 ShowNormalmapPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _in) : COLOR
 
 float4 NormalTexturedPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
   float3 l_Normal = normalize(_in.WorldNormal);
-  float3 l_EyeDirection = normalize(g_CameraPosition - _in.WorldPosition);
 
   float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
-  
-  float4 out_ = l_DiffuseColor * float4(g_AmbientLight, 1.0);
-  
-  out_ += float4(ComputeAllLights(l_Normal, _in.WorldPosition, l_EyeDirection, l_DiffuseColor),1.0);
+  float4 out_ = float4(ComputeAllLights(l_Normal, _in.WorldPosition, l_DiffuseColor),1.0);
   
   return out_;
 }
 
+float4 NormalDiffusedPS(TNORMAL_DIFFUSED_VERTEX_PS _in) : COLOR {
+  float3 l_Normal = normalize(_in.WorldNormal);
 
+  float4 l_DiffuseColor = _in.Color;
+  
+  float4 out_ = float4(ComputeAllLights(l_Normal, _in.WorldPosition, l_DiffuseColor),1.0);
+  
+  return out_;
+}
+
+float4 TangentBinormalNormalTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
+  NORMAL_UV l_aux = CalcParallaxMap(_in.WorldPosition, 
+                                    _in.WorldNormal, 
+                                    _in.WorldTangent, 
+                                    _in.WorldBinormal, 
+                                    _in.UV);
+
+	//float3 l_Normal = CalcNormalmap(_in.WorldTangent, _in.WorldBinormal, _in.WorldNormal, _in.UV);
+	
+  float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,l_aux.UV);
+  
+  float4 out_ = float4(ComputeAllLights(l_aux.Normal, _in.WorldPosition, l_DiffuseColor),1.0);
+  
+	return out_;
+}
+
+
+technique NormalDiffusedTechnique {
+	pass p0 {
+		//Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar
+    ZEnable = true;
+    ZWriteEnable = true;
+    ZFunc = LessEqual;
+    //Deshabilitamos el alphablend
+    AlphaBlendEnable = false;
+    //Tipo de culling que queremos utilizar
+    CullMode = CCW;
+    //Vertex / Pixel shader
+		VertexShader = compile vs_3_0 NormalDiffusedVS();
+		PixelShader = compile ps_3_0 NormalDiffusedPS();
+	}
+}
 technique NormalTexturedTechnique {
 	pass p0 {
 		//Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar
@@ -95,6 +158,21 @@ technique NormalTexturedTechnique {
     //Vertex / Pixel shader
 		VertexShader = compile vs_3_0 NormalTexturedVS();
 		PixelShader = compile ps_3_0 NormalTexturedPS();
+	}
+}
+technique TangentBinormalNormalTexturedTechnique {
+	pass p0 {
+		//Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar
+    ZEnable = true;
+    ZWriteEnable = true;
+    ZFunc = LessEqual;
+    //Deshabilitamos el alphablend
+    AlphaBlendEnable = false;
+    //Tipo de culling que queremos utilizar
+    CullMode = CCW;
+    //Vertex / Pixel shader
+		VertexShader = compile vs_3_0 TangentBinormalNormalTexturedVS();
+		PixelShader = compile ps_3_0 TangentBinormalNormalTexturedPS();
 	}
 }
 technique ShowNormalsTechnique {
