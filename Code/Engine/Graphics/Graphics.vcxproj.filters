@@ -94,9 +94,6 @@
     <Filter Include="RenderableObject\RenderableAnimatedInstanceModel">
       <UniqueIdentifier>{aada233b-7012-4223-bb63-9fac627959df}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AnimatedModelManager">
-      <UniqueIdentifier>{c52e837d-037d-4ea7-a9a7-be14ebfb2f5f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="SceneEffects">
       <UniqueIdentifier>{f103fe91-1e9f-42d7-a3a5-ffeea6e10be4}</UniqueIdentifier>
     </Filter>
@@ -120,6 +117,9 @@
     </Filter>
     <Filter Include="Effects\EffectMaterial">
       <UniqueIdentifier>{79307dda-f3c6-4172-b997-332e68885b6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AnimatedModel\AnimatedModelManager">
+      <UniqueIdentifier>{c52e837d-037d-4ea7-a9a7-be14ebfb2f5f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -175,7 +175,7 @@
       <Filter>AnimatedModel\AnimatedInstanceModel</Filter>
     </ClCompile>
     <ClCompile Include="AnimatedModelManager.cpp">
-      <Filter>AnimatedModelManager</Filter>
+      <Filter>AnimatedModel\AnimatedModelManager</Filter>
     </ClCompile>
     <ClCompile Include="RenderableAnimatedInstanceModel.cpp">
       <Filter>RenderableObject\RenderableAnimatedInstanceModel</Filter>
@@ -285,7 +285,7 @@
       <Filter>AnimatedModel\AnimatedInstanceModel</Filter>
     </ClInclude>
     <ClInclude Include="include\AnimatedModelManager.h">
-      <Filter>AnimatedModelManager</Filter>
+      <Filter>AnimatedModel\AnimatedModelManager</Filter>
     </ClInclude>
     <ClInclude Include="include\RenderableAnimatedInstanceModel.h">
       <Filter>RenderableObject\RenderableAnimatedInstanceModel</Filter>

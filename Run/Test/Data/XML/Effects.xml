@@ -3,6 +3,7 @@
   <effects>
     <!-- effect name="Test Effects" file="Data/Effects/Efectillo2.fx"/ -->
     <effect name="Default Effects" file="Data/Effects/DefaultEffects.fx"/>
+    <!-- effect name="Cal3d Effects" file="Data/Effects/Cal3dEffect.fx"/ -->
     <!-- effect name=.../-->
     <!-- effect name=.../-->
   </effects>
@@ -32,6 +33,7 @@
     <technique name="ShowNormalmapTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
     <technique name="NormalTexturedTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true"
                use_lights="true" nom_of_lights="1" use_camera_position="true"/>
+    <!-- technique name="cal3dTechnique" effect="Cal3d Effects" use_world_view_projection_matrix="true" / -->
     
   </techniques>
 </shaders>
