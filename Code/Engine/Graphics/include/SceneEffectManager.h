@@ -22,13 +22,16 @@ public:/*private:?*/
   vector<CSceneEffect*> m_vCaptureFrameBufferSceneEffects;
   vector<CSceneEffect*> m_vCaptureFrameBufferSceneEffectsAfterPostRender;
   vector<CSceneEffect*> m_vPostRenderSceneEffects;
+  bool Load();
+  string m_szFileName;
 
 public:
   CSceneEffectManager();
   ~CSceneEffectManager(){Done();};
 
+  bool Init(const CXMLTreeNode& _xmlSceneEffect);
   void Release();
-  void LoadXML(const string& _szFileName);
+  bool Load(const string& m_szFileName);
   void PreRender(CRenderManager* _pRM, CProcess* _pProc);
   void ActivateRenderSceneEffects();
   void CaptureFrameBuffers(CRenderManager* _pRM);
