@@ -126,9 +126,9 @@ private:
 struct TNORMALTANGENTBINORMALTEXTUREDVERTEX
 {
   float x, y, z;
-  float nx, ny, nz;
-  float tangentx, tangenty, tangentz;
-  float binormalx, binormaly, binormalz;
+  float nx, ny, nz, nw;
+  float tangentx, tangenty, tangentz, tangentw;
+  float binormalx, binormaly, binormalz, binormalw;
   float tu,tv;
 
   /**
@@ -164,9 +164,9 @@ private:
 struct TNORMALTANGENTBINORMALTEXTURED2VERTEX
 {
   float x, y, z;
-  float nx, ny, nz;
-  float tangentx, tangenty, tangentz;
-  float binormalx, binormaly, binormalz;
+  float nx, ny, nz, nw;
+  float tangentx, tangenty, tangentz, tangentw;
+  float binormalx, binormaly, binormalz, binormalw;
   float tu,tv;
   float tu2,tv2;
 

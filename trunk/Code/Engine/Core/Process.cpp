@@ -8,6 +8,9 @@
 #include <ActionToInput.h>
 #include <RenderableObjectsManager.h>
 
+#include "RenderManager.h"
+#include "EffectManager.h"
+
 void CProcess::DebugInformation(float _FPS)
 {
 
@@ -49,6 +52,10 @@ bool CProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _p
   {
     CORE->GetActionToInput()->Reload();
     CORE->GetRenderableObjectsManager()->Reload();
+    return true;
+  } else if(strcmp(_pcAction, "ReloadShaders") == 0)
+  {
+    RENDER_MANAGER->GetEffectManager()->Reload();
     return true;
   }
   return ExecuteProcessAction(_fDeltaSeconds,_fDelta,_pcAction);

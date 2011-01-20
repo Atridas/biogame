@@ -8,7 +8,9 @@ float4x4 g_WorldViewMatrix : WorldView;
 float4x4 g_ViewProjectionMatrix : ViewProjection; 
 float4x4 g_WorldViewProjectionMatrix : WorldViewProjection; 
 float4x4 g_ViewToLightProjectionMatrix : ViewToLightProjection;
-float3x4 g_Bones[MAXBONES];
+float3x4 g_Bones[MAXBONES] : Bones;
+
+float g_Bump = 2.4;
   
 //D3DXHANDLE m_pLightsEnabledParameter, m_pLightsTypeParameter, m_pLightsPositionParameter, m_pLightsDirectionParameter, m_pLightsAngleParameter, m_pLightsColorParameter;
 //D3DXHANDLE m_pLightsFallOffParameter, m_pLightsStartRangeAttenuationParameter, m_pLightsEndRangeAttenuationParameter;

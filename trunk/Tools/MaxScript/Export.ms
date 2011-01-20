@@ -211,13 +211,17 @@ function CreateVertex _Pos _Normal _TUV1 _TUV2 _DiffuseColor _VertexType VertexO
 	
 	if bit.and _VertexType VERTEX_TYPE_TANGENT > 0 then
 	(
-		append VertexOut_ 0.0
-		append VertexOut_ 0.0
-		append VertexOut_ 0.0
+		append VertexOut_ 1.0 -- w de la normal
 		
 		append VertexOut_ 0.0
 		append VertexOut_ 0.0
 		append VertexOut_ 0.0
+		append VertexOut_ 1.0
+		
+		append VertexOut_ 0.0
+		append VertexOut_ 0.0
+		append VertexOut_ 0.0
+		append VertexOut_ 1.0
 	)
 	
 	if bit.and _VertexType VERTEX_TYPE_TEXTURE1 > 0 then

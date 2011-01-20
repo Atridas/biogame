@@ -38,25 +38,29 @@ void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
 
   //non XML dependant
   m_pEffect = RENDER_MANAGER->GetEffectManager()->GetEffect(l_szEffectName);
-  m_pD3DTechnique = m_pEffect->GetTechniqueByName(GetName());
-  
-  if(m_pEffect && m_pD3DTechnique)
-    SetOk(true);
-  else
+  if(m_pEffect->IsOk())
   {
-    if(!m_pEffect)
-      LOGGER->AddNewLog(ELL_ERROR, "CEffectTechnique::Init  Effect not loaded.");
-    if(!m_pD3DTechnique)
-      LOGGER->AddNewLog(ELL_ERROR, "CEffectTechnique::Init  D3DTechnique not loaded.");
+    m_pD3DTechnique = m_pEffect->GetTechniqueByName(GetName());
+  
+    if(m_pEffect && m_pD3DTechnique)
+      SetOk(true);
+    else
+    {
+      if(!m_pEffect)
+        LOGGER->AddNewLog(ELL_ERROR, "CEffectTechnique::Init  Effect \"%s\" not loaded.", l_szEffectName.c_str());
+      if(!m_pD3DTechnique)
+        LOGGER->AddNewLog(ELL_ERROR, "CEffectTechnique::Init  D3DTechnique \"%s\" not loaded.", GetName().c_str());
 
-    SetOk(false);
+      SetOk(false);
+    }
+  } else {
+    LOGGER->AddNewLog(ELL_ERROR, "CEffectTechnique::Init  Effect \"%s\" not loaded.", l_szEffectName.c_str());
   }
-
 }
 
 bool CEffectTechnique::BeginRender()
 {
-  if(m_pEffect)
+  if(m_pEffect && m_pEffect->IsOk())
   {
     CEffectManager* l_pEM = RENDER_MANAGER->GetEffectManager();
     LPD3DXEFFECT l_pD3DEffect = m_pEffect->GetD3DEffect();
@@ -138,7 +142,7 @@ bool CEffectTechnique::BeginRender()
       l_pD3DEffect->SetMatrix(m_pEffect->m_pViewToLightProjectionMatrixParameter,&l_pEM->GetLightViewMatrix().GetD3DXMatrix());
 
   } else {
-    LOGGER->AddNewLog(ELL_WARNING, "CEffectTechnique::BeginRender  No effect specified.");
+    //LOGGER->AddNewLog(ELL_WARNING, "CEffectTechnique::BeginRender  No effect specified.");
     return false;
   }
   return true;
