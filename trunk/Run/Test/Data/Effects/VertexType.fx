@@ -74,11 +74,21 @@ struct TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS {
 
 // Cal3d --------------------------------------------------------------------------------------------------------------------------
 
-struct appdata
-{
+struct CAL3D_HW_VERTEX_VS {
 	float3 Position : POSITION;
 	float4 Weight : BLENDWEIGHT;
 	float4 Indices : BLENDINDICES;
-	float3 Normal : NORMAL;
+	float4 Normal : NORMAL;
+	float4 Tangent : TANGENT0;
+	float4 BiNormal : BINORMAL0;
 	float2 TexCoord : TEXCOORD0;
+};
+
+struct CAL3D_HW_VERTEX_PS {
+	float4 HPosition : POSITION;
+	float2 UV : TEXCOORD0;
+	float3 WorldNormal : TEXCOORD1;
+	float3 WorldPosition : TEXCOORD2;
+	float3 WorldTangent : TEXCOORD3;
+	float3 WorldBinormal : TEXCOORD4;
 };
