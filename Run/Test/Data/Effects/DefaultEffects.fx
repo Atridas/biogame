@@ -3,6 +3,7 @@
 #include "Globals.fx"
 #include "Samplers.fx"
 #include "VertexType.fx"
+#include "Functions.fx"
 
 
 
@@ -29,6 +30,20 @@ TNORMAL_TEXTURED2_VERTEX_PS NormalTextured2VS(TNORMAL_TEXTURED2_VERTEX_VS _in) {
 	return out_;
 }
 
+TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS TangentBinormalNormalTextured2VS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_VS _in) {
+	TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS out_ = (TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS)0;
+	
+	out_.WorldNormal   = mul(_in.Normal,(float3x3)g_WorldMatrix);
+	out_.WorldTangent  = mul(_in.Tangent,(float3x3)g_WorldMatrix);
+	out_.WorldBinormal = mul(_in.Binormal,(float3x3)g_WorldMatrix);
+	out_.UV  = _in.UV.xy;
+	out_.UV2 = _in.UV2.xy;
+	out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
+	//out_.WorldPosition=mul(float4(_in.Position,1.0),g_WorldMatrix).xyz;
+	
+	return out_;
+}
+
 float4 LightmapPS(TNORMAL_TEXTURED2_VERTEX_PS _in) : COLOR {
 	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
 	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2);
@@ -41,9 +56,12 @@ float4 ShowNormalsPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
 	//return float4(l_normal,1.0);
 }
 
-float4 ShowNormalmapPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
-	float4 l_DiffuseColor = tex2D(NormalTextureSampler,_in.UV);
-	return l_DiffuseColor;
+float4 ShowNormalmapPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _in) : COLOR {
+  float3 l_DiffuseColor = CalcNormalmap((float3)_in.WorldTangent, 
+                                        (float3)_in.WorldBinormal, 
+                                        (float3)_in.WorldNormal, 
+                                        _in.UV);
+	return float4(l_DiffuseColor, 1.0);
 	//return float4(l_normal,1.0);
 }
 
@@ -75,7 +93,7 @@ technique ShowNormalmapTechnique {
     //Tipo de culling que queremos utilizar
     CullMode = CCW;
     //Vertex / Pixel shader
-		VertexShader = compile vs_3_0 NormalTexturedVS();
+		VertexShader = compile vs_3_0 TangentBinormalNormalTextured2VS();
 		PixelShader = compile ps_3_0 ShowNormalmapPS();
 	}
 }

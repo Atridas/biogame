@@ -209,8 +209,8 @@ bool CEffect::InitParameters()
 
   //Altres
   GetParameterBySemantic("CameraPosition", m_pCameraPositionParameter);
-  GetParameterBySemantic("BONES", m_pBonesParameter);
-  GetParameterBySemantic("TIME", m_pTimeParameter);
+  GetParameterBySemantic("Bones", m_pBonesParameter);
+  GetParameterBySemantic("Time", m_pTimeParameter);
 
   return true;
 }

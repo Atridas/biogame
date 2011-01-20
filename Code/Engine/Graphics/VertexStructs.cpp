@@ -255,27 +255,27 @@ LPDIRECT3DVERTEXDECLARATION9& TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetVertexDec
       },
       { 0, 
         sizeof(float)*3 ,       //desplaçament 
-        D3DDECLTYPE_FLOAT3,     //type
+        D3DDECLTYPE_FLOAT4,     //type
         D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
         D3DDECLUSAGE_NORMAL,    //ús de les dades
         0 
       },
       { 0, 
-        sizeof(float)*6 ,       //desplaçament 
-        D3DDECLTYPE_FLOAT3,     //type
+        sizeof(float)*7 ,       //desplaçament 
+        D3DDECLTYPE_FLOAT4,     //type
         D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
         D3DDECLUSAGE_TANGENT,   //ús de les dades
         0 
       },
       { 0, 
-        sizeof(float)*9 ,       //desplaçament 
-        D3DDECLTYPE_FLOAT3,     //type
+        sizeof(float)*11 ,      //desplaçament 
+        D3DDECLTYPE_FLOAT4,     //type
         D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
         D3DDECLUSAGE_BINORMAL,  //ús de les dades
         0 
       },
       { 0, 
-        sizeof(float)*12 ,      //desplaçament 
+        sizeof(float)*15 ,      //desplaçament 
         D3DDECLTYPE_FLOAT2,     //type
         D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
         D3DDECLUSAGE_TEXCOORD,  //ús de les dades
@@ -324,34 +324,34 @@ LPDIRECT3DVERTEXDECLARATION9& TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetVertexDe
       },
       { 0, 
         sizeof(float)*3 ,       //desplaçament 
-        D3DDECLTYPE_FLOAT3,     //type
+        D3DDECLTYPE_FLOAT4,     //type
         D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
         D3DDECLUSAGE_NORMAL,    //ús de les dades
         0 
       },
       { 0, 
-        sizeof(float)*6 ,       //desplaçament 
-        D3DDECLTYPE_FLOAT3,     //type
+        sizeof(float)*7 ,       //desplaçament 
+        D3DDECLTYPE_FLOAT4,     //type
         D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
         D3DDECLUSAGE_TANGENT,   //ús de les dades
         0 
       },
       { 0, 
-        sizeof(float)*9 ,       //desplaçament 
-        D3DDECLTYPE_FLOAT3,     //type
+        sizeof(float)*11 ,      //desplaçament 
+        D3DDECLTYPE_FLOAT4,     //type
         D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
         D3DDECLUSAGE_BINORMAL,  //ús de les dades
         0 
       },
       { 0, 
-        sizeof(float)*12 ,      //desplaçament 
+        sizeof(float)*15 ,      //desplaçament 
         D3DDECLTYPE_FLOAT2,     //type
         D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
         D3DDECLUSAGE_TEXCOORD,  //ús de les dades
         0 
       },
       { 0, 
-        sizeof(float)*14 ,      //desplaçament 
+        sizeof(float)*17 ,      //desplaçament 
         D3DDECLTYPE_FLOAT2,     //type
         D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
         D3DDECLUSAGE_TEXCOORD,  //ús de les dades
