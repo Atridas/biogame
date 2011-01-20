@@ -45,7 +45,6 @@ public:
   const Mat44f& GetViewMatrix() const {return m_mViewMatrix;};
   const Mat44f& GetLightViewMatrix() const {return m_mLightViewMatrix;};
   const Mat44f& GetShadowProjectionMatrix() {return m_mShadowProjectionMatrix;};
-
   //Compostes
   const Mat44f& GetInverseProjectionMatrix();
   const Mat44f& GetInverseViewMatrix();
@@ -53,15 +52,14 @@ public:
   const Mat44f& GetViewProjectionMatrix();
   const Mat44f& GetWorldViewMatrix();
   const Mat44f& GetWorldViewProjectionMatrix();
-
-
+  //non matrix
   const Vect3f& GetCameraEye() {return m_vCameraEye;};
   size_t GetMaxLights() const { return MAX_LIGHTS_BY_SHADER; }; //de Effect.h
   string GetTechniqueEffectNameByVertexDefault(unsigned short _sVertexType) const;
-  CEffectTechnique * GetStaticMeshTechnique() const { return m_pStaticMeshTechnique; };
-  CEffectTechnique * GetAnimatedModelTechnique() const { m_pAnimatedModelTechnique; };
-  CEffectTechnique * GetEffectTechnique(const string& _szName) {return GetResource(_szName);};
-  CEffect * GetEffect(const string& _szName) {return m_Effects.GetResource(_szName);};
+  CEffectTechnique* GetStaticMeshTechnique() const { return m_pStaticMeshTechnique; };
+  CEffectTechnique* GetAnimatedModelTechnique() const { return m_pAnimatedModelTechnique; };
+  CEffectTechnique* GetEffectTechnique(const string& _szName) {return GetResource(_szName);};
+  CEffect* GetEffect(const string& _szName) {return m_Effects.GetResource(_szName);};
   
   void ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _mProjectionMatrix, const Vect3f& _vCameraEye);
   bool Load(const string& _szFileName);

@@ -131,8 +131,8 @@ void CEffectManager::Release()
   m_Effects.Release();
 
   //pointers
-  CHECKED_DELETE(m_pStaticMeshTechnique);
-  CHECKED_DELETE(m_pAnimatedModelTechnique);
+  //CHECKED_DELETE(m_pStaticMeshTechnique);
+  //CHECKED_DELETE(m_pAnimatedModelTechnique);
 }
 
 string CEffectManager::GetTechniqueEffectNameByVertexDefault(unsigned short _sVertexType) const

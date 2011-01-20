@@ -3,7 +3,7 @@
   <effects>
     <!-- effect name="Test Effects" file="Data/Effects/Efectillo2.fx"/ -->
     <effect name="Default Effects" file="Data/Effects/DefaultEffects.fx"/>
-    <!-- effect name="Cal3d Effects" file="Data/Effects/Cal3dEffect.fx"/ -->
+    <effect name="Cal3D Effects" file="Data/Effects/Cal3dEffect.fx"/>
     <!-- effect name=.../-->
     <!-- effect name=.../-->
   </effects>
@@ -16,7 +16,7 @@
     <default_technique vertex_type="31" technique="TangentBinormalNormalTexturedTechnique"/>
     
     <default_technique vertex_type="47" technique="NormalTexturedTechnique"/>
-    <!--default_technique vertex_type="31" technique="ShowNormalmapTechnique"/-->
+    <default_technique vertex_type="787" technique="Cal3DTechnique"/>
   </default_techniques>
   <techniques>
     <!-- technique name=.../-->
@@ -39,7 +39,7 @@
                use_lights="true" nom_of_lights="1" use_camera_position="true"/>
     <technique name="TangentBinormalNormalTexturedTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true"
                use_lights="true" nom_of_lights="1" use_camera_position="true"/>
-    <!-- technique name="cal3dTechnique" effect="Cal3d Effects" use_world_view_projection_matrix="true" / -->
+    <technique name="Cal3DTechnique" animated="true" effect="Cal3D Effects" use_world_matrix="true" use_world_view_projection_matrix="true"/>
     
   </techniques>
 </shaders>

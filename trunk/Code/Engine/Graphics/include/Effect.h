@@ -10,6 +10,7 @@
 //Forward declarations-------------
 class CEffectTechnique;
 class CEffectMaterial;
+class CAnimatedInstanceModel;
 class CXMLTreeNode;
 //---------------------------------
 
@@ -67,6 +68,7 @@ private:
   
   friend CEffectTechnique;
   friend CEffectMaterial;
+  friend CAnimatedInstanceModel;
 };
 
 #endif

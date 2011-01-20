@@ -585,10 +585,6 @@ LPDIRECT3DVERTEXDECLARATION9& SNORMALTEXTURED2VERTEX::GetVertexDeclaration()
 
 
 // Cal 3D Vertex ---------------------------------------------------------------------------------------------------
-unsigned short TCAL3D_HW_VERTEX::GetVertexType()
-{
-  return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_NORMAL|VERTEX_TYPE_TEXTURE1;//TODO
-}
 
 bool TCAL3D_HW_VERTEX::ActivateTextures(const vector<CTexture*>& _TextureArray)
 {

@@ -11,6 +11,7 @@ class CRenderManager;
 class CalModel;
 class CAnimatedCoreModel;
 class CTexture;
+class CEffectTechnique;
 // ----------------------------------
 
 
@@ -28,7 +29,7 @@ public:
   CAnimatedInstanceModel(void): m_pCalModel(0),m_pAnimatedCoreModel(0),
                                 m_iCurrentCycle(0),m_iCurrentAnimationId(0),
                                 m_fCurrentAnimationTime(0),m_pVB(0),m_pIB(0),
-                                m_iNumVtxs(0),m_iNumFaces(0)
+                                m_iNumVtxs(0),m_iNumFaces(0),m_pEffectTechnique(0)
                                 {};
   /**
    * Destructor.
@@ -124,9 +125,13 @@ private:
   **/
   CAnimatedCoreModel*       m_pAnimatedCoreModel;
   /**
+   * AnimatedCoreModel a instanciar.
+  **/
+  CEffectTechnique*         m_pEffectTechnique;
+  /**
    * Llista de textures del model.
   **/
-  vector<CTexture *>        m_vTextureList;
+  vector<CTexture*>        m_vTextureList;
   /**
    * Cicle actual d'animació.
   **/

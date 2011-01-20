@@ -230,12 +230,16 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CalModel *_pCM)
     //donde se encuentran las coordenadas de textura
     m_pCalHardwareModel->setTextureCoordBuffer(0,((char*)l_pVtxs) + 56,sizeof(TCAL3D_HW_VERTEX));
     //donde copiar los índices
-    //m_pCalHardwareModel->setIndexBuffer(l_pIdxs);
+    
+    m_pCalHardwareModel->setIndexBuffer((CalIndex *)&l_pIdxs[0]);
     m_pCalHardwareModel->load( 0, 0, MAXBONES);
 
     m_iNumVtxs=m_pCalHardwareModel->getTotalVertexCount();
   
     //CalcTangentsAndBinormals(l_pVtxs, l_pIdxs, m_pNumVtxs, m_pNumFaces*3, sizeof(CAL3D_HW_VERTEX),0, 44, 60, 76, 92);
+    if(m_pRenderableVertexs)
+      CHECKED_DELETE(m_pRenderableVertexs);
+
     m_pRenderableVertexs = new CIndexedVertexs<TCAL3D_HW_VERTEX>(RENDER_MANAGER, l_pVtxs, l_pIdxs, m_iNumVtxs, m_iNumFaces*3);
 
     delete []l_pVtxs;

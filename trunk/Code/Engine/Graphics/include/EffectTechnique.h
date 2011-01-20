@@ -64,6 +64,7 @@ private:
 
   int m_iNumOfLights;
   bool m_bUseLights;
+  bool m_bAnimated;
 
   bool m_bUseCameraPosition;
   bool m_bUseTime;

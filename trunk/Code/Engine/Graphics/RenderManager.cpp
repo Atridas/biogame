@@ -142,6 +142,13 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
 
     m_pEffectManager = new CEffectManager();
 
+     if(!m_pEffectManager->Load(_params.szEffectsXML))
+    {
+      LOGGER->AddNewLog(ELL_ERROR,"RenderManager:: Error al manager d'Effects.");
+      //TODO
+      //SetOk(false);
+    }
+
     if(!m_pStaticMeshManager->Load(_params.vRenderableMeshes))
     {
       LOGGER->AddNewLog(ELL_ERROR,"RenderManager:: Error al manager de Static Meshes.");
@@ -152,13 +159,6 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
     {
       LOGGER->AddNewLog(ELL_ERROR,"RenderManager:: Error al manager d'Animated Models.");
       SetOk(false);
-    }
-
-    if(!m_pEffectManager->Load(_params.szEffectsXML))
-    {
-      LOGGER->AddNewLog(ELL_ERROR,"RenderManager:: Error al manager d'Effects.");
-      //TODO
-      //SetOk(false);
     }
 
   }

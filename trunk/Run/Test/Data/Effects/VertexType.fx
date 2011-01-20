@@ -93,7 +93,7 @@ struct CAL3D_HW_VERTEX_VS {
 	float4 Weight : BLENDWEIGHT;
 	float4 Indices : BLENDINDICES;
 	float4 Normal : NORMAL;
-	float4 Tangent : TANGENT0;
+  float4 Tangent : TANGENT0;
 	float4 BiNormal : BINORMAL0;
 	float2 TexCoord : TEXCOORD0;
 };
