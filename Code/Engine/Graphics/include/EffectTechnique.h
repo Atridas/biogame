@@ -24,7 +24,6 @@ public:
                       m_bUseInverseViewMatrix(false),
                       m_bUseInverseWorldMatrix(false),
                       m_bUseLights(false),
-                      m_bUseLightAmbientColor(false),
                       m_bUseProjMatrix(false),
                       m_bUseViewMatrix(false),
                       m_bUseWorldMatrix(false),
@@ -65,7 +64,6 @@ private:
 
   int m_iNumOfLights;
   bool m_bUseLights;
-  bool m_bUseLightAmbientColor;
 
   bool m_bUseCameraPosition;
   bool m_bUseTime;

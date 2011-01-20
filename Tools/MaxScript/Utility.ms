@@ -261,7 +261,10 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		
 		format "\n" to:l_file
 		
-		format "%\n" (OpenTagXML "lights") to:l_file
+		local l_aux = "" as StringStream
+		format "% % %" 0.3 0.3 0.3 to:l_aux
+		
+		format "%\n" (OpenTagParamXML "lights" #(#("ambient", l_aux))) to:l_file
 		
 		for i=1 to _lights.count do
 		(
@@ -271,7 +274,6 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			local l_position = "" as StringStream
 			local l_color = "" as StringStream 
 			local l_translation = "" as StringStream 
-			local l_aux = "" as StringStream
 			
 			if classof l_light == TargetDirectionallight then
 			(
@@ -348,7 +350,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 	(
 		labelPath.text = "D:/treballs/master/biogame/Run/Test/Data"
 		--labelPath.text = "C:/Treballs/Directoris v2/Run/Test/Data"
-		dropNivell.items = #("","Level -2","Level -1", "Hangar")
+		dropNivell.items = #("","Level -2","Level -1", "Hangar", "Proves")
 	)
 	on buttonPath pressed do
 	(

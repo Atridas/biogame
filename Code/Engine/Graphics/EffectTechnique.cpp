@@ -23,7 +23,6 @@ void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
   m_bUseInverseViewMatrix = _XMLParams.GetBoolProperty("use_inverse_view_matrix");
   m_bUseInverseWorldMatrix = _XMLParams.GetBoolProperty("use_inverse_world_matrix");
   m_bUseLights = _XMLParams.GetBoolProperty("use_lights");
-  m_bUseLightAmbientColor = _XMLParams.GetBoolProperty("use_light_ambient_color");
   m_bUseProjMatrix = _XMLParams.GetBoolProperty("use_proj_matrix");
   m_bUseViewMatrix = _XMLParams.GetBoolProperty("use_view_matrix");
   m_bUseWorldMatrix = _XMLParams.GetBoolProperty("use_world_matrix");
@@ -81,6 +80,8 @@ bool CEffectTechnique::BeginRender()
 
       if(m_pEffect->SetLights(m_iNumOfLights))
       {
+        l_pD3DEffect->SetFloatArray   (m_pEffect->m_pAmbientLight,                        m_pEffect->m_aAmbientLight,                 3);
+
         l_pD3DEffect->SetBoolArray    (m_pEffect->m_pLightsEnabledParameter,      (BOOL*) m_pEffect->m_aLightsEnabled,                m_iNumOfLights);
         l_pD3DEffect->SetIntArray     (m_pEffect->m_pLightsTypeParameter,                 m_pEffect->m_aLightsType,                   m_iNumOfLights);
         l_pD3DEffect->SetFloatArray   (m_pEffect->m_pLightsAngleParameter,                m_pEffect->m_aLightsAngle,                  m_iNumOfLights);

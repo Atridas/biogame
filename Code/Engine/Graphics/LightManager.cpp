@@ -15,8 +15,11 @@ bool CLightManager::Load(const string& _szFileName)
   if(!l_XMLLights.LoadFile(_szFileName.c_str()))
   {
     LOGGER->AddNewLog(ELL_WARNING,"CLightManager:: No s'ha trobat el XML \"%s\"", _szFileName.c_str());
+    SetOk(false);
     return false;
   }
+
+  m_vAmbientLight = l_XMLLights.GetVect3fProperty("ambient",Vect3f(0.3f));
 
   int l_iNumMeshesLights = l_XMLLights.GetNumChildren();
   for(int i = 0; i < l_iNumMeshesLights; i++)
@@ -29,8 +32,8 @@ bool CLightManager::Load(const string& _szFileName)
     string l_szName = "";
     string l_szType = "";
 
-    l_szName = l_XMLLight.GetPszProperty("name" ,"");
-    l_szType = l_XMLLight.GetPszProperty("type" ,"");
+    l_szName = l_XMLLight.GetPszISOProperty("name" ,"");
+    l_szType = l_XMLLight.GetPszISOProperty("type" ,"");
 
     if(l_szType.compare("omni") == 0)
     {
@@ -54,8 +57,8 @@ bool CLightManager::Load(const string& _szFileName)
     }
 
   }
-
-  return true;
+  SetOk(true);
+  return IsOk();
 }
 
 void CLightManager::Render(CRenderManager *_pRM) const
