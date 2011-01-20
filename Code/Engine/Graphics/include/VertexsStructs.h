@@ -14,13 +14,15 @@
 class CTexture;
 // ------------------------------------------------------------
 
-#define VERTEX_TYPE_GEOMETRY 0x0001
-#define VERTEX_TYPE_NORMAL   0x0002
-#define VERTEX_TYPE_TANGENT  0x0004
-#define VERTEX_TYPE_BINORMAL 0x0008
-#define VERTEX_TYPE_TEXTURE1 0x0010
-#define VERTEX_TYPE_TEXTURE2 0x0020
-#define VERTEX_TYPE_DIFFUSE  0x0040
+#define VERTEX_TYPE_GEOMETRY  0x0001
+#define VERTEX_TYPE_NORMAL    0x0002
+#define VERTEX_TYPE_TANGENT   0x0004
+#define VERTEX_TYPE_BINORMAL  0x0008
+#define VERTEX_TYPE_TEXTURE1  0x0010
+#define VERTEX_TYPE_TEXTURE2  0x0020
+#define VERTEX_TYPE_DIFFUSE   0x0040
+#define VERTEX_TYPE_BLENDIDX  0x0100
+#define VERTEX_TYPE_BLENDWGT  0x0200
 
 
 /**
@@ -49,13 +51,15 @@ struct SDIFFUSEVERTEX
   /**
    * Getter del tipus de vèrtex.
    * Els tipus de vèrtex és una màscara donada pel següent conjunt d'elements:
-   *  - VERTEX_TYPE_GEOMETRY 0x0001
-   *  - VERTEX_TYPE_NORMAL   0x0002
-   *  - VERTEX_TYPE_TANGENT  0x0004
-   *  - VERTEX_TYPE_BINORMAL 0x0008
-   *  - VERTEX_TYPE_TEXTURE1 0x0010
-   *  - VERTEX_TYPE_TEXTURE2 0x0020
-   *  - VERTEX_TYPE_DIFFUSE  0x0040
+   *  - VERTEX_TYPE_GEOMETRY  0x0001
+   *  - VERTEX_TYPE_NORMAL    0x0002
+   *  - VERTEX_TYPE_TANGENT   0x0004
+   *  - VERTEX_TYPE_BINORMAL  0x0008
+   *  - VERTEX_TYPE_TEXTURE1  0x0010
+   *  - VERTEX_TYPE_TEXTURE2  0x0020
+   *  - VERTEX_TYPE_DIFFUSE   0x0040
+   *  - VERTEX_TYPE_BLENDIDX  0x0100
+   *  - VERTEX_TYPE_BLENDWGT  0x0200
    * @return El tipus del vèrtex.
   **/
   static unsigned short GetVertexType();
@@ -92,13 +96,15 @@ struct SNORMALDIFFUSEVERTEX
   /**
    * Getter del tipus de vèrtex.
    * Els tipus de vèrtex és una màscara donada pel següent conjunt d'elements:
-   *  - VERTEX_TYPE_GEOMETRY 0x0001
-   *  - VERTEX_TYPE_NORMAL   0x0002
-   *  - VERTEX_TYPE_TANGENT  0x0004
-   *  - VERTEX_TYPE_BINORMAL 0x0008
-   *  - VERTEX_TYPE_TEXTURE1 0x0010
-   *  - VERTEX_TYPE_TEXTURE2 0x0020
-   *  - VERTEX_TYPE_DIFFUSE  0x0040
+   *  - VERTEX_TYPE_GEOMETRY  0x0001
+   *  - VERTEX_TYPE_NORMAL    0x0002
+   *  - VERTEX_TYPE_TANGENT   0x0004
+   *  - VERTEX_TYPE_BINORMAL  0x0008
+   *  - VERTEX_TYPE_TEXTURE1  0x0010
+   *  - VERTEX_TYPE_TEXTURE2  0x0020
+   *  - VERTEX_TYPE_DIFFUSE   0x0040
+   *  - VERTEX_TYPE_BLENDIDX  0x0100
+   *  - VERTEX_TYPE_BLENDWGT  0x0200
    * @return El tipus del vèrtex.
   **/
   static unsigned short GetVertexType();
@@ -134,13 +140,15 @@ struct TNORMALTANGENTBINORMALTEXTUREDVERTEX
   /**
    * Getter del tipus de vèrtex.
    * Els tipus de vèrtex és una màscara donada pel següent conjunt d'elements:
-   *  - VERTEX_TYPE_GEOMETRY 0x0001
-   *  - VERTEX_TYPE_NORMAL   0x0002
-   *  - VERTEX_TYPE_TANGENT  0x0004
-   *  - VERTEX_TYPE_BINORMAL 0x0008
-   *  - VERTEX_TYPE_TEXTURE1 0x0010
-   *  - VERTEX_TYPE_TEXTURE2 0x0020
-   *  - VERTEX_TYPE_DIFFUSE  0x0040
+   *  - VERTEX_TYPE_GEOMETRY  0x0001
+   *  - VERTEX_TYPE_NORMAL    0x0002
+   *  - VERTEX_TYPE_TANGENT   0x0004
+   *  - VERTEX_TYPE_BINORMAL  0x0008
+   *  - VERTEX_TYPE_TEXTURE1  0x0010
+   *  - VERTEX_TYPE_TEXTURE2  0x0020
+   *  - VERTEX_TYPE_DIFFUSE   0x0040
+   *  - VERTEX_TYPE_BLENDIDX  0x0100
+   *  - VERTEX_TYPE_BLENDWGT  0x0200
    * @return El tipus del vèrtex.
   **/
   static unsigned short GetVertexType();
@@ -173,13 +181,15 @@ struct TNORMALTANGENTBINORMALTEXTURED2VERTEX
   /**
    * Getter del tipus de vèrtex.
    * Els tipus de vèrtex és una màscara donada pel següent conjunt d'elements:
-   *  - VERTEX_TYPE_GEOMETRY 0x0001
-   *  - VERTEX_TYPE_NORMAL   0x0002
-   *  - VERTEX_TYPE_TANGENT  0x0004
-   *  - VERTEX_TYPE_BINORMAL 0x0008
-   *  - VERTEX_TYPE_TEXTURE1 0x0010
-   *  - VERTEX_TYPE_TEXTURE2 0x0020
-   *  - VERTEX_TYPE_DIFFUSE  0x0040
+   *  - VERTEX_TYPE_GEOMETRY  0x0001
+   *  - VERTEX_TYPE_NORMAL    0x0002
+   *  - VERTEX_TYPE_TANGENT   0x0004
+   *  - VERTEX_TYPE_BINORMAL  0x0008
+   *  - VERTEX_TYPE_TEXTURE1  0x0010
+   *  - VERTEX_TYPE_TEXTURE2  0x0020
+   *  - VERTEX_TYPE_DIFFUSE   0x0040
+   *  - VERTEX_TYPE_BLENDIDX  0x0100
+   *  - VERTEX_TYPE_BLENDWGT  0x0200
    * @return El tipus del vèrtex.
   **/
   static unsigned short GetVertexType();
@@ -250,13 +260,15 @@ struct STEXTUREDVERTEX
   /**
    * Getter del tipus de vèrtex.
    * Els tipus de vèrtex és una màscara donada pel següent conjunt d'elements:
-   *  - VERTEX_TYPE_GEOMETRY 0x0001
-   *  - VERTEX_TYPE_NORMAL   0x0002
-   *  - VERTEX_TYPE_TANGENT  0x0004
-   *  - VERTEX_TYPE_BINORMAL 0x0008
-   *  - VERTEX_TYPE_TEXTURE1 0x0010
-   *  - VERTEX_TYPE_TEXTURE2 0x0020
-   *  - VERTEX_TYPE_DIFFUSE  0x0040
+   *  - VERTEX_TYPE_GEOMETRY  0x0001
+   *  - VERTEX_TYPE_NORMAL    0x0002
+   *  - VERTEX_TYPE_TANGENT   0x0004
+   *  - VERTEX_TYPE_BINORMAL  0x0008
+   *  - VERTEX_TYPE_TEXTURE1  0x0010
+   *  - VERTEX_TYPE_TEXTURE2  0x0020
+   *  - VERTEX_TYPE_DIFFUSE   0x0040
+   *  - VERTEX_TYPE_BLENDIDX  0x0100
+   *  - VERTEX_TYPE_BLENDWGT  0x0200
    * @return El tipus del vèrtex.
   **/
   static unsigned short GetVertexType();
@@ -293,13 +305,15 @@ struct STEXTURED2VERTEX
   /**
    * Getter del tipus de vèrtex.
    * Els tipus de vèrtex és una màscara donada pel següent conjunt d'elements:
-   *  - VERTEX_TYPE_GEOMETRY 0x0001
-   *  - VERTEX_TYPE_NORMAL   0x0002
-   *  - VERTEX_TYPE_TANGENT  0x0004
-   *  - VERTEX_TYPE_BINORMAL 0x0008
-   *  - VERTEX_TYPE_TEXTURE1 0x0010
-   *  - VERTEX_TYPE_TEXTURE2 0x0020
-   *  - VERTEX_TYPE_DIFFUSE  0x0040
+   *  - VERTEX_TYPE_GEOMETRY  0x0001
+   *  - VERTEX_TYPE_NORMAL    0x0002
+   *  - VERTEX_TYPE_TANGENT   0x0004
+   *  - VERTEX_TYPE_BINORMAL  0x0008
+   *  - VERTEX_TYPE_TEXTURE1  0x0010
+   *  - VERTEX_TYPE_TEXTURE2  0x0020
+   *  - VERTEX_TYPE_DIFFUSE   0x0040
+   *  - VERTEX_TYPE_BLENDIDX  0x0100
+   *  - VERTEX_TYPE_BLENDWGT  0x0200
    * @return El tipus del vèrtex.
   **/
   static unsigned short GetVertexType();
@@ -336,13 +350,15 @@ struct SNORMALTEXTUREDVERTEX
   /**
    * Getter del tipus de vèrtex.
    * Els tipus de vèrtex és una màscara donada pel següent conjunt d'elements:
-   *  - VERTEX_TYPE_GEOMETRY 0x0001
-   *  - VERTEX_TYPE_NORMAL   0x0002
-   *  - VERTEX_TYPE_TANGENT  0x0004
-   *  - VERTEX_TYPE_BINORMAL 0x0008
-   *  - VERTEX_TYPE_TEXTURE1 0x0010
-   *  - VERTEX_TYPE_TEXTURE2 0x0020
-   *  - VERTEX_TYPE_DIFFUSE  0x0040
+   *  - VERTEX_TYPE_GEOMETRY  0x0001
+   *  - VERTEX_TYPE_NORMAL    0x0002
+   *  - VERTEX_TYPE_TANGENT   0x0004
+   *  - VERTEX_TYPE_BINORMAL  0x0008
+   *  - VERTEX_TYPE_TEXTURE1  0x0010
+   *  - VERTEX_TYPE_TEXTURE2  0x0020
+   *  - VERTEX_TYPE_DIFFUSE   0x0040
+   *  - VERTEX_TYPE_BLENDIDX  0x0100
+   *  - VERTEX_TYPE_BLENDWGT  0x0200
    * @return El tipus del vèrtex.
   **/
   static unsigned short GetVertexType();
@@ -380,13 +396,15 @@ struct SNORMALTEXTURED2VERTEX
   /**
    * Getter del tipus de vèrtex.
    * Els tipus de vèrtex és una màscara donada pel següent conjunt d'elements:
-   *  - VERTEX_TYPE_GEOMETRY 0x0001
-   *  - VERTEX_TYPE_NORMAL   0x0002
-   *  - VERTEX_TYPE_TANGENT  0x0004
-   *  - VERTEX_TYPE_BINORMAL 0x0008
-   *  - VERTEX_TYPE_TEXTURE1 0x0010
-   *  - VERTEX_TYPE_TEXTURE2 0x0020
-   *  - VERTEX_TYPE_DIFFUSE  0x0040
+   *  - VERTEX_TYPE_GEOMETRY  0x0001
+   *  - VERTEX_TYPE_NORMAL    0x0002
+   *  - VERTEX_TYPE_TANGENT   0x0004
+   *  - VERTEX_TYPE_BINORMAL  0x0008
+   *  - VERTEX_TYPE_TEXTURE1  0x0010
+   *  - VERTEX_TYPE_TEXTURE2  0x0020
+   *  - VERTEX_TYPE_DIFFUSE   0x0040
+   *  - VERTEX_TYPE_BLENDIDX  0x0100
+   *  - VERTEX_TYPE_BLENDWGT  0x0200
    * @return El tipus del vèrtex.
   **/
   static unsigned short GetVertexType();
@@ -410,6 +428,10 @@ private:
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
 };
 
+/**
+ * Estructura Vertex de cal3d.
+ * Representa a un Vertex d'un model animat cal3d amb geometria, pesos, índexs, normals i textura.
+**/
 struct TCAL3D_HW_VERTEX
 {
   float x, y, z;
@@ -418,8 +440,29 @@ struct TCAL3D_HW_VERTEX
   float nx, ny, nz;
   float tu,tv;
 
-  static unsigned short GetVertexType();
+  /**
+   * Getter del tipus de vèrtex.
+   * Els tipus de vèrtex és una màscara donada pel següent conjunt d'elements:
+   *  - VERTEX_TYPE_GEOMETRY  0x0001
+   *  - VERTEX_TYPE_NORMAL    0x0002
+   *  - VERTEX_TYPE_TANGENT   0x0004
+   *  - VERTEX_TYPE_BINORMAL  0x0008
+   *  - VERTEX_TYPE_TEXTURE1  0x0010
+   *  - VERTEX_TYPE_TEXTURE2  0x0020
+   *  - VERTEX_TYPE_DIFFUSE   0x0040
+   *  - VERTEX_TYPE_BLENDIDX  0x0100
+   *  - VERTEX_TYPE_BLENDWGT  0x0200
+   * @return El tipus del vèrtex.
+  **/
+  static inline unsigned short GetVertexType()
+  {
+    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_BLENDIDX | VERTEX_TYPE_BLENDWGT;
+  }
 
+ /**
+   * Getter del tipus de vèrtex.
+   * @return El tipus del vèrtex segons la codificació de DirectX9.
+  **/
   static inline unsigned int GetFVF()
   {
     return 0;

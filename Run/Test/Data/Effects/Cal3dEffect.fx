@@ -17,17 +17,18 @@ CAL3D_HW_VERTEX_PS RenderCal3DHWVS(CAL3D_HW_VERTEX_VS IN)
 	OUT.WorldTangent=normalize(mul(l_Tangent,g_WorldMatrix));
 	OUT.WorldBinormal=mul(cross(l_Tangent,l_Normal),(float3x3)g_WorldMatrix);
 	OUT.UV = IN.TexCoord.xy;
-	OUT.HPosition = mul(WorldPosition, g_WorldViewProjectionMatrix );
+	OUT.HPosition = mul(l_WorldPosition, g_WorldViewProjectionMatrix );
 	return OUT;
 }
 
 float4 RenderCal3DHWPS(CAL3D_HW_VERTEX_PS IN) : COLOR
 {
-	float3 Nn=CalcBumpMap(IN.WorldPosition, IN.WorldNormal, IN.WorldTangent,
-	IN.WorldBinormal, IN.UV);
-	float4 l_SpecularColor = 1.0;
-	float4 l_DiffuseColor=tex2D(DiffuseTextureSampler, IN.UV);
-	return CalcLighting (IN.WorldPosition, Nn, l_DiffuseColor, l_SpecularColor);
+	//float3 Nn=CalcNormalmap(IN.WorldPosition, IN.WorldNormal, IN.WorldTangent, IN.WorldBinormal, IN.UV);
+  //float3 Nn=CalcNormalmap(IN.WorldTangent, IN.WorldBinormal, IN.WorldNormal, IN.UV);
+	//float4 l_SpecularColor = 1.0;
+	//float4 l_DiffuseColor=tex2D(DiffuseTextureSampler, IN.UV);
+	//return CalcLighting (IN.WorldPosition, Nn, l_DiffuseColor, l_SpecularColor);
+  return (1.0,1.0,1.0,1.0);
 }
 
 technique Cal3DTechnique

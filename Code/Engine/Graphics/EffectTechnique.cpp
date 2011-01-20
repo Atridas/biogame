@@ -31,14 +31,22 @@ void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
   m_bUseViewProjectionMatrix = _XMLParams.GetBoolProperty("use_view_projection_matrix");
   m_bUseViewToLightProjectionMatrix = _XMLParams.GetBoolProperty("use_view_to_light_projection_matrix");
   m_bUseTime = _XMLParams.GetBoolProperty("use_time");
+  m_bAnimated = _XMLParams.GetBoolProperty("animated");
 
   //integers
   m_iNumOfLights= _XMLParams.GetIntProperty("nom_of_lights",0);
 
   //non XML dependant
-  m_pEffect = RENDER_MANAGER->GetEffectManager()->GetEffect(l_szEffectName);
+  CEffectManager* l_pEffectManager = RENDER_MANAGER->GetEffectManager();
+  m_pEffect = l_pEffectManager->GetEffect(l_szEffectName);
+
   if(m_pEffect->IsOk())
   {
+    if(m_bAnimated)
+    {
+      LOGGER->AddNewLog(ELL_INFORMATION, "CEffectTechnique::Init  Adding animated technique to EffectManager.");
+      l_pEffectManager->SetAnimatedModelTechnique(this);
+    }
     m_pD3DTechnique = m_pEffect->GetTechniqueByName(GetName());
   
     if(m_pEffect && m_pD3DTechnique)
@@ -170,6 +178,16 @@ bool CEffectTechnique::Refresh()
 
 void CEffectTechnique::Release()
 {
+  if(m_bAnimated)
+  {
+    CEffectManager* l_pEffectManager = RENDER_MANAGER->GetEffectManager();
+    if(l_pEffectManager->GetAnimatedModelTechnique() == this)
+    {
+      LOGGER->AddNewLog(ELL_INFORMATION, "CEffectTechnique::Release  Removing animated technique from EffectManager.");
+      l_pEffectManager->SetAnimatedModelTechnique(0);
+    }
+  }
+
   //self
   CHECKED_DELETE(m_pEffect);
   //d3d9

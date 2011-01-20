@@ -121,6 +121,9 @@ private:
    * Model Cal3D representat.
   **/
   CalCoreModel*             m_pCalCoreModel;
+  /**
+   * Model Cal3D hardware representat.
+  **/
   CalHardwareModel*         m_pCalHardwareModel;
   /**
    * Malla i índexs del model.
