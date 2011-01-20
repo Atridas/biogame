@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Config>
   <RenderManager resolution="800 600" position="50 5" fullscreenMode="false">
-    <StaticMeshManager xml="Data/Levels/Level -1/XML/StaticMeshes.xml"/>
+    <StaticMeshManager xml="Data/Levels/Proves/XML/StaticMeshes.xml"/>
     <!--
+    <StaticMeshManager xml="Data/Levels/Proves/XML/StaticMeshes.xml"/>
     <StaticMeshManager xml="Data/Levels/Hangar/XML/StaticMeshes.xml"/>
     <StaticMeshManager xml="Data/Levels/Level -2/XML/StaticMeshes.xml"/>
     <StaticMeshManager xml="Data/XML/StaticMeshes.xml"/>
@@ -21,16 +22,17 @@
 
   <!-- RenderableObjectsManager file="Data/XML/RenderableObjects.xml" -->
   <!-- RenderableObjectsManager file="Data/Levels/Level -2/XML/RenderableObjects.xml" -->
-  <RenderableObjectsManager file="Data/Levels/Level -1/XML/RenderableObjects.xml">
+  <RenderableObjectsManager file="Data/Levels/Proves/XML/RenderableObjects.xml">
     <!--
     <Level xml="Data/XML/RenderableObjects.xml"/>
     <Level xml="Data/Levels/Level -1/XML/RenderableObjects.xml"/>
     <Level xml="Data/Levels/Level -2/XML/RenderableObjects.xml"/>
     <Level xml="Data/Levels/Hangar/XML/RenderableObjects.xml"/>
+    <Level xml="Data/Levels/Proves/XML/RenderableObjects.xml"/>
     -->
   </RenderableObjectsManager>
 
-  <LightsManager file="Data/Levels/Hangar/XML/Lights.xml"/>
+  <LightsManager file="Data/Levels/Proves/XML/Lights.xml"/>
     
   <!--<AnimatedModelManager file="Data/XML/AnimatedModels.xml">
   </AnimatedModelManager>-->

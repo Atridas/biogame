@@ -12,7 +12,7 @@
     <default_technique vertex_type="67" technique="ShowNormalsTechnique"/>
     <default_technique vertex_type="33" technique="LightmapTechnique"/>
     <default_technique vertex_type="31" technique="ShowNormalsTechnique"/>
-    <default_technique vertex_type="47" technique="ShowNormalmapTechnique"/>
+    <default_technique vertex_type="47" technique="NormalTexturedTechnique"/>
     <!--default_technique vertex_type="31" technique="ShowNormalmapTechnique"/-->
   </default_techniques>
   <techniques>
@@ -30,6 +30,8 @@
     <technique name="ShowNormalsTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
     <technique name="LightmapTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
     <technique name="ShowNormalmapTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
+    <technique name="NormalTexturedTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true"
+               use_lights="true" nom_of_lights="1" use_camera_position="true"/>
     
   </techniques>
 </shaders>

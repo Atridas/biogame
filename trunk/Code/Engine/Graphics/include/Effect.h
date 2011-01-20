@@ -9,6 +9,7 @@
 
 //Forward declarations-------------
 class CEffectTechnique;
+class CEffectMaterial;
 class CXMLTreeNode;
 //---------------------------------
 
@@ -41,6 +42,7 @@ private:
 
   string m_szFileName;
   LPD3DXEFFECT m_pD3DEffect;
+  float m_aAmbientLight[3];
   bool m_aLightsEnabled[MAX_LIGHTS_BY_SHADER];
   int m_aLightsType[MAX_LIGHTS_BY_SHADER];
   float m_aLightsAngle[MAX_LIGHTS_BY_SHADER];
@@ -55,14 +57,16 @@ private:
   D3DXHANDLE m_pWorldViewMatrixParameter,  m_pViewProjectionMatrixParameter, m_pWorldViewProjectionMatrixParameter;
   D3DXHANDLE m_pViewToLightProjectionMatrixParameter;
 
+  D3DXHANDLE m_pAmbientLight;
   D3DXHANDLE m_pLightsEnabledParameter, m_pLightsTypeParameter, m_pLightsPositionParameter, m_pLightsDirectionParameter, m_pLightsAngleParameter, m_pLightsColorParameter;
   D3DXHANDLE m_pLightsFallOffParameter, m_pLightsStartRangeAttenuationParameter, m_pLightsEndRangeAttenuationParameter;
 
   D3DXHANDLE m_pCameraPositionParameter;
   D3DXHANDLE m_pBonesParameter;
   D3DXHANDLE m_pTimeParameter;
-
+  
   friend CEffectTechnique;
+  friend CEffectMaterial;
 };
 
 #endif

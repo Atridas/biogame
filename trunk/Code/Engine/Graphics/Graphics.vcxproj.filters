@@ -118,6 +118,9 @@
     <Filter Include="SceneEffects\DrawQuadSceneEffect">
       <UniqueIdentifier>{645f202a-97ec-4bf9-a968-52306fbcce33}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Effects\EffectMaterial">
+      <UniqueIdentifier>{79307dda-f3c6-4172-b997-332e68885b6c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -218,6 +221,9 @@
     </ClCompile>
     <ClCompile Include="DrawQuadSceneEffect.cpp">
       <Filter>SceneEffects\DrawQuadSceneEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectMaterial.cpp">
+      <Filter>Effects\EffectMaterial</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -322,6 +328,9 @@
     </ClInclude>
     <ClInclude Include="include\DrawQuadSceneEffect.h">
       <Filter>SceneEffects\DrawQuadSceneEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EffectMaterial.h">
+      <Filter>Effects\EffectMaterial</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

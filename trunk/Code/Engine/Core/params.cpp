@@ -71,7 +71,7 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
             LOGGER->AddNewLog(ELL_INFORMATION, "\tEffects \"%s\"",l_pcXML);
           }
         }
-        else 
+        else if(!l_TreeChild.IsComment())
         {
           LOGGER->AddNewLog(ELL_WARNING, "\tParametre del RenderManager desconegut : %s", l_TreeChild.GetName());
         }

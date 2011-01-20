@@ -19,6 +19,7 @@ CEffect::CEffect(void):
   m_pViewProjectionMatrixParameter(0),
   m_pWorldViewProjectionMatrixParameter(0),
   m_pViewToLightProjectionMatrixParameter(0),
+  m_pAmbientLight(0),
   m_pLightsEnabledParameter(0),
   m_pLightsTypeParameter(0),
   m_pLightsPositionParameter(0),
@@ -54,24 +55,25 @@ void CEffect::Release()
 
 void CEffect::SetNullParameters() 
 {
-  m_pWorldMatrixParameter = 0;
-  m_pViewMatrixParameter = 0;
-  m_pProjectionMatrixParameter = 0;
-  m_pWorldViewMatrixParameter = 0;
-  m_pViewProjectionMatrixParameter = 0;
-  m_pWorldViewProjectionMatrixParameter = 0;
-  m_pViewToLightProjectionMatrixParameter = 0;
-  m_pLightsEnabledParameter = 0;
-  m_pLightsTypeParameter = 0;
-  m_pLightsPositionParameter = 0;
-  m_pLightsDirectionParameter = 0;
-  m_pLightsAngleParameter = 0;
-  m_pLightsColorParameter = 0;
-  m_pLightsFallOffParameter = 0;
-  m_pLightsStartRangeAttenuationParameter = 0;
-  m_pLightsEndRangeAttenuationParameter = 0;
-  m_pCameraPositionParameter = 0;
-  m_pBonesParameter = 0;
+  m_pWorldMatrixParameter =
+  m_pViewMatrixParameter =
+  m_pProjectionMatrixParameter =
+  m_pWorldViewMatrixParameter =
+  m_pViewProjectionMatrixParameter =
+  m_pWorldViewProjectionMatrixParameter =
+  m_pViewToLightProjectionMatrixParameter =
+  m_pAmbientLight =
+  m_pLightsEnabledParameter =
+  m_pLightsTypeParameter =
+  m_pLightsPositionParameter =
+  m_pLightsDirectionParameter =
+  m_pLightsAngleParameter =
+  m_pLightsColorParameter =
+  m_pLightsFallOffParameter =
+  m_pLightsStartRangeAttenuationParameter =
+  m_pLightsEndRangeAttenuationParameter =
+  m_pCameraPositionParameter =
+  m_pBonesParameter =
   m_pTimeParameter = 0;
 }
 
@@ -130,6 +132,12 @@ bool CEffect::SetLights(size_t _iNumOfLights){
     return false;
   }
   CLightManager* l_pLightManager = CORE->GetLightManager();
+
+  const Vect3f l_Ambient = l_pLightManager->getAmbientLight();
+  m_aAmbientLight[0] = l_Ambient.x;
+  m_aAmbientLight[1] = l_Ambient.y;
+  m_aAmbientLight[2] = l_Ambient.z;
+
   vector<CLight*> l_vLights = l_pLightManager->GetLights(_iNumOfLights);
   for(size_t i = 0; i < _iNumOfLights; i++)
   {
@@ -197,15 +205,16 @@ bool CEffect::InitParameters()
   GetParameterBySemantic("ViewToLightProjection", m_pViewToLightProjectionMatrixParameter);
 
   //lights
-  GetParameterBySemantic("LIGHTS_ENABLED", m_pLightsEnabledParameter);
-  GetParameterBySemantic("LIGHTS_TYPE", m_pLightsTypeParameter);
-  GetParameterBySemantic("LIGHTS_POSITION", m_pLightsPositionParameter);
-  GetParameterBySemantic("LIGHTS_DIRECTION", m_pLightsDirectionParameter);
-  GetParameterBySemantic("LIGHTS_ANGLE", m_pLightsAngleParameter);
-  GetParameterBySemantic("LIGHTS_COLOR", m_pLightsColorParameter);
-  GetParameterBySemantic("LIGHTS_FALL_OFF", m_pLightsFallOffParameter);
-  GetParameterBySemantic("LIGHTS_START_RANGE_ATTENUATION", m_pLightsStartRangeAttenuationParameter);
-  GetParameterBySemantic("LIGHTS_END_RANGE_ATTENUATION", m_pLightsEndRangeAttenuationParameter);
+  GetParameterBySemantic("AmbientLight", m_pAmbientLight);
+  GetParameterBySemantic("LightsEnabled", m_pLightsEnabledParameter);
+  GetParameterBySemantic("LightsType", m_pLightsTypeParameter);
+  GetParameterBySemantic("LightsPosition", m_pLightsPositionParameter);
+  GetParameterBySemantic("LightsDirection", m_pLightsDirectionParameter);
+  GetParameterBySemantic("LightsAngle", m_pLightsAngleParameter);
+  GetParameterBySemantic("LightsColor", m_pLightsColorParameter);
+  GetParameterBySemantic("LightsFallOff", m_pLightsFallOffParameter);
+  GetParameterBySemantic("LightsStartRange", m_pLightsStartRangeAttenuationParameter);
+  GetParameterBySemantic("LightsEndRange", m_pLightsEndRangeAttenuationParameter);
 
   //Altres
   GetParameterBySemantic("CameraPosition", m_pCameraPositionParameter);

@@ -99,6 +99,7 @@
     <ClCompile Include="DrawQuadSceneEffect.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
+    <ClCompile Include="EffectMaterial.cpp" />
     <ClCompile Include="EffectTechnique.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="FPSCamera.cpp" />
@@ -133,6 +134,7 @@
     <ClInclude Include="include\DrawQuadSceneEffect.h" />
     <ClInclude Include="include\Effect.h" />
     <ClInclude Include="include\EffectManager.h" />
+    <ClInclude Include="include\EffectMaterial.h" />
     <ClInclude Include="include\EffectTechnique.h" />
     <ClInclude Include="include\FontManager.h" />
     <ClInclude Include="include\FPSCamera.h" />
