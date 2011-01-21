@@ -33,4 +33,5 @@
 	<mesh name="Caixes50" path="Data/Levels/Hangar/Meshes/Caixes50.mesh"/>
 	<mesh name="Caixes51" path="Data/Levels/Hangar/Meshes/Caixes51.mesh"/>
 	<mesh name="Bidó08" path="Data/Levels/Hangar/Meshes/Bidó08.mesh"/>
+	<mesh name="Base Hangar01" path="Data/Levels/Hangar/Meshes/Base Hangar01.mesh"/>
 </meshes>

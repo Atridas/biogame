@@ -45,15 +45,16 @@
                /-->
 
     <technique name="WhiteTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
+    <technique name="NoTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
     <technique name="ShowNormalsTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
     <technique name="LightmapTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
     <technique name="ShowNormalmapTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
     <technique name="NormalTexturedTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true"
-               use_lights="true" num_of_lights="1" use_camera_position="true"/>
+               use_lights="true" num_of_lights="4" use_camera_position="true"/>
     <technique name="NormalDiffusedTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true"
-               use_lights="true" num_of_lights="1" use_camera_position="true"/>
+               use_lights="true" num_of_lights="4" use_camera_position="true"/>
     <technique name="TangentBinormalNormalTexturedTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true"
-               use_lights="true" num_of_lights="1" use_camera_position="true"/>
+               use_lights="true" num_of_lights="4" use_camera_position="true"/>
     <technique name="Cal3DTechnique" animated="true" effect="Cal3D Effects" use_world_matrix="true" use_world_view_projection_matrix="true"/>
     
   </techniques>

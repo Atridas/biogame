@@ -44,7 +44,7 @@ private:
   string m_szFileName;
   LPD3DXEFFECT m_pD3DEffect;
   float m_aAmbientLight[3];
-  bool m_aLightsEnabled[MAX_LIGHTS_BY_SHADER];
+  BOOL m_aLightsEnabled[MAX_LIGHTS_BY_SHADER];
   int m_aLightsType[MAX_LIGHTS_BY_SHADER];
   float m_aLightsAngle[MAX_LIGHTS_BY_SHADER];
   float m_aLightsFallOff[MAX_LIGHTS_BY_SHADER];

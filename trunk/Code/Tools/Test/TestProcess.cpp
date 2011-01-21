@@ -195,7 +195,10 @@ void CTestProcess::Update(float _fElapsedTime)
   l_fYaw = m_pObject->GetYaw();
   
   m_pObject->SetYaw(l_fYaw-l_vVec.x*_fElapsedTime);
-  m_pObject->SetPitch(l_fPitch-l_vVec.y*_fElapsedTime);
+  l_fPitch -= l_vVec.y*_fElapsedTime;
+  if(l_fPitch < - FLOAT_PI_VALUE/3) l_fPitch = - FLOAT_PI_VALUE/3;
+  if(l_fPitch >   FLOAT_PI_VALUE/3) l_fPitch =   FLOAT_PI_VALUE/3;
+  m_pObject->SetPitch(l_fPitch);
 
   //g_pAnimatedInstanceModel->Update(_fElapsedTime);
   //g_pRenderableAIModel->GetAnimatedInstanceModel()->Update(_fElapsedTime);

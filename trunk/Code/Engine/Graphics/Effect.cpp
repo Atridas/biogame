@@ -141,6 +141,12 @@ bool CEffect::SetLights(size_t _iNumOfLights){
   vector<CLight*> l_vLights = l_pLightManager->GetLights(_iNumOfLights);
   for(size_t i = 0; i < _iNumOfLights; i++)
   {
+    if(l_vLights.size() <= i)
+    {
+      m_aLightsEnabled[i] = false;
+      continue;
+    }
+
     CLight* l_pLight = l_vLights[i];
     if(!l_pLight)
     {
@@ -153,6 +159,8 @@ bool CEffect::SetLights(size_t _iNumOfLights){
     
     m_aLightsStartRangeAttenuation[i] = l_pLight->GetStartRangeAttenuation();
     m_aLightsEndRangeAttenuation[i]   = l_pLight->GetEndRangeAttenuation();
+    m_aLightsStartRangeAttenuation[i] *= m_aLightsStartRangeAttenuation[i]; // Make it square
+    m_aLightsEndRangeAttenuation[i]   *= m_aLightsEndRangeAttenuation[i];   // Make it square
     m_aLightsPosition[i]              = l_pLight->GetPosition();
     m_aLightsColor[i]                 = l_pLight->GetColor();
 
@@ -164,8 +172,17 @@ bool CEffect::SetLights(size_t _iNumOfLights){
       if(m_aLightsType[i] == CLight::SPOT)
       {
         CSpotLight* l_pSpot = (CSpotLight*) l_pDirectional;
-        m_aLightsAngle[i]   = l_pSpot->GetAngle();
+        m_aLightsAngle[i]   = l_pSpot->GetAngle() ;
         m_aLightsFallOff[i] = l_pSpot->GetFallOff();
+
+        m_aLightsAngle[i]   *= FLOAT_PI_VALUE * 2 / 360; // radiants
+        m_aLightsFallOff[i] *= FLOAT_PI_VALUE * 2 / 360;
+
+        m_aLightsAngle[i]   *= 0.5; // agafar només la meitat
+        m_aLightsFallOff[i] *= 0.5;
+
+        m_aLightsAngle[i]   = cos(m_aLightsAngle[i]); // volem el cosinus, que calcular-lo al shader val un iogurt.
+        m_aLightsFallOff[i] = cos(m_aLightsAngle[i]);
       }
     }
   }
@@ -210,11 +227,11 @@ bool CEffect::InitParameters()
   GetParameterBySemantic("LightsType", m_pLightsTypeParameter);
   GetParameterBySemantic("LightsPosition", m_pLightsPositionParameter);
   GetParameterBySemantic("LightsDirection", m_pLightsDirectionParameter);
-  GetParameterBySemantic("LightsAngle", m_pLightsAngleParameter);
+  GetParameterBySemantic("LightsAngleCos", m_pLightsAngleParameter);
+  GetParameterBySemantic("LightsFallOffCos", m_pLightsFallOffParameter);
   GetParameterBySemantic("LightsColor", m_pLightsColorParameter);
-  GetParameterBySemantic("LightsFallOff", m_pLightsFallOffParameter);
-  GetParameterBySemantic("LightsStartRange", m_pLightsStartRangeAttenuationParameter);
-  GetParameterBySemantic("LightsEndRange", m_pLightsEndRangeAttenuationParameter);
+  GetParameterBySemantic("LightsStartRangeSQ", m_pLightsStartRangeAttenuationParameter);
+  GetParameterBySemantic("LightsEndRangeSQ", m_pLightsEndRangeAttenuationParameter);
 
   //Altres
   GetParameterBySemantic("CameraPosition", m_pCameraPositionParameter);
