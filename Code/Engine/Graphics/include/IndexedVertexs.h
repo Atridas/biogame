@@ -158,7 +158,7 @@ bool CIndexedVertexs<T>::Render(CRenderManager *_pRM, CEffectTechnique *_pEffect
         l_pD3DEffect->EndPass();
       }
     }
-    return true;
+    return SUCCEEDED( l_pD3DEffect->End() );
   } else {
     return false;
   }

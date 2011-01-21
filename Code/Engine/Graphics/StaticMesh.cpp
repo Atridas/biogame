@@ -281,6 +281,7 @@ void CStaticMesh::Render(CRenderManager *_pRM) const
       //---------------------------- shaders -----------------------
       CEffectManager* l_pEffectManager = _pRM->GetEffectManager();
       uint16 l_iVertexType = (*l_ItRV)->GetVertexType();
+      //if(l_iVertexType == 31) return;
       string l_szName = l_pEffectManager->GetTechniqueEffectNameByVertexDefault(l_iVertexType);
       CEffectTechnique* l_pEffectTechnique = l_pEffectManager->GetEffectTechnique(l_szName);
       if(l_pEffectTechnique)

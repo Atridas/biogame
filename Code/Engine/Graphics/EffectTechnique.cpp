@@ -34,7 +34,7 @@ void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
   m_bAnimated = _XMLParams.GetBoolProperty("animated");
 
   //integers
-  m_iNumOfLights= _XMLParams.GetIntProperty("nom_of_lights",0);
+  m_iNumOfLights= _XMLParams.GetIntProperty("num_of_lights",0);
 
   //non XML dependant
   CEffectManager* l_pEffectManager = RENDER_MANAGER->GetEffectManager();

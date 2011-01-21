@@ -7,6 +7,16 @@
 
 
 
+float4 SimpleVS(float4 _in : POSITION) : POSITION {
+	
+	return mul(_in,g_WorldViewProjectionMatrix);
+}
+
+float4 NoVS() : POSITION {
+	
+	return float4(0,0,0,0);
+}
+
 TNORMAL_DIFFUSED_VERTEX_PS NormalDiffusedVS(TNORMAL_DIFFUSED_VERTEX_VS _in) {
 	TNORMAL_DIFFUSED_VERTEX_PS out_ = (TNORMAL_DIFFUSED_VERTEX_PS)0;
 	
@@ -129,6 +139,12 @@ float4 TangentBinormalNormalTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_
 	return out_;
 }
 
+float4 WhitePS() : COLOR {
+  return float4(1.0,1.0,1.0,1.0);
+}
+float4 NoPS() : COLOR {
+  return float4(0.0,0.0,0.0,0.0);
+}
 
 technique NormalDiffusedTechnique {
 	pass p0 {
@@ -220,5 +236,36 @@ technique LightmapTechnique {
     //Vertex / Pixel shader
 		VertexShader = compile vs_3_0 NormalTextured2VS();
 		PixelShader = compile ps_3_0 LightmapPS();
+	}
+}
+
+technique WhiteTechnique {
+	pass p0 {
+		//Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar
+    ZEnable = true;
+    ZWriteEnable = true;
+    ZFunc = LessEqual;
+    //Deshabilitamos el alphablend
+    AlphaBlendEnable = false;
+    //Tipo de culling que queremos utilizar
+    CullMode = CCW;
+    //Vertex / Pixel shader
+		VertexShader = compile vs_3_0 SimpleVS();
+		PixelShader = compile ps_3_0 WhitePS();
+	}
+}
+
+technique NoTechnique {
+	pass p0 {
+		//Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar
+    ZEnable = true;
+    ZWriteEnable = true;
+    ZFunc = LessEqual;
+    AlphaBlendEnable = true;
+    //Tipo de culling que queremos utilizar
+    CullMode = CCW;
+    //Vertex / Pixel shader
+		VertexShader = compile vs_3_0 NoVS();
+		PixelShader = compile ps_3_0 NoPS();
 	}
 }
