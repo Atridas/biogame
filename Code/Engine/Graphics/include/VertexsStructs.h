@@ -465,7 +465,7 @@ struct TCAL3D_HW_VERTEX
   **/
   static inline unsigned int GetFVF()
   {
-    return 0;
+    return D3DFVF_XYZ | D3DFVF_TEX4 | D3DFVF_TEX4 | D3DFVF_NORMAL | D3DFVF_TEX2;
   }
 
   static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
