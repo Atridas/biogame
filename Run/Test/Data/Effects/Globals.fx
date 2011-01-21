@@ -36,11 +36,11 @@ float3  g_LightsPosition[MAXLIGHTS]    : LightsPosition;
 float3  g_LightsDirection[MAXLIGHTS]   : LightsDirection;
 float4  g_LightsColor[MAXLIGHTS]       : LightsColor;
 
-float   g_LightsAngle[MAXLIGHTS]       : LightsAngle;
-float   g_LightsFallOff[MAXLIGHTS]     : LightsFallOff;
+float   g_LightsAngleCos[MAXLIGHTS]    : LightsAngleCos;
+float   g_LightsFallOffCos[MAXLIGHTS]  : LightsFallOffCos;
 
-float   g_LightsStartRange[MAXLIGHTS]  : LightsStartRange;
-float   g_LightsEndRange[MAXLIGHTS]    : LightsEndRange;
+float   g_LightsStartRangeSQ[MAXLIGHTS]: LightsStartRangeSQ;
+float   g_LightsEndRangeSQ[MAXLIGHTS]  : LightsEndRangeSQ;
 
 //D3DXHANDLE m_pLightsEnabledParameter, m_pLightsTypeParameter, m_pLightsPositionParameter, m_pLightsDirectionParameter, m_pLightsAngleParameter, m_pLightsColorParameter;
 //D3DXHANDLE m_pLightsFallOffParameter, m_pLightsStartRangeAttenuationParameter, m_pLightsEndRangeAttenuationParameter;

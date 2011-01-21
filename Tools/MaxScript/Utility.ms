@@ -308,7 +308,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 				
 				l_aux = "" as StringStream
 				format "%" l_light.falloff to:l_aux
-				append l_params #("fall_of",l_aux)
+				append l_params #("fall_off",l_aux)
 			) else
 			(
 				--res, és un mesh o algu així
@@ -326,7 +326,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			append l_params #("color",l_color)
 			
 			l_aux = "" as StringStream
-			format "%" l_light.farAttenStart to:l_aux
+			format "%" l_light.NearAttenStart to:l_aux
 			append l_params #("att_start_range",l_aux)
 			l_aux = "" as StringStream
 			format "%" l_light.farAttenEnd to:l_aux

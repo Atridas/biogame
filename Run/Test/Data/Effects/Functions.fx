@@ -42,20 +42,48 @@ float3 ComputeAllLights(float3 _Normal, float3 _WorltPosition, float3 _DiffuseCo
       if(g_LightsType[i] == LIGHT_OMNI)
       {
         l_LightDirection = g_LightsPosition[i] - _WorltPosition;
-        l_LightDirection = mul(l_LightDirection,(float3x3)g_WorldMatrix);
-        //TODO
+        float l_DistSquared = dot(l_LightDirection,l_LightDirection);
+        if(l_DistSquared < 0.0 || l_DistSquared > g_LightsEndRangeSQ[i])
+        {
+          l_Attenuation = 0.0;
+        } else if(l_DistSquared > g_LightsStartRangeSQ[i]) {
+          l_Attenuation *= (g_LightsEndRangeSQ[i] - l_DistSquared) / (g_LightsEndRangeSQ[i] - g_LightsStartRangeSQ[i]);
+        }
+        if(l_Attenuation > 0.0)
+        {
+          l_LightDirection = normalize(l_LightDirection);
+        }
       } else if(g_LightsType[i] == LIGHT_DIRECTIONAL)
       {
-        l_LightDirection = mul(-g_LightsDirection[i],(float3x3)g_WorldMatrix);
-        //TODO
+        l_LightDirection = -g_LightsDirection[i];
       } else if(g_LightsType[i] == LIGHT_SPOT)
       {
-        l_LightDirection = mul(-g_LightsDirection[i],(float3x3)g_WorldMatrix);
-        //TODO
+        l_LightDirection = g_LightsPosition[i] - _WorltPosition;
+        
+        float l_DistSquared = dot(l_LightDirection,l_LightDirection);
+        if(l_DistSquared < 0.0 || l_DistSquared > g_LightsEndRangeSQ[i])
+        {
+          l_Attenuation = 0.0;
+        } else if(l_DistSquared > g_LightsStartRangeSQ[i]) {
+          l_Attenuation *= (g_LightsEndRangeSQ[i] - l_DistSquared) / (g_LightsEndRangeSQ[i] - g_LightsStartRangeSQ[i]);
+        }
+        if(l_Attenuation > 0.0)
+        {
+          l_LightDirection = normalize(l_LightDirection);
+          
+          float l_cosAmbLightAngle = dot(l_LightDirection, -g_LightsDirection[i]);
+          if(l_cosAmbLightAngle < g_LightsFallOffCos[i])
+          {
+            l_Attenuation = 0.0;
+          } else if(l_cosAmbLightAngle < g_LightsAngleCos[i])
+          {
+            l_Attenuation *= (g_LightsFallOffCos[i] - l_cosAmbLightAngle) / (g_LightsFallOffCos[i] - g_LightsAngleCos[i]);
+          }
+          
+        }
       }
       if(l_Attenuation > 0.0)
       {
-        l_LightDirection = normalize(l_LightDirection);
         float3 l_HalfWayVector = normalize(l_EyeDirection+l_LightDirection);
         out_ += ComputeLight( _Normal, 
                               l_LightDirection, 
@@ -89,6 +117,7 @@ struct NORMAL_UV {
   float2 UV;
 };
 
+
 NORMAL_UV CalcParallaxMap(float3 _Position, float3 _Normal, float3 _Tangent, float3 _Binormal, float2 _UV)
 {
   NORMAL_UV out_ = (NORMAL_UV)0;
@@ -115,6 +144,58 @@ NORMAL_UV CalcParallaxMap(float3 _Position, float3 _Normal, float3 _Tangent, flo
 
   return out_;
 }
+/*
+
+//Versió 1
+NORMAL_UV CalcParallaxMap(float3 _Position, float3 _Normal, float3 _Tangent, float3 _Binormal, float2 _UV)
+{
+  NORMAL_UV out_ = (NORMAL_UV)0;
+  // view directions
+  float3 Vn = normalize(_Position); //TODO
+  out_.UV = _UV;
+  // parallax code
+  float3x3 tbnXf = float3x3(_Tangent,_Binormal,_Normal);
+  float4 l_NormalMapColor = tex2D(NormalTextureSampler,out_.UV);
+  float height = l_NormalMapColor.w * g_BumpDiff + g_BumpMinHeight;
+  //float height = reliefTex.w * g_Bump - g_Bump*0.5;
+  out_.UV += height * mul(tbnXf,Vn).xy;
+  // normal map
+  out_.Normal = l_NormalMapColor.xyz - float3(0.5,0.5,0.5);
+  // transform tNorm to world space
+  out_.Normal = normalize(out_.Normal.x*_Tangent -
+                          out_.Normal.y*_Binormal +
+                          out_.Normal.z*_Normal);
+  return out_;
+}
+
+//Versió 2
+NORMAL_UV CalcParallaxMap(float3 _Position, float3 _Normal, float3 _Tangent, float3 _Binormal, float2 _UV)
+{
+  NORMAL_UV out_ = (NORMAL_UV)0;
+
+  //calcul normal
+  float4 l_NormalMapColor = tex2D(NormalTextureSampler,_UV);
+
+  out_.Normal = l_NormalMapColor.xyz - float3(0.5,0.5,0.5);
+
+  // transform tNorm to world space
+  out_.Normal = normalize(out_.Normal.x*_Tangent -
+                          out_.Normal.y*_Binormal +
+                          out_.Normal.z*_Normal);
+
+  //calcul mapa
+  float3x3 tbnXf = float3x3(_Tangent,_Binormal,_Normal);
+  float3 Vn = normalize(_Position);
+
+  out_.UV = _UV;
+
+  float height = l_NormalMapColor.w * (g_BumpMaxHeight - g_BumpMinHeight) + g_BumpMinHeight;
+
+  out_.UV += g_ParallaxHeight * height *  mul(tbnXf,Vn).xy;
+
+  return out_;
+}
+*/
 
 // Cal3d functions
 

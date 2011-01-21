@@ -91,8 +91,8 @@ float4 LightmapPS(TNORMAL_TEXTURED2_VERTEX_PS _in) : COLOR {
 
 float4 ShowNormalsPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
 	float3 l_normal = normalize(_in.WorldNormal);
-	return float4(0.5*l_normal + 0.5,1.0);
-	//return float4(l_normal,1.0);
+	//return float4(0.5*l_normal + 0.5,1.0);
+	return float4(l_normal,1.0);
 }
 
 float4 ShowNormalmapPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _in) : COLOR {
@@ -131,6 +131,7 @@ float4 TangentBinormalNormalTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_
                                     _in.UV);
 
 	//float3 l_Normal = CalcNormalmap(_in.WorldTangent, _in.WorldBinormal, _in.WorldNormal, _in.UV);
+  
 	
   float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,l_aux.UV);
   
