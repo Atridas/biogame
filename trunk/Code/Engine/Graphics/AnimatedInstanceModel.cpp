@@ -7,6 +7,7 @@
 #include "VertexsStructs.h"
 #include <cal3d/cal3d.h>
 
+#include "IndexedVertexs.h"
 #include "RenderableVertexs.h"
 #include "EffectManager.h"
 #include "EffectTechnique.h"
@@ -53,7 +54,7 @@ void CAnimatedInstanceModel::Initialize(CAnimatedCoreModel *_pAnimatedCoreModel)
     LOGGER->AddNewLog(ELL_WARNING,"CAnimatedInstanceModel::Initialize L'AnimatedCoreModel proporcionat es NULL.");
 }
 
-bool CAnimatedInstanceModel::LoadVertexBuffer(CRenderManager *_pRM)
+/*bool CAnimatedInstanceModel::LoadVertexBuffer(CRenderManager *_pRM)
 {
   bool isOk = true;
 
@@ -73,7 +74,7 @@ bool CAnimatedInstanceModel::LoadVertexBuffer(CRenderManager *_pRM)
   }
 
   return isOk;
-}
+}*/
 
 void CAnimatedInstanceModel::LoadTextures(CRenderManager *_pRM)
 {
@@ -143,9 +144,12 @@ void CAnimatedInstanceModel::Render(CRenderManager *_pRM)
         }
 
         l_pd3dEffect->SetFloatArray(l_pEffect->m_pBonesParameter, (float *)l_mMatrix,(l_pCalHardwareModel->getBoneCount())*3*4);
-        m_vTextureList[0]->Activate(0);
-  //      m_pNormalTextureList[0]->Activate(1);
-        m_pAnimatedCoreModel->GetRenderableVertexs()->Render( _pRM, l_pEffectTechnique);
+
+        vector<CTexture*>::iterator l_itTexture = m_vTextureList.begin();
+
+        (*l_itTexture)->Activate(0);
+
+        ((CIndexedVertexs<TCAL3D_HW_VERTEX>*)m_pAnimatedCoreModel->GetRenderableVertexs())->Render( _pRM, l_pEffectTechnique);
 
       }
     }
@@ -250,7 +254,8 @@ void CAnimatedInstanceModel::Update(float _fElapsedTime)
 
 void CAnimatedInstanceModel::InitD3D(CRenderManager *_pRM)
 {
-  if(!LoadVertexBuffer(_pRM))
+  //if(!LoadVertexBuffer(_pRM))
+  if(!m_pAnimatedCoreModel->LoadVertexBuffer(m_pCalModel))
   {
     LOGGER->AddNewLog(ELL_WARNING,"CAnimatedInstanceModel:: LoadVertexBuffer retorna false.");
   }

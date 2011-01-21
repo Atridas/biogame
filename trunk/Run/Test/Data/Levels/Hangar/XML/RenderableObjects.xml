@@ -95,4 +95,5 @@
 	<RenderableObject name="Caixes50" class="StaticMesh" resource="Caixes50" position="6.49051 0.0 6.40033" yaw="-15.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Caixes51" class="StaticMesh" resource="Caixes51" position="6.49051 0.0 6.40033" yaw="-15.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Bidó08" class="StaticMesh" resource="Bidó08" position="14.8958 0.0 10.8947" yaw="0.0" pitch="0.0" roll="0.0"/>
+  <RenderableObject name="bot" class="AnimatedModel" resource="bot" position="-2.0 0.0 2.7" yaw="0.0" pitch="0.0" roll="-90"/>
 </RenderableObjects>
