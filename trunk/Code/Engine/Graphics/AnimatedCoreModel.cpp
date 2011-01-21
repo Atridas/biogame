@@ -1,6 +1,7 @@
 #include "AnimatedCoreModel.h"
 #include "VertexsStructs.h"
 #include "IndexedVertexs.h"
+#include "VertexCalculations.h"
 
 #include <cal3d/cal3d.h>
 #include <XML/XMLTreeNode.h>
@@ -8,9 +9,9 @@
 
 void CAnimatedCoreModel::Release()
 {
-  CHECKED_DELETE(m_pCalCoreModel);
-  CHECKED_DELETE(m_pCalHardwareModel);
   CHECKED_DELETE(m_pRenderableVertexs);
+  CHECKED_DELETE(m_pCalHardwareModel);
+  CHECKED_DELETE(m_pCalCoreModel);
   m_szMeshFilename      = "";
   m_szSkeletonFilename  = "";
   m_vTextureFilenameList.clear();
@@ -126,7 +127,9 @@ bool CAnimatedCoreModel::Load(const std::string &_szPath)
       }
     }
 
-    SetOk(true);
+    if(LoadVertexBuffer())
+      SetOk(true);
+
   } else {
     LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load No s'ha trobat l'arxiu");
   }
@@ -176,7 +179,7 @@ bool CAnimatedCoreModel::LoadAnimation(const string& _szName, const std::string&
 }
 
 //TODO: MOLT DEBUG
-bool CAnimatedCoreModel::LoadVertexBuffer(CalModel *_pCM)
+bool CAnimatedCoreModel::LoadVertexBuffer()
 {
   /*
   LPDIRECT3DDEVICE9 l_pDevice = _pRM->GetDevice();
@@ -194,60 +197,63 @@ bool CAnimatedCoreModel::LoadVertexBuffer(CalModel *_pCM)
     isOk = false;
   }
   */
-  LOGGER->AddNewLog(ELL_INFORMATION,"CAnimatedCoreModel::LoadVertexBuffer  Loading.");
 
-  if(IsOk())
+  bool l_bIsOk = false;
+
+  LOGGER->AddNewLog(ELL_INFORMATION,"CAnimatedCoreModel::LoadVertexBuffer  Loading \"%s\".", GetName().c_str());
+
+  int l_iMeshCount = m_pCalCoreModel->getCoreMeshCount();
+  for(int l_iMeshId = 0; l_iMeshId < l_iMeshCount; l_iMeshId++)
   {
-    int l_iMeshCount = m_pCalCoreModel->getCoreMeshCount();
-    for(int l_iMeshId = 0; l_iMeshId < l_iMeshCount; l_iMeshId++)
+    LOGGER->AddNewLog(ELL_INFORMATION,"CAnimatedCoreModel::LoadVertexBuffer  Comptant vèrtexs i índexs de la mesh %d.", l_iMeshId);
+    CalCoreMesh* l_pCoreMesh = m_pCalCoreModel->getCoreMesh(l_iMeshId);
+
+    int l_iSubmeshCount = l_pCoreMesh->getCoreSubmeshCount();
+    for(int l_iSubMeshId = 0; l_iSubMeshId < l_iSubmeshCount; l_iSubMeshId++)
     {
-      CalCoreMesh* l_pCoreMesh = m_pCalCoreModel->getCoreMesh(l_iMeshId);
-
-      int l_iSubmeshCount = l_pCoreMesh->getCoreSubmeshCount();
-      for(int l_iSubMeshId = 0; l_iSubMeshId < l_iSubmeshCount; l_iSubMeshId++)
-      {
-        m_iNumVtxs += l_pCoreMesh->getCoreSubmesh(l_iSubMeshId)->getVertexCount();
-        m_iNumFaces += l_pCoreMesh->getCoreSubmesh(l_iSubMeshId)->getFaceCount();
-      }
+      m_iNumVtxs += l_pCoreMesh->getCoreSubmesh(l_iSubMeshId)->getVertexCount();
+      m_iNumFaces += l_pCoreMesh->getCoreSubmesh(l_iSubMeshId)->getFaceCount();
     }
+  }
 
-    //TCAL3D_HW_VERTEX* l_pVertex;
-    m_pCalHardwareModel = new CalHardwareModel(m_pCalCoreModel);
+  //TCAL3D_HW_VERTEX* l_pVertex;
+  if(m_pCalHardwareModel)
+    CHECKED_DELETE(m_pCalHardwareModel);
 
-    TCAL3D_HW_VERTEX* l_pVtxs = new TCAL3D_HW_VERTEX[m_iNumVtxs*2];
-    unsigned short* l_pIdxs = new unsigned short[m_iNumFaces*3];
+  m_pCalHardwareModel = new CalHardwareModel(m_pCalCoreModel);
 
-    //donde se encuentra el vertex buffer
-    m_pCalHardwareModel->setVertexBuffer((char*) l_pVtxs, sizeof(TCAL3D_HW_VERTEX));
-    //donde se encuentra el weight buffer
-    m_pCalHardwareModel->setWeightBuffer(((char*)l_pVtxs) + 12, sizeof(TCAL3D_HW_VERTEX));
-    //donde se encuentra el índice de las matrices
-    m_pCalHardwareModel->setMatrixIndexBuffer(((char*)l_pVtxs) + 28, sizeof(TCAL3D_HW_VERTEX));
-    //donde se encuentra la estructura de normales
-    m_pCalHardwareModel->setNormalBuffer(((char*)l_pVtxs) + 44, sizeof(TCAL3D_HW_VERTEX));
-    //numero de texturas del vértice
-    m_pCalHardwareModel->setTextureCoordNum(1);
-    //donde se encuentran las coordenadas de textura
-    m_pCalHardwareModel->setTextureCoordBuffer(0,((char*)l_pVtxs) + 56,sizeof(TCAL3D_HW_VERTEX));
-    //donde copiar los índices
-    
-    m_pCalHardwareModel->setIndexBuffer((CalIndex *)&l_pIdxs[0]);
-    m_pCalHardwareModel->load( 0, 0, MAXBONES);
+  TCAL3D_HW_VERTEX* l_pVtxs = new TCAL3D_HW_VERTEX[m_iNumVtxs*2];
+  unsigned short* l_pIdxs = new unsigned short[m_iNumFaces*3];
 
-    m_iNumVtxs=m_pCalHardwareModel->getTotalVertexCount();
+  //donde se encuentra el vertex buffer
+  m_pCalHardwareModel->setVertexBuffer((char*) l_pVtxs, sizeof(TCAL3D_HW_VERTEX));
+  //donde se encuentra el weight buffer
+  m_pCalHardwareModel->setWeightBuffer(((char*)l_pVtxs) + 12, sizeof(TCAL3D_HW_VERTEX));
+  //donde se encuentra el índice de las matrices
+  m_pCalHardwareModel->setMatrixIndexBuffer(((char*)l_pVtxs) + 28, sizeof(TCAL3D_HW_VERTEX));
+  //donde se encuentra la estructura de normales
+  m_pCalHardwareModel->setNormalBuffer(((char*)l_pVtxs) + 44, sizeof(TCAL3D_HW_VERTEX));
+  //numero de texturas del vértice
+  m_pCalHardwareModel->setTextureCoordNum(1);
+  //donde se encuentran las coordenadas de textura
+  m_pCalHardwareModel->setTextureCoordBuffer(0,((char*)l_pVtxs) + 56,sizeof(TCAL3D_HW_VERTEX));
+  //donde copiar los índices    
+  m_pCalHardwareModel->setIndexBuffer((CalIndex *)&l_pIdxs[0]);
+  m_pCalHardwareModel->load( 0, 0, MAXBONES);
+
+  m_iNumVtxs=m_pCalHardwareModel->getTotalVertexCount();
   
-    //CalcTangentsAndBinormals(l_pVtxs, l_pIdxs, m_pNumVtxs, m_pNumFaces*3, sizeof(CAL3D_HW_VERTEX),0, 44, 60, 76, 92);
-    if(m_pRenderableVertexs)
-      CHECKED_DELETE(m_pRenderableVertexs);
+  CalcTangentsAndBinormals(l_pVtxs, l_pIdxs, m_iNumVtxs, m_iNumFaces*3, sizeof(TCAL3D_HW_VERTEX),0, 44, 60, 76, 92);
+  if(m_pRenderableVertexs)
+    CHECKED_DELETE(m_pRenderableVertexs);
 
-    m_pRenderableVertexs = new CIndexedVertexs<TCAL3D_HW_VERTEX>(RENDER_MANAGER, l_pVtxs, l_pIdxs, m_iNumVtxs, m_iNumFaces*3);
+  m_pRenderableVertexs = new CIndexedVertexs<TCAL3D_HW_VERTEX>(RENDER_MANAGER, l_pVtxs, l_pIdxs, m_iNumVtxs, m_iNumFaces*3);
 
-    delete []l_pVtxs;
-    delete []l_pIdxs;
+  delete []l_pVtxs;
+  delete []l_pIdxs;
 
-    LOGGER->AddNewLog(ELL_INFORMATION,"CAnimatedCoreModel::LoadVertexBuffer  Loaded.");
-  }else
-    LOGGER->AddNewLog(ELL_ERROR,"CAnimatedCoreModel::LoadVertexBuffer  Class is not Ok.");
+  if(m_pCalHardwareModel && m_pRenderableVertexs)
+    l_bIsOk = true;
 
-  return IsOk();
+  return l_bIsOk;
 }

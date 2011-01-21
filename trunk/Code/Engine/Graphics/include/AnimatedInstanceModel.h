@@ -108,7 +108,7 @@ private:
    * Aquest mètode carrega el VertexBuffer i l'IndexBuffer a GRAM per al seu us amb D3D.
    * @param _pRM RenderManager.
   **/
-  //bool LoadVertexBuffer(CRenderManager *_pRM);
+  bool LoadVertexBuffer(CRenderManager *_pRM);
   /**
    * Mètode per carregar textures.
    * Aquest mètode carrega les textures a GRAM per al seu us amb D3D.

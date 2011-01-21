@@ -80,7 +80,7 @@ public:
    * Aquest mètode carrega el VertexBuffer i l'IndexBuffer a GRAM per al seu us amb D3D.
    * @param _pRM RenderManager.
   **/
-  bool LoadVertexBuffer                (CalModel *_pCM);
+  bool LoadVertexBuffer                ();
   /**
    * Mètode de recàrrega desde fitxer.
    * Aquest mètode recarrega el model cal3d anteriorment carregat. Si la càrrega s'ha efectuat correctament quedarà en ok.

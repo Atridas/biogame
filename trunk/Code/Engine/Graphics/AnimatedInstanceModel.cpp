@@ -23,23 +23,21 @@ void CAnimatedInstanceModel::Initialize(CAnimatedCoreModel *_pAnimatedCoreModel)
     CalCoreModel* l_pCoreModel = m_pAnimatedCoreModel->GetCoreModel();
     m_pCalModel = new CalModel(l_pCoreModel);
 
-    m_iNumVtxs = 0;
-    m_iNumFaces = 0;
+    //m_iNumVtxs = 0;
+    //m_iNumFaces = 0;
 
     int l_iMeshCount = l_pCoreModel->getCoreMeshCount();
     for(int l_iMeshId = 0; l_iMeshId < l_iMeshCount; l_iMeshId++)
     {
       LOGGER->AddNewLog(ELL_INFORMATION,"CAnimatedInstanceModel::Initialize Afegint mesh %d.", l_iMeshId);
-
       m_pCalModel->attachMesh(l_iMeshId);
-      CalCoreMesh* l_pCoreMesh = l_pCoreModel->getCoreMesh(l_iMeshId);
-
-      int l_iSubmeshCount = l_pCoreMesh->getCoreSubmeshCount();
-      for(int l_iSubMeshId = 0; l_iSubMeshId < l_iSubmeshCount; l_iSubMeshId++)
-      {
-        m_iNumVtxs += l_pCoreMesh->getCoreSubmesh(l_iSubMeshId)->getVertexCount();
-        m_iNumFaces += l_pCoreMesh->getCoreSubmesh(l_iSubMeshId)->getFaceCount();
-      }
+      //CalCoreMesh* l_pCoreMesh = l_pCoreModel->getCoreMesh(l_iMeshId);
+      //int l_iSubmeshCount = l_pCoreMesh->getCoreSubmeshCount();
+      //for(int l_iSubMeshId = 0; l_iSubMeshId < l_iSubmeshCount; l_iSubMeshId++)
+      //{
+      //  m_iNumVtxs += l_pCoreMesh->getCoreSubmesh(l_iSubMeshId)->getVertexCount();
+      //  m_iNumFaces += l_pCoreMesh->getCoreSubmesh(l_iSubMeshId)->getFaceCount();
+      //}
     }
 
     InitD3D(RENDER_MANAGER);
@@ -54,7 +52,7 @@ void CAnimatedInstanceModel::Initialize(CAnimatedCoreModel *_pAnimatedCoreModel)
     LOGGER->AddNewLog(ELL_WARNING,"CAnimatedInstanceModel::Initialize L'AnimatedCoreModel proporcionat es NULL.");
 }
 
-/*bool CAnimatedInstanceModel::LoadVertexBuffer(CRenderManager *_pRM)
+bool CAnimatedInstanceModel::LoadVertexBuffer(CRenderManager *_pRM)
 {
   bool isOk = true;
 
@@ -74,7 +72,7 @@ void CAnimatedInstanceModel::Initialize(CAnimatedCoreModel *_pAnimatedCoreModel)
   }
 
   return isOk;
-}*/
+}
 
 void CAnimatedInstanceModel::LoadTextures(CRenderManager *_pRM)
 {
@@ -255,10 +253,9 @@ void CAnimatedInstanceModel::Update(float _fElapsedTime)
 void CAnimatedInstanceModel::InitD3D(CRenderManager *_pRM)
 {
   //if(!LoadVertexBuffer(_pRM))
-  if(!m_pAnimatedCoreModel->LoadVertexBuffer(m_pCalModel))
-  {
-    LOGGER->AddNewLog(ELL_WARNING,"CAnimatedInstanceModel:: LoadVertexBuffer retorna false.");
-  }
+  //{
+  //  LOGGER->AddNewLog(ELL_WARNING,"CAnimatedInstanceModel:: LoadVertexBuffer retorna false.");
+  //}
   LoadTextures(_pRM);
 }
 
