@@ -67,6 +67,12 @@ public:
   **/
   virtual bool Render(CRenderManager *_pRM, CEffectTechnique *_pEffectTechnique) const;
 
+  virtual bool Render(CRenderManager *_pRM, CEffectTechnique *_pEffectTechnique, int _iBaseVertexIndex,
+                                                                                 int _iMinIndex,
+                                                                                 int _iNumVertices,
+                                                                                 int _iStartIndex,
+                                                                                 int _iNumFaces) const;
+
   virtual bool ActivateTextures(const vector<CTexture*>& _TextureArray) const { return T::ActivateTextures(_TextureArray); };
 
   /**
@@ -118,50 +124,72 @@ CIndexedVertexs<T>::CIndexedVertexs(CRenderManager *_pRM, char *_pVertexAddress,
 template<class T>
 bool CIndexedVertexs<T>::Render(CRenderManager *_pRM) const
 {
-  LPDIRECT3DDEVICE9 l_pDevice = _pRM->GetDevice();
-  l_pDevice->SetIndices(m_pIB);
-  l_pDevice->SetStreamSource(0,m_pVB,0,GetVertexSize());
-  l_pDevice->SetFVF(T::GetFVF());
-  l_pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, // PrimitiveType
-                                  0,                  // BaseVertexIndex
-                                  0,                  // MinIndex
-                                  GetVertexsCount(),  // NumVertices
-                                  0,                  // StartIndex
-                                  GetFacesCount() );
-
-  return true;
+  return Render(_pRM,
+            NULL,
+            0,
+            0,
+            GetVertexsCount(),
+            0,
+            GetFacesCount());
 };
 
 template<class T>
 bool CIndexedVertexs<T>::Render(CRenderManager *_pRM, CEffectTechnique *_pEffectTechnique) const
 {
-  LPDIRECT3DDEVICE9 l_pDevice = _pRM->GetDevice();
-
-  uint32 l_iNumPasses;
-  LPD3DXEFFECT l_pD3DEffect=_pEffectTechnique->GetEffect()->GetD3DEffect();
-  l_pD3DEffect->SetTechnique(_pEffectTechnique->GetD3DTechnique());
-  if(SUCCEEDED(l_pD3DEffect->Begin(&l_iNumPasses,0)))
-  {
-    l_pDevice->SetVertexDeclaration(T::GetVertexDeclaration());
-    l_pDevice->SetIndices(m_pIB);
-    l_pDevice->SetStreamSource(0,m_pVB,0,GetVertexSize());
-    for(uint32 i = 0; i < l_iNumPasses; i++)
-    {
-      if(SUCCEEDED(l_pD3DEffect->BeginPass(i)))
-      {
-        l_pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, // PrimitiveType
-                                        0,                  // BaseVertexIndex
-                                        0,                  // MinIndex
-                                        GetVertexsCount(),  // NumVertices
-                                        0,                  // StartIndex
-                                        GetFacesCount() );
-        l_pD3DEffect->EndPass();
-      }
-    }
-    return SUCCEEDED( l_pD3DEffect->End() );
-  } else {
-    return false;
-  }
+  return Render(_pRM,
+            _pEffectTechnique,
+            0,
+            0,
+            GetVertexsCount(),
+            0,
+            GetFacesCount());
 };
 
+template<class T>
+bool CIndexedVertexs<T>::Render(CRenderManager *_pRM,
+            CEffectTechnique *_pEffectTechnique,
+            int _iBaseVertexIndex,
+            int _iMinIndex,
+            int _iNumVertices,
+            int _iStartIndex,
+            int _iNumFaces) const
+{
+  LPDIRECT3DDEVICE9 l_pDevice = _pRM->GetDevice();
+
+  uint32 l_iNumPasses = 1;
+  bool l_bSucceeded = true;
+  LPD3DXEFFECT l_pD3DEffect = 0;
+
+  if(_pEffectTechnique)
+  {
+    l_pD3DEffect=_pEffectTechnique->GetEffect()->GetD3DEffect();
+    l_pD3DEffect->SetTechnique(_pEffectTechnique->GetD3DTechnique());
+    l_bSucceeded = SUCCEEDED(l_pD3DEffect->Begin(&l_iNumPasses,0));
+  }
+  
+  l_pDevice->SetVertexDeclaration(T::GetVertexDeclaration());
+  l_pDevice->SetIndices(m_pIB);
+  l_pDevice->SetStreamSource(0,m_pVB,0,GetVertexSize());
+
+  for(uint32 i = 0; i < l_iNumPasses; i++)
+  {
+    if(_pEffectTechnique)
+      l_bSucceeded = SUCCEEDED(l_pD3DEffect->BeginPass(i));
+    
+    l_pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, // PrimitiveType
+                                    _iBaseVertexIndex,  // BaseVertexIndex
+                                    _iMinIndex,         // MinIndex
+                                    _iNumVertices,      // NumVertices
+                                    _iStartIndex,       // StartIndex
+                                    _iNumFaces );
+    if(_pEffectTechnique)
+     l_pD3DEffect->EndPass();
+  }
+  
+  if(_pEffectTechnique)
+     l_bSucceeded = SUCCEEDED(l_pD3DEffect->End());
+
+  return l_bSucceeded;
+  
+};
 #endif
