@@ -162,7 +162,7 @@ void CAnimatedInstanceModel::Render(CRenderManager *_pRM)
   if(l_pEffectTechnique==NULL)
     l_pEffectTechnique = m_pEffectTechnique;
 
-  if(l_pEffectTechnique == NULL)
+  if(l_pEffectTechnique == NULL || !l_pEffectTechnique->IsOk())
     return;
 
   //l_pEffectManager->SetWorldMatrix(GetTransform());
