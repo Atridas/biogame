@@ -1,3 +1,5 @@
+#ifndef __SAMPLERS_FX__
+#define __SAMPLERS_FX__
 
 sampler DiffuseTextureSampler : register(s0) = sampler_state
 {
@@ -52,3 +54,5 @@ sampler ShadowTextureSampler : register(s5) = sampler_state
   AddressU  = WRAP;
   AddressV  = WRAP;
 };
+
+#endif
