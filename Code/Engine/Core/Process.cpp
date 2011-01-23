@@ -57,6 +57,10 @@ bool CProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _p
   {
     RENDER_MANAGER->GetEffectManager()->Reload();
     return true;
+  } else if(strcmp(_pcAction, "ReloadMeshes") == 0)
+  {
+    CORE->GetRenderableObjectsManager()->Reload();
+    return true;
   }
   return ExecuteProcessAction(_fDeltaSeconds,_fDelta,_pcAction);
 }
