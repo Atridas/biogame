@@ -293,12 +293,6 @@ void CTestProcess::Render()
 
 bool CTestProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
 {
-  if(strcmp(_pcAction, "Reload Test Cube") == 0 )
-  {
-    g_pMesh->ReLoad();
-    return true;
-  }
-
   if(strcmp(_pcAction, "Run") == 0)
   {
     m_fVelocity = 10;
