@@ -217,7 +217,7 @@ bool CAnimatedCoreModel::LoadVertexBuffer()
   }
 
   //TCAL3D_HW_VERTEX* l_pVertex;
-  if(m_pCalHardwareModel)
+  //if(m_pCalHardwareModel)
     CHECKED_DELETE(m_pCalHardwareModel);
 
   m_pCalHardwareModel = new CalHardwareModel(m_pCalCoreModel);
@@ -243,7 +243,7 @@ bool CAnimatedCoreModel::LoadVertexBuffer()
 
   m_iNumVtxs=m_pCalHardwareModel->getTotalVertexCount();
   
-  CalcTangentsAndBinormals(l_pVtxs, l_pIdxs, m_iNumVtxs, m_iNumFaces*3, sizeof(TCAL3D_HW_VERTEX),0, 44, 60, 76, 92);
+  //CalcTangentsAndBinormals(l_pVtxs, l_pIdxs, m_iNumVtxs, m_iNumFaces*3, sizeof(TCAL3D_HW_VERTEX),0, 44, 60, 76, 92);
   if(m_pRenderableVertexs)
     CHECKED_DELETE(m_pRenderableVertexs);
 

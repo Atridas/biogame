@@ -30,7 +30,10 @@
     <!-- Tangent-Binormal blabla Textured 2 -->
     <!-- default_technique vertex_type="47" technique="NormalTexturedTechnique"/ -->
     <default_technique vertex_type="47" technique="NoTechnique"/>
-    <default_technique vertex_type="787" technique="Cal3DTechnique"/>
+
+
+    <!-- default_technique vertex_type="787" technique="Cal3DTechnique"/ -->
+    <default_technique vertex_type="787" technique="WhiteTechnique"/>
   </default_techniques>
   <techniques>
     <!-- technique name=.../-->
