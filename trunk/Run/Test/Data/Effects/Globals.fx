@@ -1,3 +1,6 @@
+#ifndef __GLOBALS_FX__
+#define __GLOBALS_FX__
+
 
 #define MAXBONES 29
 #define MAXLIGHTS 4
@@ -50,3 +53,5 @@ float   g_LightsEndRangeSQ[MAXLIGHTS]  : LightsEndRangeSQ;
 float3 g_CameraPosition : CameraPosition;
 float g_Time : Time;
 //D3DXHANDLE m_pBonesParameter;
+
+#endif

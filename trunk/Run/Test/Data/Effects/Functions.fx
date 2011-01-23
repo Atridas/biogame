@@ -1,4 +1,8 @@
+#ifndef __FUNCTIONS_FX__
+#define __FUNCTIONS_FX__
 
+#include "Globals.fx"
+#include "Samplers.fx"
 
 //Lights
 
@@ -243,3 +247,5 @@ void CalcAnimatedNormalTangent(float3 Normal,
 	OutNormal = normalize(OutNormal);
 	OutTangent = normalize(OutTangent);
 }
+
+#endif

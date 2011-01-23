@@ -2,8 +2,8 @@
 <shaders>
   <effects>
     <!-- effect name="Test Effects" file="Data/Effects/Efectillo2.fx"/ -->
-    <effect name="Default Effects" file="Data/Effects/DefaultEffects.fx"/>
-    <effect name="Cal3D Effects" file="Data/Effects/Cal3dEffect.fx"/>
+    <effect name="Default Effects" file="Data/Effects/DefaultTechniques.fx"/>
+    <effect name="Cal3D Effects" file="Data/Effects/Cal3dTechniques.fx"/>
     <!-- effect name=.../-->
     <!-- effect name=.../-->
   </effects>
@@ -33,7 +33,7 @@
 
 
     <!-- default_technique vertex_type="787" technique="Cal3DTechnique"/ -->
-    <default_technique vertex_type="787" technique="WhiteTechnique"/>
+    <default_technique vertex_type="787" technique="Cal3DTechnique"/>
   </default_techniques>
   <techniques>
     <!-- technique name=.../-->
