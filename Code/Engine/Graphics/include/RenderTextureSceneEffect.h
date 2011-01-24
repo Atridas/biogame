@@ -13,11 +13,13 @@ class CTexture;
 //---------------------------------
 
 class CRenderTextureSceneEffect :
-  public  CBaseControl, CSceneEffect
+  public CSceneEffect
 {
 public:
-  CRenderTextureSceneEffect(MKeyValue& _Atts);
+  CRenderTextureSceneEffect(): m_pTexture(0), m_pSurface(0) {};
   ~CRenderTextureSceneEffect() {Done();};
+
+  virtual bool Init(const CXMLTreeNode& _params);
 
   void CaptureFrameBuffers(CRenderManager* _pRM);
 

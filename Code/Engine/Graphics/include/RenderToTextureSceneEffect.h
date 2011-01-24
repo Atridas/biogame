@@ -16,12 +16,13 @@ class CRenderToTextureSceneEffect :
   public CRenderTextureSceneEffect
 {
 public:
-  CRenderToTextureSceneEffect(MKeyValue& _Atts):
-                CRenderTextureSceneEffect(_Atts),
+  CRenderToTextureSceneEffect():
                 m_pAnimatedModelTechnique(0),
                 m_pStaticMeshTechnique(0)
                 {};
   ~CRenderToTextureSceneEffect() {Done();};
+
+  virtual bool Init(const CXMLTreeNode& _params);
 
   void PreRender(CRenderManager* _pRM, CProcess* _pProc);
 

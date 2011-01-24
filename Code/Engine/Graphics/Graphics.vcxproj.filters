@@ -121,6 +121,9 @@
     <Filter Include="AnimatedModel\AnimatedModelManager">
       <UniqueIdentifier>{c52e837d-037d-4ea7-a9a7-be14ebfb2f5f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SceneEffects\ShadowMapRenderToTexture">
+      <UniqueIdentifier>{8d361bcc-c2a9-4450-ae07-9597e726c960}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -224,6 +227,9 @@
     </ClCompile>
     <ClCompile Include="EffectMaterial.cpp">
       <Filter>Effects\EffectMaterial</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowMapRenderToTexture.cpp">
+      <Filter>SceneEffects\ShadowMapRenderToTexture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -331,6 +337,9 @@
     </ClInclude>
     <ClInclude Include="include\EffectMaterial.h">
       <Filter>Effects\EffectMaterial</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ShadowMapRenderToTexture.h">
+      <Filter>SceneEffects\ShadowMapRenderToTexture</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
