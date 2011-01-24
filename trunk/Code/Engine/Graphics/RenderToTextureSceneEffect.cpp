@@ -4,6 +4,15 @@
 #include "Camera.h"
 #include "EffectManager.h"
 
+
+bool CRenderToTextureSceneEffect::Init(const CXMLTreeNode& _params)
+{
+  CRenderTextureSceneEffect::Init(_params); //comprovar true
+  //TODO
+
+  return false;
+}
+
 //TODO: UNCOMMENT
 void CRenderToTextureSceneEffect::PreRender(CRenderManager* _pRM, CProcess* _pProc)
 {

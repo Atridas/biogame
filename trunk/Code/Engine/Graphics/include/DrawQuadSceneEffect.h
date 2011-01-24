@@ -10,13 +10,13 @@ class MKeyValue;
 class CEffectTechnique;
 //--------------------------------------------------------
 
-class CDrawQuadSceneEffect : public CSceneEffect, public CBaseControl
+class CDrawQuadSceneEffect : public CSceneEffect
 {
 public:
   CDrawQuadSceneEffect(): m_pTechnique(0) {};
   ~CDrawQuadSceneEffect() {Done();};
 
-  bool Init(const MKeyValue& _atts);
+  virtual bool Init(const CXMLTreeNode& _params);
 
 
   void PostRender(CRenderManager *RM);
@@ -25,4 +25,5 @@ protected:
   CEffectTechnique *m_pTechnique;
   CColor m_Color;
 };
+
 #endif

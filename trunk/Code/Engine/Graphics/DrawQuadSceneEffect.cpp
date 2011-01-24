@@ -1,8 +1,9 @@
 #include "DrawQuadSceneEffect.h"
 
 
-bool CDrawQuadSceneEffect::Init(const MKeyValue& _atts)
+bool CDrawQuadSceneEffect::Init(const CXMLTreeNode& _params)
 {
+  //TODO
   return false;
 }
 

@@ -40,15 +40,15 @@ bool CSceneEffectManager::Load()
   {
 
     //--------Pre_Render-------------
-    CXMLTreeNode l_treePreRender = l_treeSceneEffects["pre_render"];
-    int l_iNumChildren = l_treePreRender.GetNumChildren();
+    int l_iNumChildren = l_treeSceneEffects.GetNumChildren();
 
     LOGGER->AddNewLog(ELL_INFORMATION,"CSceneEffectManager::Load() Loading %d pre_render.", l_iNumChildren);
 
     for(int i = 0; i < l_iNumChildren; i++)
     {
-      CXMLTreeNode l_treePreRender = l_treePreRender(i);
-      if(l_treePreRender.IsComment())
+
+      CXMLTreeNode l_treeSceneEffect = l_treeSceneEffects(i);
+      if(l_treeSceneEffect.IsComment())
         continue;
       
       string l_szTypePreRender = l_treePreRender.GetPszISOProperty("type","");

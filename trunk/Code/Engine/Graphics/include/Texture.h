@@ -13,32 +13,6 @@
 class CTexture:
   public CBaseControl, CNamed
 {
-protected:
-  /**
-   * Textura en format de DirectX9.
-  **/
-  LPDIRECT3DTEXTURE9 m_pTexture;
-  /**
-   * Path relatiu a la textura.
-  **/
-  string m_szFileName;
-
-  uint32 m_uiWidth;
-
-  uint32 m_uiHeight;
-
-  LPDIRECT3DSURFACE9 m_pDepthStencilRenderTargetTexture;
-
-  /**
-   * Mètode de càrrega.
-   * Aquest mètode carregarà la textura especificada a m_pTexture a la VRAM.
-   * @return True si s'ha carregat correctament, false sino.
-  **/
-  virtual bool LoadFile();
-  /**
-   * Mètode d'alliberament de recursos.
-  **/
-  virtual void Release();
 public:
   /**
    * Constructor per defecte.
@@ -113,7 +87,38 @@ public:
   void Deactivate(size_t Stage);
   bool SetAsRenderTarget();
   void UnsetAsRenderTarget();
-  CTexture::TFormatType GetFormatTypeFromString(const string &FormatType);
+  static CTexture::TFormatType GetFormatTypeFromString(const string &FormatType);
+
+  LPDIRECT3DSURFACE9 GetSurface() const {return m_pDepthStencilRenderTargetTexture;};
+  
+protected:
+  /**
+   * Textura en format de DirectX9.
+  **/
+  LPDIRECT3DTEXTURE9 m_pTexture;
+  /**
+   * Path relatiu a la textura.
+  **/
+  string m_szFileName;
+
+  uint32 m_uiWidth;
+
+  uint32 m_uiHeight;
+
+  LPDIRECT3DSURFACE9 m_pDepthStencilRenderTargetTexture;
+
+  /**
+   * Mètode de càrrega.
+   * Aquest mètode carregarà la textura especificada a m_pTexture a la VRAM.
+   * @return True si s'ha carregat correctament, false sino.
+  **/
+  virtual bool LoadFile();
+  /**
+   * Mètode d'alliberament de recursos.
+  **/
+  virtual void Release();
 };
+
+
 
 #endif

@@ -11,16 +11,19 @@
 class CRenderManager;
 class CProcess;
 class CTexture;
+class CXMLTreeNode;
 //---------------------------------
 
-class CSceneEffect : public /*CActive,*/ CNamed
+class CSceneEffect : public /*CActive,*/ CNamed, public CBaseControl
 {
 public:
 
   CSceneEffect(/*MKeyValue &atts*/) : CNamed("") {};
-  virtual ~CSceneEffect() {};
+  virtual ~CSceneEffect() {Done();};
   void ActivateTextures();
   void AddStageTexture(int _iStageId, CTexture* _pTexture);
+
+  virtual bool Init(const CXMLTreeNode& _params) = 0;
 
   virtual void PreRender(CRenderManager* _pRM, CProcess* _pProc);
   virtual void PostRender(CRenderManager* _pRM);
