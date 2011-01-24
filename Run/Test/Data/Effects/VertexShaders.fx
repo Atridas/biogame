@@ -52,10 +52,10 @@ TNORMAL_TEXTURED2_VERTEX_PS NormalTextured2VS(TNORMAL_TEXTURED2_VERTEX_VS _in) {
 TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS TangentBinormalNormalTexturedVS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_VS _in) {
 	TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS out_ = (TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS)0;
 	
-	out_.WorldNormal   = mul(_in.Normal,(float3x3)g_WorldMatrix);
-	out_.WorldPosition = mul(_in.Position,(float3x3)g_WorldMatrix);
-	out_.WorldTangent  = mul(_in.Tangent,(float3x3)g_WorldMatrix);
-	out_.WorldBinormal = mul(_in.Binormal,(float3x3)g_WorldMatrix);
+	out_.WorldNormal   = normalize(mul(_in.Normal,(float3x3)g_WorldMatrix));
+	out_.WorldPosition = mul(float4(_in.Position,1.0),g_WorldMatrix).xyz;
+	out_.WorldTangent  = normalize(mul(_in.Tangent,(float3x3)g_WorldMatrix));
+	out_.WorldBinormal = normalize(cross(out_.WorldNormal, out_.WorldTangent));
 	out_.UV  = _in.UV.xy;
 	out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
 	
