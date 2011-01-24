@@ -24,7 +24,7 @@ float3 ComputeLight(float3 _Normal,          //Normal of the pixel
   float3 l_AuxColor = _LightColor * _MaterialColor;
   _out = ndotl * l_AuxColor;
   
-  if(ndoth > 0.0)
+  if(ndoth > 0.0)	
   {
     _out += pow(ndoth, _MaterialSpecularPow) * l_AuxColor * _MaterialSpotlightFactor;
   }
@@ -116,103 +116,23 @@ float3 CalcNormalmap(float3 _Tangent, float3 _Binormal, float3 _Normal, float2 _
   return normalize(l_Bump.x*l_Tangent + l_Bump.y*l_Binormal + l_Bump.z*l_Normal);
 }
 
-struct NORMAL_UV {
-  float3 Normal;
-  float2 UV;
-};
-
-float2 CalcParallaxCoords(float3 _WorldPosition, float2 _UV)
+float3 CalcParallaxMap(float3 _Position, float3 WorldNormal, float3 WorldTangent, float3 WorldBinormal, float2 UV, out float2 OutUV)
 {
-  float3 l_EyeDirection = normalize(g_CameraPosition - _WorldPosition);
-  float fBumpScale = 0.05f;
-  float2 vCoord = _UV;	
-  float fDepth = tex2D(NormalTextureSampler, vCoord).w;	
-  float2 vHalfOffset = l_EyeDirection.xy * (fDepth) * fBumpScale;	
-  fDepth = (fDepth + tex2D(NormalTextureSampler, vCoord + vHalfOffset).w) * 0.5;	
-  vHalfOffset = l_EyeDirection.xy * (fDepth) * fBumpScale;	
-  fDepth = (fDepth + tex2D(NormalTextureSampler, vCoord + vHalfOffset).w) * 0.5;
-  vHalfOffset = l_EyeDirection.xy * (fDepth) * fBumpScale;		
-  return vCoord + vHalfOffset;
+	float2 l_UV = UV;
+	float3 Vn = normalize(g_CameraPosition - _Position);
+	// parallax code
+	float3x3 tbnXf = float3x3(WorldTangent,WorldBinormal,WorldNormal);
+	float4 l_NormalMapColor = tex2D(NormalTextureSampler,l_UV);
+	float height = (1-l_NormalMapColor.w) * 2.0 * g_ParallaxHeight - g_ParallaxHeight;
+
+	l_UV += height * mul(tbnXf,Vn).xy;
+	// normal map
+	float3 tNorm = l_NormalMapColor.xyz - float3(0.5,0.5,0.5);
+	// transform tNorm to world space
+	tNorm = normalize(tNorm.x*WorldTangent - tNorm.y*WorldBinormal + tNorm.z*WorldNormal);
+	OutUV=l_UV;
+	return tNorm;
 }
-
-NORMAL_UV CalcParallaxMap(float3 _Position, float3 _Normal, float3 _Tangent, float3 _Binormal, float2 _UV)
-{
-  NORMAL_UV out_ = (NORMAL_UV)0;
-
-  //calcul normal
-  float4 l_NormalMapColor = tex2D(NormalTextureSampler,_UV);
-
-  out_.Normal = l_NormalMapColor.xyz - float3(0.5,0.5,0.5);
-
-  // transform tNorm to world space
-  out_.Normal = normalize(out_.Normal.x*_Tangent -
-                          out_.Normal.y*_Binormal +
-                          out_.Normal.z*_Normal);
-
-  //calcul mapa
-  float3x3 tbnXf = float3x3(_Tangent,_Binormal,_Normal);
-  float3 Vn = normalize(_Position);
-
-  out_.UV = _UV;
-
-  float height = l_NormalMapColor.w * (g_BumpMaxHeight - g_BumpMinHeight) + g_BumpMinHeight;
-
-  out_.UV += g_ParallaxHeight * height *  mul(tbnXf,Vn).xy;
-
-  return out_;
-}
-/*
-
-//Versió 1
-NORMAL_UV CalcParallaxMap(float3 _Position, float3 _Normal, float3 _Tangent, float3 _Binormal, float2 _UV)
-{
-  NORMAL_UV out_ = (NORMAL_UV)0;
-  // view directions
-  float3 Vn = normalize(_Position); //TODO
-  out_.UV = _UV;
-  // parallax code
-  float3x3 tbnXf = float3x3(_Tangent,_Binormal,_Normal);
-  float4 l_NormalMapColor = tex2D(NormalTextureSampler,out_.UV);
-  float height = l_NormalMapColor.w * g_BumpDiff + g_BumpMinHeight;
-  //float height = reliefTex.w * g_Bump - g_Bump*0.5;
-  out_.UV += height * mul(tbnXf,Vn).xy;
-  // normal map
-  out_.Normal = l_NormalMapColor.xyz - float3(0.5,0.5,0.5);
-  // transform tNorm to world space
-  out_.Normal = normalize(out_.Normal.x*_Tangent -
-                          out_.Normal.y*_Binormal +
-                          out_.Normal.z*_Normal);
-  return out_;
-}
-
-//Versió 2
-NORMAL_UV CalcParallaxMap(float3 _Position, float3 _Normal, float3 _Tangent, float3 _Binormal, float2 _UV)
-{
-  NORMAL_UV out_ = (NORMAL_UV)0;
-
-  //calcul normal
-  float4 l_NormalMapColor = tex2D(NormalTextureSampler,_UV);
-
-  out_.Normal = l_NormalMapColor.xyz - float3(0.5,0.5,0.5);
-
-  // transform tNorm to world space
-  out_.Normal = normalize(out_.Normal.x*_Tangent -
-                          out_.Normal.y*_Binormal +
-                          out_.Normal.z*_Normal);
-
-  //calcul mapa
-  float3x3 tbnXf = float3x3(_Tangent,_Binormal,_Normal);
-  float3 Vn = normalize(_Position);
-
-  out_.UV = _UV;
-
-  float height = l_NormalMapColor.w * (g_BumpMaxHeight - g_BumpMinHeight) + g_BumpMinHeight;
-
-  out_.UV += g_ParallaxHeight * height *  mul(tbnXf,Vn).xy;
-
-  return out_;
-}
-*/
 
 // Cal3d functions
 
