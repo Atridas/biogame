@@ -238,8 +238,9 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			
 			local l_object = _AnimatedModels[i]
 			local l_resource = getUserProp l_object "Resource"
+			local l_animation = getUserProp l_object "cycle"
 			
-			l_params = #(#("name",l_object.name),#("class","AnimatedModel"),#("resource",l_resource))
+			l_params = #(#("name",l_object.name),#("class","AnimatedModel"),#("resource",l_resource),#("cycle",l_animation)))
 		
 			local l_aux = "" as stringStream
 			

@@ -10,14 +10,20 @@ CRenderableAnimatedInstanceModel::CRenderableAnimatedInstanceModel(const string&
   
 }
 
-bool CRenderableAnimatedInstanceModel::Init(const string& _szCoreName)
+bool CRenderableAnimatedInstanceModel::Init(const string& _szCoreName, const int _szDefaultAnimation)
 {
   if(_szCoreName != "") 
   {
     m_pAnimatedInstanceModel = ANIMATED_MANAGER->GetInstance(_szCoreName);
     if(m_pAnimatedInstanceModel != 0)
     {
-      SetOk(true);
+      if(_szDefaultAnimation != -1)
+      {
+        m_pAnimatedInstanceModel->BlendCycle(_szDefaultAnimation,0);
+      }
+      
+        SetOk(true);
+     
     }
   } else {
     SetOk(true);

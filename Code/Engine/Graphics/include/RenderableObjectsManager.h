@@ -21,7 +21,7 @@ public:
   void Render(CRenderManager *RM);
 
   CRenderableObject* AddMeshInstance(const string& _szCoreMeshName, const string& _szInstanceName);
-  CRenderableObject* AddAnimatedModel(const string& _szCoreModelName, const string& _szInstanceName);
+  CRenderableObject* AddAnimatedModel(const string& _szCoreModelName, const string& _szInstanceName,const int _szDefaultAnimation);
 
 
   void AddResource(const string& _szName, CRenderableObject* _pRenderableObject);
