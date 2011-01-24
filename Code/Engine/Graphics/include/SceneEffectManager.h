@@ -3,9 +3,10 @@
 #define __SCENE_EFFECT_MANAGER_H__
 
 #include "base.h"
+#include "SceneEffect.h"
 //Forward declarations-------------
 class CXMLTreeNode;
-class CSceneEffect;
+//class CSceneEffect;
 class CRenderManager;
 class CProcess;
 //---------------------------------
