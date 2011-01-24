@@ -110,13 +110,14 @@ struct CAL3D_HW_VERTEX_VS {
 	float2 TexCoord : TEXCOORD0;
 };
 
-struct CAL3D_HW_VERTEX_PS {
-	float4 HPosition : POSITION;
-	float2 UV : TEXCOORD0;
-	float3 WorldPosition : TEXCOORD2;
-	float3 WorldNormal : TEXCOORD3;
-	//float3 WorldTangent : TEXCOORD4;
-	//float3 WorldBinormal : TEXCOORD5;
-};
+//Fa falta?
+//struct CAL3D_HW_VERTEX_PS {
+//	float4 HPosition : POSITION;
+//	float2 UV : TEXCOORD0;
+//	float3 WorldPosition : TEXCOORD2;
+//	float3 WorldNormal : TEXCOORD3;
+//	//float3 WorldTangent : TEXCOORD4;
+//	//float3 WorldBinormal : TEXCOORD5;
+//};
 
 #endif
