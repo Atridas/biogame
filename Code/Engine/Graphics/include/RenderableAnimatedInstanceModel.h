@@ -12,7 +12,7 @@ class CRenderableAnimatedInstanceModel: public CRenderableObject
     CRenderableAnimatedInstanceModel(const string& _szName);
     virtual ~CRenderableAnimatedInstanceModel() {Done();};
 
-    bool          Init      (const string& _szCoreName,const int _szDefaultAnimation);
+    bool          Init      (const string& _szCoreName,const string& _szDefaultAnimation);
     CAnimatedInstanceModel* GetAnimatedInstanceModel(){return m_pAnimatedInstanceModel;}
 
     //Methods
