@@ -1,7 +1,11 @@
 #pragma once
-#include <base.h>
+#include "base.h"
 
+//Forward declarations---------------------
 class CCamera;
+class CSceneEffectManager;
+class CRenderManager;
+//-----------------------------------------
 
 /**
  * Intefície bàsica d'un procés.
@@ -17,7 +21,8 @@ public:
    * Constructor de la classe. Permet especificar el nom que rebrà el procés.
    * @param _szProcessName Nom que rebrà el procés.
   **/
-                        CProcess(const string& _szProcessName):m_pCamera(0),m_szProcessName(_szProcessName),m_bRenderInfo(false)
+  CProcess(const string& _szProcessName):
+      m_pCamera(0),m_pSceneEffectManager(0),m_szProcessName(_szProcessName),m_bRenderInfo(false)
                                                                           {};
   /**
    * Mètode d'update.
@@ -34,10 +39,28 @@ public:
   **/
 	void				          DebugInformation(float _fFPS);
   /**
-   * Mètode de render.
-   * Aquest mètode s'executa a cada iteració. Durant aquest es realitzarà el pintat de l'escena per pantalla.
+   * Mètode de pre renderitzat.
+   * Aquest mètode s'executa a cada iteració. Es realitzarà el prerender dels efectes d'escena.
+   * @param _pRM Render Manager.
   **/
-	virtual void          Render() = 0;
+	virtual void          PreRender(CRenderManager* _pRM);
+  /**
+   * Mètode de render.
+   * Aquest mètode s'executa a cada iteració. Es realitzen els següents passos:
+   *  - S'activen els efectes d'escena.
+   *  - Es renderitza l'escena.
+   *  - Es captura el buffer d'escena pels efectes de post-processat.
+   *  - Es realitza el post-processat d'efectes d'escena.
+   *  - Es captura el buffer de post-processat.
+   * @param _pRM Render Manager.
+  **/
+	virtual void          Render(CRenderManager* _pRM);
+  /**
+   * Mètode de render d'escena.
+   * Aquest mètode s'executa a cada iteració. Durant aquest es realitzarà el pintat de l'escena per pantalla.
+   * @param _pRM Render Manager.
+  **/
+	virtual void          RenderScene(CRenderManager* _pRM) = 0;
   /**
    * Mètode d'inicialització.
    * Aquest mètode inicialitzarà el procés, deixant-lo llest pel seu funcionament.
@@ -45,11 +68,18 @@ public:
 	virtual bool          Init() = 0;
 
   /**
+   * Setter del SceneEffectManager.
+   * Aquest mètode especifica el SceneEffectManager que s'utilitzarà.
+   * @return CCamera* que representa l'actual càmara assignada al procés.
+  **/
+  virtual CCamera*      GetCamera                 ()         {return m_pCamera;};
+
+  /**
    * Getter de la càmara.
    * Aquest mètode retorna l'actual càmara assignada al procés i sobre la qual es dibuixa l'escena.
    * @return CCamera* que representa l'actual càmara assignada al procés.
   **/
-  virtual CCamera*      GetCamera                 ()         {return m_pCamera;};
+  virtual void          SetSceneEffectManager     (CSceneEffectManager* _pSceneEffectManager)         { m_pSceneEffectManager = _pSceneEffectManager; };
 
   /**
    * Mètode d'execució d'accions.
@@ -88,7 +118,10 @@ protected:
    * Punter que representa l'actual càmara assignada al procés. L'escena es dibuixarà a partir d'aquesta càmara.
   **/
   CCamera*              m_pCamera;
-
+  /**
+   * Punter a Manager d'efectes d'escena.
+  **/
+  CSceneEffectManager*  m_pSceneEffectManager;
 private:
 
   /**

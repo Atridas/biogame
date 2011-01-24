@@ -80,7 +80,7 @@ void CEngine::RenderScene()
 {
 	if(m_pProcess != NULL)
 	{
-		m_pProcess->Render();
+		m_pProcess->Render(RENDER_MANAGER);
 		//Mostrem la informació de Debug (en aquest cas els FPS del timer)
     float l_fFrameRate = m_pTimer->GetFPS();
 		m_pProcess->DebugInformation(l_fFrameRate);

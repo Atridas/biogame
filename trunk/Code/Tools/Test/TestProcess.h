@@ -3,7 +3,10 @@
 #include "Process.h"
 #include <base.h>
 
+//Forward declarations---------------------
 class CObject3D;
+class CRenderManager;
+//-----------------------------------------
 
 class CTestProcess:
   public CProcess
@@ -17,7 +20,9 @@ public:
 
 	void                  Update                  (float elapsedTime);
 	void					        DebugInformation        (float FPS);
-	void                  Render                  ();
+  //void                  PreRender               (CRenderManager* _pRM);
+  //void                  Render                  (CRenderManager* _pRM);
+  void                  RenderScene             (CRenderManager* _pRM);
 
   virtual bool          ExecuteProcessAction      (float _fDeltaSeconds, float _fDelta, const char* _pcAction);
 

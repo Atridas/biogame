@@ -121,8 +121,8 @@ bool CTestProcess::Init()
   
   //g_pAnimatedInstanceModel = ANIMATED_MANAGER->GetInstance("bot");
   //g_pAnimatedInstanceModel->BlendCycle(1,0);
-  CRenderableAnimatedInstanceModel* l_pRenderableAnimatedIM = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("bot");
-  l_pRenderableAnimatedIM->GetAnimatedInstanceModel()->BlendCycle(1,0);
+  //CRenderableAnimatedInstanceModel* l_pRenderableAnimatedIM = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("bot");
+  //l_pRenderableAnimatedIM->GetAnimatedInstanceModel()->BlendCycle(1,0);
 
   /*CRenderableAnimatedInstanceModel* l_pRenderableAnimatedIM2 = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("bot2");
   l_pRenderableAnimatedIM2->GetAnimatedInstanceModel()->BlendCycle(2,0);
@@ -204,12 +204,10 @@ void CTestProcess::Update(float _fElapsedTime)
   //g_pRenderableAIModel->GetAnimatedInstanceModel()->Update(_fElapsedTime);
 }
 
-void CTestProcess::Render()
+void CTestProcess::RenderScene(CRenderManager* _pRM)
 {
   CColor col = colBLUE;
   CColor l_CubeCol = colWHITE;
-
-  CRenderManager* l_pRM = RENDER_MANAGER;
 
   Mat44f r,r2, t, s, identity, total;
 
@@ -219,7 +217,7 @@ void CTestProcess::Render()
   t.SetIdentity();
   s.SetIdentity();
 
-  l_pRM->SetTransform(identity);
+  _pRM->SetTransform(identity);
 
   /*pRM->DrawCube(Vect3f(2.0f,0.5f,0.0f),1.0f,l_CubeCol);
   pRM->DrawCube(Vect3f(2.0f,0.5f,2.0f),1.0f,l_CubeCol);
@@ -238,48 +236,48 @@ void CTestProcess::Render()
 
   total = t*r*r2*s;
   
-  l_pRM->DrawGrid(30.0f,colCYAN,30,30);
+  _pRM->DrawGrid(30.0f,colCYAN,30,30);
 
-  l_pRM->DrawAxis();
+  _pRM->DrawAxis();
 
-  l_pRM->SetTransform(total);
+  _pRM->SetTransform(total);
 
-  l_pRM->DrawCube(1.0f,l_CubeCol);
+  _pRM->DrawCube(1.0f,l_CubeCol);
  
-  l_pRM->SetTransform(identity);
-  l_pRM->DrawCamera(m_pCubeCamera);
+  _pRM->SetTransform(identity);
+  _pRM->DrawCamera(m_pCubeCamera);
 
-  l_pRM->SetTransform(t.Translate(Vect3f(-2.0f,0.0f,0.0f)) * r.SetFromAngleY(FLOAT_PI_VALUE/2.0f));
+  _pRM->SetTransform(t.Translate(Vect3f(-2.0f,0.0f,0.0f)) * r.SetFromAngleY(FLOAT_PI_VALUE/2.0f));
   g_tex->Activate(0);
-  l_pRM->GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE,FALSE);
+  _pRM->GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE,FALSE);
 
 
-  //g_pMesh->Render(l_pRM);
+  //g_pMesh->Render(_pRM);
 
 
-  //g_pRenderableObjectsManager->Render(l_pRM);
+  //g_pRenderableObjectsManager->Render(_pRM);
  
-  l_pRM->GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE,TRUE);
-  l_pRM->GetDevice()->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
-  l_pRM->GetDevice()->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-  l_pRM->GetDevice()->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+  _pRM->GetDevice()->SetRenderState(D3DRS_ALPHABLENDENABLE,TRUE);
+  _pRM->GetDevice()->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+  _pRM->GetDevice()->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+  _pRM->GetDevice()->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
   
   //g_pIndexedVertexs->Render(pRM);
 
   t.SetIdentity();
   r.SetIdentity();
   r.RotByAngleX(-FLOAT_PI_VALUE/2);
-  l_pRM->SetTransform(t.Translate(Vect3f(-2.0f,0.0f,3.0f)) * r);
+  _pRM->SetTransform(t.Translate(Vect3f(-2.0f,0.0f,3.0f)) * r);
   
-  //g_pAnimatedInstanceModel->Render(l_pRM);
-  //g_pRenderableAIModel->GetAnimatedInstanceModel()->Render(l_pRM);
+  //g_pAnimatedInstanceModel->Render(_pRM);
+  //g_pRenderableAIModel->GetAnimatedInstanceModel()->Render(_pRM);
 
-  //CORE->GetRenderableObjectsManager()->GetResource("bot")->Render(l_pRM);
-  //g_pAnimatedInstanceModel->Render(l_pRM);
-  //g_pLightManager->Render(l_pRM);
+  //CORE->GetRenderableObjectsManager()->GetResource("bot")->Render(_pRM);
+  //g_pAnimatedInstanceModel->Render(_pRM);
+  //g_pLightManager->Render(_pRM);
 
   //g_tex->Activate(0);
-  //g_pIndexedVertexs->Render(l_pRM);
+  //g_pIndexedVertexs->Render(_pRM);
   
   //pRM->SetTransform(s.Scale(0.1f,0.1f,0.1f));
 

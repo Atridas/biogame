@@ -1,11 +1,12 @@
 #include "GameProcess.h"
+#include "RenderManager.h"
 
 void CGameProcess::Update(float elT)
 {
 
 }
 
-void CGameProcess::Render()
+void CGameProcess::RenderScene(CRenderManager* _pRM)
 {
 
 }
