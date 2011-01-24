@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <RenderableObjects>
   <RenderableObject name="GeoSphere01" class="StaticMesh" resource="GeoSphere01" position="2.88831 0.0 -0.311329" yaw="0.0" pitch="0.0" roll="0.0"/>
-  <RenderableObject name="bot" class="AnimatedModel" resource="bot" position="10 0 10" yaw="0.0" pitch="0.0" roll="-90"/>
+  <RenderableObject name="bot" class="AnimatedModel" cycle="0" resource="bot" position="10 0 10" yaw="0.0" pitch="0.0" roll="-90"/>
 </RenderableObjects>
