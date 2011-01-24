@@ -41,7 +41,7 @@ CRenderableObject* CRenderableObjectsManager::AddMeshInstance(
 CRenderableObject* CRenderableObjectsManager::AddAnimatedModel(
                                                       const string& _szCoreModelName,
                                                       const string& _szInstanceName,
-                                                      const int _szDefaultAnimation)
+                                                      const string& _szDefaultAnimation)
 {
   CRenderableAnimatedInstanceModel* l_pAnimatedModel = new CRenderableAnimatedInstanceModel(_szInstanceName);
   if(!l_pAnimatedModel->Init(_szCoreModelName,_szDefaultAnimation))
@@ -86,12 +86,12 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
   int l_iNumObjects = l_XMLObjects.GetNumChildren();
   for(int i = 0; i < l_iNumObjects; i++)
   {
-    string l_szName, l_szClass, l_szResource;
+    string l_szName, l_szClass, l_szResource,l_szDefaultAnimation;
     Vect3f l_vPos;
     float l_fYaw;
     float l_fPitch;
     float l_fRoll;
-    int l_szDefaultAnimation;
+
     CRenderableObject* l_pRenderableObject = 0;
 
     CXMLTreeNode l_XMLObject = l_XMLObjects(i);
@@ -99,8 +99,8 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
     l_szName      = l_XMLObject.GetPszISOProperty("name" ,"");
     l_szClass     = l_XMLObject.GetPszISOProperty("class" ,"");
     l_szResource  = l_XMLObject.GetPszISOProperty("resource" ,"");
-    //l_szDefaultAnimation = l_XMLObject.GetPszISOProperty("animation" ,"");
-    l_szDefaultAnimation = l_XMLObject.GetIntProperty("cycle");
+    l_szDefaultAnimation = l_XMLObject.GetPszISOProperty("cycle" ,"");
+    //l_szDefaultAnimation = l_XMLObject.GetIntProperty("cycle");
 
     l_vPos        = l_XMLObject.GetVect3fProperty("position",Vect3f(0.0f));
     l_fYaw        = l_XMLObject.GetFloatProperty("yaw") * FLOAT_PI_VALUE / 180.0f;

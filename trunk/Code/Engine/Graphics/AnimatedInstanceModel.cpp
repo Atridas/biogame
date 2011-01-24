@@ -349,6 +349,12 @@ void CAnimatedInstanceModel::BlendCycle(int _iId, float _fTime)
   m_iCurrentCycle = _iId;
 }
 
+void CAnimatedInstanceModel::BlendCycle(const std::string &AnimationName, float _fTime)
+{
+  int l_AnimationId=m_pAnimatedCoreModel->GetCoreModel()->getCoreAnimationId(AnimationName);
+  BlendCycle(l_AnimationId, _fTime);
+}
+
 void CAnimatedInstanceModel::ClearCycle(float _fTime)
 {
   m_pCalModel->getMixer()->clearCycle(m_iCurrentCycle,_fTime);

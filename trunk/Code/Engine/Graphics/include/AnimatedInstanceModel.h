@@ -85,6 +85,7 @@ public:
    * @param _fTime Duració de l'animació.
   **/
   void BlendCycle             (int _iId, float _fTime);
+  void BlendCycle             (const std::string &AnimationName, float _fTime);
   /**
    * Mètode per acabar les animacions actives.
    * Aquest mètode acabarà les animacions actives que tingués el model, fent que a final de cicle no es repeteixin més.
