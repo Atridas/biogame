@@ -33,10 +33,10 @@ float3 ComputeLight(float3 _Normal,          //Normal of the pixel
 }
 
 // normal & eyeDirection han d'estar normalitzades
-float3 ComputeAllLights(float3 _Normal, float3 _WorltPosition, float3 _DiffuseColor)
+float3 ComputeAllLights(float3 _Normal, float3 _WorldPosition, float3 _DiffuseColor)
 {
   float3 out_ = _DiffuseColor * g_AmbientLight;
-  float3 l_EyeDirection = normalize(g_CameraPosition - _WorltPosition);
+  float3 l_EyeDirection = normalize(g_CameraPosition - _WorldPosition);
   for(int i = 0; i < MAXLIGHTS; i++)
   {
     if(g_LightsEnabled[i])
@@ -45,7 +45,7 @@ float3 ComputeAllLights(float3 _Normal, float3 _WorltPosition, float3 _DiffuseCo
       float  l_Attenuation = 1.0;
       if(g_LightsType[i] == LIGHT_OMNI)
       {
-        l_LightDirection = g_LightsPosition[i] - _WorltPosition;
+        l_LightDirection = g_LightsPosition[i] - _WorldPosition;
         float l_DistSquared = dot(l_LightDirection,l_LightDirection);
         if(l_DistSquared < 0.0 || l_DistSquared > g_LightsEndRangeSQ[i])
         {
@@ -62,7 +62,7 @@ float3 ComputeAllLights(float3 _Normal, float3 _WorltPosition, float3 _DiffuseCo
         l_LightDirection = -g_LightsDirection[i];
       } else if(g_LightsType[i] == LIGHT_SPOT)
       {
-        l_LightDirection = g_LightsPosition[i] - _WorltPosition;
+        l_LightDirection = g_LightsPosition[i] - _WorldPosition;
         
         float l_DistSquared = dot(l_LightDirection,l_LightDirection);
         if(l_DistSquared < 0.0 || l_DistSquared > g_LightsEndRangeSQ[i])
@@ -121,6 +121,19 @@ struct NORMAL_UV {
   float2 UV;
 };
 
+float2 CalcParallaxCoords(float3 _WorldPosition, float2 _UV)
+{
+  float3 l_EyeDirection = normalize(g_CameraPosition - _WorldPosition);
+  float fBumpScale = 0.05f;
+  float2 vCoord = _UV;	
+  float fDepth = tex2D(NormalTextureSampler, vCoord).w;	
+  float2 vHalfOffset = l_EyeDirection.xy * (fDepth) * fBumpScale;	
+  fDepth = (fDepth + tex2D(NormalTextureSampler, vCoord + vHalfOffset).w) * 0.5;	
+  vHalfOffset = l_EyeDirection.xy * (fDepth) * fBumpScale;	
+  fDepth = (fDepth + tex2D(NormalTextureSampler, vCoord + vHalfOffset).w) * 0.5;
+  vHalfOffset = l_EyeDirection.xy * (fDepth) * fBumpScale;		
+  return vCoord + vHalfOffset;
+}
 
 NORMAL_UV CalcParallaxMap(float3 _Position, float3 _Normal, float3 _Tangent, float3 _Binormal, float2 _UV)
 {

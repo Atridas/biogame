@@ -20,7 +20,7 @@ float g_BumpMaxHeight =  0.7;
 float g_BumpMinHeight = -0.7;
 float g_BumpDiff = 0.6;
 
-float g_ParallaxHeight = 0.035f;
+float g_ParallaxHeight = 0.35f;
 
 float g_SpecularPow = 30;
 float g_SpotlightFactor = 0.5;
