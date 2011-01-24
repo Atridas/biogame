@@ -1,15 +1,15 @@
-#include "Process.h"
-#include "base.h"
-#include "Core.h"
-#include "Math/Color.h"
-#include "FontManager.h"
 #include <sstream>
-#include <Utils/LanguageManager.h>
-#include <ActionToInput.h>
-#include <RenderableObjectsManager.h>
+#include "Process.h"
+#include "Core.h"
+#include "ActionToInput.h"
+#include "Camera.h"
 
+#include "Utils/LanguageManager.h"
+#include "FontManager.h"
 #include "RenderManager.h"
 #include "EffectManager.h"
+#include "RenderableObjectsManager.h"
+#include "SceneEffectManager.h"
 
 void CProcess::DebugInformation(float _FPS)
 {
@@ -64,7 +64,43 @@ bool CProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _p
   }
   return ExecuteProcessAction(_fDeltaSeconds,_fDelta,_pcAction);
 }
+
 bool CProcess::ExecuteScript(float _fDeltaSeconds, float _fDelta, const char* _pcScript)
 {
   return false;
+}
+
+
+void CProcess::PreRender(CRenderManager* _pRM)
+{
+  //m_pSceneEffectManager->PreRender(_pRM, this);
+  //Código de Prerender si necesitásemos hacer el pre-render de la GUI
+}
+
+void CProcess::Render(CRenderManager* _pRM)
+{
+  //CEffectManager* l_pEM = _pRM->GetEffectManager();
+  //CCamera* l_pCamera= _pRM->GetCamera();
+  //l_pCamera->Activate();
+  //_pRM->SetupMatrices(l_pCamera);
+
+  //m_pSceneEffectManager->ActivateRenderSceneEffects();
+
+  //que usen la technique por defecto del tipo de vértice
+  //l_pEM->SetAnimatedModelTechnique(NULL);
+  //l_pEM->SetStaticMeshTechnique(NULL);
+
+  //Renderizamos la escena
+  RenderScene(_pRM);
+
+  //Capturamos el Frame Buffer antes de los efectos de post render
+  //m_pSceneEffectManager->CaptureFrameBuffers(_pRM);
+  //Efectuamos los efectos de post render
+  //m_pSceneEffectManager->PostRender(_pRM);
+  //
+  //m_pSceneEffectManager->CaptureFrameBuffersAfterPostRender(_pRM);
+  
+  //CGUI *l_GUI=GetCurrentGUI();
+  //if(l_GUI)
+  //  l_GUI->Render(PSParams);
 }
