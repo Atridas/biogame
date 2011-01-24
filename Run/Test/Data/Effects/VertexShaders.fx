@@ -3,6 +3,7 @@
 
 #include "VertexType.fx"
 #include "Globals.fx"
+#include "Functions.fx"
 
 float4 SimpleVS(float4 _in : POSITION) : POSITION {
 	
@@ -73,6 +74,28 @@ TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS TangentBinormalNormalTextured2VS(TT
 	out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
 	
 	return out_;
+}
+
+//Retornem un TNORMAL_TEXTURED_VERTEX_PS (en un futur TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS)
+//enlloc de CAL3D_HW_VERTEX_PS
+TNORMAL_TEXTURED_VERTEX_PS RenderCal3DHWVS(CAL3D_HW_VERTEX_VS IN)
+{
+	TNORMAL_TEXTURED_VERTEX_PS OUT=(TNORMAL_TEXTURED_VERTEX_PS)0;
+	//float3 l_Normal= 0;
+	//float3 l_Tangent=0;
+	//CalcAnimatedNormalTangent(IN.Normal.xyz, IN.Tangent.xyz, IN.Indices, IN.Weight, l_Normal,l_Tangent);
+	float3 l_Position = CalcAnimtedPos(float4(IN.Position.xyz,1.0), IN.Indices, IN.Weight);
+	float3 l_Normal   = CalcAnimtedPos(IN.Normal, IN.Indices, IN.Weight);
+	float4 l_WorldPosition=float4(l_Position, 1.0);
+	OUT.WorldPosition=mul(l_WorldPosition,g_WorldMatrix);  
+	OUT.WorldNormal = mul(l_Normal,(float3x3)g_WorldMatrix);
+  
+  
+	//OUT.WorldTangent=normalize(mul(l_Tangent,g_WorldMatrix));
+	//OUT.WorldBinormal=mul(cross(l_Tangent,l_Normal),(float3x3)g_WorldMatrix);
+	OUT.UV = IN.TexCoord.xy;
+	OUT.HPosition = mul(l_WorldPosition, g_WorldViewProjectionMatrix );
+	return OUT;
 }
 
 #endif
