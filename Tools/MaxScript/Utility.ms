@@ -175,7 +175,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		return true
 	)
 	
-	function ExportRenderableObjectsManager _objects _cores =
+	function ExportRenderableObjectsManager _objects _cores _AnimatedModels =
 	(
 			
 		local l_level = dropNivell.items[dropNivell.selection]
@@ -233,6 +233,39 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			
 		)
 		
+		for i=1 to _AnimatedModels.count do
+		(
+			
+			local l_object = _AnimatedModels[i]
+			local l_resource = getUserProp l_object "Resource"
+			
+			l_params = #(#("name",l_object.name),#("class","AnimatedModel"),#("resource",l_resource))
+		
+			local l_aux = "" as stringStream
+			
+				
+			local l_translation = RHVectorToLH l_object.transform.translation
+			format "% % %" l_translation.x l_translation.y l_translation.z to:l_aux
+			append l_params #("position",l_aux)
+			
+			l_aux = "" as stringStream
+			local l_yaw = GetYaw l_object.transform
+			format "%" l_yaw to:l_aux
+			append l_params #("yaw",l_aux)
+			
+			l_aux = "" as stringStream
+			local l_pitch = GetPitch l_object.transform
+			format "%" l_pitch to:l_aux
+			append l_params #("pitch",l_aux)
+			
+			l_aux = "" as stringStream
+			local l_roll = GetRoll l_object.transform
+			format "%" l_roll to:l_aux
+			append l_params #("roll",l_aux)
+			
+			format "\n\t" to:l_file
+			format "%" (InlineTagParamXML "RenderableObject" l_params) to:l_file
+		)
 		format "\n" to:l_file
 		format "%" (CloseTagXML "RenderableObjects") to:l_file
 		
@@ -428,9 +461,17 @@ utility BioUtility "Eon-Utility" width:160 height:312
 	(
 		
 		-- TODO acceptar més coses
-		if classof _object == Point then
+		if classof _object == Dummy then
 		(
-			return true
+			if getUserProp _object "UserType" == "AnimatedModel" then
+			(
+				--ShowMessage "Tenim un AnimatedModel"
+				return true
+			)
+			else
+			(
+				return false
+			)
 		) else (
 			return false
 		)
@@ -494,7 +535,8 @@ utility BioUtility "Eon-Utility" width:160 height:312
 				)
 			) else if isAnimatedModel $*[i] then
 			(
-				ShowMessage "Tenim un AnimatedModel"
+				append l_AnimatedModels $*[i]
+				--ShowMessage "Tenim un AnimatedModel"
 			)
 		)
 		
@@ -502,7 +544,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		(
 			ShowMessage "Export mesh manager finalitzat"
 		)
-		if ExportRenderableObjectsManager l_instances l_cores then
+		if ExportRenderableObjectsManager l_instances l_cores l_AnimatedModels then
 		(
 			ShowMessage "Export scene finalitzat"
 		)
