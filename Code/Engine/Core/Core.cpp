@@ -25,6 +25,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pRenderableObjectsManager = new CRenderableObjectsManager();
   m_pLightManager             = new CLightManager();
   //m_pAnimatedModelManager     = new CAnimatedModelManager();
+  
 
   m_pRenderManager->Init(hWnd,_InitParams.RenderManagerParams);
   m_pLanguageManager->Init(_InitParams.LanguageManagerParams);
@@ -35,6 +36,8 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pRenderableObjectsManager->Load(_InitParams.RenderableObjectsManager.vXMLFiles);
   m_pLightManager->Load(_InitParams.LightsManager.szFile);
   //m_pAnimatedModelManager->Load(_InitParams.);
+
+  
 
   SetOk(true);
 

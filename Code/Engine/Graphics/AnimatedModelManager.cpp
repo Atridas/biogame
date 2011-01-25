@@ -1,7 +1,12 @@
 #include "AnimatedModelManager.h"
-
 #include "AnimatedInstanceModel.h"
 #include <XML/XMLTreeNode.h>
+#include <cal3d\cal3d.h>
+
+CAnimatedModelManager::CAnimatedModelManager()
+{
+  CalLoader::setLoadingMode(LOADER_ROTATE_X_AXIS);
+}
 
 bool CAnimatedModelManager::Load(const string &_szFileName)
 {
