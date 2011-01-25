@@ -101,6 +101,9 @@ HRESULT CMouse::Update(void)
 
 	m_Delta.x = m_Delta.y = m_Delta.z = 0;
 
+  if(GetForegroundWindow() != m_hWnd)
+    return S_FALSE;
+
 	// try to get the data from the mouse
 	if (FAILED(GetData(IDV_MOUSE, &od[0], &dwNumElem))) 
 	{
