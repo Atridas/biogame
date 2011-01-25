@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <scene_effects>
+  <!--
   <pre_render type="shadow_map_render_to_texture" name="shadow_map_scene_effect" 
               texture="ShadowMapTexture" width="1024" height="1024" static_mesh_technique="RenderShadowTechnique" 
               animated_model_technique="Cal3DTechniqueShadow" light_shadow_cast="TPhotometricLight02" 
@@ -39,8 +40,9 @@
     <texture stage_id="0" texture="FrameBufferTextureWithPostFX"/>
   </post_render>
   
+  -->
   <post_render type="draw_quad" name="noise_and_vignetting_scene_effect" technique="RenderNoiseAndVignettingTechnique" active="true">
-    <texture stage_id="0" texture="data/gui/textures/noise.tga"/>
-    <texture stage_id="1" texture="data/gui/textures/vignetting.tga"/>
+    <texture stage_id="0" texture="Data/Textures/noise.tga"/>
+    <texture stage_id="1" texture="Data/Textures/vigneting.tga"/>
   </post_render>
 </scene_effects>

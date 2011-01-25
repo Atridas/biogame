@@ -11,49 +11,18 @@ bool CDrawQuadSceneEffect::Init(const CXMLTreeNode& _params)
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "CDrawQuadSceneEffect::Init  Initializing CDrawQuadSceneEffect.");
 
-  string l_szName = _params.GetPszISOProperty("name","");
-  SetName(l_szName);
-  LOGGER->AddNewLog(ELL_INFORMATION, "CDrawQuadSceneEffect::Init  \"%s\".", l_szName.c_str());
+  if(!CSceneEffect::Init(_params))
+    return false;
+
   string l_szTechnique = _params.GetPszISOProperty("technique","");
   
   CEffectManager* l_pEffectManager = RENDER_MANAGER->GetEffectManager();
   m_pTechnique    = l_pEffectManager->GetEffectTechnique(l_szTechnique);
 
-  int l_iNumChildren = _params.GetNumChildren();
-
-  for(int i = 0; i < l_iNumChildren; i++)
-  {
-    CXMLTreeNode l_treeTextures = _params(i);
-    if(strcmp(l_treeTextures.GetName(), "texture") == 0)
-    {
-      int l_iStage = l_treeTextures.GetIntProperty("stage_id", 0);
-      string l_szTextureName = l_treeTextures.GetPszISOProperty("texture", "");
-      if(l_szTextureName == "")
-      {
-        LOGGER->AddNewLog(ELL_ERROR, "CDrawQuadSceneEffect::Init  Error loading Texture, no texture name.");
-        Release();
-        SetOk(false);
-        return false;
-      }
-      CTexture* l_pTexture = RENDER_MANAGER->GetTextureManager()->GetResource(l_szTextureName);
-      if(!l_pTexture)
-      {
-        LOGGER->AddNewLog(ELL_ERROR, "CDrawQuadSceneEffect::Init  Error loading Texture, no texture \"%s\" exists.", l_szTextureName.c_str());
-        Release();
-        SetOk(false);
-        return false;
-      }
-
-      m_vTextures.push_back(QuadTextures(l_iStage,l_pTexture));
-    } else if(!l_treeTextures.IsComment())
-    {
-      LOGGER->AddNewLog(ELL_WARNING, "CDrawQuadSceneEffect::Init  Tag \"%s\" not recognized.", l_treeTextures.GetName());
-    }
-  }
-
   if(!m_pTechnique)
   {
     LOGGER->AddNewLog(ELL_ERROR, "CDrawQuadSceneEffect::Init  Error loading Technique, no technique \"%s\" exists.", l_szTechnique.c_str());
+    Release();
     SetOk(false);
   } else {
     SetOk(true);
@@ -62,10 +31,34 @@ bool CDrawQuadSceneEffect::Init(const CXMLTreeNode& _params)
   return IsOk();
 }
 
-void CDrawQuadSceneEffect::PostRender(CRenderManager *RM)
-{}
+void CDrawQuadSceneEffect::PostRender(CRenderManager *_pRM)
+{
+  if(IsOk())
+  {
+    RECT l_Rect;
+    l_Rect.top=l_Rect.left=0;
+    l_Rect.bottom=_pRM->GetScreenHeight();
+    l_Rect.right=_pRM->GetScreenWidth();
+    m_pTechnique->BeginRender();
+    LPD3DXEFFECT l_Effect=m_pTechnique->GetEffect()->GetD3DEffect();
+    if(l_Effect!=NULL)
+    {
+      l_Effect->SetTechnique(m_pTechnique->GetD3DTechnique());
+      UINT l_NumPasses;
+      l_Effect->Begin(&l_NumPasses, 0);
+      for (UINT iPass = 0; iPass < l_NumPasses; iPass++)
+      {
+        l_Effect->BeginPass(iPass);
+        ActivateTextures();
+        _pRM->DrawColoredQuad2DTextured( l_Rect, m_Color);
+        l_Effect->EndPass();
+      }
+      l_Effect->End();
+    }
+  }
+}
 
 void CDrawQuadSceneEffect::Release()
 {
-  m_vTextures.clear();
+  CSceneEffect::Release();
 }

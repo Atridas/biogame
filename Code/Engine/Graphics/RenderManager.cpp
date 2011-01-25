@@ -8,6 +8,7 @@
 #include "AnimatedModelManager.h"
 #include "EffectManager.h"
 #include "VertexsStructs.h"
+#include "Texture.h"
 
 #define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
 #define D3DFVF_CUSTOMVERTEX2 (D3DFVF_XYZ|D3DFVF_TEX1)
@@ -20,6 +21,7 @@ struct CUSTOMVERTEX
 		return D3DFVF_CUSTOMVERTEX;
 	}
 };
+
 struct CUSTOMVERTEX2
 {
 	D3DXVECTOR3 pos;
@@ -591,4 +593,19 @@ void CRenderManager::DrawGrid(float Size, CColor Color, int GridX, int32 GridZ )
 		l_vCurrentRight += l_vIncX;
 	}
 
+}
+
+void CRenderManager::DrawColoredQuad2DTextured(RECT _Rect, CColor _Color)
+{
+  DWORD l_Color   = _Color.GetUint32Argb();
+
+  SDIFFUSETEXTUREDVERTEX quad[4] =
+  {
+    {(float)_Rect.bottom,  (float)_Rect.left,   0, l_Color, 0, 0},
+    {(float)_Rect.top,     (float)_Rect.left,   0, l_Color, 1, 0},
+    {(float)_Rect.bottom,  (float)_Rect.right,  0, l_Color, 0, 1},
+    {(float)_Rect.top,     (float)_Rect.right,  0, l_Color, 1, 1}
+  };
+
+  m_pD3DDevice->DrawPrimitiveUP( D3DPT_TRIANGLESTRIP, 2, quad, sizeof(SDIFFUSETEXTUREDVERTEX));
 }

@@ -23,7 +23,7 @@ public:
   void ActivateTextures();
   void AddStageTexture(int _iStageId, CTexture* _pTexture);
 
-  virtual bool Init(const CXMLTreeNode& _params) = 0;
+  virtual bool Init(const CXMLTreeNode& _params);
 
   virtual void PreRender(CRenderManager* _pRM, CProcess* _pProc);
   virtual void PostRender(CRenderManager* _pRM);
@@ -32,15 +32,17 @@ public:
 protected:
   class CStageTexture
   {
-    public:
-    CStageTexture(int _iStageId, CTexture* _pTexture);
-    void Activate();
+  public:
+    CStageTexture(int _iStageId, CTexture* _pTexture):m_iStageId(_iStageId),m_pTexture(_pTexture){};
+    void Activate() const;
 
     int m_iStageId;
     CTexture* m_pTexture;
   };
 
   vector<CStageTexture> m_vStageTextures;
+
+  void Release();
 };
 
 #endif

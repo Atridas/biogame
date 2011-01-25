@@ -15,6 +15,7 @@ class CActionToInput;
 class CRenderableObjectsManager;
 class CAnimatedModelManager;
 class CLightManager;
+class CSceneEffectManager;
 // --------------------------
 
 /**
@@ -33,7 +34,7 @@ public:
   **/
                       CCore               (void): m_pRenderManager(0),m_pLanguageManager(0),m_pFontManager(0),m_pInputManager(0),
                                                   m_pActionToInput(0),m_pRenderableObjectsManager(0),m_pLightManager(0),
-                                                  m_bRenderLights(false)
+                                                  m_pSceneEffectManager(0),m_bRenderLights(false)
                                                   {};
   /**
    * Destructor.
@@ -99,6 +100,8 @@ public:
   CLightManager*      GetLightManager       () const                        {return m_pLightManager;}
   CRenderableObjectsManager*  GetRenderableObjectsManager      () const                        {return m_pRenderableObjectsManager;}
 
+  CSceneEffectManager*GetSceneEffectManager () const                        {return m_pSceneEffectManager;};
+
   bool                GetRenderLights       () const                        {return m_bRenderLights;};
 
   void                SetRenderLights       (bool _bRenderLights)           {m_bRenderLights = _bRenderLights;};
@@ -145,6 +148,8 @@ private:
    * LightManager
   **/
   CLightManager*              m_pLightManager;
+
+  CSceneEffectManager*        m_pSceneEffectManager;
 
 
   bool                        m_bRenderLights;

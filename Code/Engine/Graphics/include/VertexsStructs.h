@@ -83,6 +83,30 @@ private:
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
 };
 
+struct SDIFFUSETEXTUREDVERTEX
+{
+  float    x, y, z;
+  uint32   color;
+  float    tu, tv;
+
+  static unsigned short GetVertexType();
+
+  static unsigned int GetFVF();
+
+  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+
+  static bool ActivateTextures(const vector<CTexture*>& _TextureArray);
+
+  static void ReleaseVertexDeclaration()
+  {
+    CHECKED_RELEASE(s_VertexDeclaration);
+  }
+
+private:
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+};
+
+
 /**
  * Estructura Vertex Difus amb Normals.
  * Representa a un vertex amb coordenades geomètriques, normals i color difús.

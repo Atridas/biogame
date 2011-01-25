@@ -115,6 +115,11 @@ struct SLightsManager
   string szFile;
 };
 
+struct SSceneEffectManager
+{
+  string szFile;
+};
+
 /**
  * Paràmetres d'inicialització del procés.
  * Estructura que conté els paràmetres de configuració que es poden trobar al config del procés.
@@ -140,6 +145,7 @@ struct SInitParams
   SActionToInputParams      ActionToInputParams;
   SRenderableObjectsManager RenderableObjectsManager;
   SLightsManager            LightsManager;
+  SSceneEffectManager       SceneEffect;
 };
 
 void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML);

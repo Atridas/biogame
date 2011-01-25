@@ -26,6 +26,8 @@ public:
 protected:
   CTexture* m_pTexture;
   LPDIRECT3DSURFACE9 m_pSurface;
+
+  void Release();
 };
 
 #endif

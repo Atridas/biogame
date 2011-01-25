@@ -30,7 +30,6 @@ public:
   CSceneEffectManager();
   ~CSceneEffectManager(){Done();};
 
-  bool Init(const CXMLTreeNode& _xmlSceneEffect);
   void Release();
   bool Load(const string& m_szFileName);
   void PreRender(CRenderManager* _pRM, CProcess* _pProc);
