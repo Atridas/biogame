@@ -15,6 +15,8 @@ class CEffectManager;
 class CTexture;
 //-------------------------------------------------------------------
 
+typedef enum eTypeAlignment { CENTER, UPPER_LEFT, UPPER_RIGHT, LOWER_LEFT, LOWER_RIGHT };
+
 class CRenderManager:
   public CBaseControl
 {
@@ -41,6 +43,9 @@ public:
   //-------------------------------------------------------------------
 
   //----Render Functions ----------------------------------------------
+  void CalculateAlignment (uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, Vect2i& _vfinalPos);
+  void DrawQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, CColor _Color);
+  void DrawTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, CTexture* _Texture, CColor _Color);
   void DrawColoredQuad2DTextured(RECT _Rect, CColor _Color);
   //-------------------------------------------------------------------
 
