@@ -56,7 +56,7 @@ public:
   bool								GetBoolKeyword     	(const char* _pszKey, bool _bDefault=false) const;
   const char*					GetPszKeyword      	(const char* _pszKey, const char* _pszDefault=NULL) const;
 
-  int									GetNumChildren     	() ;
+  int									GetNumChildren     	() const;
 
   CXMLTreeNode 				operator[]         	(const char* _pszKey) const;
   CXMLTreeNode 				operator()         	(int _iIndex) const;

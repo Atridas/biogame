@@ -182,7 +182,7 @@ CXMLTreeNode CXMLTreeNode::operator() (int _iIndex) const
 //----------------------------------------------------------------------------
 // Returns the number of children a tree has
 //----------------------------------------------------------------------------
-int CXMLTreeNode::GetNumChildren ()  
+int CXMLTreeNode::GetNumChildren () const
 {
   assert(m_pNode);
 

@@ -14,7 +14,7 @@ class CTexture;
 class CXMLTreeNode;
 //---------------------------------
 
-class CSceneEffect : public /*CActive,*/ CNamed, public CBaseControl
+class CSceneEffect : public CNamed, public CBaseControl
 {
 public:
 

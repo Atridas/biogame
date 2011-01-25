@@ -11,7 +11,7 @@ class CLight;
 class CShadowMapRenderToTexture: public CRenderToTextureSceneEffect
 {
 public:
-  CShadowMapRenderToTexture(void):m_LightShadowCast(0) {};
+  CShadowMapRenderToTexture(void):m_pLightShadowCast(0) {};
   ~CShadowMapRenderToTexture() {Done();};
 
   virtual bool Init(const CXMLTreeNode& _params);
@@ -19,7 +19,7 @@ public:
 protected:
   void Release() {};
 private:
-  CLight *m_LightShadowCast;
+  CLight *m_pLightShadowCast;
 };
 
 #endif
