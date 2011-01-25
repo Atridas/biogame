@@ -26,6 +26,7 @@ bool CTestProcess::Init()
   LOGGER->AddNewLog(ELL_INFORMATION,"TestProcess::Init");
   
   m_pObject = new CObject3D();
+  m_fVelocity = 1;
   m_pObject->SetPosition(Vect3f(-6,1.7f,0));
   m_pObjectCamera = new CFPSCamera(
     0.1f,
