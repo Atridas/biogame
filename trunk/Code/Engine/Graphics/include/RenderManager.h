@@ -12,6 +12,7 @@ class CTextureManager;
 class CStaticMeshManager;
 class CAnimatedModelManager;
 class CEffectManager;
+class CTexture;
 //-------------------------------------------------------------------
 
 class CRenderManager:
@@ -37,6 +38,10 @@ public:
   void                  SetupMatrices     (CCamera* _pCamera);
   void                  SetTransform      (D3DXMATRIX& matrix);
   void                  SetTransform      (Mat44f& m);
+  //-------------------------------------------------------------------
+
+  //----Render Functions ----------------------------------------------
+  void DrawColoredQuad2DTextured(RECT _Rect, CColor _Color);
   //-------------------------------------------------------------------
 
 	//----DebugRender Functions-------------------------------------------

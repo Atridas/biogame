@@ -54,3 +54,8 @@ void CRenderToTextureSceneEffect::PreRender(CRenderManager* _pRM, CProcess* _pPr
 
   //m_pTexture->UnsetAsRenderTarget();
 }
+
+void CRenderToTextureSceneEffect::Release()
+{
+  CRenderTextureSceneEffect::Release();
+}

@@ -22,3 +22,8 @@ bool CShadowMapRenderToTexture::Init(const CXMLTreeNode& _params)
   }
   return IsOk();
 }
+
+void CShadowMapRenderToTexture::Release()
+{
+  CRenderToTextureSceneEffect::Release();
+}

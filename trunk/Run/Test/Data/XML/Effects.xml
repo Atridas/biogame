@@ -4,6 +4,7 @@
     <!-- effect name="Test Effects" file="Data/Effects/Efectillo2.fx"/ -->
     <effect name="Default Effects" file="Data/Effects/DefaultTechniques.fx"/>
     <effect name="Cal3D Effects" file="Data/Effects/Cal3dTechniques.fx"/>
+    <effect name="Noise And Vignetting" file="Data/Effects/NoiseAndVignetting.fx"/>
     <!-- effect name=.../-->
     <!-- effect name=.../-->
   </effects>
@@ -58,8 +59,11 @@
                use_lights="true" num_of_lights="4" use_camera_position="true"/>
     <technique name="TangentBinormalNormalTexturedTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true"
                use_lights="true" num_of_lights="4" use_camera_position="true"/>
+    
     <technique name="Cal3DTechnique" animated="true" effect="Cal3D Effects" use_world_matrix="true" use_world_view_projection_matrix="true"
                use_lights="true" num_of_lights="4" use_camera_position="true"/>
+
+    <technique name="RenderNoiseAndVignettingTechnique" effect="Noise And Vignetting"/>
     
   </techniques>
 </shaders>

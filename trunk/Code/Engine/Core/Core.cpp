@@ -11,6 +11,7 @@
 #include <ActionToInput.h>
 #include <RenderableObjectsManager.h>
 #include <LightManager.h>
+#include <SceneEffectManager.h>
 //#include <AnimatedModelManager.h>
 
 bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
@@ -24,6 +25,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pActionToInput            = new CActionToInput();
   m_pRenderableObjectsManager = new CRenderableObjectsManager();
   m_pLightManager             = new CLightManager();
+  m_pSceneEffectManager       = new CSceneEffectManager();
 
   m_pRenderManager->Init(hWnd,_InitParams.RenderManagerParams);
   m_pLanguageManager->Init(_InitParams.LanguageManagerParams);
@@ -33,6 +35,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
 
   m_pRenderableObjectsManager->Load(_InitParams.RenderableObjectsManager.vXMLFiles);
   m_pLightManager->Load(_InitParams.LightsManager.szFile);
+  m_pSceneEffectManager->Load(_InitParams.SceneEffect.szFile);
 
   SetOk(true);
 
@@ -45,6 +48,7 @@ void CCore::Release()
   
 
   //delete a l'inrevès de com s'ha fet l'init
+  CHECKED_DELETE(m_pSceneEffectManager);
   CHECKED_DELETE(m_pLightManager);
   CHECKED_DELETE(m_pRenderableObjectsManager);
 

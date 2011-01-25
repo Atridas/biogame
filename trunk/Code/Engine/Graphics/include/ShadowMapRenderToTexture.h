@@ -17,7 +17,7 @@ public:
   virtual bool Init(const CXMLTreeNode& _params);
 
 protected:
-  void Release() {};
+  void Release();
 private:
   CLight *m_pLightShadowCast;
 };

@@ -35,6 +35,8 @@
   </RenderableObjectsManager>
 
   <LightsManager file="Data/Levels/Proves/XML/Lights.xml"/>
+
+  <SceneEffectManager file="Data/XML/SceneEffects.xml"/>
     
   <!--<AnimatedModelManager file="Data/XML/AnimatedModels.xml">
   </AnimatedModelManager>-->

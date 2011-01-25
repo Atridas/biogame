@@ -4,6 +4,7 @@
 
 LPDIRECT3DVERTEXDECLARATION9 SDIFFUSEVERTEX::s_VertexDeclaration = 0;
 
+LPDIRECT3DVERTEXDECLARATION9 SDIFFUSETEXTUREDVERTEX::s_VertexDeclaration = 0;
 LPDIRECT3DVERTEXDECLARATION9 STEXTUREDVERTEX::s_VertexDeclaration = 0;
 LPDIRECT3DVERTEXDECLARATION9 STEXTURED2VERTEX::s_VertexDeclaration = 0;
 
@@ -21,27 +22,6 @@ LPDIRECT3DVERTEXDECLARATION9 TCAL3D_HW_VERTEX::s_VertexDeclaration=0;
 
 uint16 GetVertexSize(uint16 _usVertexType)
 {
-  /*uint16 size = 0;
-  if(_usVertexType & VERTEX_TYPE_GEOMETRY)
-  {
-    size += 3 * sizeof(float);
-  }
-  if(_usVertexType & VERTEX_TYPE_NORMAL)
-  {
-    size += 3 * sizeof(float);
-  }
-  if(_usVertexType & VERTEX_TYPE_TEXTURE1)
-  {
-    size += 2 * sizeof(float);
-  } else if(_usVertexType & VERTEX_TYPE_TEXTURE2)
-  {
-    size += 4 * sizeof(float);
-  }
-  if(_usVertexType & VERTEX_TYPE_DIFFUSE)
-  {
-    size += sizeof(unsigned long);
-  }
-  return size;*/
   if(_usVertexType == SDIFFUSEVERTEX::GetVertexType())
   {
     return sizeof(SDIFFUSEVERTEX);
@@ -51,7 +31,10 @@ uint16 GetVertexSize(uint16 _usVertexType)
   } else if(_usVertexType == STEXTURED2VERTEX::GetVertexType())
   {
     return sizeof(STEXTURED2VERTEX);
-  } else if(_usVertexType == SNORMALDIFFUSEVERTEX::GetVertexType())
+  } else if(_usVertexType == STEXTURED2VERTEX::GetVertexType())
+  {
+    return sizeof(SDIFFUSETEXTUREDVERTEX);
+  } else if(_usVertexType == SDIFFUSETEXTUREDVERTEX::GetVertexType())
   {
     return sizeof(SNORMALDIFFUSEVERTEX);
   } else if(_usVertexType == SNORMALTEXTUREDVERTEX::GetVertexType())
@@ -94,6 +77,9 @@ uint16 GetTextureNum(uint16 _usVertexType)
   } else if(_usVertexType == STEXTUREDVERTEX::GetVertexType())
   {
     return 2;
+  } else if(_usVertexType == SDIFFUSETEXTUREDVERTEX::GetVertexType())
+  {
+    return 1;
   } else if(_usVertexType == STEXTURED2VERTEX::GetVertexType())
   {
     return 3;
@@ -155,6 +141,61 @@ LPDIRECT3DVERTEXDECLARATION9& SDIFFUSEVERTEX::GetVertexDeclaration()
         D3DDECLTYPE_D3DCOLOR,   //type
         D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
         D3DDECLUSAGE_COLOR,     //ús de les dades
+        0 
+      },
+      D3DDECL_END()
+    };
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    assert(result == D3D_OK);
+  }
+  return s_VertexDeclaration;
+}
+
+
+// Diffuse Textured Vertex -----------------------------------------------------------------------------------------------------------
+
+unsigned short SDIFFUSETEXTUREDVERTEX::GetVertexType()
+{
+  return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_DIFFUSE|VERTEX_TYPE_TEXTURE1;
+}
+
+unsigned int SDIFFUSETEXTUREDVERTEX::GetFVF()
+{
+  return D3DFVF_XYZ|D3DFVF_DIFFUSE|D3DFVF_TEX1;
+}
+
+bool SDIFFUSETEXTUREDVERTEX::ActivateTextures(const vector<CTexture*>& _TextureArray)
+{
+  assert(_TextureArray.size() == 1);
+  _TextureArray[0]->Activate(1); // normal
+  return true;
+}
+
+LPDIRECT3DVERTEXDECLARATION9& SDIFFUSETEXTUREDVERTEX::GetVertexDeclaration()
+{
+  if(s_VertexDeclaration==NULL)
+  {
+    D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+    {
+      { 0, 
+        0 , 
+        D3DDECLTYPE_FLOAT3,     //type
+        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+        D3DDECLUSAGE_POSITION,  //ús de les dades
+        0 
+      },
+      { 0, 
+        12 ,                    //desplaçament 
+        D3DDECLTYPE_D3DCOLOR,   //type
+        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+        D3DDECLUSAGE_COLOR,     //ús de les dades
+        0 
+      },
+      { 0, 
+        12 + sizeof(uint32) ,                    //desplaçament 
+        D3DDECLTYPE_FLOAT2,   //type
+        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+        D3DDECLUSAGE_TEXCOORD,     //ús de les dades
         0 
       },
       D3DDECL_END()

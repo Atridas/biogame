@@ -29,6 +29,8 @@ public:
 protected:
   CEffectTechnique* m_pStaticMeshTechnique;
   CEffectTechnique* m_pAnimatedModelTechnique;
+
+  void Release();
 };
 
 #endif

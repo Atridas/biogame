@@ -185,12 +185,12 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
       LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"RenderableObjectsManager\". Usant valors per defecte [Res].");
     }
 
-
+    
     //-------------------------------------------------------------------------------------------------------------------------------------------------------
     //Lights Manager ----------------------------------------------------------------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------------------------------------------------------------
     CXMLTreeNode l_TreeLightsManager = l_TreeConfig["LightsManager"];
-    if(l_TreeRenderableObjectsManager.Exists())
+    if(l_TreeLightsManager.Exists())
     {
       const char* l_pcFile = l_TreeLightsManager.GetPszProperty("file", 0);
 
@@ -204,6 +204,26 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
 
     } else {
       LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"LightsManager\". Usant valors per defecte [Res].");
+    }
+
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Scene Effect Manager ----------------------------------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
+    CXMLTreeNode l_TreeSceneEffectManager = l_TreeConfig["SceneEffectManager"];
+    if(l_TreeSceneEffectManager.Exists())
+    {
+      const char* l_pcFile = l_TreeSceneEffectManager.GetPszProperty("file", 0);
+
+      if(l_pcFile == 0)
+      {
+        LOGGER->AddNewLog(ELL_WARNING, "\tNo hi ha fitxer base del SceneEffectManager.");
+      } else {
+        InitParams_.SceneEffect.szFile = l_pcFile;
+        LOGGER->AddNewLog(ELL_INFORMATION, "\tSceneEffectManager base \"%s\"",l_pcFile);
+      }
+
+    } else {
+      LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"SceneEffectManager\". Usant valors per defecte [Res].");
     }
   }
   
