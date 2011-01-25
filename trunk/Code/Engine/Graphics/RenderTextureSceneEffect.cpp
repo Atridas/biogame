@@ -7,11 +7,13 @@
 
 bool CRenderTextureSceneEffect::Init(const CXMLTreeNode& _params)
 {
-  LOGGER->AddNewLog(ELL_INFORMATION, "CRenderTextureSceneEffect::CRenderTextureSceneEffect  Initializing CRenderTextureSceneEffect.");
+  LOGGER->AddNewLog(ELL_INFORMATION, "CRenderTextureSceneEffect::Init  Initializing CRenderTextureSceneEffect.");
 
   m_pTexture = new CTexture();
 
   string l_szName = _params.GetPszISOProperty("name","");
+  SetName(l_szName);
+  LOGGER->AddNewLog(ELL_INFORMATION, "CRenderTextureSceneEffect::Init  \"%s\".", l_szName.c_str());
   string l_szTexture = _params.GetPszISOProperty("texture","");
   uint32 l_iWidth = _params.GetIntProperty("width");
   uint32 l_iHeight = _params.GetIntProperty("height");

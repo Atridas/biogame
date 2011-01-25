@@ -3,14 +3,36 @@
 #include "Process.h"
 #include "Camera.h"
 #include "EffectManager.h"
+#include "XML\XMLTreeNode.h"
+#include "Core.h"
+#include "EffectTechnique.h"
 
 
 bool CRenderToTextureSceneEffect::Init(const CXMLTreeNode& _params)
 {
-  CRenderTextureSceneEffect::Init(_params); //comprovar true
-  //TODO
+  LOGGER->AddNewLog(ELL_INFORMATION, "CRenderToTextureSceneEffect::Init  Initializing CRenderToTextureSceneEffect.");
 
-  return false;
+  if(!CRenderTextureSceneEffect::Init(_params))
+    return false;
+  
+  string l_szStaticTechnique = _params.GetPszISOProperty("static_mesh_technique","");
+  string l_szAnimatedTechnique = _params.GetPszISOProperty("animated_model_technique","");
+  
+  CEffectManager* l_pEffectManager = RENDER_MANAGER->GetEffectManager();
+  m_pStaticMeshTechnique    = l_pEffectManager->GetEffectTechnique(l_szStaticTechnique);
+  m_pAnimatedModelTechnique = l_pEffectManager->GetEffectTechnique(l_szAnimatedTechnique);
+
+  if(!m_pStaticMeshTechnique || !m_pAnimatedModelTechnique)
+  {
+    if(!m_pStaticMeshTechnique)
+      LOGGER->AddNewLog(ELL_ERROR, "CRenderToTextureSceneEffect::Init  No technique \"%s\".", l_szStaticTechnique.c_str());
+    if(!m_pAnimatedModelTechnique)
+      LOGGER->AddNewLog(ELL_ERROR, "CRenderToTextureSceneEffect::Init  No technique \"%s\".", l_szAnimatedTechnique.c_str());
+
+    m_pStaticMeshTechnique = m_pAnimatedModelTechnique = 0;
+    SetOk(false);
+  }
+  return IsOk();
 }
 
 //TODO: UNCOMMENT

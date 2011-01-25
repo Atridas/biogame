@@ -15,7 +15,7 @@
   
   
   <render name="default_scene_effect" active="true">
-    <texture stage_id="5" file="ShadowMapTexture"/>
+    <texture stage_id="5" texture="ShadowMapTexture"/>
   </render>
   
   
@@ -27,20 +27,20 @@
                                 texture_width_as_frame_buffer="true" active="true" format_type="A8R8G8B8"/>
   
   <post_render type="draw_quad" name="post_zblur_scene_effect" technique="UsePS20ThirteenLookupsTechnique" active="true">
-    <texture stage_id="0" file="ZBlurTexture"/>
-    <texture stage_id="1" file="FrameBufferTextureWithoutPostFX"/>
+    <texture stage_id="0" texture="ZBlurTexture"/>
+    <texture stage_id="1" texture="FrameBufferTextureWithoutPostFX"/>
   </post_render>
   
   <post_render type="draw_quad" name="glow_post_effect" technique="RenderGlowPostFXTechnique" active="true" color="1.0 1.0 1.0 1.0">
-    <texture stage_id="0" file="GlowTexture"/>
+    <texture stage_id="0" texture="GlowTexture"/>
   </post_render>
   
   <post_render type="draw_quad" name="post_blur_scene_effect" technique="RenderGUITechnique" active="true" color="1.0 1.0 1.0 0.4">
-    <texture stage_id="0" file="FrameBufferTextureWithPostFX"/>
+    <texture stage_id="0" texture="FrameBufferTextureWithPostFX"/>
   </post_render>
   
   <post_render type="draw_quad" name="noise_and_vignetting_scene_effect" technique="RenderNoiseAndVignettingTechnique" active="true">
-    <texture stage_id="0" file="data/gui/textures/noise.tga" load_file="true"/>
-    <texture stage_id="1" file="data/gui/textures/vignetting.tga" load_file="true"/>
+    <texture stage_id="0" texture="data/gui/textures/noise.tga"/>
+    <texture stage_id="1" texture="data/gui/textures/vignetting.tga"/>
   </post_render>
 </scene_effects>
