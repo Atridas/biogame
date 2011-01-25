@@ -63,16 +63,19 @@ void CEngine::Update()
 
 void CEngine::Render()
 {
-	CRenderManager * rm = m_pCore->GetRenderManager();
-	rm->BeginRendering();
-  rm->SetupMatrices(m_pProcess->GetCamera());
+	CRenderManager* l_pRM = m_pCore->GetRenderManager();
 
-  m_pCore->Render();
-	{
-		RenderScene();
-	}
-	rm->EndRendering();
+  if(m_pProcess != NULL)
+    m_pProcess->PreRender(l_pRM);
 
+	l_pRM->BeginRendering();
+
+  if(m_pProcess != NULL)
+    l_pRM->SetupMatrices(m_pProcess->GetCamera());
+	
+	RenderScene();
+
+	l_pRM->EndRendering();
 
 }
 
@@ -80,8 +83,7 @@ void CEngine::RenderScene()
 {
 	if(m_pProcess != NULL)
 	{
-    m_pProcess->PreRender(RENDER_MANAGER);
-		m_pProcess->Render(RENDER_MANAGER);
+    m_pProcess->Render(RENDER_MANAGER);
 		//Mostrem la informació de Debug (en aquest cas els FPS del timer)
     float l_fFrameRate = m_pTimer->GetFPS();
 		m_pProcess->DebugInformation(l_fFrameRate);

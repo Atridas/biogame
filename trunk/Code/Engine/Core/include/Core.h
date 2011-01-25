@@ -56,11 +56,11 @@ public:
    * @params _fElapsedTime temps que ha transcorregut desde l'última execuciód el mètode.
   **/
   void Update(float _fElapsedTime);
-	/**
-   * Mètode de render.
-   * Aquest mètode s'executa a cada iteració. Durant aquest es farà render de tots els RenderableObjects.
-  **/
-  void Render();
+ ///**
+ //  * Mètode de render.
+ //  * Aquest mètode s'executa a cada iteració. Durant aquest es farà render de tots els RenderableObjects.
+ // **/
+ // void Render();
   
   /**
    * Getter del RenderManager.
