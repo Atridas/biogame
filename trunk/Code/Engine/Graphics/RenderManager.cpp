@@ -333,6 +333,47 @@ void CRenderManager::SetTransform(Mat44f& m)
     m_pEffectManager->SetWorldMatrix(m);
 }
 
+void CRenderManager::CalculateAlignment (uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, Vect2i& _vfinalPos)
+{
+  switch (_Alignment)
+  {
+    case CENTER:
+    {
+      _vfinalPos.x -= (uint32)(_uiW*0.5f);
+      _vfinalPos.y -= (uint32)(_uiH*0.5f);
+    }
+    break;
+    case UPPER_LEFT:
+    {
+      //Por defecto ya est alienado de esta manera :)
+    }
+    break;
+    case UPPER_RIGHT:
+    {
+      _vfinalPos.x -= _uiW;
+    }
+    break;
+    case LOWER_RIGHT:
+    {
+      _vfinalPos.x -= _uiW;
+      _vfinalPos.y -= _uiH;
+    }
+    break;
+    case LOWER_LEFT:
+    {
+      _vfinalPos.y -= _uiH;
+    }
+    break;
+    default:
+    {
+      LOGGER->AddNewLog(ELL_ERROR, "RenderManager::CalculateAlignment Se está intentado renderizar un quad2d con una alineacion desconocida");
+    }
+    break;
+  }
+
+}
+
+
 void CRenderManager::DrawLine ( const Vect3f &_PosA, const Vect3f &_PosB, const CColor& _Color)
 {
 	DWORD l_color_aux = _Color.GetUint32Argb();
@@ -593,6 +634,61 @@ void CRenderManager::DrawGrid(float Size, CColor Color, int GridX, int32 GridZ )
 		l_vCurrentRight += l_vIncX;
 	}
 
+}
+void CRenderManager::DrawQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, CColor _Color)
+{
+  DWORD l_Color = _Color.GetUint32Argb(); //si no va, usar: D3DCOLOR_COLORVALUE(_Color.GetRed(), _Color.GetGreen(), _Color.GetBlue(), _Color.GetAlpha())
+  Vect2i l_vFinalPos = _vPos;
+  CalculateAlignment(_uiW, _uiH, _Alignment, l_vFinalPos);
+
+  // finalPos = [0]
+  //
+  //  [0]------[2]
+  //   |        |
+  //   |        |
+  //   |        |
+  //  [1]------[3]
+
+  unsigned short _usIndices[6]={0,2,1,1,2,3};
+  SDIFFUSEVERTEX l_Vtx[4] =
+  {
+     { (float)l_vFinalPos.x,      (float)l_vFinalPos.y,       0, l_Color} //(x,y) sup_esq.
+    ,{ (float)l_vFinalPos.x,      (float)l_vFinalPos.y+_uiH,  0, l_Color} //(x,y) inf_esq.
+    ,{ (float)l_vFinalPos.x+_uiW, (float)l_vFinalPos.y,       0, l_Color} //(x,y) sup_dr.
+    ,{ (float)l_vFinalPos.x+_uiW, (float)l_vFinalPos.y+_uiH,  0, l_Color} //(x,y) inf_dr.
+  };
+
+  m_pD3DDevice->SetFVF( SDIFFUSEVERTEX::GetFVF() );
+  m_pD3DDevice->SetTexture(0, NULL);
+  m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST,0, 4, 2, _usIndices, D3DFMT_INDEX16, l_Vtx, sizeof( SDIFFUSEVERTEX ) );
+}
+
+void CRenderManager::DrawTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, CTexture* _Texture, CColor _Color)
+{
+  DWORD l_Color = _Color.GetUint32Argb(); //si no va, usar: D3DCOLOR_COLORVALUE(_Color.GetRed(), _Color.GetGreen(), _Color.GetBlue(), _Color.GetAlpha())
+  Vect2i l_vFinalPos = _vPos;
+  CalculateAlignment(_uiW, _uiH, _Alignment, l_vFinalPos);
+
+  // finalPos = [0]
+  //
+  //  [0]------[2]
+  //   |        |
+  //   |        |
+  //   |        |
+  //  [1]------[3]
+
+  unsigned short _usIndices[6]={0,2,1,1,2,3};
+  SDIFFUSETEXTUREDVERTEX l_Vtx[4] =
+  {
+     { (float)l_vFinalPos.x,      (float)l_vFinalPos.y,       0, l_Color, 0.0f, 0.0f } //(x,y) sup_esq.
+    ,{ (float)l_vFinalPos.x,      (float)l_vFinalPos.y+_uiH,  0, l_Color, 0.0f, 1.0f } //(x,y) inf_esq.
+    ,{ (float)l_vFinalPos.x+_uiW, (float)l_vFinalPos.y,       0, l_Color, 1.0f, 0.0f } //(x,y) sup_dr.
+    ,{ (float)l_vFinalPos.x+_uiW, (float)l_vFinalPos.y+_uiH,  0, l_Color, 1.0f, 1.0f } //(x,y) inf_dr.
+  };
+
+  m_pD3DDevice->SetFVF( SDIFFUSETEXTUREDVERTEX::GetFVF() );
+  _Texture->Activate(0);
+  m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST,0, 4, 2, _usIndices, D3DFMT_INDEX16, l_Vtx, sizeof( SDIFFUSETEXTUREDVERTEX ) );
 }
 
 void CRenderManager::DrawColoredQuad2DTextured(RECT _Rect, CColor _Color)
