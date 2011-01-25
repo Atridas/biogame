@@ -47,8 +47,8 @@ bool CSceneEffectManager::Load()
     for(int i = 0; i < l_iNumChildren; i++)
     {
 
-      CXMLTreeNode l_treeSceneEffect = l_treeSceneEffects(i);
-      if(l_treeSceneEffect.IsComment())
+      CXMLTreeNode l_treePreRender = l_treeSceneEffects(i);
+      if(l_treePreRender.IsComment())
         continue;
       
       string l_szTypePreRender = l_treePreRender.GetPszISOProperty("type","");
@@ -64,7 +64,7 @@ bool CSceneEffectManager::Load()
 
       
       // O es creo un objecta, i es posen les dades llegides dins, no se com
-      CSceneEffect* l_pSceneEffect = new CSceneEffect();
+      //CSceneEffect* l_pSceneEffect = new CSceneEffect();
     
       //O inserta a sacp la info en el vector
     /*  m_vPreRenderSceneEffects.insert(m_vPreRenderSceneEffects.end(),l_szTypePreRender);
