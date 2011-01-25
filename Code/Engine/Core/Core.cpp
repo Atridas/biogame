@@ -24,8 +24,6 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pActionToInput            = new CActionToInput();
   m_pRenderableObjectsManager = new CRenderableObjectsManager();
   m_pLightManager             = new CLightManager();
-  //m_pAnimatedModelManager     = new CAnimatedModelManager();
-  
 
   m_pRenderManager->Init(hWnd,_InitParams.RenderManagerParams);
   m_pLanguageManager->Init(_InitParams.LanguageManagerParams);
@@ -35,9 +33,6 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
 
   m_pRenderableObjectsManager->Load(_InitParams.RenderableObjectsManager.vXMLFiles);
   m_pLightManager->Load(_InitParams.LightsManager.szFile);
-  //m_pAnimatedModelManager->Load(_InitParams.);
-
-  
 
   SetOk(true);
 
@@ -58,7 +53,6 @@ void CCore::Release()
   CHECKED_DELETE(m_pFontManager);
   CHECKED_DELETE(m_pLanguageManager);
   CHECKED_DELETE(m_pRenderManager);
-  //CHECKED_DELETE(m_pAnimatedModelManager);
 }
 
 void CCore::Update(float elapsedTime)
@@ -66,11 +60,4 @@ void CCore::Update(float elapsedTime)
   m_pInputManager->Update();
   m_pActionToInput->Update(elapsedTime);
   m_pRenderableObjectsManager->Update(elapsedTime);
-}
-
-void CCore::Render()
-{
-  m_pRenderableObjectsManager->Render(m_pRenderManager);
-  if(m_bRenderLights)
-    m_pLightManager->Render(m_pRenderManager);
 }

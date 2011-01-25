@@ -77,12 +77,10 @@ void CProcess::PreRender(CRenderManager* _pRM)
   //Código de Prerender si necesitásemos hacer el pre-render de la GUI
 }
 
+//TODO: uncomment when ready
 void CProcess::Render(CRenderManager* _pRM)
 {
   //CEffectManager* l_pEM = _pRM->GetEffectManager();
-  //CCamera* l_pCamera= _pRM->GetCamera();
-  //l_pCamera->Activate();
-  //_pRM->SetupMatrices(l_pCamera);
 
   //m_pSceneEffectManager->ActivateRenderSceneEffects();
 
@@ -100,7 +98,4 @@ void CProcess::Render(CRenderManager* _pRM)
   //
   //m_pSceneEffectManager->CaptureFrameBuffersAfterPostRender(_pRM);
   
-  //CGUI *l_GUI=GetCurrentGUI();
-  //if(l_GUI)
-  //  l_GUI->Render(PSParams);
 }
