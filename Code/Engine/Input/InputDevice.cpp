@@ -104,6 +104,9 @@ HRESULT CInputDevice::GetData(INPUT_DEVICE_TYPE Type, void *pData,DWORD *pdwNum)
 	HRESULT hr=S_FALSE;
 	size_t size=0;
 
+  if(GetForegroundWindow() != m_hWnd)
+    return S_FALSE;
+
 	// is this a mouse?
 	if (Type == IDV_MOUSE) 
 	{
