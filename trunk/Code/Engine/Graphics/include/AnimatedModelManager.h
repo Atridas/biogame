@@ -26,7 +26,7 @@ public:
    * Constructor per defecte.
    * Amb el constructor per defecte és suficient per deixar la classe en Ok.
   **/
-  CAnimatedModelManager(void)   {};
+  CAnimatedModelManager();
   /**
    * Destructor.
    * Allibera els recursos abans de destruir-se.

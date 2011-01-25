@@ -119,6 +119,7 @@ bool CTestProcess::Init()
 
   //g_pAnimatedInstanceModel = ANIMATED_MANAGER->GetResource("bot");
   
+  
   //g_pAnimatedInstanceModel = ANIMATED_MANAGER->GetInstance("bot");
   //g_pAnimatedInstanceModel->BlendCycle(1,0);
   //CRenderableAnimatedInstanceModel* l_pRenderableAnimatedIM = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("bot");
