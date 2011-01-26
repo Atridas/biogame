@@ -102,6 +102,17 @@ float3 ComputeAllLights(float3 _Normal, float3 _WorldPosition, float3 _DiffuseCo
   return out_;
 }
 
+//shadow
+float shadowMultiplier(float4 _PosLight)
+{
+  float2 ShadowTexC = 0.5 * _PosLight.xy / _PosLight.w + float2( 0.5, 0.5 );
+  ShadowTexC.y = 1.0f - ShadowTexC.y;
+
+  float LightAmount = (tex2D( ShadowTextureSampler, ShadowTexC ) + SHADOW_EPSILON < _PosLight.z / _PosLight.w)? 0.0f: 1.0f;
+  
+  return LightAmount;
+}
+
 //Normal Mapping / Parallax Mapping
 
 float3 CalcNormalmap(float3 _Tangent, float3 _Binormal, float3 _Normal, float2 _UV)
@@ -132,17 +143,6 @@ float3 CalcParallaxMap(float3 _Position, float3 WorldNormal, float3 WorldTangent
 	tNorm = normalize(tNorm.x*WorldTangent - tNorm.y*WorldBinormal + tNorm.z*WorldNormal);
 	OutUV=l_UV;
 	return tNorm;
-}
-
-//shadow
-float shadowMultiplier(float4 _PosLight)
-{
-  float2 ShadowTexC = 0.5 * _PosLight.xy / _PosLight.w + float2( 0.5, 0.5 );
-  ShadowTexC.y = 1.0f - ShadowTexC.y;
-
-  float LightAmount = (tex2D( ShadowTextureSampler, ShadowTexC ) + SHADOW_EPSILON < _PosLight.z / _PosLight.w)? 0.0f: 1.0f;
-  
-  return LightAmount;
 }
 
 // Cal3d functions
