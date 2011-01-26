@@ -134,6 +134,17 @@ float3 CalcParallaxMap(float3 _Position, float3 WorldNormal, float3 WorldTangent
 	return tNorm;
 }
 
+//shadow
+float shadowMultiplier(float4 _PosLight)
+{
+  float2 ShadowTexC = 0.5 * _PosLight.xy / _PosLight.w + float2( 0.5, 0.5 );
+  ShadowTexC.y = 1.0f - ShadowTexC.y;
+
+  float LightAmount = (tex2D( ShadowTextureSampler, ShadowTexC ) + SHADOW_EPSILON < _PosLight.z / _PosLight.w)? 0.0f: 1.0f;
+  
+  return LightAmount;
+}
+
 // Cal3d functions
 
 float3 CalcAnimtedPos(float4 Position, float4 Indices, float4 Weight)

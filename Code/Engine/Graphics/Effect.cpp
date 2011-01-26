@@ -94,6 +94,7 @@ bool CEffect::LoadEffect()
   {
     LOGGER->AddNewLog(ELL_ERROR,"CEffect::LoadEffect Error creating effect '%s':\n%s", m_szFileName.c_str(), l_ErrorBuffer->GetBufferPointer());
     CHECKED_RELEASE(l_ErrorBuffer);
+    SetOk(false);
     return false;
   }
   if(l_HR != D3D_OK)
@@ -101,21 +102,26 @@ bool CEffect::LoadEffect()
     if(l_HR == D3DERR_INVALIDCALL)
     {
       LOGGER->AddNewLog(ELL_ERROR,"CEffect::LoadEffect Error crida invàlida");
+      SetOk(false);
       return false;
     }
     else if(l_HR == D3DXERR_INVALIDDATA)
     {
       LOGGER->AddNewLog(ELL_ERROR,"CEffect::LoadEffect Error invalid data");
+      SetOk(false);
       return false;
     }
     else if(l_HR == E_OUTOFMEMORY)
     {
       LOGGER->AddNewLog(ELL_ERROR,"CEffect::LoadEffect Error out of memory");
+      SetOk(false);
       return false;
     }
   }
 
-  return InitParameters();
+  SetOk(InitParameters());
+  
+  return IsOk();
 }
 
 void CEffect::GetParameterBySemantic(const string& _szSemanticName, D3DXHANDLE& _pHandle)

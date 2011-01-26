@@ -2,9 +2,15 @@
 <scene_effects>
   
   <pre_render type="shadow_map_render_to_texture" name="shadow_map_scene_effect" 
-              texture="ShadowMapTexture" width="1024" height="1024" static_mesh_technique="RenderShadowTechnique" 
-              animated_model_technique="Cal3DTechniqueShadow" light_shadow_cast="TPhotometricLight02" 
+              texture="ShadowMapTexture" width="1024" height="1024" 
+              static_mesh_technique="RenderShadowTechnique" animated_model_technique="Cal3DTechniqueShadow" 
+              light_shadow_cast="Spot01" 
               active="true" format_type="R32F"/>
+              
+              
+  <render name="default_scene_effect" active="true">
+    <texture stage_id="5" texture="ShadowMapTexture"/>
+  </render>
   <!--            
   <pre_render type="render_to_texture" name="z_blur_scene_effect" texture="ZBlurTexture" width="1024" height="1024"
               static_mesh_technique="RenderZBlurTechnique"
@@ -15,9 +21,6 @@
   
   
   
-  <render name="default_scene_effect" active="true">
-    <texture stage_id="5" texture="ShadowMapTexture"/>
-  </render>
   
   
   

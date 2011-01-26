@@ -23,6 +23,8 @@ TNORMAL_DIFFUSED_VERTEX_PS NormalDiffusedVS(TNORMAL_DIFFUSED_VERTEX_VS _in) {
 	out_.Color = _in.Color;
 	out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
 	
+  out_.PosLight = mul(float4(out_.WorldPosition,1.0), g_ViewToLightProjectionMatrix);
+  
 	return out_;
 }
 
@@ -33,6 +35,8 @@ TNORMAL_TEXTURED_VERTEX_PS NormalTexturedVS(TNORMAL_TEXTURED_VERTEX_VS _in) {
 	out_.WorldPosition = mul(_in.Position,(float3x3)g_WorldMatrix);
 	out_.UV = _in.UV.xy;
 	out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
+	
+  out_.PosLight = mul(float4(out_.WorldPosition,1.0), g_ViewToLightProjectionMatrix);
 	
 	return out_;
 }
@@ -46,6 +50,8 @@ TNORMAL_TEXTURED2_VERTEX_PS NormalTextured2VS(TNORMAL_TEXTURED2_VERTEX_VS _in) {
 	out_.UV2 = _in.UV2.xy;
 	out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
 	
+  out_.PosLight = mul(float4(out_.WorldPosition,1.0), g_ViewToLightProjectionMatrix);
+	
 	return out_;
 }
 
@@ -58,6 +64,8 @@ TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS TangentBinormalNormalTexturedVS(TTAN
 	out_.WorldBinormal = normalize(cross(out_.WorldNormal, out_.WorldTangent));
 	out_.UV  = _in.UV.xy;
 	out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
+	
+  out_.PosLight = mul(float4(out_.WorldPosition,1.0), g_ViewToLightProjectionMatrix);
 	
 	return out_;
 }
@@ -73,6 +81,8 @@ TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS TangentBinormalNormalTextured2VS(TT
 	out_.UV2 = _in.UV2.xy;
 	out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
 	
+  out_.PosLight = mul(float4(out_.WorldPosition,1.0), g_ViewToLightProjectionMatrix);
+	
 	return out_;
 }
 
@@ -80,22 +90,24 @@ TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS TangentBinormalNormalTextured2VS(TT
 //enlloc de CAL3D_HW_VERTEX_PS
 TNORMAL_TEXTURED_VERTEX_PS RenderCal3DHWVS(CAL3D_HW_VERTEX_VS IN)
 {
-	TNORMAL_TEXTURED_VERTEX_PS OUT=(TNORMAL_TEXTURED_VERTEX_PS)0;
+	TNORMAL_TEXTURED_VERTEX_PS out_=(TNORMAL_TEXTURED_VERTEX_PS)0;
 	//float3 l_Normal= 0;
 	//float3 l_Tangent=0;
 	//CalcAnimatedNormalTangent(IN.Normal.xyz, IN.Tangent.xyz, IN.Indices, IN.Weight, l_Normal,l_Tangent);
 	float3 l_Position = CalcAnimtedPos(float4(IN.Position.xyz,1.0), IN.Indices, IN.Weight);
 	float3 l_Normal   = CalcAnimtedPos(IN.Normal, IN.Indices, IN.Weight);
 	float4 l_WorldPosition=float4(l_Position, 1.0);
-	OUT.WorldPosition=mul(l_WorldPosition,g_WorldMatrix);  
-	OUT.WorldNormal = mul(l_Normal,(float3x3)g_WorldMatrix);
+	out_.WorldPosition=mul(l_WorldPosition,g_WorldMatrix);  
+	out_.WorldNormal = mul(l_Normal,(float3x3)g_WorldMatrix);
+	
+  out_.PosLight = mul(float4(out_.WorldPosition,1.0), g_ViewToLightProjectionMatrix);
   
   
 	//OUT.WorldTangent=normalize(mul(l_Tangent,g_WorldMatrix));
 	//OUT.WorldBinormal=mul(cross(l_Tangent,l_Normal),(float3x3)g_WorldMatrix);
-	OUT.UV = IN.TexCoord.xy;
-	OUT.HPosition = mul(l_WorldPosition, g_WorldViewProjectionMatrix );
-	return OUT;
+	out_.UV = IN.TexCoord.xy;
+	out_.HPosition = mul(l_WorldPosition, g_WorldViewProjectionMatrix );
+	return out_;
 }
 
 #endif

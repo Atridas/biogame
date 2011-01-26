@@ -14,6 +14,7 @@ struct TNORMAL_DIFFUSED_VERTEX_PS {
 	float4 Color : COLOR;
   float3 WorldPosition : TEXCOORD2;
 	float3 WorldNormal : TEXCOORD3;
+  float4 PosLight      : TEXCOORD6;
 };
 // Textured --------------------------------------------------------------------------------------------------------------
 
@@ -52,6 +53,7 @@ struct TNORMAL_TEXTURED_VERTEX_PS {
 	float2 UV : TEXCOORD0;
   float3 WorldPosition : TEXCOORD2;
 	float3 WorldNormal : TEXCOORD3;
+  float4 PosLight      : TEXCOORD6;
 };
 
 // Normal Textured 2 --------------------------------------------------------------------------------------------------------------
@@ -69,6 +71,7 @@ struct TNORMAL_TEXTURED2_VERTEX_PS {
 	float2 UV2 : TEXCOORD1;
   float3 WorldPosition : TEXCOORD2;
 	float3 WorldNormal : TEXCOORD3;
+  float4 PosLight      : TEXCOORD6;
 };
 
 // Normal Textured + Binormal / Tangent------------------------------------------------------------------------------------------
@@ -88,6 +91,7 @@ struct TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS {
 	float3 WorldNormal : TEXCOORD3;
   float3 WorldTangent : TEXCOORD4;
   float3 WorldBinormal : TEXCOORD5;
+  float4 PosLight      : TEXCOORD6;
 };
 
 // Normal Textured2+ Binormal / Tangent------------------------------------------------------------------------------------------
@@ -109,6 +113,7 @@ struct TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS {
 	float3 WorldNormal : TEXCOORD3;
   float3 WorldTangent : TEXCOORD4;
   float3 WorldBinormal : TEXCOORD5;
+  float4 PosLight      : TEXCOORD6;
 };
 
 // Cal3d --------------------------------------------------------------------------------------------------------------------------

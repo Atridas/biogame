@@ -30,6 +30,9 @@ float g_SpotlightFactor = 1.5;
 #define LIGHT_DIRECTIONAL 1
 #define LIGHT_SPOT        2
 
+//Shadows
+#define SHADOW_EPSILON 0.00005f
+
 
 float3  g_AmbientLight                 : AmbientLight;
 

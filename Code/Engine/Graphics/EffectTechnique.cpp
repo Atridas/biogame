@@ -139,20 +139,27 @@ bool CEffectTechnique::BeginRender()
     }
     //Light
     if(m_bUseViewToLightProjectionMatrix)
-      //LightView, no LightViewProjection
-      l_pD3DEffect->SetMatrix(m_pEffect->m_pViewToLightProjectionMatrixParameter, &l_pEM->GetLightViewMatrix().GetD3DXMatrix());
-    //Time
+    {
+      Mat44f l_ViewToLightProjectionMatrix(l_pEM->GetViewMatrix());
+      l_ViewToLightProjectionMatrix.Invert();
+      l_ViewToLightProjectionMatrix=l_ViewToLightProjectionMatrix * l_pEM->GetLightViewMatrix();
+      l_ViewToLightProjectionMatrix=l_ViewToLightProjectionMatrix * l_pEM->GetShadowProjectionMatrix();
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pViewToLightProjectionMatrixParameter, &l_ViewToLightProjectionMatrix.GetD3DXMatrix());
+    }
     if(m_bUseTime)
+    {
       l_pD3DEffect->SetFloat(m_pEffect->m_pTimeParameter, CORE->GetTimer()->GetRelativeTime());
-  }else
+    }
+  } else {
     return false;
-  
+  }
+
   return true;
 }
 
 bool CEffectTechnique::Refresh()
 {
-  if(m_pEffect)
+  if(m_pEffect && m_pEffect->IsOk())
   {
       m_pD3DTechnique = m_pEffect->GetTechniqueByName(GetName());
       
