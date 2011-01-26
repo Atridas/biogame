@@ -55,9 +55,6 @@ void CDrawQuadSceneEffect::PostRender(CRenderManager *_pRM)
         return;
       }
     }*/
-    //TODO temporal?
-    CEffectManager* l_pEffectManager = RENDER_MANAGER->GetEffectManager();
-    m_pTechnique    = l_pEffectManager->GetEffectTechnique(m_szTechnique);
 
     m_pTechnique->BeginRender();
     LPD3DXEFFECT l_Effect=m_pTechnique->GetEffect()->GetD3DEffect();

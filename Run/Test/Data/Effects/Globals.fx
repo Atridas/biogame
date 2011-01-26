@@ -23,7 +23,7 @@ float g_BumpDiff = 0.6;
 float g_ParallaxHeight = 0.02f;
 
 float g_SpecularPow = 40;
-float g_SpotlightFactor = 2.5;
+float g_SpotlightFactor = 1.5;
 
 //Lights
 #define LIGHT_OMNI        0

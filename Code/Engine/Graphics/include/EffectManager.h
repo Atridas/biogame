@@ -73,7 +73,7 @@ protected:
 
 private:
 
-  bool Load();
+  bool Load(bool _bReload);
 
   string m_szFileName;
 
