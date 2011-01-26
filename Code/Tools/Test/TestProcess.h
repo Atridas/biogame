@@ -30,7 +30,10 @@ private:
 
 	void                  Release                 ();
 
+  int                   m_iState;
+  bool                  m_bStateChanged;
   CObject3D*            m_pObject;
+  CObject3D*            m_pObjectBot;
   CCamera*              m_pObjectCamera;
   float                 m_fVelocity;
   bool                  m_bRenderLights;

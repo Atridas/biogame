@@ -27,13 +27,29 @@ bool CTestProcess::Init()
   
   m_pObject = new CObject3D();
   m_fVelocity = 1;
+  
   m_pObject->SetPosition(Vect3f(-6,1.7f,0));
-  m_pObjectCamera = new CFPSCamera(
+
+  m_pObjectBot = CORE->GetRenderableObjectsManager()->GetResource("bot");
+
+  m_iState = 0;
+
+  m_bStateChanged = false;
+
+  //m_pObjectCamera = new CFPSCamera(
+  //  0.1f,
+  //  100.0f,
+  //  45.0f * FLOAT_PI_VALUE/180.0f,
+  //  ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
+  //  m_pObject);
+
+  m_pObjectCamera = new CThPSCamera(
     0.1f,
     100.0f,
     45.0f * FLOAT_PI_VALUE/180.0f,
     ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
-    m_pObject);
+    m_pObject,
+    4.0f);
 
   m_pCamera = m_pObjectCamera;
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
@@ -63,10 +79,22 @@ void CTestProcess::Update(float _fElapsedTime)
   l_fYaw = m_pObject->GetYaw();
   
   m_pObject->SetYaw(l_fYaw-l_vVec.x*_fElapsedTime);
+  m_pObjectBot->SetYaw(m_pObject->GetYaw()-FLOAT_PI_VALUE/2.0f);
+
   l_fPitch -= l_vVec.y*_fElapsedTime;
   if(l_fPitch < - FLOAT_PI_VALUE/3) l_fPitch = - FLOAT_PI_VALUE/3;
   if(l_fPitch >   FLOAT_PI_VALUE/3) l_fPitch =   FLOAT_PI_VALUE/3;
   m_pObject->SetPitch(l_fPitch);
+
+  m_pObjectBot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObjectBot->GetPosition().y, m_pObject->GetPosition().z));
+
+  if(m_bStateChanged)
+  {
+    ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->BlendCycle(m_iState,0);
+
+    m_bStateChanged = false;
+  }
+
 }
 
 void CTestProcess::RenderScene(CRenderManager* _pRM)
@@ -121,6 +149,12 @@ bool CTestProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, con
     l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
     l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
     m_pObject->SetPosition(l_vPos);
+
+    if(m_iState != 1)
+      m_bStateChanged = true;
+
+    m_iState = 1;
+
     return true;
   }
 
@@ -130,6 +164,12 @@ bool CTestProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, con
     l_vPos.x = l_vPos.x - cos(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
     l_vPos.z = l_vPos.z - sin(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
     m_pObject->SetPosition(l_vPos);
+
+    if(m_iState != 1)
+      m_bStateChanged = true;
+
+    m_iState = 1;
+
     return true;
   }
 
@@ -139,6 +179,12 @@ bool CTestProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, con
     l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
     l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
     m_pObject->SetPosition(l_vPos);
+
+    if(m_iState != 1)
+      m_bStateChanged = true;
+
+    m_iState = 1;
+
     return true;
   }
 
@@ -148,6 +194,12 @@ bool CTestProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, con
     l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
     l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
     m_pObject->SetPosition(l_vPos);
+
+    if(m_iState != 1)
+      m_bStateChanged = true;
+
+    m_iState = 1;
+
     return true;
   }
 

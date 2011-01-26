@@ -79,6 +79,7 @@ void CEffect::SetNullParameters()
 
 bool CEffect::LoadEffect()
 {
+
   LPD3DXBUFFER l_ErrorBuffer=NULL;
   HRESULT l_HR = D3DXCreateEffectFromFile(
                           RENDER_MANAGER->GetDevice(),
@@ -124,7 +125,8 @@ void CEffect::GetParameterBySemantic(const string& _szSemanticName, D3DXHANDLE& 
     LOGGER->AddNewLog(ELL_WARNING,"CEffect::GetParameterBySemantic Parameter by semantic '%s' wasn't found on effect '%s'", _szSemanticName.c_str(),m_szFileName.c_str());
 }
 
-bool CEffect::SetLights(size_t _iNumOfLights){
+bool CEffect::SetLights(size_t _iNumOfLights)
+{
   if(_iNumOfLights > MAX_LIGHTS_BY_SHADER)
   {
     assert(false);
@@ -194,11 +196,12 @@ bool CEffect::SetLights(size_t _iNumOfLights){
   return true;
 }
 
-bool CEffect::Init(const CXMLTreeNode& _xmlEffect){
+bool CEffect::Init(const CXMLTreeNode& _xmlEffect)
+{
   SetNullParameters();
   m_szFileName = _xmlEffect.GetPszISOProperty("file","");
   SetName(_xmlEffect.GetPszISOProperty("name","")); 
-  if(! LoadEffect() )
+  if(!LoadEffect())
     return false;
   SetOk(true);
   return true;
