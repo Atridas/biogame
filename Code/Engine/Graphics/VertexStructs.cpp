@@ -36,6 +36,9 @@ uint16 GetVertexSize(uint16 _usVertexType)
     return sizeof(SDIFFUSETEXTUREDVERTEX);
   } else if(_usVertexType == SDIFFUSETEXTUREDVERTEX::GetVertexType())
   {
+    return sizeof(SDIFFUSETEXTUREDVERTEX);
+  } else if(_usVertexType == SNORMALDIFFUSEVERTEX::GetVertexType())
+  {
     return sizeof(SNORMALDIFFUSEVERTEX);
   } else if(_usVertexType == SNORMALTEXTUREDVERTEX::GetVertexType())
   {
