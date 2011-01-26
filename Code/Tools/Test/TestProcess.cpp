@@ -38,7 +38,7 @@ bool CTestProcess::Init()
   m_pCamera = m_pObjectCamera;
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
 
-  CORE->SetRenderLights(true);
+  m_bRenderLights = true;
 
   SetOk(true);
   return IsOk();
@@ -75,7 +75,7 @@ void CTestProcess::RenderScene(CRenderManager* _pRM)
   CORE->GetRenderableObjectsManager()->Render(_pRM);
 
   //Render Lights
-  if(CORE->GetRenderLights())
+  if(m_bRenderLights)
     CORE->GetLightManager()->Render(_pRM);
 
   //Matrix for testing

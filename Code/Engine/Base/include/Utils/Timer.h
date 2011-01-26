@@ -20,12 +20,18 @@ public:
 	~CTimer();
 
 	void			Update					();
-	float			GetElapsedTime	() const { return m_fElpasedTime; }
+  void      Reset           ()       { m_fRelativeTime = 0.0f; }; //Resets the relative time
+
+	float			GetElapsedTime	() const { return m_fElapsedTime; }
+  float			GetTotalTime  	() const { return m_fTotalTime; }
+  float			GetRelativeTime	() const { return m_fRelativeTime; }
 	float			GetFPS					() const { return m_fFPS; }
 
 private:
 
-	float			m_fElpasedTime; // ElapsedTime
+	float			m_fElapsedTime; // ElapsedTime
+  float     m_fTotalTime;   // Time since the app started
+  float     m_fRelativeTime;// Time since last's reset
 	float			m_fFPS;					// FPS
 	float			m_fLastFps;
 	float			m_fFPSTime;

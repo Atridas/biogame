@@ -3,6 +3,7 @@
 #include "Core.h"
 #include "ActionToInput.h"
 #include "Camera.h"
+#include "Utils/Timer.h"
 
 #include "Utils/LanguageManager.h"
 #include "FontManager.h"
@@ -11,20 +12,22 @@
 #include "RenderableObjectsManager.h"
 #include "SceneEffectManager.h"
 
-void CProcess::DebugInformation(float _FPS)
+void CProcess::DebugInformation()
 {
-
   if(m_bRenderInfo)  //TODO: comprovar en una variable de debug
   {
     stringstream l_SStream;
 	  CColor col = colBLUE;
+    CTimer* l_pTimer = CORE->GetTimer();
     uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");
     
-    l_SStream << "FPS: " << (int)_FPS << endl;
+    l_SStream << "Total:     " << (float) l_pTimer->GetTotalTime() << "s" << endl;
+    l_SStream << "Relative:  " << (float) l_pTimer->GetRelativeTime() << "s" << endl;
+    l_SStream << "FPS:       " << (int) l_pTimer->GetFPS() << endl;
     string l_szMsg(l_SStream.str());
-    
-    FONT_MANAGER->DrawText(0,40,col,l_uiFontType,l_szMsg.c_str());
-    FONT_MANAGER->DrawText(0,65,col,l_uiFontType,m_szProcessName.c_str());
+
+    FONT_MANAGER->DrawText(0,40,col,l_uiFontType,m_szProcessName.c_str());
+    FONT_MANAGER->DrawText(0,65,col,l_uiFontType,l_szMsg.c_str());
   }
 }
 

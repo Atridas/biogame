@@ -1,6 +1,7 @@
 #include "XML/XMLTreeNode.h"
 #include "EffectTechnique.h"
 #include "Effect.h"
+#include "Utils/Timer.h"
 #include "RenderManager.h"
 #include "EffectManager.h"
 #include <Core.h>
@@ -83,9 +84,6 @@ bool CEffectTechnique::BeginRender()
     //Lights
     if(m_bUseLights)
     {
-      //BOOL l_iLight = true;
-      //l_pD3DEffect->GetBool(m_pEffect->m_pLightsEnabledParameter,l_iLight);
-
       if(m_pEffect->SetLights(m_iNumOfLights))
       {
         l_pD3DEffect->SetFloatArray   (m_pEffect->m_pAmbientLight,                        m_pEffect->m_aAmbientLight,                 3);
@@ -117,43 +115,38 @@ bool CEffectTechnique::BeginRender()
     //Matrix
     //Projection
     if(m_bUseProjMatrix)
-      l_pD3DEffect->SetMatrix(m_pEffect->m_pProjectionMatrixParameter,&l_pEM->GetProjectionMatrix().GetD3DXMatrix());
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pProjectionMatrixParameter,            &l_pEM->GetProjectionMatrix().GetD3DXMatrix());
     if(m_bUseInverseProjMatrix)
-      l_pD3DEffect->SetMatrix(m_pEffect->m_pProjectionMatrixParameter,&l_pEM->GetInverseProjectionMatrix().GetD3DXMatrix());
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pProjectionMatrixParameter,            &l_pEM->GetInverseProjectionMatrix().GetD3DXMatrix());
     //World
     if(m_bUseWorldMatrix)
-      l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldMatrixParameter,&l_pEM->GetWorldMatrix().GetD3DXMatrix());
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldMatrixParameter,                 &l_pEM->GetWorldMatrix().GetD3DXMatrix());
     if(m_bUseInverseWorldMatrix)
-      l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldMatrixParameter,&l_pEM->GetInverseWorldMatrix().GetD3DXMatrix());
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldMatrixParameter,                 &l_pEM->GetInverseWorldMatrix().GetD3DXMatrix());
     //View
     if(m_bUseViewMatrix)
-      l_pD3DEffect->SetMatrix(m_pEffect->m_pViewMatrixParameter,&l_pEM->GetViewMatrix().GetD3DXMatrix());
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pViewMatrixParameter,                  &l_pEM->GetViewMatrix().GetD3DXMatrix());
     if(m_bUseInverseViewMatrix)
-      l_pD3DEffect->SetMatrix(m_pEffect->m_pViewMatrixParameter,&l_pEM->GetInverseViewMatrix().GetD3DXMatrix());
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pViewMatrixParameter,                  &l_pEM->GetInverseViewMatrix().GetD3DXMatrix());
     //Composed
     if(m_bUseViewProjectionMatrix)
-      l_pD3DEffect->SetMatrix(m_pEffect->m_pViewProjectionMatrixParameter,&l_pEM->GetViewProjectionMatrix().GetD3DXMatrix());
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pViewProjectionMatrixParameter,        &l_pEM->GetViewProjectionMatrix().GetD3DXMatrix());
     if(m_bUseWorldViewMatrix)
-      l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldViewMatrixParameter,&(l_pEM->GetWorldViewMatrix()).GetD3DXMatrix());
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldViewMatrixParameter,             &(l_pEM->GetWorldViewMatrix()).GetD3DXMatrix());
     if(m_bUseWorldViewProjectionMatrix)
     {
-      //D3DXMATRIX l_World=l_pEM->GetWorldMatrix().GetD3DXMatrix();
-      //D3DXMATRIX l_View=l_pEM->GetViewMatrix().GetD3DXMatrix();
-      //D3DXMATRIX l_Projection=l_pEM->GetProjectionMatrix().GetD3DXMatrix();
-      //D3DXMATRIX l_WorldViewProjection=l_World*l_View*l_Projection;
-      
-      //l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldViewProjectionMatrixParameter,&l_WorldViewProjection);
-      l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldViewProjectionMatrixParameter,&(l_pEM->GetWorldViewProjectionMatrix()).GetD3DXMatrix());
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pWorldViewProjectionMatrixParameter,   &(l_pEM->GetWorldViewProjectionMatrix()).GetD3DXMatrix());
     }
     //Light
     if(m_bUseViewToLightProjectionMatrix)
       //LightView, no LightViewProjection
-      l_pD3DEffect->SetMatrix(m_pEffect->m_pViewToLightProjectionMatrixParameter,&l_pEM->GetLightViewMatrix().GetD3DXMatrix());
-
-  } else {
-    //LOGGER->AddNewLog(ELL_WARNING, "CEffectTechnique::BeginRender  No effect specified.");
+      l_pD3DEffect->SetMatrix(m_pEffect->m_pViewToLightProjectionMatrixParameter, &l_pEM->GetLightViewMatrix().GetD3DXMatrix());
+    //Time
+    if(m_bUseTime)
+      l_pD3DEffect->SetFloat(m_pEffect->m_pTimeParameter, CORE->GetTimer()->GetRelativeTime());
+  }else
     return false;
-  }
+  
   return true;
 }
 
