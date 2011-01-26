@@ -34,17 +34,17 @@ void CEffectManager::ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _m
 bool CEffectManager::Load(const string& _szFileName)
 {
   m_szFileName = _szFileName;
-  return Load();
+  return Load(false);
 }
 
-bool CEffectManager::Load()
+bool CEffectManager::Load(bool _bReload)
 {
-  LOGGER->AddNewLog(ELL_INFORMATION, "CEffectManager::Load() Carregant el fitxer \"%s\"", m_szFileName.c_str());
+  LOGGER->AddNewLog(ELL_INFORMATION, "CEffectManager::Load Carregant el fitxer \"%s\"", m_szFileName.c_str());
 
   CXMLTreeNode l_treeShaders;
   if(!l_treeShaders.LoadFile(m_szFileName.c_str()))
   {
-    LOGGER->AddNewLog(ELL_WARNING,"CEffectManager::Load() No s'ha trobat el XML \"%s\"", m_szFileName.c_str());
+    LOGGER->AddNewLog(ELL_WARNING,"CEffectManager::Load No s'ha trobat el XML \"%s\"", m_szFileName.c_str());
     return false;
   }
 
@@ -55,7 +55,7 @@ bool CEffectManager::Load()
     CXMLTreeNode l_treeEffects = l_treeShaders["effects"];
     int l_iNumChildren = l_treeEffects.GetNumChildren();
 
-    LOGGER->AddNewLog(ELL_INFORMATION,"CEffectManager::Load() Loading %d effects.", l_iNumChildren);
+    LOGGER->AddNewLog(ELL_INFORMATION,"CEffectManager::Load Loading %d effects.", l_iNumChildren);
 
     for(int i = 0; i < l_iNumChildren; i++)
     {
@@ -63,10 +63,36 @@ bool CEffectManager::Load()
       if(l_treeEffect.IsComment())
         continue;
       
-      CEffect* l_pEffect = new CEffect();
-      l_pEffect->Init(l_treeEffect);
 
-      m_Effects.AddResource(l_pEffect->GetName(),l_pEffect);
+      CEffect* l_pEffect = 0;
+
+      string l_szEffectName = l_treeEffect.GetPszISOProperty("name","");
+
+      l_pEffect = m_Effects.GetResource(l_szEffectName);
+
+      if(l_pEffect)
+      {
+        if(_bReload)
+        {
+          LOGGER->AddNewLog(ELL_INFORMATION,"CEffectManager::Load Reloading effect \"%s\"", l_szEffectName.c_str());
+        }
+
+        l_pEffect->Reload();
+
+      } else {
+
+        if(_bReload)
+        {
+          LOGGER->AddNewLog(ELL_INFORMATION,"CEffectManager::Load Found new effect during reload: \"%s\"", l_szEffectName.c_str());
+        }
+
+        l_pEffect = new CEffect();
+
+        l_pEffect->Init(l_treeEffect);
+
+        m_Effects.AddResource(l_pEffect->GetName(),l_pEffect);
+      }
+
     }
     //----------------------------
 
@@ -74,7 +100,7 @@ bool CEffectManager::Load()
     CXMLTreeNode l_treeDefTechniques = l_treeShaders["default_techniques"];
     l_iNumChildren = l_treeDefTechniques.GetNumChildren();
 
-    LOGGER->AddNewLog(ELL_INFORMATION,"CEffectManager::Load() Loading %d default_techniques.", l_iNumChildren);
+    LOGGER->AddNewLog(ELL_INFORMATION,"CEffectManager::Load Loading %d default_techniques.", l_iNumChildren);
 
     for(int i = 0; i < l_iNumChildren; i++)
     {
@@ -86,7 +112,7 @@ bool CEffectManager::Load()
       string l_szTechniqueName = l_treeDefTechnique.GetPszISOProperty("technique","");
 
       if(l_iVertexType == 0)
-        LOGGER->AddNewLog(ELL_WARNING,"CEffectManager::Load() Default technique \"%s\" amb vertex_type = 0.", l_szTechniqueName.c_str());
+        LOGGER->AddNewLog(ELL_WARNING,"CEffectManager::Load Default technique \"%s\" amb vertex_type = 0.", l_szTechniqueName.c_str());
 
       m_DefaultTechniqueEffectMap[l_iVertexType] = l_szTechniqueName;
     }
@@ -96,7 +122,7 @@ bool CEffectManager::Load()
     CXMLTreeNode l_treeTechniques = l_treeShaders["techniques"];
     l_iNumChildren = l_treeTechniques.GetNumChildren();
 
-    LOGGER->AddNewLog(ELL_INFORMATION,"CEffectManager::Load() Loading %d techniques.", l_iNumChildren);
+    LOGGER->AddNewLog(ELL_INFORMATION,"CEffectManager::Load Loading %d techniques.", l_iNumChildren);
 
     for(int i = 0; i < l_iNumChildren; i++)
     {
@@ -104,10 +130,34 @@ bool CEffectManager::Load()
       if(l_treeTechnique.IsComment())
         continue;
 
-      CEffectTechnique* l_pTechnique = new CEffectTechnique();
-      l_pTechnique->Init(l_treeTechnique);
+      string l_szTechniqueName = l_treeTechnique.GetPszISOProperty("name","");
 
-      AddResource(l_pTechnique->GetName(),l_pTechnique);
+      CEffectTechnique* l_pTechnique = GetResource(l_szTechniqueName);
+
+      if(l_pTechnique)
+      {
+        if(_bReload)
+        {
+          LOGGER->AddNewLog(ELL_INFORMATION,"CEffectManager::Load Reloading technique \"%s\"", l_szTechniqueName.c_str());
+        }
+
+        l_pTechnique->Init(l_treeTechnique);
+
+        l_pTechnique->Refresh();
+
+      } else {
+        if(_bReload)
+        {
+          LOGGER->AddNewLog(ELL_INFORMATION,"CEffectManager::Load Found new technique during reload: \"%s\"", l_szTechniqueName.c_str());
+        }
+
+        l_pTechnique = new CEffectTechnique();
+
+        l_pTechnique->Init(l_treeTechnique);
+
+        AddResource(l_pTechnique->GetName(),l_pTechnique);
+      }
+
     }
     //-----------------------------
   }
@@ -117,8 +167,7 @@ bool CEffectManager::Load()
 
 void CEffectManager::Reload()
 {
-  Release();
-  Load();
+  Load(true);
 }
 
 void CEffectManager::Release()

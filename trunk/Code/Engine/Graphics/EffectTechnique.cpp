@@ -8,7 +8,7 @@
 
 void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
 {
-  Release();
+  //Release();
   LOGGER->AddNewLog(ELL_INFORMATION, "CEffectTechnique::Init  Initializing params from XML.");
 
   //strings
@@ -187,9 +187,4 @@ void CEffectTechnique::Release()
       l_pEffectManager->SetAnimatedModelTechnique(0);
     }
   }
-
-  //self
-  CHECKED_DELETE(m_pEffect);
-  //d3d9
-  //CHECKED_DELETE(m_pD3DTechnique); Els handles NO s'alliveren.
 }
