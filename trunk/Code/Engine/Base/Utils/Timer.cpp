@@ -8,7 +8,9 @@
 //Inicializamos todas las variables
 CTimer::CTimer (uint32 avgSamples)
 : m_uSamples(avgSamples)
-, m_fElpasedTime(0.f)
+, m_fElapsedTime(0.f)
+, m_fTotalTime(0.0f)
+, m_fRelativeTime(0.0f)
 , m_dLastTime(0)
 , m_fFPS(0.f)
 , m_fFPSTime(0.f)
@@ -49,17 +51,18 @@ void CTimer::Update( void )
 		d += m_Deltas[j];
 	}
 	d /= (float)m_uSamples;
-	m_fElpasedTime = d;
+	m_fElapsedTime = d;
 	m_uIndex = (++m_uIndex) % m_uSamples;
 
 
 	//Calculo de los frames por segundo (m_fFPS)
 	m_uFPSCount++;
-	m_fFPSTime += m_fElpasedTime;
+	m_fFPSTime += m_fElapsedTime;
 
 	m_fFPS = m_uFPSCount/m_fFPSTime;
 
-	if( l_dCurTime - m_fLastFps > 1000 )	//Solo mostramos los fps cada segundo
+  //Solo mostramos los fps cada segundo
+	if( l_dCurTime - m_fLastFps > 1000 )
 	{
 		m_fFPS = m_uFPSCount/m_fFPSTime;
 		m_uFPSCount = 0;
@@ -67,4 +70,9 @@ void CTimer::Update( void )
 		m_fLastFps = (float)l_dCurTime;
 	}
 	//---------------------------------------------//
+
+  //Actualización del tiempo
+  m_fTotalTime    += m_fElapsedTime;
+  m_fRelativeTime += m_fElapsedTime;
+
 }

@@ -1,7 +1,7 @@
 #include "Core.h"
 
 #include <base.h>
-
+#include "Utils/Timer.h"
 #include "params.h"
 
 #include <RenderManager.h>
@@ -17,6 +17,8 @@
 bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"Core::Init");
+  
+  m_pTimer                    = new CTimer(30);
 
   m_pRenderManager            = new CRenderManager();
   m_pLanguageManager          = new CLanguageManager();
@@ -57,11 +59,17 @@ void CCore::Release()
   CHECKED_DELETE(m_pFontManager);
   CHECKED_DELETE(m_pLanguageManager);
   CHECKED_DELETE(m_pRenderManager);
+  CHECKED_DELETE(m_pTimer);
 }
 
-void CCore::Update(float elapsedTime)
+void CCore::Update()
 {
+  //Time update
+  m_pTimer->Update();
+  float l_fElapsedTime = m_pTimer->GetElapsedTime();
+
+  //Manager Updates
   m_pInputManager->Update();
-  m_pActionToInput->Update(elapsedTime);
-  m_pRenderableObjectsManager->Update(elapsedTime);
+  m_pActionToInput->Update(l_fElapsedTime);
+  m_pRenderableObjectsManager->Update(l_fElapsedTime);
 }

@@ -13,7 +13,9 @@ class CTestProcess:
 {
 
 public:
-	                      CTestProcess            ():CProcess("CTestProcess") {};
+                        CTestProcess            (): CProcess("CTestProcess"), m_pObject(0), m_pObjectCamera(0),
+                                                    m_fVelocity(0.0f),m_bRenderLights(false)
+                                                {};
   virtual               ~CTestProcess           ()                          {Done();};
 
   virtual bool          Init();
@@ -31,5 +33,5 @@ private:
   CObject3D*            m_pObject;
   CCamera*              m_pObjectCamera;
   float                 m_fVelocity;
+  bool                  m_bRenderLights;
 };
-

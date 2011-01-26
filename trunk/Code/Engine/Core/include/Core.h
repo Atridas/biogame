@@ -5,12 +5,13 @@
 #include <base.h>
 
 // -- forward declarations --
+struct SInitParams;
 class CRenderManager;
 class CLanguageManager;
 class CFontManager;
 class CXMLTreeNode;
+class CTimer;
 class CInputManager;
-struct SInitParams;
 class CActionToInput;
 class CRenderableObjectsManager;
 class CAnimatedModelManager;
@@ -34,7 +35,7 @@ public:
   **/
                       CCore               (void): m_pRenderManager(0),m_pLanguageManager(0),m_pFontManager(0),m_pInputManager(0),
                                                   m_pActionToInput(0),m_pRenderableObjectsManager(0),m_pLightManager(0),
-                                                  m_pSceneEffectManager(0),m_bRenderLights(false)
+                                                  m_pSceneEffectManager(0), m_pTimer(0)
                                                   {};
   /**
    * Destructor.
@@ -54,15 +55,20 @@ public:
 	/**
    * Mètode d'update.
    * Aquest mètode s'executa a cada iteració. Durant aquest es calcularà i realitzarà la lògica d'inputs desde l'última iteració.
-   * @params _fElapsedTime temps que ha transcorregut desde l'última execuciód el mètode.
   **/
-  void Update(float _fElapsedTime);
- ///**
- //  * Mètode de render.
- //  * Aquest mètode s'executa a cada iteració. Durant aquest es farà render de tots els RenderableObjects.
- // **/
- // void Render();
+  void Update();
+ /**
+   * Mètode de render.
+   * Aquest mètode s'executa a cada iteració. Durant aquest es farà render de tots els RenderableObjects.
+ **/
+ //void Render();
   
+  /**
+   * Getter del RenderManager.
+   * @return El RenderManager.
+   * @see RENDER_MANAGER
+  **/
+  CTimer*             GetTimer              () const                        {return m_pTimer;};
   /**
    * Getter del RenderManager.
    * @return El RenderManager.
@@ -102,10 +108,6 @@ public:
 
   CSceneEffectManager*GetSceneEffectManager () const                        {return m_pSceneEffectManager;};
 
-  bool                GetRenderLights       () const                        {return m_bRenderLights;};
-
-  void                SetRenderLights       (bool _bRenderLights)           {m_bRenderLights = _bRenderLights;};
-
 private:
 
   /**
@@ -120,6 +122,10 @@ private:
   **/
   void                 Release             ();
 
+  /**
+   * Timer.
+  **/
+  CTimer*                     m_pTimer;
   /**
    * RenderManager.
   **/
@@ -150,9 +156,6 @@ private:
   CLightManager*              m_pLightManager;
 
   CSceneEffectManager*        m_pSceneEffectManager;
-
-
-  bool                        m_bRenderLights;
 
   /**
    * AnimatedModelManager.

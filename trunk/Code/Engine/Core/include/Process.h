@@ -35,9 +35,8 @@ public:
    * Aquest mètode mostrarà per pantalla diversa informació que pot ser d'utilitat per al debug:
    *  - Nom del procés
    *  - FramesPerSecond
-   * @param _fFPS Valor dels FPS actuals. Aquest valor serà imprés per pantalla.
   **/
-	void				          DebugInformation(float _fFPS);
+	void				          DebugInformation();
   /**
    * Mètode de pre renderitzat.
    * Aquest mètode s'executa a cada iteració. Es realitzarà el prerender dels efectes d'escena.
