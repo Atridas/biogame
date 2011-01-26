@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <scene_effects>
-  <!--
+  
   <pre_render type="shadow_map_render_to_texture" name="shadow_map_scene_effect" 
               texture="ShadowMapTexture" width="1024" height="1024" static_mesh_technique="RenderShadowTechnique" 
               animated_model_technique="Cal3DTechniqueShadow" light_shadow_cast="TPhotometricLight02" 
               active="true" format_type="R32F"/>
-              
+  <!--            
   <pre_render type="render_to_texture" name="z_blur_scene_effect" texture="ZBlurTexture" width="1024" height="1024"
               static_mesh_technique="RenderZBlurTechnique"
               animated_model_technique="Cal3DTechniqueShadow" active="true" format_type="A8R8G8B8"/>

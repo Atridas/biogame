@@ -165,7 +165,10 @@ bool CTexture::Create(const string& _szName,
   m_uiWidth=_uiWidth;
   m_uiHeight=_uiHeight;
 
-  return hr != D3D_OK;
+  if(SUCCEEDED(hr))
+    SetOk(true);
+
+  return IsOk();
 }
 
 void CTexture::Deactivate(size_t Stage)
