@@ -34,7 +34,7 @@
     -->
   </RenderableObjectsManager>
 
-  <LightsManager file="Data/Levels/Proves/XML/Lights.xml"/>
+  <LightsManager file="Data/Levels/Hangar/XML/Lights.xml"/>
 
   <SceneEffectManager file="Data/XML/SceneEffects.xml"/>
     

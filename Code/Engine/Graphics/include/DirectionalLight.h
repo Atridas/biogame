@@ -22,6 +22,9 @@ public:
   Vect3f GetDirection() const {return m_vDirection;};
   virtual void Render(CRenderManager *RM) const;
 
+  Mat44f GetLightViewMatrix()       const;
+  Mat44f GetLightProjectionMatrix() const;
+
 protected:
   void Release() {};
 

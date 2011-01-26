@@ -15,6 +15,7 @@ public:
   ~CShadowMapRenderToTexture() {Done();};
 
   virtual bool Init(const CXMLTreeNode& _params);
+  virtual void PreRender(CRenderManager* _pRM, CProcess* _pProc);
 
 protected:
   void Release();

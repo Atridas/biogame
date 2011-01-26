@@ -80,13 +80,13 @@ void CProcess::PreRender(CRenderManager* _pRM)
 //TODO: uncomment when ready
 void CProcess::Render(CRenderManager* _pRM)
 {
-  //CEffectManager* l_pEM = _pRM->GetEffectManager();
+  CEffectManager* l_pEM = _pRM->GetEffectManager();
 
   //m_pSceneEffectManager->ActivateRenderSceneEffects();
 
   //que usen la technique por defecto del tipo de vértice
-  //l_pEM->SetAnimatedModelTechnique(NULL);
-  //l_pEM->SetStaticMeshTechnique(NULL);
+  l_pEM->SetAnimatedModelTechnique(NULL);
+  l_pEM->SetStaticMeshTechnique(NULL);
 
   //Renderizamos la escena
   RenderScene(_pRM);
@@ -94,10 +94,6 @@ void CProcess::Render(CRenderManager* _pRM)
   //Capturamos el Frame Buffer antes de los efectos de post render
   //m_pSceneEffectManager->CaptureFrameBuffers(_pRM);
   //Efectuamos los efectos de post render
-  //Mat44f t;
-  //t.SetIdentity();
-  //_pRM->SetTransform(t);
-  //_pRM->Setup2DCamera();
   m_pSceneEffectManager->PostRender(_pRM);
   //
   //m_pSceneEffectManager->CaptureFrameBuffersAfterPostRender(_pRM);

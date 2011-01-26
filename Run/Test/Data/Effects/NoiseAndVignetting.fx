@@ -35,7 +35,7 @@ float4 RenderNoiseAndVignettingPS(float2 UV : TEXCOORD0) : COLOR
   float2 l_UV=UV+l_Offset;
   float4 l_VignettingColor=tex2D(VignettingSampler, UV);
   float4 l_NoiseColor=tex2D(NoiseSampler, l_UV);
-  return float4(l_NoiseColor.xyz*l_VignettingColor.xyz, l_NoiseColor.a+l_VignettingColor.a*3);
+  return float4(l_NoiseColor.xyz*l_VignettingColor.xyz, l_NoiseColor.a+l_VignettingColor.a);
 }
 technique RenderNoiseAndVignettingTechnique
 {
