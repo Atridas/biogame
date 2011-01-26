@@ -31,9 +31,6 @@ uint16 GetVertexSize(uint16 _usVertexType)
   } else if(_usVertexType == STEXTURED2VERTEX::GetVertexType())
   {
     return sizeof(STEXTURED2VERTEX);
-  } else if(_usVertexType == STEXTURED2VERTEX::GetVertexType())
-  {
-    return sizeof(SDIFFUSETEXTUREDVERTEX);
   } else if(_usVertexType == SDIFFUSETEXTUREDVERTEX::GetVertexType())
   {
     return sizeof(SDIFFUSETEXTUREDVERTEX);
