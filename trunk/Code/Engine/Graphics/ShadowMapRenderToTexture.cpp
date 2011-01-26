@@ -22,7 +22,7 @@ bool CShadowMapRenderToTexture::Init(const CXMLTreeNode& _params)
 
   if(!m_pLightShadowCast)
   {
-    LOGGER->AddNewLog(ELL_INFORMATION, "CShadowMapRenderToTexture::Init  No light \"%s\".", l_szLightShadowCast.c_str());
+    LOGGER->AddNewLog(ELL_ERROR, "CShadowMapRenderToTexture::Init  No light \"%s\".", l_szLightShadowCast.c_str());
     SetOk(false);
   }
   return IsOk();

@@ -1,4 +1,5 @@
 #include "VertexType.fx"
+#include "Globals.fx"
 
 sampler VignettingSampler : register(s1) = sampler_state
 {
@@ -30,10 +31,10 @@ TTEXTURED_DIFFUSSED_VERTEX_PS RenderNoiseAndVignettingVS(TTEXTURED_DIFFUSSED_VER
 
 float4 RenderNoiseAndVignettingPS(float2 UV : TEXCOORD0) : COLOR
 {
-  //float2 l_Offset=float2(g_Time*0.39*0.001,g_Time*0.79*0.001);
-  float2 l_Offset=0;
+  float2 l_Offset=float2(g_Time*0.39, g_Time*0.79);
+  //float2 l_Offset=0;
   float2 l_UV=UV+l_Offset;
-  float4 l_VignettingColor=tex2D(VignettingSampler, UV);
+  float4 l_VignettingColor = tex2D(VignettingSampler, UV);
   float4 l_NoiseColor=tex2D(NoiseSampler, l_UV);
   return float4(l_NoiseColor.xyz*l_VignettingColor.xyz, l_NoiseColor.a+l_VignettingColor.a);
 }

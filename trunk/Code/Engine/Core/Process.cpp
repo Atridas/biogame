@@ -85,7 +85,7 @@ void CProcess::Render(CRenderManager* _pRM)
 {
   CEffectManager* l_pEM = _pRM->GetEffectManager();
 
-  //m_pSceneEffectManager->ActivateRenderSceneEffects();
+  m_pSceneEffectManager->ActivateRenderSceneEffects();
 
   //que usen la technique por defecto del tipo de vértice
   l_pEM->SetAnimatedModelTechnique(NULL);
