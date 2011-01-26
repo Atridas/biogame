@@ -26,6 +26,19 @@ struct TTEXTURED_VERTEX_PS {
 	float4 HPosition : POSITION;
 	float2 UV : TEXCOORD0;
 };
+// Textured Difussed--------------------------------------------------------------------------------------------------------------
+
+struct TTEXTURED_DIFFUSSED_VERTEX_VS {
+	float3 Position : POSITION;
+	float4 Color : COLOR;
+	float4 UV : TEXCOORD0;
+};
+
+struct TTEXTURED_DIFFUSSED_VERTEX_PS {
+	float4 HPosition : POSITION;
+	float4 Color : COLOR;
+	float2 UV : TEXCOORD0;
+};
 // Normal Textured --------------------------------------------------------------------------------------------------------------
 
 struct TNORMAL_TEXTURED_VERTEX_VS {

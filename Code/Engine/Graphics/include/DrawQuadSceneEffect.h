@@ -14,7 +14,7 @@ class CTexture;
 class CDrawQuadSceneEffect : public CSceneEffect
 {
 public:
-  CDrawQuadSceneEffect(): m_pTechnique(0) {};
+  CDrawQuadSceneEffect(): m_pTechnique(0),m_szTechnique("") {};
   ~CDrawQuadSceneEffect() {Done();};
 
   virtual bool Init(const CXMLTreeNode& _params);
@@ -24,6 +24,7 @@ public:
 protected:
   void Release();
   CEffectTechnique *m_pTechnique;
+  string            m_szTechnique;
   CColor m_Color;
 };
 

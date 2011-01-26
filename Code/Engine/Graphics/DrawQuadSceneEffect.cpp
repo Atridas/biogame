@@ -14,14 +14,14 @@ bool CDrawQuadSceneEffect::Init(const CXMLTreeNode& _params)
   if(!CSceneEffect::Init(_params))
     return false;
 
-  string l_szTechnique = _params.GetPszISOProperty("technique","");
+  m_szTechnique = _params.GetPszISOProperty("technique","");
   
   CEffectManager* l_pEffectManager = RENDER_MANAGER->GetEffectManager();
-  m_pTechnique    = l_pEffectManager->GetEffectTechnique(l_szTechnique);
+  m_pTechnique    = l_pEffectManager->GetEffectTechnique(m_szTechnique);
 
   if(!m_pTechnique)
   {
-    LOGGER->AddNewLog(ELL_ERROR, "CDrawQuadSceneEffect::Init  Error loading Technique, no technique \"%s\" exists.", l_szTechnique.c_str());
+    LOGGER->AddNewLog(ELL_ERROR, "CDrawQuadSceneEffect::Init  Error loading Technique, no technique \"%s\" exists.", m_szTechnique.c_str());
     Release();
     SetOk(false);
   } else {
@@ -35,10 +35,30 @@ void CDrawQuadSceneEffect::PostRender(CRenderManager *_pRM)
 {
   if(IsOk())
   {
-    RECT l_Rect;
-    l_Rect.top=l_Rect.left=0;
-    l_Rect.bottom=_pRM->GetScreenHeight();
-    l_Rect.right=_pRM->GetScreenWidth();
+    //RECT l_Rect;
+    //l_Rect.top=l_Rect.left=0;
+    //l_Rect.bottom=_pRM->GetScreenHeight();
+    //l_Rect.right=_pRM->GetScreenWidth();
+    Vect2i posInit(0,0);
+    uint32 w = _pRM->GetScreenWidth();
+    uint32 h = _pRM->GetScreenHeight();
+
+    /*if(!m_pTechnique->IsOk())
+    {
+      CEffectManager* l_pEffectManager = RENDER_MANAGER->GetEffectManager();
+      m_pTechnique    = l_pEffectManager->GetEffectTechnique(m_szTechnique);
+
+      if(!m_pTechnique || !m_pTechnique->IsOk())
+      {
+        Release();
+        SetOk(false);
+        return;
+      }
+    }*/
+    //TODO temporal?
+    CEffectManager* l_pEffectManager = RENDER_MANAGER->GetEffectManager();
+    m_pTechnique    = l_pEffectManager->GetEffectTechnique(m_szTechnique);
+
     m_pTechnique->BeginRender();
     LPD3DXEFFECT l_Effect=m_pTechnique->GetEffect()->GetD3DEffect();
     if(l_Effect!=NULL)
@@ -50,7 +70,8 @@ void CDrawQuadSceneEffect::PostRender(CRenderManager *_pRM)
       {
         l_Effect->BeginPass(iPass);
         ActivateTextures();
-        _pRM->DrawColoredQuad2DTextured( l_Rect, m_Color);
+        //_pRM->DrawColoredQuad2DTextured( l_Rect, m_Color);
+        _pRM->DrawTexturedQuad2D (posInit,w,h,UPPER_LEFT,m_Color);
         l_Effect->EndPass();
       }
       l_Effect->End();
