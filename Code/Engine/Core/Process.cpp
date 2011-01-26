@@ -76,7 +76,7 @@ bool CProcess::ExecuteScript(float _fDeltaSeconds, float _fDelta, const char* _p
 
 void CProcess::PreRender(CRenderManager* _pRM)
 {
-  //m_pSceneEffectManager->PreRender(_pRM, this);
+  m_pSceneEffectManager->PreRender(_pRM, this);
   //Código de Prerender si necesitásemos hacer el pre-render de la GUI
 }
 

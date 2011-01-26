@@ -173,41 +173,39 @@ bool CTexture::Create(const string& _szName,
 
 void CTexture::Deactivate(size_t Stage)
 {
-  //PSRender.GetDevice()->SetTexture((DWORD)Stage,NULL);
+  RENDER_MANAGER->GetDevice()->SetTexture((DWORD)Stage,NULL);
 }
 
 bool CTexture::SetAsRenderTarget()
 {
   //TODO: Falten mil variables membre
-  /*
-  LPDIRECT3DDEVICE9 l_pDevice=PSRender.GetDevice();
-
-  l_pDevice->GetRenderTarget(0, &m_OldRenderTarget);
   
-  if(FAILED( m_pTexture->GetSurfaceLevel( 0, &m_RenderTargetTexture )  ) )
+  LPDIRECT3DDEVICE9 l_pDevice=RENDER_MANAGER->GetDevice();
+
+  l_pDevice->GetRenderTarget(0, &m_pOldRenderTarget);
+  
+  if(FAILED( m_pTexture->GetSurfaceLevel( 0, &m_pRenderTargetTexture )  ) )
     return false;
 
-  l_Device->SetRenderTarget( 0, m_RenderTargetTexture );
+  l_pDevice->SetRenderTarget( 0, m_pRenderTargetTexture );
 
-  CHECKED_RELEASE(m_RenderTargetTexture);
+  CHECKED_RELEASE(m_pRenderTargetTexture);
 
-  if(FAILED( l_pDevice->GetDepthStencilSurface( &m_OldDepthStencilRenderTarget ) ) )
+  if(FAILED( l_pDevice->GetDepthStencilSurface( &m_pOldDepthStencilRenderTarget ) ) )
     return false;
 
-  l_Device->SetDepthStencilSurface( m_pDepthStencilRenderTargetTexture );
-  */
+  l_pDevice->SetDepthStencilSurface( m_pDepthStencilRenderTargetTexture );
+  
   return true;
 }
 
 void CTexture::UnsetAsRenderTarget()
 {
-  /* Falten variables
-  LPDIRECT3DDEVICE9 l_Device=PSRender.GetDevice();
-  l_Device->SetDepthStencilSurface(m_OldDepthStencilRenderTarget);
-  CHECKED_RELEASE(m_OldDepthStencilRenderTarget);
-  l_Device->SetRenderTarget(0, m_OldRenderTarget);
-  CHECKED_RELEASE(m_OldRenderTarget);
-  */
+  LPDIRECT3DDEVICE9 l_pDevice = RENDER_MANAGER->GetDevice();
+  l_pDevice->SetDepthStencilSurface(m_pOldDepthStencilRenderTarget);
+  CHECKED_RELEASE(m_pOldDepthStencilRenderTarget);
+  l_pDevice->SetRenderTarget(0, m_pOldRenderTarget);
+  CHECKED_RELEASE(m_pOldRenderTarget);
 }
 
 CTexture::TFormatType CTexture::GetFormatTypeFromString(const string &FormatType)
