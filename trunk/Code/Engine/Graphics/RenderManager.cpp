@@ -266,7 +266,7 @@ void CRenderManager::EndRendering    ()
 	m_pD3DDevice->Present( NULL, NULL, NULL, NULL );
 }
 
-void CRenderManager::SetupMatrices(CCamera* _pCamera)
+void CRenderManager::SetupMatrices(CCamera* _pCamera, bool _bOrtho)
 {
 	D3DXMATRIX m_matView;
 	D3DXMATRIX m_matProject;
@@ -277,18 +277,28 @@ void CRenderManager::SetupMatrices(CCamera* _pCamera)
 		//Set default view and projection matrix
 
 		//Setup Matrix view
-    eye=Vect3f(5.0f,2.0f,-1.0f);
+    eye=Vect3f(0.0f,0.0f,-1.0f);
 		D3DXVECTOR3 l_Eye(eye.x, eye.y, eye.z), l_LookAt(0.0f,0.0f,0.0f), l_VUP(0.0f,1.0f,0.0f);
 		D3DXMatrixLookAtLH( &m_matView, &l_Eye, &l_LookAt, &l_VUP);
 
 		//Setup Matrix projection
-		D3DXMatrixPerspectiveFovLH( 
-      &m_matProject, 
-      45.0f * D3DX_PI / 180.0f,               //angle de visió
-      ((float)m_uWidth)/((float)m_uHeight),   //aspect ratio
-      1.0f,                                   //z near
-      100.0f                                  //z far
-      );
+    if(_bOrtho)
+    {
+      D3DXMatrixOrthoLH(
+                    &m_matProject,
+                    (float)m_uWidth,
+                    (float)m_uHeight,
+                     0.0f,
+                     1.0f);
+    } else {
+		  D3DXMatrixPerspectiveFovLH( 
+        &m_matProject, 
+        45.0f * D3DX_PI / 180.0f,               //angle de visió
+        ((float)m_uWidth)/((float)m_uHeight),   //aspect ratio
+        1.0f,                                   //z near
+        100.0f                                  //z far
+        );
+    }
 	}
 	else
 	{
@@ -302,9 +312,51 @@ void CRenderManager::SetupMatrices(CCamera* _pCamera)
 		D3DXMatrixLookAtLH( &m_matView, &l_Eye, &l_LookAt, &l_VUP);
 
 		//Setup Matrix projection
-		D3DXMatrixPerspectiveFovLH(	&m_matProject, _pCamera->GetFov(), _pCamera->GetAspectRatio(),
-			_pCamera->GetZn(), _pCamera->GetZf());
+    if(_bOrtho)
+    {
+      D3DXMatrixOrthoLH(
+                    &m_matProject,
+                    (float)m_uWidth,
+                    (float)m_uHeight,
+                     _pCamera->GetZn(),
+                     _pCamera->GetZf());
+    } else {
+		  D3DXMatrixPerspectiveFovLH(	&m_matProject, _pCamera->GetFov(), _pCamera->GetAspectRatio(),
+			  _pCamera->GetZn(), _pCamera->GetZf());
+    }
 	}
+
+
+	m_pD3DDevice->SetTransform( D3DTS_VIEW, &m_matView );
+	m_pD3DDevice->SetTransform( D3DTS_PROJECTION, &m_matProject );
+  m_pEffectManager->ActivateCamera(m_matView, m_matProject, eye);
+  /*m_pEffectManager->SetProjectionMatrix(m_matProject);
+  m_pEffectManager->SetViewMatrix(m_matView);
+  */
+}
+
+void CRenderManager::Setup2DCamera()
+{
+	D3DXMATRIX m_matView;
+	D3DXMATRIX m_matProject;
+  Vect3f eye;
+
+	//Set default view and projection matrix
+  float l_fCenterW = m_uWidth /2.0f;
+  float l_fCenterH = m_uHeight/2.0f;
+	//Setup Matrix view
+  eye=Vect3f(l_fCenterW,l_fCenterH,-1.0f);
+	D3DXVECTOR3 l_Eye(eye.x, eye.y, eye.z), l_LookAt(l_fCenterW,l_fCenterH,0.0f), l_VUP(0.0f,1.0f,0.0f);
+	D3DXMatrixLookAtLH( &m_matView, &l_Eye, &l_LookAt, &l_VUP);
+
+	//Setup Matrix projection
+  D3DXMatrixOrthoLH(
+                &m_matProject,
+                (float)m_uWidth,
+                (float)m_uHeight,
+                  0.0f,
+                  2.0f);
+    
 
 
 	m_pD3DDevice->SetTransform( D3DTS_VIEW, &m_matView );
@@ -663,7 +715,7 @@ void CRenderManager::DrawQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, 
   m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST,0, 4, 2, _usIndices, D3DFMT_INDEX16, l_Vtx, sizeof( SDIFFUSEVERTEX ) );
 }
 
-void CRenderManager::DrawTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, CTexture* _Texture, CColor _Color)
+void CRenderManager::DrawTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, CColor _Color)
 {
   DWORD l_Color = _Color.GetUint32Argb(); //si no va, usar: D3DCOLOR_COLORVALUE(_Color.GetRed(), _Color.GetGreen(), _Color.GetBlue(), _Color.GetAlpha())
   Vect2i l_vFinalPos = _vPos;
@@ -678,30 +730,30 @@ void CRenderManager::DrawTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint3
   //  [1]------[3]
 
   unsigned short _usIndices[6]={0,2,1,1,2,3};
-  SDIFFUSETEXTUREDVERTEX l_Vtx[4] =
+  SDIFFUSETEXTUREDSCREENVERTEX l_Vtx[4] =
   {
-     { (float)l_vFinalPos.x,      (float)l_vFinalPos.y,       0, l_Color, 0.0f, 0.0f } //(x,y) sup_esq.
-    ,{ (float)l_vFinalPos.x,      (float)l_vFinalPos.y+_uiH,  0, l_Color, 0.0f, 1.0f } //(x,y) inf_esq.
-    ,{ (float)l_vFinalPos.x+_uiW, (float)l_vFinalPos.y,       0, l_Color, 1.0f, 0.0f } //(x,y) sup_dr.
-    ,{ (float)l_vFinalPos.x+_uiW, (float)l_vFinalPos.y+_uiH,  0, l_Color, 1.0f, 1.0f } //(x,y) inf_dr.
+     { (float)l_vFinalPos.x,      (float)l_vFinalPos.y,       0, 1, l_Color, 0.0f, 0.0f } //(x,y) sup_esq.
+    ,{ (float)l_vFinalPos.x,      (float)l_vFinalPos.y+_uiH,  0, 1, l_Color, 0.0f, 1.0f } //(x,y) inf_esq.
+    ,{ (float)l_vFinalPos.x+_uiW, (float)l_vFinalPos.y,       0, 1, l_Color, 1.0f, 0.0f } //(x,y) sup_dr.
+    ,{ (float)l_vFinalPos.x+_uiW, (float)l_vFinalPos.y+_uiH,  0, 1, l_Color, 1.0f, 1.0f } //(x,y) inf_dr.
   };
 
-  m_pD3DDevice->SetFVF( SDIFFUSETEXTUREDVERTEX::GetFVF() );
-  _Texture->Activate(0);
-  m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST,0, 4, 2, _usIndices, D3DFMT_INDEX16, l_Vtx, sizeof( SDIFFUSETEXTUREDVERTEX ) );
+  m_pD3DDevice->SetFVF( SDIFFUSETEXTUREDSCREENVERTEX::GetFVF() );
+  //_Texture->Activate(0);
+  m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST,0, 4, 2, _usIndices, D3DFMT_INDEX16, l_Vtx, sizeof( SDIFFUSETEXTUREDSCREENVERTEX ) );
 }
 
 void CRenderManager::DrawColoredQuad2DTextured(RECT _Rect, CColor _Color)
 {
   DWORD l_Color   = _Color.GetUint32Argb();
 
-  SDIFFUSETEXTUREDVERTEX quad[4] =
+  SDIFFUSETEXTUREDSCREENVERTEX quad[4] =
   {
-    {(float)_Rect.bottom,  (float)_Rect.left,   0, l_Color, 0, 0},
-    {(float)_Rect.top,     (float)_Rect.left,   0, l_Color, 1, 0},
-    {(float)_Rect.bottom,  (float)_Rect.right,  0, l_Color, 0, 1},
-    {(float)_Rect.top,     (float)_Rect.right,  0, l_Color, 1, 1}
+    {(float)_Rect.bottom,  (float)_Rect.left,   0, 1, l_Color, 0, 0},
+    {(float)_Rect.top,     (float)_Rect.left,   0, 1, l_Color, 1, 0},
+    {(float)_Rect.bottom,  (float)_Rect.right,  0, 1, l_Color, 0, 1},
+    {(float)_Rect.top,     (float)_Rect.right,  0, 1, l_Color, 1, 1}
   };
 
-  m_pD3DDevice->DrawPrimitiveUP( D3DPT_TRIANGLESTRIP, 2, quad, sizeof(SDIFFUSETEXTUREDVERTEX));
+  m_pD3DDevice->DrawPrimitiveUP( D3DPT_TRIANGLESTRIP, 2, quad, sizeof(SDIFFUSETEXTUREDSCREENVERTEX));
 }

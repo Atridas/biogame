@@ -94,7 +94,11 @@ void CProcess::Render(CRenderManager* _pRM)
   //Capturamos el Frame Buffer antes de los efectos de post render
   //m_pSceneEffectManager->CaptureFrameBuffers(_pRM);
   //Efectuamos los efectos de post render
-  //m_pSceneEffectManager->PostRender(_pRM);
+  //Mat44f t;
+  //t.SetIdentity();
+  //_pRM->SetTransform(t);
+  //_pRM->Setup2DCamera();
+  m_pSceneEffectManager->PostRender(_pRM);
   //
   //m_pSceneEffectManager->CaptureFrameBuffersAfterPostRender(_pRM);
   

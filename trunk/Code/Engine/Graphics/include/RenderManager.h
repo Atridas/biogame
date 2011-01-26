@@ -37,7 +37,8 @@ public:
   void                  EndRendering      ();
 
   //----Matrix Functions-----------------------------------------------
-  void                  SetupMatrices     (CCamera* _pCamera);
+  void                  Setup2DCamera     ();
+  void                  SetupMatrices     (CCamera* _pCamera, bool m_bOrtho = false);
   void                  SetTransform      (D3DXMATRIX& matrix);
   void                  SetTransform      (Mat44f& m);
   //-------------------------------------------------------------------
@@ -45,7 +46,7 @@ public:
   //----Render Functions ----------------------------------------------
   void CalculateAlignment (uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, Vect2i& _vfinalPos);
   void DrawQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, CColor _Color);
-  void DrawTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, CTexture* _Texture, CColor _Color);
+  void DrawTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, CColor _Color);
   void DrawColoredQuad2DTextured(RECT _Rect, CColor _Color);
   //-------------------------------------------------------------------
 

@@ -83,9 +83,9 @@ private:
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
 };
 
-struct SDIFFUSETEXTUREDVERTEX
+struct SDIFFUSETEXTUREDSCREENVERTEX
 {
-  float    x, y, z;
+  float    x, y, z, w;
   uint32   color;
   float    tu, tv;
 

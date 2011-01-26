@@ -4,7 +4,7 @@
 
 LPDIRECT3DVERTEXDECLARATION9 SDIFFUSEVERTEX::s_VertexDeclaration = 0;
 
-LPDIRECT3DVERTEXDECLARATION9 SDIFFUSETEXTUREDVERTEX::s_VertexDeclaration = 0;
+LPDIRECT3DVERTEXDECLARATION9 SDIFFUSETEXTUREDSCREENVERTEX::s_VertexDeclaration = 0;
 LPDIRECT3DVERTEXDECLARATION9 STEXTUREDVERTEX::s_VertexDeclaration = 0;
 LPDIRECT3DVERTEXDECLARATION9 STEXTURED2VERTEX::s_VertexDeclaration = 0;
 
@@ -31,9 +31,9 @@ uint16 GetVertexSize(uint16 _usVertexType)
   } else if(_usVertexType == STEXTURED2VERTEX::GetVertexType())
   {
     return sizeof(STEXTURED2VERTEX);
-  } else if(_usVertexType == SDIFFUSETEXTUREDVERTEX::GetVertexType())
+  } else if(_usVertexType == SDIFFUSETEXTUREDSCREENVERTEX::GetVertexType())
   {
-    return sizeof(SDIFFUSETEXTUREDVERTEX);
+    return sizeof(SDIFFUSETEXTUREDSCREENVERTEX);
   } else if(_usVertexType == SNORMALDIFFUSEVERTEX::GetVertexType())
   {
     return sizeof(SNORMALDIFFUSEVERTEX);
@@ -77,7 +77,7 @@ uint16 GetTextureNum(uint16 _usVertexType)
   } else if(_usVertexType == STEXTUREDVERTEX::GetVertexType())
   {
     return 2;
-  } else if(_usVertexType == SDIFFUSETEXTUREDVERTEX::GetVertexType())
+  } else if(_usVertexType == SDIFFUSETEXTUREDSCREENVERTEX::GetVertexType())
   {
     return 1;
   } else if(_usVertexType == STEXTURED2VERTEX::GetVertexType())
@@ -152,26 +152,26 @@ LPDIRECT3DVERTEXDECLARATION9& SDIFFUSEVERTEX::GetVertexDeclaration()
 }
 
 
-// Diffuse Textured Vertex -----------------------------------------------------------------------------------------------------------
+// Diffuse Textured Screen Vertex -----------------------------------------------------------------------------------------------------------
 
-unsigned short SDIFFUSETEXTUREDVERTEX::GetVertexType()
+unsigned short SDIFFUSETEXTUREDSCREENVERTEX::GetVertexType()
 {
   return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_DIFFUSE|VERTEX_TYPE_TEXTURE1;
 }
 
-unsigned int SDIFFUSETEXTUREDVERTEX::GetFVF()
+unsigned int SDIFFUSETEXTUREDSCREENVERTEX::GetFVF()
 {
-  return D3DFVF_XYZ|D3DFVF_DIFFUSE|D3DFVF_TEX1;
+  return D3DFVF_XYZRHW|D3DFVF_DIFFUSE|D3DFVF_TEX1;
 }
 
-bool SDIFFUSETEXTUREDVERTEX::ActivateTextures(const vector<CTexture*>& _TextureArray)
+bool SDIFFUSETEXTUREDSCREENVERTEX::ActivateTextures(const vector<CTexture*>& _TextureArray)
 {
   assert(_TextureArray.size() == 1);
   _TextureArray[0]->Activate(1); // normal
   return true;
 }
 
-LPDIRECT3DVERTEXDECLARATION9& SDIFFUSETEXTUREDVERTEX::GetVertexDeclaration()
+LPDIRECT3DVERTEXDECLARATION9& SDIFFUSETEXTUREDSCREENVERTEX::GetVertexDeclaration()
 {
   if(s_VertexDeclaration==NULL)
   {
@@ -179,9 +179,9 @@ LPDIRECT3DVERTEXDECLARATION9& SDIFFUSETEXTUREDVERTEX::GetVertexDeclaration()
     {
       { 0, 
         0 , 
-        D3DDECLTYPE_FLOAT3,     //type
+        D3DDECLTYPE_FLOAT4,     //type
         D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_POSITION,  //ús de les dades
+        D3DDECLUSAGE_POSITIONT,  //ús de les dades
         0 
       },
       { 0, 

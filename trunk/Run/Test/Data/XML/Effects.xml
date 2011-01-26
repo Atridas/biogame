@@ -63,7 +63,7 @@
     <technique name="Cal3DTechnique" animated="true" effect="Cal3D Effects" use_world_matrix="true" use_world_view_projection_matrix="true"
                use_lights="true" num_of_lights="4" use_camera_position="true"/>
 
-    <technique name="RenderNoiseAndVignettingTechnique" effect="Noise And Vignetting"/>
+    <technique name="RenderNoiseAndVignettingTechnique" effect="Noise And Vignetting" use_world_view_projection_matrix="true"/>
     
   </techniques>
 </shaders>
