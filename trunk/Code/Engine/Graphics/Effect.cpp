@@ -180,17 +180,14 @@ bool CEffect::SetLights(size_t _iNumOfLights)
       if(m_aLightsType[i] == CLight::SPOT)
       {
         CSpotLight* l_pSpot = (CSpotLight*) l_pDirectional;
-        m_aLightsAngle[i]   = l_pSpot->GetAngle() ;
-        m_aLightsFallOff[i] = l_pSpot->GetFallOff();
+        m_aLightsAngle[i]   = l_pSpot->GetAngle() * FLOAT_PI_VALUE / 180.0f;
+        m_aLightsFallOff[i] = l_pSpot->GetFallOff() * FLOAT_PI_VALUE / 180.0f;
 
-        m_aLightsAngle[i]   *= FLOAT_PI_VALUE * 2 / 360; // radiants
-        m_aLightsFallOff[i] *= FLOAT_PI_VALUE * 2 / 360;
+        m_aLightsAngle[i]   *= 0.5f; // agafar només la meitat
+        m_aLightsFallOff[i] *= 0.5f;
 
-        m_aLightsAngle[i]   *= 0.5; // agafar només la meitat
-        m_aLightsFallOff[i] *= 0.5;
-
-        m_aLightsAngle[i]   = cos(m_aLightsAngle[i]); // volem el cosinus, que calcular-lo al shader val un iogurt.
-        m_aLightsFallOff[i] = cos(m_aLightsAngle[i]);
+        m_aLightsAngle[i]   = cosf(m_aLightsAngle[i]); // volem el cosinus, que calcular-lo al shader val un iogurt.
+        m_aLightsFallOff[i] = cosf(m_aLightsFallOff[i]);
       }
     }
   }

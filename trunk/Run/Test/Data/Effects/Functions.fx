@@ -76,13 +76,20 @@ float3 ComputeAllLights(float3 _Normal, float3 _WorldPosition, float3 _DiffuseCo
           l_LightDirection = normalize(l_LightDirection);
           
           float l_cosAmbLightAngle = dot(l_LightDirection, -g_LightsDirection[i]);
+		  
           if(l_cosAmbLightAngle < g_LightsFallOffCos[i])
           {
             l_Attenuation = 0.0;
           } else if(l_cosAmbLightAngle < g_LightsAngleCos[i])
           {
-            l_Attenuation *= (g_LightsFallOffCos[i] - l_cosAmbLightAngle) / (g_LightsFallOffCos[i] - g_LightsAngleCos[i]);
+			//l_Attenuation*=sin((3.1416/2.0)*(l_cosAmbLightAngle-l_FallOffAngle)/(l_CosAngle-l_FallOffAngle));
+			l_Attenuation*=sin((3.1416/2.0)*(l_cosAmbLightAngle-g_LightsFallOffCos[i])/(g_LightsAngleCos[i]-g_LightsFallOffCos[i]));
+            
           }
+		  /*else
+		  {
+			l_Attenuation+=pow(1.0-(l_cosAmbLightAngle-l_CosAngle),500);
+		  }*/
           
         }
       }
