@@ -68,7 +68,15 @@ float4 TangentBinormalNormalTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_
 	
   float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,l_OUT);
   
-  float4 out_ = float4(ComputeAllLights(l_Normal, _in.WorldPosition, l_DiffuseColor),1.0);
+  float shadow = shadowMultiplier(_in.PosLight);
+  
+  float4 out_;
+  if(shadow > 0.0)
+  {
+    out_ = float4(ComputeAllLights(l_Normal, _in.WorldPosition, l_DiffuseColor),1.0);
+  } else {
+    out_ = float4(l_DiffuseColor * g_AmbientLight, 1.0);
+  }
   
 	return out_;
 }
