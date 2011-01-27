@@ -25,11 +25,11 @@ void AnimatedShadow(CAL3D_HW_VERTEX_VS _in,
   // Compute the projected coordinates
   //
 	float3 l_Position = CalcAnimtedPos(float4(_in.Position.xyz,1.0), _in.Indices, _in.Weight);
-  oPos = mul( l_Position, g_WorldViewProjectionMatrix );
+  oPos = mul( float4(l_Position,1.0), g_WorldViewProjectionMatrix );
   //
   // Store z and w in our spare texcoord
   //
-  Depth.xy = float2(oPos.z, 1);
+  Depth.xy = oPos.zw;
 }
 
 //Pixel Shader
