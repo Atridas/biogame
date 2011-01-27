@@ -22,8 +22,8 @@ TNORMAL_DIFFUSED_VERTEX_PS NormalDiffusedVS(TNORMAL_DIFFUSED_VERTEX_VS _in) {
 	out_.WorldPosition = mul(_in.Position,(float3x3)g_WorldMatrix);
 	out_.Color = _in.Color;
 	out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
-	
-  out_.PosLight = mul(float4(out_.WorldPosition,1.0), g_ViewToLightProjectionMatrix);
+  float4 vPos = mul(float4(_in.Position,1.0),g_WorldViewMatrix);
+  out_.PosLight = mul(vPos, g_ViewToLightProjectionMatrix);
   
 	return out_;
 }
@@ -35,8 +35,8 @@ TNORMAL_TEXTURED_VERTEX_PS NormalTexturedVS(TNORMAL_TEXTURED_VERTEX_VS _in) {
 	out_.WorldPosition = mul(_in.Position,(float3x3)g_WorldMatrix);
 	out_.UV = _in.UV.xy;
 	out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
-	
-  out_.PosLight = mul(float4(out_.WorldPosition,1.0), g_ViewToLightProjectionMatrix);
+  float4 vPos = mul(float4(_in.Position,1.0),g_WorldViewMatrix);
+  out_.PosLight = mul(vPos, g_ViewToLightProjectionMatrix);
 	
 	return out_;
 }
@@ -49,8 +49,8 @@ TNORMAL_TEXTURED2_VERTEX_PS NormalTextured2VS(TNORMAL_TEXTURED2_VERTEX_VS _in) {
 	out_.UV  = _in.UV.xy;
 	out_.UV2 = _in.UV2.xy;
 	out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
-	
-  out_.PosLight = mul(float4(out_.WorldPosition,1.0), g_ViewToLightProjectionMatrix);
+  float4 vPos = mul(float4(_in.Position,1.0),g_WorldViewMatrix);
+  out_.PosLight = mul(vPos, g_ViewToLightProjectionMatrix);
 	
 	return out_;
 }
@@ -64,8 +64,8 @@ TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS TangentBinormalNormalTexturedVS(TTAN
 	out_.WorldBinormal = normalize(cross(out_.WorldNormal, out_.WorldTangent));
 	out_.UV  = _in.UV.xy;
 	out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
-	
-  out_.PosLight = mul(float4(out_.WorldPosition,1.0), g_ViewToLightProjectionMatrix);
+  float4 vPos = mul(float4(_in.Position,1.0),g_WorldViewMatrix);
+  out_.PosLight = mul(vPos, g_ViewToLightProjectionMatrix);
 	
 	return out_;
 }
@@ -80,8 +80,8 @@ TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS TangentBinormalNormalTextured2VS(TT
 	out_.UV  = _in.UV.xy;
 	out_.UV2 = _in.UV2.xy;
 	out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
-	
-  out_.PosLight = mul(float4(out_.WorldPosition,1.0), g_ViewToLightProjectionMatrix);
+  float4 vPos = mul(float4(_in.Position,1.0),g_WorldViewMatrix);
+  out_.PosLight = mul(vPos, g_ViewToLightProjectionMatrix);
 	
 	return out_;
 }
@@ -100,13 +100,14 @@ TNORMAL_TEXTURED_VERTEX_PS RenderCal3DHWVS(CAL3D_HW_VERTEX_VS IN)
 	out_.WorldPosition=mul(l_WorldPosition,g_WorldMatrix);  
 	out_.WorldNormal = mul(l_Normal,(float3x3)g_WorldMatrix);
 	
-  out_.PosLight = mul(float4(out_.WorldPosition,1.0), g_ViewToLightProjectionMatrix);
   
   
 	//OUT.WorldTangent=normalize(mul(l_Tangent,g_WorldMatrix));
 	//OUT.WorldBinormal=mul(cross(l_Tangent,l_Normal),(float3x3)g_WorldMatrix);
 	out_.UV = IN.TexCoord.xy;
 	out_.HPosition = mul(l_WorldPosition, g_WorldViewProjectionMatrix );
+  float4 vPos = mul(float4(l_Position,1.0),g_WorldViewMatrix);
+  out_.PosLight = mul(vPos, g_ViewToLightProjectionMatrix);
 	return out_;
 }
 
