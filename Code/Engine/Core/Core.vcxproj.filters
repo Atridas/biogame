@@ -13,6 +13,9 @@
     <Filter Include="Params">
       <UniqueIdentifier>{564e9ceb-cb7f-4553-9bd7-4200cec4771d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scripting">
+      <UniqueIdentifier>{048ec5a4-9fdd-4e38-ba46-8d6ee783f912}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -30,6 +33,9 @@
     <ClCompile Include="params.cpp">
       <Filter>Params</Filter>
     </ClCompile>
+    <ClCompile Include="ScriptManager.cpp">
+      <Filter>Scripting</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Core.h">
@@ -43,6 +49,9 @@
     </ClInclude>
     <ClInclude Include="include\params.h">
       <Filter>Params</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ScriptManager.h">
+      <Filter>Scripting</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
