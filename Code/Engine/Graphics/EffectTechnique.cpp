@@ -100,6 +100,8 @@ bool CEffectTechnique::BeginRender()
         l_pD3DEffect->SetFloatArray   (m_pEffect->m_pLightsDirectionParameter,    (float*)m_pEffect->m_aLightsDirection,              m_iNumOfLights * 3);
       
         l_pD3DEffect->SetFloatArray   (m_pEffect->m_pLightsColorParameter,        (float*)m_pEffect->m_aLightsColor,                  m_iNumOfLights * 4);
+
+        l_pD3DEffect->SetBoolArray    (m_pEffect->m_pShadowsEnabledParameter,      (BOOL*) m_pEffect->m_aShadowsEnabled,                MAX_LIGHTS_BY_SHADER);
       }
     }
     //TODO LightManager()->GetAmbientLight();

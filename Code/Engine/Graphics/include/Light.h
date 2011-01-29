@@ -50,7 +50,7 @@ public:
   void SetEndRangeAttenuation(const float _fEndRangeAttenuation) {m_fEndRangeAttenuation = _fEndRangeAttenuation;};
   float GetEndRangeAttenuation() const {return m_fEndRangeAttenuation;};
   void SetRenderShadows(bool _bRenderShadows) {m_bRenderShadows = _bRenderShadows;};
-  bool RenderShadows() const {return false;};
+  bool GetRenderShadows() const {return m_bRenderShadows;};
 
   void SetType(const TLightType _Type) {m_Type = _Type;};
   TLightType GetType() const {return m_Type;};

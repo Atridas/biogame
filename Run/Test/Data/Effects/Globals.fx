@@ -48,6 +48,8 @@ float   g_LightsFallOffCos[MAXLIGHTS]  : LightsFallOffCos;
 float   g_LightsStartRangeSQ[MAXLIGHTS]: LightsStartRangeSQ;
 float   g_LightsEndRangeSQ[MAXLIGHTS]  : LightsEndRangeSQ;
 
+bool    g_ShadowEnabled[MAXLIGHTS]     : ShadowEnabled;
+
 //D3DXHANDLE m_pLightsEnabledParameter, m_pLightsTypeParameter, m_pLightsPositionParameter, m_pLightsDirectionParameter, m_pLightsAngleParameter, m_pLightsColorParameter;
 //D3DXHANDLE m_pLightsFallOffParameter, m_pLightsStartRangeAttenuationParameter, m_pLightsEndRangeAttenuationParameter;
 
