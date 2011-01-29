@@ -108,6 +108,7 @@ TNORMAL_TEXTURED_VERTEX_PS RenderCal3DHWVS(CAL3D_HW_VERTEX_VS IN)
 	out_.HPosition = mul(l_WorldPosition, g_WorldViewProjectionMatrix );
   float4 vPos = mul(float4(l_Position,1.0),g_WorldViewMatrix);
   out_.PosLight = mul(vPos, g_ViewToLightProjectionMatrix);
+
 	return out_;
 }
 

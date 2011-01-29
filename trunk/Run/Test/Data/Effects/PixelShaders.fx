@@ -30,7 +30,7 @@ float4 NormalTexturedPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
   float3 l_Normal = normalize(_in.WorldNormal);
 
   float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
-  float4 out_ = float4(ComputeAllLights(l_Normal, _in.WorldPosition, l_DiffuseColor),1.0);
+  float4 out_ = float4(ComputeAllLights(l_Normal, _in.WorldPosition, l_DiffuseColor,_in.PosLight),1.0);
   
   return out_;
 }
@@ -46,16 +46,8 @@ float4 NormalDiffusedPS(TNORMAL_DIFFUSED_VERTEX_PS _in) : COLOR {
   float3 l_Normal = normalize(_in.WorldNormal);
 
   float4 l_DiffuseColor = _in.Color;
-  
-  float shadow = shadowMultiplier(_in.PosLight);
-  
-  float4 out_;
-  if(shadow > 0.0)
-  {
-    out_ = float4(ComputeAllLights(l_Normal, _in.WorldPosition, l_DiffuseColor),1.0);
-  } else {
-    out_ = float4(l_DiffuseColor * g_AmbientLight, 1.0);
-  }
+
+  float4 out_ = float4(ComputeAllLights(l_Normal, _in.WorldPosition, l_DiffuseColor,_in.PosLight),1.0);
   
   return out_;
 }
@@ -68,17 +60,9 @@ float4 TangentBinormalNormalTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_
 	
   float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,l_OUT);
   
-  float shadow = shadowMultiplier(_in.PosLight);
-  
-  float4 out_;
-  if(shadow > 0.0)
-  {
-    out_ = float4(ComputeAllLights(l_Normal, _in.WorldPosition, l_DiffuseColor),1.0);
-  } else {
-    out_ = float4(l_DiffuseColor * g_AmbientLight, 1.0);
-  }
-  
-	return out_;
+  float4 out_ = float4(ComputeAllLights(l_Normal, _in.WorldPosition, l_DiffuseColor, _in.PosLight),1.0);
+
+  return out_;
 }
 
 float4 WhitePS() : COLOR {

@@ -147,6 +147,7 @@ bool CEffect::SetLights(size_t _iNumOfLights)
   m_aAmbientLight[2] = l_Ambient.z;
 
   vector<CLight*> l_vLights = l_pLightManager->GetLights(_iNumOfLights);
+
   for(size_t i = 0; i < _iNumOfLights; i++)
   {
     if(l_vLights.size() <= i)
@@ -171,6 +172,8 @@ bool CEffect::SetLights(size_t _iNumOfLights)
     m_aLightsEndRangeAttenuation[i]   *= m_aLightsEndRangeAttenuation[i];   // Make it square
     m_aLightsPosition[i]              = l_pLight->GetPosition();
     m_aLightsColor[i]                 = l_pLight->GetColor();
+
+    m_aShadowsEnabled[i] = l_pLight->GetRenderShadows();
 
     if(m_aLightsType[i] == CLight::DIRECTIONAL || m_aLightsType[i] == CLight::SPOT)
     {
@@ -238,6 +241,7 @@ bool CEffect::InitParameters()
   GetParameterBySemantic("LightsColor", m_pLightsColorParameter);
   GetParameterBySemantic("LightsStartRangeSQ", m_pLightsStartRangeAttenuationParameter);
   GetParameterBySemantic("LightsEndRangeSQ", m_pLightsEndRangeAttenuationParameter);
+  GetParameterBySemantic("ShadowEnabled", m_pShadowsEnabledParameter);
 
   //Altres
   GetParameterBySemantic("CameraPosition", m_pCameraPositionParameter);

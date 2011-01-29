@@ -53,6 +53,8 @@ private:
   Vect3f m_aLightsPosition[MAX_LIGHTS_BY_SHADER];
   Vect3f m_aLightsDirection[MAX_LIGHTS_BY_SHADER];
   CColor m_aLightsColor[MAX_LIGHTS_BY_SHADER];
+  BOOL m_aShadowsEnabled[MAX_LIGHTS_BY_SHADER];
+
 
   D3DXHANDLE m_pWorldMatrixParameter, m_pViewMatrixParameter, m_pProjectionMatrixParameter;
   D3DXHANDLE m_pWorldViewMatrixParameter,  m_pViewProjectionMatrixParameter, m_pWorldViewProjectionMatrixParameter;
@@ -66,6 +68,8 @@ private:
   D3DXHANDLE m_pBonesParameter;
   D3DXHANDLE m_pTimeParameter;
   
+  D3DXHANDLE m_pShadowsEnabledParameter;
+
   friend CEffectTechnique;
   friend CEffectMaterial;
   friend CAnimatedInstanceModel;

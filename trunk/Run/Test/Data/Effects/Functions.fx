@@ -4,6 +4,17 @@
 #include "Globals.fx"
 #include "Samplers.fx"
 
+//shadow
+bool IsInShadow(float4 _PosLight)
+{
+  float2 ShadowTexC = 0.5 * _PosLight.xy/_PosLight.w + float2( 0.5, 0.5 );
+  ShadowTexC.y = 1.0f - ShadowTexC.y;
+
+  bool l_bIsInShadow = tex2D( ShadowTextureSampler, ShadowTexC ) + SHADOW_EPSILON < _PosLight.z/_PosLight.w;
+  
+  return l_bIsInShadow;
+}
+
 //Lights
 
 //All params must be pre-normalized
@@ -13,8 +24,7 @@ float3 ComputeLight(float3 _Normal,          //Normal of the pixel
                     float3 _LightColor,
                     float3 _MaterialColor,
                     float  _MaterialSpecularPow,
-                    float  _MaterialSpotlightFactor
-                    )
+                    float  _MaterialSpotlightFactor)
 {
   float3 _out;
   
@@ -33,14 +43,22 @@ float3 ComputeLight(float3 _Normal,          //Normal of the pixel
 }
 
 // normal & eyeDirection han d'estar normalitzades
-float3 ComputeAllLights(float3 _Normal, float3 _WorldPosition, float3 _DiffuseColor)
+float3 ComputeAllLights(float3 _Normal, float3 _WorldPosition, float3 _DiffuseColor, float4 _PosLight)
 {
   float3 out_ = _DiffuseColor * g_AmbientLight;
   float3 l_EyeDirection = normalize(g_CameraPosition - _WorldPosition);
   for(int i = 0; i < MAXLIGHTS; i++)
   {
-    if(g_LightsEnabled[i])
+	bool l_bIsInShadow = false;
+
+	if(g_ShadowEnabled[i])
+	{
+	  l_bIsInShadow = IsInShadow(_PosLight);
+	}
+
+    if(g_LightsEnabled[i] && !l_bIsInShadow)
     {
+
       float3 l_LightDirection;
       float  l_Attenuation = 1.0;
       if(g_LightsType[i] == LIGHT_OMNI)
@@ -82,14 +100,9 @@ float3 ComputeAllLights(float3 _Normal, float3 _WorldPosition, float3 _DiffuseCo
             l_Attenuation = 0.0;
           } else if(l_cosAmbLightAngle < g_LightsAngleCos[i])
           {
-			//l_Attenuation*=sin((3.1416/2.0)*(l_cosAmbLightAngle-l_FallOffAngle)/(l_CosAngle-l_FallOffAngle));
 			l_Attenuation*=sin((3.1416/2.0)*(l_cosAmbLightAngle-g_LightsFallOffCos[i])/(g_LightsAngleCos[i]-g_LightsFallOffCos[i]));
             
           }
-		  /*else
-		  {
-			l_Attenuation+=pow(1.0-(l_cosAmbLightAngle-l_CosAngle),500);
-		  }*/
           
         }
       }
@@ -107,17 +120,6 @@ float3 ComputeAllLights(float3 _Normal, float3 _WorldPosition, float3 _DiffuseCo
     }
   }
   return out_;
-}
-
-//shadow
-float shadowMultiplier(float4 _PosLight)
-{
-  float2 ShadowTexC = 0.5 * _PosLight.xy / _PosLight.w + float2( 0.5, 0.5 );
-  ShadowTexC.y = 1.0f - ShadowTexC.y;
-
-  float LightAmount = (tex2D( ShadowTextureSampler, ShadowTexC ) + SHADOW_EPSILON < _PosLight.z / _PosLight.w)? 0.0f: 1.0f;
-  
-  return LightAmount;
 }
 
 //Normal Mapping / Parallax Mapping
