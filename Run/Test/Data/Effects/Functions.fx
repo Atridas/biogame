@@ -122,6 +122,74 @@ float3 ComputeAllLights(float3 _Normal, float3 _WorldPosition, float3 _DiffuseCo
   return out_;
 }
 
+float3 ComputeLightTangentSpace(float3 _Normal, float3 _Position, float3 _DiffuseColor, 
+                                float3 _LightPosition, float3 _LightDirection, int lightID,
+                                float3 _DirectionToEye)
+{
+  if(g_LightsEnabled[lightID])
+  {
+    float3 l_DirectionToLight;
+    float  l_Attenuation = 1.0;
+    if(g_LightsType[lightID] == LIGHT_OMNI)
+    {
+      l_DirectionToLight = _LightPosition - _Position;
+      float l_DistSquared = dot(l_DirectionToLight,l_DirectionToLight);
+      if(l_DistSquared < 0.0 || l_DistSquared > g_LightsEndRangeSQ[lightID])
+      {
+        l_Attenuation = 0.0;
+      } else if(l_DistSquared > g_LightsStartRangeSQ[lightID]) {
+        l_Attenuation *= (g_LightsEndRangeSQ[lightID] - l_DistSquared) / (g_LightsEndRangeSQ[lightID] - g_LightsStartRangeSQ[lightID]);
+      }
+      if(l_Attenuation > 0.0)
+      {
+        l_DirectionToLight = normalize(l_DirectionToLight);
+      }
+    } else if(g_LightsType[lightID] == LIGHT_DIRECTIONAL)
+    {
+      l_DirectionToLight = -_LightDirection;
+    } else if(g_LightsType[lightID] == LIGHT_SPOT)
+    {
+      l_DirectionToLight = _LightPosition - _Position;
+      
+      float l_DistSquared = dot(l_DirectionToLight,l_DirectionToLight);
+      if(l_DistSquared < 0.0 || l_DistSquared > g_LightsEndRangeSQ[lightID])
+      {
+        l_Attenuation = 0.0;
+      } else if(l_DistSquared > g_LightsStartRangeSQ[lightID]) {
+        l_Attenuation *= (g_LightsEndRangeSQ[lightID] - l_DistSquared) / (g_LightsEndRangeSQ[lightID] - g_LightsStartRangeSQ[lightID]);
+      }
+      if(l_Attenuation > 0.0)
+      {
+        l_DirectionToLight = normalize(l_DirectionToLight);
+        
+        float l_cosAmbLightAngle = dot(l_DirectionToLight, -_LightDirection);
+    
+        if(l_cosAmbLightAngle < g_LightsFallOffCos[lightID])
+        {
+          l_Attenuation = 0.0;
+        } else if(l_cosAmbLightAngle < g_LightsAngleCos[lightID])
+        {
+          l_Attenuation*=sin((3.1416/2.0)*(l_cosAmbLightAngle-g_LightsFallOffCos[lightID])/(g_LightsAngleCos[lightID]-g_LightsFallOffCos[lightID]));
+          
+        }
+        
+      }
+    }
+    if(l_Attenuation > 0.0)
+    {
+      float3 l_HalfWayVector = normalize(_DirectionToEye+l_DirectionToLight);
+      return ComputeLight(_Normal, 
+                          l_DirectionToLight, 
+                          l_HalfWayVector, 
+                          g_LightsColor[lightID] * l_Attenuation, 
+                          _DiffuseColor, 
+                          g_SpecularPow,
+                          g_SpotlightFactor);
+    }
+  }
+  return float4(0,0,0,0);
+}
+
 //Normal Mapping / Parallax Mapping
 
 float3 CalcNormalmap(float3 _Tangent, float3 _Binormal, float3 _Normal, float2 _UV)

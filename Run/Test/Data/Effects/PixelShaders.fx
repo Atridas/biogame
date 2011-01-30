@@ -25,6 +25,14 @@ float4 ShowNormalmapPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS _in) : COLOR 
 	return float4(l_DiffuseColor, 1.0);
 }
 
+float4 ShowTangentPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
+	return float4(_in.WorldTangent.xyz*0.5+0.5, 1.0);
+}
+
+float4 ShowBitangentPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
+	return float4(_in.WorldBinormal.xyz*0.5+0.5, 1.0);
+}
+
 float4 ShowFlatNormalmapPS(TTEXTURED_VERTEX_VS _in) : COLOR {
   float4 l_DiffuseColor = tex2D(NormalTextureSampler, _in.UV);
 	return l_DiffuseColor;
