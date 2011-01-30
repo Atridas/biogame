@@ -10,7 +10,7 @@ bool IsInShadow(float4 _PosLight)
   float2 ShadowTexC = 0.5 * _PosLight.xy/_PosLight.w + float2( 0.5, 0.5 );
   ShadowTexC.y = 1.0f - ShadowTexC.y;
 
-  bool l_bIsInShadow = tex2D( ShadowTextureSampler, ShadowTexC ) + SHADOW_EPSILON < _PosLight.z/_PosLight.w;
+  bool l_bIsInShadow = tex2D( ShadowTextureSampler, ShadowTexC ).x + SHADOW_EPSILON < _PosLight.z/_PosLight.w;
   
   return l_bIsInShadow;
 }

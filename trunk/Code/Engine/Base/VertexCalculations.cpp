@@ -46,6 +46,7 @@ void CalcTangentsAndBinormals(void *VtxsData, uint16 *IdxsData, size_t VtxCount,
   for (size_t b=0;b<VtxCount;++b)
   {
     D3DXVECTOR3 *l_NormalVtx=(D3DXVECTOR3 *) &l_VtxAddress[b*VertexStride+NormalStride];
+    D3DXVec3Normalize(l_NormalVtx,l_NormalVtx);
     D3DXVECTOR3 *l_TangentVtx=(D3DXVECTOR3 *) &l_VtxAddress[b*VertexStride+TangentStride];
     D3DXVECTOR4 *l_TangentVtx4=(D3DXVECTOR4 *) &l_VtxAddress[b*VertexStride+TangentStride];
     D3DXVECTOR3 *l_BiNormalVtx=(D3DXVECTOR3 *) &l_VtxAddress[b*VertexStride+BiNormalStride];

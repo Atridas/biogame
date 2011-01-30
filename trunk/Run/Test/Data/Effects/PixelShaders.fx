@@ -17,13 +17,21 @@ float4 ShowNormalsPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
 	return float4(l_normal,1.0);
 }
 
-float4 ShowNormalmapPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _in) : COLOR {
+float4 ShowNormalmapPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
   float3 l_DiffuseColor = CalcNormalmap((float3)_in.WorldTangent, 
                                         (float3)_in.WorldBinormal, 
                                         (float3)_in.WorldNormal, 
                                         _in.UV);
 	return float4(l_DiffuseColor, 1.0);
-	//return float4(l_normal,1.0);
+}
+
+float4 ShowFlatNormalmapPS(TTEXTURED_VERTEX_VS _in) : COLOR {
+  float4 l_DiffuseColor = tex2D(NormalTextureSampler, _in.UV);
+	return l_DiffuseColor;
+}
+
+float4 ShowUVCoordsPS(TTEXTURED_VERTEX_VS _in) : COLOR {
+	return float4(_in.UV.x, _in.UV.y, 0.0, 1.0);
 }
 
 float4 NormalTexturedPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
@@ -53,7 +61,6 @@ float4 NormalDiffusedPS(TNORMAL_DIFFUSED_VERTEX_PS _in) : COLOR {
 }
 
 float4 TangentBinormalNormalTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
-                                    
   float2 l_OUT;
 
   float3 l_Normal = normalize(CalcParallaxMap(_in.WorldPosition, _in.WorldNormal, _in.WorldTangent, _in.WorldBinormal, _in.UV, l_OUT));
