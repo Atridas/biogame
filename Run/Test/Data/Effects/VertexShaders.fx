@@ -41,6 +41,15 @@ TNORMAL_TEXTURED_VERTEX_PS NormalTexturedVS(TNORMAL_TEXTURED_VERTEX_VS _in) {
 	return out_;
 }
 
+TTEXTURED_VERTEX_PS TexturedVS(TTEXTURED_VERTEX_VS _in) {
+	TTEXTURED_VERTEX_PS out_ = (TTEXTURED_VERTEX_PS)0;
+	
+	out_.UV = _in.UV.xy;
+	out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
+	
+	return out_;
+}
+
 TNORMAL_TEXTURED2_VERTEX_PS NormalTextured2VS(TNORMAL_TEXTURED2_VERTEX_VS _in) {
 	TNORMAL_TEXTURED2_VERTEX_PS out_ = (TNORMAL_TEXTURED2_VERTEX_PS)0;
 	
