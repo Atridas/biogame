@@ -95,6 +95,64 @@ TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS TangentBinormalNormalTextured2VS(TT
 	return out_;
 }
 
+// Funcions en TANGENT SPACE ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+/*
+struct TTANGENT_SPACE_TEXTURED_PS {
+  float4 HPosition : POSITION;
+  float2 UV : TEXCOORD0;
+  
+  float3 TangentSpacePosition : TEXCOORD2;
+  float3 TangentSpaceCamera : TEXCOORD3;
+  
+  float4 PosLight      : TEXCOORD6;
+  
+  float3 LightPosition0:  TEXCOORD7;
+  float3 LightDirection0: TEXCOORD8;
+  float3 LightPosition1:  TEXCOORD9;
+  float3 LightDirection1: TEXCOORD10;
+  float3 LightPosition2:  TEXCOORD11;
+  float3 LightDirection2: TEXCOORD12;
+  float3 LightPosition3:  TEXCOORD13;
+  float3 LightDirection3: TEXCOORD14;
+  
+};*/
+
+TTANGENT_SPACE_TEXTURED_PS TangentSpaceTexturedVS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_VS _in) {
+	TTANGENT_SPACE_TEXTURED_PS out_ = (TTANGENT_SPACE_TEXTURED_PS)0;
+	
+	out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
+  float4 vPos = mul(float4(_in.Position,1.0),g_WorldViewMatrix);
+  out_.PosLight = mul(vPos, g_ViewToLightProjectionMatrix);
+	out_.UV  = _in.UV.xy;
+  
+	float3 l_WorldNormal    = normalize(mul(_in.Normal,(float3x3)g_WorldMatrix));
+	float3 l_WorldPosition  = mul(float4(_in.Position,1.0),g_WorldMatrix).xyz;
+	float3 l_WorldTangent   = normalize(mul(_in.Tangent,(float3x3)g_WorldMatrix));
+	float3 l_WorldBitangent = normalize(mul(_in.Binormal,(float3x3)g_WorldMatrix));
+  
+  float3x3 l_WorldToTangentMatrix = float3x3(l_WorldTangent,l_WorldBitangent,l_WorldNormal);
+  
+  out_.TangentSpacePosition = mul(l_WorldPosition, l_WorldToTangentMatrix);
+  out_.TangentSpaceCamera = mul(g_CameraPosition, l_WorldToTangentMatrix);
+  
+  out_.LightPosition0 = mul(g_LightsPosition[0],l_WorldToTangentMatrix);
+  out_.LightPosition1 = mul(g_LightsPosition[1],l_WorldToTangentMatrix);
+  out_.LightPosition2 = mul(g_LightsPosition[2],l_WorldToTangentMatrix);
+  out_.LightPosition3 = mul(g_LightsPosition[3],l_WorldToTangentMatrix);
+  
+  out_.LightDirection0 = mul(g_LightsDirection[0],l_WorldToTangentMatrix);
+  out_.LightDirection1 = mul(g_LightsDirection[1],l_WorldToTangentMatrix);
+  out_.LightDirection2 = mul(g_LightsDirection[2],l_WorldToTangentMatrix);
+  out_.LightDirection3 = mul(g_LightsDirection[3],l_WorldToTangentMatrix);
+	
+	return out_;
+}
+
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 //Retornem un TNORMAL_TEXTURED_VERTEX_PS (en un futur TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS)
 //enlloc de CAL3D_HW_VERTEX_PS
 TNORMAL_TEXTURED_VERTEX_PS RenderCal3DHWVS(CAL3D_HW_VERTEX_VS IN)

@@ -17,7 +17,7 @@ class CTexture;
 #define VERTEX_TYPE_GEOMETRY  0x0001
 #define VERTEX_TYPE_NORMAL    0x0002
 #define VERTEX_TYPE_TANGENT   0x0004
-#define VERTEX_TYPE_BINORMAL  0x0008
+#define VERTEX_TYPE_BITANGENT 0x0008
 #define VERTEX_TYPE_TEXTURE1  0x0010
 #define VERTEX_TYPE_TEXTURE2  0x0020
 #define VERTEX_TYPE_DIFFUSE   0x0040
@@ -198,7 +198,7 @@ struct TNORMALTANGENTBINORMALTEXTURED2VERTEX
   float x, y, z;
   float nx, ny, nz, nw;
   float tangentx, tangenty, tangentz, tangentw;
-  float binormalx, binormaly, binormalz, binormalw;
+  float bitangentx, bitangenty, bitangentz, bitangentw;
   float tu,tv;
   float tu2,tv2;
 

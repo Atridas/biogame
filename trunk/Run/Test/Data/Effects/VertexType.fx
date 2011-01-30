@@ -94,6 +94,26 @@ struct TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS {
   float4 PosLight      : TEXCOORD6;
 };
 
+struct TTANGENT_SPACE_TEXTURED_PS {
+  float4 HPosition : POSITION;
+  float2 UV : TEXCOORD0;
+  
+  float4 PosLight      : TEXCOORD6;
+  
+  float3 TangentSpacePosition : TEXCOORD7;
+  float3 TangentSpaceCamera : TEXCOORD8;
+  
+  float3 LightPosition0:  TEXCOORD9;
+  float3 LightDirection0: TEXCOORD10;
+  float3 LightPosition1:  TEXCOORD11;
+  float3 LightDirection1: TEXCOORD12;
+  float3 LightPosition2:  TEXCOORD13;
+  float3 LightDirection2: TEXCOORD14;
+  float3 LightPosition3:  TEXCOORD15;
+  float3 LightDirection3: TEXCOORD16;
+  
+};
+
 // Normal Textured2+ Binormal / Tangent------------------------------------------------------------------------------------------
 
 struct TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_VS {

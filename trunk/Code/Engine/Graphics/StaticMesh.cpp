@@ -192,7 +192,7 @@ bool CStaticMesh::Load(const string &_szFileName)
                                                                         l_IndexCount);
     } else if(l_pusVertexType[i] == TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetVertexType())
     {
-      CalcTangentsAndBinormals( l_pVertexBuffer, l_pIndexList, l_VertexCount,
+      CalcTangentsAndBinormalsBis( l_pVertexBuffer, l_pIndexList, l_VertexCount,
                                 l_IndexCount, sizeof(TNORMALTANGENTBINORMALTEXTUREDVERTEX), 0, sizeof(float)*3,
                                 sizeof(float)*7, sizeof(float)*11, sizeof(float)*15);
 
@@ -203,7 +203,7 @@ bool CStaticMesh::Load(const string &_szFileName)
                                                                                         l_IndexCount);
     } else if(l_pusVertexType[i] == TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetVertexType())
     {
-      CalcTangentsAndBinormals( l_pVertexBuffer, l_pIndexList, l_VertexCount,
+      CalcTangentsAndBinormalsBis( l_pVertexBuffer, l_pIndexList, l_VertexCount,
                                 l_IndexCount, sizeof(TNORMALTANGENTBINORMALTEXTURED2VERTEX), 0, sizeof(float)*3,
                                 sizeof(float)*7, sizeof(float)*11, sizeof(float)*15);
 
