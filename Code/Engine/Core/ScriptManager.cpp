@@ -1,21 +1,41 @@
 #include "ScriptManager.h"
 
-int SumaLua(lua_State *_State);
-int HelloWorldLua(lua_State *_State);
-int LogTextLua(lua_State *_State);
+extern "C"
+{
+#include "lua.h"
+#include "lualib.h"
+#include "lauxlib.h"
+}
+
+#include <luabind/luabind.hpp>
+#include <luabind/function.hpp>
+#include <luabind/class.hpp>
+#include <luabind/operator.hpp>
+
+#include "Core.h"
+
+using namespace luabind;
+
+#define REGISTER_LUA_FUNCTION(LUA_STATE,FunctionName,AddrFunction) {luabind::module(LUA_STATE) [ luabind::def(FunctionName,AddrFunction) ];}
 
 //Para inicializar el motor de LUA
 void CScriptManager::Initialize()
 {
-  m_LS=lua_open();
-  luaopen_base(m_LS);
-  luaopen_string(m_LS);
-  luaopen_table(m_LS);
-  luaopen_math(m_LS);
-  luaopen_io(m_LS);
-  luaopen_debug(m_LS);
-  //Sobreescribimos la función _ALERT de LUA cuando se genere algún error al ejecutar código LUA lua_register(m_LS,"_ALERT",Alert);
+  m_pLS=lua_open();
+  luaopen_base(m_pLS);
+  luaopen_string(m_pLS);
+  luaopen_table(m_pLS);
+  luaopen_math(m_pLS);
+  luaopen_io(m_pLS);
+  luaopen_debug(m_pLS);
+  //Sobreescribimos la función _ALERT de LUA cuando se genere algún error al ejecutar código LUA 
+  RegisterLUAFunctions();
+
+  //RunCode( "local a = 2;local b = 5;local c = suma(a, b);log(\"el valor es \" .. c)" );
+  RunFile("Data/Lua/first.lua");
 }
+
+
 
 //Código de la función Alert que se llamará al generarse algún error de LUA
 int Alert(lua_State * State)
@@ -43,23 +63,23 @@ int Alert(lua_State * State)
 //Para desinicializar el motor de LUA
 void CScriptManager::Destroy()
 {
-  lua_close(m_LS);
+  lua_close(m_pLS);
 }
 //Para ejecutar un fragmento de código LUA
 void CScriptManager::RunCode(const std::string &Code) const
 {
-  if(luaL_dostring(m_LS,Code.c_str()))
+  if(luaL_dostring(m_pLS,Code.c_str()))
   {
-    const char *l_Str=lua_tostring(m_LS, -1);
+    const char *l_Str=lua_tostring(m_pLS, -1);
     LOGGER->AddNewLog(ELL_INFORMATION, l_Str);
   }
 }
 //Para ejecutar un fichero de código LUA
 void CScriptManager::RunFile(const std::string &FileName) const
 {
-  if(luaL_dofile(m_LS, FileName.c_str()))
+  if(luaL_dofile(m_pLS, FileName.c_str()))
   {
-    const char *l_Str=lua_tostring(m_LS, -1);
+    const char *l_Str=lua_tostring(m_pLS, -1);
     LOGGER->AddNewLog(ELL_INFORMATION, l_Str);
   }
 }
@@ -70,32 +90,46 @@ int Suma(int a, int b)
   return a + b;
 }
 
-int SumaLua(lua_State *_State)
+
+void HelloWorldLua()
 {
-  int a = lua_tointeger(_State, 0);
-  int b = lua_tointeger(_State, 1);
+  LOGGER->AddNewLog(ELL_INFORMATION, "Hola Mundo");
+}
 
-  int c = a + b;
-
-  lua_pushinteger(_State, c);
-
-  return 1;
+void LogTextLua(const string &_c)
+{
+  LOGGER->AddNewLog(ELL_INFORMATION, _c.c_str());
 }
 
 
-/*
-int HelloWorldLua(lua_State *_State)
-{
-  LOGGER->(ELL_INfo "Hola Mundo");
 
-  return 0;
+CCore& GetCore()
+{
+  return CCore::GetSingleton();
 }
 
-int LogTextLua(lua_State *_State)
-{
-  char* c = lua_tostring(_State, 0);
-  LOGGER->(c);
 
-  return 0;
+
+void CScriptManager::RegisterLUAFunctions()
+{
+  lua_register(m_pLS,"_ALERT",Alert);
+  REGISTER_LUA_FUNCTION(m_pLS, "suma", Suma);
+  REGISTER_LUA_FUNCTION(m_pLS, "hello_world", HelloWorldLua);
+  REGISTER_LUA_FUNCTION(m_pLS, "log", LogTextLua);
+
+  module(m_pLS) [
+    class_<CBaseControl>("CBaseControl")
+      .def("is_ok", &CBaseControl::IsOk)
+  ];
+
+  module(m_pLS) [
+    class_<CSingleton<CCore>>("CSingletonCore")
+  ];
+
+  module(m_pLS) [
+    class_<CCore, bases<CBaseControl,CSingleton<CCore>>>("CCore")
+      //.def("get_light_manager", &CCore::GetLightManager)
+  ];
+
+  //REGISTER_LUA_FUNCTION(m_pLS, "get_core", GetCore);
 }
-*/
