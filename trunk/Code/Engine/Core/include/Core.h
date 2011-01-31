@@ -17,6 +17,7 @@ class CRenderableObjectsManager;
 class CAnimatedModelManager;
 class CLightManager;
 class CSceneEffectManager;
+class CScriptManager;
 // --------------------------
 
 /**
@@ -35,7 +36,7 @@ public:
   **/
                       CCore               (void): m_pRenderManager(0),m_pLanguageManager(0),m_pFontManager(0),m_pInputManager(0),
                                                   m_pActionToInput(0),m_pRenderableObjectsManager(0),m_pLightManager(0),
-                                                  m_pSceneEffectManager(0), m_pTimer(0)
+                                                  m_pSceneEffectManager(0), m_pTimer(0), m_pScriptManager(0)
                                                   {};
   /**
    * Destructor.
@@ -108,6 +109,8 @@ public:
 
   CSceneEffectManager*GetSceneEffectManager () const                        {return m_pSceneEffectManager;};
 
+  CScriptManager*     GetScriptManager      () const                        {return m_pScriptManager;};
+
 private:
 
   /**
@@ -156,6 +159,8 @@ private:
   CLightManager*              m_pLightManager;
 
   CSceneEffectManager*        m_pSceneEffectManager;
+
+  CScriptManager*             m_pScriptManager;
 
   /**
    * AnimatedModelManager.

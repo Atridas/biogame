@@ -4,30 +4,25 @@
 #include <string>
 #include <vector>
 
-extern "C"
-{
-#include "lua.h"
-#include "lualib.h"
-#include "lauxlib.h"
-}
 
+struct lua_State;
 
 #include "base.h"
 #include "Core.h"
 
-
 class CScriptManager
 {
-private:
-  lua_State *m_LS;
 public:
-  CScriptManager();
+  CScriptManager() : m_pLS(0) {};
+  ~CScriptManager() {Destroy();};
   void Initialize();
   void Destroy();
   void RunCode(const std::string &Code) const;
   void RunFile(const std::string &FileName) const;
   void Load(const std::string &XMLFile);
-  lua_State * GetLuaState() const {return m_LS;}
+  lua_State * GetLuaState() const {return m_pLS;}
   void RegisterLUAFunctions();
+private:
+  lua_State *m_pLS;
 };
 #endif
