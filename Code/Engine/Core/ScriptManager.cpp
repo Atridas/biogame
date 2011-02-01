@@ -22,12 +22,8 @@ using namespace luabind;
 void CScriptManager::Initialize()
 {
   m_pLS=lua_open();
-  luaopen_base(m_pLS);
-  luaopen_string(m_pLS);
-  luaopen_table(m_pLS);
-  luaopen_math(m_pLS);
-  //luaopen_io(m_pLS);
-  luaopen_debug(m_pLS);
+  luaL_openlibs(m_pLS);
+
   //Sobreescribimos la función _ALERT de LUA cuando se genere algún error al ejecutar código LUA 
   RegisterLUAFunctions();
 
@@ -51,7 +47,7 @@ int Alert(lua_State * State)
     lua_call(State, 1, 1);
     s = lua_tostring(State, -1);
     if (s == NULL)
-      return luaL_error(State, "`tostring' must return a string to `print'");
+      return luaL_error(State, "'tostring' must return a string to 'print'");
     if (i>1) l_Text += '\t';
     l_Text += s;
     lua_pop(State, 1);
