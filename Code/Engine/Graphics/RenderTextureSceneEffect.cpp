@@ -14,8 +14,16 @@ bool CRenderTextureSceneEffect::Init(const CXMLTreeNode& _params)
 
   m_pTexture = new CTexture();
   string l_szTexture = _params.GetPszISOProperty("texture","");
-  uint32 l_iWidth = _params.GetIntProperty("width");
-  uint32 l_iHeight = _params.GetIntProperty("height");
+  uint32 l_iWidth, l_iHeight;
+  if(_params.GetBoolProperty("texture_width_as_frame_buffer",false))
+  {
+    l_iWidth  = RENDER_MANAGER->GetScreenWidth();
+    l_iHeight = RENDER_MANAGER->GetScreenHeight();
+  } else
+  {
+    l_iWidth  = _params.GetIntProperty("width");
+    l_iHeight = _params.GetIntProperty("height");
+  }
   string l_szformat_type = _params.GetPszISOProperty("format_type","");
 
   if(m_pTexture->Create(  l_szTexture,
@@ -60,9 +68,12 @@ void CRenderTextureSceneEffect::CaptureFrameBuffers(CRenderManager* _pRM)
   if(IsOk())
   {
     LPDIRECT3DSURFACE9 l_pRenderTarget = 0;
+    LPDIRECT3DDEVICE9  l_pDevice = _pRM->GetDevice();
+    HRESULT hr = l_pDevice->GetRenderTarget(0,&l_pRenderTarget);
+    assert(SUCCEEDED(hr) && "CRenderTextureSceneEffect::CaptureFrameBuffers error getting render target");
 
-    _pRM->GetDevice()->GetRenderTarget(0,&l_pRenderTarget);
-    _pRM->GetDevice()->StretchRect( l_pRenderTarget, NULL, m_pSurface, NULL, D3DTEXF_NONE);
+    hr = l_pDevice->StretchRect( l_pRenderTarget, NULL, m_pSurface, NULL, D3DTEXF_NONE);
+    assert(SUCCEEDED(hr) && "CRenderTextureSceneEffect::CaptureFrameBuffers error stretching texture");
 
     l_pRenderTarget->Release();
   }else

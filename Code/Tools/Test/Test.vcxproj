@@ -27,6 +27,7 @@
     <None Include="..\..\..\Run\Test\Data\XML\init_test.xml">
       <SubType>Designer</SubType>
     </None>
+    <None Include="..\..\..\Run\Test\Data\XML\SceneEffects.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{52606329-0594-4B34-879A-B11B8787A7F1}</ProjectGuid>

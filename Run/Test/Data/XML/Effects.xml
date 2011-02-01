@@ -75,7 +75,8 @@
                use_lights="true" num_of_lights="4" use_camera_position="true"/>
 
     <!-- SCENE EFFECTS -->
-    <technique name="RenderNoiseAndVignettingTechnique" effect="Noise And Vignetting" use_world_view_projection_matrix="true" use_time="true"/>
+    <technique name="RenderNoiseAndVignettingTechnique" effect="Noise And Vignetting" use_time="true"/>
+    <technique name="BloomTechnique" effect="Bloom"/>
     
     <technique name="RenderShadowTechnique" effect="Shadows" use_world_view_projection_matrix="true"/>
     <technique name="Cal3DTechniqueShadow"  effect="Shadows" use_world_view_projection_matrix="true" animated="true"/>
