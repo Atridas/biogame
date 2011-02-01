@@ -22,6 +22,7 @@ public:
                          m_pDepthStencilRenderTargetTexture(0),
                          m_pOldRenderTarget(0),
                          m_pOldDepthStencilRenderTarget(0),
+                         m_pTextureSurface0(0),
                          m_uiWidth(0),
                          m_uiHeight(0),
                          m_szFileName("") {};
@@ -92,7 +93,7 @@ public:
   void UnsetAsRenderTarget();
   static CTexture::TFormatType GetFormatTypeFromString(const string &FormatType);
 
-  LPDIRECT3DSURFACE9 GetSurface() const {return m_pDepthStencilRenderTargetTexture;};
+  LPDIRECT3DSURFACE9 GetSurface() const {return m_pTextureSurface0;};
   
 protected:
   /**
@@ -109,7 +110,7 @@ protected:
   uint32 m_uiHeight;
   
   LPDIRECT3DSURFACE9 m_pDepthStencilRenderTargetTexture, m_pOldDepthStencilRenderTarget,
-                     m_pOldRenderTarget, m_pRenderTargetTexture;
+                     m_pOldRenderTarget, m_pRenderTargetTexture, m_pTextureSurface0;
 
   /**
    * Mètode de càrrega.
