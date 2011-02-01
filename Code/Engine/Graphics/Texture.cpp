@@ -162,11 +162,16 @@ bool CTexture::Create(const string& _szName,
   assert(m_pTexture!=NULL);
   assert(hr==D3D_OK);
 
+  HRESULT hr2 = m_pTexture->GetSurfaceLevel(0,&m_pTextureSurface0);
+
+  assert(hr2==D3D_OK);
+
   m_uiWidth=_uiWidth;
   m_uiHeight=_uiHeight;
 
-  if(SUCCEEDED(hr))
+  if(SUCCEEDED(hr) && SUCCEEDED(hr2))
     SetOk(true);
+
 
   return IsOk();
 }

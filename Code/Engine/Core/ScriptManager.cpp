@@ -99,9 +99,9 @@ void LogTextLua(const string &_c)
 
 
 
-CCore& GetCore()
+CCore* GetCore()
 {
-  return CCore::GetSingleton();
+  return CCore::GetSingletonPtr();
 }
 
 
