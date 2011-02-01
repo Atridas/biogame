@@ -116,10 +116,10 @@
 	<RenderableObject name="tub_estret14" class="StaticMesh" resource="tub_estret14" position="-12.9823 4.14409 0.921249" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Caldera" class="StaticMesh" resource="Caldera" position="-14.2968 0.0 0.0864078" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Edvac" class="StaticMesh" resource="Edvac" position="-12.6636 0.0 -10.5702" yaw="0.0" pitch="0.0" roll="0.0"/>
-	<RenderableObject name="Laboratori parets" class="StaticMesh" resource="Laboratori parets" position="-9.78482 2.5 -4.99161" yaw="0.0" pitch="0.0" roll="0.0"/>
-	<RenderableObject name="CAPSULA_DEF2" class="StaticMesh" resource="CAPSULA_DEF2" position="-11.3747 1.24775 0.485784" yaw="0.0" pitch="0.0" roll="0.0"/>
-	<RenderableObject name="CAPSULA_DEF3" class="StaticMesh" resource="CAPSULA_DEF3" position="-7.65574 1.24775 0.484792" yaw="0.0" pitch="0.0" roll="0.0"/>
-	<RenderableObject name="CAPSULA_DEF1" class="StaticMesh" resource="CAPSULA_DEF1" position="-14.5139 1.24775 -3.48805" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Laboratori parets" class="StaticMesh" resource="Laboratori parets" position="-9.78482 2.5 -4.9735" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="CAPSULA_DEF_02" class="StaticMesh" resource="CAPSULA_DEF_02" position="-11.3747 1.24775 0.485784" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="CAPSULA_DEF_01" class="StaticMesh" resource="CAPSULA_DEF_01" position="-7.65574 1.24775 0.484792" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="CAPSULA_DEF" class="StaticMesh" resource="CAPSULA_DEF" position="-14.5139 1.24775 -3.48805" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="autopsia_taula" class="StaticMesh" resource="autopsia_taula" position="-9.97162 0.0 -2.69891" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Aixeta_autopsia" class="StaticMesh" resource="Aixeta_autopsia" position="-10.8726 1.2 -2.59063" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Pizarra" class="StaticMesh" resource="Pizarra" position="-4.65465 1.91763 -4.88916" yaw="0.0" pitch="0.0" roll="0.0"/>
@@ -177,5 +177,5 @@
 	<RenderableObject name="radiografia11" class="StaticMesh" resource="radiografia11" position="-13.0278 0.00952148 -6.4698" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Caixa de llums02" class="StaticMesh" resource="Caixa de llums02" position="-14.9604 1.48875 -6.4606" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="suport_suero" class="StaticMesh" resource="suport_suero" position="-13.0765 0.152835 -8.99306" yaw="0.0" pitch="0.0" roll="0.0"/>
-	<RenderableObject name="bot" class="AnimatedModel" resource="bot" cycle="run" position="-11.2274 0.0 -7.69735" yaw="0.0" pitch="0.0" roll="0.0"/>
+  <RenderableObject name="bot" class="AnimatedModel" resource="bot" position="5.1793 0.0 -5.2768" yaw="0.0" pitch="0.0" roll="0"/>
 </RenderableObjects>
