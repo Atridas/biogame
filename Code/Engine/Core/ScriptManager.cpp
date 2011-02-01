@@ -26,13 +26,13 @@ void CScriptManager::Initialize()
   luaopen_string(m_pLS);
   luaopen_table(m_pLS);
   luaopen_math(m_pLS);
-  luaopen_io(m_pLS);
+  //luaopen_io(m_pLS);
   luaopen_debug(m_pLS);
   //Sobreescribimos la función _ALERT de LUA cuando se genere algún error al ejecutar código LUA 
   RegisterLUAFunctions();
 
   //RunCode( "local a = 2;local b = 5;local c = suma(a, b);log(\"el valor es \" .. c)" );
-  RunFile("Data/Lua/first.lua");
+  //RunFile("Data/Lua/first.lua");
 }
 
 
@@ -113,22 +113,25 @@ CCore& GetCore()
 void CScriptManager::RegisterLUAFunctions()
 {
   lua_register(m_pLS,"_ALERT",Alert);
-  REGISTER_LUA_FUNCTION(m_pLS, "suma", Suma);
-  REGISTER_LUA_FUNCTION(m_pLS, "hello_world", HelloWorldLua);
-  REGISTER_LUA_FUNCTION(m_pLS, "log", LogTextLua);
-
+  
+  //REGISTER_LUA_FUNCTION(m_pLS, "suma", Suma);
+  //REGISTER_LUA_FUNCTION(m_pLS, "hello_world", HelloWorldLua);
+  //REGISTER_LUA_FUNCTION(m_pLS, "log", LogTextLua);
+  
   module(m_pLS) [
+    def("suma", &Suma),
+    def("hello_world", &HelloWorldLua),
+    def("log", &LogTextLua)
+    /*
+    ,
     class_<CBaseControl>("CBaseControl")
       .def("is_ok", &CBaseControl::IsOk)
-  ];
-
-  module(m_pLS) [
+    ,
     class_<CSingleton<CCore>>("CSingletonCore")
-  ];
-
-  module(m_pLS) [
+    ,
     class_<CCore, bases<CBaseControl,CSingleton<CCore>>>("CCore")
       //.def("get_light_manager", &CCore::GetLightManager)
+    */
   ];
 
   //REGISTER_LUA_FUNCTION(m_pLS, "get_core", GetCore);

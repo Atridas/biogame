@@ -6,6 +6,7 @@
     <effect name="Cal3D Effects" file="Data/Effects/Cal3dTechniques.fx"/>
     <effect name="Noise And Vignetting" file="Data/Effects/NoiseAndVignetting.fx"/>
     <effect name="Shadows" file="Data/Effects/ShadowTechniques.fx"/>
+    <effect name="Bloom" file="Data/Effects/Bloom.fx"/>
     <!-- effect name=.../-->
     <!-- effect name=.../-->
   </effects>
