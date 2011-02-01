@@ -5,7 +5,7 @@ local b = 5
 
 local c = suma(a, b)
 
-log("el valor es " .. c)
+log("LUA:: el valor es " .. c)
 
 
 --[[
