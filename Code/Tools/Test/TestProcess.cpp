@@ -46,10 +46,10 @@ bool CTestProcess::Init()
   m_pObjectCamera = new CThPSCamera(
     0.1f,
     100.0f,
-    45.0f * FLOAT_PI_VALUE/180.0f,
+    35.0f * FLOAT_PI_VALUE/180.0f,
     ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
     m_pObject,
-    4.0f);
+    2.5f);
 
   m_pCamera = m_pObjectCamera;
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
