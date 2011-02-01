@@ -181,7 +181,7 @@ void CSceneEffectManager::CaptureFrameBuffers(CRenderManager* _pRM)
   {
     m_vCaptureFrameBufferSceneEffects[i]->CaptureFrameBuffers(_pRM);
   }
-  CaptureFrameBuffersAfterPostRender(_pRM);
+  //CaptureFrameBuffersAfterPostRender(_pRM);
 }
   
 void CSceneEffectManager::PostRender(CRenderManager* _pRM)

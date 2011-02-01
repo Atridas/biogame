@@ -6,6 +6,7 @@
 #include "XML\XMLTreeNode.h"
 #include "Core.h"
 #include "EffectTechnique.h"
+#include "Texture.h"
 
 
 bool CRenderToTextureSceneEffect::Init(const CXMLTreeNode& _params)
@@ -43,16 +44,17 @@ void CRenderToTextureSceneEffect::PreRender(CRenderManager* _pRM, CProcess* _pPr
   CEffectManager* l_pEffectManager = _pRM->GetEffectManager();
 
   //l_pEffectManager->ActivateCamera(l_pCamera->GetViewMatrix(), l_pCamera->GetProjectionMatrix(), l_pCamera->GetPosition());
-  //m_pTexture->SetAsRenderTarget();
+  _pRM->SetupMatrices(_pProc->GetCamera());
+  m_pTexture->SetAsRenderTarget();
 
   _pRM->BeginRendering();
 
   l_pEffectManager->SetStaticMeshTechnique(m_pStaticMeshTechnique);
   l_pEffectManager->SetAnimatedModelTechnique(m_pAnimatedModelTechnique);
-  //_pProc->Render3DScene(PSParams);
+  _pProc->RenderScene(_pRM);
   _pRM->EndRendering();
 
-  //m_pTexture->UnsetAsRenderTarget();
+  m_pTexture->UnsetAsRenderTarget();
 }
 
 void CRenderToTextureSceneEffect::Release()

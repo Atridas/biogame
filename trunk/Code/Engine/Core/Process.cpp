@@ -102,3 +102,4 @@ void CProcess::Render(CRenderManager* _pRM)
   m_pSceneEffectManager->CaptureFrameBuffersAfterPostRender(_pRM);
   
 }
+
