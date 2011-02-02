@@ -11,10 +11,11 @@
 #include "EffectManager.h"
 #include "RenderableObjectsManager.h"
 #include "SceneEffectManager.h"
+#include "ScriptManager.h"
 
 void CProcess::DebugInformation()
 {
-  if(m_bRenderInfo)  //TODO: comprovar en una variable de debug
+  if(m_bRenderInfo)
   {
     stringstream l_SStream;
 	  CColor col = colBLUE;
@@ -63,6 +64,14 @@ bool CProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _p
   } else if(strcmp(_pcAction, "ReloadMeshes") == 0)
   {
     CORE->GetRenderableObjectsManager()->Reload();
+    return true;
+  } else if(strcmp(_pcAction, "ReloadScript") == 0)
+  {
+    CORE->GetScriptManager()->Reload();
+    return true;
+  } else if(strcmp(_pcAction, "ExecuteScript") == 0)
+  {
+    CORE->GetScriptManager()->Execute();
     return true;
   }
   return ExecuteProcessAction(_fDeltaSeconds,_fDelta,_pcAction);
