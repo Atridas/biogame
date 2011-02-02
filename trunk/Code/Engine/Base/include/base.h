@@ -27,7 +27,9 @@
 using namespace std;
 
 #if defined( _DEBUG )  
+#ifndef __DONT_INCLUDE_MEM_LEAKS__
 #include "Utils/MemLeaks.h" 
+#endif
 #endif
 
 #ifndef NULL
