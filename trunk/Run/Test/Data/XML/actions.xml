@@ -41,6 +41,14 @@
   <action name="ReloadMeshes">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F10"/>
   </action>
+
+  <action name="ReloadScript">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F11"/>
+  </action>
+
+  <action name="ExecuteScript">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F12"/>
+  </action>
   
   <action name="LogRender_PageDown">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN" Code="KEY_PGDOWN"/>

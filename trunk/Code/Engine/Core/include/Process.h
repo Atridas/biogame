@@ -67,16 +67,16 @@ public:
 	virtual bool          Init() = 0;
 
   /**
-   * Setter del SceneEffectManager.
-   * Aquest mètode especifica el SceneEffectManager que s'utilitzarà.
+   * Getter de la càmara.
+   * Aquest mètode retorna l'actual càmara assignada al procés i sobre la qual es dibuixa l'escena.
    * @return CCamera* que representa l'actual càmara assignada al procés.
   **/
   virtual CCamera*      GetCamera                 ()         {return m_pCamera;};
 
   /**
-   * Getter de la càmara.
-   * Aquest mètode retorna l'actual càmara assignada al procés i sobre la qual es dibuixa l'escena.
-   * @return CCamera* que representa l'actual càmara assignada al procés.
+   * Setter del SceneEffectManager.
+   * Aquest mètode especifica el SceneEffectManager que s'utilitzarà.
+   * @param _pSceneEffectManager Punter al SceneEffectManager a utilitzar.
   **/
   virtual void          SetSceneEffectManager     (CSceneEffectManager* _pSceneEffectManager)         { m_pSceneEffectManager = _pSceneEffectManager; };
 
@@ -117,10 +117,18 @@ protected:
    * Punter que representa l'actual càmara assignada al procés. L'escena es dibuixarà a partir d'aquesta càmara.
   **/
   CCamera*              m_pCamera;
+
   /**
    * Punter a Manager d'efectes d'escena.
   **/
   CSceneEffectManager*  m_pSceneEffectManager;
+
+  /**
+   * Setter del DebugInfo.
+   * Aquest mètode permet determinar si es farà o no el pintat de debug.
+   * @param _bRenderInfo Si es vol o no mostrar la informació de debug.
+  **/
+  virtual void          SetDebugInfo     (bool _bRenderInfo)         { m_bRenderInfo = _bRenderInfo; };
 private:
 
   /**
@@ -129,7 +137,7 @@ private:
   string                m_szProcessName;
   /**
    * Control de pintat.
-   * Variable utilitzada per comprobar el correcte funcionament del pintat.
+   * Variable utilitzada per determinar si s'ha de fer el pintat de debug o no.
   **/
   bool                  m_bRenderInfo;
 };
