@@ -12,6 +12,8 @@ extern "C"
 #include <luabind/class.hpp>
 #include <luabind/operator.hpp>
 
+#include "Utils\MemLeaks.h"
+
 #include "Core.h"
 
 using namespace luabind;
@@ -117,7 +119,8 @@ void CScriptManager::RegisterLUAFunctions()
   module(m_pLS) [
     def("suma", &Suma),
     def("hello_world", &HelloWorldLua),
-    def("log", &LogTextLua)
+    def("log", &LogTextLua),
+    def("get_core", &GetCore)
     /*
     ,
     class_<CBaseControl>("CBaseControl")
