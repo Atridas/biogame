@@ -1,8 +1,6 @@
 #ifndef SCRIPTMANAGER_H
 #define SCRIPTMANAGER_H
 
-#define __DONT_INCLUDE_MEM_LEAKS__
-
 #include <string>
 #include <vector>
 
