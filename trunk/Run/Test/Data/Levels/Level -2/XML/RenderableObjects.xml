@@ -178,4 +178,5 @@
 	<RenderableObject name="Caixa de llums02" class="StaticMesh" resource="Caixa de llums02" position="-14.9604 1.48875 -6.4606" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="suport_suero" class="StaticMesh" resource="suport_suero" position="-13.0765 0.152835 -8.99306" yaw="0.0" pitch="0.0" roll="0.0"/>
   <RenderableObject name="bot" class="AnimatedModel" resource="bot" position="5.1793 0.0 -5.2768" yaw="0.0" pitch="0.0" roll="0"/>
+  <RenderableObject name="bot2" class="AnimatedModel" resource="bot" cycle="run" position="20.008 0.0 -0.854093" yaw="0.0" pitch="0.0" roll="0.0"/>
 </RenderableObjects>
