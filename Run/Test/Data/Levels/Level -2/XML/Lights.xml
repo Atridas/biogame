@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <lights ambient="0.3 0.3 0.3">
-  <light type="directional" direction="1.20439 0.0 -17.0443" name="Direct01" pos="-20.6773 0.0 8.76726" color="1.0 1.0 1.0" att_start_range="0.0" att_end_range="200.0" render_shadows="false"/>
-  <light type="spot" direction="85.5433 0.0 -1.04267" angle="33.0" fall_off="45.0" name="Spot01" pos="-7.6679 0.0 -29.1093" color="1.0 1.0 1.0" att_start_range="40.0" att_end_range="1000.0" render_shadows="true"/>
+  <!--light type="directional" direction="1.20439 0.0 -17.0443" name="Direct01" pos="-20.6773 0.0 8.76726" color="1.0 1.0 1.0" att_start_range="0.0" att_end_range="200.0" render_shadows="false"/-->
+  <light type="spot" direction="85.5433 0.0 -1.04267" angle="10.0" fall_off="20.0" name="Spot01" pos="-7.6679 0.0 -29.1093" color="1.0 1.0 1.0" att_start_range="40.0" att_end_range="1000.0" render_shadows="true"/>
 </lights>

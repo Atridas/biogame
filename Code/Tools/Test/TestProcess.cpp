@@ -19,6 +19,7 @@
 #include "VertexsStructs.h"
 
 #include <LightManager.h>
+#include "SpotLight.h"
 
 
 bool CTestProcess::Init()
@@ -49,10 +50,13 @@ bool CTestProcess::Init()
     35.0f * FLOAT_PI_VALUE/180.0f,
     ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
     m_pObject,
-    2.5f);
+    10.5f);
 
   m_pCamera = m_pObjectCamera;
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
+
+  CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
+  l_Spot->SetDirection(m_pObjectBot->GetPosition());
 
   m_bRenderLights = true;
 
@@ -87,6 +91,19 @@ void CTestProcess::Update(float _fElapsedTime)
   m_pObject->SetPitch(l_fPitch);
 
   m_pObjectBot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObjectBot->GetPosition().y, m_pObject->GetPosition().z));
+  
+  l_fPitch = m_pObjectBot->GetPitch();
+  //l_fPitch = l_fPitch+FLOAT_PI_VALUE/2;
+  l_fYaw = m_pObjectBot->GetYaw();
+  l_fYaw = l_fYaw+FLOAT_PI_VALUE/2;
+  //l_fRoll = m_pObjectBot->GetRoll();
+
+  CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
+  l_Spot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObjectBot->GetPosition().y, m_pObject->GetPosition().z));
+
+  //CDirectionalLight* l_dir = (CDirectionalLight*)CORE->GetLightManager()->GetResource("Direct01");
+  Vect3f l_vec(cos(l_fYaw) * cos(l_fPitch), sin(l_fPitch),sin(l_fYaw) * cos(l_fPitch) );
+  l_Spot->SetDirection(Vect3f(l_vec.x,l_vec.y,l_vec.z));
 
   if(m_bStateChanged)
   {
