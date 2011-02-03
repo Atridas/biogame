@@ -4,8 +4,9 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Propietats">
-      <UniqueIdentifier>{e3eba879-86f2-4531-af3f-1d4bbba256bc}</UniqueIdentifier>
-    </Filter>
+    <ClInclude Include="include\EnemyManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EnemyManager.cpp" />
   </ItemGroup>
 </Project>
