@@ -33,12 +33,12 @@ void AnimatedShadow(CAL3D_HW_VERTEX_VS _in,
 }
 
 //Pixel Shader
-void PixShadow( float2 Depth : TEXCOORD0, out float4 Color : COLOR )
+void PixShadow( float2 _Depth : TEXCOORD0, out float4 Color_ : COLOR )
 {
   //
   // Depth is z / w
   //
-  Color = Depth.x / Depth.y;
+  Color_ = _Depth.x / _Depth.y;
 }
 
 

@@ -8,6 +8,7 @@
     <effect name="Shadows" file="Data/Effects/ShadowTechniques.fx"/>
     <effect name="Bloom" file="Data/Effects/Bloom.fx"/>
     <effect name="HDR" file="Data/Effects/HDR.fx"/>
+    <effect name="Glow" file="Data/Effects/Glow.fx"/>
     <!-- effect name=.../-->
     <!-- effect name=.../-->
   </effects>
@@ -79,9 +80,13 @@
     <technique name="RenderNoiseAndVignettingTechnique" effect="Noise And Vignetting" use_time="true"/>
     <technique name="BloomTechnique" effect="Bloom"/>
     <technique name="HDRTechnique" effect="HDR"/>
-    
+
     <technique name="RenderShadowTechnique" effect="Shadows" use_world_view_projection_matrix="true"/>
     <technique name="Cal3DTechniqueShadow"  effect="Shadows" use_world_view_projection_matrix="true" animated="true"/>
-    
+
+    <technique name="RenderGlowTechnique" effect="Glow" use_world_view_projection_matrix="true"/>
+    <technique name="Cal3DGlowTechnique"  effect="Glow" use_world_view_projection_matrix="true" animated="true"/>
+
+    <technique name="PostProcessGlowTechnique"  effect="Glow"/>
   </techniques>
 </shaders>
