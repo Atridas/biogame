@@ -85,6 +85,7 @@ void CTexture::Activate(size_t _StageId)
   {
     LOGGER->AddNewLog(ELL_ERROR, "CTexture::Activate D3DERR_INVALIDCALL");
     //TODO exception?
+    assert(0 && "CTexture::Activate D3DERR_INVALIDCALL");
   }
 }
 

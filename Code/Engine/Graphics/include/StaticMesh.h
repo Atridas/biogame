@@ -6,7 +6,7 @@
 
 //forward declarations---------------
 class CRenderableVertexs;
-class CTexture;
+class CEffectMaterial;
 class CRenderManager;
 //---------------------------------
 
@@ -17,27 +17,6 @@ class CRenderManager;
 class CStaticMesh:
   public CBaseControl
 {
-protected:
-  /**
-   * Vector de Vèrtexs pels diferents conjunts de vèrtexs que formen la malla.
-  **/
-  vector<CRenderableVertexs*> m_RVs;
-  /**
-   * Vector de Textures que conté la malla.
-  **/
-  vector<vector<CTexture *>> m_Textures;
-  /**
-   * Path relatiu al fitxer mesh.
-  **/
-  string m_szFileName;
-  /**
-   * Nombre de vèrtexs i triangles de la malla.
-  **/
-  unsigned int m_iNumVertexs, m_iNumFaces;
-  /**
-   * Mètode d'alliberament de recursos.
-  **/
-  void Unload() {Release();};
 public:
   /**
    * Constructor per defecte.
@@ -73,5 +52,27 @@ public:
   **/
   void Render(CRenderManager *_pRM) const;
   //bool LoadSergi(const string &_szFileName);
+  
+protected:
+  /**
+   * Vector de Vèrtexs pels diferents conjunts de vèrtexs que formen la malla.
+  **/
+  vector<CRenderableVertexs*> m_RVs;
+  /**
+   * Vector de Textures que conté la malla.
+  **/
+  vector<CEffectMaterial*> m_vMaterials;
+  /**
+   * Path relatiu al fitxer mesh.
+  **/
+  string m_szFileName;
+  /**
+   * Nombre de vèrtexs i triangles de la malla.
+  **/
+  unsigned int m_iNumVertexs, m_iNumFaces;
+  /**
+   * Mètode d'alliberament de recursos.
+  **/
+  void Unload() {Release();};
 };
 #endif

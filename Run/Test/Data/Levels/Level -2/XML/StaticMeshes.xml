@@ -117,9 +117,9 @@
 	<mesh name="Caldera" path="Data/Levels/Level -2/Meshes/Caldera.mesh"/>
 	<mesh name="Edvac" path="Data/Levels/Level -2/Meshes/Edvac.mesh"/>
 	<mesh name="Laboratori parets" path="Data/Levels/Level -2/Meshes/Laboratori parets.mesh"/>
-	<mesh name="CAPSULA_DEF_02" path="Data/Levels/Level -2/Meshes/CAPSULA_DEF_02.mesh"/>
-	<mesh name="CAPSULA_DEF_01" path="Data/Levels/Level -2/Meshes/CAPSULA_DEF_01.mesh"/>
-	<mesh name="CAPSULA_DEF" path="Data/Levels/Level -2/Meshes/CAPSULA_DEF.mesh"/>
+	<mesh name="CAPSULA_DEF2" path="Data/Levels/Level -2/Meshes/CAPSULA_DEF2.mesh"/>
+	<mesh name="CAPSULA_DEF3" path="Data/Levels/Level -2/Meshes/CAPSULA_DEF3.mesh"/>
+	<mesh name="CAPSULA_DEF1" path="Data/Levels/Level -2/Meshes/CAPSULA_DEF1.mesh"/>
 	<mesh name="autopsia_taula" path="Data/Levels/Level -2/Meshes/autopsia_taula.mesh"/>
 	<mesh name="Aixeta_autopsia" path="Data/Levels/Level -2/Meshes/Aixeta_autopsia.mesh"/>
 	<mesh name="Pizarra" path="Data/Levels/Level -2/Meshes/Pizarra.mesh"/>
@@ -177,4 +177,5 @@
 	<mesh name="radiografia11" path="Data/Levels/Level -2/Meshes/radiografia11.mesh"/>
 	<mesh name="Caixa de llums02" path="Data/Levels/Level -2/Meshes/Caixa de llums02.mesh"/>
 	<mesh name="suport_suero" path="Data/Levels/Level -2/Meshes/suport_suero.mesh"/>
+	<mesh name="autopsia_taula01" path="Data/Levels/Level -2/Meshes/autopsia_taula01.mesh"/>
 </meshes>

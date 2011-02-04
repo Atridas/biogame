@@ -17,18 +17,23 @@
     <texture stage_id="1" texture="Data/Textures/vigneting.tga"/>
   </post_render>
 
-  <!--capture_frame_buffer name="capture_frame_buffer_scene_effect_without_post_fx" texture="FrameBufferTextureWithoutPostFX"
+  <capture_frame_buffer name="capture_frame_buffer_scene_effect_without_post_fx" texture="FrameBufferTextureWithoutPostFX"
                         texture_width_as_frame_buffer="true" active="true" format_type="A8R8G8B8"/>
 
 
   <capture_frame_buffer_post_fx name="capture_frame_buffer_scene_effect_with_post_fx" texture="FrameBufferTextureWithPostFX"
                                 texture_width_as_frame_buffer="true" active="true" format_type="A8R8G8B8"/>
 
+  <capture_frame_buffer name="capture400x300" texture="capture400x300" width="160" height="120" active="true" format_type="A8R8G8B8"/>
 
   <post_render type="draw_quad" name="bloom_post_effect" technique="BloomTechnique" active="true" color="1.0 1.0 1.0 1.0">
     <texture stage_id="0" texture="FrameBufferTextureWithoutPostFX"/>
-  </post_render-->
+    <texture stage_id="1" texture="capture400x300"/>
+  </post_render>
   <!--
+  <post_render type="draw_quad" name="bloom_post_effect" technique="BloomTechnique" active="true" color="1.0 1.0 1.0 1.0">
+    <texture stage_id="0" texture="FrameBufferTextureWithoutPostFX"/>
+  </post_render>
   <capture_frame_buffer name="hdr1024" texture="HDR1024" width="1024" height="1024" active="true" format_type="A8R8G8B8"/>
   <capture_frame_buffer name="hdr512" texture="HDR512" width="512" height="512" active="true" format_type="A8R8G8B8"/>
   <capture_frame_buffer name="hdr256" texture="HDR256" width="256" height="256" active="true" format_type="A8R8G8B8"/>

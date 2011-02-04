@@ -36,7 +36,7 @@ sampler EnvironmentTextureSampler : register(s3) = sampler_state
   AddressU  = WRAP;
   AddressV  = WRAP;
 };
-/*
+
 sampler GlowTextureSampler : register(s4) = sampler_state
 {
   MipFilter = LINEAR;
@@ -44,8 +44,8 @@ sampler GlowTextureSampler : register(s4) = sampler_state
   MagFilter = LINEAR;
   AddressU  = WRAP;
   AddressV  = WRAP;
-}
-*/
+};
+
 sampler ShadowTextureSampler : register(s5) = sampler_state
 {
   MipFilter = LINEAR;

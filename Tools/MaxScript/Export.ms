@@ -1,3 +1,6 @@
+global MATERIAL_INFO_VERTEXTYPE = 0X0001
+global MATERIAL_INFO_TEXTURETYPE = 0x0002
+
 global VERTEX_TYPE_GEOMETRY =0x0001
 global VERTEX_TYPE_NORMAL     =0x0002
 global VERTEX_TYPE_TANGENT    =0x0004
@@ -5,6 +8,13 @@ global VERTEX_TYPE_BINORMAL  =0x0008
 global VERTEX_TYPE_TEXTURE1   =0x0010
 global VERTEX_TYPE_TEXTURE2   =0x0020
 global VERTEX_TYPE_DIFFUSE      =0x0040
+
+
+global TEXTURE_TYPE_DIFFUSSE = 0X0001
+global TEXTURE_TYPE_NORMALMAP = 0X0002
+global TEXTURE_TYPE_LIGHTMAN = 0X0004
+global TEXTURE_TYPE_ENVIRONMENT = 0X0008
+global TEXTURE_TYPE_GLOW = 0X0010
 
 
 --global GAME_PATH = "Data/Assets/Textures/"
@@ -57,36 +67,46 @@ function GetVertexType _material =
 	return mascara
 )
 
+
+--global TEXTURE_TYPE_DIFFUSSE = 0X0001
+--global TEXTURE_TYPE_NORMALMAP = 0X0002
+--global TEXTURE_TYPE_LIGHTMAN = 0X0004
+--global TEXTURE_TYPE_ENVIRONMENT = 0X0008
+--global TEXTURE_TYPE_GLOW = 0X0010
+
 function ExportMaterial _material _file _relativePath = 
 (
-	/*
-	local l_cont = 0
+	local l_materialMask = 0
 	if _material.diffuseMapEnable == true and  _material.diffuseMap != undefined then
 	(
-		l_cont = l_cont + 1
+		l_materialMask = bit.or l_materialMask TEXTURE_TYPE_DIFFUSSE
 	)
 	
 	if _material.bumpMapEnable == true and  _material.bumpMap != undefined then
 	(
-		l_cont = l_cont + 1
+		l_materialMask = bit.or l_materialMask TEXTURE_TYPE_NORMALMAP
 	)
 	
 	if _material.selfIllumMapEnable == true and  _material.selfIllumMap != undefined then
 	(
-		l_cont = l_cont + 1
+		l_materialMask = bit.or l_materialMask TEXTURE_TYPE_LIGHTMAN
 	)
 	
 	if _material.reflectionMapEnable == true and  _material.reflectionMap != undefined then
 	(
-		l_cont = l_cont + 1
+		l_materialMask = bit.or l_materialMask TEXTURE_TYPE_ENVIRONMENT
+	)
+	
+	if _material.filterMapEnable == true and  _material.filterMap != undefined then
+	(
+		l_materialMask = bit.or l_materialMask TEXTURE_TYPE_GLOW
 	)
 	
 	--- lo mismo
-	
-	WriteShort _file l_cont #unsigned
+	format "Texture mask %\n" l_materialMask
+	WriteShort _file l_materialMask #unsigned
 	
 	local l_texture
-	*/
 	
 	if _material.diffuseMapEnable == true and  _material.diffuseMap != undefined then
 	(
@@ -118,6 +138,15 @@ function ExportMaterial _material _file _relativePath =
 	if _material.reflectionMapEnable == true and  _material.reflectionMap != undefined then
 	(
 		l_texture = _material.reflectionMap.filename
+		l_texture = filenameFromPath (OpenBitmap l_texture).filename
+		l_texture = _relativePath + l_texture
+		WriteShort _file l_texture.count #unsigned
+		WriteString _file l_texture
+	)
+	
+	if _material.filterMapEnable == true and  _material.filterMap != undefined then
+	(
+		l_texture = _material.filterMap.filename
 		l_texture = filenameFromPath (OpenBitmap l_texture).filename
 		l_texture = _relativePath + l_texture
 		WriteShort _file l_texture.count #unsigned
@@ -154,6 +183,13 @@ function TextureListOne _material =
 	if _material.reflectionMapEnable == true and  _material.reflectionMap != undefined then
 	(
 		l_texture = _material.reflectionMap.filename
+		l_texture = (OpenBitmap l_texture).filename
+		append l_paths l_texture
+	)
+	
+	if _material.filterMapEnable == true and  _material.filterMap != undefined then
+	(
+		l_texture = _material.filterMap.filename
 		l_texture = (OpenBitmap l_texture).filename
 		append l_paths l_texture
 	)
@@ -441,6 +477,9 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 	uab_clear_vertex_buffer()
 )
 
+--global MATERIAL_INFO_VERTEXTYPE = 0X0001
+--global MATERIAL_INFO_TEXTURETYPE = 0x0002
+
 function ExportMesh _object0 _filename _relativeTexturePath = 
 (
 	format "Exporting % \n" _object0.name
@@ -464,6 +503,8 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 	
 	local l_material = _object.material
 	
+	local l_materialInfo
+	
 	local l_numMaterials --nombre de materials
 	local l_vertexType = #() -- llista de vertexTypes, amb un sol element si no és un multimaterial
 	
@@ -478,7 +519,12 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 			--afegim a la llista el tipus de vertex
 			local l_vertexType2 = GetVertexType l_material[i]
 			append l_vertexType l_vertexType2
-		
+			
+			
+			l_materialInfo = MATERIAL_INFO_VERTEXTYPE
+			l_materialInfo = bit.or l_materialInfo MATERIAL_INFO_TEXTURETYPE
+			format "Mat info %\n" l_materialInfo
+			WriteShort l_file l_materialInfo #unsigned
 			--tipus de vertex i material en si
 			WriteShort l_file l_vertexType2 #unsigned
 			ExportMaterial l_material[i] l_file _relativeTexturePath
@@ -493,6 +539,10 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 		local l_vertexType2 = GetVertexType l_material
 		append l_vertexType l_vertexType2
 		
+		l_materialInfo = MATERIAL_INFO_VERTEXTYPE
+		l_materialInfo = bit.or l_materialInfo MATERIAL_INFO_TEXTURETYPE
+		format "Mat info %\n" l_materialInfo
+		WriteShort l_file l_materialInfo #unsigned
 		--tipus de vertex i material en si
 		WriteShort l_file l_vertexType2 #unsigned
 		ExportMaterial l_material l_file  _relativeTexturePath
