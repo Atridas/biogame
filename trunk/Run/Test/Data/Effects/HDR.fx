@@ -144,11 +144,12 @@ float4 HDRPS(float2 _UV: TEXCOORD0) : COLOR
   downsampleColor += tex2D(HDR64, _UV);
   downsampleColor += tex2D(HDR32, _UV);
   downsampleColor += tex2D(HDR16, _UV);
-  downsampleColor += tex2D(HDR8, _UV);
+  /*downsampleColor += tex2D(HDR8, _UV);
   downsampleColor += tex2D(HDR4, _UV);
   downsampleColor += tex2D(HDR2, _UV);
-  downsampleColor += tex2D(HDR1, _UV);
-  return l_Total + downsampleColor / 9;
+  downsampleColor += tex2D(HDR1, _UV);*/
+  float alpha = luma(l_Total);
+  return float4(l_Total.xyz * alpha + (1 - alpha) * downsampleColor.xyz / 5, 1.0);
 }
 
 technique HDRTechnique

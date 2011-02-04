@@ -6,6 +6,7 @@
 #include "TextureManager.h"
 #include "EffectManager.h"
 #include "EffectTechnique.h"
+#include "EffectMaterial.h"
 #include <IndexedVertexs.h>
 #include <base.h>
 #include <fstream>
@@ -81,41 +82,14 @@ bool CStaticMesh::Load(const string &_szFileName)
   l_File.read((char*)&l_usNumMaterials, sizeof(uint16));
   
   l_pusVertexType = new uint16[l_usNumMaterials];
-  l_pusTextureNum = new uint16[l_usNumMaterials];
+  //l_pusTextureNum = new uint16[l_usNumMaterials];
 
-
+  m_vMaterials.clear();
   for(int i = 0; i < l_usNumMaterials; i++)
   {
-    
-    m_Textures.push_back(vector<CTexture*>());
-    //Vertex Type
-    l_File.read((char*)&(l_pusVertexType[i]), sizeof(uint16));
-    //l_File.read((char*)&(l_pusTextureNum[i]), sizeof(uint16));
-    l_pusTextureNum[i] = GetTextureNum(l_pusVertexType[i]);
-
-    for(int j = 0; j < l_pusTextureNum[i]; j++)
-    {
-      uint16 l_usTextLen = 0;
-      l_File.read((char*)&l_usTextLen, sizeof(uint16));
-      char* l_pcTexture = new char[++l_usTextLen];
-    
-      l_File.read(l_pcTexture, sizeof(char) * l_usTextLen);
-
-      m_Textures[i].push_back(l_pTextureManager->GetResource(l_pcTexture));
-      if(m_Textures[i][j] == 0)
-      {
-        //No hi ha logger ja que ja el posa la textura
-        CHECKED_DELETE_ARRAY(l_pusVertexType);
-        CHECKED_DELETE_ARRAY(l_pusTextureNum);
-        delete l_pcTexture;
-        l_File.close();
-        return false;
-      }
-
-
-
-      delete l_pcTexture;
-    }
+    m_vMaterials.push_back(new CEffectMaterial());
+    m_vMaterials[i]->Init(l_File);
+    l_pusVertexType[i] = m_vMaterials[i]->GetVertexType();
 
   }
 
@@ -257,38 +231,14 @@ void CStaticMesh::Render(CRenderManager *_pRM) const
     vector<CRenderableVertexs*>::const_iterator l_ItRV = m_RVs.begin();
     vector<CRenderableVertexs*>::const_iterator l_EndRV = m_RVs.end();
 
-    vector<vector<CTexture*>>::const_iterator l_ItTextureArray = m_Textures.begin();
+    vector<CEffectMaterial*>::const_iterator l_ItMaterialArray = m_vMaterials.begin();
 
     while(l_ItRV != l_EndRV) 
     {
-      /*if(l_ItTextureArray != m_Textures.end())
-      {
-        vector<CTexture*>::const_iterator l_ItTexture = (*l_ItTextureArray).begin();
-        vector<CTexture*>::const_iterator l_EndTexture = (*l_ItTextureArray).end();
-        int stage = 0;
-        while(l_ItTexture != l_EndTexture)
-        {
-          (*l_ItTexture)->Activate(stage);
-          ++l_ItTexture;
-          ++stage;
-        }
-        ++l_ItTextureArray;
-      }*/
-      (*l_ItRV)->ActivateTextures(*l_ItTextureArray);
-
-      //(*l_ItRV)->Render(_pRM);  // Fixed Pipeline render
 
       //---------------------------- shaders -----------------------
-      CEffectManager* l_pEffectManager = _pRM->GetEffectManager();
       
-      CEffectTechnique* l_pEffectTechnique = l_pEffectManager->GetStaticMeshTechnique();
-      
-      if(!l_pEffectTechnique)
-      {
-        uint16 l_iVertexType = (*l_ItRV)->GetVertexType();
-        string l_szName = l_pEffectManager->GetTechniqueEffectNameByVertexDefault(l_iVertexType);
-        l_pEffectTechnique = l_pEffectManager->GetEffectTechnique(l_szName);
-      }
+      CEffectTechnique* l_pEffectTechnique = (*l_ItMaterialArray)->ActivateMaterial(_pRM);
 
       if(l_pEffectTechnique)
       {
@@ -305,6 +255,7 @@ void CStaticMesh::Render(CRenderManager *_pRM) const
       //------------------------------------------------------------
 
       ++l_ItRV;
+      ++l_ItMaterialArray;
     }
 }
 
@@ -320,7 +271,7 @@ void CStaticMesh::Release()
     }
 
     //el texture manager ja s'encarregarà de petar les textures
-    m_Textures.clear();
+    m_vMaterials.clear();
 
     m_RVs.clear();
 }
