@@ -261,6 +261,7 @@ void CStaticMesh::Render(CRenderManager *_pRM) const
 
 void CStaticMesh::Release()
 {
+  {
     vector<CRenderableVertexs*>::iterator l_It = m_RVs.begin();
     vector<CRenderableVertexs*>::iterator l_End = m_RVs.end();
 
@@ -269,9 +270,19 @@ void CStaticMesh::Release()
       CHECKED_DELETE(*l_It)
       ++l_It;
     }
+  }
+  {
+    vector<CEffectMaterial*>::iterator l_It = m_vMaterials.begin();
+    vector<CEffectMaterial*>::iterator l_End = m_vMaterials.end();
 
-    //el texture manager ja s'encarregarà de petar les textures
-    m_vMaterials.clear();
+    while(l_It != l_End) 
+    {
+      CHECKED_DELETE(*l_It)
+      ++l_It;
+    }
+  }
 
-    m_RVs.clear();
+  m_vMaterials.clear();
+
+  m_RVs.clear();
 }

@@ -1,24 +1,35 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <scene_effects>
-  
-  <pre_render type="shadow_map_render_to_texture" name="shadow_map_scene_effect" 
-              texture="ShadowMapTexture" width="1024" height="1024" 
-              static_mesh_technique="RenderShadowTechnique" animated_model_technique="Cal3DTechniqueShadow" 
-              light_shadow_cast="Spot01" 
+
+  <pre_render type="shadow_map_render_to_texture" name="shadow_map_scene_effect"
+              texture="ShadowMapTexture" width="1024" height="1024"
+              static_mesh_technique="RenderShadowTechnique" animated_model_technique="Cal3DTechniqueShadow"
+              light_shadow_cast="Spot01"
               active="true" format_type="R32F"/>
-              
-              
+
+  <pre_render type="render_to_texture" name="glow_scene_effect" texture="GlowTexture" width="512" height="512"
+              static_mesh_technique="RenderGlowTechnique" animated_model_technique="Cal3DGlowTechnique" format_type="A8R8G8B8" active="true"/>
+
+
+
   <render name="default_scene_effect" active="true">
     <texture stage_id="5" texture="ShadowMapTexture"/>
   </render>
 
+  <capture_frame_buffer name="capture_frame_buffer_scene_effect_without_post_fx" texture="FrameBufferTextureWithoutPostFX"
+                        texture_width_as_frame_buffer="true" active="true" format_type="A8R8G8B8"/>
+  
   <post_render type="draw_quad" name="noise_and_vignetting_scene_effect" technique="RenderNoiseAndVignettingTechnique" active="true">
     <texture stage_id="0" texture="Data/Textures/noise.tga"/>
     <texture stage_id="1" texture="Data/Textures/vigneting.tga"/>
   </post_render>
 
-  <capture_frame_buffer name="capture_frame_buffer_scene_effect_without_post_fx" texture="FrameBufferTextureWithoutPostFX"
-                        texture_width_as_frame_buffer="true" active="true" format_type="A8R8G8B8"/>
+  <post_render type="draw_quad" name="glow" technique="PostProcessGlowTechnique" active="true">
+    <texture stage_id="0" texture="GlowTexture"/>
+    <texture stage_id="1" texture="FrameBufferTextureWithoutPostFX"/>
+  </post_render>
+
+  <!--
 
 
   <capture_frame_buffer_post_fx name="capture_frame_buffer_scene_effect_with_post_fx" texture="FrameBufferTextureWithPostFX"
@@ -30,6 +41,7 @@
     <texture stage_id="0" texture="FrameBufferTextureWithoutPostFX"/>
     <texture stage_id="1" texture="capture400x300"/>
   </post_render>
+  -->
   <!--
   <post_render type="draw_quad" name="bloom_post_effect" technique="BloomTechnique" active="true" color="1.0 1.0 1.0 1.0">
     <texture stage_id="0" texture="FrameBufferTextureWithoutPostFX"/>
@@ -65,8 +77,6 @@
               static_mesh_technique="RenderZBlurTechnique"
               animated_model_technique="Cal3DTechniqueShadow" active="true" format_type="A8R8G8B8"/>
               
-  <pre_render type="render_to_texture" name="glow_scene_effect" texture="GlowTexture" width="256" height="256" 
-              static_mesh_technique="RenderGlowTechnique" animated_model_technique="Cal3DGlowTechnique" format_type="A8R8G8B8" active="true"/>
   
   
   

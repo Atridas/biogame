@@ -57,6 +57,6 @@ bool    g_ShadowEnabled[MAXLIGHTS]     : ShadowEnabled;
 //Other
 float3 g_CameraPosition : CameraPosition;
 float g_Time : Time;
-//D3DXHANDLE m_pBonesParameter;
+
 
 #endif

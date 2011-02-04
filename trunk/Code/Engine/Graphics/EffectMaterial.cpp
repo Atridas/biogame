@@ -89,6 +89,8 @@ bool CEffectMaterial::Init(std::fstream& _File)
 
 CEffectTechnique* CEffectMaterial::ActivateMaterial(const CRenderManager* _pRM) const
 {
+  LPDIRECT3DDEVICE9 l_pDevice = _pRM->GetDevice();
+
   //Activar les textures
   vector<CTexture*>::const_iterator l_it = m_vTextures.cbegin();
   
@@ -97,31 +99,51 @@ CEffectTechnique* CEffectMaterial::ActivateMaterial(const CRenderManager* _pRM) 
     assert(l_it != m_vTextures.cend() && "CEffectMaterial::ActivateMaterial hi ha menys textures de les necessàries.");
     (*l_it)->Activate(0);
     ++l_it;
+  } else {
+    HRESULT l_Result = l_pDevice->SetTexture(0,0);
+    assert(SUCCEEDED(l_Result) && "CEffectMaterial::ActivateMaterial error al directX");
   }
+
   if(m_usTextureMask & TEXTURE_TYPE_NORMALMAP)
   {
     assert(l_it != m_vTextures.cend() && "CEffectMaterial::ActivateMaterial hi ha menys textures de les necessàries.");
     (*l_it)->Activate(1);
     ++l_it;
+  } else {
+    HRESULT l_Result = l_pDevice->SetTexture(1,0);
+    assert(SUCCEEDED(l_Result) && "CEffectMaterial::ActivateMaterial error al directX");
   }
+
   if(m_usTextureMask & TEXTURE_TYPE_LIGHTMAN)
   {
     assert(l_it != m_vTextures.cend() && "CEffectMaterial::ActivateMaterial hi ha menys textures de les necessàries.");
     (*l_it)->Activate(2);
     ++l_it;
+  } else {
+    HRESULT l_Result = l_pDevice->SetTexture(2,0);
+    assert(SUCCEEDED(l_Result) && "CEffectMaterial::ActivateMaterial error al directX");
   }
+
   if(m_usTextureMask & TEXTURE_TYPE_ENVIRONMENT)
   {
     assert(l_it != m_vTextures.cend() && "CEffectMaterial::ActivateMaterial hi ha menys textures de les necessàries.");
     (*l_it)->Activate(3);
     ++l_it;
+  } else {
+    HRESULT l_Result = l_pDevice->SetTexture(3,0);
+    assert(SUCCEEDED(l_Result) && "CEffectMaterial::ActivateMaterial error al directX");
   }
+
   if(m_usTextureMask & TEXTURE_TYPE_GLOW)
   {
     assert(l_it != m_vTextures.cend() && "CEffectMaterial::ActivateMaterial hi ha menys textures de les necessàries.");
     (*l_it)->Activate(4);
     ++l_it;
+  } else {
+    HRESULT l_Result = l_pDevice->SetTexture(4,0);
+    assert(SUCCEEDED(l_Result) && "CEffectMaterial::ActivateMaterial error al directX");
   }
+
   assert(l_it == m_vTextures.cend() && "CEffectMaterial::ActivateMaterial hi ha més textures de les necessàries.");
 
   CEffectManager*   l_pEM = _pRM->GetEffectManager();
