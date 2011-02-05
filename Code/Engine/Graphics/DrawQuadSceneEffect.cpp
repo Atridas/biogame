@@ -14,6 +14,12 @@ bool CDrawQuadSceneEffect::Init(const CXMLTreeNode& _params)
   if(!CSceneEffect::Init(_params))
     return false;
 
+  Vect4f l_Color = _params.GetVect4fProperty("color",Vect4f(0,0,0,0));
+  m_Color.SetRed  (l_Color.x);
+  m_Color.SetGreen(l_Color.y);
+  m_Color.SetBlue (l_Color.z);
+  m_Color.SetAlpha(l_Color.w);
+
   m_szTechnique = _params.GetPszISOProperty("technique","");
   
   CEffectManager* l_pEffectManager = RENDER_MANAGER->GetEffectManager();
