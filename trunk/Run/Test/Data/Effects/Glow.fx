@@ -32,7 +32,12 @@ void AnimatedGlow(CAL3D_HW_VERTEX_VS _in,
 //Pixel Shader
 void PixGlow( float2 _UV : TEXCOORD0, out float4 Color_ : COLOR )
 {
-  Color_ = tex2D(GlowTextureSampler,_UV);
+  if(g_GlowActive)
+  {
+    Color_ = tex2D(GlowTextureSampler,_UV);
+  } else {
+    Color_ = float4(0,0,0,0);
+  }
 }
 
 
@@ -95,8 +100,8 @@ float4 PostProcessGlowPS(float2 _UV: TEXCOORD0) : COLOR
       l_Counter += l_Color.a;
     }
   }
-  l_Total = l_Total / max(1, l_Counter);
-  return l_Original + l_Total * l_Total.a;
+  return l_Total / max(1, l_Counter);
+  //return l_Original + l_Total * l_Total.a;
 }
 
 technique PostProcessGlowTechnique
@@ -106,7 +111,9 @@ technique PostProcessGlowTechnique
 		ZEnable = true;
 		ZWriteEnable = true;
 		ZFunc = LessEqual;
-		AlphaBlendEnable = false;
+		AlphaBlendEnable = true;
+		SrcBlend=SrcAlpha;
+		DestBlend=InvSrcAlpha;
 		CullMode = CCW;
 		PixelShader = compile ps_3_0 PostProcessGlowPS();
 	}

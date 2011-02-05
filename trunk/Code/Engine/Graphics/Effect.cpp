@@ -31,7 +31,8 @@ CEffect::CEffect(void):
   m_pLightsEndRangeAttenuationParameter(0),
   m_pCameraPositionParameter(0),
   m_pBonesParameter(0),
-  m_pTimeParameter(0)
+  m_pTimeParameter(0),
+  m_pGlowActive(0)
 {
   for(int i = 0; i < MAX_LIGHTS_BY_SHADER; i++)
   {
@@ -74,6 +75,7 @@ void CEffect::SetNullParameters()
   m_pLightsEndRangeAttenuationParameter =
   m_pCameraPositionParameter =
   m_pBonesParameter =
+  m_pGlowActive =
   m_pTimeParameter = 0;
 }
 
@@ -247,6 +249,7 @@ bool CEffect::InitParameters()
   GetParameterBySemantic("CameraPosition", m_pCameraPositionParameter);
   GetParameterBySemantic("Bones", m_pBonesParameter);
   GetParameterBySemantic("Time", m_pTimeParameter);
+  GetParameterBySemantic("GlowActive", m_pGlowActive);
 
   return true;
 }

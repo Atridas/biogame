@@ -12,6 +12,7 @@ class CalModel;
 class CalCoreModel;
 class CalHardwareModel;
 class CRenderableVertexs;
+class CEffectMaterial;
 // ----------------------------------
 
 
@@ -50,13 +51,16 @@ public:
    * @param _uiId Índex de la textura sol·licitada.
    * @return Identificador de la textura.
   **/
-  const string & GetTextureName         ( size_t _uiId ) const      { return m_vTextureFilenameList[_uiId]; };
+  //const string & GetTextureName         ( size_t _uiId ) const      { return m_vTextureFilenameList[_uiId]; };
   /**
    * Getter del nombre de textures.
    * Aquest mètode retorna el nombre de textures que conté el model representat.
    * @return Nombre de textures del model.
   **/
-  size_t GetNumTextures                 ( ) const                   { return m_vTextureFilenameList.size(); };
+  //size_t GetNumTextures                 ( ) const                   { return m_vTextureFilenameList.size(); };
+
+  CEffectMaterial* GetMaterial            ( size_t _uiId ) const      { return m_vMaterials[_uiId];};
+
   /**
    * Getter del model cal3d.
    * Aquest mètode retorna model de cal3d representat, preparat per la seva renderització via hardware.
@@ -148,7 +152,7 @@ private:
   /**
    * Vector de paths de les textures del model.
   **/
-  vector<std::string>       m_vTextureFilenameList;
+  vector<CEffectMaterial*>  m_vMaterials;
   /**
    * Path del model.
   **/

@@ -9,6 +9,7 @@
 
 #include "IndexedVertexs.h"
 #include "RenderableVertexs.h"
+#include "EffectMaterial.h"
 #include "EffectManager.h"
 #include "EffectTechnique.h"
 
@@ -43,8 +44,8 @@ void CAnimatedInstanceModel::Initialize(CAnimatedCoreModel *_pAnimatedCoreModel)
     InitD3D(RENDER_MANAGER);
 
     //animated vertex technique
-    string l_szTechniqueName = RENDER_MANAGER->GetEffectManager()->GetTechniqueEffectNameByVertexDefault(TCAL3D_HW_VERTEX::GetVertexType());
-    m_pEffectTechnique = RENDER_MANAGER->GetEffectManager()->GetEffectTechnique(l_szTechniqueName);
+    //string l_szTechniqueName = RENDER_MANAGER->GetEffectManager()->GetTechniqueEffectNameByVertexDefault(TCAL3D_HW_VERTEX::GetVertexType());
+    //m_pEffectTechnique = RENDER_MANAGER->GetEffectManager()->GetEffectTechnique(l_szTechniqueName);
 
     SetOk(true);
 
@@ -74,6 +75,7 @@ bool CAnimatedInstanceModel::LoadVertexBuffer(CRenderManager *_pRM)
   return isOk;
 }
 
+/*
 void CAnimatedInstanceModel::LoadTextures(CRenderManager *_pRM)
 {
   m_vTextureList.clear();
@@ -88,6 +90,7 @@ void CAnimatedInstanceModel::LoadTextures(CRenderManager *_pRM)
   }
 
 }
+*/
 
 /*void CAnimatedInstanceModel::Render(CRenderManager *_pRM)
 {
@@ -156,35 +159,28 @@ void CAnimatedInstanceModel::LoadTextures(CRenderManager *_pRM)
 
 void CAnimatedInstanceModel::Render(CRenderManager *_pRM)
 {
-  CEffectManager* l_pEffectManager = _pRM->GetEffectManager();
-  CEffectTechnique* l_pEffectTechnique = l_pEffectManager->GetAnimatedModelTechnique();
+  CalHardwareModel* l_pCalHardwareModel = m_pAnimatedCoreModel->GetCalHardwareModel();
 
-  if(l_pEffectTechnique==NULL)
-    l_pEffectTechnique = m_pEffectTechnique;
-
-  if(l_pEffectTechnique == NULL || !l_pEffectTechnique->IsOk())
-    return;
-
-  //l_pEffectManager->SetWorldMatrix(GetTransform());
-  CEffect* l_pEffect = l_pEffectTechnique->GetEffect();
-  
-  if(l_pEffect==NULL)
-    return;
-
-  LPD3DXEFFECT l_pd3dEffect = l_pEffect->GetD3DEffect();
-  if(l_pd3dEffect)
+  if(l_pCalHardwareModel)
   {
-    l_pEffectTechnique->BeginRender();
-    CalHardwareModel* l_pCalHardwareModel = m_pAnimatedCoreModel->GetCalHardwareModel();
 
-    if(l_pCalHardwareModel)
+    D3DXMATRIX l_mTransformation[MAXBONES];
+
+    for(int l_iHardwareMeshId=0; l_iHardwareMeshId < l_pCalHardwareModel->getHardwareMeshCount(); l_iHardwareMeshId++)
     {
-      vector<CTexture*>::iterator l_itTexture = m_vTextureList.begin();
+      CEffectMaterial*  l_pMaterial = m_pAnimatedCoreModel->GetMaterial(l_iHardwareMeshId);
+      CEffectTechnique* l_pEffectTechnique = l_pMaterial->GetEffectTechnique(_pRM);
+      if(l_pEffectTechnique == NULL || !l_pEffectTechnique->IsOk())
+        return;
 
-      D3DXMATRIX l_mTransformation[MAXBONES];
-
-      for(int l_iHardwareMeshId=0; l_iHardwareMeshId < l_pCalHardwareModel->getHardwareMeshCount(); l_iHardwareMeshId++)
+      CEffect* l_pEffect = l_pEffectTechnique->GetEffect();
+  
+      if(l_pEffect==NULL)
+        return;
+      LPD3DXEFFECT l_pd3dEffect = l_pEffect->GetD3DEffect();
+      if(l_pd3dEffect)
       {
+        l_pEffectTechnique->BeginRender(l_pMaterial);
         l_pCalHardwareModel->selectHardwareMesh(l_iHardwareMeshId);
 
         for(int l_iBoneId = 0; l_iBoneId < l_pCalHardwareModel->getBoneCount(); l_iBoneId++)
@@ -205,9 +201,6 @@ void CAnimatedInstanceModel::Render(CRenderManager *_pRM)
 
         l_pd3dEffect->SetFloatArray(l_pEffect->m_pBonesParameter, (float *)l_mMatrix,(l_pCalHardwareModel->getBoneCount())*3*4);
 
-        (*l_itTexture)->Activate(0);
-        l_itTexture++;
-
         ((CIndexedVertexs<TCAL3D_HW_VERTEX>*)m_pAnimatedCoreModel->GetRenderableVertexs())->
           Render(
             _pRM,
@@ -218,7 +211,6 @@ void CAnimatedInstanceModel::Render(CRenderManager *_pRM)
 			      l_pCalHardwareModel->getStartIndex(),
 			      l_pCalHardwareModel->getFaceCount()
           );
-
       }
     }
   }
@@ -251,7 +243,7 @@ void CAnimatedInstanceModel::RenderModelBySoftware(CRenderManager *_pRM)
   l_iMeshCount = pCalRenderer->getMeshCount();
 
   //Això pot petar!!!
-  vector<CTexture*>::iterator l_itTexture = m_vTextureList.begin();
+  //vector<CTexture*>::iterator l_itTexture = m_vTextureList.begin();
 
   // render all meshes of the model
   int l_iMeshId;
@@ -268,8 +260,7 @@ void CAnimatedInstanceModel::RenderModelBySoftware(CRenderManager *_pRM)
       // select mesh and submesh for further data access
       if(pCalRenderer->selectMeshSubmesh(l_iMeshId, l_iSubmeshId))
       {
-        (*l_itTexture)->Activate(0);
-        l_itTexture++;
+        m_pAnimatedCoreModel->GetMaterial(l_iSubmeshId)->ActivateTextures(_pRM);
 		   
 		    // Get vertexbuffer from the model		  		  
 		    SNORMALTEXTUREDVERTEX* l_pVertices;
@@ -327,12 +318,11 @@ void CAnimatedInstanceModel::InitD3D(CRenderManager *_pRM)
   //{
   //  LOGGER->AddNewLog(ELL_WARNING,"CAnimatedInstanceModel:: LoadVertexBuffer retorna false.");
   //}
-  LoadTextures(_pRM);
+  //LoadTextures(_pRM);
 }
 
 void CAnimatedInstanceModel::Release()
 {
-  m_vTextureList.clear();
   CHECKED_DELETE(m_pCalModel);
 }
 

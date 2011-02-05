@@ -238,11 +238,11 @@ void CStaticMesh::Render(CRenderManager *_pRM) const
 
       //---------------------------- shaders -----------------------
       
-      CEffectTechnique* l_pEffectTechnique = (*l_ItMaterialArray)->ActivateMaterial(_pRM);
+      CEffectTechnique* l_pEffectTechnique = (*l_ItMaterialArray)->GetEffectTechnique(_pRM);
 
       if(l_pEffectTechnique)
       {
-        if(l_pEffectTechnique->BeginRender())
+        if(l_pEffectTechnique->BeginRender(*l_ItMaterialArray))
         {
           (*l_ItRV)->Render(_pRM,l_pEffectTechnique);
         } else {

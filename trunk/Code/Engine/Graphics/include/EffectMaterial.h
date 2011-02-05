@@ -9,7 +9,7 @@
 
 #define TEXTURE_TYPE_DIFFUSSE    0X0001
 #define TEXTURE_TYPE_NORMALMAP   0X0002
-#define TEXTURE_TYPE_LIGHTMAN    0X0004
+#define TEXTURE_TYPE_LIGHTMAP    0X0004
 #define TEXTURE_TYPE_ENVIRONMENT 0X0008
 #define TEXTURE_TYPE_GLOW        0X0010
 
@@ -18,6 +18,7 @@ class CEffect;
 class CTexture;
 class CEffectTechnique;
 class CRenderManager;
+class CXMLTreeNode;
 //------------------------------------------------
 
 class CEffectMaterial: public CBaseControl
@@ -27,14 +28,16 @@ public:
   ~CEffectMaterial(void) {Done();};
   
   //bool Init(bool _bAnimated, int _iTextureMask, int _iVertexType, const vector<CTexture*>& _vTextures);
+  bool Init(const CXMLTreeNode& _xmlMaterial);
   bool Init(fstream& _File);
 
   int GetTextureMask() const {return m_usTextureMask;};
   int GetVertexType()  const {return m_usVertexType;};
   int GetMaterialInfo()const {return m_usMaterialInfo;};
   bool IsAnimated()    const {return m_bAnimated;};
-
-  CEffectTechnique* ActivateMaterial(const CRenderManager* _pRM) const;
+  
+  CEffectTechnique* GetEffectTechnique(const CRenderManager* _pRM) const;
+  void ActivateTextures(const CRenderManager* _pRM) const;
 
   static int NumTextures(int mask);
 

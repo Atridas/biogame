@@ -8,6 +8,7 @@
 
 //forward declarations ----------------------------------------------
 class CEffect;
+class CEffectMaterial;
 class CXMLTreeNode;
 //-------------------------------------------------------------------
 
@@ -32,6 +33,7 @@ public:
                       m_bUseViewProjectionMatrix(false),
                       m_bUseViewToLightProjectionMatrix(false),
                       m_bUseTime(false),
+                      m_bGlowActive(false),
                       m_iNumOfLights(0),
                       m_pEffect(0),
                       m_pD3DTechnique(0)
@@ -43,7 +45,7 @@ public:
   inline CEffect * GetEffect() const {return m_pEffect;}
   D3DXHANDLE GetD3DTechnique() { return m_pD3DTechnique; };
 
-  bool BeginRender();
+  bool BeginRender(const CEffectMaterial* _pMaterial);
   bool Refresh();  
   
 
@@ -65,6 +67,7 @@ private:
   int m_iNumOfLights;
   bool m_bUseLights;
   bool m_bAnimated;
+  bool m_bGlowActive;
 
   bool m_bUseCameraPosition;
   bool m_bUseTime;

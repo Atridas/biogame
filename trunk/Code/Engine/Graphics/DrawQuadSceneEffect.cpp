@@ -56,7 +56,8 @@ void CDrawQuadSceneEffect::PostRender(CRenderManager *_pRM)
       }
     }*/
 
-    m_pTechnique->BeginRender();
+    m_pTechnique->BeginRender(0);
+    ActivateTextures();
     LPD3DXEFFECT l_Effect=m_pTechnique->GetEffect()->GetD3DEffect();
     if(l_Effect!=NULL)
     {
@@ -66,8 +67,6 @@ void CDrawQuadSceneEffect::PostRender(CRenderManager *_pRM)
       for (UINT iPass = 0; iPass < l_NumPasses; iPass++)
       {
         l_Effect->BeginPass(iPass);
-        ActivateTextures();
-        //_pRM->DrawColoredQuad2DTextured( l_Rect, m_Color);
         _pRM->DrawTexturedQuad2D (posInit,w,h,UPPER_LEFT,m_Color);
         l_Effect->EndPass();
       }
