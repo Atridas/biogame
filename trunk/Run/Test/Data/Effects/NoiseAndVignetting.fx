@@ -1,4 +1,3 @@
-#include "VertexType.fx"
 #include "Globals.fx"
 
 sampler VignettingSampler : register(s1) = sampler_state
@@ -18,16 +17,6 @@ sampler NoiseSampler : register(s0) = sampler_state
   AddressU  = WRAP;
   AddressV  = WRAP;
 };
-/*
-TTEXTURED_DIFFUSSED_VERTEX_PS RenderNoiseAndVignettingVS(TTEXTURED_DIFFUSSED_VERTEX_VS _in) {
-	TTEXTURED_DIFFUSSED_VERTEX_PS out_ = (TTEXTURED_DIFFUSSED_VERTEX_PS)0;
-	out_.Color = _in.Color;
-	out_.UV  = _in.UV.xy;
-	out_.HPosition = float4(_in.Position.xy,1.0,1.0);
-	
-	return out_;
-}
-*/
 
 float4 RenderNoiseAndVignettingPS(float2 UV : TEXCOORD0) : COLOR
 {

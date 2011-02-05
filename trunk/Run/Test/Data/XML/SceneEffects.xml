@@ -18,9 +18,12 @@
 
   <capture_frame_buffer name="capture_frame_buffer_scene_effect_without_post_fx" texture="FrameBufferTextureWithoutPostFX"
                         texture_width_as_frame_buffer="true" active="true" format_type="A8R8G8B8"/>
+  
+  <capture_frame_buffer_post_fx name="capture_frame_buffer_scene_effect_with_post_fx" texture="FrameBufferTextureWithPostFX"
+                                texture_width_as_frame_buffer="true" active="true" format_type="A8R8G8B8"/>
 
 
-  <post_render type="draw_quad" name="glow" technique="PostProcessGlowTechnique" active="true">
+  <post_render type="draw_quad" name="post_glow" technique="PostProcessGlowTechnique" active="true">
     <texture stage_id="0" texture="GlowTexture"/>
     <texture stage_id="1" texture="FrameBufferTextureWithoutPostFX"/>
   </post_render>
@@ -29,11 +32,12 @@
     <texture stage_id="0" texture="Data/Textures/noise.tga"/>
     <texture stage_id="1" texture="Data/Textures/vigneting.tga"/>
   </post_render>
+
+
+  <post_render type="draw_quad" name="post_blur_scene_effect" technique="PostProcessBlurTechnique" active="true" color="1.0 1.0 1.0 0.25">
+    <texture stage_id="0" texture="FrameBufferTextureWithPostFX"/>
+  </post_render>
   <!--
-
-
-  <capture_frame_buffer_post_fx name="capture_frame_buffer_scene_effect_with_post_fx" texture="FrameBufferTextureWithPostFX"
-                                texture_width_as_frame_buffer="true" active="true" format_type="A8R8G8B8"/>
 
   <capture_frame_buffer name="capture400x300" texture="capture400x300" width="160" height="120" active="true" format_type="A8R8G8B8"/>
 
@@ -93,9 +97,6 @@
     <texture stage_id="0" texture="GlowTexture"/>
   </post_render>
   
-  <post_render type="draw_quad" name="post_blur_scene_effect" technique="RenderGUITechnique" active="true" color="1.0 1.0 1.0 0.4">
-    <texture stage_id="0" texture="FrameBufferTextureWithPostFX"/>
-  </post_render>
   
   -->
 </scene_effects>
