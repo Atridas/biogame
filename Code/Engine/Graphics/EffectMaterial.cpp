@@ -6,6 +6,7 @@
 #include "EffectManager.h"
 #include "RenderManager.h"
 #include "VertexsStructs.h"
+#include <XML/XMLTreeNode.h>
 
 #include <fstream>
 
@@ -42,6 +43,128 @@ bool CEffectMaterial::Init(bool _bAnimated, int _iTextureMask, int _iVertexType,
 }
 */
 
+
+
+bool CEffectMaterial::Init(const CXMLTreeNode& _xmlMaterial)
+{
+  m_bAnimated = _xmlMaterial.GetBoolProperty("animated", false);
+
+  m_usVertexType = _xmlMaterial.GetIntProperty("vertex_type", 787);
+
+  m_usTextureMask = 0;
+
+
+  string l_szTexDiffuse(""), l_szTexNormal(""), l_szTexLightmap(""), l_szTexEnvironment(""), l_szTexGlow("");
+  int l_iNumChildren = _xmlMaterial.GetNumChildren();
+  for(int i = 0; i < l_iNumChildren; i++)
+  {
+    if(strcmp(_xmlMaterial(i).GetName(),"texture") == 0)
+    {
+      CXMLTreeNode l_xmlTexture = _xmlMaterial(i);
+      string l_szTexType = l_xmlTexture.GetPszISOProperty("type","");
+      string l_szTexFilename = l_xmlTexture.GetPszISOProperty("filename", "");
+      if(l_szTexType == "diffusse")
+      {
+        if(m_usTextureMask & TEXTURE_TYPE_DIFFUSSE)
+          LOGGER->AddNewLog(ELL_WARNING, "CEffectMaterial::Init textura difusa repetida, sobreescrivint. Antiga: \"%s\" Nova: \"%s\"", l_szTexDiffuse.c_str(), l_szTexFilename);
+        m_usTextureMask |= TEXTURE_TYPE_DIFFUSSE;
+        l_szTexDiffuse = l_szTexFilename;
+      } else if(l_szTexType == "normalmap")
+      {
+        if(m_usTextureMask & TEXTURE_TYPE_NORMALMAP)
+          LOGGER->AddNewLog(ELL_WARNING, "CEffectMaterial::Init textura normalmap repetida, sobreescrivint. Antiga: \"%s\" Nova: \"%s\"", l_szTexNormal.c_str(), l_szTexFilename);
+        m_usTextureMask |= TEXTURE_TYPE_NORMALMAP;
+        l_szTexNormal = l_szTexFilename;
+      } else if(l_szTexType == "lightmap")
+      {
+        if(m_usTextureMask & TEXTURE_TYPE_LIGHTMAP)
+          LOGGER->AddNewLog(ELL_WARNING, "CEffectMaterial::Init textura lightmap repetida, sobreescrivint. Antiga: \"%s\" Nova: \"%s\"", l_szTexLightmap.c_str(), l_szTexFilename);
+        m_usTextureMask |= TEXTURE_TYPE_LIGHTMAP;
+        l_szTexLightmap = l_szTexFilename;
+      } else if(l_szTexType == "environment")
+      {
+        if(m_usTextureMask & TEXTURE_TYPE_ENVIRONMENT)
+          LOGGER->AddNewLog(ELL_WARNING, "CEffectMaterial::Init textura environment repetida, sobreescrivint. Antiga: \"%s\" Nova: \"%s\"", l_szTexEnvironment.c_str(), l_szTexFilename);
+        m_usTextureMask |= TEXTURE_TYPE_ENVIRONMENT;
+        l_szTexEnvironment = l_szTexFilename;
+      } else if(l_szTexType == "glow")
+      {
+        if(m_usTextureMask & TEXTURE_TYPE_GLOW)
+          LOGGER->AddNewLog(ELL_WARNING, "CEffectMaterial::Init textura glow repetida, sobreescrivint. Antiga: \"%s\" Nova: \"%s\"", l_szTexGlow.c_str(), l_szTexFilename);
+        m_usTextureMask |= TEXTURE_TYPE_GLOW;
+        l_szTexGlow = l_szTexFilename;
+      } else if(l_szTexType == "")
+      {
+        LOGGER->AddNewLog(ELL_WARNING, "CEffectMaterial::Init No s'ha trobat el tipus de textura.");
+      } else 
+      {
+        LOGGER->AddNewLog(ELL_WARNING, "CEffectMaterial::Init Tipus de textura no reconegut \"%s\".", l_szTexType.c_str());
+      }
+    } else if(!_xmlMaterial(i).IsComment())
+    {
+      LOGGER->AddNewLog(ELL_WARNING, "CEffectMaterial::Init trobat un element desconegut \"%s\"", _xmlMaterial(i).GetName());
+    }
+  }
+  CTextureManager* l_pTextureManager = RENDER_MANAGER->GetTextureManager();
+  if(m_usTextureMask & TEXTURE_TYPE_DIFFUSSE)
+  {
+    CTexture* l_Texture = l_pTextureManager->GetResource(l_szTexDiffuse);
+    if(!l_Texture)
+    {
+      LOGGER->AddNewLog(ELL_WARNING, "CEffectMaterial::Init No s'ha trobat la textura \"%s\".", l_szTexDiffuse.c_str());
+      m_usTextureMask &= ~TEXTURE_TYPE_DIFFUSSE;
+    } else {
+      m_vTextures.push_back(l_Texture);
+    }
+  }
+  if(m_usTextureMask & TEXTURE_TYPE_NORMALMAP)
+  {
+    CTexture* l_Texture = l_pTextureManager->GetResource(l_szTexNormal);
+    if(!l_Texture)
+    {
+      LOGGER->AddNewLog(ELL_WARNING, "CEffectMaterial::Init No s'ha trobat la textura \"%s\".", l_szTexNormal.c_str());
+      m_usTextureMask &= ~TEXTURE_TYPE_NORMALMAP;
+    } else {
+      m_vTextures.push_back(l_Texture);
+    }
+  }
+  if(m_usTextureMask & TEXTURE_TYPE_LIGHTMAP)
+  {
+    CTexture* l_Texture = l_pTextureManager->GetResource(l_szTexLightmap);
+    if(!l_Texture)
+    {
+      LOGGER->AddNewLog(ELL_WARNING, "CEffectMaterial::Init No s'ha trobat la textura \"%s\".", l_szTexLightmap.c_str());
+      m_usTextureMask &= ~TEXTURE_TYPE_LIGHTMAP;
+    } else {
+      m_vTextures.push_back(l_Texture);
+    }
+  }
+  if(m_usTextureMask & TEXTURE_TYPE_ENVIRONMENT)
+  {
+    CTexture* l_Texture = l_pTextureManager->GetResource(l_szTexEnvironment);
+    if(!l_Texture)
+    {
+      LOGGER->AddNewLog(ELL_WARNING, "CEffectMaterial::Init No s'ha trobat la textura \"%s\".", l_szTexEnvironment.c_str());
+      m_usTextureMask &= ~TEXTURE_TYPE_ENVIRONMENT;
+    } else {
+      m_vTextures.push_back(l_Texture);
+    }
+  }
+  if(m_usTextureMask & TEXTURE_TYPE_GLOW)
+  {
+    CTexture* l_Texture = l_pTextureManager->GetResource(l_szTexGlow);
+    if(!l_Texture)
+    {
+      LOGGER->AddNewLog(ELL_WARNING, "CEffectMaterial::Init No s'ha trobat la textura \"%s\".", l_szTexGlow.c_str());
+      m_usTextureMask &= ~TEXTURE_TYPE_GLOW;
+    } else {
+      m_vTextures.push_back(l_Texture);
+    }
+  }
+  SetOk(true);
+  return true;
+}
+
 bool CEffectMaterial::Init(std::fstream& _File)
 {
   m_bAnimated = false;
@@ -54,6 +177,10 @@ bool CEffectMaterial::Init(std::fstream& _File)
   if(m_usMaterialInfo & MATERIAL_INFO_VERTEXTYPE)
   {
     _File.read((char*)&(m_usVertexType), sizeof(uint16));
+    if(m_usVertexType & (VERTEX_TYPE_BLENDIDX | VERTEX_TYPE_BLENDWGT))
+    {
+      m_bAnimated = true;
+    }
   }
   //Textures
   uint16 l_usTextureNum = 0; 
@@ -87,7 +214,7 @@ bool CEffectMaterial::Init(std::fstream& _File)
   return true;
 }
 
-CEffectTechnique* CEffectMaterial::ActivateMaterial(const CRenderManager* _pRM) const
+void CEffectMaterial::ActivateTextures(const CRenderManager* _pRM) const
 {
   LPDIRECT3DDEVICE9 l_pDevice = _pRM->GetDevice();
 
@@ -96,56 +223,59 @@ CEffectTechnique* CEffectMaterial::ActivateMaterial(const CRenderManager* _pRM) 
   
   if(m_usTextureMask & TEXTURE_TYPE_DIFFUSSE)
   {
-    assert(l_it != m_vTextures.cend() && "CEffectMaterial::ActivateMaterial hi ha menys textures de les necessàries.");
+    assert(l_it != m_vTextures.cend() && "CEffectMaterial::ActivateTextures hi ha menys textures de les necessàries.");
     (*l_it)->Activate(0);
     ++l_it;
   } else {
     HRESULT l_Result = l_pDevice->SetTexture(0,0);
-    assert(SUCCEEDED(l_Result) && "CEffectMaterial::ActivateMaterial error al directX");
+    assert(SUCCEEDED(l_Result) && "CEffectMaterial::ActivateTextures error al directX");
   }
 
   if(m_usTextureMask & TEXTURE_TYPE_NORMALMAP)
   {
-    assert(l_it != m_vTextures.cend() && "CEffectMaterial::ActivateMaterial hi ha menys textures de les necessàries.");
+    assert(l_it != m_vTextures.cend() && "CEffectMaterial::ActivateTextures hi ha menys textures de les necessàries.");
     (*l_it)->Activate(1);
     ++l_it;
   } else {
     HRESULT l_Result = l_pDevice->SetTexture(1,0);
-    assert(SUCCEEDED(l_Result) && "CEffectMaterial::ActivateMaterial error al directX");
+    assert(SUCCEEDED(l_Result) && "CEffectMaterial::ActivateTextures error al directX");
   }
 
-  if(m_usTextureMask & TEXTURE_TYPE_LIGHTMAN)
+  if(m_usTextureMask & TEXTURE_TYPE_LIGHTMAP)
   {
-    assert(l_it != m_vTextures.cend() && "CEffectMaterial::ActivateMaterial hi ha menys textures de les necessàries.");
+    assert(l_it != m_vTextures.cend() && "CEffectMaterial::ActivateTextures hi ha menys textures de les necessàries.");
     (*l_it)->Activate(2);
     ++l_it;
   } else {
     HRESULT l_Result = l_pDevice->SetTexture(2,0);
-    assert(SUCCEEDED(l_Result) && "CEffectMaterial::ActivateMaterial error al directX");
+    assert(SUCCEEDED(l_Result) && "CEffectMaterial::ActivateTextures error al directX");
   }
 
   if(m_usTextureMask & TEXTURE_TYPE_ENVIRONMENT)
   {
-    assert(l_it != m_vTextures.cend() && "CEffectMaterial::ActivateMaterial hi ha menys textures de les necessàries.");
+    assert(l_it != m_vTextures.cend() && "CEffectMaterial::ActivateTextures hi ha menys textures de les necessàries.");
     (*l_it)->Activate(3);
     ++l_it;
   } else {
     HRESULT l_Result = l_pDevice->SetTexture(3,0);
-    assert(SUCCEEDED(l_Result) && "CEffectMaterial::ActivateMaterial error al directX");
+    assert(SUCCEEDED(l_Result) && "CEffectMaterial::ActivateTextures error al directX");
   }
 
   if(m_usTextureMask & TEXTURE_TYPE_GLOW)
   {
-    assert(l_it != m_vTextures.cend() && "CEffectMaterial::ActivateMaterial hi ha menys textures de les necessàries.");
+    assert(l_it != m_vTextures.cend() && "CEffectMaterial::ActivateTextures hi ha menys textures de les necessàries.");
     (*l_it)->Activate(4);
     ++l_it;
   } else {
     HRESULT l_Result = l_pDevice->SetTexture(4,0);
-    assert(SUCCEEDED(l_Result) && "CEffectMaterial::ActivateMaterial error al directX");
+    assert(SUCCEEDED(l_Result) && "CEffectMaterial::ActivateTextures error al directX");
   }
 
-  assert(l_it == m_vTextures.cend() && "CEffectMaterial::ActivateMaterial hi ha més textures de les necessàries.");
+  assert(l_it == m_vTextures.cend() && "CEffectMaterial::ActivateTextures hi ha més textures de les necessàries.");
+}
 
+CEffectTechnique* CEffectMaterial::GetEffectTechnique(const CRenderManager* _pRM) const
+{
   CEffectManager*   l_pEM = _pRM->GetEffectManager();
   CEffectTechnique* l_pForcedTechnique;
   if(m_bAnimated)
@@ -170,7 +300,7 @@ int CEffectMaterial::NumTextures(int mask)
     l_count++;
   if(mask & TEXTURE_TYPE_NORMALMAP)
     l_count++;
-  if(mask & TEXTURE_TYPE_LIGHTMAN)
+  if(mask & TEXTURE_TYPE_LIGHTMAP)
     l_count++;
   if(mask & TEXTURE_TYPE_ENVIRONMENT)
     l_count++;

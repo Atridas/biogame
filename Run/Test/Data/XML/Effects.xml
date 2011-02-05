@@ -84,8 +84,8 @@
     <technique name="RenderShadowTechnique" effect="Shadows" use_world_view_projection_matrix="true"/>
     <technique name="Cal3DTechniqueShadow"  effect="Shadows" use_world_view_projection_matrix="true" animated="true"/>
 
-    <technique name="RenderGlowTechnique" effect="Glow" use_world_view_projection_matrix="true"/>
-    <technique name="Cal3DGlowTechnique"  effect="Glow" use_world_view_projection_matrix="true" animated="true"/>
+    <technique name="RenderGlowTechnique" effect="Glow" use_world_view_projection_matrix="true" glow_active="true"/>
+    <technique name="Cal3DGlowTechnique"  effect="Glow" use_world_view_projection_matrix="true" glow_active="true" animated="true"/>
 
     <technique name="PostProcessGlowTechnique"  effect="Glow"/>
   </techniques>

@@ -2,6 +2,7 @@
 #include "VertexsStructs.h"
 #include "IndexedVertexs.h"
 #include "VertexCalculations.h"
+#include "EffectMaterial.h"
 
 #include <cal3d/cal3d.h>
 #include <XML/XMLTreeNode.h>
@@ -14,7 +15,15 @@ void CAnimatedCoreModel::Release()
   CHECKED_DELETE(m_pCalCoreModel);
   m_szMeshFilename      = "";
   m_szSkeletonFilename  = "";
-  m_vTextureFilenameList.clear();
+  
+  vector<CEffectMaterial*>::iterator l_it  = m_vMaterials.begin();
+  vector<CEffectMaterial*>::iterator l_end = m_vMaterials.end();
+  while(l_it != l_end)
+  {
+    CHECKED_DELETE(*l_it);
+    ++l_it;
+  }
+  m_vMaterials.clear();
 }
 
 bool CAnimatedCoreModel::Load(const std::string &_szPath)
@@ -96,16 +105,18 @@ bool CAnimatedCoreModel::Load(const std::string &_szPath)
           return IsOk();
         }
 
-      } else if(strcmp(l_treeChild.GetName(),"texture") == 0)
+      } else if(strcmp(l_treeChild.GetName(),"material") == 0)
       {
-        const char* l_pcFileName = l_treeChild.GetPszProperty("filename",0);
+        CEffectMaterial* l_pMaterial = new CEffectMaterial();
 
-        if(l_pcFileName != 0)
+        if(l_pMaterial->Init(l_treeChild))
         {
-          m_vTextureFilenameList.push_back(string(l_pcFileName));
+          m_vMaterials.push_back(l_pMaterial);
         } else {
-          LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load No s'ha trobat la propietat \"filename\" a una textura.");
+          LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load no s'ha pogut inicialitzar el material correctament");
+          delete l_pMaterial;
         }
+
       } else if(strcmp(l_treeChild.GetName(),"animation") == 0)
       {
         const char* l_pcFileName = l_treeChild.GetPszProperty("filename",0);

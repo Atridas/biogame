@@ -12,7 +12,7 @@ global VERTEX_TYPE_DIFFUSE      =0x0040
 
 global TEXTURE_TYPE_DIFFUSSE = 0X0001
 global TEXTURE_TYPE_NORMALMAP = 0X0002
-global TEXTURE_TYPE_LIGHTMAN = 0X0004
+global TEXTURE_TYPE_LIGHTMAP = 0X0004
 global TEXTURE_TYPE_ENVIRONMENT = 0X0008
 global TEXTURE_TYPE_GLOW = 0X0010
 
@@ -70,7 +70,7 @@ function GetVertexType _material =
 
 --global TEXTURE_TYPE_DIFFUSSE = 0X0001
 --global TEXTURE_TYPE_NORMALMAP = 0X0002
---global TEXTURE_TYPE_LIGHTMAN = 0X0004
+--global TEXTURE_TYPE_LIGHTMAP = 0X0004
 --global TEXTURE_TYPE_ENVIRONMENT = 0X0008
 --global TEXTURE_TYPE_GLOW = 0X0010
 
@@ -89,7 +89,7 @@ function ExportMaterial _material _file _relativePath =
 	
 	if _material.selfIllumMapEnable == true and  _material.selfIllumMap != undefined then
 	(
-		l_materialMask = bit.or l_materialMask TEXTURE_TYPE_LIGHTMAN
+		l_materialMask = bit.or l_materialMask TEXTURE_TYPE_LIGHTMAP
 	)
 	
 	if _material.reflectionMapEnable == true and  _material.reflectionMap != undefined then

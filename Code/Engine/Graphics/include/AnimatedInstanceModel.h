@@ -10,7 +10,7 @@
 class CRenderManager;
 class CalModel;
 class CAnimatedCoreModel;
-class CTexture;
+class CEffectMaterial;
 class CEffectTechnique;
 // ----------------------------------
 
@@ -29,7 +29,7 @@ public:
   CAnimatedInstanceModel(void): m_pCalModel(0),m_pAnimatedCoreModel(0),
                                 m_iCurrentCycle(0),m_iCurrentAnimationId(0),
                                 m_fCurrentAnimationTime(0),m_pVB(0),m_pIB(0),
-                                m_iNumVtxs(0),m_iNumFaces(0),m_pEffectTechnique(0)
+                                m_iNumVtxs(0),m_iNumFaces(0)//,m_pEffectTechnique(0)
                                 {};
   /**
    * Destructor.
@@ -115,7 +115,7 @@ private:
    * Aquest mètode carrega les textures a GRAM per al seu us amb D3D.
    * @param _pRM RenderManager.
   **/
-  void LoadTextures(CRenderManager *_pRM);
+  //void LoadTextures(CRenderManager *_pRM);
 
   /**
    * CalModel del model a instanciar.
@@ -128,11 +128,11 @@ private:
   /**
    * AnimatedCoreModel a instanciar.
   **/
-  CEffectTechnique*         m_pEffectTechnique;
+  //CEffectTechnique*         m_pEffectTechnique;
   /**
-   * Llista de textures del model.
+   * Llista de materials del model.
   **/
-  vector<CTexture*>        m_vTextureList;
+  //vector<CEffectMaterial*>        m_vTextureList;
   /**
    * Cicle actual d'animació.
   **/

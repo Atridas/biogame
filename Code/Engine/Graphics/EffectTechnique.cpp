@@ -4,6 +4,7 @@
 #include "Utils/Timer.h"
 #include "RenderManager.h"
 #include "EffectManager.h"
+#include "EffectMaterial.h"
 #include <Core.h>
 
 
@@ -33,6 +34,7 @@ void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
   m_bUseViewToLightProjectionMatrix = _XMLParams.GetBoolProperty("use_view_to_light_projection_matrix");
   m_bUseTime = _XMLParams.GetBoolProperty("use_time");
   m_bAnimated = _XMLParams.GetBoolProperty("animated");
+  m_bGlowActive = _XMLParams.GetBoolProperty("glow_active");
 
   //integers
   m_iNumOfLights= _XMLParams.GetIntProperty("num_of_lights",0);
@@ -66,12 +68,18 @@ void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
   }
 }
 
-bool CEffectTechnique::BeginRender()
+bool CEffectTechnique::BeginRender(const CEffectMaterial* _pMaterial)
 {
   if(m_pEffect && m_pEffect->IsOk())
   {
-    CEffectManager* l_pEM = RENDER_MANAGER->GetEffectManager();
+    CRenderManager* l_pRM = RENDER_MANAGER;
+    CEffectManager* l_pEM = l_pRM->GetEffectManager();
     LPD3DXEFFECT l_pD3DEffect = m_pEffect->GetD3DEffect();
+
+    if(_pMaterial && _pMaterial->IsOk())
+    {
+      _pMaterial->ActivateTextures(l_pRM);
+    }
 
     //Position
     if(m_bUseCameraPosition)
@@ -151,6 +159,16 @@ bool CEffectTechnique::BeginRender()
     if(m_bUseTime)
     {
       l_pD3DEffect->SetFloat(m_pEffect->m_pTimeParameter, CORE->GetTimer()->GetRelativeTime());
+    }
+    if(m_bGlowActive)
+    {
+      if(_pMaterial && _pMaterial->IsOk())
+      {
+        bool l_glowActive = (_pMaterial->GetTextureMask() & TEXTURE_TYPE_GLOW) != 0;
+        l_pD3DEffect->SetBool(m_pEffect->m_pGlowActive, l_glowActive);
+      } else {
+        l_pD3DEffect->SetBool(m_pEffect->m_pGlowActive, false);
+      }
     }
   } else {
     return false;
