@@ -27,8 +27,8 @@ void CProcess::DebugInformation()
     l_SStream << "FPS:       " << (int) l_pTimer->GetFPS() << endl;
     string l_szMsg(l_SStream.str());
 
-    FONT_MANAGER->DrawText(0,40,col,l_uiFontType,m_szProcessName.c_str());
-    FONT_MANAGER->DrawText(0,65,col,l_uiFontType,l_szMsg.c_str());
+    FONT_MANAGER->DrawText(0,12,colRED,l_uiFontType,m_szProcessName.c_str());
+    FONT_MANAGER->DrawText(0,45,col,l_uiFontType,l_szMsg.c_str());
   }
 }
 
