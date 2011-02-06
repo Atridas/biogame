@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Lua>
+  <Files>
+    <file path="Data/Lua/first.lua"/>
+  </Files>
+  <InitScripts>
+    <!--
+    <Script action="_core          = getCore();"/>
+    <Script action="_inputM        = getCore():getInput();"/>
+    <Script action="_renderM       = getCore():getRender();"/>
+    <Script action="_physicM       = getCore():getPhysic();"/>
+    <Script action="_textureM      = getCore():getTexture();"/>
+    <Script action="_effectM       = getCore():getEffect();"/>
+    <Script action="_guiM          = getCore():getGui();"/>
+    <Script action="_soundM        = getCore():getSound();"/>
+    <Script action="_aviPM         = getCore():getAviPlayer();"/>
+    <Script action="_networkM      = getCore():getNetwork();"/>
+    <Script action="_cvM           = getCore():getComputerVision();"/>
+    <Script action="_GprahicTest   = getGrpahicTest();"/>
+    <Script action="_aVITest       = getAVITest();"/>
+    <Script action="_guiTest       = getGuiTest();"/>
+    <Script action="_physXTest     = getPhysXTest();"/>
+    <Script action="_spriteTest    = getSpriteTest();"/>
+    <Script action="_partSystTest  = getPartSystTest();"/>
+    -->
+  </InitScripts>
+</Lua>
+  

@@ -59,7 +59,7 @@ void CActionToInput::Load()
   CXMLTreeNode l_XMLActions;
   if(!l_XMLActions.LoadFile(m_szXMLFile.c_str()))
   {
-    LOGGER->AddNewLog(ELL_WARNING,"CActionToInput:: No s'ha trobat el XML \"%s\"", m_szXMLFile.c_str());
+    LOGGER->AddNewLog(ELL_WARNING,"CActionToInput::Load No s'ha trobat el XML \"%s\"", m_szXMLFile.c_str());
   }
   else
   {
@@ -71,7 +71,7 @@ void CActionToInput::Load()
       {
         if(!l_XMLAction.IsComment())
         {
-          LOGGER->AddNewLog(ELL_WARNING,"CActionToInput:: Error de format a l'xml, hi ha un element invàlid \"%s\"", l_XMLAction.GetName());
+          LOGGER->AddNewLog(ELL_WARNING,"CActionToInput::Load Error de format a l'xml, hi ha un element invàlid \"%s\"", l_XMLAction.GetName());
         }
       } else {
         //agafa l'acció
@@ -80,10 +80,10 @@ void CActionToInput::Load()
         l_Action.script          = l_XMLAction.GetPszProperty(SCRIPTED_ACTION_PROPERTY  ,"");
         if(l_Action.hardCodedAction == "" && l_Action.script == "")
         {
-          LOGGER->AddNewLog(ELL_WARNING,"CActionToInput:: Hi ha una acció sense script ni res assignat. La nº%d", i);
+          LOGGER->AddNewLog(ELL_WARNING,"CActionToInput::Load Hi ha una acció sense script ni res assignat. La nº%d", i);
         } else {
 
-          LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput::  Action \"%s\" script \"%s\"",l_Action.hardCodedAction.c_str(),l_Action.script.c_str());
+          LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput::Load  Action \"%s\" script \"%s\"",l_Action.hardCodedAction.c_str(),l_Action.script.c_str());
 
           int l_iNumTriggers = l_XMLAction.GetNumChildren();
           TInputTriggers* l_Triggers = new TInputTriggers(l_iNumTriggers);
@@ -108,7 +108,7 @@ void CActionToInput::Load()
 
               (*l_Triggers)[j] = l_Trigger;
               
-              LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput::   Device %s, Axis %s, Event %s, Code %s, Delta %f",
+              LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput::Load   Device %s, Axis %s, Event %s, Code %s, Delta %f",
                                                       l_szDevice.c_str(),
                                                       l_szAxis.c_str(),
                                                       l_szEvent.c_str(),
@@ -116,10 +116,10 @@ void CActionToInput::Load()
                                                       l_fDelta);
               if(l_Trigger.axis == AXIS_NOTHING && l_Trigger.eventType == EVENT_NOTHING)
               {
-                LOGGER->AddNewLog(ELL_WARNING,"CActionToInput:: trigger sense axis ni event!");
+                LOGGER->AddNewLog(ELL_WARNING,"CActionToInput::Load trigger sense axis ni event!");
               }
             } else {
-              LOGGER->AddNewLog(ELL_WARNING,"CActionToInput:: Error de format a l'xml, hi ha un element invàlid \"%s\"", l_XMLInput.GetName());
+              LOGGER->AddNewLog(ELL_WARNING,"CActionToInput::Load Error de format a l'xml, hi ha un element invàlid \"%s\"", l_XMLInput.GetName());
             }
           }
           m_pActionToTriggers->insert(TActionToTriggersPair(l_Action,l_Triggers));
@@ -182,7 +182,7 @@ void CActionToInput::Update(float _fDeltaSeconds)
     if(strlen(l_Action.m_pcAction) > 0)
       ExecuteAction(_fDeltaSeconds,l_Action.m_fDelta,l_Action.m_pcAction);
     if(strlen(l_Action.m_pcScript) > 0)
-      ExecuteAction(_fDeltaSeconds,l_Action.m_fDelta,l_Action.m_pcScript);
+      ExecuteScript(_fDeltaSeconds,l_Action.m_fDelta,l_Action.m_pcScript);
   }
 
 }
@@ -265,7 +265,7 @@ void CActionToInput::ExecuteAction(float _fDeltaSeconds, float _fDelta, const ch
     if(m_pProcess->ExecuteAction(_fDeltaSeconds, _fDelta, _pcAction))
       return;
   }
-  LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput:: Action \"%s\" delta[%f] seconds[%f]", _pcAction, _fDelta, _fDeltaSeconds);
+  LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput::ExecuteAction Action \"%s\" delta[%f] seconds[%f]", _pcAction, _fDelta, _fDeltaSeconds);
 }
 
 void CActionToInput::ExecuteScript(float _fDeltaSeconds, float _fDelta, const char* _pcScript)
@@ -275,7 +275,7 @@ void CActionToInput::ExecuteScript(float _fDeltaSeconds, float _fDelta, const ch
     if(m_pProcess->ExecuteScript(_fDeltaSeconds, _fDelta, _pcScript))
       return;
   }
-  LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput:: Script \"%s\" delta[%f] seconds[%f]", _pcScript, _fDelta, _fDeltaSeconds);
+  LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput::ExecuteScript Script \"%s\" delta[%f] seconds[%f]", _pcScript, _fDelta, _fDeltaSeconds);
 }
 
 

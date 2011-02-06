@@ -23,6 +23,9 @@ CRenderableObject* CRenderableObjectsManager::AddMeshInstance(
                                                       const string& _szCoreMeshName,
                                                       const string& _szInstanceName)
 {
+  if(GetResource(_szInstanceName) != 0)
+    return 0;
+
   CInstanceMesh* l_pInstanceMesh = new CInstanceMesh(_szInstanceName);
   if(!l_pInstanceMesh->Init(_szCoreMeshName))
   {
@@ -43,6 +46,9 @@ CRenderableObject* CRenderableObjectsManager::AddAnimatedModel(
                                                       const string& _szInstanceName,
                                                       const string& _szDefaultAnimation)
 {
+  if(GetResource(_szInstanceName) != 0)
+    return 0;
+
   CRenderableAnimatedInstanceModel* l_pAnimatedModel = new CRenderableAnimatedInstanceModel(_szInstanceName);
   if(!l_pAnimatedModel->Init(_szCoreModelName,_szDefaultAnimation))
   {

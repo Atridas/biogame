@@ -113,11 +113,31 @@ struct SRenderableObjectsManager
 struct SLightsManager
 {
   string szFile;
+
+  //Default Params
+  SLightsManager():
+    szFile("./Data/XML/Lights.xml")
+  {};
 };
 
 struct SSceneEffectManager
 {
   string szFile;
+
+  //Default Params
+  SSceneEffectManager():
+    szFile("./Data/XML/SceneEffects.xml")
+  {};
+};
+
+struct SScriptManager
+{
+  string szFile;
+
+  //Default Params
+  SScriptManager():
+    szFile("./Data/XML/Scriptss.xml")
+  {};
 };
 
 /**
@@ -146,6 +166,7 @@ struct SInitParams
   SRenderableObjectsManager RenderableObjectsManager;
   SLightsManager            LightsManager;
   SSceneEffectManager       SceneEffect;
+  SScriptManager            ScriptManager;
 };
 
 void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML);
