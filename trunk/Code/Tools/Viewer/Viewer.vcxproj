@@ -26,7 +26,9 @@
     <None Include="..\..\..\Run\Viewer\Data\XML\Lua.xml" />
     <None Include="..\..\..\Run\Viewer\Data\XML\RenderableObjects.xml" />
     <None Include="..\..\..\Run\Viewer\Data\XML\SceneEffects.xml" />
-    <None Include="..\..\..\Run\Viewer\Data\XML\StaticMeshes.xml" />
+    <None Include="..\..\..\Run\Viewer\Data\XML\StaticMeshes.xml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{53AA6520-CC4F-48AE-B2D2-736F01BB6DDB}</ProjectGuid>
