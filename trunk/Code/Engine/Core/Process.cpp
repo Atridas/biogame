@@ -22,9 +22,11 @@ void CProcess::DebugInformation()
     CTimer* l_pTimer = CORE->GetTimer();
     uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");
     
-    l_SStream << "Total:     " << (float) l_pTimer->GetTotalTime() << "s" << endl;
-    l_SStream << "Relative:  " << (float) l_pTimer->GetRelativeTime() << "s" << endl;
-    l_SStream << "FPS:       " << (int) l_pTimer->GetFPS() << endl;
+    l_SStream << "FPS: " << (int) l_pTimer->GetFPS() << endl;
+    l_SStream << "Time: " << (float) l_pTimer->GetRelativeTime() << "s" << endl;
+    //l_SStream << "Faces: " << CORE->GetRenderableObjectsManager()->GetActiveFaces() << endl;
+    //l_SStream << "Primitives: " << CORE->GetRenderableObjectsManager()->GetActivePrimitiveCalls() << endl;
+    
     string l_szMsg(l_SStream.str());
 
     FONT_MANAGER->DrawText(0,12,colRED,l_uiFontType,m_szProcessName.c_str());
@@ -79,7 +81,8 @@ bool CProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _p
 
 bool CProcess::ExecuteScript(float _fDeltaSeconds, float _fDelta, const char* _pcScript)
 {
-  return false;
+  CORE->GetScriptManager()->RunCode(_pcScript);
+  return true;
 }
 
 
@@ -89,7 +92,6 @@ void CProcess::PreRender(CRenderManager* _pRM)
   //Código de Prerender si necesitásemos hacer el pre-render de la GUI
 }
 
-//TODO: uncomment when ready
 void CProcess::Render(CRenderManager* _pRM)
 {
   CEffectManager* l_pEM = _pRM->GetEffectManager();
@@ -107,7 +109,7 @@ void CProcess::Render(CRenderManager* _pRM)
   m_pSceneEffectManager->CaptureFrameBuffers(_pRM);
   //Efectuamos los efectos de post render
   m_pSceneEffectManager->PostRender(_pRM);
-  //
+  //Capturamos el Frame Buffer después de los efectos de post render
   m_pSceneEffectManager->CaptureFrameBuffersAfterPostRender(_pRM);
   
 }

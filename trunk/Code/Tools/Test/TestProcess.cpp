@@ -137,13 +137,6 @@ void CTestProcess::RenderScene(CRenderManager* _pRM)
   _pRM->DrawGrid(30.0f,colCYAN,30,30);
   _pRM->DrawAxis();
 
-
-  //text
-  uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");
-  string l_szMsg("Biogame");
-  CColor col = colBLUE;
-
-  FONT_MANAGER->DrawText((uint32)0,(uint32)20,col,l_uiFontType,l_szMsg.c_str());
 }
 
 bool CTestProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)

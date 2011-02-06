@@ -203,7 +203,7 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
       }
 
     } else {
-      LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"LightsManager\". Usant valors per defecte [Res].");
+      LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"LightsManager\". Usant valors per defecte.");
     }
 
     //-------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -223,8 +223,29 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
       }
 
     } else {
-      LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"SceneEffectManager\". Usant valors per defecte [Res].");
+      LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"SceneEffectManager\". Usant valors per defecte.");
     }
+
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Script Manager ----------------------------------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
+    CXMLTreeNode l_TreeScriptManager = l_TreeConfig["ScriptManager"];
+    if(l_TreeScriptManager.Exists())
+    {
+      const char* l_pcFile = l_TreeScriptManager.GetPszProperty("file", 0);
+
+      if(l_pcFile == 0)
+      {
+        LOGGER->AddNewLog(ELL_WARNING, "\tNo hi ha fitxer base del ScriptManager.");
+      } else {
+        InitParams_.ScriptManager.szFile = l_pcFile;
+        LOGGER->AddNewLog(ELL_INFORMATION, "\tScriptManager base \"%s\"",l_pcFile);
+      }
+
+    } else {
+      LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"ScriptManager\". Usant valors per defecte.");
+    }
+
   }
   
   LOGGER->AddNewLog(ELL_INFORMATION, "Fi carregar configuració");

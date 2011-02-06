@@ -13,14 +13,39 @@ extern "C"
 #include <luabind/class.hpp>
 #include <luabind/operator.hpp>
 
-#include "Utils\MemLeaks.h"
-
-#include "Core.h"
 #include <XML/XMLTreeNode.h>
+
+#include "Utils/MemLeaks.h"
+
+//lua defined class & structs
+#include "Core.h"
+#include "RenderableObjectsManager.h"
+#include "InstanceMesh.h"
+#include "RenderableAnimatedInstanceModel.h"
+
+#include "Object3D.h"
+#include "Utils/BaseControl.h"
 
 using namespace luabind;
 
 #define REGISTER_LUA_FUNCTION(LUA_STATE,FunctionName,AddrFunction) {luabind::module(LUA_STATE) [ luabind::def(FunctionName,AddrFunction) ];}
+
+
+//Para inicializar el motor de LUA
+void CScriptManager::Initialize()
+{
+  m_pLS=lua_open();
+  luaopen_base(m_pLS);
+  luaopen_string(m_pLS);
+  luaopen_table(m_pLS);
+  luaopen_math(m_pLS);
+  //luaopen_io(m_LS);
+  luaopen_debug(m_pLS);
+  open(m_pLS);
+
+  RegisterLUAFunctions();
+}
+
 
 void CScriptManager::Load(const string& _szFileName)
 {
@@ -36,20 +61,40 @@ void CScriptManager::Load(const string& _szFileName)
 
   m_szFileName = _szFileName;
 
-  int l_iNumScriptFiles = l_XMLLua.GetNumChildren();
+  //Files
+  CXMLTreeNode l_TreeFiles = l_XMLLua["Files"];
+  int l_iNumScriptFiles = l_TreeFiles.GetNumChildren();
   for(int i = 0; i < l_iNumScriptFiles; i++)
   {
-    CXMLTreeNode l_LuaFile = l_XMLLua(i);
+    CXMLTreeNode l_LuaFile = l_TreeFiles(i);
     if(l_LuaFile.IsComment()) {
       continue;
     }
 
-    string l_szLuaFile = l_LuaFile.GetPszISOProperty("file","");
+    string l_szLuaFile = l_LuaFile.GetPszISOProperty("path","");
 
     if(l_szLuaFile != "")
       m_vLuaScripts.push_back(l_szLuaFile);
     else
       LOGGER->AddNewLog(ELL_WARNING,"CScriptManager::Load Propietat \"file\" no trobada a linia %d", i);
+  }
+
+  //Init Scripts
+  CXMLTreeNode l_TreeInitScripts = l_XMLLua["InitScripts"];
+  int l_iNumScriptCalls = l_TreeInitScripts.GetNumChildren();
+  for(int i = 0; i < l_iNumScriptCalls; i++)
+  {
+    CXMLTreeNode l_LuaScript = l_TreeInitScripts(i);
+    if(l_LuaScript.IsComment()) {
+      continue;
+    }
+
+    string l_szLuaCall = l_LuaScript.GetPszISOProperty("action","");
+
+    if(l_szLuaCall != "")
+      RunCode(l_szLuaCall);
+    else
+      LOGGER->AddNewLog(ELL_WARNING,"CScriptManager::Load Propietat \"action\" no trobada a linia %d", i);
   }
 
   SetOk(true);
@@ -72,22 +117,8 @@ void CScriptManager::Execute()
   }
 }
 
-//Para inicializar el motor de LUA
-void CScriptManager::Initialize()
-{
-  m_pLS=lua_open();
-  luaL_openlibs(m_pLS);
-
-  //Sobreescribimos la función _ALERT de LUA cuando se genere algún error al ejecutar código LUA 
-  RegisterLUAFunctions();
-
-  //RunCode( "local a = 2;local b = 5;local c = suma(a, b);log(\"el valor es \" .. c)" );
-  //RunFile("Data/Lua/first.lua");
-}
-
-
-
 //Código de la función Alert que se llamará al generarse algún error de LUA
+//Sobreescribimos la función _ALERT de LUA cuando se genere algún error al ejecutar código LUA 
 int Alert(lua_State * State)
 {
   std::string l_Text;
@@ -125,33 +156,35 @@ void CScriptManager::Release()
 //Para ejecutar un fragmento de código LUA
 void CScriptManager::RunCode(const string& _szCode) const
 {
-  if(luaL_dostring(m_pLS,_szCode.c_str()))
+  int l_iError = luaL_dostring(m_pLS,_szCode.c_str());
+  if(l_iError == 0)
   {
-    const char *l_pcStr=lua_tostring(m_pLS, -1);
-    LOGGER->AddNewLog(ELL_INFORMATION, "CScriptManager::RunCode  %s", l_pcStr);
+    const char *l_pcStr = lua_tostring(m_pLS, -1);
+  }else
+  {
+    if(l_iError == LUA_ERRSYNTAX)
+      LOGGER->AddNewLog(ELL_ERROR, "CScriptManager::RunCode  Syntax Error for: %s", _szCode);
+    else if (l_iError == LUA_ERRMEM)
+      LOGGER->AddNewLog(ELL_ERROR, "CScriptManager::RunCode  Internal lua error when running: %s", _szCode);
   }
 }
 
 //Para ejecutar un fichero de código LUA
 void CScriptManager::RunFile(const string& _szFileName) const
 {
-  if(luaL_dofile(m_pLS, _szFileName.c_str()))
+  int l_iError = luaL_dofile(m_pLS, _szFileName.c_str());
+  if(l_iError == 0)
   {
-    const char *l_pcStr=lua_tostring(m_pLS, -1);
-    LOGGER->AddNewLog(ELL_INFORMATION, "CScriptManager::RunFile  %s", l_pcStr);
+    const char *l_pcStr = lua_tostring(m_pLS, -1);
+  }else
+  {
+    if(l_iError == LUA_ERRFILE)
+      LOGGER->AddNewLog(ELL_ERROR, "CScriptManager::RunFile  File error for: %s", _szFileName);
+    else if(l_iError == LUA_ERRSYNTAX)
+      LOGGER->AddNewLog(ELL_ERROR, "CScriptManager::RunFile  Syntax Error at: %s", _szFileName);
+    else if (l_iError == LUA_ERRMEM)
+      LOGGER->AddNewLog(ELL_ERROR, "CScriptManager::RunFile  Internal lua error when running: %s", _szFileName);
   }
-}
-
-
-int Suma(int a, int b)
-{
-  return a + b;
-}
-
-
-void HelloWorldLua()
-{
-  LOGGER->AddNewLog(ELL_INFORMATION, "Hola Mundo");
 }
 
 void LogTextLua(const string &_c)
@@ -159,14 +192,10 @@ void LogTextLua(const string &_c)
   LOGGER->AddNewLog(ELL_INFORMATION, _c.c_str());
 }
 
-
-
 CCore* GetCore()
 {
-  return CCore::GetSingletonPtr();
+  return CORE;
 }
-
-
 
 void CScriptManager::RegisterLUAFunctions()
 {
@@ -176,22 +205,83 @@ void CScriptManager::RegisterLUAFunctions()
   //REGISTER_LUA_FUNCTION(m_pLS, "hello_world", HelloWorldLua);
   //REGISTER_LUA_FUNCTION(m_pLS, "log", LogTextLua);
   
+  //general access functions
   module(m_pLS) [
-    def("suma", &Suma),
-    def("hello_world", &HelloWorldLua),
-    def("log", &LogTextLua),
-    def("get_core", &GetCore)
+    //logger
+    def("log", &LogTextLua)
+    //core macro
+    ,def("get_core", &GetCore)
+  ];
+
+  //Vect3f
+  module(m_pLS) [
+    class_<Vect3f>("Vect3f")
+      .def(constructor<float>())
+      .def(constructor<float, float, float>())
+      .def_readwrite("x",&Vect3f::x)
+      .def_readwrite("y",&Vect3f::y)
+      .def_readwrite("z",&Vect3f::z)
+  ];
+
+  //Object3D
+  module(m_pLS) [
+    class_<CObject3D>("Object3D")
+      .def(constructor<>())
+      .def(constructor<Vect3f,float,float,float>())
+      .def("get_yaw",       &CObject3D::GetYaw)
+      .def("get_roll",      &CObject3D::GetRoll)
+      .def("get_pitch",     &CObject3D::GetPitch)
+      .def("get_position",  &CObject3D::GetPosition)
+      .def("get_visible",   &CObject3D::GetVisible)
+      .def("set_yaw",       &CObject3D::SetYaw)
+      .def("set_roll",      &CObject3D::SetRoll)
+      .def("set_pitch",     &CObject3D::SetPitch)
+      .def("set_position",  &CObject3D::SetPosition)
+      .def("set_visible",   &CObject3D::SetVisible)
+  ];
+
+  //BaseControl
+  module(m_pLS) [
+    class_<CBaseControl>("BaseControl")
+      .def("is_ok",    &CBaseControl::IsOk)
+      .def("Done",     &CBaseControl::Done)
+  ];
+
+  //Core
+  module(m_pLS) [
+    class_<CCore>("Core")
+      .def("get_renderable_objects_manager", &CCore::GetRenderableObjectsManager)
+  ];
+
+  //CRenderableObjectsManager
+  module(m_pLS) [
+    class_<CRenderableObjectsManager>("RenderableObjectsManager")
+      .def("get_resource",   &CRenderableObjectsManager::GetResource)
+      .def("add_static",     &CRenderableObjectsManager::AddMeshInstance)
+      .def("add_animated",   &CRenderableObjectsManager::AddAnimatedModel)
+      .def("add_resource",   &CRenderableObjectsManager::AddResource)
+  ];
+
+  //RenderableObject
+  module(m_pLS) [
+    class_<CRenderableObject, bases<CObject3D,CBaseControl>>("RenderableObject")
+  ];
+
+  //InstanceMesh
+  module(m_pLS) [
+    class_<CInstanceMesh, bases<CRenderableObject>>("InstanceMesh")
+  ];
+
+  //RenderableAnimatedInstanceModel
+  module(m_pLS) [
+    class_<CRenderableAnimatedInstanceModel, bases<CRenderableObject>>("AnimatedInstance")
+  ];
+
     /*
-    ,
-    class_<CBaseControl>("CBaseControl")
-      .def("is_ok", &CBaseControl::IsOk)
-    ,
-    class_<CSingleton<CCore>>("CSingletonCore")
-    ,
-    class_<CCore, bases<CBaseControl,CSingleton<CCore>>>("CCore")
+    ,class_<CSingleton<CCore>>("CSingletonCore")
+    ,class_<CCore, bases<CBaseControl,CSingleton<CCore>>>("CCore")
       //.def("get_light_manager", &CCore::GetLightManager)
     */
-  ];
 
   //REGISTER_LUA_FUNCTION(m_pLS, "get_core", GetCore);
 }

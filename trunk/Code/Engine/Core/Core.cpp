@@ -41,6 +41,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pLightManager->Load(_InitParams.LightsManager.szFile);
   m_pSceneEffectManager->Load(_InitParams.SceneEffect.szFile);
   m_pScriptManager->Initialize();
+  m_pScriptManager->Load(_InitParams.ScriptManager.szFile);
 
   SetOk(true);
 

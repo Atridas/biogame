@@ -1,12 +1,10 @@
+log("LUA:: Init test script ")
 
-local a = 2
-local b = 5
-
-
-local c = suma(a, b)
-
-log("LUA:: el valor es " .. c)
-
+for i = 1, 10 do
+  local l_vPos = Vect3f(math.random(-15,15), 0.0, math.random(-15,15))
+  local l_pStaticModel = get_core():get_renderable_objects_manager():add_static("braç","bracet_"..i)
+  l_pStaticModel:set_position(l_vPos)
+end
 
 --[[
 local pos = vect3f 0 0 0
