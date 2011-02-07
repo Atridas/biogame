@@ -24,7 +24,10 @@ CRenderableObject* CRenderableObjectsManager::AddMeshInstance(
                                                       const string& _szInstanceName)
 {
   if(GetResource(_szInstanceName) != 0)
+  {
+    LOGGER->AddNewLog(ELL_WARNING, "CRenderableObjectsManager:: CInstanceMesh amb nom repetit \"%s\"", _szCoreMeshName.c_str());
     return 0;
+  }
 
   CInstanceMesh* l_pInstanceMesh = new CInstanceMesh(_szInstanceName);
   if(!l_pInstanceMesh->Init(_szCoreMeshName))
@@ -47,7 +50,10 @@ CRenderableObject* CRenderableObjectsManager::AddAnimatedModel(
                                                       const string& _szDefaultAnimation)
 {
   if(GetResource(_szInstanceName) != 0)
+  {
+    LOGGER->AddNewLog(ELL_WARNING, "CRenderableObjectsManager:: CAnimatedModel amb nom repetit \"%s\"", _szCoreModelName.c_str());
     return 0;
+  }
 
   CRenderableAnimatedInstanceModel* l_pAnimatedModel = new CRenderableAnimatedInstanceModel(_szInstanceName);
   if(!l_pAnimatedModel->Init(_szCoreModelName,_szDefaultAnimation))
@@ -181,4 +187,20 @@ bool CRenderableObjectsManager::Load(const set<string>& _vXMLFiles)
     }
   }
   return l_bResult;
+}
+
+
+void CRenderableObjectsManager::SetAllVisible(bool _bVisible, int _ID)
+{
+  for(size_t i=0; i < m_RenderableObjects.size() ; i++)
+  {
+    if (i==_ID)
+    {
+      m_RenderableObjects[i]->SetVisible(true);
+    }
+    else
+    {
+      m_RenderableObjects[i]->SetVisible(_bVisible);
+    }
+  }
 }
