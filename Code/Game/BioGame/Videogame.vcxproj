@@ -92,19 +92,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="EnemyInstance.cpp" />
-    <ClCompile Include="EnemyManager.cpp" />
-    <ClCompile Include="EnemyResource.cpp" />
     <ClCompile Include="GameProcess.cpp" />
-    <ClCompile Include="Sniper.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EnemyInstance.h" />
-    <ClInclude Include="EnemyManager.h" />
-    <ClInclude Include="EnemyResource.h" />
     <ClInclude Include="GameProcess.h" />
-    <ClInclude Include="Sniper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

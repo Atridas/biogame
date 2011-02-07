@@ -7,24 +7,63 @@
     <Filter Include="Caracteristiques">
       <UniqueIdentifier>{84578ec3-1d55-47ef-a03f-d97346e91379}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Enemics">
+    <Filter Include="Estats">
+      <UniqueIdentifier>{56eaa720-15fd-45ce-be6a-5ec95fc3b24c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemy">
       <UniqueIdentifier>{4ab6a035-bbbc-46fb-980f-9ceab5ac55c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemy\EnemyManager">
+      <UniqueIdentifier>{111a63c7-b461-4194-a5fd-93e6f32c8e00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemy\Militar">
+      <UniqueIdentifier>{b38e2107-68f9-4f75-a685-003cbb9581b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemy\Miner">
+      <UniqueIdentifier>{bc902cff-0dec-42f7-b3fb-f6cc9d4bbe43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemy\Vigia">
+      <UniqueIdentifier>{6e32080b-9b9a-4b69-a7a3-bd0293cd6d4f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Caracteristiques.h">
       <Filter>Caracteristiques</Filter>
     </ClInclude>
-    <ClInclude Include="include\Enemic.h">
-      <Filter>Enemics</Filter>
+    <ClInclude Include="include\EnemyManager.h">
+      <Filter>Enemy\EnemyManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Enemy.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Militar.h">
+      <Filter>Enemy\Militar</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Miner.h">
+      <Filter>Enemy\Miner</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Vigia.h">
+      <Filter>Enemy\Vigia</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caracteristiques.cpp">
       <Filter>Caracteristiques</Filter>
     </ClCompile>
-    <ClCompile Include="Enemic.cpp">
-      <Filter>Enemics</Filter>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>Enemy\EnemyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Militar.cpp">
+      <Filter>Enemy\Militar</Filter>
+    </ClCompile>
+    <ClCompile Include="Miner.cpp">
+      <Filter>Enemy\Miner</Filter>
+    </ClCompile>
+    <ClCompile Include="Vigia.cpp">
+      <Filter>Enemy\Vigia</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
