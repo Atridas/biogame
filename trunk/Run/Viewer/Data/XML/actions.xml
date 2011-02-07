@@ -132,14 +132,22 @@
 	</action>
 
 
-  <action name="ChangeMode">
-    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_M"/>
-  </action>
+	<action name="ChangeMode">
+	<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_M"/>
+	</action>
 
 
-  <action name="SetCameraFPS">
+	<action name="SetCameraFPS">
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_C"/>
 	</action>
+
+	
+	<action name="ZoomCamera">
+		<input deviceType="IDV_MOUSE" AxisType="AXIS_MOUSE_Z" Delta="1.f"/>
+	</action>
+
+
+
 
 	<!--.......VIEWER CAMERA CONTROL: GAMEPAD.......................
   <action name="MoveXViewerCam">
