@@ -91,11 +91,19 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Caracteristiques.h" />
-    <ClInclude Include="include\Enemic.h" />
+    <ClInclude Include="include\Enemy.h" />
+    <ClInclude Include="include\EnemyManager.h" />
+    <ClInclude Include="include\Militar.h" />
+    <ClInclude Include="include\Miner.h" />
+    <ClInclude Include="include\Vigia.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Caracteristiques.cpp" />
-    <ClCompile Include="Enemic.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="Militar.cpp" />
+    <ClCompile Include="Miner.cpp" />
+    <ClCompile Include="Vigia.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

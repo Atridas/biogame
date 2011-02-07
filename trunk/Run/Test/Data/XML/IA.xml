@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+  <enemies>
+    <templates>
+      <enemy_template id="MILITAR" run_speed="3.0" walk_speed="1.0" rotate_speed="3.0" atac_speed="0.50" life="90" dany_atac="8" view_angle="35" view_radius="10" sound_radius="3" mesh="Data\Enemies\xxxxx.mesh"/>  <!--PATH DELS ENEMICS-->
+      <enemy_template id="MINER" run_speed="1.75" walk_speed="0.7" rotate_speed="2.0" atac_speed="1" life="140" dany_atac="12" view_angle="50" view_radius="12" sound_radius="0" mesh="Data\Enemies\xxxxxxx.mesh"/> <!--PATH DELS ENEMICS-->
+    </templates>
+    <instances>
+      <enemy_instance type="MILITAR" pos="0 0 0" rot="0 180 0" />
+      <enemy_instance type="MINER" pos="0 0 0" rot="0 180 0" />
+    </instances>
+  </enemies>
