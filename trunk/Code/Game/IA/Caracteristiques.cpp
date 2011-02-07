@@ -2,7 +2,8 @@
 
 
 
-CCaracteristiques::CCaracteristiques(void)
+CCaracteristiques::CCaracteristiques(void):
+CNamed("")
 {
 }
 
