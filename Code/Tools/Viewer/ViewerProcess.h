@@ -14,7 +14,7 @@ class CViewerProcess:
 
 public:
                         CViewerProcess            (): CProcess("Viewer Process"), m_pObject(0), m_pObjectCamera(0),
-                                                    m_fVelocity(0.0f),m_bRenderLights(false)
+                                                    m_fVelocity(0.0f),m_bRenderLights(false),m_iMode(0)
                                                 {};
   virtual               ~CViewerProcess           ()                          {Done();};
 
@@ -37,4 +37,5 @@ private:
   CCamera*              m_pObjectCamera;
   float                 m_fVelocity;
   bool                  m_bRenderLights;
+  int                   m_iMode;
 };
