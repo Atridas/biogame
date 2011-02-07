@@ -25,7 +25,7 @@ public:
 
 
   void AddResource(const string& _szName, CRenderableObject* _pRenderableObject);
-  void CleanUp()                        {Release();m_RenderableObjects.clear();};
+  void CleanUp()                        {Release();m_RenderableObjects.clear();m_vIndexMeshes.clear(),m_vIndexAnimated.clear();};
 
   bool Load(const string& _szFileName)  {return Load(_szFileName,false);};
   bool Load(const vector<string>& _vXMLFiles);
@@ -36,6 +36,10 @@ public:
   bool Reload() {CleanUp(); return Load(m_vXMLFiles);};
   //CRenderableObject* GetInstance(const string& _szName) const;
   // el get instance ja està ben implementat a MapManager
+
+  vector<int> m_vIndexMeshes;
+  vector<int> m_vIndexAnimated;
+
 
 private:
   set<string> m_vXMLFiles;
