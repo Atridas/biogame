@@ -124,3 +124,5 @@ CAnimatedInstanceModel* CAnimatedModelManager::GetInstance(const std::string &_s
 
   return l_pInstance;
 }
+
+

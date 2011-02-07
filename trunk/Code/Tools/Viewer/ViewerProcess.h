@@ -19,7 +19,7 @@ class CViewerProcess:
 
 public:
                         CViewerProcess            (): CProcess("Viewer Process"), m_pObject(0), m_pObjectCamera(0),
-                                                    m_fVelocity(0.0f),m_bRenderLights(false),m_iMode(0)
+                                                    m_fVelocity(0.0f),m_bRenderLights(false),m_iMode(0),m_iAnimat(0),m_iMesh(0),m_iRenderObject(0)
                                                 {};
   virtual               ~CViewerProcess           ()                          {Done();};
 
@@ -28,6 +28,7 @@ public:
 	void                  Update                  (float elapsedTime);
 	void					        DebugInformation        (float FPS);
   void                  RenderScene             (CRenderManager* _pRM);
+  void                  RenderINFO              (CRenderManager* _pRM, int _iMode);
 
   virtual bool          ExecuteProcessAction      (float _fDeltaSeconds, float _fDelta, const char* _pcAction);
 
@@ -43,4 +44,7 @@ private:
   float                 m_fVelocity;
   bool                  m_bRenderLights;
   int                   m_iMode;
+  int                   m_iAnimat;
+  int                   m_iMesh;
+  int                   m_iRenderObject;
 };

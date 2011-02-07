@@ -70,6 +70,8 @@ public:
    * @return L'AnimatedInstanceModel si existeix la core, NULL sino.
   **/
   CAnimatedInstanceModel* GetInstance(const std::string& _szName);
+
+  //CAnimatedInstanceModel* GetResourceByID(int _ID) {return m_Resources[_ID]->second;};
   
 private:
   /**
