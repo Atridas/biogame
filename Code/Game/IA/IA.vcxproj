@@ -86,10 +86,12 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\EnemyManager.h" />
+    <ClInclude Include="include\Caracteristiques.h" />
+    <ClInclude Include="include\Enemic.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EnemyManager.cpp" />
+    <ClCompile Include="Caracteristiques.cpp" />
+    <ClCompile Include="Enemic.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

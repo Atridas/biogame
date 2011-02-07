@@ -4,9 +4,27 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\EnemyManager.h" />
+    <Filter Include="Caracteristiques">
+      <UniqueIdentifier>{84578ec3-1d55-47ef-a03f-d97346e91379}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemics">
+      <UniqueIdentifier>{4ab6a035-bbbc-46fb-980f-9ceab5ac55c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EnemyManager.cpp" />
+    <ClInclude Include="include\Caracteristiques.h">
+      <Filter>Caracteristiques</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Enemic.h">
+      <Filter>Enemics</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Caracteristiques.cpp">
+      <Filter>Caracteristiques</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemic.cpp">
+      <Filter>Enemics</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
