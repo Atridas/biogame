@@ -74,7 +74,10 @@ void CScriptManager::Load(const string& _szFileName)
     string l_szLuaFile = l_LuaFile.GetPszISOProperty("path","");
 
     if(l_szLuaFile != "")
+    {
       m_vLuaScripts.push_back(l_szLuaFile);
+      RunFile(l_szLuaFile);
+    }
     else
       LOGGER->AddNewLog(ELL_WARNING,"CScriptManager::Load Propietat \"file\" no trobada a linia %d", i);
   }
@@ -157,15 +160,10 @@ void CScriptManager::Release()
 void CScriptManager::RunCode(const string& _szCode) const
 {
   int l_iError = luaL_dostring(m_pLS,_szCode.c_str());
-  if(l_iError == 0)
+  if(l_iError != 0)
   {
     const char *l_pcStr = lua_tostring(m_pLS, -1);
-  }else
-  {
-    if(l_iError == LUA_ERRSYNTAX)
-      LOGGER->AddNewLog(ELL_ERROR, "CScriptManager::RunCode  Syntax Error for: %s", _szCode);
-    else if (l_iError == LUA_ERRMEM)
-      LOGGER->AddNewLog(ELL_ERROR, "CScriptManager::RunCode  Internal lua error when running: %s", _szCode);
+    LOGGER->AddNewLog(ELL_ERROR, "CScriptManager::RunCode  %s", l_pcStr);
   }
 }
 
@@ -173,17 +171,10 @@ void CScriptManager::RunCode(const string& _szCode) const
 void CScriptManager::RunFile(const string& _szFileName) const
 {
   int l_iError = luaL_dofile(m_pLS, _szFileName.c_str());
-  if(l_iError == 0)
+  if(l_iError != 0)
   {
     const char *l_pcStr = lua_tostring(m_pLS, -1);
-  }else
-  {
-    if(l_iError == LUA_ERRFILE)
-      LOGGER->AddNewLog(ELL_ERROR, "CScriptManager::RunFile  File error for: %s", _szFileName);
-    else if(l_iError == LUA_ERRSYNTAX)
-      LOGGER->AddNewLog(ELL_ERROR, "CScriptManager::RunFile  Syntax Error at: %s", _szFileName);
-    else if (l_iError == LUA_ERRMEM)
-      LOGGER->AddNewLog(ELL_ERROR, "CScriptManager::RunFile  Internal lua error when running: %s", _szFileName);
+    LOGGER->AddNewLog(ELL_ERROR, "CScriptManager::RunFile  %s", l_pcStr);
   }
 }
 
@@ -282,6 +273,4 @@ void CScriptManager::RegisterLUAFunctions()
     ,class_<CCore, bases<CBaseControl,CSingleton<CCore>>>("CCore")
       //.def("get_light_manager", &CCore::GetLightManager)
     */
-
-  //REGISTER_LUA_FUNCTION(m_pLS, "get_core", GetCore);
 }
