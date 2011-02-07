@@ -28,7 +28,7 @@ bool CViewerProcess::Init()
   
  
   m_pObject = new CObject3D();
-  m_fVelocity = 1;
+  m_fVelocity = 5;
   
   m_pObject->SetPosition(Vect3f(-6,1.7f,0));
 
@@ -60,6 +60,11 @@ bool CViewerProcess::Init()
 
   l_Spot->SetDirection(m_pObjectBot->GetPosition());
 
+  if (m_iMode != 0)
+  {
+    m_pObject->SetPosition(Vect3f(0.0f,0.0f,0.0f));
+  }
+
   m_bRenderLights = true;
 
   SetOk(true);
@@ -80,34 +85,42 @@ void CViewerProcess::Update(float _fElapsedTime)
   float l_fPitch, l_fYaw;
 
   Vect3i l_vVec = INPUT_MANAGER->GetMouseDelta();
+  CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
 
   l_fPitch = m_pObject->GetPitch();
   l_fYaw = m_pObject->GetYaw();
   
   m_pObject->SetYaw(l_fYaw-l_vVec.x*_fElapsedTime);
-
-  m_pObjectBot->SetYaw(m_pObject->GetYaw()-FLOAT_PI_VALUE/2.0f);
-
+  
   l_fPitch -= l_vVec.y*_fElapsedTime;
   if(l_fPitch < - FLOAT_PI_VALUE/3) l_fPitch = - FLOAT_PI_VALUE/3;
   if(l_fPitch >   FLOAT_PI_VALUE/3) l_fPitch =   FLOAT_PI_VALUE/3;
   m_pObject->SetPitch(l_fPitch);
 
-  m_pObjectBot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObjectBot->GetPosition().y, m_pObject->GetPosition().z));
+  if (m_iMode == 0)
+  {
+    m_pObjectBot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObjectBot->GetPosition().y, m_pObject->GetPosition().z));
+    m_pObjectBot->SetYaw(m_pObject->GetYaw()-FLOAT_PI_VALUE/2.0f);
+    l_fPitch = m_pObjectBot->GetPitch();
+    l_fYaw = m_pObjectBot->GetYaw();
+    l_fYaw = l_fYaw+FLOAT_PI_VALUE/2;
+    if (l_Spot != 0)
+    l_Spot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObjectBot->GetPosition().y, m_pObject->GetPosition().z));
+
+    Vect3f l_vec(cos(l_fYaw) * cos(l_fPitch), sin(l_fPitch),sin(l_fYaw) * cos(l_fPitch) );
+    l_Spot->SetDirection(Vect3f(l_vec.x,l_vec.y,l_vec.z));
+  }
+  else
+  {
+    
+    
+  }
   
   
-  l_fPitch = m_pObjectBot->GetPitch();
-  l_fYaw = m_pObjectBot->GetYaw();
-  l_fYaw = l_fYaw+FLOAT_PI_VALUE/2;
 
-  CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
+  
 
-  if (l_Spot != 0)
-  l_Spot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObjectBot->GetPosition().y, m_pObject->GetPosition().z));
-
-  Vect3f l_vec(cos(l_fYaw) * cos(l_fPitch), sin(l_fPitch),sin(l_fYaw) * cos(l_fPitch) );
-
-  l_Spot->SetDirection(Vect3f(l_vec.x,l_vec.y,l_vec.z));
+  
 
   if(m_bStateChanged)
   {
@@ -150,44 +163,52 @@ void CViewerProcess::RenderScene(CRenderManager* _pRM)
 
   switch (m_iMode)
   {
-    case 0:
-      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontType,l_szMsg.c_str());
+    case MODE_ESCENA:
+      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontType,l_szMsg3.c_str());
       break;
 
-    case 1:
+    case MODE_MESH:
       FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontType,l_szMsg2.c_str());
       break;
 
-    case 2:
-      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontType,l_szMsg3.c_str());
-      break;
-   
+    case MODE_ANIMATS:
+      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontType,l_szMsg.c_str());
+      break; 
   }
-  
-   
 }
 
 bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
 {
   if(strcmp(_pcAction, "Run") == 0)
   {
-    m_fVelocity = 10;
+    if (m_iMode == 0)
+    {
+      m_fVelocity = 10;
+    }
+    
     return true;
   }
 
   if(strcmp(_pcAction, "Walk") == 0)
   {
-    m_fVelocity = 1;
+    if (m_iMode == 0)
+    {
+      m_fVelocity = 5;
+    }
     return true;
   }
 
   if(strcmp(_pcAction, "MoveFwd") == 0)
   {
-    Vect3f l_vPos = m_pObject->GetPosition();
-    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
-    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
-    m_pObject->SetPosition(l_vPos);
 
+    Vect3f l_vPos = m_pObject->GetPosition();
+
+    if (m_iMode == 0)
+    {
+      l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
+      l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
+      m_pObject->SetPosition(l_vPos);
+    }
     if(m_iState != 1)
       m_bStateChanged = true;
 
@@ -198,11 +219,14 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
 
  if(strcmp(_pcAction, "MoveBack") == 0)
   {
-    Vect3f l_vPos = m_pObject->GetPosition();
-    l_vPos.x = l_vPos.x - cos(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
-    l_vPos.z = l_vPos.z - sin(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
-    m_pObject->SetPosition(l_vPos);
 
+    Vect3f l_vPos = m_pObject->GetPosition();
+    if (m_iMode == 0)
+    {
+      l_vPos.x = l_vPos.x - cos(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
+      l_vPos.z = l_vPos.z - sin(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
+      m_pObject->SetPosition(l_vPos);
+    }
     if(m_iState != 1)
       m_bStateChanged = true;
 
@@ -214,9 +238,13 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
   if(strcmp(_pcAction, "MoveLeft") == 0)
   {
     Vect3f l_vPos = m_pObject->GetPosition();
-    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
-    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
-    m_pObject->SetPosition(l_vPos);
+
+    if (m_iMode == 0)
+    {
+      l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
+      l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
+      m_pObject->SetPosition(l_vPos);
+    }
 
     if(m_iState != 1)
       m_bStateChanged = true;
@@ -229,9 +257,13 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
   if(strcmp(_pcAction, "MoveRight") == 0)
   {
     Vect3f l_vPos = m_pObject->GetPosition();
-    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
-    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
-    m_pObject->SetPosition(l_vPos);
+
+    if (m_iMode == 0)
+    {
+      l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
+      l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
+      m_pObject->SetPosition(l_vPos);
+    }
 
     if(m_iState != 1)
       m_bStateChanged = true;
@@ -246,7 +278,37 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
   {
     m_iMode = m_iMode + 1;
     if (m_iMode == 3)
+    {
       m_iMode = 0;
+      CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
+      l_pCam->SetZoom(2.5f);
+    }
+    else 
+      m_pObject->SetPosition(Vect3f(0.0f,0.0f,0.0f));
+
+    
+    return true;
+  }
+
+
+  if(strcmp(_pcAction, "ZoomCamera") == 0)
+  {
+    if (m_iMode != 0)
+    {
+      CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
+      //l_pCam->AddZoom(-0.1f);
+      Vect3i l_vDelta = INPUT_MANAGER->GetMouseDelta();
+
+      if (l_vDelta.z < 0)
+      {
+        l_pCam->AddZoom(0.2f);
+      }
+      else
+      {
+        l_pCam->AddZoom(-0.2f);
+      }
+
+    }
     return true;
   }
 

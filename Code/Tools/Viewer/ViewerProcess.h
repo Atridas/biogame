@@ -3,6 +3,11 @@
 #include "Process.h"
 #include <base.h>
 
+#define MODE_ESCENA 0
+#define MODE_MESH 1
+#define MODE_ANIMATS 2
+
+
 //Forward declarations---------------------
 class CObject3D;
 class CRenderManager;
