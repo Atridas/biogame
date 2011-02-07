@@ -5,7 +5,7 @@
 
 #include "base.h"
 #include "Named.h"
-#include "../Graphics/include/Object3D.h"
+#include "Object3D.h"
 
 class CCaracteristiques : 
     public CObject3D,
@@ -16,7 +16,7 @@ public:
   CCaracteristiques();
   ~CCaracteristiques();
 
-  Vect3f GetPosition() {return Object3D::   m_vPosition;};
+  Vect3f GetPosition() {return CObject3D::   m_vPosition;};
   void SetName(const string& _name) {CNamed::SetName(_name);};
 
   //els set s'hauran de calcular correctament segons de cidim, pero de moment aixi kda llest
