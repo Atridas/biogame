@@ -97,6 +97,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="DrawQuadSceneEffect.cpp" />
+    <ClCompile Include="DrawQuadToTextureSceneEffect.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="EffectMaterial.cpp" />
@@ -133,6 +134,7 @@
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\DirectionalLight.h" />
     <ClInclude Include="include\DrawQuadSceneEffect.h" />
+    <ClInclude Include="include\DrawQuadToTextureSceneEffect.h" />
     <ClInclude Include="include\Effect.h" />
     <ClInclude Include="include\EffectManager.h" />
     <ClInclude Include="include\EffectMaterial.h" />

@@ -41,26 +41,9 @@ void CDrawQuadSceneEffect::PostRender(CRenderManager *_pRM)
 {
   if(IsOk())
   {
-    //RECT l_Rect;
-    //l_Rect.top=l_Rect.left=0;
-    //l_Rect.bottom=_pRM->GetScreenHeight();
-    //l_Rect.right=_pRM->GetScreenWidth();
     Vect2i posInit(0,0);
     uint32 w = _pRM->GetScreenWidth();
     uint32 h = _pRM->GetScreenHeight();
-
-    /*if(!m_pTechnique->IsOk())
-    {
-      CEffectManager* l_pEffectManager = RENDER_MANAGER->GetEffectManager();
-      m_pTechnique    = l_pEffectManager->GetEffectTechnique(m_szTechnique);
-
-      if(!m_pTechnique || !m_pTechnique->IsOk())
-      {
-        Release();
-        SetOk(false);
-        return;
-      }
-    }*/
 
     m_pTechnique->BeginRender(0);
     ActivateTextures();

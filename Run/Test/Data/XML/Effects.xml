@@ -79,10 +79,14 @@
 
     <!-- SCENE EFFECTS -->
     <technique name="RenderNoiseAndVignettingTechnique" effect="Noise And Vignetting" use_time="true"/>
-    <technique name="BloomTechnique" effect="Bloom"/>
+    <!--<technique name="BloomTechnique" effect="Bloom"/> -->
     <technique name="HDRTechnique" effect="HDR"/>
     <technique name="PostProcessGlowTechnique"  effect="Glow"/>
     <technique name="PostProcessBlurTechnique"  effect="Blur"/>
+
+    <technique name="HoritzontalBloomTechnique" effect="Bloom"/>
+    <technique name="VerticalBloomTechnique" effect="Bloom"/>
+    <technique name="PostProcessBloomTechnique" effect="Bloom"/>
 
     <technique name="RenderShadowTechnique" effect="Shadows" use_world_view_projection_matrix="true"/>
     <technique name="Cal3DTechniqueShadow"  effect="Shadows" use_world_view_projection_matrix="true" animated="true"/>
@@ -90,5 +94,7 @@
     <technique name="RenderGlowTechnique" effect="Glow" use_world_view_projection_matrix="true" glow_active="true"/>
     <technique name="Cal3DGlowTechnique"  effect="Glow" use_world_view_projection_matrix="true" glow_active="true" animated="true"/>
 
+
+    
   </techniques>
 </shaders>

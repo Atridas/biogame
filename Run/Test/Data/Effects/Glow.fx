@@ -76,11 +76,8 @@ float g_KT[GLOW_KERNEL_HALF] = {1.0, 0.8, 0.6, 0.4};
 
 float4 PostProcessGlowPS(float2 _UV: TEXCOORD0) : COLOR
 {
-  //return float4(_UV, 0, 1);
-  //return tex2D(DiffuseTextureSampler, _UV);
   float4 l_Total = 0;
   int l_Counter = 0;
-  float4 l_Original = tex2D(NormalTextureSampler,_UV);
   for(int i = - (GLOW_KERNEL_HALF-1) ; i < (GLOW_KERNEL_HALF); i++)
   {
     float l_XTextureInc = i * g_XIncrementTexture;
@@ -101,7 +98,6 @@ float4 PostProcessGlowPS(float2 _UV: TEXCOORD0) : COLOR
     }
   }
   return l_Total / max(1, l_Counter);
-  //return l_Original + l_Total * l_Total.a;
 }
 
 technique PostProcessGlowTechnique
@@ -118,3 +114,5 @@ technique PostProcessGlowTechnique
 		PixelShader = compile ps_3_0 PostProcessGlowPS();
 	}
 }
+
+

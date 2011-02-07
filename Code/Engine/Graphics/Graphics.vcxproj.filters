@@ -124,6 +124,9 @@
     <Filter Include="SceneEffects\ShadowMapRenderToTexture">
       <UniqueIdentifier>{8d361bcc-c2a9-4450-ae07-9597e726c960}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SceneEffects\DrawQuadToTextureSceneEffect">
+      <UniqueIdentifier>{c1bd35f1-7aaa-4fd9-841b-8ef82e9536db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -230,6 +233,9 @@
     </ClCompile>
     <ClCompile Include="ShadowMapRenderToTexture.cpp">
       <Filter>SceneEffects\ShadowMapRenderToTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawQuadToTextureSceneEffect.cpp">
+      <Filter>SceneEffects\DrawQuadToTextureSceneEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -340,6 +346,9 @@
     </ClInclude>
     <ClInclude Include="include\ShadowMapRenderToTexture.h">
       <Filter>SceneEffects\ShadowMapRenderToTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DrawQuadToTextureSceneEffect.h">
+      <Filter>SceneEffects\DrawQuadToTextureSceneEffect</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
