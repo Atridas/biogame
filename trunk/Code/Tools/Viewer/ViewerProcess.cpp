@@ -26,7 +26,7 @@ bool CViewerProcess::Init()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"CViewerProcess::Init");
   
-  
+ 
   m_pObject = new CObject3D();
   m_fVelocity = 1;
   
@@ -36,6 +36,7 @@ bool CViewerProcess::Init()
   CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
 
   m_iState = 0;
+  m_iMode = 0;
 
   m_bStateChanged = false;
 
@@ -52,7 +53,7 @@ bool CViewerProcess::Init()
     35.0f * FLOAT_PI_VALUE/180.0f,
     ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
     m_pObject,
-    10.5f);
+    2.5f);
 
   m_pCamera = m_pObjectCamera;
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
@@ -142,11 +143,28 @@ void CViewerProcess::RenderScene(CRenderManager* _pRM)
 
 
   //text
-  /*uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");
-  string l_szMsg("Biogame Viewer");
-  CColor col = colBLUE;
+  uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");
+  string l_szMsg("Mode Animats");
+  string l_szMsg2("Mode Meshes");
+  string l_szMsg3("Mode Escena");
 
-  FONT_MANAGER->DrawText((uint32)0,(uint32)20,col,l_uiFontType,l_szMsg.c_str());*/
+  switch (m_iMode)
+  {
+    case 0:
+      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontType,l_szMsg.c_str());
+      break;
+
+    case 1:
+      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontType,l_szMsg2.c_str());
+      break;
+
+    case 2:
+      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontType,l_szMsg3.c_str());
+      break;
+   
+  }
+  
+   
 }
 
 bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
@@ -220,6 +238,15 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
 
     m_iState = 1;
 
+    return true;
+  }
+
+
+  if(strcmp(_pcAction, "ChangeMode") == 0)
+  {
+    m_iMode = m_iMode + 1;
+    if (m_iMode == 3)
+      m_iMode = 0;
     return true;
   }
 
