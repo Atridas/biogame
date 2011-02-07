@@ -275,14 +275,32 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
       CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
       l_pCam->SetZoom(2.5f);
       CORE->GetRenderableObjectsManager()->SetAllVisible(true,m_iRenderObject);
+      m_pObject->SetPosition(Vect3f(-6,1.7f,0));
 
     }
     else 
     {
-      m_pObjectBot->SetPosition(CORE->GetRenderableObjectsManager()->GetResource("bot")->GetPosition());
+      m_iMesh = 0;
+      m_iAnimat = 0;
+      m_iRenderObject = 0;
+      //m_pObjectBot->SetPosition(CORE->GetRenderableObjectsManager()->GetResource("bot")->GetPosition());
+      CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
       Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(m_iRenderObject)->GetPosition();
+
+      if (m_iMode == MODE_ANIMATS)
+      {
+        l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();   
+        CORE->GetRenderableObjectsManager()->SetAllVisible(false,l_pROM->m_vIndexAnimated[m_iAnimat]);
+      }
+      else if (m_iMode == MODE_MESH)
+      {
+        l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetPosition();  
+        CORE->GetRenderableObjectsManager()->SetAllVisible(false,l_pROM->m_vIndexMeshes[m_iMesh]);
+      }
+
+      //Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(m_iRenderObject)->GetPosition();
       m_pObject->SetPosition(l_pos);
-      CORE->GetRenderableObjectsManager()->SetAllVisible(false,m_iRenderObject);
+      
     }
     
     return true;
@@ -312,57 +330,72 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
 
   if(strcmp(_pcAction, "CanviObjecteDRETA") == 0)
   {
-    if (m_iMode != MODE_ESCENA)
+    if (m_iMode == MODE_MESH)
     {
-      m_iRenderObject++;
+      m_iMesh++;
       CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
 
-      if (m_iRenderObject == l_pROM->GetRenderableVectorSize())
-        m_iRenderObject = 0;
+      if (m_iMesh == l_pROM->m_vIndexMeshes.size())
+        m_iMesh = 0;
 
-      Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(m_iRenderObject)->GetPosition();
+
+      Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetPosition();
       m_pObject->SetPosition(l_pos);
 
-      l_pROM->SetAllVisible(false,m_iRenderObject);
+      l_pROM->SetAllVisible(false,l_pROM->m_vIndexMeshes[m_iMesh]);
+    }
+    else if (m_iMode == MODE_ANIMATS)
+    {
+      m_iAnimat++;
+      CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
+
+      if (m_iAnimat == l_pROM->m_vIndexAnimated.size())
+        m_iAnimat = 0;
+
+
+      Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();
+      m_pObject->SetPosition(l_pos);
+
+      l_pROM->SetAllVisible(false,l_pROM->m_vIndexAnimated[m_iAnimat]);
     }
 
-    /*if (m_iMode == MODE_ANIMATS)
-    {
-      CRenderableObjectsManager* l_pAMM = CORE->GetRenderableObjectsManager();
-    }
-    else if (m_iMode == MODE_MESH)
-    {
-    
-    
-    }*/
     return true;
   }
 
 
   if(strcmp(_pcAction, "CanviObjecteESQUERRA") == 0)
   {
-    if (m_iMode != MODE_ESCENA)
+    if (m_iMode == MODE_MESH)
     {
-      m_iRenderObject--;
+      m_iMesh--;
       CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
 
-      if (m_iRenderObject == -1)
-        m_iRenderObject = l_pROM->GetRenderableVectorSize()-1;
+      if (m_iMesh == -1)
+        m_iMesh = l_pROM->m_vIndexMeshes.size()-1;
 
-      Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(m_iRenderObject)->GetPosition();
+
+      Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetPosition();
       m_pObject->SetPosition(l_pos);
 
-      l_pROM->SetAllVisible(false,m_iRenderObject);
+      l_pROM->SetAllVisible(false,l_pROM->m_vIndexMeshes[m_iMesh]);
     }
-    /*if (m_iMode == MODE_ANIMATS)
+    else if (m_iMode == MODE_ANIMATS)
     {
-      CAnimatedModelManager* l_pAMM = RENDER_MANAGER->GetAnimatedModelManager();
+      m_iAnimat--;
+      CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
+
+      if (m_iAnimat == -1)
+        m_iAnimat = l_pROM->m_vIndexAnimated.size()-1;
+
+
+      Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();
+      m_pObject->SetPosition(l_pos);
+
+      l_pROM->SetAllVisible(false,l_pROM->m_vIndexAnimated[m_iAnimat]);
     }
-    else if (m_iMode == MODE_MESH)
-    {
-    
-    
-    }*/
+
+
+
     return true;
   }
 

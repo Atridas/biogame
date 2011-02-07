@@ -122,12 +122,17 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
     if(!GetResource(l_szName))
     {
       CRenderableObject* l_pRenderableObject = 0;
-      if(l_szClass == "StaticMesh") {
+      if(l_szClass == "StaticMesh") 
+      {
         l_pRenderableObject = AddMeshInstance(l_szResource, l_szName);
-      } else if(l_szClass == "AnimatedModel") {
+        m_vIndexMeshes.push_back(i);
+
+      } else if(l_szClass == "AnimatedModel") 
+      {
         l_pRenderableObject = AddAnimatedModel(l_szResource, l_szName,l_szDefaultAnimation);
-        //LOGGER->AddNewLog(ELL_WARNING,"CRenderableObjectsManager:: Object: \"%s\" has no class", l_szName.c_str());
-      } else {
+         m_vIndexAnimated.push_back(i);
+      } else 
+      {
         LOGGER->AddNewLog(ELL_WARNING,"CRenderableObjectsManager:: Object: \"%s\" has unknown \"%s\" class", l_szName.c_str(), l_szClass.c_str());
       }
       
