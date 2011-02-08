@@ -113,6 +113,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathConstants.cpp" />
+    <ClCompile Include="Utils\BoundingBox.cpp" />
+    <ClCompile Include="Utils\BoundingSphere.cpp" />
     <ClCompile Include="Utils\CountDownTimer.cpp" />
     <ClCompile Include="Utils\Exception.cpp" />
     <ClCompile Include="Utils\LanguageManager.cpp" />
@@ -139,6 +141,8 @@
     <ClInclude Include="include\Named.h" />
     <ClInclude Include="include\Utils\BaseControl.h" />
     <ClInclude Include="include\Utils\BaseUtils.h" />
+    <ClInclude Include="include\Utils\BoundingBox.h" />
+    <ClInclude Include="include\Utils\BoundingSphere.h" />
     <ClInclude Include="include\Utils\CountDownTimer.h" />
     <ClInclude Include="include\Utils\Exception.h" />
     <ClInclude Include="include\Utils\LanguageManager.h" />

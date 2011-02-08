@@ -67,6 +67,15 @@
     <Filter Include="Utils\VertexCalculations">
       <UniqueIdentifier>{2b032600-1b86-4728-b59a-1b2be9b4d09e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils\Bounding">
+      <UniqueIdentifier>{0f675238-1d08-430a-8ad1-1712aa41fce7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Bounding\BoundingBox">
+      <UniqueIdentifier>{9f54944a-0489-4252-8ab6-ce3466dc1839}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Bounding\BoundingSphere">
+      <UniqueIdentifier>{45c2bbfb-73b9-41aa-90f6-364327ce4f04}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathConstants.cpp">
@@ -104,6 +113,12 @@
     </ClCompile>
     <ClCompile Include="VertexCalculations.cpp">
       <Filter>Utils\VertexCalculations</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\BoundingBox.cpp">
+      <Filter>Utils\Bounding\BoundingBox</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\BoundingSphere.cpp">
+      <Filter>Utils\Bounding\BoundingSphere</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +200,12 @@
     </ClInclude>
     <ClInclude Include="include\VertexCalculations.h">
       <Filter>Utils\VertexCalculations</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\BoundingBox.h">
+      <Filter>Utils\Bounding\BoundingBox</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\BoundingSphere.h">
+      <Filter>Utils\Bounding\BoundingSphere</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
