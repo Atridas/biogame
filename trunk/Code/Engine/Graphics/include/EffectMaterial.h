@@ -30,16 +30,23 @@ public:
   //bool Init(bool _bAnimated, int _iTextureMask, int _iVertexType, const vector<CTexture*>& _vTextures);
   bool Init(const CXMLTreeNode& _xmlMaterial);
   bool Init(fstream& _File);
+  void Init() {SetOk(true);};
 
   int GetTextureMask() const {return m_usTextureMask;};
   int GetVertexType()  const {return m_usVertexType;};
   int GetMaterialInfo()const {return m_usMaterialInfo;};
   bool IsAnimated()    const {return m_bAnimated;};
+
+  int GetTextureWidth() const   {return m_iTextureWidth;};
+  int GetTextureHeight()const   {return m_iTextureHeight;};
+  void SetTextureWidth (int _w) {m_iTextureWidth  = _w;};
+  void SetTextureHeight(int _h) {m_iTextureHeight = _h;};
   
   CEffectTechnique* GetEffectTechnique(const CRenderManager* _pRM) const;
   void ActivateTextures(const CRenderManager* _pRM) const;
 
   static int NumTextures(int mask);
+  
 
 protected:
   void Release();
@@ -51,6 +58,8 @@ private:
   uint16             m_usMaterialInfo;
   vector<CTexture *> m_vTextures;
   CEffectTechnique*  m_pTechnique;
+  int                m_iTextureWidth;
+  int                m_iTextureHeight;
 };
 
 #endif

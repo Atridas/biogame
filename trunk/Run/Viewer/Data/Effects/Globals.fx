@@ -59,4 +59,7 @@ float3 g_CameraPosition : CameraPosition;
 float g_Time : Time;
 float g_GlowActive : GlowActive;
 
+int g_TextureWidth  : TextureWidth;
+int g_TextureHeight : TextureHeight;
+
 #endif

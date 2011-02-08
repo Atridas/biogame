@@ -50,7 +50,7 @@ bool CTestProcess::Init()
     35.0f * FLOAT_PI_VALUE/180.0f,
     ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
     m_pObject,
-    10.5f);
+    4.5f);
 
   m_pCamera = m_pObjectCamera;
   m_pSceneEffectManager = CORE->GetSceneEffectManager();

@@ -32,7 +32,9 @@ CEffect::CEffect(void):
   m_pCameraPositionParameter(0),
   m_pBonesParameter(0),
   m_pTimeParameter(0),
-  m_pGlowActive(0)
+  m_pGlowActive(0),
+  m_pTextureWidth(0),
+  m_pTextureHeight(0)
 {
   for(int i = 0; i < MAX_LIGHTS_BY_SHADER; i++)
   {
@@ -76,6 +78,8 @@ void CEffect::SetNullParameters()
   m_pCameraPositionParameter =
   m_pBonesParameter =
   m_pGlowActive =
+  m_pTextureWidth =
+  m_pTextureHeight =
   m_pTimeParameter = 0;
 }
 
@@ -250,6 +254,8 @@ bool CEffect::InitParameters()
   GetParameterBySemantic("Bones", m_pBonesParameter);
   GetParameterBySemantic("Time", m_pTimeParameter);
   GetParameterBySemantic("GlowActive", m_pGlowActive);
+  GetParameterBySemantic("TextureWidth", m_pTextureWidth);
+  GetParameterBySemantic("TextureHeight", m_pTextureHeight);
 
   return true;
 }

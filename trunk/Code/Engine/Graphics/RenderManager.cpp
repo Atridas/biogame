@@ -732,10 +732,10 @@ void CRenderManager::DrawTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint3
   unsigned short _usIndices[6]={0,2,1,1,2,3};
   SDIFFUSETEXTUREDSCREENVERTEX l_Vtx[4] =
   {
-     { (float)l_vFinalPos.x,      (float)l_vFinalPos.y,       0, 1, l_Color, 0.0f, 0.0f } //(x,y) sup_esq.
-    ,{ (float)l_vFinalPos.x,      (float)l_vFinalPos.y+_uiH,  0, 1, l_Color, 0.0f, 1.0f } //(x,y) inf_esq.
-    ,{ (float)l_vFinalPos.x+_uiW, (float)l_vFinalPos.y,       0, 1, l_Color, 1.0f, 0.0f } //(x,y) sup_dr.
-    ,{ (float)l_vFinalPos.x+_uiW, (float)l_vFinalPos.y+_uiH,  0, 1, l_Color, 1.0f, 1.0f } //(x,y) inf_dr.
+     { (float)l_vFinalPos.x      -0.5f, (float)l_vFinalPos.y      -0.5f,  0, 1, l_Color, 0.0f, 0.0f } //(x,y) sup_esq.
+    ,{ (float)l_vFinalPos.x      -0.5f, (float)l_vFinalPos.y+_uiH -0.5f,  0, 1, l_Color, 0.0f, 1.0f } //(x,y) inf_esq.
+    ,{ (float)l_vFinalPos.x+_uiW -0.5f, (float)l_vFinalPos.y      -0.5f,  0, 1, l_Color, 1.0f, 0.0f } //(x,y) sup_dr.
+    ,{ (float)l_vFinalPos.x+_uiW -0.5f, (float)l_vFinalPos.y+_uiH -0.5f,  0, 1, l_Color, 1.0f, 1.0f } //(x,y) inf_dr.
   };
 
   m_pD3DDevice->SetFVF( SDIFFUSETEXTUREDSCREENVERTEX::GetFVF() );

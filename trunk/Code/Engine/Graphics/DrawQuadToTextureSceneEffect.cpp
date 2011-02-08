@@ -57,7 +57,7 @@ void CDrawQuadToTextureSceneEffect::PreRender(CRenderManager* _pRM, CProcess* _p
     uint32 w = m_pTexture->GetWidth();
     uint32 h = m_pTexture->GetHeight();
 
-    m_pTechnique->BeginRender(0);
+    m_pTechnique->BeginRender(m_pEffectMaterial);
     ActivateTextures();
     LPD3DXEFFECT l_Effect=m_pTechnique->GetEffect()->GetD3DEffect();
     if(l_Effect!=NULL)

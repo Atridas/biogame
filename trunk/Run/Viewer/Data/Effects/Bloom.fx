@@ -1,71 +1,122 @@
 #include "Globals.fx"
 
-float g_XIncrementTexture = 1/400.0; // amplada de la textura
-float g_YIncrementTexture = 1/300.0; // alçada de la textura
-float g_BloomThreshold = 0.90;
-float g_KT[4] = {1.0, 0.8, 0.6, 0.4};
-#define BLOOM_KERNEL_HALF 4
-
-
-sampler FrameBufferSampler : register(s0) = sampler_state
+sampler PrevFilterSampler : register(s0) = sampler_state
 {
   MipFilter = LINEAR;
   MinFilter = LINEAR;  
   MagFilter = LINEAR;
-  AddressU  = WRAP;
-  AddressV  = WRAP;
-};
-sampler CaptureSampler : register(s1) = sampler_state
-{
-  MipFilter = POINT;
-  MinFilter = POINT;  
-  MagFilter = POINT;
-  AddressU  = WRAP;
-  AddressV  = WRAP;
+  AddressU  = CLAMP;
+  AddressV  = CLAMP;
 };
 
+// Optimització per separabilitat -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-float luma(float3 _color)
+//float g_XIncrementTexture = 1/g_TextureWidth;
+//float g_YIncrementTexture = 1/g_TextureHeight;
+
+//Triangle de pascal / tartaglia nivell 7
+
+//       1
+//     1 1
+//    1 2 1
+//  1 3 3 1
+//1 4 6 4 1   => 16
+// 1   6  15  20   15  6   1       +++ => 64
+//#define GLOW_KERNEL_HALF 3
+//float g_GaussianKernel[GLOW_KERNEL_HALF] = {0.375 , 0.25, 0.0625};
+//#define GLOW_KERNEL_HALF 4
+//float g_GaussianKernel[GLOW_KERNEL_HALF] = {0.315, 0.234375 , 0.09375, 0.015625};
+
+#define GLOW_KERNEL_HALF 7
+float g_GaussianKernel[7] = { 0.3989422804,
+                        0.2419707245,
+                        0.0539909665,
+                        0.0044318484,
+                        0.2419707245,
+                        0.0539909665,
+                        0.0044318484};
+
+float4 VerticalBloomPS(float2 _UV: TEXCOORD0) : COLOR
 {
-  return 0.3 * _color.r + 0.59 * _color.g + 0.11 * _color.b;
+  float l_YIncrementTexture = 1.0/(float)g_TextureHeight;
+  
+  float4 l_Total = float4(0, 0, 0, 0);
+  for(int i = - (GLOW_KERNEL_HALF-1) ; i < (GLOW_KERNEL_HALF); i++)
+  {
+    float l_YTextureInc = i * l_YIncrementTexture;
+    
+    float l_KT = g_GaussianKernel[abs(i)];
+    float4 l_Color = tex2D(PrevFilterSampler, _UV + float2(0,l_YTextureInc));
+    
+    if(l_Color.a > 0.0)
+      l_Total += l_Color * l_KT;
+  }
+  return l_Total;
+  //return l_Original + l_Total * l_Total.a;
 }
 
-float4 BloomPS(float2 _UV: TEXCOORD0) : COLOR
+float4 HoritzontalBloomPS(float2 _UV: TEXCOORD0) : COLOR
 {
-  //return float4(_UV, 0, 1);
-  //return tex2D(DiffuseTextureSampler, _UV);
-  float4 l_Total = 0;
-  int l_Counter = 0;
-  float3 l_BaseColor = tex2D(FrameBufferSampler, _UV);
-  for(int i = - (BLOOM_KERNEL_HALF-1) ; i < (BLOOM_KERNEL_HALF); i++)
+  float l_XIncrementTexture = 1.0/(float)g_TextureWidth;
+  
+  float4 l_Total = float4(0, 0, 0, 0);
+  for(int i = - (GLOW_KERNEL_HALF-1) ; i < (GLOW_KERNEL_HALF); i++)
   {
-    float l_XTextureInc = i * g_XIncrementTexture;
-    for(int j = - (BLOOM_KERNEL_HALF-1) ; j < (BLOOM_KERNEL_HALF); j++)
-    {
-      float l_YTextureInc = j * g_YIncrementTexture;
-      float l_KT = (g_KT[abs(i)] + g_KT[abs(j)]) * 0.5;
-      float4 l_Color = tex2D(CaptureSampler, _UV + float2(l_XTextureInc,l_YTextureInc));
+    float l_XTextureInc = i * l_XIncrementTexture;
+    
+    float l_KT = g_GaussianKernel[abs(i)];
+    float4 l_Color = tex2D(PrevFilterSampler, _UV + float2(l_XTextureInc,0));
       
-      if(luma(l_Color) > g_BloomThreshold )
-      {
-        l_Total += l_Color * l_KT;
-        l_Color.a = 1.0;
-      } else {
-        l_Color.a = 0.0;
-      }
-      l_Counter += l_Color.a;
+    if(l_Color.a > 0.0)
+    {
+      l_Total += l_Color * l_KT;
     }
   }
-  l_Total = l_Total / max(1, l_Counter);
-  float alpha = luma(l_Total.rgb);
-  return float4(l_BaseColor * (1- alpha) + l_Total.xyz * alpha ,1);
+  
+  return l_Total;
 }
 
-technique BloomTechnique
+float4 PostProcessBloomPS(float2 _UV: TEXCOORD0) : COLOR
 {
-  pass p0
-  {
-    CullMode = CCW;
-    PixelShader = compile ps_3_0 BloomPS();
-  }
+  return tex2D(PrevFilterSampler, _UV );
+}
+
+
+
+technique HoritzontalBloomTechnique
+{
+	pass p0
+	{
+		ZEnable = false;
+		ZWriteEnable = false;
+		AlphaBlendEnable = false;
+		CullMode = CCW;
+		PixelShader = compile ps_3_0 HoritzontalBloomPS();
+	}
+}
+
+technique VerticalBloomTechnique
+{
+	pass p0
+	{
+		ZEnable = false;
+		ZWriteEnable = false;
+		AlphaBlendEnable = false;
+		CullMode = CCW;
+		PixelShader = compile ps_3_0 VerticalBloomPS();
+	}
+}
+
+technique PostProcessBloomTechnique
+{
+	pass p0
+	{
+		ZEnable = false;
+		ZWriteEnable = false;
+		AlphaBlendEnable = true;
+		SrcBlend=SrcAlpha;
+		DestBlend=InvSrcAlpha;
+		CullMode = CCW;
+		PixelShader = compile ps_3_0 PostProcessBloomPS();
+	}
 }

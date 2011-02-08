@@ -7,13 +7,29 @@
               light_shadow_cast="Spot01"
               active="true" format_type="R32F"/>
 
-  <pre_render type="render_to_texture" name="glow_scene_effect" texture="GlowTexture" width="128" height="128"
+  <pre_render type="render_to_texture" name="glow_scene_effect" texture="GlowTexture"
+              texture_size_as_frame_buffer="true"
               static_mesh_technique="RenderGlowTechnique" animated_model_technique="Cal3DGlowTechnique" format_type="A8R8G8B8" active="true"/>
-  <pre_render type="draw_quad_to_texture" name="vertical_glow_effect" texture="GlowTexture2" width="128" height="128"
-              technique="VerticalBloomTechnique" format_type="A8R8G8B8" active="true">
+
+  <pre_render type="draw_quad_to_texture" name="downsample_glow" texture="DownSampledGlow"
+              texture_size_as_frame_buffer="true" scale_size="0.5"
+              technique="DownSample4xTechnique" format_type="A8R8G8B8" active="true">
     <texture stage_id="0" texture="GlowTexture"/>
   </pre_render>
-  <pre_render type="draw_quad_to_texture" name="horitzontal_glow_effect" texture="GlowTexture3" width="128" height="128"
+  <pre_render type="draw_quad_to_texture" name="downsample_glow" texture="DownSampledGlow2"
+              texture_size_as_frame_buffer="true" scale_size="0.25"
+              technique="DownSample4xTechnique" format_type="A8R8G8B8" active="true">
+    <texture stage_id="0" texture="DownSampledGlow"/>
+  </pre_render>
+  
+  <pre_render type="draw_quad_to_texture" name="vertical_glow_effect" texture="GlowTexture2"
+              texture_size_as_frame_buffer="true" scale_size="0.25"
+              technique="VerticalBloomTechnique" format_type="A8R8G8B8" active="true">
+    <texture stage_id="0" texture="DownSampledGlow2"/>
+  </pre_render>
+  
+  <pre_render type="draw_quad_to_texture" name="horitzontal_glow_effect" texture="GlowTexture3"
+              texture_size_as_frame_buffer="true" scale_size="0.25"
               technique="HoritzontalBloomTechnique" format_type="A8R8G8B8" active="true">
     <texture stage_id="0" texture="GlowTexture2"/>
   </pre_render>
