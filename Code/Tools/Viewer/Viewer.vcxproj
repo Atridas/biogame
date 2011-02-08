@@ -18,13 +18,17 @@
     <ClInclude Include="ViewerProcess.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Run\Viewer\Data\XML\actions.xml" />
+    <None Include="..\..\..\Run\Viewer\Data\XML\actions.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="..\..\..\Run\Viewer\Data\XML\AnimatedModels.xml" />
     <None Include="..\..\..\Run\Viewer\Data\XML\Effects.xml" />
     <None Include="..\..\..\Run\Viewer\Data\XML\init_viewer.xml" />
     <None Include="..\..\..\Run\Viewer\Data\XML\Lights.xml" />
     <None Include="..\..\..\Run\Viewer\Data\XML\Lua.xml" />
-    <None Include="..\..\..\Run\Viewer\Data\XML\RenderableObjects.xml" />
+    <None Include="..\..\..\Run\Viewer\Data\XML\RenderableObjects.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="..\..\..\Run\Viewer\Data\XML\SceneEffects.xml" />
     <None Include="..\..\..\Run\Viewer\Data\XML\StaticMeshes.xml">
       <SubType>Designer</SubType>

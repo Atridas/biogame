@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <meshes>
+	<mesh name="Box01" path="Data/Meshes/Box01.mesh"/>
+	<mesh name="Sphere01" path="Data/Meshes/Sphere01.mesh"/>
 	<mesh name="Box02" path="Data/Meshes/Box02.mesh"/>
 </meshes>

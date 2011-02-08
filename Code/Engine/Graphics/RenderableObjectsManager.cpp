@@ -99,10 +99,11 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
   for(int i = 0; i < l_iNumObjects; i++)
   {
     string l_szName, l_szClass, l_szResource,l_szDefaultAnimation;
-    Vect3f l_vPos;
+    Vect3f l_vPos,l_vMin,l_vMax;
     float l_fYaw;
     float l_fPitch;
     float l_fRoll;
+    float l_fAltura;
 
     CRenderableObject* l_pRenderableObject = 0;
 
@@ -113,6 +114,9 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
     l_szResource  = l_XMLObject.GetPszISOProperty("resource" ,"");
     l_szDefaultAnimation = l_XMLObject.GetPszISOProperty("cycle" ,"");
     //l_szDefaultAnimation = l_XMLObject.GetIntProperty("cycle");
+    l_vMin        = l_XMLObject.GetVect3fProperty("Min",Vect3f(0.0f));
+    l_vMax        = l_XMLObject.GetVect3fProperty("Max",Vect3f(0.0f));
+    l_fAltura     = l_XMLObject.GetFloatProperty("Altura");
 
     l_vPos        = l_XMLObject.GetVect3fProperty("position",Vect3f(0.0f));
     l_fYaw        = l_XMLObject.GetFloatProperty("yaw") * FLOAT_PI_VALUE / 180.0f;
@@ -127,10 +131,18 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
         l_pRenderableObject = AddMeshInstance(l_szResource, l_szName);
         m_vIndexMeshes.push_back(i);
 
+        l_pRenderableObject->m_vMin = Vect3f(l_vMin.x,l_vMin.y,l_vMin.z);
+        l_pRenderableObject->m_vMax = Vect3f(l_vMax.x,l_vMax.y,l_vMax.z);
+
+
       } else if(l_szClass == "AnimatedModel") 
       {
         l_pRenderableObject = AddAnimatedModel(l_szResource, l_szName,l_szDefaultAnimation);
          m_vIndexAnimated.push_back(i);
+
+         l_pRenderableObject->m_vMin = Vect3f(l_vPos.x,l_fAltura,l_vPos.z);
+         l_pRenderableObject->m_vMax = Vect3f(l_vPos.x,l_fAltura,l_vPos.z);
+
       } else 
       {
         LOGGER->AddNewLog(ELL_WARNING,"CRenderableObjectsManager:: Object: \"%s\" has unknown \"%s\" class", l_szName.c_str(), l_szClass.c_str());

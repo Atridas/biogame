@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <RenderableObjects>
-	<RenderableObject name="Box02" class="StaticMesh" resource="Box02" position="3.83975 0.0 -1.45868" yaw="39.5606" pitch="0.0" roll="0.0"/>
-	<RenderableObject name="bot" class="AnimatedModel" resource="bot" cycle="run" position="4.79108 0.0 5.2463" yaw="0.0" pitch="0.0" roll="0.0"/>
-  <RenderableObject name="bot2" class="AnimatedModel" resource="bot" cycle="shoot" position="4.79108 0.0 5.2463" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Box01" class="StaticMesh" resource="Box01" position="-5.14577 3.8622 0.5912" yaw="0.0" pitch="0.0" roll="0.0" Min="-10.5513 3.8622 -4.7483" Max="0.259725 14.0842 5.9307"/>
+	<RenderableObject name="Sphere01" class="StaticMesh" resource="Sphere01" position="34.3717 18.8057 -11.6065" yaw="0.0" pitch="0.0" roll="0.0" Min="21.4506 5.88469 -24.5276" Max="47.2928 31.7268 1.31453"/>
+	<RenderableObject name="Box02" class="StaticMesh" resource="Box02" position="-35.3481 0.0 1.30488" yaw="0.0" pitch="0.0" roll="0.0" Min="-40.9529 0.0 -5.20733" Max="-29.7434 17.1626 7.81708"/>
+	<RenderableObject name="bot" class="AnimatedModel" resource="bot" cycle="run" position="-1.25437 0.0 38.9313" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="bot2" class="AnimatedModel" resource="bot" cycle="shoot" position="12.7953 0.0 -8.68207" yaw="-115.0" pitch="0.0" roll="0.0"/>
 </RenderableObjects>

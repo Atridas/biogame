@@ -18,9 +18,14 @@ public:
   CRenderableObject(const string& _szName):CNamed(_szName) {};
   virtual void Update(float ElapsedTime) {};
   void Render(CRenderManager *RM);
+  Vect3f m_vMax;
+  Vect3f m_vMin;
+  
 
 protected:
   virtual void RenderRenderableObject(CRenderManager *RM) = 0;
+
+private:
 };
 
 #endif

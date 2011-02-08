@@ -202,6 +202,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			
 			local l_core = GetCore _cores l_object
 			
+			
 			l_params = #(#("name",l_object.name),#("class","StaticMesh"),#("resource",l_core.name))
 		
 				
@@ -227,6 +228,19 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			format "%" l_roll to:l_aux
 			append l_params #("roll",l_aux)
 			
+			
+			-------------------------------------------
+			l_aux = "" as stringStream
+			local l_vMin = RHVectorToLH (l_object.min)
+			format "% % %" l_vMin.x l_vMin.y l_vMin.z to:l_aux
+			append l_params #("Min",l_aux)
+			
+			l_aux = "" as stringStream
+			local l_vMax = RHVectorToLH (l_object.max)
+			format "% % %" l_vMax.x l_vMax.y l_vMax.z to:l_aux
+			append l_params #("Max",l_aux)
+			--------------------------------------------
+			
 			format "\n\t" to:l_file
 			format "%" (InlineTagParamXML "RenderableObject" l_params) to:l_file
 				
@@ -239,6 +253,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			local l_object = _AnimatedModels[i]
 			local l_resource = getUserProp l_object "Resource"
 			local l_animation = getUserProp l_object "Cycle"
+			local l_altura = getUserProp l_object "Altura"
 			
 			l_params = #(#("name",l_object.name),#("class","AnimatedModel"),#("resource",l_resource),#("cycle",l_animation))
 		
@@ -263,6 +278,10 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			local l_roll = GetRoll l_object.transform
 			format "%" l_roll to:l_aux
 			append l_params #("roll",l_aux)
+			
+			l_aux = "" as stringStream
+			format "%" l_altura to:l_aux
+			append l_params #("Altura",l_aux)
 			
 			format "\n\t" to:l_file
 			format "%" (InlineTagParamXML "RenderableObject" l_params) to:l_file
