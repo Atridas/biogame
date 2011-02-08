@@ -7,8 +7,16 @@
               light_shadow_cast="Spot01"
               active="true" format_type="R32F"/>
 
-  <pre_render type="render_to_texture" name="glow_scene_effect" texture="GlowTexture" width="512" height="512"
+  <pre_render type="render_to_texture" name="glow_scene_effect" texture="GlowTexture" width="128" height="128"
               static_mesh_technique="RenderGlowTechnique" animated_model_technique="Cal3DGlowTechnique" format_type="A8R8G8B8" active="true"/>
+  <pre_render type="draw_quad_to_texture" name="vertical_glow_effect" texture="GlowTexture2" width="128" height="128"
+              technique="VerticalBloomTechnique" format_type="A8R8G8B8" active="true">
+    <texture stage_id="0" texture="GlowTexture"/>
+  </pre_render>
+  <pre_render type="draw_quad_to_texture" name="horitzontal_glow_effect" texture="GlowTexture3" width="128" height="128"
+              technique="HoritzontalBloomTechnique" format_type="A8R8G8B8" active="true">
+    <texture stage_id="0" texture="GlowTexture2"/>
+  </pre_render>
 
 
 
@@ -22,12 +30,11 @@
 
 	<capture_frame_buffer_post_fx name="capture_frame_buffer_scene_effect_with_post_fx" texture="FrameBufferTextureWithPostFX"
                                 texture_width_as_frame_buffer="true" active="true" format_type="A8R8G8B8"/-->
+  
 
-
-	<!--post_render type="draw_quad" name="post_glow" technique="PostProcessGlowTechnique" active="true">
-    <texture stage_id="0" texture="GlowTexture"/>
-    <texture stage_id="1" texture="FrameBufferTextureWithoutPostFX"/>
-  </post_render-->
+  <post_render type="draw_quad" name="post_glow" technique="PostProcessBloomTechnique" active="true">
+    <texture stage_id="0" texture="GlowTexture3"/>
+  </post_render>
   
   
   <post_render type="draw_quad" name="noise_and_vignetting_scene_effect" technique="RenderNoiseAndVignettingTechnique" active="false">
@@ -40,47 +47,6 @@
 	<!--post_render type="draw_quad" name="post_blur_scene_effect" technique="PostProcessBlurTechnique" active="true" color="1.0 1.0 1.0 0.25">
     <texture stage_id="0" texture="FrameBufferTextureWithPostFX"/>
   </post_render-->
-
-	
-  
-
-  <capture_frame_buffer name="capture400x300" texture="capture400x300" width="160" height="120" active="true" format_type="A8R8G8B8"/>
-
-	<!--post_render type="draw_quad" name="bloom_post_effect" technique="BloomTechnique" active="true" color="1.0 1.0 1.0 1.0">
-    <texture stage_id="0" texture="FrameBufferTextureWithoutPostFX"/>
-    <texture stage_id="1" texture="capture400x300"/>
-  </post_render-->
-  
-  <!--
-  <post_render type="draw_quad" name="bloom_post_effect" technique="BloomTechnique" active="true" color="1.0 1.0 1.0 1.0">
-    <texture stage_id="0" texture="FrameBufferTextureWithoutPostFX"/>
-  </post_render>
-  <capture_frame_buffer name="hdr1024" texture="HDR1024" width="1024" height="1024" active="true" format_type="A8R8G8B8"/>
-  <capture_frame_buffer name="hdr512" texture="HDR512" width="512" height="512" active="true" format_type="A8R8G8B8"/>
-  <capture_frame_buffer name="hdr256" texture="HDR256" width="256" height="256" active="true" format_type="A8R8G8B8"/>
-  <capture_frame_buffer name="hdr128" texture="HDR128" width="128" height="128" active="true" format_type="A8R8G8B8"/>
-  <capture_frame_buffer name="hdr64" texture="HDR64" width="64" height="64" active="true" format_type="A8R8G8B8"/>
-  <capture_frame_buffer name="hdr32" texture="HDR32" width="32" height="32" active="true" format_type="A8R8G8B8"/>
-  <capture_frame_buffer name="hdr16" texture="HDR16" width="16" height="16" active="true" format_type="A8R8G8B8"/>
-  <capture_frame_buffer name="hdr8" texture="HDR8" width="8" height="8" active="true" format_type="A8R8G8B8"/>
-  <capture_frame_buffer name="hdr4" texture="HDR4" width="4" height="4" active="true" format_type="A8R8G8B8"/>
-  <capture_frame_buffer name="hdr2" texture="HDR2" width="2" height="2" active="true" format_type="A8R8G8B8"/>
-  <capture_frame_buffer name="hdr1" texture="HDR1" width="1" height="1" active="true" format_type="A8R8G8B8"/>
-  <post_render type="draw_quad" name="hdr_post_effect" technique="HDRTechnique" active="true" color="1.0 1.0 1.0 1.0">
-    <texture stage_id="0" texture="FrameBufferTextureWithoutPostFX"/>
-    <texture stage_id="1" texture="HDR1"/>
-    <texture stage_id="2" texture="HDR2"/>
-    <texture stage_id="3" texture="HDR4"/>
-    <texture stage_id="4" texture="HDR8"/>
-    <texture stage_id="5" texture="HDR16"/>
-    <texture stage_id="6" texture="HDR32"/>
-    <texture stage_id="7" texture="HDR64"/>
-    <texture stage_id="8" texture="HDR128"/>
-    <texture stage_id="9" texture="HDR256"/>
-    <texture stage_id="10" texture="HDR512"/>
-    <texture stage_id="11" texture="HDR1024"/>
-  </post_render>
-  -->
   <!--            
   <pre_render type="render_to_texture" name="z_blur_scene_effect" texture="ZBlurTexture" width="1024" height="1024"
               static_mesh_technique="RenderZBlurTechnique"

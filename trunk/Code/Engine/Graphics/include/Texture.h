@@ -57,6 +57,10 @@ public:
   **/
   void Activate(size_t _StageId);
 
+  
+  uint32 GetWidth()  const {return m_uiWidth; };
+  uint32 GetHeight() const {return m_uiHeight;};
+
   enum TPoolType {
     DEFAULT=0,
     SYSTEMMEM
