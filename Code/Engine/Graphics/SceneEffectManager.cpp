@@ -8,6 +8,7 @@
 #include "ShadowMapRenderToTexture.h"
 #include "RenderToTextureSceneEffect.h"
 #include "RenderTextureSceneEffect.h"
+#include "DrawQuadToTextureSceneEffect.h"
 
 CSceneEffectManager::CSceneEffectManager(void)
 {
@@ -94,6 +95,9 @@ bool CSceneEffectManager::Load()
       } else if(l_szType == "render_to_texture")
       {
         l_pSceneEffect = new CRenderToTextureSceneEffect();
+      } else if(l_szType == "draw_quad_to_texture")
+      {
+        l_pSceneEffect = new CDrawQuadToTextureSceneEffect();
       } else
       {
         LOGGER->AddNewLog(ELL_WARNING,"CSceneEffectManager::Load  type de pre-render incorrecte o no trobat \"%s\".", l_szType.c_str());

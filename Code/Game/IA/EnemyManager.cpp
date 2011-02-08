@@ -27,7 +27,7 @@ bool CEnemyManager::Load()
     LOGGER->AddNewLog(ELL_WARNING,"CEnemyManager::Load() No s'ha trobat el XML.");
     SetOk(false);
     Release();
-    return IsOk;
+    return IsOk();
   }
 
   int l_iNumChildren = l_treeIA.GetNumChildren();

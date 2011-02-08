@@ -1,4 +1,6 @@
 #pragma once
+
+#include "Enemy.h"
 class CMilitar:
   public CEnemy
 {

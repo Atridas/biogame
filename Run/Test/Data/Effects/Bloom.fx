@@ -3,16 +3,25 @@
 
 // Optimització per separabilitat -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-float g_XIncrementTexture = 1/512.0;
-float g_YIncrementTexture = 1/512.0;
-#define GLOW_KERNEL_HALF 4
+float g_XIncrementTexture = 1/128.0;
+float g_YIncrementTexture = 1/128.0;
+
 //Triangle de pascal / tartaglia nivell 7
 // 1   6  15  20   15  6   1       +++ => 64
-float g_GaussianKernel[GLOW_KERNEL_HALF] = {0.315, 0.234375 , 0.09375, 0.015625};
+//#define GLOW_KERNEL_HALF 4
+//float g_GaussianKernel[GLOW_KERNEL_HALF] = {0.315, 0.234375 , 0.09375, 0.015625};
+
+//       1
+//     1 1
+//    1 2 1
+//  1 3 3 1
+//1 4 6 4 1   => 16
+#define GLOW_KERNEL_HALF 3
+float g_GaussianKernel[GLOW_KERNEL_HALF] = {0.375 , 0.25, 0.0625};
 
 float4 VerticalBloomPS(float2 _UV: TEXCOORD0) : COLOR
 {
-  float4 l_Total = 0;
+  float4 l_Total = float4(0, 0, 0, 0);
   for(int i = - (GLOW_KERNEL_HALF-1) ; i < (GLOW_KERNEL_HALF); i++)
   {
     float l_XTextureInc = 0;//i * g_XIncrementTexture;
@@ -20,8 +29,9 @@ float4 VerticalBloomPS(float2 _UV: TEXCOORD0) : COLOR
     
     float l_KT = g_GaussianKernel[abs(i)];
     float4 l_Color = tex2D(DiffuseTextureSampler, _UV + float2(l_XTextureInc,l_YTextureInc));
-      
-    l_Total += l_Color * l_KT;
+    
+    if(l_Color.a > 0.0)
+      l_Total += l_Color * l_KT;
   }
   return l_Total;
   //return l_Original + l_Total * l_Total.a;
@@ -29,7 +39,8 @@ float4 VerticalBloomPS(float2 _UV: TEXCOORD0) : COLOR
 
 float4 HoritzontalBloomPS(float2 _UV: TEXCOORD0) : COLOR
 {
-  float4 l_Total = 0;
+  float4 l_Total = float4(0, 0, 0, 0);
+  int l_count = 0;
   for(int i = - (GLOW_KERNEL_HALF-1) ; i < (GLOW_KERNEL_HALF); i++)
   {
     float l_XTextureInc = i * g_XIncrementTexture;
@@ -38,10 +49,14 @@ float4 HoritzontalBloomPS(float2 _UV: TEXCOORD0) : COLOR
     float l_KT = g_GaussianKernel[abs(i)];
     float4 l_Color = tex2D(DiffuseTextureSampler, _UV + float2(l_XTextureInc,l_YTextureInc));
       
-    l_Total += l_Color * l_KT;
+    if(l_Color.a > 0.0)
+    {
+      l_Total += l_Color * l_KT;
+      l_count++;
+    }
   }
+  
   return l_Total;
-  //return l_Original + l_Total * l_Total.a;
 }
 
 float4 PostProcessBloomPS(float2 _UV: TEXCOORD0) : COLOR
