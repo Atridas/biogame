@@ -104,11 +104,11 @@ void CViewerProcess::Update(float _fElapsedTime)
   {
     m_pObjectBot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObjectBot->GetPosition().y, m_pObject->GetPosition().z));
     m_pObjectBot->SetYaw(m_pObject->GetYaw()-FLOAT_PI_VALUE/2.0f);
-    l_fPitch = m_pObjectBot->GetPitch();
+    l_fPitch = m_pObject->GetPitch();
     l_fYaw = m_pObjectBot->GetYaw();
     l_fYaw = l_fYaw+FLOAT_PI_VALUE/2;
     if (l_Spot != 0)
-    l_Spot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObjectBot->GetPosition().y, m_pObject->GetPosition().z));
+    l_Spot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObject->GetPosition().y, m_pObject->GetPosition().z));
 
     Vect3f l_vec(cos(l_fYaw) * cos(l_fPitch), sin(l_fPitch),sin(l_fYaw) * cos(l_fPitch) );
     l_Spot->SetDirection(Vect3f(l_vec.x,l_vec.y,l_vec.z));
@@ -303,11 +303,11 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
 
       if (l_vDelta.z < 0)
       {
-        l_pCam->AddZoom(0.2f);
+        l_pCam->AddZoom(0.4f);
       }
       else
       {
-        l_pCam->AddZoom(-0.2f);
+        l_pCam->AddZoom(-0.4f);
       }
 
     }

@@ -92,7 +92,7 @@ void CTestProcess::Update(float _fElapsedTime)
 
   m_pObjectBot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObjectBot->GetPosition().y, m_pObject->GetPosition().z));
   
-  l_fPitch = m_pObjectBot->GetPitch();
+  l_fPitch = m_pObject->GetPitch();
   //l_fPitch = l_fPitch+FLOAT_PI_VALUE/2;
   l_fYaw = m_pObjectBot->GetYaw();
   l_fYaw = l_fYaw+FLOAT_PI_VALUE/2;
