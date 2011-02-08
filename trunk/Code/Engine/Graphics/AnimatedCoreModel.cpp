@@ -145,7 +145,7 @@ bool CAnimatedCoreModel::Load(const std::string &_szPath)
     LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load No s'ha trobat l'arxiu");
   }
 
-
+  m_iAnimationCount = m_pCalCoreModel->getCoreAnimationCount();
   return IsOk();
 }
 

@@ -11,6 +11,11 @@
 //Forward declarations---------------------
 class CObject3D;
 class CRenderManager;
+class CalModel;
+class CalCoreModel;
+class CalHardwareModel;
+class CRenderableVertexs;
+class CEffectMaterial;
 //-----------------------------------------
 
 class CViewerProcess:
