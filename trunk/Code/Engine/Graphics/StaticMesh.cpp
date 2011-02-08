@@ -104,6 +104,8 @@ bool CStaticMesh::Load(const string &_szFileName)
 
     char* l_pVertexBuffer = new char[l_VertexCount*l_usVertexSize];
     l_File.read(&l_pVertexBuffer[0], l_usVertexSize*l_VertexCount);
+
+    
   
   
     uint32 l_IndexCount;
@@ -121,6 +123,8 @@ bool CStaticMesh::Load(const string &_szFileName)
 
     //CIndexedVertexs<SNORMALTEXTUREDVERTEX> *l_IndexedVertexs=new CIndexedVertexs<SNORMALTEXTUREDVERTEX>(RENDER_MANAGER, (SNORMALTEXTUREDVERTEX*)l_pVertexBuffer, l_pIndexList, l_VertexCount, l_IndexCount);
     CRenderableVertexs* l_RenderableVertexs = 0;
+
+    
 
     if(l_pusVertexType[i] == SNORMALTEXTUREDVERTEX::GetVertexType())
     {

@@ -34,6 +34,7 @@ public:
 	void					        DebugInformation        (float FPS);
   void                  RenderScene             (CRenderManager* _pRM);
   void                  RenderINFO              (CRenderManager* _pRM);
+  float                 GetZoomMesh             (Vect3f _vMax,Vect3f _vCentre);
 
   virtual bool          ExecuteProcessAction      (float _fDeltaSeconds, float _fDelta, const char* _pcAction);
 
