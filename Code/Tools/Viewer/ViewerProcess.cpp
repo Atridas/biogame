@@ -21,6 +21,8 @@
 #include <LightManager.h>
 #include <sstream>
 #include "SpotLight.h"
+//#include "cal3d.h"
+
 
 
 bool CViewerProcess::Init()
@@ -379,9 +381,54 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
       l_pROM->SetAllVisible(false,l_pROM->m_vIndexAnimated[m_iAnimat]);
     }
 
-
-
     return true;
+  }
+
+
+  //En el cas que canviem d'animacio!!!!
+  if(strcmp(_pcAction, "CanviAnimacioUP") == 0)
+  {
+    if (m_iMode == MODE_ANIMATS)
+    {
+      CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
+      CRenderableAnimatedInstanceModel* l_RenderModel = (CRenderableAnimatedInstanceModel*)l_pROM->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat]);
+      int l_iNumAnimations = l_RenderModel->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetAnimationCount();
+      int l_iCurrentCycle = l_RenderModel->GetAnimatedInstanceModel()->GetCurrentCycle();
+
+      l_iCurrentCycle++;
+
+      if (l_iCurrentCycle == l_iNumAnimations)
+      {
+        l_iCurrentCycle = 0;
+      }
+      l_RenderModel->GetAnimatedInstanceModel()->ClearCycle(0);
+      l_RenderModel->GetAnimatedInstanceModel()->BlendCycle(l_iCurrentCycle,0);
+    }
+
+  }
+
+
+  if(strcmp(_pcAction, "CanviAnimacioDOWN") == 0)
+  {
+    if (m_iMode == MODE_ANIMATS)
+    {
+      CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
+      //CRenderableObject* l_pAnimatedInstance = l_pROM->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat]);
+      CRenderableAnimatedInstanceModel* l_RenderModel = (CRenderableAnimatedInstanceModel*)l_pROM->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat]);
+      int l_iNumAnimations = l_RenderModel->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetAnimationCount();
+      int l_iCurrentCycle = l_RenderModel->GetAnimatedInstanceModel()->GetCurrentCycle();
+
+      l_iCurrentCycle--;
+
+      if (l_iCurrentCycle == -1)
+      {
+        l_iCurrentCycle = l_iNumAnimations-1;
+      }
+
+      l_RenderModel->GetAnimatedInstanceModel()->ClearCycle(0);
+      l_RenderModel->GetAnimatedInstanceModel()->BlendCycle(l_iCurrentCycle,0);
+    }
+
   }
 
   return false;
@@ -399,7 +446,6 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
   string l_szMsg3("Mode Escena");
   CRenderableObject* l_pMeshInstance = l_pROM->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh]);
   CRenderableObject* l_pAnimatedInstance = l_pROM->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat]);
-
   stringstream l_SStream;
   
 
@@ -420,13 +466,15 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
       l_SStream << "Yaw: " << (float)l_pMeshInstance->GetYaw() << endl;
       l_SStream << "Pitch: " << (float)l_pMeshInstance->GetPitch() << endl;
       l_SStream << "Roll: " << (float)l_pMeshInstance->GetRoll() << endl;
-      FONT_MANAGER->DrawText(0,400,colGREEN,l_uiFontType,l_SStream.str().c_str());
+      FONT_MANAGER->DrawText(0,300,colGREEN,l_uiFontType,l_SStream.str().c_str());
 
 
       break;
 
     case MODE_ANIMATS:
       FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontType,l_szMsg.c_str());
+
+      CRenderableAnimatedInstanceModel* l_RenderModel = (CRenderableAnimatedInstanceModel*)l_pROM->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat]);
 
       l_SStream << "Nom: " << l_pAnimatedInstance->GetName() << endl;
       l_SStream << "Tipus: AnimatedModel" << endl;
@@ -436,7 +484,8 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
       l_SStream << "Yaw: " << (float)l_pAnimatedInstance->GetYaw() << endl;
       l_SStream << "Pitch: " << (float)l_pAnimatedInstance->GetPitch() << endl;
       l_SStream << "Roll: " << (float)l_pAnimatedInstance->GetRoll() << endl;
-      FONT_MANAGER->DrawText(0,400,colGREEN,l_uiFontType,l_SStream.str().c_str());
+      l_SStream << "Animacio: " << (int)l_RenderModel->GetAnimatedInstanceModel()->GetCurrentCycle() << endl;
+      FONT_MANAGER->DrawText(0,300,colGREEN,l_uiFontType,l_SStream.str().c_str());
 
       break; 
   }

@@ -17,6 +17,7 @@ bool CEnemyManager::Load(const string &_szFileName)
   return Load();
 }
 
+/*
 bool CEnemyManager::Load()
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "CEnemyManager::Load() Carregant el fitxer \"%s\"", m_szFileName.c_str());
@@ -98,5 +99,5 @@ bool CEnemyManager::Load()
   SetOk(true);
   return IsOk();
 }
-
+*/
      
