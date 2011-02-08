@@ -3,6 +3,7 @@
 #include "Core.h"
 #include "TextureManager.h"
 #include "Texture.h"
+#include "EffectMaterial.h"
 #include "XML/XMLTreeNode.h"
 
 bool CRenderTextureSceneEffect::Init(const CXMLTreeNode& _params)
@@ -12,13 +13,15 @@ bool CRenderTextureSceneEffect::Init(const CXMLTreeNode& _params)
   if(!CSceneEffect::Init(_params))
     return false;
 
+
   m_pTexture = new CTexture();
   string l_szTexture = _params.GetPszISOProperty("texture","");
   uint32 l_iWidth, l_iHeight;
-  if(_params.GetBoolProperty("texture_width_as_frame_buffer",false))
+  if(_params.GetBoolProperty("texture_size_as_frame_buffer",false))
   {
-    l_iWidth  = RENDER_MANAGER->GetScreenWidth();
-    l_iHeight = RENDER_MANAGER->GetScreenHeight();
+    float l_fScaleSize = _params.GetFloatProperty("scale_size", 1.0f);
+    l_iWidth  = (uint32)((float)RENDER_MANAGER->GetScreenWidth()  * l_fScaleSize);
+    l_iHeight = (uint32)((float)RENDER_MANAGER->GetScreenHeight() * l_fScaleSize);
   } else
   {
     l_iWidth  = _params.GetIntProperty("width");
@@ -57,7 +60,15 @@ bool CRenderTextureSceneEffect::Init(const CXMLTreeNode& _params)
     if(!m_pSurface)
       LOGGER->AddNewLog(ELL_ERROR, "CRenderTextureSceneEffect::CRenderTextureSceneEffect  Surface is not Ok.");
     SetOk(false);
-    CHECKED_DELETE(m_pTexture)
+    CHECKED_DELETE(m_pTexture);
+  }
+
+  if(IsOk())
+  {
+    m_pEffectMaterial = new CEffectMaterial();
+    m_pEffectMaterial->Init();
+    m_pEffectMaterial->SetTextureWidth(l_iWidth);
+    m_pEffectMaterial->SetTextureHeight(l_iHeight);
   }
 
   return IsOk();
@@ -83,4 +94,5 @@ void CRenderTextureSceneEffect::CaptureFrameBuffers(CRenderManager* _pRM)
 void CRenderTextureSceneEffect::Release()
 {
   CSceneEffect::Release();
+  CHECKED_DELETE(m_pEffectMaterial);
 }

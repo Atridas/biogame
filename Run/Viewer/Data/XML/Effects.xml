@@ -10,6 +10,7 @@
     <effect name="HDR" file="Data/Effects/HDR.fx"/>
     <effect name="Glow" file="Data/Effects/Glow.fx"/>
     <effect name="Blur" file="Data/Effects/Blur.fx"/>
+    <effect name="Down Samples" file="Data/Effects/Downsampling.fx"/>
     <!-- effect name=.../-->
     <!-- effect name=.../-->
   </effects>
@@ -64,10 +65,10 @@
     <technique name="LightmapTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
     <technique name="ShowNormalmapTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
     <technique name="ShowFlatNormalmapTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
-    <technique name="NormalTexturedTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true"
+    <technique name="NormalTexturedTechnique"                effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true"
                use_lights="true" num_of_lights="4" use_camera_position="true"
                use_view_to_light_projection_matrix="true" use_world_view_matrix="true"/>
-    <technique name="NormalDiffusedTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true"
+    <technique name="NormalDiffusedTechnique"                effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true"
                use_lights="true" num_of_lights="4" use_camera_position="true"
                use_view_to_light_projection_matrix="true" use_world_view_matrix="true"/>
     <technique name="TangentBinormalNormalTexturedTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true"
@@ -79,10 +80,16 @@
 
     <!-- SCENE EFFECTS -->
     <technique name="RenderNoiseAndVignettingTechnique" effect="Noise And Vignetting" use_time="true"/>
-    <technique name="BloomTechnique" effect="Bloom"/>
+    <!--<technique name="BloomTechnique" effect="Bloom"/> -->
     <technique name="HDRTechnique" effect="HDR"/>
     <technique name="PostProcessGlowTechnique"  effect="Glow"/>
     <technique name="PostProcessBlurTechnique"  effect="Blur"/>
+
+    <technique name="DownSample4xTechnique" effect="Down Samples" use_texture_size="true"/>
+
+    <technique name="HoritzontalBloomTechnique" effect="Bloom" use_texture_size="true"/>
+    <technique name="VerticalBloomTechnique" effect="Bloom" use_texture_size="true"/>
+    <technique name="PostProcessBloomTechnique" effect="Bloom"/>
 
     <technique name="RenderShadowTechnique" effect="Shadows" use_world_view_projection_matrix="true"/>
     <technique name="Cal3DTechniqueShadow"  effect="Shadows" use_world_view_projection_matrix="true" animated="true"/>
@@ -90,5 +97,7 @@
     <technique name="RenderGlowTechnique" effect="Glow" use_world_view_projection_matrix="true" glow_active="true"/>
     <technique name="Cal3DGlowTechnique"  effect="Glow" use_world_view_projection_matrix="true" glow_active="true" animated="true"/>
 
+
+    
   </techniques>
 </shaders>

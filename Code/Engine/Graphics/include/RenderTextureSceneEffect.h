@@ -10,13 +10,14 @@
 class MKeyValue;
 class CRenderManager;
 class CTexture;
+class CEffectMaterial;
 //---------------------------------
 
 class CRenderTextureSceneEffect :
   public CSceneEffect
 {
 public:
-  CRenderTextureSceneEffect(): m_pTexture(0), m_pSurface(0) {};
+  CRenderTextureSceneEffect(): m_pTexture(0), m_pSurface(0), m_pEffectMaterial(0) {};
   ~CRenderTextureSceneEffect() {Done();};
 
   virtual bool Init(const CXMLTreeNode& _params);
@@ -26,6 +27,7 @@ public:
 protected:
   CTexture* m_pTexture;
   LPDIRECT3DSURFACE9 m_pSurface;
+  CEffectMaterial* m_pEffectMaterial;
 
   void Release();
 };

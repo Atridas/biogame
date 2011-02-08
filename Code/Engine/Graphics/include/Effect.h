@@ -68,6 +68,7 @@ private:
   D3DXHANDLE m_pBonesParameter;
   D3DXHANDLE m_pTimeParameter;
   D3DXHANDLE m_pGlowActive;
+  D3DXHANDLE m_pTextureWidth, m_pTextureHeight; 
   
   D3DXHANDLE m_pShadowsEnabledParameter;
 

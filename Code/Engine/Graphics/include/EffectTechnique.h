@@ -34,6 +34,7 @@ public:
                       m_bUseViewToLightProjectionMatrix(false),
                       m_bUseTime(false),
                       m_bGlowActive(false),
+                      m_bUseTextureSize(false),
                       m_iNumOfLights(0),
                       m_pEffect(0),
                       m_pD3DTechnique(0)
@@ -71,6 +72,7 @@ private:
 
   bool m_bUseCameraPosition;
   bool m_bUseTime;
+  bool m_bUseTextureSize;
 
   CEffect* m_pEffect;
   D3DXHANDLE m_pD3DTechnique;

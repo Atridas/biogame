@@ -6,6 +6,7 @@
 #include "EffectTechnique.h"
 #include "Texture.h"
 #include "TextureManager.h"
+#include "EffectMaterial.h"
 
 bool CDrawQuadSceneEffect::Init(const CXMLTreeNode& _params)
 {
@@ -34,6 +35,9 @@ bool CDrawQuadSceneEffect::Init(const CXMLTreeNode& _params)
     SetOk(true);
   }
 
+  m_pEffectMaterial = new CEffectMaterial();
+  m_pEffectMaterial->Init();
+
   return IsOk();
 }
 
@@ -45,7 +49,7 @@ void CDrawQuadSceneEffect::PostRender(CRenderManager *_pRM)
     uint32 w = _pRM->GetScreenWidth();
     uint32 h = _pRM->GetScreenHeight();
 
-    m_pTechnique->BeginRender(0);
+    m_pTechnique->BeginRender(m_pEffectMaterial);
     ActivateTextures();
     LPD3DXEFFECT l_Effect=m_pTechnique->GetEffect()->GetD3DEffect();
     if(l_Effect!=NULL)
@@ -67,4 +71,5 @@ void CDrawQuadSceneEffect::PostRender(CRenderManager *_pRM)
 void CDrawQuadSceneEffect::Release()
 {
   CSceneEffect::Release();
+  CHECKED_DELETE(m_pEffectMaterial);
 }

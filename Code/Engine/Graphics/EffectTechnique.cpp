@@ -35,6 +35,7 @@ void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
   m_bUseTime = _XMLParams.GetBoolProperty("use_time");
   m_bAnimated = _XMLParams.GetBoolProperty("animated");
   m_bGlowActive = _XMLParams.GetBoolProperty("glow_active");
+  m_bUseTextureSize = _XMLParams.GetBoolProperty("use_texture_size");
 
   //integers
   m_iNumOfLights= _XMLParams.GetIntProperty("num_of_lights",0);
@@ -162,12 +163,22 @@ bool CEffectTechnique::BeginRender(const CEffectMaterial* _pMaterial)
     }
     if(m_bGlowActive)
     {
-      if(_pMaterial && _pMaterial->IsOk())
+      if(_pMaterial)
       {
+        assert(_pMaterial->IsOk());
         bool l_glowActive = (_pMaterial->GetTextureMask() & TEXTURE_TYPE_GLOW) != 0;
         l_pD3DEffect->SetBool(m_pEffect->m_pGlowActive, l_glowActive);
       } else {
         l_pD3DEffect->SetBool(m_pEffect->m_pGlowActive, false);
+      }
+    }
+    if(m_bUseTextureSize)
+    {
+      if(_pMaterial)
+      {
+        assert(_pMaterial->IsOk());
+        l_pD3DEffect->SetInt(m_pEffect->m_pTextureWidth,  _pMaterial->GetTextureWidth() );
+        l_pD3DEffect->SetInt(m_pEffect->m_pTextureHeight, _pMaterial->GetTextureHeight());
       }
     }
   } else {
