@@ -19,6 +19,7 @@
 #include "VertexsStructs.h"
 
 #include <LightManager.h>
+#include <sstream>
 #include "SpotLight.h"
 
 
@@ -147,25 +148,9 @@ void CViewerProcess::RenderScene(CRenderManager* _pRM)
   _pRM->DrawAxis();
 
 
-  //text
-  uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");
-  string l_szMsg("Mode Animats");
-  string l_szMsg2("Mode Meshes");
-  string l_szMsg3("Mode Escena");
-
-  switch (m_iMode)
+  if (getRenderInfo())
   {
-    case MODE_ESCENA:
-      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontType,l_szMsg3.c_str());
-      break;
-
-    case MODE_MESH:
-      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontType,l_szMsg2.c_str());
-      break;
-
-    case MODE_ANIMATS:
-      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontType,l_szMsg.c_str());
-      break; 
+    RenderINFO(_pRM);
   }
 }
 
@@ -403,17 +388,69 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
 }
 
 
-void CViewerProcess::RenderINFO(CRenderManager* _pRM, int _iMode)
+void CViewerProcess::RenderINFO(CRenderManager* _pRM)
 {
-  if (_iMode == MODE_ANIMATS)
-  {
-    CAnimatedModelManager* l_pAMM = _pRM->GetAnimatedModelManager();
+  CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
 
-  }
-  else if (_iMode == MODE_MESH)
+   //text
+  uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");
+  string l_szMsg("Mode Animats");
+  string l_szMsg2("Mode Meshes");
+  string l_szMsg3("Mode Escena");
+  CRenderableObject* l_pMeshInstance = l_pROM->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh]);
+  CRenderableObject* l_pAnimatedInstance = l_pROM->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat]);
+
+  stringstream l_SStream;
+  
+
+  switch (m_iMode)
   {
-    CStaticMeshManager* l_pSMM = _pRM->GetStaticMeshManager();
-  
-  
+    case MODE_ESCENA:
+      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontType,l_szMsg3.c_str());
+      break;
+
+    case MODE_MESH:
+      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontType,l_szMsg2.c_str());
+
+      l_SStream << "Nom: " << l_pMeshInstance->GetName() << endl;
+      l_SStream << "Tipus: StaticMesh" << endl;
+      l_SStream << "Posicio: " << (float)l_pMeshInstance->GetPosition().x << " ";
+      l_SStream << (float)l_pMeshInstance->GetPosition().y << " ";
+      l_SStream << (float)l_pMeshInstance->GetPosition().y << endl;
+      l_SStream << "Yaw: " << (float)l_pMeshInstance->GetYaw() << endl;
+      l_SStream << "Pitch: " << (float)l_pMeshInstance->GetPitch() << endl;
+      l_SStream << "Roll: " << (float)l_pMeshInstance->GetRoll() << endl;
+      FONT_MANAGER->DrawText(0,400,colGREEN,l_uiFontType,l_SStream.str().c_str());
+
+
+      break;
+
+    case MODE_ANIMATS:
+      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontType,l_szMsg.c_str());
+
+      l_SStream << "Nom: " << l_pAnimatedInstance->GetName() << endl;
+      l_SStream << "Tipus: AnimatedModel" << endl;
+      l_SStream << "Posicio: " << (float)l_pAnimatedInstance->GetPosition().x << " ";
+      l_SStream << (float)l_pAnimatedInstance->GetPosition().y << " ";
+      l_SStream << (float)l_pAnimatedInstance->GetPosition().y << endl;
+      l_SStream << "Yaw: " << (float)l_pAnimatedInstance->GetYaw() << endl;
+      l_SStream << "Pitch: " << (float)l_pAnimatedInstance->GetPitch() << endl;
+      l_SStream << "Roll: " << (float)l_pAnimatedInstance->GetRoll() << endl;
+      FONT_MANAGER->DrawText(0,400,colGREEN,l_uiFontType,l_SStream.str().c_str());
+
+      break; 
   }
+
+
+  //if (m_iMode == MODE_ANIMATS)
+  //{
+  //  //CAnimatedModelManager* l_pAMM = _pRM->GetAnimatedModelManager();
+
+  //}
+  //else if (m_iMode == MODE_MESH)
+  //{
+  //  //CStaticMeshManager* l_pSMM = _pRM->GetStaticMeshManager();
+  //
+  //
+  //}
 }

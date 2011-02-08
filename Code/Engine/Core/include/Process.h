@@ -109,6 +109,7 @@ public:
    * @return True si l'acció existeix. False si no.
   **/
   virtual bool          ExecuteProcessAction      (float _fDeltaSeconds, float _fDelta, const char* _pcAction) = 0;
+  bool getRenderInfo() {return m_bRenderInfo;}
 
 protected:
 
