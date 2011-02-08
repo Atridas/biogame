@@ -90,7 +90,6 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Caracteristiques.h" />
     <ClInclude Include="include\Enemy.h" />
     <ClInclude Include="include\EnemyManager.h" />
     <ClInclude Include="include\Militar.h" />
@@ -98,7 +97,6 @@
     <ClInclude Include="include\Vigia.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Caracteristiques.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="Militar.cpp" />

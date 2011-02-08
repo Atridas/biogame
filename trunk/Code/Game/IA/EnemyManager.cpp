@@ -17,7 +17,7 @@ bool CEnemyManager::Load(const string &_szFileName)
   return Load();
 }
 
-/*
+
 bool CEnemyManager::Load()
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "CEnemyManager::Load() Carregant el fitxer \"%s\"", m_szFileName.c_str());
@@ -41,25 +41,24 @@ bool CEnemyManager::Load()
 	//------------ENEMY TEMPLATE------------------------------
 	if(strcmp(l_XMLIA.GetName(),"enemy_template") == 0) 
     {
-      string l_szType = l_treeIA.GetPszISOProperty("id", "");
+      string l_szType = l_XMLIA.GetPszISOProperty("type", "");
       
       
       if(l_szType == "MILITAR")
       {
-		CMilitar* l_pMilitar = new CMilitar(l_szType);
-		l_pMilitar->Init(l_XMLIA);
-		AddResource(l_pMilitar->GetName(),l_pMilitar);
-        
+		    CMilitar* l_pMilitar = new CMilitar(l_szType);
+		    l_pMilitar->InitTemplate(l_XMLIA);
+		    AddResource(l_pMilitar->GetName(),l_pMilitar);
       } else if(l_szType == "MINER")
       {
         CMiner* l_pMiner = new CMiner(l_szType);
-		l_pMiner->Init(l_XMLIA);
-		AddResource(l_pMiner->GetName(),l_pMiner);
+		    l_pMiner->InitTemplate(l_XMLIA);
+		    AddResource(l_pMiner->GetName(),l_pMiner);
       } else if(l_szType == "VIGIA")
       {
         CVigia* l_pVigia = new CVigia(l_szType);
-		l_pVigia->Init(l_XMLIA);
-		AddResource(l_pVigia->GetName(),l_pVigia);
+		    l_pVigia->InitTemplate(l_XMLIA);
+		    AddResource(l_pVigia->GetName(),l_pVigia);
       } else
       {
         LOGGER->AddNewLog(ELL_WARNING,"CEnemyManager::Load  type de pre-enemy_instance incorrecte o no trobat \"%s\".", l_szType.c_str());
@@ -70,28 +69,26 @@ bool CEnemyManager::Load()
     if(strcmp(l_XMLIA.GetName(),"enemy_instance") == 0) 
     {
       
-      string l_szType = l_treeIA.GetPszISOProperty("type", "");
-      
-      
+      string l_szType = l_XMLIA.GetPszISOProperty("type", "");
       if(l_szType == "MILITAR")
       {
-		CMilitar* l_pMilitar = new CMilitar(l_szType);
-		l_pMilitar->Init(l_XMLIA);
-		AddResource(l_pMilitar->GetName(),l_pMilitar);
+		    CMilitar* l_pMilitar = new CMilitar(l_szType);
+		    l_pMilitar->InitInstance(l_XMLIA);
+		    AddResource(l_pMilitar->GetName(),l_pMilitar);
         
       } else if(l_szType == "MINER")
       {
         CMiner* l_pMiner = new CMiner(l_szType);
-		l_pMiner->Init(l_XMLIA);
-		AddResource(l_pMiner->GetName(),l_pMiner);
+		    l_pMiner->InitInstance(l_XMLIA);
+		    AddResource(l_pMiner->GetName(),l_pMiner);
       } else if(l_szType == "VIGIA")
       {
         CVigia* l_pVigia = new CVigia(l_szType);
-		l_pVigia->Init(l_XMLIA);
-		AddResource(l_pVigia->GetName(),l_pVigia);
+		    l_pVigia->InitInstance(l_XMLIA);
+		    AddResource(l_pVigia->GetName(),l_pVigia);
       } else
       {
-        LOGGER->AddNewLog(ELL_WARNING,"CEnemyManager::Load  type de pre-enemy_instance incorrecte o no trobat \"%s\".", l_szType.c_str());
+        LOGGER->AddNewLog(ELL_WARNING,"CEnemyManager::Load  type de enemy_instance incorrecte o no trobat \"%s\".", l_szType.c_str());
         continue;
       }
     }
@@ -99,5 +96,5 @@ bool CEnemyManager::Load()
   SetOk(true);
   return IsOk();
 }
-*/
+
      

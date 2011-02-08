@@ -4,9 +4,6 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Caracteristiques">
-      <UniqueIdentifier>{84578ec3-1d55-47ef-a03f-d97346e91379}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Estats">
       <UniqueIdentifier>{56eaa720-15fd-45ce-be6a-5ec95fc3b24c}</UniqueIdentifier>
     </Filter>
@@ -27,9 +24,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\Caracteristiques.h">
-      <Filter>Caracteristiques</Filter>
-    </ClInclude>
     <ClInclude Include="include\EnemyManager.h">
       <Filter>Enemy\EnemyManager</Filter>
     </ClInclude>
@@ -47,9 +41,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Caracteristiques.cpp">
-      <Filter>Caracteristiques</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyManager.cpp">
       <Filter>Enemy\EnemyManager</Filter>
     </ClCompile>
