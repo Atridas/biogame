@@ -2,7 +2,7 @@
 #ifndef __RENDERABLEOBJECT_H__
 #define __RENDERABLEOBJECT_H__
 
-#include "Object3D.h"
+#include "Utils/Object3D.h"
 #include "Named.h"
 
 //forward declarations---------------

@@ -76,6 +76,9 @@
     <Filter Include="Utils\Bounding\BoundingSphere">
       <UniqueIdentifier>{45c2bbfb-73b9-41aa-90f6-364327ce4f04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils\Object3D">
+      <UniqueIdentifier>{c9a51843-deb5-4e5d-827b-33c166e4a464}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathConstants.cpp">
@@ -119,6 +122,9 @@
     </ClCompile>
     <ClCompile Include="Utils\BoundingSphere.cpp">
       <Filter>Utils\Bounding\BoundingSphere</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Object3D.cpp">
+      <Filter>Utils\Object3D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +212,9 @@
     </ClInclude>
     <ClInclude Include="include\Utils\BoundingSphere.h">
       <Filter>Utils\Bounding\BoundingSphere</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\Object3D.h">
+      <Filter>Utils\Object3D</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
