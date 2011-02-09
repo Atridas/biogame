@@ -90,17 +90,27 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Attack.h" />
     <ClInclude Include="include\Enemy.h" />
+    <ClInclude Include="include\EnemyInstance.h" />
     <ClInclude Include="include\EnemyManager.h" />
     <ClInclude Include="include\Militar.h" />
     <ClInclude Include="include\Miner.h" />
+    <ClInclude Include="include\Patrol.h" />
+    <ClInclude Include="include\State.h" />
+    <ClInclude Include="include\StateMachine.h" />
     <ClInclude Include="include\Vigia.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Attack.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyInstance.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="Militar.cpp" />
     <ClCompile Include="Miner.cpp" />
+    <ClCompile Include="Patrol.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="Vigia.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

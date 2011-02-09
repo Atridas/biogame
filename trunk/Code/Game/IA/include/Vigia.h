@@ -3,14 +3,14 @@
 #ifndef __VIGIA_H__
 #define __VIGIA_H__
 
-#include "Enemy.h"
+#include "EnemyInstance.h"
 
 
-class CVigia: public CEnemy
+class CVigia: public CEnemyInstance
 {
 public:
 
-  CVigia(const string& _name) : CEnemy(_name),
+  CVigia(const string& _name) : CEnemyInstance(_name),
                                   m_fAlarmActivate(false),
                                   m_fEscudoActivate(false)
                                   {m_Type = CEnemy::MINER;};

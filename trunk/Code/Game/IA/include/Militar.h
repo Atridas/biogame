@@ -3,13 +3,13 @@
 #ifndef __MILITAR_H__
 #define __MILITAR_H__
 
-#include "Enemy.h"
+#include "EnemyInstance.h"
 
-class CMilitar: public CEnemy
+class CMilitar: public CEnemyInstance
 {
 public:
 
-  CMilitar(const string& _name) : CEnemy(_name),
+  CMilitar(const string& _name) : CEnemyInstance(_name),
                                   m_fRotateSpeed(0.0f)
                                   {m_Type = CEnemy::MILITAR;};
 

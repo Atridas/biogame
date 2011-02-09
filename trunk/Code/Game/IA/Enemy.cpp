@@ -1,7 +1,7 @@
 #include "Enemy.h"
 
 
-void CEnemy::Init(CXMLTreeNode& _XMLParams)
+void CEnemy::InitTemplate(CXMLTreeNode& _XMLParams)
 {
     SetName(_XMLParams.GetPszProperty("name" ,""));
     
@@ -14,9 +14,10 @@ void CEnemy::Init(CXMLTreeNode& _XMLParams)
     m_fViewAngle = (_XMLParams.GetFloatProperty("view_angle",false));
     m_fViewRadius = (_XMLParams.GetFloatProperty("view_radius",false));
     m_fSoundRadius = (_XMLParams.GetFloatProperty("sound_radius",false));
-
+    
     SetOk(true);
 }
+
 
 
 
