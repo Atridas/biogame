@@ -98,6 +98,7 @@ public:
   static CTexture::TFormatType GetFormatTypeFromString(const string &FormatType);
 
   LPDIRECT3DSURFACE9 GetSurface() const {return m_pTextureSurface0;};
+  LPDIRECT3DTEXTURE9 GetD3DTexture() const {return m_pTexture;};
   
 protected:
   /**
