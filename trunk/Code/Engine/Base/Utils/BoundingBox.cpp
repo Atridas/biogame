@@ -1,10 +1,11 @@
 #include "Utils/BoundingBox.h"
 
-
 BoundingBox::BoundingBox()
 {
   for(int i = 0; i < 8; i++)
     m_vBox[i] = Vect3f(0.0f);
+
+  m_bCollisional = true;
 }
 
 bool BoundingBox::Init(Vect3f _vMin, Vect3f _vMax)
@@ -85,8 +86,26 @@ bool BoundingBox::Init(char* _pVertexBuffer, unsigned short _usGeometryOffset, u
   return Init(l_vMin, l_vMax);
 }
 
+//La col·lisió per al pla Y només es comprova de forma general sense tenir en compte rotacions.
+bool BoundingBox::Collides(BoundingBox _Target)
+{
+  if(m_bCollisional && _Target.GetCollisional())
+  {
+    //No importa l'orientació ni si està rotat.
+    //Si està més amunt o més abaix, no col·lisiona.
+    if(_Target.GetMax().y < m_vBox[0].y)
+      return false;
+    if(_Target.GetMin().y > m_vBox[7].y)
+      return false;
+
+    //Es fa una projecció de les boxes sobre els plans paral·lels a les cantonades de l'altre box.
+    //Si en algun d'ells es detecta un buit (no interseccionen les projeccions), no estan col·lisionant.
+
+    return true;
+  }else
+    return false;
+}
+
 void BoundingBox::Release()
 {
-   for(int i = 0; i < 8; i++)
-    m_vBox[i] = Vect3f(0.0f);
 }
