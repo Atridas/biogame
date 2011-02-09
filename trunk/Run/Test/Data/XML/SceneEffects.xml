@@ -16,7 +16,7 @@
               technique="DownSample4xTechnique" format_type="A8R8G8B8" active="true">
     <texture stage_id="0" texture="GlowTexture"/>
   </pre_render>
-  <pre_render type="draw_quad_to_texture" name="downsample_glow" texture="DownSampledGlow2"
+  <pre_render type="draw_quad_to_texture" name="downsample_glow2" texture="DownSampledGlow2"
               texture_size_as_frame_buffer="true" scale_size="0.25"
               technique="DownSample4xTechnique" format_type="A8R8G8B8" active="true">
     <texture stage_id="0" texture="DownSampledGlow"/>

@@ -21,6 +21,8 @@
 #include <LightManager.h>
 #include "SpotLight.h"
 
+ID3DXSprite* g_pD3DXSprite = NULL;
+ID3DXSprite* g_pD3DXSprite2 = NULL;
 
 bool CTestProcess::Init()
 {
@@ -60,6 +62,9 @@ bool CTestProcess::Init()
 
   m_bRenderLights = true;
 
+  D3DXCreateSprite(RENDER_MANAGER->GetDevice(), &g_pD3DXSprite);
+  D3DXCreateSprite(RENDER_MANAGER->GetDevice(), &g_pD3DXSprite2);
+
   SetOk(true);
   return IsOk();
 }
@@ -70,6 +75,8 @@ void CTestProcess::Release()
 
   CHECKED_DELETE(m_pObjectCamera)
   CHECKED_DELETE(m_pObject)
+  CHECKED_RELEASE(g_pD3DXSprite)
+  CHECKED_RELEASE(g_pD3DXSprite2)
 }
 
 void CTestProcess::Update(float _fElapsedTime)
@@ -137,6 +144,19 @@ void CTestProcess::RenderScene(CRenderManager* _pRM)
   _pRM->DrawGrid(30.0f,colCYAN,30,30);
   _pRM->DrawAxis();
 
+}
+
+void CTestProcess::RenderINFO(CRenderManager* _pRM)
+{
+  D3DXVECTOR3 vecPos = D3DXVECTOR3(0,100,0);
+  g_pD3DXSprite->Begin(0);
+  g_pD3DXSprite->Draw(_pRM->GetTextureManager()->GetResource("DownSampledGlow")->GetD3DTexture(), NULL, NULL, &vecPos, 0xffffffff);
+  g_pD3DXSprite->End();
+
+  vecPos = D3DXVECTOR3(0,382,0);
+  g_pD3DXSprite2->Begin(0);
+  g_pD3DXSprite2->Draw(_pRM->GetTextureManager()->GetResource("DownSampledGlow2")->GetD3DTexture(), NULL, NULL, &vecPos, 0xffffffff);
+	g_pD3DXSprite2->End();
 }
 
 bool CTestProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
