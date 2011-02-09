@@ -30,6 +30,7 @@ public:
    * @param _fElapsedTime És necessari facilitar-hi el temps transcorregut desde l'última crida al mètode.
   **/
 	virtual void          Update(float _fElapsedTime) = 0;
+  virtual void          RenderINFO(CRenderManager* _pRM) = 0;
   /**
    * Mètode per mostrar informació de debug.
    * Aquest mètode mostrarà per pantalla diversa informació que pot ser d'utilitat per al debug:

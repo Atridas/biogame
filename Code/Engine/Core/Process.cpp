@@ -31,6 +31,9 @@ void CProcess::DebugInformation()
 
     FONT_MANAGER->DrawText(0,12,colRED,l_uiFontType,m_szProcessName.c_str());
     FONT_MANAGER->DrawText(0,45,col,l_uiFontType,l_szMsg.c_str());
+
+
+    RenderINFO(RENDER_MANAGER);
   }
 }
 

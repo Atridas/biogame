@@ -14,7 +14,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GameProcess.h">
+    <ClInclude Include="include\GameProcess.h">
       <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
