@@ -444,7 +444,7 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
       l_RenderModel->GetAnimatedInstanceModel()->ClearCycle(0);
       l_RenderModel->GetAnimatedInstanceModel()->BlendCycle(l_iCurrentCycle,0);
     }
-
+    return true;
   }
 
 
@@ -468,7 +468,39 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
       l_RenderModel->GetAnimatedInstanceModel()->ClearCycle(0);
       l_RenderModel->GetAnimatedInstanceModel()->BlendCycle(l_iCurrentCycle,0);
     }
+    return true;
+  }
 
+
+  if(strcmp(_pcAction, "AugmentaAmbient") == 0)
+  {
+
+    Vect3f l_vAmbient = CORE->GetLightManager()->GetAmbientLight();
+    l_vAmbient = l_vAmbient + 0.05f;
+    if (l_vAmbient.x > 1.0f)
+    {
+      l_vAmbient.x = 1.0f;
+      l_vAmbient.y = 1.0f;
+      l_vAmbient.z = 1.0f;
+    }
+
+    CORE->GetLightManager()->SetAmbientLight(l_vAmbient);
+    return true;
+  }
+
+  if(strcmp(_pcAction, "DisminueixAmbient") == 0)
+  {
+    Vect3f l_vAmbient = CORE->GetLightManager()->GetAmbientLight();
+    l_vAmbient = l_vAmbient - 0.05f;
+    if (l_vAmbient.x < 0.0f)
+    {
+      l_vAmbient.x = 0.0f;
+      l_vAmbient.y = 0.0f;
+      l_vAmbient.z = 0.0f;
+    }
+
+    CORE->GetLightManager()->SetAmbientLight(l_vAmbient);
+    return true;
   }
 
   return false;

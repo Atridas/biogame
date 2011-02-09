@@ -165,12 +165,17 @@
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_DOWN"/>
   </action>
 
-	
+  <action name="AugmentaAmbient">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_NPPLUS"/>
+  </action>
+
+  <action name="DisminueixAmbient">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_NPMINUS"/>
+  </action>
 
 
 
-
-	<!--.......VIEWER CAMERA CONTROL: GAMEPAD.......................
+  <!--.......VIEWER CAMERA CONTROL: GAMEPAD.......................
   <action name="MoveXViewerCam">
     <input deviceType="IDV_GAMEPAD1" EventType="EVENT_DOWN"         Code="PAD_BUTTON_RIGHT_THUMB"/>
     <input deviceType="IDV_GAMEPAD1" AxisType="AXIS_RIGHT_THUMB_X"  Delta="1.f"/>
