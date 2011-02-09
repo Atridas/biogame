@@ -9,7 +9,7 @@
 #include "Named.h"
 
 class CEnemy:
-  public CObject3D,
+ // public CObject3D,
   public CNamed,
   public CBaseControl
 
@@ -34,11 +34,12 @@ public:
             m_fWalkSpeed(0.0f),
             m_fAtacSpeed(0.0f),
             m_fLife(0.0f),
-            m_iWeaponStrength(0)    {};
+            m_iWeaponStrength(0)          {};
 
   virtual ~CEnemy(){};
 
-  virtual void Init(CXMLTreeNode& _XMLParams);
+  virtual void InitTemplate(CXMLTreeNode& _XMLParams);
+  
   
 	   
 
@@ -52,6 +53,7 @@ public:
   void SetAtacSpeed(float _fAtacSpeed){m_fAtacSpeed = _fAtacSpeed;};
   void SetLife(float _fLife){m_fLife = _fLife;};
   void SetWeaponStrength(int _iWeaponStrength){m_iWeaponStrength = _iWeaponStrength;}; 
+  
 
   float GetViewAngle() const{return m_fViewAngle;};
   float GetViewRadius() const{return m_fViewRadius;};
@@ -62,6 +64,7 @@ public:
   float GetAtacSpeed() const {return m_fAtacSpeed;};
   float GetLife() const {return m_fLife;};
   int   GetWeaponStrength() const {return m_iWeaponStrength;};
+  
 
 protected:
   TEnemyType m_Type;
@@ -73,6 +76,7 @@ protected:
   float	  m_fAtacSpeed;
   float	  m_fLife;
   int     m_iWeaponStrength;
+  
 
   //m_pFSM     NO SE DE QUIN TIPUS ES NI PQ SERVEIX AIXO (MAKINA ESTATS)
 };

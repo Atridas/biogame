@@ -21,6 +21,7 @@ public:
   void Release();
   bool Load(const string& m_szFileName);
 
+
 private:
   bool Load();
   string m_szFileName;

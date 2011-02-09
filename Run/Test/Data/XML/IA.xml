@@ -6,8 +6,8 @@
 	    <enemy_template name="VIGIA" type="VIGIA" run_speed="4" walk_speed="1" atac_speed="1.5" life="60" weapon_strength="5" view_angle="360" view_radius="15" sound_radius="4" alarm_activate="false" escudo_activate="false" mesh="Data\Enemies\xxxxxxx.mesh"/> <!--PATH DELS ENEMICS-->
     </templates>
     <instances>
-      <enemy_instance type="MILITAR" pos="0 0 0" rot="0 180 0" />
+      <enemy_instance type="MILITAR" pos="0 0 0" rot="0 180 0"/>
       <enemy_instance type="MINER" pos="0 0 0" rot="0 180 0" />
-	    <enemy_instance type="VIGIA" pos="0 0 0" rot="0 180 0" />
+      <enemy_instance type="VIGIA" pos="0 0 0" rot="0 180 0" />
     </instances>
   </enemies>

@@ -57,7 +57,7 @@ Mat44f CDirectionalLight::GetLightProjectionMatrix() const
 
   if(GetType() == SPOT)
   {
-    l_fAngle = ((CSpotLight*)this)->GetFallOff()*2.5;
+    l_fAngle = ((CSpotLight*)this)->GetFallOff()*2.5f;
   } else {
     l_fAngle = 45.0f;
   }

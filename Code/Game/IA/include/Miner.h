@@ -3,13 +3,13 @@
 #ifndef __MINER_H__
 #define __MINER_H__
 
-#include "Enemy.h"
+#include "EnemyInstance.h"
 
-class CMiner: public CEnemy
+class CMiner: public CEnemyInstance
 {
 public:
 
-  CMiner(const string& _name) : CEnemy(_name),
+  CMiner(const string& _name) : CEnemyInstance(_name),
                                   m_fRotateSpeed(0.0f)
                                   {m_Type = CEnemy::MINER;};
 
