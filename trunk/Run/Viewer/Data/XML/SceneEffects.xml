@@ -48,9 +48,9 @@
                                 texture_width_as_frame_buffer="true" active="true" format_type="A8R8G8B8"/-->
   
 
-  <post_render type="draw_quad" name="post_glow" technique="PostProcessBloomTechnique" active="true">
+  <!--post_render type="draw_quad" name="post_glow" technique="PostProcessBloomTechnique" active="true">
     <texture stage_id="0" texture="GlowTexture3"/>
-  </post_render>
+  </post_render-->
   
   
   <post_render type="draw_quad" name="noise_and_vignetting_scene_effect" technique="RenderNoiseAndVignettingTechnique" active="false">

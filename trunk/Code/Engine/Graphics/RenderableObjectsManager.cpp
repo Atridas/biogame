@@ -133,15 +133,14 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
 
         l_pRenderableObject->m_vMin = Vect3f(l_vMin.x,l_vMin.y,l_vMin.z);
         l_pRenderableObject->m_vMax = Vect3f(l_vMax.x,l_vMax.y,l_vMax.z);
+        l_pRenderableObject->m_fAltura = 0;
 
 
       } else if(l_szClass == "AnimatedModel") 
       {
         l_pRenderableObject = AddAnimatedModel(l_szResource, l_szName,l_szDefaultAnimation);
          m_vIndexAnimated.push_back(i);
-
-         l_pRenderableObject->m_vMin = Vect3f(l_vPos.x,l_fAltura,l_vPos.z);
-         l_pRenderableObject->m_vMax = Vect3f(l_vPos.x,l_fAltura,l_vPos.z);
+         l_pRenderableObject->m_fAltura = l_fAltura;
 
       } else 
       {
