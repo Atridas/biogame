@@ -65,6 +65,12 @@ void CEngine::Render()
 
 	l_pRM->EndRendering();
 
+  //if(m_pProcess != NULL)
+  //{
+		//
+  //  //m_pProcess->RenderINFO();
+  //}
+
 }
 
 void CEngine::RenderScene()
@@ -72,7 +78,6 @@ void CEngine::RenderScene()
 	if(m_pProcess != NULL)
 	{
     m_pProcess->Render(RENDER_MANAGER);
-		//Mostrem la informació de Debug (en aquest cas els FPS del timer)
 		m_pProcess->DebugInformation();
 	}
 

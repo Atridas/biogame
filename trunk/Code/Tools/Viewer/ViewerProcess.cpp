@@ -147,17 +147,9 @@ void CViewerProcess::RenderScene(CRenderManager* _pRM)
   //Draw Grid and Axis
   _pRM->SetTransform(identity);
 
-  if (m_iMode == MODE_ESCENA)
-  {
-    _pRM->DrawGrid(30.0f,colCYAN,30,30);
-    _pRM->DrawAxis();
-  }
+ 
 
-
-  if (getRenderInfo())
-  {
-    RenderINFO(_pRM);
-  }
+  
 }
 
 bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
@@ -501,6 +493,10 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
   {
     case MODE_ESCENA:
       FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontType,l_szMsg3.c_str());
+      _pRM->DrawGrid(30.0f,colCYAN,30,30);
+      _pRM->DrawAxis();
+     
+
       break;
 
     case MODE_MESH:
