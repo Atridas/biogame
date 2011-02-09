@@ -228,13 +228,12 @@ void CRenderManager::BeginRendering ()
 	uint32 red		= (uint32) (1.f * 255);
 	uint32 green	= (uint32) (0.f * 255);
 	uint32 blue		= (uint32) (1.f * 255);
-	m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET|D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(red, green, blue), 1.0f, 0 );
 #else // Clear the backbuffer to black color in a Release mode
 	uint32 red		= (uint32) (0.f * 255);
 	uint32 green	= (uint32) (0.f * 255);
 	uint32 blue		= (uint32) (0.f * 255);
-	m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET|D3DCLEAR_ZBUFFER, D3DCOLOR_XRGB(red, green, blue), 1.0f, 0 );
 #endif
+	m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET|D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB(0, red, green, blue), 1.0f, 0 );
 
 
 	// Begin the scene
