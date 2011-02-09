@@ -129,6 +129,7 @@
     <ClCompile Include="XML\XMLTreeNode.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Activable.h" />
     <ClInclude Include="include\base.h" />
     <ClInclude Include="include\Math\Color.h" />
     <ClInclude Include="include\Math\MathTypes.h" />

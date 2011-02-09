@@ -14,6 +14,8 @@ bool CSceneEffect::Init(const CXMLTreeNode& _params)
   SetName(l_szName);
   LOGGER->AddNewLog(ELL_INFORMATION, "CSceneEffect::Init  \"%s\".", l_szName.c_str());
 
+  SetActive( _params.GetBoolProperty("active", true) );
+
   int l_iNumChildren = _params.GetNumChildren();
 
   for(int i = 0; i < l_iNumChildren; i++)

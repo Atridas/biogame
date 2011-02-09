@@ -216,5 +216,8 @@
     <ClInclude Include="include\Utils\Object3D.h">
       <Filter>Utils\Object3D</Filter>
     </ClInclude>
+    <ClInclude Include="include\Activable.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -6,6 +6,7 @@
 #include "Core.h"
 #include "RenderManager.h"
 #include "Named.h"
+#include "Activable.h"
 
 //Forward declarations-------------
 class CRenderManager;
@@ -14,7 +15,7 @@ class CTexture;
 class CXMLTreeNode;
 //---------------------------------
 
-class CSceneEffect : public CNamed, public CBaseControl
+class CSceneEffect : public CNamed, public CBaseControl, public CActivable
 {
 public:
 

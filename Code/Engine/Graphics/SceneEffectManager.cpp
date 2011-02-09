@@ -167,7 +167,8 @@ void CSceneEffectManager::PreRender(CRenderManager* _pRM, CProcess* _pProc)
 {
   for(size_t i=0; i < m_vPreRenderSceneEffects.size() ; i++)
   {
-    m_vPreRenderSceneEffects[i]->PreRender(_pRM,_pProc);
+    if(m_vPreRenderSceneEffects[i]->IsActive())
+      m_vPreRenderSceneEffects[i]->PreRender(_pRM,_pProc);
   }
 }
   
@@ -175,7 +176,8 @@ void CSceneEffectManager::ActivateRenderSceneEffects()
 {
   for(size_t i=0; i < m_vRenderSceneEffects.size() ; i++)
   {
-    m_vRenderSceneEffects[i]->ActivateTextures();
+    if(m_vRenderSceneEffects[i]->IsActive())
+      m_vRenderSceneEffects[i]->ActivateTextures();
   }
 }
   
@@ -183,7 +185,8 @@ void CSceneEffectManager::CaptureFrameBuffers(CRenderManager* _pRM)
 {
   for(size_t i=0; i < m_vCaptureFrameBufferSceneEffects.size() ; i++)
   {
-    m_vCaptureFrameBufferSceneEffects[i]->CaptureFrameBuffers(_pRM);
+    if(m_vCaptureFrameBufferSceneEffects[i]->IsActive())
+      m_vCaptureFrameBufferSceneEffects[i]->CaptureFrameBuffers(_pRM);
   }
   //CaptureFrameBuffersAfterPostRender(_pRM);
 }
@@ -193,7 +196,8 @@ void CSceneEffectManager::PostRender(CRenderManager* _pRM)
   
   for(size_t i=0; i < m_vPostRenderSceneEffects.size() ; i++)
   {
-    m_vPostRenderSceneEffects[i]->PostRender(_pRM);
+    if(m_vPostRenderSceneEffects[i]->IsActive())
+      m_vPostRenderSceneEffects[i]->PostRender(_pRM);
   }
   
 }
@@ -202,7 +206,8 @@ void CSceneEffectManager::CaptureFrameBuffersAfterPostRender(CRenderManager* _pR
 {
   for(size_t i=0; i < m_vCaptureFrameBufferSceneEffectsAfterPostRender.size() ; i++)
   {
-    m_vCaptureFrameBufferSceneEffectsAfterPostRender[i]->CaptureFrameBuffers(_pRM);
+    if(m_vCaptureFrameBufferSceneEffectsAfterPostRender[i]->IsActive())
+      m_vCaptureFrameBufferSceneEffectsAfterPostRender[i]->CaptureFrameBuffers(_pRM);
   }
 }
 
