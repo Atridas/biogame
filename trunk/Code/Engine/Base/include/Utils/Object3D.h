@@ -10,12 +10,15 @@
 #define INC_OBJECT_3D_H_
 
 #include "base.h"
+#include "Utils/BoundingBox.h"
 
 class CObject3D
 {
 public:
-	CObject3D(const Vect3f& pos, float yaw, float pitch, float roll = 0);
-  CObject3D();
+  CObject3D(): m_vPosition(Vect3f(0.0f)), m_fYaw(0.0f),
+               m_fPitch(0.0f), m_fRoll(0.0f), m_bVisible(true)
+           {};
+	CObject3D(const Vect3f& _vPos, float _fYaw, float _fPitch, float _fRoll = 0);
 	virtual ~CObject3D(void) {/*Nothing*/;}
 
 	//---Get Functions
@@ -26,18 +29,19 @@ public:
   bool						GetVisible	() const {return m_bVisible;}
 
 	//---Set Functions
-	void		SetPosition	( const Vect3f& pos )		{m_vPosition = pos;}
-	void		SetYaw			( float yaw )						{m_fYaw = yaw;}
-	void		SetPitch		( float pitch )					{m_fPitch = pitch;}
-	void		SetRoll			( float roll )					{m_fRoll = roll;}
-  void		SetVisible	( bool  visible )				{m_bVisible = visible;}
+	void		SetPosition	( const Vect3f& _vPos );
+	void		SetYaw			( float _fYaw );
+	void		SetPitch		( float _fPitch );
+	void		SetRoll			( float _fRoll );
+  void		SetVisible	( bool  _bVisible ) {m_bVisible = _bVisible;};
 
 protected:
-	Vect3f	m_vPosition;
-	float		m_fYaw;
-	float		m_fPitch;
-	float		m_fRoll;
-  bool    m_bVisible;
+	Vect3f	    m_vPosition;
+	float		    m_fYaw;
+	float		    m_fPitch;
+	float		    m_fRoll;
+  bool        m_bVisible;
+  BoundingBox m_BoundingBox;
 };
 
 #endif //INC_CORE_H_

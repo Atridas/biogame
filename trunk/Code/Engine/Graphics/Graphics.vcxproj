@@ -108,7 +108,6 @@
     <ClCompile Include="InstanceMesh.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="LightManager.cpp" />
-    <ClCompile Include="Object3D.cpp" />
     <ClCompile Include="OmniLight.cpp" />
     <ClCompile Include="RenderableAnimatedInstanceModel.cpp" />
     <ClCompile Include="RenderableObject.cpp" />
@@ -146,7 +145,6 @@
     <ClInclude Include="include\InstanceMesh.h" />
     <ClInclude Include="include\Light.h" />
     <ClInclude Include="include\LightManager.h" />
-    <ClInclude Include="include\Object3D.h" />
     <ClInclude Include="include\OmniLight.h" />
     <ClInclude Include="include\RenderableAnimatedInstanceModel.h" />
     <ClInclude Include="include\RenderableObject.h" />

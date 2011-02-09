@@ -4,7 +4,7 @@
 #define __LIGHT_H__
 
 #include "base.h"
-#include "Object3D.h"
+#include "Utils/Object3D.h"
 #include <XML/XMLTreeNode.h>
 #include "Named.h"
 

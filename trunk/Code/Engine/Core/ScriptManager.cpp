@@ -23,7 +23,7 @@ extern "C"
 #include "InstanceMesh.h"
 #include "RenderableAnimatedInstanceModel.h"
 
-#include "Object3D.h"
+#include "Utils/Object3D.h"
 #include "Utils/BaseControl.h"
 
 using namespace luabind;

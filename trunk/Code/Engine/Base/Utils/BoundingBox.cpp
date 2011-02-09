@@ -2,14 +2,22 @@
 
 BoundingBox::BoundingBox()
 {
+  m_vInitMin = Vect3f(0.0f);
+  m_vInitMax = Vect3f(0.0f);
+
   for(int i = 0; i < 8; i++)
     m_vBox[i] = Vect3f(0.0f);
 
   m_bCollisional = true;
 }
 
-bool BoundingBox::Init(Vect3f _vMin, Vect3f _vMax)
+bool BoundingBox::Init(Vect3f& _vMin, Vect3f& _vMax)
 {
+  //establir el vector min i max inicials.
+  m_vInitMin = _vMin;
+  m_vInitMax = _vMax;
+
+  //crear la box
   /*            4                    5
                _____________________
               /|                  /|
@@ -28,7 +36,6 @@ bool BoundingBox::Init(Vect3f _vMin, Vect3f _vMax)
         | /                 | /     
       2 |/__________________|/ 3 
   */
-
   m_vBox[0] = (_vMin.x,_vMin.y,_vMin.z);
   m_vBox[1] = (_vMax.x,_vMin.y,_vMin.z);
   m_vBox[2] = (_vMin.x,_vMin.y,_vMax.z);
@@ -86,24 +93,49 @@ bool BoundingBox::Init(char* _pVertexBuffer, unsigned short _usGeometryOffset, u
   return Init(l_vMin, l_vMax);
 }
 
-//La col·lisió per al pla Y només es comprova de forma general sense tenir en compte rotacions.
-bool BoundingBox::Collides(BoundingBox _Target)
+Vect3f BoundingBox::GetMiddlePoint()
 {
-  if(m_bCollisional && _Target.GetCollisional())
+  Vect3f l_vMidVector = m_vBox[7] - m_vBox[0];
+  l_vMidVector *= 0.5f;
+  return m_vBox[0] + l_vMidVector;
+}
+
+void BoundingBox::TranslateBox(const Vect3f& _vTranslation)
+{
+  for(int i = 0; i < 8; i++)
   {
-    //No importa l'orientació ni si està rotat.
-    //Si està més amunt o més abaix, no col·lisiona.
-    if(_Target.GetMax().y < m_vBox[0].y)
-      return false;
-    if(_Target.GetMin().y > m_vBox[7].y)
-      return false;
+    m_vBox[i].x += _vTranslation.x;
+    m_vBox[i].y += _vTranslation.y;
+    m_vBox[i].z += _vTranslation.z;
+  }
+}
 
-    //Es fa una projecció de les boxes sobre els plans paral·lels a les cantonades de l'altre box.
-    //Si en algun d'ells es detecta un buit (no interseccionen les projeccions), no estan col·lisionant.
+void BoundingBox::RotateBox(float _fPitch, float _fYaw, float _fRoll)
+{
+  for(int i = 0; i < 8; i++)
+  {
+    m_vBox[i] = m_vBox[i].RotateX(_fPitch);
+    m_vBox[i] = m_vBox[i].RotateY(_fPitch);
+    m_vBox[i] = m_vBox[i].RotateZ(_fPitch);
+  }
+}
 
-    return true;
-  }else
-    return false;
+void BoundingBox::DoYaw(float _fYaw)
+{
+  for(int i = 0; i < 8; i++)
+    m_vBox[i] = m_vBox[i].RotateY(_fYaw);
+}
+
+void BoundingBox::DoPitch(float _fPitch)
+{
+  for(int i = 0; i < 8; i++)
+    m_vBox[i] = m_vBox[i].RotateX(_fPitch);
+}
+
+void BoundingBox::DoRoll(float _fRoll)
+{
+  for(int i = 0; i < 8; i++)
+    m_vBox[i] = m_vBox[i].RotateZ(_fRoll);
 }
 
 void BoundingBox::Release()
