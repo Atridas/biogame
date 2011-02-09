@@ -20,6 +20,7 @@ public:
   void Render(CRenderManager *RM);
   Vect3f m_vMax;
   Vect3f m_vMin;
+  float m_fAltura;
   
 
 protected:
