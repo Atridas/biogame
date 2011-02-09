@@ -147,7 +147,7 @@ bool CEffect::SetLights(size_t _iNumOfLights)
   }
   CLightManager* l_pLightManager = CORE->GetLightManager();
 
-  const Vect3f l_Ambient = l_pLightManager->getAmbientLight();
+  const Vect3f l_Ambient = l_pLightManager->GetAmbientLight();
   m_aAmbientLight[0] = l_Ambient.x;
   m_aAmbientLight[1] = l_Ambient.y;
   m_aAmbientLight[2] = l_Ambient.z;

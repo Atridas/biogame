@@ -23,7 +23,8 @@ public:
   CLight* GetLight (int _i)  const;
   vector<CLight*> GetLights(int _num) const;
 
-  const Vect3f& getAmbientLight() const {return m_vAmbientLight;};
+  const Vect3f& GetAmbientLight() const {return m_vAmbientLight;};
+  void SetAmbientLight(Vect3f _vAmbient) {m_vAmbientLight = _vAmbient;};
 private:
   Vect3f m_vAmbientLight;
 };
