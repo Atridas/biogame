@@ -35,6 +35,7 @@ public:
                       m_bUseTime(false),
                       m_bGlowActive(false),
                       m_bUseTextureSize(false),
+                      m_bUsePoissonBlurKernel(false),
                       m_iNumOfLights(0),
                       m_pEffect(0),
                       m_pD3DTechnique(0)
@@ -73,6 +74,9 @@ private:
   bool m_bUseCameraPosition;
   bool m_bUseTime;
   bool m_bUseTextureSize;
+  bool m_bUsePoissonBlurKernel;
+
+  float m_pfPoissonBlurKernel[32];
 
   CEffect* m_pEffect;
   D3DXHANDLE m_pD3DTechnique;

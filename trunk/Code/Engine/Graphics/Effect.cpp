@@ -32,6 +32,7 @@ CEffect::CEffect(void):
   m_pCameraPositionParameter(0),
   m_pBonesParameter(0),
   m_pTimeParameter(0),
+  m_pPoissonBlurKernelParameter(0),
   m_pGlowActive(0),
   m_pTextureWidth(0),
   m_pTextureHeight(0)
@@ -80,6 +81,7 @@ void CEffect::SetNullParameters()
   m_pGlowActive =
   m_pTextureWidth =
   m_pTextureHeight =
+  m_pPoissonBlurKernelParameter =
   m_pTimeParameter = 0;
 }
 
@@ -256,6 +258,7 @@ bool CEffect::InitParameters()
   GetParameterBySemantic("GlowActive", m_pGlowActive);
   GetParameterBySemantic("TextureWidth", m_pTextureWidth);
   GetParameterBySemantic("TextureHeight", m_pTextureHeight);
+  GetParameterBySemantic("PoissonBlurKernel", m_pPoissonBlurKernelParameter);
 
   return true;
 }

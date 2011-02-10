@@ -148,15 +148,18 @@ void CTestProcess::RenderScene(CRenderManager* _pRM)
 
 void CTestProcess::RenderINFO(CRenderManager* _pRM)
 {
+  /*
   D3DXVECTOR3 vecPos = D3DXVECTOR3(0,100,0);
   g_pD3DXSprite->Begin(0);
-  g_pD3DXSprite->Draw(_pRM->GetTextureManager()->GetResource("DownSampledGlow")->GetD3DTexture(), NULL, NULL, &vecPos, 0xffffffff);
+  g_pD3DXSprite->Draw(_pRM->GetTextureManager()->GetResource("ZBlurTexture")->GetD3DTexture(), NULL, NULL, &vecPos, 0xffffffff);
   g_pD3DXSprite->End();
-
+  */
+  /*
   vecPos = D3DXVECTOR3(0,382,0);
   g_pD3DXSprite2->Begin(0);
   g_pD3DXSprite2->Draw(_pRM->GetTextureManager()->GetResource("DownSampledGlow2")->GetD3DTexture(), NULL, NULL, &vecPos, 0xffffffff);
 	g_pD3DXSprite2->End();
+  */
 }
 
 bool CTestProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)

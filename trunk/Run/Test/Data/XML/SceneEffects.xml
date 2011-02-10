@@ -36,7 +36,7 @@
 
   <pre_render type="render_to_texture" name="z_blur_scene_effect" texture="ZBlurTexture" width="1024" height="1024"
               static_mesh_technique="PreZBlurTechnique"
-              animated_model_technique="AnimatedPreZBlurTechnique" active="true" format_type="R32F"/>
+              animated_model_technique="AnimatedPreZBlurTechnique" active="true" format_type="A8R8G8B8"/>
 
   <render name="default_scene_effect" active="true">
     <texture stage_id="5" texture="ShadowMapTexture"/>

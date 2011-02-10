@@ -5,7 +5,10 @@
 #include "RenderManager.h"
 #include "EffectManager.h"
 #include "EffectMaterial.h"
+#include "VertexCalculations.h"
 #include <Core.h>
+
+
 
 
 void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
@@ -36,6 +39,12 @@ void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
   m_bAnimated = _XMLParams.GetBoolProperty("animated");
   m_bGlowActive = _XMLParams.GetBoolProperty("glow_active");
   m_bUseTextureSize = _XMLParams.GetBoolProperty("use_texture_size");
+  m_bUsePoissonBlurKernel = _XMLParams.GetBoolProperty("use_poisson_blur_kernel");
+
+  if(m_bUsePoissonBlurKernel)
+  {
+    CreatePoissonBlur16x2(m_pfPoissonBlurKernel);
+  }
 
   //integers
   m_iNumOfLights= _XMLParams.GetIntProperty("num_of_lights",0);
@@ -180,6 +189,10 @@ bool CEffectTechnique::BeginRender(const CEffectMaterial* _pMaterial)
         l_pD3DEffect->SetInt(m_pEffect->m_pTextureWidth,  _pMaterial->GetTextureWidth() );
         l_pD3DEffect->SetInt(m_pEffect->m_pTextureHeight, _pMaterial->GetTextureHeight());
       }
+    }
+    if(m_bUsePoissonBlurKernel)
+    {
+      l_pD3DEffect->SetFloatArray(m_pEffect->m_pPoissonBlurKernelParameter, m_pfPoissonBlurKernel, 32);
     }
   } else {
     return false;
