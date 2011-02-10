@@ -134,49 +134,14 @@ void CalcTangentsAndBinormalsBis( void *VtxsData, uint16 *IdxsData, size_t VtxCo
 
 void CreatePoissonBlur16x2( float pfKernel_[32] )
 {
-  /*
+  
   //Creem nombres aleatoris de 0 a 1
   for(int i = 0; i < 32; i++)
   {
     pfKernel_[i] = ((float)rand() / (float)RAND_MAX);
   }
-  */
+
   
-  pfKernel_[0]  = 0.1f;
-  pfKernel_[1]  = 0.9f;
-  pfKernel_[2]  = 0.6f;
-  pfKernel_[3]  = 0.3f;
-  pfKernel_[4]  = 0.5f;
-  pfKernel_[5]  = 0.8f;
-  pfKernel_[6]  = 0.9f;
-  pfKernel_[7]  = 0.5f;
-  pfKernel_[8]  = 0.2f;
-  pfKernel_[9]  = 0.4f;
-  pfKernel_[10] = 0.7f;
-  pfKernel_[11] = 0.8f;
-  pfKernel_[12] = 0.5f;
-  pfKernel_[13] = 0.3f;
-  pfKernel_[14] = 0.6f;
-  pfKernel_[15] = 0.9f;
-  pfKernel_[16] = 0.4f;
-  pfKernel_[17] = 0.5f;
-  pfKernel_[18] = 0.9f;
-  pfKernel_[19] = 0.5f;
-  pfKernel_[20] = 0.2f;
-  pfKernel_[21] = 0.2f;
-  pfKernel_[22] = 0.4f;
-  pfKernel_[23] = 0.5f;
-  pfKernel_[24] = 0.8f;
-  pfKernel_[25] = 0.9f;
-  pfKernel_[26] = 0.8f;
-  pfKernel_[27] = 0.3f;
-  pfKernel_[28] = 0.5f;
-  pfKernel_[29] = 0.6f;
-  pfKernel_[30] = 0.3f;
-  pfKernel_[31] = 0.2f;
-
-
-
   //fem una caixa 4x4 de nombres aleatoris en caselles
   for(int i = 0; i < 4; i++)
   {
@@ -186,11 +151,11 @@ void CreatePoissonBlur16x2( float pfKernel_[32] )
       pfKernel_[2*(i*4+j)+1] += j;
     }
   }
-
+  
   //escalar a una caixa 1x1
   for(int i = 0; i < 32; i++)
   {
-    pfKernel_[i] /= 4.f;
+    pfKernel_[i] *= 0.25f;
   }
 
   //ho posem a un cercle
@@ -205,4 +170,5 @@ void CreatePoissonBlur16x2( float pfKernel_[32] )
     pfKernel_[i*2  ] = x;
     pfKernel_[i*2+1] = y;
   }
+  
 }
