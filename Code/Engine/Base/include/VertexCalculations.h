@@ -11,4 +11,8 @@ void CalcTangentsAndBinormalsBis( void *VtxsData, uint16 *IdxsData, size_t VtxCo
                                   size_t IdxCount, size_t VertexStride, size_t GeometryStride, size_t NormalStride,
                                   size_t TangentStride, size_t BitangentStride, size_t TextureCoordsStride);
 
+
+void CreatePoissonBlur16x2( float pfKernel_[32] );
+
+
 #endif

@@ -37,6 +37,8 @@ bool CDrawQuadSceneEffect::Init(const CXMLTreeNode& _params)
 
   m_pEffectMaterial = new CEffectMaterial();
   m_pEffectMaterial->Init();
+  m_pEffectMaterial->SetTextureWidth(RENDER_MANAGER->GetScreenWidth());
+  m_pEffectMaterial->SetTextureHeight(RENDER_MANAGER->GetScreenHeight());
 
   return IsOk();
 }

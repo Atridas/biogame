@@ -1,5 +1,7 @@
 #include "VertexCalculations.h"
 
+#include <cstdlib>
+
 // Crear les tangents i binormals
 void CalcTangentsAndBinormals(void *VtxsData, uint16 *IdxsData, size_t VtxCount,
                               size_t IdxCount, size_t VertexStride, size_t GeometryStride, size_t NormalStride,
@@ -126,4 +128,81 @@ void CalcTangentsAndBinormalsBis( void *VtxsData, uint16 *IdxsData, size_t VtxCo
     D3DXVec3Normalize(l_BitangentVtx,l_BitangentVtx);
   }
   delete[] tangent;
+}
+
+
+
+void CreatePoissonBlur16x2( float pfKernel_[32] )
+{
+  /*
+  //Creem nombres aleatoris de 0 a 1
+  for(int i = 0; i < 32; i++)
+  {
+    pfKernel_[i] = ((float)rand() / (float)RAND_MAX);
+  }
+  */
+  
+  pfKernel_[0]  = 0.1f;
+  pfKernel_[1]  = 0.9f;
+  pfKernel_[2]  = 0.6f;
+  pfKernel_[3]  = 0.3f;
+  pfKernel_[4]  = 0.5f;
+  pfKernel_[5]  = 0.8f;
+  pfKernel_[6]  = 0.9f;
+  pfKernel_[7]  = 0.5f;
+  pfKernel_[8]  = 0.2f;
+  pfKernel_[9]  = 0.4f;
+  pfKernel_[10] = 0.7f;
+  pfKernel_[11] = 0.8f;
+  pfKernel_[12] = 0.5f;
+  pfKernel_[13] = 0.3f;
+  pfKernel_[14] = 0.6f;
+  pfKernel_[15] = 0.9f;
+  pfKernel_[16] = 0.4f;
+  pfKernel_[17] = 0.5f;
+  pfKernel_[18] = 0.9f;
+  pfKernel_[19] = 0.5f;
+  pfKernel_[20] = 0.2f;
+  pfKernel_[21] = 0.2f;
+  pfKernel_[22] = 0.4f;
+  pfKernel_[23] = 0.5f;
+  pfKernel_[24] = 0.8f;
+  pfKernel_[25] = 0.9f;
+  pfKernel_[26] = 0.8f;
+  pfKernel_[27] = 0.3f;
+  pfKernel_[28] = 0.5f;
+  pfKernel_[29] = 0.6f;
+  pfKernel_[30] = 0.3f;
+  pfKernel_[31] = 0.2f;
+
+
+
+  //fem una caixa 4x4 de nombres aleatoris en caselles
+  for(int i = 0; i < 4; i++)
+  {
+    for(int j = 0; j < 4; j++)
+    {
+      pfKernel_[2*(i*4+j)  ] += i;
+      pfKernel_[2*(i*4+j)+1] += j;
+    }
+  }
+
+  //escalar a una caixa 1x1
+  for(int i = 0; i < 32; i++)
+  {
+    pfKernel_[i] /= 4.f;
+  }
+
+  //ho posem a un cercle
+  for(int i = 0; i < 16; i++)
+  {
+    float u = pfKernel_[i*2  ];
+    float v = pfKernel_[i*2+1];
+    
+    float x = sqrt(u) * cos(v * 2 * FLOAT_PI_VALUE);
+    float y = sqrt(u) * sin(v * 2 * FLOAT_PI_VALUE);
+    
+    pfKernel_[i*2  ] = x;
+    pfKernel_[i*2+1] = y;
+  }
 }
