@@ -6,10 +6,11 @@
 #include <XML/XMLTreeNode.h>
 #include "Named.h"
 #include "Enemy.h"
+//#include "Utils/Object3D.h"
 
 class CEnemyInstance : 
-  public CEnemy,
-  public CObject3D
+  public CEnemy
+  //public CObject3D
 {
 public:
   CEnemyInstance(const string& _name) : CEnemy(_name),
