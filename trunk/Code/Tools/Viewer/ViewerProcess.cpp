@@ -108,7 +108,7 @@ void CViewerProcess::Update(float _fElapsedTime)
     l_fYaw = m_pObjectBot->GetYaw();
     l_fYaw = l_fYaw+FLOAT_PI_VALUE/2;
     if (l_Spot != 0)
-    l_Spot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObject->GetPosition().y, m_pObject->GetPosition().z));
+    l_Spot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObject->GetPosition().y+0.5f, m_pObject->GetPosition().z));
 
     Vect3f l_vec(cos(l_fYaw) * cos(l_fPitch), sin(l_fPitch),sin(l_fYaw) * cos(l_fPitch) );
     l_Spot->SetDirection(Vect3f(l_vec.x,l_vec.y,l_vec.z));
@@ -321,11 +321,11 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
 
       if (l_vDelta.z < 0)
       {
-        l_pCam->AddZoom(0.4f);
+        l_pCam->AddZoom(0.2f);
       }
       else
       {
-        l_pCam->AddZoom(-0.4f);
+        l_pCam->AddZoom(-0.2f);
       }
 
     }
@@ -512,7 +512,9 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
   CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
 
    //text
-  uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");
+  uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("arial");
+  uint32 l_uiFontTypeTitle = FONT_MANAGER->GetTTF_Id("Deco");
+  int l_iPosicio = 450;
   string l_szMsg("Mode Animats");
   string l_szMsg2("Mode Meshes");
   string l_szMsg3("Mode Escena");
@@ -524,7 +526,7 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
   switch (m_iMode)
   {
     case MODE_ESCENA:
-      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontType,l_szMsg3.c_str());
+      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg3.c_str());
       //_pRM->DrawGrid(30.0f,colCYAN,30,30);
       //_pRM->DrawAxis();
      
@@ -532,7 +534,7 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
       break;
 
     case MODE_MESH:
-      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontType,l_szMsg2.c_str());
+      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg2.c_str());
 
       l_SStream << "Nom: " << l_pMeshInstance->GetName() << endl;
       l_SStream << "Tipus: StaticMesh" << endl;
@@ -542,13 +544,13 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
       l_SStream << "Yaw: " << (float)l_pMeshInstance->GetYaw() << endl;
       l_SStream << "Pitch: " << (float)l_pMeshInstance->GetPitch() << endl;
       l_SStream << "Roll: " << (float)l_pMeshInstance->GetRoll() << endl;
-      FONT_MANAGER->DrawText(0,300,colGREEN,l_uiFontType,l_SStream.str().c_str());
+      FONT_MANAGER->DrawText(0,l_iPosicio,colGREEN,l_uiFontType,l_SStream.str().c_str());
 
 
       break;
 
     case MODE_ANIMATS:
-      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontType,l_szMsg.c_str());
+      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg.c_str());
 
       CRenderableAnimatedInstanceModel* l_RenderModel = (CRenderableAnimatedInstanceModel*)l_pROM->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat]);
 
@@ -561,7 +563,7 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
       l_SStream << "Pitch: " << (float)l_pAnimatedInstance->GetPitch() << endl;
       l_SStream << "Roll: " << (float)l_pAnimatedInstance->GetRoll() << endl;
       l_SStream << "Animacio: " << (int)l_RenderModel->GetAnimatedInstanceModel()->GetCurrentCycle() << endl;
-      FONT_MANAGER->DrawText(0,300,colGREEN,l_uiFontType,l_SStream.str().c_str());
+      FONT_MANAGER->DrawText(0,l_iPosicio,colGREEN,l_uiFontType,l_SStream.str().c_str());
 
       break; 
   }
