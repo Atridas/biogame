@@ -157,6 +157,6 @@
 	<RenderableObject name="pot_Mitja01" class="StaticMesh" resource="pot_Mitja01" position="-8.82189 1.79379 -10.5683" yaw="0.0" pitch="0.0" roll="0.0" Min="-8.93214 1.78883 -10.6786" Max="-8.71165 2.07621 -10.4581"/>
 	<RenderableObject name="pot_prim02" class="StaticMesh" resource="pot_prim02" position="-8.6831 1.30262 -10.4107" yaw="0.0" pitch="0.0" roll="0.0" Min="-8.77139 1.29624 -10.499" Max="-8.5948 1.66598 -10.3224"/>
 	<RenderableObject name="pot_petit03" class="StaticMesh" resource="pot_petit03" position="-9.27972 1.30262 -10.5683" yaw="0.0" pitch="0.0" roll="0.0" Min="-9.33735 1.29845 -10.626" Max="-9.22209 1.53978 -10.5107"/>
-	<RenderableObject name="bot" class="AnimatedModel" resource="bot" cycle="run" position="-8.2333 0.0 -7.26637" yaw="0.0" pitch="0.0" roll="0.0" Altura="2"/>
-  <RenderableObject name="bot2" class="AnimatedModel" resource="bot" cycle="shoot" position="-8.2333 0.0 -7.26637" yaw="0.0" pitch="0.0" roll="0.0" Altura="2"/>
+  <!--<RenderableObject name="bot" class="AnimatedModel" resource="bot" cycle="run" position="-8.2333 0.0 -7.26637" yaw="0.0" pitch="0.0" roll="0.0" Altura="2"/>
+  <RenderableObject name="bot2" class="AnimatedModel" resource="bot" cycle="shoot" position="-8.2333 0.0 -7.26637" yaw="0.0" pitch="0.0" roll="0.0" Altura="2"/>-->
 </RenderableObjects>
