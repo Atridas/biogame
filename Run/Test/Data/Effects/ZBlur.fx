@@ -6,7 +6,7 @@
 // vDofParams coefficients:
 // x = near blur depth; y = focal plane depth; z = far blur depth
 // w = blurriness cutoff constant for objects behind the focal plane
-float4 vDofParams=float4(3.0,15.0,45.0, 0.75);
+float4 vDofParams=float4(2.0,5.0,45.0, 0.75);
 
 
 //Vertex Shader
@@ -44,6 +44,7 @@ void AnimatedPreZBlurVS(CAL3D_HW_VERTEX_VS _in,
 
 float ComputeDepthBlur(float depth /* in view space */)
 {
+/*
   float f;
   if(depth < vDofParams.y)
   {
@@ -55,6 +56,23 @@ float ComputeDepthBlur(float depth /* in view space */)
   }
   
   return f * 0.5 + 0.5;
+  */
+  
+  float f;
+  if(depth < vDofParams.x)
+  {
+    f = 1.0;
+  } else if(depth <= vDofParams.y)
+  {
+    f = ((-depth)/(vDofParams.y-vDofParams.x)) + vDofParams.x/(vDofParams.y-vDofParams.x) + 1;
+  } else if(depth <= vDofParams.z)
+  {
+    f = (depth * vDofParams.w / (vDofParams.z - vDofParams.y)) - (vDofParams.y*vDofParams.w/(vDofParams.z-vDofParams.y));
+  } else 
+  {
+    f = vDofParams.w;
+  }
+  return f;
 }
 
 
@@ -153,7 +171,8 @@ float4 DepthOfFieldManySamples(float2 OriginalUV : TEXCOORD0) : COLOR
   float3 OriginalRGB = tex2D(FrameBufferSampler, OriginalUV).xyz;
   float OriginalA = tex2D(ZBlurSampler, OriginalUV).x;
   //return float4(OriginalA,OriginalA,OriginalA,1.0);
-  float3 Blurred = 0;
+  float l_AcumA = 1-OriginalA;
+  float3 Blurred = OriginalRGB * (1-OriginalA);
   for(int i = 0; i < POISON_BLUR_KERNEL_SIZE; i++)
   {
     float2 l_displacement = g_PoissonBlurKernel[i] * OriginalA * MAX_RADI_BLUR;
@@ -163,9 +182,15 @@ float4 DepthOfFieldManySamples(float2 OriginalUV : TEXCOORD0) : COLOR
     float3 CurrentRGB = tex2D(FrameBufferSampler, l_UVFrameBuffer).xyz;
     float  CurrentA   = tex2D(ZBlurSampler,       l_UVZBlur).x;
     // Lerp between original rgb and the jitter rgb based on the alpha value
-    Blurred += CurrentRGB;
+    Blurred += CurrentRGB * (1-CurrentA);
+    l_AcumA += 1-CurrentA;
   }
-  return float4(Blurred / POISON_BLUR_KERNEL_SIZE, 1.0f);
+  if(l_AcumA == 0)
+  {
+    Blurred = OriginalRGB;
+    l_AcumA = 1;
+  }
+  return float4(Blurred / l_AcumA, 1.0f);
 }
 
 technique PostZBlurTechnique
