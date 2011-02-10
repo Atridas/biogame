@@ -61,8 +61,10 @@ bool CViewerProcess::Init()
   m_pCamera = m_pObjectCamera;
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
 
-  l_Spot->SetDirection(m_pObjectBot->GetPosition());
-
+  if (m_pObjectBot != 0)
+  {
+    l_Spot->SetDirection(m_pObjectBot->GetPosition());
+  }
   /*if (m_iMode != 0)
   {
     m_pObject->SetPosition(Vect3f(0.0f,0.0f,0.0f));
@@ -102,24 +104,29 @@ void CViewerProcess::Update(float _fElapsedTime)
 
   if (m_iMode == 0)
   {
-    m_pObjectBot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObjectBot->GetPosition().y, m_pObject->GetPosition().z));
-    m_pObjectBot->SetYaw(m_pObject->GetYaw()-FLOAT_PI_VALUE/2.0f);
-    l_fPitch = m_pObject->GetPitch();
-    l_fYaw = m_pObjectBot->GetYaw();
-    l_fYaw = l_fYaw+FLOAT_PI_VALUE/2;
-    if (l_Spot != 0)
-    l_Spot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObject->GetPosition().y+0.5f, m_pObject->GetPosition().z));
+    if (m_pObjectBot != 0)
+    {
+      m_pObjectBot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObjectBot->GetPosition().y, m_pObject->GetPosition().z));
+      m_pObjectBot->SetYaw(m_pObject->GetYaw()-FLOAT_PI_VALUE/2.0f);
+      l_fPitch = m_pObject->GetPitch();
+      l_fYaw = m_pObjectBot->GetYaw();
+      l_fYaw = l_fYaw+FLOAT_PI_VALUE/2;
+      if (l_Spot != 0)
+      l_Spot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObject->GetPosition().y+0.5f, m_pObject->GetPosition().z));
 
-    Vect3f l_vec(cos(l_fYaw) * cos(l_fPitch), sin(l_fPitch),sin(l_fYaw) * cos(l_fPitch) );
-    l_Spot->SetDirection(Vect3f(l_vec.x,l_vec.y,l_vec.z));
+      Vect3f l_vec(cos(l_fYaw) * cos(l_fPitch), sin(l_fPitch),sin(l_fYaw) * cos(l_fPitch) );
+      l_Spot->SetDirection(Vect3f(l_vec.x,l_vec.y,l_vec.z));
+    }
   }
  
 
 
   if(m_bStateChanged)
   {
-    ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->BlendCycle(m_iState,0);
-
+    if (m_pObjectBot != 0)
+    {
+      ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->BlendCycle(m_iState,0);
+    }
     m_bStateChanged = false;
   }
 
@@ -271,38 +278,45 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
 
       if (m_iMode == MODE_ANIMATS)
       {
-        l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();   
-        CORE->GetRenderableObjectsManager()->SetAllVisible(false,l_pROM->m_vIndexAnimated[m_iAnimat]);
-        //m_pObject->SetPosition(l_pos);
+        if (l_pROM->m_vIndexAnimated.size() != 0)
+        {
+          l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();   
+          CORE->GetRenderableObjectsManager()->SetAllVisible(false,l_pROM->m_vIndexAnimated[m_iAnimat]);
+          //m_pObject->SetPosition(l_pos);
 
-        /*CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
+          /*CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
 
-        Vect3f l_vMax = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->m_vMax;
-        Vect3f l_vMin = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->m_vMin;
-        Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();
-        Vect3f l_vCentre = (l_vMax + l_vMin)/2;
-        m_pObject->SetPosition(Vect3f(l_pos.x,l_pos.y+l_vMax.y,l_pos.z));
-        l_pCam->SetZoom(l_vMax.y*10);*/
-        CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
-        float l_fAltura = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->m_fAltura;
-        l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();
+          Vect3f l_vMax = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->m_vMax;
+          Vect3f l_vMin = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->m_vMin;
+          Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();
+          Vect3f l_vCentre = (l_vMax + l_vMin)/2;
+          m_pObject->SetPosition(Vect3f(l_pos.x,l_pos.y+l_vMax.y,l_pos.z));
+          l_pCam->SetZoom(l_vMax.y*10);*/
+          CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
+          float l_fAltura = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->m_fAltura;
+          l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();
      
-        l_pCam->SetZoom(l_fAltura*2);
-        m_pObject->SetPosition(Vect3f(l_pos.x,l_fAltura/2,l_pos.z));
+          l_pCam->SetZoom(l_fAltura*2);
+          m_pObject->SetPosition(Vect3f(l_pos.x,l_fAltura/2,l_pos.z));
+        }
+        m_pObject->SetPosition(Vect3f(0.0f,0.0f,0.0f));
 
       }
       else if (m_iMode == MODE_MESH)
       {
-        l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetPosition();  
-        CORE->GetRenderableObjectsManager()->SetAllVisible(false,l_pROM->m_vIndexMeshes[m_iMesh]);
-        CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
+        if (l_pROM->m_vIndexMeshes.size() != 0)
+        {
+          l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetPosition();  
+          CORE->GetRenderableObjectsManager()->SetAllVisible(false,l_pROM->m_vIndexMeshes[m_iMesh]);
+          CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
 
-        Vect3f l_vMax = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMax;
-        Vect3f l_vMin = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMin;
-        Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetPosition();
-        Vect3f l_vCentre = (l_vMax + l_vMin)/2;
-        m_pObject->SetPosition(Vect3f(l_pos.x,l_vCentre.y,l_pos.z));
-        l_pCam->SetZoom(GetZoomMesh(l_vMax,l_vCentre));
+          Vect3f l_vMax = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMax;
+          Vect3f l_vMin = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMin;
+          Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetPosition();
+          Vect3f l_vCentre = (l_vMax + l_vMin)/2;
+          m_pObject->SetPosition(Vect3f(l_pos.x,l_vCentre.y,l_pos.z));
+          l_pCam->SetZoom(GetZoomMesh(l_vMax,l_vCentre));
+        }
       }
       
       
@@ -343,17 +357,20 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
       if (m_iMesh == l_pROM->m_vIndexMeshes.size())
         m_iMesh = 0;
 
-     CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
+      if (l_pROM->m_vIndexMeshes.size() != 0)
+      {
+        CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
 
-      Vect3f l_vMax = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMax;
-      Vect3f l_vMin = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMin;
-      Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetPosition();
-      Vect3f l_vCentre = (l_vMax + l_vMin)/2;
-      m_pObject->SetPosition(Vect3f(l_pos.x,l_vCentre.y,l_pos.z));
-      l_pCam->SetZoom(GetZoomMesh(l_vMax,l_vCentre));
+        Vect3f l_vMax = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMax;
+        Vect3f l_vMin = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMin;
+        Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetPosition();
+        Vect3f l_vCentre = (l_vMax + l_vMin)/2;
+        m_pObject->SetPosition(Vect3f(l_pos.x,l_vCentre.y,l_pos.z));
+        l_pCam->SetZoom(GetZoomMesh(l_vMax,l_vCentre));
 
 
-      l_pROM->SetAllVisible(false,l_pROM->m_vIndexMeshes[m_iMesh]);
+        l_pROM->SetAllVisible(false,l_pROM->m_vIndexMeshes[m_iMesh]);
+      }
     }
     else if (m_iMode == MODE_ANIMATS)
     {
@@ -363,17 +380,19 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
       if (m_iAnimat == l_pROM->m_vIndexAnimated.size())
         m_iAnimat = 0;
 
-
-      CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
-      float l_fAltura = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->m_fAltura;
-      Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();
+      if (l_pROM->m_vIndexAnimated.size() != 0)
+      {
+        CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
+        float l_fAltura = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->m_fAltura;
+        Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();
      
-      l_pCam->SetZoom(l_fAltura*2);
-      m_pObject->SetPosition(Vect3f(l_pos.x,l_fAltura/2,l_pos.z));
-      /*Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();
-      m_pObject->SetPosition(l_pos);*/
+        l_pCam->SetZoom(l_fAltura*2);
+        m_pObject->SetPosition(Vect3f(l_pos.x,l_fAltura/2,l_pos.z));
+        /*Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();
+        m_pObject->SetPosition(l_pos);*/
 
-      l_pROM->SetAllVisible(false,l_pROM->m_vIndexAnimated[m_iAnimat]);
+        l_pROM->SetAllVisible(false,l_pROM->m_vIndexAnimated[m_iAnimat]);
+      }
     }
 
     return true;
@@ -391,16 +410,19 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
         m_iMesh = l_pROM->m_vIndexMeshes.size()-1;
 
 
-      CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
+      if (l_pROM->m_vIndexMeshes.size() != 0)
+      {
+        CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
 
-      Vect3f l_vMax = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMax;
-      Vect3f l_vMin = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMin;
-      Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetPosition();
-      Vect3f l_vCentre = (l_vMax + l_vMin)/2;
-      m_pObject->SetPosition(Vect3f(l_pos.x,l_vCentre.y,l_pos.z));
-      l_pCam->SetZoom(GetZoomMesh(l_vMax,l_vCentre));
+        Vect3f l_vMax = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMax;
+        Vect3f l_vMin = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMin;
+        Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetPosition();
+        Vect3f l_vCentre = (l_vMax + l_vMin)/2;
+        m_pObject->SetPosition(Vect3f(l_pos.x,l_vCentre.y,l_pos.z));
+        l_pCam->SetZoom(GetZoomMesh(l_vMax,l_vCentre));
 
-      l_pROM->SetAllVisible(false,l_pROM->m_vIndexMeshes[m_iMesh]);
+        l_pROM->SetAllVisible(false,l_pROM->m_vIndexMeshes[m_iMesh]);
+      }
     }
     else if (m_iMode == MODE_ANIMATS)
     {
@@ -410,15 +432,17 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
       if (m_iAnimat == -1)
         m_iAnimat = l_pROM->m_vIndexAnimated.size()-1;
 
-      CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
-      float l_fAltura = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->m_fAltura;
-      Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();
+      if (l_pROM->m_vIndexAnimated.size() != 0)
+      {
+        CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
+        float l_fAltura = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->m_fAltura;
+        Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();
      
-      l_pCam->SetZoom(l_fAltura*2);
-      m_pObject->SetPosition(Vect3f(l_pos.x,l_fAltura/2,l_pos.z));
-      //m_pObject->SetPosition(l_pos);
+        l_pCam->SetZoom(l_fAltura*2);
+        m_pObject->SetPosition(Vect3f(l_pos.x,l_fAltura/2,l_pos.z));
 
-      l_pROM->SetAllVisible(false,l_pROM->m_vIndexAnimated[m_iAnimat]);
+        l_pROM->SetAllVisible(false,l_pROM->m_vIndexAnimated[m_iAnimat]);
+      }
     }
 
     return true;
@@ -431,18 +455,21 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
     if (m_iMode == MODE_ANIMATS)
     {
       CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
-      CRenderableAnimatedInstanceModel* l_RenderModel = (CRenderableAnimatedInstanceModel*)l_pROM->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat]);
-      int l_iNumAnimations = l_RenderModel->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetAnimationCount();
-      int l_iCurrentCycle = l_RenderModel->GetAnimatedInstanceModel()->GetCurrentCycle();
-
-      l_iCurrentCycle++;
-
-      if (l_iCurrentCycle == l_iNumAnimations)
+      if (l_pROM->m_vIndexAnimated.size() != 0)
       {
-        l_iCurrentCycle = 0;
+        CRenderableAnimatedInstanceModel* l_RenderModel = (CRenderableAnimatedInstanceModel*)l_pROM->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat]);
+        int l_iNumAnimations = l_RenderModel->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetAnimationCount();
+        int l_iCurrentCycle = l_RenderModel->GetAnimatedInstanceModel()->GetCurrentCycle();
+
+        l_iCurrentCycle++;
+
+        if (l_iCurrentCycle == l_iNumAnimations)
+        {
+          l_iCurrentCycle = 0;
+        }
+        l_RenderModel->GetAnimatedInstanceModel()->ClearCycle(0);
+        l_RenderModel->GetAnimatedInstanceModel()->BlendCycle(l_iCurrentCycle,0);
       }
-      l_RenderModel->GetAnimatedInstanceModel()->ClearCycle(0);
-      l_RenderModel->GetAnimatedInstanceModel()->BlendCycle(l_iCurrentCycle,0);
     }
     return true;
   }
@@ -453,20 +480,23 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
     if (m_iMode == MODE_ANIMATS)
     {
       CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
-      //CRenderableObject* l_pAnimatedInstance = l_pROM->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat]);
-      CRenderableAnimatedInstanceModel* l_RenderModel = (CRenderableAnimatedInstanceModel*)l_pROM->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat]);
-      int l_iNumAnimations = l_RenderModel->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetAnimationCount();
-      int l_iCurrentCycle = l_RenderModel->GetAnimatedInstanceModel()->GetCurrentCycle();
-
-      l_iCurrentCycle--;
-
-      if (l_iCurrentCycle == -1)
+      if (l_pROM->m_vIndexAnimated.size() != 0)
       {
-        l_iCurrentCycle = l_iNumAnimations-1;
-      }
+        //CRenderableObject* l_pAnimatedInstance = l_pROM->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat]);
+        CRenderableAnimatedInstanceModel* l_RenderModel = (CRenderableAnimatedInstanceModel*)l_pROM->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat]);
+        int l_iNumAnimations = l_RenderModel->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetAnimationCount();
+        int l_iCurrentCycle = l_RenderModel->GetAnimatedInstanceModel()->GetCurrentCycle();
 
-      l_RenderModel->GetAnimatedInstanceModel()->ClearCycle(0);
-      l_RenderModel->GetAnimatedInstanceModel()->BlendCycle(l_iCurrentCycle,0);
+        l_iCurrentCycle--;
+
+        if (l_iCurrentCycle == -1)
+        {
+          l_iCurrentCycle = l_iNumAnimations-1;
+        }
+
+        l_RenderModel->GetAnimatedInstanceModel()->ClearCycle(0);
+        l_RenderModel->GetAnimatedInstanceModel()->BlendCycle(l_iCurrentCycle,0);
+      }
     }
     return true;
   }
@@ -514,13 +544,21 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
    //text
   uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("arial");
   uint32 l_uiFontTypeTitle = FONT_MANAGER->GetTTF_Id("Deco");
+  uint32 l_uiFontTypeTitle2 = FONT_MANAGER->GetTTF_Id("xfiles");
   int l_iPosicio = 450;
   string l_szMsg("Mode Animats");
   string l_szMsg2("Mode Meshes");
   string l_szMsg3("Mode Escena");
-  CRenderableObject* l_pMeshInstance = l_pROM->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh]);
-  CRenderableObject* l_pAnimatedInstance = l_pROM->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat]);
+  CRenderableObject* l_pAnimatedInstance;
+  CRenderableObject* l_pMeshInstance;
   stringstream l_SStream;
+
+  //if ((l_pROM->m_vIndexAnimated.size() != 0) && (l_pROM->m_vIndexMeshes.size() != 0))
+  //{
+  
+  
+  
+  
   
 
   switch (m_iMode)
@@ -534,39 +572,61 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
       break;
 
     case MODE_MESH:
-      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg2.c_str());
+      if (l_pROM->m_vIndexMeshes.size() != 0)
+      {
+        FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg2.c_str());
+        l_pMeshInstance = l_pROM->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh]);
 
-      l_SStream << "Nom: " << l_pMeshInstance->GetName() << endl;
-      l_SStream << "Tipus: StaticMesh" << endl;
-      l_SStream << "Posicio: " << (float)l_pMeshInstance->GetPosition().x << " ";
-      l_SStream << (float)l_pMeshInstance->GetPosition().y << " ";
-      l_SStream << (float)l_pMeshInstance->GetPosition().y << endl;
-      l_SStream << "Yaw: " << (float)l_pMeshInstance->GetYaw() << endl;
-      l_SStream << "Pitch: " << (float)l_pMeshInstance->GetPitch() << endl;
-      l_SStream << "Roll: " << (float)l_pMeshInstance->GetRoll() << endl;
-      FONT_MANAGER->DrawText(0,l_iPosicio,colGREEN,l_uiFontType,l_SStream.str().c_str());
+        l_SStream << "Nom: " << l_pMeshInstance->GetName() << endl;
+        l_SStream << "Tipus: StaticMesh" << endl;
+        l_SStream << "Posicio: " << (float)l_pMeshInstance->GetPosition().x << " ";
+        l_SStream << (float)l_pMeshInstance->GetPosition().y << " ";
+        l_SStream << (float)l_pMeshInstance->GetPosition().y << endl;
+        l_SStream << "Yaw: " << (float)l_pMeshInstance->GetYaw() << endl;
+        l_SStream << "Pitch: " << (float)l_pMeshInstance->GetPitch() << endl;
+        l_SStream << "Roll: " << (float)l_pMeshInstance->GetRoll() << endl;
+        FONT_MANAGER->DrawText(0,l_iPosicio,colGREEN,l_uiFontType,l_SStream.str().c_str());
+      }
+      else
+      {
+        FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg.c_str());
+        l_SStream << "No hi ha cap OBJECTE MESH per mostrar" << endl;
+        FONT_MANAGER->DrawText(0,l_iPosicio,colGREEN,l_uiFontType,l_SStream.str().c_str());
+      }
 
 
       break;
 
     case MODE_ANIMATS:
-      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg.c_str());
 
-      CRenderableAnimatedInstanceModel* l_RenderModel = (CRenderableAnimatedInstanceModel*)l_pROM->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat]);
+      if (l_pROM->m_vIndexAnimated.size() != 0)
+      {
+        FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg.c_str());
+        l_pAnimatedInstance = l_pROM->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat]);
+        CRenderableAnimatedInstanceModel* l_RenderModel = (CRenderableAnimatedInstanceModel*)l_pROM->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat]);
 
-      l_SStream << "Nom: " << l_pAnimatedInstance->GetName() << endl;
-      l_SStream << "Tipus: AnimatedModel" << endl;
-      l_SStream << "Posicio: " << (float)l_pAnimatedInstance->GetPosition().x << " ";
-      l_SStream << (float)l_pAnimatedInstance->GetPosition().y << " ";
-      l_SStream << (float)l_pAnimatedInstance->GetPosition().y << endl;
-      l_SStream << "Yaw: " << (float)l_pAnimatedInstance->GetYaw() << endl;
-      l_SStream << "Pitch: " << (float)l_pAnimatedInstance->GetPitch() << endl;
-      l_SStream << "Roll: " << (float)l_pAnimatedInstance->GetRoll() << endl;
-      l_SStream << "Animacio: " << (int)l_RenderModel->GetAnimatedInstanceModel()->GetCurrentCycle() << endl;
-      FONT_MANAGER->DrawText(0,l_iPosicio,colGREEN,l_uiFontType,l_SStream.str().c_str());
+        l_SStream << "Nom: " << l_pAnimatedInstance->GetName() << endl;
+        l_SStream << "Tipus: AnimatedModel" << endl;
+        l_SStream << "Posicio: " << (float)l_pAnimatedInstance->GetPosition().x << " ";
+        l_SStream << (float)l_pAnimatedInstance->GetPosition().y << " ";
+        l_SStream << (float)l_pAnimatedInstance->GetPosition().y << endl;
+        l_SStream << "Yaw: " << (float)l_pAnimatedInstance->GetYaw() << endl;
+        l_SStream << "Pitch: " << (float)l_pAnimatedInstance->GetPitch() << endl;
+        l_SStream << "Roll: " << (float)l_pAnimatedInstance->GetRoll() << endl;
+        l_SStream << "Animacio: " << (int)l_RenderModel->GetAnimatedInstanceModel()->GetCurrentCycle() << endl;
+        FONT_MANAGER->DrawText(0,l_iPosicio,colGREEN,l_uiFontType,l_SStream.str().c_str());
+      }
+      else
+      {
+        FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg.c_str());
+        l_SStream << "No hi ha cap OBJECTE ANIMAT per mostrar" << endl;
+        FONT_MANAGER->DrawText(0,l_iPosicio,colGREEN,l_uiFontType,l_SStream.str().c_str());
+      }
 
       break; 
   }
+
+  //}
 }
 
 
