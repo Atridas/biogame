@@ -20,5 +20,19 @@ void CEnemy::InitTemplate(CXMLTreeNode& _XMLParams)
 
 
 
+void CEnemy::SetWiew(bool _bView)
+{
+	//nomes mira al player, pasar un punter de object 3d per si de cas
+	//si troba al player es true, si no el veu es false
 
+	m_vPosition;
+	m_fYaw+=m_fViewAngle;
+}
+  
+void CEnemy::SetSound(bool _bSound)
+{
+	//nomes mira al player, pasar un punter de object 3d per si de cas
+	//si escolta al player es true, si no l'escolta es false
+
+}
 
