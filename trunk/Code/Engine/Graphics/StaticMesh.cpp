@@ -93,14 +93,24 @@ bool CStaticMesh::Load(const string &_szFileName)
 
   }
 
-  
+  int l_i = 0;
   // ----------------------------- BUFFERS ----------------------------------------
   for(int i = 0; i < l_usNumMaterials; i++)
   {
+
     uint16 l_VertexCount;
-    uint16 l_usVertexSize = GetVertexSize(l_pusVertexType[i]);
-  
     l_File.read((char*)&l_VertexCount, sizeof(uint16));
+
+   /* if (l_VertexCount <= 0)
+    {*/
+
+    /*m_vMaterials.push_back(new CEffectMaterial());
+    m_vMaterials[l_i]->Init(l_File);
+    l_pusVertexType[l_i] = m_vMaterials[l_i]->GetVertexType();*/
+    
+    uint16 l_usVertexSize = GetVertexSize(l_pusVertexType[l_i]);
+  
+   
 
     char* l_pVertexBuffer = new char[l_VertexCount*l_usVertexSize];
     l_File.read(&l_pVertexBuffer[0], l_usVertexSize*l_VertexCount);
@@ -126,49 +136,49 @@ bool CStaticMesh::Load(const string &_szFileName)
 
     
 
-    if(l_pusVertexType[i] == SNORMALTEXTUREDVERTEX::GetVertexType())
+    if(l_pusVertexType[l_i] == SNORMALTEXTUREDVERTEX::GetVertexType())
     {
       l_RenderableVertexs = new CIndexedVertexs<SNORMALTEXTUREDVERTEX>( l_pRenderManager,
                                                                         l_pVertexBuffer,
                                                                         l_pIndexList,
                                                                         l_VertexCount, 
                                                                         l_IndexCount);
-    } else if(l_pusVertexType[i] == SNORMALTEXTURED2VERTEX::GetVertexType())
+    } else if(l_pusVertexType[l_i] == SNORMALTEXTURED2VERTEX::GetVertexType())
     {
       l_RenderableVertexs = new CIndexedVertexs<SNORMALTEXTURED2VERTEX>(  l_pRenderManager,
                                                                           l_pVertexBuffer,
                                                                           l_pIndexList,
                                                                           l_VertexCount, 
                                                                           l_IndexCount);
-    } else if(l_pusVertexType[i] == SDIFFUSEVERTEX::GetVertexType())
+    } else if(l_pusVertexType[l_i] == SDIFFUSEVERTEX::GetVertexType())
     {
       l_RenderableVertexs = new CIndexedVertexs<SDIFFUSEVERTEX>(  l_pRenderManager,
                                                                   l_pVertexBuffer,
                                                                   l_pIndexList,
                                                                   l_VertexCount, 
                                                                   l_IndexCount);
-    } else if(l_pusVertexType[i] == STEXTUREDVERTEX::GetVertexType())
+    } else if(l_pusVertexType[l_i] == STEXTUREDVERTEX::GetVertexType())
     {
       l_RenderableVertexs = new CIndexedVertexs<STEXTUREDVERTEX>( l_pRenderManager,
                                                                         l_pVertexBuffer,
                                                                         l_pIndexList,
                                                                         l_VertexCount, 
                                                                         l_IndexCount);
-    } else if(l_pusVertexType[i] == STEXTURED2VERTEX::GetVertexType())
+    } else if(l_pusVertexType[l_i] == STEXTURED2VERTEX::GetVertexType())
     {
       l_RenderableVertexs = new CIndexedVertexs<STEXTURED2VERTEX>(  l_pRenderManager,
                                                                     l_pVertexBuffer,
                                                                     l_pIndexList,
                                                                     l_VertexCount, 
                                                                     l_IndexCount);
-    } else if(l_pusVertexType[i] == SNORMALDIFFUSEVERTEX::GetVertexType())
+    } else if(l_pusVertexType[l_i] == SNORMALDIFFUSEVERTEX::GetVertexType())
     {
       l_RenderableVertexs = new CIndexedVertexs<SNORMALDIFFUSEVERTEX>(  l_pRenderManager,
                                                                         l_pVertexBuffer,
                                                                         l_pIndexList,
                                                                         l_VertexCount, 
                                                                         l_IndexCount);
-    } else if(l_pusVertexType[i] == TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetVertexType())
+    } else if(l_pusVertexType[l_i] == TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetVertexType())
     {
       CalcTangentsAndBinormalsBis( l_pVertexBuffer, l_pIndexList, l_VertexCount,
                                 l_IndexCount, sizeof(TNORMALTANGENTBINORMALTEXTUREDVERTEX), 0, sizeof(float)*3,
@@ -179,7 +189,7 @@ bool CStaticMesh::Load(const string &_szFileName)
                                                                                         l_pIndexList,
                                                                                         l_VertexCount, 
                                                                                         l_IndexCount);
-    } else if(l_pusVertexType[i] == TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetVertexType())
+    } else if(l_pusVertexType[l_i] == TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetVertexType())
     {
       CalcTangentsAndBinormalsBis( l_pVertexBuffer, l_pIndexList, l_VertexCount,
                                 l_IndexCount, sizeof(TNORMALTANGENTBINORMALTEXTURED2VERTEX), 0, sizeof(float)*3,
@@ -207,6 +217,11 @@ bool CStaticMesh::Load(const string &_szFileName)
   
     delete l_pVertexBuffer;
     delete l_pIndexList;
+
+    l_i++;
+    
+    
+    //FI FOR
   }
 
 

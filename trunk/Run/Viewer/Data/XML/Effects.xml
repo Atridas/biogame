@@ -32,7 +32,7 @@
     
     <!-- Normal Textured-->
     <!--default_technique vertex_type="19" technique="ShowNormalsTechnique"/-->
-    <default_technique vertex_type="19" technique="NoTechnique"/>
+    <default_technique vertex_type="19" technique="NormalTexturedTechnique"/>
 
     <!-- Tangent-Binormal blabla Textured 2 -->
     <!-- default_technique vertex_type="47" technique="NormalTexturedTechnique"/ -->
