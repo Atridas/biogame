@@ -96,6 +96,7 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
   }
 
   int l_iNumObjects = l_XMLObjects.GetNumChildren();
+  int l_iMeshIndex = 0;
   for(int i = 0; i < l_iNumObjects; i++)
   {
     string l_szName, l_szClass, l_szResource,l_szDefaultAnimation;
@@ -123,24 +124,22 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
     l_fPitch      = l_XMLObject.GetFloatProperty("pitch") * FLOAT_PI_VALUE / 180.0f;
     l_fRoll       = l_XMLObject.GetFloatProperty("roll") * FLOAT_PI_VALUE / 180.0f;
 
-    if(!GetResource(l_szName))
+    l_pRenderableObject = GetResource(l_szName);
+    if(!l_pRenderableObject)
     {
-      CRenderableObject* l_pRenderableObject = 0;
       if(l_szClass == "StaticMesh") 
       {
         l_pRenderableObject = AddMeshInstance(l_szResource, l_szName);
-        m_vIndexMeshes.push_back(i);
-
         l_pRenderableObject->m_vMin = Vect3f(l_vMin.x,l_vMin.y,l_vMin.z);
-        l_pRenderableObject->m_vMax = Vect3f(l_vMax.x,l_vMax.y,l_vMax.z);
-        l_pRenderableObject->m_fAltura = 0;
-
+          l_pRenderableObject->m_vMax = Vect3f(l_vMax.x,l_vMax.y,l_vMax.z);
+          l_pRenderableObject->m_fAltura = 0;
+          m_vIndexMeshes.push_back(l_iMeshIndex);
 
       } else if(l_szClass == "AnimatedModel") 
       {
         l_pRenderableObject = AddAnimatedModel(l_szResource, l_szName,l_szDefaultAnimation);
-         m_vIndexAnimated.push_back(i);
-         l_pRenderableObject->m_fAltura = l_fAltura;
+        m_vIndexAnimated.push_back(l_iMeshIndex);
+          l_pRenderableObject->m_fAltura = l_fAltura;
 
       } else 
       {
@@ -159,16 +158,17 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
         LOGGER->AddNewLog(ELL_WARNING,"CRenderableObjectsManager:: Object: \"%s\" not added", l_szName.c_str());
       }
 
-
+      l_iMeshIndex = l_iMeshIndex + 1;
     }else{
+      //i=i-1;
       if(!_bReload)
       {
         LOGGER->AddNewLog(ELL_WARNING,"CRenderableObjectsManager:: Repeated object \"%s\"", l_szName.c_str());
       }
-      l_pRenderableObject->SetPosition(l_vPos);
+      /*l_pRenderableObject->SetPosition(l_vPos);
       l_pRenderableObject->SetYaw     (l_fYaw);
       l_pRenderableObject->SetPitch   (l_fPitch);
-      l_pRenderableObject->SetRoll    (l_fRoll);
+      l_pRenderableObject->SetRoll    (l_fRoll);*/
     }
   }
 

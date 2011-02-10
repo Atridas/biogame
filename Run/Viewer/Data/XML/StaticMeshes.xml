@@ -15,8 +15,8 @@
 	<mesh name="cadira_oficina" path="Data/Meshes/cadira_oficina.mesh"/>
 	<mesh name="Marc Porta" path="Data/Meshes/Marc Porta.mesh"/>
 	<mesh name="fluorescente_DEF" path="Data/Meshes/fluorescente_DEF.mesh"/>
-	<mesh name="Carpetes02" path="Data/Meshes/Carpetes02.mesh"/>
-	<mesh name="Carpetes01" path="Data/Meshes/Carpetes01.mesh"/>
+	<mesh name="Carpeta1" path="Data/Meshes/Carpeta1.mesh"/>
+	<mesh name="Carpeta2" path="Data/Meshes/Carpeta2.mesh"/>
 	<mesh name="Cable_Lampada" path="Data/Meshes/Cable_Lampada.mesh"/>
 	<mesh name="braç02" path="Data/Meshes/braç02.mesh"/>
 	<mesh name="pot02" path="Data/Meshes/pot02.mesh"/>
@@ -30,14 +30,6 @@
 	<mesh name="Proveta19" path="Data/Meshes/Proveta19.mesh"/>
 	<mesh name="Proveta20" path="Data/Meshes/Proveta20.mesh"/>
 	<mesh name="Proveta21" path="Data/Meshes/Proveta21.mesh"/>
-	<mesh name="soport provetas03" path="Data/Meshes/soport provetas03.mesh"/>
-	<mesh name="Proveta02" path="Data/Meshes/Proveta02.mesh"/>
-	<mesh name="Proveta03" path="Data/Meshes/Proveta03.mesh"/>
-	<mesh name="Proveta04" path="Data/Meshes/Proveta04.mesh"/>
-	<mesh name="Proveta05" path="Data/Meshes/Proveta05.mesh"/>
-	<mesh name="Proveta06" path="Data/Meshes/Proveta06.mesh"/>
-	<mesh name="Proveta07" path="Data/Meshes/Proveta07.mesh"/>
-	<mesh name="Proveta08" path="Data/Meshes/Proveta08.mesh"/>
 	<mesh name="maleta" path="Data/Meshes/maleta.mesh"/>
 	<mesh name="viga" path="Data/Meshes/viga.mesh"/>
 	<mesh name="vigueta" path="Data/Meshes/vigueta.mesh"/>
@@ -56,8 +48,8 @@
 	<mesh name="Llum_emergencia" path="Data/Meshes/Llum_emergencia.mesh"/>
 	<mesh name="Cable_florescent" path="Data/Meshes/Cable_florescent.mesh"/>
 	<mesh name="Botiquin_medic_DEF" path="Data/Meshes/Botiquin_medic_DEF.mesh"/>
-	<mesh name="Carpetes00" path="Data/Meshes/Carpetes00.mesh"/>
-	<mesh name="Carpetes03" path="Data/Meshes/Carpetes03.mesh"/>
+	<mesh name="Carpeta" path="Data/Meshes/Carpeta.mesh"/>
+	<mesh name="Carpeta" path="Data/Meshes/Carpeta.mesh"/>
 	<mesh name="Carpetes04" path="Data/Meshes/Carpetes04.mesh"/>
 	<mesh name="radiografia07" path="Data/Meshes/radiografia07.mesh"/>
 	<mesh name="radiografia08" path="Data/Meshes/radiografia08.mesh"/>
@@ -69,15 +61,31 @@
 	<mesh name="vigueta01" path="Data/Meshes/vigueta01.mesh"/>
 	<mesh name="vigueta02" path="Data/Meshes/vigueta02.mesh"/>
 	<mesh name="cadira_oficina01" path="Data/Meshes/cadira_oficina01.mesh"/>
+	<mesh name="Taula01" path="Data/Meshes/Taula01.mesh"/>
 	<mesh name="pot_prim" path="Data/Meshes/pot_prim.mesh"/>
 	<mesh name="pot_petit" path="Data/Meshes/pot_petit.mesh"/>
 	<mesh name="pot_Mitja" path="Data/Meshes/pot_Mitja.mesh"/>
+	<mesh name="proveta01" path="Data/Meshes/proveta01.mesh"/>
+	<mesh name="proveta02" path="Data/Meshes/proveta02.mesh"/>
 	<mesh name="CAPSULA_DEF01" path="Data/Meshes/CAPSULA_DEF01.mesh"/>
 	<mesh name="CAPSULA_DEF02" path="Data/Meshes/CAPSULA_DEF02.mesh"/>
+	<mesh name="Lampada01" path="Data/Meshes/Lampada01.mesh"/>
+	<mesh name="Cable_Lampada01" path="Data/Meshes/Cable_Lampada01.mesh"/>
+	<mesh name="Cable_florescent01" path="Data/Meshes/Cable_florescent01.mesh"/>
+	<mesh name="Cable_florescent02" path="Data/Meshes/Cable_florescent02.mesh"/>
+	<mesh name="Cable_florescent03" path="Data/Meshes/Cable_florescent03.mesh"/>
+	<mesh name="Cable_florescent04" path="Data/Meshes/Cable_florescent04.mesh"/>
+	<mesh name="Cable_florescent05" path="Data/Meshes/Cable_florescent05.mesh"/>
+	<mesh name="Cable_florescent06" path="Data/Meshes/Cable_florescent06.mesh"/>
+	<mesh name="Cable_florescent07" path="Data/Meshes/Cable_florescent07.mesh"/>
+	<mesh name="Cable_florescent08" path="Data/Meshes/Cable_florescent08.mesh"/>
+	<mesh name="Cable_florescent09" path="Data/Meshes/Cable_florescent09.mesh"/>
+	<mesh name="Cable_florescent10" path="Data/Meshes/Cable_florescent10.mesh"/>
 	<mesh name="Ordinador_DEF" path="Data/Meshes/Ordinador_DEF.mesh"/>
 	<mesh name="tub_estret_DEF" path="Data/Meshes/tub_estret_DEF.mesh"/>
 	<mesh name="Frigorific_DEF" path="Data/Meshes/Frigorific_DEF.mesh"/>
 	<mesh name="Frigorific_DEF01" path="Data/Meshes/Frigorific_DEF01.mesh"/>
+	<mesh name="Ordinador_DEF01" path="Data/Meshes/Ordinador_DEF01.mesh"/>
 	<mesh name="tub_estret_DEF01" path="Data/Meshes/tub_estret_DEF01.mesh"/>
 	<mesh name="tub_Petit" path="Data/Meshes/tub_Petit.mesh"/>
 	<mesh name="tub_Petit01" path="Data/Meshes/tub_Petit01.mesh"/>
@@ -91,91 +99,62 @@
 	<mesh name="tub_Gros01" path="Data/Meshes/tub_Gros01.mesh"/>
 	<mesh name="tub_Gros02" path="Data/Meshes/tub_Gros02.mesh"/>
 	<mesh name="Caixa de llums" path="Data/Meshes/Caixa de llums.mesh"/>
-	<mesh name="Arxivador_DEF" path="Data/Meshes/Arxivador_DEF.mesh"/>
+	<mesh name="Caixa de llums01" path="Data/Meshes/Caixa de llums01.mesh"/>
+	<mesh name="Arxivador00" path="Data/Meshes/Arxivador00.mesh"/>
+	<mesh name="Arxivador01" path="Data/Meshes/Arxivador01.mesh"/>
+	<mesh name="Arxivador02" path="Data/Meshes/Arxivador02.mesh"/>
+	<mesh name="Arxivador03" path="Data/Meshes/Arxivador03.mesh"/>
+	<mesh name="Arxivador04" path="Data/Meshes/Arxivador04.mesh"/>
+	<mesh name="Arxivador05" path="Data/Meshes/Arxivador05.mesh"/>
+	<mesh name="Arxivador06" path="Data/Meshes/Arxivador06.mesh"/>
+	<mesh name="Arxivador07" path="Data/Meshes/Arxivador07.mesh"/>
+	<mesh name="Arxivador08" path="Data/Meshes/Arxivador08.mesh"/>
+	<mesh name="Arxivador09" path="Data/Meshes/Arxivador09.mesh"/>
+	<mesh name="Arxivador10" path="Data/Meshes/Arxivador10.mesh"/>
+	<mesh name="Arxivador11" path="Data/Meshes/Arxivador11.mesh"/>
+	<mesh name="Arxivador12" path="Data/Meshes/Arxivador12.mesh"/>
+	<mesh name="Arxivador13" path="Data/Meshes/Arxivador13.mesh"/>
+	<mesh name="Arxivador14" path="Data/Meshes/Arxivador14.mesh"/>
+	<mesh name="Arxivador15" path="Data/Meshes/Arxivador15.mesh"/>
+	<mesh name="Arxivador16" path="Data/Meshes/Arxivador16.mesh"/>
+	<mesh name="Arxivador17" path="Data/Meshes/Arxivador17.mesh"/>
+	<mesh name="Arxivador18" path="Data/Meshes/Arxivador18.mesh"/>
+	<mesh name="Arxivador19" path="Data/Meshes/Arxivador19.mesh"/>
+	<mesh name="Arxivador20" path="Data/Meshes/Arxivador20.mesh"/>
+	<mesh name="Arxivador21" path="Data/Meshes/Arxivador21.mesh"/>
+	<mesh name="Arxivador22" path="Data/Meshes/Arxivador22.mesh"/>
+	<mesh name="Arxivador23" path="Data/Meshes/Arxivador23.mesh"/>
+	<mesh name="Arxivador24" path="Data/Meshes/Arxivador24.mesh"/>
+	<mesh name="Arxivador25" path="Data/Meshes/Arxivador25.mesh"/>
+	<mesh name="Arxivador26" path="Data/Meshes/Arxivador26.mesh"/>
+	<mesh name="Arxivador27" path="Data/Meshes/Arxivador27.mesh"/>
+	<mesh name="Arxivador28" path="Data/Meshes/Arxivador28.mesh"/>
+	<mesh name="Arxivador29" path="Data/Meshes/Arxivador29.mesh"/>
 	<mesh name="Estanteria_DEF" path="Data/Meshes/Estanteria_DEF.mesh"/>
+	<mesh name="Estanteria_DEF01" path="Data/Meshes/Estanteria_DEF01.mesh"/>
 	<mesh name="Taula_DEF" path="Data/Meshes/Taula_DEF.mesh"/>
 	<mesh name="Maleta_DEF" path="Data/Meshes/Maleta_DEF.mesh"/>
+	<mesh name="Maleta_DEF01" path="Data/Meshes/Maleta_DEF01.mesh"/>
+	<mesh name="Maleta_DEF02" path="Data/Meshes/Maleta_DEF02.mesh"/>
 	<mesh name="Suero_DEF" path="Data/Meshes/Suero_DEF.mesh"/>
+	<mesh name="fluorescente_DEF01" path="Data/Meshes/fluorescente_DEF01.mesh"/>
+	<mesh name="fluorescente_DEF02" path="Data/Meshes/fluorescente_DEF02.mesh"/>
+	<mesh name="fluorescente_DEF03" path="Data/Meshes/fluorescente_DEF03.mesh"/>
+	<mesh name="fluorescente_DEF04" path="Data/Meshes/fluorescente_DEF04.mesh"/>
+	<mesh name="fluorescente_DEF05" path="Data/Meshes/fluorescente_DEF05.mesh"/>
+	<mesh name="Caixa_oberta_DEF01" path="Data/Meshes/Caixa_oberta_DEF01.mesh"/>
+	<mesh name="caixa_tapada_DEF01" path="Data/Meshes/caixa_tapada_DEF01.mesh"/>
+	<mesh name="caixa_tapada_DEF02" path="Data/Meshes/caixa_tapada_DEF02.mesh"/>
 	<mesh name="Provetas_prestatge" path="Data/Meshes/Provetas_prestatge.mesh"/>
-	<mesh name="Cadira_de_forsa02" path="Data/Meshes/Cadira_de_forsa02.mesh"/>
-	<mesh name="BancRadiografies02" path="Data/Meshes/BancRadiografies02.mesh"/>
-	<mesh name="radiografia13" path="Data/Meshes/radiografia13.mesh"/>
-	<mesh name="radiografia14" path="Data/Meshes/radiografia14.mesh"/>
-	<mesh name="radiografia15" path="Data/Meshes/radiografia15.mesh"/>
-	<mesh name="radiografia16" path="Data/Meshes/radiografia16.mesh"/>
-	<mesh name="radiografia17" path="Data/Meshes/radiografia17.mesh"/>
-	<mesh name="braç03" path="Data/Meshes/braç03.mesh"/>
-	<mesh name="Taula03" path="Data/Meshes/Taula03.mesh"/>
-	<mesh name="radiografia18" path="Data/Meshes/radiografia18.mesh"/>
-	<mesh name="radiografia19" path="Data/Meshes/radiografia19.mesh"/>
-	<mesh name="Ventilacion02" path="Data/Meshes/Ventilacion02.mesh"/>
-	<mesh name="cadira_oficina03" path="Data/Meshes/cadira_oficina03.mesh"/>
-	<mesh name="Marc Porta02" path="Data/Meshes/Marc Porta02.mesh"/>
-	<mesh name="fluorescente_DEF07" path="Data/Meshes/fluorescente_DEF07.mesh"/>
-	<mesh name="Carpetes06" path="Data/Meshes/Carpetes06.mesh"/>
-	<mesh name="Carpetes07" path="Data/Meshes/Carpetes07.mesh"/>
-	<mesh name="Cable_Lampada03" path="Data/Meshes/Cable_Lampada03.mesh"/>
-	<mesh name="braç04" path="Data/Meshes/braç04.mesh"/>
-	<mesh name="pot05" path="Data/Meshes/pot05.mesh"/>
-	<mesh name="pot06" path="Data/Meshes/pot06.mesh"/>
-	<mesh name="proveta04" path="Data/Meshes/proveta04.mesh"/>
-	<mesh name="maleta02" path="Data/Meshes/maleta02.mesh"/>
-	<mesh name="viga04" path="Data/Meshes/viga04.mesh"/>
-	<mesh name="vigueta04" path="Data/Meshes/vigueta04.mesh"/>
-	<mesh name="viga_pilar02" path="Data/Meshes/viga_pilar02.mesh"/>
-	<mesh name="Lampada03" path="Data/Meshes/Lampada03.mesh"/>
-	<mesh name="Caldera02" path="Data/Meshes/Caldera02.mesh"/>
-	<mesh name="Edvac02" path="Data/Meshes/Edvac02.mesh"/>
-	<mesh name="Laboratori_parets02" path="Data/Meshes/Laboratori_parets02.mesh"/>
-	<mesh name="CAPSULA_DEF04" path="Data/Meshes/CAPSULA_DEF04.mesh"/>
-	<mesh name="autopsia_taula02" path="Data/Meshes/autopsia_taula02.mesh"/>
-	<mesh name="Aixeta_autopsia02" path="Data/Meshes/Aixeta_autopsia02.mesh"/>
-	<mesh name="Pizarra02" path="Data/Meshes/Pizarra02.mesh"/>
-	<mesh name="Caixa_oberta_DEF03" path="Data/Meshes/Caixa_oberta_DEF03.mesh"/>
-	<mesh name="caixa_tapada_DEF04" path="Data/Meshes/caixa_tapada_DEF04.mesh"/>
-	<mesh name="Porta02" path="Data/Meshes/Porta02.mesh"/>
-	<mesh name="Llum_emergencia02" path="Data/Meshes/Llum_emergencia02.mesh"/>
-	<mesh name="Cable_florescent12" path="Data/Meshes/Cable_florescent12.mesh"/>
-	<mesh name="Botiquin_medic_DEF02" path="Data/Meshes/Botiquin_medic_DEF02.mesh"/>
-	<mesh name="Carpetes08" path="Data/Meshes/Carpetes08.mesh"/>
-	<mesh name="Carpetes09" path="Data/Meshes/Carpetes09.mesh"/>
-	<mesh name="Carpetes10" path="Data/Meshes/Carpetes10.mesh"/>
-	<mesh name="radiografia20" path="Data/Meshes/radiografia20.mesh"/>
-	<mesh name="radiografia21" path="Data/Meshes/radiografia21.mesh"/>
-	<mesh name="radiografia22" path="Data/Meshes/radiografia22.mesh"/>
-	<mesh name="radiografia23" path="Data/Meshes/radiografia23.mesh"/>
-	<mesh name="radiografia24" path="Data/Meshes/radiografia24.mesh"/>
-	<mesh name="viga05" path="Data/Meshes/viga05.mesh"/>
-	<mesh name="viga06" path="Data/Meshes/viga06.mesh"/>
-	<mesh name="vigueta05" path="Data/Meshes/vigueta05.mesh"/>
-	<mesh name="vigueta06" path="Data/Meshes/vigueta06.mesh"/>
-	<mesh name="cadira_oficina04" path="Data/Meshes/cadira_oficina04.mesh"/>
-	<mesh name="pot_prim04" path="Data/Meshes/pot_prim04.mesh"/>
-	<mesh name="pot_petit05" path="Data/Meshes/pot_petit05.mesh"/>
-	<mesh name="pot_Mitja03" path="Data/Meshes/pot_Mitja03.mesh"/>
-	<mesh name="CAPSULA_DEF05" path="Data/Meshes/CAPSULA_DEF05.mesh"/>
-	<mesh name="CAPSULA_DEF06" path="Data/Meshes/CAPSULA_DEF06.mesh"/>
-	<mesh name="Ordinador_DEF03" path="Data/Meshes/Ordinador_DEF03.mesh"/>
-	<mesh name="tub_estret_DEF03" path="Data/Meshes/tub_estret_DEF03.mesh"/>
-	<mesh name="Frigorific_DEF03" path="Data/Meshes/Frigorific_DEF03.mesh"/>
-	<mesh name="Frigorific_DEF04" path="Data/Meshes/Frigorific_DEF04.mesh"/>
-	<mesh name="tub_estret_DEF04" path="Data/Meshes/tub_estret_DEF04.mesh"/>
-	<mesh name="tub_Petit09" path="Data/Meshes/tub_Petit09.mesh"/>
-	<mesh name="tub_Petit10" path="Data/Meshes/tub_Petit10.mesh"/>
-	<mesh name="tub_Petit11" path="Data/Meshes/tub_Petit11.mesh"/>
-	<mesh name="tub_Petit12" path="Data/Meshes/tub_Petit12.mesh"/>
-	<mesh name="tub_Petit13" path="Data/Meshes/tub_Petit13.mesh"/>
-	<mesh name="tub_Petit14" path="Data/Meshes/tub_Petit14.mesh"/>
-	<mesh name="tub_Petit15" path="Data/Meshes/tub_Petit15.mesh"/>
-	<mesh name="tub_Petit16" path="Data/Meshes/tub_Petit16.mesh"/>
-	<mesh name="tub_Gros04" path="Data/Meshes/tub_Gros04.mesh"/>
-	<mesh name="tub_Gros05" path="Data/Meshes/tub_Gros05.mesh"/>
-	<mesh name="tub_Gros06" path="Data/Meshes/tub_Gros06.mesh"/>
-	<mesh name="Caixa de llums03" path="Data/Meshes/Caixa de llums03.mesh"/>
-	<mesh name="Arxivador_DEF31" path="Data/Meshes/Arxivador_DEF31.mesh"/>
-	<mesh name="Estanteria_DEF03" path="Data/Meshes/Estanteria_DEF03.mesh"/>
-	<mesh name="Taula_DEF02" path="Data/Meshes/Taula_DEF02.mesh"/>
-	<mesh name="Maleta_DEF04" path="Data/Meshes/Maleta_DEF04.mesh"/>
-	<mesh name="Suero_DEF02" path="Data/Meshes/Suero_DEF02.mesh"/>
-	<mesh name="Provetas_prestatge05" path="Data/Meshes/Provetas_prestatge05.mesh"/>
+	<mesh name="Provetas_prestatge01" path="Data/Meshes/Provetas_prestatge01.mesh"/>
+	<mesh name="Provetas_prestatge02" path="Data/Meshes/Provetas_prestatge02.mesh"/>
+	<mesh name="Provetas_prestatge03" path="Data/Meshes/Provetas_prestatge03.mesh"/>
+	<mesh name="pot03" path="Data/Meshes/pot03.mesh"/>
+	<mesh name="pot_petit01" path="Data/Meshes/pot_petit01.mesh"/>
+	<mesh name="pot_petit02" path="Data/Meshes/pot_petit02.mesh"/>
+	<mesh name="pot_prim01" path="Data/Meshes/pot_prim01.mesh"/>
+	<mesh name="pot04" path="Data/Meshes/pot04.mesh"/>
+	<mesh name="pot_Mitja01" path="Data/Meshes/pot_Mitja01.mesh"/>
+	<mesh name="pot_prim02" path="Data/Meshes/pot_prim02.mesh"/>
+	<mesh name="pot_petit03" path="Data/Meshes/pot_petit03.mesh"/>
 </meshes>
