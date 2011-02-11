@@ -182,8 +182,8 @@ float4 DepthOfFieldManySamples(float2 OriginalUV : TEXCOORD0) : COLOR
     float3 CurrentRGB = tex2D(FrameBufferSampler, l_UVFrameBuffer).xyz;
     float  CurrentA   = tex2D(ZBlurSampler,       l_UVZBlur).x;
     // Lerp between original rgb and the jitter rgb based on the alpha value
-    Blurred += CurrentRGB * (1-CurrentA);
-    l_AcumA += 1-CurrentA;
+    Blurred += CurrentRGB * (CurrentA);
+    l_AcumA += CurrentA;
   }
   if(l_AcumA == 0)
   {
