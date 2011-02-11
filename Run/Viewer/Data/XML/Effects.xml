@@ -10,6 +10,7 @@
     <effect name="HDR" file="Data/Effects/HDR.fx"/>
     <effect name="Glow" file="Data/Effects/Glow.fx"/>
     <effect name="Blur" file="Data/Effects/Blur.fx"/>
+    <effect name="ZBlur" file="Data/Effects/ZBlur.fx"/>
     <effect name="Down Samples" file="Data/Effects/Downsampling.fx"/>
     <!-- effect name=.../-->
     <!-- effect name=.../-->
@@ -93,6 +94,10 @@
 
     <technique name="RenderShadowTechnique" effect="Shadows" use_world_view_projection_matrix="true"/>
     <technique name="Cal3DTechniqueShadow"  effect="Shadows" use_world_view_projection_matrix="true" animated="true"/>
+
+    <technique name="PreZBlurTechnique" effect="ZBlur" use_world_view_matrix="true" use_proj_matrix="true"/>
+    <technique name="AnimatedPreZBlurTechnique"  effect="ZBlur" use_world_view_matrix="true" use_proj_matrix="true" animated="true"/>
+    <technique name="PostZBlurTechnique"  effect="ZBlur" use_texture_size="true" use_poisson_blur_kernel="true"/>
 
     <technique name="RenderGlowTechnique" effect="Glow" use_world_view_projection_matrix="true" glow_active="true"/>
     <technique name="Cal3DGlowTechnique"  effect="Glow" use_world_view_projection_matrix="true" glow_active="true" animated="true"/>

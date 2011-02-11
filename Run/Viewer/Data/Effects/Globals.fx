@@ -62,4 +62,8 @@ float g_GlowActive : GlowActive;
 int g_TextureWidth  : TextureWidth;
 int g_TextureHeight : TextureHeight;
 
+#define POISON_BLUR_KERNEL_SIZE 16
+
+float2 g_PoissonBlurKernel[POISON_BLUR_KERNEL_SIZE] : PoissonBlurKernel;
+
 #endif
