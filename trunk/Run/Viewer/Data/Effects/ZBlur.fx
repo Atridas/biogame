@@ -6,7 +6,7 @@
 // vDofParams coefficients:
 // x = near blur depth; y = focal plane depth; z = far blur depth
 // w = blurriness cutoff constant for objects behind the focal plane
-float4 vDofParams=float4(2.0,5.0,10.0, 0.75);
+float4 vDofParams=float4(2.0,5.0,45.0, 0.75);
 
 
 //Vertex Shader
@@ -182,8 +182,8 @@ float4 DepthOfFieldManySamples(float2 OriginalUV : TEXCOORD0) : COLOR
     float3 CurrentRGB = tex2D(FrameBufferSampler, l_UVFrameBuffer).xyz;
     float  CurrentA   = tex2D(ZBlurSampler,       l_UVZBlur).x;
     // Lerp between original rgb and the jitter rgb based on the alpha value
-    Blurred += CurrentRGB * (CurrentA);
-    l_AcumA += CurrentA;
+    Blurred += CurrentRGB * (1-CurrentA);
+    l_AcumA += 1-CurrentA;
   }
   if(l_AcumA == 0)
   {

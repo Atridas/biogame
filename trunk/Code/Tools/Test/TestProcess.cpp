@@ -149,7 +149,7 @@ void CTestProcess::RenderScene(CRenderManager* _pRM)
 void CTestProcess::RenderINFO(CRenderManager* _pRM)
 {
   /*
-  D3DXVECTOR3 vecPos = D3DXVECTOR3(0,100,0);
+  D3DXVECTOR3 vecPos = D3DXVECTOR3(0,0,0);
   g_pD3DXSprite->Begin(0);
   g_pD3DXSprite->Draw(_pRM->GetTextureManager()->GetResource("ZBlurTexture")->GetD3DTexture(), NULL, NULL, &vecPos, 0xffffffff);
   g_pD3DXSprite->End();
