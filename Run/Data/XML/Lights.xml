@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<lights ambient="0.3 0.3 0.3">
+  <light type="spot" direction="-5.4188 0.0 3.75613" angle="43.0" fall_off="45.0" name="Spot01" pos="-2.15715 0.0 -7.32758" color="1.0 1.0 1.0" att_start_range="20.0" att_end_range="80.0" render_shadows="true"/>
+</lights>
