@@ -148,7 +148,6 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			append l_params #("name",l_object.name)
 			append l_params #("path",l_relPath)
 			
-			/*
 			local l_invTransform = inverse l_object.transform
 			
 			l_aux = "" as stringStream
@@ -164,7 +163,6 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			l_MinCoord = RHVectorToLH l_MinCoord
 			format "% % %" l_MinCoord.x l_MinCoord.y l_MinCoord.z to:l_aux
 			append l_params #("min",l_aux)
-			*/
 			
 			format "\n\t" to:l_file
 			format "%" (InlineTagParamXML "mesh" l_params) to:l_file
