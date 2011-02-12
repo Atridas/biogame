@@ -295,11 +295,13 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
           CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
           float l_fAltura = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->m_fAltura;
           l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();
-     
           l_pCam->SetZoom(l_fAltura*2);
           m_pObject->SetPosition(Vect3f(l_pos.x,l_fAltura/2,l_pos.z));
         }
-        m_pObject->SetPosition(Vect3f(0.0f,0.0f,0.0f));
+        else
+        {
+          m_pObject->SetPosition(Vect3f(0.0f,0.0f,0.0f));
+        }
 
       }
       else if (m_iMode == MODE_MESH)
