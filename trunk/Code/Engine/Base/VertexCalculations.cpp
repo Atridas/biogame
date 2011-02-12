@@ -172,3 +172,42 @@ void CreatePoissonBlur16x2( float pfKernel_[32] )
   }
   
 }
+
+void CalcMinMaxCoord(char* _pVertexBuffer, unsigned short _usGeometryOffset, unsigned short _usVertexSize, unsigned short _usVertexCount, Vect3f& _vMin, Vect3f& _vMax)
+{
+  float* l_vCurrent = 0;
+  unsigned int l_uiBase = 0;
+
+  //init at first vertex
+  l_vCurrent = (float*)(_pVertexBuffer + _usGeometryOffset);
+  _vMin.x = l_vCurrent[0];
+  _vMin.y = l_vCurrent[1];
+  _vMin.z = l_vCurrent[2];
+  _vMax.x = l_vCurrent[0];
+  _vMax.y = l_vCurrent[1];
+  _vMax.z = l_vCurrent[2];
+
+  for(int i = 0; i < _usVertexCount; i++)
+  {
+    //locate the pointer at the current vector's (x,y,z)
+    l_vCurrent = (float*)(_pVertexBuffer + l_uiBase + _usGeometryOffset);
+
+    //min
+    if(l_vCurrent[0] < _vMin.x)
+      _vMin.x = l_vCurrent[0];
+    if(l_vCurrent[1] < _vMin.y)
+      _vMin.y = l_vCurrent[1];
+    if(l_vCurrent[2] < _vMin.z)
+      _vMin.z = l_vCurrent[2];
+
+    //max
+    if(l_vCurrent[0] > _vMax.x)
+      _vMax.x = l_vCurrent[0];
+    if(l_vCurrent[1] > _vMax.y)
+      _vMax.y = l_vCurrent[1];
+    if(l_vCurrent[2] > _vMax.z)
+      _vMax.z = l_vCurrent[2];
+
+    l_uiBase += _usVertexSize;
+  }
+}

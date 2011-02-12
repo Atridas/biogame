@@ -16,7 +16,7 @@
 #define HEADER 0xAAAA
 #define FOOTER 0xFFFF
 
-bool CStaticMesh::Load(const string &_szFileName)
+bool CStaticMesh::Load(const CXMLTreeNode& _XMLTreeNode)
 {
   /** Format fitxer
     *
@@ -44,7 +44,19 @@ bool CStaticMesh::Load(const string &_szFileName)
     *
     * Fi Format fitxer
    **/
-  LOGGER->AddNewLog(ELL_INFORMATION, "CStaticMesh::Load \"%s\"", _szFileName.c_str());
+  string l_szFileName = _XMLTreeNode.GetPszISOProperty("path","");
+  bool l_bRecalc      = false;
+  m_vMax              = _XMLTreeNode.GetVect3fProperty("max",Vect3f(0.0f));
+  m_vMin              = _XMLTreeNode.GetVect3fProperty("min",Vect3f(0.0f));
+
+  Vect3f l_vMax, l_vMin = Vect3f(0.0f);
+
+  LOGGER->AddNewLog(ELL_INFORMATION, "CStaticMesh::Load \"%s\"", l_szFileName.c_str());
+  if(m_vMax == Vect3f(0.0f) && m_vMin == Vect3f(0.0f))
+  {
+    l_bRecalc = true;
+    LOGGER->AddNewLog(ELL_INFORMATION, "CStaticMesh::Load calculate min & max");
+  }
   
   fstream l_File;
   uint16 l_usHelper = 0;
@@ -56,7 +68,7 @@ bool CStaticMesh::Load(const string &_szFileName)
 
   CTextureManager* l_pTextureManager = l_pRenderManager->GetTextureManager();
   
-  l_File.open(_szFileName, fstream::in | fstream::binary );
+  l_File.open(l_szFileName, fstream::in | fstream::binary );
   if(!l_File.is_open())
   {
     LOGGER->AddNewLog(ELL_WARNING, "CStaticMesh::Load no s'ha pogut obrir el fitxer.");
@@ -115,8 +127,14 @@ bool CStaticMesh::Load(const string &_szFileName)
     char* l_pVertexBuffer = new char[l_VertexCount*l_usVertexSize];
     l_File.read(&l_pVertexBuffer[0], l_usVertexSize*l_VertexCount);
 
-    
-  
+    //Recalc min max per cada material
+    if(l_bRecalc)
+    {
+      CalcMinMaxCoord(l_pVertexBuffer, 0, l_usVertexSize, l_VertexCount, l_vMin, l_vMax);
+
+      m_vMin.SetIfMinComponents(l_vMin);
+      m_vMax.SetIfMaxComponents(l_vMax);
+    }
   
     uint32 l_IndexCount;
 
@@ -237,7 +255,7 @@ bool CStaticMesh::Load(const string &_szFileName)
   }
   
   l_File.close();
-  m_szFileName = _szFileName;
+  m_szFileName = l_szFileName;
   CHECKED_DELETE_ARRAY(l_pusVertexType);
   CHECKED_DELETE_ARRAY(l_pusTextureNum);
 

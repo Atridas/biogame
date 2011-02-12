@@ -5,6 +5,7 @@
 
 #include "base.h"
 #include "RenderableObject.h"
+#include <XML/XMLTreeNode.h>
 
 //forward declarations-------------
 class CRenderManager;
@@ -20,6 +21,7 @@ public:
   virtual ~CInstanceMesh() {Done();};
 
   bool          Init      (const string& _szCoreName);
+  virtual void InitFromXML(CXMLTreeNode& l_XMLObject);
 
   //Methods
   virtual void  RenderRenderableObject(CRenderManager* _pRM);

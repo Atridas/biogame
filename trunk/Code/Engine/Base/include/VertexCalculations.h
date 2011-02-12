@@ -14,5 +14,7 @@ void CalcTangentsAndBinormalsBis( void *VtxsData, uint16 *IdxsData, size_t VtxCo
 
 void CreatePoissonBlur16x2( float pfKernel_[32] );
 
+void CalcMinMaxCoord(char* _pVertexBuffer, unsigned short _usGeometryOffset, unsigned short _usVertexSize, unsigned short _usVertexCount, Vect3f& _vMin, Vect3f& _vMax);
+
 
 #endif

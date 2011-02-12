@@ -22,11 +22,12 @@ public:
 	virtual ~CObject3D(void) {/*Nothing*/;}
 
 	//---Get Functions
-	float						GetYaw			() const {return m_fYaw;}
-	float						GetRoll			() const {return m_fRoll;}
-	float						GetPitch		() const {return m_fPitch;}
-	const Vect3f&		GetPosition	() const {return m_vPosition;}
-  bool						GetVisible	() const {return m_bVisible;}
+	float						GetYaw			    () const {return m_fYaw;}
+	float						GetRoll			    () const {return m_fRoll;}
+	float						GetPitch		    () const {return m_fPitch;}
+	const Vect3f&		GetPosition	    () const {return m_vPosition;}
+  bool						GetVisible	    () const {return m_bVisible;}
+  CBoundingBox		GetBoundingBox	() const {return m_BoundingBox;}
 
 	//---Set Functions
 	void		SetPosition	( const Vect3f& _vPos );
@@ -36,12 +37,12 @@ public:
   void		SetVisible	( bool  _bVisible ) {m_bVisible = _bVisible;};
 
 protected:
-	Vect3f	    m_vPosition;
-	float		    m_fYaw;
-	float		    m_fPitch;
-	float		    m_fRoll;
-  bool        m_bVisible;
-  BoundingBox m_BoundingBox;
+	Vect3f	      m_vPosition;
+	float		      m_fYaw;
+	float		      m_fPitch;
+	float		      m_fRoll;
+  bool          m_bVisible;
+  CBoundingBox  m_BoundingBox;
 };
 
 #endif //INC_CORE_H_

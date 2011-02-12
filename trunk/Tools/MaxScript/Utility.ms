@@ -99,6 +99,18 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		return undefined
 	)
 	
+	function ListMemberName _list _element = 
+	(
+		for i=1 to _list.count do
+		(
+			if _list[i].name == _element.name then
+			(
+				return true
+			)
+		)
+		return false
+	)
+	
 	function ExportMeshManager _objects =
 	(
 		local l_MeshTotalPath = getMeshPath()
@@ -124,14 +136,39 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		
 		for i=1 to _objects.count do
 		(
+			
 			local l_object = _objects[i]
 			
 			local l_relPath = getRelativeMeshPath() + l_object.name + ".mesh"
 			
-			l_params = #(#("name",l_object.name),#("path",l_relPath))
+			-------------------------------
+			--paràmetres
+			l_params = #()
+			
+			append l_params #("name",l_object.name)
+			append l_params #("path",l_relPath)
+			
+			/*
+			local l_invTransform = inverse l_object.transform
+			
+			l_aux = "" as stringStream
+			local l_MaxCoord = l_object.max
+			l_MaxCoord = l_MaxCoord * l_invTransform
+			l_MaxCoord = RHVectorToLH l_MaxCoord
+			format "% % %" l_MaxCoord.x l_MaxCoord.y l_MaxCoord.z to:l_aux
+			append l_params #("max",l_aux)
+			
+			l_aux = "" as stringStream
+			local l_MinCoord = l_object.min
+			l_MinCoord = l_MinCoord * l_invTransform
+			l_MinCoord = RHVectorToLH l_MinCoord
+			format "% % %" l_MinCoord.x l_MinCoord.y l_MinCoord.z to:l_aux
+			append l_params #("min",l_aux)
+			*/
 			
 			format "\n\t" to:l_file
 			format "%" (InlineTagParamXML "mesh" l_params) to:l_file
+			-------------------------------
 				
 			if checkMeshes.checked then
 			(
@@ -202,7 +239,6 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			
 			local l_core = GetCore _cores l_object
 			
-			
 			l_params = #(#("name",l_object.name),#("class","StaticMesh"),#("resource",l_core.name))
 		
 				
@@ -227,19 +263,6 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			local l_roll = GetRoll l_object.transform
 			format "%" l_roll to:l_aux
 			append l_params #("roll",l_aux)
-			
-			
-			-------------------------------------------
-			l_aux = "" as stringStream
-			local l_vMin = RHVectorToLH (l_object.min)
-			format "% % %" l_vMin.x l_vMin.y l_vMin.z to:l_aux
-			append l_params #("Min",l_aux)
-			
-			l_aux = "" as stringStream
-			local l_vMax = RHVectorToLH (l_object.max)
-			format "% % %" l_vMax.x l_vMax.y l_vMax.z to:l_aux
-			append l_params #("Max",l_aux)
-			--------------------------------------------
 			
 			format "\n\t" to:l_file
 			format "%" (InlineTagParamXML "RenderableObject" l_params) to:l_file
@@ -364,7 +387,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 				append l_params #("fall_off",l_aux)
 			) else
 			(
-				--res, és un mesh o algu així
+				--res, és un mesh o algo així
 				format "Això no hauria de passar MAI!\n"
 				format "%\n" l_light
 				continue
@@ -401,6 +424,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 	
 	on BioUtility open do
 	(
+		--labelPath.text = "D:/Documents/Master/biogame/Run/Viewer/Data"
 		labelPath.text = "D:/treballs/master/biogame/Run/Test/Data"
 		--labelPath.text = "C:/Treballs/Directoris v2/Run/Test/Data"
 		dropNivell.items = #("","Level -2","Level -1", "Hangar", "Proves")
@@ -424,7 +448,6 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			local l_outName=GetSaveFileName fileName:(l_meshPath + $.name + ".mesh") caption:"Select output file to export file" types:" mesh(*.mesh)|*.mesh|All Files(*.*)|*.*|"
 			if l_outName != undefined then
 			(
-				
 				
 				local l_relativeTexPath = getRelativeTexturePath()
 				
@@ -485,7 +508,6 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		(
 			if getUserProp _object "UserType" == "AnimatedModel" then
 			(
-				--ShowMessage "Tenim un AnimatedModel"
 				return true
 			)
 			else
@@ -540,6 +562,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		local l_instances = #()
 		local l_lights = #()
 		local l_AnimatedModels = #()
+		local l_aux = "" as stringStream
 		
 		for i=1 to $*.count do
 		(
@@ -548,7 +571,16 @@ utility BioUtility "Eon-Utility" width:160 height:312
 				append l_lights $*[i]
 			) else if IsMesh $*[i] then
 			(
-				append l_instances $*[i]
+				if ListMemberName l_instances $*[i] then
+				(
+					l_aux = "" as stringStream
+					format "Mesh amb nom repetit %" $*[i].name to:l_aux
+					ShowMessage l_aux
+				) else
+				(
+					append l_instances $*[i]
+				)
+
 				if GetCore l_cores $*[i] == undefined then
 				(
 					append l_cores $*[i]
@@ -556,7 +588,6 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			) else if isAnimatedModel $*[i] then
 			(
 				append l_AnimatedModels $*[i]
-				--ShowMessage "Tenim un AnimatedModel"
 			)
 		)
 		

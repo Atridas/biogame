@@ -1,6 +1,6 @@
 #include "Utils/BoundingBox.h"
 
-BoundingBox::BoundingBox()
+CBoundingBox::CBoundingBox()
 {
   m_vInitMin = Vect3f(0.0f);
   m_vInitMax = Vect3f(0.0f);
@@ -11,11 +11,8 @@ BoundingBox::BoundingBox()
   m_bCollisional = true;
 }
 
-bool BoundingBox::Init(Vect3f& _vMin, Vect3f& _vMax)
+bool CBoundingBox::Init(Vect3f& _vMin, Vect3f& _vMax)
 {
-  //establir el vector min i max inicials.
-  m_vInitMin = _vMin;
-  m_vInitMax = _vMax;
 
   //crear la box
   /*            4                    5
@@ -36,71 +33,52 @@ bool BoundingBox::Init(Vect3f& _vMin, Vect3f& _vMax)
         | /                 | /     
       2 |/__________________|/ 3 
   */
-  m_vBox[0] = (_vMin.x,_vMin.y,_vMin.z);
-  m_vBox[1] = (_vMax.x,_vMin.y,_vMin.z);
-  m_vBox[2] = (_vMin.x,_vMin.y,_vMax.z);
-  m_vBox[3] = (_vMax.x,_vMin.y,_vMax.z);
-  m_vBox[4] = (_vMin.x,_vMax.y,_vMin.z);
-  m_vBox[5] = (_vMax.x,_vMax.y,_vMin.z);
-  m_vBox[6] = (_vMin.x,_vMax.y,_vMax.z);
-  m_vBox[7] = (_vMax.x,_vMax.y,_vMax.z);
+
+  //establir el vector min i max inicials.
+  m_vInitMin = _vMin;
+  m_vInitMax = _vMax;
+
+  m_vBox[0] = Vect3f(_vMin.x,_vMin.y,_vMin.z);
+  m_vBox[1] = Vect3f(_vMax.x,_vMin.y,_vMin.z);
+  m_vBox[2] = Vect3f(_vMin.x,_vMin.y,_vMax.z);
+  m_vBox[3] = Vect3f(_vMax.x,_vMin.y,_vMax.z);
+  m_vBox[4] = Vect3f(_vMin.x,_vMax.y,_vMin.z);
+  m_vBox[5] = Vect3f(_vMax.x,_vMax.y,_vMin.z);
+  m_vBox[6] = Vect3f(_vMin.x,_vMax.y,_vMax.z);
+  m_vBox[7] = Vect3f(_vMax.x,_vMax.y,_vMax.z);
+
+  //Dimensions
+  float l_fSideLengthX = m_vBox[0].Distance(m_vBox[1]);
+  float l_fSideLengthY = m_vBox[0].Distance(m_vBox[4]);
+  float l_fSideLengthZ = m_vBox[0].Distance(m_vBox[2]);
+
+  m_vOriginDimension = Vect3f(l_fSideLengthX,l_fSideLengthY,l_fSideLengthZ);
+  m_vCurrentDimension = m_vOriginDimension;
 
   SetOk(true);
 
   return IsOk();
 }
 
-bool BoundingBox::Init(char* _pVertexBuffer, unsigned short _usGeometryOffset, unsigned short _usVertexSize, unsigned short _usVertexCount)
+float CBoundingBox::GetMaxDistanceFromMiddle()
 {
-  Vect3f l_vMin = Vect3f(0.0f);
-  Vect3f l_vMax = Vect3f(0.0f);
-  float* l_vCurrent = 0;
-  unsigned int l_uiBase = 0;
+  float l_fMax = m_vOriginDimension.x;
+  if(l_fMax < m_vOriginDimension.y)
+    l_fMax = m_vOriginDimension.y;
+  if(l_fMax < m_vOriginDimension.z)
+    l_fMax = m_vOriginDimension.z;
 
-  //init at first vertex
-  l_vCurrent = (float*)(_pVertexBuffer + _usGeometryOffset);
-  l_vMin.x = l_vCurrent[0];
-  l_vMin.y = l_vCurrent[1];
-  l_vMin.z = l_vCurrent[2];
-  l_vMax.x = l_vCurrent[0];
-  l_vMax.y = l_vCurrent[1];
-  l_vMax.z = l_vCurrent[2];
-
-  for(int i = 0; i < _usVertexCount; i++)
-  {
-    //locate the pointer at the current vector's (x,y,z)
-    l_vCurrent = (float*)(_pVertexBuffer + l_uiBase + _usGeometryOffset);
-
-    //min
-    if(l_vCurrent[0] < l_vMin.x)
-      l_vMin.x = l_vCurrent[0];
-    if(l_vCurrent[1] < l_vMin.y)
-      l_vMin.y = l_vCurrent[0];
-    if(l_vCurrent[2] < l_vMin.z)
-      l_vMin.z = l_vCurrent[0];
-
-    //max
-    if(l_vCurrent[0] > l_vMax.x)
-      l_vMax.x = l_vCurrent[0];
-    if(l_vCurrent[1] > l_vMax.y)
-      l_vMax.y = l_vCurrent[0];
-    if(l_vCurrent[2] > l_vMax.z)
-      l_vMax.z = l_vCurrent[0];
-
-    l_uiBase += _usVertexSize;
-  }
-
-  return Init(l_vMin, l_vMax);
+  return l_fMax;
 }
 
-Vect3f BoundingBox::GetMiddlePoint()
+Vect3f CBoundingBox::MiddlePoint()
 {
   Vect3f l_vMidVector = m_vBox[7] - m_vBox[0];
   l_vMidVector *= 0.5f;
-  return m_vBox[0] + l_vMidVector;
+  return l_vMidVector + m_vBox[0];
 }
 
-void BoundingBox::TranslateBox(const Vect3f& _vTranslation)
+void CBoundingBox::TranslateBox(const Vect3f& _vTranslation)
 {
   for(int i = 0; i < 8; i++)
   {
@@ -110,7 +88,7 @@ void BoundingBox::TranslateBox(const Vect3f& _vTranslation)
   }
 }
 
-void BoundingBox::RotateBox(float _fPitch, float _fYaw, float _fRoll)
+void CBoundingBox::RotateBox(float _fPitch, float _fYaw, float _fRoll)
 {
   for(int i = 0; i < 8; i++)
   {
@@ -118,26 +96,43 @@ void BoundingBox::RotateBox(float _fPitch, float _fYaw, float _fRoll)
     m_vBox[i] = m_vBox[i].RotateY(_fPitch);
     m_vBox[i] = m_vBox[i].RotateZ(_fPitch);
   }
+  //actualitzar dimensions
+  RecalcCurrentDimension();
 }
 
-void BoundingBox::DoYaw(float _fYaw)
+void CBoundingBox::DoYaw(float _fYaw)
 {
   for(int i = 0; i < 8; i++)
     m_vBox[i] = m_vBox[i].RotateY(_fYaw);
+  //actualitzar dimensions
+  RecalcCurrentDimension();
 }
 
-void BoundingBox::DoPitch(float _fPitch)
+void CBoundingBox::DoPitch(float _fPitch)
 {
   for(int i = 0; i < 8; i++)
     m_vBox[i] = m_vBox[i].RotateX(_fPitch);
+  //actualitzar dimensions
+  RecalcCurrentDimension();
 }
 
-void BoundingBox::DoRoll(float _fRoll)
+void CBoundingBox::DoRoll(float _fRoll)
 {
   for(int i = 0; i < 8; i++)
     m_vBox[i] = m_vBox[i].RotateZ(_fRoll);
+  //actualitzar dimensions
+  RecalcCurrentDimension();
 }
 
-void BoundingBox::Release()
+void CBoundingBox::RecalcCurrentDimension()
+{
+  float l_fSideLengthX = m_vBox[0].Distance(m_vBox[1]);
+  float l_fSideLengthY = m_vBox[0].Distance(m_vBox[4]);
+  float l_fSideLengthZ = m_vBox[0].Distance(m_vBox[2]);
+
+  m_vCurrentDimension = Vect3f(l_fSideLengthX,l_fSideLengthY,l_fSideLengthZ);
+}
+
+void CBoundingBox::Release()
 {
 }

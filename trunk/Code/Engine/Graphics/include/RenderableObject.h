@@ -4,6 +4,7 @@
 
 #include "Utils/Object3D.h"
 #include "Named.h"
+#include <XML/XMLTreeNode.h>
 
 //forward declarations---------------
 class CRenderManager;
@@ -16,17 +17,15 @@ class CRenderableObject :
 {
 public:
   CRenderableObject(const string& _szName):CNamed(_szName) {};
-  virtual void Update(float ElapsedTime) {};
-  void Render(CRenderManager *RM);
-  Vect3f m_vMax;
-  Vect3f m_vMin;
-  float m_fAltura;
+  virtual void Update(float _fElapsedTime) {};
+  virtual void InitFromXML(CXMLTreeNode& l_XMLObject) {};
+  void Render(CRenderManager *_pRM);
   
-
 protected:
   virtual void RenderRenderableObject(CRenderManager *RM) = 0;
 
-private:
+public:
+  float m_fAltura;
 };
 
 #endif
