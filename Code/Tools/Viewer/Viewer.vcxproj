@@ -25,10 +25,14 @@
     <None Include="..\..\..\Run\Data\XML\fonts.xml" />
     <None Include="..\..\..\Run\Data\XML\IA.xml" />
     <None Include="..\..\..\Run\Data\XML\init_viewer.xml" />
-    <None Include="..\..\..\Run\Data\XML\Lights.xml" />
+    <None Include="..\..\..\Run\Data\XML\Lights.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="..\..\..\Run\Data\XML\Lua.xml" />
     <None Include="..\..\..\Run\Data\XML\RenderableObjects.xml" />
-    <None Include="..\..\..\Run\Data\XML\SceneEffects_Viewer.xml" />
+    <None Include="..\..\..\Run\Data\XML\SceneEffects_Viewer.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="..\..\..\Run\Data\XML\StaticMeshes.xml" />
     <None Include="..\..\..\Run\Data\XML\test.xml" />
   </ItemGroup>
