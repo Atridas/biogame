@@ -5,6 +5,7 @@
 #include "base.h"
 #include "AnimatedInstanceModel.h"
 #include "RenderableObject.h"
+#include <XML/XMLTreeNode.h>
 
 class CRenderableAnimatedInstanceModel: public CRenderableObject
 {
@@ -12,11 +13,13 @@ class CRenderableAnimatedInstanceModel: public CRenderableObject
     CRenderableAnimatedInstanceModel(const string& _szName);
     virtual ~CRenderableAnimatedInstanceModel() {Done();};
 
-    bool          Init      (const string& _szCoreName,const string& _szDefaultAnimation);
-    CAnimatedInstanceModel* GetAnimatedInstanceModel(){return m_pAnimatedInstanceModel;}
+    bool          Init      (const string& _szCoreName);
+    virtual void  InitFromXML(CXMLTreeNode& l_XMLObject);
 
     //Methods
     virtual void  RenderRenderableObject(CRenderManager* _pRM);
+
+    CAnimatedInstanceModel* GetAnimatedInstanceModel(){return m_pAnimatedInstanceModel;}
 
   protected:
     virtual void          Release                   ();

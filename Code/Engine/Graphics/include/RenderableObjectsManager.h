@@ -18,11 +18,10 @@ public:
   ~CRenderableObjectsManager() {Done();};
 
   void Update(float _fElapsedTime);
-  void Render(CRenderManager *RM);
+  void Render(CRenderManager* _pRM);
 
   CRenderableObject* AddMeshInstance(const string& _szCoreMeshName, const string& _szInstanceName);
-  CRenderableObject* AddAnimatedModel(const string& _szCoreModelName, const string& _szInstanceName,const string& _szDefaultAnimation);
-
+  CRenderableObject* AddAnimatedModel(const string& _szCoreModelName, const string& _szInstanceName);
 
   void AddResource(const string& _szName, CRenderableObject* _pRenderableObject);
   void CleanUp()                        {Release();m_RenderableObjects.clear();m_vIndexMeshes.clear(),m_vIndexAnimated.clear();};

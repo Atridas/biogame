@@ -34,7 +34,7 @@ bool CStaticMeshManager::Load(const string &_szFileName, bool _bReload)
     {
       l_pStaticMesh = new CStaticMesh();
 
-      if(l_pStaticMesh->Load(l_szPath))
+      if(l_pStaticMesh->Load(l_XMLMesh))
       {
         LOGGER->AddNewLog(ELL_INFORMATION,"CStaticMeshManager:: Adding mesh: \"%s\"", l_szName.c_str());
         AddResource(l_szName,l_pStaticMesh);

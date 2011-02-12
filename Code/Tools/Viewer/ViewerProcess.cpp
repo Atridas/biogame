@@ -310,12 +310,17 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
           CORE->GetRenderableObjectsManager()->SetAllVisible(false,l_pROM->m_vIndexMeshes[m_iMesh]);
           CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
 
-          Vect3f l_vMax = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMax;
-          Vect3f l_vMin = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMin;
-          Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetPosition();
-          Vect3f l_vCentre = (l_vMax + l_vMin)/2;
-          m_pObject->SetPosition(Vect3f(l_pos.x,l_vCentre.y,l_pos.z));
-          l_pCam->SetZoom(GetZoomMesh(l_vMax,l_vCentre));
+          //Vect3f l_vMax = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMax;
+          //Vect3f l_vMin = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMin;
+          //Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetPosition();
+          //Vect3f l_vCentre = (l_vMax + l_vMin)/2;
+          //m_pObject->SetPosition(Vect3f(l_pos.x,l_vCentre.y,l_pos.z));
+          //l_pCam->SetZoom(GetZoomMesh(l_vMax,l_vCentre));
+
+          Vect3f l_vMiddle = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetBoundingBox().MiddlePoint();
+          float l_vZoom = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetBoundingBox().GetMaxDistanceFromMiddle();
+          m_pObject->SetPosition(l_vMiddle);
+          l_pCam->SetZoom(l_vZoom*3);
         }
       }
       
@@ -361,12 +366,17 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
       {
         CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
 
-        Vect3f l_vMax = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMax;
-        Vect3f l_vMin = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMin;
-        Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetPosition();
-        Vect3f l_vCentre = (l_vMax + l_vMin)/2;
-        m_pObject->SetPosition(Vect3f(l_pos.x,l_vCentre.y,l_pos.z));
-        l_pCam->SetZoom(GetZoomMesh(l_vMax,l_vCentre));
+        //Vect3f l_vMax = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMax;
+        //Vect3f l_vMin = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMin;
+        //Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetPosition();
+        //Vect3f l_vCentre = (l_vMax + l_vMin)/2;
+        //m_pObject->SetPosition(Vect3f(l_pos.x,l_vCentre.y,l_pos.z));
+        //l_pCam->SetZoom(GetZoomMesh(l_vMax,l_vCentre));
+
+        Vect3f l_vMiddle = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetBoundingBox().MiddlePoint();
+        float l_vZoom = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetBoundingBox().GetMaxDistanceFromMiddle();
+        m_pObject->SetPosition(l_vMiddle);
+        l_pCam->SetZoom(l_vZoom*3);
 
 
         l_pROM->SetAllVisible(false,l_pROM->m_vIndexMeshes[m_iMesh]);
@@ -414,12 +424,17 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
       {
         CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
 
-        Vect3f l_vMax = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMax;
-        Vect3f l_vMin = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMin;
-        Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetPosition();
-        Vect3f l_vCentre = (l_vMax + l_vMin)/2;
-        m_pObject->SetPosition(Vect3f(l_pos.x,l_vCentre.y,l_pos.z));
-        l_pCam->SetZoom(GetZoomMesh(l_vMax,l_vCentre));
+        //Vect3f l_vMax = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMax;
+        //Vect3f l_vMin = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->m_vMin;
+        //Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetPosition();
+        //Vect3f l_vCentre = (l_vMax + l_vMin)/2;
+        //m_pObject->SetPosition(Vect3f(l_pos.x,l_vCentre.y,l_pos.z));
+        //l_pCam->SetZoom(GetZoomMesh(l_vMax,l_vCentre));
+
+        Vect3f l_vMiddle = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetBoundingBox().MiddlePoint();
+        float l_vZoom = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetBoundingBox().GetMaxDistanceFromMiddle();
+        m_pObject->SetPosition(l_vMiddle);
+        l_pCam->SetZoom(l_vZoom*3);
 
         l_pROM->SetAllVisible(false,l_pROM->m_vIndexMeshes[m_iMesh]);
       }
@@ -545,7 +560,7 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
   uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("arial");
   uint32 l_uiFontTypeTitle = FONT_MANAGER->GetTTF_Id("Deco");
   uint32 l_uiFontTypeTitle2 = FONT_MANAGER->GetTTF_Id("xfiles");
-  int l_iPosicio = 450;
+  int l_iPosicio = 420;
   string l_szMsg("Mode Animats");
   string l_szMsg2("Mode Meshes");
   string l_szMsg3("Mode Escena");
@@ -576,9 +591,13 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
       {
         FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg2.c_str());
         l_pMeshInstance = l_pROM->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh]);
+        Vect3f l_vDimension = l_pMeshInstance->GetBoundingBox().GetOriginDimension();
 
         l_SStream << "Nom: " << l_pMeshInstance->GetName() << endl;
         l_SStream << "Tipus: StaticMesh" << endl;
+        l_SStream << "Dimensions(XYZ): " << (float)l_vDimension.x << "x";
+        l_SStream << (float)l_vDimension.y << "x";
+        l_SStream << (float)l_vDimension.z << endl;
         l_SStream << "Posicio: " << (float)l_pMeshInstance->GetPosition().x << " ";
         l_SStream << (float)l_pMeshInstance->GetPosition().y << " ";
         l_SStream << (float)l_pMeshInstance->GetPosition().y << endl;

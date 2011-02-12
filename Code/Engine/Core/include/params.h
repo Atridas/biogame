@@ -136,7 +136,7 @@ struct SScriptManager
 
   //Default Params
   SScriptManager():
-    szFile("./Data/XML/Scriptss.xml")
+    szFile("./Data/XML/Scripts.xml")
   {};
 };
 

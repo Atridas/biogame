@@ -3,6 +3,7 @@
 #define __STATIC_MESH_H__
 
 #include <base.h>
+#include <XML/XMLTreeNode.h>
 
 //forward declarations---------------
 class CRenderableVertexs;
@@ -21,7 +22,7 @@ public:
   /**
    * Constructor per defecte.
   **/
-  CStaticMesh(): m_iNumVertexs(0),m_iNumFaces(0),m_szFileName(""){};
+  CStaticMesh(): m_iNumVertexs(0),m_iNumFaces(0),m_szFileName(""),m_vMax(Vect3f(0.0f)),m_vMin(Vect3f(0.0f)){};
   /**
    * Destructor.
    * Allibera els recursos abans de destruir-se.
@@ -37,23 +38,35 @@ public:
    * @param _szFileName Path relatiu al fitxer mesh.
    * @return True si s'ha carregat correctament, false sino.
   **/
-  bool Load(const string &_szFileName);
+  bool Load(const CXMLTreeNode& _XMLTreeNode);
   /**
    * Mètode de recàrrega.
    * Aquest mètode recarrega la malla del fitxer especificat anteriorment.
    * @return True si s'ha carregat correctament, false sino.
    * @see Load (const string &_szFileName)
   **/
-  bool ReLoad() {Unload(); return Load(m_szFileName);};
+  //bool ReLoad() {Unload(); return Load(m_szFileName);};
   /**
    * Mètode de render.
    * Aquest mètode renderitza la malla.
    * @param _pRM Render Manager.
   **/
   void Render(CRenderManager *_pRM) const;
-  //bool LoadSergi(const string &_szFileName);
-  
+  /**
+   * Retorn de les coordenades mínimes de la malla.
+   * @return Les coordenades mínimes de la malla.
+  **/
+  Vect3f GetMin() const { return m_vMin; };
+  /**
+   * Retorn de les coordenades máximes de la malla.
+   * @return Les coordenades máximes de la malla.
+  **/
+  Vect3f GetMax() const { return m_vMax; };
 protected:
+  /**
+   * Mètode d'alliberament de recursos.
+  **/
+  void Unload() {Release();};
   /**
    * Vector de Vèrtexs pels diferents conjunts de vèrtexs que formen la malla.
   **/
@@ -71,8 +84,8 @@ protected:
   **/
   unsigned int m_iNumVertexs, m_iNumFaces;
   /**
-   * Mètode d'alliberament de recursos.
+   * Valors max i min de cada coordenada.
   **/
-  void Unload() {Release();};
+  Vect3f m_vMax, m_vMin;
 };
 #endif

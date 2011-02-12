@@ -46,8 +46,7 @@ CRenderableObject* CRenderableObjectsManager::AddMeshInstance(
 //Add AnimatedModel
 CRenderableObject* CRenderableObjectsManager::AddAnimatedModel(
                                                       const string& _szCoreModelName,
-                                                      const string& _szInstanceName,
-                                                      const string& _szDefaultAnimation)
+                                                      const string& _szInstanceName)
 {
   if(GetResource(_szInstanceName) != 0)
   {
@@ -56,7 +55,7 @@ CRenderableObject* CRenderableObjectsManager::AddAnimatedModel(
   }
 
   CRenderableAnimatedInstanceModel* l_pAnimatedModel = new CRenderableAnimatedInstanceModel(_szInstanceName);
-  if(!l_pAnimatedModel->Init(_szCoreModelName,_szDefaultAnimation))
+  if(!l_pAnimatedModel->Init(_szCoreModelName))
   {
     LOGGER->AddNewLog(ELL_WARNING, "CRenderableObjectsManager:: No s'ha pogut carregar el CRenderableAnimatedInstanceModel \"%s\" de la core \"%s\"", _szInstanceName.c_str(), _szCoreModelName.c_str());
     delete l_pAnimatedModel;
@@ -99,12 +98,7 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
   int l_iMeshIndex = 0;
   for(int i = 0; i < l_iNumObjects; i++)
   {
-    string l_szName, l_szClass, l_szResource,l_szDefaultAnimation;
-    Vect3f l_vPos,l_vMin,l_vMax;
-    float l_fYaw;
-    float l_fPitch;
-    float l_fRoll;
-    float l_fAltura;
+    string l_szName, l_szClass, l_szResource;
 
     CRenderableObject* l_pRenderableObject = 0;
 
@@ -113,16 +107,6 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
     l_szName      = l_XMLObject.GetPszISOProperty("name" ,"");
     l_szClass     = l_XMLObject.GetPszISOProperty("class" ,"");
     l_szResource  = l_XMLObject.GetPszISOProperty("resource" ,"");
-    l_szDefaultAnimation = l_XMLObject.GetPszISOProperty("cycle" ,"");
-    //l_szDefaultAnimation = l_XMLObject.GetIntProperty("cycle");
-    l_vMin        = l_XMLObject.GetVect3fProperty("Min",Vect3f(0.0f));
-    l_vMax        = l_XMLObject.GetVect3fProperty("Max",Vect3f(0.0f));
-    l_fAltura     = l_XMLObject.GetFloatProperty("Altura");
-
-    l_vPos        = l_XMLObject.GetVect3fProperty("position",Vect3f(0.0f));
-    l_fYaw        = l_XMLObject.GetFloatProperty("yaw") * FLOAT_PI_VALUE / 180.0f;
-    l_fPitch      = l_XMLObject.GetFloatProperty("pitch") * FLOAT_PI_VALUE / 180.0f;
-    l_fRoll       = l_XMLObject.GetFloatProperty("roll") * FLOAT_PI_VALUE / 180.0f;
 
     l_pRenderableObject = GetResource(l_szName);
     if(!l_pRenderableObject)
@@ -130,45 +114,40 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
       if(l_szClass == "StaticMesh") 
       {
         l_pRenderableObject = AddMeshInstance(l_szResource, l_szName);
-        l_pRenderableObject->m_vMin = Vect3f(l_vMin.x,l_vMin.y,l_vMin.z);
-          l_pRenderableObject->m_vMax = Vect3f(l_vMax.x,l_vMax.y,l_vMax.z);
-          l_pRenderableObject->m_fAltura = 0;
+
+        if(l_pRenderableObject != 0  && l_pRenderableObject->IsOk())
+        {
+          l_pRenderableObject->InitFromXML(l_XMLObject);
           m_vIndexMeshes.push_back(l_iMeshIndex);
+        }
 
       } else if(l_szClass == "AnimatedModel") 
       {
-        l_pRenderableObject = AddAnimatedModel(l_szResource, l_szName,l_szDefaultAnimation);
-        m_vIndexAnimated.push_back(l_iMeshIndex);
-          l_pRenderableObject->m_fAltura = l_fAltura;
+        l_pRenderableObject = AddAnimatedModel(l_szResource, l_szName);
 
+        if(l_pRenderableObject != 0 && l_pRenderableObject->IsOk())
+        {
+          l_pRenderableObject->InitFromXML(l_XMLObject);
+          m_vIndexAnimated.push_back(l_iMeshIndex);
+        }
       } else 
       {
         LOGGER->AddNewLog(ELL_WARNING,"CRenderableObjectsManager:: Object: \"%s\" has unknown \"%s\" class", l_szName.c_str(), l_szClass.c_str());
       }
       
+      //Log d'inserció
       if(l_pRenderableObject != 0)
-      {
-        l_pRenderableObject->SetPosition(l_vPos);
-        l_pRenderableObject->SetYaw     (l_fYaw);
-        l_pRenderableObject->SetPitch   (l_fPitch);
-        l_pRenderableObject->SetRoll    (l_fRoll);
-
         LOGGER->AddNewLog(ELL_INFORMATION,"CRenderableObjectsManager:: Added object: \"%s\"", l_szName.c_str());
-      } else {
+      else
         LOGGER->AddNewLog(ELL_WARNING,"CRenderableObjectsManager:: Object: \"%s\" not added", l_szName.c_str());
-      }
 
       l_iMeshIndex = l_iMeshIndex + 1;
     }else{
-      //i=i-1;
       if(!_bReload)
       {
         LOGGER->AddNewLog(ELL_WARNING,"CRenderableObjectsManager:: Repeated object \"%s\"", l_szName.c_str());
       }
-      /*l_pRenderableObject->SetPosition(l_vPos);
-      l_pRenderableObject->SetYaw     (l_fYaw);
-      l_pRenderableObject->SetPitch   (l_fPitch);
-      l_pRenderableObject->SetRoll    (l_fRoll);*/
+      l_pRenderableObject->InitFromXML(l_XMLObject);
     }
   }
 

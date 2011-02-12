@@ -482,7 +482,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 
 function ExportMesh _object0 _filename _relativeTexturePath = 
 (
-	format "Exporting % \n" _object0.name
+	format "Exportant objecte: % \n" _object0.name
 	
 	
 	if _object0.material == undefined then
@@ -536,18 +536,12 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 			
 			if ((IsMaterialEmpty _object i) == false) then
 			(
-				format "Mat info %\n" l_materialInfo
+				format "Exportant material: % amb Mat. info % i vèrtex %\n" i l_materialInfo l_vertexType2
 				WriteShort l_file l_materialInfo #unsigned
 				--tipus de vertex i material en si
 				WriteShort l_file l_vertexType2 #unsigned
 				ExportMaterial l_material[i] l_file _relativeTexturePath
 			)
-			else
-			(
-				format "Multimaterial:  % de % no exportat\n" i l_numMaterials
-			)
-			
-			
 		)
 	)
 	else
@@ -561,7 +555,7 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 		
 		l_materialInfo = MATERIAL_INFO_VERTEXTYPE
 		l_materialInfo = bit.or l_materialInfo MATERIAL_INFO_TEXTURETYPE
-		format "Mat info %\n" l_materialInfo
+		format "Unimaterial amb Mat. info % i vèrtex %\n" l_materialInfo l_vertexType2
 		WriteShort l_file l_materialInfo #unsigned
 		--tipus de vertex i material en si
 		WriteShort l_file l_vertexType2 #unsigned
@@ -622,7 +616,6 @@ function UABClearNormalsArray =
 		deleteItem UABVtxsNormals 1
 	)
 )
-
 
 function IsSmoothingGroupEnabled IdGroup Value =
 (
