@@ -1,18 +1,50 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="iso-8859-1"?>
 <Config>
-  <ScreenResolution width="1024" height="768"/>
-  <!--ScreenResolution width="800" height="550"/-->
-  <WindowsPosition position="0 0"/>
-  <Rendermode fullscreenMode="false"/>
-  <Console_Logger activateConsole="true" Log_Level="INFORMATION" activateLogger="true" linesPerPageInLogger="20"/>
-  <Mouse exclusiveModeinMouse="true" drawPointerMouse="true"/>
-  <ActionToInput fileXML="./Data/actions.xml"/>
-  <Fonts fontsXML="./Data/Fonts/fonts.xml"/>
-  <Languages default="spanish">
+  <RenderManager resolution="800 600" position="50 5" fullscreenMode="false">
+    <StaticMeshManager xml="Data/Levels/Level -2/XML/StaticMeshes.xml"/>
+    <!--
+    <StaticMeshManager xml="Data/Levels/Proves/XML/StaticMeshes.xml"/>
+    <StaticMeshManager xml="Data/Levels/Hangar/XML/StaticMeshes.xml"/>
+    <StaticMeshManager xml="Data/Levels/Level -2/XML/StaticMeshes.xml"/>
+    <StaticMeshManager xml="Data/XML/StaticMeshes.xml"/>
+    -->
+    <AnimatedModelManager xml="Data/XML/AnimatedModels.xml"/>
+    <EffectManager xml="Data/XML/Effects.xml"/>
+  </RenderManager>
+  <FontManager fontsXML="./Data/XML/Fonts.xml"/>
+  <Languages default="cat">
     <Language languageXML="./Data/Language/spanish.xml"/>
     <Language languageXML="./Data/Language/catalan.xml"/>
     <Language languageXML="./Data/Language/english.xml"/>
   </Languages>
+  <InputManager exclusiveMouse="true"/>
+  <ActionToInput file="./Data/XML/actions.xml"/>
+
+  <!-- RenderableObjectsManager file="Data/XML/RenderableObjects.xml" -->
+  <!-- RenderableObjectsManager file="Data/Levels/Level -2/XML/RenderableObjects.xml" -->
+  <!--RenderableObjectsManager file="Data/Levels/Proves/XML/RenderableObjects.xml"-->
+  <RenderableObjectsManager file="Data/Levels/Level -2/XML/RenderableObjects.xml">
+    <!--
+    <Level xml="Data/XML/RenderableObjects.xml"/>
+    <Level xml="Data/Levels/Level -1/XML/RenderableObjects.xml"/>
+    <Level xml="Data/Levels/Level -2/XML/RenderableObjects.xml"/>
+    <Level xml="Data/Levels/Hangar/XML/RenderableObjects.xml"/>
+    <Level xml="Data/Levels/Proves/XML/RenderableObjects.xml"/>
+    -->
+  </RenderableObjectsManager>
+
+  <LightsManager file="Data/Levels/Level -2/XML/Lights.xml"/>
+
+  <SceneEffectManager file="Data/XML/SceneEffects.xml"/>
+  
+  <ScriptManager file="Data/XML/Scripts.xml"/>
+    
+  <!--<AnimatedModelManager file="Data/XML/AnimatedModels.xml">
+  </AnimatedModelManager>-->
+  
+  <!--<Console_Logger activateConsole="true" Log_Level="INFORMATION" activateLogger="true" linesPerPageInLogger="20"/>
+  <Mouse exclusiveModeinMouse="true" drawPointerMouse="true"/>
+  <ActionToInput fileXML="./Data/actions.xml"/>
   <GUI initGuiXML="./Data/GUI/initGui_tests.xml"/>
   <Sound soundXML="./Data/Sounds/Sounds.xml"/>
   <Avi aviXML="./Data/AviFiles/aviFiles.xml"/>
@@ -36,7 +68,7 @@
     <Script action="_physXTest     = getPhysXTest();"/>
     <Script action="_spriteTest    = getSpriteTest();"/>
     <Script action="_partSystTest  = getPartSystTest();"/>
-  </InitScripts>
+  </InitScripts>-->
 
   <!--<Process initProcess="AVITest"/>-->
   <!--<Process initProcess="PhysXTest"/>-->
@@ -45,6 +77,6 @@
   <!--<Process initProcess="SpriteTest"/>-->
   <!--<Process initProcess="ParticleSystemTest"/>-->
   <!--<Process initProcess=""/>-->
-  <Process initProcess="AVITest"/>
-  
+  <!--<Process initProcess="AVITest"/>-->
+
 </Config>

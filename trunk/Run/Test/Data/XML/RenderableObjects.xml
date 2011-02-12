@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<RenderableObjects>
-	<RenderableObject name="Box02" class="StaticMesh" resource="Box02" position="3.83975 0.0 -1.45868" yaw="39.5606" pitch="0.0" roll="0.0"/>
-	<RenderableObject name="bot" class="AnimatedModel" resource="bot" cycle="run" position="4.79108 0.0 5.2463" yaw="0.0" pitch="0.0" roll="0.0"/>
-</RenderableObjects>
