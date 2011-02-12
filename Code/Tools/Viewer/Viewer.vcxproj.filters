@@ -13,31 +13,43 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Run\Viewer\Data\XML\actions.xml">
+    <None Include="..\..\..\Run\Data\XML\actions.xml">
       <Filter>Data</Filter>
     </None>
-    <None Include="..\..\..\Run\Viewer\Data\XML\AnimatedModels.xml">
+    <None Include="..\..\..\Run\Data\XML\AnimatedModels.xml">
       <Filter>Data</Filter>
     </None>
-    <None Include="..\..\..\Run\Viewer\Data\XML\Effects.xml">
+    <None Include="..\..\..\Run\Data\XML\Effects.xml">
       <Filter>Data</Filter>
     </None>
-    <None Include="..\..\..\Run\Viewer\Data\XML\init_viewer.xml">
+    <None Include="..\..\..\Run\Data\XML\enemigos.xml">
       <Filter>Data</Filter>
     </None>
-    <None Include="..\..\..\Run\Viewer\Data\XML\Lights.xml">
+    <None Include="..\..\..\Run\Data\XML\fonts.xml">
       <Filter>Data</Filter>
     </None>
-    <None Include="..\..\..\Run\Viewer\Data\XML\Lua.xml">
+    <None Include="..\..\..\Run\Data\XML\IA.xml">
       <Filter>Data</Filter>
     </None>
-    <None Include="..\..\..\Run\Viewer\Data\XML\RenderableObjects.xml">
+    <None Include="..\..\..\Run\Data\XML\init_viewer.xml">
       <Filter>Data</Filter>
     </None>
-    <None Include="..\..\..\Run\Viewer\Data\XML\SceneEffects.xml">
+    <None Include="..\..\..\Run\Data\XML\Lights.xml">
       <Filter>Data</Filter>
     </None>
-    <None Include="..\..\..\Run\Viewer\Data\XML\StaticMeshes.xml">
+    <None Include="..\..\..\Run\Data\XML\Lua.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\RenderableObjects.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\StaticMeshes.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\test.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\SceneEffects_Viewer.xml">
       <Filter>Data</Filter>
     </None>
   </ItemGroup>

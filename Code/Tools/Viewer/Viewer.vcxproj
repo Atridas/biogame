@@ -18,25 +18,19 @@
     <ClInclude Include="ViewerProcess.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Run\Viewer\Data\XML\actions.xml">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="..\..\..\Run\Viewer\Data\XML\AnimatedModels.xml" />
-    <None Include="..\..\..\Run\Viewer\Data\XML\Effects.xml" />
-    <None Include="..\..\..\Run\Viewer\Data\XML\init_viewer.xml" />
-    <None Include="..\..\..\Run\Viewer\Data\XML\Lights.xml">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="..\..\..\Run\Viewer\Data\XML\Lua.xml" />
-    <None Include="..\..\..\Run\Viewer\Data\XML\RenderableObjects.xml">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="..\..\..\Run\Viewer\Data\XML\SceneEffects.xml">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="..\..\..\Run\Viewer\Data\XML\StaticMeshes.xml">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="..\..\..\Run\Data\XML\actions.xml" />
+    <None Include="..\..\..\Run\Data\XML\AnimatedModels.xml" />
+    <None Include="..\..\..\Run\Data\XML\Effects.xml" />
+    <None Include="..\..\..\Run\Data\XML\enemigos.xml" />
+    <None Include="..\..\..\Run\Data\XML\fonts.xml" />
+    <None Include="..\..\..\Run\Data\XML\IA.xml" />
+    <None Include="..\..\..\Run\Data\XML\init_viewer.xml" />
+    <None Include="..\..\..\Run\Data\XML\Lights.xml" />
+    <None Include="..\..\..\Run\Data\XML\Lua.xml" />
+    <None Include="..\..\..\Run\Data\XML\RenderableObjects.xml" />
+    <None Include="..\..\..\Run\Data\XML\SceneEffects_Viewer.xml" />
+    <None Include="..\..\..\Run\Data\XML\StaticMeshes.xml" />
+    <None Include="..\..\..\Run\Data\XML\test.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{53AA6520-CC4F-48AE-B2D2-736F01BB6DDB}</ProjectGuid>

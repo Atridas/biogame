@@ -35,7 +35,7 @@
 
 	<LightsManager file="Data/XML/Lights.xml"/>
 
-	<SceneEffectManager file="Data/XML/SceneEffects.xml"/>
+	<SceneEffectManager file="Data/XML/SceneEffects_Viewer.xml"/>
 
 	<!--<AnimatedModelManager file="Data/XML/AnimatedModels.xml">
   </AnimatedModelManager>-->
