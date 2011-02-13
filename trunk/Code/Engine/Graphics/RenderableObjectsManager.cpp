@@ -119,9 +119,8 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
         {
           l_pRenderableObject->InitFromXML(l_XMLObject);
           m_vIndexMeshes.push_back(l_iMeshIndex);
+          l_iMeshIndex = l_iMeshIndex + 1;
         }
-
-        l_iMeshIndex = l_iMeshIndex + 1;
 
       } else if(l_szClass == "AnimatedModel") 
       {
@@ -131,9 +130,9 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
         {
           l_pRenderableObject->InitFromXML(l_XMLObject);
           m_vIndexAnimated.push_back(l_iMeshIndex);
+          l_iMeshIndex = l_iMeshIndex + 1;
         }
 
-        l_iMeshIndex = l_iMeshIndex + 1;
       } else 
       {
         LOGGER->AddNewLog(ELL_WARNING,"CRenderableObjectsManager:: Object: \"%s\" has unknown \"%s\" class", l_szName.c_str(), l_szClass.c_str());
