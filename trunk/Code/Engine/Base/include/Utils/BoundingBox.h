@@ -21,7 +21,7 @@ public:
   Vect3f MiddlePoint();
   
   bool GetCollisional () { return m_bCollisional; };
-  float GetMaxDistanceFromMiddle();
+  float GetMaxSideLength();
   Vect3f GetMin() { return m_vBox[0]; };
   Vect3f GetMax() { return m_vBox[7]; };
   Vect3f GetInitMin() { return m_vInitMin; };
@@ -37,8 +37,12 @@ protected:
   
 private:
   void   RecalcCurrentDimension();
+  void   Translate(const Vect3f& _vTranslation);
+  
   Vect3f m_vInitMin;
   Vect3f m_vInitMax;
+
+  Vect3f m_vTranslation;
 
   Vect3f m_vOriginDimension;
   Vect3f m_vCurrentDimension;
