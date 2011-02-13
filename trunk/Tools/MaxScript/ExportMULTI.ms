@@ -280,6 +280,7 @@ function CreateVertex _Pos _Normal _TUV1 _TUV2 _DiffuseColor _VertexType VertexO
 
 function WriteVertexs _File _VertexList _VertexType =
 (
+	format "Escribint % vèrtexs...\n" _VertexList.count
 	WriteShort _File _VertexList.count #unsigned
 	for i= 1 to _VertexList.count do
 	(
@@ -305,6 +306,7 @@ function WriteVertexs _File _VertexList _VertexType =
 )
 function WriteIndexs _File _IndexList =
 (
+	format "Escribint % índexs...\n" _IndexList.count
 	WriteLong _File _IndexList.count #unsigned
 	for i= 1 to _IndexList.count do
 	(
