@@ -62,42 +62,48 @@ void CScriptManager::Load(const string& _szFileName)
   m_szFileName = _szFileName;
 
   //Files
-  CXMLTreeNode l_TreeFiles = l_XMLLua["Files"];
-  int l_iNumScriptFiles = l_TreeFiles.GetNumChildren();
-  for(int i = 0; i < l_iNumScriptFiles; i++)
+  CXMLTreeNode l_TreeFiles = l_XMLLua["files"];
+  if(l_TreeFiles.IsOk())
   {
-    CXMLTreeNode l_LuaFile = l_TreeFiles(i);
-    if(l_LuaFile.IsComment()) {
-      continue;
-    }
-
-    string l_szLuaFile = l_LuaFile.GetPszISOProperty("path","");
-
-    if(l_szLuaFile != "")
+    int l_iNumScriptFiles = l_TreeFiles.GetNumChildren();
+    for(int i = 0; i < l_iNumScriptFiles; i++)
     {
-      m_vLuaScripts.push_back(l_szLuaFile);
-      RunFile(l_szLuaFile);
+      CXMLTreeNode l_LuaFile = l_TreeFiles(i);
+      if(l_LuaFile.IsComment()) {
+        continue;
+      }
+
+      string l_szLuaFile = l_LuaFile.GetPszISOProperty("path","");
+
+      if(l_szLuaFile != "")
+      {
+        m_vLuaScripts.push_back(l_szLuaFile);
+        RunFile(l_szLuaFile);
+      }
+      else
+        LOGGER->AddNewLog(ELL_WARNING,"CScriptManager::Load Propietat \"file\" no trobada a linia %d", i);
     }
-    else
-      LOGGER->AddNewLog(ELL_WARNING,"CScriptManager::Load Propietat \"file\" no trobada a linia %d", i);
   }
 
   //Init Scripts
-  CXMLTreeNode l_TreeInitScripts = l_XMLLua["InitScripts"];
-  int l_iNumScriptCalls = l_TreeInitScripts.GetNumChildren();
-  for(int i = 0; i < l_iNumScriptCalls; i++)
+  CXMLTreeNode l_TreeInitScripts = l_XMLLua["initscripts"];
+  if(l_TreeInitScripts.IsOk())
   {
-    CXMLTreeNode l_LuaScript = l_TreeInitScripts(i);
-    if(l_LuaScript.IsComment()) {
-      continue;
+    int l_iNumScriptCalls = l_TreeInitScripts.GetNumChildren();
+    for(int i = 0; i < l_iNumScriptCalls; i++)
+    {
+      CXMLTreeNode l_LuaScript = l_TreeInitScripts(i);
+      if(l_LuaScript.IsComment()) {
+        continue;
+      }
+
+      string l_szLuaCall = l_LuaScript.GetPszISOProperty("action","");
+
+      if(l_szLuaCall != "")
+        RunCode(l_szLuaCall);
+      else
+        LOGGER->AddNewLog(ELL_WARNING,"CScriptManager::Load Propietat \"action\" no trobada a linia %d", i);
     }
-
-    string l_szLuaCall = l_LuaScript.GetPszISOProperty("action","");
-
-    if(l_szLuaCall != "")
-      RunCode(l_szLuaCall);
-    else
-      LOGGER->AddNewLog(ELL_WARNING,"CScriptManager::Load Propietat \"action\" no trobada a linia %d", i);
   }
 
   SetOk(true);
@@ -107,17 +113,6 @@ void CScriptManager::Reload()
 {
   if(IsOk())
     Load(m_szFileName);
-}
-
-void CScriptManager::Execute()
-{
-  if(IsOk())
-  {
-    int l_iNumScriptFiles = m_vLuaScripts.size();
-    
-    for(int i = 0; i < l_iNumScriptFiles; i++)
-      RunFile(m_vLuaScripts[i]);
-  }
 }
 
 //Código de la función Alert que se llamará al generarse algún error de LUA

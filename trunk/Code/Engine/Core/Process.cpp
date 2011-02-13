@@ -74,10 +74,6 @@ bool CProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _p
   {
     CORE->GetScriptManager()->Reload();
     return true;
-  } else if(strcmp(_pcAction, "ExecuteScript") == 0)
-  {
-    CORE->GetScriptManager()->Execute();
-    return true;
   }
   return ExecuteProcessAction(_fDeltaSeconds,_fDelta,_pcAction);
 }
