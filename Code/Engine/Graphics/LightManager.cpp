@@ -114,3 +114,14 @@ vector<CLight*> CLightManager::GetLights(int _num) const
   return l_vOut;
 }
 
+
+void CLightManager::SetLightsVisible(bool _bVisible)
+{
+  TMapResource::const_iterator l_it = m_Resources.cbegin();
+  TMapResource::const_iterator l_end = m_Resources.cend();
+
+  for(;l_it != l_end; ++l_it)
+  {
+    l_it->second->SetVisible(_bVisible);
+  }
+}

@@ -126,6 +126,7 @@ void CViewerProcess::Update(float _fElapsedTime)
         l_Spot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObject->GetPosition().y+0.5f, m_pObject->GetPosition().z));
         Vect3f l_vec(cos(l_fYaw) * cos(l_fPitch), sin(l_fPitch),sin(l_fYaw) * cos(l_fPitch) );
         l_Spot->SetDirection(Vect3f(l_vec.x,l_vec.y,l_vec.z));
+        //l_Spot->
       }
     }
   }
@@ -525,6 +526,18 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
     return true;
   }
 
+  if(strcmp(_pcAction, "SetLightsONOFF") == 0)
+  {
+    m_bVisibleLights = !m_bVisibleLights;
+    CORE->GetLightManager()->SetLightsVisible(m_bVisibleLights);
+  }
+
+  if(strcmp(_pcAction, "ShowAjuda") == 0)
+  {
+    m_bAjuda = !m_bAjuda;
+    //CORE->GetLightManager()->SetLightsVisible(m_bVisibleLights);
+  }
+
   return false;
 }
 
@@ -538,12 +551,14 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
   uint32 l_uiFontTypeTitle = FONT_MANAGER->GetTTF_Id("Deco");
   uint32 l_uiFontTypeTitle2 = FONT_MANAGER->GetTTF_Id("xfiles");
   int l_iPosicio = 420;
+  int l_iPosicio2 = 400;
   string l_szMsg("Mode Animats");
   string l_szMsg2("Mode Meshes");
   string l_szMsg3("Mode Escena");
   CRenderableObject* l_pAnimatedInstance;
   CRenderableObject* l_pMeshInstance;
   stringstream l_SStream;
+  stringstream l_SStreamHelp;
 
   switch (m_iMode)
   {
@@ -551,7 +566,20 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
       FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg3.c_str());
       //_pRM->DrawGrid(30.0f,colCYAN,30,30);
       //_pRM->DrawAxis();
-     
+
+      if (m_bAjuda)
+      {
+          l_SStreamHelp << "---<Ajuda>---" <<  endl;
+          l_SStreamHelp << "[Canvi de Mode] Tecla M" <<  endl;
+          l_SStreamHelp << "[Mov. Endavant] W" <<  endl;
+          l_SStreamHelp << "[Mov. Endarrera] S" <<  endl;
+          l_SStreamHelp << "[Mov. Dreta] D" <<  endl;
+          l_SStreamHelp << "[Mov. Esquerra] A" <<  endl;
+          l_SStreamHelp << "[Correr] Mantenir L_Shift" <<  endl;
+          l_SStreamHelp << "[Ocultar Ajuda] F1" <<  endl;
+          
+          FONT_MANAGER->DrawText(550,l_iPosicio2,colGREEN,l_uiFontType,l_SStreamHelp.str().c_str());
+      }
       break;
 
     case MODE_MESH:
@@ -579,6 +607,25 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
         FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg.c_str());
         l_SStream << "No hi ha cap OBJECTE MESH per mostrar" << endl;
         FONT_MANAGER->DrawText(0,l_iPosicio,colGREEN,l_uiFontType,l_SStream.str().c_str());
+      }
+
+      if (m_bAjuda)
+      {
+         
+          l_SStreamHelp << "---<Ajuda>---" <<  endl;
+          l_SStreamHelp << "[Canvi de Mode] Tecla M" <<  endl;
+          l_SStreamHelp << "[Següent Mesh] Fletxa Dreta" <<  endl;
+          l_SStreamHelp << "[Anterior Mesh] Fletxa Esquerra" <<  endl;
+          l_SStreamHelp << "[Moure Càmera] Ratolí" <<  endl;
+          l_SStreamHelp << "[Zoom] Rodeta Ratolí" <<  endl;
+          l_SStreamHelp << "[Ocultar Ajuda] F1" <<  endl;
+          
+          FONT_MANAGER->DrawText(550,l_iPosicio2,colGREEN,l_uiFontType,l_SStreamHelp.str().c_str());
+          
+         // l_SStream << "Dimensions(XYZ): " << (float)l_vDimension.x << "x";
+  
+  
+  
       }
 
 
@@ -610,8 +657,29 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
         FONT_MANAGER->DrawText(0,l_iPosicio,colGREEN,l_uiFontType,l_SStream.str().c_str());
       }
 
+      if (m_bAjuda)
+      {
+          l_SStreamHelp << "---<Ajuda>---" <<  endl;
+          l_SStreamHelp << "[Canvi de Mode] Tecla M" <<  endl;
+          l_SStreamHelp << "[Següent Animat] Fletxa Dreta" <<  endl;
+          l_SStreamHelp << "[Anterior Animat] Fletxa Esquerra" <<  endl;
+          l_SStreamHelp << "[Següent Animacio] Fletxa UP" <<  endl;
+          l_SStreamHelp << "[Anterior Animacio] Fletxa DOWN" <<  endl;
+          l_SStreamHelp << "[Moure Càmera] Ratolí" <<  endl;
+          l_SStreamHelp << "[Zoom] Rodeta Ratolí" <<  endl;
+          l_SStreamHelp << "[Ocultar Ajuda] F1" <<  endl;
+          
+          FONT_MANAGER->DrawText(550,l_iPosicio2,colGREEN,l_uiFontType,l_SStreamHelp.str().c_str());
+  
+  
+  
+      }
+
       break; 
   }
+
+
+  
 
   //}
 }

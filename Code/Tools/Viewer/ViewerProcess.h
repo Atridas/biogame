@@ -6,6 +6,7 @@
 #define MODE_ESCENA 0
 #define MODE_MESH 1
 #define MODE_ANIMATS 2
+//#define MODE_AJUDA 3
 
 
 //Forward declarations---------------------
@@ -24,7 +25,8 @@ class CViewerProcess:
 
 public:
                         CViewerProcess            (): CProcess("Viewer Process"), m_pObject(0), m_pObjectCamera(0),
-                                                    m_fVelocity(0.0f),m_bRenderLights(false),m_iMode(0),m_iAnimat(0),m_iMesh(0),m_iRenderObject(0)
+                                                    m_fVelocity(0.0f),m_bRenderLights(false),m_iMode(0),m_iAnimat(0),
+                                                    m_iMesh(0),m_iRenderObject(0),m_bVisibleLights(true),m_bAjuda(true)
                                                 {};
   virtual               ~CViewerProcess           ()                          {Done();};
 
@@ -49,8 +51,10 @@ private:
   CCamera*              m_pObjectCamera;
   float                 m_fVelocity;
   bool                  m_bRenderLights;
+  bool                  m_bVisibleLights;
   int                   m_iMode;
   int                   m_iAnimat;
   int                   m_iMesh;
   int                   m_iRenderObject;
+  bool                  m_bAjuda;
 };
