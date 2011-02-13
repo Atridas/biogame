@@ -296,7 +296,7 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
           CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
           float l_fAltura = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->m_fAltura;
           l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();
-          l_pCam->SetZoom(l_fAltura*2);
+          l_pCam->SetZoom(l_fAltura*3.0f);
           m_pObject->SetPosition(Vect3f(l_pos.x,l_fAltura/2,l_pos.z));
         }
         else
@@ -312,10 +312,11 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
           l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetPosition();  
           CORE->GetRenderableObjectsManager()->SetAllVisible(false,l_pROM->m_vIndexMeshes[m_iMesh]);
           CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
-          Vect3f l_vMiddle = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetBoundingBox().MiddlePoint();
-          float l_vZoom = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetBoundingBox().GetMaxDistanceFromMiddle();
+          CBoundingBox l_BoundingBox = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetBoundingBox();
+          Vect3f l_vMiddle = l_BoundingBox.MiddlePoint();
+          float l_vZoom = l_BoundingBox.GetMaxSideLength();
           m_pObject->SetPosition(l_vMiddle);
-          l_pCam->SetZoom(l_vZoom*3);
+          l_pCam->SetZoom(l_vZoom*3.0f);
         }
       }
       
@@ -360,10 +361,11 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
       if (l_pROM->m_vIndexMeshes.size() != 0)
       {
         CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
-        Vect3f l_vMiddle = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetBoundingBox().MiddlePoint();
-        float l_vZoom = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetBoundingBox().GetMaxDistanceFromMiddle();
+        CBoundingBox l_BoundingBox = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetBoundingBox();
+        Vect3f l_vMiddle = l_BoundingBox.MiddlePoint();
+        float l_vZoom = l_BoundingBox.GetMaxSideLength();
         m_pObject->SetPosition(l_vMiddle);
-        l_pCam->SetZoom(l_vZoom*3);
+        l_pCam->SetZoom(l_vZoom*3.0f);
 
 
         l_pROM->SetAllVisible(false,l_pROM->m_vIndexMeshes[m_iMesh]);
@@ -383,7 +385,7 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
         float l_fAltura = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->m_fAltura;
         Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();
      
-        l_pCam->SetZoom(l_fAltura*2);
+        l_pCam->SetZoom(l_fAltura*3.0f);
         m_pObject->SetPosition(Vect3f(l_pos.x,l_fAltura/2,l_pos.z));
         l_pROM->SetAllVisible(false,l_pROM->m_vIndexAnimated[m_iAnimat]);
       }
@@ -407,10 +409,11 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
       if (l_pROM->m_vIndexMeshes.size() != 0)
       {
         CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
-        Vect3f l_vMiddle = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetBoundingBox().MiddlePoint();
-        float l_vZoom = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetBoundingBox().GetMaxDistanceFromMiddle();
+        CBoundingBox l_BoundingBox = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetBoundingBox();
+        Vect3f l_vMiddle = l_BoundingBox.MiddlePoint();
+        float l_vZoom = l_BoundingBox.GetMaxSideLength();
         m_pObject->SetPosition(l_vMiddle);
-        l_pCam->SetZoom(l_vZoom*3);
+        l_pCam->SetZoom(l_vZoom*3.0f);
 
         l_pROM->SetAllVisible(false,l_pROM->m_vIndexMeshes[m_iMesh]);
       }
@@ -429,7 +432,7 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
         float l_fAltura = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->m_fAltura;
         Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();
      
-        l_pCam->SetZoom(l_fAltura*2);
+        l_pCam->SetZoom(l_fAltura*3.0f);
         m_pObject->SetPosition(Vect3f(l_pos.x,l_fAltura/2,l_pos.z));
         l_pROM->SetAllVisible(false,l_pROM->m_vIndexAnimated[m_iAnimat]);
       }

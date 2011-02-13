@@ -2,13 +2,13 @@
 
 CBoundingBox::CBoundingBox()
 {
-  m_vInitMin = Vect3f(0.0f);
-  m_vInitMax = Vect3f(0.0f);
+  m_vInitMin = m_vInitMax = m_vTranslation = m_vOriginDimension = m_vCurrentDimension = Vect3f(0.0f);
 
   for(int i = 0; i < 8; i++)
     m_vBox[i] = Vect3f(0.0f);
 
   m_bCollisional = true;
+
 }
 
 bool CBoundingBox::Init(Vect3f& _vMin, Vect3f& _vMax)
@@ -52,6 +52,7 @@ bool CBoundingBox::Init(Vect3f& _vMin, Vect3f& _vMax)
   float l_fSideLengthY = m_vBox[0].Distance(m_vBox[4]);
   float l_fSideLengthZ = m_vBox[0].Distance(m_vBox[2]);
 
+  m_vTranslation = Vect3f(0.0f);
   m_vOriginDimension = Vect3f(l_fSideLengthX,l_fSideLengthY,l_fSideLengthZ);
   m_vCurrentDimension = m_vOriginDimension;
 
@@ -60,7 +61,7 @@ bool CBoundingBox::Init(Vect3f& _vMin, Vect3f& _vMax)
   return IsOk();
 }
 
-float CBoundingBox::GetMaxDistanceFromMiddle()
+float CBoundingBox::GetMaxSideLength()
 {
   float l_fMax = m_vOriginDimension.x;
   if(l_fMax < m_vOriginDimension.y)
@@ -80,46 +81,63 @@ Vect3f CBoundingBox::MiddlePoint()
 
 void CBoundingBox::TranslateBox(const Vect3f& _vTranslation)
 {
-  for(int i = 0; i < 8; i++)
-  {
-    m_vBox[i].x += _vTranslation.x;
-    m_vBox[i].y += _vTranslation.y;
-    m_vBox[i].z += _vTranslation.z;
-  }
+  m_vTranslation += _vTranslation;
+
+  Translate(_vTranslation);
 }
 
 void CBoundingBox::RotateBox(float _fPitch, float _fYaw, float _fRoll)
 {
+  Translate(m_vTranslation*-1);
+
   for(int i = 0; i < 8; i++)
   {
     m_vBox[i] = m_vBox[i].RotateX(_fPitch);
     m_vBox[i] = m_vBox[i].RotateY(_fPitch);
     m_vBox[i] = m_vBox[i].RotateZ(_fPitch);
   }
+
+  Translate(m_vTranslation);
+
   //actualitzar dimensions
   RecalcCurrentDimension();
 }
 
 void CBoundingBox::DoYaw(float _fYaw)
 {
+  Translate(m_vTranslation*-1);
+
   for(int i = 0; i < 8; i++)
     m_vBox[i] = m_vBox[i].RotateY(_fYaw);
+
+  Translate(m_vTranslation);
+
   //actualitzar dimensions
   RecalcCurrentDimension();
 }
 
 void CBoundingBox::DoPitch(float _fPitch)
 {
+  Translate(m_vTranslation*-1);
+
   for(int i = 0; i < 8; i++)
     m_vBox[i] = m_vBox[i].RotateX(_fPitch);
+
+  Translate(m_vTranslation);
+
   //actualitzar dimensions
   RecalcCurrentDimension();
 }
 
 void CBoundingBox::DoRoll(float _fRoll)
 {
+  Translate(m_vTranslation*-1);
+
   for(int i = 0; i < 8; i++)
     m_vBox[i] = m_vBox[i].RotateZ(_fRoll);
+
+  Translate(m_vTranslation);
+
   //actualitzar dimensions
   RecalcCurrentDimension();
 }
@@ -131,6 +149,16 @@ void CBoundingBox::RecalcCurrentDimension()
   float l_fSideLengthZ = m_vBox[0].Distance(m_vBox[2]);
 
   m_vCurrentDimension = Vect3f(l_fSideLengthX,l_fSideLengthY,l_fSideLengthZ);
+}
+
+void CBoundingBox::Translate(const Vect3f& _vTranslation)
+{
+  for(int i = 0; i < 8; i++)
+  {
+    m_vBox[i].x += _vTranslation.x;
+    m_vBox[i].y += _vTranslation.y;
+    m_vBox[i].z += _vTranslation.z;
+  }
 }
 
 void CBoundingBox::Release()
