@@ -570,7 +570,7 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 	
 	for i = 1 to l_numMaterials do
 	(
-		if ((IsMaterialEmpty _object i) == false) then
+		if (l_numMaterials == 1 or (IsMaterialEmpty _object i) == false) then
 		(
 			--format "Vertex Type %\n" l_vertexType[i] 
 			WriteVertexs l_file l_VertexList[i] l_vertexType[i] 

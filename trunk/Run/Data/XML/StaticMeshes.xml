@@ -35,7 +35,7 @@
 	<mesh name="Caixa_oberta_DEF" path="Data/Meshes/Caixa_oberta_DEF.mesh" max="0.2 0.290917 0.431708" min="-0.250463 0.0 -0.2"/>
 	<mesh name="caixa_tapada_DEF" path="Data/Meshes/caixa_tapada_DEF.mesh" max="0.2005 0.0957872 0.2" min="-0.2005 -0.0957872 -0.2"/>
 	<mesh name="Porta" path="Data/Meshes/Porta.mesh" max="0.0866122 1.25556 1.00326" min="-0.088191 -1.25556 -1.0075"/>
-	<!--mesh name="Llum_emergencia" path="Data/Meshes/Llum_emergencia.mesh" max="0.0711188 0.0 0.22954" min="-0.0774603 -0.168595 -0.22954"/-->
+	<mesh name="Llum_emergencia" path="Data/Meshes/Llum_emergencia.mesh" max="0.0711188 0.0 0.22954" min="-0.0774603 -0.168595 -0.22954"/>
 	<mesh name="Cable_florescent" path="Data/Meshes/Cable_florescent.mesh" max="0.0118561 0.5522 0.0" min="-0.0118561 -0.860855 -0.0144982"/>
 	<mesh name="Botiquin_medic_DEF" path="Data/Meshes/Botiquin_medic_DEF.mesh" max="0.0816007 0.291966 0.00457692" min="-0.0816007 -0.291966 -0.494896"/>
 	<mesh name="Carpeta01" path="Data/Meshes/Carpeta01.mesh" max="0.206423 0.0 0.174282" min="-0.105 -0.00562245 -0.174282"/>
@@ -87,8 +87,8 @@
 	<mesh name="tub_Gros" path="Data/Meshes/tub_Gros.mesh" max="0.214685 0.14342 -2.25249" min="0.0618382 -0.14342 0.0348682"/>
 	<mesh name="tub_Gros01" path="Data/Meshes/tub_Gros01.mesh" max="-0.0764236 0.14342 -1.14368" min="0.0764237 -0.14342 1.14368"/>
 	<mesh name="tub_Gros02" path="Data/Meshes/tub_Gros02.mesh" max="-0.0764236 0.14342 -1.14368" min="0.0764237 -0.14342 1.14368"/>
-	<!--mesh name="Caixa de llums" path="Data/Meshes/Caixa de llums.mesh" max="0.0540514 1.22494 0.215426" min="-0.0540504 -1.22494 -0.215427"/-->
-	<!--mesh name="Caixa de llums01" path="Data/Meshes/Caixa de llums01.mesh" max="0.0540504 1.22494 0.215426" min="-0.0540514 -1.22494 -0.215426"/-->
+	<mesh name="Caixa de llums" path="Data/Meshes/Caixa de llums.mesh" max="0.0540514 1.22494 0.215426" min="-0.0540504 -1.22494 -0.215427"/>
+	<mesh name="Caixa de llums01" path="Data/Meshes/Caixa de llums01.mesh" max="0.0540504 1.22494 0.215426" min="-0.0540514 -1.22494 -0.215426"/>
 	<mesh name="Arxivador19" path="Data/Meshes/Arxivador19.mesh" max="0.105 0.297 0.0500002" min="-0.105 0.0 -0.0500002"/>
 	<mesh name="Arxivador20" path="Data/Meshes/Arxivador20.mesh" max="0.105 0.297 0.0500002" min="-0.105 0.0 -0.0500002"/>
 	<mesh name="Arxivador22" path="Data/Meshes/Arxivador22.mesh" max="0.105 0.297 0.0500002" min="-0.105 0.0 -0.0500002"/>
