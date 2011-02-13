@@ -35,7 +35,7 @@
 	<RenderableObject name="Caixa_oberta_DEF" class="StaticMesh" resource="Caixa_oberta_DEF" position="-14.4364 1.79834 -9.55654" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="caixa_tapada_DEF" class="StaticMesh" resource="caixa_tapada_DEF" position="-14.4402 0.389527 -9.60498" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Porta" class="StaticMesh" resource="Porta" position="-4.56061 1.25447 -7.74437" yaw="0.0" pitch="0.0" roll="0.0"/>
-	<!--RenderableObject name="Llum_emergencia" class="StaticMesh" resource="Llum_emergencia" position="-4.73019 3.26819 -7.74813" yaw="0.0" pitch="0.0" roll="0.0"/-->
+	<RenderableObject name="Llum_emergencia" class="StaticMesh" resource="Llum_emergencia" position="-4.73019 3.26819 -7.74813" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Cable_florescent" class="StaticMesh" resource="Cable_florescent" position="-11.2983 4.39201 -4.88435" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Botiquin_medic_DEF" class="StaticMesh" resource="Botiquin_medic_DEF" position="-4.73131 1.86031 -2.96408" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Carpeta01" class="StaticMesh" resource="Carpeta01" position="-10.4334 0.0157218 -0.828875" yaw="0.0" pitch="0.0" roll="0.0"/>
@@ -87,8 +87,8 @@
 	<RenderableObject name="tub_Gros" class="StaticMesh" resource="tub_Gros" position="-15.03 2.67862 -4.05831" yaw="0.0" pitch="-86.3311" roll="0.0"/>
 	<RenderableObject name="tub_Gros01" class="StaticMesh" resource="tub_Gros01" position="-11.9319 3.8341 0.750328" yaw="-55.526" pitch="-94.848" roll="-3.79896"/>
 	<RenderableObject name="tub_Gros02" class="StaticMesh" resource="tub_Gros02" position="-8.2359 3.8341 0.750328" yaw="-55.526" pitch="-94.848" roll="-3.79896"/>
-	<!--RenderableObject name="Caixa de llums" class="StaticMesh" resource="Caixa de llums" position="-14.7692 1.22994 -1.67133" yaw="0.0" pitch="0.0" roll="0.0"/-->
-	<!--RenderableObject name="Caixa de llums01" class="StaticMesh" resource="Caixa de llums01" position="-4.69703 1.22994 -9.97175" yaw="0.0" pitch="0.0" roll="0.0"/-->
+	<RenderableObject name="Caixa de llums" class="StaticMesh" resource="Caixa de llums" position="-14.7692 1.22994 -1.67133" yaw="0.0" pitch="0.0" roll="0.0"/>
+	<RenderableObject name="Caixa de llums01" class="StaticMesh" resource="Caixa de llums01" position="-4.69703 1.22994 -9.97175" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Arxivador19" class="StaticMesh" resource="Arxivador19" position="-14.4638 2.29841 -8.39574" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Arxivador20" class="StaticMesh" resource="Arxivador20" position="-14.4638 2.29841 -8.50585" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Arxivador22" class="StaticMesh" resource="Arxivador22" position="-14.4318 2.29841 -9.02599" yaw="0.0" pitch="0.0" roll="0.0"/>
