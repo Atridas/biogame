@@ -104,6 +104,11 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
 
     CXMLTreeNode l_XMLObject = l_XMLObjects(i);
 
+    if(l_XMLObject.IsComment())
+    {
+      continue;
+    }
+
     l_szName      = l_XMLObject.GetPszISOProperty("name" ,"");
     l_szClass     = l_XMLObject.GetPszISOProperty("class" ,"");
     l_szResource  = l_XMLObject.GetPszISOProperty("resource" ,"");
