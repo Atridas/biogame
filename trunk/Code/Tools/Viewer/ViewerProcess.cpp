@@ -278,6 +278,11 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
       l_pCam->SetZoom(2.5f);
       CORE->GetRenderableObjectsManager()->SetAllVisible(true,m_iRenderObject);
       m_pObject->SetPosition(Vect3f(-6,1.7f,0));
+      if (m_pObjectBot != 0)
+      {
+        ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->ClearCycle(0);
+        ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->BlendCycle("run",0);
+      }
 
     }
     else 
@@ -575,6 +580,7 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
           l_SStreamHelp << "[Mov. Endarrera] S" <<  endl;
           l_SStreamHelp << "[Mov. Dreta] D" <<  endl;
           l_SStreamHelp << "[Mov. Esquerra] A" <<  endl;
+          l_SStreamHelp << "[Vista Càmera] Ratolí" <<  endl;
           l_SStreamHelp << "[Correr] Mantenir L_Shift" <<  endl;
           l_SStreamHelp << "[Ocultar Ajuda] F1" <<  endl;
           
