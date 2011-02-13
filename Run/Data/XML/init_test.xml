@@ -11,14 +11,14 @@
     <AnimatedModelManager xml="Data/XML/AnimatedModels.xml"/>
     <EffectManager xml="Data/XML/Effects.xml"/>
   </RenderManager>
-  <FontManager fontsXML="./Data/XML/Fonts.xml"/>
+  <FontManager fontsXML="Data/XML/Fonts.xml"/>
   <Languages default="cat">
-    <Language languageXML="./Data/Language/spanish.xml"/>
-    <Language languageXML="./Data/Language/catalan.xml"/>
-    <Language languageXML="./Data/Language/english.xml"/>
+    <Language languageXML="Data/Language/spanish.xml"/>
+    <Language languageXML="Data/Language/catalan.xml"/>
+    <Language languageXML="Data/Language/english.xml"/>
   </Languages>
   <InputManager exclusiveMouse="true"/>
-  <ActionToInput file="./Data/XML/actions.xml"/>
+  <ActionToInput file="Data/XML/actions.xml"/>
 
   <!-- RenderableObjectsManager file="Data/XML/RenderableObjects.xml" -->
   <!-- RenderableObjectsManager file="Data/Levels/Level -2/XML/RenderableObjects.xml" -->
@@ -37,7 +37,7 @@
 
   <SceneEffectManager file="Data/XML/SceneEffects.xml"/>
   
-  <ScriptManager file="Data/XML/Scripts.xml"/>
+  <ScriptManager file="Data/XML/Lua.xml"/>
     
   <!--<AnimatedModelManager file="Data/XML/AnimatedModels.xml">
   </AnimatedModelManager>-->

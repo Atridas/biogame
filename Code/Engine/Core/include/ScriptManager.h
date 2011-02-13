@@ -23,7 +23,6 @@ public:
   void RunFile(const string& _szFileName) const;
   void Load(const string& _szFileName);
   void Reload();
-  void Execute();
   lua_State * GetLuaState() const {return m_pLS;}
   void RegisterLUAFunctions();
 

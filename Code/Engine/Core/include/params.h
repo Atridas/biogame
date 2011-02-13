@@ -50,7 +50,7 @@ struct SFontManagerParams
 
   //Default Params
   SFontManagerParams():
-    pcFontsXML("./Data/Fonts/Fonts.xml")
+    pcFontsXML("Data/Fonts/Fonts.xml")
   {};
 };
 
@@ -95,7 +95,7 @@ struct SActionToInputParams
 
   //Default Params
   SActionToInputParams():
-    pcFile("./Data/XML/actions.xml")
+    pcFile("Data/XML/actions.xml")
   {};
 };
 
@@ -116,7 +116,7 @@ struct SLightsManager
 
   //Default Params
   SLightsManager():
-    szFile("./Data/XML/Lights.xml")
+    szFile("Data/XML/Lights.xml")
   {};
 };
 
@@ -126,7 +126,7 @@ struct SSceneEffectManager
 
   //Default Params
   SSceneEffectManager():
-    szFile("./Data/XML/SceneEffects.xml")
+    szFile("Data/XML/SceneEffects.xml")
   {};
 };
 
@@ -136,7 +136,7 @@ struct SScriptManager
 
   //Default Params
   SScriptManager():
-    szFile("./Data/XML/Scripts.xml")
+    szFile("Data/XML/Lua.xml")
   {};
 };
 
