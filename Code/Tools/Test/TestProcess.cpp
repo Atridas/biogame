@@ -161,19 +161,21 @@ void CTestProcess::RenderINFO(CRenderManager* _pRM)
 	g_pD3DXSprite2->End();
   */
 
+  //_pRM->DrawQuad2D(pos, 100, 100, UPPER_LEFT, colGREEN);
+
+  _pRM->EnableAlphaBlend();
+
   Vect2i pos(40, 40);
-
-  _pRM->DrawQuad2D(pos, 100, 100, UPPER_LEFT, colGREEN);
-
-  pos.x += 100;
 
   CTexture* l_pTexture = _pRM->GetTextureManager()->GetResource("Data/Textures/gohan.png");
   if(l_pTexture)
   {
     assert(l_pTexture->IsOk());
     l_pTexture->Activate(0);
-    _pRM->DrawTexturedQuad2D(pos, 100, 100, UPPER_LEFT);
+    _pRM->DrawTexturedQuad2D(pos, l_pTexture->GetWidth(), l_pTexture->GetHeight(), UPPER_LEFT);
   }
+
+  _pRM->DisableAlphaBlend();
 }
 
 bool CTestProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
