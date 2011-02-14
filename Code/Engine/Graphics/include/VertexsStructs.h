@@ -73,8 +73,6 @@ struct SDIFFUSEVERTEX
 
   static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
 
-  static bool ActivateTextures(const vector<CTexture*>& _TextureArray);
-
   static void ReleaseVertexDeclaration()
   {
     CHECKED_RELEASE(s_VertexDeclaration);
@@ -94,8 +92,6 @@ struct SDIFFUSESCREENVERTEX
   static unsigned int GetFVF();
 
   static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-
-  static bool ActivateTextures(const vector<CTexture*>& _TextureArray);
 
   static void ReleaseVertexDeclaration()
   {
@@ -117,8 +113,6 @@ struct STEXTUREDSCREENVERTEX
 
   static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
 
-  static bool ActivateTextures(const vector<CTexture*>& _TextureArray);
-
   static void ReleaseVertexDeclaration()
   {
     CHECKED_RELEASE(s_VertexDeclaration);
@@ -139,8 +133,6 @@ struct SDIFFUSETEXTUREDSCREENVERTEX
   static unsigned int GetFVF();
 
   static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
-
-  static bool ActivateTextures(const vector<CTexture*>& _TextureArray);
 
   static void ReleaseVertexDeclaration()
   {
@@ -186,8 +178,6 @@ struct SNORMALDIFFUSEVERTEX
 
   static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
 
-  static bool ActivateTextures(const vector<CTexture*>& _TextureArray);
-
   static void ReleaseVertexDeclaration()
   {
     CHECKED_RELEASE(s_VertexDeclaration);
@@ -231,8 +221,6 @@ struct TNORMALTANGENTBINORMALTEXTUREDVERTEX
 
   static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
 
-  static bool ActivateTextures(const vector<CTexture*>& _TextureArray);
-
 private:
   
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
@@ -271,8 +259,6 @@ struct TNORMALTANGENTBINORMALTEXTURED2VERTEX
   }
 
   static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
-
-  static bool ActivateTextures(const vector<CTexture*>& _TextureArray);
 
 private:
   
@@ -350,8 +336,6 @@ struct STEXTUREDVERTEX
 
   static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
 
-  static bool ActivateTextures(const vector<CTexture*>& _TextureArray);
-
   static void ReleaseVertexDeclaration()
   {
     CHECKED_RELEASE(s_VertexDeclaration);
@@ -394,8 +378,6 @@ struct STEXTURED2VERTEX
   static unsigned int GetFVF();
 
   static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
-
-  static bool ActivateTextures(const vector<CTexture*>& _TextureArray);
 
   static void ReleaseVertexDeclaration()
   {
@@ -440,8 +422,6 @@ struct SNORMALTEXTUREDVERTEX
 
   static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
 
-  static bool ActivateTextures(const vector<CTexture*>& _TextureArray);
-
   static void ReleaseVertexDeclaration()
   {
     CHECKED_RELEASE(s_VertexDeclaration);
@@ -485,8 +465,6 @@ struct SNORMALTEXTURED2VERTEX
   static unsigned int GetFVF();
 
   static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
-
-  static bool ActivateTextures(const vector<CTexture*>& _TextureArray);
 
   static void ReleaseVertexDeclaration()
   {
@@ -538,8 +516,6 @@ struct TCAL3D_HW_VERTEX
   }
 
   static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
-
-  static bool ActivateTextures(const vector<CTexture*>& _TextureArray);
 
   static void ReleaseVertexDeclaration()
   {

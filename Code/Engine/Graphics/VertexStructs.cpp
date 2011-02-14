@@ -131,13 +131,6 @@ unsigned int SDIFFUSEVERTEX::GetFVF()
 	return D3DFVF_XYZ|D3DFVF_DIFFUSE;
 }
 
-bool SDIFFUSEVERTEX::ActivateTextures(const vector<CTexture*>& _TextureArray)
-{
-  assert(_TextureArray.size() == 1);
-  _TextureArray[0]->Activate(1); // normal
-  return true;
-}
-
 LPDIRECT3DVERTEXDECLARATION9& SDIFFUSEVERTEX::GetVertexDeclaration()
 {
   if(s_VertexDeclaration==NULL)
@@ -177,11 +170,6 @@ unsigned short SDIFFUSESCREENVERTEX::GetVertexType()
 unsigned int SDIFFUSESCREENVERTEX::GetFVF()
 {
   return D3DFVF_XYZRHW|D3DFVF_DIFFUSE;
-}
-
-bool SDIFFUSESCREENVERTEX::ActivateTextures(const vector<CTexture*>& _TextureArray)
-{
-  return true;
 }
 
 LPDIRECT3DVERTEXDECLARATION9& SDIFFUSESCREENVERTEX::GetVertexDeclaration()
@@ -225,13 +213,6 @@ unsigned int STEXTUREDSCREENVERTEX::GetFVF()
   return D3DFVF_XYZRHW|D3DFVF_TEX1;
 }
 
-bool STEXTUREDSCREENVERTEX::ActivateTextures(const vector<CTexture*>& _TextureArray)
-{
-  assert(_TextureArray.size() == 1);
-  _TextureArray[0]->Activate(1); // normal
-  return true;
-}
-
 LPDIRECT3DVERTEXDECLARATION9& STEXTUREDSCREENVERTEX::GetVertexDeclaration()
 {
   if(s_VertexDeclaration==NULL)
@@ -271,13 +252,6 @@ unsigned short SDIFFUSETEXTUREDSCREENVERTEX::GetVertexType()
 unsigned int SDIFFUSETEXTUREDSCREENVERTEX::GetFVF()
 {
   return D3DFVF_XYZRHW|D3DFVF_DIFFUSE|D3DFVF_TEX1;
-}
-
-bool SDIFFUSETEXTUREDSCREENVERTEX::ActivateTextures(const vector<CTexture*>& _TextureArray)
-{
-  assert(_TextureArray.size() == 1);
-  _TextureArray[0]->Activate(1); // normal
-  return true;
 }
 
 LPDIRECT3DVERTEXDECLARATION9& SDIFFUSETEXTUREDSCREENVERTEX::GetVertexDeclaration()
@@ -328,12 +302,6 @@ unsigned int SNORMALDIFFUSEVERTEX::GetFVF()
 	return D3DFVF_XYZ|D3DFVF_NORMAL|D3DFVF_DIFFUSE;
 }
 
-bool SNORMALDIFFUSEVERTEX::ActivateTextures(const vector<CTexture*>& _TextureArray)
-{
-  assert(_TextureArray.size() == 0);
-  return true;
-}
-
 LPDIRECT3DVERTEXDECLARATION9& SNORMALDIFFUSEVERTEX::GetVertexDeclaration()
 {
   if(s_VertexDeclaration==NULL)
@@ -378,16 +346,6 @@ unsigned short TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetVertexType()
 unsigned int TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetFVF()
 {
   return D3DFVF_XYZ|D3DFVF_NORMAL|D3DFVF_TEX1; //TODO?
-}
-
-bool TNORMALTANGENTBINORMALTEXTUREDVERTEX::ActivateTextures(const vector<CTexture*>& _TextureArray)
-{
-  assert(_TextureArray.size() == 2);
-  _TextureArray[0]->Activate(0); // diffuse
-  _TextureArray[1]->Activate(1); // normal
-  //_TextureArray[2]->Activate(2); // lightmap
-  //_TextureArray[3]->Activate(3); // enviroment
-  return true;
 }
 
 LPDIRECT3DVERTEXDECLARATION9& TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetVertexDeclaration()
@@ -447,16 +405,6 @@ unsigned short TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetVertexType()
 unsigned int TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetFVF()
 {
   return D3DFVF_XYZ|D3DFVF_NORMAL|D3DFVF_TEX2; //TODO?
-}
-
-bool TNORMALTANGENTBINORMALTEXTURED2VERTEX::ActivateTextures(const vector<CTexture*>& _TextureArray)
-{
-  assert(_TextureArray.size() == 3);
-  _TextureArray[0]->Activate(0); // diffuse
-  _TextureArray[1]->Activate(1); // normal
-  _TextureArray[2]->Activate(2); // lightmap
-  //_TextureArray[3]->Activate(3); // enviroment
-  return true;
 }
 
 LPDIRECT3DVERTEXDECLARATION9& TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetVertexDeclaration()
@@ -527,14 +475,6 @@ unsigned int STEXTUREDVERTEX::GetFVF()
 	return D3DFVF_XYZ|D3DFVF_TEX1;
 }
 
-bool STEXTUREDVERTEX::ActivateTextures(const vector<CTexture*>& _TextureArray)
-{
-  assert(_TextureArray.size() == 2);
-  _TextureArray[0]->Activate(0); // diffuse
-  _TextureArray[1]->Activate(1); // normal
-  return true;
-}
-
 LPDIRECT3DVERTEXDECLARATION9& STEXTUREDVERTEX::GetVertexDeclaration()
 {
   if(s_VertexDeclaration==NULL)
@@ -572,15 +512,6 @@ unsigned short STEXTURED2VERTEX::GetVertexType()
 unsigned int STEXTURED2VERTEX::GetFVF()
 {
 	return D3DFVF_XYZ|D3DFVF_TEX4;
-}
-
-bool STEXTURED2VERTEX::ActivateTextures(const vector<CTexture*>& _TextureArray)
-{
-  assert(_TextureArray.size() == 3);
-  _TextureArray[0]->Activate(0); // diffuse
-  _TextureArray[1]->Activate(1); // normal
-  _TextureArray[2]->Activate(2); // lightmap
-  return true;
 }
 
 LPDIRECT3DVERTEXDECLARATION9& STEXTURED2VERTEX::GetVertexDeclaration()
@@ -630,13 +561,6 @@ unsigned int SNORMALTEXTUREDVERTEX::GetFVF()
 	return D3DFVF_XYZ|D3DFVF_NORMAL|D3DFVF_TEX2;
 }
 
-bool SNORMALTEXTUREDVERTEX::ActivateTextures(const vector<CTexture*>& _TextureArray)
-{
-  assert(_TextureArray.size() == 1);
-  _TextureArray[0]->Activate(0); // diffuse
-  return true;
-}
-
 LPDIRECT3DVERTEXDECLARATION9& SNORMALTEXTUREDVERTEX::GetVertexDeclaration()
 {
   if(s_VertexDeclaration==NULL)
@@ -681,14 +605,6 @@ unsigned short SNORMALTEXTURED2VERTEX::GetVertexType()
 unsigned int SNORMALTEXTURED2VERTEX::GetFVF()
 {
 	return D3DFVF_XYZ|D3DFVF_NORMAL|D3DFVF_TEX4;
-}
-
-bool SNORMALTEXTURED2VERTEX::ActivateTextures(const vector<CTexture*>& _TextureArray)
-{
-  assert(_TextureArray.size() == 2);
-  _TextureArray[0]->Activate(0); // diffuse
-  _TextureArray[1]->Activate(2); // lightmap
-  return true;
 }
 
 LPDIRECT3DVERTEXDECLARATION9& SNORMALTEXTURED2VERTEX::GetVertexDeclaration()
@@ -736,13 +652,6 @@ LPDIRECT3DVERTEXDECLARATION9& SNORMALTEXTURED2VERTEX::GetVertexDeclaration()
 
 // Cal 3D Vertex ---------------------------------------------------------------------------------------------------
 
-bool TCAL3D_HW_VERTEX::ActivateTextures(const vector<CTexture*>& _TextureArray)
-{
-  //assert(_TextureArray.size() == 2);
-  //_TextureArray[0]->Activate(0); // diffuse
-  //_TextureArray[1]->Activate(2); // lightmap
-  return true; // TODO
-}
 
 LPDIRECT3DVERTEXDECLARATION9& TCAL3D_HW_VERTEX::GetVertexDeclaration()
 {
