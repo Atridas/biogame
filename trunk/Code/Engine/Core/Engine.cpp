@@ -10,6 +10,8 @@
 #include <Utils/Timer.h>
 #include <ActionToInput.h>
 
+#include "HDRPipeline.h"
+
 #include "params.h"
 
 bool CEngine::Init(const SInitParams& _InitParams,  HWND hWnd)
@@ -23,6 +25,12 @@ bool CEngine::Init(const SInitParams& _InitParams,  HWND hWnd)
   if(m_pProcess) //TODO: Comprovar excepcio m_pProcess == NULL i logejar
     m_pProcess->Init(); 
 
+  m_pHDR = new CHDRPipeline();
+  if(!m_pHDR->Init(_InitParams.EngineParams.szHDRFile))
+  {
+    CHECKED_DELETE( m_pHDR );
+  }
+
   m_pCore->GetActionToInput()->SetProcess(m_pProcess);
 
   SetOk(true);
@@ -34,6 +42,7 @@ void CEngine::Release()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"Engine::Release");
 
+  CHECKED_DELETE(m_pHDR);
   CHECKED_DELETE(m_pProcess);
   CHECKED_DELETE(m_pCore);
   LOGGER->SaveLogsInFile();
@@ -54,35 +63,46 @@ void CEngine::Render()
 	CRenderManager* l_pRM = m_pCore->GetRenderManager();
 
   if(m_pProcess != NULL)
+  {
     m_pProcess->PreRender(l_pRM);
 
-	l_pRM->BeginRendering();
-
-  if(m_pProcess != NULL)
-    l_pRM->SetupMatrices(m_pProcess->GetCamera());
-	
-	RenderScene();
-
-	l_pRM->EndRendering();
-
-  //if(m_pProcess != NULL)
-  //{
-		//
-  //  //m_pProcess->RenderINFO();
-  //}
-
+    if(m_pHDR && m_pHDR->IsActive())
+    {
+      RenderHDR(l_pRM, m_pProcess);
+    } else {
+      RenderNoHDR(l_pRM, m_pProcess);
+    }
+  }
 }
 
-void CEngine::RenderScene()
+
+void CEngine::RenderHDR(CRenderManager* _pRM, CProcess* _pProcess)
 {
-	if(m_pProcess != NULL)
-	{
-    m_pProcess->Render(RENDER_MANAGER);
-		m_pProcess->DebugInformation();
-	}
+  assert(m_pHDR->IsOk());
 
-	
+  m_pHDR->PrepareTextures(_pRM, _pProcess);
+
+  _pRM->BeginRendering();
+  
+  m_pHDR->Render(_pRM);
+  _pProcess->PostRender(_pRM);
+	_pProcess->DebugInformation();
+
+	_pRM->EndRendering();
 }
+
+void CEngine::RenderNoHDR(CRenderManager* _pRM, CProcess* _pProcess)
+{
+  _pRM->BeginRendering();
+
+  _pRM->SetupMatrices(m_pProcess->GetCamera());
+  _pProcess->Render(_pRM);
+  _pProcess->PostRender(_pRM);
+	_pProcess->DebugInformation();
+
+	_pRM->EndRendering();
+}
+
 void CEngine::SetProcess(CProcess* _pProcess)
 {
 	m_pProcess = _pProcess;
