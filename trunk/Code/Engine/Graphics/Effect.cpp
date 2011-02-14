@@ -171,7 +171,7 @@ bool CEffect::SetLights(size_t _iNumOfLights)
       LOGGER->AddNewLog(ELL_ERROR, "CEffect::SetLights Light manager no té %d llums.", i);
       return false;
     }
-    m_aLightsEnabled[i] = true;
+    m_aLightsEnabled[i] = l_pLight->IsActive();
     m_aLightsType[i] = l_pLight->GetType();
     
     m_aLightsStartRangeAttenuation[i] = l_pLight->GetStartRangeAttenuation();

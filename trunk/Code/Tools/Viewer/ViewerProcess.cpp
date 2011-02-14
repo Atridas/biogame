@@ -65,6 +65,7 @@ bool CViewerProcess::Init()
   if (l_Spot != 0)
   {
     l_Spot->SetDirection(m_pObject->GetPosition());
+    l_Spot->SetActive(true);
   }
   
  
@@ -534,7 +535,7 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
   if(strcmp(_pcAction, "SetLightsONOFF") == 0)
   {
     m_bVisibleLights = !m_bVisibleLights;
-    CORE->GetLightManager()->SetLightsVisible(m_bVisibleLights);
+    CORE->GetLightManager()->SetLightsEnabled(m_bVisibleLights);
   }
 
   if(strcmp(_pcAction, "ShowAjuda") == 0)

@@ -25,7 +25,8 @@ public:
 
   const Vect3f& GetAmbientLight() const {return m_vAmbientLight;};
   void SetAmbientLight(Vect3f _vAmbient) {m_vAmbientLight = _vAmbient;};
-  void SetLightsVisible(bool _bVisible);
+  void SetLightsEnabled(bool _bEnabled);
+
 private:
   Vect3f m_vAmbientLight;
 };

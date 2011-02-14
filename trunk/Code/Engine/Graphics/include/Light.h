@@ -5,6 +5,7 @@
 
 #include "base.h"
 #include "Utils/Object3D.h"
+#include "Activable.h"
 #include <XML/XMLTreeNode.h>
 #include "Named.h"
 
@@ -16,7 +17,8 @@ class CColor;
 class CLight : 
   public CObject3D,
   public CNamed,
-  public CBaseControl
+  public CBaseControl,
+  public CActivable
 {
 public:
   
