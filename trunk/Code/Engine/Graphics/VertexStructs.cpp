@@ -4,7 +4,10 @@
 
 LPDIRECT3DVERTEXDECLARATION9 SDIFFUSEVERTEX::s_VertexDeclaration = 0;
 
+LPDIRECT3DVERTEXDECLARATION9 SDIFFUSESCREENVERTEX::s_VertexDeclaration = 0;
+LPDIRECT3DVERTEXDECLARATION9 STEXTUREDSCREENVERTEX::s_VertexDeclaration = 0;
 LPDIRECT3DVERTEXDECLARATION9 SDIFFUSETEXTUREDSCREENVERTEX::s_VertexDeclaration = 0;
+
 LPDIRECT3DVERTEXDECLARATION9 STEXTUREDVERTEX::s_VertexDeclaration = 0;
 LPDIRECT3DVERTEXDECLARATION9 STEXTURED2VERTEX::s_VertexDeclaration = 0;
 
@@ -31,9 +34,15 @@ uint16 GetVertexSize(uint16 _usVertexType)
   } else if(_usVertexType == STEXTURED2VERTEX::GetVertexType())
   {
     return sizeof(STEXTURED2VERTEX);
+  } else if(_usVertexType == STEXTUREDSCREENVERTEX::GetVertexType())
+  {
+    return sizeof(STEXTUREDSCREENVERTEX);
   } else if(_usVertexType == SDIFFUSETEXTUREDSCREENVERTEX::GetVertexType())
   {
     return sizeof(SDIFFUSETEXTUREDSCREENVERTEX);
+  } else if(_usVertexType == SDIFFUSESCREENVERTEX::GetVertexType())
+  {
+    return sizeof(SDIFFUSESCREENVERTEX);
   } else if(_usVertexType == SNORMALDIFFUSEVERTEX::GetVertexType())
   {
     return sizeof(SNORMALDIFFUSEVERTEX);
@@ -77,9 +86,15 @@ uint16 GetTextureNum(uint16 _usVertexType)
   } else if(_usVertexType == STEXTUREDVERTEX::GetVertexType())
   {
     return 2;
+  } else if(_usVertexType == STEXTUREDSCREENVERTEX::GetVertexType())
+  {
+    return 1;
   } else if(_usVertexType == SDIFFUSETEXTUREDSCREENVERTEX::GetVertexType())
   {
     return 1;
+  } else if(_usVertexType == SDIFFUSESCREENVERTEX::GetVertexType())
+  {
+    return 0;
   } else if(_usVertexType == STEXTURED2VERTEX::GetVertexType())
   {
     return 3;
@@ -152,11 +167,105 @@ LPDIRECT3DVERTEXDECLARATION9& SDIFFUSEVERTEX::GetVertexDeclaration()
 }
 
 
+// Diffuse Screen Vertex -----------------------------------------------------------------------------------------------------------
+
+unsigned short SDIFFUSESCREENVERTEX::GetVertexType()
+{
+  return VERTEX_TYPE_SCREENGEO|VERTEX_TYPE_DIFFUSE|VERTEX_TYPE_TEXTURE1;
+}
+
+unsigned int SDIFFUSESCREENVERTEX::GetFVF()
+{
+  return D3DFVF_XYZRHW|D3DFVF_DIFFUSE;
+}
+
+bool SDIFFUSESCREENVERTEX::ActivateTextures(const vector<CTexture*>& _TextureArray)
+{
+  return true;
+}
+
+LPDIRECT3DVERTEXDECLARATION9& SDIFFUSESCREENVERTEX::GetVertexDeclaration()
+{
+  if(s_VertexDeclaration==NULL)
+  {
+    D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+    {
+      { 0, 
+        0 , 
+        D3DDECLTYPE_FLOAT4,     //type
+        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+        D3DDECLUSAGE_POSITIONT,  //ús de les dades
+        0 
+      },
+      { 0, 
+        12 ,                    //desplaçament 
+        D3DDECLTYPE_D3DCOLOR,   //type
+        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+        D3DDECLUSAGE_COLOR,     //ús de les dades
+        0 
+      },
+      D3DDECL_END()
+    };
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    assert(result == D3D_OK);
+  }
+  return s_VertexDeclaration;
+}
+
+
+// Textured Screen Vertex -----------------------------------------------------------------------------------------------------------
+
+unsigned short STEXTUREDSCREENVERTEX::GetVertexType()
+{
+  return VERTEX_TYPE_SCREENGEO|VERTEX_TYPE_TEXTURE1;
+}
+
+unsigned int STEXTUREDSCREENVERTEX::GetFVF()
+{
+  return D3DFVF_XYZRHW|D3DFVF_TEX1;
+}
+
+bool STEXTUREDSCREENVERTEX::ActivateTextures(const vector<CTexture*>& _TextureArray)
+{
+  assert(_TextureArray.size() == 1);
+  _TextureArray[0]->Activate(1); // normal
+  return true;
+}
+
+LPDIRECT3DVERTEXDECLARATION9& STEXTUREDSCREENVERTEX::GetVertexDeclaration()
+{
+  if(s_VertexDeclaration==NULL)
+  {
+    D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+    {
+      { 0, 
+        0 , 
+        D3DDECLTYPE_FLOAT4,     //type
+        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+        D3DDECLUSAGE_POSITIONT,  //ús de les dades
+        0 
+      },
+      { 0, 
+        12 ,                    //desplaçament 
+        D3DDECLTYPE_FLOAT2,   //type
+        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
+        D3DDECLUSAGE_TEXCOORD,     //ús de les dades
+        0 
+      },
+      D3DDECL_END()
+    };
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    assert(result == D3D_OK);
+  }
+  return s_VertexDeclaration;
+}
+
+
 // Diffuse Textured Screen Vertex -----------------------------------------------------------------------------------------------------------
 
 unsigned short SDIFFUSETEXTUREDSCREENVERTEX::GetVertexType()
 {
-  return VERTEX_TYPE_GEOMETRY|VERTEX_TYPE_DIFFUSE|VERTEX_TYPE_TEXTURE1;
+  return VERTEX_TYPE_SCREENGEO|VERTEX_TYPE_DIFFUSE|VERTEX_TYPE_TEXTURE1;
 }
 
 unsigned int SDIFFUSETEXTUREDSCREENVERTEX::GetFVF()

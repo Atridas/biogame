@@ -68,7 +68,7 @@ void CDrawQuadToTextureSceneEffect::PreRender(CRenderManager* _pRM, CProcess* _p
       for (UINT iPass = 0; iPass < l_NumPasses; iPass++)
       {
         l_Effect->BeginPass(iPass);
-        _pRM->DrawTexturedQuad2D (posInit,w,h,UPPER_LEFT,m_Color);
+        _pRM->DrawColoredTexturedQuad2D (posInit,w,h,UPPER_LEFT,m_Color);
         l_Effect->EndPass();
       }
       l_Effect->End();

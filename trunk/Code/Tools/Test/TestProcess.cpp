@@ -160,6 +160,10 @@ void CTestProcess::RenderINFO(CRenderManager* _pRM)
   g_pD3DXSprite2->Draw(_pRM->GetTextureManager()->GetResource("DownSampledGlow2")->GetD3DTexture(), NULL, NULL, &vecPos, 0xffffffff);
 	g_pD3DXSprite2->End();
   */
+
+  Vect2i pos(40, 40);
+
+  _pRM->DrawQuad2D(pos, 100, 100, UPPER_LEFT, colGREEN);
 }
 
 bool CTestProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
