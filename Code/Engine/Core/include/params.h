@@ -39,6 +39,16 @@ struct SRenderManagerParams
   {};
 };
 
+struct SEngineParams
+{
+  string szHDRFile;
+
+  //Default params
+  SEngineParams():
+    szHDRFile("Data/XML/HDR.xml")
+    {};
+};
+
 /**
  * Paràmetres del font manager.
  * Estructura que conté els paràmetres de configuració, referents a FontManager, que es poden trobar al config del procés.
@@ -104,38 +114,38 @@ struct SActionToInputParams
  * Estructura que conté els paràmetres de configuració, referents a RenderableObjectsManager, que es poden trobar al config del procés.
  *  - vXMLFiles: Vector de fitxers de configuració per a RenderableObjectsManager. Default buit.
 **/
-struct SRenderableObjectsManager
+struct SRenderableObjectsManagerParams
 {
   vector<string> vXMLFiles;
 };
 
 
-struct SLightsManager
+struct SLightsManagerParams
 {
   string szFile;
 
   //Default Params
-  SLightsManager():
+  SLightsManagerParams():
     szFile("Data/XML/Lights.xml")
   {};
 };
 
-struct SSceneEffectManager
+struct SSceneEffectManagerParams
 {
   string szFile;
 
   //Default Params
-  SSceneEffectManager():
+  SSceneEffectManagerParams():
     szFile("Data/XML/SceneEffects.xml")
   {};
 };
 
-struct SScriptManager
+struct SScriptManagerParams
 {
   string szFile;
 
   //Default Params
-  SScriptManager():
+  SScriptManagerParams():
     szFile("Data/XML/Lua.xml")
   {};
 };
@@ -158,15 +168,16 @@ struct SScriptManager
 **/
 struct SInitParams
 {
-  SRenderManagerParams      RenderManagerParams;
-  SFontManagerParams        FontManagerParams;
-  SLanguageManagerParams    LanguageManagerParams;
-  SInputManagerParams       InputManagerParams;
-  SActionToInputParams      ActionToInputParams;
-  SRenderableObjectsManager RenderableObjectsManager;
-  SLightsManager            LightsManager;
-  SSceneEffectManager       SceneEffect;
-  SScriptManager            ScriptManager;
+  SEngineParams                   EngineParams;
+  SRenderManagerParams            RenderManagerParams;
+  SFontManagerParams              FontManagerParams;
+  SLanguageManagerParams          LanguageManagerParams;
+  SInputManagerParams             InputManagerParams;
+  SActionToInputParams            ActionToInputParams;
+  SRenderableObjectsManagerParams RenderableObjectsManagerParams;
+  SLightsManagerParams            LightsManagerParams;
+  SSceneEffectManagerParams       SceneEffectParams;
+  SScriptManagerParams            ScriptManagerParams;
 };
 
 void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML);

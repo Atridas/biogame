@@ -104,12 +104,18 @@ void CProcess::Render(CRenderManager* _pRM)
   //Renderizamos la escena
   RenderScene(_pRM);
 
-  //Capturamos el Frame Buffer antes de los efectos de post render
-  m_pSceneEffectManager->CaptureFrameBuffers(_pRM);
+  
+}
+
+void CProcess::PostRender(CRenderManager* _pRM, bool _bCaptureNoPostFX)
+{
+  if(_bCaptureNoPostFX)
+  {
+    //Capturamos el Frame Buffer antes de los efectos de post render
+    m_pSceneEffectManager->CaptureFrameBuffers(_pRM);
+  }
   //Efectuamos los efectos de post render
   m_pSceneEffectManager->PostRender(_pRM);
   //Capturamos el Frame Buffer después de los efectos de post render
   m_pSceneEffectManager->CaptureFrameBuffersAfterPostRender(_pRM);
-  
 }
-

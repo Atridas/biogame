@@ -44,6 +44,8 @@ public:
    * @param _pRM Render Manager.
   **/
 	virtual void          PreRender(CRenderManager* _pRM);
+
+	virtual void          PostRender(CRenderManager* _pRM, bool _bCaptureNoPostFX = true);
   /**
    * Mètode de render.
    * Aquest mètode s'executa a cada iteració. Es realitzen els següents passos:

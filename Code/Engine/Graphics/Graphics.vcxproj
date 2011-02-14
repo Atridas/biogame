@@ -105,6 +105,7 @@
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="FPSCamera.cpp" />
     <ClCompile Include="Frustum.cpp" />
+    <ClCompile Include="HDRPipeline.cpp" />
     <ClCompile Include="InstanceMesh.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="LightManager.cpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="include\FontManager.h" />
     <ClInclude Include="include\FPSCamera.h" />
     <ClInclude Include="include\Frustum.h" />
+    <ClInclude Include="include\HDRPipeline.h" />
     <ClInclude Include="include\IndexedVertexs.h" />
     <ClInclude Include="include\InstanceMesh.h" />
     <ClInclude Include="include\Light.h" />

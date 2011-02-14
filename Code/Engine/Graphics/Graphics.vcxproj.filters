@@ -124,6 +124,9 @@
     <Filter Include="SceneEffects\DrawQuadToTextureSceneEffect">
       <UniqueIdentifier>{c1bd35f1-7aaa-4fd9-841b-8ef82e9536db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SceneEffects\HDR Pipeline">
+      <UniqueIdentifier>{9fed3f9b-f795-408e-a3a8-28924e5f726e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -230,6 +233,9 @@
     </ClCompile>
     <ClCompile Include="DrawQuadToTextureSceneEffect.cpp">
       <Filter>SceneEffects\DrawQuadToTextureSceneEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="HDRPipeline.cpp">
+      <Filter>SceneEffects\HDR Pipeline</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -340,6 +346,9 @@
     </ClInclude>
     <ClInclude Include="include\DrawQuadToTextureSceneEffect.h">
       <Filter>SceneEffects\DrawQuadToTextureSceneEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HDRPipeline.h">
+      <Filter>SceneEffects\HDR Pipeline</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

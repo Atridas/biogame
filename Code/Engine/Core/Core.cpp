@@ -37,11 +37,11 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pInputManager->Init(hWnd,Vect2i(_InitParams.RenderManagerParams.v2iResolution.x,_InitParams.RenderManagerParams.v2iResolution.y),_InitParams.InputManagerParams.bExclusiveMouse);
   m_pActionToInput->Init(m_pInputManager,_InitParams.ActionToInputParams.pcFile);
 
-  m_pRenderableObjectsManager->Load(_InitParams.RenderableObjectsManager.vXMLFiles);
-  m_pLightManager->Load(_InitParams.LightsManager.szFile);
-  m_pSceneEffectManager->Load(_InitParams.SceneEffect.szFile);
+  m_pRenderableObjectsManager->Load(_InitParams.RenderableObjectsManagerParams.vXMLFiles);
+  m_pLightManager->Load(_InitParams.LightsManagerParams.szFile);
+  m_pSceneEffectManager->Load(_InitParams.SceneEffectParams.szFile);
   m_pScriptManager->Initialize();
-  m_pScriptManager->Load(_InitParams.ScriptManager.szFile);
+  m_pScriptManager->Load(_InitParams.ScriptManagerParams.szFile);
 
   SetOk(true);
 

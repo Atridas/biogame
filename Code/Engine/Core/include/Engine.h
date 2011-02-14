@@ -11,6 +11,7 @@ class CProcess;
 class CCore;
 class CRenderManager;
 class CTimer;
+class CHDRPipeline;
 struct SInitParams;
 //--------------------------
 
@@ -31,7 +32,7 @@ public:
   /**
     * Constructor per defecte.
   **/
-	                          CEngine(void):m_pProcess(0),m_pCore(0)                      {};
+	                          CEngine(void):m_pProcess(0),m_pCore(0),m_pHDR(0)            {};
   /**
    * Destructor.
    * S'encarrega d'alliberar recursos abans de destruir-se.
@@ -59,18 +60,13 @@ public:
   **/
   void				              Render				      ();
 	/**
-   * Mètode de render del procés actiu.
-   * Aquest mètode cridarà al render del procés actiu i s'encarregarà de cridar el seu DebugInformation.
-  **/
-  void				              RenderScene		      ();
-	/**
    * Mètode de sel·lecció de procés.
    * Aquest mètode determinarà el procés que s'ha d'executar en aquell moment.
    * @param _pProcess Procés a executar.
   **/
   void				              SetProcess		      (CProcess* _pProcess);
 
-private:
+protected:
 
   /**
    * Mètode d'alliberament de recursos.
@@ -78,7 +74,10 @@ private:
   **/
   void                      Release              ();
 
-
+private:
+  
+  void                      RenderHDR            (CRenderManager* _pRM, CProcess* _pProcess);
+  void                      RenderNoHDR          (CRenderManager* _pRM, CProcess* _pProcess);
 
 	/**
    * Procés en execució.
@@ -93,6 +92,8 @@ private:
    * Timer.
   **/
   CTimer*							      m_pTimer;
+
+  CHDRPipeline*             m_pHDR;
 	/**
    * TODO vector de processos.
   **/
