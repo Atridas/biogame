@@ -164,6 +164,16 @@ void CTestProcess::RenderINFO(CRenderManager* _pRM)
   Vect2i pos(40, 40);
 
   _pRM->DrawQuad2D(pos, 100, 100, UPPER_LEFT, colGREEN);
+
+  pos.x += 100;
+
+  CTexture* l_pTexture = _pRM->GetTextureManager()->GetResource("Data/Textures/gohan.png");
+  if(l_pTexture)
+  {
+    assert(l_pTexture->IsOk());
+    l_pTexture->Activate(0);
+    _pRM->DrawTexturedQuad2D(pos, 100, 100, UPPER_LEFT);
+  }
 }
 
 bool CTestProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
