@@ -701,20 +701,47 @@ void CRenderManager::DrawQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, 
   //  [1]------[3]
 
   unsigned short _usIndices[6]={0,2,1,1,2,3};
-  SDIFFUSEVERTEX l_Vtx[4] =
+  SDIFFUSESCREENVERTEX l_Vtx[4] =
   {
-     { (float)l_vFinalPos.x,      (float)l_vFinalPos.y,       0, l_Color} //(x,y) sup_esq.
-    ,{ (float)l_vFinalPos.x,      (float)l_vFinalPos.y+_uiH,  0, l_Color} //(x,y) inf_esq.
-    ,{ (float)l_vFinalPos.x+_uiW, (float)l_vFinalPos.y,       0, l_Color} //(x,y) sup_dr.
-    ,{ (float)l_vFinalPos.x+_uiW, (float)l_vFinalPos.y+_uiH,  0, l_Color} //(x,y) inf_dr.
+     { (float)l_vFinalPos.x,      (float)l_vFinalPos.y,       0, 1, l_Color} //(x,y) sup_esq.
+    ,{ (float)l_vFinalPos.x,      (float)l_vFinalPos.y+_uiH,  0, 1, l_Color} //(x,y) inf_esq.
+    ,{ (float)l_vFinalPos.x+_uiW, (float)l_vFinalPos.y,       0, 1, l_Color} //(x,y) sup_dr.
+    ,{ (float)l_vFinalPos.x+_uiW, (float)l_vFinalPos.y+_uiH,  0, 1, l_Color} //(x,y) inf_dr.
   };
 
-  m_pD3DDevice->SetFVF( SDIFFUSEVERTEX::GetFVF() );
+  m_pD3DDevice->SetFVF( SDIFFUSESCREENVERTEX::GetFVF() );
   m_pD3DDevice->SetTexture(0, NULL);
-  m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST,0, 4, 2, _usIndices, D3DFMT_INDEX16, l_Vtx, sizeof( SDIFFUSEVERTEX ) );
+  m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST,0, 4, 2, _usIndices, D3DFMT_INDEX16, l_Vtx, sizeof( SDIFFUSESCREENVERTEX ) );
 }
 
-void CRenderManager::DrawTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, CColor _Color)
+void CRenderManager::DrawTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment)
+{
+  Vect2i l_vFinalPos = _vPos;
+  CalculateAlignment(_uiW, _uiH, _Alignment, l_vFinalPos);
+
+  // finalPos = [0]
+  //
+  //  [0]------[2]
+  //   |        |
+  //   |        |
+  //   |        |
+  //  [1]------[3]
+
+  unsigned short _usIndices[6]={0,2,1,1,2,3};
+  STEXTUREDSCREENVERTEX l_Vtx[4] =
+  {
+     { (float)l_vFinalPos.x      -0.5f, (float)l_vFinalPos.y      -0.5f,  0, 1, 0.0f, 0.0f } //(x,y) sup_esq.
+    ,{ (float)l_vFinalPos.x      -0.5f, (float)l_vFinalPos.y+_uiH -0.5f,  0, 1, 0.0f, 1.0f } //(x,y) inf_esq.
+    ,{ (float)l_vFinalPos.x+_uiW -0.5f, (float)l_vFinalPos.y      -0.5f,  0, 1, 1.0f, 0.0f } //(x,y) sup_dr.
+    ,{ (float)l_vFinalPos.x+_uiW -0.5f, (float)l_vFinalPos.y+_uiH -0.5f,  0, 1, 1.0f, 1.0f } //(x,y) inf_dr.
+  };
+
+  m_pD3DDevice->SetFVF( STEXTUREDSCREENVERTEX::GetFVF() );
+  //_Texture->Activate(0);
+  m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST,0, 4, 2, _usIndices, D3DFMT_INDEX16, l_Vtx, sizeof( STEXTUREDSCREENVERTEX ) );
+}
+
+void CRenderManager::DrawColoredTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, CColor _Color)
 {
   DWORD l_Color = _Color.GetUint32Argb(); //si no va, usar: D3DCOLOR_COLORVALUE(_Color.GetRed(), _Color.GetGreen(), _Color.GetBlue(), _Color.GetAlpha())
   Vect2i l_vFinalPos = _vPos;
@@ -742,17 +769,4 @@ void CRenderManager::DrawTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint3
   m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST,0, 4, 2, _usIndices, D3DFMT_INDEX16, l_Vtx, sizeof( SDIFFUSETEXTUREDSCREENVERTEX ) );
 }
 
-void CRenderManager::DrawColoredQuad2DTextured(RECT _Rect, CColor _Color)
-{
-  DWORD l_Color   = _Color.GetUint32Argb();
 
-  SDIFFUSETEXTUREDSCREENVERTEX quad[4] =
-  {
-    {(float)_Rect.bottom,  (float)_Rect.left,   0, 1, l_Color, 0, 0},
-    {(float)_Rect.top,     (float)_Rect.left,   0, 1, l_Color, 1, 0},
-    {(float)_Rect.bottom,  (float)_Rect.right,  0, 1, l_Color, 0, 1},
-    {(float)_Rect.top,     (float)_Rect.right,  0, 1, l_Color, 1, 1}
-  };
-
-  m_pD3DDevice->DrawPrimitiveUP( D3DPT_TRIANGLESTRIP, 2, quad, sizeof(SDIFFUSETEXTUREDSCREENVERTEX));
-}

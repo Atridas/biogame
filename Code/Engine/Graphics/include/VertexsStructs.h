@@ -14,6 +14,7 @@
 class CTexture;
 // ------------------------------------------------------------
 
+#define VERTEX_TYPE_SCREENGEO 0x0400
 #define VERTEX_TYPE_GEOMETRY  0x0001
 #define VERTEX_TYPE_NORMAL    0x0002
 #define VERTEX_TYPE_TANGENT   0x0004
@@ -71,6 +72,50 @@ struct SDIFFUSEVERTEX
 	static unsigned int GetFVF();
 
   static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+
+  static bool ActivateTextures(const vector<CTexture*>& _TextureArray);
+
+  static void ReleaseVertexDeclaration()
+  {
+    CHECKED_RELEASE(s_VertexDeclaration);
+  }
+
+private:
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+};
+
+struct SDIFFUSESCREENVERTEX
+{
+  float    x, y, z, w;
+  uint32   color;
+
+  static unsigned short GetVertexType();
+
+  static unsigned int GetFVF();
+
+  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+
+  static bool ActivateTextures(const vector<CTexture*>& _TextureArray);
+
+  static void ReleaseVertexDeclaration()
+  {
+    CHECKED_RELEASE(s_VertexDeclaration);
+  }
+
+private:
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+};
+
+struct STEXTUREDSCREENVERTEX
+{
+  float    x, y, z, w;
+  float    tu, tv;
+
+  static unsigned short GetVertexType();
+
+  static unsigned int GetFVF();
+
+  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
 
   static bool ActivateTextures(const vector<CTexture*>& _TextureArray);
 
