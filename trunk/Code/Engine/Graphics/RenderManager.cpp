@@ -370,6 +370,24 @@ void CRenderManager::SetTransform(Mat44f& m)
   m_pEffectManager->SetWorldMatrix(m);
 }
 
+void CRenderManager::EnableAlphaBlend ()
+{
+  m_pD3DDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
+  // render el quad de difuminacion....
+
+  m_pD3DDevice->SetRenderState ( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA  );
+  m_pD3DDevice->SetRenderState ( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
+  //// render el quad de difuminacion....
+  m_pD3DDevice->SetTextureStageState( 0, D3DTSS_ALPHAOP, D3DTOP_MODULATE );
+  m_pD3DDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG1, D3DTA_TEXTURE );
+  m_pD3DDevice->SetTextureStageState( 0, D3DTSS_ALPHAARG2, D3DTA_DIFFUSE );
+}
+
+void CRenderManager::DisableAlphaBlend ()
+{
+  m_pD3DDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE );    
+}
+
 void CRenderManager::CalculateAlignment (uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, Vect2i& _vfinalPos)
 {
   assert(IsOk());

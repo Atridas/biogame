@@ -35,6 +35,9 @@ public:
 
   void                  BeginRendering    ();
   void                  EndRendering      ();
+  void                  EnableAlphaBlend  ();
+  void                  DisableAlphaBlend ();
+
 
   //----Matrix Functions-----------------------------------------------
   void                  Setup2DCamera     ();
