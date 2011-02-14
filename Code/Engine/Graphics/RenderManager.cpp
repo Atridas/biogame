@@ -830,3 +830,27 @@ void CRenderManager::GetRay (const Vect2i& mousePos, Vect3f& posRay, Vect3f& dir
   dirRay.y = ray_dir.y;
   dirRay.z = ray_dir.z;
 }
+
+void CRenderManager::DrawRectangle2D (const Vect2i& pos, uint32 w, uint32 h, CColor& backGroundColor, uint32 edge_w, uint32 edge_h, CColor& edgeColor )
+{
+    //Draw background quad2D:
+    DrawQuad2D(pos, w, h, UPPER_LEFT, backGroundColor);
+   	 
+    //Draw the four edges:
+
+    //2 Horizontal:
+    Vect2i pos_aux = pos;
+    pos_aux.y -= edge_h;
+    DrawQuad2D(pos_aux, w, edge_h, UPPER_LEFT, edgeColor);
+    pos_aux = pos;
+    pos_aux.y += h;
+    DrawQuad2D(pos_aux, w, edge_h, UPPER_LEFT, edgeColor);
+    
+    //2 Vertical:
+    pos_aux = pos;
+    pos_aux.x -= edge_w;
+    pos_aux.y -= edge_h;
+    DrawQuad2D(pos_aux, edge_w, h + (2*edge_w), UPPER_LEFT, edgeColor);
+    pos_aux.x = pos.x + w;
+    DrawQuad2D(pos_aux, edge_w, h + (2*edge_w), UPPER_LEFT, edgeColor);    
+}
