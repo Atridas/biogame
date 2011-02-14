@@ -10,28 +10,6 @@
 #include "VertexsStructs.h"
 #include "Texture.h"
 
-#define D3DFVF_CUSTOMVERTEX (D3DFVF_XYZ|D3DFVF_DIFFUSE)
-#define D3DFVF_CUSTOMVERTEX2 (D3DFVF_XYZ|D3DFVF_TEX1)
-struct CUSTOMVERTEX
-{
-	float x, y, z;
-	DWORD color;
-	static unsigned int getFlags()
-	{
-		return D3DFVF_CUSTOMVERTEX;
-	}
-};
-
-struct CUSTOMVERTEX2
-{
-	D3DXVECTOR3 pos;
-	DWORD color;
-	static unsigned int getFlags()
-	{
-		return D3DFVF_CUSTOMVERTEX;
-	}
-};
-
 
 bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
 {
@@ -189,6 +167,7 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
 
 void CRenderManager::GetWindowRect( HWND hwnd )
 {
+  assert(IsOk());
 	RECT rec_window;
 	GetClientRect(	hwnd, &rec_window);
 	m_uWidth	= rec_window.right - rec_window.left;
@@ -198,6 +177,7 @@ void CRenderManager::GetWindowRect( HWND hwnd )
 
 void CRenderManager::Release(void)
 {
+  assert(IsOk());
   LOGGER->AddNewLog(ELL_INFORMATION, "RenderManager::Release",m_uWidth,m_uHeight);
 
   STEXTUREDVERTEX::ReleaseVertexDeclaration();
@@ -223,6 +203,7 @@ void CRenderManager::Release(void)
 // RENDERING STUFF:
 void CRenderManager::BeginRendering ()
 {
+  assert(IsOk());
 
 #ifdef _DEBUG // Clear the backbuffer to magenta color in a Debug mode
 	uint32 red		= (uint32) (1.f * 255);
@@ -260,6 +241,7 @@ void CRenderManager::BeginRendering ()
 
 void CRenderManager::EndRendering    ()
 {
+  assert(IsOk());
 	m_pD3DDevice->EndScene();
 	// Present the backbuffer contents to the display
 	m_pD3DDevice->Present( NULL, NULL, NULL, NULL );
@@ -267,6 +249,7 @@ void CRenderManager::EndRendering    ()
 
 void CRenderManager::SetupMatrices(CCamera* _pCamera, bool _bOrtho)
 {
+  assert(IsOk());
 	D3DXMATRIX m_matView;
 	D3DXMATRIX m_matProject;
   Vect3f eye;
@@ -336,6 +319,7 @@ void CRenderManager::SetupMatrices(CCamera* _pCamera, bool _bOrtho)
 
 void CRenderManager::Setup2DCamera()
 {
+  assert(IsOk());
 	D3DXMATRIX m_matView;
 	D3DXMATRIX m_matProject;
   Vect3f eye;
@@ -368,6 +352,7 @@ void CRenderManager::Setup2DCamera()
 
 void CRenderManager::SetTransform(D3DXMATRIX& matrix)
 {
+  assert(IsOk());
   assert(!"Method not supported setworldmatrix needs mat44f no d3dxmatrix");
     m_pD3DDevice->SetTransform(D3DTS_WORLD, &matrix);
 
@@ -376,16 +361,18 @@ void CRenderManager::SetTransform(D3DXMATRIX& matrix)
 
 void CRenderManager::SetTransform(Mat44f& m)
 {
-    D3DXMATRIX matrix(m.m00, m.m10, m.m20, m.m30, m.m01, m.m11, m.m21, m.m31,
-                    m.m02, m.m12, m.m22, m.m32, m.m03, m.m13, m.m23, m.m33);
+  assert(IsOk());
+  D3DXMATRIX matrix(m.m00, m.m10, m.m20, m.m30, m.m01, m.m11, m.m21, m.m31,
+                  m.m02, m.m12, m.m22, m.m32, m.m03, m.m13, m.m23, m.m33);
 
-    m_pD3DDevice->SetTransform(D3DTS_WORLD, &matrix);
+  m_pD3DDevice->SetTransform(D3DTS_WORLD, &matrix);
     
-    m_pEffectManager->SetWorldMatrix(m);
+  m_pEffectManager->SetWorldMatrix(m);
 }
 
 void CRenderManager::CalculateAlignment (uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, Vect2i& _vfinalPos)
 {
+  assert(IsOk());
   switch (_Alignment)
   {
     case CENTER:
@@ -427,26 +414,28 @@ void CRenderManager::CalculateAlignment (uint32 _uiW, uint32 _uiH, eTypeAlignmen
 
 void CRenderManager::DrawLine ( const Vect3f &_PosA, const Vect3f &_PosB, const CColor& _Color)
 {
+  assert(IsOk());
 	DWORD l_color_aux = _Color.GetUint32Argb();
 
-	CUSTOMVERTEX v[2] =
+	SDIFFUSEVERTEX v[2] =
 	{
 		{_PosA.x, _PosA.y, _PosA.z, l_color_aux},
 		{_PosB.x, _PosB.y, _PosB.z, l_color_aux},
 	};
 
 	m_pD3DDevice->SetTexture(0,NULL);
-	m_pD3DDevice->SetFVF(CUSTOMVERTEX::getFlags());
-	m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST,1, v,sizeof(CUSTOMVERTEX));
+	m_pD3DDevice->SetFVF(SDIFFUSEVERTEX::GetFVF());
+	m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST,1, v,sizeof(SDIFFUSEVERTEX));
 }
 
 void CRenderManager::DrawAxis ()
 {
+  assert(IsOk());
 	DWORD color_red   = colRED.GetUint32Argb();
 	DWORD color_green = colGREEN.GetUint32Argb();
 	DWORD color_blue  = colBLUE.GetUint32Argb();
 
-	CUSTOMVERTEX v[6] =
+	SDIFFUSEVERTEX v[6] =
 	{
 		{0.f,0.f,0.f, color_red},
 		{1.f,0.f,0.f, color_red},
@@ -459,21 +448,23 @@ void CRenderManager::DrawAxis ()
 	};
 
 	m_pD3DDevice->SetTexture(0,NULL);
-	m_pD3DDevice->SetFVF(CUSTOMVERTEX::getFlags());
-	m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST,3, v,sizeof(CUSTOMVERTEX));
+	m_pD3DDevice->SetFVF(SDIFFUSEVERTEX::GetFVF());
+	m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST,3, v,sizeof(SDIFFUSEVERTEX));
 }
 
 void CRenderManager::DrawCube(float _fSize, const CColor& _Color)
 {
+  assert(IsOk());
   DrawCube(Vect3f(0.0f,0.0f,0.0f),_fSize,_Color);
 }
 
 void CRenderManager::DrawCube(const Vect3f &_Pos, float _fSize, const CColor& _Color)
 {
+  assert(IsOk());
   float l_fC = _fSize/2.f;
   DWORD l_Color   = _Color.GetUint32Argb();
 
-  CUSTOMVERTEX v[24] =
+  SDIFFUSEVERTEX v[24] =
 	{
 		{_Pos.x - l_fC,_Pos.y - l_fC,_Pos.z - l_fC, l_Color},
 		{_Pos.x + l_fC,_Pos.y - l_fC,_Pos.z - l_fC, l_Color},
@@ -519,12 +510,13 @@ void CRenderManager::DrawCube(const Vect3f &_Pos, float _fSize, const CColor& _C
 	};
   
 	m_pD3DDevice->SetTexture(0,NULL);
-	m_pD3DDevice->SetFVF(CUSTOMVERTEX::getFlags());
-	m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST,12, v,sizeof(CUSTOMVERTEX));
+	m_pD3DDevice->SetFVF(SDIFFUSEVERTEX::GetFVF());
+	m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST,12, v,sizeof(SDIFFUSEVERTEX));
 }
 
 void CRenderManager::DrawCamera(CCamera* camera)
 {
+  assert(IsOk());
 
 	D3DXMATRIX matrix;
 	D3DXMATRIX translation;
@@ -558,7 +550,7 @@ void CRenderManager::DrawCamera(CCamera* camera)
 	// Cambiar el sistema de coordenadas
 	m_pD3DDevice->SetTransform( D3DTS_WORLD, &matrix );
 	
-	CUSTOMVERTEX2 pts[9];
+	SDIFFUSEVERTEX pts[9];
 
 	float fov = camera->GetFov();
 	float aspect = camera->GetAspectRatio();
@@ -574,40 +566,56 @@ void CRenderManager::DrawCamera(CCamera* camera)
 	float h_far = d * tan ( fov * 0.5f );
 	float k_far = h_far * aspect;
 
-	pts[ 0 ].pos = D3DXVECTOR3( 0, 0,0 );
+	pts[ 0 ].x = pts[ 0 ].y = pts[ 0 ].z = 0;
 	pts[ 0 ].color = 0xffffffff;
-
-	pts[ 1 ].pos = D3DXVECTOR3( d, h_far, k_far );
+  
+	pts[ 1 ].x = d;
+	pts[ 1 ].y = h_far;
+	pts[ 1 ].z = k_far;
 	pts[ 1 ].color = 0xffffffff;
-	pts[ 2 ].pos = D3DXVECTOR3( d, h_far, -k_far );
+	pts[ 2 ].x = d;
+	pts[ 2 ].y = h_far;
+	pts[ 2 ].z = -k_far;
 	pts[ 2 ].color = 0xffffffff;
-	pts[ 3 ].pos = D3DXVECTOR3( d,-h_far, -k_far );
+	pts[ 3 ].x = d;
+	pts[ 3 ].y = -h_far;
+	pts[ 3 ].z = -k_far;
 	pts[ 3 ].color = 0xffffffff;
-	pts[ 4 ].pos = D3DXVECTOR3( d, -h_far, k_far );
+	pts[ 4 ].x = d;
+	pts[ 4 ].y = -h_far;
+	pts[ 4 ].z =  k_far;
 	pts[ 4 ].color = 0xffffffff;
 
-	pts[ 5 ].pos = D3DXVECTOR3( zNear, h_near, k_near );
+	pts[ 5 ].x = zNear;
+	pts[ 5 ].y = h_near;
+	pts[ 5 ].z = k_near;
 	pts[ 5 ].color = 0xffffffff;
-	pts[ 6 ].pos = D3DXVECTOR3( zNear, h_near, -k_near );
+	pts[ 6 ].x = zNear;
+	pts[ 6 ].y = h_near;
+	pts[ 6 ].z = -k_near;
 	pts[ 6 ].color = 0xffffffff;
-	pts[ 7 ].pos = D3DXVECTOR3( zNear,-h_near, -k_near );
+	pts[ 7 ].x = zNear;
+	pts[ 7 ].y = -h_near;
+	pts[ 7 ].z = -k_near;
 	pts[ 7 ].color = 0xffffffff;
-	pts[ 8 ].pos = D3DXVECTOR3( zNear, -h_near, k_near );
+	pts[ 8 ].x = zNear;
+	pts[ 8 ].y = -h_near;
+	pts[ 8 ].z = k_near;
 	pts[ 8 ].color = 0xffffffff;
 
 	// Decimos el tipo de vertice que vamos a proporcionar...
-	m_pD3DDevice->SetFVF( CUSTOMVERTEX2::getFlags() );
+	m_pD3DDevice->SetFVF( SDIFFUSEVERTEX::GetFVF() );
 
 	// Desactivar la textura
 	m_pD3DDevice->SetTexture (0, NULL);
 
-	m_pD3DDevice->DrawPrimitiveUP( D3DPT_POINTLIST, 9, pts, sizeof( CUSTOMVERTEX2 ) );
+	m_pD3DDevice->DrawPrimitiveUP( D3DPT_POINTLIST, 9, pts, sizeof( SDIFFUSEVERTEX ) );
 	static short int indexes[] =  {
 		0,1, 0,2, 0,3, 0,4,
 		1,2, 2,3, 3,4, 4,1,
 		5,6, 6,7, 7,8, 8,5
 	};
-	m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_LINELIST, 0, 9, 12, indexes, D3DFMT_INDEX16, pts, sizeof( CUSTOMVERTEX2 ) );
+	m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_LINELIST, 0, 9, 12, indexes, D3DFMT_INDEX16, pts, sizeof( SDIFFUSEVERTEX ) );
 
 	D3DXMatrixTranslation( &matrix, 0, 0, 0 );
 	m_pD3DDevice->SetTransform( D3DTS_WORLD, &matrix );
@@ -619,7 +627,7 @@ void CRenderManager::DrawCamera(CCamera* camera)
 	matrix = translation2 * rotation2 * rotation * translation;
 	m_pD3DDevice->SetTransform( D3DTS_WORLD, &matrix );
 
-	CUSTOMVERTEX v[6] =
+	SDIFFUSEVERTEX v[6] =
 	{
 		//EJE X
 		{0, 0, 0, 0xffff0000},
@@ -633,8 +641,8 @@ void CRenderManager::DrawCamera(CCamera* camera)
 	};
 
 	m_pD3DDevice->SetTexture(0,NULL);
-	m_pD3DDevice->SetFVF(CUSTOMVERTEX::getFlags());
-	m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST, 3, v,sizeof(CUSTOMVERTEX));
+	m_pD3DDevice->SetFVF(SDIFFUSEVERTEX::GetFVF());
+	m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST, 3, v,sizeof(SDIFFUSEVERTEX));
 
 	DrawCube(0.5f,colWHITE);
 
@@ -644,6 +652,7 @@ void CRenderManager::DrawCamera(CCamera* camera)
 
 void CRenderManager::DrawGrid(float Size, CColor Color, int GridX, int32 GridZ )
 {
+  assert(IsOk());
 	D3DXMATRIX matrix;
 	D3DXMatrixIdentity(&matrix);
 	m_pD3DDevice->SetTransform(D3DTS_WORLD, &matrix);		
@@ -688,6 +697,7 @@ void CRenderManager::DrawGrid(float Size, CColor Color, int GridX, int32 GridZ )
 }
 void CRenderManager::DrawQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, CColor _Color)
 {
+  assert(IsOk());
   DWORD l_Color = _Color.GetUint32Argb(); //si no va, usar: D3DCOLOR_COLORVALUE(_Color.GetRed(), _Color.GetGreen(), _Color.GetBlue(), _Color.GetAlpha())
   Vect2i l_vFinalPos = _vPos;
   CalculateAlignment(_uiW, _uiH, _Alignment, l_vFinalPos);
@@ -714,8 +724,9 @@ void CRenderManager::DrawQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, 
   m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST,0, 4, 2, _usIndices, D3DFMT_INDEX16, l_Vtx, sizeof( SDIFFUSESCREENVERTEX ) );
 }
 
-void CRenderManager::DrawTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment)
+void CRenderManager::DrawTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, CTexture* _pTexture)
 {
+  assert(IsOk());
   Vect2i l_vFinalPos = _vPos;
   CalculateAlignment(_uiW, _uiH, _Alignment, l_vFinalPos);
 
@@ -737,12 +748,14 @@ void CRenderManager::DrawTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint3
   };
 
   m_pD3DDevice->SetFVF( STEXTUREDSCREENVERTEX::GetFVF() );
-  //_Texture->Activate(0);
+  if(_pTexture)
+    _pTexture->Activate(0);
   m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST,0, 4, 2, _usIndices, D3DFMT_INDEX16, l_Vtx, sizeof( STEXTUREDSCREENVERTEX ) );
 }
 
-void CRenderManager::DrawColoredTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, CColor _Color)
+void CRenderManager::DrawColoredTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, CColor _Color, CTexture* _pTexture)
 {
+  assert(IsOk());
   DWORD l_Color = _Color.GetUint32Argb(); //si no va, usar: D3DCOLOR_COLORVALUE(_Color.GetRed(), _Color.GetGreen(), _Color.GetBlue(), _Color.GetAlpha())
   Vect2i l_vFinalPos = _vPos;
   CalculateAlignment(_uiW, _uiH, _Alignment, l_vFinalPos);
@@ -765,8 +778,37 @@ void CRenderManager::DrawColoredTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW
   };
 
   m_pD3DDevice->SetFVF( SDIFFUSETEXTUREDSCREENVERTEX::GetFVF() );
-  //_Texture->Activate(0);
+  if(_pTexture)
+    _pTexture->Activate(0);
   m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST,0, 4, 2, _usIndices, D3DFMT_INDEX16, l_Vtx, sizeof( SDIFFUSETEXTUREDSCREENVERTEX ) );
 }
 
+void CRenderManager::GetRay (const Vect2i& mousePos, Vect3f& posRay, Vect3f& dirRay)
+{
+  assert(IsOk());
+  D3DXMATRIX projectionMatrix, viewMatrix, worldViewInverse, worldMatrix;
 
+  m_pD3DDevice->GetTransform(D3DTS_PROJECTION, &projectionMatrix);
+  m_pD3DDevice->GetTransform(D3DTS_VIEW, &viewMatrix);
+  m_pD3DDevice->GetTransform(D3DTS_WORLD, &worldMatrix);
+
+  float angle_x = (((2.0f * mousePos.x) / m_uWidth) - 1.0f) / projectionMatrix(0,0);
+  float angle_y = (((-2.0f * mousePos.y) / m_uHeight) + 1.0f) / projectionMatrix(1,1);
+
+  D3DXVECTOR3 ray_org = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
+  D3DXVECTOR3 ray_dir = D3DXVECTOR3(angle_x, angle_y, 1.0f);
+
+  D3DXMATRIX m = worldMatrix * viewMatrix;
+  D3DXMatrixInverse(&worldViewInverse, 0, &m);
+  D3DXVec3TransformCoord(&ray_org, &ray_org, &worldViewInverse);
+  D3DXVec3TransformNormal(&ray_dir, &ray_dir, &worldViewInverse);
+  D3DXVec3Normalize(&ray_dir, &ray_dir);
+
+  posRay.x = ray_org.x;
+  posRay.y = ray_org.y;
+  posRay.z = ray_org.z;
+
+  dirRay.x = ray_dir.x;
+  dirRay.y = ray_dir.y;
+  dirRay.z = ray_dir.z;
+}

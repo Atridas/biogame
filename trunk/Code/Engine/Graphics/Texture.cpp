@@ -75,6 +75,7 @@ bool CTexture::Reload()
 
 void CTexture::Activate(size_t _StageId)
 {
+  assert(IsOk());
   LPDIRECT3DDEVICE9 l_pDevice = RENDER_MANAGER->GetDevice();
 
   HRESULT l_Result = l_pDevice->SetTexture(_StageId,m_pTexture);
@@ -179,12 +180,13 @@ bool CTexture::Create(const string& _szName,
 
 void CTexture::Deactivate(size_t Stage)
 {
+  assert(IsOk());
   RENDER_MANAGER->GetDevice()->SetTexture((DWORD)Stage,NULL);
 }
 
 bool CTexture::SetAsRenderTarget()
 {
-  //TODO: Falten mil variables membre
+  assert(IsOk());
   
   LPDIRECT3DDEVICE9 l_pDevice=RENDER_MANAGER->GetDevice();
 
@@ -207,6 +209,7 @@ bool CTexture::SetAsRenderTarget()
 
 void CTexture::UnsetAsRenderTarget()
 {
+  assert(IsOk());
   LPDIRECT3DDEVICE9 l_pDevice = RENDER_MANAGER->GetDevice();
   l_pDevice->SetDepthStencilSurface(m_pOldDepthStencilRenderTarget);
   CHECKED_RELEASE(m_pOldDepthStencilRenderTarget);
