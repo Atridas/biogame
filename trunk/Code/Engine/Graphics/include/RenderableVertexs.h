@@ -59,8 +59,6 @@ public:
   **/
   virtual bool Render(CRenderManager *_pRM, CEffectTechnique *_pEffectTechnique) const         = 0;
 
-  virtual bool ActivateTextures(const vector<CTexture*>& _TextureArray) const = 0;
-
   /**
    * Getter del nombre de triangles.
    * @return El nombre de triangles.

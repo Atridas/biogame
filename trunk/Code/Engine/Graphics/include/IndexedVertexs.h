@@ -73,8 +73,7 @@ public:
                                                                                  int _iStartIndex,
                                                                                  int _iNumFaces) const;
 
-  virtual bool ActivateTextures(const vector<CTexture*>& _TextureArray) const { return T::ActivateTextures(_TextureArray); };
-
+  
   /**
    * Getter del tipus de vèrtex.
    * @return El tipus del vèrtex segons la nostra codificació.
