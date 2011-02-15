@@ -59,8 +59,12 @@ bool CTestProcess::Init()
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
 
   CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
-  l_Spot->SetDirection(m_pObjectBot->GetPosition());
 
+  if(l_Spot)
+  {
+    l_Spot->SetDirection(m_pObjectBot->GetPosition());
+    l_Spot->SetActive(true);
+  }
   m_bRenderLights = true;
 
   D3DXCreateSprite(RENDER_MANAGER->GetDevice(), &g_pD3DXSprite);

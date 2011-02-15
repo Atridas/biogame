@@ -12,6 +12,7 @@
     <effect name="Blur" file="Data/Effects/Blur.fx"/>
     <effect name="ZBlur" file="Data/Effects/ZBlur.fx"/>
     <effect name="Down Samples" file="Data/Effects/Downsampling.fx"/>
+    <effect name="Gas" file="Data/Effects/Gas.fx"/>
     <!-- effect name=.../-->
     <!-- effect name=.../-->
   </effects>
@@ -81,6 +82,7 @@
 
     <!-- SCENE EFFECTS -->
     <technique name="RenderNoiseAndVignettingTechnique" effect="Noise And Vignetting" use_time="true"/>
+    <technique name="GasTechnique" effect="Gas" use_time="true"/>
     <!--<technique name="BloomTechnique" effect="Bloom"/> -->
     <technique name="HDRTechnique" effect="HDR"/>
     <technique name="PostProcessGlowTechnique"  effect="Glow"/>

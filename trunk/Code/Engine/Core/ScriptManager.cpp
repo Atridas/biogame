@@ -26,6 +26,8 @@ extern "C"
 #include "Utils/Object3D.h"
 #include "Utils/BaseControl.h"
 
+#include "Console.h"
+
 using namespace luabind;
 
 #define REGISTER_LUA_FUNCTION(LUA_STATE,FunctionName,AddrFunction) {luabind::module(LUA_STATE) [ luabind::def(FunctionName,AddrFunction) ];}
@@ -183,6 +185,11 @@ CCore* GetCore()
   return CORE;
 }
 
+void CloseConsole()
+{
+  CORE->GetConsole()->SetActive(false);
+}
+
 void CScriptManager::RegisterLUAFunctions()
 {
   lua_register(m_pLS,"_ALERT",Alert);
@@ -197,6 +204,8 @@ void CScriptManager::RegisterLUAFunctions()
     def("log", &LogTextLua)
     //core macro
     ,def("get_core", &GetCore)
+    //open/close console
+    ,def("exit", &CloseConsole)
   ];
 
   //Vect3f
@@ -236,7 +245,8 @@ void CScriptManager::RegisterLUAFunctions()
   //Core
   module(m_pLS) [
     class_<CCore>("Core")
-      .def("get_renderable_objects_manager", &CCore::GetRenderableObjectsManager)
+      .def("get_renderable_objects_manager",  &CCore::GetRenderableObjectsManager)
+      .def("get_console",                     &CCore::GetConsole)
   ];
 
   //CRenderableObjectsManager
@@ -263,6 +273,10 @@ void CScriptManager::RegisterLUAFunctions()
     class_<CRenderableAnimatedInstanceModel, bases<CRenderableObject>>("AnimatedInstance")
   ];
 
+  module(m_pLS) [
+    class_<CConsole>("Console")
+      .def("toggle", &CConsole::Toggle)
+  ];
     /*
     ,class_<CSingleton<CCore>>("CSingletonCore")
     ,class_<CCore, bases<CBaseControl,CSingleton<CCore>>>("CCore")
