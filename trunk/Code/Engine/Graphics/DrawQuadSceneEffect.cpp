@@ -23,7 +23,7 @@ bool CDrawQuadSceneEffect::Init(const CXMLTreeNode& _params)
 
   m_szTechnique = _params.GetPszISOProperty("technique","");
   
-  CEffectManager* l_pEffectManager = RENDER_MANAGER->GetEffectManager();
+  CEffectManager* l_pEffectManager = CORE->GetEffectManager();
   m_pTechnique    = l_pEffectManager->GetEffectTechnique(m_szTechnique);
 
   if(!m_pTechnique)

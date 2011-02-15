@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Config>
-  <RenderManager resolution="800 600" position="50 5" fullscreenMode="false">
-    <StaticMeshManager xml="Data/Levels/Level -2/XML/StaticMeshes.xml"/>
+  <RenderManager resolution="800 600" position="50 5" fullscreenMode="false"/>
+  
+  <StaticMeshManager>
+    <StaticMeshes xml="Data/Levels/Level -2/XML/StaticMeshes.xml"/>
     <!--
     <StaticMeshManager xml="Data/Levels/Proves/XML/StaticMeshes.xml"/>
     <StaticMeshManager xml="Data/Levels/Hangar/XML/StaticMeshes.xml"/>
     <StaticMeshManager xml="Data/Levels/Level -2/XML/StaticMeshes.xml"/>
     <StaticMeshManager xml="Data/XML/StaticMeshes.xml"/>
     -->
-    <AnimatedModelManager xml="Data/XML/AnimatedModels.xml"/>
-    <EffectManager xml="Data/XML/Effects.xml"/>
-  </RenderManager>
+  </StaticMeshManager>
+
+  <AnimatedModelManager>
+    <AnimatedModels xml="Data/XML/AnimatedModels.xml"/>
+  </AnimatedModelManager>
+    
+  <EffectManager xml="Data/XML/Effects.xml"/>
   <FontManager fontsXML="Data/XML/Fonts.xml"/>
   <Languages default="cat">
     <Language languageXML="Data/Language/spanish.xml"/>

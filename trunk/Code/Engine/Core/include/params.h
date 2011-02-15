@@ -24,11 +24,6 @@ struct SRenderManagerParams
 
   bool bFullscreen;
 
-  vector<string> vRenderableMeshes;
-  vector<string> vAnimatedModels;
-
-  string szEffectsXML;
-
   //Default params
   SRenderManagerParams():
     v2iResolution(800,600),
@@ -60,7 +55,7 @@ struct SFontManagerParams
 
   //Default Params
   SFontManagerParams():
-    pcFontsXML("Data/Fonts/Fonts.xml")
+    pcFontsXML("Data/XML/fonts.xml")
   {};
 };
 
@@ -150,6 +145,28 @@ struct SScriptManagerParams
   {};
 };
 
+struct SStaticMeshManagerParams
+{
+  vector<string> vRenderableMeshes;
+
+};
+
+struct SAnimatedModelManagerParams
+{
+  vector<string> vAnimatedModels;
+
+};
+
+struct SEffectManagerParams
+{
+  string szFile;
+
+  //Default Params
+  SEffectManagerParams():
+    szFile("Data/XML/Effects.xml")
+  {};
+};
+
 /**
  * Paràmetres d'inicialització del procés.
  * Estructura que conté els paràmetres de configuració que es poden trobar al config del procés.
@@ -170,6 +187,9 @@ struct SInitParams
 {
   SEngineParams                   EngineParams;
   SRenderManagerParams            RenderManagerParams;
+  SStaticMeshManagerParams        StaticMeshManagerParams;
+  SAnimatedModelManagerParams     AnimatedModelManagerParams;
+  SEffectManagerParams            EffectManagerParams;
   SFontManagerParams              FontManagerParams;
   SLanguageManagerParams          LanguageManagerParams;
   SInputManagerParams             InputManagerParams;

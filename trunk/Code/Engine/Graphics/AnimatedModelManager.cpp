@@ -47,14 +47,14 @@ bool CAnimatedModelManager::Load(const string &_szFileName)
 }
 
 
-bool CAnimatedModelManager::Load(const vector<string>& _XMLs)
+bool CAnimatedModelManager::Load(const SAnimatedModelManagerParams& _params)
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "CAnimatedModelManager::Load (Multi)");
 
   bool l_res = true;
   
-  vector<string>::const_iterator l_end = _XMLs.cend();
-  for(vector<string>::const_iterator l_it = _XMLs.cbegin(); l_it != l_end; ++l_it)
+  vector<string>::const_iterator l_end = _params.vAnimatedModels.cend();
+  for(vector<string>::const_iterator l_it = _params.vAnimatedModels.cbegin(); l_it != l_end; ++l_it)
   {
     if(!Load(*l_it))
     {

@@ -51,14 +51,14 @@ bool CStaticMeshManager::Load(const string &_szFileName, bool _bReload)
 }
 
 
-bool CStaticMeshManager::Load(const vector<string>& _XMLs)
+bool CStaticMeshManager::Load(const SStaticMeshManagerParams& _params)
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "CStaticMeshManager::Load (Multi)");
 
   bool l_res = true;
   
-  vector<string>::const_iterator l_end = _XMLs.cend();
-  for(vector<string>::const_iterator l_it = _XMLs.cbegin(); l_it != l_end; ++l_it)
+  vector<string>::const_iterator l_end = _params.vRenderableMeshes.cend();
+  for(vector<string>::const_iterator l_it = _params.vRenderableMeshes.cbegin(); l_it != l_end; ++l_it)
   {
     if(!Load(*l_it, false))
     {

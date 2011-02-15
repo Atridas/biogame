@@ -7,6 +7,10 @@
 // -- forward declarations --
 struct SInitParams;
 class CRenderManager;
+class CTextureManager;
+class CStaticMeshManager;
+class CAnimatedModelManager;
+class CEffectManager;
 class CLanguageManager;
 class CFontManager;
 class CXMLTreeNode;
@@ -38,7 +42,8 @@ public:
   **/
                       CCore               (void): m_pRenderManager(0),m_pLanguageManager(0),m_pFontManager(0),m_pInputManager(0),
                                                   m_pActionToInput(0),m_pRenderableObjectsManager(0),m_pLightManager(0),
-                                                  m_pSceneEffectManager(0), m_pTimer(0), m_pScriptManager(0), m_pLogRender(0), m_pConsole(0)
+                                                  m_pSceneEffectManager(0), m_pTimer(0), m_pScriptManager(0),m_pTextureManager(0),
+                                                  m_pStaticMeshManager(0),m_pAnimatedModelManager(0),m_pEffectManager(0)
                                                   {};
   /**
    * Destructor.
@@ -79,6 +84,14 @@ public:
   **/
   CRenderManager*     GetRenderManager      () const                        {return m_pRenderManager;};
   //void                SetRenderManager      (CRenderManager* _pRm)          {m_pRenderManager = _pRm;};
+
+  CTextureManager*        GetTextureManager       () const {return m_pTextureManager;};
+  
+  CStaticMeshManager*     GetStaticMeshManager    () const {return m_pStaticMeshManager;};
+  
+  CAnimatedModelManager*  GetAnimatedModelManager () const {return m_pAnimatedModelManager;};
+  
+  CEffectManager*         GetEffectManager        () const {return m_pEffectManager;};
 
   /**
    * Getter del LanguageManager.
@@ -139,6 +152,15 @@ private:
    * RenderManager.
   **/
   CRenderManager*             m_pRenderManager;
+
+  CTextureManager*        m_pTextureManager;
+
+  CStaticMeshManager*     m_pStaticMeshManager;
+
+  CAnimatedModelManager*  m_pAnimatedModelManager;
+
+  CEffectManager*         m_pEffectManager;
+
   /**
    * LanguageManager.
   **/
@@ -171,10 +193,5 @@ private:
   CLogRender*                 m_pLogRender;
 
   CConsole*				            m_pConsole;
-
-  /**
-   * AnimatedModelManager.
-  **/
-  //CAnimatedModelManager*  m_pAnimatedModelManager;
 };
 

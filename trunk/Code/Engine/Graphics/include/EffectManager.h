@@ -6,6 +6,7 @@
 #include "Effect.h"
 #include "EffectTechnique.h"
 #include "Utils/MapManager.h"
+#include "params.h"
 
 //forward declarations ----------------------------------------------
 
@@ -62,7 +63,7 @@ public:
   CEffect* GetEffect(const string& _szName) {return m_Effects.GetResource(_szName);};
   
   void ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _mProjectionMatrix, const Vect3f& _vCameraEye);
-  bool Load(const string& _szFileName);
+  bool Load(const SEffectManagerParams& _params);
   void Reload();
   
   

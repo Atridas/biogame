@@ -169,8 +169,8 @@ void CTestProcess::RenderINFO(CRenderManager* _pRM)
   Vect2i pos(40, 40);
 
   
-  CTexture* l_pTexture = _pRM->GetTextureManager()->GetResource("Data/Textures/gohan.png");
-  CTexture* l_pTexture2 = _pRM->GetTextureManager()->GetResource("Data/Textures/gohan.png");
+  CTexture* l_pTexture = CORE->GetTextureManager()->GetResource("Data/Textures/gohan.png");
+  CTexture* l_pTexture2 = CORE->GetTextureManager()->GetResource("Data/Textures/gohan.png");
  // _pRM->EnableAlphaBlend();
   if(l_pTexture)
   {

@@ -3,12 +3,9 @@
 #include "RenderManager.h"
 #include "Camera.h"
 #include "params.h"
-#include "TextureManager.h"
-#include "StaticMeshManager.h"
-#include "AnimatedModelManager.h"
-#include "EffectManager.h"
 #include "VertexsStructs.h"
 #include "Texture.h"
+#include "EffectManager.h"
 
 
 bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
@@ -112,37 +109,6 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
 		}
 	}
 
-  if(IsOk())
-  {
-    //altres sistemes
-    m_pTextureManager = new CTextureManager();
-
-    m_pStaticMeshManager = new CStaticMeshManager();
-    m_pAnimatedModelManager = new CAnimatedModelManager();
-
-    m_pEffectManager = new CEffectManager();
-
-     if(!m_pEffectManager->Load(_params.szEffectsXML))
-    {
-      LOGGER->AddNewLog(ELL_ERROR,"RenderManager:: Error al manager d'Effects.");
-      //TODO
-      //SetOk(false);
-    }
-
-    if(!m_pStaticMeshManager->Load(_params.vRenderableMeshes))
-    {
-      LOGGER->AddNewLog(ELL_ERROR,"RenderManager:: Error al manager de Static Meshes.");
-      SetOk(false);
-    }
-
-    if(!m_pAnimatedModelManager->Load(_params.vAnimatedModels))
-    {
-      LOGGER->AddNewLog(ELL_ERROR,"RenderManager:: Error al manager d'Animated Models.");
-      SetOk(false);
-    }
-
-  }
-
 	if (!IsOk())
 	{
 		std::string msg_error = "Rendermanager::Init-> Error al inicializar Direct3D";
@@ -189,11 +155,7 @@ void CRenderManager::Release(void)
   TNORMALTANGENTBINORMALTEXTUREDVERTEX::ReleaseVertexDeclaration();
   TNORMALTANGENTBINORMALTEXTURED2VERTEX::ReleaseVertexDeclaration();
   TCAL3D_HW_VERTEX::ReleaseVertexDeclaration();
-  
-  CHECKED_DELETE(m_pEffectManager);
-  CHECKED_DELETE(m_pAnimatedModelManager)
-  CHECKED_DELETE(m_pStaticMeshManager)
-  CHECKED_DELETE(m_pTextureManager)
+
 	//Release main devices of render
 	CHECKED_RELEASE(m_pD3DDevice)
 	CHECKED_RELEASE(m_pD3D)
@@ -311,7 +273,7 @@ void CRenderManager::SetupMatrices(CCamera* _pCamera, bool _bOrtho)
 
 	m_pD3DDevice->SetTransform( D3DTS_VIEW, &m_matView );
 	m_pD3DDevice->SetTransform( D3DTS_PROJECTION, &m_matProject );
-  m_pEffectManager->ActivateCamera(m_matView, m_matProject, eye);
+  CORE->GetEffectManager()->ActivateCamera(m_matView, m_matProject, eye);
   /*m_pEffectManager->SetProjectionMatrix(m_matProject);
   m_pEffectManager->SetViewMatrix(m_matView);
   */
@@ -344,7 +306,7 @@ void CRenderManager::Setup2DCamera()
 
 	m_pD3DDevice->SetTransform( D3DTS_VIEW, &m_matView );
 	m_pD3DDevice->SetTransform( D3DTS_PROJECTION, &m_matProject );
-  m_pEffectManager->ActivateCamera(m_matView, m_matProject, eye);
+  CORE->GetEffectManager()->ActivateCamera(m_matView, m_matProject, eye);
   /*m_pEffectManager->SetProjectionMatrix(m_matProject);
   m_pEffectManager->SetViewMatrix(m_matView);
   */
@@ -356,7 +318,7 @@ void CRenderManager::SetTransform(D3DXMATRIX& matrix)
   assert(!"Method not supported setworldmatrix needs mat44f no d3dxmatrix");
     m_pD3DDevice->SetTransform(D3DTS_WORLD, &matrix);
 
-    m_pEffectManager->SetWorldMatrix(matrix);
+    CORE->GetEffectManager()->SetWorldMatrix(matrix);
 }
 
 void CRenderManager::SetTransform(Mat44f& m)
@@ -367,7 +329,7 @@ void CRenderManager::SetTransform(Mat44f& m)
 
   m_pD3DDevice->SetTransform(D3DTS_WORLD, &matrix);
     
-  m_pEffectManager->SetWorldMatrix(m);
+  CORE->GetEffectManager()->SetWorldMatrix(m);
 }
 
 void CRenderManager::EnableAlphaBlend ()

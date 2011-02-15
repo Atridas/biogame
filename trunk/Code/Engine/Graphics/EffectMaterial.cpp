@@ -105,7 +105,7 @@ bool CEffectMaterial::Init(const CXMLTreeNode& _xmlMaterial)
       LOGGER->AddNewLog(ELL_WARNING, "CEffectMaterial::Init trobat un element desconegut \"%s\"", _xmlMaterial(i).GetName());
     }
   }
-  CTextureManager* l_pTextureManager = RENDER_MANAGER->GetTextureManager();
+  CTextureManager* l_pTextureManager = CORE->GetTextureManager();
   if(m_usTextureMask & TEXTURE_TYPE_DIFFUSSE)
   {
     CTexture* l_Texture = l_pTextureManager->GetResource(l_szTexDiffuse);
@@ -169,7 +169,7 @@ bool CEffectMaterial::Init(std::fstream& _File)
 {
   m_bAnimated = false;
 
-  CTextureManager* l_pTextureManager = RENDER_MANAGER->GetTextureManager();
+  CTextureManager* l_pTextureManager = CORE->GetTextureManager();
   //MaterialInfo
   _File.read((char*)&(m_usMaterialInfo), sizeof(uint16));
 
@@ -276,7 +276,7 @@ void CEffectMaterial::ActivateTextures(const CRenderManager* _pRM) const
 
 CEffectTechnique* CEffectMaterial::GetEffectTechnique(const CRenderManager* _pRM) const
 {
-  CEffectManager*   l_pEM = _pRM->GetEffectManager();
+  CEffectManager*   l_pEM = CORE->GetEffectManager();
   CEffectTechnique* l_pForcedTechnique;
   if(m_bAnimated)
     l_pForcedTechnique = l_pEM->GetAnimatedModelTechnique();

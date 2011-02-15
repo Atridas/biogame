@@ -39,7 +39,7 @@ void CShadowMapRenderToTexture::PreRender(CRenderManager *_pRM, CProcess *_pProc
     Vect3f l_VDir= l_pDirLight->GetDirection();
 
     //Creamos las matrices de View y de Proyección según la luz
-    CEffectManager *l_pEffectManager=_pRM->GetEffectManager();
+    CEffectManager *l_pEffectManager = CORE->GetEffectManager();
     Mat44f l_LightViewMatrix = l_pDirLight->GetLightViewMatrix();
     Mat44f l_LightProjectionMatrix = l_pDirLight->GetLightProjectionMatrix();
     Vect3f l_LightPosition = l_pDirLight->GetPosition();

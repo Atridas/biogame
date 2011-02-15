@@ -66,7 +66,7 @@ bool CProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _p
     return true;
   } else if(strcmp(_pcAction, "ReloadShaders") == 0)
   {
-    RENDER_MANAGER->GetEffectManager()->Reload();
+    CORE->GetEffectManager()->Reload();
     return true;
   } else if(strcmp(_pcAction, "ReloadMeshes") == 0)
   {
@@ -119,7 +119,7 @@ void CProcess::PreRender(CRenderManager* _pRM)
 
 void CProcess::Render(CRenderManager* _pRM)
 {
-  CEffectManager* l_pEM = _pRM->GetEffectManager();
+  CEffectManager* l_pEM = CORE->GetEffectManager();
 
   m_pSceneEffectManager->ActivateRenderSceneEffects();
 

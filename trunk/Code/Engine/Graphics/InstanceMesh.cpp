@@ -13,7 +13,7 @@ bool CInstanceMesh::Init(const string& _szCoreName)
 {
   if(_szCoreName != "") 
   {
-    m_StaticMesh = RENDER_MANAGER->GetStaticMeshManager()->GetResource(_szCoreName);
+    m_StaticMesh = CORE->GetStaticMeshManager()->GetResource(_szCoreName);
 
     if(m_StaticMesh != 0)
     {

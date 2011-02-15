@@ -2,16 +2,12 @@
 
 #include <d3dx9.h>
 #include <string>
-#include "Base.h"
+#include "base.h"
 #include "Math/Color.h"
 
 //forward declarations ----------------------------------------------
 struct SRenderManagerParams;
 class CCamera;
-class CTextureManager;
-class CStaticMeshManager;
-class CAnimatedModelManager;
-class CEffectManager;
 class CTexture;
 //-------------------------------------------------------------------
 
@@ -29,8 +25,7 @@ class CRenderManager:
 public:
 	                      CRenderManager    (void):	m_pD3D(0), m_pD3DDevice(0),
 												                          m_uWidth(0), m_uHeight(0),
-                                                  m_pCamera(0), m_pTextureManager(0),
-                                                  m_pStaticMeshManager(0),m_pAnimatedModelManager(0)
+                                                  m_pCamera(0)
                                                                                   {};
 
 
@@ -81,10 +76,6 @@ public:
 
   LPDIRECT3DDEVICE9       GetDevice               () const {return m_pD3DDevice;};
   CCamera*                GetCamera               () const {return m_pCamera;};
-  CTextureManager*        GetTextureManager       () const {return m_pTextureManager;};
-  CStaticMeshManager*     GetStaticMeshManager    () const {return m_pStaticMeshManager;};
-  CAnimatedModelManager*  GetAnimatedModelManager () const {return m_pAnimatedModelManager;};
-  CEffectManager*         GetEffectManager        () const {return m_pEffectManager;};
 
   
 
@@ -101,8 +92,5 @@ private:
 	uint32								  m_uHeight;
 
   CCamera*                m_pCamera;
-  CTextureManager*        m_pTextureManager;
-  CStaticMeshManager*     m_pStaticMeshManager;
-  CAnimatedModelManager*  m_pAnimatedModelManager;
-  CEffectManager*         m_pEffectManager;
+
 };

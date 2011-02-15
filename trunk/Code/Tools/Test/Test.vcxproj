@@ -18,18 +18,7 @@
     <ClInclude Include="TestProcess.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Run\Test\Data\XML\actions.xml">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="..\..\..\Run\Test\Data\XML\Effects.xml">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="..\..\..\Run\Test\Data\XML\init_test.xml">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="..\..\..\Run\Test\Data\XML\SceneEffects.xml">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="..\..\..\Run\Data\XML\init_test.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{52606329-0594-4B34-879A-B11B8787A7F1}</ProjectGuid>

@@ -5,6 +5,10 @@
 #include "params.h"
 
 #include <RenderManager.h>
+#include "TextureManager.h"
+#include "StaticMeshManager.h"
+#include "AnimatedModelManager.h"
+#include "EffectManager.h"
 #include <FontManager.h>
 #include <Utils/LanguageManager.h>
 #include <InputManager.h>
@@ -22,8 +26,11 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   LOGGER->AddNewLog(ELL_INFORMATION,"Core::Init");
   
   m_pTimer                    = new CTimer(30);
-
   m_pRenderManager            = new CRenderManager();
+  m_pTextureManager           = new CTextureManager();
+  m_pStaticMeshManager        = new CStaticMeshManager();
+  m_pAnimatedModelManager     = new CAnimatedModelManager();
+  m_pEffectManager            = new CEffectManager();
   m_pLanguageManager          = new CLanguageManager();
   m_pFontManager              = new CFontManager();
   m_pInputManager             = new CInputManager();
@@ -36,6 +43,28 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pConsole                  = new CConsole();
 
   m_pRenderManager->Init(hWnd,_InitParams.RenderManagerParams);
+
+  SetOk(true);
+
+  if(!m_pEffectManager->Load(_InitParams.EffectManagerParams))
+  {
+    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al manager d'Effects.");
+    //TODO
+    //SetOk(false);
+  }
+
+  if(!m_pStaticMeshManager->Load(_InitParams.StaticMeshManagerParams))
+  {
+    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al manager de Static Meshes.");
+    SetOk(false);
+  }
+
+  if(!m_pAnimatedModelManager->Load(_InitParams.AnimatedModelManagerParams))
+  {
+    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al manager d'Animated Models.");
+    SetOk(false);
+  }
+
   m_pLanguageManager->Init(_InitParams.LanguageManagerParams);
   m_pFontManager->Init(m_pRenderManager,_InitParams.FontManagerParams.pcFontsXML);
   m_pInputManager->Init(hWnd,Vect2i(_InitParams.RenderManagerParams.v2iResolution.x,_InitParams.RenderManagerParams.v2iResolution.y),_InitParams.InputManagerParams.bExclusiveMouse);
@@ -48,8 +77,6 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pScriptManager->Load(_InitParams.ScriptManagerParams.szFile);
   m_pLogRender->SetWindowsPos(Vect2i(10,0));
   m_pConsole->Init(m_pScriptManager);
-  SetOk(true);
-
   return IsOk();
 }
 
@@ -60,18 +87,21 @@ void CCore::Release()
 
   //delete a l'inrevès de com s'ha fet l'init
   CHECKED_DELETE(m_pConsole);
-  CHECKED_DELETE(m_pLogRender);
-  CHECKED_DELETE(m_pScriptManager);
-  CHECKED_DELETE(m_pSceneEffectManager);
-  CHECKED_DELETE(m_pLightManager);
-  CHECKED_DELETE(m_pRenderableObjectsManager);
-
-  CHECKED_DELETE(m_pActionToInput);
-  CHECKED_DELETE(m_pInputManager);
-  CHECKED_DELETE(m_pFontManager);
-  CHECKED_DELETE(m_pLanguageManager);
-  CHECKED_DELETE(m_pRenderManager);
-  CHECKED_DELETE(m_pTimer);
+  CHECKED_DELETE(m_pLogRender)
+  CHECKED_DELETE(m_pScriptManager)
+  CHECKED_DELETE(m_pSceneEffectManager)
+  CHECKED_DELETE(m_pLightManager)
+  CHECKED_DELETE(m_pRenderableObjectsManager)
+  CHECKED_DELETE(m_pActionToInput)
+  CHECKED_DELETE(m_pInputManager)
+  CHECKED_DELETE(m_pFontManager)
+  CHECKED_DELETE(m_pLanguageManager)
+  CHECKED_DELETE(m_pEffectManager)
+  CHECKED_DELETE(m_pAnimatedModelManager)
+  CHECKED_DELETE(m_pStaticMeshManager)
+  CHECKED_DELETE(m_pTextureManager)
+  CHECKED_DELETE(m_pRenderManager)
+  CHECKED_DELETE(m_pTimer)
 }
 
 void CCore::Update()

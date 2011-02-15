@@ -32,7 +32,7 @@ bool CSceneEffect::Init(const CXMLTreeNode& _params)
         SetOk(false);
         return false;
       }
-      CTexture* l_pTexture = RENDER_MANAGER->GetTextureManager()->GetResource(l_szTextureName);
+      CTexture* l_pTexture = CORE->GetTextureManager()->GetResource(l_szTextureName);
       if(!l_pTexture)
       {
         LOGGER->AddNewLog(ELL_ERROR, "CDrawQuadSceneEffect::Init  Error loading Texture, no texture \"%s\" exists.", l_szTextureName.c_str());

@@ -66,7 +66,7 @@ bool CStaticMesh::Load(const CXMLTreeNode& _XMLTreeNode)
 
   CRenderManager* l_pRenderManager = CORE->GetRenderManager();
 
-  CTextureManager* l_pTextureManager = l_pRenderManager->GetTextureManager();
+  CTextureManager* l_pTextureManager = CORE->GetTextureManager();
   
   l_File.open(l_szFileName, fstream::in | fstream::binary );
   if(!l_File.is_open())
