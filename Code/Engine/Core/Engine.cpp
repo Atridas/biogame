@@ -7,6 +7,7 @@
 #include <Core.h>
 #include <Process.h>
 #include <RenderManager.h>
+#include <LogRender.h>
 #include <Utils/Timer.h>
 #include <ActionToInput.h>
 
@@ -56,6 +57,10 @@ void CEngine::Update()
 	if(m_pProcess != NULL)
 		m_pProcess->Update(l_fElapsedTime);
 
+  CLogRender* l_pLR = m_pCore->GetLogRender();
+  if(l_pLR)
+    l_pLR->Update(l_fElapsedTime);
+
 }
 
 void CEngine::Render()
@@ -87,6 +92,10 @@ void CEngine::RenderHDR(CRenderManager* _pRM, CProcess* _pProcess)
   m_pHDR->Render(_pRM);
   _pProcess->PostRender(_pRM);
 	_pProcess->DebugInformation();
+  
+  CLogRender* l_pLR = m_pCore->GetLogRender();
+  if(l_pLR)
+    l_pLR->Render(_pRM,m_pCore->GetFontManager());
 
 	_pRM->EndRendering();
 }
@@ -99,6 +108,10 @@ void CEngine::RenderNoHDR(CRenderManager* _pRM, CProcess* _pProcess)
   _pProcess->Render(_pRM);
   _pProcess->PostRender(_pRM);
 	_pProcess->DebugInformation();
+
+  CLogRender* l_pLR = m_pCore->GetLogRender();
+  if(l_pLR)
+    l_pLR->Render(_pRM,m_pCore->GetFontManager());
 
 	_pRM->EndRendering();
 }

@@ -182,32 +182,32 @@ void CLogRender::Render (CRenderManager* renderManager, CFontManager* fm, CColor
 		RenderLines (renderManager, fm, m_VecLogsToRender, beginIndex, endIndex, errors, warnings, color );
 		
 	}
-	else
-	{
-		std::string info, shortInfo;
-		CActionToInput* action2Input = CORE->GetActionToInput();
-		//action2Input->GetActionInfo(ACTION_LOGGER, info, shortInfo);
+	//else
+	//{
+	//	std::string info, shortInfo;
+	//	CActionToInput* action2Input = CORE->GetActionToInput();
+	//	//action2Input->GetActionInfo(ACTION_LOGGER, info, shortInfo);
 
-		std::string l_sInfo;
-		baseUtils::FormatSrting(l_sInfo, "Press %s to view the Logger", shortInfo.c_str());
+	//	std::string l_sInfo;
+	//	baseUtils::FormatSrting(l_sInfo, "Press %s to view the Logger", shortInfo.c_str());
 
-		//Draw background quad2D
-		CColor quad2dColor(0.f,0.f,0.5f,0.7f);
-		uint32 w = fm->SizeX(l_sInfo.c_str());
-		uint32 h = fm->SizeY(l_sInfo.c_str());
-		
-		CColor edgeColor = colBLACK;
-		edgeColor.SetAlpha(0.7f);
-		renderManager->DrawRectangle2D(Vect2i(m_WindowsPos.x, (uint32)(m_WindowsPos.y - h*0.5)), w, h, m_Quad2dColor, 1, 1, edgeColor);
+	//	//Draw background quad2D
+	//	CColor quad2dColor(0.f,0.f,0.5f,0.7f);
+	//	uint32 w = fm->SizeX(l_sInfo.c_str());
+	//	uint32 h = fm->SizeY(l_sInfo.c_str());
+	//	
+	//	CColor edgeColor = colBLACK;
+	//	edgeColor.SetAlpha(0.7f);
+	//	renderManager->DrawRectangle2D(Vect2i(m_WindowsPos.x, (uint32)(m_WindowsPos.y - h*0.5)), w, h, m_Quad2dColor, 1, 1, edgeColor);
 
 
-		//Draw Info Text
-		if	(LOGGER->Warnings())	color = colGREEN;
-		if	(LOGGER->Errors())		color = colRED;
-		
+	//	//Draw Info Text
+	//	if	(LOGGER->Warnings())	color = colGREEN;
+	//	if	(LOGGER->Errors())		color = colRED;
+	//	
 
-		fm->DrawDefaultText(m_WindowsPos.x,m_WindowsPos.y-10,color, l_sInfo.c_str());
-	}
+	//	fm->DrawDefaultText(m_WindowsPos.x,m_WindowsPos.y-10,color, l_sInfo.c_str());
+	//}
 
 }
 

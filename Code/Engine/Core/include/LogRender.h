@@ -38,6 +38,7 @@ public:
 	bool					GetVisible					() const								{return m_bIsVisible;}
 	void					SetVisible					(bool flag);
 	void					SetLinePerPage			(uint32 lines);
+  void          Toggle              ()                      { m_bIsVisible = !m_bIsVisible; };
 
 private:
 	void					RenderLines					(	CRenderManager* renderManager, CFontManager* fm, const std::vector<SLog>& vecLogs,

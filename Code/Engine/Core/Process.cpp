@@ -12,6 +12,7 @@
 #include "RenderableObjectsManager.h"
 #include "SceneEffectManager.h"
 #include "ScriptManager.h"
+#include "LogRender.h"
 
 void CProcess::DebugInformation()
 {
@@ -73,6 +74,26 @@ bool CProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _p
   } else if(strcmp(_pcAction, "ReloadScript") == 0)
   {
     CORE->GetScriptManager()->Reload();
+    return true;
+  } else if(strcmp(_pcAction, "Console") == 0)
+  {
+    CORE->GetLogRender()->Toggle();
+    return true;
+  } else if(strcmp(_pcAction, "LogRender_PageDown") == 0)
+  {
+    CORE->GetLogRender()->PageDown();
+    return true;
+  } else if(strcmp(_pcAction, "LogRender_PageUp") == 0)
+  {
+    CORE->GetLogRender()->PageUp();
+    return true;
+  } else if(strcmp(_pcAction, "LogRender_PrevLine") == 0)
+  {
+    CORE->GetLogRender()->PrevLine();
+    return true;
+  } else if(strcmp(_pcAction, "LogRender_NextLine") == 0)
+  {
+    CORE->GetLogRender()->NextLine();
     return true;
   }
   return ExecuteProcessAction(_fDeltaSeconds,_fDelta,_pcAction);
