@@ -17,6 +17,11 @@ class CTexture;
 
 typedef enum eTypeAlignment { CENTER, UPPER_LEFT, UPPER_RIGHT, LOWER_LEFT, LOWER_RIGHT };
 
+
+
+typedef enum ETypeFlip { NONE_FLIP, FLIP_X, FLIP_Y};
+
+
 class CRenderManager:
   public CBaseControl
 {
@@ -65,6 +70,8 @@ public:
   void                  DrawCube          (float _fSize, const CColor& _Color);
   void                  DrawCamera        (CCamera* camera);
  	void									DrawGrid				  (float Size, CColor Color=colWHITE, int GridX=10, int32 GridZ=10 );
+  //void                  EnableAlphaBlend  ();
+  //void                  DisbaleAlphaBlend ();
 
 	//--------------------------------------------------------------------
 
@@ -78,6 +85,8 @@ public:
   CStaticMeshManager*     GetStaticMeshManager    () const {return m_pStaticMeshManager;};
   CAnimatedModelManager*  GetAnimatedModelManager () const {return m_pAnimatedModelManager;};
   CEffectManager*         GetEffectManager        () const {return m_pEffectManager;};
+
+  
 
 public:
 	void                    Release					  ();
@@ -97,4 +106,3 @@ private:
   CAnimatedModelManager*  m_pAnimatedModelManager;
   CEffectManager*         m_pEffectManager;
 };
-

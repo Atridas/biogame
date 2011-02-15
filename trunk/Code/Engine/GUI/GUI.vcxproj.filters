@@ -3,4 +3,19 @@
   <ItemGroup>
     <None Include="ReadMe.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Consola">
+      <UniqueIdentifier>{dd0cb340-3b91-4650-b074-b0df85820c14}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Console.cpp">
+      <Filter>Consola</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Console.h">
+      <Filter>Consola</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

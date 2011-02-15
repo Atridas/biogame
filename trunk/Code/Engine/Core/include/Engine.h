@@ -12,6 +12,7 @@ class CCore;
 class CRenderManager;
 class CTimer;
 class CHDRPipeline;
+
 struct SInitParams;
 //--------------------------
 
@@ -98,5 +99,8 @@ private:
    * TODO vector de processos.
   **/
   VectorProcessPtr				  m_vProcesses;
+
+  
+
 };
 
