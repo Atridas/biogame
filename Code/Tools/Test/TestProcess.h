@@ -38,4 +38,5 @@ private:
   CCamera*              m_pObjectCamera;
   float                 m_fVelocity;
   bool                  m_bRenderLights;
+  
 };

@@ -10,6 +10,7 @@
 #include <LogRender.h>
 #include <Utils/Timer.h>
 #include <ActionToInput.h>
+#include <Console.h>
 
 #include "HDRPipeline.h"
 
@@ -61,6 +62,10 @@ void CEngine::Update()
   if(l_pLR)
     l_pLR->Update(l_fElapsedTime);
 
+  CConsole* l_pC = m_pCore->GetConsole();
+  if(l_pC)
+    l_pC->Update(l_fElapsedTime);
+
 }
 
 void CEngine::Render()
@@ -97,6 +102,10 @@ void CEngine::RenderHDR(CRenderManager* _pRM, CProcess* _pProcess)
   if(l_pLR)
     l_pLR->Render(_pRM,m_pCore->GetFontManager());
 
+  CConsole* l_pC = m_pCore->GetConsole();
+  if(l_pC)
+    l_pC->Render(_pRM,m_pCore->GetFontManager());
+
 	_pRM->EndRendering();
 }
 
@@ -112,6 +121,10 @@ void CEngine::RenderNoHDR(CRenderManager* _pRM, CProcess* _pProcess)
   CLogRender* l_pLR = m_pCore->GetLogRender();
   if(l_pLR)
     l_pLR->Render(_pRM,m_pCore->GetFontManager());
+
+  CConsole* l_pC = m_pCore->GetConsole();
+  if(l_pC)
+    l_pC->Render(_pRM,m_pCore->GetFontManager());
 
 	_pRM->EndRendering();
 }

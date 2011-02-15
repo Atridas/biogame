@@ -19,6 +19,7 @@ class CLightManager;
 class CSceneEffectManager;
 class CScriptManager;
 class CLogRender;
+class CConsole;
 // --------------------------
 
 /**
@@ -37,7 +38,7 @@ public:
   **/
                       CCore               (void): m_pRenderManager(0),m_pLanguageManager(0),m_pFontManager(0),m_pInputManager(0),
                                                   m_pActionToInput(0),m_pRenderableObjectsManager(0),m_pLightManager(0),
-                                                  m_pSceneEffectManager(0), m_pTimer(0), m_pScriptManager(0)
+                                                  m_pSceneEffectManager(0), m_pTimer(0), m_pScriptManager(0), m_pLogRender(0), m_pConsole(0)
                                                   {};
   /**
    * Destructor.
@@ -114,6 +115,8 @@ public:
 
   CLogRender*         GetLogRender          () const                        {return m_pLogRender;};
 
+  CConsole*           GetConsole            () const                        {return m_pConsole;};
+
 private:
 
   /**
@@ -166,6 +169,8 @@ private:
   CScriptManager*             m_pScriptManager;
 
   CLogRender*                 m_pLogRender;
+
+  CConsole*				            m_pConsole;
 
   /**
    * AnimatedModelManager.
