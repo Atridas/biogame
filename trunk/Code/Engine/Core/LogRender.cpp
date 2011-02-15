@@ -175,7 +175,7 @@ void CLogRender::Render (CRenderManager* renderManager, CFontManager* fm, CColor
 		
 		CColor edgeColor = colBLACK;
 		edgeColor.SetAlpha(0.7f);
-		renderManager->DrawRectangle2D(Vect2i(5,2),w-10, h_aux,m_Quad2dColor,2,2,edgeColor);
+		renderManager->DrawRectangle2D(Vect2i(0,0), w, h_aux,m_Quad2dColor,2,2,edgeColor);
 
 		
 		//Draw Info Text
@@ -362,7 +362,7 @@ void CLogRender::RenderLines (	CRenderManager* renderManager, CFontManager* fm, 
 	dy = m_WindowsPos.y;
 
 	//Dibujamos la cabecera:
-	std::string header = "	LINE   |         LEVEL         |                       MESSAGE                                          (Press F1 to hide the Logger)";
+	std::string header = "	LINE   |         LEVEL         |                       MESSAGE                                          (Press F2 to hide the Logger)";
 	incY += fm->DrawDefaultText(m_WindowsPos.x, dy, colWHITE, header.c_str());
 	header = "______________________________________________________________________________________________________________________________________";
 	dy +=fm->DrawDefaultText(m_WindowsPos.x, dy, colWHITE, header.c_str());
@@ -412,13 +412,13 @@ void CLogRender::RenderLines (	CRenderManager* renderManager, CFontManager* fm, 
 			break;					
 		case ELL_INFORMATION:
 			{
-				color = colWHITE; //white
+				color = colGREEN; //green
 				level = "INFORMATION";
 			}
 			break;
 		case ELL_WARNING:
 			{
-				color = colGREEN; //green
+				color = colYELLOW; //yellow
 				level = "WARNING";
 			}
 			break;
@@ -461,7 +461,7 @@ void CLogRender::RenderLines (	CRenderManager* renderManager, CFontManager* fm, 
 
 	if( warnings )
 	{
-		color = colGREEN;
+		color = colYELLOW;
 		fm->DrawDefaultText(	m_WindowsPos.x+400,dy,color, "Warnings: YES");
 	}
 	else
@@ -472,7 +472,7 @@ void CLogRender::RenderLines (	CRenderManager* renderManager, CFontManager* fm, 
 	
 	color = colWHITE;
 
-	fm->DrawDefaultText(	m_WindowsPos.x+500,dy,color, "|      (Press PgDown, PgUp, Ctrl+Up or Ctrl+Down to view more logs)");
+	fm->DrawDefaultText(	m_WindowsPos.x+500,dy,color, "| (PgDown, PgUp, Ctrl+Up, Ctrl+Down)");
 	header = "______________________________________________________________________________________________________________________________________";
 	fm->DrawDefaultText(m_WindowsPos.x,dy,color, header.c_str());
 }

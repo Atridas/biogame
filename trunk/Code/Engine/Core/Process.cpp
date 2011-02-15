@@ -75,7 +75,7 @@ bool CProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _p
   {
     CORE->GetScriptManager()->Reload();
     return true;
-  } else if(strcmp(_pcAction, "Console") == 0)
+  } else if(strcmp(_pcAction, "LogRender") == 0)
   {
     CORE->GetLogRender()->Toggle();
     return true;
