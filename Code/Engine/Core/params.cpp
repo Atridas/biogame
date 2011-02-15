@@ -17,7 +17,7 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
     LOGGER->AddNewLog(ELL_INFORMATION,"\tLlegint XML");
     
     //----------------------------------------------------------------------------------------------------------------------------------------------
-    //Engine ---------------------------------------------------------------------------------------------------------------------------------
+    //Engine ---------------------------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------------------------------
     {
       CXMLTreeNode l_Engine = l_TreeConfig["Engine"];
@@ -48,52 +48,80 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
         InitParams_.RenderManagerParams.bFullscreen = l_TreeRenderManager.GetBoolProperty("fullscreenMode",InitParams_.RenderManagerParams.bFullscreen);
         LOGGER->AddNewLog(ELL_INFORMATION, "\tFullscreen: %s",InitParams_.RenderManagerParams.bFullscreen? "true":"false");
 
-
-        int l_iNumChildren = l_TreeRenderManager.GetNumChildren();
-        for(int i = 0; i < l_iNumChildren; i++)
-        {
-          CXMLTreeNode l_TreeChild = l_TreeRenderManager(i);
-
-          if(strcmp(l_TreeChild.GetName(), "StaticMeshManager") == 0)
-          {
-            const char* l_pcXML = l_TreeChild.GetPszProperty("xml",0);
-            if(l_pcXML == 0)
-            {
-              LOGGER->AddNewLog(ELL_WARNING, "\tElement \"StaticMeshManager\" sense parametre \"xml\"");
-            } else {
-              InitParams_.RenderManagerParams.vRenderableMeshes.push_back(string(l_pcXML));
-              LOGGER->AddNewLog(ELL_INFORMATION, "\tStaticMeshes \"%s\"",l_pcXML);
-            }
-          } 
-          else if (strcmp(l_TreeChild.GetName(), "AnimatedModelManager") == 0)
-          {
-            const char* l_pcXML = l_TreeChild.GetPszProperty("xml",0);
-            if(l_pcXML == 0)
-            {
-              LOGGER->AddNewLog(ELL_WARNING, "\tElement \"AnimatedModelManager\" sense parametre \"xml\"");
-            } else {
-              InitParams_.RenderManagerParams.vAnimatedModels.push_back(string(l_pcXML));
-              LOGGER->AddNewLog(ELL_INFORMATION, "\tAnimatedModels \"%s\"",l_pcXML);
-            }
-          } else if (strcmp(l_TreeChild.GetName(), "EffectManager") == 0)
-          {
-            const char* l_pcXML = l_TreeChild.GetPszProperty("xml",0);
-            if(l_pcXML == 0)
-            {
-              LOGGER->AddNewLog(ELL_WARNING, "\tElement \"EffectManager\" sense parametre \"xml\"");
-            } else {
-              InitParams_.RenderManagerParams.szEffectsXML = string(l_pcXML);
-              LOGGER->AddNewLog(ELL_INFORMATION, "\tEffects \"%s\"",l_pcXML);
-            }
-          }
-          else if(!l_TreeChild.IsComment())
-          {
-            LOGGER->AddNewLog(ELL_WARNING, "\tParametre del RenderManager desconegut : %s", l_TreeChild.GetName());
-          }
-        }
-
       } else {
         LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat element \"RenderManager\". Usant valors per defecte.");
+      }
+    }
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+    //Static Mesh Manager --------------------------------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+    {
+      CXMLTreeNode l_TreeStaticMeshManager = l_TreeConfig["StaticMeshManager"];
+      int l_iNumChildren = l_TreeStaticMeshManager.GetNumChildren();
+      
+      for(int i = 0; i < l_iNumChildren; i++)
+      {
+        CXMLTreeNode l_TreeChild = l_TreeStaticMeshManager(i);
+
+        if(!l_TreeChild.IsComment())
+        {
+          const char* l_pcXML = l_TreeChild.GetPszProperty("xml",0);
+          if(l_pcXML == 0)
+          {
+            LOGGER->AddNewLog(ELL_WARNING, "\tElement \"StaticMeshManager\" sense parametre \"xml\"");
+          } else {
+            InitParams_.StaticMeshManagerParams.vRenderableMeshes.push_back(string(l_pcXML));
+            LOGGER->AddNewLog(ELL_INFORMATION, "\tStaticMeshes \"%s\"",l_pcXML);
+          }
+        } 
+      }
+    }
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+    //Animated Model Manager -----------------------------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+    {
+      CXMLTreeNode l_TreeAnimatedModelManager = l_TreeConfig["AnimatedModelManager"];
+      int l_iNumChildren = l_TreeAnimatedModelManager.GetNumChildren();
+      
+      for(int i = 0; i < l_iNumChildren; i++)
+      {
+        CXMLTreeNode l_TreeChild = l_TreeAnimatedModelManager(i);
+
+        if(!l_TreeChild.IsComment())
+        {
+          const char* l_pcXML = l_TreeChild.GetPszProperty("xml",0);
+          if(l_pcXML == 0)
+          {
+            LOGGER->AddNewLog(ELL_WARNING, "\tElement \"AnimatedModelManager\" sense parametre \"xml\"");
+          } else {
+            InitParams_.AnimatedModelManagerParams.vAnimatedModels.push_back(string(l_pcXML));
+            LOGGER->AddNewLog(ELL_INFORMATION, "\tAnimatedModels \"%s\"",l_pcXML);
+          }
+        } 
+      }
+    }
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+    //Effect Manager -------------------------------------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+    {
+      CXMLTreeNode l_TreeEffectManager = l_TreeConfig["EffectManager"];
+      int l_iNumChildren = l_TreeEffectManager.GetNumChildren();
+      
+      for(int i = 0; i < l_iNumChildren; i++)
+      {
+        CXMLTreeNode l_TreeChild = l_TreeEffectManager(i);
+
+        if(!l_TreeChild.IsComment())
+        {
+          const char* l_pcXML = l_TreeChild.GetPszProperty("xml",0);
+          if(l_pcXML == 0)
+          {
+            LOGGER->AddNewLog(ELL_WARNING, "\tElement \"EffectManager\" sense parametre \"xml\"");
+          } else {
+            InitParams_.EffectManagerParams.szFile = string(l_pcXML);
+            LOGGER->AddNewLog(ELL_INFORMATION, "\tEffects \"%s\"",l_pcXML);
+          }
+        } 
       }
     }
     //----------------------------------------------------------------------------------------------------------------------------------------------
@@ -228,7 +256,7 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
       }
     }
     //-------------------------------------------------------------------------------------------------------------------------------------------------------
-    //Scene Effect Manager ----------------------------------------------------------------------------------------------------------------------------------------
+    //Scene Effect Manager ----------------------------------------------------------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------------------------------------------------------------
     {
       CXMLTreeNode l_TreeSceneEffectManager = l_TreeConfig["SceneEffectManager"];

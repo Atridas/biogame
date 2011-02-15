@@ -84,4 +84,4 @@ using namespace std;
 /**
  * @define Macro d'accés a Animated Model Manager.
 **/
-#define ANIMATED_MANAGER RENDER_MANAGER->GetAnimatedModelManager()
+#define ANIMATED_MANAGER CORE->GetAnimatedModelManager()

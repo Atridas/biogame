@@ -3,11 +3,9 @@
 #define __ANIMATED_MODEL_MANAGER_H__
 
 #include "base.h"
-
 #include <set>
-
 #include "Utils/MapManager.h"
-
+#include "params.h"
 #include "AnimatedCoreModel.h"
 
 // Forward declarations -------------
@@ -45,7 +43,7 @@ public:
    * @param _XMLs Vector que conté els diferents fitxers des d'on carregar AnimatedModels.
    * @return True si s'ha iniciat correctament. False si no.
   **/
-  bool Load(const vector<string>& _XMLs);
+  bool Load(const SAnimatedModelManagerParams& _params);
   /**
    * Mètode de recàrrega del Manager.
    * Aquest mètode tornarà a inicialitzar tots els AnimatedModel que es trobin als fitxers especificats anteriorment.

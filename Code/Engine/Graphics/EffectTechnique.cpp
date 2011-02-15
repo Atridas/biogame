@@ -50,7 +50,7 @@ void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
   m_iNumOfLights= _XMLParams.GetIntProperty("num_of_lights",0);
 
   //non XML dependant
-  CEffectManager* l_pEffectManager = RENDER_MANAGER->GetEffectManager();
+  CEffectManager* l_pEffectManager = CORE->GetEffectManager();
   m_pEffect = l_pEffectManager->GetEffect(l_szEffectName);
 
   if(m_pEffect->IsOk())
@@ -83,7 +83,7 @@ bool CEffectTechnique::BeginRender(const CEffectMaterial* _pMaterial)
   if(m_pEffect && m_pEffect->IsOk())
   {
     CRenderManager* l_pRM = RENDER_MANAGER;
-    CEffectManager* l_pEM = l_pRM->GetEffectManager();
+    CEffectManager* l_pEM = CORE->GetEffectManager();
     LPD3DXEFFECT l_pD3DEffect = m_pEffect->GetD3DEffect();
 
     if(_pMaterial && _pMaterial->IsOk())
@@ -224,7 +224,7 @@ void CEffectTechnique::Release()
 {
   if(m_bAnimated)
   {
-    CEffectManager* l_pEffectManager = RENDER_MANAGER->GetEffectManager();
+    CEffectManager* l_pEffectManager = CORE->GetEffectManager();
     if(l_pEffectManager->GetAnimatedModelTechnique() == this)
     {
       LOGGER->AddNewLog(ELL_INFORMATION, "CEffectTechnique::Release  Removing animated technique from EffectManager.");

@@ -19,7 +19,7 @@ bool CRenderToTextureSceneEffect::Init(const CXMLTreeNode& _params)
   string l_szStaticTechnique = _params.GetPszISOProperty("static_mesh_technique","");
   string l_szAnimatedTechnique = _params.GetPszISOProperty("animated_model_technique","");
   
-  CEffectManager* l_pEffectManager = RENDER_MANAGER->GetEffectManager();
+  CEffectManager* l_pEffectManager = CORE->GetEffectManager();
   m_pStaticMeshTechnique    = l_pEffectManager->GetEffectTechnique(l_szStaticTechnique);
   m_pAnimatedModelTechnique = l_pEffectManager->GetEffectTechnique(l_szAnimatedTechnique);
 
@@ -41,7 +41,7 @@ void CRenderToTextureSceneEffect::PreRender(CRenderManager* _pRM, CProcess* _pPr
 {
   CCamera* l_pCamera=_pRM->GetCamera();
 
-  CEffectManager* l_pEffectManager = _pRM->GetEffectManager();
+  CEffectManager* l_pEffectManager = CORE->GetEffectManager();
 
   //l_pEffectManager->ActivateCamera(l_pCamera->GetViewMatrix(), l_pCamera->GetProjectionMatrix(), l_pCamera->GetPosition());
   _pRM->SetupMatrices(_pProc->GetCamera());

@@ -31,9 +31,10 @@ void CEffectManager::ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _m
   </techniques>
 </shaders>
 */
-bool CEffectManager::Load(const string& _szFileName)
+
+bool CEffectManager::Load(const SEffectManagerParams& _params)
 {
-  m_szFileName = _szFileName;
+  m_szFileName = _params.szFile;
   return Load(false);
 }
 

@@ -4,6 +4,7 @@
 
 #include <Utils/MapManager.h>
 #include <set>
+#include "params.h"
 #include "StaticMesh.h"
 
 /**
@@ -30,14 +31,14 @@ public:
    * @params _szFileName Path relatiu al fitxer XML.
    * @return True si ha carregat correctament, false sino.
   **/
-  bool Load(const string &_szFileName);
+  bool Load(const string& _szFileName);
   /**
    * Mètode de càrrega.
    * Aquest mètode pren un vector de fitxers XML en els qual s'especifiquin les diferents malles a carregar i les carrega.
    * @params _XMLs Vector que conté paths relatius als fitxers XML.
    * @return True si ha carregat correctament, false sino.
   **/
-  bool Load(const vector<string>& _XMLs);
+  bool Load(const SStaticMeshManagerParams& _params);
   /**
    * Mètode de recàrrega.
    * Aquest mètode recarrega tots els mesh segons els fitxers XML proporcionats anteriorment.

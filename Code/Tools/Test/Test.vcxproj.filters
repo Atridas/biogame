@@ -13,16 +13,7 @@
     <ClInclude Include="TestProcess.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Run\Test\Data\XML\init_test.xml">
-      <Filter>Data</Filter>
-    </None>
-    <None Include="..\..\..\Run\Test\Data\XML\actions.xml">
-      <Filter>Data</Filter>
-    </None>
-    <None Include="..\..\..\Run\Test\Data\XML\Effects.xml">
-      <Filter>Data</Filter>
-    </None>
-    <None Include="..\..\..\Run\Test\Data\XML\SceneEffects.xml">
+    <None Include="..\..\..\Run\Data\XML\init_test.xml">
       <Filter>Data</Filter>
     </None>
   </ItemGroup>

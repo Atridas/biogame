@@ -13,10 +13,10 @@ bool CRenderTextureSceneEffect::Init(const CXMLTreeNode& _params)
   if(!CSceneEffect::Init(_params))
     return false;
 
-
   m_pTexture = new CTexture();
   string l_szTexture = _params.GetPszISOProperty("texture","");
   uint32 l_iWidth, l_iHeight;
+
   if(_params.GetBoolProperty("texture_size_as_frame_buffer",false))
   {
     float l_fScaleSize = _params.GetFloatProperty("scale_size", 1.0f);
@@ -27,6 +27,7 @@ bool CRenderTextureSceneEffect::Init(const CXMLTreeNode& _params)
     l_iWidth  = _params.GetIntProperty("width");
     l_iHeight = _params.GetIntProperty("height");
   }
+
   string l_szformat_type = _params.GetPszISOProperty("format_type","");
 
   if(m_pTexture->Create(  l_szTexture,
@@ -35,24 +36,18 @@ bool CRenderTextureSceneEffect::Init(const CXMLTreeNode& _params)
                           1,
                           CTexture::RENDERTARGET,
                           CTexture::DEFAULT,
-                          CTexture::GetFormatTypeFromString(l_szformat_type)
-                      ))
+                          CTexture::GetFormatTypeFromString(l_szformat_type)))
   {
     m_pSurface = m_pTexture->GetSurface();
   } else
   {
     m_pSurface = 0;
   }
-  //patillada total
-  //if(m_pTexture->Create(_Atts.name, _Atts.width, _Atts.Height, _Atts.MipMaps, CTexture::RENDERTARGET, CTexture::DEFAULT, CTexture::A8R8G8B8))
-  //  m_pSurface = m_pTexture->GetSurface();
-  //else
-  //  m_pSurface = 0;
   
   if(m_pTexture->IsOk() && m_pSurface)
   {
     SetOk(true);
-    RENDER_MANAGER->GetTextureManager()->AddResource(l_szTexture, m_pTexture);
+    CORE->GetTextureManager()->AddResource(l_szTexture, m_pTexture);
   } else
   {
     if(!m_pTexture->IsOk())
