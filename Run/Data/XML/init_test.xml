@@ -29,7 +29,7 @@
   <!-- RenderableObjectsManager file="Data/XML/RenderableObjects.xml" -->
   <!-- RenderableObjectsManager file="Data/Levels/Level -2/XML/RenderableObjects.xml" -->
   <!--RenderableObjectsManager file="Data/Levels/Proves/XML/RenderableObjects.xml"-->
-  <RenderableObjectsManager file="Data/Levels/Level -2/XML/RenderableObjects.xml">
+  <RenderableObjectsManager file="Data/XML/RenderableObjects.xml">
     <!--
     <Level xml="Data/XML/RenderableObjects.xml"/>
     <Level xml="Data/Levels/Level -1/XML/RenderableObjects.xml"/>
@@ -39,7 +39,7 @@
     -->
   </RenderableObjectsManager>
 
-  <LightsManager file="Data/Levels/Level -2/XML/Lights.xml"/>
+  <LightsManager file="Data/XML/Lights.xml"/>
 
   <SceneEffectManager file="Data/XML/SceneEffects.xml"/>
   

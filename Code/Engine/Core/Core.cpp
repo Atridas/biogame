@@ -112,6 +112,9 @@ void CCore::Update()
 
   //Manager Updates
   m_pInputManager->Update();
-  m_pActionToInput->Update(l_fElapsedTime);
+  if(!m_pConsole->IsActive())
+  {
+    m_pActionToInput->Update(l_fElapsedTime);
+  }
   m_pRenderableObjectsManager->Update(l_fElapsedTime);
 }

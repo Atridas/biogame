@@ -61,7 +61,7 @@
 	</post_render>
 
 
-	<post_render type="draw_quad" name="noise_and_vignetting_scene_effect" technique="RenderNoiseAndVignettingTechnique" active="true">
+	<post_render type="draw_quad" name="noise_and_vignetting_scene_effect" technique="RenderNoiseAndVignettingTechnique" active="true" color="1.0 1.0 1.0 1.0">
 		<texture stage_id="0" texture="Data/Textures/noise.tga"/>
 		<texture stage_id="1" texture="Data/Textures/vigneting.tga"/>
 	</post_render-->
@@ -70,4 +70,14 @@
     <texture stage_id="0" texture="FrameBufferTextureWithPostFX"/>
   </post_render-->
 
+  <!--
+  <post_render type="draw_quad" name="gas_scene_effect" technique="GasTechnique" active="true" color="0.0 1.0 0.0 0.4">
+    <texture stage_id="0" texture="Data/Textures/mecagonto.tga"/>
+    <texture stage_id="1" texture="Data/Textures/n1.tga"/>
+    <texture stage_id="2" texture="Data/Textures/n2.tga"/>
+    <texture stage_id="3" texture="Data/Textures/n3.tga"/>
+    <texture stage_id="4" texture="Data/Textures/n4.tga"/>
+  </post_render>
+  -->
+  
 </scene_effects>
