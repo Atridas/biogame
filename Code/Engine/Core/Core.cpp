@@ -44,6 +44,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pSceneEffectManager->Load(_InitParams.SceneEffectParams.szFile);
   m_pScriptManager->Initialize();
   m_pScriptManager->Load(_InitParams.ScriptManagerParams.szFile);
+  m_pLogRender->SetWindowsPos(Vect2i(10,0));
 
   SetOk(true);
 
