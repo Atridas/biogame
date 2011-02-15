@@ -18,6 +18,7 @@ class CAnimatedModelManager;
 class CLightManager;
 class CSceneEffectManager;
 class CScriptManager;
+class CLogRender;
 // --------------------------
 
 /**
@@ -111,6 +112,8 @@ public:
 
   CScriptManager*     GetScriptManager      () const                        {return m_pScriptManager;};
 
+  CLogRender*         GetLogRender          () const                        {return m_pLogRender;};
+
 private:
 
   /**
@@ -161,6 +164,8 @@ private:
   CSceneEffectManager*        m_pSceneEffectManager;
 
   CScriptManager*             m_pScriptManager;
+
+  CLogRender*                 m_pLogRender;
 
   /**
    * AnimatedModelManager.

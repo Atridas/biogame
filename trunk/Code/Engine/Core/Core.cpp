@@ -12,7 +12,8 @@
 #include <RenderableObjectsManager.h>
 #include <LightManager.h>
 #include <SceneEffectManager.h>
-#include "ScriptManager.h"
+#include <ScriptManager.h>
+#include <LogRender.h>
 //#include <AnimatedModelManager.h>
 
 bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
@@ -30,6 +31,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pLightManager             = new CLightManager();
   m_pSceneEffectManager       = new CSceneEffectManager();
   m_pScriptManager            = new CScriptManager();
+  m_pLogRender                = new CLogRender();
 
   m_pRenderManager->Init(hWnd,_InitParams.RenderManagerParams);
   m_pLanguageManager->Init(_InitParams.LanguageManagerParams);
@@ -54,6 +56,7 @@ void CCore::Release()
   
 
   //delete a l'inrevès de com s'ha fet l'init
+  CHECKED_DELETE(m_pLogRender);
   CHECKED_DELETE(m_pScriptManager);
   CHECKED_DELETE(m_pSceneEffectManager);
   CHECKED_DELETE(m_pLightManager);
