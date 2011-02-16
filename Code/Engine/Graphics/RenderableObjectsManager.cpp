@@ -95,7 +95,7 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
   }
 
   int l_iNumObjects = l_XMLObjects.GetNumChildren();
-  int l_iMeshIndex = 0;
+
   for(int i = 0; i < l_iNumObjects; i++)
   {
     string l_szName, l_szClass, l_szResource;
@@ -123,8 +123,7 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
         if(l_pRenderableObject != 0  && l_pRenderableObject->IsOk())
         {
           l_pRenderableObject->InitFromXML(l_XMLObject);
-          m_vIndexMeshes.push_back(l_iMeshIndex);
-          l_iMeshIndex = l_iMeshIndex + 1;
+          m_vMeshes.push_back(l_pRenderableObject);
         }
 
       } else if(l_szClass == "AnimatedModel") 
@@ -134,8 +133,7 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
         if(l_pRenderableObject != 0 && l_pRenderableObject->IsOk())
         {
           l_pRenderableObject->InitFromXML(l_XMLObject);
-          m_vIndexAnimated.push_back(l_iMeshIndex);
-          l_iMeshIndex = l_iMeshIndex + 1;
+          m_vAnimatedModels.push_back(l_pRenderableObject);
         }
 
       } else 
@@ -193,17 +191,12 @@ bool CRenderableObjectsManager::Load(const set<string>& _vXMLFiles)
 }
 
 
-void CRenderableObjectsManager::SetAllVisible(bool _bVisible, int _ID)
+void CRenderableObjectsManager::SetAllVisible(bool _bVisible, CRenderableObject* _pRO)
 {
   for(size_t i=0; i < m_RenderableObjects.size() ; i++)
   {
-    if (i==_ID)
-    {
-      m_RenderableObjects[i]->SetVisible(true);
-    }
-    else
-    {
       m_RenderableObjects[i]->SetVisible(_bVisible);
-    }
   }
+
+  _pRO->SetVisible(true);
 }

@@ -98,8 +98,8 @@ public:
    * @return True si tot ha anat bé, false sino.
   **/
   bool Reload                           (const std::string &_szPath){ Release(); return Load( _szPath);};
-  //void  SetAnimationCoreCount                () {m_iAnimationCount = m_pCalCoreModel->getCoreAnimationCount();};
-  int  GetAnimationCount                () {return m_iAnimationCount;};
+
+  int  GetAnimationCount                ();
 
 protected:
   /**
@@ -122,7 +122,6 @@ private:
    * @param _szFileName Nom del fitxer on es troba l'animació.
   **/
   bool LoadAnimation                   (const string& _szName, const std::string& _szFilename);
-  int m_iAnimationCount;
 
   /**
    * Model Cal3D representat.

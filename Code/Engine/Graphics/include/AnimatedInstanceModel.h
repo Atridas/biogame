@@ -102,7 +102,8 @@ public:
    * @return L'animació actual.
   **/
   int GetCurrentAction        () const              { return m_iCurrentAnimationId; };
-  CAnimatedCoreModel*         GetAnimatedCoreModel() {return m_pAnimatedCoreModel;};
+
+  int GetAnimationCount       ();
 
 private:
   /**

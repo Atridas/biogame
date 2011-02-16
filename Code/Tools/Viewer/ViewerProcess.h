@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include "Process.h"
 #include <base.h>
 
@@ -17,6 +18,7 @@ class CalCoreModel;
 class CalHardwareModel;
 class CRenderableVertexs;
 class CEffectMaterial;
+class CRenderableObject;
 //-----------------------------------------
 
 class CViewerProcess:
@@ -57,4 +59,7 @@ private:
   int                   m_iMesh;
   int                   m_iRenderObject;
   bool                  m_bAjuda;
+
+  vector<CRenderableObject*> m_vMeshes;
+  vector<CRenderableObject*> m_vAnimatedModels;
 };
