@@ -24,26 +24,28 @@ public:
   CRenderableObject* AddAnimatedModel(const string& _szCoreModelName, const string& _szInstanceName);
 
   void AddResource(const string& _szName, CRenderableObject* _pRenderableObject);
-  void CleanUp()                        {Release();m_RenderableObjects.clear();m_vIndexMeshes.clear(),m_vIndexAnimated.clear();};
+  void CleanUp()                        {Release();m_RenderableObjects.clear();m_vMeshes.clear(),m_vAnimatedModels.clear();};
 
   bool Load(const string& _szFileName)  {return Load(_szFileName,false);};
   bool Load(const vector<string>& _vXMLFiles);
-  void SetAllVisible(bool _bVisible, int _ID);
+
+  void SetAllVisible(bool _bVisible, CRenderableObject* _pRO);
+
   CRenderableObject* GetRenderableObject (int _ID) {return m_RenderableObjects[_ID];};
   int GetRenderableVectorSize() {return m_RenderableObjects.size();};
 
   bool Reload() {CleanUp(); return Load(m_vXMLFiles);};
-  //CRenderableObject* GetInstance(const string& _szName) const;
-  // el get instance ja està ben implementat a MapManager
 
-  vector<int> m_vIndexMeshes;
-  vector<int> m_vIndexAnimated;
-
+  const vector<CRenderableObject*>& GetMeshes() {return m_vMeshes;};
+  const vector<CRenderableObject*>& GetAnimatedModels() {return m_vAnimatedModels;};
 
 private:
+
   set<string> m_vXMLFiles;
   vector<CRenderableObject*> m_RenderableObjects;
-  
+  vector<CRenderableObject*> m_vMeshes;
+  vector<CRenderableObject*> m_vAnimatedModels;
+
   bool Load(const string& _szFileName, bool _bReload);
   bool Load(const set<string>& _vXMLFiles);
 };

@@ -11,7 +11,7 @@
 #include "StaticMeshManager.h"
 #include "RenderableObjectsManager.h"
 #include "AnimatedModelManager.h"
-
+#include "RenderableObject.h"
 #include "AnimatedInstanceModel.h"
 #include "RenderableAnimatedInstanceModel.h"
 
@@ -21,9 +21,17 @@
 #include <LightManager.h>
 #include <sstream>
 #include "SpotLight.h"
-//#include "cal3d.h"
 
+bool SortRenderableObjectByName(CRenderableObject* _pRO1, CRenderableObject* _pRO2)
+{
+  string l_szName1 = _pRO1->GetName();
+  string l_szName2 = _pRO2->GetName();
 
+  transform(l_szName1.begin(), l_szName1.end(), l_szName1.begin(), tolower);
+  transform(l_szName2.begin(), l_szName2.end(), l_szName2.begin(), tolower);
+
+  return (l_szName1.compare(l_szName2) < 0);
+}
 
 bool CViewerProcess::Init()
 {
@@ -68,7 +76,11 @@ bool CViewerProcess::Init()
     l_Spot->SetActive(true);
   }
   
- 
+  m_vMeshes = CORE->GetRenderableObjectsManager()->GetMeshes();
+  m_vAnimatedModels = CORE->GetRenderableObjectsManager()->GetAnimatedModels();
+
+  sort(m_vMeshes.begin(),m_vMeshes.end(),SortRenderableObjectByName);
+  sort(m_vAnimatedModels.begin(),m_vAnimatedModels.end(),SortRenderableObjectByName);
 
   m_bRenderLights = false;
 
@@ -174,6 +186,8 @@ void CViewerProcess::RenderScene(CRenderManager* _pRM)
 
 bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
 {
+  CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
+
   if(strcmp(_pcAction, "Run") == 0)
   {
     if (m_iMode == 0)
@@ -277,8 +291,12 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
       m_iMode = 0;
       CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
       l_pCam->SetZoom(2.5f);
-      CORE->GetRenderableObjectsManager()->SetAllVisible(true,m_iRenderObject);
+
+      CRenderableObject* l_pRenderableObject = m_vAnimatedModels[0];
+      CORE->GetRenderableObjectsManager()->SetAllVisible(true,l_pRenderableObject);
+
       m_pObject->SetPosition(Vect3f(-6,1.7f,0));
+
       if (m_pObjectBot != 0)
       {
         ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->ClearCycle(0);
@@ -291,18 +309,21 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
       m_iMesh = 0;
       m_iAnimat = 0;
       m_iRenderObject = 0;
-      CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
+      
       Vect3f l_pos;
 
       if (m_iMode == MODE_ANIMATS)
       {
-        if (l_pROM->m_vIndexAnimated.size() != 0)
+        if (m_vMeshes.size() != 0)
         {
-          l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();   
-          CORE->GetRenderableObjectsManager()->SetAllVisible(false,l_pROM->m_vIndexAnimated[m_iAnimat]);
+          CRenderableObject* l_pRenderableObject = m_vAnimatedModels[m_iAnimat];
+          
+          l_pos = l_pRenderableObject->GetPosition();   
+          l_pROM->SetAllVisible(false,l_pRenderableObject);
+
           CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
-          float l_fAltura = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->m_fAltura;
-          l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();
+          float l_fAltura = l_pRenderableObject->m_fAltura;
+
           l_pCam->SetZoom(l_fAltura*3.0f);
           m_pObject->SetPosition(Vect3f(l_pos.x,l_fAltura/2,l_pos.z));
         }
@@ -314,12 +335,16 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
       }
       else if (m_iMode == MODE_MESH)
       {
-        if (l_pROM->m_vIndexMeshes.size() != 0)
+        if (m_vMeshes.size() != 0)
         {
-          l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetPosition();  
-          CORE->GetRenderableObjectsManager()->SetAllVisible(false,l_pROM->m_vIndexMeshes[m_iMesh]);
+          CRenderableObject* l_pRenderableObject = m_vMeshes[m_iMesh];
+
+          l_pos = l_pRenderableObject->GetPosition();  
+          l_pROM->SetAllVisible(false,l_pRenderableObject);
+
           CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
-          CBoundingBox l_BoundingBox = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetBoundingBox();
+          CBoundingBox l_BoundingBox = l_pRenderableObject->GetBoundingBox();
+
           Vect3f l_vMiddle = l_BoundingBox.MiddlePoint();
           float l_vZoom = l_BoundingBox.GetMaxSideLength();
           m_pObject->SetPosition(l_vMiddle);
@@ -360,41 +385,44 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
     if (m_iMode == MODE_MESH)
     {
       m_iMesh++;
-      CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
 
-      if (m_iMesh == l_pROM->m_vIndexMeshes.size())
+      if (m_iMesh == m_vMeshes.size())
         m_iMesh = 0;
 
-      if (l_pROM->m_vIndexMeshes.size() != 0)
+      if (m_vMeshes.size() != 0)
       {
+        CRenderableObject* l_pRenderableObject = m_vMeshes[m_iMesh];
+
         CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
-        CBoundingBox l_BoundingBox = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetBoundingBox();
+        CBoundingBox l_BoundingBox = l_pRenderableObject->GetBoundingBox();
+
         Vect3f l_vMiddle = l_BoundingBox.MiddlePoint();
         float l_vZoom = l_BoundingBox.GetMaxSideLength();
         m_pObject->SetPosition(l_vMiddle);
         l_pCam->SetZoom(l_vZoom*3.0f);
 
 
-        l_pROM->SetAllVisible(false,l_pROM->m_vIndexMeshes[m_iMesh]);
+        l_pROM->SetAllVisible(false,l_pRenderableObject);
       }
     }
     else if (m_iMode == MODE_ANIMATS)
     {
       m_iAnimat++;
-      CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
 
-      if (m_iAnimat == l_pROM->m_vIndexAnimated.size())
+      if (m_iAnimat == m_vAnimatedModels.size())
         m_iAnimat = 0;
 
-      if (l_pROM->m_vIndexAnimated.size() != 0)
+      if (m_vAnimatedModels.size() != 0)
       {
+        CRenderableObject* l_pRenderableObject = m_vAnimatedModels[m_iAnimat];
+
         CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
-        float l_fAltura = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->m_fAltura;
-        Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();
+        float l_fAltura = l_pRenderableObject->m_fAltura;
+        Vect3f l_pos = l_pRenderableObject->GetPosition();
      
         l_pCam->SetZoom(l_fAltura*3.0f);
         m_pObject->SetPosition(Vect3f(l_pos.x,l_fAltura/2,l_pos.z));
-        l_pROM->SetAllVisible(false,l_pROM->m_vIndexAnimated[m_iAnimat]);
+        l_pROM->SetAllVisible(false,l_pRenderableObject);
       }
     }
 
@@ -407,41 +435,44 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
     if (m_iMode == MODE_MESH)
     {
       m_iMesh--;
-      CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
 
       if (m_iMesh == -1)
-        m_iMesh = l_pROM->m_vIndexMeshes.size()-1;
+        m_iMesh = m_vMeshes.size()-1;
 
 
-      if (l_pROM->m_vIndexMeshes.size() != 0)
+      if (m_vMeshes.size() != 0)
       {
+        CRenderableObject* l_pRenderableObject = m_vMeshes[m_iMesh];
+
         CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
-        CBoundingBox l_BoundingBox = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh])->GetBoundingBox();
+        CBoundingBox l_BoundingBox = l_pRenderableObject->GetBoundingBox();
+
         Vect3f l_vMiddle = l_BoundingBox.MiddlePoint();
         float l_vZoom = l_BoundingBox.GetMaxSideLength();
         m_pObject->SetPosition(l_vMiddle);
         l_pCam->SetZoom(l_vZoom*3.0f);
 
-        l_pROM->SetAllVisible(false,l_pROM->m_vIndexMeshes[m_iMesh]);
+        l_pROM->SetAllVisible(false,l_pRenderableObject);
       }
     }
     else if (m_iMode == MODE_ANIMATS)
     {
       m_iAnimat--;
-      CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
 
       if (m_iAnimat == -1)
-        m_iAnimat = l_pROM->m_vIndexAnimated.size()-1;
+        m_iAnimat = m_vAnimatedModels.size()-1;
 
-      if (l_pROM->m_vIndexAnimated.size() != 0)
+      if (m_vAnimatedModels.size() != 0)
       {
+        CRenderableObject* l_pRenderableObject = m_vAnimatedModels[m_iAnimat];
+
         CThPSCamera* l_pCam = (CThPSCamera*) m_pCamera;
-        float l_fAltura = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->m_fAltura;
-        Vect3f l_pos = CORE->GetRenderableObjectsManager()->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat])->GetPosition();
+        float l_fAltura = l_pRenderableObject->m_fAltura;
+        Vect3f l_pos = l_pRenderableObject->GetPosition();
      
         l_pCam->SetZoom(l_fAltura*3.0f);
         m_pObject->SetPosition(Vect3f(l_pos.x,l_fAltura/2,l_pos.z));
-        l_pROM->SetAllVisible(false,l_pROM->m_vIndexAnimated[m_iAnimat]);
+        l_pROM->SetAllVisible(false,l_pRenderableObject);
       }
     }
 
@@ -455,11 +486,11 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
     if (m_iMode == MODE_ANIMATS)
     {
       CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
-      if (l_pROM->m_vIndexAnimated.size() != 0)
+      if (m_vAnimatedModels.size() != 0)
       {
-        CRenderableAnimatedInstanceModel* l_RenderModel = (CRenderableAnimatedInstanceModel*)l_pROM->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat]);
-        int l_iNumAnimations = l_RenderModel->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetAnimationCount();
-        int l_iCurrentCycle = l_RenderModel->GetAnimatedInstanceModel()->GetCurrentCycle();
+        CRenderableAnimatedInstanceModel* l_pRenderModel = (CRenderableAnimatedInstanceModel*)m_vAnimatedModels[m_iAnimat];
+        int l_iNumAnimations = l_pRenderModel->GetAnimatedInstanceModel()->GetAnimationCount();
+        int l_iCurrentCycle = l_pRenderModel->GetAnimatedInstanceModel()->GetCurrentCycle();
 
         l_iCurrentCycle++;
 
@@ -467,8 +498,8 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
         {
           l_iCurrentCycle = 0;
         }
-        l_RenderModel->GetAnimatedInstanceModel()->ClearCycle(0);
-        l_RenderModel->GetAnimatedInstanceModel()->BlendCycle(l_iCurrentCycle,0);
+        l_pRenderModel->GetAnimatedInstanceModel()->ClearCycle(0);
+        l_pRenderModel->GetAnimatedInstanceModel()->BlendCycle(l_iCurrentCycle,0);
       }
     }
     return true;
@@ -480,11 +511,11 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
     if (m_iMode == MODE_ANIMATS)
     {
       CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
-      if (l_pROM->m_vIndexAnimated.size() != 0)
+      if (m_vAnimatedModels.size() != 0)
       {
-        CRenderableAnimatedInstanceModel* l_RenderModel = (CRenderableAnimatedInstanceModel*)l_pROM->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat]);
-        int l_iNumAnimations = l_RenderModel->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetAnimationCount();
-        int l_iCurrentCycle = l_RenderModel->GetAnimatedInstanceModel()->GetCurrentCycle();
+        CRenderableAnimatedInstanceModel* l_pRenderModel = (CRenderableAnimatedInstanceModel*)m_vAnimatedModels[m_iAnimat];
+        int l_iNumAnimations = l_pRenderModel->GetAnimatedInstanceModel()->GetAnimationCount();
+        int l_iCurrentCycle = l_pRenderModel->GetAnimatedInstanceModel()->GetCurrentCycle();
 
         l_iCurrentCycle--;
 
@@ -493,8 +524,8 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
           l_iCurrentCycle = l_iNumAnimations-1;
         }
 
-        l_RenderModel->GetAnimatedInstanceModel()->ClearCycle(0);
-        l_RenderModel->GetAnimatedInstanceModel()->BlendCycle(l_iCurrentCycle,0);
+        l_pRenderModel->GetAnimatedInstanceModel()->ClearCycle(0);
+        l_pRenderModel->GetAnimatedInstanceModel()->BlendCycle(l_iCurrentCycle,0);
       }
     }
     return true;
@@ -590,10 +621,10 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
       break;
 
     case MODE_MESH:
-      if (l_pROM->m_vIndexMeshes.size() != 0)
+      if (m_vMeshes.size() != 0)
       {
         FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg2.c_str());
-        l_pMeshInstance = l_pROM->GetRenderableObject(l_pROM->m_vIndexMeshes[m_iMesh]);
+        l_pMeshInstance = m_vMeshes[m_iMesh];
         Vect3f l_vDimension = l_pMeshInstance->GetBoundingBox().GetOriginDimension();
 
         l_SStream << "Nom: " << l_pMeshInstance->GetName() << endl;
@@ -640,11 +671,11 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
 
     case MODE_ANIMATS:
 
-      if (l_pROM->m_vIndexAnimated.size() != 0)
+      if (m_vAnimatedModels.size() != 0)
       {
         FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg.c_str());
-        l_pAnimatedInstance = l_pROM->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat]);
-        CRenderableAnimatedInstanceModel* l_RenderModel = (CRenderableAnimatedInstanceModel*)l_pROM->GetRenderableObject(l_pROM->m_vIndexAnimated[m_iAnimat]);
+        l_pAnimatedInstance = m_vAnimatedModels[m_iAnimat];
+        CRenderableAnimatedInstanceModel* l_pRenderModel = (CRenderableAnimatedInstanceModel*)m_vAnimatedModels[m_iAnimat];
 
         l_SStream << "Nom: " << l_pAnimatedInstance->GetName() << endl;
         l_SStream << "Tipus: AnimatedModel" << endl;
@@ -654,7 +685,7 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
         l_SStream << "Yaw: " << (float)l_pAnimatedInstance->GetYaw() << endl;
         l_SStream << "Pitch: " << (float)l_pAnimatedInstance->GetPitch() << endl;
         l_SStream << "Roll: " << (float)l_pAnimatedInstance->GetRoll() << endl;
-        l_SStream << "Animacio: " << (int)l_RenderModel->GetAnimatedInstanceModel()->GetCurrentCycle() << endl;
+        l_SStream << "Animacio: " << (int)l_pRenderModel->GetAnimatedInstanceModel()->GetCurrentCycle() << endl;
         FONT_MANAGER->DrawText(0,l_iPosicio,colGREEN,l_uiFontType,l_SStream.str().c_str());
       }
       else

@@ -350,3 +350,8 @@ void CAnimatedInstanceModel::ClearCycle(float _fTime)
   m_pCalModel->getMixer()->clearCycle(m_iCurrentCycle,_fTime);
 }
 
+int CAnimatedInstanceModel::GetAnimationCount()
+{
+  return m_pAnimatedCoreModel->GetAnimationCount();
+}
+
