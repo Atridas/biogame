@@ -78,7 +78,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\cal3d-0.11rc2\src;$(SolutionDir)Engine\Graphics\include;$(SolutionDir)Engine\Core\include;$(SolutionDir)Engine\Base\include;$(SolutionDir)3rdParty\libxml2-2.7.2.win32\include;$(SolutionDir)3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)Engine\Input\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)3rdParty\cal3d-0.11rc2\src;$(SolutionDir)Engine\Graphics\include;$(SolutionDir)Engine\Core\include;$(SolutionDir)Engine\Base\include;$(SolutionDir)3rdParty\libxml2-2.7.2.win32\include;$(SolutionDir)3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)Engine\Input\include;$(SolutionDir)Engine\GUI\include</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
@@ -92,10 +92,38 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="CheckButton.cpp" />
     <ClCompile Include="Console.cpp" />
+    <ClCompile Include="DialogBox.cpp" />
+    <ClCompile Include="EditableTextBox.cpp" />
+    <ClCompile Include="GuiElement.cpp" />
+    <ClCompile Include="GUIManager.cpp" />
+    <ClCompile Include="GUIWindows.cpp" />
+    <ClCompile Include="Image.cpp" />
+    <ClCompile Include="PointerMouse.cpp" />
+    <ClCompile Include="ProgressBar.cpp" />
+    <ClCompile Include="RadioBox.cpp" />
+    <ClCompile Include="Slider.cpp" />
+    <ClCompile Include="StaticText.cpp" />
+    <ClCompile Include="TextBox.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Button.h" />
+    <ClInclude Include="include\CheckButton.h" />
     <ClInclude Include="include\Console.h" />
+    <ClInclude Include="include\DialogBox.h" />
+    <ClInclude Include="include\EditableTextBox.h" />
+    <ClInclude Include="include\GuiElement.h" />
+    <ClInclude Include="include\GUIManager.h" />
+    <ClInclude Include="include\GUIWindows.h" />
+    <ClInclude Include="include\Image.h" />
+    <ClInclude Include="include\PointerMouse.h" />
+    <ClInclude Include="include\ProgressBar.h" />
+    <ClInclude Include="include\RadioBox.h" />
+    <ClInclude Include="include\Slider.h" />
+    <ClInclude Include="include\StaticText.h" />
+    <ClInclude Include="include\TextBox.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

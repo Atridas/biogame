@@ -11,7 +11,7 @@ class CCamera;
 class CTexture;
 //-------------------------------------------------------------------
 
-typedef enum eTypeAlignment { CENTER, UPPER_LEFT, UPPER_RIGHT, LOWER_LEFT, LOWER_RIGHT };
+typedef enum ETypeAlignment { CENTER, UPPER_LEFT, UPPER_RIGHT, LOWER_LEFT, LOWER_RIGHT };
 
 
 
@@ -51,10 +51,12 @@ public:
   //-------------------------------------------------------------------
 
   //----Render Functions ----------------------------------------------
-  void CalculateAlignment (uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, Vect2i& _vfinalPos);
-  void DrawQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, CColor _Color);
-  void DrawTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, CTexture* _pTexture = 0);
-  void DrawColoredTexturedQuad2D(const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, CColor _Color, CTexture* _pTexture = 0);
+  void CalculateAlignment (uint32 _uiW, uint32 _uiH, ETypeAlignment _Alignment, Vect2i& _vfinalPos);
+
+  //TODO FLIP!!!!!!!!!!!!
+  void DrawQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, ETypeAlignment _Alignment, CColor _Color, ETypeFlip _bFlip = NONE_FLIP);
+  void DrawTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, ETypeAlignment _Alignment, CTexture* _pTexture = 0, ETypeFlip _bFlip = NONE_FLIP);
+  void DrawColoredTexturedQuad2D(const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, ETypeAlignment _Alignment, CColor _Color, CTexture* _pTexture = 0, ETypeFlip _bFlip = NONE_FLIP);
   void DrawRectangle2D(const Vect2i& pos, uint32 w, uint32 h, CColor& backGroundColor,  uint32 edge_w, uint32 edge_h, CColor& edgeColor);
   //-------------------------------------------------------------------
 

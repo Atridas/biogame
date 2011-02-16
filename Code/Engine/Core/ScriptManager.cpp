@@ -28,6 +28,9 @@ extern "C"
 
 #include "Console.h"
 
+#include "GUIManager.h"
+
+
 using namespace luabind;
 
 #define REGISTER_LUA_FUNCTION(LUA_STATE,FunctionName,AddrFunction) {luabind::module(LUA_STATE) [ luabind::def(FunctionName,AddrFunction) ];}
@@ -190,6 +193,112 @@ void CloseConsole()
   CORE->GetConsole()->SetActive(false);
 }
 
+
+
+
+void CScriptManager::RegisterGUI() {
+  module(m_pLS)
+    [
+      // registramos la clase CGUIManager
+			class_<CGUIManager>("CGUIManager")
+			
+			// registramos su constructor
+      .def(constructor<const Vect2i&>())
+
+      // registramos sus funciones publicas
+			//.def(	CScriptRegister::PushFunctionName(AUTO_COMPLETE), &CScriptRegister::AutoComplete)
+		
+			//.def(	CScriptRegister::PushFunctionName(HELP,"void","void",
+			//			"Muestra todas las funciones de esta clase"),
+			//			&CScriptRegister::Help)
+
+      .def(	"activeWindows",
+						&CGUIManager::ActiveWindows)
+			
+			.def(	"activeWindowsWithEffect", 
+						&CGUIManager::ActiveWindowsWithEffect)
+      
+			.def(	"pushWindows", 
+						&CGUIManager::PushWindows)
+      
+			.def(	"popWindows", 
+						&CGUIManager::PopWindows)
+			
+			.def(	"setScreenResolution",
+						&CGUIManager::SetScreenResolution)
+			
+			.def(	"loadGuiFiles", 
+						&CGUIManager::LoadGuiFiles)
+			
+			.def(	"reloadGui", 
+						&CGUIManager::ReloadGuiFiles)
+			
+			.def(	"setMessageBox", 
+						&CGUIManager::SetMessageBox)
+			
+			.def(	"isVisibleMessage", 
+						&CGUIManager::IsVisibleMessage)
+			
+			.def(	"setVisiblePointerMouse",
+						&CGUIManager::SetVisiblePointerMouse)
+			
+			//-------Funciones para modificar los GuiElements--------------------------		
+			.def(	"setActiveGuiElement", 
+						&CGUIManager::SetActiveGuiElement)
+			
+			.def(	"setVisibleGuiElement", 
+						&CGUIManager::SetVisibleGuiElement)
+			
+			.def(	"getProgressBarValue", 
+						&CGUIManager::GetProgressBarValue)
+			
+			.def(	"setProgressBarValue", 
+						&CGUIManager::SetProgressBarValue)
+			
+			.def(	"nextBlockInRadioBox", 
+						&CGUIManager::NextBlockInRadioBox)
+			
+			.def(	"prevBlockInRadioBox", 
+						&CGUIManager::PrevBlockInRadioBox)
+			
+			.def(	"getButtonCheckInRadioBox", 
+						&CGUIManager::GetButtonCheckInRadioBox)
+			
+			.def(	"setButtonCheckInRadioBox", 
+						&CGUIManager::SetButtonCheckInRadioBox)
+			
+			.def(	"setStateCheckButton", 
+						&CGUIManager::SetStateCheckButton)
+			
+			.def(	"getStateCheckButton", 
+						&CGUIManager::GetStateCheckButton)
+			
+			.def(	"setStateSlider", 
+						&CGUIManager::SetStateSlider)
+			
+			.def(	"getStateSlider", 
+						&CGUIManager::GetStateSlider)
+			
+			.def(	"setLiteralInStaticText", 
+						&CGUIManager::SetLiteralInStaticText)
+			
+			.def(	"setEditableTextBox", 
+						&CGUIManager::SetEditableTextBox)
+			
+			.def(	"getEditableTextBox", 
+						&CGUIManager::GetEditableTextBox)
+			
+			.def(	"setImage", 
+						&CGUIManager::SetImage)
+			
+			.def(	"getImage", 
+						&CGUIManager::GetImage)
+			
+			.def(	"playImage", 
+						&CGUIManager::PlayImage)
+    ];
+}
+
 void CScriptManager::RegisterLUAFunctions()
 {
   lua_register(m_pLS,"_ALERT",Alert);
@@ -282,4 +391,6 @@ void CScriptManager::RegisterLUAFunctions()
     ,class_<CCore, bases<CBaseControl,CSingleton<CCore>>>("CCore")
       //.def("get_light_manager", &CCore::GetLightManager)
     */
+
+  RegisterGUI();
 }

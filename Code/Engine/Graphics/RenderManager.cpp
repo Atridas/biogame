@@ -350,7 +350,7 @@ void CRenderManager::DisableAlphaBlend ()
   m_pD3DDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE );    
 }
 
-void CRenderManager::CalculateAlignment (uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, Vect2i& _vfinalPos)
+void CRenderManager::CalculateAlignment (uint32 _uiW, uint32 _uiH, ETypeAlignment _Alignment, Vect2i& _vfinalPos)
 {
   assert(IsOk());
   switch (_Alignment)
@@ -675,7 +675,7 @@ void CRenderManager::DrawGrid(float Size, CColor Color, int GridX, int32 GridZ )
 	}
 
 }
-void CRenderManager::DrawQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, CColor _Color)
+void CRenderManager::DrawQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, ETypeAlignment _Alignment, CColor _Color, ETypeFlip _bFlip)
 {
   assert(IsOk());
   DWORD l_Color = _Color.GetUint32Argb(); //si no va, usar: D3DCOLOR_COLORVALUE(_Color.GetRed(), _Color.GetGreen(), _Color.GetBlue(), _Color.GetAlpha())
@@ -704,7 +704,7 @@ void CRenderManager::DrawQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, 
   m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST,0, 4, 2, _usIndices, D3DFMT_INDEX16, l_Vtx, sizeof( SDIFFUSESCREENVERTEX ) );
 }
 
-void CRenderManager::DrawTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, CTexture* _pTexture)
+void CRenderManager::DrawTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, ETypeAlignment _Alignment, CTexture* _pTexture, ETypeFlip _bFlip)
 {
   assert(IsOk());
   Vect2i l_vFinalPos = _vPos;
@@ -733,7 +733,7 @@ void CRenderManager::DrawTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint3
   m_pD3DDevice->DrawIndexedPrimitiveUP( D3DPT_TRIANGLELIST,0, 4, 2, _usIndices, D3DFMT_INDEX16, l_Vtx, sizeof( STEXTUREDSCREENVERTEX ) );
 }
 
-void CRenderManager::DrawColoredTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, eTypeAlignment _Alignment, CColor _Color, CTexture* _pTexture)
+void CRenderManager::DrawColoredTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, ETypeAlignment _Alignment, CColor _Color, CTexture* _pTexture, ETypeFlip _bFlip)
 {
   assert(IsOk());
   DWORD l_Color = _Color.GetUint32Argb(); //si no va, usar: D3DCOLOR_COLORVALUE(_Color.GetRed(), _Color.GetGreen(), _Color.GetBlue(), _Color.GetAlpha())
@@ -793,7 +793,7 @@ void CRenderManager::GetRay (const Vect2i& mousePos, Vect3f& posRay, Vect3f& dir
   dirRay.z = ray_dir.z;
 }
 
-void CRenderManager::DrawRectangle2D (const Vect2i& pos, uint32 w, uint32 h, CColor& backGroundColor, uint32 edge_w, uint32 edge_h, CColor& edgeColor )
+void CRenderManager::DrawRectangle2D (const Vect2i& pos, uint32 w, uint32 h, CColor& backGroundColor, uint32 edge_w, uint32 edge_h, CColor& edgeColor)
 {
     //Draw background quad2D:
     DrawQuad2D(pos, w, h, UPPER_LEFT, backGroundColor);
