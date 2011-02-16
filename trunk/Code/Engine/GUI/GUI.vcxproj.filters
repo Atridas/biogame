@@ -7,15 +7,141 @@
     <Filter Include="Consola">
       <UniqueIdentifier>{dd0cb340-3b91-4650-b074-b0df85820c14}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GUIElement">
+      <UniqueIdentifier>{7563d967-6e1e-41fc-92d7-f5bb431de8ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUIElement\Button">
+      <UniqueIdentifier>{41320e14-6caa-4011-bf61-757d9f19ecd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUIElement\CheckButton">
+      <UniqueIdentifier>{8b173490-4d8d-4fbc-8a31-7b545428b054}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUIElement\DialogBox">
+      <UniqueIdentifier>{2dfe3368-1c9f-4012-925b-72f68b665813}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUIElement\EditableTextBox">
+      <UniqueIdentifier>{360bfbeb-8316-4088-971a-49a023f57218}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUIElement\Image">
+      <UniqueIdentifier>{78c59116-0aa9-496d-a092-3f2f22b452c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUIElement\PointerMouse">
+      <UniqueIdentifier>{4a7843d6-be65-4c43-92bf-b96639511340}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUIElement\ProgressBar">
+      <UniqueIdentifier>{b3e3e313-9220-4b71-a7ac-571081b04eb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUIElement\RadioBox">
+      <UniqueIdentifier>{a0f76395-983f-4645-b8f1-a504b3b898bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUIElement\Slider">
+      <UniqueIdentifier>{8a3711fc-40b3-4616-9b41-694f0bda2747}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUIElement\StaticText">
+      <UniqueIdentifier>{f02dfaf2-2e37-45f9-ac60-089a5f34e0b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUIElement\TextBox">
+      <UniqueIdentifier>{9144454d-9e52-4f73-b326-4421d0e8cdc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUIWindows">
+      <UniqueIdentifier>{61d1a55d-b0a0-430a-99ab-8b399f8116d3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUIManager">
+      <UniqueIdentifier>{a0bc61f2-8494-43bf-9dc5-9b4fa9d3a33c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Console.cpp">
       <Filter>Consola</Filter>
     </ClCompile>
+    <ClCompile Include="GUIManager.cpp">
+      <Filter>GUIManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GuiElement.cpp">
+      <Filter>GUIElement</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>GUIElement\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckButton.cpp">
+      <Filter>GUIElement\CheckButton</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogBox.cpp">
+      <Filter>GUIElement\DialogBox</Filter>
+    </ClCompile>
+    <ClCompile Include="EditableTextBox.cpp">
+      <Filter>GUIElement\EditableTextBox</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>GUIElement\Image</Filter>
+    </ClCompile>
+    <ClCompile Include="PointerMouse.cpp">
+      <Filter>GUIElement\PointerMouse</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgressBar.cpp">
+      <Filter>GUIElement\ProgressBar</Filter>
+    </ClCompile>
+    <ClCompile Include="RadioBox.cpp">
+      <Filter>GUIElement\RadioBox</Filter>
+    </ClCompile>
+    <ClCompile Include="Slider.cpp">
+      <Filter>GUIElement\Slider</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticText.cpp">
+      <Filter>GUIElement\StaticText</Filter>
+    </ClCompile>
+    <ClCompile Include="TextBox.cpp">
+      <Filter>GUIElement\TextBox</Filter>
+    </ClCompile>
+    <ClCompile Include="GUIWindows.cpp">
+      <Filter>GUIWindows</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Console.h">
       <Filter>Consola</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GUIManager.h">
+      <Filter>GUIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GuiElement.h">
+      <Filter>GUIElement</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Button.h">
+      <Filter>GUIElement\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CheckButton.h">
+      <Filter>GUIElement\CheckButton</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DialogBox.h">
+      <Filter>GUIElement\DialogBox</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EditableTextBox.h">
+      <Filter>GUIElement\EditableTextBox</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Image.h">
+      <Filter>GUIElement\Image</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PointerMouse.h">
+      <Filter>GUIElement\PointerMouse</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ProgressBar.h">
+      <Filter>GUIElement\ProgressBar</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RadioBox.h">
+      <Filter>GUIElement\RadioBox</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Slider.h">
+      <Filter>GUIElement\Slider</Filter>
+    </ClInclude>
+    <ClInclude Include="include\StaticText.h">
+      <Filter>GUIElement\StaticText</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TextBox.h">
+      <Filter>GUIElement\TextBox</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GUIWindows.h">
+      <Filter>GUIWindows</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

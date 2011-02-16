@@ -24,12 +24,14 @@ public:
   void Load(const string& _szFileName);
   void Reload();
   lua_State * GetLuaState() const {return m_pLS;}
-  void RegisterLUAFunctions();
 
 protected:
   void Release();
 
 private:
+  void RegisterLUAFunctions();
+  void RegisterGUI();
+
   lua_State*      m_pLS;
   string          m_szFileName;
   vector<string>  m_vLuaScripts;
