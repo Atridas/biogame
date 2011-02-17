@@ -297,6 +297,51 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
         LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"ScriptManager\". Usant valors per defecte.");
       }
     }
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Log Render ----------------------------------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
+    {
+      CXMLTreeNode l_TreeLogRender = l_TreeConfig["LogRender"];
+      if(l_TreeLogRender.Exists())
+      {
+        InitParams_.LogRenderParams.vPosition = l_TreeLogRender.GetVect2iProperty("position", InitParams_.LogRenderParams.vPosition);
+
+        LOGGER->AddNewLog(ELL_INFORMATION, "\tLogRender (%d, %d)",InitParams_.LogRenderParams.vPosition.x,InitParams_.LogRenderParams.vPosition.y);
+      } else {
+        LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"LogRender\". Usant valors per defecte.");
+      }
+    }
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
+    //GUI Manager ----------------------------------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
+    {
+      CXMLTreeNode l_TreeGUIManager = l_TreeConfig["GUIManager"];
+      if(l_TreeGUIManager.Exists())
+      {
+        const char* l_pcFile = l_TreeGUIManager.GetPszProperty("xml", 0);
+
+        if(l_pcFile == 0)
+        {
+          LOGGER->AddNewLog(ELL_WARNING, "\tNo hi ha fitxer base del GUI Manager.");
+        } else {
+          InitParams_.GUIManagerParams.szXML = l_pcFile;
+          LOGGER->AddNewLog(ELL_INFORMATION, "\tGUI Manager base \"%s\"",l_pcFile);
+        }
+
+        const char* l_pcWindow = l_TreeGUIManager.GetPszProperty("start", 0);
+
+        if(l_pcFile == 0)
+        {
+          LOGGER->AddNewLog(ELL_WARNING, "\tNo hi ha finestra inicial del GUI Manager.");
+        } else {
+          InitParams_.GUIManagerParams.szInitWindow = l_pcWindow;
+          LOGGER->AddNewLog(ELL_INFORMATION, "\tGUI Manager finestra inicial \"%s\"",l_pcWindow);
+        }
+
+      } else {
+        LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"GUIManager\". Usant valors per defecte.");
+      }
+    }
   }
   
   LOGGER->AddNewLog(ELL_INFORMATION, "Fi carregar configuració");

@@ -44,6 +44,10 @@
   <SceneEffectManager file="Data/XML/SceneEffects.xml"/>
   
   <ScriptManager file="Data/XML/Lua.xml"/>
+
+  <LogRender position="10 0"/>
+
+  <GUIManager xml="Data/XML/GUI.xml" start="Game.xml"/>
     
   <!--<AnimatedModelManager file="Data/XML/AnimatedModels.xml">
   </AnimatedModelManager>-->

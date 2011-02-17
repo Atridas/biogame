@@ -19,6 +19,7 @@
 #include <ScriptManager.h>
 #include <LogRender.h>
 #include <Console.h>
+#include <GUIManager.h>
 //#include <AnimatedModelManager.h>
 
 bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
@@ -41,6 +42,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pScriptManager            = new CScriptManager();
   m_pLogRender                = new CLogRender();
   m_pConsole                  = new CConsole();
+  m_pGUIManager               = new CGUIManager(_InitParams.RenderManagerParams.v2iResolution);
 
   m_pRenderManager->Init(hWnd,_InitParams.RenderManagerParams);
 
@@ -75,8 +77,10 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pSceneEffectManager->Load(_InitParams.SceneEffectParams.szFile);
   m_pScriptManager->Initialize();
   m_pScriptManager->Load(_InitParams.ScriptManagerParams.szFile);
-  m_pLogRender->SetWindowsPos(Vect2i(10,0));
+  m_pLogRender->SetWindowsPos(_InitParams.LogRenderParams.vPosition);
   m_pConsole->Init(m_pScriptManager);
+  m_pGUIManager->Init(_InitParams.GUIManagerParams.szXML);
+  m_pGUIManager->ActiveWindows(_InitParams.GUIManagerParams.szInitWindow);
   return IsOk();
 }
 
@@ -86,6 +90,7 @@ void CCore::Release()
   
 
   //delete a l'inrevès de com s'ha fet l'init
+  CHECKED_DELETE(m_pGUIManager);
   CHECKED_DELETE(m_pConsole);
   CHECKED_DELETE(m_pLogRender)
   CHECKED_DELETE(m_pScriptManager)

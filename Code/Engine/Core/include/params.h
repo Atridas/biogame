@@ -167,6 +167,28 @@ struct SEffectManagerParams
   {};
 };
 
+struct SLogRenderParams
+{
+  Vect2i vPosition;
+
+  //Default Params
+  SLogRenderParams():
+    vPosition(10,0)
+  {};
+};
+
+struct SGUIManagerParams
+{
+  string szXML;
+  string szInitWindow;
+
+  //Default Params
+  SGUIManagerParams():
+    szXML("Data/XML/GUI.xml"),
+    szInitWindow("Main.xml")
+  {};
+};
+
 /**
  * Paràmetres d'inicialització del procés.
  * Estructura que conté els paràmetres de configuració que es poden trobar al config del procés.
@@ -198,6 +220,8 @@ struct SInitParams
   SLightsManagerParams            LightsManagerParams;
   SSceneEffectManagerParams       SceneEffectParams;
   SScriptManagerParams            ScriptManagerParams;
+  SLogRenderParams                LogRenderParams;
+  SGUIManagerParams               GUIManagerParams;
 };
 
 void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML);

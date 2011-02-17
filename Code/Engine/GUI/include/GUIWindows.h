@@ -53,15 +53,15 @@ public:
 private:
 	void	IsKeyDown						(CInputManager* intputManager);	
 
-	void	LoadButton					(CButton* button, CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm);
-	void	LoadCheckButton			(CCheckButton* checkButton, CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm);
-	void	LoadSlider					(CSlider* slider, CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm);
-	void	LoadDialogBox				(CDialogBox* dialogBox, CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm);
-	void	LoadEditableTextBox (CEditableTextBox* editableTextBox, CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm);
-	void	LoadRadioBox				(CRadioBox* radioBox, CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm);
-	void	_LoadImage					(CImage* image, CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm);
-	void	LoadProgressBar			(CProgressBar* progressBar, CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm);
-	void	LoadStaticText			(CStaticText* staticText, CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm);
+	CButton*	        LoadButton					( CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm);
+	CCheckButton*	    LoadCheckButton			( CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm);
+	CSlider*	        LoadSlider					( CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm);
+	CDialogBox*	      LoadDialogBox				( CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm);
+	CEditableTextBox*	LoadEditableTextBox ( CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm);
+	CRadioBox*        LoadRadioBox				( CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm);
+	CImage*	          _LoadImage					( CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm);
+	CProgressBar*	    LoadProgressBar			( CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm);
+	CStaticText*	    LoadStaticText			( CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm);
 
 private:
 	std::vector<CGuiElement*>	m_GuiElementsVector;

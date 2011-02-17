@@ -11,6 +11,7 @@
 #include <Utils/Timer.h>
 #include <ActionToInput.h>
 #include <Console.h>
+#include <GUIManager.h>
 
 #include "HDRPipeline.h"
 
@@ -58,14 +59,7 @@ void CEngine::Update()
 	if(m_pProcess != NULL)
 		m_pProcess->Update(l_fElapsedTime);
 
-  CLogRender* l_pLR = m_pCore->GetLogRender();
-  if(l_pLR)
-    l_pLR->Update(l_fElapsedTime);
-
-  CConsole* l_pC = m_pCore->GetConsole();
-  if(l_pC)
-    l_pC->Update(l_fElapsedTime);
-
+  UpdateSystems(l_fElapsedTime);
 }
 
 void CEngine::Render()
@@ -98,13 +92,7 @@ void CEngine::RenderHDR(CRenderManager* _pRM, CProcess* _pProcess)
   _pProcess->PostRender(_pRM);
 	_pProcess->DebugInformation();
   
-  CLogRender* l_pLR = m_pCore->GetLogRender();
-  if(l_pLR)
-    l_pLR->Render(_pRM,m_pCore->GetFontManager());
-
-  CConsole* l_pC = m_pCore->GetConsole();
-  if(l_pC)
-    l_pC->Render(_pRM,m_pCore->GetFontManager());
+  CEngine::RenderSystems(_pRM);
 
 	_pRM->EndRendering();
 }
@@ -118,6 +106,14 @@ void CEngine::RenderNoHDR(CRenderManager* _pRM, CProcess* _pProcess)
   _pProcess->PostRender(_pRM);
 	_pProcess->DebugInformation();
 
+  CEngine::RenderSystems(_pRM);
+
+	_pRM->EndRendering();
+}
+
+
+void CEngine::RenderSystems(CRenderManager* _pRM)
+{
   CLogRender* l_pLR = m_pCore->GetLogRender();
   if(l_pLR)
     l_pLR->Render(_pRM,m_pCore->GetFontManager());
@@ -126,7 +122,24 @@ void CEngine::RenderNoHDR(CRenderManager* _pRM, CProcess* _pProcess)
   if(l_pC)
     l_pC->Render(_pRM,m_pCore->GetFontManager());
 
-	_pRM->EndRendering();
+  CGUIManager* l_pGUI = m_pCore->GetGUIManager();
+  if(l_pGUI)
+    l_pGUI->Render(_pRM,m_pCore->GetFontManager());
+}
+
+void CEngine::UpdateSystems(float _fElapsedTime)
+{
+  CLogRender* l_pLR = m_pCore->GetLogRender();
+  if(l_pLR)
+    l_pLR->Update(_fElapsedTime);
+
+  CConsole* l_pC = m_pCore->GetConsole();
+  if(l_pC)
+    l_pC->Update(_fElapsedTime);
+
+  CGUIManager* l_pGUI = m_pCore->GetGUIManager();
+  if(l_pGUI)
+    l_pGUI->Update(_fElapsedTime);
 }
 
 void CEngine::SetProcess(CProcess* _pProcess)
