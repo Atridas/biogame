@@ -575,6 +575,34 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
     //CORE->GetLightManager()->SetLightsVisible(m_bVisibleLights);
   }
 
+  if(strcmp(_pcAction, "ShootBOT") == 0)
+  {
+    if (m_iMode == MODE_ESCENA)
+    {
+      CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("bot");
+      //m_pObjectBot->
+      if (l_pAnim != 0)
+      {
+        l_pAnim->GetAnimatedInstanceModel()->ExecuteAction(4,1);
+      }
+    }
+    //CORE->GetLightManager()->SetLightsVisible(m_bVisibleLights);
+  }
+
+  if(strcmp(_pcAction, "HurtBOT") == 0)
+  {
+    if (m_iMode == MODE_ESCENA)
+    {
+      CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("bot");
+      //m_pObjectBot->
+      if (l_pAnim != 0)
+      {
+        l_pAnim->GetAnimatedInstanceModel()->ExecuteAction(3,1);
+      }
+    }
+    //CORE->GetLightManager()->SetLightsVisible(m_bVisibleLights);
+  }
+
   return false;
 }
 
