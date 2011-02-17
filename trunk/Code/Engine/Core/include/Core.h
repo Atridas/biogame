@@ -24,6 +24,7 @@ class CSceneEffectManager;
 class CScriptManager;
 class CLogRender;
 class CConsole;
+class CGUIManager;
 // --------------------------
 
 /**
@@ -43,7 +44,8 @@ public:
                       CCore               (void): m_pRenderManager(0),m_pLanguageManager(0),m_pFontManager(0),m_pInputManager(0),
                                                   m_pActionToInput(0),m_pRenderableObjectsManager(0),m_pLightManager(0),
                                                   m_pSceneEffectManager(0), m_pTimer(0), m_pScriptManager(0),m_pTextureManager(0),
-                                                  m_pStaticMeshManager(0),m_pAnimatedModelManager(0),m_pEffectManager(0)
+                                                  m_pStaticMeshManager(0),m_pAnimatedModelManager(0),m_pEffectManager(0),
+                                                  m_pGUIManager(0)
                                                   {};
   /**
    * Destructor.
@@ -130,6 +132,8 @@ public:
 
   CConsole*           GetConsole            () const                        {return m_pConsole;};
 
+  CGUIManager*        GetGUIManager         () const                        {return m_pGUIManager;};
+
 private:
 
   /**
@@ -193,5 +197,7 @@ private:
   CLogRender*                 m_pLogRender;
 
   CConsole*				            m_pConsole;
+
+  CGUIManager*                m_pGUIManager;
 };
 

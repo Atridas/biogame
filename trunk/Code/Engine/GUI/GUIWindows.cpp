@@ -256,56 +256,47 @@ bool CGuiWindows::LoadXML( const std::string &xmlGuiFile, const Vect2i& screenRe
 				std::string tagName = pNewNode.GetName();
 				if (tagName.compare("Button")==0)
 				{
-					CButton* newButton = NULL;
-					LoadButton(newButton,pNewNode,screenResolution, textureM);
+					CButton* newButton = LoadButton(pNewNode,screenResolution, textureM);
 					AddGuiElement(newButton);
 				}
 				else if (tagName.compare("CheckButton")==0)
 				{
-					CCheckButton* new_checkButton = NULL;
-					LoadCheckButton(new_checkButton,pNewNode,screenResolution, textureM);									
+					CCheckButton* new_checkButton = LoadCheckButton(pNewNode,screenResolution, textureM);									
 					AddGuiElement(new_checkButton);
 				}
 				else if (tagName.compare("Slider")==0)
 				{
-					CSlider* new_slider = NULL;
-					LoadSlider(new_slider,pNewNode,screenResolution, textureM);					
+					CSlider* new_slider = LoadSlider(pNewNode,screenResolution, textureM);					
 					AddGuiElement(new_slider);
 				}
 				else if (tagName.compare("DialogBox")==0)
 				{
-					CDialogBox* new_dialogBox = NULL;
-					LoadDialogBox(new_dialogBox,pNewNode,screenResolution, textureM);					
+					CDialogBox* new_dialogBox = LoadDialogBox(pNewNode,screenResolution, textureM);					
 					AddGuiElement(new_dialogBox);
 				}
 				else if (tagName.compare("EditableTextBox")==0)
 				{
-					CEditableTextBox* new_editableTextBox = NULL;
-					LoadEditableTextBox(new_editableTextBox,pNewNode,screenResolution, textureM);					
+					CEditableTextBox* new_editableTextBox = LoadEditableTextBox(pNewNode,screenResolution, textureM);					
 					AddGuiElement(new_editableTextBox);
 				}
 				else if (tagName.compare("RadioBox")==0)
 				{
-					CRadioBox* new_radioBox = NULL;
-					LoadRadioBox(new_radioBox,pNewNode,screenResolution, textureM);		
+					CRadioBox* new_radioBox = LoadRadioBox(pNewNode,screenResolution, textureM);		
 					AddGuiElement(new_radioBox);
 				}
 				else if (tagName.compare("Image")==0)
 				{
-					CImage* new_image = NULL;
-					_LoadImage(new_image,pNewNode,screenResolution, textureM);		
+					CImage* new_image = _LoadImage(pNewNode,screenResolution, textureM);		
 					AddGuiElement(new_image);
 				}
 				else if (tagName.compare("ProgressBar")==0)
 				{
-					CProgressBar* new_progressBar = NULL;
-					LoadProgressBar(new_progressBar,pNewNode,screenResolution, textureM);		
+					CProgressBar* new_progressBar = LoadProgressBar(pNewNode,screenResolution, textureM);		
 					AddGuiElement(new_progressBar);
 				} 
 				else if (tagName.compare("StaticText")==0)
 				{
-					CStaticText* new_staticText = NULL;
-					LoadStaticText(new_staticText,pNewNode,screenResolution, textureM);		
+					CStaticText* new_staticText = LoadStaticText(pNewNode,screenResolution, textureM);		
 					AddGuiElement(new_staticText);
 				}
 				else if (tagName.compare("KeyBoard_Back")==0)
@@ -314,7 +305,7 @@ bool CGuiWindows::LoadXML( const std::string &xmlGuiFile, const Vect2i& screenRe
 					m_sLuaCode_OnKeyDown	= pNewNode.GetPszProperty("OnKeyDown", "");
 					m_uInputKeyDown				= pNewNode.GetIntProperty("input", 0);
 				}
-				else
+        else if(!pNewNode.IsComment())
 				{
 					//Warning
 					LOGGER->AddNewLog(ELL_WARNING, "Windows:: No se reconoce el tag %s del fichero %s", tagName.c_str(), xmlGuiFile.c_str());
@@ -347,7 +338,7 @@ bool CGuiWindows::LoadXML( const std::string &xmlGuiFile, const Vect2i& screenRe
 }
 
 
-void CGuiWindows::LoadButton (CButton* button, CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm)
+CButton* CGuiWindows::LoadButton ( CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm)
 {
 	//<Button	name="play"	posx="0" posy="0" height="10" width="10" visible="true" activated="true" 
 	// texture_normal="blabla" texture_over="bla" texture_clicked="bla" texture_deactivated="bla"
@@ -378,14 +369,16 @@ void CGuiWindows::LoadButton (CButton* button, CXMLTreeNode& pNewNode, const Vec
 	uint32 widthOffset	= (uint32) (screenResolution.x	* 0.01f * widthOffsetPercent );
 	uint32 heightOffset	= (uint32) (screenResolution.y	* 0.01f * heightOffsetPercent );
 
-	button	= new CButton(screenResolution.y,screenResolution.x, h, w, Vect2f(posx,posy), l_literal, heightOffset, widthOffset, visible, activated);
+	CButton* button	= new CButton(screenResolution.y,screenResolution.x, h, w, Vect2f(posx,posy), l_literal, heightOffset, widthOffset, visible, activated);
 	button->SetName(name);
 	button->SetTextures(normal,over,clicked,deactivated);
 	button->SetOnClickedAction(OnClickedAction);
 	button->SetOnOverAction(OnOverAction);
+
+  return button;
 }
 
-void CGuiWindows::LoadCheckButton (CCheckButton* checkButton, CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm)
+CCheckButton* CGuiWindows::LoadCheckButton ( CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm)
 {
 	//<CheckButton name="debug_thps" posx="0" posy="2" height="10" width="10" visible="true" active="true" isOn="true"
 	// texture_on="blabla" texture_off="bla" texture_deactivated"bla"
@@ -420,7 +413,7 @@ void CGuiWindows::LoadCheckButton (CCheckButton* checkButton, CXMLTreeNode& pNew
 	uint32 widthOffset	= (uint32) (screenResolution.x	* 0.01f * widthOffsetPercent );
 	uint32 heightOffset	= (uint32) (screenResolution.y	* 0.01f * heightOffsetPercent );
 
-	checkButton = new CCheckButton(screenResolution.y,screenResolution.x, h, w, Vect2f(posx,posy), isOn, l_literal, heightOffset, widthOffset, visible, activated);
+	CCheckButton* checkButton = new CCheckButton(screenResolution.y,screenResolution.x, h, w, Vect2f(posx,posy), isOn, l_literal, heightOffset, widthOffset, visible, activated);
 	checkButton->SetName(name);
 	checkButton->SetTextures(on, off, deactivated);
 	checkButton->SetOnCheckOnAction(OnCheckOn);
@@ -428,9 +421,11 @@ void CGuiWindows::LoadCheckButton (CCheckButton* checkButton, CXMLTreeNode& pNew
 	checkButton->SetOnLoadValueAction(OnLoadValue);
 	checkButton->SetOnSaveValueAction(OnSaveValue);
 	checkButton->SetOnOverAction(OnOverButton);
+
+  return checkButton;
 }
 
-void CGuiWindows::LoadSlider (CSlider* slider, CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm)
+CSlider* CGuiWindows::LoadSlider ( CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm)
 {
 	//<Slider	name="debug_fps" posx="0" posy="2" height="10" width="10" visible="true" active="true" value="0.5" buttonH="10" buttonW="10"
 	// button_normal="blabla" button_over="bla" button_clicked"bla" button_deactivated="bla" quad="bla"
@@ -469,7 +464,7 @@ void CGuiWindows::LoadSlider (CSlider* slider, CXMLTreeNode& pNewNode, const Vec
 	uint32 widthOffset	= (uint32) (screenResolution.x	* 0.01f * widthOffsetPercent );
 	uint32 heightOffset	= (uint32) (screenResolution.y	* 0.01f * heightOffsetPercent );
 
-	slider = new CSlider(	screenResolution.y, screenResolution.x, h, w, Vect2f(posx,posy), buttonW, buttonH, value, 
+	CSlider* slider = new CSlider(	screenResolution.y, screenResolution.x, h, w, Vect2f(posx,posy), buttonW, buttonH, value, 
 												l_literal, heightOffset, widthOffset, visible, activated);
 	slider->SetName(name);
 	slider->SetButtonTextures(normal, over, clicked, deac);
@@ -479,9 +474,11 @@ void CGuiWindows::LoadSlider (CSlider* slider, CXMLTreeNode& pNewNode, const Vec
 	slider->SetOnOverAction(OnOverAction);
 	slider->SetOnLoadValueAction(OnLoadValue);
 	slider->SetOnSaveValueAction(OnSaveValue);
+
+  return slider;
 }
 
-void	CGuiWindows::LoadDialogBox			(CDialogBox* dialogBox, CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm)
+CDialogBox*	CGuiWindows::LoadDialogBox			(CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm)
 {
 	//<DialogBox name="debug_fps" posx="0" posy="2" height="10" width="10" visible="true" active="true" buttonH="10" buttonW="10"
 	// buttonClose_normal="blabla" buttonClose_over="bla" buttonClose_clicked"bla"  buttonClose_deactivated"bla" buttonMove_normal="blabla" buttonMove_over="bla"
@@ -522,15 +519,17 @@ void	CGuiWindows::LoadDialogBox			(CDialogBox* dialogBox, CXMLTreeNode& pNewNode
 	uint32 widthOffset	= (uint32) (screenResolution.x	* 0.01f * widthOffsetPercent );
 	uint32 heightOffset	= (uint32) (screenResolution.y	* 0.01f * heightOffsetPercent );
 
-	dialogBox = new CDialogBox(	screenResolution.y,screenResolution.x, h, w, Vect2f(posx,posy), buttonW, buttonH, l_literal, 
-															heightOffset, widthOffset, visible, activated);
+	CDialogBox* dialogBox = new CDialogBox(	screenResolution.y,screenResolution.x, h, w, Vect2f(posx,posy), buttonW, buttonH, l_literal, 
+															            heightOffset, widthOffset, visible, activated);
 	dialogBox->SetName(name);
 	dialogBox->SetCloseButtonTextures(Close_normal, Close_over, Close_clicked, Close_deactivated);
 	dialogBox->SetMoveButtonTextures(Move_normal, Move_over, Move_clicked, Move_deactivated);
 	dialogBox->SetDialogTexture(back);
+
+  return dialogBox;
 }
 
-void	CGuiWindows::LoadEditableTextBox (CEditableTextBox* editableTextBox, CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm)
+CEditableTextBox*	CGuiWindows::LoadEditableTextBox (CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm)
 {
 	//<EditableTextBox name="debug_fps" posx="0" posy="2" height="10" width="10" visible="true" active="true" 
 	// texture_quad="blabla" id_font="0" color_font_r="0" color_font_g="0" color_font_b="0"
@@ -561,18 +560,20 @@ void	CGuiWindows::LoadEditableTextBox (CEditableTextBox* editableTextBox, CXMLTr
 
 	CTexture* quad_texture	= tm->GetResource(quad);
 
-	editableTextBox = new CEditableTextBox(	screenResolution.y,screenResolution.x,h, w, Vect2f(posx,posy),
-																					CColor(color_font_r,color_font_g,color_font_b),idFont, l_literal,
-																					heightOffset, widthOffset, visible, activated);
+	CEditableTextBox* editableTextBox = new CEditableTextBox(	screenResolution.y,screenResolution.x,h, w, Vect2f(posx,posy),
+																					                  CColor(color_font_r,color_font_g,color_font_b),idFont, l_literal,
+																					                  heightOffset, widthOffset, visible, activated);
 	editableTextBox->SetName(name);
 	editableTextBox->SetBackGroundTexture(quad_texture);
 	editableTextBox->SetBuffer(buffer);
 	editableTextBox->SetOnLoadValueAction(OnSaveValue);
 	editableTextBox->SetOnSaveValueAction(OnLoadValue);
+
+  return editableTextBox;
 }
 
 
-void	CGuiWindows::LoadRadioBox(CRadioBox* radioBox, CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm)
+CRadioBox*	CGuiWindows::LoadRadioBox(CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm)
 {
 	//<RadioBox name="pepito" posx="0" posy="2" height="10" width="10" default_checkButton="bla" visible="true" active="true" texture_back=""
 	// columns="3" rows="3" OnCheckOn="blabla" OnCheckOff="blabla" OnOverButton="blabla"
@@ -606,8 +607,8 @@ void	CGuiWindows::LoadRadioBox(CRadioBox* radioBox, CXMLTreeNode& pNewNode, cons
 	uint32 widthOffset	= (uint32) (screenResolution.x	* 0.01f * widthOffsetPercent );
 	uint32 heightOffset	= (uint32) (screenResolution.y	* 0.01f * heightOffsetPercent );
 
-	radioBox = new CRadioBox(	screenResolution.y,screenResolution.x,h, w, Vect2f(posx,posy), columns, rows, default_checkButton, 
-														l_literal, heightOffset, widthOffset, visible, activated);
+	CRadioBox* radioBox = new CRadioBox(	screenResolution.y,screenResolution.x,h, w, Vect2f(posx,posy), columns, rows, default_checkButton, 
+												            		l_literal, heightOffset, widthOffset, visible, activated);
 	if (texture_back!="")
 	{
 		CTexture* quad	= tm->GetResource(texture_back);
@@ -635,9 +636,11 @@ void	CGuiWindows::LoadRadioBox(CRadioBox* radioBox, CXMLTreeNode& pNewNode, cons
 			radioBox->SetCheckButton(name, texture_on, texture_off, texture_deactivated);
 		}
 	}
+
+  return radioBox;
 }
 
-void	CGuiWindows::_LoadImage(CImage* image, CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm)
+CImage* CGuiWindows::_LoadImage(CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm)
 {
 	//<Image	name="imageRoomSelected_gameserver2" posx="35" posy="20" height="40" width="30" visible="true" active="true" 
 	//default="q3dm1"	isAnimated="true", time="0" loop="true" OnSaveValue="blabla"  OnLoadValue="blabla"  Literal="blabla"
@@ -665,8 +668,8 @@ void	CGuiWindows::_LoadImage(CImage* image, CXMLTreeNode& pNewNode, const Vect2i
 	uint32 widthOffset	= (uint32) (screenResolution.x	* 0.01f * widthOffsetPercent );
 	uint32 heightOffset	= (uint32) (screenResolution.y	* 0.01f * heightOffsetPercent );
 
-	image = new CImage(	screenResolution.y,screenResolution.x, h, w, Vect2f(posx,posy),
-											l_literal, heightOffset, widthOffset, visible, activated);
+	CImage* image = new CImage(	screenResolution.y,screenResolution.x, h, w, Vect2f(posx,posy),
+										         	l_literal, heightOffset, widthOffset, visible, activated);
 	image->SetName(name);
 	image->SetActiveTexture(default_image);
 
@@ -699,10 +702,11 @@ void	CGuiWindows::_LoadImage(CImage* image, CXMLTreeNode& pNewNode, const Vect2i
 			image->SetTexture(texture_image, name);
 		}
 	}
+  return image;
 }
 
 
-void	CGuiWindows::LoadProgressBar(CProgressBar* progressBar, CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm)
+CProgressBar*	CGuiWindows::LoadProgressBar(CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm)
 {
 	//<ProgressBar name="progressBar1" posx="200" posy="600" height="10" width="100" visible="true" active="true"
 	//	texture_back="hola" texture_bar="hola2"  id_font="0" color_font_r="0" color_font_g="0" color_font_b="0"
@@ -732,15 +736,17 @@ void	CGuiWindows::LoadProgressBar(CProgressBar* progressBar, CXMLTreeNode& pNewN
 	uint32 widthOffset	= (uint32) (screenResolution.x	* 0.01f * widthOffsetPercent );
 	uint32 heightOffset	= (uint32) (screenResolution.y	* 0.01f * heightOffsetPercent );
 
-	progressBar = new CProgressBar(	screenResolution.y,screenResolution.x, h, w, Vect2f(posx, posy), 
+	CProgressBar* progressBar = new CProgressBar(	screenResolution.y,screenResolution.x, h, w, Vect2f(posx, posy), 
 																	l_literal, heightOffset, widthOffset, visible, activated);
 	progressBar->SetName(name);
 	progressBar->SetTextures(back, bar);
 	progressBar->SetFont(idFont, CColor(color_font_r,color_font_g,color_font_b));
 	progressBar->SetOnComplete(OnComplete);
+
+  return progressBar;
 }
 
-void	CGuiWindows::LoadStaticText(CStaticText* staticText, CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm)
+CStaticText*	CGuiWindows::LoadStaticText( CXMLTreeNode& pNewNode, const Vect2i& screenResolution, CTextureManager* tm)
 {
 	//<StaticText name="pepito" posx="0" posy="2" literal="blabla" visible="true" active="true"/>
 	
@@ -753,6 +759,8 @@ void	CGuiWindows::LoadStaticText(CStaticText* staticText, CXMLTreeNode& pNewNode
 	bool 				activated				= pNewNode.GetBoolProperty("active", true);
 	std::string l_literal				= pNewNode.GetPszProperty("Literal", "");
 	
-	staticText = new CStaticText(screenResolution.y, screenResolution.x, h, w, Vect2f(posx,posy), l_literal, visible, activated);
+	CStaticText* staticText = new CStaticText(screenResolution.y, screenResolution.x, h, w, Vect2f(posx,posy), l_literal, visible, activated);
 	staticText->SetName(name);
+
+  return staticText;
 }
