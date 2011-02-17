@@ -153,6 +153,24 @@ void CViewerProcess::Update(float _fElapsedTime)
         //l_Spot->
       }
     }
+
+    
+
+    if (!(CORE->GetInputManager()->IsDown(IDV_KEYBOARD,KEY_W)) &&
+        !(CORE->GetInputManager()->IsDown(IDV_KEYBOARD,KEY_S)) &&
+        !(CORE->GetInputManager()->IsDown(IDV_KEYBOARD,KEY_A)) &&
+        !(CORE->GetInputManager()->IsDown(IDV_KEYBOARD,KEY_D)))
+    {
+    
+      if (m_pObjectBot != 0)
+      {
+        if (((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->GetCurrentCycle() != 0)
+        {
+          ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->ClearCycle(0);
+          ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->BlendCycle("idle",0);
+        }
+      }
+    }
   }else{
 
     m_bVisibleLights = false;
@@ -238,6 +256,17 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
       l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
       l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
       m_pObject->SetPosition(l_vPos);
+
+      if (m_pObjectBot != 0)
+      {
+        if (((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+        {
+          ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->ClearCycle(0);
+          ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->BlendCycle("run",0);
+        }
+      }
+
+
     }
     if(m_iState != 1)
       m_bStateChanged = true;
@@ -256,6 +285,15 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
       l_vPos.x = l_vPos.x - cos(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
       l_vPos.z = l_vPos.z - sin(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
       m_pObject->SetPosition(l_vPos);
+
+      if (m_pObjectBot != 0)
+      {
+        if (((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+        {
+          ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->ClearCycle(0);
+          ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->BlendCycle("run",0);
+        }
+      }
     }
     if(m_iState != 1)
       m_bStateChanged = true;
@@ -274,6 +312,14 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
       l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
       l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
       m_pObject->SetPosition(l_vPos);
+      if (m_pObjectBot != 0)
+      {
+        if (((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+        {
+          ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->ClearCycle(0);
+          ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->BlendCycle("run",0);
+        }
+      }
     }
 
     if(m_iState != 1)
@@ -293,6 +339,14 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
       l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
       l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
       m_pObject->SetPosition(l_vPos);
+      if (m_pObjectBot != 0)
+      {
+        if (((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+        {
+          ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->ClearCycle(0);
+          ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->BlendCycle("run",0);
+        }
+      }
     }
 
     if(m_iState != 1)
@@ -303,6 +357,23 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
     return true;
   }
 
+  //if ((strcmp(_pcAction, "MoveRight") != 0) &&
+  //   (strcmp(_pcAction, "MoveLeft") != 0) &&
+  //   (strcmp(_pcAction, "MoveBack") != 0) &&
+  //   (strcmp(_pcAction, "MoveFwd") != 0))
+  //{
+  //  if (m_iMode == MODE_ESCENA)
+  //  {
+  //    CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("bot");
+  //    //m_pObjectBot->
+  //    if (l_pAnim != 0)
+  //    {
+  //      l_pAnim->GetAnimatedInstanceModel()->ClearCycle(0);
+  //      l_pAnim->GetAnimatedInstanceModel()->BlendCycle("idle",0);
+  //    }
+  //  }
+  //  
+  //}
 
   if(strcmp(_pcAction, "ChangeMode") == 0)
   {
