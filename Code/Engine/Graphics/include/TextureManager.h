@@ -28,6 +28,9 @@ public:
    * Allibera els recursos abans de destruir-se.
   **/
   ~CTextureManager() {Done();};
+
+  void				Init							();
+
   /**
    * Mètode de recàrrega.
    * Aquest mètode recarrega totes les textures enmagatzemades.
@@ -40,6 +43,11 @@ public:
    * @return Textura sol·licitada.
   **/
   virtual CTexture* GetResource(const std::string &_szName);
+  CTexture *	GetDefualtTexture	() {return m_pDefaultTexture;}
+
+private:
+  CTexture*													m_pDefaultTexture;
+
 };
 
 #endif

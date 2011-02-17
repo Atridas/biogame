@@ -232,3 +232,88 @@ CTexture::TFormatType CTexture::GetFormatTypeFromString(const string &FormatType
 
   return CTexture::A8R8G8B8;
 }
+
+bool CTexture::FillTextureWithColor (uint32 width, uint32 height, const CColor& color)
+{
+  if (m_pTexture==0)
+  {
+    LOGGER->AddNewLog(ELL_ERROR,"CTexture::FillTextureWithColor-> m_pTexture no ha sido creado aun ");
+    return false;
+  }
+
+  HRESULT hr;
+  D3DLOCKED_RECT lock;
+  hr=m_pTexture->LockRect(0, &lock, NULL, D3DLOCK_DISCARD);
+  if(hr==D3D_OK)
+  {
+    uint8 *pTxtBuffer; // Bitmap buffer, texture buffer
+    pTxtBuffer = (uint8*)lock.pBits;
+
+		
+    uint32 j = 0;
+    for( uint32 cont = 0; cont< width * height; cont++)
+    {
+      //BLUE
+      pTxtBuffer[cont*4 + 0] = (uint8)(color.GetBlue()*255);
+      //GREEN
+      pTxtBuffer[cont*4 + 1] = (uint8)(color.GetGreen()*255);
+      //RED
+      pTxtBuffer[cont*4 + 2] = (uint8)(color.GetRed()*255);
+      //ALPHA
+      pTxtBuffer[cont*4 + 3] = (uint8)(color.GetAlpha()*255);
+    }
+    hr=m_pTexture->UnlockRect(0);
+  }
+  else
+  {
+    LOGGER->AddNewLog(ELL_ERROR,"CTexture::FillTextureWithColor->Error en la llamada lockRect");
+    return false;
+  }
+
+	m_uiWidth	= width;
+	m_uiHeight	= height;
+
+  return true;
+}
+
+bool CTexture::FillTextureFromBuffer (uint32 width, uint32 height, uint8* pImgBuffer)
+{
+  if (m_pTexture==0)
+  {
+    LOGGER->AddNewLog(ELL_ERROR,"CTexture::FillTextureFromBuffer-> m_Texture no ha sido creado aun ");
+    return false;
+  }
+
+  HRESULT hr;
+  D3DLOCKED_RECT lock;
+  hr=m_pTexture->LockRect(0,&lock,0,D3DLOCK_DISCARD);
+  if(hr==D3D_OK)
+  {
+    uint8 *pTxtBuffer; // Bitmap buffer, texture buffer
+    pTxtBuffer = (uint8*)lock.pBits;
+
+    uint32 j = 0;
+    for( uint32 cont = 0; cont< width * height; cont++)
+    {
+      //BLUE
+      pTxtBuffer[cont*4 + 0] = pImgBuffer[j]; j++;
+      //GREEN
+      pTxtBuffer[cont*4 + 1] = pImgBuffer[j]; j++; 			
+      //RED
+      pTxtBuffer[cont*4 + 2] = pImgBuffer[j]; j++;
+      //ALPHA
+      pTxtBuffer[cont*4 + 3] = 255;
+    }
+    hr=m_pTexture->UnlockRect(0);
+  }
+  else
+  {
+    LOGGER->AddNewLog(ELL_ERROR,"CTexture::FillTextureFromBuffer->Error en la llamada lockRect");
+    return false;
+  }
+
+	m_uiWidth	= width;
+	m_uiHeight	= height;
+
+  return true;
+}
