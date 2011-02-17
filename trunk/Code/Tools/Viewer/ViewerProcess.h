@@ -60,6 +60,7 @@ private:
   int                   m_iRenderObject;
   bool                  m_bAjuda;
 
+  Vect3f m_vAmbient;
   vector<CRenderableObject*> m_vMeshes;
   vector<CRenderableObject*> m_vAnimatedModels;
 };

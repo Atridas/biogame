@@ -76,6 +76,8 @@ bool CViewerProcess::Init()
     l_Spot->SetActive(true);
   }
   
+  m_vAmbient = CORE->GetLightManager()->GetAmbientLight();
+
   m_vMeshes = CORE->GetRenderableObjectsManager()->GetMeshes();
   m_vAnimatedModels = CORE->GetRenderableObjectsManager()->GetAnimatedModels();
 
@@ -116,6 +118,15 @@ void CViewerProcess::Update(float _fElapsedTime)
 
   if (m_iMode == 0)
   {
+    m_bVisibleLights = true;
+    CORE->GetLightManager()->SetLightsEnabled(m_bVisibleLights);
+
+    CDirectionalLight* l_pLight = (CDirectionalLight*)CORE->GetLightManager()->GetResource("Directional01");
+    if(l_pLight)
+    {
+      l_pLight->SetActive(false);
+    }
+
     if (m_pObjectBot != 0)
     {
       m_pObjectBot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObjectBot->GetPosition().y, m_pObject->GetPosition().z));
@@ -142,10 +153,20 @@ void CViewerProcess::Update(float _fElapsedTime)
         //l_Spot->
       }
     }
+  }else{
+
+    m_bVisibleLights = false;
+    CORE->GetLightManager()->SetLightsEnabled(m_bVisibleLights);
+
+    CDirectionalLight* l_pLight = (CDirectionalLight*)CORE->GetLightManager()->GetResource("Directional01");
+    if(l_pLight)
+    {
+      l_pLight->SetActive(true);
+      l_pLight->SetPosition(m_pCamera->GetEye());
+      l_pLight->SetDirection(m_pCamera->GetDirection());
+    }
   }
  
-
-
   if(m_bStateChanged)
   {
     if (m_pObjectBot != 0)
@@ -303,6 +324,9 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
         ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->BlendCycle("run",0);
       }
 
+      CORE->GetLightManager()->SetAmbientLight(m_vAmbient);
+      //m_bVisibleLights = true;
+      //CORE->GetLightManager()->SetLightsEnabled(m_bVisibleLights);
     }
     else 
     {
@@ -311,6 +335,10 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
       m_iRenderObject = 0;
       
       Vect3f l_pos;
+
+      CORE->GetLightManager()->SetAmbientLight(Vect3f(0.0f,0.0f,0.0f));
+      //m_bVisibleLights = false;
+      //CORE->GetLightManager()->SetLightsEnabled(m_bVisibleLights);
 
       if (m_iMode == MODE_ANIMATS)
       {
@@ -534,32 +562,29 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
 
   if(strcmp(_pcAction, "AugmentaAmbient") == 0)
   {
-
-    Vect3f l_vAmbient = CORE->GetLightManager()->GetAmbientLight();
-    l_vAmbient = l_vAmbient + 0.05f;
-    if (l_vAmbient.x > 1.0f)
+    m_vAmbient = m_vAmbient + 0.05f;
+    if (m_vAmbient.x > 1.0f)
     {
-      l_vAmbient.x = 1.0f;
-      l_vAmbient.y = 1.0f;
-      l_vAmbient.z = 1.0f;
+      m_vAmbient.x = 1.0f;
+      m_vAmbient.y = 1.0f;
+      m_vAmbient.z = 1.0f;
     }
 
-    CORE->GetLightManager()->SetAmbientLight(l_vAmbient);
+    CORE->GetLightManager()->SetAmbientLight(m_vAmbient);
     return true;
   }
 
   if(strcmp(_pcAction, "DisminueixAmbient") == 0)
   {
-    Vect3f l_vAmbient = CORE->GetLightManager()->GetAmbientLight();
-    l_vAmbient = l_vAmbient - 0.05f;
-    if (l_vAmbient.x < 0.0f)
+    m_vAmbient = m_vAmbient - 0.05f;
+    if (m_vAmbient.x < 0.0f)
     {
-      l_vAmbient.x = 0.0f;
-      l_vAmbient.y = 0.0f;
-      l_vAmbient.z = 0.0f;
+      m_vAmbient.x = 0.0f;
+      m_vAmbient.y = 0.0f;
+      m_vAmbient.z = 0.0f;
     }
 
-    CORE->GetLightManager()->SetAmbientLight(l_vAmbient);
+    CORE->GetLightManager()->SetAmbientLight(m_vAmbient);
     return true;
   }
 
