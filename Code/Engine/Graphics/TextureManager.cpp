@@ -17,7 +17,13 @@ void CTextureManager::Init ()
   m_pDefaultTexture = new CTexture;
 	//m_pDefaultTexture->SetAsDefaultTexture();
   bool isOk = false;
-  if(m_pDefaultTexture->Create("DefaultTexture",50,50,0,CTexture::TUsageType::RENDERTARGET,CTexture::TPoolType::DEFAULT,CTexture::TFormatType::A8R8G8B8))
+  if(m_pDefaultTexture->Create("DefaultTexture",
+      50,
+      50,
+      0,
+      CTexture::RENDERTARGET,
+      CTexture::DEFAULT,
+      CTexture::A8R8G8B8))
   {
     if(m_pDefaultTexture->FillTextureWithColor(50, 50, colGREEN))
     {
