@@ -148,7 +148,5 @@
 	<RenderableObject name="pot_petit03" class="StaticMesh" resource="pot_petit03" position="-9.27972 1.30262 -10.5683" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="pot_Mitja02" class="StaticMesh" resource="pot_Mitja02" position="-4.88037 0.921331 -3.12124" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Maleta_DEF03" class="StaticMesh" resource="Maleta_DEF03" position="-8.85657 2.81011 -10.3454" yaw="0.0" pitch="0.0" roll="0.0"/>
-  
-  <RenderableObject name="bot" class="AnimatedModel" resource="bot" cycle="run" position="-11.2274 0.0 -7.69735" yaw="0.0" pitch="0.0" roll="0.0" Altura="2"/>
-  
+  <RenderableObject name="bot" class="AnimatedModel" resource="bot" cycle="run" position="-11.2274 0.0 -7.69735" yaw="-90.0" pitch="0.0" roll="0.0" Altura="2"/>
 </RenderableObjects>

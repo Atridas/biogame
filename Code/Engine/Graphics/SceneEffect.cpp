@@ -27,7 +27,7 @@ bool CSceneEffect::Init(const CXMLTreeNode& _params)
       string l_szTextureName = l_treeTextures.GetPszISOProperty("texture", "");
       if(l_szTextureName == "")
       {
-        LOGGER->AddNewLog(ELL_ERROR, "CDrawQuadSceneEffect::Init  Error loading Texture, no texture name.");
+        LOGGER->AddNewLog(ELL_ERROR, "CSceneEffect::Init  Error loading Texture, no texture name.");
         Release();
         SetOk(false);
         return false;
@@ -35,7 +35,7 @@ bool CSceneEffect::Init(const CXMLTreeNode& _params)
       CTexture* l_pTexture = CORE->GetTextureManager()->GetResource(l_szTextureName);
       if(!l_pTexture)
       {
-        LOGGER->AddNewLog(ELL_ERROR, "CDrawQuadSceneEffect::Init  Error loading Texture, no texture \"%s\" exists.", l_szTextureName.c_str());
+        LOGGER->AddNewLog(ELL_ERROR, "CSceneEffect::Init  Error loading Texture, no texture \"%s\" exists.", l_szTextureName.c_str());
         Release();
         SetOk(false);
         return false;

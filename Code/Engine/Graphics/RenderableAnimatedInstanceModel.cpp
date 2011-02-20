@@ -38,15 +38,11 @@ void CRenderableAnimatedInstanceModel::InitFromXML(CXMLTreeNode& l_XMLObject)
     float l_fYaw                = l_XMLObject.GetFloatProperty("yaw") * FLOAT_PI_VALUE / 180.0f;
     float l_fPitch              = l_XMLObject.GetFloatProperty("pitch") * FLOAT_PI_VALUE / 180.0f;
     float l_fRoll               = l_XMLObject.GetFloatProperty("roll") * FLOAT_PI_VALUE / 180.0f;
-    float l_fAltura             = l_XMLObject.GetFloatProperty("Altura");
     
     SetPosition(l_vPos);
     SetYaw(l_fYaw);
     SetPitch(l_fPitch);
     SetRoll(l_fRoll);
-
-    //temporal mentre l'alçada no estigui a la core
-    m_fAltura = l_fAltura;
 
     if(l_szDefaultAnimation != "")
       m_pAnimatedInstanceModel->BlendCycle(l_szDefaultAnimation, 0.0f);

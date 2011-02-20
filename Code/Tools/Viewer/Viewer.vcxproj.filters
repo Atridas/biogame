@@ -3,9 +3,11 @@
   <ItemGroup>
     <ClCompile Include="mainViewer.cpp" />
     <ClCompile Include="ViewerProcess.cpp" />
+    <ClCompile Include="Viewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ViewerProcess.h" />
+    <ClInclude Include="Viewer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Data">
