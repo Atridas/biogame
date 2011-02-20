@@ -27,7 +27,7 @@ public:
 	float						GetPitch		    () const {return m_fPitch;}
 	const Vect3f&		GetPosition	    () const {return m_vPosition;}
   bool						GetVisible	    () const {return m_bVisible;}
-  CBoundingBox		GetBoundingBox	() const {return m_BoundingBox;}
+  CBoundingBox&		GetBoundingBox	() {return m_BoundingBox;}
 
 	//---Set Functions
 	void		SetPosition	( const Vect3f& _vPos );

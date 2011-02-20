@@ -191,12 +191,10 @@ bool CRenderableObjectsManager::Load(const set<string>& _vXMLFiles)
 }
 
 
-void CRenderableObjectsManager::SetAllVisible(bool _bVisible, CRenderableObject* _pRO)
+void CRenderableObjectsManager::SetAllVisibility(bool _bVisible)
 {
   for(size_t i=0; i < m_RenderableObjects.size() ; i++)
   {
       m_RenderableObjects[i]->SetVisible(_bVisible);
   }
-
-  _pRO->SetVisible(true);
 }

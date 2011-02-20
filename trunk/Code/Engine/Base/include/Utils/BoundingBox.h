@@ -22,13 +22,13 @@ public:
   
   bool GetCollisional () { return m_bCollisional; };
   float GetMaxSideLength();
-  Vect3f GetMin() { return m_vBox[0]; };
-  Vect3f GetMax() { return m_vBox[7]; };
-  Vect3f GetInitMin() { return m_vInitMin; };
-  Vect3f GetInitMax() { return m_vInitMax; };
-  Vect3f* GetBox() { return m_vBox; };
-  Vect3f GetOriginDimension() { return m_vOriginDimension; };
-  Vect3f GetCurrentDimension() { return m_vCurrentDimension; };
+  const Vect3f& GetMin() const { return m_vBox[0]; };
+  const Vect3f& GetMax() const { return m_vBox[7]; };
+  const Vect3f& GetInitMin() const { return m_vInitMin; };
+  const Vect3f& GetInitMax() const { return m_vInitMax; };
+  const Vect3f* GetBox() const { return m_vBox; };
+  const Vect3f& GetOriginDimension() const { return m_vOriginDimension; };
+  const Vect3f& GetCurrentDimension() const { return m_vCurrentDimension; };
 
   void SetCollisional ( bool _bCollisional) { m_bCollisional = _bCollisional; };
 

@@ -16,7 +16,7 @@ class CSceneEffectManager :
   public CBaseControl
 {
 
-public:/*private:?*/
+private:
 
   vector<CSceneEffect*> m_vPreRenderSceneEffects;
   vector<CSceneEffect*> m_vRenderSceneEffects;

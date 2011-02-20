@@ -24,8 +24,6 @@ public:
 protected:
   virtual void RenderRenderableObject(CRenderManager *RM) = 0;
 
-public:
-  float m_fAltura;
 };
 
 #endif

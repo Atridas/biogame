@@ -12,9 +12,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mainViewer.cpp" />
+    <ClCompile Include="Viewer.cpp" />
     <ClCompile Include="ViewerProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Viewer.h" />
     <ClInclude Include="ViewerProcess.h" />
   </ItemGroup>
   <ItemGroup>
