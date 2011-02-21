@@ -84,8 +84,31 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		return getRelativePath() + "Meshes/"
 	)
 	
-
+	function AddInstance _instances _instance _index =
+	(
+		--l_aux = "" as stringStream
+		--format "%%" _instance.name _instances[_index].count to:l_aux
+		--_instance.name = l_aux
+		append _instances[_index] _instance
+	)
 	
+	function NewInstance _instances _instance =
+	(
+		append _instances #()
+		AddInstance _instances _instance _instances.count
+	)
+
+	function GetCoreByName _cores _object =
+	(
+		for i=1 to _cores.count do
+		(
+			if _cores[i].name == _object.name then
+			(
+				return i
+			)
+		)
+		return undefined
+	)
 	
 	function GetCore _cores _object =
 	(
@@ -99,17 +122,17 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		return undefined
 	)
 	
-	function ListMemberName _list _element = 
-	(
-		for i=1 to _list.count do
-		(
-			if _list[i].name == _element.name then
-			(
-				return true
-			)
-		)
-		return false
-	)
+	--function ListMemberName _list _element = 
+	--(
+	--	for i=1 to _list.count do
+	--	(
+	--		if _list[i].name == _element.name then
+	--		(
+	--			return true
+	--		)
+	--	)
+	--	return false
+	--)
 	
 	function ExportMeshManager _objects =
 	(
@@ -210,7 +233,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		return true
 	)
 	
-	function ExportRenderableObjectsManager _objects _cores _AnimatedModels =
+	function ExportRenderableObjectsManager _instances _cores _AnimatedModels =
 	(
 			
 		local l_level = dropNivell.items[dropNivell.selection]
@@ -231,41 +254,45 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		
 		format "%" (OpenTagXML "RenderableObjects") to:l_file
 		
-		for i=1 to _objects.count do
+		for i=1 to _instances.count do
 		(
-			local l_object = _objects[i]
-			
-			local l_core = GetCore _cores l_object
-			
-			l_params = #(#("name",l_object.name),#("class","StaticMesh"),#("resource",l_core.name))
-		
+			for j=1 to _instances[i].count do
+			(
+				local l_instance = _instances[i][j]
 				
-			local l_aux = "" as stringStream
-			
+				local l_core = _cores[i]
 				
-			local l_translation = RHVectorToLH l_object.transform.translation
-			format "% % %" l_translation.x l_translation.y l_translation.z to:l_aux
-			append l_params #("position",l_aux)
-			
-			l_aux = "" as stringStream
-			local l_yaw = GetYaw l_object.transform
-			format "%" l_yaw to:l_aux
-			append l_params #("yaw",l_aux)
-			
-			l_aux = "" as stringStream
-			local l_pitch = GetPitch l_object.transform
-			format "%" l_pitch to:l_aux
-			append l_params #("pitch",l_aux)
-			
-			l_aux = "" as stringStream
-			local l_roll = GetRoll l_object.transform
-			format "%" l_roll to:l_aux
-			append l_params #("roll",l_aux)
-			
-			format "\n\t" to:l_file
-			format "%" (InlineTagParamXML "RenderableObject" l_params) to:l_file
+				local l_aux = "" as stringStream
+				format "%_%" l_instance.name j to:l_aux
 				
+				l_params = #(#("name",l_aux),#("class","StaticMesh"),#("resource",l_core.name))
 			
+					
+				l_aux = "" as stringStream
+				
+					
+				local l_translation = RHVectorToLH l_instance.transform.translation
+				format "% % %" l_translation.x l_translation.y l_translation.z to:l_aux
+				append l_params #("position",l_aux)
+				
+				l_aux = "" as stringStream
+				local l_yaw = GetYaw l_instance.transform
+				format "%" l_yaw to:l_aux
+				append l_params #("yaw",l_aux)
+				
+				l_aux = "" as stringStream
+				local l_pitch = GetPitch l_instance.transform
+				format "%" l_pitch to:l_aux
+				append l_params #("pitch",l_aux)
+				
+				l_aux = "" as stringStream
+				local l_roll = GetRoll l_instance.transform
+				format "%" l_roll to:l_aux
+				append l_params #("roll",l_aux)
+				
+				format "\n\t" to:l_file
+				format "%" (InlineTagParamXML "RenderableObject" l_params) to:l_file
+			)
 		)
 		
 		for i=1 to _AnimatedModels.count do
@@ -500,7 +527,6 @@ utility BioUtility "Eon-Utility" width:160 height:312
 	
 	function isAnimatedModel _object =
 	(
-		
 		-- TODO acceptar més coses
 		if classof _object == Dummy then
 		(
@@ -569,20 +595,19 @@ utility BioUtility "Eon-Utility" width:160 height:312
 				append l_lights $*[i]
 			) else if IsMesh $*[i] then
 			(
-				if ListMemberName l_instances $*[i] then
-				(
-					l_aux = "" as stringStream
-					format "Mesh amb nom repetit %" $*[i].name to:l_aux
-					ShowMessage l_aux
-				) else
-				(
-					append l_instances $*[i]
-				)
-
-				if GetCore l_cores $*[i] == undefined then
+				--instances és una array d'arrays, on cada una d'aquestes subarrays conté totes les instancies d'un core.
+				--l'índex de l'array on es troben les instancies coincideix amb l'índex de l'array de cores.
+				local l_index = GetCoreByName l_cores $*[i]
+				
+				if l_index == undefined then
 				(
 					append l_cores $*[i]
+					NewInstance l_instances $*[i]
+				) else
+				(
+					AddInstance l_instances $*[i] l_index
 				)
+
 			) else if isAnimatedModel $*[i] then
 			(
 				append l_AnimatedModels $*[i]
