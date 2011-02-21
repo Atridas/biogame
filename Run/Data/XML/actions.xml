@@ -63,6 +63,10 @@
 	<action name="ReloadScript">
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F11"/>
 	</action>
+ 
+ 	<action script="GUI_MANAGER:reloadGui()">
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F12"/>
+	</action>
 
   <action name="Console">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_GRAVE"/>
@@ -188,7 +192,7 @@
 	<action name="ShowAjuda">
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F1"/>
 	</action>
-
+<!--
   <action name="ShootBOT">
     <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN" Code="MOUSE_BUTTON_LEFT"/>
   </action>
@@ -196,7 +200,7 @@
   <action name="HurtBOT">
     <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN" Code="MOUSE_BUTTON_RIGHT"/>
   </action>
-
+-->
 
   <!--.......VIEWER CAMERA CONTROL: GAMEPAD.......................
   <action name="MoveXViewerCam">

@@ -2,7 +2,12 @@
 <Lua>
   <files>
     <file path="Data/Lua/first.lua" />
+    <file path="Data/Lua/globals.lua" />
   </files>
   <initscripts>
+    <script action="CORE                          = get_core()"/>
+    <script action="CONSOLE                       = CORE:get_console()"/>
+    <script action="RENDERABLE_OBJECTS_MANAGER    = CORE:get_renderable_objects_manager()"/>
+    <script action="GUI_MANAGER                   = CORE:get_gui_manager()"/>
   </initscripts>
 </Lua>
