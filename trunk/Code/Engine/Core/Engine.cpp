@@ -114,17 +114,26 @@ void CEngine::RenderNoHDR(CRenderManager* _pRM, CProcess* _pProcess)
 
 void CEngine::RenderSystems(CRenderManager* _pRM)
 {
+  CFontManager* l_pFontManager = m_pCore->GetFontManager();
   CLogRender* l_pLR = m_pCore->GetLogRender();
+
+  _pRM->EnableAlphaBlend();
+
   if(l_pLR)
-    l_pLR->Render(_pRM,m_pCore->GetFontManager());
+    l_pLR->Render(_pRM,l_pFontManager);
 
   CConsole* l_pC = m_pCore->GetConsole();
   if(l_pC)
-    l_pC->Render(_pRM,m_pCore->GetFontManager());
+    l_pC->Render(_pRM,l_pFontManager);
 
   CGUIManager* l_pGUI = m_pCore->GetGUIManager();
   if(l_pGUI)
-    l_pGUI->Render(_pRM,m_pCore->GetFontManager());
+  {
+    l_pGUI->Render(_pRM,l_pFontManager);
+    l_pGUI->RenderPointerMouse(_pRM,l_pFontManager);
+  }
+
+  _pRM->DisableAlphaBlend();
 }
 
 void CEngine::UpdateSystems(float _fElapsedTime)

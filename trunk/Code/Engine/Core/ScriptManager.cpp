@@ -68,7 +68,7 @@ void CScriptManager::Load(const string& _szFileName)
 
   //Files
   CXMLTreeNode l_TreeFiles = l_XMLLua["files"];
-  if(l_TreeFiles.IsOk())
+  if(l_TreeFiles.Exists())
   {
     int l_iNumScriptFiles = l_TreeFiles.GetNumChildren();
     for(int i = 0; i < l_iNumScriptFiles; i++)
@@ -83,6 +83,7 @@ void CScriptManager::Load(const string& _szFileName)
       if(l_szLuaFile != "")
       {
         m_vLuaScripts.push_back(l_szLuaFile);
+        LOGGER->AddNewLog(ELL_INFORMATION,"CScriptManager::Load Carregant el fitxer \"%s\"", l_szLuaFile.c_str());
         RunFile(l_szLuaFile);
       }
       else
@@ -92,7 +93,7 @@ void CScriptManager::Load(const string& _szFileName)
 
   //Init Scripts
   CXMLTreeNode l_TreeInitScripts = l_XMLLua["initscripts"];
-  if(l_TreeInitScripts.IsOk())
+  if(l_TreeInitScripts.Exists())
   {
     int l_iNumScriptCalls = l_TreeInitScripts.GetNumChildren();
     for(int i = 0; i < l_iNumScriptCalls; i++)
@@ -105,8 +106,10 @@ void CScriptManager::Load(const string& _szFileName)
       string l_szLuaCall = l_LuaScript.GetPszISOProperty("action","");
 
       if(l_szLuaCall != "")
+      {
+        LOGGER->AddNewLog(ELL_INFORMATION,"CScriptManager::Load Executant el codi previ \"%s\"", l_szLuaCall.c_str());
         RunCode(l_szLuaCall);
-      else
+      }else
         LOGGER->AddNewLog(ELL_WARNING,"CScriptManager::Load Propietat \"action\" no trobada a linia %d", i);
     }
   }
@@ -356,6 +359,7 @@ void CScriptManager::RegisterLUAFunctions()
     class_<CCore>("Core")
       .def("get_renderable_objects_manager",  &CCore::GetRenderableObjectsManager)
       .def("get_console",                     &CCore::GetConsole)
+      .def("get_gui_manager",                 &CCore::GetGUIManager)
   ];
 
   //CRenderableObjectsManager

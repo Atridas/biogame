@@ -43,8 +43,8 @@ void CPointerMouse::Update (CInputManager* inputManager, float elapsedTime)
 	if( CGuiElement::m_bIsVisible && CGuiElement::m_bIsActive )
 	{
 		Vect2i pos;
-		//inputManager->GetPosition(IDV_MOUSE, pos);
-		inputManager->GetPosition(IDV_GAMEPAD1, pos);
+		inputManager->GetPosition(IDV_MOUSE, pos);
+		//inputManager->GetPosition(IDV_GAMEPAD1, pos);
 		CGuiElement::SetPosition(pos);
 
 		if (m_bAnimated)

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Windows OnLoadWindows="" OnSaveWindows="" OnUpdateWindows="">
   
-  <Image name="game_columna_left" posx="45.00" posy="45.00" height="10.00" width="10.00" visible="true" active="true"
+  <Image name="game_columna_left" posx="45.00" posy="80.00" height="10.00" width="10.00" visible="true" active="true"
          default="img1" OnLoadValue="" OnSaveValue="" flip="" backGround="false">
     <texture name="img1" name_texture="./Data/Textures/GUI/Textures_Test/CloseDialegBoxC.jpg"/>
+    <!--Textures/GUI/Textures_Test/CloseDialegBoxC.jpg"/-->
   </Image>
   
 </Windows>
