@@ -29,7 +29,6 @@ bool CDrawQuadSceneEffect::Init(const CXMLTreeNode& _params)
   if(!m_pTechnique)
   {
     LOGGER->AddNewLog(ELL_ERROR, "CDrawQuadSceneEffect::Init  Error loading Technique, no technique \"%s\" exists.", m_szTechnique.c_str());
-    Release();
     SetOk(false);
   } else {
     SetOk(true);
@@ -40,7 +39,13 @@ bool CDrawQuadSceneEffect::Init(const CXMLTreeNode& _params)
   m_pEffectMaterial->SetTextureWidth(RENDER_MANAGER->GetScreenWidth());
   m_pEffectMaterial->SetTextureHeight(RENDER_MANAGER->GetScreenHeight());
 
-  return IsOk();
+  if( IsOk() ) 
+  {
+    return true;
+  } else {
+    Release();
+    return false;
+  }
 }
 
 void CDrawQuadSceneEffect::PostRender(CRenderManager *_pRM)

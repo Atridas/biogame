@@ -33,7 +33,13 @@ bool CDrawQuadToTextureSceneEffect::Init(const CXMLTreeNode& _params)
     SetOk(false);
   }
 
-  return IsOk();
+  if( IsOk() ) 
+  {
+    return true;
+  } else {
+    Release();
+    return false;
+  }
 }
 
 void CDrawQuadToTextureSceneEffect::Release()

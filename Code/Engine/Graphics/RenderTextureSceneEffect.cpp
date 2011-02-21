@@ -66,7 +66,13 @@ bool CRenderTextureSceneEffect::Init(const CXMLTreeNode& _params)
     m_pEffectMaterial->SetTextureHeight(l_iHeight);
   }
 
-  return IsOk();
+  if( IsOk() ) 
+  {
+    return true;
+  } else {
+    Release();
+    return false;
+  }
 }
 
 void CRenderTextureSceneEffect::CaptureFrameBuffers(CRenderManager* _pRM)

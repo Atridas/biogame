@@ -33,7 +33,13 @@ bool CRenderToTextureSceneEffect::Init(const CXMLTreeNode& _params)
     m_pStaticMeshTechnique = m_pAnimatedModelTechnique = 0;
     SetOk(false);
   }
-  return IsOk();
+  if( IsOk() ) 
+  {
+    return true;
+  } else {
+    Release();
+    return false;
+  }
 }
 
 //TODO: UNCOMMENT
