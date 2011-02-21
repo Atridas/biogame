@@ -7,8 +7,6 @@ CBoundingBox::CBoundingBox()
   for(int i = 0; i < 8; i++)
     m_vBox[i] = Vect3f(0.0f);
 
-  m_bCollisional = true;
-
 }
 
 bool CBoundingBox::Init(Vect3f& _vMin, Vect3f& _vMax)
@@ -79,7 +77,7 @@ Vect3f CBoundingBox::MiddlePoint()
   return l_vMidVector + m_vBox[0];
 }
 
-void CBoundingBox::TranslateBox(const Vect3f& _vTranslation)
+/*void CBoundingBox::TranslateBox(const Vect3f& _vTranslation)
 {
   m_vTranslation += _vTranslation;
 
@@ -138,7 +136,7 @@ void CBoundingBox::Translate(const Vect3f& _vTranslation)
     m_vBox[i].y += _vTranslation.y;
     m_vBox[i].z += _vTranslation.z;
   }
-}
+}*/
 
 void CBoundingBox::Release()
 {

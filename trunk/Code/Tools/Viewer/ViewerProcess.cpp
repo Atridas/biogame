@@ -1,26 +1,12 @@
 #include "ViewerProcess.h"
 #include "Core.h"
-#include "RenderManager.h"
-#include "FontManager.h"
-#include "FPSCamera.h"
-#include "ThPSCamera.h"
+#include "EffectManager.h"
 #include "InputManager.h"
-#include "Texture.h"
-#include "TextureManager.h"
-#include "StaticMesh.h"
-#include "StaticMeshManager.h"
+#include "RenderManager.h"
 #include "RenderableObjectsManager.h"
-#include "AnimatedModelManager.h"
-#include "RenderableObject.h"
-#include "AnimatedInstanceModel.h"
-#include "RenderableAnimatedInstanceModel.h"
 
-#include <IndexedVertexs.h>
-#include "VertexsStructs.h"
+#include "LightManager.h"
 
-#include <LightManager.h>
-#include <sstream>
-#include "SpotLight.h"
 
 bool CViewerProcess::Init()
 {
@@ -61,11 +47,27 @@ void CViewerProcess::RenderScene(CRenderManager* _pRM)
   if(m_pViewer->GetRenderLights())
     CORE->GetLightManager()->Render(_pRM);
 
-  m_pViewer->Debug(_pRM);
+  //m_pViewer->Debug(_pRM);
 }
 
 bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
 {
+  if(strcmp(_pcAction, "ToggleNormalRendering") == 0)
+  {
+    m_pViewer->ToggleNormalRendering();
+
+    if(m_pViewer->GetNormalRendering())
+    {
+      m_pStaticMeshTechnique = CORE->GetEffectManager()->GetEffectTechnique("ShowNormalsTechnique");
+      m_pAnimatedTechnique = CORE->GetEffectManager()->GetEffectTechnique("Cal3DTechnique");
+    }else{
+      m_pStaticMeshTechnique = 0;
+      m_pAnimatedTechnique = 0;
+    }
+
+    return true;
+  }
+
   return m_pViewer->ExecuteAction(_fDeltaSeconds,_fDelta,_pcAction);
 
   return false;

@@ -47,7 +47,6 @@ CViewer::CViewer(void)
   }
 
   m_pTargetObject = new CObject3D();
-  m_pTargetObject->GetBoundingBox().SetCollisional(false);
   m_pTargetObject->SetPosition(Vect3f(0.0f,2.0f,0.0f));
 
   m_pObjectCamera = new CThPSCamera(
@@ -65,6 +64,8 @@ CViewer::CViewer(void)
 
   m_bEnableLights = true;
   m_bShowHelp = true;
+  m_bNormalRendering = false;
+  m_bShowBoxes = false;
 
   m_iMode = FREE_MODE;
 
@@ -306,14 +307,13 @@ void CViewer::UpdateCamera(float _fDeltaPitch, float _fDeltaYaw)
 
 void CViewer::FocusCurrentMesh()
 {
-  CBoundingBox l_BoundingBox = (*m_itCurrentMesh)->GetBoundingBox();
-  Vect3f l_vMiddle = l_BoundingBox.MiddlePoint();
-  float l_vZoom = l_BoundingBox.GetMaxSideLength() * 3.0f;
+  CBoundingBox* l_BoundingBox = (*m_itCurrentMesh)->GetBoundingBox();
+  float l_vZoom = l_BoundingBox->GetMaxSideLength() * 3.0f;
 
   CORE->GetRenderableObjectsManager()->SetAllVisibility(false);
   (*m_itCurrentMesh)->SetVisible(true);
 
-  m_pTargetObject->SetPosition(l_vMiddle);
+  m_pTargetObject->SetPosition((*m_itCurrentMesh)->GetCenterPosition());
   ((CThPSCamera*)m_pObjectCamera)->SetZoom(l_vZoom);
 
 }
@@ -457,6 +457,18 @@ void CViewer::SetPrevAnimation()
   l_pRenderModel->GetAnimatedInstanceModel()->BlendCycle(l_iCurrentCycle,0.0f);
 }
 
+void CViewer::ToggleNormalRendering()
+{
+  m_bNormalRendering = !m_bNormalRendering;
+}
+
+void CViewer::ToggleShowBoxes()
+{
+  m_bShowBoxes = !m_bShowBoxes;
+
+  CORE->GetRenderableObjectsManager()->SetAllRenderBoundingBox(m_bShowBoxes);
+}
+
 bool CViewer::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
 {
   if(strcmp(_pcAction, "ChangeMode") == 0)
@@ -468,6 +480,13 @@ bool CViewer::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pc
   if(strcmp(_pcAction, "ShowAjuda") == 0)
   {
     ToggleHelp();
+    return true;
+  }
+
+  if(strcmp(_pcAction, "ToggleShowBoxes") == 0)
+  {
+    ToggleShowBoxes();
+    return true;
   }
 
   switch(m_iMode) {
@@ -752,7 +771,7 @@ void CViewer::ShowMeshModeInfo()
   {
     FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg.c_str());
     l_pMeshInstance = *m_itCurrentMesh;
-    Vect3f l_vDimension = l_pMeshInstance->GetBoundingBox().GetDimension();
+    Vect3f l_vDimension = l_pMeshInstance->GetBoundingBox()->GetDimension();
 
     l_SStream << "Nom: " << l_pMeshInstance->GetName() << endl;
     l_SStream << "Tipus: StaticMesh" << endl;
@@ -837,47 +856,4 @@ void CViewer::ShowAnimatedModeInfo()
           
         FONT_MANAGER->DrawText(550,l_iPosicio2,colGREEN,l_uiFontType,l_SStreamHelp.str().c_str());
     }
-}
-
-void CViewer::Debug(CRenderManager* _pRM)
-{
-  Mat44f l_m4Identity = Mat44f();
-  l_m4Identity.SetIdentity();
-  _pRM->SetTransform(l_m4Identity);
-
-  const Vect3f* l_vBox = (*m_itCurrentMesh)->GetBoundingBox().GetBox();
-
-  _pRM->DrawLine(l_vBox[0],(*m_itCurrentMesh)->GetBoundingBox().MiddlePoint(),colGREEN);
-
-    /*            4                    5
-               _____________________
-              /|                  /|
-             / |                 / |
-            /  |                /  |
-           /   |               /   |
-          /    |              /    |
-         /     |             /     |
-      6 /___________________/ 7    |
-        |      | 0          |      | 1
-        |      |___________ |______|
-        |     /             |     / 
-        |    /              |    /  
-        |   /               |   /   
-        |  /                |  /    
-        | /                 | /     
-      2 |/__________________|/ 3 
-  */
-
-  _pRM->DrawLine(l_vBox[0],l_vBox[1],colBLUE);
-  _pRM->DrawLine(l_vBox[0],l_vBox[2],colBLUE);
-  _pRM->DrawLine(l_vBox[0],l_vBox[4],colBLUE);
-  _pRM->DrawLine(l_vBox[3],l_vBox[1],colBLUE);
-  _pRM->DrawLine(l_vBox[3],l_vBox[2],colBLUE);
-  _pRM->DrawLine(l_vBox[3],l_vBox[7],colBLUE);
-  _pRM->DrawLine(l_vBox[4],l_vBox[5],colBLUE);
-  _pRM->DrawLine(l_vBox[4],l_vBox[6],colBLUE);
-  _pRM->DrawLine(l_vBox[5],l_vBox[1],colBLUE);
-  _pRM->DrawLine(l_vBox[5],l_vBox[7],colBLUE);
-  _pRM->DrawLine(l_vBox[6],l_vBox[2],colBLUE);
-  _pRM->DrawLine(l_vBox[6],l_vBox[7],colBLUE);
 }

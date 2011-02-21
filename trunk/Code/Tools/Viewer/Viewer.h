@@ -21,6 +21,7 @@ public:
   void Update(const float _fElapsedTime,const Vect3i& _vMouseDelta);
 
   bool GetRenderLights() {return m_bRenderLights;};
+  bool GetNormalRendering() {return m_bNormalRendering;};
   CCamera* GetCamera() {return m_pObjectCamera;};
 
   void SetRunning();
@@ -42,8 +43,17 @@ public:
   void IncreaseZoom();
   void DecreaseZoom();
 
+  void SelectNextMesh();
+  void SelectPrevMesh();
+
+  void SelectNextAnimatedModel();
+  void SelectPrevAnimatedModel();
+
   void SetNextAnimation();
   void SetPrevAnimation();
+
+  void ToggleNormalRendering();
+  void ToggleShowBoxes();
 
   bool ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction);
 
@@ -56,18 +66,12 @@ public:
     ANIMATED_MODE
   };
 
-  void Debug(CRenderManager* _pRM);
-
 private:
 
   void UpdatePosition(Vect3f& _PosDelta, float _fDeltaPitch, float _fDeltaYaw);
   void UpdateCamera(float _fDeltaPitch, float _fDeltaYaw);
   void FocusCurrentMesh();
   void FocusCurrentAnimatedModel();
-  void SelectNextMesh();
-  void SelectPrevMesh();
-  void SelectNextAnimatedModel();
-  void SelectPrevAnimatedModel();
   void ResetActions();
   void ProcessFreeMode(const float _fElapsedTime,const Vect3i& _vMouseDelta);
   void ProcessMeshMode(const float _fElapsedTime,const Vect3i& _vMouseDelta);
@@ -102,6 +106,9 @@ private:
   bool m_bMoveBack;
   bool m_bMoveLeft;
   bool m_bMoveRight;
+
+  bool m_bNormalRendering;
+  bool m_bShowBoxes;
 
   vector<CRenderableObject*>::iterator m_itCurrentMesh;
   vector<CRenderableObject*>::iterator m_itCurrentAnimated;

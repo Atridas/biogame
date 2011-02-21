@@ -24,5 +24,10 @@ void CRenderableObject::Render(CRenderManager* _pRM)
     _pRM->SetTransform(total);
 
     RenderRenderableObject(_pRM);
+
+    if(m_bRenderBoundingBox)
+    {
+      _pRM->RenderBoundingBox(GetBoundingBox());
+    }
   }
 }

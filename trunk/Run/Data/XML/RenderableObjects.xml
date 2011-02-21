@@ -148,4 +148,5 @@
 	<RenderableObject name="pot_petit02_1" class="StaticMesh" resource="pot_petit02" position="-9.16074 1.79163 -10.7221" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Pot_B_1" class="StaticMesh" resource="Pot_B" position="-9.04424 1.80726 -10.4589" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="Pot_B_2" class="StaticMesh" resource="Pot_B" position="-8.6831 1.30262 -10.4107" yaw="0.0" pitch="0.0" roll="0.0"/>
+  <RenderableObject name="bot" class="AnimatedModel" resource="bot" cycle="run" position="-11.2274 0.0 -7.69735" yaw="-90.0" pitch="0.0" roll="0.0"/>
 </RenderableObjects>
