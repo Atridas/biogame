@@ -816,3 +816,42 @@ void CRenderManager::DrawRectangle2D (const Vect2i& pos, uint32 w, uint32 h, CCo
     pos_aux.x = pos.x + w;
     DrawQuad2D(pos_aux, edge_w, h + (2*edge_w), UPPER_LEFT, edgeColor);    
 }
+
+void CRenderManager::RenderBoundingBox(CBoundingBox* _pBBox)
+{
+  const Vect3f *l_pVectBox = _pBBox->GetBox();
+
+  DrawLine(l_pVectBox[0],_pBBox->MiddlePoint(),colGREEN);
+
+    /*            4                    5
+               _____________________
+              /|                  /|
+             / |                 / |
+            /  |                /  |
+           /   |               /   |
+          /    |              /    |
+         /     |             /     |
+      6 /___________________/ 7    |
+        |      | 0          |      | 1
+        |      |___________ |______|
+        |     /             |     / 
+        |    /              |    /  
+        |   /               |   /   
+        |  /                |  /    
+        | /                 | /     
+      2 |/__________________|/ 3 
+  */
+
+  DrawLine(l_pVectBox[0],l_pVectBox[1],colBLUE);
+  DrawLine(l_pVectBox[0],l_pVectBox[2],colBLUE);
+  DrawLine(l_pVectBox[0],l_pVectBox[4],colBLUE);
+  DrawLine(l_pVectBox[3],l_pVectBox[1],colBLUE);
+  DrawLine(l_pVectBox[3],l_pVectBox[2],colBLUE);
+  DrawLine(l_pVectBox[3],l_pVectBox[7],colBLUE);
+  DrawLine(l_pVectBox[4],l_pVectBox[5],colBLUE);
+  DrawLine(l_pVectBox[4],l_pVectBox[6],colBLUE);
+  DrawLine(l_pVectBox[5],l_pVectBox[1],colBLUE);
+  DrawLine(l_pVectBox[5],l_pVectBox[7],colBLUE);
+  DrawLine(l_pVectBox[6],l_pVectBox[2],colBLUE);
+  DrawLine(l_pVectBox[6],l_pVectBox[7],colBLUE);
+}

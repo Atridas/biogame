@@ -5,6 +5,7 @@
 class CCamera;
 class CSceneEffectManager;
 class CRenderManager;
+class CEffectTechnique;
 //-----------------------------------------
 
 /**
@@ -22,7 +23,8 @@ public:
    * @param _szProcessName Nom que rebrà el procés.
   **/
   CProcess(const string& _szProcessName):
-      m_pCamera(0),m_pSceneEffectManager(0),m_szProcessName(_szProcessName),m_bRenderInfo(true)
+      m_pCamera(0),m_pSceneEffectManager(0),m_szProcessName(_szProcessName),m_bRenderInfo(true),
+      m_pStaticMeshTechnique(0), m_pAnimatedTechnique(0)
                                                                           {};
   /**
    * Mètode d'update.
@@ -126,6 +128,8 @@ protected:
    * Punter a Manager d'efectes d'escena.
   **/
   CSceneEffectManager*  m_pSceneEffectManager;
+
+  CEffectTechnique     *m_pStaticMeshTechnique, *m_pAnimatedTechnique;
 
   /**
    * Setter del DebugInfo.

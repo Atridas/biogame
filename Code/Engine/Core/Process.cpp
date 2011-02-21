@@ -124,8 +124,8 @@ void CProcess::Render(CRenderManager* _pRM)
   m_pSceneEffectManager->ActivateRenderSceneEffects();
 
   //que usen la technique por defecto del tipo de vértice
-  l_pEM->SetAnimatedModelTechnique(NULL);
-  l_pEM->SetStaticMeshTechnique(NULL);
+  l_pEM->SetAnimatedModelTechnique(m_pAnimatedTechnique);
+  l_pEM->SetStaticMeshTechnique(m_pStaticMeshTechnique);
 
   //Renderizamos la escena
   RenderScene(_pRM);

@@ -14,8 +14,12 @@ void CRenderableObjectsManager::Render(CRenderManager *RM)
 {
   //renderitzar només els visibles
   for(size_t i=0; i < m_RenderableObjects.size() ; i++)
+  {
     if(m_RenderableObjects[i]->GetVisible())
+    {
       m_RenderableObjects[i]->Render(RM);
+    }
+  }
 }
 
 //TODO
@@ -196,5 +200,13 @@ void CRenderableObjectsManager::SetAllVisibility(bool _bVisible)
   for(size_t i=0; i < m_RenderableObjects.size() ; i++)
   {
       m_RenderableObjects[i]->SetVisible(_bVisible);
+  }
+}
+
+void CRenderableObjectsManager::SetAllRenderBoundingBox(bool _bVisible)
+{
+  for(size_t i=0; i < m_RenderableObjects.size() ; i++)
+  {
+      m_RenderableObjects[i]->SetRenderBoundingBox(_bVisible);
   }
 }
