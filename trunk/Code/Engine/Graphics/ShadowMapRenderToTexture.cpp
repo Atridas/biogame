@@ -25,7 +25,13 @@ bool CShadowMapRenderToTexture::Init(const CXMLTreeNode& _params)
     LOGGER->AddNewLog(ELL_ERROR, "CShadowMapRenderToTexture::Init  No light \"%s\".", l_szLightShadowCast.c_str());
     SetOk(false);
   }
-  return IsOk();
+  if( IsOk() ) 
+  {
+    return true;
+  } else {
+    Release();
+    return false;
+  }
 }
 
 void CShadowMapRenderToTexture::PreRender(CRenderManager *_pRM, CProcess *_pProc)

@@ -26,7 +26,13 @@ void CHDRPipeline::Release(void)
 
 bool CHDRPipeline::Init(const string& _szXML)
 {
-  return false;
+  if( IsOk() ) 
+  {
+    return true;
+  } else {
+    Release();
+    return false;
+  }
 }
   
 void CHDRPipeline::PrepareTextures(CRenderManager* _pRM, CProcess* _pProcess)
