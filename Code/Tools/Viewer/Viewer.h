@@ -9,6 +9,7 @@ class CRenderableObject;
 class CRenderableAnimatedInstanceModel;
 class CDirectionalLight;
 class CSpotLight;
+class CRenderManager;
 //-----------------------------------------
 
 class CViewer
@@ -54,6 +55,8 @@ public:
     MESH_MODE,
     ANIMATED_MODE
   };
+
+  void Debug(CRenderManager* _pRM);
 
 private:
 

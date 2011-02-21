@@ -47,6 +47,7 @@ CViewer::CViewer(void)
   }
 
   m_pTargetObject = new CObject3D();
+  m_pTargetObject->GetBoundingBox().SetCollisional(false);
   m_pTargetObject->SetPosition(Vect3f(0.0f,2.0f,0.0f));
 
   m_pObjectCamera = new CThPSCamera(
@@ -751,7 +752,7 @@ void CViewer::ShowMeshModeInfo()
   {
     FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg.c_str());
     l_pMeshInstance = *m_itCurrentMesh;
-    Vect3f l_vDimension = l_pMeshInstance->GetBoundingBox().GetOriginDimension();
+    Vect3f l_vDimension = l_pMeshInstance->GetBoundingBox().GetDimension();
 
     l_SStream << "Nom: " << l_pMeshInstance->GetName() << endl;
     l_SStream << "Tipus: StaticMesh" << endl;
@@ -836,4 +837,47 @@ void CViewer::ShowAnimatedModeInfo()
           
         FONT_MANAGER->DrawText(550,l_iPosicio2,colGREEN,l_uiFontType,l_SStreamHelp.str().c_str());
     }
+}
+
+void CViewer::Debug(CRenderManager* _pRM)
+{
+  Mat44f l_m4Identity = Mat44f();
+  l_m4Identity.SetIdentity();
+  _pRM->SetTransform(l_m4Identity);
+
+  const Vect3f* l_vBox = (*m_itCurrentMesh)->GetBoundingBox().GetBox();
+
+  _pRM->DrawLine(l_vBox[0],(*m_itCurrentMesh)->GetBoundingBox().MiddlePoint(),colGREEN);
+
+    /*            4                    5
+               _____________________
+              /|                  /|
+             / |                 / |
+            /  |                /  |
+           /   |               /   |
+          /    |              /    |
+         /     |             /     |
+      6 /___________________/ 7    |
+        |      | 0          |      | 1
+        |      |___________ |______|
+        |     /             |     / 
+        |    /              |    /  
+        |   /               |   /   
+        |  /                |  /    
+        | /                 | /     
+      2 |/__________________|/ 3 
+  */
+
+  _pRM->DrawLine(l_vBox[0],l_vBox[1],colBLUE);
+  _pRM->DrawLine(l_vBox[0],l_vBox[2],colBLUE);
+  _pRM->DrawLine(l_vBox[0],l_vBox[4],colBLUE);
+  _pRM->DrawLine(l_vBox[3],l_vBox[1],colBLUE);
+  _pRM->DrawLine(l_vBox[3],l_vBox[2],colBLUE);
+  _pRM->DrawLine(l_vBox[3],l_vBox[7],colBLUE);
+  _pRM->DrawLine(l_vBox[4],l_vBox[5],colBLUE);
+  _pRM->DrawLine(l_vBox[4],l_vBox[6],colBLUE);
+  _pRM->DrawLine(l_vBox[5],l_vBox[1],colBLUE);
+  _pRM->DrawLine(l_vBox[5],l_vBox[7],colBLUE);
+  _pRM->DrawLine(l_vBox[6],l_vBox[2],colBLUE);
+  _pRM->DrawLine(l_vBox[6],l_vBox[7],colBLUE);
 }

@@ -60,6 +60,8 @@ void CViewerProcess::RenderScene(CRenderManager* _pRM)
 
   if(m_pViewer->GetRenderLights())
     CORE->GetLightManager()->Render(_pRM);
+
+  m_pViewer->Debug(_pRM);
 }
 
 bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)

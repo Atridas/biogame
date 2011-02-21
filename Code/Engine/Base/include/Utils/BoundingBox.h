@@ -27,8 +27,7 @@ public:
   const Vect3f& GetInitMin() const { return m_vInitMin; };
   const Vect3f& GetInitMax() const { return m_vInitMax; };
   const Vect3f* GetBox() const { return m_vBox; };
-  const Vect3f& GetOriginDimension() const { return m_vOriginDimension; };
-  const Vect3f& GetCurrentDimension() const { return m_vCurrentDimension; };
+  const Vect3f& GetDimension() const { return m_vDimension; };
 
   void SetCollisional ( bool _bCollisional) { m_bCollisional = _bCollisional; };
 
@@ -36,7 +35,6 @@ protected:
   virtual void Release();
   
 private:
-  void   RecalcCurrentDimension();
   void   Translate(const Vect3f& _vTranslation);
   
   Vect3f m_vInitMin;
@@ -44,8 +42,7 @@ private:
 
   Vect3f m_vTranslation;
 
-  Vect3f m_vOriginDimension;
-  Vect3f m_vCurrentDimension;
+  Vect3f m_vDimension;
 
   Vect3f m_vBox[8];
   bool   m_bCollisional;

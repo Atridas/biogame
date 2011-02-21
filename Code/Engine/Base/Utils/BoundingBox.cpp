@@ -2,7 +2,7 @@
 
 CBoundingBox::CBoundingBox()
 {
-  m_vInitMin = m_vInitMax = m_vTranslation = m_vOriginDimension = m_vCurrentDimension = Vect3f(0.0f);
+  m_vInitMin = m_vInitMax = m_vTranslation = m_vDimension = Vect3f(0.0f);
 
   for(int i = 0; i < 8; i++)
     m_vBox[i] = Vect3f(0.0f);
@@ -53,8 +53,7 @@ bool CBoundingBox::Init(Vect3f& _vMin, Vect3f& _vMax)
   float l_fSideLengthZ = m_vBox[0].Distance(m_vBox[2]);
 
   m_vTranslation = Vect3f(0.0f);
-  m_vOriginDimension = Vect3f(l_fSideLengthX,l_fSideLengthY,l_fSideLengthZ);
-  m_vCurrentDimension = m_vOriginDimension;
+  m_vDimension = Vect3f(l_fSideLengthX,l_fSideLengthY,l_fSideLengthZ);
 
   SetOk(true);
 
@@ -63,11 +62,12 @@ bool CBoundingBox::Init(Vect3f& _vMin, Vect3f& _vMax)
 
 float CBoundingBox::GetMaxSideLength()
 {
-  float l_fMax = m_vOriginDimension.x;
-  if(l_fMax < m_vOriginDimension.y)
-    l_fMax = m_vOriginDimension.y;
-  if(l_fMax < m_vOriginDimension.z)
-    l_fMax = m_vOriginDimension.z;
+  float l_fMax = m_vDimension.x;
+
+  if(l_fMax < m_vDimension.y)
+     l_fMax = m_vDimension.y;
+  if(l_fMax < m_vDimension.z)
+     l_fMax = m_vDimension.z;
 
   return l_fMax;
 }
@@ -98,9 +98,6 @@ void CBoundingBox::RotateBox(float _fPitch, float _fYaw, float _fRoll)
   }
 
   Translate(m_vTranslation);
-
-  //actualitzar dimensions
-  RecalcCurrentDimension();
 }
 
 void CBoundingBox::DoYaw(float _fYaw)
@@ -111,9 +108,6 @@ void CBoundingBox::DoYaw(float _fYaw)
     m_vBox[i] = m_vBox[i].RotateY(_fYaw);
 
   Translate(m_vTranslation);
-
-  //actualitzar dimensions
-  RecalcCurrentDimension();
 }
 
 void CBoundingBox::DoPitch(float _fPitch)
@@ -121,12 +115,9 @@ void CBoundingBox::DoPitch(float _fPitch)
   Translate(m_vTranslation*-1);
 
   for(int i = 0; i < 8; i++)
-    m_vBox[i] = m_vBox[i].RotateX(_fPitch);
+    m_vBox[i] = m_vBox[i].RotateZ(_fPitch);
 
   Translate(m_vTranslation);
-
-  //actualitzar dimensions
-  RecalcCurrentDimension();
 }
 
 void CBoundingBox::DoRoll(float _fRoll)
@@ -134,21 +125,9 @@ void CBoundingBox::DoRoll(float _fRoll)
   Translate(m_vTranslation*-1);
 
   for(int i = 0; i < 8; i++)
-    m_vBox[i] = m_vBox[i].RotateZ(_fRoll);
+    m_vBox[i] = m_vBox[i].RotateX(_fRoll);
 
   Translate(m_vTranslation);
-
-  //actualitzar dimensions
-  RecalcCurrentDimension();
-}
-
-void CBoundingBox::RecalcCurrentDimension()
-{
-  float l_fSideLengthX = m_vBox[0].Distance(m_vBox[1]);
-  float l_fSideLengthY = m_vBox[0].Distance(m_vBox[4]);
-  float l_fSideLengthZ = m_vBox[0].Distance(m_vBox[2]);
-
-  m_vCurrentDimension = Vect3f(l_fSideLengthX,l_fSideLengthY,l_fSideLengthZ);
 }
 
 void CBoundingBox::Translate(const Vect3f& _vTranslation)
