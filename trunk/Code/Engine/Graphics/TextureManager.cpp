@@ -12,35 +12,38 @@ void CTextureManager::Reload ()
   }
 }
 
-void CTextureManager::Init ()
+bool CTextureManager::Init ()
 {
-  m_pDefaultTexture = new CTexture;
-	//m_pDefaultTexture->SetAsDefaultTexture();
-  bool isOk = false;
+  m_pDefaultTexture = new CTexture();
   if(m_pDefaultTexture->Create("DefaultTexture",
-      50,
-      50,
+      32,
+      32,
       0,
-      CTexture::RENDERTARGET,
+      CTexture::DYNAMIC,
       CTexture::DEFAULT,
       CTexture::A8R8G8B8))
   {
-    if(m_pDefaultTexture->FillTextureWithColor(50, 50, colGREEN))
+    if(m_pDefaultTexture->FillDefaultTexture())
     {
-      isOk = true;
+      SetOk( true );
     }
   }
 
-  if(!isOk)
+  if(!IsOk())
   {
 		std::string msg_error = "CTextureManager::Init-> Error al intentar crear la defualtTexture en la inicialización de CTextureManager";
 		LOGGER->AddNewLog(ELL_ERROR, msg_error.c_str());
+    Release();
     //throw CException(__FILE__, __LINE__, msg_error);
   }
+
+  return IsOk();
 }
 
 CTexture* CTextureManager::GetResource(const std::string &_szName)
 {
+  //return m_pDefaultTexture;
+
   CTexture* l_pTexture = CMapManager::GetResource(_szName);
   if(l_pTexture != 0)
     return l_pTexture;
@@ -54,4 +57,10 @@ CTexture* CTextureManager::GetResource(const std::string &_szName)
   }
   CMapManager::AddResource(_szName,l_pTexture);
   return l_pTexture;
+}
+
+void CTextureManager::Release()
+{
+  CHECKED_DELETE(m_pDefaultTexture);
+  CMapManager::Release();
 }

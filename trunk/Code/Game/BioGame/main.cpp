@@ -54,7 +54,7 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
   CEngine l_engine;
   CProcess* l_game = new CGameProcess();
 
-  l_engine.SetProcess(l_game);
+  l_engine.AddProcess(l_game);
 
   ShowWindow( hWnd, SW_SHOWDEFAULT );
   UpdateWindow( hWnd );
