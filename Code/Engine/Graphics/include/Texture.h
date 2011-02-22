@@ -96,8 +96,9 @@ public:
   bool SetAsRenderTarget();
   void UnsetAsRenderTarget();
   static CTexture::TFormatType GetFormatTypeFromString(const string &FormatType);
-
+  
   bool FillTextureWithColor(uint32 width, uint32 height, const CColor& color);
+  bool FillDefaultTexture();
   bool FillTextureFromBuffer (uint32 width, uint32 height, uint8* pImgBuffer);
 
   LPDIRECT3DSURFACE9 GetSurface() const {return m_pTextureSurface0;};

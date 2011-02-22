@@ -33,7 +33,7 @@ public:
   /**
     * Constructor per defecte.
   **/
-	                          CEngine(void):m_pProcess(0),m_pCore(0),m_pHDR(0)            {};
+	                          CEngine(void):m_pCore(0),m_pHDR(0),m_pActiveProcess(0)            {};
   /**
    * Destructor.
    * S'encarrega d'alliberar recursos abans de destruir-se.
@@ -65,7 +65,10 @@ public:
    * Aquest mètode determinarà el procés que s'ha d'executar en aquell moment.
    * @param _pProcess Procés a executar.
   **/
-  void				              SetProcess		      (CProcess* _pProcess);
+  void				              AddProcess		      (CProcess* _pProcess);
+  
+  void				              ActivateProcess		  (int _i);
+  void				              ActivateProcess		  (CProcess* _pProcess);
 
 protected:
 
@@ -84,11 +87,6 @@ private:
   void                      UpdateSystems        (float _fElapsedTime);
 
 	/**
-   * Procés en execució.
-   * TODO temporal, s'hauria d'utilitzar m_vProcesses.
-  **/
-  CProcess*			            m_pProcess;
-	/**
    * Core.
   **/
   CCore*				            m_pCore;
@@ -102,6 +100,7 @@ private:
    * TODO vector de processos.
   **/
   VectorProcessPtr				  m_vProcesses;
+  CProcess*                 m_pActiveProcess;
 
   
 

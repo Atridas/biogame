@@ -22,14 +22,14 @@ public:
    * Constructor per defecte.
    * Aquest constructor deixa la classe en Ok.
   **/
-  CTextureManager() {SetOk(true);};
+  CTextureManager(): m_pDefaultTexture(0) {};
   /**
    * Destructor.
    * Allibera els recursos abans de destruir-se.
   **/
   ~CTextureManager() {Done();};
 
-  void				Init							();
+  bool				Init							();
 
   /**
    * Mètode de recàrrega.
@@ -43,6 +43,9 @@ public:
    * @return Textura sol·licitada.
   **/
   virtual CTexture* GetResource(const std::string &_szName);
+
+  virtual void Release();
+
   CTexture *	GetDefualtTexture	() {return m_pDefaultTexture;}
 
 private:

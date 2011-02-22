@@ -25,8 +25,8 @@ bool CEngine::Init(const SInitParams& _InitParams,  HWND hWnd)
 
   m_pCore->Init(hWnd, _InitParams);
 
-  if(m_pProcess) //TODO: Comprovar excepcio m_pProcess == NULL i logejar
-    m_pProcess->Init(); 
+  if(m_pActiveProcess) //TODO: Comprovar excepcio m_pProcess == NULL i logejar
+    m_pActiveProcess->Init(); 
 
   m_pHDR = new CHDRPipeline();
   if(!m_pHDR->Init(_InitParams.EngineParams.szHDRFile))
@@ -34,7 +34,7 @@ bool CEngine::Init(const SInitParams& _InitParams,  HWND hWnd)
     CHECKED_DELETE( m_pHDR );
   }
 
-  m_pCore->GetActionToInput()->SetProcess(m_pProcess);
+  m_pCore->GetActionToInput()->SetProcess(m_pActiveProcess);
 
   SetOk(true);
 
@@ -46,7 +46,13 @@ void CEngine::Release()
   LOGGER->AddNewLog(ELL_INFORMATION,"Engine::Release");
 
   CHECKED_DELETE(m_pHDR);
-  CHECKED_DELETE(m_pProcess);
+  
+  for(VectorProcessPtr::iterator l_it = m_vProcesses.begin(); l_it != m_vProcesses.end(); ++l_it)
+  {
+    delete *l_it;
+  }
+  m_vProcesses.clear();
+  m_pActiveProcess = 0;
   CHECKED_DELETE(m_pCore);
   LOGGER->SaveLogsInFile();
 }
@@ -56,8 +62,8 @@ void CEngine::Update()
 	m_pCore->Update();
 	float l_fElapsedTime = m_pCore->GetTimer()->GetElapsedTime();
 
-	if(m_pProcess != NULL)
-		m_pProcess->Update(l_fElapsedTime);
+	if(m_pActiveProcess != NULL)
+		m_pActiveProcess->Update(l_fElapsedTime);
 
   UpdateSystems(l_fElapsedTime);
 }
@@ -66,15 +72,15 @@ void CEngine::Render()
 {
 	CRenderManager* l_pRM = m_pCore->GetRenderManager();
 
-  if(m_pProcess != NULL)
+  if(m_pActiveProcess != NULL)
   {
-    m_pProcess->PreRender(l_pRM);
+    m_pActiveProcess->PreRender(l_pRM);
 
     if(m_pHDR && m_pHDR->IsActive())
     {
-      RenderHDR(l_pRM, m_pProcess);
+      RenderHDR(l_pRM, m_pActiveProcess);
     } else {
-      RenderNoHDR(l_pRM, m_pProcess);
+      RenderNoHDR(l_pRM, m_pActiveProcess);
     }
   }
 }
@@ -101,7 +107,7 @@ void CEngine::RenderNoHDR(CRenderManager* _pRM, CProcess* _pProcess)
 {
   _pRM->BeginRendering();
 
-  _pRM->SetupMatrices(m_pProcess->GetCamera());
+  _pRM->SetupMatrices(m_pActiveProcess->GetCamera());
   _pProcess->Render(_pRM);
   _pProcess->PostRender(_pRM);
 	_pProcess->DebugInformation();
@@ -151,7 +157,30 @@ void CEngine::UpdateSystems(float _fElapsedTime)
     l_pGUI->Update(_fElapsedTime);
 }
 
-void CEngine::SetProcess(CProcess* _pProcess)
+void CEngine::AddProcess(CProcess* _pProcess)
 {
-	m_pProcess = _pProcess;
+  m_vProcesses.push_back(_pProcess);
+  if(!m_pActiveProcess) 
+  {
+    m_pActiveProcess = _pProcess;
+  }
+}
+
+void CEngine::ActivateProcess(int _i)
+{
+  m_pActiveProcess = m_vProcesses[_i];
+}
+
+void CEngine::ActivateProcess(CProcess* _pProcess)
+{
+  for(VectorProcessPtr::iterator l_it = m_vProcesses.begin(); l_it != m_vProcesses.end(); ++l_it)
+  {
+    if(*l_it == _pProcess)
+    {
+      m_pActiveProcess = *l_it;
+      return;
+    }
+  }
+  assert(false && "Assingant un process inexistent");
+
 }

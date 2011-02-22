@@ -84,7 +84,7 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 
     // Añadir aquí el Init de la applicación
     CProcess* l_Test = new CTestProcess();
-    l_Engine.SetProcess(l_Test);
+    l_Engine.AddProcess(l_Test);
 
     l_Engine.Init(l_InitParams, hWnd);
 

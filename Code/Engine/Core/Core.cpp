@@ -48,11 +48,14 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
 
   SetOk(true);
 
+  if(!m_pTextureManager->Init()) 
+  {
+  }
+
   if(!m_pEffectManager->Load(_InitParams.EffectManagerParams))
   {
     LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al manager d'Effects.");
-    //TODO
-    //SetOk(false);
+    SetOk(false);
   }
 
   if(!m_pStaticMeshManager->Load(_InitParams.StaticMeshManagerParams))
