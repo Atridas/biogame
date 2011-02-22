@@ -98,6 +98,17 @@
   <ItemGroup>
     <ClInclude Include="include\GameProcess.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Run\Data\XML\AnimatedModels.xml" />
+    <None Include="..\..\..\Run\Data\XML\Effects.xml" />
+    <None Include="..\..\..\Run\Data\XML\enemigos.xml" />
+    <None Include="..\..\..\Run\Data\XML\fonts.xml" />
+    <None Include="..\..\..\Run\Data\XML\IA.xml" />
+    <None Include="..\..\..\Run\Data\XML\Lights.xml" />
+    <None Include="..\..\..\Run\Data\XML\Lua.xml" />
+    <None Include="..\..\..\Run\Data\XML\RenderableObjects.xml" />
+    <None Include="..\..\..\Run\Data\XML\StaticMeshes.xml" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
