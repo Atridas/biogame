@@ -21,24 +21,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Run\Data\XML\actions.xml" />
-    <None Include="..\..\..\Run\Data\XML\AnimatedModels.xml" />
-    <None Include="..\..\..\Run\Data\XML\Effects.xml" />
-    <None Include="..\..\..\Run\Data\XML\enemigos.xml" />
-    <None Include="..\..\..\Run\Data\XML\fonts.xml" />
-    <None Include="..\..\..\Run\Data\XML\IA.xml" />
     <None Include="..\..\..\Run\Data\XML\init_viewer.xml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="..\..\..\Run\Data\XML\Lights.xml">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="..\..\..\Run\Data\XML\Lua.xml" />
-    <None Include="..\..\..\Run\Data\XML\RenderableObjects.xml" />
     <None Include="..\..\..\Run\Data\XML\SceneEffects_Viewer.xml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="..\..\..\Run\Data\XML\StaticMeshes.xml" />
-    <None Include="..\..\..\Run\Data\XML\test.xml" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{53AA6520-CC4F-48AE-B2D2-736F01BB6DDB}</ProjectGuid>

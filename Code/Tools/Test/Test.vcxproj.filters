@@ -16,5 +16,11 @@
     <None Include="..\..\..\Run\Data\XML\init_test.xml">
       <Filter>Data</Filter>
     </None>
+    <None Include="..\..\..\Run\Data\XML\SceneEffects_Test.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\test.xml">
+      <Filter>Data</Filter>
+    </None>
   </ItemGroup>
 </Project>

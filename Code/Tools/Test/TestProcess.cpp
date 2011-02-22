@@ -86,44 +86,49 @@ void CTestProcess::Release()
 
 void CTestProcess::Update(float _fElapsedTime)
 {
-  //Actualitze el pitch i el yaw segons els delta del mouse
-  float l_fPitch, l_fYaw;
-
-  Vect3i l_vVec = INPUT_MANAGER->GetMouseDelta();
-
-  l_fPitch = m_pObject->GetPitch();
-  l_fYaw = m_pObject->GetYaw();
-  
-  m_pObject->SetYaw(l_fYaw-l_vVec.x*_fElapsedTime);
-  m_pObjectBot->SetYaw(m_pObject->GetYaw()-FLOAT_PI_VALUE/2.0f);
-
-  l_fPitch -= l_vVec.y*_fElapsedTime;
-  if(l_fPitch < - FLOAT_PI_VALUE/3) l_fPitch = - FLOAT_PI_VALUE/3;
-  if(l_fPitch >   FLOAT_PI_VALUE/3) l_fPitch =   FLOAT_PI_VALUE/3;
-  m_pObject->SetPitch(l_fPitch);
-
-  m_pObjectBot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObjectBot->GetPosition().y, m_pObject->GetPosition().z));
-  
-  l_fPitch = m_pObject->GetPitch();
-  //l_fPitch = l_fPitch+FLOAT_PI_VALUE/2;
-  l_fYaw = m_pObjectBot->GetYaw();
-  l_fYaw = l_fYaw+FLOAT_PI_VALUE/2;
-  //l_fRoll = m_pObjectBot->GetRoll();
-
-  CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
-  l_Spot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObject->GetPosition().y, m_pObject->GetPosition().z));
-
-  //CDirectionalLight* l_dir = (CDirectionalLight*)CORE->GetLightManager()->GetResource("Direct01");
-  Vect3f l_vec(cos(l_fYaw) * cos(l_fPitch), sin(l_fPitch),sin(l_fYaw) * cos(l_fPitch) );
-  l_Spot->SetDirection(Vect3f(l_vec.x,l_vec.y,l_vec.z));
-
-  if(m_bStateChanged)
+  if(m_pObject && m_pObjectBot) 
   {
-    ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->BlendCycle(m_iState,0);
+    //Actualitze el pitch i el yaw segons els delta del mouse
+    float l_fPitch, l_fYaw;
 
-    m_bStateChanged = false;
+    Vect3i l_vVec = INPUT_MANAGER->GetMouseDelta();
+
+    l_fPitch = m_pObject->GetPitch();
+    l_fYaw = m_pObject->GetYaw();
+  
+    m_pObject->SetYaw(l_fYaw-l_vVec.x*_fElapsedTime);
+    m_pObjectBot->SetYaw(m_pObject->GetYaw()-FLOAT_PI_VALUE/2.0f);
+
+    l_fPitch -= l_vVec.y*_fElapsedTime;
+    if(l_fPitch < - FLOAT_PI_VALUE/3) l_fPitch = - FLOAT_PI_VALUE/3;
+    if(l_fPitch >   FLOAT_PI_VALUE/3) l_fPitch =   FLOAT_PI_VALUE/3;
+    m_pObject->SetPitch(l_fPitch);
+
+    m_pObjectBot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObjectBot->GetPosition().y, m_pObject->GetPosition().z));
+  
+    l_fPitch = m_pObject->GetPitch();
+    //l_fPitch = l_fPitch+FLOAT_PI_VALUE/2;
+    l_fYaw = m_pObjectBot->GetYaw();
+    l_fYaw = l_fYaw+FLOAT_PI_VALUE/2;
+    //l_fRoll = m_pObjectBot->GetRoll();
+
+    CSpotLight* l_pSpot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
+    if(l_pSpot)
+    {
+      l_pSpot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObject->GetPosition().y, m_pObject->GetPosition().z));
+
+      //CDirectionalLight* l_dir = (CDirectionalLight*)CORE->GetLightManager()->GetResource("Direct01");
+      Vect3f l_vec(cos(l_fYaw) * cos(l_fPitch), sin(l_fPitch),sin(l_fYaw) * cos(l_fPitch) );
+      l_pSpot->SetDirection(Vect3f(l_vec.x,l_vec.y,l_vec.z));
+    }
+
+    if(m_bStateChanged)
+    {
+      ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->BlendCycle(m_iState,0);
+
+      m_bStateChanged = false;
+    }
   }
-
 }
 
 void CTestProcess::RenderScene(CRenderManager* _pRM)
