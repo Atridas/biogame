@@ -59,6 +59,10 @@ public:
   void DrawTexturedQuad2D (const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, ETypeAlignment _Alignment, CTexture* _pTexture = 0, ETypeFlip _bFlip = NONE_FLIP);
   void DrawColoredTexturedQuad2D(const Vect2i& _vPos, uint32 _uiW, uint32 _uiH, ETypeAlignment _Alignment, CColor _Color, CTexture* _pTexture = 0, ETypeFlip _bFlip = NONE_FLIP);
   void DrawRectangle2D(const Vect2i& pos, uint32 w, uint32 h, CColor& backGroundColor,  uint32 edge_w, uint32 edge_h, CColor& edgeColor);
+
+  //----QuadRender Functions----------------------------------------------
+   //void    DrawQuad2D     (const Vect2i& pos, uint32 w, uint32 h, eTypeAlignment alignment, CTexture* texture, SRectangle2D& coordText);
+   //void    DrawQuad2D     (const Vect2i& pos, uint32 w, uint32 h, eTypeAlignment alignment, CTexture* texture, eTypeFlip flip = NONE_FLIP);    
   //-------------------------------------------------------------------
 
 	//----DebugRender Functions-------------------------------------------
@@ -69,6 +73,8 @@ public:
   void                  DrawCamera        (CCamera* camera);
  	void									DrawGrid				  (float Size, CColor Color=colWHITE, int GridX=10, int32 GridZ=10 );
   void                  RenderBoundingBox (CBoundingBox* _pBBox);
+  //void                  DrawPlane         (float Size, const Vect3f& normal, float distance,  CColor Color=colWHITE, int GridX=10, int32 GridZ=10, ETypeModePaint mode = PAINT_WIREFRAME );
+  //void                  DrawSphere        (float Radius, CColor Color=colWHITE, uint32 Aristas=10,  ETypeModePaint mode = PAINT_WIREFRAME,  EtypeSphere typeSphere = COMPLETE);
   //void                  EnableAlphaBlend  ();
   //void                  DisbaleAlphaBlend ();
 
