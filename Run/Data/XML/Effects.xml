@@ -59,6 +59,7 @@
     <technique name="WhiteTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
     <technique name="NoTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
     <technique name="ShowNormalsTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
+    <technique name="Cal3dShowNormalsTechnique" effect="Cal3D Effects" use_world_matrix="true" use_world_view_projection_matrix="true" animated="true"/>
     <technique name="ShowUVCoordsTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
     <technique name="ShowTangentTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
     <technique name="ShowBitangentTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
