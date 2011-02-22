@@ -59,7 +59,7 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
     if(m_pViewer->GetNormalRendering())
     {
       m_pStaticMeshTechnique = CORE->GetEffectManager()->GetEffectTechnique("ShowNormalsTechnique");
-      m_pAnimatedTechnique = CORE->GetEffectManager()->GetEffectTechnique("Cal3DTechnique");
+      m_pAnimatedTechnique = CORE->GetEffectManager()->GetEffectTechnique("Cal3dShowNormalsTechnique");
     }else{
       m_pStaticMeshTechnique = 0;
       m_pAnimatedTechnique = 0;
