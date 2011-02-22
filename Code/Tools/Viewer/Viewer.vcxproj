@@ -20,7 +20,9 @@
     <ClInclude Include="ViewerProcess.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Run\Data\XML\actions.xml" />
+    <None Include="..\..\..\Run\Data\XML\actions.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="..\..\..\Run\Data\XML\init_viewer.xml">
       <SubType>Designer</SubType>
     </None>
@@ -60,7 +62,7 @@
     <OutDir>$(SolutionDir)Bin\</OutDir>
     <IntDir>$(SolutionDir)Bin\Intermediate_d\$(ProjectName)\</IntDir>
     <IncludePath>C:\Archivos de programa\Microsoft DirectX SDK %28June 2010%29\Include;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;C:\Archivos de programa\Microsoft DirectX SDK %28August 2009%29\Include;E:\Archivos de programa\Microsoft DirectX SDK (August 2009)\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;C:\Archivos de programa\Microsoft DirectX SDK %28August 2009%29\Lib\x86;E:\Archivos de programa\Microsoft DirectX SDK %28August 2009%29\Lib\x86;C:\Archivos de programa\Microsoft DirectX SDK %28June 2010%29\Lib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;C:\Archivos de programa\Microsoft DirectX SDK %28August 2009%29\Lib\x86;E:\Archivos de programa\Microsoft DirectX SDK %28August 2009%29\Lib\x86;C:\Archivos de programa\Microsoft DirectX SDK %28June 2010%29\Lib\x86;C:\Archivos de programa\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\lib\Win32;$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName)_d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -68,7 +70,7 @@
     <OutDir>$(SolutionDir)Bin\</OutDir>
     <IntDir>$(SolutionDir)Bin\Intermediate\$(ProjectName)\</IntDir>
     <IncludePath>C:\Archivos de programa\Microsoft DirectX SDK %28June 2010%29\Include;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;C:\Archivos de programa\Microsoft DirectX SDK %28August 2009%29\Include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Archivos de programa\Microsoft DirectX SDK %28June 2010%29\Lib\x86;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;C:\Archivos de programa\Microsoft DirectX SDK %28August 2009%29\Lib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Archivos de programa\Microsoft DirectX SDK %28June 2010%29\Lib\x86;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;C:\Archivos de programa\Microsoft DirectX SDK %28August 2009%29\Lib\x86;C:\Archivos de programa\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\lib\Win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -83,7 +85,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>LuaBind_d.lib;Lua_d.lib;cal3d_d.lib;Graphics_d.lib;Core_d.lib;GUI_d.lib;Base_d.lib;Input_d.lib;d3dx9d.lib;d3d9.lib;d3dxof.lib;dxguid.lib;dinput8.lib;xinput.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;winmm.lib;%(AdditionalDependencies);Winmm.lib</AdditionalDependencies>
+      <AdditionalDependencies>PhysXLoader.lib;NxCooking.lib;NxCharacter.lib;LuaBind_d.lib;Lua_d.lib;cal3d_d.lib;Graphics_d.lib;Core_d.lib;GUI_d.lib;Base_d.lib;Input_d.lib;d3dx9d.lib;d3d9.lib;d3dxof.lib;dxguid.lib;dinput8.lib;xinput.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;winmm.lib;%(AdditionalDependencies);Winmm.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Bin\lib\;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -104,7 +106,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>LuaBind.lib;Lua.lib;GUI.lib;cal3d.lib;Graphics.lib;Core.lib;Base.lib;Input.lib;d3dx9.lib;d3d9.lib;d3dxof.lib;dxguid.lib;dinput8.lib;xinput.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);Winmm.lib</AdditionalDependencies>
+      <AdditionalDependencies>PhysXLoader.lib;NxCooking.lib;NxCharacter.lib;LuaBind.lib;Lua.lib;GUI.lib;cal3d.lib;Graphics.lib;Core.lib;Base.lib;Input.lib;d3dx9.lib;d3d9.lib;d3dxof.lib;dxguid.lib;dinput8.lib;xinput.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);Winmm.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SolutionDir)Bin\lib\;</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
