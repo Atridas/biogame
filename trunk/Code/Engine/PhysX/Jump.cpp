@@ -1,6 +1,7 @@
 #include "base.h"
 #include "Jump.h"
 
+#include "Utils/MemLeaks.h"
 
 void CJump::StartJump(float v0)
 {

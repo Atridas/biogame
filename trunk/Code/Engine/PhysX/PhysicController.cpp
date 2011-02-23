@@ -10,6 +10,8 @@
 #include "NxCapsuleController.h"
 //---------------------//
 
+#include "Utils/MemLeaks.h"
+
 CPhysicController::CPhysicController(float radius, float height, float slope, float skinwidth, float stepOffset,
 																		 uint32 collisionGroups, CPhysicUserData* userData, const Vect3f& pos, float gravity)
 																		 : m_pPhXController(NULL)

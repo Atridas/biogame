@@ -28,6 +28,8 @@
 #include "RenderManager.h"
 #include "Utils/Exception.h"
 
+#include "Utils/MemLeaks.h"
+
 #define MAX_ARISTAS 10
 
 //----------------------------------------------------------------------------

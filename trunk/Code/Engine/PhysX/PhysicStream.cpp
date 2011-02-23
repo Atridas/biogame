@@ -5,6 +5,8 @@
 
 #include "base.h"
 
+#include "Utils/MemLeaks.h"
+
 CPhysicUserStream::CPhysicUserStream(const char* filename, bool load) : fp(NULL)
 {
 	fp = fopen(filename, load ? "rb" : "wb");
