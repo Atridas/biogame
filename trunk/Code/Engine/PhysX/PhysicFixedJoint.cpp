@@ -1,3 +1,4 @@
+#define __DONT_INCLUDE_MEM_LEAKS__
 #include "PhysicFixedJoint.h"
 #include "NxFixedJointDesc.h"
 #include "PhysicActor.h"

@@ -73,7 +73,8 @@ public:
   void                  DrawCamera        (CCamera* camera);
  	void									DrawGrid				  (float Size, CColor Color=colWHITE, int GridX=10, int32 GridZ=10 );
   void                  RenderBoundingBox (CBoundingBox* _pBBox);
-  //void                  DrawPlane         (float Size, const Vect3f& normal, float distance,  CColor Color=colWHITE, int GridX=10, int32 GridZ=10, ETypeModePaint mode = PAINT_WIREFRAME );
+  void                  DrawPlane         (float size, const Vect3f& normal, float distance, CColor Color, int GridX, int GridZ ); 
+  void                  DrawSphere        (float Radius, const CColor& Color, int Aristas);
   //void                  DrawSphere        (float Radius, CColor Color=colWHITE, uint32 Aristas=10,  ETypeModePaint mode = PAINT_WIREFRAME,  EtypeSphere typeSphere = COMPLETE);
   //void                  EnableAlphaBlend  ();
   //void                  DisbaleAlphaBlend ();

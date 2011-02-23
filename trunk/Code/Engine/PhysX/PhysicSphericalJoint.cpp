@@ -1,3 +1,4 @@
+#define __DONT_INCLUDE_MEM_LEAKS__
 #include "PhysicSphericalJoint.h"
 #include "NxSphericalJointDesc.h"
 #include "PhysicActor.h"

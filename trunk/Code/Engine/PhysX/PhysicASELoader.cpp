@@ -1,3 +1,4 @@
+#define __DONT_INCLUDE_MEM_LEAKS__
 #include "PhysicASELoader.h"
 #include "Math/Vector3.h"
 #include "base.h"

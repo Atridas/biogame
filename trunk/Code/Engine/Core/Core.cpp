@@ -20,6 +20,7 @@
 #include <LogRender.h>
 #include <Console.h>
 #include <GUIManager.h>
+#include <PhysicsManager.h>
 //#include <AnimatedModelManager.h>
 
 bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
@@ -43,6 +44,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pLogRender                = new CLogRender();
   m_pConsole                  = new CConsole();
   m_pGUIManager               = new CGUIManager(_InitParams.RenderManagerParams.v2iResolution);
+  m_pPhysicsManager           = new CPhysicsManager();
 
   m_pRenderManager->Init(hWnd,_InitParams.RenderManagerParams);
 
@@ -84,6 +86,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pConsole->Init(m_pScriptManager);
   m_pGUIManager->Init(_InitParams.GUIManagerParams.szXML);
   m_pGUIManager->ActiveWindows(_InitParams.GUIManagerParams.szInitWindow);
+  m_pPhysicsManager->Init();
   return IsOk();
 }
 
@@ -93,6 +96,7 @@ void CCore::Release()
   
 
   //delete a l'inrevès de com s'ha fet l'init
+  CHECKED_DELETE(m_pPhysicsManager);
   CHECKED_DELETE(m_pGUIManager);
   CHECKED_DELETE(m_pConsole);
   CHECKED_DELETE(m_pLogRender)
