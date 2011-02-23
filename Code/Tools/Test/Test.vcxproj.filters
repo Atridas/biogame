@@ -3,6 +3,7 @@
   <ItemGroup>
     <ClCompile Include="TestProcess.cpp" />
     <ClCompile Include="mainTest.cpp" />
+    <ClCompile Include="PhysXProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Data">
@@ -11,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TestProcess.h" />
+    <ClInclude Include="PhysXProcess.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Run\Data\XML\init_test.xml">
@@ -20,6 +22,9 @@
       <Filter>Data</Filter>
     </None>
     <None Include="..\..\..\Run\Data\XML\test.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\ScenneEffects_PhysX.xml">
       <Filter>Data</Filter>
     </None>
   </ItemGroup>

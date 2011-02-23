@@ -129,4 +129,5 @@ void CCore::Update()
     m_pActionToInput->Update(l_fElapsedTime);
   }
   m_pRenderableObjectsManager->Update(l_fElapsedTime);
+  m_pPhysicsManager->Update(l_fElapsedTime);
 }
