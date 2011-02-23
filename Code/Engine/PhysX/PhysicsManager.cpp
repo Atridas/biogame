@@ -1,3 +1,4 @@
+#define __DONT_INCLUDE_MEM_LEAKS__
 #include "base.h"
 
 #include "Assert.h"
@@ -26,6 +27,8 @@
 #include "PhysicFixedJoint.h"
 #include "RenderManager.h"
 #include "Utils/Exception.h"
+
+#define MAX_ARISTAS 10
 
 //----------------------------------------------------------------------------
 // Init data
@@ -189,7 +192,7 @@ void CPhysicsManager::DrawActor (NxActor* actor, CRenderManager* render)
 				float distance = shapes[nShapes]->isPlane()->getPlane().d;
 				NxVec3 normal =  shapes[nShapes]->isPlane()->getPlane().normal;
 				Vect3f n(normal.x,normal.y,normal.z);
-				//render->DrawPlane(100.f, n, distance,color,40,40);
+				render->DrawPlane(100.f, n, distance,color,40,40);
 			}
 			break;
 		case NX_SHAPE_BOX:
@@ -219,7 +222,7 @@ void CPhysicsManager::DrawActor (NxActor* actor, CRenderManager* render)
 				render->SetTransform(m);
 				NxReal radius = shapes[nShapes]->isSphere()->getRadius();
 				CColor color = physicUserData->GetColor();
-				//render->DrawSphere(radius,color);
+				render->DrawSphere(radius,color,MAX_ARISTAS);
 			}
 			break;
 		case NX_SHAPE_CAPSULE:
@@ -242,12 +245,12 @@ void CPhysicsManager::DrawActor (NxActor* actor, CRenderManager* render)
 				
 				total = m * translation;
 				render->SetTransform(total);
-				//render->DrawSphere(radius, color);
+				render->DrawSphere(radius, color,MAX_ARISTAS);
 
 				translation.Translate( Vect3f(0.f, -(height*0.5f), 0.f ));
 				total = m * translation;
 				render->SetTransform(total);
-				//render->DrawSphere(radius, color);
+				render->DrawSphere(radius, color,MAX_ARISTAS);
 			}
 			break;
 		case NX_SHAPE_CONVEX:

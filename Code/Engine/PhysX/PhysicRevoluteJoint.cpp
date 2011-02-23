@@ -1,3 +1,4 @@
+#define __DONT_INCLUDE_MEM_LEAKS__
 #include "PhysicRevoluteJoint.h"
 #include "NxRevoluteJointDesc.h"
 #include "NxRevoluteJoint.h"

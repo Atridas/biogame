@@ -941,85 +941,103 @@ void CRenderManager::RenderBoundingBox(CBoundingBox* _pBBox)
 //       }
 //   }
 //}
-//
-//
-//void CRenderManager::DrawPlane (float size, const Vect3f& normal, float distance, CColor Color, int32 GridX, int32 GridZ, ETypeModePaint mode )
-//{
-//   D3DXMATRIX matrix;
-//   D3DXMatrixIdentity(&matrix);
-//   m_pD3DDevice->SetTransform(D3DTS_WORLD, &matrix);
-//
-//   //Ax + By + Cz + D = 0
-//   //if (x,y) = (0,0) then z = -D/C
-//   //if (x,y) = (1,1) then z = (-D-A-B)/C
-//   //With two points we have a vector-->
-//
-//   float A,B,C,D;
-//   A = normal.x;
-//   B = normal.y;
-//   C = normal.z;
-//   D = distance;
-//
-//
-//   Vect3f pointA, pointB;
-//   if( C!= 0)
-//   {
-//       pointA = Vect3f(0.f,0.f, -D/C);
-//       pointB = Vect3f(1.f,1.f, (D-A-B)/C);
-//   }
-//   else if( B!= 0)
-//   {
-//       pointA = Vect3f(0.f,-D/B, 0.f);
-//       pointB = Vect3f(1.f,(-D-A-C)/B,1.f);
-//   }
-//   else if( A != 0)
-//   {
-//       pointA = Vect3f(-D/A,0.f, 0.f);
-//       pointB = Vect3f((-D-B-C)/A,1.f,1.f);
-//   }
-//   else
-//   {
-//       //error.
-//   }
-//
-//   Vect3f vectorA = pointB - pointA;
-//   vectorA.Normalize();
-//   Vect3f vectorB;
-//   vectorB = vectorA ^ normal; //cross product
-//   vectorB.Normalize();
-//   Vect3f initPoint = normal*distance;
-//
-//   assert(GridX>0);
-//   assert(GridZ>0);
-//
-//   if (mode != PAINT_WIREFRAME)
-//   {
-//       Vect3f initP = normal*(distance+0.1f);
-//       DrawQuad3D(initP, vectorA, vectorB,    size,    size,    Color);
-//   }
-//
-//   if (mode != PAINT_SOLID)
-//   {
-//       if (mode == PAINT_BOTH)
-//       {
-//           //si es solid las lineas las pintamos blancas:
-//           Color = colWHITE;
-//       }
-//       //LINEAS EN Z
-//       Vect3f initPointA = initPoint - vectorB*size*0.5;
-//       for(int b=0;b<=GridX;++b)
-//       {        
-//           DrawLine(    initPointA + vectorA*size*0.5, initPointA - vectorA*size*0.5, Color );
-//
-//           initPointA += vectorB*size/(float)GridX;
-//       }
-//       initPointA = initPoint - vectorA*size*0.5;
-//       for(int b=0;b<=GridX;++b)
-//       {
-//           DrawLine(    initPointA + vectorB*size*0.5, initPointA - vectorB*size*0.5, Color);
-//
-//           initPointA += vectorA*size/(float)GridX;
-//       }
-//   }
-//   
-//}
+
+void CRenderManager::DrawPlane(float size, const Vect3f& normal, float distance, CColor Color, int GridX, int GridZ )
+{
+
+	D3DXMATRIX matrix;
+	D3DXMatrixIdentity(&matrix);
+	m_pD3DDevice->SetTransform(D3DTS_WORLD, &matrix);
+
+	//Ax + By + Cz + D = 0
+	//if (x,y) = (0,0) then z = -D/C
+	//if (x,y) = (1,1) then z = (-D-A-B)/C
+	//With two points we have a vector-->
+
+	float A,B,C,D;
+	A = normal.x; 
+	B = normal.y; 
+	C = normal.z; 
+	D = distance; 
+	//float pointAz;
+	//float pointBz;
+
+	Vect3f pointA, pointB;
+	if( C!= 0)
+	{
+		pointA = Vect3f(0.f,0.f, -D/C);
+		pointB = Vect3f(1.f,1.f, (D-A-B)/C);
+	}
+	else if( B!= 0)
+	{
+		pointA = Vect3f(0.f,-D/B, 0.f);
+		pointB = Vect3f(1.f,(-D-A-C)/B,1.f);
+	}
+	else if( A != 0)
+	{
+		pointA = Vect3f(-D/A,0.f, 0.f);
+		pointB = Vect3f((-D-B-C)/A,1.f,1.f);
+	}
+	else
+	{
+		//error.
+	}
+
+
+	Vect3f vectorA = pointB - pointA;
+  vectorA.Normalize();
+	Vect3f vectorB;
+  vectorB = normal^vectorA;
+  vectorB.Normalize();
+	Vect3f initPoint = normal*distance;
+
+	assert(GridX>0);
+	assert(GridZ>0);
+	//LINEAS EN Z
+	Vect3f initPointA = initPoint - vectorB*size*0.5;
+	for(int b=0;b<=GridX;++b)
+	{		
+		DrawLine(initPointA + vectorA*size*0.5, initPointA - vectorA*size*0.5, Color );
+
+		initPointA += vectorB*size/(float)GridX;
+	}
+	initPointA = initPoint - vectorA*size*0.5;
+	for(int b=0;b<=GridX;++b)
+	{
+		DrawLine(initPointA + vectorB*size*0.5, initPointA - vectorB*size*0.5, Color);
+		initPointA += vectorA*size/(float)GridX;
+	}
+}
+
+
+void CRenderManager::DrawSphere( float Radius, const CColor& Color, int Aristas)
+{
+  for(int t=0;t<Aristas;++t)
+  {
+    float l_RadiusRing=Radius*sin(mathUtils::Deg2Rad(180.0f*((float)t))/((float)Aristas));
+    for(int b=0;b<Aristas;++b)
+    {
+      Vect3f l_PosA(  l_RadiusRing*cos(mathUtils::Deg2Rad((float)(360.0f*(float)b)/((float)Aristas))),
+                      Radius*cos(mathUtils::Deg2Rad((180.0f*((float)t))/((float)Aristas))),
+                      l_RadiusRing*sin(mathUtils::Deg2Rad(((float)(360.0f*(float)b)/((float)Aristas)))));
+
+      Vect3f l_PosB(  l_RadiusRing*cos(mathUtils::Deg2Rad((float)(360.0f*(float)(b+1))/((float)Aristas))),
+                      Radius*cos(mathUtils::Deg2Rad((180.0f*((float)t))/((float)Aristas))),
+                      l_RadiusRing*sin(mathUtils::Deg2Rad(((float)(360.0f*(float)(b+1))/((float)Aristas)))));
+
+      DrawLine(l_PosA,l_PosB,Color);
+
+      float l_RadiusNextRing=Radius*sin(mathUtils::Deg2Rad(180.0f*((float)(t+1)))/((float)Aristas));
+
+      Vect3f l_PosC(  l_RadiusRing*cos(mathUtils::Deg2Rad((float)(360.0f*(float)b)/((float)Aristas))),
+                      Radius*cos(mathUtils::Deg2Rad((180.0f*((float)t))/((float)Aristas))),
+                      l_RadiusRing*sin(mathUtils::Deg2Rad(((float)(360.0f*(float)b)/((float)Aristas)))));
+      Vect3f l_PosD(  l_RadiusNextRing*cos(mathUtils::Deg2Rad((float)(360.0f*(float)b)/((float)Aristas))),
+                      Radius*cos(mathUtils::Deg2Rad((180.0f*((float)(t+1)))/((float)Aristas))),
+                      l_RadiusNextRing*sin(mathUtils::Deg2Rad(((float)(360.0f*(float)b)/((float)Aristas)))));
+
+      DrawLine(l_PosC,l_PosD,Color);
+    }
+  }
+}
+
