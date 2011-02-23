@@ -38,7 +38,7 @@ class CScriptManager;
 struct SPhysicsInitParams
 {
 	SPhysicsInitParams::SPhysicsInitParams():	m_fSkinWidth(0.001f), m_fGravity(-9.81f*10), 
-																						m_Restitution_DefMat(0.0f), m_StaticFriction_DefMat(0.5f),
+																						m_Restitution_DefMat(0.4f), m_StaticFriction_DefMat(0.5f),
 																						m_DynamicFriction_DefMat(0.5f) {}
 	float		m_fSkinWidth;
 	float		m_fGravity;
@@ -77,7 +77,7 @@ class CPhysicsManager
 
 public:
 	//--- Init and End protocols	
-	CPhysicsManager()	:	m_bIsOk(false), m_bDebugRenderMode(false),
+	CPhysicsManager()	:	m_bIsOk(false), m_bDebugRenderMode(true),
 											m_pPhysicsSDK(0), m_pScene(0),
 											m_pControllerManager(0), m_pMyAllocator(0),
 											m_pCookingMesh(0), m_InitParams() {}
