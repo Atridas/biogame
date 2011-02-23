@@ -5,6 +5,8 @@
 
 #include "base.h"
 
+#include "Utils/MemLeaks.h"
+
 CPhysicSphericalJoint::CPhysicSphericalJoint()
 : m_pJoint(NULL)
 , m_pSphericalDesc(NULL)

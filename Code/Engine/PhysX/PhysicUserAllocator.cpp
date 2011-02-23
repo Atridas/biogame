@@ -8,6 +8,8 @@
 #include <stdio.h>
 #include "base.h"
 
+//Aquest és el fitxer que fa busca memory leaks a physX
+
 #define MEMBLOCKSTART 64
 static const size_t g_pointerMarker = (size_t)0xbadbad00deadbabeLL;
 

@@ -4,6 +4,8 @@
 #include "base.h"
 #include <stdio.h>
 
+#include "Utils/MemLeaks.h"
+
 char* CPhysicASELoader::TrimFront(char* c)
 {
 	while(*c == ' ' || *c == '\t')
