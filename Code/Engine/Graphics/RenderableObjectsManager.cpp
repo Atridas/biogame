@@ -19,6 +19,7 @@ void CRenderableObjectsManager::Render(CRenderManager *RM)
     {
       m_RenderableObjects[i]->Render(RM);
     }
+    if(i > 25) return;
   }
 }
 
@@ -208,5 +209,13 @@ void CRenderableObjectsManager::SetAllRenderBoundingBox(bool _bVisible)
   for(size_t i=0; i < m_RenderableObjects.size() ; i++)
   {
       m_RenderableObjects[i]->SetRenderBoundingBox(_bVisible);
+  }
+}
+
+void CRenderableObjectsManager::SetAllRenderBoundingSphere(bool _bVisible)
+{
+  for(size_t i=0; i < m_RenderableObjects.size() ; i++)
+  {
+      m_RenderableObjects[i]->SetRenderBoundingSphere(_bVisible);
   }
 }

@@ -2,7 +2,8 @@
 
 CBoundingBox::CBoundingBox()
 {
-  m_vInitMin = m_vInitMax = m_vTranslation = m_vDimension = Vect3f(0.0f);
+  m_fMaxSideLenght = 0.0f;
+  m_vDimension = m_vMiddlePoint = Vect3f(0.0f);
 
   for(int i = 0; i < 8; i++)
     m_vBox[i] = Vect3f(0.0f);
@@ -11,7 +12,18 @@ CBoundingBox::CBoundingBox()
 
 bool CBoundingBox::Init(Vect3f& _vMin, Vect3f& _vMax)
 {
+  CalcBox(_vMin, _vMax);
+  CalcMiddlePoint();
+  CalcDimension();
+  CalcMaxSide();
 
+  SetOk(true);
+
+  return IsOk();
+}
+
+void CBoundingBox::CalcBox(Vect3f& _vMin, Vect3f& _vMax)
+{
   //crear la box
   /*            4                    5
                _____________________
@@ -31,10 +43,7 @@ bool CBoundingBox::Init(Vect3f& _vMin, Vect3f& _vMax)
         | /                 | /     
       2 |/__________________|/ 3 
   */
-
   //establir el vector min i max inicials.
-  m_vInitMin = _vMin;
-  m_vInitMax = _vMax;
 
   m_vBox[0] = Vect3f(_vMin.x,_vMin.y,_vMin.z);
   m_vBox[1] = Vect3f(_vMax.x,_vMin.y,_vMin.z);
@@ -44,21 +53,25 @@ bool CBoundingBox::Init(Vect3f& _vMin, Vect3f& _vMax)
   m_vBox[5] = Vect3f(_vMax.x,_vMax.y,_vMin.z);
   m_vBox[6] = Vect3f(_vMin.x,_vMax.y,_vMax.z);
   m_vBox[7] = Vect3f(_vMax.x,_vMax.y,_vMax.z);
+}
 
-  //Dimensions
+void CBoundingBox::CalcMiddlePoint()
+{
+  Vect3f l_vMidVector = m_vBox[7] - m_vBox[0];
+  l_vMidVector *= 0.5f;
+  m_vMiddlePoint = l_vMidVector + m_vBox[0];
+}
+
+void CBoundingBox::CalcDimension()
+{
   float l_fSideLengthX = m_vBox[0].Distance(m_vBox[1]);
   float l_fSideLengthY = m_vBox[0].Distance(m_vBox[4]);
   float l_fSideLengthZ = m_vBox[0].Distance(m_vBox[2]);
 
-  m_vTranslation = Vect3f(0.0f);
   m_vDimension = Vect3f(l_fSideLengthX,l_fSideLengthY,l_fSideLengthZ);
-
-  SetOk(true);
-
-  return IsOk();
 }
 
-float CBoundingBox::GetMaxSideLength()
+void CBoundingBox::CalcMaxSide()
 {
   float l_fMax = m_vDimension.x;
 
@@ -67,15 +80,9 @@ float CBoundingBox::GetMaxSideLength()
   if(l_fMax < m_vDimension.z)
      l_fMax = m_vDimension.z;
 
-  return l_fMax;
+  m_fMaxSideLenght = l_fMax;
 }
 
-Vect3f CBoundingBox::MiddlePoint()
-{
-  Vect3f l_vMidVector = m_vBox[7] - m_vBox[0];
-  l_vMidVector *= 0.5f;
-  return l_vMidVector + m_vBox[0];
-}
 
 /*void CBoundingBox::TranslateBox(const Vect3f& _vTranslation)
 {

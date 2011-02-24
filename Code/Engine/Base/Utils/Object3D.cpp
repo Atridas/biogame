@@ -7,6 +7,8 @@ CObject3D::CObject3D(const Vect3f& _vPos, float _fYaw, float _fPitch, float _fRo
 , m_fPitch(_fPitch)
 , m_fRoll(_fRoll)
 , m_bVisible(true)
+, m_bRenderBoundingBox(false)
+, m_bRenderBoundingSphere(false)
 {
 
 }
@@ -33,7 +35,7 @@ void CObject3D::SetRoll( float _fRoll )
 	
  Vect3f CObject3D::GetCenterPosition()
  {
-   return m_vPosition+m_BoundingBox.MiddlePoint();
+   return m_vPosition+m_BoundingBox.GetMiddlePoint();
  }
 	
 	
