@@ -324,8 +324,10 @@ void CRenderManager::SetTransform(D3DXMATRIX& matrix)
 void CRenderManager::SetTransform(Mat44f& m)
 {
   assert(IsOk());
-  D3DXMATRIX matrix(m.m00, m.m10, m.m20, m.m30, m.m01, m.m11, m.m21, m.m31,
-                  m.m02, m.m12, m.m22, m.m32, m.m03, m.m13, m.m23, m.m33);
+  D3DXMATRIX matrix(m.m00, m.m10, m.m20, m.m30,
+                    m.m01, m.m11, m.m21, m.m31,
+                    m.m02, m.m12, m.m22, m.m32,
+                    m.m03, m.m13, m.m23, m.m33);
 
   m_pD3DDevice->SetTransform(D3DTS_WORLD, &matrix);
     
@@ -795,33 +797,35 @@ void CRenderManager::GetRay (const Vect2i& mousePos, Vect3f& posRay, Vect3f& dir
 
 void CRenderManager::DrawRectangle2D (const Vect2i& pos, uint32 w, uint32 h, CColor& backGroundColor, uint32 edge_w, uint32 edge_h, CColor& edgeColor)
 {
-    //Draw background quad2D:
-    DrawQuad2D(pos, w, h, UPPER_LEFT, backGroundColor);
-   	 
-    //Draw the four edges:
+  assert(IsOk());
+  //Draw background quad2D:
+  DrawQuad2D(pos, w, h, UPPER_LEFT, backGroundColor);
+   
+  //Draw the four edges:
 
-    //2 Horizontal:
-    Vect2i pos_aux = pos;
-    pos_aux.y -= edge_h;
-    DrawQuad2D(pos_aux, w, edge_h, UPPER_LEFT, edgeColor);
-    pos_aux = pos;
-    pos_aux.y += h;
-    DrawQuad2D(pos_aux, w, edge_h, UPPER_LEFT, edgeColor);
-    
-    //2 Vertical:
-    pos_aux = pos;
-    pos_aux.x -= edge_w;
-    pos_aux.y -= edge_h;
-    DrawQuad2D(pos_aux, edge_w, h + (2*edge_w), UPPER_LEFT, edgeColor);
-    pos_aux.x = pos.x + w;
-    DrawQuad2D(pos_aux, edge_w, h + (2*edge_w), UPPER_LEFT, edgeColor);    
+  //2 Horizontal:
+  Vect2i pos_aux = pos;
+  pos_aux.y -= edge_h;
+  DrawQuad2D(pos_aux, w, edge_h, UPPER_LEFT, edgeColor);
+  pos_aux = pos;
+  pos_aux.y += h;
+  DrawQuad2D(pos_aux, w, edge_h, UPPER_LEFT, edgeColor);
+  
+  //2 Vertical:
+  pos_aux = pos;
+  pos_aux.x -= edge_w;
+  pos_aux.y -= edge_h;
+  DrawQuad2D(pos_aux, edge_w, h + (2*edge_w), UPPER_LEFT, edgeColor);
+  pos_aux.x = pos.x + w;
+  DrawQuad2D(pos_aux, edge_w, h + (2*edge_w), UPPER_LEFT, edgeColor);    
 }
 
 void CRenderManager::RenderBoundingBox(CBoundingBox* _pBBox)
 {
+  assert(IsOk());
   const Vect3f *l_pVectBox = _pBBox->GetBox();
 
-  DrawLine(l_pVectBox[0],_pBBox->MiddlePoint(),colGREEN);
+  //DrawLine(l_pVectBox[0],_pBBox->GetMiddlePoint(),colGREEN);
 
     /*            4                    5
                _____________________
@@ -856,7 +860,26 @@ void CRenderManager::RenderBoundingBox(CBoundingBox* _pBBox)
   DrawLine(l_pVectBox[6],l_pVectBox[7],colBLUE);
 }
 
-//
+void CRenderManager::RenderBoundingSphere(CBoundingSphere* _pBSphere)
+{
+  assert(IsOk());
+
+  //Traslladar al centre de l'esfera
+  D3DMATRIX l_md3d;
+  m_pD3DDevice->GetTransform(D3DTS_WORLD,&l_md3d);
+  Mat44f l_mT = l_md3d;
+  Vect3f l_vMid = _pBSphere->GetMiddlePoint();
+  l_vMid += l_mT.GetTranslationVector();
+  l_mT.Translate(l_vMid);
+
+  SetTransform(l_mT);
+  
+  DrawSphere(_pBSphere->GetRadius(),colBLUE, 10);
+  //DrawLine(_pBSphere->GetMiddlePoint(),Vect3f(0.0f),colGREEN);
+  //DrawLine(Vect3f(0.0f),Vect3f(0.0f,0.1f,0.0f),colRED);
+}
+
+
 //void CRenderManager::DrawSphere (float Radius, CColor Color, uint32 Aristas, ETypeModePaint mode, EtypeSphere typeSphere)
 //{
 //   float l_fAngle    = 180.f;
@@ -944,7 +967,7 @@ void CRenderManager::RenderBoundingBox(CBoundingBox* _pBBox)
 
 void CRenderManager::DrawPlane(float size, const Vect3f& normal, float distance, CColor Color, int GridX, int GridZ )
 {
-
+  assert(IsOk());
 	D3DXMATRIX matrix;
 	D3DXMatrixIdentity(&matrix);
 	m_pD3DDevice->SetTransform(D3DTS_WORLD, &matrix);
@@ -1012,6 +1035,7 @@ void CRenderManager::DrawPlane(float size, const Vect3f& normal, float distance,
 
 void CRenderManager::DrawSphere( float Radius, const CColor& Color, int Aristas)
 {
+  assert(IsOk());
   for(int t=0;t<Aristas;++t)
   {
     float l_RadiusRing=Radius*sin(mathUtils::Deg2Rad(180.0f*((float)t))/((float)Aristas));

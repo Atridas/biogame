@@ -29,5 +29,10 @@ void CRenderableObject::Render(CRenderManager* _pRM)
     {
       _pRM->RenderBoundingBox(GetBoundingBox());
     }
+
+    if(m_bRenderBoundingSphere)
+    {
+      _pRM->RenderBoundingSphere(GetBoundingSphere());
+    }
   }
 }

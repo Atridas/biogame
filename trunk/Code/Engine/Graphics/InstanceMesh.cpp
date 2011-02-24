@@ -18,6 +18,7 @@ bool CInstanceMesh::Init(const string& _szCoreName)
     if(m_StaticMesh != 0)
     {
       m_BoundingBox.Init(m_StaticMesh->GetMin(),m_StaticMesh->GetMax());
+      m_BoundingSphere.Init(m_StaticMesh->GetMin(),m_StaticMesh->GetMax());
       SetOk(true);
     }else
       SetOk(false);

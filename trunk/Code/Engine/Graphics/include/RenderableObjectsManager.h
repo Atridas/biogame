@@ -31,6 +31,7 @@ public:
 
   void SetAllVisibility(bool _bVisible);
   void SetAllRenderBoundingBox(bool _bVisible);
+  void SetAllRenderBoundingSphere(bool _bVisible);
 
   CRenderableObject* GetRenderableObject (int _ID) {return m_RenderableObjects[_ID];};
   int GetRenderableVectorSize() {return m_RenderableObjects.size();};

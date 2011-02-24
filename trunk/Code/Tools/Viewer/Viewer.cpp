@@ -467,6 +467,7 @@ void CViewer::ToggleShowBoxes()
   m_bShowBoxes = !m_bShowBoxes;
 
   CORE->GetRenderableObjectsManager()->SetAllRenderBoundingBox(m_bShowBoxes);
+  CORE->GetRenderableObjectsManager()->SetAllRenderBoundingSphere(m_bShowBoxes);
 }
 
 bool CViewer::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
