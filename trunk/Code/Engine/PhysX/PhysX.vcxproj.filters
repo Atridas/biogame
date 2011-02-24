@@ -16,6 +16,9 @@
     <Filter Include="CookingMesh">
       <UniqueIdentifier>{f6f2a5aa-8f97-484c-9ac4-e98965f15ea3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PhysicMaterial">
+      <UniqueIdentifier>{cf07d87f-2df9-45be-bae7-522cab4ca4e8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PhysicSphericalJoint.cpp">
@@ -52,6 +55,9 @@
     <ClCompile Include="PhysicTriggerReport.cpp">
       <Filter>Actor</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicMaterial.cpp">
+      <Filter>PhysicMaterial</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\PhysicSphericalJoint.h">
@@ -87,6 +93,9 @@
     </ClInclude>
     <ClInclude Include="include\PhysicTriggerReport.h">
       <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PhysicMaterial.h">
+      <Filter>PhysicMaterial</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

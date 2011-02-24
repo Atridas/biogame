@@ -24,6 +24,7 @@
 #include "PhysicActor.h"
 #include "SpotLight.h"
 
+
 CPhysicUserData* g_pUserData;
 CPhysicUserData* g_pUserData2;
 CPhysicUserData* g_pUserData3;
@@ -79,11 +80,11 @@ bool CPhysXProcess::Init()
 
 
   //PHYSICS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  g_pUserData = new CPhysicUserData();
-  g_pUserData2 = new CPhysicUserData();
-  g_pUserData3 = new CPhysicUserData();
-  g_pUserData4 = new CPhysicUserData();
-  g_pUserData5 = new CPhysicUserData();
+  g_pUserData = new CPhysicUserData("Plane");
+  g_pUserData2 = new CPhysicUserData("Ball1");
+  g_pUserData3 = new CPhysicUserData("Composite");
+  g_pUserData4 = new CPhysicUserData("Pilota");
+  g_pUserData5 = new CPhysicUserData("Cub");
   g_pUserData->SetPaint(true);
   g_pUserData->SetColor(colWHITE);
   g_pUserData2->SetPaint(true);
@@ -122,6 +123,9 @@ bool CPhysXProcess::Init()
   l_pPhysManager->AddPhysicActor(g_pPActorBall);
   l_pPhysManager->AddPhysicActor(g_pPActorComposite);
 
+  
+ 
+  
   
 
   //CORE->GetRenderableObjectsManager()->SetAllVisibility(false);
@@ -354,7 +358,7 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
 
   if(strcmp(_pcAction, "Elevate") == 0)
   {
-    g_pPActorComposite->SetLinearVelocity(Vect3f(0.1,1,0.2)*m_fPhysxVelocity);
+    g_pPActorComposite->SetLinearVelocity(Vect3f(0.0f,1.0f,0.0f)*m_fPhysxVelocity);
   }
 
   if(strcmp(_pcAction, "ShootBOX") == 0)

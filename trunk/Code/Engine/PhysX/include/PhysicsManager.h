@@ -13,6 +13,7 @@
 #include "Math/Color.h"
 #include "Math/MathUtils.h"
 #include "Math/Vector3.h"
+#include "Named.h"
 #include <vector>
 //#include "Script/ScriptRegister.h"
 
@@ -32,6 +33,7 @@ class CPhysicRevoluteJoint;
 class CPhysicFixedJoint;
 class CPhysicTriggerReport;
 class CScriptManager;
+
 //--------------------------
 
 //---- Declaracion de nuevos tipos------------
@@ -54,11 +56,11 @@ struct SCollisionInfo
 	Vect3f	m_CollisionPoint;
 };
 
-class CPhysicUserData
+class CPhysicUserData : public CNamed
 {
 public:
-	CPhysicUserData(): m_bPaintPhysicObject(false), m_ColorPhysicObject(colWHITE){}
-	~CPhysicUserData(){/*Nothing*/}
+	CPhysicUserData(const string& _szName) : CNamed(_szName), m_bPaintPhysicObject(false), m_ColorPhysicObject(colWHITE){}
+	~CPhysicUserData() {/*Nothing*/}
 
 	void					SetPaint	(bool flag)						{m_bPaintPhysicObject = flag;}
 	void					SetColor	(const CColor& color) {m_ColorPhysicObject = color;}
