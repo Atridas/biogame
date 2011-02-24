@@ -26,8 +26,12 @@
 
 CPhysicUserData* g_pUserData;
 CPhysicUserData* g_pUserData2;
+CPhysicUserData* g_pUserData3;
+CPhysicUserData* g_pUserData4;
+CPhysicUserData* g_pUserData5;
 CPhysicActor* g_pPActorPlane;
 CPhysicActor* g_pPActorBall;
+CPhysicActor* g_pPActorComposite;
 
 bool CPhysXProcess::Init()
 {
@@ -77,25 +81,47 @@ bool CPhysXProcess::Init()
   //PHYSICS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   g_pUserData = new CPhysicUserData();
   g_pUserData2 = new CPhysicUserData();
+  g_pUserData3 = new CPhysicUserData();
+  g_pUserData4 = new CPhysicUserData();
+  g_pUserData5 = new CPhysicUserData();
   g_pUserData->SetPaint(true);
   g_pUserData->SetColor(colWHITE);
   g_pUserData2->SetPaint(true);
   g_pUserData2->SetColor(colGREEN);
+  g_pUserData3->SetPaint(true);
+  g_pUserData3->SetColor(colRED);
+  g_pUserData4->SetPaint(true);
+  g_pUserData4->SetColor(colYELLOW);
+  g_pUserData5->SetPaint(true);
+  g_pUserData5->SetColor(colCYAN);
 
 
   g_pPActorBall = new CPhysicActor(g_pUserData2);
   g_pPActorPlane = new CPhysicActor(g_pUserData);
+  g_pPActorComposite = new CPhysicActor(g_pUserData3);
 
   //Plane
   g_pPActorPlane->AddPlaneShape(Vect3f(0,1,0),0);
 
   //Ball
   g_pPActorBall->AddSphereShape(1);
-  g_pPActorBall->SetGlobalPosition(Vect3f(0,6,0));
+  g_pPActorBall->SetGlobalPosition(Vect3f(5,6,0));
   g_pPActorBall->CreateBody(0.1f);
+
+  //Composite
+  g_pPActorComposite->AddBoxSphape(4,Vect3f(0,7,0));
+  g_pPActorComposite->AddSphereShape(1,Vect3f(2,4,2));
+  g_pPActorComposite->AddSphereShape(1,Vect3f(2,4,-2));
+  g_pPActorComposite->AddSphereShape(1,Vect3f(-2,4,-2));
+  g_pPActorComposite->AddSphereShape(1,Vect3f(-2,4,2));
+  
+
+  g_pPActorComposite->CreateBody(0.6f);
 
   l_pPhysManager->AddPhysicActor(g_pPActorPlane);
   l_pPhysManager->AddPhysicActor(g_pPActorBall);
+  l_pPhysManager->AddPhysicActor(g_pPActorComposite);
+
   
 
   //CORE->GetRenderableObjectsManager()->SetAllVisibility(false);
@@ -112,10 +138,16 @@ void CPhysXProcess::Release()
 
   CHECKED_DELETE(m_pObjectCamera)
   CHECKED_DELETE(m_pObject)
+
   CHECKED_DELETE(g_pPActorPlane)
   CHECKED_DELETE(g_pUserData)
   CHECKED_DELETE(g_pUserData2)
+  CHECKED_DELETE(g_pUserData3)
+  CHECKED_DELETE(g_pUserData4)
+  CHECKED_DELETE(g_pUserData5)
   CHECKED_DELETE(g_pPActorBall)
+  CHECKED_DELETE(g_pPActorComposite)
+  
 
   
   
@@ -217,7 +249,7 @@ void CPhysXProcess::RenderINFO(CRenderManager* _pRM)
 
   _pRM->EnableAlphaBlend();
 
-  Vect2i pos(40, 40);
+  Vect2i pos(400, 40);
 
   
   CTexture* l_pTexture = CORE->GetTextureManager()->GetResource("Data/Textures/gohan.png");
@@ -227,7 +259,7 @@ void CPhysXProcess::RenderINFO(CRenderManager* _pRM)
   {
     assert(l_pTexture->IsOk());
     l_pTexture->Activate(0);
-    _pRM->DrawTexturedQuad2D(pos, l_pTexture->GetWidth(), l_pTexture->GetHeight(), UPPER_LEFT);
+    //_pRM->DrawTexturedQuad2D(pos, l_pTexture->GetWidth(), l_pTexture->GetHeight(), UPPER_LEFT);
   }
 
   _pRM->DisableAlphaBlend();
@@ -307,6 +339,58 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
 
     return true;
   }
+
+
+  if(strcmp(_pcAction, "ShootBall") == 0)
+  {
+    CPhysicActor* l_pPActorShoot = new CPhysicActor(g_pUserData4);
+    l_pPActorShoot->AddSphereShape(0.3f,m_pCamera->GetEye());
+    l_pPActorShoot->CreateBody(1);
+    CORE->GetPhysicsManager()->AddPhysicActor(l_pPActorShoot);
+    m_pCamera->GetDirection();
+    l_pPActorShoot->SetLinearVelocity(m_pCamera->GetDirection()*m_fPhysxVelocity);
+    CHECKED_DELETE(l_pPActorShoot)
+  }
+
+  if(strcmp(_pcAction, "Elevate") == 0)
+  {
+    g_pPActorComposite->SetLinearVelocity(Vect3f(0.1,1,0.2)*m_fPhysxVelocity);
+  }
+
+  if(strcmp(_pcAction, "ShootBOX") == 0)
+  {
+    CPhysicActor* l_pPActorShoot = new CPhysicActor(g_pUserData5);
+    l_pPActorShoot->AddBoxSphape(0.8f,m_pCamera->GetEye());
+    l_pPActorShoot->CreateBody(3);
+    CORE->GetPhysicsManager()->AddPhysicActor(l_pPActorShoot);
+    m_pCamera->GetDirection();
+    l_pPActorShoot->SetLinearVelocity(m_pCamera->GetDirection()*m_fPhysxVelocity);
+    CHECKED_DELETE(l_pPActorShoot)
+  }
+
+  if(strcmp(_pcAction, "VelocityChange") == 0)
+  {
+    Vect3i l_vDelta = INPUT_MANAGER->GetMouseDelta();
+
+    if (l_vDelta.z < 0)
+    {
+      m_fPhysxVelocity = m_fPhysxVelocity - 2;
+      if (m_fPhysxVelocity == 0)
+        m_fPhysxVelocity = 2;
+      
+    }
+    else
+    {
+       m_fPhysxVelocity = m_fPhysxVelocity + 2;
+      if (m_fPhysxVelocity == 1000)
+        m_fPhysxVelocity = 998;
+      
+    }
+ 
+    
+  }
+
+  
 
   return false;
 }

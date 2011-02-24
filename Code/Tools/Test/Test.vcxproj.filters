@@ -27,5 +27,11 @@
     <None Include="..\..\..\Run\Data\XML\ScenneEffects_PhysX.xml">
       <Filter>Data</Filter>
     </None>
+    <None Include="..\..\..\Run\Data\XML\actions.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\actions_physx.xml">
+      <Filter>Data</Filter>
+    </None>
   </ItemGroup>
 </Project>

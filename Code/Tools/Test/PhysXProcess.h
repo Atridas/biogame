@@ -14,7 +14,7 @@ class CPhysXProcess:
 
 public:
                         CPhysXProcess            (): CProcess("CPhysXProcess"), m_pObject(0), m_pObjectCamera(0),
-                                                    m_fVelocity(0.0f),m_bRenderLights(false)
+                                                    m_fVelocity(0.0f),m_bRenderLights(false),m_fPhysxVelocity(20)
                                                 {};
   virtual               ~CPhysXProcess           ()                          {Done();};
 
@@ -38,5 +38,6 @@ private:
   CCamera*              m_pObjectCamera;
   float                 m_fVelocity;
   bool                  m_bRenderLights;
+  float                 m_fPhysxVelocity;
   
 };
