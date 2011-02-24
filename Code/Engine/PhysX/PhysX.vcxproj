@@ -93,6 +93,7 @@
     <ClCompile Include="PhysicController.cpp" />
     <ClCompile Include="PhysicCookingMesh.cpp" />
     <ClCompile Include="PhysicFixedJoint.cpp" />
+    <ClCompile Include="PhysicMaterial.cpp" />
     <ClCompile Include="PhysicRevoluteJoint.cpp" />
     <ClCompile Include="PhysicsManager.cpp" />
     <ClCompile Include="PhysicSphericalJoint.cpp" />
@@ -107,6 +108,7 @@
     <ClInclude Include="include\PhysicController.h" />
     <ClInclude Include="include\PhysicCookingMesh.h" />
     <ClInclude Include="include\PhysicFixedJoint.h" />
+    <ClInclude Include="include\PhysicMaterial.h" />
     <ClInclude Include="include\PhysicRevoluteJoint.h" />
     <ClInclude Include="include\PhysicsManager.h" />
     <ClInclude Include="include\PhysicSphericalJoint.h" />

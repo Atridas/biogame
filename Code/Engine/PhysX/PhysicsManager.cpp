@@ -79,6 +79,8 @@ bool CPhysicsManager::Init ()
 				defaultMaterial->setStaticFriction(m_InitParams.m_StaticFriction_DefMat);
 				defaultMaterial->setDynamicFriction(m_InitParams.m_DynamicFriction_DefMat);
 
+        
+
 				// Create a controllerManager
 				m_pControllerManager = NxCreateControllerManager(m_pMyAllocator);
 				m_bIsOk = (m_pControllerManager != NULL);
