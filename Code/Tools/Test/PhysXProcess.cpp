@@ -16,6 +16,7 @@
 #include "RenderableAnimatedInstanceModel.h"
 
 #include <IndexedVertexs.h>
+#include <sstream>
 #include "VertexsStructs.h"
 #include "Console.h"
 
@@ -33,6 +34,8 @@ CPhysicUserData* g_pUserData5;
 CPhysicActor* g_pPActorPlane;
 CPhysicActor* g_pPActorBall;
 CPhysicActor* g_pPActorComposite;
+
+CPhysicUserData* g_pUserDataSHOOT = 0;
 
 bool CPhysXProcess::Init()
 {
@@ -88,9 +91,9 @@ bool CPhysXProcess::Init()
   g_pUserData->SetPaint(true);
   g_pUserData->SetColor(colWHITE);
   g_pUserData2->SetPaint(true);
-  g_pUserData2->SetColor(colGREEN);
+  g_pUserData2->SetColor(colWHITE);
   g_pUserData3->SetPaint(true);
-  g_pUserData3->SetColor(colRED);
+  g_pUserData3->SetColor(colWHITE);
   g_pUserData4->SetPaint(true);
   g_pUserData4->SetColor(colYELLOW);
   g_pUserData5->SetPaint(true);
@@ -202,6 +205,20 @@ void CPhysXProcess::Update(float _fElapsedTime)
       m_bStateChanged = false;
     }
   }
+
+  /*CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
+  const Vect3f l_PosCamera = m_pCamera->GetEye();
+  const Vect3f& l_DirCamera = m_pCamera->GetDirection().Normalize();
+  
+  SCollisionInfo l_CInfo;
+  CPhysicUserData* l_pUserData = 0;
+  l_pUserData = l_pPhysManager->RaycastClosestActor(l_PosCamera,l_DirCamera,1,l_pUserData,l_CInfo);
+  
+  if (l_pUserData != 0)
+  {
+    
+  }*/
+
 }
 
 void CPhysXProcess::RenderScene(CRenderManager* _pRM)
@@ -235,39 +252,30 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
 
 void CPhysXProcess::RenderINFO(CRenderManager* _pRM)
 {
-  /*
-  D3DXVECTOR3 vecPos = D3DXVECTOR3(0,0,0);
-  g_pD3DXSprite->Begin(0);
-  g_pD3DXSprite->Draw(_pRM->GetTextureManager()->GetResource("ZBlurTexture")->GetD3DTexture(), NULL, NULL, &vecPos, 0xffffffff);
-  g_pD3DXSprite->End();
-  */
-  /*
-  vecPos = D3DXVECTOR3(0,382,0);
-  g_pD3DXSprite2->Begin(0);
-  g_pD3DXSprite2->Draw(_pRM->GetTextureManager()->GetResource("DownSampledGlow2")->GetD3DTexture(), NULL, NULL, &vecPos, 0xffffffff);
-	g_pD3DXSprite2->End();
-  */
-  
 
-  //_pRM->DrawQuad2D(pos, 100, 100, UPPER_LEFT, colGREEN);
+  uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");
+ 
+  int l_iPosicio = 0;
+  int l_iPosicio2 = 130;
+  string l_szMsg("Sense Objecte");
+  //stringstream l_SStream;
+  stringstream l_SStreamHelp;
 
-  _pRM->EnableAlphaBlend();
 
-  Vect2i pos(400, 40);
+  //
 
-  
-  CTexture* l_pTexture = CORE->GetTextureManager()->GetResource("Data/Textures/gohan.png");
-  CTexture* l_pTexture2 = CORE->GetTextureManager()->GetResource("Data/Textures/gohan.png");
- // _pRM->EnableAlphaBlend();
-  if(l_pTexture)
+  if (g_pUserDataSHOOT != 0)
   {
-    assert(l_pTexture->IsOk());
-    l_pTexture->Activate(0);
-    //_pRM->DrawTexturedQuad2D(pos, l_pTexture->GetWidth(), l_pTexture->GetHeight(), UPPER_LEFT);
+    l_SStreamHelp << "Objecte Tocat: " << endl << g_pUserDataSHOOT->GetName() << endl;
+    FONT_MANAGER->DrawText(l_iPosicio,l_iPosicio2,colGREEN,l_uiFontType,l_SStreamHelp.str().c_str());
   }
-
-  _pRM->DisableAlphaBlend();
-   _pRM->DrawAxis();
+  else
+  {
+    l_SStreamHelp << "Objecte Tocat: " << endl << l_szMsg << endl;
+    FONT_MANAGER->DrawText(l_iPosicio,l_iPosicio2,colGREEN,l_uiFontType,l_SStreamHelp.str().c_str());
+  }
+ 
+  _pRM->DrawAxis();
 }
 
 bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
@@ -347,18 +355,39 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
 
   if(strcmp(_pcAction, "ShootBall") == 0)
   {
+    
     CPhysicActor* l_pPActorShoot = new CPhysicActor(g_pUserData4);
     l_pPActorShoot->AddSphereShape(0.3f,m_pCamera->GetEye());
     l_pPActorShoot->CreateBody(1);
     CORE->GetPhysicsManager()->AddPhysicActor(l_pPActorShoot);
-    m_pCamera->GetDirection();
+    //m_pCamera->GetDirection();
     l_pPActorShoot->SetLinearVelocity(m_pCamera->GetDirection()*m_fPhysxVelocity);
+    
     CHECKED_DELETE(l_pPActorShoot)
+
   }
 
   if(strcmp(_pcAction, "Elevate") == 0)
   {
-    g_pPActorComposite->SetLinearVelocity(Vect3f(0.0f,1.0f,0.0f)*m_fPhysxVelocity);
+    //g_pPActorComposite->SetLinearVelocity(Vect3f(0.0f,1.0f,0.0f)*m_fPhysxVelocity);
+      CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
+      const Vect3f l_PosCamera = m_pCamera->GetEye();
+      const Vect3f& l_DirCamera = m_pCamera->GetDirection().Normalize();
+  
+      SCollisionInfo l_CInfo;
+      //CPhysicUserData* l_pUserData = 0;
+      if (g_pUserDataSHOOT != 0)
+      {
+        g_pUserDataSHOOT->SetColor(colWHITE);
+      }
+      
+      g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActor(l_PosCamera,l_DirCamera,1,g_pUserDataSHOOT,l_CInfo);
+
+      if (g_pUserDataSHOOT != 0)
+      {
+        g_pUserDataSHOOT->SetColor(colRED);
+      }
+     
   }
 
   if(strcmp(_pcAction, "ShootBOX") == 0)
@@ -367,7 +396,7 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     l_pPActorShoot->AddBoxSphape(0.8f,m_pCamera->GetEye());
     l_pPActorShoot->CreateBody(3);
     CORE->GetPhysicsManager()->AddPhysicActor(l_pPActorShoot);
-    m_pCamera->GetDirection();
+    //m_pCamera->GetDirection();
     l_pPActorShoot->SetLinearVelocity(m_pCamera->GetDirection()*m_fPhysxVelocity);
     CHECKED_DELETE(l_pPActorShoot)
   }
@@ -398,4 +427,10 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
 
   return false;
 }
+
+
+
+  
+
+
 
