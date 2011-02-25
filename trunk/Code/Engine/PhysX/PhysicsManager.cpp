@@ -565,6 +565,8 @@ NxCCDSkeleton* CPhysicsManager::CreateCCDSkeleton (float size)
 
 CPhysicUserData* CPhysicsManager::RaycastClosestActor (const Vect3f posRay, const Vect3f& dirRay, uint32 impactMask, CPhysicUserData* impactObject, SCollisionInfo& info )
 {
+  
+  //NxUserRaycastReport::ALL_SHAPES
 	assert(m_pScene != NULL);
 
 	NxRay ray; 

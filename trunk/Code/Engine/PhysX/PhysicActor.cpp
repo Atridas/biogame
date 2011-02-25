@@ -137,6 +137,7 @@ void CPhysicActor::AddSphereShape	(float radius, const Vect3f& localPos, NxCCDSk
 		sphereDesc->shapeFlags |= NX_SF_DYNAMIC_DYNAMIC_CCD; //Activate dynamic-dynamic CCD for this body
 	}
 	m_pPhXActorDesc->shapes.pushBack( sphereDesc );
+  
 }
 
 void CPhysicActor::AddBoxSphape (const Vect3f& size, const Vect3f& localPos, NxCCDSkeleton* skeleton, uint32 group)
