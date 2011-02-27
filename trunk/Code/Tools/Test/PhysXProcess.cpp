@@ -24,6 +24,7 @@
 #include <PhysicsManager.h>
 #include "PhysicActor.h"
 #include "SpotLight.h"
+#include "InstanceMesh.h"
 
 
 CPhysicUserData* g_pUserData;
@@ -73,6 +74,7 @@ bool CPhysXProcess::Init()
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
 
   CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
+  m_pRenderPhysX = CORE->GetRenderableObjectsManager()->GetResource("maquina exploradora");
 
   if(l_Spot)
   {
@@ -84,13 +86,13 @@ bool CPhysXProcess::Init()
 
   //PHYSICS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   g_pUserData = new CPhysicUserData("Plane");
-  g_pUserData2 = new CPhysicUserData("Ball1");
+  g_pUserData2 = new CPhysicUserData("CaixaNormalMap");
   g_pUserData3 = new CPhysicUserData("Composite");
   g_pUserData4 = new CPhysicUserData("Pilota");
   g_pUserData5 = new CPhysicUserData("Cub");
   g_pUserData->SetPaint(true);
   g_pUserData->SetColor(colWHITE);
-  g_pUserData2->SetPaint(true);
+  g_pUserData2->SetPaint(false);
   g_pUserData2->SetColor(colWHITE);
   g_pUserData3->SetPaint(true);
   g_pUserData3->SetColor(colWHITE);
@@ -108,12 +110,17 @@ bool CPhysXProcess::Init()
   g_pPActorPlane->AddPlaneShape(Vect3f(0,1,0),0);
 
   //Ball
-  g_pPActorBall->AddSphereShape(1);
-  g_pPActorBall->SetGlobalPosition(Vect3f(5,6,0));
+  Vect3f l_vBoxDim(1.0f,1.0f,1.0f);
+  if (m_pRenderPhysX!=0)
+  {
+    l_vBoxDim = m_pRenderPhysX->GetBoundingBox()->GetDimension();
+  }
+  g_pPActorBall->AddBoxSphape(l_vBoxDim/2);
+  //g_pPActorBall->SetGlobalPosition(Vect3f(5,6,0));
   g_pPActorBall->CreateBody(0.1f);
 
   //Composite
-  g_pPActorComposite->AddBoxSphape(4,Vect3f(0,7,0));
+  g_pPActorComposite->AddBoxSphape(2,Vect3f(0,7,0));
   g_pPActorComposite->AddSphereShape(1,Vect3f(2,4,2));
   g_pPActorComposite->AddSphereShape(1,Vect3f(2,4,-2));
   g_pPActorComposite->AddSphereShape(1,Vect3f(-2,4,-2));
@@ -121,14 +128,16 @@ bool CPhysXProcess::Init()
   
 
   g_pPActorComposite->CreateBody(0.6f);
+  g_pPActorComposite->SetGlobalPosition(Vect3f(10,4,0));
 
   l_pPhysManager->AddPhysicActor(g_pPActorPlane);
   l_pPhysManager->AddPhysicActor(g_pPActorBall);
   l_pPhysManager->AddPhysicActor(g_pPActorComposite);
 
   
- 
+  //CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
   
+  //m_pRenderPhysX->SetVisible(true);
   
 
   //CORE->GetRenderableObjectsManager()->SetAllVisibility(false);
@@ -224,8 +233,14 @@ void CPhysXProcess::Update(float _fElapsedTime)
 void CPhysXProcess::RenderScene(CRenderManager* _pRM)
 {
 
-    CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
+   CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
    l_pPhysManager->DebugRender(_pRM);
+   if (m_pRenderPhysX!=0)
+   {
+     Mat44f l_vMat;
+     g_pPActorBall->GetMat44(l_vMat);
+     RenderPhysX(_pRM,m_pRenderPhysX,l_vMat);
+   }
   //Render Objects
   //CORE->GetRenderableObjectsManager()->Render(_pRM);
 
@@ -428,6 +443,21 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
   return false;
 }
 
+
+void CPhysXProcess::RenderPhysX(CRenderManager* _pRM, CRenderableObject* _pRO, Mat44f _mMatTransf)
+{
+    //_pRO->GetBoundingBox()->GetMiddlePoint();
+   Mat44f t;
+   t.SetIdentity();
+
+   t.Translate(Vect3f(0.0f,-_pRO->GetBoundingBox()->GetMiddlePoint().y,0.0f));
+   _pRM->SetTransform(_mMatTransf*t);
+   //(StaticMesh*)
+
+   CInstanceMesh* l_pInstanceMesh = (CInstanceMesh*)_pRO;
+   l_pInstanceMesh->RenderRenderableObject(_pRM);
+  // _pRM->RenderBoundingBox(l_pInstanceMesh->GetBoundingBox());
+}
 
 
   

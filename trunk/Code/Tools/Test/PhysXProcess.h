@@ -6,6 +6,8 @@
 //Forward declarations---------------------
 class CObject3D;
 class CRenderManager;
+class CRenderableObject;
+
 //-----------------------------------------
 
 class CPhysXProcess:
@@ -14,7 +16,7 @@ class CPhysXProcess:
 
 public:
                         CPhysXProcess            (): CProcess("CPhysXProcess"), m_pObject(0), m_pObjectCamera(0),
-                                                    m_fVelocity(0.0f),m_bRenderLights(false),m_fPhysxVelocity(20)
+                                                    m_fVelocity(0.0f),m_bRenderLights(false),m_fPhysxVelocity(20),m_pRenderPhysX(0)
                                                 {};
   virtual               ~CPhysXProcess           ()                          {Done();};
 
@@ -24,6 +26,7 @@ public:
 	void					        DebugInformation        (float FPS);
   void                  RenderScene             (CRenderManager* _pRM);
   void                  RenderINFO              (CRenderManager* _pRM);
+  void                  RenderPhysX             (CRenderManager* _pRM, CRenderableObject* _pRO, Mat44f _mMatTransf);
 
   virtual bool          ExecuteProcessAction      (float _fDeltaSeconds, float _fDelta, const char* _pcAction);
 
@@ -39,5 +42,6 @@ private:
   float                 m_fVelocity;
   bool                  m_bRenderLights;
   float                 m_fPhysxVelocity;
+  CRenderableObject*    m_pRenderPhysX;
   
 };
