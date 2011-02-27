@@ -19,7 +19,7 @@ void CRenderableObjectsManager::Render(CRenderManager *RM)
     {
       m_RenderableObjects[i]->Render(RM);
     }
-    if(i > 25) return;
+    //if(i > 25) return;
   }
 }
 
