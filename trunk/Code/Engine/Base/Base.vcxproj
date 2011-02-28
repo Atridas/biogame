@@ -155,6 +155,7 @@
     <ClInclude Include="include\Utils\MapManager.h" />
     <ClInclude Include="include\Utils\MemLeaks.h" />
     <ClInclude Include="include\Utils\Object3D.h" />
+    <ClInclude Include="include\Utils\RecyclingArray.h" />
     <ClInclude Include="include\Utils\Singleton.h" />
     <ClInclude Include="include\Utils\Timer.h" />
     <ClInclude Include="include\Utils\Types.h" />
