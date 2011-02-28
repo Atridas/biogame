@@ -52,6 +52,8 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
 
   if(!m_pTextureManager->Init()) 
   {
+    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al manager de textures.");
+    SetOk(false);
   }
 
   if(!m_pEffectManager->Load(_InitParams.EffectManagerParams))
@@ -86,6 +88,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pConsole->Init(m_pScriptManager);
   m_pGUIManager->Init(_InitParams.GUIManagerParams.szXML);
   m_pGUIManager->ActiveWindows(_InitParams.GUIManagerParams.szInitWindow);
+  m_pGUIManager->SetVisiblePointerMouse(_InitParams.GUIManagerParams.bRenderMouse);
   m_pPhysicsManager->Init();
   return IsOk();
 }

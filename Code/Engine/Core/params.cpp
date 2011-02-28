@@ -338,6 +338,8 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
           LOGGER->AddNewLog(ELL_INFORMATION, "\tGUI Manager finestra inicial \"%s\"",l_pcWindow);
         }
 
+        InitParams_.GUIManagerParams.bRenderMouse = l_TreeGUIManager.GetBoolProperty("render_mouse", false);
+
       } else {
         LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"GUIManager\". Usant valors per defecte.");
       }
