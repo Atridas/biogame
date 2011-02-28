@@ -47,7 +47,7 @@
 
   <LogRender position="10 0"/>
 
-  <GUIManager xml="Data/XML/GUI.xml" start="TextWindow1.xml"/>
+  <GUIManager xml="Data/XML/GUI.xml" start="TextWindow1.xml" render_mouse="false"/>
     
   <!--<AnimatedModelManager file="Data/XML/AnimatedModels.xml">
   </AnimatedModelManager>-->

@@ -181,6 +181,7 @@ struct SGUIManagerParams
 {
   string szXML;
   string szInitWindow;
+  bool   bRenderMouse;
 
   //Default Params
   SGUIManagerParams():
