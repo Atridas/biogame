@@ -3,6 +3,13 @@
 #include "InstanceMesh.h"
 #include <XML/XMLTreeNode.h>
 #include "RenderableAnimatedInstanceModel.h"
+#include "InstancedData.h"
+
+struct SHWIntancedMeshes
+{
+  CInstancedData<Mat44f> m_mWorldMats;
+  vector<CInstanceMesh*> m_vInstances;
+};
 
 void CRenderableObjectsManager::Update(float _fElapsedTime)
 {

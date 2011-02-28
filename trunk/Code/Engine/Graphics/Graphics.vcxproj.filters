@@ -127,6 +127,9 @@
     <Filter Include="SceneEffects\HDR Pipeline">
       <UniqueIdentifier>{9fed3f9b-f795-408e-a3a8-28924e5f726e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="RenderableObject\InstancedData">
+      <UniqueIdentifier>{46fa5196-5f97-4c66-a85a-0f318061bed4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -349,6 +352,9 @@
     </ClInclude>
     <ClInclude Include="include\HDRPipeline.h">
       <Filter>SceneEffects\HDR Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InstancedData.h">
+      <Filter>RenderableObject\InstancedData</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

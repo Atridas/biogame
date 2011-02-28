@@ -9,7 +9,10 @@
 
 //forward declarations---------------
 class CRenderManager;
+struct SHWIntancedMeshes;
+class CStaticMesh;
 //---------------------------------
+
 
 class CRenderableObjectsManager : public CMapManager<CRenderableObject>
 {
@@ -47,6 +50,7 @@ private:
   vector<CRenderableObject*> m_RenderableObjects;
   vector<CRenderableObject*> m_vMeshes;
   vector<CRenderableObject*> m_vAnimatedModels;
+  map<CStaticMesh*,SHWIntancedMeshes*> m_mapHWStaticInstances;
 
   bool Load(const string& _szFileName, bool _bReload);
   bool Load(const set<string>& _vXMLFiles);
