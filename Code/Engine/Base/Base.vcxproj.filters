@@ -79,6 +79,9 @@
     <Filter Include="Utils\Object3D">
       <UniqueIdentifier>{c9a51843-deb5-4e5d-827b-33c166e4a464}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils\RecyclingArray">
+      <UniqueIdentifier>{9a03e4ce-1346-4438-a9a7-7680eb85efa8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathConstants.cpp">
@@ -218,6 +221,9 @@
     </ClInclude>
     <ClInclude Include="include\Activable.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\RecyclingArray.h">
+      <Filter>Utils\RecyclingArray</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
