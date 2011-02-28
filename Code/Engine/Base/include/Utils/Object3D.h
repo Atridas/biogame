@@ -30,6 +30,7 @@ public:
 	const Vect3f&		    GetPosition	    () const {return m_vPosition;}
   Vect3f		          GetCenterPosition	    ();
   bool						    GetVisible	    () const {return m_bVisible;}
+  Mat44f              GetMat44        () const {return m_vMat44;}
   bool						    GetRenderBoundingBox  () const {return m_bRenderBoundingBox;}
   bool						    GetRenderBoundingSphere  () const {return m_bRenderBoundingSphere;}
   CBoundingBox*		    GetBoundingBox	() {return &m_BoundingBox;}
@@ -41,14 +42,19 @@ public:
 	void		SetPitch		( float _fPitch );
 	void		SetRoll			( float _fRoll );
   void		SetVisible	( bool  _bVisible ) {m_bVisible = _bVisible;};
+  void    SetMat44    (Mat44f _vMat44);
   void		SetRenderBoundingBox	( bool  _bValue ) {m_bRenderBoundingBox = _bValue;};
   void		SetRenderBoundingSphere	( bool  _bValue ) {m_bRenderBoundingSphere = _bValue;};
+
+  //---Other Functions
+  void    InitMat44   ();
 
 protected:
 	Vect3f	        m_vPosition;
 	float		        m_fYaw;
 	float		        m_fPitch;
 	float		        m_fRoll;
+  Mat44f          m_vMat44;
   bool            m_bVisible;
   bool            m_bRenderBoundingBox;
   bool            m_bRenderBoundingSphere;

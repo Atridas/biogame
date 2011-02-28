@@ -44,6 +44,8 @@ void CRenderableAnimatedInstanceModel::InitFromXML(CXMLTreeNode& l_XMLObject)
     SetPitch(l_fPitch);
     SetRoll(l_fRoll);
 
+    InitMat44();
+
     if(l_szDefaultAnimation != "")
       m_pAnimatedInstanceModel->BlendCycle(l_szDefaultAnimation, 0.0f);
     
