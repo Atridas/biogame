@@ -242,7 +242,7 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
      RenderPhysX(_pRM,m_pRenderPhysX,l_vMat);
    }
   //Render Objects
-  //CORE->GetRenderableObjectsManager()->Render(_pRM);
+  CORE->GetRenderableObjectsManager()->Render(_pRM);
 
   //Render Lights
   if(m_bRenderLights)
@@ -453,6 +453,7 @@ void CPhysXProcess::RenderPhysX(CRenderManager* _pRM, CRenderableObject* _pRO, M
    t.Translate(Vect3f(0.0f,-_pRO->GetBoundingBox()->GetMiddlePoint().y,0.0f));
    _pRM->SetTransform(_mMatTransf*t);
    //(StaticMesh*)
+   
 
    CInstanceMesh* l_pInstanceMesh = (CInstanceMesh*)_pRO;
    l_pInstanceMesh->RenderRenderableObject(_pRM);
