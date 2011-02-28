@@ -15,7 +15,7 @@
 #include <string>
 
 //-----Definicion de nuevos tipos-----------------------
-#define CAPACITY 500
+#define CAPACITY 1500
 
 enum ELOG_LEVEL
 {

@@ -144,6 +144,7 @@
     <ClInclude Include="include\Frustum.h" />
     <ClInclude Include="include\HDRPipeline.h" />
     <ClInclude Include="include\IndexedVertexs.h" />
+    <ClInclude Include="include\InstancedData.h" />
     <ClInclude Include="include\InstanceMesh.h" />
     <ClInclude Include="include\Light.h" />
     <ClInclude Include="include\LightManager.h" />
