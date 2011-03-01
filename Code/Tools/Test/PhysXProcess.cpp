@@ -25,6 +25,7 @@
 #include "PhysicActor.h"
 #include "SpotLight.h"
 #include "InstanceMesh.h"
+#include "GameObject.h"
 
 
 CPhysicUserData* g_pUserData;
@@ -37,6 +38,7 @@ CPhysicActor* g_pPActorBall;
 CPhysicActor* g_pPActorComposite;
 
 CPhysicUserData* g_pUserDataSHOOT = 0;
+CGameObject* g_pGameObject = 0;
 
 bool CPhysXProcess::Init()
 {
@@ -134,6 +136,11 @@ bool CPhysXProcess::Init()
   l_pPhysManager->AddPhysicActor(g_pPActorBall);
   l_pPhysManager->AddPhysicActor(g_pPActorComposite);
 
+
+  g_pGameObject = new CGameObject("Objecte Fisic");
+  g_pGameObject->Init(m_pRenderPhysX,g_pPActorBall);
+
+
   
   //CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
   
@@ -163,6 +170,7 @@ void CPhysXProcess::Release()
   CHECKED_DELETE(g_pUserData5)
   CHECKED_DELETE(g_pPActorBall)
   CHECKED_DELETE(g_pPActorComposite)
+  CHECKED_DELETE(g_pGameObject)
   
 
   
@@ -228,6 +236,8 @@ void CPhysXProcess::Update(float _fElapsedTime)
     
   }*/
 
+  g_pGameObject->Update(_fElapsedTime);
+
 }
 
 void CPhysXProcess::RenderScene(CRenderManager* _pRM)
@@ -235,12 +245,15 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
 
    CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
    l_pPhysManager->DebugRender(_pRM);
-   if (m_pRenderPhysX!=0)
+
+
+
+   /*if (m_pRenderPhysX!=0)
    {
      Mat44f l_vMat;
      g_pPActorBall->GetMat44(l_vMat);
      RenderPhysX(_pRM,m_pRenderPhysX,l_vMat);
-   }
+   }*/
   //Render Objects
   CORE->GetRenderableObjectsManager()->Render(_pRM);
 
