@@ -100,7 +100,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Run\Data\XML\AnimatedModels.xml" />
-    <None Include="..\..\..\Run\Data\XML\Effects.xml" />
+    <None Include="..\..\..\Run\Data\XML\Effects.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="..\..\..\Run\Data\XML\enemigos.xml" />
     <None Include="..\..\..\Run\Data\XML\fonts.xml" />
     <None Include="..\..\..\Run\Data\XML\IA.xml" />

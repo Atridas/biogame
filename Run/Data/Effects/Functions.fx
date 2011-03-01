@@ -269,4 +269,11 @@ void CalcAnimatedNormalTangent(float3 Normal,
 	OutTangent = normalize(OutTangent);
 }
 
+// --------------------------------------------------------------------------------------------------------------------------------
+
+float4x4 GetWorldMatrix(float4 WorldMatrix0, float4 WorldMatrix1, float4 WorldMatrix2, float4 WorldMatrix3)
+{
+  return float4x4(WorldMatrix0, WorldMatrix1, WorldMatrix2, WorldMatrix3);
+}
+
 #endif

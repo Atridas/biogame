@@ -11,6 +11,7 @@
 class CRenderManager;
 struct SHWIntancedMeshes;
 class CStaticMesh;
+class CInstanceMesh;
 //---------------------------------
 
 
@@ -28,6 +29,7 @@ public:
 
   void AddResource(const string& _szName, CRenderableObject* _pRenderableObject);
   void CleanUp()                        {Release();m_RenderableObjects.clear();m_vMeshes.clear(),m_vAnimatedModels.clear();};
+  virtual void Release();
 
   bool Load(const string& _szFileName)  {return Load(_szFileName,false);};
   bool Load(const vector<string>& _vXMLFiles);
@@ -50,10 +52,14 @@ private:
   vector<CRenderableObject*> m_RenderableObjects;
   vector<CRenderableObject*> m_vMeshes;
   vector<CRenderableObject*> m_vAnimatedModels;
-  map<CStaticMesh*,SHWIntancedMeshes*> m_mapHWStaticInstances;
+  map<const CStaticMesh*,SHWIntancedMeshes*> m_mapHWStaticInstances;
 
   bool Load(const string& _szFileName, bool _bReload);
   bool Load(const set<string>& _vXMLFiles);
+
+  void AddHWStaticInstance(CInstanceMesh* _pInstanceMesh);
+  void RenderHWInstanced(CRenderManager* _pRM);
+  void RenderOld(CRenderManager* _pRM);
 };
 
 #endif

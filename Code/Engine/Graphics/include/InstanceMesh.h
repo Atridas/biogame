@@ -21,10 +21,12 @@ public:
   virtual ~CInstanceMesh() {Done();};
 
   bool          Init      (const string& _szCoreName);
-  virtual void InitFromXML(CXMLTreeNode& l_XMLObject);
+  virtual void  InitFromXML(CXMLTreeNode& l_XMLObject);
 
   //Methods
   virtual void  RenderRenderableObject(CRenderManager* _pRM);
+
+  const CStaticMesh* GetStaticMesh() const { return m_StaticMesh; };
 
 protected:
   virtual void          Release                   ();
