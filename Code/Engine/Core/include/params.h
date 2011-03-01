@@ -186,7 +186,8 @@ struct SGUIManagerParams
   //Default Params
   SGUIManagerParams():
     szXML("Data/XML/GUI.xml"),
-    szInitWindow("Main.xml")
+    szInitWindow("Main.xml"),
+    bRenderMouse(false)
   {};
 };
 

@@ -115,7 +115,12 @@ bool CEffectManager::Load(bool _bReload)
       if(l_iVertexType == 0)
         LOGGER->AddNewLog(ELL_WARNING,"CEffectManager::Load Default technique \"%s\" amb vertex_type = 0.", l_szTechniqueName.c_str());
 
-      m_DefaultTechniqueEffectMap[l_iVertexType] = l_szTechniqueName;
+      if(l_treeDefTechnique.GetBoolProperty("instanced", false))
+      {
+        m_DefaultInstancedTechniqueEffectMap[l_iVertexType] = l_szTechniqueName;
+      } else {
+        m_DefaultTechniqueEffectMap[l_iVertexType] = l_szTechniqueName;
+      }
     }
     //---------------------------------------
 
@@ -189,6 +194,15 @@ string CEffectManager::GetTechniqueEffectNameByVertexDefault(unsigned short _sVe
 {
   TDefaultTechniqueEffectMap::const_iterator l_it = m_DefaultTechniqueEffectMap.find((int)_sVertexType);
   if(l_it != m_DefaultTechniqueEffectMap.cend())
+    return l_it->second;
+
+  return "";
+}
+
+string CEffectManager::GetInstancedTechniqueEffectNameByVertexDefault(unsigned short _sVertexType) const
+{
+  TDefaultTechniqueEffectMap::const_iterator l_it = m_DefaultInstancedTechniqueEffectMap.find((int)_sVertexType);
+  if(l_it != m_DefaultInstancedTechniqueEffectMap.cend())
     return l_it->second;
 
   return "";

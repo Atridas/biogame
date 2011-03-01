@@ -50,6 +50,7 @@ public:
   bool BeginRender(const CEffectMaterial* _pMaterial);
   bool Refresh();  
   
+  bool IsInstanced() const { return m_bIsInstanced; };
 
 protected:
   void Release();
@@ -77,6 +78,8 @@ private:
   bool m_bUsePoissonBlurKernel;
 
   float m_pfPoissonBlurKernel[32];
+
+  bool m_bIsInstanced;
 
   CEffect* m_pEffect;
   D3DXHANDLE m_pD3DTechnique;
