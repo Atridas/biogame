@@ -23,6 +23,7 @@
 #include <LightManager.h>
 #include <PhysicsManager.h>
 #include "PhysicActor.h"
+#include "PhysicController.h"
 #include "SpotLight.h"
 #include "InstanceMesh.h"
 #include "GameObject.h"
@@ -33,12 +34,14 @@ CPhysicUserData* g_pUserData2;
 CPhysicUserData* g_pUserData3;
 CPhysicUserData* g_pUserData4;
 CPhysicUserData* g_pUserData5;
+CPhysicUserData* g_pUserDataController;
 CPhysicActor* g_pPActorPlane;
 CPhysicActor* g_pPActorBall;
 CPhysicActor* g_pPActorComposite;
 
 CPhysicUserData* g_pUserDataSHOOT = 0;
 CGameObject* g_pGameObject = 0;
+CPhysicController* g_pPhysXController = 0;
 
 bool CPhysXProcess::Init()
 {
@@ -92,6 +95,7 @@ bool CPhysXProcess::Init()
   g_pUserData3 = new CPhysicUserData("Composite");
   g_pUserData4 = new CPhysicUserData("Pilota");
   g_pUserData5 = new CPhysicUserData("Cub");
+  g_pUserDataController = new CPhysicUserData("PhysX Controller");
   g_pUserData->SetPaint(true);
   g_pUserData->SetColor(colWHITE);
   g_pUserData2->SetPaint(false);
@@ -102,6 +106,8 @@ bool CPhysXProcess::Init()
   g_pUserData4->SetColor(colYELLOW);
   g_pUserData5->SetPaint(true);
   g_pUserData5->SetColor(colCYAN);
+  g_pUserDataController->SetPaint(true);
+  g_pUserDataController->SetColor(colMAGENTA);
 
 
   g_pPActorBall = new CPhysicActor(g_pUserData2);
@@ -140,6 +146,10 @@ bool CPhysXProcess::Init()
   g_pGameObject = new CGameObject("Objecte Fisic");
   g_pGameObject->Init(m_pRenderPhysX,g_pPActorBall);
 
+  g_pPhysXController = new CPhysicController(0.3f,2.3f,10.0f,0.1f,0.5f,1,g_pUserDataController);
+  
+  l_pPhysManager->AddPhysicController(g_pPhysXController);
+
 
   
   //CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
@@ -171,6 +181,7 @@ void CPhysXProcess::Release()
   CHECKED_DELETE(g_pPActorBall)
   CHECKED_DELETE(g_pPActorComposite)
   CHECKED_DELETE(g_pGameObject)
+  CHECKED_DELETE(g_pPhysXController);
   
 
   
@@ -327,6 +338,12 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
     m_pObject->SetPosition(l_vPos);
 
+    Vect3f l_vDir = m_pCamera->GetDirection();
+
+    //l_vDir.Normalize();
+    l_vDir.y = 0.0f;
+    g_pPhysXController->Move(l_vDir,_fDeltaSeconds);
+
     if(m_iState != 1)
       m_bStateChanged = true;
 
@@ -341,6 +358,12 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     l_vPos.x = l_vPos.x - cos(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
     l_vPos.z = l_vPos.z - sin(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
     m_pObject->SetPosition(l_vPos);
+
+    Vect3f l_vDir = m_pCamera->GetDirection();
+
+    //l_vDir.Normalize();
+    l_vDir.y = 0.0f;
+    g_pPhysXController->Move(-l_vDir,_fDeltaSeconds);
 
     if(m_iState != 1)
       m_bStateChanged = true;
