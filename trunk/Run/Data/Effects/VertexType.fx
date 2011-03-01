@@ -9,6 +9,17 @@ struct TNORMAL_DIFFUSED_VERTEX_VS {
 	float4 Color : COLOR;
 };
 
+struct TNORMAL_DIFFUSED_VERTEX_INSTANCED_VS {
+	float3 Position : POSITION;
+	float3 Normal : NORMAL;
+	float4 Color : COLOR;
+  
+  float4 WorldMatrix0 : TEXCOORD2;
+  float4 WorldMatrix1 : TEXCOORD3;
+  float4 WorldMatrix2 : TEXCOORD4;
+  float4 WorldMatrix3 : TEXCOORD5;
+};
+
 struct TNORMAL_DIFFUSED_VERTEX_PS {
 	float4 HPosition : POSITION;
 	float4 Color : COLOR;
@@ -23,6 +34,16 @@ struct TTEXTURED_VERTEX_VS {
 	float4 UV : TEXCOORD0;
 };
 
+struct TTEXTURED_VERTEX_INSTANCED_VS {
+	float3 Position : POSITION;
+	float4 UV : TEXCOORD0;
+  
+  float4 WorldMatrix0 : TEXCOORD2;
+  float4 WorldMatrix1 : TEXCOORD3;
+  float4 WorldMatrix2 : TEXCOORD4;
+  float4 WorldMatrix3 : TEXCOORD5;
+};
+
 struct TTEXTURED_VERTEX_PS {
 	float4 HPosition : POSITION;
 	float2 UV : TEXCOORD0;
@@ -33,6 +54,17 @@ struct TTEXTURED_DIFFUSSED_VERTEX_VS {
 	float3 Position : POSITION;
 	float4 Color : COLOR;
 	float4 UV : TEXCOORD0;
+};
+
+struct TTEXTURED_DIFFUSSED_VERTEX_INSTANCED_VS {
+	float3 Position : POSITION;
+	float4 Color : COLOR;
+	float4 UV : TEXCOORD0;
+  
+  float4 WorldMatrix0 : TEXCOORD2;
+  float4 WorldMatrix1 : TEXCOORD3;
+  float4 WorldMatrix2 : TEXCOORD4;
+  float4 WorldMatrix3 : TEXCOORD5;
 };
 
 struct TTEXTURED_DIFFUSSED_VERTEX_PS {
@@ -46,6 +78,17 @@ struct TNORMAL_TEXTURED_VERTEX_VS {
 	float3 Position : POSITION;
 	float3 Normal : NORMAL;
 	float4 UV : TEXCOORD0;
+};
+
+struct TNORMAL_TEXTURED_VERTEX_INSTANCED_VS {
+	float3 Position : POSITION;
+	float3 Normal : NORMAL;
+	float4 UV : TEXCOORD0;
+  
+  float4 WorldMatrix0 : TEXCOORD2;
+  float4 WorldMatrix1 : TEXCOORD3;
+  float4 WorldMatrix2 : TEXCOORD4;
+  float4 WorldMatrix3 : TEXCOORD5;
 };
 
 struct TNORMAL_TEXTURED_VERTEX_PS {
@@ -65,6 +108,18 @@ struct TNORMAL_TEXTURED2_VERTEX_VS {
 	float4 UV2 : TEXCOORD1;
 };
 
+struct TNORMAL_TEXTURED2_VERTEX_INSTANCED_VS {
+	float3 Position : POSITION;
+	float3 Normal : NORMAL;
+	float4 UV : TEXCOORD0;
+	float4 UV2 : TEXCOORD1;
+  
+  float4 WorldMatrix0 : TEXCOORD2;
+  float4 WorldMatrix1 : TEXCOORD3;
+  float4 WorldMatrix2 : TEXCOORD4;
+  float4 WorldMatrix3 : TEXCOORD5;
+};
+
 struct TNORMAL_TEXTURED2_VERTEX_PS {
 	float4 HPosition : POSITION;
 	float2 UV : TEXCOORD0;
@@ -82,6 +137,19 @@ struct TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_VS {
 	float4 UV : TEXCOORD0;
   float3 Tangent : TANGENT;
   float3 Binormal : BINORMAL;
+};
+
+struct TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_INSTANCED_VS {
+	float3 Position : POSITION;
+	float3 Normal : NORMAL;
+	float4 UV : TEXCOORD0;
+  float3 Tangent : TANGENT;
+  float3 Binormal : BINORMAL;
+  
+  float4 WorldMatrix0 : TEXCOORD2;
+  float4 WorldMatrix1 : TEXCOORD3;
+  float4 WorldMatrix2 : TEXCOORD4;
+  float4 WorldMatrix3 : TEXCOORD5;
 };
 
 struct TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS {
@@ -114,6 +182,7 @@ struct TTANGENT_SPACE_TEXTURED_PS {
   
 };
 
+
 // Normal Textured2+ Binormal / Tangent------------------------------------------------------------------------------------------
 
 struct TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_VS {
@@ -123,6 +192,20 @@ struct TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_VS {
 	float4 UV2 : TEXCOORD1;
   float3 Tangent : TANGENT;
   float3 Binormal : BINORMAL;
+};
+
+struct TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_INSTANCED_VS {
+	float3 Position : POSITION;
+	float3 Normal : NORMAL;
+	float4 UV : TEXCOORD0;
+	float4 UV2 : TEXCOORD1;
+  float3 Tangent : TANGENT;
+  float3 Binormal : BINORMAL;
+  
+  float4 WorldMatrix0 : TEXCOORD2;
+  float4 WorldMatrix1 : TEXCOORD3;
+  float4 WorldMatrix2 : TEXCOORD4;
+  float4 WorldMatrix3 : TEXCOORD5;
 };
 
 struct TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS {
@@ -147,15 +230,5 @@ struct CAL3D_HW_VERTEX_VS {
 	//float4 BiNormal : BINORMAL0;
 	float2 TexCoord : TEXCOORD0;
 };
-
-//Fa falta?
-//struct CAL3D_HW_VERTEX_PS {
-//	float4 HPosition : POSITION;
-//	float2 UV : TEXCOORD0;
-//	float3 WorldPosition : TEXCOORD2;
-//	float3 WorldNormal : TEXCOORD3;
-//	//float3 WorldTangent : TEXCOORD4;
-//	//float3 WorldBinormal : TEXCOORD5;
-//};
 
 #endif

@@ -26,7 +26,7 @@ public:
 
     LPDIRECT3DDEVICE9 l_pDevice = _pRM->GetDevice();
 
-    if(SUCCEDED(l_pDevice->CreateVertexBuffer(sizeof(T)*m_uiMaxNumInstances,0,0,D3DPOOL_DEFAULT,&m_pVB,NULL)))
+    if(!FAILED(l_pDevice->CreateVertexBuffer(sizeof(T)*m_uiMaxNumInstances,0,0,D3DPOOL_DEFAULT,&m_pVB,NULL)))
     {
       SetOk(true);
     }else{

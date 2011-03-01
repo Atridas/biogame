@@ -4,6 +4,7 @@
 #include <XML/XMLTreeNode.h>
 #include "RenderableAnimatedInstanceModel.h"
 #include "InstancedData.h"
+#include "Core.h"
 
 struct SHWIntancedMeshes
 {
@@ -11,20 +12,59 @@ struct SHWIntancedMeshes
   vector<CInstanceMesh*> m_vInstances;
 };
 
+void CRenderableObjectsManager::Release()
+{
+  map<const CStaticMesh*,SHWIntancedMeshes*>::iterator l_it = m_mapHWStaticInstances.begin();
+  while(l_it != m_mapHWStaticInstances.end())
+  {
+    CHECKED_DELETE(l_it->second);
+    l_it++;
+  }
+  m_mapHWStaticInstances.clear();
+  CMapManager<CRenderableObject>::Release();
+}
+
 void CRenderableObjectsManager::Update(float _fElapsedTime)
 {
   for(size_t i=0; i < m_RenderableObjects.size() ; i++)
     m_RenderableObjects[i]->Update(_fElapsedTime);
 }
 
-void CRenderableObjectsManager::Render(CRenderManager *RM)
+void CRenderableObjectsManager::Render(CRenderManager *_pRM)
+{
+  RenderOld(_pRM);
+}
+
+void CRenderableObjectsManager::RenderHWInstanced(CRenderManager* _pRM)
+{
+  //objectes estàtics
+  {
+    map<const CStaticMesh*,SHWIntancedMeshes*>::iterator l_it, l_end;
+    l_end = m_mapHWStaticInstances.end();
+    for(l_it = m_mapHWStaticInstances.begin(); l_it != l_end; ++l_it)
+    {
+      //(*l_it)->Render(_pRM);
+    }
+  }
+  //objectes animats
+  {
+    vector<CRenderableObject*>::iterator l_it, l_end;
+    l_end = m_vAnimatedModels.end();
+    for(l_it = m_vAnimatedModels.begin(); l_it != l_end; ++l_it)
+    {
+      (*l_it)->Render(_pRM);
+    }
+  }
+}
+
+void CRenderableObjectsManager::RenderOld(CRenderManager* _pRM)
 {
   //renderitzar només els visibles
   for(size_t i=0; i < m_RenderableObjects.size() ; i++)
   {
     if(m_RenderableObjects[i]->GetVisible())
     {
-      m_RenderableObjects[i]->Render(RM);
+      m_RenderableObjects[i]->Render(_pRM);
     }
     //if(i > 25) return;
   }
@@ -50,6 +90,8 @@ CRenderableObject* CRenderableObjectsManager::AddMeshInstance(
   }
 
   AddResource(_szInstanceName, l_pInstanceMesh);
+
+  AddHWStaticInstance(l_pInstanceMesh);
 
   return l_pInstanceMesh;
 }
@@ -225,4 +267,27 @@ void CRenderableObjectsManager::SetAllRenderBoundingSphere(bool _bVisible)
   {
       m_RenderableObjects[i]->SetRenderBoundingSphere(_bVisible);
   }
+}
+/*
+struct SHWIntancedMeshes
+{
+  CInstancedData<Mat44f> m_mWorldMats;
+  vector<CInstanceMesh*> m_vInstances;
+};
+*/
+void CRenderableObjectsManager::AddHWStaticInstance(CInstanceMesh* _pInstanceMesh)
+{
+  const CStaticMesh* l_pStaticMesh = _pInstanceMesh->GetStaticMesh();
+  SHWIntancedMeshes* l_pHWIntancedMeshes;
+  map<const CStaticMesh*,SHWIntancedMeshes*>::iterator find = m_mapHWStaticInstances.find(l_pStaticMesh);
+  if(find == m_mapHWStaticInstances.end())
+  {
+    l_pHWIntancedMeshes = new SHWIntancedMeshes;
+    m_mapHWStaticInstances[l_pStaticMesh] = l_pHWIntancedMeshes;
+    l_pHWIntancedMeshes->m_mWorldMats.Init(CORE->GetRenderManager(), 1);
+  } else {
+    l_pHWIntancedMeshes = find->second;
+  }
+
+  l_pHWIntancedMeshes->m_vInstances.push_back(_pInstanceMesh);
 }
