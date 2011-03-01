@@ -16,21 +16,25 @@ CObject3D::CObject3D(const Vect3f& _vPos, float _fYaw, float _fPitch, float _fRo
 void CObject3D::SetPosition(const Vect3f& _vPos)
 {
   m_vPosition = _vPos;
+  InitMat44();
 }
 
 void CObject3D::SetYaw( float _fYaw )
 {
   m_fYaw = _fYaw;
+  InitMat44();
 }
 
 void CObject3D::SetPitch( float _fPitch )
 {
   m_fPitch = _fPitch;
+  InitMat44();
 }
 
 void CObject3D::SetRoll( float _fRoll )
 {
   m_fRoll = _fRoll;
+  InitMat44();
 }
 	
  Vect3f CObject3D::GetCenterPosition()
