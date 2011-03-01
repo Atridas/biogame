@@ -525,4 +525,16 @@ private:
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
 };
 
+struct VERTEX_PARTICLE
+{
+  float   x, y, z;
+  float   pointsize;
+  uint32  color;
+
+  static inline unsigned int GetFVF()
+  {
+    return D3DFVF_XYZ|D3DFVF_DIFFUSE|D3DFVF_PSIZE;
+  }
+};
+
 #endif

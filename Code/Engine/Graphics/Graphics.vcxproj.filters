@@ -130,6 +130,12 @@
     <Filter Include="RenderableObject\InstancedData">
       <UniqueIdentifier>{46fa5196-5f97-4c66-a85a-0f318061bed4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Particle">
+      <UniqueIdentifier>{71afdec6-0767-4def-9a85-eafdbf63f3e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Particle\ParticleEmitter">
+      <UniqueIdentifier>{affdfcee-9a85-4c4a-98c1-f80e53f90f04}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -239,6 +245,12 @@
     </ClCompile>
     <ClCompile Include="HDRPipeline.cpp">
       <Filter>SceneEffects\HDR Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleEmitter.cpp">
+      <Filter>Particle\ParticleEmitter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -355,6 +367,12 @@
     </ClInclude>
     <ClInclude Include="include\InstancedData.h">
       <Filter>RenderableObject\InstancedData</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Particle.h">
+      <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ParticleEmitter.h">
+      <Filter>Particle\ParticleEmitter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
