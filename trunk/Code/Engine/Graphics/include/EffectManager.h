@@ -56,12 +56,24 @@ public:
   //non matrix
   const Vect3f& GetCameraEye() {return m_vCameraEye;};
   size_t GetMaxLights() const { return MAX_LIGHTS_BY_SHADER; }; //de Effect.h
+
+
+
+  
   string GetTechniqueEffectNameByVertexDefault(unsigned short _sVertexType) const;
+  string GetInstancedTechniqueEffectNameByVertexDefault(unsigned short _sVertexType) const;
+
   CEffectTechnique* GetStaticMeshTechnique() const { return m_pStaticMeshTechnique; };
   CEffectTechnique* GetAnimatedModelTechnique() const { return m_pAnimatedModelTechnique; };
+
   CEffectTechnique* GetEffectTechnique(const string& _szName) {return GetResource(_szName);};
+
   CEffect* GetEffect(const string& _szName) {return m_Effects.GetResource(_szName);};
   
+
+
+
+
   void ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _mProjectionMatrix, const Vect3f& _vCameraEye);
   bool Load(const SEffectManagerParams& _params);
   void Reload();
@@ -77,8 +89,10 @@ private:
   bool Load(bool _bReload);
 
   string m_szFileName;
-
+  
   TDefaultTechniqueEffectMap m_DefaultTechniqueEffectMap;
+  TDefaultTechniqueEffectMap m_DefaultInstancedTechniqueEffectMap;
+
   Mat44f m_mWorldMatrix, m_mProjectionMatrix, m_mViewMatrix;
   Mat44f m_mLightViewMatrix, m_mShadowProjectionMatrix;
   Vect3f m_vCameraEye;

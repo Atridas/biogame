@@ -1,6 +1,23 @@
 #ifndef __VERTEX_TYPE_FX__
 #define __VERTEX_TYPE_FX__
 
+// minimalista -------------------------------------------------------------------------------------------------------------------
+
+struct TSIMPLE_VS 
+{
+	float3 Position : POSITION;
+};
+
+struct TSIMPLE_INSTANCED_VS 
+{
+	float3 Position : POSITION;
+  
+  float4 WorldMatrix0 : TEXCOORD2;
+  float4 WorldMatrix1 : TEXCOORD3;
+  float4 WorldMatrix2 : TEXCOORD4;
+  float4 WorldMatrix3 : TEXCOORD5;
+};
+
 // Normal Diffused --------------------------------------------------------------------------------------------------------------
 
 struct TNORMAL_DIFFUSED_VERTEX_VS {
@@ -27,6 +44,8 @@ struct TNORMAL_DIFFUSED_VERTEX_PS {
 	float3 WorldNormal : TEXCOORD3;
   float4 PosLight      : TEXCOORD4;
 };
+
+
 // Textured --------------------------------------------------------------------------------------------------------------
 
 struct TTEXTURED_VERTEX_VS {

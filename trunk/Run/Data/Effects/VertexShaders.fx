@@ -5,17 +5,26 @@
 #include "Globals.fx"
 #include "Functions.fx"
 
-float4 SimpleVS(float4 _in : POSITION) : POSITION {
-	
-	return mul(_in,g_WorldViewProjectionMatrix);
+float4 SimpleVS(TSIMPLE_VS _in) : POSITION 
+{
+	return mul(_in.Position,g_WorldViewProjectionMatrix);
 }
 
-float4 NoVS() : POSITION {
-	
+float4 SimpleInstancedVS(TSIMPLE_INSTANCED_VS _in) : POSITION 
+{
+  float4x4 l_World = GetWorldMatrix(_in.WorldMatrix0, _in.WorldMatrix1, _in.WorldMatrix2, _in.WorldMatrix3);
+  float4x4 l_WorldViewProjectionMatrix = mul(l_World, g_ViewProjectionMatrix);
+  
+	return mul(_in.Position,l_WorldViewProjectionMatrix);
+}
+
+float4 NoVS() : POSITION 
+{
 	return float4(0,0,0,0);
 }
 
-TNORMAL_DIFFUSED_VERTEX_PS NormalDiffusedVS(TNORMAL_DIFFUSED_VERTEX_VS _in) {
+TNORMAL_DIFFUSED_VERTEX_PS NormalDiffusedVS(TNORMAL_DIFFUSED_VERTEX_VS _in) 
+{
 	TNORMAL_DIFFUSED_VERTEX_PS out_ = (TNORMAL_DIFFUSED_VERTEX_PS)0;
 	
 	out_.WorldNormal = normalize(mul(_in.Normal,(float3x3)g_WorldMatrix));
@@ -28,7 +37,8 @@ TNORMAL_DIFFUSED_VERTEX_PS NormalDiffusedVS(TNORMAL_DIFFUSED_VERTEX_VS _in) {
 	return out_;
 }
 
-TNORMAL_TEXTURED_VERTEX_PS NormalTexturedVS(TNORMAL_TEXTURED_VERTEX_VS _in) {
+TNORMAL_TEXTURED_VERTEX_PS NormalTexturedVS(TNORMAL_TEXTURED_VERTEX_VS _in) 
+{
 	TNORMAL_TEXTURED_VERTEX_PS out_ = (TNORMAL_TEXTURED_VERTEX_PS)0;
 	
 	out_.WorldNormal = normalize(mul(_in.Normal,(float3x3)g_WorldMatrix));
@@ -41,7 +51,8 @@ TNORMAL_TEXTURED_VERTEX_PS NormalTexturedVS(TNORMAL_TEXTURED_VERTEX_VS _in) {
 	return out_;
 }
 
-TTEXTURED_VERTEX_PS TexturedVS(TTEXTURED_VERTEX_VS _in) {
+TTEXTURED_VERTEX_PS TexturedVS(TTEXTURED_VERTEX_VS _in) 
+{
 	TTEXTURED_VERTEX_PS out_ = (TTEXTURED_VERTEX_PS)0;
 	
 	out_.UV = _in.UV.xy;
@@ -50,7 +61,8 @@ TTEXTURED_VERTEX_PS TexturedVS(TTEXTURED_VERTEX_VS _in) {
 	return out_;
 }
 
-TNORMAL_TEXTURED2_VERTEX_PS NormalTextured2VS(TNORMAL_TEXTURED2_VERTEX_VS _in) {
+TNORMAL_TEXTURED2_VERTEX_PS NormalTextured2VS(TNORMAL_TEXTURED2_VERTEX_VS _in) 
+{
 	TNORMAL_TEXTURED2_VERTEX_PS out_ = (TNORMAL_TEXTURED2_VERTEX_PS)0;
 	
 	out_.WorldNormal = mul(_in.Normal,(float3x3)g_WorldMatrix);
@@ -64,7 +76,8 @@ TNORMAL_TEXTURED2_VERTEX_PS NormalTextured2VS(TNORMAL_TEXTURED2_VERTEX_VS _in) {
 	return out_;
 }
 
-TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS TangentBinormalNormalTexturedVS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_VS _in) {
+TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS TangentBinormalNormalTexturedVS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_VS _in) 
+{
 	TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS out_ = (TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS)0;
 	
 	out_.WorldNormal   = normalize(mul(_in.Normal,(float3x3)g_WorldMatrix));
@@ -79,7 +92,8 @@ TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS TangentBinormalNormalTexturedVS(TTAN
 	return out_;
 }
 
-TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS TangentBinormalNormalTextured2VS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_VS _in) {
+TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS TangentBinormalNormalTextured2VS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_VS _in) 
+{
 	TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS out_ = (TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS)0;
 	
 	out_.WorldNormal   = mul(_in.Normal,(float3x3)g_WorldMatrix);
@@ -119,7 +133,8 @@ struct TTANGENT_SPACE_TEXTURED_PS {
   
 };*/
 
-TTANGENT_SPACE_TEXTURED_PS TangentSpaceTexturedVS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_VS _in) {
+TTANGENT_SPACE_TEXTURED_PS TangentSpaceTexturedVS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_VS _in) 
+{
 	TTANGENT_SPACE_TEXTURED_PS out_ = (TTANGENT_SPACE_TEXTURED_PS)0;
 	
 	out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);

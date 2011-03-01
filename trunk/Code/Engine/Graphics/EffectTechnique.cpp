@@ -41,6 +41,8 @@ void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
   m_bUseTextureSize = _XMLParams.GetBoolProperty("use_texture_size");
   m_bUsePoissonBlurKernel = _XMLParams.GetBoolProperty("use_poisson_blur_kernel");
 
+  m_bIsInstanced = _XMLParams.GetBoolProperty("instanced");
+
   if(m_bUsePoissonBlurKernel)
   {
     CreatePoissonBlur16x2(m_pfPoissonBlurKernel);

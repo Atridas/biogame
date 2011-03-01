@@ -20,29 +20,36 @@
     <!-- Normal Textured2 -->
     <!-- default_technique vertex_type="35" technique="ShowNormalsTechnique"/ -->
     <default_technique vertex_type="35" technique="NoTechnique"/>
+    <default_technique vertex_type="35" technique="WhiteInstancedTechnique" instanced="true"/>
     <!-- Textured-->
     <!-- default_technique vertex_type="33" technique="LightmapTechnique"/ -->
     <default_technique vertex_type="33" technique="NoTechnique"/>
+    <default_technique vertex_type="33" technique="WhiteInstancedTechnique" instanced="true"/>
 
     <!-- Normal Diffused -->
     <!-- default_technique vertex_type="67" technique="NormalDiffusedTechnique"/ -->
     <default_technique vertex_type="67" technique="NormalDiffusedTechnique"/>
+    <default_technique vertex_type="67" technique="WhiteInstancedTechnique" instanced="true"/>
     
     <!-- Tangent-Binormal blabla Textured -->
     <!--default_technique vertex_type="31" technique="TangentBinormalNormalTexturedTechnique"/-->
     <default_technique vertex_type="31" technique="TangentBinormalNormalTexturedTechnique"/>
+    <default_technique vertex_type="31" technique="WhiteInstancedTechnique" instanced="true"/>
     
     <!-- Normal Textured-->
     <!--default_technique vertex_type="19" technique="ShowNormalsTechnique"/-->
     <default_technique vertex_type="19" technique="NormalTexturedTechnique"/>
+    <default_technique vertex_type="19" technique="WhiteInstancedTechnique" instanced="true"/>
 
     <!-- Tangent-Binormal blabla Textured 2 -->
     <!-- default_technique vertex_type="47" technique="NormalTexturedTechnique"/ -->
     <default_technique vertex_type="47" technique="LightmapTechnique"/>
+    <default_technique vertex_type="47" technique="WhiteInstancedTechnique" instanced="true"/>
 
 
     <!-- default_technique vertex_type="787" technique="Cal3DTechnique"/ -->
     <default_technique vertex_type="787" technique="Cal3DTechnique"/>
+    <default_technique vertex_type="787" technique="WhiteInstancedTechnique" instanced="true"/>
   </default_techniques>
   <techniques>
     <!-- technique name=.../-->
@@ -56,14 +63,15 @@
                use_world_view_matrix="true" use_camera_position="true" use_world_view_projection_matrix="true"
                /-->
 
-    <technique name="WhiteTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
-    <technique name="NoTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
+    <technique name="WhiteTechnique" effect="Default Effects" use_world_view_projection_matrix="true" />
+    <technique name="NoTechnique" effect="Default Effects" />
     <technique name="ShowNormalsTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
     <technique name="Cal3dShowNormalsTechnique" effect="Cal3D Effects" use_world_matrix="true" use_world_view_projection_matrix="true" animated="true"/>
     <technique name="ShowUVCoordsTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
     <technique name="ShowTangentTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
     <technique name="ShowBitangentTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
-    
+
+    <technique name="WhiteInstancedTechnique" effect="Default Effects" use_view_projection_matrix="true" instanced="true" />
     
     <technique name="LightmapTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
     <technique name="ShowNormalmapTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
