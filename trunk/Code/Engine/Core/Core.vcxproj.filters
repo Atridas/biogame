@@ -16,7 +16,7 @@
     <Filter Include="Scripting">
       <UniqueIdentifier>{048ec5a4-9fdd-4e38-ba46-8d6ee783f912}</UniqueIdentifier>
     </Filter>
-    <Filter Include="LogRender">
+    <Filter Include="Engine\LogRender">
       <UniqueIdentifier>{254d7347-6db2-4348-8286-cb76d4458b49}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -40,7 +40,7 @@
       <Filter>Scripting</Filter>
     </ClCompile>
     <ClCompile Include="LogRender.cpp">
-      <Filter>LogRender</Filter>
+      <Filter>Engine\LogRender</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -60,7 +60,7 @@
       <Filter>Scripting</Filter>
     </ClInclude>
     <ClInclude Include="include\LogRender.h">
-      <Filter>LogRender</Filter>
+      <Filter>Engine\LogRender</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
