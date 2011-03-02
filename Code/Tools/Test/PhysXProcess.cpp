@@ -107,7 +107,7 @@ bool CPhysXProcess::Init()
   g_pUserData5->SetPaint(true);
   g_pUserData5->SetColor(colCYAN);
   g_pUserDataController->SetPaint(true);
-  g_pUserDataController->SetColor(colMAGENTA);
+  g_pUserDataController->SetColor(colBLACK);
 
 
   g_pPActorBall = new CPhysicActor(g_pUserData2);
@@ -149,6 +149,8 @@ bool CPhysXProcess::Init()
   g_pPhysXController = new CPhysicController(0.3f,2.3f,10.0f,0.1f,0.5f,1,g_pUserDataController);
   
   l_pPhysManager->AddPhysicController(g_pPhysXController);
+  CORE->GetRenderableObjectsManager()->SetAllVisibility(false);
+  m_pRenderPhysX->SetVisible(true);
 
 
   
@@ -182,6 +184,8 @@ void CPhysXProcess::Release()
   CHECKED_DELETE(g_pPActorComposite)
   CHECKED_DELETE(g_pGameObject)
   CHECKED_DELETE(g_pPhysXController);
+
+  //CHECKED_DELETE(m_pRenderPhysX);
   
 
   
@@ -343,6 +347,7 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     //l_vDir.Normalize();
     l_vDir.y = 0.0f;
     g_pPhysXController->Move(l_vDir,_fDeltaSeconds);
+   
 
     if(m_iState != 1)
       m_bStateChanged = true;
