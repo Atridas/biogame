@@ -42,7 +42,7 @@ public:
   void SetTextureWidth (int _w) {m_iTextureWidth  = _w;};
   void SetTextureHeight(int _h) {m_iTextureHeight = _h;};
   
-  CEffectTechnique* GetEffectTechnique(const CRenderManager* _pRM) const;
+  CEffectTechnique* GetEffectTechnique(const CRenderManager* _pRM, bool _bInstanced = false) const;
   void ActivateTextures(const CRenderManager* _pRM) const;
 
   static int NumTextures(int mask);

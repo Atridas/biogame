@@ -70,16 +70,19 @@ struct SDIFFUSEVERTEX
    * @return El tipus del vèrtex segons la codificació de DirectX9.
   **/
 	static unsigned int GetFVF();
-
-  static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+  
+  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+  static LPDIRECT3DVERTEXDECLARATION9& GetInstancedVertexDeclaration();
 
   static void ReleaseVertexDeclaration()
   {
     CHECKED_RELEASE(s_VertexDeclaration);
+    CHECKED_RELEASE(s_VertexInstancedDeclaration);
   }
 
 private:
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexInstancedDeclaration;
 };
 
 struct SDIFFUSESCREENVERTEX
@@ -92,14 +95,17 @@ struct SDIFFUSESCREENVERTEX
   static unsigned int GetFVF();
 
   static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+  static LPDIRECT3DVERTEXDECLARATION9& GetInstancedVertexDeclaration();
 
   static void ReleaseVertexDeclaration()
   {
     CHECKED_RELEASE(s_VertexDeclaration);
+    CHECKED_RELEASE(s_VertexInstancedDeclaration);
   }
 
 private:
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexInstancedDeclaration;
 };
 
 struct STEXTUREDSCREENVERTEX
@@ -112,14 +118,17 @@ struct STEXTUREDSCREENVERTEX
   static unsigned int GetFVF();
 
   static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+  static LPDIRECT3DVERTEXDECLARATION9& GetInstancedVertexDeclaration();
 
   static void ReleaseVertexDeclaration()
   {
     CHECKED_RELEASE(s_VertexDeclaration);
+    CHECKED_RELEASE(s_VertexInstancedDeclaration);
   }
 
 private:
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexInstancedDeclaration;
 };
 
 struct SDIFFUSETEXTUREDSCREENVERTEX
@@ -133,14 +142,17 @@ struct SDIFFUSETEXTUREDSCREENVERTEX
   static unsigned int GetFVF();
 
   static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+  static LPDIRECT3DVERTEXDECLARATION9& GetInstancedVertexDeclaration();
 
   static void ReleaseVertexDeclaration()
   {
     CHECKED_RELEASE(s_VertexDeclaration);
+    CHECKED_RELEASE(s_VertexInstancedDeclaration);
   }
 
 private:
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexInstancedDeclaration;
 };
 
 
@@ -177,14 +189,17 @@ struct SNORMALDIFFUSEVERTEX
   static unsigned int GetFVF();
 
   static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+  static LPDIRECT3DVERTEXDECLARATION9& GetInstancedVertexDeclaration();
 
   static void ReleaseVertexDeclaration()
   {
     CHECKED_RELEASE(s_VertexDeclaration);
+    CHECKED_RELEASE(s_VertexInstancedDeclaration);
   }
 
 private:
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexInstancedDeclaration;
 };
 // codi afegit
 
@@ -217,13 +232,16 @@ struct TNORMALTANGENTBINORMALTEXTUREDVERTEX
   static void ReleaseVertexDeclaration()
   {
     CHECKED_RELEASE(s_VertexDeclaration);
+    CHECKED_RELEASE(s_VertexInstancedDeclaration);
   }
 
-  static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+  static LPDIRECT3DVERTEXDECLARATION9& GetInstancedVertexDeclaration();
 
 private:
   
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexInstancedDeclaration;
 };
 
 struct TNORMALTANGENTBINORMALTEXTURED2VERTEX
@@ -256,13 +274,16 @@ struct TNORMALTANGENTBINORMALTEXTURED2VERTEX
   static void ReleaseVertexDeclaration()
   {
     CHECKED_RELEASE(s_VertexDeclaration);
+    CHECKED_RELEASE(s_VertexInstancedDeclaration);
   }
 
-  static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+  static LPDIRECT3DVERTEXDECLARATION9& GetInstancedVertexDeclaration();
 
 private:
   
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexInstancedDeclaration;
 };
 /*
 struct SNORMALDIFFUSETEXTUREDVERTEX
@@ -335,14 +356,17 @@ struct STEXTUREDVERTEX
   static unsigned int GetFVF();
 
   static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+  static LPDIRECT3DVERTEXDECLARATION9& GetInstancedVertexDeclaration();
 
   static void ReleaseVertexDeclaration()
   {
     CHECKED_RELEASE(s_VertexDeclaration);
+    CHECKED_RELEASE(s_VertexInstancedDeclaration);
   }
 
 private:
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexInstancedDeclaration;
 };
 
 /**
@@ -377,15 +401,18 @@ struct STEXTURED2VERTEX
   **/
   static unsigned int GetFVF();
 
-  static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+  static LPDIRECT3DVERTEXDECLARATION9& GetInstancedVertexDeclaration();
 
   static void ReleaseVertexDeclaration()
   {
     CHECKED_RELEASE(s_VertexDeclaration);
+    CHECKED_RELEASE(s_VertexInstancedDeclaration);
   }
 
 private:
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexInstancedDeclaration;
 };
 
 /**
@@ -420,15 +447,18 @@ struct SNORMALTEXTUREDVERTEX
   **/
   static unsigned int GetFVF();
 
-  static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+  static LPDIRECT3DVERTEXDECLARATION9& GetInstancedVertexDeclaration();
 
   static void ReleaseVertexDeclaration()
   {
     CHECKED_RELEASE(s_VertexDeclaration);
+    CHECKED_RELEASE(s_VertexInstancedDeclaration);
   }
 
 private:
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexInstancedDeclaration;
 };
 
 /**
@@ -464,15 +494,18 @@ struct SNORMALTEXTURED2VERTEX
   **/
   static unsigned int GetFVF();
 
-  static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+  static LPDIRECT3DVERTEXDECLARATION9& GetInstancedVertexDeclaration();
 
   static void ReleaseVertexDeclaration()
   {
     CHECKED_RELEASE(s_VertexDeclaration);
+    CHECKED_RELEASE(s_VertexInstancedDeclaration);
   }
 
 private:
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexInstancedDeclaration;
 };
 
 /**
@@ -515,14 +548,17 @@ struct TCAL3D_HW_VERTEX
     return D3DFVF_XYZ | D3DFVF_TEX4 | D3DFVF_TEX4 | D3DFVF_NORMAL | D3DFVF_TEX2;
   }
 
-  static LPDIRECT3DVERTEXDECLARATION9 & GetVertexDeclaration();
+  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+  static LPDIRECT3DVERTEXDECLARATION9& GetInstancedVertexDeclaration();
 
   static void ReleaseVertexDeclaration()
   {
     CHECKED_RELEASE(s_VertexDeclaration);
+    CHECKED_RELEASE(s_VertexInstancedDeclaration);
   }
 private:
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexInstancedDeclaration;
 };
 
 struct VERTEX_PARTICLE

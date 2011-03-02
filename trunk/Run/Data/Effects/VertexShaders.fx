@@ -7,7 +7,7 @@
 
 float4 SimpleVS(TSIMPLE_VS _in) : POSITION 
 {
-	return mul(_in.Position,g_WorldViewProjectionMatrix);
+	return mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
 }
 
 float4 SimpleInstancedVS(TSIMPLE_INSTANCED_VS _in) : POSITION 
@@ -15,7 +15,7 @@ float4 SimpleInstancedVS(TSIMPLE_INSTANCED_VS _in) : POSITION
   float4x4 l_World = GetWorldMatrix(_in.WorldMatrix0, _in.WorldMatrix1, _in.WorldMatrix2, _in.WorldMatrix3);
   float4x4 l_WorldViewProjectionMatrix = mul(l_World, g_ViewProjectionMatrix);
   
-	return mul(_in.Position,l_WorldViewProjectionMatrix);
+	return mul(float4(_in.Position,1.0),l_WorldViewProjectionMatrix);
 }
 
 float4 NoVS() : POSITION 

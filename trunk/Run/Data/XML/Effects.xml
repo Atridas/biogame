@@ -37,7 +37,7 @@
     <default_technique vertex_type="31" technique="WhiteInstancedTechnique" instanced="true"/>
     
     <!-- Normal Textured-->
-    <!--default_technique vertex_type="19" technique="ShowNormalsTechnique"/-->
+    <!--default_technique vertex_type="19" technique="NormalTexturedTechnique"/-->
     <default_technique vertex_type="19" technique="NormalTexturedTechnique"/>
     <default_technique vertex_type="19" technique="WhiteInstancedTechnique" instanced="true"/>
 
@@ -71,7 +71,7 @@
     <technique name="ShowTangentTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
     <technique name="ShowBitangentTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
 
-    <technique name="WhiteInstancedTechnique" effect="Default Effects" use_view_projection_matrix="true" instanced="true" />
+    <technique name="WhiteInstancedTechnique" effect="Default Effects" use_world_matrix="true" use_view_projection_matrix="true" instanced="true" />
     
     <technique name="LightmapTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
     <technique name="ShowNormalmapTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />

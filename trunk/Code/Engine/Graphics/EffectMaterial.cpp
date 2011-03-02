@@ -274,10 +274,12 @@ void CEffectMaterial::ActivateTextures(const CRenderManager* _pRM) const
   assert(l_it == m_vTextures.cend() && "CEffectMaterial::ActivateTextures hi ha més textures de les necessàries.");
 }
 
-CEffectTechnique* CEffectMaterial::GetEffectTechnique(const CRenderManager* _pRM) const
+CEffectTechnique* CEffectMaterial::GetEffectTechnique(const CRenderManager* _pRM, bool _bInstanced) const
 {
   CEffectManager*   l_pEM = CORE->GetEffectManager();
   CEffectTechnique* l_pForcedTechnique;
+
+  //TODO les techniques forçades també han de ser instanced!!!!!
   if(m_bAnimated)
     l_pForcedTechnique = l_pEM->GetAnimatedModelTechnique();
   else
@@ -288,9 +290,15 @@ CEffectTechnique* CEffectMaterial::GetEffectTechnique(const CRenderManager* _pRM
 
   if(m_pTechnique)
     return m_pTechnique;
-
-  string l_szName = l_pEM->GetTechniqueEffectNameByVertexDefault(m_usVertexType);
-  return l_pEM->GetEffectTechnique(l_szName);
+  
+  if(_bInstanced)
+  {
+    string l_szName = l_pEM->GetInstancedTechniqueEffectNameByVertexDefault(m_usVertexType);
+    return l_pEM->GetEffectTechnique(l_szName);
+  } else {
+    string l_szName = l_pEM->GetTechniqueEffectNameByVertexDefault(m_usVertexType);
+    return l_pEM->GetEffectTechnique(l_szName);
+  }
 }
 
 int CEffectMaterial::NumTextures(int mask)

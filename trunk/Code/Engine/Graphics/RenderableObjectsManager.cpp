@@ -1,6 +1,7 @@
 #include "RenderableObjectsManager.h"
 #include "RenderManager.h"
 #include "InstanceMesh.h"
+#include "StaticMesh.h"
 #include <XML/XMLTreeNode.h>
 #include "RenderableAnimatedInstanceModel.h"
 #include "InstancedData.h"
@@ -8,7 +9,7 @@
 
 struct SHWIntancedMeshes
 {
-  CInstancedData<Mat44f> m_mWorldMats;
+  CInstancedData<D3DMATRIX> m_mWorldMats;
   vector<CInstanceMesh*> m_vInstances;
 };
 
@@ -37,22 +38,63 @@ void CRenderableObjectsManager::Render(CRenderManager *_pRM)
 
 void CRenderableObjectsManager::RenderHWInstanced(CRenderManager* _pRM)
 {
+  LPDIRECT3DDEVICE9 l_pDevice = _pRM->GetDevice();
   //objectes estàtics
   {
     map<const CStaticMesh*,SHWIntancedMeshes*>::iterator l_it, l_end;
     l_end = m_mapHWStaticInstances.end();
     for(l_it = m_mapHWStaticInstances.begin(); l_it != l_end; ++l_it)
     {
-      //(*l_it)->Render(_pRM);
+      SHWIntancedMeshes* l_HWStaticInstances = l_it->second;
+      // Agafem les matrius -------------------------------------------------------------------------------
+      D3DMATRIX* l_mBuffer = l_HWStaticInstances->m_mWorldMats.GetBuffer(l_HWStaticInstances->m_vInstances.size(), _pRM);
+
+      vector<CInstanceMesh*>::iterator l_itInst, l_endInst;
+      l_endInst = l_HWStaticInstances->m_vInstances.end();
+      int cont = 0;
+      for(l_itInst = l_HWStaticInstances->m_vInstances.begin(); l_itInst != l_endInst; ++l_itInst)
+      {
+        if((*l_itInst)->GetVisible())
+        {
+          l_mBuffer[cont] = (*l_itInst)->GetMat44().GetD3DXMatrix();
+          cont++;
+        }
+      }
+
+      if(cont == 0)
+      {
+        continue; //No ens fa falta renderitzar res i perdre més temps amb aquest tipus d'objecte
+      }
+
+      // Omplim el buffer ------------------------------------------------------------------------------
+      bool result = l_HWStaticInstances->m_mWorldMats.SetData(l_mBuffer, cont, _pRM);
+
+      assert(result);// ---
+
+      // Fem els set stream sources
+      l_pDevice->SetStreamSourceFreq(0, (D3DSTREAMSOURCE_INDEXEDDATA  | cont));
+
+      l_pDevice->SetStreamSourceFreq(1, (D3DSTREAMSOURCE_INSTANCEDATA | 1   ));
+
+
+      _pRM->SetTransform(l_HWStaticInstances->m_vInstances[0]->GetMat44()); //de test només
+      l_it->first->Render(_pRM, true);
     }
   }
+  //Deixem els streams com els teniem
+  l_pDevice->SetStreamSourceFreq(0, 1);
+  l_pDevice->SetStreamSourceFreq(1, 1);
+
   //objectes animats
   {
     vector<CRenderableObject*>::iterator l_it, l_end;
     l_end = m_vAnimatedModels.end();
     for(l_it = m_vAnimatedModels.begin(); l_it != l_end; ++l_it)
     {
-      (*l_it)->Render(_pRM);
+      if((*l_it)->GetVisible())
+      {
+        (*l_it)->Render(_pRM);
+      }
     }
   }
 }

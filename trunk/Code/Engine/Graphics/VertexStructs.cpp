@@ -20,6 +20,26 @@ LPDIRECT3DVERTEXDECLARATION9 TNORMALTANGENTBINORMALTEXTURED2VERTEX::s_VertexDecl
 
 LPDIRECT3DVERTEXDECLARATION9 TCAL3D_HW_VERTEX::s_VertexDeclaration=0;
 
+// Instanced declarations ------------------------------------------------------
+
+LPDIRECT3DVERTEXDECLARATION9 SDIFFUSEVERTEX::s_VertexInstancedDeclaration = 0;
+
+LPDIRECT3DVERTEXDECLARATION9 SDIFFUSESCREENVERTEX::s_VertexInstancedDeclaration = 0;
+LPDIRECT3DVERTEXDECLARATION9 STEXTUREDSCREENVERTEX::s_VertexInstancedDeclaration = 0;
+LPDIRECT3DVERTEXDECLARATION9 SDIFFUSETEXTUREDSCREENVERTEX::s_VertexInstancedDeclaration = 0;
+
+LPDIRECT3DVERTEXDECLARATION9 STEXTUREDVERTEX::s_VertexInstancedDeclaration = 0;
+LPDIRECT3DVERTEXDECLARATION9 STEXTURED2VERTEX::s_VertexInstancedDeclaration = 0;
+
+LPDIRECT3DVERTEXDECLARATION9 SNORMALDIFFUSEVERTEX::s_VertexInstancedDeclaration = 0;
+
+LPDIRECT3DVERTEXDECLARATION9 SNORMALTEXTUREDVERTEX::s_VertexInstancedDeclaration = 0;
+LPDIRECT3DVERTEXDECLARATION9 SNORMALTEXTURED2VERTEX::s_VertexInstancedDeclaration = 0;
+LPDIRECT3DVERTEXDECLARATION9 TNORMALTANGENTBINORMALTEXTUREDVERTEX::s_VertexInstancedDeclaration=0;
+LPDIRECT3DVERTEXDECLARATION9 TNORMALTANGENTBINORMALTEXTURED2VERTEX::s_VertexInstancedDeclaration=0;
+
+LPDIRECT3DVERTEXDECLARATION9 TCAL3D_HW_VERTEX::s_VertexInstancedDeclaration=0;
+
 //---------------------------------------------------------------------------------------------
 
 
@@ -136,21 +156,31 @@ LPDIRECT3DVERTEXDECLARATION9& SDIFFUSEVERTEX::GetVertexDeclaration()
   if(s_VertexDeclaration==NULL)
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
-    {
-      { 0, 
-        0 , 
-        D3DDECLTYPE_FLOAT3,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_POSITION,  //ús de les dades
-        0 
-      },
-      { 0, 
-        12 ,                    //desplaçament 
-        D3DDECLTYPE_D3DCOLOR,   //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_COLOR,     //ús de les dades
-        0 
-      },
+    {          //type            sempre default (per meshes)    //ús de les dades
+      { 0, 0,  D3DDECLTYPE_FLOAT3,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0},
+      { 0, 12, D3DDECLTYPE_D3DCOLOR, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR, 0  },
+      D3DDECL_END()
+    };
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    assert(result == D3D_OK);
+  }
+  return s_VertexDeclaration;
+}
+
+LPDIRECT3DVERTEXDECLARATION9& SDIFFUSEVERTEX::GetInstancedVertexDeclaration()
+{
+  if(s_VertexDeclaration==NULL)
+  {
+    D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+    {          //type            sempre default (per meshes)    //ús de les dades
+      { 0, 0,  D3DDECLTYPE_FLOAT3,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0},
+      { 0, 12, D3DDECLTYPE_D3DCOLOR, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR, 0  },
+      //World matrix
+      { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
+      { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
+      { 1, 16 * 2, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 4 },
+      { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
+
       D3DDECL_END()
     };
     HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
@@ -177,21 +207,30 @@ LPDIRECT3DVERTEXDECLARATION9& SDIFFUSESCREENVERTEX::GetVertexDeclaration()
   if(s_VertexDeclaration==NULL)
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
-    {
-      { 0, 
-        0 , 
-        D3DDECLTYPE_FLOAT4,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_POSITIONT,  //ús de les dades
-        0 
-      },
-      { 0, 
-        12 ,                    //desplaçament 
-        D3DDECLTYPE_D3DCOLOR,   //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_COLOR,     //ús de les dades
-        0 
-      },
+    {          //type            sempre default (per meshes)    //ús de les dades
+      { 0, 0,  D3DDECLTYPE_FLOAT4,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITIONT, 0 },
+      { 0, 12, D3DDECLTYPE_D3DCOLOR, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,     0 },
+      D3DDECL_END()
+    };
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    assert(result == D3D_OK);
+  }
+  return s_VertexDeclaration;
+}
+
+LPDIRECT3DVERTEXDECLARATION9& SDIFFUSESCREENVERTEX::GetInstancedVertexDeclaration()
+{
+  if(s_VertexDeclaration==NULL)
+  {
+    D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+    {          //type            sempre default (per meshes)    //ús de les dades
+      { 0, 0,  D3DDECLTYPE_FLOAT4,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITIONT, 0 },
+      { 0, 12, D3DDECLTYPE_D3DCOLOR, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,     0 },
+      //World matrix
+      { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
+      { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
+      { 1, 16 * 2, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 4 },
+      { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
       D3DDECL_END()
     };
     HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
@@ -218,21 +257,30 @@ LPDIRECT3DVERTEXDECLARATION9& STEXTUREDSCREENVERTEX::GetVertexDeclaration()
   if(s_VertexDeclaration==NULL)
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
-    {
-      { 0, 
-        0 , 
-        D3DDECLTYPE_FLOAT4,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_POSITIONT,  //ús de les dades
-        0 
-      },
-      { 0, 
-        12 ,                    //desplaçament 
-        D3DDECLTYPE_FLOAT2,   //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_TEXCOORD,     //ús de les dades
-        0 
-      },
+    {          //type            sempre default (per meshes)    //ús de les dades
+      { 0, 0,  D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITIONT, 0 },
+      { 0, 12, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,  0 },
+      D3DDECL_END()
+    };
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    assert(result == D3D_OK);
+  }
+  return s_VertexDeclaration;
+}
+
+LPDIRECT3DVERTEXDECLARATION9& STEXTUREDSCREENVERTEX::GetInstancedVertexDeclaration()
+{
+  if(s_VertexDeclaration==NULL)
+  {
+    D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+    {          //type            sempre default (per meshes)    //ús de les dades
+      { 0, 0,  D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITIONT, 0 },
+      { 0, 12, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,  0 },
+      //World matrix
+      { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
+      { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
+      { 1, 16 * 2, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 4 },
+      { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
       D3DDECL_END()
     };
     HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
@@ -259,28 +307,32 @@ LPDIRECT3DVERTEXDECLARATION9& SDIFFUSETEXTUREDSCREENVERTEX::GetVertexDeclaration
   if(s_VertexDeclaration==NULL)
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
-    {
-      { 0, 
-        0 , 
-        D3DDECLTYPE_FLOAT4,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_POSITIONT,  //ús de les dades
-        0 
-      },
-      { 0, 
-        12 ,                    //desplaçament 
-        D3DDECLTYPE_D3DCOLOR,   //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_COLOR,     //ús de les dades
-        0 
-      },
-      { 0, 
-        12 + sizeof(uint32) ,                    //desplaçament 
-        D3DDECLTYPE_FLOAT2,   //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_TEXCOORD,     //ús de les dades
-        0 
-      },
+    {                           //type            sempre default (per meshes)    //ús de les dades
+      { 0, 0,                   D3DDECLTYPE_FLOAT4,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITIONT, 0 },
+      { 0, 12,                  D3DDECLTYPE_D3DCOLOR, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,     0 },
+      { 0, 12 + sizeof(uint32), D3DDECLTYPE_FLOAT2,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,  0 },
+      D3DDECL_END()
+    };
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    assert(result == D3D_OK);
+  }
+  return s_VertexDeclaration;
+}
+
+LPDIRECT3DVERTEXDECLARATION9& SDIFFUSETEXTUREDSCREENVERTEX::GetInstancedVertexDeclaration()
+{
+  if(s_VertexDeclaration==NULL)
+  {
+    D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+    {                           //type            sempre default (per meshes)    //ús de les dades
+      { 0, 0,                   D3DDECLTYPE_FLOAT4,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITIONT, 0 },
+      { 0, 12,                  D3DDECLTYPE_D3DCOLOR, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,     0 },
+      { 0, 12 + sizeof(uint32), D3DDECLTYPE_FLOAT2,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,  0 },
+      //World matrix
+      { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
+      { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
+      { 1, 16 * 2, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 4 },
+      { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
       D3DDECL_END()
     };
     HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
@@ -307,28 +359,32 @@ LPDIRECT3DVERTEXDECLARATION9& SNORMALDIFFUSEVERTEX::GetVertexDeclaration()
   if(s_VertexDeclaration==NULL)
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
-    {
-      { 0, 
-        0 , 
-        D3DDECLTYPE_FLOAT3,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_POSITION,  //ús de les dades
-        0 
-      },
-      { 0, 
-        12 ,                    //desplaçament 
-        D3DDECLTYPE_FLOAT3,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_NORMAL,    //ús de les dades
-        0 
-      },
-      { 0, 
-        24 ,                    //desplaçament 
-        D3DDECLTYPE_D3DCOLOR,   //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_COLOR,     //ús de les dades
-        0 
-      },
+    {        //type            sempre default (per meshes)    //ús de les dades
+      { 0, 0,  D3DDECLTYPE_FLOAT3,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+      { 0, 12, D3DDECLTYPE_FLOAT3,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL,   0 },
+      { 0, 24, D3DDECLTYPE_D3DCOLOR, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,    0 },
+      D3DDECL_END()
+    };
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    assert(result == D3D_OK);
+  }
+  return s_VertexDeclaration;
+}
+
+LPDIRECT3DVERTEXDECLARATION9& SNORMALDIFFUSEVERTEX::GetInstancedVertexDeclaration()
+{
+  if(s_VertexDeclaration==NULL)
+  {
+    D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+    {        //type            sempre default (per meshes)    //ús de les dades
+      { 0, 0,  D3DDECLTYPE_FLOAT3,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+      { 0, 12, D3DDECLTYPE_FLOAT3,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL,   0 },
+      { 0, 24, D3DDECLTYPE_D3DCOLOR, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,    0 },
+      //World matrix
+      { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
+      { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
+      { 1, 16 * 2, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 4 },
+      { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
       D3DDECL_END()
     };
     HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
@@ -353,42 +409,12 @@ LPDIRECT3DVERTEXDECLARATION9& TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetVertexDec
   if(s_VertexDeclaration==NULL)
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
-    {
-      { 0, 
-        0 , 
-        D3DDECLTYPE_FLOAT3,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_POSITION,  //ús de les dades
-        0 
-      },
-      { 0, 
-        sizeof(float)*3 ,       //desplaçament 
-        D3DDECLTYPE_FLOAT4,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_NORMAL,    //ús de les dades
-        0 
-      },
-      { 0, 
-        sizeof(float)*7 ,       //desplaçament 
-        D3DDECLTYPE_FLOAT4,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_TANGENT,   //ús de les dades
-        0 
-      },
-      { 0, 
-        sizeof(float)*11 ,      //desplaçament 
-        D3DDECLTYPE_FLOAT4,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_BINORMAL,  //ús de les dades
-        0 
-      },
-      { 0, 
-        sizeof(float)*15 ,      //desplaçament 
-        D3DDECLTYPE_FLOAT2,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_TEXCOORD,  //ús de les dades
-        0 
-      },
+    {                        //type            sempre default (per meshes)    //ús de les dades
+      { 0, 0,                D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+      { 0, sizeof(float)*3,  D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL,   0 },
+      { 0, sizeof(float)*7,  D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TANGENT,  0 },
+      { 0, sizeof(float)*11, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_BINORMAL, 0 },
+      { 0, sizeof(float)*15, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
       D3DDECL_END()
     };
     HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
@@ -396,6 +422,32 @@ LPDIRECT3DVERTEXDECLARATION9& TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetVertexDec
   }
   return s_VertexDeclaration;
 }
+
+LPDIRECT3DVERTEXDECLARATION9& TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetInstancedVertexDeclaration()
+{
+  if(s_VertexDeclaration==NULL)
+  {
+    D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+    {                        //type            sempre default (per meshes)    //ús de les dades
+      { 0, 0,                D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+      { 0, sizeof(float)*3,  D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL,   0 },
+      { 0, sizeof(float)*7,  D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TANGENT,  0 },
+      { 0, sizeof(float)*11, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_BINORMAL, 0 },
+      { 0, sizeof(float)*15, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+      //World matrix
+      { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
+      { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
+      { 1, 16 * 2, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 4 },
+      { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
+      D3DDECL_END()
+    };
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    assert(result == D3D_OK);
+  }
+  return s_VertexDeclaration;
+}
+
+
 // Normal Tangent Binormal Textured 2-------------------------------------------------------------------------------
 unsigned short TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetVertexType()
 {
@@ -412,49 +464,38 @@ LPDIRECT3DVERTEXDECLARATION9& TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetVertexDe
   if(s_VertexDeclaration==NULL)
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
-    {
-      { 0, 
-        0 , 
-        D3DDECLTYPE_FLOAT3,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_POSITION,  //ús de les dades
-        0 
-      },
-      { 0, 
-        sizeof(float)*3 ,       //desplaçament 
-        D3DDECLTYPE_FLOAT4,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_NORMAL,    //ús de les dades
-        0 
-      },
-      { 0, 
-        sizeof(float)*7 ,       //desplaçament 
-        D3DDECLTYPE_FLOAT4,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_TANGENT,   //ús de les dades
-        0 
-      },
-      { 0, 
-        sizeof(float)*11 ,      //desplaçament 
-        D3DDECLTYPE_FLOAT4,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_BINORMAL,  //ús de les dades
-        0 
-      },
-      { 0, 
-        sizeof(float)*15 ,      //desplaçament 
-        D3DDECLTYPE_FLOAT2,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_TEXCOORD,  //ús de les dades
-        0 
-      },
-      { 0, 
-        sizeof(float)*17 ,      //desplaçament 
-        D3DDECLTYPE_FLOAT2,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_TEXCOORD,  //ús de les dades
-        1 
-      },
+    {                        //type            sempre default (per meshes)    //ús de les dades
+      { 0, 0 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+      { 0, sizeof(float)*3 , D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL, 0 },
+      { 0, sizeof(float)*7 , D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TANGENT, 0 },
+      { 0, sizeof(float)*11 , D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_BINORMAL, 0 },
+      { 0, sizeof(float)*15 , D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+      { 0, sizeof(float)*17 , D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
+      D3DDECL_END()
+    };
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    assert(result == D3D_OK);
+  }
+  return s_VertexDeclaration;
+}
+
+LPDIRECT3DVERTEXDECLARATION9& TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetInstancedVertexDeclaration()
+{
+  if(s_VertexDeclaration==NULL)
+  {
+    D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+    {                        //type            sempre default (per meshes)    //ús de les dades
+      { 0, 0 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+      { 0, sizeof(float)*3 , D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL, 0 },
+      { 0, sizeof(float)*7 , D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TANGENT, 0 },
+      { 0, sizeof(float)*11 , D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_BINORMAL, 0 },
+      { 0, sizeof(float)*15 , D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+      { 0, sizeof(float)*17 , D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
+      //World matrix
+      { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
+      { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
+      { 1, 16 * 2, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 4 },
+      { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
       D3DDECL_END()
     };
     HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
@@ -481,20 +522,29 @@ LPDIRECT3DVERTEXDECLARATION9& STEXTUREDVERTEX::GetVertexDeclaration()
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
     {
-      { 0, 
-        0 , 
-        D3DDECLTYPE_FLOAT3,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_POSITION,  //ús de les dades
-        0 
-      },
-      { 0, 
-        sizeof(float)*3 ,                    //desplaçament 
-        D3DDECLTYPE_FLOAT2,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_TEXCOORD,  //ús de les dades
-        0 
-      },
+      { 0, 0 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+      { 0, sizeof(float)*3 , D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+      D3DDECL_END()
+    };
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    assert(result == D3D_OK);
+  }
+  return s_VertexDeclaration;
+}
+
+LPDIRECT3DVERTEXDECLARATION9& STEXTUREDVERTEX::GetInstancedVertexDeclaration()
+{
+  if(s_VertexDeclaration==NULL)
+  {
+    D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+    {
+      { 0, 0 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+      { 0, sizeof(float)*3 , D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+      //World matrix
+      { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
+      { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
+      { 1, 16 * 2, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 4 },
+      { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
       D3DDECL_END()
     };
     HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
@@ -520,27 +570,31 @@ LPDIRECT3DVERTEXDECLARATION9& STEXTURED2VERTEX::GetVertexDeclaration()
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
     {
-      { 0, 
-        0 , 
-        D3DDECLTYPE_FLOAT3,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_POSITION,  //ús de les dades
-        0 
-      },
-      { 0, 
-        sizeof(float)*3 ,       //desplaçament
-        D3DDECLTYPE_FLOAT2,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_TEXCOORD,  //ús de les dades
-        0 
-      },
-      { 0, 
-        sizeof(float)*5 ,       //desplaçament
-        D3DDECLTYPE_FLOAT2,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_TEXCOORD,  //ús de les dades
-        1 
-      },
+      { 0, 0 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+      { 0, sizeof(float)*3 , D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+      { 0, sizeof(float)*5 , D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
+      D3DDECL_END()
+    };
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    assert(result == D3D_OK);
+  }
+  return s_VertexDeclaration;
+}
+
+LPDIRECT3DVERTEXDECLARATION9& STEXTURED2VERTEX::GetInstancedVertexDeclaration()
+{
+  if(s_VertexDeclaration==NULL)
+  {
+    D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+    {
+      { 0, 0 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+      { 0, sizeof(float)*3 , D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+      { 0, sizeof(float)*5 , D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
+      //World matrix
+      { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
+      { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
+      { 1, 16 * 2, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 4 },
+      { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
       D3DDECL_END()
     };
     HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
@@ -567,27 +621,31 @@ LPDIRECT3DVERTEXDECLARATION9& SNORMALTEXTUREDVERTEX::GetVertexDeclaration()
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
     {
-      { 0, 
-        0 , 
-        D3DDECLTYPE_FLOAT3,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_POSITION,  //ús de les dades
-        0 
-      },
-      { 0, 
-        sizeof(float)*3 ,       //desplaçament
-        D3DDECLTYPE_FLOAT3,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_NORMAL,    //ús de les dades
-        0 
-      },
-      { 0, 
-        sizeof(float)*6 ,       //desplaçament
-        D3DDECLTYPE_FLOAT2,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_TEXCOORD,  //ús de les dades
-        0 
-      },
+      { 0, 0 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+      { 0, sizeof(float)*3 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL, 0 },
+      { 0, sizeof(float)*6 , D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+      D3DDECL_END()
+    };
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    assert(result == D3D_OK);
+  }
+  return s_VertexDeclaration;
+}
+
+LPDIRECT3DVERTEXDECLARATION9& SNORMALTEXTUREDVERTEX::GetInstancedVertexDeclaration()
+{
+  if(s_VertexDeclaration==NULL)
+  {
+    D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+    {
+      { 0, 0 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+      { 0, sizeof(float)*3 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL, 0 },
+      { 0, sizeof(float)*6 , D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+      //World matrix
+      { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
+      { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
+      { 1, 16 * 2, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 4 },
+      { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
       D3DDECL_END()
     };
     HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
@@ -613,34 +671,33 @@ LPDIRECT3DVERTEXDECLARATION9& SNORMALTEXTURED2VERTEX::GetVertexDeclaration()
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
     {
-      { 0, 
-        0 , 
-        D3DDECLTYPE_FLOAT3,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_POSITION,  //ús de les dades
-        0 
-      },
-      { 0, 
-        sizeof(float)*3 ,       //desplaçament
-        D3DDECLTYPE_FLOAT3,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_NORMAL,    //ús de les dades
-        0 
-      },
-      { 0, 
-        sizeof(float)*6 ,       //desplaçament
-        D3DDECLTYPE_FLOAT2,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_TEXCOORD,  //ús de les dades
-        0 
-      },
-      { 0, 
-        sizeof(float)*8 ,       //desplaçament
-        D3DDECLTYPE_FLOAT2,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_TEXCOORD,  //ús de les dades
-        1 
-      },
+      { 0, 0 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+      { 0, sizeof(float)*3 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL, 0 },
+      { 0,    sizeof(float)*6 ,     D3DDECLTYPE_FLOAT2,    D3DDECLMETHOD_DEFAULT,    D3DDECLUSAGE_TEXCOORD,    0  },
+      { 0,    sizeof(float)*8 ,   D3DDECLTYPE_FLOAT2,   D3DDECLMETHOD_DEFAULT,   D3DDECLUSAGE_TEXCOORD, 1  },
+      D3DDECL_END()
+    };
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    assert(result == D3D_OK);
+  }
+  return s_VertexDeclaration;
+}
+
+LPDIRECT3DVERTEXDECLARATION9& SNORMALTEXTURED2VERTEX::GetInstancedVertexDeclaration()
+{
+  if(s_VertexDeclaration==NULL)
+  {
+    D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+    {
+      { 0, 0 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+      { 0, sizeof(float)*3 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL, 0 },
+      { 0,    sizeof(float)*6 ,     D3DDECLTYPE_FLOAT2,    D3DDECLMETHOD_DEFAULT,    D3DDECLUSAGE_TEXCOORD,    0  },
+      { 0,    sizeof(float)*8 ,   D3DDECLTYPE_FLOAT2,   D3DDECLMETHOD_DEFAULT,   D3DDECLUSAGE_TEXCOORD, 1  },
+      //World matrix
+      { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
+      { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
+      { 1, 16 * 2, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 4 },
+      { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
       D3DDECL_END()
     };
     HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
@@ -659,41 +716,36 @@ LPDIRECT3DVERTEXDECLARATION9& TCAL3D_HW_VERTEX::GetVertexDeclaration()
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
     {
-      { 0, 
-        0 , 
-        D3DDECLTYPE_FLOAT3,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_POSITION,  //ús de les dades
-        0 
-      },
-      { 0, 
-        sizeof(float)*3 ,        //desplaçament
-        D3DDECLTYPE_FLOAT4,      //type
-        D3DDECLMETHOD_DEFAULT,   //---- sempre default (per meshes)
-        D3DDECLUSAGE_BLENDWEIGHT,//ús de les dades
-        0 
-      },
-      { 0, 
-        sizeof(float)*7 ,         //desplaçament
-        D3DDECLTYPE_FLOAT4,       //type
-        D3DDECLMETHOD_DEFAULT,    //---- sempre default (per meshes)
-        D3DDECLUSAGE_BLENDINDICES,//ús de les dades
-        0 
-      },
-      { 0, 
-        sizeof(float)*11 ,      //desplaçament
-        D3DDECLTYPE_FLOAT3,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_NORMAL,    //ús de les dades
-        0 
-      },
-      { 0, 
-        sizeof(float)*14 ,      //desplaçament
-        D3DDECLTYPE_FLOAT2,     //type
-        D3DDECLMETHOD_DEFAULT,  //---- sempre default (per meshes)
-        D3DDECLUSAGE_TEXCOORD,  //ús de les dades
-        0 
-      },
+      { 0,   0 ,    D3DDECLTYPE_FLOAT3,  D3DDECLMETHOD_DEFAULT,    D3DDECLUSAGE_POSITION,  0   },
+      { 0,    sizeof(float)*3 ,   D3DDECLTYPE_FLOAT4,       D3DDECLMETHOD_DEFAULT,    D3DDECLUSAGE_BLENDWEIGHT, 0   },
+      { 0,   sizeof(float)*7 ,    D3DDECLTYPE_FLOAT4,  D3DDECLMETHOD_DEFAULT,    D3DDECLUSAGE_BLENDINDICES,  0  },
+      { 0,    sizeof(float)*11 ,   D3DDECLTYPE_FLOAT3,     D3DDECLMETHOD_DEFAULT,     D3DDECLUSAGE_NORMAL,  0  },
+      { 0,  sizeof(float)*14 ,   D3DDECLTYPE_FLOAT2,    D3DDECLMETHOD_DEFAULT,     D3DDECLUSAGE_TEXCOORD,    0  },
+      D3DDECL_END()
+    };
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    assert(result == D3D_OK);
+  }
+  return s_VertexDeclaration;
+}
+
+
+LPDIRECT3DVERTEXDECLARATION9& TCAL3D_HW_VERTEX::GetInstancedVertexDeclaration()
+{
+  if(s_VertexDeclaration==NULL)
+  {
+    D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+    {
+      { 0,   0 ,    D3DDECLTYPE_FLOAT3,  D3DDECLMETHOD_DEFAULT,    D3DDECLUSAGE_POSITION,  0   },
+      { 0,    sizeof(float)*3 ,   D3DDECLTYPE_FLOAT4,       D3DDECLMETHOD_DEFAULT,    D3DDECLUSAGE_BLENDWEIGHT, 0   },
+      { 0,   sizeof(float)*7 ,    D3DDECLTYPE_FLOAT4,  D3DDECLMETHOD_DEFAULT,    D3DDECLUSAGE_BLENDINDICES,  0  },
+      { 0,    sizeof(float)*11 ,   D3DDECLTYPE_FLOAT3,     D3DDECLMETHOD_DEFAULT,     D3DDECLUSAGE_NORMAL,  0  },
+      { 0,  sizeof(float)*14 ,   D3DDECLTYPE_FLOAT2,    D3DDECLMETHOD_DEFAULT,     D3DDECLUSAGE_TEXCOORD,    0  },
+      //World matrix
+      { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
+      { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
+      { 1, 16 * 2, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 4 },
+      { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
       D3DDECL_END()
     };
     HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
