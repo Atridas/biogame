@@ -65,13 +65,14 @@ public:
    * @param _pEffectTechnique Tècnica.
    * @return True si s'ha renderitzat correctament, false sino.
   **/
-  virtual bool Render(CRenderManager *_pRM, CEffectTechnique *_pEffectTechnique) const;
+  virtual bool Render(CRenderManager *_pRM, CEffectTechnique *_pEffectTechnique, bool _bInstanced = false) const;
 
   virtual bool Render(CRenderManager *_pRM, CEffectTechnique *_pEffectTechnique, int _iBaseVertexIndex,
                                                                                  int _iMinIndex,
                                                                                  int _iNumVertices,
                                                                                  int _iStartIndex,
-                                                                                 int _iNumFaces) const;
+                                                                                 int _iNumFaces, 
+                                                                                 bool _bInstanced = false) const;
 
   
   /**
@@ -129,11 +130,12 @@ bool CIndexedVertexs<T>::Render(CRenderManager *_pRM) const
             0,
             GetVertexsCount(),
             0,
-            GetFacesCount());
+            GetFacesCount(),
+            false);
 };
 
 template<class T>
-bool CIndexedVertexs<T>::Render(CRenderManager *_pRM, CEffectTechnique *_pEffectTechnique) const
+bool CIndexedVertexs<T>::Render(CRenderManager *_pRM, CEffectTechnique *_pEffectTechnique, bool _bInstanced) const
 {
   return Render(_pRM,
             _pEffectTechnique,
@@ -141,7 +143,8 @@ bool CIndexedVertexs<T>::Render(CRenderManager *_pRM, CEffectTechnique *_pEffect
             0,
             GetVertexsCount(),
             0,
-            GetFacesCount());
+            GetFacesCount(),
+            _bInstanced);
 };
 
 template<class T>
@@ -151,7 +154,8 @@ bool CIndexedVertexs<T>::Render(CRenderManager *_pRM,
             int _iMinIndex,
             int _iNumVertices,
             int _iStartIndex,
-            int _iNumFaces) const
+            int _iNumFaces, 
+            bool _bInstanced) const
 {
   LPDIRECT3DDEVICE9 l_pDevice = _pRM->GetDevice();
 
@@ -166,7 +170,12 @@ bool CIndexedVertexs<T>::Render(CRenderManager *_pRM,
     l_bSucceeded = SUCCEEDED(l_pD3DEffect->Begin(&l_iNumPasses,0));
   }
   
-  l_pDevice->SetVertexDeclaration(T::GetVertexDeclaration());
+  if(_bInstanced)
+  {
+    l_pDevice->SetVertexDeclaration(T::GetInstancedVertexDeclaration());
+  } else {
+    l_pDevice->SetVertexDeclaration(T::GetVertexDeclaration());
+  }
   l_pDevice->SetIndices(m_pIB);
   l_pDevice->SetStreamSource(0,m_pVB,0,GetVertexSize());
 

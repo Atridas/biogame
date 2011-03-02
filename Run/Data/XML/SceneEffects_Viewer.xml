@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <scene_effects>
 
+  <!--
 	<pre_render type="shadow_map_render_to_texture" name="shadow_map_scene_effect"
 				texture="ShadowMapTexture" width="1024" height="1024"
 				static_mesh_technique="RenderShadowTechnique" animated_model_technique="Cal3DTechniqueShadow"
 				light_shadow_cast="FreeModeLight"
 				active="true" format_type="R32F"/>
-
+  -->
 	<!--pre_render type="render_to_texture" name="glow_scene_effect" texture="GlowTexture"
 				texture_size_as_frame_buffer="true"
 				static_mesh_technique="RenderGlowTechnique" animated_model_technique="Cal3DGlowTechnique" format_type="A8R8G8B8" active="true"/>
@@ -39,7 +40,7 @@
 				animated_model_technique="AnimatedPreZBlurTechnique" active="true" format_type="A8R8G8B8"/-->
 
 	<render name="default_scene_effect" active="true">
-		<texture stage_id="5" texture="ShadowMapTexture"/>
+    <texture stage_id="5" texture="ShadowMapTexture"/>
 	</render>
 
 

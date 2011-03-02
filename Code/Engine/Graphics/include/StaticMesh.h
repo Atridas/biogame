@@ -51,7 +51,7 @@ public:
    * Aquest mètode renderitza la malla.
    * @param _pRM Render Manager.
   **/
-  void Render(CRenderManager *_pRM) const;
+  void Render(CRenderManager *_pRM, bool _bInstanced = false) const;
   /**
    * Retorn de les coordenades mínimes de la malla.
    * @return Les coordenades mínimes de la malla.

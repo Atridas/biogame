@@ -263,7 +263,7 @@ bool CStaticMesh::Load(const CXMLTreeNode& _XMLTreeNode)
   return IsOk();
 }
 
-void CStaticMesh::Render(CRenderManager *_pRM) const
+void CStaticMesh::Render(CRenderManager *_pRM, bool _bInstanced) const
 {
     vector<CRenderableVertexs*>::const_iterator l_ItRV = m_RVs.begin();
     vector<CRenderableVertexs*>::const_iterator l_EndRV = m_RVs.end();
@@ -275,13 +275,13 @@ void CStaticMesh::Render(CRenderManager *_pRM) const
 
       //---------------------------- shaders -----------------------
       
-      CEffectTechnique* l_pEffectTechnique = (*l_ItMaterialArray)->GetEffectTechnique(_pRM);
+      CEffectTechnique* l_pEffectTechnique = (*l_ItMaterialArray)->GetEffectTechnique(_pRM, _bInstanced);
 
-      if(l_pEffectTechnique)
+      if(l_pEffectTechnique && l_pEffectTechnique->IsInstanced() == _bInstanced)
       {
         if(l_pEffectTechnique->BeginRender(*l_ItMaterialArray))
         {
-          (*l_ItRV)->Render(_pRM,l_pEffectTechnique);
+          (*l_ItRV)->Render(_pRM,l_pEffectTechnique,_bInstanced);
         } else {
           (*l_ItRV)->Render(_pRM);
         }
