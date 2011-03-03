@@ -34,6 +34,7 @@ void CRenderableObjectsManager::Update(float _fElapsedTime)
 void CRenderableObjectsManager::Render(CRenderManager *_pRM)
 {
   RenderOld(_pRM);
+  //RenderHWInstanced(_pRM);
 }
 
 void CRenderableObjectsManager::RenderHWInstanced(CRenderManager* _pRM)
@@ -57,6 +58,9 @@ void CRenderableObjectsManager::RenderHWInstanced(CRenderManager* _pRM)
         if((*l_itInst)->GetVisible())
         {
           l_mBuffer[cont] = (*l_itInst)->GetMat44().GetD3DXMatrix();
+          //Mat44f mat;
+          //mat.SetIdentity();
+          //l_mBuffer[cont] = mat.GetD3DXMatrix();
           cont++;
         }
       }
@@ -68,14 +72,14 @@ void CRenderableObjectsManager::RenderHWInstanced(CRenderManager* _pRM)
 
       // Omplim el buffer ------------------------------------------------------------------------------
       bool result = l_HWStaticInstances->m_mWorldMats.SetData(l_mBuffer, cont, _pRM);
-
       assert(result);// ---
 
       // Fem els set stream sources
       l_pDevice->SetStreamSourceFreq(0, (D3DSTREAMSOURCE_INDEXEDDATA  | cont));
 
       l_pDevice->SetStreamSourceFreq(1, (D3DSTREAMSOURCE_INSTANCEDATA | 1   ));
-
+      result = l_HWStaticInstances->m_mWorldMats.SetStreamSource(_pRM, 1);
+      assert(result);// ---
 
       _pRM->SetTransform(l_HWStaticInstances->m_vInstances[0]->GetMat44()); //de test només
       l_it->first->Render(_pRM, true);

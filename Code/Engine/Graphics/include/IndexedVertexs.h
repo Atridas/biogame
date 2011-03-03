@@ -177,6 +177,7 @@ bool CIndexedVertexs<T>::Render(CRenderManager *_pRM,
     l_pDevice->SetVertexDeclaration(T::GetVertexDeclaration());
   }
   l_pDevice->SetIndices(m_pIB);
+
   l_pDevice->SetStreamSource(0,m_pVB,0,GetVertexSize());
 
   for(uint32 i = 0; i < l_iNumPasses; i++)

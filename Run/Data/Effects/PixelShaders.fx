@@ -83,6 +83,11 @@ float4 TangentBinormalNormalTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_
 float4 WhitePS() : COLOR {
   return float4(1.0,1.0,1.0,1.0);
 }
+
+float4 ColorPS(float4 _color : COLOR) : COLOR {
+  return _color;
+}
+
 float4 NoPS() : COLOR {
   return float4(0.0,0.0,0.0,0.0);
 }
