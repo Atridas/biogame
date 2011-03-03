@@ -440,6 +440,12 @@ void CRenderManager::DrawCube(float _fSize, const CColor& _Color)
   DrawCube(Vect3f(0.0f,0.0f,0.0f),_fSize,_Color);
 }
 
+void CRenderManager::DrawCube(Vect3f &_fSize, const CColor& _Color)
+{
+  assert(IsOk());
+  DrawCube(Vect3f(0.0f,0.0f,0.0f),_fSize,_Color);
+}
+
 void CRenderManager::DrawCube(const Vect3f &_Pos, float _fSize, const CColor& _Color)
 {
   assert(IsOk());
@@ -489,6 +495,63 @@ void CRenderManager::DrawCube(const Vect3f &_Pos, float _fSize, const CColor& _C
     //---------------------------------------------------
 		{_Pos.x - l_fC,_Pos.y + l_fC,_Pos.z + l_fC, l_Color},
 		{_Pos.x + l_fC,_Pos.y + l_fC,_Pos.z + l_fC, l_Color},
+	};
+  
+	m_pD3DDevice->SetTexture(0,NULL);
+	m_pD3DDevice->SetFVF(SDIFFUSEVERTEX::GetFVF());
+	m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST,12, v,sizeof(SDIFFUSEVERTEX));
+}
+
+
+void CRenderManager::DrawCube(const Vect3f &_Pos, const Vect3f &_Size, const CColor& _Color)
+{
+  assert(IsOk());
+  Vect3f l_fC = _Size/2.f;
+  DWORD l_Color   = _Color.GetUint32Argb();
+
+  SDIFFUSEVERTEX v[24] =
+	{
+		{_Pos.x - l_fC.x,_Pos.y - l_fC.y,_Pos.z - l_fC.z, l_Color},
+		{_Pos.x + l_fC.x,_Pos.y - l_fC.y,_Pos.z - l_fC.z, l_Color},
+                                             
+		{_Pos.x - l_fC.x,_Pos.y - l_fC.y,_Pos.z - l_fC.z, l_Color},
+		{_Pos.x - l_fC.x,_Pos.y + l_fC.y,_Pos.z - l_fC.z, l_Color},
+                                             
+		{_Pos.x - l_fC.x,_Pos.y - l_fC.y,_Pos.z - l_fC.z, l_Color},
+		{_Pos.x - l_fC.x,_Pos.y - l_fC.y,_Pos.z + l_fC.z, l_Color},
+                                             
+    //----------------------------------------l_fC.z-------
+		{_Pos.x + l_fC.x,_Pos.y - l_fC.y,_Pos.z - l_fC.z, l_Color},
+		{_Pos.x + l_fC.x,_Pos.y + l_fC.y,_Pos.z - l_fC.z, l_Color},
+                                              
+		{_Pos.x + l_fC.x,_Pos.y - l_fC.y,_Pos.z - l_fC.z, l_Color},
+		{_Pos.x + l_fC.x,_Pos.y - l_fC.y,_Pos.z + l_fC.z, l_Color},
+                                             
+    //----------------------------------------l_fC.z-------
+		{_Pos.x - l_fC.x,_Pos.y + l_fC.y,_Pos.z - l_fC.z, l_Color},
+		{_Pos.x + l_fC.x,_Pos.y + l_fC.y,_Pos.z - l_fC.z, l_Color},
+                                             
+		{_Pos.x - l_fC.x,_Pos.y + l_fC.y,_Pos.z - l_fC.z, l_Color},
+		{_Pos.x - l_fC.x,_Pos.y + l_fC.y,_Pos.z + l_fC.z, l_Color},
+                                             
+    //----------------------------------------l_fC.z-------
+		{_Pos.x - l_fC.x,_Pos.y - l_fC.y,_Pos.z + l_fC.z, l_Color},
+		{_Pos.x + l_fC.x,_Pos.y - l_fC.y,_Pos.z + l_fC.z, l_Color},
+                                             
+		{_Pos.x - l_fC.x,_Pos.y - l_fC.y,_Pos.z + l_fC.z, l_Color},
+		{_Pos.x - l_fC.x,_Pos.y + l_fC.y,_Pos.z + l_fC.z, l_Color},
+                                             
+    //----------------------------------------l_fC.z-------
+		{_Pos.x + l_fC.x,_Pos.y + l_fC.y,_Pos.z - l_fC.z, l_Color},
+		{_Pos.x + l_fC.x,_Pos.y + l_fC.y,_Pos.z + l_fC.z, l_Color},
+                                             
+    //----------------------------------------l_fC.z-------
+		{_Pos.x + l_fC.x,_Pos.y - l_fC.y,_Pos.z + l_fC.z, l_Color},
+		{_Pos.x + l_fC.x,_Pos.y + l_fC.y,_Pos.z + l_fC.z, l_Color},
+                                              
+    //----------------------------------------l_fC.z-------
+		{_Pos.x - l_fC.x,_Pos.y + l_fC.y,_Pos.z + l_fC.z, l_Color},
+		{_Pos.x + l_fC.x,_Pos.y + l_fC.y,_Pos.z + l_fC.z, l_Color},
 	};
   
 	m_pD3DDevice->SetTexture(0,NULL);

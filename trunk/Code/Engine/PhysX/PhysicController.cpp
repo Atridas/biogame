@@ -12,6 +12,7 @@
 
 #include "Utils/MemLeaks.h"
 
+
 CPhysicController::CPhysicController(float radius, float height, float slope, float skinwidth, float stepOffset,
 																		 uint32 collisionGroups, CPhysicUserData* userData, const Vect3f& pos, float gravity)
 																		 : m_pPhXController(NULL)
@@ -59,6 +60,7 @@ void CPhysicController::CreateController (NxController* controller, NxScene* sce
 
 void CPhysicController::SetPosition	(const Vect3f& pos)
 {
+  
 	if (m_pPhXController != NULL)
 	{
 		NxExtendedVec3 position;
@@ -107,6 +109,7 @@ void CPhysicController::Move (const Vect3f& direction, float elapsedTime)
 	NxVec3 d(direction.x, direction.y+(m_fGravity*elapsedTime), direction.z);
 	NxF32 sharpness = 1.0f;
 	NxU32 collisionFlags = 0;
+  //NxU32 Collision = 0;
 	float heightDelta = m_Jump.GetHeight(elapsedTime);
 	if( heightDelta != 0.f )
 	{
@@ -115,7 +118,8 @@ void CPhysicController::Move (const Vect3f& direction, float elapsedTime)
 		d.z *= 0.3f;
 	}
 
-	m_pPhXController->move(d, m_uCollisionGroups, 0.000001f, collisionFlags, sharpness);
+	//m_pPhXController->move(d, m_uCollisionGroups, 0.000001f, collisionFlags, sharpness);
+  m_pPhXController->move(d, m_uCollisionGroups, 0.000001f, collisionFlags, sharpness);
 	if(	(collisionFlags & NXCC_COLLISION_DOWN) || (collisionFlags & NXCC_COLLISION_UP) )
 	{
 		m_Jump.StopJump();

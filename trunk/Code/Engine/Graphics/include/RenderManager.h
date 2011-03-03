@@ -70,7 +70,9 @@ public:
 	void								  DrawLine					   (const Vect3f &_PosA, const Vect3f &_PosB, const CColor& _Color);
   void                  DrawAxis             ();
   void                  DrawCube             (const Vect3f &_Pos, float _fSize, const CColor& _Color);
+  void                  DrawCube             (const Vect3f &_Pos, const Vect3f &_Size, const CColor& _Color);
   void                  DrawCube             (float _fSize, const CColor& _Color);
+  void                  DrawCube             (Vect3f &_fSize, const CColor& _Color);
   void                  DrawCamera           (CCamera* camera);
  	void									DrawGrid				     (float Size, CColor Color=colWHITE, int GridX=10, int32 GridZ=10 );
   void                  RenderBoundingBox    (CBoundingBox* _pBBox);
