@@ -169,12 +169,15 @@ LPDIRECT3DVERTEXDECLARATION9& SDIFFUSEVERTEX::GetVertexDeclaration()
 
 LPDIRECT3DVERTEXDECLARATION9& SDIFFUSEVERTEX::GetInstancedVertexDeclaration()
 {
-  if(s_VertexDeclaration==NULL)
+  if(s_VertexInstancedDeclaration==NULL)
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
     {          //type            sempre default (per meshes)    //ús de les dades
-      { 0, 0,  D3DDECLTYPE_FLOAT3,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0},
-      { 0, 12, D3DDECLTYPE_D3DCOLOR, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR, 0  },
+      { 0, 0,  D3DDECLTYPE_FLOAT3,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+      { 0, 12, D3DDECLTYPE_D3DCOLOR, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,    0 },
+      //Buffer
+      { 1, 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+      { 1, 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
       //World matrix
       { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
       { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
@@ -183,10 +186,10 @@ LPDIRECT3DVERTEXDECLARATION9& SDIFFUSEVERTEX::GetInstancedVertexDeclaration()
 
       D3DDECL_END()
     };
-    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexInstancedDeclaration);
     assert(result == D3D_OK);
   }
-  return s_VertexDeclaration;
+  return s_VertexInstancedDeclaration;
 }
 
 
@@ -220,12 +223,15 @@ LPDIRECT3DVERTEXDECLARATION9& SDIFFUSESCREENVERTEX::GetVertexDeclaration()
 
 LPDIRECT3DVERTEXDECLARATION9& SDIFFUSESCREENVERTEX::GetInstancedVertexDeclaration()
 {
-  if(s_VertexDeclaration==NULL)
+  if(s_VertexInstancedDeclaration==NULL)
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
     {          //type            sempre default (per meshes)    //ús de les dades
       { 0, 0,  D3DDECLTYPE_FLOAT4,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITIONT, 0 },
       { 0, 12, D3DDECLTYPE_D3DCOLOR, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,     0 },
+      //Buffer
+      { 1, 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+      { 1, 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
       //World matrix
       { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
       { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
@@ -233,10 +239,10 @@ LPDIRECT3DVERTEXDECLARATION9& SDIFFUSESCREENVERTEX::GetInstancedVertexDeclaratio
       { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
       D3DDECL_END()
     };
-    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexInstancedDeclaration);
     assert(result == D3D_OK);
   }
-  return s_VertexDeclaration;
+  return s_VertexInstancedDeclaration;
 }
 
 
@@ -270,12 +276,14 @@ LPDIRECT3DVERTEXDECLARATION9& STEXTUREDSCREENVERTEX::GetVertexDeclaration()
 
 LPDIRECT3DVERTEXDECLARATION9& STEXTUREDSCREENVERTEX::GetInstancedVertexDeclaration()
 {
-  if(s_VertexDeclaration==NULL)
+  if(s_VertexInstancedDeclaration==NULL)
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
     {          //type            sempre default (per meshes)    //ús de les dades
       { 0, 0,  D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITIONT, 0 },
       { 0, 12, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,  0 },
+      //Buffer
+      { 1, 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
       //World matrix
       { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
       { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
@@ -283,10 +291,10 @@ LPDIRECT3DVERTEXDECLARATION9& STEXTUREDSCREENVERTEX::GetInstancedVertexDeclarati
       { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
       D3DDECL_END()
     };
-    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexInstancedDeclaration);
     assert(result == D3D_OK);
   }
-  return s_VertexDeclaration;
+  return s_VertexInstancedDeclaration;
 }
 
 
@@ -321,13 +329,15 @@ LPDIRECT3DVERTEXDECLARATION9& SDIFFUSETEXTUREDSCREENVERTEX::GetVertexDeclaration
 
 LPDIRECT3DVERTEXDECLARATION9& SDIFFUSETEXTUREDSCREENVERTEX::GetInstancedVertexDeclaration()
 {
-  if(s_VertexDeclaration==NULL)
+  if(s_VertexInstancedDeclaration==NULL)
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
     {                           //type            sempre default (per meshes)    //ús de les dades
       { 0, 0,                   D3DDECLTYPE_FLOAT4,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITIONT, 0 },
       { 0, 12,                  D3DDECLTYPE_D3DCOLOR, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,     0 },
       { 0, 12 + sizeof(uint32), D3DDECLTYPE_FLOAT2,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,  0 },
+      //Buffer
+      { 1, 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
       //World matrix
       { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
       { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
@@ -335,10 +345,10 @@ LPDIRECT3DVERTEXDECLARATION9& SDIFFUSETEXTUREDSCREENVERTEX::GetInstancedVertexDe
       { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
       D3DDECL_END()
     };
-    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexInstancedDeclaration);
     assert(result == D3D_OK);
   }
-  return s_VertexDeclaration;
+  return s_VertexInstancedDeclaration;
 }
 
 
@@ -373,13 +383,16 @@ LPDIRECT3DVERTEXDECLARATION9& SNORMALDIFFUSEVERTEX::GetVertexDeclaration()
 
 LPDIRECT3DVERTEXDECLARATION9& SNORMALDIFFUSEVERTEX::GetInstancedVertexDeclaration()
 {
-  if(s_VertexDeclaration==NULL)
+  if(s_VertexInstancedDeclaration==NULL)
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
     {        //type            sempre default (per meshes)    //ús de les dades
       { 0, 0,  D3DDECLTYPE_FLOAT3,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
       { 0, 12, D3DDECLTYPE_FLOAT3,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL,   0 },
       { 0, 24, D3DDECLTYPE_D3DCOLOR, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,    0 },
+      //Buffer
+      { 1, 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+      { 1, 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
       //World matrix
       { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
       { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
@@ -387,10 +400,10 @@ LPDIRECT3DVERTEXDECLARATION9& SNORMALDIFFUSEVERTEX::GetInstancedVertexDeclaratio
       { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
       D3DDECL_END()
     };
-    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexInstancedDeclaration);
     assert(result == D3D_OK);
   }
-  return s_VertexDeclaration;
+  return s_VertexInstancedDeclaration;
 }
 
 // Normal Tangent Binormal Textured --------------------------------------------------------------------------------
@@ -425,7 +438,7 @@ LPDIRECT3DVERTEXDECLARATION9& TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetVertexDec
 
 LPDIRECT3DVERTEXDECLARATION9& TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetInstancedVertexDeclaration()
 {
-  if(s_VertexDeclaration==NULL)
+  if(s_VertexInstancedDeclaration==NULL)
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
     {                        //type            sempre default (per meshes)    //ús de les dades
@@ -434,6 +447,8 @@ LPDIRECT3DVERTEXDECLARATION9& TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetInstanced
       { 0, sizeof(float)*7,  D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TANGENT,  0 },
       { 0, sizeof(float)*11, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_BINORMAL, 0 },
       { 0, sizeof(float)*15, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+      //Buffer
+      { 1, 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
       //World matrix
       { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
       { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
@@ -441,10 +456,10 @@ LPDIRECT3DVERTEXDECLARATION9& TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetInstanced
       { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
       D3DDECL_END()
     };
-    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexInstancedDeclaration);
     assert(result == D3D_OK);
   }
-  return s_VertexDeclaration;
+  return s_VertexInstancedDeclaration;
 }
 
 
@@ -481,7 +496,7 @@ LPDIRECT3DVERTEXDECLARATION9& TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetVertexDe
 
 LPDIRECT3DVERTEXDECLARATION9& TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetInstancedVertexDeclaration()
 {
-  if(s_VertexDeclaration==NULL)
+  if(s_VertexInstancedDeclaration==NULL)
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
     {                        //type            sempre default (per meshes)    //ús de les dades
@@ -491,6 +506,8 @@ LPDIRECT3DVERTEXDECLARATION9& TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetInstance
       { 0, sizeof(float)*11 , D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_BINORMAL, 0 },
       { 0, sizeof(float)*15 , D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
       { 0, sizeof(float)*17 , D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
+      //Buffer
+      // -----------------------------------------------------------------------------------------
       //World matrix
       { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
       { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
@@ -498,10 +515,10 @@ LPDIRECT3DVERTEXDECLARATION9& TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetInstance
       { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
       D3DDECL_END()
     };
-    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexInstancedDeclaration);
     assert(result == D3D_OK);
   }
-  return s_VertexDeclaration;
+  return s_VertexInstancedDeclaration;
 }
 
 // Textured Vertex -------------------------------------------------------------------------------------------------
@@ -534,12 +551,14 @@ LPDIRECT3DVERTEXDECLARATION9& STEXTUREDVERTEX::GetVertexDeclaration()
 
 LPDIRECT3DVERTEXDECLARATION9& STEXTUREDVERTEX::GetInstancedVertexDeclaration()
 {
-  if(s_VertexDeclaration==NULL)
+  if(s_VertexInstancedDeclaration==NULL)
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
     {
       { 0, 0 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
       { 0, sizeof(float)*3 , D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+      //Buffer
+      { 1, 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
       //World matrix
       { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
       { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
@@ -547,10 +566,10 @@ LPDIRECT3DVERTEXDECLARATION9& STEXTUREDVERTEX::GetInstancedVertexDeclaration()
       { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
       D3DDECL_END()
     };
-    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexInstancedDeclaration);
     assert(result == D3D_OK);
   }
-  return s_VertexDeclaration;
+  return s_VertexInstancedDeclaration;
 }
 
 // Textured 2 Vertex -----------------------------------------------------------------------------------------------
@@ -583,13 +602,15 @@ LPDIRECT3DVERTEXDECLARATION9& STEXTURED2VERTEX::GetVertexDeclaration()
 
 LPDIRECT3DVERTEXDECLARATION9& STEXTURED2VERTEX::GetInstancedVertexDeclaration()
 {
-  if(s_VertexDeclaration==NULL)
+  if(s_VertexInstancedDeclaration==NULL)
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
     {
       { 0, 0 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
       { 0, sizeof(float)*3 , D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
       { 0, sizeof(float)*5 , D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
+      //Buffer
+      //-------------------------------------------------------------------------------------------------
       //World matrix
       { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
       { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
@@ -597,10 +618,10 @@ LPDIRECT3DVERTEXDECLARATION9& STEXTURED2VERTEX::GetInstancedVertexDeclaration()
       { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
       D3DDECL_END()
     };
-    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexInstancedDeclaration);
     assert(result == D3D_OK);
   }
-  return s_VertexDeclaration;
+  return s_VertexInstancedDeclaration;
 }
 
 
@@ -634,13 +655,15 @@ LPDIRECT3DVERTEXDECLARATION9& SNORMALTEXTUREDVERTEX::GetVertexDeclaration()
 
 LPDIRECT3DVERTEXDECLARATION9& SNORMALTEXTUREDVERTEX::GetInstancedVertexDeclaration()
 {
-  if(s_VertexDeclaration==NULL)
+  if(s_VertexInstancedDeclaration==NULL)
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
     {
       { 0, 0 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
       { 0, sizeof(float)*3 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL, 0 },
       { 0, sizeof(float)*6 , D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+      //Buffer
+      { 1, 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
       //World matrix
       { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
       { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
@@ -648,10 +671,10 @@ LPDIRECT3DVERTEXDECLARATION9& SNORMALTEXTUREDVERTEX::GetInstancedVertexDeclarati
       { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
       D3DDECL_END()
     };
-    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexInstancedDeclaration);
     assert(result == D3D_OK);
   }
-  return s_VertexDeclaration;
+  return s_VertexInstancedDeclaration;
 }
 
 // Normal Textured2 Vertex -----------------------------------------------------------------------------------------
@@ -685,14 +708,14 @@ LPDIRECT3DVERTEXDECLARATION9& SNORMALTEXTURED2VERTEX::GetVertexDeclaration()
 
 LPDIRECT3DVERTEXDECLARATION9& SNORMALTEXTURED2VERTEX::GetInstancedVertexDeclaration()
 {
-  if(s_VertexDeclaration==NULL)
+  if(s_VertexInstancedDeclaration==NULL)
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
     {
-      { 0, 0 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
-      { 0, sizeof(float)*3 , D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL, 0 },
-      { 0,    sizeof(float)*6 ,     D3DDECLTYPE_FLOAT2,    D3DDECLMETHOD_DEFAULT,    D3DDECLUSAGE_TEXCOORD,    0  },
-      { 0,    sizeof(float)*8 ,   D3DDECLTYPE_FLOAT2,   D3DDECLMETHOD_DEFAULT,   D3DDECLUSAGE_TEXCOORD, 1  },
+      { 0, 0,               D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
+      { 0, sizeof(float)*3, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL,   0 },
+      { 0, sizeof(float)*6, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+      { 0, sizeof(float)*8, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
       //World matrix
       { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
       { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
@@ -700,10 +723,10 @@ LPDIRECT3DVERTEXDECLARATION9& SNORMALTEXTURED2VERTEX::GetInstancedVertexDeclarat
       { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
       D3DDECL_END()
     };
-    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexInstancedDeclaration);
     assert(result == D3D_OK);
   }
-  return s_VertexDeclaration;
+  return s_VertexInstancedDeclaration;
 }
 
 
@@ -732,15 +755,17 @@ LPDIRECT3DVERTEXDECLARATION9& TCAL3D_HW_VERTEX::GetVertexDeclaration()
 
 LPDIRECT3DVERTEXDECLARATION9& TCAL3D_HW_VERTEX::GetInstancedVertexDeclaration()
 {
-  if(s_VertexDeclaration==NULL)
+  if(s_VertexInstancedDeclaration==NULL)
   {
     D3DVERTEXELEMENT9 l_VertexDeclaration[] =
     {
-      { 0,   0 ,    D3DDECLTYPE_FLOAT3,  D3DDECLMETHOD_DEFAULT,    D3DDECLUSAGE_POSITION,  0   },
-      { 0,    sizeof(float)*3 ,   D3DDECLTYPE_FLOAT4,       D3DDECLMETHOD_DEFAULT,    D3DDECLUSAGE_BLENDWEIGHT, 0   },
-      { 0,   sizeof(float)*7 ,    D3DDECLTYPE_FLOAT4,  D3DDECLMETHOD_DEFAULT,    D3DDECLUSAGE_BLENDINDICES,  0  },
-      { 0,    sizeof(float)*11 ,   D3DDECLTYPE_FLOAT3,     D3DDECLMETHOD_DEFAULT,     D3DDECLUSAGE_NORMAL,  0  },
-      { 0,  sizeof(float)*14 ,   D3DDECLTYPE_FLOAT2,    D3DDECLMETHOD_DEFAULT,     D3DDECLUSAGE_TEXCOORD,    0  },
+      { 0, 0,                D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION,     0 },
+      { 0, sizeof(float)*3,  D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_BLENDWEIGHT,  0 },
+      { 0, sizeof(float)*7,  D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_BLENDINDICES, 0 },
+      { 0, sizeof(float)*11, D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_NORMAL,       0 },
+      { 0, sizeof(float)*14, D3DDECLTYPE_FLOAT2, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD,     0 },
+      //Buffer
+      { 1, 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
       //World matrix
       { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
       { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
@@ -748,8 +773,8 @@ LPDIRECT3DVERTEXDECLARATION9& TCAL3D_HW_VERTEX::GetInstancedVertexDeclaration()
       { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
       D3DDECL_END()
     };
-    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexInstancedDeclaration);
     assert(result == D3D_OK);
   }
-  return s_VertexDeclaration;
+  return s_VertexInstancedDeclaration;
 }

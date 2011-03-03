@@ -28,7 +28,7 @@ public:
 
     UINT l_uiSize = sizeof(T)*m_uiMaxNumInstances;
 
-    if(!FAILED(l_pDevice->CreateVertexBuffer(l_uiSize,0,0,D3DPOOL_DEFAULT,&m_pVB,NULL)))
+    if(!FAILED(l_pDevice->CreateVertexBuffer(l_uiSize,D3DUSAGE_DYNAMIC|D3DUSAGE_WRITEONLY,0,D3DPOOL_DEFAULT,&m_pVB,NULL)))
     {
       SetOk(true);
     }else{
@@ -56,17 +56,21 @@ public:
         return false;
     }
 
+    UINT l_uiSize = sizeof(T)*_uiNumInstances;
+
     void* l_p;
-    m_pVB->Lock (0,sizeof(T)*_uiNumInstances,&l_p,0);
-    memcpy(l_p,_pData,sizeof(T)*_uiNumInstances);
-    m_pVB->Unlock();
-    return true;
+    if(FAILED(m_pVB->Lock (0,l_uiSize,&l_p,0)))
+    {
+      return false;
+    }
+    memcpy(l_p,_pData,l_uiSize);
+    return !FAILED(m_pVB->Unlock());
   }
 
   bool SetStreamSource(CRenderManager* _pRM, int _iStream = 1)
   {
     LPDIRECT3DDEVICE9 l_pDevice = _pRM->GetDevice();
-    l_pDevice->SetStreamSource(_iStream, m_pVB, 0, sizeof(T));
+    return !FAILED(l_pDevice->SetStreamSource(_iStream, m_pVB, 0, sizeof(T)));
   }
 
   T* GetBuffer(uint32 _uiNumInstances, CRenderManager* _pRM)

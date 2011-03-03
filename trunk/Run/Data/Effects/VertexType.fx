@@ -27,14 +27,14 @@ struct TNORMAL_DIFFUSED_VERTEX_VS {
 };
 
 struct TNORMAL_DIFFUSED_VERTEX_INSTANCED_VS {
-	float3 Position : POSITION;
+	float3 Position : POSITION0;
 	float3 Normal : NORMAL;
 	float4 Color : COLOR;
   
-  float4 WorldMatrix0 : TEXCOORD2;
-  float4 WorldMatrix1 : TEXCOORD3;
-  float4 WorldMatrix2 : TEXCOORD4;
-  float4 WorldMatrix3 : TEXCOORD5;
+  float4 WorldMatrix0 : POSITION1;
+  float4 WorldMatrix1 : POSITION2;
+  float4 WorldMatrix2 : POSITION3;
+  float4 WorldMatrix3 : POSITION4;
 };
 
 struct TNORMAL_DIFFUSED_VERTEX_PS {

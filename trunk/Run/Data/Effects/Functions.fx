@@ -273,29 +273,28 @@ void CalcAnimatedNormalTangent(float3 Normal,
 
 float4x4 GetWorldMatrix(float4 WorldMatrix0, float4 WorldMatrix1, float4 WorldMatrix2, float4 WorldMatrix3)
 {
-/*
+  /*
   float4x4 aux = {
                     {WorldMatrix0.x, WorldMatrix1.x, WorldMatrix2.x, WorldMatrix3.x},
                     {WorldMatrix0.y, WorldMatrix1.y, WorldMatrix2.y, WorldMatrix3.y},
                     {WorldMatrix0.z, WorldMatrix1.z, WorldMatrix2.z, WorldMatrix3.z},
                     {WorldMatrix0.w, WorldMatrix1.w, WorldMatrix2.w, WorldMatrix3.w},
-                 };
-                 */
-  /*
+                 };  
+                   */    
   float4x4 aux = {
                     {WorldMatrix0.x, WorldMatrix0.y, WorldMatrix0.z, WorldMatrix0.w},
                     {WorldMatrix1.x, WorldMatrix1.y, WorldMatrix1.z, WorldMatrix1.w},
                     {WorldMatrix2.x, WorldMatrix2.y, WorldMatrix2.z, WorldMatrix2.w},
                     {WorldMatrix3.x, WorldMatrix3.y, WorldMatrix3.z, WorldMatrix3.w},
-                 };         
-              */
+                 }; 
+               /*  
   float4x4 aux = {
                     {1, 0, 0, 0},
                     {0, 1, 0, 0},
                     {0, 0, 1, 0},
                     {0, 0, 0, 1},
                  };  
-                 
+                 */
   //float4x4 aux = g_WorldMatrix;
   return aux;
 }
