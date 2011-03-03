@@ -36,6 +36,9 @@ class CScriptManager;
 
 //--------------------------
 
+
+
+
 //---- Declaracion de nuevos tipos------------
 struct SPhysicsInitParams
 {

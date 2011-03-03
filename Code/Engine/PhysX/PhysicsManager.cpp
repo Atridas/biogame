@@ -211,8 +211,8 @@ void CPhysicsManager::DrawActor (NxActor* actor, CRenderManager* render)
 				render->SetTransform(m);
 				NxVec3 boxDim = shapes[nShapes]->isBox()->getDimensions();
 				CColor color = physicUserData->GetColor();
-				//render->DrawBox(boxDim.x*2, boxDim.y*2, boxDim.z*2, color);
-        render->DrawCube(boxDim.y*2,color);
+				render->DrawCube(Vect3f(boxDim.x*2,boxDim.y*2,boxDim.z*2), color);
+        //render->DrawCube(boxDim.y*2,color);
 			}
 			break;
 		case NX_SHAPE_SPHERE:

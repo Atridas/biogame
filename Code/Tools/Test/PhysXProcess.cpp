@@ -28,6 +28,18 @@
 #include "InstanceMesh.h"
 #include "GameObject.h"
 
+//typedef enum ETypeFunction { 
+//      COLISION_STATIC_MASK = 0,
+//      COLISION_SOLID_MASK = 1, 
+//      COLISION_SCENE_MASK = 2
+//  };
+
+#define COLISION_STATIC_MASK 0
+#define COLISION_SOLID_MASK 1
+#define COLISION_SCENE_MASK 2
+
+#define COLISIONABLE_MASK ((1<<COLISION_SCENE_MASK) || (1<<COLISION_STATIC_MASK) || (1<<COLISION_SOLID_MASK))
+
 
 CPhysicUserData* g_pUserData;
 CPhysicUserData* g_pUserData2;
@@ -35,9 +47,11 @@ CPhysicUserData* g_pUserData3;
 CPhysicUserData* g_pUserData4;
 CPhysicUserData* g_pUserData5;
 CPhysicUserData* g_pUserDataController;
+CPhysicUserData* g_pUserDataEscala;
 CPhysicActor* g_pPActorPlane;
 CPhysicActor* g_pPActorBall;
 CPhysicActor* g_pPActorComposite;
+CPhysicActor* g_pPEscala;
 
 CPhysicUserData* g_pUserDataSHOOT = 0;
 CGameObject* g_pGameObject = 0;
@@ -75,7 +89,11 @@ bool CPhysXProcess::Init()
     m_pObject,
     4.5f);
 
+  
+
   m_pCamera = m_pObjectCamera;
+
+  ((CThPSCamera*)m_pObjectCamera)->SetZoom(10.0f);
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
 
   CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
@@ -95,8 +113,9 @@ bool CPhysXProcess::Init()
   g_pUserData3 = new CPhysicUserData("Composite");
   g_pUserData4 = new CPhysicUserData("Pilota");
   g_pUserData5 = new CPhysicUserData("Cub");
+  g_pUserDataEscala = new CPhysicUserData("Escala");
   g_pUserDataController = new CPhysicUserData("PhysX Controller");
-  g_pUserData->SetPaint(true);
+  g_pUserData->SetPaint(false);
   g_pUserData->SetColor(colWHITE);
   g_pUserData2->SetPaint(false);
   g_pUserData2->SetColor(colWHITE);
@@ -108,14 +127,33 @@ bool CPhysXProcess::Init()
   g_pUserData5->SetColor(colCYAN);
   g_pUserDataController->SetPaint(true);
   g_pUserDataController->SetColor(colBLACK);
+  g_pUserDataEscala->SetPaint(true);
+  g_pUserDataEscala->SetColor(colYELLOW);
+  
 
 
   g_pPActorBall = new CPhysicActor(g_pUserData2);
   g_pPActorPlane = new CPhysicActor(g_pUserData);
   g_pPActorComposite = new CPhysicActor(g_pUserData3);
+  g_pPEscala = new CPhysicActor(g_pUserDataEscala);
 
-  //Plane
-  g_pPActorPlane->AddPlaneShape(Vect3f(0,1,0),0);
+  //ESCALA
+  g_pPEscala->AddBoxSphape(Vect3f(0.5f,0.3f,2.0f),Vect3f(-10.0f,0.0f,0.0f));
+  g_pPEscala->AddBoxSphape(Vect3f(0.5f,0.6f,2.0f),Vect3f(-11.0f,0.0f,0.0f));
+  g_pPEscala->AddBoxSphape(Vect3f(0.5f,0.9f,2.0f),Vect3f(-12.0f,0.0f,0.0f));
+  g_pPEscala->AddBoxSphape(Vect3f(0.5f,1.2f,2.0f),Vect3f(-13.0f,0.0f,0.0f));
+  g_pPEscala->AddBoxSphape(Vect3f(0.5f,1.5f,2.0f),Vect3f(-14.0f,0.0f,0.0f));
+  g_pPEscala->AddBoxSphape(Vect3f(0.5f,1.8f,2.0f),Vect3f(-15.0f,0.0f,0.0f));
+  g_pPEscala->AddBoxSphape(Vect3f(0.5f,2.1f,2.0f),Vect3f(-16.0f,0.0f,0.0f));
+  g_pPEscala->AddBoxSphape(Vect3f(0.5f,2.4f,2.0f),Vect3f(-17.0f,0.0f,0.0f));
+  g_pPEscala->AddBoxSphape(Vect3f(0.5f,2.7f,2.0f),Vect3f(-18.0f,0.0f,0.0f));
+  g_pPEscala->AddBoxSphape(Vect3f(0.5f,3.0f,2.0f),Vect3f(-19.0f,0.0f,0.0f));
+
+
+  //Actor estatic en forma de pla per fer probes amb el charactercontroller:
+  //CPhysicActor* plaXung = new CPhysicActor(g_pUserData2);
+  g_pPActorPlane->AddBoxSphape(Vect3f(100.f,1.0f,100.f),Vect3f(0.0f,-1.0f,0.0f));
+  //g_pPActorPlane->CreateBody(100.0f);
 
   //Ball
   Vect3f l_vBoxDim(1.0f,1.0f,1.0f);
@@ -137,20 +175,29 @@ bool CPhysXProcess::Init()
 
   g_pPActorComposite->CreateBody(0.6f);
   g_pPActorComposite->SetGlobalPosition(Vect3f(10,4,0));
+  
 
-  l_pPhysManager->AddPhysicActor(g_pPActorPlane);
+  //l_pPhysManager->AddPhysicActor(g_pPActorPlane);
   l_pPhysManager->AddPhysicActor(g_pPActorBall);
   l_pPhysManager->AddPhysicActor(g_pPActorComposite);
-
+  l_pPhysManager->AddPhysicActor(g_pPActorPlane);
+  l_pPhysManager->AddPhysicActor(g_pPEscala);
+  
 
   g_pGameObject = new CGameObject("Objecte Fisic");
   g_pGameObject->Init(m_pRenderPhysX,g_pPActorBall);
 
-  g_pPhysXController = new CPhysicController(0.3f,2.3f,10.0f,0.1f,0.5f,1,g_pUserDataController);
-  
+  g_pPhysXController = new CPhysicController(0.5f,3.0f,10.0f,0.1f,0.5f,COLISION_SOLID_MASK,g_pUserDataController,Vect3f(0.0f,2.2f,0.0f));
   l_pPhysManager->AddPhysicController(g_pPhysXController);
-  CORE->GetRenderableObjectsManager()->SetAllVisibility(false);
-  m_pRenderPhysX->SetVisible(true);
+
+  m_pObject->SetPosition(g_pPhysXController->GetPosition());
+
+ 
+  if (m_pRenderPhysX!=0)
+  {
+    CORE->GetRenderableObjectsManager()->SetAllVisibility(false);
+    m_pRenderPhysX->SetVisible(true);
+  }
 
 
   
@@ -183,7 +230,10 @@ void CPhysXProcess::Release()
   CHECKED_DELETE(g_pPActorBall)
   CHECKED_DELETE(g_pPActorComposite)
   CHECKED_DELETE(g_pGameObject)
-  CHECKED_DELETE(g_pPhysXController);
+  CHECKED_DELETE(g_pPhysXController)
+  CHECKED_DELETE(g_pPEscala)
+  CHECKED_DELETE(g_pUserDataEscala);
+  //CHECKED_DELETE(plaXung)
 
   //CHECKED_DELETE(m_pRenderPhysX);
   
@@ -252,6 +302,7 @@ void CPhysXProcess::Update(float _fElapsedTime)
   }*/
 
   g_pGameObject->Update(_fElapsedTime);
+  g_pPhysXController->Move(Vect3f(0.0f,0.0f,0.0f),_fElapsedTime);
 
 }
 
@@ -287,7 +338,7 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
 
   //Draw Grid and Axis
   _pRM->SetTransform(identity);
-  //_pRM->DrawGrid(30.0f,colCYAN,30,30);
+  _pRM->DrawGrid(30.0f,colCYAN,30,30);
    
    //_pRM->DrawPlane(10,Vect3f(0,1,0),0,colBLUE,10,10);
 
@@ -323,15 +374,20 @@ void CPhysXProcess::RenderINFO(CRenderManager* _pRM)
 
 bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
 {
+
+  float l_pVelocity = 1/20;
+
   if(strcmp(_pcAction, "Run") == 0)
   {
     m_fVelocity = 10;
+    
     return true;
   }
 
   if(strcmp(_pcAction, "Walk") == 0)
   {
     m_fVelocity = 1;
+    
     return true;
   }
 
@@ -344,9 +400,10 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
 
     Vect3f l_vDir = m_pCamera->GetDirection();
 
-    //l_vDir.Normalize();
-    l_vDir.y = 0.0f;
-    g_pPhysXController->Move(l_vDir,_fDeltaSeconds);
+    l_vDir.Normalize();
+    //l_vDir.y = 0.0f;
+    g_pPhysXController->Move(Vect3f(l_vDir.x,0.0f,l_vDir.z)*0.05f*m_fVelocity,_fDeltaSeconds);
+    m_pObject->SetPosition(g_pPhysXController->GetPosition());
    
 
     if(m_iState != 1)
@@ -366,9 +423,10 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
 
     Vect3f l_vDir = m_pCamera->GetDirection();
 
-    //l_vDir.Normalize();
-    l_vDir.y = 0.0f;
-    g_pPhysXController->Move(-l_vDir,_fDeltaSeconds);
+    l_vDir.Normalize();
+    //l_vDir.y = 0.0f;
+    g_pPhysXController->Move(Vect3f(-l_vDir.x,0.0f,-l_vDir.z)*0.05f*m_fVelocity,_fDeltaSeconds);
+    m_pObject->SetPosition(g_pPhysXController->GetPosition());
 
     if(m_iState != 1)
       m_bStateChanged = true;
@@ -477,6 +535,20 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     }
  
     
+  }
+
+  if(strcmp(_pcAction, "ZoomCamera") == 0)
+  {
+    Vect3i l_vDelta = INPUT_MANAGER->GetMouseDelta();
+
+    if (l_vDelta.z < 0)
+    {
+      ((CThPSCamera*)m_pObjectCamera)->AddZoom(0.3f);
+    }else{
+      ((CThPSCamera*)m_pObjectCamera)->AddZoom(-0.3f);
+    }
+
+    return true;
   }
 
   
