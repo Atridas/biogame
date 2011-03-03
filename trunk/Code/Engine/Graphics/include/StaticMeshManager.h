@@ -48,6 +48,8 @@ public:
   **/
   bool Reload();
 
+  void AddXMLFile(const string &_szFileName) {m_vXMLFiles.insert(_szFileName);};
+
 private:
   /**
    * Mètode de càrrega.

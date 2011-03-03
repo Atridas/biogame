@@ -11,6 +11,7 @@
 class CRenderManager;
 //----------------------------------
 
+//TODO fer que puguis canviar de XML dinàmicament BÉ
 class CLightManager : public CMapManager<CLight>
 {
   string m_szFileName;
