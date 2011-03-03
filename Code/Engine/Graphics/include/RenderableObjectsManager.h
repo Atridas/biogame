@@ -18,7 +18,7 @@ class CInstanceMesh;
 class CRenderableObjectsManager : public CMapManager<CRenderableObject>
 {
 public:
-  CRenderableObjectsManager() {SetOk(true);};
+  CRenderableObjectsManager():m_bRenderInstanced(false) {SetOk(true);};
   ~CRenderableObjectsManager() {Done();};
 
   void Update(float _fElapsedTime);
@@ -40,13 +40,18 @@ public:
 
   CRenderableObject* GetRenderableObject (int _ID) {return m_RenderableObjects[_ID];};
   int GetRenderableVectorSize() {return m_RenderableObjects.size();};
-
-  bool Reload() {CleanUp(); return Load(m_vXMLFiles);};
+  
+  bool Reload()                          {CleanUp(); return Load(m_vXMLFiles);};
+  bool Reload(const string& _szFileName) {CleanUp(); return Load(_szFileName);};
 
   const vector<CRenderableObject*>& GetMeshes() {return m_vMeshes;};
   const vector<CRenderableObject*>& GetAnimatedModels() {return m_vAnimatedModels;};
 
+  void SetInstanced(bool _bInstanced) {m_bRenderInstanced = _bInstanced;};
+
 private:
+
+  bool m_bRenderInstanced;
 
   set<string> m_vXMLFiles;
   vector<CRenderableObject*> m_RenderableObjects;
@@ -60,6 +65,7 @@ private:
   void AddHWStaticInstance(CInstanceMesh* _pInstanceMesh);
   void RenderHWInstanced(CRenderManager* _pRM);
   void RenderOld(CRenderManager* _pRM);
+  void FillBuffers(CRenderManager* _pRM);
 };
 
 #endif

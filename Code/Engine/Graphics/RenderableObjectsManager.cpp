@@ -33,8 +33,42 @@ void CRenderableObjectsManager::Update(float _fElapsedTime)
 
 void CRenderableObjectsManager::Render(CRenderManager *_pRM)
 {
-  RenderOld(_pRM);
-  //RenderHWInstanced(_pRM);
+  if(m_bRenderInstanced)
+  {
+    RenderHWInstanced(_pRM);
+  } else {
+    RenderOld(_pRM);
+  }
+}
+
+void FillBuffer(SHWIntancedMeshes* _HWStaticInstances, CRenderManager* _pRM)
+{
+  // Agafem les matrius -------------------------------------------------------------------------------
+  D3DMATRIX* l_mBuffer = _HWStaticInstances->m_mWorldMats.GetBuffer(_HWStaticInstances->m_vInstances.size(), _pRM);
+
+  vector<CInstanceMesh*>::const_iterator l_itInst,
+                                         l_endInst = _HWStaticInstances->m_vInstances.cend();
+  int cont = 0;
+  for(l_itInst = _HWStaticInstances->m_vInstances.begin(); l_itInst != l_endInst; ++l_itInst)
+  {
+    l_mBuffer[cont] = (*l_itInst)->GetMat44().GetD3DXMatrix();
+    cont++;
+  }
+  // Omplim el buffer ------------------------------------------------------------------------------
+  bool result = _HWStaticInstances->m_mWorldMats.SetData(l_mBuffer, cont, _pRM);
+  assert(result);// ---
+}
+
+void CRenderableObjectsManager::FillBuffers(CRenderManager* _pRM)
+{
+  map<const CStaticMesh*,SHWIntancedMeshes*>::iterator l_it, l_end;
+  l_end = m_mapHWStaticInstances.end();
+  for(l_it = m_mapHWStaticInstances.begin(); l_it != l_end; ++l_it)
+  {
+    SHWIntancedMeshes* l_HWStaticInstances = l_it->second;
+      
+    FillBuffer(l_HWStaticInstances, _pRM);
+  }
 }
 
 void CRenderableObjectsManager::RenderHWInstanced(CRenderManager* _pRM)
@@ -47,41 +81,16 @@ void CRenderableObjectsManager::RenderHWInstanced(CRenderManager* _pRM)
     for(l_it = m_mapHWStaticInstances.begin(); l_it != l_end; ++l_it)
     {
       SHWIntancedMeshes* l_HWStaticInstances = l_it->second;
-      // Agafem les matrius -------------------------------------------------------------------------------
-      D3DMATRIX* l_mBuffer = l_HWStaticInstances->m_mWorldMats.GetBuffer(l_HWStaticInstances->m_vInstances.size(), _pRM);
-
-      vector<CInstanceMesh*>::iterator l_itInst, l_endInst;
-      l_endInst = l_HWStaticInstances->m_vInstances.end();
-      int cont = 0;
-      for(l_itInst = l_HWStaticInstances->m_vInstances.begin(); l_itInst != l_endInst; ++l_itInst)
-      {
-        if((*l_itInst)->GetVisible())
-        {
-          l_mBuffer[cont] = (*l_itInst)->GetMat44().GetD3DXMatrix();
-          //Mat44f mat;
-          //mat.SetIdentity();
-          //l_mBuffer[cont] = mat.GetD3DXMatrix();
-          cont++;
-        }
-      }
-
-      if(cont == 0)
-      {
-        continue; //No ens fa falta renderitzar res i perdre més temps amb aquest tipus d'objecte
-      }
-
-      // Omplim el buffer ------------------------------------------------------------------------------
-      bool result = l_HWStaticInstances->m_mWorldMats.SetData(l_mBuffer, cont, _pRM);
-      assert(result);// ---
+      
+      int cont = l_HWStaticInstances->m_vInstances.size();
 
       // Fem els set stream sources
       l_pDevice->SetStreamSourceFreq(0, (D3DSTREAMSOURCE_INDEXEDDATA  | cont));
 
       l_pDevice->SetStreamSourceFreq(1, (D3DSTREAMSOURCE_INSTANCEDATA | 1   ));
-      result = l_HWStaticInstances->m_mWorldMats.SetStreamSource(_pRM, 1);
+      bool result = l_HWStaticInstances->m_mWorldMats.SetStreamSource(_pRM, 1);
       assert(result);// ---
 
-      _pRM->SetTransform(l_HWStaticInstances->m_vInstances[0]->GetMat44()); //de test només
       l_it->first->Render(_pRM, true);
     }
   }
@@ -257,6 +266,7 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
     }
   }
 
+  FillBuffers(CORE->GetRenderManager());
   return true;
 }
 

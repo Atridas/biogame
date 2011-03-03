@@ -22,6 +22,8 @@ extern "C"
 #include "RenderableObjectsManager.h"
 #include "InstanceMesh.h"
 #include "RenderableAnimatedInstanceModel.h"
+#include "StaticMeshManager.h"
+#include "LightManager.h"
 
 #include "Utils/Object3D.h"
 #include "Utils/BaseControl.h"
@@ -360,15 +362,36 @@ void CScriptManager::RegisterLUAFunctions()
       .def("get_renderable_objects_manager",  &CCore::GetRenderableObjectsManager)
       .def("get_console",                     &CCore::GetConsole)
       .def("get_gui_manager",                 &CCore::GetGUIManager)
+      .def("get_light_manager",               &CCore::GetLightManager)
+      .def("get_static_mesh_manager",         &CCore::GetStaticMeshManager)
   ];
 
   //CRenderableObjectsManager
   module(m_pLS) [
-    class_<CRenderableObjectsManager>("RenderableObjectsManager")
+    class_<CMapManager<CRenderableObject>>("RenderableObjectMapManager"),
+    class_<CRenderableObjectsManager, CMapManager<CRenderableObject>>("RenderableObjectsManager")
       .def("get_resource",   &CRenderableObjectsManager::GetResource)
       .def("add_static",     &CRenderableObjectsManager::AddMeshInstance)
       .def("add_animated",   &CRenderableObjectsManager::AddAnimatedModel)
       .def("add_resource",   &CRenderableObjectsManager::AddResource)
+      .def("set_instanced",  &CRenderableObjectsManager::SetInstanced)
+      .def("reload",         ((bool(CRenderableObjectsManager::*)(void))&CRenderableObjectsManager::Reload))
+      .def("reload",         ((bool(CRenderableObjectsManager::*)(const string&))&CRenderableObjectsManager::Reload))
+  ];
+
+  //StaticMeshManager
+  module(m_pLS) [
+    class_<CMapManager<CStaticMesh>>("StaticMeshMapManager"),
+    class_<CStaticMeshManager, CMapManager<CStaticMesh>>("StaticMeshManager")
+      .def("add_file", &CStaticMeshManager::AddXMLFile)
+      .def("reload",   &CStaticMeshManager::Reload)
+  ];
+
+  //LightManager
+  module(m_pLS) [
+    class_<CMapManager<CLight>>("LightMapManager"),
+    class_<CLightManager, CMapManager<CLight>>("LightManager")
+      .def("load", &CLightManager::Load)
   ];
 
   //RenderableObject

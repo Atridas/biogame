@@ -26,6 +26,7 @@
     <None Include="..\..\..\Run\Data\XML\init_viewer.xml">
       <SubType>Designer</SubType>
     </None>
+    <None Include="..\..\..\Run\Data\XML\Lua_viewer.xml" />
     <None Include="..\..\..\Run\Data\XML\SceneEffects_Viewer.xml">
       <SubType>Designer</SubType>
     </None>

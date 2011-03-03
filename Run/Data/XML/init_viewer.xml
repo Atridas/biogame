@@ -37,6 +37,8 @@
 
 	<SceneEffectManager file="Data/XML/SceneEffects_Viewer.xml"/>
   
+  <ScriptManager file="Data/XML/Lua_viewer.xml"/>
+  
 	<!--<AnimatedModelManager file="Data/XML/AnimatedModels.xml">
   </AnimatedModelManager>-->
 

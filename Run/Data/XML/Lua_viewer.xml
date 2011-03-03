@@ -3,6 +3,7 @@
   <files>
     <file path="Data/Lua/first.lua" />
     <file path="Data/Lua/globals.lua" />
+    <file path="Data/Lua/viewer_functions.lua" />
   </files>
   <initscripts>
     <script action="CORE                          = get_core()"/>
