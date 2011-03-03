@@ -27,7 +27,6 @@ public:
   void SetSpawnDir1         (D3DXVECTOR3& _vSpawnDir1)              {m_vSpawnDir1 = _vSpawnDir1;};
   void SetSpawnDir2         (D3DXVECTOR3& _vSpawnDir2)              {m_vSpawnDir2 = _vSpawnDir2;};
   void SetNumNewPartsExcess (float _fNumNewPartsExcess)             {m_fNumNewPartsExcess = _fNumNewPartsExcess;};
-  void SetTexture           (string& _sTexture)                     {m_sTexture = _sTexture;};
   void SetDevice            (LPDIRECT3DDEVICE9 _pd3dDevice)         {m_pd3dDevice = _pd3dDevice;};
   void SetParticle          (LPDIRECT3DVERTEXBUFFER9 _vbParticles)  {m_vbParticles = _vbParticles;};
 
@@ -43,7 +42,6 @@ public:
   const D3DXVECTOR3&      GetSpawnDir1        () const {return m_vSpawnDir1;};
   const D3DXVECTOR3&      GetSpawnDir2        () const {return m_vSpawnDir2;};
   float                   GetNumNewPartsExcess() const {return m_fNumNewPartsExcess;};
-  const string&           GetTexture          () const {return m_sTexture;};
   LPDIRECT3DDEVICE9       GetDevice           () const {return m_pd3dDevice;};
   LPDIRECT3DVERTEXBUFFER9 GetParticle         () const {return m_vbParticles;};
 
@@ -65,9 +63,10 @@ private:
   D3DXVECTOR3                               m_vSpawnDir1;
   D3DXVECTOR3                               m_vSpawnDir2;
   float                                     m_fNumNewPartsExcess;
-  string                                    m_sTexture;
+  LPDIRECT3DTEXTURE9                        m_pTexParticle;
   LPDIRECT3DDEVICE9                         m_pd3dDevice;
   LPDIRECT3DVERTEXBUFFER9                   m_vbParticles;
   CRecyclingArray<CParticle>                m_Particles;
 };
+
 #endif

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Process.h"
+#include "ParticleEmitter.h"
 #include <base.h>
 
 //Forward declarations---------------------
@@ -43,5 +44,6 @@ private:
   bool                  m_bRenderLights;
   float                 m_fPhysxVelocity;
   CRenderableObject*    m_pRenderPhysX;
+  CParticleEmitter      m_ParticleEmitter;
   
 };
