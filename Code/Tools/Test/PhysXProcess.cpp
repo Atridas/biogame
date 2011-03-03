@@ -209,6 +209,8 @@ bool CPhysXProcess::Init()
   //CORE->GetRenderableObjectsManager()->SetAllVisibility(false);
 
   
+  //m_ParticleEmitter.Init(CORE->GetRenderManager(),"./Data/Textures/Ch19p1_ParticleTexture.png");
+  m_ParticleEmitter.Init(CORE->GetRenderManager(),"./Data/Textures/gohan.png");
 
   SetOk(true);
   return IsOk();
@@ -286,6 +288,8 @@ void CPhysXProcess::Update(float _fElapsedTime)
 
       m_bStateChanged = false;
     }
+
+    m_ParticleEmitter.Update(_fElapsedTime);
   }
 
   /*CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
@@ -341,6 +345,8 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
   _pRM->DrawGrid(30.0f,colCYAN,30,30);
    
    //_pRM->DrawPlane(10,Vect3f(0,1,0),0,colBLUE,10,10);
+
+  m_ParticleEmitter.Render();
 
 }
 

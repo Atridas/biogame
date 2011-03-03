@@ -21,7 +21,7 @@ public:
   const uint32 GetTotalElements() const { return m_uiTotalElements; };
 
   T* GetAt(uint32 _uiIndex) const;
-  bool IsAlive(uint32 _uiIndex) const;
+  bool IsFree(uint32 _uiIndex) const;
   
   T* New();
   void Free(uint32 _uiIndex);
@@ -37,6 +37,7 @@ private:
   uint32  m_uiUsedElements;
   uint32  m_uiTotalElements;
   T*      m_vRecyclingArray;
+  T       m_TDefault;
   //true si està lliure, false si està ocupat
   bool*   m_vRecyclingArrayStatus;
 };
@@ -63,8 +64,8 @@ void CRecyclingArray<T>::Init(void)
 template<class T>
 void CRecyclingArray<T>::Release(void)
 {
-  CHECKED_DELETE(m_vRecyclingArray);
-  CHECKED_DELETE(m_vRecyclingArrayStatus);
+  CHECKED_DELETE_ARRAY(m_vRecyclingArray);
+  CHECKED_DELETE_ARRAY(m_vRecyclingArrayStatus);
 };
 
 template<class T>
@@ -116,13 +117,14 @@ T* CRecyclingArray<T>::New(void)
     m_uiFreeElements--;
     m_uiUsedElements++;
     m_vRecyclingArrayStatus[l_uiIndex] = false;
+    m_vRecyclingArray[l_uiIndex] = m_TDefault;
     return &(m_vRecyclingArray[l_uiIndex]);
   }else
     return 0;
 };
 
 template<class T>
-bool CRecyclingArray<T>::IsAlive(uint32 _uiIndex) const
+bool CRecyclingArray<T>::IsFree(uint32 _uiIndex) const
 {
   assert(IsOk());
 
