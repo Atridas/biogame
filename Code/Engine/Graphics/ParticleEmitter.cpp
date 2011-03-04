@@ -123,7 +123,7 @@ void CParticleEmitter::Release()
   m_Particles.DeleteAllElements();
   if ( m_vbParticles!= NULL)
   {
-    m_vbParticles->Release();
+//    m_vbParticles->Release();
   }
 }
   

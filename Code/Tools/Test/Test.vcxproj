@@ -12,10 +12,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="mainTest.cpp" />
+    <ClCompile Include="ParticleProcess.cpp" />
     <ClCompile Include="PhysXProcess.cpp" />
     <ClCompile Include="TestProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ParticleProcess.h" />
     <ClInclude Include="PhysXProcess.h" />
     <ClInclude Include="TestProcess.h" />
   </ItemGroup>

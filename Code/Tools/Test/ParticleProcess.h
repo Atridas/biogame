@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Process.h"
+#include "ParticleEmitter.h"
 #include <base.h>
+
 
 //Forward declarations---------------------
 class CObject3D;
@@ -10,15 +12,25 @@ class CRenderableObject;
 
 //-----------------------------------------
 
-class CPhysXProcess:
+
+class CParticleProcess:
   public CProcess
 {
-
 public:
-                        CPhysXProcess            (): CProcess("CPhysXProcess"), m_pObject(0), m_pObjectCamera(0),
-                                                    m_fVelocity(0.0f),m_bRenderLights(false),m_fPhysxVelocity(20),m_pRenderPhysX(0)
-                                                {};
-  virtual               ~CPhysXProcess           ()                          {Done();};
+  CParticleProcess(): CProcess("CParticleProcess"),
+                      m_iState(0),
+                      m_bStateChanged(false),
+                      m_pObject(0),
+                      m_pObjectBot(0),
+                      m_pObjectCamera(0),
+                      m_fVelocity(0.0f),
+                      m_bRenderLights(false)
+                      {};
+                      
+
+
+  //virtual ~CParticleProcess(){Done;};
+  virtual               ~CParticleProcess           ()                          {Done();};
 
   virtual bool          Init();
 
@@ -42,7 +54,7 @@ private:
   float                 m_fVelocity;
   bool                  m_bRenderLights;
   float                 m_fPhysxVelocity;
-  CRenderableObject*    m_pRenderPhysX;
-  
-  
+  //CRenderableObject*    m_pRenderPhysX;
+  CParticleEmitter      m_ParticleEmitter;
 };
+
