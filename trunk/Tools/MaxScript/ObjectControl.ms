@@ -65,6 +65,20 @@ function GetCoreName _object =
 	return getUserProp _object "resource"
 )
 
+-- Comprova que el nom no existeixi ja a una array d'objectes
+function CheckRepeatedName _array _name =
+(
+	for i=1 to _array.count do
+	(
+		if _array[i].name == _name then
+		(
+			return true
+		)
+	)
+	
+	return false
+)
+
 -- Afegeix una core a la llista de cores.
 -- Aquesta core és una copia d'una malla, la llista s'ha de netejar un cop feta servir
 function AddCore _cores _object _name =
@@ -78,7 +92,7 @@ function AddCore _cores _object _name =
 	(
 		-- core amb nom repetit, no hauria de passar mai perquè abans es comprova
 		local l_message = "" as stringStream
-		format "La core % està repetida" _name to:l_text
+		format "La core % està repetida" _name to:l_message
 		ShowMessage l_message
 	)
 )
@@ -90,20 +104,6 @@ function ClearCores _cores =
 	(
 		delete _cores[i]
 	)
-)
-
--- Comprova que el nom no existeixi ja a una array d'objectes
-function CheckRepeatedName _array _name =
-(
-	for i=1 to _array.count do
-	(
-		if _array[i].name == _name then
-		(
-			return true
-		)
-	)
-	
-	return false
 )
 
 -- Comprova que el nom de la instancia no estigui repetit
@@ -132,7 +132,7 @@ function AddInstance _instances _instance _index =
 	(
 		-- instancia amb nom repetit
 		local l_message = "" as stringStream
-		format "La instancia % està repetida" _instance.name to:l_text
+		format "La instancia % està repetida" _instance.name to:l_message
 		ShowMessage l_message
 	)
 )
