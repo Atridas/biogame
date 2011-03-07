@@ -1,10 +1,11 @@
 fileIn "GlobalsAndHelpers.ms"
 fileIn "MaterialAndTexture.ms"
 fileIn "IndexAndVertex.ms"
+fileIn "ObjectControl.ms"
 
 function ExportMesh _object0 _filename _relativeTexturePath = 
 (
-	format "Exportant objecte: % \n" _object0.name
+	format "Exportant objecte: % com a core %\n" _object0.name (GetCoreName _object0)
 	
 	if _object0.material == undefined then
 	(

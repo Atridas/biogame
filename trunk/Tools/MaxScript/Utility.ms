@@ -1,7 +1,6 @@
 fileIn "Config.ms"
 fileIn "XML.ms"
 fileIn "Export.ms"
-fileIn "ObjectControl.ms"
 
 utility BioUtility "Eon-Utility" width:160 height:312
 (
@@ -107,7 +106,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
   
   -- Exportadors
   
-  -- Exporta un array d'objectes, creant les mesh i l'xml de mesh
+  -- Exporta un array de cores, creant les mesh i l'xml de mesh
 	function ExportMeshManager _objects =
 	(
 		local l_MeshTotalPath = getMeshPath()
@@ -135,14 +134,15 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		(
 			
 			local l_object = _objects[i]
+			local l_name  = GetCoreName _objects[i]
 			
-			local l_relPath = getRelativeMeshPath() + l_object.name + ".mesh"
+			local l_relPath = getRelativeMeshPath() + l_name + ".mesh"
 			
 			-------------------------------
 			--paràmetres
 			l_params = #()
 			
-			append l_params #("name",l_object.name)
+			append l_params #("name",l_name)
 			append l_params #("path",l_relPath)
 			
 			local l_invTransform = inverse l_object.transform
@@ -169,17 +169,15 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			(
 				makeDir l_MeshTotalPath all:true
 				
-				local l_outName = l_MeshTotalPath + l_object.name + ".mesh"
+				local l_outName = l_MeshTotalPath + l_name + ".mesh"
 				
 				if ExportMesh l_object l_outName l_relativeTexPath == false then
 				(
 					close l_file
 					
 					local l_text = "" as stringStream
-					format "L'objecte % ha causat un error d'exportació" l_object.name to:l_text
+					format "La core % ha causat un error d'exportació" l_name to:l_text
 					ShowError l_text
-					
-					ClearCores _objects
 					
 					return false
 				)
@@ -237,14 +235,12 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		format "%" (OpenTagXML "RenderableObjects") to:l_file
 		
 		for i=1 to _instances.count do
-		(
-			local l_core = _cores[i]
-      
+		(      
 			for j=1 to _instances[i].count do
 			(
 				local l_instance = _instances[i][j]
 				
-				l_params = #(#("name",l_instance.name),#("class","StaticMesh"),#("resource",l_core.name))
+				l_params = #(#("name",l_instance.name),#("class","StaticMesh"),#("resource", (GetCoreName l_instance)))
 					
 				l_aux = "" as stringStream
 					
@@ -509,12 +505,12 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			)
 		)
 		
+		format "Export mesh manager...\n"
 		if ExportMeshManager l_cores then
 		(
-			ShowMessage "Export finalitzat"
+			format "Export finalitzat\n"
 		)
-		
-		ClearCores l_cores
+
 	)
 	
 	on buttonLight pressed do
@@ -528,6 +524,8 @@ utility BioUtility "Eon-Utility" width:160 height:312
 				append l_lights $*[i]
 			)
 		)
+		
+		format "Export lights...\n"
 		if ExportLights l_lights then
 		(
 			ShowMessage "Export finalitzat"
@@ -581,20 +579,21 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			)
 		)
 		
+		format "Export mesh manager...\n"
 		if ExportMeshManager l_cores then
 		(
-			ShowMessage "Export mesh manager finalitzat"
+			format "Export mesh manager finalitzat\n"
 		)
+		format "Export renderable objects...\n"
 		if ExportRenderableObjectsManager l_instances l_cores l_AnimatedModels then
 		(
-			ShowMessage "Export scene finalitzat"
+			format "Export renderable objects finalitzat\n"
 		)
+		format "Export lights...\n"
 		if ExportLights l_lights then
 		(
-			ShowMessage "Export lights finalitzat"
+			format "Export lights finalitzat\n"
 		)
-		
-		ClearCores l_cores
 		
 		ShowMessage "Fi"
 	)
