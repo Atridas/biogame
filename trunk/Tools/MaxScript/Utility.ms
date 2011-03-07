@@ -1,5 +1,7 @@
-fileIn "ExportMULTI.ms"
+fileIn "Config.ms"
 fileIn "XML.ms"
+fileIn "Export.ms"
+fileIn "ObjectControl.ms"
 
 utility BioUtility "Eon-Utility" width:160 height:312
 (
@@ -13,9 +15,17 @@ utility BioUtility "Eon-Utility" width:160 height:312
 	button buttonMeshManager "Mesh Manager" pos:[24,212] width:98 height:22
 	button buttonScene "Scene" pos:[26,271] width:94 height:22
 	button buttonLight "Light" pos:[27,241] width:93 height:18
-	-- Contenido de la utility
 	
+		
+	on BioUtility open do
+	(
+		labelPath.text = g_DefaultPath
+		dropNivell.items = g_LevelArray
+	)
 	
+	-- Control de Paths
+  
+	-- Torna el path de Data
 	function getDataPath =
 	(
 		local l_path = labelPath.text + "/"
@@ -26,7 +36,8 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		)
 		return l_path
 	)
-	
+
+	-- Torna el path relatiu
 	function getRelativePath =
 	(
 		local l_path = labelPath.text
@@ -35,105 +46,68 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		(
 			l_index = l_index - 1
 		)
-		
+
 		l_index = l_index + 1
-		
+
 		l_path = substring l_path l_index (l_path.count-l_index+1)
-		
+
 		l_path = l_path + "/"
-		
+
 		if dropNivell.selection != 1 then
 		(
 			l_path = l_path + "Levels/" + dropNivell.items[dropNivell.selection] + "/"
 		)
-		
+
 		return l_path
 	)
-	
+
+	-- Torna el path dels XML
 	function getXMLPath =
 	(
 		local l_path = getDataPath()
 		l_path = l_path + "XML/"
-		
+
 		return l_path
 	)
-	
+
+	-- Torna el path relatiu dels XML
 	function getRelativeXMLPath =
 	(
 		local l_path = getRelativePath()
 		l_path = l_path + "XML/"
-		
+
 		return l_path
 	)
-	
+
+	-- Torna el path de les textures
 	function getTexturePath =
 	(
 		return getDataPath() + "Textures/"
 	)
+
+	-- Torna el path de les Mesh
 	function getMeshPath =
 	(
 		return getDataPath() + "Meshes/"
 	)
-	
+
+	-- Torna el path relatiu de les textures
 	function getRelativeTexturePath =
 	(
 		return getRelativePath() + "Textures/"
 	)
+
+	-- Torna el path relatiu de les mesh
 	function getRelativeMeshPath =
 	(
 		return getRelativePath() + "Meshes/"
 	)
-	
-	function AddInstance _instances _instance _index =
-	(
-		--l_aux = "" as stringStream
-		--format "%%" _instance.name _instances[_index].count to:l_aux
-		--_instance.name = l_aux
-		append _instances[_index] _instance
-	)
-	
-	function NewInstance _instances _instance =
-	(
-		append _instances #()
-		AddInstance _instances _instance _instances.count
-	)
-
-	function GetCoreByName _cores _object =
-	(
-		for i=1 to _cores.count do
-		(
-			if _cores[i].name == _object.name then
-			(
-				return i
-			)
-		)
-		return undefined
-	)
-	
-	function GetCore _cores _object =
-	(
-		for i=1 to _cores.count do
-		(
-			if areNodesInstances _cores[i] _object then
-			(
-				return _cores[i]
-			)
-		)
-		return undefined
-	)
-	
-	--function ListMemberName _list _element = 
-	--(
-	--	for i=1 to _list.count do
-	--	(
-	--		if _list[i].name == _element.name then
-	--		(
-	--			return true
-	--		)
-	--	)
-	--	return false
-	--)
-	
+  
+  -- Fi path
+  
+  -- Exportadors
+  
+  -- Exporta un array d'objectes, creant les mesh i l'xml de mesh
 	function ExportMeshManager _objects =
 	(
 		local l_MeshTotalPath = getMeshPath()
@@ -200,6 +174,13 @@ utility BioUtility "Eon-Utility" width:160 height:312
 				if ExportMesh l_object l_outName l_relativeTexPath == false then
 				(
 					close l_file
+					
+					local l_text = "" as stringStream
+					format "L'objecte % ha causat un error d'exportació" l_object.name to:l_text
+					ShowError l_text
+					
+					ClearCores _objects
+					
 					return false
 				)
 			)
@@ -233,6 +214,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		return true
 	)
 	
+	-- Crea l'xml de renderable objects
 	function ExportRenderableObjectsManager _instances _cores _AnimatedModels =
 	(
 			
@@ -256,20 +238,15 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		
 		for i=1 to _instances.count do
 		(
+			local l_core = _cores[i]
+      
 			for j=1 to _instances[i].count do
 			(
 				local l_instance = _instances[i][j]
 				
-				local l_core = _cores[i]
-				
-				local l_aux = "" as stringStream
-				format "%_%" l_instance.name j to:l_aux
-				
-				l_params = #(#("name",l_aux),#("class","StaticMesh"),#("resource",l_core.name))
-			
+				l_params = #(#("name",l_instance.name),#("class","StaticMesh"),#("resource",l_core.name))
 					
 				l_aux = "" as stringStream
-				
 					
 				local l_translation = RHVectorToLH l_instance.transform.translation
 				format "% % %" l_translation.x l_translation.y l_translation.z to:l_aux
@@ -297,11 +274,10 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		
 		for i=1 to _AnimatedModels.count do
 		(
-			
 			local l_object = _AnimatedModels[i]
-			local l_resource = getUserProp l_object "Resource"
-			local l_animation = getUserProp l_object "Cycle"
-			local l_altura = getUserProp l_object "Altura"
+			local l_resource = getUserProp l_object "resource"
+			local l_animation = getUserProp l_object "cycle"
+			local l_altura = getUserProp l_object "altura"
 			
 			l_params = #(#("name",l_object.name),#("class","AnimatedModel"),#("resource",l_resource),#("cycle",l_animation))
 		
@@ -344,15 +320,13 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		return true
 	)
 	
-	
-	
+  -- Crea l'xml de les llums de l'escena
 	function ExportLights _lights =
 	(			
 		local l_pathToFile = getXMLPath() 
 		makeDir l_pathToFile all:true
 		
 		l_pathToFile = l_pathToFile + "Lights.xml"
-		
 		
 		local l_file = createfile l_pathToFile
 		
@@ -445,15 +419,22 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		
 		return true
 	)
-	
-	
-	on BioUtility open do
+  
+	-- Popup de sel·lecció de carpeta on desar la malla
+	function ExportPop =
 	(
-		labelPath.text = "H:/Document/Master/game/biogame/Run/Data"
-		--labelPath.text = "D:/treballs/master/biogame/Run/Data"
-		--labelPath.text = "C:/Treballs/Directoris v2/Run/Data"
-		dropNivell.items = #("","Level -2","Level -1", "Hangar", "Proves")
+		local l_outName = GetSaveFileName caption:"Selecciona on guardar la malla" types:"mesh(*.mesh)|*.mesh|All Files(*.*)|*.*|"
+		
+		if l_outName != undefined then
+		(
+			ExportMesh $ l_outName
+		)
 	)
+	
+	-- Fi exportadors
+	
+	-- Funcionalitats botons
+  
 	on buttonPath pressed do
 	(
 		local l_outPath=GetSavePath initialDir:labelPath.text caption:"Select output file to export file" types:" mesh(*.mesh)|*.mesh|All Files(*.*)|*.*|"
@@ -462,6 +443,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			labelPath.text = l_outPath
 		)
 	)
+  
 	on buttonMesh pressed do
 	(
 		if $ != undefined then
@@ -504,53 +486,26 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		)
 	)
 	
-	function IsLight _object =
-	(
-		if classof _object == TargetDirectionallight or classof _object == Omnilight or classof _object == targetSpot then
-		(
-			return true
-		) else (
-			return false
-		)
-	)
-	
-	function IsMesh _object =
-	(
-		-- TODO acceptar més coses
-		if classof _object == Editable_Poly or classof _object == Box or classof _object == Editable_mesh or classof _object == Cylinder or classof _object == GeoSphere then
-		(
-			return true
-		) else (
-			return false
-		)
-	)
-	
-	function isAnimatedModel _object =
-	(
-		-- TODO acceptar més coses
-		if classof _object == Dummy then
-		(
-			if getUserProp _object "UserType" == "AnimatedModel" then
-			(
-				return true
-			)
-			else
-			(
-				return false
-			)
-		) else (
-			return false
-		)
-	)
-	
 	on buttonMeshManager pressed do
 	(
 		l_cores = #()
 		for i=1 to $*.count do
 		(
-			if IsMesh $*[i] and GetCore l_cores $*[i] == undefined then
+			local l_index = GetCoreIndex l_cores $*[i]
+				
+			if IsMesh $*[i] and l_index == undefined then
 			(
-				append l_cores $*[i]
+				local l_corename = GetCoreName $*[i]
+				
+				if l_corename != undefined then
+				(
+					AddCore l_cores $*[i] l_corename
+				) else
+				(
+					local l_text = "" as stringStream
+					format "L'objecte % no té core especificada" $*[i].name to:l_text
+					ShowError l_text
+				)
 			)
 		)
 		
@@ -558,6 +513,8 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		(
 			ShowMessage "Export finalitzat"
 		)
+		
+		ClearCores l_cores
 	)
 	
 	on buttonLight pressed do
@@ -597,12 +554,22 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			(
 				--instances és una array d'arrays, on cada una d'aquestes subarrays conté totes les instancies d'un core.
 				--l'índex de l'array on es troben les instancies coincideix amb l'índex de l'array de cores.
-				local l_index = GetCoreByName l_cores $*[i]
+				local l_index = GetCoreIndex l_cores $*[i]
 				
 				if l_index == undefined then
 				(
-					append l_cores $*[i]
-					NewInstance l_instances $*[i]
+					local l_corename = GetCoreName $*[i]
+					 
+					if l_corename != undefined then
+					(
+						AddCore l_cores $*[i] l_corename
+						NewInstance l_instances $*[i]
+					) else
+					(
+						local l_text = "" as stringStream
+						format "L'objecte % no té core especificada" $*[i].name to:l_text
+						ShowError l_text
+					)
 				) else
 				(
 					AddInstance l_instances $*[i] l_index
@@ -626,6 +593,11 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		(
 			ShowMessage "Export lights finalitzat"
 		)
+		
+		ClearCores l_cores
+		
 		ShowMessage "Fi"
 	)
+	
+	-- Fi funcionalitats botons
 )
