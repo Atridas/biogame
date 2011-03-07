@@ -1,3 +1,5 @@
+fileIn "GlobalsAndHelpers.ms"
+
 -- Comprova si l'objecte proporcionat és una mesh
 function IsMesh _object =
 (
@@ -40,6 +42,12 @@ function IsLight _object =
 	)
 )
 
+-- Cerca l'índex de la core segons el nom
+function GetCoreName _object =
+(
+	return getUserProp _object "resource"
+)
+
 -- Retorna l'índex de la core de l'objecte
 function GetCoreIndex _cores _object =
 (
@@ -50,19 +58,13 @@ function GetCoreIndex _cores _object =
 	(
 		for i=1 to _cores.count do
 		(
-			if _cores[i].name == l_name then
+			if (GetCoreName _cores[i]) == l_name then
 			(
 				return i
 			)
 		)
 	)
 	return undefined
-)
-
--- Cerca l'índex de la core segons el nom
-function GetCoreName _object =
-(
-	return getUserProp _object "resource"
 )
 
 -- Comprova que el nom no existeixi ja a una array d'objectes
@@ -85,24 +87,13 @@ function AddCore _cores _object _name =
 (
 	if (CheckRepeatedName _cores _name) == false then
 	(
-		l_copy = copy _object
-		l_copy.name = _name
-		append _cores l_copy
+		append _cores _object
 	)else
 	(
 		-- core amb nom repetit, no hauria de passar mai perquè abans es comprova
 		local l_message = "" as stringStream
 		format "La core % està repetida" _name to:l_message
-		ShowMessage l_message
-	)
-)
-
--- Allibera la llista de cores
-function ClearCores _cores =
-(
-	for i=1 to _cores.count do
-	(
-		delete _cores[i]
+		ShowError l_message
 	)
 )
 
@@ -133,7 +124,7 @@ function AddInstance _instances _instance _index =
 		-- instancia amb nom repetit
 		local l_message = "" as stringStream
 		format "La instancia % està repetida" _instance.name to:l_message
-		ShowMessage l_message
+		ShowError l_message
 	)
 )
 
