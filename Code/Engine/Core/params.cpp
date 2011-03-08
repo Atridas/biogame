@@ -131,7 +131,6 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
     //----------------------------------------------------------------------------------------------------------------------------------------------
     {
       CXMLTreeNode l_TreeParticleManager = l_TreeConfig["ParticleManager"];
-
       if(l_TreeParticleManager.Exists())
       {
         int l_iNumChildren = l_TreeParticleManager.GetNumChildren();
@@ -146,7 +145,8 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
             if(l_pcXML == 0)
             {
               LOGGER->AddNewLog(ELL_WARNING, "\tElement \"ParticleManager\" sense parametre \"xml\"");
-            } else {
+            } else
+            {
               InitParams_.PaticleManagerParams.szFile = string(l_pcXML);
               LOGGER->AddNewLog(ELL_INFORMATION, "\tParticle \"%s\"",l_pcXML);
             }
@@ -154,7 +154,6 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
         }
       }
     }
-
     //----------------------------------------------------------------------------------------------------------------------------------------------
     //Font Manager ---------------------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------------------------------

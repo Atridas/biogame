@@ -25,7 +25,7 @@
 
 //#include <AnimatedModelManager.h>
 
-bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
+bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"Core::Init");
   
@@ -48,6 +48,8 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pGUIManager               = new CGUIManager(_InitParams.RenderManagerParams.v2iResolution);
   m_pPhysicsManager           = new CPhysicsManager();
   m_pParticleManager          = new CParticleManager();
+
+  m_pEngine                   = _pEngine;
 
   m_pRenderManager->Init(hWnd,_InitParams.RenderManagerParams);
 

@@ -23,11 +23,13 @@ bool CEngine::Init(const SInitParams& _InitParams,  HWND hWnd)
 
   m_pCore = new CCore();
 
-  m_pCore->Init(hWnd, _InitParams);
+  m_pCore->Init(hWnd, _InitParams, this);
 
   if(m_pActiveProcess) //TODO: Comprovar excepcio m_pProcess == NULL i logejar
+  {
     m_pActiveProcess->Init(); 
-
+    m_pActiveProcess->RegisterLuaFunctions();
+  }
   m_pHDR = new CHDRPipeline();
   if(!m_pHDR->Init(_InitParams.EngineParams.szHDRFile))
   {

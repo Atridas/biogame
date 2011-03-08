@@ -18,6 +18,8 @@ public:
   CViewer(void);
   ~CViewer(void);
 
+  void Init();
+
   void Update(const float _fElapsedTime,const Vect3i& _vMouseDelta);
 
   bool GetRenderLights() {return m_bRenderLights;};
@@ -66,7 +68,11 @@ public:
     ANIMATED_MODE
   };
 
+  void Reset() {Release(); Init();};
+
 private:
+  void Release();
+  void InitLua();
 
   void UpdatePosition(Vect3f& _PosDelta, float _fDeltaPitch, float _fDeltaYaw);
   void UpdateCamera(float _fDeltaPitch, float _fDeltaYaw);

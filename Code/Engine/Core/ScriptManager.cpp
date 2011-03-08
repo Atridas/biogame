@@ -19,6 +19,8 @@ extern "C"
 
 //lua defined class & structs
 #include "Core.h"
+#include "Engine.h"
+#include "Process.h"
 #include "RenderableObjectsManager.h"
 #include "InstanceMesh.h"
 #include "RenderableAnimatedInstanceModel.h"
@@ -364,6 +366,14 @@ void CScriptManager::RegisterLUAFunctions()
       .def("get_gui_manager",                 &CCore::GetGUIManager)
       .def("get_light_manager",               &CCore::GetLightManager)
       .def("get_static_mesh_manager",         &CCore::GetStaticMeshManager)
+      .def("get_engine",                      &CCore::GetEngine)
+
+  //Process
+    ,class_<CProcess,CBaseControl>("Process")
+
+  //Engine
+    ,class_<CEngine, CBaseControl>("Engine")
+      .def("get_active_process",              &CEngine::GetActiveProcess)
   ];
 
   //CRenderableObjectsManager

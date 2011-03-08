@@ -1,3 +1,4 @@
+#define __DONT_INCLUDE_MEM_LEAKS__
 #include "ViewerProcess.h"
 #include "Core.h"
 #include "EffectManager.h"
@@ -6,6 +7,15 @@
 #include "RenderableObjectsManager.h"
 
 #include "LightManager.h"
+
+#include "ScriptManager.h"
+
+#include <luabind/luabind.hpp>
+#include <luabind/function.hpp>
+#include <luabind/class.hpp>
+#include <luabind/operator.hpp>
+
+#include "Utils/MemLeaks.h"
 
 
 bool CViewerProcess::Init()
@@ -18,6 +28,7 @@ bool CViewerProcess::Init()
   
   if(m_pViewer)
   {
+    m_pViewer->Init();
     m_pCamera = m_pViewer->GetCamera();
     SetOk(true);
   }else{
@@ -76,5 +87,26 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
 
 void CViewerProcess::RenderINFO(CRenderManager* _pRM)
 {
-  m_pViewer->ShowInfo();
+  //m_pViewer->ShowInfo();
 }
+
+
+void CViewerProcess::RegisterLuaFunctions()
+{
+  lua_State* l_LuaState = CORE->GetScriptManager()->GetLuaState();
+
+  luabind::module(l_LuaState)
+  [
+    luabind::class_<CViewerProcess,CProcess>("ViewerProcess")
+      .def("reset_viewer", &CViewerProcess::ResetViewer)
+  ];
+}
+
+void CViewerProcess::ResetViewer() 
+{
+  if(m_pViewer)
+  {
+    m_pViewer->Reset(); 
+    m_pCamera = m_pViewer->GetCamera();
+  }
+};

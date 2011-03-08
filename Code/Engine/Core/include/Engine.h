@@ -70,6 +70,8 @@ public:
   void				              ActivateProcess		  (int _i);
   void				              ActivateProcess		  (CProcess* _pProcess);
 
+  CProcess*                 GetActiveProcess    () const {return m_pActiveProcess;};
+
 protected:
 
   /**
