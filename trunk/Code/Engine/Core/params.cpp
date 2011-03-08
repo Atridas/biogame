@@ -131,23 +131,27 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
     //----------------------------------------------------------------------------------------------------------------------------------------------
     {
       CXMLTreeNode l_TreeParticleManager = l_TreeConfig["ParticleManager"];
-      int l_iNumChildren = l_TreeParticleManager.GetNumChildren();
-      
-      for(int i = 0; i < l_iNumChildren; i++)
-      {
-        CXMLTreeNode l_TreeChild = l_TreeParticleManager(i);
 
-        if(!l_TreeChild.IsComment())
+      if(l_TreeParticleManager.Exists())
+      {
+        int l_iNumChildren = l_TreeParticleManager.GetNumChildren();
+      
+        for(int i = 0; i < l_iNumChildren; i++)
         {
-          const char* l_pcXML = l_TreeChild.GetPszProperty("xml",0);
-          if(l_pcXML == 0)
+          CXMLTreeNode l_TreeChild = l_TreeParticleManager(i);
+
+          if(!l_TreeChild.IsComment())
           {
-            LOGGER->AddNewLog(ELL_WARNING, "\tElement \"ParticleManager\" sense parametre \"xml\"");
-          } else {
-            InitParams_.PaticleManagerParams.szFile = string(l_pcXML);
-            LOGGER->AddNewLog(ELL_INFORMATION, "\tParticle \"%s\"",l_pcXML);
-          }
-        } 
+            const char* l_pcXML = l_TreeChild.GetPszProperty("xml",0);
+            if(l_pcXML == 0)
+            {
+              LOGGER->AddNewLog(ELL_WARNING, "\tElement \"ParticleManager\" sense parametre \"xml\"");
+            } else {
+              InitParams_.PaticleManagerParams.szFile = string(l_pcXML);
+              LOGGER->AddNewLog(ELL_INFORMATION, "\tParticle \"%s\"",l_pcXML);
+            }
+          } 
+        }
       }
     }
 
