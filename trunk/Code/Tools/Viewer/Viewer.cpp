@@ -1,3 +1,4 @@
+#define __DONT_INCLUDE_MEM_LEAKS__
 #include <algorithm>
 #include <sstream>
 #include "Viewer.h"
@@ -13,6 +14,17 @@
 #include <LightManager.h>
 #include "SpotLight.h"
 
+
+#include "ScriptManager.h"
+
+#include <luabind/luabind.hpp>
+#include <luabind/function.hpp>
+#include <luabind/class.hpp>
+#include <luabind/operator.hpp>
+
+#include "Utils/MemLeaks.h"
+
+
 bool SortRenderableObjectByName(CRenderableObject* _pRO1, CRenderableObject* _pRO2)
 {
   string l_szName1 = _pRO1->GetName();
@@ -26,7 +38,13 @@ bool SortRenderableObjectByName(CRenderableObject* _pRO1, CRenderableObject* _pR
 
 CViewer::CViewer(void)
 {
+  //--------------------
+}
+
+void CViewer::Init() 
+{
   m_bRenderLights = false;
+
 
   m_vMeshes = CORE->GetRenderableObjectsManager()->GetMeshes();
   m_vAnimatedModels = CORE->GetRenderableObjectsManager()->GetAnimatedModels();
@@ -87,11 +105,16 @@ CViewer::CViewer(void)
   ResetActions();
 
   InitMode();
-
 }
 
 
+
 CViewer::~CViewer(void)
+{
+  Release();
+}
+
+void CViewer::Release()
 {
   CHECKED_DELETE(m_pObjectCamera)
   CHECKED_DELETE(m_pTargetObject)
