@@ -7,16 +7,32 @@
 #include "ParticleEmitter.h"
 #include <XML/XMLTreeNode.h>
 #include "params.h"
-
-
-
-class CParticleManager
+#include <Utils/MapManager.h>
+/*
+struct SInfo
+{
+  string                m_szId;
+  D3DXVECTOR3           m_vPos;
+  float                 m_fMinEmitRate;
+  float                 m_fMaxEmitRate;
+  D3DXCOLOR             m_Color1;
+  D3DXCOLOR             m_Color2;
+  float                 m_fMinSize;
+  float                 m_fMaxSize;
+  D3DXVECTOR3           m_vSpawnDir1;
+  D3DXVECTOR3           m_vSpawnDir2;
+  LPDIRECT3DTEXTURE9    m_pTexParticle;
+  
+}
+*/
+class CParticleManager //: public CMapManager<SInfo>
 {
 public:
   CParticleManager(void);
   ~CParticleManager(){/*Done;*/};
   //bool Load(const SPaticleManagerParams& _params);
   bool Load(const string& _szFileName);
+ 
   vector<CParticleEmitter> m_vEmitterParticle;
 
   void Reload();
