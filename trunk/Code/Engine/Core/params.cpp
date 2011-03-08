@@ -124,6 +124,33 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
         } 
       }
     }
+
+
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+    //Paticle Manager -------------------------------------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+    {
+      CXMLTreeNode l_TreeParticleManager = l_TreeConfig["ParticleManager"];
+      int l_iNumChildren = l_TreeParticleManager.GetNumChildren();
+      
+      for(int i = 0; i < l_iNumChildren; i++)
+      {
+        CXMLTreeNode l_TreeChild = l_TreeParticleManager(i);
+
+        if(!l_TreeChild.IsComment())
+        {
+          const char* l_pcXML = l_TreeChild.GetPszProperty("xml",0);
+          if(l_pcXML == 0)
+          {
+            LOGGER->AddNewLog(ELL_WARNING, "\tElement \"ParticleManager\" sense parametre \"xml\"");
+          } else {
+            InitParams_.PaticleManagerParams.szFile = string(l_pcXML);
+            LOGGER->AddNewLog(ELL_INFORMATION, "\tParticle \"%s\"",l_pcXML);
+          }
+        } 
+      }
+    }
+
     //----------------------------------------------------------------------------------------------------------------------------------------------
     //Font Manager ---------------------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------------------------------

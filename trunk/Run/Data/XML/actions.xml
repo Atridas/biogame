@@ -67,9 +67,13 @@
  	<action script="GUI_MANAGER:reloadGui()">
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F12"/>
 	</action>
-
   <action name="Console">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_GRAVE"/>
+  </action>
+
+
+  <action name="Particle">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_P"/>
   </action>
 
 

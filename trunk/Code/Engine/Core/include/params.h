@@ -125,6 +125,16 @@ struct SLightsManagerParams
   {};
 };
 
+struct SPaticleManagerParams
+{
+  string szFile;
+
+  //Default Params
+  SPaticleManagerParams():
+    szFile("Data/XML/Particles.xml")
+  {};
+};
+
 struct SSceneEffectManagerParams
 {
   string szFile;
@@ -220,6 +230,7 @@ struct SInitParams
   SActionToInputParams            ActionToInputParams;
   SRenderableObjectsManagerParams RenderableObjectsManagerParams;
   SLightsManagerParams            LightsManagerParams;
+  SPaticleManagerParams           PaticleManagerParams;
   SSceneEffectManagerParams       SceneEffectParams;
   SScriptManagerParams            ScriptManagerParams;
   SLogRenderParams                LogRenderParams;

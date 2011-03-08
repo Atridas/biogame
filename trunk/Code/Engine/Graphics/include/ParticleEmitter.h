@@ -9,14 +9,20 @@
 #include "Utils\RecyclingArray.h"
 #include "Particle.h"
 #include "RenderManager.h"
+#include <XML/XMLTreeNode.h>
+
+//Forward declarations-------------
+class CParticleManager;
+//---------------------------------
 
 class CParticleEmitter
 {
 public:
   CParticleEmitter();
-  ~CParticleEmitter(void);
+  ~CParticleEmitter();
 
   //  Set
+  void SetId                (string _szId)                          {m_szId = _szId;};
   void SetPosition          (D3DXVECTOR3& _vPos)                    {m_vPos=_vPos;};
   void SetMinEmitRate       (float _fMinEmitRate)                   {m_fMinEmitRate = _fMinEmitRate;};
   void SetMaxEmitRate       (float _fMaxEmitRate)                   {m_fMaxEmitRate = _fMaxEmitRate;};
@@ -26,33 +32,42 @@ public:
   void SetMaxSize           (float _fMaxSize)                       {m_fMaxSize = _fMaxSize;};
   void SetSpawnDir1         (D3DXVECTOR3& _vSpawnDir1)              {m_vSpawnDir1 = _vSpawnDir1;};
   void SetSpawnDir2         (D3DXVECTOR3& _vSpawnDir2)              {m_vSpawnDir2 = _vSpawnDir2;};
+  void SetTexParticle       (LPDIRECT3DTEXTURE9& _pTexParticle)     {m_pTexParticle = _pTexParticle;};
   void SetNumNewPartsExcess (float _fNumNewPartsExcess)             {m_fNumNewPartsExcess = _fNumNewPartsExcess;};
   void SetDevice            (LPDIRECT3DDEVICE9 _pd3dDevice)         {m_pd3dDevice = _pd3dDevice;};
   void SetParticle          (LPDIRECT3DVERTEXBUFFER9 _vbParticles)  {m_vbParticles = _vbParticles;};
 
 
   //Get
-  const D3DXVECTOR3&      GetPosition         () const {return m_vPos;};
-  float                   GetMinEmitRate      () const {return m_fMinEmitRate;};
-  float                   GetMaxEmitRate      () const {return m_fMaxEmitRate;};
-  const D3DXCOLOR&        GetColor1           () const {return m_Color1;};
-  const D3DXCOLOR&        GetColor2           () const {return m_Color2;};
-  float                   GetMinSize          () const {return m_fMinSize;};
-  float                   GetMaxSize          () const {return m_fMaxSize;};
-  const D3DXVECTOR3&      GetSpawnDir1        () const {return m_vSpawnDir1;};
-  const D3DXVECTOR3&      GetSpawnDir2        () const {return m_vSpawnDir2;};
-  float                   GetNumNewPartsExcess() const {return m_fNumNewPartsExcess;};
-  LPDIRECT3DDEVICE9       GetDevice           () const {return m_pd3dDevice;};
-  LPDIRECT3DVERTEXBUFFER9 GetParticle         () const {return m_vbParticles;};
+  string                          GetId               () const {return m_szId;};
+  const D3DXVECTOR3&              GetPosition         () const {return m_vPos;};
+  float                           GetMinEmitRate      () const {return m_fMinEmitRate;};
+  float                           GetMaxEmitRate      () const {return m_fMaxEmitRate;};
+  const D3DXCOLOR&                GetColor1           () const {return m_Color1;};
+  const D3DXCOLOR&                GetColor2           () const {return m_Color2;};
+  float                           GetMinSize          () const {return m_fMinSize;};
+  float                           GetMaxSize          () const {return m_fMaxSize;};
+  const D3DXVECTOR3&              GetSpawnDir1        () const {return m_vSpawnDir1;};
+  const D3DXVECTOR3&              GetSpawnDir2        () const {return m_vSpawnDir2;};
+  const LPDIRECT3DTEXTURE9        GetTexParticle      () const {return m_pTexParticle;};        
+  float                           GetNumNewPartsExcess() const {return m_fNumNewPartsExcess;};
+  const LPDIRECT3DDEVICE9         GetDevice           () const {return m_pd3dDevice;};
+  const LPDIRECT3DVERTEXBUFFER9   GetParticle         () const {return m_vbParticles;};
 
 
   void                    Update              (float fElapsedTime);
   void                    Init                (CRenderManager* rm, const string& _texureFileName);
   void                    Release             ();
   void                    Render              ();
+  bool                    Load                (CXMLTreeNode& l_XMLParticle);
+  void                    Init                (CXMLTreeNode& _XMLParams);
+  
 
 private:
 
+  
+  string                                    m_szFileName;
+  string                                    m_szId;
   D3DXVECTOR3                               m_vPos;
   float                                     m_fMinEmitRate;
   float                                     m_fMaxEmitRate;
@@ -67,6 +82,8 @@ private:
   LPDIRECT3DDEVICE9                         m_pd3dDevice;
   LPDIRECT3DVERTEXBUFFER9                   m_vbParticles;
   CRecyclingArray<CParticle>                m_Particles;
+  
 };
+
 
 #endif

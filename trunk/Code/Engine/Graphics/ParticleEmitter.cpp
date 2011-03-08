@@ -1,8 +1,9 @@
-#include "include\ParticleEmitter.h"
+#include "ParticleEmitter.h"
 #include <math.h>
 #include "Utils\Timer.h"
 #include "VertexsStructs.h"
 #include "TextureManager.h"
+#include "ParticleManager.h"
 
 float RandomNumber(float _fMin, float _fMax)
 {
@@ -21,14 +22,15 @@ float RandomNumber(float _fMin, float _fMax)
 CParticleEmitter::CParticleEmitter():
 m_Particles(NUMPARTICLES)
 {
+ 
   //SetGravity(D3DXVECTOR3(0.0f,0.0f,0.0f));
   SetPosition(D3DXVECTOR3(0.0f,0.0f,0.0f));
-  SetMinEmitRate(30.0f);
-  SetMaxEmitRate(15.0f);
+  SetMinEmitRate(10.0f);
+  SetMaxEmitRate(30.0f);
   SetColor1(D3DXCOLOR(1.0f,1.0f,1.0f,1.0f));
   SetColor2(D3DXCOLOR(1.0f,1.0f,1.0f,1.0f));
   SetMinSize(1.0f);
-  SetMaxSize(1.0f);
+  SetMaxSize(3.0f);
   SetSpawnDir1(D3DXVECTOR3(-5.0f, -5.0f, -5.0f));
   SetSpawnDir2(D3DXVECTOR3(5.0f, 5.0f, 5.0f));
  
@@ -37,6 +39,9 @@ m_Particles(NUMPARTICLES)
   m_pd3dDevice    = NULL;
   //SetVBSize(NUMPARTICLES / 10);
   m_fNumNewPartsExcess = 0.0f;
+  
+  
+  
 }
 
 
@@ -45,6 +50,73 @@ CParticleEmitter::~CParticleEmitter(void)
   Release();
 }
 
+void CParticleEmitter::Init(CXMLTreeNode& l_XMLParticle)
+{
+  m_szId=l_XMLParticle.GetPszISOProperty("id" ,"");
+  //m_vPos = l_XMLParticle.GetVect3fProperty("Position");
+  m_fMinEmitRate = l_XMLParticle.GetFloatProperty("MinEmitRate");
+  m_fMaxEmitRate = l_XMLParticle.GetFloatProperty("MaxEmitRate");
+  //m_Color1 = l_XMLParticle.GetVect4fProperty("Color1",Vect4f(0.0f),true);
+  //m_Color2 = l_XMLParticle.GetVect4fProperty("Color2",Vect4f(0.0f),true);
+  m_fMinSize = l_XMLParticle.GetFloatProperty("MinSize");
+  m_fMaxSize = l_XMLParticle.GetFloatProperty("MaxSize");
+
+}
+
+/*
+bool CParticleEmitter::Load(CXMLTreeNode& l_XMLParticle)
+{
+  /*LOGGER->AddNewLog(ELL_INFORMATION, "CParticleManager::Load \"%s\"", _szFileName.c_str());
+
+  m_szFileName = _szFileName;
+  m_szFileName = l_XMLParticle.LoadFile("Data\XML\Particules.xml");
+
+ // CXMLTreeNode l_XMLParticles;
+ /* if(!l_XMLParticles.LoadFile(_szFileName.c_str()))
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"CParticleManager:: No s'ha trobat el XML \"%s\"", _szFileName.c_str());
+    //SetOk(false);
+    return false;
+  }*/
+/*
+  CParticleManager* l_pParticleManager = CORE->GetParticleManager();
+  
+  
+  int l_iNumParticleEmitters = l_XMLParticles.GetNumChildren();
+  for(int i = 0; i < l_iNumParticleEmitters; i++)
+  {
+    CXMLTreeNode l_XMLParticle = l_XMLParticles(i);
+    if(l_XMLParticle.IsComment()) 
+    {
+      continue;
+    }
+    m_szId=l_pParticleManager->m_vEmitterParticle[l_iNumParticleEmitters].GetId();
+    m_fMinEmitRate = l_pParticleManager->m_vEmitterParticle[l_iNumParticleEmitters].GetMinEmitRate();
+    m_fMaxEmitRate = l_pParticleManager->m_vEmitterParticle[l_iNumParticleEmitters].GetMaxEmitRate();
+    m_fMinSize = l_pParticleManager->m_vEmitterParticle[l_iNumParticleEmitters].GetMinSize();
+    m_fMaxSize = l_pParticleManager->m_vEmitterParticle[l_iNumParticleEmitters].GetMaxSize();
+    
+    m_szId=l_XMLParticle.GetPszISOProperty("id" ,"");
+    //m_vPos = l_XMLParticle.GetVect3fProperty("Position");
+    m_fMinEmitRate = l_XMLParticle.GetFloatProperty("MinEmitRate");
+    m_fMaxEmitRate = l_XMLParticle.GetFloatProperty("MaxEmitRate");
+    //m_Color1 = l_XMLParticle.GetVect4fProperty("Color1",Vect4f(0.0f),true);
+    //m_Color2 = l_XMLParticle.GetVect4fProperty("Color2",Vect4f(0.0f),true);
+    m_fMinSize = l_XMLParticle.GetFloatProperty("MinSize");
+    m_fMaxSize = l_XMLParticle.GetFloatProperty("MaxSize");
+    // m_vSpawnDir1;
+    //m_vSpawnDir2;
+    //m_fNumNewPartsExcess;
+    //m_pTexParticle;
+    
+    
+  
+  }
+  SetOk(true);
+  return IsOk();
+  return true;
+
+}*/
 void CParticleEmitter::Update(float fElapsedTime)
 {
   //1.] Updatejar les particules i en cas de que s'hagi acabat el seu temps de vida, posar 
@@ -61,6 +133,7 @@ void CParticleEmitter::Update(float fElapsedTime)
       }
     }
   }
+  
 
   //2.] Si es temps de crear particules noves fer-ho:
   int iNumNewParts = 0;
@@ -80,7 +153,7 @@ void CParticleEmitter::Update(float fElapsedTime)
     if (m_Particles.GetNumFreeElements() > 0)
     {
       CParticle* part = m_Particles.New();
-      part->SetLifeTimer(10.f);
+      part->SetLifeTimer(5.0f);
   
       // determine a random vector between dir1 and dir2
       float fRandX = RandomNumber(m_vSpawnDir1.x, m_vSpawnDir2.x);
@@ -120,6 +193,13 @@ void CParticleEmitter::Init(CRenderManager* rm, const string& _texureFileName)
   
 void CParticleEmitter::Release()
 {
+
+/*  CHECKED_RELEASE(m_vbParticles);
+  CHECKED_RELEASE(m_pd3dDevice);
+  CHECKED_RELEASE(m_pTexParticle);
+ */
+  
+
   m_Particles.DeleteAllElements();
   if ( m_vbParticles!= NULL)
   {

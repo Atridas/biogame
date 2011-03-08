@@ -26,6 +26,7 @@ class CLogRender;
 class CConsole;
 class CGUIManager;
 class CPhysicsManager;
+class CParticleManager;
 // --------------------------
 
 /**
@@ -46,7 +47,7 @@ public:
                                                   m_pActionToInput(0),m_pRenderableObjectsManager(0),m_pLightManager(0),
                                                   m_pSceneEffectManager(0), m_pTimer(0), m_pScriptManager(0),m_pTextureManager(0),
                                                   m_pStaticMeshManager(0),m_pAnimatedModelManager(0),m_pEffectManager(0),
-                                                  m_pGUIManager(0),m_pPhysicsManager(0)
+                                                  m_pGUIManager(0),m_pPhysicsManager(0),m_pParticleManager(0)
                                                   {};
   /**
    * Destructor.
@@ -136,6 +137,8 @@ public:
   CGUIManager*        GetGUIManager         () const                        {return m_pGUIManager;};
   CPhysicsManager*    GetPhysicsManager     () const                        {return m_pPhysicsManager;};
 
+  CParticleManager*   GetParticleManager    () const                        {return m_pParticleManager;};
+
 private:
 
   /**
@@ -203,5 +206,7 @@ private:
   CGUIManager*                m_pGUIManager;
 
   CPhysicsManager*            m_pPhysicsManager;
+
+  CParticleManager*           m_pParticleManager;
 };
 

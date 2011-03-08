@@ -29,7 +29,7 @@ public:
                       
 
 
-  //virtual ~CParticleProcess(){Done;};
+  
   virtual               ~CParticleProcess           ()                          {Done();};
 
   virtual bool          Init();
@@ -38,7 +38,7 @@ public:
 	void					        DebugInformation        (float FPS);
   void                  RenderScene             (CRenderManager* _pRM);
   void                  RenderINFO              (CRenderManager* _pRM);
-  void                  RenderPhysX             (CRenderManager* _pRM, CRenderableObject* _pRO, Mat44f _mMatTransf);
+  
 
   virtual bool          ExecuteProcessAction      (float _fDeltaSeconds, float _fDelta, const char* _pcAction);
 
@@ -54,7 +54,6 @@ private:
   float                 m_fVelocity;
   bool                  m_bRenderLights;
   float                 m_fPhysxVelocity;
-  //CRenderableObject*    m_pRenderPhysX;
   CParticleEmitter      m_ParticleEmitter;
 };
 

@@ -112,6 +112,7 @@
     <ClCompile Include="OmniLight.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleEmitter.cpp" />
+    <ClCompile Include="ParticleManager.cpp" />
     <ClCompile Include="RenderableAnimatedInstanceModel.cpp" />
     <ClCompile Include="RenderableObject.cpp" />
     <ClCompile Include="RenderableObjectsManager.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="include\OmniLight.h" />
     <ClInclude Include="include\Particle.h" />
     <ClInclude Include="include\ParticleEmitter.h" />
+    <ClInclude Include="include\ParticleManager.h" />
     <ClInclude Include="include\RenderableAnimatedInstanceModel.h" />
     <ClInclude Include="include\RenderableObject.h" />
     <ClInclude Include="include\RenderableObjectsManager.h" />

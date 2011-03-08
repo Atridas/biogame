@@ -136,6 +136,9 @@
     <Filter Include="Particle\ParticleEmitter">
       <UniqueIdentifier>{affdfcee-9a85-4c4a-98c1-f80e53f90f04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Particle\ParticleManager">
+      <UniqueIdentifier>{bb2d63d0-cd3c-4495-a701-f2d877e97105}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -251,6 +254,9 @@
     </ClCompile>
     <ClCompile Include="ParticleEmitter.cpp">
       <Filter>Particle\ParticleEmitter</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleManager.cpp">
+      <Filter>Particle\ParticleManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -373,6 +379,9 @@
     </ClInclude>
     <ClInclude Include="include\ParticleEmitter.h">
       <Filter>Particle\ParticleEmitter</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ParticleManager.h">
+      <Filter>Particle\ParticleManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

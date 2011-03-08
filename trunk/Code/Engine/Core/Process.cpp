@@ -14,6 +14,7 @@
 #include "ScriptManager.h"
 #include "LogRender.h"
 #include "Console.h"
+#include "ParticleManager.h"
 
 void CProcess::DebugInformation()
 {
@@ -96,6 +97,12 @@ bool CProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _p
   {
     CORE->GetLogRender()->NextLine();
     return true;
+
+  } else if(strcmp(_pcAction, "Particle") == 0) //************************************************
+  {
+    CORE->GetParticleManager()->Reload();
+    return true;                                //************************************************
+    
   } else if(strcmp(_pcAction, "Console") == 0)
   {
     CORE->GetConsole()->Toggle();
