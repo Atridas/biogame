@@ -17,6 +17,7 @@
   </AnimatedModelManager>
     
   <EffectManager xml="Data/XML/Effects.xml"/>
+  <ParticleManager xml="Data/XML/Particles.xml"/>
   <FontManager fontsXML="Data/XML/Fonts.xml"/>
   <Languages default="cat">
     <Language languageXML="Data/Language/spanish.xml"/>
@@ -25,6 +26,7 @@
   </Languages>
   <InputManager exclusiveMouse="true"/>
   <ActionToInput file="Data/XML/actions_physx.xml"/>
+  
 
   <!-- RenderableObjectsManager file="Data/XML/RenderableObjects.xml" -->
   <!-- RenderableObjectsManager file="Data/Levels/Level -2/XML/RenderableObjects.xml" -->

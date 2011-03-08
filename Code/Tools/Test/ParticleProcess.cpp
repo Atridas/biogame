@@ -62,8 +62,7 @@ bool CParticleProcess::Init()
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
 
   CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
-  //m_pRenderPhysX = CORE->GetRenderableObjectsManager()->GetResource("maquina exploradora");
-
+  
   if(l_Spot)
   {
     l_Spot->SetDirection(m_pObjectBot->GetPosition());
@@ -134,45 +133,22 @@ void CParticleProcess::Update(float _fElapsedTime)
 
 void CParticleProcess::RenderScene(CRenderManager* _pRM)
 {
-  //CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
-   //l_pPhysManager->DebugRender(_pRM);
-
-
-
-   /*if (m_pRenderPhysX!=0)
-   {
-     Mat44f l_vMat;
-     g_pPActorBall->GetMat44(l_vMat);
-     RenderPhysX(_pRM,m_pRenderPhysX,l_vMat);
-   }*/
+  
   //Render Objects
-  CORE->GetRenderableObjectsManager()->Render(_pRM);
+  // Ensenya tot el Hangar i els seus objectas
+  //CORE->GetRenderableObjectsManager()->Render(_pRM);
 
-  //Render Lights
-  if(m_bRenderLights)
-    CORE->GetLightManager()->Render(_pRM);
-
-  //Matrix for testing
-  Mat44f r,r2, t, s, identity, total;
-
-  identity.SetIdentity();
-  r.SetIdentity();
-  r2.SetIdentity();
-  t.SetIdentity();
-  s.SetIdentity();
-
-  //Draw Grid and Axis
-  _pRM->SetTransform(identity);
+  
   _pRM->DrawGrid(30.0f,colCYAN,30,30);
    
-   //_pRM->DrawPlane(10,Vect3f(0,1,0),0,colBLUE,10,10);
+  //_pRM->DrawPlane(10,Vect3f(0,1,0),0,colBLUE,10,10);
 
   m_ParticleEmitter.Render();
 }
 
 void CParticleProcess::RenderINFO(CRenderManager* _pRM)
 {
-  uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");
+  /*uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");
  
   int l_iPosicio = 0;
   int l_iPosicio2 = 130;
@@ -181,7 +157,7 @@ void CParticleProcess::RenderINFO(CRenderManager* _pRM)
   stringstream l_SStreamHelp;
 
  
-  _pRM->DrawAxis();
+  _pRM->DrawAxis();  */
 }
 
 
@@ -214,10 +190,7 @@ bool CParticleProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta,
     Vect3f l_vDir = m_pCamera->GetDirection();
 
     l_vDir.Normalize();
-    //l_vDir.y = 0.0f;
-   // g_pPhysXController->Move(Vect3f(l_vDir.x,0.0f,l_vDir.z)*0.05f*m_fVelocity,_fDeltaSeconds);
-    //m_pObject->SetPosition(g_pPhysXController->GetPosition());
-   
+    
 
     if(m_iState != 1)
       m_bStateChanged = true;
@@ -237,10 +210,7 @@ bool CParticleProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta,
     Vect3f l_vDir = m_pCamera->GetDirection();
 
     l_vDir.Normalize();
-    //l_vDir.y = 0.0f;
-    //g_pPhysXController->Move(Vect3f(-l_vDir.x,0.0f,-l_vDir.z)*0.05f*m_fVelocity,_fDeltaSeconds);
-    //m_pObject->SetPosition(g_pPhysXController->GetPosition());
-
+    
     if(m_iState != 1)
       m_bStateChanged = true;
 
@@ -278,93 +248,6 @@ bool CParticleProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta,
 
     return true;
   }
-
-  /*
-  if(strcmp(_pcAction, "ShootBall") == 0)
-  {
-    
-    CPhysicActor* l_pPActorShoot = new CPhysicActor(g_pUserData4);
-    l_pPActorShoot->AddSphereShape(0.3f,m_pCamera->GetEye());
-    l_pPActorShoot->CreateBody(1);
-    CORE->GetPhysicsManager()->AddPhysicActor(l_pPActorShoot);
-    //m_pCamera->GetDirection();
-    l_pPActorShoot->SetLinearVelocity(m_pCamera->GetDirection()*m_fPhysxVelocity);
-    
-    CHECKED_DELETE(l_pPActorShoot)
-
-  }
-
-  if(strcmp(_pcAction, "Elevate") == 0)
-  {
-    //g_pPActorComposite->SetLinearVelocity(Vect3f(0.0f,1.0f,0.0f)*m_fPhysxVelocity);
-      CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
-      const Vect3f l_PosCamera = m_pCamera->GetEye();
-      const Vect3f& l_DirCamera = m_pCamera->GetDirection().Normalize();
-  
-      SCollisionInfo l_CInfo;
-      //CPhysicUserData* l_pUserData = 0;
-      if (g_pUserDataSHOOT != 0)
-      {
-        g_pUserDataSHOOT->SetColor(colWHITE);
-      }
-      
-      g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActor(l_PosCamera,l_DirCamera,1,g_pUserDataSHOOT,l_CInfo);
-
-      if (g_pUserDataSHOOT != 0)
-      {
-        g_pUserDataSHOOT->SetColor(colRED);
-      }
-     
-  }
-
-  if(strcmp(_pcAction, "ShootBOX") == 0)
-  {
-    CPhysicActor* l_pPActorShoot = new CPhysicActor(g_pUserData5);
-    l_pPActorShoot->AddBoxSphape(0.8f,m_pCamera->GetEye());
-    l_pPActorShoot->CreateBody(3);
-    CORE->GetPhysicsManager()->AddPhysicActor(l_pPActorShoot);
-    //m_pCamera->GetDirection();
-    l_pPActorShoot->SetLinearVelocity(m_pCamera->GetDirection()*m_fPhysxVelocity);
-    CHECKED_DELETE(l_pPActorShoot)
-  }
-
-  if(strcmp(_pcAction, "VelocityChange") == 0)
-  {
-    Vect3i l_vDelta = INPUT_MANAGER->GetMouseDelta();
-
-    if (l_vDelta.z < 0)
-    {
-      m_fPhysxVelocity = m_fPhysxVelocity - 2;
-      if (m_fPhysxVelocity == 0)
-        m_fPhysxVelocity = 2;
-      
-    }
-    else
-    {
-       m_fPhysxVelocity = m_fPhysxVelocity + 2;
-      if (m_fPhysxVelocity == 1000)
-        m_fPhysxVelocity = 998;
-      
-    }
- 
-    
-  }
-
-  if(strcmp(_pcAction, "ZoomCamera") == 0)
-  {
-    Vect3i l_vDelta = INPUT_MANAGER->GetMouseDelta();
-
-    if (l_vDelta.z < 0)
-    {
-      ((CThPSCamera*)m_pObjectCamera)->AddZoom(0.3f);
-    }else{
-      ((CThPSCamera*)m_pObjectCamera)->AddZoom(-0.3f);
-    }
-
-    return true;
-  }
-
-  */
 
   return false;
 }

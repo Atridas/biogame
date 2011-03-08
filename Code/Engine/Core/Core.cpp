@@ -21,6 +21,8 @@
 #include <Console.h>
 #include <GUIManager.h>
 #include <PhysicsManager.h>
+#include <ParticleManager.h>
+
 //#include <AnimatedModelManager.h>
 
 bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
@@ -45,6 +47,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pConsole                  = new CConsole();
   m_pGUIManager               = new CGUIManager(_InitParams.RenderManagerParams.v2iResolution);
   m_pPhysicsManager           = new CPhysicsManager();
+  m_pParticleManager          = new CParticleManager();
 
   m_pRenderManager->Init(hWnd,_InitParams.RenderManagerParams);
 
@@ -62,6 +65,11 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
     SetOk(false);
   }
 
+  if(!m_pParticleManager->Load(_InitParams.PaticleManagerParams.szFile))
+  {
+    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al manager de particulas");
+    SetOk(false);
+  }
   if(!m_pStaticMeshManager->Load(_InitParams.StaticMeshManagerParams))
   {
     LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al manager de Static Meshes.");
@@ -90,6 +98,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pGUIManager->ActiveWindows(_InitParams.GUIManagerParams.szInitWindow);
   m_pGUIManager->SetVisiblePointerMouse(_InitParams.GUIManagerParams.bRenderMouse);
   m_pPhysicsManager->Init();
+  
   return IsOk();
 }
 
@@ -99,6 +108,7 @@ void CCore::Release()
   
 
   //delete a l'inrevès de com s'ha fet l'init
+  CHECKED_DELETE(m_pParticleManager);
   CHECKED_DELETE(m_pPhysicsManager);
   CHECKED_DELETE(m_pGUIManager);
   CHECKED_DELETE(m_pConsole);
