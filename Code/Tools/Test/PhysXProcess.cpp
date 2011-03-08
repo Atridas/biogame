@@ -233,7 +233,8 @@ void CPhysXProcess::Release()
   CHECKED_DELETE(g_pGameObject)
   CHECKED_DELETE(g_pPhysXController)
   CHECKED_DELETE(g_pPEscala)
-  CHECKED_DELETE(g_pUserDataEscala);
+  CHECKED_DELETE(g_pUserDataEscala)
+  CHECKED_DELETE(g_pUserDataController)
   //CHECKED_DELETE(plaXung)
 
   //CHECKED_DELETE(m_pRenderPhysX);
