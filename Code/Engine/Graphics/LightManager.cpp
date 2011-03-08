@@ -61,6 +61,89 @@ bool CLightManager::Load(const string& _szFileName)
   return IsOk();
 }
 
+CDirectionalLight* CLightManager::CreateDirectionalLight(string _szName,
+                                          Vect3f& _vPosition,
+                                          Vect3f& _vDirection,
+                                          CColor& _colColor,
+                                          float _fStartRangeAtt,
+                                          float _fEndRangeAtt,
+                                          bool _bRenderShadows)
+{
+  CLight* l_pLight = GetResource(_szName);
+
+  if(!l_pLight)
+  {
+    CDirectionalLight* l_pDirectionalLight = new CDirectionalLight(_szName);
+
+    l_pDirectionalLight->SetDirection(_vDirection);
+    l_pDirectionalLight->SetPosition(_vPosition);
+    l_pDirectionalLight->SetColor(_colColor);
+    l_pDirectionalLight->SetStartRangeAttenuation(_fStartRangeAtt);
+    l_pDirectionalLight->SetEndRangeAttenuation(_fEndRangeAtt);
+    l_pDirectionalLight->SetRenderShadows(_bRenderShadows);
+    AddResource(l_pDirectionalLight->GetName(),l_pDirectionalLight);
+    return l_pDirectionalLight;
+  }
+  
+  return 0;
+}
+
+CSpotLight* CLightManager::CreateSpotLight(string _szName,
+                                            Vect3f& _vPosition,
+                                            Vect3f& _vDirection,
+                                            CColor& _colColor,
+                                            float _fStartRangeAtt,
+                                            float _fEndRangeAtt,
+                                            float _fAngle,
+                                            float _fFallOff,
+                                            bool _bRenderShadows)
+ {
+
+  CLight* l_pLight = GetResource(_szName);
+
+  if(!l_pLight)
+  {
+    CSpotLight* l_pSpotLight = new CSpotLight(_szName);
+
+    l_pSpotLight->SetDirection(_vDirection);
+    l_pSpotLight->SetPosition(_vPosition);
+    l_pSpotLight->SetColor(_colColor);
+    l_pSpotLight->SetStartRangeAttenuation(_fStartRangeAtt);
+    l_pSpotLight->SetEndRangeAttenuation(_fEndRangeAtt);
+    l_pSpotLight->SetRenderShadows(_bRenderShadows);
+    l_pSpotLight->SetAngle(_fAngle);
+    l_pSpotLight->SetFallOff(_fFallOff);
+    AddResource(l_pSpotLight->GetName(),l_pSpotLight);
+    return l_pSpotLight;
+  }
+
+  return 0;
+}
+
+COmniLight* CLightManager::CreateOmniLight(string _szName,
+                                          Vect3f& _vPosition,
+                                          CColor& _colColor,
+                                          float _fStartRangeAtt,
+                                          float _fEndRangeAtt)
+{
+  CLight* l_pLight = GetResource(_szName);
+
+  if(!l_pLight)
+  {
+    COmniLight* l_pOmniLight = new COmniLight(_szName);
+
+    l_pOmniLight->SetPosition(_vPosition);
+    l_pOmniLight->SetColor(_colColor);
+    l_pOmniLight->SetStartRangeAttenuation(_fStartRangeAtt);
+    l_pOmniLight->SetEndRangeAttenuation(_fEndRangeAtt);
+    l_pOmniLight->SetRenderShadows(false);
+    AddResource(l_pOmniLight->GetName(),l_pOmniLight);
+    return l_pOmniLight;
+  }
+
+  return 0;
+}
+
 void CLightManager::Render(CRenderManager *_pRM) const
 {
   TMapResource::const_iterator l_it = m_Resources.cbegin();

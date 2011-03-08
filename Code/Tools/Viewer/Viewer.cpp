@@ -57,8 +57,23 @@ CViewer::CViewer(void)
       m_pTargetObject,
       2.5f);
 
-  m_pObjectModeLight = (CDirectionalLight*)CORE->GetLightManager()->GetResource("ObjectModeLight");
-  m_pSpotLight = (CSpotLight*)CORE->GetLightManager()->GetResource("FreeModeLight");
+  m_pObjectModeLight = CORE->GetLightManager()->CreateDirectionalLight("ObjectModeLight",
+                                                                        Vect3f(0.0f),
+                                                                        Vect3f(1.0f,1.0f,1.0f),
+                                                                        CColor(Vect3f(1.0f,1.0f,1.0f)),
+                                                                        50.0f,
+                                                                        80.0f,
+                                                                        false);
+
+  m_pSpotLight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
+                                                          Vect3f(-2.15715f,0.0f,-7.32758f),
+                                                          Vect3f(-5.4188f,0.0f,3.75613f),
+                                                          CColor(Vect3f(1.0f,1.0f,1.0f)),
+                                                          20.0f,
+                                                          80.0f,
+                                                          10.0f,
+                                                          45.0f,
+                                                          false);
 
   m_vAmbientLight = CORE->GetLightManager()->GetAmbientLight();
 
