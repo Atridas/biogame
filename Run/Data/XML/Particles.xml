@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Particles>
 
-  <ParticleEmitter id="font1"                         Position="0.0f, 0.0f, 0.0f"     MinEmitRate="70.0f"   MaxEmitRate="100.0f"   
-                   Color1="1.0f,1.0f,1.0f,1.0f"       Color2="1.0f,1.0f,1.0f,1.0f"    MinSize="1.0f"        MaxSize="3.0f"    
+  <ParticleEmitter id="font1"                      MinEmitRate="70.0f"             MaxEmitRate="100.0f"
+                   Color1="1.0f,1.0f,1.0f,1.0f"    Color2="1.0f,1.0f,1.0f,1.0f"    MinSize="1.0f"        MaxSize="3.0f"
                    Direction1="0.0f, 0.0f, 1.0f"   Direction2="0.0f, 0.0f, 5.0f"   TexParticle="/Data/Textures/gohan.png">
   </ParticleEmitter>
   <!--
@@ -16,4 +16,7 @@
                    Direction1="1.0f, -0.0f, -5.0f"   Direction2="2.0f, 0.0f, 1.0f"   TexParticle="/Data/Textures/gohan.png">
   </ParticleEmitter>
   -->
+  <InstanceParticle id="hola"                    type="font1"                      Position="0.0f, 0.0f, 0.0f">
+  </InstanceParticle>
+  
 </Particles>
