@@ -6,9 +6,11 @@
 #include "Samplers.fx"
 
 float4 LightmapPS(TNORMAL_TEXTURED2_VERTEX_PS _in) : COLOR {
+	float3 l_Normal = normalize(_in.WorldNormal);
 	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
+	float4 l_LightResult = float4(ComputeAllLights(l_Normal, _in.WorldPosition, l_DiffuseColor, _in.PosLight),1.0);
 	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2);
-	return l_DiffuseColor*l_LightmapColor * 2;
+	return l_LightResult*l_LightmapColor * 2;
 }
 
 float4 ShowNormalsPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
