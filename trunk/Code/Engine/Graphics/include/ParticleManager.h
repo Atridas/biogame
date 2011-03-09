@@ -8,11 +8,10 @@
 #include <XML/XMLTreeNode.h>
 #include "params.h"
 #include <Utils/MapManager.h>
-/*
+
 struct SInfo
 {
   string                m_szId;
-  D3DXVECTOR3           m_vPos;
   float                 m_fMinEmitRate;
   float                 m_fMaxEmitRate;
   D3DXCOLOR             m_Color1;
@@ -23,9 +22,9 @@ struct SInfo
   D3DXVECTOR3           m_vSpawnDir2;
   LPDIRECT3DTEXTURE9    m_pTexParticle;
   
-}
-*/
-class CParticleManager //: public CMapManager<SInfo>
+};
+
+class CParticleManager : public CMapManager<SInfo>
 {
 public:
   CParticleManager(void);
