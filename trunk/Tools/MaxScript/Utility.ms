@@ -415,17 +415,6 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		
 		return true
 	)
-  
-	-- Popup de sel·lecció de carpeta on desar la malla
-	function ExportPop =
-	(
-		local l_outName = GetSaveFileName caption:"Selecciona on guardar la malla" types:"mesh(*.mesh)|*.mesh|All Files(*.*)|*.*|"
-		
-		if l_outName != undefined then
-		(
-			ExportMesh $ l_outName
-		)
-	)
 	
 	-- Fi exportadors
 	
@@ -448,7 +437,11 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			local l_TextureTotalPath = getTexturePath()
 			makeDir l_meshPath all:true
 			makeDir l_TextureTotalPath all:true
-			local l_outName=GetSaveFileName fileName:(l_meshPath + $.name + ".mesh") caption:"Select output file to export file" types:" mesh(*.mesh)|*.mesh|All Files(*.*)|*.*|"
+			
+			local l_text = "" as stringStream
+			format "%.mesh" (GetCoreName $) to:l_text
+			
+			local l_outName=GetSaveFileName fileName:(l_meshPath + l_text) caption:"Select output file to export file" types:" mesh(*.mesh)|*.mesh|All Files(*.*)|*.*|"
 			if l_outName != undefined then
 			(
 				
