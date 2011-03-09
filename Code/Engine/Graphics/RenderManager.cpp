@@ -205,7 +205,11 @@ void CRenderManager::EndRendering    ()
 {
   assert(IsOk());
 	m_pD3DDevice->EndScene();
-	// Present the backbuffer contents to the display
+}
+
+void CRenderManager::Present()
+{
+  // Present the backbuffer contents to the display
 	m_pD3DDevice->Present( NULL, NULL, NULL, NULL );
 }
 

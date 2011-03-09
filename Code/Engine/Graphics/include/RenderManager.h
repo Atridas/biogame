@@ -37,6 +37,7 @@ public:
 
   void                  BeginRendering    ();
   void                  EndRendering      ();
+  void                  Present           ();
   void                  EnableAlphaBlend  ();
   void                  DisableAlphaBlend ();
 
