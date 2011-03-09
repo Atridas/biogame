@@ -38,14 +38,11 @@ bool CParticleManager::Load(const string& _szFileName)
     }
     
     
-    /*
+    
     SInfo* l_pInfo= new SInfo();
     Vect3f l_vVec3;
     Vect4f l_vVec4;
     l_pInfo->m_szId = l_treeParticleEmitter.GetPszISOProperty("id" ,"");
-    l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Position",Vect3f(0.0f));
-    l_pInfo->m_vPos = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
-    AddResource(l_pInfo->m_szId,l_pInfo);
     l_pInfo->m_fMinEmitRate = l_treeParticleEmitter.GetFloatProperty("MinEmitRate");
     l_pInfo->m_fMaxEmitRate = l_treeParticleEmitter.GetFloatProperty("MaxEmitRate");
     l_vVec4 = l_treeParticleEmitter.GetVect4fProperty("Color1",Vect4f(0.0f),true);
@@ -59,7 +56,7 @@ bool CParticleManager::Load(const string& _szFileName)
     l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Direction2",Vect3f(0.0f));
     l_pInfo->m_vSpawnDir2 = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
 
-    AddResource(l_pInfo->m_szId,l_pInfo);*/
+    AddResource(l_pInfo->m_szId,l_pInfo);
     //---------------------------------------------------
   }
     //--------Instance  Particle -------------
@@ -77,9 +74,27 @@ bool CParticleManager::Load(const string& _szFileName)
       // depenen del tipus, carregar una font o una altre
       // posar tots els valor segons la font carregada
       // llegir les caracteristiques del instanceparticle, i posar-ho tot en un vector
-      CParticleEmitter* l_particleEmitter= new CParticleEmitter();
-    
-      
+      CParticleEmitter l_particleEmitter= CParticleEmitter();
+      string l_szType = l_treeInstanceParticle.GetPszProperty("type","");
+
+      SInfo* l_pInfo= new SInfo();
+      l_pInfo = GetResource("Id"); // s'ha de fer que la Id de la SInfo correspongui amb el type de la instancia 
+      Vect3f l_vVec3;
+
+      l_particleEmitter.SetId(l_pInfo->m_szId);
+      l_vVec3 = l_treeInstanceParticle.GetVect3fProperty("Position",Vect3f(0.0f));
+      l_particleEmitter.SetPosition(D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z));
+      l_particleEmitter.SetMinEmitRate(l_pInfo->m_fMinEmitRate);
+      l_particleEmitter.SetMaxEmitRate(l_pInfo->m_fMaxEmitRate);
+      l_particleEmitter.SetColor1(l_pInfo->m_Color1);
+      l_particleEmitter.SetColor2(l_pInfo->m_Color2);
+      l_particleEmitter.SetMinSize(l_pInfo->m_fMinSize);
+      l_particleEmitter.SetMaxSize(l_pInfo->m_fMaxSize);
+      l_particleEmitter.SetSpawnDir1(l_pInfo->m_vSpawnDir1);
+      l_particleEmitter.SetSpawnDir2(l_pInfo->m_vSpawnDir2);
+      //l_particleEmitter.SetTexParticle();
+
+      m_vEmitterParticle.push_back(l_particleEmitter);
     }
     //---------------------------------------
 
