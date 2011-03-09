@@ -6,7 +6,8 @@
 #include "SceneEffect.h"
 //Forward declarations-------------
 class CXMLTreeNode;
-//class CSceneEffect;
+class CShadowMapRenderToTexture;
+class CLight;
 class CRenderManager;
 class CProcess;
 //---------------------------------
@@ -15,6 +16,21 @@ class CProcess;
 class CSceneEffectManager :
   public CBaseControl
 {
+
+public:
+
+  CSceneEffectManager();
+  ~CSceneEffectManager(){Done();};
+
+  void Release();
+  bool Load(const string& m_szFileName);
+  void PreRender(CRenderManager* _pRM, CProcess* _pProc);
+  void ActivateRenderSceneEffects();
+  void CaptureFrameBuffers(CRenderManager* _pRM);
+  void PostRender(CRenderManager* _pRM);
+  void CaptureFrameBuffersAfterPostRender(CRenderManager* _pRM);
+
+  void SetShadowMapLightCast(CLight* _pLight);
 
 private:
 
@@ -26,17 +42,7 @@ private:
   bool Load();
   string m_szFileName;
 
-public:
-  CSceneEffectManager();
-  ~CSceneEffectManager(){Done();};
-
-  void Release();
-  bool Load(const string& m_szFileName);
-  void PreRender(CRenderManager* _pRM, CProcess* _pProc);
-  void ActivateRenderSceneEffects();
-  void CaptureFrameBuffers(CRenderManager* _pRM);
-  void PostRender(CRenderManager* _pRM);
-  void CaptureFrameBuffersAfterPostRender(CRenderManager* _pRM);
+  CShadowMapRenderToTexture* m_pShadowMapEffect;
 };
 
 #endif

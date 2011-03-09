@@ -12,6 +12,7 @@
 #include "AnimatedInstanceModel.h"
 #include "RenderableAnimatedInstanceModel.h"
 #include <LightManager.h>
+#include "SceneEffectManager.h"
 #include "SpotLight.h"
 
 
@@ -91,7 +92,9 @@ void CViewer::Init()
                                                           80.0f,
                                                           10.0f,
                                                           45.0f,
-                                                          false);
+                                                          true);
+
+  CORE->GetSceneEffectManager()->SetShadowMapLightCast(m_pSpotLight);
 
   m_vAmbientLight = CORE->GetLightManager()->GetAmbientLight();
 
