@@ -117,6 +117,7 @@ void CEngine::RenderNoHDR(CRenderManager* _pRM, CProcess* _pProcess)
   CEngine::RenderSystems(_pRM);
 
 	_pRM->EndRendering();
+  _pRM->Present();
 }
 
 
