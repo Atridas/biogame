@@ -4,6 +4,7 @@
 
 //Forward declarations ---------------------
 class CLight;
+class CLight;
 // -----------------------------------------
 
 #include "RenderToTextureSceneEffect.h"
@@ -16,6 +17,8 @@ public:
 
   virtual bool Init(const CXMLTreeNode& _params);
   virtual void PreRender(CRenderManager* _pRM, CProcess* _pProc);
+
+  void SetShadowMapLightCast(CLight* _pLight) {m_pLightShadowCast = _pLight;};
 
 protected:
   void Release();

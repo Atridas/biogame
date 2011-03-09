@@ -10,7 +10,7 @@
 #include "RenderTextureSceneEffect.h"
 #include "DrawQuadToTextureSceneEffect.h"
 
-CSceneEffectManager::CSceneEffectManager(void)
+CSceneEffectManager::CSceneEffectManager(void) : m_pShadowMapEffect(0)
 {
   SetOk(true);
 }
@@ -19,6 +19,8 @@ CSceneEffectManager::CSceneEffectManager(void)
 void CSceneEffectManager::Release()
 {
   vector<CSceneEffect*>::iterator l_begin, l_end, l_it;
+
+  m_pShadowMapEffect = 0;
 
   l_begin = m_vRenderSceneEffects.begin();
   l_end   = m_vRenderSceneEffects.end();
@@ -59,6 +61,7 @@ void CSceneEffectManager::Release()
     delete *l_it;
   }
   m_vPostRenderSceneEffects.clear();
+
 }
   
 bool CSceneEffectManager::Load(const string &_szFileName)
@@ -92,6 +95,7 @@ bool CSceneEffectManager::Load()
       if(l_szType == "shadow_map_render_to_texture")
       {
         l_pSceneEffect = new CShadowMapRenderToTexture();
+        m_pShadowMapEffect = (CShadowMapRenderToTexture*)l_pSceneEffect;
       } else if(l_szType == "render_to_texture")
       {
         l_pSceneEffect = new CRenderToTextureSceneEffect();
@@ -210,4 +214,10 @@ void CSceneEffectManager::CaptureFrameBuffersAfterPostRender(CRenderManager* _pR
       m_vCaptureFrameBufferSceneEffectsAfterPostRender[i]->CaptureFrameBuffers(_pRM);
   }
 }
+
+void CSceneEffectManager::SetShadowMapLightCast(CLight* _pLight)
+{
+  if(m_pShadowMapEffect)
+    m_pShadowMapEffect->SetShadowMapLightCast(_pLight);
+};
 
