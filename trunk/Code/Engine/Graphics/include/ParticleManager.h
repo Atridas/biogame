@@ -32,12 +32,13 @@ public:
   //bool Load(const SPaticleManagerParams& _params);
   bool Load(const string& _szFileName);
  
-  vector<CParticleEmitter> m_vEmitterParticle;
+ 
 
   void Reload();
 
 private:
   string m_szFileName;
+	 vector<CParticleEmitter> m_vEmitterParticle;
 
 };
 #endif
