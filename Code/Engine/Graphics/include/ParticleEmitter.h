@@ -11,9 +11,7 @@
 #include "RenderManager.h"
 #include <XML/XMLTreeNode.h>
 
-//Forward declarations-------------
-class CParticleManager;
-//---------------------------------
+
 
 class CParticleEmitter
 {

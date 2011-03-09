@@ -70,8 +70,11 @@ bool CParticleProcess::Init()
   }
   m_bRenderLights = false;
 
+
   //m_ParticleEmitter.Init(CORE->GetRenderManager(),"./Data/Textures/Ch19p1_ParticleTexture.png");
-  m_ParticleEmitter.Init(CORE->GetRenderManager(),"./Data/Textures/gohan.png"); 
+  m_ParticleEmitter.Init(CORE->GetRenderManager(),"./Data/Textures/gohan.png");
+
+
   
   SetOk(true);
   return IsOk();
