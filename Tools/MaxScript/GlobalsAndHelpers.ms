@@ -20,12 +20,12 @@ global TEXTURE_TYPE_GLOW             = 0X0010
 
 function GetYaw transform =
 (
-	return (transform as eulerangles).y
+	return (transform as eulerangles).z
 )
 
 function GetPitch transform =
 (
-	return (transform as eulerangles).z
+	return (transform as eulerangles).y
 )
 
 function GetRoll transform =
