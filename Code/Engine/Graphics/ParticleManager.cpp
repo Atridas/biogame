@@ -56,7 +56,6 @@ bool CParticleManager::Load(const string& _szFileName)
 			l_pInfo->m_vSpawnDir2 = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
 
 			AddResource(l_pInfo->m_szId,l_pInfo);
-			delete l_pInfo;
 		}
 
 		CXMLTreeNode l_treeInstanceParticles = l_XMLParticles["InstanceParticles"];
@@ -91,7 +90,7 @@ bool CParticleManager::Load(const string& _szFileName)
 			l_particleEmitter.SetSpawnDir2(l_pInfo->m_vSpawnDir2);
 			//l_particleEmitter.SetTexParticle(NULL);
 
-			m_vEmitterParticle.push_back(l_particleEmitter);
+			//m_vEmitterParticle.push_back(l_particleEmitter);
 			delete l_pInfo;
 		}
 	
