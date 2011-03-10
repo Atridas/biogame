@@ -3,4 +3,19 @@
   <ItemGroup>
     <None Include="ReadMe.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Filter Include="SoundManager">
+      <UniqueIdentifier>{573abe25-820f-45e2-b38b-5aa069309511}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>SoundManager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\SoundManager.h">
+      <Filter>SoundManager</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

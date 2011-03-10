@@ -22,6 +22,7 @@
 #include <GUIManager.h>
 #include <PhysicsManager.h>
 #include <ParticleManager.h>
+#include <SoundManager.h>
 
 //#include <AnimatedModelManager.h>
 
@@ -48,6 +49,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pGUIManager               = new CGUIManager(_InitParams.RenderManagerParams.v2iResolution);
   m_pPhysicsManager           = new CPhysicsManager();
   m_pParticleManager          = new CParticleManager();
+  m_pSoundManager             = new CSoundManager();
 
   m_pEngine                   = _pEngine;
 
@@ -100,6 +102,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pGUIManager->ActiveWindows(_InitParams.GUIManagerParams.szInitWindow);
   m_pGUIManager->SetVisiblePointerMouse(_InitParams.GUIManagerParams.bRenderMouse);
   m_pPhysicsManager->Init();
+  m_pSoundManager->Init();
   
   return IsOk();
 }
@@ -110,6 +113,7 @@ void CCore::Release()
   
 
   //delete a l'inrevès de com s'ha fet l'init
+  CHECKED_DELETE(m_pSoundManager);
   CHECKED_DELETE(m_pParticleManager);
   CHECKED_DELETE(m_pPhysicsManager);
   CHECKED_DELETE(m_pGUIManager);
