@@ -91,9 +91,9 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
     l_Engine.AddProcess(l_Test);
     l_Engine.AddProcess(l_PhysX);
     l_Engine.AddProcess(l_Particle);
-    //l_Engine.ActivateProcess(l_PhysX);
+    l_Engine.ActivateProcess(l_PhysX);
     //l_Engine.ActivateProcess(l_Test);
-    l_Engine.ActivateProcess(l_Particle);
+    //l_Engine.ActivateProcess(l_Particle);
     l_Engine.Init(l_InitParams, hWnd);
 
 
