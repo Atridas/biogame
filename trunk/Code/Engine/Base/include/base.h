@@ -85,3 +85,7 @@ using namespace std;
  * @define Macro d'accés a Animated Model Manager.
 **/
 #define ANIMATED_MANAGER CORE->GetAnimatedModelManager()
+/**
+ * @define Macro d'accés a Sound Manager.
+**/
+#define SOUND_MANAGER CORE->GetSoundManager()

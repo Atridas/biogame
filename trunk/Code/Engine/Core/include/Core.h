@@ -27,6 +27,7 @@ class CConsole;
 class CGUIManager;
 class CPhysicsManager;
 class CParticleManager;
+class CSoundManager;
 class CEngine;
 // --------------------------
 
@@ -48,7 +49,8 @@ public:
                                                   m_pActionToInput(0),m_pRenderableObjectsManager(0),m_pLightManager(0),
                                                   m_pSceneEffectManager(0), m_pTimer(0), m_pScriptManager(0),m_pTextureManager(0),
                                                   m_pStaticMeshManager(0),m_pAnimatedModelManager(0),m_pEffectManager(0),
-                                                  m_pGUIManager(0),m_pPhysicsManager(0),m_pParticleManager(0),m_pEngine(0)
+                                                  m_pGUIManager(0),m_pPhysicsManager(0),m_pParticleManager(0),m_pSoundManager(0),
+                                                  m_pEngine(0)
                                                   {};
   /**
    * Destructor.
@@ -125,6 +127,7 @@ public:
   //CAnimatedModelManager*  GetAnimatedModelManager      () const             {return m_pAnimatedModelManager;}
 
   CLightManager*      GetLightManager       () const                        {return m_pLightManager;}
+  
   CRenderableObjectsManager*  GetRenderableObjectsManager      () const                        {return m_pRenderableObjectsManager;}
 
   CSceneEffectManager*GetSceneEffectManager () const                        {return m_pSceneEffectManager;};
@@ -139,6 +142,8 @@ public:
   CPhysicsManager*    GetPhysicsManager     () const                        {return m_pPhysicsManager;};
 
   CParticleManager*   GetParticleManager    () const                        {return m_pParticleManager;};
+
+  CSoundManager*      GetSoundManager       () const                        {return m_pSoundManager;};
 
   CEngine*            GetEngine             () const                        {return m_pEngine;};
 
@@ -211,6 +216,8 @@ private:
   CPhysicsManager*            m_pPhysicsManager;
 
   CParticleManager*           m_pParticleManager;
+
+  CSoundManager*              m_pSoundManager;
 
   CEngine*                    m_pEngine;
 };
