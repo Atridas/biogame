@@ -36,7 +36,6 @@ m_Particles(NUMPARTICLES)
  
   // initialize misc. other things
   m_pTexParticle  = NULL;
-  m_pd3dDevice    = NULL;
   //SetVBSize(NUMPARTICLES / 10);
   m_fNumNewPartsExcess = 0.0f;
   
@@ -44,7 +43,7 @@ m_Particles(NUMPARTICLES)
   SetOk(true);
 }
 
-bool CParticleEmitter::Init(SParticleInfo* _info) 
+bool CParticleEmitter::SetAttributes(SParticleInfo* _info) 
 {
   return true;
 }
@@ -180,8 +179,8 @@ void CParticleEmitter::Init(CRenderManager* rm, const string& _texureFileName)
 {
   
   m_Particles.DeleteAllElements();
-  m_pd3dDevice = rm->GetDevice();
-  m_pd3dDevice->CreateVertexBuffer( NUMPARTICLES * sizeof(VERTEX_PARTICLE), 
+  LPDIRECT3DDEVICE9 l_pd3dDevice = rm->GetDevice();
+  l_pd3dDevice->CreateVertexBuffer( NUMPARTICLES * sizeof(VERTEX_PARTICLE), 
                                     D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY | D3DUSAGE_POINTS,   
                                     VERTEX_PARTICLE::GetFVF(),
                                     D3DPOOL_DEFAULT, 
@@ -193,10 +192,9 @@ void CParticleEmitter::Init(CRenderManager* rm, const string& _texureFileName)
 void CParticleEmitter::Release()
 {
 
-/*  CHECKED_RELEASE(m_vbParticles);
-  CHECKED_RELEASE(m_pd3dDevice);
-  CHECKED_RELEASE(m_pTexParticle);
- */
+  //CHECKED_RELEASE(m_vbParticles);
+  //CHECKED_RELEASE(m_pTexParticle);
+
   
 
   m_Particles.DeleteAllElements();
@@ -206,15 +204,17 @@ void CParticleEmitter::Release()
   }
 }
   
-void CParticleEmitter::Render()
+void CParticleEmitter::Render(CRenderManager* _pRM)
 {
-  m_pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
+  LPDIRECT3DDEVICE9 l_pd3dDevice = _pRM->GetDevice();
 
-  m_pd3dDevice->SetRenderState( D3DRS_POINTSPRITEENABLE, TRUE );
-  m_pd3dDevice->SetRenderState( D3DRS_POINTSCALEENABLE,  TRUE );
+  l_pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
+
+  l_pd3dDevice->SetRenderState( D3DRS_POINTSPRITEENABLE, TRUE );
+  l_pd3dDevice->SetRenderState( D3DRS_POINTSCALEENABLE,  TRUE );
  
-   m_pd3dDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
-  m_pd3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
+  l_pd3dDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
+  l_pd3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
 
   float l_fPointSize    = 100.0f;
   float l_fPointSizeMin = 0.00f;
@@ -222,20 +222,20 @@ void CParticleEmitter::Render()
   float l_fPointScaleA  = 0.00f;
   float l_fPointScaleB  = 0.00f;
   float l_fPointScaleC  = 1.00f;
-  m_pd3dDevice->SetRenderState(D3DRS_POINTSIZE,     *((DWORD*)&l_fPointSize));
-  m_pd3dDevice->SetRenderState(D3DRS_POINTSIZE_MIN, *((DWORD*)&l_fPointSizeMin));    
-  m_pd3dDevice->SetRenderState(D3DRS_POINTSIZE_MAX, *((DWORD*)&l_fPointSizeMax));    
-  m_pd3dDevice->SetRenderState(D3DRS_POINTSCALE_A,  *((DWORD*)&l_fPointScaleA));    
-  m_pd3dDevice->SetRenderState(D3DRS_POINTSCALE_B,  *((DWORD*)&l_fPointScaleB));    
-  m_pd3dDevice->SetRenderState(D3DRS_POINTSCALE_C,  *((DWORD*)&l_fPointScaleC));
-  //m_pd3dDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
+  l_pd3dDevice->SetRenderState(D3DRS_POINTSIZE,     *((DWORD*)&l_fPointSize));
+  l_pd3dDevice->SetRenderState(D3DRS_POINTSIZE_MIN, *((DWORD*)&l_fPointSizeMin));    
+  l_pd3dDevice->SetRenderState(D3DRS_POINTSIZE_MAX, *((DWORD*)&l_fPointSizeMax));    
+  l_pd3dDevice->SetRenderState(D3DRS_POINTSCALE_A,  *((DWORD*)&l_fPointScaleA));    
+  l_pd3dDevice->SetRenderState(D3DRS_POINTSCALE_B,  *((DWORD*)&l_fPointScaleB));    
+  l_pd3dDevice->SetRenderState(D3DRS_POINTSCALE_C,  *((DWORD*)&l_fPointScaleC));
+  //l_pd3dDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
 
    
   // Set up the vertex buffer to be rendered
-  m_pd3dDevice->SetStreamSource( 0, m_vbParticles,0, sizeof(VERTEX_PARTICLE));
-  m_pd3dDevice->SetFVF( VERTEX_PARTICLE::GetFVF() );
+  l_pd3dDevice->SetStreamSource( 0, m_vbParticles,0, sizeof(VERTEX_PARTICLE));
+  l_pd3dDevice->SetFVF( VERTEX_PARTICLE::GetFVF() );
 
-  m_pd3dDevice->SetTexture(0, m_pTexParticle);
+  l_pd3dDevice->SetTexture(0, m_pTexParticle);
 
   VERTEX_PARTICLE *pVertices;
  
@@ -263,13 +263,13 @@ void CParticleEmitter::Render()
 
   m_vbParticles->Unlock();
 
-  m_pd3dDevice->DrawPrimitive(D3DPT_POINTLIST, 0, dwNumParticlesToRender);
+  l_pd3dDevice->DrawPrimitive(D3DPT_POINTLIST, 0, dwNumParticlesToRender);
   
   // Reset render states
-  m_pd3dDevice->SetRenderState( D3DRS_POINTSPRITEENABLE, FALSE );
-  m_pd3dDevice->SetRenderState( D3DRS_POINTSCALEENABLE,  FALSE );
+  l_pd3dDevice->SetRenderState( D3DRS_POINTSPRITEENABLE, FALSE );
+  l_pd3dDevice->SetRenderState( D3DRS_POINTSCALEENABLE,  FALSE );
 
-  m_pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE );
+  l_pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE );
 }
 
 

@@ -60,7 +60,6 @@ void CRecyclingArray<T>::Init(void)
   for(uint32 i = 0; i < m_uiTotalElements; i++)
   {
     m_vRecyclingArrayStatus[i] = true;
-    //((void*)m_vRecyclingArray[i]) = &((void*)m_vRecyclingArray[i+1]);
   }
 };
 
