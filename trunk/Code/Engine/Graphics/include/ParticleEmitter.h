@@ -11,6 +11,7 @@
 #include "RenderManager.h"
 #include <XML/XMLTreeNode.h>
 
+struct SParticleInfo;
 
 
 class CParticleEmitter:
