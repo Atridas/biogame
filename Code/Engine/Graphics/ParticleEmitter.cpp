@@ -41,13 +41,12 @@ m_Particles(NUMPARTICLES)
   m_fNumNewPartsExcess = 0.0f;
   
   
-  
+  SetOk(true);
 }
 
-
-CParticleEmitter::~CParticleEmitter(void)
+bool CParticleEmitter::Init(SParticleInfo* _info) 
 {
-  Release();
+  return true;
 }
 /*
 void CParticleEmitter::Init(CXMLTreeNode& l_XMLParticle)
