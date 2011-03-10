@@ -28,7 +28,7 @@ class CParticleManager : public CMapManager<SParticleInfo>
 {
 public:
   CParticleManager(void);
-  ~CParticleManager(){/*Done;*/};
+  ~CParticleManager(){Done();};
   //bool Load(const SPaticleManagerParams& _params);
   bool Load(const string& _szFileName);
  
@@ -36,9 +36,11 @@ public:
 
   void Reload();
 
+  virtual void Release();
+
 private:
   string m_szFileName;
-	 vector<CParticleEmitter> m_vEmitterParticle;
+	 vector<CParticleEmitter*> m_vEmitterParticle;
 
 };
 #endif

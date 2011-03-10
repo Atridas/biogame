@@ -10,6 +10,20 @@ void CParticleManager::Reload()
   bool Load(const string& _szFileName);
 }
 
+void CParticleManager::Release()
+{
+  //Cridar el release del pare
+  CMapManager::Release();
+
+  vector<CParticleEmitter*>::iterator it  = m_vEmitterParticle.begin(),
+                                      end = m_vEmitterParticle.end();
+  for(; it != end; ++it)
+  {
+    delete (*it);
+  }
+  m_vEmitterParticle.clear();
+}
+
 //bool CParticleManager::Load(const SPaticleManagerParams& _params)
 bool CParticleManager::Load(const string& _szFileName)
 {
@@ -21,7 +35,7 @@ bool CParticleManager::Load(const string& _szFileName)
   if(!l_XMLParticles.LoadFile(m_szFileName.c_str()))
   {
     LOGGER->AddNewLog(ELL_WARNING,"CParticleManager:: No s'ha trobat el XML \"%s\"", m_szFileName.c_str());
-    //SetOk(false);
+    SetOk(false);
     return false;
   }
 
@@ -69,33 +83,39 @@ bool CParticleManager::Load(const string& _szFileName)
       if(l_treeInstanceParticle.IsComment())
 				continue;
       
-			SParticleInfo* l_pInfo = new SParticleInfo;
+			SParticleInfo* l_pInfo = 0;
 
 				
-			CParticleEmitter l_particleEmitter;
+			CParticleEmitter* l_pParticleEmitter = new CParticleEmitter;
 			string l_szType = l_treeInstanceParticle.GetPszProperty("type","");
 			l_pInfo = GetResource(l_szType); // s'ha de fer que la Id de la SInfo correspongui amb el type de la instancia 
+
+      if(!l_pInfo)
+      {
+        LOGGER->AddNewLog(ELL_WARNING, "No existeix el emiter tipus %s", l_szType);
+        continue;
+      }
+
 			Vect3f l_vVec3;
 
-			l_particleEmitter.SetId(l_pInfo->m_szId);
+			l_pParticleEmitter->SetId(l_pInfo->m_szId);
 			l_vVec3 = l_treeInstanceParticle.GetVect3fProperty("Position",Vect3f(0.0f));
-			l_particleEmitter.SetPosition(D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z));
-			l_particleEmitter.SetMinEmitRate(l_pInfo->m_fMinEmitRate);
-			l_particleEmitter.SetMaxEmitRate(l_pInfo->m_fMaxEmitRate);
-			l_particleEmitter.SetColor1(l_pInfo->m_Color1);
-			l_particleEmitter.SetColor2(l_pInfo->m_Color2);
-			l_particleEmitter.SetMinSize(l_pInfo->m_fMinSize);
-			l_particleEmitter.SetMaxSize(l_pInfo->m_fMaxSize);
-			l_particleEmitter.SetSpawnDir1(l_pInfo->m_vSpawnDir1);
-			l_particleEmitter.SetSpawnDir2(l_pInfo->m_vSpawnDir2);
+			l_pParticleEmitter->SetPosition(D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z));
+			l_pParticleEmitter->SetMinEmitRate(l_pInfo->m_fMinEmitRate);
+			l_pParticleEmitter->SetMaxEmitRate(l_pInfo->m_fMaxEmitRate);
+			l_pParticleEmitter->SetColor1(l_pInfo->m_Color1);
+			l_pParticleEmitter->SetColor2(l_pInfo->m_Color2);
+			l_pParticleEmitter->SetMinSize(l_pInfo->m_fMinSize);
+			l_pParticleEmitter->SetMaxSize(l_pInfo->m_fMaxSize);
+			l_pParticleEmitter->SetSpawnDir1(l_pInfo->m_vSpawnDir1);
+			l_pParticleEmitter->SetSpawnDir2(l_pInfo->m_vSpawnDir2);
 			//l_particleEmitter.SetTexParticle(NULL);
 
-			//m_vEmitterParticle.push_back(l_particleEmitter);
-			delete l_pInfo;
+			m_vEmitterParticle.push_back(l_pParticleEmitter);
+			//delete l_pInfo;
 		}
 	
-		int jorls = 0;
-		jorls = 0+12;
+		SetOk(true);
 	}
 /*
   CXMLTreeNode l_treeParticles = l_XMLParticles["Particles"];

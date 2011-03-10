@@ -38,9 +38,6 @@ m_Particles(NUMPARTICLES)
   m_pTexParticle  = NULL;
   //SetVBSize(NUMPARTICLES / 10);
   m_fNumNewPartsExcess = 0.0f;
-  
-  
-  SetOk(true);
 }
 
 bool CParticleEmitter::SetAttributes(SParticleInfo* _info) 
@@ -187,13 +184,16 @@ void CParticleEmitter::Init(CRenderManager* rm, const string& _texureFileName)
                                     &m_vbParticles,NULL);
 
   m_pTexParticle = CORE->GetTextureManager()->GetResource(_texureFileName)->GetD3DTexture();
+  
+  
+  SetOk(true);
 }
   
 void CParticleEmitter::Release()
 {
 
-  //CHECKED_RELEASE(m_vbParticles);
-  //CHECKED_RELEASE(m_pTexParticle);
+  CHECKED_RELEASE(m_vbParticles);
+  CHECKED_RELEASE(m_pTexParticle);
 
   
 
