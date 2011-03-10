@@ -21,7 +21,7 @@ public:
   CParticleEmitter();
   ~CParticleEmitter() {Done();};
 
-  bool Init(SParticleInfo* _info);
+  bool SetAttributes(SParticleInfo* _info);
 
   //  Set
   void SetId                (string _szId)                          {m_szId = _szId;};
@@ -36,7 +36,6 @@ public:
   void SetSpawnDir2         (D3DXVECTOR3& _vSpawnDir2)              {m_vSpawnDir2 = _vSpawnDir2;};
   void SetTexParticle       (LPDIRECT3DTEXTURE9& _pTexParticle)     {m_pTexParticle = _pTexParticle;};
   void SetNumNewPartsExcess (float _fNumNewPartsExcess)             {m_fNumNewPartsExcess = _fNumNewPartsExcess;};
-  void SetDevice            (LPDIRECT3DDEVICE9 _pd3dDevice)         {m_pd3dDevice = _pd3dDevice;};
   void SetParticle          (LPDIRECT3DVERTEXBUFFER9 _vbParticles)  {m_vbParticles = _vbParticles;};
 
 
@@ -53,14 +52,13 @@ public:
   const D3DXVECTOR3&              GetSpawnDir2        () const {return m_vSpawnDir2;};
   const LPDIRECT3DTEXTURE9        GetTexParticle      () const {return m_pTexParticle;};        
   float                           GetNumNewPartsExcess() const {return m_fNumNewPartsExcess;};
-  const LPDIRECT3DDEVICE9         GetDevice           () const {return m_pd3dDevice;};
   const LPDIRECT3DVERTEXBUFFER9   GetParticle         () const {return m_vbParticles;};
 
 
   void                    Update              (float fElapsedTime);
   void                    Init                (CRenderManager* rm, const string& _texureFileName);
   void                    Release             ();
-  void                    Render              ();
+  void                    Render              (CRenderManager* _pRM);
  // bool                    Load                (CXMLTreeNode& l_XMLParticle);
  // void                    Init                (CXMLTreeNode& _XMLParams);
   
@@ -81,7 +79,6 @@ private:
   D3DXVECTOR3                               m_vSpawnDir2;
   float                                     m_fNumNewPartsExcess;
   LPDIRECT3DTEXTURE9                        m_pTexParticle;
-  LPDIRECT3DDEVICE9                         m_pd3dDevice;
   LPDIRECT3DVERTEXBUFFER9                   m_vbParticles;
   CRecyclingArray<CParticle>                m_Particles;
   

@@ -147,7 +147,7 @@ void CParticleProcess::RenderScene(CRenderManager* _pRM)
    
   //_pRM->DrawPlane(10,Vect3f(0,1,0),0,colBLUE,10,10);
 
-  m_ParticleEmitter.Render();
+  m_ParticleEmitter.Render(_pRM);
 }
 
 void CParticleProcess::RenderINFO(CRenderManager* _pRM)
