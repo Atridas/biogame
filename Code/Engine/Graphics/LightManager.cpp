@@ -70,10 +70,11 @@ CDirectionalLight* CLightManager::CreateDirectionalLight(string _szName,
                                           bool _bRenderShadows)
 {
   CLight* l_pLight = GetResource(_szName);
+  CDirectionalLight* l_pDirectionalLight = 0;
 
   if(!l_pLight)
   {
-    CDirectionalLight* l_pDirectionalLight = new CDirectionalLight(_szName);
+    l_pDirectionalLight = new CDirectionalLight(_szName);
 
     l_pDirectionalLight->SetDirection(_vDirection);
     l_pDirectionalLight->SetPosition(_vPosition);
@@ -82,10 +83,23 @@ CDirectionalLight* CLightManager::CreateDirectionalLight(string _szName,
     l_pDirectionalLight->SetEndRangeAttenuation(_fEndRangeAtt);
     l_pDirectionalLight->SetRenderShadows(_bRenderShadows);
     AddResource(l_pDirectionalLight->GetName(),l_pDirectionalLight);
-    return l_pDirectionalLight;
+    
+  }else{
+
+    if(l_pLight->GetType() != CLight::DIRECTIONAL)
+      return 0;
+
+    l_pDirectionalLight = (CDirectionalLight*)l_pLight;
+
+    l_pDirectionalLight->SetDirection(_vDirection);
+    l_pDirectionalLight->SetPosition(_vPosition);
+    l_pDirectionalLight->SetColor(_colColor);
+    l_pDirectionalLight->SetStartRangeAttenuation(_fStartRangeAtt);
+    l_pDirectionalLight->SetEndRangeAttenuation(_fEndRangeAtt);
+    l_pDirectionalLight->SetRenderShadows(_bRenderShadows); 
   }
   
-  return 0;
+  return l_pDirectionalLight;
 }
 
 CSpotLight* CLightManager::CreateSpotLight(string _szName,
@@ -101,9 +115,11 @@ CSpotLight* CLightManager::CreateSpotLight(string _szName,
 
   CLight* l_pLight = GetResource(_szName);
 
+  CSpotLight* l_pSpotLight = 0;
+
   if(!l_pLight)
   {
-    CSpotLight* l_pSpotLight = new CSpotLight(_szName);
+    l_pSpotLight = new CSpotLight(_szName);
 
     l_pSpotLight->SetDirection(_vDirection);
     l_pSpotLight->SetPosition(_vPosition);
@@ -114,10 +130,25 @@ CSpotLight* CLightManager::CreateSpotLight(string _szName,
     l_pSpotLight->SetAngle(_fAngle);
     l_pSpotLight->SetFallOff(_fFallOff);
     AddResource(l_pSpotLight->GetName(),l_pSpotLight);
-    return l_pSpotLight;
+
+  }else{
+
+    if(l_pLight->GetType() != CLight::SPOT)
+      return 0;
+
+    l_pSpotLight = (CSpotLight*)l_pLight;
+
+    l_pSpotLight->SetDirection(_vDirection);
+    l_pSpotLight->SetPosition(_vPosition);
+    l_pSpotLight->SetColor(_colColor);
+    l_pSpotLight->SetStartRangeAttenuation(_fStartRangeAtt);
+    l_pSpotLight->SetEndRangeAttenuation(_fEndRangeAtt);
+    l_pSpotLight->SetRenderShadows(_bRenderShadows);
+    l_pSpotLight->SetAngle(_fAngle);
+    l_pSpotLight->SetFallOff(_fFallOff);
   }
 
-  return 0;
+  return l_pSpotLight;
 }
 
 COmniLight* CLightManager::CreateOmniLight(string _szName,
