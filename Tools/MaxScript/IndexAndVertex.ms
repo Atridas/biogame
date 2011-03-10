@@ -235,6 +235,8 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 			TUV2 = ChangeUVCoords TUV2
 		)
 		local l_Normal = UABGetVertexNormal _Obj face.x l_SmoothValue l_FaceNormal
+		l_Normal = l_Normal + _Obj.pos
+		l_Normal = l_Normal * l_invTransform
 		l_Normal = RHVectorToLH l_Normal
 		
 		CreateVertex pos l_Normal TUV TUV2 l_Color _VertexType[l_materialID] VertexOut1
@@ -253,6 +255,8 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 			TUV2 = ChangeUVCoords TUV2
 		)
 		local l_Normal = UABGetVertexNormal _Obj face.y l_SmoothValue l_FaceNormal
+		l_Normal = l_Normal + _Obj.pos
+		l_Normal = l_Normal * l_invTransform
 		l_Normal = RHVectorToLH l_Normal
 
 		CreateVertex pos l_Normal TUV TUV2 l_Color _VertexType[l_materialID] VertexOut2
@@ -271,6 +275,8 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 			TUV2 = ChangeUVCoords TUV2
 		)
 		local l_Normal = UABGetVertexNormal _Obj face.z l_SmoothValue l_FaceNormal
+		l_Normal = l_Normal + _Obj.pos
+		l_Normal = l_Normal * l_invTransform
 		l_Normal = RHVectorToLH l_Normal
 
 		CreateVertex pos l_Normal TUV TUV2 l_Color _VertexType[l_materialID] VertexOut3
