@@ -82,7 +82,8 @@ bool CParticleProcess::Init()
 
 void CParticleProcess::Release()
 {
-  
+	CHECKED_DELETE(m_pCamera);
+  CHECKED_DELETE(m_pObject);
 }
 
 void CParticleProcess::Update(float _fElapsedTime)
