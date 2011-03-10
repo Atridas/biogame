@@ -13,11 +13,14 @@
 
 
 
-class CParticleEmitter
+class CParticleEmitter:
+  public CBaseControl
 {
 public:
   CParticleEmitter();
-  ~CParticleEmitter();
+  ~CParticleEmitter() {Done();};
+
+  bool Init(SParticleInfo* _info);
 
   //  Set
   void SetId                (string _szId)                          {m_szId = _szId;};
@@ -57,8 +60,8 @@ public:
   void                    Init                (CRenderManager* rm, const string& _texureFileName);
   void                    Release             ();
   void                    Render              ();
-  bool                    Load                (CXMLTreeNode& l_XMLParticle);
-  void                    Init                (CXMLTreeNode& _XMLParams);
+ // bool                    Load                (CXMLTreeNode& l_XMLParticle);
+ // void                    Init                (CXMLTreeNode& _XMLParams);
   
 
 private:

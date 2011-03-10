@@ -38,7 +38,7 @@ bool CParticleManager::Load(const string& _szFileName)
       if(l_treeParticleEmitter.IsComment())
 				continue;
       
-			SInfo* l_pInfo= new SInfo();
+			SParticleInfo* l_pInfo= new SParticleInfo();
 			Vect3f l_vVec3;
 			Vect4f l_vVec4;
 			l_pInfo->m_szId = l_treeParticleEmitter.GetPszISOProperty("id" ,"");
@@ -56,7 +56,7 @@ bool CParticleManager::Load(const string& _szFileName)
 			l_pInfo->m_vSpawnDir2 = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
 
 			AddResource(l_pInfo->m_szId,l_pInfo);
-
+			delete l_pInfo;
 		}
 
 		CXMLTreeNode l_treeInstanceParticles = l_XMLParticles["InstanceParticles"];
@@ -70,7 +70,7 @@ bool CParticleManager::Load(const string& _szFileName)
       if(l_treeInstanceParticle.IsComment())
 				continue;
       
-			SInfo* l_pInfo;
+			SParticleInfo* l_pInfo = new SParticleInfo;
 
 				
 			CParticleEmitter l_particleEmitter;
@@ -89,10 +89,10 @@ bool CParticleManager::Load(const string& _szFileName)
 			l_particleEmitter.SetMaxSize(l_pInfo->m_fMaxSize);
 			l_particleEmitter.SetSpawnDir1(l_pInfo->m_vSpawnDir1);
 			l_particleEmitter.SetSpawnDir2(l_pInfo->m_vSpawnDir2);
-			//l_particleEmitter.SetTexParticle();
+			//l_particleEmitter.SetTexParticle(NULL);
 
-			//m_vEmitterParticle.push_back(l_particleEmitter);
-			int para=1;
+			m_vEmitterParticle.push_back(l_particleEmitter);
+			delete l_pInfo;
 		}
 	
 		int jorls = 0;

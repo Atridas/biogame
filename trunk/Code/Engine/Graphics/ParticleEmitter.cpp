@@ -49,7 +49,7 @@ CParticleEmitter::~CParticleEmitter(void)
 {
   Release();
 }
-
+/*
 void CParticleEmitter::Init(CXMLTreeNode& l_XMLParticle)
 {
   m_szId=l_XMLParticle.GetPszISOProperty("id" ,"");
@@ -62,7 +62,7 @@ void CParticleEmitter::Init(CXMLTreeNode& l_XMLParticle)
   m_fMaxSize = l_XMLParticle.GetFloatProperty("MaxSize");
 
 }
-
+*/
 /*
 bool CParticleEmitter::Load(CXMLTreeNode& l_XMLParticle)
 {
@@ -229,6 +229,7 @@ void CParticleEmitter::Render()
   m_pd3dDevice->SetRenderState(D3DRS_POINTSCALE_A,  *((DWORD*)&l_fPointScaleA));    
   m_pd3dDevice->SetRenderState(D3DRS_POINTSCALE_B,  *((DWORD*)&l_fPointScaleB));    
   m_pd3dDevice->SetRenderState(D3DRS_POINTSCALE_C,  *((DWORD*)&l_fPointScaleC));
+  //m_pd3dDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
 
    
   // Set up the vertex buffer to be rendered

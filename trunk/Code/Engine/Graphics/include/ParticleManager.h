@@ -9,7 +9,7 @@
 #include "params.h"
 #include <Utils/MapManager.h>
 
-struct SInfo
+struct SParticleInfo
 {
   string                m_szId;
   float                 m_fMinEmitRate;
@@ -24,7 +24,7 @@ struct SInfo
   
 };
 
-class CParticleManager : public CMapManager<SInfo>
+class CParticleManager : public CMapManager<SParticleInfo>
 {
 public:
   CParticleManager(void);
