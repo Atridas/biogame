@@ -11,4 +11,4 @@ g_DefaultPath = "D:/treballs/master/biogame/Run/Data"
 	Indicar els nivells que apareixeràn al desplegable d'exportació.
 	El nivell "" indica que s'extreu a les carpetes per defecte, per als altres es crearan les carpetes necesaries.
 */
-g_LevelArray   = #("","Level -2","Level -1", "Hangar", "Proves", "Viewer", "Laboratori", "Passadis1")
+g_LevelArray   = #("","Level -2","Level -1", "Hangar", "Proves", "Viewer", "Laboratori", "Passadis1","PhysX")

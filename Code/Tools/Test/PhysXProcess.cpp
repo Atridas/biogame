@@ -429,7 +429,7 @@ void CPhysXProcess::Release()
 
 void CPhysXProcess::Update(float _fElapsedTime)
 {
-  if(m_pObject && m_pObjectBot) 
+  if(m_pObject) 
   {
     //Actualitze el pitch i el yaw segons els delta del mouse
     float l_fPitch, l_fYaw;
@@ -440,19 +440,19 @@ void CPhysXProcess::Update(float _fElapsedTime)
     l_fYaw = m_pObject->GetYaw();
   
     m_pObject->SetYaw(l_fYaw-l_vVec.x*_fElapsedTime);
-    m_pObjectBot->SetYaw(m_pObject->GetYaw()-FLOAT_PI_VALUE/2.0f);
+    //m_pObjectBot->SetYaw(m_pObject->GetYaw()-FLOAT_PI_VALUE/2.0f);
 
     l_fPitch -= l_vVec.y*_fElapsedTime;
     if(l_fPitch < - FLOAT_PI_VALUE/3) l_fPitch = - FLOAT_PI_VALUE/3;
     if(l_fPitch >   FLOAT_PI_VALUE/3) l_fPitch =   FLOAT_PI_VALUE/3;
     m_pObject->SetPitch(l_fPitch);
 
-    m_pObjectBot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObjectBot->GetPosition().y, m_pObject->GetPosition().z));
+    //m_pObjectBot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObjectBot->GetPosition().y, m_pObject->GetPosition().z));
   
     l_fPitch = m_pObject->GetPitch();
     //l_fPitch = l_fPitch+FLOAT_PI_VALUE/2;
-    l_fYaw = m_pObjectBot->GetYaw();
-    l_fYaw = l_fYaw+FLOAT_PI_VALUE/2;
+    l_fYaw = m_pObject->GetYaw();
+    //l_fYaw = l_fYaw+FLOAT_PI_VALUE/2;
     //l_fRoll = m_pObjectBot->GetRoll();
 
     CSpotLight* l_pSpot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
@@ -465,12 +465,12 @@ void CPhysXProcess::Update(float _fElapsedTime)
       l_pSpot->SetDirection(Vect3f(l_vec.x,l_vec.y,l_vec.z));
     }
 
-    if(m_bStateChanged)
+   /* if(m_bStateChanged)
     {
       ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->BlendCycle(m_iState,0);
 
       m_bStateChanged = false;
-    }
+    }*/
 
     
   }
