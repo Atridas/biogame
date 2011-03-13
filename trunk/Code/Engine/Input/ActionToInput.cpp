@@ -265,7 +265,7 @@ void CActionToInput::ExecuteAction(float _fDeltaSeconds, float _fDelta, const ch
     if(m_pProcess->ExecuteAction(_fDeltaSeconds, _fDelta, _pcAction))
       return;
   }
-  LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput::ExecuteAction Action \"%s\" delta[%f] seconds[%f]", _pcAction, _fDelta, _fDeltaSeconds);
+  //LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput::ExecuteAction Action \"%s\" delta[%f] seconds[%f]", _pcAction, _fDelta, _fDeltaSeconds);
 }
 
 void CActionToInput::ExecuteScript(float _fDeltaSeconds, float _fDelta, const char* _pcScript)
@@ -275,7 +275,7 @@ void CActionToInput::ExecuteScript(float _fDeltaSeconds, float _fDelta, const ch
     if(m_pProcess->ExecuteScript(_fDeltaSeconds, _fDelta, _pcScript))
       return;
   }
-  LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput::ExecuteScript Script \"%s\" delta[%f] seconds[%f]", _pcScript, _fDelta, _fDeltaSeconds);
+  //LOGGER->AddNewLog(ELL_INFORMATION,"CActionToInput::ExecuteScript Script \"%s\" delta[%f] seconds[%f]", _pcScript, _fDelta, _fDeltaSeconds);
 }
 
 

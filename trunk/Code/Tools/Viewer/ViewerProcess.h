@@ -37,11 +37,13 @@ public:
   void                  RenderScene             (CRenderManager* _pRM);
   void                  RenderINFO              (CRenderManager* _pRM);
 
-  virtual bool          ExecuteProcessAction      (float _fDeltaSeconds, float _fDelta, const char* _pcAction);
+  virtual bool          ExecuteProcessAction    (float _fDeltaSeconds, float _fDelta, const char* _pcAction);
+  CViewer*              GetViewer               () { return m_pViewer; };
 
   virtual void          RegisterLuaFunctions      ();
 
   void                  ResetViewer               ();
+  void                  ToggleNormalRendering     ();
 
 private:
 

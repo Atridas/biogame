@@ -18,14 +18,30 @@ public:
   CViewer(void);
   ~CViewer(void);
 
+  enum EModes
+  {
+    FREE_MODE = 0,
+    MESH_MODE,
+    ANIMATED_MODE
+  };
+
+  //Process
   void Init();
 
   void Update(const float _fElapsedTime,const Vect3i& _vMouseDelta);
+  void ShowInfo();
 
+  //setters
+  void SetMode(EModes _eMode);
+  void SetNextMode();
+
+  //getters
   bool GetRenderLights() {return m_bRenderLights;};
   bool GetNormalRendering() {return m_bNormalRendering;};
   CCamera* GetCamera() {return m_pObjectCamera;};
+  int GetCurrentMode() { return m_iMode; };
 
+  //actions
   void SetRunning();
   void SetWalking();
 
@@ -33,8 +49,6 @@ public:
   void MoveBack();
   void MoveLeft();
   void MoveRight();
-
-  void SetNextMode();
 
   void IncrementAmbientLight();
   void DecrementAmbientLight();
@@ -56,23 +70,17 @@ public:
 
   void ToggleNormalRendering();
   void ToggleShowBoxes();
+  void ToggleShowSpheres();
 
   bool ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction);
 
-  void ShowInfo();
-
-  enum EModes
-  {
-    FREE_MODE = 0,
-    MESH_MODE,
-    ANIMATED_MODE
-  };
-
   void Reset() {Release(); Init();};
+
+  void SetViewMode(bool _bValue) { m_bViewMode = _bValue; };
+  bool GetViewMode()             { return m_bViewMode; };
 
 private:
   void Release();
-  void InitLua();
 
   void UpdatePosition(Vect3f& _PosDelta, float _fDeltaPitch, float _fDeltaYaw);
   void UpdateCamera(float _fDeltaPitch, float _fDeltaYaw);
@@ -105,7 +113,8 @@ private:
   bool m_bRenderLights;
   float m_fVelocity;
 
-  int m_iMode;
+  int  m_iMode;
+  bool m_bViewMode;
   bool m_bShowHelp;
 
   bool m_bMoveFwd;
@@ -115,6 +124,7 @@ private:
 
   bool m_bNormalRendering;
   bool m_bShowBoxes;
+  bool m_bShowSpheres;
 
   vector<CRenderableObject*>::iterator m_itCurrentMesh;
   vector<CRenderableObject*>::iterator m_itCurrentAnimated;

@@ -1,10 +1,6 @@
 <Actions>
 
-	<action name="Logger">
-		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_LCTRL"/>
-		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F1"/>
-	</action>
-
+  <!-- Log Render -->
 	<action name="LogRender">
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F2"/>
 	</action>
@@ -26,6 +22,7 @@
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_LCTRL"/>
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN" Code="KEY_DOWN"/>
 	</action>
+  <!-- Log Render END -->
 
 	<action name="ProcessInfo">
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_LCTRL"/>
@@ -56,10 +53,6 @@
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F9"/>
 	</action>
 
-	<action name="ReloadMeshes">
-		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F10"/>
-	</action>
-
 	<action name="ReloadScript">
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F11"/>
 	</action>
@@ -67,17 +60,14 @@
  	<action script="GUI_MANAGER:reloadGui()">
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F12"/>
 	</action>
+  
   <action name="Console">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_GRAVE"/>
   </action>
 
-
   <action name="Particle">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_P"/>
   </action>
-
-
-
 
 	<!--.......VIEWER CAMERA CONTROL: MOUSE AND KEYBOARD............-->
 	<action name="MoveXViewerCam">
