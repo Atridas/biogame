@@ -1,0 +1,127 @@
+<Actions>
+
+  <!--.......DEBUG ACTIONS.........-->
+  <!-- Log Render -->
+	<action name="LogRender">
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F2"/>
+	</action>
+  
+	<action name="LogRender_PageDown">
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN" Code="KEY_PGDOWN"/>
+	</action>
+
+	<action name="LogRender_PageUp">
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN" Code="KEY_PGUP"/>
+	</action>
+
+	<action name="LogRender_PrevLine">
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_LCTRL"/>
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN" Code="KEY_UP"/>
+	</action>
+
+	<action name="LogRender_NextLine">
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_LCTRL"/>
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN" Code="KEY_DOWN"/>
+	</action>
+  <!-- Log Render END -->
+
+	<action name="ProcessInfo">
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_LCTRL"/>
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F3"/>
+	</action>
+
+	<action name="Screenshot">
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F4"/>
+	</action>
+
+	<action name="SaveLogsInFile">
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F5"/>
+	</action>
+
+	<action name="ReloadActions">
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F8"/>
+	</action>
+
+	<action name="ReloadShaders">
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F9"/>
+	</action>
+
+	<action name="ReloadScript">
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F11"/>
+	</action>
+ 
+ 	<action script="GUI_MANAGER:reloadGui()">
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F12"/>
+	</action>
+  
+  <action name="Console">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_GRAVE"/>
+  </action>
+
+	<!--.......VIEWER ACTIONS.........-->
+  <action script="toggle_gui()">
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_TAB"/>
+	</action>
+  
+	<action name="Run">
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN" Code="KEY_LSHIFT"/>
+	</action>
+
+	<action name="Walk">
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_LSHIFT"/>
+	</action>
+
+	<action name="MoveFwd">
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_W"/>
+	</action>
+
+	<action name="MoveBack">
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_S"/>
+	</action>
+
+	<action name="MoveLeft">
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_A"/>
+	</action>
+
+	<action name="MoveRight">
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_D"/>
+	</action>
+
+  <action name="AugmentaAmbient">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_RBRACKET"/>
+  </action>
+
+  <action name="DisminueixAmbient">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_SLASH"/>
+  </action>
+
+  <action name="AugmentaAmbient">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_NPPLUS"/>
+  </action>
+
+  <action name="DisminueixAmbient">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_NPMINUS"/>
+  </action>
+
+  <action name="SetLightsONOFF">
+	<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_L"/>
+  </action>
+  
+	<action name="ShowAjuda">
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F1"/>
+	</action>
+  
+	
+	<action name="ZoomCamera">
+		<input deviceType="IDV_MOUSE" AxisType="AXIS_MOUSE_Z" Delta="1.f"/>
+	</action>
+
+  <action name="ShootBOT">
+    <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN" Code="MOUSE_BUTTON_LEFT"/>
+  </action>
+
+  <action name="HurtBOT">
+    <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN" Code="MOUSE_BUTTON_RIGHT"/>
+  </action>
+
+</Actions>

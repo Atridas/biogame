@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Windows  OnLoadWindows="" 
+          OnSaveWindows=""
+          OnUpdateWindows="">
+          
+  <!--Default Buttons-->
+  <Button name="Animated_FreeMode" posx="30.00" posy="02.00" height="4.00" width="10.00" visible="true" active="true"
+      texture_normal=""
+      texture_over=""
+      texture_clicked=""
+      texture_deactivated=""
+      OnClickedAction="VIEWER:set_mode(Viewer.FREE)
+                      show_gui()"
+      OnOverAction=""/>
+  <Button name="Animated_MeshMode" posx="45.00" posy="02.00" height="4.00" width="10.00" visible="true" active="true"
+      texture_normal=""
+      texture_over=""
+      texture_clicked=""
+      texture_deactivated=""
+      OnClickedAction="VIEWER:set_mode(Viewer.MESH)
+                      show_gui()"
+      OnOverAction=""/>
+  <Button name="Animated_Animated" posx="60.00" posy="02.00" height="4.00" width="10.00" visible="true" active="true"
+      texture_normal=""
+      texture_over=""
+      texture_clicked=""
+      texture_deactivated=""
+      OnClickedAction="VIEWER:set_mode(Viewer.ANIMATED)
+                      show_gui()"
+      OnOverAction=""/>
+  <Button name="Animated_Normals" posx="76.00" posy="02.00" height="4.00" width="4.00" visible="true" active="true"
+      texture_normal=""
+      texture_over=""
+      texture_clicked=""
+      texture_deactivated=""
+      OnClickedAction="VIEWER_PROCESS:toggle_normals()"
+      OnOverAction=""/>
+  <!--Default Buttons End-->
+  <Button name="Animated_Box" posx="85.00" posy="02.00" height="4.00" width="4.80" visible="true" active="true"
+      texture_normal=""
+      texture_over=""
+      texture_clicked=""
+      texture_deactivated=""
+      OnClickedAction="VIEWER:toggle_boxes()"
+      OnOverAction=""/>
+  <Button name="Animated_Sphere" posx="90.00" posy="02.00" height="4.00" width="4.80" visible="true" active="true"
+      texture_normal=""
+      texture_over=""
+      texture_clicked=""
+      texture_deactivated=""
+      OnClickedAction="VIEWER:toggle_spheres()"
+      OnOverAction=""/>
+  <Button name="Animated_Next" posx="85.00" posy="85.00" height="4.00" width="4.80" visible="true" active="true"
+      texture_normal=""
+      texture_over=""
+      texture_clicked=""
+      texture_deactivated=""
+      OnClickedAction="VIEWER:next_model()"
+      OnOverAction=""/>
+  <Button name="Animated_Previous" posx="90.00" posy="85.00" height="4.00" width="4.80" visible="true" active="true"
+      texture_normal=""
+      texture_over=""
+      texture_clicked=""
+      texture_deactivated=""
+      OnClickedAction="VIEWER:previous_model()"
+      OnOverAction=""/>
+      <Button name="Animated_Next_Action" posx="85.00" posy="80.00" height="4.00" width="4.80" visible="true" active="true"
+      texture_normal=""
+      texture_over=""
+      texture_clicked=""
+      texture_deactivated=""
+      OnClickedAction="VIEWER:next_animation()"
+      OnOverAction=""/>
+  <Button name="Animated_Previous_Action" posx="90.00" posy="80.00" height="4.00" width="4.80" visible="true" active="true"
+      texture_normal=""
+      texture_over=""
+      texture_clicked=""
+      texture_deactivated=""
+      OnClickedAction="VIEWER:previous_animation()"
+      OnOverAction=""/>
+</Windows>

@@ -64,7 +64,7 @@ public:
   void                PopWindows                ();
 	void								ActiveWindowsWithEffect		(const std::string& inNameWindow, EtypeTransitionEffect type, float transitionTime );
 	void								SetVisiblePointerMouse		(bool flag)																					{m_bVisiblePointerMouse = flag;}
-	
+
 	//-------Funciones para modificar los GuiElements--------------------------
 	void								SetActiveGuiElement				(const std::string& inNameGuiElement, bool flag);
 	void								SetVisibleGuiElement			(const std::string& inNameGuiElement, bool flag);

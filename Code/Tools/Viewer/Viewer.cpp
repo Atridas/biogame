@@ -99,9 +99,11 @@ void CViewer::Init()
   m_vAmbientLight = CORE->GetLightManager()->GetAmbientLight();
 
   m_bEnableLights = true;
+  m_bViewMode = true;
   m_bShowHelp = true;
   m_bNormalRendering = false;
   m_bShowBoxes = false;
+  m_bShowSpheres = false;
 
   m_iMode = FREE_MODE;
 
@@ -121,6 +123,15 @@ void CViewer::Release()
 {
   CHECKED_DELETE(m_pObjectCamera)
   CHECKED_DELETE(m_pTargetObject)
+}
+
+void CViewer::SetMode(EModes _eMode)
+{
+  int l_iPreviousMode = m_iMode;
+  m_iMode = _eMode;
+
+  if(l_iPreviousMode != m_iMode)
+    InitMode();
 }
 
 void CViewer::InitMode()
@@ -173,50 +184,48 @@ void CViewer::InitFreeMode()
 
 void CViewer::InitMeshMode()
 {
-  CORE->GetLightManager()->SetLightsEnabled(false);
-
-  if(m_vMeshes.size() == 0)
+  if(m_vMeshes.size() != 0)
   {
+    CORE->GetLightManager()->SetLightsEnabled(false);
+
+    m_pTargetObject->SetPitch(0.0f);
+    m_pTargetObject->SetYaw(0.0f);
+
+    if(m_pObjectModeLight)
+    {
+      CORE->GetLightManager()->SetAmbientLight(Vect3f(0.0f,0.0f,0.0f));
+      m_pObjectModeLight->SetActive(true);
+    }else{
+
+    }
+
+  
+    FocusCurrentMesh();
+  }else
     SetNextMode();
-    return;
-  }
-
-  m_pTargetObject->SetPitch(0.0f);
-  m_pTargetObject->SetYaw(0.0f);
-
-  if(m_pObjectModeLight)
-  {
-    CORE->GetLightManager()->SetAmbientLight(Vect3f(0.0f,0.0f,0.0f));
-    m_pObjectModeLight->SetActive(true);
-  }else{
-
-  }
-
-  FocusCurrentMesh();
 }
 
 void CViewer::InitAnimatedMode()
 {
-  CORE->GetLightManager()->SetLightsEnabled(false);
-
-  if(m_vAnimatedModels.size() == 0)
+  if(m_vAnimatedModels.size() != 0)
   {
+    CORE->GetLightManager()->SetLightsEnabled(false);
+
+    if(m_pObjectModeLight)
+    {
+      CORE->GetLightManager()->SetAmbientLight(Vect3f(0.0f,0.0f,0.0f));
+      m_pObjectModeLight->SetActive(true);
+    }else{
+
+    }
+
+    m_pTargetObject->SetPitch(0.0f);
+    m_pTargetObject->SetYaw(0.0f);
+
+    FocusCurrentAnimatedModel();
+
+  }else
     SetNextMode();
-    return;
-  }
-
-  if(m_pObjectModeLight)
-  {
-    CORE->GetLightManager()->SetAmbientLight(Vect3f(0.0f,0.0f,0.0f));
-    m_pObjectModeLight->SetActive(true);
-  }else{
-
-  }
-
-  m_pTargetObject->SetPitch(0.0f);
-  m_pTargetObject->SetYaw(0.0f);
-
-  FocusCurrentAnimatedModel();
 }
 
 void CViewer::ProcessFreeMode(const float _fElapsedTime,const Vect3i& _vMouseDelta)
@@ -276,7 +285,7 @@ void CViewer::ProcessMeshMode(const float _fElapsedTime,const Vect3i& _vMouseDel
 
   UpdateCamera(l_fDeltaPitch,l_fDeltaYaw);
 
-  if(m_pObjectModeLight)
+  if(m_vMeshes.size() != 0 && m_pObjectModeLight)
   {
     m_pObjectModeLight->SetPosition(m_pObjectCamera->GetEye());
     m_pObjectModeLight->SetDirection(m_pObjectCamera->GetDirection());
@@ -290,7 +299,7 @@ void CViewer::ProcessAnimatedMode(const float _fElapsedTime,const Vect3i& _vMous
 
   UpdateCamera(l_fDeltaPitch,l_fDeltaYaw);
 
-  if(m_pObjectModeLight)
+  if(m_vAnimatedModels.size() != 0 && m_pObjectModeLight)
   {
     m_pObjectModeLight->SetPosition(m_pObjectCamera->GetEye());
     m_pObjectModeLight->SetDirection(m_pObjectCamera->GetDirection());
@@ -299,18 +308,21 @@ void CViewer::ProcessAnimatedMode(const float _fElapsedTime,const Vect3i& _vMous
 
 void CViewer::Update(const float _fElapsedTime,const Vect3i& _vMouseDelta)
 {
-  switch(m_iMode) {
-  case FREE_MODE:
-    ProcessFreeMode(_fElapsedTime,_vMouseDelta);
-    break;
-  case MESH_MODE:
-    ProcessMeshMode(_fElapsedTime,_vMouseDelta);
-    break;
-  case ANIMATED_MODE:
-    ProcessAnimatedMode(_fElapsedTime,_vMouseDelta);
-    break;
-  default:
-    break;
+  if(m_bViewMode)
+  {
+    switch(m_iMode) {
+    case FREE_MODE:
+      ProcessFreeMode(_fElapsedTime,_vMouseDelta);
+      break;
+    case MESH_MODE:
+      ProcessMeshMode(_fElapsedTime,_vMouseDelta);
+      break;
+    case ANIMATED_MODE:
+      ProcessAnimatedMode(_fElapsedTime,_vMouseDelta);
+      break;
+    default:
+      break;
+    }
   }
 
   ResetActions();
@@ -466,36 +478,42 @@ void CViewer::DecreaseZoom()
 
 void CViewer::SetNextAnimation()
 {
-  CRenderableAnimatedInstanceModel* l_pRenderModel = (CRenderableAnimatedInstanceModel*)(*m_itCurrentAnimated);
-  int l_iNumAnimations = l_pRenderModel->GetAnimatedInstanceModel()->GetAnimationCount();
-  int l_iCurrentCycle = l_pRenderModel->GetAnimatedInstanceModel()->GetCurrentCycle();
-
-  l_iCurrentCycle++;
-
-  if(l_iCurrentCycle >= l_iNumAnimations)
+  if(m_vAnimatedModels.size() != 0)
   {
-    l_iCurrentCycle = 0;
-  }
+    CRenderableAnimatedInstanceModel* l_pRenderModel = (CRenderableAnimatedInstanceModel*)(*m_itCurrentAnimated);
+    int l_iNumAnimations = l_pRenderModel->GetAnimatedInstanceModel()->GetAnimationCount();
+    int l_iCurrentCycle = l_pRenderModel->GetAnimatedInstanceModel()->GetCurrentCycle();
 
-  l_pRenderModel->GetAnimatedInstanceModel()->ClearCycle(0.0f);
-  l_pRenderModel->GetAnimatedInstanceModel()->BlendCycle(l_iCurrentCycle,0.0f);
+    l_iCurrentCycle++;
+
+    if(l_iCurrentCycle >= l_iNumAnimations)
+    {
+      l_iCurrentCycle = 0;
+    }
+
+    l_pRenderModel->GetAnimatedInstanceModel()->ClearCycle(0.0f);
+    l_pRenderModel->GetAnimatedInstanceModel()->BlendCycle(l_iCurrentCycle,0.0f);
+  }
 }
 
 void CViewer::SetPrevAnimation()
 {
-  CRenderableAnimatedInstanceModel* l_pRenderModel = (CRenderableAnimatedInstanceModel*)(*m_itCurrentAnimated);
-  int l_iNumAnimations = l_pRenderModel->GetAnimatedInstanceModel()->GetAnimationCount();
-  int l_iCurrentCycle = l_pRenderModel->GetAnimatedInstanceModel()->GetCurrentCycle();
-
-  l_iCurrentCycle--;
-
-  if(l_iCurrentCycle < 0)
+  if(m_vAnimatedModels.size() != 0)
   {
-    l_iCurrentCycle = l_iNumAnimations-1;
-  }
+    CRenderableAnimatedInstanceModel* l_pRenderModel = (CRenderableAnimatedInstanceModel*)(*m_itCurrentAnimated);
+    int l_iNumAnimations = l_pRenderModel->GetAnimatedInstanceModel()->GetAnimationCount();
+    int l_iCurrentCycle = l_pRenderModel->GetAnimatedInstanceModel()->GetCurrentCycle();
 
-  l_pRenderModel->GetAnimatedInstanceModel()->ClearCycle(0.0f);
-  l_pRenderModel->GetAnimatedInstanceModel()->BlendCycle(l_iCurrentCycle,0.0f);
+    l_iCurrentCycle--;
+
+    if(l_iCurrentCycle < 0)
+    {
+      l_iCurrentCycle = l_iNumAnimations-1;
+    }
+
+    l_pRenderModel->GetAnimatedInstanceModel()->ClearCycle(0.0f);
+    l_pRenderModel->GetAnimatedInstanceModel()->BlendCycle(l_iCurrentCycle,0.0f);
+  }
 }
 
 void CViewer::ToggleNormalRendering()
@@ -508,16 +526,22 @@ void CViewer::ToggleShowBoxes()
   m_bShowBoxes = !m_bShowBoxes;
 
   CORE->GetRenderableObjectsManager()->SetAllRenderBoundingBox(m_bShowBoxes);
-  //CORE->GetRenderableObjectsManager()->SetAllRenderBoundingSphere(m_bShowBoxes);
+}
+
+void CViewer::ToggleShowSpheres()
+{
+  m_bShowSpheres = !m_bShowSpheres;
+
+  CORE->GetRenderableObjectsManager()->SetAllRenderBoundingSphere(m_bShowSpheres);
 }
 
 bool CViewer::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
 {
-  if(strcmp(_pcAction, "ChangeMode") == 0)
-  {
-    SetNextMode(); 
-    return true;
-  }
+  //if(strcmp(_pcAction, "ChangeMode") == 0)
+  //{
+  //  SetNextMode(); 
+  //  return true;
+  //}
 
   if(strcmp(_pcAction, "ShowAjuda") == 0)
   {
@@ -525,11 +549,11 @@ bool CViewer::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pc
     return true;
   }
 
-  if(strcmp(_pcAction, "ToggleShowBoxes") == 0)
-  {
-    ToggleShowBoxes();
-    return true;
-  }
+  //if(strcmp(_pcAction, "ToggleShowBoxes") == 0)
+  //{
+  //  ToggleShowBoxes();
+  //  return true;
+  //}
 
   switch(m_iMode) {
   case FREE_MODE:
@@ -676,30 +700,30 @@ bool CViewer::ExecuteAnimatedModeAction(float _fDeltaSeconds, float _fDelta, con
     return true;
   }
 
-  if(strcmp(_pcAction, "CanviObjecteDRETA") == 0)
-  {
-    SelectNextAnimatedModel();
-    return true;
-  }
+  //if(strcmp(_pcAction, "CanviObjecteDRETA") == 0)
+  //{
+  //  SelectNextAnimatedModel();
+  //  return true;
+  //}
 
-  if(strcmp(_pcAction, "CanviObjecteESQUERRA") == 0)
-  {
-    SelectPrevAnimatedModel();
-    return true;
-  }
+  //if(strcmp(_pcAction, "CanviObjecteESQUERRA") == 0)
+  //{
+  //  SelectPrevAnimatedModel();
+  //  return true;
+  //}
 
-  if(strcmp(_pcAction, "CanviAnimacioUP") == 0)
-  {
-    SetNextAnimation();
-    return true;
-  }
+  //if(strcmp(_pcAction, "CanviAnimacioUP") == 0)
+  //{
+  //  SetNextAnimation();
+  //  return true;
+  //}
 
 
-  if(strcmp(_pcAction, "CanviAnimacioDOWN") == 0)
-  {
-    SetPrevAnimation();
-    return true;
-  }
+  //if(strcmp(_pcAction, "CanviAnimacioDOWN") == 0)
+  //{
+  //  SetPrevAnimation();
+  //  return true;
+  //}
 
   return false;
 }

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Config>
-	<RenderManager resolution="800 600" position="50 5" fullscreenMode="false"/>
+	<RenderManager resolution="1024 768" position="50 5" fullscreenMode="false"/>
   
 	<StaticMeshManager>
-    <StaticMeshes xml="Data/XML/StaticMeshes.xml"/>
+    <StaticMeshes xml="Data/Levels/Laboratori/XML/StaticMeshes.xml"/>
   </StaticMeshManager>
   
 	<AnimatedModelManager>
-    <AnimatedModels xml="Data/XML/AnimatedModels.xml"/>
+    <AnimatedModels xml="Data/Levels/Laboratori/XML/AnimatedModels.xml"/>
   </AnimatedModelManager>
     
 	<EffectManager xml="Data/XML/Effects.xml"/>
@@ -18,12 +18,12 @@
 		<Language languageXML="./Data/Language/english.xml"/>
 	</Languages>
 	<InputManager exclusiveMouse="true"/>
-	<ActionToInput file="./Data/XML/actions.xml"/>
+	<ActionToInput file="./Data/XML/actions_viewer.xml"/>
 
 	<!-- RenderableObjectsManager file="Data/XML/RenderableObjects.xml" -->
 	<!-- RenderableObjectsManager file="Data/Levels/Level -2/XML/RenderableObjects.xml" -->
 	<!--RenderableObjectsManager file="Data/Levels/Proves/XML/RenderableObjects.xml"-->
-	<RenderableObjectsManager file="Data/XML/RenderableObjects.xml">
+	<RenderableObjectsManager file="Data/Levels/Laboratori/XML/RenderableObjects.xml">
 		<!--
     <Level xml="Data/XML/RenderableObjects.xml"/>
     <Level xml="Data/Levels/Level -1/XML/RenderableObjects.xml"/>
@@ -38,6 +38,8 @@
 	<SceneEffectManager file="Data/XML/SceneEffects_Viewer.xml"/>
   
   <ScriptManager file="Data/XML/Lua_viewer.xml"/>
+
+  <GUIManager xml="Data/XML/GUIViewer.xml" start="Mesh.xml" render_mouse="true"/>
   
 	<!--<AnimatedModelManager file="Data/XML/AnimatedModels.xml">
   </AnimatedModelManager>-->
