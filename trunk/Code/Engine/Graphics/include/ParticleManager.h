@@ -31,6 +31,7 @@ public:
   ~CParticleManager(){Done();};
   //bool Load(const SPaticleManagerParams& _params);
   bool Load(const string& _szFileName);
+  vector<CParticleEmitter> GetVectorParticulas() const {return m_vEmitterParticle;};
  
  
 
@@ -40,7 +41,7 @@ public:
 
 private:
   string m_szFileName;
-	 vector<CParticleEmitter*> m_vEmitterParticle;
+	 vector<CParticleEmitter> m_vEmitterParticle;
 
 };
 #endif

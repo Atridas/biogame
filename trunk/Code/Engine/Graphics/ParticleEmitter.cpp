@@ -40,8 +40,22 @@ m_Particles(NUMPARTICLES)
   m_fNumNewPartsExcess = 0.0f;
 }
 
-bool CParticleEmitter::SetAttributes(SParticleInfo* _info) 
+bool CParticleEmitter::SetAttributes(SParticleInfo* _info, vector<CParticleEmitter> _vVectorAtributs) 
 {
+  CParticleEmitter l_pParticleEmitter;
+  
+  l_pParticleEmitter.m_szId  = _info->m_szId;
+  l_pParticleEmitter.m_fMinEmitRate = _info->m_fMinEmitRate;
+  l_pParticleEmitter.m_fMaxEmitRate = _info->m_fMaxEmitRate;
+  l_pParticleEmitter.m_Color1 = _info->m_Color1;
+  l_pParticleEmitter.m_Color2 = _info->m_Color2;
+  l_pParticleEmitter.m_fMinSize = _info->m_fMinSize;
+  l_pParticleEmitter.m_fMaxSize = _info->m_fMaxSize;
+  l_pParticleEmitter.m_vSpawnDir1 = _info->m_vSpawnDir1;
+  l_pParticleEmitter.m_vSpawnDir2 = _info->m_vSpawnDir2;
+  
+ _vVectorAtributs.push_back(l_pParticleEmitter);
+
   return true;
 }
 /*
@@ -112,8 +126,11 @@ bool CParticleEmitter::Load(CXMLTreeNode& l_XMLParticle)
   return true;
 
 }*/
-void CParticleEmitter::Update(float fElapsedTime)
+void CParticleEmitter::Update(float fElapsedTime,CParticleEmitter* _EmitterParticle)
 {
+
+ CParticleEmitter* l_PropertiesEmitter2= _EmitterParticle;
+ CParticleEmitter l_PropertiesEmitter;
   //1.] Updatejar les particules i en cas de que s'hagi acabat el seu temps de vida, posar 
   //    en el vector que la posicio esta lliure
   CParticle* particula = 0;
@@ -151,19 +168,19 @@ void CParticleEmitter::Update(float fElapsedTime)
       part->SetLifeTimer(5.0f);
   
       // determine a random vector between dir1 and dir2
-      float fRandX = RandomNumber(m_vSpawnDir1.x, m_vSpawnDir2.x);
-      float fRandY = RandomNumber(m_vSpawnDir1.y, m_vSpawnDir2.y);
-      float fRandZ = RandomNumber(m_vSpawnDir1.z, m_vSpawnDir2.z);
+      float fRandX = RandomNumber(l_PropertiesEmitter.m_vSpawnDir1.x, l_PropertiesEmitter.m_vSpawnDir2.x);
+      float fRandY = RandomNumber(l_PropertiesEmitter.m_vSpawnDir1.y, l_PropertiesEmitter.m_vSpawnDir2.y);
+      float fRandZ = RandomNumber(l_PropertiesEmitter.m_vSpawnDir1.z, l_PropertiesEmitter.m_vSpawnDir2.z);
 
     
       part->SetDir(D3DXVECTOR3(fRandX, fRandY, fRandZ));
-      part->SetPos(m_vPos);
+      part->SetPos(l_PropertiesEmitter.m_vPos);
     
                       
-      float fRandR = RandomNumber(m_Color1.r, m_Color2.r);
-      float fRandG = RandomNumber(m_Color1.g, m_Color2.g);
-      float fRandB = RandomNumber(m_Color1.b, m_Color2.b);
-      float fRandA = RandomNumber(m_Color1.a, m_Color2.a);
+      float fRandR = RandomNumber(l_PropertiesEmitter.m_Color1.r, l_PropertiesEmitter.m_Color2.r);
+      float fRandG = RandomNumber(l_PropertiesEmitter.m_Color1.g, l_PropertiesEmitter.m_Color2.g);
+      float fRandB = RandomNumber(l_PropertiesEmitter.m_Color1.b, l_PropertiesEmitter.m_Color2.b);
+      float fRandA = RandomNumber(l_PropertiesEmitter.m_Color1.a, l_PropertiesEmitter.m_Color2.a);
                       
     
       part->SetColor(D3DXCOLOR(fRandR, fRandG, fRandB, fRandA));

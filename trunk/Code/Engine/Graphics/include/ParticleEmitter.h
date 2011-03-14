@@ -11,6 +11,7 @@
 #include "RenderManager.h"
 #include <XML/XMLTreeNode.h>
 
+
 struct SParticleInfo;
 
 
@@ -21,9 +22,10 @@ public:
   CParticleEmitter();
   ~CParticleEmitter() {Done();};
 
-  bool SetAttributes(SParticleInfo* _info);
+  
 
   //  Set
+  void SetName              (string _szName)                        {m_szName = _szName;};
   void SetId                (string _szId)                          {m_szId = _szId;};
   void SetPosition          (D3DXVECTOR3& _vPos)                    {m_vPos=_vPos;};
   void SetMinEmitRate       (float _fMinEmitRate)                   {m_fMinEmitRate = _fMinEmitRate;};
@@ -40,6 +42,7 @@ public:
 
 
   //Get
+  string                          GetName             () const {return m_szName;};
   string                          GetId               () const {return m_szId;};
   const D3DXVECTOR3&              GetPosition         () const {return m_vPos;};
   float                           GetMinEmitRate      () const {return m_fMinEmitRate;};
@@ -55,18 +58,21 @@ public:
   const LPDIRECT3DVERTEXBUFFER9   GetParticle         () const {return m_vbParticles;};
 
 
-  void                    Update              (float fElapsedTime);
+  void                    Update              (float fElapsedTime, CParticleEmitter* _EmitterParticle);
   void                    Init                (CRenderManager* rm, const string& _texureFileName);
   void                    Release             ();
   void                    Render              (CRenderManager* _pRM);
+  bool                    SetAttributes       (SParticleInfo* _info, vector<CParticleEmitter> _vVectorAtributs);
+
  // bool                    Load                (CXMLTreeNode& l_XMLParticle);
  // void                    Init                (CXMLTreeNode& _XMLParams);
   
-
+  
 private:
 
   
-  string                                    m_szFileName;
+  //string                                    m_szFileName;
+  string                                    m_szName;
   string                                    m_szId;
   D3DXVECTOR3                               m_vPos;
   float                                     m_fMinEmitRate;
@@ -81,6 +87,7 @@ private:
   LPDIRECT3DTEXTURE9                        m_pTexParticle;
   LPDIRECT3DVERTEXBUFFER9                   m_vbParticles;
   CRecyclingArray<CParticle>                m_Particles;
+  
   
 };
 
