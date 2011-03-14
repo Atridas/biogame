@@ -8,6 +8,7 @@
 //Forward declarations---------------------
 class CPhysicActor;
 class CRenderableObject;
+class CPhysicUserData;
 //-----------------------------------------
 
 class CGameObject:  
@@ -15,11 +16,12 @@ class CGameObject:
   public CBaseControl
 {
 public:
-  CGameObject(string _szName) : m_pRenderableObject(0), m_pPhysXActor(0),CNamed(_szName) {};
+  CGameObject(string _szName) : m_pRenderableObject(0), m_pPhysXActor(0),CNamed(_szName),m_pUserData(0) {};
   ~CGameObject(){Done();};
 
   //Set Functions
   void                    SetRenderableObject(CRenderableObject* _pRO)  {m_pRenderableObject = _pRO;};
+  
   void                    SetPhysXActor(CPhysicActor* _pPA)             {m_pPhysXActor = _pPA;};
 
   //Get Functions
@@ -35,5 +37,6 @@ protected:
 private:
   CRenderableObject*          m_pRenderableObject;
   CPhysicActor*               m_pPhysXActor;
+  CPhysicUserData*            m_pUserData;
 };
 
