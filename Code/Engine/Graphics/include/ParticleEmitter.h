@@ -11,6 +11,7 @@
 #include "RenderManager.h"
 #include <XML/XMLTreeNode.h>
 
+struct SParticleInfo;
 
 struct SParticleInfo;
 
@@ -20,7 +21,7 @@ class CParticleEmitter:
 {
 public:
   CParticleEmitter();
-  ~CParticleEmitter() {Done();};
+  ~CParticleEmitter(){Done();};
 
   
 
@@ -36,7 +37,7 @@ public:
   void SetMaxSize           (float _fMaxSize)                       {m_fMaxSize = _fMaxSize;};
   void SetSpawnDir1         (D3DXVECTOR3& _vSpawnDir1)              {m_vSpawnDir1 = _vSpawnDir1;};
   void SetSpawnDir2         (D3DXVECTOR3& _vSpawnDir2)              {m_vSpawnDir2 = _vSpawnDir2;};
-  void SetTexParticle       (LPDIRECT3DTEXTURE9& _pTexParticle)     {m_pTexParticle = _pTexParticle;};
+  void SetTexParticle       (CTexture* _pTexParticle)               {m_pTexParticle = _pTexParticle;};
   void SetNumNewPartsExcess (float _fNumNewPartsExcess)             {m_fNumNewPartsExcess = _fNumNewPartsExcess;};
   void SetParticle          (LPDIRECT3DVERTEXBUFFER9 _vbParticles)  {m_vbParticles = _vbParticles;};
 
@@ -53,16 +54,16 @@ public:
   float                           GetMaxSize          () const {return m_fMaxSize;};
   const D3DXVECTOR3&              GetSpawnDir1        () const {return m_vSpawnDir1;};
   const D3DXVECTOR3&              GetSpawnDir2        () const {return m_vSpawnDir2;};
-  const LPDIRECT3DTEXTURE9        GetTexParticle      () const {return m_pTexParticle;};        
+  CTexture*                       GetTexParticle      () const {return m_pTexParticle;};        
   float                           GetNumNewPartsExcess() const {return m_fNumNewPartsExcess;};
   const LPDIRECT3DVERTEXBUFFER9   GetParticle         () const {return m_vbParticles;};
 
 
-  void                    Update              (float fElapsedTime, CParticleEmitter* _EmitterParticle);
+  void                    Update              (float fElapsedTime);
   void                    Init                (CRenderManager* rm, const string& _texureFileName);
   void                    Release             ();
   void                    Render              (CRenderManager* _pRM);
-  bool                    SetAttributes       (SParticleInfo* _info, vector<CParticleEmitter> _vVectorAtributs);
+  void                    SetAttributes       (SParticleInfo* _info);
 
  // bool                    Load                (CXMLTreeNode& l_XMLParticle);
  // void                    Init                (CXMLTreeNode& _XMLParams);
@@ -84,7 +85,7 @@ private:
   D3DXVECTOR3                               m_vSpawnDir1;
   D3DXVECTOR3                               m_vSpawnDir2;
   float                                     m_fNumNewPartsExcess;
-  LPDIRECT3DTEXTURE9                        m_pTexParticle;
+  CTexture*                                 m_pTexParticle;
   LPDIRECT3DVERTEXBUFFER9                   m_vbParticles;
   CRecyclingArray<CParticle>                m_Particles;
   

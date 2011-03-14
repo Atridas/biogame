@@ -69,7 +69,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
     SetOk(false);
   }
 
-  if(!m_pParticleManager->Load(_InitParams.PaticleManagerParams.szFile))
+ if(!m_pParticleManager->Load(_InitParams.PaticleManagerParams.szFile))
   {
     LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al manager de particulas");
     SetOk(false);
@@ -149,4 +149,5 @@ void CCore::Update()
   }
   m_pRenderableObjectsManager->Update(l_fElapsedTime);
   m_pPhysicsManager->Update(l_fElapsedTime);
+  m_pParticleManager->Update(l_fElapsedTime);
 }

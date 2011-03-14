@@ -40,23 +40,17 @@ m_Particles(NUMPARTICLES)
   m_fNumNewPartsExcess = 0.0f;
 }
 
-bool CParticleEmitter::SetAttributes(SParticleInfo* _info, vector<CParticleEmitter> _vVectorAtributs) 
+void CParticleEmitter::SetAttributes(SParticleInfo* _info) 
 {
-  CParticleEmitter l_pParticleEmitter;
-  
-  l_pParticleEmitter.m_szId  = _info->m_szId;
-  l_pParticleEmitter.m_fMinEmitRate = _info->m_fMinEmitRate;
-  l_pParticleEmitter.m_fMaxEmitRate = _info->m_fMaxEmitRate;
-  l_pParticleEmitter.m_Color1 = _info->m_Color1;
-  l_pParticleEmitter.m_Color2 = _info->m_Color2;
-  l_pParticleEmitter.m_fMinSize = _info->m_fMinSize;
-  l_pParticleEmitter.m_fMaxSize = _info->m_fMaxSize;
-  l_pParticleEmitter.m_vSpawnDir1 = _info->m_vSpawnDir1;
-  l_pParticleEmitter.m_vSpawnDir2 = _info->m_vSpawnDir2;
-  
- _vVectorAtributs.push_back(l_pParticleEmitter);
-
-  return true;
+  m_szId  = _info->m_szId;
+  m_fMinEmitRate = _info->m_fMinEmitRate;
+  m_fMaxEmitRate = _info->m_fMaxEmitRate;
+  m_Color1 = _info->m_Color1;
+  m_Color2 = _info->m_Color2;
+  m_fMinSize = _info->m_fMinSize;
+  m_fMaxSize = _info->m_fMaxSize;
+  m_vSpawnDir1 = _info->m_vSpawnDir1;
+  m_vSpawnDir2 = _info->m_vSpawnDir2;
 }
 /*
 void CParticleEmitter::Init(CXMLTreeNode& l_XMLParticle)
@@ -126,11 +120,9 @@ bool CParticleEmitter::Load(CXMLTreeNode& l_XMLParticle)
   return true;
 
 }*/
-void CParticleEmitter::Update(float fElapsedTime,CParticleEmitter* _EmitterParticle)
+void CParticleEmitter::Update(float fElapsedTime)
 {
 
- CParticleEmitter* l_PropertiesEmitter2= _EmitterParticle;
- CParticleEmitter l_PropertiesEmitter;
   //1.] Updatejar les particules i en cas de que s'hagi acabat el seu temps de vida, posar 
   //    en el vector que la posicio esta lliure
   CParticle* particula = 0;
@@ -168,19 +160,19 @@ void CParticleEmitter::Update(float fElapsedTime,CParticleEmitter* _EmitterParti
       part->SetLifeTimer(5.0f);
   
       // determine a random vector between dir1 and dir2
-      float fRandX = RandomNumber(l_PropertiesEmitter.m_vSpawnDir1.x, l_PropertiesEmitter.m_vSpawnDir2.x);
-      float fRandY = RandomNumber(l_PropertiesEmitter.m_vSpawnDir1.y, l_PropertiesEmitter.m_vSpawnDir2.y);
-      float fRandZ = RandomNumber(l_PropertiesEmitter.m_vSpawnDir1.z, l_PropertiesEmitter.m_vSpawnDir2.z);
+      float fRandX = RandomNumber(m_vSpawnDir1.x, m_vSpawnDir2.x);
+      float fRandY = RandomNumber(m_vSpawnDir1.y, m_vSpawnDir2.y);
+      float fRandZ = RandomNumber(m_vSpawnDir1.z, m_vSpawnDir2.z);
 
     
       part->SetDir(D3DXVECTOR3(fRandX, fRandY, fRandZ));
-      part->SetPos(l_PropertiesEmitter.m_vPos);
+      part->SetPos(m_vPos);
     
                       
-      float fRandR = RandomNumber(l_PropertiesEmitter.m_Color1.r, l_PropertiesEmitter.m_Color2.r);
-      float fRandG = RandomNumber(l_PropertiesEmitter.m_Color1.g, l_PropertiesEmitter.m_Color2.g);
-      float fRandB = RandomNumber(l_PropertiesEmitter.m_Color1.b, l_PropertiesEmitter.m_Color2.b);
-      float fRandA = RandomNumber(l_PropertiesEmitter.m_Color1.a, l_PropertiesEmitter.m_Color2.a);
+      float fRandR = RandomNumber(m_Color1.r, m_Color2.r);
+      float fRandG = RandomNumber(m_Color1.g, m_Color2.g);
+      float fRandB = RandomNumber(m_Color1.b, m_Color2.b);
+      float fRandA = RandomNumber(m_Color1.a, m_Color2.a);
                       
     
       part->SetColor(D3DXCOLOR(fRandR, fRandG, fRandB, fRandA));
@@ -200,7 +192,7 @@ void CParticleEmitter::Init(CRenderManager* rm, const string& _texureFileName)
                                     D3DPOOL_DEFAULT, 
                                     &m_vbParticles,NULL);
 
-  m_pTexParticle = CORE->GetTextureManager()->GetResource(_texureFileName)->GetD3DTexture();
+  m_pTexParticle = CORE->GetTextureManager()->GetResource(_texureFileName);
   
   
   SetOk(true);
@@ -210,7 +202,6 @@ void CParticleEmitter::Release()
 {
 
   CHECKED_RELEASE(m_vbParticles);
-  CHECKED_RELEASE(m_pTexParticle);
 
   
 
@@ -252,7 +243,8 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
   l_pd3dDevice->SetStreamSource( 0, m_vbParticles,0, sizeof(VERTEX_PARTICLE));
   l_pd3dDevice->SetFVF( VERTEX_PARTICLE::GetFVF() );
 
-  l_pd3dDevice->SetTexture(0, m_pTexParticle);
+  //l_pd3dDevice->SetTexture(0, m_pTexParticle);
+  m_pTexParticle->Activate(0);
 
   VERTEX_PARTICLE *pVertices;
  

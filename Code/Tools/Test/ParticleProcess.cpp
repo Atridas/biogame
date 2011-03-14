@@ -28,6 +28,7 @@
 #include "SpotLight.h"
 #include "InstanceMesh.h"
 #include "GameObject.h"
+#include "ParticleManager.h"
 
 
 
@@ -38,7 +39,7 @@ bool CParticleProcess::Init()
   
   m_pObject->SetPosition(Vect3f(-6,1.7f,0));
 
-  m_pObjectBot = CORE->GetRenderableObjectsManager()->GetResource("bot");
+  //m_pObjectBot = CORE->GetRenderableObjectsManager()->GetResource("bot");
 
   m_iState = 0;
 
@@ -65,7 +66,7 @@ bool CParticleProcess::Init()
   
   if(l_Spot)
   {
-    l_Spot->SetDirection(m_pObjectBot->GetPosition());
+    //l_Spot->SetDirection(m_pObjectBot->GetPosition());
     l_Spot->SetActive(true);
   }
   m_bRenderLights = false;
@@ -88,7 +89,7 @@ void CParticleProcess::Release()
 
 void CParticleProcess::Update(float _fElapsedTime)
 {
-  if(m_pObject && m_pObjectBot) 
+  if(m_pObject)// && m_pObjectBot) 
   {
     //Actualitze el pitch i el yaw segons els delta del mouse
     float l_fPitch, l_fYaw;
@@ -99,18 +100,18 @@ void CParticleProcess::Update(float _fElapsedTime)
     l_fYaw = m_pObject->GetYaw();
   
     m_pObject->SetYaw(l_fYaw-l_vVec.x*_fElapsedTime);
-    m_pObjectBot->SetYaw(m_pObject->GetYaw()-FLOAT_PI_VALUE/2.0f);
+    //m_pObjectBot->SetYaw(m_pObject->GetYaw()-FLOAT_PI_VALUE/2.0f);
 
     l_fPitch -= l_vVec.y*_fElapsedTime;
     if(l_fPitch < - FLOAT_PI_VALUE/3) l_fPitch = - FLOAT_PI_VALUE/3;
     if(l_fPitch >   FLOAT_PI_VALUE/3) l_fPitch =   FLOAT_PI_VALUE/3;
     m_pObject->SetPitch(l_fPitch);
 
-    m_pObjectBot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObjectBot->GetPosition().y, m_pObject->GetPosition().z));
+    //m_pObjectBot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObjectBot->GetPosition().y, m_pObject->GetPosition().z));
   
     l_fPitch = m_pObject->GetPitch();
     //l_fPitch = l_fPitch+FLOAT_PI_VALUE/2;
-    l_fYaw = m_pObjectBot->GetYaw();
+    //l_fYaw = m_pObjectBot->GetYaw();
     l_fYaw = l_fYaw+FLOAT_PI_VALUE/2;
     //l_fRoll = m_pObjectBot->GetRoll();
 
@@ -126,12 +127,10 @@ void CParticleProcess::Update(float _fElapsedTime)
 
     if(m_bStateChanged)
     {
-      ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->BlendCycle(m_iState,0);
+      //((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->BlendCycle(m_iState,0);
 
       m_bStateChanged = false;
     }
-
-    m_ParticleEmitter.Update(_fElapsedTime);
   }
 }
 
@@ -142,12 +141,12 @@ void CParticleProcess::RenderScene(CRenderManager* _pRM)
   // Ensenya tot el Hangar i els seus objectas
   //CORE->GetRenderableObjectsManager()->Render(_pRM);
 
+  m_ParticleEmitter.Render(_pRM);
+
   
   _pRM->DrawGrid(30.0f,colCYAN,30,30);
    
   //_pRM->DrawPlane(10,Vect3f(0,1,0),0,colBLUE,10,10);
-
-  m_ParticleEmitter.Render(_pRM);
 }
 
 void CParticleProcess::RenderINFO(CRenderManager* _pRM)
