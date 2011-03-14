@@ -14,8 +14,7 @@
 #include <LightManager.h>
 #include "SceneEffectManager.h"
 #include "SpotLight.h"
-
-
+#include "SoundManager.h"
 #include "ScriptManager.h"
 
 #include <luabind/luabind.hpp>
@@ -106,6 +105,8 @@ void CViewer::Init()
   m_bShowSpheres = false;
 
   m_iMode = FREE_MODE;
+
+  SOUND_MANAGER->PlaySample("bgm");
 
   ResetActions();
 

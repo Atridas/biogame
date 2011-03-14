@@ -5,17 +5,18 @@
 
 #include "base.h"
 
+//TODO: Usar MapManager.
 class CSoundManager :
   public CBaseControl
 {
 public:
-  CSoundManager() : m_iMaxChannels(0),m_iMusicChannels(0) {};
+  CSoundManager() : m_iMaxChannels(0),m_iMusicChannels(0),m_iCurrentMusic(0),m_iCurrentSample(0) {};
   ~CSoundManager() {Done();};
 
-  void Init();
+  bool Init(const string& _szFile);
   void Release();
 
-  void PlaySample();
+  void PlaySample(const string& _szSample);
   void PlaySample3D();
   void PlayMusic();
   void PlayMusic3D();
@@ -31,12 +32,18 @@ private:
   struct SChannel
   {
     float m_fVolume;
-    int m_iResourceIndex;
+    unsigned long m_iResourceIndex;
+
+    SChannel(unsigned long _iResourceIndex, float _fVolume) : m_iResourceIndex(_iResourceIndex), m_fVolume(_fVolume) {};
   };
 
-  map<string,int> m_mResources;
+  unsigned long GetSample(const string& _szSample);
+
+  map<string,unsigned long> m_mResources;
   vector<SChannel> m_vChannels;
 
+  int m_iCurrentMusic;
+  int m_iCurrentSample;
   int m_iMaxChannels;
   int m_iMusicChannels;
 };

@@ -40,6 +40,8 @@
   <ScriptManager file="Data/XML/Lua_viewer.xml"/>
 
   <GUIManager xml="Data/XML/GUIViewer.xml" start="Mesh.xml" render_mouse="true"/>
+
+  <SoundManager file="Data/XML/Sound.xml"/>
   
 	<!--<AnimatedModelManager file="Data/XML/AnimatedModels.xml">
   </AnimatedModelManager>-->
