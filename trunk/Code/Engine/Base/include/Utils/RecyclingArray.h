@@ -66,8 +66,8 @@ void CRecyclingArray<T>::Init(void)
 template<class T>
 void CRecyclingArray<T>::Release(void)
 {
-  //CHECKED_DELETE_ARRAY(m_vRecyclingArray);
-//  CHECKED_DELETE_ARRAY(m_vRecyclingArrayStatus);
+  CHECKED_DELETE_ARRAY(m_vRecyclingArray);
+  CHECKED_DELETE_ARRAY(m_vRecyclingArrayStatus);
 };
 
 template<class T>
