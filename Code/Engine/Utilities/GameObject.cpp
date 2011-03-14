@@ -19,4 +19,5 @@ void  CGameObject::Init(CRenderableObject* _pRO,CPhysicActor* _pPA)
 {
   m_pRenderableObject = _pRO;
   m_pPhysXActor = _pPA;
+  m_pUserData = m_pPhysXActor->GetUserData();
 }
