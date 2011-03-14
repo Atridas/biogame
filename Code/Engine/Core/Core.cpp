@@ -102,7 +102,12 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pGUIManager->ActiveWindows(_InitParams.GUIManagerParams.szInitWindow);
   m_pGUIManager->SetVisiblePointerMouse(_InitParams.GUIManagerParams.bRenderMouse);
   m_pPhysicsManager->Init();
-  m_pSoundManager->Init();
+  
+  if(!m_pSoundManager->Init(_InitParams.SoundManagerParams.szFile))
+  {
+    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error inicialitzant SoundManager.");
+    SetOk(false);  
+  }
   
   return IsOk();
 }

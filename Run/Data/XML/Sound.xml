@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<sounds maxTracks="10" numMusicTracks="2">
+  <sound name="bgm" file="./Data/Sounds/bgm.mp3" sound3D="false" type="music" loop="true" priority="1" />  
+</sounds>
