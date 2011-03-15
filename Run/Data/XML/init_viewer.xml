@@ -3,11 +3,11 @@
 	<RenderManager resolution="1024 768" position="50 5" fullscreenMode="false"/>
   
 	<StaticMeshManager>
-    <StaticMeshes xml="Data/Levels/Laboratori/XML/StaticMeshes.xml"/>
+    <StaticMeshes xml="Data/XML/StaticMeshes.xml"/>
   </StaticMeshManager>
   
 	<AnimatedModelManager>
-    <AnimatedModels xml="Data/Levels/Laboratori/XML/AnimatedModels.xml"/>
+    <AnimatedModels xml="Data/XML/AnimatedModels.xml"/>
   </AnimatedModelManager>
     
 	<EffectManager xml="Data/XML/Effects.xml"/>
@@ -23,7 +23,7 @@
 	<!-- RenderableObjectsManager file="Data/XML/RenderableObjects.xml" -->
 	<!-- RenderableObjectsManager file="Data/Levels/Level -2/XML/RenderableObjects.xml" -->
 	<!--RenderableObjectsManager file="Data/Levels/Proves/XML/RenderableObjects.xml"-->
-	<RenderableObjectsManager file="Data/Levels/Laboratori/XML/RenderableObjects.xml">
+	<RenderableObjectsManager file="Data/XML/RenderableObjects.xml">
 		<!--
     <Level xml="Data/XML/RenderableObjects.xml"/>
     <Level xml="Data/Levels/Level -1/XML/RenderableObjects.xml"/>
