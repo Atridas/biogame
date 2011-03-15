@@ -29,7 +29,7 @@ public:
   bool  Update               (float fTimeDelta);
 
 private:
-	float		        m_fSize;
+  float           m_fSize;
   float           m_fLifetime;
   float           m_fAge;
   D3DXCOLOR       m_Color;

@@ -9,6 +9,8 @@
 #include "params.h"
 #include <Utils/MapManager.h>
 
+class CRenderManager;
+
 struct SParticleInfo
 {
   string                m_szId;
@@ -20,7 +22,7 @@ struct SParticleInfo
   float                 m_fMaxSize;
   D3DXVECTOR3           m_vSpawnDir1;
   D3DXVECTOR3           m_vSpawnDir2;
-  LPDIRECT3DTEXTURE9    m_pTexParticle;
+  CTexture*             m_pTexParticle;
   
 };
 
@@ -32,6 +34,7 @@ public:
   //bool Load(const SPaticleManagerParams& _params);
   bool Load(const string& _szFileName);
   void Update(const float _fElapsedTime);
+  void Render(CRenderManager* _pRM);
   //vector<CParticleEmitter*> GetVectorParticulas() const {return m_vEmitterParticle;};
  
  

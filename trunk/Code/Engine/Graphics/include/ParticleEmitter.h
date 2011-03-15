@@ -13,8 +13,6 @@
 
 struct SParticleInfo;
 
-struct SParticleInfo;
-
 
 class CParticleEmitter:
   public CBaseControl
