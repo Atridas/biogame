@@ -19,20 +19,6 @@ bool CSoundManager::Init(const string& _szFile)
     return false;
   }
 
-  m_iMaxChannels = l_XMLSounds.GetIntProperty("maxTracks",10);
-  m_iMusicChannels = l_XMLSounds.GetIntProperty("numMusicTracks",2);
-
-  if(m_iMusicChannels >= m_iMaxChannels)
-  {
-    LOGGER->AddNewLog(ELL_ERROR,"CSoundManager::Init MaxTracks ha de ser major a NumMusicTracks");
-    SetOk(false);
-    return IsOk();
-  }
-
-  m_iCurrentSample = m_iMusicChannels;
-
-  m_vChannels.resize(m_iMaxChannels,SChannel(0,0.5f));
-
   int l_iNumSounds = l_XMLSounds.GetNumChildren();
   for(int i = 0; i < l_iNumSounds; i++)
   {
@@ -75,14 +61,27 @@ bool CSoundManager::Init(const string& _szFile)
     if(l_szType.compare("music") == 0)
     {
       l_iStream = BASS_StreamCreateFile(false,l_szFile.c_str(), 0, 0, l_iMask);
-    }else{
-      l_iStream = BASS_SampleLoad(false,l_szFile.c_str(), 0, 0, 1, l_iMask);
+      if(l_iStream)
+      {
+        m_vMusicChannels.push_back(SMusicChannel(l_iStream,1.0f));
+      }else{
+        LOGGER->AddNewLog(ELL_WARNING,"CSoundManager::Init error al crear stream: \"%s\"", l_szFile.c_str());
+      }
+    }
+    
+    if(l_szType.compare("sample") == 0){
+      int l_iMaxSamples = l_XMLSound.GetIntProperty("maxSamples",1);
+      l_iStream = BASS_SampleLoad(false,l_szFile.c_str(), 0, 0, l_iMaxSamples, l_iMask);
+      if(l_iStream)
+      {
+
+      }else{
+        LOGGER->AddNewLog(ELL_WARNING,"CSoundManager::Init error al crear sample: \"%s\"", l_szFile.c_str());
+      }
     }
 
-    if(!l_iStream)
+    if(l_iStream)
     {
-      LOGGER->AddNewLog(ELL_WARNING,"CSoundManager::Init error al crear stream: \"%s\"", l_szFile.c_str());
-    }else{
       m_mResources[l_szName] = l_iStream;
     }
 
@@ -98,7 +97,6 @@ void CSoundManager::Release()
   BASS_Stop();
   BASS_Free();
 
-  m_vChannels.clear();
   m_mResources.clear();
 }
 
@@ -114,22 +112,18 @@ HSTREAM CSoundManager::GetSample(const string& _szSample)
 
 void CSoundManager::PlaySample(const string& _szSample)
 {
-  HSTREAM l_pSample = GetSample(_szSample);
+  HSTREAM l_Sample = GetSample(_szSample);
 
-  if(l_pSample != 0)
+  if(l_Sample != 0)
   {
-    m_vChannels[m_iCurrentSample].m_iResourceIndex = l_pSample;
+    HCHANNEL l_Channel = BASS_SampleGetChannel(l_Sample,false);
 
-    BASS_SampleGetChannel(l_pSample,false);
-    BASS_ChannelSetAttribute(l_pSample, BASS_ATTRIB_VOL, m_vChannels[m_iCurrentSample].m_fVolume);
-    BASS_ChannelPlay(l_pSample,false);
-
-    m_iCurrentSample++;
-
-    if(m_iCurrentSample >= m_iMaxChannels)
-      m_iCurrentSample = m_iMusicChannels;
+    if(l_Channel)
+    {
+      BASS_ChannelSetAttribute(l_Channel, BASS_ATTRIB_VOL, 1.0f);
+      BASS_ChannelPlay(l_Channel,false);
+    }
   }
-
 }
 
 void CSoundManager::PlaySample3D()
@@ -137,9 +131,15 @@ void CSoundManager::PlaySample3D()
 
 }
 
-void CSoundManager::PlayMusic()
+void CSoundManager::PlayMusic(const string& _szSample)
 {
+  HSTREAM l_Sample = GetSample(_szSample);
 
+  if(l_Sample != 0)
+  {
+    BASS_ChannelSetAttribute(l_Sample, BASS_ATTRIB_VOL, 1.0f);
+    BASS_ChannelPlay(l_Sample,false);
+  }
 }
 
 void CSoundManager::PlayMusic3D()

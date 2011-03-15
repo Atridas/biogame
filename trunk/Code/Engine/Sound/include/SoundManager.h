@@ -10,7 +10,7 @@ class CSoundManager :
   public CBaseControl
 {
 public:
-  CSoundManager() : m_iMaxChannels(0),m_iMusicChannels(0),m_iCurrentMusic(0),m_iCurrentSample(0) {};
+  CSoundManager() : m_iCurrentMusic(0) {};
   ~CSoundManager() {Done();};
 
   bool Init(const string& _szFile);
@@ -18,7 +18,7 @@ public:
 
   void PlaySample(const string& _szSample);
   void PlaySample3D();
-  void PlayMusic();
+  void PlayMusic(const string& _szSample);
   void PlayMusic3D();
   void StopAll();
   void StopMusics();
@@ -29,23 +29,24 @@ public:
 
 private:
 
-  struct SChannel
+  struct SMusicChannel
   {
     float m_fVolume;
-    unsigned long m_iResourceIndex;
+    unsigned long m_iChannel;
 
-    SChannel(unsigned long _iResourceIndex, float _fVolume) : m_iResourceIndex(_iResourceIndex), m_fVolume(_fVolume) {};
+    SMusicChannel(unsigned long _iChannel, float _fVolume) : m_iChannel(_iChannel), m_fVolume(_fVolume) {};
   };
 
   unsigned long GetSample(const string& _szSample);
 
   map<string,unsigned long> m_mResources;
-  vector<SChannel> m_vChannels;
+  vector<SMusicChannel> m_vMusicChannels;
 
   int m_iCurrentMusic;
-  int m_iCurrentSample;
-  int m_iMaxChannels;
-  int m_iMusicChannels;
+
+  //int m_iCurrentSample;
+  //int m_iMaxChannels;
+  //int m_iMusicChannels;
 };
 
 #endif
