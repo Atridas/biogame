@@ -36,6 +36,7 @@ m_Particles(NUMPARTICLES)
  
   // initialize misc. other things
   m_pTexParticle  = NULL;
+  m_vbParticles   = NULL;
   //SetVBSize(NUMPARTICLES / 10);
   m_fNumNewPartsExcess = 0.0f;
 }
@@ -51,75 +52,9 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
   m_fMaxSize = _info->m_fMaxSize;
   m_vSpawnDir1 = _info->m_vSpawnDir1;
   m_vSpawnDir2 = _info->m_vSpawnDir2;
+  m_pTexParticle = _info->m_pTexParticle;
 }
-/*
-void CParticleEmitter::Init(CXMLTreeNode& l_XMLParticle)
-{
-  m_szId=l_XMLParticle.GetPszISOProperty("id" ,"");
-  //m_vPos = l_XMLParticle.GetVect3fProperty("Position");
-  m_fMinEmitRate = l_XMLParticle.GetFloatProperty("MinEmitRate");
-  m_fMaxEmitRate = l_XMLParticle.GetFloatProperty("MaxEmitRate");
-  //m_Color1 = l_XMLParticle.GetVect4fProperty("Color1",Vect4f(0.0f),true);
-  //m_Color2 = l_XMLParticle.GetVect4fProperty("Color2",Vect4f(0.0f),true);
-  m_fMinSize = l_XMLParticle.GetFloatProperty("MinSize");
-  m_fMaxSize = l_XMLParticle.GetFloatProperty("MaxSize");
 
-}
-*/
-/*
-bool CParticleEmitter::Load(CXMLTreeNode& l_XMLParticle)
-{
-  /*LOGGER->AddNewLog(ELL_INFORMATION, "CParticleManager::Load \"%s\"", _szFileName.c_str());
-
-  m_szFileName = _szFileName;
-  m_szFileName = l_XMLParticle.LoadFile("Data\XML\Particules.xml");
-
- // CXMLTreeNode l_XMLParticles;
- /* if(!l_XMLParticles.LoadFile(_szFileName.c_str()))
-  {
-    LOGGER->AddNewLog(ELL_WARNING,"CParticleManager:: No s'ha trobat el XML \"%s\"", _szFileName.c_str());
-    //SetOk(false);
-    return false;
-  }*/
-/*
-  CParticleManager* l_pParticleManager = CORE->GetParticleManager();
-  
-  
-  int l_iNumParticleEmitters = l_XMLParticles.GetNumChildren();
-  for(int i = 0; i < l_iNumParticleEmitters; i++)
-  {
-    CXMLTreeNode l_XMLParticle = l_XMLParticles(i);
-    if(l_XMLParticle.IsComment()) 
-    {
-      continue;
-    }
-    m_szId=l_pParticleManager->m_vEmitterParticle[l_iNumParticleEmitters].GetId();
-    m_fMinEmitRate = l_pParticleManager->m_vEmitterParticle[l_iNumParticleEmitters].GetMinEmitRate();
-    m_fMaxEmitRate = l_pParticleManager->m_vEmitterParticle[l_iNumParticleEmitters].GetMaxEmitRate();
-    m_fMinSize = l_pParticleManager->m_vEmitterParticle[l_iNumParticleEmitters].GetMinSize();
-    m_fMaxSize = l_pParticleManager->m_vEmitterParticle[l_iNumParticleEmitters].GetMaxSize();
-    
-    m_szId=l_XMLParticle.GetPszISOProperty("id" ,"");
-    //m_vPos = l_XMLParticle.GetVect3fProperty("Position");
-    m_fMinEmitRate = l_XMLParticle.GetFloatProperty("MinEmitRate");
-    m_fMaxEmitRate = l_XMLParticle.GetFloatProperty("MaxEmitRate");
-    //m_Color1 = l_XMLParticle.GetVect4fProperty("Color1",Vect4f(0.0f),true);
-    //m_Color2 = l_XMLParticle.GetVect4fProperty("Color2",Vect4f(0.0f),true);
-    m_fMinSize = l_XMLParticle.GetFloatProperty("MinSize");
-    m_fMaxSize = l_XMLParticle.GetFloatProperty("MaxSize");
-    // m_vSpawnDir1;
-    //m_vSpawnDir2;
-    //m_fNumNewPartsExcess;
-    //m_pTexParticle;
-    
-    
-  
-  }
-  SetOk(true);
-  return IsOk();
-  return true;
-
-}*/
 void CParticleEmitter::Update(float fElapsedTime)
 {
 
@@ -186,9 +121,9 @@ void CParticleEmitter::Init(CRenderManager* rm, const string& _texureFileName)
   
   m_Particles.DeleteAllElements();
   LPDIRECT3DDEVICE9 l_pd3dDevice = rm->GetDevice();
-  l_pd3dDevice->CreateVertexBuffer( NUMPARTICLES * sizeof(VERTEX_PARTICLE), 
+  l_pd3dDevice->CreateVertexBuffer( NUMPARTICLES * sizeof(SPARTICLE_VERTEX), 
                                     D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY | D3DUSAGE_POINTS,   
-                                    VERTEX_PARTICLE::GetFVF(),
+                                    SPARTICLE_VERTEX::GetFVF(),
                                     D3DPOOL_DEFAULT, 
                                     &m_vbParticles,NULL);
 
@@ -216,13 +151,14 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
 {
   LPDIRECT3DDEVICE9 l_pd3dDevice = _pRM->GetDevice();
 
-  l_pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
+  _pRM->EnableAlphaBlend();
 
   l_pd3dDevice->SetRenderState( D3DRS_POINTSPRITEENABLE, TRUE );
   l_pd3dDevice->SetRenderState( D3DRS_POINTSCALEENABLE,  TRUE );
+  /*l_pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
  
   l_pd3dDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
-  l_pd3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
+  l_pd3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );*/
 
   float l_fPointSize    = 100.0f;
   float l_fPointSizeMin = 0.00f;
@@ -240,16 +176,16 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
 
    
   // Set up the vertex buffer to be rendered
-  l_pd3dDevice->SetStreamSource( 0, m_vbParticles,0, sizeof(VERTEX_PARTICLE));
-  l_pd3dDevice->SetFVF( VERTEX_PARTICLE::GetFVF() );
+  l_pd3dDevice->SetStreamSource( 0, m_vbParticles,0, sizeof(SPARTICLE_VERTEX));
+  l_pd3dDevice->SetFVF( SPARTICLE_VERTEX::GetFVF() );
 
   //l_pd3dDevice->SetTexture(0, m_pTexParticle);
   m_pTexParticle->Activate(0);
 
-  VERTEX_PARTICLE *pVertices;
+  SPARTICLE_VERTEX *pVertices;
  
 
-  m_vbParticles->Lock(  0, NUMPARTICLES * sizeof(VERTEX_PARTICLE),
+  m_vbParticles->Lock(  0, NUMPARTICLES * sizeof(SPARTICLE_VERTEX),
                         (void **) &pVertices, D3DLOCK_DISCARD);
 
   DWORD dwNumParticlesToRender = 0;
@@ -278,10 +214,6 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
   l_pd3dDevice->SetRenderState( D3DRS_POINTSPRITEENABLE, FALSE );
   l_pd3dDevice->SetRenderState( D3DRS_POINTSCALEENABLE,  FALSE );
 
-  l_pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE );
+  _pRM->DisableAlphaBlend();
+  //l_pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE );
 }
-
-
-
-
-                      

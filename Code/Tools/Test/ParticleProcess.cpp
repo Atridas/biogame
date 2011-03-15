@@ -72,11 +72,6 @@ bool CParticleProcess::Init()
   m_bRenderLights = false;
 
 
-  //m_ParticleEmitter.Init(CORE->GetRenderManager(),"./Data/Textures/Ch19p1_ParticleTexture.png");
-  m_ParticleEmitter.Init(CORE->GetRenderManager(),"./Data/Textures/gohan.png");
-
-
-  
   SetOk(true);
   return IsOk();
 }
@@ -141,7 +136,7 @@ void CParticleProcess::RenderScene(CRenderManager* _pRM)
   // Ensenya tot el Hangar i els seus objectas
   //CORE->GetRenderableObjectsManager()->Render(_pRM);
 
-  m_ParticleEmitter.Render(_pRM);
+  //CORE->GetParticleManager()->Render(_pRM);
 
   
   _pRM->DrawGrid(30.0f,colCYAN,30,30);

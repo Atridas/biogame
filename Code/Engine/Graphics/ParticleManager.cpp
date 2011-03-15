@@ -1,4 +1,7 @@
 #include "ParticleManager.h"
+#include "Core.h"
+#include "TextureManager.h"
+#include "RenderManager.h"
 
 
 CParticleManager::CParticleManager(void)
@@ -60,8 +63,8 @@ bool CParticleManager::Load(const string& _szFileName)
 			  SParticleInfo* l_pInfo= new SParticleInfo;
 			  Vect3f l_vVec3;
 			  Vect4f l_vVec4;
-        string l_szString;
-			  l_pInfo->m_szId = l_treeParticleEmitter.GetPszISOProperty("id" ,"");
+        
+        l_pInfo->m_szId = l_treeParticleEmitter.GetPszISOProperty("id" ,"");
 			  l_pInfo->m_fMinEmitRate = l_treeParticleEmitter.GetFloatProperty("MinEmitRate");
 			  l_pInfo->m_fMaxEmitRate = l_treeParticleEmitter.GetFloatProperty("MaxEmitRate");
 			  l_vVec4 = l_treeParticleEmitter.GetVect4fProperty("Color1",Vect4f(0.0f),true);
@@ -74,7 +77,8 @@ bool CParticleManager::Load(const string& _szFileName)
 			  l_pInfo->m_vSpawnDir1 = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
 			  l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Direction2",Vect3f(0.0f));
 			  l_pInfo->m_vSpawnDir2 = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
-        l_szString = l_treeParticleEmitter.GetPszProperty("TexParticle","");
+        l_pInfo->m_pTexParticle = CORE->GetTextureManager()->GetResource(l_treeParticleEmitter.GetPszProperty("TexParticle",""));
+        
         //l_pInfo->m_pTexParticle = l_szString;
 			  AddResource(l_pInfo->m_szId,l_pInfo);
 		  }
@@ -131,6 +135,17 @@ void CParticleManager::Update(const float _fElapsedTime)
   while(it != end)
   {
     (*it)->Update(_fElapsedTime);
+    ++it;
+  }
+}
+
+void CParticleManager::Render(CRenderManager* _pRM)
+{
+  vector<CParticleEmitter*>::iterator it  = m_vEmitterParticle.begin(),
+                                      end = m_vEmitterParticle.end();
+  while(it != end)
+  {
+    (*it)->Render(_pRM);
     ++it;
   }
 }

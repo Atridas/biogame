@@ -561,7 +561,7 @@ private:
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexInstancedDeclaration;
 };
 
-struct VERTEX_PARTICLE
+struct SPARTICLE_VERTEX
 {
   float   x, y, z;
   float   pointsize;

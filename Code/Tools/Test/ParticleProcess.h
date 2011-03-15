@@ -34,17 +34,16 @@ public:
 
   virtual bool          Init();
 
-	void                  Update                  (float elapsedTime);
-	void					        DebugInformation        (float FPS);
+  void                  Update                  (float elapsedTime);
+  void                  DebugInformation        (float FPS);
   void                  RenderScene             (CRenderManager* _pRM);
   void                  RenderINFO              (CRenderManager* _pRM);
-  
 
   virtual bool          ExecuteProcessAction      (float _fDeltaSeconds, float _fDelta, const char* _pcAction);
 
 private:
 
-	void                  Release                 ();
+  void                  Release                 ();
 
   int                   m_iState;
   bool                  m_bStateChanged;
@@ -54,6 +53,5 @@ private:
   float                 m_fVelocity;
   bool                  m_bRenderLights;
   float                 m_fPhysxVelocity;
-  CParticleEmitter      m_ParticleEmitter;
 };
 
