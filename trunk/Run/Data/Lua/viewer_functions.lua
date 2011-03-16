@@ -34,6 +34,12 @@ function show_gui()
   end
 end
 
+--selecciona el següent mode
+function set_next_mode()
+  VIEWER:next_mode()
+  show_gui()
+end
+
 --carrega un nivell
 function load_level(level)
   

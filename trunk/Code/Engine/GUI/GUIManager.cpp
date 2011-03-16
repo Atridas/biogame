@@ -169,7 +169,7 @@ bool CGUIManager::Init (const std::string& initGuiXML)
 				float posy													= m.GetFloatProperty("posy",			5.f);
 				float w															= m.GetFloatProperty("width",			5.f);
 				float h															= m.GetFloatProperty("height",		5.f);
-				std::string texture									= m.GetPszProperty("texture",			"./Data/GUI/Textures_Test/gui_pointer_mouse.tga");
+				std::string texture									= m.GetPszProperty("texture",			"");
 				bool isQuadrant											= m.GetBoolProperty("isQuadrant",	true);
 				
 				CTexture* texture_pointer = textureM->GetResource(texture);

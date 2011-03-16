@@ -98,7 +98,7 @@ void CViewer::Init()
   m_vAmbientLight = CORE->GetLightManager()->GetAmbientLight();
 
   m_bEnableLights = true;
-  m_bViewMode = true;
+  m_bViewMode = false;
   m_bShowHelp = true;
   m_bNormalRendering = false;
   m_bShowBoxes = false;
