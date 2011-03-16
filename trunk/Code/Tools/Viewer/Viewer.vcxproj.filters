@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Run\Data\XML\actions.xml">
-      <Filter>Data</Filter>
-    </None>
     <None Include="..\..\..\Run\Data\XML\init_viewer.xml">
       <Filter>Data</Filter>
     </None>
@@ -25,6 +22,9 @@
       <Filter>Data</Filter>
     </None>
     <None Include="..\..\..\Run\Data\XML\Lua_viewer.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\actions_viewer.xml">
       <Filter>Data</Filter>
     </None>
   </ItemGroup>

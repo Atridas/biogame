@@ -636,18 +636,27 @@ bool CViewer::ExecuteFreeModeAction(float _fDeltaSeconds, float _fDelta, const c
     if(m_pCharacter)
     {
       CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)m_pCharacter;
-      l_pAnim->GetAnimatedInstanceModel()->ExecuteAction(4,1);
+      l_pAnim->GetAnimatedInstanceModel()->ExecuteAction(3,1);
     }
 
     return true;
   }
 
-  if(strcmp(_pcAction, "HurtBOT") == 0)
+  if(strcmp(_pcAction, "AimBot") == 0)
   {
     if(m_pCharacter)
     {
       CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)m_pCharacter;
-      l_pAnim->GetAnimatedInstanceModel()->ExecuteAction(3,1);
+      if (l_pAnim->GetAnimatedInstanceModel()->GetCurrentCycle() == 1)
+      {
+        l_pAnim->GetAnimatedInstanceModel()->ClearCycle(0.5f);
+        l_pAnim->GetAnimatedInstanceModel()->BlendCycle(2,0.5f);
+      }
+      else if (l_pAnim->GetAnimatedInstanceModel()->GetCurrentCycle() == 2)
+      {
+        l_pAnim->GetAnimatedInstanceModel()->ClearCycle(0.5f);
+        l_pAnim->GetAnimatedInstanceModel()->BlendCycle(1,0.5f);
+      }
     }
 
     return true;

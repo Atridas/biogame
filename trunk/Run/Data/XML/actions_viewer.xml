@@ -112,6 +112,10 @@
     <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN" Code="MOUSE_BUTTON_LEFT"/>
   </action>
   
+  <action name="AimBot">
+    <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN_UP" Code="MOUSE_BUTTON_RIGHT"/>
+  </action>
+  
   <!--...........MOVEMENT...........-->
 	<action name="Run">
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN" Code="KEY_LSHIFT"/>
