@@ -178,9 +178,9 @@ TNORMAL_TEXTURED_VERTEX_PS RenderCal3DHWVS(CAL3D_HW_VERTEX_VS IN)
 	//CalcAnimatedNormalTangent(IN.Normal.xyz, IN.Tangent.xyz, IN.Indices, IN.Weight, l_Normal,l_Tangent);
 	float3 l_Position = CalcAnimtedPos(float4(IN.Position.xyz,1.0), IN.Indices, IN.Weight);
 	float3 l_Normal   = CalcAnimtedPos(IN.Normal, IN.Indices, IN.Weight);
-	float4 l_WorldPosition=float4(l_Position, 1.0);
+	float4 l_WorldPosition=float4(-l_Position.x,l_Position.y,l_Position.z, 1.0);
 	out_.WorldPosition=mul(l_WorldPosition,g_WorldMatrix);  
-	out_.WorldNormal = mul(l_Normal,(float3x3)g_WorldMatrix);
+	out_.WorldNormal = mul(float4(-l_Normal.x,l_Normal.y,l_Normal.z,0.0),g_WorldMatrix);
 	
   
   

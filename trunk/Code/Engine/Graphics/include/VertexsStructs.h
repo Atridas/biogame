@@ -520,6 +520,9 @@ struct TCAL3D_HW_VERTEX
   float nx, ny, nz;
   float tu,tv;
 
+  float tangentx, tangenty, tangentz;
+  float bitangentx, bitangenty, bitangentz;
+
   /**
    * Getter del tipus de vèrtex.
    * Els tipus de vèrtex és una màscara donada pel següent conjunt d'elements:
@@ -536,7 +539,8 @@ struct TCAL3D_HW_VERTEX
   **/
   static inline unsigned short GetVertexType()
   {
-    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_BLENDIDX | VERTEX_TYPE_BLENDWGT;
+    return VERTEX_TYPE_GEOMETRY | VERTEX_TYPE_NORMAL | VERTEX_TYPE_TEXTURE1 | VERTEX_TYPE_BLENDIDX | VERTEX_TYPE_BLENDWGT
+         | VERTEX_TYPE_TANGENT  | VERTEX_TYPE_BITANGENT;
   }
 
  /**

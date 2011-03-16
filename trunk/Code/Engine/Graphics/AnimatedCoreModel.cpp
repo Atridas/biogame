@@ -253,7 +253,17 @@ bool CAnimatedCoreModel::LoadVertexBuffer()
 
   m_iNumVtxs=m_pCalHardwareModel->getTotalVertexCount();
   
+  CalcTangentsAndBinormalsBis( l_pVtxs, l_pIdxs,             //punters a vertex/index
+                                m_iNumVtxs, m_iNumFaces*3,   //num vertex/index
+                                sizeof(TCAL3D_HW_VERTEX),    //vertex stride
+                                0,                           //geometria
+                                sizeof(float)*11,            //normals
+                                sizeof(float)*16,            //tangents
+                                sizeof(float)*19,            //bitangents
+                                sizeof(float)*14);           //coordenades de textura
+
   //CalcTangentsAndBinormals(l_pVtxs, l_pIdxs, m_iNumVtxs, m_iNumFaces*3, sizeof(TCAL3D_HW_VERTEX),0, 44, 60, 76, 92);
+
   if(m_pRenderableVertexs)
     CHECKED_DELETE(m_pRenderableVertexs);
 
