@@ -100,6 +100,7 @@ void CViewerProcess::RegisterLuaFunctions()
       .def("set_view_mode",       &CViewer::SetViewMode)
       .def("toggle_boxes",        &CViewer::ToggleShowBoxes)
       .def("toggle_spheres",      &CViewer::ToggleShowSpheres)
+      .def("next_mode",           &CViewer::SetNextMode)
       //MESH
       .def("next_mesh",           &CViewer::SelectNextMesh)
       .def("previous_mesh",       &CViewer::SelectPrevMesh)

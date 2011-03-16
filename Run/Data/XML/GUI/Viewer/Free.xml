@@ -5,34 +5,34 @@
           
   <!--Default Buttons-->
   <Button name="Free_FreeMode" posx="30.00" posy="02.00" height="4.00" width="10.00" visible="true" active="true"
-      texture_normal=""
-      texture_over=""
-      texture_clicked=""
-      texture_deactivated=""
+      texture_normal="Data/Textures/GUI/Viewer/Free.png"
+      texture_over="Data/Textures/GUI/Viewer/Free.png"
+      texture_clicked="Data/Textures/GUI/Viewer/Free.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/Free.png"
       OnClickedAction="VIEWER:set_mode(Viewer.FREE)
                       show_gui()"
       OnOverAction=""/>
   <Button name="Free_MeshMode" posx="45.00" posy="02.00" height="4.00" width="10.00" visible="true" active="true"
-      texture_normal=""
-      texture_over=""
-      texture_clicked=""
-      texture_deactivated=""
+      texture_normal="Data/Textures/GUI/Viewer/Mesh.png"
+      texture_over="Data/Textures/GUI/Viewer/Mesh.png"
+      texture_clicked="Data/Textures/GUI/Viewer/Mesh.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/Mesh.png"
       OnClickedAction="VIEWER:set_mode(Viewer.MESH)
                       show_gui()"
       OnOverAction=""/>
   <Button name="Free_Animated" posx="60.00" posy="02.00" height="4.00" width="10.00" visible="true" active="true"
-      texture_normal=""
-      texture_over=""
-      texture_clicked=""
-      texture_deactivated=""
+      texture_normal="Data/Textures/GUI/Viewer/Animated.png"
+      texture_over="Data/Textures/GUI/Viewer/Animated.png"
+      texture_clicked="Data/Textures/GUI/Viewer/Animated.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/Animated.png"
       OnClickedAction="VIEWER:set_mode(Viewer.ANIMATED)
                       show_gui()"
       OnOverAction=""/>
   <Button name="Free_Normals" posx="76.00" posy="02.00" height="4.00" width="4.00" visible="true" active="true"
-      texture_normal=""
-      texture_over=""
-      texture_clicked=""
-      texture_deactivated=""
+      texture_normal="Data/Textures/GUI/Viewer/Normals.png"
+      texture_over="Data/Textures/GUI/Viewer/Normals.png"
+      texture_clicked="Data/Textures/GUI/Viewer/Normals.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/Normals.png"
       OnClickedAction="VIEWER_PROCESS:toggle_normals()"
       OnOverAction=""/>
   <!--Default Buttons End-->

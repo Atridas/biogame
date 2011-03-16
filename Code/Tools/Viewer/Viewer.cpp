@@ -137,6 +137,9 @@ void CViewer::SetMode(EModes _eMode)
 
 void CViewer::InitMode()
 {
+  m_bShowBoxes = false;
+  m_bShowSpheres = false;
+
   switch(m_iMode) {
   case FREE_MODE:
     InitFreeMode();
