@@ -250,4 +250,14 @@ struct CAL3D_HW_VERTEX_VS {
 	float2 TexCoord : TEXCOORD0;
 };
 
+struct CAL3D_TANGENT_BITANGENT_HW_VERTEX_VS {
+	float3 Position : POSITION;
+	float4 Weight : BLENDWEIGHT;
+	float4 Indices : BLENDINDICES;
+	float4 Normal : NORMAL;
+  float4 Tangent : TANGENT0;
+	float4 Bitangent : BINORMAL0;
+	float2 TexCoord : TEXCOORD0;
+};
+
 #endif

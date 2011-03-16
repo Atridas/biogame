@@ -17,6 +17,20 @@ technique Cal3DTechnique
 	}
 }
 
+technique Cal3DNormalMapTechnique
+{
+	pass p0
+	{
+		ZEnable = true;
+		ZWriteEnable = true;
+		ZFunc = LessEqual;
+		AlphaBlendEnable = false;
+		CullMode = CW;
+		VertexShader = compile vs_3_0 RenderTangentBitangentCal3DHWVS();
+		PixelShader = compile ps_3_0 TangentBinormalNormalTexturedNoParallaxPS();
+	}
+}
+
 technique Cal3dShowNormalsTechnique {
 	pass p0 {
 	//Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar

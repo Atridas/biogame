@@ -82,6 +82,17 @@ float4 TangentBinormalNormalTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_
   return out_;
 }
 
+float4 TangentBinormalNormalTexturedNoParallaxPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
+
+  float3 l_Normal = normalize(CalcNormalmap(_in.WorldTangent, _in.WorldBinormal, _in.WorldNormal, _in.UV));
+	
+  float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
+  
+  float4 out_ = float4(ComputeAllLights(l_Normal, _in.WorldPosition, l_DiffuseColor, _in.PosLight),1.0);
+
+  return out_;
+}
+
 float4 WhitePS() : COLOR {
   return float4(1.0,1.0,1.0,1.0);
 }
