@@ -71,6 +71,7 @@ bool CParticleProcess::Init()
   }
   m_bRenderLights = false;
 
+  CORE->GetParticleManager()->Init(CORE->GetRenderManager(), "./Data/Textures/gohan.png");
 
   SetOk(true);
   return IsOk();
@@ -133,10 +134,10 @@ void CParticleProcess::RenderScene(CRenderManager* _pRM)
 {
   
   //Render Objects
-  // Ensenya tot el Hangar i els seus objectas
+  // Ensenya tot el Hangar i els seus objectes
   //CORE->GetRenderableObjectsManager()->Render(_pRM);
 
-  //CORE->GetParticleManager()->Render(_pRM);
+  CORE->GetParticleManager()->Render(_pRM);
 
   
   _pRM->DrawGrid(30.0f,colCYAN,30,30);
