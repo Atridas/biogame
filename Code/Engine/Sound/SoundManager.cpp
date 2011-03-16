@@ -63,7 +63,7 @@ bool CSoundManager::Init(const string& _szFile)
       l_iStream = BASS_StreamCreateFile(false,l_szFile.c_str(), 0, 0, l_iMask);
       if(l_iStream)
       {
-        m_vMusicChannels.push_back(SMusicChannel(l_iStream,1.0f));
+        m_vMusicChannels.push_back(SSoundChannel(l_iStream,1.0f));
       }else{
         LOGGER->AddNewLog(ELL_WARNING,"CSoundManager::Init error al crear stream: \"%s\"", l_szFile.c_str());
       }
@@ -74,7 +74,7 @@ bool CSoundManager::Init(const string& _szFile)
       l_iStream = BASS_SampleLoad(false,l_szFile.c_str(), 0, 0, l_iMaxSamples, l_iMask);
       if(l_iStream)
       {
-
+        m_vSampleChannels.push_back(SSoundChannel(l_iStream,1.0f));
       }else{
         LOGGER->AddNewLog(ELL_WARNING,"CSoundManager::Init error al crear sample: \"%s\"", l_szFile.c_str());
       }
@@ -98,6 +98,7 @@ void CSoundManager::Release()
   BASS_Free();
 
   m_mResources.clear();
+  m_vSampleChannels.clear();
 }
 
 HSTREAM CSoundManager::GetSample(const string& _szSample)
@@ -110,7 +111,7 @@ HSTREAM CSoundManager::GetSample(const string& _szSample)
   return l_It->second;
 }
 
-void CSoundManager::PlaySample(const string& _szSample)
+void CSoundManager::PlaySample(const string& _szSample, float _fVolume)
 {
   HSTREAM l_Sample = GetSample(_szSample);
 
@@ -131,14 +132,14 @@ void CSoundManager::PlaySample3D()
 
 }
 
-void CSoundManager::PlayMusic(const string& _szSample)
+void CSoundManager::PlayMusic(const string& _szSample, bool _bRestart, float _fVolume)
 {
   HSTREAM l_Sample = GetSample(_szSample);
 
   if(l_Sample != 0)
   {
-    BASS_ChannelSetAttribute(l_Sample, BASS_ATTRIB_VOL, 1.0f);
-    BASS_ChannelPlay(l_Sample,false);
+    BASS_ChannelSetAttribute(l_Sample, BASS_ATTRIB_VOL, _fVolume);
+    BASS_ChannelPlay(l_Sample,_bRestart);
   }
 }
 
@@ -149,17 +150,27 @@ void CSoundManager::PlayMusic3D()
 
 void CSoundManager::StopAll()
 {
-
+  BASS_Stop();
 }
 
 void CSoundManager::StopMusics()
 {
+  vector<SSoundChannel>::iterator l_It = m_vMusicChannels.begin();
 
+  for(l_It = m_vMusicChannels.begin(); l_It != m_vMusicChannels.end(); l_It++)
+  {
+    BASS_ChannelPause((*l_It).m_iHandle);
+  }
 }
 
 void CSoundManager::StopSounds()
 {
+  vector<SSoundChannel>::iterator l_It = m_vSampleChannels.begin();
 
+  for(l_It = m_vSampleChannels.begin(); l_It != m_vSampleChannels.end(); l_It++)
+  {
+    BASS_SampleStop((*l_It).m_iHandle);
+  }
 }
 
 void CSoundManager::SetMasterVolume()
@@ -167,12 +178,17 @@ void CSoundManager::SetMasterVolume()
 
 }
 
-void CSoundManager::Pause()
+void CSoundManager::Pause(const string& _szSample)
 {
+  HSTREAM l_Sample = GetSample(_szSample);
 
+  if(l_Sample != 0)
+  {
+    BASS_ChannelPause(l_Sample);
+  }
 }
 
-void CSoundManager::Resume()
+void CSoundManager::Resume(const string& _szSample)
 {
-
+  PlayMusic(_szSample,false);
 }
