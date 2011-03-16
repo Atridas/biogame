@@ -11,7 +11,7 @@ technique Cal3DTechnique
 		ZWriteEnable = true;
 		ZFunc = LessEqual;
 		AlphaBlendEnable = false;
-		CullMode = CCW;
+		CullMode = CW;
 		VertexShader = compile vs_3_0 RenderCal3DHWVS();
 		PixelShader = compile ps_3_0 NormalTexturedPS();
 	}
@@ -26,7 +26,7 @@ technique Cal3dShowNormalsTechnique {
     //Deshabilitamos el alphablend
     AlphaBlendEnable = false;
     //Tipo de culling que queremos utilizar
-    CullMode = CCW;
+    CullMode = CW;
     //Vertex / Pixel shader
 		VertexShader = compile vs_3_0 RenderCal3DHWVS();
 		PixelShader = compile ps_3_0 ShowNormalsPS();
