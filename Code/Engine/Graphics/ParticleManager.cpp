@@ -101,6 +101,7 @@ bool CParticleManager::Load(const string& _szFileName)
       
         
 			  CParticleEmitter* l_pParticleEmitter = new CParticleEmitter();
+			  
 			  string l_szType = l_treeInstanceParticle.GetPszProperty("type","");
         // s'ha de fer que la Id de la SInfo correspongui amb el type de la instancia
 			  SParticleInfo* l_pInfo = GetResource(l_szType);
@@ -146,6 +147,17 @@ void CParticleManager::Render(CRenderManager* _pRM)
   while(it != end)
   {
     (*it)->Render(_pRM);
+    ++it;
+  }
+}
+
+void CParticleManager::Init(CRenderManager* _pRM, const string& _texureFileName)
+{
+  vector<CParticleEmitter*>::iterator it  = m_vEmitterParticle.begin(),
+                                      end = m_vEmitterParticle.end();
+  while(it != end)
+  {
+    (*it)->Init(_pRM,_texureFileName);
     ++it;
   }
 }

@@ -35,6 +35,7 @@ public:
   bool Load(const string& _szFileName);
   void Update(const float _fElapsedTime);
   void Render(CRenderManager* _pRM);
+  void Init(CRenderManager* rm, const string& _texureFileName);
   //vector<CParticleEmitter*> GetVectorParticulas() const {return m_vEmitterParticle;};
  
  

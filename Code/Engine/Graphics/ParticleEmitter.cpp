@@ -118,19 +118,39 @@ void CParticleEmitter::Update(float fElapsedTime)
   
 void CParticleEmitter::Init(CRenderManager* rm, const string& _texureFileName)
 {
-  
-  m_Particles.DeleteAllElements();
-  LPDIRECT3DDEVICE9 l_pd3dDevice = rm->GetDevice();
-  l_pd3dDevice->CreateVertexBuffer( NUMPARTICLES * sizeof(SPARTICLE_VERTEX), 
-                                    D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY | D3DUSAGE_POINTS,   
-                                    SPARTICLE_VERTEX::GetFVF(),
-                                    D3DPOOL_DEFAULT, 
-                                    &m_vbParticles,NULL);
+  bool bIsOk = rm != NULL;
 
-  m_pTexParticle = CORE->GetTextureManager()->GetResource(_texureFileName);
+  if (bIsOk)
+  {
+	  m_Particles.DeleteAllElements();
+	  LPDIRECT3DDEVICE9 l_pd3dDevice = rm->GetDevice();
+
+	  bIsOk = l_pd3dDevice != NULL;
+
+	  if (bIsOk)
+	  {
+		  if (FAILED(l_pd3dDevice->CreateVertexBuffer( NUMPARTICLES * sizeof(SPARTICLE_VERTEX), 
+											D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY | D3DUSAGE_POINTS,   
+											SPARTICLE_VERTEX::GetFVF(),
+											D3DPOOL_DEFAULT, 
+											&m_vbParticles,NULL)))
+		  {
+			  bIsOk = false;
+		  }
+
+		  if (bIsOk)
+		  {
+			m_pTexParticle = CORE->GetTextureManager()->GetResource(_texureFileName);
+		  }	  
+	  }
+  }
   
-  
-  SetOk(true);
+  SetOk(bIsOk);
+
+  if (!bIsOk)
+  {
+	  Release();
+  }
 }
   
 void CParticleEmitter::Release()
@@ -182,12 +202,18 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
   //l_pd3dDevice->SetTexture(0, m_pTexParticle);
   m_pTexParticle->Activate(0);
 
-  SPARTICLE_VERTEX *pVertices;
+  SPARTICLE_VERTEX* pVertices;
  
+  // akesta es la bona
+  
+  m_vbParticles->Lock(  0, NUMPARTICLES * sizeof(SPARTICLE_VERTEX), (void **) &pVertices, D3DLOCK_DISCARD);
+	/*bool hr=false;
+    if(FAILED(hr = m_vbParticles->Lock(  0, NUMPARTICLES * sizeof(SPARTICLE_VERTEX), (void **) &pVertices, D3DLOCK_DISCARD)))
+    {
+        hr= false;
+    }*/
 
-  m_vbParticles->Lock(  0, NUMPARTICLES * sizeof(SPARTICLE_VERTEX),
-                        (void **) &pVertices, D3DLOCK_DISCARD);
-
+ 
   DWORD dwNumParticlesToRender = 0;
   for (int q=0; q < NUMPARTICLES; q++)
   {
