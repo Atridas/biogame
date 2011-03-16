@@ -16,31 +16,32 @@ public:
   bool Init(const string& _szFile);
   void Release();
 
-  void PlaySample(const string& _szSample);
+  void PlaySample(const string& _szSample, float _fVolume = 1.0f);
   void PlaySample3D();
-  void PlayMusic(const string& _szSample);
+  void PlayMusic(const string& _szSample, bool _bRestart = true, float _fVolume = 1.0f);
   void PlayMusic3D();
   void StopAll();
   void StopMusics();
   void StopSounds();
   void SetMasterVolume();
-  void Pause();
-  void Resume();
+  void Pause(const string& _szSample);
+  void Resume(const string& _szSample);
 
 private:
 
-  struct SMusicChannel
+  struct SSoundChannel
   {
     float m_fVolume;
-    unsigned long m_iChannel;
+    unsigned long m_iHandle;
 
-    SMusicChannel(unsigned long _iChannel, float _fVolume) : m_iChannel(_iChannel), m_fVolume(_fVolume) {};
+    SSoundChannel(unsigned long _iChannel, float _fVolume) : m_iHandle(_iChannel), m_fVolume(_fVolume) {};
   };
 
   unsigned long GetSample(const string& _szSample);
 
   map<string,unsigned long> m_mResources;
-  vector<SMusicChannel> m_vMusicChannels;
+  vector<SSoundChannel> m_vMusicChannels;
+  vector<SSoundChannel> m_vSampleChannels;
 
   int m_iCurrentMusic;
 

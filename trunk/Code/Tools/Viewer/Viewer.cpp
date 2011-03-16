@@ -106,7 +106,7 @@ void CViewer::Init()
 
   m_iMode = FREE_MODE;
 
-  SOUND_MANAGER->PlayMusic("bgm2");
+  SOUND_MANAGER->PlayMusic("bgm2",true);
 
   ResetActions();
 
