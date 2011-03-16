@@ -148,7 +148,8 @@
 	<RenderableObject name="Provetas_prestatge03" class="StaticMesh" resource="provetes_prestatge" position="-4.85249 1.15637 -0.266027" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="pot_prim01" class="StaticMesh" resource="pot_prim" position="-9.04424 1.80726 -10.4589" yaw="0.0" pitch="0.0" roll="0.0"/>
 	<RenderableObject name="pot_prim02" class="StaticMesh" resource="pot_prim" position="-8.6831 1.30262 -10.4107" yaw="0.0" pitch="0.0" roll="0.0"/>
-  <RenderableObject name="bot" class="AnimatedModel" resource="bot" position="5.1793 0.0 5.2768" yaw="0.0" pitch="0.0" roll="0" cycle="idle"/>
-  <RenderableObject name="riggle" class="AnimatedModel" resource="riggle" position="5.1793 0.0 -5.2768" yaw="0.0" pitch="0.0" roll="0" cycle="idle"/>
+  <RenderableObject name="riggle" class="AnimatedModel" resource="riggle" position="5.1793 0.0 -5.2768" yaw="-90.0" pitch="0.0" roll="0" cycle="walk"/>
+  <!--RenderableObject name="bot" class="AnimatedModel" resource="bot" position="5.1793 0.0 5.2768" yaw="0.0" pitch="0.0" roll="0" cycle="idle"/-->
+  <RenderableObject name="riggle2" class="AnimatedModel" resource="riggle" position="-5.1793 0.0 5.2768" yaw="0.0" pitch="0.0" roll="0" cycle="walk"/>
 
 </RenderableObjects>
