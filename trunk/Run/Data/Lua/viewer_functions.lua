@@ -33,8 +33,6 @@ function show_gui()
     GUI_MANAGER:activeWindows('Animated.xml')
   end
 end
---
-
 
 --carrega un nivell
 function load_level(level)
