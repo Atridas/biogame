@@ -34,7 +34,7 @@ void AnimatedPreZBlurVS(CAL3D_HW_VERTEX_VS _in,
   // Compute the projected coordinates
   //
 	float3 l_Position = CalcAnimtedPos(float4(_in.Position.xyz,1.0), _in.Indices, _in.Weight);
-  float4 l_ViewPos = mul( float4(l_Position,1.0), g_WorldViewMatrix );
+  float4 l_ViewPos = mul( float4(-l_Position.x,l_Position.y,l_Position.z,1.0), g_WorldViewMatrix );
   Pos_ = mul( l_ViewPos, g_ProjectionMatrix );
   //
   // Store z and w in our spare texcoord

@@ -188,7 +188,7 @@ TNORMAL_TEXTURED_VERTEX_PS RenderCal3DHWVS(CAL3D_HW_VERTEX_VS IN)
 	//OUT.WorldBinormal=mul(cross(l_Tangent,l_Normal),(float3x3)g_WorldMatrix);
 	out_.UV = IN.TexCoord.xy;
 	out_.HPosition = mul(l_WorldPosition, g_WorldViewProjectionMatrix );
-  float4 vPos = mul(float4(l_Position,1.0),g_WorldViewMatrix);
+  float4 vPos = mul(l_WorldPosition,g_WorldViewMatrix);
   out_.PosLight = mul(vPos, g_ViewToLightProjectionMatrix);
 
 	return out_;
@@ -221,7 +221,7 @@ TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS RenderTangentBitangentCal3DHWVS(CAL3
 	//OUT.WorldBinormal=mul(cross(l_Tangent,l_Normal),(float3x3)g_WorldMatrix);
 	out_.UV = IN.TexCoord.xy;
 	out_.HPosition = mul(l_WorldPosition, g_WorldViewProjectionMatrix );
-  float4 vPos = mul(float4(l_Position,1.0),g_WorldViewMatrix);
+  float4 vPos = mul(l_WorldPosition,g_WorldViewMatrix);
   out_.PosLight = mul(vPos, g_ViewToLightProjectionMatrix);
 
 	return out_;
