@@ -116,7 +116,7 @@ void CParticleEmitter::Update(float fElapsedTime)
 
 }
   
-void CParticleEmitter::Init(CRenderManager* rm, const string& _texureFileName)
+void CParticleEmitter::Init(CRenderManager* rm)
 {
   bool bIsOk = rm != NULL;
 
@@ -137,12 +137,8 @@ void CParticleEmitter::Init(CRenderManager* rm, const string& _texureFileName)
 		  {
 			  bIsOk = false;
 		  }
-
-		  if (bIsOk)
-		  {
-			m_pTexParticle = CORE->GetTextureManager()->GetResource(_texureFileName);
-		  }	  
-	  }
+    }
+		  
   }
   
   SetOk(bIsOk);
@@ -163,7 +159,7 @@ void CParticleEmitter::Release()
   m_Particles.DeleteAllElements();
   if ( m_vbParticles!= NULL)
   {
-//    m_vbParticles->Release();
+    m_vbParticles->Release();
   }
 }
   
@@ -175,6 +171,7 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
 
   l_pd3dDevice->SetRenderState( D3DRS_POINTSPRITEENABLE, TRUE );
   l_pd3dDevice->SetRenderState( D3DRS_POINTSCALEENABLE,  TRUE );
+  
   /*l_pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
  
   l_pd3dDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
@@ -192,8 +189,8 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
   l_pd3dDevice->SetRenderState(D3DRS_POINTSCALE_A,  *((DWORD*)&l_fPointScaleA));    
   l_pd3dDevice->SetRenderState(D3DRS_POINTSCALE_B,  *((DWORD*)&l_fPointScaleB));    
   l_pd3dDevice->SetRenderState(D3DRS_POINTSCALE_C,  *((DWORD*)&l_fPointScaleC));
-  //l_pd3dDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
-
+  
+  l_pd3dDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
    
   // Set up the vertex buffer to be rendered
   l_pd3dDevice->SetStreamSource( 0, m_vbParticles,0, sizeof(SPARTICLE_VERTEX));
@@ -207,11 +204,8 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
   // akesta es la bona
   
   m_vbParticles->Lock(  0, NUMPARTICLES * sizeof(SPARTICLE_VERTEX), (void **) &pVertices, D3DLOCK_DISCARD);
-	/*bool hr=false;
-    if(FAILED(hr = m_vbParticles->Lock(  0, NUMPARTICLES * sizeof(SPARTICLE_VERTEX), (void **) &pVertices, D3DLOCK_DISCARD)))
-    {
-        hr= false;
-    }*/
+	  
+    
 
  
   DWORD dwNumParticlesToRender = 0;

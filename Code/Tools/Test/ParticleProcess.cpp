@@ -71,7 +71,7 @@ bool CParticleProcess::Init()
   }
   m_bRenderLights = false;
 
-  CORE->GetParticleManager()->Init(CORE->GetRenderManager(), "./Data/Textures/gohan.png");
+  CORE->GetParticleManager()->Init(CORE->GetRenderManager());
 
   SetOk(true);
   return IsOk();
@@ -80,7 +80,7 @@ bool CParticleProcess::Init()
 void CParticleProcess::Release()
 {
 	CHECKED_DELETE(m_pCamera);
-  CHECKED_DELETE(m_pObject);
+	CHECKED_DELETE(m_pObject);
 }
 
 void CParticleProcess::Update(float _fElapsedTime)
@@ -102,6 +102,7 @@ void CParticleProcess::Update(float _fElapsedTime)
     if(l_fPitch < - FLOAT_PI_VALUE/3) l_fPitch = - FLOAT_PI_VALUE/3;
     if(l_fPitch >   FLOAT_PI_VALUE/3) l_fPitch =   FLOAT_PI_VALUE/3;
     m_pObject->SetPitch(l_fPitch);
+
 
     //m_pObjectBot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObjectBot->GetPosition().y, m_pObject->GetPosition().z));
   
@@ -137,10 +138,11 @@ void CParticleProcess::RenderScene(CRenderManager* _pRM)
   // Ensenya tot el Hangar i els seus objectes
   //CORE->GetRenderableObjectsManager()->Render(_pRM);
 
+  _pRM->DrawGrid(30.0f,colCYAN,30,30);
   CORE->GetParticleManager()->Render(_pRM);
 
   
-  _pRM->DrawGrid(30.0f,colCYAN,30,30);
+  
    
   //_pRM->DrawPlane(10,Vect3f(0,1,0),0,colBLUE,10,10);
 }
