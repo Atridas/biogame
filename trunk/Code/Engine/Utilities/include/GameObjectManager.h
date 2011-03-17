@@ -19,8 +19,9 @@ class CGameObjectManager :
 public:
   CGameObjectManager()                {SetOk(true);};
   ~CGameObjectManager()               {Done();};
-  void CleanUp()                      {Release();m_vResources.clear();};
-  virtual void Release();
+  void						CleanUp()                      {Release();m_vResources.clear();};
+  bool						Load	(const string& _szFileName, bool _bReload);
+  virtual void				Release();
 private:
   vector<CGameObject*> m_vResources;
 };
