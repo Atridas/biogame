@@ -108,7 +108,9 @@
     <None Include="..\..\..\Run\Data\XML\IA.xml" />
     <None Include="..\..\..\Run\Data\XML\Lights.xml" />
     <None Include="..\..\..\Run\Data\XML\Lua.xml" />
-    <None Include="..\..\..\Run\Data\XML\Particles.xml" />
+    <None Include="..\..\..\Run\Data\XML\Particles.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="..\..\..\Run\Data\XML\RenderableObjects.xml" />
     <None Include="..\..\..\Run\Data\XML\StaticMeshes.xml" />
   </ItemGroup>

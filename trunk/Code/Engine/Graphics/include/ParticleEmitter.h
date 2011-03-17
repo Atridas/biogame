@@ -58,7 +58,7 @@ public:
 
 
   void                    Update              (float fElapsedTime);
-  void                    Init                (CRenderManager* rm, const string& _texureFileName);
+  void                    Init                (CRenderManager* rm);
   void                    Release             ();
   void                    Render              (CRenderManager* _pRM);
   void                    SetAttributes       (SParticleInfo* _info);

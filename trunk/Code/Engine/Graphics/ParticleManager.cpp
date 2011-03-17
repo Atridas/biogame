@@ -151,13 +151,13 @@ void CParticleManager::Render(CRenderManager* _pRM)
   }
 }
 
-void CParticleManager::Init(CRenderManager* _pRM, const string& _texureFileName)
+void CParticleManager::Init(CRenderManager* _pRM)
 {
   vector<CParticleEmitter*>::iterator it  = m_vEmitterParticle.begin(),
                                       end = m_vEmitterParticle.end();
   while(it != end)
   {
-    (*it)->Init(_pRM,_texureFileName);
+    (*it)->Init(_pRM);
     ++it;
   }
 }
