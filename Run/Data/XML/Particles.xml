@@ -3,16 +3,19 @@
   <ParticleEmitters>
     <ParticleEmitter  id="font1"                        MinEmitRate="70.0"             MaxEmitRate="100.0"
                       Color1="1.0 1.0 1.0 1.0"          Color2="0.0 0.0 0.0 1.0"       MinSize="1.0"        MaxSize="3.0"
-                      Direction1="0.0 0.0 1.0"          Direction2="4.0  7.0  5.0"     TexParticle="Data/Textures/Particula_ALFA.dds"/>
+                      Direction1="0.0 0.0 1.0"          Direction2="4.0  7.0  5.0"     Life1="0.1"          Life2="0.3"
+                      TexParticle="Data/Textures/Particula_ALFA.dds"/>
 
     <ParticleEmitter id="font2"                         MinEmitRate="30.0"             MaxEmitRate="50.0"
                      Color1="1.0 0.0 1.0 1.0"           Color2="1.0 0.5 1.0 1.0"       MinSize="1.0"        MaxSize="2.0"
-                     Direction1="-1.0 0.0 -5.0"         Direction2="1.0 0.0 5.0"       TexParticle="Data/Textures/gohan.png"/>
+                     Direction1="-1.0 0.0 -5.0"         Direction2="1.0 0.0 5.0"       Life1="0.2"          Life2="0.4"
+                     TexParticle="Data/Textures/gohan.png"/>
    
 
     <ParticleEmitter id="font3"                         MinEmitRate="10.0"             MaxEmitRate="15.0"
                      Color1="1.0 1.0 1.0 1.0"           Color2="1.0 1.0 1.0 1.0"       MinSize="1.0"        MaxSize="1.0"
-                     Direction1="1.0  -0.0  -5.0"       Direction2="2.0  0.0  1.0"     TexParticle="Data/Textures/gohan.png"/>
+                     Direction1="1.0  -0.0  -5.0"       Direction2="2.0  0.0  1.0"     Life1="1.0"          Life2="1.5"
+                     TexParticle="Data/Textures/gohan.png"/>
     
     
   </ParticleEmitters>

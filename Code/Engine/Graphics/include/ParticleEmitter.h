@@ -84,6 +84,8 @@ private:
   D3DXVECTOR3                               m_vSpawnDir2;
   float                                     m_fNumNewPartsExcess;
   CTexture*                                 m_pTexParticle;
+  float                                     m_fLife1;
+  float                                     m_fLife2;
   LPDIRECT3DVERTEXBUFFER9                   m_vbParticles;
   CRecyclingArray<CParticle>                m_Particles;
   
