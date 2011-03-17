@@ -23,7 +23,9 @@ struct SParticleInfo
   D3DXVECTOR3           m_vSpawnDir1;
   D3DXVECTOR3           m_vSpawnDir2;
   CTexture*             m_pTexParticle;
-  
+  float                 m_fLife1;
+  float                 m_fLife2;
+
 };
 
 class CParticleManager : public CMapManager<SParticleInfo>

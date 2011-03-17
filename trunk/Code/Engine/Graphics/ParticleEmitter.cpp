@@ -53,6 +53,9 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
   m_vSpawnDir1 = _info->m_vSpawnDir1;
   m_vSpawnDir2 = _info->m_vSpawnDir2;
   m_pTexParticle = _info->m_pTexParticle;
+  m_fLife1 = _info->m_fLife1;
+  m_fLife2 = _info->m_fLife2;
+
 }
 
 void CParticleEmitter::Update(float fElapsedTime)
@@ -92,8 +95,13 @@ void CParticleEmitter::Update(float fElapsedTime)
     if (m_Particles.GetNumFreeElements() > 0)
     {
       CParticle* part = m_Particles.New();
-      part->SetLifeTimer(5.0f);
-  
+      
+
+      // determina el random de la vida de cada particula
+      float fRandLife = RandomNumber(m_fLife1,m_fLife2);
+
+
+      part->SetLifeTimer(fRandLife);
       // determine a random vector between dir1 and dir2
       float fRandX = RandomNumber(m_vSpawnDir1.x, m_vSpawnDir2.x);
       float fRandY = RandomNumber(m_vSpawnDir1.y, m_vSpawnDir2.y);

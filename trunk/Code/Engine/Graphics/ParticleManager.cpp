@@ -52,7 +52,7 @@ bool CParticleManager::Load(const string& _szFileName)
     {
       int l_iNumChildren = l_treeParticleEmitters.GetNumChildren();
 
-      LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d effects.", l_iNumChildren);
+      LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmitters.", l_iNumChildren);
 
       for(int i = 0; i < l_iNumChildren; i++)
       {
@@ -78,7 +78,8 @@ bool CParticleManager::Load(const string& _szFileName)
 			  l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Direction2",Vect3f(0.0f));
 			  l_pInfo->m_vSpawnDir2 = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
         l_pInfo->m_pTexParticle = CORE->GetTextureManager()->GetResource(l_treeParticleEmitter.GetPszProperty("TexParticle",""));
-        
+        l_pInfo->m_fLife1 = l_treeParticleEmitter.GetFloatProperty("Life1");
+        l_pInfo->m_fLife2 = l_treeParticleEmitter.GetFloatProperty("Life2");
         //l_pInfo->m_pTexParticle = l_szString;
 			  AddResource(l_pInfo->m_szId,l_pInfo);
 		  }
@@ -108,7 +109,7 @@ bool CParticleManager::Load(const string& _szFileName)
 
         if(!l_pInfo)
         {
-          LOGGER->AddNewLog(ELL_WARNING, "CParticleManager:: No existeix el emiter tipus %s", l_szType);
+          LOGGER->AddNewLog(ELL_WARNING, "CParticleManager:: No existeix el emiter de tipus %s", l_szType);
           continue;
         }
 
