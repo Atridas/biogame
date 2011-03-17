@@ -24,7 +24,7 @@ void AnimatedGlow(CAL3D_HW_VERTEX_VS _in,
   // Compute the projected coordinates
   //
 	float3 l_Position = CalcAnimtedPos(float4(_in.Position.xyz,1.0), _in.Indices, _in.Weight);
-  Pos_ = mul( float4(l_Position,1.0), g_WorldViewProjectionMatrix );
+  Pos_ = mul( float4(-l_Position.x,l_Position.y,l_Position.z,1.0), g_WorldViewProjectionMatrix );
   // Pass texture coordinates
   UV_.xy = _in.TexCoord.xy;
 }
