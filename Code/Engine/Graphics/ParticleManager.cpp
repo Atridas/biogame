@@ -25,14 +25,15 @@ void CParticleManager::Release()
     CHECKED_DELETE(*it);
     ++it;
   }
+  m_vParticleEvent.clear();
   m_vEmitterParticle.clear();
   
 }
 
-//bool CParticleManager::Load(const SPaticleManagerParams& _params)
+
 bool CParticleManager::Load(const string& _szFileName)
 {
-  //m_szFileName = _params.szFile;
+  
   m_szFileName = _szFileName;
   LOGGER->AddNewLog(ELL_INFORMATION, "CParticleManager::Load \"%s\"", m_szFileName.c_str());
 
@@ -82,7 +83,36 @@ bool CParticleManager::Load(const string& _szFileName)
         l_pInfo->m_fLife2 = l_treeParticleEmitter.GetFloatProperty("Life2");
         //l_pInfo->m_pTexParticle = l_szString;
 			  AddResource(l_pInfo->m_szId,l_pInfo);
-		  }
+
+        CXMLTreeNode l_treeParticleEmittersColors = l_XMLParticles["Colors"];
+
+        if(l_treeParticleEmittersColors.Exists())
+        {
+          int l_iNumChildren = l_treeParticleEmittersColors.GetNumChildren();
+
+          LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmittersColors.", l_iNumChildren);
+
+          for(int i = 0; i < l_iNumChildren; i++)
+          {
+            CXMLTreeNode l_treeParticleEmittersColor = l_treeParticleEmittersColors(i);
+            if(l_treeParticleEmittersColor.IsComment())
+				    continue;
+
+            SParticleEvent* l_pEvent= new SParticleEvent;
+
+            l_pEvent->m_fTime = l_treeParticleEmittersColor.GetFloatProperty("time");
+            l_pEvent->m_szType = l_treeParticleEmitter.GetPszISOProperty("type" ,"");
+
+            l_vVec4 = l_treeParticleEmitter.GetVect4fProperty("Color1",Vect4f(0.0f),true);
+			      l_pEvent->m_Color1 = D3DXCOLOR(l_vVec4.x,l_vVec4.y,l_vVec4.z,l_vVec4.w);
+			      l_vVec4 = l_treeParticleEmitter.GetVect4fProperty("Color2",Vect4f(0.0f),true);
+			      l_pEvent->m_Color2 = D3DXCOLOR(l_vVec4.x,l_vVec4.y,l_vVec4.z,l_vVec4.w);
+
+
+            m_vParticleEvent.push_back(l_pEvent);
+          }
+        }
+      }
     }
 
 		CXMLTreeNode l_treeInstanceParticles = l_XMLParticles["InstanceParticles"];
@@ -134,9 +164,18 @@ void CParticleManager::Update(const float _fElapsedTime)
 {
   vector<CParticleEmitter*>::iterator it  = m_vEmitterParticle.begin(),
                                       end = m_vEmitterParticle.end();
+
+  vector<SParticleEvent*>::iterator itEvent = m_vParticleEvent.begin(),
+                                    endEvent = m_vParticleEvent.end();
+
+  if((*it)->GetId()==(*itEvent)->GetType())
+  {
+
+  }
   while(it != end)
   {
     (*it)->Update(_fElapsedTime);
+    
     ++it;
   }
 }
