@@ -198,11 +198,11 @@
   <action name="ShootBOT">
     <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN" Code="MOUSE_BUTTON_LEFT"/>
   </action>
-
-  <action name="HurtBOT">
-    <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN" Code="MOUSE_BUTTON_RIGHT"/>
-  </action>
 -->
+  <action name="AimBot">
+    <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN_UP" Code="MOUSE_BUTTON_RIGHT"/>
+  </action>
+
 
   <!--.......VIEWER CAMERA CONTROL: GAMEPAD.......................
   <action name="MoveXViewerCam">

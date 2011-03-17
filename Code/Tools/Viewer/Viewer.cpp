@@ -62,6 +62,8 @@ void CViewer::Init()
   {
     m_pCharacter = (CRenderableAnimatedInstanceModel*)m_vAnimatedModels[0];
     m_fInitialCharacterYaw = m_pCharacter->GetYaw();
+	m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0);
+	m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(0,0);
   }
 
   m_pTargetObject = new CObject3D();
@@ -278,6 +280,19 @@ void CViewer::ProcessFreeMode(const float _fElapsedTime,const Vect3i& _vMouseDel
     Vect3f l_vPosition = m_pTargetObject->GetPosition();
     m_pSpotLight->SetPosition(l_vPosition);
     m_pSpotLight->SetDirection(m_pObjectCamera->GetDirection());
+  }
+
+  if ((!INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_W)) &&
+	 (!INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_S)) &&
+	 (!INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_A)) &&
+	 (!INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_D)))
+  {
+	  if (m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() == 1)
+	  {
+		m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+        m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(0,0.3f);
+	  }
+  
   }
 
 }
@@ -593,24 +608,28 @@ bool CViewer::ExecuteFreeModeAction(float _fDeltaSeconds, float _fDelta, const c
   if(strcmp(_pcAction, "MoveFwd") == 0)
   {
     MoveFwd();
+	
     return true;
   }
 
  if(strcmp(_pcAction, "MoveBack") == 0)
   {
     MoveBack();
+	
     return true;
   }
 
   if(strcmp(_pcAction, "MoveLeft") == 0)
   {
     MoveLeft();
+	
     return true;
   }
 
   if(strcmp(_pcAction, "MoveRight") == 0)
   {
     MoveRight();
+	
     return true;
   }
 
@@ -647,7 +666,8 @@ bool CViewer::ExecuteFreeModeAction(float _fDeltaSeconds, float _fDelta, const c
     if(m_pCharacter)
     {
       CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)m_pCharacter;
-      if (l_pAnim->GetAnimatedInstanceModel()->GetCurrentCycle() == 1)
+      if ((l_pAnim->GetAnimatedInstanceModel()->GetCurrentCycle() == 1) ||
+		  (l_pAnim->GetAnimatedInstanceModel()->GetCurrentCycle() == 0))
       {
         l_pAnim->GetAnimatedInstanceModel()->ClearCycle(0.5f);
         l_pAnim->GetAnimatedInstanceModel()->BlendCycle(2,0.5f);
@@ -761,22 +781,42 @@ void CViewer::SetWalking()
 
 void CViewer::MoveFwd()
 {
-  m_bMoveFwd = true;
+	if (m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+	{
+		m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+		m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
+	}
+	m_bMoveFwd = true;
 }
 
 void CViewer::MoveBack()
 {
+	if (m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+	{
+		m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+        m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
+	}
     m_bMoveBack = true;
 }
 
 void CViewer::MoveLeft()
 {
-  m_bMoveLeft = true;
+	if (m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+	{
+		m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+        m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
+	}
+	m_bMoveLeft = true;
 }
 
 void CViewer::MoveRight()
 {
-  m_bMoveRight = true;
+	if (m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+	{
+		m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+        m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
+	}
+	m_bMoveRight = true;
 }
 
 void CViewer::SetNextMode()
