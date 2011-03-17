@@ -28,19 +28,27 @@ struct SParticleInfo
 
 };
 
+struct SParticleEvent
+{
+  string                m_szType;
+  float                 m_fTime;
+  D3DXCOLOR             m_Color1;
+  D3DXCOLOR             m_Color2;
+
+  string GetType() const{return m_szType;};
+};
+
 class CParticleManager : public CMapManager<SParticleInfo>
 {
 public:
   CParticleManager(void);
   ~CParticleManager(){Done();};
-  //bool Load(const SPaticleManagerParams& _params);
+  
   bool Load(const string& _szFileName);
   void Update(const float _fElapsedTime);
   void Render(CRenderManager* _pRM);
-  void Init(CRenderManager* rm);
-  //vector<CParticleEmitter*> GetVectorParticulas() const {return m_vEmitterParticle;};
- 
- 
+  void Init(CRenderManager* _pRM);
+  
 
   void Reload();
 
@@ -49,6 +57,7 @@ public:
 private:
   string m_szFileName;
   vector<CParticleEmitter*> m_vEmitterParticle;
+  vector<SParticleEvent*> m_vParticleEvent;
 
 };
 #endif
