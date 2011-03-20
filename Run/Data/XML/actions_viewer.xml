@@ -79,6 +79,22 @@
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_P"/>
   </action>
   
+  <action script="next()">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_RIGHT"/>
+  </action>
+  
+  <action script="previous()">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_LEFT"/>
+  </action>
+  
+  <action script="next_animation()">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_UP"/>
+  </action>
+  
+  <action script="previous_animation()">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_DOWN"/>
+  </action>
+  
   <action name="ShowAjuda">
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F1"/>
 	</action>

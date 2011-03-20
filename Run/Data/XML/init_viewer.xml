@@ -39,7 +39,7 @@
   
   <ScriptManager file="Data/XML/Lua_viewer.xml"/>
 
-  <GUIManager xml="Data/XML/GUIViewer.xml" start="Free.xml" render_mouse="true"/>
+  <GUIManager xml="Data/XML/GUIViewer.xml" start="Main.xml" render_mouse="true"/>
 
   <SoundManager file="Data/XML/Sound.xml"/>
   
