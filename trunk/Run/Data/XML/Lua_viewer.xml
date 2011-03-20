@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Lua>
   <files>
-    <file path="Data/Lua/viewer_functions.lua" />
+    <file path="Data/Lua/viewer_logica.lua" />
+    <file path="Data/Lua/viewer_gui.lua" />
   </files>
   <initscripts>
     <script action="CORE                          = get_core()"/>

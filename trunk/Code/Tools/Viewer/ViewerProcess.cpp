@@ -69,7 +69,7 @@ bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
 
 void CViewerProcess::RenderINFO(CRenderManager* _pRM)
 {
-  //m_pViewer->ShowInfo();
+  m_pViewer->ShowInfo();
 }
 
 

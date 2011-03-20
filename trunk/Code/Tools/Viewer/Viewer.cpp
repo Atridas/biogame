@@ -62,8 +62,8 @@ void CViewer::Init()
   {
     m_pCharacter = (CRenderableAnimatedInstanceModel*)m_vAnimatedModels[0];
     m_fInitialCharacterYaw = m_pCharacter->GetYaw();
-	m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0);
-	m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(0,0);
+	  m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0);
+	  m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(0,0);
   }
 
   m_pTargetObject = new CObject3D();
@@ -100,7 +100,7 @@ void CViewer::Init()
   m_vAmbientLight = CORE->GetLightManager()->GetAmbientLight();
 
   m_bEnableLights = true;
-  m_bViewMode = false;
+  m_bViewMode = true;
   m_bShowHelp = true;
   m_bNormalRendering = false;
   m_bShowBoxes = false;
@@ -287,12 +287,14 @@ void CViewer::ProcessFreeMode(const float _fElapsedTime,const Vect3i& _vMouseDel
 	 (!INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_A)) &&
 	 (!INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_D)))
   {
-	  if (m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() == 1)
-	  {
-		m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+    if(m_pCharacter)
+    {
+	    if(m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() == 1)
+	    {
+		    m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
         m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(0,0.3f);
-	  }
-  
+	    }
+    }
   }
 
 }
@@ -733,31 +735,6 @@ bool CViewer::ExecuteAnimatedModeAction(float _fDeltaSeconds, float _fDelta, con
     return true;
   }
 
-  //if(strcmp(_pcAction, "CanviObjecteDRETA") == 0)
-  //{
-  //  SelectNextAnimatedModel();
-  //  return true;
-  //}
-
-  //if(strcmp(_pcAction, "CanviObjecteESQUERRA") == 0)
-  //{
-  //  SelectPrevAnimatedModel();
-  //  return true;
-  //}
-
-  //if(strcmp(_pcAction, "CanviAnimacioUP") == 0)
-  //{
-  //  SetNextAnimation();
-  //  return true;
-  //}
-
-
-  //if(strcmp(_pcAction, "CanviAnimacioDOWN") == 0)
-  //{
-  //  SetPrevAnimation();
-  //  return true;
-  //}
-
   return false;
 }
 
@@ -781,41 +758,53 @@ void CViewer::SetWalking()
 
 void CViewer::MoveFwd()
 {
-	if (m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
-	{
-		m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
-		m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
-	}
+  if(m_pCharacter)
+  {
+	  if(m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+	  {
+		  m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+		  m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
+	  }
+  }
 	m_bMoveFwd = true;
 }
 
 void CViewer::MoveBack()
 {
-	if (m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
-	{
-		m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
-        m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
-	}
-    m_bMoveBack = true;
+  if(m_pCharacter)
+  {
+	  if (m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+	  {
+		  m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+          m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
+	  }
+  }
+  m_bMoveBack = true;
 }
 
 void CViewer::MoveLeft()
 {
-	if (m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
-	{
-		m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
-        m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
-	}
+  if(m_pCharacter)
+  {
+	  if (m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+	  {
+		  m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+          m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
+	  }
+  }
 	m_bMoveLeft = true;
 }
 
 void CViewer::MoveRight()
 {
-	if (m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
-	{
-		m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
-        m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
-	}
+  if(m_pCharacter)
+  {
+	  if (m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+	  {
+		  m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+          m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
+	  }
+  }
 	m_bMoveRight = true;
 }
 
@@ -855,8 +844,9 @@ void CViewer::ShowFreeModeInfo()
   stringstream l_SStream;
   stringstream l_SStreamHelp;
 
-  FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg3.c_str());
+  //FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg3.c_str());
 
+  /*
   if(m_bShowHelp)
   {
     l_SStreamHelp << "---<Ajuda>---" <<  endl;
@@ -868,9 +858,10 @@ void CViewer::ShowFreeModeInfo()
     l_SStreamHelp << "[Vista Càmera] Ratolí" <<  endl;
     l_SStreamHelp << "[Correr] Mantenir L_Shift" <<  endl;
     l_SStreamHelp << "[Ocultar Ajuda] F1" <<  endl;
-  }
 
-  FONT_MANAGER->DrawText(550,l_iPosicio2,colGREEN,l_uiFontType,l_SStreamHelp.str().c_str());
+    FONT_MANAGER->DrawText(550,l_iPosicio2,colGREEN,l_uiFontType,l_SStreamHelp.str().c_str());
+  }
+  */
 
 }
 
@@ -888,7 +879,7 @@ void CViewer::ShowMeshModeInfo()
 
   if (m_vMeshes.size() > 0)
   {
-    FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg.c_str());
+    //FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg.c_str());
     l_pMeshInstance = *m_itCurrentMesh;
     Vect3f l_vDimension = l_pMeshInstance->GetBoundingBox()->GetDimension();
 
@@ -904,15 +895,11 @@ void CViewer::ShowMeshModeInfo()
     l_SStream << "Pitch: " << (float)l_pMeshInstance->GetPitch() << endl;
     l_SStream << "Roll: " << (float)l_pMeshInstance->GetRoll() << endl;
     FONT_MANAGER->DrawText(0,l_iPosicio,colGREEN,l_uiFontType,l_SStream.str().c_str());
-  }else{
-    FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg.c_str());
-    l_SStream << "No hi ha cap OBJECTE MESH per mostrar" << endl;
-    FONT_MANAGER->DrawText(0,l_iPosicio,colGREEN,l_uiFontType,l_SStream.str().c_str());
   }
 
+  /*
   if(m_bShowHelp)
   {
-         
       l_SStreamHelp << "---<Ajuda>---" <<  endl;
       l_SStreamHelp << "[Canvi de Mode] Tecla M" <<  endl;
       l_SStreamHelp << "[Següent Mesh] Fletxa Dreta" <<  endl;
@@ -923,6 +910,7 @@ void CViewer::ShowMeshModeInfo()
           
       FONT_MANAGER->DrawText(550,l_iPosicio2,colGREEN,l_uiFontType,l_SStreamHelp.str().c_str());
   }
+  */
 }
 
 void CViewer::ShowAnimatedModeInfo()
@@ -938,29 +926,24 @@ void CViewer::ShowAnimatedModeInfo()
   CRenderableObject* l_pAnimatedInstance;
 
   if (m_vAnimatedModels.size() > 0)
-    {
-      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg.c_str());
-      l_pAnimatedInstance = *m_itCurrentAnimated;
-      CRenderableAnimatedInstanceModel* l_pRenderModel = (CRenderableAnimatedInstanceModel*)l_pAnimatedInstance;
+  {
+    //FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg.c_str());
+    l_pAnimatedInstance = *m_itCurrentAnimated;
+    CRenderableAnimatedInstanceModel* l_pRenderModel = (CRenderableAnimatedInstanceModel*)l_pAnimatedInstance;
 
-      l_SStream << "Nom: " << l_pAnimatedInstance->GetName() << endl;
-      l_SStream << "Tipus: AnimatedModel" << endl;
-      l_SStream << "Posicio: " << (float)l_pAnimatedInstance->GetPosition().x << " ";
-      l_SStream << (float)l_pAnimatedInstance->GetPosition().y << " ";
-      l_SStream << (float)l_pAnimatedInstance->GetPosition().y << endl;
-      l_SStream << "Yaw: " << (float)l_pAnimatedInstance->GetYaw() << endl;
-      l_SStream << "Pitch: " << (float)l_pAnimatedInstance->GetPitch() << endl;
-      l_SStream << "Roll: " << (float)l_pAnimatedInstance->GetRoll() << endl;
-      l_SStream << "Animacio: " << (int)l_pRenderModel->GetAnimatedInstanceModel()->GetCurrentCycle() << endl;
-      FONT_MANAGER->DrawText(0,l_iPosicio,colGREEN,l_uiFontType,l_SStream.str().c_str());
-    }
-    else
-    {
-      FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg.c_str());
-      l_SStream << "No hi ha cap OBJECTE ANIMAT per mostrar" << endl;
-      FONT_MANAGER->DrawText(0,l_iPosicio,colGREEN,l_uiFontType,l_SStream.str().c_str());
-    }
+    l_SStream << "Nom: " << l_pAnimatedInstance->GetName() << endl;
+    l_SStream << "Tipus: AnimatedModel" << endl;
+    l_SStream << "Posicio: " << (float)l_pAnimatedInstance->GetPosition().x << " ";
+    l_SStream << (float)l_pAnimatedInstance->GetPosition().y << " ";
+    l_SStream << (float)l_pAnimatedInstance->GetPosition().y << endl;
+    l_SStream << "Yaw: " << (float)l_pAnimatedInstance->GetYaw() << endl;
+    l_SStream << "Pitch: " << (float)l_pAnimatedInstance->GetPitch() << endl;
+    l_SStream << "Roll: " << (float)l_pAnimatedInstance->GetRoll() << endl;
+    l_SStream << "Animacio: " << (int)l_pRenderModel->GetAnimatedInstanceModel()->GetCurrentCycle() << endl;
+    FONT_MANAGER->DrawText(0,l_iPosicio,colGREEN,l_uiFontType,l_SStream.str().c_str());
+  }
 
+    /*
     if(m_bShowHelp)
     {
         l_SStreamHelp << "---<Ajuda>---" <<  endl;
@@ -975,4 +958,5 @@ void CViewer::ShowAnimatedModeInfo()
           
         FONT_MANAGER->DrawText(550,l_iPosicio2,colGREEN,l_uiFontType,l_SStreamHelp.str().c_str());
     }
+    */
 }
