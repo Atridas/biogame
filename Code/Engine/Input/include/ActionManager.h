@@ -14,7 +14,7 @@ class CActionManager
   : public CMapManager<CInputAction>
 {
 public:
-  CActionManager() : m_pProcess(0),m_szXMLFile("") {};
+  CActionManager() : m_pProcess(0),m_szXMLFile(""),m_bReload(false) {};
   ~CActionManager() {Done();};
 
   bool Init(string _szXMLFile);
@@ -23,8 +23,7 @@ public:
 
   void Update(float _fDeltaSeconds);
 
-  //TODO
-  void Reload() {};
+  void Reload() {m_bReload = true;};
 
   virtual void Release();
 
@@ -33,6 +32,7 @@ private:
   void ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction);
   void ExecuteScript(float _fDeltaSeconds, float _fDelta, const char* _pcScript);
 
+  bool m_bReload;
   string m_szXMLFile;
   CProcess* m_pProcess;
 };

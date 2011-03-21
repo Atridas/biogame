@@ -62,6 +62,13 @@ void CActionManager::Release()
 
 void CActionManager::Update (float _fDeltaSeconds)
 {
+  if(m_bReload)
+  {
+    Done();
+    Init(m_szXMLFile);
+    m_bReload = false;
+  }
+
   TMapResource::iterator l_It = m_Resources.begin();
   TMapResource::iterator l_End = m_Resources.end();
   while(l_It != l_End) 
