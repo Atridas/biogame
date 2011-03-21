@@ -98,19 +98,19 @@ bool CParticleManager::Load(const string& _szFileName)
             if(l_treeParticleEmittersColor.IsComment())
 				    continue;
 
-            SParticleEvent* l_pEvent= new SParticleEvent;
+            SParticleEvent l_Event;
 
-            l_pEvent->m_fTime = l_treeParticleEmittersColor.GetFloatProperty("time");
+            l_Event.m_fTime = l_treeParticleEmittersColor.GetFloatProperty("time");
             
 
             l_vVec4 = l_treeParticleEmitter.GetVect4fProperty("Color1",Vect4f(0.0f),true);
-			      l_pEvent->m_Color1 = D3DXCOLOR(l_vVec4.x,l_vVec4.y,l_vVec4.z,l_vVec4.w);
+			      l_Event.m_Color1 = D3DXCOLOR(l_vVec4.x,l_vVec4.y,l_vVec4.z,l_vVec4.w);
 			      l_vVec4 = l_treeParticleEmitter.GetVect4fProperty("Color2",Vect4f(0.0f),true);
-			      l_pEvent->m_Color2 = D3DXCOLOR(l_vVec4.x,l_vVec4.y,l_vVec4.z,l_vVec4.w);
+			      l_Event.m_Color2 = D3DXCOLOR(l_vVec4.x,l_vVec4.y,l_vVec4.z,l_vVec4.w);
 
-            l_pInfo->m_vTime.push_back(l_pEvent->m_fTime);
-            l_pInfo->m_vColor.push_back(l_pEvent->m_Color1);
-            l_pInfo->m_vColor.push_back(l_pEvent->m_Color2);
+            l_pInfo->m_vTime.push_back(l_Event.m_fTime);
+            l_pInfo->m_vColor.push_back(l_Event.m_Color1);
+            l_pInfo->m_vColor.push_back(l_Event.m_Color2);
 
             //m_vParticleEvent.push_back(l_pEvent);
           }
