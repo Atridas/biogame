@@ -25,17 +25,19 @@ struct SParticleInfo
   CTexture*             m_pTexParticle;
   float                 m_fLife1;
   float                 m_fLife2;
+  vector<D3DXCOLOR>      m_vColor;
+  vector<float>          m_vTime;
 
 };
 
 struct SParticleEvent
 {
-  string                m_szType;
+  
   float                 m_fTime;
   D3DXCOLOR             m_Color1;
   D3DXCOLOR             m_Color2;
 
-  string GetType() const{return m_szType;};
+ 
 };
 
 class CParticleManager : public CMapManager<SParticleInfo>
@@ -57,7 +59,7 @@ public:
 private:
   string m_szFileName;
   vector<CParticleEmitter*> m_vEmitterParticle;
-  vector<SParticleEvent*> m_vParticleEvent;
+  
 
 };
 #endif

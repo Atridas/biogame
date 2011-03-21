@@ -24,7 +24,17 @@ bool CParticle::Update(float fTimeDelta)
     //its time to die..
     return false;
   }
-  
+
+  int i= m_vTime.size()-1;
+  while (i>=0)
+  {
+     if(m_vTime[i]<m_fAge)
+	 {
+	   m_Color = m_vColor[i];
+	 }
+    i--;
+  }
+
   m_vPos=m_vPos+m_vDir*fTimeDelta;
   return true;
 }
