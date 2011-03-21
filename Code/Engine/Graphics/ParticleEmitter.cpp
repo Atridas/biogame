@@ -39,6 +39,8 @@ m_Particles(NUMPARTICLES)
   m_vbParticles   = NULL;
   //SetVBSize(NUMPARTICLES / 10);
   m_fNumNewPartsExcess = 0.0f;
+
+  //TODO inicialitzar els vector de clolor i temps
 }
 
 void CParticleEmitter::SetAttributes(SParticleInfo* _info) 
@@ -55,7 +57,9 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
   m_pTexParticle = _info->m_pTexParticle;
   m_fLife1 = _info->m_fLife1;
   m_fLife2 = _info->m_fLife2;
-
+  m_vColor = _info->m_vColor;
+  m_vTime = _info->m_vTime;
+  //m_vNewColor = D3DXCOLOR(0.0, 0.0, 0.0, 0.0);
 }
 
 void CParticleEmitter::Update(float fElapsedTime)
@@ -110,7 +114,53 @@ void CParticleEmitter::Update(float fElapsedTime)
     
       part->SetDir(D3DXVECTOR3(fRandX, fRandY, fRandZ));
       part->SetPos(m_vPos);
-    
+
+
+      int j=m_vTime.size();
+      while(j!=0)
+      {
+        m_vNewColor.push_back(m_Color1);
+        j--;
+      }
+	    int i=m_vTime.size()-1;
+      while(i!=0)
+      {
+        
+	      float fRandR = RandomNumber(m_vColor[i*2].r, m_vColor[(i*2)+1].r);
+		    float fRandG = RandomNumber(m_vColor[i*2].g, m_vColor[(i*2)+1].g);
+		    float fRandB = RandomNumber(m_vColor[i*2].b, m_vColor[(i*2)+1].b);
+		    float fRandA = RandomNumber(m_vColor[i*2].a, m_vColor[(i*2)+1].a);
+		    
+        
+		    m_vNewColor[i]= D3DXCOLOR(fRandR, fRandG, fRandB, fRandA);
+		    i--;
+        
+       }	  
+      part->m_vTime = m_vTime;
+      part->m_vColor = m_vNewColor;
+    //***************************************************
+    // nou
+  /*   
+      int i=m_vTime.size()-1;
+      float temps=0;
+      float temps2=0;
+      float temps3=0;
+      while(i!=0)
+      {
+        temps3=part->GetAge();
+        temps=m_vTime[i];
+        temps2=part->GetLifeTimer();
+        if(m_vTime[i]< part->GetAge())
+        {
+          m_Color1 = m_vColor[i*2];
+          m_Color2 = m_vColor[(i*2)+1];
+          i=1;
+        }
+        --i;
+      }
+      */
+    //*************************************************
+
                       
       float fRandR = RandomNumber(m_Color1.r, m_Color2.r);
       float fRandG = RandomNumber(m_Color1.g, m_Color2.g);

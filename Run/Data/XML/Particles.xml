@@ -3,15 +3,15 @@
   <ParticleEmitters>
     <ParticleEmitter  id="font1"                        MinEmitRate="70.0"             MaxEmitRate="100.0"
                       Color1="1.0 1.0 1.0 1.0"          Color2="0.0 0.0 0.0 1.0"       MinSize="1.0"        MaxSize="3.0"
-                      Direction1="0.0 0.0 1.0"          Direction2="4.0  7.0  5.0"     Life1="0.1"          Life2="0.3"
+                      Direction1="0.0 0.0 1.0"          Direction2="4.0  7.0  5.0"     Life1="10.0"          Life2="11.3"
                       TexParticle="Data/Textures/Particula_ALFA.dds"/>
       <Colors>
-        <Color        type="font1"    time="2.0"        Color1="0.0 0.0 0.0 1.0"       Color2="0.2 0.2 0.2 1.0"/>
-        <Color        type="font1"    time="4.0"        Color1="0.2 0.2 0.2 1.0"       Color2="0.4 0.4 0.4 1.0"/>
-        <Color        type="font1"    time="6.0"        Color1="0.5 0.5 0.5 1.0"       Color2="0.7 0.7 0.7 1.0"/>
-        <Color        type="font1"    time="8.0"        Color1="0.8 0.8 0.8 1.0"       Color2="1.0 1.0 1.0 1.0"/>
+        <Color        time="0.2"        Color1="0.0 0.0 0.0 1.0"       Color2="0.0 0.0 0.0 1.0"/>
+        <Color        time="4.0"        Color1="0.0 0.0 0.0 1.0"       Color2="0.0 0.0 0.0 1.0"/>
+        <Color        time="6.0"        Color1="0.8 0.8 0.8 1.0"       Color2="0.9 0.9 0.9 1.0"/>
+        <Color        time="8.0"        Color1="0.9 0.9 0.9 1.0"       Color2="1.0 1.0 1.0 1.0"/>
       </Colors>
-
+    <!--
     <ParticleEmitter id="font2"                         MinEmitRate="30.0"             MaxEmitRate="50.0"
                      Color1="1.0 0.0 1.0 1.0"           Color2="1.0 0.5 1.0 1.0"       MinSize="1.0"        MaxSize="2.0"
                      Direction1="-1.0 0.0 -5.0"         Direction2="1.0 0.0 5.0"       Life1="0.2"          Life2="0.4"
@@ -22,19 +22,20 @@
                      Color1="1.0 1.0 1.0 1.0"           Color2="1.0 1.0 1.0 1.0"       MinSize="1.0"        MaxSize="1.0"
                      Direction1="1.0  -0.0  -5.0"       Direction2="2.0  0.0  1.0"     Life1="1.0"          Life2="1.5"
                      TexParticle="Data/Textures/gohan.png"/>
-    
+    -->
     
   </ParticleEmitters>
 <!--*************************************************************************************************************************-->
   <InstanceParticles>
     <InstanceParticle id="hola"                   type="font1"                      Position="0.0  0.0  0.0"/>
+    <!--
     <InstanceParticle id="edu"                    type="font3"                      Position="2.0  8.0  0.0"/>
     <InstanceParticle id="edu2"                   type="font2"                      Position="210  0.0  2.0"/>
     <InstanceParticle id="edu3"                   type="font3"                      Position="2.0  5.0  3.0"/>
     <InstanceParticle id="edu4"                   type="font2"                      Position="-6.0  7.0  2.0"/>
     <InstanceParticle id="edu8"                   type="font1"                      Position="8.0  9.9  9.0"/>
     <InstanceParticle id="edu6"                   type="font3"                      Position="2.0  7.0  0.0"/>
-    
+    -->
   </InstanceParticles>
   
 </Particles>
