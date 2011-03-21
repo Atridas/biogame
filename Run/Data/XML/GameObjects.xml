@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <GameObjectManager>
-  <GameObject name="Box1" Physx="true" PhysxType="BoundingBox" RenderableObject="Box01" PhysxActor="Box01"/>
-  <GameObject name="Box2" Physx="false" PhysxType="BoundingBox" RenderableObject="Box02" PhysxActor="Box02"/>
-  <GameObject name="Box3" Physx="true" PhysxType="BoundingBox" RenderableObject="Box03" PhysxActor="Box03"/>
-  <GameObject name="Box4" Physx="true" PhysxType="BoundingBox" RenderableObject="Box04" PhysxActor="Box04"/>
-  <GameObject name="Box5" Physx="true" PhysxType="BoundingSphere" RenderableObject="Box05" PhysxActor="Box05"/>
+  <GameObject name="Box1" Physx="true" PhysxType="BoundingBox" RenderableObject="Box01" PhysxActor="Box01" Body="0.1"/>
+  <GameObject name="Box2" Physx="false" PhysxType="BoundingBox" RenderableObject="Box02" PhysxActor="Box02" Body="0.1"/>
+  <GameObject name="Box3" Physx="true" PhysxType="BoundingBox" RenderableObject="Box03" PhysxActor="Box03" Body="0.1"/>
+  <GameObject name="Box4" Physx="true" PhysxType="BoundingBox" RenderableObject="Box04" PhysxActor="Box04" Body="0.1"/>
+  <GameObject name="Box5" Physx="true" PhysxType="BoundingSphere" RenderableObject="Box05" PhysxActor="Box05" Body="0.1"/>
 </GameObjectManager>
