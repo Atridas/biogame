@@ -1,7 +1,7 @@
 #include <sstream>
 #include "Process.h"
 #include "Core.h"
-#include "ActionToInput.h"
+#include "ActionManager.h"
 #include "Camera.h"
 #include "Utils/Timer.h"
 
@@ -62,8 +62,8 @@ bool CProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _p
     return true;
   } else if(strcmp(_pcAction, "ReloadActions") == 0)
   {
-    CORE->GetActionToInput()->Reload();
-    CORE->GetRenderableObjectsManager()->Reload();
+    CORE->GetActionManager()->Reload();
+    //CORE->GetRenderableObjectsManager()->Reload();
     return true;
   } else if(strcmp(_pcAction, "ReloadShaders") == 0)
   {

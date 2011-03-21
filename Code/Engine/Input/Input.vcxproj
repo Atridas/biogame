@@ -94,19 +94,25 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ActionManager.cpp" />
     <ClCompile Include="ActionToInput.cpp" />
     <ClCompile Include="GamePad.cpp" />
+    <ClCompile Include="InputAction.cpp" />
     <ClCompile Include="InputDevice.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="InputTrigger.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Mouse.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\ActionManager.h" />
     <ClInclude Include="include\ActionToInput.h" />
     <ClInclude Include="include\GamePad.h" />
+    <ClInclude Include="include\InputAction.h" />
     <ClInclude Include="include\InputDefs.h" />
     <ClInclude Include="include\InputDevice.h" />
     <ClInclude Include="include\InputManager.h" />
+    <ClInclude Include="include\InputTrigger.h" />
     <ClInclude Include="include\Keyboard.h" />
     <ClInclude Include="include\Mouse.h" />
   </ItemGroup>

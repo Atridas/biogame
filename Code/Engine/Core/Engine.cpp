@@ -9,7 +9,7 @@
 #include <RenderManager.h>
 #include <LogRender.h>
 #include <Utils/Timer.h>
-#include <ActionToInput.h>
+#include <ActionManager.h>
 #include <Console.h>
 #include <GUIManager.h>
 
@@ -36,7 +36,7 @@ bool CEngine::Init(const SInitParams& _InitParams,  HWND hWnd)
     CHECKED_DELETE( m_pHDR );
   }
 
-  m_pCore->GetActionToInput()->SetProcess(m_pActiveProcess);
+  m_pCore->GetActionManager()->SetProcess(m_pActiveProcess);
 
   SetOk(true);
 

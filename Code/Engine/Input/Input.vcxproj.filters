@@ -13,6 +13,9 @@
     <Filter Include="ActionToInput">
       <UniqueIdentifier>{b429e257-72c1-4f2a-a00b-8c6484363724}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ActionManager">
+      <UniqueIdentifier>{3f86c5dc-3c97-4a34-b98c-5a759779f7df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="InputManager.cpp">
@@ -32,6 +35,15 @@
     </ClCompile>
     <ClCompile Include="ActionToInput.cpp">
       <Filter>ActionToInput</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionManager.cpp">
+      <Filter>ActionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="InputAction.cpp">
+      <Filter>ActionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="InputTrigger.cpp">
+      <Filter>ActionManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -55,6 +67,15 @@
     </ClInclude>
     <ClInclude Include="include\ActionToInput.h">
       <Filter>ActionToInput</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ActionManager.h">
+      <Filter>ActionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InputAction.h">
+      <Filter>ActionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InputTrigger.h">
+      <Filter>ActionManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

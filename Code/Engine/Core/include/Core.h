@@ -16,7 +16,8 @@ class CFontManager;
 class CXMLTreeNode;
 class CTimer;
 class CInputManager;
-class CActionToInput;
+//class CActionToInput;
+class CActionManager;
 class CRenderableObjectsManager;
 class CAnimatedModelManager;
 class CLightManager;
@@ -46,7 +47,7 @@ public:
    * Core està implementat segons el patró de Singleton.
   **/
                       CCore               (void): m_pRenderManager(0),m_pLanguageManager(0),m_pFontManager(0),m_pInputManager(0),
-                                                  m_pActionToInput(0),m_pRenderableObjectsManager(0),m_pLightManager(0),
+                                                  m_pActionManager(0),m_pRenderableObjectsManager(0),m_pLightManager(0),
                                                   m_pSceneEffectManager(0), m_pTimer(0), m_pScriptManager(0),m_pTextureManager(0),
                                                   m_pStaticMeshManager(0),m_pAnimatedModelManager(0),m_pEffectManager(0),
                                                   m_pGUIManager(0),m_pPhysicsManager(0),m_pParticleManager(0),m_pSoundManager(0),
@@ -123,7 +124,7 @@ public:
    * Getter de l'ActionToInput.
    * @return L'ActionToInput.
   **/
-  CActionToInput*     GetActionToInput      () const                        {return m_pActionToInput;}
+  CActionManager* GetActionManager() const {return m_pActionManager;};
   //CAnimatedModelManager*  GetAnimatedModelManager      () const             {return m_pAnimatedModelManager;}
 
   CLightManager*      GetLightManager       () const                        {return m_pLightManager;}
@@ -193,7 +194,7 @@ private:
   /**
    * ActionToInput.
   **/
-  CActionToInput*             m_pActionToInput;
+  CActionManager*             m_pActionManager;
   /**
    * RenderableObjectsManager.
   **/

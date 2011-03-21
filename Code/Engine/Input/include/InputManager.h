@@ -57,11 +57,17 @@ public:
 	//----CScriptRegister interface-------------------
 	//virtual void		RegisterFunctions								(CScriptManager* scriptManager);
 
+  uint32 GetCode(const string& _szCodeName) {return m_String2Code[_szCodeName];};
 
 private:
 	void						Release													();
 
-private:	
+private:
+
+  void            InitString2Input                ();
+
+  map<std::string, uint32> m_String2Code;
+
 	bool			            m_bIsOk;	      // Initialization boolean control
 	LPDIRECTINPUT8	      m_pDI;
 	CKeyboard*		        m_pKB;		      // Pointer to the Keyboard instance
