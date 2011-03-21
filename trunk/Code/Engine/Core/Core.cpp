@@ -12,7 +12,7 @@
 #include <FontManager.h>
 #include <Utils/LanguageManager.h>
 #include <InputManager.h>
-#include <ActionToInput.h>
+#include <ActionManager.h>
 #include <RenderableObjectsManager.h>
 #include <LightManager.h>
 #include <SceneEffectManager.h>
@@ -39,7 +39,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pLanguageManager          = new CLanguageManager();
   m_pFontManager              = new CFontManager();
   m_pInputManager             = new CInputManager();
-  m_pActionToInput            = new CActionToInput();
+  m_pActionManager            = new CActionManager();
   m_pRenderableObjectsManager = new CRenderableObjectsManager();
   m_pLightManager             = new CLightManager();
   m_pSceneEffectManager       = new CSceneEffectManager();
@@ -89,7 +89,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pLanguageManager->Init(_InitParams.LanguageManagerParams);
   m_pFontManager->Init(m_pRenderManager,_InitParams.FontManagerParams.pcFontsXML);
   m_pInputManager->Init(hWnd,Vect2i(_InitParams.RenderManagerParams.v2iResolution.x,_InitParams.RenderManagerParams.v2iResolution.y),_InitParams.InputManagerParams.bExclusiveMouse);
-  m_pActionToInput->Init(m_pInputManager,_InitParams.ActionToInputParams.pcFile);
+  m_pActionManager->Init(_InitParams.ActionToInputParams.pcFile);
 
   m_pRenderableObjectsManager->Load(_InitParams.RenderableObjectsManagerParams.vXMLFiles);
   m_pLightManager->Load(_InitParams.LightsManagerParams.szFile);
@@ -128,7 +128,7 @@ void CCore::Release()
   CHECKED_DELETE(m_pSceneEffectManager)
   CHECKED_DELETE(m_pLightManager)
   CHECKED_DELETE(m_pRenderableObjectsManager)
-  CHECKED_DELETE(m_pActionToInput)
+  CHECKED_DELETE(m_pActionManager)
   CHECKED_DELETE(m_pInputManager)
   CHECKED_DELETE(m_pFontManager)
   CHECKED_DELETE(m_pLanguageManager)
@@ -150,7 +150,7 @@ void CCore::Update()
   m_pInputManager->Update();
   if(!m_pConsole->IsActive())
   {
-    m_pActionToInput->Update(l_fElapsedTime);
+    m_pActionManager->Update(l_fElapsedTime);
   }
   m_pRenderableObjectsManager->Update(l_fElapsedTime);
   m_pPhysicsManager->Update(l_fElapsedTime);
