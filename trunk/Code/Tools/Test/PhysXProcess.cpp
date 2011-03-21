@@ -244,6 +244,7 @@ bool CPhysXProcess::Init()
     m_pRenderPhysX->SetVisible(true);
   }
 
+  CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
   CORE->GetRenderableObjectsManager()->GetResource("Box02")->SetVisible(true);
   CORE->GetRenderableObjectsManager()->GetResource("Box03")->SetVisible(true);
   CORE->GetRenderableObjectsManager()->GetResource("Box04")->SetVisible(true);

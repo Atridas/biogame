@@ -21,7 +21,8 @@ public:
   ~CGameObjectManager()               {Done();};
   void						CleanUp()                      {Release();m_vResources.clear();};
   bool						Load	(const string& _szFileName, bool _bReload);
-  virtual void				Release();
+  CPhysicActor*   AddPhysicActor(CRenderableObject* l_pRenderObject, string& _szName, string& _szMode, float _fBody);
+  virtual void		Release();
 private:
   vector<CGameObject*> m_vResources;
 };

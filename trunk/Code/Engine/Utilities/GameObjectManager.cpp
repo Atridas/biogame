@@ -8,16 +8,42 @@
 #include "Core.h"
 #include "PhysicActor.h"
 #include "PhysicsManager.h"
+#include "RenderableObjectsManager.h"
+
 
 void CGameObjectManager::Release()
 {
   CMapManager<CGameObject>::Release();
 }
 
+CPhysicActor* CGameObjectManager::AddPhysicActor(CRenderableObject* _pRenderObject, string& _szName, string& _szMode, float _fBody)
+{
+  CPhysicActor* l_pPhysicActor = 0;
+  if (_szMode == "BoundingBox")
+  {
+    Vect3f l_vBoxDim = _pRenderObject->GetBoundingBox()->GetDimension();
+
+    CPhysicUserData* l_pPhysicsUserData = new CPhysicUserData(_szName);
+    l_pPhysicsUserData->SetColor(colWHITE);
+    l_pPhysicsUserData->SetPaint(true);
+    l_pPhysicActor = new CPhysicActor(l_pPhysicsUserData);
+    l_pPhysicActor->AddBoxSphape(l_vBoxDim/2);
+    if (_fBody != 0)
+    {
+      l_pPhysicActor->CreateBody(_fBody);
+    }
+
+    CORE->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
+ 
+  }
+  return l_pPhysicActor;
+}
+
 bool CGameObjectManager::Load(const string& _szFileName, bool _bReload)
 {
 	
-	
+  CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
+  CPhysicsManager* l_pPM = CORE->GetPhysicsManager();
 	LOGGER->AddNewLog(ELL_INFORMATION, "CGameObjectManager::Load");
 
 	CXMLTreeNode l_XMLObjects;
@@ -32,8 +58,11 @@ bool CGameObjectManager::Load(const string& _szFileName, bool _bReload)
 	for(int i = 0; i < l_iNumObjects; i++)
 	{
 		string l_szName, l_bPhysx, l_szRenderObject, l_szPhysxType, l_szPhysxActor;
+    float l_fBody;
 
 		CGameObject* l_pGameObject = 0;
+    CRenderableObject* l_pRenderObject = 0;
+    CPhysicActor* l_pPhysicsActor = 0;
 		CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
 
 		CXMLTreeNode l_XMLObject = l_XMLObjects(i);
@@ -43,18 +72,24 @@ bool CGameObjectManager::Load(const string& _szFileName, bool _bReload)
 			continue;
 		}
 
-		l_szName			= l_XMLObject.GetPszISOProperty("name" ,"");
-		l_bPhysx			= l_XMLObject.GetBoolProperty("Physx");
+		l_szName			    = l_XMLObject.GetPszISOProperty("name" ,"");
+		l_bPhysx			    = l_XMLObject.GetBoolProperty("Physx");
 		l_szRenderObject	= l_XMLObject.GetPszISOProperty("RenderableObject" ,"");
 		l_szPhysxActor		= l_XMLObject.GetPszISOProperty("PhysxActor" ,"");
-		l_szPhysxType		= l_XMLObject.GetPszISOProperty("PhysxType" ,"");
+		l_szPhysxType		  = l_XMLObject.GetPszISOProperty("PhysxType" ,"");
+    l_fBody           = l_XMLObject.GetFloatProperty("Body");
 
 		l_pGameObject = GetResource(l_szName);
-		if(!l_pGameObject)
+    l_pRenderObject = l_pROM->GetResource(l_szRenderObject);
+		if((!l_pGameObject) && (!l_pRenderObject))
 		{
 			if(l_szPhysxType == "BoundingBox") 
 			{
-				
+			  l_pGameObject = new CGameObject(l_szName);
+        l_pPhysicsActor = AddPhysicActor(l_pRenderObject,l_szPhysxActor,l_szPhysxType,l_fBody);
+        l_pGameObject->Init(l_pRenderObject,l_pPhysicsActor);
+        m_vResources.push_back(l_pGameObject);
+        AddResource(l_szName,l_pGameObject);
 			
 
 			} else if(l_szPhysxType == "BoundingSphere") 
