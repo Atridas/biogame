@@ -48,7 +48,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pConsole                  = new CConsole();
   m_pGUIManager               = new CGUIManager(_InitParams.RenderManagerParams.v2iResolution);
   m_pPhysicsManager           = new CPhysicsManager();
-  m_pParticleManager          = new CParticleManager();
+  //m_pParticleManager          = new CParticleManager();
   m_pSoundManager             = new CSoundManager();
 
   m_pEngine                   = _pEngine;
@@ -69,11 +69,12 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
     SetOk(false);
   }
 
- if(!m_pParticleManager->Load(_InitParams.PaticleManagerParams.szFile))
+ /*if(!m_pParticleManager->Load(_InitParams.PaticleManagerParams.szFile))
   {
     LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al manager de particulas");
     SetOk(false);
-  }
+  }*/
+
   if(!m_pStaticMeshManager->Load(_InitParams.StaticMeshManagerParams))
   {
     LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al manager de Static Meshes.");
@@ -119,7 +120,7 @@ void CCore::Release()
 
   //delete a l'inrevès de com s'ha fet l'init
   CHECKED_DELETE(m_pSoundManager);
-  CHECKED_DELETE(m_pParticleManager);
+  //CHECKED_DELETE(m_pParticleManager);
   CHECKED_DELETE(m_pPhysicsManager);
   CHECKED_DELETE(m_pGUIManager);
   CHECKED_DELETE(m_pConsole);
@@ -154,5 +155,5 @@ void CCore::Update()
   }
   m_pRenderableObjectsManager->Update(l_fElapsedTime);
   m_pPhysicsManager->Update(l_fElapsedTime);
-  m_pParticleManager->Update(l_fElapsedTime);
+  //m_pParticleManager->Update(l_fElapsedTime);
 }

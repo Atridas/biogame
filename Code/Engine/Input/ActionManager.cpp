@@ -20,6 +20,8 @@ bool CActionManager::Init(string _szXMLFile)
   
   int l_iNumActions = l_XMLActions.GetNumChildren();
 
+  CInputAction* l_pAction = 0;
+
   for(int i = 0; i < l_iNumActions; i++)
   {
     CXMLTreeNode l_XMLAction = l_XMLActions(i);
@@ -29,15 +31,21 @@ bool CActionManager::Init(string _szXMLFile)
       if(!l_XMLAction.IsComment())
       {
         LOGGER->AddNewLog(ELL_WARNING,"CInputAction::Init Error de format a l'xml, hi ha un element invàlid \"%s\"", l_XMLAction.GetName());
-        return false;
       }
 
     }else{
-      CInputAction* l_pAction = new CInputAction();
+      l_pAction = new CInputAction();
       
       if(l_pAction->Init(&l_XMLAction))
       {
-        AddResource(l_pAction->GetName(),l_pAction);
+        if(!GetResource(l_pAction->GetName()))
+        {
+          AddResource(l_pAction->GetName(),l_pAction);
+        }else{
+          LOGGER->AddNewLog(ELL_WARNING,"CInputAction::Init Error accio repetida \"%s\"", l_pAction->GetName().c_str());
+          CHECKED_DELETE(l_pAction);
+        }
+        
       }else{
         CHECKED_DELETE(l_pAction);
       }
@@ -62,10 +70,7 @@ void CActionManager::Update (float _fDeltaSeconds)
     l_pAction->Update();
     if(l_pAction->IsTriggered())
     {
-      if(l_pAction->HasName())
-      {
-        ExecuteAction(_fDeltaSeconds,l_pAction->GetDelta(),l_pAction->GetName().c_str());
-      }
+      ExecuteAction(_fDeltaSeconds,l_pAction->GetDelta(),l_pAction->GetName().c_str());
 
       if(l_pAction->HasScript())
       {

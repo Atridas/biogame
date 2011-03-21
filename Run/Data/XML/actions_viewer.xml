@@ -50,7 +50,7 @@
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F11"/>
 	</action>
  
- 	<action script="GUI_MANAGER:reloadGui()">
+ 	<action name="reloadGUI" script="GUI_MANAGER:reloadGui()">
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F12"/>
 	</action>
   
@@ -59,39 +59,39 @@
   </action>
 
 	<!--.......VIEWER ACTIONS.........-->
-  <action script="toggle_gui()">
+  <action name="toggleGUI" script="toggle_gui()">
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_TAB"/>
 	</action>
   
-  <action script="set_next_mode()">
+  <action name="setNextMode" script="set_next_mode()">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_M"/>
   </action>
   
-  <action script="VIEWER_PROCESS:toggle_normals()">
+  <action name="showNormals" script="VIEWER_PROCESS:toggle_normals()">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_N"/>
   </action>
   
-  <action script="VIEWER:toggle_boxes()">
+  <action name="showBoxes" script="VIEWER:toggle_boxes()">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_B"/>
   </action>
   
-  <action script="VIEWER:toggle_spheres()">
+  <action name="toggleSpheres" script="VIEWER:toggle_spheres()">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_P"/>
   </action>
   
-  <action script="next()">
+  <action name="next" script="next()">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_RIGHT"/>
   </action>
   
-  <action script="previous()">
+  <action name="previous" script="previous()">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_LEFT"/>
   </action>
   
-  <action script="next_animation()">
+  <action name="nextAnimation" script="next_animation()">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_UP"/>
   </action>
   
-  <action script="previous_animation()">
+  <action name="previousAnimation" script="previous_animation()">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_DOWN"/>
   </action>
   
@@ -102,14 +102,14 @@
   <action name="ZoomCamera">
 		<input deviceType="IDV_MOUSE" AxisType="AXIS_MOUSE_Z" Delta="1.f"/>
 	</action>
-  
-  <action name="AugmentaAmbient">
+
+  <!--action name="AugmentaAmbient">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_RBRACKET"/>
   </action>
 
   <action name="DisminueixAmbient">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_SLASH"/>
-  </action>
+  </action-->
 
   <action name="AugmentaAmbient">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_NPPLUS"/>

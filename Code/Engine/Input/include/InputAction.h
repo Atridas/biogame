@@ -14,14 +14,13 @@ class CInputAction
   : public CNamed
 {
 public:
-  CInputAction() : CNamed(""),m_szScriptAction(""),m_bHasScript(false),m_bHasName(false),m_fDelta(0.0f) {};
+  CInputAction() : CNamed(""),m_szScriptAction(""),m_bHasScript(false),m_fDelta(0.0f) {};
   ~CInputAction() {Release();};
 
   bool Init(CXMLTreeNode* _pTreeNode);
 
   string& GetScriptAction() {return m_szScriptAction;};
   bool HasScript() {return m_bHasScript;};
-  bool HasName() {return m_bHasName;};
 
   void Update();
 
@@ -36,7 +35,6 @@ private:
   float m_fDelta;
   string m_szScriptAction;
   bool m_bHasScript;
-  bool m_bHasName;
   vector<CInputTrigger*> m_vInputTriggers;
 
 };
