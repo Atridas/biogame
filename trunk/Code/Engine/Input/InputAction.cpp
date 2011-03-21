@@ -8,20 +8,15 @@ bool CInputAction::Init(CXMLTreeNode* _pTreeNode)
   string l_szName = _pTreeNode->GetPszISOProperty("name","");
   m_szScriptAction = _pTreeNode->GetPszISOProperty("script","");
 
-  if(l_szName.compare("") != 0)
+  if(l_szName.compare("") == 0)
   {
-    m_bHasName = true;
+    LOGGER->AddNewLog(ELL_ERROR,"CInputAction::Init Acció sense nom.");
+    return false;
   }
 
   if(m_szScriptAction.compare("") != 0)
   {
     m_bHasScript = true;
-  }
-
-  if(l_szName.compare("") == 0 && !m_bHasScript)
-  {
-    LOGGER->AddNewLog(ELL_WARNING,"CInputAction::Init Acció sense nom ni script.");
-    return false;
   }
 
   SetName(l_szName);
@@ -32,11 +27,13 @@ bool CInputAction::Init(CXMLTreeNode* _pTreeNode)
   
   m_vInputTriggers.reserve(l_iNumTriggers);
   
+  CInputTrigger* l_pTrigger = 0;
+
   for(int j = 0; j < l_iNumTriggers; j++)
   {
     CXMLTreeNode l_XMLInput = (*_pTreeNode)(j);
 
-    CInputTrigger* l_pTrigger = new CInputTrigger();
+    l_pTrigger = new CInputTrigger();
 
     if(l_pTrigger->Init(&l_XMLInput))
     {
