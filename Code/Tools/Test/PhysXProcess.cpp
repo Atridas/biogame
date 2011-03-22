@@ -28,6 +28,7 @@
 #include "SpotLight.h"
 #include "InstanceMesh.h"
 #include "GameObject.h"
+#include "GameObjectManager.h"
 
 //typedef enum ETypeFunction { 
 //      COLISION_STATIC_MASK = 0,
@@ -80,6 +81,10 @@ CPhysicFixedJoint* g_pJoint5;
 CPhysicUserData* g_pUserDataSHOOT = 0;
 CGameObject* g_pGameObject = 0;
 CPhysicController* g_pPhysXController = 0;
+
+
+//MANAGER DE GAMEOBJECTS
+CGameObjectManager* g_pObjectManager = 0;
 
 bool CPhysXProcess::Init()
 {
@@ -138,7 +143,7 @@ bool CPhysXProcess::Init()
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
 
   CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
-  m_pRenderPhysX = CORE->GetRenderableObjectsManager()->GetResource("maquina exploradora");
+ 
 
   if(l_Spot)
   {
@@ -173,7 +178,6 @@ bool CPhysXProcess::Init()
   
 
 
-  g_pPActorBall = new CPhysicActor(g_pUserData2);
   g_pPActorPlane = new CPhysicActor(g_pUserData);
   g_pPActorComposite = new CPhysicActor(g_pUserData3);
   g_pPEscala = new CPhysicActor(g_pUserDataEscala);
@@ -196,15 +200,6 @@ bool CPhysXProcess::Init()
   g_pPActorPlane->AddBoxSphape(Vect3f(100.f,1.0f,100.f),Vect3f(0.0f,-1.0f,0.0f));
   //g_pPActorPlane->CreateBody(100.0f);
 
-  //Ball
-  Vect3f l_vBoxDim(1.0f,1.0f,1.0f);
-  if (m_pRenderPhysX!=0)
-  {
-    l_vBoxDim = m_pRenderPhysX->GetBoundingBox()->GetDimension();
-  }
-  g_pPActorBall->AddBoxSphape(l_vBoxDim/2);
-  g_pPActorBall->SetGlobalPosition(Vect3f(15,6,0));
-  g_pPActorBall->CreateBody(0.1f);
 
   //Composite
   g_pPActorComposite->AddBoxSphape(2,Vect3f(0,7,0));
@@ -219,17 +214,11 @@ bool CPhysXProcess::Init()
   
 
   //l_pPhysManager->AddPhysicActor(g_pPActorPlane);
-  l_pPhysManager->AddPhysicActor(g_pPActorBall);
+  
   l_pPhysManager->AddPhysicActor(g_pPActorComposite);
   l_pPhysManager->AddPhysicActor(g_pPActorPlane);
   l_pPhysManager->AddPhysicActor(g_pPEscala);
   
-
-  g_pGameObject = new CGameObject("Objecte Fisic");
-  if (m_pRenderPhysX != 0)
-  {
-    g_pGameObject->Init(m_pRenderPhysX,g_pPActorBall);
-  }
 
   g_pPhysXController = new CPhysicController(0.5f,3.0f,10.0f,0.1f,0.5f,COLISION_SOLID_MASK,g_pUserDataController,Vect3f(5.0f,2.2f,0.0f));
   g_pPhysXController->SetYaw(-90);
@@ -237,123 +226,108 @@ bool CPhysXProcess::Init()
 
   m_pObject->SetPosition(g_pPhysXController->GetPosition());
 
- 
-  if (m_pRenderPhysX!=0)
-  {
-    CORE->GetRenderableObjectsManager()->SetAllVisibility(false);
-    m_pRenderPhysX->SetVisible(true);
-  }
+  //Vect3f l_vBoxDim2(1.0f,1.0f,1.0f);
+  //Vect3f l_vBoxDim3(1.0f,1.0f,1.0f);
+  //Vect3f l_vBoxDim4(1.0f,1.0f,1.0f);
+  //Vect3f l_vBoxDim5(1.0f,1.0f,1.0f);
+  //Vect3f l_vBoxDim6(1.0f,1.0f,1.0f);
+  //Vect3f l_vBoxDim7(1.0f,1.0f,1.0f);
 
-  CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
-  CORE->GetRenderableObjectsManager()->GetResource("Box02")->SetVisible(true);
-  CORE->GetRenderableObjectsManager()->GetResource("Box03")->SetVisible(true);
-  CORE->GetRenderableObjectsManager()->GetResource("Box04")->SetVisible(true);
-  CORE->GetRenderableObjectsManager()->GetResource("Box05")->SetVisible(true);
-  CORE->GetRenderableObjectsManager()->GetResource("Box06")->SetVisible(true);
-  CORE->GetRenderableObjectsManager()->GetResource("Box07")->SetVisible(true);
+  //l_vBoxDim2 = CORE->GetRenderableObjectsManager()->GetResource("Box02")->GetBoundingBox()->GetDimension();
+  //l_vBoxDim3 = CORE->GetRenderableObjectsManager()->GetResource("Box03")->GetBoundingBox()->GetDimension();
+  //l_vBoxDim4 = CORE->GetRenderableObjectsManager()->GetResource("Box04")->GetBoundingBox()->GetDimension();
+  //l_vBoxDim5 = CORE->GetRenderableObjectsManager()->GetResource("Box05")->GetBoundingBox()->GetDimension();
+  //l_vBoxDim6 = CORE->GetRenderableObjectsManager()->GetResource("Box06")->GetBoundingBox()->GetDimension();
+  //l_vBoxDim7 = CORE->GetRenderableObjectsManager()->GetResource("Box07")->GetBoundingBox()->GetDimension();
 
-  Vect3f l_vBoxDim2(1.0f,1.0f,1.0f);
-  Vect3f l_vBoxDim3(1.0f,1.0f,1.0f);
-  Vect3f l_vBoxDim4(1.0f,1.0f,1.0f);
-  Vect3f l_vBoxDim5(1.0f,1.0f,1.0f);
-  Vect3f l_vBoxDim6(1.0f,1.0f,1.0f);
-  Vect3f l_vBoxDim7(1.0f,1.0f,1.0f);
+  //
 
-  l_vBoxDim2 = CORE->GetRenderableObjectsManager()->GetResource("Box02")->GetBoundingBox()->GetDimension();
-  l_vBoxDim3 = CORE->GetRenderableObjectsManager()->GetResource("Box03")->GetBoundingBox()->GetDimension();
-  l_vBoxDim4 = CORE->GetRenderableObjectsManager()->GetResource("Box04")->GetBoundingBox()->GetDimension();
-  l_vBoxDim5 = CORE->GetRenderableObjectsManager()->GetResource("Box05")->GetBoundingBox()->GetDimension();
-  l_vBoxDim6 = CORE->GetRenderableObjectsManager()->GetResource("Box06")->GetBoundingBox()->GetDimension();
-  l_vBoxDim7 = CORE->GetRenderableObjectsManager()->GetResource("Box07")->GetBoundingBox()->GetDimension();
-
-  
-
-  g_pBoxes = new CPhysicUserData("Boxes Fisiques");
-  g_pBoxes->SetPaint(false);
-  g_pBoxes->SetColor(colWHITE);
-  g_Box02 = new CPhysicActor(g_pBoxes);
-  g_Box03 = new CPhysicActor(g_pBoxes);
-  g_Box04 = new CPhysicActor(g_pBoxes);
-  g_Box05 = new CPhysicActor(g_pBoxes);
-  g_Box06 = new CPhysicActor(g_pBoxes);
-  g_Box07 = new CPhysicActor(g_pBoxes);
+  //g_pBoxes = new CPhysicUserData("Boxes Fisiques");
+  //g_pBoxes->SetPaint(false);
+  //g_pBoxes->SetColor(colWHITE);
+  //g_Box02 = new CPhysicActor(g_pBoxes);
+  //g_Box03 = new CPhysicActor(g_pBoxes);
+  //g_Box04 = new CPhysicActor(g_pBoxes);
+  //g_Box05 = new CPhysicActor(g_pBoxes);
+  //g_Box06 = new CPhysicActor(g_pBoxes);
+  //g_Box07 = new CPhysicActor(g_pBoxes);
 
 
-  g_Box02->AddBoxSphape(l_vBoxDim2/2);
-  g_Box03->AddBoxSphape(l_vBoxDim3/2);
-  g_Box04->AddBoxSphape(l_vBoxDim4/2);
-  g_Box05->AddBoxSphape(l_vBoxDim5/2);
-  g_Box06->AddBoxSphape(l_vBoxDim6/2);
-  g_Box07->AddBoxSphape(l_vBoxDim7/2);
+  //g_Box02->AddBoxSphape(l_vBoxDim2/2);
+  //g_Box03->AddBoxSphape(l_vBoxDim3/2);
+  //g_Box04->AddBoxSphape(l_vBoxDim4/2);
+  //g_Box05->AddBoxSphape(l_vBoxDim5/2);
+  //g_Box06->AddBoxSphape(l_vBoxDim6/2);
+  //g_Box07->AddBoxSphape(l_vBoxDim7/2);
 
-  /*l_Box02->SetMat44(CORE->GetRenderableObjectsManager()->GetResource("Box02")->GetMat44());
-  l_Box03->SetMat44(CORE->GetRenderableObjectsManager()->GetResource("Box03")->GetMat44());
-  l_Box04->SetMat44(CORE->GetRenderableObjectsManager()->GetResource("Box04")->GetMat44());
-  l_Box05->SetMat44(CORE->GetRenderableObjectsManager()->GetResource("Box05")->GetMat44());
-  l_Box06->SetMat44(CORE->GetRenderableObjectsManager()->GetResource("Box06")->GetMat44());
-  l_Box07->SetMat44(CORE->GetRenderableObjectsManager()->GetResource("Box07")->GetMat44());*/
-  g_Box02->SetGlobalPosition(CORE->GetRenderableObjectsManager()->GetResource("Box02")->GetPosition());
-  g_Box03->SetGlobalPosition(CORE->GetRenderableObjectsManager()->GetResource("Box03")->GetPosition());
-  g_Box04->SetGlobalPosition(CORE->GetRenderableObjectsManager()->GetResource("Box04")->GetPosition());
-  g_Box05->SetGlobalPosition(CORE->GetRenderableObjectsManager()->GetResource("Box05")->GetPosition());
-  g_Box06->SetGlobalPosition(CORE->GetRenderableObjectsManager()->GetResource("Box06")->GetPosition());
-  g_Box07->SetGlobalPosition(CORE->GetRenderableObjectsManager()->GetResource("Box07")->GetPosition());
+  ///*l_Box02->SetMat44(CORE->GetRenderableObjectsManager()->GetResource("Box02")->GetMat44());
+  //l_Box03->SetMat44(CORE->GetRenderableObjectsManager()->GetResource("Box03")->GetMat44());
+  //l_Box04->SetMat44(CORE->GetRenderableObjectsManager()->GetResource("Box04")->GetMat44());
+  //l_Box05->SetMat44(CORE->GetRenderableObjectsManager()->GetResource("Box05")->GetMat44());
+  //l_Box06->SetMat44(CORE->GetRenderableObjectsManager()->GetResource("Box06")->GetMat44());
+  //l_Box07->SetMat44(CORE->GetRenderableObjectsManager()->GetResource("Box07")->GetMat44());*/
+  //g_Box02->SetGlobalPosition(CORE->GetRenderableObjectsManager()->GetResource("Box02")->GetPosition());
+  //g_Box03->SetGlobalPosition(CORE->GetRenderableObjectsManager()->GetResource("Box03")->GetPosition());
+  //g_Box04->SetGlobalPosition(CORE->GetRenderableObjectsManager()->GetResource("Box04")->GetPosition());
+  //g_Box05->SetGlobalPosition(CORE->GetRenderableObjectsManager()->GetResource("Box05")->GetPosition());
+  //g_Box06->SetGlobalPosition(CORE->GetRenderableObjectsManager()->GetResource("Box06")->GetPosition());
+  //g_Box07->SetGlobalPosition(CORE->GetRenderableObjectsManager()->GetResource("Box07")->GetPosition());
 
-  g_Box02->CreateBody(1.1f);
-  g_Box03->CreateBody(1.1f);
-  g_Box04->CreateBody(1.1f);
-  g_Box05->CreateBody(1.1f);
-  g_Box06->CreateBody(1.1f);
-  g_Box07->CreateBody(1.1f);
+  //g_Box02->CreateBody(1.1f);
+  //g_Box03->CreateBody(1.1f);
+  //g_Box04->CreateBody(1.1f);
+  //g_Box05->CreateBody(1.1f);
+  //g_Box06->CreateBody(1.1f);
+  //g_Box07->CreateBody(1.1f);
 
-  g_pJoint = new CPhysicFixedJoint();
-  g_pJoint2 = new CPhysicFixedJoint();
-  g_pJoint3 = new CPhysicFixedJoint();
-  g_pJoint4 = new CPhysicFixedJoint();
-  g_pJoint5 = new CPhysicFixedJoint();
-  //CPhysicFixedJoint* l_pJointP = new CPhysicFixedJoint();
+  //g_pJoint = new CPhysicFixedJoint();
+  //g_pJoint2 = new CPhysicFixedJoint();
+  //g_pJoint3 = new CPhysicFixedJoint();
+  //g_pJoint4 = new CPhysicFixedJoint();
+  //g_pJoint5 = new CPhysicFixedJoint();
+  ////CPhysicFixedJoint* l_pJointP = new CPhysicFixedJoint();
 
-  //l_pJointP->SetInfo(g_Box02,g_pPActorBall);
-
-
-  g_pJoint->SetInfo(g_Box02,g_Box03);
-  g_pJoint2->SetInfo(g_Box03,g_Box04);
-  g_pJoint3->SetInfo(g_Box04,g_Box05);
-  g_pJoint4->SetInfo(g_Box05,g_Box06);
-  g_pJoint5->SetInfo(g_Box06,g_Box07);
+  ////l_pJointP->SetInfo(g_Box02,g_pPActorBall);
 
 
-  l_pPhysManager->AddPhysicActor(g_Box02);
-  l_pPhysManager->AddPhysicActor(g_Box03);
-  l_pPhysManager->AddPhysicActor(g_Box04);
-  l_pPhysManager->AddPhysicActor(g_Box05);
-  l_pPhysManager->AddPhysicActor(g_Box06);
-  l_pPhysManager->AddPhysicActor(g_Box07);
+  //g_pJoint->SetInfo(g_Box02,g_Box03);
+  //g_pJoint2->SetInfo(g_Box03,g_Box04);
+  //g_pJoint3->SetInfo(g_Box04,g_Box05);
+  //g_pJoint4->SetInfo(g_Box05,g_Box06);
+  //g_pJoint5->SetInfo(g_Box06,g_Box07);
 
-  l_pPhysManager->AddPhysicFixedJoint(g_pJoint);
-  l_pPhysManager->AddPhysicFixedJoint(g_pJoint2);
-  l_pPhysManager->AddPhysicFixedJoint(g_pJoint3);
-  l_pPhysManager->AddPhysicFixedJoint(g_pJoint4);
-  l_pPhysManager->AddPhysicFixedJoint(g_pJoint5);
-  //l_pPhysManager->AddPhysicFixedJoint(l_pJointP);
 
-  
+  //l_pPhysManager->AddPhysicActor(g_Box02);
+  //l_pPhysManager->AddPhysicActor(g_Box03);
+  //l_pPhysManager->AddPhysicActor(g_Box04);
+  //l_pPhysManager->AddPhysicActor(g_Box05);
+  //l_pPhysManager->AddPhysicActor(g_Box06);
+  //l_pPhysManager->AddPhysicActor(g_Box07);
+
+  //l_pPhysManager->AddPhysicFixedJoint(g_pJoint);
+  //l_pPhysManager->AddPhysicFixedJoint(g_pJoint2);
+  //l_pPhysManager->AddPhysicFixedJoint(g_pJoint3);
+  //l_pPhysManager->AddPhysicFixedJoint(g_pJoint4);
+  //l_pPhysManager->AddPhysicFixedJoint(g_pJoint5);
+  ////l_pPhysManager->AddPhysicFixedJoint(l_pJointP);
+
+  //
 
 
 
-  g_pGameBox02 = new CGameObject("Box02");
-  g_pGameBox03 = new CGameObject("Box03");
-  g_pGameBox04 = new CGameObject("Box04");
-  g_pGameBox05 = new CGameObject("Box05");
-  g_pGameBox06 = new CGameObject("Box06");
-  g_pGameBox07 = new CGameObject("Box07");
+  //g_pGameBox02 = new CGameObject("Box02");
+  //g_pGameBox03 = new CGameObject("Box03");
+  //g_pGameBox04 = new CGameObject("Box04");
+  //g_pGameBox05 = new CGameObject("Box05");
+  //g_pGameBox06 = new CGameObject("Box06");
+  //g_pGameBox07 = new CGameObject("Box07");
 
-  g_pGameBox02->Init(CORE->GetRenderableObjectsManager()->GetResource("Box02"),g_Box02);
-  g_pGameBox03->Init(CORE->GetRenderableObjectsManager()->GetResource("Box03"),g_Box03);
-  g_pGameBox04->Init(CORE->GetRenderableObjectsManager()->GetResource("Box04"),g_Box04);
-  g_pGameBox05->Init(CORE->GetRenderableObjectsManager()->GetResource("Box05"),g_Box05);
-  g_pGameBox06->Init(CORE->GetRenderableObjectsManager()->GetResource("Box06"),g_Box06);
-  g_pGameBox07->Init(CORE->GetRenderableObjectsManager()->GetResource("Box07"),g_Box07);
+  //g_pGameBox02->Init(CORE->GetRenderableObjectsManager()->GetResource("Box02"),g_Box02);
+  //g_pGameBox03->Init(CORE->GetRenderableObjectsManager()->GetResource("Box03"),g_Box03);
+  //g_pGameBox04->Init(CORE->GetRenderableObjectsManager()->GetResource("Box04"),g_Box04);
+  //g_pGameBox05->Init(CORE->GetRenderableObjectsManager()->GetResource("Box05"),g_Box05);
+  //g_pGameBox06->Init(CORE->GetRenderableObjectsManager()->GetResource("Box06"),g_Box06);
+  //g_pGameBox07->Init(CORE->GetRenderableObjectsManager()->GetResource("Box07"),g_Box07);
 
   
 
@@ -372,7 +346,8 @@ bool CPhysXProcess::Init()
   //CORE->GetRenderableObjectsManager()->SetAllVisibility(false);
 
   
-  
+  g_pObjectManager = new CGameObjectManager();
+  g_pObjectManager->Load("Data/XML/GameObjects.xml",false);
 
   SetOk(true);
   return IsOk();
@@ -419,6 +394,7 @@ void CPhysXProcess::Release()
   CHECKED_DELETE(g_pJoint4)
   CHECKED_DELETE(g_pJoint5)
   CHECKED_DELETE(g_pBoxes)  
+  CHECKED_DELETE(g_pObjectManager);
   //CHECKED_DELETE(plaXung)
 
   //CHECKED_DELETE(m_pRenderPhysX);
@@ -489,18 +465,22 @@ void CPhysXProcess::Update(float _fElapsedTime)
     
   }*/
 
-  if (m_pRenderPhysX != 0)
+  /*if (m_pRenderPhysX != 0)
   {
     g_pGameObject->Update(_fElapsedTime);
-  }
+  }*/
   g_pPhysXController->Move(Vect3f(0.0f,0.0f,0.0f),_fElapsedTime);
 
-  g_pGameBox02->Update(_fElapsedTime);
+  /*g_pGameBox02->Update(_fElapsedTime);
   g_pGameBox03->Update(_fElapsedTime);
   g_pGameBox04->Update(_fElapsedTime);
   g_pGameBox05->Update(_fElapsedTime);
   g_pGameBox06->Update(_fElapsedTime);
-  g_pGameBox07->Update(_fElapsedTime);
+  g_pGameBox07->Update(_fElapsedTime);*/
+
+
+
+  g_pObjectManager->Update(_fElapsedTime);
 
 }
 

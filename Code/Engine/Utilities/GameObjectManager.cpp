@@ -22,12 +22,15 @@ CPhysicActor* CGameObjectManager::AddPhysicActor(CRenderableObject* _pRenderObje
   if (_szMode == "BoundingBox")
   {
     Vect3f l_vBoxDim = _pRenderObject->GetBoundingBox()->GetDimension();
+    Vect3f l_vMiddlePos = _pRenderObject->GetBoundingBox()->GetMiddlePoint();
+    Vect3f l_vPos = _pRenderObject->GetPosition();
 
     CPhysicUserData* l_pPhysicsUserData = new CPhysicUserData(_szName);
     l_pPhysicsUserData->SetColor(colWHITE);
     l_pPhysicsUserData->SetPaint(true);
     l_pPhysicActor = new CPhysicActor(l_pPhysicsUserData);
     l_pPhysicActor->AddBoxSphape(l_vBoxDim/2);
+    l_pPhysicActor->SetGlobalPosition(Vect3f(l_vPos.x,l_vPos.y+l_vMiddlePos.y,l_vPos.z));
     if (_fBody != 0)
     {
       l_pPhysicActor->CreateBody(_fBody);
@@ -81,7 +84,7 @@ bool CGameObjectManager::Load(const string& _szFileName, bool _bReload)
 
 		l_pGameObject = GetResource(l_szName);
     l_pRenderObject = l_pROM->GetResource(l_szRenderObject);
-		if((!l_pGameObject) && (!l_pRenderObject))
+		if((!l_pGameObject) && (l_pRenderObject))
 		{
 			if(l_szPhysxType == "BoundingBox") 
 			{
@@ -90,6 +93,7 @@ bool CGameObjectManager::Load(const string& _szFileName, bool _bReload)
         l_pGameObject->Init(l_pRenderObject,l_pPhysicsActor);
         m_vResources.push_back(l_pGameObject);
         AddResource(l_szName,l_pGameObject);
+        l_pRenderObject->SetVisible(true);
 			
 
 			} else if(l_szPhysxType == "BoundingSphere") 
@@ -125,4 +129,10 @@ bool CGameObjectManager::Load(const string& _szFileName, bool _bReload)
 	return true;
 
 
+}
+
+void CGameObjectManager::Update(float _fElapsedTime)
+{
+  for(size_t i=0; i < m_vResources.size() ; i++)
+    m_vResources[i]->Update(_fElapsedTime);
 }
