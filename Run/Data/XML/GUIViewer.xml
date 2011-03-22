@@ -3,15 +3,15 @@
   <GuiFiles path="./Data/XML/GUI/Viewer"/>
   
   <TextBox  posx="0" posy="0" width="0" height="0" button_width="0" button_height="0"
-            buttonClose_normal=     ""
-            buttonClose_over=       ""
-            buttonClose_clicked=    ""
-            buttonClose_deactivated="" 
-            buttonMove_normal=      ""
-            buttonMove_over=        ""
-            buttonMove_clicked=     ""
-            buttonMove_deactivated= ""
-            quad=                   ""/>
+            buttonClose_normal=     "Data/Textures/gohan.png"
+            buttonClose_over=       "Data/Textures/gohan.png"
+            buttonClose_clicked=    "Data/Textures/gohan.png"
+            buttonClose_deactivated="Data/Textures/gohan.png" 
+            buttonMove_normal=      "Data/Textures/gohan.png"
+            buttonMove_over=        "Data/Textures/gohan.png"
+            buttonMove_clicked=     "Data/Textures/gohan.png"
+            buttonMove_deactivated= "Data/Textures/gohan.png"
+            quad=                   "Data/Textures/gohan.png"/>
   
   <PointerMouse posx="50" posy="50" width="5" height="5" 
                 texture="./Data/Textures/GUI/Textures_Test/gui_pointer_mouse.tga" isQuadrant="true"/>

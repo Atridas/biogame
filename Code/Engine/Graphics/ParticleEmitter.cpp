@@ -40,6 +40,8 @@ m_Particles(NUMPARTICLES)
   //SetVBSize(NUMPARTICLES / 10);
   m_fNumNewPartsExcess = 0.0f;
 
+  m_bActive = false;
+
   //TODO inicialitzar els vector de clolor i temps
 }
 
@@ -64,6 +66,9 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
 
 void CParticleEmitter::Update(float fElapsedTime)
 {
+
+  if(!m_bActive)
+    return;
 
   //1.] Updatejar les particules i en cas de que s'hagi acabat el seu temps de vida, posar 
   //    en el vector que la posicio esta lliure
@@ -223,6 +228,9 @@ void CParticleEmitter::Release()
   
 void CParticleEmitter::Render(CRenderManager* _pRM)
 {
+  if(!m_bActive)
+    return;
+
   LPDIRECT3DDEVICE9 l_pd3dDevice = _pRM->GetDevice();
 
   _pRM->EnableAlphaBlend();

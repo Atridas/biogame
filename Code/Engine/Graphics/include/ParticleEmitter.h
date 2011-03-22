@@ -38,6 +38,7 @@ public:
   void SetTexParticle       (CTexture* _pTexParticle)               {m_pTexParticle = _pTexParticle;};
   void SetNumNewPartsExcess (float _fNumNewPartsExcess)             {m_fNumNewPartsExcess = _fNumNewPartsExcess;};
   void SetParticle          (LPDIRECT3DVERTEXBUFFER9 _vbParticles)  {m_vbParticles = _vbParticles;};
+  void SetActive            (bool _Active)                          {m_bActive = _Active;};
 
 
   //Get
@@ -55,6 +56,7 @@ public:
   CTexture*                       GetTexParticle      () const {return m_pTexParticle;};        
   float                           GetNumNewPartsExcess() const {return m_fNumNewPartsExcess;};
   const LPDIRECT3DVERTEXBUFFER9   GetParticle         () const {return m_vbParticles;};
+  const bool                      GetActive           () const {return m_bActive;};
 
 
   void                    Update              (float fElapsedTime);
@@ -91,7 +93,7 @@ private:
   vector<D3DXCOLOR>                         m_vColor;
   vector<D3DXCOLOR>                         m_vNewColor;
   vector<float>                             m_vTime;
-  
+  bool                                      m_bActive;
   
 };
 

@@ -21,7 +21,10 @@ function set_next_mode()
   local l_iState = VIEWER:get_current_mode()
   
   VIEWER:next_mode()
-  switch_view(l_iState, VIEWER:get_current_mode())
+  
+  if VIEWER:get_view_mode() == false then
+    switch_view(l_iState, VIEWER:get_current_mode())
+  end
 end
 
 --selecciona un mode concret
