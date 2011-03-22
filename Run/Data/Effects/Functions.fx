@@ -5,14 +5,17 @@
 #include "Samplers.fx"
 
 //shadow
-bool IsInShadow(float4 _PosLight)
+int ShadowAmount(float4 _PosLight)
 {
   float2 ShadowTexC = 0.5 * _PosLight.xy/_PosLight.w + float2( 0.5, 0.5 );
   ShadowTexC.y = 1.0f - ShadowTexC.y;
 
   bool l_bIsInShadow = tex2D( ShadowTextureSampler, ShadowTexC ).x + SHADOW_EPSILON < _PosLight.z/_PosLight.w;
   
-  return l_bIsInShadow;
+  if(l_bIsInShadow)
+    return 1;
+  else
+    return 0;
 }
 
 //Lights
@@ -49,18 +52,18 @@ float3 ComputeAllLights(float3 _Normal, float3 _WorldPosition, float3 _DiffuseCo
   float3 l_EyeDirection = normalize(g_CameraPosition - _WorldPosition);
   for(int i = 0; i < MAXLIGHTS; i++)
   {
-	bool l_bIsInShadow = false;
+    int l_iShadowAmount = 0;
 
-	if(g_ShadowEnabled[i])
-	{
-	  l_bIsInShadow = IsInShadow(_PosLight);
-	}
+    if(g_ShadowEnabled[i])
+    {
+      l_iShadowAmount = ShadowAmount(_PosLight);
+    }
 
-    if(g_LightsEnabled[i] && !l_bIsInShadow)
+    if(g_LightsEnabled[i] && l_iShadowAmount < 1)
     {
 
       float3 l_LightDirection;
-      float  l_Attenuation = 1.0;
+      float  l_Attenuation = 1.0 - l_iShadowAmount;
       if(g_LightsType[i] == LIGHT_OMNI)
       {
         l_LightDirection = g_LightsPosition[i] - _WorldPosition;
@@ -100,7 +103,7 @@ float3 ComputeAllLights(float3 _Normal, float3 _WorldPosition, float3 _DiffuseCo
             l_Attenuation = 0.0;
           } else if(l_cosAmbLightAngle < g_LightsAngleCos[i])
           {
-			l_Attenuation*=sin((3.1416/2.0)*(l_cosAmbLightAngle-g_LightsFallOffCos[i])/(g_LightsAngleCos[i]-g_LightsFallOffCos[i]));
+            l_Attenuation*=sin((3.1416/2.0)*(l_cosAmbLightAngle-g_LightsFallOffCos[i])/(g_LightsAngleCos[i]-g_LightsFallOffCos[i]));
             
           }
           

@@ -558,7 +558,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 					) else
 					(
 						local l_text = "" as stringStream
-						format "L'objecte % no té core especificada" $*[i].name to:l_text
+						format "L'objecte % no té core especificada o no te nom..." $*[i].name to:l_text
 						ShowError l_text
 					)
 				) else

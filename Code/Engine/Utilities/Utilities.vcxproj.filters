@@ -4,6 +4,12 @@
     <Filter Include="GameObject">
       <UniqueIdentifier>{ee37027d-224a-4da1-90f1-7d6183deccc3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ScriptedStateMachine">
+      <UniqueIdentifier>{dce18fb9-8713-45a7-9ed8-7aa372441619}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem">
+      <UniqueIdentifier>{31371ca7-252d-4b80-82a7-15e00a685721}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -12,6 +18,9 @@
     <ClCompile Include="GameObjectManager.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="GameEntity.cpp">
+      <Filter>EntitySystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GameObject.h">
@@ -19,6 +28,18 @@
     </ClInclude>
     <ClInclude Include="include\GameObjectManager.h">
       <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ScriptedStateMachine.h">
+      <Filter>ScriptedStateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameEntity.h">
+      <Filter>EntitySystem</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BaseComponent.h">
+      <Filter>EntitySystem</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EntityDefines.h">
+      <Filter>EntitySystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

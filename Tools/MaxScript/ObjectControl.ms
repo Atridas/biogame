@@ -45,7 +45,14 @@ function IsLight _object =
 -- Cerca l'índex de la core segons el nom
 function GetCoreName _object =
 (
-	return getUserProp _object "resource"
+	-- S'agafa la core del paràmetre
+	local l_name = getUserProp _object "resource"
+
+	if l_name == undefined then
+	(
+		l_name = _object.name
+	)
+	return l_name
 )
 
 -- Retorna l'índex de la core de l'objecte
@@ -54,14 +61,16 @@ function GetCoreIndex _cores _object =
 	-- S'agafa la core del paràmetre
 	local l_name = getUserProp _object "resource"
 
-	if l_name != undefined then
+	if l_name == undefined then
 	(
-		for i=1 to _cores.count do
+		l_name = _object.name
+	)
+	
+	for i=1 to _cores.count do
+	(
+		if (GetCoreName _cores[i]) == l_name then
 		(
-			if (GetCoreName _cores[i]) == l_name then
-			(
-				return i
-			)
+			return i
 		)
 	)
 	return undefined
