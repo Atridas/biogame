@@ -1,8 +1,47 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <GameObjectManager>
-  <GameObject name="Box1" Physx="true" PhysxType="BoundingBox" RenderableObject="Box01" PhysxActor="Box01" Body="0.1"/>
-  <GameObject name="Box2" Physx="false" PhysxType="BoundingBox" RenderableObject="Box02" PhysxActor="Box02" Body="0.1"/>
+  <GameObject name="Box2" Physx="true" PhysxType="BoundingBox" RenderableObject="Box02" PhysxActor="Box02" Body="0.1"/>
   <GameObject name="Box3" Physx="true" PhysxType="BoundingBox" RenderableObject="Box03" PhysxActor="Box03" Body="0.1"/>
   <GameObject name="Box4" Physx="true" PhysxType="BoundingBox" RenderableObject="Box04" PhysxActor="Box04" Body="0.1"/>
-  <GameObject name="Box5" Physx="true" PhysxType="BoundingSphere" RenderableObject="Box05" PhysxActor="Box05" Body="0.1"/>
+  <GameObject name="Box5" Physx="true" PhysxType="BoundingBox" RenderableObject="Box05" PhysxActor="Box05" Body="0.1"/>
+  <GameObject name="Box6" Physx="true" PhysxType="BoundingBox" RenderableObject="Box06" PhysxActor="Box06" Body="0.1"/>
+  <GameObject name="Box7" Physx="true" PhysxType="BoundingBox" RenderableObject="Box07" PhysxActor="Box07" Body="0.1"/>
+
+  <GameObject name="Maquina1" Physx="true" PhysxType="BoundingBox" RenderableObject="maquina exploradora" PhysxActor="maquina exploradora" Body="0.1"/>
+  <GameObject name="Maquina2" Physx="true" PhysxType="BoundingBox" RenderableObject="maquina exploradora01" PhysxActor="maquina exploradora01" Body="0.1"/>
+
+  <GameObject name="Cadira1" Physx="true" PhysxType="BoundingBox" RenderableObject="cadira_oficina" PhysxActor="cadira_oficina" Body="0.1"/>
+  <GameObject name="Cadira2" Physx="true" PhysxType="BoundingBox" RenderableObject="cadira_oficina01" PhysxActor="cadira_oficina01" Body="0.1"/>
+  <GameObject name="autopsia_taula" Physx="true" PhysxType="BoundingBox" RenderableObject="autopsia_taula" PhysxActor="autopsia_taula" Body="0.4"/>
+
+
+  <GameObject name="Arxivador00" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador00" PhysxActor="Arxivador00" Body="0.1"/>
+  <GameObject name="Arxivador01" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador01" PhysxActor="Arxivador01" Body="0.1"/>
+  <GameObject name="Arxivador02" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador02" PhysxActor="Arxivador02" Body="0.1"/>
+  <GameObject name="Arxivador03" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador03" PhysxActor="Arxivador03" Body="0.1"/>
+  <GameObject name="Arxivador04" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador04" PhysxActor="Arxivador04" Body="0.1"/>
+  <GameObject name="Arxivador05" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador05" PhysxActor="Arxivador05" Body="0.1"/>
+  <GameObject name="Arxivador06" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador06" PhysxActor="Arxivador06" Body="0.1"/>
+  <GameObject name="Arxivador07" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador07" PhysxActor="Arxivador07" Body="0.1"/>
+  <GameObject name="Arxivador08" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador08" PhysxActor="Arxivador08" Body="0.1"/>
+  <GameObject name="Arxivador09" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador09" PhysxActor="Arxivador09" Body="0.1"/>
+  <GameObject name="Arxivador10" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador10" PhysxActor="Arxivador10" Body="0.1"/>
+  <GameObject name="Arxivador11" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador11" PhysxActor="Arxivador11" Body="0.1"/>
+  <GameObject name="Arxivador12" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador12" PhysxActor="Arxivador12" Body="0.1"/>
+  <GameObject name="Arxivador13" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador13" PhysxActor="Arxivador13" Body="0.1"/>
+  <GameObject name="Arxivador14" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador14" PhysxActor="Arxivador14" Body="0.1"/>
+  <GameObject name="Arxivador15" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador15" PhysxActor="Arxivador15" Body="0.1"/>
+  <GameObject name="Arxivador16" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador16" PhysxActor="Arxivador16" Body="0.1"/>
+  <GameObject name="Arxivador17" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador17" PhysxActor="Arxivador17" Body="0.1"/>
+  <GameObject name="Arxivador18" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador18" PhysxActor="Arxivador18" Body="0.1"/>
+  <GameObject name="Arxivador19" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador19" PhysxActor="Arxivador19" Body="0.1"/>
+  <GameObject name="Arxivador20" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador20" PhysxActor="Arxivador20" Body="0.1"/>
+  <GameObject name="Arxivador21" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador21" PhysxActor="Arxivador21" Body="0.1"/>
+  <GameObject name="Arxivador22" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador22" PhysxActor="Arxivador22" Body="0.1"/>
+  <GameObject name="Arxivador23" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador23" PhysxActor="Arxivador23" Body="0.1"/>
+  <GameObject name="Arxivador24" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador24" PhysxActor="Arxivador24" Body="0.1"/>
+  <GameObject name="Arxivador25" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador25" PhysxActor="Arxivador25" Body="0.1"/>
+  <GameObject name="Arxivador26" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador26" PhysxActor="Arxivador26" Body="0.1"/>
+  <GameObject name="Arxivador27" Physx="true" PhysxType="BoundingBox" RenderableObject="Arxivador27" PhysxActor="Arxivador27" Body="0.1"/>
+  
 </GameObjectManager>

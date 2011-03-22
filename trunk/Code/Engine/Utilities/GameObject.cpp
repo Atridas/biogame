@@ -9,7 +9,10 @@ void  CGameObject::Update(float _fElapsedTime)
   m_pPhysXActor->GetMat44(l_vPhysXMat);
 
   l_vMt.SetIdentity();
-  l_vMt.Translate(Vect3f(0.0f,-m_pRenderableObject->GetBoundingBox()->GetMiddlePoint().y,0.0f));
+  l_vMt.Translate(Vect3f(-m_pRenderableObject->GetBoundingBox()->GetMiddlePoint().x,
+                         -m_pRenderableObject->GetBoundingBox()->GetMiddlePoint().y,
+                         -m_pRenderableObject->GetBoundingBox()->GetMiddlePoint().z));
+   //l_vMt.Translate(Vect3f(0.0f,0.0f,0.0f));
   l_vMtotal = l_vPhysXMat*l_vMt;
 
   m_pRenderableObject->SetMat44(l_vMtotal);

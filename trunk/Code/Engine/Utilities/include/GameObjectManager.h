@@ -23,6 +23,7 @@ public:
   bool						Load	(const string& _szFileName, bool _bReload);
   CPhysicActor*   AddPhysicActor(CRenderableObject* l_pRenderObject, string& _szName, string& _szMode, float _fBody);
   virtual void		Release();
+  void            Update(float _fElapsedTime);
 private:
   vector<CGameObject*> m_vResources;
 };
