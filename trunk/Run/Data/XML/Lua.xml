@@ -3,6 +3,7 @@
   <files>
     <file path="Data/Lua/first.lua" />
     <file path="Data/Lua/globals.lua" />
+    <file path="Data/Lua/biogame_gui.lua" />
   </files>
   <initscripts>
     <script action="CORE                          = get_core()"/>
@@ -18,5 +19,7 @@
     <script action="LM                            = CORE:get_light_manager()"/>
     
     <script action="GUI_MANAGER                   = CORE:get_gui_manager()"/>
+
+    <script action="ENGINE                        = CORE:get_engine()"/>
   </initscripts>
 </Lua>

@@ -33,7 +33,7 @@ public:
   /**
     * Constructor per defecte.
   **/
-	                          CEngine(void):m_pCore(0),m_pHDR(0),m_pActiveProcess(0)            {};
+	                          CEngine(void):m_pCore(0),m_pHDR(0),m_pActiveProcess(0),m_bExit(false) {};
   /**
    * Destructor.
    * S'encarrega d'alliberar recursos abans de destruir-se.
@@ -50,6 +50,10 @@ public:
    * @see SInitParams
   **/
   bool                      Init					      (const SInitParams& _InitParams, HWND _hWnd);
+  
+  bool                      GetExit() const     {return m_bExit;};
+  void                      SetExit(bool _bExit){m_bExit = _bExit;};
+
 	/**
    * Mètode d'update.
    * Aquest mètode s'executa a cada iteració. Durant aquest es realitzaran els càlculs de lògica de l'engine i es cridarà a l'update del Core del procés actiu.
@@ -104,7 +108,7 @@ private:
   VectorProcessPtr				  m_vProcesses;
   CProcess*                 m_pActiveProcess;
 
-  
+  bool                      m_bExit;
 
 };
 
