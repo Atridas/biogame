@@ -22,7 +22,7 @@ function set_next_mode()
   
   VIEWER:next_mode()
   
-  if VIEWER:get_view_mode() == false then
+  if g_toggleGui == false then
     switch_view(l_iState, VIEWER:get_current_mode())
   end
 end

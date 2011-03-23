@@ -1,23 +1,26 @@
 --activa o desactiva la GUI
 function toggle_gui()  
-  if VIEWER:get_view_mode() then
+  if g_toggleGui == false then
+	g_toggleGui = true
     show_gui()
   else
+	g_toggleGui = false
     hide_gui()
   end
+
 end
 
 --desactiva la GUI
 function hide_gui()
   GUI_MANAGER:setVisiblePointerMouse(false)
-  VIEWER:set_view_mode(true)
+  VIEWER:activate_gui(false)
   
   deactivate_view(VIEWER:get_current_mode())
 end
 
 --activa la GUI a l'estat que toca
 function show_gui()
-  VIEWER:set_view_mode(false)
+  VIEWER:activate_gui(true)
   GUI_MANAGER:setVisiblePointerMouse(true)
   
   show_common()

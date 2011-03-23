@@ -98,6 +98,14 @@
   <action name="ShowAjuda">
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F1"/>
 	</action>
+
+  <action name="Yaw">
+    <input deviceType="IDV_MOUSE" AxisType="AXIS_MOUSE_X" Delta="1.f"/>
+  </action>
+  
+  <action name="Pitch">
+    <input deviceType="IDV_MOUSE" AxisType="AXIS_MOUSE_Y" Delta="1.f"/>
+  </action>
   
   <action name="ZoomCamera">
 		<input deviceType="IDV_MOUSE" AxisType="AXIS_MOUSE_Z" Delta="1.f"/>
@@ -134,12 +142,12 @@
   
   <!--...........MOVEMENT...........-->
 	<action name="Run">
-		<input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN" Code="KEY_LSHIFT"/>
+		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_LSHIFT"/>
 	</action>
 
-	<action name="Walk">
+	<!--action name="Walk">
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_LSHIFT"/>
-	</action>
+	</action-->
 
 	<action name="MoveFwd">
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_W"/>

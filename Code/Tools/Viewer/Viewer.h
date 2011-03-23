@@ -28,7 +28,7 @@ public:
   //Process
   void Init();
 
-  void Update(const float _fElapsedTime,const Vect3i& _vMouseDelta);
+  void Update(const float _fElapsedTime);
   void ShowInfo();
 
   //setters
@@ -76,8 +76,8 @@ public:
 
   void Reset() {Release(); Init();};
 
-  void SetViewMode(bool _bValue) { m_bViewMode = _bValue; };
-  bool GetViewMode()             { return m_bViewMode; };
+  void ActivateGui(bool _bValue) { m_bGuiActive = _bValue; };
+  bool IsGuiActive() {return m_bGuiActive;};
 
 private:
   void Release();
@@ -87,9 +87,9 @@ private:
   void FocusCurrentMesh();
   void FocusCurrentAnimatedModel();
   void ResetActions();
-  void ProcessFreeMode(const float _fElapsedTime,const Vect3i& _vMouseDelta);
-  void ProcessMeshMode(const float _fElapsedTime,const Vect3i& _vMouseDelta);
-  void ProcessAnimatedMode(const float _fElapsedTime,const Vect3i& _vMouseDelta);
+  void ProcessFreeMode(const float _fElapsedTime);
+  void ProcessMeshMode(const float _fElapsedTime);
+  void ProcessAnimatedMode(const float _fElapsedTime);
   void InitMode();
   void InitFreeMode();
   void InitMeshMode();
@@ -113,8 +113,10 @@ private:
   bool m_bRenderLights;
   float m_fVelocity;
 
+  Vect3i m_vMouseDelta;
+
   int  m_iMode;
-  bool m_bViewMode;
+  bool m_bGuiActive;
   bool m_bShowHelp;
 
   bool m_bMoveFwd;

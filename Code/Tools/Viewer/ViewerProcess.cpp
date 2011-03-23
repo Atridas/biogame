@@ -22,6 +22,8 @@ bool CViewerProcess::Init()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"CViewerProcess::Init");
 
+  RENDER_MANAGER->SetClearColor(colMAGENTA);
+
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
 
   m_pViewer = new CViewer();
@@ -47,8 +49,7 @@ void CViewerProcess::Release()
 
 void CViewerProcess::Update(float _fElapsedTime)
 {
-  Vect3i l_vMouseDelta = INPUT_MANAGER->GetMouseDelta();
-  m_pViewer->Update(_fElapsedTime,l_vMouseDelta);
+  m_pViewer->Update(_fElapsedTime);
 }
 
 void CViewerProcess::RenderScene(CRenderManager* _pRM)
@@ -96,8 +97,8 @@ void CViewerProcess::RegisterLuaFunctions()
       //GUI
       .def("get_current_mode",    &CViewer::GetCurrentMode)
       .def("set_mode",            &CViewer::SetMode)
-      .def("get_view_mode",       &CViewer::GetViewMode)
-      .def("set_view_mode",       &CViewer::SetViewMode)
+      .def("activate_gui",        &CViewer::ActivateGui)
+      .def("is_gui_active",        &CViewer::IsGuiActive)
       .def("toggle_boxes",        &CViewer::ToggleShowBoxes)
       .def("toggle_spheres",      &CViewer::ToggleShowSpheres)
       .def("next_mode",           &CViewer::SetNextMode)

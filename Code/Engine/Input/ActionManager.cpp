@@ -106,3 +106,15 @@ void CActionManager::ExecuteScript(float _fDeltaSeconds, float _fDelta, const ch
   }
 }
 
+bool CActionManager::IsActionActive(const string& _szActionName)
+{
+  CInputAction* l_pInputAction = GetResource(_szActionName);
+
+  if(l_pInputAction)
+  {
+    return l_pInputAction->IsTriggered();
+  }
+
+  return false;
+}
+
