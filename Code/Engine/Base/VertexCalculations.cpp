@@ -211,3 +211,33 @@ void CalcMinMaxCoord(char* _pVertexBuffer, unsigned short _usGeometryOffset, uns
     l_uiBase += _usVertexSize;
   }
 }
+
+
+vector<Vect3f> CalcSimpleVertexBuffer(char* _pVertexBuffer, unsigned short _usVertexSize, unsigned short _usVertexCount)
+{
+  unsigned int l_uiBase = 0;
+  vector<Vect3f> l_vBuffer;
+
+  for(int i = 0; i < _usVertexCount; i++)
+  {
+    D3DXVECTOR3 *v1=(D3DXVECTOR3 *) &_pVertexBuffer[i*_usVertexSize];
+    l_vBuffer.push_back(Vect3f(v1->x,v1->y,v1->z));
+  }
+  return l_vBuffer;
+}
+
+vector<uint32> CalcSimpleIndexBuffer(uint16* _pIndexBuffer, unsigned short _usIndexSize, unsigned short _usIndexCount)
+{
+  unsigned int l_uiBase = 0;
+  vector<uint32> l_vBuffer;
+  uint32 l_uiIndex;
+
+  for(int i = 0; i < _usIndexCount; i++)
+  {
+    l_uiIndex = (uint32) _pIndexBuffer[i];
+    l_vBuffer.push_back(l_uiIndex);
+    //l_uiBase += _usIndexSize;
+  }
+
+  return l_vBuffer;
+}

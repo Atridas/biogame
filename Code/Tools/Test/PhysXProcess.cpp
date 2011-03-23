@@ -29,6 +29,7 @@
 #include "InstanceMesh.h"
 #include "GameObject.h"
 #include "GameObjectManager.h"
+#include "PhysicCookingMesh.h"
 
 //typedef enum ETypeFunction { 
 //      COLISION_STATIC_MASK = 0,
@@ -70,6 +71,7 @@ CGameObject* g_pGameBox04;
 CGameObject* g_pGameBox05;
 CGameObject* g_pGameBox06;
 CGameObject* g_pGameBox07;
+
 
 
 CPhysicFixedJoint* g_pJoint;
@@ -183,6 +185,9 @@ bool CPhysXProcess::Init()
   g_pPEscala = new CPhysicActor(g_pUserDataEscala);
 
   //ESCALA
+
+
+
   g_pPEscala->AddBoxSphape(Vect3f(0.5f,0.3f,2.0f),Vect3f(-10.0f,0.0f,0.0f));
   g_pPEscala->AddBoxSphape(Vect3f(0.5f,0.6f,2.0f),Vect3f(-11.0f,0.0f,0.0f));
   g_pPEscala->AddBoxSphape(Vect3f(0.5f,0.9f,2.0f),Vect3f(-12.0f,0.0f,0.0f));
@@ -197,20 +202,31 @@ bool CPhysXProcess::Init()
 
   //Actor estatic en forma de pla per fer probes amb el charactercontroller:
   //CPhysicActor* plaXung = new CPhysicActor(g_pUserData2);
-  g_pPActorPlane->AddBoxSphape(Vect3f(100.f,1.0f,100.f),Vect3f(0.0f,-1.0f,0.0f));
+  g_pPActorPlane->AddBoxSphape(Vect3f(500.f,1.0f,500.f),Vect3f(0.0f,-1.0f,0.0f));
   //g_pPActorPlane->CreateBody(100.0f);
 
 
+  const vector<uint32> l_vIndexBuff = CORE->GetStaticMeshManager()->GetResource("ordinador_def")->GetIndexBuffer();
+  const vector<Vect3f> l_vVertexBuff = CORE->GetStaticMeshManager()->GetResource("ordinador_def")->GetVertexBuffer();
+  CPhysicCookingMesh* l_pCookingMesh = CORE->GetPhysicsManager()->GetCookingMesh();
+  l_pCookingMesh->CreatePhysicMesh(l_vVertexBuff,l_vIndexBuff,"ordinador_def");
+  NxTriangleMesh* l_pMesh = l_pCookingMesh->GetPhysicMesh("ordinador_def");
+  g_pPActorComposite->AddMeshShape(l_pMesh);
+
+  CRenderableObject* l_pRenderObject = CORE->GetRenderableObjectsManager()->GetResource("Ordinador_DEF");
+  g_pGameObject = new CGameObject("ordinador_def");
+  g_pGameObject->Init(l_pRenderObject,g_pPActorComposite);
+  
   //Composite
-  g_pPActorComposite->AddBoxSphape(2,Vect3f(0,7,0));
-  g_pPActorComposite->AddSphereShape(1,Vect3f(2,4,2));
-  g_pPActorComposite->AddSphereShape(1,Vect3f(2,4,-2));
-  g_pPActorComposite->AddSphereShape(1,Vect3f(-2,4,-2));
-  g_pPActorComposite->AddSphereShape(1,Vect3f(-2,4,2));
+  //g_pPActorComposite->AddBoxSphape(2,Vect3f(0,7,0));
+  //g_pPActorComposite->AddSphereShape(0.001f);
+  //g_pPActorComposite->AddSphereShape(1,Vect3f(2,4,-2));
+  //g_pPActorComposite->AddSphereShape(1,Vect3f(-2,4,-2));
+  //g_pPActorComposite->AddSphereShape(1,Vect3f(-2,4,2));
   
 
-  g_pPActorComposite->CreateBody(0.6f);
-  g_pPActorComposite->SetGlobalPosition(Vect3f(10,4,0));
+  //g_pPActorComposite->CreateBody(0.1f);
+  //g_pPActorComposite->SetGlobalPosition(Vect3f(0,4,0));
   
 
   //l_pPhysManager->AddPhysicActor(g_pPActorPlane);
@@ -346,6 +362,7 @@ bool CPhysXProcess::Init()
   //CORE->GetRenderableObjectsManager()->SetAllVisibility(false);
 
   
+  //CORE->GetStaticMeshManager()->GetResource("ordinador_def")->
   g_pObjectManager = new CGameObjectManager();
   g_pObjectManager->Load("Data/XML/GameObjects.xml",false);
 
@@ -481,6 +498,7 @@ void CPhysXProcess::Update(float _fElapsedTime)
 
 
   g_pObjectManager->Update(_fElapsedTime);
+  g_pGameObject->Update(_fElapsedTime);
 
 }
 

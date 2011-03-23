@@ -16,5 +16,8 @@ void CreatePoissonBlur16x2( float pfKernel_[32] );
 
 void CalcMinMaxCoord(char* _pVertexBuffer, unsigned short _usGeometryOffset, unsigned short _usVertexSize, unsigned short _usVertexCount, Vect3f& _vMin, Vect3f& _vMax);
 
+vector<Vect3f> CalcSimpleVertexBuffer(char* _pVertexBuffer, unsigned short _usVertexSize, unsigned short _usVertexCount);
+vector<uint32> CalcSimpleIndexBuffer(uint16* _pIndexBuffer, unsigned short _usIndexSize, unsigned short _usIndexCount);
+
 
 #endif
