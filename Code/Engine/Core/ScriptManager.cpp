@@ -374,6 +374,8 @@ void CScriptManager::RegisterLUAFunctions()
   //Engine
     ,class_<CEngine, CBaseControl>("Engine")
       .def("get_active_process",              &CEngine::GetActiveProcess)
+      .def("set_exit",                        &CEngine::SetExit)
+      .def("get_exit",                        &CEngine::GetExit)
   ];
 
   //CRenderableObjectsManager

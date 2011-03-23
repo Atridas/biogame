@@ -23,8 +23,8 @@ public:
    * @param _szProcessName Nom que rebrà el procés.
   **/
   CProcess(const string& _szProcessName):
-      m_pCamera(0),m_pSceneEffectManager(0),m_szProcessName(_szProcessName),m_bRenderInfo(true),
-      m_pStaticMeshTechnique(0), m_pAnimatedTechnique(0)
+      m_pCamera(0),m_szProcessName(_szProcessName),m_bRenderInfo(true)
+      ,m_pSceneEffectManager(0),m_pStaticMeshTechnique(0), m_pAnimatedTechnique(0)
                                                                           {};
   /**
    * Mètode d'update.
