@@ -95,7 +95,8 @@ public:
 	void								SetInitParams								(const SPhysicsInitParams& initParams) {m_InitParams = initParams;}
 
 	//----CScriptRegister interface-------------------
-	virtual void				RegisterFunctions					(CScriptManager* scriptManager);
+	virtual void				RegisterFunctions					  (CScriptManager* scriptManager);
+  bool						    Load	                      (const string& _szFileName, bool _bReload);
 
 	//--- Intersection Functions:
 	CPhysicUserData*		RaycastClosestActor					(const Vect3f posRay, const Vect3f& dirRay, uint32 impactMask, CPhysicUserData* impactObject, SCollisionInfo& info);

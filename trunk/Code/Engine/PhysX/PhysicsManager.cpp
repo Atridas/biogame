@@ -666,3 +666,14 @@ void CPhysicsManager::RegisterFunctions (CScriptManager* scriptManager)
 	//					&CPhysicsManager::GetDebugRenderMode)
  //   ];
 }
+
+
+
+
+bool CPhysicsManager::Load(const string& _szFileName, bool _bReload)
+{
+
+
+
+  return true;
+}

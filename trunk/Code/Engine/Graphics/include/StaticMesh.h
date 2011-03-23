@@ -62,6 +62,10 @@ public:
    * @return Les coordenades máximes de la malla.
   **/
   Vect3f GetMax() const { return m_vMax; };
+
+  vector<uint32> GetIndexBuffer ()  {return m_vIndexBuffer;};
+  vector<Vect3f> GetVertexBuffer ()  {return m_vVertexBuffer;};
+
 protected:
   /**
    * Mètode d'alliberament de recursos.
@@ -87,5 +91,8 @@ protected:
    * Valors max i min de cada coordenada.
   **/
   Vect3f m_vMax, m_vMin;
+
+  vector<uint32> m_vIndexBuffer;
+  vector<Vect3f> m_vVertexBuffer;
 };
 #endif

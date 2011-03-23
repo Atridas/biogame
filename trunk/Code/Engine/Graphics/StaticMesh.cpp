@@ -135,6 +135,8 @@ bool CStaticMesh::Load(const CXMLTreeNode& _XMLTreeNode)
       m_vMin.SetIfMinComponents(l_vMin);
       m_vMax.SetIfMaxComponents(l_vMax);
     }
+
+    
   
     uint32 l_IndexCount;
 
@@ -153,6 +155,10 @@ bool CStaticMesh::Load(const CXMLTreeNode& _XMLTreeNode)
     CRenderableVertexs* l_RenderableVertexs = 0;
 
     
+
+    //CARREGUEM LES VERSIONS SIMPLES DELS VB I IB PER LA FISICA
+    m_vIndexBuffer = CalcSimpleIndexBuffer(l_pIndexList,sizeof(uint32),l_IndexCount);
+    m_vVertexBuffer = CalcSimpleVertexBuffer(l_pVertexBuffer,l_usVertexSize,l_VertexCount);
 
     if(l_pusVertexType[l_i] == SNORMALTEXTUREDVERTEX::GetVertexType())
     {
