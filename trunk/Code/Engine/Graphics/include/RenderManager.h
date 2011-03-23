@@ -93,14 +93,14 @@ public:
   LPDIRECT3DDEVICE9       GetDevice               () const {return m_pD3DDevice;};
   CCamera*                GetCamera               () const {return m_pCamera;};
 
-  
-
-public:
-	void                    Release					  ();
+  void                    SetClearColor           (const CColor& _cColor) {m_cClearColor = _cColor;};
 
 private:
+	virtual void            Release					  ();
+
 	void									  GetWindowRect		  (HWND hWnd);
 
+  CColor                  m_cClearColor;
 	LPDIRECT3D9						  m_pD3D; // direct3d interface
 	LPDIRECT3DDEVICE9	  	  m_pD3DDevice;	   					 // direct3d device
 

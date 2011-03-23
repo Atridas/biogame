@@ -4,7 +4,6 @@
 #include "Viewer.h"
 #include "Core.h"
 #include "RenderManager.h"
-#include "InputManager.h"
 #include "FontManager.h"
 #include "ThPSCamera.h"
 #include "RenderableObjectsManager.h"
@@ -16,7 +15,7 @@
 #include "SpotLight.h"
 #include "SoundManager.h"
 #include "ScriptManager.h"
-
+#include "ActionManager.h"
 #include <luabind/luabind.hpp>
 #include <luabind/function.hpp>
 #include <luabind/class.hpp>
@@ -100,7 +99,7 @@ void CViewer::Init()
   m_vAmbientLight = CORE->GetLightManager()->GetAmbientLight();
 
   m_bEnableLights = true;
-  m_bViewMode = true;
+  m_bGuiActive = false;
   m_bShowHelp = true;
   m_bNormalRendering = false;
   m_bShowBoxes = false;
@@ -109,6 +108,8 @@ void CViewer::Init()
   m_iMode = FREE_MODE;
 
   SOUND_MANAGER->PlayMusic("bgm2",true);
+
+  m_vMouseDelta = 0;
 
   ResetActions();
 
@@ -234,14 +235,46 @@ void CViewer::InitAnimatedMode()
     SetNextMode();
 }
 
-void CViewer::ProcessFreeMode(const float _fElapsedTime,const Vect3i& _vMouseDelta)
+void CViewer::ProcessFreeMode(const float _fElapsedTime)
 {
   Vect3f l_vPosDelta = Vect3f(0.0f);
-  float l_fDeltaYaw = _vMouseDelta.x * _fElapsedTime;
-  float l_fDeltaPitch = _vMouseDelta.y * _fElapsedTime;
+  float l_fDeltaYaw = m_vMouseDelta.x * _fElapsedTime;
+  float l_fDeltaPitch = m_vMouseDelta.y * _fElapsedTime;
+
+  if(m_bGuiActive)
+  {
+    l_fDeltaYaw = 0.0f;
+    l_fDeltaPitch = 0.0f;
+  }
 
   CORE->GetLightManager()->SetAmbientLight(m_vAmbientLight);
   CORE->GetLightManager()->SetLightsEnabled(m_bEnableLights);
+
+  if(!CORE->GetActionManager()->IsActionActive("Run"))
+  {
+    SetWalking();
+  }
+
+  if(!CORE->GetActionManager()->IsActionActive("MoveFwd"))
+  {
+    m_bMoveFwd = false;
+  }
+
+  if(!CORE->GetActionManager()->IsActionActive("MoveBack"))
+  {
+    m_bMoveBack = false;
+  }
+
+  if(!CORE->GetActionManager()->IsActionActive("MoveLeft"))
+  {
+    m_bMoveLeft = false;
+  }
+
+  if(!CORE->GetActionManager()->IsActionActive("MoveRight"))
+  {
+    m_bMoveRight = false;
+  }
+
   if(m_pObjectModeLight)
   {
     m_pObjectModeLight->SetActive(false);
@@ -282,10 +315,7 @@ void CViewer::ProcessFreeMode(const float _fElapsedTime,const Vect3i& _vMouseDel
     m_pSpotLight->SetDirection(m_pObjectCamera->GetDirection());
   }
 
-  if ((!INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_W)) &&
-	 (!INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_S)) &&
-	 (!INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_A)) &&
-	 (!INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_D)))
+  if (!m_bMoveFwd && !m_bMoveBack && !m_bMoveLeft && !m_bMoveLeft && !m_bMoveRight)
   {
     if(m_pCharacter)
     {
@@ -299,10 +329,10 @@ void CViewer::ProcessFreeMode(const float _fElapsedTime,const Vect3i& _vMouseDel
 
 }
 
-void CViewer::ProcessMeshMode(const float _fElapsedTime,const Vect3i& _vMouseDelta)
+void CViewer::ProcessMeshMode(const float _fElapsedTime)
 {  
-  float l_fDeltaYaw = _vMouseDelta.x * _fElapsedTime;
-  float l_fDeltaPitch = _vMouseDelta.y * _fElapsedTime;
+  float l_fDeltaYaw = m_vMouseDelta.x * _fElapsedTime;
+  float l_fDeltaPitch = m_vMouseDelta.y * _fElapsedTime;
 
   UpdateCamera(l_fDeltaPitch,l_fDeltaYaw);
 
@@ -313,10 +343,10 @@ void CViewer::ProcessMeshMode(const float _fElapsedTime,const Vect3i& _vMouseDel
   }
 }
 
-void CViewer::ProcessAnimatedMode(const float _fElapsedTime,const Vect3i& _vMouseDelta)
+void CViewer::ProcessAnimatedMode(const float _fElapsedTime)
 {
-  float l_fDeltaYaw = _vMouseDelta.x * _fElapsedTime;
-  float l_fDeltaPitch = _vMouseDelta.y * _fElapsedTime;
+  float l_fDeltaYaw = m_vMouseDelta.x * _fElapsedTime;
+  float l_fDeltaPitch = m_vMouseDelta.y * _fElapsedTime;
 
   UpdateCamera(l_fDeltaPitch,l_fDeltaYaw);
 
@@ -327,26 +357,23 @@ void CViewer::ProcessAnimatedMode(const float _fElapsedTime,const Vect3i& _vMous
   }
 }
 
-void CViewer::Update(const float _fElapsedTime,const Vect3i& _vMouseDelta)
+void CViewer::Update(const float _fElapsedTime)
 {
-  if(m_bViewMode)
-  {
-    switch(m_iMode) {
-    case FREE_MODE:
-      ProcessFreeMode(_fElapsedTime,_vMouseDelta);
-      break;
-    case MESH_MODE:
-      ProcessMeshMode(_fElapsedTime,_vMouseDelta);
-      break;
-    case ANIMATED_MODE:
-      ProcessAnimatedMode(_fElapsedTime,_vMouseDelta);
-      break;
-    default:
-      break;
-    }
+  switch(m_iMode) {
+  case FREE_MODE:
+    ProcessFreeMode(_fElapsedTime);
+    break;
+  case MESH_MODE:
+    ProcessMeshMode(_fElapsedTime);
+    break;
+  case ANIMATED_MODE:
+    ProcessAnimatedMode(_fElapsedTime);
+    break;
+  default:
+    break;
   }
 
-  ResetActions();
+  m_vMouseDelta = 0;
 }
 
 void CViewer::UpdatePosition(Vect3f& _PosDelta, float _fDeltaPitch, float _fDeltaYaw)
@@ -576,6 +603,18 @@ bool CViewer::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pc
   //  return true;
   //}
 
+  if(strcmp(_pcAction, "Yaw") == 0)
+  {
+    m_vMouseDelta.x = (int)_fDelta;
+    return true;
+  }
+
+  if(strcmp(_pcAction, "Pitch") == 0)
+  {
+    m_vMouseDelta.y = (int)_fDelta;
+    return true;
+  }
+
   switch(m_iMode) {
   case FREE_MODE:
     return ExecuteFreeModeAction(_fDeltaSeconds,_fDelta,_pcAction);
@@ -598,12 +637,6 @@ bool CViewer::ExecuteFreeModeAction(float _fDeltaSeconds, float _fDelta, const c
   if(strcmp(_pcAction, "Run") == 0)
   {
     SetRunning();
-    return true;
-  }
-
-  if(strcmp(_pcAction, "Walk") == 0)
-  {
-    SetWalking();
     return true;
   }
 
@@ -691,9 +724,7 @@ bool CViewer::ExecuteMeshModeAction(float _fDeltaSeconds, float _fDelta, const c
 
   if(strcmp(_pcAction, "ZoomCamera") == 0)
   {
-    Vect3i l_vDelta = INPUT_MANAGER->GetMouseDelta();
-
-    if (l_vDelta.z < 0)
+    if (_fDelta < 0)
     {
       IncreaseZoom();
     }else{
@@ -723,9 +754,7 @@ bool CViewer::ExecuteAnimatedModeAction(float _fDeltaSeconds, float _fDelta, con
 
   if(strcmp(_pcAction, "ZoomCamera") == 0)
   {
-    Vect3i l_vDelta = INPUT_MANAGER->GetMouseDelta();
-
-    if (l_vDelta.z < 0)
+    if (_fDelta < 0)
     {
       IncreaseZoom();
     }else{

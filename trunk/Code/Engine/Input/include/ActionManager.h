@@ -25,9 +25,11 @@ public:
 
   void Reload() {m_bReload = true;};
 
-  virtual void Release();
+  bool IsActionActive(const string& _szActionName);
 
 private:
+
+  virtual void Release();
 
   void ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction);
   void ExecuteScript(float _fDeltaSeconds, float _fDelta, const char* _pcScript);

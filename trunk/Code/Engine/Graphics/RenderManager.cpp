@@ -127,6 +127,12 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
   TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetVertexDeclaration();
   TCAL3D_HW_VERTEX::GetVertexDeclaration();
 
+#ifdef _DEBUG // Clear the backbuffer to magenta color in a Debug mode
+  m_cClearColor = colMAGENTA;
+#else // Clear the backbuffer to black color in a Release mode
+  m_cClearColor = colBLACK;
+#endif
+
 	return IsOk();
 }
 
@@ -167,17 +173,11 @@ void CRenderManager::BeginRendering ()
 {
   assert(IsOk());
 
-#ifdef _DEBUG // Clear the backbuffer to magenta color in a Debug mode
-	uint32 red		= (uint32) (1.f * 255);
-	uint32 green	= (uint32) (0.f * 255);
-	uint32 blue		= (uint32) (1.f * 255);
-#else // Clear the backbuffer to black color in a Release mode
-	uint32 red		= (uint32) (0.f * 255);
-	uint32 green	= (uint32) (0.f * 255);
-	uint32 blue		= (uint32) (0.f * 255);
-#endif
-	m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET|D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB(0, red, green, blue), 1.0f, 0 );
+	uint32 red		= (uint32) (m_cClearColor.GetRed() * 255);
+	uint32 green	= (uint32) (m_cClearColor.GetGreen() * 255);
+	uint32 blue		= (uint32) (m_cClearColor.GetBlue() * 255);
 
+	m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET|D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB(0, red, green, blue), 1.0f, 0 );
 
 	// Begin the scene
 	HRESULT hr = m_pD3DDevice->BeginScene();
