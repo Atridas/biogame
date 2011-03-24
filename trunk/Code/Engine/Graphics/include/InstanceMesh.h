@@ -26,7 +26,7 @@ public:
   //Methods
   virtual void  RenderRenderableObject(CRenderManager* _pRM);
 
-  const CStaticMesh* GetStaticMesh() const { return m_StaticMesh; };
+  CStaticMesh* GetStaticMesh() { return m_StaticMesh; };
 
 protected:
   virtual void          Release                   ();

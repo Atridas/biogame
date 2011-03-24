@@ -21,7 +21,8 @@ public:
   ~CGameObjectManager()               {Done();};
   void						CleanUp()                      {Release();m_vResources.clear();};
   bool						Load	(const string& _szFileName, bool _bReload);
-  CPhysicActor*   AddPhysicActor(CRenderableObject* l_pRenderObject, string& _szName, string& _szMode, float _fBody);
+  CPhysicActor*   AddPhysicActor(CRenderableObject* l_pRenderObject, string& _szName, float _fBody);
+  CPhysicActor*   AddPhysicActorMesh(CRenderableObject* _pRenderObject, string& _szName, float _fBody);
   virtual void		Release();
   void            Update(float _fElapsedTime);
 private:

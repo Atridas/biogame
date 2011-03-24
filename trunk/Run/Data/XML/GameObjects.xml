@@ -10,8 +10,8 @@
   <GameObject name="Maquina1" Physx="true" PhysxType="BoundingBox" RenderableObject="maquina exploradora" PhysxActor="maquina exploradora" Body="0.1"/>
   <GameObject name="Maquina2" Physx="true" PhysxType="BoundingBox" RenderableObject="maquina exploradora01" PhysxActor="maquina exploradora01" Body="0.1"/>
 
-  <GameObject name="Cadira1" Physx="true" PhysxType="BoundingBox" RenderableObject="cadira_oficina" PhysxActor="cadira_oficina" Body="0.1"/>
-  <GameObject name="Cadira2" Physx="true" PhysxType="BoundingBox" RenderableObject="cadira_oficina01" PhysxActor="cadira_oficina01" Body="0.1"/>
+  <GameObject name="Cadira1" Physx="true" PhysxType="mesh" RenderableObject="cadira_oficina" PhysxActor="cadira_oficina" Body="0"/>
+  <GameObject name="Cadira2" Physx="true" PhysxType="mesh" RenderableObject="cadira_oficina01" PhysxActor="cadira_oficina01" Body="0.1"/>
   <GameObject name="autopsia_taula" Physx="true" PhysxType="BoundingBox" RenderableObject="autopsia_taula" PhysxActor="autopsia_taula" Body="0.4"/>
 
 

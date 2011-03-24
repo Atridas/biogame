@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Config>
-  <RenderManager resolution="800 600" position="50 5" fullscreenMode="false"/>
+  <RenderManager resolution="1080 720" position="50 5" fullscreenMode="false"/>
   
   <StaticMeshManager>
     <StaticMeshes xml="Data/XML/StaticMeshes.xml"/>
@@ -49,7 +49,7 @@
 
   <LogRender position="10 0"/>
 
-  <GUIManager xml="Data/XML/GUI.xml" start="TextWindow1.xml" render_mouse="false"/>
+  <GUIManager xml="Data/XML/GUI_test.xml" start="Main.xml" render_mouse="false"/>
     
   <!--<AnimatedModelManager file="Data/XML/AnimatedModels.xml">
   </AnimatedModelManager>-->
