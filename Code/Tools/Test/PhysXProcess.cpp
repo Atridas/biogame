@@ -198,7 +198,7 @@ bool CPhysXProcess::Init()
   g_pPEscala->AddBoxSphape(Vect3f(0.5f,2.4f,2.0f),Vect3f(-17.0f,0.0f,0.0f));
   g_pPEscala->AddBoxSphape(Vect3f(0.5f,2.7f,2.0f),Vect3f(-18.0f,0.0f,0.0f));
   g_pPEscala->AddBoxSphape(Vect3f(0.5f,3.0f,2.0f),Vect3f(-19.0f,0.0f,0.0f));
-
+  g_pPEscala->SetGlobalPosition(Vect3f(5.0f,0.0f,5.0f));
 
   //Actor estatic en forma de pla per fer probes amb el charactercontroller:
   //CPhysicActor* plaXung = new CPhysicActor(g_pUserData2);
@@ -206,7 +206,7 @@ bool CPhysXProcess::Init()
   //g_pPActorPlane->CreateBody(100.0f);
 
 
-  const vector<uint32> l_vIndexBuff = CORE->GetStaticMeshManager()->GetResource("ordinador_def")->GetIndexBuffer();
+  /*const vector<uint32> l_vIndexBuff = CORE->GetStaticMeshManager()->GetResource("ordinador_def")->GetIndexBuffer();
   const vector<Vect3f> l_vVertexBuff = CORE->GetStaticMeshManager()->GetResource("ordinador_def")->GetVertexBuffer();
   CPhysicCookingMesh* l_pCookingMesh = CORE->GetPhysicsManager()->GetCookingMesh();
   l_pCookingMesh->CreatePhysicMesh(l_vVertexBuff,l_vIndexBuff,"ordinador_def");
@@ -215,7 +215,7 @@ bool CPhysXProcess::Init()
 
   CRenderableObject* l_pRenderObject = CORE->GetRenderableObjectsManager()->GetResource("Ordinador_DEF");
   g_pGameObject = new CGameObject("ordinador_def");
-  g_pGameObject->Init(l_pRenderObject,g_pPActorComposite);
+  g_pGameObject->Init(l_pRenderObject,g_pPActorComposite,"mesh");*/
   
   //Composite
   //g_pPActorComposite->AddBoxSphape(2,Vect3f(0,7,0));
@@ -498,7 +498,7 @@ void CPhysXProcess::Update(float _fElapsedTime)
 
 
   g_pObjectManager->Update(_fElapsedTime);
-  g_pGameObject->Update(_fElapsedTime);
+  //g_pGameObject->Update(_fElapsedTime);
 
 }
 
