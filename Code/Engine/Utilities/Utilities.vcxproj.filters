@@ -10,6 +10,12 @@
     <Filter Include="EntitySystem">
       <UniqueIdentifier>{31371ca7-252d-4b80-82a7-15e00a685721}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\ComponentObject3D">
+      <UniqueIdentifier>{70bb2498-4de9-48c7-8ade-33dc159a33fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\ComponentPhysXController">
+      <UniqueIdentifier>{48735945-4a40-47e9-b996-1336c150102f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -20,6 +26,9 @@
     </ClCompile>
     <ClCompile Include="GameEntity.cpp">
       <Filter>EntitySystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentPhysXController.cpp">
+      <Filter>EntitySystem\ComponentPhysXController</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -40,6 +49,12 @@
     </ClInclude>
     <ClInclude Include="include\EntityDefines.h">
       <Filter>EntitySystem</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentObject3D.h">
+      <Filter>EntitySystem\ComponentObject3D</Filter>
+    </ClInclude>
+    <ClInclude Include="ComponentPhysXController.h">
+      <Filter>EntitySystem\ComponentPhysXController</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
