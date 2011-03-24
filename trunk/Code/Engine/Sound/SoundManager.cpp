@@ -41,13 +41,6 @@ bool CSoundManager::Init(const string& _szFile)
     l_bLoop = l_XMLSound.GetBoolProperty("loop");
     l_iPriority = l_XMLSound.GetIntProperty("priority");
 
-    map<string,HSTREAM>::iterator l_It = m_mResources.find(l_szName);
-    if(l_It != m_mResources.end()) 
-    {
-      LOGGER->AddNewLog(ELL_WARNING,"CSoundManager::Init Sampler repetit: \"%s\"", l_szName.c_str());
-      continue;
-    }
-
     int l_iMask = 0;
 
     if(l_bLoop)
@@ -58,33 +51,48 @@ bool CSoundManager::Init(const string& _szFile)
 
     HSTREAM l_iStream = 0;
 
+    SSoundChannel* l_pSound = 0;
+
     if(l_szType.compare("music") == 0)
     {
-      l_iStream = BASS_StreamCreateFile(false,l_szFile.c_str(), 0, 0, l_iMask);
-      if(l_iStream)
+      map<string,SSoundChannel*>::iterator l_It = m_mapMusics.find(l_szName);
+      if(l_It == m_mapMusics.end()) 
       {
-        m_vMusicChannels.push_back(SSoundChannel(l_iStream,1.0f));
-      }else{
-        LOGGER->AddNewLog(ELL_WARNING,"CSoundManager::Init error al crear stream: \"%s\"", l_szFile.c_str());
-      }
-    }
-    
-    if(l_szType.compare("sample") == 0){
-      int l_iMaxSamples = l_XMLSound.GetIntProperty("maxSamples",1);
-      l_iStream = BASS_SampleLoad(false,l_szFile.c_str(), 0, 0, l_iMaxSamples, l_iMask);
-      if(l_iStream)
-      {
-        m_vSampleChannels.push_back(SSoundChannel(l_iStream,1.0f));
-      }else{
-        LOGGER->AddNewLog(ELL_WARNING,"CSoundManager::Init error al crear sample: \"%s\"", l_szFile.c_str());
-      }
-    }
+        l_iStream = BASS_StreamCreateFile(false,l_szFile.c_str(), 0, 0, l_iMask);
 
-    if(l_iStream)
+        if(l_iStream)
+        {
+          l_pSound = new SSoundChannel(l_iStream,1.0f);
+          m_mapMusics[l_szName] = l_pSound;
+          m_vMusics.push_back(l_pSound);
+
+        }else{
+          LOGGER->AddNewLog(ELL_WARNING,"CSoundManager::Init error al crear stream: \"%s\"", l_szFile.c_str());
+        }
+      }else{
+        LOGGER->AddNewLog(ELL_WARNING,"CSoundManager::Init Musica repetida: \"%s\"", l_szName.c_str());
+      }
+    }else if(l_szType.compare("sample") == 0)
     {
-      m_mResources[l_szName] = l_iStream;
-    }
+      map<string,SSoundChannel*>::iterator l_It = m_mapSamples.find(l_szName);
+      if(l_It == m_mapSamples.end()) 
+      {
+        int l_iMaxSamples = l_XMLSound.GetIntProperty("maxSamples",1);
+        l_iStream = BASS_SampleLoad(false,l_szFile.c_str(), 0, 0, l_iMaxSamples, l_iMask);
 
+        if(l_iStream)
+        {
+          l_pSound = new SSoundChannel(l_iStream,1.0f);
+          m_mapSamples[l_szName] = l_pSound;
+          m_vSamples.push_back(l_pSound);
+
+        }else{
+          LOGGER->AddNewLog(ELL_WARNING,"CSoundManager::Init error al crear sample: \"%s\"", l_szFile.c_str());
+        }
+      }else{
+        LOGGER->AddNewLog(ELL_WARNING,"CSoundManager::Init Sampler repetit: \"%s\"", l_szName.c_str());
+      }
+    }
   }
 
   SetOk(true);
@@ -97,31 +105,62 @@ void CSoundManager::Release()
   BASS_Stop();
   BASS_Free();
 
-  m_mResources.clear();
-  m_vSampleChannels.clear();
+  vector<SSoundChannel*>::iterator l_It = m_vMusics.begin();
+  vector<SSoundChannel*>::iterator l_ItEnd = m_vMusics.end();
+
+  while(l_It != l_ItEnd)
+  {
+    CHECKED_DELETE(*l_It);
+    ++l_It;
+  }
+
+  m_mapMusics.clear();
+  m_vMusics.clear();
+
+  l_It = m_vSamples.begin();
+  l_ItEnd = m_vSamples.end();
+
+  while(l_It != l_ItEnd)
+  {
+    CHECKED_DELETE(*l_It);
+    ++l_It;
+  }
+
+  m_mapSamples.clear();
+  m_vSamples.clear();
 }
 
-HSTREAM CSoundManager::GetSample(const string& _szSample)
+CSoundManager::SSoundChannel* CSoundManager::GetSample(const string& _szSample)
 {
-  map<string,HSTREAM>::iterator l_It = m_mResources.find(_szSample);
-  if(l_It == m_mResources.end()) 
+  map<string,SSoundChannel*>::iterator l_It = m_mapSamples.find(_szSample);
+  if(l_It == m_mapSamples.end()) 
   {
     return 0;
   }
   return l_It->second;
 }
 
-void CSoundManager::PlaySample(const string& _szSample, float _fVolume)
+CSoundManager::SSoundChannel* CSoundManager::GetMusic(const string& _szSample)
 {
-  HSTREAM l_Sample = GetSample(_szSample);
-
-  if(l_Sample != 0)
+  map<string,SSoundChannel*>::iterator l_It = m_mapMusics.find(_szSample);
+  if(l_It == m_mapMusics.end()) 
   {
-    HCHANNEL l_Channel = BASS_SampleGetChannel(l_Sample,false);
+    return 0;
+  }
+  return l_It->second;
+}
+
+void CSoundManager::PlaySample(const string& _szSample)
+{
+  SSoundChannel* l_pSample = GetSample(_szSample);
+
+  if(l_pSample)
+  {
+    HCHANNEL l_Channel = BASS_SampleGetChannel(l_pSample->m_iHandle,false);
 
     if(l_Channel)
     {
-      BASS_ChannelSetAttribute(l_Channel, BASS_ATTRIB_VOL, 1.0f);
+      BASS_ChannelSetAttribute(l_Channel, BASS_ATTRIB_VOL, l_pSample->m_fVolume);
       BASS_ChannelPlay(l_Channel,false);
     }
   }
@@ -132,14 +171,14 @@ void CSoundManager::PlaySample3D()
 
 }
 
-void CSoundManager::PlayMusic(const string& _szSample, bool _bRestart, float _fVolume)
+void CSoundManager::PlayMusic(const string& _szMusic, bool _bRestart)
 {
-  HSTREAM l_Sample = GetSample(_szSample);
+  SSoundChannel* l_pMusic = GetMusic(_szMusic);
 
-  if(l_Sample != 0)
+  if(l_pMusic)
   {
-    BASS_ChannelSetAttribute(l_Sample, BASS_ATTRIB_VOL, _fVolume);
-    BASS_ChannelPlay(l_Sample,_bRestart);
+    BASS_ChannelSetAttribute(l_pMusic->m_iHandle, BASS_ATTRIB_VOL, l_pMusic->m_fVolume);
+    BASS_ChannelPlay(l_pMusic->m_iHandle,_bRestart);
   }
 }
 
@@ -155,21 +194,21 @@ void CSoundManager::StopAll()
 
 void CSoundManager::StopMusics()
 {
-  vector<SSoundChannel>::iterator l_It = m_vMusicChannels.begin();
+  vector<SSoundChannel*>::iterator l_It;
 
-  for(l_It = m_vMusicChannels.begin(); l_It != m_vMusicChannels.end(); l_It++)
+  for(l_It = m_vMusics.begin(); l_It != m_vMusics.end(); ++l_It)
   {
-    BASS_ChannelPause((*l_It).m_iHandle);
+    BASS_ChannelPause((*l_It)->m_iHandle);
   }
 }
 
 void CSoundManager::StopSounds()
 {
-  vector<SSoundChannel>::iterator l_It = m_vSampleChannels.begin();
+  vector<SSoundChannel*>::iterator l_It;
 
-  for(l_It = m_vSampleChannels.begin(); l_It != m_vSampleChannels.end(); l_It++)
+  for(l_It = m_vSamples.begin(); l_It != m_vSamples.end(); ++l_It)
   {
-    BASS_SampleStop((*l_It).m_iHandle);
+    BASS_SampleStop((*l_It)->m_iHandle);
   }
 }
 
@@ -178,17 +217,17 @@ void CSoundManager::SetMasterVolume()
 
 }
 
-void CSoundManager::Pause(const string& _szSample)
+void CSoundManager::Pause(const string& _szMusic)
 {
-  HSTREAM l_Sample = GetSample(_szSample);
+  SSoundChannel* l_pMusic = GetMusic(_szMusic);
 
-  if(l_Sample != 0)
+  if(l_pMusic)
   {
-    BASS_ChannelPause(l_Sample);
+    BASS_ChannelPause(l_pMusic->m_iHandle);
   }
 }
 
-void CSoundManager::Resume(const string& _szSample)
+void CSoundManager::Resume(const string& _szMusic)
 {
-  PlayMusic(_szSample,false);
+  PlayMusic(_szMusic,false);
 }
