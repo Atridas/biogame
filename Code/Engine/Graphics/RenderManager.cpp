@@ -932,18 +932,24 @@ void CRenderManager::RenderBoundingSphere(CBoundingSphere* _pBSphere)
   assert(IsOk());
 
   //Traslladar al centre de l'esfera
-  D3DMATRIX l_md3d;
-  m_pD3DDevice->GetTransform(D3DTS_WORLD,&l_md3d);
-  Mat44f l_mT = l_md3d;
-  Vect3f l_vMid = _pBSphere->GetMiddlePoint();
-  l_vMid += l_mT.GetTranslationVector();
-  l_mT.Translate(l_vMid);
+  D3DMATRIX l_matD3d;
 
-  SetTransform(l_mT);
+  m_pD3DDevice->GetTransform(D3DTS_WORLD,&l_matD3d);
+  
+  Mat44f l_matWorld(l_matD3d);
+
+  Mat44f l_matTranslation;
+
+  l_matTranslation.SetIdentity();
+
+  l_matTranslation.Translate(_pBSphere->GetMiddlePoint());
+
+  SetTransform(l_matWorld*l_matTranslation);
   
   DrawSphere(_pBSphere->GetRadius(),colBLUE, 10);
-  //DrawLine(_pBSphere->GetMiddlePoint(),Vect3f(0.0f),colGREEN);
-  //DrawLine(Vect3f(0.0f),Vect3f(0.0f,0.1f,0.0f),colRED);
+
+  SetTransform(l_matWorld);
+
 }
 
 

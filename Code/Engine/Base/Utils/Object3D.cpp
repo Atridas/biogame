@@ -39,7 +39,7 @@ void CObject3D::SetRoll( float _fRoll )
 	
  Vect3f CObject3D::GetCenterPosition()
  {
-   return m_vPosition+m_BoundingBox.GetMiddlePoint();
+   return m_vMat44 * m_BoundingBox.GetMiddlePoint();
  }
 
 
