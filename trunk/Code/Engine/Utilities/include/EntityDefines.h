@@ -3,10 +3,12 @@
 #ifndef __ENTITY_DEFINES_H__
 #define __ENTITY_DEFINES_H__
 
+#include "GameEntity.h"
+#include "BaseComponent.h"
+
 enum EComponentType {
-  ECT_TRANSFORM,
-  ECT_COBERTURA,
-  ECT_STATIC_MESH //...
+  ECT_PHISX_CONTROLLER,
+  ECT_OBJECT_3D
 };
 
 

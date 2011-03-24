@@ -5,20 +5,31 @@
 
 #include "base.h"
 #include "BaseComponent.h"
+#include "EntityDefines.h"
+
+//---- forward declarations --
+class CBaseComponent;
+enum EComponentType;
+// ---------------------------
 
 class CGameEntity:
   public CBaseControl
 {
 public:
-  CGameEntity() {};
+  CGameEntity():m_iGUID(-1) {};
   virtual ~CGameEntity() {Done();};
 
-  void Init() {SetOk(true);};
+  void Init();
+
+  int GetGUID() const {return m_iGUID;};
+
+  CBaseComponent* GetComponent(EComponentType _type) const;
 
   void Update(float deltaTime);
 
 private:
-  vector<CBaseComponent*> m_vComponents;
+  map<EComponentType, CBaseComponent*> m_vComponents;
+  int                     m_iGUID;
 };
 
 

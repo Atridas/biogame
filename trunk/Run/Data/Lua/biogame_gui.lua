@@ -25,4 +25,5 @@ function gui_init_game()
   load_level('Laboratori')
   
   GUI_MANAGER:activeWindows('Game.xml')
+  GUI_MANAGER:setVisiblePointerMouse(false)
 end

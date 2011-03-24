@@ -52,5 +52,8 @@
     <None Include="..\..\..\Run\Data\XML\Particles.xml">
       <Filter>Data</Filter>
     </None>
+    <None Include="..\..\..\Run\Data\XML\init.xml">
+      <Filter>Data</Filter>
+    </None>
   </ItemGroup>
 </Project>
