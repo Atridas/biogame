@@ -415,6 +415,7 @@ void CViewer::FocusCurrentMesh()
   (*m_itCurrentMesh)->SetVisible(true);
 
   m_pTargetObject->SetPosition((*m_itCurrentMesh)->GetCenterPosition());
+
   ((CThPSCamera*)m_pObjectCamera)->SetZoom(l_vZoom);
 
 }
