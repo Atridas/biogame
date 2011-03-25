@@ -433,6 +433,14 @@ utility BioUtility "Eon-Utility" width:160 height:312
 	(
 		if $ != undefined then
 		(
+			local l_check = CheckMesh $ true
+			
+			if l_check != true then
+			(
+				ShowError l_check
+				return false
+			)
+			
 			local l_meshPath = getMeshPath()
 			local l_TextureTotalPath = getTexturePath()
 			makeDir l_meshPath all:true
@@ -535,6 +543,17 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		local l_lights = #()
 		local l_AnimatedModels = #()
 		local l_aux = "" as stringStream
+		
+		--Check
+		local l_check = true
+		l_check = CheckSceneObjects $*
+			
+		if l_check != true then
+		(
+			ShowError l_check
+			return false
+		)
+		--Check end
 		
 		for i=1 to $*.count do
 		(

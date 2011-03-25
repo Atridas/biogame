@@ -101,7 +101,7 @@ function AddCore _cores _object _name =
 	(
 		-- core amb nom repetit, no hauria de passar mai perquè abans es comprova
 		local l_message = "" as stringStream
-		format "La core % està repetida" _name to:l_message
+		format "La core % està repetida. Si es vol instanciar feu servir la propietat d'usuari." _name to:l_message
 		ShowError l_message
 	)
 )
@@ -132,7 +132,7 @@ function AddInstance _instances _instance _index =
 	(
 		-- instancia amb nom repetit
 		local l_message = "" as stringStream
-		format "La instancia % està repetida" _instance.name to:l_message
+		format "La instancia % està repetida. Canvia-li el nom." _instance.name to:l_message
 		ShowError l_message
 	)
 )
