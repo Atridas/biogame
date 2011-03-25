@@ -55,3 +55,15 @@ function ShowMessage _text =
 (
 	messageBox _text title:"Fine" beep:false
 )
+
+function Member _array _element =
+(
+	for i = 1 to _array.count do
+	(
+		if _array[i] == _element then
+		(
+			return true
+		)
+	)
+	return false
+)

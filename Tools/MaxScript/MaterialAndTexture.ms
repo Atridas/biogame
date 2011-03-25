@@ -95,6 +95,36 @@ function IsMaterialEmpty _object _IDmaterial =
 	return true
 )
 
+--Retorna un array amb els índexs dels submaterials que tinguin vèrtexs a l'objecte.
+function GetMaterials _object =
+(
+	local l_indexs = #()
+	
+	if _object.material == undefined then
+	(
+		l_indexs = undefined
+		
+	)else if classof _object.material == Standardmaterial then
+	(
+		append l_indexs 1
+	)else
+	(
+		local l_numFaces = getNumFaces _object
+	
+		for i = 1 to l_numFaces do
+		(
+			l_materialID = getFaceMatID _object i
+			if (Member l_indexs l_materialID) == false  then
+			(
+				append l_indexs l_materialID
+			)
+		
+		)
+	)
+	
+	return l_indexs
+)
+
 -- Retorna el nombre de materials amb vèrtexs per a l'objecte actual
 function GetNumGoodMaterials _object =
 (
