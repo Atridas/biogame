@@ -3,39 +3,6 @@ fileIn "MaterialAndTexture.ms"
 fileIn "IndexAndVertex.ms"
 fileIn "ObjectControl.ms"
 
--- comprova si un array d'objectes compleix les especificacions
-function CheckSceneObjects _objectArray = 
-(
-	--s'evita tornar a comprovar els materials, ja que al mirar les rutes dels fitxers es relenteix molt.
-	local l_materials = #()
-	local l_mat
-	local l_check
-	for i = 1 to _objectArray.count do
-	(
-		local l_mat = _objectArray[i].material
-		if (Member l_materials l_mat) == false then
-		(
-			append l_materials l_mat
-			l_check = CheckMesh _objectArray[i] true
-			
-			if l_check != true then
-			(
-				return l_check
-			)
-		)else
-		(
-			l_check = CheckMesh _objectArray[i] false
-			
-			if l_check != true then
-			(
-				return l_check
-			)
-		)
-	)
-	
-	return true
-)
-
 --comprova si l'objecte cumpleix les especificacions
 function CheckMesh _object _checkMaterial =
 (
@@ -249,6 +216,39 @@ function CheckMesh _object _checkMaterial =
 	)
 	
 	--other
+	
+	return true
+)
+
+-- comprova si un array d'objectes compleix les especificacions
+function CheckSceneObjects _objectArray = 
+(
+	--s'evita tornar a comprovar els materials, ja que al mirar les rutes dels fitxers es relenteix molt.
+	local l_materials = #()
+	local l_mat
+	local l_check
+	for i = 1 to _objectArray.count do
+	(
+		local l_mat = _objectArray[i].material
+		if (Member l_materials l_mat) == false then
+		(
+			append l_materials l_mat
+			l_check = CheckMesh _objectArray[i] true
+			
+			if l_check != true then
+			(
+				return l_check
+			)
+		)else
+		(
+			l_check = CheckMesh _objectArray[i] false
+			
+			if l_check != true then
+			(
+				return l_check
+			)
+		)
+	)
 	
 	return true
 )
