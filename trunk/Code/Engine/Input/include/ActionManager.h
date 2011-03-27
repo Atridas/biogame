@@ -19,6 +19,8 @@ public:
 
   bool Init(string _szXMLFile);
 
+  bool Load(const string& _szXMLFile) {m_szXMLFile = _szXMLFile;Done();return Init(m_szXMLFile);};
+
   void SetProcess(CProcess* _pProcess) {m_pProcess = _pProcess;};
 
   void Update(float _fDeltaSeconds);

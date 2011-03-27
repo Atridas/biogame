@@ -33,6 +33,7 @@ bool CSoundManager::Init(const string& _szFile)
     bool l_bSound3D = false;
     bool l_bLoop = false;
     int l_iPriority = 0;
+    float l_fVolume = 0.0f;
 
     l_szName = l_XMLSound.GetPszISOProperty("name" ,"");
     l_szFile = l_XMLSound.GetPszISOProperty("file" ,"");
@@ -40,6 +41,19 @@ bool CSoundManager::Init(const string& _szFile)
     l_bSound3D = l_XMLSound.GetBoolProperty("sound3D");
     l_bLoop = l_XMLSound.GetBoolProperty("loop");
     l_iPriority = l_XMLSound.GetIntProperty("priority");
+    l_fVolume = l_XMLSound.GetFloatProperty("volume",1.0f);
+
+    if(l_fVolume > 1.0f)
+    {
+      LOGGER->AddNewLog(ELL_WARNING,"CSoundManager::Init Invalid volume value in \"%s\"", l_szName.c_str());
+      l_fVolume = 1.0f;
+    }
+
+    if(l_fVolume < 0.0f)
+    {
+      LOGGER->AddNewLog(ELL_WARNING,"CSoundManager::Init Invalid volume value in \"%s\"", l_szName.c_str());
+      l_fVolume = 0.0f;
+    }
 
     int l_iMask = 0;
 
@@ -62,7 +76,7 @@ bool CSoundManager::Init(const string& _szFile)
 
         if(l_iStream)
         {
-          l_pSound = new SSoundChannel(l_iStream,1.0f);
+          l_pSound = new SSoundChannel(l_iStream,l_fVolume);
           m_mapMusics[l_szName] = l_pSound;
           m_vMusics.push_back(l_pSound);
 
@@ -82,7 +96,7 @@ bool CSoundManager::Init(const string& _szFile)
 
         if(l_iStream)
         {
-          l_pSound = new SSoundChannel(l_iStream,1.0f);
+          l_pSound = new SSoundChannel(l_iStream,l_fVolume);
           m_mapSamples[l_szName] = l_pSound;
           m_vSamples.push_back(l_pSound);
 
@@ -166,10 +180,41 @@ void CSoundManager::PlaySample(const string& _szSample)
   }
 }
 
-void CSoundManager::PlaySample3D()
+void CSoundManager::PlaySample3D(const string& _szSample, Vect3f _vPosition)
 {
 
 }
+
+void CSoundManager::ChangeMusic(const string& _szMusic, unsigned long _ulFadeOutTimeMs, bool _bRestart)
+{
+  vector<SSoundChannel*>::iterator l_It = m_vMusics.begin();
+  vector<SSoundChannel*>::iterator l_ItEnd = m_vMusics.end();
+
+  SSoundChannel* l_pMusic = 0;
+
+  while(l_It != l_ItEnd)
+  {
+    l_pMusic = (*l_It);
+
+    if(BASS_ChannelIsActive(l_pMusic->m_iHandle) == BASS_ACTIVE_PLAYING)
+    {
+      BASS_ChannelSlideAttribute(l_pMusic->m_iHandle,BASS_ATTRIB_VOL,-1,_ulFadeOutTimeMs);
+    }
+    ++l_It;
+  }
+
+  l_pMusic = GetMusic(_szMusic);
+
+  if(l_pMusic)
+  {
+    BASS_ChannelSetAttribute(l_pMusic->m_iHandle, BASS_ATTRIB_VOL, 0.0f);
+    BASS_ChannelSlideAttribute(l_pMusic->m_iHandle,BASS_ATTRIB_VOL,l_pMusic->m_fVolume,_ulFadeOutTimeMs);
+    BASS_ChannelPlay(l_pMusic->m_iHandle,_bRestart);
+  }
+  
+}
+
+
 
 void CSoundManager::PlayMusic(const string& _szMusic, bool _bRestart)
 {
@@ -182,9 +227,43 @@ void CSoundManager::PlayMusic(const string& _szMusic, bool _bRestart)
   }
 }
 
-void CSoundManager::PlayMusic3D()
+void CSoundManager::SetMusic3DPosition(const string& _szMusic, const Vect3f& _vSoundEmmiterPosition)
 {
+  SSoundChannel* l_pMusic = GetMusic(_szMusic);
 
+  if(l_pMusic)
+  {
+    BASS_3DVECTOR l_pos;
+
+    l_pos.x = _vSoundEmmiterPosition.x;
+    l_pos.y = _vSoundEmmiterPosition.y;
+    l_pos.z = _vSoundEmmiterPosition.z;
+
+    BASS_ChannelSet3DPosition(l_pMusic->m_iHandle, &l_pos, 0, 0);
+  }
+}
+
+void CSoundManager::UpdateSound3DSystem(const Vect3f& _vListenerPosition, const Vect3f& _vListenerDirection)
+{
+  BASS_3DVECTOR l_Pos;
+  BASS_3DVECTOR l_Dir;
+  BASS_3DVECTOR l_Top;
+
+  l_Pos.x = _vListenerPosition.x;
+  l_Pos.y = _vListenerPosition.y;
+  l_Pos.z = _vListenerPosition.z;
+
+  l_Dir.x = _vListenerDirection.x;
+  l_Dir.y = _vListenerDirection.y;
+  l_Dir.z = _vListenerDirection.z;
+
+  l_Top.x = 0.0f;
+  l_Top.y = 1.0f;
+  l_Top.z = 0.0f;
+
+  BASS_Set3DPosition(&l_Pos,0,&l_Dir,&l_Top);
+  BASS_Set3DFactors(1.0, 1.0, 1.0);
+  BASS_Apply3D();
 }
 
 void CSoundManager::StopAll()
@@ -212,9 +291,15 @@ void CSoundManager::StopSounds()
   }
 }
 
-void CSoundManager::SetMasterVolume()
+void CSoundManager::SetMasterVolume(float _fVolume)
 {
+  if(_fVolume > 1.0f)
+    _fVolume = 1.0f;
 
+  if(_fVolume < 0.0f)
+    _fVolume = 0.0f;
+
+  BASS_SetVolume(_fVolume);
 }
 
 void CSoundManager::Pause(const string& _szMusic)
