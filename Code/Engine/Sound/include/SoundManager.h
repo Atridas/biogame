@@ -16,13 +16,15 @@ public:
   void Release();
 
   void PlaySample(const string& _szSample);
-  void PlaySample3D();
+  void PlaySample3D(const string& _szSample, Vect3f _vPosition);
+  void ChangeMusic(const string& _szMusic, unsigned long _ulFadeOutTimeMs, bool _bRestart = true);
   void PlayMusic(const string& _szMusic, bool _bRestart = true);
-  void PlayMusic3D();
+  void SetMusic3DPosition(const string& _szMusic, const Vect3f& _vSoundEmmiterPosition);
+  void UpdateSound3DSystem(const Vect3f& _vListenerPosition, const Vect3f& _vListenerDirection);
   void StopAll();
   void StopMusics();
   void StopSounds();
-  void SetMasterVolume();
+  void SetMasterVolume(float _fVolume);
   void Pause(const string& _szMusic);
   void Resume(const string& _szMusic);
 

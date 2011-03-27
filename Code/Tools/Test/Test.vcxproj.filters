@@ -5,6 +5,7 @@
     <ClCompile Include="mainTest.cpp" />
     <ClCompile Include="PhysXProcess.cpp" />
     <ClCompile Include="ParticleProcess.cpp" />
+    <ClCompile Include="SoundTestProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Data">
@@ -15,6 +16,7 @@
     <ClInclude Include="TestProcess.h" />
     <ClInclude Include="PhysXProcess.h" />
     <ClInclude Include="ParticleProcess.h" />
+    <ClInclude Include="SoundTestProcess.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Run\Data\XML\init_test.xml">
