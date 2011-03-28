@@ -11,6 +11,8 @@ bool CSoundManager::Init(const string& _szFile)
     return IsOk();
   }
 
+  BASS_Set3DFactors(1.0, 1.0, 1.0);
+
   CXMLTreeNode l_XMLSounds;
   if(!l_XMLSounds.LoadFile(_szFile.c_str()))
   {
@@ -34,6 +36,8 @@ bool CSoundManager::Init(const string& _szFile)
     bool l_bLoop = false;
     int l_iPriority = 0;
     float l_fVolume = 0.0f;
+    float l_fMinDistance = -1.0f;
+    float l_fMaxDistance = -1.0f;
 
     l_szName = l_XMLSound.GetPszISOProperty("name" ,"");
     l_szFile = l_XMLSound.GetPszISOProperty("file" ,"");
@@ -42,6 +46,8 @@ bool CSoundManager::Init(const string& _szFile)
     l_bLoop = l_XMLSound.GetBoolProperty("loop");
     l_iPriority = l_XMLSound.GetIntProperty("priority");
     l_fVolume = l_XMLSound.GetFloatProperty("volume",1.0f);
+    l_fMinDistance = l_XMLSound.GetFloatProperty("minDistance",-1.0f);
+    l_fMaxDistance = l_XMLSound.GetFloatProperty("maxDistance",-1.0f);
 
     if(l_fVolume > 1.0f)
     {
@@ -76,6 +82,11 @@ bool CSoundManager::Init(const string& _szFile)
 
         if(l_iStream)
         {
+          if(l_bSound3D)
+          {
+            BASS_ChannelSet3DAttributes(l_iStream,BASS_3DMODE_NORMAL,l_fMinDistance,l_fMaxDistance,360,360,0.0f);
+          }
+
           l_pSound = new SSoundChannel(l_iStream,l_fVolume);
           m_mapMusics[l_szName] = l_pSound;
           m_vMusics.push_back(l_pSound);
@@ -96,6 +107,11 @@ bool CSoundManager::Init(const string& _szFile)
 
         if(l_iStream)
         {
+          if(l_bSound3D)
+          {
+            BASS_ChannelSet3DAttributes(l_iStream,BASS_3DMODE_NORMAL,l_fMinDistance,l_fMaxDistance,360,360,0.0f);
+          }
+
           l_pSound = new SSoundChannel(l_iStream,l_fVolume);
           m_mapSamples[l_szName] = l_pSound;
           m_vSamples.push_back(l_pSound);
@@ -262,7 +278,6 @@ void CSoundManager::UpdateSound3DSystem(const Vect3f& _vListenerPosition, const 
   l_Top.z = 0.0f;
 
   BASS_Set3DPosition(&l_Pos,0,&l_Dir,&l_Top);
-  BASS_Set3DFactors(1.0, 1.0, 1.0);
   BASS_Apply3D();
 }
 
@@ -315,4 +330,14 @@ void CSoundManager::Pause(const string& _szMusic)
 void CSoundManager::Resume(const string& _szMusic)
 {
   PlayMusic(_szMusic,false);
+}
+
+void CSoundManager::FadeMusicVolume(const string& _szMusic, float _fVolume, unsigned long _iTimeMs)
+{
+  SSoundChannel* l_pMusic = GetMusic(_szMusic);
+
+  if(l_pMusic)
+  {
+    BASS_ChannelSlideAttribute(l_pMusic->m_iHandle,BASS_ATTRIB_VOL,_fVolume,_iTimeMs);
+  }
 }
