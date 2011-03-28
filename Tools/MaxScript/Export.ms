@@ -296,6 +296,18 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 		local l_RealNumMaterials = GetNumGoodMaterials _object
 		WriteShort l_file l_RealNumMaterials #unsigned
 		
+		
+		for i=1 to l_objectMaterials.count do
+		(
+			if l_objectMaterials[i] < 1 or l_objectMaterials[i] > l_numMaterials then
+			(
+				local l_aux = "" as stringStream
+				format "L'objecte % té una cara amb el material ID %, que no existeix!!!" _object.name l_objectMaterials[i] to:l_aux
+				ShowError l_aux
+				return false
+			)
+		)
+		
 		l_objectMaterials = GetMaterials _object
 		
 		for i = 1 to l_numMaterials do

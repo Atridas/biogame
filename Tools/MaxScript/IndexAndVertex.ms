@@ -213,13 +213,6 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 		if _numMaterials > 1 then -- agafem el material, en cas de ser multimaterial
 		(
 			l_materialID = getFaceMatID _Obj i
-			-- TODO passar això al comprovador inicial
-			if _Obj.material[l_materialID] == undefined then
-			(
-				local l_aux = "" as stringStream
-				format "L'objecte % té una cara amb el material ID %, que no existeix!!!" _Obj l_materialID to:l_aux
-				ShowError l_aux
-			)
 			l_Color = CreateColorLong _Obj.material[l_materialID].diffuse
 		)
 		else
