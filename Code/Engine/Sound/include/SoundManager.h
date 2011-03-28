@@ -13,8 +13,6 @@ public:
   ~CSoundManager() {Done();};
 
   bool Init(const string& _szFile);
-  void Release();
-
   void PlaySample(const string& _szSample);
   void PlaySample3D(const string& _szSample, Vect3f _vPosition);
   void ChangeMusic(const string& _szMusic, unsigned long _ulFadeOutTimeMs, bool _bRestart = true);
@@ -27,8 +25,11 @@ public:
   void SetMasterVolume(float _fVolume);
   void Pause(const string& _szMusic);
   void Resume(const string& _szMusic);
+  void FadeMusicVolume(const string& _szMusic, float _fVolume, unsigned long _iTimeMs);
 
 private:
+
+  void Release();
 
   struct SSoundChannel
   {

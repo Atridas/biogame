@@ -52,6 +52,7 @@ bool CSoundTestProcess::Init()
   //SOUND_MANAGER->PlayMusic("bgm",true);
   SOUND_MANAGER->SetMusic3DPosition("music3d",(*g_itCurrentMesh)->GetPosition());
   SOUND_MANAGER->PlayMusic("music3d");
+  SOUND_MANAGER->PlayMusic("bgm");
 
   SetOk(true);
   return IsOk();
@@ -107,8 +108,18 @@ void CSoundTestProcess::Update(float _fElapsedTime)
 
   Vect3f l_vFrontDirection(0.0f);
 
+  float l_fDistance = m_pTargetObject->GetPosition().Distance((*g_itCurrentMesh)->GetPosition());
+
+  if(l_fDistance < 5.0f)
+  {
+    SOUND_MANAGER->FadeMusicVolume("bgm",(l_fDistance)/20.0f,500);
+  }else{
+    SOUND_MANAGER->FadeMusicVolume("bgm",1.0f,1000);
+  }
+
   l_vFrontDirection.x = 1.0f;
   l_vFrontDirection.RotateY(-m_pTargetObject->GetYaw());
+
   SOUND_MANAGER->UpdateSound3DSystem(m_pTargetObject->GetPosition(),l_vFrontDirection);
 
   g_vMouseDelta = 0;
