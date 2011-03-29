@@ -56,3 +56,10 @@ void  CGameObject::UpdateBoundingSphere(float _fElapsedTime)
 
 
 }
+
+
+
+void CGameObject::Release() 
+{ 
+  //CHECKED_DELETE(m_pPhysXActor)
+}; 
