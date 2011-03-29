@@ -17,6 +17,14 @@
 void CGameObjectManager::Release()
 {
   CMapManager<CGameObject>::Release();
+  for(size_t i=0; i < m_vUserData.size() ; i++)
+  {
+    CHECKED_DELETE(m_vUserData[i]);
+  }
+  for(size_t i=0; i < m_vActors.size() ; i++)
+  {
+    CHECKED_DELETE(m_vActors[i]);
+  }
 }
 
 
@@ -32,6 +40,7 @@ CPhysicActor* CGameObjectManager::AddPhysicActor(CRenderableObject* _pRenderObje
   CPhysicUserData* l_pPhysicsUserData = new CPhysicUserData(_szName);
   l_pPhysicsUserData->SetColor(colWHITE);
   l_pPhysicsUserData->SetPaint(true);
+  m_vUserData.push_back(l_pPhysicsUserData);
   l_pPhysicActor = new CPhysicActor(l_pPhysicsUserData);
   l_pPhysicActor->AddBoxSphape(l_vBoxDim/2);
   l_pPhysicActor->SetGlobalPosition(Vect3f(l_vPos.x,l_vPos.y+l_vMiddlePos.y,l_vPos.z));
@@ -41,6 +50,7 @@ CPhysicActor* CGameObjectManager::AddPhysicActor(CRenderableObject* _pRenderObje
   }
 
   CORE->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
+  m_vActors.push_back(l_pPhysicActor);
  
   
   return l_pPhysicActor;
@@ -56,6 +66,7 @@ CPhysicActor* CGameObjectManager::AddPhysicActorMesh(CRenderableObject* _pRender
   CPhysicUserData* l_pPhysicsUserData = new CPhysicUserData(_szName);
   l_pPhysicsUserData->SetColor(colWHITE);
   l_pPhysicsUserData->SetPaint(true);
+  m_vUserData.push_back(l_pPhysicsUserData);
   l_pPhysicActor = new CPhysicActor(l_pPhysicsUserData);
 
   CInstanceMesh* l_pInstanceMesh = (CInstanceMesh*)_pRenderObject;
@@ -73,6 +84,7 @@ CPhysicActor* CGameObjectManager::AddPhysicActorMesh(CRenderableObject* _pRender
     l_pPhysicActor->CreateBody(_fBody);
   }
   CORE->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
+  m_vActors.push_back(l_pPhysicActor);
 
   return l_pPhysicActor;
 }

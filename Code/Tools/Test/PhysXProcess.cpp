@@ -296,6 +296,9 @@ bool CPhysXProcess::Init()
   //g_Box06->CreateBody(1.1f);
   //g_Box07->CreateBody(1.1f);
 
+
+
+
   //g_pJoint = new CPhysicFixedJoint();
   //g_pJoint2 = new CPhysicFixedJoint();
   //g_pJoint3 = new CPhysicFixedJoint();
@@ -373,6 +376,9 @@ bool CPhysXProcess::Init()
 void CPhysXProcess::Release()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"TestProcess::Release");
+
+
+  g_pObjectManager->CleanUp();
 
   CHECKED_DELETE(m_pObjectCamera)
   CHECKED_DELETE(m_pObject)

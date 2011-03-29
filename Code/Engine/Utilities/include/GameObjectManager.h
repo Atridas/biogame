@@ -19,7 +19,7 @@ class CGameObjectManager :
 public:
   CGameObjectManager()                {SetOk(true);};
   ~CGameObjectManager()               {Done();};
-  void						CleanUp()                      {Release();m_vResources.clear();};
+  void						CleanUp()                      {Release();m_vResources.clear();m_vUserData.clear();m_vActors.clear();};
   bool						Load	(const string& _szFileName, bool _bReload);
   CPhysicActor*   AddPhysicActor(CRenderableObject* l_pRenderObject, string& _szName, float _fBody);
   CPhysicActor*   AddPhysicActorMesh(CRenderableObject* _pRenderObject, string& _szName, float _fBody);
@@ -27,5 +27,7 @@ public:
   void            Update(float _fElapsedTime);
 private:
   vector<CGameObject*> m_vResources;
+  vector<CPhysicUserData*> m_vUserData;
+  vector<CPhysicActor*> m_vActors;
 };
 

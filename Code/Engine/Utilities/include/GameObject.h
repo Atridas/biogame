@@ -40,7 +40,7 @@ public:
   void                    UpdateBoundingBox(float _fElapsedTime);
   void                    UpdateBoundingSphere(float _fElapsedTime);
 protected:
-  void                    Release() {};    
+  void                    Release();    
 
 private:
   CRenderableObject*          m_pRenderableObject;
