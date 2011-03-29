@@ -43,13 +43,15 @@ CPhysicActor* CGameObjectManager::AddPhysicActor(CRenderableObject* _pRenderObje
   m_vUserData.push_back(l_pPhysicsUserData);
   l_pPhysicActor = new CPhysicActor(l_pPhysicsUserData);
   l_pPhysicActor->AddBoxSphape(l_vBoxDim/2);
-  l_pPhysicActor->SetGlobalPosition(Vect3f(l_vPos.x,l_vPos.y+l_vMiddlePos.y,l_vPos.z));
+  //l_pPhysicActor->SetGlobalPosition(Vect3f(l_vPos.x,l_vPos.y+l_vMiddlePos.y,l_vPos.z));
+  Mat44f l_vMat = _pRenderObject->GetMat44();
   if (_fBody != 0)
   {
     l_pPhysicActor->CreateBody(_fBody);
   }
 
   CORE->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
+  l_pPhysicActor->SetMat44(l_vMat);
   m_vActors.push_back(l_pPhysicActor);
  
   
@@ -78,12 +80,15 @@ CPhysicActor* CGameObjectManager::AddPhysicActorMesh(CRenderableObject* _pRender
   l_pCookingMesh->CreatePhysicMesh(l_vVertexBuff,l_vIndexBuff,_szName);
   NxTriangleMesh* l_pMesh = l_pCookingMesh->GetPhysicMesh(_szName);
   l_pPhysicActor->AddMeshShape(l_pMesh);
-  l_pPhysicActor->SetGlobalPosition(Vect3f(l_vPos.x,l_vPos.y,l_vPos.z));
+  //l_pPhysicActor->SetGlobalPosition(Vect3f(l_vPos.x,l_vPos.y,l_vPos.z));
+  Mat44f l_vMat = l_pInstanceMesh->GetMat44();
+  
   if (_fBody != 0)
   {
     l_pPhysicActor->CreateBody(_fBody);
   }
   CORE->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
+  l_pPhysicActor->SetMat44(l_vMat);
   m_vActors.push_back(l_pPhysicActor);
 
   return l_pPhysicActor;

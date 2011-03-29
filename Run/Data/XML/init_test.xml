@@ -3,7 +3,7 @@
   <RenderManager resolution="1080 720" position="50 5" fullscreenMode="false"/>
   
   <StaticMeshManager>
-    <StaticMeshes xml="Data/Levels/PhysX/XML/StaticMeshes.xml"/>
+    <StaticMeshes xml="Data/XML/StaticMeshes.xml"/>
     <!--
     <StaticMeshManager xml="Data/Levels/Proves/XML/StaticMeshes.xml"/>
     <StaticMeshManager xml="Data/Levels/Hangar/XML/StaticMeshes.xml"/>
@@ -31,7 +31,7 @@
   <!-- RenderableObjectsManager file="Data/XML/RenderableObjects.xml" -->
   <!-- RenderableObjectsManager file="Data/Levels/Level -2/XML/RenderableObjects.xml" -->
   <!--RenderableObjectsManager file="Data/Levels/Proves/XML/RenderableObjects.xml"-->
-  <RenderableObjectsManager file="Data/Levels/PhysX/XML/RenderableObjects.xml">
+  <RenderableObjectsManager file="Data/XML/RenderableObjects.xml">
     <!--
     <Level xml="Data/XML/RenderableObjects.xml"/>
     <Level xml="Data/Levels/Level -1/XML/RenderableObjects.xml"/>
