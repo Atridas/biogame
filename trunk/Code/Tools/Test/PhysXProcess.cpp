@@ -763,8 +763,12 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     return true;
   }
 
+  if(strcmp(_pcAction, "RenderPhysX") == 0)
+  {
+    bool l_bRender = CORE->GetPhysicsManager()->GetDebugRenderMode();
+    CORE->GetPhysicsManager()->SetDebugRenderMode(!l_bRender);
+  }
   
-
   return false;
 }
 

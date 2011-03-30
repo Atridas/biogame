@@ -217,8 +217,10 @@
   <action name="VelocityChange">
     <input deviceType="IDV_MOUSE" AxisType="AXIS_MOUSE_Z" Delta="1.f"/>
   </action>
-  
-  
+
+  <action name="RenderPhysX">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_R"/>
+  </action>
   <!--
   <action name="ShootBOT">
     <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN" Code="MOUSE_BUTTON_LEFT"/>
