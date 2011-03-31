@@ -49,6 +49,10 @@ void  CGameObject::UpdateBoundingBox(float _fElapsedTime)
 
   m_pRenderableObject->SetMat44(l_vMtotal);
 
+  /*Mat44f l_vPhysXMat;
+  m_pPhysXActor->GetMat44(l_vPhysXMat);
+  m_pRenderableObject->SetMat44(l_vPhysXMat);*/
+
 }
 
 void  CGameObject::UpdateBoundingSphere(float _fElapsedTime)

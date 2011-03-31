@@ -15,3 +15,4 @@ g_DefaultPath = "C:/Treballs/biogame/Run/Data"
 	El nivell "" indica que s'extreu a les carpetes per defecte, per als altres es crearan les carpetes necesaries.
 */
 g_LevelArray   = #("","Level -2","Level -1", "Hangar", "Proves", "Viewer", "Laboratori", "Passadis1","PhysX")
+g_PhysXArray = #("BoundingBox","BoundingSphere","mesh")
