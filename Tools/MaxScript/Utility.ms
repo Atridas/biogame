@@ -2,26 +2,21 @@ fileIn "Config.ms"
 fileIn "XML.ms"
 fileIn "Export.ms"
 
-utility BioUtility "Eon-Utility" width:160 height:312
+utility BioUtility "Eon-Utility" width:160 height:459
 (
 	button buttonPath "Set Path" pos:[8,8] width:144 height:24
 	label labelPath "Marian" pos:[8,52] width:137 height:24
 	checkbox checkMeshes "Export Mesh" pos:[13,74] width:114 height:16
 	checkbox checkTextures "Export Textures" pos:[13,98] width:115 height:16
 	dropdownList dropNivell "Nivell" pos:[11,125] width:131 height:40
-	GroupBox grp1 "Export" pos:[11,170] width:131 height:126
+	GroupBox grp1 "Export" pos:[11,170] width:131 height:135
 	button buttonMesh "Mesh" pos:[23,188] width:100 height:19
 	button buttonMeshManager "Mesh Manager" pos:[24,212] width:98 height:22
 	button buttonScene "Scene" pos:[26,271] width:94 height:22
 	button buttonLight "Light" pos:[27,241] width:93 height:18
-	
-		
-	on BioUtility open do
-	(
-		labelPath.text = g_DefaultPath
-		dropNivell.items = g_LevelArray
-	)
-	
+	GroupBox grp3 "PhysX" pos:[12,323] width:130 height:119
+	dropdownList DropListPhysX "Type" pos:[29,346] width:95 height:40
+	button ButtonPhysX "Create" pos:[33,404] width:88 height:23
 	-- Control de Paths
   
 	-- Torna el path de Data
@@ -416,10 +411,76 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		return true
 	)
 	
+	
+	
+	function ExportPhysX _instances =
+	(
+			
+		local l_PhysXType = DropListPhysX.items[DropListPhysX.selection]
+		
+		local l_pathToFile = getXMLPath() 
+		makeDir l_pathToFile all:true
+		
+		l_pathToFile = l_pathToFile + "GameObjects.xml"
+		
+		
+		local l_file = createfile l_pathToFile
+		
+		local l_header = GetInitTagXML()
+		
+		format "%" l_header to:l_file
+		
+		format "\n" to:l_file
+		
+		format "%" (OpenTagXML "GameObjectManager") to:l_file
+		
+		for i=1 to _instances.count do
+		(
+			for j=1 to _instances[i].count do
+			(
+				local l_instance = _instances[i][j]
+				
+				l_params = #(#("name",l_instance.name),#("Physx","true"),#("PhysxType",l_PhysXType),#("RenderableObject",l_instance.name),#("PhysxActor",l_instance.name))
+					
+				l_aux = "" as stringStream
+				l_Body = 0
+				
+				format "%" l_Body to:l_aux
+				append l_params #("Body",l_aux)
+				
+				format "\n\t" to:l_file
+				format "%" (InlineTagParamXML "GameObject" l_params) to:l_file
+			)
+			
+		)
+		
+		format "\n" to:l_file
+		format "%" (CloseTagXML "GameObjectManager") to:l_file
+		
+		format "\n" to:l_file
+		
+		close l_file
+		
+		return true
+	)
 	-- Fi exportadors
 	
 	-- Funcionalitats botons
   
+  
+	
+	
+	
+	
+	-- Fi funcionalitats botons
+	
+	
+	on BioUtility open do
+	(
+		labelPath.text = g_DefaultPath
+		dropNivell.items = g_LevelArray
+		DropListPhysX.items = g_PhysXArray
+	)
 	on buttonPath pressed do
 	(
 		local l_outPath=GetSavePath initialDir:labelPath.text caption:"Select output file to export file" types:" mesh(*.mesh)|*.mesh|All Files(*.*)|*.*|"
@@ -428,7 +489,6 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			labelPath.text = l_outPath
 		)
 	)
-  
 	on buttonMesh pressed do
 	(
 		if $ != undefined then
@@ -482,7 +542,6 @@ utility BioUtility "Eon-Utility" width:160 height:312
 			ShowError "No hi ha cap objecte seleccionat"
 		)
 	)
-	
 	on buttonMeshManager pressed do
 	(
 		l_cores = #()
@@ -511,31 +570,8 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		(
 			format "Export finalitzat\n"
 		)
-
-	)
 	
-	on buttonLight pressed do
-	(
-		local l_lights = #()
-		for i=1 to $*.count do
-		(
-			if IsLight $*[i] then
-			(
-				--llum, no ho exportem aquí
-				append l_lights $*[i]
-			)
-		)
-		
-		format "Export lights...\n"
-		if ExportLights l_lights then
-		(
-			ShowMessage "Export finalitzat"
-		) else 
-		(
-			ShowError "Problema inidentificat"
-		)
 	)
-	
 	on buttonScene pressed do
 	(
 		local l_cores = #()
@@ -584,7 +620,7 @@ utility BioUtility "Eon-Utility" width:160 height:312
 				(
 					AddInstance l_instances $*[i] l_index
 				)
-
+	
 			) else if isAnimatedModel $*[i] then
 			(
 				append l_AnimatedModels $*[i]
@@ -609,6 +645,67 @@ utility BioUtility "Eon-Utility" width:160 height:312
 		
 		ShowMessage "Fi"
 	)
+	on buttonLight pressed do
+	(
+		local l_lights = #()
+		for i=1 to $*.count do
+		(
+			if IsLight $*[i] then
+			(
+				--llum, no ho exportem aquí
+				append l_lights $*[i]
+			)
+		)
+		
+		format "Export lights...\n"
+		if ExportLights l_lights then
+		(
+			ShowMessage "Export finalitzat"
+		) else 
+		(
+			ShowError "Problema inidentificat"
+		)
+	)
 	
-	-- Fi funcionalitats botons
+	on ButtonPhysX pressed do
+	(
+		
+		local l_cores = #()
+		local l_instances = #()
+		
+		--Check
+		local l_check = true
+		l_check = CheckSceneObjects $*
+			
+		if l_check != true then
+		(
+			ShowError l_check
+			--return false
+		)
+		
+		for i=1 to $*.count do
+		(
+			if IsMesh $*[i] then
+			(
+				--instances és una array d'arrays, on cada una d'aquestes subarrays conté totes les instancies d'un core.
+				--l'índex de l'array on es troben les instancies coincideix amb l'índex de l'array de cores.
+				local l_index = GetCoreIndex l_cores $*[i]
+				
+				if l_index == undefined then
+				(
+					NewInstance l_instances $*[i]
+				) 
+				else
+				(
+					AddInstance l_instances $*[i] l_index
+				)
+	
+			) 
+		)
+		
+		if ExportPhysX l_instances then
+		(
+			ShowMessage "Export de la Fisica finalitzat\n"
+		)
+	)
 )

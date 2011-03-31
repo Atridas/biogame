@@ -236,7 +236,7 @@ bool CPhysXProcess::Init()
   l_pPhysManager->AddPhysicActor(g_pPEscala);
   
 
-  g_pPhysXController = new CPhysicController(0.5f,3.0f,10.0f,0.1f,0.5f,COLISION_SOLID_MASK,g_pUserDataController,Vect3f(5.0f,2.2f,0.0f));
+  g_pPhysXController = new CPhysicController(0.3f,1.5f,10.0f,0.1f,0.5f,COLISION_SOLID_MASK,g_pUserDataController,Vect3f(-7.0f,2.2f,-4.0f));
   g_pPhysXController->SetYaw(-90);
   l_pPhysManager->AddPhysicController(g_pPhysXController);
 

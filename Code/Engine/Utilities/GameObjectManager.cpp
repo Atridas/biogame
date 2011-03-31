@@ -51,7 +51,18 @@ CPhysicActor* CGameObjectManager::AddPhysicActor(CRenderableObject* _pRenderObje
   }
 
   CORE->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
-  l_pPhysicActor->SetMat44(l_vMat);
+
+  //Operacions amb Matrius per tractar la posicio correcte amb BoundingBox
+  Mat44f l_vMt,l_vMtotal;
+  l_vMt.SetIdentity();
+  l_vMt.Translate(Vect3f(_pRenderObject->GetBoundingBox()->GetMiddlePoint().x,
+                         _pRenderObject->GetBoundingBox()->GetMiddlePoint().y,
+                         _pRenderObject->GetBoundingBox()->GetMiddlePoint().z));
+
+  l_vMtotal = l_vMat*l_vMt;
+
+
+  l_pPhysicActor->SetMat44(l_vMtotal);
   m_vActors.push_back(l_pPhysicActor);
  
   
