@@ -3,7 +3,7 @@
 #define __COMPONENT_OBJECT_3D__
 
 #include "base.h"
-#include "BaseComponent.h"
+#include "EntityDefines.h"
 #include "Utils/Object3D.h"
 
 class CComponentObject3D :

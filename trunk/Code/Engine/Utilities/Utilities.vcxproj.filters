@@ -30,6 +30,9 @@
     <ClCompile Include="ComponentPhysXController.cpp">
       <Filter>EntitySystem\ComponentPhysXController</Filter>
     </ClCompile>
+    <ClCompile Include="ScriptedStateMachine.cpp">
+      <Filter>ScriptedStateMachine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GameObject.h">
@@ -53,7 +56,7 @@
     <ClInclude Include="include\ComponentObject3D.h">
       <Filter>EntitySystem\ComponentObject3D</Filter>
     </ClInclude>
-    <ClInclude Include="ComponentPhysXController.h">
+    <ClInclude Include="include\ComponentPhysXController.h">
       <Filter>EntitySystem\ComponentPhysXController</Filter>
     </ClInclude>
   </ItemGroup>

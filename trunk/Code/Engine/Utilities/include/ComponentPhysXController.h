@@ -3,7 +3,7 @@
 #define __COMPONENT_PHYSX_CONTROLLER__
 
 #include "base.h"
-#include "BaseComponent.h"
+#include "EntityDefines.h"
 
 //--- forward declarations
 class CComponentObject3D;

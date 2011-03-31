@@ -3,9 +3,17 @@
 #ifndef __BASE_COMPONENT_H__
 #define __BASE_COMPONENT_H__
 
+// NO INCLOURE AQUEST ARXIU !!!!!!!!!!!!!!!! !!!!!!!!!!!!!!!!!!!!!!
+
+// incloure "EntityDefines.h"
+
 #include "base.h"
+
+#ifndef __ENTITY_DEFINES_H__
+#error S'ha d'incloure "EntityDefines.h" i no "BaseComponent.h"
+#endif
+
 #include "EntityDefines.h"
-#include "GameEntity.h"
 
 //---- forward declarations --
 class CGameEntity;
@@ -15,11 +23,17 @@ class CBaseComponent:
   public CBaseControl
 {
 public:
+
+  enum EComponentType {
+    ECT_PHISX_CONTROLLER,
+    ECT_OBJECT_3D
+  };
   
   EComponentType GetType() {return m_Type;};
   bool IsType(EComponentType _Type) {return m_Type == _Type;};
   CGameEntity* GetEntity() const {return m_pEntity;};
-  //TODO events
+  
+  void ReceiveEvent(const SEvent& _Event) {};
 
   //updates
   virtual void Update(float deltaTime) {};
