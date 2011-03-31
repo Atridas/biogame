@@ -1,4 +1,4 @@
-#include "ComponentPhysXController.h"
+
 #include "ComponentObject3D.h"
 #include "PhysicController.h"
 #include "PhysicsManager.h"
@@ -6,6 +6,7 @@
 
 #include <sstream>
 
+#include "ComponentPhysXController.h"
 
 bool CComponentPhysXController::Init(CGameEntity *_pEntity,
             float radius, float height, float slope, float skinwidth, 
