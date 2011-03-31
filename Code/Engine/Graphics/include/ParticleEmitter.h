@@ -19,7 +19,7 @@ class CParticleEmitter:
 {
 public:
   CParticleEmitter();
-  ~CParticleEmitter(){Done();};
+  ~CParticleEmitter(){Done(); Release();};
 
   
 
@@ -65,14 +65,10 @@ public:
   void                    Render              (CRenderManager* _pRM);
   void                    SetAttributes       (SParticleInfo* _info);
 
- // bool                    Load                (CXMLTreeNode& l_XMLParticle);
- // void                    Init                (CXMLTreeNode& _XMLParams);
-  
   
 private:
 
-  
-  //string                                    m_szFileName;
+
   string                                    m_szName;
   string                                    m_szId;
   D3DXVECTOR3                               m_vPos;
@@ -92,7 +88,10 @@ private:
   CRecyclingArray<CParticle>                m_Particles;
   vector<D3DXCOLOR>                         m_vColor;
   vector<D3DXCOLOR>                         m_vNewColor;
-  vector<float>                             m_vTime;
+  vector<float>                             m_vTimeColor;
+  vector<D3DXVECTOR3>                       m_vDirection;
+  vector<D3DXVECTOR3>                       m_vNewDirection;
+  vector<float>                             m_vTimeDirection;
   bool                                      m_bActive;
   
 };

@@ -25,8 +25,10 @@ struct SParticleInfo
   CTexture*             m_pTexParticle;
   float                 m_fLife1;
   float                 m_fLife2;
-  vector<D3DXCOLOR>      m_vColor;
-  vector<float>          m_vTime;
+  vector<D3DXCOLOR>     m_vColor;
+  vector<float>         m_vTimeColor;  //modificar tot els  m_vTime  per els m_vTimeColor
+  vector<D3DXVECTOR3>   m_vDirection;
+  vector<float>         m_vTimeDirection;
 
 };
 
@@ -36,14 +38,15 @@ struct SParticleEvent
   float                 m_fTime;
   D3DXCOLOR             m_Color1;
   D3DXCOLOR             m_Color2;
-
+  D3DXVECTOR3           m_vSpawnDir1;
+  D3DXVECTOR3           m_vSpawnDir2;
  
 };
 
 class CParticleManager : public CMapManager<SParticleInfo>
 {
 public:
-  CParticleManager(void);
+  CParticleManager();
   ~CParticleManager(){Done();};
   
   bool Load(const string& _szFileName);
@@ -52,12 +55,15 @@ public:
   void Init(CRenderManager* _pRM);
   
 
-  void Reload();
+  //bool Reload() {Release(); return Load(m_szFileName);};
 
-  virtual void Release();
+  bool Reload()  {Release(); return Load(m_szFileName);};
+
+  void Release();
 
 private:
   string m_szFileName;
+  CRenderManager*           m_pRM;
   vector<CParticleEmitter*> m_vEmitterParticle;
   
 

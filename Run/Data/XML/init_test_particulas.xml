@@ -15,7 +15,7 @@
   <AnimatedModelManager>
     <AnimatedModels xml="Data/XML/AnimatedModels.xml"/>
   </AnimatedModelManager>
-    
+
   <EffectManager xml="Data/XML/Effects.xml"/>
   <ParticleManager xml="Data/XML/Particles.xml"/>
   <FontManager fontsXML="Data/XML/Fonts.xml"/>
@@ -25,7 +25,7 @@
     <Language languageXML="Data/Language/english.xml"/>
   </Languages>
   <InputManager exclusiveMouse="true"/>
-  <ActionToInput file="Data/XML/actions_physx.xml"/>
+  <ActionToInput file="Data/XML/actions.xml"/>
   
 
   <!-- RenderableObjectsManager file="Data/XML/RenderableObjects.xml" -->
@@ -49,7 +49,7 @@
 
   <LogRender position="10 0"/>
 
-  <GUIManager xml="Data/XML/GUI.xml" start="TextWindow1.xml" render_mouse="false"/>
+  <GUIManager xml="Data/XML/GUI_test.xml" start="Main.xml" render_mouse="false"/>
     
   <!--<AnimatedModelManager file="Data/XML/AnimatedModels.xml">
   </AnimatedModelManager>-->

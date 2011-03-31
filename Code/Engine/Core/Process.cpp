@@ -98,10 +98,10 @@ bool CProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _p
     CORE->GetLogRender()->NextLine();
     return true;
 
- /* } else if(strcmp(_pcAction, "Particle") == 0) //************************************************
+  } else if(strcmp(_pcAction, "Particle") == 0) 
   {
     CORE->GetParticleManager()->Reload();
-    return true;         */                       //************************************************
+    return true;         
     
   } else if(strcmp(_pcAction, "Console") == 0)
   {

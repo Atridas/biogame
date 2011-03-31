@@ -1,41 +1,78 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Particles>
   <ParticleEmitters>
-    <ParticleEmitter  id="font1"                        MinEmitRate="70.0"             MaxEmitRate="100.0"
+
+      <ParticleEmitter  id="font1"                        MinEmitRate="70.0"             MaxEmitRate="100.0"
+                        Color1="1.0 1.0 1.0 1.0"          Color2="0.0 0.0 0.0 1.0"       MinSize="1.0"        MaxSize="3.0"
+                        Direction1="-0.3 1.0 -0.3"         Direction2="0.3 1.0 0.3"     Life1="10.0"          Life2="11.3"
+                        TexParticle="Data/Textures/texturas particulas/flameE.dds">
+      <Colors>
+        <Color        time="1.2"        Color1="0.0 0.0 0.0 1.0"       Color2="0.0 0.0 0.0 1.0"/>
+        <Color        time="4.0"        Color1="0.0 0.0 0.0 1.0"       Color2="0.0 0.0 0.0 1.0"/>
+        <Color        time="6.0"        Color1="0.8 0.8 0.8 1.0"       Color2="0.9 0.9 0.9 1.0"/>
+        <Color        time="8.0"        Color1="0.9 0.9 0.9 1.0"       Color2="1.0 1.0 1.0 1.0"/>
+      </Colors>
+
+      <Directions>
+        <Direction    time="0.5"        Direction1="0.0 0.0 -1.0"       Direction2="0.0 0.0 1.0"/>
+        <Direction    time="4.0"        Direction1="0.0 0.0 0.0"       Direction2="1.0 1.0 1.0"/>
+        <Direction    time="6.0"        Direction1="0.8 0.8 0.8"       Direction2="0.9 0.9 0.9"/>
+        <Direction    time="8.0"        Direction1="0.9 0.9 0.9"       Direction2="1.0 1.0 1.0"/>
+      </Directions>
+      </ParticleEmitter>
+<!--
+    <ParticleEmitter  id="font2"                        MinEmitRate="10.0"             MaxEmitRate="15.0"
                       Color1="1.0 1.0 1.0 1.0"          Color2="0.0 0.0 0.0 1.0"       MinSize="1.0"        MaxSize="3.0"
-                      Direction1="0.0 0.0 1.0"          Direction2="4.0  7.0  5.0"     Life1="10.0"          Life2="11.3"
-                      TexParticle="Data/Textures/Particula_ALFA.dds"/>
+                      Direction1="-0.3 1. -0.3"         Direction2="0.3 1.0 -0.3"     Life1="10.0"          Life2="11.3"
+                      TexParticle="Data/Textures/texturas particulas/smoke.dds">
+      <Colors>
+        <Color        time="2.2"        Color1="0.0 0.0 0.0 1.0"       Color2="0.0 0.0 0.0 1.0"/>
+        <Color        time="4.0"        Color1="0.0 0.0 0.0 1.0"       Color2="0.0 0.0 0.0 1.0"/>
+        <Color        time="6.0"        Color1="0.8 0.8 0.8 1.0"       Color2="0.9 0.9 0.9 1.0"/>
+        <Color        time="8.0"        Color1="0.9 0.9 0.9 1.0"       Color2="1.0 1.0 1.0 1.0"/>
+      </Colors>
+
+      <Directions>
+        <Direction    time="3.5"        Direction1="0.0 0.0 -1.0"       Direction2="0.0 0.0 1.0"/>
+        <Direction    time="4.0"        Direction1="0.0 0.0 0.0"       Direction2="1.0 1.0 1.0"/>
+        <Direction    time="6.0"        Direction1="0.8 0.8 0.8"       Direction2="0.9 0.9 0.9"/>
+        <Direction    time="8.0"        Direction1="0.9 0.9 0.9"       Direction2="1.0 1.0 1.0"/>
+      </Directions>
+    </ParticleEmitter>
+
+    <ParticleEmitter  id="font3"                        MinEmitRate="30.0"             MaxEmitRate="50.0"
+                        Color1="1.0 1.0 1.0 1.0"          Color2="0.0 0.0 0.0 1.0"       MinSize="1.0"        MaxSize="3.0"
+                        Direction1="-0.3 1. -0.3"         Direction2="0.3 1.0 -0.3"     Life1="10.0"          Life2="11.3"
+                        TexParticle="Data/Textures/texturas particulas/fire4.dds">
       <Colors>
         <Color        time="0.2"        Color1="0.0 0.0 0.0 1.0"       Color2="0.0 0.0 0.0 1.0"/>
         <Color        time="4.0"        Color1="0.0 0.0 0.0 1.0"       Color2="0.0 0.0 0.0 1.0"/>
         <Color        time="6.0"        Color1="0.8 0.8 0.8 1.0"       Color2="0.9 0.9 0.9 1.0"/>
         <Color        time="8.0"        Color1="0.9 0.9 0.9 1.0"       Color2="1.0 1.0 1.0 1.0"/>
       </Colors>
-    <!--
-    <ParticleEmitter id="font2"                         MinEmitRate="30.0"             MaxEmitRate="50.0"
-                     Color1="1.0 0.0 1.0 1.0"           Color2="1.0 0.5 1.0 1.0"       MinSize="1.0"        MaxSize="2.0"
-                     Direction1="-1.0 0.0 -5.0"         Direction2="1.0 0.0 5.0"       Life1="0.2"          Life2="0.4"
-                     TexParticle="Data/Textures/gohan.png"/>
-   
 
-    <ParticleEmitter id="font3"                         MinEmitRate="10.0"             MaxEmitRate="15.0"
-                     Color1="1.0 1.0 1.0 1.0"           Color2="1.0 1.0 1.0 1.0"       MinSize="1.0"        MaxSize="1.0"
-                     Direction1="1.0  -0.0  -5.0"       Direction2="2.0  0.0  1.0"     Life1="1.0"          Life2="1.5"
-                     TexParticle="Data/Textures/gohan.png"/>
-    -->
-    
+      <Directions>
+        <Direction    time="3.5"        Direction1="0.0 0.0 -1.0"       Direction2="0.0 0.0 1.0"/>
+        <Direction    time="4.0"        Direction1="0.0 0.0 0.0"       Direction2="1.0 1.0 1.0"/>
+        <Direction    time="6.0"        Direction1="0.8 0.8 0.8"       Direction2="0.9 0.9 0.9"/>
+        <Direction    time="8.0"        Direction1="0.9 0.9 0.9"       Direction2="1.0 1.0 1.0"/>
+      </Directions>
+    </ParticleEmitter>
+  -->  
   </ParticleEmitters>
+ 
 <!--*************************************************************************************************************************-->
   <InstanceParticles>
     <InstanceParticle id="hola"                   type="font1"                      Position="0.0  0.0  0.0"/>
-    <!--
+   <!--
+   
     <InstanceParticle id="edu"                    type="font3"                      Position="2.0  8.0  0.0"/>
     <InstanceParticle id="edu2"                   type="font2"                      Position="210  0.0  2.0"/>
     <InstanceParticle id="edu3"                   type="font3"                      Position="2.0  5.0  3.0"/>
     <InstanceParticle id="edu4"                   type="font2"                      Position="-6.0  7.0  2.0"/>
     <InstanceParticle id="edu8"                   type="font1"                      Position="8.0  9.9  9.0"/>
     <InstanceParticle id="edu6"                   type="font3"                      Position="2.0  7.0  0.0"/>
-    -->
+ -->
   </InstanceParticles>
   
 </Particles>

@@ -37,9 +37,6 @@
     <None Include="..\..\..\Run\Data\XML\actions_physx.xml">
       <Filter>Data</Filter>
     </None>
-    <None Include="..\..\..\Run\Data\XML\Particles.xml">
-      <Filter>Data</Filter>
-    </None>
     <None Include="..\..\..\Run\Data\XML\init_test_particulas.xml">
       <Filter>Data</Filter>
     </None>
