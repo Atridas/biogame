@@ -1,7 +1,7 @@
 #include "Particle.h"
 
 
-CParticle::CParticle(void)
+CParticle::CParticle()
 {
   m_fSize     = 0.f;
   m_fLifetime = 0.f;
@@ -11,9 +11,13 @@ CParticle::CParticle(void)
   m_vDir      = D3DXVECTOR3(0.f, 0.f, 0.f);
 }
 
-
-CParticle::~CParticle(void)
+void CParticle::Release()
 {
+  m_vColor.clear();
+  m_vTimeColor.clear();
+  m_vDirection.clear();
+  m_vTimeDirection.clear();
+
 }
 
 bool CParticle::Update(float fTimeDelta)
@@ -25,12 +29,25 @@ bool CParticle::Update(float fTimeDelta)
     return false;
   }
 
-  int i= m_vTime.size()-1;
+  int i= m_vTimeColor.size()-1;
   while (i>=0)
   {
-     if(m_vTime[i]<m_fAge)
+    if(m_vTimeColor[i]<m_fAge)
 	 {
 	   m_Color = m_vColor[i];
+     i=0;
+	 }
+    i--;
+  }
+  //m_Color= m_Color;
+  
+  i= m_vTimeDirection.size()-1;
+  while (i>=0)
+  {
+    if(m_vTimeDirection[i]<m_fAge)
+	 {
+     m_vDir = m_vDirection[i];
+     i=0;
 	 }
     i--;
   }

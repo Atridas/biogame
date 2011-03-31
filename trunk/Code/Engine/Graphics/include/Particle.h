@@ -9,8 +9,8 @@
 class CParticle
 {
 public:
-	CParticle   (void);
-	~CParticle  (void);
+	CParticle   ();
+  ~CParticle  (){Release();}; //pq no funciona el done??
 
   //---Set andf Get Functions---
   void SetSize              (float _fSize)              {m_fSize = _fSize;};
@@ -19,8 +19,7 @@ public:
   void SetColor             (const D3DXCOLOR& _Color)   {m_Color = _Color;};
   void SetPos               (const D3DXVECTOR3& _vPos)  {m_vPos = _vPos;};
   void SetDir               (const D3DXVECTOR3& _vDir)  {m_vDir = _vDir;};
-  //void SetVectorTimeColor   (float _vTime)              {m_vTime = _vTime;};
-  //void SetVectorColor       (D3DXCOLOR _vColor)         {m_vColor = _vColor;};
+  
 
   float GetSize                   () const              {return m_fSize;};
   float GetLifeTimer              () const              {return m_fLifetime;};
@@ -28,14 +27,15 @@ public:
   const D3DXCOLOR& GetColor       () const              {return m_Color;};
   const D3DXVECTOR3& GetPos       () const              {return m_vPos;};
   const D3DXVECTOR3& GetDir       () const              {return m_vDir;};
-  //float GetVectorTimeColor        (int i)               {return m_vTime[i];};
-  //D3DXCOLOR GetVectorColor        (int i)               {return m_vColor[i];};
-
+  
   bool  Update               (float fTimeDelta);
+  void  Release              ();
 
   
   vector<D3DXCOLOR>      m_vColor;
-  vector<float>          m_vTime;
+  vector<float>          m_vTimeColor; 
+  vector<D3DXVECTOR3>    m_vDirection;
+  vector<float>          m_vTimeDirection;
 
 private:
   float             m_fSize;

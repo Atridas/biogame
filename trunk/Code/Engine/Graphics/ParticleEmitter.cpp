@@ -35,14 +35,25 @@ m_Particles(NUMPARTICLES)
   SetSpawnDir2(D3DXVECTOR3(5.0f, 5.0f, 5.0f));
  
   // initialize misc. other things
+  m_szName        = "";
+  m_szId          = "";
   m_pTexParticle  = NULL;
   m_vbParticles   = NULL;
   //SetVBSize(NUMPARTICLES / 10);
   m_fNumNewPartsExcess = 0.0f;
+  m_fLife1 = 0.0f;
+  m_fLife2 = 0.0f;
 
   m_bActive = false;
 
-  //TODO inicialitzar els vector de clolor i temps
+
+  
+  
+  
+
+ 
+
+  //TODO inicialitzar els vector de color i temps
 }
 
 void CParticleEmitter::SetAttributes(SParticleInfo* _info) 
@@ -50,7 +61,7 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
   m_szId  = _info->m_szId;
   m_fMinEmitRate = _info->m_fMinEmitRate;
   m_fMaxEmitRate = _info->m_fMaxEmitRate;
-  m_Color1 = _info->m_Color1;
+  m_Color1 = _info->m_Color1; 
   m_Color2 = _info->m_Color2;
   m_fMinSize = _info->m_fMinSize;
   m_fMaxSize = _info->m_fMaxSize;
@@ -60,8 +71,25 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
   m_fLife1 = _info->m_fLife1;
   m_fLife2 = _info->m_fLife2;
   m_vColor = _info->m_vColor;
-  m_vTime = _info->m_vTime;
-  //m_vNewColor = D3DXCOLOR(0.0, 0.0, 0.0, 0.0);
+  m_vTimeColor = _info->m_vTimeColor;
+  m_vDirection = _info->m_vDirection;
+  m_vTimeDirection = _info->m_vTimeDirection;
+
+  //crear un vector de direccion de tantas posicions com estat pot tenir (segons vector temps)
+  int j=m_vTimeDirection.size();
+  while(j!=0)
+  {
+    m_vNewDirection.push_back(m_vSpawnDir1);
+    j--;
+  }
+  //crear un vector de color de tantas posicions com estat pot tenir (segons vector temps)
+  j=m_vTimeColor.size();
+  while(j!=0)
+  {
+    m_vNewColor.push_back(m_Color1);
+    j--;
+  }
+ 
 }
 
 void CParticleEmitter::Update(float fElapsedTime)
@@ -108,28 +136,47 @@ void CParticleEmitter::Update(float fElapsedTime)
 
       // determina el random de la vida de cada particula
       float fRandLife = RandomNumber(m_fLife1,m_fLife2);
-
-
       part->SetLifeTimer(fRandLife);
-      // determine a random vector between dir1 and dir2
-      float fRandX = RandomNumber(m_vSpawnDir1.x, m_vSpawnDir2.x);
-      float fRandY = RandomNumber(m_vSpawnDir1.y, m_vSpawnDir2.y);
-      float fRandZ = RandomNumber(m_vSpawnDir1.z, m_vSpawnDir2.z);
 
-    
-      part->SetDir(D3DXVECTOR3(fRandX, fRandY, fRandZ));
-      part->SetPos(m_vPos);
+      // determina el random del tamany de la particula
+      float fRandSize = RandomNumber(m_fMinSize,m_fMaxSize);
+      part->SetSize(fRandSize);
 
+      
+      
 
-      int j=m_vTime.size();
+      //*****************
+      //es guarda en un vector totes les direccions que tindra la particula durant el seu temps de vida
+	    //ja amb el valor calculat	(fet el random) 
+	 
+     
+	    int i=m_vTimeDirection.size()-1;
+      while(i>=0)
+      {
+        float fRandX = RandomNumber(m_vDirection[i*2].x, m_vDirection[(i*2)+1].x);
+        float fRandY = RandomNumber(m_vDirection[i*2].y, m_vDirection[(i*2)+1].y);
+        float fRandZ = RandomNumber(m_vDirection[i*2].z, m_vDirection[(i*2)+1].z);
+        		    
+        
+		    m_vNewDirection[i] = D3DXVECTOR3(fRandX, fRandY, fRandZ);
+		    i--;
+        
+       }	  
+      part->m_vTimeDirection = m_vTimeDirection;
+      part->m_vDirection = m_vNewDirection;
+
+      //es guarda en un vector tots els colors que tindra la particula durant el seu temps de vida
+	    //ja amb el valor calculat	  
+     /* j=m_vTimeColor.size();
       while(j!=0)
       {
         m_vNewColor.push_back(m_Color1);
         j--;
-      }
-	    int i=m_vTime.size()-1;
-      while(i!=0)
+      }*/
+      i=m_vTimeColor.size()-1;
+      while(i>=0)
       {
+       
         
 	      float fRandR = RandomNumber(m_vColor[i*2].r, m_vColor[(i*2)+1].r);
 		    float fRandG = RandomNumber(m_vColor[i*2].g, m_vColor[(i*2)+1].g);
@@ -141,42 +188,11 @@ void CParticleEmitter::Update(float fElapsedTime)
 		    i--;
         
        }	  
-      part->m_vTime = m_vTime;
+      part->m_vTimeColor = m_vTimeColor;
       part->m_vColor = m_vNewColor;
-    //***************************************************
-    // nou
-  /*   
-      int i=m_vTime.size()-1;
-      float temps=0;
-      float temps2=0;
-      float temps3=0;
-      while(i!=0)
-      {
-        temps3=part->GetAge();
-        temps=m_vTime[i];
-        temps2=part->GetLifeTimer();
-        if(m_vTime[i]< part->GetAge())
-        {
-          m_Color1 = m_vColor[i*2];
-          m_Color2 = m_vColor[(i*2)+1];
-          i=1;
-        }
-        --i;
-      }
-      */
-    //*************************************************
-
-                      
-      float fRandR = RandomNumber(m_Color1.r, m_Color2.r);
-      float fRandG = RandomNumber(m_Color1.g, m_Color2.g);
-      float fRandB = RandomNumber(m_Color1.b, m_Color2.b);
-      float fRandA = RandomNumber(m_Color1.a, m_Color2.a);
-                      
-    
-      part->SetColor(D3DXCOLOR(fRandR, fRandG, fRandB, fRandA));
+      part->SetPos(m_vPos);
     }
   }
-
 }
   
 void CParticleEmitter::Init(CRenderManager* rm)
@@ -216,14 +232,22 @@ void CParticleEmitter::Release()
 {
 
   CHECKED_RELEASE(m_vbParticles);
-
   
-
   m_Particles.DeleteAllElements();
   if ( m_vbParticles!= NULL)
   {
     m_vbParticles->Release();
   }
+
+   
+
+  m_vColor.clear();
+  m_vDirection.clear();
+  m_vNewColor.clear();
+  m_vNewDirection.clear();
+  m_vTimeColor.clear();
+  m_vTimeDirection.clear();
+  
 }
   
 void CParticleEmitter::Render(CRenderManager* _pRM)
@@ -286,7 +310,7 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
       pVertices->x = part->GetPos().x;
 	    pVertices->y = part->GetPos().y;
 	    pVertices->z = part->GetPos().z;
-      pVertices->pointsize = 1.0f;
+      pVertices->pointsize = part->GetSize();
       pVertices->color = (DWORD)part->GetColor();
       pVertices++;
     }
