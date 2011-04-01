@@ -319,7 +319,7 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 			local l_vertexType2 = GetVertexType l_material[i]
 			append l_vertexType l_vertexType2
 						
-			if ((bit.and l_vertexType2 VERTEX_TYPE_TEXTURE2) != 0) and ((meshop.getNumMaps _object) < 2) then
+			if ((bit.and l_vertexType2 VERTEX_TYPE_TEXTURE2) != 0) and ((meshop.getNumMaps _object) < 3) then
 			(
 				local l_aux = "" as stringStream
 				format "L'objecte % amb submaterial % no té segones coordenades de textura." _object.name i to:l_aux
@@ -352,7 +352,7 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 		local l_vertexType2 = GetVertexType l_material
 		append l_vertexType l_vertexType2
 		
-		if ((bit.and l_vertexType2 VERTEX_TYPE_TEXTURE2) != 0) and ((meshop.getNumMaps _object) < 2) then
+		if ((bit.and l_vertexType2 VERTEX_TYPE_TEXTURE2) != 0) and ((meshop.getNumMaps _object) < 3) then
 		(
 			local l_aux = "" as stringStream
 			format "L'objecte % no té segones coordenades de textura." _object.name to:l_aux

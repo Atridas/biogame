@@ -168,7 +168,7 @@ utility BioUtility "Eon-Utility" width:160 height:459
 				
 				if ExportMesh l_object l_outName l_relativeTexPath == false then
 				(
-					close l_file
+					--close l_file
 					
 					local l_text = "" as stringStream
 					format "La core % ha causat un error d'exportació" l_name to:l_text
