@@ -40,6 +40,8 @@
 #define COLISION_STATIC_MASK 0
 #define COLISION_SOLID_MASK 1
 #define COLISION_SCENE_MASK 2
+#define ALTURA_CONTROLLER 1.5f
+#define RADIUS_CONTROLLER 0.3f
 
 #define COLISIONABLE_MASK ((1<<COLISION_SCENE_MASK) || (1<<COLISION_STATIC_MASK) || (1<<COLISION_SOLID_MASK))
 
@@ -83,6 +85,7 @@ CPhysicFixedJoint* g_pJoint5;
 CPhysicUserData* g_pUserDataSHOOT = 0;
 CGameObject* g_pGameObject = 0;
 CPhysicController* g_pPhysXController = 0;
+CRenderableAnimatedInstanceModel* g_pCharacter = 0;
 
 
 //MANAGER DE GAMEOBJECTS
@@ -141,7 +144,7 @@ bool CPhysXProcess::Init()
 
   m_pCamera = m_pObjectCamera;
 
-  ((CThPSCamera*)m_pObjectCamera)->SetZoom(10.0f);
+  ((CThPSCamera*)m_pObjectCamera)->SetZoom(5.0f);
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
 
   CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
@@ -236,7 +239,7 @@ bool CPhysXProcess::Init()
   l_pPhysManager->AddPhysicActor(g_pPEscala);
   
 
-  g_pPhysXController = new CPhysicController(0.3f,1.5f,10.0f,0.1f,0.5f,COLISION_SOLID_MASK,g_pUserDataController,Vect3f(-7.0f,2.2f,-4.0f));
+  g_pPhysXController = new CPhysicController(0.3f,ALTURA_CONTROLLER,10.0f,0.1f,0.5f,COLISION_SOLID_MASK,g_pUserDataController,Vect3f(7.0f,2.2f,4.0f));
   g_pPhysXController->SetYaw(-90);
   l_pPhysManager->AddPhysicController(g_pPhysXController);
 
@@ -369,6 +372,21 @@ bool CPhysXProcess::Init()
   g_pObjectManager = new CGameObjectManager();
   g_pObjectManager->Load("Data/XML/GameObjects.xml",false);
 
+
+
+  g_pCharacter = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
+
+  if (g_pCharacter != 0)
+  {
+    Vect3f l_vPos = g_pPhysXController->GetPosition();
+    l_vPos.y = 0.0f;
+    g_pCharacter->SetPosition(l_vPos);
+    g_pCharacter->GetAnimatedInstanceModel()->BlendCycle("idle",0);
+  }
+
+  Vect3f l_ControllerPos = g_pPhysXController->GetPosition();
+  m_pObject->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y,l_ControllerPos.z));
+
   SetOk(true);
   return IsOk();
 }
@@ -452,8 +470,10 @@ void CPhysXProcess::Update(float _fElapsedTime)
     l_fPitch = m_pObject->GetPitch();
     //l_fPitch = l_fPitch+FLOAT_PI_VALUE/2;
     l_fYaw = m_pObject->GetYaw();
-    //l_fYaw = l_fYaw+FLOAT_PI_VALUE/2;
+    l_fYaw = l_fYaw-FLOAT_PI_VALUE/2;
     //l_fRoll = m_pObjectBot->GetRoll();
+
+    g_pCharacter->SetYaw(l_fYaw);
 
     CSpotLight* l_pSpot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
     if(l_pSpot)
@@ -493,6 +513,8 @@ void CPhysXProcess::Update(float _fElapsedTime)
     g_pGameObject->Update(_fElapsedTime);
   }*/
   g_pPhysXController->Move(Vect3f(0.0f,0.0f,0.0f),_fElapsedTime);
+  Vect3f l_ControllerPos = g_pPhysXController->GetPosition();
+  m_pObject->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y,l_ControllerPos.z));
 
   /*g_pGameBox02->Update(_fElapsedTime);
   g_pGameBox03->Update(_fElapsedTime);
@@ -505,6 +527,22 @@ void CPhysXProcess::Update(float _fElapsedTime)
 
   g_pObjectManager->Update(_fElapsedTime);
   //g_pGameObject->Update(_fElapsedTime);
+
+
+  if ((!INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_W)) &&
+      (!INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_S)) &&
+      (!INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_A)) &&
+      (!INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_D)))
+  {
+    if(g_pCharacter)
+    {
+	    if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() == 1)
+	    {
+		    g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+        g_pCharacter->GetAnimatedInstanceModel()->BlendCycle("idle",0.3f);
+	    }
+    }
+  }
 
 }
 
@@ -597,18 +635,27 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
 
   if(strcmp(_pcAction, "MoveFwd") == 0)
   {
-    Vect3f l_vPos = m_pObject->GetPosition();
+    /*Vect3f l_vPos = m_pObject->GetPosition();
     l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
     l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
-    m_pObject->SetPosition(l_vPos);
+    m_pObject->SetPosition(l_vPos);*/
 
     Vect3f l_vDir = m_pCamera->GetDirection();
 
+    float l_fAltura = (ALTURA_CONTROLLER+2*RADIUS_CONTROLLER)*0.5;
     l_vDir.Normalize();
-    //l_vDir.y = 0.0f;
     g_pPhysXController->Move(Vect3f(l_vDir.x,0.0f,l_vDir.z)*0.05f*m_fVelocity,_fDeltaSeconds);
-    m_pObject->SetPosition(g_pPhysXController->GetPosition());
-   
+    Vect3f l_ControllerPos = g_pPhysXController->GetPosition();
+    m_pObject->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y,l_ControllerPos.z));
+    if (g_pCharacter)
+    {
+      g_pCharacter->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y-l_fAltura,l_ControllerPos.z));
+      if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+	    {
+		    g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+		    g_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
+	    }
+    }
 
     if(m_iState != 1)
       m_bStateChanged = true;
@@ -620,17 +667,27 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
 
  if(strcmp(_pcAction, "MoveBack") == 0)
   {
-    Vect3f l_vPos = m_pObject->GetPosition();
+    /*Vect3f l_vPos = m_pObject->GetPosition();
     l_vPos.x = l_vPos.x - cos(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
     l_vPos.z = l_vPos.z - sin(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
-    m_pObject->SetPosition(l_vPos);
+    m_pObject->SetPosition(l_vPos);*/
 
     Vect3f l_vDir = m_pCamera->GetDirection();
 
+    float l_fAltura = (ALTURA_CONTROLLER+2*RADIUS_CONTROLLER)*0.5;
     l_vDir.Normalize();
-    //l_vDir.y = 0.0f;
     g_pPhysXController->Move(Vect3f(-l_vDir.x,0.0f,-l_vDir.z)*0.05f*m_fVelocity,_fDeltaSeconds);
-    m_pObject->SetPosition(g_pPhysXController->GetPosition());
+    Vect3f l_ControllerPos = g_pPhysXController->GetPosition();
+    m_pObject->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y,l_ControllerPos.z));
+    if (g_pCharacter)
+    {
+      g_pCharacter->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y-l_fAltura,l_ControllerPos.z));
+      if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+	    {
+		    g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+		    g_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
+	    }
+    }
 
     if(m_iState != 1)
       m_bStateChanged = true;
@@ -642,10 +699,26 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
 
   if(strcmp(_pcAction, "MoveLeft") == 0)
   {
-    Vect3f l_vPos = m_pObject->GetPosition();
-    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
-    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
-    m_pObject->SetPosition(l_vPos);
+    Vect3f l_vDir = m_pObject->GetPosition();
+    l_vDir.x = cos(m_pObject->GetYaw()+FLOAT_PI_VALUE/2);
+    l_vDir.z = sin(m_pObject->GetYaw()+FLOAT_PI_VALUE/2);
+    l_vDir.y = 0.0f;
+ 
+    float l_fAltura = (ALTURA_CONTROLLER+2*RADIUS_CONTROLLER)*0.5;
+    l_vDir.Normalize();
+    g_pPhysXController->Move(Vect3f(l_vDir.x,0.0f,l_vDir.z)*0.05f*m_fVelocity,_fDeltaSeconds);
+    Vect3f l_ControllerPos = g_pPhysXController->GetPosition();
+    m_pObject->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y,l_ControllerPos.z));
+    if (g_pCharacter)
+    {
+      g_pCharacter->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y-l_fAltura,l_ControllerPos.z));
+      if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+	    {
+		    g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+		    g_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
+	    }
+    }
+
 
     if(m_iState != 1)
       m_bStateChanged = true;
@@ -657,10 +730,25 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
 
   if(strcmp(_pcAction, "MoveRight") == 0)
   {
-    Vect3f l_vPos = m_pObject->GetPosition();
-    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
-    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
-    m_pObject->SetPosition(l_vPos);
+    Vect3f l_vDir = m_pObject->GetPosition();
+    l_vDir.x = cos(m_pObject->GetYaw()+FLOAT_PI_VALUE/2);
+    l_vDir.z = sin(m_pObject->GetYaw()+FLOAT_PI_VALUE/2);
+    l_vDir.y = 0.0f;
+
+    float l_fAltura = (ALTURA_CONTROLLER+2*RADIUS_CONTROLLER)*0.5;
+    l_vDir.Normalize();
+    g_pPhysXController->Move(Vect3f(-l_vDir.x,0.0f,-l_vDir.z)*0.05f*m_fVelocity,_fDeltaSeconds);
+    Vect3f l_ControllerPos = g_pPhysXController->GetPosition();
+    m_pObject->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y,l_ControllerPos.z));
+    if (g_pCharacter)
+    {
+      g_pCharacter->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y-l_fAltura,l_ControllerPos.z));
+      if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+	    {
+		    g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+		    g_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
+	    }
+    }
 
     if(m_iState != 1)
       m_bStateChanged = true;
