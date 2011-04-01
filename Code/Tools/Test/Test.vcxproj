@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="IAProcess.cpp" />
     <ClCompile Include="mainTest.cpp" />
     <ClCompile Include="ParticleProcess.cpp" />
     <ClCompile Include="PhysXProcess.cpp" />
@@ -18,6 +19,7 @@
     <ClCompile Include="TestProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IAProcess.h" />
     <ClInclude Include="ParticleProcess.h" />
     <ClInclude Include="PhysXProcess.h" />
     <ClInclude Include="SoundTestProcess.h" />
@@ -29,6 +31,7 @@
     <None Include="..\..\..\Run\Data\XML\init_test.xml">
       <SubType>Designer</SubType>
     </None>
+    <None Include="..\..\..\Run\Data\XML\init_test_ia.xml" />
     <None Include="..\..\..\Run\Data\XML\init_test_particulas.xml">
       <SubType>Designer</SubType>
     </None>
