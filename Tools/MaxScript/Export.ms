@@ -40,8 +40,9 @@ function CheckMesh _object _checkMaterial =
 		)
 		
 		if classof l_material == Multimaterial then
-		(		
-			for i = 1 to l_material.count do
+		(
+			local l_numMaterials = l_material.numsubs
+			for i = 1 to l_numMaterials do
 			(
 				if l_material[i] == undefined then
 				(
@@ -286,6 +287,7 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 	if l_objectMaterials == undefined then
 	(
 		ShowError (_object0.name + " no té cap vèrtexs que tingui material")
+		delete _object
 		return false
 	)
 	
@@ -304,6 +306,7 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 				local l_aux = "" as stringStream
 				format "L'objecte % té una cara amb el material ID %, que no existeix!!!" _object.name l_objectMaterials[i] to:l_aux
 				ShowError l_aux
+				delete _object
 				return false
 			)
 		)
@@ -315,6 +318,15 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 			--afegim a la llista el tipus de vertex
 			local l_vertexType2 = GetVertexType l_material[i]
 			append l_vertexType l_vertexType2
+						
+			if ((bit.and l_vertexType2 VERTEX_TYPE_TEXTURE2) != 0) and ((meshop.getNumMaps _object) < 2) then
+			(
+				local l_aux = "" as stringStream
+				format "L'objecte % amb submaterial % no té segones coordenades de textura." _object.name i to:l_aux
+				ShowError l_aux
+				delete _object
+				return false
+			)
 			
 			l_materialInfo = MATERIAL_INFO_VERTEXTYPE
 			l_materialInfo = bit.or l_materialInfo MATERIAL_INFO_TEXTURETYPE
@@ -339,6 +351,15 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 		WriteShort l_file l_numMaterials #unsigned
 		local l_vertexType2 = GetVertexType l_material
 		append l_vertexType l_vertexType2
+		
+		if ((bit.and l_vertexType2 VERTEX_TYPE_TEXTURE2) != 0) and ((meshop.getNumMaps _object) < 2) then
+		(
+			local l_aux = "" as stringStream
+			format "L'objecte % no té segones coordenades de textura." _object.name to:l_aux
+			ShowError l_aux
+			delete _object
+			return false
+		)
 		
 		l_materialInfo = MATERIAL_INFO_VERTEXTYPE
 		l_materialInfo = bit.or l_materialInfo MATERIAL_INFO_TEXTURETYPE
