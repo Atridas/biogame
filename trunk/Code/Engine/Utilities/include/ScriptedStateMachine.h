@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef SCRIPTEDScriptedStateMachine_H
 #define SCRIPTEDScriptedStateMachine_H
 #pragma warning (disable : 4786)

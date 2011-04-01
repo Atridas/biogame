@@ -9,6 +9,7 @@
 #include "Utils/Exception.h"
 #include "ParticleProcess.h"
 #include "SoundTestProcess.h"
+#include "IAProcess.h"
 
 #if defined( _DEBUG )  
 #include "Utils/MemLeaks.h" 
@@ -71,7 +72,7 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
     CEngine l_Engine;
     SInitParams l_InitParams;
 
-    ReadXMLInitParams(l_InitParams,"./Data/XML/init_test.xml");
+    ReadXMLInitParams(l_InitParams,"./Data/XML/init_test_ia.xml");
 
     // Create the application's window
     HWND hWnd = CreateWindow(	
@@ -90,13 +91,20 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
     CPhysXProcess* l_PhysX = new CPhysXProcess();
     CParticleProcess* l_Particle = new CParticleProcess();
     CSoundTestProcess* l_pSoundTestProcess = new CSoundTestProcess();
+    CIAProcess* l_pIAProcess = new CIAProcess();
     l_Engine.AddProcess(l_Test);
     l_Engine.AddProcess(l_PhysX);
     l_Engine.AddProcess(l_Particle);
     l_Engine.AddProcess(l_pSoundTestProcess);
+    l_Engine.AddProcess(l_pIAProcess);
+    
+    //l_Engine.ActivateProcess(l_Test);
     //l_Engine.ActivateProcess(l_pSoundTestProcess);
-    l_Engine.ActivateProcess(l_PhysX);
+    //l_Engine.ActivateProcess(l_PhysX);
     //l_Engine.ActivateProcess(l_Particle);
+    l_Engine.ActivateProcess(l_pIAProcess);
+
+
     l_Engine.Init(l_InitParams, hWnd);
 
 

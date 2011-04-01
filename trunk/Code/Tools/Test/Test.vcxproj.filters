@@ -6,6 +6,7 @@
     <ClCompile Include="PhysXProcess.cpp" />
     <ClCompile Include="ParticleProcess.cpp" />
     <ClCompile Include="SoundTestProcess.cpp" />
+    <ClCompile Include="IAProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Data">
@@ -17,6 +18,7 @@
     <ClInclude Include="PhysXProcess.h" />
     <ClInclude Include="ParticleProcess.h" />
     <ClInclude Include="SoundTestProcess.h" />
+    <ClInclude Include="IAProcess.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Run\Data\XML\init_test.xml">
@@ -38,6 +40,9 @@
       <Filter>Data</Filter>
     </None>
     <None Include="..\..\..\Run\Data\XML\init_test_particulas.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\init_test_ia.xml">
       <Filter>Data</Filter>
     </None>
   </ItemGroup>

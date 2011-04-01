@@ -16,6 +16,9 @@
     <Filter Include="EntitySystem\ComponentPhysXController">
       <UniqueIdentifier>{48735945-4a40-47e9-b996-1336c150102f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Grafs">
+      <UniqueIdentifier>{c652030f-faa7-46f0-a5ee-142c49841b03}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -32,6 +35,12 @@
     </ClCompile>
     <ClCompile Include="ScriptedStateMachine.cpp">
       <Filter>ScriptedStateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="SparseGraph.cpp">
+      <Filter>Grafs</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphDefines.cpp">
+      <Filter>Grafs</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -58,6 +67,18 @@
     </ClInclude>
     <ClInclude Include="include\ComponentPhysXController.h">
       <Filter>EntitySystem\ComponentPhysXController</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphNode.h">
+      <Filter>Grafs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphDefines.h">
+      <Filter>Grafs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphEdge.h">
+      <Filter>Grafs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SparseGraph.h">
+      <Filter>Grafs</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
