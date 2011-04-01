@@ -174,7 +174,7 @@ utility BioUtility "Eon-Utility" width:160 height:459
 					format "La core % ha causat un error d'exportació" l_name to:l_text
 					ShowError l_text
 					
-					return false
+					--return false
 				)
 			)
 			
@@ -465,15 +465,7 @@ utility BioUtility "Eon-Utility" width:160 height:459
 	)
 	-- Fi exportadors
 	
-	-- Funcionalitats botons
-  
-  
-	
-	
-	
-	
-	-- Fi funcionalitats botons
-	
+	-- Funcionalitats botons	
 	
 	on BioUtility open do
 	(
@@ -645,6 +637,7 @@ utility BioUtility "Eon-Utility" width:160 height:459
 		
 		ShowMessage "Fi"
 	)
+	
 	on buttonLight pressed do
 	(
 		local l_lights = #()
@@ -708,4 +701,6 @@ utility BioUtility "Eon-Utility" width:160 height:459
 			ShowMessage "Export de la Fisica finalitzat\n"
 		)
 	)
+	
+	-- Fi funcionalitats botons
 )
