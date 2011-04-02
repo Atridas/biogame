@@ -3,7 +3,6 @@
 	<RenderManager resolution="1280 720" position="50 5" fullscreenMode="false"/>
   
 	<StaticMeshManager>
-    <StaticMeshes xml="Data/XML/StaticMeshes.xml"/>
     <StaticMeshes xml="Data/Levels/Viewer/XML/StaticMeshes.xml"/>
   </StaticMeshManager>
   
