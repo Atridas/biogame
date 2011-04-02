@@ -112,6 +112,7 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="base.cpp" />
     <ClCompile Include="Math\MathConstants.cpp" />
     <ClCompile Include="Utils\BoundingBox.cpp" />
     <ClCompile Include="Utils\BoundingSphere.cpp" />
@@ -155,6 +156,7 @@
     <ClInclude Include="include\Utils\MapManager.h" />
     <ClInclude Include="include\Utils\MemLeaks.h" />
     <ClInclude Include="include\Utils\Object3D.h" />
+    <ClInclude Include="include\Utils\PriorityQueue.h" />
     <ClInclude Include="include\Utils\RecyclingArray.h" />
     <ClInclude Include="include\Utils\Singleton.h" />
     <ClInclude Include="include\Utils\Timer.h" />

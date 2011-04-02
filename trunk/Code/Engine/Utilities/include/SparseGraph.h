@@ -9,6 +9,8 @@
 #include "base.h"
 #include <list>
 
+class CRenderManager;
+
 class CSparseGraph                                 
 {
 public:
@@ -17,7 +19,7 @@ public:
   //of the code on the printed page
   typedef std::vector<CGraphNode>   NodeVector;
   typedef std::list<CGraphEdge>     EdgeList;
-  typedef std::vector<EdgeList>    EdgeListVector;
+  typedef std::vector<EdgeList>     EdgeListVector;
 
  
 private:
@@ -49,11 +51,16 @@ public:
   //ctor
   CSparseGraph(bool digraph): m_iNextNodeIndex(0), m_bDigraph(digraph){}
 
+
+  void DebugRender(CRenderManager* _pRM) const;
+
   //returns the node at the given index
   const CGraphNode&  GetNode(int idx)const;
 
   //non const version
   CGraphNode&  GetNode(int idx);
+
+  int GetClosestNode(const Vect3f& _vPosition);
 
   //const method for obtaining a reference to an edge
   const CGraphEdge& GetEdge(int from, int to)const;
@@ -173,6 +180,7 @@ public:
         {        
           curEdge = G.m_Edges[NodeIndex].begin();
     
+          if(end()) return 0;
           return &(*curEdge);
         }
 
@@ -180,6 +188,7 @@ public:
         {
           ++curEdge;
     
+          if(end()) return 0;
           return &(*curEdge);
 
         }
@@ -219,6 +228,7 @@ public:
         {        
           curEdge = G.m_Edges[NodeIndex].begin();
     
+          if(end()) return 0;
           return &(*curEdge);
         }
 
@@ -226,6 +236,7 @@ public:
         {
           ++curEdge;
     
+          if(end()) return 0;
           return &(*curEdge);
 
         }
@@ -276,7 +287,8 @@ public:
         curNode = G.m_Nodes.begin();
 
         GetNextValidNode(curNode);
-
+        
+        if(end()) return 0;
         return &(*curNode);
       }
 
@@ -285,7 +297,8 @@ public:
         ++curNode;
 
         GetNextValidNode(curNode);
-
+        
+        if(end()) return 0;
         return &(*curNode);
       }
 
@@ -336,6 +349,7 @@ public:
 
         GetNextValidNode(curNode);
 
+        if(end()) return 0;
         return &(*curNode);
       }
 
@@ -344,7 +358,8 @@ public:
         ++curNode;
 
         GetNextValidNode(curNode);
-
+        
+        if(end()) return 0;
         return &(*curNode);
       }
 

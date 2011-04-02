@@ -21,7 +21,7 @@ public:
   virtual void Release() {};
 
   int GetIndex() const { return m_iIndex; };
-  Vect3f GetPosition() const { return m_vPosition; };
+  const Vect3f& GetPosition() const { return m_vPosition; };
   
   void SetIndex(int _iIndex) { m_iIndex = _iIndex;};
   void SetPosition(const Vect3f& _vPosition) { m_vPosition = _vPosition;};

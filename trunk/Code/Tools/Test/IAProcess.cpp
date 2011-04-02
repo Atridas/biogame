@@ -8,19 +8,14 @@
 #include "ActionManager.h"
 #include "ScriptManager.h"
 #include "GraphDefines.h"
+#include "Heuristics.h"
+#include "SearchAStar.h"
 
 bool CIAProcess::Init()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"CIAProcess::Init");
   
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
-
-  CORE->GetScriptManager()->RunCode("load_level('ia')");
-
-  if(!CORE->GetActionManager()->Load("Data/XML/actions_soundtest.xml"))
-  {
-    LOGGER->AddNewLog(ELL_ERROR,"CSoundTestProcess::Init Error loading actions.");
-  }
 
   m_pTargetObject = new CObject3D();
   
@@ -37,7 +32,19 @@ bool CIAProcess::Init()
 
   m_pGraph = new CSparseGraph(false);
 
-  GraphHelper_CreateGrid(*m_pGraph, 20, 20, 20, 20);
+  GraphHelper_CreateGrid(*m_pGraph, 40, 40, 10, 10);
+
+
+  m_vDemoObj = Vect3f(3.5f,0.f,3.5f);
+
+  int m_iNodeInicial = m_pGraph->GetClosestNode(m_vDemoObj);
+
+  
+  m_iNodeObjectiu = RandomNumber(0, m_pGraph->NumNodes());
+
+  CSearchAStar l_Search(*m_pGraph, &(CHeuristicEuclid::instance), m_iNodeInicial, m_iNodeObjectiu);
+
+  m_liPath = l_Search.GetPathToTarget();
 
   SetOk(true);
   return IsOk();
@@ -98,6 +105,8 @@ void CIAProcess::Update(float _fElapsedTime)
   l_vFrontDirection.RotateY(-m_pTargetObject->GetYaw());
 
   m_vMouseDelta = 0;
+
+  UpdateIA(_fElapsedTime);
 }
 
 void CIAProcess::UpdateCamera(float _fDeltaPitch, float _fDeltaYaw)
@@ -122,14 +131,87 @@ void CIAProcess::UpdatePosition(Vect3f& _PosDelta, float _fDeltaPitch, float _fD
 
 }
 
+void CIAProcess::UpdateIA(float _fDT)
+{
+  if(m_liPath.empty())
+  {
+    return;
+  }
+
+  Vect3f l_vObj = m_pGraph->GetNode(m_liPath.front()).GetPosition();
+
+  Vect3f l_vDir = l_vObj - m_vDemoObj;
+  l_vDir = l_vDir.Normalize(1.f);
+
+  m_vDemoObj += l_vDir * _fDT;
+
+  if(m_vDemoObj.SqDistance(l_vObj) < 0.2)
+  {
+    m_liPath.pop_front();
+  }
+}
+
 void CIAProcess::RenderScene(CRenderManager* _pRM)
 {
   CORE->GetRenderableObjectsManager()->Render(_pRM);
+
+
+  //_pRM->DrawGrid(20,colWHITE,20,20);
+  m_pGraph->DebugRender(_pRM);
+
+  Mat44f mat;
+  mat.SetIdentity();
+  mat.Translate( m_vDemoObj );
+  mat.m13 = 2.f;
+  _pRM->SetTransform(mat);
+
+  //Objecte que es mou
+  _pRM->DrawCube(Vect3f(1,1,1),colYELLOW);
+  
+  //---
+
+  mat.SetIdentity();
+  mat.Translate( m_pGraph->GetNode(m_iNodeObjectiu).GetPosition() );
+  mat.m13 = 2.f;
+  _pRM->SetTransform(mat);
+
+  //objectiu
+  _pRM->DrawSphere(.5f,colYELLOW,10);
+
+  //PATH
+
+  mat.SetIdentity();
+  mat.m13 = 1.f;
+  _pRM->SetTransform(mat);
+  
+
+  list<int>::iterator l_itPath = m_liPath.begin();
+  if(l_itPath != m_liPath.end())
+  {
+    Vect3f l_vLastPos = m_pGraph->GetNode(*l_itPath).GetPosition();
+    _pRM->DrawLine(l_vLastPos, m_vDemoObj, colWHITE);
+
+    ++l_itPath;
+    while(l_itPath != m_liPath.end())
+    {
+      Vect3f l_vNewPos = m_pGraph->GetNode(*l_itPath).GetPosition();
+
+      _pRM->DrawLine(l_vLastPos, l_vNewPos, colWHITE);
+
+      ++l_itPath;
+      l_vLastPos = l_vNewPos;
+    }
+  }
 }
 
 void CIAProcess::RenderINFO(CRenderManager* _pRM)
 {
-  _pRM->DrawGrid(20,colWHITE,20,20);
+
+
+  uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");
+  int l_iPosicio = 0;
+  int l_iPosicio2 = 130;
+  FONT_MANAGER->DrawText(l_iPosicio,l_iPosicio2,colGREEN,l_uiFontType,"Press 'N' to change target");
 }
 
 bool CIAProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
@@ -143,6 +225,17 @@ bool CIAProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const
   if(strcmp(_pcAction, "Pitch") == 0)
   {
     m_vMouseDelta.y = (int)_fDelta;
+    return true;
+  }
+
+  if(strcmp(_pcAction, "change IA target") == 0)
+  {
+    m_iNodeObjectiu = RandomNumber(0, m_pGraph->NumNodes());
+    int m_iNodeInicial = m_pGraph->GetClosestNode(m_vDemoObj);
+
+    CSearchAStar l_Search(*m_pGraph, &(CHeuristicEuclid::instance), m_iNodeInicial, m_iNodeObjectiu);
+
+    m_liPath = l_Search.GetPathToTarget();
     return true;
   }
 

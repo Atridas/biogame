@@ -129,6 +129,7 @@
     <ClCompile Include="Utils\Object3D.cpp">
       <Filter>Utils\Object3D</Filter>
     </ClCompile>
+    <ClCompile Include="base.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Math\MathTypes.h">
@@ -224,6 +225,9 @@
     </ClInclude>
     <ClInclude Include="include\Utils\RecyclingArray.h">
       <Filter>Utils\RecyclingArray</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\PriorityQueue.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
