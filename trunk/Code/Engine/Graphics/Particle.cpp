@@ -9,6 +9,7 @@ CParticle::CParticle()
   m_Color     = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
   m_vPos      = D3DXVECTOR3(0.f, 0.f, 0.f);
   m_vDir      = D3DXVECTOR3(0.f, 0.f, 0.f);
+  m_fAngle    =0.0f;
 }
 
 void CParticle::Release()
@@ -23,6 +24,7 @@ void CParticle::Release()
 bool CParticle::Update(float fTimeDelta)
 {
   m_fAge += fTimeDelta;
+  m_fAngle += fTimeDelta*5;
   if (m_fAge >= m_fLifetime )
   {
     //its time to die..
@@ -51,7 +53,7 @@ bool CParticle::Update(float fTimeDelta)
 	 }
     i--;
   }
-
+  
   m_vPos=m_vPos+m_vDir*fTimeDelta;
   return true;
 }

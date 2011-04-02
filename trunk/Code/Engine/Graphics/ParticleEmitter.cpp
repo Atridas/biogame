@@ -29,6 +29,7 @@ m_Particles(NUMPARTICLES)
   m_fNumNewPartsExcess = 0.0f;
   m_fLife1 = 0.0f;
   m_fLife2 = 0.0f;
+  m_fAngle = 0.0f;
 
   m_bActive = false;
 
@@ -83,6 +84,14 @@ void CParticleEmitter::Update(float fElapsedTime)
 
   if(!m_bActive)
     return;
+  
+  if(m_bReload)
+  {
+    Done();
+    Release();
+    Init(_pRM);
+    m_bReload = false;
+  }
 
   //1.] Updatejar les particules i en cas de que s'hagi acabat el seu temps de vida, posar 
   //    en el vector que la posicio esta lliure
@@ -176,7 +185,10 @@ void CParticleEmitter::Update(float fElapsedTime)
        }	  
       part->m_vTimeColor = m_vTimeColor;
       part->m_vColor = m_vNewColor;
+      part->SetAngle(m_fAngle);
       part->SetPos(m_vPos);
+
+      
     }
   }
 }
@@ -259,6 +271,14 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
   float l_fPointScaleA  = 0.00f;
   float l_fPointScaleB  = 0.00f;
   float l_fPointScaleC  = 1.00f;
+  
+  //***************************
+  D3DXMATRIX m_Rotation;
+  D3DXMatrixRotationY(&m_Rotation, m_fAngle);
+  l_pd3dDevice->SetTransform(D3DTS_WORLD, &m_Rotation);
+
+
+  //**************************
   l_pd3dDevice->SetRenderState(D3DRS_POINTSIZE,     *((DWORD*)&l_fPointSize));
   l_pd3dDevice->SetRenderState(D3DRS_POINTSIZE_MIN, *((DWORD*)&l_fPointSizeMin));    
   l_pd3dDevice->SetRenderState(D3DRS_POINTSIZE_MAX, *((DWORD*)&l_fPointSizeMax));    
