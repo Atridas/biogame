@@ -29,6 +29,7 @@ struct SParticleInfo
   vector<float>         m_vTimeColor;  //modificar tot els  m_vTime  per els m_vTimeColor
   vector<D3DXVECTOR3>   m_vDirection;
   vector<float>         m_vTimeDirection;
+  
 
 };
 
@@ -57,15 +58,15 @@ public:
 
   //bool Reload() {Release(); return Load(m_szFileName);};
 
-  bool Reload()  {Release(); return Load(m_szFileName);};
+  bool Reload()  {Release(); m_bReload = true; return Load(m_szFileName);};
 
   void Release();
 
 private:
-  string m_szFileName;
+  string                    m_szFileName;
   CRenderManager*           m_pRM;
   vector<CParticleEmitter*> m_vEmitterParticle;
-  
+  bool                  m_bReload;
 
 };
 #endif

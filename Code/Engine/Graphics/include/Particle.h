@@ -19,6 +19,7 @@ public:
   void SetColor             (const D3DXCOLOR& _Color)   {m_Color = _Color;};
   void SetPos               (const D3DXVECTOR3& _vPos)  {m_vPos = _vPos;};
   void SetDir               (const D3DXVECTOR3& _vDir)  {m_vDir = _vDir;};
+  void SetAngle             (float _fAngle)                         {m_fAngle = _fAngle;};
   
 
   float GetSize                   () const              {return m_fSize;};
@@ -27,6 +28,7 @@ public:
   const D3DXCOLOR& GetColor       () const              {return m_Color;};
   const D3DXVECTOR3& GetPos       () const              {return m_vPos;};
   const D3DXVECTOR3& GetDir       () const              {return m_vDir;};
+  float GetAngle                  () const              {return m_fAngle;};
   
   bool  Update               (float fTimeDelta);
   void  Release              ();
@@ -44,6 +46,7 @@ private:
   D3DXCOLOR         m_Color;
   D3DXVECTOR3       m_vPos;
   D3DXVECTOR3       m_vDir; 
+  float             m_fAngle;
   
 };
 #endif
