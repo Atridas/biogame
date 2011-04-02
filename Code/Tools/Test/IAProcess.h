@@ -32,6 +32,8 @@ private:
   void UpdateCamera(float _fDeltaPitch, float _fDeltaYaw);
   void UpdatePosition(Vect3f& _PosDelta, float _fDeltaPitch, float _fDeltaYaw);
 
+  void UpdateIA(float _fDT);
+
 	void                  Release                 ();
 
   CObject3D*            m_pTargetObject;
@@ -41,4 +43,10 @@ private:
   Vect3i                m_vMouseDelta;
   
   CSparseGraph*         m_pGraph;
+
+
+  //Demo gràfica
+  int                   m_iNodeObjectiu;
+  list<int>             m_liPath;
+  Vect3f                m_vDemoObj;
 };

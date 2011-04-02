@@ -1,13 +1,12 @@
 #pragma once
-
-/**
- * @file
-**/
+#ifndef __BASE_BIOGAME_H__
+#define __BASE_BIOGAME_H__
 
 #ifndef NULL
 #define NULL 0
 #endif
 
+#include <list>
 #include <vector>
 #include <map>
 #include <string>
@@ -89,3 +88,9 @@ using namespace std;
  * @define Macro d'accés a Sound Manager.
 **/
 #define SOUND_MANAGER CORE->GetSoundManager()
+
+
+float RandomNumber(float _fMin, float _fMax);
+int   RandomNumber(int _iMin, int _iMax);
+
+#endif

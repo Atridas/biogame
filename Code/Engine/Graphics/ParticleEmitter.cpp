@@ -5,20 +5,6 @@
 #include "TextureManager.h"
 #include "ParticleManager.h"
 
-float RandomNumber(float _fMin, float _fMax)
-{
-  float l_fNumber;
-  if(_fMin> _fMax)
-  {
-    float l_fAux = _fMax;
-    _fMax = _fMin;
-    _fMin=l_fAux;
-  }
-  l_fNumber=( (rand()/static_cast<float>(RAND_MAX)) * (_fMax - _fMin) + _fMin);
-
-  return l_fNumber;
-}
-
 CParticleEmitter::CParticleEmitter():
 m_Particles(NUMPARTICLES)
 {

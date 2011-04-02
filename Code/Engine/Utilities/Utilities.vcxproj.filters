@@ -19,6 +19,9 @@
     <Filter Include="Grafs">
       <UniqueIdentifier>{c652030f-faa7-46f0-a5ee-142c49841b03}</UniqueIdentifier>
     </Filter>
+    <Filter Include="A%2a">
+      <UniqueIdentifier>{25923e21-a69a-435b-b8ae-8a286d9042d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -41,6 +44,12 @@
     </ClCompile>
     <ClCompile Include="GraphDefines.cpp">
       <Filter>Grafs</Filter>
+    </ClCompile>
+    <ClCompile Include="SearchAStar.cpp">
+      <Filter>A%2a</Filter>
+    </ClCompile>
+    <ClCompile Include="Heuristics.cpp">
+      <Filter>A%2a</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -79,6 +88,12 @@
     </ClInclude>
     <ClInclude Include="include\SparseGraph.h">
       <Filter>Grafs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SearchAStar.h">
+      <Filter>A%2a</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Heuristics.h">
+      <Filter>A%2a</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,5 +1,6 @@
 #include "GraphDefines.h"
 
+#include "RenderManager.h"
 
 //--------------------------- isNodePresent --------------------------------
 //
@@ -425,3 +426,58 @@ bool CSparseGraph::UniqueEdge(int from, int to)const
 //  return true;
 //}
 //   
+
+
+
+
+int CSparseGraph::GetClosestNode(const Vect3f& _vPosition)
+{
+  //TODO optimitzar amb algun quad-tree o algo
+  int l_iNode = INVALID_GRAPH_NODE_INDEX;
+  float l_fDistanceSquared;
+
+  for(uint32 i = 0; i < m_Nodes.size(); ++i)
+  {
+    float l_fNewDist = m_Nodes[i].GetPosition().SqDistance(_vPosition);
+    if(l_iNode == INVALID_GRAPH_NODE_INDEX || l_fDistanceSquared > l_fNewDist)
+    {
+      l_iNode = i;
+      l_fDistanceSquared = l_fNewDist;
+    }
+  }
+  return l_iNode;
+}
+
+
+
+// Debug render : ------------------------------------------------------------------------------------------------------
+
+void CSparseGraph::DebugRender(CRenderManager* _pRM) const
+{
+  Mat44f l_Transform;
+  //Renderitzar nodes
+  NodeVector::const_iterator l_itNode = m_Nodes.begin();
+  for (l_itNode; l_itNode!=m_Nodes.end(); ++l_itNode)
+  {
+    l_Transform.SetIdentity();
+    l_Transform.Translate(l_itNode->GetPosition());
+
+    _pRM->SetTransform(l_Transform);
+
+    _pRM->DrawAxis();
+  }
+  
+  l_Transform.SetIdentity();
+  _pRM->SetTransform(l_Transform);
+
+  for (unsigned int nodeIdx = 0; nodeIdx < m_Nodes.size(); ++nodeIdx)
+  {
+    for (EdgeList::const_iterator curEdge = m_Edges[nodeIdx].begin();
+         curEdge!=m_Edges[nodeIdx].end(); ++curEdge)
+    {
+      _pRM->DrawLine( GetNode( curEdge->GetFrom() ).GetPosition(), 
+                      GetNode( curEdge->GetTo()   ).GetPosition(),
+                      colCYAN);
+    }  
+  }
+}

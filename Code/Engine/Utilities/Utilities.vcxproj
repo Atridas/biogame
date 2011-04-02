@@ -81,7 +81,9 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="GraphDefines.cpp" />
+    <ClCompile Include="Heuristics.cpp" />
     <ClCompile Include="ScriptedStateMachine.cpp" />
+    <ClCompile Include="SearchAStar.cpp" />
     <ClCompile Include="SparseGraph.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -95,7 +97,9 @@
     <ClInclude Include="include\GraphDefines.h" />
     <ClInclude Include="include\GraphEdge.h" />
     <ClInclude Include="include\GraphNode.h" />
+    <ClInclude Include="include\Heuristics.h" />
     <ClInclude Include="include\ScriptedStateMachine.h" />
+    <ClInclude Include="include\SearchAStar.h" />
     <ClInclude Include="include\SparseGraph.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

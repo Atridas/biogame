@@ -23,7 +23,9 @@ bool CEngine::Init(const SInitParams& _InitParams,  HWND hWnd)
 
   m_pCore = new CCore();
 
-  m_pCore->Init(hWnd, _InitParams, this);
+  bool result = m_pCore->Init(hWnd, _InitParams, this);
+
+  assert(result);
   
   if(m_pActiveProcess) //TODO: Comprovar excepcio m_pProcess == NULL i logejar
   {
