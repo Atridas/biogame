@@ -114,7 +114,7 @@ void CSoundTestProcess::Update(float _fElapsedTime)
   {
     SOUND_MANAGER->FadeMusicVolume("bgm",(l_fDistance)/20.0f,500);
   }else{
-    SOUND_MANAGER->FadeMusicVolume("bgm",1.0f,1000);
+    SOUND_MANAGER->FadeMusicVolume("bgm",0.5f,1000);
   }
 
   l_vFrontDirection.x = 1.0f;
