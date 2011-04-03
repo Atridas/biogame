@@ -71,8 +71,6 @@ bool CParticleProcess::Init()
   }
   m_bRenderLights = false;
 
-  CORE->GetParticleManager()->Init(CORE->GetRenderManager());
-
   SetOk(true);
   return IsOk();
 }
