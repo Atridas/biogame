@@ -45,5 +45,8 @@
     <None Include="..\..\..\Run\Data\XML\init_test_ia.xml">
       <Filter>Data</Filter>
     </None>
+    <None Include="..\..\..\Run\Data\XML\init_test_physx.xml">
+      <Filter>Data</Filter>
+    </None>
   </ItemGroup>
 </Project>
