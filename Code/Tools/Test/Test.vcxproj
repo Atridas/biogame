@@ -26,7 +26,9 @@
     <ClInclude Include="TestProcess.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Run\Data\XML\actions.xml" />
+    <None Include="..\..\..\Run\Data\XML\actions.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="..\..\..\Run\Data\XML\actions_physx.xml" />
     <None Include="..\..\..\Run\Data\XML\init_test.xml">
       <SubType>Designer</SubType>
