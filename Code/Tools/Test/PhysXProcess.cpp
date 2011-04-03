@@ -365,7 +365,7 @@ bool CPhysXProcess::Init()
   
   //CORE->GetStaticMeshManager()->GetResource("ordinador_def")->
   g_pObjectManager = new CGameObjectManager();
-  g_pObjectManager->Load("Data/Levels/PhysX/XML/GameObjects.xml",false);
+  g_pObjectManager->Load("Data/XML/GameObjects.xml",false);
 
 
 
@@ -480,7 +480,6 @@ void CPhysXProcess::Update(float _fElapsedTime)
     l_fYaw = l_fYaw-FLOAT_PI_VALUE/2;
     //l_fRoll = m_pObjectBot->GetRoll();
 
-    if (g_pCharacter)
     g_pCharacter->SetYaw(l_fYaw);
 
     CSpotLight* l_pSpot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");

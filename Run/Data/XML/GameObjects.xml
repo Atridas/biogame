@@ -46,7 +46,6 @@
   <GameObject name="proveta02" Physx="true" PhysxType="mesh" RenderableObject="proveta02" PhysxActor="proveta02" Body="0"/>
   <GameObject name="CAPSULA_trencada" Physx="true" PhysxType="mesh" RenderableObject="CAPSULA_trencada" PhysxActor="CAPSULA_trencada" Body="0"/>
   <GameObject name="CAPSULA_DEF2" Physx="true" PhysxType="mesh" RenderableObject="CAPSULA_DEF2" PhysxActor="CAPSULA_DEF2" Body="0"/>
-  <GameObject name="CAPSULA_DEF03" Physx="true" PhysxType="mesh" RenderableObject="CAPSULA_DEF03" PhysxActor="CAPSULA_DEF03" Body="0"/>
   <GameObject name="Lampada01" Physx="true" PhysxType="mesh" RenderableObject="Lampada01" PhysxActor="Lampada01" Body="0"/>
   <GameObject name="Cable_Lampada01" Physx="true" PhysxType="mesh" RenderableObject="Cable_Lampada01" PhysxActor="Cable_Lampada01" Body="0"/>
   <!--<GameObject name="Cable_florescent01" Physx="true" PhysxType="mesh" RenderableObject="Cable_florescent01" PhysxActor="Cable_florescent01" Body="0"/>
