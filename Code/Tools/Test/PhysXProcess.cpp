@@ -93,7 +93,7 @@ CGameObjectManager* g_pObjectManager = 0;
 
 bool CPhysXProcess::Init()
 {
-  LOGGER->AddNewLog(ELL_INFORMATION,"TestProcess::Init");
+  LOGGER->AddNewLog(ELL_INFORMATION,"CPhysXProcess::Init");
 
   CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
   
@@ -150,12 +150,6 @@ bool CPhysXProcess::Init()
   CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
  
 
-  if(l_Spot)
-  {
-    l_Spot->SetDirection(m_pObjectBot->GetPosition());
-    l_Spot->SetActive(true);
-  }
-  m_bRenderLights = false;
 
 
   //PHYSICS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -239,7 +233,7 @@ bool CPhysXProcess::Init()
   l_pPhysManager->AddPhysicActor(g_pPEscala);
   
 
-  g_pPhysXController = new CPhysicController(0.3f,ALTURA_CONTROLLER,10.0f,0.1f,0.5f,COLISION_SOLID_MASK,g_pUserDataController,Vect3f(7.0f,2.2f,4.0f));
+  g_pPhysXController = new CPhysicController(0.3f,ALTURA_CONTROLLER,10.0f,0.1f,0.5f,COLISION_SOLID_MASK,g_pUserDataController,Vect3f(-7.0f,2.2f,-4.0f));
   g_pPhysXController->SetYaw(-90);
   l_pPhysManager->AddPhysicController(g_pPhysXController);
 
@@ -386,6 +380,18 @@ bool CPhysXProcess::Init()
 
   Vect3f l_ControllerPos = g_pPhysXController->GetPosition();
   m_pObject->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y,l_ControllerPos.z));
+
+  
+  if(l_Spot)
+  {
+    l_Spot->SetDirection(l_ControllerPos);
+    l_Spot->SetActive(true);
+  }
+  m_bRenderLights = false;
+
+
+  CORE->GetLightManager()->SetLightsEnabled(true);
+  l_pPhysManager->SetDebugRenderMode(false);
 
   SetOk(true);
   return IsOk();
@@ -578,7 +584,7 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
 
   //Draw Grid and Axis
   _pRM->SetTransform(identity);
-  _pRM->DrawGrid(30.0f,colCYAN,30,30);
+  //_pRM->DrawGrid(30.0f,colCYAN,30,30);
    
    //_pRM->DrawPlane(10,Vect3f(0,1,0),0,colBLUE,10,10);
 
@@ -590,12 +596,13 @@ void CPhysXProcess::RenderINFO(CRenderManager* _pRM)
 {
 
   uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");
+  uint32 l_uiFontType2 = FONT_MANAGER->GetTTF_Id("arial");
  
   int l_iPosicio = 0;
   int l_iPosicio2 = 130;
   string l_szMsg("Sense Objecte");
   //stringstream l_SStream;
-  stringstream l_SStreamHelp;
+  stringstream l_SStreamHelp,l_SStreamInfo;
 
 
   //
@@ -610,6 +617,11 @@ void CPhysXProcess::RenderINFO(CRenderManager* _pRM)
     l_SStreamHelp << "Objecte Tocat: " << endl << l_szMsg << endl;
     FONT_MANAGER->DrawText(l_iPosicio,l_iPosicio2,colGREEN,l_uiFontType,l_SStreamHelp.str().c_str());
   }
+
+  l_SStreamInfo << "Mostrar Malles del PhysX:" << endl << "Tecla R" << endl;
+  FONT_MANAGER->DrawText(l_iPosicio,l_iPosicio2-60,colYELLOW,l_uiFontType,l_SStreamInfo.str().c_str());
+
+
  
   _pRM->DrawAxis();
 }
