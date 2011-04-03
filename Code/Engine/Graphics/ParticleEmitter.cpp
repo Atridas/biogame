@@ -31,7 +31,7 @@ m_Particles(NUMPARTICLES)
   m_fLife2 = 0.0f;
   m_fAngle = 0.0f;
 
-  m_bActive = false;
+  m_bActive = true;
 
 
   

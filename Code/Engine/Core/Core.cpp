@@ -74,6 +74,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
     LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al manager de particulas");
     SetOk(false);
   }
+  m_pParticleManager->Init(CORE->GetRenderManager());
 
   if(!m_pStaticMeshManager->Load(_InitParams.StaticMeshManagerParams))
   {
