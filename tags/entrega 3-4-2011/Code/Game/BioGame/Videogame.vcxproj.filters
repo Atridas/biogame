@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Game">
+      <UniqueIdentifier>{74150768-6a85-4ddd-9fb3-fa4db25d96e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{320ca114-4113-4867-9eda-79418d3566cf}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="GameProcess.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\GameProcess.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Run\Data\XML\AnimatedModels.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\Effects.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\enemigos.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\fonts.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\IA.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\Lights.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\Lua.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\RenderableObjects.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\StaticMeshes.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\Particles.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\init.xml">
+      <Filter>Data</Filter>
+    </None>
+  </ItemGroup>
+</Project>

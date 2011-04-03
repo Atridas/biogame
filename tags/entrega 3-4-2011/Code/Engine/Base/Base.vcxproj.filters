@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="include\Math\MathUtils.inl">
+      <Filter>Math</Filter>
+    </None>
+    <None Include="include\Math\Matrix33.inl">
+      <Filter>Math</Filter>
+    </None>
+    <None Include="include\Math\Matrix34.inl">
+      <Filter>Math</Filter>
+    </None>
+    <None Include="include\Math\Matrix44.inl">
+      <Filter>Math</Filter>
+    </None>
+    <None Include="include\Math\Vector2.inl">
+      <Filter>Math</Filter>
+    </None>
+    <None Include="include\Math\Vector3.inl">
+      <Filter>Math</Filter>
+    </None>
+    <None Include="include\Math\Vector4.inl">
+      <Filter>Math</Filter>
+    </None>
+    <None Include="include\Math\Color.inl">
+      <Filter>Math</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Math">
+      <UniqueIdentifier>{13d0725d-84e6-4e05-828a-96496af3df7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="XML">
+      <UniqueIdentifier>{fb009b7e-bf8c-4ab4-a713-79b657863608}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{aac0a4ba-a7fe-4093-b81b-109606b819b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\LanguageManager">
+      <UniqueIdentifier>{f70f4da3-320a-409f-9b42-b9d69aaf45e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\CountDownTimer">
+      <UniqueIdentifier>{d59a394e-cd0c-4308-bc13-b9390d438714}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Exception">
+      <UniqueIdentifier>{4c1952a8-e476-4f64-89c7-ca05608db221}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\LerpAnimator">
+      <UniqueIdentifier>{d7021e1f-d08f-47eb-8b15-483ab80ef8f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Logger">
+      <UniqueIdentifier>{39d7cec7-3e96-4acf-8f3d-fe8fdba3dde5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\MemLeaks">
+      <UniqueIdentifier>{cf6693b7-6f65-4cf6-a42b-445c96ab07fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Timer">
+      <UniqueIdentifier>{e972d8c3-d4e7-4dd9-ab71-033a599d7ef1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\MapManager">
+      <UniqueIdentifier>{ac963d84-2254-46ef-ade9-6c86aecb0c39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Named">
+      <UniqueIdentifier>{b3718a1d-da8a-4b0b-9496-0f76a2aee4e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\VertexCalculations">
+      <UniqueIdentifier>{2b032600-1b86-4728-b59a-1b2be9b4d09e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Bounding">
+      <UniqueIdentifier>{0f675238-1d08-430a-8ad1-1712aa41fce7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Bounding\BoundingBox">
+      <UniqueIdentifier>{9f54944a-0489-4252-8ab6-ce3466dc1839}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Bounding\BoundingSphere">
+      <UniqueIdentifier>{45c2bbfb-73b9-41aa-90f6-364327ce4f04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\Object3D">
+      <UniqueIdentifier>{c9a51843-deb5-4e5d-827b-33c166e4a464}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils\RecyclingArray">
+      <UniqueIdentifier>{9a03e4ce-1346-4438-a9a7-7680eb85efa8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Math\MathConstants.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="XML\XMLTreeNode.cpp">
+      <Filter>XML</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\LanguageManager.cpp">
+      <Filter>Utils\LanguageManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\CountDownTimer.cpp">
+      <Filter>Utils\CountDownTimer</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Exception.cpp">
+      <Filter>Utils\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\LerpAnimator1D.cpp">
+      <Filter>Utils\LerpAnimator</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\LerpAnimator2D.cpp">
+      <Filter>Utils\LerpAnimator</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\LerpAnimator3D.cpp">
+      <Filter>Utils\LerpAnimator</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Logger.cpp">
+      <Filter>Utils\Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\MemLeaks.cpp">
+      <Filter>Utils\MemLeaks</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Timer.cpp">
+      <Filter>Utils\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexCalculations.cpp">
+      <Filter>Utils\VertexCalculations</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\BoundingBox.cpp">
+      <Filter>Utils\Bounding\BoundingBox</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\BoundingSphere.cpp">
+      <Filter>Utils\Bounding\BoundingSphere</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\Object3D.cpp">
+      <Filter>Utils\Object3D</Filter>
+    </ClCompile>
+    <ClCompile Include="base.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Math\MathTypes.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\MathUtils.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\Matrix33.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\Matrix34.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\Matrix44.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\Vector2.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\Vector3.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Math\Vector4.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\XML\XMLTreeNode.h">
+      <Filter>XML</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\Types.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\base.h" />
+    <ClInclude Include="include\Math\Color.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\Singleton.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\BaseUtils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\BaseControl.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\LanguageManager.h">
+      <Filter>Utils\LanguageManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\CountDownTimer.h">
+      <Filter>Utils\CountDownTimer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\Exception.h">
+      <Filter>Utils\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\LerpAnimator3D.h">
+      <Filter>Utils\LerpAnimator</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\LerpAnimator1D.h">
+      <Filter>Utils\LerpAnimator</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\LerpAnimator2D.h">
+      <Filter>Utils\LerpAnimator</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\Logger.h">
+      <Filter>Utils\Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\MemLeaks.h">
+      <Filter>Utils\MemLeaks</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\Timer.h">
+      <Filter>Utils\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\MapManager.h">
+      <Filter>Utils\MapManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Named.h">
+      <Filter>Utils\Named</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VertexCalculations.h">
+      <Filter>Utils\VertexCalculations</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\BoundingBox.h">
+      <Filter>Utils\Bounding\BoundingBox</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\BoundingSphere.h">
+      <Filter>Utils\Bounding\BoundingSphere</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\Object3D.h">
+      <Filter>Utils\Object3D</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Activable.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\RecyclingArray.h">
+      <Filter>Utils\RecyclingArray</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\PriorityQueue.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Lua>
+  <files>
+    <file path="Data/Lua/first.lua" />
+    <file path="Data/Lua/globals.lua" />
+    <file path="Data/Lua/biogame_gui.lua" />
+  </files>
+  <initscripts>
+    <script action="CORE                          = get_core()"/>
+    <script action="CONSOLE                       = CORE:get_console()"/>
+    
+    <script action="RENDERABLE_OBJECTS_MANAGER    = CORE:get_renderable_objects_manager()"/>
+    <script action="ROM                           = CORE:get_renderable_objects_manager()"/>
+    
+    <script action="STATIC_MESH_MANAGER           = CORE:get_static_mesh_manager()"/>
+    <script action="SMM                           = CORE:get_static_mesh_manager()"/>
+
+    <script action="LIGHT_MANAGER                 = CORE:get_light_manager()"/>
+    <script action="LM                            = CORE:get_light_manager()"/>
+    
+    <script action="GUI_MANAGER                   = CORE:get_gui_manager()"/>
+
+    <script action="ENGINE                        = CORE:get_engine()"/>
+  </initscripts>
+</Lua>

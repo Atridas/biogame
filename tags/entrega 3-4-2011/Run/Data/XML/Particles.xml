@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Particles>
+  <ParticleEmitters>
+    
+      <ParticleEmitter  id="foc1"                        MinEmitRate="30.0"             MaxEmitRate="30.0"
+                        Color1="0.1 0.5 0.68 0.0"          Color2="0.2 0.6 0.71 0.0"       MinSize="1.0"        MaxSize="1.5"
+                        Direction1="-0.2 0.0 -0.2"         Direction2="0.2 0.6 0.2"     Life1="4.0"          Life2="4.5"
+                        TexParticle="Data/Textures/texturas particulas/flameD.dds">
+        <Colors>
+          <Color        time="0.5"        Color1="1.0 1.0 1.0 0.65"       Color2="1.0 1.0 1.0 0.72"/>
+          <Color        time="2.0"        Color1="1.0 1.0 1.0 1.0"       Color2="1.0 1.0 1.0 1.0"/>
+          <Color        time="3.0"        Color1="1.0 1.0 1.0 0.34.0"       Color2="1.0 1.0 1.0 0.36"/>
+          <Color        time="4.0"        Color1="1.0 1.0 1.0 0.0"       Color2="1.0 1.0 1.0 0.0"/>
+        </Colors>
+
+        <Directions>
+          <Direction    time="1.5"        Direction1="-0.2 0.0 -0.2"         Direction2="0.2 0.6 0.2"/>
+          <Direction    time="2.0"        Direction1="-0.2 0.0 -0.2"         Direction2="0.2 0.6 0.2"/>
+          <Direction    time="3.0"        Direction1="-0.2 0.0 -0.2"         Direction2="0.2 0.6 0.2"/>
+          <Direction    time="4.0"        Direction1="-0.2 0.0 -0.2"         Direction2="0.2 0.6 0.2"/>
+        </Directions>
+      </ParticleEmitter>
+
+      <ParticleEmitter  id="fumfoc1"                        MinEmitRate="40.0"             MaxEmitRate="40.0"
+                        Color1="1.0 1.0 1.0 0.0"            Color2="0.0 0.0 0.0 0.0"       MinSize="1.0"        MaxSize="2.0"
+                        Direction1="-0.4 0.2 -0.4"          Direction2="0.4 1.2 0.4"       Life1="7.0"          Life2="7.0"
+                        TexParticle="Data/Textures/texturas particulas/smoke4.dds">
+        <Colors>
+          <Color        time="1.5"        Color1="0.42 0.42 0.42 0.07"       Color2="0.44 0.44 0.44 0.08"/>
+          <Color        time="2.0"        Color1="0.39 0.39 0.39 0.22"       Color2="0.41 0.41 0.41 0.24"/>
+          <Color        time="4.0"        Color1="0.43 0.43 0.43 0.20"       Color2="0.44 0.44 0.44 0.21"/>
+          <Color        time="6.0"        Color1="1.0 1.0 1.0 0.0"           Color2="1.0 1.0 1.0 0.0"/>
+        </Colors>
+
+        <Directions>
+          <Direction    time="1.5"        Direction1="-0.4 0.2 -0.4"         Direction2="0.4 1.2 0.4"/>
+          <Direction    time="3.0"        Direction1="-0.4 0.2 -0.4"         Direction2="0.4 1.2 0.4"/>
+          <Direction    time="4.5"        Direction1="-0.4 0.2 -0.4"         Direction2="0.4 1.2 0.4"/>
+          <Direction    time="6.5"        Direction1="-0.4 0.2 -0.4"         Direction2="0.4 1.2 0.4"/>
+        </Directions>                    
+      </ParticleEmitter>
+   
+
+      <ParticleEmitter  id="bumbollas"                    MinEmitRate="10.0"             MaxEmitRate="25.0"
+                        Color1="1.0 1.0 1.0 0.0"          Color2="1.0 1.0 1.0 0.0"       MinSize="0.1"        MaxSize="1.0"
+                        Direction1="-1.0 0.0 -1.0"        Direction2="1.0 1.0 1.0"       Life1="7.0"          Life2="7.0"
+                        TexParticle="Data/Textures/texturas particulas/soapbubble.dds">
+        <Colors>
+          <Color        time="1.5"        Color1="1.0 1.0 1.0 1.0"          Color2="1.0 1.0 1.0 1.0"/>
+        </Colors> 
+        
+      </ParticleEmitter>
+
+      <ParticleEmitter  id="magia1"                        MinEmitRate="5.0"             MaxEmitRate="10.0"
+                        Color1="0.0 0.0 0.0 0.0"           Color2="0.0 0.0 0.0 0.0"      MinSize="0.3"        MaxSize="0.8"
+                        Direction1="-0.3 0.0 -0.3"         Direction2="0.3 0.6 0.3"      Life1="3.0"          Life2="3.0"
+                        TexParticle="Data/Textures/texturas particulas/Star02.png">
+        <Colors>
+          <Color        time="0.5"        Color1="0.93 1.0 0.86 0.70"     Color2="0.95 1.0 0.88 0.72"/>
+          <Color        time="1.5"        Color1="1.0 1.0 1.0 0.70"       Color2="1.0 1.0 1.0 0.72"/>
+        </Colors>
+      
+      </ParticleEmitter>
+
+      <ParticleEmitter  id="magia2"                        MinEmitRate="15.0"             MaxEmitRate="25.0"
+                        Color1="0.0 0.0 0.0 0.0"           Color2="0.0 0.0 0.0 0.0"       MinSize="0.3"        MaxSize="0.8"
+                        Direction1="-0.4 0.0 -0.4"         Direction2="0.4 0.8 0.4"       Life1="3.0"          Life2="3.0"
+                        TexParticle="Data/Textures/texturas particulas/fairydust.dds">
+        <Colors>
+          <Color        time="0.5"        Color1="0.93 1.0 0.85 0.69"        Color2="0.95 1.0 0.87 0.71"/>
+          <Color        time="1.5"        Color1="0.42 0.71 1.0 1.0"         Color2="0.44 0.73 1.0 1.0"/>
+          <Color        time="2.3"        Color1="0.93 1.0 0.85 0.69"        Color2="0.95 1.0 0.87 0.71"/>
+        </Colors>
+
+      </ParticleEmitter>
+
+  </ParticleEmitters>
+ 
+<!--*************************************************************************************************************************-->
+  <InstanceParticles>
+    
+    <InstanceParticle id="fum"                    type="fumfoc1"                     Position="0.0  1.3  0.0"/>
+    <InstanceParticle id="focPrincipal"           type="foc1"                        Position="0.0  0.0  0.0"/>
+    <InstanceParticle id="bumbollas"              type="bumbollas"                   Position="10.0  0.0  -12.0"/>
+    <InstanceParticle id="magia"                  type="magia1"                      Position="12.0  0.0  13.0"/>
+    <InstanceParticle id="magia2"                 type="magia2"                      Position="12.0  0.0  13.0"/>
+ 
+  </InstanceParticles>
+  
+</Particles>

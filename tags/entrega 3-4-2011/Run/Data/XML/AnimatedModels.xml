@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<animatedModels>
+	<animatedModel name="bot" path="Data/Animated Models/actor.xml"/>
+  <animatedModel name="riggle" path="Data/Animated Models/Riggle/actor.xml"/>
+  <animatedModel name="miner" path="Data/Animated Models/Miner/actor.xml"/>
+</animatedModels>

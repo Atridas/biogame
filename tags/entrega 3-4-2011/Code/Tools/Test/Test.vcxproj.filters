@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="TestProcess.cpp" />
+    <ClCompile Include="mainTest.cpp" />
+    <ClCompile Include="PhysXProcess.cpp" />
+    <ClCompile Include="ParticleProcess.cpp" />
+    <ClCompile Include="SoundTestProcess.cpp" />
+    <ClCompile Include="IAProcess.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Data">
+      <UniqueIdentifier>{7588f414-7ba8-4c90-acf6-522a536d7926}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TestProcess.h" />
+    <ClInclude Include="PhysXProcess.h" />
+    <ClInclude Include="ParticleProcess.h" />
+    <ClInclude Include="SoundTestProcess.h" />
+    <ClInclude Include="IAProcess.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Run\Data\XML\init_test.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\SceneEffects_Test.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\test.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\ScenneEffects_PhysX.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\actions.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\actions_physx.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\init_test_particulas.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\init_test_ia.xml">
+      <Filter>Data</Filter>
+    </None>
+  </ItemGroup>
+</Project>

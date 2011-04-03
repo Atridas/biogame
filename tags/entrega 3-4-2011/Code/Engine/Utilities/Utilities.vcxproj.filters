@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{ee37027d-224a-4da1-90f1-7d6183deccc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ScriptedStateMachine">
+      <UniqueIdentifier>{dce18fb9-8713-45a7-9ed8-7aa372441619}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem">
+      <UniqueIdentifier>{31371ca7-252d-4b80-82a7-15e00a685721}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\ComponentObject3D">
+      <UniqueIdentifier>{70bb2498-4de9-48c7-8ade-33dc159a33fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\ComponentPhysXController">
+      <UniqueIdentifier>{48735945-4a40-47e9-b996-1336c150102f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Grafs">
+      <UniqueIdentifier>{c652030f-faa7-46f0-a5ee-142c49841b03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="A%2a">
+      <UniqueIdentifier>{25923e21-a69a-435b-b8ae-8a286d9042d2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectManager.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEntity.cpp">
+      <Filter>EntitySystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentPhysXController.cpp">
+      <Filter>EntitySystem\ComponentPhysXController</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptedStateMachine.cpp">
+      <Filter>ScriptedStateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="SparseGraph.cpp">
+      <Filter>Grafs</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphDefines.cpp">
+      <Filter>Grafs</Filter>
+    </ClCompile>
+    <ClCompile Include="SearchAStar.cpp">
+      <Filter>A%2a</Filter>
+    </ClCompile>
+    <ClCompile Include="Heuristics.cpp">
+      <Filter>A%2a</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameObjectManager.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ScriptedStateMachine.h">
+      <Filter>ScriptedStateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameEntity.h">
+      <Filter>EntitySystem</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BaseComponent.h">
+      <Filter>EntitySystem</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EntityDefines.h">
+      <Filter>EntitySystem</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentObject3D.h">
+      <Filter>EntitySystem\ComponentObject3D</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentPhysXController.h">
+      <Filter>EntitySystem\ComponentPhysXController</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphNode.h">
+      <Filter>Grafs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphDefines.h">
+      <Filter>Grafs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphEdge.h">
+      <Filter>Grafs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SparseGraph.h">
+      <Filter>Grafs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SearchAStar.h">
+      <Filter>A%2a</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Heuristics.h">
+      <Filter>A%2a</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

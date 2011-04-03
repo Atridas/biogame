@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<shaders>
+  <effects>
+    <!-- effect name="Test Effects" file="Data/Effects/Efectillo2.fx"/ -->
+    <effect name="Default Effects" file="Data/Effects/DefaultTechniques.fx"/>
+    <effect name="Cal3D Effects" file="Data/Effects/Cal3dTechniques.fx"/>
+    <effect name="Noise And Vignetting" file="Data/Effects/NoiseAndVignetting.fx"/>
+    <effect name="Shadows" file="Data/Effects/ShadowTechniques.fx"/>
+    <effect name="Bloom" file="Data/Effects/Bloom.fx"/>
+    <effect name="HDR" file="Data/Effects/HDR.fx"/>
+    <effect name="Glow" file="Data/Effects/Glow.fx"/>
+    <effect name="Blur" file="Data/Effects/Blur.fx"/>
+    <effect name="ZBlur" file="Data/Effects/ZBlur.fx"/>
+    <effect name="Down Samples" file="Data/Effects/Downsampling.fx"/>
+    <effect name="Gas" file="Data/Effects/Gas.fx"/>
+    <!-- effect name=.../-->
+    <!-- effect name=.../-->
+  </effects>
+  <default_techniques>
+    <!--
+    VERTEX_TYPE_GEOMETRY  0x0001
+    VERTEX_TYPE_NORMAL    0x0002
+    VERTEX_TYPE_TANGENT   0x0004
+    VERTEX_TYPE_BITANGENT 0x0008
+    VERTEX_TYPE_TEXTURE1  0x0010
+    VERTEX_TYPE_TEXTURE2  0x0020
+    VERTEX_TYPE_DIFFUSE   0x0040
+    VERTEX_TYPE_BLENDIDX  0x0100
+    VERTEX_TYPE_BLENDWGT  0x0200
+    VERTEX_TYPE_SCREENGEO 0x0400
+    -->
+    
+    
+    <!-- Normal Textured2 -->
+    <!-- default_technique vertex_type="35" technique="ShowNormalsTechnique"/ -->
+    <default_technique vertex_type="35" technique="LightmapNormalmapTechnique"/>
+    <default_technique vertex_type="35" technique="WhiteInstancedTechnique" instanced="true"/>
+    
+    <!-- Textured2-->
+    <!-- default_technique vertex_type="33" technique="LightmapTechnique"/ -->
+    <default_technique vertex_type="33" technique="WhiteTechnique"/>
+    <default_technique vertex_type="33" technique="WhiteInstancedTechnique" instanced="true"/>
+
+    <!-- Normal Diffused -->
+    <!-- default_technique vertex_type="67" technique="NormalDiffusedTechnique"/ -->
+    <default_technique vertex_type="67" technique="NormalDiffusedTechnique"/>
+    <default_technique vertex_type="67" technique="WhiteInstancedTechnique" instanced="true"/>
+    
+    <!-- Tangent-Binormal blabla Textured -->
+    <!--default_technique vertex_type="31" technique="TangentBinormalNormalTexturedTechnique"/-->
+    <default_technique vertex_type="31" technique="TangentBinormalNormalTexturedTechnique"/>
+    <default_technique vertex_type="31" technique="WhiteInstancedTechnique" instanced="true"/>
+    
+    <!-- Normal Textured-->
+    <!--default_technique vertex_type="19" technique="NormalTexturedTechnique"/-->
+    <default_technique vertex_type="19" technique="NormalTexturedTechnique"/>
+    <default_technique vertex_type="19" technique="WhiteInstancedTechnique" instanced="true"/>
+
+    <!-- Tangent-Binormal blabla Textured 2 -->
+    <!-- default_technique vertex_type="47" technique="NormalTexturedTechnique"/ -->
+    <default_technique vertex_type="47" technique="LightmapTechnique"/>
+    <default_technique vertex_type="47" technique="WhiteInstancedTechnique" instanced="true"/>
+
+
+    <!-- default_technique vertex_type="787" technique="Cal3DTechnique"/ -->
+    <default_technique vertex_type="787" technique="Cal3DTechnique"/>
+    <default_technique vertex_type="787" technique="WhiteInstancedTechnique" instanced="true"/>
+    
+    <!-- cal3d amb bitangents i tangents -->
+    <!-- default_technique vertex_type="799" technique="Cal3DTechnique"/ -->
+    <default_technique vertex_type="799" technique="Cal3DNormalMapTechnique"/>
+    <default_technique vertex_type="799" technique="WhiteInstancedTechnique" instanced="true"/>
+  </default_techniques>
+  <techniques>
+    <!-- technique name=.../-->
+    <!-- technique name="NormalTexturedTechnique" effect="Test Effects" use_world_matrix="true"
+               use_world_view_matrix="true" use_camera_position="true" use_world_view_projection_matrix="true"
+               />
+    <technique name="NormalTextured2Technique" effect="Test Effects" use_world_matrix="true"
+               use_world_view_matrix="true" use_camera_position="true" use_world_view_projection_matrix="true"
+               />
+    <technique name="NormalDiffusedTechnique" effect="Test Effects" use_world_matrix="true"
+               use_world_view_matrix="true" use_camera_position="true" use_world_view_projection_matrix="true"
+               /-->
+
+    <technique name="WhiteTechnique" effect="Default Effects" use_world_view_projection_matrix="true" />
+    <technique name="NoTechnique" effect="Default Effects" />
+    <technique name="ShowNormalsTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
+    <technique name="Cal3dShowNormalsTechnique" effect="Cal3D Effects" use_world_matrix="true" use_world_view_projection_matrix="true" animated="true"/>
+    <technique name="ShowUVCoordsTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
+    <technique name="ShowTangentTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
+    <technique name="ShowBitangentTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
+
+    <technique name="WhiteInstancedTechnique" effect="Default Effects" use_world_matrix="true" use_view_projection_matrix="true" instanced="true" />
+    
+    <technique name="LightmapTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true"
+               use_lights="true" num_of_lights="4" use_camera_position="true"
+               use_view_to_light_projection_matrix="true" use_world_view_matrix="true"/>
+    <technique name="ShowNormalmapTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
+    <technique name="ShowFlatNormalmapTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true" />
+    <technique name="NormalTexturedTechnique"                effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true"
+               use_lights="true" num_of_lights="4" use_camera_position="true"
+               use_view_to_light_projection_matrix="true" use_world_view_matrix="true"/>
+    <technique name="NormalDiffusedTechnique"                effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true"
+               use_lights="true" num_of_lights="4" use_camera_position="true"
+               use_view_to_light_projection_matrix="true" use_world_view_matrix="true"/>
+    <technique name="TangentBinormalNormalTexturedTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true"
+               use_lights="true" num_of_lights="4" use_camera_position="true"
+               use_view_to_light_projection_matrix="true" use_world_view_matrix="true"/>
+    <technique name="LightmapNormalmapTechnique" effect="Default Effects" use_world_matrix="true" use_world_view_projection_matrix="true"
+               use_lights="true" num_of_lights="4" use_camera_position="true"
+               use_view_to_light_projection_matrix="true" use_world_view_matrix="true"/>
+    
+    <technique name="Cal3DTechnique" animated="true" effect="Cal3D Effects" use_world_matrix="true" use_world_view_projection_matrix="true"
+               use_lights="true" num_of_lights="4" use_camera_position="true"
+               use_view_to_light_projection_matrix="true" use_world_view_matrix="true" />
+    
+    <technique name="Cal3DNormalMapTechnique" animated="true" effect="Cal3D Effects" use_world_matrix="true" use_world_view_projection_matrix="true"
+               use_lights="true" num_of_lights="4" use_camera_position="true" 
+               use_view_to_light_projection_matrix="true" use_world_view_matrix="true" />
+
+    <!-- SCENE EFFECTS -->
+    <technique name="RenderNoiseAndVignettingTechnique" effect="Noise And Vignetting" use_time="true"/>
+    <technique name="GasTechnique" effect="Gas" use_time="true"/>
+    <!--<technique name="BloomTechnique" effect="Bloom"/> -->
+    <technique name="HDRTechnique" effect="HDR"/>
+    <technique name="PostProcessGlowTechnique"  effect="Glow"/>
+    <technique name="PostProcessBlurTechnique"  effect="Blur"/>
+
+    <technique name="DownSample4xTechnique" effect="Down Samples" use_texture_size="true"/>
+
+    <technique name="HoritzontalBloomTechnique" effect="Bloom" use_texture_size="true"/>
+    <technique name="VerticalBloomTechnique" effect="Bloom" use_texture_size="true"/>
+    <technique name="PostProcessBloomTechnique" effect="Bloom"/>
+
+    <technique name="RenderShadowTechnique" effect="Shadows" use_world_view_projection_matrix="true"/>
+    <technique name="Cal3DTechniqueShadow"  effect="Shadows" use_world_view_projection_matrix="true" animated="true"/>
+
+    <technique name="PreZBlurTechnique" effect="ZBlur" use_world_view_matrix="true" use_proj_matrix="true"/>
+    <technique name="AnimatedPreZBlurTechnique"  effect="ZBlur" use_world_view_matrix="true" use_proj_matrix="true" animated="true"/>
+    <technique name="PostZBlurTechnique"  effect="ZBlur" use_texture_size="true" use_poisson_blur_kernel="true"/>
+
+    <technique name="RenderGlowTechnique" effect="Glow" use_world_view_projection_matrix="true" glow_active="true"/>
+    <technique name="Cal3DGlowTechnique"  effect="Glow" use_world_view_projection_matrix="true" glow_active="true" animated="true"/>
+
+
+    
+  </techniques>
+</shaders>

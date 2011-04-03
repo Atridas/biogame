@@ -1,0 +1,242 @@
+#include "LightManager.h"
+#include "RenderManager.h"
+#include <XML/XMLTreeNode.h>
+#include "OmniLight.h"
+#include "SpotLight.h"
+#include "DirectionalLight.h"
+
+bool CLightManager::Load(const string& _szFileName)
+{
+  LOGGER->AddNewLog(ELL_INFORMATION, "CLightManager::Load \"%s\"", _szFileName.c_str());
+
+  m_szFileName = _szFileName;
+
+  CXMLTreeNode l_XMLLights;
+  if(!l_XMLLights.LoadFile(_szFileName.c_str()))
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"CLightManager:: No s'ha trobat el XML \"%s\"", _szFileName.c_str());
+    SetOk(false);
+    return false;
+  }
+
+  m_vAmbientLight = l_XMLLights.GetVect3fProperty("ambient",Vect3f(0.3f));
+
+  int l_iNumMeshesLights = l_XMLLights.GetNumChildren();
+  for(int i = 0; i < l_iNumMeshesLights; i++)
+  {
+    CXMLTreeNode l_XMLLight = l_XMLLights(i);
+    if(l_XMLLight.IsComment()) {
+      continue;
+    }
+
+    string l_szName = "";
+    string l_szType = "";
+
+    l_szName = l_XMLLight.GetPszISOProperty("name" ,"");
+    l_szType = l_XMLLight.GetPszISOProperty("type" ,"");
+
+    if(l_szType.compare("omni") == 0)
+    {
+      COmniLight* l_pOmniLight = new COmniLight(l_szName);
+      l_pOmniLight->Init(l_XMLLight);
+      AddResource(l_pOmniLight->GetName(),l_pOmniLight);
+
+    }else if(l_szType.compare("directional") == 0)
+    {
+      CDirectionalLight* l_pDirectionalLight = new CDirectionalLight(l_szName);
+      l_pDirectionalLight->Init(l_XMLLight);
+      AddResource(l_pDirectionalLight->GetName(),l_pDirectionalLight);
+
+    }else if(l_szType.compare("spot") == 0)
+    {
+      CSpotLight* l_pSpotLight = new CSpotLight(l_szName);
+      l_pSpotLight->Init(l_XMLLight);
+      AddResource(l_pSpotLight->GetName(),l_pSpotLight);
+    }else{
+      LOGGER->AddNewLog(ELL_WARNING,"CLightManager:: Unknown light type: \"%s\".", l_szType.c_str());
+    }
+
+  }
+  SetOk(true);
+  return IsOk();
+}
+
+CDirectionalLight* CLightManager::CreateDirectionalLight(string _szName,
+                                          Vect3f& _vPosition,
+                                          Vect3f& _vDirection,
+                                          CColor& _colColor,
+                                          float _fStartRangeAtt,
+                                          float _fEndRangeAtt,
+                                          bool _bRenderShadows)
+{
+  CLight* l_pLight = GetResource(_szName);
+  CDirectionalLight* l_pDirectionalLight = 0;
+
+  if(!l_pLight)
+  {
+    l_pDirectionalLight = new CDirectionalLight(_szName);
+
+    l_pDirectionalLight->SetDirection(_vDirection);
+    l_pDirectionalLight->SetPosition(_vPosition);
+    l_pDirectionalLight->SetColor(_colColor);
+    l_pDirectionalLight->SetStartRangeAttenuation(_fStartRangeAtt);
+    l_pDirectionalLight->SetEndRangeAttenuation(_fEndRangeAtt);
+    l_pDirectionalLight->SetRenderShadows(_bRenderShadows);
+    AddResource(l_pDirectionalLight->GetName(),l_pDirectionalLight);
+    
+  }else{
+
+    if(l_pLight->GetType() != CLight::DIRECTIONAL)
+      return 0;
+
+    l_pDirectionalLight = (CDirectionalLight*)l_pLight;
+
+    l_pDirectionalLight->SetDirection(_vDirection);
+    l_pDirectionalLight->SetPosition(_vPosition);
+    l_pDirectionalLight->SetColor(_colColor);
+    l_pDirectionalLight->SetStartRangeAttenuation(_fStartRangeAtt);
+    l_pDirectionalLight->SetEndRangeAttenuation(_fEndRangeAtt);
+    l_pDirectionalLight->SetRenderShadows(_bRenderShadows); 
+  }
+  
+  return l_pDirectionalLight;
+}
+
+CSpotLight* CLightManager::CreateSpotLight(string _szName,
+                                            Vect3f& _vPosition,
+                                            Vect3f& _vDirection,
+                                            CColor& _colColor,
+                                            float _fStartRangeAtt,
+                                            float _fEndRangeAtt,
+                                            float _fAngle,
+                                            float _fFallOff,
+                                            bool _bRenderShadows)
+ {
+
+  CLight* l_pLight = GetResource(_szName);
+
+  CSpotLight* l_pSpotLight = 0;
+
+  if(!l_pLight)
+  {
+    l_pSpotLight = new CSpotLight(_szName);
+
+    l_pSpotLight->SetDirection(_vDirection);
+    l_pSpotLight->SetPosition(_vPosition);
+    l_pSpotLight->SetColor(_colColor);
+    l_pSpotLight->SetStartRangeAttenuation(_fStartRangeAtt);
+    l_pSpotLight->SetEndRangeAttenuation(_fEndRangeAtt);
+    l_pSpotLight->SetRenderShadows(_bRenderShadows);
+    l_pSpotLight->SetAngle(_fAngle);
+    l_pSpotLight->SetFallOff(_fFallOff);
+    AddResource(l_pSpotLight->GetName(),l_pSpotLight);
+
+  }else{
+
+    if(l_pLight->GetType() != CLight::SPOT)
+      return 0;
+
+    l_pSpotLight = (CSpotLight*)l_pLight;
+
+    l_pSpotLight->SetDirection(_vDirection);
+    l_pSpotLight->SetPosition(_vPosition);
+    l_pSpotLight->SetColor(_colColor);
+    l_pSpotLight->SetStartRangeAttenuation(_fStartRangeAtt);
+    l_pSpotLight->SetEndRangeAttenuation(_fEndRangeAtt);
+    l_pSpotLight->SetRenderShadows(_bRenderShadows);
+    l_pSpotLight->SetAngle(_fAngle);
+    l_pSpotLight->SetFallOff(_fFallOff);
+  }
+
+  return l_pSpotLight;
+}
+
+COmniLight* CLightManager::CreateOmniLight(string _szName,
+                                          Vect3f& _vPosition,
+                                          CColor& _colColor,
+                                          float _fStartRangeAtt,
+                                          float _fEndRangeAtt)
+{
+  CLight* l_pLight = GetResource(_szName);
+
+  if(!l_pLight)
+  {
+    COmniLight* l_pOmniLight = new COmniLight(_szName);
+
+    l_pOmniLight->SetPosition(_vPosition);
+    l_pOmniLight->SetColor(_colColor);
+    l_pOmniLight->SetStartRangeAttenuation(_fStartRangeAtt);
+    l_pOmniLight->SetEndRangeAttenuation(_fEndRangeAtt);
+    l_pOmniLight->SetRenderShadows(false);
+    AddResource(l_pOmniLight->GetName(),l_pOmniLight);
+    return l_pOmniLight;
+  }
+
+  return 0;
+}
+
+void CLightManager::Render(CRenderManager *_pRM) const
+{
+  TMapResource::const_iterator l_it = m_Resources.cbegin();
+  TMapResource::const_iterator l_end = m_Resources.cend();
+  for(;l_it != l_end; ++l_it)
+  {
+    l_it->second->Render(_pRM);
+  }
+}
+
+
+CLight* CLightManager::GetLight(int _i) const
+{
+  TMapResource::const_iterator l_it = m_Resources.cbegin();
+  TMapResource::const_iterator l_end = m_Resources.cend();
+
+  if(l_it == l_end)
+  {
+    return 0;
+  }
+  for(int i = 0; i<_i; ++i)
+  {
+    ++l_it;
+    if(l_it == l_end)
+    {
+      return 0;
+    }
+  }
+  return l_it->second;
+}
+
+vector<CLight*> CLightManager::GetLights(int _num) const
+{
+  vector<CLight*> l_vOut;
+  TMapResource::const_iterator l_it = m_Resources.cbegin();
+  TMapResource::const_iterator l_end = m_Resources.cend();
+
+  if(l_it == l_end)
+  {
+    return l_vOut;
+  }
+  for(int i = 0; i<_num; ++i)
+  {
+    l_vOut.push_back(l_it->second);
+    ++l_it;
+    if(l_it == l_end)
+    {
+      return l_vOut;
+    }
+  }
+  return l_vOut;
+}
+
+
+void CLightManager::SetLightsEnabled(bool _bEnabled)
+{
+  TMapResource::const_iterator l_it = m_Resources.cbegin();
+  TMapResource::const_iterator l_end = m_Resources.cend();
+
+  for(;l_it != l_end; ++l_it)
+  {
+    l_it->second->SetActive(_bEnabled);
+  }
+}
+

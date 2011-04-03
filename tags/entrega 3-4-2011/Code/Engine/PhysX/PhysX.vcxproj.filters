@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Joints">
+      <UniqueIdentifier>{0b034c8b-797f-4541-951b-908e49eb197a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{7405db9e-1202-45eb-9714-6dbee8b6964c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor">
+      <UniqueIdentifier>{1d72982c-e2b5-4d85-88ff-cc55f9591c70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PhysicController">
+      <UniqueIdentifier>{8161a39e-4cc0-486e-8b4c-06e6161122aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CookingMesh">
+      <UniqueIdentifier>{f6f2a5aa-8f97-484c-9ac4-e98965f15ea3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PhysicMaterial">
+      <UniqueIdentifier>{cf07d87f-2df9-45be-bae7-522cab4ca4e8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="PhysicSphericalJoint.cpp">
+      <Filter>Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicFixedJoint.cpp">
+      <Filter>Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicRevoluteJoint.cpp">
+      <Filter>Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicsManager.cpp" />
+    <ClCompile Include="PhysicASELoader.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicStream.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicUserAllocator.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicActor.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicController.cpp">
+      <Filter>PhysicController</Filter>
+    </ClCompile>
+    <ClCompile Include="Jump.cpp">
+      <Filter>PhysicController</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicCookingMesh.cpp">
+      <Filter>CookingMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicTriggerReport.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysicMaterial.cpp">
+      <Filter>PhysicMaterial</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\PhysicSphericalJoint.h">
+      <Filter>Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PhysicFixedJoint.h">
+      <Filter>Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PhysicRevoluteJoint.h">
+      <Filter>Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PhysicsManager.h" />
+    <ClInclude Include="include\PhysicASELoader.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PhysicStream.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PhysicUserAllocator.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PhysicActor.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PhysicController.h">
+      <Filter>PhysicController</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Jump.h">
+      <Filter>PhysicController</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PhysicCookingMesh.h">
+      <Filter>CookingMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PhysicTriggerReport.h">
+      <Filter>Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PhysicMaterial.h">
+      <Filter>PhysicMaterial</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
