@@ -42,6 +42,7 @@
 #define COLISION_SCENE_MASK 2
 #define ALTURA_CONTROLLER 1.5f
 #define RADIUS_CONTROLLER 0.3f
+#define ALTURA_TOTAL ((ALTURA_CONTROLLER+2*RADIUS_CONTROLLER)*0.5f + 0.1f)
 
 #define COLISIONABLE_MASK ((1<<COLISION_SCENE_MASK) || (1<<COLISION_STATIC_MASK) || (1<<COLISION_SOLID_MASK))
 
@@ -98,7 +99,7 @@ bool CPhysXProcess::Init()
   CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
   
   m_pObject = new CObject3D();
-  m_fVelocity = 1;
+  m_fVelocity = 2;
   
   m_pObject->SetPosition(Vect3f(-6,1.7f,0));
 
@@ -233,7 +234,7 @@ bool CPhysXProcess::Init()
   l_pPhysManager->AddPhysicActor(g_pPEscala);
   
 
-  g_pPhysXController = new CPhysicController(0.3f,ALTURA_CONTROLLER,10.0f,0.1f,0.5f,COLISION_SOLID_MASK,g_pUserDataController,Vect3f(-7.0f,2.2f,-4.0f));
+  g_pPhysXController = new CPhysicController(RADIUS_CONTROLLER,ALTURA_CONTROLLER,10.0f,0.1f,0.5f,COLISION_SOLID_MASK,g_pUserDataController,Vect3f(-7.0f,2.2f,-4.0f));
   g_pPhysXController->SetYaw(-90);
   l_pPhysManager->AddPhysicController(g_pPhysXController);
 
@@ -633,35 +634,30 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
 
   if(strcmp(_pcAction, "Run") == 0)
   {
-    m_fVelocity = 10;
+    m_fVelocity = 7;
     
     return true;
   }
 
   if(strcmp(_pcAction, "Walk") == 0)
   {
-    m_fVelocity = 1;
+    m_fVelocity = 2;
     
     return true;
   }
 
   if(strcmp(_pcAction, "MoveFwd") == 0)
   {
-    /*Vect3f l_vPos = m_pObject->GetPosition();
-    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
-    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
-    m_pObject->SetPosition(l_vPos);*/
-
     Vect3f l_vDir = m_pCamera->GetDirection();
 
-    float l_fAltura = (ALTURA_CONTROLLER+2*RADIUS_CONTROLLER)*0.5;
+    
     l_vDir.Normalize();
-    g_pPhysXController->Move(Vect3f(l_vDir.x,0.0f,l_vDir.z)*0.05f*m_fVelocity,_fDeltaSeconds);
+    g_pPhysXController->Move(Vect3f(l_vDir.x,0.0f,l_vDir.z)*_fDeltaSeconds*m_fVelocity,_fDeltaSeconds);
     Vect3f l_ControllerPos = g_pPhysXController->GetPosition();
     m_pObject->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y,l_ControllerPos.z));
     if (g_pCharacter)
     {
-      g_pCharacter->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y-l_fAltura,l_ControllerPos.z));
+      g_pCharacter->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y-ALTURA_TOTAL,l_ControllerPos.z));
       if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
 	    {
 		    g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
@@ -679,21 +675,16 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
 
  if(strcmp(_pcAction, "MoveBack") == 0)
   {
-    /*Vect3f l_vPos = m_pObject->GetPosition();
-    l_vPos.x = l_vPos.x - cos(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
-    l_vPos.z = l_vPos.z - sin(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
-    m_pObject->SetPosition(l_vPos);*/
-
     Vect3f l_vDir = m_pCamera->GetDirection();
 
-    float l_fAltura = (ALTURA_CONTROLLER+2*RADIUS_CONTROLLER)*0.5;
+    
     l_vDir.Normalize();
-    g_pPhysXController->Move(Vect3f(-l_vDir.x,0.0f,-l_vDir.z)*0.05f*m_fVelocity,_fDeltaSeconds);
+    g_pPhysXController->Move(Vect3f(-l_vDir.x,0.0f,-l_vDir.z)*_fDeltaSeconds*m_fVelocity,_fDeltaSeconds);
     Vect3f l_ControllerPos = g_pPhysXController->GetPosition();
     m_pObject->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y,l_ControllerPos.z));
     if (g_pCharacter)
     {
-      g_pCharacter->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y-l_fAltura,l_ControllerPos.z));
+      g_pCharacter->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y-ALTURA_TOTAL,l_ControllerPos.z));
       if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
 	    {
 		    g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
@@ -716,14 +707,13 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     l_vDir.z = sin(m_pObject->GetYaw()+FLOAT_PI_VALUE/2);
     l_vDir.y = 0.0f;
  
-    float l_fAltura = (ALTURA_CONTROLLER+2*RADIUS_CONTROLLER)*0.5;
     l_vDir.Normalize();
-    g_pPhysXController->Move(Vect3f(l_vDir.x,0.0f,l_vDir.z)*0.05f*m_fVelocity,_fDeltaSeconds);
+    g_pPhysXController->Move(Vect3f(l_vDir.x,0.0f,l_vDir.z)*_fDeltaSeconds*m_fVelocity,_fDeltaSeconds);
     Vect3f l_ControllerPos = g_pPhysXController->GetPosition();
     m_pObject->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y,l_ControllerPos.z));
     if (g_pCharacter)
     {
-      g_pCharacter->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y-l_fAltura,l_ControllerPos.z));
+      g_pCharacter->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y-ALTURA_TOTAL,l_ControllerPos.z));
       if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
 	    {
 		    g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
@@ -747,14 +737,13 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     l_vDir.z = sin(m_pObject->GetYaw()+FLOAT_PI_VALUE/2);
     l_vDir.y = 0.0f;
 
-    float l_fAltura = (ALTURA_CONTROLLER+2*RADIUS_CONTROLLER)*0.5;
     l_vDir.Normalize();
-    g_pPhysXController->Move(Vect3f(-l_vDir.x,0.0f,-l_vDir.z)*0.05f*m_fVelocity,_fDeltaSeconds);
+    g_pPhysXController->Move(Vect3f(-l_vDir.x,0.0f,-l_vDir.z)*_fDeltaSeconds*m_fVelocity,_fDeltaSeconds);
     Vect3f l_ControllerPos = g_pPhysXController->GetPosition();
     m_pObject->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y,l_ControllerPos.z));
     if (g_pCharacter)
     {
-      g_pCharacter->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y-l_fAltura,l_ControllerPos.z));
+      g_pCharacter->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y-ALTURA_TOTAL,l_ControllerPos.z));
       if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
 	    {
 		    g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
