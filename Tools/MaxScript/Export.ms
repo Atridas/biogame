@@ -69,7 +69,7 @@ function CheckMesh _object _checkMaterial =
 					(
 						if OpenBitmap l_material[i].diffuseMap.filename == undefined then
 						(
-							format "No es troba la textura difusa del multimaterial % de l'objecte %." i l_name to:l_aux
+							format "No es troba la textura difusa \"%\" del multimaterial % de l'objecte %." l_material[i].diffuseMap.filename i l_name to:l_aux
 							return l_aux
 						)
 					)				
@@ -88,7 +88,7 @@ function CheckMesh _object _checkMaterial =
 					(
 						if OpenBitmap l_material[i].bumpMap.filename == undefined then
 						(
-							format "No es troba la textura bump del multimaterial % de l'objecte %." i l_name to:l_aux
+							format "No es troba la textura bump \"%\" del multimaterial % de l'objecte %." l_material[i].bumpMap.filename i l_name to:l_aux
 							return l_aux
 						)
 					)				
@@ -107,7 +107,7 @@ function CheckMesh _object _checkMaterial =
 					(
 						if OpenBitmap l_material[i].selfIllumMap.filename == undefined then
 						(
-							format "No es troba la textura d'auto il·luminació del multimaterial % de l'objecte %." i l_name to:l_aux
+							format "No es troba la textura d'auto il·luminació \"%\" del multimaterial % de l'objecte %." l_material[i].selfIllumMap.filename i l_name to:l_aux
 							return l_aux
 						)
 					)				
@@ -126,7 +126,7 @@ function CheckMesh _object _checkMaterial =
 					(
 						if OpenBitmap l_material[i].reflectionMap.filename == undefined then
 						(
-							format "No es troba la textura de reflexió del multimaterial % de l'objecte %." i l_name to:l_aux
+							format "No es troba la textura de reflexió \"%\" del multimaterial % de l'objecte %." l_material[i].reflectionMap.filename i l_name to:l_aux
 							return l_aux
 						)
 					)				
@@ -145,7 +145,7 @@ function CheckMesh _object _checkMaterial =
 					(
 						if OpenBitmap l_material[i].filterMap.filename == undefined then
 						(
-							format "No es troba la textura de filtre del multimaterial % de l'objecte %." i l_name to:l_aux
+							format "No es troba la textura de filtre \"%\" del multimaterial % de l'objecte %." l_material[i].filterMap.filename i l_name to:l_aux
 							return l_aux
 						)
 					)				
@@ -171,7 +171,7 @@ function CheckMesh _object _checkMaterial =
 				(
 					if OpenBitmap l_material.diffuseMap.filename == undefined then
 					(
-						return "No es troba la textura difusa de l'objecte " + l_name + "."
+						return "No es troba la textura difusa \"" + l_material.diffuseMap.filename + "\" de l'objecte " + l_name + "."
 					)
 				)				
 			)
@@ -188,7 +188,7 @@ function CheckMesh _object _checkMaterial =
 				(
 					if OpenBitmap l_material.bumpMap.filename == undefined then
 					(
-						return "No es troba la textura bump de l'objecte " + l_name + "."
+						return "No es troba la textura bump \"" + l_material.bumpMap.filename + "\" de l'objecte " + l_name + "."
 					)
 				)				
 			)
@@ -205,7 +205,7 @@ function CheckMesh _object _checkMaterial =
 				(
 					if OpenBitmap l_material.selfIllumMap.filename == undefined then
 					(
-						return "No es troba la textura d'auto il·luminació de l'objecte " + l_name + "."
+						return "No es troba la textura d'auto il·luminació \"" + l_material.selfIllumMap.filename + "\" de l'objecte " + l_name + "."
 					)
 				)				
 			)
@@ -222,7 +222,7 @@ function CheckMesh _object _checkMaterial =
 				(
 					if OpenBitmap l_material.reflectionMap.filename == undefined then
 					(
-						return "No es troba la textura de reflexió de l'objecte " + l_name + "."
+						return "No es troba la textura de reflexió \"" + l_material.reflectionMap.filename + "\" de l'objecte " + l_name + "."
 					)
 				)				
 			)
@@ -239,7 +239,7 @@ function CheckMesh _object _checkMaterial =
 				(
 					if OpenBitmap l_material.filterMap.filename == undefined then
 					(
-						return "No es troba la textura de filtre de l'objecte " + l_name + "."
+						return "No es troba la textura de filtre \"" + l_material.filterMap.filename + "\" de l'objecte " + l_name + "."
 					)
 				)				
 			)
@@ -359,26 +359,26 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 			local l_vertexType2 = GetVertexType l_material[i]
 			append l_vertexType l_vertexType2
 						
-			if ((bit.and l_vertexType2 VERTEX_TYPE_TEXTURE2) != 0) and ((meshop.getNumMaps _object) < 3) then
-			(
-				local l_aux = "" as stringStream
-				format "L'objecte % amb submaterial % no té segones coordenades de textura." _object.name i to:l_aux
-				ShowError l_aux
-				delete _object
-				
-				fflush l_file
-				fclose l_file
-				deleteFile _filename
-				
-				return false
-			)
-			
 			l_materialInfo = MATERIAL_INFO_VERTEXTYPE
 			l_materialInfo = bit.or l_materialInfo MATERIAL_INFO_TEXTURETYPE
 			
-			
 			if Member l_objectMaterials i then
 			(
+				--comprovar que el material tingui les coordenades necessaries
+				if ((bit.and l_vertexType2 VERTEX_TYPE_TEXTURE2) != 0) and ((meshop.getNumMaps _object) < 3) then
+				(
+					local l_aux = "" as stringStream
+					format "L'objecte % amb submaterial % té lightmap activat sense segones coordenades de textura." _object.name i to:l_aux
+					ShowError l_aux
+					delete _object
+					
+					fflush l_file
+					fclose l_file
+					deleteFile _filename
+					
+					return false
+				)
+				
 				format "Exportant material: % amb Mat. info % i vèrtex %\n" i l_materialInfo l_vertexType2
 		
 				WriteShort l_file l_materialInfo #unsigned
@@ -400,7 +400,7 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 		if ((bit.and l_vertexType2 VERTEX_TYPE_TEXTURE2) != 0) and ((meshop.getNumMaps _object) < 3) then
 		(
 			local l_aux = "" as stringStream
-			format "L'objecte % no té segones coordenades de textura." _object.name to:l_aux
+			format "L'objecte % té lightmap activat sense segones coordenades de textura." _object.name to:l_aux
 			ShowError l_aux
 			delete _object
 			
