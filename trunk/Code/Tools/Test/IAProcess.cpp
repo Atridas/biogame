@@ -52,7 +52,7 @@ bool CIAProcess::Init()
 
 void CIAProcess::Release()
 {
-  LOGGER->AddNewLog(ELL_INFORMATION,"CSoundTestProcess::Release");
+  LOGGER->AddNewLog(ELL_INFORMATION,"CIAProcess::Release");
 
   CHECKED_DELETE(m_pObjectCamera)
   CHECKED_DELETE(m_pTargetObject)

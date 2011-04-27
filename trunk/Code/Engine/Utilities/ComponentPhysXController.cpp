@@ -31,14 +31,24 @@ bool CComponentPhysXController::Init(CGameEntity *_pEntity,
                                   m_pObject3D->GetPosition());
   
   m_pPhysXController->SetPitch(m_pObject3D->GetPitch());
-  m_pPhysXController->SetYaw(m_pObject3D->GetYaw());
-  m_pPhysXController->SetRoll(m_pObject3D->GetRoll());
+  m_pPhysXController->SetYaw  (m_pObject3D->GetYaw()  );
+  m_pPhysXController->SetRoll (m_pObject3D->GetRoll() );
 
   CORE->GetPhysicsManager()->AddPhysicController(m_pPhysXController);
 
   SetOk(true);
   return IsOk();
 }
+
+void CComponentPhysXController::Update(float _fDeltaTime)
+{
+  Vect3f l_vMovementVector = m_pObject3D->GetPosition() - m_pPhysXController->GetPosition();
+
+  m_pPhysXController->Move(l_vMovementVector, _fDeltaTime);
+  Vect3f l_ControllerPos = m_pPhysXController->GetPosition();
+  m_pObject3D->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y,l_ControllerPos.z));
+}
+
 
 void CComponentPhysXController::Release(void)
 {
