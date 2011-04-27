@@ -36,7 +36,7 @@ public:
   void ReceiveEvent(const SEvent& _Event) {};
 
   //updates
-  virtual void Update(float deltaTime) {};
+  virtual void Update(float _fDeltaTime) {};
 
 protected:
   CBaseComponent(EComponentType _Type):m_Type(_Type), m_pEntity(0){};

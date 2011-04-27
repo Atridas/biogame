@@ -29,6 +29,8 @@ public:
 		        float stepOffset, uint32 collisionGroups 
             );
 
+  void Update(float _fDeltaTime);
+
   virtual ~CComponentPhysXController(void) {Done();};
 
 protected:
