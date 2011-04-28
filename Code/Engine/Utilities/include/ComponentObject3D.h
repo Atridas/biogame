@@ -11,9 +11,13 @@ class CComponentObject3D :
   public CObject3D
 {
 public:
-  CComponentObject3D(void);
+  CComponentObject3D(void) {};
   virtual ~CComponentObject3D(void) {Done();};
+  
 
+  virtual EComponentType GetType() {return ECT_OBJECT_3D;};
+  
+  bool Init(CGameEntity *_pEntity) { assert(_pEntity->IsOk()); SetEntity(_pEntity); SetOk(true); return IsOk();};
 
 
   void Release(){};

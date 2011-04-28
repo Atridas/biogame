@@ -23,14 +23,9 @@ class CBaseComponent:
   public CBaseControl
 {
 public:
-
-  enum EComponentType {
-    ECT_PHISX_CONTROLLER,
-    ECT_OBJECT_3D
-  };
   
-  EComponentType GetType() {return m_Type;};
-  bool IsType(EComponentType _Type) {return m_Type == _Type;};
+  virtual EComponentType GetType() = 0; //{return m_Type;};
+  bool IsType(EComponentType _Type) {return GetType() == _Type;};
   CGameEntity* GetEntity() const {return m_pEntity;};
   
   void ReceiveEvent(const SEvent& _Event) {};
@@ -39,11 +34,11 @@ public:
   virtual void Update(float _fDeltaTime) {};
 
 protected:
-  CBaseComponent(EComponentType _Type):m_Type(_Type), m_pEntity(0){};
-  void SetEntity(CGameEntity* _pEntity) {m_pEntity = _pEntity;};
+  CBaseComponent():m_pEntity(0) {};
+  void SetEntity(CGameEntity* _pEntity);
 
 private:
-  EComponentType m_Type;
+  //EComponentType m_Type;
   CGameEntity*   m_pEntity;
 };
 

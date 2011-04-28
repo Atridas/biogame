@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="EntityProcess.cpp" />
     <ClCompile Include="IAProcess.cpp" />
     <ClCompile Include="mainTest.cpp" />
     <ClCompile Include="ParticleProcess.cpp" />
@@ -19,6 +20,7 @@
     <ClCompile Include="TestProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EntityProcess.h" />
     <ClInclude Include="IAProcess.h" />
     <ClInclude Include="ParticleProcess.h" />
     <ClInclude Include="PhysXProcess.h" />

@@ -18,11 +18,12 @@ public:
 
 
   CComponentPhysXController():
-      CBaseComponent(ECT_PHISX_CONTROLLER),
       m_pObject3D(0),
       m_pPhysXController(0),
       m_pPhisXData(0)
       {};
+
+  virtual EComponentType GetType() {return ECT_PHISX_CONTROLLER;};
 
   bool Init(CGameEntity *_Entity,
             float radius, float height, float slope, float skinwidth, 
