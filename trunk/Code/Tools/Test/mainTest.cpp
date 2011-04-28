@@ -10,6 +10,7 @@
 #include "ParticleProcess.h"
 #include "SoundTestProcess.h"
 #include "IAProcess.h"
+#include "EntityProcess.h"
 
 #if defined( _DEBUG )  
 #include "Utils/MemLeaks.h" 
@@ -92,17 +93,21 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
     CParticleProcess* l_Particle = new CParticleProcess();
     CSoundTestProcess* l_pSoundTestProcess = new CSoundTestProcess();
     CIAProcess* l_pIAProcess = new CIAProcess();
+    CEntityProcess* l_pEntityProcess = new CEntityProcess();
+
     l_Engine.AddProcess(l_Test);
     l_Engine.AddProcess(l_PhysX);
     l_Engine.AddProcess(l_Particle);
     l_Engine.AddProcess(l_pSoundTestProcess);
     l_Engine.AddProcess(l_pIAProcess);
-    
+    l_Engine.AddProcess(l_pEntityProcess);
+
     //l_Engine.ActivateProcess(l_Test);
     //l_Engine.ActivateProcess(l_pSoundTestProcess);
-    l_Engine.ActivateProcess(l_PhysX);
+    //l_Engine.ActivateProcess(l_PhysX);
     //l_Engine.ActivateProcess(l_Particle);
     //l_Engine.ActivateProcess(l_pIAProcess);
+    l_Engine.ActivateProcess(l_pEntityProcess);
 
 
     l_Engine.Init(l_InitParams, hWnd);

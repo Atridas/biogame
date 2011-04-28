@@ -1,22 +1,22 @@
 #pragma once
 
 #include "Process.h"
+#include "EntityDefines.h"
 #include <base.h>
 
 //Forward declarations---------------------
 class CObject3D;
 class CRenderManager;
-class CSparseGraph;
 //-----------------------------------------
 
-class CIAProcess:
+class CEntityProcess:
   public CProcess
 {
 
 public:
-                        CIAProcess       (): CProcess("CIAProcess"), m_pTargetObject(0), m_pObjectCamera(0), m_pGraph(0)
+                        CEntityProcess       (): CProcess("CEntityProcess"),m_pPlayerEntity(0)
                                                 {};
-  virtual               ~CIAProcess      ()                          {Done();};
+  virtual               ~CEntityProcess      ()                          {Done();};
 
   virtual bool          Init();
 
@@ -29,24 +29,7 @@ public:
 
 private:
 
-  void UpdateCamera(float _fDeltaPitch, float _fDeltaYaw);
-  void UpdatePosition(Vect3f& _PosDelta, float _fDeltaPitch, float _fDeltaYaw);
-
-  void UpdateIA(float _fDT);
-
 	void                  Release                 ();
 
-  CObject3D*            m_pTargetObject;
-
-  CCamera*              m_pObjectCamera;
-  
-  Vect3i                m_vMouseDelta;
-  
-  CSparseGraph*         m_pGraph;
-
-
-  //Demo gràfica
-  int                   m_iNodeObjectiu;
-  list<int>             m_liPath;
-  Vect3f                m_vDemoObj;
+  CGameEntity*          m_pPlayerEntity;
 };

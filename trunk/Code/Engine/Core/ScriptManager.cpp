@@ -485,8 +485,8 @@ void CScriptManager::RegisterLUAFunctions()
     ,class_<CBaseComponent>("BaseComponent")
       .enum_("ComponentType")
       [
-          value("phisX_controller", CBaseComponent::ECT_PHISX_CONTROLLER),
-          value("object_3d",        CBaseComponent::ECT_OBJECT_3D)
+          value("phisX_controller", ECT_PHISX_CONTROLLER),
+          value("object_3d",        ECT_OBJECT_3D)
       ]
       .def("get_type",     &CBaseComponent::GetType)
       .def("get_entity",   &CBaseComponent::GetEntity)

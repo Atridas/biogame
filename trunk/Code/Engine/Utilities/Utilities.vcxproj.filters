@@ -22,6 +22,9 @@
     <Filter Include="A%2a">
       <UniqueIdentifier>{25923e21-a69a-435b-b8ae-8a286d9042d2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\ComponentPlayerController">
+      <UniqueIdentifier>{42f1b943-eb42-4882-a91b-88e6e156a311}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -50,6 +53,12 @@
     </ClCompile>
     <ClCompile Include="Heuristics.cpp">
       <Filter>A%2a</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentPlayerController.cpp">
+      <Filter>EntitySystem\ComponentPlayerController</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseComponent.cpp">
+      <Filter>EntitySystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="include\Heuristics.h">
       <Filter>A%2a</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentPlayerController.h">
+      <Filter>EntitySystem\ComponentPlayerController</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

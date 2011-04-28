@@ -76,7 +76,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseComponent.cpp" />
     <ClCompile Include="ComponentPhysXController.cpp" />
+    <ClCompile Include="ComponentPlayerController.cpp" />
     <ClCompile Include="GameEntity.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameObjectManager.cpp" />
@@ -90,6 +92,7 @@
     <ClInclude Include="include\BaseComponent.h" />
     <ClInclude Include="include\ComponentObject3D.h" />
     <ClInclude Include="include\ComponentPhysXController.h" />
+    <ClInclude Include="include\ComponentPlayerController.h" />
     <ClInclude Include="include\EntityDefines.h" />
     <ClInclude Include="include\GameEntity.h" />
     <ClInclude Include="include\GameObject.h" />

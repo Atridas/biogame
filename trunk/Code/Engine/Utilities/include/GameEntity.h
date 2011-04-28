@@ -26,15 +26,23 @@ public:
 
   int GetGUID() const {return m_iGUID;};
 
-  CBaseComponent* GetComponent(CBaseComponent::EComponentType _type) const;
+  CBaseComponent* GetComponent(EComponentType _type) const;
 
   void Update(float deltaTime);
 
   void ReceiveEvent(const SEvent& _Event);
 
+protected:
+
+  virtual void Release();
+
 private:
-  map<CBaseComponent::EComponentType, CBaseComponent*> m_vComponents;
+  void AddComponent(CBaseComponent* _pComponent);
+
+  map<EComponentType, CBaseComponent*> m_vComponents;
   int                     m_iGUID;
+
+  friend class CBaseComponent;
 };
 
 
