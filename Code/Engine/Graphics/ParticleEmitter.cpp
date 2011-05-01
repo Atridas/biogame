@@ -85,14 +85,6 @@ void CParticleEmitter::Update(float fElapsedTime)
   if(!m_bActive)
     return;
   
-  if(m_bReload)
-  {
-    Done();
-    Release();
-    Init(_pRM);
-    m_bReload = false;
-  }
-
   //1.] Updatejar les particules i en cas de que s'hagi acabat el seu temps de vida, posar 
   //    en el vector que la posicio esta lliure
   CParticle* particula = 0;

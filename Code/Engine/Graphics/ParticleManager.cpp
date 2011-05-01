@@ -10,13 +10,17 @@ CParticleManager::CParticleManager()
   m_bReload = false;
 }
 
-/*bool CParticleManager::Reload()
+bool CParticleManager::Reload()
 {
   Release();
-
-  bool Load(const string& _szFileName);
- return true; 
-}*/
+	bool isOk = false;
+  isOk = Load(m_szFileName);
+  if (isOk)
+  {
+    Init(CORE->GetRenderManager());
+  }
+  return isOk;
+}
 
 void CParticleManager::Release()
 {
