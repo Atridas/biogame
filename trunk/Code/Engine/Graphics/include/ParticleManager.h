@@ -54,12 +54,7 @@ public:
   void Update(const float _fElapsedTime);
   void Render(CRenderManager* _pRM);
   void Init(CRenderManager* _pRM);
-  
-
-  //bool Reload() {Release(); return Load(m_szFileName);};
-
-  bool Reload()  {Release(); m_bReload = true; return Load(m_szFileName);};
-
+  bool Reload();
   void Release();
 
 private:
