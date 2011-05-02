@@ -9,6 +9,7 @@
 #include "ComponentObject3D.h"
 #include "ComponentPhysXController.h"
 #include "ComponentPlayerController.h"
+#include "Component3rdPSCamera.h"
 
 bool CEntityProcess::Init()
 {
@@ -16,8 +17,7 @@ bool CEntityProcess::Init()
   
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
 
-  m_pPlayerEntity = new CGameEntity();
-  m_pPlayerEntity->Init();
+  m_pPlayerEntity = CORE->GetEntityManager()->CreateEntity();
 
   CComponentObject3D *m_pComponentObject3D = new CComponentObject3D();
   m_pComponentObject3D->Init(m_pPlayerEntity);
@@ -25,18 +25,20 @@ bool CEntityProcess::Init()
 
   CComponentPlayerController *m_pComponentPlayerController = new CComponentPlayerController();
   m_pComponentPlayerController->Init(m_pPlayerEntity,
-                                      "MoveFwd",
-                                      "MoveBack",
-                                      "MoveLeft",
-                                      "MoveRight",
-                                      "Walk",
-                                      "Run",
-                                      4, 10, 1, 1,
-                                       FLOAT_PI_VALUE/3,
-                                      -FLOAT_PI_VALUE/3,
-                                      1);
+                                     "MoveFwd",
+                                     "MoveBack",
+                                     "MoveLeft",
+                                     "MoveRight",
+                                     "Walk",
+                                     "Run",
+                                     4, 10, 1, 1,
+                                      FLOAT_PI_VALUE/3,
+                                     -FLOAT_PI_VALUE/3);
 
-  m_pCamera = m_pComponentPlayerController->GetCamera();
+  CComponent3rdPSCamera *m_pComponent3rdPSCamera = new CComponent3rdPSCamera();
+  m_pComponent3rdPSCamera->Init(m_pPlayerEntity, 1);
+
+  m_pCamera = m_pComponent3rdPSCamera->GetCamera();
 
   SetOk(true);
   return IsOk();
@@ -45,8 +47,6 @@ bool CEntityProcess::Init()
 void CEntityProcess::Release()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"CEntityProcess::Release");
-
-  CHECKED_DELETE(m_pPlayerEntity);
 }
 
 void CEntityProcess::Update(float _fElapsedTime)

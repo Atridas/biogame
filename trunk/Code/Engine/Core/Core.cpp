@@ -23,6 +23,7 @@
 #include <PhysicsManager.h>
 #include <ParticleManager.h>
 #include <SoundManager.h>
+#include <EntityManager.h>
 
 //#include <AnimatedModelManager.h>
 
@@ -50,6 +51,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pPhysicsManager           = new CPhysicsManager();
   m_pParticleManager          = new CParticleManager();
   m_pSoundManager             = new CSoundManager();
+  m_pEntityManager            = new CEntityManager();
 
   m_pEngine                   = _pEngine;
 
@@ -120,6 +122,7 @@ void CCore::Release()
   
 
   //delete a l'inrevès de com s'ha fet l'init
+  CHECKED_DELETE(m_pEntityManager);
   CHECKED_DELETE(m_pSoundManager);
   CHECKED_DELETE(m_pParticleManager);
   CHECKED_DELETE(m_pPhysicsManager);

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Process.h"
-#include "EntityDefines.h"
+#include "EntityManager.h"
 #include <base.h>
 
 //Forward declarations---------------------

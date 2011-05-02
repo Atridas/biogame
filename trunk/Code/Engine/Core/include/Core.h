@@ -30,6 +30,7 @@ class CPhysicsManager;
 class CParticleManager;
 class CSoundManager;
 class CEngine;
+class CEntityManager;
 // --------------------------
 
 /**
@@ -51,7 +52,7 @@ public:
                                                   m_pSceneEffectManager(0), m_pTimer(0), m_pScriptManager(0),m_pTextureManager(0),
                                                   m_pStaticMeshManager(0),m_pAnimatedModelManager(0),m_pEffectManager(0),
                                                   m_pGUIManager(0),m_pPhysicsManager(0),m_pParticleManager(0),m_pSoundManager(0),
-                                                  m_pEngine(0)
+                                                  m_pEngine(0), m_pEntityManager(0)
                                                   {};
   /**
    * Destructor.
@@ -148,6 +149,8 @@ public:
 
   CEngine*            GetEngine             () const                        {return m_pEngine;};
 
+  CEntityManager*     GetEntityManager      () const                        {return m_pEntityManager;};
+
 private:
 
   /**
@@ -221,5 +224,7 @@ private:
   CSoundManager*              m_pSoundManager;
 
   CEngine*                    m_pEngine;
+
+  CEntityManager*             m_pEntityManager;
 };
 
