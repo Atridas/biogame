@@ -94,6 +94,7 @@
     <ClCompile Include="AnimatedCoreModel.cpp" />
     <ClCompile Include="AnimatedInstanceModel.cpp" />
     <ClCompile Include="AnimatedModelManager.cpp" />
+    <ClCompile Include="BillBoard.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="DrawQuadSceneEffect.cpp" />
@@ -131,6 +132,7 @@
     <ClCompile Include="VertexStructs.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BillBoard.h" />
     <ClInclude Include="include\AnimatedCoreModel.h" />
     <ClInclude Include="include\AnimatedInstanceModel.h" />
     <ClInclude Include="include\AnimatedModelManager.h" />

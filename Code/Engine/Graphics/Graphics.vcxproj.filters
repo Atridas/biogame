@@ -258,6 +258,9 @@
     <ClCompile Include="ParticleManager.cpp">
       <Filter>Particle\ParticleManager</Filter>
     </ClCompile>
+    <ClCompile Include="BillBoard.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RenderManager.h">
@@ -382,6 +385,9 @@
     </ClInclude>
     <ClInclude Include="include\ParticleManager.h">
       <Filter>Particle\ParticleManager</Filter>
+    </ClInclude>
+    <ClInclude Include="BillBoard.h">
+      <Filter>Particle</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
