@@ -29,6 +29,8 @@ struct SParticleInfo
   vector<float>         m_vTimeColor;  //modificar tot els  m_vTime  per els m_vTimeColor
   vector<D3DXVECTOR3>   m_vDirection;
   vector<float>         m_vTimeDirection;
+  D3DXVECTOR3           m_vVel; 
+  D3DXVECTOR3           m_vGravity; 
   
 
 };

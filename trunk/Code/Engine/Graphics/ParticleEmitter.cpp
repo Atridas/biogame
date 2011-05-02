@@ -19,6 +19,8 @@ m_Particles(NUMPARTICLES)
   SetMaxSize(3.0f);
   SetSpawnDir1(D3DXVECTOR3(-5.0f, -5.0f, -5.0f));
   SetSpawnDir2(D3DXVECTOR3(5.0f, 5.0f, 5.0f));
+  SetVel(D3DXVECTOR3(1.0f,1.0f,1.0f));
+  SetGravity(D3DXVECTOR3(0.0f,0.0f,0.0f));
  
   // initialize misc. other things
   m_szName        = "";
@@ -29,16 +31,9 @@ m_Particles(NUMPARTICLES)
   m_fNumNewPartsExcess = 0.0f;
   m_fLife1 = 0.0f;
   m_fLife2 = 0.0f;
-  m_fAngle = 0.0f;
+  //m_fAngle = 0.0f;
 
-  m_bActive = true;
-
-
-  
-  
-  
-
- 
+  m_bActive = false;
 
   //TODO inicialitzar els vector de color i temps
 }
@@ -61,6 +56,8 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
   m_vTimeColor = _info->m_vTimeColor;
   m_vDirection = _info->m_vDirection;
   m_vTimeDirection = _info->m_vTimeDirection;
+  m_vGravity = _info->m_vGravity;
+  m_vVel = _info->m_vVel;
 
   //crear un vector de direccion de tantas posicions com estat pot tenir (segons vector temps)
   int j=m_vTimeDirection.size();
@@ -174,10 +171,12 @@ void CParticleEmitter::Update(float fElapsedTime)
 		    m_vNewColor[i]= D3DXCOLOR(fRandR, fRandG, fRandB, fRandA);
 		    i--;
         
-       }	  
+       }	
+      part->SetGravity(m_vGravity);
+      part->SetVel(m_vVel);
       part->m_vTimeColor = m_vTimeColor;
       part->m_vColor = m_vNewColor;
-      part->SetAngle(m_fAngle);
+      //part->SetAngle(m_fAngle);
       part->SetPos(m_vPos);
 
       
@@ -264,13 +263,7 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
   float l_fPointScaleB  = 0.00f;
   float l_fPointScaleC  = 1.00f;
   
-  //***************************
-  D3DXMATRIX m_Rotation;
-  D3DXMatrixRotationY(&m_Rotation, m_fAngle);
-  l_pd3dDevice->SetTransform(D3DTS_WORLD, &m_Rotation);
 
-
-  //**************************
   l_pd3dDevice->SetRenderState(D3DRS_POINTSIZE,     *((DWORD*)&l_fPointSize));
   l_pd3dDevice->SetRenderState(D3DRS_POINTSIZE_MIN, *((DWORD*)&l_fPointSizeMin));    
   l_pd3dDevice->SetRenderState(D3DRS_POINTSIZE_MAX, *((DWORD*)&l_fPointSizeMax));    

@@ -39,8 +39,10 @@ public:
   void SetNumNewPartsExcess (float _fNumNewPartsExcess)             {m_fNumNewPartsExcess = _fNumNewPartsExcess;};
   void SetParticle          (LPDIRECT3DVERTEXBUFFER9 _vbParticles)  {m_vbParticles = _vbParticles;};
   void SetActive            (bool _Active)                          {m_bActive = _Active;};
-  void SetAngle             (float _fAngle)                         {m_fAngle = _fAngle;};
-  void SetReload            (bool _bReload)                         {m_bReload = _bReload;};
+  void SetVel               (D3DXVECTOR3& _vVel)                    {m_vVel = _vVel;};
+  void SetGravity           (D3DXVECTOR3& _vGravity)                {m_vGravity = _vGravity;};
+  //void SetAngle             (float _fAngle)                         {m_fAngle = _fAngle;};
+  //void SetReload            (bool _bReload)                         {m_bReload = _bReload;};
 
   //Get
   string                          GetName             () const {return m_szName;};
@@ -58,8 +60,10 @@ public:
   float                           GetNumNewPartsExcess() const {return m_fNumNewPartsExcess;};
   const LPDIRECT3DVERTEXBUFFER9   GetParticle         () const {return m_vbParticles;};
   const bool                      GetActive           () const {return m_bActive;};
-  float                           GetAngle            () const {return m_fAngle;};
-  bool                            GetReload           () const {return m_bReload;};
+  const D3DXVECTOR3&              GetVel              () const {return m_vVel;};
+  const D3DXVECTOR3&              GetGravity          () const {return m_vGravity;};
+  //float                           GetAngle            () const {return m_fAngle;};
+  //bool                            GetReload           () const {return m_bReload;};
 
 
 
@@ -97,9 +101,11 @@ private:
   vector<D3DXVECTOR3>                       m_vNewDirection;
   vector<float>                             m_vTimeDirection;
   bool                                      m_bActive;
-  float                                     m_fAngle;
-  bool                                      m_bReload;
-  CRenderManager*                           _pRM;
+  D3DXVECTOR3                               m_vVel; //velocitat de la particula
+  D3DXVECTOR3                               m_vGravity; // forçes gravitatories
+  //float                                     m_fAngle;
+  //bool                                      m_bReload;
+  //CRenderManager*                           _pRM;
 
 };
 
