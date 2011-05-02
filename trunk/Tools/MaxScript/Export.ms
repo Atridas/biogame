@@ -29,6 +29,11 @@ function CheckMesh _object _checkMaterial =
 		return "S'està rebent un objecte sense nom. Realment es pot crear un objecte sense nom?"
 	)
 	
+	if GetNumFaces _object < 1 then
+	(
+		return "L'objecte " + l_name + " no té cap cara."
+	)
+	
 	local l_material = _object.material
 	
 	if _checkMaterial then
