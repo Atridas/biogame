@@ -185,7 +185,7 @@ function TextureListOne _material =
 	return l_paths
 )
 
-function TextureList _object =
+function TextureList _textures _object =
 (
 	local l_material = _object.material
 	
@@ -194,17 +194,29 @@ function TextureList _object =
 		--definim coses que necessitarem quan fem els vertexos
 		local l_numMaterials = l_material.numsubs
 		
-		local l_textures = #() 
-		
 		for i = 1 to l_numMaterials do
 		(
 			local l_texTemp = TextureListOne l_material[i]
-			join l_textures l_texTemp
+			
+			for j = 1 to l_texTemp.count do
+			(
+				if (Member _textures l_texTemp[j]) == false then
+				(
+					append _textures l_texTemp[j]
+				)
+			)
 		)
-		return l_textures
 	)
 	else
 	(
-		return TextureListOne l_material
+		local l_texTemp = TextureListOne l_material
+			
+		for j = 1 to l_texTemp.count do
+		(
+			if (Member _textures l_texTemp[j]) == false then
+			(
+				append _textures l_texTemp[j]
+			)
+		)
 	)
 )

@@ -23,6 +23,13 @@ utility BioUtility "Eon-Utility" width:160 height:459
 	function getDataPath =
 	(
 		local l_path = labelPath.text + "/"
+		return l_path
+	)
+	
+	-- Torna el path de Data segons el nivell
+	function getLevelPath =
+	(
+		local l_path = labelPath.text + "/"
 		
 		if dropNivell.selection != 1 then
 		(
@@ -33,6 +40,25 @@ utility BioUtility "Eon-Utility" width:160 height:459
 
 	-- Torna el path relatiu
 	function getRelativePath =
+	(
+		local l_path = labelPath.text
+		local l_index = l_path.count
+		while l_path[l_index] != "/" and l_path[l_index] != "\\" and l_index > 1 do
+		(
+			l_index = l_index - 1
+		)
+
+		l_index = l_index + 1
+
+		l_path = substring l_path l_index (l_path.count-l_index+1)
+
+		l_path = l_path + "/"
+
+		return l_path
+	)
+	
+	-- Torna el path relatiu segons el nivell
+	function getRelativeLevelPath =
 	(
 		local l_path = labelPath.text
 		local l_index = l_path.count
@@ -58,7 +84,7 @@ utility BioUtility "Eon-Utility" width:160 height:459
 	-- Torna el path dels XML
 	function getXMLPath =
 	(
-		local l_path = getDataPath()
+		local l_path = getLevelPath()
 		l_path = l_path + "XML/"
 
 		return l_path
@@ -67,7 +93,7 @@ utility BioUtility "Eon-Utility" width:160 height:459
 	-- Torna el path relatiu dels XML
 	function getRelativeXMLPath =
 	(
-		local l_path = getRelativePath()
+		local l_path = getRelativeLevelPath()
 		l_path = l_path + "XML/"
 
 		return l_path
@@ -97,16 +123,35 @@ utility BioUtility "Eon-Utility" width:160 height:459
 		return getRelativePath() + "Meshes/"
 	)
   
-  -- Fi path
+	-- Fi path
   
-  -- Exportadors
+	-- Exportadors
+	
+	--Exporta les textures al path especificat
+	function ExportTextures _TextureTotalPath _textures =
+	(
+		makeDir _TextureTotalPath all:true
+				
+		for i=1 to _textures.count do
+		(
+			path1 = _textures[i]
+			path2 = _TextureTotalPath + (filenameFromPath path1)
+			
+			if stricmp (getFilenamePath path1) (getFilenamePath path2) != 0 then
+			(
+				deleteFile path2
+				copyFile path1 path2
+			)
+		)
+	)
   
-  -- Exporta un array de cores, creant les mesh i l'xml de mesh
+	-- Exporta un array de cores, creant les mesh i l'xml de mesh
 	function ExportMeshManager _objects =
 	(
 		local l_MeshTotalPath = getMeshPath()
 		local l_TextureTotalPath = getTexturePath()
 		local l_relativeTexPath = getRelativeTexturePath()
+		local l_textures = #()
 			
 		local l_level = dropNivell.items[dropNivell.selection]
 		
@@ -180,8 +225,11 @@ utility BioUtility "Eon-Utility" width:160 height:459
 			
 			if checkTextures.checked then
 			(
+				TextureList l_textures l_object
+				
+				/*
 				makeDir l_TextureTotalPath all:true
-				local l_textures = TextureList l_object
+				
 				for i=1 to l_textures.count do
 				(
 					path1 = l_textures[i]
@@ -194,7 +242,13 @@ utility BioUtility "Eon-Utility" width:160 height:459
 						copyFile path1 path2
 					)
 				)
+				*/
 			)
+		)
+		
+		if checkTextures.checked then
+		(
+			ExportTextures l_TextureTotalPath l_textures
 		)
 		
 		format "\n" to:l_file
@@ -495,6 +549,8 @@ utility BioUtility "Eon-Utility" width:160 height:459
 			
 			local l_meshPath = getMeshPath()
 			local l_TextureTotalPath = getTexturePath()
+			local l_textures = #()
+			
 			makeDir l_meshPath all:true
 			makeDir l_TextureTotalPath all:true
 			
@@ -515,7 +571,8 @@ utility BioUtility "Eon-Utility" width:160 height:459
 				-- copiar textures
 				if checkTextures.checked == true then
 				(
-					local l_textures = TextureList $
+					TextureList l_textures $
+					/*
 					for i=1 to l_textures.count do
 					(
 						path1 = l_textures[i]
@@ -528,6 +585,7 @@ utility BioUtility "Eon-Utility" width:160 height:459
 							copyFile path1 path2
 						)
 					)
+					*/
 				)
 			)
 		) else (
