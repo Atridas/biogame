@@ -5,12 +5,6 @@
 
 #include "base.h"
 
-enum EComponentType {
-  ECT_PHISX_CONTROLLER,
-  ECT_OBJECT_3D,
-  ECT_PLAYER_CONTROLLER
-};
-
 struct SEventInfo {
   enum { STI_INT, STI_FLOAT, STI_VECTOR, STI_STRING } Type;
   union {
@@ -38,7 +32,7 @@ struct SEvent {
 
 #include "BaseComponent.h"
 #include "GameEntity.h"
-
+#include "EntityManager.h"
 
 
 #endif

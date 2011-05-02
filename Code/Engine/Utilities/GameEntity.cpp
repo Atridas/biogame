@@ -1,14 +1,5 @@
 #include "EntityDefines.h"
 
-int g_LastGUID = 0;
-
-
-void CGameEntity::Init() {
-  m_iGUID = g_LastGUID++;
-
-  SetOk(true);
-};
-
 
 void CGameEntity::AddComponent(CBaseComponent* _pComponent)
 {
@@ -18,8 +9,8 @@ void CGameEntity::AddComponent(CBaseComponent* _pComponent)
 
 void CGameEntity::Update(float deltaTime)
 {
-  map<EComponentType, CBaseComponent*>::iterator l_it = m_vComponents.begin();
-  map<EComponentType, CBaseComponent*>::iterator l_end = m_vComponents.end();
+  map<CBaseComponent::Type, CBaseComponent*>::iterator l_it = m_vComponents.begin();
+  map<CBaseComponent::Type, CBaseComponent*>::iterator l_end = m_vComponents.end();
 
   for(; l_it != l_end; ++l_it)
   {
@@ -29,8 +20,8 @@ void CGameEntity::Update(float deltaTime)
 
 void CGameEntity::ReceiveEvent(const SEvent& _Event)
 {
-  map<EComponentType, CBaseComponent*>::iterator l_it = m_vComponents.begin();
-  map<EComponentType, CBaseComponent*>::iterator l_end = m_vComponents.end();
+  map<CBaseComponent::Type, CBaseComponent*>::iterator l_it = m_vComponents.begin();
+  map<CBaseComponent::Type, CBaseComponent*>::iterator l_end = m_vComponents.end();
 
   for(; l_it != l_end; ++l_it)
   {
@@ -38,9 +29,9 @@ void CGameEntity::ReceiveEvent(const SEvent& _Event)
   }
 }
 
-CBaseComponent* CGameEntity::GetComponent(EComponentType _type) const
+CBaseComponent* CGameEntity::GetComponent(CBaseComponent::Type _type) const
 {
-  map<EComponentType, CBaseComponent*>::const_iterator l_it = m_vComponents.find(_type);
+  map<CBaseComponent::Type, CBaseComponent*>::const_iterator l_it = m_vComponents.find(_type);
 
   if(l_it == m_vComponents.cend())
   {
@@ -51,8 +42,8 @@ CBaseComponent* CGameEntity::GetComponent(EComponentType _type) const
 
 void CGameEntity::Release()
 {
-  map<EComponentType, CBaseComponent*>::const_iterator l_it = m_vComponents.begin();
-  map<EComponentType, CBaseComponent*>::const_iterator l_end = m_vComponents.end();
+  map<CBaseComponent::Type, CBaseComponent*>::const_iterator l_it = m_vComponents.begin();
+  map<CBaseComponent::Type, CBaseComponent*>::const_iterator l_end = m_vComponents.end();
 
   for(; l_it != l_end; ++l_it)
   {

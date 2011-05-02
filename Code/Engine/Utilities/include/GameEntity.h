@@ -14,19 +14,16 @@
 #endif
 
 class CBaseComponent;
+class CEntityManager;
 
 class CGameEntity:
   public CBaseControl
 {
 public:
-  CGameEntity():m_iGUID(-1) {};
-  virtual ~CGameEntity() {Done();};
-
-  void Init();
 
   int GetGUID() const {return m_iGUID;};
 
-  CBaseComponent* GetComponent(EComponentType _type) const;
+  CBaseComponent* GetComponent(CBaseComponent::Type _type) const;
 
   void Update(float deltaTime);
 
@@ -37,12 +34,15 @@ protected:
   virtual void Release();
 
 private:
+  CGameEntity(int _iId):m_iGUID(_iId) {SetOk(true);};
+  ~CGameEntity() {Done();};
   void AddComponent(CBaseComponent* _pComponent);
 
-  map<EComponentType, CBaseComponent*> m_vComponents;
+  map<CBaseComponent::Type, CBaseComponent*> m_vComponents;
   int                     m_iGUID;
-
+  
   friend class CBaseComponent;
+  friend class CEntityManager;
 };
 
 

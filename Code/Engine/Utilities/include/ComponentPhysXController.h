@@ -23,7 +23,7 @@ public:
       m_pPhisXData(0)
       {};
 
-  virtual EComponentType GetType() {return ECT_PHISX_CONTROLLER;};
+  CBaseComponent::Type GetType() {return CBaseComponent::ECT_PHISX_CONTROLLER;};
 
   bool Init(CGameEntity *_Entity,
             float radius, float height, float slope, float skinwidth, 

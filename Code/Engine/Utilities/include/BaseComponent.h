@@ -23,9 +23,15 @@ class CBaseComponent:
   public CBaseControl
 {
 public:
+  enum Type {
+    ECT_OBJECT_3D,
+    ECT_PHISX_CONTROLLER,
+    ECT_PLAYER_CONTROLLER,
+    ECT_3RD_PERSON_SHOOTER_CAMERA
+  };
   
-  virtual EComponentType GetType() = 0; //{return m_Type;};
-  bool IsType(EComponentType _Type) {return GetType() == _Type;};
+  virtual Type GetType() = 0; //{return m_Type;};
+  bool IsType(Type _Type) {return GetType() == _Type;};
   CGameEntity* GetEntity() const {return m_pEntity;};
   
   void ReceiveEvent(const SEvent& _Event) {};

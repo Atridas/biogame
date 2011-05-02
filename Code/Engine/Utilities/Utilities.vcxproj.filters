@@ -10,20 +10,29 @@
     <Filter Include="EntitySystem">
       <UniqueIdentifier>{31371ca7-252d-4b80-82a7-15e00a685721}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EntitySystem\ComponentObject3D">
-      <UniqueIdentifier>{70bb2498-4de9-48c7-8ade-33dc159a33fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EntitySystem\ComponentPhysXController">
-      <UniqueIdentifier>{48735945-4a40-47e9-b996-1336c150102f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Grafs">
       <UniqueIdentifier>{c652030f-faa7-46f0-a5ee-142c49841b03}</UniqueIdentifier>
     </Filter>
     <Filter Include="A%2a">
       <UniqueIdentifier>{25923e21-a69a-435b-b8ae-8a286d9042d2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EntitySystem\ComponentPlayerController">
+    <Filter Include="EntitySystem\Components">
+      <UniqueIdentifier>{7edf2a8a-3fb3-4167-8ebb-c0648f680b8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\Component3rdPSCamera">
+      <UniqueIdentifier>{4c659c11-6c6c-4331-b80a-6989d147dce1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentObject3D">
+      <UniqueIdentifier>{70bb2498-4de9-48c7-8ade-33dc159a33fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentPhysXController">
+      <UniqueIdentifier>{48735945-4a40-47e9-b996-1336c150102f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentPlayerController">
       <UniqueIdentifier>{42f1b943-eb42-4882-a91b-88e6e156a311}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\EntityManager">
+      <UniqueIdentifier>{39da934c-176c-443b-8956-5ba463ad5e16}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -37,7 +46,7 @@
       <Filter>EntitySystem</Filter>
     </ClCompile>
     <ClCompile Include="ComponentPhysXController.cpp">
-      <Filter>EntitySystem\ComponentPhysXController</Filter>
+      <Filter>EntitySystem\Components\ComponentPhysXController</Filter>
     </ClCompile>
     <ClCompile Include="ScriptedStateMachine.cpp">
       <Filter>ScriptedStateMachine</Filter>
@@ -55,10 +64,19 @@
       <Filter>A%2a</Filter>
     </ClCompile>
     <ClCompile Include="ComponentPlayerController.cpp">
-      <Filter>EntitySystem\ComponentPlayerController</Filter>
+      <Filter>EntitySystem\Components\ComponentPlayerController</Filter>
+    </ClCompile>
+    <ClCompile Include="Component3rdPSCamera.cpp">
+      <Filter>EntitySystem\Components\Component3rdPSCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="EntitiesToLua.cpp">
+      <Filter>EntitySystem</Filter>
     </ClCompile>
     <ClCompile Include="BaseComponent.cpp">
-      <Filter>EntitySystem</Filter>
+      <Filter>EntitySystem\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>EntitySystem\EntityManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,17 +92,14 @@
     <ClInclude Include="include\GameEntity.h">
       <Filter>EntitySystem</Filter>
     </ClInclude>
-    <ClInclude Include="include\BaseComponent.h">
-      <Filter>EntitySystem</Filter>
-    </ClInclude>
     <ClInclude Include="include\EntityDefines.h">
       <Filter>EntitySystem</Filter>
     </ClInclude>
     <ClInclude Include="include\ComponentObject3D.h">
-      <Filter>EntitySystem\ComponentObject3D</Filter>
+      <Filter>EntitySystem\Components\ComponentObject3D</Filter>
     </ClInclude>
     <ClInclude Include="include\ComponentPhysXController.h">
-      <Filter>EntitySystem\ComponentPhysXController</Filter>
+      <Filter>EntitySystem\Components\ComponentPhysXController</Filter>
     </ClInclude>
     <ClInclude Include="include\GraphNode.h">
       <Filter>Grafs</Filter>
@@ -105,7 +120,19 @@
       <Filter>A%2a</Filter>
     </ClInclude>
     <ClInclude Include="include\ComponentPlayerController.h">
-      <Filter>EntitySystem\ComponentPlayerController</Filter>
+      <Filter>EntitySystem\Components\ComponentPlayerController</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Component3rdPSCamera.h">
+      <Filter>EntitySystem\Components\Component3rdPSCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EntitiesToLua.h">
+      <Filter>EntitySystem</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BaseComponent.h">
+      <Filter>EntitySystem\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EntityManager.h">
+      <Filter>EntitySystem\EntityManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
