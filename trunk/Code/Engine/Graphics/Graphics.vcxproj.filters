@@ -386,7 +386,7 @@
     <ClInclude Include="include\ParticleManager.h">
       <Filter>Particle\ParticleManager</Filter>
     </ClInclude>
-    <ClInclude Include="BillBoard.h">
+    <ClInclude Include="include\BillBoard.h">
       <Filter>Particle</Filter>
     </ClInclude>
   </ItemGroup>

@@ -21,7 +21,7 @@ CBillBoard::~CBillBoard(void)
 }
 
 CBillBoard::CBillBoard()
-	: m_Position(D3DXVECTOR3(0,0,0))
+	: m_Position(Vect3f(0,0,0))
 	, m_SizeX(2)
 	, m_SizeY(2)
 	{}
@@ -39,25 +39,17 @@ void CBillBoard::Update(CCamera *camera)
 	*/
 
 
-	Vect3f yaw_angle = camera->GetLookAt(); //GetYaw();
-	D3DXVECTOR3 l_VRight;// = D3DXVECTOR3( cos(yaw_angle-D3DX_PI*0.5f), 0.0f, sin(yaw_angle-D3DX_PI*0.5f) );
-	D3DXVECTOR3 l_VUp;//=camera->GetVecUp();
-	float normalize =	l_VRight.x*l_VRight.x +
-						l_VRight.y*l_VRight.y +
-						l_VRight.z*l_VRight.z;
-	normalize = sqrt( normalize );
-	l_VRight = l_VRight/normalize;
-
-	 normalize =	l_VUp.x*l_VUp.x +
-					l_VUp.y*l_VUp.y +
-					l_VUp.z*l_VUp.z;
-	normalize = sqrt( normalize );
-	l_VUp = l_VUp/normalize;
-
-	m_PointA = m_Position - (l_VRight*m_SizeX*0.5f) - (l_VUp*m_SizeY*0.5f);
+ 
+  Vect3f l_VDirection = camera->GetDirection();
+  Vect3f l_VUp = camera->GetVecUp();
+	//Vect3f l_VRight = l_VDirection^l_VUp; // producte vectorial
+  Vect3f l_VRight = l_VUp^l_VDirection; // producte vectorial
+  l_VRight.Normalize();
+  m_PointA = m_Position - (l_VRight*m_SizeX*0.5f) - (l_VUp*m_SizeY*0.5f);
 	m_PointB = m_Position + (l_VRight*m_SizeX*0.5f) - (l_VUp*m_SizeY*0.5f);
 	m_PointC = m_Position - (l_VRight*m_SizeX*0.5f) + (l_VUp*m_SizeY*0.5f);
 	m_PointD = m_Position + (l_VRight*m_SizeX*0.5f) + (l_VUp*m_SizeY*0.5f);
+    
 }
 
 void CBillBoard::Render(LPDIRECT3DDEVICE9 device,const LPDIRECT3DTEXTURE9& texture )

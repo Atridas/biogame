@@ -29,11 +29,15 @@
 #include "InstanceMesh.h"
 #include "GameObject.h"
 #include "ParticleManager.h"
+#include "BillBoard.h"
 
 
 
 bool CParticleProcess::Init()
 {
+  m_pBillBoard.SetPos( Vect3f(0.f, 1.f, 0.f));
+  m_pBillBoard.SetSize( 5.f, 5.f);
+  
   m_pObject = new CObject3D();
   m_fVelocity = 1;
   
@@ -85,6 +89,8 @@ void CParticleProcess::Update(float _fElapsedTime)
 {
   if(m_pObject)// && m_pObjectBot) 
   {
+
+    m_pBillBoard.Update(m_pObjectCamera);
     //Actualitze el pitch i el yaw segons els delta del mouse
     float l_fPitch, l_fYaw;
 
@@ -139,8 +145,8 @@ void CParticleProcess::RenderScene(CRenderManager* _pRM)
   _pRM->DrawGrid(30.0f,colCYAN,30,30);
   //_pRM->DrawPlane(10,Vect3f(0,1,0),0,colBLUE,10,10);
   CORE->GetParticleManager()->Render(_pRM);
-
-  
+  CTexture*  texture = CORE->GetTextureManager()->GetDefualtTexture();
+  m_pBillBoard.Render(_pRM->GetDevice(), texture->GetD3DTexture() );
   
    
   
