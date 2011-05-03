@@ -132,10 +132,10 @@
     <ClCompile Include="VertexStructs.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BillBoard.h" />
     <ClInclude Include="include\AnimatedCoreModel.h" />
     <ClInclude Include="include\AnimatedInstanceModel.h" />
     <ClInclude Include="include\AnimatedModelManager.h" />
+    <ClInclude Include="include\BillBoard.h" />
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\DirectionalLight.h" />
     <ClInclude Include="include\DrawQuadSceneEffect.h" />

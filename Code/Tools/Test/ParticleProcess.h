@@ -3,12 +3,14 @@
 #include "Process.h"
 #include "ParticleEmitter.h"
 #include <base.h>
+#include "BillBoard.h"
 
 
 //Forward declarations---------------------
 class CObject3D;
 class CRenderManager;
 class CRenderableObject;
+//class CBillBoard;
 
 //-----------------------------------------
 
@@ -53,5 +55,6 @@ private:
   float                 m_fVelocity;
   bool                  m_bRenderLights;
   float                 m_fPhysxVelocity;
+  CBillBoard            m_pBillBoard;
 };
 
