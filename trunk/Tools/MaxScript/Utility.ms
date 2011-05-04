@@ -494,7 +494,7 @@ utility BioUtility "Eon-Utility" width:160 height:459
 			(
 				local l_instance = _instances[i][j]
 				
-				l_params = #(#("name",l_instance.name),#("Physx","true"),#("PhysxType",l_PhysXType),#("RenderableObject",l_instance.name),#("PhysxActor",l_instance.name))
+				l_params = #(#("name",l_instance.name),#("Physx","true"),#("PhysxType",l_PhysXType),#("RenderableObject",l_instance.name),#("PhysxActor",l_instance.name),#("Pushable","false"))
 					
 				l_aux = "" as stringStream
 				l_Body = 0
