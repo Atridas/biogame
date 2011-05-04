@@ -13,6 +13,37 @@
 #include "Utils/MemLeaks.h"
 
 
+class CPhysicsControllerHitReport : public NxUserControllerHitReport
+{
+	public:
+
+	virtual NxControllerAction onShapeHit(const NxControllerShapeHit& hit)
+	{
+		if(hit.shape)
+		{
+			NxCollisionGroup group = hit.shape->getGroup();
+			if(group==GROUP_COLLIDABLE_PUSHABLE)
+			{
+				NxActor& actor = hit.shape->getActor();
+
+					if(hit.dir.y==0.0f)
+					{
+              NxF32 coeff = actor.getMass() * hit.length * 10.0f;
+              actor.addForceAtLocalPos(hit.dir*coeff, NxVec3(0,0,0), NX_IMPULSE);
+          }
+			}
+		}
+
+		return NX_ACTION_NONE;
+	}
+
+	virtual NxControllerAction onControllerHit(const NxControllersHit& hit)
+	{
+		return NX_ACTION_NONE;
+	}
+};
+
+
 CPhysicController::CPhysicController(float radius, float height, float slope, float skinwidth, float stepOffset,
 																		 uint32 collisionGroups, CPhysicUserData* userData, const Vect3f& pos, float gravity)
 																		 : m_pPhXController(NULL)
@@ -25,11 +56,14 @@ CPhysicController::CPhysicController(float radius, float height, float slope, fl
 																		 , m_fStepOffset_Capsule(stepOffset)
 																		 , m_fGravity(gravity)
 																		 , m_uCollisionGroups(collisionGroups)
+                                    
 {
 	assert(userData);
 
 	//---- Crear un nuevo NxController----
 	m_pPhXControllerDesc = new NxCapsuleControllerDesc();
+  CPhysicsControllerHitReport* l_Report  = new CPhysicsControllerHitReport();
+  m_Report = l_Report;
 
 	m_pPhXControllerDesc->position.x		= pos.x;
 	m_pPhXControllerDesc->position.y		= pos.y;
@@ -40,12 +74,15 @@ CPhysicController::CPhysicController(float radius, float height, float slope, fl
 	m_pPhXControllerDesc->skinWidth			= m_fSkinWidth_Capsule;
 	m_pPhXControllerDesc->stepOffset		= m_fStepOffset_Capsule;
 	m_pPhXControllerDesc->upDirection		= NX_Y;
+  m_pPhXControllerDesc->callback      = l_Report;
 }
 
 
 CPhysicController::~CPhysicController()
 {
+  //delete m_pPhXControllerDesc->callback;
 	CHECKED_DELETE(m_pPhXControllerDesc);
+  CHECKED_DELETE(m_Report);
 }
 
 

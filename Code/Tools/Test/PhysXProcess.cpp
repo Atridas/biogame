@@ -44,7 +44,7 @@
 #define RADIUS_CONTROLLER 0.3f
 #define ALTURA_TOTAL ((ALTURA_CONTROLLER+2*RADIUS_CONTROLLER)*0.5f + 0.1f)
 
-#define COLISIONABLE_MASK ((1<<COLISION_SCENE_MASK) || (1<<COLISION_STATIC_MASK) || (1<<COLISION_SOLID_MASK))
+#define COLISIONABLE_MASK (1<<GROUP_COLLIDABLE_NON_PUSHABLE)
 
 
 CPhysicUserData* g_pUserData;
@@ -200,7 +200,7 @@ bool CPhysXProcess::Init()
 
   //Actor estatic en forma de pla per fer probes amb el charactercontroller:
   //CPhysicActor* plaXung = new CPhysicActor(g_pUserData2);
-  g_pPActorPlane->AddBoxSphape(Vect3f(500.f,1.0f,500.f),Vect3f(0.0f,-1.0f,0.0f));
+  g_pPActorPlane->AddBoxSphape(Vect3f(500.f,1.0f,500.f),Vect3f(0.0f,-1.0f,0.0f),NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
   //g_pPActorPlane->CreateBody(100.0f);
 
 
@@ -234,7 +234,7 @@ bool CPhysXProcess::Init()
   l_pPhysManager->AddPhysicActor(g_pPEscala);
   
 
-  g_pPhysXController = new CPhysicController(RADIUS_CONTROLLER,ALTURA_CONTROLLER,10.0f,0.1f,0.5f,COLISION_SOLID_MASK,g_pUserDataController,Vect3f(-7.0f,2.2f,-4.0f));
+  g_pPhysXController = new CPhysicController(RADIUS_CONTROLLER,ALTURA_CONTROLLER,10.0f,0.1f,0.5f,2,g_pUserDataController,Vect3f(-7.0f,2.2f,-4.0f));
   g_pPhysXController->SetYaw(-90);
   l_pPhysManager->AddPhysicController(g_pPhysXController);
 
