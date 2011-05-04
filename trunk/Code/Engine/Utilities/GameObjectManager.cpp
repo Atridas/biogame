@@ -12,6 +12,7 @@
 #include "PhysicCookingMesh.h"
 #include "StaticMeshManager.h"
 #include "InstanceMesh.h"
+#include "PhysicController.h"
 
 
 void CGameObjectManager::Release()
@@ -29,7 +30,7 @@ void CGameObjectManager::Release()
 
 
 //Afegir un ACTOR AMB LA BOUNDING BOX
-CPhysicActor* CGameObjectManager::AddPhysicActor(CRenderableObject* _pRenderObject, string& _szName, float _fBody)
+CPhysicActor* CGameObjectManager::AddPhysicActor(CRenderableObject* _pRenderObject, string& _szName, float _fBody, bool _bPushable)
 {
   CPhysicActor* l_pPhysicActor = 0;
   
@@ -42,7 +43,16 @@ CPhysicActor* CGameObjectManager::AddPhysicActor(CRenderableObject* _pRenderObje
   l_pPhysicsUserData->SetPaint(true);
   m_vUserData.push_back(l_pPhysicsUserData);
   l_pPhysicActor = new CPhysicActor(l_pPhysicsUserData);
-  l_pPhysicActor->AddBoxSphape(l_vBoxDim/2);
+
+
+  if (_bPushable)
+  {
+   l_pPhysicActor->AddBoxSphape(l_vBoxDim/2,v3fZERO,NULL,GROUP_COLLIDABLE_PUSHABLE);
+  }
+  else
+  {
+    l_pPhysicActor->AddBoxSphape(l_vBoxDim/2,v3fZERO,NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
+  } 
   //l_pPhysicActor->SetGlobalPosition(Vect3f(l_vPos.x,l_vPos.y+l_vMiddlePos.y,l_vPos.z));
   Mat44f l_vMat = _pRenderObject->GetMat44();
   if (_fBody != 0)
@@ -71,7 +81,7 @@ CPhysicActor* CGameObjectManager::AddPhysicActor(CRenderableObject* _pRenderObje
 
 
 //Afegir un ACTOR AMB LA MESH
-CPhysicActor* CGameObjectManager::AddPhysicActorMesh(CRenderableObject* _pRenderObject, string& _szName, float _fBody)
+CPhysicActor* CGameObjectManager::AddPhysicActorMesh(CRenderableObject* _pRenderObject, string& _szName, float _fBody, bool _bPushable)
 {
 
   CPhysicActor* l_pPhysicActor = 0;
@@ -90,7 +100,16 @@ CPhysicActor* CGameObjectManager::AddPhysicActorMesh(CRenderableObject* _pRender
   CPhysicCookingMesh* l_pCookingMesh = CORE->GetPhysicsManager()->GetCookingMesh();
   l_pCookingMesh->CreatePhysicMesh(l_vVertexBuff,l_vIndexBuff,_szName);
   NxTriangleMesh* l_pMesh = l_pCookingMesh->GetPhysicMesh(_szName);
-  l_pPhysicActor->AddMeshShape(l_pMesh);
+
+  if (_bPushable)
+  {
+    l_pPhysicActor->AddMeshShape(l_pMesh,v3fZERO,GROUP_COLLIDABLE_PUSHABLE);
+  }
+  else
+  {
+    l_pPhysicActor->AddMeshShape(l_pMesh,v3fZERO,GROUP_COLLIDABLE_NON_PUSHABLE);
+  }
+
   //l_pPhysicActor->SetGlobalPosition(Vect3f(l_vPos.x,l_vPos.y,l_vPos.z));
   Mat44f l_vMat = l_pInstanceMesh->GetMat44();
   
@@ -125,6 +144,7 @@ bool CGameObjectManager::Load(const string& _szFileName, bool _bReload)
 	{
 		string l_szName, l_bPhysx, l_szRenderObject, l_szPhysxType, l_szPhysxActor;
     float l_fBody;
+    bool l_bPushable;
 
 		CGameObject* l_pGameObject = 0;
     CRenderableObject* l_pRenderObject = 0;
@@ -144,6 +164,7 @@ bool CGameObjectManager::Load(const string& _szFileName, bool _bReload)
 		l_szPhysxActor		= l_XMLObject.GetPszISOProperty("PhysxActor" ,"");
 		l_szPhysxType		  = l_XMLObject.GetPszISOProperty("PhysxType" ,"");
     l_fBody           = l_XMLObject.GetFloatProperty("Body");
+    l_bPushable       = l_XMLObject.GetBoolProperty("Pushable");
 
 		l_pGameObject = GetResource(l_szName);
     l_pRenderObject = l_pROM->GetResource(l_szRenderObject);
@@ -152,7 +173,7 @@ bool CGameObjectManager::Load(const string& _szFileName, bool _bReload)
 			if(l_szPhysxType == "BoundingBox") 
 			{
 			  l_pGameObject = new CGameObject(l_szName);
-        l_pPhysicsActor = AddPhysicActor(l_pRenderObject,l_szPhysxActor,l_fBody);
+        l_pPhysicsActor = AddPhysicActor(l_pRenderObject,l_szPhysxActor,l_fBody,l_bPushable);
         l_pGameObject->Init(l_pRenderObject,l_pPhysicsActor,l_szPhysxType);
         m_vResources.push_back(l_pGameObject);
         AddResource(l_szName,l_pGameObject);
@@ -168,7 +189,7 @@ bool CGameObjectManager::Load(const string& _szFileName, bool _bReload)
 			{
 
         l_pGameObject = new CGameObject(l_szName);
-        l_pPhysicsActor = AddPhysicActorMesh(l_pRenderObject,l_szPhysxActor,l_fBody);
+        l_pPhysicsActor = AddPhysicActorMesh(l_pRenderObject,l_szPhysxActor,l_fBody,l_bPushable);
         l_pGameObject->Init(l_pRenderObject,l_pPhysicsActor,l_szPhysxType);
         m_vResources.push_back(l_pGameObject);
         AddResource(l_szName,l_pGameObject);

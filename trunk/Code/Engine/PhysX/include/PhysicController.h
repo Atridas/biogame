@@ -17,7 +17,18 @@ class NxController;
 class NxCapsuleControllerDesc;
 class NxScene;
 class CPhysicUserData;
+class CPhysicsControllerHitReport;
+
 //--------------------------
+
+enum CollisionGroup
+{
+	GROUP_NON_COLLIDABLE,
+	GROUP_COLLIDABLE_NON_PUSHABLE,
+	GROUP_COLLIDABLE_PUSHABLE,
+};
+
+
 
 class CPhysicController:public CObject3D
 {
@@ -46,6 +57,8 @@ public:
 private:
 
 	CPhysicUserData*	m_pUserData;
+  //CPhysicsControllerHitReport m_Report;
+  void*             m_Report;
 	uint32						m_uCollisionGroups;
 	CJump							m_Jump;
 	float							m_fGravity;
