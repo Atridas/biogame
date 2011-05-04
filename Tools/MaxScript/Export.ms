@@ -21,6 +21,12 @@ function CheckMesh _object _checkMaterial =
 		return true
 	)
 	
+	--si es tracte d'una llum o dummy no seguim comprovant
+	if classof _object == TargetDirectionallight or classof _object == Omnilight or classof _object == targetSpot or classof _object == Dummy then
+	(
+		return true
+	)
+	
 	local l_name = _object.name
 	
 	--objecte sense nom (pot passar?)
@@ -29,9 +35,12 @@ function CheckMesh _object _checkMaterial =
 		return "S'està rebent un objecte sense nom. Realment es pot crear un objecte sense nom?"
 	)
 	
-	if GetNumFaces _object < 1 then
+	if classof _object == Editable_Poly or classof _object == Editable_Mesh then
 	(
-		return "L'objecte " + l_name + " no té cap cara."
+		if GetNumFaces _object < 1 then
+		(
+			return "L'objecte " + l_name + " no té cap cara."
+		)
 	)
 	
 	local l_material = _object.material
