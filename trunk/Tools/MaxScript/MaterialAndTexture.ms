@@ -207,7 +207,7 @@ function TextureList _textures _object =
 			)
 		)
 	)
-	else
+	else if classof(l_material) == Standardmaterial then
 	(
 		local l_texTemp = TextureListOne l_material
 			
