@@ -130,7 +130,7 @@ bool CPhysXProcess::Init()
     4.5f);
 
   
-  CORE->GetLightManager()->CreateDirectionalLight("ObjectModeLight",
+  /*CORE->GetLightManager()->CreateDirectionalLight("ObjectModeLight",
                                                   Vect3f(0.0f),
                                                   Vect3f(1.0f,1.0f,1.0f),
                                                   CColor(Vect3f(1.0f,1.0f,1.0f)),
@@ -146,7 +146,7 @@ bool CPhysXProcess::Init()
                                           80.0f,
                                           10.0f,
                                           45.0f,
-                                          true);
+                                          true);*/
 
   m_pCamera = m_pObjectCamera;
 
