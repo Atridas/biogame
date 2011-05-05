@@ -27,6 +27,7 @@ public:
   void                  RenderScene             (CRenderManager* _pRM);
   void                  RenderINFO              (CRenderManager* _pRM);
   void                  RenderPhysX             (CRenderManager* _pRM, CRenderableObject* _pRO, Mat44f _mMatTransf);
+  void                  RenderImpacts           (CRenderManager* _pRM);
 
   virtual bool          ExecuteProcessAction      (float _fDeltaSeconds, float _fDelta, const char* _pcAction);
 
@@ -43,6 +44,7 @@ private:
   bool                  m_bRenderLights;
   float                 m_fPhysxVelocity;
   CRenderableObject*    m_pRenderPhysX;
+
   
   
 };
