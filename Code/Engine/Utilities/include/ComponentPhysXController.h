@@ -7,6 +7,7 @@
 
 //--- forward declarations
 class CComponentObject3D;
+class CComponentMovement;
 class CPhysicController;
 class CPhysicUserData;
 //--------------------
@@ -18,7 +19,7 @@ public:
 
 
   CComponentPhysXController():
-      m_pObject3D(0),
+      m_pObject3D(0), m_pMovement(0),
       m_pPhysXController(0),
       m_pPhysXData(0)
       {};
@@ -29,8 +30,9 @@ public:
             float radius, float height, float slope, float skinwidth, 
 		        float stepOffset, uint32 collisionGroups 
             );
-
+  
   void Update(float _fDeltaTime);
+  void UpdatePostPhysX(float _fDeltaTime);
 
   virtual ~CComponentPhysXController(void) {Done();};
 
@@ -40,6 +42,7 @@ protected:
 private:
   //Altres components referenciats
   CComponentObject3D * m_pObject3D;
+  CComponentMovement * m_pMovement;
 
   //Dades pròpies dels components
   CPhysicController  * m_pPhysXController;

@@ -8,8 +8,7 @@
 
 //--- forward declarations
 class CComponentObject3D;
-class CThPSCamera;
-class CCamera;
+class CComponentMovement;
 //--------------------
 
 class CComponentPlayerController :
@@ -19,7 +18,7 @@ public:
 
 
   CComponentPlayerController():
-      m_pObject3D(0),
+      m_pObject3D(0), m_pMovement(0),
 
       m_fWalkSpeed(1),
       m_fRunSpeed(2),
@@ -79,6 +78,7 @@ protected:
 
 private:
   //Altres components referenciats
+  CComponentMovement * m_pMovement;
   CComponentObject3D * m_pObject3D;
 
   float m_fSpeed;

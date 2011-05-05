@@ -103,7 +103,6 @@ void RegisterEntitiesToLua(lua_State* _pLS)
   module(_pLS) [
     class_<CComponentObject3D, bases<CObject3D,CBaseComponent>>("ComponentObject3D")
       .def("init", &CComponentObject3D::Init)
-      .def_readwrite("modified",   &CComponentObject3D::m_bModified)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPlayerController, CBaseComponent>("ComponentPlayerController")

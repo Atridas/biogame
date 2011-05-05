@@ -24,8 +24,15 @@ public:
   int GetGUID() const {return m_iGUID;};
 
   CBaseComponent* GetComponent(CBaseComponent::Type _type) const;
-
-  void Update(float deltaTime);
+  
+  
+  
+  void         PreUpdate(float _fDeltaTime)      ;
+  void         Update(float _fDeltaTime)         ;
+  void         UpdatePrePhysX(float _fDeltaTime) ;
+  void         UpdatePostPhysX(float _fDeltaTime);
+  void         UpdatePostAnim(float _fDeltaTime) ;
+  void         PostUpdate(float _fDeltaTime)     ;
 
   void ReceiveEvent(const SEvent& _Event);
 

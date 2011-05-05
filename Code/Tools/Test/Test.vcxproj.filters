@@ -50,5 +50,11 @@
     <None Include="..\..\..\Run\Data\XML\init_test_physx.xml">
       <Filter>Data</Filter>
     </None>
+    <None Include="..\..\..\Run\Data\XML\init_test_entities.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\Levels\NivellProves\XML\GameObjects.xml">
+      <Filter>Data</Filter>
+    </None>
   </ItemGroup>
 </Project>

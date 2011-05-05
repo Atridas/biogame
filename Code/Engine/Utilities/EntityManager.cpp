@@ -88,6 +88,24 @@ void CEntityManager::RemoveEntity(int _iId)
   m_vFreeIDs.push_back(_iId);
 }
 
+
+
+
+/// ----------------------------- UPDATES ----------------------------------------------
+
+void CEntityManager::PreUpdate(float _fDeltaTime)
+{
+  vector<CGameEntity*>::iterator l_it  = m_vEntities.begin();
+  vector<CGameEntity*>::iterator l_end = m_vEntities.end();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    CGameEntity* l_pEntity = (*l_it);
+    if(l_pEntity) 
+      l_pEntity->PreUpdate(_fDeltaTime);
+  }
+}
+
 void CEntityManager::Update(float _fDeltaTime)
 {
   vector<CGameEntity*>::iterator l_it  = m_vEntities.begin();
@@ -98,5 +116,57 @@ void CEntityManager::Update(float _fDeltaTime)
     CGameEntity* l_pEntity = (*l_it);
     if(l_pEntity) 
       l_pEntity->Update(_fDeltaTime);
+  }
+}
+
+void CEntityManager::UpdatePrePhysX(float _fDeltaTime)
+{
+  vector<CGameEntity*>::iterator l_it  = m_vEntities.begin();
+  vector<CGameEntity*>::iterator l_end = m_vEntities.end();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    CGameEntity* l_pEntity = (*l_it);
+    if(l_pEntity) 
+      l_pEntity->UpdatePrePhysX(_fDeltaTime);
+  }
+}
+
+void CEntityManager::UpdatePostPhysX(float _fDeltaTime)
+{
+  vector<CGameEntity*>::iterator l_it  = m_vEntities.begin();
+  vector<CGameEntity*>::iterator l_end = m_vEntities.end();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    CGameEntity* l_pEntity = (*l_it);
+    if(l_pEntity) 
+      l_pEntity->UpdatePostPhysX(_fDeltaTime);
+  }
+}
+
+void CEntityManager::UpdatePostAnim(float _fDeltaTime)
+{
+  vector<CGameEntity*>::iterator l_it  = m_vEntities.begin();
+  vector<CGameEntity*>::iterator l_end = m_vEntities.end();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    CGameEntity* l_pEntity = (*l_it);
+    if(l_pEntity) 
+      l_pEntity->UpdatePostAnim(_fDeltaTime);
+  }
+}
+
+void CEntityManager::PostUpdate(float _fDeltaTime)
+{
+  vector<CGameEntity*>::iterator l_it  = m_vEntities.begin();
+  vector<CGameEntity*>::iterator l_end = m_vEntities.end();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    CGameEntity* l_pEntity = (*l_it);
+    if(l_pEntity) 
+      l_pEntity->PostUpdate(_fDeltaTime);
   }
 }

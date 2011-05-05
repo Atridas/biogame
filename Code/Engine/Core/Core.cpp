@@ -157,8 +157,19 @@ void CCore::Update()
   {
     m_pActionManager->Update(l_fElapsedTime);
   }
-  m_pRenderableObjectsManager->Update(l_fElapsedTime);
-  m_pPhysicsManager->Update(l_fElapsedTime);
-  m_pParticleManager->Update(l_fElapsedTime);
+  
+  m_pEntityManager->PreUpdate(l_fElapsedTime);
   m_pEntityManager->Update(l_fElapsedTime);
+  m_pEntityManager->UpdatePrePhysX(l_fElapsedTime);
+
+  m_pPhysicsManager->Update(l_fElapsedTime);// -------------
+  
+  m_pEntityManager->UpdatePostPhysX(l_fElapsedTime);
+
+  m_pParticleManager->Update(l_fElapsedTime);// -------------
+  m_pRenderableObjectsManager->Update(l_fElapsedTime);// ----
+  
+  m_pEntityManager->UpdatePostAnim(l_fElapsedTime);
+  
+  m_pEntityManager->PostUpdate(l_fElapsedTime);
 }

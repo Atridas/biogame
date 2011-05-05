@@ -37,6 +37,9 @@
     <Filter Include="EntitySystem\Components\ComponentPhysXBox">
       <UniqueIdentifier>{a9c09e6a-5b85-4558-92fb-c38a3c5567dc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentMovement">
+      <UniqueIdentifier>{32195c11-2c3d-4bd1-95da-c65c1970b228}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -83,6 +86,9 @@
     </ClCompile>
     <ClCompile Include="ComponentPhysXBox.cpp">
       <Filter>EntitySystem\Components\ComponentPhysXBox</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentMovement.cpp">
+      <Filter>EntitySystem\Components\ComponentMovement</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -142,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentPhysXBox.h">
       <Filter>EntitySystem\Components\ComponentPhysXBox</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentMovement.h">
+      <Filter>EntitySystem\Components\ComponentMovement</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

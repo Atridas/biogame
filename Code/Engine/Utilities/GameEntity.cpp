@@ -18,6 +18,17 @@ void CGameEntity::AddComponent(CBaseComponent* _pComponent)
   }
 }
 
+void CGameEntity::PreUpdate(float deltaTime)
+{
+  vector<CBaseComponent*>::iterator l_it = m_vComponents.begin();
+  vector<CBaseComponent*>::iterator l_end = m_vComponents.end();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    (*l_it)->PreUpdate(deltaTime);
+  }
+}
+
 void CGameEntity::Update(float deltaTime)
 {
   vector<CBaseComponent*>::iterator l_it = m_vComponents.begin();
@@ -26,6 +37,50 @@ void CGameEntity::Update(float deltaTime)
   for(; l_it != l_end; ++l_it)
   {
     (*l_it)->Update(deltaTime);
+  }
+}
+
+void CGameEntity::UpdatePrePhysX(float deltaTime)
+{
+  vector<CBaseComponent*>::iterator l_it = m_vComponents.begin();
+  vector<CBaseComponent*>::iterator l_end = m_vComponents.end();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    (*l_it)->UpdatePrePhysX(deltaTime);
+  }
+}
+
+void CGameEntity::UpdatePostPhysX(float deltaTime)
+{
+  vector<CBaseComponent*>::iterator l_it = m_vComponents.begin();
+  vector<CBaseComponent*>::iterator l_end = m_vComponents.end();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    (*l_it)->UpdatePostPhysX(deltaTime);
+  }
+}
+
+void CGameEntity::UpdatePostAnim(float deltaTime)
+{
+  vector<CBaseComponent*>::iterator l_it = m_vComponents.begin();
+  vector<CBaseComponent*>::iterator l_end = m_vComponents.end();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    (*l_it)->UpdatePostAnim(deltaTime);
+  }
+}
+
+void CGameEntity::PostUpdate(float deltaTime)
+{
+  vector<CBaseComponent*>::iterator l_it = m_vComponents.begin();
+  vector<CBaseComponent*>::iterator l_end = m_vComponents.end();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    (*l_it)->PostUpdate(deltaTime);
   }
 }
 

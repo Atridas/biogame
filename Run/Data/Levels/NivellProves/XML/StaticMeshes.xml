@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<meshes>
+	<mesh name="Escenari" path="Data/Meshes/Escenari.mesh" max="66.8544 3.45273 49.6658" min="-66.8544 -0.654876 -49.6658"/>
+	<mesh name="BoxParallax" path="Data/Meshes/BoxParallax.mesh" max="5.74997 3.10692 4.44316" min="-5.74997 0.0 -4.44316"/>
+	<mesh name="BoxInstance" path="Data/Meshes/BoxInstance.mesh" max="5.74997 3.10692 4.44316" min="-5.74997 0.0 -4.44316"/>
+	<mesh name="BoxNormal" path="Data/Meshes/BoxNormal.mesh" max="5.74997 3.10692 4.44316" min="-5.74997 0.0 -4.44316"/>
+	<mesh name="LowCover" path="Data/Meshes/LowCover.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5"/>
+	<mesh name="HighCover" path="Data/Meshes/HighCover.mesh" max="1.0 1.5 1.0" min="-1.0 0.0 -1.0"/>
+	<mesh name="Wall" path="Data/Meshes/Wall.mesh" max="0.642471 3.97046 2.7743" min="-0.642471 0.0 -2.7743"/>
+</meshes>

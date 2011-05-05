@@ -77,6 +77,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseComponent.cpp" />
+    <ClCompile Include="ComponentMovement.cpp" />
     <ClCompile Include="Component3rdPSCamera.cpp" />
     <ClCompile Include="ComponentPhysXBox.cpp" />
     <ClCompile Include="ComponentPhysXController.cpp" />
@@ -94,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\BaseComponent.h" />
+    <ClInclude Include="include\ComponentMovement.h" />
     <ClInclude Include="include\Component3rdPSCamera.h" />
     <ClInclude Include="include\ComponentObject3D.h" />
     <ClInclude Include="include\ComponentPhysXBox.h" />
