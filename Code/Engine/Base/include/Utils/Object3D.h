@@ -19,7 +19,7 @@ public:
   CObject3D(): m_vPosition(Vect3f(0.0f)), m_fYaw(0.0f),
                m_fPitch(0.0f), m_fRoll(0.0f), m_bVisible(true),m_bRenderBoundingBox(false),
                m_bRenderBoundingSphere(false)
-           {};
+           {m_vMat44.SetIdentity();};
 	CObject3D(const Vect3f& _vPos, float _fYaw, float _fPitch, float _fRoll = 0);
 	virtual ~CObject3D(void) {/*Nothing*/;}
 
@@ -37,7 +37,7 @@ public:
   CBoundingSphere*		GetBoundingSphere	() {return &m_BoundingSphere;}
 
 	//---Set Functions
-	void		SetPosition	( const Vect3f& _vPos );
+	void    SetPosition	( const Vect3f& _vPos );
 	void		SetYaw			( float _fYaw );
 	void		SetPitch		( float _fPitch );
 	void		SetRoll			( float _fRoll );

@@ -29,17 +29,21 @@ public:
 
   void ReceiveEvent(const SEvent& _Event);
 
+  string GetName() const;
+
 protected:
 
   virtual void Release();
 
 private:
-  CGameEntity(int _iId):m_iGUID(_iId) {SetOk(true);};
+  CGameEntity(int _iId):m_iGUID(_iId),m_pszName(0) {SetOk(true);};
   ~CGameEntity() {Done();};
   void AddComponent(CBaseComponent* _pComponent);
 
-  map<CBaseComponent::Type, CBaseComponent*> m_vComponents;
+  map<CBaseComponent::Type, CBaseComponent*> m_mComponents;
+  vector<CBaseComponent*>                    m_vComponents;
   int                     m_iGUID;
+  const string*           m_pszName;
   
   friend class CBaseComponent;
   friend class CEntityManager;

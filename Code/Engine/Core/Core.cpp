@@ -160,4 +160,5 @@ void CCore::Update()
   m_pRenderableObjectsManager->Update(l_fElapsedTime);
   m_pPhysicsManager->Update(l_fElapsedTime);
   m_pParticleManager->Update(l_fElapsedTime);
+  m_pEntityManager->Update(l_fElapsedTime);
 }

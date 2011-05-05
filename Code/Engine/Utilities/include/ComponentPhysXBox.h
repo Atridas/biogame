@@ -1,38 +1,39 @@
 #pragma once
-#ifndef __COMPONENT_PHYSX_CONTROLLER__
-#define __COMPONENT_PHYSX_CONTROLLER__
+#ifndef __COMPONENT_PHYSX_BOX__
+#define __COMPONENT_PHYSX_BOX__
 
 #include "base.h"
 #include "EntityDefines.h"
 
 //--- forward declarations
 class CComponentObject3D;
-class CPhysicController;
+class CPhysicActor;
 class CPhysicUserData;
 //--------------------
 
-class CComponentPhysXController :
+class CComponentPhysXBox :
   public CBaseComponent
 {
 public:
 
 
-  CComponentPhysXController():
+  CComponentPhysXBox():
       m_pObject3D(0),
-      m_pPhysXController(0),
+      m_pPhysXBox(0),
       m_pPhysXData(0)
       {};
 
-  CBaseComponent::Type GetType() {return CBaseComponent::ECT_PHISX_CONTROLLER;};
+  CBaseComponent::Type GetType() {return CBaseComponent::ECT_PHISX_BOX;};
 
   bool Init(CGameEntity *_Entity,
-            float radius, float height, float slope, float skinwidth, 
-		        float stepOffset, uint32 collisionGroups 
+            float _fSizeX, float _fSizeY, float _fSizeZ,
+            float _fPosX , float _fPosY , float _fPosZ,
+            float _fDensity, int _iCollisionMask
             );
 
   void Update(float _fDeltaTime);
 
-  virtual ~CComponentPhysXController(void) {Done();};
+  virtual ~CComponentPhysXBox(void) {Done();};
 
 protected:
   virtual void Release();
@@ -42,7 +43,7 @@ private:
   CComponentObject3D * m_pObject3D;
 
   //Dades pròpies dels components
-  CPhysicController  * m_pPhysXController;
+  CPhysicActor       * m_pPhysXBox;
   CPhysicUserData    * m_pPhysXData;
 };
 

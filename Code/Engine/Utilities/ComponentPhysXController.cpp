@@ -4,8 +4,6 @@
 #include "PhysicsManager.h"
 #include "Core.h"
 
-#include <sstream>
-
 #include "ComponentPhysXController.h"
 
 bool CComponentPhysXController::Init(CGameEntity *_pEntity,
@@ -19,15 +17,13 @@ bool CComponentPhysXController::Init(CGameEntity *_pEntity,
   m_pObject3D = dynamic_cast<CComponentObject3D*>(_pEntity->GetComponent(ECT_OBJECT_3D));
   assert(m_pObject3D); //TODO fer missatges d'error més elavorats
 
-  stringstream l_SStream;
-
-  l_SStream << "Entity " << _pEntity->GetGUID();
-
-  m_pPhisXData = new CPhysicUserData(l_SStream.str().c_str());
+  m_pPhysXData = new CPhysicUserData(_pEntity->GetName().c_str());
+  m_pPhysXData->SetPaint(true);
+  m_pPhysXData->SetColor(colGREEN);
 
   m_pPhysXController = new CPhysicController(
                                   radius, height, slope, skinwidth, stepOffset, collisionGroups,
-                                  m_pPhisXData,
+                                  m_pPhysXData,
                                   m_pObject3D->GetPosition());
   
   m_pPhysXController->SetPitch(m_pObject3D->GetPitch());
@@ -42,19 +38,28 @@ bool CComponentPhysXController::Init(CGameEntity *_pEntity,
 
 void CComponentPhysXController::Update(float _fDeltaTime)
 {
-  Vect3f l_vMovementVector = m_pObject3D->GetPosition() - m_pPhysXController->GetPosition();
+  if(m_pObject3D->m_bModified)
+  {
+    Vect3f l_vObj = m_pObject3D->GetPosition();
+    Vect3f l_vPhy = m_pPhysXController->GetPosition();
+    Vect3f l_vMovementVector = l_vObj - l_vPhy;
 
-  m_pPhysXController->Move(l_vMovementVector, _fDeltaTime);
-  Vect3f l_ControllerPos = m_pPhysXController->GetPosition();
-  m_pObject3D->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y,l_ControllerPos.z));
+    m_pPhysXController->Move(l_vMovementVector, _fDeltaTime);
+  }
+  else
+  {
+    m_pPhysXController->Move(Vect3f(0,0,0), _fDeltaTime);
+  }
+  Vect3f l_vPhy2 = m_pPhysXController->GetPosition();
+  m_pObject3D->SetPosition(l_vPhy2);
 }
 
 
 void CComponentPhysXController::Release(void)
 {
-  //TODO treure controller del physic manager
-  //CORE->GetPhysicsManager()
+  //treure controller del physic manager
+  CORE->GetPhysicsManager()->ReleasePhysicController(m_pPhysXController);
 
   CHECKED_DELETE(m_pPhysXController);
-  CHECKED_DELETE(m_pPhisXData);
+  CHECKED_DELETE(m_pPhysXData);
 }

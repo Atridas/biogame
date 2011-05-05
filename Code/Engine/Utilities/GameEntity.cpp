@@ -1,54 +1,78 @@
 #include "EntityDefines.h"
 
+#include <sstream>
 
 void CGameEntity::AddComponent(CBaseComponent* _pComponent)
 {
-  assert(m_vComponents.find(_pComponent->GetType()) == m_vComponents.end());
-  m_vComponents[_pComponent->GetType()] = _pComponent;
+  assert(m_mComponents.find(_pComponent->GetType()) == m_mComponents.end());
+  m_mComponents[_pComponent->GetType()] = _pComponent;
+
+  //insertem els components en ordre de tipus.
+  int position = m_vComponents.size();
+  m_vComponents.push_back(_pComponent);
+  while(position>0 && m_vComponents[position-1]->GetType() > _pComponent->GetType())
+  {
+    m_vComponents[position] = m_vComponents[position-1];
+    m_vComponents[position-1] = _pComponent;
+    --position;
+  }
 }
 
 void CGameEntity::Update(float deltaTime)
 {
-  map<CBaseComponent::Type, CBaseComponent*>::iterator l_it = m_vComponents.begin();
-  map<CBaseComponent::Type, CBaseComponent*>::iterator l_end = m_vComponents.end();
+  vector<CBaseComponent*>::iterator l_it = m_vComponents.begin();
+  vector<CBaseComponent*>::iterator l_end = m_vComponents.end();
 
   for(; l_it != l_end; ++l_it)
   {
-    l_it->second->Update(deltaTime);
+    (*l_it)->Update(deltaTime);
   }
 }
 
 void CGameEntity::ReceiveEvent(const SEvent& _Event)
 {
-  map<CBaseComponent::Type, CBaseComponent*>::iterator l_it = m_vComponents.begin();
-  map<CBaseComponent::Type, CBaseComponent*>::iterator l_end = m_vComponents.end();
+  vector<CBaseComponent*>::iterator l_it = m_vComponents.begin();
+  vector<CBaseComponent*>::iterator l_end = m_vComponents.end();
 
   for(; l_it != l_end; ++l_it)
   {
-    l_it->second->ReceiveEvent(_Event);
+    (*l_it)->ReceiveEvent(_Event);
   }
 }
 
 CBaseComponent* CGameEntity::GetComponent(CBaseComponent::Type _type) const
 {
-  map<CBaseComponent::Type, CBaseComponent*>::const_iterator l_it = m_vComponents.find(_type);
+  map<CBaseComponent::Type, CBaseComponent*>::const_iterator l_it = m_mComponents.find(_type);
 
-  if(l_it == m_vComponents.cend())
+  if(l_it == m_mComponents.cend())
   {
     return 0;
   }
   return l_it->second;
 }
 
+string CGameEntity::GetName() const
+{
+  if(m_pszName)
+  {
+    return *m_pszName;
+  } else {
+    stringstream l_SStream;
+    l_SStream << "Entity " << GetGUID();
+    return l_SStream.str();
+  }
+}
+
 void CGameEntity::Release()
 {
-  map<CBaseComponent::Type, CBaseComponent*>::const_iterator l_it = m_vComponents.begin();
-  map<CBaseComponent::Type, CBaseComponent*>::const_iterator l_end = m_vComponents.end();
+  vector<CBaseComponent*>::iterator l_it = m_vComponents.begin();
+  vector<CBaseComponent*>::iterator l_end = m_vComponents.end();
 
   for(; l_it != l_end; ++l_it)
   {
-    delete l_it->second;
+    delete *l_it;
   }
-
+  
+  m_mComponents.clear();
   m_vComponents.clear();
 }

@@ -17,8 +17,9 @@ extern "C"
 
 #include "ComponentObject3D.h"
 #include "Component3rdPSCamera.h"
-#include "ComponentPhysXController.h"
 #include "ComponentPlayerController.h"
+#include "ComponentPhysXController.h"
+#include "ComponentPhysXBox.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -101,10 +102,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
 
   module(_pLS) [
     class_<CComponentObject3D, bases<CObject3D,CBaseComponent>>("ComponentObject3D")
-      
-    // ----------------------------------------------------------------------------------------------------
-    ,class_<CComponentPhysXController,CBaseComponent>("ComponentPhysXController")
-      .def("init", &CComponentPhysXController::Init)
+      .def("init", &CComponentObject3D::Init)
+      .def_readwrite("modified",   &CComponentObject3D::m_bModified)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPlayerController, CBaseComponent>("ComponentPlayerController")
@@ -130,6 +129,14 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponent3rdPSCamera, CBaseComponent>("Component3rdPSCamera")
       .def("init", &CComponent3rdPSCamera::Init)
       .def_readwrite("camera_height", &CComponent3rdPSCamera::m_fCameraHeight)
+      
+    // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentPhysXController,CBaseComponent>("ComponentPhysXController")
+      .def("init", &CComponentPhysXController::Init)
+      
+    // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentPhysXBox, CBaseComponent>("ComponentPhysXBox")
+      .def("init", &CComponentPhysXBox::Init)
   
   ];
 }

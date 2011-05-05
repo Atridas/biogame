@@ -7,6 +7,8 @@
 //Forward declarations---------------------
 class CObject3D;
 class CRenderManager;
+class CPhysicUserData;
+class CPhysicActor;
 //-----------------------------------------
 
 class CEntityProcess:
@@ -14,7 +16,7 @@ class CEntityProcess:
 {
 
 public:
-                        CEntityProcess       (): CProcess("CEntityProcess"),m_pPlayerEntity(0)
+                        CEntityProcess       (): CProcess("CEntityProcess"),m_pPlayerEntity(0),m_pUserData(0),m_pPActorPlane(0)
                                                 {};
   virtual               ~CEntityProcess      ()                          {Done();};
 
@@ -32,4 +34,6 @@ private:
 	void                  Release                 ();
 
   CGameEntity*          m_pPlayerEntity;
+  CPhysicUserData*      m_pUserData;
+  CPhysicActor*         m_pPActorPlane;
 };

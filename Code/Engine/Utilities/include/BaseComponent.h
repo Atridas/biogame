@@ -25,8 +25,9 @@ class CBaseComponent:
 public:
   enum Type {
     ECT_OBJECT_3D,
-    ECT_PHISX_CONTROLLER,
     ECT_PLAYER_CONTROLLER,
+    ECT_PHISX_CONTROLLER,
+    ECT_PHISX_BOX,
     ECT_3RD_PERSON_SHOOTER_CAMERA
   };
   

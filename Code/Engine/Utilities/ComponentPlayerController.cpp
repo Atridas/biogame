@@ -101,20 +101,24 @@ void CComponentPlayerController::Update(float _fDeltaTime)
   {
     Vect3f l_vDirection(cos(l_fYaw), 0, sin(l_fYaw) );
     m_pObject3D->SetPosition( m_pObject3D->GetPosition() + l_vDirection * (m_fSpeed*_fDeltaTime));
+    m_pObject3D->m_bModified = true;
   }
   if(l_pActionManager->IsActionActive(m_szMoveBack))
   {
     Vect3f l_vDirection(cos(l_fYaw), 0, sin(l_fYaw) );
     m_pObject3D->SetPosition( m_pObject3D->GetPosition() - l_vDirection * (m_fSpeed*_fDeltaTime));
+    m_pObject3D->m_bModified = true;
   }
   if(l_pActionManager->IsActionActive(m_szMoveLeft))
   {
     Vect3f l_vLeft(cos(l_fYaw+FLOAT_PI_VALUE/2), 0, sin(l_fYaw+FLOAT_PI_VALUE/2) );
     m_pObject3D->SetPosition( m_pObject3D->GetPosition() + l_vLeft * (m_fSpeed*_fDeltaTime));
+    m_pObject3D->m_bModified = true;
   }
   if(l_pActionManager->IsActionActive(m_szMoveRight))
   {
     Vect3f l_vLeft(cos(l_fYaw+FLOAT_PI_VALUE/2), 0, sin(l_fYaw+FLOAT_PI_VALUE/2) );
     m_pObject3D->SetPosition( m_pObject3D->GetPosition() - l_vLeft * (m_fSpeed*_fDeltaTime));
+    m_pObject3D->m_bModified = true;
   }
 }
