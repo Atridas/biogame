@@ -37,21 +37,9 @@ void  CGameObject::UpdateMesh(float _fElapsedTime)
 
 void  CGameObject::UpdateBoundingBox(float _fElapsedTime)
 {
-  Mat44f l_vPhysXMat,l_vMt,l_vMtotal;
+  Mat44f l_vPhysXMat;
   m_pPhysXActor->GetMat44(l_vPhysXMat);
-
-  l_vMt.SetIdentity();
-  l_vMt.Translate(Vect3f(-m_pRenderableObject->GetBoundingBox()->GetMiddlePoint().x,
-                         -m_pRenderableObject->GetBoundingBox()->GetMiddlePoint().y,
-                         -m_pRenderableObject->GetBoundingBox()->GetMiddlePoint().z));
-
-  l_vMtotal = l_vPhysXMat*l_vMt;
-
-  m_pRenderableObject->SetMat44(l_vMtotal);
-
-  /*Mat44f l_vPhysXMat;
-  m_pPhysXActor->GetMat44(l_vPhysXMat);
-  m_pRenderableObject->SetMat44(l_vPhysXMat);*/
+  m_pRenderableObject->SetMat44(l_vPhysXMat);
 
 }
 

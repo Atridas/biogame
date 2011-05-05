@@ -47,14 +47,14 @@ CPhysicActor* CGameObjectManager::AddPhysicActor(CRenderableObject* _pRenderObje
 
   if (_bPushable)
   {
-   l_pPhysicActor->AddBoxSphape(l_vBoxDim/2,v3fZERO,NULL,GROUP_COLLIDABLE_PUSHABLE);
+   l_pPhysicActor->AddBoxSphape(l_vBoxDim/2,l_vMiddlePos,NULL,GROUP_COLLIDABLE_PUSHABLE);
   }
   else
   {
-    l_pPhysicActor->AddBoxSphape(l_vBoxDim/2,v3fZERO,NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
+    l_pPhysicActor->AddBoxSphape(l_vBoxDim/2,l_vMiddlePos,NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
   } 
-  //l_pPhysicActor->SetGlobalPosition(Vect3f(l_vPos.x,l_vPos.y+l_vMiddlePos.y,l_vPos.z));
-  Mat44f l_vMat = _pRenderObject->GetMat44();
+
+ 
   if (_fBody != 0)
   {
     l_pPhysicActor->CreateBody(_fBody);
@@ -62,17 +62,9 @@ CPhysicActor* CGameObjectManager::AddPhysicActor(CRenderableObject* _pRenderObje
 
   CORE->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
 
-  //Operacions amb Matrius per tractar la posicio correcte amb BoundingBox
-  Mat44f l_vMt,l_vMtotal;
-  l_vMt.SetIdentity();
-  l_vMt.Translate(Vect3f(_pRenderObject->GetBoundingBox()->GetMiddlePoint().x,
-                         _pRenderObject->GetBoundingBox()->GetMiddlePoint().y,
-                         _pRenderObject->GetBoundingBox()->GetMiddlePoint().z));
+  Mat44f l_vMat = _pRenderObject->GetMat44();
+  l_pPhysicActor->SetMat44(l_vMat);
 
-  l_vMtotal = l_vMat*l_vMt;
-
-
-  l_pPhysicActor->SetMat44(l_vMtotal);
   m_vActors.push_back(l_pPhysicActor);
  
   
@@ -110,14 +102,15 @@ CPhysicActor* CGameObjectManager::AddPhysicActorMesh(CRenderableObject* _pRender
     l_pPhysicActor->AddMeshShape(l_pMesh,v3fZERO,GROUP_COLLIDABLE_NON_PUSHABLE);
   }
 
-  //l_pPhysicActor->SetGlobalPosition(Vect3f(l_vPos.x,l_vPos.y,l_vPos.z));
-  Mat44f l_vMat = l_pInstanceMesh->GetMat44();
+  
   
   if (_fBody != 0)
   {
     l_pPhysicActor->CreateBody(_fBody);
   }
   CORE->GetPhysicsManager()->AddPhysicActor(l_pPhysicActor);
+
+  Mat44f l_vMat = l_pInstanceMesh->GetMat44();
   l_pPhysicActor->SetMat44(l_vMat);
   m_vActors.push_back(l_pPhysicActor);
 
