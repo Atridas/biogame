@@ -11,7 +11,7 @@ class CComponentObject3D :
   public CObject3D
 {
 public:
-  CComponentObject3D(void) {};
+  CComponentObject3D(void):m_bModified(false) {};
   virtual ~CComponentObject3D(void) {Done();};
   
 
@@ -19,8 +19,10 @@ public:
   
   bool Init(CGameEntity *_pEntity) { assert(_pEntity->IsOk()); SetEntity(_pEntity); SetOk(true); return IsOk();};
 
-
+  void Update(float _dt) {m_bModified = false;};
   void Release(){};
+
+  bool m_bModified;
 };
 
 #endif

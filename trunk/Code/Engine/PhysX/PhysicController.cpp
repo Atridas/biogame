@@ -112,7 +112,9 @@ void CPhysicController::SetPosition	(const Vect3f& pos)
 		m_pPhXControllerDesc->position.y		= pos.y;
 		m_pPhXControllerDesc->position.z		= pos.z;
 	}
-	CObject3D::m_vPosition = pos;
+	//CObject3D::m_vPosition = pos;
+  //CObject3D::InitMat44();
+  CObject3D::SetPosition(pos);
 }
 
 Vect3f CPhysicController::GetPosition ()
@@ -165,6 +167,7 @@ void CPhysicController::Move (const Vect3f& direction, float elapsedTime)
 	CObject3D::m_vPosition.x = (float)tmp.x;
 	CObject3D::m_vPosition.y = (float)tmp.y;
 	CObject3D::m_vPosition.z = (float)tmp.z;
+  CObject3D::InitMat44();
 }
 
 
@@ -215,5 +218,6 @@ bool CPhysicController::UpdateCharacterExtents (bool bent, float ammount)
 	NxCapsuleController* c = static_cast<NxCapsuleController*> (m_pPhXController);
 	c->setHeight(height);
 	m_fHeight_Capsule = height;
+  CObject3D::InitMat44();
 	return true;
 }

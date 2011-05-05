@@ -10,12 +10,21 @@
 #include "ComponentPhysXController.h"
 #include "ComponentPlayerController.h"
 #include "Component3rdPSCamera.h"
+#include "ComponentPhysXBox.h"
+
+
+#include "PhysicActor.h"
+#include <PhysicsManager.h>
 
 bool CEntityProcess::Init()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"CEntityProcess::Init");
   
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
+
+
+
+  // Creem la entitat del jugador ----------------------------------------------------------------
 
   m_pPlayerEntity = CORE->GetEntityManager()->CreateEntity();
 
@@ -40,6 +49,31 @@ bool CEntityProcess::Init()
 
   m_pCamera = m_pComponent3rdPSCamera->GetCamera();
 
+  CComponentPhysXController *m_pComponentPhysXController = new CComponentPhysXController();
+  m_pComponentPhysXController->Init(m_pPlayerEntity, 0.3f, 1.5f, 10.0f, 0.1f, 0.5f, 1);
+
+
+  CGameEntity* l_peFloor = CORE->GetEntityManager()->CreateEntity();
+  (new CComponentObject3D())->Init(l_peFloor);
+  (new CComponentPhysXBox())->Init(l_peFloor ,
+                                    50.f, 1.f, 50.f, 
+                                    0.f, -1.f,  0.f,
+                                    0, 0
+                                  );
+  
+
+  /*
+  CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
+  l_pPhysManager->SetDebugRenderMode(true);
+
+  m_pUserData = new CPhysicUserData("Plane");
+  m_pUserData->SetPaint(true);
+  m_pUserData->SetColor(colBLUE);
+  m_pPActorPlane = new CPhysicActor(m_pUserData);
+  m_pPActorPlane->AddBoxSphape(Vect3f(50.f,1.0f,50.f),Vect3f(0.0f,-1.0f,0.0f),NULL,0);
+  l_pPhysManager->AddPhysicActor(m_pPActorPlane);
+  */
+
   SetOk(true);
   return IsOk();
 }
@@ -47,11 +81,14 @@ bool CEntityProcess::Init()
 void CEntityProcess::Release()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"CEntityProcess::Release");
+
+  CHECKED_DELETE(m_pPActorPlane)
+  CHECKED_DELETE(m_pUserData)
 }
 
 void CEntityProcess::Update(float _fElapsedTime)
 {
-  m_pPlayerEntity->Update(_fElapsedTime);
+
 }
 
 void CEntityProcess::RenderScene(CRenderManager* _pRM)
@@ -67,6 +104,7 @@ void CEntityProcess::RenderScene(CRenderManager* _pRM)
 
 void CEntityProcess::RenderINFO(CRenderManager* _pRM)
 {
+  CORE->GetPhysicsManager()->DebugRender(_pRM);
 
   /*
   uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");

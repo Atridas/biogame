@@ -50,6 +50,7 @@ void CEntityManager::SetName(const string& _szName, int _iId)
   assert(m_vNames.find(_szName) != m_vNames.end());
 
   m_vNames[_szName] = _iId;
+  m_vEntities[_iId]->m_pszName = &(m_vNames.find(_szName)->first); //TODO hi ha d'haver una manera més correcte de fer això
 }
 
 CGameEntity* CEntityManager::GetEntity(const string& _szName) const
@@ -85,4 +86,17 @@ void CEntityManager::RemoveEntity(int _iId)
   delete m_vEntities[_iId];
   m_vEntities[_iId] = 0;
   m_vFreeIDs.push_back(_iId);
+}
+
+void CEntityManager::Update(float _fDeltaTime)
+{
+  vector<CGameEntity*>::iterator l_it  = m_vEntities.begin();
+  vector<CGameEntity*>::iterator l_end = m_vEntities.end();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    CGameEntity* l_pEntity = (*l_it);
+    if(l_pEntity) 
+      l_pEntity->Update(_fDeltaTime);
+  }
 }
