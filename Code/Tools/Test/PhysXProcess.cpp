@@ -44,9 +44,10 @@
 #define RADIUS_CONTROLLER 0.3f
 #define ALTURA_TOTAL ((ALTURA_CONTROLLER+2*RADIUS_CONTROLLER)*0.5f + 0.1f)
 
-#define COLISIONABLE_MASK (1<<GROUP_COLLIDABLE_NON_PUSHABLE)
+#define COLISIONABLE_MASK ((1<<GROUP_COLLIDABLE_NON_PUSHABLE))
 
 
+vector<SCollisionInfo> g_vCollisions;
 CPhysicUserData* g_pUserData;
 CPhysicUserData* g_pUserData2;
 CPhysicUserData* g_pUserData3;
@@ -67,6 +68,10 @@ CPhysicActor* g_Box04;
 CPhysicActor* g_Box05;
 CPhysicActor* g_Box06;
 CPhysicActor* g_Box07;
+
+CPhysicActor* g_pBoxJoint;
+CPhysicActor* g_pSphereJoint;
+
 
 CGameObject* g_pGameBox02;
 CGameObject* g_pGameBox03;
@@ -161,6 +166,8 @@ bool CPhysXProcess::Init()
   g_pUserData5 = new CPhysicUserData("Cub");
   g_pUserDataEscala = new CPhysicUserData("Escala");
   g_pUserDataController = new CPhysicUserData("PhysX Controller");
+
+  g_pBoxes= new CPhysicUserData("Boxes");
   g_pUserData->SetPaint(false);
   g_pUserData->SetColor(colWHITE);
   g_pUserData2->SetPaint(true);
@@ -200,7 +207,7 @@ bool CPhysXProcess::Init()
 
   //Actor estatic en forma de pla per fer probes amb el charactercontroller:
   //CPhysicActor* plaXung = new CPhysicActor(g_pUserData2);
-  g_pPActorPlane->AddBoxSphape(Vect3f(500.f,1.0f,500.f),Vect3f(0.0f,-1.0f,0.0f),NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
+  //g_pPActorPlane->AddBoxSphape(Vect3f(500.f,1.0f,500.f),Vect3f(0.0f,-1.0f,0.0f),NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
   //g_pPActorPlane->CreateBody(100.0f);
 
 
@@ -229,12 +236,12 @@ bool CPhysXProcess::Init()
 
   //l_pPhysManager->AddPhysicActor(g_pPActorPlane);
   
-  l_pPhysManager->AddPhysicActor(g_pPActorComposite);
-  l_pPhysManager->AddPhysicActor(g_pPActorPlane);
-  l_pPhysManager->AddPhysicActor(g_pPEscala);
+  //l_pPhysManager->AddPhysicActor(g_pPActorComposite);
+  //l_pPhysManager->AddPhysicActor(g_pPActorPlane);
+  //l_pPhysManager->AddPhysicActor(g_pPEscala);
   
 
-  g_pPhysXController = new CPhysicController(RADIUS_CONTROLLER,ALTURA_CONTROLLER,10.0f,0.1f,0.5f,2,g_pUserDataController,Vect3f(-7.0f,2.2f,-4.0f));
+  g_pPhysXController = new CPhysicController(RADIUS_CONTROLLER,ALTURA_CONTROLLER,10.0f,0.1f,0.5f,COLISIONABLE_MASK,g_pUserDataController,Vect3f(-7.0f,2.2f,-4.0f));
   g_pPhysXController->SetYaw(-90);
   l_pPhysManager->AddPhysicController(g_pPhysXController);
 
@@ -365,7 +372,7 @@ bool CPhysXProcess::Init()
   
   //CORE->GetStaticMeshManager()->GetResource("ordinador_def")->
   g_pObjectManager = new CGameObjectManager();
-  g_pObjectManager->Load("Data/Levels/PhysX/XML/GameObjects.xml",false);
+  g_pObjectManager->Load("Data/Levels/NivellProves/XML/GameObjects.xml",false);
 
 
 
@@ -443,6 +450,7 @@ void CPhysXProcess::Release()
   CHECKED_DELETE(g_pJoint5)
   CHECKED_DELETE(g_pBoxes)  
   CHECKED_DELETE(g_pObjectManager);
+  g_vCollisions.clear();
   //CHECKED_DELETE(plaXung)
 
   //CHECKED_DELETE(m_pRenderPhysX);
@@ -561,6 +569,9 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
    l_pPhysManager->DebugRender(_pRM);
 
 
+   RenderImpacts(_pRM);
+
+
 
    /*if (m_pRenderPhysX!=0)
    {
@@ -593,6 +604,24 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
   
 
 }
+
+
+void CPhysXProcess::RenderImpacts(CRenderManager* _pRM)
+{
+  Mat44f t;  
+  for (int i=0;i<g_vCollisions.size();++i)
+  {
+
+      t.SetIdentity();
+      t.Translate(g_vCollisions[i].m_CollisionPoint);
+      _pRM->SetTransform(t);
+      _pRM->DrawSphere(0.1f,colYELLOW,5);
+      _pRM->DrawLine(v3fZERO,g_vCollisions[i].m_Normal*0.5f,colGREEN);
+  }
+
+
+}
+
 
 void CPhysXProcess::RenderINFO(CRenderManager* _pRM)
 {
@@ -789,7 +818,8 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
         g_pUserDataSHOOT->SetColor(colWHITE);
       }
       
-      g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActor(l_PosCamera,l_DirCamera,1,g_pUserDataSHOOT,l_CInfo);
+      g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActor(l_PosCamera,l_DirCamera,2,g_pUserDataSHOOT,l_CInfo);
+      g_vCollisions.push_back(l_CInfo);
 
       if (g_pUserDataSHOOT != 0)
       {
