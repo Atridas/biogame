@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<GameObjectManager>
+	<GameObject name="Escenari" Physx="true" PhysxType="mesh" RenderableObject="Escenari" PhysxActor="Escenari" Pushable="false" Body="0"/>
+	<GameObject name="BoxParallax" Physx="true" PhysxType="BoundingBox" RenderableObject="BoxParallax" PhysxActor="BoxParallax" Pushable="false" Body="0"/>
+	<GameObject name="BoxInstance" Physx="true" PhysxType="BoundingBox" RenderableObject="BoxInstance" PhysxActor="BoxInstance" Pushable="false" Body="0"/>
+	<GameObject name="BoxNormal" Physx="true" PhysxType="BoundingBox" RenderableObject="BoxNormal" PhysxActor="BoxNormal" Pushable="false" Body="0"/>
+	<GameObject name="LowCover" Physx="true" PhysxType="BoundingBox" RenderableObject="LowCover" PhysxActor="LowCover" Pushable="false" Body="0"/>
+	<GameObject name="HighCover" Physx="true" PhysxType="BoundingBox" RenderableObject="HighCover" PhysxActor="HighCover" Pushable="false" Body="0"/>
+	<GameObject name="LowCover01" Physx="true" PhysxType="BoundingBox" RenderableObject="LowCover01" PhysxActor="LowCover01" Pushable="false" Body="0"/>
+	<GameObject name="LowCover02" Physx="true" PhysxType="BoundingBox" RenderableObject="LowCover02" PhysxActor="LowCover02" Pushable="false" Body="0"/>
+	<GameObject name="LowCover03" Physx="true" PhysxType="BoundingBox" RenderableObject="LowCover03" PhysxActor="LowCover03" Pushable="false" Body="0"/>
+	<GameObject name="LowCover04" Physx="true" PhysxType="BoundingBox" RenderableObject="LowCover04" PhysxActor="LowCover04" Pushable="false" Body="0"/>
+	<GameObject name="HighCover01" Physx="true" PhysxType="BoundingBox" RenderableObject="HighCover01" PhysxActor="HighCover01" Pushable="false" Body="0"/>
+	<GameObject name="LowCover05" Physx="true" PhysxType="BoundingBox" RenderableObject="LowCover05" PhysxActor="LowCover05" Pushable="false" Body="0"/>
+	<GameObject name="LowCover06" Physx="true" PhysxType="BoundingBox" RenderableObject="LowCover06" PhysxActor="LowCover06" Pushable="false" Body="0"/>
+	<GameObject name="Wall" Physx="true" PhysxType="BoundingBox" RenderableObject="Wall" PhysxActor="Wall" Pushable="false" Body="0"/>
+	<GameObject name="HighCover02" Physx="true" PhysxType="BoundingBox" RenderableObject="HighCover02" PhysxActor="HighCover02" Pushable="false" Body="0"/>
+	<GameObject name="LowCover07" Physx="true" PhysxType="BoundingBox" RenderableObject="LowCover07" PhysxActor="LowCover07" Pushable="false" Body="0"/>
+</GameObjectManager>

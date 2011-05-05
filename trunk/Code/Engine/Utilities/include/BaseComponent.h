@@ -25,6 +25,7 @@ class CBaseComponent:
 public:
   enum Type {
     ECT_OBJECT_3D,
+    ECT_MOVEMENT,
     ECT_PLAYER_CONTROLLER,
     ECT_PHISX_CONTROLLER,
     ECT_PHISX_BOX,
@@ -38,7 +39,13 @@ public:
   void ReceiveEvent(const SEvent& _Event) {};
 
   //updates
-  virtual void Update(float _fDeltaTime) {};
+  
+  virtual void PreUpdate(float _fDeltaTime)        {};
+  virtual void Update(float _fDeltaTime)           {};
+  virtual void UpdatePrePhysX(float _fDeltaTime)   {};
+  virtual void UpdatePostPhysX(float _fDeltaTime)  {};
+  virtual void UpdatePostAnim(float _fDeltaTime)   {};
+  virtual void PostUpdate(float _fDeltaTime)       {};
 
 protected:
   CBaseComponent():m_pEntity(0) {};

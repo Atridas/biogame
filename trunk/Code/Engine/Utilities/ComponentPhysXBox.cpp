@@ -40,7 +40,7 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity,
   return IsOk();
 }
 
-void CComponentPhysXBox::Update(float _fDeltaTime)
+void CComponentPhysXBox::UpdatePostPhysX(float _fDeltaTime)
 {
   Mat44f l_mat;
   m_pPhysXBox->GetMat44(l_mat);

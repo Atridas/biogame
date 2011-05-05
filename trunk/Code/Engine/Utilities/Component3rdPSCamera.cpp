@@ -39,14 +39,14 @@ void CComponent3rdPSCamera::Release()
   CHECKED_DELETE(m_pCamera);
 }
 
-void CComponent3rdPSCamera::Update(float _fDeltaTime)
+void CComponent3rdPSCamera::PostUpdate(float _fDeltaTime)
 {
 
   Vect3f l_vPos = m_pObject3D->GetPosition();
   l_vPos.y += m_fCameraHeight;
   m_CameraObject.SetPosition( l_vPos );
   m_CameraObject.SetPitch( m_pObject3D->GetPitch() );
-  m_CameraObject.SetYaw( m_pObject3D->GetYaw() );
+  m_CameraObject.SetYaw  ( m_pObject3D->GetYaw()   );
 }
 
 

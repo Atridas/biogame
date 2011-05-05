@@ -1,5 +1,6 @@
 #include "ComponentPlayerController.h"
 #include "ComponentObject3D.h"
+#include "ComponentMovement.h"
 #include "ThPSCamera.h"
 #include "RenderManager.h"
 #include "Core.h"
@@ -10,6 +11,9 @@ bool CComponentPlayerController::Init(CGameEntity *_pEntity)
 {
   assert(_pEntity->IsOk());
   SetEntity(_pEntity);
+
+  m_pMovement = dynamic_cast<CComponentMovement*>(_pEntity->GetComponent(ECT_MOVEMENT));
+  assert(m_pMovement); //TODO fer missatges d'error més elavorats
 
   m_pObject3D = dynamic_cast<CComponentObject3D*>(_pEntity->GetComponent(ECT_OBJECT_3D));
   assert(m_pObject3D); //TODO fer missatges d'error més elavorats
@@ -37,6 +41,9 @@ bool CComponentPlayerController::Init(CGameEntity *_pEntity,
 {
   assert(_pEntity->IsOk());
   SetEntity(_pEntity);
+
+  m_pMovement = dynamic_cast<CComponentMovement*>(_pEntity->GetComponent(ECT_MOVEMENT));
+  assert(m_pMovement); //TODO fer missatges d'error més elavorats
 
   m_pObject3D = dynamic_cast<CComponentObject3D*>(_pEntity->GetComponent(ECT_OBJECT_3D));
   assert(m_pObject3D); //TODO fer missatges d'error més elavorats
@@ -100,25 +107,21 @@ void CComponentPlayerController::Update(float _fDeltaTime)
   if(l_pActionManager->IsActionActive(m_szMoveForward))
   {
     Vect3f l_vDirection(cos(l_fYaw), 0, sin(l_fYaw) );
-    m_pObject3D->SetPosition( m_pObject3D->GetPosition() + l_vDirection * (m_fSpeed*_fDeltaTime));
-    m_pObject3D->m_bModified = true;
+    m_pMovement->m_vMovement += l_vDirection * (m_fSpeed*_fDeltaTime);
   }
   if(l_pActionManager->IsActionActive(m_szMoveBack))
   {
     Vect3f l_vDirection(cos(l_fYaw), 0, sin(l_fYaw) );
-    m_pObject3D->SetPosition( m_pObject3D->GetPosition() - l_vDirection * (m_fSpeed*_fDeltaTime));
-    m_pObject3D->m_bModified = true;
+    m_pMovement->m_vMovement -= l_vDirection * (m_fSpeed*_fDeltaTime);
   }
   if(l_pActionManager->IsActionActive(m_szMoveLeft))
   {
     Vect3f l_vLeft(cos(l_fYaw+FLOAT_PI_VALUE/2), 0, sin(l_fYaw+FLOAT_PI_VALUE/2) );
-    m_pObject3D->SetPosition( m_pObject3D->GetPosition() + l_vLeft * (m_fSpeed*_fDeltaTime));
-    m_pObject3D->m_bModified = true;
+    m_pMovement->m_vMovement += l_vLeft * (m_fSpeed*_fDeltaTime);
   }
   if(l_pActionManager->IsActionActive(m_szMoveRight))
   {
     Vect3f l_vLeft(cos(l_fYaw+FLOAT_PI_VALUE/2), 0, sin(l_fYaw+FLOAT_PI_VALUE/2) );
-    m_pObject3D->SetPosition( m_pObject3D->GetPosition() - l_vLeft * (m_fSpeed*_fDeltaTime));
-    m_pObject3D->m_bModified = true;
+    m_pMovement->m_vMovement -= l_vLeft * (m_fSpeed*_fDeltaTime);
   }
 }

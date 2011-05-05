@@ -7,11 +7,12 @@
 #include "ScriptManager.h"
 
 #include "ComponentObject3D.h"
+#include "ComponentMovement.h"
 #include "ComponentPhysXController.h"
 #include "ComponentPlayerController.h"
 #include "Component3rdPSCamera.h"
 #include "ComponentPhysXBox.h"
-
+#include "LightManager.h"
 
 #include "PhysicActor.h"
 #include <PhysicsManager.h>
@@ -21,7 +22,7 @@ bool CEntityProcess::Init()
   LOGGER->AddNewLog(ELL_INFORMATION,"CEntityProcess::Init");
   
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
-
+  CORE->GetLightManager()->SetLightsEnabled(true);
 
 
   // Creem la entitat del jugador ----------------------------------------------------------------
@@ -31,6 +32,8 @@ bool CEntityProcess::Init()
   CComponentObject3D *m_pComponentObject3D = new CComponentObject3D();
   m_pComponentObject3D->Init(m_pPlayerEntity);
   m_pComponentObject3D->SetPosition(Vect3f(-8.0f,2.0f,-4.0f));
+
+  (new CComponentMovement)->Init(m_pPlayerEntity);
 
   CComponentPlayerController *m_pComponentPlayerController = new CComponentPlayerController();
   m_pComponentPlayerController->Init(m_pPlayerEntity,

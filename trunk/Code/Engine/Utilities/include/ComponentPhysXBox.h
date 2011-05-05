@@ -31,7 +31,7 @@ public:
             float _fDensity, int _iCollisionMask
             );
 
-  void Update(float _fDeltaTime);
+  void UpdatePostPhysX(float _fDeltaTime);
 
   virtual ~CComponentPhysXBox(void) {Done();};
 

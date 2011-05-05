@@ -1,5 +1,6 @@
 
 #include "ComponentObject3D.h"
+#include "ComponentMovement.h"
 #include "PhysicController.h"
 #include "PhysicsManager.h"
 #include "Core.h"
@@ -16,6 +17,9 @@ bool CComponentPhysXController::Init(CGameEntity *_pEntity,
 
   m_pObject3D = dynamic_cast<CComponentObject3D*>(_pEntity->GetComponent(ECT_OBJECT_3D));
   assert(m_pObject3D); //TODO fer missatges d'error més elavorats
+
+  m_pMovement = dynamic_cast<CComponentMovement*>(_pEntity->GetComponent(ECT_MOVEMENT));
+  assert(m_pMovement); //TODO fer missatges d'error més elavorats
 
   m_pPhysXData = new CPhysicUserData(_pEntity->GetName().c_str());
   m_pPhysXData->SetPaint(true);
@@ -38,18 +42,11 @@ bool CComponentPhysXController::Init(CGameEntity *_pEntity,
 
 void CComponentPhysXController::Update(float _fDeltaTime)
 {
-  if(m_pObject3D->m_bModified)
-  {
-    Vect3f l_vObj = m_pObject3D->GetPosition();
-    Vect3f l_vPhy = m_pPhysXController->GetPosition();
-    Vect3f l_vMovementVector = l_vObj - l_vPhy;
+  m_pPhysXController->Move(m_pMovement->m_vMovement, _fDeltaTime);
+}
 
-    m_pPhysXController->Move(l_vMovementVector, _fDeltaTime);
-  }
-  else
-  {
-    m_pPhysXController->Move(Vect3f(0,0,0), _fDeltaTime);
-  }
+void CComponentPhysXController::UpdatePostPhysX(float _fDeltaTime)
+{
   Vect3f l_vPhy2 = m_pPhysXController->GetPosition();
   m_pObject3D->SetPosition(l_vPhy2);
 }

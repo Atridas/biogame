@@ -73,7 +73,7 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
     CEngine l_Engine;
     SInitParams l_InitParams;
 
-    ReadXMLInitParams(l_InitParams,"./Data/XML/init_test_physx.xml");
+    ReadXMLInitParams(l_InitParams,"./Data/XML/init_test_entities.xml");
 
     // Create the application's window
     HWND hWnd = CreateWindow(	

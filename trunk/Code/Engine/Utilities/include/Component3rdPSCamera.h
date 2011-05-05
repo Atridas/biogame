@@ -30,7 +30,7 @@ public:
   bool Init(CGameEntity *_pEntity,
             float _fCameraHeight);
 
-  void Update(float _fDeltaTime);
+  void PostUpdate(float _fDeltaTime);
 
   CCamera* GetCamera() const;
 

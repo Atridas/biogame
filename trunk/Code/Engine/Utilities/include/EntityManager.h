@@ -17,8 +17,13 @@ public:
   void         SetName(const string&,int);
   CGameEntity* GetEntity(int) const;
   CGameEntity* GetEntity(const string&) const;
-
-  void         Update(float _fDeltaTime);
+  
+  void         PreUpdate(float _fDeltaTime)      ;
+  void         Update(float _fDeltaTime)         ;
+  void         UpdatePrePhysX(float _fDeltaTime) ;
+  void         UpdatePostPhysX(float _fDeltaTime);
+  void         UpdatePostAnim(float _fDeltaTime) ;
+  void         PostUpdate(float _fDeltaTime)     ;
   
   void RemoveEntity(int);
 
