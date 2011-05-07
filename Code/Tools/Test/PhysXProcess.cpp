@@ -609,7 +609,7 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
 void CPhysXProcess::RenderImpacts(CRenderManager* _pRM)
 {
   Mat44f t;  
-  for (int i=0;i<g_vCollisions.size();++i)
+  for (int i=0;i<(int)g_vCollisions.size();++i)
   {
 
       t.SetIdentity();
