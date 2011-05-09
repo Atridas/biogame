@@ -43,11 +43,16 @@ CGameEntity* CEntityManager::GetEntity(int _iId) const
 }
 
 
+void CEntityManager::SetName(const string& _szName,const CGameEntity* _pEntity)
+{
+  SetName(_szName, _pEntity->GetGUID());
+}
+
 void CEntityManager::SetName(const string& _szName, int _iId)
 {
-  assert(m_vEntities.size() < (uint32) _iId);
+  assert(m_vEntities.size() > (uint32) _iId);
   for(uint32 i = 0; i < m_vFreeIDs.size(); ++i) assert(m_vFreeIDs[i] != _iId);
-  assert(m_vNames.find(_szName) != m_vNames.end());
+  assert(m_vNames.find(_szName) == m_vNames.end());
 
   m_vNames[_szName] = _iId;
   m_vEntities[_iId]->m_pszName = &(m_vNames.find(_szName)->first); //TODO hi ha d'haver una manera més correcte de fer això
@@ -65,9 +70,15 @@ CGameEntity* CEntityManager::GetEntity(const string& _szName) const
   }
 }
 
+
+void CEntityManager::RemoveEntity(const CGameEntity* _pEntity)
+{
+  RemoveEntity(_pEntity->GetGUID());
+}
+
 void CEntityManager::RemoveEntity(int _iId)
 {
-  assert(m_vEntities.size() < (uint32) _iId);
+  assert(m_vEntities.size() > (uint32) _iId);
   for(uint32 i = 0; i < m_vFreeIDs.size(); ++i) assert(m_vFreeIDs[i] != _iId);
 
   

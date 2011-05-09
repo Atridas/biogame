@@ -31,6 +31,7 @@ public:
   Vect3f		          GetCenterPosition	    ();
   bool						    GetVisible	    () const {return m_bVisible;}
   Mat44f              GetMat44        () const {return m_vMat44;}
+  void                GetMat44        (Mat44f& _Mat) const {_Mat = m_vMat44;}
   bool						    GetRenderBoundingBox  () const {return m_bRenderBoundingBox;}
   bool						    GetRenderBoundingSphere  () const {return m_bRenderBoundingSphere;}
   CBoundingBox*		    GetBoundingBox	() {return &m_BoundingBox;}

@@ -40,6 +40,15 @@
     <Filter Include="EntitySystem\Components\ComponentMovement">
       <UniqueIdentifier>{32195c11-2c3d-4bd1-95da-c65c1970b228}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentRenderableObject">
+      <UniqueIdentifier>{7f7dea5e-8134-40cc-ad32-cf66ab93171b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentPhysXMesh">
+      <UniqueIdentifier>{b5251dd6-e9f1-484c-b681-42323275fa90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentIAWalkToPlayer">
+      <UniqueIdentifier>{6217f4e8-cc45-4ca5-a7bd-853b47b854ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -89,6 +98,15 @@
     </ClCompile>
     <ClCompile Include="ComponentMovement.cpp">
       <Filter>EntitySystem\Components\ComponentMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentRenderableObject.cpp">
+      <Filter>EntitySystem\Components\ComponentRenderableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentPhysXMesh.cpp">
+      <Filter>EntitySystem\Components\ComponentPhysXMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentIAWalkToPlayer.cpp">
+      <Filter>EntitySystem\Components\ComponentIAWalkToPlayer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -151,6 +169,15 @@
     </ClInclude>
     <ClInclude Include="include\ComponentMovement.h">
       <Filter>EntitySystem\Components\ComponentMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentRenderableObject.h">
+      <Filter>EntitySystem\Components\ComponentRenderableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentPhysXMesh.h">
+      <Filter>EntitySystem\Components\ComponentPhysXMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentIAWalkToPlayer.h">
+      <Filter>EntitySystem\Components\ComponentIAWalkToPlayer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

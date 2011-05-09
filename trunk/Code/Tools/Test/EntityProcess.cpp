@@ -10,8 +10,11 @@
 #include "ComponentMovement.h"
 #include "ComponentPhysXController.h"
 #include "ComponentPlayerController.h"
+#include "ComponentIAWalkToPlayer.h"
 #include "Component3rdPSCamera.h"
 #include "ComponentPhysXBox.h"
+#include "ComponentPhysXMesh.h"
+#include "ComponentRenderableObject.h"
 #include "LightManager.h"
 
 #include "PhysicActor.h"
@@ -28,6 +31,7 @@ bool CEntityProcess::Init()
   // Creem la entitat del jugador ----------------------------------------------------------------
 
   m_pPlayerEntity = CORE->GetEntityManager()->CreateEntity();
+  CORE->GetEntityManager()->SetName("Player", m_pPlayerEntity);
 
   CComponentObject3D *m_pComponentObject3D = new CComponentObject3D();
   m_pComponentObject3D->Init(m_pPlayerEntity);
@@ -55,27 +59,38 @@ bool CEntityProcess::Init()
   CComponentPhysXController *m_pComponentPhysXController = new CComponentPhysXController();
   m_pComponentPhysXController->Init(m_pPlayerEntity, 0.3f, 1.5f, 10.0f, 0.1f, 0.5f, 1);
 
+  // Entitat de l'escenari ----------------------------------------------------------------------
+  CGameEntity* l_peEscenari = CORE->GetEntityManager()->CreateEntity();
+  (new CComponentObject3D())->Init(l_peEscenari);
+  (new CComponentRenderableObject())->Init(l_peEscenari, "Escenari");
+  (new CComponentPhysXMesh())->Init(l_peEscenari, 0, 0);
 
-  CGameEntity* l_peFloor = CORE->GetEntityManager()->CreateEntity();
-  (new CComponentObject3D())->Init(l_peFloor);
-  (new CComponentPhysXBox())->Init(l_peFloor ,
-                                    50.f, 1.f, 50.f, 
-                                    0.f, -1.f,  0.f,
-                                    0, 0
+  //Una paret -------------------------------------------------------------------------
+  CGameEntity* l_peWall = CORE->GetEntityManager()->CreateEntity();
+  (new CComponentObject3D())->Init(l_peWall);
+
+  CComponentRenderableObject* l_pComponentRenderableObject = new CComponentRenderableObject();
+  l_pComponentRenderableObject->Init(l_peWall, "Wall");
+  CRenderableObject* l_pRO = l_pComponentRenderableObject->GetRenderableObject();
+  Vect3f l_BoxDimension = l_pRO->GetBoundingBox()->GetDimension();
+  Vect3f l_BoxMidPoint = l_pRO->GetBoundingBox()->GetMiddlePoint();
+
+  (new CComponentPhysXBox())->Init(l_peWall ,
+                                    l_BoxDimension.x*0.5f, l_BoxDimension.y*0.5f, l_BoxDimension.z*0.5f, 
+                                    l_BoxMidPoint.x,  l_BoxMidPoint.y,  l_BoxMidPoint.z, 
+                                    1, 0
                                   );
-  
 
-  /*
-  CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
-  l_pPhysManager->SetDebugRenderMode(true);
+  // un enemic ------------------------------------------------------------------------
+  CGameEntity* l_peEnemy = CORE->GetEntityManager()->CreateEntity();
+  m_pComponentObject3D = new CComponentObject3D();
+  m_pComponentObject3D->Init(l_peEnemy);
+  m_pComponentObject3D->SetPosition(Vect3f(8.0f,2.0f,4.0f));
+  (new CComponentMovement)->Init(l_peEnemy);
 
-  m_pUserData = new CPhysicUserData("Plane");
-  m_pUserData->SetPaint(true);
-  m_pUserData->SetColor(colBLUE);
-  m_pPActorPlane = new CPhysicActor(m_pUserData);
-  m_pPActorPlane->AddBoxSphape(Vect3f(50.f,1.0f,50.f),Vect3f(0.0f,-1.0f,0.0f),NULL,0);
-  l_pPhysManager->AddPhysicActor(m_pPActorPlane);
-  */
+  (new CComponentPhysXController())->Init(l_peEnemy, 0.3f, 1.5f, 10.0f, 0.1f, 0.5f, 1);
+
+  (new CComponentIAWalkToPlayer())->Init(l_peEnemy,"Player",2);
 
   SetOk(true);
   return IsOk();

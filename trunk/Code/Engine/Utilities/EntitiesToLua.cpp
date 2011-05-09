@@ -94,10 +94,13 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("get_component", &CGameEntity::GetComponent)
 
     ,class_<CEntityManager>("EntityManager")
-      .def("create_entity",        &CEntityManager::CreateEntity)
-      .def("set_name",             &CEntityManager::SetName)
-      .def("get_entity",           (CGameEntity*(CEntityManager::*)(int)          const)&CEntityManager::GetEntity)
-      .def("get_entity_from_name", (CGameEntity*(CEntityManager::*)(const string&)const)&CEntityManager::GetEntity)
+      .def("create_entity",         &CEntityManager::CreateEntity)
+      .def("set_name_from_id",      (void(CEntityManager::*)(const string&, int)               )&CEntityManager::SetName)
+      .def("set_name",              (void(CEntityManager::*)(const string&, const CGameEntity*))&CEntityManager::SetName)
+      .def("get_entity",            (CGameEntity*(CEntityManager::*)(int)          const)&CEntityManager::GetEntity)
+      .def("get_entity_from_name",  (CGameEntity*(CEntityManager::*)(const string&)const)&CEntityManager::GetEntity)
+      .def("remove_entity_from_id", (void(CEntityManager::*)(int)               )&CEntityManager::RemoveEntity)
+      .def("remove_entity",         (void(CEntityManager::*)(const CGameEntity*))&CEntityManager::RemoveEntity)
   ];
 
   module(_pLS) [

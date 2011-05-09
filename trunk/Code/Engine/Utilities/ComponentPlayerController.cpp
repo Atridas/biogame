@@ -1,8 +1,6 @@
 #include "ComponentPlayerController.h"
 #include "ComponentObject3D.h"
 #include "ComponentMovement.h"
-#include "ThPSCamera.h"
-#include "RenderManager.h"
 #include "Core.h"
 #include "InputManager.h"
 #include "ActionManager.h"
