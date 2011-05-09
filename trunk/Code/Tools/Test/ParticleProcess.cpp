@@ -35,7 +35,7 @@
 
 bool CParticleProcess::Init()
 {
-  m_pBillBoard.SetPos( Vect3f(0.f, 1.f, 0.f));
+  m_pBillBoard.SetPos( D3DXVECTOR3(0.f, 1.f, 0.f));
   m_pBillBoard.SetSize( 5.f, 5.f);
   
   m_pObject = new CObject3D();
@@ -91,6 +91,7 @@ void CParticleProcess::Update(float _fElapsedTime)
   {
 
     m_pBillBoard.Update(m_pObjectCamera);
+    CORE->GetParticleManager()->Update(_fElapsedTime,m_pObjectCamera);
     //Actualitze el pitch i el yaw segons els delta del mouse
     float l_fPitch, l_fYaw;
 

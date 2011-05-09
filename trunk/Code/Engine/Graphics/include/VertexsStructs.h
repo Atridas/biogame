@@ -577,4 +577,15 @@ struct SPARTICLE_VERTEX
   }
 };
 
+struct VERTEX_TEXTURED
+{
+	float x, y, z;
+  float u, v;         // COORDENADAS DE TEXTURAS
+  uint32  color;
+	static unsigned int GetFVF()
+	{
+		return D3DFVF_XYZ|D3DFVF_DIFFUSE|D3DFVF_TEX1;
+	}
+};
+
 #endif

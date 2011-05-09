@@ -10,6 +10,7 @@
 #include "Particle.h"
 #include "RenderManager.h"
 #include <XML/XMLTreeNode.h>
+#include "Camera.h"
 
 struct SParticleInfo;
 
@@ -47,7 +48,7 @@ public:
   //Get
   string                          GetName             () const {return m_szName;};
   string                          GetId               () const {return m_szId;};
-  const D3DXVECTOR3&              GetPosition         () const {return m_vPos;};
+  const D3DXVECTOR3&				      GetPosition         () const {return m_vPos;};
   float                           GetMinEmitRate      () const {return m_fMinEmitRate;};
   float                           GetMaxEmitRate      () const {return m_fMaxEmitRate;};
   const D3DXCOLOR&                GetColor1           () const {return m_Color1;};
@@ -67,7 +68,7 @@ public:
 
 
 
-  void                    Update              (float fElapsedTime);
+  void                    Update              (float fElapsedTime, CCamera* camera);
   void                    Init                (CRenderManager* rm);
   void                    Release             ();
   void                    Render              (CRenderManager* _pRM);
@@ -106,6 +107,12 @@ private:
   //float                                     m_fAngle;
   //bool                                      m_bReload;
   //CRenderManager*                           _pRM;
+  float             m_fSizeX;
+  float             m_fSizeY;
+ /* D3DXVECTOR3		        m_PointA;
+  D3DXVECTOR3            m_PointB;
+  D3DXVECTOR3            m_PointC; 
+  D3DXVECTOR3            m_PointD;*/
 
 };
 

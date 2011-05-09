@@ -5,6 +5,8 @@
 
 #include <d3dx9.h>
 #include "base.h"
+#include "Camera.h"
+#include "Texture.h"
 
 class CParticle
 {
@@ -22,9 +24,15 @@ public:
   void SetVel               (const D3DXVECTOR3& _vVel)        {m_vVel = _vVel;};
   void SetGravity           (const D3DXVECTOR3& _vGravity)    {m_vGravity = _vGravity;};
   //void SetAngle             (float _fAngle)                         {m_fAngle = _fAngle;};
+  //void SetSize	            ( const float sizeX, const float sizeY ) {m_fSizeX = sizeX; m_fSizeY = sizeY;}
+  void SetPointA            (const D3DXVECTOR3& _pointA)      {m_PointA=_pointA;};
+  void SetPointB            (const D3DXVECTOR3& _pointB)      {m_PointB=_pointB;};
+  void SetPointC            (const D3DXVECTOR3& _pointC)      {m_PointC=_pointC;};
+  void SetPointD            (const D3DXVECTOR3& _pointD)      {m_PointD=_pointD;};
   
 
   float GetSize                   () const              {return m_fSize;};
+  
   float GetLifeTimer              () const              {return m_fLifetime;};
   float GetAge                    () const              {return m_fAge;};
   const D3DXCOLOR& GetColor       () const              {return m_Color;};
@@ -33,8 +41,13 @@ public:
   const D3DXVECTOR3& GetVel       () const              {return m_vVel;};
   const D3DXVECTOR3& GetGravity   () const              {return m_vGravity;};
   //float GetAngle                  () const              {return m_fAngle;};
+  const D3DXVECTOR3& GetPointA    () const              {return m_PointA;};
+  const D3DXVECTOR3& GetPointB    () const              {return m_PointB;};
+  const D3DXVECTOR3& GetPointC    () const              {return m_PointC;};
+  const D3DXVECTOR3& GetPointD    () const              {return m_PointD;};
   
-  bool  Update               (float fTimeDelta);
+  bool  Update               (float fTimeDelta, CCamera* camera);
+  //void  Render	             (LPDIRECT3DDEVICE9 device, CTexture* texture);
   void  Release              ();
 
   
@@ -48,11 +61,18 @@ private:
   float             m_fLifetime; // temps de vida que tindra
   float             m_fAge; //la edat que te, es a dir, temps que porta inicialitzada
   D3DXCOLOR         m_Color;
-  D3DXVECTOR3       m_vPos;
+  //D3DXVECTOR3       m_vPos;
   D3DXVECTOR3       m_vDir; 
   D3DXVECTOR3       m_vVel;
   D3DXVECTOR3       m_vGravity;
   //float             m_fAngle;
+  D3DXVECTOR3            m_vPos;
+  // float             m_fSizeX;
+  //float             m_fSizeY;
+  D3DXVECTOR3		        m_PointA;
+  D3DXVECTOR3           m_PointB;
+  D3DXVECTOR3           m_PointC; 
+  D3DXVECTOR3           m_PointD;
   
 };
 #endif

@@ -8,6 +8,7 @@
 #include <XML/XMLTreeNode.h>
 #include "params.h"
 #include <Utils/MapManager.h>
+#include "Camera.h"
 
 class CRenderManager;
 
@@ -53,7 +54,7 @@ public:
   ~CParticleManager(){Done();};
   
   bool Load(const string& _szFileName);
-  void Update(const float _fElapsedTime);
+  void Update(const float _fElapsedTime, CCamera* camera);
   void Render(CRenderManager* _pRM);
   void Init(CRenderManager* _pRM);
   bool Reload();
