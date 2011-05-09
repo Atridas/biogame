@@ -10,14 +10,14 @@
   <!--<GameObject name="fluorescente_DEF" Physx="true" PhysxType="mesh" RenderableObject="fluorescente_DEF" PhysxActor="fluorescente_DEF" Body="0" Pushable="false"/>-->
   <!--<GameObject name="Carpeta03" Physx="true" PhysxType="mesh" RenderableObject="Carpeta03" PhysxActor="Carpeta03" Body="0" Pushable="false"/>
   <GameObject name="Carpeta02" Physx="true" PhysxType="mesh" RenderableObject="Carpeta02" PhysxActor="Carpeta02" Body="0" Pushable="false"/>-->
-  <GameObject name="Cable_Lampada" Physx="true" PhysxType="mesh" RenderableObject="Cable_Lampada" PhysxActor="Cable_Lampada" Body="0" Pushable="false"/>
+  <GameObject name="Cable_Lampada" Physx="true" PhysxType="BoundingBox" RenderableObject="Cable_Lampada" PhysxActor="Cable_Lampada" Body="1" Pushable="true"/>
   <!--<GameObject name="braç02" Physx="true" PhysxType="mesh" RenderableObject="braç02" PhysxActor="braç02" Body="0" Pushable="false"/>
   <GameObject name="pot01" Physx="true" PhysxType="mesh" RenderableObject="pot01" PhysxActor="pot01" Body="0" Pushable="false"/>
   <GameObject name="proveta" Physx="true" PhysxType="mesh" RenderableObject="proveta" PhysxActor="proveta" Body="0" Pushable="false"/>
   <GameObject name="viga" Physx="true" PhysxType="mesh" RenderableObject="viga" PhysxActor="viga" Body="0" Pushable="false"/>
   <GameObject name="vigueta" Physx="true" PhysxType="mesh" RenderableObject="vigueta" PhysxActor="vigueta" Body="0" Pushable="false"/>
   <GameObject name="viga_pilar" Physx="true" PhysxType="mesh" RenderableObject="viga_pilar" PhysxActor="viga_pilar" Body="0" Pushable="false"/>-->
-  <GameObject name="Lampada" Physx="true" PhysxType="mesh" RenderableObject="Lampada" PhysxActor="Lampada" Body="0" Pushable="false"/>
+  <GameObject name="Lampada" Physx="true" PhysxType="BoundingBox" RenderableObject="Lampada" PhysxActor="Lampada" Body="1" Pushable="true"/>
   <GameObject name="Bido" Physx="true" PhysxType="mesh" RenderableObject="Bido" PhysxActor="Bido" Body="0" Pushable="false"/>
   <GameObject name="Edvac" Physx="true" PhysxType="mesh" RenderableObject="Edvac" PhysxActor="Edvac" Body="0" Pushable="false"/>
   <GameObject name="Laboratori_parets" Physx="true" PhysxType="mesh" RenderableObject="Laboratori_parets" PhysxActor="Laboratori_parets" Body="0" Pushable="false"/>
