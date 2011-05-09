@@ -32,8 +32,14 @@ m_Particles(NUMPARTICLES)
   m_fLife1 = 0.0f;
   m_fLife2 = 0.0f;
   //m_fAngle = 0.0f;
+  m_fSizeX= 1.0f;
+  m_fSizeY=1.0f;
+ /* m_PointA=(D3DXVECTOR3(0.0f,0.0f,0.0f));
+  m_PointB=(D3DXVECTOR3(0.0f,0.0f,0.0f));
+  m_PointC=(D3DXVECTOR3(0.0f,0.0f,0.0f)); 
+  m_PointD=(D3DXVECTOR3(0.0f,0.0f,0.0f));*/
 
-  m_bActive = false;
+  m_bActive = true;
 
   //TODO inicialitzar els vector de color i temps
 }
@@ -76,7 +82,7 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
  
 }
 
-void CParticleEmitter::Update(float fElapsedTime)
+void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
 {
 
   if(!m_bActive)
@@ -90,7 +96,7 @@ void CParticleEmitter::Update(float fElapsedTime)
     if(!m_Particles.IsFree(i))
     {
       particula = m_Particles.GetAt(i);
-      if(!particula->Update(fElapsedTime))
+      if(!particula->Update(fElapsedTime, camera))
       {
         m_Particles.Free(i);
       }
@@ -180,6 +186,8 @@ void CParticleEmitter::Update(float fElapsedTime)
       part->SetPos(m_vPos);
 
       
+
+      
     }
   }
 }
@@ -197,11 +205,21 @@ void CParticleEmitter::Init(CRenderManager* rm)
 
 	  if (bIsOk)
 	  {
-		  if (FAILED(l_pd3dDevice->CreateVertexBuffer( NUMPARTICLES * sizeof(SPARTICLE_VERTEX), 
+		   
+     // pointsize
+     if (FAILED(l_pd3dDevice->CreateVertexBuffer( NUMPARTICLES * sizeof(SPARTICLE_VERTEX), 
 											D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY | D3DUSAGE_POINTS,   
 											SPARTICLE_VERTEX::GetFVF(),
 											D3DPOOL_DEFAULT, 
 											&m_vbParticles,NULL)))
+
+      //BillBoard
+      /*
+      if (FAILED(l_pd3dDevice->CreateVertexBuffer(NUMPARTICLES * sizeof(VERTEX_TEXTURED), 
+											D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY | D3DUSAGE_POINTS,   
+											VERTEX_TEXTURED::GetFVF(),
+											D3DPOOL_DEFAULT, 
+											&m_vbParticles,NULL)))*/
 		  {
 			  bIsOk = false;
 		  }
@@ -246,15 +264,18 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
 
   LPDIRECT3DDEVICE9 l_pd3dDevice = _pRM->GetDevice();
 
-  _pRM->EnableAlphaBlend();
+ 
+//POINTSIZE
+ 
+ _pRM->EnableAlphaBlend();
 
   l_pd3dDevice->SetRenderState( D3DRS_POINTSPRITEENABLE, TRUE );
   l_pd3dDevice->SetRenderState( D3DRS_POINTSCALEENABLE,  TRUE );
   
-  /*l_pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
+  l_pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
  
   l_pd3dDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
-  l_pd3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );*/
+  l_pd3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
 
   float l_fPointSize    = 100.0f;
   float l_fPointSizeMin = 0.00f;
@@ -286,7 +307,9 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
   
   m_vbParticles->Lock(  0, NUMPARTICLES * sizeof(SPARTICLE_VERTEX), (void **) &pVertices, D3DLOCK_DISCARD);
 	  
-    
+  //BILLBOARD
+ /* VERTEX_TEXTURED l_Points[4];
+		unsigned short l_Indexes[6]={0,2,1,1,2,3}; */
 
  
   DWORD dwNumParticlesToRender = 0;
@@ -297,24 +320,62 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
 	  {
       CParticle* part = m_Particles.GetAt(q);
       dwNumParticlesToRender++;
- 
+      //POINTSIZE
       pVertices->x = part->GetPos().x;
 	    pVertices->y = part->GetPos().y;
 	    pVertices->z = part->GetPos().z;
       pVertices->pointsize = part->GetSize();
       pVertices->color = (DWORD)part->GetColor();
       pVertices++;
+
+//BILLBOLARD
+/*
+      l_Points[0].x=part->GetPointA().x;
+		  l_Points[0].y=part->GetPointA().y;
+		  l_Points[0].z=part->GetPointA().z;
+		  l_Points[0].u=0.0f;
+		  l_Points[0].v=1.0f;
+      l_Points[0].color=part->GetColor();
+		  
+		  l_Points[1].x=part->GetPointB().x;
+		  l_Points[1].y=part->GetPointB().y;
+		  l_Points[1].z=part->GetPointB().z;
+		  l_Points[1].u=1.0f;
+		  l_Points[1].v=1.0f;
+      l_Points[1].color=part->GetColor();
+
+		  l_Points[2].x=part->GetPointC().x;
+		  l_Points[2].y=part->GetPointC().y;
+		  l_Points[2].z=part->GetPointC().z;
+		  l_Points[2].u=0.0f;
+		  l_Points[2].v=0.0f;
+      l_Points[2].color=part->GetColor();
+
+		  l_Points[3].x=part->GetPointD().x;
+		  l_Points[3].y=part->GetPointD().y;
+		  l_Points[3].z=part->GetPointD().z;
+		  l_Points[3].u=1.0f;
+		  l_Points[3].v=0.0f;
+      l_Points[3].color=part->GetColor();
+
+      m_pTexParticle->Activate(0);*/
     }
   }
 
+  //POINTSIZE
   m_vbParticles->Unlock();
-
   l_pd3dDevice->DrawPrimitive(D3DPT_POINTLIST, 0, dwNumParticlesToRender);
-  
   // Reset render states
-  l_pd3dDevice->SetRenderState( D3DRS_POINTSPRITEENABLE, FALSE );
+   l_pd3dDevice->SetRenderState( D3DRS_POINTSPRITEENABLE, FALSE );
   l_pd3dDevice->SetRenderState( D3DRS_POINTSCALEENABLE,  FALSE );
 
   _pRM->DisableAlphaBlend();
   //l_pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE );
+ /*
+ BILLBOARD
+ l_pd3dDevice->SetStreamSource( 0, m_vbParticles,0, sizeof(VERTEX_TEXTURED));// no se si serveix aki
+  l_pd3dDevice->SetFVF(D3DFVF_XYZ|D3DFVF_TEX1|D3DFVF_DIFFUSE);
+	l_pd3dDevice->DrawIndexedPrimitiveUP(D3DPT_TRIANGLELIST,0,6,2,l_Indexes,D3DFMT_INDEX16,l_Points,sizeof(VERTEX_TEXTURED));*/
+  
+ 
 }

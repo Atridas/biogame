@@ -226,7 +226,7 @@ bool CParticleManager::Load(const string& _szFileName)
 
 
 
-void CParticleManager::Update(const float _fElapsedTime)
+void CParticleManager::Update(const float _fElapsedTime, CCamera* camera)
 {
   vector<CParticleEmitter*>::iterator it  = m_vEmitterParticle.begin(),
                                       end = m_vEmitterParticle.end();
@@ -234,7 +234,7 @@ void CParticleManager::Update(const float _fElapsedTime)
 
   while(it != end)
   {
-    (*it)->Update(_fElapsedTime);
+    (*it)->Update(_fElapsedTime,camera);
     
     ++it;
   }

@@ -166,7 +166,7 @@ void CCore::Update()
   
   m_pEntityManager->UpdatePostPhysX(l_fElapsedTime);
 
-  m_pParticleManager->Update(l_fElapsedTime);// -------------
+  //m_pParticleManager->Update(l_fElapsedTime);// -------------
   m_pRenderableObjectsManager->Update(l_fElapsedTime);// ----
   
   m_pEntityManager->UpdatePostAnim(l_fElapsedTime);
