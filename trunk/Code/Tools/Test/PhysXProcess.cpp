@@ -25,6 +25,8 @@
 #include "PhysicActor.h"
 #include "PhysicController.h"
 #include "PhysicFixedJoint.h"
+#include "PhysicRevoluteJoint.h"
+#include "PhysicSphericalJoint.h"
 #include "SpotLight.h"
 #include "InstanceMesh.h"
 #include "GameObject.h"
@@ -49,50 +51,31 @@
 
 vector<SCollisionInfo> g_vCollisions;
 CPhysicUserData* g_pUserData;
-CPhysicUserData* g_pUserData2;
-CPhysicUserData* g_pUserData3;
-CPhysicUserData* g_pUserData4;
-CPhysicUserData* g_pUserData5;
 CPhysicUserData* g_pUserDataController;
-CPhysicUserData* g_pUserDataEscala;
-CPhysicActor* g_pPActorPlane;
-CPhysicActor* g_pPActorBall;
-CPhysicActor* g_pPActorComposite;
-CPhysicActor* g_pPEscala;
-CPhysicUserData* g_pBoxes;
+//CPhysicUserData* g_pUserDataEscala;
+//CPhysicActor* g_pPActorPlane;
+//CPhysicActor* g_pPEscala;
 
-
-CPhysicActor* g_Box02;
-CPhysicActor* g_Box03;
-CPhysicActor* g_Box04;
-CPhysicActor* g_Box05;
-CPhysicActor* g_Box06;
-CPhysicActor* g_Box07;
-
-CPhysicActor* g_pBoxJoint;
-CPhysicActor* g_pSphereJoint;
-
-
-CGameObject* g_pGameBox02;
-CGameObject* g_pGameBox03;
-CGameObject* g_pGameBox04;
-CGameObject* g_pGameBox05;
-CGameObject* g_pGameBox06;
-CGameObject* g_pGameBox07;
-
-
-
-CPhysicFixedJoint* g_pJoint;
-CPhysicFixedJoint* g_pJoint2;
-CPhysicFixedJoint* g_pJoint3;
-CPhysicFixedJoint* g_pJoint4;
-CPhysicFixedJoint* g_pJoint5;
 
 CPhysicUserData* g_pUserDataSHOOT = 0;
 CGameObject* g_pGameObject = 0;
 CPhysicController* g_pPhysXController = 0;
 CRenderableAnimatedInstanceModel* g_pCharacter = 0;
 
+
+//PROVES DE JOINTS
+CPhysicActor* g_pJointActor1;
+CPhysicActor* g_pJointActor2;
+CPhysicActor* g_pJointActor3;
+
+CPhysicUserData* g_pUserDataJoint1;
+CPhysicUserData* g_pUserDataJoint2;
+CPhysicUserData* g_pUserDataJoint3;
+
+CPhysicFixedJoint* g_pFixedJoint;
+CPhysicFixedJoint* g_pFixedJoint2;
+CPhysicRevoluteJoint* g_pRevoluteJoint;
+CPhysicSphericalJoint* g_pSphericalJoint;
 
 //MANAGER DE GAMEOBJECTS
 CGameObjectManager* g_pObjectManager = 0;
@@ -114,13 +97,6 @@ bool CPhysXProcess::Init()
 
   m_bStateChanged = false;
 
-  //m_pObjectCamera = new CFPSCamera(
-  //  0.1f,
-  //  100.0f,
-  //  45.0f * FLOAT_PI_VALUE/180.0f,
-  //  ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
-  //  m_pObject);
-
   m_pObjectCamera = new CThPSCamera(
     0.1f,
     100.0f,
@@ -128,25 +104,6 @@ bool CPhysXProcess::Init()
     ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
     m_pObject,
     4.5f);
-
-  
-  /*CORE->GetLightManager()->CreateDirectionalLight("ObjectModeLight",
-                                                  Vect3f(0.0f),
-                                                  Vect3f(1.0f,1.0f,1.0f),
-                                                  CColor(Vect3f(1.0f,1.0f,1.0f)),
-                                                  50.0f,
-                                                  80.0f,
-                                                  false);
-
-  CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
-                                          Vect3f(-2.15715f,0.0f,-7.32758f),
-                                          Vect3f(-5.4188f,0.0f,3.75613f),
-                                          CColor(Vect3f(1.0f,1.0f,1.0f)),
-                                          20.0f,
-                                          80.0f,
-                                          10.0f,
-                                          45.0f,
-                                          true);*/
 
   m_pCamera = m_pObjectCamera;
 
@@ -158,88 +115,58 @@ bool CPhysXProcess::Init()
 
 
 
-  //PHYSICS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  g_pUserData = new CPhysicUserData("Plane");
-  g_pUserData2 = new CPhysicUserData("CaixaNormalMap");
-  g_pUserData3 = new CPhysicUserData("Composite");
-  g_pUserData4 = new CPhysicUserData("Pilota");
-  g_pUserData5 = new CPhysicUserData("Cub");
-  g_pUserDataEscala = new CPhysicUserData("Escala");
-  g_pUserDataController = new CPhysicUserData("PhysX Controller");
 
-  g_pBoxes= new CPhysicUserData("Boxes");
-  g_pUserData->SetPaint(false);
-  g_pUserData->SetColor(colWHITE);
-  g_pUserData2->SetPaint(true);
-  g_pUserData2->SetColor(colWHITE);
-  g_pUserData3->SetPaint(true);
-  g_pUserData3->SetColor(colWHITE);
-  g_pUserData4->SetPaint(true);
-  g_pUserData4->SetColor(colYELLOW);
-  g_pUserData5->SetPaint(true);
-  g_pUserData5->SetColor(colCYAN);
+  g_pUserDataJoint1 = new CPhysicUserData("Objecte Joint 1");
+  g_pUserDataJoint2 = new CPhysicUserData("Objecte Joint 2");
+  g_pUserDataJoint3 = new CPhysicUserData("Objecte Joint 3");
+  g_pUserDataJoint1->SetPaint(true);
+  g_pUserDataJoint1->SetColor(colYELLOW);
+  g_pUserDataJoint2->SetPaint(true);
+  g_pUserDataJoint2->SetColor(colRED);
+  g_pUserDataJoint3->SetPaint(true);
+  g_pUserDataJoint3->SetColor(colGREEN);
+
+
+  g_pJointActor1 = new CPhysicActor(g_pUserDataJoint1);
+  g_pJointActor2 = new CPhysicActor(g_pUserDataJoint2);
+  g_pJointActor3 = new CPhysicActor(g_pUserDataJoint3);
+
+
+  g_pJointActor1->AddBoxSphape(Vect3f(0.5f,0.5f,0.5f),v3fZERO,NULL,GROUP_COLLIDABLE_PUSHABLE);
+  g_pJointActor2->AddSphereShape(0.4f,v3fZERO,NULL,GROUP_COLLIDABLE_PUSHABLE);
+  //g_pJointActor1->SetGlobalPosition(Vect3f(-6.0f,1.0f,-3.0f));
+  //g_pJointActor2->SetGlobalPosition(Vect3f(-7.0f,1.0f,-3.0f));
+
+  g_pJointActor1->CreateBody(1.0f);
+  g_pJointActor2->CreateBody(1.0f);
+  
+  g_pFixedJoint = new CPhysicFixedJoint();
+  g_pFixedJoint2 = new CPhysicFixedJoint();
+  g_pRevoluteJoint = new CPhysicRevoluteJoint();
+  g_pSphericalJoint = new CPhysicSphericalJoint();
+
+  //g_pFixedJoint->SetInfo(g_pJointActor1);
+  //g_pRevoluteJoint->SetInfo(v3fZERO,Vect3f(1.0f,1.0f,1.0f),g_pJointActor1,g_pJointActor2);
+  g_pSphericalJoint->SetInfo(Vect3f(1.0f,1.0f,1.0f),g_pJointActor1,g_pJointActor2);
+  //g_pRevoluteJoint->SetMotor(1.0f,1.0f);
+
+  //g_pFixedJoint->CreateJoint(NULL);
+
+  l_pPhysManager->AddPhysicActor(g_pJointActor1);
+  l_pPhysManager->AddPhysicActor(g_pJointActor2);
+  //l_pPhysManager->AddPhysicFixedJoint(g_pFixedJoint);
+  //l_pPhysManager->AddPhysicRevoluteJoint(g_pRevoluteJoint);
+  l_pPhysManager->AddPhysicSphericalJoint(g_pSphericalJoint);
+
+  
+  
+ 
+
+
+  //CHARACTER CONTROLLER
+  g_pUserDataController = new CPhysicUserData("PhysX Controller");
   g_pUserDataController->SetPaint(true);
   g_pUserDataController->SetColor(colBLACK);
-  g_pUserDataEscala->SetPaint(true);
-  g_pUserDataEscala->SetColor(colYELLOW);
-  
-
-
-  g_pPActorPlane = new CPhysicActor(g_pUserData);
-  g_pPActorComposite = new CPhysicActor(g_pUserData3);
-  g_pPEscala = new CPhysicActor(g_pUserDataEscala);
-
-  //ESCALA
-
-
-
-  g_pPEscala->AddBoxSphape(Vect3f(0.5f,0.3f,2.0f),Vect3f(-10.0f,0.0f,0.0f));
-  g_pPEscala->AddBoxSphape(Vect3f(0.5f,0.6f,2.0f),Vect3f(-11.0f,0.0f,0.0f));
-  g_pPEscala->AddBoxSphape(Vect3f(0.5f,0.9f,2.0f),Vect3f(-12.0f,0.0f,0.0f));
-  g_pPEscala->AddBoxSphape(Vect3f(0.5f,1.2f,2.0f),Vect3f(-13.0f,0.0f,0.0f));
-  g_pPEscala->AddBoxSphape(Vect3f(0.5f,1.5f,2.0f),Vect3f(-14.0f,0.0f,0.0f));
-  g_pPEscala->AddBoxSphape(Vect3f(0.5f,1.8f,2.0f),Vect3f(-15.0f,0.0f,0.0f));
-  g_pPEscala->AddBoxSphape(Vect3f(0.5f,2.1f,2.0f),Vect3f(-16.0f,0.0f,0.0f));
-  g_pPEscala->AddBoxSphape(Vect3f(0.5f,2.4f,2.0f),Vect3f(-17.0f,0.0f,0.0f));
-  g_pPEscala->AddBoxSphape(Vect3f(0.5f,2.7f,2.0f),Vect3f(-18.0f,0.0f,0.0f));
-  g_pPEscala->AddBoxSphape(Vect3f(0.5f,3.0f,2.0f),Vect3f(-19.0f,0.0f,0.0f));
-  g_pPEscala->SetGlobalPosition(Vect3f(5.0f,0.0f,5.0f));
-
-  //Actor estatic en forma de pla per fer probes amb el charactercontroller:
-  //CPhysicActor* plaXung = new CPhysicActor(g_pUserData2);
-  //g_pPActorPlane->AddBoxSphape(Vect3f(500.f,1.0f,500.f),Vect3f(0.0f,-1.0f,0.0f),NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
-  //g_pPActorPlane->CreateBody(100.0f);
-
-
-  /*const vector<uint32> l_vIndexBuff = CORE->GetStaticMeshManager()->GetResource("ordinador_def")->GetIndexBuffer();
-  const vector<Vect3f> l_vVertexBuff = CORE->GetStaticMeshManager()->GetResource("ordinador_def")->GetVertexBuffer();
-  CPhysicCookingMesh* l_pCookingMesh = CORE->GetPhysicsManager()->GetCookingMesh();
-  l_pCookingMesh->CreatePhysicMesh(l_vVertexBuff,l_vIndexBuff,"ordinador_def");
-  NxTriangleMesh* l_pMesh = l_pCookingMesh->GetPhysicMesh("ordinador_def");
-  g_pPActorComposite->AddMeshShape(l_pMesh);
-
-  CRenderableObject* l_pRenderObject = CORE->GetRenderableObjectsManager()->GetResource("Ordinador_DEF");
-  g_pGameObject = new CGameObject("ordinador_def");
-  g_pGameObject->Init(l_pRenderObject,g_pPActorComposite,"mesh");*/
-  
-  //Composite
-  //g_pPActorComposite->AddBoxSphape(2,Vect3f(0,7,0));
-  //g_pPActorComposite->AddSphereShape(0.001f);
-  //g_pPActorComposite->AddSphereShape(1,Vect3f(2,4,-2));
-  //g_pPActorComposite->AddSphereShape(1,Vect3f(-2,4,-2));
-  //g_pPActorComposite->AddSphereShape(1,Vect3f(-2,4,2));
-  
-
-  //g_pPActorComposite->CreateBody(0.1f);
-  //g_pPActorComposite->SetGlobalPosition(Vect3f(0,4,0));
-  
-
-  //l_pPhysManager->AddPhysicActor(g_pPActorPlane);
-  
-  //l_pPhysManager->AddPhysicActor(g_pPActorComposite);
-  //l_pPhysManager->AddPhysicActor(g_pPActorPlane);
-  //l_pPhysManager->AddPhysicActor(g_pPEscala);
-  
 
   g_pPhysXController = new CPhysicController(RADIUS_CONTROLLER,ALTURA_CONTROLLER,10.0f,0.1f,0.5f,COLISIONABLE_MASK,g_pUserDataController,Vect3f(-7.0f,2.2f,-4.0f));
   g_pPhysXController->SetYaw(-90);
@@ -247,135 +174,11 @@ bool CPhysXProcess::Init()
 
   m_pObject->SetPosition(g_pPhysXController->GetPosition());
 
-  //Vect3f l_vBoxDim2(1.0f,1.0f,1.0f);
-  //Vect3f l_vBoxDim3(1.0f,1.0f,1.0f);
-  //Vect3f l_vBoxDim4(1.0f,1.0f,1.0f);
-  //Vect3f l_vBoxDim5(1.0f,1.0f,1.0f);
-  //Vect3f l_vBoxDim6(1.0f,1.0f,1.0f);
-  //Vect3f l_vBoxDim7(1.0f,1.0f,1.0f);
-
-  //l_vBoxDim2 = CORE->GetRenderableObjectsManager()->GetResource("Box02")->GetBoundingBox()->GetDimension();
-  //l_vBoxDim3 = CORE->GetRenderableObjectsManager()->GetResource("Box03")->GetBoundingBox()->GetDimension();
-  //l_vBoxDim4 = CORE->GetRenderableObjectsManager()->GetResource("Box04")->GetBoundingBox()->GetDimension();
-  //l_vBoxDim5 = CORE->GetRenderableObjectsManager()->GetResource("Box05")->GetBoundingBox()->GetDimension();
-  //l_vBoxDim6 = CORE->GetRenderableObjectsManager()->GetResource("Box06")->GetBoundingBox()->GetDimension();
-  //l_vBoxDim7 = CORE->GetRenderableObjectsManager()->GetResource("Box07")->GetBoundingBox()->GetDimension();
-
-  //
-
-  //g_pBoxes = new CPhysicUserData("Boxes Fisiques");
-  //g_pBoxes->SetPaint(false);
-  //g_pBoxes->SetColor(colWHITE);
-  //g_Box02 = new CPhysicActor(g_pBoxes);
-  //g_Box03 = new CPhysicActor(g_pBoxes);
-  //g_Box04 = new CPhysicActor(g_pBoxes);
-  //g_Box05 = new CPhysicActor(g_pBoxes);
-  //g_Box06 = new CPhysicActor(g_pBoxes);
-  //g_Box07 = new CPhysicActor(g_pBoxes);
-
-
-  //g_Box02->AddBoxSphape(l_vBoxDim2/2);
-  //g_Box03->AddBoxSphape(l_vBoxDim3/2);
-  //g_Box04->AddBoxSphape(l_vBoxDim4/2);
-  //g_Box05->AddBoxSphape(l_vBoxDim5/2);
-  //g_Box06->AddBoxSphape(l_vBoxDim6/2);
-  //g_Box07->AddBoxSphape(l_vBoxDim7/2);
-
-  ///*l_Box02->SetMat44(CORE->GetRenderableObjectsManager()->GetResource("Box02")->GetMat44());
-  //l_Box03->SetMat44(CORE->GetRenderableObjectsManager()->GetResource("Box03")->GetMat44());
-  //l_Box04->SetMat44(CORE->GetRenderableObjectsManager()->GetResource("Box04")->GetMat44());
-  //l_Box05->SetMat44(CORE->GetRenderableObjectsManager()->GetResource("Box05")->GetMat44());
-  //l_Box06->SetMat44(CORE->GetRenderableObjectsManager()->GetResource("Box06")->GetMat44());
-  //l_Box07->SetMat44(CORE->GetRenderableObjectsManager()->GetResource("Box07")->GetMat44());*/
-  //g_Box02->SetGlobalPosition(CORE->GetRenderableObjectsManager()->GetResource("Box02")->GetPosition());
-  //g_Box03->SetGlobalPosition(CORE->GetRenderableObjectsManager()->GetResource("Box03")->GetPosition());
-  //g_Box04->SetGlobalPosition(CORE->GetRenderableObjectsManager()->GetResource("Box04")->GetPosition());
-  //g_Box05->SetGlobalPosition(CORE->GetRenderableObjectsManager()->GetResource("Box05")->GetPosition());
-  //g_Box06->SetGlobalPosition(CORE->GetRenderableObjectsManager()->GetResource("Box06")->GetPosition());
-  //g_Box07->SetGlobalPosition(CORE->GetRenderableObjectsManager()->GetResource("Box07")->GetPosition());
-
-  //g_Box02->CreateBody(1.1f);
-  //g_Box03->CreateBody(1.1f);
-  //g_Box04->CreateBody(1.1f);
-  //g_Box05->CreateBody(1.1f);
-  //g_Box06->CreateBody(1.1f);
-  //g_Box07->CreateBody(1.1f);
-
-
-
-
-  //g_pJoint = new CPhysicFixedJoint();
-  //g_pJoint2 = new CPhysicFixedJoint();
-  //g_pJoint3 = new CPhysicFixedJoint();
-  //g_pJoint4 = new CPhysicFixedJoint();
-  //g_pJoint5 = new CPhysicFixedJoint();
-  ////CPhysicFixedJoint* l_pJointP = new CPhysicFixedJoint();
-
-  ////l_pJointP->SetInfo(g_Box02,g_pPActorBall);
-
-
-  //g_pJoint->SetInfo(g_Box02,g_Box03);
-  //g_pJoint2->SetInfo(g_Box03,g_Box04);
-  //g_pJoint3->SetInfo(g_Box04,g_Box05);
-  //g_pJoint4->SetInfo(g_Box05,g_Box06);
-  //g_pJoint5->SetInfo(g_Box06,g_Box07);
-
-
-  //l_pPhysManager->AddPhysicActor(g_Box02);
-  //l_pPhysManager->AddPhysicActor(g_Box03);
-  //l_pPhysManager->AddPhysicActor(g_Box04);
-  //l_pPhysManager->AddPhysicActor(g_Box05);
-  //l_pPhysManager->AddPhysicActor(g_Box06);
-  //l_pPhysManager->AddPhysicActor(g_Box07);
-
-  //l_pPhysManager->AddPhysicFixedJoint(g_pJoint);
-  //l_pPhysManager->AddPhysicFixedJoint(g_pJoint2);
-  //l_pPhysManager->AddPhysicFixedJoint(g_pJoint3);
-  //l_pPhysManager->AddPhysicFixedJoint(g_pJoint4);
-  //l_pPhysManager->AddPhysicFixedJoint(g_pJoint5);
-  ////l_pPhysManager->AddPhysicFixedJoint(l_pJointP);
-
-  //
-
-
-
-  //g_pGameBox02 = new CGameObject("Box02");
-  //g_pGameBox03 = new CGameObject("Box03");
-  //g_pGameBox04 = new CGameObject("Box04");
-  //g_pGameBox05 = new CGameObject("Box05");
-  //g_pGameBox06 = new CGameObject("Box06");
-  //g_pGameBox07 = new CGameObject("Box07");
-
-  //g_pGameBox02->Init(CORE->GetRenderableObjectsManager()->GetResource("Box02"),g_Box02);
-  //g_pGameBox03->Init(CORE->GetRenderableObjectsManager()->GetResource("Box03"),g_Box03);
-  //g_pGameBox04->Init(CORE->GetRenderableObjectsManager()->GetResource("Box04"),g_Box04);
-  //g_pGameBox05->Init(CORE->GetRenderableObjectsManager()->GetResource("Box05"),g_Box05);
-  //g_pGameBox06->Init(CORE->GetRenderableObjectsManager()->GetResource("Box06"),g_Box06);
-  //g_pGameBox07->Init(CORE->GetRenderableObjectsManager()->GetResource("Box07"),g_Box07);
-
-  
-
-  /*CHECKED_DELETE(l_pJoint)
-  CHECKED_DELETE(l_pJoint2);
-  CHECKED_DELETE(l_pJoint3);
-  CHECKED_DELETE(l_pJoint4);
-  CHECKED_DELETE(l_pJoint5);
-  CHECKED_DELETE(l_pBoxes);*/
-  
-  //CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
-  
-  //m_pRenderPhysX->SetVisible(true);
-  
-
-  //CORE->GetRenderableObjectsManager()->SetAllVisibility(false);
-
-  
-  //CORE->GetStaticMeshManager()->GetResource("ordinador_def")->
   g_pObjectManager = new CGameObjectManager();
-  g_pObjectManager->Load("Data/Levels/NivellProves/XML/GameObjects.xml",false);
+  g_pObjectManager->Load("Data/Levels/PhysX/XML/GameObjects.xml",false);
 
 
-
+  //Init del character de Riggle
   g_pCharacter = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
 
   if (g_pCharacter != 0)
@@ -399,64 +202,80 @@ bool CPhysXProcess::Init()
 
 
   CORE->GetLightManager()->SetLightsEnabled(true);
-  l_pPhysManager->SetDebugRenderMode(false);
+  l_pPhysManager->SetDebugRenderMode(true);
 
   SetOk(true);
   return IsOk();
+
+
+
+
+
+  
+
+
+  //PHYSICS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  /*g_pUserData = new CPhysicUserData("Plane");
+  g_pUserDataEscala = new CPhysicUserData("Escala");*/
+  /*g_pUserData->SetPaint(false);
+  g_pUserData->SetColor(colWHITE);*/
+  /*g_pUserDataEscala->SetPaint(true);
+  g_pUserDataEscala->SetColor(colYELLOW);*/
+  //ESCALA
+  /*g_pPEscala->AddBoxSphape(Vect3f(0.5f,0.3f,2.0f),Vect3f(-10.0f,0.0f,0.0f));
+  g_pPEscala->AddBoxSphape(Vect3f(0.5f,0.6f,2.0f),Vect3f(-11.0f,0.0f,0.0f));
+  g_pPEscala->AddBoxSphape(Vect3f(0.5f,0.9f,2.0f),Vect3f(-12.0f,0.0f,0.0f));
+  g_pPEscala->AddBoxSphape(Vect3f(0.5f,1.2f,2.0f),Vect3f(-13.0f,0.0f,0.0f));
+  g_pPEscala->AddBoxSphape(Vect3f(0.5f,1.5f,2.0f),Vect3f(-14.0f,0.0f,0.0f));
+  g_pPEscala->AddBoxSphape(Vect3f(0.5f,1.8f,2.0f),Vect3f(-15.0f,0.0f,0.0f));
+  g_pPEscala->AddBoxSphape(Vect3f(0.5f,2.1f,2.0f),Vect3f(-16.0f,0.0f,0.0f));
+  g_pPEscala->AddBoxSphape(Vect3f(0.5f,2.4f,2.0f),Vect3f(-17.0f,0.0f,0.0f));
+  g_pPEscala->AddBoxSphape(Vect3f(0.5f,2.7f,2.0f),Vect3f(-18.0f,0.0f,0.0f));
+  g_pPEscala->AddBoxSphape(Vect3f(0.5f,3.0f,2.0f),Vect3f(-19.0f,0.0f,0.0f));
+  g_pPEscala->SetGlobalPosition(Vect3f(5.0f,0.0f,5.0f));*/
+
+  
+  //g_pPActorPlane->AddBoxSphape(Vect3f(500.f,1.0f,500.f),Vect3f(0.0f,-1.0f,0.0f),NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
+  //l_pPhysManager->AddPhysicActor(g_pPActorPlane);
+
+  //g_pPActorPlane = new CPhysicActor(g_pUserData);
+  //g_pPActorComposite = new CPhysicActor(g_pUserData3);
+  //g_pPEscala = new CPhysicActor(g_pUserDataEscala);
+  /////////////////////////////////////////////////////////////////////////////////
+
+
+
 }
 
 void CPhysXProcess::Release()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"TestProcess::Release");
 
-
+  //DELETES DE OBJECTS
   g_pObjectManager->CleanUp();
 
   CHECKED_DELETE(m_pObjectCamera)
   CHECKED_DELETE(m_pObject)
-
-  CHECKED_DELETE(g_pPActorPlane)
   CHECKED_DELETE(g_pUserData)
-  CHECKED_DELETE(g_pUserData2)
-  CHECKED_DELETE(g_pUserData3)
-  CHECKED_DELETE(g_pUserData4)
-  CHECKED_DELETE(g_pUserData5)
-  CHECKED_DELETE(g_pPActorBall)
-  CHECKED_DELETE(g_pPActorComposite)
   CHECKED_DELETE(g_pGameObject)
   CHECKED_DELETE(g_pPhysXController)
-  CHECKED_DELETE(g_pPEscala)
-  CHECKED_DELETE(g_pUserDataEscala)
   CHECKED_DELETE(g_pUserDataController)
-  CHECKED_DELETE(g_pGameBox02)
-  CHECKED_DELETE(g_pGameBox03)
-  CHECKED_DELETE(g_pGameBox04)
-  CHECKED_DELETE(g_pGameBox05)
-  CHECKED_DELETE(g_pGameBox06)
-  CHECKED_DELETE(g_pGameBox07)
-
-  CHECKED_DELETE(g_Box02)
-  CHECKED_DELETE(g_Box03)
-  CHECKED_DELETE(g_Box04)
-  CHECKED_DELETE(g_Box05)
-  CHECKED_DELETE(g_Box06)
-  CHECKED_DELETE(g_Box07)
+  CHECKED_DELETE(g_pObjectManager)
 
 
-  CHECKED_DELETE(g_pJoint)
-  CHECKED_DELETE(g_pJoint2)
-  CHECKED_DELETE(g_pJoint3)
-  CHECKED_DELETE(g_pJoint4)
-  CHECKED_DELETE(g_pJoint5)
-  CHECKED_DELETE(g_pBoxes)  
-  CHECKED_DELETE(g_pObjectManager);
+  CHECKED_DELETE(g_pUserDataJoint1)
+  CHECKED_DELETE(g_pUserDataJoint2)
+  CHECKED_DELETE(g_pUserDataJoint3)
+  CHECKED_DELETE(g_pJointActor1)
+  CHECKED_DELETE(g_pJointActor2)
+  CHECKED_DELETE(g_pJointActor3)
+  CHECKED_DELETE(g_pFixedJoint)
+  CHECKED_DELETE(g_pFixedJoint2)
+  CHECKED_DELETE(g_pRevoluteJoint);
+  CHECKED_DELETE(g_pSphericalJoint);
+
   g_vCollisions.clear();
-  //CHECKED_DELETE(plaXung)
 
-  //CHECKED_DELETE(m_pRenderPhysX);
-  
-
-  
   
 }
 
@@ -790,21 +609,21 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
   }
 
 
-  if(strcmp(_pcAction, "ShootBall") == 0)
+  if(strcmp(_pcAction, "Elevate") == 0)
   {
     
-    CPhysicActor* l_pPActorShoot = new CPhysicActor(g_pUserData4);
-    l_pPActorShoot->AddSphereShape(0.3f,m_pCamera->GetEye());
-    l_pPActorShoot->CreateBody(1);
-    CORE->GetPhysicsManager()->AddPhysicActor(l_pPActorShoot);
-    //m_pCamera->GetDirection();
-    l_pPActorShoot->SetLinearVelocity(m_pCamera->GetDirection()*m_fPhysxVelocity);
-    
-    CHECKED_DELETE(l_pPActorShoot)
+    //CPhysicActor* l_pPActorShoot = new CPhysicActor(g_pUserData);
+    //l_pPActorShoot->AddSphereShape(0.3f,m_pCamera->GetEye());
+    //l_pPActorShoot->CreateBody(1);
+    //CORE->GetPhysicsManager()->AddPhysicActor(l_pPActorShoot);
+    ////m_pCamera->GetDirection();
+    //l_pPActorShoot->SetLinearVelocity(m_pCamera->GetDirection()*m_fPhysxVelocity);
+    //
+    //CHECKED_DELETE(l_pPActorShoot)
 
   }
 
-  if(strcmp(_pcAction, "Elevate") == 0)
+  if(strcmp(_pcAction, "ShootBall") == 0)
   {
     //g_pPActorComposite->SetLinearVelocity(Vect3f(0.0f,1.0f,0.0f)*m_fPhysxVelocity);
       CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
@@ -838,13 +657,13 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
 
   if(strcmp(_pcAction, "ShootBOX") == 0)
   {
-    CPhysicActor* l_pPActorShoot = new CPhysicActor(g_pUserData5);
-    l_pPActorShoot->AddBoxSphape(0.8f,m_pCamera->GetEye());
-    l_pPActorShoot->CreateBody(3);
-    CORE->GetPhysicsManager()->AddPhysicActor(l_pPActorShoot);
-    //m_pCamera->GetDirection();
-    l_pPActorShoot->SetLinearVelocity(m_pCamera->GetDirection()*m_fPhysxVelocity);
-    CHECKED_DELETE(l_pPActorShoot)
+    //CPhysicActor* l_pPActorShoot = new CPhysicActor(g_pUserData);
+    //l_pPActorShoot->AddBoxSphape(0.8f,m_pCamera->GetEye());
+    //l_pPActorShoot->CreateBody(3);
+    //CORE->GetPhysicsManager()->AddPhysicActor(l_pPActorShoot);
+    ////m_pCamera->GetDirection();
+    //l_pPActorShoot->SetLinearVelocity(m_pCamera->GetDirection()*m_fPhysxVelocity);
+    //CHECKED_DELETE(l_pPActorShoot)
   }
 
   if(strcmp(_pcAction, "VelocityChange") == 0)
