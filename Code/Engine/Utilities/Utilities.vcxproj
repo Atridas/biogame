@@ -77,11 +77,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BaseComponent.cpp" />
+    <ClCompile Include="ComponentIAWalkToPlayer.cpp" />
     <ClCompile Include="ComponentMovement.cpp" />
     <ClCompile Include="Component3rdPSCamera.cpp" />
     <ClCompile Include="ComponentPhysXBox.cpp" />
     <ClCompile Include="ComponentPhysXController.cpp" />
+    <ClCompile Include="ComponentPhysXMesh.cpp" />
     <ClCompile Include="ComponentPlayerController.cpp" />
+    <ClCompile Include="ComponentRenderableObject.cpp" />
     <ClCompile Include="EntitiesToLua.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="GameEntity.cpp" />
@@ -95,12 +98,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\BaseComponent.h" />
+    <ClInclude Include="include\ComponentIAWalkToPlayer.h" />
     <ClInclude Include="include\ComponentMovement.h" />
     <ClInclude Include="include\Component3rdPSCamera.h" />
     <ClInclude Include="include\ComponentObject3D.h" />
     <ClInclude Include="include\ComponentPhysXBox.h" />
     <ClInclude Include="include\ComponentPhysXController.h" />
+    <ClInclude Include="include\ComponentPhysXMesh.h" />
     <ClInclude Include="include\ComponentPlayerController.h" />
+    <ClInclude Include="include\ComponentRenderableObject.h" />
     <ClInclude Include="include\EntitiesToLua.h" />
     <ClInclude Include="include\EntityDefines.h" />
     <ClInclude Include="include\EntityManager.h" />

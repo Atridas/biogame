@@ -15,6 +15,7 @@ public:
   
   CGameEntity* CreateEntity();
   void         SetName(const string&,int);
+  void         SetName(const string&,const CGameEntity*);
   CGameEntity* GetEntity(int) const;
   CGameEntity* GetEntity(const string&) const;
   
@@ -25,6 +26,7 @@ public:
   void         UpdatePostAnim(float _fDeltaTime) ;
   void         PostUpdate(float _fDeltaTime)     ;
   
+  void RemoveEntity(const CGameEntity*);
   void RemoveEntity(int);
 
 protected:
