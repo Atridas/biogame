@@ -24,8 +24,10 @@ public:
       {};
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_PHISX_BOX;};
+  
+  bool Init(CGameEntity *_pEntity, float _fDensity, int _iCollisionMask);
 
-  bool Init(CGameEntity *_Entity,
+  bool Init(CGameEntity *_pEntity,
             float _fSizeX, float _fSizeY, float _fSizeZ,
             float _fPosX , float _fPosY , float _fPosZ,
             float _fDensity, int _iCollisionMask

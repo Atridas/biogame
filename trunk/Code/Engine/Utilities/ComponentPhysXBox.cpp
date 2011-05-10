@@ -1,5 +1,7 @@
 
 #include "ComponentObject3D.h"
+#include "ComponentRenderableObject.h"
+#include "RenderableObject.h"
 #include "PhysicActor.h"
 #include "PhysicsManager.h"
 #include "Core.h"
@@ -30,6 +32,42 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity,
 
   m_pPhysXBox->AddBoxSphape(Vect3f( _fSizeX, _fSizeY, _fSizeZ), 
                             Vect3f( _fPosX , _fPosY , _fPosZ ),
+                            NULL, _iCollisionMask);
+
+
+  CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXBox);
+  m_pPhysXBox->SetMat44( m_pObject3D->GetMat44() );
+
+  SetOk(true);
+  return IsOk();
+}
+
+
+bool CComponentPhysXBox::Init(CGameEntity *_pEntity, float _fDensity, int _iCollisionMask)
+{
+  assert(_pEntity->IsOk());
+  SetEntity(_pEntity);
+
+  m_pObject3D = dynamic_cast<CComponentObject3D*>(_pEntity->GetComponent(ECT_OBJECT_3D));
+  assert(m_pObject3D); //TODO fer missatges d'error més elavorats
+
+  CComponentRenderableObject* l_pComponentRenderableObject = dynamic_cast<CComponentRenderableObject*>(_pEntity->GetComponent(ECT_RENDERABLE_OBJECT));
+  assert(l_pComponentRenderableObject);
+  CRenderableObject* l_pRenderableObject = l_pComponentRenderableObject->GetRenderableObject();
+  CBoundingBox* l_pBB = l_pRenderableObject->GetBoundingBox();
+
+  m_pPhysXData = new CPhysicUserData(_pEntity->GetName().c_str());
+  m_pPhysXData->SetPaint(true);
+  m_pPhysXData->SetColor(colBLUE);
+
+  m_pPhysXBox = new CPhysicActor(m_pPhysXData);
+  if(_fDensity > 0)
+  {
+    m_pPhysXBox->CreateBody(_fDensity);
+  }
+
+  m_pPhysXBox->AddBoxSphape(l_pBB->GetDimension() * .5f, 
+                            l_pBB->GetMiddlePoint(),
                             NULL, _iCollisionMask);
 
 

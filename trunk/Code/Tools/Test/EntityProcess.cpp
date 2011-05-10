@@ -52,7 +52,7 @@ bool CEntityProcess::Init()
                                      -FLOAT_PI_VALUE/3);
 
   CComponent3rdPSCamera *m_pComponent3rdPSCamera = new CComponent3rdPSCamera();
-  m_pComponent3rdPSCamera->Init(m_pPlayerEntity, 1);
+  m_pComponent3rdPSCamera->Init(m_pPlayerEntity, 1, 0.5f);
 
   m_pCamera = m_pComponent3rdPSCamera->GetCamera();
 
@@ -71,13 +71,8 @@ bool CEntityProcess::Init()
 
   CComponentRenderableObject* l_pComponentRenderableObject = new CComponentRenderableObject();
   l_pComponentRenderableObject->Init(l_peWall, "Wall");
-  CRenderableObject* l_pRO = l_pComponentRenderableObject->GetRenderableObject();
-  Vect3f l_BoxDimension = l_pRO->GetBoundingBox()->GetDimension();
-  Vect3f l_BoxMidPoint = l_pRO->GetBoundingBox()->GetMiddlePoint();
 
   (new CComponentPhysXBox())->Init(l_peWall ,
-                                    l_BoxDimension.x*0.5f, l_BoxDimension.y*0.5f, l_BoxDimension.z*0.5f, 
-                                    l_BoxMidPoint.x,  l_BoxMidPoint.y,  l_BoxMidPoint.z, 
                                     1, 0
                                   );
 

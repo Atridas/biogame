@@ -131,6 +131,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponent3rdPSCamera, CBaseComponent>("Component3rdPSCamera")
       .def("init", &CComponent3rdPSCamera::Init)
       .def_readwrite("camera_height", &CComponent3rdPSCamera::m_fCameraHeight)
+      .def_readwrite("camera_right", &CComponent3rdPSCamera::m_fCameraRight)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPhysXController,CBaseComponent>("ComponentPhysXController")
@@ -138,7 +139,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPhysXBox, CBaseComponent>("ComponentPhysXBox")
-      .def("init", &CComponentPhysXBox::Init)
+      .def("init",                        (bool(CComponentPhysXBox::*)(CGameEntity*,float,float,float,float,float,float,float,int))&CComponentPhysXBox::Init)
+      .def("init_with_renderable_object", (bool(CComponentPhysXBox::*)(CGameEntity*,float,int))&CComponentPhysXBox::Init)
   
   ];
 }
