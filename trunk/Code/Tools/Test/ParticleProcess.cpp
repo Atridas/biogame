@@ -35,7 +35,8 @@
 
 bool CParticleProcess::Init()
 {
-  m_pBillBoard.SetPos( Vect3f(0.f, 1.f, 0.f));
+
+  m_pBillBoard.SetPos( Vect3f(-8.f, 1.f, -5.f));
   m_pBillBoard.SetSize( 5.f, 5.f);
   
   m_pObject = new CObject3D();
