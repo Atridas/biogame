@@ -35,7 +35,7 @@
 
 bool CParticleProcess::Init()
 {
-  m_pBillBoard.SetPos( D3DXVECTOR3(0.f, 1.f, 0.f));
+  m_pBillBoard.SetPos( Vect3f(0.f, 1.f, 0.f));
   m_pBillBoard.SetSize( 5.f, 5.f);
   
   m_pObject = new CObject3D();
@@ -98,7 +98,7 @@ void CParticleProcess::Update(float _fElapsedTime)
     Vect3i l_vVec = INPUT_MANAGER->GetMouseDelta();
 
     l_fPitch = m_pObject->GetPitch();
-    l_fYaw = m_pObject->GetYaw();
+    l_fYaw   = m_pObject->GetYaw();
   
     m_pObject->SetYaw(l_fYaw-l_vVec.x*_fElapsedTime);
     //m_pObjectBot->SetYaw(m_pObject->GetYaw()-FLOAT_PI_VALUE/2.0f);

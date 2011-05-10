@@ -28,7 +28,8 @@ public:
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_3RD_PERSON_SHOOTER_CAMERA;};
 
   bool Init(CGameEntity *_pEntity,
-            float _fCameraHeight);
+            float _fCameraHeight,
+            float _fCameraRight);
 
   void PostUpdate(float _fDeltaTime);
 
@@ -38,6 +39,7 @@ public:
 
   //Dades pròpies dels components
   float m_fCameraHeight;
+  float m_fCameraRight;
 
 protected:
   virtual void Release();
