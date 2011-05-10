@@ -32,6 +32,7 @@
 #include "GameObject.h"
 #include "GameObjectManager.h"
 #include "PhysicCookingMesh.h"
+#include <cal3d/cal3d.h>
 //---PhysX Includes---//
 #undef min
 #undef max
@@ -118,8 +119,8 @@ bool CPhysXProcess::Init()
   CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
  
 
-
-
+  CalCoreSkeleton* l_pSkeleton = CORE->GetAnimatedModelManager()->GetResource("riggle")->GetCoreModel()->getCoreSkeleton();
+  
 
   g_pUserDataJoint1 = new CPhysicUserData("Objecte Joint 1");
   g_pUserDataJoint2 = new CPhysicUserData("Objecte Joint 2");
