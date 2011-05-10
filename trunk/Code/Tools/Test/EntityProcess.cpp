@@ -59,6 +59,10 @@ bool CEntityProcess::Init()
   CComponentPhysXController *m_pComponentPhysXController = new CComponentPhysXController();
   m_pComponentPhysXController->Init(m_pPlayerEntity, 0.3f, 1.5f, 10.0f, 0.1f, 0.5f, 1);
 
+  //Carregar entitats de l'escenari
+  LoadEntitiesFromXML("Data/Levels/NivellProves/XML/GameEntities.xml");
+
+  /*
   // Entitat de l'escenari ----------------------------------------------------------------------
   CGameEntity* l_peEscenari = CORE->GetEntityManager()->CreateEntity();
   (new CComponentObject3D())->Init(l_peEscenari);
@@ -75,6 +79,8 @@ bool CEntityProcess::Init()
   (new CComponentPhysXBox())->Init(l_peWall ,
                                     1, 0
                                   );
+
+  */
 
   // un enemic ------------------------------------------------------------------------
   CGameEntity* l_peEnemy = CORE->GetEntityManager()->CreateEntity();

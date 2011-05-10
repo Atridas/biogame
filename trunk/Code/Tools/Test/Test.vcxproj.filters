@@ -56,5 +56,8 @@
     <None Include="..\..\..\Run\Data\Levels\NivellProves\XML\GameObjects.xml">
       <Filter>Data</Filter>
     </None>
+    <None Include="..\..\..\Run\Data\Levels\NivellProves\XML\GameEntities.xml">
+      <Filter>Data</Filter>
+    </None>
   </ItemGroup>
 </Project>
