@@ -42,7 +42,7 @@ function CloseTagXML _Name =
 
 function InlineTagXML _Name =
 (
-	return "<" + _Name + "/>"
+	return "<" + _Name + " />"
 )
 
 function InlineTagParamXML _Name _Params =
@@ -64,7 +64,7 @@ function InlineTagParamXML _Name _Params =
 		)
 	)
 	
-	l_Output = l_Output + "/>"
+	l_Output = l_Output + " />"
 	
 	return l_Output
 )
