@@ -86,6 +86,7 @@
     <ClCompile Include="ComponentPlayerController.cpp" />
     <ClCompile Include="ComponentRenderableObject.cpp" />
     <ClCompile Include="EntitiesToLua.cpp" />
+    <ClCompile Include="EntityLoader.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="GameEntity.cpp" />
     <ClCompile Include="GameObject.cpp" />

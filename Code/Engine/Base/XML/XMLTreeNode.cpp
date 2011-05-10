@@ -2,7 +2,8 @@
 
 #include "XML/XMLTreeNode.h"
 #include "Assert.h"
-//#include "Logger/Logger.h"
+#include "base.h"
+#include "Utils/Logger.h"
 
 // Defines
 #define MY_ENCODING "ISO-8859-1"
@@ -203,6 +204,15 @@ int CXMLTreeNode::GetNumChildren () const
   return iCount;
 }
 
+
+//----------------------------------------------------------------------------
+// Returns if a property exists
+//----------------------------------------------------------------------------
+bool CXMLTreeNode::ExistsProperty(const char* _pszKey)
+{
+  return 0 != GetProperty(_pszKey);
+}
+
 //----------------------------------------------------------------------------
 // Returns a param of the tree from a given key
 //----------------------------------------------------------------------------
@@ -236,7 +246,7 @@ int CXMLTreeNode::GetIntProperty (const char* _pszKey, int _iDefault, bool warni
   }
 	else if(warningDefault)
 	{
-		//LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetIntProperty se ha utilizado el valor por defecto:%d para el tag <%s>",_iDefault, _pszKey);
+		LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetIntProperty se ha utilizado el valor por defecto:%d para el tag <%s>",_iDefault, _pszKey);
 	}
 
   xmlFree(value);
@@ -259,7 +269,7 @@ float CXMLTreeNode::GetFloatProperty (const char* _pszKey, float _fDefault, bool
   }
 	else if(warningDefault)
 	{
-		//LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetFloatProperty se ha utilizado el valor por defecto:%f para el tag <%s>",_fDefault, _pszKey);
+		LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetFloatProperty se ha utilizado el valor por defecto:%f para el tag <%s>",_fDefault, _pszKey);
 	}
 
   xmlFree(value);
@@ -288,7 +298,7 @@ bool CXMLTreeNode::GetBoolProperty (const char* _pszKey, bool _bDefault, bool wa
   }
 	else if(warningDefault)
 	{
-		//LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetBoolProperty se ha utilizado el valor por defecto:%d para el tag <%s>",_bDefault, _pszKey);
+		LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetBoolProperty se ha utilizado el valor por defecto:%d para el tag <%s>",_bDefault, _pszKey);
 	}
 
   xmlFree(value);
@@ -311,7 +321,7 @@ const char* CXMLTreeNode::GetPszProperty (const char* _pszKey, const char* _pszD
   }
 	else if(warningDefault)
 	{
-		//LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetPszProperty se ha utilizado el valor por defecto:%s para el tag <%s>",_pszDefault, _pszKey);
+		LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetPszProperty se ha utilizado el valor por defecto:%s para el tag <%s>",_pszDefault, _pszKey);
 	}
 
   return pszRet;
@@ -338,7 +348,7 @@ std::string CXMLTreeNode::GetPszISOProperty (const char* _pszKey, const char* _p
   }
 	else if(warningDefault)
 	{
-		//LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetPszISOProperty se ha utilizado el valor por defecto:%s para el tag <%s>",_pszDefault, _pszKey);
+		LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetPszISOProperty se ha utilizado el valor por defecto:%s para el tag <%s>",_pszDefault, _pszKey);
 	}
 
   return szRet;
@@ -359,7 +369,7 @@ Vect2f CXMLTreeNode::GetVect2fProperty  (const char* _pszKey, const Vect2f& _Def
   }
 	else if(warningDefault)
 	{
-		//LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect2fProperty se ha utilizado el vector2f por defecto:(%f,%f) para el tag <%s>",_Default.x, _Default.y, _pszKey);
+		LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect2fProperty se ha utilizado el vector2f por defecto:(%f,%f) para el tag <%s>",_Default.x, _Default.y, _pszKey);
 	}
 
   xmlFree(value);
@@ -381,7 +391,7 @@ Vect3f CXMLTreeNode::GetVect3fProperty  (const char* _pszKey, const Vect3f& _Def
   }
 	else if(warningDefault)
 	{
-		//LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector3f por defecto:(%f,%f,%f) para el tag <%s>",_Default.x, _Default.y, _Default.z, _pszKey);
+		LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector3f por defecto:(%f,%f,%f) para el tag <%s>",_Default.x, _Default.y, _Default.z, _pszKey);
 	}
 
   xmlFree(value);
@@ -403,7 +413,7 @@ Vect4f CXMLTreeNode::GetVect4fProperty  (const char* _pszKey, const Vect4f& _Def
   }
 	else if(warningDefault)
 	{
-		//LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector4f por defecto:(%f,%f,%f,%f) para el tag <%s>",_Default.x, _Default.y, _Default.z, _Default.w, _pszKey);
+		LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector4f por defecto:(%f,%f,%f,%f) para el tag <%s>",_Default.x, _Default.y, _Default.z, _Default.w, _pszKey);
 	}
 
   xmlFree(value);
@@ -425,7 +435,7 @@ Vect2i CXMLTreeNode::GetVect2iProperty  (const char* _pszKey, const Vect2i& _Def
   }
 	else if(warningDefault)
 	{
-		//LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector2i por defecto:(%d,%d) para el tag <%s>", _Default.x, _Default.y, _pszKey);
+		LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector2i por defecto:(%d,%d) para el tag <%s>", _Default.x, _Default.y, _pszKey);
 	}
 
   xmlFree(value);
@@ -447,7 +457,7 @@ Vect3i CXMLTreeNode::GetVect3iProperty  (const char* _pszKey, const Vect3i& _Def
   }
 	else if(warningDefault)
 	{
-		//LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector3i por defecto:(%d,%d,%d) para el tag <%s>",_Default.x,_Default.y,_Default.z, _pszKey);
+		LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector3i por defecto:(%d,%d,%d) para el tag <%s>",_Default.x,_Default.y,_Default.z, _pszKey);
 	}
 
   xmlFree(value);
@@ -469,7 +479,7 @@ Vect4i CXMLTreeNode::GetVect4iProperty  (const char* _pszKey, const Vect4i& _Def
   }
 	else if(warningDefault)
 	{
-		//LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector4i por defecto:(%d,%d,%d,%d) para el tag <%s>", _Default.x, _Default.y, _Default.z, _Default.w, _pszKey);
+		LOGGER->AddNewLog(ELL_WARNING, "CXMLTreeNode::GetVect3fProperty se ha utilizado el vector4i por defecto:(%d,%d,%d,%d) para el tag <%s>", _Default.x, _Default.y, _Default.z, _Default.w, _pszKey);
 	}
 
   xmlFree(value);

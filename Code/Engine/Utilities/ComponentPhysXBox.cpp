@@ -6,6 +6,8 @@
 #include "PhysicsManager.h"
 #include "Core.h"
 
+#include "Utils/Logger.h"
+
 #include "ComponentPhysXBox.h"
 
 bool CComponentPhysXBox::Init(CGameEntity *_pEntity,
@@ -46,13 +48,21 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity,
 bool CComponentPhysXBox::Init(CGameEntity *_pEntity, float _fDensity, int _iCollisionMask)
 {
   assert(_pEntity->IsOk());
-  SetEntity(_pEntity);
 
   m_pObject3D = dynamic_cast<CComponentObject3D*>(_pEntity->GetComponent(ECT_OBJECT_3D));
-  assert(m_pObject3D); //TODO fer missatges d'error més elavorats
+  if(!m_pObject3D)
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"CComponentPhysXBox::Init  L'objecte no té el component CComponentObject3D.");
+    return false;
+  }
 
   CComponentRenderableObject* l_pComponentRenderableObject = dynamic_cast<CComponentRenderableObject*>(_pEntity->GetComponent(ECT_RENDERABLE_OBJECT));
-  assert(l_pComponentRenderableObject);
+  if(!l_pComponentRenderableObject)
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"CComponentPhysXBox::Init  L'objecte no té el component CComponentRenderableObject.");
+    return false;
+  }
+
   CRenderableObject* l_pRenderableObject = l_pComponentRenderableObject->GetRenderableObject();
   CBoundingBox* l_pBB = l_pRenderableObject->GetBoundingBox();
 
@@ -73,7 +83,9 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity, float _fDensity, int _iColl
 
   CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXBox);
   m_pPhysXBox->SetMat44( m_pObject3D->GetMat44() );
+  
 
+  SetEntity(_pEntity);
   SetOk(true);
   return IsOk();
 }

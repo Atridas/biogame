@@ -34,5 +34,6 @@ struct SEvent {
 #include "GameEntity.h"
 #include "EntityManager.h"
 
+void LoadEntitiesFromXML(const string& _szFile);
 
 #endif
