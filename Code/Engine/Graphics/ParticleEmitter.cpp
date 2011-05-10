@@ -39,7 +39,7 @@ m_Particles(NUMPARTICLES)
   m_PointC=(D3DXVECTOR3(0.0f,0.0f,0.0f)); 
   m_PointD=(D3DXVECTOR3(0.0f,0.0f,0.0f));*/
 
-  m_bActive = true;
+  m_bActive = false;
 
   //TODO inicialitzar els vector de color i temps
 }
@@ -206,20 +206,22 @@ void CParticleEmitter::Init(CRenderManager* rm)
 	  if (bIsOk)
 	  {
 		   
-     // pointsize
-     if (FAILED(l_pd3dDevice->CreateVertexBuffer( NUMPARTICLES * sizeof(SPARTICLE_VERTEX), 
+// pointsize*****************************************
+    /* if (FAILED(l_pd3dDevice->CreateVertexBuffer( NUMPARTICLES * sizeof(SPARTICLE_VERTEX), 
 											D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY | D3DUSAGE_POINTS,   
 											SPARTICLE_VERTEX::GetFVF(),
 											D3DPOOL_DEFAULT, 
-											&m_vbParticles,NULL)))
+											&m_vbParticles,NULL)))*/
+//******************************************************
 
-      //BillBoard
-      /*
+//BillBoard*****************************************************
+      
       if (FAILED(l_pd3dDevice->CreateVertexBuffer(NUMPARTICLES * sizeof(VERTEX_TEXTURED), 
 											D3DUSAGE_DYNAMIC | D3DUSAGE_WRITEONLY | D3DUSAGE_POINTS,   
 											VERTEX_TEXTURED::GetFVF(),
 											D3DPOOL_DEFAULT, 
-											&m_vbParticles,NULL)))*/
+											&m_vbParticles,NULL)))
+//*************************************************
 		  {
 			  bIsOk = false;
 		  }
@@ -265,8 +267,7 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
   LPDIRECT3DDEVICE9 l_pd3dDevice = _pRM->GetDevice();
 
  
-//POINTSIZE
- 
+
  _pRM->EnableAlphaBlend();
 
   l_pd3dDevice->SetRenderState( D3DRS_POINTSPRITEENABLE, TRUE );
@@ -276,7 +277,8 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
  
   l_pd3dDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
   l_pd3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
-
+//POINTSIZE ***************************************************
+ /*
   float l_fPointSize    = 100.0f;
   float l_fPointSizeMin = 0.00f;
   float l_fPointSizeMax = 1000.00f;
@@ -290,27 +292,31 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
   l_pd3dDevice->SetRenderState(D3DRS_POINTSIZE_MAX, *((DWORD*)&l_fPointSizeMax));    
   l_pd3dDevice->SetRenderState(D3DRS_POINTSCALE_A,  *((DWORD*)&l_fPointScaleA));    
   l_pd3dDevice->SetRenderState(D3DRS_POINTSCALE_B,  *((DWORD*)&l_fPointScaleB));    
-  l_pd3dDevice->SetRenderState(D3DRS_POINTSCALE_C,  *((DWORD*)&l_fPointScaleC));
+  l_pd3dDevice->SetRenderState(D3DRS_POINTSCALE_C,  *((DWORD*)&l_fPointScaleC));*/
   
   l_pd3dDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
-   
+ /*  
   // Set up the vertex buffer to be rendered
   l_pd3dDevice->SetStreamSource( 0, m_vbParticles,0, sizeof(SPARTICLE_VERTEX));
-  l_pd3dDevice->SetFVF( SPARTICLE_VERTEX::GetFVF() );
+  l_pd3dDevice->SetFVF( SPARTICLE_VERTEX::GetFVF() );*/
 
   //l_pd3dDevice->SetTexture(0, m_pTexParticle);
-  m_pTexParticle->Activate(0);
+  //m_pTexParticle->Activate(0);
 
-  SPARTICLE_VERTEX* pVertices;
+  //SPARTICLE_VERTEX* pVertices;
  
   // akesta es la bona
   
-  m_vbParticles->Lock(  0, NUMPARTICLES * sizeof(SPARTICLE_VERTEX), (void **) &pVertices, D3DLOCK_DISCARD);
-	  
-  //BILLBOARD
- /* VERTEX_TEXTURED l_Points[4];
-		unsigned short l_Indexes[6]={0,2,1,1,2,3}; */
+  //m_vbParticles->Lock(  0, NUMPARTICLES * sizeof(SPARTICLE_VERTEX), (void **) &pVertices, D3DLOCK_DISCARD);*/
 
+//*****************************************************************
+	  
+//BILLBOARD***********************
+  VERTEX_TEXTURED l_Points[4*NUMPARTICLES];
+		//unsigned short l_Indexes[6]={0,2,1,1,2,3}; 
+    unsigned short l_Indexes[6*NUMPARTICLES]; 
+    int l_cont=0;
+//***********************************
  
   DWORD dwNumParticlesToRender = 0;
   for (int q=0; q < NUMPARTICLES; q++)
@@ -320,62 +326,73 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
 	  {
       CParticle* part = m_Particles.GetAt(q);
       dwNumParticlesToRender++;
-      //POINTSIZE
-      pVertices->x = part->GetPos().x;
+
+      l_Indexes[0+(l_cont*6)]=0+(l_cont*4);
+      l_Indexes[1+(l_cont*6)]=2+(l_cont*4);
+      l_Indexes[2+(l_cont*6)]=1+(l_cont*4);
+      l_Indexes[3+(l_cont*6)]=1+(l_cont*4);
+      l_Indexes[4+(l_cont*6)]=2+(l_cont*4);
+      l_Indexes[5+(l_cont*6)]=3+(l_cont*4);
+//POINTSIZE***************************************
+  /*    pVertices->x = part->GetPos().x;
 	    pVertices->y = part->GetPos().y;
 	    pVertices->z = part->GetPos().z;
       pVertices->pointsize = part->GetSize();
       pVertices->color = (DWORD)part->GetColor();
-      pVertices++;
+      pVertices++;*/
+//***********************************************
 
-//BILLBOLARD
-/*
-      l_Points[0].x=part->GetPointA().x;
-		  l_Points[0].y=part->GetPointA().y;
-		  l_Points[0].z=part->GetPointA().z;
-		  l_Points[0].u=0.0f;
-		  l_Points[0].v=1.0f;
-      l_Points[0].color=part->GetColor();
+//BILLBOLARD*****************************
+
+      l_Points[0+(l_cont*4)].x=part->GetPointA().x;
+		  l_Points[0+(l_cont*4)].y=part->GetPointA().y;
+		  l_Points[0+(l_cont*4)].z=part->GetPointA().z;
+		  l_Points[0+(l_cont*4)].u=0.0f;
+		  l_Points[0+(l_cont*4)].v=1.0f;
+      //l_Points[0+(l_cont*4)].color=part->GetColor();
 		  
-		  l_Points[1].x=part->GetPointB().x;
-		  l_Points[1].y=part->GetPointB().y;
-		  l_Points[1].z=part->GetPointB().z;
-		  l_Points[1].u=1.0f;
-		  l_Points[1].v=1.0f;
-      l_Points[1].color=part->GetColor();
+		  l_Points[1+(l_cont*4)].x=part->GetPointB().x;
+		  l_Points[1+(l_cont*4)].y=part->GetPointB().y;
+		  l_Points[1+(l_cont*4)].z=part->GetPointB().z;
+		  l_Points[1+(l_cont*4)].u=1.0f;
+		  l_Points[1+(l_cont*4)].v=1.0f;
+      //l_Points[1+(l_cont*4)].color=part->GetColor();
 
-		  l_Points[2].x=part->GetPointC().x;
-		  l_Points[2].y=part->GetPointC().y;
-		  l_Points[2].z=part->GetPointC().z;
-		  l_Points[2].u=0.0f;
-		  l_Points[2].v=0.0f;
-      l_Points[2].color=part->GetColor();
+		  l_Points[2+(l_cont*4)].x=part->GetPointC().x;
+		  l_Points[2+(l_cont*4)].y=part->GetPointC().y;
+		  l_Points[2+(l_cont*4)].z=part->GetPointC().z;
+		  l_Points[2+(l_cont*4)].u=0.0f;
+		  l_Points[2+(l_cont*4)].v=0.0f;
+      //l_Points[2+(l_cont*4)].color=part->GetColor();
 
-		  l_Points[3].x=part->GetPointD().x;
-		  l_Points[3].y=part->GetPointD().y;
-		  l_Points[3].z=part->GetPointD().z;
-		  l_Points[3].u=1.0f;
-		  l_Points[3].v=0.0f;
-      l_Points[3].color=part->GetColor();
+		  l_Points[3+(l_cont*4)].x=part->GetPointD().x;
+		  l_Points[3+(l_cont*4)].y=part->GetPointD().y;
+		  l_Points[3+(l_cont*4)].z=part->GetPointD().z;
+		  l_Points[3+(l_cont*4)].u=1.0f;
+		  l_Points[3+(l_cont*4)].v=0.0f;
+      //l_Points[3+(l_cont*4)].color=part->GetColor();
 
-      m_pTexParticle->Activate(0);*/
+      
+      l_cont++;
+      
     }
   }
 
-  //POINTSIZE
-  m_vbParticles->Unlock();
+//POINTSIZE******************************************
+ /* m_vbParticles->Unlock();
   l_pd3dDevice->DrawPrimitive(D3DPT_POINTLIST, 0, dwNumParticlesToRender);
   // Reset render states
    l_pd3dDevice->SetRenderState( D3DRS_POINTSPRITEENABLE, FALSE );
   l_pd3dDevice->SetRenderState( D3DRS_POINTSCALEENABLE,  FALSE );
 
   _pRM->DisableAlphaBlend();
-  //l_pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE );
- /*
- BILLBOARD
- l_pd3dDevice->SetStreamSource( 0, m_vbParticles,0, sizeof(VERTEX_TEXTURED));// no se si serveix aki
-  l_pd3dDevice->SetFVF(D3DFVF_XYZ|D3DFVF_TEX1|D3DFVF_DIFFUSE);
-	l_pd3dDevice->DrawIndexedPrimitiveUP(D3DPT_TRIANGLELIST,0,6,2,l_Indexes,D3DFMT_INDEX16,l_Points,sizeof(VERTEX_TEXTURED));*/
-  
+  //l_pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, FALSE );*/
+//*******************************************************************
+ 
+//BILLBOARD**********************************************************
+  m_pTexParticle->Activate(0);
+  l_pd3dDevice->SetStreamSource( 0, m_vbParticles,0, sizeof(VERTEX_TEXTURED));// no se si serveix aki
+  l_pd3dDevice->SetFVF(D3DFVF_XYZ|D3DFVF_TEX1);
+  l_pd3dDevice->DrawIndexedPrimitiveUP(D3DPT_TRIANGLELIST,0,4*l_cont,2*l_cont,l_Indexes,D3DFMT_INDEX16,l_Points,sizeof(VERTEX_TEXTURED));
  
 }
