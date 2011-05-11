@@ -19,11 +19,11 @@ bool CInputTrigger::Init(CXMLTreeNode* _pTreeNode)
     return false;
   }
 
-  string l_szDevice = _pTreeNode->GetPszISOProperty("deviceType","IDV_NOTHING");
-  string l_szAxis   = _pTreeNode->GetPszISOProperty("AxisType","AXIS_NOTHING");
-  string l_szEvent  = _pTreeNode->GetPszISOProperty("EventType","EVENT_NOTHING");
-  string l_szCode   = _pTreeNode->GetPszISOProperty("Code","KEY_NULL");
-  float  l_fDelta   = _pTreeNode->GetFloatProperty("Delta",1.0f);
+  string l_szDevice = _pTreeNode->GetPszISOProperty("deviceType","IDV_NOTHING", false);
+  string l_szAxis   = _pTreeNode->GetPszISOProperty("AxisType","AXIS_NOTHING", false);
+  string l_szEvent  = _pTreeNode->GetPszISOProperty("EventType","EVENT_NOTHING", false);
+  string l_szCode   = _pTreeNode->GetPszISOProperty("Code","KEY_NULL", false);
+  float  l_fDelta   = _pTreeNode->GetFloatProperty("Delta",1.0f, false);
 
   //TODO comprovar errors, accedir via "get"
   m_Device = (INPUT_DEVICE_TYPE) m_pInputManager->GetCode(l_szDevice);

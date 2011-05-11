@@ -28,7 +28,9 @@
     <ClInclude Include="TestProcess.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Run\Data\Levels\NivellProves\XML\GameEntities.xml" />
+    <None Include="..\..\..\Run\Data\Levels\NivellProves\XML\GameEntities.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="..\..\..\Run\Data\Levels\NivellProves\XML\GameObjects.xml" />
     <None Include="..\..\..\Run\Data\XML\actions.xml">
       <SubType>Designer</SubType>

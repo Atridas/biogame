@@ -5,8 +5,8 @@
 bool CInputAction::Init(CXMLTreeNode* _pTreeNode)
 {
 
-  string l_szName = _pTreeNode->GetPszISOProperty("name","");
-  m_szScriptAction = _pTreeNode->GetPszISOProperty("script","");
+  string l_szName = _pTreeNode->GetPszISOProperty("name","", false);
+  m_szScriptAction = _pTreeNode->GetPszISOProperty("script","", false);
 
   if(l_szName.compare("") == 0)
   {
