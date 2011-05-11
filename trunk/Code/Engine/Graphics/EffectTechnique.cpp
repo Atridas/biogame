@@ -23,25 +23,25 @@ void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
   LOGGER->AddNewLog(ELL_INFORMATION, "CEffectTechnique::Init  Effect \"%s\" Technique \"%s\".",GetName().c_str(), l_szEffectName.c_str());
 
   //booleans
-  m_bUseCameraPosition = _XMLParams.GetBoolProperty("use_camera_position");
-  m_bUseInverseProjMatrix = _XMLParams.GetBoolProperty("use_inverse_proj_matrix");
-  m_bUseInverseViewMatrix = _XMLParams.GetBoolProperty("use_inverse_view_matrix");
-  m_bUseInverseWorldMatrix = _XMLParams.GetBoolProperty("use_inverse_world_matrix");
-  m_bUseLights = _XMLParams.GetBoolProperty("use_lights");
-  m_bUseProjMatrix = _XMLParams.GetBoolProperty("use_proj_matrix");
-  m_bUseViewMatrix = _XMLParams.GetBoolProperty("use_view_matrix");
-  m_bUseWorldMatrix = _XMLParams.GetBoolProperty("use_world_matrix");
-  m_bUseWorldViewMatrix = _XMLParams.GetBoolProperty("use_world_view_matrix");
-  m_bUseWorldViewProjectionMatrix = _XMLParams.GetBoolProperty("use_world_view_projection_matrix");
-  m_bUseViewProjectionMatrix = _XMLParams.GetBoolProperty("use_view_projection_matrix");
-  m_bUseViewToLightProjectionMatrix = _XMLParams.GetBoolProperty("use_view_to_light_projection_matrix");
-  m_bUseTime = _XMLParams.GetBoolProperty("use_time");
-  m_bAnimated = _XMLParams.GetBoolProperty("animated");
-  m_bGlowActive = _XMLParams.GetBoolProperty("glow_active");
-  m_bUseTextureSize = _XMLParams.GetBoolProperty("use_texture_size");
-  m_bUsePoissonBlurKernel = _XMLParams.GetBoolProperty("use_poisson_blur_kernel");
+  m_bUseCameraPosition = _XMLParams.GetBoolProperty("use_camera_position", false, false);
+  m_bUseInverseProjMatrix = _XMLParams.GetBoolProperty("use_inverse_proj_matrix", false, false);
+  m_bUseInverseViewMatrix = _XMLParams.GetBoolProperty("use_inverse_view_matrix", false, false);
+  m_bUseInverseWorldMatrix = _XMLParams.GetBoolProperty("use_inverse_world_matrix", false, false);
+  m_bUseLights = _XMLParams.GetBoolProperty("use_lights", false, false);
+  m_bUseProjMatrix = _XMLParams.GetBoolProperty("use_proj_matrix", false, false);
+  m_bUseViewMatrix = _XMLParams.GetBoolProperty("use_view_matrix", false, false);
+  m_bUseWorldMatrix = _XMLParams.GetBoolProperty("use_world_matrix", false, false);
+  m_bUseWorldViewMatrix = _XMLParams.GetBoolProperty("use_world_view_matrix", false, false);
+  m_bUseWorldViewProjectionMatrix = _XMLParams.GetBoolProperty("use_world_view_projection_matrix", false, false);
+  m_bUseViewProjectionMatrix = _XMLParams.GetBoolProperty("use_view_projection_matrix", false, false);
+  m_bUseViewToLightProjectionMatrix = _XMLParams.GetBoolProperty("use_view_to_light_projection_matrix", false, false);
+  m_bUseTime = _XMLParams.GetBoolProperty("use_time", false, false);
+  m_bAnimated = _XMLParams.GetBoolProperty("animated", false, false);
+  m_bGlowActive = _XMLParams.GetBoolProperty("glow_active", false, false);
+  m_bUseTextureSize = _XMLParams.GetBoolProperty("use_texture_size", false, false);
+  m_bUsePoissonBlurKernel = _XMLParams.GetBoolProperty("use_poisson_blur_kernel", false, false);
 
-  m_bIsInstanced = _XMLParams.GetBoolProperty("instanced");
+  m_bIsInstanced = _XMLParams.GetBoolProperty("instanced", false, false);
 
   if(m_bUsePoissonBlurKernel)
   {
@@ -49,7 +49,7 @@ void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
   }
 
   //integers
-  m_iNumOfLights= _XMLParams.GetIntProperty("num_of_lights",0);
+  m_iNumOfLights= _XMLParams.GetIntProperty("num_of_lights",0, false);
 
   //non XML dependant
   CEffectManager* l_pEffectManager = CORE->GetEffectManager();

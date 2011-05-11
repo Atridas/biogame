@@ -115,7 +115,7 @@ bool CEffectManager::Load(bool _bReload)
       if(l_iVertexType == 0)
         LOGGER->AddNewLog(ELL_WARNING,"CEffectManager::Load Default technique \"%s\" amb vertex_type = 0.", l_szTechniqueName.c_str());
 
-      if(l_treeDefTechnique.GetBoolProperty("instanced", false))
+      if(l_treeDefTechnique.GetBoolProperty("instanced", false, false))
       {
         m_DefaultInstancedTechniqueEffectMap[l_iVertexType] = l_szTechniqueName;
       } else {

@@ -35,11 +35,11 @@ void CInstanceMesh::InitFromXML(CXMLTreeNode& l_XMLObject)
   {
     //Posterior us un cop la informació del max i min estiguin a la core.
     //string l_szResource         = l_XMLObject.GetPszISOProperty("resource" ,"");
-    string l_szDefaultAnimation = l_XMLObject.GetPszISOProperty("cycle" ,"");
-    Vect3f l_vPos               = l_XMLObject.GetVect3fProperty("position",Vect3f(0.0f));
-    float l_fYaw                = l_XMLObject.GetFloatProperty("yaw") * FLOAT_PI_VALUE / 180.0f;
-    float l_fPitch              = l_XMLObject.GetFloatProperty("pitch") * FLOAT_PI_VALUE / 180.0f;
-    float l_fRoll               = l_XMLObject.GetFloatProperty("roll") * FLOAT_PI_VALUE / 180.0f;
+    string l_szDefaultAnimation = l_XMLObject.GetPszISOProperty("cycle" ,"", false);
+    Vect3f l_vPos               = l_XMLObject.GetVect3fProperty("position",Vect3f(0.0f), false);
+    float l_fYaw                = l_XMLObject.GetFloatProperty("yaw", 0.0f, false) * FLOAT_PI_VALUE / 180.0f;
+    float l_fPitch              = l_XMLObject.GetFloatProperty("pitch", 0.0f, false) * FLOAT_PI_VALUE / 180.0f;
+    float l_fRoll               = l_XMLObject.GetFloatProperty("roll", 0.0f, false) * FLOAT_PI_VALUE / 180.0f;
     
     SetPosition(l_vPos);
     SetYaw(l_fYaw);
