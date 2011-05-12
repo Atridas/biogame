@@ -1952,3 +1952,37 @@ inline void Matrix33<T>::TransformArrayVectors (int iElements, Vector3<T>* pVecO
     pVecOUT[i] = (*this) * (pVecIN[i]);
   }
 }
+
+template<typename T>
+inline Matrix33<T>& Matrix33<T>::FromAxisAngle(const Vector3<T>& dir, const float angle) 
+{
+    float c = (float)cos(angle);
+    float s = (float)sin(angle);
+    float t = 1.0f - c;
+	//  if axis is not already normalised then uncomment this
+	// double magnitude = Math.sqrt(dir.x*dir.x + dir.y*dir.y + dir.z*dir.z);
+	// if (magnitude==0) throw error;
+	// dir.x /= magnitude;
+	// dir.y /= magnitude;
+	// dir.z /= magnitude;
+
+    m00 = c + dir.x*dir.x*t;
+    m11 = c + dir.y*dir.y*t;
+    m22 = c + dir.z*dir.z*t;
+
+
+    float tmp1 = dir.x*dir.y*t;
+    float tmp2 = dir.z*s;
+    m10 = tmp1 + tmp2;
+    m01 = tmp1 - tmp2;
+    tmp1 = dir.x*dir.z*t;
+    
+	tmp2 = dir.y*s;
+    m20 = tmp1 - tmp2;
+    m02 = tmp1 + tmp2;    tmp1 = dir.y*dir.z*t;
+    tmp2 = dir.x*s;
+    m21 = tmp1 + tmp2;
+    m12 = tmp1 - tmp2;
+
+	return (*this);
+}

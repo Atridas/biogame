@@ -65,14 +65,17 @@ private:
   D3DXVECTOR3       m_vDir; 
   D3DXVECTOR3       m_vVel;
   D3DXVECTOR3       m_vGravity;
-  //float             m_fAngle;
-  D3DXVECTOR3            m_vPos;
+  float             m_fAngle;
+  D3DXVECTOR3       m_vPos;
   // float             m_fSizeX;
   //float             m_fSizeY;
-  D3DXVECTOR3		        m_PointA;
-  D3DXVECTOR3           m_PointB;
-  D3DXVECTOR3           m_PointC; 
-  D3DXVECTOR3           m_PointD;
+  D3DXVECTOR3		    m_PointA;
+  D3DXVECTOR3       m_PointB;
+  D3DXVECTOR3       m_PointC; 
+  D3DXVECTOR3       m_PointD;
+  D3DXVECTOR3       m_VDirection;
+  D3DXVECTOR3       m_VUp;
+  D3DXVECTOR3       m_VRight;
   
 };
 #endif

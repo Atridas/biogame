@@ -39,7 +39,7 @@ bool CSoundTestProcess::Init()
 
   g_itCurrentMesh = g_vMeshes.begin();
   (*g_itCurrentMesh)->SetRenderBoundingBox(true);
-
+  
   m_pObjectCamera = new CFPSCamera(
     0.1f,
     100.0f,

@@ -41,7 +41,7 @@ bool CParticleProcess::Init()
   
   m_pObject = new CObject3D();
   m_fVelocity = 1;
-  
+  angle=0;
   m_pObject->SetPosition(Vect3f(-6,1.7f,0));
 
   //m_pObjectBot = CORE->GetRenderableObjectsManager()->GetResource("bot");
@@ -88,6 +88,53 @@ void CParticleProcess::Release()
 
 void CParticleProcess::Update(float _fElapsedTime)
 {
+  /*Vect3f B=(7, 0, 1);
+  //Vect3f l_VDirection = (1,1,1);
+  Vect3f l_VUp = (3, 4, 5);   //P
+  Vect3f m_Position= (9, 2, 6); //A*/
+  AB= B - m_Position;
+  ModAB= sqrt((AB.x*AB.x)+(AB.y*AB.y)+(AB.z*AB.z));
+  l_VDirection= AB/ModAB;
+  
+  //float l_VDirection = 0.382683432;//n
+  	// A ->centre de la particula     m_Position
+	// n-> direction                  l_VDirection
+	// P-> up                         l_VUp
+
+	//P' = A + [n·(ESCALAR)(P - A)]*(VECTORIAL)n + 
+  //     cos(theta)*[(P - A) - [n·(P - A)]*n] +
+  //     - sin(theta)*[n cross (P - A)]
+  
+  //P-A
+  Vect3f P_A;
+  P_A= l_VUp - m_Position;
+
+  // n·(P-A) -> nP_A
+  Vect3f nP_A;
+  nP_A = l_VDirection * P_A;
+
+  // n·(P-A)*n -> nP_An
+  Vect3f nP_An;
+  nP_An= nP_A^l_VDirection;
+
+  //[(P - A) - [n·(P - A)]*n]  -> PA_nP_An
+  Vect3f PA_nP_An;
+  PA_nP_An = P_A - nP_An;
+  // n cross (P - A)
+  Vect3f nCrossP_A;
+  nCrossP_A= l_VDirection*P_A;
+
+  angle=angle*_fElapsedTime*(float)0.001;
+  
+
+  l_VUp = m_Position + PA_nP_An + cos(angle)^PA_nP_An - sin(angle)^nCrossP_A;
+
+ 
+ 
+	//Vect3f l_VRight = l_VDirection^l_VUp; // producte vectorial
+ 
+  //******************************************************************************************************
+
   if(m_pObject)// && m_pObjectBot) 
   {
 
@@ -139,6 +186,12 @@ void CParticleProcess::Update(float _fElapsedTime)
 
 void CParticleProcess::RenderScene(CRenderManager* _pRM)
 {
+
+
+
+
+
+  //*******************************************************
   
   //Render Objects
   // Ensenya tot el Hangar i els seus objectes

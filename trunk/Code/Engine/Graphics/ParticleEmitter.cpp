@@ -39,7 +39,7 @@ m_Particles(NUMPARTICLES)
   m_PointC=(D3DXVECTOR3(0.0f,0.0f,0.0f)); 
   m_PointD=(D3DXVECTOR3(0.0f,0.0f,0.0f));*/
 
-  m_bActive = false;
+  m_bActive = true;
 
   //TODO inicialitzar els vector de color i temps
 }
