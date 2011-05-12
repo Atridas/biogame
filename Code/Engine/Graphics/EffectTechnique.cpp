@@ -60,9 +60,9 @@ void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
     if(m_bAnimated)
     {
       LOGGER->AddNewLog(ELL_INFORMATION, "CEffectTechnique::Init  Adding animated technique to EffectManager.");
-      l_pEffectManager->SetAnimatedModelTechnique(this);
+      //l_pEffectManager->SetAnimatedModelTechnique(this);
     }
-    m_pD3DTechnique = m_pEffect->GetTechniqueByName(GetName());
+    //m_pD3DTechnique = m_pEffect->GetTechniqueByName(GetName());
   
     if(m_pEffect && m_pD3DTechnique)
       SetOk(true);
@@ -82,7 +82,7 @@ void CEffectTechnique::Init(CXMLTreeNode& _XMLParams)
 
 bool CEffectTechnique::BeginRender(const CEffectMaterial* _pMaterial)
 {
-  if(m_pEffect && m_pEffect->IsOk())
+  /*if(m_pEffect && m_pEffect->IsOk())
   {
     CRenderManager* l_pRM = RENDER_MANAGER;
     CEffectManager* l_pEM = CORE->GetEffectManager();
@@ -98,7 +98,7 @@ bool CEffectTechnique::BeginRender(const CEffectMaterial* _pMaterial)
     {
       Vect3f l_vPos = l_pEM->GetCameraEye();
       const float l_vfPos[3] = {l_vPos.x,l_vPos.y,l_vPos.z};
-      l_pD3DEffect->SetFloatArray(m_pEffect->m_pCameraPositionParameter,l_vfPos,3);
+      //l_pD3DEffect->SetFloatArray(m_pEffect->m_pCameraPositionParameter,l_vfPos,3);
     }
 
     //Lights
@@ -198,7 +198,7 @@ bool CEffectTechnique::BeginRender(const CEffectMaterial* _pMaterial)
     }
   } else {
     return false;
-  }
+  }*/
 
   return true;
 }
@@ -207,7 +207,7 @@ bool CEffectTechnique::Refresh()
 {
   if(m_pEffect && m_pEffect->IsOk())
   {
-      m_pD3DTechnique = m_pEffect->GetTechniqueByName(GetName());
+      //m_pD3DTechnique = m_pEffect->GetTechniqueByName(GetName());
       
       if(m_pD3DTechnique)
         return true;
@@ -227,10 +227,10 @@ void CEffectTechnique::Release()
   if(m_bAnimated)
   {
     CEffectManager* l_pEffectManager = CORE->GetEffectManager();
-    if(l_pEffectManager->GetAnimatedModelTechnique() == this)
+    /*if(l_pEffectManager->GetAnimatedModelTechnique() == this)
     {
       LOGGER->AddNewLog(ELL_INFORMATION, "CEffectTechnique::Release  Removing animated technique from EffectManager.");
       l_pEffectManager->SetAnimatedModelTechnique(0);
-    }
+    }*/
   }
 }

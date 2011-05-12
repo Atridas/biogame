@@ -139,6 +139,48 @@
     <Filter Include="Particle\ParticleManager">
       <UniqueIdentifier>{bb2d63d0-cd3c-4495-a701-f2d877e97105}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Materials">
+      <UniqueIdentifier>{cbbece00-30db-40c8-888b-e60fb2b41183}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\EmptyMaterials">
+      <UniqueIdentifier>{8e32ee1f-30b3-4c2a-b759-75ccedba0083}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\EmptyMaterials\AnimatedMeshEmptyMaterial">
+      <UniqueIdentifier>{049e484b-5059-4cec-9928-a8468f220c31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\EmptyMaterials\StaticMeshEmptyMaterial">
+      <UniqueIdentifier>{1629c1e9-c23c-485b-aa95-c4dada919c23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators">
+      <UniqueIdentifier>{4cea3814-5e88-40d7-9d73-647676c3940e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\TextureDecorators">
+      <UniqueIdentifier>{f495d972-3b87-411c-9723-95e147b85431}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\TextureDecorators\DiffuseTexture">
+      <UniqueIdentifier>{8b77695d-7664-4715-b574-fb6009bbbcb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\TextureDecorators\NormalmapTexture">
+      <UniqueIdentifier>{50930022-3650-4920-a66e-9d90e1908425}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\TextureDecorators\LightmapTexture">
+      <UniqueIdentifier>{5caf5a64-5f00-4f25-8486-1bdd7d5a1551}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\TextureDecorators\GlowTexture">
+      <UniqueIdentifier>{32b244d4-4626-4327-8083-aa5f90ed1fc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\TextureDecorators\SpecularTexture">
+      <UniqueIdentifier>{7b8d75c3-4b0d-4b87-8b25-f2bd945e1f09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\PropertyDecorators">
+      <UniqueIdentifier>{694df533-2c9c-4544-9a0e-eb9b746bb1e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\PropertyDecorators\ParallaxDecorator">
+      <UniqueIdentifier>{8ff9a178-86a8-4834-9a7f-ca03cd9c5f76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\PropertyDecorators\BumpDecorator">
+      <UniqueIdentifier>{a24fea53-9e85-4afe-88c7-b8a388d55234}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -388,6 +430,48 @@
     </ClInclude>
     <ClInclude Include="include\BillBoard.h">
       <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Material.h">
+      <Filter>Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AnimatedMeshEmptyMaterial.h">
+      <Filter>Materials\EmptyMaterials\AnimatedMeshEmptyMaterial</Filter>
+    </ClInclude>
+    <ClInclude Include="include\StaticMeshEmptyMaterial.h">
+      <Filter>Materials\EmptyMaterials\StaticMeshEmptyMaterial</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MaterialDecorator.h">
+      <Filter>Materials\MaterialDecorators</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DiffuseTextureDecorator.h">
+      <Filter>Materials\MaterialDecorators\TextureDecorators\DiffuseTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\NormalTextureDecorator.h">
+      <Filter>Materials\MaterialDecorators\TextureDecorators\NormalmapTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LightmapTextureDecorator.h">
+      <Filter>Materials\MaterialDecorators\TextureDecorators\LightmapTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GlowTextureDecorator.h">
+      <Filter>Materials\MaterialDecorators\TextureDecorators\GlowTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SpecularTextureDecorator.h">
+      <Filter>Materials\MaterialDecorators\TextureDecorators\SpecularTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TextureDecorator.h">
+      <Filter>Materials\MaterialDecorators\TextureDecorators</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ParallaxPropertyDecorator.h">
+      <Filter>Materials\MaterialDecorators\PropertyDecorators\ParallaxDecorator</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BumpPropertyDecorator.h">
+      <Filter>Materials\MaterialDecorators\PropertyDecorators\BumpDecorator</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EmptyMaterial.h">
+      <Filter>Materials\EmptyMaterials</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PropertyDecorator.h">
+      <Filter>Materials\MaterialDecorators\PropertyDecorators</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

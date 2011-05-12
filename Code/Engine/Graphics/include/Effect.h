@@ -8,39 +8,39 @@
 #include <d3d9.h>
 
 //Forward declarations-------------
-class CEffectTechnique;
-class CEffectMaterial;
-class CAnimatedInstanceModel;
 class CXMLTreeNode;
 //---------------------------------
-
-
-#define MAX_LIGHTS_BY_SHADER 4
 
 class CEffect :
   public CBaseControl,
   public CNamed
 {
 public:
-  CEffect(void);
+  CEffect() : CNamed(""),
+              m_szFileName(""),
+              m_pD3DEffect(0),
+              m_pD3DTechnique(0),
+              m_pD3DInstancedTechnique(0),
+              m_pEffectPool(0) {};
+
   virtual ~CEffect(void) {Done();};
 
-  bool SetLights(size_t _iNumOfLights);
-  bool Init(const CXMLTreeNode& _xmlEffect);
+  //bool SetLights(size_t _iNumOfLights);
+  bool Init(const CXMLTreeNode& _xmlEffect,LPD3DXEFFECTPOOL _pEffectPool);
   bool Reload();
-  //DirectX Methods Interface
+
   LPD3DXEFFECT GetD3DEffect() const {return m_pD3DEffect;};
-  D3DXHANDLE GetTechniqueByName(const string& _szTechniqueName) const;
+  //D3DXHANDLE GetTechniqueByName(const string& _szTechniqueName) const;
   
 protected:
   void Release();
 private:
-  void SetNullParameters();
-  bool InitParameters();
-  void GetParameterBySemantic(const string& _szSemanticName, D3DXHANDLE& _pHandle);
+  //void SetNullParameters();
+  //bool InitParameters();
+  //void GetParameterBySemantic(const string& _szSemanticName, D3DXHANDLE& _pHandle);
   bool LoadEffect();
 
-
+  /*
   string m_szFileName;
   LPD3DXEFFECT m_pD3DEffect;
   float m_aAmbientLight[3];
@@ -72,10 +72,15 @@ private:
   D3DXHANDLE m_pPoissonBlurKernelParameter;
   
   D3DXHANDLE m_pShadowsEnabledParameter;
+  */
 
-  friend CEffectTechnique;
-  friend CEffectMaterial;
-  friend CAnimatedInstanceModel;
+  string m_szFileName;
+  string m_szTechniqueName;
+  string m_szInstancedTechniqueName;
+  LPD3DXEFFECT m_pD3DEffect;
+  D3DXHANDLE m_pD3DTechnique;
+  D3DXHANDLE m_pD3DInstancedTechnique;
+  LPD3DXEFFECTPOOL m_pEffectPool;
 };
 
 #endif

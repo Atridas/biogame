@@ -1,6 +1,14 @@
 #include "EffectManager.h"
-#include "EffectTechnique.h"
 #include "Effect.h"
+#include "Material.h"
+#include "LightManager.h"
+#include "DirectionalLight.h"
+#include "SpotLight.h"
+#include "Core.h"
+
+#include "AnimatedCoreModel.h"
+#include <cal3d/cal3d.h>
+
 #include <XML/XMLTreeNode.h>
 
 
@@ -10,9 +18,10 @@ void CEffectManager::ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _m
   m_mViewMatrix=_mViewMatrix;
   m_vCameraEye=_vCameraEye;
   
-  m_bInverseProjectionUpdated = m_bInverseViewUpdated = m_bInverseWorldUpdated = m_bViewProjectionUpdated = m_bWorldViewUpdated = m_bWorldViewProjectionUpdated = false;
+  m_bViewProjectionMatrixUpdated = m_bWorldViewMatrixUpdated = m_bWorldViewProjectionMatrixUpdated = true;
 }
 
+//TODO: UPDATE FORMAT!!!
 /* format inventat de Effects.xml:
 <shaders>
   <effects>
@@ -34,7 +43,26 @@ void CEffectManager::ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _m
 
 bool CEffectManager::Load(const SEffectManagerParams& _params)
 {
+  m_pLightManager = CORE->GetLightManager();
+
   m_szFileName = _params.szFile;
+
+  HRESULT l_hResult = D3DXCreateEffectPool(&m_pEffectPool);
+
+  switch(l_hResult)
+  {
+  case D3DERR_INVALIDCALL:
+    LOGGER->AddNewLog(ELL_ERROR, "CEffectManager::Load Error creating EffectPool: Invalid arguments");
+    return false;
+    break;
+  case E_FAIL:
+    LOGGER->AddNewLog(ELL_ERROR, "CEffectManager::Load Error creating EffectPool: D3DXCreateEffectPool Failed");
+    return false;
+    break;
+  default:
+    break;
+  }
+
   return Load(false);
 }
 
@@ -69,7 +97,7 @@ bool CEffectManager::Load(bool _bReload)
 
       string l_szEffectName = l_treeEffect.GetPszISOProperty("name","");
 
-      l_pEffect = m_Effects.GetResource(l_szEffectName);
+      l_pEffect = GetResource(l_szEffectName);
 
       if(l_pEffect)
       {
@@ -80,7 +108,7 @@ bool CEffectManager::Load(bool _bReload)
 
         l_pEffect->Reload();
 
-      } else {
+      }else{
 
         if(_bReload)
         {
@@ -89,83 +117,31 @@ bool CEffectManager::Load(bool _bReload)
 
         l_pEffect = new CEffect();
 
-        l_pEffect->Init(l_treeEffect);
+        l_pEffect->Init(l_treeEffect,m_pEffectPool);
 
-        m_Effects.AddResource(l_pEffect->GetName(),l_pEffect);
+        AddResource(l_pEffect->GetName(),l_pEffect);
       }
-
     }
     //----------------------------
 
-    //--------Default techniques-------------
-    CXMLTreeNode l_treeDefTechniques = l_treeShaders["default_techniques"];
-    l_iNumChildren = l_treeDefTechniques.GetNumChildren();
+    //--------Default effects-------------
+    CXMLTreeNode l_treeDefEffects = l_treeShaders["default_effects"];
+    l_iNumChildren = l_treeDefEffects.GetNumChildren();
 
-    LOGGER->AddNewLog(ELL_INFORMATION,"CEffectManager::Load Loading %d default_techniques.", l_iNumChildren);
+    LOGGER->AddNewLog(ELL_INFORMATION,"CEffectManager::Load Loading %d default_effects.", l_iNumChildren);
 
     for(int i = 0; i < l_iNumChildren; i++)
     {
-      CXMLTreeNode l_treeDefTechnique = l_treeDefTechniques(i);
-      if(l_treeDefTechnique.IsComment())
+      CXMLTreeNode l_treeDefEffect = l_treeDefEffects(i);
+      if(l_treeDefEffect.IsComment())
         continue;
       
-      int l_iVertexType = l_treeDefTechnique.GetIntProperty("vertex_type");
-      string l_szTechniqueName = l_treeDefTechnique.GetPszISOProperty("technique","");
+      int l_iMaterialType = l_treeDefEffect.GetIntProperty("material_type");
+      string l_szEffectName = l_treeDefEffect.GetPszISOProperty("effect","");
 
-      if(l_iVertexType == 0)
-        LOGGER->AddNewLog(ELL_WARNING,"CEffectManager::Load Default technique \"%s\" amb vertex_type = 0.", l_szTechniqueName.c_str());
-
-      if(l_treeDefTechnique.GetBoolProperty("instanced", false, false))
-      {
-        m_DefaultInstancedTechniqueEffectMap[l_iVertexType] = l_szTechniqueName;
-      } else {
-        m_DefaultTechniqueEffectMap[l_iVertexType] = l_szTechniqueName;
-      }
+      m_DefaultEffectMap[l_iMaterialType] = l_szEffectName;
+      
     }
-    //---------------------------------------
-
-    //--------Techniques-----------
-    CXMLTreeNode l_treeTechniques = l_treeShaders["techniques"];
-    l_iNumChildren = l_treeTechniques.GetNumChildren();
-
-    LOGGER->AddNewLog(ELL_INFORMATION,"CEffectManager::Load Loading %d techniques.", l_iNumChildren);
-
-    for(int i = 0; i < l_iNumChildren; i++)
-    {
-      CXMLTreeNode l_treeTechnique = l_treeTechniques(i);
-      if(l_treeTechnique.IsComment())
-        continue;
-
-      string l_szTechniqueName = l_treeTechnique.GetPszISOProperty("name","");
-
-      CEffectTechnique* l_pTechnique = GetResource(l_szTechniqueName);
-
-      if(l_pTechnique)
-      {
-        if(_bReload)
-        {
-          LOGGER->AddNewLog(ELL_INFORMATION,"CEffectManager::Load Reloading technique \"%s\"", l_szTechniqueName.c_str());
-        }
-
-        l_pTechnique->Init(l_treeTechnique);
-
-        l_pTechnique->Refresh();
-
-      } else {
-        if(_bReload)
-        {
-          LOGGER->AddNewLog(ELL_INFORMATION,"CEffectManager::Load Found new technique during reload: \"%s\"", l_szTechniqueName.c_str());
-        }
-
-        l_pTechnique = new CEffectTechnique();
-
-        l_pTechnique->Init(l_treeTechnique);
-
-        AddResource(l_pTechnique->GetName(),l_pTechnique);
-      }
-
-    }
-    //-----------------------------
   }
 
   return true;
@@ -180,92 +156,269 @@ void CEffectManager::Release()
 {
   CMapManager::Release();
 
-  //map
-  m_DefaultTechniqueEffectMap.clear();
-  //mapmanager
-  m_Effects.Release();
+  m_DefaultEffectMap.clear();
 
-  //pointers
-  //CHECKED_DELETE(m_pStaticMeshTechnique);
-  //CHECKED_DELETE(m_pAnimatedModelTechnique);
+  m_pForcedStaticMeshEffect = 0;
+  m_pForcedAnimatedModelEffect = 0;
+  CHECKED_RELEASE(m_pEffectPool);
 }
 
-string CEffectManager::GetTechniqueEffectNameByVertexDefault(unsigned short _sVertexType) const
+void CEffectManager::LoadShaderData(CEffect* _pEffect)
 {
-  TDefaultTechniqueEffectMap::const_iterator l_it = m_DefaultTechniqueEffectMap.find((int)_sVertexType);
-  if(l_it != m_DefaultTechniqueEffectMap.cend())
-    return l_it->second;
+  LPD3DXEFFECT l_pD3DEffect = _pEffect->GetD3DEffect();
 
-  return "";
-}
-
-string CEffectManager::GetInstancedTechniqueEffectNameByVertexDefault(unsigned short _sVertexType) const
-{
-  TDefaultTechniqueEffectMap::const_iterator l_it = m_DefaultInstancedTechniqueEffectMap.find((int)_sVertexType);
-  if(l_it != m_DefaultInstancedTechniqueEffectMap.cend())
-    return l_it->second;
-
-  return "";
-}
-
-
-const Mat44f& CEffectManager::GetInverseProjectionMatrix()
-{
-  if(!m_bInverseProjectionUpdated)
+  if(!m_bSemanticsUpdated)
   {
-    m_mInverseProjectionMatrix = m_mProjectionMatrix.GetInverted();
-    m_bInverseProjectionUpdated = true;
+    m_pWorldMatrixParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"World");
+    m_pViewMatrixParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"View");
+    m_pProjectionMatrixParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"Projection");
+    m_pWorldViewMatrixParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"WorldView");
+    m_pViewProjectionMatrixParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"ViewProjection");
+    m_pWorldViewProjectionMatrixParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"WorldViewProjection");
+    m_pViewToLightProjectionMatrixParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"ViewToLightProjection");
+    m_pCameraPositionParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"CameraPosition");
+    m_pAmbientLight = l_pD3DEffect->GetParameterBySemantic(NULL,"AmbientLight");
+    m_pLightsEnabledParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsEnabled");
+    m_pLightsTypeParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsType");
+    m_pLightsPositionParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsPosition");
+    m_pLightsDirectionParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsDirection");
+    m_pLightsAngleParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsAngleCos");
+    m_pLightsColorParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsColor");
+    m_pLightsFallOffParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsFallOffCos");
+    m_pLightsStartRangeAttenuationParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsStartRangeSQ");
+    m_pLightsEndRangeAttenuationParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsEndRangeSQ");
+    m_pShadowsEnabledParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"ShadowEnabled");
+    m_pBonesParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"Bones");
+    m_bSemanticsUpdated = true;
   }
-  return m_mInverseProjectionMatrix;
+
+  if(m_bLightsUpdated)
+  {
+    const vector<CLight*>& l_vLights = m_pLightManager->GetLights();
+
+    int l_iNumOfLights = l_vLights.size() > MAX_LIGHTS_BY_SHADER? MAX_LIGHTS_BY_SHADER : l_vLights.size();
+
+    float l_aAmbientLight[3];
+    BOOL l_aLightsEnabled[MAX_LIGHTS_BY_SHADER];
+    int l_aLightsType[MAX_LIGHTS_BY_SHADER];
+    float l_aLightsAngle[MAX_LIGHTS_BY_SHADER];
+    float l_aLightsFallOff[MAX_LIGHTS_BY_SHADER];
+    float l_aLightsStartRangeAttenuation[MAX_LIGHTS_BY_SHADER];
+    float l_aLightsEndRangeAttenuation[MAX_LIGHTS_BY_SHADER];
+    Vect3f l_aLightsPosition[MAX_LIGHTS_BY_SHADER];
+    Vect3f l_aLightsDirection[MAX_LIGHTS_BY_SHADER];
+    CColor l_aLightsColor[MAX_LIGHTS_BY_SHADER];
+    BOOL l_aShadowsEnabled[MAX_LIGHTS_BY_SHADER];
+
+    memset(l_aLightsEnabled,FALSE,sizeof(BOOL)*MAX_LIGHTS_BY_SHADER);
+
+    const Vect3f& l_vAmbient = m_pLightManager->GetAmbientLight();
+    l_aAmbientLight[0] = l_vAmbient.x;
+    l_aAmbientLight[1] = l_vAmbient.y;
+    l_aAmbientLight[2] = l_vAmbient.z;
+
+    for(int i = 0; i < l_iNumOfLights; ++i)
+    {
+      CLight* l_pLight = l_vLights[i];
+
+      l_aLightsEnabled[i] = l_pLight->IsActive();
+
+      if(!l_pLight->IsActive())
+      {
+        continue;
+      }
+
+      l_aLightsType[i] = l_pLight->GetType();
+      l_aLightsStartRangeAttenuation[i] = l_pLight->GetStartRangeAttenuation();
+      l_aLightsStartRangeAttenuation[i] *= l_aLightsStartRangeAttenuation[i];
+      l_aLightsEndRangeAttenuation[i] = l_pLight->GetEndRangeAttenuation();
+      l_aLightsEndRangeAttenuation[i] *= l_aLightsEndRangeAttenuation[i];
+      l_aLightsPosition[i] = l_pLight->GetPosition();
+      l_aLightsColor[i] = l_pLight->GetColor();
+      l_aShadowsEnabled[i] = FALSE;//l_pLight->GetRenderShadows();
+
+      if(l_pLight->GetType() == CLight::DIRECTIONAL || l_pLight->GetType() == CLight::SPOT)
+      {
+        CDirectionalLight* l_pDirectional = (CDirectionalLight*) l_pLight;
+
+        l_aLightsDirection[i] = l_pDirectional->GetDirection();
+      
+        if(l_pLight->GetType() == CLight::SPOT)
+        {
+          CSpotLight* l_pSpot = (CSpotLight*) l_pDirectional;
+
+          l_aLightsAngle[i]   = l_pSpot->GetAngle() * FLOAT_PI_VALUE / 180.0f;
+          l_aLightsFallOff[i] = l_pSpot->GetFallOff() * FLOAT_PI_VALUE / 180.0f;
+
+          l_aLightsAngle[i]   *= 0.5f; // agafar només la meitat
+          l_aLightsFallOff[i] *= 0.5f;
+
+          l_aLightsAngle[i]   = cosf(l_aLightsAngle[i]); // volem el cosinus, que calcular-lo al shader val un iogurt.
+          l_aLightsFallOff[i] = cosf(l_aLightsFallOff[i]);
+        }
+      }
+    }
+
+    l_pD3DEffect->SetFloatArray   (m_pAmbientLight,                        l_aAmbientLight,                 3);
+    l_pD3DEffect->SetBoolArray    (m_pLightsEnabledParameter,      (BOOL*) l_aLightsEnabled,                MAX_LIGHTS_BY_SHADER);
+    l_pD3DEffect->SetIntArray     (m_pLightsTypeParameter,                 l_aLightsType,                   l_iNumOfLights);
+    l_pD3DEffect->SetFloatArray   (m_pLightsAngleParameter,                l_aLightsAngle,                  l_iNumOfLights);
+    l_pD3DEffect->SetFloatArray   (m_pLightsFallOffParameter,              l_aLightsFallOff,                l_iNumOfLights);
+    l_pD3DEffect->SetFloatArray   (m_pLightsStartRangeAttenuationParameter,l_aLightsStartRangeAttenuation,  l_iNumOfLights);
+    l_pD3DEffect->SetFloatArray   (m_pLightsEndRangeAttenuationParameter,  l_aLightsEndRangeAttenuation,    l_iNumOfLights);
+    l_pD3DEffect->SetFloatArray   (m_pLightsPositionParameter,     (float*)l_aLightsPosition,               l_iNumOfLights * 3);
+    l_pD3DEffect->SetFloatArray   (m_pLightsDirectionParameter,    (float*)l_aLightsDirection,              l_iNumOfLights * 3);
+    l_pD3DEffect->SetFloatArray   (m_pLightsColorParameter,        (float*)l_aLightsColor,                  l_iNumOfLights * 4);
+    l_pD3DEffect->SetBoolArray    (m_pShadowsEnabledParameter,      (BOOL*)l_aShadowsEnabled,               l_iNumOfLights);
+   
+    m_bLightsUpdated = false;
+  }
+
+  if(m_bSkeletonUpdated)
+  {
+    D3DXMATRIX l_mTransformation[MAXBONES];
+
+    for(int l_iBoneId = 0; l_iBoneId < m_pCalHardwareModel->getBoneCount(); l_iBoneId++)
+    {
+      D3DXMatrixRotationQuaternion(&l_mTransformation[l_iBoneId],(CONST D3DXQUATERNION*)& m_pCalHardwareModel->getRotationBoneSpace(l_iBoneId, m_pCalSkeleton));
+      CalVector l_vTranslationBoneSpace = m_pCalHardwareModel->getTranslationBoneSpace(l_iBoneId, m_pCalSkeleton);
+      l_mTransformation[l_iBoneId]._14 = l_vTranslationBoneSpace.x;
+      l_mTransformation[l_iBoneId]._24 = l_vTranslationBoneSpace.y;
+      l_mTransformation[l_iBoneId]._34 = l_vTranslationBoneSpace.z;
+    }
+
+    float l_mMatrix[MAXBONES*3*4];
+
+    for(int l_iB = 0; l_iB < m_pCalHardwareModel->getBoneCount(); ++l_iB)
+    {
+      memcpy(&l_mMatrix[l_iB*3*4], &l_mTransformation[l_iB],sizeof(float)*3*4);
+    }
+
+    l_pD3DEffect->SetFloatArray(m_pBonesParameter, (float *)l_mMatrix,(m_pCalHardwareModel->getBoneCount())*3*4);
+    
+    m_bSkeletonUpdated = false;
+  }
+
+  if(m_bWorldMatrixUpdated)
+  {
+    l_pD3DEffect->SetMatrix(m_pWorldMatrixParameter, &(m_mWorldMatrix.GetD3DXMatrix()));
+    m_bWorldMatrixUpdated = false;
+  }
+
+  if(m_bProjectionMatrixUpdated)
+  {
+    l_pD3DEffect->SetMatrix(m_pProjectionMatrixParameter, &(m_mProjectionMatrix.GetD3DXMatrix()));
+    m_bProjectionMatrixUpdated = false;
+  }
+
+  if(m_bViewMatrixUpdated)
+  {
+    l_pD3DEffect->SetMatrix(m_pViewMatrixParameter, &(m_mViewMatrix.GetD3DXMatrix()));
+    m_bViewMatrixUpdated = false;
+  }
+
+  if(m_bLightViewMatrixUpdated)
+  {
+    m_bLightViewMatrixUpdated = false;
+  }
+  
+  if(m_bShadowProjectionMatrixUpdated)
+  {
+    m_bShadowProjectionMatrixUpdated = false;
+  }
+  
+  if(m_bCameraEyeUpdated)
+  {
+    const float l_vfPos[3] = {m_vCameraEye.x,m_vCameraEye.y,m_vCameraEye.z};
+    l_pD3DEffect->SetFloatArray(m_pCameraPositionParameter,l_vfPos,3);
+    m_bCameraEyeUpdated = false;
+  }
+
+  if(m_bViewProjectionMatrixUpdated)
+  {
+    l_pD3DEffect->SetMatrix(m_pViewProjectionMatrixParameter, &(GetViewProjectionMatrix().GetD3DXMatrix()));
+    m_bViewProjectionMatrixUpdated = false;
+  }
+
+  if(m_bWorldViewMatrixUpdated)
+  {
+    l_pD3DEffect->SetMatrix(m_pWorldViewMatrixParameter, &(GetWorldViewMatrix().GetD3DXMatrix()));
+    m_bWorldViewMatrixUpdated = false;
+  }
+  
+  if(m_bWorldViewProjectionMatrixUpdated)
+  {
+    l_pD3DEffect->SetMatrix(m_pWorldViewProjectionMatrixParameter, &(GetWorldViewProjectionMatrix().GetD3DXMatrix()));
+    m_bWorldViewProjectionMatrixUpdated = false;
+  }
+  
+  
 }
 
-const Mat44f& CEffectManager::GetInverseViewMatrix()
+CEffect* CEffectManager::ActivateMaterial(CMaterial* _pMaterial)
 {
-  if(!m_bInverseViewUpdated)
-  {
-    m_mInverseViewMatrix = m_mViewMatrix.GetInverted();
-    m_bInverseViewUpdated = true;
-  }
-  return m_mInverseViewMatrix;
-}
+  CEffect* l_pEffect = 0;
+  
+  int l_iMaterialType = _pMaterial->GetMaterialType();
+  bool l_bStaticMesh = (l_iMaterialType & ANIMATED_MESH_MATERIAL_MASK) == 0;
+  bool l_bAnimatedMesh = (l_iMaterialType & ANIMATED_MESH_MATERIAL_MASK) > 0;
 
-const Mat44f& CEffectManager::GetInverseWorldMatrix()
-{
-  if(!m_bInverseWorldUpdated)
+  if(l_bStaticMesh && m_pForcedStaticMeshEffect)
   {
-    m_mInverseWorldMatrix = m_mWorldMatrix.GetInverted();
-    m_bInverseWorldUpdated = true;
+    l_pEffect = m_pForcedStaticMeshEffect;
   }
-  return m_mInverseWorldMatrix;
+
+  if(l_bAnimatedMesh && m_pForcedAnimatedModelEffect)
+  {
+    l_pEffect = m_pForcedAnimatedModelEffect;
+  }
+
+  if(!l_pEffect)
+  {
+    l_pEffect = GetResource(m_DefaultEffectMap[l_iMaterialType]);
+
+    float l_fBump = _pMaterial->GetBump();
+    float l_fParallax = _pMaterial->GetParallaxHeight();
+
+    _pMaterial->Activate();
+  }
+
+  if(l_pEffect)
+  {
+    LoadShaderData(l_pEffect);
+  }
+
+  return l_pEffect;
 }
 
 const Mat44f& CEffectManager::GetViewProjectionMatrix()
 {
-  if(!m_bViewProjectionUpdated)
+  if(m_bViewProjectionUpdated)
   {
     m_mViewProjectionMatrix = m_mProjectionMatrix * m_mViewMatrix;
-    m_bViewProjectionUpdated = true;
+    m_bViewProjectionUpdated = false;
   }
   return m_mViewProjectionMatrix;
 }
 
 const Mat44f& CEffectManager::GetWorldViewMatrix()
 {
-  if(!m_bWorldViewUpdated)
+  if(m_bWorldViewUpdated)
   {
     m_mWorldViewMatrix = m_mViewMatrix * m_mWorldMatrix;
-    m_bWorldViewUpdated = true;
+    m_bWorldViewUpdated = false;
   }
   return m_mWorldViewMatrix;
 }
 
 const Mat44f& CEffectManager::GetWorldViewProjectionMatrix()
 {
-  if(!m_bInverseProjectionUpdated)
+  if(m_bWorldViewProjectionUpdated)
   {
     m_mWorldViewProjectionMatrix = m_mProjectionMatrix * m_mViewMatrix * m_mWorldMatrix;
-    m_bWorldViewProjectionUpdated = true;
+    m_bWorldViewProjectionUpdated = false;
   }
   return m_mWorldViewProjectionMatrix;
 }
+
 

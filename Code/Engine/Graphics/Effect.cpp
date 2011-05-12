@@ -8,56 +8,7 @@
 #include "RenderManager.h"
 #include <XML/XMLTreeNode.h>
 
-CEffect::CEffect(void):
-  CNamed(""),
-  m_szFileName(""),
-  m_pD3DEffect(0),
-  m_pWorldMatrixParameter(0),
-  m_pViewMatrixParameter(0),
-  m_pProjectionMatrixParameter(0),
-  m_pWorldViewMatrixParameter(0),
-  m_pViewProjectionMatrixParameter(0),
-  m_pWorldViewProjectionMatrixParameter(0),
-  m_pViewToLightProjectionMatrixParameter(0),
-  m_pAmbientLight(0),
-  m_pLightsEnabledParameter(0),
-  m_pLightsTypeParameter(0),
-  m_pLightsPositionParameter(0),
-  m_pLightsDirectionParameter(0),
-  m_pLightsAngleParameter(0),
-  m_pLightsColorParameter(0),
-  m_pLightsFallOffParameter(0),
-  m_pLightsStartRangeAttenuationParameter(0),
-  m_pLightsEndRangeAttenuationParameter(0),
-  m_pCameraPositionParameter(0),
-  m_pBonesParameter(0),
-  m_pTimeParameter(0),
-  m_pPoissonBlurKernelParameter(0),
-  m_pGlowActive(0),
-  m_pTextureWidth(0),
-  m_pTextureHeight(0)
-{
-  for(int i = 0; i < MAX_LIGHTS_BY_SHADER; i++)
-  {
-    m_aLightsEnabled[i] = false;
-    m_aLightsType[i] = 0;
-    m_aLightsAngle[i] = 0;
-    m_aLightsFallOff[i] = 0;
-    m_aLightsStartRangeAttenuation[i] = 0;
-    m_aLightsEndRangeAttenuation[i] = 0;
-    m_aLightsPosition[i] = Vect3f(0.0f);
-    m_aLightsDirection[i] = Vect3f(0.0f);
-    m_aLightsColor[i] = colWHITE;
-  }
-}
-
-void CEffect::Release() 
-{
-  CHECKED_RELEASE(m_pD3DEffect);
-  SetNullParameters();
-}
-
-void CEffect::SetNullParameters() 
+/*void CEffect::SetNullParameters() 
 {
   m_pWorldMatrixParameter =
   m_pViewMatrixParameter =
@@ -83,63 +34,18 @@ void CEffect::SetNullParameters()
   m_pTextureHeight =
   m_pPoissonBlurKernelParameter =
   m_pTimeParameter = 0;
-}
+}*/
 
-bool CEffect::LoadEffect()
-{
 
-  LPD3DXBUFFER l_ErrorBuffer=NULL;
-  HRESULT l_HR = D3DXCreateEffectFromFile(
-                          RENDER_MANAGER->GetDevice(),
-                          m_szFileName.c_str(),
-                          NULL,
-                          NULL,
-                          D3DXSHADER_USE_LEGACY_D3DX9_31_DLL,
-                          NULL,
-                          &m_pD3DEffect,
-                          &l_ErrorBuffer);
-  if(l_ErrorBuffer)
-  {
-    LOGGER->AddNewLog(ELL_ERROR,"CEffect::LoadEffect Error creating effect '%s':\n%s", m_szFileName.c_str(), l_ErrorBuffer->GetBufferPointer());
-    CHECKED_RELEASE(l_ErrorBuffer);
-    SetOk(false);
-    return false;
-  }
-  if(l_HR != D3D_OK)
-  {
-    if(l_HR == D3DERR_INVALIDCALL)
-    {
-      LOGGER->AddNewLog(ELL_ERROR,"CEffect::LoadEffect Error crida invàlida");
-      SetOk(false);
-      return false;
-    }
-    else if(l_HR == D3DXERR_INVALIDDATA)
-    {
-      LOGGER->AddNewLog(ELL_ERROR,"CEffect::LoadEffect Error invalid data");
-      SetOk(false);
-      return false;
-    }
-    else if(l_HR == E_OUTOFMEMORY)
-    {
-      LOGGER->AddNewLog(ELL_ERROR,"CEffect::LoadEffect Error out of memory");
-      SetOk(false);
-      return false;
-    }
-  }
 
-  SetOk(InitParameters());
-  
-  return IsOk();
-}
-
-void CEffect::GetParameterBySemantic(const string& _szSemanticName, D3DXHANDLE& _pHandle)
+/*void CEffect::GetParameterBySemantic(const string& _szSemanticName, D3DXHANDLE& _pHandle)
 {
   _pHandle=m_pD3DEffect->GetParameterBySemantic(NULL,_szSemanticName.c_str());
   if(_pHandle==NULL)
     LOGGER->AddNewLog(ELL_WARNING,"CEffect::GetParameterBySemantic Parameter by semantic '%s' wasn't found on effect '%s'", _szSemanticName.c_str(),m_szFileName.c_str());
-}
+}*/
 
-bool CEffect::SetLights(size_t _iNumOfLights)
+/*bool CEffect::SetLights(size_t _iNumOfLights)
 {
   if(_iNumOfLights > MAX_LIGHTS_BY_SHADER)
   {
@@ -208,17 +114,107 @@ bool CEffect::SetLights(size_t _iNumOfLights)
     m_aLightsEnabled[i] = false;
   }
   return true;
+}*/
+
+bool CEffect::Init(const CXMLTreeNode& _xmlEffect, LPD3DXEFFECTPOOL _pEffectPool)
+{
+  //SetNullParameters();
+  string l_szName = _xmlEffect.GetPszISOProperty("name","");
+
+  m_pEffectPool = _pEffectPool;
+
+  if(l_szName.compare("") == 0)
+  {
+    LOGGER->AddNewLog(ELL_ERROR,"CEffect::Init Empty name");
+    SetOk(false);
+    return false;
+  }
+
+  SetName(l_szName); 
+
+  m_szFileName = _xmlEffect.GetPszISOProperty("file","");
+
+  if(m_szFileName.compare("") == 0)
+  {
+    LOGGER->AddNewLog(ELL_ERROR,"CEffect::Init Empty effect path");
+    SetOk(false);
+    return false;
+  }
+
+  m_szTechniqueName = _xmlEffect.GetPszISOProperty("technique","");
+
+  if(m_szTechniqueName.compare("") == 0)
+  {
+    LOGGER->AddNewLog(ELL_ERROR,"CEffect::Init Empty technique name");
+    SetOk(false);
+    return false;
+  }
+
+  m_szInstancedTechniqueName = _xmlEffect.GetPszISOProperty("instanced_technique","");
+
+  SetOk(LoadEffect());
+  return true;
 }
 
-bool CEffect::Init(const CXMLTreeNode& _xmlEffect)
+bool CEffect::LoadEffect()
 {
-  SetNullParameters();
-  m_szFileName = _xmlEffect.GetPszISOProperty("file","");
-  SetName(_xmlEffect.GetPszISOProperty("name","")); 
-  if(!LoadEffect())
+  LPD3DXBUFFER l_ErrorBuffer=NULL;
+  HRESULT l_HR = D3DXCreateEffectFromFile(
+                          RENDER_MANAGER->GetDevice(),
+                          m_szFileName.c_str(),
+                          NULL,
+                          NULL,
+                          D3DXSHADER_USE_LEGACY_D3DX9_31_DLL,
+                          m_pEffectPool,
+                          &m_pD3DEffect,
+                          &l_ErrorBuffer);
+  if(l_ErrorBuffer)
+  {
+    LOGGER->AddNewLog(ELL_ERROR,"CEffect::Init Error creating effect '%s':\n%s", m_szFileName.c_str(), l_ErrorBuffer->GetBufferPointer());
+    CHECKED_RELEASE(l_ErrorBuffer);
+    SetOk(false);
     return false;
-  SetOk(true);
-  return true;
+  }
+
+  if(l_HR != D3D_OK)
+  {
+    if(l_HR == D3DERR_INVALIDCALL)
+    {
+      LOGGER->AddNewLog(ELL_ERROR,"CEffect::Init Error crida invàlida");
+      SetOk(false);
+      return false;
+    }
+
+    else if(l_HR == D3DXERR_INVALIDDATA)
+    {
+      LOGGER->AddNewLog(ELL_ERROR,"CEffect::Init Error invalid data");
+      SetOk(false);
+      return false;
+    }
+
+    else if(l_HR == E_OUTOFMEMORY)
+    {
+      LOGGER->AddNewLog(ELL_ERROR,"CEffect::Init Error out of memory");
+      SetOk(false);
+      return false;
+    }
+  }
+
+  m_pD3DTechnique = m_pD3DEffect->GetTechniqueByName(m_szTechniqueName.c_str());
+
+  if(m_szInstancedTechniqueName.compare("") == 0)
+  {
+    m_pD3DInstancedTechnique = m_pD3DEffect->GetTechniqueByName(m_szInstancedTechniqueName.c_str());
+  }else{
+    m_pD3DInstancedTechnique = 0;
+  }
+
+  if(m_pD3DTechnique)
+  {
+    m_pD3DEffect->SetTechnique(m_pD3DTechnique);
+  }
+
+  return IsOk();
 }
 
 bool CEffect::Reload()
@@ -227,7 +223,15 @@ bool CEffect::Reload()
   return LoadEffect();
 }
 
-bool CEffect::InitParameters()
+void CEffect::Release() 
+{
+  CHECKED_RELEASE(m_pD3DEffect);
+  m_pD3DTechnique = 0;
+  m_pD3DInstancedTechnique = 0;
+  m_pEffectPool = 0;
+}
+
+/*bool CEffect::InitParameters()
 {
   //matrixes
   GetParameterBySemantic("World", m_pWorldMatrixParameter);
@@ -261,9 +265,11 @@ bool CEffect::InitParameters()
   GetParameterBySemantic("PoissonBlurKernel", m_pPoissonBlurKernelParameter);
 
   return true;
-}
+}*/
 
+/*
 D3DXHANDLE CEffect::GetTechniqueByName(const string& _szTechniqueName) const 
 {
   return m_pD3DEffect->GetTechniqueByName(_szTechniqueName.c_str());
 }
+*/

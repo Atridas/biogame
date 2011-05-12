@@ -7,6 +7,17 @@
 #include "EffectManager.h"
 #include "EffectTechnique.h"
 #include "EffectMaterial.h"
+
+#include "Material.h"
+#include "StaticMeshEmptyMaterial.h"
+#include "DiffuseTextureDecorator.h"
+#include "NormalTextureDecorator.h"
+#include "LightmapTextureDecorator.h"
+#include "SpecularTextureDecorator.h"
+#include "GlowTextureDecorator.h"
+#include "ParallaxPropertyDecorator.h"
+#include "BumpPropertyDecorator.h"
+
 #include <IndexedVertexs.h>
 #include <base.h>
 #include <fstream>
@@ -25,20 +36,21 @@ bool CStaticMesh::Load(const CXMLTreeNode& _XMLTreeNode)
     *
     *  for MaterialCount
     *  	unsigned short            -> VERTEX_TYPE.
+    *   unsigned short            -> nombre de textures a llegir
+    *   for MaterialTextures
+    *     unsigned short            -> TEXTURE_TYPE.
+    *     unsigned short            -> Longitud de la cadena.
+    *     char[]                    -> string: path.
     *   unsigned short            -> nombre de propietats a llegir
-    *   [unsigned short, string]  -> Diffuse. u16: Longitud de la cadena u16. string: path.
-    *   [unsigned short, string]  -> Bumpmap. u16: Longitud de la cadena u16. string: path.
-    *   [unsigned short, string]  -> Lightmap. u16: Longitud de la cadena u16. string: path.
-    *   [unsigned short, string]  -> Environment. u16: Longitud de la cadena u16. string: path.
+    *   for MaterialProperty
+    *     unsigned short            -> PROPERTY_TYPE.
+    *     float[]                   -> values
     *
     *  for MaterialCount
     *  	unsigned short            -> VertexCount. Nombre de vèrtexs.
-    *   for VertexCount
-    *     VERTEX_STRUCT           -> Vèrtexs. Llista de vèrtexs. Format depenent de VERTEX_TYPE.
-    *
+    *   VERTEX_STRUCT[]           -> Vèrtexs. Llista de vèrtexs. Format depenent de VERTEX_TYPE.
     *  	unsigned short            -> IndexCount. Nombre d'índexs.
-    *  	for IndexCount
-    *  		unsigned short          -> Índexs. Llista d'índexs de vèrtexs.
+    *   unsigned short[]          -> Índexs. Llista d'índexs de vèrtexs.
     *  
     *  unsigned short             -> FOOTER(MASK = 0xFFFF)
     *
@@ -94,15 +106,91 @@ bool CStaticMesh::Load(const CXMLTreeNode& _XMLTreeNode)
   l_File.read((char*)&l_usNumMaterials, sizeof(uint16));
   
   l_pusVertexType = new uint16[l_usNumMaterials];
+
   //l_pusTextureNum = new uint16[l_usNumMaterials];
 
   m_vMaterials.clear();
-  for(int i = 0; i < l_usNumMaterials; i++)
+
+  /*for(int i = 0; i < l_usNumMaterials; i++)
   {
     m_vMaterials.push_back(new CEffectMaterial());
     m_vMaterials[i]->Init(l_File);
     l_pusVertexType[i] = m_vMaterials[i]->GetVertexType();
 
+  }*/
+
+  uint16 l_usNumTextures = 0;
+  uint16 l_usNumProperties = 0;
+  uint16 l_usTextureType = 0;
+  uint16 l_usPropertyType = 0;
+  uint16 l_usStrLength = 0;
+  float l_fValue = 0.0f;
+
+  CTexture* l_pTexture = 0;
+  
+  for(int j = 0; j < l_usNumMaterials; ++j)
+  {
+    l_File.read((char*)&l_pusVertexType[j], sizeof(uint16));
+    l_File.read((char*)&l_usNumTextures, sizeof(uint16));
+
+    CMaterial* l_pMaterial = new CStaticMeshEmptyMaterial();
+
+    for(int i = 0; i < l_usNumTextures; ++i)
+    {
+      l_File.read((char*)&l_usTextureType, sizeof(uint16));
+      l_File.read((char*)&l_usStrLength, sizeof(uint16));
+      char* l_szPath = new char[++l_usStrLength];
+      memset(l_szPath,0,sizeof(char)*(l_usStrLength));
+      l_File.read(l_szPath, sizeof(char)*l_usStrLength);
+
+      l_pTexture = l_pTextureManager->GetResource(l_szPath);
+
+      delete[] l_szPath;
+
+      switch(l_usTextureType)
+      {
+        case DIFFUSE_MATERIAL_MASK:
+          l_pMaterial = new CDiffuseTextureDecorator(l_pMaterial,l_pTexture);
+          break;
+        case NORMALMAP_MATERIAL_MASK:
+          l_pMaterial = new CNormalTextureDecorator(l_pMaterial,l_pTexture);
+          break;
+        case LIGHTMAP_MATERIAL_MASK:
+          l_pMaterial = new CLightmapTextureDecorator(l_pMaterial,l_pTexture);        
+          break;
+        case SPECULARMAP_MATERIAL_MASK:
+          l_pMaterial = new CSpecularTextureDecorator(l_pMaterial,l_pTexture);
+          break;
+        case GLOW_MATERIAL_MASK:
+          l_pMaterial = new CGlowTextureDecorator(l_pMaterial,l_pTexture);
+          break;
+        default:
+          break;
+      }
+    }
+
+    l_File.read((char*)&l_usNumProperties, sizeof(uint16));
+
+    for(int i = 0; i < l_usNumProperties; ++i)
+    {
+      l_File.read((char*)&l_usPropertyType, sizeof(uint16));
+
+      switch(l_usPropertyType)
+      {
+        case PARALLAX_PROPERTY_TYPE:
+          l_File.read((char*)&l_fValue, sizeof(float));
+          l_pMaterial = new CParallaxPropertyDecorator(l_pMaterial,l_fValue);
+          break;
+        case BUMP_PROPERTY_TYPE:
+          l_File.read((char*)&l_fValue, sizeof(float));
+          l_pMaterial = new CBumpPropertyDecorator(l_pMaterial,l_fValue);
+          break;
+        default:
+          break;
+      }
+    }
+
+    m_vMaterials.push_back(l_pMaterial);
   }
 
   int l_i = 0;
@@ -274,28 +362,15 @@ void CStaticMesh::Render(CRenderManager *_pRM, bool _bInstanced) const
     vector<CRenderableVertexs*>::const_iterator l_ItRV = m_RVs.begin();
     vector<CRenderableVertexs*>::const_iterator l_EndRV = m_RVs.end();
 
-    vector<CEffectMaterial*>::const_iterator l_ItMaterialArray = m_vMaterials.begin();
+    vector<CMaterial*>::const_iterator l_ItMaterialArray = m_vMaterials.begin();
+
+    CEffectManager* m_pEM = CORE->GetEffectManager();
 
     while(l_ItRV != l_EndRV) 
     {
+      CEffect* l_pEffect = m_pEM->ActivateMaterial(*l_ItMaterialArray);
 
-      //---------------------------- shaders -----------------------
-      
-      CEffectTechnique* l_pEffectTechnique = (*l_ItMaterialArray)->GetEffectTechnique(_pRM, _bInstanced);
-
-      if(l_pEffectTechnique && l_pEffectTechnique->IsInstanced() == _bInstanced)
-      {
-        if(l_pEffectTechnique->BeginRender(*l_ItMaterialArray))
-        {
-          (*l_ItRV)->Render(_pRM,l_pEffectTechnique,_bInstanced);
-        } else {
-          (*l_ItRV)->Render(_pRM);
-        }
-      } else {
-        (*l_ItRV)->Render(_pRM);
-      }
-
-      //------------------------------------------------------------
+      (*l_ItRV)->Render(_pRM,l_pEffect);
 
       ++l_ItRV;
       ++l_ItMaterialArray;
@@ -314,9 +389,22 @@ void CStaticMesh::Release()
       ++l_It;
     }
   }
-  {
+  /*{
     vector<CEffectMaterial*>::iterator l_It = m_vMaterials.begin();
     vector<CEffectMaterial*>::iterator l_End = m_vMaterials.end();
+
+    while(l_It != l_End) 
+    {
+      CHECKED_DELETE(*l_It)
+      ++l_It;
+    }
+  }*/
+
+  //m_vMaterials.clear();
+
+  {
+    vector<CMaterial*>::iterator l_It = m_vMaterials.begin();
+    vector<CMaterial*>::iterator l_End = m_vMaterials.end();
 
     while(l_It != l_End) 
     {

@@ -12,7 +12,7 @@
 #include <ActionManager.h>
 #include <Console.h>
 #include <GUIManager.h>
-
+#include <EffectManager.h>
 #include "HDRPipeline.h"
 
 #include "params.h"
@@ -78,6 +78,9 @@ void CEngine::Render()
 
   if(m_pActiveProcess != NULL)
   {
+    CEffectManager* l_pEM = m_pCore->GetEffectManager();
+    l_pEM->Begin();
+
     m_pActiveProcess->PreRender(l_pRM);
 
     if(m_pHDR && m_pHDR->IsActive())

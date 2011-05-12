@@ -94,7 +94,11 @@ void CViewer::Init()
                                                           45.0f,
                                                           true);
 
-  CORE->GetSceneEffectManager()->SetShadowMapLightCast(m_pSpotLight);
+  CSceneEffectManager* l_pSceneEffectManager = CORE->GetSceneEffectManager();
+  if(l_pSceneEffectManager)
+  {
+    l_pSceneEffectManager->SetShadowMapLightCast(m_pSpotLight);
+  }
 
   m_vAmbientLight = CORE->GetLightManager()->GetAmbientLight();
 
