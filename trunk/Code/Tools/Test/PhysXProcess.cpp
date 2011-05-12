@@ -118,9 +118,21 @@ bool CPhysXProcess::Init()
 
   CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
  
+  CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
+  CalCoreSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetCoreModel()->getCoreSkeleton();
+  vector<CalCoreBone*> l_vBones = l_pSkeleton->getVectorCoreBone();
+  CalVector l_vBonePos;
 
-  CalCoreSkeleton* l_pSkeleton = CORE->GetAnimatedModelManager()->GetResource("riggle")->GetCoreModel()->getCoreSkeleton();
-  
+  for (size_t i=0;i<l_vBones.size();++i)
+  {
+    //l_vBones[0]->getBoundingData(plane,l_vBonePos);
+    l_vBonePos = l_vBones[i]->getTranslationAbsolute();
+    Vect3f l_vVector = Vect3f(l_vBonePos.x,l_vBonePos.y,l_vBonePos.z);
+    SCollisionInfo l_cInfo;
+    l_cInfo.m_CollisionPoint = l_vVector;
+    l_cInfo.m_Normal = v3fZERO;
+    g_vCollisions.push_back(l_cInfo);
+  }
 
   g_pUserDataJoint1 = new CPhysicUserData("Objecte Joint 1");
   g_pUserDataJoint2 = new CPhysicUserData("Objecte Joint 2");
@@ -433,6 +445,23 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
    CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
    l_pPhysManager->DebugRender(_pRM);
 
+
+  // g_vCollisions.clear();
+  //CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
+  //CalCoreSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetCoreModel()->getCoreSkeleton();
+  //vector<CalCoreBone*> l_vBones = l_pSkeleton->getVectorCoreBone();
+  //CalVector l_vBonePos;
+
+  //for (size_t i=0;i<l_vBones.size();++i)
+  //{
+  //  //l_vBones[0]->getBoundingData(plane,l_vBonePos);
+  //  l_vBonePos = l_vBones[i]->getTranslationAbsolute();
+  //  Vect3f l_vVector = Vect3f(l_vBonePos.x,l_vBonePos.y,l_vBonePos.z);
+  //  SCollisionInfo l_cInfo;
+  //  l_cInfo.m_CollisionPoint = l_vVector;
+  //  l_cInfo.m_Normal = v3fZERO;
+  //  g_vCollisions.push_back(l_cInfo);
+  //}
 
    RenderImpacts(_pRM);
 
