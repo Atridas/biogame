@@ -12,7 +12,7 @@ class CalModel;
 class CalCoreModel;
 class CalHardwareModel;
 class CRenderableVertexs;
-class CEffectMaterial;
+class CMaterial;
 // ----------------------------------
 
 
@@ -59,7 +59,7 @@ public:
   **/
   //size_t GetNumTextures                 ( ) const                   { return m_vTextureFilenameList.size(); };
 
-  CEffectMaterial* GetMaterial            ( size_t _uiId ) const      { return m_vMaterials[_uiId];};
+  const vector<CMaterial*>& GetMaterials        () const      { return m_vMaterials;};
 
   /**
    * Getter del model cal3d.
@@ -154,7 +154,7 @@ private:
   /**
    * Vector de paths de les textures del model.
   **/
-  vector<CEffectMaterial*>  m_vMaterials;
+  vector<CMaterial*>        m_vMaterials;
   /**
    * Path del model.
   **/

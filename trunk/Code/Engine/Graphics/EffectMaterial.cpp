@@ -276,29 +276,30 @@ void CEffectMaterial::ActivateTextures(const CRenderManager* _pRM) const
 
 CEffectTechnique* CEffectMaterial::GetEffectTechnique(const CRenderManager* _pRM, bool _bInstanced) const
 {
-  CEffectManager*   l_pEM = CORE->GetEffectManager();
-  CEffectTechnique* l_pForcedTechnique;
+  /*CEffectManager*   l_pEM = CORE->GetEffectManager();
+  CEffectTechnique* l_pForcedTechnique;*/
 
   //TODO les techniques forçades també han de ser instanced!!!!!
-  if(m_bAnimated)
-    l_pForcedTechnique = l_pEM->GetAnimatedModelTechnique();
-  else
-    l_pForcedTechnique = l_pEM->GetStaticMeshTechnique();
+  //if(m_bAnimated)
+    //l_pForcedTechnique = l_pEM->GetAnimatedModelTechnique();
+  //else
+    //l_pForcedTechnique = l_pEM->GetStaticMeshTechnique();
 
-  if(l_pForcedTechnique)
+  /*if(l_pForcedTechnique)
     return l_pForcedTechnique;
 
   if(m_pTechnique)
-    return m_pTechnique;
+    return m_pTechnique;*/
   
-  if(_bInstanced)
+  /*if(_bInstanced)
   {
     string l_szName = l_pEM->GetInstancedTechniqueEffectNameByVertexDefault(m_usVertexType);
     return l_pEM->GetEffectTechnique(l_szName);
   } else {
     string l_szName = l_pEM->GetTechniqueEffectNameByVertexDefault(m_usVertexType);
     return l_pEM->GetEffectTechnique(l_szName);
-  }
+  }*/
+  return 0;
 }
 
 int CEffectMaterial::NumTextures(int mask)

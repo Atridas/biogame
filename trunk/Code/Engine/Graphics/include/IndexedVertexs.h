@@ -5,7 +5,7 @@
 #include "RenderableVertexs.h"
 #include "RenderManager.h"
 #include "Effect.h"
-#include "EffectTechnique.h"
+//#include "EffectTechnique.h"
 
 /**
  * Classe template d'Indexed Vertexs.
@@ -65,14 +65,13 @@ public:
    * @param _pEffectTechnique Tècnica.
    * @return True si s'ha renderitzat correctament, false sino.
   **/
-  virtual bool Render(CRenderManager *_pRM, CEffectTechnique *_pEffectTechnique, bool _bInstanced = false) const;
+  virtual bool Render(CRenderManager *_pRM, CEffect* _pEffect) const;
 
-  virtual bool Render(CRenderManager *_pRM, CEffectTechnique *_pEffectTechnique, int _iBaseVertexIndex,
-                                                                                 int _iMinIndex,
-                                                                                 int _iNumVertices,
-                                                                                 int _iStartIndex,
-                                                                                 int _iNumFaces, 
-                                                                                 bool _bInstanced = false) const;
+  virtual bool Render(CRenderManager *_pRM, CEffect* _pEffect,  int _iBaseVertexIndex,
+                                                                int _iMinIndex,
+                                                                int _iNumVertices,
+                                                                int _iStartIndex,
+                                                                int _iNumFaces) const;
 
   
   /**
@@ -130,32 +129,29 @@ bool CIndexedVertexs<T>::Render(CRenderManager *_pRM) const
             0,
             GetVertexsCount(),
             0,
-            GetFacesCount(),
-            false);
+            GetFacesCount());
 };
 
 template<class T>
-bool CIndexedVertexs<T>::Render(CRenderManager *_pRM, CEffectTechnique *_pEffectTechnique, bool _bInstanced) const
+bool CIndexedVertexs<T>::Render(CRenderManager *_pRM, CEffect*_pEffect) const
 {
   return Render(_pRM,
-            _pEffectTechnique,
+            _pEffect,
             0,
             0,
             GetVertexsCount(),
             0,
-            GetFacesCount(),
-            _bInstanced);
+            GetFacesCount());
 };
 
 template<class T>
 bool CIndexedVertexs<T>::Render(CRenderManager *_pRM,
-            CEffectTechnique *_pEffectTechnique,
+            CEffect*_pEffect,
             int _iBaseVertexIndex,
             int _iMinIndex,
             int _iNumVertices,
             int _iStartIndex,
-            int _iNumFaces, 
-            bool _bInstanced) const
+            int _iNumFaces) const
 {
   LPDIRECT3DDEVICE9 l_pDevice = _pRM->GetDevice();
 
@@ -163,26 +159,27 @@ bool CIndexedVertexs<T>::Render(CRenderManager *_pRM,
   bool l_bSucceeded = true;
   LPD3DXEFFECT l_pD3DEffect = 0;
 
-  if(_pEffectTechnique)
+  if(_pEffect)
   {
-    l_pD3DEffect=_pEffectTechnique->GetEffect()->GetD3DEffect();
-    l_pD3DEffect->SetTechnique(_pEffectTechnique->GetD3DTechnique());
+    l_pD3DEffect=_pEffect->GetD3DEffect();
     l_bSucceeded = SUCCEEDED(l_pD3DEffect->Begin(&l_iNumPasses,0));
   }
   
-  if(_bInstanced)
+  /*if(_bInstanced)
   {
     l_pDevice->SetVertexDeclaration(T::GetInstancedVertexDeclaration());
   } else {
     l_pDevice->SetVertexDeclaration(T::GetVertexDeclaration());
-  }
+  }*/
+  l_pDevice->SetVertexDeclaration(T::GetVertexDeclaration());
+
   l_pDevice->SetIndices(m_pIB);
 
   l_pDevice->SetStreamSource(0,m_pVB,0,GetVertexSize());
 
   for(uint32 i = 0; i < l_iNumPasses; i++)
   {
-    if(_pEffectTechnique)
+    if(_pEffect)
       l_bSucceeded = SUCCEEDED(l_pD3DEffect->BeginPass(i));
     
     l_pDevice->DrawIndexedPrimitive(D3DPT_TRIANGLELIST, // PrimitiveType
@@ -191,11 +188,11 @@ bool CIndexedVertexs<T>::Render(CRenderManager *_pRM,
                                     _iNumVertices,      // NumVertices
                                     _iStartIndex,       // StartIndex
                                     _iNumFaces );
-    if(_pEffectTechnique)
+    if(_pEffect)
      l_pD3DEffect->EndPass();
   }
   
-  if(_pEffectTechnique)
+  if(_pEffect)
      l_bSucceeded = SUCCEEDED(l_pD3DEffect->End());
 
   return l_bSucceeded;

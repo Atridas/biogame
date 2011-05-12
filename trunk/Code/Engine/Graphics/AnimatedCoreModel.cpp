@@ -2,7 +2,17 @@
 #include "VertexsStructs.h"
 #include "IndexedVertexs.h"
 #include "VertexCalculations.h"
-#include "EffectMaterial.h"
+#include "TextureManager.h"
+
+#include "Material.h"
+#include "AnimatedMeshEmptyMaterial.h"
+#include "DiffuseTextureDecorator.h"
+#include "NormalTextureDecorator.h"
+#include "LightmapTextureDecorator.h"
+#include "SpecularTextureDecorator.h"
+#include "GlowTextureDecorator.h"
+#include "ParallaxPropertyDecorator.h"
+#include "BumpPropertyDecorator.h"
 
 #include <cal3d/cal3d.h>
 #include <XML/XMLTreeNode.h>
@@ -16,8 +26,8 @@ void CAnimatedCoreModel::Release()
   m_szMeshFilename      = "";
   m_szSkeletonFilename  = "";
   
-  vector<CEffectMaterial*>::iterator l_it  = m_vMaterials.begin();
-  vector<CEffectMaterial*>::iterator l_end = m_vMaterials.end();
+  vector<CMaterial*>::iterator l_it  = m_vMaterials.begin();
+  vector<CMaterial*>::iterator l_end = m_vMaterials.end();
   while(l_it != l_end)
   {
     CHECKED_DELETE(*l_it);
@@ -49,9 +59,9 @@ bool CAnimatedCoreModel::Load(const std::string &_szPath)
     m_pCalCoreModel = new CalCoreModel(GetName().c_str());
 
     int l_iNumChildren = l_treeActor.GetNumChildren();
+
     for(int i = 0; i < l_iNumChildren; i++)
     {
-
       CXMLTreeNode l_treeChild = l_treeActor(i);
       if(strcmp(l_treeChild.GetName(),"skeleton") == 0)
       {
@@ -107,15 +117,62 @@ bool CAnimatedCoreModel::Load(const std::string &_szPath)
 
       } else if(strcmp(l_treeChild.GetName(),"material") == 0)
       {
-        CEffectMaterial* l_pMaterial = new CEffectMaterial();
+        CTextureManager* l_pTextureManager = CORE->GetTextureManager();
+        CTexture* l_pTexture = 0;
 
-        if(l_pMaterial->Init(l_treeChild))
+        CMaterial* l_pMaterial = new CAnimatedMeshEmptyMaterial();
+
+        int l_iNumChildren = l_treeChild.GetNumChildren();
+
+        for(int i = 0; i < l_iNumChildren; i++)
         {
-          m_vMaterials.push_back(l_pMaterial);
-        } else {
-          LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load no s'ha pogut inicialitzar el material correctament");
-          delete l_pMaterial;
+          if(strcmp(l_treeChild(i).GetName(),"texture") == 0)
+          {
+            CXMLTreeNode l_xmlTexture = l_treeChild(i);
+
+            string l_szTexType = l_xmlTexture.GetPszISOProperty("type","");
+            string l_szTexFilename = l_xmlTexture.GetPszISOProperty("filename", "");
+
+            l_pTexture = l_pTextureManager->GetResource(l_szTexFilename);
+
+            if(l_szTexType == "diffusse")
+            {
+              l_pMaterial = new CDiffuseTextureDecorator(l_pMaterial,l_pTexture);
+            } else if(l_szTexType == "normalmap")
+            {
+              l_pMaterial = new CNormalTextureDecorator(l_pMaterial,l_pTexture);
+            } else if(l_szTexType == "lightmap")
+            {
+              l_pMaterial = new CLightmapTextureDecorator(l_pMaterial,l_pTexture);
+            } else if(l_szTexType == "specular")
+            {
+              l_pMaterial = new CSpecularTextureDecorator(l_pMaterial,l_pTexture);
+            } else if(l_szTexType == "glow")
+            {
+              l_pMaterial = new CGlowTextureDecorator(l_pMaterial,l_pTexture);
+            }
+          }
+
+          if(strcmp(l_treeChild(i).GetName(),"property") == 0)
+          {
+            CXMLTreeNode l_xmlProperty = l_treeChild(i);
+
+            string l_szTexType = l_xmlProperty.GetPszISOProperty("type","");
+            float l_fValue = l_xmlProperty.GetFloatProperty("value", 0.0f);
+
+            if(l_szTexType == "parallax")
+            {
+              l_pMaterial = new CParallaxPropertyDecorator(l_pMaterial,l_fValue);
+            } else if(l_szTexType == "bump")
+            {
+              l_pMaterial = new CBumpPropertyDecorator(l_pMaterial,l_fValue);
+            }
+          }
+
+          
         }
+
+        m_vMaterials.push_back(l_pMaterial);
 
       } else if(strcmp(l_treeChild.GetName(),"animation") == 0)
       {

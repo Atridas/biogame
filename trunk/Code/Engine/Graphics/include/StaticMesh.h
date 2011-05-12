@@ -9,6 +9,7 @@
 class CRenderableVertexs;
 class CEffectMaterial;
 class CRenderManager;
+class CMaterial;
 //---------------------------------
 
 /**
@@ -78,7 +79,9 @@ protected:
   /**
    * Vector de Textures que conté la malla.
   **/
-  vector<CEffectMaterial*> m_vMaterials;
+  //vector<CEffectMaterial*> m_vMaterials;
+
+  vector<CMaterial*> m_vMaterials;
   /**
    * Path relatiu al fitxer mesh.
   **/

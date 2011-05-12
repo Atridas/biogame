@@ -54,8 +54,8 @@ void CShadowMapRenderToTexture::PreRender(CRenderManager *_pRM, CProcess *_pProc
 
       _pRM->BeginRendering();
 
-      l_pEffectManager->SetStaticMeshTechnique(m_pStaticMeshTechnique);
-      l_pEffectManager->SetAnimatedModelTechnique(m_pAnimatedModelTechnique);
+      //l_pEffectManager->SetStaticMeshTechnique(m_pStaticMeshTechnique);
+      //l_pEffectManager->SetAnimatedModelTechnique(m_pAnimatedModelTechnique);
       _pProc->RenderScene(_pRM);
 
       _pRM->EndRendering();

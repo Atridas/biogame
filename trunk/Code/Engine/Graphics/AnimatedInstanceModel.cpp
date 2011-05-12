@@ -9,7 +9,7 @@
 
 #include "IndexedVertexs.h"
 #include "RenderableVertexs.h"
-#include "EffectMaterial.h"
+#include "Material.h"
 #include "EffectManager.h"
 #include "EffectTechnique.h"
 
@@ -160,58 +160,30 @@ void CAnimatedInstanceModel::LoadTextures(CRenderManager *_pRM)
 void CAnimatedInstanceModel::Render(CRenderManager *_pRM)
 {
   CalHardwareModel* l_pCalHardwareModel = m_pAnimatedCoreModel->GetCalHardwareModel();
+  CEffectManager* m_pEM = CORE->GetEffectManager();
 
   if(l_pCalHardwareModel)
   {
-
-    D3DXMATRIX l_mTransformation[MAXBONES];
+    m_pEM->SetSkeleton(m_pCalModel->getSkeleton(),l_pCalHardwareModel);
 
     for(int l_iHardwareMeshId=0; l_iHardwareMeshId < l_pCalHardwareModel->getHardwareMeshCount(); l_iHardwareMeshId++)
     {
-      CEffectMaterial*  l_pMaterial = m_pAnimatedCoreModel->GetMaterial(l_iHardwareMeshId);
-      CEffectTechnique* l_pEffectTechnique = l_pMaterial->GetEffectTechnique(_pRM);
-      if(l_pEffectTechnique == NULL || !l_pEffectTechnique->IsOk())
-        return;
+      const vector<CMaterial*>& l_vMaterials = m_pAnimatedCoreModel->GetMaterials();
 
-      CEffect* l_pEffect = l_pEffectTechnique->GetEffect();
-  
-      if(l_pEffect==NULL)
-        return;
-      LPD3DXEFFECT l_pd3dEffect = l_pEffect->GetD3DEffect();
-      if(l_pd3dEffect)
-      {
-        l_pEffectTechnique->BeginRender(l_pMaterial);
-        l_pCalHardwareModel->selectHardwareMesh(l_iHardwareMeshId);
+      CMaterial*  l_pMaterial = l_vMaterials[l_iHardwareMeshId];
 
-        for(int l_iBoneId = 0; l_iBoneId < l_pCalHardwareModel->getBoneCount(); l_iBoneId++)
-        {
-          D3DXMatrixRotationQuaternion(&l_mTransformation[l_iBoneId],(CONST D3DXQUATERNION*)& l_pCalHardwareModel->getRotationBoneSpace(l_iBoneId, m_pCalModel->getSkeleton()));
-          CalVector l_vTranslationBoneSpace = l_pCalHardwareModel->getTranslationBoneSpace(l_iBoneId, m_pCalModel->getSkeleton());
-          l_mTransformation[l_iBoneId]._14 = l_vTranslationBoneSpace.x;
-          l_mTransformation[l_iBoneId]._24 = l_vTranslationBoneSpace.y;
-          l_mTransformation[l_iBoneId]._34 = l_vTranslationBoneSpace.z;
-        }
+      CEffect* l_pEffect = m_pEM->ActivateMaterial(l_pMaterial);
+      
+      l_pCalHardwareModel->selectHardwareMesh(l_iHardwareMeshId);
 
-        float l_mMatrix[MAXBONES*3*4];
-
-        for(int l_iB = 0; l_iB < l_pCalHardwareModel->getBoneCount(); ++l_iB)
-        {
-          memcpy(&l_mMatrix[l_iB*3*4], &l_mTransformation[l_iB],sizeof(float)*3*4);
-        }
-
-        l_pd3dEffect->SetFloatArray(l_pEffect->m_pBonesParameter, (float *)l_mMatrix,(l_pCalHardwareModel->getBoneCount())*3*4);
-
-        ((CIndexedVertexs<TCAL3D_HW_VERTEX>*)m_pAnimatedCoreModel->GetRenderableVertexs())->
-          Render(
-            _pRM,
-            l_pEffectTechnique,
-            l_pCalHardwareModel->getBaseVertexIndex(),
-			      0,
-			      l_pCalHardwareModel->getVertexCount(),
-			      l_pCalHardwareModel->getStartIndex(),
-			      l_pCalHardwareModel->getFaceCount()
-          );
-      }
+      ((CIndexedVertexs<TCAL3D_HW_VERTEX>*)m_pAnimatedCoreModel->GetRenderableVertexs())->
+        Render( _pRM,
+                l_pEffect,
+                l_pCalHardwareModel->getBaseVertexIndex(),
+			          0,
+			          l_pCalHardwareModel->getVertexCount(),
+			          l_pCalHardwareModel->getStartIndex(),
+			          l_pCalHardwareModel->getFaceCount());
     }
   }
 }
@@ -260,7 +232,7 @@ void CAnimatedInstanceModel::RenderModelBySoftware(CRenderManager *_pRM)
       // select mesh and submesh for further data access
       if(pCalRenderer->selectMeshSubmesh(l_iMeshId, l_iSubmeshId))
       {
-        m_pAnimatedCoreModel->GetMaterial(l_iSubmeshId)->ActivateTextures(_pRM);
+        //m_pAnimatedCoreModel->GetMaterial(l_iSubmeshId)->ActivateTextures(_pRM);
 		   
 		    // Get vertexbuffer from the model		  		  
 		    SNORMALTEXTUREDVERTEX* l_pVertices;

@@ -21,11 +21,14 @@ class CLightManager : public CMapManager<CLight>
 public:
   CLightManager() : m_szFileName(""),m_vAmbientLight(0) {};
   ~CLightManager()  {Done();};
+
+  void Release(void);
+
   bool Load(const string& _szFileName);
   void Render(CRenderManager* _pRM) const;
   
   CLight* GetLight (int _i)  const;
-  vector<CLight*> GetLights(int _num) const;
+  const vector<CLight*>& GetLights() const {return m_vLights;};
 
   const Vect3f& GetAmbientLight() const {return m_vAmbientLight;};
   void SetAmbientLight(Vect3f _vAmbient) {m_vAmbientLight = _vAmbient;};
@@ -57,6 +60,8 @@ public:
 
 private:
   Vect3f m_vAmbientLight;
+
+  vector<CLight*> m_vLights;
 };
 
 #endif

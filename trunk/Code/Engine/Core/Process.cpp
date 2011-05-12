@@ -120,7 +120,10 @@ bool CProcess::ExecuteScript(float _fDeltaSeconds, float _fDelta, const char* _p
 
 void CProcess::PreRender(CRenderManager* _pRM)
 {
-  m_pSceneEffectManager->PreRender(_pRM, this);
+  if(m_pSceneEffectManager)
+  {
+    m_pSceneEffectManager->PreRender(_pRM, this);
+  }
   //Código de Prerender si necesitásemos hacer el pre-render de la GUI
 }
 
@@ -128,11 +131,17 @@ void CProcess::Render(CRenderManager* _pRM)
 {
   CEffectManager* l_pEM = CORE->GetEffectManager();
 
-  m_pSceneEffectManager->ActivateRenderSceneEffects();
+  if(m_pSceneEffectManager)
+  {
+    m_pSceneEffectManager->ActivateRenderSceneEffects();
+  }
 
-  //que usen la technique por defecto del tipo de vértice
-  l_pEM->SetAnimatedModelTechnique(m_pAnimatedTechnique);
-  l_pEM->SetStaticMeshTechnique(m_pStaticMeshTechnique);
+  if(l_pEM)
+  {
+    //que usen la technique por defecto del tipo de vértice
+    //l_pEM->SetAnimatedModelTechnique(m_pAnimatedTechnique);
+    //l_pEM->SetStaticMeshTechnique(m_pStaticMeshTechnique);
+  }
 
   //Renderizamos la escena
   RenderScene(_pRM);
@@ -142,13 +151,16 @@ void CProcess::Render(CRenderManager* _pRM)
 
 void CProcess::PostRender(CRenderManager* _pRM, bool _bCaptureNoPostFX)
 {
-  if(_bCaptureNoPostFX)
+  if(m_pSceneEffectManager)
   {
-    //Capturamos el Frame Buffer antes de los efectos de post render
-    m_pSceneEffectManager->CaptureFrameBuffers(_pRM);
+    if(_bCaptureNoPostFX)
+    {
+      //Capturamos el Frame Buffer antes de los efectos de post render
+      m_pSceneEffectManager->CaptureFrameBuffers(_pRM);
+    }
+    //Efectuamos los efectos de post render
+    m_pSceneEffectManager->PostRender(_pRM);
+    //Capturamos el Frame Buffer después de los efectos de post render
+    m_pSceneEffectManager->CaptureFrameBuffersAfterPostRender(_pRM);
   }
-  //Efectuamos los efectos de post render
-  m_pSceneEffectManager->PostRender(_pRM);
-  //Capturamos el Frame Buffer después de los efectos de post render
-  m_pSceneEffectManager->CaptureFrameBuffersAfterPostRender(_pRM);
 }
