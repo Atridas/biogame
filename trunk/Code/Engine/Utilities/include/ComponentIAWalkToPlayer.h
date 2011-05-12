@@ -27,7 +27,8 @@ public:
 
   bool Init(CGameEntity *_pEntity,
             const string& _szPlayerEntityName,
-            float _fWalkSpeed);
+            float _fWalkSpeed,
+            const string& _szWalkAnimation);
 
   void Update(float _fDeltaTime);
 

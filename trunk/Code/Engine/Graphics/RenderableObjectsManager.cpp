@@ -182,6 +182,20 @@ void CRenderableObjectsManager::AddResource(const string& _szName, CRenderableOb
   m_RenderableObjects.push_back(_pRenderableObject);
 }
 
+void CRenderableObjectsManager::RemoveResource(const string& _szName)
+{
+  TMapResource::iterator l_it = m_Resources.find(_szName);
+  if(l_it == m_Resources.end())
+  {
+    LOGGER->AddNewLog(ELL_WARNING, "Intentant eliminar un recurs inexistent \"%s\"", _szName.c_str());
+  }
+  else
+  {
+    delete l_it->second;
+    m_Resources.erase(l_it);
+  }
+}
+
 bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "CRenderableObjectsManager::Load");
