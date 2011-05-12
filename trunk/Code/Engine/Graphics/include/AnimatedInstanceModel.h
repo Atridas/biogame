@@ -105,6 +105,7 @@ public:
 
   int GetAnimationCount       ();
   CAnimatedCoreModel*       GetAnimatedCoreModel() {return m_pAnimatedCoreModel;};
+  CalModel*       GetAnimatedCalModel() {return m_pCalModel;};
 
   int GetAnimationId          (const std::string &AnimationName) const;
 

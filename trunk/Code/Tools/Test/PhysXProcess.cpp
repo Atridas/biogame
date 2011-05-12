@@ -118,21 +118,28 @@ bool CPhysXProcess::Init()
 
   CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
  
-  CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
-  CalCoreSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetCoreModel()->getCoreSkeleton();
-  vector<CalCoreBone*> l_vBones = l_pSkeleton->getVectorCoreBone();
-  CalVector l_vBonePos;
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  /////CODI PER MOSTRAR LES ESFERES ALS BONES
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
+  //CalCoreSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetCoreModel()->getCoreSkeleton();
+  //vector<CalCoreBone*> l_vBones = l_pSkeleton->getVectorCoreBone();
+  //CalVector l_vBonePos;
 
-  for (size_t i=0;i<l_vBones.size();++i)
-  {
-    //l_vBones[0]->getBoundingData(plane,l_vBonePos);
-    l_vBonePos = l_vBones[i]->getTranslationAbsolute();
-    Vect3f l_vVector = Vect3f(l_vBonePos.x,l_vBonePos.y,l_vBonePos.z);
-    SCollisionInfo l_cInfo;
-    l_cInfo.m_CollisionPoint = l_vVector;
-    l_cInfo.m_Normal = v3fZERO;
-    g_vCollisions.push_back(l_cInfo);
-  }
+  //for (size_t i=0;i<l_vBones.size();++i)
+  //{
+  //  //l_vBones[0]->getBoundingData(plane,l_vBonePos);
+  //  l_vBonePos = l_vBones[i]->getTranslationAbsolute();
+  //  Vect3f l_vVector = Vect3f(l_vBonePos.x,l_vBonePos.y,l_vBonePos.z);
+  //  SCollisionInfo l_cInfo;
+  //  l_cInfo.m_CollisionPoint = l_vVector;
+  //  l_cInfo.m_Normal = v3fZERO;
+  //  g_vCollisions.push_back(l_cInfo);
+  //}
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
   g_pUserDataJoint1 = new CPhysicUserData("Objecte Joint 1");
   g_pUserDataJoint2 = new CPhysicUserData("Objecte Joint 2");
@@ -183,39 +190,34 @@ bool CPhysXProcess::Init()
 
 
   g_pObjectManager = new CGameObjectManager();
-  g_pObjectManager->Load("Data/Levels/PhysX/XML/GameObjects.xml",false);
-  CPhysicActor* l_pLampada = g_pObjectManager->GetResource("Lampada")->GetPhysXActor();
-  CPhysicActor* l_pCable = g_pObjectManager->GetResource("Cable_Lampada")->GetPhysXActor();
-  Vect3f l_vMax = g_pObjectManager->GetResource("Cable_Lampada")->GetRenderableObject()->GetBoundingBox()->GetDimension();
-  Vect3f l_vPos = g_pObjectManager->GetResource("Lampada")->GetRenderableObject()->GetPosition();
-  Vect3f l_vPos2 = g_pObjectManager->GetResource("Cable_Lampada")->GetRenderableObject()->GetPosition();
-  Vect3f l_vPos3 = l_vPos2;
+  g_pObjectManager->Load("Data/Levels/NivellProves/XML/GameObjects.xml",false);
 
-  l_vPos2.y = l_vPos2.y - (l_vMax.y*0.5f); 
-  l_vPos3.y = l_vPos3.y + (l_vMax.y*0.5f); 
+  //CPhysicActor* l_pLampada = g_pObjectManager->GetResource("Lampada")->GetPhysXActor();
+  //CPhysicActor* l_pCable = g_pObjectManager->GetResource("Cable_Lampada")->GetPhysXActor();
+  //Vect3f l_vMax = g_pObjectManager->GetResource("Cable_Lampada")->GetRenderableObject()->GetBoundingBox()->GetDimension();
+  //Vect3f l_vPos = g_pObjectManager->GetResource("Lampada")->GetRenderableObject()->GetPosition();
+  //Vect3f l_vPos2 = g_pObjectManager->GetResource("Cable_Lampada")->GetRenderableObject()->GetPosition();
+  //Vect3f l_vPos3 = l_vPos2;
 
-
-  SCollisionInfo l_SInfo;
-  l_SInfo.m_CollisionPoint = l_vPos2;
-  l_SInfo.m_Normal = Vect3f(0.0f,-1.0f,0.0f);
-  g_vCollisions.push_back(l_SInfo);
-
-  l_SInfo.m_CollisionPoint = l_vPos3;
-  g_vCollisions.push_back(l_SInfo);
+  //l_vPos2.y = l_vPos2.y - (l_vMax.y*0.5f); 
+  //l_vPos3.y = l_vPos3.y + (l_vMax.y*0.5f); 
 
 
-  g_pSphericalJoint->SetInfo(l_vPos2,l_pLampada,l_pCable);
-  g_pSphericalJoint2->SetInfo(l_vPos3,l_pCable);
-  //g_pSphericalJoint2->SetInfo(l_vPos2,l_pLampada);
-  //g_pFixedJoint->SetInfo(l_pCable,l_pLampada);
+  //SCollisionInfo l_SInfo;
+  //l_SInfo.m_CollisionPoint = l_vPos2;
+  //l_SInfo.m_Normal = Vect3f(0.0f,-1.0f,0.0f);
+  //g_vCollisions.push_back(l_SInfo);
+
+  //l_SInfo.m_CollisionPoint = l_vPos3;
+  //g_vCollisions.push_back(l_SInfo);
 
 
-  l_pPhysManager->AddPhysicSphericalJoint(g_pSphericalJoint);
-  l_pPhysManager->AddPhysicSphericalJoint(g_pSphericalJoint2);
-  //l_pPhysManager->AddPhysicFixedJoint(g_pFixedJoint);
-  //l_pPhysManager->AddPhysicRevoluteJoint(g_pRevoluteJoint);
-  
-  
+  //g_pSphericalJoint->SetInfo(l_vPos2,l_pLampada,l_pCable);
+  //g_pSphericalJoint2->SetInfo(l_vPos3,l_pCable);
+
+  //l_pPhysManager->AddPhysicSphericalJoint(g_pSphericalJoint);
+  //l_pPhysManager->AddPhysicSphericalJoint(g_pSphericalJoint2);
+ 
   
  
 
@@ -446,22 +448,32 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
    l_pPhysManager->DebugRender(_pRM);
 
 
-  // g_vCollisions.clear();
-  //CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
-  //CalCoreSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetCoreModel()->getCoreSkeleton();
-  //vector<CalCoreBone*> l_vBones = l_pSkeleton->getVectorCoreBone();
-  //CalVector l_vBonePos;
-
-  //for (size_t i=0;i<l_vBones.size();++i)
-  //{
-  //  //l_vBones[0]->getBoundingData(plane,l_vBonePos);
-  //  l_vBonePos = l_vBones[i]->getTranslationAbsolute();
-  //  Vect3f l_vVector = Vect3f(l_vBonePos.x,l_vBonePos.y,l_vBonePos.z);
-  //  SCollisionInfo l_cInfo;
-  //  l_cInfo.m_CollisionPoint = l_vVector;
-  //  l_cInfo.m_Normal = v3fZERO;
-  //  g_vCollisions.push_back(l_cInfo);
-  //}
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ///CODI PER MOSTRAR LES ESFERES ALS BONES
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
+  CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
+  l_pSkeleton->calculateBoundingBoxes();
+  vector<CalBone*> l_vBones = l_pSkeleton->getVectorBone();
+  CalVector l_vBonePos;
+  CalVector l_vBoneRot;
+  g_vCollisions.clear();
+  for (size_t i=0;i<l_vBones.size();++i)
+  {
+    //l_vBones[0]->getBoundingData(plane,l_vBonePos);
+    //l_vBones[i]->getBoundingBox().plane
+    l_vBonePos = l_vBones[i]->getTranslationAbsolute();
+    l_vBoneRot = l_vBones[i]->getTranslationBoneSpace();
+    Vect3f l_vVector = Vect3f(l_vBonePos.x,l_vBonePos.y,l_vBonePos.z);
+    Vect3f l_vVector2 = Vect3f(l_vBoneRot.x,l_vBoneRot.y,l_vBoneRot.z);
+    SCollisionInfo l_cInfo;
+    l_cInfo.m_CollisionPoint = l_vVector;
+    l_cInfo.m_Normal = l_vVector2.Normalize();
+    g_vCollisions.push_back(l_cInfo);
+  }
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
    RenderImpacts(_pRM);
 
@@ -509,7 +521,14 @@ void CPhysXProcess::RenderImpacts(CRenderManager* _pRM)
       t.SetIdentity();
       t.Translate(g_vCollisions[i].m_CollisionPoint);
       _pRM->SetTransform(t);
-      _pRM->DrawSphere(0.1f,colYELLOW,5);
+      if (i==0)
+      {
+        _pRM->DrawSphere(0.2f,colRED,5);
+      }
+      else
+      {
+        _pRM->DrawSphere(0.1f,colYELLOW,5);
+      }
       _pRM->DrawLine(v3fZERO,g_vCollisions[i].m_Normal*0.5f,colGREEN);
   }
 
