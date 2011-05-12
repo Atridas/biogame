@@ -4,6 +4,8 @@
 #include "Core.h"
 #include "InputManager.h"
 #include "ActionManager.h"
+#include "RenderableAnimatedInstanceModel.h"
+#include "ComponentRenderableObject.h"
 
 bool CComponentPlayerController::Init(CGameEntity *_pEntity)
 {
@@ -28,6 +30,12 @@ bool CComponentPlayerController::Init(CGameEntity *_pEntity,
 
             const string& _szWalk,
             const string& _szRun,
+
+            const string& _szIdleAnimation,
+            const string& _szForwardAnimation,
+            const string& _szBackAnimation,
+            const string& _szLeftAnimation,
+            const string& _szRightAnimation,
   
             float _fWalkSpeed,
             float _fRunSpeed,
@@ -46,6 +54,13 @@ bool CComponentPlayerController::Init(CGameEntity *_pEntity,
   m_pObject3D = dynamic_cast<CComponentObject3D*>(_pEntity->GetComponent(ECT_OBJECT_3D));
   assert(m_pObject3D); //TODO fer missatges d'error més elavorats
 
+  CComponentRenderableObject *l_pComponentRO = dynamic_cast<CComponentRenderableObject*>(_pEntity->GetComponent(ECT_RENDERABLE_OBJECT));
+  assert(l_pComponentRO); //TODO fer missatges d'error més elavorats
+  m_pAnimatedModel = dynamic_cast<CRenderableAnimatedInstanceModel*>(l_pComponentRO->GetRenderableObject());
+  assert(m_pAnimatedModel); //TODO fer missatges d'error més elavorats
+  
+  m_iCurrentAnimation = m_pAnimatedModel->GetAnimatedInstanceModel()->GetAnimationId(_szIdleAnimation);
+  m_pAnimatedModel->GetAnimatedInstanceModel()->BlendCycle(m_iCurrentAnimation,0.f);
 
   m_szMoveForward   = _szMoveForward;
   m_szMoveBack      = _szMoveBack;
@@ -54,6 +69,12 @@ bool CComponentPlayerController::Init(CGameEntity *_pEntity,
   
   m_szRun  = _szRun;
   m_szWalk = _szWalk;
+
+  m_szIdleAnimation    = _szIdleAnimation;
+  m_szForwardAnimation = _szForwardAnimation;
+  m_szBackAnimation    = _szBackAnimation;
+  m_szLeftAnimation    = _szLeftAnimation;
+  m_szRightAnimation   = _szRightAnimation;
 
   m_fSpeed = m_fWalkSpeed  = _fWalkSpeed;
   m_fRunSpeed   = _fRunSpeed;
@@ -101,25 +122,43 @@ void CComponentPlayerController::Update(float _fDeltaTime)
   {
     m_fSpeed = m_fWalkSpeed;
   }
+
+  CAnimatedInstanceModel *l_pAnimatedInstanceModel = m_pAnimatedModel->GetAnimatedInstanceModel();
+  int l_iDesiredAnim = l_pAnimatedInstanceModel->GetAnimationId(m_szIdleAnimation);
   
   if(l_pActionManager->IsActionActive(m_szMoveForward))
   {
     Vect3f l_vDirection(cos(l_fYaw), 0, sin(l_fYaw) );
     m_pMovement->m_vMovement += l_vDirection * (m_fSpeed*_fDeltaTime);
+
+    l_iDesiredAnim = l_pAnimatedInstanceModel->GetAnimationId(m_szForwardAnimation);
   }
   if(l_pActionManager->IsActionActive(m_szMoveBack))
   {
     Vect3f l_vDirection(cos(l_fYaw), 0, sin(l_fYaw) );
     m_pMovement->m_vMovement -= l_vDirection * (m_fSpeed*_fDeltaTime);
+
+    l_iDesiredAnim = l_pAnimatedInstanceModel->GetAnimationId(m_szBackAnimation);
   }
   if(l_pActionManager->IsActionActive(m_szMoveLeft))
   {
     Vect3f l_vLeft(cos(l_fYaw+FLOAT_PI_VALUE/2), 0, sin(l_fYaw+FLOAT_PI_VALUE/2) );
     m_pMovement->m_vMovement += l_vLeft * (m_fSpeed*_fDeltaTime);
+
+    l_iDesiredAnim = l_pAnimatedInstanceModel->GetAnimationId(m_szLeftAnimation);
   }
   if(l_pActionManager->IsActionActive(m_szMoveRight))
   {
     Vect3f l_vLeft(cos(l_fYaw+FLOAT_PI_VALUE/2), 0, sin(l_fYaw+FLOAT_PI_VALUE/2) );
     m_pMovement->m_vMovement -= l_vLeft * (m_fSpeed*_fDeltaTime);
+
+    l_iDesiredAnim = l_pAnimatedInstanceModel->GetAnimationId(m_szRightAnimation);
+  }
+
+  if(l_iDesiredAnim != m_iCurrentAnimation)
+  {
+    l_pAnimatedInstanceModel->ClearCycle(0.3f);
+    l_pAnimatedInstanceModel->BlendCycle(l_iDesiredAnim, 0.3f);
+    m_iCurrentAnimation = l_iDesiredAnim;
   }
 }

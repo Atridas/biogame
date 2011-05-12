@@ -28,6 +28,7 @@ public:
   CRenderableObject* AddAnimatedModel(const string& _szCoreModelName, const string& _szInstanceName);
 
   void AddResource(const string& _szName, CRenderableObject* _pRenderableObject);
+  void RemoveResource(const string& _szName);
   void CleanUp()                        {Release();m_RenderableObjects.clear();m_vMeshes.clear(),m_vAnimatedModels.clear();};
   virtual void Release();
 

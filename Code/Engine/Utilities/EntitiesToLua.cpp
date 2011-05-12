@@ -20,6 +20,7 @@ extern "C"
 #include "ComponentPlayerController.h"
 #include "ComponentPhysXController.h"
 #include "ComponentPhysXBox.h"
+#include "ComponentRenderableObject.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -141,6 +142,12 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponentPhysXBox, CBaseComponent>("ComponentPhysXBox")
       .def("init",                        (bool(CComponentPhysXBox::*)(CGameEntity*,float,float,float,float,float,float,float,int))&CComponentPhysXBox::Init)
       .def("init_with_renderable_object", (bool(CComponentPhysXBox::*)(CGameEntity*,float,int))&CComponentPhysXBox::Init)
+      
+    // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentRenderableObject, CBaseComponent>("ComponentRenderableObject")
+      .def("init",                               &CComponentRenderableObject::Init)
+      .def("init_animated_model",                &CComponentRenderableObject::InitAnimatedModel)
+      .def_readwrite("remove_renderable_object", &CComponentRenderableObject::m_bRemoveRenderableObject)
   
   ];
 }

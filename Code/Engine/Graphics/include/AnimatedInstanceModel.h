@@ -105,6 +105,8 @@ public:
 
   int GetAnimationCount       ();
 
+  int GetAnimationId          (const std::string &AnimationName) const;
+
 private:
   /**
    * Mètode per carregar el VertexBuffer i IndexBuffer.
