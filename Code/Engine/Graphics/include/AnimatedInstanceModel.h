@@ -104,6 +104,7 @@ public:
   int GetCurrentAction        () const              { return m_iCurrentAnimationId; };
 
   int GetAnimationCount       ();
+  CAnimatedCoreModel*       GetAnimatedCoreModel() {return m_pAnimatedCoreModel;};
 
   int GetAnimationId          (const std::string &AnimationName) const;
 
