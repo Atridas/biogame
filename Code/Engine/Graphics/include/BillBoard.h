@@ -22,6 +22,7 @@ private:
 	Vect3f		m_Position;
 	Vect3f		m_PointA, m_PointB, m_PointC, m_PointD;
 	float			m_SizeX, m_SizeY;
+	float		angle;
 	
 	
 };

@@ -26,7 +26,11 @@ public:
                       m_pObjectBot(0),
                       m_pObjectCamera(0),
                       m_fVelocity(0.0f),
-                      m_bRenderLights(false)
+                      m_bRenderLights(false),
+                      B(7.f, 0.f, 1.f),
+                      l_VUp(3.f, 4.f, 5.f),
+                      m_Position(9.f, 2.f, 6.f),
+                      m_vDemoObj(2.f, 2.f,3.f )
                       {};
                       
 
@@ -56,5 +60,18 @@ private:
   bool                  m_bRenderLights;
   float                 m_fPhysxVelocity;
   CBillBoard            m_pBillBoard;
+  Vect3f m_PointA;
+  Vect3f m_PointB;
+  Vect3f m_PointC;
+  Vect3f m_PointD;
+  float angle;
+  Vect3f B;
+  //Vect3f l_VDirection = (1,1,1);
+  Vect3f l_VUp;
+  Vect3f m_Position;
+  Vect3f l_VDirection;
+  Vect3f                m_vDemoObj;
+  float ModAB;
+  Vect3f AB;
 };
 

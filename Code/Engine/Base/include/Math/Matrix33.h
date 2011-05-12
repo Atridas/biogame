@@ -192,6 +192,10 @@ public:
   Matrix33<T>& RotByAngleZ    (const T angleZ);
   Matrix33<T>& RotByAnglesXZ  (const T angleX, const T angleZ);
   Matrix33<T>& RotByAnglesYXZ (const T angleY, const T angleX, const T angleZ);
+
+  Matrix33<T>&  FromAxisAngle(const Vector3<T>& dir, const float angle) ;
+
+
   Matrix33<T>& Scale          (const T escala_x, const T escala_y, const T escala_z);
 
   // (*)

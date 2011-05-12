@@ -16,6 +16,7 @@ CParticle::CParticle()
   m_PointB=(D3DXVECTOR3(0.0f,0.0f,0.0f));
   m_PointC=(D3DXVECTOR3(0.0f,0.0f,0.0f)); 
   m_PointD=(D3DXVECTOR3(0.0f,0.0f,0.0f));
+  m_fAngle    = 0.0f;
 }
 
 void CParticle::Release()
@@ -31,7 +32,8 @@ bool CParticle::Update(float fTimeDelta,CCamera* camera)
 {
 
   m_fAge += fTimeDelta;
-  //m_fAngle += fTimeDelta*5;
+  //m_fAngle += fTimeDelta*20;
+  m_fAngle += 0.01f;
   if (m_fAge >= m_fLifetime )
   {
     //its time to die..
@@ -67,26 +69,27 @@ bool CParticle::Update(float fTimeDelta,CCamera* camera)
   m_vPos.z= m_vPos.z+(m_vDir.z*m_vVel.z*fTimeDelta); 
   m_vVel= m_vVel+m_vGravity*fTimeDelta;
 
-  Vect3f cameraDirection = camera->GetDirection();
-  Vect3f cameraVecUp = camera->GetVecUp();
+  Vect3f l_cameraDirection = camera->GetDirection();
+  Vect3f l_cameraVecUp = camera->GetVecUp();
 
-  D3DXVECTOR3 l_VDirection;
-  D3DXVECTOR3 l_VUp;
-  D3DXVECTOR3 l_VRight;
-  l_VDirection.x = cameraDirection.x;
-  l_VDirection.y = cameraDirection.y;
-  l_VDirection.z = cameraDirection.z;
+ 
+  m_VDirection.x = l_cameraDirection.x;
+  m_VDirection.y = l_cameraDirection.y;
+  m_VDirection.z = l_cameraDirection.z;
+    
+  Mat33f mat;
+  l_cameraVecUp = mat.FromAxisAngle(l_cameraDirection.Normalize(), m_fAngle)* l_cameraVecUp.Normalize();
+  m_VUp.x = l_cameraVecUp.x;
+  m_VUp.y = l_cameraVecUp.y;
+  m_VUp.z = l_cameraVecUp.z;
 
-  l_VUp.x = cameraVecUp.x;
-  l_VUp.y = cameraVecUp.y;
-  l_VUp.z = cameraVecUp.z;
       
-	D3DXVec3Cross(&l_VRight, &l_VUp, &l_VDirection);// producte vectorial ok
+	D3DXVec3Cross(&m_VRight, &m_VUp, &m_VDirection);// producte vectorial ok
       
-  D3DXVec3Normalize(&l_VRight, &l_VRight);
-  m_PointA = m_vPos - (l_VRight*m_fSize*0.5f) - (l_VUp*m_fSize*0.5f);
-	m_PointB = m_vPos + (l_VRight*m_fSize*0.5f) - (l_VUp*m_fSize*0.5f);
-	m_PointC = m_vPos - (l_VRight*m_fSize*0.5f) + (l_VUp*m_fSize*0.5f);
-	m_PointD = m_vPos + (l_VRight*m_fSize*0.5f) + (l_VUp*m_fSize*0.5f);
+  D3DXVec3Normalize(&m_VRight, &m_VRight);
+  m_PointA = m_vPos - (m_VRight*m_fSize*0.5f) - (m_VUp*m_fSize*0.5f);
+	m_PointB = m_vPos + (m_VRight*m_fSize*0.5f) - (m_VUp*m_fSize*0.5f);
+	m_PointC = m_vPos - (m_VRight*m_fSize*0.5f) + (m_VUp*m_fSize*0.5f);
+	m_PointD = m_vPos + (m_VRight*m_fSize*0.5f) + (m_VUp*m_fSize*0.5f);
   return true;
 }
