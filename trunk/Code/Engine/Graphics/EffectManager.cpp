@@ -5,6 +5,7 @@
 #include "DirectionalLight.h"
 #include "SpotLight.h"
 #include "Core.h"
+#include "VertexCalculations.h"
 
 #include "AnimatedCoreModel.h"
 #include <cal3d/cal3d.h>
@@ -18,7 +19,12 @@ void CEffectManager::ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _m
   m_mViewMatrix=_mViewMatrix;
   m_vCameraEye=_vCameraEye;
   
-  m_bViewProjectionMatrixUpdated = m_bWorldViewMatrixUpdated = m_bWorldViewProjectionMatrixUpdated = true;
+  m_bProjectionMatrixUpdated = 
+  m_bViewMatrixUpdated = 
+  m_bCameraEyeUpdated = 
+  m_bViewProjectionMatrixUpdated = 
+  m_bWorldViewMatrixUpdated = 
+  m_bWorldViewProjectionMatrixUpdated = true;
 }
 
 //TODO: UPDATE FORMAT!!!
@@ -62,6 +68,8 @@ bool CEffectManager::Load(const SEffectManagerParams& _params)
   default:
     break;
   }
+
+  CreatePoissonBlur16x2(m_pfPoissonBlurKernel);
 
   return Load(false);
 }
@@ -189,6 +197,11 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     m_pLightsEndRangeAttenuationParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsEndRangeSQ");
     m_pShadowsEnabledParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"ShadowEnabled");
     m_pBonesParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"Bones");
+    m_pTimeParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"Time");
+    m_pGlowActive = l_pD3DEffect->GetParameterBySemantic(NULL,"GlowActive");
+    m_pTextureWidth = l_pD3DEffect->GetParameterBySemantic(NULL,"TextureWidth");
+    m_pTextureHeight = l_pD3DEffect->GetParameterBySemantic(NULL,"TextureHeight");
+    m_pPoissonBlurKernelParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"PoissonBlurKernel");
     m_bSemanticsUpdated = true;
   }
 
@@ -211,6 +224,7 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     BOOL l_aShadowsEnabled[MAX_LIGHTS_BY_SHADER];
 
     memset(l_aLightsEnabled,FALSE,sizeof(BOOL)*MAX_LIGHTS_BY_SHADER);
+    memset(l_aShadowsEnabled,FALSE,sizeof(BOOL)*MAX_LIGHTS_BY_SHADER);
 
     const Vect3f& l_vAmbient = m_pLightManager->GetAmbientLight();
     l_aAmbientLight[0] = l_vAmbient.x;
@@ -235,7 +249,7 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
       l_aLightsEndRangeAttenuation[i] *= l_aLightsEndRangeAttenuation[i];
       l_aLightsPosition[i] = l_pLight->GetPosition();
       l_aLightsColor[i] = l_pLight->GetColor();
-      l_aShadowsEnabled[i] = FALSE;//l_pLight->GetRenderShadows();
+      l_aShadowsEnabled[i] = l_pLight->GetRenderShadows();
 
       if(l_pLight->GetType() == CLight::DIRECTIONAL || l_pLight->GetType() == CLight::SPOT)
       {
@@ -319,12 +333,12 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
 
   if(m_bLightViewMatrixUpdated)
   {
+    D3DXMATRIX  l_ViewToLightProjectionMatrix = m_mViewMatrix.GetD3DXMatrix();
+    D3DXMatrixInverse(&l_ViewToLightProjectionMatrix, NULL, &l_ViewToLightProjectionMatrix);
+    l_ViewToLightProjectionMatrix = l_ViewToLightProjectionMatrix * m_mLightViewMatrix.GetD3DXMatrix();
+    l_ViewToLightProjectionMatrix = l_ViewToLightProjectionMatrix * m_mShadowProjectionMatrix.GetD3DXMatrix();
+    l_pD3DEffect->SetMatrix(m_pViewToLightProjectionMatrixParameter, &l_ViewToLightProjectionMatrix);
     m_bLightViewMatrixUpdated = false;
-  }
-  
-  if(m_bShadowProjectionMatrixUpdated)
-  {
-    m_bShadowProjectionMatrixUpdated = false;
   }
   
   if(m_bCameraEyeUpdated)
@@ -352,6 +366,18 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     m_bWorldViewProjectionMatrixUpdated = false;
   }
   
+  if(m_bTextureWidthHeightUpdated)
+  {
+    l_pD3DEffect->SetInt(m_pTextureWidth,m_iTextureWidth);
+    l_pD3DEffect->SetInt(m_pTextureHeight,m_iTextureHeight);
+    m_bTextureWidthHeightUpdated = false;
+  }
+
+  if(m_bPoissonBlurKernelUpdated)
+  {
+    l_pD3DEffect->SetFloatArray(m_pPoissonBlurKernelParameter, m_pfPoissonBlurKernel, 32);
+    m_bPoissonBlurKernelUpdated = false;
+  }
   
 }
 

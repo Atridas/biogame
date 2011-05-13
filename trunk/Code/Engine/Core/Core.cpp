@@ -97,7 +97,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
 
   m_pRenderableObjectsManager->Load(_InitParams.RenderableObjectsManagerParams.vXMLFiles);
   m_pLightManager->Load(_InitParams.LightsManagerParams.szFile);
-  //m_pSceneEffectManager->Load(_InitParams.SceneEffectParams.szFile);
+  m_pSceneEffectManager->Load(_InitParams.SceneEffectParams.szFile);
   m_pScriptManager->Initialize();
   m_pScriptManager->Load(_InitParams.ScriptManagerParams.szFile);
   m_pLogRender->SetWindowsPos(_InitParams.LogRenderParams.vPosition);

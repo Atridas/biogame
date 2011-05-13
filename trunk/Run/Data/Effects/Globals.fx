@@ -53,13 +53,13 @@ shared bool    g_ShadowEnabled[MAXLIGHTS]     : ShadowEnabled;
 //Other
 shared float3 g_CameraPosition : CameraPosition;
 shared float g_Time : Time;
-float g_GlowActive : GlowActive;
+shared float g_GlowActive : GlowActive;
 
-int g_TextureWidth  : TextureWidth;
-int g_TextureHeight : TextureHeight;
+shared int g_TextureWidth  : TextureWidth;
+shared int g_TextureHeight : TextureHeight;
 
 #define POISON_BLUR_KERNEL_SIZE 16
 
-float2 g_PoissonBlurKernel[POISON_BLUR_KERNEL_SIZE] : PoissonBlurKernel;
+shared float2 g_PoissonBlurKernel[POISON_BLUR_KERNEL_SIZE] : PoissonBlurKernel;
 
 #endif

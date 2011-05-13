@@ -21,23 +21,23 @@ bool CDrawQuadSceneEffect::Init(const CXMLTreeNode& _params)
   m_Color.SetBlue (l_Color.z);
   m_Color.SetAlpha(l_Color.w);
 
-  m_szTechnique = _params.GetPszISOProperty("technique","");
+  m_szEffect = _params.GetPszISOProperty("effect","");
   
   CEffectManager* l_pEffectManager = CORE->GetEffectManager();
-  //m_pTechnique    = l_pEffectManager->GetEffectTechnique(m_szTechnique);
+  m_pEffect    = l_pEffectManager->GetEffect(m_szEffect);
 
-  if(!m_pTechnique)
+  if(!m_pEffect)
   {
-    LOGGER->AddNewLog(ELL_ERROR, "CDrawQuadSceneEffect::Init  Error loading Technique, no technique \"%s\" exists.", m_szTechnique.c_str());
+    LOGGER->AddNewLog(ELL_ERROR, "CDrawQuadSceneEffect::Init  Error loading Technique, no technique \"%s\" exists.", m_szEffect.c_str());
     SetOk(false);
   } else {
     SetOk(true);
   }
 
-  m_pEffectMaterial = new CEffectMaterial();
-  m_pEffectMaterial->Init();
-  m_pEffectMaterial->SetTextureWidth(RENDER_MANAGER->GetScreenWidth());
-  m_pEffectMaterial->SetTextureHeight(RENDER_MANAGER->GetScreenHeight());
+  //m_pEffectMaterial = new CEffectMaterial();
+  //m_pEffectMaterial->Init();
+  m_iWidth = RENDER_MANAGER->GetScreenWidth(); 
+  m_iHeight = RENDER_MANAGER->GetScreenHeight();
 
   if( IsOk() ) 
   {
@@ -56,21 +56,26 @@ void CDrawQuadSceneEffect::PostRender(CRenderManager *_pRM)
     uint32 w = _pRM->GetScreenWidth();
     uint32 h = _pRM->GetScreenHeight();
 
-    m_pTechnique->BeginRender(m_pEffectMaterial);
+    CEffectManager* l_pEffectManager = CORE->GetEffectManager();
+    l_pEffectManager->SetTextureWidthHeight(m_iWidth,m_iHeight);
+
+    l_pEffectManager->LoadShaderData(m_pEffect);
+
     ActivateTextures();
-    LPD3DXEFFECT l_Effect=m_pTechnique->GetEffect()->GetD3DEffect();
-    if(l_Effect!=NULL)
+
+    LPD3DXEFFECT l_pD3DEffect = m_pEffect->GetD3DEffect();
+
+    if(l_pD3DEffect!=NULL)
     {
-      l_Effect->SetTechnique(m_pTechnique->GetD3DTechnique());
       UINT l_NumPasses;
-      l_Effect->Begin(&l_NumPasses, 0);
+      l_pD3DEffect->Begin(&l_NumPasses, 0);
       for (UINT iPass = 0; iPass < l_NumPasses; iPass++)
       {
-        l_Effect->BeginPass(iPass);
+        l_pD3DEffect->BeginPass(iPass);
         _pRM->DrawColoredTexturedQuad2D (posInit,w,h,UPPER_LEFT,m_Color);
-        l_Effect->EndPass();
+        l_pD3DEffect->EndPass();
       }
-      l_Effect->End();
+      l_pD3DEffect->End();
     }
   }
 }
@@ -78,5 +83,5 @@ void CDrawQuadSceneEffect::PostRender(CRenderManager *_pRM)
 void CDrawQuadSceneEffect::Release()
 {
   CSceneEffect::Release();
-  CHECKED_DELETE(m_pEffectMaterial);
+  //CHECKED_DELETE(m_pEffectMaterial);
 }

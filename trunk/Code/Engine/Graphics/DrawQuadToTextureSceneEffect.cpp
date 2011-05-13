@@ -21,14 +21,14 @@ bool CDrawQuadToTextureSceneEffect::Init(const CXMLTreeNode& _params)
   m_Color.SetBlue (l_Color.z);
   m_Color.SetAlpha(l_Color.w);
   
-  string l_szTechnique = _params.GetPszISOProperty("technique","");
+  string l_szEffect = _params.GetPszISOProperty("effect","");
   
   CEffectManager* l_pEffectManager = CORE->GetEffectManager();
-  //m_pTechnique    = l_pEffectManager->GetEffectTechnique(l_szTechnique);
+  m_pEffect = l_pEffectManager->GetEffect(l_szEffect);
 
-  if(!m_pTechnique)
+  if(!m_pEffect)
   {
-    LOGGER->AddNewLog(ELL_ERROR, "CDrawQuadToTextureSceneEffect::Init  No technique \"%s\".", l_szTechnique.c_str());
+    LOGGER->AddNewLog(ELL_ERROR, "CDrawQuadToTextureSceneEffect::Init  No effect \"%s\".", l_szEffect.c_str());
     
     SetOk(false);
   }
@@ -58,26 +58,32 @@ void CDrawQuadToTextureSceneEffect::PreRender(CRenderManager* _pRM, CProcess* _p
 
   //fins aqui codi render to texture
   {
+    CEffectManager* l_pEM = CORE->GetEffectManager();
+
     //aqui dintre, codi drawquad
     Vect2i posInit(0,0);
     uint32 w = m_pTexture->GetWidth();
     uint32 h = m_pTexture->GetHeight();
 
-    m_pTechnique->BeginRender(m_pEffectMaterial);
+    l_pEM->SetTextureWidthHeight(w,h);
+
+    l_pEM->LoadShaderData(m_pEffect);
+    
     ActivateTextures();
-    LPD3DXEFFECT l_Effect=m_pTechnique->GetEffect()->GetD3DEffect();
-    if(l_Effect!=NULL)
+
+    LPD3DXEFFECT l_pD3DEffect = m_pEffect->GetD3DEffect();
+
+    if(l_pD3DEffect != 0)
     {
-      l_Effect->SetTechnique(m_pTechnique->GetD3DTechnique());
       UINT l_NumPasses;
-      l_Effect->Begin(&l_NumPasses, 0);
+      l_pD3DEffect->Begin(&l_NumPasses, 0);
       for (UINT iPass = 0; iPass < l_NumPasses; iPass++)
       {
-        l_Effect->BeginPass(iPass);
+        l_pD3DEffect->BeginPass(iPass);
         _pRM->DrawColoredTexturedQuad2D (posInit,w,h,UPPER_LEFT,m_Color);
-        l_Effect->EndPass();
+        l_pD3DEffect->EndPass();
       }
-      l_Effect->End();
+      l_pD3DEffect->End();
     }
   }
   //a partir d'aqui codi render to texture

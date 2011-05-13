@@ -52,13 +52,13 @@ void CShadowMapRenderToTexture::PreRender(CRenderManager *_pRM, CProcess *_pProc
       l_pEffectManager->SetLightViewMatrix(l_LightViewMatrix);
       m_pTexture->SetAsRenderTarget();
 
+      l_pEffectManager->SetForcedStaticMeshEffect(m_pStaticMeshEffect);
+      l_pEffectManager->SetForcedAnimatedModelEffect(m_pAnimatedModelEffect);
+
       _pRM->BeginRendering();
-
-      //l_pEffectManager->SetStaticMeshTechnique(m_pStaticMeshTechnique);
-      //l_pEffectManager->SetAnimatedModelTechnique(m_pAnimatedModelTechnique);
       _pProc->RenderScene(_pRM);
-
       _pRM->EndRendering();
+
       m_pTexture->UnsetAsRenderTarget();
       //Debemos establecer las matrices de View y de Proyección guardadas previamente en el EffectManager
       //End render shadowMap

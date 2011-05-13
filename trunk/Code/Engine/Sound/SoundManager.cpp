@@ -7,7 +7,7 @@ bool CSoundManager::Init(const string& _szFile)
   if(!BASS_Init(1, 44100, BASS_DEVICE_3D, 0, NULL))
   {
     LOGGER->AddNewLog(ELL_ERROR,"CSoundManager::Init Error al inicialitzar la BASS lib");
-    SetOk(false);
+    SetOk(true);
     return IsOk();
   }
 

@@ -5,7 +5,7 @@
 class CCamera;
 class CSceneEffectManager;
 class CRenderManager;
-class CEffectTechnique;
+class CEffect;
 //-----------------------------------------
 
 /**
@@ -24,7 +24,7 @@ public:
   **/
   CProcess(const string& _szProcessName):
       m_pCamera(0),m_szProcessName(_szProcessName),m_bRenderInfo(true)
-      ,m_pSceneEffectManager(0),m_pStaticMeshTechnique(0), m_pAnimatedTechnique(0)
+      ,m_pSceneEffectManager(0),m_pStaticMeshEffect(0), m_pAnimatedMeshEffect(0)
                                                                           {};
   /**
    * Mètode d'update.
@@ -131,7 +131,8 @@ protected:
   **/
   CSceneEffectManager*  m_pSceneEffectManager;
 
-  CEffectTechnique     *m_pStaticMeshTechnique, *m_pAnimatedTechnique;
+  CEffect *m_pStaticMeshEffect;
+  CEffect *m_pAnimatedMeshEffect;
 
   /**
    * Setter del DebugInfo.

@@ -5,7 +5,7 @@
 #include "RenderTextureSceneEffect.h"
 
 // Forward declarations --------
-class CEffectTechnique;
+class CEffect;
 class CProcess;
 class CRenderManager;
 // -----------------------------
@@ -14,7 +14,7 @@ class CDrawQuadToTextureSceneEffect:
   public CRenderTextureSceneEffect
 {
 public:
-  CDrawQuadToTextureSceneEffect():m_pTechnique(0)
+  CDrawQuadToTextureSceneEffect():m_pEffect(0)
                                   {};
   ~CDrawQuadToTextureSceneEffect() {Done();};
 
@@ -25,7 +25,7 @@ public:
 protected:
   void Release();
 
-  CEffectTechnique* m_pTechnique;
+  CEffect* m_pEffect;
   CColor m_Color;
 };
 
