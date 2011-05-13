@@ -10,6 +10,7 @@ class MKeyValue;
 class CRenderManager;
 class CProcess;
 class CEffectTechnique;
+class CEffect;
 //---------------------------------
 
 class CRenderToTextureSceneEffect :
@@ -17,8 +18,8 @@ class CRenderToTextureSceneEffect :
 {
 public:
   CRenderToTextureSceneEffect():
-                m_pAnimatedModelTechnique(0),
-                m_pStaticMeshTechnique(0)
+                m_pStaticMeshEffect(0),
+                m_pAnimatedModelEffect(0)
                 {};
   ~CRenderToTextureSceneEffect() {Done();};
 
@@ -27,8 +28,8 @@ public:
   void PreRender(CRenderManager* _pRM, CProcess* _pProc);
 
 protected:
-  CEffectTechnique* m_pStaticMeshTechnique;
-  CEffectTechnique* m_pAnimatedModelTechnique;
+  CEffect* m_pStaticMeshEffect;
+  CEffect* m_pAnimatedModelEffect;
 
   void Release();
 };

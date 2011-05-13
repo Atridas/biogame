@@ -5,7 +5,7 @@
 #include "EffectManager.h"
 #include "XML\XMLTreeNode.h"
 #include "Core.h"
-#include "EffectTechnique.h"
+#include "Effect.h"
 #include "Texture.h"
 
 
@@ -16,21 +16,21 @@ bool CRenderToTextureSceneEffect::Init(const CXMLTreeNode& _params)
   if(!CRenderTextureSceneEffect::Init(_params))
     return false;
   
-  string l_szStaticTechnique = _params.GetPszISOProperty("static_mesh_technique","");
-  string l_szAnimatedTechnique = _params.GetPszISOProperty("animated_model_technique","");
+  string l_szStaticEffect = _params.GetPszISOProperty("static_mesh_effect","");
+  string l_szAnimatedEffect = _params.GetPszISOProperty("animated_model_effect","");
   
   CEffectManager* l_pEffectManager = CORE->GetEffectManager();
-  //m_pStaticMeshTechnique    = l_pEffectManager->GetEffectTechnique(l_szStaticTechnique);
-  //m_pAnimatedModelTechnique = l_pEffectManager->GetEffectTechnique(l_szAnimatedTechnique);
+  m_pStaticMeshEffect    = l_pEffectManager->GetEffect(l_szStaticEffect);
+  m_pAnimatedModelEffect = l_pEffectManager->GetEffect(l_szAnimatedEffect);
 
-  if(!m_pStaticMeshTechnique || !m_pAnimatedModelTechnique)
+  if(!m_pStaticMeshEffect || !m_pAnimatedModelEffect)
   {
-    if(!m_pStaticMeshTechnique)
-      LOGGER->AddNewLog(ELL_ERROR, "CRenderToTextureSceneEffect::Init  No technique \"%s\".", l_szStaticTechnique.c_str());
-    if(!m_pAnimatedModelTechnique)
-      LOGGER->AddNewLog(ELL_ERROR, "CRenderToTextureSceneEffect::Init  No technique \"%s\".", l_szAnimatedTechnique.c_str());
+    if(!m_pStaticMeshEffect)
+      LOGGER->AddNewLog(ELL_ERROR, "CRenderToTextureSceneEffect::Init  No technique \"%s\".", l_szStaticEffect.c_str());
+    if(!m_pAnimatedModelEffect)
+      LOGGER->AddNewLog(ELL_ERROR, "CRenderToTextureSceneEffect::Init  No technique \"%s\".", l_szAnimatedEffect.c_str());
 
-    m_pStaticMeshTechnique = m_pAnimatedModelTechnique = 0;
+    m_pStaticMeshEffect = m_pAnimatedModelEffect = 0;
     SetOk(false);
   }
   if( IsOk() ) 
@@ -53,10 +53,10 @@ void CRenderToTextureSceneEffect::PreRender(CRenderManager* _pRM, CProcess* _pPr
   _pRM->SetupMatrices(_pProc->GetCamera());
   m_pTexture->SetAsRenderTarget();
 
-  _pRM->BeginRendering();
+  l_pEffectManager->SetForcedStaticMeshEffect(m_pStaticMeshEffect);
+  l_pEffectManager->SetForcedAnimatedModelEffect(m_pAnimatedModelEffect);
 
-  //l_pEffectManager->SetStaticMeshTechnique(m_pStaticMeshTechnique);
-  //l_pEffectManager->SetAnimatedModelTechnique(m_pAnimatedModelTechnique);
+  _pRM->BeginRendering();
   _pProc->RenderScene(_pRM);
   _pRM->EndRendering();
 

@@ -116,4 +116,13 @@ float4 NoPS() : COLOR {
   return float4(0.0,0.0,0.0,0.0);
 }
 
+//Pixel Shader
+void PixShadow( float2 _Depth : TEXCOORD0, out float4 Color_ : COLOR )
+{
+  //
+  // Depth is z / w
+  //
+  Color_ = _Depth.x / _Depth.y;
+}
+
 #endif

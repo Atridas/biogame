@@ -3,7 +3,7 @@
 
   <pre_render type="shadow_map_render_to_texture" name="shadow_map_scene_effect"
               texture="ShadowMapTexture" width="1024" height="1024"
-              static_mesh_technique="RenderShadowTechnique" animated_model_technique="Cal3DTechniqueShadow"
+              static_mesh_effect="RenderShadowTechnique" animated_model_effect="Cal3DTechniqueShadow"
               light_shadow_cast="Spot01"
               active="true" format_type="R32F"/>
 

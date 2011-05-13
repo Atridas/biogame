@@ -3,7 +3,7 @@
 #include "Core.h"
 #include "TextureManager.h"
 #include "Texture.h"
-#include "EffectMaterial.h"
+//#include "EffectMaterial.h"
 #include "XML/XMLTreeNode.h"
 
 bool CRenderTextureSceneEffect::Init(const CXMLTreeNode& _params)
@@ -60,10 +60,12 @@ bool CRenderTextureSceneEffect::Init(const CXMLTreeNode& _params)
 
   if(IsOk())
   {
-    m_pEffectMaterial = new CEffectMaterial();
-    m_pEffectMaterial->Init();
-    m_pEffectMaterial->SetTextureWidth(l_iWidth);
-    m_pEffectMaterial->SetTextureHeight(l_iHeight);
+    //m_pEffectMaterial = new CEffectMaterial();
+    //m_pEffectMaterial->Init();
+    //m_pEffectMaterial->SetTextureWidth(l_iWidth);
+    //m_pEffectMaterial->SetTextureHeight(l_iHeight);
+    m_iWidth = l_iWidth;
+    m_iHeight = l_iHeight;
   }
 
   if( IsOk() ) 
@@ -95,5 +97,5 @@ void CRenderTextureSceneEffect::CaptureFrameBuffers(CRenderManager* _pRM)
 void CRenderTextureSceneEffect::Release()
 {
   CSceneEffect::Release();
-  CHECKED_DELETE(m_pEffectMaterial);
+  //CHECKED_DELETE(m_pEffectMaterial);
 }

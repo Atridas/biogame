@@ -33,11 +33,13 @@ public:
                     m_vCameraEye(0.0f),
                     m_pCalSkeleton(0),
                     m_pCalHardwareModel(0),
+                    m_iTextureWidth(0),
+                    m_iTextureHeight(0),
                     m_bWorldMatrixUpdated(false),
                     m_bProjectionMatrixUpdated(false),
                     m_bViewMatrixUpdated(false),
                     m_bLightViewMatrixUpdated(false), 
-                    m_bShadowProjectionMatrixUpdated(false),
+                    //m_bShadowProjectionMatrixUpdated(false),
                     m_bViewProjectionMatrixUpdated(false),
                     m_bWorldViewMatrixUpdated(false),
                     m_bWorldViewProjectionMatrixUpdated(false),
@@ -48,6 +50,8 @@ public:
                     m_bSemanticsUpdated(false),
                     m_bLightsUpdated(false),
                     m_bSkeletonUpdated(false),
+                    m_bTextureWidthHeightUpdated(false),
+                    m_bPoissonBlurKernelUpdated(true),
                     m_pWorldMatrixParameter(0),
                     m_pViewMatrixParameter(0),
                     m_pProjectionMatrixParameter(0),
@@ -67,7 +71,12 @@ public:
                     m_pLightsStartRangeAttenuationParameter(0),
                     m_pLightsEndRangeAttenuationParameter(0),
                     m_pShadowsEnabledParameter(0),
-                    m_pBonesParameter(0)
+                    m_pBonesParameter(0),
+                    m_pTimeParameter(0),
+                    m_pGlowActive(0),
+                    m_pTextureWidth(0),
+                    m_pTextureHeight(0), 
+                    m_pPoissonBlurKernelParameter(0)
                     {SetOk(true);};
 
   ~CEffectManager() {Done();};
@@ -76,7 +85,7 @@ public:
   void SetProjectionMatrix(const Mat44f& _mMatrix) { m_mProjectionMatrix = _mMatrix; m_bProjectionMatrixUpdated=m_bViewProjectionMatrixUpdated=m_bWorldViewProjectionMatrixUpdated=m_bViewProjectionUpdated=m_bWorldViewUpdated=m_bWorldViewProjectionUpdated=true;};
   void SetViewMatrix(const Mat44f& _mMatrix) { m_mViewMatrix = _mMatrix; m_bViewMatrixUpdated=m_bViewProjectionMatrixUpdated=m_bWorldViewMatrixUpdated=m_bWorldViewProjectionMatrixUpdated=m_bViewProjectionUpdated=m_bWorldViewProjectionUpdated=true;};
   void SetLightViewMatrix(const Mat44f& _mMatrix) { m_mLightViewMatrix = _mMatrix; m_bLightViewMatrixUpdated=true; };
-  void SetShadowProjectionMatrix(const Mat44f& _mMatrix) { m_mShadowProjectionMatrix = _mMatrix; m_bShadowProjectionMatrixUpdated=true; };
+  void SetShadowProjectionMatrix(const Mat44f& _mMatrix) { m_mShadowProjectionMatrix = _mMatrix; m_bLightViewMatrixUpdated=true; };
   
   void SetCameraEye(const Vect3f& _vCameraEye) { m_vCameraEye = _vCameraEye; m_bCameraEyeUpdated=true; };
 
@@ -110,9 +119,13 @@ public:
 
   void SetSkeleton(CalSkeleton* _pSkeleton, CalHardwareModel* _pCalHardwareModel) {m_pCalSkeleton = _pSkeleton; m_pCalHardwareModel = _pCalHardwareModel; m_bSkeletonUpdated = true;};
 
+  void SetTextureWidthHeight(int _iWidth, int _iHeight) {m_iTextureWidth  = _iWidth; m_iTextureHeight = _iHeight; m_bTextureWidthHeightUpdated = true;};
+
   void ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _mProjectionMatrix, const Vect3f& _vCameraEye);
 
   void Begin(void) {m_bLightsUpdated = true;};
+
+  void LoadShaderData(CEffect* _pEffect);
 
   bool Load(const SEffectManagerParams& _params);
   void Reload();
@@ -123,7 +136,6 @@ protected:
 
 private:
 
-  void LoadShaderData(CEffect* _pEffect);
   bool Load(bool _bReload);
 
   CLightManager* m_pLightManager;
@@ -149,17 +161,24 @@ private:
   Mat44f m_mWorldViewProjectionMatrix;
   Vect3f m_vCameraEye;
   
+  int m_iTextureWidth;
+  int m_iTextureHeight;
+
+  float m_pfPoissonBlurKernel[32];
+
   //Variables actualitzadeds al shader
   bool m_bWorldMatrixUpdated;
   bool m_bProjectionMatrixUpdated;
   bool m_bViewMatrixUpdated;
   bool m_bLightViewMatrixUpdated;
-  bool m_bShadowProjectionMatrixUpdated;
+  //bool m_bShadowProjectionMatrixUpdated;
   bool m_bViewProjectionMatrixUpdated;
   bool m_bWorldViewMatrixUpdated;
   bool m_bWorldViewProjectionMatrixUpdated;
   bool m_bCameraEyeUpdated;
   bool m_bSkeletonUpdated;
+  bool m_bTextureWidthHeightUpdated;
+  bool m_bPoissonBlurKernelUpdated;
 
   //Matrius compostes recalculades
   bool m_bViewProjectionUpdated;
@@ -191,6 +210,12 @@ private:
   D3DXHANDLE m_pShadowsEnabledParameter;
 
   D3DXHANDLE m_pBonesParameter;
+
+  D3DXHANDLE m_pTimeParameter;
+  D3DXHANDLE m_pGlowActive;
+  D3DXHANDLE m_pTextureWidth;
+  D3DXHANDLE m_pTextureHeight; 
+  D3DXHANDLE m_pPoissonBlurKernelParameter;
 
   //bool m_bInverseProjectionUpdated, m_bInverseViewUpdated, m_bInverseWorldUpdated;
   

@@ -19,15 +19,16 @@
     <effect name="AnimatedNormalmap" file="Data/Effects/AnimatedTangentBinormalNormalTexturedEffect.fx" technique="Cal3DNormalMapTechnique" />
     <effect name="AnimatedShowNormals" file="Data/Effects/AnimatedShowNormalsEffect.fx" technique="Cal3dShowNormalsTechnique" />
     
-    <!--<effect name="Noise And Vignetting" file="Data/Effects/NoiseAndVignetting.fx"/>
-    <effect name="Shadows" file="Data/Effects/ShadowTechniques.fx"/>
-    <effect name="Bloom" file="Data/Effects/Bloom.fx"/>
-    <effect name="HDR" file="Data/Effects/HDR.fx"/>
-    <effect name="Glow" file="Data/Effects/Glow.fx"/>
-    <effect name="Blur" file="Data/Effects/Blur.fx"/>
-    <effect name="ZBlur" file="Data/Effects/ZBlur.fx"/>
-    <effect name="Down Samples" file="Data/Effects/Downsampling.fx"/>
-    <effect name="Gas" file="Data/Effects/Gas.fx"/>-->
+    <!--<effect name="Noise And Vignetting" file="Data/Effects/NoiseAndVignetting.fx"/>-->
+    <effect name="Depth" file="Data/Effects/Depth.fx" technique="RenderShadowTechnique" />
+    <effect name="AnimatedDepth" file="Data/Effects/AnimatedDepth.fx" technique="Cal3DTechniqueShadow" />
+    <!--<effect name="Bloom" file="Data/Effects/Bloom.fx"/>-->
+    <!--<effect name="HDR" file="Data/Effects/HDR.fx"/>-->
+    <!--<effect name="Glow" file="Data/Effects/Glow.fx"/>-->
+    <!--<effect name="Blur" file="Data/Effects/Blur.fx"/>-->
+    <!--<effect name="ZBlur" file="Data/Effects/ZBlur.fx"/>-->
+    <!--<effect name="Down Samples" file="Data/Effects/Downsampling.fx"/>-->
+    <!--<effect name="Gas" file="Data/Effects/Gas.fx"/>-->
 
   </effects>
   <default_effects>

@@ -131,12 +131,10 @@ void CViewerProcess::ToggleNormalRendering()
 
   if(m_pViewer->GetNormalRendering())
   {
-    CEffect* l_pStaticMeshEffect = CORE->GetEffectManager()->GetEffect("ShowNormals");
-    CEffect* l_pAnimatedMeshEffect = CORE->GetEffectManager()->GetEffect("AnimatedShowNormals");
-    CORE->GetEffectManager()->SetForcedStaticMeshEffect(l_pStaticMeshEffect);
-    CORE->GetEffectManager()->SetForcedAnimatedModelEffect(l_pAnimatedMeshEffect);
+    m_pStaticMeshEffect = CORE->GetEffectManager()->GetEffect("ShowNormals");
+    m_pAnimatedMeshEffect = CORE->GetEffectManager()->GetEffect("AnimatedShowNormals");
   }else{
-    CORE->GetEffectManager()->SetForcedStaticMeshEffect(0);
-    CORE->GetEffectManager()->SetForcedAnimatedModelEffect(0);
+    m_pStaticMeshEffect = 0;
+    m_pAnimatedMeshEffect = 0;
   }
 }
