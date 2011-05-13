@@ -83,7 +83,7 @@ public:
   
   void SetWorldMatrix(const Mat44f& _mMatrix) { m_mWorldMatrix = _mMatrix; m_bWorldMatrixUpdated=m_bWorldViewMatrixUpdated=m_bWorldViewProjectionMatrixUpdated=m_bWorldViewUpdated=m_bWorldViewProjectionUpdated=true;};
   void SetProjectionMatrix(const Mat44f& _mMatrix) { m_mProjectionMatrix = _mMatrix; m_bProjectionMatrixUpdated=m_bViewProjectionMatrixUpdated=m_bWorldViewProjectionMatrixUpdated=m_bViewProjectionUpdated=m_bWorldViewUpdated=m_bWorldViewProjectionUpdated=true;};
-  void SetViewMatrix(const Mat44f& _mMatrix) { m_mViewMatrix = _mMatrix; m_bViewMatrixUpdated=m_bViewProjectionMatrixUpdated=m_bWorldViewMatrixUpdated=m_bWorldViewProjectionMatrixUpdated=m_bViewProjectionUpdated=m_bWorldViewProjectionUpdated=true;};
+  void SetViewMatrix(const Mat44f& _mMatrix) { m_mViewMatrix = _mMatrix; m_bLightViewMatrixUpdated = m_bViewMatrixUpdated=m_bViewProjectionMatrixUpdated=m_bWorldViewMatrixUpdated=m_bWorldViewProjectionMatrixUpdated=m_bViewProjectionUpdated=m_bWorldViewProjectionUpdated=true;};
   void SetLightViewMatrix(const Mat44f& _mMatrix) { m_mLightViewMatrix = _mMatrix; m_bLightViewMatrixUpdated=true; };
   void SetShadowProjectionMatrix(const Mat44f& _mMatrix) { m_mShadowProjectionMatrix = _mMatrix; m_bLightViewMatrixUpdated=true; };
   
