@@ -92,7 +92,7 @@ void CViewer::Init()
                                                           80.0f,
                                                           10.0f,
                                                           45.0f,
-                                                          true);
+                                                          true );
 
   CSceneEffectManager* l_pSceneEffectManager = CORE->GetSceneEffectManager();
   if(l_pSceneEffectManager)

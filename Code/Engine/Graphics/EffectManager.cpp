@@ -15,16 +15,9 @@
 
 void CEffectManager::ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _mProjectionMatrix, const Vect3f& _vCameraEye)
 {
-  m_mProjectionMatrix=_mProjectionMatrix;
-  m_mViewMatrix=_mViewMatrix;
-  m_vCameraEye=_vCameraEye;
-  
-  m_bProjectionMatrixUpdated = 
-  m_bViewMatrixUpdated = 
-  m_bCameraEyeUpdated = 
-  m_bViewProjectionMatrixUpdated = 
-  m_bWorldViewMatrixUpdated = 
-  m_bWorldViewProjectionMatrixUpdated = true;
+  SetProjectionMatrix(_mProjectionMatrix);
+  SetViewMatrix(_mViewMatrix);
+  SetCameraEye(_vCameraEye);
 }
 
 //TODO: UPDATE FORMAT!!!
