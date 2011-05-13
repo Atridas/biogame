@@ -1,33 +1,74 @@
 -- Escriu a fitxer la informació del material
-function ExportMaterial _material _file _relativePath = 
+function ExportMaterial _object _material _vertexType _file _relativePath = 
 (
 	local l_materialMask = 0
+	local l_numTextures = 0
+	
+	local l_numProperties = 0
+	local l_bump = false
+	local l_bumpPercent = 0
+	local l_parallax = false
+	local l_parallaxHeight = 0
+	
+	--informació del material
 	if _material.diffuseMapEnable == true and _material.diffuseMap != undefined then
 	(
-		l_materialMask = bit.or l_materialMask TEXTURE_TYPE_DIFFUSSE
+		--l_materialMask = bit.or l_materialMask TEXTURE_TYPE_DIFFUSSE
+		l_numTextures = l_numTextures + 1
 	)
 	
 	if _material.bumpMapEnable == true and _material.bumpMap != undefined then
 	(
-		l_materialMask = bit.or l_materialMask TEXTURE_TYPE_NORMALMAP
+		--l_materialMask = bit.or l_materialMask TEXTURE_TYPE_NORMALMAP
+		l_numTextures = l_numTextures + 1
+		l_numProperties = l_numProperties + 1
+		
+		--propietats per a bumpmap
+		l_bump = true
+		l_bumpPercent = getUserProp _object "bump"
+		if l_bumpPercent == undefined or l_bumpPercent < 0 or l_bumpPercent > 1 then
+		(
+			l_bumpPercent = DEFAULT_BUMP_VALUE
+		)
+		
+		--propietats per parallax
+		l_parallaxHeight = getUserProp _object "parallax"
+		if l_parallaxHeight == undefined then
+		(
+			l_parallax = false
+		)else
+		(
+			l_parallax = true
+			l_numProperties = l_numProperties + 1
+			
+			if l_parallaxHeight < 0 or l_parallaxHeight > 1 then
+			(
+				l_bumpPercent = DEFAULT_PARALLAX_VALUE
+			)
+		)
 	)
 	
 	if _material.selfIllumMapEnable == true and _material.selfIllumMap != undefined then
 	(
-		l_materialMask = bit.or l_materialMask TEXTURE_TYPE_LIGHTMAP
+		--l_materialMask = bit.or l_materialMask TEXTURE_TYPE_LIGHTMAP
+		l_numTextures = l_numTextures + 1
 	)
 	
 	if _material.reflectionMapEnable == true and _material.reflectionMap != undefined then
 	(
-		l_materialMask = bit.or l_materialMask TEXTURE_TYPE_ENVIRONMENT
+		--l_materialMask = bit.or l_materialMask TEXTURE_TYPE_ENVIRONMENT
+		l_numTextures = l_numTextures + 1
 	)
 	
 	if _material.filterMapEnable == true and _material.filterMap != undefined then
 	(
-		l_materialMask = bit.or l_materialMask TEXTURE_TYPE_GLOW
+		--l_materialMask = bit.or l_materialMask TEXTURE_TYPE_GLOW
+		l_numTextures = l_numTextures + 1
 	)
 	
-	WriteShort _file l_materialMask #unsigned
+	--volcat a fitxer
+	WriteShort _file _vertexType #unsigned
+	WriteShort _file l_numTextures #unsigned
 	
 	local l_texture
 	
@@ -36,6 +77,9 @@ function ExportMaterial _material _file _relativePath =
 		l_texture = _material.diffuseMap.filename
 		l_texture = filenameFromPath (OpenBitmap l_texture).filename
 		l_texture = _relativePath + l_texture
+		format "	->	DIFFUSE\n"
+		
+		WriteShort _file DIFFUSE_MATERIAL_MASK #unsigned
 		WriteShort _file l_texture.count #unsigned
 		WriteString _file l_texture
 	)
@@ -45,6 +89,9 @@ function ExportMaterial _material _file _relativePath =
 		l_texture = _material.bumpMap.filename
 		l_texture = filenameFromPath (OpenBitmap l_texture).filename
 		l_texture = _relativePath + l_texture
+		format "	->	NORMAL\n"
+		
+		WriteShort _file NORMALMAP_MATERIAL_MASK #unsigned
 		WriteShort _file l_texture.count #unsigned
 		WriteString _file l_texture
 	)
@@ -54,6 +101,9 @@ function ExportMaterial _material _file _relativePath =
 		l_texture = _material.selfIllumMap.filename
 		l_texture = filenameFromPath (OpenBitmap l_texture).filename
 		l_texture = _relativePath + l_texture
+		format "	->	LIGHTMAP\n"
+		
+		WriteShort _file LIGHTMAP_MATERIAL_MASK #unsigned
 		WriteShort _file l_texture.count #unsigned
 		WriteString _file l_texture
 	)
@@ -63,6 +113,9 @@ function ExportMaterial _material _file _relativePath =
 		l_texture = _material.reflectionMap.filename
 		l_texture = filenameFromPath (OpenBitmap l_texture).filename
 		l_texture = _relativePath + l_texture
+		format "	->	SPECULAR\n"
+		
+		WriteShort _file SPECULARMAP_MATERIAL_MASK #unsigned
 		WriteShort _file l_texture.count #unsigned
 		WriteString _file l_texture
 	)
@@ -72,8 +125,29 @@ function ExportMaterial _material _file _relativePath =
 		l_texture = _material.filterMap.filename
 		l_texture = filenameFromPath (OpenBitmap l_texture).filename
 		l_texture = _relativePath + l_texture
+		format "	->	GLOW\n"
+		
+		WriteShort _file GLOW_MATERIAL_MASK #unsigned
 		WriteShort _file l_texture.count #unsigned
 		WriteString _file l_texture
+	)
+	
+	--propietats dels materials	
+	WriteShort _file l_numProperties #unsigned	
+	
+	if l_numProperties != 0 then
+	(
+		if l_bump then
+		(
+			WriteShort _file BUMP_PROPERTY_TYPE #unsigned
+			WriteFloat _file l_bumpPercent			
+		)
+		
+		if l_parallax then
+		(
+			WriteShort _file PARALLAX_PROPERTY_TYPE #unsigned
+			WriteFloat _file l_parallaxHeight
+		)
 	)
 )
 
@@ -182,6 +256,7 @@ function TextureListOne _material =
 		l_texture = (OpenBitmap l_texture).filename
 		append l_paths l_texture
 	)
+	
 	return l_paths
 )
 

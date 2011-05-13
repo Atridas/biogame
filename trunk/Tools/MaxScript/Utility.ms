@@ -2,7 +2,7 @@ fileIn "Config.ms"
 fileIn "XML.ms"
 fileIn "Export.ms"
 
-utility BioUtility "Eon-Utility" width:160 height:549
+utility BioUtility "Eon-Utility" width:160 height:459
 (
 	button buttonPath "Set Path" pos:[8,8] width:144 height:24
 	label labelPath "Marian" pos:[8,52] width:137 height:24
@@ -17,7 +17,6 @@ utility BioUtility "Eon-Utility" width:160 height:549
 	GroupBox grp3 "PhysX" pos:[12,323] width:130 height:119
 	dropdownList DropListPhysX "Type" pos:[29,346] width:95 height:40
 	button ButtonPhysX "Create" pos:[33,404] width:88 height:23
-	button ButtonEntities "Exportar Entitats" pos:[21,460] width:116 height:26
 	-- Control de Paths
   
 	-- Torna el path de Data
@@ -518,75 +517,10 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		
 		return true
 	)
-	
-	function ExportMeshEntities _instances =
-	(
-		local l_pathToFile = getXMLPath() 
-		makeDir l_pathToFile all:true
-		
-		l_pathToFile = l_pathToFile + "GameEntities.xml"
-		
-		local l_file = createfile l_pathToFile
-		local l_header = GetInitTagXML()
-		
-		local l_aux
-		local l_params
-		
-		format "%" l_header to:l_file
-		
-		format "\n" to:l_file
-		
-		format "%" (OpenTagXML "Entities") to:l_file
-		
-		------------------------------------------------------
-		for i=1 to _instances.count do
-		(
-			for j=1 to _instances[i].count do
-			(
-				local l_instance = _instances[i][j]
-				
-				format "\n  %" (OpenTagXML "Entity") to:l_file
-				
-				format "\n    %" (InlineTagXML "Object3D") to:l_file
-				  
-				l_params = #(#("name",l_instance.name))
-				format "\n    %" (InlineTagParamXML "RenderableObject" l_params) to:l_file
-				
-				if (GetUserProp l_instance "physXBox") != undefined then
-				(
-					l_params = #(#("fromRenderableObject","true"),#("density","0"))
-					format "\n    %" (InlineTagParamXML "PhysXBox" l_params) to:l_file
-				)
-				
-				if (GetUserProp l_instance "physXMesh") != undefined then
-				(
-					l_params = #(#("density","0"))
-					format "\n    %" (InlineTagParamXML "PhysXMesh" l_params) to:l_file
-				)
-				
-				format "\n  %" (CloseTagXML "Entity") to:l_file
-			)
-		)
-		-------------------------------------------------------
-		
-		format "\n" to:l_file
-		format "%" (CloseTagXML "Entities") to:l_file
-		
-		format "\n" to:l_file
-		
-		close l_file
-		
-		return true
-	)
 	-- Fi exportadors
 	
 	-- Funcionalitats botons	
 	
-	
-	
-	
-	-- Fi funcionalitats botons
-
 	on BioUtility open do
 	(
 		labelPath.text = g_DefaultPath
@@ -761,6 +695,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		
 		ShowMessage "Fi"
 	)
+	
 	on buttonLight pressed do
 	(
 		local l_lights = #()
@@ -825,45 +760,5 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		)
 	)
 	
-	on ButtonEntities pressed do
-	(
-		
-		local l_cores = #()
-		local l_instances = #()
-		
-		--Check
-		local l_check = true
-		l_check = CheckSceneObjects $*
-			
-		if l_check != true then
-		(
-			ShowError l_check
-			--return false
-		)
-		
-		for i=1 to $*.count do
-		(
-			if IsMesh $*[i] then
-			(
-				--instances és una array d'arrays, on cada una d'aquestes subarrays conté totes les instancies d'un core.
-				--l'índex de l'array on es troben les instancies coincideix amb l'índex de l'array de cores.
-				local l_index = GetCoreIndex l_cores $*[i]
-				
-				if l_index == undefined then
-				(
-					NewInstance l_instances $*[i]
-				) 
-				else
-				(
-					AddInstance l_instances $*[i] l_index
-				)
-	
-			) 
-		)
-		
-		if ExportMeshEntities l_instances then
-		(
-			ShowMessage "Export de les Entities finalitzada\n"
-		)
-	)
+	-- Fi funcionalitats botons
 )
