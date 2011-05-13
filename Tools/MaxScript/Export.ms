@@ -300,7 +300,7 @@ function CheckSceneObjects _objectArray =
 
 function ExportMesh _object0 _filename _relativeTexturePath = 
 (
-	format "Exportant objecte: % com a core %\n" _object0.name (GetCoreName _object0)
+	format "\nExportant objecte: % com a core %\n" _object0.name (GetCoreName _object0)
 	
 	if _object0.material == undefined then
 	(
@@ -373,8 +373,8 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 			local l_vertexType2 = GetVertexType l_material[i]
 			append l_vertexType l_vertexType2
 						
-			l_materialInfo = MATERIAL_INFO_VERTEXTYPE
-			l_materialInfo = bit.or l_materialInfo MATERIAL_INFO_TEXTURETYPE
+			--l_materialInfo = MATERIAL_INFO_VERTEXTYPE
+			--l_materialInfo = bit.or l_materialInfo MATERIAL_INFO_TEXTURETYPE
 			
 			if Member l_objectMaterials i then
 			(
@@ -393,12 +393,12 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 					return false
 				)
 				
-				format "Exportant material: % amb Mat. info % i vèrtex %\n" i l_materialInfo l_vertexType2
+				format "Exportant material: % amb vèrtex %\n" i l_vertexType2
 		
-				WriteShort l_file l_materialInfo #unsigned
+				--WriteShort l_file l_materialInfo #unsigned
 				--tipus de vertex i material en si
-				WriteShort l_file l_vertexType2 #unsigned
-				ExportMaterial l_material[i] l_file _relativeTexturePath
+				--WriteShort l_file l_vertexType2 #unsigned
+				ExportMaterial _object l_material[i] l_vertexType2 l_file _relativeTexturePath
 			)
 		)
 	)
@@ -425,14 +425,14 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 			return false
 		)
 		
-		l_materialInfo = MATERIAL_INFO_VERTEXTYPE
-		l_materialInfo = bit.or l_materialInfo MATERIAL_INFO_TEXTURETYPE
-		format "Unimaterial amb Mat. info % i vèrtex %\n" l_materialInfo l_vertexType2
+		--l_materialInfo = MATERIAL_INFO_VERTEXTYPE
+		--l_materialInfo = bit.or l_materialInfo MATERIAL_INFO_TEXTURETYPE
+		format "Unimaterial amb vèrtex %\n" l_vertexType2
     
-		WriteShort l_file l_materialInfo #unsigned
+		--WriteShort l_file l_materialInfo #unsigned
 		--tipus de vertex i material en si
-		WriteShort l_file l_vertexType2 #unsigned
-		ExportMaterial l_material l_file _relativeTexturePath
+		--WriteShort l_file l_vertexType2 #unsigned
+		ExportMaterial _object l_material l_vertexType2 l_file _relativeTexturePath
 	)
   
 	local l_VertexList =#()
@@ -443,7 +443,7 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 	if classof l_material == Standardmaterial then
 	(
 		format "Exportant material simple\n"
-		WriteVertexs l_file l_VertexList[1] l_vertexType[1] 
+		WriteVertexs l_file l_VertexList[1] l_vertexType[1]
 		WriteIndexs l_file l_IndexList[1]
 	)else
 	(
