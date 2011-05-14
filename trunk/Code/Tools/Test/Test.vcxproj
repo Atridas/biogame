@@ -45,6 +45,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="..\..\..\Run\Data\XML\init_test_physx.xml" />
+    <None Include="..\..\..\Run\Data\XML\Particles.xml" />
     <None Include="..\..\..\Run\Data\XML\SceneEffects_Test.xml">
       <SubType>Designer</SubType>
     </None>

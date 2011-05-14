@@ -36,7 +36,7 @@
 bool CParticleProcess::Init()
 {
 
-  m_pBillBoard.SetPos( Vect3f(-8.f, 1.f, -5.f));
+  m_pBillBoard.SetPos( Vect3f(-8.f, 3.f, 2.f));
   m_pBillBoard.SetSize( 5.f, 5.f);
   
   m_pObject = new CObject3D();
@@ -88,57 +88,10 @@ void CParticleProcess::Release()
 
 void CParticleProcess::Update(float _fElapsedTime)
 {
-  /*Vect3f B=(7, 0, 1);
-  //Vect3f l_VDirection = (1,1,1);
-  Vect3f l_VUp = (3, 4, 5);   //P
-  Vect3f m_Position= (9, 2, 6); //A*/
-  AB= B - m_Position;
-  ModAB= sqrt((AB.x*AB.x)+(AB.y*AB.y)+(AB.z*AB.z));
-  l_VDirection= AB/ModAB;
-  
-  //float l_VDirection = 0.382683432;//n
-  	// A ->centre de la particula     m_Position
-	// n-> direction                  l_VDirection
-	// P-> up                         l_VUp
-
-	//P' = A + [n·(ESCALAR)(P - A)]*(VECTORIAL)n + 
-  //     cos(theta)*[(P - A) - [n·(P - A)]*n] +
-  //     - sin(theta)*[n cross (P - A)]
-  
-  //P-A
-  Vect3f P_A;
-  P_A= l_VUp - m_Position;
-
-  // n·(P-A) -> nP_A
-  Vect3f nP_A;
-  nP_A = l_VDirection * P_A;
-
-  // n·(P-A)*n -> nP_An
-  Vect3f nP_An;
-  nP_An= nP_A^l_VDirection;
-
-  //[(P - A) - [n·(P - A)]*n]  -> PA_nP_An
-  Vect3f PA_nP_An;
-  PA_nP_An = P_A - nP_An;
-  // n cross (P - A)
-  Vect3f nCrossP_A;
-  nCrossP_A= l_VDirection*P_A;
-
-  angle=angle*_fElapsedTime*(float)0.001;
-  
-
-  l_VUp = m_Position + PA_nP_An + cos(angle)^PA_nP_An - sin(angle)^nCrossP_A;
-
- 
- 
-	//Vect3f l_VRight = l_VDirection^l_VUp; // producte vectorial
- 
-  //******************************************************************************************************
-
-  if(m_pObject)// && m_pObjectBot) 
+   if(m_pObject)// && m_pObjectBot) 
   {
 
-    m_pBillBoard.Update(m_pObjectCamera);
+    m_pBillBoard.Update(_fElapsedTime,m_pObjectCamera);
     CORE->GetParticleManager()->Update(_fElapsedTime,m_pObjectCamera);
     //Actualitze el pitch i el yaw segons els delta del mouse
     float l_fPitch, l_fYaw;
@@ -200,7 +153,7 @@ void CParticleProcess::RenderScene(CRenderManager* _pRM)
   _pRM->DrawGrid(30.0f,colCYAN,30,30);
   //_pRM->DrawPlane(10,Vect3f(0,1,0),0,colBLUE,10,10);
   CORE->GetParticleManager()->Render(_pRM);
-  CTexture*  texture = CORE->GetTextureManager()->GetDefualtTexture();
+  CTexture*  texture = CORE->GetTextureManager()->GetResource("Data/Textures/texturas particulas/explosprite.dds");
   m_pBillBoard.Render(_pRM->GetDevice(), texture->GetD3DTexture() );
   
    

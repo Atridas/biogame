@@ -77,5 +77,6 @@ private:
   D3DXVECTOR3       m_VUp;
   D3DXVECTOR3       m_VRight;
   
+  
 };
 #endif
