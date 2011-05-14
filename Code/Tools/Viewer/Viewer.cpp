@@ -111,7 +111,7 @@ void CViewer::Init()
 
   m_iMode = FREE_MODE;
 
-  SOUND_MANAGER->PlayMusic("bgm",true);
+  //SOUND_MANAGER->PlayMusic("bgm",true);
 
   m_vMouseDelta = 0;
 
@@ -166,7 +166,6 @@ void CViewer::InitFreeMode()
 {
   m_fVelocity = 5.0f;
 
-  CORE->GetLightManager()->SetLightsEnabled(m_bEnableLights);
   CORE->GetRenderableObjectsManager()->SetAllVisibility(true);
 
   if(m_pCharacter)
@@ -182,10 +181,18 @@ void CViewer::InitFreeMode()
 
   ((CThPSCamera*)m_pObjectCamera)->SetZoom(2.5f);
 
+  CORE->GetLightManager()->SetLightsEnabled(true);
+
   if(m_pObjectModeLight)
   {
     m_pObjectModeLight->SetActive(false);
   }
+
+  if(m_pSpotLight)
+  {
+    m_pSpotLight->SetActive(m_bEnableLights);
+  }
+
 
   CORE->GetLightManager()->SetAmbientLight(m_vAmbientLight);
 
@@ -252,7 +259,12 @@ void CViewer::ProcessFreeMode(const float _fElapsedTime)
   }
 
   CORE->GetLightManager()->SetAmbientLight(m_vAmbientLight);
-  CORE->GetLightManager()->SetLightsEnabled(m_bEnableLights);
+  
+  //CORE->GetLightManager()->SetLightsEnabled(m_bEnableLights);
+  if(m_pSpotLight)
+  {
+    m_pSpotLight->SetActive(m_bEnableLights);
+  }
 
   if(!CORE->GetActionManager()->IsActionActive("Run"))
   {
