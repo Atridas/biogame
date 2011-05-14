@@ -60,7 +60,7 @@ void CBillBoard::Update(float fTimeDelta,CCamera *camera)
 	m_PointB = m_Position + (l_VRight*m_SizeX*0.5f) - (l_VUp*m_SizeY*0.5f);
 	m_PointC = m_Position - (l_VRight*m_SizeX*0.5f) + (l_VUp*m_SizeY*0.5f);
 	m_PointD = m_Position + (l_VRight*m_SizeX*0.5f) + (l_VUp*m_SizeY*0.5f);
-
+  
   //*******************************************
   
       m_fIncrementV = /*(float)m_pTexParticle->GetHeight()*/ 256.f/m_iTexNumFiles;
@@ -93,6 +93,7 @@ void CBillBoard::Update(float fTimeDelta,CCamera *camera)
       m_iNumDiapo++;
       m_fTimeAnimationActual=0;
     }
+
 
     if(m_iNumDiapo>m_iTotalDiapos)
     {
@@ -128,6 +129,7 @@ void CBillBoard::Update(float fTimeDelta,CCamera *camera)
    
     m_fDU = m_fBU;
     m_fDV = m_fCV;
+
  
 }
 
