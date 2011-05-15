@@ -202,6 +202,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 	for i = 1 to numFaces do
 	(
 		local UV2
+		local IdxsMap2
 		local face = GetFace _Obj i
 		local IdxsMap = meshop.getMapFace _Obj 1 i
 		local l_FaceNormal = GetFaceNormal _Obj i
@@ -220,6 +221,11 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
 			l_materialID = 1
 			l_Color = CreateColorLong _Obj.material.diffuse
 		)
+		
+		if bit.and _VertexType[l_materialID] VERTEX_TYPE_TEXTURE2 != 0 then
+		(
+			IdxsMap2 = meshop.getMapFace _Obj 2 i
+		)
 
 		-- vertex 1
 		local pos =  GetVert _Obj face.x
@@ -231,7 +237,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
     
 		if bit.and _VertexType[l_materialID] VERTEX_TYPE_TEXTURE2 != 0 then
 		(
-			TUV2 = meshop.getMapVert _Obj 2 IdxsMap.x
+			TUV2 = meshop.getMapVert _Obj 2 IdxsMap2.x
 			TUV2 = ChangeUVCoords TUV2
 		)
 		local l_Normal = UABGetVertexNormal _Obj face.x l_SmoothValue l_FaceNormal
@@ -251,7 +257,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
     
 		if bit.and _VertexType[l_materialID] VERTEX_TYPE_TEXTURE2 != 0 then
 		(
-			TUV2 = meshop.getMapVert _Obj 2 IdxsMap.y
+			TUV2 = meshop.getMapVert _Obj 2 IdxsMap2.y
 			TUV2 = ChangeUVCoords TUV2
 		)
 		local l_Normal = UABGetVertexNormal _Obj face.y l_SmoothValue l_FaceNormal
@@ -271,7 +277,7 @@ function VertexList _Obj _VertexType _numMaterials VertexList_ IndexList_ =
     
 		if bit.and _VertexType[l_materialID] VERTEX_TYPE_TEXTURE2 != 0 then
 		(
-			TUV2 =  meshop.getMapVert _Obj 2 IdxsMap.z
+			TUV2 =  meshop.getMapVert _Obj 2 IdxsMap2.z
 			TUV2 = ChangeUVCoords TUV2
 		)
 		local l_Normal = UABGetVertexNormal _Obj face.z l_SmoothValue l_FaceNormal
