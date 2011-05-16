@@ -19,6 +19,9 @@
     <Filter Include="PhysicMaterial">
       <UniqueIdentifier>{cf07d87f-2df9-45be-bae7-522cab4ca4e8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ragdolls">
+      <UniqueIdentifier>{b15b9386-703f-49d2-b5db-63ac317ba0d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PhysicSphericalJoint.cpp">
@@ -58,6 +61,9 @@
     <ClCompile Include="PhysicMaterial.cpp">
       <Filter>PhysicMaterial</Filter>
     </ClCompile>
+    <ClCompile Include="PhysxRagdoll.cpp">
+      <Filter>Ragdolls</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\PhysicSphericalJoint.h">
@@ -96,6 +102,9 @@
     </ClInclude>
     <ClInclude Include="include\PhysicMaterial.h">
       <Filter>PhysicMaterial</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PhysxRagdoll.h">
+      <Filter>Ragdolls</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

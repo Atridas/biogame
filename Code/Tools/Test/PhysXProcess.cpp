@@ -33,6 +33,7 @@
 #include "GameObjectManager.h"
 #include "PhysicCookingMesh.h"
 #include "ActionManager.h"
+#include "PhysxRagdoll.h"
 #include <cal3d/cal3d.h>
 //---PhysX Includes---//
 #undef min
@@ -86,6 +87,9 @@ CPhysicSphericalJoint* g_pSphericalJoint2;
 
 //MANAGER DE GAMEOBJECTS
 CGameObjectManager* g_pObjectManager = 0;
+
+//RAGDOLLS
+CPhysxRagdoll* g_pRagdoll = 0;
 
 bool CPhysXProcess::Init()
 {
@@ -264,6 +268,18 @@ bool CPhysXProcess::Init()
   CORE->GetLightManager()->SetLightsEnabled(true);
   l_pPhysManager->SetDebugRenderMode(true);
 
+  /////////////////////////////////////////////////////////////////////////////////
+  //// RAGDOLL PROVES
+  /////////////////////////////////////////////////////////////////////////////////
+
+  //g_pRagdoll = new CPhysxRagdoll("Ragdoll Prova");
+  //g_pRagdoll->Load("Data/Animated Models/Riggle/Ragdoll.xml",false);
+
+
+  /////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////
+
   SetOk(true);
   return IsOk();
 
@@ -334,6 +350,8 @@ void CPhysXProcess::Release()
   CHECKED_DELETE(g_pRevoluteJoint);
   CHECKED_DELETE(g_pSphericalJoint);
   CHECKED_DELETE(g_pSphericalJoint2);
+
+  CHECKED_DELETE(g_pRagdoll);
 
   g_vCollisions.clear();
 
@@ -482,26 +500,26 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   ///CODI PER MOSTRAR LES ESFERES ALS BONES
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
-  //CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
-  //l_pSkeleton->calculateBoundingBoxes();
-  //vector<CalBone*> l_vBones = l_pSkeleton->getVectorBone();
-  //CalVector l_vBonePos;
-  //CalVector l_vBoneRot;
-  //g_vCollisions.clear();
-  //for (size_t i=0;i<l_vBones.size();++i)
-  //{
-  //  //l_vBones[0]->getBoundingData(plane,l_vBonePos);
-  //  //l_vBones[i]->getBoundingBox().plane
-  //  l_vBonePos = l_vBones[i]->getTranslationAbsolute();
-  //  l_vBoneRot = l_vBones[i]->getTranslationBoneSpace();
-  //  Vect3f l_vVector = Vect3f(l_vBonePos.x,l_vBonePos.y,l_vBonePos.z);
-  //  Vect3f l_vVector2 = Vect3f(l_vBoneRot.x,l_vBoneRot.y,l_vBoneRot.z);
-  //  SCollisionInfo l_cInfo;
-  //  l_cInfo.m_CollisionPoint = l_vVector;
-  //  l_cInfo.m_Normal = l_vVector2.Normalize();
-  //  g_vCollisions.push_back(l_cInfo);
-  //}
+  CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
+  CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
+  l_pSkeleton->calculateBoundingBoxes();
+  vector<CalBone*> l_vBones = l_pSkeleton->getVectorBone();
+  CalVector l_vBonePos;
+  CalVector l_vBoneRot;
+  g_vCollisions.clear();
+  for (size_t i=0;i<l_vBones.size();++i)
+  {
+    //l_vBones[0]->getBoundingData(plane,l_vBonePos);
+    //l_vBones[i]->getBoundingBox().plane
+    l_vBonePos = l_vBones[i]->getTranslationAbsolute();
+    l_vBoneRot = l_vBones[i]->getTranslationBoneSpace();
+    Vect3f l_vVector = Vect3f(l_vBonePos.x,l_vBonePos.y,l_vBonePos.z);
+    //Vect3f l_vVector2 = Vect3f(l_vBoneRot.x,l_vBoneRot.y,l_vBoneRot.z);
+    SCollisionInfo l_cInfo;
+    l_cInfo.m_CollisionPoint = l_vVector;
+    l_cInfo.m_Normal = v3fZERO;
+    g_vCollisions.push_back(l_cInfo);
+  }
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -552,14 +570,14 @@ void CPhysXProcess::RenderImpacts(CRenderManager* _pRM)
       t.SetIdentity();
       t.Translate(g_vCollisions[i].m_CollisionPoint);
       _pRM->SetTransform(t);
-      if (i==0)
-      {
-        _pRM->DrawSphere(0.2f,colRED,5);
-      }
-      else
-      {
+      //if (i==0)
+      //{
+        //_pRM->DrawSphere(0.2f,colRED,5);
+      //}
+      //else
+      //{
         _pRM->DrawSphere(0.1f,colYELLOW,5);
-      }
+      //}
       _pRM->DrawLine(v3fZERO,g_vCollisions[i].m_Normal*0.5f,colGREEN);
   }
 
@@ -793,6 +811,24 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     ////m_pCamera->GetDirection();
     //l_pPActorShoot->SetLinearVelocity(m_pCamera->GetDirection()*m_fPhysxVelocity);
     //CHECKED_DELETE(l_pPActorShoot)
+
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // RAGDOLL PROVES
+    ///////////////////////////////////////////////////////////////////////////////
+
+    CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
+    CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
+    l_pSkeleton->calculateBoundingBoxes();
+
+    g_pRagdoll = new CPhysxRagdoll("Ragdoll Prova");
+    g_pRagdoll->Load("Data/Animated Models/Riggle/Ragdoll.xml",false);
+    g_pRagdoll->Init(l_pSkeleton);
+
+    ///////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////
+
   }
 
   if(strcmp(_pcAction, "VelocityChange") == 0)

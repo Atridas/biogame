@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Process.h"
+
 #include <base.h>
 
 //Forward declarations---------------------
