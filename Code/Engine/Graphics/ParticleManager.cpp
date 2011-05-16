@@ -98,6 +98,7 @@ bool CParticleManager::Load(const string& _szFileName)
         l_pInfo->m_vGravity = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
         l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Velocitate",Vect3f(3.0f));
         l_pInfo->m_vVel = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
+        l_pInfo->m_bAnimated = l_treeParticleEmitter.GetBoolProperty("Animated");
         
 			  
 
@@ -140,8 +141,44 @@ bool CParticleManager::Load(const string& _szFileName)
             //m_vParticleEvent.push_back(l_pEvent);
           }
         }
+        //*******************
+        CXMLTreeNode l_treeParticleEmittersAnimateds = l_treeParticleEmitter["Animateds"];
 
-          CXMLTreeNode l_treeParticleEmittersDiredtions = l_treeParticleEmitter["Directions"];
+        if(l_treeParticleEmittersAnimateds.Exists())
+        {
+          int l_iNumChildren = l_treeParticleEmittersAnimateds.GetNumChildren();
+
+          LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmittersAnimated.", l_iNumChildren);
+
+          for(int i = 0; i < l_iNumChildren; i++)
+          {
+            //SParticleEvent l_Event;
+            CXMLTreeNode l_treeParticleEmittersAnimated = l_treeParticleEmittersAnimateds(i);
+            if(l_treeParticleEmittersAnimated.IsComment())
+				    continue;
+
+            //SParticleEvent l_Event;
+
+            l_Event.m_fTime = l_treeParticleEmittersAnimated.GetFloatProperty("time");
+
+          /*  NumFiles="4"    NumColumnes="4"   TimeDiapo="0.05"
+            
+			
+			      l_vVec3 = l_treeParticleEmittersDirection.GetVect3fProperty("Direction1",Vect3f(3.0f));
+            l_Event.m_vSpawnDir1 = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
+			      l_vVec3 = l_treeParticleEmittersDirection.GetVect3fProperty("Direction2",Vect3f(3.0f));
+            l_Event.m_vSpawnDir2 = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
+
+
+            l_pInfo->m_vTimeDirection.push_back(l_Event.m_fTime);
+            l_pInfo->m_vDirection.push_back(l_Event.m_vSpawnDir1);
+            l_pInfo->m_vDirection.push_back(l_Event.m_vSpawnDir2);
+            */
+
+          }
+        }
+        //************
+        CXMLTreeNode l_treeParticleEmittersDiredtions = l_treeParticleEmitter["Directions"];
 
         if(l_treeParticleEmittersDiredtions.Exists())
         {
@@ -195,11 +232,20 @@ bool CParticleManager::Load(const string& _szFileName)
 				  continue;
       
         
-			  CParticleEmitter* l_pParticleEmitter = new CParticleEmitter();
-			  
 			  string l_szType = l_treeInstanceParticle.GetPszProperty("type","");
-        // s'ha de fer que la Id de la SInfo correspongui amb el type de la instancia
+
 			  SParticleInfo* l_pInfo = GetResource(l_szType);
+
+			  //if(l_pInfo->m_bAnimated == false)
+			  //{
+				CParticleEmitter* l_pParticleEmitter = new CParticleEmitter();
+			  //}else{
+				//CParticleEmitter* l_pParticleEmitter = new CAnimatedParticleEmitter(); //CParticleEmitter::Update(...);
+			  //}
+			  
+			  
+        // s'ha de fer que la Id de la SInfo correspongui amb el type de la instancia
+			  
 
         if(!l_pInfo)
         {

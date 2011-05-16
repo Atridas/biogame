@@ -31,9 +31,13 @@ struct SParticleInfo
   vector<D3DXVECTOR3>   m_vDirection;
   vector<float>         m_vTimeDirection;
   D3DXVECTOR3           m_vVel; 
-  D3DXVECTOR3           m_vGravity; 
+  D3DXVECTOR3           m_vGravity;
+  bool                  m_bAnimated;
+  int                   m_iTexNumFiles;
+  int                   m_iTexNumColumnes;
+  float                 m_fTimeAnimationDiapo;
+  vector<int>           m_vFilesColumnes;//guarda el numero de files i de columnes que conte la textura animada
   
-
 };
 
 struct SParticleEvent
@@ -44,6 +48,8 @@ struct SParticleEvent
   D3DXCOLOR             m_Color2;
   D3DXVECTOR3           m_vSpawnDir1;
   D3DXVECTOR3           m_vSpawnDir2;
+  int                   m_iTexNumFiles;
+  int                   m_iTexNumColumnes;
  
 };
 
