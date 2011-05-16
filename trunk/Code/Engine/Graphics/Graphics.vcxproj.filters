@@ -187,6 +187,9 @@
     <Filter Include="Explosions\ExplosionsManager">
       <UniqueIdentifier>{842fe1c4-9a1c-4016-bd90-e28c474102d5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Particle\AnimatedParticleEmitter">
+      <UniqueIdentifier>{e1eaabaf-ff7f-4db0-b96e-200cce179242}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -314,6 +317,9 @@
     </ClCompile>
     <ClCompile Include="Explosion.cpp">
       <Filter>Explosions</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedParticleEmitter.cpp">
+      <Filter>Particle\AnimatedParticleEmitter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -490,6 +496,9 @@
     </ClInclude>
     <ClInclude Include="include\Explosion.h">
       <Filter>Explosions</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AnimatedParticleEmitter.h">
+      <Filter>Particle\AnimatedParticleEmitter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

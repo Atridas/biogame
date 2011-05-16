@@ -21,7 +21,7 @@ class CParticleEmitter:
 public:
   CParticleEmitter();
   ~CParticleEmitter(){Done(); Release();};
-
+  
   
 
   //  Set
@@ -68,16 +68,14 @@ public:
 
 
 
-  void                    Update              (float fElapsedTime, CCamera* camera);
+  virtual void            Update              (float fElapsedTime, CCamera* camera);
   void                    Init                (CRenderManager* rm);
-  void                    Release             ();
+  virtual void            Release             ();
   void                    Render              (CRenderManager* _pRM);
-  void                    SetAttributes       (SParticleInfo* _info);
+  virtual void            SetAttributes       (SParticleInfo* _info);
 
   
-private:
-
-
+protected:
   string                                    m_szName;
   string                                    m_szId;
   D3DXVECTOR3                               m_vPos;
