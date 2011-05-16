@@ -26,9 +26,7 @@ CBillBoard::CBillBoard()
 	: m_Position(Vect3f(0,0,0))
 	, m_SizeX(2)
 	, m_SizeY(2)
-	,angle(0)
-  ,m_bTextureAnimated(true)
-  ,m_fTimeAnimationDiapo(0.05f)
+	,m_fTimeAnimationDiapo(0.05f)
   ,m_iTexNumFiles(4)
   ,m_iTexNumColumnes(4)
   ,m_fTimeAnimationActual(0)
@@ -50,7 +48,8 @@ void CBillBoard::Update(float fTimeDelta,CCamera *camera)
   Vect3f l_VDirection = camera->GetDirection();
   Vect3f l_VUp = camera->GetVecUp();
   Mat33f mat;
-  l_VUp = mat.FromAxisAngle(l_VDirection.Normalize(), angle)* l_VUp;
+  //per si es vol rotar amb un cert angle
+  //l_VUp = mat.FromAxisAngle(l_VDirection.Normalize(), angle)* l_VUp;
    
  // angle+=0.01f;
   

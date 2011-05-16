@@ -23,18 +23,16 @@ private:
 	Vect3f		m_Position;
 	Vect3f		m_PointA, m_PointB, m_PointC, m_PointD;
 	float			m_SizeX, m_SizeY;
-	float		angle;
-
-  bool              m_bTextureAnimated;
 	CTexture*  m_pTexParticle; 
   int        m_iTexNumFiles;// numero de files que te la texture
   int        m_iTexNumColumnes;// numero de columnes que te la textura
   float      m_fTimeAnimationActual;//temps k porta durant l'animacio
   float      m_fTimeAnimationDiapo;//(akest valor es pasa per el xml)temps que es destina a cada diapositiva
   int        m_iNumDiapo;//numero de diapositiva a la que ens trobem
-  float      m_fIncrementV; 
-  float      m_fIncrementU;
+  float      m_fIncrementV; //alçada de cada diapositiva 
+  float      m_fIncrementU; //amplada de cada diapositiva
   int        m_iTotalDiapos;
+  // cordenades de textura per a cada punt.
   float      m_fAU;
   float      m_fAV;
   float      m_fBU;

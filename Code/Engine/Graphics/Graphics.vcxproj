@@ -103,6 +103,8 @@
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="EffectMaterial.cpp" />
     <ClCompile Include="EffectTechnique.cpp" />
+    <ClCompile Include="Explosion.cpp" />
+    <ClCompile Include="ExplosionsManager.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="FPSCamera.cpp" />
     <ClCompile Include="Frustum.cpp" />
@@ -148,6 +150,8 @@
     <ClInclude Include="include\EffectMaterial.h" />
     <ClInclude Include="include\EffectTechnique.h" />
     <ClInclude Include="include\EmptyMaterial.h" />
+    <ClInclude Include="include\Explosion.h" />
+    <ClInclude Include="include\ExplosionsManager.h" />
     <ClInclude Include="include\FontManager.h" />
     <ClInclude Include="include\FPSCamera.h" />
     <ClInclude Include="include\Frustum.h" />
