@@ -32,6 +32,7 @@
 #include "GameObject.h"
 #include "GameObjectManager.h"
 #include "PhysicCookingMesh.h"
+#include "ActionManager.h"
 #include <cal3d/cal3d.h>
 //---PhysX Includes---//
 #undef min
@@ -438,6 +439,36 @@ void CPhysXProcess::Update(float _fElapsedTime)
 	    }
     }
   }
+  else
+  /*if ((INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_W)) ||
+      (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_S)) ||
+      (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_A)) ||
+      (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_D)))*/
+  {
+    if(g_pCharacter)
+    {
+      //if (CORE->GetActionManager()->IsActionActive("Run"))
+      if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_LSHIFT))
+      {
+	      if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 6)
+	      {
+		      g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+          g_pCharacter->GetAnimatedInstanceModel()->BlendCycle("run",0.3f);
+	      }
+      }
+      else
+      {
+        if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+	      {
+		      g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+          g_pCharacter->GetAnimatedInstanceModel()->BlendCycle("walk",0.3f);
+	      }
+        
+      }
+    }
+
+      
+  }
 
 }
 
@@ -451,26 +482,26 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   ///CODI PER MOSTRAR LES ESFERES ALS BONES
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
-  CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
-  l_pSkeleton->calculateBoundingBoxes();
-  vector<CalBone*> l_vBones = l_pSkeleton->getVectorBone();
-  CalVector l_vBonePos;
-  CalVector l_vBoneRot;
-  g_vCollisions.clear();
-  for (size_t i=0;i<l_vBones.size();++i)
-  {
-    //l_vBones[0]->getBoundingData(plane,l_vBonePos);
-    //l_vBones[i]->getBoundingBox().plane
-    l_vBonePos = l_vBones[i]->getTranslationAbsolute();
-    l_vBoneRot = l_vBones[i]->getTranslationBoneSpace();
-    Vect3f l_vVector = Vect3f(l_vBonePos.x,l_vBonePos.y,l_vBonePos.z);
-    Vect3f l_vVector2 = Vect3f(l_vBoneRot.x,l_vBoneRot.y,l_vBoneRot.z);
-    SCollisionInfo l_cInfo;
-    l_cInfo.m_CollisionPoint = l_vVector;
-    l_cInfo.m_Normal = l_vVector2.Normalize();
-    g_vCollisions.push_back(l_cInfo);
-  }
+  //CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
+  //CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
+  //l_pSkeleton->calculateBoundingBoxes();
+  //vector<CalBone*> l_vBones = l_pSkeleton->getVectorBone();
+  //CalVector l_vBonePos;
+  //CalVector l_vBoneRot;
+  //g_vCollisions.clear();
+  //for (size_t i=0;i<l_vBones.size();++i)
+  //{
+  //  //l_vBones[0]->getBoundingData(plane,l_vBonePos);
+  //  //l_vBones[i]->getBoundingBox().plane
+  //  l_vBonePos = l_vBones[i]->getTranslationAbsolute();
+  //  l_vBoneRot = l_vBones[i]->getTranslationBoneSpace();
+  //  Vect3f l_vVector = Vect3f(l_vBonePos.x,l_vBonePos.y,l_vBonePos.z);
+  //  Vect3f l_vVector2 = Vect3f(l_vBoneRot.x,l_vBoneRot.y,l_vBoneRot.z);
+  //  SCollisionInfo l_cInfo;
+  //  l_cInfo.m_CollisionPoint = l_vVector;
+  //  l_cInfo.m_Normal = l_vVector2.Normalize();
+  //  g_vCollisions.push_back(l_cInfo);
+  //}
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -601,11 +632,11 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     if (g_pCharacter)
     {
       g_pCharacter->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y-ALTURA_TOTAL,l_ControllerPos.z));
-      if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+      /*if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
 	    {
 		    g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
 		    g_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
-	    }
+	    }*/
     }
 
     if(m_iState != 1)
@@ -628,11 +659,11 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     if (g_pCharacter)
     {
       g_pCharacter->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y-ALTURA_TOTAL,l_ControllerPos.z));
-      if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+      /*if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
 	    {
 		    g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
 		    g_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
-	    }
+	    }*/
     }
 
     if(m_iState != 1)
@@ -657,11 +688,11 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     if (g_pCharacter)
     {
       g_pCharacter->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y-ALTURA_TOTAL,l_ControllerPos.z));
-      if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+      /*if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
 	    {
 		    g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
 		    g_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
-	    }
+	    }*/
     }
 
 
@@ -687,11 +718,11 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     if (g_pCharacter)
     {
       g_pCharacter->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y-ALTURA_TOTAL,l_ControllerPos.z));
-      if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+      /*if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
 	    {
 		    g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
 		    g_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
-	    }
+	    }*/
     }
 
     if(m_iState != 1)
