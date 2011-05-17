@@ -87,7 +87,7 @@ void CViewer::Init()
   m_pSpotLight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
                                                           Vect3f(-2.15715f,0.0f,-7.32758f),
                                                           Vect3f(-5.4188f,0.0f,3.75613f),
-                                                          CColor(Vect3f(1.0f,1.0f,1.0f)),
+                                                          CColor(Vect3f(0.7f,0.7f,0.7f)),
                                                           20.0f,
                                                           80.0f,
                                                           10.0f,
@@ -507,7 +507,7 @@ void CViewer::SelectPrevAnimatedModel()
 
 void CViewer::IncrementAmbientLight()
 {
-  m_vAmbientLight += 0.05f;
+  m_vAmbientLight += 0.01f;
   m_vAmbientLight.x = m_vAmbientLight.x > 1.0f? 1.0f : m_vAmbientLight.x;
   m_vAmbientLight.y = m_vAmbientLight.y > 1.0f? 1.0f : m_vAmbientLight.y;
   m_vAmbientLight.z = m_vAmbientLight.z > 1.0f? 1.0f : m_vAmbientLight.z;
@@ -515,7 +515,7 @@ void CViewer::IncrementAmbientLight()
 
 void CViewer::DecrementAmbientLight()
 {
-  m_vAmbientLight -= 0.05f;
+  m_vAmbientLight -= 0.01f;
   m_vAmbientLight.x = m_vAmbientLight.x < 0.0f? 0.0f : m_vAmbientLight.x;
   m_vAmbientLight.y = m_vAmbientLight.y < 0.0f? 0.0f : m_vAmbientLight.y;
   m_vAmbientLight.z = m_vAmbientLight.z < 0.0f? 0.0f : m_vAmbientLight.z;
