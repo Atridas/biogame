@@ -161,7 +161,7 @@ void CEffectManager::Release()
 
   m_pForcedStaticMeshEffect = 0;
   m_pForcedAnimatedModelEffect = 0;
-  CHECKED_RELEASE(m_pEffectPool);
+  //CHECKED_RELEASE(m_pEffectPool);
 }
 
 void CEffectManager::LoadShaderData(CEffect* _pEffect)
@@ -392,9 +392,14 @@ CEffect* CEffectManager::ActivateMaterial(CMaterial* _pMaterial)
     l_pEffect = m_pForcedAnimatedModelEffect;
   }
 
-  if(!l_pEffect)
+  if(!l_pEffect || !l_pEffect->IsOk())
   {
     l_pEffect = GetResource(m_DefaultEffectMap[l_iMaterialType]);
+
+    if(!l_pEffect || !l_pEffect->IsOk())
+    {
+      return NULL;
+    }
 
     float l_fBump = _pMaterial->GetBump();
     float l_fParallax = _pMaterial->GetParallaxHeight();

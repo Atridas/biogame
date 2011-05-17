@@ -28,7 +28,7 @@ sampler LightmapTextureSampler : register(s2) = sampler_state
   AddressV  = WRAP;
 };
 
-sampler EnvironmentTextureSampler : register(s3) = sampler_state
+sampler SpecularTextureSampler : register(s3) = sampler_state
 {
   MipFilter = LINEAR;
   MinFilter = LINEAR;  
@@ -53,6 +53,15 @@ sampler ShadowTextureSampler : register(s5) = sampler_state
   MagFilter = LINEAR;
   AddressU  = CLAMP;
   AddressV  = CLAMP;
+};
+
+sampler EnvironmentTextureSampler : register(s6) = sampler_state
+{
+  MipFilter = LINEAR;
+  MinFilter = LINEAR;  
+  MagFilter = LINEAR;
+  AddressU  = WRAP;
+  AddressV  = WRAP;
 };
 
 #endif

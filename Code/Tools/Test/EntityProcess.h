@@ -9,6 +9,7 @@ class CObject3D;
 class CRenderManager;
 class CPhysicUserData;
 class CPhysicActor;
+class CSpotLight;
 //-----------------------------------------
 
 class CEntityProcess:
@@ -36,4 +37,6 @@ private:
   CGameEntity*          m_pPlayerEntity;
   CPhysicUserData*      m_pUserData;
   CPhysicActor*         m_pPActorPlane;
+
+  CSpotLight*           m_pSpotLight;
 };

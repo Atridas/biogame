@@ -42,8 +42,8 @@ public:
   virtual void Init(CXMLTreeNode& _XMLParams);
   void SetColor(const CColor& _colColor) {m_colColor = _colColor;};
   const CColor& GetColor() const {return m_colColor;};
-  void SetPosition(Vect3f& _vPosition) {m_vPosition = _vPosition;};
-  Vect3f GetPosition() {return m_vPosition;};
+  void SetPosition(const Vect3f& _vPosition) {m_vPosition = _vPosition;};
+  Vect3f GetPosition() const {return m_vPosition;};
   //void SetSpecular(float _fSpecular);
   //float GetSpecular() const;
 
