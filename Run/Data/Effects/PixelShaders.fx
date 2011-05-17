@@ -8,12 +8,12 @@
 float4 LightmapPS(TNORMAL_TEXTURED2_VERTEX_PS _in) : COLOR {
 	float3 l_Normal = normalize(_in.WorldNormal);
 	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
-	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2);
+	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2)+float4(g_AmbientLight,1.0);
 	float4 l_LightResult = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   l_LightmapColor, g_SpotlightFactor,
                                                   _in.PosLight)
                                 ,1.0);
-	return l_LightResult*l_LightmapColor * 2;
+	return l_LightResult;
 }
 
 float4 LightmapNormalmapPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _in) : COLOR {
@@ -22,12 +22,12 @@ float4 LightmapNormalmapPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _in) : C
                                   (float3)_in.WorldNormal, 
                                   _in.UV);
 	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
-	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2);
+	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2)+float4(g_AmbientLight,1.0);
 	float4 l_LightResult = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   l_LightmapColor, g_SpotlightFactor,
                                                   _in.PosLight)
                                 ,1.0);
-	return l_LightResult*l_LightmapColor * 2;
+	return l_LightResult;
 }
 
 float4 ShowNormalsPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
