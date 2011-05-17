@@ -16,6 +16,8 @@
 #include "ComponentPhysXMesh.h"
 #include "ComponentRenderableObject.h"
 #include "LightManager.h"
+#include "SpotLight.h"
+#include "Camera.h"
 
 #include "PhysicActor.h"
 #include <PhysicsManager.h>
@@ -74,29 +76,9 @@ bool CEntityProcess::Init()
   l_pComponentPhysXController->Init(m_pPlayerEntity, 0.3f, 1.5f, 10.0f, 0.1f, 0.5f, 1);
 
 
-
   //Carregar entitats de l'escenari
   LoadEntitiesFromXML("Data/Levels/NivellProves/XML/GameEntities.xml");
 
-  /*
-  // Entitat de l'escenari ----------------------------------------------------------------------
-  CGameEntity* l_peEscenari = CORE->GetEntityManager()->CreateEntity();
-  (new CComponentObject3D())->Init(l_peEscenari);
-  (new CComponentRenderableObject())->Init(l_peEscenari, "Escenari");
-  (new CComponentPhysXMesh())->Init(l_peEscenari, 0, 0);
-
-  //Una paret -------------------------------------------------------------------------
-  CGameEntity* l_peWall = CORE->GetEntityManager()->CreateEntity();
-  (new CComponentObject3D())->Init(l_peWall);
-
-  CComponentRenderableObject* l_pComponentRenderableObject = new CComponentRenderableObject();
-  l_pComponentRenderableObject->Init(l_peWall, "Wall");
-
-  (new CComponentPhysXBox())->Init(l_peWall ,
-                                    1, 0
-                                  );
-
-  */
 
   // un enemic ------------------------------------------------------------------------
   CGameEntity* l_peEnemy = CORE->GetEntityManager()->CreateEntity();
@@ -115,6 +97,21 @@ bool CEntityProcess::Init()
 
   (new CComponentIAWalkToPlayer())->Init(l_peEnemy,"Player",2,"walk");
 
+
+  // llum ----------------------------------------
+  
+  m_pSpotLight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
+                                                          Vect3f(-2.15715f,0.0f,-7.32758f),
+                                                          Vect3f(-5.4188f,0.0f,3.75613f),
+                                                          CColor(Vect3f(1.0f,1.0f,1.0f)),
+                                                          20.0f,
+                                                          80.0f,
+                                                          10.0f,
+                                                          45.0f,
+                                                          false );
+
+  m_pSpotLight->SetActive(true);
+
   SetOk(true);
   return IsOk();
 }
@@ -129,7 +126,10 @@ void CEntityProcess::Release()
 
 void CEntityProcess::Update(float _fElapsedTime)
 {
+  CObject3D* m_pPlayerPos = dynamic_cast<CObject3D*>(CORE->GetEntityManager()->GetEntity("Player")->GetComponent(CBaseComponent::ECT_OBJECT_3D));
 
+  m_pSpotLight->SetPosition(m_pPlayerPos->GetPosition());
+  m_pSpotLight->SetDirection(m_pCamera->GetDirection());
 }
 
 void CEntityProcess::RenderScene(CRenderManager* _pRM)
@@ -137,10 +137,6 @@ void CEntityProcess::RenderScene(CRenderManager* _pRM)
   CORE->GetRenderableObjectsManager()->Render(_pRM);
 
   
-  Mat44f mat;
-  mat.SetIdentity();
-  _pRM->SetTransform(mat);
-  _pRM->DrawGrid(20,colWHITE,20,20);
 }
 
 void CEntityProcess::RenderINFO(CRenderManager* _pRM)

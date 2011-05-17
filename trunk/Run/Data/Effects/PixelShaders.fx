@@ -8,8 +8,11 @@
 float4 LightmapPS(TNORMAL_TEXTURED2_VERTEX_PS _in) : COLOR {
 	float3 l_Normal = normalize(_in.WorldNormal);
 	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
-	float4 l_LightResult = float4(ComputeAllLights(l_Normal, _in.WorldPosition, l_DiffuseColor, _in.PosLight),1.0);
 	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2);
+	float4 l_LightResult = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
+                                                  l_LightmapColor, g_SpotlightFactor,
+                                                  _in.PosLight)
+                                ,1.0);
 	return l_LightResult*l_LightmapColor * 2;
 }
 
@@ -19,8 +22,11 @@ float4 LightmapNormalmapPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _in) : C
                                   (float3)_in.WorldNormal, 
                                   _in.UV);
 	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
-	float4 l_LightResult = float4(ComputeAllLights(l_Normal, _in.WorldPosition, l_DiffuseColor, _in.PosLight),1.0);
 	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2);
+	float4 l_LightResult = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
+                                                  l_LightmapColor, g_SpotlightFactor,
+                                                  _in.PosLight)
+                                ,1.0);
 	return l_LightResult*l_LightmapColor * 2;
 }
 
@@ -59,7 +65,23 @@ float4 NormalTexturedPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
   float3 l_Normal = normalize(_in.WorldNormal);
 
   float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
-  float4 out_ = float4(ComputeAllLights(l_Normal, _in.WorldPosition, l_DiffuseColor,_in.PosLight),1.0);
+  float4 out_ = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
+                                                  g_AmbientLight, g_SpotlightFactor,
+                                                  _in.PosLight)
+                                ,1.0);
+  
+  return out_;
+}
+
+float4 SpecularTexturedPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
+  float3 l_Normal = normalize(_in.WorldNormal);
+
+  float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
+  float4 l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x;
+  float4 out_ = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
+                                                  g_AmbientLight, l_SpotlightFactor,
+                                                  _in.PosLight)
+                                ,1.0);
   
   return out_;
 }
@@ -76,7 +98,10 @@ float4 NormalDiffusedPS(TNORMAL_DIFFUSED_VERTEX_PS _in) : COLOR {
 
   float4 l_DiffuseColor = _in.Color;
 
-  float4 out_ = float4(ComputeAllLights(l_Normal, _in.WorldPosition, l_DiffuseColor,_in.PosLight),1.0);
+  float4 out_ = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
+                                                  g_AmbientLight, g_SpotlightFactor,
+                                                  _in.PosLight)
+                                ,1.0);
   
   return out_;
 }
@@ -88,7 +113,10 @@ float4 TangentBinormalNormalTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_
 	
   float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,l_OUT);
   
-  float4 out_ = float4(ComputeAllLights(l_Normal, _in.WorldPosition, l_DiffuseColor, _in.PosLight),1.0);
+  float4 out_ = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
+                                                  g_AmbientLight, g_SpotlightFactor,
+                                                  _in.PosLight)
+                                ,1.0);
 
   return out_;
 }
@@ -99,7 +127,10 @@ float4 TangentBinormalNormalTexturedNoParallaxPS(TTANGENT_BINORMAL_NORMAL_TEXTUR
 	
   float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
   
-  float4 out_ = float4(ComputeAllLights(l_Normal, _in.WorldPosition, l_DiffuseColor, _in.PosLight),1.0);
+  float4 out_ = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
+                                                  g_AmbientLight, g_SpotlightFactor,
+                                                  _in.PosLight)
+                                ,1.0);
 
   return out_;
 }

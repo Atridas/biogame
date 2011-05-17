@@ -22,7 +22,7 @@
 	<RenderableObject name="HighCover03" class="StaticMesh" resource="Covertura Grossa" position="-31.3156 0.0 -10.6048" yaw="-11.0158" pitch="0.0" roll="0.0" />
 	<RenderableObject name="HighCover04" class="StaticMesh" resource="Covertura Grossa" position="-31.2776 0.0 -8.27065" yaw="9.04182" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Wall" class="StaticMesh" resource="Wall" position="-25.5656 0.0 4.80554" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="BoxAlpha" class="StaticMesh" resource="BoxAlpha" position="-54.6592 0.0376649 -21.1499" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="BoxAlpha" class="StaticMesh" resource="BoxAlpha" position="-57.4588 0.0376649 -18.0876" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="BoxSpecular" class="StaticMesh" resource="BoxSpecular" position="-54.6592 0.0376649 -36.8326" yaw="0.0" pitch="0.0" roll="0.0" />
-  <RenderableObject name="ariggle" class="AnimatedModel" resource="riggle" position="5.1793 0.0 -5.2768" yaw="-90.0" pitch="0.0" roll="0" cycle="walk"/>
+	<RenderableObject name="BoxAlpha01" class="StaticMesh" resource="BoxAlpha01" position="-50.0065 0.0376649 -24.0954" yaw="0.0" pitch="0.0" roll="0.0" />
 </RenderableObjects>

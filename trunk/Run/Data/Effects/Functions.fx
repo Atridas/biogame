@@ -46,9 +46,13 @@ float3 ComputeLight(float3 _Normal,          //Normal of the pixel
 }
 
 // normal & eyeDirection han d'estar normalitzades
-float3 ComputeAllLights(float3 _Normal, float3 _WorldPosition, float3 _DiffuseColor, float4 _PosLight)
+float3 ComputeAllLights(
+                        float3 _Normal, float3 _WorldPosition, float3 _DiffuseColor, 
+                        float3 _AmbientLight, float _SpotlightFactor, 
+                        float4 _PosLight
+                       )
 {
-  float3 out_ = _DiffuseColor * g_AmbientLight;
+  float3 out_ = _DiffuseColor * _AmbientLight;
   float3 l_EyeDirection = normalize(g_CameraPosition - _WorldPosition);
   for(int i = 0; i < MAXLIGHTS; i++)
   {
@@ -118,7 +122,7 @@ float3 ComputeAllLights(float3 _Normal, float3 _WorldPosition, float3 _DiffuseCo
                               g_LightsColor[i] * l_Attenuation, 
                               _DiffuseColor, 
                               g_SpecularPow,
-                              g_SpotlightFactor);
+                              _SpotlightFactor);
       }
     }
   }

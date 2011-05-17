@@ -5,6 +5,7 @@
     <effect name="Diffused" file="Data/Effects/NormalDiffusedEffect.fx" technique="NormalDiffusedTechnique" />
     <effect name="Textured" file="Data/Effects/NormalTexturedEffect.fx" technique="NormalTexturedTechnique" />
     <effect name="Normalmap" file="Data/Effects/TangentBinormalNormalTexturedEffect.fx" technique="TangentBinormalNormalTexturedTechnique" />
+    <effect name="SpecularTextured" file="Data/Effects/SpecularTexturedEffect.fx" technique="SpecularTexturedTechnique" />
     <effect name="ShowNormals" file="Data/Effects/ShowNormalsEffect.fx" technique="ShowNormalsTechnique" />
     <effect name="ShowNormalmap" file="Data/Effects/ShowNormalmapEffect.fx" technique="ShowNormalmapTechnique" />
     <effect name="ShowTangent" file="Data/Effects/ShowTangentEffect.fx" technique="ShowTangentTechnique" />
@@ -15,9 +16,11 @@
     <effect name="LightmapNormalmap" file="Data/Effects/LightmapNormalmapNormalTexturedEffect.fx" technique="LightmapNormalmapTechnique" />
     <effect name="White" file="Data/Effects/WhiteEffect.fx" technique="WhiteTechnique" instanced_technique="WhiteInstancedTechnique" />
     <effect name="No" file="Data/Effects/NoEffect.fx" technique="NoTechnique" />
+    <!-- Animats -->
     <effect name="AnimatedTextured" file="Data/Effects/AnimatedNormalTexturedEffect.fx" technique="Cal3DTechnique" />
     <effect name="AnimatedNormalmap" file="Data/Effects/AnimatedTangentBinormalNormalTexturedEffect.fx" technique="Cal3DNormalMapTechnique" />
     <effect name="AnimatedShowNormals" file="Data/Effects/AnimatedShowNormalsEffect.fx" technique="Cal3dShowNormalsTechnique" />
+    
     
     <!--<effect name="Noise And Vignetting" file="Data/Effects/NoiseAndVignetting.fx"/>-->
     <effect name="Depth" file="Data/Effects/Depth.fx" technique="RenderShadowTechnique" />
@@ -39,6 +42,7 @@
     <default_effect material_type="7" effect="AnimatedNormalmap" />
     <default_effect material_type="10" effect="Lightmap" />
     <default_effect material_type="14" effect="LightmapNormalmap" />
+    <default_effect material_type="18" effect="SpecularTextured" />
   </default_effects>
 
 

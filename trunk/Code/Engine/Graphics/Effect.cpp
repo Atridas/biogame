@@ -118,6 +118,7 @@
 
 bool CEffect::Init(const CXMLTreeNode& _xmlEffect, LPD3DXEFFECTPOOL _pEffectPool)
 {
+  SetOk(true);
   //SetNullParameters();
   string l_szName = _xmlEffect.GetPszISOProperty("name","");
 
@@ -153,7 +154,7 @@ bool CEffect::Init(const CXMLTreeNode& _xmlEffect, LPD3DXEFFECTPOOL _pEffectPool
   m_szInstancedTechniqueName = _xmlEffect.GetPszISOProperty("instanced_technique","");
 
   SetOk(LoadEffect());
-  return true;
+  return IsOk();
 }
 
 bool CEffect::LoadEffect()
