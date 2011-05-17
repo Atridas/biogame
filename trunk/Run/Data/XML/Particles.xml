@@ -2,7 +2,7 @@
 <Particles>
   <ParticleEmitters>
     
-      <ParticleEmitter  id="foc1"                        MinEmitRate="30.0"             MaxEmitRate="30.0"      Animated="true"
+      <ParticleEmitter  id="foc1"                        MinEmitRate="30.0"             MaxEmitRate="30.0"      
                         Color1="0.1 0.5 0.68 0.0"          Color2="0.2 0.6 0.71 0.0"       MinSize="1.0"        MaxSize="1.5"
                         Direction1="-0.2 0.0 -0.2"         Direction2="0.2 0.6 0.2"     Life1="4.0"          Life2="4.5"
                         Gravity="0.0 0.0 0.0"             Velocitate="1.0 1.0 1.0"      TexParticle="Data/Textures/texturas particulas/flameD.dds">
@@ -23,6 +23,8 @@
         <Animateds>
           <Animated     time="0.0"    NumFiles="4"    NumColumnes="4"   TimeDiapo="0.05"
                         TexParticle="Data/Textures/texturas particulas/flameD.dds"/>
+          <Animated     time="0.5"    NumFiles="4"    NumColumnes="4"   TimeDiapo="0.05"
+                        TexParticle="Data/Textures/texturas particulas/explosprite.dds"/>
         </Animateds>
       </ParticleEmitter>
 

@@ -24,9 +24,9 @@ public:
   int               GetNumColumnes          () const {return m_iTexNumColumnes;};
   float             GetTimeAnimationDiapo   () const {return m_fTimeAnimationDiapo;};
 
-  virtual void      Update              (float fElapsedTime, CCamera* camera);
-  virtual void      Release             ();
-  virtual void      SetAttributes       (SParticleInfo* _info);
+  void      Release             ();
+  void      SetAttributes       (SParticleInfo* _info);
+  void      Render              (CRenderManager* _pRM);
 
 private:
   int                 m_iTexNumFiles;// numero de files que te la texture

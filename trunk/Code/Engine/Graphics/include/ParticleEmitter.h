@@ -42,6 +42,8 @@ public:
   void SetActive            (bool _Active)                          {m_bActive = _Active;};
   void SetVel               (D3DXVECTOR3& _vVel)                    {m_vVel = _vVel;};
   void SetGravity           (D3DXVECTOR3& _vGravity)                {m_vGravity = _vGravity;};
+
+
   //void SetAngle             (float _fAngle)                         {m_fAngle = _fAngle;};
   //void SetReload            (bool _bReload)                         {m_bReload = _bReload;};
 
@@ -63,15 +65,17 @@ public:
   const bool                      GetActive           () const {return m_bActive;};
   const D3DXVECTOR3&              GetVel              () const {return m_vVel;};
   const D3DXVECTOR3&              GetGravity          () const {return m_vGravity;};
+  //*********
+
   //float                           GetAngle            () const {return m_fAngle;};
   //bool                            GetReload           () const {return m_bReload;};
 
 
 
-  virtual void            Update              (float fElapsedTime, CCamera* camera);
+  void                    Update              (float fElapsedTime, CCamera* camera);
   void                    Init                (CRenderManager* rm);
   virtual void            Release             ();
-  void                    Render              (CRenderManager* _pRM);
+  virtual void            Render              (CRenderManager* _pRM);
   virtual void            SetAttributes       (SParticleInfo* _info);
 
   
@@ -107,6 +111,9 @@ protected:
   //CRenderManager*                           _pRM;
   float             m_fSizeX;
   float             m_fSizeY;
+  bool                m_bAnimated;
+  vector<int>           m_vFilesColumnes;//guarda el numero de files i de columnes que conte la textura animada
+  vector<float>			    m_vTimeAnimated;//aqui guardem el temps en que pasa el event, i el temps de l'animacio
  /* D3DXVECTOR3		        m_PointA;
   D3DXVECTOR3            m_PointB;
   D3DXVECTOR3            m_PointC; 
