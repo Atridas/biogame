@@ -6,7 +6,7 @@
 #include "PhysicActor.h"
 #include "PhysicController.h"
 #include "PhysicFixedJoint.h"
-
+#include "AnimatedModelManager.h"
 
 
 void CPhysxRagdoll::Release() 
@@ -75,8 +75,13 @@ bool CPhysxRagdoll::Init(CalSkeleton* _pSkeleton)
     int l_iBoneId = _pSkeleton->getCoreSkeleton()->getCoreBoneId(m_vBoneActors[i].m_szBoneName);
 
     CalBone* l_pBone = _pSkeleton->getBone(l_iBoneId);
-    CalVector l_vVectorPos = l_pBone->getTranslationAbsolute();
+    CalVector l_vVectorPos = l_pBone->getTranslationAbsolute(); 
     Vect3f l_vBonePos(l_vVectorPos.x,l_vVectorPos.y,l_vVectorPos.z);
+    //l_pBone->calculateBoundingBox();
+    
+    CalVector l_vPoints[8];
+    l_pBone->getBoundingBox().computePoints(l_vPoints);
+
 
     if (m_vBoneActors[i].m_szType == "Box")
     {
@@ -85,7 +90,22 @@ bool CPhysxRagdoll::Init(CalSkeleton* _pSkeleton)
       l_pUserData->SetColor(colGREEN);
       CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
       l_pActor->AddBoxSphape(m_vBoneActors[i].m_vSize,l_vBonePos,NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
-      //l_pActor->CreateBody(m_vBoneActors[i].m_Density);
+      l_pActor->CreateBody(m_vBoneActors[i].m_Density);
+      l_pPM->AddPhysicActor(l_pActor);
+
+      m_vBoneActors[i].m_pActor = l_pActor;
+      m_vBoneActors[i].m_pUserData = l_pUserData;
+      
+    }
+
+    if (m_vBoneActors[i].m_szType == "Sphere")
+    {
+      CPhysicUserData* l_pUserData = new CPhysicUserData(m_vBoneActors[i].m_pActorName);
+      l_pUserData->SetPaint(true);
+      l_pUserData->SetColor(colYELLOW);
+      CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
+      l_pActor->AddSphereShape(m_vBoneActors[i].m_vSize.x,l_vBonePos,NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
+      l_pActor->CreateBody(m_vBoneActors[i].m_Density);
       l_pPM->AddPhysicActor(l_pActor);
 
       m_vBoneActors[i].m_pActor = l_pActor;
