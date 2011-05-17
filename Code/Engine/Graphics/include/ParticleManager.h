@@ -37,6 +37,8 @@ struct SParticleInfo
   int                   m_iTexNumColumnes;
   float                 m_fTimeAnimationDiapo;
   vector<int>           m_vFilesColumnes;//guarda el numero de files i de columnes que conte la textura animada
+  vector<float>			    m_vTimeAnimated;//aqui guardem el temps en que pasa el event, i el temps de l'animacio
+  
   
 };
 

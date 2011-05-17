@@ -321,6 +321,9 @@
     <ClCompile Include="AnimatedParticleEmitter.cpp">
       <Filter>Particle\AnimatedParticleEmitter</Filter>
     </ClCompile>
+    <ClCompile Include="ParticleAnimated.cpp">
+      <Filter>Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RenderManager.h">
@@ -499,6 +502,9 @@
     </ClInclude>
     <ClInclude Include="include\AnimatedParticleEmitter.h">
       <Filter>Particle\AnimatedParticleEmitter</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ParticleAnimated.h">
+      <Filter>Particle</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

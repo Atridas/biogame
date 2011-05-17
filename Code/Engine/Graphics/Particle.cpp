@@ -17,6 +17,22 @@ CParticle::CParticle()
   m_PointC=(D3DXVECTOR3(0.0f,0.0f,0.0f)); 
   m_PointD=(D3DXVECTOR3(0.0f,0.0f,0.0f));
   m_fAngle    = 0.0f;
+
+  //*******
+  m_iTexNumFiles=0;
+  m_iTexNumColumnes=0;
+  m_fTimeAnimationDiapo=0.0f;
+  m_bAnimated=true;
+  
+
+  m_fAU = 0.0f;
+  m_fAV = 1.0f;
+  m_fBU = 1.0f;
+  m_fBV = 1.0f;
+  m_fCU = 0.0f;
+  m_fCV = 0.0f;
+  m_fDU = 1.0f;
+  m_fDV = 0.0f;
 }
 
 void CParticle::Release()

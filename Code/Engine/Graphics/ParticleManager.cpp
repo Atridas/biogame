@@ -98,7 +98,7 @@ bool CParticleManager::Load(const string& _szFileName)
         l_pInfo->m_vGravity = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
         l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Velocitate",Vect3f(3.0f));
         l_pInfo->m_vVel = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
-        l_pInfo->m_bAnimated = l_treeParticleEmitter.GetBoolProperty("Animated");
+       
         
 			  
 
@@ -152,29 +152,23 @@ bool CParticleManager::Load(const string& _szFileName)
 
           for(int i = 0; i < l_iNumChildren; i++)
           {
-            //SParticleEvent l_Event;
+            
             CXMLTreeNode l_treeParticleEmittersAnimated = l_treeParticleEmittersAnimateds(i);
             if(l_treeParticleEmittersAnimated.IsComment())
 				    continue;
 
-            //SParticleEvent l_Event;
-
-            l_Event.m_fTime = l_treeParticleEmittersAnimated.GetFloatProperty("time");
-
-          /*  NumFiles="4"    NumColumnes="4"   TimeDiapo="0.05"
             
+			      l_pInfo->m_bAnimated = true;
+            l_Event.m_fTime = l_treeParticleEmittersAnimated.GetFloatProperty("time");
+			      l_pInfo->m_vTimeAnimated.push_back(l_Event.m_fTime);
+			      l_Event.m_fTime = l_treeParticleEmittersAnimated.GetFloatProperty("TimeDiapo");
+			      l_pInfo->m_vTimeAnimated.push_back(l_Event.m_fTime);
 			
-			      l_vVec3 = l_treeParticleEmittersDirection.GetVect3fProperty("Direction1",Vect3f(3.0f));
-            l_Event.m_vSpawnDir1 = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
-			      l_vVec3 = l_treeParticleEmittersDirection.GetVect3fProperty("Direction2",Vect3f(3.0f));
-            l_Event.m_vSpawnDir2 = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
-
-
-            l_pInfo->m_vTimeDirection.push_back(l_Event.m_fTime);
-            l_pInfo->m_vDirection.push_back(l_Event.m_vSpawnDir1);
-            l_pInfo->m_vDirection.push_back(l_Event.m_vSpawnDir2);
-            */
-
+			      l_Event.m_iTexNumFiles = l_treeParticleEmittersAnimated.GetIntProperty("NumFiles");
+			      l_Event.m_iTexNumColumnes = l_treeParticleEmittersAnimated.GetIntProperty("NumColumnes");
+			      l_pInfo->m_vFilesColumnes.push_back(l_Event.m_iTexNumFiles);
+			      l_pInfo->m_vFilesColumnes.push_back(l_Event.m_iTexNumColumnes);
+			
           }
         }
         //************

@@ -29,6 +29,19 @@ public:
   void SetPointB            (const D3DXVECTOR3& _pointB)      {m_PointB=_pointB;};
   void SetPointC            (const D3DXVECTOR3& _pointC)      {m_PointC=_pointC;};
   void SetPointD            (const D3DXVECTOR3& _pointD)      {m_PointD=_pointD;};
+  void SetAU                (float _fAU)                      {m_fAU = _fAU;};
+  void SetAV                (float _fAV)                      {m_fAV = _fAV;};
+  void SetBU                (float _fBU)                      {m_fBU = _fBU;};
+  void SetBV                (float _fBV)                      {m_fBV = _fBV;};
+  void SetCU                (float _fCU)                      {m_fCU = _fCU;};
+  void SetCV                (float _fCV)                      {m_fCV = _fCV;};
+  void SetDU                (float _fDU)                      {m_fDU = _fDU;};
+  void SetDV                (float _fDV)                      {m_fDV = _fDV;};
+
+  void SetNumFiles            (int _iTexNumFiles)                     {m_iTexNumFiles = _iTexNumFiles;};
+  void SetNumColumnes         (int _iTexNumColumnes)                  {m_iTexNumColumnes = _iTexNumColumnes;};
+  void SetTimeAnimationDiapo  (float _fTimeAnimationDiapo)            {m_fTimeAnimationDiapo = _fTimeAnimationDiapo;};
+
   
 
   float GetSize                   () const              {return m_fSize;};
@@ -45,18 +58,36 @@ public:
   const D3DXVECTOR3& GetPointB    () const              {return m_PointB;};
   const D3DXVECTOR3& GetPointC    () const              {return m_PointC;};
   const D3DXVECTOR3& GetPointD    () const              {return m_PointD;};
+
+  float GetAU                     () const              {return m_fAU;};
+  float GetAV                     () const              {return m_fAV;};
+  float GetBU                     () const              {return m_fBU;};
+  float GetBV                     () const              {return m_fBV;};
+  float GetCU                     () const              {return m_fCU;};
+  float GetCV                     () const              {return m_fCV;};
+  float GetDU                     () const              {return m_fDU;};
+  float GetDV                     () const              {return m_fDV;};
+ 
+
+  int   GetNumFiles               () const              {return m_iTexNumFiles;};
+  int   GetNumColumnes            () const              {return m_iTexNumColumnes;};
+  float GetTimeAnimationDiapo     () const              {return m_fTimeAnimationDiapo;};
   
-  bool  Update               (float fTimeDelta, CCamera* camera);
+  
+  virtual bool  Update               (float fTimeDelta, CCamera* camera);
   //void  Render	             (LPDIRECT3DDEVICE9 device, CTexture* texture);
-  void  Release              ();
+  virtual void  Release              ();
 
   
   vector<D3DXCOLOR>      m_vColor;
   vector<float>          m_vTimeColor; 
   vector<D3DXVECTOR3>    m_vDirection;
   vector<float>          m_vTimeDirection;
+  // animated
+  vector<int>            m_vFilesColumnes;//guarda el numero de files i de columnes que conte la textura animada
+  vector<float>			     m_vTimeAnimated;//aqui guardem el temps en que pasa el event, i el temps de l'animacio
 
-private:
+protected:
   float             m_fSize;
   float             m_fLifetime; // temps de vida que tindra
   float             m_fAge; //la edat que te, es a dir, temps que porta inicialitzada
@@ -76,6 +107,22 @@ private:
   D3DXVECTOR3       m_VDirection;
   D3DXVECTOR3       m_VUp;
   D3DXVECTOR3       m_VRight;
+  //**************************
+  int                 m_iTexNumFiles;// numero de files que te la texture
+  int                 m_iTexNumColumnes;// numero de columnes que te la textura
+  float               m_fTimeAnimationDiapo;//(akest valor es pasa per el xml)temps que es destina a cada diapositiva
+  bool                m_bAnimated;
+
+
+  // cordenades de textura per a cada punt.
+  float      m_fAU;
+  float      m_fAV;
+  float      m_fBU;
+  float      m_fBV;
+  float      m_fCU;
+  float      m_fCV;
+  float      m_fDU;
+  float      m_fDV;
   
   
 };

@@ -4,6 +4,7 @@
 #include "VertexsStructs.h"
 #include "TextureManager.h"
 #include "ParticleManager.h"
+#include "ParticleAnimated.h"
 
 CParticleEmitter::CParticleEmitter():
 m_Particles(NUMPARTICLES)
@@ -21,6 +22,9 @@ m_Particles(NUMPARTICLES)
   SetSpawnDir2(D3DXVECTOR3(5.0f, 5.0f, 5.0f));
   SetVel(D3DXVECTOR3(1.0f,1.0f,1.0f));
   SetGravity(D3DXVECTOR3(0.0f,0.0f,0.0f));
+
+  //******
+ 
  
   // initialize misc. other things
   m_szName        = "";
@@ -34,11 +38,12 @@ m_Particles(NUMPARTICLES)
   //m_fAngle = 0.0f;
   m_fSizeX= 1.0f;
   m_fSizeY=1.0f;
+
  /* m_PointA=(D3DXVECTOR3(0.0f,0.0f,0.0f));
   m_PointB=(D3DXVECTOR3(0.0f,0.0f,0.0f));
   m_PointC=(D3DXVECTOR3(0.0f,0.0f,0.0f)); 
   m_PointD=(D3DXVECTOR3(0.0f,0.0f,0.0f));*/
-
+  m_bAnimated= false;
   m_bActive = true;
 
   //TODO inicialitzar els vector de color i temps
@@ -64,6 +69,11 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
   m_vTimeDirection = _info->m_vTimeDirection;
   m_vGravity = _info->m_vGravity;
   m_vVel = _info->m_vVel;
+  //*** per animació
+
+  m_bAnimated = _info->m_bAnimated;
+  m_vFilesColumnes = _info->m_vFilesColumnes;
+  m_vTimeAnimated = _info->m_vTimeAnimated;
 
   //crear un vector de direccion de tantas posicions com estat pot tenir (segons vector temps)
   int j=m_vTimeDirection.size();
@@ -184,6 +194,15 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
       part->m_vColor = m_vNewColor;
       //part->SetAngle(m_fAngle);
       part->SetPos(m_vPos);
+   
+
+      //**************************
+      if(m_bAnimated)
+      {
+        part->m_vFilesColumnes=m_vFilesColumnes;
+        part->m_vTimeAnimated = m_vTimeAnimated;
+      }
+      
 
       
 
@@ -347,29 +366,29 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
       l_Points[0+(l_cont*4)].x=part->GetPointA().x;
 		  l_Points[0+(l_cont*4)].y=part->GetPointA().y;
 		  l_Points[0+(l_cont*4)].z=part->GetPointA().z;
-		  l_Points[0+(l_cont*4)].u=0.0f;
-		  l_Points[0+(l_cont*4)].v=1.0f;
+      l_Points[0+(l_cont*4)].u=part->GetAU();
+      l_Points[0+(l_cont*4)].v=part->GetAV();
       //l_Points[0+(l_cont*4)].color=part->GetColor();
 		  
 		  l_Points[1+(l_cont*4)].x=part->GetPointB().x;
 		  l_Points[1+(l_cont*4)].y=part->GetPointB().y;
 		  l_Points[1+(l_cont*4)].z=part->GetPointB().z;
-		  l_Points[1+(l_cont*4)].u=1.0f;
-		  l_Points[1+(l_cont*4)].v=1.0f;
+		  l_Points[1+(l_cont*4)].u=part->GetBU();
+		  l_Points[1+(l_cont*4)].v=part->GetBV();
       //l_Points[1+(l_cont*4)].color=part->GetColor();
 
 		  l_Points[2+(l_cont*4)].x=part->GetPointC().x;
 		  l_Points[2+(l_cont*4)].y=part->GetPointC().y;
 		  l_Points[2+(l_cont*4)].z=part->GetPointC().z;
-		  l_Points[2+(l_cont*4)].u=0.0f;
-		  l_Points[2+(l_cont*4)].v=0.0f;
+		  l_Points[2+(l_cont*4)].u=part->GetCU();
+		  l_Points[2+(l_cont*4)].v=part->GetCV();
       //l_Points[2+(l_cont*4)].color=part->GetColor();
 
 		  l_Points[3+(l_cont*4)].x=part->GetPointD().x;
 		  l_Points[3+(l_cont*4)].y=part->GetPointD().y;
 		  l_Points[3+(l_cont*4)].z=part->GetPointD().z;
-		  l_Points[3+(l_cont*4)].u=1.0f;
-		  l_Points[3+(l_cont*4)].v=0.0f;
+		  l_Points[3+(l_cont*4)].u=part->GetDU();
+		  l_Points[3+(l_cont*4)].v=part->GetDV();
       //l_Points[3+(l_cont*4)].color=part->GetColor();
 
       
