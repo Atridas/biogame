@@ -164,6 +164,16 @@ void CEffectManager::Release()
   //CHECKED_RELEASE(m_pEffectPool);
 }
 
+void CEffectManager::SetSpecularParams(float _fGlossiness, float _fSpecularLevel)
+{
+  if(_fGlossiness != m_fGlossiness || _fSpecularLevel != m_fSpecularLevel)
+  {
+    _fGlossiness = m_fGlossiness;
+    _fSpecularLevel = m_fSpecularLevel;
+    m_bSpecularParamsUpdated = true;
+  }
+}
+
 void CEffectManager::LoadShaderData(CEffect* _pEffect)
 {
   LPD3DXEFFECT l_pD3DEffect = _pEffect->GetD3DEffect();
@@ -195,7 +205,21 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     m_pTextureWidth = l_pD3DEffect->GetParameterBySemantic(NULL,"TextureWidth");
     m_pTextureHeight = l_pD3DEffect->GetParameterBySemantic(NULL,"TextureHeight");
     m_pPoissonBlurKernelParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"PoissonBlurKernel");
+    
+    //m_pBump = l_pD3DEffect->GetParameterBySemantic(NULL,"GlowActive");
+    //m_pParallaxHeight = l_pD3DEffect->GetParameterBySemantic(NULL,"TextureWidth");
+    m_pGlossiness    = l_pD3DEffect->GetParameterBySemantic(NULL,"Glossiness");
+    m_pSpecularLevel = l_pD3DEffect->GetParameterBySemantic(NULL,"SpecularLevel");
+
     m_bSemanticsUpdated = true;
+  }
+
+  //Parametres Especulars
+  if(m_bSpecularParamsUpdated)
+  {
+    l_pD3DEffect->SetFloat(m_pGlossiness,    m_fGlossiness);
+    l_pD3DEffect->SetFloat(m_pSpecularLevel, m_fSpecularLevel);
+    m_bSpecularParamsUpdated = false;
   }
 
   if(m_bLightsUpdated)
@@ -409,6 +433,11 @@ CEffect* CEffectManager::ActivateMaterial(CMaterial* _pMaterial)
 
   if(l_pEffect)
   {
+    if(_pMaterial->GetMaterialType() & SPECULAR_MATERIAL_MASK)
+    {
+      SetSpecularParams(_pMaterial->GetGlossiness(), _pMaterial->GetSpecularFactor());
+    }
+
     LoadShaderData(l_pEffect);
   }
 

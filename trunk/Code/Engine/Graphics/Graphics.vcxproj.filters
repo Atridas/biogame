@@ -190,6 +190,9 @@
     <Filter Include="Particle\AnimatedParticleEmitter">
       <UniqueIdentifier>{e1eaabaf-ff7f-4db0-b96e-200cce179242}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Materials\MaterialDecorators\PropertyDecorators\SpecularPropertyDecorator">
+      <UniqueIdentifier>{a3105cc8-1c04-4baa-991f-e56ac65adb6f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -505,6 +508,9 @@
     </ClInclude>
     <ClInclude Include="include\ParticleAnimated.h">
       <Filter>Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SpecularPropertyDecorator.h">
+      <Filter>Materials\MaterialDecorators\PropertyDecorators\SpecularPropertyDecorator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

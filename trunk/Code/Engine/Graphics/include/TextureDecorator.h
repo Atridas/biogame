@@ -10,9 +10,6 @@ public:
 
   virtual ~CTextureDecorator() {};
 
-  virtual float GetParallaxHeight() {return m_pDecoratedMaterial->GetParallaxHeight();};
-  virtual float GetBump() {return m_pDecoratedMaterial->GetBump();};
-
 protected:
   CTexture* m_pTexture;
 };

@@ -9,9 +9,11 @@
 #define SPECULARMAP_MATERIAL_MASK 0x0010
 #define GLOW_MATERIAL_MASK 0x0020
 #define PARALLAX_MATERIAL_MASK 0x0040
+#define SPECULAR_MATERIAL_MASK 0x0080
 
 #define PARALLAX_PROPERTY_TYPE 1
 #define BUMP_PROPERTY_TYPE 2
+#define SPECULAR_PROPERTY_TYPE 3
 
 class CMaterial
 {
@@ -23,4 +25,6 @@ public:
   virtual int GetMaterialType() = 0;
   virtual float GetParallaxHeight() = 0;
   virtual float GetBump() = 0;
+  virtual float GetGlossiness() = 0;
+  virtual float GetSpecularFactor() = 0;
 };

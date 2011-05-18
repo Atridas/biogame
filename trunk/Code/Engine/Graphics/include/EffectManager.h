@@ -52,6 +52,9 @@ public:
                     m_bSkeletonUpdated(false),
                     m_bTextureWidthHeightUpdated(false),
                     m_bPoissonBlurKernelUpdated(true),
+                    m_bSpecularParamsUpdated(true),
+                    m_fGlossiness(0.f),
+                    m_fSpecularLevel(0.f),
                     m_pWorldMatrixParameter(0),
                     m_pViewMatrixParameter(0),
                     m_pProjectionMatrixParameter(0),
@@ -76,7 +79,11 @@ public:
                     m_pGlowActive(0),
                     m_pTextureWidth(0),
                     m_pTextureHeight(0), 
-                    m_pPoissonBlurKernelParameter(0)
+                    m_pPoissonBlurKernelParameter(0),
+                    m_pBump(0),
+                    m_pParallaxHeight(0),
+                    m_pGlossiness(0),
+                    m_pSpecularLevel(0)
                     {SetOk(true);};
 
   ~CEffectManager() {Done();};
@@ -88,6 +95,8 @@ public:
   void SetShadowProjectionMatrix(const Mat44f& _mMatrix) { m_mShadowProjectionMatrix = _mMatrix; m_bLightViewMatrixUpdated=true; };
   
   void SetCameraEye(const Vect3f& _vCameraEye) { m_vCameraEye = _vCameraEye; m_bCameraEyeUpdated=true; };
+
+  void SetSpecularParams(float _fGlossiness, float _fSpecularLevel);
 
   const Mat44f& GetWorldMatrix() const {return m_mWorldMatrix;};
   const Mat44f& GetProjectionMatrix() const {return m_mProjectionMatrix;};
@@ -188,6 +197,11 @@ private:
   bool m_bSemanticsUpdated;
   bool m_bLightsUpdated;
 
+  //Parametres
+  bool  m_bSpecularParamsUpdated;
+  float m_fGlossiness;
+  float m_fSpecularLevel;
+
   D3DXHANDLE m_pWorldMatrixParameter;
   D3DXHANDLE m_pViewMatrixParameter;
   D3DXHANDLE m_pProjectionMatrixParameter;
@@ -216,6 +230,12 @@ private:
   D3DXHANDLE m_pTextureWidth;
   D3DXHANDLE m_pTextureHeight; 
   D3DXHANDLE m_pPoissonBlurKernelParameter;
+  
+  D3DXHANDLE m_pBump;
+  D3DXHANDLE m_pParallaxHeight; 
+  D3DXHANDLE m_pGlossiness;
+  D3DXHANDLE m_pSpecularLevel;
+
 
   //bool m_bInverseProjectionUpdated, m_bInverseViewUpdated, m_bInverseWorldUpdated;
   

@@ -25,5 +25,4 @@
 	<RenderableObject name="BoxAlpha" class="StaticMesh" resource="BoxAlpha" position="-57.4588 0.0376649 -18.0876" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="BoxSpecular" class="StaticMesh" resource="BoxSpecular" position="-54.6592 0.0376649 -36.8326" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="BoxAlpha01" class="StaticMesh" resource="BoxAlpha01" position="-50.0065 0.0376649 -24.0954" yaw="0.0" pitch="0.0" roll="0.0" />
-  <RenderableObject name="ariggle" class="AnimatedModel" resource="riggle" position="5.1793 0.0 -5.2768" yaw="-90.0" pitch="0.0" roll="0" cycle="walk"/>
 </RenderableObjects>
