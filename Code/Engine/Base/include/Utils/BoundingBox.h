@@ -12,6 +12,7 @@ public:
   ~CBoundingBox() { Done(); };
 
   bool Init(Vect3f& _vMin, Vect3f& _vMax);
+  bool Init(Vect3f _vPoints[8]);
   
   const Vect3f& GetMin() const { return m_vBox[0]; };
   const Vect3f& GetMax() const { return m_vBox[7]; };

@@ -34,6 +34,8 @@
 #include "PhysicCookingMesh.h"
 #include "ActionManager.h"
 #include "PhysxRagdoll.h"
+#include "SpotLight.h"
+#include "Camera.h"
 #include <cal3d/cal3d.h>
 //---PhysX Includes---//
 #undef min
@@ -127,6 +129,18 @@ bool CPhysXProcess::Init()
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
 
   CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
+
+  m_pSpotlight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
+	                                                          Vect3f(-2.15715f,0.0f,-7.32758f),
+	                                                          Vect3f(-5.4188f,0.0f,3.75613f),
+	                                                          CColor(Vect3f(1.0f,1.0f,1.0f)),
+	                                                          20.0f,
+	                                                          80.0f,
+	                                                          10.0f,
+	                                                          45.0f,
+	                                                          false );
+	
+	 m_pSpotlight->SetActive(true);
  
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   /////CODI PER MOSTRAR LES ESFERES ALS BONES
@@ -404,6 +418,14 @@ void CPhysXProcess::Update(float _fElapsedTime)
       l_pSpot->SetDirection(Vect3f(l_vec.x,l_vec.y,l_vec.z));
     }
 
+
+    if (m_pSpotlight)
+    {
+      m_pSpotlight->SetPosition(m_pObject->GetPosition());
+      m_pSpotlight->SetDirection(m_pCamera->GetDirection());
+    
+    }
+
    /* if(m_bStateChanged)
     {
       ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->BlendCycle(m_iState,0);
@@ -549,18 +571,44 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
     {
 
       CalBone* l_pBone = l_vBones[j];
+      CalVector l_vPoints[8];
+      l_pBone->getBoundingBox().computePoints(l_vPoints);
+      CBoundingBox* l_pBox = new CBoundingBox();
+      Vect3f l_vect[8];
+        
+      for (int t=0;t<8;++t)
+      {
+        l_vect[t] = Vect3f(l_vPoints[t].x,l_vPoints[t].y,l_vPoints[t].z);
+      }
+
+      l_pBox->Init(l_vect);
+      //l_pBox->CalcMiddlePoint();
+      Vect3f l_vMiddlePoint = l_pBox->GetMiddlePoint();
+      
+
       for (int i=0;i<8;++i)
       {
-        CalVector l_vPoints[8];
-        l_pBone->getBoundingBox().computePoints(l_vPoints);
+        
+        
         SCollisionInfo l_sInfo;
         Vect3f l_vPos(-l_vPoints[i].x,l_vPoints[i].y,l_vPoints[i].z);
         l_sInfo.m_CollisionPoint = l_vPos;
         l_sInfo.m_Normal = v3fZERO;
 
         g_vCollisions.push_back(l_sInfo);
+        
    
       }
+
+      SCollisionInfo l_sInfo;
+      Vect3f l_vPos(-l_vMiddlePoint.x,l_vMiddlePoint.y,l_vMiddlePoint.z);
+      l_sInfo.m_CollisionPoint = l_vPos;
+      l_sInfo.m_Normal = v3fZERO;
+
+      g_vCollisions.push_back(l_sInfo);
+      CHECKED_DELETE(l_pBox)
+
+
     }
 
     
@@ -570,7 +618,7 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   RenderImpacts(_pRM);
+   //RenderImpacts(_pRM);
 
 
   
@@ -600,7 +648,7 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
 
   //Draw Grid and Axis
   _pRM->SetTransform(identity);
-   l_pAnim->RenderRenderableObject(RENDER_MANAGER);
+  // l_pAnim->RenderRenderableObject(RENDER_MANAGER);
   //_pRM->DrawGrid(30.0f,colCYAN,30,30);
    
    //_pRM->DrawPlane(10,Vect3f(0,1,0),0,colBLUE,10,10);
@@ -813,6 +861,26 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     //
     //CHECKED_DELETE(l_pPActorShoot)
 
+    ///////////////////////////////////////////////////////////////////////////////
+    // RAGDOLL PROVES
+    ///////////////////////////////////////////////////////////////////////////////
+
+    CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
+    CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
+    l_pSkeleton->getCoreSkeleton()->calculateBoundingBoxes(l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getCoreModel());
+    l_pSkeleton->calculateBoundingBoxes();
+
+    if (g_pRagdoll == 0)
+    {
+      g_pRagdoll = new CPhysxRagdoll("Ragdoll Prova");
+      g_pRagdoll->Load("Data/Animated Models/Riggle/Ragdoll.xml",false);
+      g_pRagdoll->Init(l_pSkeleton);
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////
+
   }
 
   if(strcmp(_pcAction, "ShootBall") == 0)
@@ -862,22 +930,7 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     //CHECKED_DELETE(l_pPActorShoot)
 
 
-    ///////////////////////////////////////////////////////////////////////////////
-    // RAGDOLL PROVES
-    ///////////////////////////////////////////////////////////////////////////////
-
-    CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
-    CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
-    l_pSkeleton->getCoreSkeleton()->calculateBoundingBoxes(l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getCoreModel());
-    l_pSkeleton->calculateBoundingBoxes();
-
-    g_pRagdoll = new CPhysxRagdoll("Ragdoll Prova");
-    g_pRagdoll->Load("Data/Animated Models/Riggle/Ragdoll.xml",false);
-    g_pRagdoll->Init(l_pSkeleton);
-
-    ///////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////////////
+    
 
   }
 

@@ -1,4 +1,5 @@
 #include "Utils/BoundingBox.h"
+class CalVector;
 
 CBoundingBox::CBoundingBox()
 {
@@ -16,6 +17,25 @@ bool CBoundingBox::Init(Vect3f& _vMin, Vect3f& _vMax)
   CalcMiddlePoint();
   CalcDimension();
   CalcMaxSide();
+
+  SetOk(true);
+
+  return IsOk();
+}
+
+bool CBoundingBox::Init(Vect3f _vPoints[8])
+{
+  m_vBox[0] = Vect3f(_vPoints[0].x,_vPoints[0].y,_vPoints[0].z);
+  m_vBox[1] = Vect3f(_vPoints[1].x,_vPoints[1].y,_vPoints[1].z);
+  m_vBox[2] = Vect3f(_vPoints[2].x,_vPoints[2].y,_vPoints[2].z);
+  m_vBox[3] = Vect3f(_vPoints[3].x,_vPoints[3].y,_vPoints[3].z);
+  m_vBox[4] = Vect3f(_vPoints[4].x,_vPoints[4].y,_vPoints[4].z);
+  m_vBox[5] = Vect3f(_vPoints[5].x,_vPoints[5].y,_vPoints[5].z);
+  m_vBox[6] = Vect3f(_vPoints[6].x,_vPoints[6].y,_vPoints[6].z);
+  m_vBox[7] = Vect3f(_vPoints[7].x,_vPoints[7].y,_vPoints[7].z);
+  CalcMiddlePoint();
+  CalcDimension();
+  //CalcMaxSide();
 
   SetOk(true);
 

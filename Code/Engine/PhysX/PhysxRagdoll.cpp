@@ -82,6 +82,20 @@ bool CPhysxRagdoll::Init(CalSkeleton* _pSkeleton)
     CalVector l_vPoints[8];
     l_pBone->getBoundingBox().computePoints(l_vPoints);
 
+    
+    CBoundingBox* l_pBox = new CBoundingBox();
+    Vect3f l_vect[8];
+        
+    for (int t=0;t<8;++t)
+    {
+      l_vect[t] = Vect3f(l_vPoints[t].x,l_vPoints[t].y,l_vPoints[t].z);
+    }
+
+    l_pBox->Init(l_vect);
+    Vect3f l_vMiddlePoint = l_pBox->GetMiddlePoint();
+    Vect3f l_vPos(-l_vMiddlePoint.x,l_vMiddlePoint.y,l_vMiddlePoint.z);
+    CHECKED_DELETE(l_pBox)
+
 
     if (m_vBoneActors[i].m_szType == "Box")
     {
@@ -89,7 +103,7 @@ bool CPhysxRagdoll::Init(CalSkeleton* _pSkeleton)
       l_pUserData->SetPaint(true);
       l_pUserData->SetColor(colGREEN);
       CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
-      l_pActor->AddBoxSphape(m_vBoneActors[i].m_vSize,l_vBonePos,NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
+      l_pActor->AddBoxSphape(m_vBoneActors[i].m_vSize,l_vPos,NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
       l_pActor->CreateBody(m_vBoneActors[i].m_Density);
       l_pPM->AddPhysicActor(l_pActor);
 
@@ -104,7 +118,7 @@ bool CPhysxRagdoll::Init(CalSkeleton* _pSkeleton)
       l_pUserData->SetPaint(true);
       l_pUserData->SetColor(colYELLOW);
       CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
-      l_pActor->AddSphereShape(m_vBoneActors[i].m_vSize.x,l_vBonePos,NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
+      l_pActor->AddSphereShape(m_vBoneActors[i].m_vSize.x,l_vPos,NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
       l_pActor->CreateBody(m_vBoneActors[i].m_Density);
       l_pPM->AddPhysicActor(l_pActor);
 
