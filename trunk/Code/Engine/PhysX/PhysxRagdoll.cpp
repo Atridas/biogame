@@ -81,6 +81,19 @@ bool CPhysxRagdoll::Init(CalSkeleton* _pSkeleton)
     
     CalVector l_vPoints[8];
     l_pBone->getBoundingBox().computePoints(l_vPoints);
+    l_pBone->getBoundingBox().computePoints(l_vPoints);
+    CalMatrix l_vMatrix = l_pBone->getTransformMatrix();
+
+    CalQuaternion l_vQuaternion = l_pBone->getRotationAbsolute();
+    
+    Mat33f l_vMat33(l_vMatrix.dxdx,l_vMatrix.dxdy,l_vMatrix.dxdz,l_vMatrix.dydx,l_vMatrix.dydy,l_vMatrix.dydz,l_vMatrix.dzdx,l_vMatrix.dzdy,l_vMatrix.dzdz);
+    float l_fYaw = l_vMat33.GetYaw();
+    float l_fPitch = l_vMat33.GetPitch();
+    float l_fRoll = l_vMat33.GetRoll();
+
+    
+    
+    //l_pBone->getCoreBone()->getBoundingBox().
 
     
     CBoundingBox* l_pBox = new CBoundingBox();
@@ -94,7 +107,30 @@ bool CPhysxRagdoll::Init(CalSkeleton* _pSkeleton)
     l_pBox->Init(l_vect);
     Vect3f l_vMiddlePoint = l_pBox->GetMiddlePoint();
     Vect3f l_vPos(-l_vMiddlePoint.x,l_vMiddlePoint.y,l_vMiddlePoint.z);
-    CHECKED_DELETE(l_pBox)
+    //l_pBox->CalcDimension();
+    Mat44f l_vTrans;
+    l_vTrans.SetIdentity();
+    l_vTrans.Translate(l_vPos);
+
+
+    Mat44f r, r2, r3, t, total;
+    
+    t.SetIdentity();
+    r.SetIdentity();
+    r2.SetIdentity();
+    r3.SetIdentity();
+
+    t.Translate(l_vPos);
+    r.SetFromAngleY(l_fPitch);
+    r2.SetFromAngleZ(l_fYaw);
+    //r3.SetFromAngleX(l_fRoll);
+    //s.Scale(1.5f,1.5f,1.5f);
+
+    total = t*r*r2;
+
+    //Mat44f l_vMat44(l_vMat33); 
+
+
 
 
     if (m_vBoneActors[i].m_szType == "Box")
@@ -103,9 +139,14 @@ bool CPhysxRagdoll::Init(CalSkeleton* _pSkeleton)
       l_pUserData->SetPaint(true);
       l_pUserData->SetColor(colGREEN);
       CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
-      l_pActor->AddBoxSphape(m_vBoneActors[i].m_vSize,l_vPos,NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
+      l_pActor->AddBoxSphape(l_pBox->GetDimension()*0.5f,v3fZERO,NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
       l_pActor->CreateBody(m_vBoneActors[i].m_Density);
+
+      
+      //l_pActor->SetGlobalPosition(l_vPos);
+
       l_pPM->AddPhysicActor(l_pActor);
+      l_pActor->SetMat44(total);
 
       m_vBoneActors[i].m_pActor = l_pActor;
       m_vBoneActors[i].m_pUserData = l_pUserData;
@@ -126,6 +167,8 @@ bool CPhysxRagdoll::Init(CalSkeleton* _pSkeleton)
       m_vBoneActors[i].m_pUserData = l_pUserData;
       
     }
+
+    CHECKED_DELETE(l_pBox)
   }
 
   return true;
