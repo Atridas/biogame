@@ -33,8 +33,9 @@ bool CBoundingBox::Init(Vect3f _vPoints[8])
   m_vBox[5] = Vect3f(_vPoints[5].x,_vPoints[5].y,_vPoints[5].z);
   m_vBox[6] = Vect3f(_vPoints[6].x,_vPoints[6].y,_vPoints[6].z);
   m_vBox[7] = Vect3f(_vPoints[7].x,_vPoints[7].y,_vPoints[7].z);
+
   CalcMiddlePoint();
-  CalcDimension();
+  CalcDimension2();
   //CalcMaxSide();
 
   SetOk(true);
@@ -86,6 +87,16 @@ void CBoundingBox::CalcDimension()
 {
   float l_fSideLengthX = m_vBox[0].Distance(m_vBox[1]);
   float l_fSideLengthY = m_vBox[0].Distance(m_vBox[4]);
+  float l_fSideLengthZ = m_vBox[0].Distance(m_vBox[2]);
+
+  m_vDimension = Vect3f(l_fSideLengthX,l_fSideLengthY,l_fSideLengthZ);
+}
+
+
+void CBoundingBox::CalcDimension2()
+{
+  float l_fSideLengthX = m_vBox[0].Distance(m_vBox[4]);
+  float l_fSideLengthY = m_vBox[0].Distance(m_vBox[1]);
   float l_fSideLengthZ = m_vBox[0].Distance(m_vBox[2]);
 
   m_vDimension = Vect3f(l_fSideLengthX,l_fSideLengthY,l_fSideLengthZ);

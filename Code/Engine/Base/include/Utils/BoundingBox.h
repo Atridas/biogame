@@ -20,6 +20,7 @@ public:
   const Vect3f& GetDimension() const { return m_vDimension; };
   const Vect3f& GetMiddlePoint() const { return m_vMiddlePoint; };
   const float GetMaxSideLength() const { return m_fMaxSideLenght; };
+  void CalcDimension2();
 
 protected:
   virtual void Release();

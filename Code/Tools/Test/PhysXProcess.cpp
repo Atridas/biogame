@@ -293,6 +293,10 @@ bool CPhysXProcess::Init()
 
   //g_pRagdoll = new CPhysxRagdoll("Ragdoll Prova");
   //g_pRagdoll->Load("Data/Animated Models/Riggle/Ragdoll.xml",false);
+  CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
+  CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
+  l_pSkeleton->getCoreSkeleton()->calculateBoundingBoxes(l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getCoreModel());
+  l_pSkeleton->calculateBoundingBoxes();
 
 
   /////////////////////////////////////////////////////////////////////////////////
@@ -567,12 +571,19 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
     //CalVector l_vPoints[8];
     //l_pBone->getBoundingBox().computePoints(l_vPoints);
 
-    for (size_t j=0;j<l_vBones.size();++j)
-    {
+    /*for (size_t j=0;j<l_vBones.size();++j)
+    {*/
 
-      CalBone* l_pBone = l_vBones[j];
+    
+      //l_pSkeleton->getBone(l_pSkeleton->getCoreSkeleton()->getCoreBoneId("Bip 01 Head"));
+      CalBone* l_pBone = l_pSkeleton->getBone(l_pSkeleton->getCoreSkeleton()->getCoreBoneId("Bip01 Head"));
       CalVector l_vPoints[8];
       l_pBone->getBoundingBox().computePoints(l_vPoints);
+      CalMatrix l_vMatrix = l_pBone->getTransformMatrix();
+
+      //CalQuaternion l_vQuaternion = l_pBone->getRotationAbsolute();
+      Mat33f l_vMat33(l_vMatrix.dxdx,l_vMatrix.dxdy,l_vMatrix.dxdz,l_vMatrix.dydx,l_vMatrix.dydy,l_vMatrix.dydz,l_vMatrix.dzdx,l_vMatrix.dzdy,l_vMatrix.dzdz);
+      Mat44f l_vMat44(l_vMat33); 
       CBoundingBox* l_pBox = new CBoundingBox();
       Vect3f l_vect[8];
         
@@ -609,7 +620,7 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
       CHECKED_DELETE(l_pBox)
 
 
-    }
+    //}
 
     
 
@@ -618,7 +629,7 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   //RenderImpacts(_pRM);
+   RenderImpacts(_pRM);
 
 
   
@@ -667,14 +678,14 @@ void CPhysXProcess::RenderImpacts(CRenderManager* _pRM)
       t.SetIdentity();
       t.Translate(g_vCollisions[i].m_CollisionPoint);
       _pRM->SetTransform(t);
-      //if (i==0)
-      //{
-        //_pRM->DrawSphere(0.2f,colRED,5);
-      //}
-      //else
-      //{
+      if (i==8)
+      {
+        _pRM->DrawSphere(0.015f,colRED,5);
+      }
+      else
+      {
         _pRM->DrawSphere(0.01f,colYELLOW,5);
-      //}
+      }
       _pRM->DrawLine(v3fZERO,g_vCollisions[i].m_Normal*0.5f,colGREEN);
   }
 
@@ -870,12 +881,12 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     l_pSkeleton->getCoreSkeleton()->calculateBoundingBoxes(l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getCoreModel());
     l_pSkeleton->calculateBoundingBoxes();
 
-    if (g_pRagdoll == 0)
-    {
+    //if (g_pRagdoll == 0)
+    //{
       g_pRagdoll = new CPhysxRagdoll("Ragdoll Prova");
       g_pRagdoll->Load("Data/Animated Models/Riggle/Ragdoll.xml",false);
       g_pRagdoll->Init(l_pSkeleton);
-    }
+    //}
 
     ///////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////
