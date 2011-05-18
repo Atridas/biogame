@@ -9,6 +9,13 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 	local l_bumpPercent = 0
 	local l_parallax = false
 	local l_parallaxHeight = 0
+	local l_specularParams = false
+	
+	if _material.glossiness != undefined and _material.specularLevel != undefined then
+	(
+		l_numProperties = l_numProperties + 1
+		l_specularParams = true
+	)
 	
 	--informació del material
 	if _material.diffuseMapEnable == true and _material.diffuseMap != undefined then
@@ -140,13 +147,23 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 		if l_bump then
 		(
 			WriteShort _file BUMP_PROPERTY_TYPE #unsigned
-			WriteFloat _file l_bumpPercent			
+			WriteFloat _file l_bumpPercent		
+			format "	->	Bump percent:%\n" l_bumpPercent	
 		)
 		
 		if l_parallax then
 		(
 			WriteShort _file PARALLAX_PROPERTY_TYPE #unsigned
 			WriteFloat _file l_parallaxHeight
+			format "	->	Parallax Property:%\n" l_parallaxHeight
+		)
+		
+		if l_specularParams then
+		(
+			WriteShort _file SPECULAR_PROPERTY_TYPE #unsigned
+			WriteFloat _file _material.glossiness
+			WriteFloat _file _material.specularLevel
+			format "	->	Specular properties Gloss:% Factor:%\n" _material.glossiness _material.specularLevel
 		)
 	)
 )

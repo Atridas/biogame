@@ -36,13 +36,21 @@
   </effects>
   <default_effects>
     <default_effect material_type="0" effect="Diffused" />
+    <default_effect material_type="128" effect="Diffused" />
     <default_effect material_type="2" effect="Textured" />
+    <default_effect material_type="130" effect="Textured" />
     <default_effect material_type="3" effect="AnimatedTextured" />
+    <default_effect material_type="131" effect="AnimatedTextured" />
     <default_effect material_type="6" effect="Normalmap" />
+    <default_effect material_type="134" effect="Normalmap" />
     <default_effect material_type="7" effect="AnimatedNormalmap" />
+    <default_effect material_type="135" effect="AnimatedNormalmap" />
     <default_effect material_type="10" effect="Lightmap" />
+    <default_effect material_type="138" effect="Lightmap" />
     <default_effect material_type="14" effect="LightmapNormalmap" />
+    <default_effect material_type="142" effect="LightmapNormalmap" />
     <default_effect material_type="18" effect="SpecularTextured" />
+    <default_effect material_type="146" effect="SpecularTextured" />
   </default_effects>
 
 

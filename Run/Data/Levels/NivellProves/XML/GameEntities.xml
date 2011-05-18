@@ -120,4 +120,9 @@
     <RenderableObject name="LowCover11" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
+  <Entity>
+    <Object3D />
+    <RenderableObject name="BoxAlpha01" />
+    <PhysXBox fromRenderableObject="true" density="0" />
+  </Entity>
 </Entities>

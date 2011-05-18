@@ -10,8 +10,6 @@ public:
   virtual ~CPropertyDecorator() {};
 
   virtual void Activate() {m_pDecoratedMaterial->Activate();};
-  virtual float GetParallaxHeight() {return m_pDecoratedMaterial->GetParallaxHeight();};
-  virtual float GetBump() {return m_pDecoratedMaterial->GetBump();};
   virtual int GetMaterialType() {return m_pDecoratedMaterial->GetMaterialType();};
 };
 

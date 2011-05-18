@@ -17,6 +17,7 @@
 #include "GlowTextureDecorator.h"
 #include "ParallaxPropertyDecorator.h"
 #include "BumpPropertyDecorator.h"
+#include "SpecularPropertyDecorator.h"
 
 #include <IndexedVertexs.h>
 #include <base.h>
@@ -174,7 +175,7 @@ bool CStaticMesh::Load(const CXMLTreeNode& _XMLTreeNode)
     for(int i = 0; i < l_usNumProperties; ++i)
     {
       l_File.read((char*)&l_usPropertyType, sizeof(uint16));
-
+      float l_fGlossiness, l_fSpecularLevel;
       switch(l_usPropertyType)
       {
         case PARALLAX_PROPERTY_TYPE:
@@ -184,6 +185,11 @@ bool CStaticMesh::Load(const CXMLTreeNode& _XMLTreeNode)
         case BUMP_PROPERTY_TYPE:
           l_File.read((char*)&l_fValue, sizeof(float));
           l_pMaterial = new CBumpPropertyDecorator(l_pMaterial,l_fValue);
+          break;
+        case SPECULAR_PROPERTY_TYPE:
+          l_File.read((char*)&l_fGlossiness, sizeof(float));
+          l_File.read((char*)&l_fSpecularLevel, sizeof(float));
+          l_pMaterial = new CSpecularPropertyDecorator(l_pMaterial,l_fGlossiness,l_fSpecularLevel);
           break;
         default:
           break;
