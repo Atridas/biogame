@@ -118,9 +118,12 @@ bool CEffectManager::Load(bool _bReload)
 
         l_pEffect = new CEffect();
 
-        l_pEffect->Init(l_treeEffect,m_pEffectPool);
-
-        AddResource(l_pEffect->GetName(),l_pEffect);
+        if(l_pEffect->Init(l_treeEffect,m_pEffectPool))
+        {
+          AddResource(l_pEffect->GetName(),l_pEffect);
+        }else{
+          CHECKED_DELETE(l_pEffect);
+        }
       }
     }
     //----------------------------
@@ -155,13 +158,15 @@ void CEffectManager::Reload()
 
 void CEffectManager::Release()
 {
+  CHECKED_RELEASE(m_pEffectPool);
+
   CMapManager::Release();
 
   m_DefaultEffectMap.clear();
 
   m_pForcedStaticMeshEffect = 0;
   m_pForcedAnimatedModelEffect = 0;
-  //CHECKED_RELEASE(m_pEffectPool);
+  
 }
 
 void CEffectManager::SetSpecularParams(float _fGlossiness, float _fSpecularLevel)
