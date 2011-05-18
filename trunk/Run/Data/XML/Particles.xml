@@ -5,7 +5,7 @@
       <ParticleEmitter  id="foc1"                        MinEmitRate="30.0"             MaxEmitRate="30.0"      
                         Color1="0.1 0.5 0.68 0.0"          Color2="0.2 0.6 0.71 0.0"       MinSize="1.0"        MaxSize="1.5"
                         Direction1="-0.2 0.0 -0.2"         Direction2="0.2 0.6 0.2"     Life1="4.0"          Life2="4.5"
-                        Gravity="0.0 0.0 0.0"             Velocitate="1.0 1.0 1.0"      TexParticle="Data/Textures/texturas particulas/flameD.dds">
+                        Gravity="0.0 0.0 0.0"             Velocitate="1.0 1.0 1.0"      TexParticle="Data/Textures/texturas particulas/explosprite.dds">
         <Colors>
           <Color        time="0.5"        Color1="1.0 1.0 1.0 0.65"       Color2="1.0 1.0 1.0 0.72"/>
           <Color        time="2.0"        Color1="1.0 1.0 1.0 1.0"       Color2="1.0 1.0 1.0 1.0"/>
@@ -22,11 +22,11 @@
 
         <Animateds>
           <Animated     time="0.0"    NumFiles="4"    NumColumnes="4"   TimeDiapo="0.05"
-                        TexParticle="Data/Textures/texturas particulas/flameD.dds"/>
+                        TexParticle="Data/Textures/texturas particulas/explosprite.dds"/>
           <Animated     time="0.5"    NumFiles="4"    NumColumnes="4"   TimeDiapo="0.05"
                         TexParticle="Data/Textures/texturas particulas/explosprite.dds"/>
         </Animateds>
-      </ParticleEmitter>
+    </ParticleEmitter>
 
       <ParticleEmitter  id="fumfoc1"                        MinEmitRate="40.0"             MaxEmitRate="40.0"
                         Color1="1.0 1.0 1.0 0.0"            Color2="0.0 0.0 0.0 0.0"       MinSize="1.0"        MaxSize="2.0"
@@ -85,13 +85,13 @@
                           Color1="0.0 0.0 0.0 1.0"            Color2="1.0 1.0 1.0 1.0"       MinSize="0.3"        MaxSize="0.5"
                           Direction1="-0.2 0.2 -0.2"          Direction2="0.2 1.0 0.2"       Life1="2.1"          Life2="2.1"
                           Gravity="0.0 -9.8 0.0"               Velocitate="1.0 8.0 1.0"   TexParticle="Data/Textures/texturas particulas/foam.tga">
-      </ParticleEmitter>
+      </ParticleEmitter> 
     </ParticleEmitters>
  
 <!--*************************************************************************************************************************-->
   <InstanceParticles>
     
-    <InstanceParticle id="fum"                    type="fumfoc1"                     Position="0.0  1.3  0.0"/>
+   <!-- <InstanceParticle id="fum"                    type="fumfoc1"                     Position="0.0  1.3  0.0"/> -->
     <InstanceParticle id="focPrincipal"           type="foc1"                        Position="0.0  0.0  0.0"/>
     <InstanceParticle id="bumbollas"              type="bumbollas"                   Position="10.0  0.0  -12.0"/>
     <InstanceParticle id="magia"                  type="magia1"                      Position="12.0  0.0  13.0"/>

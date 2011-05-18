@@ -98,7 +98,7 @@ bool CParticleManager::Load(const string& _szFileName)
         l_pInfo->m_vGravity = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
         l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Velocitate",Vect3f(3.0f));
         l_pInfo->m_vVel = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
-       
+        l_pInfo->m_bAnimated = false; // si te animacio despres la canvio
         
 			  
 

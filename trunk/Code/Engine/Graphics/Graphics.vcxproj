@@ -94,7 +94,6 @@
     <ClCompile Include="AnimatedCoreModel.cpp" />
     <ClCompile Include="AnimatedInstanceModel.cpp" />
     <ClCompile Include="AnimatedModelManager.cpp" />
-    <ClCompile Include="AnimatedParticleEmitter.cpp" />
     <ClCompile Include="BillBoard.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
@@ -115,7 +114,6 @@
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="OmniLight.cpp" />
     <ClCompile Include="Particle.cpp" />
-    <ClCompile Include="ParticleAnimated.cpp" />
     <ClCompile Include="ParticleEmitter.cpp" />
     <ClCompile Include="ParticleManager.cpp" />
     <ClCompile Include="RenderableAnimatedInstanceModel.cpp" />
@@ -140,7 +138,6 @@
     <ClInclude Include="include\AnimatedInstanceModel.h" />
     <ClInclude Include="include\AnimatedMeshEmptyMaterial.h" />
     <ClInclude Include="include\AnimatedModelManager.h" />
-    <ClInclude Include="include\AnimatedParticleEmitter.h" />
     <ClInclude Include="include\BillBoard.h" />
     <ClInclude Include="include\BumpPropertyDecorator.h" />
     <ClInclude Include="include\Camera.h" />
@@ -172,7 +169,6 @@
     <ClInclude Include="include\OmniLight.h" />
     <ClInclude Include="include\ParallaxPropertyDecorator.h" />
     <ClInclude Include="include\Particle.h" />
-    <ClInclude Include="include\ParticleAnimated.h" />
     <ClInclude Include="include\ParticleEmitter.h" />
     <ClInclude Include="include\ParticleManager.h" />
     <ClInclude Include="include\PropertyDecorator.h" />

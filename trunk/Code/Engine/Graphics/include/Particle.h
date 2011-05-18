@@ -23,6 +23,7 @@ public:
   void SetDir               (const D3DXVECTOR3& _vDir)        {m_vDir = _vDir;};
   void SetVel               (const D3DXVECTOR3& _vVel)        {m_vVel = _vVel;};
   void SetGravity           (const D3DXVECTOR3& _vGravity)    {m_vGravity = _vGravity;};
+  void SetTexParticle       (CTexture* _pTexParticle)               {m_pTexParticle = _pTexParticle;};
   //void SetAngle             (float _fAngle)                         {m_fAngle = _fAngle;};
   //void SetSize	            ( const float sizeX, const float sizeY ) {m_fSizeX = sizeX; m_fSizeY = sizeY;}
   void SetPointA            (const D3DXVECTOR3& _pointA)      {m_PointA=_pointA;};
@@ -41,7 +42,7 @@ public:
   void SetNumFiles            (int _iTexNumFiles)                     {m_iTexNumFiles = _iTexNumFiles;};
   void SetNumColumnes         (int _iTexNumColumnes)                  {m_iTexNumColumnes = _iTexNumColumnes;};
   void SetTimeAnimationDiapo  (float _fTimeAnimationDiapo)            {m_fTimeAnimationDiapo = _fTimeAnimationDiapo;};
-
+  void SetAnimated            (bool _bAnimated)                       {m_bAnimated = _bAnimated;};
   
 
   float GetSize                   () const              {return m_fSize;};
@@ -53,6 +54,7 @@ public:
   const D3DXVECTOR3& GetDir       () const              {return m_vDir;};
   const D3DXVECTOR3& GetVel       () const              {return m_vVel;};
   const D3DXVECTOR3& GetGravity   () const              {return m_vGravity;};
+  CTexture*   GetTexParticle      () const              {return m_pTexParticle;};  
   //float GetAngle                  () const              {return m_fAngle;};
   const D3DXVECTOR3& GetPointA    () const              {return m_PointA;};
   const D3DXVECTOR3& GetPointB    () const              {return m_PointB;};
@@ -72,6 +74,7 @@ public:
   int   GetNumFiles               () const              {return m_iTexNumFiles;};
   int   GetNumColumnes            () const              {return m_iTexNumColumnes;};
   float GetTimeAnimationDiapo     () const              {return m_fTimeAnimationDiapo;};
+  bool  GetAnimated               () const              {return m_bAnimated;};
   
   
   virtual bool  Update               (float fTimeDelta, CCamera* camera);
@@ -87,7 +90,7 @@ public:
   vector<int>            m_vFilesColumnes;//guarda el numero de files i de columnes que conte la textura animada
   vector<float>			     m_vTimeAnimated;//aqui guardem el temps en que pasa el event, i el temps de l'animacio
 
-protected:
+private:
   float             m_fSize;
   float             m_fLifetime; // temps de vida que tindra
   float             m_fAge; //la edat que te, es a dir, temps que porta inicialitzada
@@ -112,6 +115,12 @@ protected:
   int                 m_iTexNumColumnes;// numero de columnes que te la textura
   float               m_fTimeAnimationDiapo;//(akest valor es pasa per el xml)temps que es destina a cada diapositiva
   bool                m_bAnimated;
+  float      m_fTimeAnimationActual;//temps k porta durant l'animacio
+  int        m_iNumDiapo;//numero de diapositiva a la que ens trobem
+  float      m_fIncrementV; //alçada de cada diapositiva 
+  float      m_fIncrementU; //amplada de cada diapositiva
+  int        m_iTotalDiapos;
+  CTexture*  m_pTexParticle;
 
 
   // cordenades de textura per a cada punt.
@@ -123,6 +132,11 @@ protected:
   float      m_fCV;
   float      m_fDU;
   float      m_fDV;
+
+ 
+  
+ 
+
   
   
 };

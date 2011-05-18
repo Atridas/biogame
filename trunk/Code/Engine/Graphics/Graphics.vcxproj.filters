@@ -187,9 +187,6 @@
     <Filter Include="Explosions\ExplosionsManager">
       <UniqueIdentifier>{842fe1c4-9a1c-4016-bd90-e28c474102d5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Particle\AnimatedParticleEmitter">
-      <UniqueIdentifier>{e1eaabaf-ff7f-4db0-b96e-200cce179242}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Materials\MaterialDecorators\PropertyDecorators\SpecularPropertyDecorator">
       <UniqueIdentifier>{a3105cc8-1c04-4baa-991f-e56ac65adb6f}</UniqueIdentifier>
     </Filter>
@@ -320,12 +317,6 @@
     </ClCompile>
     <ClCompile Include="Explosion.cpp">
       <Filter>Explosions</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimatedParticleEmitter.cpp">
-      <Filter>Particle\AnimatedParticleEmitter</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleAnimated.cpp">
-      <Filter>Particle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -502,12 +493,6 @@
     </ClInclude>
     <ClInclude Include="include\Explosion.h">
       <Filter>Explosions</Filter>
-    </ClInclude>
-    <ClInclude Include="include\AnimatedParticleEmitter.h">
-      <Filter>Particle\AnimatedParticleEmitter</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ParticleAnimated.h">
-      <Filter>Particle</Filter>
     </ClInclude>
     <ClInclude Include="include\SpecularPropertyDecorator.h">
       <Filter>Materials\MaterialDecorators\PropertyDecorators\SpecularPropertyDecorator</Filter>

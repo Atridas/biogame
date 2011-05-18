@@ -96,7 +96,7 @@ protected:
   float                                     m_fLife1;
   float                                     m_fLife2;
   LPDIRECT3DVERTEXBUFFER9                   m_vbParticles;
-  CRecyclingArray<CParticle>                m_Particles;
+  CRecyclingArray<CParticle>		        m_Particles;
   vector<D3DXCOLOR>                         m_vColor;
   vector<D3DXCOLOR>                         m_vNewColor;
   vector<float>                             m_vTimeColor;

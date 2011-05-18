@@ -4,7 +4,7 @@
 #include "VertexsStructs.h"
 #include "TextureManager.h"
 #include "ParticleManager.h"
-#include "ParticleAnimated.h"
+
 
 CParticleEmitter::CParticleEmitter():
 m_Particles(NUMPARTICLES)
@@ -131,7 +131,9 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
     // Si hay espacio para una nueva partícula:
     if (m_Particles.GetNumFreeElements() > 0)
     {
-      CParticle* part = m_Particles.New();
+      CParticle* part =m_Particles.New();
+      
+      
       
 
       // determina el random de la vida de cada particula
@@ -194,14 +196,18 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
       part->m_vColor = m_vNewColor;
       //part->SetAngle(m_fAngle);
       part->SetPos(m_vPos);
-   
+
+      part->SetAnimated(m_bAnimated);
+      part->m_vFilesColumnes=m_vFilesColumnes;
+      part->m_vTimeAnimated = m_vTimeAnimated;
+      part->SetTexParticle(m_pTexParticle);
 
       //**************************
-      if(m_bAnimated)
+      /*if(m_bAnimated)
       {
         part->m_vFilesColumnes=m_vFilesColumnes;
         part->m_vTimeAnimated = m_vTimeAnimated;
-      }
+      }*/
       
 
       
@@ -275,6 +281,8 @@ void CParticleEmitter::Release()
   m_vNewDirection.clear();
   m_vTimeColor.clear();
   m_vTimeDirection.clear();
+  m_vFilesColumnes.clear();
+  m_vTimeAnimated.clear();
   
 }
   
