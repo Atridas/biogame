@@ -1,6 +1,7 @@
 fileIn "Config.ms"
 fileIn "XML.ms"
 fileIn "Export.ms"
+fileIn "Physic.ms"
 
 utility BioUtility "Eon-Utility" width:160 height:549
 (
@@ -186,6 +187,15 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			append l_params #("name",l_name)
 			append l_params #("path",l_relPath)
 			
+			--Wrapper Físic de l'objecte
+			l_coords = GetPhysxWrapper l_object
+			l_coordscount = l_coords.count
+			for i = 1 to l_coordscount do
+			(
+				append l_params l_coords[i]
+			)
+			
+			/*
 			local l_invTransform = inverse l_object.transform
 			
 			l_aux = "" as stringStream
@@ -201,7 +211,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			l_MinCoord = RHVectorToLH l_MinCoord
 			format "% % %" l_MinCoord.x l_MinCoord.y l_MinCoord.z to:l_aux
 			append l_params #("min",l_aux)
-			
+			*/
 			format "\n\t" to:l_file
 			format "%" (InlineTagParamXML "mesh" l_params) to:l_file
 			-------------------------------
@@ -227,23 +237,6 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			if checkTextures.checked then
 			(
 				TextureList l_textures l_object
-				
-				/*
-				makeDir l_TextureTotalPath all:true
-				
-				for i=1 to l_textures.count do
-				(
-					path1 = l_textures[i]
-					path2 = getTexturePath() + (filenameFromPath path1)
-					
-					if stricmp (getFilenamePath path1) (getFilenamePath path2) != 0 then
-					(
-						deleteFile path2
-						
-						copyFile path1 path2
-					)
-				)
-				*/
 			)
 		)
 		
@@ -467,7 +460,6 @@ utility BioUtility "Eon-Utility" width:160 height:549
 	)
 	
 	
-	
 	function ExportPhysX _instances =
 	(
 			
@@ -634,20 +626,6 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				if checkTextures.checked == true then
 				(
 					TextureList l_textures $
-					/*
-					for i=1 to l_textures.count do
-					(
-						path1 = l_textures[i]
-						path2 = getTexturePath() + (filenameFromPath path1)
-						
-						if stricmp (getFilenamePath path1) (getFilenamePath path2) != 0 then
-						(
-							deleteFile path2
-							
-							copyFile path1 path2
-						)
-					)
-					*/
 				)
 			)
 		) else (
