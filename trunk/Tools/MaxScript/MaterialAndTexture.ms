@@ -37,6 +37,7 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 		(
 			l_bumpPercent = DEFAULT_BUMP_VALUE
 		)
+		format "	->	NORMAL: %\n" l_bumpPercent
 		
 		--propietats per parallax
 		l_parallaxHeight = getUserProp _object "parallax"
@@ -48,10 +49,12 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 			l_parallax = true
 			l_numProperties = l_numProperties + 1
 			
+			
 			if l_parallaxHeight < 0 or l_parallaxHeight > 1 then
 			(
-				l_bumpPercent = DEFAULT_PARALLAX_VALUE
+				l_parallaxHeight = DEFAULT_PARALLAX_VALUE
 			)
+			format "	->	PARALLAX: %\n" l_parallaxHeight
 		)
 	)
 	
@@ -59,18 +62,21 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 	(
 		--l_materialMask = bit.or l_materialMask TEXTURE_TYPE_LIGHTMAP
 		l_numTextures = l_numTextures + 1
+		format "	->	LIGHTMAP\n"
 	)
 	
 	if _material.reflectionMapEnable == true and _material.reflectionMap != undefined then
 	(
 		--l_materialMask = bit.or l_materialMask TEXTURE_TYPE_ENVIRONMENT
 		l_numTextures = l_numTextures + 1
+		format "	->	SPECULAR\n"
 	)
 	
 	if _material.filterMapEnable == true and _material.filterMap != undefined then
 	(
 		--l_materialMask = bit.or l_materialMask TEXTURE_TYPE_GLOW
 		l_numTextures = l_numTextures + 1
+		format "	->	GLOW\n"
 	)
 	
 	--volcat a fitxer
@@ -96,7 +102,6 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 		l_texture = _material.bumpMap.filename
 		l_texture = filenameFromPath (OpenBitmap l_texture).filename
 		l_texture = _relativePath + l_texture
-		format "	->	NORMAL\n"
 		
 		WriteShort _file NORMALMAP_MATERIAL_MASK #unsigned
 		WriteShort _file l_texture.count #unsigned
@@ -108,7 +113,6 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 		l_texture = _material.selfIllumMap.filename
 		l_texture = filenameFromPath (OpenBitmap l_texture).filename
 		l_texture = _relativePath + l_texture
-		format "	->	LIGHTMAP\n"
 		
 		WriteShort _file LIGHTMAP_MATERIAL_MASK #unsigned
 		WriteShort _file l_texture.count #unsigned
@@ -120,7 +124,6 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 		l_texture = _material.reflectionMap.filename
 		l_texture = filenameFromPath (OpenBitmap l_texture).filename
 		l_texture = _relativePath + l_texture
-		format "	->	SPECULAR\n"
 		
 		WriteShort _file SPECULARMAP_MATERIAL_MASK #unsigned
 		WriteShort _file l_texture.count #unsigned
@@ -132,7 +135,6 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 		l_texture = _material.filterMap.filename
 		l_texture = filenameFromPath (OpenBitmap l_texture).filename
 		l_texture = _relativePath + l_texture
-		format "	->	GLOW\n"
 		
 		WriteShort _file GLOW_MATERIAL_MASK #unsigned
 		WriteShort _file l_texture.count #unsigned
