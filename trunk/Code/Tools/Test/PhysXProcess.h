@@ -8,6 +8,7 @@
 class CObject3D;
 class CRenderManager;
 class CRenderableObject;
+class CSpotLight;
 
 //-----------------------------------------
 
@@ -17,7 +18,7 @@ class CPhysXProcess:
 
 public:
                         CPhysXProcess            (): CProcess("CPhysXProcess"), m_pObject(0), m_pObjectCamera(0),
-                                                    m_fVelocity(0.0f),m_bRenderLights(false),m_fPhysxVelocity(20),m_pRenderPhysX(0)
+                                                    m_fVelocity(0.0f),m_bRenderLights(false),m_fPhysxVelocity(20),m_pRenderPhysX(0),m_pSpotlight(0)
                                                 {};
   virtual               ~CPhysXProcess           ()                          {Done();};
 
@@ -45,6 +46,7 @@ private:
   bool                  m_bRenderLights;
   float                 m_fPhysxVelocity;
   CRenderableObject*    m_pRenderPhysX;
+  CSpotLight*           m_pSpotlight;
 
   
   
