@@ -47,8 +47,9 @@ public:
   ~CPhysxRagdoll(){Done();Release();};
 
   //Funcions
-  bool						Load	(const string& _szFileName, bool _bReload);
-  bool						Init	(CalSkeleton* _pSkeleton);
+  bool						Load	        (const string& _szFileName, bool _bReload);
+  bool						Init	        (CalSkeleton* _pSkeleton);
+  bool						InitSkeleton	(CalSkeleton* _pSkeleton);
 
   //CGameObject(string _szName) : m_pRenderableObject(0), m_pPhysXActor(0),CNamed(_szName),m_pUserData(0),m_szType("") {};
 protected:
