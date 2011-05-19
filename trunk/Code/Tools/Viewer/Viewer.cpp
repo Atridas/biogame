@@ -13,6 +13,7 @@
 #include <LightManager.h>
 #include "SceneEffectManager.h"
 #include "SpotLight.h"
+#include "OmniLight.h"
 #include "SoundManager.h"
 #include "ScriptManager.h"
 #include "ActionManager.h"
@@ -76,6 +77,10 @@ void CViewer::Init()
       m_pTargetObject,
       2.5f);
 
+  m_pObjectModeLight = 0;
+  m_pSpotLight = 0;
+  m_pOmniLight = 0;
+
   m_pObjectModeLight = CORE->GetLightManager()->CreateDirectionalLight("ObjectModeLight",
                                                                         Vect3f(0.0f),
                                                                         Vect3f(1.0f,1.0f,1.0f),
@@ -84,7 +89,7 @@ void CViewer::Init()
                                                                         80.0f,
                                                                         false);
 
-  m_pSpotLight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
+  /*m_pSpotLight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
                                                           Vect3f(-2.15715f,0.0f,-7.32758f),
                                                           Vect3f(-5.4188f,0.0f,3.75613f),
                                                           CColor(Vect3f(0.7f,0.7f,0.7f)),
@@ -92,7 +97,9 @@ void CViewer::Init()
                                                           80.0f,
                                                           10.0f,
                                                           45.0f,
-                                                          true );
+                                                          true );*/
+
+  m_pOmniLight = CORE->GetLightManager()->CreateOmniLight("OmniViewerLight",Vect3f(0.0f),CColor(Vect3f(0.15f)),0.1f,17.0f);
 
   CSceneEffectManager* l_pSceneEffectManager = CORE->GetSceneEffectManager();
   if(l_pSceneEffectManager)
@@ -193,6 +200,10 @@ void CViewer::InitFreeMode()
     m_pSpotLight->SetActive(m_bEnableLights);
   }
 
+  if(m_pOmniLight)
+  {
+    m_pOmniLight->SetActive(m_bEnableLights);
+  }
 
   CORE->GetLightManager()->SetAmbientLight(m_vAmbientLight);
 
@@ -266,6 +277,11 @@ void CViewer::ProcessFreeMode(const float _fElapsedTime)
     m_pSpotLight->SetActive(m_bEnableLights);
   }
 
+  if(m_pOmniLight)
+  {
+    m_pOmniLight->SetActive(m_bEnableLights);
+  }
+
   if(!CORE->GetActionManager()->IsActionActive("Run"))
   {
     SetWalking();
@@ -329,6 +345,12 @@ void CViewer::ProcessFreeMode(const float _fElapsedTime)
     Vect3f l_vPosition = m_pTargetObject->GetPosition();
     m_pSpotLight->SetPosition(l_vPosition);
     m_pSpotLight->SetDirection(m_pObjectCamera->GetDirection());
+  }
+
+  if(m_pOmniLight)
+  {
+    Vect3f l_vPosition = m_pObjectCamera->GetEye();
+    m_pOmniLight->SetPosition(l_vPosition);
   }
 
   if (!m_bMoveFwd && !m_bMoveBack && !m_bMoveLeft && !m_bMoveLeft && !m_bMoveRight)
