@@ -30,6 +30,8 @@ public:
   void                  RenderINFO              (CRenderManager* _pRM);
   void                  RenderPhysX             (CRenderManager* _pRM, CRenderableObject* _pRO, Mat44f _mMatTransf);
   void                  RenderImpacts           (CRenderManager* _pRM);
+  void                  RenderLaserPoint        (CRenderManager* _pRM);
+
 
   virtual bool          ExecuteProcessAction      (float _fDeltaSeconds, float _fDelta, const char* _pcAction);
 

@@ -83,10 +83,24 @@ bool CPhysxRagdoll::Init(CalSkeleton* _pSkeleton)
     l_pBone->getBoundingBox().computePoints(l_vPoints);
     l_pBone->getBoundingBox().computePoints(l_vPoints);
     CalMatrix l_vMatrix = l_pBone->getTransformMatrix();
+   
 
+    //CalQuaternion l_vQuaternion = l_pBone->getRotationBoneSpace();
+    D3DXMATRIX l_dMatrix;
     CalQuaternion l_vQuaternion = l_pBone->getRotationAbsolute();
-    
-    Mat33f l_vMat33(l_vMatrix.dxdx,l_vMatrix.dxdy,l_vMatrix.dxdz,l_vMatrix.dydx,l_vMatrix.dydy,l_vMatrix.dydz,l_vMatrix.dzdx,l_vMatrix.dzdy,l_vMatrix.dzdz);
+
+    D3DXMatrixRotationQuaternion(&l_dMatrix,(CONST D3DXQUATERNION*)& l_vQuaternion);
+    CalVector l_vTranslationBoneSpace = l_pBone->getTranslationBoneSpace();
+    l_dMatrix._14 = l_vTranslationBoneSpace.x;
+    l_dMatrix._24 = l_vTranslationBoneSpace.y;
+    l_dMatrix._34 = l_vTranslationBoneSpace.z;
+
+    Mat44f l_vMat44prova = (Mat44f)l_dMatrix;
+
+    CalMatrix l_vMatrix2(l_vQuaternion);
+
+    Mat33f l_vMat33(l_vMatrix2.dxdx,l_vMatrix2.dxdy,l_vMatrix2.dxdz,l_vMatrix2.dydx,l_vMatrix2.dydy,l_vMatrix2.dydz,l_vMatrix2.dzdx,l_vMatrix2.dzdy,l_vMatrix2.dzdz);
+    Mat44f l_vMatGlobal(l_vMat33);
     float l_fYaw = l_vMat33.GetYaw();
     float l_fPitch = l_vMat33.GetPitch();
     float l_fRoll = l_vMat33.GetRoll();
@@ -121,14 +135,15 @@ bool CPhysxRagdoll::Init(CalSkeleton* _pSkeleton)
     r3.SetIdentity();
 
     t.Translate(l_vPos);
-    r.SetFromAngleY(l_fPitch);
-    r2.SetFromAngleZ(l_fYaw);
+    r.SetFromAngleY(l_fYaw);
+    r2.SetFromAngleZ(l_fPitch);
     //r3.SetFromAngleX(l_fRoll);
     //s.Scale(1.5f,1.5f,1.5f);
 
     total = t*r*r2;
 
     //Mat44f l_vMat44(l_vMat33); 
+
 
 
 
@@ -146,7 +161,7 @@ bool CPhysxRagdoll::Init(CalSkeleton* _pSkeleton)
       //l_pActor->SetGlobalPosition(l_vPos);
 
       l_pPM->AddPhysicActor(l_pActor);
-      l_pActor->SetMat44(total);
+      l_pActor->SetMat44(l_vTrans*l_vMatGlobal);
 
       m_vBoneActors[i].m_pActor = l_pActor;
       m_vBoneActors[i].m_pUserData = l_pUserData;
