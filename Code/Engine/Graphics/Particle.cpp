@@ -1,4 +1,5 @@
 #include "Particle.h"
+#include "base.h"
 
 
 CParticle::CParticle()
@@ -17,6 +18,7 @@ CParticle::CParticle()
   m_PointC=(D3DXVECTOR3(0.0f,0.0f,0.0f)); 
   m_PointD=(D3DXVECTOR3(0.0f,0.0f,0.0f));
   m_fAngle    = 0.0f;
+  m_iIncrementAngle=0.0f;
 
   //*******
 /*  m_iTexNumFiles=0;
@@ -50,8 +52,8 @@ bool CParticle::Update(float fTimeDelta,CCamera* camera)
 {
 
   m_fAge += fTimeDelta;
-  //m_fAngle += fTimeDelta*20;
-  m_fAngle += 0.01f;
+  m_iIncrementAngle = m_iIncrementAngle+(m_fAngle*fTimeDelta);
+  //m_fAngle += 0.01f;
   if (m_fAge >= m_fLifetime )
   {
     //its time to die..
@@ -64,6 +66,7 @@ bool CParticle::Update(float fTimeDelta,CCamera* camera)
     if(m_vTimeColor[i]<m_fAge)
 	 {
 	   m_Color = m_vColor[i];
+    
      i=0;
 	 }
     i--;
@@ -71,11 +74,17 @@ bool CParticle::Update(float fTimeDelta,CCamera* camera)
   //m_Color= m_Color;
   
   i= m_vTimeDirection.size()-1;
+  int i_aux=i;
   while (i>=0)
   {
     if(m_vTimeDirection[i]<m_fAge)
 	 {
      m_vDir = m_vDirection[i];
+     if(i<i_aux)
+     {
+      m_vDir = InterPolaterNumber(m_vDir,m_vDirection[i+1],0.4f);
+     }
+     m_vDirection[i]=m_vDir;
      i=0;
 	 }
     i--;
@@ -96,7 +105,7 @@ bool CParticle::Update(float fTimeDelta,CCamera* camera)
   m_VDirection.z = l_cameraDirection.z;
     
   Mat33f mat;
-  l_cameraVecUp = mat.FromAxisAngle(l_cameraDirection.Normalize(), m_fAngle)* l_cameraVecUp.Normalize();
+  l_cameraVecUp = mat.FromAxisAngle(l_cameraDirection.Normalize(), m_iIncrementAngle)* l_cameraVecUp.Normalize();
   m_VUp.x = l_cameraVecUp.x;
   m_VUp.y = l_cameraVecUp.y;
   m_VUp.z = l_cameraVecUp.z;
@@ -127,10 +136,10 @@ bool CParticle::Update(float fTimeDelta,CCamera* camera)
 	   }
       i=i-2;
     }
-    m_fIncrementV = (float)m_pTexParticle->GetHeight() /*256.f*//m_iTexNumFiles;
-    m_fIncrementV= m_fIncrementV/256.f;
-    m_fIncrementU = (float)m_pTexParticle->GetWidth()/*256.f*//m_iTexNumColumnes;
-    m_fIncrementU = m_fIncrementU/256.f;
+    m_fIncrementV = (float)m_pTexParticle->GetHeight()/m_iTexNumFiles;
+    m_fIncrementV= m_fIncrementV/m_pTexParticle->GetHeight();
+    m_fIncrementU = (float)m_pTexParticle->GetWidth()/m_iTexNumColumnes;
+    m_fIncrementU = m_fIncrementU/m_pTexParticle->GetHeight();
 	  m_iTotalDiapos=m_iTexNumFiles*m_iTexNumColumnes;
 	  int l_canviDiapo=1;
 		

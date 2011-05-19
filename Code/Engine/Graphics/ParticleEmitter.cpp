@@ -35,6 +35,8 @@ m_Particles(NUMPARTICLES)
   m_fNumNewPartsExcess = 0.0f;
   m_fLife1 = 0.0f;
   m_fLife2 = 0.0f;
+  m_fAngle1 = 0.0f;
+  m_fAngle2 = 0.0f;
   //m_fAngle = 0.0f;
   m_fSizeX= 1.0f;
   m_fSizeY=1.0f;
@@ -69,6 +71,8 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
   m_vTimeDirection = _info->m_vTimeDirection;
   m_vGravity = _info->m_vGravity;
   m_vVel = _info->m_vVel;
+  m_fAngle1 = _info->m_fAngle1;
+  m_fAngle2 = _info->m_fAngle2;
   //*** per animació
 
   m_bAnimated = _info->m_bAnimated;
@@ -144,7 +148,11 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
       float fRandSize = RandomNumber(m_fMinSize,m_fMaxSize);
       part->SetSize(fRandSize);
 
+      float fRandAngle = RandomNumber(m_fAngle1,m_fAngle2);
+      part->SetAngle(fRandAngle);
       
+      float l_iIncrementAngle= RandomNumber(0.0f,120.0f);
+      part->SetInitAngle(l_iIncrementAngle);
       
 
       //*****************

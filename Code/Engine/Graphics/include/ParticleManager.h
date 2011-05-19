@@ -26,6 +26,8 @@ struct SParticleInfo
   CTexture*             m_pTexParticle;
   float                 m_fLife1;
   float                 m_fLife2;
+  float                 m_fAngle1;
+  float                 m_fAngle2;
   vector<D3DXCOLOR>     m_vColor;
   vector<float>         m_vTimeColor;  //modificar tot els  m_vTime  per els m_vTimeColor
   vector<D3DXVECTOR3>   m_vDirection;

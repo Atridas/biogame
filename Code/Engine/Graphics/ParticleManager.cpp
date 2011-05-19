@@ -94,6 +94,8 @@ bool CParticleManager::Load(const string& _szFileName)
         l_pInfo->m_pTexParticle = CORE->GetTextureManager()->GetResource(l_treeParticleEmitter.GetPszProperty("TexParticle",""));
         l_pInfo->m_fLife1 = l_treeParticleEmitter.GetFloatProperty("Life1");
         l_pInfo->m_fLife2 = l_treeParticleEmitter.GetFloatProperty("Life2");
+        l_pInfo->m_fAngle1 = l_treeParticleEmitter.GetFloatProperty("Angle1");
+        l_pInfo->m_fAngle2 = l_treeParticleEmitter.GetFloatProperty("Angle2");
         l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Gravity",Vect3f(3.0f));
         l_pInfo->m_vGravity = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
         l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Velocitate",Vect3f(3.0f));
