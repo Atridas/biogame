@@ -9,6 +9,7 @@ class CRenderableObject;
 class CRenderableAnimatedInstanceModel;
 class CDirectionalLight;
 class CSpotLight;
+class COmniLight;
 class CRenderManager;
 //-----------------------------------------
 
@@ -107,6 +108,7 @@ private:
   CRenderableAnimatedInstanceModel* m_pCharacter;
   CDirectionalLight* m_pObjectModeLight;
   CSpotLight* m_pSpotLight;
+  COmniLight* m_pOmniLight;
   Vect3f m_vAmbientLight;
   bool m_bEnableLights;
   float m_fInitialCharacterYaw;
