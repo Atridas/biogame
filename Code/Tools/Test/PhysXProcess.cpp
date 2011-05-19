@@ -523,9 +523,12 @@ void CPhysXProcess::Update(float _fElapsedTime)
 
 void CPhysXProcess::RenderScene(CRenderManager* _pRM)
 {
-
+   
    CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
    l_pPhysManager->DebugRender(_pRM);
+
+   //RenderLaserPoint(_pRM);
+   
 
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -646,7 +649,7 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
    }*/
   //Render Objects
   CORE->GetRenderableObjectsManager()->Render(_pRM);
-
+  //RenderLaserPoint(_pRM);
   //Render Lights
   if(m_bRenderLights)
     CORE->GetLightManager()->Render(_pRM);
@@ -662,6 +665,7 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
 
   //Draw Grid and Axis
   _pRM->SetTransform(identity);
+  
   // l_pAnim->RenderRenderableObject(RENDER_MANAGER);
   //_pRM->DrawGrid(30.0f,colCYAN,30,30);
    
@@ -705,6 +709,7 @@ void CPhysXProcess::RenderINFO(CRenderManager* _pRM)
 
  
   _pRM->DrawAxis();
+  
 }
 
 bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
@@ -865,7 +870,7 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     {
       g_pRagdoll = new CPhysxRagdoll("Ragdoll Prova");
       g_pRagdoll->Load("Data/Animated Models/Riggle/Ragdoll.xml",false);
-      g_pRagdoll->Init(l_pSkeleton);
+      g_pRagdoll->InitSkeleton(l_pSkeleton);
     }
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -1032,9 +1037,9 @@ void CPhysXProcess::RenderLaserPoint(CRenderManager* _pRM)
   t.Translate(l_vAnimPos);
   _pRM->SetTransform(t);*/
 
+  Vect3f l_vAnimPos2 = m_pObject->GetPosition();
   //_pRM->DrawLine(Vect3f(l_vPos.x+l_vAnimPos.x,l_vPos.y+l_vAnimPos.y,l_vPos.z+l_vAnimPos.z),l_CInfo.m_CollisionPoint,colRED);
-  
-  _pRM->DrawLine(Vect3f(l_vAnimPos.x,l_vAnimPos.y,l_vAnimPos.z),l_CInfo.m_CollisionPoint,colRED);
+  _pRM->DrawLine(l_CInfo.m_CollisionPoint,Vect3f(l_vAnimPos.x,l_vAnimPos.y,l_vAnimPos.z),colRED);
 
   Mat44f t;
   t.SetIdentity();
