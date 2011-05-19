@@ -571,12 +571,14 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
     //CalVector l_vPoints[8];
     //l_pBone->getBoundingBox().computePoints(l_vPoints);
 
-    /*for (size_t j=0;j<l_vBones.size();++j)
-    {*/
+    for (size_t j=0;j<l_vBones.size();++j)
+    {
 
     
       //l_pSkeleton->getBone(l_pSkeleton->getCoreSkeleton()->getCoreBoneId("Bip 01 Head"));
-      CalBone* l_pBone = l_pSkeleton->getBone(l_pSkeleton->getCoreSkeleton()->getCoreBoneId("Bip01 Head"));
+      //CalBone* l_pBone = l_pSkeleton->getBone(l_pSkeleton->getCoreSkeleton()->getCoreBoneId("Bip01 Head"));
+
+      CalBone* l_pBone = l_vBones[j];
       CalVector l_vPoints[8];
       l_pBone->getBoundingBox().computePoints(l_vPoints);
       CalMatrix l_vMatrix = l_pBone->getTransformMatrix();
@@ -620,7 +622,7 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
       CHECKED_DELETE(l_pBox)
 
 
-    //}
+    }
 
     
 
@@ -630,6 +632,7 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
    RenderImpacts(_pRM);
+   RenderLaserPoint(_pRM);
 
 
   
@@ -668,29 +671,6 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
 
 }
 
-
-void CPhysXProcess::RenderImpacts(CRenderManager* _pRM)
-{
-  Mat44f t;  
-  for (int i=0;i<(int)g_vCollisions.size();++i)
-  {
-
-      t.SetIdentity();
-      t.Translate(g_vCollisions[i].m_CollisionPoint);
-      _pRM->SetTransform(t);
-      if (i==8)
-      {
-        _pRM->DrawSphere(0.015f,colRED,5);
-      }
-      else
-      {
-        _pRM->DrawSphere(0.01f,colYELLOW,5);
-      }
-      _pRM->DrawLine(v3fZERO,g_vCollisions[i].m_Normal*0.5f,colGREEN);
-  }
-
-
-}
 
 
 void CPhysXProcess::RenderINFO(CRenderManager* _pRM)
@@ -881,12 +861,12 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     l_pSkeleton->getCoreSkeleton()->calculateBoundingBoxes(l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getCoreModel());
     l_pSkeleton->calculateBoundingBoxes();
 
-    //if (g_pRagdoll == 0)
-    //{
+    if (g_pRagdoll == 0)
+    {
       g_pRagdoll = new CPhysxRagdoll("Ragdoll Prova");
       g_pRagdoll->Load("Data/Animated Models/Riggle/Ragdoll.xml",false);
       g_pRagdoll->Init(l_pSkeleton);
-    //}
+    }
 
     ///////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////////
@@ -990,7 +970,6 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
   return false;
 }
 
-
 void CPhysXProcess::RenderPhysX(CRenderManager* _pRM, CRenderableObject* _pRO, Mat44f _mMatTransf)
 {
     //_pRO->GetBoundingBox()->GetMiddlePoint();
@@ -1007,6 +986,66 @@ void CPhysXProcess::RenderPhysX(CRenderManager* _pRM, CRenderableObject* _pRO, M
   // _pRM->RenderBoundingBox(l_pInstanceMesh->GetBoundingBox());
 }
 
+void CPhysXProcess::RenderImpacts(CRenderManager* _pRM)
+{
+  Mat44f t;  
+  for (int i=0;i<(int)g_vCollisions.size();++i)
+  {
+
+      t.SetIdentity();
+      t.Translate(g_vCollisions[i].m_CollisionPoint);
+      _pRM->SetTransform(t);
+      if (i==8)
+      {
+        _pRM->DrawSphere(0.015f,colRED,5);
+      }
+      else
+      {
+        _pRM->DrawSphere(0.01f,colYELLOW,5);
+      }
+      _pRM->DrawLine(v3fZERO,g_vCollisions[i].m_Normal*0.5f,colGREEN);
+  }
+
+
+}
+
+void CPhysXProcess::RenderLaserPoint(CRenderManager* _pRM)
+{
+  CalSkeleton* l_pSkeleton = g_pCharacter->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
+  l_pSkeleton->calculateBoundingBoxes();
+  Vect3f l_vAnimPos = g_pCharacter->GetPosition();
+  int l_iBoneId = l_pSkeleton->getCoreSkeleton()->getCoreBoneId("Bip01 R Hand");
+  CalBone* l_pBone = l_pSkeleton->getBone(l_iBoneId);
+  CalVector l_vPos = l_pBone->getTranslationAbsolute();
+
+
+  CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
+  const Vect3f l_PosCamera = m_pCamera->GetEye();
+  const Vect3f& l_DirCamera = m_pCamera->GetDirection().Normalize();
+  
+  SCollisionInfo l_CInfo;
+  g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActor(l_PosCamera,l_DirCamera,2,g_pUserDataSHOOT,l_CInfo);
+  //vCollisions.push_back(l_CInfo);
+
+  /*Mat44f t;
+  t.SetIdentity();
+  t.Translate(l_vAnimPos);
+  _pRM->SetTransform(t);*/
+
+  //_pRM->DrawLine(Vect3f(l_vPos.x+l_vAnimPos.x,l_vPos.y+l_vAnimPos.y,l_vPos.z+l_vAnimPos.z),l_CInfo.m_CollisionPoint,colRED);
+  
+  _pRM->DrawLine(Vect3f(l_vAnimPos.x,l_vAnimPos.y,l_vAnimPos.z),l_CInfo.m_CollisionPoint,colRED);
+
+  Mat44f t;
+  t.SetIdentity();
+  t.Translate(l_CInfo.m_CollisionPoint);
+  _pRM->SetTransform(t);
+  _pRM->DrawSphere(0.1f,colRED,5);
+
+  if (g_pUserDataSHOOT)
+  g_pUserDataSHOOT->SetColor(colGREEN);
+
+}
 
   
 
