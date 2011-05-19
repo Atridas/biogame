@@ -21,6 +21,7 @@ public:
               m_pD3DEffect(0),
               m_pD3DTechnique(0),
               m_pD3DInstancedTechnique(0),
+              m_pD3DAlphaTechnique(0),
               m_pEffectPool(0) {};
 
   virtual ~CEffect(void) {Done();};
@@ -28,6 +29,10 @@ public:
   //bool SetLights(size_t _iNumOfLights);
   bool Init(const CXMLTreeNode& _xmlEffect,LPD3DXEFFECTPOOL _pEffectPool);
   bool Reload();
+  
+  void ActivateDefaultRendering();
+  void ActivateAlphaRendering();
+  void ActivateInstancedRendering();
 
   LPD3DXEFFECT GetD3DEffect() const {return m_pD3DEffect;};
   //D3DXHANDLE GetTechniqueByName(const string& _szTechniqueName) const;
@@ -77,9 +82,11 @@ private:
   string m_szFileName;
   string m_szTechniqueName;
   string m_szInstancedTechniqueName;
+  string m_szD3DAlphaTechniqueName;
   LPD3DXEFFECT m_pD3DEffect;
   D3DXHANDLE m_pD3DTechnique;
   D3DXHANDLE m_pD3DInstancedTechnique;
+  D3DXHANDLE m_pD3DAlphaTechnique;
   LPD3DXEFFECTPOOL m_pEffectPool;
 };
 

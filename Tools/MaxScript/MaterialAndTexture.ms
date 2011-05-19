@@ -10,6 +10,7 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 	local l_parallax = false
 	local l_parallaxHeight = 0
 	local l_specularParams = false
+	local l_opacityMap = false
 	
 	if _material.glossiness != undefined and _material.specularLevel != undefined then
 	(
@@ -22,6 +23,11 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 	(
 		--l_materialMask = bit.or l_materialMask TEXTURE_TYPE_DIFFUSSE
 		l_numTextures = l_numTextures + 1
+		if _material.OpacityMapEnable then
+		(
+			l_numProperties = l_numProperties + 1
+			l_opacityMap = true
+		)
 	)
 	
 	if _material.bumpMapEnable == true and _material.bumpMap != undefined then
@@ -166,6 +172,12 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 			WriteFloat _file _material.glossiness
 			WriteFloat _file _material.specularLevel
 			format "	->	Specular properties Gloss:% Factor:%\n" _material.glossiness _material.specularLevel
+		)
+		
+		if l_opacityMap then
+		(
+			WriteShort _file ALPHA_PROPERTY_TYPE #unsigned
+			format "	->	Diffuse has alpha\n"
 		)
 	)
 )

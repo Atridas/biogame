@@ -24,10 +24,12 @@ global SPECULARMAP_MATERIAL_MASK  = 0x0010
 global GLOW_MATERIAL_MASK             = 0x0020
 global PARALLAX_MATERIAL_MASK        = 0x0040
 global SPECULAR_MATERIAL_MASK        = 0x0080
+global ALPHA_MATERIAL_MASK             = 0x0100
 
 global PARALLAX_PROPERTY_TYPE        = 1
 global BUMP_PROPERTY_TYPE              = 2
 global SPECULAR_PROPERTY_TYPE        = 3
+global ALPHA_PROPERTY_TYPE             = 4
 
 global DEFAULT_BUMP_VALUE              = 0.6
 global DEFAULT_PARALLAX_VALUE        = 0.02

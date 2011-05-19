@@ -8,7 +8,7 @@ public:
     : CPropertyDecorator(_pDecoratedMaterial),m_fBump(_fBump) {};
   virtual ~CBumpPropertyDecorator() {};
 
-  virtual float GetBump() {return m_fBump;};
+  virtual float GetBump() const {return m_fBump;};
 
 private:
   float m_fBump;

@@ -132,7 +132,11 @@ public:
 
   void ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _mProjectionMatrix, const Vect3f& _vCameraEye);
 
-  void Begin(void) {m_bLightsUpdated = true;};
+  void Begin(void) {m_bLightsUpdated = true; ActivateDefaultRendering();};
+  
+  void ActivateDefaultRendering(void);
+  void ActivateAlphaRendering(void);
+  void ActivateInstancedRendering(void);
 
   void LoadShaderData(CEffect* _pEffect);
 

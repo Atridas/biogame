@@ -7,6 +7,6 @@ public:
   CAnimatedMeshEmptyMaterial() {};
   ~CAnimatedMeshEmptyMaterial() {};
 
-  virtual int GetMaterialType() {return ANIMATED_MESH_MATERIAL_MASK;};
+  virtual int GetMaterialType() const {return ANIMATED_MESH_MATERIAL_MASK;};
 };
 

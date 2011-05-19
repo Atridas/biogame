@@ -28,6 +28,8 @@ public:
 
   CStaticMesh* GetStaticMesh() { return m_StaticMesh; };
 
+  virtual bool IsAlphaBlended() const;
+
 protected:
   virtual void          Release                   ();
 

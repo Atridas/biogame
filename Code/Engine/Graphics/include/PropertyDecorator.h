@@ -10,6 +10,6 @@ public:
   virtual ~CPropertyDecorator() {};
 
   virtual void Activate() {m_pDecoratedMaterial->Activate();};
-  virtual int GetMaterialType() {return m_pDecoratedMaterial->GetMaterialType();};
+  virtual int GetMaterialType() const {return m_pDecoratedMaterial->GetMaterialType();};
 };
 

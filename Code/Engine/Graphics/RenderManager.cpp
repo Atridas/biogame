@@ -220,6 +220,8 @@ void CRenderManager::SetupMatrices(CCamera* _pCamera, bool _bOrtho)
 	D3DXMATRIX m_matProject;
   Vect3f eye;
 
+  m_pCamera = _pCamera;
+
 	if(!_pCamera)
 	{
 		//Set default view and projection matrix

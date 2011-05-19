@@ -66,6 +66,8 @@ public:
 
   vector<uint32> GetIndexBuffer ()  {return m_vIndexBuffer;};
   vector<Vect3f> GetVertexBuffer ()  {return m_vVertexBuffer;};
+  
+  bool IsAlphaBlended() const;
 
 protected:
   /**

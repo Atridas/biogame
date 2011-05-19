@@ -190,6 +190,9 @@
     <Filter Include="Materials\MaterialDecorators\PropertyDecorators\SpecularPropertyDecorator">
       <UniqueIdentifier>{a3105cc8-1c04-4baa-991f-e56ac65adb6f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Materials\MaterialDecorators\PropertyDecorators\AlphaDecorator">
+      <UniqueIdentifier>{e29af470-f754-4bf1-b101-f50d5379fa13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -496,6 +499,9 @@
     </ClInclude>
     <ClInclude Include="include\SpecularPropertyDecorator.h">
       <Filter>Materials\MaterialDecorators\PropertyDecorators\SpecularPropertyDecorator</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AlphaDecorator.h">
+      <Filter>Materials\MaterialDecorators\PropertyDecorators\AlphaDecorator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

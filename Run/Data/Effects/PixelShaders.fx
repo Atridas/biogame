@@ -12,7 +12,7 @@ float4 LightmapPS(TNORMAL_TEXTURED2_VERTEX_PS _in) : COLOR {
 	float4 l_LightResult = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   l_LightmapColor, g_SpotlightFactor,
                                                   _in.PosLight)
-                                ,1.0);
+                                ,l_DiffuseColor.a);
 	return l_LightResult;
 }
 
@@ -26,7 +26,7 @@ float4 LightmapNormalmapPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _in) : C
 	float4 l_LightResult = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   l_LightmapColor, g_SpotlightFactor,
                                                   _in.PosLight)
-                                ,1.0);
+                                ,l_DiffuseColor.a);
 	return l_LightResult;
 }
 
@@ -68,7 +68,7 @@ float4 NormalTexturedPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
   float4 out_ = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   g_AmbientLight, g_SpotlightFactor,
                                                   _in.PosLight)
-                                ,1.0);
+                                ,l_DiffuseColor.a);
   
   return out_;
 }
@@ -81,7 +81,7 @@ float4 SpecularTexturedPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
   float4 out_ = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   g_AmbientLight, l_SpotlightFactor,
                                                   _in.PosLight)
-                                ,1.0);
+                                ,l_DiffuseColor.a);
   
   return out_;
 }
@@ -101,7 +101,7 @@ float4 NormalDiffusedPS(TNORMAL_DIFFUSED_VERTEX_PS _in) : COLOR {
   float4 out_ = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   g_AmbientLight, g_SpotlightFactor,
                                                   _in.PosLight)
-                                ,1.0);
+                                ,l_DiffuseColor.a);
   
   return out_;
 }
@@ -116,7 +116,7 @@ float4 TangentBinormalNormalTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_
   float4 out_ = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   g_AmbientLight, g_SpotlightFactor,
                                                   _in.PosLight)
-                                ,1.0);
+                                ,l_DiffuseColor.a);
 
   return out_;
 }
@@ -130,7 +130,7 @@ float4 TangentBinormalNormalTexturedNoParallaxPS(TTANGENT_BINORMAL_NORMAL_TEXTUR
   float4 out_ = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   g_AmbientLight, g_SpotlightFactor,
                                                   _in.PosLight)
-                                ,1.0);
+                                ,l_DiffuseColor.a);
 
   return out_;
 }

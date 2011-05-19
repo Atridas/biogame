@@ -52,6 +52,12 @@ void CInstanceMesh::InitFromXML(CXMLTreeNode& l_XMLObject)
   }
 }
 
+
+bool CInstanceMesh::IsAlphaBlended() const 
+{ 
+  return m_StaticMesh->IsAlphaBlended(); 
+};
+
 void CInstanceMesh::Release()
 {
   //res, el static mesh el peta el manager.
