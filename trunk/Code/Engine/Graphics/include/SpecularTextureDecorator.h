@@ -8,7 +8,7 @@ public:
     : CTextureDecorator(_pDecoratedMaterial,_pTexture) {};
   ~CSpecularTextureDecorator() {};
 
-  virtual int GetMaterialType() {return SPECULARMAP_MATERIAL_MASK | m_pDecoratedMaterial->GetMaterialType();};
+  virtual int GetMaterialType() const {return SPECULARMAP_MATERIAL_MASK | m_pDecoratedMaterial->GetMaterialType();};
   virtual void Activate() {m_pTexture->Activate(3);m_pDecoratedMaterial->Activate();};
 };
 

@@ -18,6 +18,7 @@
 #include "ParallaxPropertyDecorator.h"
 #include "BumpPropertyDecorator.h"
 #include "SpecularPropertyDecorator.h"
+#include "AlphaDecorator.h"
 
 #include <IndexedVertexs.h>
 #include <base.h>
@@ -190,6 +191,9 @@ bool CStaticMesh::Load(const CXMLTreeNode& _XMLTreeNode)
           l_File.read((char*)&l_fGlossiness, sizeof(float));
           l_File.read((char*)&l_fSpecularLevel, sizeof(float));
           l_pMaterial = new CSpecularPropertyDecorator(l_pMaterial,l_fGlossiness,l_fSpecularLevel);
+          break;
+        case ALPHA_PROPERTY_TYPE:
+          l_pMaterial = new CAlphaDecorator( l_pMaterial );
           break;
         default:
           break;
@@ -381,6 +385,21 @@ void CStaticMesh::Render(CRenderManager *_pRM, bool _bInstanced) const
       ++l_ItRV;
       ++l_ItMaterialArray;
     }
+}
+
+bool CStaticMesh::IsAlphaBlended() const
+{
+  vector<CMaterial*>::const_iterator l_it  = m_vMaterials.cbegin();
+  vector<CMaterial*>::const_iterator l_end = m_vMaterials.cend();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    if( (*l_it)->HasAlphaBlending() )
+    {
+      return true;
+    }
+  }
+  return false;
 }
 
 void CStaticMesh::Release()

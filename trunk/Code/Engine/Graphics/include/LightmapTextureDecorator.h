@@ -8,7 +8,7 @@ public:
     : CTextureDecorator(_pDecoratedMaterial,_pTexture) {};
   ~CLightmapTextureDecorator() {};
 
-  virtual int GetMaterialType() {return LIGHTMAP_MATERIAL_MASK | m_pDecoratedMaterial->GetMaterialType();};
+  virtual int GetMaterialType() const {return LIGHTMAP_MATERIAL_MASK | m_pDecoratedMaterial->GetMaterialType();};
   virtual void Activate() {m_pTexture->Activate(2);m_pDecoratedMaterial->Activate();};
 };
 

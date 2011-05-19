@@ -43,7 +43,9 @@ bool CEffect::Init(const CXMLTreeNode& _xmlEffect, LPD3DXEFFECTPOOL _pEffectPool
     return false;
   }
 
-  m_szInstancedTechniqueName = _xmlEffect.GetPszISOProperty("instanced_technique","");
+  m_szInstancedTechniqueName = _xmlEffect.GetPszISOProperty("instanced_technique","", false);
+
+  m_szD3DAlphaTechniqueName  = _xmlEffect.GetPszISOProperty("alpha_technique","", false);
 
   SetOk(LoadEffect());
   return IsOk();
@@ -89,6 +91,8 @@ bool CEffect::LoadEffect()
 
   m_pD3DInstancedTechnique = m_pD3DEffect->GetTechniqueByName(m_szInstancedTechniqueName.c_str());
 
+  m_pD3DAlphaTechnique = m_pD3DEffect->GetTechniqueByName(m_szD3DAlphaTechniqueName.c_str());
+
   if(m_pD3DTechnique)
   {
     m_pD3DEffect->SetTechnique(m_pD3DTechnique);
@@ -110,3 +114,21 @@ void CEffect::Release()
   m_pD3DInstancedTechnique = 0;
   m_pEffectPool = 0;
 }
+
+
+void CEffect::ActivateDefaultRendering()
+{
+  m_pD3DEffect->SetTechnique( m_pD3DTechnique );
+};
+
+void CEffect::ActivateAlphaRendering()
+{
+  if(m_pD3DAlphaTechnique)
+    m_pD3DEffect->SetTechnique( m_pD3DAlphaTechnique );
+};
+
+void CEffect::ActivateInstancedRendering()
+{
+  if(m_pD3DInstancedTechnique)
+    m_pD3DEffect->SetTechnique( m_pD3DInstancedTechnique );
+};

@@ -438,7 +438,7 @@ CEffect* CEffectManager::ActivateMaterial(CMaterial* _pMaterial)
 
   if(l_pEffect)
   {
-    if(_pMaterial->GetMaterialType() & SPECULAR_MATERIAL_MASK)
+    if(_pMaterial->HasSpecularParameters())
     {
       SetSpecularParams(_pMaterial->GetGlossiness(), _pMaterial->GetSpecularFactor());
     }
@@ -448,6 +448,44 @@ CEffect* CEffectManager::ActivateMaterial(CMaterial* _pMaterial)
 
   return l_pEffect;
 }
+
+
+void CEffectManager::ActivateDefaultRendering(void)
+{
+  CMapManager<CEffect>::TMapResource::iterator l_it = m_Resources.begin();
+  CMapManager<CEffect>::TMapResource::iterator l_end = m_Resources.end();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    l_it->second->ActivateDefaultRendering();
+  }
+
+}
+
+void CEffectManager::ActivateAlphaRendering(void)
+{
+  CMapManager<CEffect>::TMapResource::iterator l_it = m_Resources.begin();
+  CMapManager<CEffect>::TMapResource::iterator l_end = m_Resources.end();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    l_it->second->ActivateAlphaRendering();
+  }
+
+}
+
+void CEffectManager::ActivateInstancedRendering(void)
+{
+  CMapManager<CEffect>::TMapResource::iterator l_it = m_Resources.begin();
+  CMapManager<CEffect>::TMapResource::iterator l_end = m_Resources.end();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    l_it->second->ActivateInstancedRendering();
+  }
+
+}
+
 
 const Mat44f& CEffectManager::GetViewProjectionMatrix()
 {

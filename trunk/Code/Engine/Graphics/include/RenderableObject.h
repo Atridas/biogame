@@ -20,6 +20,8 @@ public:
   virtual void Update(float _fElapsedTime) {};
   virtual void InitFromXML(CXMLTreeNode& l_XMLObject) {};
   void Render(CRenderManager *_pRM);
+
+  virtual bool IsAlphaBlended() const = 0;
   
 protected:
   virtual void RenderRenderableObject(CRenderManager *RM) = 0;

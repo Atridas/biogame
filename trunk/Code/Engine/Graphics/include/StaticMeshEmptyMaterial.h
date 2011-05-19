@@ -7,5 +7,5 @@ public:
   CStaticMeshEmptyMaterial() {};
   ~CStaticMeshEmptyMaterial() {};
 
-  virtual int GetMaterialType() {return STATIC_MESH_MATERIAL_MASK;};
+  virtual int GetMaterialType() const {return STATIC_MESH_MATERIAL_MASK;};
 };

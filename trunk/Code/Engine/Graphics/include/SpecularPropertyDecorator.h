@@ -11,8 +11,8 @@ public:
   CSpecularPropertyDecorator(CMaterial* _pDecoratedMaterial, float _fGlossiness, float _fSpecularLevel)
     : CPropertyDecorator(_pDecoratedMaterial),m_fGlossiness(_fGlossiness),m_fSpecularLevel(_fSpecularLevel) {};
   virtual ~CSpecularPropertyDecorator() {};
-
-  virtual int GetMaterialType() {return SPECULAR_MATERIAL_MASK | m_pDecoratedMaterial->GetMaterialType();};
+  
+  virtual bool HasSpecularParameters() const { return true; };
 
 private:
   float m_fGlossiness;

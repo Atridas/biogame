@@ -10,4 +10,5 @@
 	<mesh name="BoxAlpha" path="Data/Meshes/BoxAlpha.mesh" max="5.74998 3.10692 4.44316" min="-5.74997 0.0 -4.44316" />
 	<mesh name="BoxSpecular" path="Data/Meshes/BoxSpecular.mesh" max="5.74997 3.10692 4.44316" min="-5.74997 0.0 -4.44316" />
 	<mesh name="BoxAlpha01" path="Data/Meshes/BoxAlpha01.mesh" max="5.74997 3.10692 4.44316" min="-5.74997 0.0 -4.44316" />
+	<mesh name="Llum" path="Data/Meshes/Llum.mesh" max="1.5527 2.0 0.842842" min="-1.5527 0.606994 -0.842842" />
 </meshes>

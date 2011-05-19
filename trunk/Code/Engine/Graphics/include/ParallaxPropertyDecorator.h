@@ -8,8 +8,8 @@ public:
     : CPropertyDecorator(_pDecoratedMaterial),m_fParallaxHeight(_fParallaxHeight) {};
   virtual ~CParallaxPropertyDecorator() {};
 
-  virtual float GetParallaxHeight() {return m_fParallaxHeight;};
-  virtual int GetMaterialType() {return PARALLAX_MATERIAL_MASK | m_pDecoratedMaterial->GetMaterialType();};
+  virtual float GetParallaxHeight() const {return m_fParallaxHeight;};
+  virtual int GetMaterialType() const {return PARALLAX_MATERIAL_MASK | m_pDecoratedMaterial->GetMaterialType();};
 
 private:
   float m_fParallaxHeight;

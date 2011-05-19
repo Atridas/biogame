@@ -6,6 +6,10 @@
 #include "RenderableAnimatedInstanceModel.h"
 #include "InstancedData.h"
 #include "Core.h"
+#include "Camera.h"
+#include "EffectManager.h"
+
+#include <queue>
 
 struct SHWIntancedMeshes
 {
@@ -112,16 +116,59 @@ void CRenderableObjectsManager::RenderHWInstanced(CRenderManager* _pRM)
   }
 }
 
+class CDistanceOrdering
+{
+  Vect3f m_vCameraPos;
+public:
+  CDistanceOrdering(const Vect3f& _vCameraPos):m_vCameraPos(_vCameraPos)
+    {;}
+  CDistanceOrdering(const CDistanceOrdering& _other):m_vCameraPos(_other.m_vCameraPos)
+    {;}
+  bool operator() (const CRenderableObject* lhs, const CRenderableObject* rhs) const
+  {
+    Vect3f l_LeftDist  = lhs->GetPosition() - m_vCameraPos;
+    Vect3f l_RightDist = rhs->GetPosition() - m_vCameraPos;
+    
+    float l_fLeftDistSQ  = l_LeftDist  * l_LeftDist;
+    float l_fRightDistSQ = l_RightDist * l_RightDist;
+
+    return l_fLeftDistSQ < l_fRightDistSQ;
+  }
+};
+
 void CRenderableObjectsManager::RenderOld(CRenderManager* _pRM)
 {
+  CCamera* l_pCamera = _pRM->GetCamera();
+  Vect3f   l_vEye    = (l_pCamera)? l_pCamera->GetEye() : Vect3f(0,0,-1);
+  CDistanceOrdering l_Ordering(l_vEye);
+  priority_queue<CRenderableObject*,vector< CRenderableObject*>, CDistanceOrdering> l_BlendQueue(l_Ordering);
+
+  CORE->GetEffectManager()->ActivateDefaultRendering();
+
   //renderitzar només els visibles
   for(size_t i=0; i < m_RenderableObjects.size() ; i++)
   {
     if(m_RenderableObjects[i]->GetVisible())
     {
-      m_RenderableObjects[i]->Render(_pRM);
+      if(m_RenderableObjects[i]->IsAlphaBlended())
+      {
+        l_BlendQueue.push(m_RenderableObjects[i]);
+      }
+      else
+      {
+        m_RenderableObjects[i]->Render(_pRM);
+      }
     }
     //if(i > 25) return;
+  }
+  
+  CORE->GetEffectManager()->ActivateAlphaRendering();
+
+  while(!l_BlendQueue.empty())
+  {
+    CRenderableObject* l_pRenderableObject = l_BlendQueue.top();
+    l_pRenderableObject->Render(_pRM);
+    l_BlendQueue.pop();
   }
 }
 

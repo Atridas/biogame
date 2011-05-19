@@ -134,6 +134,7 @@
     <ClCompile Include="VertexStructs.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\AlphaDecorator.h" />
     <ClInclude Include="include\AnimatedCoreModel.h" />
     <ClInclude Include="include\AnimatedInstanceModel.h" />
     <ClInclude Include="include\AnimatedMeshEmptyMaterial.h" />

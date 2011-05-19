@@ -8,9 +8,11 @@ public:
   virtual ~CEmptyMaterial() {};
 
   virtual void Activate() {};
-  virtual float GetParallaxHeight() {return 0.0f;};
-  virtual float GetBump() {return 0.0f;};
-  virtual float GetGlossiness() {return 100.0f;};
-  virtual float GetSpecularFactor() {return 0.1f;};
+  virtual float GetParallaxHeight()    const {return 0.0f;};
+  virtual float GetBump()              const {return 0.0f;};
+  virtual float GetGlossiness()        const {return 100.0f;};
+  virtual float GetSpecularFactor()    const {return 0.1f;};
+  virtual bool HasAlphaBlending()      const {return false; };
+  virtual bool HasSpecularParameters() const {return false; };
 };
 
