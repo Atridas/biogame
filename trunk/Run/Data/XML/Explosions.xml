@@ -3,7 +3,7 @@
   <ExplosionsCharacteristics>
 
     <ExplosionCharacteristic  NumFiles="4"    NumColumnes="4"   TimeDiapo="0.05"
-                              TexExplosion="Data/Textures/texturas particulas/flameD.dds">
+                              TexExplosion="Data/Textures/texturas particulas/fire2.dds">
     </ExplosionCharacteristic>
 
       

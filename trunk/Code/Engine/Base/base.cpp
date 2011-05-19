@@ -29,3 +29,9 @@ int RandomNumber(int _iMin, int _iMax)
 
   return l_iNumber;
 }
+
+D3DXVECTOR3 InterPolaterNumber(D3DXVECTOR3& _vInicial, D3DXVECTOR3& _vFinal,float _fTime)
+{
+  _vFinal = _vInicial-(_vFinal*_fTime);
+  return _vFinal;
+}

@@ -44,7 +44,8 @@ public:
   void SetGravity           (D3DXVECTOR3& _vGravity)                {m_vGravity = _vGravity;};
 
 
-  //void SetAngle             (float _fAngle)                         {m_fAngle = _fAngle;};
+  void SetAngle1             (float _fAngle1)                         {m_fAngle1 = _fAngle1;};
+  void SetAngle2             (float _fAngle2)                         {m_fAngle2 = _fAngle2;};
   //void SetReload            (bool _bReload)                         {m_bReload = _bReload;};
 
   //Get
@@ -67,7 +68,8 @@ public:
   const D3DXVECTOR3&              GetGravity          () const {return m_vGravity;};
   //*********
 
-  //float                           GetAngle            () const {return m_fAngle;};
+  float                           GetAngle1            () const {return m_fAngle1;};
+  float                           GetAngle2            () const {return m_fAngle2;};
   //bool                            GetReload           () const {return m_bReload;};
 
 
@@ -96,7 +98,7 @@ protected:
   float                                     m_fLife1;
   float                                     m_fLife2;
   LPDIRECT3DVERTEXBUFFER9                   m_vbParticles;
-  CRecyclingArray<CParticle>		        m_Particles;
+  CRecyclingArray<CParticle>		            m_Particles;
   vector<D3DXCOLOR>                         m_vColor;
   vector<D3DXCOLOR>                         m_vNewColor;
   vector<float>                             m_vTimeColor;
@@ -106,7 +108,8 @@ protected:
   bool                                      m_bActive;
   D3DXVECTOR3                               m_vVel; //velocitat de la particula
   D3DXVECTOR3                               m_vGravity; // forçes gravitatories
-  //float                                     m_fAngle;
+  float                                     m_fAngle1;
+  float                                     m_fAngle2;
   //bool                                      m_bReload;
   //CRenderManager*                           _pRM;
   float             m_fSizeX;

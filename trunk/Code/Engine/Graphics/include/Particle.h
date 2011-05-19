@@ -24,7 +24,8 @@ public:
   void SetVel               (const D3DXVECTOR3& _vVel)        {m_vVel = _vVel;};
   void SetGravity           (const D3DXVECTOR3& _vGravity)    {m_vGravity = _vGravity;};
   void SetTexParticle       (CTexture* _pTexParticle)               {m_pTexParticle = _pTexParticle;};
-  //void SetAngle             (float _fAngle)                         {m_fAngle = _fAngle;};
+  void SetAngle             (float _fAngle)                         {m_fAngle = _fAngle;};
+  void SetInitAngle         (float _iIncrementAngle)          {m_iIncrementAngle = _iIncrementAngle;};
   //void SetSize	            ( const float sizeX, const float sizeY ) {m_fSizeX = sizeX; m_fSizeY = sizeY;}
   void SetPointA            (const D3DXVECTOR3& _pointA)      {m_PointA=_pointA;};
   void SetPointB            (const D3DXVECTOR3& _pointB)      {m_PointB=_pointB;};
@@ -55,7 +56,7 @@ public:
   const D3DXVECTOR3& GetVel       () const              {return m_vVel;};
   const D3DXVECTOR3& GetGravity   () const              {return m_vGravity;};
   CTexture*   GetTexParticle      () const              {return m_pTexParticle;};  
-  //float GetAngle                  () const              {return m_fAngle;};
+  float GetAngle                  () const              {return m_fAngle;};
   const D3DXVECTOR3& GetPointA    () const              {return m_PointA;};
   const D3DXVECTOR3& GetPointB    () const              {return m_PointB;};
   const D3DXVECTOR3& GetPointC    () const              {return m_PointC;};
@@ -100,6 +101,7 @@ private:
   D3DXVECTOR3       m_vVel;
   D3DXVECTOR3       m_vGravity;
   float             m_fAngle;
+  float             m_iIncrementAngle;
   D3DXVECTOR3       m_vPos;
   // float             m_fSizeX;
   //float             m_fSizeY;
@@ -120,6 +122,8 @@ private:
   float      m_fIncrementV; //alçada de cada diapositiva 
   float      m_fIncrementU; //amplada de cada diapositiva
   int        m_iTotalDiapos;
+  
+
   CTexture*  m_pTexParticle;
 
 
