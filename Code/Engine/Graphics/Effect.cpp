@@ -14,8 +14,6 @@ bool CEffect::Init(const CXMLTreeNode& _xmlEffect, LPD3DXEFFECTPOOL _pEffectPool
 
   string l_szName = _xmlEffect.GetPszISOProperty("name","");
 
-  m_pEffectPool = _pEffectPool;
-
   if(l_szName.compare("") == 0)
   {
     LOGGER->AddNewLog(ELL_ERROR,"CEffect::Init Empty name");
@@ -47,11 +45,11 @@ bool CEffect::Init(const CXMLTreeNode& _xmlEffect, LPD3DXEFFECTPOOL _pEffectPool
 
   m_szD3DAlphaTechniqueName  = _xmlEffect.GetPszISOProperty("alpha_technique","", false);
 
-  SetOk(LoadEffect());
+  SetOk(LoadEffect(_pEffectPool));
   return IsOk();
 }
 
-bool CEffect::LoadEffect()
+bool CEffect::LoadEffect(LPD3DXEFFECTPOOL _pEffectPool)
 {
   LPD3DXBUFFER l_ErrorBuffer=NULL;
   HRESULT l_HR = D3DXCreateEffectFromFile(
@@ -60,7 +58,7 @@ bool CEffect::LoadEffect()
                           NULL,
                           NULL,
                           NULL,
-                          m_pEffectPool,
+                          _pEffectPool,
                           &m_pD3DEffect,
                           &l_ErrorBuffer);
   if(l_ErrorBuffer)
@@ -101,10 +99,10 @@ bool CEffect::LoadEffect()
   return true;
 }
 
-bool CEffect::Reload()
+bool CEffect::Reload(LPD3DXEFFECTPOOL _pEffectPool)
 {
   Release();
-  return LoadEffect();
+  return LoadEffect(_pEffectPool);
 }
 
 void CEffect::Release() 
@@ -112,7 +110,6 @@ void CEffect::Release()
   CHECKED_RELEASE(m_pD3DEffect);
   m_pD3DTechnique = 0;
   m_pD3DInstancedTechnique = 0;
-  m_pEffectPool = 0;
 }
 
 

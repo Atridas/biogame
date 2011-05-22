@@ -114,9 +114,6 @@ public:
   const Vect3f& GetCameraEye() {return m_vCameraEye;};
   size_t GetMaxLights() const { return MAX_LIGHTS_BY_SHADER; };
 
-  //string GetTechniqueEffectNameByVertexDefault(unsigned short _sVertexType) const;
-  //string GetInstancedTechniqueEffectNameByVertexDefault(unsigned short _sVertexType) const;
-
   CEffect* GetForcedStaticMeshEffect() const { return m_pForcedStaticMeshEffect; };
   CEffect* GetForcedAnimatedModelEffect() const { return m_pForcedAnimatedModelEffect; };
   void SetForcedAnimatedModelEffect(CEffect* _pForcedAnimatedModelEffect) { m_pForcedAnimatedModelEffect = _pForcedAnimatedModelEffect; };
