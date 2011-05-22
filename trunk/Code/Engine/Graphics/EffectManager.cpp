@@ -107,7 +107,7 @@ bool CEffectManager::Load(bool _bReload)
           LOGGER->AddNewLog(ELL_INFORMATION,"CEffectManager::Load Reloading effect \"%s\"", l_szEffectName.c_str());
         }
 
-        l_pEffect->Reload();
+        l_pEffect->Reload(m_pEffectPool);
 
       }else{
 
@@ -148,6 +148,8 @@ bool CEffectManager::Load(bool _bReload)
     }
   }
 
+  m_bSemanticsUpdated = true;
+
   return true;
 }
 
@@ -158,9 +160,9 @@ void CEffectManager::Reload()
 
 void CEffectManager::Release()
 {
-  CHECKED_RELEASE(m_pEffectPool);
-
   CMapManager::Release();
+
+  CHECKED_RELEASE(m_pEffectPool);
 
   m_DefaultEffectMap.clear();
 
@@ -183,7 +185,7 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
 {
   LPD3DXEFFECT l_pD3DEffect = _pEffect->GetD3DEffect();
 
-  if(!m_bSemanticsUpdated)
+  if(m_bSemanticsUpdated)
   {
     m_pWorldMatrixParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"World");
     m_pViewMatrixParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"View");
@@ -216,7 +218,7 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     m_pGlossiness    = l_pD3DEffect->GetParameterBySemantic(NULL,"Glossiness");
     m_pSpecularLevel = l_pD3DEffect->GetParameterBySemantic(NULL,"SpecularLevel");
 
-    m_bSemanticsUpdated = true;
+    m_bSemanticsUpdated = false;
   }
 
   //Parametres Especulars
