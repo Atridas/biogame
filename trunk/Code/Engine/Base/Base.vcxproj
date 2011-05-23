@@ -113,7 +113,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="base.cpp" />
-    <ClCompile Include="Interpolator.cpp" />
     <ClCompile Include="Math\MathConstants.cpp" />
     <ClCompile Include="Utils\BoundingBox.cpp" />
     <ClCompile Include="Utils\BoundingSphere.cpp" />
@@ -133,7 +132,6 @@
   <ItemGroup>
     <ClInclude Include="include\Activable.h" />
     <ClInclude Include="include\base.h" />
-    <ClInclude Include="include\Interpolator.h" />
     <ClInclude Include="include\Math\Color.h" />
     <ClInclude Include="include\Math\MathTypes.h" />
     <ClInclude Include="include\Math\MathUtils.h" />

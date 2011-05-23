@@ -133,7 +133,6 @@
       <Filter>Utils\Object3D</Filter>
     </ClCompile>
     <ClCompile Include="base.cpp" />
-    <ClCompile Include="Interpolator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Math\MathTypes.h">
@@ -233,6 +232,5 @@
     <ClInclude Include="include\Utils\PriorityQueue.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="include\Interpolator.h" />
   </ItemGroup>
 </Project>
