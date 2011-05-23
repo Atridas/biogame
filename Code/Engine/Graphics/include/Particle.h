@@ -93,6 +93,7 @@ public:
   vector<int>            m_vFilesColumnes;//guarda el numero de files i de columnes que conte la textura animada
   vector<float>			     m_vTimeAnimated;//aqui guardem el temps en que pasa el event, i el temps de l'animacio
   vector<float>			     m_vTimeAnimatedInterpolation;
+  vector<CTexture*>      m_vTextureAnimation;
 
 private:
   float             m_fSize;

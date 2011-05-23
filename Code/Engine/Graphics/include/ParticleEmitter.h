@@ -120,6 +120,7 @@ protected:
   vector<float>			                        m_vTimeAnimatedInterpolation;
   bool                                      m_bBucleInfinit;
   int                                       m_iNumBucle;
+  vector<CTexture*>                         m_vTextureAnimation;
  /* D3DXVECTOR3		        m_PointA;
   D3DXVECTOR3            m_PointB;
   D3DXVECTOR3            m_PointC; 

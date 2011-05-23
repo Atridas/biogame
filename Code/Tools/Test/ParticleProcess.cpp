@@ -153,7 +153,7 @@ void CParticleProcess::RenderScene(CRenderManager* _pRM)
   _pRM->DrawGrid(30.0f,colCYAN,30,30);
   //_pRM->DrawPlane(10,Vect3f(0,1,0),0,colBLUE,10,10);
   CORE->GetParticleManager()->Render(_pRM);
-  CTexture*  texture = CORE->GetTextureManager()->GetResource("Data/Textures/texturas particulas/explosprite.dds");
+  CTexture*  texture = CORE->GetTextureManager()->GetResource("Data/Textures/texturas particulas/flameD.dds");
   m_pBillBoard.Render(_pRM->GetDevice(), texture->GetD3DTexture() );
   
    

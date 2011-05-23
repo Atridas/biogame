@@ -41,5 +41,9 @@ private:
   float      m_fCV;
   float      m_fDU;
   float      m_fDV;
+  D3DXCOLOR       m_Color1;
+  D3DXCOLOR       m_Color2;
+  D3DXCOLOR       m_Color3;
+  D3DXCOLOR       m_Color4;
 };
 

@@ -580,11 +580,11 @@ struct SPARTICLE_VERTEX
 struct VERTEX_TEXTURED
 {
 	float x, y, z;
+  uint32  color;
   float u, v;         // COORDENADAS DE TEXTURAS
- // uint32  color;
-	static unsigned int GetFVF()
+ 	static unsigned int GetFVF()
 	{
-		return D3DFVF_XYZ|/*D3DFVF_DIFFUSE|*/D3DFVF_TEX1;
+		return D3DFVF_XYZ|D3DFVF_DIFFUSE|D3DFVF_TEX1;
 	}
 };
 

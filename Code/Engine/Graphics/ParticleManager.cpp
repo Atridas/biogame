@@ -115,6 +115,7 @@ bool CParticleManager::Load(const string& _szFileName)
         l_pInfo->m_vTimeDirection.push_back(0);
         l_pInfo->m_vDirection.push_back(l_Event.m_vSpawnDir1);
         l_pInfo->m_vDirection.push_back(l_Event.m_vSpawnDir2);
+        l_pInfo->m_vTextureAnimation.push_back(l_pInfo->m_pTexParticle);
       
         CXMLTreeNode l_treeParticleEmittersColors = l_treeParticleEmitter["Colors"];
 
@@ -174,11 +175,13 @@ bool CParticleManager::Load(const string& _szFileName)
 			      l_pInfo->m_vTimeAnimated.push_back(l_Event.m_fTime);
             l_Event.m_fTimeInterpolation = l_treeParticleEmittersAnimated.GetFloatProperty("timeInterpolation");
             l_pInfo->m_vTimeAnimatedInterpolation.push_back(l_Event.m_fTimeInterpolation);
-			
+            l_pInfo->m_pTexParticle = CORE->GetTextureManager()->GetResource(l_treeParticleEmittersAnimated.GetPszProperty("TexParticle",""));
+            			
 			      l_Event.m_iTexNumFiles = l_treeParticleEmittersAnimated.GetIntProperty("NumFiles");
 			      l_Event.m_iTexNumColumnes = l_treeParticleEmittersAnimated.GetIntProperty("NumColumnes");
 			      l_pInfo->m_vFilesColumnes.push_back(l_Event.m_iTexNumFiles);
 			      l_pInfo->m_vFilesColumnes.push_back(l_Event.m_iTexNumColumnes);
+            l_pInfo->m_vTextureAnimation.push_back(l_pInfo->m_pTexParticle);
 			
           }
         }
