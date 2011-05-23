@@ -102,21 +102,24 @@ protected:
   vector<D3DXCOLOR>                         m_vColor;
   vector<D3DXCOLOR>                         m_vNewColor;
   vector<float>                             m_vTimeColor;
+  vector<float>                             m_vTimeColorInterpolation;
   vector<D3DXVECTOR3>                       m_vDirection;
   vector<D3DXVECTOR3>                       m_vNewDirection;
   vector<float>                             m_vTimeDirection;
+  vector<float>                             m_vTimeDirectionInterpolation;
   bool                                      m_bActive;
   D3DXVECTOR3                               m_vVel; //velocitat de la particula
   D3DXVECTOR3                               m_vGravity; // forçes gravitatories
   float                                     m_fAngle1;
   float                                     m_fAngle2;
-  //bool                                      m_bReload;
-  //CRenderManager*                           _pRM;
-  float             m_fSizeX;
-  float             m_fSizeY;
-  bool                m_bAnimated;
-  vector<int>           m_vFilesColumnes;//guarda el numero de files i de columnes que conte la textura animada
-  vector<float>			    m_vTimeAnimated;//aqui guardem el temps en que pasa el event, i el temps de l'animacio
+  float                                     m_fSizeX;
+  float                                     m_fSizeY;
+  bool                                      m_bAnimated;
+  vector<int>                               m_vFilesColumnes;//guarda el numero de files i de columnes que conte la textura animada
+  vector<float>			                        m_vTimeAnimated;//aqui guardem el temps en que pasa el event, i el temps de l'animacio
+  vector<float>			                        m_vTimeAnimatedInterpolation;
+  bool                                      m_bBucleInfinit;
+  int                                       m_iNumBucle;
  /* D3DXVECTOR3		        m_PointA;
   D3DXVECTOR3            m_PointB;
   D3DXVECTOR3            m_PointC; 

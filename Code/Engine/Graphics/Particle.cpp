@@ -19,6 +19,7 @@ CParticle::CParticle()
   m_PointD=(D3DXVECTOR3(0.0f,0.0f,0.0f));
   m_fAngle    = 0.0f;
   m_iIncrementAngle=0.0f;
+  m_fTimeInterpolation=0.0f;
 
   //*******
 /*  m_iTexNumFiles=0;
@@ -41,10 +42,13 @@ void CParticle::Release()
 {
   m_vColor.clear();
   m_vTimeColor.clear();
+  m_vTimeColorInterpolation.clear();
   m_vDirection.clear();
   m_vTimeDirection.clear();
+  m_vTimeDirectionInterpolation.clear();
   m_vFilesColumnes.clear();
   m_vTimeAnimated.clear();
+  m_vTimeAnimatedInterpolation.clear();
 
 }
 
@@ -80,9 +84,17 @@ bool CParticle::Update(float fTimeDelta,CCamera* camera)
     if(m_vTimeDirection[i]<m_fAge)
 	 {
      m_vDir = m_vDirection[i];
+
+     // nomes per interpolar
+     
      if(i<i_aux)
      {
-      m_vDir = InterPolaterNumber(m_vDir,m_vDirection[i+1],0.4f);
+      float l_time_aux=m_vTimeDirection[i+1]-m_fAge;
+      m_fTimeInterpolation=m_vTimeDirectionInterpolation[i];
+      if(l_time_aux<m_fTimeInterpolation)
+      {
+        m_vDir = InterPolaterNumber(m_vDir,m_vDirection[i+1],m_fTimeInterpolation,fTimeDelta);
+      }
      }
      m_vDirection[i]=m_vDir;
      i=0;

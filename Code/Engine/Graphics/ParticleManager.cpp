@@ -101,6 +101,11 @@ bool CParticleManager::Load(const string& _szFileName)
         l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Velocitate",Vect3f(3.0f));
         l_pInfo->m_vVel = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
         l_pInfo->m_bAnimated = false; // si te animacio despres la canvio
+        l_pInfo->m_bBucleInfinit=l_treeParticleEmitter.GetBoolProperty("Bucle");
+        if(l_pInfo->m_bBucleInfinit==false)
+        {
+          l_pInfo->m_iNumBucle=l_treeParticleEmitter.GetIntProperty("NumBucle");
+        }
         
 			  
 
@@ -129,6 +134,7 @@ bool CParticleManager::Load(const string& _szFileName)
             
 
             l_Event.m_fTime = l_treeParticleEmittersColor.GetFloatProperty("time");
+            l_Event.m_fTimeInterpolation = l_treeParticleEmittersColor.GetFloatProperty("timeInterpolation");
             
 
             l_vVec4 = l_treeParticleEmittersColor.GetVect4fProperty("Color1",Vect4f(0.0f),true);
@@ -137,6 +143,7 @@ bool CParticleManager::Load(const string& _szFileName)
 			      l_Event.m_Color2 = D3DXCOLOR(l_vVec4.x,l_vVec4.y,l_vVec4.z,l_vVec4.w);
 
             l_pInfo->m_vTimeColor.push_back(l_Event.m_fTime);
+            l_pInfo->m_vTimeColorInterpolation.push_back(l_Event.m_fTimeInterpolation);
             l_pInfo->m_vColor.push_back(l_Event.m_Color1);
             l_pInfo->m_vColor.push_back(l_Event.m_Color2);
 
@@ -165,6 +172,8 @@ bool CParticleManager::Load(const string& _szFileName)
 			      l_pInfo->m_vTimeAnimated.push_back(l_Event.m_fTime);
 			      l_Event.m_fTime = l_treeParticleEmittersAnimated.GetFloatProperty("TimeDiapo");
 			      l_pInfo->m_vTimeAnimated.push_back(l_Event.m_fTime);
+            l_Event.m_fTimeInterpolation = l_treeParticleEmittersAnimated.GetFloatProperty("timeInterpolation");
+            l_pInfo->m_vTimeAnimatedInterpolation.push_back(l_Event.m_fTimeInterpolation);
 			
 			      l_Event.m_iTexNumFiles = l_treeParticleEmittersAnimated.GetIntProperty("NumFiles");
 			      l_Event.m_iTexNumColumnes = l_treeParticleEmittersAnimated.GetIntProperty("NumColumnes");
@@ -192,6 +201,7 @@ bool CParticleManager::Load(const string& _szFileName)
             //SParticleEvent l_Event;
 
             l_Event.m_fTime = l_treeParticleEmittersDirection.GetFloatProperty("time");
+            l_Event.m_fTimeInterpolation = l_treeParticleEmittersDirection.GetFloatProperty("timeInterpolation");
             
 			
 			      l_vVec3 = l_treeParticleEmittersDirection.GetVect3fProperty("Direction1",Vect3f(3.0f));
@@ -201,6 +211,7 @@ bool CParticleManager::Load(const string& _szFileName)
 
 
             l_pInfo->m_vTimeDirection.push_back(l_Event.m_fTime);
+            l_pInfo->m_vTimeDirectionInterpolation.push_back(l_Event.m_fTimeInterpolation);
             l_pInfo->m_vDirection.push_back(l_Event.m_vSpawnDir1);
             l_pInfo->m_vDirection.push_back(l_Event.m_vSpawnDir2);
 

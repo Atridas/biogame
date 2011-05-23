@@ -85,11 +85,14 @@ public:
   
   vector<D3DXCOLOR>      m_vColor;
   vector<float>          m_vTimeColor; 
+  vector<float>          m_vTimeColorInterpolation;
   vector<D3DXVECTOR3>    m_vDirection;
   vector<float>          m_vTimeDirection;
+  vector<float>          m_vTimeDirectionInterpolation;
   // animated
   vector<int>            m_vFilesColumnes;//guarda el numero de files i de columnes que conte la textura animada
   vector<float>			     m_vTimeAnimated;//aqui guardem el temps en que pasa el event, i el temps de l'animacio
+  vector<float>			     m_vTimeAnimatedInterpolation;
 
 private:
   float             m_fSize;
@@ -122,6 +125,7 @@ private:
   float      m_fIncrementV; //alçada de cada diapositiva 
   float      m_fIncrementU; //amplada de cada diapositiva
   int        m_iTotalDiapos;
+  float      m_fTimeInterpolation;
   
 
   CTexture*  m_pTexParticle;

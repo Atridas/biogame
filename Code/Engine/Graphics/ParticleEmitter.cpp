@@ -40,6 +40,8 @@ m_Particles(NUMPARTICLES)
   //m_fAngle = 0.0f;
   m_fSizeX= 1.0f;
   m_fSizeY=1.0f;
+  m_bBucleInfinit=true;
+  m_iNumBucle=0;
 
  /* m_PointA=(D3DXVECTOR3(0.0f,0.0f,0.0f));
   m_PointB=(D3DXVECTOR3(0.0f,0.0f,0.0f));
@@ -67,17 +69,23 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
   m_fLife2 = _info->m_fLife2;
   m_vColor = _info->m_vColor;
   m_vTimeColor = _info->m_vTimeColor;
+  m_vTimeColorInterpolation=_info->m_vTimeColorInterpolation;
+
   m_vDirection = _info->m_vDirection;
   m_vTimeDirection = _info->m_vTimeDirection;
+  m_vTimeDirectionInterpolation= _info->m_vTimeDirectionInterpolation;
   m_vGravity = _info->m_vGravity;
   m_vVel = _info->m_vVel;
   m_fAngle1 = _info->m_fAngle1;
   m_fAngle2 = _info->m_fAngle2;
+  m_bBucleInfinit  = _info->m_bBucleInfinit;
+  m_iNumBucle = _info->m_iNumBucle;
   //*** per animació
 
   m_bAnimated = _info->m_bAnimated;
   m_vFilesColumnes = _info->m_vFilesColumnes;
   m_vTimeAnimated = _info->m_vTimeAnimated;
+  m_vTimeAnimatedInterpolation = _info->m_vTimeAnimatedInterpolation;
 
   //crear un vector de direccion de tantas posicions com estat pot tenir (segons vector temps)
   int j=m_vTimeDirection.size();
@@ -117,110 +125,119 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
     }
   }
   
-
   //2.] Si es temps de crear particules noves fer-ho:
-  int iNumNewParts = 0;
-  float fEmitRateThisFrame = RandomNumber(m_fMinEmitRate, m_fMaxEmitRate);
-  m_fNumNewPartsExcess = (fEmitRateThisFrame * fElapsedTime)+ m_fNumNewPartsExcess;
-  
-  if(m_fNumNewPartsExcess > 1.0f)
+  if(m_bBucleInfinit==true || m_bBucleInfinit==false && m_iNumBucle>0)
   {
-    iNumNewParts = (int)m_fNumNewPartsExcess;
-    m_fNumNewPartsExcess = m_fNumNewPartsExcess - (int)m_fNumNewPartsExcess;
-  }
-
-  
-  for (int q=0; q < iNumNewParts; q++)
-  {
-    // Si hay espacio para una nueva partícula:
-    if (m_Particles.GetNumFreeElements() > 0)
+    if(m_bBucleInfinit==false)
     {
-      CParticle* part =m_Particles.New();
+      m_iNumBucle--;
+    }
+    int iNumNewParts = 0;
+    float fEmitRateThisFrame = RandomNumber(m_fMinEmitRate, m_fMaxEmitRate);
+    m_fNumNewPartsExcess = (fEmitRateThisFrame * fElapsedTime)+ m_fNumNewPartsExcess;
+  
+    if(m_fNumNewPartsExcess > 1.0f)
+    {
+      iNumNewParts = (int)m_fNumNewPartsExcess;
+      m_fNumNewPartsExcess = m_fNumNewPartsExcess - (int)m_fNumNewPartsExcess;
+    }
+  
+  
+    for (int q=0; q < iNumNewParts; q++)
+    {
+      // Si hay espacio para una nueva partícula:
+      if (m_Particles.GetNumFreeElements() > 0)
+      {
+        CParticle* part =m_Particles.New();
       
       
       
 
-      // determina el random de la vida de cada particula
-      float fRandLife = RandomNumber(m_fLife1,m_fLife2);
-      part->SetLifeTimer(fRandLife);
+        // determina el random de la vida de cada particula
+        float fRandLife = RandomNumber(m_fLife1,m_fLife2);
+        part->SetLifeTimer(fRandLife);
 
-      // determina el random del tamany de la particula
-      float fRandSize = RandomNumber(m_fMinSize,m_fMaxSize);
-      part->SetSize(fRandSize);
+        // determina el random del tamany de la particula
+        float fRandSize = RandomNumber(m_fMinSize,m_fMaxSize);
+        part->SetSize(fRandSize);
 
-      float fRandAngle = RandomNumber(m_fAngle1,m_fAngle2);
-      part->SetAngle(fRandAngle);
+        float fRandAngle = RandomNumber(m_fAngle1,m_fAngle2);
+        part->SetAngle(fRandAngle);
       
-      float l_iIncrementAngle= RandomNumber(0.0f,120.0f);
-      part->SetInitAngle(l_iIncrementAngle);
+        float l_iIncrementAngle= RandomNumber(0.0f,120.0f);
+        part->SetInitAngle(l_iIncrementAngle);
       
 
-      //*****************
-      //es guarda en un vector totes les direccions que tindra la particula durant el seu temps de vida
-	    //ja amb el valor calculat	(fet el random) 
+        //*****************
+        //es guarda en un vector totes les direccions que tindra la particula durant el seu temps de vida
+	      //ja amb el valor calculat	(fet el random) 
 	 
      
-	    int i=m_vTimeDirection.size()-1;
-      while(i>=0)
-      {
-        float fRandX = RandomNumber(m_vDirection[i*2].x, m_vDirection[(i*2)+1].x);
-        float fRandY = RandomNumber(m_vDirection[i*2].y, m_vDirection[(i*2)+1].y);
-        float fRandZ = RandomNumber(m_vDirection[i*2].z, m_vDirection[(i*2)+1].z);
+	      int i=m_vTimeDirection.size()-1;
+        while(i>=0)
+        {
+          float fRandX = RandomNumber(m_vDirection[i*2].x, m_vDirection[(i*2)+1].x);
+          float fRandY = RandomNumber(m_vDirection[i*2].y, m_vDirection[(i*2)+1].y);
+          float fRandZ = RandomNumber(m_vDirection[i*2].z, m_vDirection[(i*2)+1].z);
         		    
         
-		    m_vNewDirection[i] = D3DXVECTOR3(fRandX, fRandY, fRandZ);
-		    i--;
+		      m_vNewDirection[i] = D3DXVECTOR3(fRandX, fRandY, fRandZ);
+		      i--;
         
-       }	  
-      part->m_vTimeDirection = m_vTimeDirection;
-      part->m_vDirection = m_vNewDirection;
+         }	  
+        part->m_vTimeDirection = m_vTimeDirection;
+        part->m_vDirection = m_vNewDirection;
+        part->m_vTimeDirectionInterpolation = m_vTimeDirectionInterpolation;
 
-      //es guarda en un vector tots els colors que tindra la particula durant el seu temps de vida
-	    //ja amb el valor calculat	  
-     /* j=m_vTimeColor.size();
-      while(j!=0)
-      {
-        m_vNewColor.push_back(m_Color1);
-        j--;
-      }*/
-      i=m_vTimeColor.size()-1;
-      while(i>=0)
-      {
+        //es guarda en un vector tots els colors que tindra la particula durant el seu temps de vida
+	      //ja amb el valor calculat	  
+       /* j=m_vTimeColor.size();
+        while(j!=0)
+        {
+          m_vNewColor.push_back(m_Color1);
+          j--;
+        }*/
+        i=m_vTimeColor.size()-1;
+        while(i>=0)
+        {
        
         
-	      float fRandR = RandomNumber(m_vColor[i*2].r, m_vColor[(i*2)+1].r);
-		    float fRandG = RandomNumber(m_vColor[i*2].g, m_vColor[(i*2)+1].g);
-		    float fRandB = RandomNumber(m_vColor[i*2].b, m_vColor[(i*2)+1].b);
-		    float fRandA = RandomNumber(m_vColor[i*2].a, m_vColor[(i*2)+1].a);
+	        float fRandR = RandomNumber(m_vColor[i*2].r, m_vColor[(i*2)+1].r);
+		      float fRandG = RandomNumber(m_vColor[i*2].g, m_vColor[(i*2)+1].g);
+		      float fRandB = RandomNumber(m_vColor[i*2].b, m_vColor[(i*2)+1].b);
+		      float fRandA = RandomNumber(m_vColor[i*2].a, m_vColor[(i*2)+1].a);
 		    
         
-		    m_vNewColor[i]= D3DXCOLOR(fRandR, fRandG, fRandB, fRandA);
-		    i--;
+		      m_vNewColor[i]= D3DXCOLOR(fRandR, fRandG, fRandB, fRandA);
+		      i--;
         
-       }	
-      part->SetGravity(m_vGravity);
-      part->SetVel(m_vVel);
-      part->m_vTimeColor = m_vTimeColor;
-      part->m_vColor = m_vNewColor;
-      //part->SetAngle(m_fAngle);
-      part->SetPos(m_vPos);
+         }	
+        part->SetGravity(m_vGravity);
+        part->SetVel(m_vVel);
+        part->m_vTimeColor = m_vTimeColor;
+        part->m_vTimeColorInterpolation = m_vTimeColorInterpolation;
+        part->m_vColor = m_vNewColor;
+        //part->SetAngle(m_fAngle);
+        part->SetPos(m_vPos);
 
-      part->SetAnimated(m_bAnimated);
-      part->m_vFilesColumnes=m_vFilesColumnes;
-      part->m_vTimeAnimated = m_vTimeAnimated;
-      part->SetTexParticle(m_pTexParticle);
-
-      //**************************
-      /*if(m_bAnimated)
-      {
+        part->SetAnimated(m_bAnimated);
         part->m_vFilesColumnes=m_vFilesColumnes;
         part->m_vTimeAnimated = m_vTimeAnimated;
-      }*/
+        part->m_vTimeAnimatedInterpolation = m_vTimeAnimatedInterpolation;
+        part->SetTexParticle(m_pTexParticle);
+
+        //**************************
+        /*if(m_bAnimated)
+        {
+          part->m_vFilesColumnes=m_vFilesColumnes;
+          part->m_vTimeAnimated = m_vTimeAnimated;
+        }*/
       
 
       
 
       
+      }
     }
   }
 }
@@ -291,6 +308,9 @@ void CParticleEmitter::Release()
   m_vTimeDirection.clear();
   m_vFilesColumnes.clear();
   m_vTimeAnimated.clear();
+  m_vTimeAnimatedInterpolation.clear();
+  m_vTimeDirectionInterpolation.clear();
+  m_vTimeColorInterpolation.clear();
   
 }
   

@@ -30,17 +30,21 @@ struct SParticleInfo
   float                 m_fAngle2;
   vector<D3DXCOLOR>     m_vColor;
   vector<float>         m_vTimeColor;  //modificar tot els  m_vTime  per els m_vTimeColor
+  vector<float>         m_vTimeColorInterpolation;
   vector<D3DXVECTOR3>   m_vDirection;
   vector<float>         m_vTimeDirection;
+  vector<float>         m_vTimeDirectionInterpolation;
   D3DXVECTOR3           m_vVel; 
   D3DXVECTOR3           m_vGravity;
   bool                  m_bAnimated;
+  bool                  m_bBucleInfinit;//si es false s'ha d'indicar quantes pasades de crear particules volem, si es true crea infinitament
+  int                   m_iNumBucle;//numero de vegades que volem crear particlues
   int                   m_iTexNumFiles;
   int                   m_iTexNumColumnes;
   float                 m_fTimeAnimationDiapo;
   vector<int>           m_vFilesColumnes;//guarda el numero de files i de columnes que conte la textura animada
   vector<float>			    m_vTimeAnimated;//aqui guardem el temps en que pasa el event, i el temps de l'animacio
-  
+  vector<float>			    m_vTimeAnimatedInterpolation;
   
 };
 
@@ -54,6 +58,7 @@ struct SParticleEvent
   D3DXVECTOR3           m_vSpawnDir2;
   int                   m_iTexNumFiles;
   int                   m_iTexNumColumnes;
+  float                 m_fTimeInterpolation;
  
 };
 
@@ -74,7 +79,7 @@ private:
   string                    m_szFileName;
   CRenderManager*           m_pRM;
   vector<CParticleEmitter*> m_vEmitterParticle;
-  bool                  m_bReload;
+  bool                      m_bReload;
 
 };
 #endif
