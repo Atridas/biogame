@@ -142,3 +142,45 @@ function NewInstance _instances _instance =
 (
 	AddInstance _instances _instance (_instances.count + 1)
 )
+
+--retorna l'element amb el nom demanat
+function GetObjectByName _name =
+(
+	local l_objects = $*
+	local l_found = undefined
+	
+	if l_objects != undefined then
+	(
+		local l_totalObjects = l_objects.count
+		local l_current = undefined
+		local i = 1
+		
+		while i <= l_totalObjects and l_found == undefined do
+		(
+			l_current = l_objects[i]
+			
+			if l_current.name == _name then
+			(
+				l_found = l_current
+			)
+			i = i + 1
+		)
+	)
+	
+	return l_found
+)
+
+--comprova si l'objecte és un element d'escenari o control
+function IsInfo _object = 
+(
+	if (IsMesh _object or isAnimatedModel _object or IsLight _object) == true then
+	(
+		return false
+	)else if classof _object == Dummy or classof _object == Container then
+	(
+		return true
+	)else
+	(
+		return false
+	)
+)

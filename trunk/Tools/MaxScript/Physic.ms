@@ -29,6 +29,8 @@ function GetBoundingType _object &_type &_target =
 	return 0
 )
 
+--agafa els vèrtexs màxim i mínim de l'objecte en coordenades absolutes.
+--si es facilita un _target, les coordenades són les d'aquest, relatives a l'object.
 function CalcMaxMin _object _target =
 (
 	local l_params = #()
@@ -66,6 +68,7 @@ function CalcMaxMin _object _target =
 	l_string = l_aux as string
 	append l_params #("min",l_string)
 )
+
 
 --Calcula la box o esfera de l'objecte i en retorna
 -- els paràmetres llestos per a l'exportació XML

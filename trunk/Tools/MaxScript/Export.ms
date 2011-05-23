@@ -15,17 +15,19 @@ function CheckMesh _object _checkMaterial =
 		return "S'està rebent un objecte no definit. Aquest error no hauria de passar mai, envieu el fitxer al programador."
 	)
 	
-	--si no es cap d'aquestes classes no es tracta, per tant es considera correcte. Pot tractar-se de càmares o altres coses que es posin per l'escena.
-	if (classof _object == TargetDirectionallight or classof _object == Omnilight or classof _object == targetSpot or classof _object == Dummy or classof _object == Editable_Poly or classof _object == Box or classof _object == Editable_mesh or classof _object == Cylinder or classof _object == GeoSphere) == false then
+	--si no és una mesh no fa falta comprovar.
+	if (IsMesh _object) == false then
 	(
 		return true
 	)
 	
+	/*
 	--si es tracte d'una llum o dummy no seguim comprovant
 	if classof _object == TargetDirectionallight or classof _object == Omnilight or classof _object == targetSpot or classof _object == Dummy then
 	(
 		return true
 	)
+	*/
 	
 	local l_name = _object.name
 	
