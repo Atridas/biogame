@@ -205,20 +205,6 @@ bool CPhysxRagdoll::InitSkeleton(CalSkeleton* _pSkeleton)
 
     //Calculs per la Translacio
     CalVector l_vBoneTrans = l_pBone->getTranslationAbsolute();
-    CBoundingBox* l_pBox = new CBoundingBox();
-    CalVector l_vPoints[8];
-    l_pBone->getBoundingBox().computePoints(l_vPoints);
-    Vect3f l_vect[8];    
-    for (int t=0;t<8;++t)
-    {
-      l_vect[t] = Vect3f(l_vPoints[t].x,l_vPoints[t].y,l_vPoints[t].z);
-    }
-
-    l_pBox->Init(l_vect);
-    Vect3f l_vMiddlePoint = l_pBox->GetMiddlePoint();
-    Vect3f l_vPosMiddle(-l_vMiddlePoint.x,l_vMiddlePoint.y,l_vMiddlePoint.z);
-    Vect3f l_vPosBone = Vect3f(l_vBoneTrans.x,l_vBoneTrans.y,l_vBoneTrans.z);
-    float l_pDistance = l_vPosBone.Distance(l_vPosMiddle);
 
     //Calculs per la rotacio
     CalQuaternion l_vQuaternionLeft = l_pBone->getRotationAbsolute();   
@@ -229,15 +215,42 @@ bool CPhysxRagdoll::InitSkeleton(CalSkeleton* _pSkeleton)
     l_vQuaternion.w = l_vQuaternionLeft.w;
 
 
+    CalVector l_vPoints[8];
+    l_pBone->getBoundingBox().computePoints(l_vPoints);
+    Vect3f l_vect[8];    
+    for (int t=0;t<8;++t)
+    {
+      l_vect[t] = Vect3f(l_vPoints[t].x,l_vPoints[t].y,l_vPoints[t].z);
+			
+    }
+
+		CBoundingBox* l_pBox = new CBoundingBox();
+    l_pBox->Init(l_vect);
+    Vect3f l_vMiddlePoint = l_pBox->GetMiddlePoint();
+		delete l_pBox;
+
     CalMatrix l_vMatrix2(l_vQuaternion);
-    Mat33f l_vMat33(l_vMatrix2.dxdx,l_vMatrix2.dxdy,l_vMatrix2.dxdz,l_vMatrix2.dydx,l_vMatrix2.dydy,l_vMatrix2.dydz,l_vMatrix2.dzdx,l_vMatrix2.dzdy,l_vMatrix2.dzdz);
-    //l_vMat33.Transpose();
+    //Mat33f l_vMat33(l_vMatrix2.dxdx,l_vMatrix2.dxdy,l_vMatrix2.dxdz,l_vMatrix2.dydx,l_vMatrix2.dydy,l_vMatrix2.dydz,l_vMatrix2.dzdx,l_vMatrix2.dzdy,l_vMatrix2.dzdz);
+		Mat33f l_vMat33(l_vMatrix2.dxdx,l_vMatrix2.dydx,l_vMatrix2.dzdx,l_vMatrix2.dxdy,l_vMatrix2.dydy,l_vMatrix2.dzdy,l_vMatrix2.dxdz,l_vMatrix2.dydz,l_vMatrix2.dzdz);
     Mat44f l_vRot(l_vMat33);
-    Mat44f l_vTrans;
-    l_vTrans.SetIdentity();
-    l_vTrans.Translate(l_vPosMiddle);
-    Mat44f l_vMatTotal = l_vTrans*l_vRot;
+		Mat44f l_vRotInv = l_vRot.Invert();
     
+		for (int t=0;t<8;++t)
+    {
+      l_vect[t] = l_vect[t] - l_vMiddlePoint;
+			l_vect[t] = l_vRotInv*l_vect[t];
+			
+    }
+
+
+		l_pBox = new CBoundingBox();
+    l_pBox->Init(l_vect);
+    //l_vMiddlePoint = l_pBox->GetMiddlePoint();
+    Vect3f l_vPosMiddle(-l_vMiddlePoint.x,l_vMiddlePoint.y,l_vMiddlePoint.z);
+    Vect3f l_vPosBone = Vect3f(l_vBoneTrans.x,l_vBoneTrans.y,l_vBoneTrans.z);
+    float l_pDistance = l_vPosBone.Distance(l_vPosMiddle);
+
+		Mat44f l_vMatTotal = l_vRot.Translate(l_vPosMiddle);
 
     if (m_vBoneActors[i].m_szType == "Box")
     {
@@ -245,7 +258,7 @@ bool CPhysxRagdoll::InitSkeleton(CalSkeleton* _pSkeleton)
       l_pUserData->SetPaint(true);
       l_pUserData->SetColor(colGREEN);
       CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
-      l_pActor->AddBoxSphape(Vect3f(0.05f,l_pDistance,0.05f),v3fZERO,NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
+			l_pActor->AddBoxSphape(l_pBox->GetDimension()*0.25,v3fZERO,NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
       l_pActor->CreateBody(m_vBoneActors[i].m_Density);
 
       l_pPM->AddPhysicActor(l_pActor);
