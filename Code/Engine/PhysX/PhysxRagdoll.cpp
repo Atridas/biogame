@@ -249,6 +249,8 @@ bool CPhysxRagdoll::InitSkeleton(CalSkeleton* _pSkeleton)
     Vect3f l_vPosMiddle(-l_vMiddlePoint.x,l_vMiddlePoint.y,l_vMiddlePoint.z);
     Vect3f l_vPosBone = Vect3f(l_vBoneTrans.x,l_vBoneTrans.y,l_vBoneTrans.z);
     float l_pDistance = l_vPosBone.Distance(l_vPosMiddle);
+    //l_pBox->Ren
+    //RENDER_MANAGER->RenderBoundingBox(l_pBox);
 
 		Mat44f l_vMatTotal = l_vRot.Translate(l_vPosMiddle);
 
@@ -291,4 +293,19 @@ bool CPhysxRagdoll::InitSkeleton(CalSkeleton* _pSkeleton)
   }
 
   return true;
+}
+
+//Funcio que retorna una matriu 4x4 per la rotacio absoluta del BONE!
+Mat44f          CPhysxRagdoll::GetRotationMatrixAbsolute     (CalBone* _pBone)
+{
+  Mat44f l_mAbsoluteRotation;
+  return l_mAbsoluteRotation;
+}
+
+//Funcio que retorna una Quaternion per la rotacio relativa del BONE!
+CalQuaternion   CPhysxRagdoll::GetRotationMatrixCal3d        (Mat44f _vAbsMat)
+{
+  CalQuaternion l_cQuaternion;
+
+  return l_cQuaternion;
 }

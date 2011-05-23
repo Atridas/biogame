@@ -93,7 +93,7 @@ bool CParticle::Update(float fTimeDelta,CCamera* camera)
       m_fTimeInterpolation=m_vTimeDirectionInterpolation[i];
       if(l_time_aux<m_fTimeInterpolation)
       {
-        m_vDir = InterPolaterNumber(m_vDir,m_vDirection[i+1],m_fTimeInterpolation,fTimeDelta);
+        //m_vDir = InterPolaterNumber(m_vDir,m_vDirection[i+1],m_fTimeInterpolation,fTimeDelta);
       }
      }
      m_vDirection[i]=m_vDir;
