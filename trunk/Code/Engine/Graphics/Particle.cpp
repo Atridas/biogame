@@ -136,14 +136,16 @@ bool CParticle::Update(float fTimeDelta,CCamera* camera)
   if(m_bAnimated)
   {
     int i= m_vFilesColumnes.size()-1;
+    //int j=i
     while (i>=0)
     {
       if(m_vTimeAnimated[i]<m_fAge)
 	   {
-
+       
        m_iTexNumFiles=m_vFilesColumnes[i-1];
        m_iTexNumColumnes=m_vFilesColumnes[i];
        m_fTimeAnimationDiapo=m_vTimeAnimated[i];
+       //m_pTexParticle=m_vTextureAnimation[i]; aki resta de 2 en 2 i nomes te una textura per temsp, per aixo peta
 	     i=0;
 	   }
       i=i-2;

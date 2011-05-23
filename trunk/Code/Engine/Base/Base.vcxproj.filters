@@ -82,6 +82,9 @@
     <Filter Include="Utils\RecyclingArray">
       <UniqueIdentifier>{9a03e4ce-1346-4438-a9a7-7680eb85efa8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Utils\Interpolator">
+      <UniqueIdentifier>{a82425df-0196-40ef-bc96-467939c90736}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Math\MathConstants.cpp">
@@ -130,6 +133,7 @@
       <Filter>Utils\Object3D</Filter>
     </ClCompile>
     <ClCompile Include="base.cpp" />
+    <ClCompile Include="Interpolator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Math\MathTypes.h">
@@ -229,5 +233,6 @@
     <ClInclude Include="include\Utils\PriorityQueue.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="include\Interpolator.h" />
   </ItemGroup>
 </Project>

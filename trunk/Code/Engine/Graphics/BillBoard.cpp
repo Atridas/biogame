@@ -4,13 +4,14 @@
 #include <math.h>
 //#include <Math\MathUtils.h>
 
-#define D3DFVF_VERTEX_TEXTURED (D3DFVF_XYZ|D3DFVF_TEX1)
+#define D3DFVF_VERTEX_TEXTURED (D3DFVF_XYZ|D3DFVF_DIFFUSE|D3DFVF_TEX1)
 
 
 struct VERTEX_TEXTURED_OLD
 {
 	float x, y, z;
-    float u, v;         // COORDENADAS DE TEXTURAS
+  uint32  color;
+  float u, v;         // COORDENADAS DE TEXTURAS
 	static unsigned int getFlags()
 	{
 		return D3DFVF_VERTEX_TEXTURED;
@@ -31,6 +32,10 @@ CBillBoard::CBillBoard()
   ,m_iTexNumColumnes(4)
   ,m_fTimeAnimationActual(0)
   ,m_iNumDiapo(1)
+  ,m_Color1(0,1,0,1)
+  ,m_Color2(1,0,0,1)
+  ,m_Color3(0,0,1,1)
+  ,m_Color4(1,1,0,1)
 	{}
 
 void CBillBoard::Update(float fTimeDelta,CCamera *camera)
@@ -62,14 +67,14 @@ void CBillBoard::Update(float fTimeDelta,CCamera *camera)
   
   //*******************************************
   
-      m_fIncrementV = /*(float)m_pTexParticle->GetHeight()*/ 256.f/m_iTexNumFiles;
-      m_fIncrementV= m_fIncrementV/256.f;
-      m_fIncrementU = /*(float)m_pTexParticle->GetWidth()*/256.f/m_iTexNumColumnes;
-      m_fIncrementU = m_fIncrementU/256.f;
-			m_iTotalDiapos=m_iTexNumFiles*m_iTexNumColumnes;
-		int l_canviDiapo=1;
+     // m_fIncrementV = /*(float)m_pTexParticle->GetHeight()*/ 256.f/m_iTexNumFiles;
+     // m_fIncrementV= m_fIncrementV/256.f;
+     // m_fIncrementU = /*(float)m_pTexParticle->GetWidth()*/256.f/m_iTexNumColumnes;
+     // m_fIncrementU = m_fIncrementU/256.f;
+		//m_iTotalDiapos=m_iTexNumFiles*m_iTexNumColumnes;
+		//int l_canviDiapo=1;
 		
-		m_fTimeAnimationActual += fTimeDelta;
+		//m_fTimeAnimationActual += fTimeDelta;
 		
     // Per a quin numero de dispositiva tenim que ensenyar
 		/*float l_fTempsEnters = m_fTimeAnimationActual/m_fTimeAnimationDiapo;
@@ -87,7 +92,7 @@ void CBillBoard::Update(float fTimeDelta,CCamera *camera)
 		{
 		  m_iNumDiapo++;
 		}*/
-    if(m_fTimeAnimationActual>m_fTimeAnimationDiapo)
+  /*  if(m_fTimeAnimationActual>m_fTimeAnimationDiapo)
     {
       m_iNumDiapo++;
       m_fTimeAnimationActual=0;
@@ -127,7 +132,19 @@ void CBillBoard::Update(float fTimeDelta,CCamera *camera)
     m_fCV = m_fAV-m_fIncrementV;
    
     m_fDU = m_fBU;
-    m_fDV = m_fCV;
+    m_fDV = m_fCV;*/
+
+    m_fAU = 0;
+    m_fAV = 1;
+
+    m_fBU = 1;
+    m_fBV = 1;
+
+    m_fCU = 0;
+    m_fCV = 0;
+   
+    m_fDU = 1;
+    m_fDV = 0;
 
  
 }
@@ -144,24 +161,28 @@ void CBillBoard::Render(LPDIRECT3DDEVICE9 device,const LPDIRECT3DTEXTURE9& textu
 		l_Points[0].z=m_PointA.z;
 		l_Points[0].u=m_fAU;
 		l_Points[0].v=m_fAV;
+    l_Points[0].color= (DWORD) m_Color1;
 		
 		l_Points[1].x=m_PointB.x;
 		l_Points[1].y=m_PointB.y;
 		l_Points[1].z=m_PointB.z;
 		l_Points[1].u=m_fBU;
 		l_Points[1].v=m_fBV;
+    l_Points[1].color= (DWORD) m_Color2;
 
 		l_Points[2].x=m_PointC.x;
 		l_Points[2].y=m_PointC.y;
 		l_Points[2].z=m_PointC.z;
 		l_Points[2].u=m_fCU;
 		l_Points[2].v=m_fCV;
+    l_Points[2].color= (DWORD) m_Color3;
 
 		l_Points[3].x=m_PointD.x;
 		l_Points[3].y=m_PointD.y;
 		l_Points[3].z=m_PointD.z;
 		l_Points[3].u=m_fDU;
 		l_Points[3].v=m_fDV;
+    l_Points[3].color= (DWORD) m_Color4;
 
 		
 
