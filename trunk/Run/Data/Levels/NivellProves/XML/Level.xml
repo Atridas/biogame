@@ -1,0 +1,64 @@
+GetInitTagXML()
+<Level>
+  <Rooms>
+    <Room undefined="true">
+      <Boundings>
+      </Boundings>
+      <Objects>
+      </Objects>
+    </Room>
+    <Room undefined="false" name="Room3">
+      <Boundings>
+        <Box name="DummyRoom3" min="30.7499 -67.7911 -9.16808" max="71.1677 59.6667 9.16808" />
+      </Boundings>
+      <Objects>
+        <GameObject name="Habitacio3" />
+      </Objects>
+    </Room>
+    <Room undefined="false" name="Room2">
+      <Boundings>
+        <Box name="DummyRoom2" min="-39.683 -51.994 -10.7324" max="30.6368 52.8502 10.7324" />
+      </Boundings>
+      <Objects>
+        <GameObject name="Habitacio2" />
+        <GameObject name="LowCover" />
+        <GameObject name="HighCover" />
+        <GameObject name="LowCover01" />
+        <GameObject name="LowCover02" />
+        <GameObject name="LowCover03" />
+        <GameObject name="LowCover04" />
+        <GameObject name="HighCover01" />
+        <GameObject name="LowCover05" />
+        <GameObject name="LowCover06" />
+        <GameObject name="Wall" />
+        <GameObject name="HighCover02" />
+        <GameObject name="LowCover07" />
+        <GameObject name="HighCover03" />
+        <GameObject name="LowCover08" />
+        <GameObject name="HighCover04" />
+        <GameObject name="LowCover09" />
+        <GameObject name="LowCover10" />
+        <GameObject name="LowCover11" />
+        <GameObject name="Llum" />
+      </Objects>
+    </Room>
+    <Room undefined="false" name="Room1">
+      <Boundings>
+        <Box name="DummyRoom1" min="-73.4142 -53.9552 -5.25343" max="-38.8043 52.1505 5.25343" />
+      </Boundings>
+      <Objects>
+        <GameObject name="BoxGlow" />
+        <GameObject name="BoxNormal" />
+        <GameObject name="BoxAlpha" />
+        <GameObject name="BoxSpecular" />
+        <GameObject name="BoxAlpha01" />
+        <GameObject name="Habitacio1" />
+        <GameObject name="BoxParallax" />
+      </Objects>
+    </Room>
+  </Rooms>
+  <Portals>
+    <Portal name="DummyPortal1" roomA="Room1" roomB="Room2" min="-41.2939 -3.54726 -1.03397" max="-37.61 8.24502 4.19741" />
+    <Portal name="DummyPortal2" roomA="Room2" roomB="Room3" min="28.4181 -3.43039 -0.844862" max="32.0823 8.01042 3.62843" />
+  </Portals>
+</Entities>

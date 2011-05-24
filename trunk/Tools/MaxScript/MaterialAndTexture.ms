@@ -11,6 +11,7 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 	local l_parallaxHeight = 0
 	local l_specularParams = false
 	local l_opacityMap = false
+	local l_specularLevel = 0
 	
 	if _material.glossiness != undefined and _material.specularLevel != undefined then
 	(
@@ -38,12 +39,13 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 		
 		--propietats per a bumpmap
 		l_bump = true
-		l_bumpPercent = getUserProp _object "bump"
+		--l_bumpPercent = getUserProp _object "bump"
+		l_bumpPercent = _material.bumpMapAmount / 100.0
 		if l_bumpPercent == undefined or l_bumpPercent < 0 or l_bumpPercent > 1 then
 		(
 			l_bumpPercent = DEFAULT_BUMP_VALUE
 		)
-		format "	->	NORMAL: %\n" l_bumpPercent
+		format "	->	NORMAL\n"
 		
 		--propietats per parallax
 		l_parallaxHeight = getUserProp _object "parallax"
@@ -60,7 +62,7 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 			(
 				l_parallaxHeight = DEFAULT_PARALLAX_VALUE
 			)
-			format "	->	PARALLAX: %\n" l_parallaxHeight
+			format "	->	PARALLAX\n"
 		)
 	)
 	
@@ -71,7 +73,7 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 		format "	->	LIGHTMAP\n"
 	)
 	
-	if _material.reflectionMapEnable == true and _material.reflectionMap != undefined then
+	if _material.SpecularLevelMapEnable == true and _material.SpecularLevelMap != undefined then
 	(
 		--l_materialMask = bit.or l_materialMask TEXTURE_TYPE_ENVIRONMENT
 		l_numTextures = l_numTextures + 1
@@ -125,15 +127,21 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 		WriteString _file l_texture
 	)
 	
-	if _material.reflectionMapEnable == true and _material.reflectionMap != undefined then
+	if _material.SpecularLevelMapEnable == true and _material.SpecularLevelMap != undefined then
 	(
-		l_texture = _material.reflectionMap.filename
+		l_texture = _material.SpecularLevelMap.filename
 		l_texture = filenameFromPath (OpenBitmap l_texture).filename
 		l_texture = _relativePath + l_texture
 		
 		WriteShort _file SPECULARMAP_MATERIAL_MASK #unsigned
 		WriteShort _file l_texture.count #unsigned
 		WriteString _file l_texture
+		
+		l_specularLevel = _material.SpecularLevelMapAmount
+	)
+	else
+	(
+		l_specularLevel = _material.specularLevel
 	)
 	
 	if _material.filterMapEnable == true and _material.filterMap != undefined then
@@ -170,8 +178,8 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 		(
 			WriteShort _file SPECULAR_PROPERTY_TYPE #unsigned
 			WriteFloat _file _material.glossiness
-			WriteFloat _file _material.specularLevel
-			format "	->	Specular properties Gloss:% Factor:%\n" _material.glossiness _material.specularLevel
+			WriteFloat _file l_specularLevel
+			format "	->	Specular properties Gloss:% Factor:%\n" _material.glossiness l_specularLevel
 		)
 		
 		if l_opacityMap then

@@ -19,6 +19,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 	dropdownList DropListPhysX "Type" pos:[29,346] width:95 height:40
 	button ButtonPhysX "Create" pos:[33,404] width:88 height:23
 	button ButtonEntities "Exportar Entitats" pos:[21,460] width:116 height:26
+	button ButtonNivell "Exportar Nivell" pos:[24,502] width:114 height:23
 	-- Control de Paths
   
 	-- Torna el path de Data
@@ -510,6 +511,105 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		
 		return true
 	)
+	
+    function ExportPortalsAndRooms =
+	(
+		local l_pathToFile = getXMLPath() 
+		makeDir l_pathToFile all:true
+		l_pathToFile = l_pathToFile + "Level.xml"
+		local l_file = createfile l_pathToFile
+		
+		local l_aux
+		local l_params
+		
+		format "%" GetInitTagXML() to:l_file
+		
+		format "\n%" (OpenTagXML "Level") to:l_file
+		
+		
+		local rooms = CreateRooms $*
+		local objectes = FillRooms $* rooms
+		local portals = CreatePortals $*
+		
+		format "\n  %" (OpenTagXML "Rooms") to:l_file
+		
+		for i = 1 to rooms.count do
+		(
+			local room = rooms[i]
+			local roomObjs = objectes[i]
+			local roomDumies = CreateRoomDummies roomObjs
+			
+			if room == undefined then
+			(
+				l_params = #(#("undefined", "true"))
+			)
+			else
+			(
+				l_params = #(#("undefined", "false"),#("name", room.name))
+			)
+			format "\n    %" (OpenTagParamXML "Room" l_params) to:l_file
+			
+			
+			format "\n      %" (OpenTagXML "Boundings") to:l_file
+			for j = 1 to roomDumies.count do
+			(
+				local l_dummy = roomDumies[j]
+				l_params = #(#("name", l_dummy.name))
+				l_aux = "" as stringStream
+				format "% % %" l_dummy.min.x l_dummy.min.y l_dummy.min.z to:l_aux
+				append l_params #("min",l_aux)
+				l_aux = "" as stringStream
+				format "% % %" l_dummy.max.x l_dummy.max.y l_dummy.max.z to:l_aux
+				append l_params #("max",l_aux)
+					
+				format "\n        %" (InlineTagParamXML "Box" l_params) to:l_file
+			)
+			format "\n      %" (CloseTagXML "Boundings") to:l_file
+			
+			format "\n      %" (OpenTagXML "Objects") to:l_file
+			for j = 1 to roomObjs.count do
+			(
+				if (IsInfo roomObjs[j]) == false then
+				(
+					l_params = #(#("name", roomObjs[j].name))
+					format "\n        %" (InlineTagParamXML "GameObject" l_params) to:l_file
+				)
+			)
+			format "\n      %" (CloseTagXML "Objects") to:l_file
+			
+			format "\n    %" (CloseTagXML "Room") to:l_file
+		)
+		format "\n  %" (CloseTagXML "Rooms") to:l_file
+		-------------------------------------------------------
+		
+		format "\n  %" (OpenTagXML "Portals") to:l_file
+		
+		for i = 1 to portals.count do
+		(
+			local portal = portals[i]
+			local roomA = GetUserProp portal "roomA"
+			local roomB = GetUserProp portal "roomB"
+			l_params = #(#("name",portal.name),#("roomA",roomA),#("roomB",roomB))
+			l_aux = "" as stringStream
+			format "% % %" portal.min.x portal.min.y portal.min.z to:l_aux
+			append l_params #("min",l_aux)
+			l_aux = "" as stringStream
+			format "% % %" portal.max.x portal.max.y portal.max.z to:l_aux
+			append l_params #("max",l_aux)
+			format "\n    %" (InlineTagParamXML "Portal" l_params) to:l_file
+		)
+		
+		format "\n  %" (CloseTagXML "Portals") to:l_file
+		-------------------------------------------------------
+		
+		format "\n%" (CloseTagXML "Entities") to:l_file
+		
+		format "\n" to:l_file
+		
+		close l_file
+		
+		return true
+	)
   
   function ExportMeshEntities _instances =
 	(
@@ -575,6 +675,12 @@ utility BioUtility "Eon-Utility" width:160 height:549
 	
 	-- Funcionalitats botons	
 	
+	
+	
+  
+	
+	-- Fi funcionalitats botons
+
 	on BioUtility open do
 	(
 		labelPath.text = g_DefaultPath
@@ -735,7 +841,6 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		
 		ShowMessage "Fi"
 	)
-	
 	on buttonLight pressed do
 	(
 		local l_lights = #()
@@ -757,7 +862,6 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			ShowError "Problema inidentificat"
 		)
 	)
-	
 	on ButtonPhysX pressed do
 	(
 		
@@ -799,8 +903,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			ShowMessage "Export de la Fisica finalitzat\n"
 		)
 	)
-  
-  on ButtonEntities pressed do
+	on ButtonEntities pressed do
 	(
 		
 		local l_cores = #()
@@ -840,7 +943,22 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		(
 			ShowMessage "Export de les Entities finalitzada\n"
 		)
+		else
+		(
+			ShowMessage "Hi ha hagut un error"
+		)
 	)
 	
-	-- Fi funcionalitats botons
+	on ButtonNivell pressed do
+	(
+		
+		if ExportPortalsAndRooms() then
+		(
+			ShowMessage "Export del nivell finalitzat\n"
+		)
+		else
+		(
+			ShowMessage "Hi ha hagut un error"
+		)
+	)
 )
