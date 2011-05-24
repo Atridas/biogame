@@ -591,15 +591,21 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
       Mat44f l_vMat44(l_vMat33); 
       CBoundingBox* l_pBox = new CBoundingBox();
       Vect3f l_vect[8];
+      
         
       for (int t=0;t<8;++t)
       {
-        l_vect[t] = Vect3f(l_vPoints[t].x,l_vPoints[t].y,l_vPoints[t].z);
+        l_vect[t] = Vect3f(-l_vPoints[t].x,l_vPoints[t].y,l_vPoints[t].z);
       }
 
       l_pBox->Init(l_vect);
       //l_pBox->CalcMiddlePoint();
       Vect3f l_vMiddlePoint = l_pBox->GetMiddlePoint();
+
+      Mat44f l_vMat;
+      l_vMat.SetIdentity();
+      _pRM->SetTransform(l_vMat);
+      _pRM->RenderBoundingBox(l_pBox);
       
 
       for (int i=0;i<8;++i)
