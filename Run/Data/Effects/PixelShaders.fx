@@ -77,7 +77,7 @@ float4 SpecularTexturedPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
   float3 l_Normal = normalize(_in.WorldNormal);
 
   float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
-  float4 l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x;
+  float  l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x;
   float4 out_ = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   g_AmbientLight, l_SpotlightFactor,
                                                   _in.PosLight)

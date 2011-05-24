@@ -13,6 +13,9 @@ public:
   virtual ~CSpecularPropertyDecorator() {};
   
   virtual bool HasSpecularParameters() const { return true; };
+  
+  virtual float GetGlossiness()        const {return m_fGlossiness;};
+  virtual float GetSpecularFactor()    const {return m_fSpecularLevel;};
 
 private:
   float m_fGlossiness;

@@ -2,23 +2,13 @@
 <Entities>
   <Entity>
     <Object3D />
-    <RenderableObject name="Escenari" />
+    <RenderableObject name="Habitacio3" />
     <PhysXMesh density="0" />
   </Entity>
   <Entity>
     <Object3D />
-    <RenderableObject name="BoxParallax" />
-    <PhysXBox fromRenderableObject="true" density="0" />
-  </Entity>
-  <Entity>
-    <Object3D />
-    <RenderableObject name="BoxGlow" />
-    <PhysXBox fromRenderableObject="true" density="0" />
-  </Entity>
-  <Entity>
-    <Object3D />
-    <RenderableObject name="BoxNormal" />
-    <PhysXBox fromRenderableObject="true" density="0" />
+    <RenderableObject name="Habitacio2" />
+    <PhysXMesh density="0" />
   </Entity>
   <Entity>
     <Object3D />
@@ -82,16 +72,6 @@
   </Entity>
   <Entity>
     <Object3D />
-    <RenderableObject name="BoxAlpha" />
-    <PhysXBox fromRenderableObject="true" density="0" />
-  </Entity>
-  <Entity>
-    <Object3D />
-    <RenderableObject name="BoxSpecular" />
-    <PhysXBox fromRenderableObject="true" density="0" />
-  </Entity>
-  <Entity>
-    <Object3D />
     <RenderableObject name="HighCover03" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
@@ -122,7 +102,41 @@
   </Entity>
   <Entity>
     <Object3D />
+    <RenderableObject name="Llum" />
+  </Entity>
+  <Entity>
+    <Object3D />
+    <RenderableObject name="BoxGlow" />
+    <PhysXBox fromRenderableObject="true" density="0" />
+  </Entity>
+  <Entity>
+    <Object3D />
+    <RenderableObject name="BoxNormal" />
+    <PhysXBox fromRenderableObject="true" density="0" />
+  </Entity>
+  <Entity>
+    <Object3D />
+    <RenderableObject name="BoxAlpha" />
+    <PhysXBox fromRenderableObject="true" density="0" />
+  </Entity>
+  <Entity>
+    <Object3D />
+    <RenderableObject name="BoxSpecular" />
+    <PhysXBox fromRenderableObject="true" density="0" />
+  </Entity>
+  <Entity>
+    <Object3D />
     <RenderableObject name="BoxAlpha01" />
+    <PhysXBox fromRenderableObject="true" density="0" />
+  </Entity>
+  <Entity>
+    <Object3D />
+    <RenderableObject name="Habitacio1" />
+    <PhysXMesh density="0" />
+  </Entity>
+  <Entity>
+    <Object3D />
+    <RenderableObject name="BoxParallax" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
 </Entities>

@@ -47,19 +47,17 @@ function FillRooms _objects _rooms =
 			for i = 1 to l_arrayLength do
 			(
 				l_current = _objects[i]
-				if (IsInfo l_current) == false then
+				--container al que pertany
+				l_container = Containers.IsInContainer l_current
+
+				--posició del container a l'array de containers
+				l_index = MemberPosition _rooms l_container
+
+				if l_index != false then
 				(
-					--container al que pertany
-					l_container = Containers.IsInContainer l_current
-
-					--posició del container a l'array de containers
-					l_index = MemberPosition _rooms l_container
-
-					if l_index != false then
-					(
-						append l_grouped[l_index] l_current
-					)
+					append l_grouped[l_index] l_current
 				)
+				
 			)
 		)
 	)
@@ -106,4 +104,44 @@ function CreatePortals _objects =
 	)
 	
 	return l_portals
+)
+
+--comprova si un element és un portal
+function IsRoomDummy _object =
+(
+	if _object != undefined then
+	(
+		if classof _object == Dummy then
+		(
+			local l_tmp = GetUserProp _object "room"
+			if l_tmp != undefined then
+			(
+				return true
+			)
+		)
+	)
+	return false
+)
+
+--Crea una array amb els dummy que delimiten les habitacions.
+function CreateRoomDummies _objects =
+(
+	local l_rooms = #()
+	
+	if _objects != undefined then
+	(
+		local l_total = _objects.count
+		local l_current = undefined
+		
+		for i = 1 to l_total do
+		(
+			l_current = _objects[i]
+			if IsRoomDummy l_current then
+			(
+				append l_rooms l_current
+			)
+		)
+	)
+	
+	return l_rooms
 )

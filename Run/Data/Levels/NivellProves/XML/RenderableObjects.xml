@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <RenderableObjects>
-	<RenderableObject name="Escenari" class="StaticMesh" resource="Escenari" position="0.0 0.0 0.193104" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="BoxParallax" class="StaticMesh" resource="BoxParallax" position="-54.6592 0.0376668 30.1002" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="BoxGlow" class="StaticMesh" resource="BoxGlow" position="-54.6592 0.0376649 12.488" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="BoxNormal" class="StaticMesh" resource="BoxNormal" position="-54.6592 0.0376649 -5.08054" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="LowCover" class="StaticMesh" resource="Covertura petita" position="-30.8658 0.0 17.8758" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Habitacio3" class="StaticMesh" resource="Habitacio3" position="0.0 0.0 0.193104" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Habitacio2" class="StaticMesh" resource="Habitacio2" position="0.0 0.0 0.193104" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="LowCover" class="StaticMesh" resource="Covertura petita" position="-30.8657 0.0 17.8758" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="LowCover01" class="StaticMesh" resource="Covertura petita" position="-30.8622 0.0 16.8709" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="LowCover02" class="StaticMesh" resource="Covertura petita" position="-30.9255 0.0 2.69175" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="LowCover03" class="StaticMesh" resource="Covertura petita" position="-30.9653 0.0 -2.56802" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -20,11 +18,15 @@
 	<RenderableObject name="HighCover01" class="StaticMesh" resource="Covertura Grossa" position="-30.4231 0.0 4.19834" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="HighCover02" class="StaticMesh" resource="Covertura Grossa" position="-22.4166 0.0 4.19834" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="HighCover03" class="StaticMesh" resource="Covertura Grossa" position="-31.3156 0.0 -10.6048" yaw="-11.0158" pitch="0.0" roll="0.0" />
-	<RenderableObject name="HighCover04" class="StaticMesh" resource="Covertura Grossa" position="-31.2776 0.0 -8.27065" yaw="9.04182" pitch="0.0" roll="0.0" />
+	<RenderableObject name="HighCover04" class="StaticMesh" resource="Covertura Grossa" position="-31.2776 0.0 -8.27065" yaw="9.04183" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Wall" class="StaticMesh" resource="Wall" position="-25.5656 0.0 4.80554" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Llum" class="StaticMesh" resource="Llum" position="-5.82813 2.0 28.9546" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="BoxGlow" class="StaticMesh" resource="BoxGlow" position="-54.6592 0.0376649 12.488" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="BoxNormal" class="StaticMesh" resource="BoxNormal" position="-54.6592 0.0376649 -5.08054" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="BoxAlpha" class="StaticMesh" resource="BoxAlpha" position="-57.4588 0.0376649 -18.0876" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="BoxSpecular" class="StaticMesh" resource="BoxSpecular" position="-54.6592 0.0376649 -36.8326" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="BoxAlpha01" class="StaticMesh" resource="BoxAlpha01" position="-50.0065 0.0376649 -24.0954" yaw="0.0" pitch="0.0" roll="0.0" />
-  <RenderableObject name="ariggle" class="AnimatedModel" resource="riggle" position="5.1793 0.0 -5.2768" yaw="-90.0" pitch="0.0" roll="0" cycle="walk"/>
-	<RenderableObject name="Llum" class="StaticMesh" resource="Llum" position="-5.82813 2.0 28.9546" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Habitacio1" class="StaticMesh" resource="Habitacio1" position="0.0 0.0 0.193104" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="BoxParallax" class="StaticMesh" resource="BoxParallax" position="-54.6592 0.0376668 30.1002" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="BoxSpecular01" class="StaticMesh" resource="BoxSpecular01" position="-54.6592 0.0376649 -36.8326" yaw="0.0" pitch="0.0" roll="0.0" />
 </RenderableObjects>
