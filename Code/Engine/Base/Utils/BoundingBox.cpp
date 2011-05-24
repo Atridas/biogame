@@ -35,6 +35,7 @@ bool CBoundingBox::Init(Vect3f _vPoints[8])
   m_vBox[7] = Vect3f(_vPoints[7].x,_vPoints[7].y,_vPoints[7].z);
 
   CalcMiddlePoint();
+  CalcDimension2();
 
   m_vBox[0] -= m_vMiddlePoint;
   m_vBox[1] -= m_vMiddlePoint;
@@ -45,8 +46,8 @@ bool CBoundingBox::Init(Vect3f _vPoints[8])
   m_vBox[6] -= m_vMiddlePoint;
   m_vBox[7] -= m_vMiddlePoint;
 
-
-  CalcDimension2();
+  CalcMiddlePoint();
+  
 
   /*m_vBox[0] += m_vDimension*0.5;
   m_vBox[1] += m_vDimension*0.5;
