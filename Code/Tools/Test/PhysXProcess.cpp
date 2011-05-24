@@ -582,19 +582,28 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
       //CalBone* l_pBone = l_pSkeleton->getBone(l_pSkeleton->getCoreSkeleton()->getCoreBoneId("Bip01 Head"));
 
       CalBone* l_pBone = l_vBones[j];
-      CalVector l_vPoints[8];
-      l_pBone->getBoundingBox().computePoints(l_vPoints);
-      CalMatrix l_vMatrix = l_pBone->getTransformMatrix();
+      CalCoreBone* l_pCoreBone = l_pBone->getCoreBone();
 
-      //CalQuaternion l_vQuaternion = l_pBone->getRotationAbsolute();
-      Mat33f l_vMat33(l_vMatrix.dxdx,l_vMatrix.dxdy,l_vMatrix.dxdz,l_vMatrix.dydx,l_vMatrix.dydy,l_vMatrix.dydz,l_vMatrix.dzdx,l_vMatrix.dzdy,l_vMatrix.dzdz);
-      Mat44f l_vMat44(l_vMat33); 
+      CalVector l_vPoints[8];
+      l_pCoreBone->getBoundingBox().computePoints(l_vPoints);
+
+      
+
+      CalQuaternion l_vRot = l_pCoreBone->getRotationBoneSpace();
+      /*l_vRot.x = -l_vRot.x;
+      l_vRot.y = -l_vRot.y;
+      l_vRot.z = -l_vRot.z;
+      l_vRot.w = l_vRot.w;*/
+      CalMatrix l_vRomM = CalMatrix(l_vRot);
+
+      
       CBoundingBox* l_pBox = new CBoundingBox();
       Vect3f l_vect[8];
       
         
       for (int t=0;t<8;++t)
       {
+        l_vPoints[t] *= l_vRomM;
         l_vect[t] = Vect3f(-l_vPoints[t].x,l_vPoints[t].y,l_vPoints[t].z);
       }
 
@@ -602,9 +611,28 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
       //l_pBox->CalcMiddlePoint();
       Vect3f l_vMiddlePoint = l_pBox->GetMiddlePoint();
 
+      CalQuaternion l_vRotT = l_pBone->getRotationAbsolute();
+      l_vRotT.x = -l_vRotT.x;
+      l_vRotT.y = -l_vRotT.y;
+      l_vRotT.z = -l_vRotT.z;
+      l_vRotT.w = l_vRotT.w;
+
+      CalMatrix l_vRomTM = CalMatrix(l_vRotT);
+
+      CalVector l_vBoneT = l_pBone->getTranslationAbsolute();
+      //CalMatrix l_vMatrix = l_pBone->getTransformMatrix();
+
+      Mat33f l_vMat33(l_vRomTM.dxdx,l_vRomTM.dydx,l_vRomTM.dzdx,
+                      l_vRomTM.dxdy,l_vRomTM.dydy,l_vRomTM.dzdy,
+                      l_vRomTM.dxdz,l_vRomTM.dydz,l_vRomTM.dzdz);
+      //Mat33f l_vMat33(l_vRomTM.dxdx,l_vRomTM.dxdy,l_vRomTM.dxdz,l_vRomTM.dydx,l_vRomTM.dydy,l_vRomTM.dydz,l_vRomTM.dzdx,l_vRomTM.dzdy,l_vRomTM.dzdz);
+      
+      Mat44f l_vMat44(l_vMat33);
+
       Mat44f l_vMat;
       l_vMat.SetIdentity();
-      _pRM->SetTransform(l_vMat);
+      
+      _pRM->SetTransform(l_vMat.Translate(Vect3f(-l_vBoneT.x,l_vBoneT.y,l_vBoneT.z))*l_vMat44);
       _pRM->RenderBoundingBox(l_pBox);
       
 
