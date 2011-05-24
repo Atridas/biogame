@@ -632,30 +632,30 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
       Mat44f l_vMat;
       l_vMat.SetIdentity();
       
-      _pRM->SetTransform(l_vMat.Translate(Vect3f(-l_vBoneT.x,l_vBoneT.y,l_vBoneT.z))*l_vMat44);
+      _pRM->SetTransform(l_vMat.Translate(Vect3f(l_vBoneT.x,l_vBoneT.y,l_vBoneT.z))*l_vMat44);
       _pRM->RenderBoundingBox(l_pBox);
       
 
-      for (int i=0;i<8;++i)
-      {
+      //for (int i=0;i<8;++i)
+      //{
         
         
         SCollisionInfo l_sInfo;
-        Vect3f l_vPos(-l_vPoints[i].x,l_vPoints[i].y,l_vPoints[i].z);
+        Vect3f l_vPos(Vect3f(l_vBoneT.x,l_vBoneT.y,l_vBoneT.z));
         l_sInfo.m_CollisionPoint = l_vPos;
         l_sInfo.m_Normal = v3fZERO;
 
         g_vCollisions.push_back(l_sInfo);
         
    
-      }
+      //}
 
-      SCollisionInfo l_sInfo;
-      Vect3f l_vPos(-l_vMiddlePoint.x,l_vMiddlePoint.y,l_vMiddlePoint.z);
-      l_sInfo.m_CollisionPoint = l_vPos;
-      l_sInfo.m_Normal = v3fZERO;
+      //SCollisionInfo l_sInfo;
+      //Vect3f l_vPos(-l_vMiddlePoint.x,l_vMiddlePoint.y,l_vMiddlePoint.z);
+      //l_sInfo.m_CollisionPoint = l_vPos;
+      //l_sInfo.m_Normal = v3fZERO;
 
-      g_vCollisions.push_back(l_sInfo);
+      //g_vCollisions.push_back(l_sInfo);
       CHECKED_DELETE(l_pBox)
 
 
