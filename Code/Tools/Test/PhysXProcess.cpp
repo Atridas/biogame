@@ -610,15 +610,15 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
       Vect3f l_vect[8];
       
         
-      for (int t=0;t<8;++t)
-      {
+      //for (int t=0;t<8;++t)
+      //{
         //l_vPoints[t] *= l_vRomM;
         //l_vPoints[t] -= l_vTrans;
-        l_vect[t] = Vect3f(l_vPoints[t].x,l_vPoints[t].y,l_vPoints[t].z);
+        //l_vect[t] = Vect3f(l_vPoints[t].x,l_vPoints[t].y,l_vPoints[t].z);
         //Vect4f l_v = l_vMatRot44*Vect4f(l_vect[t]);
         //Mat33f l_tmp = l_vMatRot.Transpose();
         //l_vect[t] = l_tmp*l_vect[t];
-      }
+      //}
 
       l_pBox->Init(l_vect);
       //l_pBox->CalcMiddlePoint();
@@ -665,25 +665,35 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
         l_Quat2.invert();
         l_PosBB*=l_Quat2;
 
+        l_vect[j] = Vect3f(l_PosBB.x,l_PosBB.y,l_PosBB.z);
 
-        l_PosBB*=l_Quat;
-        l_PosBB+=l_Translation;
-      l_vMat.SetIdentity();
-      l_vMat.Translate(Vect3f(-l_PosBB.x,l_PosBB.y,l_PosBB.z));
-      l_vMat.Scale(0.1f,0.1f,0.1f);
+        //l_PosBB*=l_Quat;
+        //l_PosBB+=l_Translation;
+        //l_vMat.SetIdentity();
+        //l_vMat.Translate(Vect3f(-l_PosBB.x,l_PosBB.y,l_PosBB.z));
+        //l_vMat.Scale(0.1f,0.1f,0.1f);
       
-      _pRM->SetTransform(l_vMat);
-      _pRM->DrawAxis();
+        //_pRM->SetTransform(l_vMat);
+        //_pRM->DrawAxis();
 
 
       }
+
+      l_pBox->Init(l_vect);
+
+      l_Quat.x = -l_Quat.x;
+      l_Quat.y = -l_Quat.y;
+      l_Quat.z = -l_Quat.z;
+      l_Quat.w = l_Quat.w;
+
       D3DXMATRIX l_D3DXRotation, l_D3DXTranslation, l_Scale, l_World;
       D3DXMatrixRotationQuaternion(&l_D3DXRotation,(CONST D3DXQUATERNION*)&l_Quat);
       D3DXMatrixTranslation(&l_D3DXTranslation, l_Translation.x, l_Translation.y, l_Translation.z);
-      D3DXMatrixScaling(&l_Scale, 0.2f, 0.2f, 0.2f);
+      D3DXMatrixScaling(&l_Scale, 1.0f, 1.0f, 1.0f);
       l_World=l_Scale* l_D3DXRotation*l_D3DXTranslation;
       _pRM->GetDevice()->SetTransform(D3DTS_WORLD, &l_World);
-      _pRM->DrawAxis();
+      //_pRM->DrawAxis();
+      _pRM->RenderBoundingBox(l_pBox);
 
 
 
