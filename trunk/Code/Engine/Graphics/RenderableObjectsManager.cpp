@@ -145,18 +145,41 @@ void CRenderableObjectsManager::RenderOld(CRenderManager* _pRM)
 
   CORE->GetEffectManager()->ActivateDefaultRendering();
 
+  const CFrustum& l_Frustum = _pRM->GetFrustum();
+
   //renderitzar només els visibles
   for(size_t i=0; i < m_RenderableObjects.size() ; i++)
   {
     if(m_RenderableObjects[i]->GetVisible())
     {
-      if(m_RenderableObjects[i]->IsAlphaBlended())
+      Vect3f l_Center = m_RenderableObjects[i]->GetBoundingSphere()->GetMiddlePoint() +  m_RenderableObjects[i]->GetPosition();
+      D3DXVECTOR3 l_d3Center(l_Center.x,l_Center.y,l_Center.z);
+
+      if(l_Frustum.SphereVisible(l_d3Center, m_RenderableObjects[i]->GetBoundingSphere()->GetRadius()))
       {
-        l_BlendQueue.push(m_RenderableObjects[i]);
+
+        if(m_RenderableObjects[i]->IsAlphaBlended())
+        {
+          l_BlendQueue.push(m_RenderableObjects[i]);
+        }
+        else
+        {
+          m_RenderableObjects[i]->Render(_pRM);
+        }
       }
       else
-      {
-        m_RenderableObjects[i]->Render(_pRM);
+      {/*
+
+        if(m_RenderableObjects[i]->IsAlphaBlended())
+        {
+          l_BlendQueue.push(m_RenderableObjects[i]);
+        }
+        else
+        {
+          m_RenderableObjects[i]->Render(_pRM);
+        }*/
+        /*_pRM->SetTransform(m_RenderableObjects[i]->GetMat44());
+        _pRM->RenderBoundingSphere(m_RenderableObjects[i]->GetBoundingSphere());*/
       }
     }
     //if(i > 25) return;
