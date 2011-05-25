@@ -22,6 +22,9 @@
     <Filter Include="Ragdolls">
       <UniqueIdentifier>{b15b9386-703f-49d2-b5db-63ac317ba0d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Ragdolls\PhysxSkeleton">
+      <UniqueIdentifier>{09921076-c080-4f4b-bf1e-692b8c7349f0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PhysicSphericalJoint.cpp">
@@ -64,6 +67,12 @@
     <ClCompile Include="PhysxRagdoll.cpp">
       <Filter>Ragdolls</Filter>
     </ClCompile>
+    <ClCompile Include="PhysxSkeleton.cpp">
+      <Filter>Ragdolls\PhysxSkeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysxBone.cpp">
+      <Filter>Ragdolls\PhysxSkeleton</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\PhysicSphericalJoint.h">
@@ -75,7 +84,6 @@
     <ClInclude Include="include\PhysicRevoluteJoint.h">
       <Filter>Joints</Filter>
     </ClInclude>
-    <ClInclude Include="include\PhysicsManager.h" />
     <ClInclude Include="include\PhysicASELoader.h">
       <Filter>Utils</Filter>
     </ClInclude>
@@ -105,6 +113,13 @@
     </ClInclude>
     <ClInclude Include="include\PhysxRagdoll.h">
       <Filter>Ragdolls</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PhysicsManager.h" />
+    <ClInclude Include="include\PhysxSkeleton.h">
+      <Filter>Ragdolls\PhysxSkeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PhysxBone.h">
+      <Filter>Ragdolls\PhysxSkeleton</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
