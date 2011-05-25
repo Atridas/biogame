@@ -1,4 +1,4 @@
-GetInitTagXML()
+<?xml version="1.0" encoding="ISO-8859-1"?>
 <Level>
   <Rooms>
     <Room undefined="true">
@@ -9,7 +9,7 @@ GetInitTagXML()
     </Room>
     <Room undefined="false" name="Room3">
       <Boundings>
-        <Box name="DummyRoom3" min="30.7499 -67.7911 -9.16808" max="71.1677 59.6667 9.16808" />
+        <Box name="DummyRoom3" size="18.3362 18.3362 18.3362" position="50.9588 0.0 -4.06221" yaw="0.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
         <GameObject name="Habitacio3" />
@@ -17,7 +17,7 @@ GetInitTagXML()
     </Room>
     <Room undefined="false" name="Room2">
       <Boundings>
-        <Box name="DummyRoom2" min="-39.683 -51.994 -10.7324" max="30.6368 52.8502 10.7324" />
+        <Box name="DummyRoom2" size="19.6944 19.6944 19.6944" position="-4.52313 0.0 0.428096" yaw="0.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
         <GameObject name="Habitacio2" />
@@ -44,7 +44,7 @@ GetInitTagXML()
     </Room>
     <Room undefined="false" name="Room1">
       <Boundings>
-        <Box name="DummyRoom1" min="-73.4142 -53.9552 -5.25343" max="-38.8043 52.1505 5.25343" />
+        <Box name="DummyRoom1" size="26.9682 26.9682 26.9682" position="-56.1092 0.0 -0.902355" yaw="0.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
         <GameObject name="BoxGlow" />
@@ -58,7 +58,7 @@ GetInitTagXML()
     </Room>
   </Rooms>
   <Portals>
-    <Portal name="DummyPortal1" roomA="Room1" roomB="Room2" min="-41.2939 -3.54726 -1.03397" max="-37.61 8.24502 4.19741" />
-    <Portal name="DummyPortal2" roomA="Room2" roomB="Room3" min="28.4181 -3.43039 -0.844862" max="32.0823 8.01042 3.62843" />
+    <Portal name="DummyPortal1" roomA="Room1" roomB="Room2" size="7.20313 7.20313 7.20313" position="-39.4519 1.58172 2.34888" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Portal name="DummyPortal2" roomA="Room2" roomB="Room3" size="7.68333 7.68333 7.68333" position="30.2502 1.39178 2.29001" yaw="0.0" pitch="0.0" roll="0.0" />
   </Portals>
 </Entities>

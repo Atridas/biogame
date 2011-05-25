@@ -82,7 +82,7 @@ function CheckMesh _object _checkMaterial =
 					(
 						format "El multimaterial % de l'objecte % té la textura difusa activada però no definida." i l_name to:l_aux
 						return l_aux
-					)else if classof l_material[i].diffuseMap != Bitmaptexture then
+					)else if classof l_currentMaterial.diffuseMap != Bitmaptexture then
 					(
 						format "El multimaterial % de l'objecte % no té un Bitmap com a textura difusa." i l_name to:l_aux
 						return l_aux
@@ -148,25 +148,25 @@ function CheckMesh _object _checkMaterial =
 					)				
 				)
 				
-				if l_currentMaterial.reflectionMapEnable == true then
+				if l_currentMaterial.SpecularLevelMapEnable == true then
 				(
-					if l_currentMaterial.reflectionMap == undefined then
+					if l_currentMaterial.SpecularLevelMap == undefined then
 					(
-						format "El multimaterial % de l'objecte % té la textura de reflexió activada però no definida." i l_name to:l_aux
+						format "El multimaterial % de l'objecte % té la textura especular activada però no definida." i l_name to:l_aux
 						return l_aux
-					)else if classof l_currentMaterial.reflectionMap != Bitmaptexture then
+					)else if classof l_currentMaterial.SpecularLevelMap != Bitmaptexture then
 					(
-						format "El multimaterial % de l'objecte % no té un Bitmap com a textura de reflexió." i l_name to:l_aux
+						format "El multimaterial % de l'objecte % no té un Bitmap com a textura de especular." i l_name to:l_aux
 						return l_aux
-					)else if l_currentMaterial.reflectionMap.filename == undefined then
+					)else if l_currentMaterial.SpecularLevelMap.filename == undefined then
 					(
-						format "El multimaterial % de l'objecte % té un Bitmap no definit com a textura de reflexió." i l_name to:l_aux
+						format "El multimaterial % de l'objecte % té un Bitmap no definit com a textura de especular." i l_name to:l_aux
 						return l_aux
 					)else
 					(
-						if OpenBitmap l_currentMaterial.reflectionMap.filename == undefined then
+						if OpenBitmap l_currentMaterial.SpecularLevelMap.filename == undefined then
 						(
-							format "No es troba la textura de reflexió \"%\" del multimaterial % de l'objecte %." l_material[i].reflectionMap.filename i l_name to:l_aux
+							format "No es troba la textura de especular \"%\" del multimaterial % de l'objecte %." l_material[i].SpecularLevelMap.filename i l_name to:l_aux
 							return l_aux
 						)
 					)				
@@ -264,22 +264,22 @@ function CheckMesh _object _checkMaterial =
 				)				
 			)
 			
-			if l_material.reflectionMapEnable == true then
+			if l_material.SpecularLevelMapEnable == true then
 			(
-				if l_material.reflectionMap == undefined then
+				if l_material.SpecularLevelMap == undefined then
 				(
-					return "L'objecte " + l_name + " té la textura de reflexió activada però no definida."
-				)else if classof l_material.reflectionMap != Bitmaptexture then
+					return "L'objecte " + l_name + " té la textura de especular activada però no definida."
+				)else if classof l_material.SpecularLevelMap != Bitmaptexture then
 				(
-					return "L'objecte " + l_name + " no té un Bitmap com a textura de reflexió."
-				)else if l_material.reflectionMap.filename == undefined then
+					return "L'objecte " + l_name + " no té un Bitmap com a textura de especular."
+				)else if l_material.SpecularLevelMap.filename == undefined then
 				(
-					return "L'objecte " + l_name + " té un Bitmap no definit com a textura de reflexió."
+					return "L'objecte " + l_name + " té un Bitmap no definit com a textura de especular."
 				)else
 				(
-					if OpenBitmap l_material.reflectionMap.filename == undefined then
+					if OpenBitmap l_material.SpecularLevelMap.filename == undefined then
 					(
-						return "No es troba la textura de reflexió \"" + l_material.reflectionMap.filename + "\" de l'objecte " + l_name + "."
+						return "No es troba la textura de especular \"" + l_material.SpecularLevelMap.filename + "\" de l'objecte " + l_name + "."
 					)
 				)				
 			)

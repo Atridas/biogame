@@ -2,6 +2,7 @@ fileIn "Config.ms"
 fileIn "XML.ms"
 fileIn "Export.ms"
 fileIn "Physic.ms"
+filein "Portalling.ms"
 
 utility BioUtility "Eon-Utility" width:160 height:549
 (
@@ -522,7 +523,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		local l_aux
 		local l_params
 		
-		format "%" GetInitTagXML() to:l_file
+		format "%" (GetInitTagXML()) to:l_file
 		
 		format "\n%" (OpenTagXML "Level") to:l_file
 		
@@ -556,11 +557,29 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				local l_dummy = roomDumies[j]
 				l_params = #(#("name", l_dummy.name))
 				l_aux = "" as stringStream
-				format "% % %" l_dummy.min.x l_dummy.min.y l_dummy.min.z to:l_aux
-				append l_params #("min",l_aux)
+					
+				format "% % %" l_dummy.boxsize.x l_dummy.boxsize.y l_dummy.boxsize.z to:l_aux
+				append l_params #("size",l_aux)
 				l_aux = "" as stringStream
-				format "% % %" l_dummy.max.x l_dummy.max.y l_dummy.max.z to:l_aux
-				append l_params #("max",l_aux)
+				
+				local l_translation = RHVectorToLH l_dummy.transform.translation
+				format "% % %" l_translation.x l_translation.y l_translation.z to:l_aux
+				append l_params #("position",l_aux)
+				
+				l_aux = "" as stringStream
+				local l_yaw = GetYaw l_dummy.transform
+				format "%" l_yaw to:l_aux
+				append l_params #("yaw",l_aux)
+				
+				l_aux = "" as stringStream
+				local l_pitch = GetPitch l_dummy.transform
+				format "%" l_pitch to:l_aux
+				append l_params #("pitch",l_aux)
+				
+				l_aux = "" as stringStream
+				local l_roll = GetRoll l_dummy.transform
+				format "%" l_roll to:l_aux
+				append l_params #("roll",l_aux)
 					
 				format "\n        %" (InlineTagParamXML "Box" l_params) to:l_file
 			)
@@ -591,11 +610,29 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			local roomB = GetUserProp portal "roomB"
 			l_params = #(#("name",portal.name),#("roomA",roomA),#("roomB",roomB))
 			l_aux = "" as stringStream
-			format "% % %" portal.min.x portal.min.y portal.min.z to:l_aux
-			append l_params #("min",l_aux)
+			format "% % %" portal.boxsize.x portal.boxsize.y portal.boxsize.z to:l_aux
+			append l_params #("size",l_aux)
+				
 			l_aux = "" as stringStream
-			format "% % %" portal.max.x portal.max.y portal.max.z to:l_aux
-			append l_params #("max",l_aux)
+			local l_translation = RHVectorToLH portal.transform.translation
+			format "% % %" l_translation.x l_translation.y l_translation.z to:l_aux
+			append l_params #("position",l_aux)
+			
+			l_aux = "" as stringStream
+			local l_yaw = GetYaw portal.transform
+			format "%" l_yaw to:l_aux
+			append l_params #("yaw",l_aux)
+			
+			l_aux = "" as stringStream
+			local l_pitch = GetPitch portal.transform
+			format "%" l_pitch to:l_aux
+			append l_params #("pitch",l_aux)
+			
+			l_aux = "" as stringStream
+			local l_roll = GetRoll portal.transform
+			format "%" l_roll to:l_aux
+			append l_params #("roll",l_aux)
+			
 			format "\n    %" (InlineTagParamXML "Portal" l_params) to:l_file
 		)
 		
