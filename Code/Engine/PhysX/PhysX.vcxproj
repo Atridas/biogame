@@ -100,7 +100,9 @@
     <ClCompile Include="PhysicStream.cpp" />
     <ClCompile Include="PhysicTriggerReport.cpp" />
     <ClCompile Include="PhysicUserAllocator.cpp" />
+    <ClCompile Include="PhysxBone.cpp" />
     <ClCompile Include="PhysxRagdoll.cpp" />
+    <ClCompile Include="PhysxSkeleton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Jump.h" />
@@ -116,7 +118,9 @@
     <ClInclude Include="include\PhysicStream.h" />
     <ClInclude Include="include\PhysicTriggerReport.h" />
     <ClInclude Include="include\PhysicUserAllocator.h" />
+    <ClInclude Include="include\PhysxBone.h" />
     <ClInclude Include="include\PhysxRagdoll.h" />
+    <ClInclude Include="include\PhysxSkeleton.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
