@@ -3,6 +3,7 @@ fileIn "XML.ms"
 fileIn "Export.ms"
 fileIn "Physic.ms"
 filein "Portalling.ms"
+fileIn "Particles.ms"
 
 utility BioUtility "Eon-Utility" width:160 height:549
 (
@@ -11,16 +12,18 @@ utility BioUtility "Eon-Utility" width:160 height:549
 	checkbox checkMeshes "Export Mesh" pos:[13,74] width:114 height:16
 	checkbox checkTextures "Export Textures" pos:[13,98] width:115 height:16
 	dropdownList dropNivell "Nivell" pos:[11,125] width:131 height:40
-	GroupBox grp1 "Export" pos:[11,170] width:131 height:135
+	GroupBox grp1 "Export" pos:[11,170] width:131 height:171
 	button buttonMesh "Mesh" pos:[23,188] width:100 height:19
 	button buttonMeshManager "Mesh Manager" pos:[24,212] width:98 height:22
-	button buttonScene "Scene" pos:[26,271] width:94 height:22
+	button buttonScene "Scene" pos:[27,305] width:94 height:22
 	button buttonLight "Light" pos:[27,241] width:93 height:18
-	GroupBox grp3 "PhysX" pos:[12,323] width:130 height:119
-	dropdownList DropListPhysX "Type" pos:[29,346] width:95 height:40
-	button ButtonPhysX "Create" pos:[33,404] width:88 height:23
-	button ButtonEntities "Exportar Entitats" pos:[21,460] width:116 height:26
-	button ButtonNivell "Exportar Nivell" pos:[24,502] width:114 height:23
+	button buttonParticles "Particles" pos:[28,271] width:93 height:23
+	GroupBox grp3 "PhysX" pos:[14,360] width:130 height:119
+	dropdownList DropListPhysX "Type" pos:[33,385] width:95 height:40
+	button ButtonPhysX "Create" pos:[36,437] width:88 height:23
+	button ButtonEntities "Exportar Entitats" pos:[24,488] width:116 height:26
+	button ButtonNivell "Exportar Nivell" pos:[24,520] width:114 height:23
+	
 	-- Control de Paths
   
 	-- Torna el path de Data
@@ -126,6 +129,12 @@ utility BioUtility "Eon-Utility" width:160 height:549
 	(
 		return getRelativePath() + "Meshes/"
 	)
+	
+	-- Torna el path relatiu de les particules
+	function getRelativeParticlePath =
+	(
+		return getRelativePath() + "Particles/"
+	)
   
 	-- Fi path
   
@@ -197,23 +206,6 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				append l_params l_coords[i]
 			)
 			
-			/*
-			local l_invTransform = inverse l_object.transform
-			
-			l_aux = "" as stringStream
-			local l_MaxCoord = l_object.max
-			l_MaxCoord = l_MaxCoord * l_invTransform
-			l_MaxCoord = RHVectorToLH l_MaxCoord
-			format "% % %" l_MaxCoord.x l_MaxCoord.y l_MaxCoord.z to:l_aux
-			append l_params #("max",l_aux)
-			
-			l_aux = "" as stringStream
-			local l_MinCoord = l_object.min
-			l_MinCoord = l_MinCoord * l_invTransform
-			l_MinCoord = RHVectorToLH l_MinCoord
-			format "% % %" l_MinCoord.x l_MinCoord.y l_MinCoord.z to:l_aux
-			append l_params #("min",l_aux)
-			*/
 			format "\n\t" to:l_file
 			format "%" (InlineTagParamXML "mesh" l_params) to:l_file
 			-------------------------------
@@ -707,6 +699,54 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		
 		return true
 	)
+	
+	function ExportParticleEmitters =
+	(
+		local l_pathToFile = getXMLPath() 
+		local l_particleEmitters = GetParticleEmitters $*
+		local l_totalEmitters = l_particleEmitters.count
+		local l_current = undefined
+		makeDir l_pathToFile all:true
+		
+		l_pathToFile = l_pathToFile + "ParticleEmitters.xml"
+		
+		local l_file = createfile l_pathToFile
+		local l_header = GetInitTagXML()
+		
+		local l_aux
+		local l_params
+		
+		format "%" l_header to:l_file
+		
+		format "\n" to:l_file
+		
+		format "%" (OpenTagXML "ParticleEmitters") to:l_file
+		
+		------------------------------------------------------
+		for i=1 to l_totalEmitters do
+		(
+			l_current = l_particleEmitters[i]
+			
+			l_params = #(#("id",l_current.name), #("type",(GetUserProp l_current "type")))
+				
+			l_aux = "" as stringStream
+			local l_position = l_current.position
+			format "% % %" l_position.x l_position.y l_position.z to:l_aux
+			append l_params #("position",l_aux)
+				
+			format "\n  %" (InlineTagParamXML "ParticleEmitterInstance" l_params) to:l_file
+		)
+		-------------------------------------------------------
+		
+		format "\n" to:l_file
+		format "%" (CloseTagXML "ParticleEmitters") to:l_file
+		
+		format "\n" to:l_file
+		
+		close l_file
+		
+		return true
+	)
   
 	-- Fi exportadors
 	
@@ -717,7 +757,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
   
 	
 	-- Fi funcionalitats botons
-
+	
 	on BioUtility open do
 	(
 		labelPath.text = g_DefaultPath
@@ -985,13 +1025,26 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			ShowMessage "Hi ha hagut un error"
 		)
 	)
-	
 	on ButtonNivell pressed do
 	(
 		
 		if ExportPortalsAndRooms() then
 		(
 			ShowMessage "Export del nivell finalitzat\n"
+		)
+		else
+		(
+			ShowMessage "Hi ha hagut un error"
+		)
+	)
+	on buttonParticles pressed do
+	(
+		
+		format "Export Particles...\n"
+
+		if ExportParticleEmitters() then
+		(
+			ShowMessage "Export de les partícules finalitzat\n"
 		)
 		else
 		(
