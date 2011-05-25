@@ -216,8 +216,8 @@ void CRenderManager::Present()
 void CRenderManager::SetupMatrices(CCamera* _pCamera, bool _bOrtho)
 {
   assert(IsOk());
-	D3DXMATRIX m_matView;
-	D3DXMATRIX m_matProject;
+	D3DXMATRIX l_matView;
+	D3DXMATRIX l_matProject;
   Vect3f eye;
 
   m_pCamera = _pCamera;
@@ -229,20 +229,20 @@ void CRenderManager::SetupMatrices(CCamera* _pCamera, bool _bOrtho)
 		//Setup Matrix view
     eye=Vect3f(0.0f,0.0f,-1.0f);
 		D3DXVECTOR3 l_Eye(eye.x, eye.y, eye.z), l_LookAt(0.0f,0.0f,0.0f), l_VUP(0.0f,1.0f,0.0f);
-		D3DXMatrixLookAtLH( &m_matView, &l_Eye, &l_LookAt, &l_VUP);
+		D3DXMatrixLookAtLH( &l_matView, &l_Eye, &l_LookAt, &l_VUP);
 
 		//Setup Matrix projection
     if(_bOrtho)
     {
       D3DXMatrixOrthoLH(
-                    &m_matProject,
+                    &l_matProject,
                     (float)m_uWidth,
                     (float)m_uHeight,
                      0.0f,
                      1.0f);
     } else {
 		  D3DXMatrixPerspectiveFovLH( 
-        &m_matProject, 
+        &l_matProject, 
         45.0f * D3DX_PI / 180.0f,               //angle de visió
         ((float)m_uWidth)/((float)m_uHeight),   //aspect ratio
         1.0f,                                   //z near
@@ -259,27 +259,30 @@ void CRenderManager::SetupMatrices(CCamera* _pCamera, bool _bOrtho)
 		Vect3f vup = _pCamera->GetVecUp();
 		D3DXVECTOR3 l_VUP(vup.x, vup.y, vup.z);
 		//Setup Matrix view
-		D3DXMatrixLookAtLH( &m_matView, &l_Eye, &l_LookAt, &l_VUP);
+		D3DXMatrixLookAtLH( &l_matView, &l_Eye, &l_LookAt, &l_VUP);
 
 		//Setup Matrix projection
     if(_bOrtho)
     {
       D3DXMatrixOrthoLH(
-                    &m_matProject,
+                    &l_matProject,
                     (float)m_uWidth,
                     (float)m_uHeight,
                      _pCamera->GetZn(),
                      _pCamera->GetZf());
     } else {
-		  D3DXMatrixPerspectiveFovLH(	&m_matProject, _pCamera->GetFov(), _pCamera->GetAspectRatio(),
+		  D3DXMatrixPerspectiveFovLH(	&l_matProject, _pCamera->GetFov(), _pCamera->GetAspectRatio(),
 			  _pCamera->GetZn(), _pCamera->GetZf());
     }
 	}
 
 
-	m_pD3DDevice->SetTransform( D3DTS_VIEW, &m_matView );
-	m_pD3DDevice->SetTransform( D3DTS_PROJECTION, &m_matProject );
-  CORE->GetEffectManager()->ActivateCamera(m_matView, m_matProject, eye);
+	m_pD3DDevice->SetTransform( D3DTS_VIEW, &l_matView );
+	m_pD3DDevice->SetTransform( D3DTS_PROJECTION, &l_matProject );
+  CORE->GetEffectManager()->ActivateCamera(l_matView, l_matProject, eye);
+
+  m_Frustum.Update(l_matView * l_matProject);
+
   /*m_pEffectManager->SetProjectionMatrix(m_matProject);
   m_pEffectManager->SetViewMatrix(m_matView);
   */

@@ -116,12 +116,15 @@
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleEmitter.cpp" />
     <ClCompile Include="ParticleManager.cpp" />
+    <ClCompile Include="Portal.cpp" />
+    <ClCompile Include="PortalManager.cpp" />
     <ClCompile Include="RenderableAnimatedInstanceModel.cpp" />
     <ClCompile Include="RenderableObject.cpp" />
     <ClCompile Include="RenderableObjectsManager.cpp" />
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="RenderTextureSceneEffect.cpp" />
     <ClCompile Include="RenderToTextureSceneEffect.cpp" />
+    <ClCompile Include="Room.cpp" />
     <ClCompile Include="SceneEffect.cpp" />
     <ClCompile Include="SceneEffectManager.cpp" />
     <ClCompile Include="ShadowMapRenderToTexture.cpp" />
@@ -172,6 +175,8 @@
     <ClInclude Include="include\Particle.h" />
     <ClInclude Include="include\ParticleEmitter.h" />
     <ClInclude Include="include\ParticleManager.h" />
+    <ClInclude Include="include\Portal.h" />
+    <ClInclude Include="include\PortalManager.h" />
     <ClInclude Include="include\PropertyDecorator.h" />
     <ClInclude Include="include\RenderableAnimatedInstanceModel.h" />
     <ClInclude Include="include\RenderableObject.h" />
@@ -180,6 +185,7 @@
     <ClInclude Include="include\RenderManager.h" />
     <ClInclude Include="include\RenderTextureSceneEffect.h" />
     <ClInclude Include="include\RenderToTextureSceneEffect.h" />
+    <ClInclude Include="include\Room.h" />
     <ClInclude Include="include\SceneEffect.h" />
     <ClInclude Include="include\SceneEffectManager.h" />
     <ClInclude Include="include\ShadowMapRenderToTexture.h" />

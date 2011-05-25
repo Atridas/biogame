@@ -193,6 +193,18 @@
     <Filter Include="Materials\MaterialDecorators\PropertyDecorators\AlphaDecorator">
       <UniqueIdentifier>{e29af470-f754-4bf1-b101-f50d5379fa13}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Portalling">
+      <UniqueIdentifier>{6069133a-1b94-496b-a766-ff3fb1c36cb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Portalling\Room">
+      <UniqueIdentifier>{ea9f0ae1-497d-4f16-8f76-5c1cbc370686}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Portalling\Portal">
+      <UniqueIdentifier>{ef2de508-9577-4d30-93ec-322e777b6e8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Portalling\PortalManager">
+      <UniqueIdentifier>{baee1e65-9ac4-4bbb-8cea-7c7cad125267}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -320,6 +332,15 @@
     </ClCompile>
     <ClCompile Include="Explosion.cpp">
       <Filter>Explosions</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
+      <Filter>Portalling\Room</Filter>
+    </ClCompile>
+    <ClCompile Include="Portal.cpp">
+      <Filter>Portalling\Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="PortalManager.cpp">
+      <Filter>Portalling\PortalManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -502,6 +523,15 @@
     </ClInclude>
     <ClInclude Include="include\AlphaDecorator.h">
       <Filter>Materials\MaterialDecorators\PropertyDecorators\AlphaDecorator</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Room.h">
+      <Filter>Portalling\Room</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Portal.h">
+      <Filter>Portalling\Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PortalManager.h">
+      <Filter>Portalling\PortalManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
