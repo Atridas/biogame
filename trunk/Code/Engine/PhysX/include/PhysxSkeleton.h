@@ -16,7 +16,15 @@ public:
 
   virtual void Release();
 
-  bool Init(const string& _szFileName, CalModel* _pCalModel);
+  bool              Init(const string& _szFileName, CalModel* _pCalModel);
+  CalSkeleton*      GetSkeleton() {return m_pCalSkeleton;};
+  void              SetSkeleton(CalSkeleton* _pSkeleton) {m_pCalSkeleton = _pSkeleton;};
+
+  //Funcions per inicialitzar el esquelet corresponent
+  void              InitBoneMatrices();
+  void              InitPhysXActors();
+  void              InitPhysXJoints();
+
 
   void UpdateCal3dFromPhysx();
 
