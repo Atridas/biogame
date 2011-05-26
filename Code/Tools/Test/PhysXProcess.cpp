@@ -527,38 +527,6 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
    CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
    l_pPhysManager->DebugRender(_pRM);
 
-   //RenderLaserPoint(_pRM);
-   
-
-
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  ///CODI PER MOSTRAR LES ESFERES ALS BONES
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
-  //CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
-  //l_pSkeleton->calculateBoundingBoxes();
-  //vector<CalBone*> l_vBones = l_pSkeleton->getVectorBone();
-  //CalVector l_vBonePos;
-  //CalVector l_vBoneRot;
-  //g_vCollisions.clear();
-  //for (size_t i=0;i<l_vBones.size();++i)
-  //{
-  //  //l_vBones[0]->getBoundingData(plane,l_vBonePos);
-  //  //l_vBones[i]->getBoundingBox().plane
-  //  l_vBonePos = l_vBones[i]->getTranslationAbsolute();
-  //  l_vBoneRot = l_vBones[i]->getTranslationBoneSpace();
-  //  Vect3f l_vVector = Vect3f(l_vBonePos.x,l_vBonePos.y,l_vBonePos.z);
-  //  //Vect3f l_vVector2 = Vect3f(l_vBoneRot.x,l_vBoneRot.y,l_vBoneRot.z);
-  //  SCollisionInfo l_cInfo;
-  //  l_cInfo.m_CollisionPoint = l_vVector;
-  //  l_cInfo.m_Normal = v3fZERO;
-  //  g_vCollisions.push_back(l_cInfo);
-  //}
-
-
-
-
-
     CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
     CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
     
@@ -578,92 +546,80 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
     {
       CalBone* l_pBone = l_vBones[j];
       CalCoreBone* l_pCoreBone = l_pBone->getCoreBone();
- 
+
+
+      /***************CAL3D TO D3D*****************/
+      
+      //rotacio i translacio del bone (absoluta)
+      CalVector l_Translation=l_pBone->getTranslationAbsolute();
+      CalQuaternion l_Quat=l_pBone->getRotationAbsolute();
+
+      //passem el quaternion a left handed
+      l_Quat.x = -l_Quat.x;
+      l_Quat.y = -l_Quat.y;
+      l_Quat.z = -l_Quat.z;
+
+      //creem la matriu de transformacio Cal3d (absolute) -> Mat44f
+      CalMatrix l_rotmat(l_Quat);
+
+      Mat44f l_mWold(
+                  -l_rotmat.dxdx  ,-l_rotmat.dydx ,-l_rotmat.dzdx ,-l_Translation.x,
+                  l_rotmat.dxdy   ,l_rotmat.dydy  ,l_rotmat.dzdy  ,l_Translation.y,
+                  l_rotmat.dxdz   ,l_rotmat.dydz  ,l_rotmat.dzdz  ,l_Translation.z,
+                  0.0f            ,0.0f           ,0.0f           ,1.0f);
+
+      /********************************************/
+
+
+      _pRM->SetTransform(l_pAnim->GetMat44()*l_mWold);
+
+
+      /***************CORE BOUNDING BOX****************/
+
+      //agafem els punts de la bounding de la core
       CalVector l_vPoints[8];
       l_pCoreBone->getBoundingBox().computePoints(l_vPoints);
 
       CBoundingBox* l_pBox = new CBoundingBox();
       Vect3f l_vect[8];
 
-      CalVector l_Translation=l_pCoreBone->getTranslationAbsolute();
-      CalQuaternion l_Quat=l_pCoreBone->getRotationAbsolute();
+      //rotacio i translacio del core bone (absoluta)
+      CalVector l_TranslationC=l_pCoreBone->getTranslationAbsolute();
+      CalQuaternion l_QuatC=l_pCoreBone->getRotationAbsolute();
 
+      //rotem el core bone  (absoluta)
+      CalQuaternion x_axis_90(-0.7071067811f,0.0f,0.0f,0.7071067811f);
+      l_QuatC *= x_axis_90;
+      l_TranslationC *= x_axis_90;
 
       for(int j=0;j<8;++j)
       {
-        CalVector l_PosBB=(l_vPoints[j]-l_Translation);
-        CalQuaternion l_Quat2=l_Quat;
+        //calculem les coordenades del vertex de la box relatives al bone
+        CalVector l_PosBB=(l_vPoints[j]-l_TranslationC);
+        CalQuaternion l_Quat2=l_QuatC;
         l_Quat2.invert();
         l_PosBB*=l_Quat2;
 
         l_vect[j] = Vect3f(l_PosBB.x,l_PosBB.y,l_PosBB.z);
-
-        //l_PosBB*=l_Quat;
-        //l_PosBB+=l_Translation;
-        //l_vMat.SetIdentity();
-        //l_vMat.Translate(Vect3f(-l_PosBB.x,l_PosBB.y,l_PosBB.z));
-        //l_vMat.Scale(0.1f,0.1f,0.1f);
-      
-        //_pRM->SetTransform(l_vMat);
-        //_pRM->DrawAxis();
-
-
       }
 
+      //creem la box i la renderitzem
       l_pBox->Init(l_vect);
-
-      //l_Translation=l_pBone->getTranslationAbsolute();
-      //l_Quat=l_pBone->getRotationAbsolute();
-
-      //l_Quat *= l_RootQuat;
-      //l_Translation += l_RootTrans;
-
-      l_Quat.x = -l_Quat.x;
-      l_Quat.y = -l_Quat.y;
-      l_Quat.z = -l_Quat.z;
-      l_Quat.w = l_Quat.w;
-
-      D3DXMATRIX l_D3DXRotation, l_D3DXTranslation, l_Scale, l_World;
-      D3DXMatrixRotationQuaternion(&l_D3DXRotation,(CONST D3DXQUATERNION*)&l_Quat);
-      D3DXMatrixTranslation(&l_D3DXTranslation, l_Translation.x, l_Translation.y, l_Translation.z);
-      D3DXMatrixScaling(&l_Scale, 0.8f, 0.8f, 0.8f);
-      l_World=l_Scale* l_D3DXRotation*l_D3DXTranslation;
-      
-      l_World._11 = -l_World._11;
-      l_World._21 = -l_World._21;
-      l_World._31 = -l_World._31;
-      l_World._41 = -l_World._41;
-      
-      _pRM->GetDevice()->SetTransform(D3DTS_WORLD, &l_World);
-      //_pRM->DrawAxis();
       _pRM->RenderBoundingBox(l_pBox);
-
-      SCollisionInfo l_sInfo;
-      Vect3f l_vPos(Vect3f(-l_Translation.x,l_Translation.y,l_Translation.z));
-      l_sInfo.m_CollisionPoint = l_vPos;
-      l_sInfo.m_Normal = v3fZERO;
-
-      g_vCollisions.push_back(l_sInfo);
-
-      //SCollisionInfo l_sInfo;
-      //Vect3f l_vPos(-l_vMiddlePoint.x,l_vMiddlePoint.y,l_vMiddlePoint.z);
-      //l_sInfo.m_CollisionPoint = l_vPos;
-      //l_sInfo.m_Normal = v3fZERO;
-
-      //g_vCollisions.push_back(l_sInfo);
       CHECKED_DELETE(l_pBox)
 
+      /************************************************/
 
+      //renderitzem els joints
+      _pRM->DrawSphere(0.01f,colYELLOW,5);
     }
 
     
-
-    
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   RenderImpacts(_pRM);
+   //RenderImpacts(_pRM);
    //RenderLaserPoint(_pRM);
 
 
@@ -999,6 +955,7 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
   {
     bool l_bRender = CORE->GetPhysicsManager()->GetDebugRenderMode();
     CORE->GetPhysicsManager()->SetDebugRenderMode(!l_bRender);
+    g_pCharacter->SetVisible(!g_pCharacter->GetVisible());
   }
   
   return false;
