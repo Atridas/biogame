@@ -751,19 +751,13 @@ utility BioUtility "Eon-Utility" width:160 height:549
 	-- Fi exportadors
 	
 	-- Funcionalitats botons	
-	
-	
-	
-  
-	
-	-- Fi funcionalitats botons
-	
 	on BioUtility open do
 	(
 		labelPath.text = g_DefaultPath
 		dropNivell.items = g_LevelArray
 		DropListPhysX.items = g_PhysXArray
 	)
+	
 	on buttonPath pressed do
 	(
 		local l_outPath=GetSavePath initialDir:labelPath.text caption:"Select output file to export file" types:" mesh(*.mesh)|*.mesh|All Files(*.*)|*.*|"
@@ -772,9 +766,10 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			labelPath.text = l_outPath
 		)
 	)
+	
 	on buttonMesh pressed do
 	(
-		if $ != undefined then
+		if $ != undefined and IsMesh $ then
 		(
 			local l_check = CheckMesh $ true
 			
@@ -812,11 +807,23 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				)
 			)
 		) else (
-			ShowError "No hi ha cap objecte seleccionat"
+			ShowError "Sel·lecciona un únic objecte a exportar."
 		)
 	)
+	
 	on buttonMeshManager pressed do
 	(
+		--Check
+		local l_check = true
+		l_check = CheckSceneObjects $*
+			
+		if l_check != true then
+		(
+			ShowError l_check
+			return false
+		)
+		--Check end
+		
 		l_cores = #()
 		for i=1 to $*.count do
 		(
@@ -843,8 +850,8 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		(
 			format "Export finalitzat\n"
 		)
-	
 	)
+	
 	on buttonScene pressed do
 	(
 		local l_cores = #()
@@ -918,6 +925,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		
 		ShowMessage "Fi"
 	)
+	
 	on buttonLight pressed do
 	(
 		local l_lights = #()
@@ -939,9 +947,9 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			ShowError "Problema inidentificat"
 		)
 	)
+	
 	on ButtonPhysX pressed do
 	(
-		
 		local l_cores = #()
 		local l_instances = #()
 		
@@ -980,6 +988,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			ShowMessage "Export de la Fisica finalitzat\n"
 		)
 	)
+	
 	on ButtonEntities pressed do
 	(
 		
@@ -1025,6 +1034,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			ShowMessage "Hi ha hagut un error"
 		)
 	)
+	
 	on ButtonNivell pressed do
 	(
 		
@@ -1051,4 +1061,5 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			ShowMessage "Hi ha hagut un error"
 		)
 	)
+	-- Fi funcionalitats botons
 )
