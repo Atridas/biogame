@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <GameObjectManager>
-	<GameObject name="Habitacio3" Physx="true" PhysxType="BoundingBox" RenderableObject="Habitacio3" PhysxActor="Habitacio3" Pushable="false" Body="0" />
-	<GameObject name="Habitacio2" Physx="true" PhysxType="BoundingBox" RenderableObject="Habitacio2" PhysxActor="Habitacio2" Pushable="false" Body="0" />
+	<GameObject name="Habitacio3" Physx="true" PhysxType="mesh" RenderableObject="Habitacio3" PhysxActor="Habitacio3" Pushable="false" Body="0" />
+	<GameObject name="Habitacio2" Physx="true" PhysxType="mesh" RenderableObject="Habitacio2" PhysxActor="Habitacio2" Pushable="false" Body="0" />
 	<GameObject name="LowCover" Physx="true" PhysxType="BoundingBox" RenderableObject="LowCover" PhysxActor="LowCover" Pushable="false" Body="0" />
 	<GameObject name="HighCover" Physx="true" PhysxType="BoundingBox" RenderableObject="HighCover" PhysxActor="HighCover" Pushable="false" Body="0" />
 	<GameObject name="LowCover01" Physx="true" PhysxType="BoundingBox" RenderableObject="LowCover01" PhysxActor="LowCover01" Pushable="false" Body="0" />
@@ -26,6 +26,6 @@
 	<GameObject name="BoxAlpha" Physx="true" PhysxType="BoundingBox" RenderableObject="BoxAlpha" PhysxActor="BoxAlpha" Pushable="false" Body="0" />
 	<GameObject name="BoxSpecular" Physx="true" PhysxType="BoundingBox" RenderableObject="BoxSpecular" PhysxActor="BoxSpecular" Pushable="false" Body="0" />
 	<GameObject name="BoxAlpha01" Physx="true" PhysxType="BoundingBox" RenderableObject="BoxAlpha01" PhysxActor="BoxAlpha01" Pushable="false" Body="0" />
-	<GameObject name="Habitacio1" Physx="true" PhysxType="BoundingBox" RenderableObject="Habitacio1" PhysxActor="Habitacio1" Pushable="false" Body="0" />
+	<GameObject name="Habitacio1" Physx="true" PhysxType="mesh" RenderableObject="Habitacio1" PhysxActor="Habitacio1" Pushable="false" Body="0" />
 	<GameObject name="BoxParallax" Physx="true" PhysxType="BoundingBox" RenderableObject="BoxParallax" PhysxActor="BoxParallax" Pushable="false" Body="0" />
 </GameObjectManager>
