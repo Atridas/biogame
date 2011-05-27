@@ -281,7 +281,14 @@ void CRenderManager::SetupMatrices(CCamera* _pCamera, bool _bOrtho)
 	m_pD3DDevice->SetTransform( D3DTS_PROJECTION, &l_matProject );
   CORE->GetEffectManager()->ActivateCamera(l_matView, l_matProject, eye);
 
-  m_Frustum.Update(l_matView * l_matProject);
+  if(_pCamera)
+  {
+    m_Frustum.Update(_pCamera);
+  }
+  else
+  {
+    m_Frustum.Update(l_matView * l_matProject);
+  }
 
   /*m_pEffectManager->SetProjectionMatrix(m_matProject);
   m_pEffectManager->SetViewMatrix(m_matView);

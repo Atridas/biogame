@@ -202,6 +202,8 @@ bool CAnimatedCoreModel::Load(const std::string &_szPath)
     LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load No s'ha trobat l'arxiu");
   }
 
+  ComputeBoundings();
+
   return IsOk();
 }
 
@@ -338,4 +340,50 @@ bool CAnimatedCoreModel::LoadVertexBuffer()
 int CAnimatedCoreModel::GetAnimationCount()
 {
   return m_pCalCoreModel->getCoreAnimationCount();
+}
+
+
+void CAnimatedCoreModel::ComputeBoundings()
+{
+  Vect3f l_vMin, l_vMax;
+  bool l_bInit = false;
+
+  for(int i = 0; i < m_pCalCoreModel->getCoreMeshCount(); ++i)
+  {
+    CalCoreMesh* l_pMesh = m_pCalCoreModel->getCoreMesh(i);
+    for(int j = 0; j < l_pMesh->getCoreSubmeshCount(); ++j)
+    {
+      CalCoreSubmesh* l_pSubMesh = l_pMesh->getCoreSubmesh(j);
+
+      const vector<CalCoreSubmesh::Vertex> l_VertexVector  = l_pSubMesh->getVectorVertex();
+      vector<CalCoreSubmesh::Vertex>::const_iterator l_it  = l_VertexVector.cbegin();
+      vector<CalCoreSubmesh::Vertex>::const_iterator l_end = l_VertexVector.cend();
+      for(; l_it != l_end; ++l_it)
+      {
+        const CalCoreSubmesh::Vertex v = *l_it;
+        if(l_bInit)
+        {
+          l_vMin.x = (l_vMin.x < v.position.x) ? l_vMin.x : v.position.x;
+          l_vMin.y = (l_vMin.y < v.position.y) ? l_vMin.y : v.position.y;
+          l_vMin.z = (l_vMin.z < v.position.z) ? l_vMin.z : v.position.z;
+          
+          l_vMax.x = (l_vMax.x > v.position.x) ? l_vMax.x : v.position.x;
+          l_vMax.y = (l_vMax.y > v.position.y) ? l_vMax.y : v.position.y;
+          l_vMax.z = (l_vMax.z > v.position.z) ? l_vMax.z : v.position.z;
+        }
+        else
+        {
+          l_vMin.x = v.position.x;
+          l_vMin.y = v.position.y;
+          l_vMin.z = v.position.z;
+          l_vMax = l_vMin;
+          l_bInit = true;
+        }
+      }
+    }
+  }
+
+
+  m_BoundingBox.Init(l_vMin, l_vMax);
+  m_BoundingSphere.Init(l_vMin, l_vMax);
 }

@@ -4,6 +4,7 @@
 
 //main include files
 #include "Frustum.h"
+#include "Camera.h"
 
 
 void CFrustum::Update(const D3DXMATRIX &clip) 
@@ -85,6 +86,74 @@ void CFrustum::Update(const D3DXMATRIX &clip)
 	m_frustum[5][1] *= t;
 	m_frustum[5][2] *= t;
 	m_frustum[5][3] *= t;
+}
+
+void ComputePlane(const Vect3f& p0,const Vect3f& p1,const Vect3f& p2, float* plane)
+{
+  Vect3f v = p1 - p0;
+  Vect3f u = p2 - p0;
+
+  Vect3f n = (v ^ u).Normalize();
+  
+  plane[0] = n.x;
+  plane[1] = n.y;
+  plane[2] = n.z;
+  plane[3] = -(n * p0);
+}
+
+void CFrustum::Update(CCamera* _pCamera) 
+{
+  float  l_fFov    = _pCamera->GetFov();
+	float  l_fAspect = _pCamera->GetAspectRatio();
+	float  l_fZNear  = _pCamera->GetZn();
+	float  l_fZFar   = _pCamera->GetZf();
+
+  Vect3f l_vPos    = _pCamera->GetEye();
+  Vect3f l_vUp     = _pCamera->GetVecUp().Normalize();
+  Vect3f l_vDir    = (_pCamera->GetLookAt() - l_vPos).Normalize();
+
+  Vect3f l_vRight  = (l_vDir   ^ l_vUp ).Normalize();
+         l_vUp     = (l_vRight ^ l_vDir).Normalize();
+
+  
+  float l_fHNear = 2 * tan(l_fFov * .5) * l_fZNear;
+  //float l_fHNear = tan(l_fFov * .5) * l_fZNear; //Alçada del planol "near"
+	float l_fWNear = l_fHNear * l_fAspect;
+
+  float l_fHFar = 2 * tan(l_fFov * .5) * l_fZFar;
+  //float l_fHFar = tan(l_fFov * .5) * l_fZFar; //Alçada del planol "far"
+	float l_fWFar = l_fHFar * l_fAspect;
+
+
+  // (F) = far, (c) = center, (n) = near, (l) = left, (r) = right, (t) = top, (b) = bottom
+  Vect3f l_vFc = l_vPos + l_vDir * l_fZFar;
+
+	Vect3f l_vFtl = l_vFc + (l_vUp * l_fHFar * .5f) - (l_vRight * l_fWFar * .5f);
+  Vect3f l_vFtr = l_vFc + (l_vUp * l_fHFar * .5f) + (l_vRight * l_fWFar * .5f);
+  Vect3f l_vFbl = l_vFc - (l_vUp * l_fHFar * .5f) - (l_vRight * l_fWFar * .5f);
+  Vect3f l_vFbr = l_vFc - (l_vUp * l_fHFar * .5f) + (l_vRight * l_fWFar * .5f);
+
+  Vect3f l_vNc = l_vPos + l_vDir * l_fZNear;
+
+  Vect3f l_vNtl = l_vNc + (l_vUp * l_fHNear * .5f) - (l_vRight * l_fWNear * .5f);
+  Vect3f l_vNtr = l_vNc + (l_vUp * l_fHNear * .5f) + (l_vRight * l_fWNear * .5f);
+  Vect3f l_vNbl = l_vNc - (l_vUp * l_fHNear * .5f) - (l_vRight * l_fWNear * .5f);
+  Vect3f l_vNbr = l_vNc - (l_vUp * l_fHNear * .5f) + (l_vRight * l_fWNear * .5f);
+  
+  //near
+  ComputePlane(l_vNbr, l_vNbl, l_vNtr, m_frustum[0]);
+  //far
+  ComputePlane(l_vFbl, l_vFbr, l_vFtr, m_frustum[1]);
+  
+  //top
+  ComputePlane(l_vNtr, l_vNtl, l_vFtr, m_frustum[2]);
+  //bottom
+  ComputePlane(l_vNbl, l_vNbr, l_vFbr, m_frustum[3]);
+  
+  //left
+  ComputePlane(l_vNtl, l_vNbl, l_vFtl, m_frustum[4]);
+  //right
+  ComputePlane(l_vNbr, l_vNtr, l_vFbr, m_frustum[5]);
 }
 
 bool CFrustum::SphereVisible(const D3DXVECTOR3 &center,float radius) const 
@@ -177,7 +246,7 @@ bool CFrustum::BoxVisible( const D3DXVECTOR3 &max, const D3DXVECTOR3 &min) const
 			return false;
 	}
 	
-	// Si todos los puntos están dentro, entonces la caja
+	// Si algun punto está dentro, entonces la caja
 	// está dentro del frustum o parcialmente
 	return true;
 }

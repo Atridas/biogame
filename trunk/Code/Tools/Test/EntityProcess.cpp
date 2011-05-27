@@ -5,6 +5,7 @@
 #include "RenderableObjectsManager.h"
 #include "ActionManager.h"
 #include "ScriptManager.h"
+#include "ThPSCamera.h"
 
 #include "ComponentObject3D.h"
 #include "ComponentMovement.h"
@@ -68,6 +69,8 @@ bool CEntityProcess::Init()
                                      -FLOAT_PI_VALUE/3);
 
   CComponent3rdPSCamera *l_pComponent3rdPSCamera = new CComponent3rdPSCamera();
+  //l_pComponent3rdPSCamera->Init(m_pPlayerEntity, 0, 0);
+  //((CThPSCamera*)l_pComponent3rdPSCamera->GetCamera())->SetZoom(0);
   l_pComponent3rdPSCamera->Init(m_pPlayerEntity, 1, 0.5f);
 
   m_pCamera = l_pComponent3rdPSCamera->GetCamera();
