@@ -8,33 +8,34 @@
 
 #include <set>
 
+#include "RenderableObject.h"
+#include <queue>
+
 // Forward declarations ------------
-class CRenderableObject;
 class CXMLTreeNode;
 class CRenderManager;
 // ---------------------------------
 
 class CRoom:
-  public CObject3D,
   public CBaseControl
 {
 public:
   CRoom() {};
   ~CRoom() {Done();};
 
-  bool Init(const CXMLTreeNode&);
+  bool Init(CXMLTreeNode&,set<string>&);
 
-  const vector<CBoundingBox> GetBoundingBoxes() const { return m_BoundingBoxes; }
-  void Render(CRenderManager*) const;
+  const vector<CObject3D> GetBoundings() const { return m_Boundings; }
+  void Render(CRenderManager*, priority_queue<CRenderableObject*,vector< CRenderableObject*>, CRenderableObjectOrdering>& _BlendQueue) const;
   void AddRendeableObject(CRenderableObject*);
   void RemoveRendeableObject(CRenderableObject*);
 
 protected:
-  virtual Release() {};
+  virtual void Release() {};
 private:
 
-  vector<CBoundingBox> m_BoundingBoxes;
+  vector<CObject3D> m_Boundings;
   set<CRenderableObject*> m_RenderableObjects;
-}
+};
 
 #endif

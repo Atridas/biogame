@@ -15,6 +15,9 @@ bool CRenderableAnimatedInstanceModel::Init(const string& _szCoreName)
   if(_szCoreName != "") 
   {
     m_pAnimatedInstanceModel = ANIMATED_MANAGER->GetInstance(_szCoreName);
+    
+    m_BoundingBox    = m_pAnimatedInstanceModel->GetAnimatedCoreModel()->GetBoundingBox();
+    m_BoundingSphere = m_pAnimatedInstanceModel->GetAnimatedCoreModel()->GetBoundingSphere();
 
     if(m_pAnimatedInstanceModel != 0)
       SetOk(true);

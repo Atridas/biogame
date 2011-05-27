@@ -4,6 +4,8 @@
 
 #include "base.h"
 #include "Named.h"
+#include "Utils/BoundingBox.h"
+#include "Utils/BoundingSphere.h"
 
 #define MAXBONES 29
 
@@ -73,6 +75,12 @@ public:
    * @return La classe RenderableVertexs que representa al model.
   **/
   CRenderableVertexs* GetRenderableVertexs ( ) const                { return m_pRenderableVertexs; };
+
+
+  const CBoundingBox&    GetBoundingBox   () const { return m_BoundingBox; };
+  const CBoundingSphere& GetBoundingSphere() const { return m_BoundingSphere; };
+
+
   /**
    * Mètode de càrrega desde fitxer.
    * Aquest mètode carrega el model cal3d que es troba al path proporcionat. Si la càrrega s'ha efectuat correctament quedarà en ok.
@@ -108,6 +116,8 @@ protected:
   void Release                          ();
 
 private:
+
+  void ComputeBoundings();
   /**
    * Mètode de càrrega de la malla.
   **/
@@ -159,6 +169,9 @@ private:
    * Path del model.
   **/
   string                    m_szPath;
+  
+  CBoundingBox              m_BoundingBox;
+  CBoundingSphere           m_BoundingSphere;
 };
 
 #endif

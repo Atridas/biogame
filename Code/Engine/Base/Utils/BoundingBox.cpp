@@ -66,6 +66,18 @@ bool CBoundingBox::Init(Vect3f _vPoints[8])
   return IsOk();
 }
 
+bool CBoundingBox::Init(Vect3f _vDimensions)
+{
+  CalcBox(_vDimensions * -.5f, _vDimensions *.5f);
+  CalcMiddlePoint();
+  CalcDimension();
+  CalcMaxSide();
+
+  SetOk(true);
+
+  return IsOk();
+}
+
 void CBoundingBox::CalcBox(Vect3f& _vMin, Vect3f& _vMax)
 {
   //crear la box
