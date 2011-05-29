@@ -9,6 +9,8 @@ class CObject3D;
 class CRenderManager;
 class CRenderableObject;
 class CSpotLight;
+class CalSkeleton;
+class CalBone;
 
 //-----------------------------------------
 
@@ -32,10 +34,14 @@ public:
   void                  RenderImpacts           (CRenderManager* _pRM);
   void                  RenderLaserPoint        (CRenderManager* _pRM);
 
+  
 
   virtual bool          ExecuteProcessAction      (float _fDeltaSeconds, float _fDelta, const char* _pcAction);
 
 private:
+
+  Mat44f                GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone);
+  void                  ExportSkeletonInfo      (CalSkeleton* _pSkeleton);
 
 	void                  Release                 ();
 

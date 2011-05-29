@@ -521,142 +521,156 @@ void CPhysXProcess::Update(float _fElapsedTime)
 
 }
 
-void CPhysXProcess::RenderScene(CRenderManager* _pRM)
+Mat44f CPhysXProcess::GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone)
 {
-   
-   CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
-   l_pPhysManager->DebugRender(_pRM);
+  //rotacio i translacio del bone (absoluta)
+  CalVector l_vTranslation = _pBone->getTranslationAbsolute();
+  CalQuaternion l_RotationQuaternion = _pBone->getRotationAbsolute();
 
-    CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
-    CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
-    
-    l_pSkeleton->calculateBoundingBoxes();
-    
-    vector<CalBone*> l_vBones = l_pSkeleton->getVectorBone();
- 
-    g_vCollisions.clear();
-    
-    int l_id = l_pSkeleton->getCoreSkeleton()->getVectorRootCoreBoneId()[0];
-    CalCoreBone* l_pCoreBoneRoot = l_pSkeleton->getCoreSkeleton()->getCoreBone(l_id);
+  //passem el quaternion a left handed
+  l_RotationQuaternion.x = -l_RotationQuaternion.x;
+  l_RotationQuaternion.y = -l_RotationQuaternion.y;
+  l_RotationQuaternion.z = -l_RotationQuaternion.z;
 
-    CalQuaternion l_RootQuat = l_pCoreBoneRoot->getRotation();
-    CalVector l_RootTrans = l_pCoreBoneRoot->getTranslation();
+  //creem la matriu de transformacio Cal3d (absolute) -> Mat44f
+  CalMatrix l_RotationMatrix(l_RotationQuaternion);
 
-    for (size_t j=0;j<l_vBones.size();++j)
+  return Mat44f(
+              -l_RotationMatrix.dxdx  ,-l_RotationMatrix.dydx ,-l_RotationMatrix.dzdx ,-l_vTranslation.x,
+              l_RotationMatrix.dxdy   ,l_RotationMatrix.dydy  ,l_RotationMatrix.dzdy  ,l_vTranslation.y,
+              l_RotationMatrix.dxdz   ,l_RotationMatrix.dydz  ,l_RotationMatrix.dzdz  ,l_vTranslation.z,
+              0.0f                    ,0.0f                   ,0.0f                   ,1.0f);
+}
+
+void CPhysXProcess::ExportSkeletonInfo(CalSkeleton* _pSkeleton)
+{
+  CXMLTreeNode l_XMLDoc;
+  CBoundingBox l_Box;
+  Vect3f l_vPoints[8];
+  CalVector l_vCalPoints[8];
+
+  _pSkeleton->calculateBoundingBoxes();
+
+  vector<CalBone*> l_vBones = _pSkeleton->getVectorBone();
+  vector<CalBone*>::iterator l_itBone = l_vBones.begin();
+
+  l_XMLDoc.StartNewFile("Skeleton.xml");
+  l_XMLDoc.StartElement("skeleton");
+
+  while(l_itBone != l_vBones.end())
+  {
+    CalBone* l_pBone = *l_itBone;
+    CalCoreBone* l_pCoreBone = l_pBone->getCoreBone();
+
+    l_pCoreBone->getBoundingBox().computePoints(l_vCalPoints);
+
+    //rotacio i translacio del core bone (absoluta)
+    CalVector l_vCoreBoneTranslation = l_pCoreBone->getTranslationAbsolute();
+    CalQuaternion l_CoreBoneRotationQuaternion = l_pCoreBone->getRotationAbsolute();
+
+    //rotem el core bone  (absoluta)
+    CalQuaternion x_axis_90(-0.7071067811f,0.0f,0.0f,0.7071067811f);
+    l_CoreBoneRotationQuaternion *= x_axis_90;
+    l_vCoreBoneTranslation *= x_axis_90;
+
+    for(int i = 0; i < 8; ++i)
     {
-      CalBone* l_pBone = l_vBones[j];
-      CalCoreBone* l_pCoreBone = l_pBone->getCoreBone();
+      //calculem les coordenades del vertex de la box relatives al bone
+      CalVector l_vRelativeCoords = l_vCalPoints[i] - l_vCoreBoneTranslation;
+      CalQuaternion l_CoreBoneRotationQuaternionInv = l_CoreBoneRotationQuaternion;
+      l_CoreBoneRotationQuaternionInv.invert();
+      l_vRelativeCoords *= l_CoreBoneRotationQuaternionInv;
 
-
-      /***************CAL3D TO D3D*****************/
-      
-      //rotacio i translacio del bone (absoluta)
-      CalVector l_Translation=l_pBone->getTranslationAbsolute();
-      CalQuaternion l_Quat=l_pBone->getRotationAbsolute();
-
-      //passem el quaternion a left handed
-      l_Quat.x = -l_Quat.x;
-      l_Quat.y = -l_Quat.y;
-      l_Quat.z = -l_Quat.z;
-
-      //creem la matriu de transformacio Cal3d (absolute) -> Mat44f
-      CalMatrix l_rotmat(l_Quat);
-
-      Mat44f l_mWold(
-                  -l_rotmat.dxdx  ,-l_rotmat.dydx ,-l_rotmat.dzdx ,-l_Translation.x,
-                  l_rotmat.dxdy   ,l_rotmat.dydy  ,l_rotmat.dzdy  ,l_Translation.y,
-                  l_rotmat.dxdz   ,l_rotmat.dydz  ,l_rotmat.dzdz  ,l_Translation.z,
-                  0.0f            ,0.0f           ,0.0f           ,1.0f);
-
-      /********************************************/
-
-
-      _pRM->SetTransform(l_pAnim->GetMat44()*l_mWold);
-
-
-      /***************CORE BOUNDING BOX****************/
-
-      //agafem els punts de la bounding de la core
-      CalVector l_vPoints[8];
-      l_pCoreBone->getBoundingBox().computePoints(l_vPoints);
-
-      CBoundingBox* l_pBox = new CBoundingBox();
-      Vect3f l_vect[8];
-
-      //rotacio i translacio del core bone (absoluta)
-      CalVector l_TranslationC=l_pCoreBone->getTranslationAbsolute();
-      CalQuaternion l_QuatC=l_pCoreBone->getRotationAbsolute();
-
-      //rotem el core bone  (absoluta)
-      CalQuaternion x_axis_90(-0.7071067811f,0.0f,0.0f,0.7071067811f);
-      l_QuatC *= x_axis_90;
-      l_TranslationC *= x_axis_90;
-
-      for(int j=0;j<8;++j)
-      {
-        //calculem les coordenades del vertex de la box relatives al bone
-        CalVector l_PosBB=(l_vPoints[j]-l_TranslationC);
-        CalQuaternion l_Quat2=l_QuatC;
-        l_Quat2.invert();
-        l_PosBB*=l_Quat2;
-
-        l_vect[j] = Vect3f(l_PosBB.x,l_PosBB.y,l_PosBB.z);
-      }
-
-      //creem la box i la renderitzem
-      l_pBox->Init(l_vect);
-      _pRM->RenderBoundingBox(l_pBox);
-      CHECKED_DELETE(l_pBox)
-
-      /************************************************/
-
-      //renderitzem els joints
-      _pRM->DrawSphere(0.01f,colYELLOW,5);
+      l_vPoints[i] = Vect3f(l_vRelativeCoords.x,l_vRelativeCoords.y,l_vRelativeCoords.z);
     }
 
-    
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    l_Box.Init(l_vPoints);
 
-   //RenderImpacts(_pRM);
-   //RenderLaserPoint(_pRM);
+    l_XMLDoc.StartElement("bone");
 
+    l_XMLDoc.WritePszProperty("name",l_pCoreBone->getName().c_str());
+    l_XMLDoc.WritePszProperty("type","box");
+    l_XMLDoc.WriteFloatProperty("density",0.0f);
+    l_XMLDoc.WriteVect3fProperty("bounding_box_size",l_Box.GetDimension());
+    l_XMLDoc.WriteVect3fProperty("bounding_box_middle_point",l_Box.GetMiddlePoint());
 
-  
+    l_XMLDoc.EndElement();
 
+    ++l_itBone;
+  }
 
-   /*if (m_pRenderPhysX!=0)
-   {
-     Mat44f l_vMat;
-     g_pPActorBall->GetMat44(l_vMat);
-     RenderPhysX(_pRM,m_pRenderPhysX,l_vMat);
-   }*/
-  //Render Objects
+  l_XMLDoc.EndElement();
+
+  l_XMLDoc.EndNewFile();
+}
+
+void CPhysXProcess::RenderScene(CRenderManager* _pRM)
+{  
+  CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
+  l_pPhysManager->DebugRender(_pRM);
+
+  CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
+  CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
+
+  l_pSkeleton->calculateBoundingBoxes();
+
+  vector<CalBone*> l_vBones = l_pSkeleton->getVectorBone();
+
+  g_vCollisions.clear();
+
+  for (size_t j=0;j<l_vBones.size();++j)
+  {
+    CalBone* l_pBone = l_vBones[j];
+    CalCoreBone* l_pCoreBone = l_pBone->getCoreBone();
+
+    Mat44f l_mWorld = GetBoneLeftHandedAbsoluteTransformation(l_pBone);
+
+    _pRM->SetTransform(l_pAnim->GetMat44()*l_mWorld);
+
+    /***************CORE BOUNDING BOX****************/
+
+    //agafem els punts de la bounding de la core
+    CalVector l_vPoints[8];
+    l_pCoreBone->getBoundingBox().computePoints(l_vPoints);
+
+    CBoundingBox l_Box;
+    Vect3f l_vect[8];
+
+    //rotacio i translacio del core bone (absoluta)
+    CalVector l_TranslationC=l_pCoreBone->getTranslationAbsolute();
+    CalQuaternion l_QuatC=l_pCoreBone->getRotationAbsolute();
+
+    //rotem el core bone  (absoluta)
+    CalQuaternion x_axis_90(-0.7071067811f,0.0f,0.0f,0.7071067811f);
+    l_QuatC *= x_axis_90;
+    l_TranslationC *= x_axis_90;
+
+    for(int j=0;j<8;++j)
+    {
+      //calculem les coordenades del vertex de la box relatives al bone
+      CalVector l_PosBB=(l_vPoints[j]-l_TranslationC);
+      CalQuaternion l_Quat2=l_QuatC;
+      l_Quat2.invert();
+      l_PosBB*=l_Quat2;
+
+      l_vect[j] = Vect3f(l_PosBB.x,l_PosBB.y,l_PosBB.z);
+    }
+
+    //creem la box
+    l_Box.Init(l_vect);
+
+    /************************************************/
+
+    _pRM->RenderBoundingBox(&l_Box);
+
+    //renderitzem els joints
+    _pRM->DrawSphere(0.01f,colYELLOW,5);
+  }
+
   CORE->GetRenderableObjectsManager()->Render(_pRM);
-  //RenderLaserPoint(_pRM);
-  //Render Lights
+
   if(m_bRenderLights)
     CORE->GetLightManager()->Render(_pRM);
-
-  //Matrix for testing
-  Mat44f r,r2, t, s, identity, total;
-
-  identity.SetIdentity();
-  r.SetIdentity();
-  r2.SetIdentity();
-  t.SetIdentity();
-  s.SetIdentity();
-
-  //Draw Grid and Axis
-  _pRM->SetTransform(identity);
-  
-  // l_pAnim->RenderRenderableObject(RENDER_MANAGER);
-  //_pRM->DrawGrid(30.0f,colCYAN,30,30);
-   
-   //_pRM->DrawPlane(10,Vect3f(0,1,0),0,colBLUE,10,10);
-
-  
 
 }
 
@@ -956,6 +970,7 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     bool l_bRender = CORE->GetPhysicsManager()->GetDebugRenderMode();
     CORE->GetPhysicsManager()->SetDebugRenderMode(!l_bRender);
     g_pCharacter->SetVisible(!g_pCharacter->GetVisible());
+    ExportSkeletonInfo(g_pCharacter->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton());
   }
   
   return false;
