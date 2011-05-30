@@ -550,7 +550,8 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				l_params = #(#("name", l_dummy.name))
 				l_aux = "" as stringStream
 					
-				format "% % %" l_dummy.boxsize.x l_dummy.boxsize.y l_dummy.boxsize.z to:l_aux
+				local l_size = RHVectorToLH (DummySize l_dummy)
+				format "% % %" l_size.x l_size.y l_size.z to:l_aux
 				append l_params #("size",l_aux)
 				l_aux = "" as stringStream
 				
@@ -602,7 +603,9 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			local roomB = GetUserProp portal "roomB"
 			l_params = #(#("name",portal.name),#("roomA",roomA),#("roomB",roomB))
 			l_aux = "" as stringStream
-			format "% % %" portal.boxsize.x portal.boxsize.y portal.boxsize.z to:l_aux
+				
+			local l_size = RHVectorToLH (DummySize portal)
+			format "% % %" l_size.x l_size.y l_size.z to:l_aux
 			append l_params #("size",l_aux)
 				
 			l_aux = "" as stringStream

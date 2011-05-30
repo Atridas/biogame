@@ -3,6 +3,7 @@
 #define __PORTAL_H__
 
 #include "base.h"
+#include "Utils\Object3D.h"
 
 // forward---------------------
 class CRoom;
@@ -12,13 +13,13 @@ class CPortalManager;
 
 class CPortal:
   public CObject3D,
-  public CBaseUtils
+  public CBaseControl
 {
 public:
   CPortal():m_pRoomA(0), m_pRoomB(0) {};
   ~CPortal() {Done();};
 
-  bool Init(const CXMLTreeNode&, const CPortalManager*);
+  bool Init(CXMLTreeNode&, CPortalManager*);
   
   CRoom* GetRoomA() const {return m_pRoomA;};
   CRoom* GetRoomB() const {return m_pRoomB;};
@@ -26,7 +27,7 @@ public:
 protected:
   virtual void Release() {m_pRoomA = m_pRoomB = 0;};
 private:
-  CRoom* m_pRoomA, m_pRoomB;
+  CRoom* m_pRoomA, *m_pRoomB;
 };
 
 #endif

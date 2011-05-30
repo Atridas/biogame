@@ -134,7 +134,7 @@ void CRenderableObjectsManager::RenderOld(CRenderManager* _pRM)
     {
       Vect3f l_Center = m_RenderableObjects[i]->GetBoundingSphere()->GetMiddlePoint() +  m_RenderableObjects[i]->GetPosition();
       D3DXVECTOR3 l_d3Center(l_Center.x,l_Center.y,l_Center.z);
-
+      float l_Radius=m_RenderableObjects[i]->GetBoundingSphere()->GetRadius();
       if(l_Frustum.SphereVisible(l_d3Center, m_RenderableObjects[i]->GetBoundingSphere()->GetRadius()))
       {
 
@@ -147,22 +147,7 @@ void CRenderableObjectsManager::RenderOld(CRenderManager* _pRM)
           m_RenderableObjects[i]->Render(_pRM);
         }
       }
-      else
-      {/*
-
-        if(m_RenderableObjects[i]->IsAlphaBlended())
-        {
-          l_BlendQueue.push(m_RenderableObjects[i]);
-        }
-        else
-        {
-          m_RenderableObjects[i]->Render(_pRM);
-        }*/
-        /*_pRM->SetTransform(m_RenderableObjects[i]->GetMat44());
-        _pRM->RenderBoundingSphere(m_RenderableObjects[i]->GetBoundingSphere());*/
-      }
     }
-    //if(i > 25) return;
   }
   
   CORE->GetEffectManager()->ActivateAlphaRendering();

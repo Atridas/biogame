@@ -23,7 +23,7 @@ public:
   CRoom() {};
   ~CRoom() {Done();};
 
-  bool Init(CXMLTreeNode&,set<string>&);
+  bool Init(CXMLTreeNode&,set<string>& _UsedGameObjects);
 
   const vector<CObject3D> GetBoundings() const { return m_Boundings; }
   void Render(CRenderManager*, priority_queue<CRenderableObject*,vector< CRenderableObject*>, CRenderableObjectOrdering>& _BlendQueue) const;
