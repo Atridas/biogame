@@ -184,3 +184,16 @@ function IsInfo _object =
 		return false
 	)
 )
+
+function DummySize _dummy =
+(
+	local l_transformX = _dummy.transform[1]
+	local l_transformY = _dummy.transform[2]
+	local l_transformZ = _dummy.transform[3]
+	
+	local l_sizeX = sqrt(l_transformX[1] * l_transformX[1] + l_transformX[2] * l_transformX[2] + l_transformX[3] * l_transformX[3])
+	local l_sizeY = sqrt(l_transformY[1] * l_transformY[1] + l_transformY[2] * l_transformY[2] + l_transformY[3] * l_transformY[3])
+	local l_sizeZ = sqrt(l_transformZ[1] * l_transformZ[1] + l_transformZ[2] * l_transformZ[2] + l_transformZ[3] * l_transformZ[3])
+	
+	return [_dummy.boxsize.x * l_sizeX, _dummy.boxsize.y * l_sizeY, _dummy.boxsize.z * l_sizeZ]
+)
