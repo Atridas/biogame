@@ -21,9 +21,11 @@ public:
   void              SetSkeleton(CalSkeleton* _pSkeleton) {m_pCalSkeleton = _pSkeleton;};
 
   //Funcions per inicialitzar el esquelet corresponent
+  bool              Load(string _szFileName);
   void              InitBoneMatrices();
   void              InitPhysXActors();
   void              InitPhysXJoints();
+  CPhysxBone*       GetPhysxBoneByName(string _szName);
 
 
   void UpdateCal3dFromPhysx();
