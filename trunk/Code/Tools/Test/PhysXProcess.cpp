@@ -36,6 +36,8 @@
 #include "PhysxRagdoll.h"
 #include "SpotLight.h"
 #include "Camera.h"
+#include "PhysxSkeleton.h"
+#include "PhysxBone.h"
 #include <cal3d/cal3d.h>
 //---PhysX Includes---//
 #undef min
@@ -91,7 +93,7 @@ CPhysicSphericalJoint* g_pSphericalJoint2;
 CGameObjectManager* g_pObjectManager = 0;
 
 //RAGDOLLS
-CPhysxRagdoll* g_pRagdoll = 0;
+CPhysxSkeleton* g_pRagdoll = 0;
 
 //CAnimatedModelManager::CAnimatedModelManager()
 //{
@@ -864,12 +866,18 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
     l_pSkeleton->getCoreSkeleton()->calculateBoundingBoxes(l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getCoreModel());
     l_pSkeleton->calculateBoundingBoxes();
+    
 
     if (g_pRagdoll == 0)
     {
-      g_pRagdoll = new CPhysxRagdoll("Ragdoll Prova");
+      g_pRagdoll = new CPhysxSkeleton();
+      CalModel* l_pCalModel = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel();
+      g_pRagdoll->Init("Data/Animated Models/Riggle/Skeleton.xml",l_pCalModel);
+
+     /* g_pRagdoll = new CPhysxRagdoll("Ragdoll Prova");
       g_pRagdoll->Load("Data/Animated Models/Riggle/Ragdoll.xml",false);
-      g_pRagdoll->InitSkeleton(l_pSkeleton);
+      g_pRagdoll->InitSkeleton(l_pSkeleton);*/
+
     }
 
     ///////////////////////////////////////////////////////////////////////////////

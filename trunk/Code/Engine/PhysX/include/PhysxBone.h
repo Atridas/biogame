@@ -3,15 +3,19 @@
 #define INC_PHYSICS_BONE_H_
 
 #include "base.h"
+#include "Named.h"
 
 class CalBone;
 class CPhysicActor;
 class CPhysicUserData;
 
-class CPhysxBone : CBaseControl
+
+class CPhysxBone :
+  public CNamed,
+  public CBaseControl
 {
 public:
-  CPhysxBone() : m_pCalBone(0), m_iParentID(-1), m_pActor(0), m_bRoot(true),m_pBoneUserData(0) {};
+  CPhysxBone(string _szName) : CNamed(_szName),m_pCalBone(0), m_iParentID(-1), m_pActor(0), m_bRoot(true),m_pBoneUserData(0) {};
   ~CPhysxBone() {Done();};
 
   bool                Init(CalBone* _pBone);
@@ -21,8 +25,10 @@ public:
   CalBone*            GetCalBone()                           {return m_pCalBone;};
   void                SetCalBone(CalBone* _pCalBone)         {m_pCalBone = _pCalBone;};
   bool                IsBoneRoot()                           {return m_bRoot;};
+  Mat44f              GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone);
 
   //Funcions per inicialitzar la info del Bone (primer matrius, segon actors, tercer joints)
+  void                Load(float _fDensity, string _szType, Vect3f _fMiddlePoint,Vect3f _vSize,string _szName);
   void                InitBoneMatrix();
   void                InitPhysXActor();
   void                InitPhysXJoint();
