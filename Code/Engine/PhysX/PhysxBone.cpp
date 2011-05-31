@@ -54,24 +54,6 @@ void CPhysxBone::Load(float _fDensity, string _szType, Vect3f _fMiddlePoint,Vect
   Mat44f l_vMatActor;
   l_vMatActor = GetBoneLeftHandedAbsoluteTransformation(m_pCalBone);
 
-  D3DXMATRIX l_D3DXRotation;
-
-  CalQuaternion l_vQuaternionAbsolute = m_pCalBone->getRotationAbsolute();
-  //l_vQuaternionAbsolute.x = -l_vQuaternionAbsolute.x; 
-  //l_vQuaternionAbsolute.y = -l_vQuaternionAbsolute.y; 
-  //l_vQuaternionAbsolute.z = -l_vQuaternionAbsolute.z; 
-
-  D3DXMatrixRotationQuaternion(&l_D3DXRotation,(CONST D3DXQUATERNION*)& l_vQuaternionAbsolute);
-  CalVector l_vTranslationBoneSpace = m_pCalBone->getTranslationAbsolute();
-  l_D3DXRotation._14 = l_vTranslationBoneSpace.x;
-  l_D3DXRotation._24 = l_vTranslationBoneSpace.y;
-  l_D3DXRotation._34 = l_vTranslationBoneSpace.z;
-
-
-  Mat44f l_MyMat(l_D3DXRotation);
-  l_MyMat.Transpose();
-  l_vMatActor=l_MyMat;
-
   if (_szType == "box")
   {
     CPhysicUserData* l_pUserData = new CPhysicUserData(_szName);
@@ -139,9 +121,19 @@ Mat44f CPhysxBone::GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone)
   //creem la matriu de transformacio Cal3d (absolute) -> Mat44f
   CalMatrix l_RotationMatrix(l_RotationQuaternion);
 
-  return Mat44f(
-              -l_RotationMatrix.dxdx  ,-l_RotationMatrix.dydx ,-l_RotationMatrix.dzdx ,-l_vTranslation.x,
-              l_RotationMatrix.dxdy   ,l_RotationMatrix.dydy  ,l_RotationMatrix.dzdy  ,l_vTranslation.y,
-              l_RotationMatrix.dxdz   ,l_RotationMatrix.dydz  ,l_RotationMatrix.dzdz  ,l_vTranslation.z,
-              0.0f                    ,0.0f                   ,0.0f                   ,1.0f);
+  Mat33f l_Rotation = Mat33f( l_RotationMatrix.dxdx   ,l_RotationMatrix.dydx  ,l_RotationMatrix.dzdx,
+                              l_RotationMatrix.dxdy   ,l_RotationMatrix.dydy  ,l_RotationMatrix.dzdy,
+                              l_RotationMatrix.dxdz   ,l_RotationMatrix.dydz  ,l_RotationMatrix.dzdz);
+
+  float l_fAngleX = FLOAT_PI_VALUE - l_Rotation.GetAngleX();
+  float l_fAngleY = FLOAT_PI_VALUE - l_Rotation.GetAngleY();
+  float l_fAngleZ = FLOAT_PI_VALUE - l_Rotation.GetAngleZ();
+
+  Mat44f l_Transform;
+  l_Transform.SetIdentity();
+  l_Transform.RotByAnglesYXZ(l_fAngleY,l_fAngleX,l_fAngleZ);
+  l_Transform.Translate(Vect3f(-l_vTranslation.x,l_vTranslation.y,l_vTranslation.z));
+
+  return l_Transform;
+  
 }

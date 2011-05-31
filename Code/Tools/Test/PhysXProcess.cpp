@@ -537,11 +537,21 @@ Mat44f CPhysXProcess::GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone)
   //creem la matriu de transformacio Cal3d (absolute) -> Mat44f
   CalMatrix l_RotationMatrix(l_RotationQuaternion);
 
-  return Mat44f(
-              -l_RotationMatrix.dxdx  ,-l_RotationMatrix.dydx ,-l_RotationMatrix.dzdx ,-l_vTranslation.x,
-              l_RotationMatrix.dxdy   ,l_RotationMatrix.dydy  ,l_RotationMatrix.dzdy  ,l_vTranslation.y,
-              l_RotationMatrix.dxdz   ,l_RotationMatrix.dydz  ,l_RotationMatrix.dzdz  ,l_vTranslation.z,
-              0.0f                    ,0.0f                   ,0.0f                   ,1.0f);
+  Mat33f l_Rotation = Mat33f( l_RotationMatrix.dxdx   ,l_RotationMatrix.dydx  ,l_RotationMatrix.dzdx,
+                              l_RotationMatrix.dxdy   ,l_RotationMatrix.dydy  ,l_RotationMatrix.dzdy,
+                              l_RotationMatrix.dxdz   ,l_RotationMatrix.dydz  ,l_RotationMatrix.dzdz);
+
+  float l_fAngleX = FLOAT_PI_VALUE - l_Rotation.GetAngleX();
+  float l_fAngleY = FLOAT_PI_VALUE - l_Rotation.GetAngleY();
+  float l_fAngleZ = FLOAT_PI_VALUE - l_Rotation.GetAngleZ();
+
+  Mat44f l_Transform;
+  l_Transform.SetIdentity();
+  l_Transform.RotByAnglesYXZ(l_fAngleY,l_fAngleX,l_fAngleZ);
+  l_Transform.Translate(Vect3f(-l_vTranslation.x,l_vTranslation.y,l_vTranslation.z));
+
+  return l_Transform;
+  
 }
 
 void CPhysXProcess::ExportSkeletonInfo(CalSkeleton* _pSkeleton)
@@ -583,7 +593,7 @@ void CPhysXProcess::ExportSkeletonInfo(CalSkeleton* _pSkeleton)
       l_CoreBoneRotationQuaternionInv.invert();
       l_vRelativeCoords *= l_CoreBoneRotationQuaternionInv;
 
-      l_vPoints[i] = Vect3f(l_vRelativeCoords.x,l_vRelativeCoords.y,l_vRelativeCoords.z);
+      l_vPoints[i] = Vect3f(-l_vRelativeCoords.x,l_vRelativeCoords.y,l_vRelativeCoords.z);
     }
 
     l_Box.Init(l_vPoints);
@@ -627,7 +637,7 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
 
     Mat44f l_mWorld = GetBoneLeftHandedAbsoluteTransformation(l_pBone);
 
-    _pRM->SetTransform(l_pAnim->GetMat44()*l_mWorld);
+    _pRM->SetTransform(g_pCharacter->GetMat44() * l_mWorld);
 
     /***************CORE BOUNDING BOX****************/
 
@@ -655,7 +665,7 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
       l_Quat2.invert();
       l_PosBB*=l_Quat2;
 
-      l_vect[j] = Vect3f(l_PosBB.x,l_PosBB.y,l_PosBB.z);
+      l_vect[j] = Vect3f(-l_PosBB.x,l_PosBB.y,l_PosBB.z);
     }
 
     //creem la box
