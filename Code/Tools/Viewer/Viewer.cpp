@@ -10,6 +10,9 @@
 #include "RenderableObject.h"
 #include "AnimatedInstanceModel.h"
 #include "RenderableAnimatedInstanceModel.h"
+#include "InstanceMesh.h"
+#include "StaticMesh.h"
+#include "AnimatedCoreModel.h"
 #include <LightManager.h>
 #include "SceneEffectManager.h"
 #include "SpotLight.h"
@@ -307,6 +310,16 @@ void CViewer::ProcessFreeMode(const float _fElapsedTime)
     m_bMoveRight = false;
   }
 
+  if(!CORE->GetActionManager()->IsActionActive("MoveUp"))
+  {
+    m_bMoveUp = false;
+  }
+
+  if(!CORE->GetActionManager()->IsActionActive("MoveDown"))
+  {
+    m_bMoveDown = false;
+  }
+
   if(m_pObjectModeLight)
   {
     m_pObjectModeLight->SetActive(false);
@@ -330,6 +343,16 @@ void CViewer::ProcessFreeMode(const float _fElapsedTime)
   if(m_bMoveRight)
   {
     l_vPosDelta.z -= 1.0f;
+  }
+
+  if(m_bMoveUp)
+  {
+    l_vPosDelta.y += 1.0f;
+  }
+
+  if(m_bMoveDown)
+  {
+    l_vPosDelta.y -= 1.0f;
   }
 
   if(l_vPosDelta != Vect3f(0.0f))
@@ -707,7 +730,21 @@ bool CViewer::ExecuteFreeModeAction(float _fDeltaSeconds, float _fDelta, const c
     return true;
   }
 
- if(strcmp(_pcAction, "AugmentaAmbient") == 0)
+  if(strcmp(_pcAction, "MoveUp") == 0)
+  {
+    m_bMoveUp = true;
+	
+    return true;
+  }
+
+  if(strcmp(_pcAction, "MoveDown") == 0)
+  {
+    m_bMoveDown = true;
+	
+    return true;
+  }
+
+  if(strcmp(_pcAction, "AugmentaAmbient") == 0)
   {
     IncrementAmbientLight();
     return true;
@@ -755,6 +792,7 @@ bool CViewer::ExecuteFreeModeAction(float _fDeltaSeconds, float _fDelta, const c
 
     return true;
   }
+
   return false;
 }
 
@@ -785,6 +823,12 @@ bool CViewer::ExecuteMeshModeAction(float _fDeltaSeconds, float _fDelta, const c
     return true;
   }
 
+  if(strcmp(_pcAction, "ReloadMeshActual") == 0)
+  {
+    ReloadCurrentMesh();
+    return true;
+  }
+
   return false;
 }
 
@@ -803,6 +847,12 @@ bool CViewer::ExecuteAnimatedModeAction(float _fDeltaSeconds, float _fDelta, con
     return true;
   }
 
+  if(strcmp(_pcAction, "ReloadMeshActual") == 0)
+  {
+    ReloadCurrentAnimatedMesh();
+    return true;
+  }
+
   return false;
 }
 
@@ -812,6 +862,8 @@ void CViewer::ResetActions()
   m_bMoveBack = false;
   m_bMoveLeft = false;
   m_bMoveRight = false;
+  m_bMoveUp = false;
+  m_bMoveDown = false;
 }
 
 void CViewer::SetRunning()
@@ -882,6 +934,27 @@ void CViewer::SetNextMode()
   m_iMode %= 3;
 
   InitMode();
+}
+
+void CViewer::ReloadCurrentMesh()
+{
+  CInstanceMesh* l_pCurrentMesh = (CInstanceMesh*)(*m_itCurrentMesh);
+
+  if(l_pCurrentMesh)
+  {
+    l_pCurrentMesh->GetStaticMesh()->Reload();
+  }
+}
+
+void CViewer::ReloadCurrentAnimatedMesh()
+{
+  //TODO: Peta al recaregar els animats al recalcular les binormals...
+  /*CRenderableAnimatedInstanceModel* l_pCurrentAnimatedMesh = (CRenderableAnimatedInstanceModel*)(*m_itCurrentAnimated);
+
+  if(l_pCurrentAnimatedMesh)
+  {
+    l_pCurrentAnimatedMesh->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->Reload();
+  }*/
 }
 
 void CViewer::ShowInfo()

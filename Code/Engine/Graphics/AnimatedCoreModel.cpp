@@ -383,7 +383,13 @@ void CAnimatedCoreModel::ComputeBoundings()
     }
   }
 
+  l_vMin.x = -l_vMin.x;
+  l_vMax.x = -l_vMax.x;
 
-  m_BoundingBox.Init(l_vMin, l_vMax);
-  m_BoundingSphere.Init(l_vMin, l_vMax);
+  Mat44f l_Transform;
+  l_Transform.SetIdentity();
+  l_Transform.RotByAngleX(-FLOAT_PI_VALUE*0.5f);
+
+  m_BoundingBox.Init(l_Transform*l_vMin, l_Transform*l_vMax);
+  m_BoundingSphere.Init(l_Transform*l_vMin, l_Transform*l_vMax);
 }

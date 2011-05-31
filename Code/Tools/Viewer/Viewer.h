@@ -99,6 +99,9 @@ private:
   void ShowMeshModeInfo();
   void ShowAnimatedModeInfo();
 
+  void ReloadCurrentMesh();
+  void ReloadCurrentAnimatedMesh();
+
   bool ExecuteFreeModeAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction);
   bool ExecuteMeshModeAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction);
   bool ExecuteAnimatedModeAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction);
@@ -125,6 +128,8 @@ private:
   bool m_bMoveBack;
   bool m_bMoveLeft;
   bool m_bMoveRight;
+  bool m_bMoveUp;
+  bool m_bMoveDown;
 
   bool m_bNormalRendering;
   bool m_bShowBoxes;

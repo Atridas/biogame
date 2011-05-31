@@ -59,13 +59,22 @@ bool CStaticMesh::Load(const CXMLTreeNode& _XMLTreeNode)
     * Fi Format fitxer
    **/
   string l_szFileName = _XMLTreeNode.GetPszISOProperty("path","");
-  bool l_bRecalc      = false;
   m_vMax              = _XMLTreeNode.GetVect3fProperty("max",Vect3f(0.0f));
   m_vMin              = _XMLTreeNode.GetVect3fProperty("min",Vect3f(0.0f));
 
+  m_szFileName = l_szFileName;
+
+  SetOk(Load());
+  return IsOk();
+}
+
+bool CStaticMesh::Load()
+{
+  bool l_bRecalc      = false;
+
   Vect3f l_vMax, l_vMin = Vect3f(0.0f);
 
-  LOGGER->AddNewLog(ELL_INFORMATION, "CStaticMesh::Load \"%s\"", l_szFileName.c_str());
+  LOGGER->AddNewLog(ELL_INFORMATION, "CStaticMesh::Load \"%s\"", m_szFileName.c_str());
   if(m_vMax == Vect3f(0.0f) && m_vMin == Vect3f(0.0f))
   {
     l_bRecalc = true;
@@ -82,7 +91,7 @@ bool CStaticMesh::Load(const CXMLTreeNode& _XMLTreeNode)
 
   CTextureManager* l_pTextureManager = CORE->GetTextureManager();
   
-  l_File.open(l_szFileName, fstream::in | fstream::binary );
+  l_File.open(m_szFileName, fstream::in | fstream::binary );
   if(!l_File.is_open())
   {
     LOGGER->AddNewLog(ELL_WARNING, "CStaticMesh::Load no s'ha pogut obrir el fitxer.");
@@ -359,12 +368,10 @@ bool CStaticMesh::Load(const CXMLTreeNode& _XMLTreeNode)
   }
   
   l_File.close();
-  m_szFileName = l_szFileName;
   CHECKED_DELETE_ARRAY(l_pusVertexType);
   CHECKED_DELETE_ARRAY(l_pusTextureNum);
 
-  SetOk(true);
-  return IsOk();
+  return true;
 }
 
 void CStaticMesh::Render(CRenderManager *_pRM, bool _bInstanced) const
