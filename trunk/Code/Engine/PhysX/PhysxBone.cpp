@@ -119,12 +119,11 @@ void CPhysxBone::InitPhysXJoint(CPhysxBone* _pParent)
   l_pSphericalJoint = new CPhysicSphericalJoint();
   CalVector l_vCalVect = m_pCalBone->getTranslationAbsolute();
   Vect3f l_vJointPointMiddle(l_vCalVect.x,l_vCalVect.y,l_vCalVect.z);
-  Mat44f l_vMat;
+ /* Mat44f l_vMat;
   GetPhysxActor()->GetMat44(l_vMat);
 
-
-  Vect3f l_vJointPoint(l_vMat.GetTranslationVector());
-  l_pSphericalJoint->SetInfo(l_vJointPointMiddle,_pParent->GetPhysxActor(),GetPhysxActor());
+  Vect3f l_vJointPoint(l_vMat.GetTranslationVector());*/
+  l_pSphericalJoint->SetInfoComplete(l_vJointPointMiddle,Vect3f(0.0f,1.0f,0.0f),_pParent->GetPhysxActor(),GetPhysxActor());
   CORE->GetPhysicsManager()->AddPhysicSphericalJoint(l_pSphericalJoint);
 
 

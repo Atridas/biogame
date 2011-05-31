@@ -24,7 +24,8 @@ public:
 	~CPhysicSphericalJoint();
 
 	void									CreateJoint			(NxJoint* joint);
-	void									SetInfo					(const Vect3f& anchor, CPhysicActor* actorA,  CPhysicActor* actorB =0);
+	void									SetInfoComplete	(const Vect3f& anchor, const Vect3f& _axis, CPhysicActor* actorA,  CPhysicActor* actorB =0);
+  void									SetInfo					(const Vect3f& anchor, CPhysicActor* actorA,  CPhysicActor* actorB =0);
 
 
 	//---Get PhsX Info---

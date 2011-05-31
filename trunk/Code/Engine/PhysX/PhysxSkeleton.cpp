@@ -60,6 +60,24 @@ void CPhysxSkeleton::InitPhysXActors()
 
 }
 
+//void CPhysxSkeleton::InitPhysXJoints()
+//{
+//  for (size_t i=0;i<m_vBones.size();++i)
+//  {
+//
+//    int l_iIdParent = m_vBones[i]->GetCalBone()->getCoreBone()->getParentId();
+//
+//    if (!m_vBones[i]->IsBoneRoot())
+//    {
+//     
+//      CalBone* l_pParent = m_pCalSkeleton->getBone(l_iIdParent);
+//      CPhysxBone* l_pPhysxBone = GetPhysxBoneByName(l_pParent->getCoreBone()->getName());
+//      m_vBones[i]->InitPhysXJoint(l_pPhysxBone);
+//    }
+//  }
+//}
+
+
 void CPhysxSkeleton::InitPhysXJoints()
 {
   for (size_t i=0;i<m_vBones.size();++i)
@@ -76,6 +94,8 @@ void CPhysxSkeleton::InitPhysXJoints()
     }
   }
 }
+
+
 
 void CPhysxSkeleton::Release()
 {
@@ -105,6 +125,7 @@ bool CPhysxSkeleton::Load(string _szFileName)
 
   int l_iNumObjects = l_XMLObjects.GetNumChildren();
 
+  
 	for(int i = 0; i < l_iNumObjects; i++)
 	{
 		CXMLTreeNode l_XMLObject = l_XMLObjects(i);

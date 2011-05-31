@@ -637,7 +637,7 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
 
     Mat44f l_mWorld = GetBoneLeftHandedAbsoluteTransformation(l_pBone);
 
-    _pRM->SetTransform(g_pCharacter->GetMat44() * l_mWorld);
+    _pRM->SetTransform(/*g_pCharacter->GetMat44() */ l_mWorld);
 
     /***************CORE BOUNDING BOX****************/
 
@@ -673,7 +673,7 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
 
     /************************************************/
 
-    _pRM->RenderBoundingBox(&l_Box);
+    //_pRM->RenderBoundingBox(&l_Box);
 
     //renderitzem els joints
     _pRM->DrawSphere(0.01f,colYELLOW,5);

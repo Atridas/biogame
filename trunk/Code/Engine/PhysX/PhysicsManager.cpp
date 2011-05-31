@@ -47,6 +47,17 @@ bool CPhysicsManager::Init ()
 		NxPhysicsSDKDesc desc;
 		NxSDKCreateError errorCode = NXCE_NO_ERROR;
 		m_pPhysicsSDK = NxCreatePhysicsSDK(NX_PHYSICS_SDK_VERSION, m_pMyAllocator, NULL, desc, &errorCode);
+
+
+     /*Precompilation Directives*/
+    #if defined( _DEBUG )
+      #define USE_DEBUGGER
+      #ifdef USE_DEBUGGER
+        m_pPhysicsSDK->getFoundationSDK().getRemoteDebugger()->connect("127.0.0.1");
+      #endif
+    #endif
+
+
 		m_bIsOk = (m_pPhysicsSDK != NULL);
 		if (m_bIsOk)
 		{
