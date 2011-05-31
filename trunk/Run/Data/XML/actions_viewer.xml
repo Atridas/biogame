@@ -130,6 +130,10 @@
   <action name="SetLightsONOFF">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_L"/>
   </action>
+
+  <action name="ReloadMeshActual">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_R"/>
+  </action>
   
   <!--........BOT ACTIONS...........-->
   <action name="ShootBOT">
@@ -164,5 +168,13 @@
 	<action name="MoveRight">
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_D"/>
 	</action>
+
+  <action name="MoveUp">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_X"/>
+  </action>
+
+  <action name="MoveDown">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_C"/>
+  </action>
 
 </Actions>

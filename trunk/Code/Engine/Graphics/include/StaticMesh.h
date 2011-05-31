@@ -46,7 +46,7 @@ public:
    * @return True si s'ha carregat correctament, false sino.
    * @see Load (const string &_szFileName)
   **/
-  //bool ReLoad() {Unload(); return Load(m_szFileName);};
+  bool Reload() {Done(); SetOk(Load()); return IsOk();};
   /**
    * Mètode de render.
    * Aquest mètode renderitza la malla.
@@ -70,6 +70,8 @@ public:
   bool IsAlphaBlended() const;
 
 protected:
+
+  bool Load();
   /**
    * Mètode d'alliberament de recursos.
   **/
