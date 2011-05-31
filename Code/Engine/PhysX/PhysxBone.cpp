@@ -4,6 +4,7 @@
 #include "PhysicActor.h"
 #include "PhysicController.h"
 #include "PhysicFixedJoint.h"
+#include "PhysicSphericalJoint.h"
 #include "AnimatedModelManager.h"
 #include "RenderManager.h"
 #include "Core.h"
@@ -54,13 +55,18 @@ void CPhysxBone::Load(float _fDensity, string _szType, Vect3f _fMiddlePoint,Vect
   Mat44f l_vMatActor;
   l_vMatActor = GetBoneLeftHandedAbsoluteTransformation(m_pCalBone);
 
+  //l_vMatActor.m00 = -l_vMatActor.m00;
+  //l_vMatActor.m01 = -l_vMatActor.m01;
+  //l_vMatActor.m02 = -l_vMatActor.m02;
+  //l_vMatActor.m03 = -l_vMatActor.m03;
+
   if (_szType == "box")
   {
     CPhysicUserData* l_pUserData = new CPhysicUserData(_szName);
     l_pUserData->SetPaint(true);
     l_pUserData->SetColor(colGREEN);
     CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
-		l_pActor->AddBoxSphape(Vect3f(_vSize.x,_vSize.z,_vSize.y)*0.5f,_fMiddlePoint,NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
+		l_pActor->AddBoxSphape(Vect3f(_vSize.x,_vSize.z,_vSize.y)*0.5f,_fMiddlePoint,NULL,GROUP_COLLIDABLE_PUSHABLE);
     l_pActor->CreateBody(_fDensity);
 
     l_pPM->AddPhysicActor(l_pActor);
@@ -78,7 +84,7 @@ void CPhysxBone::Load(float _fDensity, string _szType, Vect3f _fMiddlePoint,Vect
     l_pUserData->SetPaint(true);
     l_pUserData->SetColor(colYELLOW);
     CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
-    l_pActor->AddSphereShape(_vSize.x*0.5f,v3fZERO,NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
+    l_pActor->AddSphereShape(_vSize.x*0.5f,_fMiddlePoint,NULL,GROUP_COLLIDABLE_PUSHABLE);
     l_pActor->CreateBody(_fDensity);
 
     l_pPM->AddPhysicActor(l_pActor);
@@ -101,8 +107,26 @@ void CPhysxBone::InitPhysXActor()
 
 }
 
-void CPhysxBone::InitPhysXJoint()
+void CPhysxBone::InitPhysXJoint(CPhysxBone* _pParent)
 {
+  /*CPhysicFixedJoint* l_pFixedJoint = 0;
+  l_pFixedJoint = new CPhysicFixedJoint();
+
+  l_pFixedJoint->SetInfo(_pParent->GetPhysxActor(),GetPhysxActor());
+  CORE->GetPhysicsManager()->AddPhysicFixedJoint(l_pFixedJoint);*/
+
+  CPhysicSphericalJoint* l_pSphericalJoint = 0;
+  l_pSphericalJoint = new CPhysicSphericalJoint();
+  CalVector l_vCalVect = m_pCalBone->getTranslationAbsolute();
+  Vect3f l_vJointPointMiddle(l_vCalVect.x,l_vCalVect.y,l_vCalVect.z);
+  Mat44f l_vMat;
+  GetPhysxActor()->GetMat44(l_vMat);
+
+
+  Vect3f l_vJointPoint(l_vMat.GetTranslationVector());
+  l_pSphericalJoint->SetInfo(l_vJointPointMiddle,_pParent->GetPhysxActor(),GetPhysxActor());
+  CORE->GetPhysicsManager()->AddPhysicSphericalJoint(l_pSphericalJoint);
+
 
 }
 

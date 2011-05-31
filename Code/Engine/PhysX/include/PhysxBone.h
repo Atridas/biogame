@@ -24,6 +24,8 @@ public:
   void                UpdateCal3dFromPhysx();
   CalBone*            GetCalBone()                           {return m_pCalBone;};
   void                SetCalBone(CalBone* _pCalBone)         {m_pCalBone = _pCalBone;};
+  CPhysicActor*       GetPhysxActor()                        {return m_pActor;};
+  void                SetPhysxActor(CPhysicActor* _pActor)   {m_pActor = _pActor;};
   bool                IsBoneRoot()                           {return m_bRoot;};
   Mat44f              GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone);
 
@@ -31,7 +33,7 @@ public:
   void                Load(float _fDensity, string _szType, Vect3f _fMiddlePoint,Vect3f _vSize,string _szName);
   void                InitBoneMatrix();
   void                InitPhysXActor();
-  void                InitPhysXJoint();
+  void                InitPhysXJoint(CPhysxBone* _pParent);
 
 
   
