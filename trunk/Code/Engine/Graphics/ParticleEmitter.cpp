@@ -42,6 +42,7 @@ m_Particles(NUMPARTICLES)
   m_fSizeY=1.0f;
   m_bBucleInfinit=true;
   m_iNumBucle=0;
+  m_iNumDirections=1;
 
  /* m_PointA=(D3DXVECTOR3(0.0f,0.0f,0.0f));
   m_PointB=(D3DXVECTOR3(0.0f,0.0f,0.0f));
@@ -62,8 +63,8 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
   m_Color2 = _info->m_Color2;
   m_fMinSize = _info->m_fMinSize;
   m_fMaxSize = _info->m_fMaxSize;
-  m_vSpawnDir1 = _info->m_vSpawnDir1;
-  m_vSpawnDir2 = _info->m_vSpawnDir2;
+ // m_vSpawnDir1 = _info->m_vSpawnDir1;
+ // m_vSpawnDir2 = _info->m_vSpawnDir2;
   m_pTexParticle = _info->m_pTexParticle;
   m_fLife1 = _info->m_fLife1;
   m_fLife2 = _info->m_fLife2;
@@ -71,9 +72,12 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
   m_vTimeColor = _info->m_vTimeColor;
   m_vTimeColorInterpolation=_info->m_vTimeColorInterpolation;
 
-  m_vDirection = _info->m_vDirection;
-  m_vTimeDirection = _info->m_vTimeDirection;
-  m_vTimeDirectionInterpolation= _info->m_vTimeDirectionInterpolation;
+  
+
+
+ // m_vDirection = _info->m_vDirection;
+ // m_vTimeDirection = _info->m_vTimeDirection;
+  //m_vTimeDirectionInterpolation= _info->m_vTimeDirectionInterpolation;
   m_vGravity = _info->m_vGravity;
   m_vVel = _info->m_vVel;
   m_fAngle1 = _info->m_fAngle1;
@@ -87,20 +91,18 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
   m_vTimeAnimated = _info->m_vTimeAnimated;
   m_vTimeAnimatedInterpolation = _info->m_vTimeAnimatedInterpolation;
   m_vTextureAnimation=_info->m_vTextureAnimation;
+  m_iNumDirections=_info->m_iNumDirections;
 
   //crear un vector de direccion de tantas posicions com estat pot tenir (segons vector temps)
-  int j=m_vTimeDirection.size();
-  while(j!=0)
+  //int j=m_vTimeDirection.size();
+  for(int j=0;j<(int)m_vTimeDirection.size();j++)
   {
     m_vNewDirection.push_back(m_vSpawnDir1);
-    j--;
   }
   //crear un vector de color de tantas posicions com estat pot tenir (segons vector temps)
-  j=m_vTimeColor.size();
-  while(j!=0)
+  for(int j=0;j<(int)m_vTimeColor.size();j++)
   {
     m_vNewColor.push_back(m_Color1);
-    j--;
   }
  
 }
@@ -219,6 +221,26 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
 			  i--;
         
 		  }	
+
+      if(m_szFormEmitter=="line")
+		  {
+		  	  m_vPos.x = RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
+          m_vPos.y = 0.0f;
+          m_vPos.z = 0.0f;
+		  }
+		  if(m_szFormEmitter=="plane")
+		  {
+		  	  m_vPos.x = RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
+          m_vPos.y = 0.0f;
+          m_vPos.z = RandomNumber(m_vPosFormEmitter.z/-2,m_vPosFormEmitter.z/2);
+		  }
+		  if(m_szFormEmitter=="cube")
+		  {
+		  
+		  	  m_vPos.x = RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
+          m_vPos.y = RandomNumber(m_vPosFormEmitter.y/-2,m_vPosFormEmitter.y/2);
+          m_vPos.z = RandomNumber(m_vPosFormEmitter.z/-2,m_vPosFormEmitter.z/2);
+		  }
 		  part->SetGravity(m_vGravity);
 		  part->SetVel(m_vVel);
 		  part->m_vTimeColor = m_vTimeColor;

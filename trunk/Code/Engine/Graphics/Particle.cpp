@@ -65,11 +65,22 @@ bool CParticle::Update(float fTimeDelta,CCamera* camera)
   }
 
   int i= m_vTimeColor.size()-1;
+  int i_aux=i;
   while (i>=0)
   {
     if(m_vTimeColor[i]<m_fAge)
 	 {
 	   m_Color = m_vColor[i];
+      if(i<i_aux)
+     {
+       float l_time_aux=m_vTimeColor[i+1]-m_fAge;
+       m_fTimeInterpolation=m_vTimeColorInterpolation[i];
+      if(l_time_aux<m_fTimeInterpolation)
+      {
+        m_Color = InterPolaterNumber2(m_Color,m_vColor[i+1],m_fTimeInterpolation,fTimeDelta);
+      }
+     }
+     m_vColor[i]=m_Color;
     
      i=0;
 	 }
@@ -78,7 +89,7 @@ bool CParticle::Update(float fTimeDelta,CCamera* camera)
   //m_Color= m_Color;
   
   i= m_vTimeDirection.size()-1;
-  int i_aux=i;
+  i_aux=i;
   while (i>=0)
   {
     if(m_vTimeDirection[i]<m_fAge)
@@ -93,7 +104,7 @@ bool CParticle::Update(float fTimeDelta,CCamera* camera)
       m_fTimeInterpolation=m_vTimeDirectionInterpolation[i];
       if(l_time_aux<m_fTimeInterpolation)
       {
-        //m_vDir = InterPolaterNumber(m_vDir,m_vDirection[i+1],m_fTimeInterpolation,fTimeDelta);
+        m_vDir = InterPolaterNumber(m_vDir,m_vDirection[i+1],m_fTimeInterpolation,fTimeDelta);
       }
      }
      m_vDirection[i]=m_vDir;

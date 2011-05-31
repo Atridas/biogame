@@ -28,6 +28,8 @@ public:
   void SetName              (string _szName)                        {m_szName = _szName;};
   void SetId                (string _szId)                          {m_szId = _szId;};
   void SetPosition          (D3DXVECTOR3& _vPos)                    {m_vPos=_vPos;};
+  void SetPositionFormEmitter   (D3DXVECTOR3& _vPosFormEmitter)         {m_vPosFormEmitter=_vPosFormEmitter;};
+  void SetFormEmitter           (string _szFormEmitter)                 {m_szFormEmitter = _szFormEmitter;};
   void SetMinEmitRate       (float _fMinEmitRate)                   {m_fMinEmitRate = _fMinEmitRate;};
   void SetMaxEmitRate       (float _fMaxEmitRate)                   {m_fMaxEmitRate = _fMaxEmitRate;};
   void SetColor1            (D3DXCOLOR& _Color1)                    {m_Color1 = _Color1;};
@@ -42,15 +44,18 @@ public:
   void SetActive            (bool _Active)                          {m_bActive = _Active;};
   void SetVel               (D3DXVECTOR3& _vVel)                    {m_vVel = _vVel;};
   void SetGravity           (D3DXVECTOR3& _vGravity)                {m_vGravity = _vGravity;};
-
-
-  void SetAngle1             (float _fAngle1)                         {m_fAngle1 = _fAngle1;};
-  void SetAngle2             (float _fAngle2)                         {m_fAngle2 = _fAngle2;};
+  void SetAngle1            (float _fAngle1)                        {m_fAngle1 = _fAngle1;};
+  void SetAngle2            (float _fAngle2)                        {m_fAngle2 = _fAngle2;};
+  void SetNumDirections     (int _iNumDirections)                   {m_iNumDirections = _iNumDirections;};
+  void SetNumColors         (int _iNumColor)                        {m_iNumColor = _iNumColor;};
+  
   //void SetReload            (bool _bReload)                         {m_bReload = _bReload;};
 
   //Get
   string                          GetName             () const {return m_szName;};
   string                          GetId               () const {return m_szId;};
+  string                          GetFormEmitter               () const {return m_szFormEmitter;};
+  const D3DXVECTOR3&				      GetPositionFormEmitter         () const {return m_vPosFormEmitter;};
   const D3DXVECTOR3&				      GetPosition         () const {return m_vPos;};
   float                           GetMinEmitRate      () const {return m_fMinEmitRate;};
   float                           GetMaxEmitRate      () const {return m_fMaxEmitRate;};
@@ -80,10 +85,18 @@ public:
   virtual void            Render              (CRenderManager* _pRM);
   virtual void            SetAttributes       (SParticleInfo* _info);
 
+
+  vector<D3DXVECTOR3>                       m_vDirection;
+  vector<D3DXVECTOR3>                       m_vNewDirection;
+  vector<float>                             m_vTimeDirection;
+  vector<float>                             m_vTimeDirectionInterpolation;
+
   
 protected:
   string                                    m_szName;
   string                                    m_szId;
+  string									                  m_szFormEmitter; // forma del emissor
+  D3DXVECTOR3                               m_vPosFormEmitter;//posicio a la que surt la particula segons al forma del emissor
   D3DXVECTOR3                               m_vPos;
   float                                     m_fMinEmitRate;
   float                                     m_fMaxEmitRate;
@@ -103,10 +116,10 @@ protected:
   vector<D3DXCOLOR>                         m_vNewColor;
   vector<float>                             m_vTimeColor;
   vector<float>                             m_vTimeColorInterpolation;
-  vector<D3DXVECTOR3>                       m_vDirection;
-  vector<D3DXVECTOR3>                       m_vNewDirection;
-  vector<float>                             m_vTimeDirection;
-  vector<float>                             m_vTimeDirectionInterpolation;
+  //vector<D3DXVECTOR3>                       m_vDirection;
+  //vector<D3DXVECTOR3>                       m_vNewDirection;
+  //vector<float>                             m_vTimeDirection;
+  //vector<float>                             m_vTimeDirectionInterpolation;
   bool                                      m_bActive;
   D3DXVECTOR3                               m_vVel; //velocitat de la particula
   D3DXVECTOR3                               m_vGravity; // forçes gravitatories
@@ -121,6 +134,9 @@ protected:
   bool                                      m_bBucleInfinit;
   int                                       m_iNumBucle;
   vector<CTexture*>                         m_vTextureAnimation;
+  int                                       m_iNumColor;
+  int                                       m_iNumDirections;
+  
  /* D3DXVECTOR3		        m_PointA;
   D3DXVECTOR3            m_PointB;
   D3DXVECTOR3            m_PointC; 

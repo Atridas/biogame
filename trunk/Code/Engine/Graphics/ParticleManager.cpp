@@ -37,6 +37,9 @@ void CParticleManager::Release()
   }
   
   m_vEmitterParticle.clear();
+  m_vDirection.clear();
+  m_vTimeDirection.clear();
+  m_vTimeDirectionInterpolation.clear();
   
 }
 
@@ -87,10 +90,10 @@ bool CParticleManager::Load(const string& _szFileName)
 			  l_Event.m_Color2 = D3DXCOLOR(l_vVec4.x,l_vVec4.y,l_vVec4.z,l_vVec4.w);
 			  l_pInfo->m_fMinSize = l_treeParticleEmitter.GetFloatProperty("MinSize");
 			  l_pInfo->m_fMaxSize = l_treeParticleEmitter.GetFloatProperty("MaxSize");
-			  l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Direction1",Vect3f(3.0f));
+			 /* l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Direction1",Vect3f(3.0f));
         l_Event.m_vSpawnDir1 = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
 			  l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Direction2",Vect3f(0.0f));
-        l_Event.m_vSpawnDir2 = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
+        l_Event.m_vSpawnDir2 = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);*/
         l_pInfo->m_pTexParticle = CORE->GetTextureManager()->GetResource(l_treeParticleEmitter.GetPszProperty("TexParticle",""));
         l_pInfo->m_fLife1 = l_treeParticleEmitter.GetFloatProperty("Life1");
         l_pInfo->m_fLife2 = l_treeParticleEmitter.GetFloatProperty("Life2");
@@ -112,9 +115,9 @@ bool CParticleManager::Load(const string& _szFileName)
         l_pInfo->m_vTimeColor.push_back(0);
         l_pInfo->m_vColor.push_back(l_Event.m_Color1);
         l_pInfo->m_vColor.push_back(l_Event.m_Color2);
-        l_pInfo->m_vTimeDirection.push_back(0);
+       /* l_pInfo->m_vTimeDirection.push_back(0);
         l_pInfo->m_vDirection.push_back(l_Event.m_vSpawnDir1);
-        l_pInfo->m_vDirection.push_back(l_Event.m_vSpawnDir2);
+        l_pInfo->m_vDirection.push_back(l_Event.m_vSpawnDir2);*/
         l_pInfo->m_vTextureAnimation.push_back(l_pInfo->m_pTexParticle);
       
         CXMLTreeNode l_treeParticleEmittersColors = l_treeParticleEmitter["Colors"];
@@ -182,11 +185,12 @@ bool CParticleManager::Load(const string& _szFileName)
 			      l_pInfo->m_vFilesColumnes.push_back(l_Event.m_iTexNumFiles);
 			      l_pInfo->m_vFilesColumnes.push_back(l_Event.m_iTexNumColumnes);
             l_pInfo->m_vTextureAnimation.push_back(l_pInfo->m_pTexParticle);
+            l_pInfo->m_iNumDirections++;
 			
           }
         }
         //************
-        CXMLTreeNode l_treeParticleEmittersDiredtions = l_treeParticleEmitter["Directions"];
+      /*  CXMLTreeNode l_treeParticleEmittersDiredtions = l_treeParticleEmitter["Directions"];
 
         if(l_treeParticleEmittersDiredtions.Exists())
         {
@@ -220,7 +224,7 @@ bool CParticleManager::Load(const string& _szFileName)
 
 
           }
-        }
+        }*/
         AddResource(l_pInfo->m_szId,l_pInfo);
         
       }
@@ -266,9 +270,92 @@ bool CParticleManager::Load(const string& _szFileName)
 			  Vect3f l_vVec3 = l_treeInstanceParticle.GetVect3fProperty("Position",Vect3f(0.0f));
 			  l_pParticleEmitter->SetPosition(D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z));
         l_pParticleEmitter->SetName(l_treeInstanceParticle.GetPszISOProperty("id" ,""));
+        l_vVec3 = l_treeInstanceParticle.GetVect3fProperty("Direction",Vect3f(3.0f));
+        m_vSpawnDir = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
+		    l_vVec3 = l_treeInstanceParticle.GetVect3fProperty("Desviacion",Vect3f(3.0f));
+        m_vDesviacionSpawnDir = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
+		
+		    m_szFormEmitter = l_treeInstanceParticle.GetPszISOProperty("FormEmitter","");
+        l_pParticleEmitter->SetFormEmitter(m_szFormEmitter);
 //        l_pParticleEmitter->SetReload(m_bReload);
-        l_pParticleEmitter->SetAttributes(l_pInfo);
+        
 
+        if(m_szFormEmitter=="line")
+		    {
+			    m_fSizeX = l_treeInstanceParticle.GetFloatProperty("sizeX");
+			    m_vPosFormEmitter.x=m_fSizeX;
+          m_vPosFormEmitter.y=0.0f;
+          m_vPosFormEmitter.z=0.0f;
+			    l_pParticleEmitter->SetPositionFormEmitter(m_vPosFormEmitter);
+		    }
+        if(m_szFormEmitter=="plane")
+		    {
+			    m_fSizeX = l_treeInstanceParticle.GetFloatProperty("sizeX");
+			    m_fSizeZ = l_treeInstanceParticle.GetFloatProperty("sizeZ");
+			    m_vPosFormEmitter.x=m_fSizeX;
+          m_vPosFormEmitter.y=0.0f;
+          m_vPosFormEmitter.z=m_fSizeZ;
+			    l_pParticleEmitter->SetPositionFormEmitter(m_vPosFormEmitter);
+		    }
+		    if(m_szFormEmitter=="cube")
+		    {
+			    m_fSizeX = l_treeInstanceParticle.GetFloatProperty("sizeX");
+			    m_fSizeY = l_treeInstanceParticle.GetFloatProperty("sizeY");
+			    m_fSizeZ = l_treeInstanceParticle.GetFloatProperty("sizeZ");
+			    m_vPosFormEmitter.x=m_fSizeX;
+          m_vPosFormEmitter.y=m_fSizeY;
+          m_vPosFormEmitter.z=m_fSizeZ;
+			    l_pParticleEmitter->SetPositionFormEmitter(m_vPosFormEmitter);
+			    l_pParticleEmitter->SetFormEmitter(m_szFormEmitter);
+		    }
+
+        l_pParticleEmitter->m_vTimeDirection.push_back(0);
+        l_pParticleEmitter->m_vDirection.push_back(m_vSpawnDir);
+        l_pParticleEmitter->m_vDirection.push_back(m_vDesviacionSpawnDir);
+
+        
+        //********************************************
+        CXMLTreeNode l_treeParticleInstanceDiredtions = l_treeInstanceParticle["Directions"];
+
+        if(l_treeParticleInstanceDiredtions.Exists())
+        {
+          int l_iNumChildren = l_treeParticleInstanceDiredtions.GetNumChildren();
+
+          LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmittersDirections.", l_iNumChildren);
+
+          for(int i = 0; i < l_iNumChildren; i++)
+          {
+          
+            CXMLTreeNode l_treeParticleInstanceDiredtion = l_treeParticleInstanceDiredtions(i);
+            if(l_treeParticleInstanceDiredtion.IsComment())
+				    continue;
+
+         
+
+            m_fTime = l_treeParticleInstanceDiredtion.GetFloatProperty("time");
+            m_fTimeInterpolation = l_treeParticleInstanceDiredtion.GetFloatProperty("timeInterpolation");
+            
+			
+			      l_vVec3 = l_treeParticleInstanceDiredtion.GetVect3fProperty("Direction",Vect3f(3.0f));
+            m_vSpawnDir = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
+			      l_vVec3 = l_treeParticleInstanceDiredtion.GetVect3fProperty("Desviacion",Vect3f(3.0f));
+            m_vDesviacionSpawnDir = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
+
+
+		
+		       l_pParticleEmitter->m_vTimeDirection.push_back(m_fTime);
+           l_pParticleEmitter->m_vDirection.push_back(m_vSpawnDir);
+           l_pParticleEmitter->m_vDirection.push_back(m_vDesviacionSpawnDir);
+		       l_pParticleEmitter->m_vTimeDirectionInterpolation.push_back(m_fTimeInterpolation);
+           l_pInfo->m_iNumDirections++;
+            
+		      }
+          //l_pParticleEmitter->SetNumDirections(m_vDirection.size());
+        }
+
+
+        //*********************************************
+        l_pParticleEmitter->SetAttributes(l_pInfo);
 			  m_vEmitterParticle.push_back(l_pParticleEmitter);
 		  }
 
