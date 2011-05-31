@@ -22,7 +22,7 @@ bool CPhysxSkeleton::Init(const string& _szFileName, CalModel* _pCalModel)
   }
 
 
-  
+  //Load la info del XML I POSA ELS ACTORS!!!!
   Load(_szFileName);
 
 
@@ -64,7 +64,16 @@ void CPhysxSkeleton::InitPhysXJoints()
 {
   for (size_t i=0;i<m_vBones.size();++i)
   {
-    m_vBones[i]->InitPhysXJoint();
+
+    int l_iIdParent = m_vBones[i]->GetCalBone()->getCoreBone()->getParentId();
+
+    if (!m_vBones[i]->IsBoneRoot())
+    {
+     
+      CalBone* l_pParent = m_pCalSkeleton->getBone(l_iIdParent);
+      CPhysxBone* l_pPhysxBone = GetPhysxBoneByName(l_pParent->getCoreBone()->getName());
+      m_vBones[i]->InitPhysXJoint(l_pPhysxBone);
+    }
   }
 }
 
