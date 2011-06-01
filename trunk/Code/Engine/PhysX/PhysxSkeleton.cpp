@@ -131,20 +131,25 @@ bool CPhysxSkeleton::InitPhysXJoints(string _szFileName)
       CPhysicSphericalJoint* l_pSphericalJoint = 0;
       l_pSphericalJoint = new CPhysicSphericalJoint();
       CalVector l_vCalVect = l_pBone1->GetCalBone()->getTranslationAbsolute();
-      Vect3f l_vJointPointMiddle(l_vCalVect.x,l_vCalVect.y,l_vCalVect.z);
+      Vect3f l_vJointPointMiddle(-l_vCalVect.x,l_vCalVect.y,l_vCalVect.z);
+      Vect3f l_vMiddle = l_pBone1->GetMiddlePoint();
+      Vect3f l_vAxis(l_vMiddle.x-l_vJointPointMiddle.x,l_vMiddle.y-l_vJointPointMiddle.y,l_vMiddle.z-l_vJointPointMiddle.z);
+      l_vAxis.Normalize();
+
+
 
       if (l_szActor2=="NULL")
       {
         l_pActor1 = l_pBone1->GetPhysxActor();
         l_pSphericalJoint->SetInfo(l_vJointPointMiddle,l_pActor1);
-        //l_pSphericalJoint->SetInfoComplete(l_vJointPointMiddle,Vect3f(1.0f,0.0f,0.0f),l_pActor1);
+        //l_pSphericalJoint->SetInfoComplete(l_vJointPointMiddle,/*Vect3f(1.0f,0.0f,0.0f)*/l_vAxis,l_pActor1);
       }
       else
       {
         l_pActor1 = l_pBone1->GetPhysxActor();
         l_pActor2 = l_pBone2->GetPhysxActor();
         l_pSphericalJoint->SetInfo(l_vJointPointMiddle,l_pActor1,l_pActor2);
-        //l_pSphericalJoint->SetInfoComplete(l_vJointPointMiddle,Vect3f(1.0f,0.0f,0.0f),l_pActor1,l_pActor2);
+        //l_pSphericalJoint->SetInfoComplete(l_vJointPointMiddle,/*Vect3f(1.0f,0.0f,0.0f)*/l_vAxis,l_pActor1,l_pActor2);
       }
       CORE->GetPhysicsManager()->AddPhysicSphericalJoint(l_pSphericalJoint);
       m_vSphericalJoints.push_back(l_pSphericalJoint);
