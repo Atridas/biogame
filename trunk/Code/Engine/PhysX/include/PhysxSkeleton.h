@@ -7,6 +7,9 @@
 class CPhysxBone;
 class CalSkeleton;
 class CalModel;
+class CPhysicFixedJoint;
+class CPhysicSphericalJoint;
+class CPhysicRevoluteJoint;
 
 class CPhysxSkeleton : public CBaseControl
 {
@@ -24,7 +27,7 @@ public:
   bool              Load(string _szFileName);
   void              InitBoneMatrices();
   void              InitPhysXActors();
-  void              InitPhysXJoints();
+  bool              InitPhysXJoints(string _szFileName);
   CPhysxBone*       GetPhysxBoneByName(string _szName);
 
 
@@ -33,6 +36,9 @@ public:
 private:
   CalSkeleton* m_pCalSkeleton;
   vector<CPhysxBone*> m_vBones;
+  vector<CPhysicFixedJoint*> m_vFixedJoints;
+  vector<CPhysicSphericalJoint*> m_vSphericalJoints;
+  vector<CPhysicRevoluteJoint*> m_vRevoluteJoints;
 };
 
 #endif 
