@@ -7,7 +7,7 @@ function IsParticleEmitter _object =
 (
 	if _object != undefined then
 	(
-		if classof _object == Point then
+		if classof _object == Point or classof _object == Plane or classof _object==line or classof _object==box or classof _object==Dummy then
 		(
 			local l_tmp = GetUserProp _object "type"
 			if l_tmp != undefined then

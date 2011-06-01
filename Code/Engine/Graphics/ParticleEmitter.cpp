@@ -11,7 +11,7 @@ m_Particles(NUMPARTICLES)
 {
  
   //SetGravity(D3DXVECTOR3(0.0f,0.0f,0.0f));
-  SetPosition(D3DXVECTOR3(0.0f,0.0f,0.0f));
+  SetPosition(D3DXVECTOR3(5.0f,4.0f,3.0f));
   SetMinEmitRate(10.0f);
   SetMaxEmitRate(30.0f);
   SetColor1(D3DXCOLOR(1.0f,1.0f,1.0f,1.0f));
@@ -221,25 +221,25 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
 			  i--;
         
 		  }	
-
+      D3DXVECTOR3 l_vPos_aux;
       if(m_szFormEmitter=="line")
 		  {
-		  	  m_vPos.x = RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
-          m_vPos.y = 0.0f;
-          m_vPos.z = 0.0f;
+		  	  l_vPos_aux.x = m_vPos.x+RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
+          l_vPos_aux.y=m_vPos.y;
+          l_vPos_aux.z=m_vPos.z;
 		  }
 		  if(m_szFormEmitter=="plane")
 		  {
-		  	  m_vPos.x = RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
-          m_vPos.y = 0.0f;
-          m_vPos.z = RandomNumber(m_vPosFormEmitter.z/-2,m_vPosFormEmitter.z/2);
+		  	  l_vPos_aux.x = m_vPos.x+RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
+          l_vPos_aux.y=m_vPos.y;
+          l_vPos_aux.z = m_vPos.z+RandomNumber(m_vPosFormEmitter.z/-2,m_vPosFormEmitter.z/2);
 		  }
-		  if(m_szFormEmitter=="cube")
+		  if(m_szFormEmitter=="dummy")
 		  {
 		  
-		  	  m_vPos.x = RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
-          m_vPos.y = RandomNumber(m_vPosFormEmitter.y/-2,m_vPosFormEmitter.y/2);
-          m_vPos.z = RandomNumber(m_vPosFormEmitter.z/-2,m_vPosFormEmitter.z/2);
+		  	  l_vPos_aux.x = m_vPos.x+RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
+          l_vPos_aux.y = m_vPos.y+RandomNumber(m_vPosFormEmitter.y/-2,m_vPosFormEmitter.y/2);
+          l_vPos_aux.z = m_vPos.z+RandomNumber(m_vPosFormEmitter.z/-2,m_vPosFormEmitter.z/2);
 		  }
 		  part->SetGravity(m_vGravity);
 		  part->SetVel(m_vVel);
@@ -247,7 +247,7 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
 		  part->m_vTimeColorInterpolation = m_vTimeColorInterpolation;
 		  part->m_vColor = m_vNewColor;
 		  //part->SetAngle(m_fAngle);
-		  part->SetPos(m_vPos);
+		  part->SetPos(l_vPos_aux);
 
 		  part->SetAnimated(m_bAnimated);
 		  part->m_vFilesColumnes=m_vFilesColumnes;

@@ -250,12 +250,9 @@ bool CParticleManager::Load(const string& _szFileName)
 
 			  SParticleInfo* l_pInfo = GetResource(l_szType);
 
-			  //if(l_pInfo->m_bAnimated == false)
-			  //{
+
 				CParticleEmitter* l_pParticleEmitter = new CParticleEmitter();
-			  //}else{
-				//CParticleEmitter* l_pParticleEmitter = new CAnimatedParticleEmitter(); //CParticleEmitter::Update(...);
-			  //}
+
 			  
 			  
         // s'ha de fer que la Id de la SInfo correspongui amb el type de la instancia
@@ -267,7 +264,7 @@ bool CParticleManager::Load(const string& _szFileName)
           continue;
         }
 
-			  Vect3f l_vVec3 = l_treeInstanceParticle.GetVect3fProperty("Position",Vect3f(0.0f));
+			  Vect3f l_vVec3 = l_treeInstanceParticle.GetVect3fProperty("position",Vect3f(0.0f));
 			  l_pParticleEmitter->SetPosition(D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z));
         l_pParticleEmitter->SetName(l_treeInstanceParticle.GetPszISOProperty("id" ,""));
         l_vVec3 = l_treeInstanceParticle.GetVect3fProperty("Direction",Vect3f(3.0f));
@@ -297,7 +294,7 @@ bool CParticleManager::Load(const string& _szFileName)
           m_vPosFormEmitter.z=m_fSizeZ;
 			    l_pParticleEmitter->SetPositionFormEmitter(m_vPosFormEmitter);
 		    }
-		    if(m_szFormEmitter=="cube")
+		    if(m_szFormEmitter=="dummy")
 		    {
 			    m_fSizeX = l_treeInstanceParticle.GetFloatProperty("sizeX");
 			    m_fSizeY = l_treeInstanceParticle.GetFloatProperty("sizeY");
