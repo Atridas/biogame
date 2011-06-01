@@ -24,6 +24,7 @@ public:
   void                UpdateCal3dFromPhysx();
   CalBone*            GetCalBone()                           {return m_pCalBone;};
   void                SetCalBone(CalBone* _pCalBone)         {m_pCalBone = _pCalBone;};
+  Vect3f              GetMiddlePoint()                       {return m_vMiddlePoint;};
   CPhysicActor*       GetPhysxActor()                        {return m_pActor;};
   void                SetPhysxActor(CPhysicActor* _pActor)   {m_pActor = _pActor;};
   bool                IsBoneRoot()                           {return m_bRoot;};
@@ -41,6 +42,7 @@ private:
 
   CalBone*            m_pCalBone;
   int                 m_iParentID;
+  Vect3f              m_vMiddlePoint;
   bool                m_bRoot;
   vector<int>         m_vChildListID;
 

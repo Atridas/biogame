@@ -65,8 +65,14 @@ bool CPhysicsManager::Init ()
 			LOGGER->AddNewLog(ELL_INFORMATION, "PhysicsManager:: -------PhsX Settings---");
 			LOGGER->AddNewLog(ELL_INFORMATION, "PhysicsManager:: El valor del SkinWidth es: %f", 
 				m_InitParams.m_fSkinWidth);
+      
 
 			m_pPhysicsSDK->setParameter(NX_SKIN_WIDTH, m_InitParams.m_fSkinWidth);
+
+      //CODI PER PRINTAR INFO DELS JOINTS
+      m_pPhysicsSDK->setParameter(NX_VISUALIZE_ACTOR_AXES, 1);
+	    m_pPhysicsSDK->setParameter(NX_VISUALIZE_JOINT_LIMITS, 1);
+	    m_pPhysicsSDK->setParameter(NX_VISUALIZE_JOINT_LOCAL_AXES, 1);
 			// Create a scene
 			LOGGER->AddNewLog(ELL_INFORMATION, "PhysicsManager:: El valor de la gravedad es: %f",
 				m_InitParams.m_fGravity);

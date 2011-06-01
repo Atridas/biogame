@@ -54,6 +54,7 @@ void CPhysxBone::Load(float _fDensity, string _szType, Vect3f _fMiddlePoint,Vect
   CPhysicsManager* l_pPM = CORE->GetPhysicsManager();
   Mat44f l_vMatActor;
   l_vMatActor = GetBoneLeftHandedAbsoluteTransformation(m_pCalBone);
+  m_vMiddlePoint = _fMiddlePoint;
 
   //l_vMatActor.m00 = -l_vMatActor.m00;
   //l_vMatActor.m01 = -l_vMatActor.m01;
@@ -109,11 +110,11 @@ void CPhysxBone::InitPhysXActor()
 
 void CPhysxBone::InitPhysXJoint(CPhysxBone* _pParent)
 {
-  CPhysicFixedJoint* l_pFixedJoint = 0;
+  /*CPhysicFixedJoint* l_pFixedJoint = 0;
   l_pFixedJoint = new CPhysicFixedJoint();
 
   l_pFixedJoint->SetInfo(_pParent->GetPhysxActor(),GetPhysxActor());
-  CORE->GetPhysicsManager()->AddPhysicFixedJoint(l_pFixedJoint);
+  CORE->GetPhysicsManager()->AddPhysicFixedJoint(l_pFixedJoint);*/
 
   //CPhysicSphericalJoint* l_pSphericalJoint = 0;
   //l_pSphericalJoint = new CPhysicSphericalJoint();
@@ -156,3 +157,7 @@ Mat44f CPhysxBone::GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone)
   return l_Transform;
   
 }
+
+
+
+
