@@ -729,13 +729,114 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		for i=1 to l_totalEmitters do
 		(
 			l_current = l_particleEmitters[i]
-			
 			l_params = #(#("id",l_current.name), #("type",(GetUserProp l_current "type")))
-				
-			l_aux = "" as stringStream
+			
+			/*l_aux = "" as stringStream
 			local l_position = l_current.position
 			format "% % %" l_position.x l_position.y l_position.z to:l_aux
-			append l_params #("position",l_aux)
+			append l_params #("position",l_aux)*/
+			
+			l_aux2 = "" as stringStream	
+			local l_translation = RHVectorToLH l_current.transform.translation
+			format "% % %" l_translation.x l_translation.y l_translation.z to:l_aux2
+			append l_params #("position",l_aux2)
+								
+				
+				
+				
+
+				
+				
+				
+			
+			if classof l_current == Point then
+			(
+				append l_params #("FormEmitter","point")
+				
+			) else if classof l_current == Plane then
+			(
+				
+				append l_params #("FormEmitter","plane")
+				
+				l_sizeX = ""as stringStream
+				format "%"l_current.length to:l_sizeX
+				append l_params #("sizeX",l_sizeX)
+				
+				l_sizeZ = ""as stringStream
+				format "%"l_current.width to:l_sizeZ
+				append l_params #("sizeZ",l_sizeZ)
+				
+				trans=l_current.transform
+				my_value=point3 0 0 1
+				my_value=my_value*trans
+				normal=my_value-l_current.pos
+				normal = RHVectorToLH(normalize normal)
+				l_auxNormal = ""as stringStream
+				format "% % %" normal.x normal.y normal.z to:l_auxNormal
+				append  l_params #("Direction",l_auxNormal)
+				
+				
+			) else if classof l_current == Dummy then
+			(
+				
+				append l_params #("FormEmitter","dummy")
+				
+				l_aux = "" as stringStream
+				local l_size = RHVectorToLH (DummySize l_current)
+				format "% % %" l_size.x l_size.y l_size.z to:l_aux
+				append l_params #("size",l_aux)
+				
+				trans=l_current.transform
+				my_value=point3 0 0 1
+				my_value=my_value*trans
+				normal=my_value-l_current.pos
+				normal = RHVectorToLH (normalize normal)
+				l_auxNormal = ""as stringStream
+				format "% % %" normal.x normal.y normal.z to:l_auxNormal
+				append  l_params #("Direction",l_auxNormal)
+				
+										
+				/*l_aux = "" as stringStream
+				local l_yaw = GetYaw l_current.transform
+				format "%" l_yaw to:l_aux
+				append l_params #("yaw",l_aux)
+				
+				l_aux = "" as stringStream
+				local l_pitch = GetPitch l_current.transform
+				format "%" l_pitch to:l_aux
+				append l_params #("pitch",l_aux)
+				
+				l_aux = "" as stringStream
+				local l_roll = GetRoll l_current.transform
+				format "%" l_roll to:l_aux
+				append l_params #("roll",l_aux)*/
+
+				
+
+			) else if classof l_current == line then
+			(	
+				append l_params #("FormEmitter","line")
+
+
+
+				
+			) else if classof l_current == Box then
+			(	
+				append l_params #("FormEmitter","cube")
+				l_sizeX = ""as stringStream
+				format "%"l_current.length to:l_sizeX
+				append l_params #("sizeX",l_sizeX)
+
+				l_sizeY = ""as stringStream
+				format "%"l_current.height to:l_sizeY
+				append l_params #("sizeX",l_sizeY)
+				
+				l_sizeZ = ""as stringStream
+				format "%"l_current.width to:l_sizeZ
+				append l_params #("sizeZ",l_sizeZ)
+			
+			)
+			--append l_params #(#("FormEmitter","plane"),#("sizeX",l_current.length),#("sizeZ",l_current.width))
 				
 			format "\n  %" (InlineTagParamXML "ParticleEmitterInstance" l_params) to:l_file
 		)
@@ -750,7 +851,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		
 		return true
 	)
-  
+	
 	-- Fi exportadors
 	
 	-- Funcionalitats botons	

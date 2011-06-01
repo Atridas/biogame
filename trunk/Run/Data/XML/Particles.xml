@@ -49,16 +49,16 @@
       </ParticleEmitter>--> 
    
 
-      <ParticleEmitter  id="bombolles"                    MinEmitRate="20.0"             MaxEmitRate="25.0"
-                        Color1="1.0 1.0 1.0 0.0"          Color2="1.0 1.0 1.0 0.0"       MinSize="2.5"        MaxSize="4.0"
+      <ParticleEmitter  id="boira"                    MinEmitRate="10.0"             MaxEmitRate="15.0"
+                        Color1="1.0 1.0 1.0 0.0"          Color2="1.0 1.0 1.0 0.0"       MinSize="1.5"        MaxSize="2.0"
                         Life1="7.0"          Life2="7.0"   Angle1="-0.5"  Angle2="0.5"
-                        Gravity="0.0 0.0 0.0"             Velocitate="1.0 1.0 1.0"       Bucle="true"
+                        Gravity="0.0 0.0 0.0"             Velocitate="0.2 0.2 0.2"       Bucle="true"
                         TexParticle="Data/Textures/texturas particulas/DustPoof.dds">
         <Colors>
-          <Color        time="1.5"       timeInterpolation="1.0"   Color1="1.0 1.0 1.0 0.1"          Color2="1.0 1.0 1.0 0.1"/>
-          <Color        time="3.0"       timeInterpolation="1.0"   Color1="1.0 1.0 1.0 0.2"          Color2="1.0 1.0 1.0 0.2"/>
-          <Color        time="4.5"       timeInterpolation="1.0"   Color1="1.0 1.0 1.0 0.1"          Color2="1.0 1.0 1.0 0.1"/>
-          <Color        time="6.0"       timeInterpolation="1.0"   Color1="1.0 1.0 1.0 0.0"          Color2="1.0 1.0 1.0 0.0"/>
+          <Color        time="1.5"       timeInterpolation="1.5"   Color1="1.0 1.0 1.0 0.1"          Color2="1.0 1.0 1.0 0.1"/>
+          <Color        time="3.0"       timeInterpolation="1.5"   Color1="1.0 1.0 1.0 0.2"          Color2="1.0 1.0 1.0 0.2"/>
+          <Color        time="4.5"       timeInterpolation="1.5"   Color1="1.0 1.0 1.0 0.1"          Color2="1.0 1.0 1.0 0.1"/>
+          <Color        time="6.0"       timeInterpolation="1.5"   Color1="1.0 1.0 1.0 0.0"          Color2="1.0 1.0 1.0 0.0"/>
         </Colors> 
         
       </ParticleEmitter>
@@ -142,11 +142,11 @@
     </InstanceParticle>
 
    <InstanceParticle id="boira"           type="boira"                        Position="0.0  0.0  0.0"/>
-        <InstanceParticle id="bombolles"              type="bombolles"    FormEmitter="plane"     sizeX="10.9997" sizeZ="10.0"          Position="10.0  0.0  -12.0"
-                          Direction="0.2 0.4 0.2"         Desviacion="0.1 0.1 0.1"/>-->
-    <InstanceParticle id="bombolles2"              type="bombolles"    FormEmitter="plane"     sizeX="10.9997" sizeZ="10.0"          Position="10.0  10.0  -12.0"
-                         Direction="0.2 0.1 0.2"         Desviacion="0.1 0.1 0.1"/>
-          
+        <InstanceParticle id="bombolles"              type="bombolles"    FormEmitter="plane"     sizeX="10.9997" sizeZ="10.0"          Position="5.0  2.0  0.0"
+                          Direction="0.2 0.4 0.2"         Desviacion="0.1 0.1 0.1"/>
+    <InstanceParticle id="bombolles2"              type="bombolles"    FormEmitter="plane"     sizeX="7.07905"  sizeY="0.318732"  sizeZ="2.82401"          Position="5.0  0.0  0.0"
+                         Direction="0.2 0.1 0.2"         Desviacion="0.1 0.1 0.1"/>-->  
+    <ParticleEmitterInstance id="boiraPla1" type="boira" position="3.11534 0.0 -8.56151" FormEmitter="dummy" sizeX="9.84748"  sizeY="0.241536"  sizeZ="5.02976" Direction="0.2 0.1 0.2" Desviacion="0.1 0.1 0.1"/>
        
     <!--   <InstanceParticle id="magia"                  type="magia1"                      Position="12.0  0.0  13.0"/>
     <InstanceParticle id="magia2"                 type="magia2"                      Position="12.0  0.0  13.0"/>
