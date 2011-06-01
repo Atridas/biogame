@@ -1,3 +1,5 @@
+#define __DONT_INCLUDE_MEM_LEAKS__
+#include "PhysXTriggerEntityController.h"
 #include "Core.h"
 
 #include <base.h>
@@ -25,6 +27,7 @@
 #include <SoundManager.h>
 #include <EntityManager.h>
 
+#include "Utils\MemLeaks.h"
 //#include <AnimatedModelManager.h>
 
 bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
@@ -52,6 +55,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pParticleManager          = new CParticleManager();
   m_pSoundManager             = new CSoundManager();
   m_pEntityManager            = new CEntityManager();
+  m_pPhysicTriggerReport      = new CPhysXTriggerEntityController();
 
   m_pEngine                   = _pEngine;
 
@@ -106,6 +110,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pGUIManager->ActiveWindows(_InitParams.GUIManagerParams.szInitWindow);
   m_pGUIManager->SetVisiblePointerMouse(_InitParams.GUIManagerParams.bRenderMouse);
   m_pPhysicsManager->Init();
+  m_pPhysicsManager->SetTriggerReport(m_pPhysicTriggerReport);
   
   if(!m_pSoundManager->Init(_InitParams.SoundManagerParams.szFile))
   {
@@ -122,6 +127,7 @@ void CCore::Release()
   
 
   //delete a l'inrevès de com s'ha fet l'init
+  CHECKED_DELETE(m_pPhysicTriggerReport);
   CHECKED_DELETE(m_pEntityManager);
   CHECKED_DELETE(m_pSoundManager);
   CHECKED_DELETE(m_pParticleManager);

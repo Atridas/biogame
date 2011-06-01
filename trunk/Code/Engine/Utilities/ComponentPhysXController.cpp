@@ -15,10 +15,10 @@ bool CComponentPhysXController::Init(CGameEntity *_pEntity,
   assert(_pEntity->IsOk());
   SetEntity(_pEntity);
 
-  m_pObject3D = dynamic_cast<CComponentObject3D*>(_pEntity->GetComponent(ECT_OBJECT_3D));
+  m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
   assert(m_pObject3D); //TODO fer missatges d'error més elavorats
 
-  m_pMovement = dynamic_cast<CComponentMovement*>(_pEntity->GetComponent(ECT_MOVEMENT));
+  m_pMovement = _pEntity->GetComponent<CComponentMovement>(ECT_MOVEMENT);
   assert(m_pMovement); //TODO fer missatges d'error més elavorats
 
   m_pPhysXData = new CPhysicUserData(_pEntity->GetName().c_str());

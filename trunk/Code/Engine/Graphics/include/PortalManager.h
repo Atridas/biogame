@@ -12,7 +12,8 @@ class CPortalManager:
 public:
   CPortalManager() {};
   ~CPortalManager() {Done();};
-
+  
+  bool Init(const string& _szFileName);
   bool Init(CXMLTreeNode& _xmlLevel);
   
   CRoom*   GetRoom  (const string& _szName);

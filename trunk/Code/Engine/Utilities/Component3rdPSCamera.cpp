@@ -10,7 +10,7 @@ bool CComponent3rdPSCamera::Init(CGameEntity *_pEntity,
   assert(_pEntity->IsOk());
   SetEntity(_pEntity);
 
-  m_pObject3D = dynamic_cast<CComponentObject3D*>(_pEntity->GetComponent(ECT_OBJECT_3D));
+  m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
   assert(m_pObject3D); //TODO fer missatges d'error més elavorats
 
   

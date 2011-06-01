@@ -19,26 +19,27 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity,
   assert(_pEntity->IsOk());
   SetEntity(_pEntity);
 
-  m_pObject3D = dynamic_cast<CComponentObject3D*>(_pEntity->GetComponent(ECT_OBJECT_3D));
+  m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
   assert(m_pObject3D); //TODO fer missatges d'error més elavorats
 
   m_pPhysXData = new CPhysicUserData(_pEntity->GetName().c_str());
   m_pPhysXData->SetPaint(true);
   m_pPhysXData->SetColor(colBLUE);
+  m_pPhysXData->SetEntity(_pEntity);
 
-  m_pPhysXBox = new CPhysicActor(m_pPhysXData);
+  m_pPhysXActor = new CPhysicActor(m_pPhysXData);
   if(_fDensity > 0)
   {
-    m_pPhysXBox->CreateBody(_fDensity);
+    m_pPhysXActor->CreateBody(_fDensity);
   }
 
-  m_pPhysXBox->AddBoxSphape(Vect3f( _fSizeX, _fSizeY, _fSizeZ), 
+  m_pPhysXActor->AddBoxSphape(Vect3f( _fSizeX, _fSizeY, _fSizeZ), 
                             Vect3f( _fPosX , _fPosY , _fPosZ ),
                             NULL, _iCollisionMask);
 
 
-  CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXBox);
-  m_pPhysXBox->SetMat44( m_pObject3D->GetMat44() );
+  CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXActor);
+  m_pPhysXActor->SetMat44( m_pObject3D->GetMat44() );
 
   SetOk(true);
   return IsOk();
@@ -49,14 +50,14 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity, float _fDensity, int _iColl
 {
   assert(_pEntity->IsOk());
 
-  m_pObject3D = dynamic_cast<CComponentObject3D*>(_pEntity->GetComponent(ECT_OBJECT_3D));
+  m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
   if(!m_pObject3D)
   {
     LOGGER->AddNewLog(ELL_WARNING,"CComponentPhysXBox::Init  L'objecte no té el component CComponentObject3D.");
     return false;
   }
 
-  CComponentRenderableObject* l_pComponentRenderableObject = dynamic_cast<CComponentRenderableObject*>(_pEntity->GetComponent(ECT_RENDERABLE_OBJECT));
+  CComponentRenderableObject* l_pComponentRenderableObject = _pEntity->GetComponent<CComponentRenderableObject>(ECT_RENDERABLE_OBJECT);
   if(!l_pComponentRenderableObject)
   {
     LOGGER->AddNewLog(ELL_WARNING,"CComponentPhysXBox::Init  L'objecte no té el component CComponentRenderableObject.");
@@ -69,40 +70,24 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity, float _fDensity, int _iColl
   m_pPhysXData = new CPhysicUserData(_pEntity->GetName().c_str());
   m_pPhysXData->SetPaint(true);
   m_pPhysXData->SetColor(colBLUE);
+  m_pPhysXData->SetEntity(_pEntity);
 
-  m_pPhysXBox = new CPhysicActor(m_pPhysXData);
+  m_pPhysXActor = new CPhysicActor(m_pPhysXData);
   if(_fDensity > 0)
   {
-    m_pPhysXBox->CreateBody(_fDensity);
+    m_pPhysXActor->CreateBody(_fDensity);
   }
 
-  m_pPhysXBox->AddBoxSphape(l_pBB->GetDimension() * .5f, 
+  m_pPhysXActor->AddBoxSphape(l_pBB->GetDimension() * .5f, 
                             l_pBB->GetMiddlePoint(),
                             NULL, _iCollisionMask);
 
 
-  CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXBox);
-  m_pPhysXBox->SetMat44( m_pObject3D->GetMat44() );
+  CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXActor);
+  m_pPhysXActor->SetMat44( m_pObject3D->GetMat44() );
   
 
   SetEntity(_pEntity);
   SetOk(true);
   return IsOk();
-}
-
-void CComponentPhysXBox::UpdatePostPhysX(float _fDeltaTime)
-{
-  Mat44f l_mat;
-  m_pPhysXBox->GetMat44(l_mat);
-  m_pObject3D->SetMat44(l_mat);
-}
-
-
-void CComponentPhysXBox::Release(void)
-{
-  //treure la box del physic manager
-  CORE->GetPhysicsManager()->ReleasePhysicActor(m_pPhysXBox);
-
-  CHECKED_DELETE(m_pPhysXBox);
-  CHECKED_DELETE(m_pPhysXData);
 }

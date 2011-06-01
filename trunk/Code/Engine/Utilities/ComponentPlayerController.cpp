@@ -12,10 +12,10 @@ bool CComponentPlayerController::Init(CGameEntity *_pEntity)
   assert(_pEntity->IsOk());
   SetEntity(_pEntity);
 
-  m_pMovement = dynamic_cast<CComponentMovement*>(_pEntity->GetComponent(ECT_MOVEMENT));
+  m_pMovement = _pEntity->GetComponent<CComponentMovement>(ECT_MOVEMENT);
   assert(m_pMovement); //TODO fer missatges d'error més elavorats
 
-  m_pObject3D = dynamic_cast<CComponentObject3D*>(_pEntity->GetComponent(ECT_OBJECT_3D));
+  m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
   assert(m_pObject3D); //TODO fer missatges d'error més elavorats
 
   SetOk(true);
@@ -48,13 +48,13 @@ bool CComponentPlayerController::Init(CGameEntity *_pEntity,
   assert(_pEntity->IsOk());
   SetEntity(_pEntity);
 
-  m_pMovement = dynamic_cast<CComponentMovement*>(_pEntity->GetComponent(ECT_MOVEMENT));
+  m_pMovement = _pEntity->GetComponent<CComponentMovement>(ECT_MOVEMENT);
   assert(m_pMovement); //TODO fer missatges d'error més elavorats
 
-  m_pObject3D = dynamic_cast<CComponentObject3D*>(_pEntity->GetComponent(ECT_OBJECT_3D));
+  m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
   assert(m_pObject3D); //TODO fer missatges d'error més elavorats
 
-  CComponentRenderableObject *l_pComponentRO = dynamic_cast<CComponentRenderableObject*>(_pEntity->GetComponent(ECT_RENDERABLE_OBJECT));
+  CComponentRenderableObject *l_pComponentRO = _pEntity->GetComponent<CComponentRenderableObject>(ECT_RENDERABLE_OBJECT);
   assert(l_pComponentRO); //TODO fer missatges d'error més elavorats
   m_pAnimatedModel = dynamic_cast<CRenderableAnimatedInstanceModel*>(l_pComponentRO->GetRenderableObject());
   assert(m_pAnimatedModel); //TODO fer missatges d'error més elavorats

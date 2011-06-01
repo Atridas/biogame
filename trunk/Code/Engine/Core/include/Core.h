@@ -31,6 +31,7 @@ class CParticleManager;
 class CSoundManager;
 class CEngine;
 class CEntityManager;
+class CPhysicTriggerReport;
 // --------------------------
 
 /**
@@ -226,5 +227,7 @@ private:
   CEngine*                    m_pEngine;
 
   CEntityManager*             m_pEntityManager;
+
+  CPhysicTriggerReport*       m_pPhysicTriggerReport;
 };
 

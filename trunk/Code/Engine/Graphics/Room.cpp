@@ -9,7 +9,9 @@ bool CRoom::Init(CXMLTreeNode& _xmlRoom, set<string>& _UsedNames)
   assert(strcmp(_xmlRoom.GetName(), "Room") == 0);
 
   bool l_bUndefined = _xmlRoom.GetBoolProperty("undefined",false,false);
-  string name = _xmlRoom.GetPszISOProperty("name", "undefined", l_bUndefined);
+  string name = _xmlRoom.GetPszISOProperty("name", "undefined", !l_bUndefined);
+
+  SetName(name);
 
   LOGGER->AddNewLog(ELL_INFORMATION, "CRoom::Init loading room \"%s\"", name.c_str());
 
@@ -56,7 +58,7 @@ bool CRoom::Init(CXMLTreeNode& _xmlRoom, set<string>& _UsedNames)
       int l_iObjects = l_xmlObjects.GetNumChildren();
       for(int i = 0; i < l_iObjects; ++i)
       {
-        CXMLTreeNode l_xmlGameObject = l_xmlGameObject(i);
+        CXMLTreeNode l_xmlGameObject = l_xmlObjects(i);
         if(strcmp( l_xmlGameObject.GetName(), "GameObject" ) == 0)
         {
           string l_szName = l_xmlGameObject.GetPszISOProperty("name", "", false);

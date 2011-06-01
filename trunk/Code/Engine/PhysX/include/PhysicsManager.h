@@ -59,21 +59,28 @@ struct SCollisionInfo
 	Vect3f	m_CollisionPoint;
 };
 
+class CGameEntity;
+
 class CPhysicUserData : public CNamed
 {
 public:
-	CPhysicUserData(const string& _szName) : CNamed(_szName), m_bPaintPhysicObject(false), m_ColorPhysicObject(colWHITE){}
+	CPhysicUserData(const string& _szName) : CNamed(_szName), m_bPaintPhysicObject(false), m_ColorPhysicObject(colWHITE), m_pEntity(0) {}
 	~CPhysicUserData() {/*Nothing*/}
 
-	void					SetPaint	(bool flag)						{m_bPaintPhysicObject = flag;}
-	void					SetColor	(const CColor& color) {m_ColorPhysicObject = color;}
+	void					SetPaint	(bool flag)						  {m_bPaintPhysicObject = flag;}
+	void					SetColor	(const CColor& color)   {m_ColorPhysicObject = color;}
+  void          SetEntity (CGameEntity* _pEntity) {m_pEntity = _pEntity;}
 
 	bool					GetPaint	() const							{return m_bPaintPhysicObject;}
 	const CColor&	GetColor	() const							{return m_ColorPhysicObject;}
+	CGameEntity* 	GetEntity	() const							{return m_pEntity;}
+
 
 private:
 	bool		m_bPaintPhysicObject;
 	CColor	m_ColorPhysicObject;
+
+  CGameEntity* m_pEntity;
 };
 //--------------------------------------------
 

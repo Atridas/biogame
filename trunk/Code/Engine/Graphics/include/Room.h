@@ -5,6 +5,7 @@
 #include "base.h"
 #include "Utils\BoundingBox.h"
 #include "Utils\Object3D.h"
+#include "Named.h"
 
 #include <set>
 
@@ -17,10 +18,11 @@ class CRenderManager;
 // ---------------------------------
 
 class CRoom:
-  public CBaseControl
+  public CBaseControl,
+  public CNamed
 {
 public:
-  CRoom() {};
+  CRoom():CNamed("undefined") {};
   ~CRoom() {Done();};
 
   bool Init(CXMLTreeNode&,set<string>& _UsedGameObjects);

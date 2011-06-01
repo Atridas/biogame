@@ -95,17 +95,6 @@ void CGameEntity::ReceiveEvent(const SEvent& _Event)
   }
 }
 
-CBaseComponent* CGameEntity::GetComponent(CBaseComponent::Type _type) const
-{
-  map<CBaseComponent::Type, CBaseComponent*>::const_iterator l_it = m_mComponents.find(_type);
-
-  if(l_it == m_mComponents.cend())
-  {
-    return 0;
-  }
-  return l_it->second;
-}
-
 string CGameEntity::GetName() const
 {
   if(m_pszName)

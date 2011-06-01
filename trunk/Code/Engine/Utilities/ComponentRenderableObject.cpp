@@ -8,7 +8,7 @@ bool CComponentRenderableObject::Init(CGameEntity *_pEntity, const string& _szNa
 {
   assert(_pEntity->IsOk());
 
-  m_pObject3D = dynamic_cast<CComponentObject3D*>(_pEntity->GetComponent(ECT_OBJECT_3D));
+  m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
   if(!m_pObject3D)
   {
     LOGGER->AddNewLog(ELL_WARNING, "CComponentRenderableObject::Init necessita un Component Object 3D");
@@ -43,7 +43,7 @@ bool CComponentRenderableObject::InitAnimatedModel(CGameEntity *_pEntity, const 
 {
   assert(_pEntity->IsOk());
 
-  m_pObject3D = dynamic_cast<CComponentObject3D*>(_pEntity->GetComponent(ECT_OBJECT_3D));
+  m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
   if(!m_pObject3D)
   {
     LOGGER->AddNewLog(ELL_WARNING, "CComponentRenderableObject::InitAnimatedModel necessita un Component Object 3D");

@@ -23,8 +23,8 @@ public:
 
   int GetGUID() const {return m_iGUID;};
 
-  CBaseComponent* GetComponent(CBaseComponent::Type _type) const;
-  
+  template<class T>
+  T* GetComponent(CBaseComponent::Type _type) const;
   
   
   void         PreUpdate(float _fDeltaTime)      ;
@@ -57,6 +57,17 @@ private:
 };
 
 
+template<class T>
+T* CGameEntity::GetComponent(CBaseComponent::Type _type) const
+{
+  map<CBaseComponent::Type, CBaseComponent*>::const_iterator l_it = m_mComponents.find(_type);
+
+  if(l_it == m_mComponents.cend())
+  {
+    return 0;
+  }
+  return dynamic_cast<T*>(l_it->second);
+}
 
 
 #endif
