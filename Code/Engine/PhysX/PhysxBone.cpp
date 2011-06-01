@@ -109,22 +109,18 @@ void CPhysxBone::InitPhysXActor()
 
 void CPhysxBone::InitPhysXJoint(CPhysxBone* _pParent)
 {
-  /*CPhysicFixedJoint* l_pFixedJoint = 0;
+  CPhysicFixedJoint* l_pFixedJoint = 0;
   l_pFixedJoint = new CPhysicFixedJoint();
 
   l_pFixedJoint->SetInfo(_pParent->GetPhysxActor(),GetPhysxActor());
-  CORE->GetPhysicsManager()->AddPhysicFixedJoint(l_pFixedJoint);*/
+  CORE->GetPhysicsManager()->AddPhysicFixedJoint(l_pFixedJoint);
 
-  CPhysicSphericalJoint* l_pSphericalJoint = 0;
-  l_pSphericalJoint = new CPhysicSphericalJoint();
-  CalVector l_vCalVect = m_pCalBone->getTranslationAbsolute();
-  Vect3f l_vJointPointMiddle(l_vCalVect.x,l_vCalVect.y,l_vCalVect.z);
- /* Mat44f l_vMat;
-  GetPhysxActor()->GetMat44(l_vMat);
-
-  Vect3f l_vJointPoint(l_vMat.GetTranslationVector());*/
-  l_pSphericalJoint->SetInfoComplete(l_vJointPointMiddle,Vect3f(0.0f,1.0f,0.0f),_pParent->GetPhysxActor(),GetPhysxActor());
-  CORE->GetPhysicsManager()->AddPhysicSphericalJoint(l_pSphericalJoint);
+  //CPhysicSphericalJoint* l_pSphericalJoint = 0;
+  //l_pSphericalJoint = new CPhysicSphericalJoint();
+  //CalVector l_vCalVect = m_pCalBone->getTranslationAbsolute();
+  //Vect3f l_vJointPointMiddle(l_vCalVect.x,l_vCalVect.y,l_vCalVect.z);
+  //l_pSphericalJoint->SetInfoComplete(l_vJointPointMiddle,Vect3f(0.0f,1.0f,0.0f),_pParent->GetPhysxActor(),GetPhysxActor());
+  //CORE->GetPhysicsManager()->AddPhysicSphericalJoint(l_pSphericalJoint);
 
 
 }

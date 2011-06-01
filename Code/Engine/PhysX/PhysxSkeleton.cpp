@@ -1,8 +1,17 @@
 #include "PhysicsManager.h"
 #include "PhysxSkeleton.h"
+#include "PhysicFixedJoint.h"
+#include "PhysicSphericalJoint.h"
+#include "PhysicRevoluteJoint.h"
+#include "PhysicsManager.h"
 #include "PhysxBone.h"
 #include <cal3d/cal3d.h>
 #include <XML/XMLTreeNode.h>
+#include "RenderManager.h"
+#include "Core.h"
+#include "base.h"
+
+
 
 bool CPhysxSkeleton::Init(const string& _szFileName, CalModel* _pCalModel)
 {
@@ -30,7 +39,7 @@ bool CPhysxSkeleton::Init(const string& _szFileName, CalModel* _pCalModel)
   //Funcions de configuracio!!
   InitBoneMatrices();
   InitPhysXActors();
-  InitPhysXJoints();
+  InitPhysXJoints(_szFileName);
 
   SetOk(true);
   return IsOk();
@@ -78,21 +87,103 @@ void CPhysxSkeleton::InitPhysXActors()
 //}
 
 
-void CPhysxSkeleton::InitPhysXJoints()
+bool CPhysxSkeleton::InitPhysXJoints(string _szFileName)
 {
-  for (size_t i=0;i<m_vBones.size();++i)
-  {
 
-    int l_iIdParent = m_vBones[i]->GetCalBone()->getCoreBone()->getParentId();
+  CXMLTreeNode l_XML;
+  CXMLTreeNode l_XMLObjects;
+	if(!l_XML.LoadFile(_szFileName.c_str()))
+	{
+		LOGGER->AddNewLog(ELL_WARNING,"CPhysxRagdoll:: No s'ha trobat el XML \"%s\"", _szFileName.c_str());
+		return false;
+	}
 
-    if (!m_vBones[i]->IsBoneRoot())
+
+  l_XMLObjects = l_XML(1);
+
+  int l_iNumObjects = l_XMLObjects.GetNumChildren();
+
+  
+	for(int i = 0; i < l_iNumObjects; i++)
+	{
+    string l_szType,l_szActor1,l_szActor2;
+    CXMLTreeNode l_XMLObject = l_XMLObjects(i);
+    if(l_XMLObject.IsComment())
+		{
+			continue;
+		}
+
+    l_szType			= l_XMLObject.GetPszISOProperty("type" ,"");
+    l_szActor1		= l_XMLObject.GetPszISOProperty("Actor1" ,"");
+    l_szActor2		= l_XMLObject.GetPszISOProperty("Actor2" ,"");
+
+    CPhysxBone* l_pBone1 = GetPhysxBoneByName(l_szActor1);
+    CPhysxBone* l_pBone2 = GetPhysxBoneByName(l_szActor2);
+
+    /*CPhysicActor* l_pActor1 = l_pBone1->GetPhysxActor();
+    CPhysicActor* l_pActor2 = l_pBone2->GetPhysxActor();*/
+    CPhysicActor* l_pActor1 = 0;
+    CPhysicActor* l_pActor2 = 0;
+
+
+    if (l_szType=="spherical")
     {
-     
-      CalBone* l_pParent = m_pCalSkeleton->getBone(l_iIdParent);
-      CPhysxBone* l_pPhysxBone = GetPhysxBoneByName(l_pParent->getCoreBone()->getName());
-      m_vBones[i]->InitPhysXJoint(l_pPhysxBone);
+      CPhysicSphericalJoint* l_pSphericalJoint = 0;
+      l_pSphericalJoint = new CPhysicSphericalJoint();
+      CalVector l_vCalVect = l_pBone1->GetCalBone()->getTranslationAbsolute();
+      Vect3f l_vJointPointMiddle(l_vCalVect.x,l_vCalVect.y,l_vCalVect.z);
+
+      if (l_szActor2=="NULL")
+      {
+        l_pActor1 = l_pBone1->GetPhysxActor();
+        l_pSphericalJoint->SetInfo(l_vJointPointMiddle,l_pActor1);
+        //l_pSphericalJoint->SetInfoComplete(l_vJointPointMiddle,Vect3f(1.0f,0.0f,0.0f),l_pActor1);
+      }
+      else
+      {
+        l_pActor1 = l_pBone1->GetPhysxActor();
+        l_pActor2 = l_pBone2->GetPhysxActor();
+        l_pSphericalJoint->SetInfo(l_vJointPointMiddle,l_pActor1,l_pActor2);
+        //l_pSphericalJoint->SetInfoComplete(l_vJointPointMiddle,Vect3f(1.0f,0.0f,0.0f),l_pActor1,l_pActor2);
+      }
+      CORE->GetPhysicsManager()->AddPhysicSphericalJoint(l_pSphericalJoint);
+      m_vSphericalJoints.push_back(l_pSphericalJoint);
+    
     }
+    
+    if (l_szType=="fixed")
+    {
+      CPhysicFixedJoint* l_pFixedJoint = 0;
+      l_pFixedJoint = new CPhysicFixedJoint();
+
+      if (l_szActor2=="NULL")
+      {
+        l_pActor1 = l_pBone1->GetPhysxActor();
+        l_pFixedJoint->SetInfo(l_pActor1);
+      }
+      else
+      {
+        l_pActor1 = l_pBone1->GetPhysxActor();
+        l_pActor2 = l_pBone2->GetPhysxActor();
+        l_pFixedJoint->SetInfo(l_pActor1,l_pActor2);
+      }
+
+      CORE->GetPhysicsManager()->AddPhysicFixedJoint(l_pFixedJoint);
+      m_vFixedJoints.push_back(l_pFixedJoint);
+    
+    }
+
+    if (l_szType=="revolute")
+    {
+    
+    
+    }
+
+
   }
+
+  return true;
+  
 }
 
 
@@ -103,6 +194,25 @@ void CPhysxSkeleton::Release()
   {
     CHECKED_DELETE(m_vBones[i])
   }
+
+  for (size_t i=0;i<m_vFixedJoints.size();++i)
+  {
+    CHECKED_DELETE(m_vFixedJoints[i])
+  }
+
+  for (size_t i=0;i<m_vRevoluteJoints.size();++i)
+  {
+    CHECKED_DELETE(m_vRevoluteJoints[i])
+  }
+
+  for (size_t i=0;i<m_vSphericalJoints.size();++i)
+  {
+    CHECKED_DELETE(m_vSphericalJoints[i])
+  }
+  
+  m_vFixedJoints.clear();
+  m_vRevoluteJoints.clear();
+  m_vSphericalJoints.clear();
   m_vBones.clear();
 }
 
@@ -115,13 +225,16 @@ void CPhysxSkeleton::UpdateCal3dFromPhysx()
 bool CPhysxSkeleton::Load(string _szFileName)
 {
 
+  CXMLTreeNode l_XML;
   CXMLTreeNode l_XMLObjects;
-	if(!l_XMLObjects.LoadFile(_szFileName.c_str()))
+	if(!l_XML.LoadFile(_szFileName.c_str()))
 	{
 		LOGGER->AddNewLog(ELL_WARNING,"CPhysxRagdoll:: No s'ha trobat el XML \"%s\"", _szFileName.c_str());
 		return false;
 	}
 
+
+  l_XMLObjects = l_XML(0);
 
   int l_iNumObjects = l_XMLObjects.GetNumChildren();
 
