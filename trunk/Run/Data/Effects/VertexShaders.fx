@@ -257,4 +257,31 @@ void AnimatedShadow(CAL3D_HW_VERTEX_VS _in,
   Depth.xy = oPos.zw;
 }
 
+//Vertex Shader
+void VertGlow(float4 _Pos : POSITION,
+              float2 _UV  : TEXCOORD0,
+              out float4 Pos_ : POSITION,
+              out float2 UV_  : TEXCOORD0 )
+{
+  //
+  // Compute the projected coordinates
+  //
+  Pos_ = mul( _Pos, g_WorldViewProjectionMatrix );
+  // Pass texture coordinates
+  UV_.xy = _UV.xy;
+}
+
+void AnimatedGlow(CAL3D_HW_VERTEX_VS _in,
+                out float4 Pos_ : POSITION,
+                out float2 UV_ : TEXCOORD0 )
+{
+  //
+  // Compute the projected coordinates
+  //
+	float3 l_Position = CalcAnimtedPos(float4(_in.Position.xyz,1.0), _in.Indices, _in.Weight);
+  Pos_ = mul( float4(-l_Position.x,l_Position.y,l_Position.z,1.0), g_WorldViewProjectionMatrix );
+  // Pass texture coordinates
+  UV_.xy = _in.TexCoord.xy;
+}
+
 #endif

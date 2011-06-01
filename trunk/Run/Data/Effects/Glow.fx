@@ -1,45 +1,5 @@
-#include "Globals.fx"
-#include "Functions.fx"
-#include "VertexType.fx"
-
-//Vertex Shader
-void VertGlow(float4 _Pos : POSITION,
-              float2 _UV  : TEXCOORD0,
-              out float4 Pos_ : POSITION,
-              out float2 UV_  : TEXCOORD0 )
-{
-  //
-  // Compute the projected coordinates
-  //
-  Pos_ = mul( _Pos, g_WorldViewProjectionMatrix );
-  // Pass texture coordinates
-  UV_.xy = _UV.xy;
-}
-
-void AnimatedGlow(CAL3D_HW_VERTEX_VS _in,
-                out float4 Pos_ : POSITION,
-                out float2 UV_ : TEXCOORD0 )
-{
-  //
-  // Compute the projected coordinates
-  //
-	float3 l_Position = CalcAnimtedPos(float4(_in.Position.xyz,1.0), _in.Indices, _in.Weight);
-  Pos_ = mul( float4(-l_Position.x,l_Position.y,l_Position.z,1.0), g_WorldViewProjectionMatrix );
-  // Pass texture coordinates
-  UV_.xy = _in.TexCoord.xy;
-}
-
-//Pixel Shader
-void PixGlow( float2 _UV : TEXCOORD0, out float4 Color_ : COLOR )
-{
-  if(g_GlowActive)
-  {
-    Color_ = tex2D(GlowTextureSampler,_UV);
-  } else {
-    Color_ = float4(0,0,0,0);
-  }
-}
-
+#include "VertexShaders.fx"
+#include "PixelShaders.fx"
 
 technique RenderGlowTechnique
 {
@@ -55,20 +15,7 @@ technique RenderGlowTechnique
 	}
 }
 
-technique Cal3DGlowTechnique
-{
-	pass p0
-	{
-		ZEnable = true;
-		ZWriteEnable = true;
-		ZFunc = LessEqual;
-		AlphaBlendEnable = false;
-		CullMode = CCW;
-		VertexShader = compile vs_3_0 AnimatedGlow();
-		PixelShader = compile ps_3_0 PixGlow();
-	}
-}
-
+/*
 float g_XIncrementTexture = 1/512.0;
 float g_YIncrementTexture = 1/512.0;
 #define GLOW_KERNEL_HALF 4
@@ -114,5 +61,5 @@ technique PostProcessGlowTechnique
 		PixelShader = compile ps_3_0 PostProcessGlowPS();
 	}
 }
-
+*/
 
