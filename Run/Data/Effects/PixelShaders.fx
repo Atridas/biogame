@@ -156,4 +156,15 @@ void PixShadow( float2 _Depth : TEXCOORD0, out float4 Color_ : COLOR )
   Color_ = _Depth.x / _Depth.y;
 }
 
+//Pixel Shader
+void PixGlow( float2 _UV : TEXCOORD0, out float4 Color_ : COLOR )
+{
+  if(g_GlowActive)
+  {
+    Color_ = tex2D(GlowTextureSampler,_UV);
+  } else {
+    Color_ = float4(0,0,0,0);
+  }
+}
+
 #endif

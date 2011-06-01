@@ -436,14 +436,18 @@ CEffect* CEffectManager::ActivateMaterial(CMaterial* _pMaterial)
     float l_fParallax = _pMaterial->GetParallaxHeight();
 
     _pMaterial->Activate();
-  }
 
-  if(l_pEffect)
-  {
     if(_pMaterial->HasSpecularParameters())
     {
       SetSpecularParams(_pMaterial->GetGlossiness(), _pMaterial->GetSpecularFactor());
     }
+
+  }
+
+  if(l_pEffect)
+  {
+    //Problema: El glow es una forced technique i necessita activar el material. Descomentar per provar
+    //_pMaterial->Activate();
 
     LoadShaderData(l_pEffect);
   }
