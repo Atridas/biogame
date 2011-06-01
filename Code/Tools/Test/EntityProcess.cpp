@@ -23,8 +23,16 @@
 #include "PhysicActor.h"
 #include <PhysicsManager.h>
 
+#include "PortalManager.h"
+
+
+
 bool CEntityProcess::Init()
 {
+  CPortalManager m_PortalManager;
+  m_PortalManager.Init("./Data/Levels/NivellProves/XML/Level.xml");
+
+
   LOGGER->AddNewLog(ELL_INFORMATION,"CEntityProcess::Init");
   
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
@@ -129,7 +137,7 @@ void CEntityProcess::Release()
 
 void CEntityProcess::Update(float _fElapsedTime)
 {
-  CObject3D* m_pPlayerPos = dynamic_cast<CObject3D*>(CORE->GetEntityManager()->GetEntity("Player")->GetComponent(CBaseComponent::ECT_OBJECT_3D));
+  CObject3D* m_pPlayerPos = CORE->GetEntityManager()->GetEntity("Player")->GetComponent<CComponentObject3D>(CBaseComponent::ECT_OBJECT_3D);
 
   m_pSpotLight->SetPosition(m_pPlayerPos->GetPosition());
   m_pSpotLight->SetDirection(m_pCamera->GetDirection());

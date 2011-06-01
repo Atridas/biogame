@@ -55,6 +55,15 @@
     <Filter Include="EntitySystem\EntitiesToLua">
       <UniqueIdentifier>{604b0f2e-e76d-4658-9d99-b2c40b51ab51}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentPhysXActor">
+      <UniqueIdentifier>{a472c37a-cd85-40a9-a921-3bdd53371dea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentTrigger">
+      <UniqueIdentifier>{4960b2dd-9849-4cec-b553-9ca9e8c9a774}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\PhysXTriggerEntityController">
+      <UniqueIdentifier>{6e93f928-016e-4dd3-b175-8e254b892348}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -116,6 +125,15 @@
     </ClCompile>
     <ClCompile Include="EntityLoader.cpp">
       <Filter>EntitySystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentPhysXActor.cpp">
+      <Filter>EntitySystem\Components\ComponentPhysXActor</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentTrigger.cpp">
+      <Filter>EntitySystem\Components\ComponentTrigger</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXTriggerEntityController.cpp">
+      <Filter>EntitySystem\PhysXTriggerEntityController</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +205,15 @@
     </ClInclude>
     <ClInclude Include="include\EntitiesToLua.h">
       <Filter>EntitySystem\EntitiesToLua</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentPhysXActor.h">
+      <Filter>EntitySystem\Components\ComponentPhysXActor</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentTrigger.h">
+      <Filter>EntitySystem\Components\ComponentTrigger</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PhysXTriggerEntityController.h">
+      <Filter>EntitySystem\PhysXTriggerEntityController</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

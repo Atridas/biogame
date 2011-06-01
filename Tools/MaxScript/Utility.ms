@@ -634,7 +634,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		format "\n  %" (CloseTagXML "Portals") to:l_file
 		-------------------------------------------------------
 		
-		format "\n%" (CloseTagXML "Entities") to:l_file
+		format "\n%" (CloseTagXML "Level") to:l_file
 		
 		format "\n" to:l_file
 		

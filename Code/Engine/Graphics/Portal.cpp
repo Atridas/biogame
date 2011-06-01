@@ -11,10 +11,12 @@ bool CPortal::Init(CXMLTreeNode& _xmlPortal, CPortalManager* _pPortalManager)
 
   string l_szName = _xmlPortal.GetPszISOProperty("name", "undefined", false);
 
+  SetName(l_szName);
+
   LOGGER->AddNewLog(ELL_INFORMATION, "CPortal::Init loading portal \"%s\"", l_szName.c_str());
   
   string l_szRoomA = _xmlPortal.GetPszISOProperty("roomA", "", false);
-  string l_szRoomB = _xmlPortal.GetPszISOProperty("roomA", "", false);
+  string l_szRoomB = _xmlPortal.GetPszISOProperty("roomB", "", false);
   
   Vect3f l_vSize     = _xmlPortal.GetVect3fProperty("size", Vect3f(), true);
   Vect3f l_vPosition = _xmlPortal.GetVect3fProperty("position", Vect3f(), true);

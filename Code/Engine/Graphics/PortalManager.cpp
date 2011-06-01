@@ -2,12 +2,30 @@
 
 #include <XML\XMLTreeNode.h>
 
+
+bool CPortalManager::Init(const string& _szFileName)
+{
+  CXMLTreeNode l_xmlLevel;
+
+  if(l_xmlLevel.LoadFile(_szFileName.c_str()))
+  {
+    Init(l_xmlLevel);
+  }
+  else
+  {
+    SetOk(false);
+    LOGGER->AddNewLog(ELL_ERROR, "CPortalManager::Init file \"%s\" not found or incorrect.");
+  }
+
+  return IsOk();
+}
+
 bool CPortalManager::Init(CXMLTreeNode& _xmlLevel)
 {
   assert(strcmp(_xmlLevel.GetName(), "Level") == 0);
   SetOk(true);
 
-  LOGGER->AddNewLog(ELL_ERROR, "CPortalManager::Init");
+  LOGGER->AddNewLog(ELL_INFORMATION, "CPortalManager::Init");
 
   {
     CXMLTreeNode l_xmlRooms = _xmlLevel["Rooms"];
@@ -16,7 +34,7 @@ bool CPortalManager::Init(CXMLTreeNode& _xmlLevel)
 
     if(l_xmlRooms.Exists())
     {
-      LOGGER->AddNewLog(ELL_ERROR, "CPortalManager::Init Recorrent Rooms");
+      LOGGER->AddNewLog(ELL_INFORMATION, "CPortalManager::Init Recorrent Rooms");
 
       int l_iRooms = l_xmlRooms.GetNumChildren();
       for(int i = 0; i < l_iRooms; ++i)
@@ -25,9 +43,9 @@ bool CPortalManager::Init(CXMLTreeNode& _xmlLevel)
         if(strcmp(l_xmlRoom.GetName(), "Room") == 0)
         {
           bool l_bUndefined = l_xmlRoom.GetBoolProperty("undefined",false,false);
-          string l_szName = l_xmlRoom.GetPszISOProperty("name", "undefined", l_bUndefined);
+          string l_szName = l_xmlRoom.GetPszISOProperty("name", "undefined", !l_bUndefined);
 
-          if(m_Rooms.find(l_szName) != m_Rooms.end())
+          if(m_Rooms.find(l_szName) == m_Rooms.end())
           {
             CRoom l_Room;
             if(l_Room.Init(l_xmlRoom, _UsedGameObjects))
@@ -62,7 +80,7 @@ bool CPortalManager::Init(CXMLTreeNode& _xmlLevel)
 
     if(l_xmlPortals.Exists())
     {
-      LOGGER->AddNewLog(ELL_ERROR, "CPortalManager::Init Recorrent Portals");
+      LOGGER->AddNewLog(ELL_INFORMATION, "CPortalManager::Init Recorrent Portals");
 
       int l_iPortals = l_xmlPortals.GetNumChildren();
       for(int i = 0; i < l_iPortals; ++i)
@@ -72,7 +90,7 @@ bool CPortalManager::Init(CXMLTreeNode& _xmlLevel)
         {
           string l_szName = l_xmlPortal.GetPszISOProperty("name", "", true);
 
-          if(m_Portals.find(l_szName) != m_Portals.end())
+          if(m_Portals.find(l_szName) == m_Portals.end())
           {
             CPortal l_Portal;
             if(l_Portal.Init(l_xmlPortal, this))

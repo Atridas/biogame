@@ -48,6 +48,7 @@ public:
 
 	//---Trigger Function---
 	void							CreateBoxTrigger	(const Vect3f& size, uint32 group = 0);
+  void              ActivateAllTriggers();
 
 	//---Get Info-------
 	void							GetMat44					(Mat44f& matrix) const;

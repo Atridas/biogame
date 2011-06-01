@@ -61,4 +61,4 @@
     <Portal name="DummyPortal1" roomA="Room1" roomB="Room2" size="3.68386 5.23138 11.7923" position="-39.4519 1.58172 2.34888" yaw="0.0" pitch="0.0" roll="0.0" />
     <Portal name="DummyPortal2" roomA="Room2" roomB="Room3" size="3.66416 4.47329 11.4408" position="30.2502 1.39178 2.29001" yaw="0.0" pitch="0.0" roll="0.0" />
   </Portals>
-</Entities>
+</Level>

@@ -248,6 +248,15 @@ void CPhysicActor::CreateBoxTrigger(const Vect3f& size, uint32 group)
 	m_pPhXActorDesc->shapes.pushBack(boxDesc);
 }
 
+void CPhysicActor::ActivateAllTriggers()
+{
+  uint32 size = m_pPhXActorDesc->shapes.size();
+  for(int i = 0; i < size; ++i)
+  {
+    m_pPhXActorDesc->shapes[i]->shapeFlags |= NX_TRIGGER_ENABLE;
+  }
+}
+
 
 void CPhysicActor::SetMat44 (const Mat44f& matrix)
 {

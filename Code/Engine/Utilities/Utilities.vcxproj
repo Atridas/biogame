@@ -80,11 +80,13 @@
     <ClCompile Include="ComponentIAWalkToPlayer.cpp" />
     <ClCompile Include="ComponentMovement.cpp" />
     <ClCompile Include="Component3rdPSCamera.cpp" />
+    <ClCompile Include="ComponentPhysXActor.cpp" />
     <ClCompile Include="ComponentPhysXBox.cpp" />
     <ClCompile Include="ComponentPhysXController.cpp" />
     <ClCompile Include="ComponentPhysXMesh.cpp" />
     <ClCompile Include="ComponentPlayerController.cpp" />
     <ClCompile Include="ComponentRenderableObject.cpp" />
+    <ClCompile Include="ComponentTrigger.cpp" />
     <ClCompile Include="EntitiesToLua.cpp" />
     <ClCompile Include="EntityLoader.cpp" />
     <ClCompile Include="EntityManager.cpp" />
@@ -93,6 +95,7 @@
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="GraphDefines.cpp" />
     <ClCompile Include="Heuristics.cpp" />
+    <ClCompile Include="PhysXTriggerEntityController.cpp" />
     <ClCompile Include="ScriptedStateMachine.cpp" />
     <ClCompile Include="SearchAStar.cpp" />
     <ClCompile Include="SparseGraph.cpp" />
@@ -103,11 +106,13 @@
     <ClInclude Include="include\ComponentMovement.h" />
     <ClInclude Include="include\Component3rdPSCamera.h" />
     <ClInclude Include="include\ComponentObject3D.h" />
+    <ClInclude Include="include\ComponentPhysXActor.h" />
     <ClInclude Include="include\ComponentPhysXBox.h" />
     <ClInclude Include="include\ComponentPhysXController.h" />
     <ClInclude Include="include\ComponentPhysXMesh.h" />
     <ClInclude Include="include\ComponentPlayerController.h" />
     <ClInclude Include="include\ComponentRenderableObject.h" />
+    <ClInclude Include="include\ComponentTrigger.h" />
     <ClInclude Include="include\EntitiesToLua.h" />
     <ClInclude Include="include\EntityDefines.h" />
     <ClInclude Include="include\EntityManager.h" />
@@ -118,6 +123,7 @@
     <ClInclude Include="include\GraphEdge.h" />
     <ClInclude Include="include\GraphNode.h" />
     <ClInclude Include="include\Heuristics.h" />
+    <ClInclude Include="include\PhysXTriggerEntityController.h" />
     <ClInclude Include="include\ScriptedStateMachine.h" />
     <ClInclude Include="include\SearchAStar.h" />
     <ClInclude Include="include\SparseGraph.h" />
