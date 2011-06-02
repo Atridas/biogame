@@ -77,14 +77,20 @@ void CPhysicSphericalJoint::SetInfoComplete	(const Vect3f& anchor, const Vect3f&
 	}
 
   m_pSphericalDesc->flags |= NX_SJF_SWING_LIMIT_ENABLED;
-  m_pSphericalDesc->swingLimit.value = 0.3*NxPi;
+  m_pSphericalDesc->swingLimit.value = 0.3f*NxPi;
 
   m_pSphericalDesc->flags |= NX_SJF_TWIST_LIMIT_ENABLED;
-  m_pSphericalDesc->twistLimit.low.value = -0.05*NxPi;
-  m_pSphericalDesc->twistLimit.high.value = 0.05*NxPi;
+  m_pSphericalDesc->twistLimit.low.value = -0.05f*NxPi;
+  m_pSphericalDesc->twistLimit.high.value = 0.05f*NxPi;
 
 	m_pSphericalDesc->setGlobalAnchor(pos);
   m_pSphericalDesc->setGlobalAxis(axis);
-   
- 
+
+
+  m_pSphericalDesc->projectionDistance = NX_JPM_LINEAR_MINDIST;
+  m_pSphericalDesc->projectionDistance = 0.01f;
+  /*m_pSphericalDesc->projectionMode |= NX_JPM_LINEAR_MINDIST;
+  NxJointProjection*/
+
+
 }

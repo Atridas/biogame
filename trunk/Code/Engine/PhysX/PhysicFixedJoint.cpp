@@ -43,4 +43,6 @@ m_pFixedDesc->actor[0] = actorA->GetPhXActor();
 	{
 		m_pFixedDesc->actor[1] = NULL;	
 	}
+
+
 }
