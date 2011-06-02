@@ -4,14 +4,12 @@
 
 #include "PropertyDecorator.h"
 
-class CAlphaDecorator : public CPropertyDecorator
+class CAlphaPropertyDecorator : public CPropertyDecorator
 {
 public:
-  CAlphaDecorator(CMaterial* _pDecoratedMaterial)
+  CAlphaPropertyDecorator(CMaterial* _pDecoratedMaterial)
     : CPropertyDecorator(_pDecoratedMaterial) {};
-  virtual ~CAlphaDecorator() {};
-  
-  virtual int GetMaterialType() const {return m_pDecoratedMaterial->GetMaterialType();};
+  virtual ~CAlphaPropertyDecorator() {};
 
   virtual bool HasAlphaBlending() const { return true; };
 

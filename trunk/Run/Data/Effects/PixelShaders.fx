@@ -161,7 +161,7 @@ void PixGlow( float2 _UV : TEXCOORD0, out float4 Color_ : COLOR )
 {
   if(g_GlowActive)
   {
-    Color_ = tex2D(GlowTextureSampler,_UV);
+    Color_ = tex2D(GlowTextureSampler,_UV) * g_GlowIntensity;
   } else {
     Color_ = float4(0,0,0,0);
   }

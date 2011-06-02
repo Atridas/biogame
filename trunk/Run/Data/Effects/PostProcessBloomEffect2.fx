@@ -2,7 +2,7 @@
 
 float4 PostProcessBloom2PS(float2 _UV: TEXCOORD0) : COLOR
 {
-  return tex2D(PrevFilterSampler, _UV ) * 2.0;
+  return tex2D(PrevFilterSampler, _UV );
 }
 
 technique PostProcessBloomTechnique2

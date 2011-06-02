@@ -28,6 +28,8 @@ public:
   virtual float GetBump()           const = 0;
   virtual float GetGlossiness()     const = 0;
   virtual float GetSpecularFactor() const = 0;
+  virtual float GetGlowIntensity()  const = 0;
+  virtual void SetGlowIntensity(const float& _fGlowIntensity) = 0;
 
   virtual bool HasAlphaBlending()      const = 0;
   virtual bool HasSpecularParameters() const = 0;
