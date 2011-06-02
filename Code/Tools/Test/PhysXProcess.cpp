@@ -185,11 +185,14 @@ bool CPhysXProcess::Init()
 
   g_pJointActor1->AddBoxSphape(Vect3f(0.5f,0.5f,0.5f),v3fZERO,NULL,GROUP_COLLIDABLE_PUSHABLE);
   g_pJointActor2->AddSphereShape(0.4f,v3fZERO,NULL,GROUP_COLLIDABLE_PUSHABLE);
+  g_pJointActor3->AddBoxSphape(Vect3f(0.3f,0.3f,0.3f),v3fZERO,NULL,GROUP_COLLIDABLE_PUSHABLE);
   g_pJointActor1->SetGlobalPosition(Vect3f(-6.0f,1.0f,-3.0f));
   g_pJointActor2->SetGlobalPosition(Vect3f(-7.0f,1.0f,-3.0f));
+  g_pJointActor3->SetGlobalPosition(Vect3f(-9.0f,1.0f,-3.0f));
 
-  //g_pJointActor1->CreateBody(1.0f);
-  g_pJointActor2->CreateBody(1.0f);
+  g_pJointActor1->CreateBody(1.0f);
+  g_pJointActor2->CreateBody(5.0f);
+  g_pJointActor3->CreateBody(10.0f);
   
   g_pFixedJoint = new CPhysicFixedJoint();
   g_pFixedJoint2 = new CPhysicFixedJoint();
@@ -198,17 +201,20 @@ bool CPhysXProcess::Init()
   g_pSphericalJoint2 = new CPhysicSphericalJoint();
   //g_pSphericalJoint->GetPhXDescJoint()->
 
-  //l_pPhysManager->AddPhysicActor(g_pJointActor1);
-  //l_pPhysManager->AddPhysicActor(g_pJointActor2);
+  l_pPhysManager->AddPhysicActor(g_pJointActor1);
+  l_pPhysManager->AddPhysicActor(g_pJointActor2);
+  l_pPhysManager->AddPhysicActor(g_pJointActor3);
 
-  //g_pFixedJoint->SetInfo(g_pJointActor1,g_pJointActor2);
+  g_pFixedJoint->SetInfo(g_pJointActor1,g_pJointActor2);
+  g_pFixedJoint2->SetInfo(g_pJointActor2,g_pJointActor3);
   //g_pRevoluteJoint->SetInfo(v3fZERO,Vect3f(0.1f,0.1f,0.1f),g_pJointActor1,g_pJointActor2);
   //g_pSphericalJoint->SetInfo(Vect3f(-6.0f,2.0f,-3.0f),g_pJointActor2);
   //g_pRevoluteJoint->SetMotor(1.0f,1.0f);
 
   //g_pFixedJoint->CreateJoint(NULL);
 
-  //l_pPhysManager->AddPhysicFixedJoint(g_pFixedJoint);
+  l_pPhysManager->AddPhysicFixedJoint(g_pFixedJoint);
+  l_pPhysManager->AddPhysicFixedJoint(g_pFixedJoint2);
   //l_pPhysManager->AddPhysicRevoluteJoint(g_pRevoluteJoint);
   //l_pPhysManager->AddPhysicSphericalJoint(g_pSphericalJoint);
 
