@@ -34,8 +34,8 @@
     -->
 	</RenderableObjectsManager>
 
-  <!--LightsManager file="Data/Levels/Viewer/XML/Lights.xml"/-->
-  <LightsManager file="Data/XML/Lights.xml"/>
+  <LightsManager file="Data/Levels/Viewer/XML/Lights.xml"/>
+  <!--<LightsManager file="Data/XML/Lights.xml"/>-->
 
 	<SceneEffectManager file="Data/XML/SceneEffects_Viewer.xml"/>
   

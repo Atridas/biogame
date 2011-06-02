@@ -20,6 +20,7 @@
 #include "SoundManager.h"
 #include "ScriptManager.h"
 #include "ActionManager.h"
+#include "Material.h"
 #include <luabind/luabind.hpp>
 #include <luabind/function.hpp>
 #include <luabind/class.hpp>
@@ -102,7 +103,7 @@ void CViewer::Init()
                                                           45.0f,
                                                           true );*/
 
-  m_pOmniLight = CORE->GetLightManager()->CreateOmniLight("OmniViewerLight",Vect3f(0.0f),CColor(Vect3f(0.15f)),0.1f,17.0f);
+  m_pOmniLight = CORE->GetLightManager()->CreateOmniLight("OmniViewerLight",Vect3f(0.0f),CColor(Vect3f(0.7f,0.7f,0.4f)),0.1f,17.0f);
 
   CSceneEffectManager* l_pSceneEffectManager = CORE->GetSceneEffectManager();
   if(l_pSceneEffectManager)
@@ -645,6 +646,42 @@ void CViewer::ToggleShowSpheres()
   CORE->GetRenderableObjectsManager()->SetAllRenderBoundingSphere(m_bShowSpheres);
 }
 
+void CViewer::IncrementGlow()
+{
+  if(m_pCharacter)
+  {
+    const vector<CMaterial*>& l_vMaterials = m_pCharacter->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetMaterials();
+    vector<CMaterial*>::const_iterator l_itMaterial = l_vMaterials.begin();
+
+    while(l_itMaterial != l_vMaterials.end())
+    {
+      CMaterial* l_pMaterial = *l_itMaterial;
+
+      l_pMaterial->SetGlowIntensity(l_pMaterial->GetGlowIntensity()+0.1f);
+      ++l_itMaterial;
+    }
+  }
+}
+
+void CViewer::DecrementGlow()
+{
+  if(m_pCharacter)
+  {
+    const vector<CMaterial*>& l_vMaterials = m_pCharacter->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetMaterials();
+    vector<CMaterial*>::const_iterator l_itMaterial = l_vMaterials.begin();
+
+    while(l_itMaterial != l_vMaterials.end())
+    {
+      CMaterial* l_pMaterial = *l_itMaterial;
+
+      float l_fIntensity = l_pMaterial->GetGlowIntensity();
+
+      l_pMaterial->SetGlowIntensity(l_fIntensity > 1.0f? l_fIntensity-0.1f : 1.0f);
+      ++l_itMaterial;
+    }
+  }
+}
+
 bool CViewer::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
 {
   //if(strcmp(_pcAction, "ChangeMode") == 0)
@@ -756,6 +793,18 @@ bool CViewer::ExecuteFreeModeAction(float _fDeltaSeconds, float _fDelta, const c
     return true;
   }
 
+  if(strcmp(_pcAction, "AugmentaGlow") == 0)
+  {
+    IncrementGlow();
+    return true;
+  }
+
+  if(strcmp(_pcAction, "DisminueixGlow") == 0)
+  {
+    DecrementGlow();
+    return true;
+  }
+
   if(strcmp(_pcAction, "SetLightsONOFF") == 0)
   {
     ToggleLights();
@@ -850,6 +899,18 @@ bool CViewer::ExecuteAnimatedModeAction(float _fDeltaSeconds, float _fDelta, con
   if(strcmp(_pcAction, "ReloadMeshActual") == 0)
   {
     ReloadCurrentAnimatedMesh();
+    return true;
+  }
+
+  if(strcmp(_pcAction, "AugmentaGlow") == 0)
+  {
+    IncrementGlow();
+    return true;
+  }
+
+  if(strcmp(_pcAction, "DisminueixGlow") == 0)
+  {
+    DecrementGlow();
     return true;
   }
 

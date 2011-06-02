@@ -84,7 +84,8 @@ public:
                     m_pBump(0),
                     m_pParallaxHeight(0),
                     m_pGlossiness(0),
-                    m_pSpecularLevel(0)
+                    m_pSpecularLevel(0),
+                    m_pGlowIntensityParameter(0)
                     {SetOk(true);};
 
   ~CEffectManager() {Done();};
@@ -129,6 +130,7 @@ public:
   void SetTextureWidthHeight(int _iWidth, int _iHeight) {m_iTextureWidth  = _iWidth; m_iTextureHeight = _iHeight; m_bTextureWidthHeightUpdated = true;};
 
   void SetGlow(bool _bGlow) {m_bGlowActive = _bGlow; m_bGlowUpdated = true;};
+  void SetGlowIntensity(float _fGlowIntensity) {m_fGlowIntensity = _fGlowIntensity; m_bGlowUpdated = true;};
 
   void ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _mProjectionMatrix, const Vect3f& _vCameraEye);
 
@@ -207,7 +209,7 @@ private:
   float m_fGlossiness;
   float m_fSpecularLevel;
   bool m_bGlowActive;
-
+  float m_fGlowIntensity;
 
   D3DXHANDLE m_pWorldMatrixParameter;
   D3DXHANDLE m_pViewMatrixParameter;
@@ -242,6 +244,7 @@ private:
   D3DXHANDLE m_pParallaxHeight; 
   D3DXHANDLE m_pGlossiness;
   D3DXHANDLE m_pSpecularLevel;
+  D3DXHANDLE m_pGlowIntensityParameter;
 
 
   //bool m_bInverseProjectionUpdated, m_bInverseViewUpdated, m_bInverseWorldUpdated;

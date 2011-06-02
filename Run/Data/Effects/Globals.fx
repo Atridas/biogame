@@ -26,7 +26,7 @@ shared float g_SpecularPow     : Glossiness;    // = 100;
 shared float g_SpotlightFactor : SpecularLevel; //= 0.1;
 
 float g_GlowBlurIntensity = 1.15;
-float g_GlowIntensity = 2.0;
+shared float g_GlowIntensity : GlowIntensity;
 
 //Lights
 #define LIGHT_OMNI        0
