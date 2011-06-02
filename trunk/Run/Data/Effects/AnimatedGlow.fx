@@ -9,7 +9,7 @@ technique AnimatedGlowTechnique
 		ZWriteEnable = true;
 		ZFunc = LessEqual;
 		AlphaBlendEnable = false;
-		CullMode = CCW;
+		CullMode = CW;
 		VertexShader = compile vs_3_0 AnimatedGlow();
 		PixelShader = compile ps_3_0 PixGlow();
 	}

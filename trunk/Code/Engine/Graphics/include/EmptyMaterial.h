@@ -8,6 +8,7 @@ public:
   virtual ~CEmptyMaterial() {};
 
   virtual void Activate() {};
+  virtual void Activate(int _iMaterialMask) {};
   virtual float GetParallaxHeight()    const {return 0.0f;};
   virtual float GetBump()              const {return 0.0f;};
   virtual float GetGlossiness()        const {return 100.0f;};

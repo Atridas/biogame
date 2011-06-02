@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <scene_effects>
 	<pre_render type="shadow_map_render_to_texture" name="shadow_map_scene_effect"
-				texture="ShadowMapTexture" width="1024" height="1024"
+				texture="ShadowMapTexture" width="512" height="512"
 				static_mesh_effect="Depth" animated_model_effect="AnimatedDepth"
 				light_shadow_cast="null"
 				active="true" format_type="R32F"/>
@@ -60,6 +60,9 @@
 		<texture stage_id="0" texture="GlowTexture3"/>
 	</post_render>
 
+  <post_render type="draw_quad" name="post_glow" effect="PostProcessBloom2" active="true">
+    <texture stage_id="0" texture="GlowTexture"/>
+  </post_render>
 
 	<!--<post_render type="draw_quad" name="noise_and_vignetting_scene_effect" technique="RenderNoiseAndVignettingTechnique" active="true" color="1.0 1.0 1.0 1.0">
 		<texture stage_id="0" texture="Data/Textures/noise.tga"/>

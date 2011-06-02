@@ -22,6 +22,7 @@ public:
   virtual ~CMaterial() {};
 
   virtual void Activate() = 0;
+  virtual void Activate(int _iTextureMask) = 0;
   virtual int   GetMaterialType()   const = 0;
   virtual float GetParallaxHeight() const = 0;
   virtual float GetBump()           const = 0;
