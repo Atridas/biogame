@@ -20,6 +20,7 @@
 #include <sstream>
 #include "VertexsStructs.h"
 #include "Console.h"
+#include "ComponentObject3D.h"
 
 #include <LightManager.h>
 #include <PhysicsManager.h>
@@ -30,6 +31,16 @@
 #include "GameObject.h"
 #include "ParticleManager.h"
 #include "BillBoard.h"
+
+#include "ComponentObject3D.h"
+#include "ComponentMovement.h"
+#include "ComponentPhysXController.h"
+#include "ComponentPlayerController.h"
+#include "ComponentIAWalkToPlayer.h"
+#include "Component3rdPSCamera.h"
+#include "ComponentPhysXBox.h"
+#include "ComponentPhysXMesh.h"
+#include "ComponentRenderableObject.h"
 
 
 
@@ -76,6 +87,55 @@ bool CParticleProcess::Init()
   }
   m_bRenderLights = false;
 
+ /* // Creem la entitat del jugador ----------------------------------------------------------------
+
+  m_pPlayerEntity = CORE->GetEntityManager()->CreateEntity();
+  CORE->GetEntityManager()->SetName("Player", m_pPlayerEntity);
+
+  CComponentObject3D *l_pComponentObject3D = new CComponentObject3D();
+  l_pComponentObject3D->Init(m_pPlayerEntity);
+  l_pComponentObject3D->SetPosition(Vect3f(3.1f,1.0f,-8.56f));
+  
+
+  (new CComponentMovement)->Init(m_pPlayerEntity);
+
+  CComponentRenderableObject * l_pComponentRenderableObject = new CComponentRenderableObject();
+  l_pComponentRenderableObject->InitAnimatedModel(m_pPlayerEntity, "Player Character", "riggle");
+  l_pComponentRenderableObject->m_bBlockPitchRoll = true;
+  l_pComponentRenderableObject->m_fHeightAdjustment = -1.f;
+  l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
+
+  CComponentPlayerController *l_pComponentPlayerController = new CComponentPlayerController();
+  l_pComponentPlayerController->Init(m_pPlayerEntity,
+                                      //Actions
+                                     "MoveFwd",
+                                     "MoveBack",
+                                     "MoveLeft",
+                                     "MoveRight",
+                                     "Walk",
+                                     "Run",
+                                      //Animations
+                                     "idle",
+                                     "walk",
+                                     "walk",
+                                     "walk",
+                                     "walk",
+                                      //Speed
+                                     4, 10, 1, 1,
+                                      FLOAT_PI_VALUE/3,
+                                     -FLOAT_PI_VALUE/3);
+
+  CComponent3rdPSCamera *l_pComponent3rdPSCamera = new CComponent3rdPSCamera();
+  //l_pComponent3rdPSCamera->Init(m_pPlayerEntity, 0, 0);
+  //((CThPSCamera*)l_pComponent3rdPSCamera->GetCamera())->SetZoom(0);
+  l_pComponent3rdPSCamera->Init(m_pPlayerEntity, 1, 0.5f);
+
+  m_pCamera = l_pComponent3rdPSCamera->GetCamera();
+
+  CComponentPhysXController *l_pComponentPhysXController = new CComponentPhysXController();
+  l_pComponentPhysXController->Init(m_pPlayerEntity, 0.3f, 1.5f, 10.0f, 0.1f, 0.5f, 1);
+  */
+
   SetOk(true);
   return IsOk();
 }
@@ -92,6 +152,9 @@ void CParticleProcess::Update(float _fElapsedTime)
   {
 
     m_pBillBoard.Update(_fElapsedTime,m_pObjectCamera);
+    //update del player
+    //CObject3D* m_pPlayerPos = CORE->GetEntityManager()->GetEntity("Player")->GetComponent<CComponentObject3D>(CBaseComponent::ECT_OBJECT_3D);
+
     CORE->GetParticleManager()->Update(_fElapsedTime,m_pObjectCamera);
     //Actualitze el pitch i el yaw segons els delta del mouse
     float l_fPitch, l_fYaw;

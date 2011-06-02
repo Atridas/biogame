@@ -27,41 +27,42 @@
           <Animated     time="0.5"    NumFiles="4"    NumColumnes="4"   TimeDiapo="0.05"
                         TexParticle="Data/Textures/texturas particulas/explosprite.dds"/>
         </Animateds>
-    </ParticleEmitter> 
+    </ParticleEmitter> -->
 
-      <ParticleEmitter  id="fumfoc1"                        MinEmitRate="40.0"             MaxEmitRate="40.0"
-                        Color1="1.0 1.0 1.0 0.0"            Color2="0.0 0.0 0.0 0.0"       MinSize="1.0"        MaxSize="2.0"
-                             Life1="7.0"          Life2="7.0"
-                        Gravity="0.0 0.0 0.0"             Velocitate="1.0 1.0 1.0"         TexParticle="Data/Textures/texturas particulas/smoke4.dds">
-        <Colors>
+      <ParticleEmitter  id="FumMenjar"                        MinEmitRate="7.0"             MaxEmitRate="10.0"
+                        Color1="1.0 1.0 1.0 0.5"            Color2="1.0 1.0 1.0 0.5"       MinSize="0.2"        MaxSize="0.5"
+                             Life1="5.0"          Life2="5.0"  Bucle="true"   Angle1="-0.5"  Angle2="0.5"
+                        Gravity="0.0 0.0 0.0"             Velocitate="0.7 0.2 0.7"         TexParticle="Data/Textures/texturas particulas/smoketest2.dds">
+       <!-- <Colors>
           <Color        time="1.5"        Color1="0.42 0.42 0.42 0.07"       Color2="0.44 0.44 0.44 0.08"/>
           <Color        time="2.0"        Color1="0.39 0.39 0.39 0.22"       Color2="0.41 0.41 0.41 0.24"/>
           <Color        time="4.0"        Color1="0.43 0.43 0.43 0.20"       Color2="0.44 0.44 0.44 0.21"/>
           <Color        time="6.0"        Color1="1.0 1.0 1.0 0.0"           Color2="1.0 1.0 1.0 0.0"/>
         </Colors>-->
+        </ParticleEmitter>
 
-       <!-- <Directions>
+      <!-- <Directions>
           <Direction    time="1.5"        Direction1="-0.4 0.2 -0.4"         Direction2="0.4 1.2 0.4"/>
           <Direction    time="3.0"        Direction1="-0.4 0.2 -0.4"         Direction2="0.4 1.2 0.4"/>
           <Direction    time="4.5"        Direction1="-0.4 0.2 -0.4"         Direction2="0.4 1.2 0.4"/>
           <Direction    time="6.5"        Direction1="-0.4 0.2 -0.4"         Direction2="0.4 1.2 0.4"/>
         </Directions>                   
-      </ParticleEmitter>--> 
+      </ParticleEmitter>
    
 
-      <ParticleEmitter  id="boira"                    MinEmitRate="10.0"             MaxEmitRate="15.0"
+      <ParticleEmitter  id="boira"                    MinEmitRate="1.0"             MaxEmitRate="1.0"
                         Color1="1.0 1.0 1.0 0.0"          Color2="1.0 1.0 1.0 0.0"       MinSize="1.5"        MaxSize="2.0"
                         Life1="7.0"          Life2="7.0"   Angle1="-0.5"  Angle2="0.5"
-                        Gravity="0.0 0.0 0.0"             Velocitate="0.2 0.2 0.2"       Bucle="true"
+                        Gravity="0.0 0.0 0.0"             Velocitate="0.2 0.2 0.2"       Bucle="false"   NumBucle="1"
                         TexParticle="Data/Textures/texturas particulas/DustPoof.dds">
         <Colors>
-          <Color        time="1.5"       timeInterpolation="1.5"   Color1="1.0 1.0 1.0 0.1"          Color2="1.0 1.0 1.0 0.1"/>
-          <Color        time="3.0"       timeInterpolation="1.5"   Color1="1.0 1.0 1.0 0.2"          Color2="1.0 1.0 1.0 0.2"/>
-          <Color        time="4.5"       timeInterpolation="1.5"   Color1="1.0 1.0 1.0 0.1"          Color2="1.0 1.0 1.0 0.1"/>
+          <Color        time="1.5"       timeInterpolation="1.5"   Color1="1.0 1.0 1.0 0.5"          Color2="1.0 1.0 1.0 0.5"/>
+          <Color        time="3.0"       timeInterpolation="1.5"   Color1="1.0 1.0 1.0 1.0"          Color2="1.0 1.0 1.0 1.0"/>
+          <Color        time="4.5"       timeInterpolation="1.5"   Color1="1.0 1.0 1.0 0.5"          Color2="1.0 1.0 1.0 0.5"/>
           <Color        time="6.0"       timeInterpolation="1.5"   Color1="1.0 1.0 1.0 0.0"          Color2="1.0 1.0 1.0 0.0"/>
         </Colors> 
         
-      </ParticleEmitter>
+      </ParticleEmitter>--> 
 
     <!-- <ParticleEmitter  id="magia1"                        MinEmitRate="5.0"             MaxEmitRate="10.0"
                         Color1="0.0 0.0 0.0 0.0"           Color2="0.0 0.0 0.0 0.0"      MinSize="0.3"        MaxSize="0.8"
@@ -146,12 +147,22 @@
                           Direction="0.2 0.4 0.2"         Desviacion="0.1 0.1 0.1"/>
     <InstanceParticle id="bombolles2"              type="bombolles"    FormEmitter="plane"     sizeX="7.07905"  sizeY="0.318732"  sizeZ="2.82401"          Position="5.0  0.0  0.0"
                          Direction="0.2 0.1 0.2"         Desviacion="0.1 0.1 0.1"/>-->  
-    <ParticleEmitterInstance id="boiraPla1" type="boira" position="3.11534 0.0 -8.56151" FormEmitter="dummy" sizeX="9.84748"  sizeY="0.241536"  sizeZ="5.02976" Direction="0.2 0.1 0.2" Desviacion="0.1 0.1 0.1"/>
-       
+  <!--   <ParticleEmitterInstance id="boiraPla1" type="boira" position="3.11534 0.0 -8.56151" FormEmitter="dummy" sizeX="9.84748"  sizeY="0.241536"  sizeZ="5.02976" Direction="0.2 0.1 0.2" Desviacion="0.1 0.1 0.1"/>
+   <ParticleEmitterInstance id="efecte_fred" type="efecte_fred" position="-5.75139 0.0 -10.6496" FormEmitter="dummy" sizeX="1.7593" sizeY="0.338507" sizeZ="0.338507" Direction="0.2 0.4 0." />
+    <ParticleEmitterInstance id="efecte_fred01" type="efecte_fred" position="-14.645 0.0 -6.84371" FormEmitter="dummy" sizeX="1.7593" sizeY="0.338507" sizeZ="0.338507" Direction="0.0 1.0 0.0" />-->
+    <ParticleEmitterInstance id="FumMenjar1" type="FumMenjar" position="14.0028 1.10657 24.48" FormEmitter="dummy" sizeX="0.160256" sizeY="0.30256" sizeZ="0.160256"  Direction="0.0 1.0 0.0" Desviacion="0.1 0.2 0.1" />
+    <ParticleEmitterInstance id="FumMenjar2" type="FumMenjar" position="12.4031 1.10657 25.218" FormEmitter="dummy" sizeX="0.160256" sizeY="0.25256" sizeZ="0.160256" Direction="0.0 1.0 0.0" Desviacion="0.1 0.2 0.1" />
+    <ParticleEmitterInstance id="FumMenjar3" type="FumMenjar" position="10.7203 1.10657 25.9327" FormEmitter="dummy" sizeX="0.160256" sizeY="0.20256" sizeZ="0.160256" Direction="0.0 1.0 0.0" Desviacion="0.1 0.2 0.1" />
+
+
     <!--   <InstanceParticle id="magia"                  type="magia1"                      Position="12.0  0.0  13.0"/>
     <InstanceParticle id="magia2"                 type="magia2"                      Position="12.0  0.0  13.0"/>
     <InstanceParticle id="font1"                 type="fontAigua"                    Position="5.0  0.0  5.0"/>-->
- 
+    
+    
+    
+
+
   </InstanceParticles>
   
 </Particles>

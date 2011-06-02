@@ -4,6 +4,7 @@
 #include "ParticleEmitter.h"
 #include <base.h>
 #include "BillBoard.h"
+#include "EntityManager.h"
 
 
 //Forward declarations---------------------
@@ -11,6 +12,8 @@ class CObject3D;
 class CRenderManager;
 class CRenderableObject;
 //class CBillBoard;
+class CPhysicUserData;
+class CPhysicActor;
 
 //-----------------------------------------
 
@@ -30,7 +33,10 @@ public:
                       B(7.f, 0.f, 1.f),
                       l_VUp(3.f, 4.f, 5.f),
                       m_Position(9.f, 2.f, 6.f),
-                      m_vDemoObj(2.f, 2.f,3.f )
+                      m_vDemoObj(2.f, 2.f,3.f ),
+                      m_pPlayerEntity(0),
+                      m_pUserData(0),
+                      m_pPActorPlane(0)
                       {};
                       
 
@@ -60,6 +66,10 @@ private:
   bool                  m_bRenderLights;
   float                 m_fPhysxVelocity;
   CBillBoard            m_pBillBoard;
+  CGameEntity*          m_pPlayerEntity;
+  CPhysicUserData*      m_pUserData;
+  CPhysicActor*         m_pPActorPlane;
+
   Vect3f m_PointA;
   Vect3f m_PointB;
   Vect3f m_PointC;

@@ -131,140 +131,136 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
   //2.] Si es temps de crear particules noves fer-ho:
   
   
-  
-	int iNumNewParts = 0;
-	float fEmitRateThisFrame = RandomNumber(m_fMinEmitRate, m_fMaxEmitRate);
-	m_fNumNewPartsExcess = (fEmitRateThisFrame * fElapsedTime)+ m_fNumNewPartsExcess;
-  
-	if(m_fNumNewPartsExcess > 1.0f)
-	{
-		iNumNewParts = (int)m_fNumNewPartsExcess;
-		m_fNumNewPartsExcess = m_fNumNewPartsExcess - (int)m_fNumNewPartsExcess;
-	}
-  
-  if(m_bBucleInfinit==false && m_bActive==true)
+  if(m_bBucleInfinit==true || m_iNumBucle>0)
   {
-    m_iNumBucle--;
-    if(m_iNumBucle<=0)
-    {
-      iNumNewParts=0;
-    }
-  }
+	  int iNumNewParts = 0;
+    float fEmitRateThisFrame = RandomNumber(m_fMinEmitRate, m_fMaxEmitRate);
+	  m_fNumNewPartsExcess = (fEmitRateThisFrame * fElapsedTime)+ m_fNumNewPartsExcess;
+  
+	  if(m_fNumNewPartsExcess > 1.0f)
+	  {
+		  iNumNewParts = (int)m_fNumNewPartsExcess;
+		  m_fNumNewPartsExcess = m_fNumNewPartsExcess - (int)m_fNumNewPartsExcess;
+      m_iNumBucle--;
+	  }
+  
+    
+    
 
-
-  for (int q=0; q < iNumNewParts; q++)
-	{
-		// Si hay espacio para una nueva partícula:
-		if (m_Particles.GetNumFreeElements() > 0)
-		{
-		  CParticle* part =m_Particles.New();
+    for (int q=0; q < iNumNewParts; q++)
+	  {
+		  // Si hay espacio para una nueva partícula:
+		  if (m_Particles.GetNumFreeElements() > 0)
+		  {
+		    CParticle* part =m_Particles.New();
      
       
       
 
-		  // determina el random de la vida de cada particula
-		  float fRandLife = RandomNumber(m_fLife1,m_fLife2);
-		  part->SetLifeTimer(fRandLife);
+		    // determina el random de la vida de cada particula
+		    float fRandLife = RandomNumber(m_fLife1,m_fLife2);
+		    part->SetLifeTimer(fRandLife);
 
-		  // determina el random del tamany de la particula
-		  float fRandSize = RandomNumber(m_fMinSize,m_fMaxSize);
-		  part->SetSize(fRandSize);
+		    // determina el random del tamany de la particula
+		    float fRandSize = RandomNumber(m_fMinSize,m_fMaxSize);
+		    part->SetSize(fRandSize);
 
-		  float fRandAngle = RandomNumber(m_fAngle1,m_fAngle2);
-		  part->SetAngle(fRandAngle);
+		    float fRandAngle = RandomNumber(m_fAngle1,m_fAngle2);
+		    part->SetAngle(fRandAngle);
       
-		  float l_iIncrementAngle= RandomNumber(0.0f,120.0f);
-		  part->SetInitAngle(l_iIncrementAngle);
+		    float l_iIncrementAngle= RandomNumber(0.0f,120.0f);
+		    part->SetInitAngle(l_iIncrementAngle);
       
 
-		  //*****************
-		  //es guarda en un vector totes les direccions que tindra la particula durant el seu temps de vida
-			  //ja amb el valor calculat	(fet el random) 
+		    //*****************
+		    //es guarda en un vector totes les direccions que tindra la particula durant el seu temps de vida
+			    //ja amb el valor calculat	(fet el random) 
 	 
      
-		  int i=m_vTimeDirection.size()-1;
-		  while(i>=0)
-		  {
-			  float fRandX = RandomNumber(m_vDirection[i*2].x, m_vDirection[(i*2)+1].x);
-			  float fRandY = RandomNumber(m_vDirection[i*2].y, m_vDirection[(i*2)+1].y);
-			  float fRandZ = RandomNumber(m_vDirection[i*2].z, m_vDirection[(i*2)+1].z);
+		    int i=m_vTimeDirection.size()-1;
+		    while(i>=0)
+		    {
+			    float fRandX = RandomNumber(m_vDirection[i*2].x, m_vDirection[(i*2)+1].x);
+			    float fRandY = RandomNumber(m_vDirection[i*2].y, m_vDirection[(i*2)+1].y);
+			    float fRandZ = RandomNumber(m_vDirection[i*2].z, m_vDirection[(i*2)+1].z);
         		    
         
-				  m_vNewDirection[i] = D3DXVECTOR3(fRandX, fRandY, fRandZ);
-				  i--;
+				    m_vNewDirection[i] = D3DXVECTOR3(fRandX, fRandY, fRandZ);
+				    i--;
         
-		  }	  
-		  part->m_vTimeDirection = m_vTimeDirection;
-		  part->m_vDirection = m_vNewDirection;
-		  part->m_vTimeDirectionInterpolation = m_vTimeDirectionInterpolation;
+		    }	  
+		    part->m_vTimeDirection = m_vTimeDirection;
+		    part->m_vDirection = m_vNewDirection;
+		    part->m_vTimeDirectionInterpolation = m_vTimeDirectionInterpolation;
 
-		  //es guarda en un vector tots els colors que tindra la particula durant el seu temps de vida
-			  //ja amb el valor calculat	  
-		  /* j=m_vTimeColor.size();
-		  while(j!=0)
-		  {
-			  m_vNewColor.push_back(m_Color1);
-			  j--;
-		  }*/
-		  i=m_vTimeColor.size()-1;
-		  while(i>=0)
-		  {
+		    //es guarda en un vector tots els colors que tindra la particula durant el seu temps de vida
+			    //ja amb el valor calculat	  
+		    /* j=m_vTimeColor.size();
+		    while(j!=0)
+		    {
+			    m_vNewColor.push_back(m_Color1);
+			    j--;
+		    }*/
+		    i=m_vTimeColor.size()-1;
+		    while(i>=0)
+		    {
        
         
-			  float fRandR = RandomNumber(m_vColor[i*2].r, m_vColor[(i*2)+1].r);
-			  float fRandG = RandomNumber(m_vColor[i*2].g, m_vColor[(i*2)+1].g);
-			  float fRandB = RandomNumber(m_vColor[i*2].b, m_vColor[(i*2)+1].b);
-			  float fRandA = RandomNumber(m_vColor[i*2].a, m_vColor[(i*2)+1].a);
+			    float fRandR = RandomNumber(m_vColor[i*2].r, m_vColor[(i*2)+1].r);
+			    float fRandG = RandomNumber(m_vColor[i*2].g, m_vColor[(i*2)+1].g);
+			    float fRandB = RandomNumber(m_vColor[i*2].b, m_vColor[(i*2)+1].b);
+			    float fRandA = RandomNumber(m_vColor[i*2].a, m_vColor[(i*2)+1].a);
 		    
         
-			  m_vNewColor[i]= D3DXCOLOR(fRandR, fRandG, fRandB, fRandA);
-			  i--;
+			    m_vNewColor[i]= D3DXCOLOR(fRandR, fRandG, fRandB, fRandA);
+			    i--;
         
-		  }	
-      D3DXVECTOR3 l_vPos_aux;
-      if(m_szFormEmitter=="line")
-		  {
-		  	  l_vPos_aux.x = m_vPos.x+RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
-          l_vPos_aux.y=m_vPos.y;
-          l_vPos_aux.z=m_vPos.z;
-		  }
-		  if(m_szFormEmitter=="plane")
-		  {
-		  	  l_vPos_aux.x = m_vPos.x+RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
-          l_vPos_aux.y=m_vPos.y;
-          l_vPos_aux.z = m_vPos.z+RandomNumber(m_vPosFormEmitter.z/-2,m_vPosFormEmitter.z/2);
-		  }
-		  if(m_szFormEmitter=="dummy")
-		  {
+		    }	
+        D3DXVECTOR3 l_vPos_aux;
+        if(m_szFormEmitter=="line")
+		    {
+		  	    l_vPos_aux.x = m_vPos.x+RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
+            l_vPos_aux.y=m_vPos.y;
+            l_vPos_aux.z=m_vPos.z;
+		    }
+		    if(m_szFormEmitter=="plane")
+		    {
+		  	    l_vPos_aux.x = m_vPos.x+RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
+            l_vPos_aux.y=m_vPos.y;
+            l_vPos_aux.z = m_vPos.z+RandomNumber(m_vPosFormEmitter.z/-2,m_vPosFormEmitter.z/2);
+		    }
+		    if(m_szFormEmitter=="dummy")
+		    {
 		  
-		  	  l_vPos_aux.x = m_vPos.x+RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
-          l_vPos_aux.y = m_vPos.y+RandomNumber(m_vPosFormEmitter.y/-2,m_vPosFormEmitter.y/2);
-          l_vPos_aux.z = m_vPos.z+RandomNumber(m_vPosFormEmitter.z/-2,m_vPosFormEmitter.z/2);
-		  }
-		  part->SetGravity(m_vGravity);
-		  part->SetVel(m_vVel);
-		  part->m_vTimeColor = m_vTimeColor;
-		  part->m_vTimeColorInterpolation = m_vTimeColorInterpolation;
-		  part->m_vColor = m_vNewColor;
-		  //part->SetAngle(m_fAngle);
-		  part->SetPos(l_vPos_aux);
+		  	    l_vPos_aux.x = m_vPos.x+RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
+            l_vPos_aux.y = m_vPos.y+RandomNumber(m_vPosFormEmitter.y/-2,m_vPosFormEmitter.y/2);
+            l_vPos_aux.z = m_vPos.z+RandomNumber(m_vPosFormEmitter.z/-2,m_vPosFormEmitter.z/2);
+		    }
+		    part->SetGravity(m_vGravity);
+		    part->SetVel(m_vVel);
+		    part->m_vTimeColor = m_vTimeColor;
+		    part->m_vTimeColorInterpolation = m_vTimeColorInterpolation;
+		    part->m_vColor = m_vNewColor;
+		    //part->SetAngle(m_fAngle);
+		    part->SetPos(l_vPos_aux);
 
-		  part->SetAnimated(m_bAnimated);
-		  part->m_vFilesColumnes=m_vFilesColumnes;
-		  part->m_vTimeAnimated = m_vTimeAnimated;
-		  part->m_vTimeAnimatedInterpolation = m_vTimeAnimatedInterpolation;
-		  part->SetTexParticle(m_pTexParticle);
-      //retorna el valor de la textura. Aixo serveix per si vol canviar de textura una particula ja creada
-      m_pTexParticle=part->GetTexParticle();
+		    part->SetAnimated(m_bAnimated);
+		    part->m_vFilesColumnes=m_vFilesColumnes;
+		    part->m_vTimeAnimated = m_vTimeAnimated;
+		    part->m_vTimeAnimatedInterpolation = m_vTimeAnimatedInterpolation;
+		    part->SetTexParticle(m_pTexParticle);
+        //retorna el valor de la textura. Aixo serveix per si vol canviar de textura una particula ja creada
+        m_pTexParticle=part->GetTexParticle();
 
-		  //**************************
-		  /*if(m_bAnimated)
-		  {
-			  part->m_vFilesColumnes=m_vFilesColumnes;
-			  part->m_vTimeAnimated = m_vTimeAnimated;
-		  }*/
-    }
-	}
+		    //**************************
+		    /*if(m_bAnimated)
+		    {
+			    part->m_vFilesColumnes=m_vFilesColumnes;
+			    part->m_vTimeAnimated = m_vTimeAnimated;
+		    }*/
+      }
+	  }
+  }
 }
   
 void CParticleEmitter::Init(CRenderManager* rm)
