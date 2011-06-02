@@ -13,6 +13,7 @@
 #include "GlowTextureDecorator.h"
 #include "ParallaxPropertyDecorator.h"
 #include "BumpPropertyDecorator.h"
+#include "GlowPropertyDecorator.h"
 
 #include <cal3d/cal3d.h>
 #include <XML/XMLTreeNode.h>
@@ -166,6 +167,9 @@ bool CAnimatedCoreModel::Load(const std::string &_szPath)
             } else if(l_szTexType == "bump")
             {
               l_pMaterial = new CBumpPropertyDecorator(l_pMaterial,l_fValue);
+            } else if(l_szTexType == "glowIntensity")
+            {
+              l_pMaterial = new CGlowPropertyDecorator(l_pMaterial,l_fValue);
             }
           }
 

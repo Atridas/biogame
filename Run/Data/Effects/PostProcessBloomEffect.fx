@@ -2,7 +2,7 @@
 
 float4 PostProcessBloomPS(float2 _UV: TEXCOORD0) : COLOR
 {
-  return tex2D(PrevFilterSampler, _UV );
+  return tex2D(PrevFilterSampler, _UV ) * g_GlowBlurIntensity;
 }
 
 technique PostProcessBloomTechnique

@@ -39,4 +39,3 @@ float g_GaussianKernel[7] = { 0.3989422804,
 
 
 
-

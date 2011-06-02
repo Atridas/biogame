@@ -11,6 +11,10 @@ public:
   virtual float GetBump()              const {return m_pDecoratedMaterial->GetBump();};
   virtual float GetGlossiness()        const {return m_pDecoratedMaterial->GetGlossiness();};
   virtual float GetSpecularFactor()    const {return m_pDecoratedMaterial->GetSpecularFactor();};
+  virtual float GetGlowIntensity()     const {return m_pDecoratedMaterial->GetGlowIntensity();};
+
+  virtual void SetGlowIntensity(const float& _fGlowIntensity) {m_pDecoratedMaterial->SetGlowIntensity(_fGlowIntensity);};
+
   virtual bool  HasAlphaBlending()     const { return m_pDecoratedMaterial->HasAlphaBlending(); };
   virtual bool  HasSpecularParameters() const { return m_pDecoratedMaterial->HasSpecularParameters(); };
 

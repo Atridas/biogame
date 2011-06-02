@@ -202,7 +202,7 @@ bool CStaticMesh::Load()
           l_pMaterial = new CSpecularPropertyDecorator(l_pMaterial,l_fGlossiness,l_fSpecularLevel);
           break;
         case ALPHA_PROPERTY_TYPE:
-          l_pMaterial = new CAlphaDecorator( l_pMaterial );
+          l_pMaterial = new CAlphaPropertyDecorator( l_pMaterial );
           break;
         default:
           break;

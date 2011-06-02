@@ -205,6 +205,9 @@
     <Filter Include="Portalling\PortalManager">
       <UniqueIdentifier>{baee1e65-9ac4-4bbb-8cea-7c7cad125267}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Materials\MaterialDecorators\PropertyDecorators\GlowDecorator">
+      <UniqueIdentifier>{2d472e9e-657f-4c9d-bd4b-900f5e314477}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -532,6 +535,9 @@
     </ClInclude>
     <ClInclude Include="include\PortalManager.h">
       <Filter>Portalling\PortalManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GlowPropertyDecorator.h">
+      <Filter>Materials\MaterialDecorators\PropertyDecorators\GlowDecorator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

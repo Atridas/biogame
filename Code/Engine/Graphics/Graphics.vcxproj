@@ -159,6 +159,7 @@
     <ClInclude Include="include\FontManager.h" />
     <ClInclude Include="include\FPSCamera.h" />
     <ClInclude Include="include\Frustum.h" />
+    <ClInclude Include="include\GlowPropertyDecorator.h" />
     <ClInclude Include="include\GlowTextureDecorator.h" />
     <ClInclude Include="include\HDRPipeline.h" />
     <ClInclude Include="include\IndexedVertexs.h" />
