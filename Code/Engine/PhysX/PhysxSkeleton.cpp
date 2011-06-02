@@ -141,15 +141,15 @@ bool CPhysxSkeleton::InitPhysXJoints(string _szFileName)
       if (l_szActor2=="NULL")
       {
         l_pActor1 = l_pBone1->GetPhysxActor();
-        l_pSphericalJoint->SetInfo(l_vJointPointMiddle,l_pActor1);
-        //l_pSphericalJoint->SetInfoComplete(l_vJointPointMiddle,/*Vect3f(1.0f,0.0f,0.0f)*/l_vAxis,l_pActor1);
+        //l_pSphericalJoint->SetInfo(l_vJointPointMiddle,l_pActor1);
+        l_pSphericalJoint->SetInfoComplete(l_vJointPointMiddle,/*Vect3f(1.0f,0.0f,0.0f)*/l_vAxis,l_pActor1);
       }
       else
       {
         l_pActor1 = l_pBone1->GetPhysxActor();
         l_pActor2 = l_pBone2->GetPhysxActor();
-        l_pSphericalJoint->SetInfo(l_vJointPointMiddle,l_pActor1,l_pActor2);
-        //l_pSphericalJoint->SetInfoComplete(l_vJointPointMiddle,/*Vect3f(1.0f,0.0f,0.0f)*/l_vAxis,l_pActor1,l_pActor2);
+        //l_pSphericalJoint->SetInfo(l_vJointPointMiddle,l_pActor1,l_pActor2);
+        l_pSphericalJoint->SetInfoComplete(l_vJointPointMiddle,/*Vect3f(1.0f,0.0f,0.0f)*/l_vAxis,l_pActor1,l_pActor2);
       }
       CORE->GetPhysicsManager()->AddPhysicSphericalJoint(l_pSphericalJoint);
       m_vSphericalJoints.push_back(l_pSphericalJoint);
