@@ -10,11 +10,139 @@
 #include "ComponentPhysXBox.h"
 #include "ComponentPhysXMesh.h"
 #include "ComponentRenderableObject.h"
+#include "ComponentTrigger.h"
 
 #include "base.h"
 #include "Core.h"
 
 #include <XML/XMLTreeNode.h>
+
+
+void LoadComponentObject3D(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
+{
+  LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCreant component d'Object3D.");
+  CComponentObject3D *l_pComponentObject3D = new CComponentObject3D();
+  if(l_pComponentObject3D->Init(_pEntity))
+  {
+    Vect3f l_vPos   = _TreeComponent.GetVect3fProperty("position", Vect3f(0,0,0), false);
+    float  l_fYaw   = _TreeComponent.GetFloatProperty("yaw"  , 0.0f, false);
+    float  l_fPitch = _TreeComponent.GetFloatProperty("pitch", 0.0f, false);
+    float  l_fRoll  = _TreeComponent.GetFloatProperty("roll" , 0.0f, false);
+                
+    l_pComponentObject3D->SetPosition(l_vPos);
+    l_pComponentObject3D->SetYaw(l_fYaw);
+    l_pComponentObject3D->SetPitch(l_fPitch);
+    l_pComponentObject3D->SetRoll(l_fRoll);
+  } else
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
+    delete l_pComponentObject3D;
+  }
+}
+
+void LoadComponentRenderableObject(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
+{
+  if(_TreeComponent.ExistsProperty("name"))
+  {
+    LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCreant component de Renderable Object amb nom \"%s\".", _TreeComponent.GetPszISOProperty("name").c_str());
+    CComponentRenderableObject *l_pComponentRenderableObject = new CComponentRenderableObject();
+    if(!l_pComponentRenderableObject->Init(_pEntity, _TreeComponent.GetPszISOProperty("name")))
+    {
+      LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
+      delete l_pComponentRenderableObject;
+    }
+  } else
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"\t\tFalta parametre \"name\".");
+  }
+}
+
+void LoadComponentPhysXBox(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
+{
+  float l_fDensity = _TreeComponent.GetFloatProperty("density", 0.f, false);
+
+  //TODO mascares
+  int l_iCollisionMask = 0;
+
+  if(strcmp(_TreeComponent.GetPszISOProperty("fromRenderableObject").c_str(),"true") == 0)
+  {
+    LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant Box física des del Renderable Object.");
+    CComponentPhysXBox* l_pComponentPhysXBox = new CComponentPhysXBox();
+    if(!l_pComponentPhysXBox->Init(_pEntity, l_fDensity, l_iCollisionMask))
+    {
+      LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
+      delete l_pComponentPhysXBox;
+    }
+  } else if(strcmp(_TreeComponent.GetPszISOProperty("fromRenderableObject").c_str(),"false") == 0)
+  {
+    LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant Box física des de XML.");
+    Vect3f l_vMidpoint = _TreeComponent.GetVect3fProperty("midpoint", Vect3f(), true);
+    Vect3f l_vSize = _TreeComponent.GetVect3fProperty("size", Vect3f(1), true);
+
+    CComponentPhysXBox* l_pComponentPhysXBox = new CComponentPhysXBox();
+    if(!l_pComponentPhysXBox->Init( _pEntity, 
+                                    l_vSize.x, l_vSize.y, l_vSize.z,
+                                    l_vMidpoint.x, l_vMidpoint.y, l_vMidpoint.z,
+                                    l_fDensity, l_iCollisionMask)
+      )
+    {
+      LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
+      delete l_pComponentPhysXBox;
+    }
+  } else
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"\t\tParametre \"fromRenderableObject\" incorrecte.");
+  }
+}
+
+void LoadComponentPhysXMesh(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
+{
+  float l_fDensity = _TreeComponent.GetFloatProperty("density", 0.f, false);
+
+  //TODO mascares
+  int l_iCollisionMask = 0;
+
+  LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant Mesh física des del Renderable Object.");
+  CComponentPhysXMesh* l_pComponentPhysXMesh = new CComponentPhysXMesh();
+  if(!l_pComponentPhysXMesh->Init(_pEntity, l_fDensity, l_iCollisionMask))
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
+    delete l_pComponentPhysXMesh;
+  }
+}
+
+
+void LoadComponentTrigger(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
+{
+  LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant Trigger.");
+  
+  //TODO mascares
+  int l_iCollisionMask = 0;
+  Vect3f l_vSize = _TreeComponent.GetVect3fProperty("size", Vect3f(1), true);
+  string l_szOnEnter = _TreeComponent.GetPszISOProperty("onEnter", "", false);
+  string l_szOnExit = _TreeComponent.GetPszISOProperty("onExit", "", false);
+  
+  LOGGER->AddNewLog(ELL_INFORMATION,"\t\t\t Enter = \"%s\" Exit = \"%s\".",l_szOnEnter.c_str(), l_szOnExit.c_str());
+
+
+  if(l_szOnEnter == "" && l_szOnExit == "")
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"\t\t\tTrigger sense cap script!.");
+  }
+
+  CComponentTrigger* l_pComponentTrigger = new CComponentTrigger();
+
+  if(!l_pComponentTrigger->Init(_pEntity, l_vSize, l_szOnEnter, l_szOnExit, l_iCollisionMask))
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
+    delete l_pComponentTrigger;
+  }
+}
+
+
+
+
+
 
 void LoadEntitiesFromXML(const string& _szFile)
 {
@@ -25,7 +153,7 @@ void LoadEntitiesFromXML(const string& _szFile)
   CXMLTreeNode l_TreeEntities;
   if(!l_TreeEntities.LoadFile(_szFile.c_str()))
   {
-    LOGGER->AddNewLog(ELL_WARNING,"\tNo s'ha trobat el Fitxer");
+    LOGGER->AddNewLog(ELL_ERROR,"\tNo s'ha trobat el Fitxer");
   } else 
   {
     //llegir XML
@@ -59,85 +187,27 @@ void LoadEntitiesFromXML(const string& _szFile)
             // ----------------- Object 3D ------------------------------------------------------------------------------
             if(strcmp(l_TreeComponent.GetName(),"Object3D") == 0)
             {
-              LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCreant component d'Object3D.");
-              CComponentObject3D *l_pComponentObject3D = new CComponentObject3D();
-              if(l_pComponentObject3D->Init(l_pEntity))
-              {
-                Vect3f l_vPos   = l_TreeComponent.GetVect3fProperty("position", Vect3f(0,0,0), false);
-                float  l_fYaw   = l_TreeComponent.GetFloatProperty("yaw"  , 0.0f, false);
-                float  l_fPitch = l_TreeComponent.GetFloatProperty("pitch", 0.0f, false);
-                float  l_fRoll  = l_TreeComponent.GetFloatProperty("roll" , 0.0f, false);
-                
-                l_pComponentObject3D->SetPosition(l_vPos);
-                l_pComponentObject3D->SetYaw(l_fYaw);
-                l_pComponentObject3D->SetPitch(l_fPitch);
-                l_pComponentObject3D->SetRoll(l_fRoll);
-              } else
-              {
-                LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
-                delete l_pComponentObject3D;
-              }
+              LoadComponentObject3D(l_TreeComponent, l_pEntity);
               
             // ----------------- Renderable Object ----------------------------------------------------------------------
             } else if(strcmp(l_TreeComponent.GetName(),"RenderableObject") == 0)
             {
-              if(l_TreeComponent.ExistsProperty("name"))
-              {
-                LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCreant component de Renderable Object amb nom \"%s\".", l_TreeComponent.GetPszISOProperty("name").c_str());
-                CComponentRenderableObject *l_pComponentRenderableObject = new CComponentRenderableObject();
-                if(!l_pComponentRenderableObject->Init(l_pEntity, l_TreeComponent.GetPszISOProperty("name")))
-                {
-                  LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
-                  delete l_pComponentRenderableObject;
-                }
-              } else
-              {
-                LOGGER->AddNewLog(ELL_WARNING,"\t\tFalta parametre \"name\".");
-              }
+              LoadComponentRenderableObject(l_TreeComponent, l_pEntity);
               
             // ----------------- PhysX Box ------------------------------------------------------------------------------
             } else if(strcmp(l_TreeComponent.GetName(),"PhysXBox") == 0)
             {
-              float l_fDensity = l_TreeComponent.GetFloatProperty("density", 0.f, false);
-
-              //TODO mascares
-              int l_iCollisionMask = 0;
-
-              if(strcmp(l_TreeComponent.GetPszISOProperty("fromRenderableObject").c_str(),"true") == 0)
-              {
-                LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant Box física des del Renderable Object.");
-                CComponentPhysXBox* l_pComponentPhysXBox = new CComponentPhysXBox();
-                if(!l_pComponentPhysXBox->Init(l_pEntity, l_fDensity, l_iCollisionMask))
-                {
-                  LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
-                  delete l_pComponentPhysXBox;
-                }
-              } else if(strcmp(l_TreeComponent.GetPszISOProperty("fromRenderableObject").c_str(),"false") == 0)
-              {
-                LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant Box física des de XML.");
-                //TODO
-                LOGGER->AddNewLog(ELL_WARNING,"\t\t\tCarregar box no implementat!");
-              } else
-              {
-                LOGGER->AddNewLog(ELL_WARNING,"\t\tParametre \"fromRenderableObject\" incorrecte.");
-              }
+              LoadComponentPhysXBox(l_TreeComponent, l_pEntity);
 
             // ----------------- PhysX Mesh -----------------------------------------------------------------------------
             } else if(strcmp(l_TreeComponent.GetName(),"PhysXMesh") == 0)
             {
-              float l_fDensity = l_TreeComponent.GetFloatProperty("density", 0.f, false);
+              LoadComponentPhysXMesh(l_TreeComponent, l_pEntity);
 
-              //TODO mascares
-              int l_iCollisionMask = 0;
-
-              LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant Mesh física des del Renderable Object.");
-              CComponentPhysXMesh* l_pComponentPhysXMesh = new CComponentPhysXMesh();
-              if(!l_pComponentPhysXMesh->Init(l_pEntity, l_fDensity, l_iCollisionMask))
-              {
-                LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
-                delete l_pComponentPhysXMesh;
-              }
-              
+            // ----------------- Trigger --------------------------------------------------------------------------------
+            } else if(strcmp(l_TreeComponent.GetName(),"Trigger") == 0)
+            {
+              LoadComponentTrigger(l_TreeComponent, l_pEntity);
 
             // -----------------------------------------------------------------------------------------------------------
             } else if(!l_TreeComponent.IsComment())

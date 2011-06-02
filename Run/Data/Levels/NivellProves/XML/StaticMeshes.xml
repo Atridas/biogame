@@ -2,9 +2,24 @@
 <meshes>
 	<mesh name="Habitacio3" path="Data/Meshes/Habitacio3.mesh" max="66.8544 3.45273 49.6658" min="28.5196 0.0 -49.6658" />
 	<mesh name="Habitacio2" path="Data/Meshes/Habitacio2.mesh" max="28.684 3.45273 49.6658" min="-38.1271 -0.654876 -49.6658" />
-	<mesh name="Covertura petita" path="Data/Meshes/Covertura petita.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
-	<mesh name="Covertura Grossa" path="Data/Meshes/Covertura Grossa.mesh" max="1.0 1.5 1.0" min="-1.0 0.0 -1.0" />
+	<mesh name="LowCover" path="Data/Meshes/LowCover.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
+	<mesh name="HighCover" path="Data/Meshes/HighCover.mesh" max="1.0 1.5 1.0" min="-1.0 0.0 -1.0" />
+	<mesh name="LowCover01" path="Data/Meshes/LowCover01.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
+	<mesh name="LowCover02" path="Data/Meshes/LowCover02.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
+	<mesh name="LowCover03" path="Data/Meshes/LowCover03.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
+	<mesh name="LowCover04" path="Data/Meshes/LowCover04.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
+	<mesh name="HighCover01" path="Data/Meshes/HighCover01.mesh" max="1.0 1.5 1.0" min="-1.0 0.0 -1.0" />
+	<mesh name="LowCover05" path="Data/Meshes/LowCover05.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
+	<mesh name="LowCover06" path="Data/Meshes/LowCover06.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
 	<mesh name="Wall" path="Data/Meshes/Wall.mesh" max="0.642471 3.97046 2.7743" min="-0.642471 0.0 -2.7743" />
+	<mesh name="HighCover02" path="Data/Meshes/HighCover02.mesh" max="1.0 1.5 1.0" min="-1.0 0.0 -1.0" />
+	<mesh name="LowCover07" path="Data/Meshes/LowCover07.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
+	<mesh name="HighCover03" path="Data/Meshes/HighCover03.mesh" max="0.926979 1.5 1.37512" min="-0.926975 0.0 -1.37512" />
+	<mesh name="LowCover08" path="Data/Meshes/LowCover08.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
+	<mesh name="HighCover04" path="Data/Meshes/HighCover04.mesh" max="1.31041 1.5 0.950604" min="-1.31041 0.0 -0.950605" />
+	<mesh name="LowCover09" path="Data/Meshes/LowCover09.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
+	<mesh name="LowCover10" path="Data/Meshes/LowCover10.mesh" max="0.649765 1.0 0.477043" min="-0.649767 0.0 -0.477043" />
+	<mesh name="LowCover11" path="Data/Meshes/LowCover11.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
 	<mesh name="Llum" path="Data/Meshes/Llum.mesh" max="1.5527 2.0 0.842842" min="-1.5527 0.606994 -0.842842" />
 	<mesh name="BoxGlow" path="Data/Meshes/BoxGlow.mesh" max="5.74997 3.10692 4.44316" min="-5.74997 0.0 -4.44316" />
 	<mesh name="BoxNormal" path="Data/Meshes/BoxNormal.mesh" max="5.74997 3.10692 4.44316" min="-5.74997 0.0 -4.44316" />
@@ -13,5 +28,5 @@
 	<mesh name="BoxAlpha01" path="Data/Meshes/BoxAlpha01.mesh" max="5.74997 3.10692 4.44316" min="-5.74997 0.0 -4.44316" />
 	<mesh name="Habitacio1" path="Data/Meshes/Habitacio1.mesh" max="-38.1271 3.45273 49.6658" min="-66.8544 0.0 -49.6658" />
 	<mesh name="BoxParallax" path="Data/Meshes/BoxParallax.mesh" max="5.74997 3.10692 4.44316" min="-5.74997 0.0 -4.44316" />
-	<mesh name="BoxSpecular01" path="Data/Meshes/BoxSpecular01.mesh" max="5.74997 3.10692 4.44316" min="-5.74997 0.0 -4.44316" />
+	<mesh name="BoxGlowAlpha" path="Data/Meshes/BoxGlowAlpha.mesh" max="5.74997 3.10692 4.44316" min="-5.74997 0.0 -4.44316" />
 </meshes>

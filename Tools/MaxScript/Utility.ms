@@ -643,7 +643,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		return true
 	)
   
-  function ExportMeshEntities _instances =
+  function ExportEntities _entites =
 	(
 		local l_pathToFile = getXMLPath() 
 		makeDir l_pathToFile all:true
@@ -663,13 +663,20 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		format "%" (OpenTagXML "Entities") to:l_file
 		
 		------------------------------------------------------
-		for i=1 to _instances.count do
+		for i=1 to _entites.count do
 		(
-			for j=1 to _instances[i].count do
+			if IsMesh _entites[i] then
 			(
-				local l_instance = _instances[i][j]
+				local l_instance = _entites[i]
 				
-				format "\n  %" (OpenTagXML "Entity") to:l_file
+				if l_instance.name == undefined then
+				(
+					format "\n  %" (OpenTagXML "Entity") to:l_file
+				)
+				else
+				(
+					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
+				)
 				
 				format "\n    %" (InlineTagXML "Object3D") to:l_file
 				  
@@ -678,25 +685,85 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				
 				if (GetUserProp l_instance "physXBox") != undefined then
 				(
-					l_params = #(#("fromRenderableObject","true"),#("density","0"))
+					l_aux = "" as stringstream
+					format "%" (GetUserProp l_instance "physXBox") to:l_aux 
+					l_params = #(#("fromRenderableObject","true"),#("density",l_aux))
 					format "\n    %" (InlineTagParamXML "PhysXBox" l_params) to:l_file
 				)
 				
 				if (GetUserProp l_instance "physXMesh") != undefined then
 				(
-					l_params = #(#("density","0"))
+					l_aux = "" as stringstream
+					format "%" (GetUserProp l_instance "physXBox") to:l_aux 
+					l_params = #(#("density",l_aux))
 					format "\n    %" (InlineTagParamXML "PhysXMesh" l_params) to:l_file
 				)
+				
+				format "\n  %" (CloseTagXML "Entity") to:l_file
+			)
+			else if IsTrigger _entites[i] then
+			(
+				local l_instance = _entites[i]
+				if l_instance.name == undefined then
+				(
+					format "\n  %" (OpenTagXML "Entity") to:l_file
+				)
+				else
+				(
+					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
+				)
+				
+				l_params = #()
+				
+				l_aux = "" as stringStream
+				local l_translation = RHVectorToLH l_instance.transform.translation
+				format "% % %" l_translation.x l_translation.y l_translation.z to:l_aux
+				append l_params #("position",l_aux)
+				
+				l_aux = "" as stringStream
+				local l_yaw = GetYaw l_instance.transform
+				format "%" l_yaw to:l_aux
+				append l_params #("yaw",l_aux)
+				
+				l_aux = "" as stringStream
+				local l_pitch = GetPitch l_instance.transform
+				format "%" l_pitch to:l_aux
+				append l_params #("pitch",l_aux)
+				
+				l_aux = "" as stringStream
+				local l_roll = GetRoll l_instance.transform
+				format "%" l_roll to:l_aux
+				append l_params #("roll",l_aux)
+				
+				format "\n    %" (InlineTagParamXML "Object3D" l_params) to:l_file
+				
+				
+				
+				l_aux = "" as stringStream
+				local l_size = RHVectorToLH (DummySize l_instance)
+				format "% % %" l_size.x l_size.y l_size.z to:l_aux
+				
+				l_params = #(#("shape","box"),#("size",l_aux))
+				
+
+				if (GetUserProp l_instance "TriggerEnter") != undefined then
+				(
+					append l_params #("onEnter", (GetUserProp l_instance "TriggerEnter"))
+				)
+				
+				if (GetUserProp l_instance "TriggerExit") != undefined then
+				(
+					append l_params #("onExit", (GetUserProp l_instance "TriggerExit"))
+				)
+				
+				format "\n    %" (InlineTagParamXML "Trigger" l_params) to:l_file
 				
 				format "\n  %" (CloseTagXML "Entity") to:l_file
 			)
 		)
 		-------------------------------------------------------
 		
-		format "\n" to:l_file
-		format "%" (CloseTagXML "Entities") to:l_file
-		
-		format "\n" to:l_file
+		format "\n%\n" (CloseTagXML "Entities") to:l_file
 		
 		close l_file
 		
@@ -1109,27 +1176,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			--return false
 		)
 		
-		for i=1 to $*.count do
-		(
-			if IsMesh $*[i] then
-			(
-				--instances és una array d'arrays, on cada una d'aquestes subarrays conté totes les instancies d'un core.
-				--l'índex de l'array on es troben les instancies coincideix amb l'índex de l'array de cores.
-				local l_index = GetCoreIndex l_cores $*[i]
-				
-				if l_index == undefined then
-				(
-					NewInstance l_instances $*[i]
-				) 
-				else
-				(
-					AddInstance l_instances $*[i] l_index
-				)
-	
-			) 
-		)
-		
-		if ExportMeshEntities l_instances then
+		if ExportEntities $* then
 		(
 			ShowMessage "Export de les Entities finalitzada\n"
 		)

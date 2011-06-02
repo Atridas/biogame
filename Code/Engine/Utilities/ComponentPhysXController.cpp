@@ -24,6 +24,7 @@ bool CComponentPhysXController::Init(CGameEntity *_pEntity,
   m_pPhysXData = new CPhysicUserData(_pEntity->GetName().c_str());
   m_pPhysXData->SetPaint(true);
   m_pPhysXData->SetColor(colGREEN);
+  m_pPhysXData->SetEntity(_pEntity);
 
   m_pPhysXController = new CPhysicController(
                                   radius, height, slope, skinwidth, stepOffset, collisionGroups,

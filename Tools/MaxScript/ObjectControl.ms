@@ -42,6 +42,18 @@ function IsLight _object =
 	)
 )
 
+-- Comprova si l'objecte proporcionat és una mesh
+function IsTrigger _object =
+(
+	-- TODO acceptar més coses
+	if classof _object == Dummy and ((GetUserProp _object "TriggerEnter") != undefined or (GetUserProp _object "TriggerExit") != undefined) then
+	(
+		return true
+	) else (
+		return false
+	)
+)
+
 -- Cerca l'índex de la core segons el nom
 function GetCoreName _object =
 (
