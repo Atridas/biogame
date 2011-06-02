@@ -2,40 +2,41 @@
 <shaders>
   <effects>
 
-    <effect name="Diffused" file="Data/Effects/NormalDiffusedEffect.fx" technique="NormalDiffusedTechnique" />
-    <effect name="Textured" file="Data/Effects/NormalTexturedEffect.fx" technique="NormalTexturedTechnique" alpha_technique="NormalTexturedAlphaTechnique" />
-    <effect name="Normalmap" file="Data/Effects/TangentBinormalNormalTexturedEffect.fx" technique="TangentBinormalNormalTexturedTechnique" />
-    <effect name="SpecularTextured" file="Data/Effects/SpecularTexturedEffect.fx" technique="SpecularTexturedTechnique" />
-    <effect name="ShowNormals" file="Data/Effects/ShowNormalsEffect.fx" technique="ShowNormalsTechnique" />
-    <effect name="ShowNormalmap" file="Data/Effects/ShowNormalmapEffect.fx" technique="ShowNormalmapTechnique" />
-    <effect name="ShowTangent" file="Data/Effects/ShowTangentEffect.fx" technique="ShowTangentTechnique" />
-    <effect name="ShowBitangent" file="Data/Effects/ShowBitangentEffect.fx" technique="ShowBitangentTechnique" />
-    <effect name="ShowFlatNormalmap" file="Data/Effects/ShowFlatNormalmapEffect.fx" technique="ShowFlatNormalmapTechnique" />
-    <effect name="ShowUVCoords" file="Data/Effects/ShowUVCoordsEffect.fx" technique="ShowUVCoordsTechnique" />
-    <effect name="Lightmap" file="Data/Effects/LightmapNormalTexturedEffect.fx" technique="LightmapTechnique" />
-    <effect name="LightmapNormalmap" file="Data/Effects/LightmapNormalmapNormalTexturedEffect.fx" technique="LightmapNormalmapTechnique" />
-    <effect name="White" file="Data/Effects/WhiteEffect.fx" technique="WhiteTechnique" instanced_technique="WhiteInstancedTechnique" />
-    <effect name="No" file="Data/Effects/NoEffect.fx" technique="NoTechnique" />
+    <effect name="Diffused" texture_mask="0" file="Data/Effects/NormalDiffusedEffect.fx" technique="NormalDiffusedTechnique" />
+    <effect name="Textured" texture_mask="2" file="Data/Effects/NormalTexturedEffect.fx" technique="NormalTexturedTechnique" alpha_technique="NormalTexturedAlphaTechnique" />
+    <effect name="Normalmap" texture_mask="6" file="Data/Effects/TangentBinormalNormalTexturedEffect.fx" technique="TangentBinormalNormalTexturedTechnique" />
+    <effect name="SpecularTextured" texture_mask="18" file="Data/Effects/SpecularTexturedEffect.fx" technique="SpecularTexturedTechnique" />
+    <effect name="ShowNormals" texture_mask="0" file="Data/Effects/ShowNormalsEffect.fx" technique="ShowNormalsTechnique" />
+    <effect name="ShowNormalmap" texture_mask="4" file="Data/Effects/ShowNormalmapEffect.fx" technique="ShowNormalmapTechnique" />
+    <effect name="ShowTangent" texture_mask="4" file="Data/Effects/ShowTangentEffect.fx" technique="ShowTangentTechnique" />
+    <effect name="ShowBitangent" texture_mask="4" file="Data/Effects/ShowBitangentEffect.fx" technique="ShowBitangentTechnique" />
+    <effect name="ShowFlatNormalmap" texture_mask="4" file="Data/Effects/ShowFlatNormalmapEffect.fx" technique="ShowFlatNormalmapTechnique" />
+    <effect name="ShowUVCoords" texture_mask="0" file="Data/Effects/ShowUVCoordsEffect.fx" technique="ShowUVCoordsTechnique" />
+    <effect name="Lightmap" texture_mask="10" file="Data/Effects/LightmapNormalTexturedEffect.fx" technique="LightmapTechnique" />
+    <effect name="LightmapNormalmap" texture_mask="14" file="Data/Effects/LightmapNormalmapNormalTexturedEffect.fx" technique="LightmapNormalmapTechnique" />
+    <effect name="White" texture_mask="0" file="Data/Effects/WhiteEffect.fx" technique="WhiteTechnique" instanced_technique="WhiteInstancedTechnique" />
+    <effect name="No" texture_mask="0" file="Data/Effects/NoEffect.fx" technique="NoTechnique" />
     <!-- Animats -->
-    <effect name="AnimatedTextured" file="Data/Effects/AnimatedNormalTexturedEffect.fx" technique="Cal3DTechnique" />
-    <effect name="AnimatedNormalmap" file="Data/Effects/AnimatedTangentBinormalNormalTexturedEffect.fx" technique="Cal3DNormalMapTechnique" />
-    <effect name="AnimatedShowNormals" file="Data/Effects/AnimatedShowNormalsEffect.fx" technique="Cal3dShowNormalsTechnique" />
+    <effect name="AnimatedTextured" texture_mask="2" file="Data/Effects/AnimatedNormalTexturedEffect.fx" technique="Cal3DTechnique" />
+    <effect name="AnimatedNormalmap" texture_mask="6" file="Data/Effects/AnimatedTangentBinormalNormalTexturedEffect.fx" technique="Cal3DNormalMapTechnique" />
+    <effect name="AnimatedShowNormals" texture_mask="0" file="Data/Effects/AnimatedShowNormalsEffect.fx" technique="Cal3dShowNormalsTechnique" />
     
     
     <!--<effect name="Noise And Vignetting" file="Data/Effects/NoiseAndVignetting.fx"/>-->
     
-    <effect name="Depth" file="Data/Effects/Depth.fx" technique="RenderShadowTechnique" />
-    <effect name="AnimatedDepth" file="Data/Effects/AnimatedDepth.fx" technique="Cal3DTechniqueShadow" />
+    <effect name="Depth" texture_mask="0" file="Data/Effects/Depth.fx" technique="RenderShadowTechnique" />
+    <effect name="AnimatedDepth" texture_mask="0" file="Data/Effects/AnimatedDepth.fx" technique="Cal3DTechniqueShadow" />
     
     <effect name="HoritzontalBloom" file="Data/Effects/HoritzontalBloomEffect.fx" technique="HoritzontalBloomTechnique" />
     <effect name="VerticalBloom" file="Data/Effects/VerticalBloomEffect.fx" technique="VerticalBloomTechnique" />
     <effect name="PostProcessBloom" file="Data/Effects/PostProcessBloomEffect.fx" technique="PostProcessBloomTechnique" />
+    <effect name="PostProcessBloom2" file="Data/Effects/PostProcessBloomEffect2.fx" technique="PostProcessBloomTechnique2" />
     
     <!--<effect name="HDR" file="Data/Effects/HDR.fx"/>-->
     <!--<effect name="Blur" file="Data/Effects/Blur.fx" />-->
     
-    <effect name="Glow" file="Data/Effects/Glow.fx" technique="RenderGlowTechnique"/>
-    <effect name="AnimatedGlow" file="Data/Effects/AnimatedGlow.fx" technique="AnimatedGlowTechnique" />
+    <effect name="Glow" texture_mask="32" file="Data/Effects/Glow.fx" technique="RenderGlowTechnique"/>
+    <effect name="AnimatedGlow" texture_mask="32" file="Data/Effects/AnimatedGlow.fx" technique="AnimatedGlowTechnique" />
     
     <!--<effect name="ZBlur" file="Data/Effects/ZBlur.fx"/>-->
     

@@ -25,7 +25,7 @@ float4 DownSample4xPS(float2 _UV: TEXCOORD0) : COLOR
   {
     l_Total += tex2D(PrevFilterSampler, _UV + l_SamplePositions[i]) * 0.25;
   }
-  return l_Total;
+  return l_Total * 1.25;
   //return l_Original + l_Total * l_Total.a;
 }
 

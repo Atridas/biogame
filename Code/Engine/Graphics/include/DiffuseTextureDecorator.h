@@ -10,5 +10,6 @@ public:
 
   virtual int GetMaterialType() const {return DIFFUSE_MATERIAL_MASK | m_pDecoratedMaterial->GetMaterialType();};
   virtual void Activate() {m_pTexture->Activate(0);m_pDecoratedMaterial->Activate();};
+  virtual void Activate(int _iTextureMask) {(_iTextureMask & DIFFUSE_MATERIAL_MASK)? Activate() : m_pDecoratedMaterial->Activate();};
 };
 

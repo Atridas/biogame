@@ -18,6 +18,7 @@ class CEffect :
 public:
   CEffect() : CNamed(""),
               m_szFileName(""),
+              m_iTextureMask(0),
               m_pD3DEffect(0),
               m_pD3DTechnique(0),
               m_pD3DInstancedTechnique(0),
@@ -28,6 +29,8 @@ public:
   bool Init(const CXMLTreeNode& _xmlEffect,LPD3DXEFFECTPOOL _pEffectPool);
   bool Reload(LPD3DXEFFECTPOOL _pEffectPool);
   
+  int GetTextureMask() const {return m_iTextureMask;};
+
   void ActivateDefaultRendering();
   void ActivateAlphaRendering();
   void ActivateInstancedRendering();
@@ -44,6 +47,9 @@ private:
   string m_szTechniqueName;
   string m_szInstancedTechniqueName;
   string m_szD3DAlphaTechniqueName;
+
+  int m_iTextureMask;
+
   LPD3DXEFFECT m_pD3DEffect;
   D3DXHANDLE m_pD3DTechnique;
   D3DXHANDLE m_pD3DInstancedTechnique;

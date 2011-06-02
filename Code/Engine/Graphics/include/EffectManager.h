@@ -53,6 +53,7 @@ public:
                     m_bTextureWidthHeightUpdated(false),
                     m_bPoissonBlurKernelUpdated(true),
                     m_bSpecularParamsUpdated(true),
+                    m_bGlowUpdated(false),
                     m_fGlossiness(0.f),
                     m_fSpecularLevel(0.f),
                     m_pWorldMatrixParameter(0),
@@ -76,7 +77,7 @@ public:
                     m_pShadowsEnabledParameter(0),
                     m_pBonesParameter(0),
                     m_pTimeParameter(0),
-                    m_pGlowActive(0),
+                    m_pGlowActiveParameter(0),
                     m_pTextureWidth(0),
                     m_pTextureHeight(0), 
                     m_pPoissonBlurKernelParameter(0),
@@ -126,6 +127,8 @@ public:
   void SetSkeleton(CalSkeleton* _pSkeleton, CalHardwareModel* _pCalHardwareModel) {m_pCalSkeleton = _pSkeleton; m_pCalHardwareModel = _pCalHardwareModel; m_bSkeletonUpdated = true;};
 
   void SetTextureWidthHeight(int _iWidth, int _iHeight) {m_iTextureWidth  = _iWidth; m_iTextureHeight = _iHeight; m_bTextureWidthHeightUpdated = true;};
+
+  void SetGlow(bool _bGlow) {m_bGlowActive = _bGlow; m_bGlowUpdated = true;};
 
   void ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _mProjectionMatrix, const Vect3f& _vCameraEye);
 
@@ -189,6 +192,8 @@ private:
   bool m_bSkeletonUpdated;
   bool m_bTextureWidthHeightUpdated;
   bool m_bPoissonBlurKernelUpdated;
+  bool m_bSpecularParamsUpdated;
+  bool m_bGlowUpdated;
 
   //Matrius compostes recalculades
   bool m_bViewProjectionUpdated;
@@ -199,9 +204,10 @@ private:
   bool m_bLightsUpdated;
 
   //Parametres
-  bool  m_bSpecularParamsUpdated;
   float m_fGlossiness;
   float m_fSpecularLevel;
+  bool m_bGlowActive;
+
 
   D3DXHANDLE m_pWorldMatrixParameter;
   D3DXHANDLE m_pViewMatrixParameter;
@@ -227,7 +233,7 @@ private:
   D3DXHANDLE m_pBonesParameter;
 
   D3DXHANDLE m_pTimeParameter;
-  D3DXHANDLE m_pGlowActive;
+  D3DXHANDLE m_pGlowActiveParameter;
   D3DXHANDLE m_pTextureWidth;
   D3DXHANDLE m_pTextureHeight; 
   D3DXHANDLE m_pPoissonBlurKernelParameter;

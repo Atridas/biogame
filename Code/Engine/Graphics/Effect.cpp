@@ -23,6 +23,8 @@ bool CEffect::Init(const CXMLTreeNode& _xmlEffect, LPD3DXEFFECTPOOL _pEffectPool
 
   SetName(l_szName); 
 
+  m_iTextureMask = _xmlEffect.GetIntProperty("texture_mask",0,false);
+
   m_szFileName = _xmlEffect.GetPszISOProperty("file","");
 
   if(m_szFileName.compare("") == 0)

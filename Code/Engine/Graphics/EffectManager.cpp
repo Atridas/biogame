@@ -208,7 +208,7 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     m_pShadowsEnabledParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"ShadowEnabled");
     m_pBonesParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"Bones");
     m_pTimeParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"Time");
-    m_pGlowActive = l_pD3DEffect->GetParameterBySemantic(NULL,"GlowActive");
+    m_pGlowActiveParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"GlowActive");
     m_pTextureWidth = l_pD3DEffect->GetParameterBySemantic(NULL,"TextureWidth");
     m_pTextureHeight = l_pD3DEffect->GetParameterBySemantic(NULL,"TextureHeight");
     m_pPoissonBlurKernelParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"PoissonBlurKernel");
@@ -402,6 +402,12 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     l_pD3DEffect->SetFloatArray(m_pPoissonBlurKernelParameter, m_pfPoissonBlurKernel, 32);
     m_bPoissonBlurKernelUpdated = false;
   }
+
+  if(m_bGlowUpdated)
+  {
+    l_pD3DEffect->SetBool(m_pGlowActiveParameter,(BOOL)m_bGlowActive);
+    m_bGlowUpdated = false;
+  }
   
 }
 
@@ -427,27 +433,26 @@ CEffect* CEffectManager::ActivateMaterial(CMaterial* _pMaterial)
   {
     l_pEffect = GetResource(m_DefaultEffectMap[l_iMaterialType]);
 
-    if(!l_pEffect || !l_pEffect->IsOk())
+    if(l_pEffect && l_pEffect->IsOk())
     {
-      return NULL;
+      float l_fBump = _pMaterial->GetBump();
+      float l_fParallax = _pMaterial->GetParallaxHeight();
+
+      if(_pMaterial->HasSpecularParameters())
+      {
+        SetSpecularParams(_pMaterial->GetGlossiness(), _pMaterial->GetSpecularFactor());
+      }
+
+    }else{
+      l_pEffect = GetResource("White");
     }
-
-    float l_fBump = _pMaterial->GetBump();
-    float l_fParallax = _pMaterial->GetParallaxHeight();
-
-    _pMaterial->Activate();
-
-    if(_pMaterial->HasSpecularParameters())
-    {
-      SetSpecularParams(_pMaterial->GetGlossiness(), _pMaterial->GetSpecularFactor());
-    }
-
   }
 
   if(l_pEffect)
   {
-    //Problema: El glow es una forced technique i necessita activar el material. Descomentar per provar
-    //_pMaterial->Activate();
+    SetGlow((l_iMaterialType & GLOW_MATERIAL_MASK) > 0);
+
+    _pMaterial->Activate(l_pEffect->GetTextureMask());
 
     LoadShaderData(l_pEffect);
   }
