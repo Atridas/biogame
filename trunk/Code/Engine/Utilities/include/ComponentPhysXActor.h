@@ -21,7 +21,7 @@ public:
   CPhysicActor*    GetActor()     {return m_pPhysXActor;}
   CPhysicUserData* GetUserData()  {return m_pPhysXData;}
 
-  void UpdatePostPhysX(float _fDeltaTime);
+  virtual void UpdatePostPhysX(float _fDeltaTime);
 
   virtual ~CComponentPhysXActor(void) {Done();};
 

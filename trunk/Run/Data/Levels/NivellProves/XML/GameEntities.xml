@@ -1,142 +1,151 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Entities>
-  <Entity>
+  <Entity name="Habitacio3">
     <Object3D />
     <RenderableObject name="Habitacio3" />
-    <PhysXMesh density="0" />
+    <PhysXMesh density="undefined" />
   </Entity>
-  <Entity>
+  <Entity name="Habitacio2">
     <Object3D />
     <RenderableObject name="Habitacio2" />
-    <PhysXMesh density="0" />
+    <PhysXMesh density="undefined" />
   </Entity>
-  <Entity>
+  <Entity name="LowCover">
     <Object3D />
     <RenderableObject name="LowCover" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="HighCover">
     <Object3D />
     <RenderableObject name="HighCover" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="LowCover01">
     <Object3D />
     <RenderableObject name="LowCover01" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="LowCover02">
     <Object3D />
     <RenderableObject name="LowCover02" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="LowCover03">
     <Object3D />
     <RenderableObject name="LowCover03" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="LowCover04">
     <Object3D />
     <RenderableObject name="LowCover04" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="HighCover01">
     <Object3D />
     <RenderableObject name="HighCover01" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="LowCover05">
     <Object3D />
     <RenderableObject name="LowCover05" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="LowCover06">
     <Object3D />
     <RenderableObject name="LowCover06" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="Wall">
     <Object3D />
     <RenderableObject name="Wall" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="HighCover02">
     <Object3D />
     <RenderableObject name="HighCover02" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="LowCover07">
     <Object3D />
     <RenderableObject name="LowCover07" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="HighCover03">
     <Object3D />
     <RenderableObject name="HighCover03" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="LowCover08">
     <Object3D />
     <RenderableObject name="LowCover08" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="HighCover04">
     <Object3D />
     <RenderableObject name="HighCover04" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="LowCover09">
     <Object3D />
     <RenderableObject name="LowCover09" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="LowCover10">
     <Object3D />
     <RenderableObject name="LowCover10" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="LowCover11">
     <Object3D />
     <RenderableObject name="LowCover11" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="Llum">
     <Object3D />
     <RenderableObject name="Llum" />
   </Entity>
-  <Entity>
+  <Entity name="BoxGlow">
     <Object3D />
     <RenderableObject name="BoxGlow" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="BoxNormal">
     <Object3D />
     <RenderableObject name="BoxNormal" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="BoxAlpha">
     <Object3D />
     <RenderableObject name="BoxAlpha" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="BoxSpecular">
     <Object3D />
     <RenderableObject name="BoxSpecular" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="BoxAlpha01">
     <Object3D />
     <RenderableObject name="BoxAlpha01" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity>
+  <Entity name="Habitacio1">
     <Object3D />
     <RenderableObject name="Habitacio1" />
-    <PhysXMesh density="0" />
+    <PhysXMesh density="undefined" />
   </Entity>
-  <Entity>
+  <Entity name="BoxParallax">
     <Object3D />
     <RenderableObject name="BoxParallax" />
     <PhysXBox fromRenderableObject="true" density="0" />
+  </Entity>
+  <Entity name="BoxGlowAlpha">
+    <Object3D />
+    <RenderableObject name="BoxGlowAlpha" />
+    <PhysXBox fromRenderableObject="true" density="0" />
+  </Entity>
+  <Entity name="DummyTrigger">
+    <Object3D position="-25.1552 2.03947 33.689" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="8.04462 5.83092 10.3979" onEnter="triggerDeProvesEntrar" onExit="triggerDeProvesSortir" />
   </Entity>
 </Entities>

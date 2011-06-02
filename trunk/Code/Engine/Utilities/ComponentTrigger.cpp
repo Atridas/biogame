@@ -19,38 +19,72 @@ extern "C"
 #include "PhysicsManager.h"
 
 #include "Utils\MemLeaks.h"
-#include "ComponentPhysXActor.h"
+#include "ComponentObject3D.h"
+#include "Utils\Logger.h"
 
-
-void CComponentTrigger::Init(CGameEntity* _pEntity, const string& _szOnEnter, const string& _szOnExit)
+bool CComponentTrigger::Init(
+            CGameEntity* _pEntity,
+            const Vect3f& _vSize,
+            const string& _szOnEnter, const string& _szOnExit,
+            int _iCollisionMask)
 {
   assert(_pEntity->IsOk());
   SetEntity(_pEntity);
 
-  CComponentPhysXActor* m_pComponentPhysXActor = _pEntity->GetComponent<CComponentPhysXActor>(ECT_PHISX_ACTOR);
-  assert(m_pComponentPhysXActor);
+  m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
+  assert(m_pObject3D); //TODO fer missatges d'error més elavorats
 
-  m_pComponentPhysXActor->GetActor()->ActivateAllTriggers();
-  m_pComponentPhysXActor->GetUserData()->SetColor(colYELLOW);
+  m_pPhysXData = new CPhysicUserData(_pEntity->GetName().c_str());
+  m_pPhysXData->SetPaint(true);
+  m_pPhysXData->SetColor(colYELLOW);
+  m_pPhysXData->SetEntity(_pEntity);
+
+  m_pPhysXActor = new CPhysicActor(m_pPhysXData);
+
+  m_pPhysXActor->CreateBoxTrigger(_vSize, _iCollisionMask);
+
+  CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXActor);
+  m_pPhysXActor->SetMat44( m_pObject3D->GetMat44() );
 
   m_szOnEnter = _szOnEnter;
   m_szOnExit  = _szOnExit;
+
+  SetOk(true);
+  return IsOk();
 }
   
 void CComponentTrigger::OnEnter(CGameEntity* _pOther)
 {
-  CScriptManager* m_pSM = CORE->GetScriptManager();
+  if(m_szOnEnter != "") 
+  {
+    CScriptManager* m_pSM = CORE->GetScriptManager();
 
-  lua_State *l_pLUA = m_pSM->GetLuaState();
+    lua_State *l_pLUA = m_pSM->GetLuaState();
 
-  luabind::call_function<void>(l_pLUA, m_szOnEnter.c_str(), GetEntity(), _pOther);
+    try {
+      luabind::call_function<void>(l_pLUA, m_szOnEnter.c_str(), GetEntity(), _pOther);
+    } catch(const std::exception& _TheError)
+    {
+      LOGGER->AddNewLog(ELL_ERROR,"\tEntity \"%s\" has entered trigger \"%s\" and script \"%s\" has failed with error \"%s\"", 
+                          _pOther->GetName().c_str(), GetEntity()->GetName().c_str(), m_szOnEnter.c_str(), _TheError.what());
+    }
+  }
 }
 
 void CComponentTrigger::OnExit (CGameEntity* _pOther)
 {
-  CScriptManager* m_pSM = CORE->GetScriptManager();
+  if(m_szOnExit != "")
+  {
+    CScriptManager* m_pSM = CORE->GetScriptManager();
 
-  lua_State *l_pLUA = m_pSM->GetLuaState();
+    lua_State *l_pLUA = m_pSM->GetLuaState();
 
-  luabind::call_function<void>(l_pLUA, m_szOnExit.c_str(), GetEntity(), _pOther);
+    try {
+      luabind::call_function<void>(l_pLUA, m_szOnExit.c_str(), GetEntity(), _pOther);
+    } catch(const std::exception& _TheError)
+    {
+      LOGGER->AddNewLog(ELL_ERROR,"\tEntity \"%s\" has exited trigger \"%s\" and script \"%s\" has failed with error \"%s\"", 
+                            _pOther->GetName().c_str(), GetEntity()->GetName().c_str(), m_szOnEnter.c_str(), _TheError.what());
+    }
+  }
 }
