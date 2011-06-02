@@ -1,3 +1,4 @@
+#define __DONT_INCLUDE_MEM_LEAKS__
 #include "PhysXProcess.h"
 #include "Core.h"
 #include "RenderManager.h"
@@ -42,6 +43,7 @@
 //---PhysX Includes---//
 #undef min
 #undef max
+#include "NxPhysics.h"
 //---------------------//
 
 //typedef enum ETypeFunction { 
@@ -49,6 +51,8 @@
 //      COLISION_SOLID_MASK = 1, 
 //      COLISION_SCENE_MASK = 2
 //  };
+
+
 
 #define COLISION_STATIC_MASK 0
 #define COLISION_SOLID_MASK 1
@@ -186,9 +190,9 @@ bool CPhysXProcess::Init()
   g_pJointActor1->AddBoxSphape(Vect3f(0.5f,0.5f,0.5f),v3fZERO,NULL,GROUP_COLLIDABLE_PUSHABLE);
   g_pJointActor2->AddSphereShape(0.4f,v3fZERO,NULL,GROUP_COLLIDABLE_PUSHABLE);
   g_pJointActor3->AddBoxSphape(Vect3f(0.3f,0.3f,0.3f),v3fZERO,NULL,GROUP_COLLIDABLE_PUSHABLE);
-  g_pJointActor1->SetGlobalPosition(Vect3f(-6.0f,1.0f,-3.0f));
-  g_pJointActor2->SetGlobalPosition(Vect3f(-7.0f,1.0f,-3.0f));
-  g_pJointActor3->SetGlobalPosition(Vect3f(-9.0f,1.0f,-3.0f));
+  g_pJointActor1->SetGlobalPosition(Vect3f(-9.0f,1.0f,-3.0f));
+  g_pJointActor2->SetGlobalPosition(Vect3f(-9.0f,3.0f,-3.0f));
+  g_pJointActor3->SetGlobalPosition(Vect3f(-9.0f,5.0f,-3.0f));
 
   g_pJointActor1->CreateBody(1.0f);
   g_pJointActor2->CreateBody(5.0f);
@@ -205,18 +209,29 @@ bool CPhysXProcess::Init()
   l_pPhysManager->AddPhysicActor(g_pJointActor2);
   l_pPhysManager->AddPhysicActor(g_pJointActor3);
 
-  g_pFixedJoint->SetInfo(g_pJointActor1,g_pJointActor2);
-  g_pFixedJoint2->SetInfo(g_pJointActor2,g_pJointActor3);
+  g_pJointActor3->GetPhXActor()->raiseBodyFlag(NX_BF_KINEMATIC);
+  g_pJointActor3->GetPhXActor()->setLinearDamping(0.5);
+
+  //g_pFixedJoint->SetInfo(g_pJointActor1,g_pJointActor2);
+  g_pSphericalJoint->SetInfoComplete(Vect3f(-9.0f,5.0f,-3.0f),Vect3f(1.0f,1.0f,1.0f),g_pJointActor2,g_pJointActor3);
+  g_pSphericalJoint2->SetInfoComplete(Vect3f(-9.0f,3.0f,-3.0f),Vect3f(1.0f,1.0f,1.0f),g_pJointActor1,g_pJointActor2);
+  //g_pSphericalJoint2->SetInfo(Vect3f(-9.0f,2.0f,-3.0f),g_pJointActor1,g_pJointActor2);
+  //g_pSphericalJoint->SetInfo(Vect3f(-9.0f,3.0f,-3.0f),g_pJointActor2,g_pJointActor3);
+  
+  
+  
+  //g_pFixedJoint2->SetInfo(g_pJointActor2,g_pJointActor3);
   //g_pRevoluteJoint->SetInfo(v3fZERO,Vect3f(0.1f,0.1f,0.1f),g_pJointActor1,g_pJointActor2);
   //g_pSphericalJoint->SetInfo(Vect3f(-6.0f,2.0f,-3.0f),g_pJointActor2);
   //g_pRevoluteJoint->SetMotor(1.0f,1.0f);
 
   //g_pFixedJoint->CreateJoint(NULL);
 
-  l_pPhysManager->AddPhysicFixedJoint(g_pFixedJoint);
-  l_pPhysManager->AddPhysicFixedJoint(g_pFixedJoint2);
+  //l_pPhysManager->AddPhysicFixedJoint(g_pFixedJoint);
+  //l_pPhysManager->AddPhysicFixedJoint(g_pFixedJoint2);
   //l_pPhysManager->AddPhysicRevoluteJoint(g_pRevoluteJoint);
-  //l_pPhysManager->AddPhysicSphericalJoint(g_pSphericalJoint);
+  l_pPhysManager->AddPhysicSphericalJoint(g_pSphericalJoint);
+  l_pPhysManager->AddPhysicSphericalJoint(g_pSphericalJoint2);
 
 
 

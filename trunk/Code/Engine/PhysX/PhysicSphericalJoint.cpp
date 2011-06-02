@@ -76,21 +76,41 @@ void CPhysicSphericalJoint::SetInfoComplete	(const Vect3f& anchor, const Vect3f&
 		m_pSphericalDesc->actor[1] = NULL;	
 	}
 
-  m_pSphericalDesc->flags |= NX_SJF_SWING_LIMIT_ENABLED;
-  m_pSphericalDesc->swingLimit.value = 0.3f*NxPi;
 
+ 
+  //LIMITS PELS TWIST!!!!!!! (gir de munyeca)
   m_pSphericalDesc->flags |= NX_SJF_TWIST_LIMIT_ENABLED;
-  m_pSphericalDesc->twistLimit.low.value = -0.05f*NxPi;
-  m_pSphericalDesc->twistLimit.high.value = 0.05f*NxPi;
+  m_pSphericalDesc->twistLimit.low.value = 0.025f*NxPi;
+  m_pSphericalDesc->twistLimit.low.restitution = 0.5f;
+  m_pSphericalDesc->twistLimit.high.value = 0.025f*NxPi;
+  m_pSphericalDesc->twistLimit.high.restitution = 1.0f;
 
-	m_pSphericalDesc->setGlobalAnchor(pos);
+  //Es pot push pero al retornar, com mes petit es el valor, menys espai recorre.
+  m_pSphericalDesc->flags |= NX_SJF_SWING_LIMIT_ENABLED;
+  m_pSphericalDesc->swingLimit.value = 0.15f*NxPi;
+  m_pSphericalDesc->swingLimit.restitution = 0.5f;
+
+  //Twist Spring Enabled
+  m_pSphericalDesc->flags |= NX_SJF_TWIST_SPRING_ENABLED;
+  m_pSphericalDesc->twistSpring.damper = 1.0f;
+  m_pSphericalDesc->twistSpring.spring = 0.5f;
+
+  //Swing Spring Enabled
+  m_pSphericalDesc->flags |= NX_SJF_SWING_SPRING_ENABLED;
+  m_pSphericalDesc->swingSpring.damper = 1.0f;
+  m_pSphericalDesc->swingSpring.spring = 0.5f;
+  
+  //Joint Springs
+  /*m_pSphericalDesc->flags |= NX_SJF_JOINT_SPRING_ENABLED;
+  m_pSphericalDesc->jointSpring.damper = 1.0f;
+  m_pSphericalDesc->jointSpring.spring = 0.5f;*/
+
+  //Projection per errors
+  /*m_pSphericalDesc->projectionMode = NX_JPM_POINT_MINDIST;
+  m_pSphericalDesc->projectionDistance = 0.15f;*/
+
+  m_pSphericalDesc->setGlobalAnchor(pos);
   m_pSphericalDesc->setGlobalAxis(axis);
-
-
-  m_pSphericalDesc->projectionDistance = NX_JPM_LINEAR_MINDIST;
-  m_pSphericalDesc->projectionDistance = 0.01f;
-  /*m_pSphericalDesc->projectionMode |= NX_JPM_LINEAR_MINDIST;
-  NxJointProjection*/
 
 
 }
