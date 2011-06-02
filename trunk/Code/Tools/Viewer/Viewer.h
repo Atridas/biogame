@@ -54,6 +54,9 @@ public:
   void IncrementAmbientLight();
   void DecrementAmbientLight();
 
+  void IncrementGlow();
+  void DecrementGlow();
+
   void ToggleLights();
   void ToggleHelp();
 

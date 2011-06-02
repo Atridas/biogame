@@ -212,8 +212,8 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     m_pTextureWidth = l_pD3DEffect->GetParameterBySemantic(NULL,"TextureWidth");
     m_pTextureHeight = l_pD3DEffect->GetParameterBySemantic(NULL,"TextureHeight");
     m_pPoissonBlurKernelParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"PoissonBlurKernel");
-    
-    //m_pBump = l_pD3DEffect->GetParameterBySemantic(NULL,"GlowActive");
+    m_pGlowIntensityParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"GlowIntensity");
+
     //m_pParallaxHeight = l_pD3DEffect->GetParameterBySemantic(NULL,"TextureWidth");
     m_pGlossiness    = l_pD3DEffect->GetParameterBySemantic(NULL,"Glossiness");
     m_pSpecularLevel = l_pD3DEffect->GetParameterBySemantic(NULL,"SpecularLevel");
@@ -406,6 +406,7 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
   if(m_bGlowUpdated)
   {
     l_pD3DEffect->SetBool(m_pGlowActiveParameter,(BOOL)m_bGlowActive);
+    l_pD3DEffect->SetFloat(m_pGlowIntensityParameter,(FLOAT)m_fGlowIntensity);
     m_bGlowUpdated = false;
   }
   
@@ -451,6 +452,10 @@ CEffect* CEffectManager::ActivateMaterial(CMaterial* _pMaterial)
   if(l_pEffect)
   {
     SetGlow((l_iMaterialType & GLOW_MATERIAL_MASK) > 0);
+    if(m_bGlowActive)
+    {
+      SetGlowIntensity(_pMaterial->GetGlowIntensity());
+    }
 
     _pMaterial->Activate(l_pEffect->GetTextureMask());
 
