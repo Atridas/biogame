@@ -6,6 +6,9 @@
     <effect name="Textured" texture_mask="2" file="Data/Effects/NormalTexturedEffect.fx" technique="NormalTexturedTechnique" alpha_technique="NormalTexturedAlphaTechnique" />
     <effect name="Normalmap" texture_mask="6" file="Data/Effects/TangentBinormalNormalTexturedEffect.fx" technique="TangentBinormalNormalTexturedTechnique" />
     <effect name="SpecularTextured" texture_mask="18" file="Data/Effects/SpecularTexturedEffect.fx" technique="SpecularTexturedTechnique" />
+    <effect name="SpecularNormalmapTextured" texture_mask="22" file="Data/Effects/SpecularNormalmapTexturedEffect.fx" technique="SpecularNormalmapTexturedTechnique" />
+    <effect name="SpecularLightmapTextured" texture_mask="26" file="Data/Effects/SpecularLightmapTexturedEffect.fx" technique="SpecularLightmapTexturedTechnique" />
+    <effect name="SpecularLightmapNormalmapTextured" texture_mask="30" file="Data/Effects/SpecularLightmapNormalmapTexturedEffect.fx" technique="SpecularLightmapNormalmapTexturedTechnique" />
     <effect name="ShowNormals" texture_mask="0" file="Data/Effects/ShowNormalsEffect.fx" technique="ShowNormalsTechnique" />
     <effect name="ShowNormalmap" texture_mask="4" file="Data/Effects/ShowNormalmapEffect.fx" technique="ShowNormalmapTechnique" />
     <effect name="ShowTangent" texture_mask="4" file="Data/Effects/ShowTangentEffect.fx" technique="ShowTangentTechnique" />
@@ -57,6 +60,9 @@
     <default_effect material_type="10" effect="Lightmap" />
     <default_effect material_type="14" effect="LightmapNormalmap" />
     <default_effect material_type="18" effect="SpecularTextured" />
+    <default_effect material_type="22" effect="SpecularNormalmapTextured" />
+    <default_effect material_type="26" effect="SpecularLightmapTextured" />
+    <default_effect material_type="30" effect="SpecularLightmapNormalmapTextured" />
   </default_effects>
 
 

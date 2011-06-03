@@ -135,6 +135,47 @@ float4 TangentBinormalNormalTexturedNoParallaxPS(TTANGENT_BINORMAL_NORMAL_TEXTUR
   return out_;
 }
 
+
+float4 SpecularNormalmapTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
+  float3 l_Normal = normalize(CalcNormalmap(_in.WorldTangent, _in.WorldBinormal, _in.WorldNormal, _in.UV));
+
+  float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
+  float  l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x;
+  float4 out_ = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
+                                                  g_AmbientLight, l_SpotlightFactor,
+                                                  _in.PosLight)
+                                ,l_DiffuseColor.a);
+  
+  return out_;
+}
+
+float4 SpecularLightmapTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _in) : COLOR {
+	float3 l_Normal = normalize(_in.WorldNormal);
+	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
+	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2)+float4(g_AmbientLight,1.0);
+	float  l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x;
+	float4 l_LightResult = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
+                                                  l_LightmapColor, l_SpotlightFactor,
+                                                  _in.PosLight)
+                                ,l_DiffuseColor.a);
+	return l_LightResult;
+}
+
+float4 SpecularLightmapNormalmapTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _in) : COLOR {
+	float3 l_Normal = CalcNormalmap((float3)_in.WorldTangent, 
+                                  (float3)_in.WorldBinormal, 
+                                  (float3)_in.WorldNormal, 
+                                  _in.UV);
+	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
+	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2)+float4(g_AmbientLight,1.0);
+	float  l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x;
+	float4 l_LightResult = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
+                                                  l_LightmapColor, l_SpotlightFactor,
+                                                  _in.PosLight)
+                                ,l_DiffuseColor.a);
+	return l_LightResult;
+}
+
 float4 WhitePS() : COLOR {
   return float4(1.0,1.0,1.0,1.0);
 }
