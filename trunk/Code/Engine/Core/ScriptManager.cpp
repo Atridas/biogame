@@ -369,6 +369,7 @@ void CScriptManager::RegisterLUAFunctions()
       .def("get_light_manager",               &CCore::GetLightManager)
       .def("get_static_mesh_manager",         &CCore::GetStaticMeshManager)
       .def("get_engine",                      &CCore::GetEngine)
+      .def("get_scipt_manager",               &CCore::GetScriptManager)
 
   //Process
     ,class_<CProcess,CBaseControl>("Process")
@@ -406,6 +407,12 @@ void CScriptManager::RegisterLUAFunctions()
     class_<CMapManager<CLight>>("LightMapManager"),
     class_<CLightManager, CMapManager<CLight>>("LightManager")
       .def("load", &CLightManager::Load)
+  ];
+
+  //ScriptManager
+  module(m_pLS) [
+    class_<CScriptManager>("ScriptManager")
+      .def("reload", &CScriptManager::Reload)
   ];
 
   //RenderableObject

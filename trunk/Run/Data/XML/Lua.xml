@@ -4,6 +4,7 @@
     <file path="Data/Lua/first.lua" />
     <file path="Data/Lua/globals.lua" />
     <file path="Data/Lua/biogame_gui.lua" />
+    <file path="Data/Lua/nivell_proves_triggers.lua" />
   </files>
   <initscripts>
     <script action="CORE                          = get_core()"/>
@@ -17,6 +18,9 @@
 
     <script action="LIGHT_MANAGER                 = CORE:get_light_manager()"/>
     <script action="LM                            = CORE:get_light_manager()"/>
+
+    <script action="SCRIPT_MANAGER                = CORE:get_scipt_manager()"/>
+    <script action="SM                            = CORE:get_scipt_manager()"/>
     
     <script action="GUI_MANAGER                   = CORE:get_gui_manager()"/>
 

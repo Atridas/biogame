@@ -93,6 +93,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("get_guid",      &CGameEntity::GetGUID)
       .def("receive_event", &CGameEntity::ReceiveEvent)
       .def("get_component", &CGameEntity::GetComponent<CBaseComponent>)
+      .def("get_name",      &CGameEntity::GetName)
 
     ,class_<CEntityManager>("EntityManager")
       .def("create_entity",         &CEntityManager::CreateEntity)
