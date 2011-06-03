@@ -59,7 +59,7 @@
 #define COLISION_SCENE_MASK 2
 #define ALTURA_CONTROLLER 1.5f
 #define RADIUS_CONTROLLER 0.3f
-#define ALTURA_TOTAL ((ALTURA_CONTROLLER+2*RADIUS_CONTROLLER)*0.5f + 0.1f)
+#define ALTURA_TOTAL ((ALTURA_CONTROLLER+2*RADIUS_CONTROLLER)*0.5f + 0.01f)
 
 #define COLISIONABLE_MASK ((1<<GROUP_COLLIDABLE_NON_PUSHABLE))
 
@@ -213,8 +213,8 @@ bool CPhysXProcess::Init()
   g_pJointActor3->GetPhXActor()->setLinearDamping(0.5);
 
   //g_pFixedJoint->SetInfo(g_pJointActor1,g_pJointActor2);
-  g_pSphericalJoint->SetInfoComplete(Vect3f(-9.0f,5.0f,-3.0f),Vect3f(1.0f,1.0f,1.0f),g_pJointActor2,g_pJointActor3);
-  g_pSphericalJoint2->SetInfoComplete(Vect3f(-9.0f,3.0f,-3.0f),Vect3f(1.0f,1.0f,1.0f),g_pJointActor1,g_pJointActor2);
+  g_pSphericalJoint->SetInfoComplete(Vect3f(-9.0f,5.0f,-3.0f),Vect3f(0.0f,-1.0f,0.0f),g_pJointActor2,g_pJointActor3);
+  g_pSphericalJoint2->SetInfoComplete(Vect3f(-9.0f,3.0f,-3.0f),Vect3f(0.0f,-1.0f,0.0f),g_pJointActor1,g_pJointActor2);
   //g_pSphericalJoint2->SetInfo(Vect3f(-9.0f,2.0f,-3.0f),g_pJointActor1,g_pJointActor2);
   //g_pSphericalJoint->SetInfo(Vect3f(-9.0f,3.0f,-3.0f),g_pJointActor2,g_pJointActor3);
   
@@ -274,7 +274,7 @@ bool CPhysXProcess::Init()
   g_pUserDataController->SetPaint(true);
   g_pUserDataController->SetColor(colBLACK);
 
-  g_pPhysXController = new CPhysicController(RADIUS_CONTROLLER,ALTURA_CONTROLLER,10.0f,0.1f,0.0001f,COLISIONABLE_MASK,g_pUserDataController,Vect3f(-7.0f,2.2f,-4.0f));
+  g_pPhysXController = new CPhysicController(RADIUS_CONTROLLER,ALTURA_CONTROLLER,10.0f,0.01f,0.0001f,COLISIONABLE_MASK,g_pUserDataController,Vect3f(-7.0f,2.2f,-4.0f));
   g_pPhysXController->SetYaw(-90);
   l_pPhysManager->AddPhysicController(g_pPhysXController);
 

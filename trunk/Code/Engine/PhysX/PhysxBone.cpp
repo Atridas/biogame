@@ -67,7 +67,7 @@ void CPhysxBone::Load(float _fDensity, string _szType, Vect3f _fMiddlePoint,Vect
     l_pUserData->SetPaint(true);
     l_pUserData->SetColor(colGREEN);
     CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
-		l_pActor->AddBoxSphape(Vect3f(_vSize.x,_vSize.z,_vSize.y)*0.5f,_fMiddlePoint,NULL,GROUP_COLLIDABLE_PUSHABLE);
+		l_pActor->AddBoxSphape(Vect3f(_vSize.x,_vSize.z,_vSize.y)*0.5f,Vect3f(_fMiddlePoint.x,0.0f,0.0f),NULL,GROUP_COLLIDABLE_PUSHABLE);
     l_pActor->CreateBody(_fDensity);
 
     l_pPM->AddPhysicActor(l_pActor);
@@ -85,7 +85,7 @@ void CPhysxBone::Load(float _fDensity, string _szType, Vect3f _fMiddlePoint,Vect
     l_pUserData->SetPaint(true);
     l_pUserData->SetColor(colYELLOW);
     CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
-    l_pActor->AddSphereShape(_vSize.x*0.5f,_fMiddlePoint,NULL,GROUP_COLLIDABLE_PUSHABLE);
+    l_pActor->AddSphereShape(_vSize.x*0.5f,Vect3f(_fMiddlePoint.x,0.0f,0.0f),NULL,GROUP_COLLIDABLE_PUSHABLE);
     l_pActor->CreateBody(_fDensity);
 
     l_pPM->AddPhysicActor(l_pActor);
