@@ -282,9 +282,9 @@ function TextureListOne _material =
 		append l_paths l_texture
 	)
 	
-	if _material.reflectionMapEnable == true and  _material.reflectionMap != undefined then
+	if _material.SpecularLevelMapEnable == true and  _material.SpecularLevelMap != undefined then
 	(
-		l_texture = _material.reflectionMap.filename
+		l_texture = _material.SpecularLevelMap.filename
 		l_texture = (OpenBitmap l_texture).filename
 		append l_paths l_texture
 	)
