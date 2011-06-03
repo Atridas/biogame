@@ -42,8 +42,8 @@ class CScriptManager;
 //---- Declaracion de nuevos tipos------------
 struct SPhysicsInitParams
 {
-	SPhysicsInitParams::SPhysicsInitParams():	m_fSkinWidth(0.001f), m_fGravity(-9.81f*10), 
-																						m_Restitution_DefMat(0.4f), m_StaticFriction_DefMat(0.5f),
+	SPhysicsInitParams::SPhysicsInitParams():	m_fSkinWidth(0.001f), m_fGravity(-9.81f), 
+																						m_Restitution_DefMat(0.5f), m_StaticFriction_DefMat(0.5f),
 																						m_DynamicFriction_DefMat(0.5f) {}
 	float		m_fSkinWidth;
 	float		m_fGravity;
