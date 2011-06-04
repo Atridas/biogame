@@ -619,63 +619,63 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
   CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
   l_pPhysManager->DebugRender(_pRM);
 
-  CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
-  CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
+  //CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
+  //CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
 
-  l_pSkeleton->calculateBoundingBoxes();
+  //l_pSkeleton->calculateBoundingBoxes();
 
-  vector<CalBone*> l_vBones = l_pSkeleton->getVectorBone();
+  //vector<CalBone*> l_vBones = l_pSkeleton->getVectorBone();
 
-  g_vCollisions.clear();
+  //g_vCollisions.clear();
 
-  for (size_t j=0;j<l_vBones.size();++j)
-  {
-    CalBone* l_pBone = l_vBones[j];
-    CalCoreBone* l_pCoreBone = l_pBone->getCoreBone();
+  //for (size_t j=0;j<l_vBones.size();++j)
+  //{
+  //  CalBone* l_pBone = l_vBones[j];
+  //  CalCoreBone* l_pCoreBone = l_pBone->getCoreBone();
 
-    Mat44f l_mWorld = GetBoneLeftHandedAbsoluteTransformation(l_pBone);
+  //  Mat44f l_mWorld = GetBoneLeftHandedAbsoluteTransformation(l_pBone);
 
-    _pRM->SetTransform(/*g_pCharacter->GetMat44() */ l_mWorld);
+  //  _pRM->SetTransform(/*g_pCharacter->GetMat44() */ l_mWorld);
 
-    /***************CORE BOUNDING BOX****************/
+  //  /***************CORE BOUNDING BOX****************/
 
-    //agafem els punts de la bounding de la core
-    CalVector l_vPoints[8];
-    l_pCoreBone->getBoundingBox().computePoints(l_vPoints);
+  //  //agafem els punts de la bounding de la core
+  //  CalVector l_vPoints[8];
+  //  l_pCoreBone->getBoundingBox().computePoints(l_vPoints);
 
-    CBoundingBox l_Box;
-    Vect3f l_vect[8];
+  //  CBoundingBox l_Box;
+  //  Vect3f l_vect[8];
 
-    //rotacio i translacio del core bone (absoluta)
-    CalVector l_TranslationC=l_pCoreBone->getTranslationAbsolute();
-    CalQuaternion l_QuatC=l_pCoreBone->getRotationAbsolute();
+  //  //rotacio i translacio del core bone (absoluta)
+  //  CalVector l_TranslationC=l_pCoreBone->getTranslationAbsolute();
+  //  CalQuaternion l_QuatC=l_pCoreBone->getRotationAbsolute();
 
-    //rotem el core bone  (absoluta)
-    CalQuaternion x_axis_90(-0.7071067811f,0.0f,0.0f,0.7071067811f);
-    l_QuatC *= x_axis_90;
-    l_TranslationC *= x_axis_90;
+  //  //rotem el core bone  (absoluta)
+  //  CalQuaternion x_axis_90(-0.7071067811f,0.0f,0.0f,0.7071067811f);
+  //  l_QuatC *= x_axis_90;
+  //  l_TranslationC *= x_axis_90;
 
-    for(int j=0;j<8;++j)
-    {
-      //calculem les coordenades del vertex de la box relatives al bone
-      CalVector l_PosBB=(l_vPoints[j]-l_TranslationC);
-      CalQuaternion l_Quat2=l_QuatC;
-      l_Quat2.invert();
-      l_PosBB*=l_Quat2;
+  //  for(int j=0;j<8;++j)
+  //  {
+  //    //calculem les coordenades del vertex de la box relatives al bone
+  //    CalVector l_PosBB=(l_vPoints[j]-l_TranslationC);
+  //    CalQuaternion l_Quat2=l_QuatC;
+  //    l_Quat2.invert();
+  //    l_PosBB*=l_Quat2;
 
-      l_vect[j] = Vect3f(-l_PosBB.x,l_PosBB.y,l_PosBB.z);
-    }
+  //    l_vect[j] = Vect3f(-l_PosBB.x,l_PosBB.y,l_PosBB.z);
+  //  }
 
-    //creem la box
-    l_Box.Init(l_vect);
+  //  //creem la box
+  //  l_Box.Init(l_vect);
 
-    /************************************************/
+  //  /************************************************/
 
-    //_pRM->RenderBoundingBox(&l_Box);
+  //  //_pRM->RenderBoundingBox(&l_Box);
 
-    //renderitzem els joints
-    _pRM->DrawSphere(0.01f,colYELLOW,5);
-  }
+  //  //renderitzem els joints
+  //  _pRM->DrawSphere(0.01f,colYELLOW,5);
+  //}
 
   CORE->GetRenderableObjectsManager()->Render(_pRM);
 
@@ -717,7 +717,7 @@ void CPhysXProcess::RenderINFO(CRenderManager* _pRM)
 
 
  
-  _pRM->DrawAxis();
+  //_pRM->DrawAxis();
   
 }
 
@@ -857,20 +857,11 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
   if(strcmp(_pcAction, "Elevate") == 0)
   {
     
-    //CPhysicActor* l_pPActorShoot = new CPhysicActor(g_pUserData);
-    //l_pPActorShoot->AddSphereShape(0.3f,m_pCamera->GetEye());
-    //l_pPActorShoot->CreateBody(1);
-    //CORE->GetPhysicsManager()->AddPhysicActor(l_pPActorShoot);
-    ////m_pCamera->GetDirection();
-    //l_pPActorShoot->SetLinearVelocity(m_pCamera->GetDirection()*m_fPhysxVelocity);
-    //
-    //CHECKED_DELETE(l_pPActorShoot)
-
     ///////////////////////////////////////////////////////////////////////////////
     // RAGDOLL PROVES
     ///////////////////////////////////////////////////////////////////////////////
 
-    CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
+    CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("rigglebot");
     CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
     l_pSkeleton->getCoreSkeleton()->calculateBoundingBoxes(l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getCoreModel());
     l_pSkeleton->calculateBoundingBoxes();
@@ -879,8 +870,10 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     if (g_pRagdoll == 0)
     {
       g_pRagdoll = new CPhysxSkeleton();
+      //RENDER_MANAGER->SetTransform(l_pAnim->GetMat44());
       CalModel* l_pCalModel = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel();
-      g_pRagdoll->Init("Data/Animated Models/Riggle/Skeleton.xml",l_pCalModel);
+      g_pRagdoll->Init("Data/Animated Models/Riggle/Skeleton.xml",l_pCalModel,l_pAnim->GetMat44());
+      l_pAnim->SetVisible(false);
 
      /* g_pRagdoll = new CPhysxRagdoll("Ragdoll Prova");
       g_pRagdoll->Load("Data/Animated Models/Riggle/Ragdoll.xml",false);
@@ -932,13 +925,13 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
 
   if(strcmp(_pcAction, "ShootBOX") == 0)
   {
-    CPhysicActor* l_pPActorShoot = new CPhysicActor(g_pUserData);
+    /*CPhysicActor* l_pPActorShoot = new CPhysicActor(g_pUserData);
     l_pPActorShoot->AddBoxSphape(0.2f,m_pCamera->GetEye());
     l_pPActorShoot->CreateBody(3);
     CORE->GetPhysicsManager()->AddPhysicActor(l_pPActorShoot);
     l_pPActorShoot->SetLinearVelocity(m_pCamera->GetDirection()*m_fPhysxVelocity);
     CHECKED_DELETE(l_pPActorShoot)
-
+*/
   }
 
   if(strcmp(_pcAction, "VelocityChange") == 0)

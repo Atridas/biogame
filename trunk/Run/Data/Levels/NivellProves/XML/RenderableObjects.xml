@@ -30,4 +30,5 @@
 	<RenderableObject name="BoxParallax" class="StaticMesh" resource="BoxParallax" position="-54.6592 0.0376668 30.1002" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="BoxGlowAlpha" class="StaticMesh" resource="BoxGlowAlpha" position="-54.6592 0.0376649 18.6366" yaw="0.0" pitch="0.0" roll="0.0" />
   <RenderableObject name="ariggle" class="AnimatedModel" resource="riggle" position="5.1793 0.0 -5.2768" yaw="-90.0" pitch="0.0" roll="0" cycle="walk"/>
+  <RenderableObject name="rigglebot" class="AnimatedModel" resource="riggle" position="3.1793 1.0 -2.2768" yaw="90.0" pitch="0.0" roll="0" cycle="idle"/>
 </RenderableObjects>

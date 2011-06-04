@@ -17,11 +17,12 @@
 #include "NxPhysics.h"
 //---------------------//
 
-bool CPhysxBone::Init(CalBone* _pBone)
+bool CPhysxBone::Init(CalBone* _pBone, Mat44f _vMat44)
 {
   SetCalBone(_pBone);
   CalCoreBone* l_pCoreBone = m_pCalBone->getCoreBone();
   m_iParentID = l_pCoreBone->getParentId();
+  m_vMatAnimatedModel = _vMat44;
 
   if (m_iParentID != -1)
   {
@@ -138,7 +139,7 @@ bool CPhysxBone::AddBoxActor(CXMLTreeNode _XMLObjects)
   l_pActor->CreateBody(l_fDensity);
 
   l_pPM->AddPhysicActor(l_pActor);
-  l_pActor->SetMat44(l_vMatActor);
+  l_pActor->SetMat44(m_vMatAnimatedModel*l_vMatActor);
 
   m_pActor = l_pActor;
   m_pBoneUserData = l_pUserData;
@@ -169,7 +170,7 @@ bool CPhysxBone::AddSphereActor(CXMLTreeNode _XMLObjects)
   l_pActor->CreateBody(l_fDensity);
 
   l_pPM->AddPhysicActor(l_pActor);
-  l_pActor->SetMat44(l_vMatActor);
+  l_pActor->SetMat44(m_vMatAnimatedModel*l_vMatActor);
 
   m_pActor = l_pActor;
   m_pBoneUserData = l_pUserData;
