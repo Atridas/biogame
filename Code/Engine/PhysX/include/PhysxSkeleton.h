@@ -21,7 +21,7 @@ public:
 
   virtual void Release();
 
-  bool              Init(const string& _szFileName, CalModel* _pCalModel);
+  bool              Init(const string& _szFileName, CalModel* _pCalModel, Mat44f _vMat);
   CalSkeleton*      GetSkeleton() {return m_pCalSkeleton;};
   void              SetSkeleton(CalSkeleton* _pSkeleton) {m_pCalSkeleton = _pSkeleton;};
 
@@ -43,11 +43,12 @@ public:
   void UpdateCal3dFromPhysx();
 
 private:
-  CalSkeleton* m_pCalSkeleton;
-  vector<CPhysxBone*> m_vBones;
-  vector<CPhysicFixedJoint*> m_vFixedJoints;
-  vector<CPhysicSphericalJoint*> m_vSphericalJoints;
-  vector<CPhysicRevoluteJoint*> m_vRevoluteJoints;
+  CalSkeleton*                    m_pCalSkeleton;
+  Mat44f                          m_vMat44;
+  vector<CPhysxBone*>             m_vBones;
+  vector<CPhysicFixedJoint*>      m_vFixedJoints;
+  vector<CPhysicSphericalJoint*>  m_vSphericalJoints;
+  vector<CPhysicRevoluteJoint*>   m_vRevoluteJoints;
 };
 
 #endif 

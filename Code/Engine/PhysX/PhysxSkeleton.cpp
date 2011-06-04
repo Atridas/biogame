@@ -15,9 +15,9 @@
 
 
 
-bool CPhysxSkeleton::Init(const string& _szFileName, CalModel* _pCalModel)
+bool CPhysxSkeleton::Init(const string& _szFileName, CalModel* _pCalModel, Mat44f _vMat)
 {
-
+  m_vMat44 = _vMat;
   SetSkeleton(_pCalModel->getSkeleton());
   vector<CalBone*> l_vLlistaBones = m_pCalSkeleton->getVectorBone();
 
@@ -27,7 +27,7 @@ bool CPhysxSkeleton::Init(const string& _szFileName, CalModel* _pCalModel)
   {
     CalBone* l_pBone = l_vLlistaBones[i];
     CPhysxBone* l_pPhysXBone = new CPhysxBone(l_pBone->getCoreBone()->getName());
-    l_pPhysXBone->Init(l_pBone);
+    l_pPhysXBone->Init(l_pBone,_vMat);
     m_vBones.push_back(l_pPhysXBone);
     
   }
@@ -255,7 +255,9 @@ bool CPhysxSkeleton::AddSphericalJoint(CXMLTreeNode _XMLObjects)
 
   CalVector l_vCalVect = l_pBone1->GetCalBone()->getTranslationAbsolute();
   Vect3f l_vJointPoint(-l_vCalVect.x,l_vCalVect.y,l_vCalVect.z);
+  l_vJointPoint = m_vMat44*l_vJointPoint;
   Vect3f l_vAxis;
+  CalVector l_vVect;
 
   
 
@@ -267,16 +269,17 @@ bool CPhysxSkeleton::AddSphericalJoint(CXMLTreeNode _XMLObjects)
       int l_pChildId = l_pBone1->GetChildList()[0];
       string l_szNameChild = m_pCalSkeleton->getBone(l_pChildId)->getCoreBone()->getName();
       CPhysxBone* l_pPhysChild = GetPhysxBoneByName(l_szNameChild);
-      CalVector l_vVect = l_pPhysChild->GetCalBone()->getTranslationAbsolute();
+      l_vVect = l_pPhysChild->GetCalBone()->getTranslationAbsolute();
       l_vVect.x = -l_vVect.x;
-      l_vAxis = Vect3f(l_vVect.x-l_vJointPoint.x,l_vVect.y-l_vJointPoint.y,l_vVect.z-l_vJointPoint.z);
-      l_vAxis.Normalize();
+    /*  l_vAxis = Vect3f(l_vVect.x-l_vJointPoint.x,l_vVect.y-l_vJointPoint.y,l_vVect.z-l_vJointPoint.z);
+      l_vAxis.Normalize();*/
     }
     else
     {
       Vect3f l_vMiddle = l_pBone1->GetMiddlePoint();
-      l_vAxis(l_vMiddle.x-l_vJointPoint.x,l_vMiddle.y-l_vJointPoint.y,l_vMiddle.z-l_vJointPoint.z);
-      l_vAxis.Normalize();
+      l_vVect = CalVector(l_vMiddle.x,l_vMiddle.y,l_vMiddle.z);
+      /*l_vAxis(l_vMiddle.x-l_vJointPoint.x,l_vMiddle.y-l_vJointPoint.y,l_vMiddle.z-l_vJointPoint.z);
+      l_vAxis.Normalize();*/
     }
   }
   else if (l_szDirection == "In")
@@ -288,14 +291,22 @@ bool CPhysxSkeleton::AddSphericalJoint(CXMLTreeNode _XMLObjects)
       CPhysxBone* l_pPhysParent = GetPhysxBoneByName(l_szNameParent);
       CalVector l_vVect = l_pPhysParent->GetCalBone()->getTranslationAbsolute();
       l_vVect.x = -l_vVect.x;
-      l_vAxis = Vect3f(l_vVect.x-l_vJointPoint.x,l_vVect.y-l_vJointPoint.y,l_vVect.z-l_vJointPoint.z);
-      l_vAxis.Normalize();
+     /* l_vAxis = Vect3f(l_vVect.x-l_vJointPoint.x,l_vVect.y-l_vJointPoint.y,l_vVect.z-l_vJointPoint.z);
+      l_vAxis.Normalize();*/
     }
     
   }
 
+  
+  Vect3f l_vAxisAux(l_vVect.x,l_vVect.y,l_vVect.z);
+  l_vAxisAux = m_vMat44*l_vAxisAux;
+  l_vAxis = Vect3f(l_vAxisAux.x-l_vJointPoint.x,l_vAxisAux.y-l_vJointPoint.y,l_vAxisAux.z-l_vJointPoint.z);
+  l_vAxis.Normalize();
+
   l_pJointInfo.m_vAnchor = l_vJointPoint;
   l_pJointInfo.m_vAxis = l_vAxis;
+
+
 
   if (l_szActor2=="NULL")
   {

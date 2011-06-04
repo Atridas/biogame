@@ -19,7 +19,7 @@ public:
   CPhysxBone(string _szName) : CNamed(_szName),m_pCalBone(0), m_iParentID(-1), m_pActor(0), m_bRoot(true),m_pBoneUserData(0) {};
   ~CPhysxBone() {Done();};
 
-  bool                Init(CalBone* _pBone);
+  bool                Init(CalBone* _pBone,Mat44f _vMat44);
   virtual void        Release();
 
   void                UpdateCal3dFromPhysx();
@@ -51,6 +51,7 @@ public:
   
 private:
 
+  Mat44f              m_vMatAnimatedModel;
   CalBone*            m_pCalBone;
   int                 m_iParentID;
   Vect3f              m_vMiddlePoint;
