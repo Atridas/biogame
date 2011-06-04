@@ -81,14 +81,14 @@ void CPhysicSphericalJoint::SetInfoComplete	(const Vect3f& anchor, const Vect3f&
   //LIMITS PELS TWIST!!!!!!! (gir de munyeca)
   m_pSphericalDesc->flags |= NX_SJF_TWIST_LIMIT_ENABLED;
   m_pSphericalDesc->twistLimit.low.value = 0.025f*NxPi;
-  m_pSphericalDesc->twistLimit.low.restitution = 0.5f;
+  m_pSphericalDesc->twistLimit.low.restitution = 0.0f;
   m_pSphericalDesc->twistLimit.high.value = 0.025f*NxPi;
-  m_pSphericalDesc->twistLimit.high.restitution = 1.0f;
+  m_pSphericalDesc->twistLimit.high.restitution = 0.0f;
 
   //Es pot push pero al retornar, com mes petit es el valor, menys espai recorre.
   m_pSphericalDesc->flags |= NX_SJF_SWING_LIMIT_ENABLED;
-  m_pSphericalDesc->swingLimit.value = 0.15f*NxPi;
-  m_pSphericalDesc->swingLimit.restitution = 0.5f;
+  m_pSphericalDesc->swingLimit.value = 0.1f*NxPi;
+  m_pSphericalDesc->swingLimit.restitution = 0.0f;
 
   //Twist Spring Enabled
   m_pSphericalDesc->flags |= NX_SJF_TWIST_SPRING_ENABLED;
