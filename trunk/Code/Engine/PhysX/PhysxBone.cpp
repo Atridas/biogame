@@ -8,6 +8,7 @@
 #include "PhysicSphericalJoint.h"
 #include "AnimatedModelManager.h"
 #include "RenderManager.h"
+#include <XML/XMLTreeNode.h>
 #include "Core.h"
 #include "base.h"
 //---PhysX Includes---//
@@ -63,57 +64,6 @@ void CPhysxBone::UpdateCal3dFromPhysx()
 }
 
 
-//Funcions per configurar el Ragdoll
-
-void CPhysxBone::Load(float _fDensity, string _szType, Vect3f _fMiddlePoint,Vect3f _vSize, string _szName)
-{
-
-  CPhysicsManager* l_pPM = CORE->GetPhysicsManager();
-  Mat44f l_vMatActor;
-  l_vMatActor = GetBoneLeftHandedAbsoluteTransformation(m_pCalBone);
-  m_vMiddlePoint = _fMiddlePoint;
-
-  //l_vMatActor.m00 = -l_vMatActor.m00;
-  //l_vMatActor.m01 = -l_vMatActor.m01;
-  //l_vMatActor.m02 = -l_vMatActor.m02;
-  //l_vMatActor.m03 = -l_vMatActor.m03;
-
-  if (_szType == "box")
-  {
-    CPhysicUserData* l_pUserData = new CPhysicUserData(_szName);
-    l_pUserData->SetPaint(true);
-    l_pUserData->SetColor(colGREEN);
-    CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
-		l_pActor->AddBoxSphape(Vect3f(_vSize.x,_vSize.z,_vSize.y)*0.5f,Vect3f(_fMiddlePoint.x,0.0f,0.0f),NULL,GROUP_COLLIDABLE_PUSHABLE);
-    l_pActor->CreateBody(_fDensity);
-
-    l_pPM->AddPhysicActor(l_pActor);
-    l_pActor->SetMat44(l_vMatActor);
-
-
-    m_pActor = l_pActor;
-    m_pBoneUserData = l_pUserData;
-      
-  }
-
-  if (_szType == "sphere")
-  {
-    CPhysicUserData* l_pUserData = new CPhysicUserData(_szName);
-    l_pUserData->SetPaint(true);
-    l_pUserData->SetColor(colYELLOW);
-    CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
-    l_pActor->AddSphereShape(_vSize.x*0.5f,Vect3f(_fMiddlePoint.x,0.0f,0.0f),NULL,GROUP_COLLIDABLE_PUSHABLE);
-    l_pActor->CreateBody(_fDensity);
-
-    l_pPM->AddPhysicActor(l_pActor);
-    l_pActor->SetMat44(l_vMatActor);
-
-    m_pActor = l_pActor;
-    m_pBoneUserData = l_pUserData;
-      
-  }
-
-}
 
 void CPhysxBone::InitBoneMatrix()
 {
@@ -160,6 +110,78 @@ Mat44f CPhysxBone::GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone)
 
   return l_Transform;
   
+}
+
+
+//Funcions per afegir els actors de fisica.
+bool CPhysxBone::AddBoxActor(CXMLTreeNode _XMLObjects)
+{
+  string l_szName;
+  Vect3f l_vSize,l_fMiddlePoint; 
+  float l_fDensity;
+
+  l_szName			        = _XMLObjects.GetPszISOProperty("name" ,"");
+  l_fDensity            = _XMLObjects.GetFloatProperty("density");
+  l_fMiddlePoint        = _XMLObjects.GetVect3fProperty("bounding_box_middle_point",Vect3f(0.0f), false);
+  l_vSize               = _XMLObjects.GetVect3fProperty("bounding_box_size",Vect3f(0.0f), false);
+
+  CPhysicsManager* l_pPM = CORE->GetPhysicsManager();
+  Mat44f l_vMatActor;
+  l_vMatActor = GetBoneLeftHandedAbsoluteTransformation(m_pCalBone);
+  m_vMiddlePoint = l_fMiddlePoint;
+
+  CPhysicUserData* l_pUserData = new CPhysicUserData(l_szName);
+  l_pUserData->SetPaint(true);
+  l_pUserData->SetColor(colGREEN);
+  CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
+	l_pActor->AddBoxSphape(Vect3f(l_vSize.x,l_vSize.z,l_vSize.y)*0.5f,Vect3f(l_fMiddlePoint.x,0.0f,0.0f),NULL,GROUP_COLLIDABLE_PUSHABLE);
+  l_pActor->CreateBody(l_fDensity);
+
+  l_pPM->AddPhysicActor(l_pActor);
+  l_pActor->SetMat44(l_vMatActor);
+
+  m_pActor = l_pActor;
+  m_pBoneUserData = l_pUserData;
+
+  return true;
+}
+
+bool CPhysxBone::AddSphereActor(CXMLTreeNode _XMLObjects)
+{
+  string l_szName;
+  Vect3f l_vSize,l_fMiddlePoint; 
+  float l_fDensity;
+
+  l_szName			        = _XMLObjects.GetPszISOProperty("name" ,"");
+  l_fDensity            = _XMLObjects.GetFloatProperty("density");
+  l_fMiddlePoint        = _XMLObjects.GetVect3fProperty("bounding_box_middle_point",Vect3f(0.0f), false);
+  l_vSize               = _XMLObjects.GetVect3fProperty("bounding_box_size",Vect3f(0.0f), false);
+
+  CPhysicsManager* l_pPM = CORE->GetPhysicsManager();
+  Mat44f l_vMatActor;
+  l_vMatActor = GetBoneLeftHandedAbsoluteTransformation(m_pCalBone);
+  m_vMiddlePoint = l_fMiddlePoint;
+  CPhysicUserData* l_pUserData = new CPhysicUserData(l_szName);
+  l_pUserData->SetPaint(true);
+  l_pUserData->SetColor(colYELLOW);
+  CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
+  l_pActor->AddSphereShape(l_vSize.x*0.5f,Vect3f(l_fMiddlePoint.x,0.0f,0.0f),NULL,GROUP_COLLIDABLE_PUSHABLE);
+  l_pActor->CreateBody(l_fDensity);
+
+  l_pPM->AddPhysicActor(l_pActor);
+  l_pActor->SetMat44(l_vMatActor);
+
+  m_pActor = l_pActor;
+  m_pBoneUserData = l_pUserData;
+
+  return true;
+}
+
+
+bool CPhysxBone::AddCapsuleActor(CXMLTreeNode _XMLObjects)
+{
+
+  return true;
 }
 
 

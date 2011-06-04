@@ -103,7 +103,6 @@ void CPhysxSkeleton::Release()
 
 bool CPhysxSkeleton::Load(string _szFileName)
 {
-
   CXMLTreeNode l_XML;
   CXMLTreeNode l_XMLObjects;
 	if(!l_XML.LoadFile(_szFileName.c_str()))
@@ -111,45 +110,45 @@ bool CPhysxSkeleton::Load(string _szFileName)
 		LOGGER->AddNewLog(ELL_WARNING,"CPhysxRagdoll:: No s'ha trobat el XML \"%s\"", _szFileName.c_str());
 		return false;
 	}
-
-
+  
   l_XMLObjects = l_XML(0);
-
   int l_iNumObjects = l_XMLObjects.GetNumChildren();
-
   
 	for(int i = 0; i < l_iNumObjects; i++)
 	{
 		CXMLTreeNode l_XMLObject = l_XMLObjects(i);
     string l_szType,l_szName;
-    Vect3f l_vSize,l_fMiddlePoint; 
-    float l_fDensity;
-
+ 
 		if(l_XMLObject.IsComment())
 		{
 			continue;
 		}
 
-
-    l_szName			        = l_XMLObject.GetPszISOProperty("name" ,"");
-    l_fDensity            = l_XMLObject.GetFloatProperty("density");
-    l_szType	            = l_XMLObject.GetPszISOProperty("type" ,"");
-    l_fMiddlePoint        = l_XMLObject.GetVect3fProperty("bounding_box_middle_point",Vect3f(0.0f), false);
-    l_vSize               = l_XMLObject.GetVect3fProperty("bounding_box_size",Vect3f(0.0f), false);
-
+    l_szName = l_XMLObject.GetPszISOProperty("name" ,"");
+    l_szType = l_XMLObject.GetPszISOProperty("type" ,"");
+    
     CPhysxBone* l_pBone = GetPhysxBoneByName(l_szName);
 
     if (l_pBone!=0)
     {
-      l_pBone->Load(l_fDensity,l_szType,l_fMiddlePoint,l_vSize,l_szName);
+      if (l_szType=="box")
+      {
+        l_pBone->AddBoxActor(l_XMLObject);
+      }
+
+      if (l_szType=="sphere")
+      {
+        l_pBone->AddSphereActor(l_XMLObject);
+      }
+
+      if (l_szType=="capsule")
+      {
+        l_pBone->AddCapsuleActor(l_XMLObject);
+      }
     }
-	  
-	
   }
-
-
+  
   return true;
-
 }
 
 

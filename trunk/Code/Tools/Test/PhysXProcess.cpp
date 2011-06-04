@@ -181,6 +181,10 @@ bool CPhysXProcess::Init()
   g_pUserDataJoint3->SetPaint(true);
   g_pUserDataJoint3->SetColor(colGREEN);
 
+  g_pUserData = new CPhysicUserData("Plane");
+  g_pUserData->SetPaint(true);
+  g_pUserData->SetColor(colWHITE);
+
 
   g_pJointActor1 = new CPhysicActor(g_pUserDataJoint1);
   g_pJointActor2 = new CPhysicActor(g_pUserDataJoint2);
@@ -329,41 +333,6 @@ bool CPhysXProcess::Init()
   SetOk(true);
   return IsOk();
 
-
-
-
-
-  
-
-
-  //PHYSICS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  /*g_pUserData = new CPhysicUserData("Plane");
-  g_pUserDataEscala = new CPhysicUserData("Escala");*/
-  /*g_pUserData->SetPaint(false);
-  g_pUserData->SetColor(colWHITE);*/
-  /*g_pUserDataEscala->SetPaint(true);
-  g_pUserDataEscala->SetColor(colYELLOW);*/
-  //ESCALA
-  /*g_pPEscala->AddBoxSphape(Vect3f(0.5f,0.3f,2.0f),Vect3f(-10.0f,0.0f,0.0f));
-  g_pPEscala->AddBoxSphape(Vect3f(0.5f,0.6f,2.0f),Vect3f(-11.0f,0.0f,0.0f));
-  g_pPEscala->AddBoxSphape(Vect3f(0.5f,0.9f,2.0f),Vect3f(-12.0f,0.0f,0.0f));
-  g_pPEscala->AddBoxSphape(Vect3f(0.5f,1.2f,2.0f),Vect3f(-13.0f,0.0f,0.0f));
-  g_pPEscala->AddBoxSphape(Vect3f(0.5f,1.5f,2.0f),Vect3f(-14.0f,0.0f,0.0f));
-  g_pPEscala->AddBoxSphape(Vect3f(0.5f,1.8f,2.0f),Vect3f(-15.0f,0.0f,0.0f));
-  g_pPEscala->AddBoxSphape(Vect3f(0.5f,2.1f,2.0f),Vect3f(-16.0f,0.0f,0.0f));
-  g_pPEscala->AddBoxSphape(Vect3f(0.5f,2.4f,2.0f),Vect3f(-17.0f,0.0f,0.0f));
-  g_pPEscala->AddBoxSphape(Vect3f(0.5f,2.7f,2.0f),Vect3f(-18.0f,0.0f,0.0f));
-  g_pPEscala->AddBoxSphape(Vect3f(0.5f,3.0f,2.0f),Vect3f(-19.0f,0.0f,0.0f));
-  g_pPEscala->SetGlobalPosition(Vect3f(5.0f,0.0f,5.0f));*/
-
-  
-  //g_pPActorPlane->AddBoxSphape(Vect3f(500.f,1.0f,500.f),Vect3f(0.0f,-1.0f,0.0f),NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
-  //l_pPhysManager->AddPhysicActor(g_pPActorPlane);
-
-  //g_pPActorPlane = new CPhysicActor(g_pUserData);
-  //g_pPActorComposite = new CPhysicActor(g_pUserData3);
-  //g_pPEscala = new CPhysicActor(g_pUserDataEscala);
-  /////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -963,16 +932,12 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
 
   if(strcmp(_pcAction, "ShootBOX") == 0)
   {
-    //CPhysicActor* l_pPActorShoot = new CPhysicActor(g_pUserData);
-    //l_pPActorShoot->AddBoxSphape(0.8f,m_pCamera->GetEye());
-    //l_pPActorShoot->CreateBody(3);
-    //CORE->GetPhysicsManager()->AddPhysicActor(l_pPActorShoot);
-    ////m_pCamera->GetDirection();
-    //l_pPActorShoot->SetLinearVelocity(m_pCamera->GetDirection()*m_fPhysxVelocity);
-    //CHECKED_DELETE(l_pPActorShoot)
-
-
-    
+    CPhysicActor* l_pPActorShoot = new CPhysicActor(g_pUserData);
+    l_pPActorShoot->AddBoxSphape(0.2f,m_pCamera->GetEye());
+    l_pPActorShoot->CreateBody(3);
+    CORE->GetPhysicsManager()->AddPhysicActor(l_pPActorShoot);
+    l_pPActorShoot->SetLinearVelocity(m_pCamera->GetDirection()*m_fPhysxVelocity);
+    CHECKED_DELETE(l_pPActorShoot)
 
   }
 
