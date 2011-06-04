@@ -71,171 +71,6 @@ void CPhysxSkeleton::InitPhysXActors()
 
 }
 
-//void CPhysxSkeleton::InitPhysXJoints()
-//{
-//  for (size_t i=0;i<m_vBones.size();++i)
-//  {
-//
-//    int l_iIdParent = m_vBones[i]->GetCalBone()->getCoreBone()->getParentId();
-//
-//    if (!m_vBones[i]->IsBoneRoot())
-//    {
-//     
-//      CalBone* l_pParent = m_pCalSkeleton->getBone(l_iIdParent);
-//      CPhysxBone* l_pPhysxBone = GetPhysxBoneByName(l_pParent->getCoreBone()->getName());
-//      m_vBones[i]->InitPhysXJoint(l_pPhysxBone);
-//    }
-//  }
-//}
-
-
-bool CPhysxSkeleton::InitPhysXJoints(string _szFileName)
-{
-
-  CXMLTreeNode l_XML;
-  CXMLTreeNode l_XMLObjects;
-	if(!l_XML.LoadFile(_szFileName.c_str()))
-	{
-		LOGGER->AddNewLog(ELL_WARNING,"CPhysxRagdoll:: No s'ha trobat el XML \"%s\"", _szFileName.c_str());
-		return false;
-	}
-
-
-  l_XMLObjects = l_XML(1);
-
-  int l_iNumObjects = l_XMLObjects.GetNumChildren();
-
-  
-	for(int i = 0; i < l_iNumObjects; i++)
-	{
-    string l_szType,l_szActor1,l_szActor2, l_szDirection;
-    CXMLTreeNode l_XMLObject = l_XMLObjects(i);
-    if(l_XMLObject.IsComment())
-		{
-			continue;
-		}
-
-    l_szType			= l_XMLObject.GetPszISOProperty("type" ,"");
-    l_szActor1		= l_XMLObject.GetPszISOProperty("Actor1" ,"");
-    l_szActor2		= l_XMLObject.GetPszISOProperty("Actor2" ,"");
-    l_szDirection = l_XMLObject.GetPszISOProperty("Direction" ,"");
-
-    CPhysxBone* l_pBone1 = GetPhysxBoneByName(l_szActor1);
-    CPhysxBone* l_pBone2 = GetPhysxBoneByName(l_szActor2);
-
-    /*CPhysicActor* l_pActor1 = l_pBone1->GetPhysxActor();
-    CPhysicActor* l_pActor2 = l_pBone2->GetPhysxActor();*/
-    CPhysicActor* l_pActor1 = 0;
-    CPhysicActor* l_pActor2 = 0;
-
-
-    if (l_szType=="spherical")
-    {
-      CPhysicSphericalJoint* l_pSphericalJoint = 0;
-      l_pSphericalJoint = new CPhysicSphericalJoint();
-      CalVector l_vCalVect = l_pBone1->GetCalBone()->getTranslationAbsolute();
-      Vect3f l_vJointPointMiddle(-l_vCalVect.x,l_vCalVect.y,l_vCalVect.z);
-      l_pActor1 = l_pBone1->GetPhysxActor();
-      Mat44f l_vMatActor;
-      l_pActor1->GetMat44(l_vMatActor);
-      Vect3f l_vTrans = l_vMatActor.GetTranslationVector();
-      Vect3f l_vRot = l_vMatActor.GetPitchRollYaw();
-
-      Mat44f l_vRotMat = l_pBone1->GetBoneLeftHandedAbsoluteTransformation(l_pBone1->GetCalBone());
-      l_vRotMat.Translate(Vect3f(1.0f,0.0f,0.0f));
-      Vect3f l_vPosCenter = l_vRotMat.GetTranslationVector();
-
-      Vect3f l_vMiddle = l_pBone1->GetMiddlePoint();
-      l_vMiddle.x = -l_vMiddle.x;
-      l_vPosCenter.x = l_vPosCenter.x;
-      Vect3f l_vAxis(l_vPosCenter.x-l_vJointPointMiddle.x,l_vPosCenter.y-l_vJointPointMiddle.y,l_vPosCenter.z-l_vJointPointMiddle.z);
-      l_vAxis.Normalize();
-
-
-
-      //MES PROVES
-      if (l_szDirection == "Out")
-      {
-        if (l_pBone1->GetChildList().size() > 0)
-        {
-          int l_pChildId = l_pBone1->GetChildList()[0];
-          string l_szNameChild = m_pCalSkeleton->getBone(l_pChildId)->getCoreBone()->getName();
-          CPhysxBone* l_pPhysChild = GetPhysxBoneByName(l_szNameChild);
-          CalVector l_vVect = l_pPhysChild->GetCalBone()->getTranslationAbsolute();
-          l_vVect.x = -l_vVect.x;
-          l_vAxis = Vect3f(l_vVect.x-l_vJointPointMiddle.x,l_vVect.y-l_vJointPointMiddle.y,l_vVect.z-l_vJointPointMiddle.z);
-          l_vAxis.Normalize();
-        }
-      }
-      else if (l_szDirection == "In")
-      {
-        if (!l_pBone1->IsBoneRoot())
-        {
-          int l_pParentID = l_pBone1->GetParentID();
-          string l_szNameParent = m_pCalSkeleton->getBone(l_pParentID)->getCoreBone()->getName();
-          CPhysxBone* l_pPhysParent = GetPhysxBoneByName(l_szNameParent);
-          CalVector l_vVect = l_pPhysParent->GetCalBone()->getTranslationAbsolute();
-          l_vVect.x = -l_vVect.x;
-          l_vAxis = Vect3f(l_vVect.x-l_vJointPointMiddle.x,l_vVect.y-l_vJointPointMiddle.y,l_vVect.z-l_vJointPointMiddle.z);
-          l_vAxis.Normalize();
-        }
-      
-      }
-
-      if (l_szActor2=="NULL")
-      {
-        //l_pSphericalJoint->SetInfo(l_vJointPointMiddle,l_pActor1);
-        l_pSphericalJoint->SetInfoComplete(l_vJointPointMiddle,l_vAxis,l_pActor1);
-
-      }
-      else
-      {
-        l_pActor2 = l_pBone2->GetPhysxActor();
-        //l_pSphericalJoint->SetInfo(l_vJointPointMiddle,l_pActor1,l_pActor2);
-        l_pSphericalJoint->SetInfoComplete(l_vJointPointMiddle,l_vAxis,l_pActor1,l_pActor2);
-       
-      }
-      CORE->GetPhysicsManager()->AddPhysicSphericalJoint(l_pSphericalJoint);
-      m_vSphericalJoints.push_back(l_pSphericalJoint);
-    
-    }
-    
-    if (l_szType=="fixed")
-    {
-      CPhysicFixedJoint* l_pFixedJoint = 0;
-      l_pFixedJoint = new CPhysicFixedJoint();
-
-      if (l_szActor2=="NULL")
-      {
-        l_pActor1 = l_pBone1->GetPhysxActor();
-        l_pFixedJoint->SetInfo(l_pActor1);
-      }
-      else
-      {
-        l_pActor1 = l_pBone1->GetPhysxActor();
-        l_pActor2 = l_pBone2->GetPhysxActor();
-        l_pFixedJoint->SetInfo(l_pActor1,l_pActor2);
-      }
-
-      CORE->GetPhysicsManager()->AddPhysicFixedJoint(l_pFixedJoint);
-      m_vFixedJoints.push_back(l_pFixedJoint);
-    
-    }
-
-    if (l_szType=="revolute")
-    {
-    
-    
-    }
-
-
-  }
-
-  return true;
-  
-}
-
-
 
 void CPhysxSkeleton::Release()
 {
@@ -264,7 +99,6 @@ void CPhysxSkeleton::Release()
   m_vSphericalJoints.clear();
   m_vBones.clear();
 }
-
 
 
 bool CPhysxSkeleton::Load(string _szFileName)
@@ -340,8 +174,6 @@ CPhysxBone* CPhysxSkeleton::GetPhysxBoneByName(string _szName)
 }
 
 
-
-
 void CPhysxSkeleton::UpdateCal3dFromPhysx()
 {
 
@@ -349,5 +181,239 @@ void CPhysxSkeleton::UpdateCal3dFromPhysx()
   {
     m_vBones[i]->UpdateCal3dFromPhysx();
   }
+
+}
+
+//Main function pels Joints.
+bool CPhysxSkeleton::InitPhysXJoints(string _szFileName)
+{
+
+  CXMLTreeNode l_XML;
+  CXMLTreeNode l_XMLObjects;
+	if(!l_XML.LoadFile(_szFileName.c_str()))
+	{
+		LOGGER->AddNewLog(ELL_WARNING,"CPhysxRagdoll:: No s'ha trobat el XML \"%s\"", _szFileName.c_str());
+		return false;
+	}
+
+  l_XMLObjects = l_XML(1);
+
+  int l_iNumObjects = l_XMLObjects.GetNumChildren();
+
+  
+	for(int i = 0; i < l_iNumObjects; i++)
+	{
+    string l_szType;
+    CXMLTreeNode l_XMLObject = l_XMLObjects(i);
+    if(l_XMLObject.IsComment())
+	  {
+		  continue;
+	  }
+
+    l_szType = l_XMLObject.GetPszISOProperty("type" ,"");
+    
+    if (l_szType=="spherical")
+    {
+      AddSphericalJoint(l_XMLObject);  
+    }
+    
+    if (l_szType=="fixed")
+    {
+      AddFixedJoint(l_XMLObject);     
+    }
+
+    if (l_szType=="revolute")
+    {
+      AddRevoluteJoint(l_XMLObject); 
+    }
+  }
+
+  return true;
+  
+}
+
+
+bool CPhysxSkeleton::AddSphericalJoint(CXMLTreeNode _XMLObjects)
+{
+  string l_szActor1,l_szActor2, l_szDirection;
+
+  l_szActor1		= _XMLObjects.GetPszISOProperty("Actor1" ,"");
+  l_szActor2		= _XMLObjects.GetPszISOProperty("Actor2" ,"");
+  l_szDirection	= _XMLObjects.GetPszISOProperty("Direction" ,"");
+
+  SSphericalLimitInfo l_pJointInfo = GetJointParameterInfo(_XMLObjects);
+
+  CPhysxBone* l_pBone1 = GetPhysxBoneByName(l_szActor1);
+  CPhysxBone* l_pBone2 = GetPhysxBoneByName(l_szActor2);
+
+  CPhysicActor* l_pActor1 = 0;
+  CPhysicActor* l_pActor2 = 0;
+  l_pActor1 = l_pBone1->GetPhysxActor();
+
+  CPhysicSphericalJoint* l_pSphericalJoint = 0;
+  l_pSphericalJoint = new CPhysicSphericalJoint();
+
+
+  CalVector l_vCalVect = l_pBone1->GetCalBone()->getTranslationAbsolute();
+  Vect3f l_vJointPoint(-l_vCalVect.x,l_vCalVect.y,l_vCalVect.z);
+  Vect3f l_vAxis;
+
+  
+
+  //MES PROVES
+  if (l_szDirection == "Out")
+  {
+    if (l_pBone1->GetChildList().size() > 0)
+    {
+      int l_pChildId = l_pBone1->GetChildList()[0];
+      string l_szNameChild = m_pCalSkeleton->getBone(l_pChildId)->getCoreBone()->getName();
+      CPhysxBone* l_pPhysChild = GetPhysxBoneByName(l_szNameChild);
+      CalVector l_vVect = l_pPhysChild->GetCalBone()->getTranslationAbsolute();
+      l_vVect.x = -l_vVect.x;
+      l_vAxis = Vect3f(l_vVect.x-l_vJointPoint.x,l_vVect.y-l_vJointPoint.y,l_vVect.z-l_vJointPoint.z);
+      l_vAxis.Normalize();
+    }
+    else
+    {
+      Vect3f l_vMiddle = l_pBone1->GetMiddlePoint();
+      l_vAxis(l_vMiddle.x-l_vJointPoint.x,l_vMiddle.y-l_vJointPoint.y,l_vMiddle.z-l_vJointPoint.z);
+      l_vAxis.Normalize();
+    }
+  }
+  else if (l_szDirection == "In")
+  {
+    if (!l_pBone1->IsBoneRoot())
+    {
+      int l_pParentID = l_pBone1->GetParentID();
+      string l_szNameParent = m_pCalSkeleton->getBone(l_pParentID)->getCoreBone()->getName();
+      CPhysxBone* l_pPhysParent = GetPhysxBoneByName(l_szNameParent);
+      CalVector l_vVect = l_pPhysParent->GetCalBone()->getTranslationAbsolute();
+      l_vVect.x = -l_vVect.x;
+      l_vAxis = Vect3f(l_vVect.x-l_vJointPoint.x,l_vVect.y-l_vJointPoint.y,l_vVect.z-l_vJointPoint.z);
+      l_vAxis.Normalize();
+    }
+    
+  }
+
+  l_pJointInfo.m_vAnchor = l_vJointPoint;
+  l_pJointInfo.m_vAxis = l_vAxis;
+
+  if (l_szActor2=="NULL")
+  {
+    //l_pSphericalJoint->SetInfoComplete(l_vJointPoint,l_vAxis,l_pActor1);
+    l_pSphericalJoint->SetInfoRagdoll(l_pJointInfo,l_pActor1);
+  }
+  else
+  {
+    l_pActor2 = l_pBone2->GetPhysxActor();
+    //l_pSphericalJoint->SetInfoComplete(l_vJointPoint,l_vAxis,l_pActor1,l_pActor2);
+    l_pSphericalJoint->SetInfoRagdoll(l_pJointInfo,l_pActor1,l_pActor2);
+  }
+  CORE->GetPhysicsManager()->AddPhysicSphericalJoint(l_pSphericalJoint);
+  m_vSphericalJoints.push_back(l_pSphericalJoint);
+
+	return true;
+}
+
+
+bool CPhysxSkeleton::AddFixedJoint(CXMLTreeNode _XMLObjects)
+{
+  string l_szActor1,l_szActor2, l_szDirection;
+
+  l_szActor1		= _XMLObjects.GetPszISOProperty("Actor1" ,"");
+  l_szActor2		= _XMLObjects.GetPszISOProperty("Actor2" ,"");
+  l_szDirection	= _XMLObjects.GetPszISOProperty("Direction" ,"");
+
+  CPhysxBone* l_pBone1 = GetPhysxBoneByName(l_szActor1);
+  CPhysxBone* l_pBone2 = GetPhysxBoneByName(l_szActor2);
+
+  CPhysicActor* l_pActor1 = 0;
+  CPhysicActor* l_pActor2 = 0;
+
+  CPhysicFixedJoint* l_pFixedJoint = 0;
+  l_pFixedJoint = new CPhysicFixedJoint();
+  l_pActor1 = l_pBone1->GetPhysxActor();
+
+  if (l_szActor2=="NULL")
+  {
+    l_pFixedJoint->SetInfo(l_pActor1);
+  }
+  else
+  {
+    l_pActor2 = l_pBone2->GetPhysxActor();
+    l_pFixedJoint->SetInfo(l_pActor1,l_pActor2);
+  }
+
+  CORE->GetPhysicsManager()->AddPhysicFixedJoint(l_pFixedJoint);
+  m_vFixedJoints.push_back(l_pFixedJoint);
+
+	return true;
+}
+
+
+bool CPhysxSkeleton::AddRevoluteJoint(CXMLTreeNode _XMLObjects)
+{
+	return true;
+}
+
+
+SSphericalLimitInfo CPhysxSkeleton::GetJointParameterInfo(CXMLTreeNode _XMLObjects)
+{
+  SSphericalLimitInfo l_sInfo;
+
+  bool l_bTwistLimitLow = _XMLObjects.ExistsProperty("TwistLimitLow");
+  bool l_bTwistLimitHigh = _XMLObjects.ExistsProperty("TwistLimitHigh");
+
+  l_sInfo.JointSpring = _XMLObjects.ExistsProperty("JointSpring");
+  l_sInfo.TwistSpring = _XMLObjects.ExistsProperty("TwistSpring");
+  l_sInfo.SwingSpring = _XMLObjects.ExistsProperty("SwingSpring");
+  l_sInfo.SwingLimit = _XMLObjects.ExistsProperty("SwingLimit");
+
+  if (l_sInfo.JointSpring)
+  {
+    Vect2f l_vJointSpring = _XMLObjects.GetVect2fProperty("JointSpring",v2fZERO,false);
+    l_sInfo.JointSpringValue = l_vJointSpring.x;
+    l_sInfo.JointSpringDamper = l_vJointSpring.y;
+  }
+
+  if (l_sInfo.TwistSpring)
+  {
+    Vect2f l_vTwistSpring = _XMLObjects.GetVect2fProperty("TwistSpring",v2fZERO,false);
+    l_sInfo.TwistSpringValue = l_vTwistSpring.x;
+    l_sInfo.TwistSpringDamper = l_vTwistSpring.y;
+  }
+
+  if (l_sInfo.SwingSpring)
+  {
+    Vect2f l_vSwingSpring = _XMLObjects.GetVect2fProperty("SwingSpring",v2fZERO,false);
+    l_sInfo.SwingSpringValue = l_vSwingSpring.x;
+    l_sInfo.SwingSpringDamper = l_vSwingSpring.y;
+  }
+
+  if (l_sInfo.SwingLimit)
+  {
+    Vect2f l_vSwingLimit = _XMLObjects.GetVect2fProperty("SwingLimit",v2fZERO,false);
+    l_sInfo.SwingValue = l_vSwingLimit.x;
+    l_sInfo.SwingRestitution = l_vSwingLimit.y;
+  }
+
+  if (l_bTwistLimitLow && l_bTwistLimitHigh)
+  {
+    l_sInfo.TwistLimit = true;
+    Vect2f l_vTwistLimitLow = _XMLObjects.GetVect2fProperty("TwistLimitLow",v2fZERO,false);
+    Vect2f l_vTwistLimitHigh = _XMLObjects.GetVect2fProperty("TwistLimitHigh",v2fZERO,false);
+
+    l_sInfo.TwistLowValue = l_vTwistLimitLow.x;
+    l_sInfo.TwistLowRestitution = l_vTwistLimitLow.y;
+    l_sInfo.TwistHighValue = l_vTwistLimitHigh.x;
+    l_sInfo.TwistHighRestitution = l_vTwistLimitHigh.y;
+  }
+  else
+  {
+    l_sInfo.TwistLimit = false;
+  }
+
+  
+  return l_sInfo;
 
 }

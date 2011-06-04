@@ -10,6 +10,8 @@ class CalModel;
 class CPhysicFixedJoint;
 class CPhysicSphericalJoint;
 class CPhysicRevoluteJoint;
+class CXMLTreeNode;
+struct SSphericalLimitInfo;
 
 class CPhysxSkeleton : public CBaseControl
 {
@@ -29,6 +31,13 @@ public:
   void              InitPhysXActors();
   bool              InitPhysXJoints(string _szFileName);
   CPhysxBone*       GetPhysxBoneByName(string _szName);
+
+  //Funcions per afegir joints al Skeleton.
+  bool				              AddSphericalJoint(CXMLTreeNode _XMLObjects);
+  bool				              AddFixedJoint(CXMLTreeNode _XMLObjects);
+  bool				              AddRevoluteJoint(CXMLTreeNode _XMLObjects);
+  SSphericalLimitInfo				GetJointParameterInfo(CXMLTreeNode _XMLObjects);
+  
 
 
   void UpdateCal3dFromPhysx();

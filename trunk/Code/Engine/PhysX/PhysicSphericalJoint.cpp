@@ -63,7 +63,7 @@ void CPhysicSphericalJoint::SetInfoComplete	(const Vect3f& anchor, const Vect3f&
 	}
 
 	NxVec3 pos(anchor.x, anchor.y, anchor.z );
-  NxVec3 axis(_axis.x, _axis.y, _axis.z );
+	NxVec3 axis(_axis.x, _axis.y, _axis.z );
 
 	m_pSphericalDesc->setToDefault();
 	m_pSphericalDesc->actor[0] = actorA->GetPhXActor();
@@ -112,5 +112,81 @@ void CPhysicSphericalJoint::SetInfoComplete	(const Vect3f& anchor, const Vect3f&
   m_pSphericalDesc->setGlobalAnchor(pos);
   m_pSphericalDesc->setGlobalAxis(axis);
 
+
+}
+
+
+void CPhysicSphericalJoint::SetInfoRagdoll	(SSphericalLimitInfo _sInfo, CPhysicActor* actorA,  CPhysicActor* actorB)
+{
+  if (actorA==NULL)
+	{
+		LOGGER->AddNewLog(ELL_ERROR, "PhysicSphericalJoint:: El primer actor pasado como argumento no puede ser null");
+		return;
+	}
+
+  NxVec3 pos(_sInfo.m_vAnchor.x, _sInfo.m_vAnchor.y, _sInfo.m_vAnchor.z );
+	NxVec3 axis(_sInfo.m_vAxis.x, _sInfo.m_vAxis.y, _sInfo.m_vAxis.z );
+
+	m_pSphericalDesc->setToDefault();
+	m_pSphericalDesc->actor[0] = actorA->GetPhXActor();
+	if (actorB!=NULL)
+	{
+		m_pSphericalDesc->actor[1] = actorB->GetPhXActor();	
+	}
+	else
+	{
+		m_pSphericalDesc->actor[1] = NULL;	
+	}
+
+
+ 
+  //LIMITS PELS TWIST!!!!!!! (gir de munyeca)
+  if (_sInfo.TwistLimit)
+  {
+    m_pSphericalDesc->flags |= NX_SJF_TWIST_LIMIT_ENABLED;
+    m_pSphericalDesc->twistLimit.low.value = _sInfo.TwistLowValue*NxPi;
+    m_pSphericalDesc->twistLimit.low.restitution = _sInfo.TwistLowRestitution;
+    m_pSphericalDesc->twistLimit.high.value = _sInfo.TwistHighValue*NxPi;
+    m_pSphericalDesc->twistLimit.high.restitution = _sInfo.TwistHighRestitution;
+  }
+
+  //Es pot push pero al retornar, com mes petit es el valor, menys espai recorre.
+  if (_sInfo.SwingLimit)
+  {
+    m_pSphericalDesc->flags |= NX_SJF_SWING_LIMIT_ENABLED;
+    m_pSphericalDesc->swingLimit.value = _sInfo.SwingValue*NxPi;
+    m_pSphericalDesc->swingLimit.restitution = _sInfo.SwingRestitution;
+  }
+
+  //Twist Spring Enabled
+  if (_sInfo.TwistSpring)
+  {
+    m_pSphericalDesc->flags |= NX_SJF_TWIST_SPRING_ENABLED;
+    m_pSphericalDesc->twistSpring.damper = _sInfo.TwistSpringDamper;
+    m_pSphericalDesc->twistSpring.spring = _sInfo.TwistSpringValue;
+  }
+
+  //Swing Spring Enabled
+  if (_sInfo.SwingSpring)
+  {
+    m_pSphericalDesc->flags |= NX_SJF_SWING_SPRING_ENABLED;
+    m_pSphericalDesc->swingSpring.damper = _sInfo.SwingSpringDamper;
+    m_pSphericalDesc->swingSpring.spring = _sInfo.SwingSpringValue;
+  }
+  
+  //Joint Springs
+  if (_sInfo.JointSpring)
+  {
+    m_pSphericalDesc->flags |= NX_SJF_JOINT_SPRING_ENABLED;
+    m_pSphericalDesc->jointSpring.damper = _sInfo.JointSpringDamper;
+    m_pSphericalDesc->jointSpring.spring = _sInfo.JointSpringValue;
+  }
+
+  //Projection per errors
+  /*m_pSphericalDesc->projectionMode = NX_JPM_POINT_MINDIST;
+  m_pSphericalDesc->projectionDistance = 0.15f;*/
+
+  m_pSphericalDesc->setGlobalAnchor(pos);
+  m_pSphericalDesc->setGlobalAxis(axis);
 
 }

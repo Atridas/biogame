@@ -17,6 +17,27 @@ class NxSphericalJointDesc;
 class CPhysicActor;
 //--------------------------
 
+
+struct SSphericalLimitInfo
+{
+	Vect3f m_vAnchor, m_vAxis;
+	bool  TwistLimit;
+	float TwistLowValue, TwistLowRestitution, TwistHighValue, TwistHighRestitution;
+
+	bool  SwingLimit;
+	float SwingValue, SwingRestitution;
+
+	bool  TwistSpring;
+	float TwistSpringValue, TwistSpringDamper;
+
+	bool  SwingSpring;
+	float SwingSpringValue, SwingSpringDamper;
+
+	bool  JointSpring;
+	float JointSpringValue, JointSpringDamper;
+};
+
+
 class CPhysicSphericalJoint
 {
 public:
@@ -25,6 +46,7 @@ public:
 
 	void									CreateJoint			(NxJoint* joint);
 	void									SetInfoComplete	(const Vect3f& anchor, const Vect3f& _axis, CPhysicActor* actorA,  CPhysicActor* actorB =0);
+  void									SetInfoRagdoll	(SSphericalLimitInfo _sInfo, CPhysicActor* actorA,  CPhysicActor* actorB =0);
   void									SetInfo					(const Vect3f& anchor, CPhysicActor* actorA,  CPhysicActor* actorB =0);
 
 
