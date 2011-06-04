@@ -8,6 +8,7 @@
 class CalBone;
 class CPhysicActor;
 class CPhysicUserData;
+class CXMLTreeNode;
 
 
 class CPhysxBone :
@@ -22,18 +23,26 @@ public:
   virtual void        Release();
 
   void                UpdateCal3dFromPhysx();
+
+  //GETERS I SETERS
   CalBone*            GetCalBone()                           {return m_pCalBone;};
-  void                SetCalBone(CalBone* _pCalBone)         {m_pCalBone = _pCalBone;};
   Vect3f              GetMiddlePoint()                       {return m_vMiddlePoint;};
   CPhysicActor*       GetPhysxActor()                        {return m_pActor;};
   const vector<int>   GetChildList()                         {return m_vChildListID;};
   int                 GetParentID()                          {return m_iParentID;};
   void                SetPhysxActor(CPhysicActor* _pActor)   {m_pActor = _pActor;};
+  void                SetCalBone(CalBone* _pCalBone)         {m_pCalBone = _pCalBone;};
+  
+  
   bool                IsBoneRoot()                           {return m_bRoot;};
   Mat44f              GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone);
 
+  //Funcions per afegir la info del actor de fisica.
+  bool				        AddBoxActor(CXMLTreeNode _XMLObjects);
+  bool				        AddSphereActor(CXMLTreeNode _XMLObjects);
+  bool				        AddCapsuleActor(CXMLTreeNode _XMLObjects);
+
   //Funcions per inicialitzar la info del Bone (primer matrius, segon actors, tercer joints)
-  void                Load(float _fDensity, string _szType, Vect3f _fMiddlePoint,Vect3f _vSize,string _szName);
   void                InitBoneMatrix();
   void                InitPhysXActor();
   void                InitPhysXJoint(CPhysxBone* _pParent);
