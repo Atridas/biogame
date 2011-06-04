@@ -26,6 +26,8 @@ public:
   void                SetCalBone(CalBone* _pCalBone)         {m_pCalBone = _pCalBone;};
   Vect3f              GetMiddlePoint()                       {return m_vMiddlePoint;};
   CPhysicActor*       GetPhysxActor()                        {return m_pActor;};
+  const vector<int>   GetChildList()                         {return m_vChildListID;};
+  int                 GetParentID()                          {return m_iParentID;};
   void                SetPhysxActor(CPhysicActor* _pActor)   {m_pActor = _pActor;};
   bool                IsBoneRoot()                           {return m_bRoot;};
   Mat44f              GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone);

@@ -1,3 +1,4 @@
+#define __DONT_INCLUDE_MEM_LEAKS__
 #include "PhysxBone.h"
 #include <cal3d/cal3d.h>
 #include <PhysicsManager.h>
@@ -9,6 +10,11 @@
 #include "RenderManager.h"
 #include "Core.h"
 #include "base.h"
+//---PhysX Includes---//
+#undef min
+#undef max
+#include "NxPhysics.h"
+//---------------------//
 
 bool CPhysxBone::Init(CalBone* _pBone)
 {
@@ -43,6 +49,17 @@ void CPhysxBone::Release()
 void CPhysxBone::UpdateCal3dFromPhysx()
 {
 
+  if (m_pActor != 0)
+  {
+    CalQuaternion l_vRotate;
+    NxQuat l_pQuat = m_pActor->GetPhXActor()->getGlobalOrientationQuat();
+    l_vRotate.x = -l_pQuat.x;
+    l_vRotate.y = -l_pQuat.y;
+    l_vRotate.z = -l_pQuat.z;
+    l_vRotate.w = l_pQuat.w;
+
+    m_pCalBone->setRotation(l_vRotate);
+  }
 }
 
 

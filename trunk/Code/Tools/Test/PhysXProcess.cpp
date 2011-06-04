@@ -494,6 +494,8 @@ void CPhysXProcess::Update(float _fElapsedTime)
 
 
   g_pObjectManager->Update(_fElapsedTime);
+
+  
   //g_pGameObject->Update(_fElapsedTime);
 
 
@@ -541,6 +543,12 @@ void CPhysXProcess::Update(float _fElapsedTime)
 
       
   }
+
+  //if (g_pRagdoll != 0)
+  //{
+  //  g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0);
+  //  g_pRagdoll->UpdateCal3dFromPhysx();
+  //}
 
 }
 

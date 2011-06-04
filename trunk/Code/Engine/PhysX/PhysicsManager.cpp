@@ -73,6 +73,7 @@ bool CPhysicsManager::Init ()
       m_pPhysicsSDK->setParameter(NX_VISUALIZE_ACTOR_AXES, 1);
 	    m_pPhysicsSDK->setParameter(NX_VISUALIZE_JOINT_LIMITS, 1);
 	    m_pPhysicsSDK->setParameter(NX_VISUALIZE_JOINT_LOCAL_AXES, 1);
+
 			// Create a scene
 			LOGGER->AddNewLog(ELL_INFORMATION, "PhysicsManager:: El valor de la gravedad es: %f",
 				m_InitParams.m_fGravity);

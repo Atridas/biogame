@@ -108,7 +108,7 @@ bool CPhysxSkeleton::InitPhysXJoints(string _szFileName)
   
 	for(int i = 0; i < l_iNumObjects; i++)
 	{
-    string l_szType,l_szActor1,l_szActor2;
+    string l_szType,l_szActor1,l_szActor2, l_szDirection;
     CXMLTreeNode l_XMLObject = l_XMLObjects(i);
     if(l_XMLObject.IsComment())
 		{
@@ -118,6 +118,7 @@ bool CPhysxSkeleton::InitPhysXJoints(string _szFileName)
     l_szType			= l_XMLObject.GetPszISOProperty("type" ,"");
     l_szActor1		= l_XMLObject.GetPszISOProperty("Actor1" ,"");
     l_szActor2		= l_XMLObject.GetPszISOProperty("Actor2" ,"");
+    l_szDirection = l_XMLObject.GetPszISOProperty("Direction" ,"");
 
     CPhysxBone* l_pBone1 = GetPhysxBoneByName(l_szActor1);
     CPhysxBone* l_pBone2 = GetPhysxBoneByName(l_szActor2);
@@ -146,24 +147,53 @@ bool CPhysxSkeleton::InitPhysXJoints(string _szFileName)
 
       Vect3f l_vMiddle = l_pBone1->GetMiddlePoint();
       l_vMiddle.x = -l_vMiddle.x;
-      Vect3f l_vAxis(l_vMiddle.x-l_vJointPointMiddle.x,l_vMiddle.y-l_vJointPointMiddle.y,l_vMiddle.z-l_vJointPointMiddle.z);
-      //Vect3f l_vAxis(l_vTrans.x-l_vJointPointMiddle.x,l_vTrans.y-l_vJointPointMiddle.y,l_vTrans.z-l_vJointPointMiddle.z);
+      l_vPosCenter.x = l_vPosCenter.x;
+      Vect3f l_vAxis(l_vPosCenter.x-l_vJointPointMiddle.x,l_vPosCenter.y-l_vJointPointMiddle.y,l_vPosCenter.z-l_vJointPointMiddle.z);
       l_vAxis.Normalize();
 
 
 
+      //MES PROVES
+      if (l_szDirection == "Out")
+      {
+        if (l_pBone1->GetChildList().size() > 0)
+        {
+          int l_pChildId = l_pBone1->GetChildList()[0];
+          string l_szNameChild = m_pCalSkeleton->getBone(l_pChildId)->getCoreBone()->getName();
+          CPhysxBone* l_pPhysChild = GetPhysxBoneByName(l_szNameChild);
+          CalVector l_vVect = l_pPhysChild->GetCalBone()->getTranslationAbsolute();
+          l_vVect.x = -l_vVect.x;
+          l_vAxis = Vect3f(l_vVect.x-l_vJointPointMiddle.x,l_vVect.y-l_vJointPointMiddle.y,l_vVect.z-l_vJointPointMiddle.z);
+          l_vAxis.Normalize();
+        }
+      }
+      else if (l_szDirection == "In")
+      {
+        if (!l_pBone1->IsBoneRoot())
+        {
+          int l_pParentID = l_pBone1->GetParentID();
+          string l_szNameParent = m_pCalSkeleton->getBone(l_pParentID)->getCoreBone()->getName();
+          CPhysxBone* l_pPhysParent = GetPhysxBoneByName(l_szNameParent);
+          CalVector l_vVect = l_pPhysParent->GetCalBone()->getTranslationAbsolute();
+          l_vVect.x = -l_vVect.x;
+          l_vAxis = Vect3f(l_vVect.x-l_vJointPointMiddle.x,l_vVect.y-l_vJointPointMiddle.y,l_vVect.z-l_vJointPointMiddle.z);
+          l_vAxis.Normalize();
+        }
+      
+      }
+
       if (l_szActor2=="NULL")
       {
         //l_pSphericalJoint->SetInfo(l_vJointPointMiddle,l_pActor1);
-        //l_pSphericalJoint->SetInfoComplete(l_vJointPointMiddle,/*Vect3f(1.0f,0.0f,0.0f)*/l_vRot,l_pActor1);
-        l_pSphericalJoint->SetInfoComplete(l_vJointPointMiddle,Vect3f(1.0f,0.0f,0.0f),l_pActor1);
+        l_pSphericalJoint->SetInfoComplete(l_vJointPointMiddle,l_vAxis,l_pActor1);
+
       }
       else
       {
         l_pActor2 = l_pBone2->GetPhysxActor();
         //l_pSphericalJoint->SetInfo(l_vJointPointMiddle,l_pActor1,l_pActor2);
-        //l_pSphericalJoint->SetInfoComplete(l_vJointPointMiddle,/*Vect3f(1.0f,0.0f,0.0f)*/l_vRot,l_pActor1,l_pActor2);
-        l_pSphericalJoint->SetInfoComplete(l_vJointPointMiddle,Vect3f(1.0f,0.0f,0.0f),l_pActor1,l_pActor2);
+        l_pSphericalJoint->SetInfoComplete(l_vJointPointMiddle,l_vAxis,l_pActor1,l_pActor2);
+       
       }
       CORE->GetPhysicsManager()->AddPhysicSphericalJoint(l_pSphericalJoint);
       m_vSphericalJoints.push_back(l_pSphericalJoint);
@@ -235,11 +265,7 @@ void CPhysxSkeleton::Release()
   m_vBones.clear();
 }
 
-void CPhysxSkeleton::UpdateCal3dFromPhysx()
-{
 
-
-}
 
 bool CPhysxSkeleton::Load(string _szFileName)
 {
@@ -311,4 +337,17 @@ CPhysxBone* CPhysxSkeleton::GetPhysxBoneByName(string _szName)
   }
 
   return 0;
+}
+
+
+
+
+void CPhysxSkeleton::UpdateCal3dFromPhysx()
+{
+
+  for(size_t i=0;i<m_vBones.size();++i)
+  {
+    m_vBones[i]->UpdateCal3dFromPhysx();
+  }
+
 }
