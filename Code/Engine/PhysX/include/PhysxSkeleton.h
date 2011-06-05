@@ -41,6 +41,7 @@ public:
 
 
   void UpdateCal3dFromPhysx();
+  void UpdatePhysxBone(CPhysxBone* _pPhysxBone);
 
 private:
   CalSkeleton*                    m_pCalSkeleton;
