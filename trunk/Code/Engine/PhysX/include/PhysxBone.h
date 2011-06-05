@@ -9,6 +9,7 @@ class CalBone;
 class CPhysicActor;
 class CPhysicUserData;
 class CXMLTreeNode;
+class CalSkeleton;
 
 
 class CPhysxBone :
@@ -22,7 +23,7 @@ public:
   bool                Init(CalBone* _pBone,Mat44f _vMat44);
   virtual void        Release();
 
-  void                UpdateCal3dFromPhysx();
+  void                UpdateCal3dFromPhysx(CalSkeleton* _pCalSkeleton);
 
   //GETERS I SETERS
   CalBone*            GetCalBone()                           {return m_pCalBone;};

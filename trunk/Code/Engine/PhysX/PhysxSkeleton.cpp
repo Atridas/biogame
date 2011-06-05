@@ -173,16 +173,6 @@ CPhysxBone* CPhysxSkeleton::GetPhysxBoneByName(string _szName)
 }
 
 
-void CPhysxSkeleton::UpdateCal3dFromPhysx()
-{
-
-  for(size_t i=0;i<m_vBones.size();++i)
-  {
-    m_vBones[i]->UpdateCal3dFromPhysx();
-  }
-
-}
-
 //Main function pels Joints.
 bool CPhysxSkeleton::InitPhysXJoints(string _szFileName)
 {
@@ -425,5 +415,46 @@ SSphericalLimitInfo CPhysxSkeleton::GetJointParameterInfo(CXMLTreeNode _XMLObjec
 
   
   return l_sInfo;
+
+}
+
+
+void CPhysxSkeleton::UpdateCal3dFromPhysx()
+{
+  std::vector<int>& listRootCoreBoneId = m_pCalSkeleton->getCoreSkeleton()->getVectorRootCoreBoneId();
+
+  std::vector<int>::iterator iteratorRootBoneId;
+  for(iteratorRootBoneId = listRootCoreBoneId.begin(); iteratorRootBoneId != listRootCoreBoneId.end(); ++iteratorRootBoneId)
+  {
+    UpdatePhysxBone(m_vBones[*iteratorRootBoneId]);
+  }
+}
+
+void CPhysxSkeleton::UpdatePhysxBone(CPhysxBone* _pPhysxBone)
+{
+    CalBone* l_pCalBone = _pPhysxBone->GetCalBone();
+
+    l_pCalBone->calculateState();
+
+    if (_pPhysxBone->IsBoneRoot())
+    {
+      
+    }
+    else
+    {
+    
+    
+    }
+
+    //Per acabar ho fem amb els fills
+    list<int>::iterator iteratorChildId;
+    for(iteratorChildId = l_pCalBone->getCoreBone()->getListChildId().begin(); iteratorChildId != l_pCalBone->getCoreBone()->getListChildId().end(); ++iteratorChildId)
+    {
+      CalBone* l_pBone = m_pCalSkeleton->getBone(*iteratorChildId);
+      string l_szNameChild = l_pBone->getCoreBone()->getName();
+      
+      UpdatePhysxBone(GetPhysxBoneByName(l_szNameChild));
+      //m_pCalSkeleton->getBone(*iteratorChildId)->calculateState();
+    }
 
 }

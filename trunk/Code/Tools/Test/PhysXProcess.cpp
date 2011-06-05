@@ -513,11 +513,14 @@ void CPhysXProcess::Update(float _fElapsedTime)
       
   }
 
-  //if (g_pRagdoll != 0)
-  //{
-  //  g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0);
-  //  g_pRagdoll->UpdateCal3dFromPhysx();
-  //}
+  if (g_pRagdoll != 0)
+  {
+    g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0);
+    g_pRagdoll->UpdateCal3dFromPhysx();
+    /*CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("rigglebot");
+    CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
+    l_pSkeleton->calculateState();*/
+  }
 
 }
 
@@ -873,7 +876,8 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
       //RENDER_MANAGER->SetTransform(l_pAnim->GetMat44());
       CalModel* l_pCalModel = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel();
       g_pRagdoll->Init("Data/Animated Models/Riggle/Skeleton.xml",l_pCalModel,l_pAnim->GetMat44());
-      l_pAnim->SetVisible(false);
+      //l_pAnim->SetVisible(false);
+      
 
      /* g_pRagdoll = new CPhysxRagdoll("Ragdoll Prova");
       g_pRagdoll->Load("Data/Animated Models/Riggle/Ragdoll.xml",false);
@@ -974,7 +978,7 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
   {
     bool l_bRender = CORE->GetPhysicsManager()->GetDebugRenderMode();
     CORE->GetPhysicsManager()->SetDebugRenderMode(!l_bRender);
-    g_pCharacter->SetVisible(!g_pCharacter->GetVisible());
+    //g_pCharacter->SetVisible(!g_pCharacter->GetVisible());
     ExportSkeletonInfo(g_pCharacter->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton());
   }
   

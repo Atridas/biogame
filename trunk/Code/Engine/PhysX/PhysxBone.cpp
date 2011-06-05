@@ -48,23 +48,6 @@ void CPhysxBone::Release()
   
 }
 
-void CPhysxBone::UpdateCal3dFromPhysx()
-{
-
-  if (m_pActor != 0)
-  {
-    CalQuaternion l_vRotate;
-    NxQuat l_pQuat = m_pActor->GetPhXActor()->getGlobalOrientationQuat();
-    l_vRotate.x = -l_pQuat.x;
-    l_vRotate.y = -l_pQuat.y;
-    l_vRotate.z = -l_pQuat.z;
-    l_vRotate.w = l_pQuat.w;
-
-    m_pCalBone->setRotation(l_vRotate);
-  }
-}
-
-
 
 void CPhysxBone::InitBoneMatrix()
 {
@@ -186,5 +169,30 @@ bool CPhysxBone::AddCapsuleActor(CXMLTreeNode _XMLObjects)
 }
 
 
+void CPhysxBone::UpdateCal3dFromPhysx(CalSkeleton* _pCalSkeleton)
+{
+
+
+  if (m_pActor != 0)
+  {
+
+
+
+    
+  }
+
+
+  /*if (m_pActor != 0)
+  {
+    CalQuaternion l_vRotate;
+    NxQuat l_pQuat = m_pActor->GetPhXActor()->getGlobalOrientationQuat();
+    l_vRotate.x = -l_pQuat.x;
+    l_vRotate.y = -l_pQuat.y;
+    l_vRotate.z = -l_pQuat.z;
+    l_vRotate.w = l_pQuat.w;
+
+    m_pCalBone->setRotation(l_vRotate);
+  }*/
+}
 
 
