@@ -850,8 +850,20 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				
 				l_aux = "" as stringStream
 				local l_size = RHVectorToLH (DummySize l_current)
-				format "% % %" l_size.x l_size.y l_size.z to:l_aux
-				append l_params #("size",l_aux)
+				--format "% % %" l_size.x l_size.y l_size.z to:l_aux
+				--append l_params #("size",l_aux)
+				
+				l_sizeX = ""as stringStream
+				format "%"l_size.x to:l_sizeX
+				append l_params #("sizeX",l_sizeX)		
+
+				l_sizeY = ""as stringStream
+				format "%"l_size.y to:l_sizeY
+				append l_params #("sizeY",l_sizeY)	
+				
+				l_sizeZ = ""as stringStream
+				format "%"l_size.z to:l_sizeZ
+				append l_params #("sizeZ",l_sizeZ)	
 				
 				trans=l_current.transform
 				my_value=point3 0 0 1
@@ -862,6 +874,9 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				format "% % %" normal.x normal.y normal.z to:l_auxNormal
 				append  l_params #("Direction",l_auxNormal)
 				
+				
+
+							
 										
 				/*l_aux = "" as stringStream
 				local l_yaw = GetYaw l_current.transform

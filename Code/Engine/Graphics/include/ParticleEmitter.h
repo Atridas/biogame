@@ -116,6 +116,11 @@ protected:
   vector<D3DXCOLOR>                         m_vNewColor;
   vector<float>                             m_vTimeColor;
   vector<float>                             m_vTimeColorInterpolation;
+
+  vector<float>                             m_vSize;
+  vector<float>                             m_vNewSize;
+  vector<float>                             m_vTimeSize;
+  vector<float>                             m_vTimeSizeInterpolation;
   //vector<D3DXVECTOR3>                       m_vDirection;
   //vector<D3DXVECTOR3>                       m_vNewDirection;
   //vector<float>                             m_vTimeDirection;

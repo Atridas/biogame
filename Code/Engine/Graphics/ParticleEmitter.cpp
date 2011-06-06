@@ -71,6 +71,9 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
   m_vColor = _info->m_vColor;
   m_vTimeColor = _info->m_vTimeColor;
   m_vTimeColorInterpolation=_info->m_vTimeColorInterpolation;
+  m_vSize = _info->m_vSize;
+  m_vTimeSize = _info->m_vTimeSize;
+  m_vTimeSizeInterpolation=_info->m_vTimeSizeInterpolation;
 
   
 
@@ -105,6 +108,11 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
     m_vNewColor.push_back(m_Color1);
   }
  
+  //crear un vector de tamanys de tantas posicions com estats pot tenir (segons vector temps)
+  for(int j=0;j<(int)m_vTimeSize.size();j++)
+  {
+    m_vNewSize.push_back(m_fMaxSize);
+  }
 }
 
 void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
@@ -162,8 +170,8 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
 		    part->SetLifeTimer(fRandLife);
 
 		    // determina el random del tamany de la particula
-		    float fRandSize = RandomNumber(m_fMinSize,m_fMaxSize);
-		    part->SetSize(fRandSize);
+		    //float fRandSize = RandomNumber(m_fMinSize,m_fMaxSize);
+		    //part->SetSize(fRandSize);
 
 		    float fRandAngle = RandomNumber(m_fAngle1,m_fAngle2);
 		    part->SetAngle(fRandAngle);
@@ -216,6 +224,19 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
 			    i--;
         
 		    }	
+      
+        //*****************
+        i=m_vTimeSize.size()-1;
+		    while(i>=0)
+		    {
+       
+          float fRandSize = RandomNumber(m_vSize[i*2], m_vSize[(i*2)+1]);
+			    
+          m_vNewSize[i]= fRandSize;
+			    i--;
+        
+		    }	
+//****************************************
         D3DXVECTOR3 l_vPos_aux;
         if(m_szFormEmitter=="line")
 		    {
@@ -241,6 +262,11 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
 		    part->m_vTimeColor = m_vTimeColor;
 		    part->m_vTimeColorInterpolation = m_vTimeColorInterpolation;
 		    part->m_vColor = m_vNewColor;
+
+        part->m_vTimeSize = m_vTimeSize;
+		    part->m_vTimeSizeInterpolation = m_vTimeSizeInterpolation;
+		    part->m_vSize = m_vNewSize;
+
 		    //part->SetAngle(m_fAngle);
 		    part->SetPos(l_vPos_aux);
 
@@ -371,7 +397,9 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
   l_pd3dDevice->SetRenderState(D3DRS_POINTSCALE_B,  *((DWORD*)&l_fPointScaleB));    
   l_pd3dDevice->SetRenderState(D3DRS_POINTSCALE_C,  *((DWORD*)&l_fPointScaleC));*/
   
-  l_pd3dDevice->SetRenderState(D3DRS_ZENABLE, FALSE);
+  l_pd3dDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
+  l_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
+  
  /*  
   // Set up the vertex buffer to be rendered
   l_pd3dDevice->SetStreamSource( 0, m_vbParticles,0, sizeof(SPARTICLE_VERTEX));

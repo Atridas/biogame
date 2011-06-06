@@ -86,6 +86,9 @@ public:
   vector<D3DXCOLOR>      m_vColor;
   vector<float>          m_vTimeColor; 
   vector<float>          m_vTimeColorInterpolation;
+  vector<float>          m_vSize;
+  vector<float>          m_vTimeSize; 
+  vector<float>          m_vTimeSizeInterpolation;
   vector<D3DXVECTOR3>    m_vDirection;
   vector<float>          m_vTimeDirection;
   vector<float>          m_vTimeDirectionInterpolation;
