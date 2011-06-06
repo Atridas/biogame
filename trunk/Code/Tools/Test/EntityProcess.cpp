@@ -16,6 +16,7 @@
 #include "ComponentPhysXBox.h"
 #include "ComponentPhysXMesh.h"
 #include "ComponentRenderableObject.h"
+#include "ComponentVida.h"
 #include "LightManager.h"
 #include "SpotLight.h"
 #include "Camera.h"
@@ -65,12 +66,16 @@ bool CEntityProcess::Init()
                                      "MoveRight",
                                      "Walk",
                                      "Run",
+                                     "Aim",
+                                     "Shoot",
                                       //Animations
                                      "idle",
                                      "walk",
                                      "walk",
                                      "walk",
                                      "walk",
+                                     "point",
+                                     "shoot",
                                       //Speed
                                      4, 10, 1, 1,
                                       FLOAT_PI_VALUE/3,
@@ -86,6 +91,7 @@ bool CEntityProcess::Init()
   CComponentPhysXController *l_pComponentPhysXController = new CComponentPhysXController();
   l_pComponentPhysXController->Init(m_pPlayerEntity, 0.3f, 1.5f, 10.0f, 0.1f, 0.5f, 1);
 
+  (new CComponentVida())->Init(m_pPlayerEntity, 100.f);
 
   //Carregar entitats de l'escenari
   LoadEntitiesFromXML("Data/Levels/NivellProves/XML/GameEntities.xml");
@@ -106,7 +112,8 @@ bool CEntityProcess::Init()
   l_pComponentRenderableObject->m_fHeightAdjustment = -1.f;
   l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
 
-  (new CComponentIAWalkToPlayer())->Init(l_peEnemy,"Player",2,"walk");
+  (new CComponentIAWalkToPlayer())->Init(l_peEnemy,"Player",2,"walk","impact");
+  (new CComponentVida())->Init(l_peEnemy, 100.f);
 
 
   // llum ----------------------------------------

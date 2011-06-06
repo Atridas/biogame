@@ -24,8 +24,8 @@
     <Language languageXML="Data/Language/catalan.xml"/>
     <Language languageXML="Data/Language/english.xml"/>
   </Languages>
-  <InputManager exclusiveMouse="true"/>
-  <ActionToInput file="Data/XML/actions_physx.xml"/>
+  <InputManager exclusiveMouse="false"/>
+  <ActionToInput file="Data/XML/actions_entities.xml"/>
   
 
   <!-- RenderableObjectsManager file="Data/XML/RenderableObjects.xml" -->

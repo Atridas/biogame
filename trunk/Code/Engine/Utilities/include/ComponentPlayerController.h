@@ -48,11 +48,16 @@ public:
             const string& _szWalk,
             const string& _szRun,
 
-            const string& m_szIdleAnimation,
-            const string& m_szForwardAnimation,
-            const string& m_szBackAnimation,
-            const string& m_szLeftAnimation,
-            const string& m_szRightAnimation,
+            const string& _szAim,
+            const string& _szShoot,
+
+            const string& _szIdleAnimation,
+            const string& _szForwardAnimation,
+            const string& _szBackAnimation,
+            const string& _szLeftAnimation,
+            const string& _szRightAnimation,
+            const string& _szAimAnimation,
+            const string& _szShootAnimation,
   
             float _fWalkSpeed,
             float _fRunSpeed,
@@ -74,12 +79,17 @@ public:
   
   string m_szRun;
   string m_szWalk;
+
+  string m_szAim;
+  string m_szShoot;
   
   string m_szIdleAnimation;
   string m_szForwardAnimation;
   string m_szBackAnimation;
   string m_szLeftAnimation;
   string m_szRightAnimation;
+  string m_szAimAnimation;
+  string m_szShootAnimation;
   
   float m_fWalkSpeed;
   float m_fRunSpeed;
