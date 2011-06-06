@@ -80,7 +80,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .enum_("ComponentType")
       [
           value("object_3d",         CBaseComponent::ECT_OBJECT_3D),
-          value("phisX_controller",  CBaseComponent::ECT_PHISX_CONTROLLER),
+          value("phisX_controller",  CBaseComponent::ECT_PHYSX_CONTROLLER),
           value("player_controller", CBaseComponent::ECT_PLAYER_CONTROLLER),
           value("thps_camera",       CBaseComponent::ECT_3RD_PERSON_SHOOTER_CAMERA)
       ]
