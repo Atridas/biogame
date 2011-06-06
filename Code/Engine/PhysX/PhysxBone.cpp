@@ -169,30 +169,43 @@ bool CPhysxBone::AddCapsuleActor(CXMLTreeNode _XMLObjects)
 }
 
 
-void CPhysxBone::UpdateCal3dFromPhysx(CalSkeleton* _pCalSkeleton)
+void CPhysxBone::UpdateCal3dFromPhysx()
 {
 
-
-  if (m_pActor != 0)
+  if ((m_pActor != 0) && (m_pParent != 0))
   {
+    if (m_pParent->GetPhysxActor() != 0)
+    {
+      //Mat44f l_vInverseRenderable = m_vMatActor.GetInverted();
+      Mat44f l_vAbsoluteParent, l_vAbsolute;
+      m_pParent->GetPhysxActor()->GetMat44(l_vAbsoluteParent);
+      GetPhysxActor()->GetMat44(l_vAbsolute);
+      Mat44f l_vInverseParent = l_vAbsoluteParent.GetInverted();
+      Mat44f l_vRelative = l_vInverseParent*l_vAbsolute;
+      
+      Vect4f l_vTranslate = l_vRelative.GetColum(3);
+      CalVector l_vRelativeTranslation(l_vTranslate.x,l_vTranslate.y,l_vTranslate.z);
 
+      Mat33f l_vMat33 = l_vRelative.Get33RotationNormalized();
+      NxVec3 l_vRow0(l_vMat33.m00,l_vMat33.m01,l_vMat33.m02);
+      NxVec3 l_vRow1(l_vMat33.m10,l_vMat33.m11,l_vMat33.m12);
+      NxVec3 l_vRow2(l_vMat33.m20,l_vMat33.m21,l_vMat33.m22);
 
+      NxMat33 l_vMat33Physx(l_vRow0,l_vRow1,l_vRow2);
+      
+      NxQuat l_vQuat(l_vMat33Physx);
+      CalQuaternion l_vQuatRelative;
 
-    
+      l_vQuatRelative.x = -l_vQuat.x;
+      l_vQuatRelative.y = -l_vQuat.y;
+      l_vQuatRelative.z = -l_vQuat.z;
+      l_vQuatRelative.w = l_vQuat.w;
+
+      m_pCalBone->setRotation(l_vQuatRelative);
+      m_pCalBone->setTranslation(l_vRelativeTranslation);      
+    }
   }
 
-
-  /*if (m_pActor != 0)
-  {
-    CalQuaternion l_vRotate;
-    NxQuat l_pQuat = m_pActor->GetPhXActor()->getGlobalOrientationQuat();
-    l_vRotate.x = -l_pQuat.x;
-    l_vRotate.y = -l_pQuat.y;
-    l_vRotate.z = -l_pQuat.z;
-    l_vRotate.w = l_pQuat.w;
-
-    m_pCalBone->setRotation(l_vRotate);
-  }*/
 }
 
 

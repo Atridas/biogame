@@ -41,6 +41,7 @@ bool CPhysxSkeleton::Init(const string& _szFileName, CalModel* _pCalModel, Mat44
   //Funcions de configuracio!!
   InitBoneMatrices();
   InitPhysXActors();
+  //InitParents();
   InitPhysXJoints(_szFileName);
 
   SetOk(true);
@@ -421,14 +422,43 @@ SSphericalLimitInfo CPhysxSkeleton::GetJointParameterInfo(CXMLTreeNode _XMLObjec
 
 void CPhysxSkeleton::UpdateCal3dFromPhysx()
 {
-  std::vector<int>& listRootCoreBoneId = m_pCalSkeleton->getCoreSkeleton()->getVectorRootCoreBoneId();
+  /*std::vector<int>& listRootCoreBoneId = m_pCalSkeleton->getCoreSkeleton()->getVectorRootCoreBoneId();
 
   std::vector<int>::iterator iteratorRootBoneId;
   for(iteratorRootBoneId = listRootCoreBoneId.begin(); iteratorRootBoneId != listRootCoreBoneId.end(); ++iteratorRootBoneId)
   {
     UpdatePhysxBone(m_vBones[*iteratorRootBoneId]);
+  }*/
+
+  for(size_t i=0;i<m_vBones.size();++i)
+  {
+    m_vBones[i]->UpdateCal3dFromPhysx();
   }
+  //m_pCalSkeleton->calculateState();
+
 }
+
+void CPhysxSkeleton::InitParents()
+{
+ 
+  for(size_t i=0;i<m_vBones.size();++i)
+  {
+    if (m_vBones[i]->IsBoneRoot())
+    {
+      int l_iParentId = m_vBones[i]->GetParentID();
+      string l_szNameParent = m_pCalSkeleton->getBone(l_iParentId)->getCoreBone()->getName();
+      CPhysxBone* l_pParentPhysBone = GetPhysxBoneByName(l_szNameParent);
+      m_vBones[i]->SetParent(l_pParentPhysBone);
+    }
+    else
+    {
+      m_vBones[i]->SetParent(0);
+    }
+  }
+
+
+}
+
 
 void CPhysxSkeleton::UpdatePhysxBone(CPhysxBone* _pPhysxBone)
 {
@@ -438,11 +468,12 @@ void CPhysxSkeleton::UpdatePhysxBone(CPhysxBone* _pPhysxBone)
 
     if (_pPhysxBone->IsBoneRoot())
     {
-      
+      //_pPhysxBone->GetCalBone()->calculateState();
     }
     else
     {
-    
+      _pPhysxBone->UpdateCal3dFromPhysx();
+      
     
     }
 
