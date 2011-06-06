@@ -16,7 +16,7 @@ class CComponentPhysXActor :
 {
 public:
 
-  CBaseComponent::Type GetType() {return CBaseComponent::ECT_PHISX_ACTOR;};
+  CBaseComponent::Type GetType() {return CBaseComponent::ECT_PHYSX_ACTOR;};
   
   CPhysicActor*    GetActor()     {return m_pPhysXActor;}
   CPhysicUserData* GetUserData()  {return m_pPhysXData;}
