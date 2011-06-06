@@ -32,14 +32,15 @@ public:
     ECT_PHYSX_ACTOR,
     ECT_RENDERABLE_OBJECT,
     ECT_3RD_PERSON_SHOOTER_CAMERA,
-    ECT_TRIGGER
+    ECT_TRIGGER,
+    ECT_VIDA
   };
   
   virtual Type GetType() = 0; //{return m_Type;};
   bool IsType(Type _Type) {return GetType() == _Type;};
   CGameEntity* GetEntity() const {return m_pEntity;};
   
-  void ReceiveEvent(const SEvent& _Event) {};
+  virtual void ReceiveEvent(const SEvent& _Event) {};
 
   //updates
   

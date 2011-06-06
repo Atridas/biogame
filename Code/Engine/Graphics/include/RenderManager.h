@@ -94,8 +94,9 @@ public:
   LPDIRECT3DDEVICE9       GetDevice               () const {return m_pD3DDevice;};
   CCamera*                GetCamera               () const {return m_pCamera;};
   const CFrustum&         GetFrustum              () const {return m_Frustum;};
-
+  
   void                    SetClearColor           (const CColor& _cColor) {m_cClearColor = _cColor;};
+  CColor                  GetClearColor           () const                {return m_cClearColor;};
 
 private:
 	virtual void            Release					  ();

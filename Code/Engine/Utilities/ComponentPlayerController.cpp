@@ -6,6 +6,10 @@
 #include "ActionManager.h"
 #include "RenderableAnimatedInstanceModel.h"
 #include "ComponentRenderableObject.h"
+#include "Component3rdPSCamera.h"
+#include "Camera.h"
+
+#include "PhysicsManager.h"
 
 bool CComponentPlayerController::Init(CGameEntity *_pEntity)
 {
@@ -31,11 +35,16 @@ bool CComponentPlayerController::Init(CGameEntity *_pEntity,
             const string& _szWalk,
             const string& _szRun,
 
+            const string& _szAim,
+            const string& _szShoot,
+
             const string& _szIdleAnimation,
             const string& _szForwardAnimation,
             const string& _szBackAnimation,
             const string& _szLeftAnimation,
             const string& _szRightAnimation,
+            const string& _szAimAnimation,
+            const string& _szShootAnimation,
   
             float _fWalkSpeed,
             float _fRunSpeed,
@@ -70,11 +79,16 @@ bool CComponentPlayerController::Init(CGameEntity *_pEntity,
   m_szRun  = _szRun;
   m_szWalk = _szWalk;
 
+  m_szAim = _szAim;
+  m_szShoot = _szShoot;
+
   m_szIdleAnimation    = _szIdleAnimation;
   m_szForwardAnimation = _szForwardAnimation;
   m_szBackAnimation    = _szBackAnimation;
   m_szLeftAnimation    = _szLeftAnimation;
   m_szRightAnimation   = _szRightAnimation;
+  m_szAimAnimation     = _szAimAnimation;
+  m_szShootAnimation   = _szShootAnimation;
 
   m_fSpeed = m_fWalkSpeed  = _fWalkSpeed;
   m_fRunSpeed   = _fRunSpeed;
@@ -160,5 +174,38 @@ void CComponentPlayerController::Update(float _fDeltaTime)
     l_pAnimatedInstanceModel->ClearCycle(0.3f);
     l_pAnimatedInstanceModel->BlendCycle(l_iDesiredAnim, 0.3f);
     m_iCurrentAnimation = l_iDesiredAnim;
+  }
+
+
+  if(l_pActionManager->IsActionActive(m_szShoot))
+  {
+    int l_iAnim = l_pAnimatedInstanceModel->GetAnimationId(m_szShootAnimation);
+    l_pAnimatedInstanceModel->ExecuteAction(l_iAnim,0.2f);
+
+    CCamera* l_pCamera = GetEntity()->GetComponent<CComponent3rdPSCamera>(ECT_3RD_PERSON_SHOOTER_CAMERA)->GetCamera();
+    //Vect3f l_vPos = m_pObject3D->GetPosition();
+    Vect3f l_vPos = l_pCamera->GetEye();
+    Vect3f l_vDir = l_pCamera->GetDirection().Normalize();
+
+    SCollisionInfo l_CInfo;
+    CPhysicUserData* l_pUserData = 0;
+
+    l_pUserData = CORE->GetPhysicsManager()->RaycastClosestActor(l_vPos,l_vDir,1,l_pUserData,l_CInfo);
+
+    if( l_pUserData )
+    {
+      if(l_pUserData->GetEntity())
+      {
+        SEvent l_impacte;
+        l_impacte.Msg = SEvent::REBRE_IMPACTE;
+        l_impacte.Info[0].Type = SEventInfo::STI_FLOAT;
+        l_impacte.Info[0].f    = 20.f;
+        l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
+        l_impacte.Sender = GetEntity()->GetGUID();
+
+        //TODO usar un manager
+        l_pUserData->GetEntity()->ReceiveEvent(l_impacte);
+      }
+    }
   }
 }

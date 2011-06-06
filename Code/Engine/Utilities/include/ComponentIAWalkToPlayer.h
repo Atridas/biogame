@@ -28,9 +28,12 @@ public:
   bool Init(CGameEntity *_pEntity,
             const string& _szPlayerEntityName,
             float _fWalkSpeed,
-            const string& _szWalkAnimation);
+            const string& _szWalkAnimation,
+            const string& _szRebreImpacte);
 
   void Update(float _fDeltaTime);
+  
+  virtual void ReceiveEvent(const SEvent& _Event);
 
   virtual ~CComponentIAWalkToPlayer(void) {Done();};
 
@@ -46,6 +49,8 @@ private:
   CComponentObject3D * m_pObject3D;
 
   CComponentObject3D* m_pPlayerPosition;
+
+  string m_szRebreImpacte;
 };
 
 #endif

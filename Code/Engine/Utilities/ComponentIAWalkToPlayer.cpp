@@ -10,7 +10,8 @@
 bool CComponentIAWalkToPlayer::Init(CGameEntity *_pEntity,
             const string& _szPlayerEntityName,
             float _fWalkSpeed,
-            const string& _szWalkAnimation)
+            const string& _szWalkAnimation,
+            const string& _szRebreImpacte)
 {
   assert(_pEntity->IsOk());
   SetEntity(_pEntity);
@@ -36,6 +37,8 @@ bool CComponentIAWalkToPlayer::Init(CGameEntity *_pEntity,
   
   l_pAnimatedModel->GetAnimatedInstanceModel()->BlendCycle(_szWalkAnimation,0.f);
   // ----------------
+
+  m_szRebreImpacte = _szRebreImpacte;
 
   SetOk(true);
   return IsOk();
@@ -65,4 +68,19 @@ void CComponentIAWalkToPlayer::Update(float _fDeltaTime)
   }
 
   m_pObject3D->SetYaw(angle);
+}
+
+void CComponentIAWalkToPlayer::ReceiveEvent(const SEvent& _Event)
+{
+  if(_Event.Msg == SEvent::REBRE_IMPACTE)
+  {
+    CComponentRenderableObject *l_pComponentRO = GetEntity()->GetComponent<CComponentRenderableObject>(ECT_RENDERABLE_OBJECT);
+    assert(l_pComponentRO); //TODO fer missatges d'error més elavorats
+    CRenderableAnimatedInstanceModel* l_pAnimatedModel = dynamic_cast<CRenderableAnimatedInstanceModel*>(l_pComponentRO->GetRenderableObject());
+    assert(l_pAnimatedModel); //TODO fer missatges d'error més elavorats
+
+    
+    int l_iAnim = l_pAnimatedModel->GetAnimatedInstanceModel()->GetAnimationId(m_szRebreImpacte);
+    l_pAnimatedModel->GetAnimatedInstanceModel()->ExecuteAction(l_iAnim,0.2f);
+  }
 }

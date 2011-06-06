@@ -87,6 +87,7 @@
     <ClCompile Include="ComponentPlayerController.cpp" />
     <ClCompile Include="ComponentRenderableObject.cpp" />
     <ClCompile Include="ComponentTrigger.cpp" />
+    <ClCompile Include="ComponentVida.cpp" />
     <ClCompile Include="EntitiesToLua.cpp" />
     <ClCompile Include="EntityLoader.cpp" />
     <ClCompile Include="EntityManager.cpp" />
@@ -113,6 +114,7 @@
     <ClInclude Include="include\ComponentPlayerController.h" />
     <ClInclude Include="include\ComponentRenderableObject.h" />
     <ClInclude Include="include\ComponentTrigger.h" />
+    <ClInclude Include="include\ComponentVida.h" />
     <ClInclude Include="include\EntitiesToLua.h" />
     <ClInclude Include="include\EntityDefines.h" />
     <ClInclude Include="include\EntityManager.h" />

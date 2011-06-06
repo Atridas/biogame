@@ -81,7 +81,12 @@ void CEngine::Render()
     CEffectManager* l_pEM = m_pCore->GetEffectManager();
     l_pEM->Begin();
 
+    CColor l_ClearColor = l_pRM->GetClearColor();
+    l_pRM->SetClearColor(colBLACK);
+
     m_pActiveProcess->PreRender(l_pRM);
+
+    l_pRM->SetClearColor(l_ClearColor);
 
     if(m_pHDR && m_pHDR->IsActive())
     {

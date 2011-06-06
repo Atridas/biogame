@@ -26,7 +26,8 @@ struct SEvent {
   SEventInfo Info[EVENT_INFO_SIZE];
 
   enum EEventType {
-
+    REBRE_IMPACTE,
+    MORIR
   } Msg;
 };
 
