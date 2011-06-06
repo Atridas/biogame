@@ -40,6 +40,7 @@ void CParticleManager::Release()
   m_vDirection.clear();
   m_vTimeDirection.clear();
   m_vTimeDirectionInterpolation.clear();
+
   
 }
 
@@ -88,8 +89,8 @@ bool CParticleManager::Load(const string& _szFileName)
 			  l_Event.m_Color1 = D3DXCOLOR(l_vVec4.x,l_vVec4.y,l_vVec4.z,l_vVec4.w);
 			  l_vVec4 = l_treeParticleEmitter.GetVect4fProperty("Color2",Vect4f(0.0f),true);
 			  l_Event.m_Color2 = D3DXCOLOR(l_vVec4.x,l_vVec4.y,l_vVec4.z,l_vVec4.w);
-			  l_pInfo->m_fMinSize = l_treeParticleEmitter.GetFloatProperty("MinSize");
-			  l_pInfo->m_fMaxSize = l_treeParticleEmitter.GetFloatProperty("MaxSize");
+			  l_Event.m_fMinSize = l_treeParticleEmitter.GetFloatProperty("MinSize");
+			  l_Event.m_fMaxSize = l_treeParticleEmitter.GetFloatProperty("MaxSize");
 			 /* l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Direction1",Vect3f(3.0f));
         l_Event.m_vSpawnDir1 = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
 			  l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Direction2",Vect3f(0.0f));
@@ -115,6 +116,9 @@ bool CParticleManager::Load(const string& _szFileName)
         l_pInfo->m_vTimeColor.push_back(0);
         l_pInfo->m_vColor.push_back(l_Event.m_Color1);
         l_pInfo->m_vColor.push_back(l_Event.m_Color2);
+        l_pInfo->m_vTimeSize.push_back(0);
+        l_pInfo->m_vSize.push_back(l_Event.m_fMinSize);
+        l_pInfo->m_vSize.push_back(l_Event.m_fMaxSize);
        /* l_pInfo->m_vTimeDirection.push_back(0);
         l_pInfo->m_vDirection.push_back(l_Event.m_vSpawnDir1);
         l_pInfo->m_vDirection.push_back(l_Event.m_vSpawnDir2);*/
@@ -150,6 +154,38 @@ bool CParticleManager::Load(const string& _szFileName)
             l_pInfo->m_vTimeColorInterpolation.push_back(l_Event.m_fTimeInterpolation);
             l_pInfo->m_vColor.push_back(l_Event.m_Color1);
             l_pInfo->m_vColor.push_back(l_Event.m_Color2);
+
+            //m_vParticleEvent.push_back(l_pEvent);
+          }
+        }
+
+        CXMLTreeNode l_treeParticleEmittersSizes = l_treeParticleEmitter["Sizes"];
+
+        if(l_treeParticleEmittersSizes.Exists())
+        {
+          int l_iNumChildren = l_treeParticleEmittersSizes.GetNumChildren();
+
+          LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmitterSizes.", l_iNumChildren);
+
+          for(int i = 0; i < l_iNumChildren; i++)
+          {
+            //SParticleEvent l_Event;
+            CXMLTreeNode l_treeParticleEmittersSize = l_treeParticleEmittersSizes(i);
+            if(l_treeParticleEmittersSize.IsComment())
+				    continue;
+
+            
+
+            l_Event.m_fTime = l_treeParticleEmittersSize.GetFloatProperty("time");
+            l_Event.m_fTimeInterpolation = l_treeParticleEmittersSize.GetFloatProperty("timeInterpolation");
+            
+            l_Event.m_fMinSize = l_treeParticleEmittersSize.GetFloatProperty("MinSize");
+			      l_Event.m_fMaxSize = l_treeParticleEmittersSize.GetFloatProperty("MaxSize");
+
+            l_pInfo->m_vTimeSize.push_back(l_Event.m_fTime);
+            l_pInfo->m_vTimeSizeInterpolation.push_back(l_Event.m_fTimeInterpolation);
+            l_pInfo->m_vSize.push_back(l_Event.m_fMinSize);
+            l_pInfo->m_vSize.push_back(l_Event.m_fMaxSize);
 
             //m_vParticleEvent.push_back(l_pEvent);
           }

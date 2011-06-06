@@ -32,6 +32,9 @@ struct SParticleInfo
   vector<D3DXCOLOR>     m_vColor;
   vector<float>         m_vTimeColor;  //modificar tot els  m_vTime  per els m_vTimeColor
   vector<float>         m_vTimeColorInterpolation;
+  vector<float>             m_vSize;
+  vector<float>             m_vTimeSize;
+  vector<float>             m_vTimeSizeInterpolation;
   //vector<D3DXVECTOR3>   m_vDirection;
   //vector<float>         m_vTimeDirection;
   //vector<float>         m_vTimeDirectionInterpolation;
@@ -56,6 +59,8 @@ struct SParticleEvent
   float                 m_fTime;
   D3DXCOLOR             m_Color1;
   D3DXCOLOR             m_Color2;
+  float                 m_fMinSize;
+  float                 m_fMaxSize;
   //D3DXVECTOR3           m_vSpawnDir1;
   //D3DXVECTOR3           m_vSpawnDir2;
   int                   m_iTexNumFiles;
@@ -87,6 +92,7 @@ private:
   vector<D3DXVECTOR3>       m_vDirection;
   vector<float>             m_vTimeDirection;
   vector<float>             m_vTimeDirectionInterpolation;
+
    float                    m_fTime;
    float                    m_fTimeInterpolation;
    string				            m_szFormEmitter;
