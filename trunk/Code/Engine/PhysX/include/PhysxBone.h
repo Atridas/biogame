@@ -17,13 +17,13 @@ class CPhysxBone :
   public CBaseControl
 {
 public:
-  CPhysxBone(string _szName) : CNamed(_szName),m_pCalBone(0), m_iParentID(-1), m_pActor(0), m_bRoot(true),m_pBoneUserData(0) {};
+  CPhysxBone(string _szName) : CNamed(_szName),m_pCalBone(0), m_iParentID(-1), m_pActor(0), m_bRoot(true),m_pBoneUserData(0), m_pParent(0) {};
   ~CPhysxBone() {Done();};
 
   bool                Init(CalBone* _pBone,Mat44f _vMat44);
   virtual void        Release();
 
-  void                UpdateCal3dFromPhysx(CalSkeleton* _pCalSkeleton);
+  void                UpdateCal3dFromPhysx();
 
   //GETERS I SETERS
   CalBone*            GetCalBone()                           {return m_pCalBone;};
@@ -33,6 +33,7 @@ public:
   int                 GetParentID()                          {return m_iParentID;};
   void                SetPhysxActor(CPhysicActor* _pActor)   {m_pActor = _pActor;};
   void                SetCalBone(CalBone* _pCalBone)         {m_pCalBone = _pCalBone;};
+  void                SetParent(CPhysxBone* _pParent)        {m_pParent = _pParent;};
   
   
   bool                IsBoneRoot()                           {return m_bRoot;};
@@ -52,6 +53,7 @@ public:
   
 private:
 
+  CPhysxBone*         m_pParent;
   Mat44f              m_vMatAnimatedModel;
   CalBone*            m_pCalBone;
   int                 m_iParentID;

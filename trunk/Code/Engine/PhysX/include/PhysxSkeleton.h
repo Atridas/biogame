@@ -28,6 +28,7 @@ public:
   //Funcions per inicialitzar el esquelet corresponent
   bool              Load(string _szFileName);
   void              InitBoneMatrices();
+  void              InitParents();
   void              InitPhysXActors();
   bool              InitPhysXJoints(string _szFileName);
   CPhysxBone*       GetPhysxBoneByName(string _szName);

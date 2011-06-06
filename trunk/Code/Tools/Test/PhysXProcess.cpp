@@ -515,11 +515,12 @@ void CPhysXProcess::Update(float _fElapsedTime)
 
   if (g_pRagdoll != 0)
   {
-    g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0);
+    //g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0);
     g_pRagdoll->UpdateCal3dFromPhysx();
-    /*CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("rigglebot");
+    CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("rigglebot");
+    l_pAnim->GetAnimatedInstanceModel()->ClearCycle(0);
     CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
-    l_pSkeleton->calculateState();*/
+    l_pSkeleton->calculateState();
   }
 
 }
