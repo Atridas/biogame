@@ -33,10 +33,10 @@ float3 ComputeLight(float3 _Normal,          //Normal of the pixel
   
   float ndotl = saturate(dot(_Normal, _LightDirection));
   float ndoth = dot(_Normal, _HalfPlaneVector);
-  
+
   float3 l_AuxColor = _LightColor * _MaterialColor;
   _out = ndotl * l_AuxColor;
-  
+	  
   if(ndoth > 0.0)	
   {
     _out += pow(abs(ndoth), _MaterialSpecularPow) * l_AuxColor * _MaterialSpotlightFactor;

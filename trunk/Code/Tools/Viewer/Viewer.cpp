@@ -103,7 +103,8 @@ void CViewer::Init()
                                                           45.0f,
                                                           true );*/
 
-  m_pOmniLight = CORE->GetLightManager()->CreateOmniLight("OmniViewerLight",Vect3f(0.0f),CColor(Vect3f(0.7f,0.7f,0.4f)),0.1f,17.0f);
+  m_vOmniColor = Vect3f(0.7f,0.7f,0.4f);
+  m_pOmniLight = CORE->GetLightManager()->CreateOmniLight("OmniViewerLight",Vect3f(0.0f),CColor(m_vOmniColor),0.1f,17.0f);
 
   CSceneEffectManager* l_pSceneEffectManager = CORE->GetSceneEffectManager();
   if(l_pSceneEffectManager)
@@ -658,8 +659,15 @@ void CViewer::IncrementGlow()
       CMaterial* l_pMaterial = *l_itMaterial;
 
       l_pMaterial->SetGlowIntensity(l_pMaterial->GetGlowIntensity()+0.1f);
+
+      if(m_pOmniLight)
+      {
+        m_pOmniLight->SetColor(CColor(m_vOmniColor*l_pMaterial->GetGlowIntensity()*0.5f));
+      }
+
       ++l_itMaterial;
     }
+    
   }
 }
 
@@ -676,7 +684,13 @@ void CViewer::DecrementGlow()
 
       float l_fIntensity = l_pMaterial->GetGlowIntensity();
 
-      l_pMaterial->SetGlowIntensity(l_fIntensity > 1.0f? l_fIntensity-0.1f : 1.0f);
+      l_pMaterial->SetGlowIntensity(l_fIntensity > 0.3f? l_fIntensity-0.1f : 0.3f);
+
+      if(m_pOmniLight)
+      {
+        m_pOmniLight->SetColor(CColor(m_vOmniColor*l_pMaterial->GetGlowIntensity()*0.5f));
+      }
+
       ++l_itMaterial;
     }
   }
@@ -1072,31 +1086,87 @@ void CViewer::ShowMeshModeInfo()
   uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("arial");
   uint32 l_uiFontTypeTitle = FONT_MANAGER->GetTTF_Id("Deco");
   uint32 l_uiFontTypeTitle2 = FONT_MANAGER->GetTTF_Id("xfiles");
-  int l_iPosicio = 420;
+  int l_iPosicio = 100;
   int l_iPosicio2 = 400;
   string l_szMsg("Mode Meshes");
   stringstream l_SStream;
   stringstream l_SStreamHelp;
-  CRenderableObject* l_pMeshInstance;
+  CInstanceMesh* l_pMeshInstance;
 
   if (m_vMeshes.size() > 0)
   {
     //FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg.c_str());
-    l_pMeshInstance = *m_itCurrentMesh;
+    l_pMeshInstance = (CInstanceMesh*)(*m_itCurrentMesh);
     Vect3f l_vDimension = l_pMeshInstance->GetBoundingBox()->GetDimension();
 
     l_SStream << "Nom: " << l_pMeshInstance->GetName() << endl;
-    l_SStream << "Tipus: StaticMesh" << endl;
-    l_SStream << "Dimensions(XYZ): " << (float)l_vDimension.x << "x";
-    l_SStream << (float)l_vDimension.y << "x";
-    l_SStream << (float)l_vDimension.z << endl;
-    l_SStream << "Posicio: " << (float)l_pMeshInstance->GetPosition().x << " ";
-    l_SStream << (float)l_pMeshInstance->GetPosition().y << " ";
-    l_SStream << (float)l_pMeshInstance->GetPosition().y << endl;
+    l_SStream << "Core: " << l_pMeshInstance->GetStaticMesh()->GetFilename() << endl;
+    l_SStream << "Dimensions(XYZ): " << (float)l_vDimension.x << " "
+      << (float)l_vDimension.y << " "
+      << (float)l_vDimension.z << endl;
+    l_SStream << "Posicio: " << (float)l_pMeshInstance->GetPosition().x << " "
+      << (float)l_pMeshInstance->GetPosition().y << " "
+      << (float)l_pMeshInstance->GetPosition().z << endl;
     l_SStream << "Yaw: " << (float)l_pMeshInstance->GetYaw() << endl;
     l_SStream << "Pitch: " << (float)l_pMeshInstance->GetPitch() << endl;
     l_SStream << "Roll: " << (float)l_pMeshInstance->GetRoll() << endl;
-    FONT_MANAGER->DrawText(0,l_iPosicio,colGREEN,l_uiFontType,l_SStream.str().c_str());
+
+    const vector<CMaterial*>& l_vMaterials = l_pMeshInstance->GetStaticMesh()->GetMaterials();
+    vector<CMaterial*>::const_iterator l_itMaterial = l_vMaterials.begin();
+
+    l_SStream << "Materials: " << endl;
+
+    while(l_itMaterial != l_vMaterials.end())
+    {
+      CMaterial* l_pMaterial = *l_itMaterial;
+
+      int l_iMaterialType = l_pMaterial->GetMaterialType();
+
+      l_SStream << "Material type: ";
+
+      if(l_iMaterialType & DIFFUSE_MATERIAL_MASK)
+      {
+        l_SStream << "Diffuse ";
+      }
+      
+      if(l_iMaterialType & NORMALMAP_MATERIAL_MASK)
+      {
+        l_SStream << "NormalMap ";
+      }
+
+      if(l_iMaterialType & LIGHTMAP_MATERIAL_MASK)
+      {
+        l_SStream << "LightMap ";
+      }
+
+      if(l_iMaterialType & SPECULARMAP_MATERIAL_MASK)
+      {
+        l_SStream << "SpecularMap ";
+      }
+
+      if(l_iMaterialType & GLOW_MATERIAL_MASK)
+      {
+        l_SStream << "Glow ";
+      }
+
+      if(l_iMaterialType & PARALLAX_MATERIAL_MASK)
+      {
+        l_SStream << "Parallax ";
+      }
+      
+      l_SStream << endl;
+
+      l_SStream << "Parallax Height: " << l_pMaterial->GetParallaxHeight() << endl;
+      l_SStream << "Bump: " << l_pMaterial->GetBump() << endl;
+      l_SStream << "Glossiness: " << l_pMaterial->GetGlossiness() << endl;
+      l_SStream << "Specular factor: " << l_pMaterial->GetSpecularFactor() << endl;
+      l_SStream << "Glow intensity: " << l_pMaterial->GetGlowIntensity() << endl;
+      l_SStream << "Alfa blend: " << l_pMaterial->HasAlphaBlending() << endl;
+
+      ++l_itMaterial;
+    }
+
+    FONT_MANAGER->DrawText(0,l_iPosicio,colBLACK,l_uiFontType,l_SStream.str().c_str());
   }
 
   /*

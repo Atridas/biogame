@@ -69,6 +69,10 @@ public:
   
   bool IsAlphaBlended() const;
 
+  const string& GetFilename() const {return m_szFileName;};
+
+  const vector<CMaterial*>& GetMaterials() const { return m_vMaterials;};
+
 protected:
 
   bool Load();

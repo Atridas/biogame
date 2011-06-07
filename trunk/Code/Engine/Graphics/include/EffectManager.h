@@ -54,6 +54,8 @@ public:
                     m_bPoissonBlurKernelUpdated(true),
                     m_bSpecularParamsUpdated(true),
                     m_bGlowUpdated(false),
+                    m_bSpecularUpdated(false),
+                    m_bSpecularActive(false),
                     m_fGlossiness(0.f),
                     m_fSpecularLevel(0.f),
                     m_pWorldMatrixParameter(0),
@@ -78,6 +80,7 @@ public:
                     m_pBonesParameter(0),
                     m_pTimeParameter(0),
                     m_pGlowActiveParameter(0),
+                    m_pSpecularActiveParameter(0),
                     m_pTextureWidth(0),
                     m_pTextureHeight(0), 
                     m_pPoissonBlurKernelParameter(0),
@@ -98,6 +101,7 @@ public:
   
   void SetCameraEye(const Vect3f& _vCameraEye) { m_vCameraEye = _vCameraEye; m_bCameraEyeUpdated=true; };
 
+  void SetSpecular(bool _bSpecular) {m_bSpecularActive = _bSpecular; m_bSpecularUpdated = true;};
   void SetSpecularParams(float _fGlossiness, float _fSpecularLevel);
 
   const Mat44f& GetWorldMatrix() const {return m_mWorldMatrix;};
@@ -196,6 +200,7 @@ private:
   bool m_bPoissonBlurKernelUpdated;
   bool m_bSpecularParamsUpdated;
   bool m_bGlowUpdated;
+  bool m_bSpecularUpdated;
 
   //Matrius compostes recalculades
   bool m_bViewProjectionUpdated;
@@ -208,6 +213,7 @@ private:
   //Parametres
   float m_fGlossiness;
   float m_fSpecularLevel;
+  bool m_bSpecularActive;
   bool m_bGlowActive;
   float m_fGlowIntensity;
 
@@ -236,6 +242,7 @@ private:
 
   D3DXHANDLE m_pTimeParameter;
   D3DXHANDLE m_pGlowActiveParameter;
+  D3DXHANDLE m_pSpecularActiveParameter;
   D3DXHANDLE m_pTextureWidth;
   D3DXHANDLE m_pTextureHeight; 
   D3DXHANDLE m_pPoissonBlurKernelParameter;
