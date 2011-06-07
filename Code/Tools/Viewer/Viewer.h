@@ -116,6 +116,7 @@ private:
   CSpotLight* m_pSpotLight;
   COmniLight* m_pOmniLight;
   Vect3f m_vAmbientLight;
+  Vect3f m_vOmniColor;
   bool m_bEnableLights;
   float m_fInitialCharacterYaw;
   bool m_bRenderLights;

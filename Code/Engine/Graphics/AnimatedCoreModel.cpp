@@ -14,6 +14,7 @@
 #include "ParallaxPropertyDecorator.h"
 #include "BumpPropertyDecorator.h"
 #include "GlowPropertyDecorator.h"
+#include "SpecularPropertyDecorator.h"
 
 #include <cal3d/cal3d.h>
 #include <XML/XMLTreeNode.h>
@@ -170,6 +171,11 @@ bool CAnimatedCoreModel::Load(const std::string &_szPath)
             } else if(l_szTexType == "glowIntensity")
             {
               l_pMaterial = new CGlowPropertyDecorator(l_pMaterial,l_fValue);
+            } else if(l_szTexType == "specularParams")
+            {
+              float l_fGlosiness = l_xmlProperty.GetFloatProperty("glossiness", 0.0f,false);
+              float l_fSpecularLevel = l_xmlProperty.GetFloatProperty("specular_level", 0.0f,false);
+              l_pMaterial = new CSpecularPropertyDecorator(l_pMaterial,l_fGlosiness,l_fSpecularLevel);
             }
           }
 

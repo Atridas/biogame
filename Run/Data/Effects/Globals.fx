@@ -57,6 +57,7 @@ shared bool    g_ShadowEnabled[MAXLIGHTS]     : ShadowEnabled;
 shared float3 g_CameraPosition : CameraPosition;
 shared float g_Time : Time;
 shared float g_GlowActive : GlowActive;
+shared float g_SpecularActive : SpecularActive;
 
 shared int g_TextureWidth  : TextureWidth;
 shared int g_TextureHeight : TextureHeight;

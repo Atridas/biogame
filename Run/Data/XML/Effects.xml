@@ -22,6 +22,7 @@
     <!-- Animats -->
     <effect name="AnimatedTextured" texture_mask="2" file="Data/Effects/AnimatedNormalTexturedEffect.fx" technique="Cal3DTechnique" />
     <effect name="AnimatedNormalmap" texture_mask="6" file="Data/Effects/AnimatedTangentBinormalNormalTexturedEffect.fx" technique="Cal3DNormalMapTechnique" />
+    <!--<effect name="AnimatedSpecularNormalmapTextured" texture_mask="23" file="Data/Effects/SpecularNormalmapTexturedEffect.fx" technique="AnimatedSpecularNormalmapTexturedTechnique" />-->
     <effect name="AnimatedShowNormals" texture_mask="0" file="Data/Effects/AnimatedShowNormalsEffect.fx" technique="Cal3dShowNormalsTechnique" />
     
     
@@ -63,6 +64,7 @@
     <default_effect material_type="22" effect="SpecularNormalmapTextured" />
     <default_effect material_type="26" effect="SpecularLightmapTextured" />
     <default_effect material_type="30" effect="SpecularLightmapNormalmapTextured" />
+    <!--<default_effect material_type="55" effect="AnimatedSpecularNormalmapTextured" />-->
   </default_effects>
 
 
