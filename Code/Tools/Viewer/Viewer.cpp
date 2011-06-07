@@ -1112,59 +1112,8 @@ void CViewer::ShowMeshModeInfo()
     l_SStream << "Roll: " << (float)l_pMeshInstance->GetRoll() << endl;
 
     const vector<CMaterial*>& l_vMaterials = l_pMeshInstance->GetStaticMesh()->GetMaterials();
-    vector<CMaterial*>::const_iterator l_itMaterial = l_vMaterials.begin();
 
-    l_SStream << "Materials: " << endl;
-
-    while(l_itMaterial != l_vMaterials.end())
-    {
-      CMaterial* l_pMaterial = *l_itMaterial;
-
-      int l_iMaterialType = l_pMaterial->GetMaterialType();
-
-      l_SStream << "Material type: ";
-
-      if(l_iMaterialType & DIFFUSE_MATERIAL_MASK)
-      {
-        l_SStream << "Diffuse ";
-      }
-      
-      if(l_iMaterialType & NORMALMAP_MATERIAL_MASK)
-      {
-        l_SStream << "NormalMap ";
-      }
-
-      if(l_iMaterialType & LIGHTMAP_MATERIAL_MASK)
-      {
-        l_SStream << "LightMap ";
-      }
-
-      if(l_iMaterialType & SPECULARMAP_MATERIAL_MASK)
-      {
-        l_SStream << "SpecularMap ";
-      }
-
-      if(l_iMaterialType & GLOW_MATERIAL_MASK)
-      {
-        l_SStream << "Glow ";
-      }
-
-      if(l_iMaterialType & PARALLAX_MATERIAL_MASK)
-      {
-        l_SStream << "Parallax ";
-      }
-      
-      l_SStream << endl;
-
-      l_SStream << "Parallax Height: " << l_pMaterial->GetParallaxHeight() << endl;
-      l_SStream << "Bump: " << l_pMaterial->GetBump() << endl;
-      l_SStream << "Glossiness: " << l_pMaterial->GetGlossiness() << endl;
-      l_SStream << "Specular factor: " << l_pMaterial->GetSpecularFactor() << endl;
-      l_SStream << "Glow intensity: " << l_pMaterial->GetGlowIntensity() << endl;
-      l_SStream << "Alfa blend: " << l_pMaterial->HasAlphaBlending() << endl;
-
-      ++l_itMaterial;
-    }
+    l_SStream << ShowMaterialProperties(l_vMaterials);
 
     FONT_MANAGER->DrawText(0,l_iPosicio,colBLACK,l_uiFontType,l_SStream.str().c_str());
   }
@@ -1190,17 +1139,17 @@ void CViewer::ShowAnimatedModeInfo()
   uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("arial");
   uint32 l_uiFontTypeTitle = FONT_MANAGER->GetTTF_Id("Deco");
   uint32 l_uiFontTypeTitle2 = FONT_MANAGER->GetTTF_Id("xfiles");
-  int l_iPosicio = 420;
+  int l_iPosicio = 100;
   int l_iPosicio2 = 400;
   string l_szMsg("Mode Animats");
   stringstream l_SStream;
   stringstream l_SStreamHelp;
-  CRenderableObject* l_pAnimatedInstance;
+  CRenderableAnimatedInstanceModel* l_pAnimatedInstance;
 
   if (m_vAnimatedModels.size() > 0)
   {
     //FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg.c_str());
-    l_pAnimatedInstance = *m_itCurrentAnimated;
+    l_pAnimatedInstance = (CRenderableAnimatedInstanceModel*)(*m_itCurrentAnimated);
     CRenderableAnimatedInstanceModel* l_pRenderModel = (CRenderableAnimatedInstanceModel*)l_pAnimatedInstance;
 
     l_SStream << "Nom: " << l_pAnimatedInstance->GetName() << endl;
@@ -1212,7 +1161,11 @@ void CViewer::ShowAnimatedModeInfo()
     l_SStream << "Pitch: " << (float)l_pAnimatedInstance->GetPitch() << endl;
     l_SStream << "Roll: " << (float)l_pAnimatedInstance->GetRoll() << endl;
     l_SStream << "Animacio: " << (int)l_pRenderModel->GetAnimatedInstanceModel()->GetCurrentCycle() << endl;
-    FONT_MANAGER->DrawText(0,l_iPosicio,colGREEN,l_uiFontType,l_SStream.str().c_str());
+
+    const vector<CMaterial*>& l_vMaterials = l_pAnimatedInstance->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetMaterials();
+    l_SStream << ShowMaterialProperties(l_vMaterials);
+
+    FONT_MANAGER->DrawText(0,l_iPosicio,colBLACK,l_uiFontType,l_SStream.str().c_str());
   }
 
     /*
@@ -1231,4 +1184,66 @@ void CViewer::ShowAnimatedModeInfo()
         FONT_MANAGER->DrawText(550,l_iPosicio2,colGREEN,l_uiFontType,l_SStreamHelp.str().c_str());
     }
     */
+}
+
+string CViewer::ShowMaterialProperties(const vector<CMaterial*>& _vMaterials)
+{
+
+  stringstream l_SStream;
+  
+  l_SStream << "Materials: " << endl;
+
+  vector<CMaterial*>::const_iterator l_itMaterial = _vMaterials.begin();
+
+  while(l_itMaterial != _vMaterials.end())
+  {
+    CMaterial* l_pMaterial = *l_itMaterial;
+
+    int l_iMaterialType = l_pMaterial->GetMaterialType();
+
+    l_SStream << "Material type: ";
+
+    if(l_iMaterialType & DIFFUSE_MATERIAL_MASK)
+    {
+      l_SStream << "Diffuse ";
+    }
+      
+    if(l_iMaterialType & NORMALMAP_MATERIAL_MASK)
+    {
+      l_SStream << "NormalMap ";
+    }
+
+    if(l_iMaterialType & LIGHTMAP_MATERIAL_MASK)
+    {
+      l_SStream << "LightMap ";
+    }
+
+    if(l_iMaterialType & SPECULARMAP_MATERIAL_MASK)
+    {
+      l_SStream << "SpecularMap ";
+    }
+
+    if(l_iMaterialType & GLOW_MATERIAL_MASK)
+    {
+      l_SStream << "Glow ";
+    }
+
+    if(l_iMaterialType & PARALLAX_MATERIAL_MASK)
+    {
+      l_SStream << "Parallax ";
+    }
+      
+    l_SStream << endl;
+
+    l_SStream << "Parallax Height: " << l_pMaterial->GetParallaxHeight() << endl;
+    l_SStream << "Bump: " << l_pMaterial->GetBump() << endl;
+    l_SStream << "Glossiness: " << l_pMaterial->GetGlossiness() << endl;
+    l_SStream << "Specular factor: " << l_pMaterial->GetSpecularFactor() << endl;
+    l_SStream << "Glow intensity: " << l_pMaterial->GetGlowIntensity() << endl;
+    l_SStream << "Alfa blend: " << l_pMaterial->HasAlphaBlending() << endl;
+
+    ++l_itMaterial;
+  }
+
+  return l_SStream.str();
 }
