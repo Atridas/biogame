@@ -41,7 +41,7 @@ bool CPhysxSkeleton::Init(const string& _szFileName, CalModel* _pCalModel, Mat44
   //Funcions de configuracio!!
   InitBoneMatrices();
   InitPhysXActors();
-  //InitParents();
+  InitParents();
   InitPhysXJoints(_szFileName);
 
   SetOk(true);
@@ -434,6 +434,8 @@ void CPhysxSkeleton::UpdateCal3dFromPhysx()
   {
     m_vBones[i]->UpdateCal3dFromPhysx();
   }
+
+  m_vMat44 = GetPhysxBoneByName("Bip01 Pelvis")->GetRenderableMatrix();
   //m_pCalSkeleton->calculateState();
 
 }
@@ -441,14 +443,22 @@ void CPhysxSkeleton::UpdateCal3dFromPhysx()
 void CPhysxSkeleton::InitParents()
 {
  
+
   for(size_t i=0;i<m_vBones.size();++i)
   {
-    if (m_vBones[i]->IsBoneRoot())
+    if (!m_vBones[i]->IsBoneRoot())
     {
       int l_iParentId = m_vBones[i]->GetParentID();
-      string l_szNameParent = m_pCalSkeleton->getBone(l_iParentId)->getCoreBone()->getName();
-      CPhysxBone* l_pParentPhysBone = GetPhysxBoneByName(l_szNameParent);
-      m_vBones[i]->SetParent(l_pParentPhysBone);
+      if (l_iParentId != -1)
+      {
+        string l_szNameParent = m_pCalSkeleton->getBone(l_iParentId)->getCoreBone()->getName();
+        CPhysxBone* l_pParentPhysBone = GetPhysxBoneByName(l_szNameParent);
+        m_vBones[i]->SetParent(l_pParentPhysBone);
+      }
+      else
+      {
+        m_vBones[i]->SetParent(0);
+      }
     }
     else
     {
