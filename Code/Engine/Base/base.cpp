@@ -41,7 +41,7 @@ D3DXVECTOR3 InterPolaterNumber(D3DXVECTOR3& _vInicial, D3DXVECTOR3& _vFinal,floa
   return l_vVectAux;
 }
 
-D3DXCOLOR InterPolaterNumber2(D3DXCOLOR& _vInicial, D3DXCOLOR& _vFinal,float _fTime,float _fTimeDelta)
+D3DXCOLOR InterPolaterNumber(D3DXCOLOR& _vInicial, D3DXCOLOR& _vFinal,float _fTime,float _fTimeDelta)
 {
   D3DXCOLOR l_vVectAux;
   l_vVectAux=_vInicial-_vFinal;
@@ -50,4 +50,14 @@ D3DXCOLOR InterPolaterNumber2(D3DXCOLOR& _vInicial, D3DXCOLOR& _vFinal,float _fT
   l_vVectAux= l_vVectAux/_fTime*_fTimeDelta;
   l_vVectAux=_vInicial-l_vVectAux;
   return l_vVectAux;
+}
+
+float InterPolaterNumber(float _fInicial, float _fFinal,float _fTime, float _fTimeDelta)
+{
+  float l_fAux;
+  l_fAux=_fInicial-_fFinal;
+  l_fAux= l_fAux/_fTime*_fTimeDelta;
+
+  l_fAux=_fInicial-l_fAux;
+  return l_fAux;
 }

@@ -49,6 +49,9 @@ void CParticle::Release()
   m_vFilesColumnes.clear();
   m_vTimeAnimated.clear();
   m_vTimeAnimatedInterpolation.clear();
+  m_vSize.clear();
+  m_vTimeSize.clear();
+  m_vTimeSizeInterpolation.clear();
 
 }
 
@@ -77,7 +80,7 @@ bool CParticle::Update(float fTimeDelta,CCamera* camera)
        m_fTimeInterpolation=m_vTimeColorInterpolation[i];
       if(l_time_aux<m_fTimeInterpolation)
       {
-        m_Color = InterPolaterNumber2(m_Color,m_vColor[i+1],m_fTimeInterpolation,fTimeDelta);
+        m_Color = InterPolaterNumber(m_Color,m_vColor[i+1],m_fTimeInterpolation,fTimeDelta);
       }
      }
      m_vColor[i]=m_Color;
@@ -112,6 +115,33 @@ bool CParticle::Update(float fTimeDelta,CCamera* camera)
 	 }
     i--;
   }
+
+  //**************
+  i= m_vTimeSize.size()-1;
+  i_aux=i;
+  while (i>=0)
+  {
+    if(m_vTimeSize[i]<m_fAge)
+	 {
+     m_fSize = m_vSize[i];
+
+     // nomes per interpolar
+     
+     if(i<i_aux)
+     {
+      float l_time_aux=m_vTimeSize[i+1]-m_fAge;
+      m_fTimeInterpolation=m_vTimeSizeInterpolation[i];
+      if(l_time_aux<m_fTimeInterpolation)
+      {
+        m_fSize = InterPolaterNumber(m_fSize,m_vSize[i+1],m_fTimeInterpolation,fTimeDelta);
+      }
+     }
+     m_vSize[i]=m_fSize;
+     i=0;
+	 }
+    i--;
+  }
+  //******************
   
   //m_vPos=m_vPos+m_vDir*fTimeDelta;
   m_vPos.x= m_vPos.x+(m_vDir.x*m_vVel.x*fTimeDelta); 
