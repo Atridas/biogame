@@ -11,6 +11,7 @@ class CDirectionalLight;
 class CSpotLight;
 class COmniLight;
 class CRenderManager;
+class CMaterial;
 //-----------------------------------------
 
 class CViewer
@@ -108,6 +109,7 @@ private:
   bool ExecuteFreeModeAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction);
   bool ExecuteMeshModeAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction);
   bool ExecuteAnimatedModeAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction);
+  string ShowMaterialProperties(const vector<CMaterial*>& _vMaterials);
 
   CCamera* m_pObjectCamera;
   CObject3D* m_pTargetObject;
