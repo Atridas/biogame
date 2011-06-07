@@ -343,8 +343,10 @@ bool CParticleManager::Load(const string& _szFileName)
 		    }
 
         l_pParticleEmitter->m_vTimeDirection.push_back(0);
-        l_pParticleEmitter->m_vDirection.push_back(m_vSpawnDir);
-        l_pParticleEmitter->m_vDirection.push_back(m_vDesviacionSpawnDir);
+        D3DXVECTOR3 l_vAux = m_vSpawnDir- m_vDesviacionSpawnDir;
+        l_pParticleEmitter->m_vDirection.push_back(l_vAux);
+        l_vAux = m_vSpawnDir+ m_vDesviacionSpawnDir;
+        l_pParticleEmitter->m_vDirection.push_back(l_vAux);
 
         
         //********************************************
@@ -373,12 +375,13 @@ bool CParticleManager::Load(const string& _szFileName)
             m_vSpawnDir = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
 			      l_vVec3 = l_treeParticleInstanceDiredtion.GetVect3fProperty("Desviacion",Vect3f(3.0f));
             m_vDesviacionSpawnDir = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
-
-
-		
+            
+            
+		        D3DXVECTOR3 l_vAux = m_vSpawnDir- m_vDesviacionSpawnDir;
 		       l_pParticleEmitter->m_vTimeDirection.push_back(m_fTime);
-           l_pParticleEmitter->m_vDirection.push_back(m_vSpawnDir);
-           l_pParticleEmitter->m_vDirection.push_back(m_vDesviacionSpawnDir);
+           l_pParticleEmitter->m_vDirection.push_back(l_vAux);
+           l_vAux = m_vSpawnDir+ m_vDesviacionSpawnDir;
+           l_pParticleEmitter->m_vDirection.push_back(l_vAux);
 		       l_pParticleEmitter->m_vTimeDirectionInterpolation.push_back(m_fTimeInterpolation);
            l_pInfo->m_iNumDirections++;
             
