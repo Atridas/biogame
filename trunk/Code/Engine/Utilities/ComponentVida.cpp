@@ -1,4 +1,5 @@
 #include "ComponentVida.h"
+#include "Core.h"
 
 
 bool CComponentVida::Init(CGameEntity* _pEntity, float _fVidaInicial)
@@ -27,7 +28,8 @@ void CComponentVida::ReceiveEvent(const SEvent& _Event)
       l_morir.Msg = SEvent::MORIR;
       l_morir.Receiver = l_morir.Sender = GetEntity()->GetGUID();
       
-      GetEntity()->ReceiveEvent(l_morir);//TODO usar un manager
+      CORE->GetEntityManager()->SendEvent(l_morir);
+      //GetEntity()->ReceiveEvent(l_morir);//TODO usar un manager
     }
   }
 }

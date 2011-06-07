@@ -141,15 +141,19 @@ void LoadComponentTrigger(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 
 
 
+// -------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------
 
 
-
-void LoadEntitiesFromXML(const string& _szFile)
+void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
 {
-  LOGGER->AddNewLog(ELL_INFORMATION, "Carregant el fitxer de Entitats \"%s\" [Utilities/EntityLoader.cpp]", _szFile.c_str());
-
-  CEntityManager *l_pEntityManager = CORE->GetEntityManager();
-
+  LOGGER->AddNewLog(ELL_INFORMATION, "CEntityManager::LoadEntitiesFromXML Carregant el fitxer de Entitats \"%s\" [Utilities/EntityLoader.cpp]", _szFile.c_str());
+  
   CXMLTreeNode l_TreeEntities;
   if(!l_TreeEntities.LoadFile(_szFile.c_str()))
   {
@@ -171,12 +175,12 @@ void LoadEntitiesFromXML(const string& _szFile)
         if(strcmp(l_TreeEntity.GetName(),"Entity") == 0)
         {
           LOGGER->AddNewLog(ELL_INFORMATION,"\tCreant nova entitat");
-          CGameEntity *l_pEntity = l_pEntityManager->CreateEntity();
+          CGameEntity *l_pEntity = CreateEntity();
 
           if(l_TreeEntity.ExistsProperty("name"))
           {
             LOGGER->AddNewLog(ELL_INFORMATION,"\t\tDefinint nom \"%s\"", l_TreeEntity.GetPszISOProperty("name").c_str());
-            l_pEntityManager->SetName(l_TreeEntity.GetPszISOProperty("name"), l_pEntity);
+            SetName(l_TreeEntity.GetPszISOProperty("name"), l_pEntity);
           }
 
           int l_iNumComponents = l_TreeEntity.GetNumChildren();

@@ -27,8 +27,9 @@ public:
       m_fHeightAdjustment(0),
       m_fYawAdjustment(0)
       {};
-
+      
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_RENDERABLE_OBJECT;};
+  static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_RENDERABLE_OBJECT;};
   
   bool Init(CGameEntity *_pEntity, const string& _szName);
   bool InitAnimatedModel(CGameEntity *_pEntity, const string& _szName, const string& _szCore);
