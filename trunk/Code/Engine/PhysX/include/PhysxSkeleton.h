@@ -24,6 +24,7 @@ public:
   bool              Init(const string& _szFileName, CalModel* _pCalModel, Mat44f _vMat);
   CalSkeleton*      GetSkeleton() {return m_pCalSkeleton;};
   void              SetSkeleton(CalSkeleton* _pSkeleton) {m_pCalSkeleton = _pSkeleton;};
+  const Mat44f&     GetRenderableMatrix()                  {return m_vMat44;};
 
   //Funcions per inicialitzar el esquelet corresponent
   bool              Load(string _szFileName);
