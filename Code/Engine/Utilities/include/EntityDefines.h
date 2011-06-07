@@ -29,12 +29,12 @@ struct SEvent {
     REBRE_IMPACTE,
     MORIR
   } Msg;
+
+  SEvent():Sender(-1),Receiver(-1),DispatchTime(0) {};
 };
 
 #include "BaseComponent.h"
 #include "GameEntity.h"
 #include "EntityManager.h"
-
-void LoadEntitiesFromXML(const string& _szFile);
 
 #endif

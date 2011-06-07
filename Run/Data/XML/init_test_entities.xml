@@ -24,7 +24,7 @@
     <Language languageXML="Data/Language/catalan.xml"/>
     <Language languageXML="Data/Language/english.xml"/>
   </Languages>
-  <InputManager exclusiveMouse="false"/>
+  <InputManager exclusiveMouse="true"/>
   <ActionToInput file="Data/XML/actions_entities.xml"/>
   
 

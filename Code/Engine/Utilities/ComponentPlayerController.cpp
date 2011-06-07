@@ -8,6 +8,10 @@
 #include "ComponentRenderableObject.h"
 #include "Component3rdPSCamera.h"
 #include "Camera.h"
+#include "AnimatedInstanceModel.h"
+#include "cal3d/cal3d.h"
+#include "ComponentLaser.h"
+#include "ComponentRenderableObject.h"
 
 #include "PhysicsManager.h"
 
@@ -187,6 +191,8 @@ void CComponentPlayerController::Update(float _fDeltaTime)
     Vect3f l_vPos = l_pCamera->GetEye();
     Vect3f l_vDir = l_pCamera->GetDirection().Normalize();
 
+    l_vPos += l_vDir;
+
     SCollisionInfo l_CInfo;
     CPhysicUserData* l_pUserData = 0;
 
@@ -194,6 +200,28 @@ void CComponentPlayerController::Update(float _fDeltaTime)
 
     if( l_pUserData )
     {
+      Vect3f l_vCenterPoint = l_CInfo.m_CollisionPoint;
+
+      CalSkeleton *l_pSkeleton = l_pAnimatedInstanceModel->GetAnimatedCalModel()->getSkeleton();
+      CalCoreSkeleton *l_pCoreSkeleton = l_pSkeleton->getCoreSkeleton();
+      CalBone* l_pBone = l_pSkeleton->getBone( l_pCoreSkeleton->getCoreBoneId("Bip01 R Hand") );
+
+      CalVector l_vTanslationBone = l_pBone->getTranslationAbsolute();
+
+      Mat44f l_mat = GetEntity()->GetComponent<CComponentRenderableObject>()->GetRenderableObject()->GetMat44();
+      //Mat44f l_mat = m_pObject3D->GetMat44();
+
+      Vect4f l_vTanslationBone2(-l_vTanslationBone.x, l_vTanslationBone.y, l_vTanslationBone.z, 1);
+
+      l_vTanslationBone2 = l_mat * l_vTanslationBone2;
+
+
+      CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
+      (new CComponentLaser())->Init(l_pLaser,
+                                    Vect3f(l_vTanslationBone2.x,l_vTanslationBone2.y,l_vTanslationBone2.z),
+                                    l_vCenterPoint,
+                                    1.f);
+
       if(l_pUserData->GetEntity())
       {
         SEvent l_impacte;
@@ -204,8 +232,34 @@ void CComponentPlayerController::Update(float _fDeltaTime)
         l_impacte.Sender = GetEntity()->GetGUID();
 
         //TODO usar un manager
-        l_pUserData->GetEntity()->ReceiveEvent(l_impacte);
+        CORE->GetEntityManager()->SendEvent(l_impacte);
+        //l_pUserData->GetEntity()->ReceiveEvent(l_impacte);
       }
+    }
+    else
+    {
+      
+      Vect3f l_vCenterPoint = l_vPos + l_vDir * 1000;
+
+      CalSkeleton *l_pSkeleton = l_pAnimatedInstanceModel->GetAnimatedCalModel()->getSkeleton();
+      CalCoreSkeleton *l_pCoreSkeleton = l_pSkeleton->getCoreSkeleton();
+      CalBone* l_pBone = l_pSkeleton->getBone( l_pCoreSkeleton->getCoreBoneId("Bip01 R Hand") );
+
+      CalVector l_vTanslationBone = l_pBone->getTranslationAbsolute();
+
+      Mat44f l_mat = GetEntity()->GetComponent<CComponentRenderableObject>()->GetRenderableObject()->GetMat44();
+      //Mat44f l_mat = m_pObject3D->GetMat44();
+
+      Vect4f l_vTanslationBone2(-l_vTanslationBone.x, l_vTanslationBone.y, l_vTanslationBone.z, 1);
+
+      l_vTanslationBone2 = l_mat * l_vTanslationBone2;
+
+
+      CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
+      (new CComponentLaser())->Init(l_pLaser,
+                                    Vect3f(l_vTanslationBone2.x,l_vTanslationBone2.y,l_vTanslationBone2.z),
+                                    l_vCenterPoint,
+                                    1.f);
     }
   }
 }

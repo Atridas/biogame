@@ -95,6 +95,17 @@ void CGameEntity::ReceiveEvent(const SEvent& _Event)
   }
 }
 
+void CGameEntity::DebugRender(CRenderManager* _pRM)
+{
+  vector<CBaseComponent*>::iterator l_it = m_vComponents.begin();
+  vector<CBaseComponent*>::iterator l_end = m_vComponents.end();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    (*l_it)->DebugRender(_pRM);
+  }
+}
+
 string CGameEntity::GetName() const
 {
   if(m_pszName)

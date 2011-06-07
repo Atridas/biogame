@@ -93,11 +93,11 @@ bool CEntityProcess::Init()
 
   (new CComponentVida())->Init(m_pPlayerEntity, 100.f);
 
-  //Carregar entitats de l'escenari
-  LoadEntitiesFromXML("Data/Levels/NivellProves/XML/GameEntities.xml");
+  //Carregar entitats de l'escenari ----------------------------------------------------------------------------------------
+  CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/NivellProves/XML/GameEntities.xml");
 
 
-  // un enemic ------------------------------------------------------------------------
+  // un enemic --------------------------------------------------------------------------------------------------------------
   CGameEntity* l_peEnemy = CORE->GetEntityManager()->CreateEntity();
   l_pComponentObject3D = new CComponentObject3D();
   l_pComponentObject3D->Init(l_peEnemy);
@@ -154,7 +154,7 @@ void CEntityProcess::RenderScene(CRenderManager* _pRM)
 {
   CORE->GetRenderableObjectsManager()->Render(_pRM);
 
-  
+  CORE->GetEntityManager()->DebugRender(_pRM);
 }
 
 void CEntityProcess::RenderINFO(CRenderManager* _pRM)

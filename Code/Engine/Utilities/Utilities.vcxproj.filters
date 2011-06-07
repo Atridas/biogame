@@ -67,6 +67,9 @@
     <Filter Include="EntitySystem\Components\ComponentVida">
       <UniqueIdentifier>{ac9ab43b-9dc5-4698-8448-b7be319f31d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentLaser">
+      <UniqueIdentifier>{b9f7e52f-6856-457f-931b-007d23436f0e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -126,9 +129,6 @@
     <ClCompile Include="EntitiesToLua.cpp">
       <Filter>EntitySystem\EntitiesToLua</Filter>
     </ClCompile>
-    <ClCompile Include="EntityLoader.cpp">
-      <Filter>EntitySystem</Filter>
-    </ClCompile>
     <ClCompile Include="ComponentPhysXActor.cpp">
       <Filter>EntitySystem\Components\ComponentPhysXActor</Filter>
     </ClCompile>
@@ -140,6 +140,12 @@
     </ClCompile>
     <ClCompile Include="ComponentVida.cpp">
       <Filter>EntitySystem\Components\ComponentVida</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentLaser.cpp">
+      <Filter>EntitySystem\Components\ComponentLaser</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityLoader.cpp">
+      <Filter>EntitySystem\EntityManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -223,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentVida.h">
       <Filter>EntitySystem\Components\ComponentVida</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentLaser.h">
+      <Filter>EntitySystem\Components\ComponentLaser</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

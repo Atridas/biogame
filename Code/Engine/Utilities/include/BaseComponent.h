@@ -17,6 +17,7 @@
 
 //---- forward declarations --
 class CGameEntity;
+class CRenderManager;
 // ---------------------------
 
 class CBaseComponent:
@@ -33,7 +34,8 @@ public:
     ECT_RENDERABLE_OBJECT,
     ECT_3RD_PERSON_SHOOTER_CAMERA,
     ECT_TRIGGER,
-    ECT_VIDA
+    ECT_VIDA,
+    ECT_LASER
   };
   
   virtual Type GetType() = 0; //{return m_Type;};
@@ -50,6 +52,9 @@ public:
   virtual void UpdatePostPhysX(float _fDeltaTime)  {};
   virtual void UpdatePostAnim(float _fDeltaTime)   {};
   virtual void PostUpdate(float _fDeltaTime)       {};
+
+
+  virtual void DebugRender(CRenderManager*)        {};
 
 protected:
   CBaseComponent():m_pEntity(0) {};

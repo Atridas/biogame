@@ -15,6 +15,7 @@
 
 class CBaseComponent;
 class CEntityManager;
+class CRenderManager;
 
 class CGameEntity:
   public CBaseControl
@@ -22,9 +23,11 @@ class CGameEntity:
 public:
 
   int GetGUID() const {return m_iGUID;};
-
+  
   template<class T>
   T* GetComponent(CBaseComponent::Type _type) const;
+  template<class T>
+  T* GetComponent() const;
   
   
   void         PreUpdate(float _fDeltaTime)      ;
@@ -34,7 +37,8 @@ public:
   void         UpdatePostAnim(float _fDeltaTime) ;
   void         PostUpdate(float _fDeltaTime)     ;
 
-  void ReceiveEvent(const SEvent& _Event);
+  void         DebugRender(CRenderManager*)      ;
+
 
   string GetName() const;
 
@@ -46,6 +50,7 @@ private:
   CGameEntity(int _iId):m_iGUID(_iId),m_pszName(0) {SetOk(true);};
   ~CGameEntity() {Done();};
   void AddComponent(CBaseComponent* _pComponent);
+  void ReceiveEvent(const SEvent& _Event);
 
   map<CBaseComponent::Type, CBaseComponent*> m_mComponents;
   vector<CBaseComponent*>                    m_vComponents;
@@ -61,6 +66,19 @@ template<class T>
 T* CGameEntity::GetComponent(CBaseComponent::Type _type) const
 {
   map<CBaseComponent::Type, CBaseComponent*>::const_iterator l_it = m_mComponents.find(_type);
+
+  if(l_it == m_mComponents.cend())
+  {
+    return 0;
+  }
+  return dynamic_cast<T*>(l_it->second);
+}
+
+
+template<class T>
+T* CGameEntity::GetComponent() const
+{
+  map<CBaseComponent::Type, CBaseComponent*>::const_iterator l_it = m_mComponents.find(T::GetStaticType());
 
   if(l_it == m_mComponents.cend())
   {
