@@ -3,4 +3,5 @@
 	<animatedModel name="bot" path="Data/Animated Models/actor.xml"/>
   <animatedModel name="riggle" path="Data/Animated Models/Riggle/actor.xml"/>
   <animatedModel name="miner" path="Data/Animated Models/Miner/actor.xml"/>
+  <animatedModel name="Militar" path="Data/Animated Models/Militar/actor.xml"/>
 </animatedModels>
