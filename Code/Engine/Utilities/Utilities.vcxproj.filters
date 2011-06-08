@@ -70,6 +70,9 @@
     <Filter Include="EntitySystem\Components\ComponentLaser">
       <UniqueIdentifier>{b9f7e52f-6856-457f-931b-007d23436f0e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentStateMachine">
+      <UniqueIdentifier>{2219db10-2e44-4e7d-942a-c2e23e3e8597}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -146,6 +149,9 @@
     </ClCompile>
     <ClCompile Include="EntityLoader.cpp">
       <Filter>EntitySystem\EntityManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentStateMachine.cpp">
+      <Filter>EntitySystem\Components\ComponentStateMachine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -232,6 +238,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentLaser.h">
       <Filter>EntitySystem\Components\ComponentLaser</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentStateMachine.h">
+      <Filter>EntitySystem\Components\ComponentStateMachine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
