@@ -370,7 +370,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		format "\n" to:l_file
 		
 		local l_aux = "" as StringStream
-		format "% % %" 0.3 0.3 0.3 to:l_aux
+		format "% % %" 0.01 0.01 0.01 to:l_aux
 		
 		format "%\n" (OpenTagParamXML "lights" #(#("ambient", l_aux))) to:l_file
 		

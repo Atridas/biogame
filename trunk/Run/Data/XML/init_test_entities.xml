@@ -3,12 +3,12 @@
   <RenderManager resolution="1080 720" position="50 5" fullscreenMode="false"/>
   
   <StaticMeshManager>
+    <StaticMeshManager xml="Data/XML/StaticMeshes.xml"/>
     <StaticMeshes xml="Data/Levels/NivellProves/XML/StaticMeshes.xml"/>
     <!--
     <StaticMeshManager xml="Data/Levels/Proves/XML/StaticMeshes.xml"/>
     <StaticMeshManager xml="Data/Levels/Hangar/XML/StaticMeshes.xml"/>
     <StaticMeshManager xml="Data/Levels/Level -2/XML/StaticMeshes.xml"/>
-    <StaticMeshManager xml="Data/XML/StaticMeshes.xml"/>
     -->
   </StaticMeshManager>
 
@@ -43,7 +43,7 @@
 
   <LightsManager file="Data/Levels/PhysX/XML/Lights.xml"/>
 
-  <SceneEffectManager file="Data/XML/SceneEffects_PhysX.xml"/>
+  <SceneEffectManager file="Data/XML/SceneEffects_Viewer.xml"/>
   
   <ScriptManager file="Data/XML/Lua.xml"/>
 

@@ -42,7 +42,9 @@
     <None Include="..\..\..\Run\Data\XML\init_test.xml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="..\..\..\Run\Data\XML\init_test_entities.xml" />
+    <None Include="..\..\..\Run\Data\XML\init_test_entities.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="..\..\..\Run\Data\XML\init_test_ia.xml" />
     <None Include="..\..\..\Run\Data\XML\init_test_particulas.xml">
       <SubType>Designer</SubType>

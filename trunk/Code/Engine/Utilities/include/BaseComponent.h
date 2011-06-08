@@ -35,7 +35,8 @@ public:
     ECT_3RD_PERSON_SHOOTER_CAMERA,
     ECT_TRIGGER,
     ECT_VIDA,
-    ECT_LASER
+    ECT_LASER,
+    ECT_STATE_MACHINE
   };
   
   virtual Type GetType() = 0; //{return m_Type;};
