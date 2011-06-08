@@ -65,12 +65,12 @@ bool CParticleManager::Load(const string& _szFileName)
 
     if(l_treeParticleEmitters.Exists())
     {
-      int l_iNumChildren = l_treeParticleEmitters.GetNumChildren();
+      int l_iNumChildrenEmitters = l_treeParticleEmitters.GetNumChildren();
 
-      LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmitters.", l_iNumChildren);
-
-      for(int i = 0; i < l_iNumChildren; i++)
+      LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmitters.", l_iNumChildrenEmitters);
+      for(int i = 0; i < l_iNumChildrenEmitters; i++)
       {
+        //CXMLTreeNode l_treeParticleEmitter = l_treeParticleEmitters(i)["ParticleEmitter"];
         CXMLTreeNode l_treeParticleEmitter = l_treeParticleEmitters(i);
         if(l_treeParticleEmitter.IsComment())
 				  continue;
@@ -123,22 +123,49 @@ bool CParticleManager::Load(const string& _szFileName)
         l_pInfo->m_vDirection.push_back(l_Event.m_vSpawnDir1);
         l_pInfo->m_vDirection.push_back(l_Event.m_vSpawnDir2);*/
         l_pInfo->m_vTextureAnimation.push_back(l_pInfo->m_pTexParticle);
+        
+      int num = l_treeParticleEmitter.GetNumChildren();
+      //for(int k = 0; k < num; k++)
+      //{
       
-        CXMLTreeNode l_treeParticleEmittersColors = l_treeParticleEmitter["Colors"];
+		for(int k=0;k<num;++k)
+		{
+			const char *l_Name=l_treeParticleEmitter(k).GetName();
+			if(strcmp(l_Name,"Sizes")==0)
+			{
+				int a;
+				a=0;
+			}
+			else if(strcmp(l_Name,"Sizes")==0)
+			{
+				int b;
+				b=0;
+			}
+			else if(strcmp(l_Name,"Colors")==0)
+			{
+				int c;
+				c=0;
+			}
+		}
 
+	  
+	  if (l_treeParticleEmitter.ExistsProperty("Colors"))
+        {
+        CXMLTreeNode l_treeParticleEmittersColors = l_treeParticleEmitter["Colors"];
+          
         if(l_treeParticleEmittersColors.Exists())
         {
-          int l_iNumChildren = l_treeParticleEmittersColors.GetNumChildren();
+          int l_iNumChildrenColors = l_treeParticleEmittersColors.GetNumChildren();
 
-          LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmittersColors.", l_iNumChildren);
+          LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmittersColors.", l_iNumChildrenColors);
 
-          for(int i = 0; i < l_iNumChildren; i++)
+          for(int j = 0; j < l_iNumChildrenColors; j++)
           {
             //SParticleEvent l_Event;
-            CXMLTreeNode l_treeParticleEmittersColor = l_treeParticleEmittersColors(i);
+            CXMLTreeNode l_treeParticleEmittersColor = l_treeParticleEmittersColors(j);
             if(l_treeParticleEmittersColor.IsComment())
 				    continue;
-
+          
             
 
             l_Event.m_fTime = l_treeParticleEmittersColor.GetFloatProperty("time");
@@ -158,19 +185,21 @@ bool CParticleManager::Load(const string& _szFileName)
             //m_vParticleEvent.push_back(l_pEvent);
           }
         }
+        //}
+      
 
         CXMLTreeNode l_treeParticleEmittersSizes = l_treeParticleEmitter["Sizes"];
 
         if(l_treeParticleEmittersSizes.Exists())
         {
-          int l_iNumChildren = l_treeParticleEmittersSizes.GetNumChildren();
+          int l_iNumChildrenSizes = l_treeParticleEmittersSizes.GetNumChildren();
 
-          LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmitterSizes.", l_iNumChildren);
+          LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmitterSizes.", l_iNumChildrenSizes);
 
-          for(int i = 0; i < l_iNumChildren; i++)
+          for(int j = 0; j < l_iNumChildrenSizes; j++)
           {
             //SParticleEvent l_Event;
-            CXMLTreeNode l_treeParticleEmittersSize = l_treeParticleEmittersSizes(i);
+            CXMLTreeNode l_treeParticleEmittersSize = l_treeParticleEmittersSizes(j);
             if(l_treeParticleEmittersSize.IsComment())
 				    continue;
 
@@ -195,14 +224,14 @@ bool CParticleManager::Load(const string& _szFileName)
 
         if(l_treeParticleEmittersAnimateds.Exists())
         {
-          int l_iNumChildren = l_treeParticleEmittersAnimateds.GetNumChildren();
+          int l_iNumChildrenAnimateds = l_treeParticleEmittersAnimateds.GetNumChildren();
 
-          LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmittersAnimated.", l_iNumChildren);
+          LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmittersAnimated.", l_iNumChildrenAnimateds);
 
-          for(int i = 0; i < l_iNumChildren; i++)
+          for(int j = 0; j < l_iNumChildrenAnimateds; j++)
           {
             
-            CXMLTreeNode l_treeParticleEmittersAnimated = l_treeParticleEmittersAnimateds(i);
+            CXMLTreeNode l_treeParticleEmittersAnimated = l_treeParticleEmittersAnimateds(j);
             if(l_treeParticleEmittersAnimated.IsComment())
 				    continue;
 
@@ -225,6 +254,7 @@ bool CParticleManager::Load(const string& _szFileName)
 			
           }
         }
+      }
         //************
       /*  CXMLTreeNode l_treeParticleEmittersDiredtions = l_treeParticleEmitter["Directions"];
 
@@ -270,11 +300,11 @@ bool CParticleManager::Load(const string& _szFileName)
 
     if(l_treeInstanceParticles.Exists())
     {
-      int l_iNumChildren = l_treeInstanceParticles.GetNumChildren();
+      int l_iNumChildrenInstances = l_treeInstanceParticles.GetNumChildren();
 
-      LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d particules.", l_iNumChildren);
+      LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d particules.", l_iNumChildrenInstances);
 
-      for(int i = 0; i < l_iNumChildren; i++)
+      for(int i = 0; i < l_iNumChildrenInstances; i++)
       {
         CXMLTreeNode l_treeInstanceParticle = l_treeInstanceParticles(i);
 
@@ -354,14 +384,14 @@ bool CParticleManager::Load(const string& _szFileName)
 
         if(l_treeParticleInstanceDiredtions.Exists())
         {
-          int l_iNumChildren = l_treeParticleInstanceDiredtions.GetNumChildren();
+          int l_iNumChildrenDirections = l_treeParticleInstanceDiredtions.GetNumChildren();
 
-          LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmittersDirections.", l_iNumChildren);
+          LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmittersDirections.", l_iNumChildrenDirections);
 
-          for(int i = 0; i < l_iNumChildren; i++)
+          for(int j = 0; j < l_iNumChildrenDirections; j++)
           {
           
-            CXMLTreeNode l_treeParticleInstanceDiredtion = l_treeParticleInstanceDiredtions(i);
+            CXMLTreeNode l_treeParticleInstanceDiredtion = l_treeParticleInstanceDiredtions(j);
             if(l_treeParticleInstanceDiredtion.IsComment())
 				    continue;
 
