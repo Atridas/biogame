@@ -176,49 +176,26 @@ void CPhysxBone::UpdateCal3dFromPhysx()
   {
     if (m_pParent->GetPhysxActor() != 0)
     {
-      //Mat44f l_vInverseRenderable = m_vMatActor.GetInverted();
       Mat44f l_vAbsoluteParent, l_vAbsolute;
       m_pParent->GetPhysxActor()->GetMat44(l_vAbsoluteParent);
       GetPhysxActor()->GetMat44(l_vAbsolute);
       Mat44f l_vInverseParent = l_vAbsoluteParent.GetInverted();
       Mat44f l_vRelative = l_vInverseParent*l_vAbsolute;
       
-      Vect4f l_vTranslate = l_vRelative.GetColum(3);
+      Vect4f l_vTranslate = l_vRelative.GetTranslationVector();
       CalVector l_vRelativeTranslation(-l_vTranslate.x,l_vTranslate.y,l_vTranslate.z);
 
       Mat33f l_vMat33 = l_vRelative.Get33RotationNormalized();
-      
 
-      //A = pi - AC
-      //AC = pi - A
       float l_fAngleX = FLOAT_PI_VALUE - l_vMat33.GetAngleX();
       float l_fAngleY = FLOAT_PI_VALUE - l_vMat33.GetAngleY();
       float l_fAngleZ = FLOAT_PI_VALUE - l_vMat33.GetAngleZ();
-
-      Mat33f l_vMat33Relative;
-      l_vMat33Relative.RotByAnglesYXZ(l_fAngleY,l_fAngleX,l_fAngleZ);
-      
-      //l_vMat33Relative.Transpose();
-
-      /*Mat44f l_Transform;
-      l_Transform.SetIdentity();
-      l_Transform.RotByAnglesYXZ(l_fAngleY,l_fAngleX,l_fAngleZ);
-      l_Transform.Translate(Vect3f(-l_vTranslation.x,l_vTranslation.y,l_vTranslation.z));*/
-
-      /*NxVec3 l_vRow0(l_vMat33Relative.m00,l_vMat33Relative.m10,l_vMat33Relative.m20);
-      NxVec3 l_vRow1(l_vMat33Relative.m01,l_vMat33Relative.m11,l_vMat33Relative.m21);
-      NxVec3 l_vRow2(l_vMat33Relative.m02,l_vMat33Relative.m12,l_vMat33Relative.m22);*/
-
-      NxVec3 l_vRow0(l_vMat33.m00,l_vMat33.m10,l_vMat33.m20);
-      NxVec3 l_vRow1(l_vMat33.m01,l_vMat33.m11,l_vMat33.m21);
-      NxVec3 l_vRow2(l_vMat33.m02,l_vMat33.m12,l_vMat33.m22);
-
-      //NxMat33 l_vMat33Physx(l_vRow0,l_vRow1,l_vRow2);
 
       NxMat33 l_vMat33PhysxX;
       NxMat33 l_vMat33PhysxY;
       NxMat33 l_vMat33PhysxZ;
       NxMat33 l_vMat33Physx;
+
       l_vMat33PhysxX.rotX(l_fAngleX);
       l_vMat33PhysxY.rotY(l_fAngleY);
       l_vMat33PhysxZ.rotZ(l_fAngleZ);
@@ -238,75 +215,16 @@ void CPhysxBone::UpdateCal3dFromPhysx()
     }
     else
     {
-      //Mat44f l_vInverseRenderable = m_vMatActor.GetInverted();
       Mat44f l_vAbsolute;
       GetPhysxActor()->GetMat44(l_vAbsolute);
       Mat44f l_vRelative = l_vAbsolute;
-      m_vMatActor = l_vRelative;
-      
+
+      Mat44f l_matRelativeTransformation;
+      l_matRelativeTransformation = GetBoneLeftHandedAbsoluteTransformation(m_pCalBone).Invert();
+
       m_vMatActor.SetIdentity();
-      //m_vMatActor.Translate(l_vRelative.GetTranslationVector());
-
-      //m_vMatActor.RotByAngleZ(-FLOAT_PI_VALUE*0.5f);
-      //m_vMatActor.Translate(Vect3f(0.0f));
-
-      Vect4f l_vTranslate = l_vRelative.GetColum(3);
-      //CalVector l_vRelativeTranslation(-l_vTranslate.x,l_vTranslate.y,l_vTranslate.z);
-      CalVector l_vRelativeTranslation(0.0f,0.0f,0.0f);
-
-      Mat33f l_vMat33 = l_vRelative.Get33RotationNormalized();
-      
-
-      //A = pi - AC
-      //AC = pi - A
-      float l_fAngleX = FLOAT_PI_VALUE - l_vMat33.GetAngleX();
-      float l_fAngleY = FLOAT_PI_VALUE - l_vMat33.GetAngleY();
-      float l_fAngleZ = FLOAT_PI_VALUE - l_vMat33.GetAngleZ();
-      //
-      //Mat33f l_vMat33Relative;
-      //l_vMat33Relative.RotByAnglesYXZ(l_fAngleY,l_fAngleX,l_fAngleZ);
-      
-      //l_vMat33Relative.Transpose();
-
-      /*Mat44f l_Transform;
-      l_Transform.SetIdentity();
-      l_Transform.RotByAnglesYXZ(l_fAngleY,l_fAngleX,l_fAngleZ);
-      l_Transform.Translate(Vect3f(-l_vTranslation.x,l_vTranslation.y,l_vTranslation.z));*/
-
-      /*NxVec3 l_vRow0(l_vMat33Relative.m00,l_vMat33Relative.m10,l_vMat33Relative.m20);
-      NxVec3 l_vRow1(l_vMat33Relative.m01,l_vMat33Relative.m11,l_vMat33Relative.m21);
-      NxVec3 l_vRow2(l_vMat33Relative.m02,l_vMat33Relative.m12,l_vMat33Relative.m22);*/
-
-      //NxVec3 l_vRow0(l_vMat33.m00,l_vMat33.m10,l_vMat33.m20);
-      //NxVec3 l_vRow1(l_vMat33.m01,l_vMat33.m11,l_vMat33.m21);
-      //NxVec3 l_vRow2(l_vMat33.m02,l_vMat33.m12,l_vMat33.m22);
-
-      //NxMat33 l_vMat33Physx(l_vRow0,l_vRow1,l_vRow2);
-
-      NxMat33 l_vMat33PhysxX;
-      NxMat33 l_vMat33PhysxY;
-      NxMat33 l_vMat33PhysxZ;
-      NxMat33 l_vMat33Physx;
-      l_vMat33PhysxX.rotX(l_fAngleX);
-      l_vMat33PhysxY.rotY(l_fAngleY);
-      l_vMat33PhysxZ.rotZ(l_fAngleZ);
-      l_vMat33Physx = l_vMat33PhysxZ*l_vMat33PhysxX*l_vMat33PhysxY;
-      
-      
-      NxQuat l_vQuat(l_vMat33Physx);
-
-      CalQuaternion l_vQuatRelative;
-
-      l_vQuatRelative.x = -l_vQuat.x;
-      l_vQuatRelative.y = -l_vQuat.y;
-      l_vQuatRelative.z = -l_vQuat.z;
-      l_vQuatRelative.w = l_vQuat.w;
-
-      CalQuaternion x_axis_90(-0.7071067811f,0.0f,0.0f,0.7071067811f);
-      l_vQuatRelative *= x_axis_90;
-
-      m_pCalBone->setRotation(l_vQuatRelative);
-      m_pCalBone->setTranslation(l_vRelativeTranslation);   
+      m_vMatActor *= l_vAbsolute;
+      m_vMatActor *= l_matRelativeTransformation;
     
     }
   }
