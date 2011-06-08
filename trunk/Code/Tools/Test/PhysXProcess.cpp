@@ -520,7 +520,7 @@ void CPhysXProcess::Update(float _fElapsedTime)
   
     CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("rigglebot");
     //l_pAnim->GetAnimatedInstanceModel()->ClearCycle(0);
-    //l_pAnim->SetMat44(g_pRagdoll->GetRenderableMatrix());
+    l_pAnim->SetMat44(g_pRagdoll->GetRenderableMatrix());
     CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
     l_pSkeleton->calculateState();
   }
@@ -688,6 +688,8 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
   if(m_bRenderLights)
     CORE->GetLightManager()->Render(_pRM);
 
+  _pRM->SetTransform(Mat44f().SetIdentity());
+  _pRM->DrawAxis();
 }
 
 
