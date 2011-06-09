@@ -101,8 +101,6 @@
     <ClCompile Include="DrawQuadToTextureSceneEffect.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
-    <ClCompile Include="EffectMaterial.cpp" />
-    <ClCompile Include="EffectTechnique.cpp" />
     <ClCompile Include="Explosion.cpp" />
     <ClCompile Include="ExplosionsManager.cpp" />
     <ClCompile Include="FontManager.cpp" />
@@ -151,8 +149,6 @@
     <ClInclude Include="include\DrawQuadToTextureSceneEffect.h" />
     <ClInclude Include="include\Effect.h" />
     <ClInclude Include="include\EffectManager.h" />
-    <ClInclude Include="include\EffectMaterial.h" />
-    <ClInclude Include="include\EffectTechnique.h" />
     <ClInclude Include="include\EmptyMaterial.h" />
     <ClInclude Include="include\Explosion.h" />
     <ClInclude Include="include\ExplosionsManager.h" />

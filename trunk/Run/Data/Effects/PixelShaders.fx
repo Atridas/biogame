@@ -131,7 +131,7 @@ float4 SpecularTexturedPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
 	
   if(g_SpecularActive)
   {
-	l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x;
+	l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x * g_SpotlightFactor;
   }else{
 	l_SpotlightFactor = g_SpotlightFactor;
   }
@@ -153,7 +153,7 @@ float4 SpecularNormalmapTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS _
 	
   if(g_SpecularActive)
   {
-	l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x;
+	l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x * g_SpotlightFactor;
   }else{
 	l_SpotlightFactor = g_SpotlightFactor;
   }
@@ -175,7 +175,7 @@ float4 SpecularLightmapTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _
 	
 	if(g_SpecularActive)
 	{
-	  l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x;
+	  l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x * g_SpotlightFactor;
 	}else{
 	  l_SpotlightFactor = g_SpotlightFactor;
 	}
@@ -199,7 +199,7 @@ float4 SpecularLightmapNormalmapTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VE
 	
 	if(g_SpecularActive)
 	{
-	  l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x;
+	  l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x * g_SpotlightFactor;
 	}else{
 	  l_SpotlightFactor = g_SpotlightFactor;
 	}

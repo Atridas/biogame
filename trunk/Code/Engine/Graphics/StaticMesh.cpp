@@ -5,8 +5,6 @@
 #include "Texture.h"
 #include "TextureManager.h"
 #include "EffectManager.h"
-#include "EffectTechnique.h"
-#include "EffectMaterial.h"
 
 #include "Material.h"
 #include "StaticMeshEmptyMaterial.h"
