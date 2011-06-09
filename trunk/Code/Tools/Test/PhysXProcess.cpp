@@ -98,6 +98,10 @@ CGameObjectManager* g_pObjectManager = 0;
 
 //RAGDOLLS
 CPhysxSkeleton* g_pRagdoll = 0;
+float g_fRagdollInitTime = 0.0f;
+float g_fRagdollAnimationDuration = 0.0f;
+bool g_bRagdollInit = false;
+unsigned int g_fRagdollFrames = 0;
 
 //CAnimatedModelManager::CAnimatedModelManager()
 //{
@@ -479,6 +483,8 @@ void CPhysXProcess::Update(float _fElapsedTime)
 	    {
 		    g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
         g_pCharacter->GetAnimatedInstanceModel()->BlendCycle("idle",0.3f);
+       /* g_pCharacter->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetCoreModel()->getCoreAnimation(0);
+        CalCoreAnimation* l_pAnimation;*/
 	    }
     }
   }
@@ -513,17 +519,51 @@ void CPhysXProcess::Update(float _fElapsedTime)
       
   }
 
+  CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("rigglebot");
+  CalModel* l_pCalModel = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel();
+
+  //Codi per testejar l
   if (g_pRagdoll != 0)
   {
-    //g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0);
-    g_pRagdoll->UpdateCal3dFromPhysx();
+    //if (g_fRagdollInitTime >= g_fRagdollAnimationDuration*0.2f)
+    if (g_fRagdollInitTime >= g_fRagdollFrames)
+    {
+      if (!g_bRagdollInit)
+      {
+        g_pRagdoll->Init("Data/Animated Models/Riggle/Skeleton.xml",l_pCalModel,l_pAnim->GetMat44());
+        g_bRagdollInit = true;
+      }
+      
+      if (g_bRagdollInit)
+      {
+        //g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0);
+        g_pRagdoll->UpdateCal3dFromPhysx();
   
-    CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("rigglebot");
-    //l_pAnim->GetAnimatedInstanceModel()->ClearCycle(0);
-    l_pAnim->SetMat44(g_pRagdoll->GetRenderableMatrix());
-    CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
-    l_pSkeleton->calculateState();
+    
+        //l_pAnim->GetAnimatedInstanceModel()->ClearCycle(0);
+        l_pAnim->SetMat44(g_pRagdoll->GetRenderableMatrix());
+        CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
+        l_pSkeleton->calculateState();
+      }
+    }
+    else
+    {
+      float l_fInc = g_fRagdollFrames/g_fRagdollAnimationDuration;
+      g_fRagdollInitTime += l_fInc*_fElapsedTime;
+    }
   }
+
+  //if (g_pRagdoll != 0)
+  //{
+  //  //g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0);
+  //  g_pRagdoll->UpdateCal3dFromPhysx();
+  //
+  //  
+  //  //l_pAnim->GetAnimatedInstanceModel()->ClearCycle(0);
+  //  l_pAnim->SetMat44(g_pRagdoll->GetRenderableMatrix());
+  //  CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
+  //  l_pSkeleton->calculateState();
+  //}
 
 }
 
@@ -939,8 +979,43 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     l_pPActorShoot->CreateBody(3);
     CORE->GetPhysicsManager()->AddPhysicActor(l_pPActorShoot);
     l_pPActorShoot->SetLinearVelocity(m_pCamera->GetDirection()*m_fPhysxVelocity);
-    CHECKED_DELETE(l_pPActorShoot)
-*/
+    CHECKED_DELETE(l_pPActorShoot)*/
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // RAGDOLL PROVES
+    ///////////////////////////////////////////////////////////////////////////////
+
+    CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("rigglebot");
+    CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
+    l_pSkeleton->getCoreSkeleton()->calculateBoundingBoxes(l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getCoreModel());
+    l_pSkeleton->calculateBoundingBoxes();
+
+    
+    
+
+    if (g_pRagdoll == 0)
+    {
+
+      int l_iId = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetCoreModel()->getCoreAnimationId("dead");
+      g_fRagdollFrames = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetCoreModel()->getCoreAnimation(l_iId)->getTotalNumberOfKeyframes();
+      g_fRagdollAnimationDuration = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetCoreModel()->getCoreAnimation(l_iId)->getDuration();
+      //g_fRagdollAnimationDuration = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetCoreModel()->getCoreAnimation(l_iId)->
+
+      l_pAnim->GetAnimatedInstanceModel()->ClearCycle(0.5f);
+      l_pAnim->GetAnimatedInstanceModel()->BlendCycle("dead",0.5f);
+      g_pRagdoll = new CPhysxSkeleton();
+      //RENDER_MANAGER->SetTransform(l_pAnim->GetMat44());
+      CalModel* l_pCalModel = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel();
+      
+      
+      //l_pAnim->SetVisible(false);
+      
+
+     /* g_pRagdoll = new CPhysxRagdoll("Ragdoll Prova");
+      g_pRagdoll->Load("Data/Animated Models/Riggle/Ragdoll.xml",false);
+      g_pRagdoll->InitSkeleton(l_pSkeleton);*/
+
+    }
   }
 
   if(strcmp(_pcAction, "VelocityChange") == 0)
