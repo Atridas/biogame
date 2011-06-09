@@ -11,6 +11,7 @@ namespace luabind {
 class CGameEntity;
 struct SEvent;
 
+#include "base.h"
 
 //template <class entity_type>
 class CScriptedStateMachine
@@ -19,11 +20,12 @@ class CScriptedStateMachine
 public:
 
   CScriptedStateMachine(CGameEntity* _owner):m_pOwner(_owner),
-  m_pCurrentState(0), m_pPreviousState(0), m_pGlobalState(0), m_pPreviousGlobalState(0) {};
+    m_bUpdateFailed(false),m_bGlobalUpdateFailed(false),
+    m_bReceiveFailed(false),m_bGlobalReceiveFailed(false) {};
 
   //use these methods to initialize the FSM
-  void SetCurrentState      (luabind::object* s);
-  void SetCurrentGlobalState(luabind::object* s);
+  void SetCurrentState      (const string& s);
+  void SetCurrentGlobalState(const string& s);
 
   
   //call this to update the FSM
@@ -33,14 +35,15 @@ public:
   void ReceiveEvent(const SEvent& _Event);
 
   //change to a new state
-  void  ChangeState      (luabind::object* _pNewState);
-  void  ChangeGlobalState(luabind::object* _pNewState);
-  void  RevertState      (luabind::object* _pNewState);
-  void  RevertGlobalState(luabind::object* _pNewState);
+  void  RevertState      ();
+  void  RevertGlobalState();
+
+  void  ChangeState      (const string& _pNewState);
+  void  ChangeGlobalState(const string& _pNewState);
 
   //retrieve the current state
-  luabind::object*  CurrentState()const;
-  luabind::object*  GlobalState()const;
+  const string&  CurrentState()const {return m_szCurrentState;};
+  const string&  GlobalState()const  {return m_szGlobalState;};
 
 private:
 
@@ -49,10 +52,15 @@ private:
 
   //the current state is a lua table of lua functions. A table may be
   //represented in C++ using a luabind::object
-  luabind::object*   m_pCurrentState;
-  luabind::object*   m_pPreviousState;
-  luabind::object*   m_pGlobalState;
-  luabind::object*   m_pPreviousGlobalState;
+  string  m_szCurrentState;
+  string  m_szPreviousState;
+  string  m_szGlobalState;
+  string  m_szPreviousGlobalState;
+  
+  bool              m_bUpdateFailed;
+  bool              m_bGlobalUpdateFailed;
+  bool              m_bReceiveFailed;
+  bool              m_bGlobalReceiveFailed;
 };
 
 

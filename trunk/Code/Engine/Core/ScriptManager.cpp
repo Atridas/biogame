@@ -33,6 +33,8 @@ extern "C"
 #include "Console.h"
 
 #include "GUIManager.h"
+#include "InputManager.h"
+#include "ActionManager.h"
 
 #include "EntitiesToLua.h"
 #include "ScriptedStateMachine.h"
@@ -151,8 +153,22 @@ int Alert(lua_State * State)
     lua_pop(State, 1);
   }
   l_Text += '\n';
-  LOGGER->AddNewLog(ELL_INFORMATION, l_Text.c_str());
+  LOGGER->AddNewLog(ELL_ERROR, "LUA ERROR: %s", l_Text.c_str());
   return true;
+}
+
+
+void CScriptManager::PrintError(const luabind::error& _error)
+{
+  const char* s = lua_tostring(_error.state(), -1);
+  if(s == NULL)
+  {
+    LOGGER->AddNewLog(ELL_ERROR, "luabind::error Desconnegut");
+  }
+  else
+  {
+    LOGGER->AddNewLog(ELL_ERROR, "luabind::error: %s", s);
+  }
 }
 
 //Para desinicializar el motor de LUA
@@ -328,12 +344,72 @@ void CScriptManager::RegisterLUAFunctions()
 
   //Vect3f
   module(m_pLS) [
+    class_<Vect2f>("Vect2f")
+      .def(constructor<>())
+      .def(constructor<const Vect2f&>())
+      .def(constructor<const float>())
+      .def(constructor<const float, const float>())
+      .def_readwrite("x",&Vect2f::x)
+      .def_readwrite("y",&Vect2f::y)
+      .def( self    + self )
+      .def( self    - self )
+      .def( self    * self )
+      .def( self    * float() )
+      .def( float() * self )
+      .def( self    / float() )
+  ];
+
+  //Vect3f
+  module(m_pLS) [
     class_<Vect3f>("Vect3f")
-      .def(constructor<float>())
-      .def(constructor<float, float, float>())
+      .def(constructor<>())
+      .def(constructor<const Vect3f&>())
+      .def(constructor<const float>())
+      .def(constructor<const float, const float, const float>())
       .def_readwrite("x",&Vect3f::x)
       .def_readwrite("y",&Vect3f::y)
       .def_readwrite("z",&Vect3f::z)
+      .def( self    + self )
+      .def( self    - self )
+      .def( self    * self )
+      .def( self    * float() )
+      .def( float() * self )
+      .def( self    / float() )
+  ];
+
+  //Vect3f
+  module(m_pLS) [
+    class_<Vect2i>("Vect2i")
+      .def(constructor<>())
+      .def(constructor<const Vect2i&>())
+      .def(constructor<const int>())
+      .def(constructor<const int, const int>())
+      .def_readwrite("x",&Vect2i::x)
+      .def_readwrite("y",&Vect2i::y)
+      .def( self    + self )
+      .def( self    - self )
+      .def( self    * self )
+      .def( self    * int() )
+      .def( int()   * self )
+      .def( self    / int() )
+  ];
+
+  //Vect3f
+  module(m_pLS) [
+    class_<Vect3i>("Vect3i")
+      .def(constructor<>())
+      .def(constructor<const Vect3i&>())
+      .def(constructor<const int>())
+      .def(constructor<const int, const int, const int>())
+      .def_readwrite("x",&Vect3i::x)
+      .def_readwrite("y",&Vect3i::y)
+      .def_readwrite("z",&Vect3i::z)
+      .def( self    + self )
+      .def( self    - self )
+      .def( self    * self )
+      .def( self    * int() )
+      .def( int()   * self )
+      .def( self    / int() )
   ];
 
   //Object3D
@@ -370,6 +446,8 @@ void CScriptManager::RegisterLUAFunctions()
       .def("get_static_mesh_manager",         &CCore::GetStaticMeshManager)
       .def("get_engine",                      &CCore::GetEngine)
       .def("get_scipt_manager",               &CCore::GetScriptManager)
+      .def("get_input_manager",               &CCore::GetInputManager)
+      .def("get_action_manager",              &CCore::GetActionManager)
 
   //Process
     ,class_<CProcess,CBaseControl>("Process")
@@ -415,6 +493,15 @@ void CScriptManager::RegisterLUAFunctions()
       .def("reload", &CScriptManager::Reload)
   ];
 
+  //Input
+  module(m_pLS) [
+    class_<CInputManager>("InputManager")
+      .def("get_mouse_delta",  &CInputManager::GetMouseDelta)
+    ,
+    class_<CActionManager>("ActionManager")
+      .def("is_action_active", &CActionManager::IsActionActive)
+  ];
+
   //RenderableObject
   module(m_pLS) [
     class_<CRenderableObject, bases<CObject3D,CBaseControl>>("RenderableObject")
@@ -444,8 +531,8 @@ void CScriptManager::RegisterLUAFunctions()
   module(m_pLS) [
    
     class_<CScriptedStateMachine>("ScriptedStateMachine")
-      .def("set_current_state",    &CScriptedStateMachine::SetCurrentState)
-      .def("change_state",         &CScriptedStateMachine::ChangeState)
+      //.def("set_current_state",    &CScriptedStateMachine::SetCurrentState)
+      //.def("change_state",         &CScriptedStateMachine::ChangeState)
       .def("current_state",        &CScriptedStateMachine::CurrentState)
       .def("receive_event",        &CScriptedStateMachine::ReceiveEvent)
   ];

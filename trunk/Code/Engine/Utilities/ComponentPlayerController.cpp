@@ -118,14 +118,13 @@ void CComponentPlayerController::Update(float _fDeltaTime)
   l_fYaw = m_pObject3D->GetYaw();
   
   l_fYaw -= l_vVec.x*_fDeltaTime*m_fYawSpeed;
-  //m_pObjectBot->SetYaw(m_pObject->GetYaw()-FLOAT_PI_VALUE/2.0f);
 
   l_fPitch -= l_vVec.y*_fDeltaTime*m_fPitchSpeed;
   if(l_fPitch < m_fMinPitchAngle) l_fPitch = m_fMinPitchAngle;
   if(l_fPitch > m_fMaxPitchAngle) l_fPitch = m_fMaxPitchAngle;
   
-  m_pObject3D->SetPitch(l_fPitch);
-  m_pObject3D->SetYaw(l_fYaw);
+  //m_pObject3D->SetPitch(l_fPitch);
+  //m_pObject3D->SetYaw(l_fYaw);
 
   
 

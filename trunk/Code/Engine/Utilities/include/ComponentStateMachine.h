@@ -16,7 +16,7 @@ public:
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_STATE_MACHINE;};
 
-  bool Init(CGameEntity* _pEntity);
+  bool Init(CGameEntity* _pEntity, const string& _pEstatInicial);
   
   virtual void Update(float _fDeltaTime);
   virtual void ReceiveEvent(const SEvent& _Event);

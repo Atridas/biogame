@@ -11,6 +11,12 @@ struct lua_State;
 #include "Utils/BaseControl.h"
 #include "Core.h"
 
+namespace luabind
+{
+  class error;
+  class cast_failed;
+};
+
 class CScriptManager:
   public CBaseControl
 {
@@ -24,6 +30,8 @@ public:
   void Load(const string& _szFileName);
   void Reload();
   lua_State * GetLuaState() const {return m_pLS;}
+  
+  static void PrintError(const luabind::error&);
 
 protected:
   void Release();

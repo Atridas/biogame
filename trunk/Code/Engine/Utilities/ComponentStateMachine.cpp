@@ -1,13 +1,15 @@
 #include "ComponentStateMachine.h"
 #include "ScriptedStateMachine.h"
 
-
-bool CComponentStateMachine::Init(CGameEntity* _pEntity)
+bool CComponentStateMachine::Init(CGameEntity* _pEntity, const string& _pEstatInicial)
 {
   assert(_pEntity->IsOk());
   SetEntity(_pEntity);
 
   m_pStateMachine = new CScriptedStateMachine(_pEntity);
+
+  m_pStateMachine->SetCurrentState(_pEstatInicial);
+
 
   SetOk(true);
   return IsOk();

@@ -212,7 +212,10 @@ bool CAnimatedCoreModel::Load(const std::string &_szPath)
     LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load No s'ha trobat l'arxiu");
   }
 
-  ComputeBoundings();
+  if(IsOk())
+  {
+    ComputeBoundings();
+  }
 
   return IsOk();
 }

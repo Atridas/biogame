@@ -63,8 +63,10 @@ void CComponentTrigger::OnEnter(CGameEntity* _pOther)
 
     try {
       luabind::call_function<void>(l_pLUA, m_szOnEnter.c_str(), GetEntity(), _pOther);
-    } catch(const std::exception& _TheError)
+    } catch(const luabind::error& _TheError)
     {
+      CScriptManager::PrintError(_TheError);
+
       LOGGER->AddNewLog(ELL_ERROR,"\tEntity \"%s\" has entered trigger \"%s\" and script \"%s\" has failed with error \"%s\"", 
                           _pOther->GetName().c_str(), GetEntity()->GetName().c_str(), m_szOnEnter.c_str(), _TheError.what());
     }
@@ -81,10 +83,12 @@ void CComponentTrigger::OnExit (CGameEntity* _pOther)
 
     try {
       luabind::call_function<void>(l_pLUA, m_szOnExit.c_str(), GetEntity(), _pOther);
-    } catch(const std::exception& _TheError)
+    } catch(const luabind::error& _TheError)
     {
-      LOGGER->AddNewLog(ELL_ERROR,"\tEntity \"%s\" has exited trigger \"%s\" and script \"%s\" has failed with error \"%s\"", 
-                            _pOther->GetName().c_str(), GetEntity()->GetName().c_str(), m_szOnEnter.c_str(), _TheError.what());
+      CScriptManager::PrintError(_TheError);
+
+      LOGGER->AddNewLog(ELL_ERROR,"\tEntity \"%s\" has exited trigger \"%s\" and script \"%s\" has failed.", 
+                            _pOther->GetName().c_str(), GetEntity()->GetName().c_str(), m_szOnEnter.c_str());
     }
   }
 }

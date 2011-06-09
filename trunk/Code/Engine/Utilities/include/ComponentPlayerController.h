@@ -98,7 +98,10 @@ public:
   
   float m_fMaxPitchAngle;
   float m_fMinPitchAngle;
+  
 
+  float m_fSpeed;
+  int m_iCurrentAnimation;
 protected:
   virtual void Release() {};
 
@@ -108,9 +111,6 @@ private:
   CComponentObject3D * m_pObject3D;
 
   CRenderableAnimatedInstanceModel* m_pAnimatedModel;
-
-  float m_fSpeed;
-  int m_iCurrentAnimation;
 };
 
 #endif
