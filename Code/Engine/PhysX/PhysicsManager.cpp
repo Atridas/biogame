@@ -646,7 +646,7 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot (const Vect3f posRay,
 
   NxVec3 l_vDirectionVec(dirRay.x,dirRay.y,dirRay.z); 
   NxF32 coeff = actor->getMass() * _fPower;
-  actor->addForceAtLocalPos(l_vDirectionVec*coeff, NxVec3(0,0,0), NX_IMPULSE);
+  actor->addForceAtLocalPos(l_vDirectionVec*coeff, NxVec3(0,0,0), NX_IMPULSE,true);
 
 
 	return impactObject;
