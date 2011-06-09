@@ -612,6 +612,46 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActor (const Vect3f posRay, cons
 	return impactObject;
 }
 
+
+CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot (const Vect3f posRay, const Vect3f& dirRay, uint32 impactMask, CPhysicUserData* impactObject, SCollisionInfo& info, float _fPower)
+{
+  
+  //NxUserRaycastReport::ALL_SHAPES
+	assert(m_pScene != NULL);
+
+	NxRay ray; 
+	ray.dir =  NxVec3(dirRay.x, dirRay.y, dirRay.z);
+	ray.orig = NxVec3(posRay.x, posRay.y, posRay.z);
+
+  NxRaycastHit hit;
+	NxShape* closestShape = NULL;
+
+	closestShape = m_pScene->raycastClosestShape(ray, NX_ALL_SHAPES, hit, impactMask);
+	if (!closestShape) 
+	{
+		//No hemos tokado a ningún objeto físico de la escena.
+		return NULL;
+	}
+	NxActor* actor = &closestShape->getActor();
+	impactObject =(CPhysicUserData*)actor->userData;
+	//Si está petando aquí quiere decir que se ha registrado un objeto físico sin proporcionarle UserData
+	assert(impactObject);
+
+	info.m_fDistance	= hit.distance;
+	info.m_Normal				= Vect3f(hit.worldNormal.x, hit.worldNormal.y, hit.worldNormal.z ); 
+	info.m_CollisionPoint	= Vect3f(hit.worldImpact.x, hit.worldImpact.y, hit.worldImpact.z ); 
+
+  Vect3f l_vDirection(dirRay.x-posRay.x,dirRay.y-posRay.y,dirRay.z-posRay.z);
+  l_vDirection.Normalize();
+
+  NxVec3 l_vDirectionVec(dirRay.x,dirRay.y,dirRay.z); 
+  NxF32 coeff = actor->getMass() * _fPower;
+  actor->addForceAtLocalPos(l_vDirectionVec*coeff, NxVec3(0,0,0), NX_IMPULSE);
+
+
+	return impactObject;
+}
+
 void CPhysicsManager::OverlapSphereActor (float radiusSphere, const Vect3f& posSphere, std::vector<CPhysicUserData*> impactObjects)
 {
 	assert(m_pScene);
