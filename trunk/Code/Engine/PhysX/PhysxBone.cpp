@@ -119,7 +119,7 @@ bool CPhysxBone::AddBoxActor(CXMLTreeNode _XMLObjects)
   l_pUserData->SetColor(colGREEN);
   CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
 	l_pActor->AddBoxSphape(Vect3f(l_vSize.x,l_vSize.z,l_vSize.y)*0.5f,l_fMiddlePoint,NULL,GROUP_COLLIDABLE_PUSHABLE);
-  l_pActor->CreateBody(l_fDensity);
+  l_pActor->CreateBody(l_fDensity,1.0f);
 
   l_pPM->AddPhysicActor(l_pActor);
   l_pActor->SetMat44(m_vMatAnimatedModel*l_vMatActor);
