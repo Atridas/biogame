@@ -1,4 +1,5 @@
 fileIn "GlobalsAndHelpers.ms"
+fileIn "ObjectControl.ms"
 
 -- Comprova el tipus d'element bounding de l'objecte
 -- a type es retorna el tipus de bounding
@@ -30,7 +31,7 @@ function GetBoundingType _object &_type &_target =
 )
 
 --agafa els vèrtexs màxim i mínim de l'objecte en coordenades absolutes.
---si es facilita un _target, les coordenades són les d'aquest, relatives a l'object.
+--si es facilita un _target, aquest ha de ser un dummy i se n'exportarà el max-min en coordenades relatives.
 function CalcMaxMin _object _target =
 (
 	local l_params = #()
@@ -38,35 +39,41 @@ function CalcMaxMin _object _target =
 	local l_string = undefined
 	local l_coord = undefined
 	local l_invTransform = inverse _object.transform
+	local l_max = undefined
+	local l_min = undefined
 	
 	l_aux = "" as stringStream
 	if _target != undefined then
 	(
-		l_coord = _target.max
+		--size/rotation/position
+		local l_size = DummySize _target
+		--transformada relativa a l'objecte
+		local l_transform = _target.transform * l_invTransform
+		
+		l_max = RHVectorToLH(0.5 * l_size * l_transform)
+		l_min = RHVectorToLH(-0.5 * l_size * l_transform)
+		
 	)else
 	(
-		l_coord = _object.max
+		--max / min
+		l_max = RHVectorToLH (_object.max * l_invTransform)
+		l_min = RHVectorToLH (_object.min * l_invTransform)
 	)
 	
-	l_coord = l_coord * l_invTransform
-	l_coord = RHVectorToLH l_coord
-	format "% % %" l_coord.x l_coord.y l_coord.z to:l_aux
-	l_string = l_aux as string
-	append l_params #("max",l_string)
-	
-	l_aux = "" as stringStream
-	if _target != undefined then
+	if l_max != undefined and l_min != undefined then
 	(
-		l_coord = _target.min
-	)else
-	(
-		l_coord = _object.min
+		format "% % %" l_max.x l_max.y l_max.z to:l_aux
+		l_string = l_aux as string
+		append l_params #("max",l_string)
+		
+		l_aux = "" as stringStream
+		
+		format "% % %" l_min.x l_min.y l_min.z to:l_aux
+		l_string = l_aux as string
+		append l_params #("min",l_string)
 	)
-	l_coord = l_coord * l_invTransform
-	l_coord = RHVectorToLH l_coord
-	format "% % %" l_coord.x l_coord.y l_coord.z to:l_aux
-	l_string = l_aux as string
-	append l_params #("min",l_string)
+	
+	return l_params	
 )
 
 
