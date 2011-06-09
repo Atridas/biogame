@@ -127,6 +127,9 @@ void RegisterEntitiesToLua(lua_State* _pLS)
 
       .def_readwrite("min_pitch_angle", &CComponentPlayerController::m_fMaxPitchAngle)
       .def_readwrite("max_pitch_angle", &CComponentPlayerController::m_fMinPitchAngle)
+
+      .def_readwrite("speed", &CComponentPlayerController::m_fSpeed)
+      .def_readwrite("current_animation", &CComponentPlayerController::m_iCurrentAnimation)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponent3rdPSCamera, CBaseComponent>("Component3rdPSCamera")

@@ -20,6 +20,7 @@
 #include "LightManager.h"
 #include "SpotLight.h"
 #include "Camera.h"
+#include "ComponentStateMachine.h"
 
 #include "PhysicActor.h"
 #include <PhysicsManager.h>
@@ -92,6 +93,8 @@ bool CEntityProcess::Init()
   l_pComponentPhysXController->Init(m_pPlayerEntity, 0.3f, 1.5f, 10.0f, 0.1f, 0.5f, 1);
 
   (new CComponentVida())->Init(m_pPlayerEntity, 100.f);
+
+  (new CComponentStateMachine())->Init(m_pPlayerEntity, "State_Player_Neutre");
 
   //Carregar entitats de l'escenari ----------------------------------------------------------------------------------------
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/NivellProves/XML/GameEntities.xml");

@@ -22,6 +22,9 @@
 
     <script action="SCRIPT_MANAGER                = CORE:get_scipt_manager()"/>
     <script action="SM                            = CORE:get_scipt_manager()"/>
+
+    <script action="INPUT_MANAGER                 = CORE:get_input_manager()"/>
+    <script action="IM                            = CORE:get_input_manager()"/>
     
     <script action="GUI_MANAGER                   = CORE:get_gui_manager()"/>
 
