@@ -526,7 +526,7 @@ void CPhysXProcess::Update(float _fElapsedTime)
   //if (g_pRagdoll != 0)
   //{
   //  //if (g_fRagdollInitTime >= g_fRagdollAnimationDuration*0.2f)
-  //  if (g_fRagdollInitTime >= g_fRagdollFrames)
+  //  if (g_fRagdollInitTime >= g_fRagdollAnimationDuration*0.9f)
   //  {
   //    if (!g_bRagdollInit)
   //    {
@@ -539,7 +539,6 @@ void CPhysXProcess::Update(float _fElapsedTime)
   //      //g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0);
   //      g_pRagdoll->UpdateCal3dFromPhysx();
   //
-  //  
   //      //l_pAnim->GetAnimatedInstanceModel()->ClearCycle(0);
   //      l_pAnim->SetMat44(g_pRagdoll->GetRenderableMatrix());
   //      CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
@@ -548,8 +547,8 @@ void CPhysXProcess::Update(float _fElapsedTime)
   //  }
   //  else
   //  {
-  //    float l_fInc = g_fRagdollFrames/g_fRagdollAnimationDuration;
-  //    g_fRagdollInitTime += l_fInc*_fElapsedTime;
+  //    //float l_fInc = g_fRagdollFrames/g_fRagdollAnimationDuration;
+  //    g_fRagdollInitTime += _fElapsedTime;
   //  }
   //}
 
@@ -950,7 +949,7 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
         g_pUserDataSHOOT->SetColor(colWHITE);
       }
       
-      g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActor(l_PosCamera,l_DirCamera,2,g_pUserDataSHOOT,l_CInfo);
+      g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActor(l_PosCamera,l_DirCamera,6,g_pUserDataSHOOT,l_CInfo);
       g_vCollisions.push_back(l_CInfo);
 
 
@@ -972,51 +971,48 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
      
   }
 
-  //if(strcmp(_pcAction, "ShootBOX") == 0)
-  //{
-  //  /*CPhysicActor* l_pPActorShoot = new CPhysicActor(g_pUserData);
-  //  l_pPActorShoot->AddBoxSphape(0.2f,m_pCamera->GetEye());
-  //  l_pPActorShoot->CreateBody(3);
-  //  CORE->GetPhysicsManager()->AddPhysicActor(l_pPActorShoot);
-  //  l_pPActorShoot->SetLinearVelocity(m_pCamera->GetDirection()*m_fPhysxVelocity);
-  //  CHECKED_DELETE(l_pPActorShoot)*/
-  //
-  //  ///////////////////////////////////////////////////////////////////////////////
-  //  // RAGDOLL PROVES
-  //  ///////////////////////////////////////////////////////////////////////////////
-  //
-  //  CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("rigglebot");
-  //  CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
-  //  l_pSkeleton->getCoreSkeleton()->calculateBoundingBoxes(l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getCoreModel());
-  //  l_pSkeleton->calculateBoundingBoxes();
-  //
-  //  
-  //  
-  //
-  //  if (g_pRagdoll == 0)
-  //  {
-  //
-  //    int l_iId = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetCoreModel()->getCoreAnimationId("dead");
-  //    g_fRagdollFrames = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetCoreModel()->getCoreAnimation(l_iId)->getTotalNumberOfKeyframes();
-  //    g_fRagdollAnimationDuration = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetCoreModel()->getCoreAnimation(l_iId)->getDuration();
-  //    //g_fRagdollAnimationDuration = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetCoreModel()->getCoreAnimation(l_iId)->
-  //
-  //    l_pAnim->GetAnimatedInstanceModel()->ClearCycle(0.5f);
-  //    l_pAnim->GetAnimatedInstanceModel()->BlendCycle("dead",0.5f);
-  //    g_pRagdoll = new CPhysxSkeleton();
-  //    //RENDER_MANAGER->SetTransform(l_pAnim->GetMat44());
-  //    CalModel* l_pCalModel = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel();
-  //    
-  //    
-  //    //l_pAnim->SetVisible(false);
-  //    
-  //
-  //   /* g_pRagdoll = new CPhysxRagdoll("Ragdoll Prova");
-  //    g_pRagdoll->Load("Data/Animated Models/Riggle/Ragdoll.xml",false);
-  //    g_pRagdoll->InitSkeleton(l_pSkeleton);*/
-  //
-  //  }
-  //}
+  if(strcmp(_pcAction, "ShootBOX") == 0)
+  {
+    /*CPhysicActor* l_pPActorShoot = new CPhysicActor(g_pUserData);
+    l_pPActorShoot->AddBoxSphape(0.2f,m_pCamera->GetEye());
+    l_pPActorShoot->CreateBody(3);
+    CORE->GetPhysicsManager()->AddPhysicActor(l_pPActorShoot);
+    l_pPActorShoot->SetLinearVelocity(m_pCamera->GetDirection()*m_fPhysxVelocity);
+    CHECKED_DELETE(l_pPActorShoot)*/
+  
+    ///////////////////////////////////////////////////////////////////////////////
+    // RAGDOLL PROVES
+    ///////////////////////////////////////////////////////////////////////////////
+  
+    //CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("rigglebot");
+    //CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
+    //l_pSkeleton->getCoreSkeleton()->calculateBoundingBoxes(l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getCoreModel());
+    //l_pSkeleton->calculateBoundingBoxes();
+  
+    //if (g_pRagdoll == 0)
+    //{
+  
+    //  int l_iId = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetCoreModel()->getCoreAnimationId("dead");
+    //  g_fRagdollFrames = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetCoreModel()->getCoreAnimation(l_iId)->getTotalNumberOfKeyframes();
+    //  g_fRagdollAnimationDuration = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetCoreModel()->getCoreAnimation(l_iId)->getDuration();
+    //  //g_fRagdollAnimationDuration = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetCoreModel()->getCoreAnimation(l_iId)->
+  
+    //  l_pAnim->GetAnimatedInstanceModel()->ClearCycle(0.5f);
+    //  l_pAnim->GetAnimatedInstanceModel()->BlendCycle("dead",0.5f);
+    //  g_pRagdoll = new CPhysxSkeleton();
+    //  //RENDER_MANAGER->SetTransform(l_pAnim->GetMat44());
+    //  CalModel* l_pCalModel = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel();
+    //  
+    //  
+    //  //l_pAnim->SetVisible(false);
+    //  
+  
+    // /* g_pRagdoll = new CPhysxRagdoll("Ragdoll Prova");
+    //  g_pRagdoll->Load("Data/Animated Models/Riggle/Ragdoll.xml",false);
+    //  g_pRagdoll->InitSkeleton(l_pSkeleton);*/
+  
+    //}
+  }
 
   if(strcmp(_pcAction, "VelocityChange") == 0)
   {
