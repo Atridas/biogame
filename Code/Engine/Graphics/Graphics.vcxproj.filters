@@ -73,9 +73,6 @@
     <Filter Include="Effects\Effect">
       <UniqueIdentifier>{b77dbc03-72bb-4ff3-b6d3-98a6e58cf77d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Effects\EffectTechnique">
-      <UniqueIdentifier>{1816bafa-d930-40be-b363-64a8670e72fd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Effects\EffectManager">
       <UniqueIdentifier>{3760ea8b-bd5a-40a6-b073-d5f95085f5c7}</UniqueIdentifier>
     </Filter>
@@ -111,9 +108,6 @@
     </Filter>
     <Filter Include="SceneEffects\DrawQuadSceneEffect">
       <UniqueIdentifier>{645f202a-97ec-4bf9-a968-52306fbcce33}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Effects\EffectMaterial">
-      <UniqueIdentifier>{79307dda-f3c6-4172-b997-332e68885b6c}</UniqueIdentifier>
     </Filter>
     <Filter Include="AnimatedModel\AnimatedModelManager">
       <UniqueIdentifier>{c52e837d-037d-4ea7-a9a7-be14ebfb2f5f}</UniqueIdentifier>
@@ -279,9 +273,6 @@
     <ClCompile Include="Light.cpp">
       <Filter>Lights</Filter>
     </ClCompile>
-    <ClCompile Include="EffectTechnique.cpp">
-      <Filter>Effects\EffectTechnique</Filter>
-    </ClCompile>
     <ClCompile Include="Effect.cpp">
       <Filter>Effects\Effect</Filter>
     </ClCompile>
@@ -305,9 +296,6 @@
     </ClCompile>
     <ClCompile Include="DrawQuadSceneEffect.cpp">
       <Filter>SceneEffects\DrawQuadSceneEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="EffectMaterial.cpp">
-      <Filter>Effects\EffectMaterial</Filter>
     </ClCompile>
     <ClCompile Include="ShadowMapRenderToTexture.cpp">
       <Filter>SceneEffects\ShadowMapRenderToTexture</Filter>
@@ -422,9 +410,6 @@
     <ClInclude Include="include\SpotLight.h">
       <Filter>Lights\SpotLight</Filter>
     </ClInclude>
-    <ClInclude Include="include\EffectTechnique.h">
-      <Filter>Effects\EffectTechnique</Filter>
-    </ClInclude>
     <ClInclude Include="include\Effect.h">
       <Filter>Effects\Effect</Filter>
     </ClInclude>
@@ -445,9 +430,6 @@
     </ClInclude>
     <ClInclude Include="include\DrawQuadSceneEffect.h">
       <Filter>SceneEffects\DrawQuadSceneEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="include\EffectMaterial.h">
-      <Filter>Effects\EffectMaterial</Filter>
     </ClInclude>
     <ClInclude Include="include\ShadowMapRenderToTexture.h">
       <Filter>SceneEffects\ShadowMapRenderToTexture</Filter>

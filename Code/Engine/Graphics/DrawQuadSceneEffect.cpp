@@ -3,10 +3,8 @@
 #include "XML\XMLTreeNode.h"
 #include "Core.h"
 #include "RenderManager.h"
-#include "EffectTechnique.h"
 #include "Texture.h"
 #include "TextureManager.h"
-#include "EffectMaterial.h"
 
 bool CDrawQuadSceneEffect::Init(const CXMLTreeNode& _params)
 {

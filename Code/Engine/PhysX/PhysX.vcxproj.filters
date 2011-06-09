@@ -64,9 +64,6 @@
     <ClCompile Include="PhysicMaterial.cpp">
       <Filter>PhysicMaterial</Filter>
     </ClCompile>
-    <ClCompile Include="PhysxRagdoll.cpp">
-      <Filter>Ragdolls</Filter>
-    </ClCompile>
     <ClCompile Include="PhysxSkeleton.cpp">
       <Filter>Ragdolls\PhysxSkeleton</Filter>
     </ClCompile>
@@ -110,9 +107,6 @@
     </ClInclude>
     <ClInclude Include="include\PhysicMaterial.h">
       <Filter>PhysicMaterial</Filter>
-    </ClInclude>
-    <ClInclude Include="include\PhysxRagdoll.h">
-      <Filter>Ragdolls</Filter>
     </ClInclude>
     <ClInclude Include="include\PhysicsManager.h" />
     <ClInclude Include="include\PhysxSkeleton.h">

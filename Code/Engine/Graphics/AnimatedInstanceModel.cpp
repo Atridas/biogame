@@ -11,8 +11,6 @@
 #include "RenderableVertexs.h"
 #include "Material.h"
 #include "EffectManager.h"
-#include "EffectTechnique.h"
-
 
 void CAnimatedInstanceModel::Initialize(CAnimatedCoreModel *_pAnimatedCoreModel)
 {

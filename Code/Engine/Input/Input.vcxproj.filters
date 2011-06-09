@@ -10,9 +10,6 @@
     <Filter Include="Devices">
       <UniqueIdentifier>{e8ca9c5c-12cd-4fb8-9659-86353466bbce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ActionToInput">
-      <UniqueIdentifier>{b429e257-72c1-4f2a-a00b-8c6484363724}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ActionManager">
       <UniqueIdentifier>{3f86c5dc-3c97-4a34-b98c-5a759779f7df}</UniqueIdentifier>
     </Filter>
@@ -32,9 +29,6 @@
     </ClCompile>
     <ClCompile Include="Keyboard.cpp">
       <Filter>Devices</Filter>
-    </ClCompile>
-    <ClCompile Include="ActionToInput.cpp">
-      <Filter>ActionToInput</Filter>
     </ClCompile>
     <ClCompile Include="ActionManager.cpp">
       <Filter>ActionManager</Filter>
@@ -64,9 +58,6 @@
     </ClInclude>
     <ClInclude Include="include\InputDefs.h">
       <Filter>Devices</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ActionToInput.h">
-      <Filter>ActionToInput</Filter>
     </ClInclude>
     <ClInclude Include="include\ActionManager.h">
       <Filter>ActionManager</Filter>

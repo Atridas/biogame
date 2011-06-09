@@ -4,7 +4,6 @@
 
 #include "base.h"
 #include "Effect.h"
-#include "EffectTechnique.h"
 #include "Utils/MapManager.h"
 #include "params.h"
 
