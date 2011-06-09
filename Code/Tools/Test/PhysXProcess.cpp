@@ -282,7 +282,7 @@ bool CPhysXProcess::Init()
   g_pUserDataController->SetPaint(true);
   g_pUserDataController->SetColor(colBLACK);
 
-  g_pPhysXController = new CPhysicController(RADIUS_CONTROLLER,ALTURA_CONTROLLER,10.0f,0.01f,0.0001f,COLISIONABLE_MASK,g_pUserDataController,Vect3f(-7.0f,2.2f,-4.0f));
+  g_pPhysXController = new CPhysicController(RADIUS_CONTROLLER,ALTURA_CONTROLLER,10.0,0.01f,0.01f,COLISIONABLE_MASK,g_pUserDataController,Vect3f(-7.0f,2.2f,-4.0f));
   g_pPhysXController->SetYaw(-90);
   l_pPhysManager->AddPhysicController(g_pPhysXController);
 
@@ -455,7 +455,11 @@ void CPhysXProcess::Update(float _fElapsedTime)
   }*/
   g_pPhysXController->Move(Vect3f(0.0f,0.0f,0.0f),_fElapsedTime);
   Vect3f l_ControllerPos = g_pPhysXController->GetPosition();
-  m_pObject->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y,l_ControllerPos.z));
+
+
+  /*Mat44f l_vMat = g_pCharacter->GetMat44();
+  Vect3f l_vVect();*/
+  m_pObject->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y+0.5f,l_ControllerPos.z-1.0f));
 
   /*g_pGameBox02->Update(_fElapsedTime);
   g_pGameBox03->Update(_fElapsedTime);
@@ -509,9 +513,13 @@ void CPhysXProcess::Update(float _fElapsedTime)
       {
         if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
 	      {
-		      g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
-          g_pCharacter->GetAnimatedInstanceModel()->BlendCycle("walk",0.3f);
+          if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 5)
+          {
+		        g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+            g_pCharacter->GetAnimatedInstanceModel()->BlendCycle("walk",0.3f);
+          }
 	      }
+
         
       }
     }
@@ -728,7 +736,8 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
     CORE->GetLightManager()->Render(_pRM);
 
   _pRM->SetTransform(Mat44f().SetIdentity());
-  _pRM->DrawAxis();
+  RenderLaserPoint(_pRM);
+  //_pRM->DrawAxis();
 }
 
 
@@ -937,19 +946,35 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
 
   if(strcmp(_pcAction, "ShootBall") == 0)
   {
-    //g_pPActorComposite->SetLinearVelocity(Vect3f(0.0f,1.0f,0.0f)*m_fPhysxVelocity);
+      if (g_pCharacter)
+      {
+        g_pCharacter->GetAnimatedInstanceModel()->ExecuteAction(3,0.0f);
+      }
+      
+      //g_pPActorComposite->SetLinearVelocity(Vect3f(0.0f,1.0f,0.0f)*m_fPhysxVelocity);
       CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
       const Vect3f l_PosCamera = m_pCamera->GetEye();
       const Vect3f& l_DirCamera = m_pCamera->GetDirection().Normalize();
+
+       CalSkeleton* l_pSkeleton = g_pCharacter->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
+      int l_iBoneId = l_pSkeleton->getCoreSkeleton()->getCoreBoneId("Bip01 R Hand");
+      CalBone* l_pBone = l_pSkeleton->getBone(l_iBoneId);
+      CalVector l_vPos = l_pBone->getTranslationAbsolute();
+      Mat44f l_vMat44 = g_pCharacter->GetMat44();
+      Vect3f l_vVect(-l_vPos.x, l_vPos.y, l_vPos.z);
+      l_vVect = l_vMat44*l_vVect;
   
       SCollisionInfo l_CInfo;
-      //CPhysicUserData* l_pUserData = 0;
       if (g_pUserDataSHOOT != 0)
       {
         g_pUserDataSHOOT->SetColor(colWHITE);
       }
       
-      g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActor(l_PosCamera,l_DirCamera,6,g_pUserDataSHOOT,l_CInfo);
+      g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActor(l_PosCamera,l_DirCamera,4,g_pUserDataSHOOT,l_CInfo);
+      Vect3f l_vDirection(l_CInfo.m_CollisionPoint.x - l_vVect.x, l_CInfo.m_CollisionPoint.y - l_vVect.y, l_CInfo.m_CollisionPoint.z - l_vVect.z);
+      l_vDirection.Normalize();
+
+      g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActorShoot(l_vVect,l_vDirection,4,g_pUserDataSHOOT,l_CInfo, 20.0f);
       g_vCollisions.push_back(l_CInfo);
 
 
@@ -1012,6 +1037,22 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     //  g_pRagdoll->InitSkeleton(l_pSkeleton);*/
   
     //}
+    if (g_pCharacter)
+    {
+      //g_pCharacter->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y-ALTURA_TOTAL,l_ControllerPos.z));
+      if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 5)
+	    {
+		    g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+		    g_pCharacter->GetAnimatedInstanceModel()->BlendCycle(5,0.3f);
+	    }
+      else
+      {
+        g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+		    g_pCharacter->GetAnimatedInstanceModel()->BlendCycle(0,0.3f);
+      }
+    }
+
+
   }
 
   if(strcmp(_pcAction, "VelocityChange") == 0)
@@ -1108,6 +1149,9 @@ void CPhysXProcess::RenderLaserPoint(CRenderManager* _pRM)
   int l_iBoneId = l_pSkeleton->getCoreSkeleton()->getCoreBoneId("Bip01 R Hand");
   CalBone* l_pBone = l_pSkeleton->getBone(l_iBoneId);
   CalVector l_vPos = l_pBone->getTranslationAbsolute();
+  Mat44f l_vMat44 = g_pCharacter->GetMat44();
+  Vect3f l_vVect(-l_vPos.x, l_vPos.y, l_vPos.z);
+  l_vVect = l_vMat44*l_vVect;
 
 
   CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
@@ -1115,7 +1159,7 @@ void CPhysXProcess::RenderLaserPoint(CRenderManager* _pRM)
   const Vect3f& l_DirCamera = m_pCamera->GetDirection().Normalize();
   
   SCollisionInfo l_CInfo;
-  g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActor(l_PosCamera,l_DirCamera,2,g_pUserDataSHOOT,l_CInfo);
+  g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActor(l_PosCamera,l_DirCamera,6,g_pUserDataSHOOT,l_CInfo);
   //vCollisions.push_back(l_CInfo);
 
   /*Mat44f t;
@@ -1124,8 +1168,17 @@ void CPhysXProcess::RenderLaserPoint(CRenderManager* _pRM)
   _pRM->SetTransform(t);*/
 
   Vect3f l_vAnimPos2 = m_pObject->GetPosition();
+  //Vect3f l_vDirectionAir(l_DirCamera.x+10.0f,l_DirCamera.y+10.0f,l_DirCamera.z+10.0f);
+  Vect3f l_vDirectionAir = l_DirCamera*10.0f;
   //_pRM->DrawLine(Vect3f(l_vPos.x+l_vAnimPos.x,l_vPos.y+l_vAnimPos.y,l_vPos.z+l_vAnimPos.z),l_CInfo.m_CollisionPoint,colRED);
-  _pRM->DrawLine(l_CInfo.m_CollisionPoint,Vect3f(l_vAnimPos.x,l_vAnimPos.y,l_vAnimPos.z),colRED);
+  if (g_pUserDataSHOOT != 0)
+  {
+    _pRM->DrawLine(l_CInfo.m_CollisionPoint,l_vVect,colRED);
+  }
+  else
+  {
+    _pRM->DrawLine(l_vVect+l_vDirectionAir,l_vVect,colRED);
+  }
 
   Mat44f t;
   t.SetIdentity();

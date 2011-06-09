@@ -32,4 +32,8 @@
   <RenderableObject name="ariggle" class="AnimatedModel" resource="riggle" position="5.1793 0.0 -5.2768" yaw="-90.0" pitch="0.0" roll="0" cycle="walk"/>
   <RenderableObject name="rigglebot" class="AnimatedModel" resource="riggle" position="3.1793 0.0 -2.2768" yaw="90.0" pitch="0.0" roll="0" cycle="walk"/>
   <RenderableObject name="ariggle" class="AnimatedModel" resource="riggle" position="5.1793 0.0 -5.2768" yaw="-90.0" pitch="0.0" roll="0" cycle="walk"/>
+  <RenderableObject name="Porta" class="AnimatedModel" resource="Porta" position="3.1793 0.0 -5.2768" yaw="90.0" pitch="0.0" roll="0" cycle="obrir"/>
+  <RenderableObject name="Vigia" class="AnimatedModel" resource="Vigia" position="3.1793 1.0 -1.2768" yaw="90.0" pitch="0.0" roll="0" cycle="moviment"/>
+  <RenderableObject name="Militar" class="AnimatedModel" resource="Militar" position="3.1793 0.0 1.2768" yaw="90.0" pitch="0.0" roll="0" cycle="run"/>
+  <RenderableObject name="Miner" class="AnimatedModel" resource="miner" position="3.1793 0.0 3.2768" yaw="90.0" pitch="0.0" roll="0" cycle="walk"/>
 </RenderableObjects>

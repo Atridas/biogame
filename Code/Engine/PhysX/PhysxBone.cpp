@@ -124,6 +124,8 @@ bool CPhysxBone::AddBoxActor(CXMLTreeNode _XMLObjects)
   l_pPM->AddPhysicActor(l_pActor);
   l_pActor->SetMat44(m_vMatAnimatedModel*l_vMatActor);
 
+  //l_pActor->GetPhXActor()->putToSleep();
+
   m_pActor = l_pActor;
   m_pBoneUserData = l_pUserData;
 
@@ -154,6 +156,8 @@ bool CPhysxBone::AddSphereActor(CXMLTreeNode _XMLObjects)
 
   l_pPM->AddPhysicActor(l_pActor);
   l_pActor->SetMat44(m_vMatAnimatedModel*l_vMatActor);
+
+  //l_pActor->GetPhXActor()->putToSleep();
 
   m_pActor = l_pActor;
   m_pBoneUserData = l_pUserData;
