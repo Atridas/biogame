@@ -318,21 +318,26 @@ bool CPhysXProcess::Init()
   CORE->GetLightManager()->SetLightsEnabled(true);
   l_pPhysManager->SetDebugRenderMode(true);
 
+  
   /////////////////////////////////////////////////////////////////////////////////
   //// RAGDOLL PROVES
   /////////////////////////////////////////////////////////////////////////////////
 
-  //g_pRagdoll = new CPhysxRagdoll("Ragdoll Prova");
-  //g_pRagdoll->Load("Data/Animated Models/Riggle/Ragdoll.xml",false);
-  CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
-  CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
-  l_pSkeleton->getCoreSkeleton()->calculateBoundingBoxes(l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getCoreModel());
-  l_pSkeleton->calculateBoundingBoxes();
+  //CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("rigglebot");
+  //CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
+  //l_pSkeleton->getCoreSkeleton()->calculateBoundingBoxes(l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getCoreModel());
+  //l_pSkeleton->calculateBoundingBoxes();
+  //if (g_pRagdoll == 0)
+  //{
+  //  g_pRagdoll = new CPhysxSkeleton();
+  //  CalModel* l_pCalModel = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel();
+  //  g_pRagdoll->Init("Data/Animated Models/Riggle/Skeleton.xml",l_pCalModel,l_pAnim->GetMat44());
+  //}
 
+  /////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////
 
-  /////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////
-  /////////////////////////////////////////////////////////////////////////////////
 
   SetOk(true);
   return IsOk();
@@ -562,14 +567,11 @@ void CPhysXProcess::Update(float _fElapsedTime)
 
   if (g_pRagdoll != 0)
   {
-    //g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0);
-    g_pRagdoll->UpdateCal3dFromPhysx();
-  
-    
-    //l_pAnim->GetAnimatedInstanceModel()->ClearCycle(0);
+    g_pRagdoll->Update();
     l_pAnim->SetMat44(g_pRagdoll->GetRenderableMatrix());
     CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
     l_pSkeleton->calculateState();
+    
   }
 
 }
@@ -921,21 +923,11 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
     l_pSkeleton->getCoreSkeleton()->calculateBoundingBoxes(l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getCoreModel());
     l_pSkeleton->calculateBoundingBoxes();
-    
-
     if (g_pRagdoll == 0)
     {
-      g_pRagdoll = new CPhysxSkeleton();
-      //RENDER_MANAGER->SetTransform(l_pAnim->GetMat44());
+      g_pRagdoll = new CPhysxSkeleton(false);
       CalModel* l_pCalModel = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel();
       g_pRagdoll->Init("Data/Animated Models/Riggle/Skeleton.xml",l_pCalModel,l_pAnim->GetMat44());
-      //l_pAnim->SetVisible(false);
-      
-
-     /* g_pRagdoll = new CPhysxRagdoll("Ragdoll Prova");
-      g_pRagdoll->Load("Data/Animated Models/Riggle/Ragdoll.xml",false);
-      g_pRagdoll->InitSkeleton(l_pSkeleton);*/
-
     }
 
     ///////////////////////////////////////////////////////////////////////////////
@@ -1037,6 +1029,12 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     //  g_pRagdoll->InitSkeleton(l_pSkeleton);*/
   
     //}
+
+    if (g_pRagdoll != 0)
+    {
+      g_pRagdoll->ToogleRagdollActive();
+    }
+
     if (g_pCharacter)
     {
       //g_pCharacter->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y-ALTURA_TOTAL,l_ControllerPos.z));

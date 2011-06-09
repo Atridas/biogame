@@ -49,20 +49,6 @@ void CPhysxBone::Release()
 }
 
 
-void CPhysxBone::InitBoneMatrix()
-{
- 
-}
-
-void CPhysxBone::InitPhysXActor()
-{
-
-}
-
-void CPhysxBone::InitPhysXJoint(CPhysxBone* _pParent)
-{
- 
-}
 
 
 Mat44f CPhysxBone::GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone)
@@ -152,7 +138,7 @@ bool CPhysxBone::AddSphereActor(CXMLTreeNode _XMLObjects)
   l_pUserData->SetColor(colYELLOW);
   CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
   l_pActor->AddSphereShape(l_vSize.x*0.5f,Vect3f(l_fMiddlePoint.x,0.0f,0.0f),NULL,GROUP_COLLIDABLE_PUSHABLE);
-  l_pActor->CreateBody(l_fDensity);
+  l_pActor->CreateBody(l_fDensity,1.0f);
 
   l_pPM->AddPhysicActor(l_pActor);
   l_pActor->SetMat44(m_vMatAnimatedModel*l_vMatActor);
@@ -235,4 +221,13 @@ void CPhysxBone::UpdateCal3dFromPhysx()
 
 }
 
+void CPhysxBone::UpdatePhysxFromCal3d()
+{
+  if (m_pActor != 0)
+  {
+    Mat44f l_vMatActor;
+    l_vMatActor = GetBoneLeftHandedAbsoluteTransformation(m_pCalBone);
+    m_pActor->SetMat44(m_vMatAnimatedModel*l_vMatActor);
+  }
+}
 

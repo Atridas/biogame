@@ -1,3 +1,4 @@
+#define __DONT_INCLUDE_MEM_LEAKS__
 #include "PhysicsManager.h"
 #include "PhysxSkeleton.h"
 #include "PhysxBone.h"
@@ -12,6 +13,11 @@
 #include "RenderManager.h"
 #include "Core.h"
 #include "base.h"
+//---PhysX Includes---//
+#undef min
+#undef max
+#include "NxPhysics.h"
+//---------------------//
 
 
 
@@ -37,10 +43,6 @@ bool CPhysxSkeleton::Init(const string& _szFileName, CalModel* _pCalModel, Mat44
   Load(_szFileName);
 
 
-
-  //Funcions de configuracio!!
-  InitBoneMatrices();
-  InitPhysXActors();
   InitParents();
   InitPhysXJoints(_szFileName);
 
@@ -49,28 +51,6 @@ bool CPhysxSkeleton::Init(const string& _szFileName, CalModel* _pCalModel, Mat44
 }
 
 
-void CPhysxSkeleton::InitBoneMatrices()
-{
-
-  for (size_t i=0;i<m_vBones.size();++i)
-  {
-    m_vBones[i]->InitBoneMatrix();
-  }
-
-
-}
-
-
-void CPhysxSkeleton::InitPhysXActors()
-{
-
-  for (size_t i=0;i<m_vBones.size();++i)
-  {
-    m_vBones[i]->InitPhysXActor();
-  }
-
-
-}
 
 
 void CPhysxSkeleton::Release()
@@ -149,6 +129,13 @@ bool CPhysxSkeleton::Load(string _szFileName)
     }
   }
   
+
+  
+  if (!m_bRagdollActive)
+  {
+    SleepPhysxBones();
+  }
+
   return true;
 }
 
@@ -422,14 +409,6 @@ SSphericalLimitInfo CPhysxSkeleton::GetJointParameterInfo(CXMLTreeNode _XMLObjec
 
 void CPhysxSkeleton::UpdateCal3dFromPhysx()
 {
-  /*std::vector<int>& listRootCoreBoneId = m_pCalSkeleton->getCoreSkeleton()->getVectorRootCoreBoneId();
-
-  std::vector<int>::iterator iteratorRootBoneId;
-  for(iteratorRootBoneId = listRootCoreBoneId.begin(); iteratorRootBoneId != listRootCoreBoneId.end(); ++iteratorRootBoneId)
-  {
-    UpdatePhysxBone(m_vBones[*iteratorRootBoneId]);
-  }*/
-
   for(size_t i=0;i<m_vBones.size();++i)
   {
     m_vBones[i]->UpdateCal3dFromPhysx();
@@ -439,6 +418,9 @@ void CPhysxSkeleton::UpdateCal3dFromPhysx()
   //m_pCalSkeleton->calculateState();
 
 }
+
+
+
 
 void CPhysxSkeleton::InitParents()
 {
@@ -469,33 +451,70 @@ void CPhysxSkeleton::InitParents()
 
 }
 
-
-void CPhysxSkeleton::UpdatePhysxBone(CPhysxBone* _pPhysxBone)
+void CPhysxSkeleton::UpdatePhysxFromCal3d()
 {
-    CalBone* l_pCalBone = _pPhysxBone->GetCalBone();
-
-    l_pCalBone->calculateState();
-
-    if (_pPhysxBone->IsBoneRoot())
-    {
-      //_pPhysxBone->GetCalBone()->calculateState();
-    }
-    else
-    {
-      _pPhysxBone->UpdateCal3dFromPhysx();
-      
-    
-    }
-
-    //Per acabar ho fem amb els fills
-    list<int>::iterator iteratorChildId;
-    for(iteratorChildId = l_pCalBone->getCoreBone()->getListChildId().begin(); iteratorChildId != l_pCalBone->getCoreBone()->getListChildId().end(); ++iteratorChildId)
-    {
-      CalBone* l_pBone = m_pCalSkeleton->getBone(*iteratorChildId);
-      string l_szNameChild = l_pBone->getCoreBone()->getName();
-      
-      UpdatePhysxBone(GetPhysxBoneByName(l_szNameChild));
-      //m_pCalSkeleton->getBone(*iteratorChildId)->calculateState();
-    }
+  for(size_t i=0;i<m_vBones.size();++i)
+  {
+    m_vBones[i]->UpdatePhysxFromCal3d();
+  }
 
 }
+
+
+void CPhysxSkeleton::Update()
+{
+  if (IsRagdollActive())
+  {
+    UpdateCal3dFromPhysx();
+  }
+  else
+  {
+    UpdatePhysxFromCal3d();
+  }
+
+}
+
+
+void CPhysxSkeleton::ToogleRagdollActive()
+{
+  if (m_bRagdollActive == false)
+  {
+    m_bRagdollActive = true;
+    WakeUpPhysxBones();
+  }
+  else
+  {
+    m_bRagdollActive = false;
+    SleepPhysxBones();
+  }
+};
+
+void CPhysxSkeleton::WakeUpPhysxBones()
+{
+  for(size_t i=0;i<m_vBones.size();++i)
+  {
+    CPhysicActor* l_pActor = m_vBones[i]->GetPhysxActor();
+
+    if (l_pActor != 0)
+    {
+      l_pActor->GetPhXActor()->wakeUp();
+    }
+  }
+};
+
+void CPhysxSkeleton::SleepPhysxBones()
+{
+  for(size_t i=0;i<m_vBones.size();++i)
+  {
+    CPhysicActor* l_pActor = m_vBones[i]->GetPhysxActor();
+
+    if (l_pActor != 0)
+    {
+      l_pActor->GetPhXActor()->putToSleep();
+    }
+  }
+};
+
+
+
+

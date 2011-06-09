@@ -24,6 +24,7 @@ public:
   virtual void        Release();
 
   void                UpdateCal3dFromPhysx();
+  void                UpdatePhysxFromCal3d();
 
   //GETERS I SETERS
   CalBone*            GetCalBone()                           {return m_pCalBone;};
@@ -44,12 +45,6 @@ public:
   bool				        AddBoxActor(CXMLTreeNode _XMLObjects);
   bool				        AddSphereActor(CXMLTreeNode _XMLObjects);
   bool				        AddCapsuleActor(CXMLTreeNode _XMLObjects);
-
-  //Funcions per inicialitzar la info del Bone (primer matrius, segon actors, tercer joints)
-  void                InitBoneMatrix();
-  void                InitPhysXActor();
-  void                InitPhysXJoint(CPhysxBone* _pParent);
-
 
   
 private:
