@@ -70,7 +70,6 @@ bool CParticleManager::Load(const string& _szFileName)
       LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmitters.", l_iNumChildrenEmitters);
       for(int i = 0; i < l_iNumChildrenEmitters; i++)
       {
-        //CXMLTreeNode l_treeParticleEmitter = l_treeParticleEmitters(i)["ParticleEmitter"];
         CXMLTreeNode l_treeParticleEmitter = l_treeParticleEmitters(i);
         if(l_treeParticleEmitter.IsComment())
 				  continue;
@@ -80,9 +79,7 @@ bool CParticleManager::Load(const string& _szFileName)
         Vect3f l_vVec3;
 			  Vect4f l_vVec4;
 
-       	    
-        
-        l_pInfo->m_szId = l_treeParticleEmitter.GetPszISOProperty("id" ,"");
+       	l_pInfo->m_szId = l_treeParticleEmitter.GetPszISOProperty("id" ,"");
 			  l_pInfo->m_fMinEmitRate = l_treeParticleEmitter.GetFloatProperty("MinEmitRate");
 			  l_pInfo->m_fMaxEmitRate = l_treeParticleEmitter.GetFloatProperty("MaxEmitRate");
 			  l_vVec4 = l_treeParticleEmitter.GetVect4fProperty("Color1",Vect4f(0.0f),true);
@@ -91,11 +88,7 @@ bool CParticleManager::Load(const string& _szFileName)
 			  l_Event.m_Color2 = D3DXCOLOR(l_vVec4.x,l_vVec4.y,l_vVec4.z,l_vVec4.w);
 			  l_Event.m_fMinSize = l_treeParticleEmitter.GetFloatProperty("MinSize");
 			  l_Event.m_fMaxSize = l_treeParticleEmitter.GetFloatProperty("MaxSize");
-			 /* l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Direction1",Vect3f(3.0f));
-        l_Event.m_vSpawnDir1 = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
-			  l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Direction2",Vect3f(0.0f));
-        l_Event.m_vSpawnDir2 = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);*/
-        l_pInfo->m_pTexParticle = CORE->GetTextureManager()->GetResource(l_treeParticleEmitter.GetPszProperty("TexParticle",""));
+			  l_pInfo->m_pTexParticle = CORE->GetTextureManager()->GetResource(l_treeParticleEmitter.GetPszProperty("TexParticle",""));
         l_pInfo->m_fLife1 = l_treeParticleEmitter.GetFloatProperty("Life1");
         l_pInfo->m_fLife2 = l_treeParticleEmitter.GetFloatProperty("Life2");
         l_pInfo->m_fAngle1 = l_treeParticleEmitter.GetFloatProperty("Angle1");
@@ -119,180 +112,120 @@ bool CParticleManager::Load(const string& _szFileName)
         l_pInfo->m_vTimeSize.push_back(0);
         l_pInfo->m_vSize.push_back(l_Event.m_fMinSize);
         l_pInfo->m_vSize.push_back(l_Event.m_fMaxSize);
-       /* l_pInfo->m_vTimeDirection.push_back(0);
-        l_pInfo->m_vDirection.push_back(l_Event.m_vSpawnDir1);
-        l_pInfo->m_vDirection.push_back(l_Event.m_vSpawnDir2);*/
         l_pInfo->m_vTextureAnimation.push_back(l_pInfo->m_pTexParticle);
         
-      int num = l_treeParticleEmitter.GetNumChildren();
-      //for(int k = 0; k < num; k++)
-      //{
+        int num = l_treeParticleEmitter.GetNumChildren();
       
-		for(int k=0;k<num;++k)
-		{
-			const char *l_Name=l_treeParticleEmitter(k).GetName();
-			if(strcmp(l_Name,"Sizes")==0)
-			{
-				int a;
-				a=0;
-			}
-			else if(strcmp(l_Name,"Sizes")==0)
-			{
-				int b;
-				b=0;
-			}
-			else if(strcmp(l_Name,"Colors")==0)
-			{
-				int c;
-				c=0;
-			}
-		}
+		    for(int k=0;k<num;++k)
+		    {
+			    const char *l_Name=l_treeParticleEmitter(k).GetName();
+			    if(strcmp(l_Name,"Sizes")==0)
+			    {
+         
+				    CXMLTreeNode l_treeParticleEmittersSizes = l_treeParticleEmitter["Sizes"];
 
-	  
-	  if (l_treeParticleEmitter.ExistsProperty("Colors"))
-        {
-        CXMLTreeNode l_treeParticleEmittersColors = l_treeParticleEmitter["Colors"];
+            if(l_treeParticleEmittersSizes.Exists())
+            {
+              int l_iNumChildrenSizes = l_treeParticleEmittersSizes.GetNumChildren();
+
+              LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmitterSizes.", l_iNumChildrenSizes);
+
+              for(int j = 0; j < l_iNumChildrenSizes; j++)
+              {
+              
+                CXMLTreeNode l_treeParticleEmittersSize = l_treeParticleEmittersSizes(j);
+                if(l_treeParticleEmittersSize.IsComment())
+				        continue;
+
+            
+
+                l_Event.m_fTime = l_treeParticleEmittersSize.GetFloatProperty("time");
+                l_Event.m_fTimeInterpolation = l_treeParticleEmittersSize.GetFloatProperty("timeInterpolation");
+            
+                l_Event.m_fMinSize = l_treeParticleEmittersSize.GetFloatProperty("MinSize");
+			          l_Event.m_fMaxSize = l_treeParticleEmittersSize.GetFloatProperty("MaxSize");
+
+                l_pInfo->m_vTimeSize.push_back(l_Event.m_fTime);
+                l_pInfo->m_vTimeSizeInterpolation.push_back(l_Event.m_fTimeInterpolation);
+                l_pInfo->m_vSize.push_back(l_Event.m_fMinSize);
+                l_pInfo->m_vSize.push_back(l_Event.m_fMaxSize);
+
+              }
+            }
+			    }
+			    else if(strcmp(l_Name,"Colors")==0)
+			    {
+				    CXMLTreeNode l_treeParticleEmittersColors = l_treeParticleEmitter["Colors"];
           
-        if(l_treeParticleEmittersColors.Exists())
-        {
-          int l_iNumChildrenColors = l_treeParticleEmittersColors.GetNumChildren();
+            if(l_treeParticleEmittersColors.Exists())
+            {
+              int l_iNumChildrenColors = l_treeParticleEmittersColors.GetNumChildren();
 
-          LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmittersColors.", l_iNumChildrenColors);
+              LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmittersColors.", l_iNumChildrenColors);
 
-          for(int j = 0; j < l_iNumChildrenColors; j++)
-          {
-            //SParticleEvent l_Event;
-            CXMLTreeNode l_treeParticleEmittersColor = l_treeParticleEmittersColors(j);
-            if(l_treeParticleEmittersColor.IsComment())
-				    continue;
+              for(int j = 0; j < l_iNumChildrenColors; j++)
+              {
+              
+                CXMLTreeNode l_treeParticleEmittersColor = l_treeParticleEmittersColors(j);
+                if(l_treeParticleEmittersColor.IsComment())
+				        continue;
           
+                l_Event.m_fTime = l_treeParticleEmittersColor.GetFloatProperty("time");
+                l_Event.m_fTimeInterpolation = l_treeParticleEmittersColor.GetFloatProperty("timeInterpolation");
             
 
-            l_Event.m_fTime = l_treeParticleEmittersColor.GetFloatProperty("time");
-            l_Event.m_fTimeInterpolation = l_treeParticleEmittersColor.GetFloatProperty("timeInterpolation");
+                l_vVec4 = l_treeParticleEmittersColor.GetVect4fProperty("Color1",Vect4f(0.0f),true);
+			          l_Event.m_Color1 = D3DXCOLOR(l_vVec4.x,l_vVec4.y,l_vVec4.z,l_vVec4.w);
+			          l_vVec4 = l_treeParticleEmittersColor.GetVect4fProperty("Color2",Vect4f(0.0f),true);
+			          l_Event.m_Color2 = D3DXCOLOR(l_vVec4.x,l_vVec4.y,l_vVec4.z,l_vVec4.w);
+
+                l_pInfo->m_vTimeColor.push_back(l_Event.m_fTime);
+                l_pInfo->m_vTimeColorInterpolation.push_back(l_Event.m_fTimeInterpolation);
+                l_pInfo->m_vColor.push_back(l_Event.m_Color1);
+                l_pInfo->m_vColor.push_back(l_Event.m_Color2);
+
+              }
+            }
+			    }
+			    else if(strcmp(l_Name,"Animateds")==0)
+			    {
+				    CXMLTreeNode l_treeParticleEmittersAnimateds = l_treeParticleEmitter["Animateds"];
+
+            if(l_treeParticleEmittersAnimateds.Exists())
+            {
+              int l_iNumChildrenAnimateds = l_treeParticleEmittersAnimateds.GetNumChildren();
+
+              LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmittersAnimated.", l_iNumChildrenAnimateds);
+
+              for(int j = 0; j < l_iNumChildrenAnimateds; j++)
+              {
             
-
-            l_vVec4 = l_treeParticleEmittersColor.GetVect4fProperty("Color1",Vect4f(0.0f),true);
-			      l_Event.m_Color1 = D3DXCOLOR(l_vVec4.x,l_vVec4.y,l_vVec4.z,l_vVec4.w);
-			      l_vVec4 = l_treeParticleEmittersColor.GetVect4fProperty("Color2",Vect4f(0.0f),true);
-			      l_Event.m_Color2 = D3DXCOLOR(l_vVec4.x,l_vVec4.y,l_vVec4.z,l_vVec4.w);
-
-            l_pInfo->m_vTimeColor.push_back(l_Event.m_fTime);
-            l_pInfo->m_vTimeColorInterpolation.push_back(l_Event.m_fTimeInterpolation);
-            l_pInfo->m_vColor.push_back(l_Event.m_Color1);
-            l_pInfo->m_vColor.push_back(l_Event.m_Color2);
-
-            //m_vParticleEvent.push_back(l_pEvent);
-          }
-        }
-        //}
-      
-
-        CXMLTreeNode l_treeParticleEmittersSizes = l_treeParticleEmitter["Sizes"];
-
-        if(l_treeParticleEmittersSizes.Exists())
-        {
-          int l_iNumChildrenSizes = l_treeParticleEmittersSizes.GetNumChildren();
-
-          LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmitterSizes.", l_iNumChildrenSizes);
-
-          for(int j = 0; j < l_iNumChildrenSizes; j++)
-          {
-            //SParticleEvent l_Event;
-            CXMLTreeNode l_treeParticleEmittersSize = l_treeParticleEmittersSizes(j);
-            if(l_treeParticleEmittersSize.IsComment())
-				    continue;
+                CXMLTreeNode l_treeParticleEmittersAnimated = l_treeParticleEmittersAnimateds(j);
+                if(l_treeParticleEmittersAnimated.IsComment())
+				        continue;
 
             
-
-            l_Event.m_fTime = l_treeParticleEmittersSize.GetFloatProperty("time");
-            l_Event.m_fTimeInterpolation = l_treeParticleEmittersSize.GetFloatProperty("timeInterpolation");
-            
-            l_Event.m_fMinSize = l_treeParticleEmittersSize.GetFloatProperty("MinSize");
-			      l_Event.m_fMaxSize = l_treeParticleEmittersSize.GetFloatProperty("MaxSize");
-
-            l_pInfo->m_vTimeSize.push_back(l_Event.m_fTime);
-            l_pInfo->m_vTimeSizeInterpolation.push_back(l_Event.m_fTimeInterpolation);
-            l_pInfo->m_vSize.push_back(l_Event.m_fMinSize);
-            l_pInfo->m_vSize.push_back(l_Event.m_fMaxSize);
-
-            //m_vParticleEvent.push_back(l_pEvent);
-          }
-        }
-        //*******************
-        CXMLTreeNode l_treeParticleEmittersAnimateds = l_treeParticleEmitter["Animateds"];
-
-        if(l_treeParticleEmittersAnimateds.Exists())
-        {
-          int l_iNumChildrenAnimateds = l_treeParticleEmittersAnimateds.GetNumChildren();
-
-          LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmittersAnimated.", l_iNumChildrenAnimateds);
-
-          for(int j = 0; j < l_iNumChildrenAnimateds; j++)
-          {
-            
-            CXMLTreeNode l_treeParticleEmittersAnimated = l_treeParticleEmittersAnimateds(j);
-            if(l_treeParticleEmittersAnimated.IsComment())
-				    continue;
-
-            
-			      l_pInfo->m_bAnimated = true;
-            l_Event.m_fTime = l_treeParticleEmittersAnimated.GetFloatProperty("time");
-			      l_pInfo->m_vTimeAnimated.push_back(l_Event.m_fTime);
-			      l_Event.m_fTime = l_treeParticleEmittersAnimated.GetFloatProperty("TimeDiapo");
-			      l_pInfo->m_vTimeAnimated.push_back(l_Event.m_fTime);
-            l_Event.m_fTimeInterpolation = l_treeParticleEmittersAnimated.GetFloatProperty("timeInterpolation");
-            l_pInfo->m_vTimeAnimatedInterpolation.push_back(l_Event.m_fTimeInterpolation);
-            l_pInfo->m_pTexParticle = CORE->GetTextureManager()->GetResource(l_treeParticleEmittersAnimated.GetPszProperty("TexParticle",""));
+			          l_pInfo->m_bAnimated = true;
+                l_Event.m_fTime = l_treeParticleEmittersAnimated.GetFloatProperty("time");
+			          l_pInfo->m_vTimeAnimated.push_back(l_Event.m_fTime);
+			          l_Event.m_fTime = l_treeParticleEmittersAnimated.GetFloatProperty("TimeDiapo");
+			          l_pInfo->m_vTimeAnimated.push_back(l_Event.m_fTime);
+                l_Event.m_fTimeInterpolation = l_treeParticleEmittersAnimated.GetFloatProperty("timeInterpolation");
+                l_pInfo->m_vTimeAnimatedInterpolation.push_back(l_Event.m_fTimeInterpolation);
+                l_pInfo->m_pTexParticle = CORE->GetTextureManager()->GetResource(l_treeParticleEmittersAnimated.GetPszProperty("TexParticle",""));
             			
-			      l_Event.m_iTexNumFiles = l_treeParticleEmittersAnimated.GetIntProperty("NumFiles");
-			      l_Event.m_iTexNumColumnes = l_treeParticleEmittersAnimated.GetIntProperty("NumColumnes");
-			      l_pInfo->m_vFilesColumnes.push_back(l_Event.m_iTexNumFiles);
-			      l_pInfo->m_vFilesColumnes.push_back(l_Event.m_iTexNumColumnes);
-            l_pInfo->m_vTextureAnimation.push_back(l_pInfo->m_pTexParticle);
-            l_pInfo->m_iNumDirections++;
+			          l_Event.m_iTexNumFiles = l_treeParticleEmittersAnimated.GetIntProperty("NumFiles");
+			          l_Event.m_iTexNumColumnes = l_treeParticleEmittersAnimated.GetIntProperty("NumColumnes");
+			          l_pInfo->m_vFilesColumnes.push_back(l_Event.m_iTexNumFiles);
+			          l_pInfo->m_vFilesColumnes.push_back(l_Event.m_iTexNumColumnes);
+                l_pInfo->m_vTextureAnimation.push_back(l_pInfo->m_pTexParticle);
+                l_pInfo->m_iNumDirections++;
 			
-          }
-        }
-      }
-        //************
-      /*  CXMLTreeNode l_treeParticleEmittersDiredtions = l_treeParticleEmitter["Directions"];
-
-        if(l_treeParticleEmittersDiredtions.Exists())
-        {
-          int l_iNumChildren = l_treeParticleEmittersDiredtions.GetNumChildren();
-
-          LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmittersDirections.", l_iNumChildren);
-
-          for(int i = 0; i < l_iNumChildren; i++)
-          {
-            //SParticleEvent l_Event;
-            CXMLTreeNode l_treeParticleEmittersDirection = l_treeParticleEmittersDiredtions(i);
-            if(l_treeParticleEmittersDirection.IsComment())
-				    continue;
-
-            //SParticleEvent l_Event;
-
-            l_Event.m_fTime = l_treeParticleEmittersDirection.GetFloatProperty("time");
-            l_Event.m_fTimeInterpolation = l_treeParticleEmittersDirection.GetFloatProperty("timeInterpolation");
-            
-			
-			      l_vVec3 = l_treeParticleEmittersDirection.GetVect3fProperty("Direction1",Vect3f(3.0f));
-            l_Event.m_vSpawnDir1 = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
-			      l_vVec3 = l_treeParticleEmittersDirection.GetVect3fProperty("Direction2",Vect3f(3.0f));
-            l_Event.m_vSpawnDir2 = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
-
-
-            l_pInfo->m_vTimeDirection.push_back(l_Event.m_fTime);
-            l_pInfo->m_vTimeDirectionInterpolation.push_back(l_Event.m_fTimeInterpolation);
-            l_pInfo->m_vDirection.push_back(l_Event.m_vSpawnDir1);
-            l_pInfo->m_vDirection.push_back(l_Event.m_vSpawnDir2);
-
-
-          }
-        }*/
+              }
+            }
+			    }
+		    }
         AddResource(l_pInfo->m_szId,l_pInfo);
-        
       }
     }
 
@@ -313,18 +246,11 @@ bool CParticleManager::Load(const string& _szFileName)
       
         
 			  string l_szType = l_treeInstanceParticle.GetPszProperty("type","");
-
-			  SParticleInfo* l_pInfo = GetResource(l_szType);
-
-
-				CParticleEmitter* l_pParticleEmitter = new CParticleEmitter();
-
-			  
-			  
+        SParticleInfo* l_pInfo = GetResource(l_szType);
+        CParticleEmitter* l_pParticleEmitter = new CParticleEmitter();
+        			  
         // s'ha de fer que la Id de la SInfo correspongui amb el type de la instancia
-			  
-
-        if(!l_pInfo)
+			  if(!l_pInfo)
         {
           LOGGER->AddNewLog(ELL_WARNING, "CParticleManager:: No existeix el emiter de tipus %s", l_szType);
           continue;
@@ -340,26 +266,8 @@ bool CParticleManager::Load(const string& _szFileName)
 		
 		    m_szFormEmitter = l_treeInstanceParticle.GetPszISOProperty("FormEmitter","");
         l_pParticleEmitter->SetFormEmitter(m_szFormEmitter);
-//        l_pParticleEmitter->SetReload(m_bReload);
-        
 
-        if(m_szFormEmitter=="line")
-		    {
-			    m_fSizeX = l_treeInstanceParticle.GetFloatProperty("sizeX");
-			    m_vPosFormEmitter.x=m_fSizeX;
-          m_vPosFormEmitter.y=0.0f;
-          m_vPosFormEmitter.z=0.0f;
-			    l_pParticleEmitter->SetPositionFormEmitter(m_vPosFormEmitter);
-		    }
-        if(m_szFormEmitter=="plane")
-		    {
-			    m_fSizeX = l_treeInstanceParticle.GetFloatProperty("sizeX");
-			    m_fSizeZ = l_treeInstanceParticle.GetFloatProperty("sizeZ");
-			    m_vPosFormEmitter.x=m_fSizeX;
-          m_vPosFormEmitter.y=0.0f;
-          m_vPosFormEmitter.z=m_fSizeZ;
-			    l_pParticleEmitter->SetPositionFormEmitter(m_vPosFormEmitter);
-		    }
+   
 		    if(m_szFormEmitter=="dummy")
 		    {
 			    m_fSizeX = l_treeInstanceParticle.GetFloatProperty("sizeX");
@@ -380,51 +288,59 @@ bool CParticleManager::Load(const string& _szFileName)
 
         
         //********************************************
-        CXMLTreeNode l_treeParticleInstanceDiredtions = l_treeInstanceParticle["Directions"];
 
-        if(l_treeParticleInstanceDiredtions.Exists())
-        {
-          int l_iNumChildrenDirections = l_treeParticleInstanceDiredtions.GetNumChildren();
+        int numDirections = l_treeInstanceParticle.GetNumChildren();
+      
+		    for(int k=0;k<numDirections;++k)
+		    {
+			    const char *l_Name=l_treeInstanceParticle(k).GetName();
+			    if(strcmp(l_Name,"Directions")==0)
+			    {
 
-          LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmittersDirections.", l_iNumChildrenDirections);
+            CXMLTreeNode l_treeParticleInstanceDiredtions = l_treeInstanceParticle["Directions"];
 
-          for(int j = 0; j < l_iNumChildrenDirections; j++)
-          {
+            if(l_treeParticleInstanceDiredtions.Exists())
+            {
+              int l_iNumChildrenDirections = l_treeParticleInstanceDiredtions.GetNumChildren();
+
+              LOGGER->AddNewLog(ELL_INFORMATION,"CParticleManager::Load Loading %d ParticleEmittersDirections.", l_iNumChildrenDirections);
+
+              for(int j = 0; j < l_iNumChildrenDirections; j++)
+              {
           
-            CXMLTreeNode l_treeParticleInstanceDiredtion = l_treeParticleInstanceDiredtions(j);
-            if(l_treeParticleInstanceDiredtion.IsComment())
-				    continue;
+                CXMLTreeNode l_treeParticleInstanceDiredtion = l_treeParticleInstanceDiredtions(j);
+                if(l_treeParticleInstanceDiredtion.IsComment())
+				        continue;
 
          
 
-            m_fTime = l_treeParticleInstanceDiredtion.GetFloatProperty("time");
-            m_fTimeInterpolation = l_treeParticleInstanceDiredtion.GetFloatProperty("timeInterpolation");
+                m_fTime = l_treeParticleInstanceDiredtion.GetFloatProperty("time");
+                m_fTimeInterpolation = l_treeParticleInstanceDiredtion.GetFloatProperty("timeInterpolation");
             
 			
-			      l_vVec3 = l_treeParticleInstanceDiredtion.GetVect3fProperty("Direction",Vect3f(3.0f));
-            m_vSpawnDir = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
-			      l_vVec3 = l_treeParticleInstanceDiredtion.GetVect3fProperty("Desviacion",Vect3f(3.0f));
-            m_vDesviacionSpawnDir = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
+			          l_vVec3 = l_treeParticleInstanceDiredtion.GetVect3fProperty("Direction",Vect3f(3.0f));
+                m_vSpawnDir = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
+			          l_vVec3 = l_treeParticleInstanceDiredtion.GetVect3fProperty("Desviacion",Vect3f(3.0f));
+                m_vDesviacionSpawnDir = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
             
             
-		        D3DXVECTOR3 l_vAux = m_vSpawnDir- m_vDesviacionSpawnDir;
-		       l_pParticleEmitter->m_vTimeDirection.push_back(m_fTime);
-           l_pParticleEmitter->m_vDirection.push_back(l_vAux);
-           l_vAux = m_vSpawnDir+ m_vDesviacionSpawnDir;
-           l_pParticleEmitter->m_vDirection.push_back(l_vAux);
-		       l_pParticleEmitter->m_vTimeDirectionInterpolation.push_back(m_fTimeInterpolation);
-           l_pInfo->m_iNumDirections++;
+		            D3DXVECTOR3 l_vAux = m_vSpawnDir- m_vDesviacionSpawnDir;
+		           l_pParticleEmitter->m_vTimeDirection.push_back(m_fTime);
+               l_pParticleEmitter->m_vDirection.push_back(l_vAux);
+               l_vAux = m_vSpawnDir+ m_vDesviacionSpawnDir;
+               l_pParticleEmitter->m_vDirection.push_back(l_vAux);
+		           l_pParticleEmitter->m_vTimeDirectionInterpolation.push_back(m_fTimeInterpolation);
+               l_pInfo->m_iNumDirections++;
             
-		      }
-          //l_pParticleEmitter->SetNumDirections(m_vDirection.size());
+		          }
+            }
+          }
         }
-
 
         //*********************************************
         l_pParticleEmitter->SetAttributes(l_pInfo);
 			  m_vEmitterParticle.push_back(l_pParticleEmitter);
 		  }
-
     }
 	
 		SetOk(true);
