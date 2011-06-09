@@ -137,7 +137,7 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 		WriteShort _file l_texture.count #unsigned
 		WriteString _file l_texture
 		
-		l_specularLevel = _material.SpecularLevelMapAmount
+		l_specularLevel = _material.SpecularLevelMapAmount * 0.03
 	)
 	else
 	(
