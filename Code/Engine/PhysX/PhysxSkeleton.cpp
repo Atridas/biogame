@@ -515,6 +515,23 @@ void CPhysxSkeleton::SleepPhysxBones()
   }
 };
 
+bool CPhysxSkeleton::IsRagdollPhysXActor(string _szName)
+{
+  for(size_t i=0;i<m_vBones.size();++i)
+  {
+    CPhysicActor* l_pActor = m_vBones[i]->GetPhysxActor();
 
+    if (l_pActor != 0)
+    {
+      if (_szName == l_pActor->GetUserData()->GetName())
+      {
+        return true;
+      }
+      
+    }
+  }
+
+  return false;
+}
 
 
