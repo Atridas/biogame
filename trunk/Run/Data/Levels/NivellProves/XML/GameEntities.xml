@@ -3,56 +3,56 @@
   <Entity name="Habitacio3">
     <Object3D />
     <RenderableObject name="Habitacio3" />
-    <PhysXMesh density="undefined" />
+    <PhysXMesh density="0" />
   </Entity>
   <Entity name="Habitacio2">
     <Object3D />
     <RenderableObject name="Habitacio2" />
-    <PhysXMesh density="undefined" />
+    <PhysXMesh density="0" />
   </Entity>
-  <Entity name="LowCover">
+  <Entity name="CaixaPetita00">
     <Object3D />
-    <RenderableObject name="LowCover" />
+    <RenderableObject name="CaixaPetita00" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity name="HighCover">
+  <Entity name="CaixaGrossa00">
     <Object3D />
-    <RenderableObject name="HighCover" />
+    <RenderableObject name="CaixaGrossa00" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity name="LowCover01">
+  <Entity name="CaixaPetita01">
     <Object3D />
-    <RenderableObject name="LowCover01" />
+    <RenderableObject name="CaixaPetita01" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity name="LowCover02">
+  <Entity name="CaixaPetita02">
     <Object3D />
-    <RenderableObject name="LowCover02" />
+    <RenderableObject name="CaixaPetita02" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity name="LowCover03">
+  <Entity name="CaixaPetita03">
     <Object3D />
-    <RenderableObject name="LowCover03" />
+    <RenderableObject name="CaixaPetita03" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity name="LowCover04">
+  <Entity name="CaixaPetita04">
     <Object3D />
-    <RenderableObject name="LowCover04" />
+    <RenderableObject name="CaixaPetita04" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity name="HighCover01">
+  <Entity name="CaixaGrossa01">
     <Object3D />
-    <RenderableObject name="HighCover01" />
+    <RenderableObject name="CaixaGrossa01" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity name="LowCover05">
+  <Entity name="CaixaPetita05">
     <Object3D />
-    <RenderableObject name="LowCover05" />
+    <RenderableObject name="CaixaPetita05" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity name="LowCover06">
+  <Entity name="CaixaPetita06">
     <Object3D />
-    <RenderableObject name="LowCover06" />
+    <RenderableObject name="CaixaPetita06" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
   <Entity name="Wall">
@@ -60,49 +60,54 @@
     <RenderableObject name="Wall" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity name="HighCover02">
+  <Entity name="CaixaGrossa02">
     <Object3D />
-    <RenderableObject name="HighCover02" />
+    <RenderableObject name="CaixaGrossa02" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity name="LowCover07">
+  <Entity name="CaixaGrossa03">
     <Object3D />
-    <RenderableObject name="LowCover07" />
+    <RenderableObject name="CaixaGrossa03" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity name="HighCover03">
+  <Entity name="CaixaPetita08">
     <Object3D />
-    <RenderableObject name="HighCover03" />
+    <RenderableObject name="CaixaPetita08" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity name="LowCover08">
+  <Entity name="CaixaGrossa04">
     <Object3D />
-    <RenderableObject name="LowCover08" />
+    <RenderableObject name="CaixaGrossa04" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity name="HighCover04">
+  <Entity name="CaixaPetita09">
     <Object3D />
-    <RenderableObject name="HighCover04" />
+    <RenderableObject name="CaixaPetita09" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity name="LowCover09">
+  <Entity name="CaixaPetita10">
     <Object3D />
-    <RenderableObject name="LowCover09" />
+    <RenderableObject name="CaixaPetita10" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
-  <Entity name="LowCover10">
+  <Entity name="CaixaPetita11">
     <Object3D />
-    <RenderableObject name="LowCover10" />
-    <PhysXBox fromRenderableObject="true" density="0" />
-  </Entity>
-  <Entity name="LowCover11">
-    <Object3D />
-    <RenderableObject name="LowCover11" />
+    <RenderableObject name="CaixaPetita11" />
     <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
   <Entity name="Llum">
     <Object3D />
     <RenderableObject name="Llum" />
+  </Entity>
+  <Entity name="CaixaPetita12">
+    <Object3D />
+    <RenderableObject name="CaixaPetita12" />
+    <PhysXBox fromRenderableObject="true" density="0" />
+  </Entity>
+  <Entity name="CaixaPetita13">
+    <Object3D />
+    <RenderableObject name="CaixaPetita13" />
+    <PhysXBox fromRenderableObject="true" density="0" />
   </Entity>
   <Entity name="BoxGlow">
     <Object3D />
@@ -132,7 +137,7 @@
   <Entity name="Habitacio1">
     <Object3D />
     <RenderableObject name="Habitacio1" />
-    <PhysXMesh density="undefined" />
+    <PhysXMesh density="0" />
   </Entity>
   <Entity name="BoxParallax">
     <Object3D />
@@ -147,5 +152,65 @@
   <Entity name="DummyTrigger">
     <Object3D position="-25.1552 2.03947 33.689" yaw="0.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="8.04462 5.83092 10.3979" onEnter="triggerDeProvesEntrar" onExit="triggerDeProvesSortir" />
+  </Entity>
+  <Entity name="LowCover01">
+    <Object3D position="-30.8646 0.509837 17.3676" yaw="0.0" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.02687 1.02634 1.9855" cover_size="1" />
+  </Entity>
+  <Entity name="LowCover02">
+    <Object3D position="-30.8337 0.498033 14.1835" yaw="0.0" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.00318 0.999353 0.99641" cover_size="1" />
+  </Entity>
+  <Entity name="LowCover03">
+    <Object3D position="-30.4229 0.736625 9.94757" yaw="0.0" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.96762 1.46503 1.96762" cover_size="2" />
+  </Entity>
+  <Entity name="LowCover04">
+    <Object3D position="-30.4269 0.736625 4.18548" yaw="0.0" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.96762 1.46503 1.96762" cover_size="2" />
+  </Entity>
+  <Entity name="LowCover05">
+    <Object3D position="-30.9704 0.499021 -1.5646" yaw="0.0" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="0.998535 1.00687 0.998535" cover_size="1" />
+  </Entity>
+  <Entity name="LowCover06">
+    <Object3D position="-31.0421 0.505118 -6.14529" yaw="0.0" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.10358 1.00999 2.23394" cover_size="2" />
+  </Entity>
+  <Entity name="LowCover07">
+    <Object3D position="-31.272 0.736625 -8.26481" yaw="12.0707" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.96762 1.46503 1.96762" cover_size="2" />
+  </Entity>
+  <Entity name="LowCover08">
+    <Object3D position="-31.3143 0.736625 -10.6122" yaw="-12.0707" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.96762 1.46503 1.96762" cover_size="2" />
+  </Entity>
+  <Entity name="LowCover10">
+    <Object3D position="-31.973 0.498918 -12.1066" yaw="0.0" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="0.981774 1.00332 1.00093" cover_size="1" />
+  </Entity>
+  <Entity name="HighCover01">
+    <Object3D position="-30.9704 1.00374 -2.56979" yaw="0.0" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="0.998535 2.00141 0.998535" cover_size="1" />
+  </Entity>
+  <Entity name="LowCover11">
+    <Object3D position="-30.9246 0.498909 2.69482" yaw="0.0" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.00038 0.993582 1.00038" cover_size="1" />
+  </Entity>
+  <Entity name="LowCover12">
+    <Object3D position="-30.6872 0.498918 -12.3202" yaw="0.0" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="0.981774 1.00332 1.00093" cover_size="1" />
+  </Entity>
+  <Entity name="HighCover02">
+    <Object3D position="-22.8876 1.00374 5.75254" yaw="0.0" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="0.998535 2.00141 0.998535" cover_size="1" />
+  </Entity>
+  <Entity name="LowCover13">
+    <Object3D position="-22.3955 0.736625 4.24436" yaw="0.0" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.96762 1.46503 1.96762" cover_size="2" />
+  </Entity>
+  <Entity name="HighCover03">
+    <Object3D position="-25.5666 1.97678 4.80545" yaw="0.0" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.26949 3.94839 5.50413" cover_size="5" />
   </Entity>
 </Entities>

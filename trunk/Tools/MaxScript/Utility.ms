@@ -694,7 +694,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				if (GetUserProp l_instance "physXMesh") != undefined then
 				(
 					l_aux = "" as stringstream
-					format "%" (GetUserProp l_instance "physXBox") to:l_aux 
+					format "%" (GetUserProp l_instance "physXMesh") to:l_aux 
 					l_params = #(#("density",l_aux))
 					format "\n    %" (InlineTagParamXML "PhysXMesh" l_params) to:l_file
 				)
@@ -760,7 +760,71 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				
 				format "\n  %" (CloseTagXML "Entity") to:l_file
 			)
+			else if IsCover _entites[i] then
+			(
+				local l_instance = _entites[i]
+				if l_instance.name == undefined then
+				(
+					format "\n  %" (OpenTagXML "Entity") to:l_file
+				)
+				else
+				(
+					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
+				)
+				
+				l_params = #()
+				
+				l_aux = "" as stringStream
+				local l_translation = RHVectorToLH l_instance.transform.translation
+				format "% % %" l_translation.x l_translation.y l_translation.z to:l_aux
+				append l_params #("position",l_aux)
+				
+				l_aux = "" as stringStream
+				local l_yaw = GetYaw l_instance.transform
+				format "%" l_yaw to:l_aux
+				append l_params #("yaw",l_aux)
+				
+				l_aux = "" as stringStream
+				local l_pitch = GetPitch l_instance.transform
+				format "%" l_pitch to:l_aux
+				append l_params #("pitch",l_aux)
+				
+				l_aux = "" as stringStream
+				local l_roll = GetRoll l_instance.transform
+				format "%" l_roll to:l_aux
+				append l_params #("roll",l_aux)
+				
+				format "\n    %" (InlineTagParamXML "Object3D" l_params) to:l_file
+				
+				l_aux = "" as stringStream
+				local l_size = RHVectorToLH (DummySize l_instance)
+				format "% % %" l_size.x l_size.y l_size.z to:l_aux
+				
+				l_params = #(#("shape","box"),#("size",l_aux))
+					
+				if (GetUserProp l_instance "LowCover") != undefined then
+				(
+					l_aux = "" as stringStream
+					l_size = GetUserProp l_instance "LowCover"
+					format "%" l_size to:l_aux
+					append l_params #("cover_size",l_aux)
+					
+					format "\n    %" (InlineTagParamXML "LowCover" l_params) to:l_file
+				)
+				else
+				(
+					l_aux = "" as stringStream
+					l_size = GetUserProp l_instance "HighCover"
+					format "%" l_size to:l_aux
+					append l_params #("cover_size",l_aux)
+					
+					format "\n    %" (InlineTagParamXML "HighCover" l_params) to:l_file
+				)
+				
+				format "\n  %" (CloseTagXML "Entity") to:l_file
+			)
 		)
+		
 		-------------------------------------------------------
 		
 		format "\n%\n" (CloseTagXML "Entities") to:l_file

@@ -42,11 +42,22 @@ function IsLight _object =
 	)
 )
 
--- Comprova si l'objecte proporcionat és una mesh
+-- Comprova si l'objecte proporcionat és un trigger
 function IsTrigger _object =
 (
 	-- TODO acceptar més coses
 	if classof _object == Dummy and ((GetUserProp _object "TriggerEnter") != undefined or (GetUserProp _object "TriggerExit") != undefined) then
+	(
+		return true
+	) else (
+		return false
+	)
+)
+
+-- Comprova si l'objecte proporcionat és una covertura
+function IsCover _object =
+(
+	if classof _object == Dummy and ((GetUserProp _object "LowCover") != undefined or (GetUserProp _object "HighCover") != undefined) then
 	(
 		return true
 	) else (
