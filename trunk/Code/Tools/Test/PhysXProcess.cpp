@@ -34,6 +34,7 @@
 #include "GameObjectManager.h"
 #include "PhysicCookingMesh.h"
 #include "ActionManager.h"
+#include "PhysxGrenade.h"
 
 #include "SpotLight.h"
 #include "Camera.h"
@@ -102,6 +103,9 @@ float g_fRagdollInitTime = 0.0f;
 float g_fRagdollAnimationDuration = 0.0f;
 bool g_bRagdollInit = false;
 unsigned int g_fRagdollFrames = 0;
+
+CPhysxGrenade* g_pGrenade = 0;
+vector<CPhysxGrenade*> g_vGrenadesVector;
 
 //CAnimatedModelManager::CAnimatedModelManager()
 //{
@@ -376,7 +380,14 @@ void CPhysXProcess::Release()
   CHECKED_DELETE(g_pSphericalJoint2);
 
   CHECKED_DELETE(g_pRagdoll);
+  CHECKED_DELETE(g_pGrenade);
 
+  for (size_t i=0;i<g_vGrenadesVector.size();++i)
+  {
+    CHECKED_DELETE(g_vGrenadesVector[i]);
+  }
+
+  g_vGrenadesVector.clear();
   g_vCollisions.clear();
 
   
@@ -535,36 +546,8 @@ void CPhysXProcess::Update(float _fElapsedTime)
   CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("rigglebot");
   CalModel* l_pCalModel = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel();
 
-  //Codi per testejar l
-  //if (g_pRagdoll != 0)
-  //{
-  //  //if (g_fRagdollInitTime >= g_fRagdollAnimationDuration*0.2f)
-  //  if (g_fRagdollInitTime >= g_fRagdollAnimationDuration*0.9f)
-  //  {
-  //    if (!g_bRagdollInit)
-  //    {
-  //      g_pRagdoll->Init("Data/Animated Models/Riggle/Skeleton.xml",l_pCalModel,l_pAnim->GetMat44());
-  //      g_bRagdollInit = true;
-  //    }
-  //    
-  //    if (g_bRagdollInit)
-  //    {
-  //      //g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0);
-  //      g_pRagdoll->UpdateCal3dFromPhysx();
-  //
-  //      //l_pAnim->GetAnimatedInstanceModel()->ClearCycle(0);
-  //      l_pAnim->SetMat44(g_pRagdoll->GetRenderableMatrix());
-  //      CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
-  //      l_pSkeleton->calculateState();
-  //    }
-  //  }
-  //  else
-  //  {
-  //    //float l_fInc = g_fRagdollFrames/g_fRagdollAnimationDuration;
-  //    g_fRagdollInitTime += _fElapsedTime;
-  //  }
-  //}
 
+  //RAGDOLLS
   if (g_pRagdoll != 0)
   {
     g_pRagdoll->Update();
@@ -572,6 +555,12 @@ void CPhysXProcess::Update(float _fElapsedTime)
     CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
     l_pSkeleton->calculateState();
     
+  }
+
+  //GRANADA
+  for (size_t i=0;i<g_vGrenadesVector.size();++i)
+  {
+    g_vGrenadesVector[i]->Update(_fElapsedTime);
   }
 
 }
@@ -942,6 +931,8 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
       {
         g_pCharacter->GetAnimatedInstanceModel()->ExecuteAction(3,0.0f);
       }
+
+      
       
       //g_pPActorComposite->SetLinearVelocity(Vect3f(0.0f,1.0f,0.0f)*m_fPhysxVelocity);
       CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
@@ -966,12 +957,6 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
       Vect3f l_vDirection(l_CInfo.m_CollisionPoint.x - l_vVect.x, l_CInfo.m_CollisionPoint.y - l_vVect.y, l_CInfo.m_CollisionPoint.z - l_vVect.z);
       l_vDirection.Normalize();
 
-      g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActorShoot(l_vVect,l_vDirection,4,g_pUserDataSHOOT,l_CInfo, 20.0f);
-      g_vCollisions.push_back(l_CInfo);
-
-
-     /* CORE->GetPhysicsManager()->RelasePhysicSphericalJoint(g_pSphericalJoint);
-      CORE->GetPhysicsManager()->RelasePhysicSphericalJoint(g_pSphericalJoint2);*/
 
       if (g_pUserDataSHOOT != 0)
       {
@@ -989,14 +974,12 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
         g_pUserDataSHOOT->SetColor(colRED);
       }
 
-     /* g_Box02->CreateBody(0.1f);
-      g_Box03->CreateBody(0.1f);
-      g_Box04->CreateBody(0.1f);
-      g_Box05->CreateBody(0.1f);
-      g_Box06->CreateBody(0.1f);
-      g_Box07->CreateBody(0.1f);*/
+
+      g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActorShoot(l_vVect,l_vDirection,4,g_pUserDataSHOOT,l_CInfo, 20.0f);
+      g_vCollisions.push_back(l_CInfo);
+
       
-     
+
   }
 
   if(strcmp(_pcAction, "ShootBOX") == 0)
@@ -1105,9 +1088,59 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     bool l_bRender = CORE->GetPhysicsManager()->GetDebugRenderMode();
     CORE->GetPhysicsManager()->SetDebugRenderMode(!l_bRender);
     //g_pCharacter->SetVisible(!g_pCharacter->GetVisible());
-    ExportSkeletonInfo(g_pCharacter->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton());
+    //ExportSkeletonInfo(g_pCharacter->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton());
   }
+
+  if(strcmp(_pcAction, "ShootGrenade") == 0)
+  {
+     if (g_pCharacter)
+      {
+        g_pCharacter->GetAnimatedInstanceModel()->ExecuteAction(3,0.0f);
+      }
+      
+      //g_pPActorComposite->SetLinearVelocity(Vect3f(0.0f,1.0f,0.0f)*m_fPhysxVelocity);
+      CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
+      const Vect3f l_PosCamera = m_pCamera->GetEye();
+      const Vect3f& l_DirCamera = m_pCamera->GetDirection().Normalize();
+
+      CalSkeleton* l_pSkeleton = g_pCharacter->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
+      int l_iBoneId = l_pSkeleton->getCoreSkeleton()->getCoreBoneId("Bip01 R Hand");
+      CalBone* l_pBone = l_pSkeleton->getBone(l_iBoneId);
+      CalVector l_vPos = l_pBone->getTranslationAbsolute();
+      Mat44f l_vMat44 = g_pCharacter->GetMat44();
+      //l_vMat44.Translate(Vect3f(0.1f,0.0f,0.0f));
+      Vect3f l_vVect(-l_vPos.x, l_vPos.y, l_vPos.z);
+      l_vVect = l_vMat44*l_vVect;
   
+      SCollisionInfo l_CInfo;
+      if (g_pUserDataSHOOT != 0)
+      {
+        g_pUserDataSHOOT->SetColor(colWHITE);
+      }
+      
+      g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActor(l_PosCamera,l_DirCamera,6,g_pUserDataSHOOT,l_CInfo);
+      Vect3f l_vDirection(l_CInfo.m_CollisionPoint.x - l_vVect.x, l_CInfo.m_CollisionPoint.y - l_vVect.y, l_CInfo.m_CollisionPoint.z - l_vVect.z);
+      l_vDirection.Normalize();
+
+      
+
+   
+
+      CPhysxGrenade* l_pGrenade = new CPhysxGrenade("Granada" + g_vGrenadesVector.size(),10.0f,3.0f,100.0f);
+      if (g_pUserDataSHOOT != 0)
+      {
+        l_pGrenade->Init(0.1f,1.0f,GROUP_COLLIDABLE_PUSHABLE,l_vVect,l_vDirection,20.0f); 
+      }
+      else
+      {
+        Vect3f l_vDirectionAir = l_DirCamera*10.0f;
+        l_vDirectionAir = l_vDirectionAir-l_vVect;
+        l_vDirectionAir.Normalize();
+        l_pGrenade->Init(0.1f,1.0f,GROUP_COLLIDABLE_PUSHABLE,l_vVect,l_vDirectionAir,20.0f);
+      }
+      g_vGrenadesVector.push_back(l_pGrenade);
+
+  }
   return false;
 }
 
