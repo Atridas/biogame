@@ -25,6 +25,9 @@
     <Filter Include="Ragdolls\PhysxSkeleton">
       <UniqueIdentifier>{09921076-c080-4f4b-bf1e-692b8c7349f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PhysXGrenades">
+      <UniqueIdentifier>{675cfe8c-5976-4858-b1c6-a3e708d2c956}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PhysicSphericalJoint.cpp">
@@ -70,6 +73,9 @@
     <ClCompile Include="PhysxBone.cpp">
       <Filter>Ragdolls\PhysxSkeleton</Filter>
     </ClCompile>
+    <ClCompile Include="PhysxGrenade.cpp">
+      <Filter>PhysXGrenades</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\PhysicSphericalJoint.h">
@@ -114,6 +120,9 @@
     </ClInclude>
     <ClInclude Include="include\PhysxBone.h">
       <Filter>Ragdolls\PhysxSkeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PhysxGrenade.h">
+      <Filter>PhysXGrenades</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

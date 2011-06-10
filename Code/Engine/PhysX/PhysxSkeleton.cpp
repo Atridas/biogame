@@ -480,7 +480,9 @@ void CPhysxSkeleton::ToogleRagdollActive()
   if (m_bRagdollActive == false)
   {
     m_bRagdollActive = true;
-    WakeUpPhysxBones();
+    //WakeUpPhysxBones();
+    SleepPhysxBones();
+    
   }
   else
   {
@@ -497,7 +499,11 @@ void CPhysxSkeleton::WakeUpPhysxBones()
 
     if (l_pActor != 0)
     {
-      l_pActor->GetPhXActor()->wakeUp();
+      //l_pActor->GetPhXActor()->setSleepAngularVelocity(0.0f);
+      l_pActor->GetPhXActor()->setSleepEnergyThreshold(0.0f);
+      //l_pActor->GetPhXActor()->setSleepLinearVelocity(0.0f);
+      l_pActor->GetPhXActor()->wakeUp(1);
+      
     }
   }
 };
