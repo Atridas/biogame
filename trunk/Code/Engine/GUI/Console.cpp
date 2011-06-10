@@ -8,9 +8,6 @@
 #include "ScriptManager.h"
 
 #include "InputManager.h"
-#include "ActionToInput.h"
-
-
 
 //----------------------------------------------------------------------------
 // Free memory

@@ -5,7 +5,7 @@
 #include "Core.h"
 #include "RenderManager.h"
 #include "FontManager.h"
-#include "ThPSCamera.h"
+#include "ShoulderCamera.h"
 #include "RenderableObjectsManager.h"
 #include "RenderableObject.h"
 #include "AnimatedInstanceModel.h"
@@ -71,15 +71,15 @@ void CViewer::Init()
   }
 
   m_pTargetObject = new CObject3D();
-  m_pTargetObject->SetPosition(Vect3f(0.0f,2.0f,0.0f));
+  m_pTargetObject->SetPosition(Vect3f(0.0f,0.0f,0.0f));
 
-  m_pObjectCamera = new CThPSCamera(
+  m_pObjectCamera = new CShoulderCamera(
       0.1f,
       100.0f,
-      35.0f * FLOAT_PI_VALUE/180.0f,
+      55.0f * FLOAT_PI_VALUE/180.0f,
       ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
       m_pTargetObject,
-      2.5f);
+      2.0f,0.6f,1.5f);
 
   m_pObjectModeLight = 0;
   m_pSpotLight = 0;
@@ -96,14 +96,14 @@ void CViewer::Init()
   /*m_pSpotLight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
                                                           Vect3f(-2.15715f,0.0f,-7.32758f),
                                                           Vect3f(-5.4188f,0.0f,3.75613f),
-                                                          CColor(Vect3f(0.7f,0.7f,0.7f)),
+                                                          CColor(Vect3f(1.0f,1.0f,1.0f)),
                                                           20.0f,
                                                           80.0f,
                                                           10.0f,
                                                           45.0f,
-                                                          true );*/
+                                                          false );*/
 
-  m_vOmniColor = Vect3f(0.7f,0.7f,0.4f);
+  m_vOmniColor = Vect3f(1.0f,1.0f,1.0f);
   m_pOmniLight = CORE->GetLightManager()->CreateOmniLight("OmniViewerLight",Vect3f(0.0f),CColor(m_vOmniColor),0.1f,17.0f);
 
   CSceneEffectManager* l_pSceneEffectManager = CORE->GetSceneEffectManager();
@@ -183,15 +183,19 @@ void CViewer::InitFreeMode()
   if(m_pCharacter)
   {
     m_pTargetObject->SetYaw(m_pCharacter->GetYaw()-m_fInitialCharacterYaw);
-    m_pTargetObject->SetPosition(m_pCharacter->GetPosition()+Vect3f(0.0f,2.0f,0.0f));
+    m_pTargetObject->SetPosition(m_pCharacter->GetPosition());
+    ((CShoulderCamera*)m_pObjectCamera)->SetShoulderDistance(0.85f);
+    ((CShoulderCamera*)m_pObjectCamera)->SetZoom(1.8f);
   }else{
     m_pTargetObject->SetYaw(0.0f);
-    m_pTargetObject->SetPosition(Vect3f(m_pTargetObject->GetPosition().x,2.0f,m_pTargetObject->GetPosition().z));
+    m_pTargetObject->SetPosition(Vect3f(m_pTargetObject->GetPosition().x,0.0f,m_pTargetObject->GetPosition().z));
+    ((CShoulderCamera*)m_pObjectCamera)->SetShoulderDistance(0.0f);
+    ((CShoulderCamera*)m_pObjectCamera)->SetZoom(0.0f);
   }
 
   m_pTargetObject->SetPitch(0.0f);
 
-  ((CThPSCamera*)m_pObjectCamera)->SetZoom(2.5f);
+  ((CShoulderCamera*)m_pObjectCamera)->SetShoulderHeight(1.55f);
 
   CORE->GetLightManager()->SetLightsEnabled(true);
 
@@ -233,6 +237,8 @@ void CViewer::InitMeshMode()
 
     }
 
+    ((CShoulderCamera*)m_pObjectCamera)->SetShoulderDistance(0.0f);
+    ((CShoulderCamera*)m_pObjectCamera)->SetShoulderHeight(0.0f);
   
     FocusCurrentMesh();
   }else
@@ -252,6 +258,9 @@ void CViewer::InitAnimatedMode()
     }else{
 
     }
+
+    ((CShoulderCamera*)m_pObjectCamera)->SetShoulderDistance(0.0f);
+    ((CShoulderCamera*)m_pObjectCamera)->SetShoulderHeight(1.0f);
 
     m_pTargetObject->SetPitch(0.0f);
     m_pTargetObject->SetYaw(0.0f);
@@ -449,7 +458,7 @@ void CViewer::UpdatePosition(Vect3f& _PosDelta, float _fDeltaPitch, float _fDelt
     _PosDelta.RotateY(-l_fYaw+m_fInitialCharacterYaw);
     m_pCharacter->SetPosition(m_pCharacter->GetPosition()+_PosDelta);
     m_pCharacter->SetYaw(l_fYaw);
-    m_pTargetObject->SetPosition(m_pCharacter->GetPosition()+Vect3f(0.0f,2.0f,0.0f));
+    m_pTargetObject->SetPosition(m_pCharacter->GetPosition()+Vect3f(0.0f,0.0f,0.0f));
   }else{
     l_fYaw = m_pTargetObject->GetYaw() - _fDeltaYaw;
     _PosDelta.RotateY(-l_fYaw);
@@ -472,27 +481,27 @@ void CViewer::UpdateCamera(float _fDeltaPitch, float _fDeltaYaw)
 void CViewer::FocusCurrentMesh()
 {
   CBoundingBox* l_BoundingBox = (*m_itCurrentMesh)->GetBoundingBox();
-  float l_vZoom = l_BoundingBox->GetMaxSideLength() * 3.0f;
+  float l_vZoom = l_BoundingBox->GetMaxSideLength() * 1.5f;
 
   CORE->GetRenderableObjectsManager()->SetAllVisibility(false);
   (*m_itCurrentMesh)->SetVisible(true);
 
   m_pTargetObject->SetPosition((*m_itCurrentMesh)->GetCenterPosition());
 
-  ((CThPSCamera*)m_pObjectCamera)->SetZoom(l_vZoom);
+  ((CShoulderCamera*)m_pObjectCamera)->SetZoom(l_vZoom);
 
 }
 
 void CViewer::FocusCurrentAnimatedModel()
 {
   Vect3f l_vPosition = (*m_itCurrentAnimated)->GetPosition();
-  float l_vZoom = 6.0f;
+  float l_vZoom = 3.0f;
 
   CORE->GetRenderableObjectsManager()->SetAllVisibility(false);
   (*m_itCurrentAnimated)->SetVisible(true);
 
-  m_pTargetObject->SetPosition(Vect3f(l_vPosition.x,1.0f,l_vPosition.z));
-  ((CThPSCamera*)m_pObjectCamera)->SetZoom(l_vZoom);
+  m_pTargetObject->SetPosition(l_vPosition);
+  ((CShoulderCamera*)m_pObjectCamera)->SetZoom(l_vZoom);
 
 }
 

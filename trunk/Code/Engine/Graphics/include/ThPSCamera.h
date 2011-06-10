@@ -33,7 +33,7 @@ public:
 	void										AddZoom					(float zoom);
 	float										GetZoom					() const	{return m_fZoom;}
 
-private:
+protected:
 	float		m_fZoom;
 };
 
