@@ -689,7 +689,59 @@ void CPhysicsManager::OverlapSphereActor (float radiusSphere, const Vect3f& posS
 			if(!find)
 				impactObjects.push_back(physicObject);
 		}
+    
 	}
+}
+
+void CPhysicsManager::OverlapSphereActorGrenade (float radiusSphere, const Vect3f& posSphere, std::vector<CPhysicUserData*> impactObjects)
+{
+	assert(m_pScene);
+
+	NxSphere worldSphere(NxVec3(posSphere.x,posSphere.y,posSphere.z), radiusSphere);
+	NxU32 nbShapes = m_pScene->getNbDynamicShapes();
+	NxShape** shapes = new NxShape* [nbShapes];
+	for (NxU32 i = 0; i < nbShapes; i++)
+	{
+		shapes[i] = NULL;
+	}
+
+  //NX_DYNAMIC_SHAPES
+	m_pScene->overlapSphereShapes(worldSphere, NX_DYNAMIC_SHAPES, nbShapes, shapes, NULL);
+
+	for (NxU32 i = 0; i < nbShapes; i++) 
+	{
+		if( shapes[i] != NULL )
+		{
+			NxActor* actor = &shapes[i]->getActor();
+			CPhysicUserData* physicObject = (CPhysicUserData*)actor->userData;
+			//Si está petando aquí quiere decir que se ha registrado un objeto físico sin proporcionarle ID
+			assert(physicObject);	
+			//Antes de meterlo comprobamos que no exista ya (un objeto fisico puede estar compuesto por varias shapes)
+			std::vector<CPhysicUserData*>::iterator it(impactObjects.begin());
+			std::vector<CPhysicUserData*>::iterator itEnd(impactObjects.end());
+			bool find = false; 
+			while (it!=itEnd)
+			{
+				CPhysicUserData* id = *it;
+				if( id == physicObject)
+					find = true;
+				++it;
+			}
+
+			if(!find)
+      {
+				impactObjects.push_back(physicObject);
+        physicObject->SetColor(colRED);
+      }
+		}
+    //delete &shapes[i];
+	}
+
+  delete shapes;
+  /*for (NxU32 i = 0; i < nbShapes; i++) 
+	{
+    delete &shapes[i];
+  }*/
 }
 
 void CPhysicsManager::RegisterFunctions (CScriptManager* scriptManager)
@@ -725,7 +777,10 @@ void CPhysicsManager::RegisterFunctions (CScriptManager* scriptManager)
  //   ];
 }
 
+void CPhysicsManager::ApplyExplosion()
+{
 
+}
 
 
 bool CPhysicsManager::Load(const string& _szFileName, bool _bReload)

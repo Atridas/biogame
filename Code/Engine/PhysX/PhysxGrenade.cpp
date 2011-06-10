@@ -34,19 +34,21 @@ void CPhysxGrenade::Explosion()
 {
   CPhysicsManager* l_pPM = CORE->GetPhysicsManager();
   vector<CPhysicUserData*> l_vUserDatas;
+  l_vUserDatas.clear();
 
   Mat44f l_vMat44;
   m_pPhysxActor->GetMat44(l_vMat44);
 
-  //l_pPM->OverlapSphereActor(m_fEffectRadius,l_vMat44.GetTranslationVector(),l_vUserDatas);
+  l_pPM->OverlapSphereActorGrenade(m_fEffectRadius,l_vMat44.GetTranslationVector(),l_vUserDatas);
 
   for(size_t i=0;i<l_vUserDatas.size();++i)
   {
     l_vUserDatas[i]->SetColor(colRED);
   }
 
-  m_bExploted = false;
+  m_bExploted = true;
   m_pPhysxUserData->SetPaint(false);
+  //m_pPhysxUserData->SetColor(colRED);
 }
 
 //Funcio que fa update al temps de vida
