@@ -33,6 +33,7 @@ public:
   void              ToogleRagdollActive();
   void              WakeUpPhysxBones();
   void              SleepPhysxBones();
+  bool              IsRagdollPhysXActor(string _szName);
 
   //Funcions per inicialitzar el esquelet corresponent
   bool              Load(string _szFileName);

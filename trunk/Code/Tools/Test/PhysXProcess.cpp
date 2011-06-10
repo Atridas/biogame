@@ -975,6 +975,17 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
 
       if (g_pUserDataSHOOT != 0)
       {
+        if (g_pRagdoll != 0)
+        {
+          if (g_pRagdoll->IsRagdollPhysXActor(g_pUserDataSHOOT->GetName()))
+          {
+            if (!g_pRagdoll->IsRagdollActive())
+            {
+              g_pRagdoll->ToogleRagdollActive();
+            }
+          }
+
+        }
         g_pUserDataSHOOT->SetColor(colRED);
       }
 
