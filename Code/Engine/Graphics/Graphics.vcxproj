@@ -126,6 +126,7 @@
     <ClCompile Include="SceneEffect.cpp" />
     <ClCompile Include="SceneEffectManager.cpp" />
     <ClCompile Include="ShadowMapRenderToTexture.cpp" />
+    <ClCompile Include="ShoulderCamera.cpp" />
     <ClCompile Include="SpotLight.cpp" />
     <ClCompile Include="StaticMesh.cpp" />
     <ClCompile Include="StaticMeshManager.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="include\SceneEffect.h" />
     <ClInclude Include="include\SceneEffectManager.h" />
     <ClInclude Include="include\ShadowMapRenderToTexture.h" />
+    <ClInclude Include="include\ShoulderCamera.h" />
     <ClInclude Include="include\SpecularPropertyDecorator.h" />
     <ClInclude Include="include\SpecularTextureDecorator.h" />
     <ClInclude Include="include\SpotLight.h" />

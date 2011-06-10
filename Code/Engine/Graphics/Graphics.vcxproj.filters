@@ -16,21 +16,6 @@
     <Filter Include="StaticMesh">
       <UniqueIdentifier>{cdc76e40-6e6b-4649-bbfe-0683ecafa07d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Lights">
-      <UniqueIdentifier>{1e8f55d6-65d4-48a1-9679-20a345809126}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Lights\LightManager">
-      <UniqueIdentifier>{f3955089-6989-41a9-9564-72b249e2412c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Lights\DirectionalLight">
-      <UniqueIdentifier>{d8de0390-5cef-487d-8425-bfb590c8a424}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Lights\OmniLight">
-      <UniqueIdentifier>{ded3d3d6-496e-4049-b1b4-a8e000bcf984}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Lights\SpotLight">
-      <UniqueIdentifier>{6128b30f-f93f-4f4d-8a5a-075a90330764}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Vertex">
       <UniqueIdentifier>{483096e6-c696-44d6-a564-80e5aae8de6e}</UniqueIdentifier>
     </Filter>
@@ -202,6 +187,24 @@
     <Filter Include="Materials\MaterialDecorators\PropertyDecorators\GlowDecorator">
       <UniqueIdentifier>{2d472e9e-657f-4c9d-bd4b-900f5e314477}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Cameras\ShoulderCamera">
+      <UniqueIdentifier>{f39a4cd2-9965-4de5-9db8-a815d561adc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights">
+      <UniqueIdentifier>{1e8f55d6-65d4-48a1-9679-20a345809126}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights\LightManager">
+      <UniqueIdentifier>{f3955089-6989-41a9-9564-72b249e2412c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights\DirectionalLight">
+      <UniqueIdentifier>{d8de0390-5cef-487d-8425-bfb590c8a424}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights\OmniLight">
+      <UniqueIdentifier>{ded3d3d6-496e-4049-b1b4-a8e000bcf984}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights\SpotLight">
+      <UniqueIdentifier>{6128b30f-f93f-4f4d-8a5a-075a90330764}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -332,6 +335,9 @@
     </ClCompile>
     <ClCompile Include="PortalManager.cpp">
       <Filter>Portalling\PortalManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ShoulderCamera.cpp">
+      <Filter>Cameras\ShoulderCamera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -520,6 +526,9 @@
     </ClInclude>
     <ClInclude Include="include\GlowPropertyDecorator.h">
       <Filter>Materials\MaterialDecorators\PropertyDecorators\GlowDecorator</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ShoulderCamera.h">
+      <Filter>Cameras\ShoulderCamera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
