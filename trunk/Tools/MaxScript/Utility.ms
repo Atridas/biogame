@@ -806,6 +806,10 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				(
 					l_aux = "" as stringStream
 					l_size = GetUserProp l_instance "LowCover"
+					if classof l_size != Integer then
+					(
+						l_size = 1
+					)
 					format "%" l_size to:l_aux
 					append l_params #("cover_size",l_aux)
 					
@@ -815,6 +819,10 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				(
 					l_aux = "" as stringStream
 					l_size = GetUserProp l_instance "HighCover"
+					if classof l_size != Integer then
+					(
+						l_size = 1
+					)
 					format "%" l_size to:l_aux
 					append l_params #("cover_size",l_aux)
 					
