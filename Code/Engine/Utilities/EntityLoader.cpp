@@ -139,6 +139,45 @@ void LoadComponentTrigger(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
   }
 }
 
+void LoadComponentHighCover(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
+{
+  //LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant Cobertura.");
+  //
+  ////TODO mascares
+  //int l_iCollisionMask = 1;
+  //Vect3f l_vSize = _TreeComponent.GetVect3fProperty("size", Vect3f(1), true);
+  //int l_iSpots = _TreeComponent.GetPszISOProperty("cover_size", "", false);
+  //
+  //LOGGER->AddNewLog(ELL_INFORMATION,"\t\t\t HighCover: \"%d\" spots.", l_iSpots);
+
+  //CComponentHighCover* l_pComponentHighCover = new CComponentHighCover();
+
+  //if(!l_pComponentHighCover->Init(_pEntity, l_vSize, l_iSpots, l_iCollisionMask))
+  //{
+  //  LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
+  //  delete l_pComponentHighCover;
+  //}
+}
+
+void LoadComponentLowCover(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
+{
+  //LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant Cobertura.");
+  //
+  ////TODO mascares
+  //int l_iCollisionMask = 1;
+  //Vect3f l_vSize = _TreeComponent.GetVect3fProperty("size", Vect3f(1), true);
+  //int l_iSpots = _TreeComponent.GetPszISOProperty("cover_size", "", false);
+  //
+  //LOGGER->AddNewLog(ELL_INFORMATION,"\t\t\t HighCover: \"%d\" spots.", l_iSpots);
+
+  //CComponentLowCover* l_pComponentLowCover = new CComponentLowCover();
+
+  //if(!l_pComponentLowCover->Init(_pEntity, l_vSize, l_iSpots, l_iCollisionMask))
+  //{
+  //  LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
+  //  delete l_pComponentLowCover;
+  //}
+}
 
 
 // -------------------------------------------------------------------------------------------------------------
@@ -209,9 +248,14 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
               LoadComponentPhysXMesh(l_TreeComponent, l_pEntity);
 
             // ----------------- Trigger --------------------------------------------------------------------------------
-            } else if(strcmp(l_TreeComponent.GetName(),"Trigger") == 0)
+            } else if(strcmp(l_TreeComponent.GetName(),"HighCover") == 0)
             {
-              LoadComponentTrigger(l_TreeComponent, l_pEntity);
+              LoadComponentHighCover(l_TreeComponent, l_pEntity);
+
+            // -----------------------------------------------------------------------------------------------------------
+            } else if(strcmp(l_TreeComponent.GetName(),"LowCover") == 0)
+            {
+              LoadComponentLowCover(l_TreeComponent, l_pEntity);
 
             // -----------------------------------------------------------------------------------------------------------
             } else if(!l_TreeComponent.IsComment())
