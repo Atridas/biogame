@@ -3,7 +3,6 @@
 #include "Core.h"
 #include "RenderManager.h"
 #include "FontManager.h"
-#include "FPSCamera.h"
 #include "ThPSCamera.h"
 #include "InputManager.h"
 #include "Texture.h"
@@ -142,9 +141,9 @@ bool CPhysXProcess::Init()
   ((CThPSCamera*)m_pObjectCamera)->SetZoom(5.0f);
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
 
-  CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
+  //CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
 
-  m_pSpotlight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
+  /*m_pSpotlight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
 	                                                          Vect3f(-2.15715f,0.0f,-7.32758f),
 	                                                          Vect3f(-5.4188f,0.0f,3.75613f),
 	                                                          CColor(Vect3f(1.0f,1.0f,1.0f)),
@@ -154,7 +153,7 @@ bool CPhysXProcess::Init()
 	                                                          45.0f,
 	                                                          false );
 	
-	 m_pSpotlight->SetActive(true);
+	 m_pSpotlight->SetActive(false);*/
  
   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   /////CODI PER MOSTRAR LES ESFERES ALS BONES
@@ -286,7 +285,7 @@ bool CPhysXProcess::Init()
   g_pUserDataController->SetPaint(true);
   g_pUserDataController->SetColor(colBLACK);
 
-  g_pPhysXController = new CPhysicController(RADIUS_CONTROLLER,ALTURA_CONTROLLER,10.0,0.01f,0.01f,COLISIONABLE_MASK,g_pUserDataController,Vect3f(-7.0f,2.2f,-4.0f));
+  g_pPhysXController = new CPhysicController(RADIUS_CONTROLLER,ALTURA_CONTROLLER,10.0,0.05f,0.01f,COLISIONABLE_MASK,g_pUserDataController,Vect3f(-7.0f,2.2f,-4.0f));
   g_pPhysXController->SetYaw(-90);
   l_pPhysManager->AddPhysicController(g_pPhysXController);
 
@@ -311,11 +310,11 @@ bool CPhysXProcess::Init()
   m_pObject->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y,l_ControllerPos.z));
 
   
-  if(l_Spot)
+  /*if(l_Spot)
   {
     l_Spot->SetDirection(l_ControllerPos);
     l_Spot->SetActive(true);
-  }
+  }*/
   m_bRenderLights = false;
 
 
@@ -551,9 +550,9 @@ void CPhysXProcess::Update(float _fElapsedTime)
   if (g_pRagdoll != 0)
   {
     g_pRagdoll->Update();
-    l_pAnim->SetMat44(g_pRagdoll->GetRenderableMatrix());
-    CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
-    l_pSkeleton->calculateState();
+    l_pAnim->SetMat44(g_pRagdoll->GetTransform());
+    //CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
+    //l_pSkeleton->calculateState();
     
   }
 
@@ -966,7 +965,7 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
           {
             if (!g_pRagdoll->IsRagdollActive())
             {
-              g_pRagdoll->ToogleRagdollActive();
+              g_pRagdoll->SetRagdollActive(true);
             }
           }
 
@@ -1026,7 +1025,23 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
 
     if (g_pRagdoll != 0)
     {
-      g_pRagdoll->ToogleRagdollActive();
+      if(!g_pRagdoll->IsRagdollActive())
+      {
+        g_pRagdoll->SetRagdollActive(true);
+      }else{
+        Mat44f l_mTransform = g_pRagdoll->GetTransform();
+
+        Mat44f l_mNewTransform;
+        Mat44f l_mNewTransform2;
+        l_mNewTransform.SetIdentity();
+        l_mNewTransform2.SetIdentity();
+        l_mNewTransform.RotByAngleY(l_mTransform.GetYaw());
+        l_mNewTransform2.Translate(Vect3f(l_mTransform.GetTranslationVector().x,0.0f,l_mTransform.GetTranslationVector().z));
+
+        g_pRagdoll->SetRagdollActive(false);
+
+        g_pRagdoll->SetTransform(l_mNewTransform2*l_mNewTransform);
+      }
     }
 
     if (g_pCharacter)

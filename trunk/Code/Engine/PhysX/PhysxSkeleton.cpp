@@ -23,7 +23,7 @@
 
 bool CPhysxSkeleton::Init(const string& _szFileName, CalModel* _pCalModel, Mat44f _vMat)
 {
-  m_vMat44 = _vMat;
+  m_mTransform = _vMat;
   SetSkeleton(_pCalModel->getSkeleton());
   vector<CalBone*> l_vLlistaBones = m_pCalSkeleton->getVectorBone();
 
@@ -233,7 +233,7 @@ bool CPhysxSkeleton::AddSphericalJoint(CXMLTreeNode _XMLObjects)
 
   CalVector l_vCalVect = l_pBone1->GetCalBone()->getTranslationAbsolute();
   Vect3f l_vJointPoint(-l_vCalVect.x,l_vCalVect.y,l_vCalVect.z);
-  l_vJointPoint = m_vMat44*l_vJointPoint;
+  l_vJointPoint = m_mTransform*l_vJointPoint;
   Vect3f l_vAxis;
   CalVector l_vVect;
 
@@ -277,7 +277,7 @@ bool CPhysxSkeleton::AddSphericalJoint(CXMLTreeNode _XMLObjects)
 
   
   Vect3f l_vAxisAux(l_vVect.x,l_vVect.y,l_vVect.z);
-  l_vAxisAux = m_vMat44*l_vAxisAux;
+  l_vAxisAux = m_mTransform*l_vAxisAux;
   l_vAxis = Vect3f(l_vAxisAux.x-l_vJointPoint.x,l_vAxisAux.y-l_vJointPoint.y,l_vAxisAux.z-l_vJointPoint.z);
   l_vAxis.Normalize();
 
@@ -338,12 +338,10 @@ bool CPhysxSkeleton::AddFixedJoint(CXMLTreeNode _XMLObjects)
 	return true;
 }
 
-
 bool CPhysxSkeleton::AddRevoluteJoint(CXMLTreeNode _XMLObjects)
 {
 	return true;
 }
-
 
 SSphericalLimitInfo CPhysxSkeleton::GetJointParameterInfo(CXMLTreeNode _XMLObjects)
 {
@@ -400,12 +398,9 @@ SSphericalLimitInfo CPhysxSkeleton::GetJointParameterInfo(CXMLTreeNode _XMLObjec
   {
     l_sInfo.TwistLimit = false;
   }
-
   
   return l_sInfo;
-
 }
-
 
 void CPhysxSkeleton::UpdateCal3dFromPhysx()
 {
@@ -414,13 +409,9 @@ void CPhysxSkeleton::UpdateCal3dFromPhysx()
     m_vBones[i]->UpdateCal3dFromPhysx();
   }
 
-  m_vMat44 = GetPhysxBoneByName("Bip01 Pelvis")->GetRenderableMatrix();
-  //m_pCalSkeleton->calculateState();
-
+  m_mTransform = GetPhysxBoneByName("Bip01 Pelvis")->GetTransform();
+  m_pCalSkeleton->calculateState();
 }
-
-
-
 
 void CPhysxSkeleton::InitParents()
 {
@@ -453,9 +444,10 @@ void CPhysxSkeleton::InitParents()
 
 void CPhysxSkeleton::UpdatePhysxFromCal3d()
 {
+
   for(size_t i=0;i<m_vBones.size();++i)
   {
-    m_vBones[i]->UpdatePhysxFromCal3d();
+    m_vBones[i]->UpdatePhysxFromCal3d(m_mTransform);
   }
 
 }
@@ -475,18 +467,18 @@ void CPhysxSkeleton::Update()
 }
 
 
-void CPhysxSkeleton::ToogleRagdollActive()
+void CPhysxSkeleton::SetRagdollActive(bool _bRagdollActive)
 {
-  if (m_bRagdollActive == false)
+  m_bRagdollActive = _bRagdollActive;
+
+  if(m_bRagdollActive)
   {
-    m_bRagdollActive = true;
-    //WakeUpPhysxBones();
-    SleepPhysxBones();
+    WakeUpPhysxBones();
+    //SleepPhysxBones();
     
   }
   else
   {
-    m_bRagdollActive = false;
     SleepPhysxBones();
   }
 };
