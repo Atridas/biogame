@@ -325,6 +325,18 @@ void CAnimatedInstanceModel::ClearCycle(float _fTime)
   m_pCalModel->getMixer()->clearCycle(m_iCurrentCycle,_fTime);
 }
 
+
+void CAnimatedInstanceModel::ClearCycle(int _iId, float _fTime)
+{
+  m_pCalModel->getMixer()->clearCycle(_iId,_fTime);
+}
+
+void CAnimatedInstanceModel::ClearCycle(const std::string &AnimationName, float _fTime)
+{
+  int l_iId = m_pAnimatedCoreModel->GetCoreModel()->getCoreAnimationId(AnimationName);
+  m_pCalModel->getMixer()->clearCycle(l_iId,_fTime);
+}
+
 int CAnimatedInstanceModel::GetAnimationCount()
 {
   return m_pAnimatedCoreModel->GetAnimationCount();

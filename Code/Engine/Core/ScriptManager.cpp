@@ -37,7 +37,6 @@ extern "C"
 #include "ActionManager.h"
 
 #include "EntitiesToLua.h"
-#include "ScriptedStateMachine.h"
 
 
 using namespace luabind;
@@ -526,16 +525,6 @@ void CScriptManager::RegisterLUAFunctions()
     ,class_<CCore, bases<CBaseControl,CSingleton<CCore>>>("CCore")
       //.def("get_light_manager", &CCore::GetLightManager)
     */
-
-
-  module(m_pLS) [
-   
-    class_<CScriptedStateMachine>("ScriptedStateMachine")
-      //.def("set_current_state",    &CScriptedStateMachine::SetCurrentState)
-      //.def("change_state",         &CScriptedStateMachine::ChangeState)
-      .def("current_state",        &CScriptedStateMachine::CurrentState)
-      .def("receive_event",        &CScriptedStateMachine::ReceiveEvent)
-  ];
 
   RegisterGUI();
   RegisterEntitiesToLua(m_pLS);

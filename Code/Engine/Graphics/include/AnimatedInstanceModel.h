@@ -92,6 +92,8 @@ public:
    * @param _fTime Temps fins a acabar-se.
   **/
   void ClearCycle             (float _fTime);
+  void ClearCycle             (int _iId, float _fTime);
+  void ClearCycle             (const std::string &AnimationName, float _fTime);
   /**
    * Getter del cicle d'animació actual.
    * @return Cicle d'animació actual.

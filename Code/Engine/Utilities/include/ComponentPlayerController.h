@@ -22,7 +22,7 @@ public:
       m_pObject3D(0), m_pMovement(0),
 
       m_pAnimatedModel(0),
-      m_iCurrentAnimation(0),
+      m_szCurrentAnimation(""),
       m_fSpeed(1),
 
       m_fWalkSpeed(1),
@@ -101,7 +101,10 @@ public:
   
 
   float m_fSpeed;
-  int m_iCurrentAnimation;
+  string m_szCurrentAnimation;
+
+  void Shoot();
+
 protected:
   virtual void Release() {};
 

@@ -21,6 +21,10 @@ extern "C"
 #include "ComponentPhysXController.h"
 #include "ComponentPhysXBox.h"
 #include "ComponentRenderableObject.h"
+#include "ComponentMovement.h"
+#include "ComponentAnimation.h"
+#include "ComponentStateMachine.h"
+#include "ScriptedStateMachine.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -73,16 +77,23 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def_readwrite("DispatchTime",&SEvent::DispatchTime)
       .property("Info", GetEventInfo, SetEventInfo, raw(_2)) 
       //.def_readwrite("Info",        &SEvent::Info)
-      
-    
 
     ,class_<CBaseComponent>("BaseComponent")
       .enum_("ComponentType")
       [
-          value("object_3d",         CBaseComponent::ECT_OBJECT_3D),
-          value("phisX_controller",  CBaseComponent::ECT_PHYSX_CONTROLLER),
-          value("player_controller", CBaseComponent::ECT_PLAYER_CONTROLLER),
-          value("thps_camera",       CBaseComponent::ECT_3RD_PERSON_SHOOTER_CAMERA)
+          value("object_3d",           CBaseComponent::ECT_OBJECT_3D),
+          value("movement",            CBaseComponent::ECT_MOVEMENT),
+          value("player_controller",   CBaseComponent::ECT_PLAYER_CONTROLLER),
+          value("ia_walk_to_player",   CBaseComponent::ECT_IA_WALK_TO_PLAYER),
+          value("physx_controller",    CBaseComponent::ECT_PHYSX_CONTROLLER),
+          value("physx_controller",    CBaseComponent::ECT_PHYSX_ACTOR),
+          value("renderable_object",   CBaseComponent::ECT_RENDERABLE_OBJECT),
+          value("thps_camera",         CBaseComponent::ECT_3RD_PERSON_SHOOTER_CAMERA),
+          value("trigger",             CBaseComponent::ECT_TRIGGER),
+          value("vida",                CBaseComponent::ECT_VIDA),
+          value("laser",               CBaseComponent::ECT_LASER),
+          value("state_machine",       CBaseComponent::ECT_STATE_MACHINE),
+          value("animation",       CBaseComponent::ECT_ANIMATION)
       ]
       .def("get_type",     &CBaseComponent::GetType)
       .def("get_entity",   &CBaseComponent::GetEntity)
@@ -111,6 +122,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPlayerController, CBaseComponent>("ComponentPlayerController")
       .def("init", (bool(CComponentPlayerController::*)(CGameEntity*))&CComponentPlayerController::Init)
+      .def("shoot", &CComponentPlayerController::Shoot)
 
       .def_readwrite("move_fwd",   &CComponentPlayerController::m_szMoveForward)
       .def_readwrite("move_back",  &CComponentPlayerController::m_szMoveBack)
@@ -129,7 +141,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def_readwrite("max_pitch_angle", &CComponentPlayerController::m_fMinPitchAngle)
 
       .def_readwrite("speed", &CComponentPlayerController::m_fSpeed)
-      .def_readwrite("current_animation", &CComponentPlayerController::m_iCurrentAnimation)
+      .def_readwrite("current_animation", &CComponentPlayerController::m_szCurrentAnimation)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponent3rdPSCamera, CBaseComponent>("Component3rdPSCamera")
@@ -143,14 +155,44 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPhysXBox, CBaseComponent>("ComponentPhysXBox")
-      .def("init",                        (bool(CComponentPhysXBox::*)(CGameEntity*,float,float,float,float,float,float,float,int))&CComponentPhysXBox::Init)
-      .def("init_with_renderable_object", (bool(CComponentPhysXBox::*)(CGameEntity*,float,int))&CComponentPhysXBox::Init)
+      .def("init",     (bool(CComponentPhysXBox::*)(CGameEntity*,float,float,float,float,float,float,float,int))&CComponentPhysXBox::Init)
+      .def("init",     (bool(CComponentPhysXBox::*)(CGameEntity*,float,int))&CComponentPhysXBox::Init)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentRenderableObject, CBaseComponent>("ComponentRenderableObject")
       .def("init",                               &CComponentRenderableObject::Init)
       .def("init_animated_model",                &CComponentRenderableObject::InitAnimatedModel)
       .def_readwrite("remove_renderable_object", &CComponentRenderableObject::m_bRemoveRenderableObject)
+      
+    // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentMovement, CBaseComponent>("ComponentMovement")
+      .def("init",                               &CComponentMovement::Init)
+      .def_readwrite("movement",                 &CComponentMovement::m_vMovement)
+      
+    // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentAnimation, CBaseComponent>("ComponentAnimation")
+      .def("init",                     &CComponentAnimation::Init)
+      .def("clear_cycle",              (void(CComponentAnimation::*)(float))&CComponentAnimation::ClearCycle)
+      .def("clear_cycle",              (void(CComponentAnimation::*)(const string&, float))&CComponentAnimation::ClearCycle)
+      .def("set_cycle",                &CComponentAnimation::SetCycle)
+      .def("set_animation",            &CComponentAnimation::SetAnimation)
+      .def("get_current_cycle",        &CComponentAnimation::GetCurrentCycle)
+      
+    // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentStateMachine, CBaseComponent>("ComponentStateMachine")
+      .def("init",                     &CComponentStateMachine::Init)
+      .def("get_state_machine",        &CComponentStateMachine::GetStateMachine)
   
+  ];
+  
+
+
+  module(_pLS) [
+   
+    class_<CScriptedStateMachine>("ScriptedStateMachine")
+      .def("set_current_state",    &CScriptedStateMachine::SetCurrentState)
+      .def("change_state",         &CScriptedStateMachine::ChangeState)
+      .def("current_state",        &CScriptedStateMachine::CurrentState)
+      .def("receive_event",        &CScriptedStateMachine::ReceiveEvent)
   ];
 }

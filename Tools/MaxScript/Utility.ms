@@ -686,16 +686,42 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				if (GetUserProp l_instance "physXBox") != undefined then
 				(
 					l_aux = "" as stringstream
-					format "%" (GetUserProp l_instance "physXBox") to:l_aux 
-					l_params = #(#("fromRenderableObject","true"),#("density",l_aux))
+					
+					local l_density = GetUserProp l_instance "physXBox"
+					
+					if classof l_density != Integer then
+					(
+						l_density = 0
+					)
+					local l_colgroup = "escenari"
+					if l_density != 0 then
+					(
+						l_colgroup = "objecte dinamic"
+					)
+					
+					format "%" l_density to:l_aux 
+					l_params = #(#("fromRenderableObject","true"),#("density",l_aux), #("collision_group", l_colgroup))
 					format "\n    %" (InlineTagParamXML "PhysXBox" l_params) to:l_file
 				)
 				
 				if (GetUserProp l_instance "physXMesh") != undefined then
 				(
 					l_aux = "" as stringstream
-					format "%" (GetUserProp l_instance "physXMesh") to:l_aux 
-					l_params = #(#("density",l_aux))
+					
+					local l_density = GetUserProp l_instance "physXMesh"
+					
+					if classof l_density != Integer then
+					(
+						l_density = 0
+					)
+					local l_colgroup = "escenari"
+					if l_density != 0 then
+					(
+						l_colgroup = "objecte dinamic"
+					)
+					
+					format "%" l_density to:l_aux 
+					l_params = #(#("density",l_aux), #("collision_group", l_colgroup))
 					format "\n    %" (InlineTagParamXML "PhysXMesh" l_params) to:l_file
 				)
 				
@@ -743,7 +769,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				local l_size = RHVectorToLH (DummySize l_instance)
 				format "% % %" l_size.x l_size.y l_size.z to:l_aux
 				
-				l_params = #(#("shape","box"),#("size",l_aux))
+				l_params = #(#("shape","box"),#("size",l_aux), #("collision_group", "trigger"))
 				
 
 				if (GetUserProp l_instance "TriggerEnter") != undefined then
@@ -800,7 +826,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				local l_size = RHVectorToLH (DummySize l_instance)
 				format "% % %" l_size.x l_size.y l_size.z to:l_aux
 				
-				l_params = #(#("shape","box"),#("size",l_aux))
+				l_params = #(#("shape","box"),#("size",l_aux),#("collision_group", "cobertura"))
 					
 				if (GetUserProp l_instance "LowCover") != undefined then
 				(

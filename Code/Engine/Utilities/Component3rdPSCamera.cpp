@@ -5,7 +5,7 @@
 #include "Core.h"
 
 bool CComponent3rdPSCamera::Init(CGameEntity *_pEntity,
-            float _fCameraHeight, float _fCameraRight)
+            float _fCameraHeight, float _fCameraRight, float _fZoom)
 {
   assert(_pEntity->IsOk());
   SetEntity(_pEntity);
@@ -33,7 +33,7 @@ bool CComponent3rdPSCamera::Init(CGameEntity *_pEntity,
                       35.0f * FLOAT_PI_VALUE/180.0f,
                       ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
                       &m_CameraObject,
-                      4.5f);
+                      _fZoom);
 
   SetOk(true);
   return IsOk();
