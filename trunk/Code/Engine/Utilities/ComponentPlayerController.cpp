@@ -72,8 +72,8 @@ bool CComponentPlayerController::Init(CGameEntity *_pEntity,
   m_pAnimatedModel = dynamic_cast<CRenderableAnimatedInstanceModel*>(l_pComponentRO->GetRenderableObject());
   assert(m_pAnimatedModel); //TODO fer missatges d'error més elavorats
   
-  m_iCurrentAnimation = m_pAnimatedModel->GetAnimatedInstanceModel()->GetAnimationId(_szIdleAnimation);
-  m_pAnimatedModel->GetAnimatedInstanceModel()->BlendCycle(m_iCurrentAnimation,0.f);
+  //m_iCurrentAnimation = m_pAnimatedModel->GetAnimatedInstanceModel()->GetAnimationId(_szIdleAnimation);
+  //m_pAnimatedModel->GetAnimatedInstanceModel()->BlendCycle(m_iCurrentAnimation,0.f);
 
   m_szMoveForward   = _szMoveForward;
   m_szMoveBack      = _szMoveBack;
@@ -127,9 +127,6 @@ void CComponentPlayerController::Update(float _fDeltaTime)
   //m_pObject3D->SetYaw(l_fYaw);
 
   
-
-
-  
   CActionManager* l_pActionManager = CORE->GetActionManager();
 
   if(l_pActionManager->IsActionActive(m_szRun))
@@ -139,126 +136,91 @@ void CComponentPlayerController::Update(float _fDeltaTime)
   {
     m_fSpeed = m_fWalkSpeed;
   }
+}
+
+
+void CComponentPlayerController::Shoot()
+{
 
   CAnimatedInstanceModel *l_pAnimatedInstanceModel = m_pAnimatedModel->GetAnimatedInstanceModel();
-  int l_iDesiredAnim = l_pAnimatedInstanceModel->GetAnimationId(m_szIdleAnimation);
-  
-  if(l_pActionManager->IsActionActive(m_szMoveForward))
+
+
+  int l_iAnim = l_pAnimatedInstanceModel->GetAnimationId(m_szShootAnimation);
+  l_pAnimatedInstanceModel->ExecuteAction(l_iAnim,0.2f);
+
+  CCamera* l_pCamera = GetEntity()->GetComponent<CComponent3rdPSCamera>(ECT_3RD_PERSON_SHOOTER_CAMERA)->GetCamera();
+  //Vect3f l_vPos = m_pObject3D->GetPosition();
+  Vect3f l_vPos = l_pCamera->GetEye();
+  Vect3f l_vDir = l_pCamera->GetDirection().Normalize();
+
+  l_vPos += l_vDir;
+
+  SCollisionInfo l_CInfo;
+  CPhysicUserData* l_pUserData = 0;
+
+  l_pUserData = CORE->GetPhysicsManager()->RaycastClosestActor(l_vPos,l_vDir,1,l_pUserData,l_CInfo);
+
+  if( l_pUserData )
   {
-    Vect3f l_vDirection(cos(l_fYaw), 0, sin(l_fYaw) );
-    m_pMovement->m_vMovement += l_vDirection * (m_fSpeed*_fDeltaTime);
+    Vect3f l_vCenterPoint = l_CInfo.m_CollisionPoint;
 
-    l_iDesiredAnim = l_pAnimatedInstanceModel->GetAnimationId(m_szForwardAnimation);
-  }
-  if(l_pActionManager->IsActionActive(m_szMoveBack))
-  {
-    Vect3f l_vDirection(cos(l_fYaw), 0, sin(l_fYaw) );
-    m_pMovement->m_vMovement -= l_vDirection * (m_fSpeed*_fDeltaTime);
+    CalSkeleton *l_pSkeleton = l_pAnimatedInstanceModel->GetAnimatedCalModel()->getSkeleton();
+    CalCoreSkeleton *l_pCoreSkeleton = l_pSkeleton->getCoreSkeleton();
+    CalBone* l_pBone = l_pSkeleton->getBone( l_pCoreSkeleton->getCoreBoneId("Bip01 R Hand") );
 
-    l_iDesiredAnim = l_pAnimatedInstanceModel->GetAnimationId(m_szBackAnimation);
-  }
-  if(l_pActionManager->IsActionActive(m_szMoveLeft))
-  {
-    Vect3f l_vLeft(cos(l_fYaw+FLOAT_PI_VALUE/2), 0, sin(l_fYaw+FLOAT_PI_VALUE/2) );
-    m_pMovement->m_vMovement += l_vLeft * (m_fSpeed*_fDeltaTime);
+    CalVector l_vTanslationBone = l_pBone->getTranslationAbsolute();
 
-    l_iDesiredAnim = l_pAnimatedInstanceModel->GetAnimationId(m_szLeftAnimation);
-  }
-  if(l_pActionManager->IsActionActive(m_szMoveRight))
-  {
-    Vect3f l_vLeft(cos(l_fYaw+FLOAT_PI_VALUE/2), 0, sin(l_fYaw+FLOAT_PI_VALUE/2) );
-    m_pMovement->m_vMovement -= l_vLeft * (m_fSpeed*_fDeltaTime);
+    Mat44f l_mat = GetEntity()->GetComponent<CComponentRenderableObject>()->GetRenderableObject()->GetMat44();
+    //Mat44f l_mat = m_pObject3D->GetMat44();
 
-    l_iDesiredAnim = l_pAnimatedInstanceModel->GetAnimationId(m_szRightAnimation);
-  }
+    Vect4f l_vTanslationBone2(-l_vTanslationBone.x, l_vTanslationBone.y, l_vTanslationBone.z, 1);
 
-  if(l_iDesiredAnim != m_iCurrentAnimation)
-  {
-    l_pAnimatedInstanceModel->ClearCycle(0.3f);
-    l_pAnimatedInstanceModel->BlendCycle(l_iDesiredAnim, 0.3f);
-    m_iCurrentAnimation = l_iDesiredAnim;
-  }
+    l_vTanslationBone2 = l_mat * l_vTanslationBone2;
 
 
-  if(l_pActionManager->IsActionActive(m_szShoot))
-  {
-    int l_iAnim = l_pAnimatedInstanceModel->GetAnimationId(m_szShootAnimation);
-    l_pAnimatedInstanceModel->ExecuteAction(l_iAnim,0.2f);
+    CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
+    (new CComponentLaser())->Init(l_pLaser,
+                                  Vect3f(l_vTanslationBone2.x,l_vTanslationBone2.y,l_vTanslationBone2.z),
+                                  l_vCenterPoint,
+                                  1.f);
 
-    CCamera* l_pCamera = GetEntity()->GetComponent<CComponent3rdPSCamera>(ECT_3RD_PERSON_SHOOTER_CAMERA)->GetCamera();
-    //Vect3f l_vPos = m_pObject3D->GetPosition();
-    Vect3f l_vPos = l_pCamera->GetEye();
-    Vect3f l_vDir = l_pCamera->GetDirection().Normalize();
-
-    l_vPos += l_vDir;
-
-    SCollisionInfo l_CInfo;
-    CPhysicUserData* l_pUserData = 0;
-
-    l_pUserData = CORE->GetPhysicsManager()->RaycastClosestActor(l_vPos,l_vDir,1,l_pUserData,l_CInfo);
-
-    if( l_pUserData )
+    if(l_pUserData->GetEntity())
     {
-      Vect3f l_vCenterPoint = l_CInfo.m_CollisionPoint;
+      SEvent l_impacte;
+      l_impacte.Msg = SEvent::REBRE_IMPACTE;
+      l_impacte.Info[0].Type = SEventInfo::STI_FLOAT;
+      l_impacte.Info[0].f    = 20.f;
+      l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
+      l_impacte.Sender = GetEntity()->GetGUID();
 
-      CalSkeleton *l_pSkeleton = l_pAnimatedInstanceModel->GetAnimatedCalModel()->getSkeleton();
-      CalCoreSkeleton *l_pCoreSkeleton = l_pSkeleton->getCoreSkeleton();
-      CalBone* l_pBone = l_pSkeleton->getBone( l_pCoreSkeleton->getCoreBoneId("Bip01 R Hand") );
-
-      CalVector l_vTanslationBone = l_pBone->getTranslationAbsolute();
-
-      Mat44f l_mat = GetEntity()->GetComponent<CComponentRenderableObject>()->GetRenderableObject()->GetMat44();
-      //Mat44f l_mat = m_pObject3D->GetMat44();
-
-      Vect4f l_vTanslationBone2(-l_vTanslationBone.x, l_vTanslationBone.y, l_vTanslationBone.z, 1);
-
-      l_vTanslationBone2 = l_mat * l_vTanslationBone2;
-
-
-      CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
-      (new CComponentLaser())->Init(l_pLaser,
-                                    Vect3f(l_vTanslationBone2.x,l_vTanslationBone2.y,l_vTanslationBone2.z),
-                                    l_vCenterPoint,
-                                    1.f);
-
-      if(l_pUserData->GetEntity())
-      {
-        SEvent l_impacte;
-        l_impacte.Msg = SEvent::REBRE_IMPACTE;
-        l_impacte.Info[0].Type = SEventInfo::STI_FLOAT;
-        l_impacte.Info[0].f    = 20.f;
-        l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
-        l_impacte.Sender = GetEntity()->GetGUID();
-
-        //TODO usar un manager
-        CORE->GetEntityManager()->SendEvent(l_impacte);
-        //l_pUserData->GetEntity()->ReceiveEvent(l_impacte);
-      }
+      //TODO usar un manager
+      CORE->GetEntityManager()->SendEvent(l_impacte);
+      //l_pUserData->GetEntity()->ReceiveEvent(l_impacte);
     }
-    else
-    {
+  }
+  else
+  {
       
-      Vect3f l_vCenterPoint = l_vPos + l_vDir * 1000;
+    Vect3f l_vCenterPoint = l_vPos + l_vDir * 1000;
 
-      CalSkeleton *l_pSkeleton = l_pAnimatedInstanceModel->GetAnimatedCalModel()->getSkeleton();
-      CalCoreSkeleton *l_pCoreSkeleton = l_pSkeleton->getCoreSkeleton();
-      CalBone* l_pBone = l_pSkeleton->getBone( l_pCoreSkeleton->getCoreBoneId("Bip01 R Hand") );
+    CalSkeleton *l_pSkeleton = l_pAnimatedInstanceModel->GetAnimatedCalModel()->getSkeleton();
+    CalCoreSkeleton *l_pCoreSkeleton = l_pSkeleton->getCoreSkeleton();
+    CalBone* l_pBone = l_pSkeleton->getBone( l_pCoreSkeleton->getCoreBoneId("Bip01 R Hand") );
 
-      CalVector l_vTanslationBone = l_pBone->getTranslationAbsolute();
+    CalVector l_vTanslationBone = l_pBone->getTranslationAbsolute();
 
-      Mat44f l_mat = GetEntity()->GetComponent<CComponentRenderableObject>()->GetRenderableObject()->GetMat44();
-      //Mat44f l_mat = m_pObject3D->GetMat44();
+    Mat44f l_mat = GetEntity()->GetComponent<CComponentRenderableObject>()->GetRenderableObject()->GetMat44();
+    //Mat44f l_mat = m_pObject3D->GetMat44();
 
-      Vect4f l_vTanslationBone2(-l_vTanslationBone.x, l_vTanslationBone.y, l_vTanslationBone.z, 1);
+    Vect4f l_vTanslationBone2(-l_vTanslationBone.x, l_vTanslationBone.y, l_vTanslationBone.z, 1);
 
-      l_vTanslationBone2 = l_mat * l_vTanslationBone2;
+    l_vTanslationBone2 = l_mat * l_vTanslationBone2;
 
 
-      CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
-      (new CComponentLaser())->Init(l_pLaser,
-                                    Vect3f(l_vTanslationBone2.x,l_vTanslationBone2.y,l_vTanslationBone2.z),
-                                    l_vCenterPoint,
-                                    1.f);
-    }
+    CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
+    (new CComponentLaser())->Init(l_pLaser,
+                                  Vect3f(l_vTanslationBone2.x,l_vTanslationBone2.y,l_vTanslationBone2.z),
+                                  l_vCenterPoint,
+                                  1.f);
   }
 }

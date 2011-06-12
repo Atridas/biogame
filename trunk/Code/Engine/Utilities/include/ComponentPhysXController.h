@@ -31,7 +31,7 @@ public:
 		        float stepOffset, uint32 collisionGroups 
             );
   
-  void Update(float _fDeltaTime);
+  void UpdatePrePhysX(float _fDeltaTime);
   void UpdatePostPhysX(float _fDeltaTime);
 
   virtual ~CComponentPhysXController(void) {Done();};

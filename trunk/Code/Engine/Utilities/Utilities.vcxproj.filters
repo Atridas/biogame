@@ -73,6 +73,9 @@
     <Filter Include="EntitySystem\Components\ComponentStateMachine">
       <UniqueIdentifier>{2219db10-2e44-4e7d-942a-c2e23e3e8597}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentAnimation">
+      <UniqueIdentifier>{25a80eb2-c540-47f4-acbc-6ad117b3f517}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -152,6 +155,9 @@
     </ClCompile>
     <ClCompile Include="ComponentStateMachine.cpp">
       <Filter>EntitySystem\Components\ComponentStateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentAnimation.cpp">
+      <Filter>EntitySystem\Components\ComponentAnimation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -241,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentStateMachine.h">
       <Filter>EntitySystem\Components\ComponentStateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentAnimation.h">
+      <Filter>EntitySystem\Components\ComponentAnimation</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

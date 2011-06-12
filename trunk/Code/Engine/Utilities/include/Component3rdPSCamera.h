@@ -29,7 +29,8 @@ public:
 
   bool Init(CGameEntity *_pEntity,
             float _fCameraHeight,
-            float _fCameraRight);
+            float _fCameraRight,
+            float _fZoom);
 
   void PostUpdate(float _fDeltaTime);
 

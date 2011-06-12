@@ -21,25 +21,26 @@
       </Boundings>
       <Objects>
         <GameObject name="Habitacio2" />
-        <GameObject name="LowCover" />
-        <GameObject name="HighCover" />
-        <GameObject name="LowCover01" />
-        <GameObject name="LowCover02" />
-        <GameObject name="LowCover03" />
-        <GameObject name="LowCover04" />
-        <GameObject name="HighCover01" />
-        <GameObject name="LowCover05" />
-        <GameObject name="LowCover06" />
+        <GameObject name="CaixaPetita00" />
+        <GameObject name="CaixaGrossa00" />
+        <GameObject name="CaixaPetita01" />
+        <GameObject name="CaixaPetita02" />
+        <GameObject name="CaixaPetita03" />
+        <GameObject name="CaixaPetita04" />
+        <GameObject name="CaixaGrossa01" />
+        <GameObject name="CaixaPetita05" />
+        <GameObject name="CaixaPetita06" />
         <GameObject name="Wall" />
-        <GameObject name="HighCover02" />
-        <GameObject name="LowCover07" />
-        <GameObject name="HighCover03" />
-        <GameObject name="LowCover08" />
-        <GameObject name="HighCover04" />
-        <GameObject name="LowCover09" />
-        <GameObject name="LowCover10" />
-        <GameObject name="LowCover11" />
+        <GameObject name="CaixaGrossa02" />
+        <GameObject name="CaixaGrossa03" />
+        <GameObject name="CaixaPetita08" />
+        <GameObject name="CaixaGrossa04" />
+        <GameObject name="CaixaPetita09" />
+        <GameObject name="CaixaPetita10" />
+        <GameObject name="CaixaPetita11" />
         <GameObject name="Llum" />
+        <GameObject name="CaixaPetita12" />
+        <GameObject name="CaixaPetita13" />
       </Objects>
     </Room>
     <Room undefined="false" name="Room1">
@@ -54,6 +55,7 @@
         <GameObject name="BoxAlpha01" />
         <GameObject name="Habitacio1" />
         <GameObject name="BoxParallax" />
+        <GameObject name="BoxGlowAlpha" />
       </Objects>
     </Room>
   </Rooms>

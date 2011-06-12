@@ -36,7 +36,8 @@ public:
     ECT_TRIGGER,
     ECT_VIDA,
     ECT_LASER,
-    ECT_STATE_MACHINE
+    ECT_STATE_MACHINE,
+    ECT_ANIMATION
   };
   
   virtual Type GetType() = 0; //{return m_Type;};

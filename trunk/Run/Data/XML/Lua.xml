@@ -25,6 +25,9 @@
 
     <script action="INPUT_MANAGER                 = CORE:get_input_manager()"/>
     <script action="IM                            = CORE:get_input_manager()"/>
+
+    <script action="ACTION_MANAGER                = CORE:get_action_manager()"/>
+    <script action="AM                            = CORE:get_action_manager()"/>
     
     <script action="GUI_MANAGER                   = CORE:get_gui_manager()"/>
 

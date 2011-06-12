@@ -35,7 +35,23 @@ void CScriptedStateMachine::SetCurrentState(const string& s)
 
 
   try {
-    luabind::call_function<void>(l_GlobalTable[s.c_str()]["Enter"],m_pOwner);
+    luabind::object state = l_GlobalTable[s.c_str()];
+    if( state )
+    {
+      luabind::object enter = state["Enter"];
+      if( enter )
+      {
+        luabind::call_function<void>(enter,m_pOwner);
+      }
+      else
+      {
+        LOGGER->AddNewLog(ELL_ERROR, "No funciona l'estat %s", s.c_str());
+      }
+    }
+    else
+    {
+      LOGGER->AddNewLog(ELL_ERROR, "No funciona l'estat %s", s.c_str());
+    }
   } catch(const luabind::error& _TheError)
   {
     CScriptManager::PrintError(_TheError);

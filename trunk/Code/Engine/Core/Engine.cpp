@@ -29,8 +29,8 @@ bool CEngine::Init(const SInitParams& _InitParams,  HWND hWnd)
   
   if(m_pActiveProcess) //TODO: Comprovar excepcio m_pProcess == NULL i logejar
   {
-    m_pActiveProcess->Init(); 
     m_pActiveProcess->RegisterLuaFunctions();
+    m_pActiveProcess->Init(); 
   }
   m_pHDR = new CHDRPipeline();
   if(!m_pHDR->Init(_InitParams.EngineParams.szHDRFile))

@@ -41,7 +41,7 @@ bool CComponentPhysXController::Init(CGameEntity *_pEntity,
   return IsOk();
 }
 
-void CComponentPhysXController::Update(float _fDeltaTime)
+void CComponentPhysXController::UpdatePrePhysX(float _fDeltaTime)
 {
   m_pPhysXController->Move(m_pMovement->m_vMovement, _fDeltaTime);
 }

@@ -21,6 +21,7 @@
 #include "SpotLight.h"
 #include "Camera.h"
 #include "ComponentStateMachine.h"
+#include "ComponentAnimation.h"
 
 #include "PhysicActor.h"
 #include <PhysicsManager.h>
@@ -58,6 +59,10 @@ bool CEntityProcess::Init()
   l_pComponentRenderableObject->m_fHeightAdjustment = -1.f;
   l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
 
+
+  (new CComponentAnimation())->Init(m_pPlayerEntity);
+
+
   CComponentPlayerController *l_pComponentPlayerController = new CComponentPlayerController();
   l_pComponentPlayerController->Init(m_pPlayerEntity,
                                       //Actions
@@ -85,15 +90,16 @@ bool CEntityProcess::Init()
   CComponent3rdPSCamera *l_pComponent3rdPSCamera = new CComponent3rdPSCamera();
   //l_pComponent3rdPSCamera->Init(m_pPlayerEntity, 0, 0);
   //((CThPSCamera*)l_pComponent3rdPSCamera->GetCamera())->SetZoom(0);
-  l_pComponent3rdPSCamera->Init(m_pPlayerEntity, 1, 0.5f);
+  l_pComponent3rdPSCamera->Init(m_pPlayerEntity, 0.8f, 0.4f, 2.f);
 
   m_pCamera = l_pComponent3rdPSCamera->GetCamera();
 
   CComponentPhysXController *l_pComponentPhysXController = new CComponentPhysXController();
-  l_pComponentPhysXController->Init(m_pPlayerEntity, 0.3f, 1.5f, 10.0f, 0.1f, 0.5f, 1);
+  l_pComponentPhysXController->Init(m_pPlayerEntity, 0.3f, 1.5f, 10.0f, 0.1f, 0.5f, ECG_PERSONATGE);
 
   (new CComponentVida())->Init(m_pPlayerEntity, 100.f);
 
+  LOGGER->SaveLogsInFile();
   (new CComponentStateMachine())->Init(m_pPlayerEntity, "State_Player_Neutre");
 
   //Carregar entitats de l'escenari ----------------------------------------------------------------------------------------
@@ -107,7 +113,7 @@ bool CEntityProcess::Init()
   l_pComponentObject3D->SetPosition(Vect3f(8.0f,2.0f,4.0f));
   (new CComponentMovement)->Init(l_peEnemy);
 
-  (new CComponentPhysXController())->Init(l_peEnemy, 0.7f, 1.5f, 10.0f, 0.1f, 0.5f, 1);
+  (new CComponentPhysXController())->Init(l_peEnemy, 0.7f, 1.5f, 10.0f, 0.1f, 0.5f, ECG_ENEMICS);
 
   l_pComponentRenderableObject = new CComponentRenderableObject();
   l_pComponentRenderableObject->InitAnimatedModel(l_peEnemy, "Bot Character 1", "miner");

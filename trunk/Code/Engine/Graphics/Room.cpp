@@ -138,7 +138,7 @@ void CRoom::AddRendeableObject(CRenderableObject* _pRO)
   m_RenderableObjects.insert(_pRO);
 }
 
-void CRoom::RemoveRendeableObject(CRenderableObject* _RO)
+void CRoom::RemoveRendeableObject(CRenderableObject* _pRO)
 {
-  m_RenderableObjects.erase(_RO);
+  m_RenderableObjects.erase(_pRO);
 }
