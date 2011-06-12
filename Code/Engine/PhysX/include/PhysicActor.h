@@ -36,7 +36,7 @@ public:
 	CPhysicUserData*	GetUserData				() {return m_pUserData;}
 	void							SetLinearVelocity	(const Vect3f& velocity);
 	Vect3f						GetPosition				();
-	void							CreateBody				(float density, float angularDamping = 0.5f);
+	void							CreateBody				(float density, float angularDamping = 0.5f, float linearDamping = 0.5f);
 	void							SetGlobalPosition	(const Vect3f& pos = Vect3f(0.f,0.f,0.f));
 
 	//---AddShape Functions-----
@@ -58,6 +58,8 @@ public:
 	void							CreateActor				(NxActor* actor);
 	NxActor*					GetPhXActor				() {return m_pPhXActor;}
 	NxActorDesc*			GetActorDesc			() {return m_pPhXActorDesc;}
+
+  void              SetActorSolverIterationCount(int _iCount);
 
 private:
 	void							DeInit						();

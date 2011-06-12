@@ -150,8 +150,8 @@ void CPhysicSphericalJoint::SetInfoRagdoll	(SSphericalLimitInfo _sInfo, CPhysicA
     m_pSphericalDesc->twistLimit.high.value = _sInfo.TwistHighValue*NxPi;
     m_pSphericalDesc->twistLimit.high.restitution = _sInfo.TwistHighRestitution;
 
-    m_pSphericalDesc->twistLimit.low.hardness = 0.30f;
-    m_pSphericalDesc->twistLimit.high.hardness = 0.30f;
+    m_pSphericalDesc->twistLimit.low.hardness = 0.5f;
+    m_pSphericalDesc->twistLimit.high.hardness = 0.5f;
 
   }
 
@@ -161,7 +161,7 @@ void CPhysicSphericalJoint::SetInfoRagdoll	(SSphericalLimitInfo _sInfo, CPhysicA
     m_pSphericalDesc->flags |= NX_SJF_SWING_LIMIT_ENABLED;
     m_pSphericalDesc->swingLimit.value = _sInfo.SwingValue*NxPi;
     m_pSphericalDesc->swingLimit.restitution = _sInfo.SwingRestitution;
-    m_pSphericalDesc->swingLimit.hardness = 0.30f;
+    m_pSphericalDesc->swingLimit.hardness = 0.5f;
   }
 
   //Twist Spring Enabled
@@ -188,12 +188,10 @@ void CPhysicSphericalJoint::SetInfoRagdoll	(SSphericalLimitInfo _sInfo, CPhysicA
     m_pSphericalDesc->jointSpring.spring = _sInfo.JointSpringValue;
   }
 
-  m_pSphericalDesc->projectionMode = NX_JPM_NONE;
+  //TODO: Passar per parametre
+  m_pSphericalDesc->projectionMode = NX_JPM_POINT_MINDIST;
   m_pSphericalDesc->projectionDistance = 0.22f;
-  
-  //m_pSphericalDesc->jointSpring = 0.0f;
-  //m_pSphericalDesc->projectionDistance = 0.01;
-  //m_pSphericalDesc->solverExtrapolationFactor = 1.9;
+  m_pSphericalDesc->solverExtrapolationFactor = 1.1;
   
   //Projection per errors
   /*m_pSphericalDesc->projectionMode = NX_JPM_POINT_MINDIST;

@@ -22,19 +22,23 @@ public:
   virtual void Release();
 
   bool              Init(const string& _szFileName, CalModel* _pCalModel, Mat44f _vMat);
-  CalSkeleton*      GetSkeleton()                         {return m_pCalSkeleton;};
+  const CalSkeleton* GetSkeleton()                        {return m_pCalSkeleton;};
   void              SetSkeleton(CalSkeleton* _pSkeleton)  {m_pCalSkeleton = _pSkeleton;};
-  const Mat44f&     GetRenderableMatrix()                 {return m_vMat44;};
-
+  const Mat44f&     GetTransform()                 {return m_mTransform;};
+  void              SetTransform(const Mat44f& _mTransform) {m_mTransform = _mTransform;};
 
   bool              IsRagdollActive()                     {return m_bRagdollActive;};  
-  void              ActivateRagdoll()                     {m_bRagdollActive = true;};
-  void              ActivateCal3d()                       {m_bRagdollActive = false;};
-  void              ToogleRagdollActive();
+  //void              ActivateRagdoll()                     {m_bRagdollActive = true;};
+  //void              ActivateCal3d()                       {m_bRagdollActive = false;};
+  void              SetRagdollActive(bool _bRagdollActive);
   void              WakeUpPhysxBones();
   void              SleepPhysxBones();
   bool              IsRagdollPhysXActor(string _szName);
 
+  void Update();
+
+
+private:
   //Funcions per inicialitzar el esquelet corresponent
   bool              Load(string _szFileName);
   void              InitParents();
@@ -46,15 +50,12 @@ public:
   bool				              AddFixedJoint(CXMLTreeNode _XMLObjects);
   bool				              AddRevoluteJoint(CXMLTreeNode _XMLObjects);
   SSphericalLimitInfo				GetJointParameterInfo(CXMLTreeNode _XMLObjects);
-  
 
-  void Update();
   void UpdateCal3dFromPhysx();
   void UpdatePhysxFromCal3d();
 
-private:
   CalSkeleton*                    m_pCalSkeleton;
-  Mat44f                          m_vMat44;
+  Mat44f                          m_mTransform;
   vector<CPhysxBone*>             m_vBones;
   vector<CPhysicFixedJoint*>      m_vFixedJoints;
   vector<CPhysicSphericalJoint*>  m_vSphericalJoints;

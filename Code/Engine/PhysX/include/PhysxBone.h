@@ -24,7 +24,7 @@ public:
   virtual void        Release();
 
   void                UpdateCal3dFromPhysx();
-  void                UpdatePhysxFromCal3d();
+  void                UpdatePhysxFromCal3d(const Mat44f& _mTransform);
 
   //GETERS I SETERS
   CalBone*            GetCalBone()                           {return m_pCalBone;};
@@ -35,7 +35,7 @@ public:
   void                SetPhysxActor(CPhysicActor* _pActor)   {m_pActor = _pActor;};
   void                SetCalBone(CalBone* _pCalBone)         {m_pCalBone = _pCalBone;};
   void                SetParent(CPhysxBone* _pParent)        {m_pParent = _pParent;};
-  const Mat44f&       GetRenderableMatrix()                  {return m_vMatActor;};
+  const Mat44f&       GetTransform()                         {return m_vMatActor;};
   
   
   bool                IsBoneRoot()                           {return m_bRoot;};

@@ -102,6 +102,13 @@ void CPhysicActor::CreateActor(NxActor* actor)
 	DeInit();
 }
 
+void CPhysicActor::SetActorSolverIterationCount(int _iCount)
+{
+  if(m_pPhXActor)
+  {
+    m_pPhXActor->setSolverIterationCount(_iCount);
+  }
+}
 
 void CPhysicActor::SetLinearVelocity (const Vect3f& velocity)
 {
@@ -210,7 +217,7 @@ void CPhysicActor::AddPlaneShape (const Vect3f& normal, float distance, uint32 g
 
 }
 
-void CPhysicActor::CreateBody (float density, float angularDamping)
+void CPhysicActor::CreateBody (float density, float angularDamping, float linearDamping)
 {
 	if( density != 0 )
 	{
@@ -218,6 +225,7 @@ void CPhysicActor::CreateBody (float density, float angularDamping)
 
 		// Create body
 		m_pPhXBodyDesc->angularDamping	= angularDamping;
+    m_pPhXBodyDesc->linearDamping = linearDamping;
 		m_pPhXActorDesc->body			= m_pPhXBodyDesc;
 		m_pPhXActorDesc->density = density;
 	}	
