@@ -34,6 +34,7 @@
 #include "PhysicCookingMesh.h"
 #include "ActionManager.h"
 #include "PhysxGrenade.h"
+#include "ShoulderCamera.h"
 
 #include "SpotLight.h"
 #include "Camera.h"
@@ -128,6 +129,14 @@ bool CPhysXProcess::Init()
 
   m_bStateChanged = false;
 
+
+  /*m_pObjectCamera = new CShoulderCamera(
+      0.1f,
+      100.0f,
+      55.0f * FLOAT_PI_VALUE/180.0f,
+      ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
+      m_pObject,
+      2.0f,0.6f,1.5f);*/
   m_pObjectCamera = new CThPSCamera(
     0.1f,
     100.0f,
@@ -1137,11 +1146,7 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
       Vect3f l_vDirection(l_CInfo.m_CollisionPoint.x - l_vVect.x, l_CInfo.m_CollisionPoint.y - l_vVect.y, l_CInfo.m_CollisionPoint.z - l_vVect.z);
       l_vDirection.Normalize();
 
-      
-
-   
-
-      CPhysxGrenade* l_pGrenade = new CPhysxGrenade("Granada" + g_vGrenadesVector.size(),7.0f,3.0f,100.0f);
+      CPhysxGrenade* l_pGrenade = new CPhysxGrenade("Granada" + g_vGrenadesVector.size(),7.0f,3.0f,25.0f);
       if (g_pUserDataSHOOT != 0)
       {
         l_pGrenade->Init(0.1f,1.0f,GROUP_COLLIDABLE_PUSHABLE,l_vVect,l_vDirection,20.0f); 

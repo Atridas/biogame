@@ -737,7 +737,7 @@ void CPhysicsManager::OverlapSphereActor (float radiusSphere, const Vect3f& posS
 	}
 }
 
-void CPhysicsManager::OverlapSphereActorGrenade (float radiusSphere, const Vect3f& posSphere, std::vector<CPhysicUserData*> impactObjects)
+void CPhysicsManager::OverlapSphereActorGrenade (float radiusSphere, const Vect3f& posSphere, std::vector<CPhysicUserData*> impactObjects, float _fPower)
 {
 	assert(m_pScene);
 
@@ -776,6 +776,7 @@ void CPhysicsManager::OverlapSphereActorGrenade (float radiusSphere, const Vect3
       {
 				impactObjects.push_back(physicObject);
         physicObject->SetColor(colRED);
+        ApplyExplosion(actor,posSphere,radiusSphere,_fPower);
       }
 		}
     //delete &shapes[i];
@@ -821,9 +822,27 @@ void CPhysicsManager::RegisterFunctions (CScriptManager* scriptManager)
  //   ];
 }
 
-void CPhysicsManager::ApplyExplosion()
+void CPhysicsManager::ApplyExplosion(NxActor* _pActor,const Vect3f& _vPosSphere, float _fEffectRadius, float _fPower)
 {
 
+  Vect3f l_vVelocityDirection;
+  Vect3f l_vActorPosition;
+  float l_fDistance;
+  float l_fTotalPower;
+
+  NxVec3 l_vPos = _pActor->getGlobalPosition();
+  l_vActorPosition = Vect3f(l_vPos.x,l_vPos.y,l_vPos.z);
+
+  l_vVelocityDirection = l_vActorPosition-_vPosSphere;
+  l_vVelocityDirection.Normalize();
+
+  l_fDistance = _vPosSphere.Distance(l_vActorPosition);
+  l_fTotalPower = _fPower*((_fEffectRadius-l_fDistance)/_fEffectRadius);
+
+  NxF32 coeff = _pActor->getMass() * l_fTotalPower;
+  NxVec3 l_vDirection(l_vVelocityDirection.x,l_vVelocityDirection.y,l_vVelocityDirection.z);
+  _pActor->addForceAtLocalPos(l_vDirection*coeff, NxVec3(0,0,0), NX_IMPULSE,true);
+ 
 }
 
 
