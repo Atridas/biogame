@@ -37,9 +37,14 @@ State_Player_Neutre = {}
 State_Player_Neutre['Enter'] = function(_jugador)
   log('enter player neutre')
   
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
-  animation:set_cycle('idle', 0.3)
   
+  if player_controller.current_animation ~= 'idle' then
+    animation:clear_cycle(0.3)
+    animation:set_cycle('idle', 0.3)
+    player_controller.current_animation = 'idle'
+  end
   
 end
 
@@ -47,7 +52,11 @@ end
 State_Player_Neutre['Exit'] = function(_jugador)
   log('exit player neutre')
   
+  local animation = _jugador:get_component(BaseComponent.animation)
   animation:clear_cycle(0.3)
+  
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  player_controller.current_animation = ''
 end
 
 -------------------------------------------------------------------------------------------------
@@ -57,9 +66,11 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   local moviment = _jugador:get_component(BaseComponent.movement)
   
   local animation = _jugador:get_component(BaseComponent.animation)
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
   
   local speed = 5
   
+  local direction, left
   local isMoving = false
   
   if ACTION_MANAGER:is_action_active('Aim') then
@@ -71,8 +82,11 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
     direction = Vect3f(math.cos(yaw), 0, math.sin(yaw) )
     moviment.movement = moviment.movement + direction * (_dt) * speed
     
-    animation:clear_cycle(0.3)
-    animation:set_cycle('walk', 0.3)
+    if player_controller.current_animation ~= 'walk' then
+      animation:clear_cycle(0.3)
+      animation:set_cycle('walk', 0.3)
+      player_controller.current_animation = 'walk'
+    end
     isMoving = true
   end
   
@@ -80,8 +94,11 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
     direction = Vect3f(math.cos(yaw), 0, math.sin(yaw) )
     moviment.movement = moviment.movement - direction * (_dt) * speed
     
-    animation:clear_cycle(0.3)
-    animation:set_cycle('walk back', 0.3)
+    if player_controller.current_animation ~= 'walk back' then
+      animation:clear_cycle(0.3)
+      animation:set_cycle('walk back', 0.3)
+      player_controller.current_animation = 'walk back'
+    end
     isMoving = true
   end
   
@@ -89,8 +106,11 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
     left = Vect3f(math.cos(yaw + math.pi / 2), 0, math.sin(yaw + math.pi / 2) )
     moviment.movement = moviment.movement + left * (_dt) * speed
     
-    animation:clear_cycle(0.3)
-    animation:set_cycle('walk', 0.3)
+    if player_controller.current_animation ~= 'walk' then
+      animation:clear_cycle(0.3)
+      animation:set_cycle('walk', 0.3)
+      player_controller.current_animation = 'walk'
+    end
     isMoving = true
   end
   
@@ -98,14 +118,20 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
     left = Vect3f(math.cos(yaw + math.pi / 2), 0, math.sin(yaw + math.pi / 2) )
     moviment.movement = moviment.movement - left * (_dt) * speed
     
-    animation:clear_cycle(0.3)
-    animation:set_cycle('walk', 0.3)
+    if player_controller.current_animation ~= 'walk' then
+      animation:clear_cycle(0.3)
+      animation:set_cycle('walk', 0.3)
+      player_controller.current_animation = 'walk'
+    end
     isMoving = true
   end
   
   if not isMoving then
-    animation:clear_cycle(0.3)
-    animation:set_cycle('idle', 0.3)
+    if player_controller.current_animation ~= 'idle' then
+      animation:clear_cycle(0.3)
+      animation:set_cycle('idle', 0.3)
+      player_controller.current_animation = 'idle'
+    end
   end
   
 end
@@ -129,8 +155,11 @@ State_Player_Apuntar['Enter'] = function(_jugador)
   
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
-  animation:set_cycle('aim', 0.3)
-  player_controller.current_animation = ''
+  if player_controller.current_animation ~= 'aim' then
+    animation:clear_cycle(0.3)
+    animation:set_cycle('aim', 0.3)
+    player_controller.current_animation = 'aim'
+  end
   
 end
 
@@ -141,12 +170,11 @@ State_Player_Apuntar['Exit'] = function(_jugador)
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
   
-  if not player_controller.current_animation == "" then
-    animation:clear_cycle(player_controller.current_animation,0.3)
-  else
-    animation:clear_cycle(0.3)
-  end
   
+  if player_controller.current_animation ~= 'aim' then
+    animation:clear_cycle(player_controller.current_animation,0.3)
+  end
+  animation:clear_cycle('aim',0.3)
   
   player_controller.current_animation = ''
 end
@@ -170,16 +198,18 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
   local animation = _jugador:get_component(BaseComponent.animation)
   local speed = 5
   
+  local direction, left
   local isMoving = false
   
   if ACTION_MANAGER:is_action_active('MoveFwd') then
     direction = Vect3f(math.cos(yaw), 0, math.sin(yaw) )
     moviment.movement = moviment.movement + direction * (_dt) * speed
     
-    if player_controller.current_animation == '' then
-      animation:set_cycle('walk', 0.3)
-    else
-      animation:clear_cycle(player_controller.current_animation, 0.3)
+    
+    if player_controller.current_animation ~= 'walk' then
+      if player_controller.current_animation ~= 'aim' then
+        animation:clear_cycle(player_controller.current_animation,0.3)
+      end
       animation:set_cycle('walk', 0.3)
       player_controller.current_animation = 'walk'
     end
@@ -190,9 +220,14 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
     direction = Vect3f(math.cos(yaw), 0, math.sin(yaw) )
     moviment.movement = moviment.movement - direction * (_dt) * speed
     
-    animation:clear_cycle(0.3)
-    animation:set_cycle('aim', 0.3)
-    animation:set_cycle('walk back', 0.3)
+    
+    if player_controller.current_animation ~= 'walk back' then
+      if player_controller.current_animation ~= 'aim' then
+        animation:clear_cycle(player_controller.current_animation,0.3)
+      end
+      animation:set_cycle('walk back', 0.3)
+      player_controller.current_animation = 'walk back'
+    end
     isMoving = true
   end
   
@@ -200,9 +235,13 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
     left = Vect3f(math.cos(yaw + math.pi / 2), 0, math.sin(yaw + math.pi / 2) )
     moviment.movement = moviment.movement + left * (_dt) * speed
     
-    animation:clear_cycle(0.3)
-    animation:set_cycle('aim', 0.3)
-    animation:set_cycle('walk', 0.3)
+    if player_controller.current_animation ~= 'walk' then
+      if player_controller.current_animation ~= 'aim' then
+        animation:clear_cycle(player_controller.current_animation,0.3)
+      end
+      animation:set_cycle('walk', 0.3)
+      player_controller.current_animation = 'walk'
+    end
     isMoving = true
   end
   
@@ -210,17 +249,23 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
     left = Vect3f(math.cos(yaw + math.pi / 2), 0, math.sin(yaw + math.pi / 2) )
     moviment.movement = moviment.movement - left * (_dt) * speed
     
-    animation:clear_cycle(0.3)
-    animation:set_cycle('aim', 0.3)
-    animation:set_cycle('walk', 0.3)
+    if player_controller.current_animation ~= 'walk' then
+      if player_controller.current_animation ~= 'aim' then
+        animation:clear_cycle(player_controller.current_animation,0.3)
+      end
+      animation:set_cycle('walk', 0.3)
+      player_controller.current_animation = 'walk'
+    end
     isMoving = true
   end
   
   
   if not isMoving then
-    animation:clear_cycle(0.3)
-    animation:set_cycle('aim', 0.3)
-    player_controller.current_animation = ''
+    if player_controller.current_animation ~= 'aim' then
+      animation:clear_cycle(player_controller.current_animation,0.3)
+      --animation:set_cycle('aim', 0.3)
+      player_controller.current_animation = 'aim'
+    end
   end
 end
 
