@@ -79,11 +79,7 @@
   
   
   <action name="Run">
-    <input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN" Code="KEY_LSHIFT"/>
-  </action>
-
-  <action name="Walk">
-    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_LSHIFT"/>
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_LSHIFT"/>
   </action>
 
   <action name="MoveFwd">
