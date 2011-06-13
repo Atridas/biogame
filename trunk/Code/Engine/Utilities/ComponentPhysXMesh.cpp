@@ -11,7 +11,7 @@
 
 #include "ComponentPhysXMesh.h"
 
-bool CComponentPhysXMesh::Init(CGameEntity* _pEntity, float _fDensity, int _iCollisionMask)
+bool CComponentPhysXMesh::Init(CGameEntity* _pEntity, float _fDensity, int _iCollisionGroup)
 {
   assert(_pEntity->IsOk());
   SetEntity(_pEntity);
@@ -48,7 +48,7 @@ bool CComponentPhysXMesh::Init(CGameEntity* _pEntity, float _fDensity, int _iCol
     m_pPhysXActor->CreateBody(_fDensity);
   }
 
-  m_pPhysXActor->AddMeshShape(l_pMesh,v3fZERO,_iCollisionMask);
+  m_pPhysXActor->AddMeshShape(l_pMesh,v3fZERO,_iCollisionGroup);
 
 
   CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXActor);

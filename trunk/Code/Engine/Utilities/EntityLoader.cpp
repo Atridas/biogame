@@ -12,6 +12,8 @@
 #include "ComponentRenderableObject.h"
 #include "ComponentTrigger.h"
 
+#include "PhysicsManager.h"
+
 #include "base.h"
 #include "Core.h"
 
@@ -28,42 +30,6 @@ enum ECollisionGroup {
   ECG_EXPLOSIONS = 64
 }
 */
-
-int GetCollisionGroups(const string& _szGroup)
-{
-  if(_szGroup == "escenari")
-  {
-    return ECG_ESCENARI | ECG_PERSONATGE | ECG_ENEMICS | ECG_OBJECTES_DINAMICS;
-  }
-  else if(_szGroup == "personatge")
-  {
-    return ECG_ESCENARI | ECG_PERSONATGE | ECG_ENEMICS | ECG_OBJECTES_DINAMICS | ECG_TRIGGERS | ECG_EXPLOSIONS;
-  }
-  else if(_szGroup == "enemic")
-  {
-    return ECG_ESCENARI | ECG_PERSONATGE | ECG_ENEMICS | ECG_OBJECTES_DINAMICS | ECG_EXPLOSIONS;
-  }
-  else if(_szGroup == "triggers")
-  {
-    return ECG_PERSONATGE | ECG_TRIGGERS;
-  }
-  else if(_szGroup == "cobertura")
-  {
-    return ECG_COBERTURES;
-  }
-  else if(_szGroup == "objecte dinamic")
-  {
-    return ECG_ESCENARI | ECG_PERSONATGE | ECG_ENEMICS | ECG_OBJECTES_DINAMICS | ECG_EXPLOSIONS;
-  }
-  else if(_szGroup == "explosio")
-  {
-    return ECG_PERSONATGE | ECG_ENEMICS | ECG_OBJECTES_DINAMICS | ECG_EXPLOSIONS;
-  }
-  else
-  {
-    return 0;
-  }
-}
 
 void LoadComponentObject3D(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 {
@@ -109,7 +75,7 @@ void LoadComponentPhysXBox(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
   float l_fDensity = _TreeComponent.GetFloatProperty("density", 0.f, false);
 
   //TODO mascares
-  int l_iCollisionMask = GetCollisionGroups(_TreeComponent.GetPszISOProperty("collision_group", "", true));
+  int l_iCollisionMask = GetCollisionGroup(_TreeComponent.GetPszISOProperty("collision_group", "", true));
 
   if(strcmp(_TreeComponent.GetPszISOProperty("fromRenderableObject").c_str(),"true") == 0)
   {
@@ -147,7 +113,7 @@ void LoadComponentPhysXMesh(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
   float l_fDensity = _TreeComponent.GetFloatProperty("density", 0.f, false);
 
   //TODO mascares
-  int l_iCollisionMask = GetCollisionGroups(_TreeComponent.GetPszISOProperty("collision_group", "", true));
+  int l_iCollisionMask = GetCollisionGroup(_TreeComponent.GetPszISOProperty("collision_group", "", true));
 
   LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant Mesh física des del Renderable Object.");
   CComponentPhysXMesh* l_pComponentPhysXMesh = new CComponentPhysXMesh();
@@ -164,7 +130,7 @@ void LoadComponentTrigger(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
   LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant Trigger.");
 
   //TODO mascares
-  int l_iCollisionMask = GetCollisionGroups(_TreeComponent.GetPszISOProperty("collision_group", "", true));
+  int l_iCollisionMask = GetCollisionGroup(_TreeComponent.GetPszISOProperty("collision_group", "", true));
   Vect3f l_vSize = _TreeComponent.GetVect3fProperty("size", Vect3f(1), true);
   string l_szOnEnter = _TreeComponent.GetPszISOProperty("onEnter", "", false);
   string l_szOnExit = _TreeComponent.GetPszISOProperty("onExit", "", false);
@@ -188,6 +154,7 @@ void LoadComponentTrigger(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 
 void LoadComponentHighCover(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 {
+  LOGGER->AddNewLog(ELL_WARNING,"\tHigh Cover no implementat");
   //LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant Cobertura.");
   //
   ////TODO mascares
@@ -208,6 +175,7 @@ void LoadComponentHighCover(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 
 void LoadComponentLowCover(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 {
+  LOGGER->AddNewLog(ELL_WARNING,"\tLow Cover no implementat");
   //LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant Cobertura.");
   //
   ////TODO mascares
@@ -295,6 +263,11 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
               LoadComponentPhysXMesh(l_TreeComponent, l_pEntity);
 
             // ----------------- Trigger --------------------------------------------------------------------------------
+            } else if(strcmp(l_TreeComponent.GetName(),"Trigger") == 0)
+            {
+              LoadComponentTrigger(l_TreeComponent, l_pEntity);
+
+            // -----------------------------------------------------------------------------------------------------------
             } else if(strcmp(l_TreeComponent.GetName(),"HighCover") == 0)
             {
               LoadComponentHighCover(l_TreeComponent, l_pEntity);
@@ -307,7 +280,7 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
             // -----------------------------------------------------------------------------------------------------------
             } else if(!l_TreeComponent.IsComment())
             {
-              LOGGER->AddNewLog(ELL_WARNING,"\tNode \"%s\" no reconegut!", l_TreeEntities.GetName());
+              LOGGER->AddNewLog(ELL_WARNING,"\tNode \"%s\" no reconegut!", l_TreeComponent.GetName());
             }
           }
 

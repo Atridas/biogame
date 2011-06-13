@@ -109,7 +109,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pGUIManager->Init(_InitParams.GUIManagerParams.szXML);
   m_pGUIManager->ActiveWindows(_InitParams.GUIManagerParams.szInitWindow);
   m_pGUIManager->SetVisiblePointerMouse(_InitParams.GUIManagerParams.bRenderMouse);
-  m_pPhysicsManager->Init();
+  m_pPhysicsManager->Init(_InitParams.PhysXManagerParams.szFile);
   m_pPhysicsManager->SetTriggerReport(m_pPhysicTriggerReport);
   
   if(!m_pSoundManager->Init(_InitParams.SoundManagerParams.szFile))

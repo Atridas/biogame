@@ -7,6 +7,8 @@
 #include "ScriptManager.h"
 //#include "Base/Math/Matrix44.h"
 
+#include "XML\XMLTreeNode.h"
+
 //#include "luabind.hpp"
 
 ////----PhysX Includes-------------
@@ -35,7 +37,7 @@
 //----------------------------------------------------------------------------
 // Init data
 //----------------------------------------------------------------------------
-bool CPhysicsManager::Init ()
+bool CPhysicsManager::Init (const string& _physXConfig)
 {
 	m_pMyAllocator = new CPhysicUserAllocator;
 	assert(m_pMyAllocator);
@@ -127,6 +129,45 @@ bool CPhysicsManager::Init ()
 		Release();
 		throw CException(__FILE__, __LINE__, msg_error);
 	}
+  else
+  {
+    CXMLTreeNode l_xmlPhysX;
+    if(!l_xmlPhysX.LoadFile(_physXConfig.c_str()))
+    {
+      LOGGER->AddNewLog(ELL_WARNING, "No s'ha pogut carregar el fitxer d'init del PhysX Manager \"%s\"", _physXConfig.c_str());
+    }
+    else
+    {
+      LOGGER->AddNewLog(ELL_INFORMATION, "Carregant init del PhysX Manager \"%s\"", _physXConfig.c_str());
+      int l_iNumC = l_xmlPhysX.GetNumChildren();
+      for(int i = 0; i < l_iNumC; ++i)
+      {
+        CXMLTreeNode l_xmlCollision = l_xmlPhysX(i);
+        if(strcmp(l_xmlCollision.GetName(), "collision") == 0)
+        {
+          string l_szGroup1 = l_xmlCollision.GetPszISOProperty("group1","",true);
+          string l_szGroup2 = l_xmlCollision.GetPszISOProperty("group2","",true);
+          int    l_iGroup1  = GetCollisionGroup(l_szGroup1);
+          int    l_iGroup2  = GetCollisionGroup(l_szGroup2);
+          
+          m_CollisionMasks[l_iGroup1] |= 1 << l_iGroup1;
+          m_CollisionMasks[l_iGroup1] |= 1 << l_iGroup2;
+          
+          m_CollisionMasks[l_iGroup2] |= 1 << l_iGroup1;
+          m_CollisionMasks[l_iGroup2] |= 1 << l_iGroup2;
+
+          m_pScene->setGroupCollisionFlag(l_iGroup1,l_iGroup2,true);
+          LOGGER->AddNewLog(ELL_INFORMATION, "Colisió etre el grup %d (%s) i el grup %d (%s)", 
+                                                                    l_iGroup1, l_szGroup1.c_str(), 
+                                                                    l_iGroup2, l_szGroup2.c_str());
+        }
+        else if(!l_xmlCollision.IsComment())
+        {
+          LOGGER->AddNewLog(ELL_WARNING, "Element no reconegut \"%s\"", l_xmlCollision.GetName());
+        }
+      }
+    }
+  }
 
 	return m_bIsOk;
 }
@@ -523,6 +564,9 @@ bool CPhysicsManager::AddPhysicController (CPhysicController* controller)
 	{
 		controller->CreateController(nxController, m_pScene);
 		nxController->getActor()->userData = controller->GetUserData();
+    //NxShape*const* shape = nxController->getActor()->getShapes();
+    //shape[0]->setGroup(controller->);
+
 		isOK = true;
 	}
 
@@ -789,4 +833,42 @@ bool CPhysicsManager::Load(const string& _szFileName, bool _bReload)
 
 
   return true;
+}
+
+
+
+int GetCollisionGroup(const string& _szGroup)
+{
+  if(_szGroup == "escenari")
+  {
+    return ECG_ESCENARI;
+  }
+  else if(_szGroup == "personatge")
+  {
+    return ECG_PERSONATGE;
+  }
+  else if(_szGroup == "enemic")
+  {
+    return ECG_ENEMICS;
+  }
+  else if(_szGroup == "trigger")
+  {
+    return ECG_TRIGGERS;
+  }
+  else if(_szGroup == "cobertura")
+  {
+    return ECG_COBERTURES;
+  }
+  else if(_szGroup == "objecte dinamic")
+  {
+    return ECG_OBJECTES_DINAMICS;
+  }
+  else if(_szGroup == "explosio")
+  {
+    return ECG_EXPLOSIONS;
+  }
+  else
+  {
+    return 0;
+  }
 }

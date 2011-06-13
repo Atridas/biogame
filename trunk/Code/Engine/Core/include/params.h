@@ -211,6 +211,16 @@ struct SSoundManagerParams
   {};
 };
 
+struct SPhysXManagerParams
+{
+  string szFile;
+
+  //Default Params
+  SPhysXManagerParams():
+    szFile("Data/XML/PhysX.xml")
+  {};
+};
+
 /**
  * Paràmetres d'inicialització del procés.
  * Estructura que conté els paràmetres de configuració que es poden trobar al config del procés.
@@ -246,6 +256,7 @@ struct SInitParams
   SLogRenderParams                LogRenderParams;
   SGUIManagerParams               GUIManagerParams;
   SSoundManagerParams             SoundManagerParams;
+  SPhysXManagerParams             PhysXManagerParams;
 };
 
 void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML);

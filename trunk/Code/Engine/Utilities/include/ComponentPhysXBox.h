@@ -10,12 +10,12 @@ class CComponentPhysXBox :
 {
 public:
   
-  bool Init(CGameEntity *_pEntity, float _fDensity, int _iCollisionMask);
+  bool Init(CGameEntity *_pEntity, float _fDensity, int _iCollisionGroup);
 
   bool Init(CGameEntity *_pEntity,
             float _fSizeX, float _fSizeY, float _fSizeZ,
             float _fPosX , float _fPosY , float _fPosZ,
-            float _fDensity, int _iCollisionMask
+            float _fDensity, int _iCollisionGroup
             );
 };
 

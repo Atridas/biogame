@@ -9,7 +9,7 @@
 
 bool CComponentPhysXController::Init(CGameEntity *_pEntity,
             float radius, float height, float slope, float skinwidth, 
-		        float stepOffset, uint32 collisionGroups 
+		        float stepOffset, uint32 _iCollisionMask 
             )
 {
   assert(_pEntity->IsOk());
@@ -27,7 +27,7 @@ bool CComponentPhysXController::Init(CGameEntity *_pEntity,
   m_pPhysXData->SetEntity(_pEntity);
 
   m_pPhysXController = new CPhysicController(
-                                  radius, height, slope, skinwidth, stepOffset, collisionGroups,
+                                  radius, height, slope, skinwidth, stepOffset, _iCollisionMask,
                                   m_pPhysXData,
                                   m_pObject3D->GetPosition());
   

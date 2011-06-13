@@ -10,7 +10,7 @@ class CComponentPhysXMesh :
 {
 public:
 
-  bool Init(CGameEntity* _pEntity, float _fDensity, int _iCollisionMask);
+  bool Init(CGameEntity* _pEntity, float _fDensity, int _iCollisionGroup);
 
   virtual ~CComponentPhysXMesh(void) {Done();};
 };
