@@ -21,6 +21,8 @@ public:
   CMaterial() {};
   virtual ~CMaterial() {};
 
+  virtual bool ReloadTextures()     const = 0;
+
   virtual void Activate() = 0;
   virtual void Activate(int _iTextureMask) = 0;
   virtual int   GetMaterialType()   const = 0;

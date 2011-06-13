@@ -99,7 +99,7 @@ public:
    * @return True si tot ha anat bé, false sino.
    * @see Load(const std::string &_szPath)
   **/
-  bool Reload                           ()                          { Release(); return Load(m_szPath);};
+  bool Reload                           ()                          { return ReloadTextures(); } //Release(); return Load(m_szPath);};
   /**
    * Mètode de recàrrega desde fitxer.
    * Aquest mètode recarrega el model cal3d del nou fitxer especificat. Si la càrrega s'ha efectuat correctament quedarà en ok.
@@ -132,6 +132,8 @@ private:
    * @param _szFileName Nom del fitxer on es troba l'animació.
   **/
   bool LoadAnimation                   (const string& _szName, const std::string& _szFilename);
+
+  bool ReloadTextures();
 
   /**
    * Model Cal3D representat.

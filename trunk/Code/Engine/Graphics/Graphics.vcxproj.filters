@@ -7,12 +7,6 @@
     <Filter Include="FontManager">
       <UniqueIdentifier>{cebecdda-b9fc-4c4c-a8fe-2998b8af51e5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Texture">
-      <UniqueIdentifier>{21842c9d-8f5a-4376-b635-ffc94bfcb203}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="TextureManager">
-      <UniqueIdentifier>{3f3fdabc-e06f-4485-b1eb-201001e4132e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="StaticMesh">
       <UniqueIdentifier>{cdc76e40-6e6b-4649-bbfe-0683ecafa07d}</UniqueIdentifier>
     </Filter>
@@ -205,6 +199,12 @@
     <Filter Include="Lights\SpotLight">
       <UniqueIdentifier>{6128b30f-f93f-4f4d-8a5a-075a90330764}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Texture">
+      <UniqueIdentifier>{21842c9d-8f5a-4376-b635-ffc94bfcb203}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Texture\TextureManager">
+      <UniqueIdentifier>{3f3fdabc-e06f-4485-b1eb-201001e4132e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -232,7 +232,7 @@
       <Filter>Texture</Filter>
     </ClCompile>
     <ClCompile Include="TextureManager.cpp">
-      <Filter>TextureManager</Filter>
+      <Filter>Texture\TextureManager</Filter>
     </ClCompile>
     <ClCompile Include="StaticMesh.cpp">
       <Filter>StaticMesh</Filter>
@@ -363,7 +363,7 @@
       <Filter>Texture</Filter>
     </ClInclude>
     <ClInclude Include="include\TextureManager.h">
-      <Filter>TextureManager</Filter>
+      <Filter>Texture\TextureManager</Filter>
     </ClInclude>
     <ClInclude Include="include\RenderableVertexs.h">
       <Filter>Vertex\RenderableVertexs</Filter>
