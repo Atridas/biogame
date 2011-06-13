@@ -372,6 +372,24 @@ bool CStaticMesh::Load()
   return true;
 }
 
+bool CStaticMesh::ReloadTextures()
+{
+  vector<CMaterial*>::const_iterator l_it  = m_vMaterials.cbegin();
+  vector<CMaterial*>::const_iterator l_end = m_vMaterials.cend();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    if(!(*l_it)->ReloadTextures() )
+    {
+      SetOk(false);
+      return IsOk();
+    }
+  }
+
+  SetOk(true);
+  return IsOk();
+}
+
 void CStaticMesh::Render(CRenderManager *_pRM, bool _bInstanced) const
 {
     vector<CRenderableVertexs*>::const_iterator l_ItRV = m_RVs.begin();

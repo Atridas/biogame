@@ -6,6 +6,8 @@ class CMaterialDecorator : public CMaterial
 public:
   CMaterialDecorator(CMaterial* _pDecoratedMaterial) : m_pDecoratedMaterial(_pDecoratedMaterial) {};
   virtual ~CMaterialDecorator() {CHECKED_DELETE(m_pDecoratedMaterial)};
+
+  virtual bool ReloadTextures()        const {return m_pDecoratedMaterial->ReloadTextures();};
   
   virtual float GetParallaxHeight()    const {return m_pDecoratedMaterial->GetParallaxHeight();};
   virtual float GetBump()              const {return m_pDecoratedMaterial->GetBump();};

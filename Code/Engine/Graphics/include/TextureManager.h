@@ -46,7 +46,7 @@ public:
 
   virtual void Release();
 
-  CTexture *	GetDefualtTexture	() {return m_pDefaultTexture;}
+  CTexture *	GetDefaultTexture	() {return m_pDefaultTexture;}
 
 private:
   CTexture*													m_pDefaultTexture;

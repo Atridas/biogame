@@ -7,6 +7,8 @@ public:
   CEmptyMaterial() {};
   virtual ~CEmptyMaterial() {};
 
+  virtual bool ReloadTextures()        const {return true;};
+
   virtual void Activate() {};
   virtual void Activate(int _iMaterialMask) {};
   virtual float GetParallaxHeight()    const {return 0.0f;};

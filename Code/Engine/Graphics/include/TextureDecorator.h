@@ -10,7 +10,8 @@ public:
 
   virtual ~CTextureDecorator() {};
 
+  virtual bool ReloadTextures()        const { return m_pTexture->Reload() && m_pDecoratedMaterial->ReloadTextures();};
+
 protected:
   CTexture* m_pTexture;
 };
-

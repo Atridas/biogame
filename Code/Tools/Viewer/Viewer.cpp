@@ -1033,12 +1033,12 @@ void CViewer::ReloadCurrentMesh()
 void CViewer::ReloadCurrentAnimatedMesh()
 {
   //TODO: Peta al recaregar els animats al recalcular les binormals...
-  /*CRenderableAnimatedInstanceModel* l_pCurrentAnimatedMesh = (CRenderableAnimatedInstanceModel*)(*m_itCurrentAnimated);
+  CRenderableAnimatedInstanceModel* l_pCurrentAnimatedMesh = (CRenderableAnimatedInstanceModel*)(*m_itCurrentAnimated);
 
   if(l_pCurrentAnimatedMesh)
   {
     l_pCurrentAnimatedMesh->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->Reload();
-  }*/
+  }
 }
 
 void CViewer::ShowInfo()

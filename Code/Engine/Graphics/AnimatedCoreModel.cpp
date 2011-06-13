@@ -260,6 +260,23 @@ bool CAnimatedCoreModel::LoadAnimation(const string& _szName, const std::string&
   }
 }
 
+bool CAnimatedCoreModel::ReloadTextures()
+{
+  vector<CMaterial*>::const_iterator l_it  = m_vMaterials.cbegin();
+  vector<CMaterial*>::const_iterator l_end = m_vMaterials.cend();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    if(!(*l_it)->ReloadTextures() )
+    {
+      SetOk(false);
+      return IsOk();
+    }
+  }
+  SetOk(true);
+  return IsOk();
+}
+
 //TODO: MOLT DEBUG
 bool CAnimatedCoreModel::LoadVertexBuffer()
 {
