@@ -13,7 +13,7 @@
 bool CComponentPhysXBox::Init(CGameEntity *_pEntity,
             float _fSizeX, float _fSizeY, float _fSizeZ,
             float _fPosX , float _fPosY , float _fPosZ,
-            float _fDensity, int _iCollisionMask
+            float _fDensity, int _iCollisionGroup
             )
 {
   assert(_pEntity->IsOk());
@@ -35,7 +35,7 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity,
 
   m_pPhysXActor->AddBoxSphape(Vect3f( _fSizeX, _fSizeY, _fSizeZ), 
                             Vect3f( _fPosX , _fPosY , _fPosZ ),
-                            NULL, _iCollisionMask);
+                            NULL, _iCollisionGroup);
 
 
   CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXActor);
@@ -46,7 +46,7 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity,
 }
 
 
-bool CComponentPhysXBox::Init(CGameEntity *_pEntity, float _fDensity, int _iCollisionMask)
+bool CComponentPhysXBox::Init(CGameEntity *_pEntity, float _fDensity, int _iCollisionGroup)
 {
   assert(_pEntity->IsOk());
 
@@ -80,7 +80,7 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity, float _fDensity, int _iColl
 
   m_pPhysXActor->AddBoxSphape(l_pBB->GetDimension() * .5f, 
                             l_pBB->GetMiddlePoint(),
-                            NULL, _iCollisionMask);
+                            NULL, _iCollisionGroup);
 
 
   CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXActor);

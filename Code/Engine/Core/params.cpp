@@ -382,18 +382,30 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
       CXMLTreeNode l_TreeSoundManager = l_TreeConfig["SoundManager"];
       if(l_TreeSoundManager.Exists())
       {
-        const char* l_pcFile = l_TreeSoundManager.GetPszProperty("file", 0);
+        string l_pcFile = l_TreeSoundManager.GetPszISOProperty("file", InitParams_.SoundManagerParams.szFile.c_str(), true);
 
-        if(l_pcFile == 0)
-        {
-          LOGGER->AddNewLog(ELL_WARNING, "\tNo hi ha fitxer base del SoundManager.");
-        } else {
-          InitParams_.SoundManagerParams.szFile = l_pcFile;
-          LOGGER->AddNewLog(ELL_INFORMATION, "\tSoundManager base \"%s\"",l_pcFile);
-        }
+        InitParams_.SoundManagerParams.szFile = l_pcFile;
+        LOGGER->AddNewLog(ELL_INFORMATION, "\tSoundManager base \"%s\"",l_pcFile.c_str());
 
       } else {
         LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"SoundManager\". Usant valors per defecte.");
+      }
+    }
+
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
+    //PhysX Manager -----------------------------------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
+    {
+      CXMLTreeNode l_TreeSoundManager = l_TreeConfig["PhysXManager"];
+      if(l_TreeSoundManager.Exists())
+      {
+        string l_pcFile = l_TreeSoundManager.GetPszISOProperty("file", InitParams_.PhysXManagerParams.szFile.c_str(), true);
+
+        InitParams_.PhysXManagerParams.szFile = l_pcFile;
+        LOGGER->AddNewLog(ELL_INFORMATION, "\tSoundManager base \"%s\"",l_pcFile.c_str());
+
+      } else {
+        LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"PhysXManager\". Usant valors per defecte.");
       }
     }
   }

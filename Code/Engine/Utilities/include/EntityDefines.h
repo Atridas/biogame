@@ -33,16 +33,6 @@ struct SEvent {
   SEvent():Sender(-1),Receiver(-1),DispatchTime(0) {};
 };
 
-enum ECollisionGroup {
-  ECG_ESCENARI = 1,
-  ECG_PERSONATGE = 2,
-  ECG_ENEMICS = 4,
-  ECG_TRIGGERS = 8,
-  ECG_COBERTURES = 16,
-  ECG_OBJECTES_DINAMICS = 32,
-  ECG_EXPLOSIONS = 64
-};
-
 #include "BaseComponent.h"
 #include "GameEntity.h"
 #include "EntityManager.h"

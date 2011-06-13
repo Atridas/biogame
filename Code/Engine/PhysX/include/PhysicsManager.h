@@ -38,6 +38,17 @@ class CScriptManager;
 
 
 
+enum ECollisionGroup {
+  ECG_ESCENARI,
+  ECG_PERSONATGE,
+  ECG_ENEMICS,
+  ECG_TRIGGERS,
+  ECG_COBERTURES,
+  ECG_OBJECTES_DINAMICS,
+  ECG_EXPLOSIONS
+};
+
+int GetCollisionGroup(const string& _szGroup);
 
 //---- Declaracion de nuevos tipos------------
 struct SPhysicsInitParams
@@ -96,7 +107,7 @@ public:
 
 	~CPhysicsManager() {Done();}
 
-	bool								Init												();
+	bool								Init												(const string& _physXConfig);
 	void								Done												();
 	bool								IsOk												() const { return m_bIsOk; }
 	void								SetInitParams								(const SPhysicsInitParams& initParams) {m_InitParams = initParams;}
@@ -145,7 +156,8 @@ public:
 	NxCCDSkeleton*			CreateCCDSkeleton						(float size);
 
 	void								SetTriggerReport						(CPhysicTriggerReport* report);
-
+  
+  int GetCollisionMask (ECollisionGroup _szGroup) {return m_CollisionMasks[_szGroup];};
 
 private:
 	void								Release											();
@@ -155,6 +167,8 @@ private:
 private:
 	bool									m_bIsOk;
 	bool									m_bDebugRenderMode;
+
+  map<int, int> m_CollisionMasks;
 
 	//---PhysX------------------------------
 	NxPhysicsSDK*					m_pPhysicsSDK;

@@ -28,7 +28,7 @@ public:
 
   bool Init(CGameEntity *_Entity,
             float radius, float height, float slope, float skinwidth, 
-		        float stepOffset, uint32 collisionGroups 
+		        float stepOffset, uint32 _iCollisionMask 
             );
   
   void UpdatePrePhysX(float _fDeltaTime);
