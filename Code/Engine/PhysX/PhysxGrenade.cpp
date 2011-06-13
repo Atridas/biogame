@@ -39,13 +39,13 @@ void CPhysxGrenade::Explosion()
   Mat44f l_vMat44;
   m_pPhysxActor->GetMat44(l_vMat44);
 
-  l_pPM->OverlapSphereActorGrenade(m_fEffectRadius,l_vMat44.GetTranslationVector(),l_vUserDatas);
+  l_pPM->OverlapSphereActorGrenade(m_fEffectRadius,l_vMat44.GetTranslationVector(),l_vUserDatas,m_fFirePower);
 
-  for(size_t i=0;i<l_vUserDatas.size();++i)
+ /* for(size_t i=0;i<l_vUserDatas.size();++i)
   {
     l_vUserDatas[i]->SetColor(colRED);
   }
-
+*/
   m_bExploted = true;
   m_pPhysxUserData->SetPaint(false);
   //m_pPhysxUserData->SetColor(colRED);
