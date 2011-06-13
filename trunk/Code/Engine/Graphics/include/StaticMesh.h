@@ -46,7 +46,7 @@ public:
    * @return True si s'ha carregat correctament, false sino.
    * @see Load (const string &_szFileName)
   **/
-  bool Reload() {Done(); SetOk(Load()); IsOk() ? SetOk(ReloadTextures()) : false ; return IsOk();};
+  bool Reload() {Done(); SetOk(Load()); IsOk() ? ReloadTextures() : false ; return IsOk();};
   /**
    * Mètode de render.
    * Aquest mètode renderitza la malla.
