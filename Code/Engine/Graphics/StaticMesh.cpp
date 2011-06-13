@@ -377,17 +377,17 @@ bool CStaticMesh::ReloadTextures()
   vector<CMaterial*>::const_iterator l_it  = m_vMaterials.cbegin();
   vector<CMaterial*>::const_iterator l_end = m_vMaterials.cend();
 
+  bool l_bIsOk = true;
+
   for(; l_it != l_end; ++l_it)
   {
     if(!(*l_it)->ReloadTextures() )
     {
-      SetOk(false);
-      return IsOk();
+      l_bIsOk = false;
     }
   }
 
-  SetOk(true);
-  return IsOk();
+  return l_bIsOk;
 }
 
 void CStaticMesh::Render(CRenderManager *_pRM, bool _bInstanced) const
