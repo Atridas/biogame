@@ -6,7 +6,7 @@ bool CComponentStateMachine::Init(CGameEntity* _pEntity, const string& _pEstatIn
   assert(_pEntity->IsOk());
   SetEntity(_pEntity);
 
-  m_pStateMachine = new CScriptedStateMachine(_pEntity);
+  m_pStateMachine = new CScriptedStateMachine(_pEntity,_pEstatInicial,"");
 
   m_pStateMachine->SetCurrentState(_pEstatInicial);
 

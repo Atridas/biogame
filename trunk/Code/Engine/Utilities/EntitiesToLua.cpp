@@ -24,6 +24,7 @@ extern "C"
 #include "ComponentMovement.h"
 #include "ComponentAnimation.h"
 #include "ComponentStateMachine.h"
+#include "ComponentIABrain.h"
 #include "ScriptedStateMachine.h"
 
 
@@ -81,19 +82,20 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CBaseComponent>("BaseComponent")
       .enum_("ComponentType")
       [
-          value("object_3d",           CBaseComponent::ECT_OBJECT_3D),
-          value("movement",            CBaseComponent::ECT_MOVEMENT),
-          value("player_controller",   CBaseComponent::ECT_PLAYER_CONTROLLER),
-          value("ia_walk_to_player",   CBaseComponent::ECT_IA_WALK_TO_PLAYER),
-          value("physx_controller",    CBaseComponent::ECT_PHYSX_CONTROLLER),
-          value("physx_controller",    CBaseComponent::ECT_PHYSX_ACTOR),
-          value("renderable_object",   CBaseComponent::ECT_RENDERABLE_OBJECT),
-          value("thps_camera",         CBaseComponent::ECT_3RD_PERSON_SHOOTER_CAMERA),
-          value("trigger",             CBaseComponent::ECT_TRIGGER),
-          value("vida",                CBaseComponent::ECT_VIDA),
-          value("laser",               CBaseComponent::ECT_LASER),
-          value("state_machine",       CBaseComponent::ECT_STATE_MACHINE),
-          value("animation",       CBaseComponent::ECT_ANIMATION)
+          value("object_3d",            CBaseComponent::ECT_OBJECT_3D),
+          value("movement",             CBaseComponent::ECT_MOVEMENT),
+          value("player_controller",    CBaseComponent::ECT_PLAYER_CONTROLLER),
+          value("ia_walk_to_player",    CBaseComponent::ECT_IA_WALK_TO_PLAYER),
+          value("physx_controller",     CBaseComponent::ECT_PHYSX_CONTROLLER),
+          value("physx_controller",     CBaseComponent::ECT_PHYSX_ACTOR),
+          value("renderable_object",    CBaseComponent::ECT_RENDERABLE_OBJECT),
+          value("thps_camera",          CBaseComponent::ECT_3RD_PERSON_SHOOTER_CAMERA),
+          value("trigger",              CBaseComponent::ECT_TRIGGER),
+          value("vida",                 CBaseComponent::ECT_VIDA),
+          value("laser",                CBaseComponent::ECT_LASER),
+          value("state_machine",        CBaseComponent::ECT_STATE_MACHINE),
+          value("animation",            CBaseComponent::ECT_ANIMATION),
+          value("ia_brain",             CBaseComponent::ECT_IA_BRAIN)
       ]
       .def("get_type",     &CBaseComponent::GetType)
       .def("get_entity",   &CBaseComponent::GetEntity)
@@ -182,6 +184,12 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponentStateMachine, CBaseComponent>("ComponentStateMachine")
       .def("init",                     &CComponentStateMachine::Init)
       .def("get_state_machine",        &CComponentStateMachine::GetStateMachine)
+      
+    // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentIABrain, CBaseComponent>("ComponentIABrain")
+      .def("init",                     &CComponentIABrain::Init)
+      .def_readonly("player",          &CComponentIABrain::m_pPlayer)
+      .def_readwrite("time",           &CComponentIABrain::m_fTime)
   
   ];
   

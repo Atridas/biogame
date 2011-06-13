@@ -31,11 +31,15 @@ camera_player = function(_jugador, _dt)
 end
 
 -------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-- Neutre!!!! -----------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
 State_Player_Neutre = {}
 
 -------------------------------------------------------------------------------------------------
 State_Player_Neutre['Enter'] = function(_jugador)
-  log('enter player neutre')
+  --log('enter player neutre')
   
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
@@ -50,7 +54,7 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Neutre['Exit'] = function(_jugador)
-  log('exit player neutre')
+  --log('exit player neutre')
   
   local animation = _jugador:get_component(BaseComponent.animation)
   animation:clear_cycle(0.3)
@@ -68,7 +72,8 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   local animation = _jugador:get_component(BaseComponent.animation)
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   
-  local speed = 5
+  local speed = 4
+  local run_speed = 10
   
   local direction, left
   local isMoving = false
@@ -76,30 +81,6 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   if ACTION_MANAGER:is_action_active('Aim') then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Apuntar')
     return
-  end
-  
-  if ACTION_MANAGER:is_action_active('MoveFwd') then
-    direction = Vect3f(math.cos(yaw), 0, math.sin(yaw) )
-    moviment.movement = moviment.movement + direction * (_dt) * speed
-    
-    if player_controller.current_animation ~= 'walk' then
-      animation:clear_cycle(0.3)
-      animation:set_cycle('walk', 0.3)
-      player_controller.current_animation = 'walk'
-    end
-    isMoving = true
-  end
-  
-  if ACTION_MANAGER:is_action_active('MoveBack') then
-    direction = Vect3f(math.cos(yaw), 0, math.sin(yaw) )
-    moviment.movement = moviment.movement - direction * (_dt) * speed
-    
-    if player_controller.current_animation ~= 'walk back' then
-      animation:clear_cycle(0.3)
-      animation:set_cycle('walk back', 0.3)
-      player_controller.current_animation = 'walk back'
-    end
-    isMoving = true
   end
   
   if ACTION_MANAGER:is_action_active('MoveLeft') then
@@ -122,6 +103,38 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
       animation:clear_cycle(0.3)
       animation:set_cycle('walk', 0.3)
       player_controller.current_animation = 'walk'
+    end
+    isMoving = true
+  end
+  
+  if ACTION_MANAGER:is_action_active('MoveFwd') then
+    direction = Vect3f(math.cos(yaw), 0, math.sin(yaw) )
+    
+    local anim
+    
+    if ACTION_MANAGER:is_action_active('Run') then
+      moviment.movement = moviment.movement + direction * (_dt) * run_speed
+      anim = 'run'
+    else
+      moviment.movement = moviment.movement + direction * (_dt) * speed
+      anim = 'walk'
+    end
+    
+    if player_controller.current_animation ~= anim then
+      animation:clear_cycle(0.3)
+      animation:set_cycle(anim, 0.3)
+      player_controller.current_animation = anim
+    end
+    
+    isMoving = true
+  elseif ACTION_MANAGER:is_action_active('MoveBack') then
+    direction = Vect3f(math.cos(yaw), 0, math.sin(yaw) )
+    moviment.movement = moviment.movement - direction * (_dt) * speed
+    
+    if player_controller.current_animation ~= 'walk back' then
+      animation:clear_cycle(0.3)
+      animation:set_cycle('walk back', 0.3)
+      player_controller.current_animation = 'walk back'
     end
     isMoving = true
   end
@@ -151,7 +164,7 @@ State_Player_Apuntar = {}
 
 -------------------------------------------------------------------------------------------------
 State_Player_Apuntar['Enter'] = function(_jugador)
-  log('enter player apuntant')
+  --log('enter player apuntant')
   
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
@@ -165,7 +178,7 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Apuntar['Exit'] = function(_jugador)
-  log('exit player apuntant')
+  --log('exit player apuntant')
   
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)

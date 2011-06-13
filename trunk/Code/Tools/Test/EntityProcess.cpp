@@ -22,6 +22,7 @@
 #include "Camera.h"
 #include "ComponentStateMachine.h"
 #include "ComponentAnimation.h"
+#include "ComponentIABrain.h"
 
 #include "PhysicActor.h"
 #include <PhysicsManager.h>
@@ -100,7 +101,6 @@ bool CEntityProcess::Init()
 
   (new CComponentVida())->Init(m_pPlayerEntity, 100.f);
 
-  LOGGER->SaveLogsInFile();
   (new CComponentStateMachine())->Init(m_pPlayerEntity, "State_Player_Neutre");
 
   //Carregar entitats de l'escenari ----------------------------------------------------------------------------------------
@@ -122,9 +122,12 @@ bool CEntityProcess::Init()
   l_pComponentRenderableObject->m_fHeightAdjustment = -1.f;
   l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
 
-  (new CComponentIAWalkToPlayer())->Init(l_peEnemy,"Player",2,"walk","impact");
+  //(new CComponentIAWalkToPlayer())->Init(l_peEnemy,"Player",2,"walk","impact");
+  (new CComponentIABrain())->Init(l_peEnemy,"Player");
+  (new CComponentAnimation())->Init(l_peEnemy);
   (new CComponentVida())->Init(l_peEnemy, 100.f);
 
+  (new CComponentStateMachine())->Init(l_peEnemy, "State_Enemy_Idle");
 
   // llum ----------------------------------------
   
