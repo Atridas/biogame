@@ -11,6 +11,7 @@
 #include "StaticMeshManager.h"
 #include "RenderableObjectsManager.h"
 #include "AnimatedModelManager.h"
+#include "ParticleManager.h"
 
 #include "AnimatedInstanceModel.h"
 #include "RenderableAnimatedInstanceModel.h"
@@ -351,6 +352,9 @@ bool CPhysXProcess::Init()
   /////////////////////////////////////////////////////////////////////////////////
 
 
+  CORE->GetParticleManager()->SetAllEmittersActive(false);
+
+
   SetOk(true);
   return IsOk();
 
@@ -571,6 +575,8 @@ void CPhysXProcess::Update(float _fElapsedTime)
     g_vGrenadesVector[i]->Update(_fElapsedTime);
   }
 
+  CORE->GetParticleManager()->Update(_fElapsedTime,m_pCamera);
+
 }
 
 Mat44f CPhysXProcess::GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone)
@@ -730,6 +736,8 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
   //}
 
   CORE->GetRenderableObjectsManager()->Render(_pRM);
+  _pRM->DrawGrid(0.1f,colCYAN,1,1);
+  CORE->GetParticleManager()->Render(_pRM);
 
   if(m_bRenderLights)
     CORE->GetLightManager()->Render(_pRM);
@@ -1149,14 +1157,14 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
       CPhysxGrenade* l_pGrenade = new CPhysxGrenade("Granada" + g_vGrenadesVector.size(),7.0f,3.0f,25.0f);
       if (g_pUserDataSHOOT != 0)
       {
-        l_pGrenade->Init(0.1f,1.0f,GROUP_COLLIDABLE_PUSHABLE,l_vVect,l_vDirection,20.0f); 
+        l_pGrenade->Init(0.1f,1.0f,GROUP_COLLIDABLE_PUSHABLE,l_vVect,l_vDirection,20.0f,"fum_proveta"); 
       }
       else
       {
         Vect3f l_vDirectionAir = l_DirCamera*10.0f;
         l_vDirectionAir = l_vDirectionAir-l_vVect;
         l_vDirectionAir.Normalize();
-        l_pGrenade->Init(0.1f,1.0f,GROUP_COLLIDABLE_PUSHABLE,l_vVect,l_vDirectionAir,20.0f);
+        l_pGrenade->Init(0.1f,1.0f,GROUP_COLLIDABLE_PUSHABLE,l_vVect,l_vDirectionAir,20.0f,"fum_proveta");
       }
       g_vGrenadesVector.push_back(l_pGrenade);
 

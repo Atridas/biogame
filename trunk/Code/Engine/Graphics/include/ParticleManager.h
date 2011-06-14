@@ -85,6 +85,7 @@ public:
   bool Reload();
   void Release();
   CParticleEmitter* GetParticleEmitter(const string& _szName);
+  void SetAllEmittersActive(bool _bActive);
  
 
 

@@ -235,7 +235,7 @@
 
     <!-- EXPORTACIO DEL MAPA DEL JARQUE-->
     
-   <!--<ParticleEmitterInstance id="fum_proveta" type="fum_proveta" position="-4.98981 1.16939 -2.77892" FormEmitter="dummy" sizeX="0.03" sizeY="0.03" sizeZ="0.03" Direction="0.0 1.0 0.0" />-->
+   <ParticleEmitterInstance id="fum_proveta" type="fum_proveta" position="-4.98981 1.16939 -2.77892" FormEmitter="dummy" sizeX="0.03" sizeY="0.03" sizeZ="0.03" Direction="0.0 1.0 0.0" />
    <ParticleEmitterInstance id="granada" type="granada" position="-4.98981 1.16939 -2.77892" FormEmitter="dummy" sizeX="0.03" sizeY="0.03" sizeZ="0.03" Direction="0.0 1.0 0.0" />
 
     <!--  <ParticleEmitterInstance id="chispes_panel1" type="chispesPanel" position="-1.72439 0.200902 9.83149" FormEmitter="dummy" sizeX="0.271797" sizeY="0.119761" sizeZ="0.268109" Direction="0.892257 0.0 -0.451528" />
