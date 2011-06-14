@@ -84,6 +84,9 @@ public:
   void Init(CRenderManager* _pRM);
   bool Reload();
   void Release();
+  CParticleEmitter* GetParticleEmitter(const string& _szName);
+ 
+
 
 private:
   string                    m_szFileName;

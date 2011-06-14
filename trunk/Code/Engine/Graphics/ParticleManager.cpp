@@ -358,7 +358,24 @@ bool CParticleManager::Load(const string& _szFileName)
 
 }
 
+CParticleEmitter* CParticleManager::GetParticleEmitter(const string& _szName)
+{
+  
+  vector<CParticleEmitter*>::iterator it  = m_vEmitterParticle.begin(),
+                                      end = m_vEmitterParticle.end();
 
+  while(it != end)
+  {
+    m_szFileName=(*it)->GetName();
+    if(_szName==m_szFileName)
+    {
+      return (*it);
+    }
+    ++it;
+  }
+  LOGGER->AddNewLog(ELL_WARNING, "CParticleManager:: No existeix el emiter de tipus %s", _szName);
+  return NULL;
+}
 
 void CParticleManager::Update(const float _fElapsedTime, CCamera* camera)
 {
@@ -376,6 +393,11 @@ void CParticleManager::Update(const float _fElapsedTime, CCamera* camera)
 
 void CParticleManager::Render(CRenderManager* _pRM)
 {
+  Mat44f l_mat;
+  l_mat.SetIdentity();
+
+  _pRM->SetTransform(l_mat);
+
   vector<CParticleEmitter*>::iterator it  = m_vEmitterParticle.begin(),
                                       end = m_vEmitterParticle.end();
   while(it != end)
