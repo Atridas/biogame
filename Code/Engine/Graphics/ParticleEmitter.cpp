@@ -44,6 +44,7 @@ m_Particles(NUMPARTICLES)
   m_iNumBucle=0;
   m_iNumBucleAux=0;
   m_iCont=0;
+  m_fContElapsedTime=0.0f;
   m_fRandomRebootEmitter=0.0f;
   m_fRebootEmitter1=0.0f;
   m_fRebootEmitter2=0.0f;
@@ -294,20 +295,20 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
 	  }
   }else
   {
+    
+    if(m_fRandomRebootEmitter==0)
+    {
+      m_bActive=false;
+    }
     if(m_fRandomRebootEmitter>0 && m_bBucleInfinit==false)
     {
-      /*if(m_iCont==0)
-      {
-        //tindria k anar amb el elapsed Time, pero fa coses rares, aixi k de moment es fa un simple comptador
-        m_fRandomRebootEmitter=m_fRandomRebootEmitter+fElapsedTime;
-        m_iCont=1;
-      }*/
-      //if(m_fRandomRebootEmitter<=fElapsedTime)
-      m_iCont++;
-      if(m_iCont>m_fRandomRebootEmitter)
+
+      //tindria k anar amb el elapsed Time, pero fa coses rares, aixi k de moment es fa un simple comptador
+      m_fContElapsedTime=m_fContElapsedTime+fElapsedTime;
+      if(m_fRandomRebootEmitter<=m_fContElapsedTime)
       {
         m_iNumBucle=m_iNumBucleAux;
-        m_iCont=0;
+        m_fContElapsedTime=0;
         m_fRandomRebootEmitter=0;
       }
     }

@@ -49,7 +49,7 @@ public:
   void SetNumDirections     (int _iNumDirections)                   {m_iNumDirections = _iNumDirections;};
   void SetNumColors         (int _iNumColor)                        {m_iNumColor = _iNumColor;};
   
-  //void SetReload            (bool _bReload)                         {m_bReload = _bReload;};
+  
 
   //Get
   string                          GetName             () const {return m_szName;};
@@ -71,16 +71,12 @@ public:
   const bool                      GetActive           () const {return m_bActive;};
   const D3DXVECTOR3&              GetVel              () const {return m_vVel;};
   const D3DXVECTOR3&              GetGravity          () const {return m_vGravity;};
-  //*********
-
   float                           GetAngle1            () const {return m_fAngle1;};
   float                           GetAngle2            () const {return m_fAngle2;};
-  //bool                            GetReload           () const {return m_bReload;};
+  
 
-
-
-  void                    Update              (float fElapsedTime, CCamera* camera);
-  void                    Init                (CRenderManager* rm);
+  void            Update              (float fElapsedTime, CCamera* camera);
+  void            Init                (CRenderManager* rm);
   void            Release             ();
   void            Render              (CRenderManager* _pRM);
   void            SetAttributes       (SParticleInfo* _info);
@@ -140,6 +136,7 @@ private:
   int                                       m_iNumBucle;
   int                                       m_iNumBucleAux;
   int                                       m_iCont;
+  float                                     m_fContElapsedTime;
   float                                     m_fRandomRebootEmitter;
   float                                     m_fRebootEmitter1; //Temps que tarde en tornar a emetre particules. Si esta a 0, no torna
   float                                     m_fRebootEmitter2;
