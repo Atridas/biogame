@@ -33,7 +33,7 @@ public:
   CAnimatedCoreModel(const string& _szName): 
                             CNamed(_szName),m_pCalCoreModel(0),
                             m_pRenderableVertexs(0),m_pCalHardwareModel(0),
-                            m_szMeshFilename(""),m_szSkeletonFilename(""),
+                            m_szSkeletonFilename(""),
                             m_szPath(""),m_iNumFaces(0), m_iNumVtxs(0)
                                             {};
   /**
@@ -158,7 +158,7 @@ private:
   /**
    * Path del fitxer que conté la malla.
   **/
-  string                    m_szMeshFilename;
+  vector<string>            m_vMeshFilenames;
   /**
    * Path del fitxer que conté l'esquelet.
   **/
