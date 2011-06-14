@@ -159,6 +159,11 @@ void CAnimatedInstanceModel::Render(CRenderManager *_pRM)
 {
   CalHardwareModel* l_pCalHardwareModel = m_pAnimatedCoreModel->GetCalHardwareModel();
   CEffectManager* m_pEM = CORE->GetEffectManager();
+  CMaterial* l_pMaterial = 0;
+
+  const vector<CMaterial*>& l_vMaterials = m_pAnimatedCoreModel->GetMaterials();
+
+  int l_iMaterialCount = l_vMaterials.size();
 
   if(l_pCalHardwareModel)
   {
@@ -166,9 +171,12 @@ void CAnimatedInstanceModel::Render(CRenderManager *_pRM)
 
     for(int l_iHardwareMeshId=0; l_iHardwareMeshId < l_pCalHardwareModel->getHardwareMeshCount(); l_iHardwareMeshId++)
     {
-      const vector<CMaterial*>& l_vMaterials = m_pAnimatedCoreModel->GetMaterials();
-
-      CMaterial*  l_pMaterial = l_vMaterials[l_iHardwareMeshId];
+      if(l_iHardwareMeshId < l_iMaterialCount)
+      {
+        l_pMaterial = l_vMaterials[l_iHardwareMeshId];
+      }else{
+        l_pMaterial = l_vMaterials[l_iMaterialCount-1];
+      }
 
       CEffect* l_pEffect = m_pEM->ActivateMaterial(l_pMaterial);
       

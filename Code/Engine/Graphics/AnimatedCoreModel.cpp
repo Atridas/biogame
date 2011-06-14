@@ -25,7 +25,7 @@ void CAnimatedCoreModel::Release()
   CHECKED_DELETE(m_pRenderableVertexs);
   CHECKED_DELETE(m_pCalHardwareModel);
   CHECKED_DELETE(m_pCalCoreModel);
-  m_szMeshFilename      = "";
+  m_vMeshFilenames.clear();
   m_szSkeletonFilename  = "";
   
   vector<CMaterial*>::iterator l_it  = m_vMaterials.begin();
@@ -93,26 +93,20 @@ bool CAnimatedCoreModel::Load(const std::string &_szPath)
 
       } else if(strcmp(l_treeChild.GetName(),"mesh") == 0)
       {
-        if(m_szMeshFilename != "")
-        {
-          LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load Mesh repetit!");
-          Release();
-          return IsOk();
-        }
+        //if(m_szMeshFilename != "")
+        //{
+        //  LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load Mesh repetit!");
+        //  Release();
+        //  return IsOk();
+        //}
 
         const char* l_pcFileName = l_treeChild.GetPszProperty("filename",0);
 
         if(l_pcFileName != 0)
         {
-          m_szMeshFilename = l_pcFileName;
+          m_vMeshFilenames.push_back(l_pcFileName);
         } else {
           LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load No s'ha trobat la propietat \"filename\" al mesh.");
-          Release();
-          return IsOk();
-        }
-
-        if(!LoadMesh())
-        {
           Release();
           return IsOk();
         }
@@ -205,6 +199,12 @@ bool CAnimatedCoreModel::Load(const std::string &_szPath)
       }
     }
 
+    if(!LoadMesh())
+    {
+      Release();
+      return IsOk();
+    }
+
     if(LoadVertexBuffer())
       SetOk(true);
 
@@ -223,15 +223,20 @@ bool CAnimatedCoreModel::Load(const std::string &_szPath)
 
 bool CAnimatedCoreModel::LoadMesh()
 {
-  LOGGER->AddNewLog(ELL_INFORMATION, "CAnimatedCoreModel::LoadMesh Carregant el Mesh \"%s\"", m_szMeshFilename.c_str());
+  vector<string>::iterator l_itFilename;
 
-  if(m_pCalCoreModel->loadCoreMesh(m_szMeshFilename.c_str()) < 0)
+  for(l_itFilename = m_vMeshFilenames.begin();l_itFilename != m_vMeshFilenames.end();++l_itFilename)
   {
-    LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::LoadMesh Error al Cal3D \"%s\"", CalError::getLastErrorText().c_str());
-    return false;
-  } else {
-    return true;
+    LOGGER->AddNewLog(ELL_INFORMATION, "CAnimatedCoreModel::LoadMesh Carregant el Mesh \"%s\"", (*l_itFilename).c_str());
+
+    if(m_pCalCoreModel->loadCoreMesh((*l_itFilename).c_str()) < 0)
+    {
+      LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::LoadMesh Error al Cal3D \"%s\"", CalError::getLastErrorText().c_str());
+      return false;
+    }
   }
+
+  return true;
 }
 
 bool CAnimatedCoreModel::LoadSkeleton()
