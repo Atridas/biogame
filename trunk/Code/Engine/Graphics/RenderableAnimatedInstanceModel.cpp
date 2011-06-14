@@ -41,11 +41,13 @@ void CRenderableAnimatedInstanceModel::InitFromXML(CXMLTreeNode& l_XMLObject)
     float l_fYaw                = l_XMLObject.GetFloatProperty("yaw") * FLOAT_PI_VALUE / 180.0f;
     float l_fPitch              = l_XMLObject.GetFloatProperty("pitch") * FLOAT_PI_VALUE / 180.0f;
     float l_fRoll               = l_XMLObject.GetFloatProperty("roll") * FLOAT_PI_VALUE / 180.0f;
-    
+    Vect3f l_vScale             = l_XMLObject.GetVect3fProperty("scale",Vect3f(1.0f));
+
     SetPosition(l_vPos);
     SetYaw(l_fYaw);
     SetPitch(l_fPitch);
     SetRoll(l_fRoll);
+    SetScale(l_vScale);
 
     InitMat44();
 

@@ -21,8 +21,10 @@ void CRenderableObject::Render(CRenderManager* _pRM)
 
     //total = t*r*r2*r3;
 
+    Mat44f l_mScaleMatrix;
+    l_mScaleMatrix.SetIdentity().Scale(m_vScale.x,m_vScale.y,m_vScale.z);
 
-    _pRM->SetTransform(GetMat44());
+    _pRM->SetTransform(GetMat44()*l_mScaleMatrix);
 
     RenderRenderableObject(_pRM);
 
