@@ -47,8 +47,8 @@
 bool CParticleProcess::Init()
 {
 
-  m_pBillBoard.SetPos( Vect3f(-8.f, 3.f, 2.f));
-  m_pBillBoard.SetSize( 5.f, 5.f);
+  m_pBillBoard.SetPos( Vect3f(0.332061f, 2.5184f, 8.16266f));
+  m_pBillBoard.SetSize( 1.79023f, 1.61947f);
   
   m_pObject = new CObject3D();
   m_fVelocity = 1;
@@ -213,11 +213,11 @@ void CParticleProcess::RenderScene(CRenderManager* _pRM)
   // Ensenya tot el Hangar i els seus objectes
   CORE->GetRenderableObjectsManager()->Render(_pRM);
 
-  _pRM->DrawGrid(30.0f,colCYAN,30,30);
+  _pRM->DrawGrid(0.1f,colCYAN,1,1);
   //_pRM->DrawPlane(10,Vect3f(0,1,0),0,colBLUE,10,10);
   CORE->GetParticleManager()->Render(_pRM);
-  //CTexture*  texture = CORE->GetTextureManager()->GetResource("Data/Textures/texturas particulas/flameD.dds");
-  //m_pBillBoard.Render(_pRM->GetDevice(), texture->GetD3DTexture() );
+  CTexture*  texture = CORE->GetTextureManager()->GetResource("Data/Textures/texturas particulas/cartaAjuste.png");
+  m_pBillBoard.Render(_pRM->GetDevice(), texture->GetD3DTexture() );
   
    
   

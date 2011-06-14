@@ -102,6 +102,15 @@ bool CParticleManager::Load(const string& _szFileName)
         if(l_pInfo->m_bBucleInfinit==false)
         {
           l_pInfo->m_iNumBucle=l_treeParticleEmitter.GetIntProperty("NumBucle");
+          l_pInfo->m_fRebootEmitter1=l_treeParticleEmitter.GetFloatProperty("RebootEmitter1");
+          l_pInfo->m_fRebootEmitter2=l_treeParticleEmitter.GetFloatProperty("RebootEmitter2");
+          l_pInfo->m_bTotDeCop=l_treeParticleEmitter.GetBoolProperty("TotDeCop");
+        }else
+        {
+          l_pInfo->m_iNumBucle=0;
+          l_pInfo->m_fRebootEmitter1=0;
+          l_pInfo->m_fRebootEmitter2=0;
+          l_pInfo->m_bTotDeCop=false;
         }
         
 			  
