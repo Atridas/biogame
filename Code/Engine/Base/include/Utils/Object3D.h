@@ -16,7 +16,7 @@
 class CObject3D
 {
 public:
-  CObject3D(): m_vPosition(Vect3f(0.0f)), m_fYaw(0.0f),
+  CObject3D(): m_vPosition(Vect3f(0.0f)),m_vScale(Vect3f(1.0f)), m_fYaw(0.0f),
                m_fPitch(0.0f), m_fRoll(0.0f), m_bVisible(true),m_bRenderBoundingBox(false),
                m_bRenderBoundingSphere(false)
            {m_vMat44.SetIdentity();};
@@ -46,12 +46,14 @@ public:
   void    SetMat44    (Mat44f _vMat44);
   void		SetRenderBoundingBox	( bool  _bValue ) {m_bRenderBoundingBox = _bValue;};
   void		SetRenderBoundingSphere	( bool  _bValue ) {m_bRenderBoundingSphere = _bValue;};
+  void    SetScale	  ( const Vect3f& _vScale ) {m_vScale = _vScale;};
 
   //---Other Functions
   void    InitMat44   ();
 
 protected:
 	Vect3f	        m_vPosition;
+  Vect3f	        m_vScale;
 	float		        m_fYaw;
 	float		        m_fPitch;
 	float		        m_fRoll;
