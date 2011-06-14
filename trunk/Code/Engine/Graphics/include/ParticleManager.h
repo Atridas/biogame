@@ -43,6 +43,9 @@ struct SParticleInfo
   bool                  m_bAnimated;
   bool                  m_bBucleInfinit;//si es false s'ha d'indicar quantes pasades de crear particules volem, si es true crea infinitament
   int                   m_iNumBucle;//numero de vegades que volem crear particlues
+  float                 m_fRebootEmitter1; //Temps que tarde en tornar a emetre particules. Si esta a 0, no torna
+  float                 m_fRebootEmitter2;
+  bool                  m_bTotDeCop; //Si esta a true crea totes les particules de cop. 
   int                   m_iTexNumFiles;
   int                   m_iTexNumColumnes;
   float                 m_fTimeAnimationDiapo;

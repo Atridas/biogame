@@ -42,7 +42,13 @@ m_Particles(NUMPARTICLES)
   m_fSizeY=1.0f;
   m_bBucleInfinit=true;
   m_iNumBucle=0;
+  m_iNumBucleAux=0;
+  m_iCont=0;
+  m_fRandomRebootEmitter=0.0f;
+  m_fRebootEmitter1=0.0f;
+  m_fRebootEmitter2=0.0f;
   m_iNumDirections=1;
+  m_bTotDeCop=false;
 
  /* m_PointA=(D3DXVECTOR3(0.0f,0.0f,0.0f));
   m_PointB=(D3DXVECTOR3(0.0f,0.0f,0.0f));
@@ -87,6 +93,10 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
   m_fAngle2 = _info->m_fAngle2;
   m_bBucleInfinit  = _info->m_bBucleInfinit;
   m_iNumBucle = _info->m_iNumBucle;
+  m_iNumBucleAux = _info->m_iNumBucle;
+  m_fRebootEmitter1 = _info->m_fRebootEmitter1;
+  m_fRebootEmitter2 = _info->m_fRebootEmitter2;
+  m_bTotDeCop = _info->m_bTotDeCop;
   //*** per animació
 
   m_bAnimated = _info->m_bAnimated;
@@ -137,7 +147,11 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
   }
   
   //2.] Si es temps de crear particules noves fer-ho:
-  
+  if(m_bBucleInfinit==false && m_fRandomRebootEmitter==0)
+  {
+    m_fRandomRebootEmitter = RandomNumber(m_fRebootEmitter1,m_fRebootEmitter2);
+    
+  }
   
   if(m_bBucleInfinit==true || m_iNumBucle>0)
   {
@@ -145,15 +159,19 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
     float fEmitRateThisFrame = RandomNumber(m_fMinEmitRate, m_fMaxEmitRate);
 	  m_fNumNewPartsExcess = (fEmitRateThisFrame * fElapsedTime)+ m_fNumNewPartsExcess;
   
-	  if(m_fNumNewPartsExcess > 1.0f)
+	  if(m_fNumNewPartsExcess > 1.0f && m_bTotDeCop==false)
 	  {
 		  iNumNewParts = (int)m_fNumNewPartsExcess;
 		  m_fNumNewPartsExcess = m_fNumNewPartsExcess - (int)m_fNumNewPartsExcess;
       m_iNumBucle--;
 	  }
   
-    
-    
+    if(m_bTotDeCop==true)
+    {
+      iNumNewParts = (int)RandomNumber(m_fMinEmitRate, m_fMaxEmitRate);   
+      //iNumNewParts=5;
+      m_iNumBucle--;
+    }
 
     for (int q=0; q < iNumNewParts; q++)
 	  {
@@ -238,24 +256,12 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
 		    }	
 //****************************************
         D3DXVECTOR3 l_vPos_aux;
-        if(m_szFormEmitter=="line")
-		    {
-		  	    l_vPos_aux.x = m_vPos.x+RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
-            l_vPos_aux.y=m_vPos.y;
-            l_vPos_aux.z=m_vPos.z;
-		    }
-		    if(m_szFormEmitter=="plane")
-		    {
-		  	    l_vPos_aux.x = m_vPos.x+RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
-            l_vPos_aux.y=m_vPos.y;
-            l_vPos_aux.z = m_vPos.z+RandomNumber(m_vPosFormEmitter.z/-2,m_vPosFormEmitter.z/2);
-		    }
+
 		    if(m_szFormEmitter=="dummy")
 		    {
-		  
-		  	    l_vPos_aux.x = m_vPos.x+RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
-            l_vPos_aux.y = m_vPos.y+RandomNumber(m_vPosFormEmitter.y/-2,m_vPosFormEmitter.y/2);
-            l_vPos_aux.z = m_vPos.z+RandomNumber(m_vPosFormEmitter.z/-2,m_vPosFormEmitter.z/2);
+		      l_vPos_aux.x = m_vPos.x+RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
+          l_vPos_aux.y = m_vPos.y+RandomNumber(m_vPosFormEmitter.y/-2,m_vPosFormEmitter.y/2);
+          l_vPos_aux.z = m_vPos.z+RandomNumber(m_vPosFormEmitter.z/-2,m_vPosFormEmitter.z/2);
 		    }
 		    part->SetGravity(m_vGravity);
 		    part->SetVel(m_vVel);
@@ -286,6 +292,25 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
 		    }*/
       }
 	  }
+  }else
+  {
+    if(m_fRandomRebootEmitter>0 && m_bBucleInfinit==false)
+    {
+      /*if(m_iCont==0)
+      {
+        //tindria k anar amb el elapsed Time, pero fa coses rares, aixi k de moment es fa un simple comptador
+        m_fRandomRebootEmitter=m_fRandomRebootEmitter+fElapsedTime;
+        m_iCont=1;
+      }*/
+      //if(m_fRandomRebootEmitter<=fElapsedTime)
+      m_iCont++;
+      if(m_iCont>m_fRandomRebootEmitter)
+      {
+        m_iNumBucle=m_iNumBucleAux;
+        m_iCont=0;
+        m_fRandomRebootEmitter=0;
+      }
+    }
   }
 }
   

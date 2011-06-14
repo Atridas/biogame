@@ -81,9 +81,9 @@ public:
 
   void                    Update              (float fElapsedTime, CCamera* camera);
   void                    Init                (CRenderManager* rm);
-  virtual void            Release             ();
-  virtual void            Render              (CRenderManager* _pRM);
-  virtual void            SetAttributes       (SParticleInfo* _info);
+  void            Release             ();
+  void            Render              (CRenderManager* _pRM);
+  void            SetAttributes       (SParticleInfo* _info);
 
 
   vector<D3DXVECTOR3>                       m_vDirection;
@@ -92,7 +92,7 @@ public:
   vector<float>                             m_vTimeDirectionInterpolation;
 
   
-protected:
+private:
   string                                    m_szName;
   string                                    m_szId;
   string									                  m_szFormEmitter; // forma del emissor
@@ -138,6 +138,12 @@ protected:
   vector<float>			                        m_vTimeAnimatedInterpolation;
   bool                                      m_bBucleInfinit;
   int                                       m_iNumBucle;
+  int                                       m_iNumBucleAux;
+  int                                       m_iCont;
+  float                                     m_fRandomRebootEmitter;
+  float                                     m_fRebootEmitter1; //Temps que tarde en tornar a emetre particules. Si esta a 0, no torna
+  float                                     m_fRebootEmitter2;
+  bool                                      m_bTotDeCop; //Si esta a true crea totes les particules de cop. 
   vector<CTexture*>                         m_vTextureAnimation;
   int                                       m_iNumColor;
   int                                       m_iNumDirections;
