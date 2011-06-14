@@ -473,8 +473,9 @@ void CPhysxSkeleton::SetRagdollActive(bool _bRagdollActive)
 
   if(m_bRagdollActive)
   {
+    SleepPhysxBones();
     WakeUpPhysxBones();
-    //SleepPhysxBones();
+    
     
   }
   else
@@ -494,7 +495,9 @@ void CPhysxSkeleton::WakeUpPhysxBones()
       //l_pActor->GetPhXActor()->setSleepAngularVelocity(0.0f);
       l_pActor->GetPhXActor()->setSleepEnergyThreshold(0.0f);
       //l_pActor->GetPhXActor()->setSleepLinearVelocity(0.0f);
-      l_pActor->GetPhXActor()->wakeUp(1);
+      //l_pActor->GetPhXActor()->raiseBodyFlag(NX_);
+      l_pActor->GetPhXActor()->clearBodyFlag(NX_BF_DISABLE_GRAVITY);
+      l_pActor->GetPhXActor()->wakeUp();
       
     }
   }
@@ -509,6 +512,7 @@ void CPhysxSkeleton::SleepPhysxBones()
     if (l_pActor != 0)
     {
       l_pActor->GetPhXActor()->putToSleep();
+      l_pActor->GetPhXActor()->raiseBodyFlag(NX_BF_DISABLE_GRAVITY);
     }
   }
 };
