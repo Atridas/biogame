@@ -10,4 +10,9 @@
 	<collision group1="enemic" group2="objecte dinamic" />
 	<collision group1="enemic" group2="explosio" />
 	<collision group1="objecte dinamic" group2="explosio" />
+  
+  <collision group1="ray shoot" group2="escenari" />
+  <collision group1="ray shoot" group2="personatge" />
+  <collision group1="ray shoot" group2="enemic" />
+  <collision group1="ray shoot" group2="objecte dinamic" />
 </physX>

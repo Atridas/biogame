@@ -9,15 +9,19 @@ class CComponentIABrain:
   public CBaseComponent
 {
 public:
-  CComponentIABrain():m_pPlayer(0),m_fTime(0) {};
+  CComponentIABrain():m_pPlayer(0),m_fTime(0),m_bShooted(false) {};
   ~CComponentIABrain() {Done();}
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_IA_BRAIN;};
+  static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_IA_BRAIN;};
 
   bool Init(CGameEntity* _pEntity, const string& _szPlayerEntityName);
 
+  void Shoot();
+
   CGameEntity* m_pPlayer;
   float        m_fTime;
+  bool         m_bShooted;
 
 protected:
   virtual void Release() {};

@@ -158,7 +158,9 @@ void CComponentPlayerController::Shoot()
   SCollisionInfo l_CInfo;
   CPhysicUserData* l_pUserData = 0;
 
-  l_pUserData = CORE->GetPhysicsManager()->RaycastClosestActor(l_vPos,l_vDir,1,l_pUserData,l_CInfo);
+  CPhysicsManager *l_pPM = CORE->GetPhysicsManager();
+
+  l_pUserData = l_pPM->RaycastClosestActor(l_vPos,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT),l_pUserData,l_CInfo);
 
   if( l_pUserData )
   {
@@ -188,7 +190,7 @@ void CComponentPlayerController::Shoot()
     {
       SEvent l_impacte;
       l_impacte.Msg = SEvent::REBRE_IMPACTE;
-      l_impacte.Info[0].Type = SEventInfo::STI_FLOAT;
+      l_impacte.Info[0].Type = SEventInfo::FLOAT;
       l_impacte.Info[0].f    = 20.f;
       l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
       l_impacte.Sender = GetEntity()->GetGUID();

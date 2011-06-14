@@ -45,7 +45,8 @@ enum ECollisionGroup {
   ECG_TRIGGERS,
   ECG_COBERTURES,
   ECG_OBJECTES_DINAMICS,
-  ECG_EXPLOSIONS
+  ECG_EXPLOSIONS,
+  ECG_RAY_SHOOT
 };
 
 int GetCollisionGroup(const string& _szGroup);
@@ -114,7 +115,6 @@ public:
 
 	//----CScriptRegister interface-------------------
 	virtual void				RegisterFunctions					  (CScriptManager* scriptManager);
-  bool						    Load	                      (const string& _szFileName, bool _bReload);
 
 	//--- Intersection Functions:
 	CPhysicUserData*		RaycastClosestActor					(const Vect3f posRay, const Vect3f& dirRay, uint32 impactMask, CPhysicUserData* impactObject, SCollisionInfo& info);

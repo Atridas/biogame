@@ -223,12 +223,14 @@ void CScriptedStateMachine::ChangeGlobalState(const string& _szNewGlobalState)
 
 void CScriptedStateMachine::RevertState      ()
 {
-  ChangeState(m_szPreviousState); //TODO testejar això que no m'en fio massa
+  string l_szPreviousState = m_szPreviousState;
+  ChangeState(l_szPreviousState);
 }
 
 void CScriptedStateMachine::RevertGlobalState()
 {
-  ChangeState(m_szPreviousGlobalState); //TODO testejar això que no m'en fio massa
+  string l_szPreviousGlobalState = m_szPreviousGlobalState;
+  ChangeState(l_szPreviousGlobalState);
 }
 
 

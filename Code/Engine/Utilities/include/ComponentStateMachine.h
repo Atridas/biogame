@@ -15,6 +15,7 @@ public:
   ~CComponentStateMachine() {Done();}
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_STATE_MACHINE;};
+  static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_STATE_MACHINE;};
 
   bool Init(CGameEntity* _pEntity, const string& _pEstatInicial);
   

@@ -26,6 +26,7 @@ extern "C"
 #include "ComponentStateMachine.h"
 #include "ComponentIABrain.h"
 #include "ScriptedStateMachine.h"
+#include "ComponentVida.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -58,10 +59,10 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     class_<SEventInfo>("EventInfo")
       .enum_("Type")
       [
-        value("sti_int"   ,SEventInfo::STI_INT),
-        value("sti_float" ,SEventInfo::STI_FLOAT),
-        value("sti_vector",SEventInfo::STI_VECTOR),
-        value("sti_string",SEventInfo::STI_STRING)
+        value("int"   ,SEventInfo::INT),
+        value("float" ,SEventInfo::FLOAT),
+        value("vector",SEventInfo::VECTOR),
+        value("string",SEventInfo::STRING)
       ]
       .def_readwrite("i",    &SEventInfo::i)
       .def_readwrite("f",    &SEventInfo::f)
@@ -69,13 +70,15 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def_readwrite("str",  &SEventInfo::str)
       
     ,class_<SEvent>("Event")
-      //.enum_("EventType")
-      //[
-      //]
-      .def_readwrite("Sender",      &SEvent::Sender)
-      .def_readwrite("Receiver",    &SEvent::Receiver)
-      .def_readwrite("Msg",         &SEvent::Msg)
-      .def_readwrite("DispatchTime",&SEvent::DispatchTime)
+      .enum_("EventType")
+      [
+        value("rebre_impacte",       SEvent::REBRE_IMPACTE),
+        value("morir",               SEvent::MORIR)
+      ]
+      .def_readwrite("sender",       &SEvent::Sender)
+      .def_readwrite("receiver",     &SEvent::Receiver)
+      .def_readwrite("msg",          &SEvent::Msg)
+      .def_readwrite("dispatch_time",&SEvent::DispatchTime)
       .property("Info", GetEventInfo, SetEventInfo, raw(_2)) 
       //.def_readwrite("Info",        &SEvent::Info)
 
@@ -144,6 +147,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
 
       .def_readwrite("speed", &CComponentPlayerController::m_fSpeed)
       .def_readwrite("current_animation", &CComponentPlayerController::m_szCurrentAnimation)
+
+      .def_readwrite("time", &CComponentPlayerController::m_fTime)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponent3rdPSCamera, CBaseComponent>("Component3rdPSCamera")
@@ -188,8 +193,16 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentIABrain, CBaseComponent>("ComponentIABrain")
       .def("init",                     &CComponentIABrain::Init)
+      .def("shoot",                    &CComponentIABrain::Shoot)
       .def_readonly("player",          &CComponentIABrain::m_pPlayer)
       .def_readwrite("time",           &CComponentIABrain::m_fTime)
+      .def_readwrite("shooted",        &CComponentIABrain::m_bShooted)
+      
+    // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentVida, CBaseComponent>("ComponentIABrain")
+      .def("init",                     &CComponentVida::Init)
+      .def_readwrite("vida",           &CComponentVida::m_fVida)
+      .def_readwrite("immortal",       &CComponentVida::m_bImmortal)
   
   ];
   
@@ -201,6 +214,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("set_current_state",    &CScriptedStateMachine::SetCurrentState)
       .def("change_state",         &CScriptedStateMachine::ChangeState)
       .def("current_state",        &CScriptedStateMachine::CurrentState)
+      .def("revert_state",         &CScriptedStateMachine::RevertState)
       .def("receive_event",        &CScriptedStateMachine::ReceiveEvent)
   ];
 }

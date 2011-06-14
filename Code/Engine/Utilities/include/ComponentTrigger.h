@@ -13,6 +13,7 @@ public:
   ~CComponentTrigger() {Done();}
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_TRIGGER;};
+  static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_TRIGGER;};
 
   bool Init(CGameEntity* _pEntity, const Vect3f& _vSize, const string& _szOnEnter, const string& _szOnExit, int _iCollisionMask);
   

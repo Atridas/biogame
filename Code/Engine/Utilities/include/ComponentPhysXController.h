@@ -25,10 +25,11 @@ public:
       {};
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_PHYSX_CONTROLLER;};
+  static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_PHYSX_CONTROLLER;};
 
   bool Init(CGameEntity *_Entity,
             float radius, float height, float slope, float skinwidth, 
-		        float stepOffset, uint32 _iCollisionMask 
+		        float stepOffset, uint32 _iCollisionGroup 
             );
   
   void UpdatePrePhysX(float _fDeltaTime);

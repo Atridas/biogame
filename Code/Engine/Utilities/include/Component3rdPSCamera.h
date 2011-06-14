@@ -26,6 +26,7 @@ public:
       {};
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_3RD_PERSON_SHOOTER_CAMERA;};
+  static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_3RD_PERSON_SHOOTER_CAMERA;};
 
   bool Init(CGameEntity *_pEntity,
             float _fCameraHeight,

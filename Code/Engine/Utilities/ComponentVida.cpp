@@ -16,9 +16,9 @@ bool CComponentVida::Init(CGameEntity* _pEntity, float _fVidaInicial)
 
 void CComponentVida::ReceiveEvent(const SEvent& _Event)
 {
-  if(_Event.Msg == SEvent::REBRE_IMPACTE)
+  if(_Event.Msg == SEvent::REBRE_IMPACTE && !m_bImmortal)
   {
-    assert(_Event.Info[0].Type == SEventInfo::STI_FLOAT);
+    assert(_Event.Info[0].Type == SEventInfo::FLOAT);
 
     m_fVida -= _Event.Info[0].f;
 

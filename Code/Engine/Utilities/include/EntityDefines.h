@@ -6,7 +6,7 @@
 #include "base.h"
 
 struct SEventInfo {
-  enum { STI_INT, STI_FLOAT, STI_VECTOR, STI_STRING } Type;
+  enum { INT, FLOAT, VECTOR, STRING } Type;
   union {
     int i;
     float f;

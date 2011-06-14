@@ -97,7 +97,7 @@ bool CEntityProcess::Init()
   m_pCamera = l_pComponent3rdPSCamera->GetCamera();
 
   CComponentPhysXController *l_pComponentPhysXController = new CComponentPhysXController();
-  l_pComponentPhysXController->Init(m_pPlayerEntity, 0.3f, 1.5f, 10.0f, 0.1f, 0.5f, l_pPM->GetCollisionMask( ECG_PERSONATGE ));
+  l_pComponentPhysXController->Init(m_pPlayerEntity, 0.3f, 1.5f, 10.0f, 0.1f, 0.5f, ECG_PERSONATGE );
 
   (new CComponentVida())->Init(m_pPlayerEntity, 100.f);
 
@@ -114,7 +114,7 @@ bool CEntityProcess::Init()
   l_pComponentObject3D->SetPosition(Vect3f(8.0f,2.0f,4.0f));
   (new CComponentMovement)->Init(l_peEnemy);
 
-  (new CComponentPhysXController())->Init(l_peEnemy, 0.7f, 1.5f, 10.0f, 0.1f, 0.5f, l_pPM->GetCollisionMask( ECG_ENEMICS ));
+  (new CComponentPhysXController())->Init(l_peEnemy, 0.7f, 1.5f, 10.0f, 0.1f, 0.5f,  ECG_ENEMICS );
 
   l_pComponentRenderableObject = new CComponentRenderableObject();
   l_pComponentRenderableObject->InitAnimatedModel(l_peEnemy, "Bot Character 1", "miner");
