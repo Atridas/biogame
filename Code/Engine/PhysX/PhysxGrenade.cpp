@@ -12,6 +12,7 @@
 #include <cal3d/cal3d.h>
 #include <XML/XMLTreeNode.h>
 #include "RenderManager.h"
+#include "ParticleManager.h"
 #include "Core.h"
 #include "base.h"
 //---PhysX Includes---//
@@ -38,8 +39,15 @@ void CPhysxGrenade::Explosion()
 
   Mat44f l_vMat44;
   m_pPhysxActor->GetMat44(l_vMat44);
+  Vect3f l_vTranslationVector = l_vMat44.GetTranslationVector();
+  //Particules
+  if (m_pParticleEmitter != 0)
+  {
+    m_pParticleEmitter->SetPosition(D3DXVECTOR3(l_vTranslationVector.x,l_vTranslationVector.y,l_vTranslationVector.z));
+    m_pParticleEmitter->SetActive(true);
+  }
 
-  l_pPM->OverlapSphereActorGrenade(m_fEffectRadius,l_vMat44.GetTranslationVector(),l_vUserDatas,m_fFirePower);
+  l_pPM->OverlapSphereActorGrenade(m_fEffectRadius,l_vTranslationVector,l_vUserDatas,m_fFirePower);
 
  /* for(size_t i=0;i<l_vUserDatas.size();++i)
   {
@@ -65,9 +73,11 @@ void CPhysxGrenade::Update(float _fElapsedTime)
   }
 }
 
-void CPhysxGrenade::Init(float _fSphereRadius, float _fDensity, int _iColGroup, Vect3f _vPosition, Vect3f _vDirection,float _fVelocity)
+void CPhysxGrenade::Init(float _fSphereRadius, float _fDensity, int _iColGroup, Vect3f _vPosition, Vect3f _vDirection,float _fVelocity, string _szEmitter)
 {
   CPhysicsManager* l_pPM = CORE->GetPhysicsManager();
+
+  m_pParticleEmitter = CORE->GetParticleManager()->GetParticleEmitter(_szEmitter);
 
   m_pPhysxUserData = new CPhysicUserData(GetName());
   m_pPhysxUserData->SetPaint(true);

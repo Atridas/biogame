@@ -393,10 +393,10 @@ void CParticleManager::Update(const float _fElapsedTime, CCamera* camera)
 
 void CParticleManager::Render(CRenderManager* _pRM)
 {
-  Mat44f l_mat;
+  /*Mat44f l_mat;
   l_mat.SetIdentity();
 
-  _pRM->SetTransform(l_mat);
+  _pRM->SetTransform(l_mat);*/
 
   vector<CParticleEmitter*>::iterator it  = m_vEmitterParticle.begin(),
                                       end = m_vEmitterParticle.end();
@@ -415,5 +415,15 @@ void CParticleManager::Init(CRenderManager* _pRM)
   {
     (*it)->Init(_pRM);
     ++it;
+  }
+}
+
+
+
+void CParticleManager::SetAllEmittersActive(bool _bActive)
+{
+  for (size_t i=0;i<m_vEmitterParticle.size();++i)
+  {
+    m_vEmitterParticle[i]->SetActive(_bActive);
   }
 }
