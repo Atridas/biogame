@@ -222,3 +222,8 @@ bool CPhysicController::UpdateCharacterExtents (bool bent, float ammount)
   CObject3D::InitMat44();
 	return true;
 }
+
+void CPhysicController::SetGroup(int _iGroup)
+{
+  m_pPhXController->getActor()->setGroup(_iGroup);
+}

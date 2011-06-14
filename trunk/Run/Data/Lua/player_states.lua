@@ -1,5 +1,20 @@
 -- Estats del player
 
+Player_Constants = {}
+
+Player_Constants["Walk Speed"] = 4
+Player_Constants["Run Speed"] = 10
+Player_Constants["Temps Tocat"] = 0.3
+Player_Constants["Temps Morint"] = 2.6
+
+
+
+State_Player_Neutre = {}
+State_Player_Apuntar = {}
+State_Player_Tocat = {}
+State_Player_Morint = {}
+State_Player_Mort = {}
+
 -------------------------------------------------------------------------------------------------
 camera_player = function(_jugador, _dt)
   --log('a saco 2')
@@ -35,7 +50,7 @@ end
 -- Neutre!!!! -----------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
-State_Player_Neutre = {}
+
 
 -------------------------------------------------------------------------------------------------
 State_Player_Neutre['Enter'] = function(_jugador)
@@ -72,8 +87,8 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   local animation = _jugador:get_component(BaseComponent.animation)
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   
-  local speed = 4
-  local run_speed = 10
+  local speed = Player_Constants["Walk Speed"]
+  local run_speed = Player_Constants["Run Speed"]
   
   local direction, left
   local isMoving = false
@@ -152,6 +167,12 @@ end
 -------------------------------------------------------------------------------------------------
 State_Player_Neutre['Receive'] = function(_jugador, _event)
 
+  if _event.msg == Event.rebre_impacte then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Tocat')
+  elseif _event.msg == Event.morir then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Morint')
+  end
+  
 end
 
 -------------------------------------------------------------------------------------------------
@@ -160,7 +181,7 @@ end
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 
-State_Player_Apuntar = {}
+
 
 -------------------------------------------------------------------------------------------------
 State_Player_Apuntar['Enter'] = function(_jugador)
@@ -209,7 +230,7 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
   end
   
   local animation = _jugador:get_component(BaseComponent.animation)
-  local speed = 5
+  local speed = Player_Constants["Walk Speed"]
   
   local direction, left
   local isMoving = false
@@ -284,6 +305,117 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Apuntar['Receive'] = function(_jugador, _event)
+
+  if _event.msg == Event.rebre_impacte then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Tocat')
+  elseif _event.msg == Event.morir then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Morint')
+  end
+  
+end
+
+
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-- Tocat!!!! ------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+
+
+
+-------------------------------------------------------------------------------------------------
+State_Player_Tocat['Enter'] = function(_jugador)
+  --log('enter player apuntant')
+  
+  local vida = _jugador:get_component(BaseComponent.vida)
+  vida.immortal = true
+  
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  local animation = _jugador:get_component(BaseComponent.animation)
+  animation:set_cycle('idle', 0.3)
+  animation:set_animation('impact', 0.3)
+  player_controller.time = 0
+  
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Tocat['Exit'] = function(_jugador)
+
+  local vida = _jugador:get_component(BaseComponent.vida)
+  vida.immortal = false
+  
+  local animation = _jugador:get_component(BaseComponent.animation)
+  animation:clear_cycle(0.3)
+  
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Tocat['Update'] = function(_jugador, _dt)
+  
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  player_controller.time = player_controller.time + _dt
+  
+  local pitch, yaw, object3d = camera_player(_jugador, _dt)
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  
+  if player_controller.time > Player_Constants["Temps Tocat"] then
+    if not ACTION_MANAGER:is_action_active('Aim') then
+      _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+    else
+      _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Apuntar')
+    end
+  end
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Tocat['Receive'] = function(_jugador, _event)
+
+  if _event.msg == Event.morir then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Payer_Morint')
+  end
+end
+
+
+
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-- Morint!!!! -----------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+
+
+
+-------------------------------------------------------------------------------------------------
+State_Player_Morint['Enter'] = function(_jugador)
+  --log('enter player apuntant')
+  
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  local animation = _jugador:get_component(BaseComponent.animation)
+  animation:set_animation('dead', 0.3)
+  player_controller.time = 0
+  
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Morint['Exit'] = function(_jugador)
+  
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Morint['Update'] = function(_jugador, _dt)
+  
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  player_controller.time = player_controller.time + _dt
+  
+  if player_controller.time > Player_Constants["Temps Morint"] then
+    --log('Por què?')
+    _jugador:get_component(BaseComponent.vida).vida = 100
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+  end
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Morint['Receive'] = function(_jugador, _event)
 
 end
 

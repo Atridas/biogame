@@ -15,6 +15,7 @@ public:
   CComponentMovement() {};
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_MOVEMENT;};
+  static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_MOVEMENT;};
 
   bool Init(CGameEntity *_pEntity);
 

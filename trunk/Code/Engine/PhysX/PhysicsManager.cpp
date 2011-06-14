@@ -846,15 +846,6 @@ void CPhysicsManager::ApplyExplosion(NxActor* _pActor,const Vect3f& _vPosSphere,
 }
 
 
-bool CPhysicsManager::Load(const string& _szFileName, bool _bReload)
-{
-
-
-
-  return true;
-}
-
-
 
 int GetCollisionGroup(const string& _szGroup)
 {
@@ -885,6 +876,10 @@ int GetCollisionGroup(const string& _szGroup)
   else if(_szGroup == "explosio")
   {
     return ECG_EXPLOSIONS;
+  }
+  else if(_szGroup == "ray shoot")
+  {
+    return ECG_RAY_SHOOT;
   }
   else
   {

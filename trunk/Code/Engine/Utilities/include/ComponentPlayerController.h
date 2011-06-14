@@ -29,6 +29,8 @@ public:
       m_fRunSpeed(2),
       m_fYawSpeed(1),
       m_fPitchSpeed(1),
+
+      m_fTime(0),
      
       m_fMaxPitchAngle( FLOAT_PI_VALUE/3),
       m_fMinPitchAngle(-FLOAT_PI_VALUE/3)
@@ -36,6 +38,7 @@ public:
       {};
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_PLAYER_CONTROLLER;};
+  static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_PLAYER_CONTROLLER;};
 
   bool Init(CGameEntity *_pEntity);
 
@@ -102,6 +105,8 @@ public:
 
   float m_fSpeed;
   string m_szCurrentAnimation;
+
+  float m_fTime;
 
   void Shoot();
 

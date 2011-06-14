@@ -18,6 +18,7 @@ public:
   ~CComponentAnimation() {Done();}
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_ANIMATION;};
+  static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_ANIMATION;};
 
   bool Init(CGameEntity* _pEntity);
   

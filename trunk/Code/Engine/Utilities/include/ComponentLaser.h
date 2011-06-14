@@ -13,6 +13,7 @@ public:
   ~CComponentLaser() {Done();}
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_LASER;};
+  static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_LASER;};
 
   bool Init(CGameEntity* _pEntity, const Vect3f& _vPosInit, const Vect3f& _vPosEnd, float _fTime);
 

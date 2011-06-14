@@ -48,6 +48,7 @@ public:
 	void											SetPosition							(const Vect3f& pos);
 	float											GetGravity							() const {return m_fGravity;}
 	void											SetGravity							(float gravity)  {m_fGravity = gravity;}
+  void                      SetGroup                (int _iGroup);
 
 	//---PhsX Info---
 	NxController*							GetPhXController				() {return m_pPhXController;}

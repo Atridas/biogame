@@ -24,6 +24,7 @@ public:
       {};
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_IA_WALK_TO_PLAYER;};
+  static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_IA_WALK_TO_PLAYER;};
 
   bool Init(CGameEntity *_pEntity,
             const string& _szPlayerEntityName,

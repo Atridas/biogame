@@ -9,11 +9,13 @@
 
 bool CComponentPhysXController::Init(CGameEntity *_pEntity,
             float radius, float height, float slope, float skinwidth, 
-		        float stepOffset, uint32 _iCollisionMask 
+		        float stepOffset, uint32 _iCollisionGroup 
             )
 {
   assert(_pEntity->IsOk());
   SetEntity(_pEntity);
+
+  CPhysicsManager *l_pPM = CORE->GetPhysicsManager();
 
   m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
   assert(m_pObject3D); //TODO fer missatges d'error més elavorats
@@ -27,7 +29,8 @@ bool CComponentPhysXController::Init(CGameEntity *_pEntity,
   m_pPhysXData->SetEntity(_pEntity);
 
   m_pPhysXController = new CPhysicController(
-                                  radius, height, slope, skinwidth, stepOffset, _iCollisionMask,
+                                  radius, height, slope, skinwidth, stepOffset, 
+                                  l_pPM->GetCollisionMask( (ECollisionGroup) _iCollisionGroup ),
                                   m_pPhysXData,
                                   m_pObject3D->GetPosition());
   
@@ -35,7 +38,9 @@ bool CComponentPhysXController::Init(CGameEntity *_pEntity,
   m_pPhysXController->SetYaw  (m_pObject3D->GetYaw()  );
   m_pPhysXController->SetRoll (m_pObject3D->GetRoll() );
 
-  CORE->GetPhysicsManager()->AddPhysicController(m_pPhysXController);
+  l_pPM->AddPhysicController(m_pPhysXController);
+
+  m_pPhysXController->SetGroup(_iCollisionGroup);
 
   SetOk(true);
   return IsOk();
