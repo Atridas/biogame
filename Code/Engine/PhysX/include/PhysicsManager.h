@@ -46,7 +46,8 @@ enum ECollisionGroup {
   ECG_COBERTURES,
   ECG_OBJECTES_DINAMICS,
   ECG_EXPLOSIONS,
-  ECG_RAY_SHOOT
+  ECG_RAY_SHOOT,
+  ECG_CAMERA
 };
 
 int GetCollisionGroup(const string& _szGroup);

@@ -1,9 +1,10 @@
 #include "TestProcess.h"
 #include "Core.h"
+#include "ActionManager.h"
 #include "RenderManager.h"
 #include "FontManager.h"
-#include "FPSCamera.h"
-#include "ThPSCamera.h"
+#include "EntityManager.h"
+#include "ShoulderCamera.h"
 #include "InputManager.h"
 #include "Texture.h"
 #include "TextureManager.h"
@@ -11,64 +12,99 @@
 #include "StaticMeshManager.h"
 #include "RenderableObjectsManager.h"
 #include "AnimatedModelManager.h"
-
 #include "AnimatedInstanceModel.h"
 #include "RenderableAnimatedInstanceModel.h"
-
 #include <IndexedVertexs.h>
 #include "VertexsStructs.h"
 #include "Console.h"
-
+#include <PhysicsManager.h>
+#include "PhysicActor.h"
+#include "ComponentObject3D.h"
+#include "ComponentMovement.h"
+#include "ComponentPhysXController.h"
+#include "ComponentPlayerController.h"
+#include "ComponentIAWalkToPlayer.h"
+#include "Component3rdPSCamera.h"
+#include "ComponentPhysXBox.h"
+#include "ComponentPhysXMesh.h"
+#include "ComponentRenderableObject.h"
+#include "ComponentAnimation.h"
+#include "ComponentVida.h"
+#include "ComponentStateMachine.h"
+#include "ComponentAnimation.h"
 #include <LightManager.h>
 #include "SpotLight.h"
 
-ID3DXSprite* g_pD3DXSprite = NULL;
-ID3DXSprite* g_pD3DXSprite2 = NULL;
+#define ALTURA_CONTROLLER 1.5f
+#define RADIUS_CONTROLLER 0.3f
+#define COLISIONABLE_MASK ((1<<GROUP_COLLIDABLE_NON_PUSHABLE))
+
+
 
 bool CTestProcess::Init()
 {
-  LOGGER->AddNewLog(ELL_INFORMATION,"TestProcess::Init");
-  
-  m_pObject = new CObject3D();
-  m_fVelocity = 1;
-  
-  m_pObject->SetPosition(Vect3f(-6,1.7f,0));
-
-  m_pObjectBot = CORE->GetRenderableObjectsManager()->GetResource("bot");
-
-  m_iState = 0;
-
-  m_bStateChanged = false;
-
-  //m_pObjectCamera = new CFPSCamera(
-  //  0.1f,
-  //  100.0f,
-  //  45.0f * FLOAT_PI_VALUE/180.0f,
-  //  ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
-  //  m_pObject);
-
-  m_pObjectCamera = new CThPSCamera(
-    0.1f,
-    100.0f,
-    35.0f * FLOAT_PI_VALUE/180.0f,
-    ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
-    m_pObject,
-    4.5f);
-
-  m_pCamera = m_pObjectCamera;
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
 
-  CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
+  m_pPlayerEntity = CORE->GetEntityManager()->CreateEntity();
+  CORE->GetEntityManager()->SetName("Player", m_pPlayerEntity);
 
-  if(l_Spot)
-  {
-    l_Spot->SetDirection(m_pObjectBot->GetPosition());
-    l_Spot->SetActive(true);
-  }
-  m_bRenderLights = true;
+  CComponentObject3D *l_pComponentObject3D = new CComponentObject3D();
+  l_pComponentObject3D->Init(m_pPlayerEntity);
+  l_pComponentObject3D->SetPosition(Vect3f(-8.0f,2.0f,-4.0f));
 
-  D3DXCreateSprite(RENDER_MANAGER->GetDevice(), &g_pD3DXSprite);
-  D3DXCreateSprite(RENDER_MANAGER->GetDevice(), &g_pD3DXSprite2);
+  (new CComponentMovement)->Init(m_pPlayerEntity);
+
+  CComponentRenderableObject * l_pComponentRenderableObject = new CComponentRenderableObject();
+  l_pComponentRenderableObject->InitAnimatedModel(m_pPlayerEntity, "Player Character", "riggle");
+  l_pComponentRenderableObject->m_bBlockPitchRoll = true;
+  l_pComponentRenderableObject->m_fHeightAdjustment = -1.f;
+  l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
+
+
+  (new CComponentAnimation())->Init(m_pPlayerEntity);
+
+
+  CComponentPlayerController *l_pComponentPlayerController = new CComponentPlayerController();
+  l_pComponentPlayerController->Init(m_pPlayerEntity,
+                                      //Actions
+                                     "MoveFwd",
+                                     "MoveBack",
+                                     "MoveLeft",
+                                     "MoveRight",
+                                     "Walk",
+                                     "Run",
+                                     "Aim",
+                                     "Shoot",
+                                      //Animations
+                                     "idle",
+                                     "walk",
+                                     "walk",
+                                     "walk",
+                                     "walk",
+                                     "point",
+                                     "shoot",
+                                      //Speed
+                                     4, 10, 1, 1,
+                                      FLOAT_PI_VALUE/3,
+                                     -FLOAT_PI_VALUE/3);
+
+  CComponent3rdPSCamera *l_pComponent3rdPSCamera = new CComponent3rdPSCamera();
+
+  l_pComponent3rdPSCamera->Init(m_pPlayerEntity, 0.55f, 0.85f, 1.8f);
+
+  m_pCamera = l_pComponent3rdPSCamera->GetCamera();
+
+  CComponentPhysXController *l_pComponentPhysXController = new CComponentPhysXController();
+  l_pComponentPhysXController->Init(m_pPlayerEntity, 0.3f, 1.5f, 10.0f, 0.1f, 0.5f, ECG_PERSONATGE );
+
+  (new CComponentStateMachine())->Init(m_pPlayerEntity, "State_Player_Neutre");
+
+
+  CLightManager* l_pLM = CORE->GetLightManager();
+  l_pLM->SetLightsEnabled(true);
+
+  CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/NivellProves/XML/GameEntities.xml");
+
 
   SetOk(true);
   return IsOk();
@@ -76,195 +112,32 @@ bool CTestProcess::Init()
 
 void CTestProcess::Release()
 {
-  LOGGER->AddNewLog(ELL_INFORMATION,"TestProcess::Release");
 
-  CHECKED_DELETE(m_pObjectCamera)
-  CHECKED_DELETE(m_pObject)
-  CHECKED_RELEASE(g_pD3DXSprite)
-  CHECKED_RELEASE(g_pD3DXSprite2)
 }
 
 void CTestProcess::Update(float _fElapsedTime)
 {
-  if(m_pObject && m_pObjectBot) 
-  {
-    //Actualitze el pitch i el yaw segons els delta del mouse
-    float l_fPitch, l_fYaw;
 
-    Vect3i l_vVec = INPUT_MANAGER->GetMouseDelta();
-
-    l_fPitch = m_pObject->GetPitch();
-    l_fYaw = m_pObject->GetYaw();
-  
-    m_pObject->SetYaw(l_fYaw-l_vVec.x*_fElapsedTime);
-    m_pObjectBot->SetYaw(m_pObject->GetYaw()-FLOAT_PI_VALUE/2.0f);
-
-    l_fPitch -= l_vVec.y*_fElapsedTime;
-    if(l_fPitch < - FLOAT_PI_VALUE/3) l_fPitch = - FLOAT_PI_VALUE/3;
-    if(l_fPitch >   FLOAT_PI_VALUE/3) l_fPitch =   FLOAT_PI_VALUE/3;
-    m_pObject->SetPitch(l_fPitch);
-
-    m_pObjectBot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObjectBot->GetPosition().y, m_pObject->GetPosition().z));
-  
-    l_fPitch = m_pObject->GetPitch();
-    //l_fPitch = l_fPitch+FLOAT_PI_VALUE/2;
-    l_fYaw = m_pObjectBot->GetYaw();
-    l_fYaw = l_fYaw+FLOAT_PI_VALUE/2;
-    //l_fRoll = m_pObjectBot->GetRoll();
-
-    CSpotLight* l_pSpot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
-    if(l_pSpot)
-    {
-      l_pSpot->SetPosition(Vect3f(m_pObject->GetPosition().x, m_pObject->GetPosition().y, m_pObject->GetPosition().z));
-
-      //CDirectionalLight* l_dir = (CDirectionalLight*)CORE->GetLightManager()->GetResource("Direct01");
-      Vect3f l_vec(cos(l_fYaw) * cos(l_fPitch), sin(l_fPitch),sin(l_fYaw) * cos(l_fPitch) );
-      l_pSpot->SetDirection(Vect3f(l_vec.x,l_vec.y,l_vec.z));
-    }
-
-    if(m_bStateChanged)
-    {
-      ((CRenderableAnimatedInstanceModel*)m_pObjectBot)->GetAnimatedInstanceModel()->BlendCycle(m_iState,0);
-
-      m_bStateChanged = false;
-    }
-  }
 }
 
 void CTestProcess::RenderScene(CRenderManager* _pRM)
 {
-  //Render Objects
   CORE->GetRenderableObjectsManager()->Render(_pRM);
 
-  //Render Lights
-  if(m_bRenderLights)
-    CORE->GetLightManager()->Render(_pRM);
-
-  //Matrix for testing
-  Mat44f r,r2, t, s, identity, total;
-
-  identity.SetIdentity();
-  r.SetIdentity();
-  r2.SetIdentity();
-  t.SetIdentity();
-  s.SetIdentity();
-
-  //Draw Grid and Axis
-  _pRM->SetTransform(identity);
-  _pRM->DrawGrid(30.0f,colCYAN,30,30);
-  _pRM->DrawAxis();
-
+  //Mat44f m;
+  //_pRM->SetTransform(m.SetIdentity());
+  //_pRM->DrawAxis();
+  //_pRM->DrawLine(m_pCamera->GetLookAt(),m_pCamera->GetEye()-Vect3f(0.0f,0.5f,0.0f)+m_pCamera->GetDirection().Normalize()*5.0f,colRED);
+  //_pRM->DrawLine(m_pCamera->GetEye(),Vect3f(0.0f),colBLUE);
 }
 
 void CTestProcess::RenderINFO(CRenderManager* _pRM)
 {
-  /*
-  D3DXVECTOR3 vecPos = D3DXVECTOR3(0,0,0);
-  g_pD3DXSprite->Begin(0);
-  g_pD3DXSprite->Draw(_pRM->GetTextureManager()->GetResource("ZBlurTexture")->GetD3DTexture(), NULL, NULL, &vecPos, 0xffffffff);
-  g_pD3DXSprite->End();
-  */
-  /*
-  vecPos = D3DXVECTOR3(0,382,0);
-  g_pD3DXSprite2->Begin(0);
-  g_pD3DXSprite2->Draw(_pRM->GetTextureManager()->GetResource("DownSampledGlow2")->GetD3DTexture(), NULL, NULL, &vecPos, 0xffffffff);
-	g_pD3DXSprite2->End();
-  */
-
-  //_pRM->DrawQuad2D(pos, 100, 100, UPPER_LEFT, colGREEN);
-
-  _pRM->EnableAlphaBlend();
-
-  Vect2i pos(40, 40);
-
-  
-  CTexture* l_pTexture = CORE->GetTextureManager()->GetResource("Data/Textures/gohan.png");
-  CTexture* l_pTexture2 = CORE->GetTextureManager()->GetResource("Data/Textures/gohan.png");
- // _pRM->EnableAlphaBlend();
-  if(l_pTexture)
-  {
-    assert(l_pTexture->IsOk());
-    l_pTexture->Activate(0);
-    _pRM->DrawTexturedQuad2D(pos, l_pTexture->GetWidth(), l_pTexture->GetHeight(), UPPER_LEFT);
-  }
-
-  _pRM->DisableAlphaBlend();
+ 
 }
 
 bool CTestProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
 {
-  if(strcmp(_pcAction, "Run") == 0)
-  {
-    m_fVelocity = 10;
-    return true;
-  }
-
-  if(strcmp(_pcAction, "Walk") == 0)
-  {
-    m_fVelocity = 1;
-    return true;
-  }
-
-  if(strcmp(_pcAction, "MoveFwd") == 0)
-  {
-    Vect3f l_vPos = m_pObject->GetPosition();
-    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
-    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
-    m_pObject->SetPosition(l_vPos);
-
-    if(m_iState != 1)
-      m_bStateChanged = true;
-
-    m_iState = 1;
-
-    return true;
-  }
-
- if(strcmp(_pcAction, "MoveBack") == 0)
-  {
-    Vect3f l_vPos = m_pObject->GetPosition();
-    l_vPos.x = l_vPos.x - cos(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
-    l_vPos.z = l_vPos.z - sin(m_pObject->GetYaw())*_fDeltaSeconds*m_fVelocity;
-    m_pObject->SetPosition(l_vPos);
-
-    if(m_iState != 1)
-      m_bStateChanged = true;
-
-    m_iState = 1;
-
-    return true;
-  }
-
-  if(strcmp(_pcAction, "MoveLeft") == 0)
-  {
-    Vect3f l_vPos = m_pObject->GetPosition();
-    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
-    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()+FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
-    m_pObject->SetPosition(l_vPos);
-
-    if(m_iState != 1)
-      m_bStateChanged = true;
-
-    m_iState = 1;
-
-    return true;
-  }
-
-  if(strcmp(_pcAction, "MoveRight") == 0)
-  {
-    Vect3f l_vPos = m_pObject->GetPosition();
-    l_vPos.x = l_vPos.x + cos(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
-    l_vPos.z = l_vPos.z + sin(m_pObject->GetYaw()-FLOAT_PI_VALUE/2)*_fDeltaSeconds*m_fVelocity;
-    m_pObject->SetPosition(l_vPos);
-
-    if(m_iState != 1)
-      m_bStateChanged = true;
-
-    m_iState = 1;
-
-    return true;
-  }
-
+  
   return false;
 }
-

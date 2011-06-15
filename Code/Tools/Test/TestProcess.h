@@ -6,6 +6,8 @@
 //Forward declarations---------------------
 class CObject3D;
 class CRenderManager;
+class CRenderableAnimatedInstanceModel;
+class CGameEntity;
 //-----------------------------------------
 
 class CTestProcess:
@@ -13,8 +15,7 @@ class CTestProcess:
 {
 
 public:
-                        CTestProcess            (): CProcess("CTestProcess"), m_pObject(0), m_pObjectCamera(0),
-                                                    m_fVelocity(0.0f),m_bRenderLights(false)
+                        CTestProcess            (): CProcess("CTestProcess")
                                                 {};
   virtual               ~CTestProcess           ()                          {Done();};
 
@@ -28,15 +29,9 @@ public:
   virtual bool          ExecuteProcessAction      (float _fDeltaSeconds, float _fDelta, const char* _pcAction);
 
 private:
-
-	void                  Release                 ();
-
-  int                   m_iState;
-  bool                  m_bStateChanged;
-  CObject3D*            m_pObject;
-  CObject3D*            m_pObjectBot;
-  CCamera*              m_pObjectCamera;
-  float                 m_fVelocity;
-  bool                  m_bRenderLights;
   
+  void                  Release                 ();
+
+
+  CGameEntity*          m_pPlayerEntity;
 };

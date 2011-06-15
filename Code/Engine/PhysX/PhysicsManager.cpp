@@ -627,7 +627,6 @@ NxCCDSkeleton* CPhysicsManager::CreateCCDSkeleton (float size)
 
 CPhysicUserData* CPhysicsManager::RaycastClosestActor (const Vect3f posRay, const Vect3f& dirRay, uint32 impactMask, CPhysicUserData* impactObject, SCollisionInfo& info )
 {
-  
   //NxUserRaycastReport::ALL_SHAPES
 	assert(m_pScene != NULL);
 
@@ -880,6 +879,10 @@ int GetCollisionGroup(const string& _szGroup)
   else if(_szGroup == "ray shoot")
   {
     return ECG_RAY_SHOOT;
+  }
+  else if(_szGroup == "camera")
+  {
+    return ECG_CAMERA;
   }
   else
   {
