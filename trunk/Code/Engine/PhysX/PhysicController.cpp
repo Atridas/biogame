@@ -225,5 +225,11 @@ bool CPhysicController::UpdateCharacterExtents (bool bent, float ammount)
 
 void CPhysicController::SetGroup(int _iGroup)
 {
-  m_pPhXController->getActor()->setGroup(_iGroup);
+  //m_pPhXController->getActor()->setGroup(_iGroup);
+  NxShape *const* shapes = m_pPhXController->getActor()->getShapes();
+  int l_iNumShapes = m_pPhXController->getActor()->getNbShapes();
+  for(int i = 0; i < l_iNumShapes; ++i)
+  {
+    shapes[i]->setGroup(_iGroup);
+  }
 }

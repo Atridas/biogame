@@ -79,6 +79,9 @@
     <Filter Include="EntitySystem\Components\ComponentIABrain">
       <UniqueIdentifier>{5142ecb9-e959-442c-ba78-8bac9075a33b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentRagdoll">
+      <UniqueIdentifier>{65730fd3-8119-4cb5-baba-15f6f57433e9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -164,6 +167,9 @@
     </ClCompile>
     <ClCompile Include="ComponentIABrain.cpp">
       <Filter>EntitySystem\Components\ComponentIABrain</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentRagdoll.cpp">
+      <Filter>EntitySystem\Components\ComponentRagdoll</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +265,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentIABrain.h">
       <Filter>EntitySystem\Components\ComponentIABrain</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentRagdoll.h">
+      <Filter>EntitySystem\Components\ComponentRagdoll</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -92,7 +92,7 @@ bool CEntityProcess::Init()
   CComponent3rdPSCamera *l_pComponent3rdPSCamera = new CComponent3rdPSCamera();
   //l_pComponent3rdPSCamera->Init(m_pPlayerEntity, 0, 0);
   //((CThPSCamera*)l_pComponent3rdPSCamera->GetCamera())->SetZoom(0);
-  l_pComponent3rdPSCamera->Init(m_pPlayerEntity, 0.8f, 0.4f, 2.f);
+  l_pComponent3rdPSCamera->Init(m_pPlayerEntity, 0.55f, 0.85f, 1.8f);
 
   m_pCamera = l_pComponent3rdPSCamera->GetCamera();
 
