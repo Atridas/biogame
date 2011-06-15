@@ -30,6 +30,7 @@ global PARALLAX_PROPERTY_TYPE        = 1
 global BUMP_PROPERTY_TYPE              = 2
 global SPECULAR_PROPERTY_TYPE        = 3
 global ALPHA_PROPERTY_TYPE             = 4
+global GLOW_PROPERTY_TYPE              = 5
 
 global DEFAULT_BUMP_VALUE              = 0.6
 global DEFAULT_PARALLAX_VALUE        = 0.02

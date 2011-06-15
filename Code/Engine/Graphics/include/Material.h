@@ -14,6 +14,7 @@
 #define BUMP_PROPERTY_TYPE     2
 #define SPECULAR_PROPERTY_TYPE 3
 #define ALPHA_PROPERTY_TYPE    4
+#define GLOW_PROPERTY_TYPE     5
 
 class CMaterial
 {

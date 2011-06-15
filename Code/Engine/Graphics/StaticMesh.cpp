@@ -17,6 +17,7 @@
 #include "BumpPropertyDecorator.h"
 #include "SpecularPropertyDecorator.h"
 #include "AlphaDecorator.h"
+#include "GlowPropertyDecorator.h"
 
 #include <IndexedVertexs.h>
 #include <base.h>
@@ -201,6 +202,10 @@ bool CStaticMesh::Load()
           break;
         case ALPHA_PROPERTY_TYPE:
           l_pMaterial = new CAlphaPropertyDecorator( l_pMaterial );
+          break;
+        case GLOW_PROPERTY_TYPE:
+          l_File.read((char*)&l_fValue, sizeof(float));
+          l_pMaterial = new CGlowPropertyDecorator(l_pMaterial,l_fValue);
           break;
         default:
           break;
