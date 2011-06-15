@@ -46,23 +46,26 @@ void CComponent3rdPSCamera::PostUpdate(float _fDeltaTime)
   CPhysicsManager* l_pPM = CORE->GetPhysicsManager();
 
   CPhysicUserData* l_pUserDataSHOOT = 0;
-  l_pUserDataSHOOT = l_pPM->RaycastClosestActor(m_pCamera->GetLookAt(),-m_pCamera->GetDirection().Normalize(),l_pPM->GetCollisionMask(ECG_CAMERA),l_pUserDataSHOOT,l_CInfo);
   
+  l_pUserDataSHOOT = l_pPM->RaycastClosestActor(m_CameraObject.GetPosition()+Vect3f(0.0f,m_fCameraHeight,0.0f),(m_pCamera->GetLookAt()-m_CameraObject.GetPosition()).Normalize(),l_pPM->GetCollisionMask(ECG_CAMERA),l_pUserDataSHOOT,l_CInfo);
+  
+  if(l_pUserDataSHOOT && l_CInfo.m_fDistance < m_fCameraRight)
+  {
+    m_pCamera->SetShoulderDistance(l_CInfo.m_fDistance);
+  }else{
+    m_pCamera->SetShoulderDistance(m_fCameraRight);
+  }
+
+	l_pUserDataSHOOT = 0;
+
+	l_pUserDataSHOOT = l_pPM->RaycastClosestActor(m_pCamera->GetLookAt(),-m_pCamera->GetDirection().Normalize(),l_pPM->GetCollisionMask(ECG_CAMERA),l_pUserDataSHOOT,l_CInfo);
+
   if(l_pUserDataSHOOT && l_CInfo.m_fDistance < m_fZoom)
   {
     m_pCamera->SetZoom(l_CInfo.m_fDistance);
   }else{
     m_pCamera->SetZoom(m_fZoom);
   }
-
-  //l_pUserDataSHOOT = l_pPM->RaycastClosestActor(m_pObject3D->GetPosition(),(m_pCamera->GetLookAt()-m_pObject3D->GetPosition()).Normalize(),l_pPM->GetCollisionMask(ECG_CAMERA),l_pUserDataSHOOT,l_CInfo);
-  //
-  //if(l_pUserDataSHOOT && l_CInfo.m_fDistance < m_fCameraRight)
-  //{
-  //  m_pCamera->SetShoulderDistance(l_CInfo.m_fDistance);
-  //}else{
-  //  m_pCamera->SetShoulderDistance(m_fCameraRight);
-  //}
   
 }
 
