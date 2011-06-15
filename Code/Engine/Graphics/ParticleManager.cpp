@@ -93,9 +93,9 @@ bool CParticleManager::Load(const string& _szFileName)
         l_pInfo->m_fLife2 = l_treeParticleEmitter.GetFloatProperty("Life2");
         l_pInfo->m_fAngle1 = l_treeParticleEmitter.GetFloatProperty("Angle1");
         l_pInfo->m_fAngle2 = l_treeParticleEmitter.GetFloatProperty("Angle2");
-        l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Gravity",Vect3f(3.0f));
+        l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Gravity",Vect3f(0.0f));
         l_pInfo->m_vGravity = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
-        l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Velocitate",Vect3f(3.0f));
+        l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Velocitate",Vect3f(0.0f));
         l_pInfo->m_vVel = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
         l_pInfo->m_bAnimated = false; // si te animacio despres la canvio
         l_pInfo->m_bBucleInfinit=l_treeParticleEmitter.GetBoolProperty("Bucle");
@@ -268,9 +268,9 @@ bool CParticleManager::Load(const string& _szFileName)
 			  Vect3f l_vVec3 = l_treeInstanceParticle.GetVect3fProperty("position",Vect3f(0.0f));
 			  l_pParticleEmitter->SetPosition(D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z));
         l_pParticleEmitter->SetName(l_treeInstanceParticle.GetPszISOProperty("id" ,""));
-        l_vVec3 = l_treeInstanceParticle.GetVect3fProperty("Direction",Vect3f(3.0f));
+        l_vVec3 = l_treeInstanceParticle.GetVect3fProperty("Direction",Vect3f(0.0f));
         m_vSpawnDir = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
-		    l_vVec3 = l_treeInstanceParticle.GetVect3fProperty("Desviacion",Vect3f(3.0f));
+		    l_vVec3 = l_treeInstanceParticle.GetVect3fProperty("Desviacion",Vect3f(0.0f));
         m_vDesviacionSpawnDir = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
 		
 		    m_szFormEmitter = l_treeInstanceParticle.GetPszISOProperty("FormEmitter","");
@@ -327,9 +327,9 @@ bool CParticleManager::Load(const string& _szFileName)
                 m_fTimeInterpolation = l_treeParticleInstanceDiredtion.GetFloatProperty("timeInterpolation");
             
 			
-			          l_vVec3 = l_treeParticleInstanceDiredtion.GetVect3fProperty("Direction",Vect3f(3.0f));
+			          l_vVec3 = l_treeParticleInstanceDiredtion.GetVect3fProperty("Direction",Vect3f(0.0f));
                 m_vSpawnDir = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
-			          l_vVec3 = l_treeParticleInstanceDiredtion.GetVect3fProperty("Desviacion",Vect3f(3.0f));
+			          l_vVec3 = l_treeParticleInstanceDiredtion.GetVect3fProperty("Desviacion",Vect3f(0.0f));
                 m_vDesviacionSpawnDir = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
             
             

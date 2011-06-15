@@ -73,7 +73,7 @@ public:
   const D3DXVECTOR3&              GetGravity          () const {return m_vGravity;};
   float                           GetAngle1            () const {return m_fAngle1;};
   float                           GetAngle2            () const {return m_fAngle2;};
-  
+  float                           GetSizeY            () const {return m_vSize[1];};
 
   void            Update              (float fElapsedTime, CCamera* camera);
   void            Init                (CRenderManager* rm);
@@ -140,6 +140,7 @@ private:
   float                                     m_fRandomRebootEmitter;
   float                                     m_fRebootEmitter1; //Temps que tarde en tornar a emetre particules. Si esta a 0, no torna
   float                                     m_fRebootEmitter2;
+  float                                     m_fAgeParticle;
   bool                                      m_bTotDeCop; //Si esta a true crea totes les particules de cop. 
   vector<CTexture*>                         m_vTextureAnimation;
   int                                       m_iNumColor;

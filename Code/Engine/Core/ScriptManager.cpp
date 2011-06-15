@@ -35,6 +35,7 @@ extern "C"
 #include "GUIManager.h"
 #include "InputManager.h"
 #include "ActionManager.h"
+#include "ParticleManager.h"
 
 #include "EntitiesToLua.h"
 
@@ -460,6 +461,7 @@ void CScriptManager::RegisterLUAFunctions()
       .def("get_scipt_manager",               &CCore::GetScriptManager)
       .def("get_input_manager",               &CCore::GetInputManager)
       .def("get_action_manager",              &CCore::GetActionManager)
+      .def("get_particle_manager",            &CCore::GetParticleManager)
 
   //Process
     ,class_<CProcess,CBaseControl>("Process")
@@ -503,6 +505,13 @@ void CScriptManager::RegisterLUAFunctions()
   module(m_pLS) [
     class_<CScriptManager>("ScriptManager")
       .def("reload", &CScriptManager::Reload)
+  ];
+
+  //ParticleManager
+  module(m_pLS) [
+    class_<CParticleManager>("ParticleManager")
+      .def("reload", &CParticleManager::Reload)
+      .def("load",   &CParticleManager::Load)
   ];
 
   //Input

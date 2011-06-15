@@ -41,9 +41,11 @@ void CPhysxGrenade::Explosion()
   m_pPhysxActor->GetMat44(l_vMat44);
   Vect3f l_vTranslationVector = l_vMat44.GetTranslationVector();
   //Particules
+
   if (m_pParticleEmitter != 0)
   {
-    m_pParticleEmitter->SetPosition(D3DXVECTOR3(l_vTranslationVector.x,l_vTranslationVector.y,l_vTranslationVector.z));
+    float l_sizeY=m_pParticleEmitter->GetSizeY()/2;
+    m_pParticleEmitter->SetPosition(D3DXVECTOR3(l_vTranslationVector.x,l_vTranslationVector.y+l_sizeY,l_vTranslationVector.z));
     m_pParticleEmitter->SetActive(true);
   }
 
