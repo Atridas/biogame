@@ -38,7 +38,8 @@ public:
     ECT_LASER,
     ECT_STATE_MACHINE,
     ECT_ANIMATION,
-    ECT_IA_BRAIN
+    ECT_IA_BRAIN,
+    ECT_RAGDOLL
   };
   
   virtual Type GetType() = 0; //{return m_Type;};

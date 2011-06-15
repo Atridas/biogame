@@ -98,7 +98,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("laser",                CBaseComponent::ECT_LASER),
           value("state_machine",        CBaseComponent::ECT_STATE_MACHINE),
           value("animation",            CBaseComponent::ECT_ANIMATION),
-          value("ia_brain",             CBaseComponent::ECT_IA_BRAIN)
+          value("ia_brain",             CBaseComponent::ECT_IA_BRAIN),
+          value("ragdoll",              CBaseComponent::ECT_RAGDOLL)
       ]
       .def("get_type",     &CBaseComponent::GetType)
       .def("get_entity",   &CBaseComponent::GetEntity)

@@ -88,6 +88,7 @@
     <ClCompile Include="ComponentPhysXController.cpp" />
     <ClCompile Include="ComponentPhysXMesh.cpp" />
     <ClCompile Include="ComponentPlayerController.cpp" />
+    <ClCompile Include="ComponentRagdoll.cpp" />
     <ClCompile Include="ComponentRenderableObject.cpp" />
     <ClCompile Include="ComponentStateMachine.cpp" />
     <ClCompile Include="ComponentTrigger.cpp" />
@@ -119,6 +120,7 @@
     <ClInclude Include="include\ComponentPhysXController.h" />
     <ClInclude Include="include\ComponentPhysXMesh.h" />
     <ClInclude Include="include\ComponentPlayerController.h" />
+    <ClInclude Include="include\ComponentRagdoll.h" />
     <ClInclude Include="include\ComponentRenderableObject.h" />
     <ClInclude Include="include\ComponentStateMachine.h" />
     <ClInclude Include="include\ComponentTrigger.h" />
