@@ -1280,6 +1280,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		local l_instances = #()
 		
 		--Check
+		/*
 		local l_check = true
 		l_check = CheckSceneObjects $*
 			
@@ -1288,6 +1289,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			ShowError l_check
 			--return false
 		)
+		*/
 		
 		if ExportEntities $* then
 		(

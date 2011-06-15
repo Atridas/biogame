@@ -12,6 +12,8 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 	local l_specularParams = false
 	local l_opacityMap = false
 	local l_specularLevel = 0
+	local l_glow = false
+	local l_glossiness = 1.0f
 	
 	if _material.glossiness != undefined and _material.specularLevel != undefined then
 	(
@@ -84,7 +86,19 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 	(
 		--l_materialMask = bit.or l_materialMask TEXTURE_TYPE_GLOW
 		l_numTextures = l_numTextures + 1
+		l_numProperties = l_numProperties + 1
 		format "	->	GLOW\n"
+		
+		l_glow = true
+		local tmp = _material.filtermapamount * .02
+		if tmp < 0 or tmp > 2 then
+		(
+			l_glossiness = 1.0
+		)
+		else
+		(
+			l_glossiness = tmp
+		)
 	)
 	
 	--volcat a fitxer
@@ -186,6 +200,13 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 		(
 			WriteShort _file ALPHA_PROPERTY_TYPE #unsigned
 			format "	->	Diffuse has alpha\n"
+		)
+		
+		if l_glow then
+		(
+			WriteShort _file GLOW_PROPERTY_TYPE #unsigned
+			WriteFloat _file l_glossiness
+			format "	->	Glossiness: %\n" l_glossiness
 		)
 	)
 )
