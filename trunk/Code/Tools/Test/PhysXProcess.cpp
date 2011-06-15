@@ -1157,14 +1157,14 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
       CPhysxGrenade* l_pGrenade = new CPhysxGrenade("Granada" + g_vGrenadesVector.size(),7.0f,3.0f,25.0f);
       if (g_pUserDataSHOOT != 0)
       {
-        l_pGrenade->Init(0.1f,1.0f,GROUP_COLLIDABLE_PUSHABLE,l_vVect,l_vDirection,20.0f,"fum_proveta"); 
+        l_pGrenade->Init(0.1f,1.0f,GROUP_COLLIDABLE_PUSHABLE,l_vVect,l_vDirection,20.0f,"granada"); 
       }
       else
       {
         Vect3f l_vDirectionAir = l_DirCamera*10.0f;
         l_vDirectionAir = l_vDirectionAir-l_vVect;
         l_vDirectionAir.Normalize();
-        l_pGrenade->Init(0.1f,1.0f,GROUP_COLLIDABLE_PUSHABLE,l_vVect,l_vDirectionAir,20.0f,"fum_proveta");
+        l_pGrenade->Init(0.1f,1.0f,GROUP_COLLIDABLE_PUSHABLE,l_vVect,l_vDirectionAir,20.0f,"granada");
       }
       g_vGrenadesVector.push_back(l_pGrenade);
 

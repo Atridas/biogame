@@ -50,6 +50,7 @@ m_Particles(NUMPARTICLES)
   m_fRebootEmitter2=0.0f;
   m_iNumDirections=1;
   m_bTotDeCop=false;
+  m_fAgeParticle=0.0f;
 
  /* m_PointA=(D3DXVECTOR3(0.0f,0.0f,0.0f));
   m_PointB=(D3DXVECTOR3(0.0f,0.0f,0.0f));
@@ -129,8 +130,8 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
 void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
 {
 
-  if(!m_bActive)
-    return;
+  //if(!m_bActive)
+  //  return;
   
   //1.] Updatejar les particules i en cas de que s'hagi acabat el seu temps de vida, posar 
   //    en el vector que la posicio esta lliure
@@ -146,7 +147,8 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
       }
     }
   }
-  
+  if(!m_bActive)
+    return;
   //2.] Si es temps de crear particules noves fer-ho:
   if(m_bBucleInfinit==false && m_fRandomRebootEmitter==0)
   {
@@ -284,6 +286,7 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
 		    part->SetTexParticle(m_pTexParticle);
         //retorna el valor de la textura. Aixo serveix per si vol canviar de textura una particula ja creada
         m_pTexParticle=part->GetTexParticle();
+        
 
 		    //**************************
 		    /*if(m_bAnimated)
@@ -299,6 +302,7 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
     if(m_fRandomRebootEmitter==0)
     {
       m_bActive=false;
+      m_iNumBucle=m_iNumBucleAux;
     }
     if(m_fRandomRebootEmitter>0 && m_bBucleInfinit==false)
     {
@@ -390,8 +394,10 @@ void CParticleEmitter::Release()
   
 void CParticleEmitter::Render(CRenderManager* _pRM)
 {
-  if(!m_bActive)
-    return;
+  //if(!m_bActive)
+  //  return;
+
+  
 
   LPDIRECT3DDEVICE9 l_pd3dDevice = _pRM->GetDevice();
 

@@ -29,6 +29,9 @@
 
     <script action="ACTION_MANAGER                = CORE:get_action_manager()"/>
     <script action="AM                            = CORE:get_action_manager()"/>
+
+    <script action="PARTICLE_MANAGER              = CORE:get_particle_manager()"/>
+    <script action="PM                            = CORE:get_particle_manager()"/>
     
     <script action="GUI_MANAGER                   = CORE:get_gui_manager()"/>
 
