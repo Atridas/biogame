@@ -8,9 +8,7 @@ technique RenderGlowTechnique
 		ZEnable = true;
 		ZWriteEnable = true;
 		ZFunc = LessEqual;
-    AlphaBlendEnable = true;
-    SrcBlend = SrcAlpha;
-    DestBlend = InvSrcAlpha;
+		AlphaBlendEnable = false;
 		CullMode = CCW;
 		VertexShader = compile vs_3_0 VertGlow();
 		PixelShader = compile ps_3_0 PixGlow();
