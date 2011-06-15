@@ -27,6 +27,7 @@ extern "C"
 #include "ComponentIABrain.h"
 #include "ScriptedStateMachine.h"
 #include "ComponentVida.h"
+#include "ComponentRagdoll.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -129,6 +130,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponentPlayerController, CBaseComponent>("ComponentPlayerController")
       .def("init", (bool(CComponentPlayerController::*)(CGameEntity*))&CComponentPlayerController::Init)
       .def("shoot", &CComponentPlayerController::Shoot)
+      .def("die",   &CComponentPlayerController::Die)
 
       .def_readwrite("move_fwd",   &CComponentPlayerController::m_szMoveForward)
       .def_readwrite("move_back",  &CComponentPlayerController::m_szMoveBack)
@@ -204,6 +206,11 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("init",                     &CComponentVida::Init)
       .def_readwrite("vida",           &CComponentVida::m_fVida)
       .def_readwrite("immortal",       &CComponentVida::m_bImmortal)
+      
+    // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentRagdoll, CBaseComponent>("ComponentRagdoll")
+      .def("init",                     &CComponentRagdoll::Init)
+      .def("activate_ragdoll",         &CComponentRagdoll::ActivateRagdoll)
   
   ];
   

@@ -109,6 +109,7 @@ public:
   float m_fTime;
 
   void Shoot();
+  void Die();
 
 protected:
   virtual void Release() {};

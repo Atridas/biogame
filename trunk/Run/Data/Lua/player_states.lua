@@ -408,14 +408,52 @@ State_Player_Morint['Update'] = function(_jugador, _dt)
   player_controller.time = player_controller.time + _dt
   
   if player_controller.time > Player_Constants["Temps Morint"] then
-    --log('Por què?')
+    log('Por què?')
     _jugador:get_component(BaseComponent.vida).vida = 100
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+    --_jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Mort')
   end
 end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Morint['Receive'] = function(_jugador, _event)
+
+end
+
+
+
+
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-- Morint!!!! -----------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+
+
+
+-------------------------------------------------------------------------------------------------
+State_Player_Mort['Enter'] = function(_jugador)
+  --log('enter player apuntant')
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  
+  player_controller:die()
+  
+  --local ragdoll = _jugador:get_component(BaseComponent.ragdoll)
+  --ragdoll:activate_ragdoll()
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Mort['Exit'] = function(_jugador)
+  
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Mort['Update'] = function(_jugador, _dt)
+
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Mort['Receive'] = function(_jugador, _event)
 
 end
 
