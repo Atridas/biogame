@@ -16,7 +16,7 @@ Vect3f CThPSCamera::GetDirection () const
 {
 	assert(m_pObject3D);
 
-	return (m_pObject3D->GetPosition() - GetEye());
+	return (GetLookAt() - GetEye());
 }
 
 Vect3f CThPSCamera::GetLookAt () const

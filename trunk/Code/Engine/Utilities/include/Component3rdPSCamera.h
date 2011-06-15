@@ -8,7 +8,7 @@
 
 //--- forward declarations
 class CComponentObject3D;
-class CThPSCamera;
+class CShoulderCamera;
 class CCamera;
 //--------------------
 
@@ -42,6 +42,7 @@ public:
   //Dades pròpies dels components
   float m_fCameraHeight;
   float m_fCameraRight;
+  float m_fZoom;
 
 protected:
   virtual void Release();
@@ -51,7 +52,7 @@ private:
   CComponentObject3D * m_pObject3D;
 
   CObject3D    m_CameraObject;
-  CThPSCamera* m_pCamera;
+  CShoulderCamera* m_pCamera;
 };
 
 #endif
