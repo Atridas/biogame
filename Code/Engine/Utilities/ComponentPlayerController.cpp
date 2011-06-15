@@ -12,6 +12,7 @@
 #include "cal3d/cal3d.h"
 #include "ComponentLaser.h"
 #include "ComponentRenderableObject.h"
+#include "ComponentRagdoll.h"
 
 #include "PhysicsManager.h"
 
@@ -224,5 +225,18 @@ void CComponentPlayerController::Shoot()
                                   Vect3f(l_vTanslationBone2.x,l_vTanslationBone2.y,l_vTanslationBone2.z),
                                   l_vCenterPoint,
                                   1.f);
+  }
+}
+
+void CComponentPlayerController::Die()
+{
+  CComponentRagdoll *l_pRC = new CComponentRagdoll();
+  if(l_pRC->Init(GetEntity(), "Data/Animated Models/Riggle/Skeleton.xml"))
+  {
+    l_pRC->ActivateRagdoll();
+  }
+  else
+  {
+    delete l_pRC;
   }
 }

@@ -4,22 +4,39 @@
 
 void CGameEntity::AddComponent(CBaseComponent* _pComponent)
 {
-  assert(m_mComponents.find(_pComponent->GetType()) == m_mComponents.end());
-  m_mComponents[_pComponent->GetType()] = _pComponent;
+  m_vNewEntities[_pComponent->GetType()] = _pComponent;
+}
 
-  //insertem els components en ordre de tipus.
-  int position = m_vComponents.size();
-  m_vComponents.push_back(_pComponent);
-  while(position>0 && m_vComponents[position-1]->GetType() > _pComponent->GetType())
+void CGameEntity::AddCachedComponents()
+{
+  map<CBaseComponent::Type, CBaseComponent*>::iterator l_it  = m_vNewEntities.begin();
+  map<CBaseComponent::Type, CBaseComponent*>::iterator l_end = m_vNewEntities.end();
+
+  for(; l_it != l_end; ++l_it)
   {
-    m_vComponents[position] = m_vComponents[position-1];
-    m_vComponents[position-1] = _pComponent;
-    --position;
+    CBaseComponent* l_pComponent = l_it->second;
+
+    assert(m_mComponents.find(l_pComponent->GetType()) == m_mComponents.end());
+    m_mComponents[l_pComponent->GetType()] = l_pComponent;
+
+    //insertem els components en ordre de tipus.
+    int position = m_vComponents.size();
+    m_vComponents.push_back(l_pComponent);
+    while(position>0 && m_vComponents[position-1]->GetType() > l_pComponent->GetType())
+    {
+      m_vComponents[position] = m_vComponents[position-1];
+      m_vComponents[position-1] = l_pComponent;
+      --position;
+    }
   }
+
+  m_vNewEntities.clear();
 }
 
 void CGameEntity::PreUpdate(float deltaTime)
 {
+  AddCachedComponents();
+
   vector<CBaseComponent*>::iterator l_it = m_vComponents.begin();
   vector<CBaseComponent*>::iterator l_end = m_vComponents.end();
 

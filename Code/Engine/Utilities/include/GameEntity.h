@@ -50,7 +50,10 @@ private:
   CGameEntity(int _iId):m_iGUID(_iId),m_pszName(0) {SetOk(true);};
   ~CGameEntity() {Done();};
   void AddComponent(CBaseComponent* _pComponent);
+  void AddCachedComponents();
   void ReceiveEvent(const SEvent& _Event);
+
+  map<CBaseComponent::Type, CBaseComponent*> m_vNewEntities;
 
   map<CBaseComponent::Type, CBaseComponent*> m_mComponents;
   vector<CBaseComponent*>                    m_vComponents;
@@ -69,7 +72,11 @@ T* CGameEntity::GetComponent(CBaseComponent::Type _type) const
 
   if(l_it == m_mComponents.cend())
   {
-    return 0;
+    l_it = m_vNewEntities.find(_type);
+    if(l_it == m_vNewEntities.cend())
+    {
+      return 0;
+    }
   }
   return dynamic_cast<T*>(l_it->second);
 }
@@ -82,7 +89,11 @@ T* CGameEntity::GetComponent() const
 
   if(l_it == m_mComponents.cend())
   {
-    return 0;
+    l_it = m_vNewEntities.find(T::GetStaticType());
+    if(l_it == m_vNewEntities.cend())
+    {
+      return 0;
+    }
   }
   return dynamic_cast<T*>(l_it->second);
 }

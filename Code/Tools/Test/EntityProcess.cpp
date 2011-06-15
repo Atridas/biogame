@@ -17,6 +17,7 @@
 #include "ComponentPhysXMesh.h"
 #include "ComponentRenderableObject.h"
 #include "ComponentVida.h"
+#include "ComponentRagdoll.h"
 #include "LightManager.h"
 #include "SpotLight.h"
 #include "Camera.h"
@@ -102,6 +103,8 @@ bool CEntityProcess::Init()
   (new CComponentVida())->Init(m_pPlayerEntity, 100.f);
 
   (new CComponentStateMachine())->Init(m_pPlayerEntity, "State_Player_Neutre");
+
+  //(new CComponentRagdoll())->Init(m_pPlayerEntity, "Data/Animated Models/Riggle/Skeleton.xml");
 
   //Carregar entitats de l'escenari ----------------------------------------------------------------------------------------
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/NivellProves/XML/GameEntities.xml");

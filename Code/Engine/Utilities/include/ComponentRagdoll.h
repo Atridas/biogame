@@ -21,11 +21,12 @@ public:
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_RAGDOLL;};
 
   bool Init(CGameEntity* _pEntity, const string& _szSkeletonFile);
+  void ActivateRagdoll();
   
   virtual void Update(float _fDeltaTime);
 
 protected:
-  virtual void Release() {};
+  virtual void Release();
 private:
 
   CPhysxSkeleton* m_pRagdoll;
