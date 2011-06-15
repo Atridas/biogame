@@ -60,11 +60,11 @@ void CThPSCamera::SetZoom (float zoom)
 {
 	m_fZoom = zoom;
 
-	if( m_fZoom > m_fZFar*0.8f ) {
-		m_fZoom = m_fZFar*0.8f;
+	if( m_fZoom > m_fZFar ) {
+		m_fZoom = m_fZFar;
 	}
-	else if( m_fZoom < m_fZNear*2.f) {
-		m_fZoom = m_fZNear*2.f;
+	else if( m_fZoom < m_fZNear) {
+		m_fZoom = m_fZNear;
 	}
 }
 
