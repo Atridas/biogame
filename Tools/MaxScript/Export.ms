@@ -84,7 +84,7 @@ function CheckMesh _object _checkMaterial =
 						return l_aux
 					)else
 					(
-						if OpenBitmap l_currentMaterial.diffuseMap.filename == undefined then
+						if doesFileExist l_currentMaterial.diffuseMap.filename == false then
 						(
 							format "No es troba la textura difusa \"%\" del multimaterial % de l'objecte %." l_material[i].diffuseMap.filename i l_name to:l_aux
 							return l_aux
@@ -108,7 +108,7 @@ function CheckMesh _object _checkMaterial =
 						return l_aux
 					)else
 					(
-						if OpenBitmap l_currentMaterial.bumpMap.filename == undefined then
+						if doesFileExist l_currentMaterial.bumpMap.filename == false then
 						(
 							format "No es troba la textura bump \"%\" del multimaterial % de l'objecte %." l_material[i].bumpMap.filename i l_name to:l_aux
 							return l_aux
@@ -132,7 +132,7 @@ function CheckMesh _object _checkMaterial =
 						return l_aux
 					)else
 					(
-						if OpenBitmap l_currentMaterial.selfIllumMap.filename == undefined then
+						if doesFileExist l_currentMaterial.selfIllumMap.filename == false then
 						(
 							format "No es troba la textura d'auto il·luminació \"%\" del multimaterial % de l'objecte %." l_material[i].selfIllumMap.filename i l_name to:l_aux
 							return l_aux
@@ -156,7 +156,7 @@ function CheckMesh _object _checkMaterial =
 						return l_aux
 					)else
 					(
-						if OpenBitmap l_currentMaterial.SpecularLevelMap.filename == undefined then
+						if doesFileExist l_currentMaterial.SpecularLevelMap.filename == false then
 						(
 							format "No es troba la textura de especular \"%\" del multimaterial % de l'objecte %." l_material[i].SpecularLevelMap.filename i l_name to:l_aux
 							return l_aux
@@ -180,7 +180,7 @@ function CheckMesh _object _checkMaterial =
 						return l_aux
 					)else
 					(
-						if OpenBitmap l_currentMaterial.filterMap.filename == undefined then
+						if doesFileExist l_currentMaterial.filterMap.filename == false then
 						(
 							format "No es troba la textura de filtre \"%\" del multimaterial % de l'objecte %." l_material[i].filterMap.filename i l_name to:l_aux
 							return l_aux
@@ -209,7 +209,7 @@ function CheckMesh _object _checkMaterial =
 					return "L'objecte " + l_name + " té un Bitmap no definit com a textura difusa."
 				)else
 				(
-					if OpenBitmap l_material.diffuseMap.filename == undefined then
+					if doesFileExist l_material.diffuseMap.filename == false then
 					(
 						return "No es troba la textura difusa \"" + l_material.diffuseMap.filename + "\" de l'objecte " + l_name + "."
 					)
@@ -229,7 +229,7 @@ function CheckMesh _object _checkMaterial =
 					return "L'objecte " + l_name + " té un Bitmap no definit com a textura de bump."
 				)else
 				(
-					if OpenBitmap l_material.bumpMap.filename == undefined then
+					if doesFileExist l_material.bumpMap.filename == false then
 					(
 						return "No es troba la textura bump \"" + l_material.bumpMap.filename + "\" de l'objecte " + l_name + "."
 					)
@@ -249,7 +249,7 @@ function CheckMesh _object _checkMaterial =
 					return "L'objecte " + l_name + " té un Bitmap no definit com a textura d'auto il·luminació.."
 				)else
 				(
-					if OpenBitmap l_material.selfIllumMap.filename == undefined then
+					if doesFileExist l_material.selfIllumMap.filename == false then
 					(
 						return "No es troba la textura d'auto il·luminació \"" + l_material.selfIllumMap.filename + "\" de l'objecte " + l_name + "."
 					)
@@ -269,7 +269,7 @@ function CheckMesh _object _checkMaterial =
 					return "L'objecte " + l_name + " té un Bitmap no definit com a textura de especular."
 				)else
 				(
-					if OpenBitmap l_material.SpecularLevelMap.filename == undefined then
+					if doesFileExist l_material.SpecularLevelMap.filename == false then
 					(
 						return "No es troba la textura de especular \"" + l_material.SpecularLevelMap.filename + "\" de l'objecte " + l_name + "."
 					)
@@ -289,7 +289,7 @@ function CheckMesh _object _checkMaterial =
 					return "L'objecte " + l_name + " té un Bitmap no definit com a textura de filtre."
 				)else
 				(
-					if OpenBitmap l_material.filterMap.filename == undefined then
+					if doesFileExist l_material.filterMap.filename == false then
 					(
 						return "No es troba la textura de filtre \"" + l_material.filterMap.filename + "\" de l'objecte " + l_name + "."
 					)

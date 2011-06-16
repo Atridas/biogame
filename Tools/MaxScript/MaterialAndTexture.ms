@@ -31,6 +31,7 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 			l_numProperties = l_numProperties + 1
 			l_opacityMap = true
 		)
+		format "	->	DIFFUSE\n"
 	)
 	
 	if _material.bumpMapEnable == true and _material.bumpMap != undefined then
@@ -109,10 +110,8 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 	
 	if _material.diffuseMapEnable == true and _material.diffuseMap != undefined then
 	(
-		l_texture = _material.diffuseMap.filename
-		l_texture = filenameFromPath (OpenBitmap l_texture).filename
+		l_texture = filenameFromPath _material.diffuseMap.filename
 		l_texture = _relativePath + l_texture
-		format "	->	DIFFUSE\n"
 		
 		WriteShort _file DIFFUSE_MATERIAL_MASK #unsigned
 		WriteShort _file l_texture.count #unsigned
@@ -122,7 +121,6 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 	if _material.bumpMapEnable == true and _material.bumpMap != undefined then
 	(
 		l_texture = _material.bumpMap.filename
-		l_texture = filenameFromPath (OpenBitmap l_texture).filename
 		l_texture = _relativePath + l_texture
 		
 		WriteShort _file NORMALMAP_MATERIAL_MASK #unsigned
@@ -133,7 +131,6 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 	if _material.selfIllumMapEnable == true and _material.selfIllumMap != undefined then
 	(
 		l_texture = _material.selfIllumMap.filename
-		l_texture = filenameFromPath (OpenBitmap l_texture).filename
 		l_texture = _relativePath + l_texture
 		
 		WriteShort _file LIGHTMAP_MATERIAL_MASK #unsigned
@@ -143,8 +140,7 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 	
 	if _material.SpecularLevelMapEnable == true and _material.SpecularLevelMap != undefined then
 	(
-		l_texture = _material.SpecularLevelMap.filename
-		l_texture = filenameFromPath (OpenBitmap l_texture).filename
+		l_texture = filenameFromPath _material.SpecularLevelMap.filename
 		l_texture = _relativePath + l_texture
 		
 		WriteShort _file SPECULARMAP_MATERIAL_MASK #unsigned
@@ -160,8 +156,7 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 	
 	if _material.filterMapEnable == true and _material.filterMap != undefined then
 	(
-		l_texture = _material.filterMap.filename
-		l_texture = filenameFromPath (OpenBitmap l_texture).filename
+		l_texture = filenameFromPath _material.filterMap.filename
 		l_texture = _relativePath + l_texture
 		
 		WriteShort _file GLOW_MATERIAL_MASK #unsigned
@@ -285,35 +280,30 @@ function TextureListOne _material =
 	if _material.diffuseMapEnable == true and  _material.diffuseMap != undefined then
 	(
 		l_texture = _material.diffuseMap.filename
-		l_texture = (OpenBitmap l_texture).filename
 		append l_paths l_texture
 	)
 	
 	if _material.bumpMapEnable == true and  _material.bumpMap != undefined then
 	(
 		l_texture = _material.bumpMap.filename
-		l_texture = (OpenBitmap l_texture).filename
 		append l_paths l_texture
 	)
 	
 	if _material.selfIllumMapEnable == true and  _material.selfIllumMap != undefined then
 	(
 		l_texture = _material.selfIllumMap.filename
-		l_texture = (OpenBitmap l_texture).filename
 		append l_paths l_texture
 	)
 	
 	if _material.SpecularLevelMapEnable == true and  _material.SpecularLevelMap != undefined then
 	(
 		l_texture = _material.SpecularLevelMap.filename
-		l_texture = (OpenBitmap l_texture).filename
 		append l_paths l_texture
 	)
 	
 	if _material.filterMapEnable == true and  _material.filterMap != undefined then
 	(
 		l_texture = _material.filterMap.filename
-		l_texture = (OpenBitmap l_texture).filename
 		append l_paths l_texture
 	)
 	
