@@ -167,8 +167,6 @@ void CAnimatedInstanceModel::Render(CRenderManager *_pRM)
 
   if(l_pCalHardwareModel)
   {
-    m_pEM->SetSkeleton(m_pCalModel->getSkeleton(),l_pCalHardwareModel);
-
     for(int l_iHardwareMeshId=0; l_iHardwareMeshId < l_pCalHardwareModel->getHardwareMeshCount(); l_iHardwareMeshId++)
     {
       if(l_iHardwareMeshId < l_iMaterialCount)
@@ -178,10 +176,12 @@ void CAnimatedInstanceModel::Render(CRenderManager *_pRM)
         l_pMaterial = l_vMaterials[l_iMaterialCount-1];
       }
 
-      CEffect* l_pEffect = m_pEM->ActivateMaterial(l_pMaterial);
-      
       l_pCalHardwareModel->selectHardwareMesh(l_iHardwareMeshId);
 
+      m_pEM->SetSkeleton(m_pCalModel->getSkeleton(),l_pCalHardwareModel);
+
+      CEffect* l_pEffect = m_pEM->ActivateMaterial(l_pMaterial);
+      
       ((CIndexedVertexs<TCAL3D_HW_VERTEX>*)m_pAnimatedCoreModel->GetRenderableVertexs())->
         Render( _pRM,
                 l_pEffect,
