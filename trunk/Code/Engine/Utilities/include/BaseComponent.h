@@ -39,7 +39,8 @@ public:
     ECT_STATE_MACHINE,
     ECT_ANIMATION,
     ECT_IA_BRAIN,
-    ECT_RAGDOLL
+    ECT_RAGDOLL,
+    ECT_LOW_COVER
   };
   
   virtual Type GetType() = 0; //{return m_Type;};
