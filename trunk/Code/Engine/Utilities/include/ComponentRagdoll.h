@@ -7,6 +7,7 @@
 
 // -------------------------------------------------
 class CPhysxSkeleton;
+class CRenderableAnimatedInstanceModel;
 // -------------------------------------------------
 
 
@@ -14,22 +15,24 @@ class CComponentRagdoll:
   public CBaseComponent
 {
 public:
-  CComponentRagdoll() {};
+  CComponentRagdoll():m_bActive(false),m_pRagdoll(0),m_pRAIM(0) {};
   ~CComponentRagdoll() {Done();}
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_RAGDOLL;};
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_RAGDOLL;};
 
   bool Init(CGameEntity* _pEntity, const string& _szSkeletonFile);
-  void ActivateRagdoll();
+  void SetActive(bool _bActive);
   
-  virtual void Update(float _fDeltaTime);
+  virtual void UpdatePostAnim(float _fDeltaTime);
 
 protected:
   virtual void Release();
 private:
 
   CPhysxSkeleton* m_pRagdoll;
+  CRenderableAnimatedInstanceModel* m_pRAIM;
+  bool m_bActive;
 };
 
 #endif

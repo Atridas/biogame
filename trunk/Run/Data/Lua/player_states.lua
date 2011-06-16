@@ -435,7 +435,7 @@ end
 State_Player_Mort['Enter'] = function(_jugador)
   --log('enter player apuntant')
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
-  
+  player_controller.time = 0
   player_controller:die()
   
   --local ragdoll = _jugador:get_component(BaseComponent.ragdoll)
@@ -449,7 +449,19 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Mort['Update'] = function(_jugador, _dt)
-
+  camera_player(_jugador, _dt)
+  
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  
+  player_controller.time = player_controller.time + _dt
+  
+  if player_controller.time > 5 then
+    player_controller:respawn()
+    _jugador:get_component(BaseComponent.vida).vida = 100
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+  end
+  --local animation = _jugador:get_component(BaseComponent.animation)
+  --animation:set_cycle('idle', 0.3)
 end
 
 -------------------------------------------------------------------------------------------------

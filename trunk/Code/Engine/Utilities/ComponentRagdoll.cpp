@@ -10,11 +10,11 @@ bool CComponentRagdoll::Init(CGameEntity* _pEntity, const string& _szSkeletonFil
 
   CComponentRenderableObject* l_pCRO = _pEntity->GetComponent<CComponentRenderableObject>();
 
-  CRenderableAnimatedInstanceModel *l_pRAIM = dynamic_cast<CRenderableAnimatedInstanceModel*>(l_pCRO->GetRenderableObject());
+  m_pRAIM = dynamic_cast<CRenderableAnimatedInstanceModel*>(l_pCRO->GetRenderableObject());
 
   m_pRagdoll = new CPhysxSkeleton(false);
-  CalModel* l_pCalModel = l_pRAIM->GetAnimatedInstanceModel()->GetAnimatedCalModel();
-  bool l_bOk = m_pRagdoll->Init(_szSkeletonFile,l_pCalModel,l_pRAIM->GetMat44());
+  CalModel* l_pCalModel = m_pRAIM->GetAnimatedInstanceModel()->GetAnimatedCalModel();
+  bool l_bOk = m_pRagdoll->Init(_szSkeletonFile,l_pCalModel,m_pRAIM->GetMat44());
 
   SetOk(l_bOk);
   return IsOk();
@@ -26,12 +26,31 @@ void CComponentRagdoll::Release()
 }
 
 
-void CComponentRagdoll::ActivateRagdoll()
+void CComponentRagdoll::SetActive(bool _bActive)
 {
-  m_pRagdoll->SetRagdollActive(true);
+  if(m_bActive != _bActive)
+  {
+    m_bActive = _bActive;
+    
+    CComponentRenderableObject* l_pCRO = GetEntity()->GetComponent<CComponentRenderableObject>();
+    if(m_bActive)
+    {
+      l_pCRO->m_bActive = false;
+      m_pRagdoll->SetRagdollActive(true);
+    }
+    else
+    {
+      l_pCRO->m_bActive = true;
+      m_pRagdoll->SetRagdollActive(false);
+    }
+  }
 }
 
-void CComponentRagdoll::Update(float _fDeltaTime)
+void CComponentRagdoll::UpdatePostAnim(float _fDeltaTime)
 {
-  m_pRagdoll->Update();
+  if(m_bActive)
+  {
+    m_pRagdoll->Update();
+    m_pRAIM->SetMat44(m_pRagdoll->GetTransform());
+  }
 }

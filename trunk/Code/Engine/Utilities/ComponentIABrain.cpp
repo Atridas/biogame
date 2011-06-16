@@ -6,6 +6,7 @@
 #include "PhysicsManager.h"
 #include "ComponentObject3D.h"
 #include "ComponentLaser.h"
+#include "ComponentRagdoll.h" 
 #include "cal3d\cal3d.h"
 
 
@@ -93,4 +94,21 @@ void CComponentIABrain::Shoot()
                                   l_vCenterPoint,
                                   1.f);
   }
+}
+
+
+
+void CComponentIABrain::Die()
+{
+  CComponentRagdoll *l_pRC = GetEntity()->GetComponent<CComponentRagdoll>();
+  if(!l_pRC)
+  {
+    l_pRC = new CComponentRagdoll();
+    if(!l_pRC->Init(GetEntity(), "Data/Animated Models/Miner/Skeleton.xml"))
+    {
+      delete l_pRC;
+      return;
+    }
+  }
+  l_pRC->SetActive(true);
 }

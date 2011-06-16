@@ -73,8 +73,9 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
     CEngine l_Engine;
     SInitParams l_InitParams;
 
-    ReadXMLInitParams(l_InitParams,"./Data/XML/init_test_physx.xml");
+    //ReadXMLInitParams(l_InitParams,"./Data/XML/init_test_physx.xml");
     //ReadXMLInitParams(l_InitParams,"./Data/XML/init_test_particulas.xml");
+    ReadXMLInitParams(l_InitParams,"./Data/XML/init_test_entities.xml");
 
     // Create the application's window
     HWND hWnd = CreateWindow(	
@@ -105,10 +106,10 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 
     //l_Engine.ActivateProcess(l_Test);
     //l_Engine.ActivateProcess(l_pSoundTestProcess);
-    l_Engine.ActivateProcess(l_PhysX);
+    //l_Engine.ActivateProcess(l_PhysX);
     //l_Engine.ActivateProcess(l_Particle);
     //l_Engine.ActivateProcess(l_pIAProcess);
-    //l_Engine.ActivateProcess(l_pEntityProcess);
+    l_Engine.ActivateProcess(l_pEntityProcess);
 
 
     l_Engine.Init(l_InitParams, hWnd);
