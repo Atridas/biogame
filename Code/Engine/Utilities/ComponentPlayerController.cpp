@@ -230,13 +230,24 @@ void CComponentPlayerController::Shoot()
 
 void CComponentPlayerController::Die()
 {
-  CComponentRagdoll *l_pRC = new CComponentRagdoll();
-  if(l_pRC->Init(GetEntity(), "Data/Animated Models/Riggle/Skeleton.xml"))
+  CComponentRagdoll *l_pRC = GetEntity()->GetComponent<CComponentRagdoll>();
+  if(!l_pRC)
   {
-    l_pRC->ActivateRagdoll();
+    l_pRC = new CComponentRagdoll();
+    if(!l_pRC->Init(GetEntity(), "Data/Animated Models/Riggle/Skeleton.xml"))
+    {
+      delete l_pRC;
+      return;
+    }
   }
-  else
+  l_pRC->SetActive(true);
+}
+
+void CComponentPlayerController::Respawn()
+{
+  CComponentRagdoll *l_pRC = GetEntity()->GetComponent<CComponentRagdoll>();
+  if(l_pRC)
   {
-    delete l_pRC;
+    l_pRC->SetActive(false);
   }
 }

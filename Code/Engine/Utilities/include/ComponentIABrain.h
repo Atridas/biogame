@@ -18,6 +18,7 @@ public:
   bool Init(CGameEntity* _pEntity, const string& _szPlayerEntityName);
 
   void Shoot();
+  void Die();
 
   CGameEntity* m_pPlayer;
   float        m_fTime;

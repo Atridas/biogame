@@ -108,9 +108,10 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("receive_event",&CBaseComponent::ReceiveEvent)
 
     ,class_<CGameEntity>("GameEntity")
-      .def("get_guid",      &CGameEntity::GetGUID)
-      .def("get_component", (CBaseComponent*(CGameEntity::*)(CBaseComponent::Type)const)&CGameEntity::GetComponent<CBaseComponent>)
-      .def("get_name",      &CGameEntity::GetName)
+      .def("get_guid",         &CGameEntity::GetGUID)
+      .def("get_component",    (CBaseComponent*(CGameEntity::*)(CBaseComponent::Type)const)&CGameEntity::GetComponent<CBaseComponent>)
+      .def("get_name",         &CGameEntity::GetName)
+      .def("delete_component", &CGameEntity::DeleteComponent)
 
     ,class_<CEntityManager>("EntityManager")
       .def("create_entity",         &CEntityManager::CreateEntity)
@@ -128,9 +129,10 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPlayerController, CBaseComponent>("ComponentPlayerController")
-      .def("init", (bool(CComponentPlayerController::*)(CGameEntity*))&CComponentPlayerController::Init)
-      .def("shoot", &CComponentPlayerController::Shoot)
-      .def("die",   &CComponentPlayerController::Die)
+      .def("init",    (bool(CComponentPlayerController::*)(CGameEntity*))&CComponentPlayerController::Init)
+      .def("shoot",   &CComponentPlayerController::Shoot)
+      .def("die",     &CComponentPlayerController::Die)
+      .def("respawn", &CComponentPlayerController::Respawn)
 
       .def_readwrite("move_fwd",   &CComponentPlayerController::m_szMoveForward)
       .def_readwrite("move_back",  &CComponentPlayerController::m_szMoveBack)
@@ -173,6 +175,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("init",                               &CComponentRenderableObject::Init)
       .def("init_animated_model",                &CComponentRenderableObject::InitAnimatedModel)
       .def_readwrite("remove_renderable_object", &CComponentRenderableObject::m_bRemoveRenderableObject)
+      .def_readwrite("active",                   &CComponentRenderableObject::m_bActive)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentMovement, CBaseComponent>("ComponentMovement")
@@ -197,6 +200,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponentIABrain, CBaseComponent>("ComponentIABrain")
       .def("init",                     &CComponentIABrain::Init)
       .def("shoot",                    &CComponentIABrain::Shoot)
+      .def("die",                      &CComponentIABrain::Die)
       .def_readonly("player",          &CComponentIABrain::m_pPlayer)
       .def_readwrite("time",           &CComponentIABrain::m_fTime)
       .def_readwrite("shooted",        &CComponentIABrain::m_bShooted)
@@ -210,7 +214,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentRagdoll, CBaseComponent>("ComponentRagdoll")
       .def("init",                     &CComponentRagdoll::Init)
-      .def("activate_ragdoll",         &CComponentRagdoll::ActivateRagdoll)
+      .def("set_active",               &CComponentRagdoll::SetActive)
   
   ];
   

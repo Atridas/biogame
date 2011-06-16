@@ -33,6 +33,35 @@ void CGameEntity::AddCachedComponents()
   m_vNewEntities.clear();
 }
 
+void CGameEntity::DeleteComponents()
+{
+  //TODO optimitzar!
+  set<CBaseComponent::Type>::iterator l_it  = m_vDeleteEntities.begin();
+  set<CBaseComponent::Type>::iterator l_end = m_vDeleteEntities.end();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    CBaseComponent::Type l_type = *l_it;
+
+    for(uint32 i = 0; i < m_vComponents.size(); ++i)
+    {
+      if(m_vComponents[i]->GetType() > l_type)
+      {
+        break;
+      } else if(m_vComponents[i]->GetType() == l_type)
+      {
+        delete m_vComponents[i];
+        for(uint32 j = i; j + 1 < m_vComponents.size(); ++j)
+        {
+          m_vComponents[j] = m_vComponents[j+1];
+        }
+        m_mComponents.erase(l_type);
+        break;
+      }
+    }
+  }
+}
+
 void CGameEntity::PreUpdate(float deltaTime)
 {
   AddCachedComponents();
@@ -44,6 +73,7 @@ void CGameEntity::PreUpdate(float deltaTime)
   {
     (*l_it)->PreUpdate(deltaTime);
   }
+  DeleteComponents();
 }
 
 void CGameEntity::Update(float deltaTime)
@@ -55,6 +85,7 @@ void CGameEntity::Update(float deltaTime)
   {
     (*l_it)->Update(deltaTime);
   }
+  DeleteComponents();
 }
 
 void CGameEntity::UpdatePrePhysX(float deltaTime)
@@ -66,6 +97,7 @@ void CGameEntity::UpdatePrePhysX(float deltaTime)
   {
     (*l_it)->UpdatePrePhysX(deltaTime);
   }
+  DeleteComponents();
 }
 
 void CGameEntity::UpdatePostPhysX(float deltaTime)
@@ -77,6 +109,7 @@ void CGameEntity::UpdatePostPhysX(float deltaTime)
   {
     (*l_it)->UpdatePostPhysX(deltaTime);
   }
+  DeleteComponents();
 }
 
 void CGameEntity::UpdatePostAnim(float deltaTime)
@@ -88,6 +121,7 @@ void CGameEntity::UpdatePostAnim(float deltaTime)
   {
     (*l_it)->UpdatePostAnim(deltaTime);
   }
+  DeleteComponents();
 }
 
 void CGameEntity::PostUpdate(float deltaTime)
@@ -99,6 +133,7 @@ void CGameEntity::PostUpdate(float deltaTime)
   {
     (*l_it)->PostUpdate(deltaTime);
   }
+  DeleteComponents();
 }
 
 void CGameEntity::ReceiveEvent(const SEvent& _Event)
@@ -110,6 +145,7 @@ void CGameEntity::ReceiveEvent(const SEvent& _Event)
   {
     (*l_it)->ReceiveEvent(_Event);
   }
+  DeleteComponents();
 }
 
 void CGameEntity::DebugRender(CRenderManager* _pRM)
@@ -121,6 +157,7 @@ void CGameEntity::DebugRender(CRenderManager* _pRM)
   {
     (*l_it)->DebugRender(_pRM);
   }
+  DeleteComponents();
 }
 
 string CGameEntity::GetName() const

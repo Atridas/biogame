@@ -110,6 +110,7 @@ public:
 
   void Shoot();
   void Die();
+  void Respawn();
 
 protected:
   virtual void Release() {};

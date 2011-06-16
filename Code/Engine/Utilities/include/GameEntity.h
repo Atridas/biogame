@@ -8,6 +8,7 @@
 // incloure "EntityDefines.h"
 
 #include "base.h"
+#include <set>
 
 #ifndef __ENTITY_DEFINES_H__
 #error S'ha d'incloure "EntityDefines.h" i no "GameEntity.h"
@@ -29,6 +30,7 @@ public:
   template<class T>
   T* GetComponent() const;
   
+  void         DeleteComponent(CBaseComponent::Type _type) {m_vDeleteEntities.insert(_type);};
   
   void         PreUpdate(float _fDeltaTime)      ;
   void         Update(float _fDeltaTime)         ;
@@ -49,11 +51,15 @@ protected:
 private:
   CGameEntity(int _iId):m_iGUID(_iId),m_pszName(0) {SetOk(true);};
   ~CGameEntity() {Done();};
+
   void AddComponent(CBaseComponent* _pComponent);
   void AddCachedComponents();
-  void ReceiveEvent(const SEvent& _Event);
+  void DeleteComponents();
 
+  void ReceiveEvent(const SEvent& _Event);
+  
   map<CBaseComponent::Type, CBaseComponent*> m_vNewEntities;
+  set<CBaseComponent::Type>                  m_vDeleteEntities;
 
   map<CBaseComponent::Type, CBaseComponent*> m_mComponents;
   vector<CBaseComponent*>                    m_vComponents;

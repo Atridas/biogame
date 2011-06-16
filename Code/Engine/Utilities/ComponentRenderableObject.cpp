@@ -78,6 +78,8 @@ bool CComponentRenderableObject::InitAnimatedModel(CGameEntity *_pEntity, const 
     SetEntity(_pEntity);
   }
 
+
+  m_bActive = true;
   return IsOk();
 }
 
@@ -85,25 +87,28 @@ void CComponentRenderableObject::PostUpdate(float _fDeltaTime)
 {
   assert(IsOk());
 
-  if(m_bBlockPitchRoll || m_fHeightAdjustment != 0.f || m_fYawAdjustment != 0.f)
+  if(m_bActive)
   {
-    if(!m_bBlockPitchRoll)
+    if(m_bBlockPitchRoll || m_fHeightAdjustment != 0.f || m_fYawAdjustment != 0.f)
     {
-      m_pRenderableObject->SetPitch(m_pObject3D->GetPitch());
-      m_pRenderableObject->SetRoll (m_pObject3D->GetRoll());
-    }
+      if(!m_bBlockPitchRoll)
+      {
+        m_pRenderableObject->SetPitch(m_pObject3D->GetPitch());
+        m_pRenderableObject->SetRoll (m_pObject3D->GetRoll());
+      }
 
-    Vect3f l_vPosition = m_pObject3D->GetPosition();
-    l_vPosition.y += m_fHeightAdjustment;
-    m_pRenderableObject->SetPosition(l_vPosition);
-    m_pRenderableObject->SetYaw (m_pObject3D->GetYaw() + m_fYawAdjustment);
-  }
-  else
-  {   
-    Mat44f l_Matrix;
+      Vect3f l_vPosition = m_pObject3D->GetPosition();
+      l_vPosition.y += m_fHeightAdjustment;
+      m_pRenderableObject->SetPosition(l_vPosition);
+      m_pRenderableObject->SetYaw (m_pObject3D->GetYaw() + m_fYawAdjustment);
+    }
+    else
+    {   
+      Mat44f l_Matrix;
   
-    m_pObject3D->GetMat44(l_Matrix);
-    m_pRenderableObject->SetMat44(l_Matrix);
+      m_pObject3D->GetMat44(l_Matrix);
+      m_pRenderableObject->SetMat44(l_Matrix);
+    }
   }
 }
 

@@ -25,7 +25,8 @@ public:
       m_bRemoveRenderableObject(false),
       m_bBlockPitchRoll(false),
       m_fHeightAdjustment(0),
-      m_fYawAdjustment(0)
+      m_fYawAdjustment(0),
+      m_bActive(true)
       {};
       
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_RENDERABLE_OBJECT;};
@@ -44,6 +45,9 @@ public:
   bool m_bBlockPitchRoll;
   float m_fHeightAdjustment;
   float m_fYawAdjustment;
+
+
+  bool m_bActive;
 
 protected:
   virtual void Release();
