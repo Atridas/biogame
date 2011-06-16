@@ -26,6 +26,7 @@ extern "C"
 #include "RenderableAnimatedInstanceModel.h"
 #include "StaticMeshManager.h"
 #include "LightManager.h"
+#include "SoundManager.h"
 
 #include "Utils/Object3D.h"
 #include "Utils/BaseControl.h"
@@ -462,6 +463,7 @@ void CScriptManager::RegisterLUAFunctions()
       .def("get_input_manager",               &CCore::GetInputManager)
       .def("get_action_manager",              &CCore::GetActionManager)
       .def("get_particle_manager",            &CCore::GetParticleManager)
+      .def("get_sound_manager",               &CCore::GetSoundManager)
 
   //Process
     ,class_<CProcess,CBaseControl>("Process")
@@ -512,6 +514,23 @@ void CScriptManager::RegisterLUAFunctions()
     class_<CParticleManager>("ParticleManager")
       .def("reload", &CParticleManager::Reload)
       .def("load",   &CParticleManager::Load)
+  ];
+
+  //SoundManager
+  module(m_pLS) [
+    class_<CSoundManager>("SoundManager")
+      .def("play_sample", &CSoundManager::PlaySample)
+      .def("play_sample_3D", &CSoundManager::PlaySample3D)
+      .def("change_music", &CSoundManager::ChangeMusic)
+      .def("play_music", &CSoundManager::PlayMusic)
+      .def("set_music_position_3D", &CSoundManager::SetMusic3DPosition)
+      .def("stop_all", &CSoundManager::StopAll)
+      .def("stop_musics", &CSoundManager::StopMusics)
+      .def("stop_sounds", &CSoundManager::StopSounds)
+      .def("set_master_volume", &CSoundManager::SetMasterVolume)
+      .def("pause_music", &CSoundManager::Pause)
+      .def("resume_music", &CSoundManager::Resume)
+      .def("fade_music_volume", &CSoundManager::FadeMusicVolume)
   ];
 
   //Input

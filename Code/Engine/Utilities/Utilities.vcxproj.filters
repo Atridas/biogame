@@ -82,6 +82,12 @@
     <Filter Include="EntitySystem\Components\ComponentRagdoll">
       <UniqueIdentifier>{65730fd3-8119-4cb5-baba-15f6f57433e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentLowCover">
+      <UniqueIdentifier>{2a7fe0ef-08cf-465c-ac3a-344df96f5cdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentHighCover">
+      <UniqueIdentifier>{c41180ce-ab1c-4228-8046-7f7d0bcadad8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -170,6 +176,9 @@
     </ClCompile>
     <ClCompile Include="ComponentRagdoll.cpp">
       <Filter>EntitySystem\Components\ComponentRagdoll</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentLowCover.cpp">
+      <Filter>EntitySystem\Components\ComponentLowCover</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -268,6 +277,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentRagdoll.h">
       <Filter>EntitySystem\Components\ComponentRagdoll</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentLowCover.h">
+      <Filter>EntitySystem\Components\ComponentLowCover</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
