@@ -28,6 +28,14 @@ public:
   void SetAnimation(const string& _szAnimation, float _fBlend);
   const string&    GetCurrentCycle() {return m_szCurrentCycle;}
 
+  //void Play(const string& _szAnimation, bool _bLockEnd = false);
+  //void Stop(const string& _szAnimation);
+  //void PlayCycle(const string& _szAnimation, float _fBlendTime);
+  //void StopCycle(const string& _szAnimation, float _fBlendTime);
+  //void ClearCyle(const string& _szAnimation);
+  //void ClearAllCycles();
+
+
 protected:
   virtual void Release() {};
 private:

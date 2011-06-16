@@ -304,16 +304,22 @@ void CAnimatedInstanceModel::Release()
   CHECKED_DELETE(m_pCalModel);
 }
 
-void CAnimatedInstanceModel::ExecuteAction(int _iId, float _fTime)
+void CAnimatedInstanceModel::ExecuteAction(int _iId, float _fTime, float _fWeight, bool _bAutoLock)
 {
-  m_pCalModel->getMixer()->executeAction(_iId,0,_fTime);
+  m_pCalModel->getMixer()->removeAction(_iId);
+  m_pCalModel->getMixer()->executeAction(_iId,0,_fTime,_fWeight,_bAutoLock);
   m_iCurrentAnimationId = _iId;
   m_fCurrentAnimationTime = 0;
 }
 
-void CAnimatedInstanceModel::BlendCycle(int _iId, float _fTime)
+void CAnimatedInstanceModel::RemoveAction(int _iId)
 {
-  m_pCalModel->getMixer()->blendCycle(_iId,1,_fTime);
+  m_pCalModel->getMixer()->removeAction(_iId);
+}
+
+void CAnimatedInstanceModel::BlendCycle(int _iId, float _fTime, float _fWeight)
+{
+  m_pCalModel->getMixer()->blendCycle(_iId,_fWeight,_fTime);
   m_iCurrentCycle = _iId;
 }
 
