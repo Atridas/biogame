@@ -122,6 +122,7 @@ private:
   //vector<float>                             m_vTimeDirection;
   //vector<float>                             m_vTimeDirectionInterpolation;
   bool                                      m_bActive;
+  bool                                      m_bActiveAux;
   D3DXVECTOR3                               m_vVel; //velocitat de la particula
   D3DXVECTOR3                               m_vGravity; // forçes gravitatories
   float                                     m_fAngle1;

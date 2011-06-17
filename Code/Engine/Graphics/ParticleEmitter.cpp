@@ -43,7 +43,7 @@ m_Particles(NUMPARTICLES)
   m_bBucleInfinit=true;
   m_iNumBucle=0;
   m_iNumBucleAux=0;
-  m_iCont=0;
+  m_iCont=5;
   m_fContElapsedTime=0.0f;
   m_fRandomRebootEmitter=0.0f;
   m_fRebootEmitter1=0.0f;
@@ -57,7 +57,8 @@ m_Particles(NUMPARTICLES)
   m_PointC=(D3DXVECTOR3(0.0f,0.0f,0.0f)); 
   m_PointD=(D3DXVECTOR3(0.0f,0.0f,0.0f));*/
   m_bAnimated= false;
-  m_bActive = false;
+  m_bActive = true;
+  m_bActiveAux = true;
 
   //TODO inicialitzar els vector de color i temps
 }
@@ -129,9 +130,9 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
 
 void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
 {
-
-  //if(!m_bActive)
-  //  return;
+  string l_nom=m_szName;
+  if(!m_bActive)
+    return;
   
   //1.] Updatejar les particules i en cas de que s'hagi acabat el seu temps de vida, posar 
   //    en el vector que la posicio esta lliure
@@ -145,17 +146,30 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
       {
         m_Particles.Free(i);
       }
-    }
+    }else
+	  {
+		  m_iCont++;
+	  }
   }
-  if(!m_bActive)
-    return;
+  
+  //if(!m_bActive)
+  //  return;
   //2.] Si es temps de crear particules noves fer-ho:
   if(m_bBucleInfinit==false && m_fRandomRebootEmitter==0)
   {
     m_fRandomRebootEmitter = RandomNumber(m_fRebootEmitter1,m_fRebootEmitter2);
-    
+    if(m_fRandomRebootEmitter==0 && m_iCont==NUMPARTICLES)
+	  {
+		  m_bActive=false;
+      m_iCont=5;
+      m_iNumBucle=m_iNumBucleAux;
+    }else
+    {
+      m_iCont=0;
+    }
   }
   
+	  
   if(m_bBucleInfinit==true || m_iNumBucle>0)
   {
 	  int iNumNewParts = 0;
@@ -299,11 +313,11 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
   }else
   {
     
-    if(m_fRandomRebootEmitter==0)
+    /*if(m_fRandomRebootEmitter==0)
     {
       m_bActive=false;
       m_iNumBucle=m_iNumBucleAux;
-    }
+    }*/
     if(m_fRandomRebootEmitter>0 && m_bBucleInfinit==false)
     {
 
@@ -394,8 +408,8 @@ void CParticleEmitter::Release()
   
 void CParticleEmitter::Render(CRenderManager* _pRM)
 {
-  //if(!m_bActive)
-  //  return;
+  if(!m_bActive)
+    return;
 
   
 
