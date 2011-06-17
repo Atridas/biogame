@@ -21,7 +21,7 @@
 
 
 
-bool CPhysxSkeleton::Init(const string& _szFileName, CalModel* _pCalModel, Mat44f _vMat)
+bool CPhysxSkeleton::Init(const string& _szFileName, CalModel* _pCalModel, Mat44f _vMat, int _iColisionGroup)
 {
   m_mTransform = _vMat;
   SetSkeleton(_pCalModel->getSkeleton());
@@ -33,7 +33,7 @@ bool CPhysxSkeleton::Init(const string& _szFileName, CalModel* _pCalModel, Mat44
   {
     CalBone* l_pBone = l_vLlistaBones[i];
     CPhysxBone* l_pPhysXBone = new CPhysxBone(l_pBone->getCoreBone()->getName());
-    l_pPhysXBone->Init(l_pBone,_vMat);
+    l_pPhysXBone->Init(l_pBone,_vMat,_iColisionGroup);
     m_vBones.push_back(l_pPhysXBone);
     
   }

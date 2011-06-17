@@ -17,12 +17,13 @@
 #include "NxPhysics.h"
 //---------------------//
 
-bool CPhysxBone::Init(CalBone* _pBone, Mat44f _vMat44)
+bool CPhysxBone::Init(CalBone* _pBone, Mat44f _vMat44, int _iColisionGroup)
 {
   SetCalBone(_pBone);
   CalCoreBone* l_pCoreBone = m_pCalBone->getCoreBone();
   m_iParentID = l_pCoreBone->getParentId();
   m_vMatAnimatedModel = _vMat44;
+  m_iCollisionGroup = _iColisionGroup;
 
   if (m_iParentID != -1)
   {
@@ -104,7 +105,7 @@ bool CPhysxBone::AddBoxActor(CXMLTreeNode _XMLObjects)
   l_pUserData->SetPaint(true);
   l_pUserData->SetColor(colGREEN);
   CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
-	l_pActor->AddBoxSphape(Vect3f(l_vSize.x,l_vSize.z,l_vSize.y)*0.5f,l_fMiddlePoint,NULL,GROUP_COLLIDABLE_PUSHABLE);
+  l_pActor->AddBoxSphape(Vect3f(l_vSize.x,l_vSize.z,l_vSize.y)*0.5f,l_fMiddlePoint,NULL,m_iCollisionGroup);
   l_pActor->CreateBody(l_fDensity,1.0f,1.0f);
 
   l_pPM->AddPhysicActor(l_pActor);

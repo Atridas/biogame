@@ -2,6 +2,7 @@
 #include "PhysxSkeleton.h"
 #include "ComponentRenderableObject.h"
 #include "RenderableAnimatedInstanceModel.h"
+#include "PhysicsManager.h"
 
 bool CComponentRagdoll::Init(CGameEntity* _pEntity, const string& _szSkeletonFile)
 {
@@ -14,7 +15,7 @@ bool CComponentRagdoll::Init(CGameEntity* _pEntity, const string& _szSkeletonFil
 
   m_pRagdoll = new CPhysxSkeleton(false);
   CalModel* l_pCalModel = m_pRAIM->GetAnimatedInstanceModel()->GetAnimatedCalModel();
-  bool l_bOk = m_pRagdoll->Init(_szSkeletonFile,l_pCalModel,m_pRAIM->GetMat44());
+  bool l_bOk = m_pRagdoll->Init(_szSkeletonFile,l_pCalModel,m_pRAIM->GetMat44(),ECG_OBJECTES_DINAMICS);
 
   SetOk(l_bOk);
   return IsOk();

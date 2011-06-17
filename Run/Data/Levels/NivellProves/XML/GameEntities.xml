@@ -13,87 +13,87 @@
   <Entity name="CaixaPetita00">
     <Object3D />
     <RenderableObject name="CaixaPetita00" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
   </Entity>
   <Entity name="CaixaGrossa00">
     <Object3D />
     <RenderableObject name="CaixaGrossa00" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
   </Entity>
   <Entity name="CaixaPetita01">
     <Object3D />
     <RenderableObject name="CaixaPetita01" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
   </Entity>
   <Entity name="CaixaPetita02">
     <Object3D />
     <RenderableObject name="CaixaPetita02" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
   </Entity>
   <Entity name="CaixaPetita03">
     <Object3D />
     <RenderableObject name="CaixaPetita03" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
   </Entity>
   <Entity name="CaixaPetita04">
     <Object3D />
     <RenderableObject name="CaixaPetita04" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
   </Entity>
   <Entity name="CaixaGrossa01">
     <Object3D />
     <RenderableObject name="CaixaGrossa01" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
   </Entity>
   <Entity name="CaixaPetita05">
     <Object3D />
     <RenderableObject name="CaixaPetita05" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
   </Entity>
   <Entity name="CaixaPetita06">
     <Object3D />
     <RenderableObject name="CaixaPetita06" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
   </Entity>
   <Entity name="Wall">
     <Object3D />
     <RenderableObject name="Wall" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
   </Entity>
   <Entity name="CaixaGrossa02">
     <Object3D />
     <RenderableObject name="CaixaGrossa02" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
   </Entity>
   <Entity name="CaixaGrossa03">
     <Object3D />
     <RenderableObject name="CaixaGrossa03" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
   </Entity>
   <Entity name="CaixaPetita08">
     <Object3D />
     <RenderableObject name="CaixaPetita08" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
   </Entity>
   <Entity name="CaixaGrossa04">
     <Object3D />
     <RenderableObject name="CaixaGrossa04" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
   </Entity>
   <Entity name="CaixaPetita09">
     <Object3D />
     <RenderableObject name="CaixaPetita09" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
   </Entity>
   <Entity name="CaixaPetita10">
     <Object3D />
     <RenderableObject name="CaixaPetita10" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
   </Entity>
   <Entity name="CaixaPetita11">
     <Object3D />
     <RenderableObject name="CaixaPetita11" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="1" collision_group="escenari" />
   </Entity>
   <Entity name="Llum">
     <Object3D />

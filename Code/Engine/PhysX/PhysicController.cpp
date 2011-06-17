@@ -7,6 +7,7 @@
 #undef max
 #include "NxPhysics.h"
 #include "NxController.h"
+#include "PhysicsManager.h"
 #include "NxCapsuleController.h"
 //---------------------//
 
@@ -22,7 +23,7 @@ class CPhysicsControllerHitReport : public NxUserControllerHitReport
 		if(hit.shape)
 		{
 			NxCollisionGroup group = hit.shape->getGroup();
-			if(group==GROUP_COLLIDABLE_PUSHABLE)
+			if(group==ECG_OBJECTES_DINAMICS)
 			{
 				NxActor& actor = hit.shape->getActor();
 

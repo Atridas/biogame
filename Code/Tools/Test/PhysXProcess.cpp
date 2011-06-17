@@ -932,7 +932,7 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     {
       g_pRagdoll = new CPhysxSkeleton(false);
       CalModel* l_pCalModel = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel();
-      g_pRagdoll->Init("Data/Animated Models/Riggle/Skeleton.xml",l_pCalModel,l_pAnim->GetMat44());
+      g_pRagdoll->Init("Data/Animated Models/Riggle/Skeleton.xml",l_pCalModel,l_pAnim->GetMat44(),GROUP_COLLIDABLE_PUSHABLE);
     }
 
     ///////////////////////////////////////////////////////////////////////////////
