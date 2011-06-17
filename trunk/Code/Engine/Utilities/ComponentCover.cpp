@@ -17,7 +17,7 @@ bool CComponentCover::Init(CGameEntity* _pEntity, const Vect3f& _vSize, const in
 
   m_pPhysXData = new CPhysicUserData(_pEntity->GetName().c_str());
   m_pPhysXData->SetPaint(true);
-  m_pPhysXData->SetColor(colBLUE);
+  m_pPhysXData->SetColor(colCYAN);
   m_pPhysXData->SetEntity(_pEntity);
 
   m_pPhysXActor = new CPhysicActor(m_pPhysXData);
