@@ -112,6 +112,8 @@ bool CEntityProcess::Init()
 
   // un enemic --------------------------------------------------------------------------------------------------------------
   CGameEntity* l_peEnemy = CORE->GetEntityManager()->CreateEntity();
+  CORE->GetEntityManager()->SetName("Gordo Cabrón", l_peEnemy);
+
   l_pComponentObject3D = new CComponentObject3D();
   l_pComponentObject3D->Init(l_peEnemy);
   l_pComponentObject3D->SetPosition(Vect3f(8.0f,2.0f,4.0f));
@@ -177,6 +179,16 @@ void CEntityProcess::RenderINFO(CRenderManager* _pRM)
 {
   CORE->GetPhysicsManager()->DebugRender(_pRM);
 
+  //CRenderableObject *l_pRO = CORE->GetEntityManager()->GetEntity("Gordo Cabrón")->GetComponent<CComponentRenderableObject>()->GetRenderableObject();
+  //
+  //CBoundingSphere *l_pBS = l_pRO->GetBoundingSphere();
+  //Mat44f t;
+  //t = l_pRO->GetMat44();
+  //
+  //_pRM->SetTransform(t);
+  //_pRM->RenderBoundingSphere(l_pBS);
+  
+  
   /*
   uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");
   int l_iPosicio = 0;

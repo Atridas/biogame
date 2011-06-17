@@ -11,7 +11,7 @@ public:
   CBoundingBox();
   ~CBoundingBox() { Done(); };
 
-  bool Init(Vect3f& _vMin, Vect3f& _vMax);
+  bool Init(const Vect3f& _vMin, const Vect3f& _vMax);
   bool Init(Vect3f _vPoints[8]);
   bool Init(Vect3f _vDimensions);
   
@@ -27,7 +27,7 @@ protected:
   virtual void Release();
   
 private:
-  void CalcBox(Vect3f& _vMin, Vect3f& _vMax);
+  void CalcBox(const Vect3f& _vMin, const Vect3f& _vMax);
   void CalcMiddlePoint();
   void CalcDimension();
   void CalcMaxSide();

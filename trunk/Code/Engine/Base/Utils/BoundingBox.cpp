@@ -11,7 +11,7 @@ CBoundingBox::CBoundingBox()
 
 }
 
-bool CBoundingBox::Init(Vect3f& _vMin, Vect3f& _vMax)
+bool CBoundingBox::Init(const Vect3f& _vMin, const Vect3f& _vMax)
 {
   CalcBox(_vMin, _vMax);
   CalcMiddlePoint();
@@ -78,7 +78,7 @@ bool CBoundingBox::Init(Vect3f _vDimensions)
   return IsOk();
 }
 
-void CBoundingBox::CalcBox(Vect3f& _vMin, Vect3f& _vMax)
+void CBoundingBox::CalcBox(const Vect3f& _vMin, const Vect3f& _vMax)
 {
   //crear la box
   /*            4                    5

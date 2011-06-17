@@ -1,8 +1,10 @@
 #include "ComponentRagdoll.h"
 #include "PhysxSkeleton.h"
+#include "PhysxBone.h"
 #include "ComponentRenderableObject.h"
 #include "RenderableAnimatedInstanceModel.h"
 #include "PhysicsManager.h"
+#include "PhysicActor.h"
 
 bool CComponentRagdoll::Init(CGameEntity* _pEntity, const string& _szSkeletonFile)
 {
@@ -52,6 +54,26 @@ void CComponentRagdoll::UpdatePostAnim(float _fDeltaTime)
   if(m_bActive)
   {
     m_pRagdoll->Update();
-    m_pRAIM->SetMat44(m_pRagdoll->GetTransform());
+    Mat44f m = m_pRagdoll->GetTransform();
+    m_pRAIM->SetMat44(m);
+
+
+
+    CPhysxBone *l_pPBone = m_pRagdoll->GetPhysxBoneByName("Bip01 Spine");
+    
+    //Mat44f m2;
+    //l_pPBone->GetPhysxActor()->GetMat44(m2);
+    //Vect3f v = m2.GetTranslationVector();
+    //
+    //float radius = m_pRAIM->GetBoundingSphere()->GetRadius();
+    //m_pRAIM->GetBoundingSphere()->Init(v - m.GetTranslationVector(), radius);
+
+    CBoundingBox l_BB = m_pRagdoll->ComputeBoundingBox();
+    CBoundingSphere l_BS;
+    l_BS.Init(l_BB.GetMin(), l_BB.GetMax());
+    //m_pRAIM->GetBoundingBox()->Init( l_BB.GetMax(), l_BB.GetMin());
+    m_pRAIM->GetBoundingSphere()->Init(l_BB.GetMiddlePoint() - m.GetTranslationVector(), l_BS.GetRadius());
+
+    //Això funciona però encara no se sap pq.
   }
 }
