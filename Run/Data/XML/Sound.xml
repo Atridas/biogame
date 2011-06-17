@@ -3,5 +3,5 @@
   <sound name="bgm" file="./Data/Sounds/bgm.mp3" sound3D="false" type="music" loop="true" priority="1" volume="0.5"/>
   <sound name="bgm2" file="./Data/Sounds/bgm2.mp3" sound3D="false" type="music" loop="true" priority="1" volume="1.0"/>
   <sound name="music3d" file="./Data/Sounds/music3d.mp3" sound3D="true" type="music" loop="true" minDistance="1.0" maxDistance="100.0" priority="1" volume="1.0"/>
-  <!--<sound name="sample" file="./Data/Sounds/sample.mp3" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />-->  
+  <sound name="pipip" file="./Data/Sounds/pipipipipi.mp3" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />  
 </sounds>

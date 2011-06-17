@@ -13,6 +13,7 @@
 #include "RenderManager.h"
 #include "Core.h"
 #include "base.h"
+
 //---PhysX Includes---//
 #undef min
 #undef max
@@ -82,7 +83,7 @@ void CPhysxSkeleton::Release()
 }
 
 
-bool CPhysxSkeleton::Load(string _szFileName)
+bool CPhysxSkeleton::Load(const string& _szFileName)
 {
   CXMLTreeNode l_XML;
   CXMLTreeNode l_XMLObjects;
@@ -140,7 +141,7 @@ bool CPhysxSkeleton::Load(string _szFileName)
 }
 
 
-CPhysxBone* CPhysxSkeleton::GetPhysxBoneByName(string _szName)
+CPhysxBone* CPhysxSkeleton::GetPhysxBoneByName(const string& _szName)
 {
 
   CPhysxBone* l_pBone = 0;
@@ -162,7 +163,7 @@ CPhysxBone* CPhysxSkeleton::GetPhysxBoneByName(string _szName)
 
 
 //Main function pels Joints.
-bool CPhysxSkeleton::InitPhysXJoints(string _szFileName)
+bool CPhysxSkeleton::InitPhysXJoints(const string& _szFileName)
 {
 
   CXMLTreeNode l_XML;
@@ -517,7 +518,7 @@ void CPhysxSkeleton::SleepPhysxBones()
   }
 };
 
-bool CPhysxSkeleton::IsRagdollPhysXActor(string _szName)
+bool CPhysxSkeleton::IsRagdollPhysXActor(const string& _szName)
 {
   for(size_t i=0;i<m_vBones.size();++i)
   {
@@ -536,4 +537,42 @@ bool CPhysxSkeleton::IsRagdollPhysXActor(string _szName)
   return false;
 }
 
+CBoundingBox CPhysxSkeleton::ComputeBoundingBox()
+{
+  vector<CPhysxBone*>::iterator l_it  = m_vBones.begin();
+  vector<CPhysxBone*>::iterator l_end = m_vBones.end();
+  Mat44f m;
+  bool m_bFirst = true;
+  Vect3f v, min, max;
 
+  for(; l_it != l_end; ++l_it)
+  {
+    CPhysicActor* l_pPA = (*l_it)->GetPhysxActor();
+    if(l_pPA)
+    {
+      l_pPA->GetMat44(m);
+      v = m.GetTranslationVector();
+      v += (*l_it)->GetMiddlePoint();
+      if(m_bFirst)
+      {
+        min = max = v;
+        m_bFirst = false;
+      }
+      else
+      {
+        min.x = (min.x < v.x) ? min.x : v.x;
+        min.y = (min.y < v.y) ? min.y : v.y;
+        min.z = (min.z < v.z) ? min.z : v.z;
+
+        max.x = (max.x > v.x) ? max.x : v.x;
+        max.y = (max.y > v.y) ? max.y : v.y;
+        max.z = (max.z > v.z) ? max.z : v.z;
+      }
+    }
+  }
+
+  CBoundingBox l_BB;
+  l_BB.Init(min, max);
+
+  return l_BB;
+}

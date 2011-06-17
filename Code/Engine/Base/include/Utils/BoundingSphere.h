@@ -12,7 +12,9 @@ public:
                     {};
   ~CBoundingSphere() { Done(); };
 
-  bool Init(Vect3f& _vMin, Vect3f& _vMax);
+  bool Init(const Vect3f& _vMin, const Vect3f& _vMax);
+
+  bool Init(const Vect3f& _vMiddlePoint, float _fRadius);
 
   const Vect3f& GetMiddlePoint() const { return m_vMiddlePoint; };
   const float GetRadius() const { return m_fRadius; };
@@ -22,8 +24,8 @@ protected:
   virtual void Release();
   
 private:
-  void CalcMiddlePoint(Vect3f& _vMin, Vect3f& _vMax);
-  void CalcRadius(Vect3f& _vMin, Vect3f& _vMax);
+  void CalcMiddlePoint(const Vect3f& _vMin, const Vect3f& _vMax);
+  void CalcRadius(const Vect3f& _vMin, const Vect3f& _vMax);
 
   Vect3f m_vMiddlePoint;
   float  m_fRadius;

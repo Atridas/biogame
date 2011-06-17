@@ -3,6 +3,7 @@
 #define INC_PHYSICS_SKELETON_H_
 
 #include "base.h"
+#include "Utils\BoundingBox.h"
 
 class CPhysxBone;
 class CalSkeleton;
@@ -26,6 +27,7 @@ public:
   void              SetSkeleton(CalSkeleton* _pSkeleton)  {m_pCalSkeleton = _pSkeleton;};
   const Mat44f&     GetTransform()                 {return m_mTransform;};
   void              SetTransform(const Mat44f& _mTransform) {m_mTransform = _mTransform;};
+  CBoundingBox      ComputeBoundingBox();
 
   bool              IsRagdollActive()                     {return m_bRagdollActive;};  
   //void              ActivateRagdoll()                     {m_bRagdollActive = true;};
@@ -33,17 +35,17 @@ public:
   void              SetRagdollActive(bool _bRagdollActive);
   void              WakeUpPhysxBones();
   void              SleepPhysxBones();
-  bool              IsRagdollPhysXActor(string _szName);
+  bool              IsRagdollPhysXActor(const string& _szName);
+  CPhysxBone*       GetPhysxBoneByName(const string& _szName);
 
   void Update();
 
 
 private:
   //Funcions per inicialitzar el esquelet corresponent
-  bool              Load(string _szFileName);
+  bool              Load(const string& _szFileName);
   void              InitParents();
-  bool              InitPhysXJoints(string _szFileName);
-  CPhysxBone*       GetPhysxBoneByName(string _szName);
+  bool              InitPhysXJoints(const string& _szFileName);
 
   //Funcions per afegir joints al Skeleton.
   bool				              AddSphericalJoint(CXMLTreeNode _XMLObjects);

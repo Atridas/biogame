@@ -417,6 +417,7 @@ State_Player_Morint['Update'] = function(_jugador, _dt)
     log('Por què?')
     _jugador:get_component(BaseComponent.vida).vida = 100
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+    --SOUND:play_sample('pipip')
     --_jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Mort')
   end
 end
