@@ -10,7 +10,7 @@ Enemy_Constants["Distance Lose Walk"] = 30 * 30
 
 Enemy_Constants["Time Hit"] = 1.1
 
-Enemy_Constants["Time Dying"] = 2.5
+Enemy_Constants["Time Dying"] = 0.5
 
 Enemy_Constants["Time Shoot"]    = 0.7
 

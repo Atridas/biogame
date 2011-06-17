@@ -55,6 +55,7 @@ void CGameEntity::DeleteComponents()
         {
           m_vComponents[j] = m_vComponents[j+1];
         }
+        m_vComponents.pop_back();
         m_mComponents.erase(l_type);
         break;
       }

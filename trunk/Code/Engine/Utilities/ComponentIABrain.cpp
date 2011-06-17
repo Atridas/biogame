@@ -109,6 +109,7 @@ void CComponentIABrain::Die()
       delete l_pRC;
       return;
     }
+    GetEntity()->DeleteComponent(CBaseComponent::ECT_PHYSX_CONTROLLER);
   }
   l_pRC->SetActive(true);
 }
