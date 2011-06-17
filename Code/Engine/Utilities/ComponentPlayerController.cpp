@@ -260,21 +260,13 @@ void CComponentPlayerController::Cover()
 void CComponentPlayerController::CheckCover()
 {  
   CCamera* l_pCamera = GetEntity()->GetComponent<CComponent3rdPSCamera>(ECT_3RD_PERSON_SHOOTER_CAMERA)->GetCamera();
-  //Vect3f l_vPos = m_pObject3D->GetPosition();
   Vect3f l_vPos = m_pObject3D->GetPosition() - Vect3f(0.0f,0.5f,0.0f);
 
   Mat33f l_mRot;
   l_mRot.SetIdentity();
-  l_mRot.RotByAngleY(m_pObject3D->GetYaw());
+  l_mRot.RotByAngleY(-m_pObject3D->GetYaw());
 
   Vect3f l_vDir = l_mRot*Vect3f(1.0f,0.0f,0.0f);
-
-  CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
-  (new CComponentLaser())->Init(l_pLaser,
-                                l_vPos,
-                                l_vPos+l_vDir*3.0f,
-                                1.f);
-  //l_vPos += l_vDir;
 
   SCollisionInfo l_CInfo;
   CPhysicUserData* l_pUserData = 0;
