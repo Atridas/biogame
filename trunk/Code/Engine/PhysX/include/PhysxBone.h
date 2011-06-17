@@ -17,10 +17,10 @@ class CPhysxBone :
   public CBaseControl
 {
 public:
-  CPhysxBone(string _szName) : CNamed(_szName),m_pCalBone(0), m_iParentID(-1), m_pActor(0), m_bRoot(true),m_pBoneUserData(0), m_pParent(0) {};
+  CPhysxBone(string _szName) : CNamed(_szName),m_pCalBone(0), m_iParentID(-1), m_pActor(0), m_bRoot(true),m_pBoneUserData(0), m_pParent(0),m_iCollisionGroup(0) {};
   ~CPhysxBone() {Done();};
 
-  bool                Init(CalBone* _pBone,Mat44f _vMat44);
+  bool                Init(CalBone* _pBone,Mat44f _vMat44,int _iColisionGroup);
   virtual void        Release();
 
   void                UpdateCal3dFromPhysx();
@@ -56,6 +56,7 @@ private:
   Vect3f              m_vMiddlePoint;
   bool                m_bRoot;
   vector<int>         m_vChildListID;
+  int                 m_iCollisionGroup;
 
   Mat44f              m_vMatActor;
 

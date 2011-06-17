@@ -21,7 +21,7 @@ public:
 
   virtual void Release();
 
-  bool              Init(const string& _szFileName, CalModel* _pCalModel, Mat44f _vMat);
+  bool              Init(const string& _szFileName, CalModel* _pCalModel, Mat44f _vMat, int _iColisionGroup);
   const CalSkeleton* GetSkeleton()                        {return m_pCalSkeleton;};
   void              SetSkeleton(CalSkeleton* _pSkeleton)  {m_pCalSkeleton = _pSkeleton;};
   const Mat44f&     GetTransform()                 {return m_mTransform;};
