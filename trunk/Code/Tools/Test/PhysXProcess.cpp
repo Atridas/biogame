@@ -354,7 +354,8 @@ bool CPhysXProcess::Init()
 
   CORE->GetParticleManager()->SetAllEmittersActive(false);
 
-
+  CORE->GetRenderableObjectsManager()->AddMeshInstance("laser_pilota", "Mirilla");
+  
   SetOk(true);
   return IsOk();
 
@@ -407,6 +408,11 @@ void CPhysXProcess::Release()
 
 void CPhysXProcess::Update(float _fElapsedTime)
 {
+
+
+
+  RenderLaserPoint(RENDER_MANAGER);
+
   if(m_pObject) 
   {
     //Actualitze el pitch i el yaw segons els delta del mouse
@@ -743,7 +749,7 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
     CORE->GetLightManager()->Render(_pRM);
 
   _pRM->SetTransform(Mat44f().SetIdentity());
-  RenderLaserPoint(_pRM);
+  
   //_pRM->DrawAxis();
 }
 
@@ -1241,21 +1247,31 @@ void CPhysXProcess::RenderLaserPoint(CRenderManager* _pRM)
   //Vect3f l_vDirectionAir(l_DirCamera.x+10.0f,l_DirCamera.y+10.0f,l_DirCamera.z+10.0f);
   Vect3f l_vDirectionAir = l_DirCamera*10.0f;
   //_pRM->DrawLine(Vect3f(l_vPos.x+l_vAnimPos.x,l_vPos.y+l_vAnimPos.y,l_vPos.z+l_vAnimPos.z),l_CInfo.m_CollisionPoint,colRED);
-  if (g_pUserDataSHOOT != 0)
+
+
+  /*if (g_pUserDataSHOOT != 0)
   {
     _pRM->DrawLine(l_CInfo.m_CollisionPoint,l_vVect,colRED);
   }
   else
   {
     _pRM->DrawLine(l_vVect+l_vDirectionAir,l_vVect,colRED);
-  }
+  }*/
 
-  Mat44f t;
+  /*Mat44f t;
   t.SetIdentity();
   t.Translate(l_CInfo.m_CollisionPoint);
   _pRM->SetTransform(t);
-  _pRM->DrawSphere(0.1f,colRED,5);
+  _pRM->DrawSphere(0.1f,colRED,5);*/
 
+  Mat44f l_vMat;
+  l_vMat.SetIdentity();
+  l_vMat.Translate(l_CInfo.m_CollisionPoint);
+  CRenderableObject* l_pRenderObject = CORE->GetRenderableObjectsManager()->GetResource("Mirilla");
+  if (l_pRenderObject != 0)
+  {
+    l_pRenderObject->SetMat44(l_vMat);
+  }
 
 }
 
