@@ -78,6 +78,7 @@
   <ItemGroup>
     <ClCompile Include="BaseComponent.cpp" />
     <ClCompile Include="ComponentAnimation.cpp" />
+    <ClCompile Include="ComponentCover.cpp" />
     <ClCompile Include="ComponentIABrain.cpp" />
     <ClCompile Include="ComponentIAWalkToPlayer.cpp" />
     <ClCompile Include="ComponentLaser.cpp" />
@@ -110,6 +111,7 @@
   <ItemGroup>
     <ClInclude Include="include\BaseComponent.h" />
     <ClInclude Include="include\ComponentAnimation.h" />
+    <ClInclude Include="include\ComponentCover.h" />
     <ClInclude Include="include\ComponentIABrain.h" />
     <ClInclude Include="include\ComponentIAWalkToPlayer.h" />
     <ClInclude Include="include\ComponentLaser.h" />

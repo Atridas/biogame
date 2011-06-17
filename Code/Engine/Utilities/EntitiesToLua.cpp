@@ -100,7 +100,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("state_machine",        CBaseComponent::ECT_STATE_MACHINE),
           value("animation",            CBaseComponent::ECT_ANIMATION),
           value("ia_brain",             CBaseComponent::ECT_IA_BRAIN),
-          value("ragdoll",              CBaseComponent::ECT_RAGDOLL)
+          value("ragdoll",              CBaseComponent::ECT_RAGDOLL),
+          value("cover",                CBaseComponent::ECT_COVER)
       ]
       .def("get_type",     &CBaseComponent::GetType)
       .def("get_entity",   &CBaseComponent::GetEntity)
@@ -131,6 +132,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponentPlayerController, CBaseComponent>("ComponentPlayerController")
       .def("init",    (bool(CComponentPlayerController::*)(CGameEntity*))&CComponentPlayerController::Init)
       .def("shoot",   &CComponentPlayerController::Shoot)
+      .def("cover",   &CComponentPlayerController::Cover)
       .def("die",     &CComponentPlayerController::Die)
       .def("respawn", &CComponentPlayerController::Respawn)
 

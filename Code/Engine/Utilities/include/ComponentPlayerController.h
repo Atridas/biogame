@@ -111,11 +111,13 @@ public:
   void Shoot();
   void Die();
   void Respawn();
+  void Cover();
 
 protected:
   virtual void Release() {};
 
 private:
+  void CheckCover();
   //Altres components referenciats
   CComponentMovement * m_pMovement;
   CComponentObject3D * m_pObject3D;

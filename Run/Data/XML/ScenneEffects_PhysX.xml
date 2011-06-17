@@ -5,79 +5,46 @@
               texture="ShadowMapTexture" width="1024" height="1024"
               static_mesh_effect="Depth" animated_model_effect="AnimatedDepth"
               light_shadow_cast="Spot01"
-              active="true" format_type="R32F"/>
+              active="false" format_type="R32F"/>
 
-  <!--<pre_render type="render_to_texture" name="glow_scene_effect" texture="GlowTexture"
-              texture_size_as_frame_buffer="true"
-              static_mesh_technique="RenderGlowTechnique" animated_model_technique="Cal3DGlowTechnique" format_type="A8R8G8B8" active="true"/>
+  <pre_render type="render_to_texture" name="glow_scene_effect" texture="GlowTexture"
+				texture_size_as_frame_buffer="true"
+				static_mesh_effect="Glow" animated_model_effect="AnimatedGlow" format_type="A8R8G8B8" active="false"/>
 
   <pre_render type="draw_quad_to_texture" name="downsample_glow" texture="DownSampledGlow"
-              texture_size_as_frame_buffer="true" scale_size="0.5"
-              technique="DownSample4xTechnique" format_type="A8R8G8B8" active="true">
+				texture_size_as_frame_buffer="true" scale_size="0.5"
+        effect="DownSample4x" format_type="A8R8G8B8" active="false">
     <texture stage_id="0" texture="GlowTexture"/>
   </pre_render>
+
   <pre_render type="draw_quad_to_texture" name="downsample_glow2" texture="DownSampledGlow2"
-              texture_size_as_frame_buffer="true" scale_size="0.25"
-              technique="DownSample4xTechnique" format_type="A8R8G8B8" active="true">
+				texture_size_as_frame_buffer="true" scale_size="0.25"
+        effect="DownSample4x" format_type="A8R8G8B8" active="false">
     <texture stage_id="0" texture="DownSampledGlow"/>
   </pre_render>
-  
+
   <pre_render type="draw_quad_to_texture" name="vertical_glow_effect" texture="GlowTexture2"
-              texture_size_as_frame_buffer="true" scale_size="0.25"
-              technique="VerticalBloomTechnique" format_type="A8R8G8B8" active="true">
+				texture_size_as_frame_buffer="true" scale_size="0.25"
+        effect="VerticalBloom" format_type="A8R8G8B8" active="false">
     <texture stage_id="0" texture="DownSampledGlow2"/>
   </pre_render>
-  
+
   <pre_render type="draw_quad_to_texture" name="horitzontal_glow_effect" texture="GlowTexture3"
-              texture_size_as_frame_buffer="true" scale_size="0.25"
-              technique="HoritzontalBloomTechnique" format_type="A8R8G8B8" active="true">
+				texture_size_as_frame_buffer="true" scale_size="0.25"
+        effect="HoritzontalBloom" format_type="A8R8G8B8" active="false">
     <texture stage_id="0" texture="GlowTexture2"/>
   </pre_render>
-
-  <pre_render type="render_to_texture" name="z_blur_scene_effect" texture="ZBlurTexture" width="1024" height="1024"
-              static_mesh_technique="PreZBlurTechnique"
-              animated_model_technique="AnimatedPreZBlurTechnique" active="true" format_type="A8R8G8B8"/>
-  -->
-  <render name="default_scene_effect" active="true">
+  
+  <render name="default_scene_effect" active="false">
     <texture stage_id="5" texture="ShadowMapTexture"/>
   </render>
-  <!--
 
-	<capture_frame_buffer name="capture_frame_buffer_scene_effect_without_post_fx" texture="FrameBufferTextureWithoutPostFX"
-                        texture_size_as_frame_buffer="true" active="true" format_type="A8R8G8B8"/>
+	<post_render type="draw_quad" name="post_glow" effect="PostProcessBloom" active="false">
+		<texture stage_id="0" texture="GlowTexture3"/>
+	</post_render>
 
-	-->
-  <!--capture_frame_buffer_post_fx name="capture_frame_buffer_scene_effect_with_post_fx" texture="FrameBufferTextureWithPostFX"
-                                texture_size_as_frame_buffer="true" active="true" format_type="A8R8G8B8"/-->
-  <!--
-
-
-
-  <post_render type="draw_quad" name="post_zblur_scene_effect" technique="PostZBlurTechnique" active="true">
-    <texture stage_id="0" texture="FrameBufferTextureWithoutPostFX"/>
-    <texture stage_id="1" texture="ZBlurTexture"/>
-  </post_render>
-
-  <post_render type="draw_quad" name="post_glow" technique="PostProcessBloomTechnique" active="true">
-    <texture stage_id="0" texture="GlowTexture3"/>
+  <post_render type="draw_quad" name="post_glow" effect="PostProcessBloom2" active="false">
+    <texture stage_id="0" texture="GlowTexture"/>
   </post_render>
   
-  
-  <post_render type="draw_quad" name="noise_and_vignetting_scene_effect" technique="RenderNoiseAndVignettingTechnique" active="true">
-    <texture stage_id="0" texture="Data/Textures/noise.tga"/>
-    <texture stage_id="1" texture="Data/Textures/vigneting.tga"/>
-  </post_render>
-
-  <post_render type="draw_quad" name="gas_scene_effect" technique="GasTechnique" active="true" color="0.0 1.0 0.0 0.2">
-    <texture stage_id="0" texture="Data/Textures/mecagonto.tga"/>
-    <texture stage_id="1" texture="Data/Textures/n1.tga"/>
-    <texture stage_id="2" texture="Data/Textures/n2.tga"/>
-    <texture stage_id="3" texture="Data/Textures/n3.tga"/>
-    <texture stage_id="4" texture="Data/Textures/n4.tga"/>
-  </post_render>-->
-
-  <!--post_render type="draw_quad" name="post_blur_scene_effect" technique="PostProcessBlurTechnique" active="true" color="1.0 1.0 1.0 0.25">
-    <texture stage_id="0" texture="FrameBufferTextureWithPostFX"/>
-  </post_render-->
-
 </scene_effects>
