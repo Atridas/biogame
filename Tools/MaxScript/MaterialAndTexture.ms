@@ -120,7 +120,7 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 	
 	if _material.bumpMapEnable == true and _material.bumpMap != undefined then
 	(
-		l_texture = _material.bumpMap.filename
+		l_texture = filenameFromPath _material.bumpMap.filename
 		l_texture = _relativePath + l_texture
 		
 		WriteShort _file NORMALMAP_MATERIAL_MASK #unsigned
@@ -130,7 +130,7 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 	
 	if _material.selfIllumMapEnable == true and _material.selfIllumMap != undefined then
 	(
-		l_texture = _material.selfIllumMap.filename
+		l_texture = filenameFromPath _material.selfIllumMap.filename
 		l_texture = _relativePath + l_texture
 		
 		WriteShort _file LIGHTMAP_MATERIAL_MASK #unsigned
