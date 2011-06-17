@@ -360,14 +360,14 @@ bool CParticleManager::Load(const string& _szFileName)
 
 CParticleEmitter* CParticleManager::GetParticleEmitter(const string& _szName)
 {
-  
+  string l_szNameEmitter;
   vector<CParticleEmitter*>::iterator it  = m_vEmitterParticle.begin(),
                                       end = m_vEmitterParticle.end();
 
   while(it != end)
   {
-    m_szFileName=(*it)->GetName();
-    if(_szName==m_szFileName)
+    l_szNameEmitter=(*it)->GetName();
+    if(_szName==l_szNameEmitter)
     {
       return (*it);
     }
@@ -422,8 +422,8 @@ void CParticleManager::Init(CRenderManager* _pRM)
 
 void CParticleManager::SetAllEmittersActive(bool _bActive)
 {
-  for (size_t i=0;i<m_vEmitterParticle.size();++i)
+ /* for (size_t i=0;i<m_vEmitterParticle.size();++i)
   {
     m_vEmitterParticle[i]->SetActive(_bActive);
-  }
+  }*/
 }

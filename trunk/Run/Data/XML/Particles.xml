@@ -29,17 +29,28 @@
         </Animateds>
     </ParticleEmitter>-->
 
-    <!--<ParticleEmitter  id="vapor"                        MinEmitRate="25.0"             MaxEmitRate="30.0"
-                    Color1="0.0 1.0 0.0 0.5"            Color2="0.0 1.0 0.0 0.5"       MinSize="0.05"        MaxSize="0.05"
-                         Life1="1.0"          Life2="1.0"  Bucle="true"   Angle1="-0.5"  Angle2="0.5"
+    <ParticleEmitter  id="vapor"                        MinEmitRate="15.0"             MaxEmitRate="20.0"
+                    Color1="0.10 0.10 0.10 0.8"            Color2="0.10 0.10 0.10 0.8"       MinSize="0.05"        MaxSize="0.05"
+                         Life1="1.0"          Life2="1.0"  Bucle="true"   Angle1="-0.1"  Angle2="0.1"
                     Gravity="0.0 5.5 0.0"             Velocitate="1.0 1.0 1.0"         TexParticle="Data/Textures/texturas particulas/smokepuff1.dds">
       <Sizes>
-        <Size        time="1.0"       timeInterpolation="1.0"   MinSize="0.6"          MaxSize="0.6"/>
+        <Size        time="1.0"       timeInterpolation="1.0"   MinSize="0.9"          MaxSize="0.9"/>
       </Sizes>
 
-    </ParticleEmitter>-->
+    </ParticleEmitter>
 
-       <!--<ParticleEmitter  id="FumMenjar"                        MinEmitRate="7.0"             MaxEmitRate="10.0"
+    <ParticleEmitter  id="vapor2"                        MinEmitRate="15.0"             MaxEmitRate="20.0"
+                 Color1="0.1 0.1 0.1 0.8"            Color2="0.1 0.1 0.1 0.8"       MinSize="0.05"        MaxSize="0.05"
+                      Life1="1.0"          Life2="1.0"  Bucle="true"   Angle1="-0.1"  Angle2="0.1"
+                 Gravity="0.0 -0.5 0.0"             Velocitate="1.0 1.0 1.0"         TexParticle="Data/Textures/texturas particulas/smokepuff1.dds">
+      <Sizes>
+        <Size        time="1.0"       timeInterpolation="1.0"   MinSize="0.9"          MaxSize="0.9"/>
+      </Sizes>
+
+    </ParticleEmitter>
+
+
+    <!--<ParticleEmitter  id="FumMenjar"                        MinEmitRate="7.0"             MaxEmitRate="10.0"
                         Color1="1.0 1.0 1.0 0.5"            Color2="1.0 1.0 1.0 0.5"       MinSize="0.2"        MaxSize="0.5"
                              Life1="5.0"          Life2="5.0"  Bucle="true"   Angle1="-0.5"  Angle2="0.5"
                         Gravity="0.0 0.0 0.0"             Velocitate="0.7 0.2 0.7"         TexParticle="Data/Textures/texturas particulas/smoketest2.dds">
@@ -49,64 +60,79 @@
           <Color        time="4.0"        Color1="0.43 0.43 0.43 0.20"       Color2="0.44 0.44 0.44 0.21"/>
           <Color        time="6.0"        Color1="1.0 1.0 1.0 0.0"           Color2="1.0 1.0 1.0 0.0"/>
         </Colors>
-        </ParticleEmitter>-->
+        </ParticleEmitter>-->    <!--smokepuff1-->
 
-    <!--<ParticleEmitter  id="efecte_fred"                        MinEmitRate="20.0"             MaxEmitRate="30.0"
-                        Color1="1.0 1.0 1.0 0.0"            Color2="1.0 1.0 1.0 0.0"       MinSize="0.5"        MaxSize="0.7"
-                             Life1="4.0"          Life2="4.0"  Bucle="true"   Angle1="-0.5"  Angle2="0.5"
-                        Gravity="0.0 1.0 0.0"             Velocitate="0.4 0.7 0.4"         TexParticle="Data/Textures/texturas particulas/smokepuff1.dds">
+    <ParticleEmitter  id="efecte_fred"                        MinEmitRate="20.0"             MaxEmitRate="30.0"
+                        Color1="1.0 1.0 1.0 0.0"            Color2="1.0 1.0 1.0 0.0"       MinSize="0.3"        MaxSize="0.5"   
+      Life1="5.0"          Life2="5.0"  Bucle="true"   Angle1="-0.5"  Angle2="0.5"
+      Gravity="0.0 0.5 0.0"             Velocitate="0.05 0.7 0.03"         TexParticle="Data/Textures/texturas particulas/smoke.dds">
       <Colors>
-        <Color        time="1.0"       timeInterpolation="1.0"   Color1="1.0 1.0 1.0 0.5"          Color2="1.0 1.0 1.0 0.5"/>
-        <Color        time="2.0"       timeInterpolation="1.0"   Color1="1.0 1.0 1.0 1.0"          Color2="1.0 1.0 1.0 1.0"/>
-        <Color        time="3.0"       timeInterpolation="1.0"   Color1="1.0 1.0 1.0 0.5"          Color2="1.0 1.0 1.0 0.5"/>
+        <Color        time="1.0"       timeInterpolation="1.0"   Color1="1.0 1.0 1.0 0.1"          Color2="1.0 1.0 1.0 0.1"/>
+        <Color        time="2.0"       timeInterpolation="1.0"   Color1="1.0 1.0 1.0 0.3"          Color2="1.0 1.0 1.0 0.3"/>
+        <Color        time="3.0"       timeInterpolation="1.0"   Color1="1.0 1.0 1.0 0.1"          Color2="1.0 1.0 1.0 0.1"/>
         <Color        time="4.0"       timeInterpolation="1.0"   Color1="1.0 1.0 1.0 0.0"          Color2="1.0 1.0 1.0 0.0"/>
-      </Colors>
-      
-   </ParticleEmitter>-->
-
-
-
-
-
-
-    <!--<ParticleEmitter  id="boira"                    MinEmitRate="10.0"             MaxEmitRate="15.0"
-                        Color1="1.0 1.0 1.0 0.0"          Color2="1.0 1.0 1.0 0.0"       MinSize="1.5"        MaxSize="1.7"
-                        Life1="7.0"          Life2="7.0"   Angle1="-0.5"  Angle2="0.5"
-                        Gravity="0.0 0.0 0.0"             Velocitate="0.2 0.05 0.2"       Bucle="true"   NumBucle="1"
-                        TexParticle="Data/Textures/texturas particulas/DustPoof.dds">
-        <Colors>
-          <Color        time="0.5"       timeInterpolation="1.5"   Color1="1.0 1.0 1.0 0.05"          Color2="1.0 1.0 1.0 0.05"/>
-          <Color        time="3.0"       timeInterpolation="1.5"   Color1="1.0 1.0 1.0 0.2"          Color2="1.0 1.0 1.0 0.2"/>
-          <Color        time="4.5"       timeInterpolation="1.5"   Color1="1.0 1.0 1.0 0.05"          Color2="1.0 1.0 1.0 0.05"/>
-          <Color        time="6.0"       timeInterpolation="1.5"   Color1="1.0 1.0 1.0 0.0"          Color2="1.0 1.0 1.0 0.0"/>
-        </Colors>
-
-
-
-      </ParticleEmitter>-->
-
-    <ParticleEmitter  id="fum_proveta"                        MinEmitRate="15.0"             MaxEmitRate="20.0"
-                    Color1="1.0 0.0 0.0 1.0"            Color2="1.0 0.4 0.2 1.0"       MinSize="0.05"        MaxSize="0.05"
-                         Life1="1.5"          Life2="1.5"  Bucle="true"   Angle1="-0.5"  Angle2="0.5"
-                    Gravity="0.0 0.0 0.0"             Velocitate="1.0 0.5 1.0"         TexParticle="Data/Textures/texturas particulas/smoke.dds">
-      <Sizes>
-        <Size        time="1.5"       timeInterpolation="1.5"   MinSize="0.7"          MaxSize="0.7"/>
-      </Sizes>
-
-      <Colors>
-        <Color        time="1.0"       timeInterpolation="1.0"   Color1="1.0 0.0 0.0 0.05"          Color2="1.0 0.2 0.2 0.05"/>
-        
       </Colors>
 
     </ParticleEmitter>
 
-    <!--<ParticleEmitter  id="bubble"                        MinEmitRate="2.0"             MaxEmitRate="3.0"
-                    Color1="1.0 1.0 1.0 1.0"            Color2="1.0 1.0 1.0 1.0"       MinSize="0.05"        MaxSize="0.1"
-                         Life1="2.5"          Life2="2.5"  Bucle="true"   Angle1="-0.5"  Angle2="0.5"
-                    Gravity="0.0 0.0 0.0"             Velocitate="1.0 0.5 1.0"         TexParticle="Data/Textures/texturas particulas/soapbubble.dds">
+
+
+
+
+    <!--Color1="0.28 0.26 0.01 0.0"          Color2="0.12 0.1 0.01 0.0"       MinSize="1.5"        MaxSize="1.7"
+    -->
+    <ParticleEmitter  id="boira"                    MinEmitRate="6.0"             MaxEmitRate="6.0"
+      Color1="0.14 0.14 0.14 0.0"          Color2="0.14 0.14 0.14 0.0"       MinSize="1.5"        MaxSize="1.7"
+      Life1="25.0"          Life2="25.0"   Angle1="-0.1"  Angle2="0.1"
+      Gravity="0.0 0.0 0.0"             Velocitate="0.2 0.05 0.2"       Bucle="true"   NumBucle="1"
+      TexParticle="Data/Textures/texturas particulas/DustPoof.dds">
+      <Colors>
+          <Color        time="0.5"       timeInterpolation="0.5"   Color1="0.30 0.30 0.30 0.06"          Color2="0.30 0.30 0.30 0.06"/>
+          <Color        time="3.0"       timeInterpolation="17.5"   Color1="0.30 0.30 0.30 0.12"         Color2="0.30 0.30 0.30 0.12"/>
+          <Color        time="20.5"       timeInterpolation="1.5"   Color1="0.30 0.30 0.30 0.06"         Color2="0.30 0.30 0.30 0.06"/>
+          <Color        time="22.0"       timeInterpolation="3"   Color1="0.30 0.30 0.30 0.0"         Color2="0.30 0.30 0.30 0.0"/>
+        </Colors>
+
+
+
+      </ParticleEmitter>
+
+    <ParticleEmitter  id="frigo"                    MinEmitRate="16.0"             MaxEmitRate="16.0"
+      Color1="0.7 0.7 0.7 0.0"          Color2="0.7 0.7 0.7 0.0"       MinSize="1.5"        MaxSize="1.7"
+      Life1="15.0"          Life2="15.0"   Angle1="-0.1"  Angle2="0.1"
+      Gravity="0.0 0.0 0.0"             Velocitate="0.2 0.05 0.2"       Bucle="true"   NumBucle="1"
+      TexParticle="Data/Textures/texturas particulas/DustPoof.dds">
+      <Colors>
+        <Color        time="0.7"       timeInterpolation="0.7"   Color1="0.7 0.7 0.7 0.06"          Color2="0.7 0.7 0.7 0.06"/>
+        <Color        time="3.0"       timeInterpolation="17.5"   Color1="0.7 0.7 0.7 0.12"         Color2="0.7 0.7 0.7 0.12"/>
+        <Color        time="20.5"       timeInterpolation="1.5"   Color1="0.7 0.7 0.7 0.06"         Color2="0.7 0.7 0.7 0.06"/>
+        <Color        time="22.0"       timeInterpolation="3"   Color1="0.7 0.7 0.7 0.0"         Color2="0.7 0.7 0.7 0.0"/>
+      </Colors>
+
+
+
+    </ParticleEmitter>
+
+    <ParticleEmitter  id="fum_proveta"                        MinEmitRate="15.0"             MaxEmitRate="20.0"
+                    Color1="0.63 0.93 0.89 0.05"            Color2="0.65 0.95 0.9 0.05"       MinSize="0.05"        MaxSize="0.05"
+                         Life1="3.5"          Life2="3.5"  Bucle="true"   Angle1="-0.5"  Angle2="0.5"
+                    Gravity="0.0 0.0 0.0"             Velocitate="1.0 0.2 1.0"         TexParticle="Data/Textures/texturas particulas/smoke.dds">
+      <Sizes>
+        <Size        time="3.6"       timeInterpolation="3.6"   MinSize="0.7"          MaxSize="0.7"/>
+      </Sizes>
+
       
 
-    </ParticleEmitter>-->
+    </ParticleEmitter>
+
+    <ParticleEmitter  id="bubble"                        MinEmitRate="7.0"             MaxEmitRate="10.0"
+                    Color1="0.0 1.0 0.0 1.0"            Color2="0.0 1.0 0.0 1.0"       MinSize="0.02"        MaxSize="0.1"
+                         Life1="2.5"          Life2="3.0"     Angle1="-0.5"  Angle2="0.5"
+                      Bucle="false"    NumBucle="10"  RebootEmitter1="1.0"   RebootEmitter2="1.5" TotDeCop="false"
+                    Gravity="0.0 -0.25 0.0"             Velocitate="1.0 1.0 1.0"         TexParticle="Data/Textures/texturas particulas/soapbubble.dds">
+      
+
+    </ParticleEmitter>
 
  <!--   <ParticleEmitter  id="magia1"                        MinEmitRate="5.0"             MaxEmitRate="10.0"
                         Color1="0.0 0.0 0.0 0.0"           Color2="0.0 0.0 0.0 0.0"      MinSize="0.3"        MaxSize="0.8"
@@ -131,29 +157,29 @@
 
       </ParticleEmitter>-->
 
-    <!--<ParticleEmitter  id="goteo"                        MinEmitRate="1.0"             MaxEmitRate="1.0"
-                    Color1="1.0 1.0 1.0 1.0"            Color2="1.0 1.0 1.0 1.0"       MinSize="0.1"        MaxSize="0.1"
+    <ParticleEmitter  id="goteo"                        MinEmitRate="1.0"             MaxEmitRate="1.0"
+                    Color1="1.0 1.0 1.0 1.0"            Color2="1.0 1.0 1.0 1.0"       MinSize="0.03"        MaxSize="0.05"
                           Life1="2.0"          Life2="2.0"  Bucle="true"   Angle1="-0.5"  Angle2="0.5"
-                    Gravity="0.0 2.0 0.0"             Velocitate="1.0 1.0 1.0"         TexParticle="Data/Textures/texturas particulas/spark.dds">
+                    Gravity="0.0 4.5 0.0"             Velocitate="1.0 1.0 1.0"         TexParticle="Data/Textures/texturas particulas/DustPoof.dds">
       
 
-    </ParticleEmitter>-->
+    </ParticleEmitter>
 
-    <!--<ParticleEmitter  id="chispes_fluorescent"                        MinEmitRate="20.0"             MaxEmitRate="25.0"
-                    Color1="0.8 0.8 0.8 0.1"            Color2="0.9 0.9 0.9 0.2"       MinSize="0.05"        MaxSize="0.05"
-                          Life1="2.0"          Life2="2.0"  Bucle="false"    NumBucle="1"  RebootEmitter1="100.0"   RebootEmitter2="150.0" TotDeCop="true"
+    <ParticleEmitter  id="chispes_fluorescent"                        MinEmitRate="30.0"             MaxEmitRate="35.0"
+                    Color1="0.8 0.8 0.8 0.1"            Color2="0.9 0.9 0.9 0.2"       MinSize="0.01"        MaxSize="0.017"
+                          Life1="1.5"          Life2="1.5"  Bucle="false"    NumBucle="1"  RebootEmitter1="2.0"   RebootEmitter2="2.0" TotDeCop="true"
                       Angle1="-0.5"  Angle2="0.5"
-                    Gravity="0.0 2.0 0.0"             Velocitate="2.0 0.2 2.0"         TexParticle="Data/Textures/texturas particulas/fire4.dds">
+                    Gravity="0.0 -1.2 0.0"             Velocitate="2.0 3.0 2.0"         TexParticle="Data/Textures/texturas particulas/fire4.dds">
 
 
       <Colors>
-        <Color        time="0.2"        Color1="1.0 1.0 1.0 0.6"        Color2="1.0 1.0 1.0 0.65"/>
+        <Color        time="0.0"        Color1="1.0 1.0 1.0 0.6"        Color2="1.0 1.0 1.0 0.65"/>
         <Color        time="1.0"        Color1="1.0 1.0 1.0 1.0"         Color2="1.0 1.0 1.0 1.0"/>
         <Color        time="1.5"        Color1="1.0 1.0 1.0 0.6"        Color2="1.0 1.0 1.0 0.65"/>
         <Color        time="2.0"        Color1="1.0 1.0 1.0 0.1"        Color2="1.0 1.0 1.0 0.15"/>
       </Colors>
 
-    </ParticleEmitter>-->
+    </ParticleEmitter>
 
     <ParticleEmitter  id="granada"                        MinEmitRate="10.0"             MaxEmitRate="17.0"
                     Color1="1.0 1.0 1.0 1.0"            Color2="1.0 1.0 1.0 1.0"       MinSize="1.5"        MaxSize="1.7"
@@ -226,9 +252,6 @@
         <ParticleEmitterInstance id="VaporTuberiaPasadis1" type="vapor" position="8.11077 1.82666 -6.34484" FormEmitter="dummy" sizeX="0.0" sizeY="0.0" sizeZ="0.0" Direction="0.0 0.111024 -0.993818" />-->
     <!--<ParticleEmitterInstance id="VaporTuberiaPasadis1" type="vapor" position="8.11077 1.82666 -6.34484" FormEmitter="dummy" sizeX="0.0" sizeY="0.0" sizeZ="0.0" Direction="0.0 0.1 -1.0" Desviacion="0.0 0.001 0.2"/>-->
   <!--  <ParticleEmitterInstance id="BoiraPasadis1" type="boira" position="3.50849 0.109375 -8.57598" FormEmitter="dummy" sizeX="9.84748"  sizeY="0.241536"  sizeZ="5.02976" Direction="0.0 1.0 0.0" />
-   <ParticleEmitterInstance id="efecte_fred" type="efecte_fred" position="-5.75139 0.0 -10.6496" FormEmitter="dummy" sizeX="1.7593" sizeY="0.338507" sizeZ="0.338507" Direction="0.2 0.4 0." />
-    <ParticleEmitterInstance id="efecte_fred01" type="efecte_fred" position="-14.645 0.0 -6.84371" FormEmitter="dummy" sizeX="1.7593" sizeY="0.338507" sizeZ="0.338507" Direction="0.0 1.0 0.0" />
-    <ParticleEmitterInstance id="efecte_fred" type="efecte_fred" position="-5.75139 0.0 -10.6496" FormEmitter="dummy" sizeX="1.7593" sizeY="0.338507" sizeZ="0.338507" Direction="0.0 0.0 1.0" Desviacion="0.3 0.1 0.2" />
     <ParticleEmitterInstance id="FumMenjar1" type="FumMenjar" position="14.0028 1.10657 24.48" FormEmitter="dummy" sizeX="0.160256" sizeY="0.30256" sizeZ="0.160256"  Direction="0.0 1.0 0.0" Desviacion="0.1 0.2 0.1" />
     <ParticleEmitterInstance id="FumMenjar2" type="FumMenjar" position="12.4031 1.10657 25.218" FormEmitter="dummy" sizeX="0.160256" sizeY="0.25256" sizeZ="0.160256" Direction="0.0 1.0 0.0" Desviacion="0.1 0.2 0.1" />
     <ParticleEmitterInstance id="FumMenjar3" type="FumMenjar" position="10.7203 1.10657 25.9327" FormEmitter="dummy" sizeX="0.160256" sizeY="0.20256" sizeZ="0.160256" Direction="0.0 1.0 0.0" Desviacion="0.1 0.2 0.1" />-->
@@ -249,13 +272,13 @@
     <ParticleEmitterInstance id="tv02" type="tv" position="0.926008 2.56716 6.47247" FormEmitter="dummy" sizeX="1.79023" sizeY="0.286755" sizeZ="1.61947" Direction="0.481972 -0.855536 0.189107" />
     <ParticleEmitterInstance id="tv03" type="tv" position="-0.254714 1.76518 5.68032" FormEmitter="dummy" sizeX="2.05104" sizeY="0.288599" sizeZ="1.66818" Direction="0.478893 -0.85007 0.219185" />
     <ParticleEmitterInstance id="tv04" type="tv" position="-1.05971 1.66011 7.74895" FormEmitter="dummy" sizeX="1.98899" sizeY="0.288139" sizeZ="1.65613" Direction="0.479658 -0.851428 0.212129" />
-    <ParticleEmitterInstance id="tv05" type="tv" position="0.875483 2.67608 11.4235" FormEmitter="dummy" sizeX="1.79023" sizeY="0.286755" sizeZ="1.61947" Direction="0.430456 -0.895307 -0.114604" />
-    <ParticleEmitterInstance id="campana_frigo" type="frigo" position="11.7734 2.80542 20.9305" FormEmitter="dummy" sizeX="5.4047" sizeY="0.677574" sizeZ="1.57349" Direction="0.0 1.0 0.0" />-->
-    <!--<ParticleEmitterInstance id="bubbles1" type="bubble" position="-14.6275 0.833153 -4.08485" FormEmitter="dummy" sizeX="0.391403" sizeY="0.702762" sizeZ="0.194437" Direction="0.0 1.0 0.0" Desviacion="0.1 0.0 0.1" />
-    <ParticleEmitterInstance id="bubbles2" type="bubble" position="-8.24538 0.801696 0.638917" FormEmitter="dummy" sizeX="0.391403" sizeY="0.702762" sizeZ="0.194437" Direction="0.0 1.0 0.0" Desviacion="0.1 0.0 0.1"/>-->
-    <!--<ParticleEmitterInstance id="frigo" type="efecte_fred" position="-14.9113 0.0 -6.91671" FormEmitter="dummy" sizeX="0.14765" sizeY="0.162571" sizeZ="1.94475" Direction="1.0 0.0 0.0" />
+    <ParticleEmitterInstance id="tv05" type="tv" position="0.875483 2.67608 11.4235" FormEmitter="dummy" sizeX="1.79023" sizeY="0.286755" sizeZ="1.61947" Direction="0.430456 -0.895307 -0.114604" />-->
+    <ParticleEmitterInstance id="campana_frigo" type="frigo" position="11.7734 2.80542 20.9305" FormEmitter="dummy" sizeX="5.4047" sizeY="0.677574" sizeZ="1.0" Direction="0.0 -1.0 0.0" />
+    <ParticleEmitterInstance id="bubbles1" type="bubble" position="-14.6275 0.833153 -4.08485" FormEmitter="dummy" sizeX="0.391403" sizeY="0.702762" sizeZ="0.194437" Direction="0.0 1.0 0.0" Desviacion="0.1 0.0 0.1" />
+    <ParticleEmitterInstance id="bubbles2" type="bubble" position="-8.24538 0.801696 0.638917" FormEmitter="dummy" sizeX="0.391403" sizeY="0.702762" sizeZ="0.194437" Direction="0.0 1.0 0.0" Desviacion="0.1 0.0 0.1"/>
+    <ParticleEmitterInstance id="efecte_fred" type="efecte_fred" position="-5.75139 0.2 -10.35" FormEmitter="dummy" sizeX="1.7593" sizeY="0.338507" sizeZ="0.338507" Direction="0.0 0.0 1.0" Desviacion="0.0 0.0 0.0" />
+    <ParticleEmitterInstance id="frigo" type="efecte_fred" position="-14.5 0.10 -6.91671" FormEmitter="dummy" sizeX="0.3" sizeY="0.162571" sizeZ="1.94475" Direction="1.0 0.0 0.0" />
     <ParticleEmitterInstance id="fum_passadis1" type="vapor" position="2.21225 0.2783 -6.42139" FormEmitter="dummy" sizeX="0.0808734" sizeY="0.0793267" sizeZ="0.0808734" Direction="0.0 0.1 -1.0" Desviacion="0.0 0.001 0.2" />
-    <ParticleEmitterInstance id="fum_passadis2" type="vapor" position="7.81338 1.55119 -10.6072" FormEmitter="dummy" sizeX="0.0808734" sizeY="0.0793267" sizeZ="0.0808734" Direction="0.0 -0.499999 0.866026" />
     <ParticleEmitterInstance id="boira1" type="boira" position="20.5521 0.360519 5.81326" FormEmitter="dummy" sizeX="5.28227" sizeY="0.86274" sizeZ="6.65006" Direction="0.0 1.0 0.0" />
     <ParticleEmitterInstance id="boira02" type="boira" position="17.5562 0.360519 -0.611503" FormEmitter="dummy" sizeX="5.28227" sizeY="0.86274" sizeZ="6.65006" Direction="0.0 1.0 0.0" />
     <ParticleEmitterInstance id="boira03" type="boira" position="11.8908 0.360519 -6.67158" FormEmitter="dummy" sizeX="5.28227" sizeY="0.86274" sizeZ="6.65006" Direction="0.0 1.0 0.0" />
@@ -264,9 +287,9 @@
     <ParticleEmitterInstance id="boira06" type="boira" position="5.76818 0.360519 -8.5065" FormEmitter="dummy" sizeX="5.28227" sizeY="0.86274" sizeZ="6.65006" Direction="0.0 1.0 0.0" />
     <ParticleEmitterInstance id="goteo1" type="goteo" position="8.46283 3.45808 -8.12495" FormEmitter="dummy" sizeX="0.0982413" sizeY="0.0889668" sizeZ="2.26739" Direction="0.0 -1.0 0.0" />
     <ParticleEmitterInstance id="goteo02" type="goteo" position="21.6917 3.45808 5.18945" FormEmitter="dummy" sizeX="0.0982413" sizeY="0.0889668" sizeZ="2.26739" Direction="0.0 -1.0 0.0" />
-    <ParticleEmitterInstance id="chispes_fluorescent1" type="chispes_fluorescent" position="-0.106966 3.06401 -8.27376" FormEmitter="dummy" sizeX="0.0819399" sizeY="0.0819399" sizeZ="0.0819399" Direction="0.0 -1.0 0.0" Desviacion="0.5 0.3 0.5" />
-    <ParticleEmitterInstance id="fum_passadis2" type="vapor" position="7.81338 1.55119 -10.6072" FormEmitter="dummy" sizeX="0.0808734" sizeY="0.0793267" sizeZ="0.0808734" Direction="0.0 -0.499999 0.866026" />-->
-
+    <ParticleEmitterInstance id="chispes_fluorescent1" type="chispes_fluorescent" position="-0.106966 3.16401 -8.27376" FormEmitter="dummy" sizeX="0.15" sizeY="0.15" sizeZ="0.15" Direction="0.0 -1.0 0.0" Desviacion="0.5 0.3 0.5" />
+    <ParticleEmitterInstance id="fum_passadis2" type="vapor2" position="7.81338 1.55119 -10.6072" FormEmitter="dummy" sizeX="0.0808734" sizeY="0.0793267" sizeZ="0.0808734" Direction="0.0 -0.499999 0.866026" />
+    
   </InstanceParticles>
   
 </Particles>
