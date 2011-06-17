@@ -305,6 +305,11 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			)
 		)
 		
+		--Default riggle actor
+		format "\n\t" to:l_file
+		l_params = #(#("name","riggle_mainchar"),#("class","AnimatedModel"),#("resource","riggle"),#("cycle","idle"),#("position","0.0 0.0 0.0"),#("yaw","-90.0"),#("pitch","0.0"),#("roll","0.0"))
+		format (InlineTagParamXML "RenderableObject" l_params) to:l_file
+		
 		for i=1 to _AnimatedModels.count do
 		(
 			local l_object = _AnimatedModels[i]
@@ -343,6 +348,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			format "\n\t" to:l_file
 			format "%" (InlineTagParamXML "RenderableObject" l_params) to:l_file
 		)
+		
 		format "\n" to:l_file
 		format "%" (CloseTagXML "RenderableObjects") to:l_file
 		
