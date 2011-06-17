@@ -40,7 +40,7 @@ public:
     ECT_ANIMATION,
     ECT_IA_BRAIN,
     ECT_RAGDOLL,
-    ECT_LOW_COVER
+    ECT_COVER
   };
   
   virtual Type GetType() = 0; //{return m_Type;};

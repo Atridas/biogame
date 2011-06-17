@@ -93,6 +93,12 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   local direction, left
   local isMoving = false
   
+  if ACTION_MANAGER:is_action_active('Cover') then
+	log('sergi')
+    player_controller:cover()
+    return
+  end
+
   if ACTION_MANAGER:is_action_active('Aim') then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Apuntar')
     return

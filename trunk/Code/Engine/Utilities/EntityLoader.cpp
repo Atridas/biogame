@@ -11,6 +11,7 @@
 #include "ComponentPhysXMesh.h"
 #include "ComponentRenderableObject.h"
 #include "ComponentTrigger.h"
+#include "ComponentLowCover.h"
 
 #include "PhysicsManager.h"
 
@@ -175,23 +176,20 @@ void LoadComponentHighCover(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 
 void LoadComponentLowCover(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 {
-  LOGGER->AddNewLog(ELL_WARNING,"\tLow Cover no implementat");
-  //LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant Cobertura.");
-  //
-  ////TODO mascares
-  //int l_iCollisionMask = 1;
-  //Vect3f l_vSize = _TreeComponent.GetVect3fProperty("size", Vect3f(1), true);
-  //int l_iSpots = _TreeComponent.GetPszISOProperty("cover_size", "", false);
-  //
-  //LOGGER->AddNewLog(ELL_INFORMATION,"\t\t\t HighCover: \"%d\" spots.", l_iSpots);
+  LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant Cobertura.");
+  
+  Vect3f l_vSize = _TreeComponent.GetVect3fProperty("size", Vect3f(1), true);
+  int l_iSpots = _TreeComponent.GetIntProperty("cover_size", 1, false);
+  
+  LOGGER->AddNewLog(ELL_INFORMATION,"\t\t\t LowCover: \"%d\" spots.", l_iSpots);
 
-  //CComponentLowCover* l_pComponentLowCover = new CComponentLowCover();
+  CComponentLowCover* l_pComponentLowCover = new CComponentLowCover();
 
-  //if(!l_pComponentLowCover->Init(_pEntity, l_vSize, l_iSpots, l_iCollisionMask))
-  //{
-  //  LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
-  //  delete l_pComponentLowCover;
-  //}
+  if(!l_pComponentLowCover->Init(_pEntity, l_vSize, l_iSpots))
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
+    delete l_pComponentLowCover;
+  }
 }
 
 

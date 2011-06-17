@@ -117,17 +117,24 @@ void CEffect::Release()
 
 void CEffect::ActivateDefaultRendering()
 {
-  m_pD3DEffect->SetTechnique( m_pD3DTechnique );
+  if(m_pD3DTechnique)
+  {
+    m_pD3DEffect->SetTechnique( m_pD3DTechnique );
+  }
 };
 
 void CEffect::ActivateAlphaRendering()
 {
   if(m_pD3DAlphaTechnique)
+  {
     m_pD3DEffect->SetTechnique( m_pD3DAlphaTechnique );
+  }
 };
 
 void CEffect::ActivateInstancedRendering()
 {
   if(m_pD3DInstancedTechnique)
+  {
     m_pD3DEffect->SetTechnique( m_pD3DInstancedTechnique );
+  }
 };
