@@ -22,9 +22,9 @@ bool CComponentCover::Init(CGameEntity* _pEntity, const Vect3f& _vSize, const in
 
   m_pPhysXActor = new CPhysicActor(m_pPhysXData);
 
-  m_pPhysXActor->AddBoxSphape(Vect3f( _vSize.x, _vSize.y, _vSize.z), 
-                                m_pObject3D->GetPosition(),
-                                NULL, ECG_COBERTURES);
+  m_pPhysXActor->AddBoxSphape(_vSize*0.5f, 
+                              m_pObject3D->GetBoundingBox()->GetMiddlePoint(),
+                              NULL, ECG_COBERTURES);
 
   CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXActor);
   m_pPhysXActor->SetMat44( m_pObject3D->GetMat44() );

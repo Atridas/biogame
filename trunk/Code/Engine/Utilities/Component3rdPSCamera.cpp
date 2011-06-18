@@ -42,13 +42,13 @@ void CComponent3rdPSCamera::PostUpdate(float _fDeltaTime)
   m_CameraObject.SetYaw  (  m_pObject3D->GetYaw() );
 
   SCollisionInfo l_CInfo;
-  
+
   CPhysicsManager* l_pPM = CORE->GetPhysicsManager();
 
   CPhysicUserData* l_pUserDataSHOOT = 0;
   
-  l_pUserDataSHOOT = l_pPM->RaycastClosestActor(m_CameraObject.GetPosition()+Vect3f(0.0f,m_fCameraHeight,0.0f),(m_pCamera->GetLookAt()-(m_CameraObject.GetPosition()+Vect3f(0.0f,m_fCameraHeight,0.0f))).Normalize(),l_pPM->GetCollisionMask(ECG_CAMERA),l_pUserDataSHOOT,l_CInfo);
-  
+  l_pUserDataSHOOT = l_pPM->RaycastClosestActor(m_CameraObject.GetPosition()+Vect3f(0.0f,m_fCameraHeight,0.0f),(m_pCamera->GetLookAt()-(m_CameraObject.GetPosition()+Vect3f(0.0f,m_fCameraHeight,0.0f))).Normalize(),l_pPM->GetCollisionMask(ECG_CAMERA),l_CInfo);
+
   if(l_pUserDataSHOOT && l_CInfo.m_fDistance - 0.25f < m_fCameraRight)
   {
     m_pCamera->SetShoulderDistance(l_CInfo.m_fDistance - 0.25f);
@@ -56,9 +56,9 @@ void CComponent3rdPSCamera::PostUpdate(float _fDeltaTime)
     m_pCamera->SetShoulderDistance(m_fCameraRight);
   }
 
-	l_pUserDataSHOOT = 0;
+  l_pUserDataSHOOT = 0;
 
-	l_pUserDataSHOOT = l_pPM->RaycastClosestActor(m_pCamera->GetLookAt(),-m_pCamera->GetDirection().Normalize(),l_pPM->GetCollisionMask(ECG_CAMERA),l_pUserDataSHOOT,l_CInfo);
+	l_pUserDataSHOOT = l_pPM->RaycastClosestActor(m_pCamera->GetLookAt(),-m_pCamera->GetDirection().Normalize(),l_pPM->GetCollisionMask(ECG_CAMERA),l_CInfo);
 
   if(l_pUserDataSHOOT && l_CInfo.m_fDistance - 0.25f < m_fZoom)
   {
