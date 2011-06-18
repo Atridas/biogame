@@ -13,8 +13,8 @@ class CEntityManager:
 public:
   CEntityManager() {SetOk(true);};
   ~CEntityManager() {Done();};
-  
-  void LoadEntitiesFromXML(const string& _szFile);
+
+  int          GetMaxHistoricEntities() {return m_vEntities.size() + m_vNewEntities.size();};
 
   CGameEntity* CreateEntity();
   void         SetName(const string&,int);
@@ -35,6 +35,18 @@ public:
   void RemoveEntity(int);
   
   void SendEvent(const SEvent& _Event);
+
+  
+  // Loading functions
+  void LoadEntitiesFromXML(const string& _szFile);
+
+  CGameEntity* InitPlayer(const string& _szEntityName, const Vect3f& _vPosition, float _fYaw);
+
+  CGameEntity* InitEnemy(const string& _szPlayerName, const Vect3f& _vPosition,
+                         const string& _szInitialState, const string& _szRenderableModel, const string& _szRagdollModell,
+                         const string& _szEntityName = "");
+
+  CGameEntity* InitMiner(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName = "");
 
 protected:
   virtual void Release();

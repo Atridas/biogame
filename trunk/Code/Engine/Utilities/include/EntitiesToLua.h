@@ -6,5 +6,6 @@
 
 struct lua_State;
 void RegisterEntitiesToLua(lua_State* _pLS);
+void RegisterCore(luabind::class_<CCore>& _Core);
 
 #endif

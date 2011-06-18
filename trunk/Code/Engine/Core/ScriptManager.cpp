@@ -450,20 +450,27 @@ void CScriptManager::RegisterLUAFunctions()
       .def("Done",     &CBaseControl::Done)
   ];
 
+
+
   //Core
+  class_<CCore> l_core ("Core");
+
+  l_core.def("get_renderable_objects_manager",  &CCore::GetRenderableObjectsManager)
+        .def("get_console",                     &CCore::GetConsole)
+        .def("get_gui_manager",                 &CCore::GetGUIManager)
+        .def("get_light_manager",               &CCore::GetLightManager)
+        .def("get_static_mesh_manager",         &CCore::GetStaticMeshManager)
+        .def("get_engine",                      &CCore::GetEngine)
+        .def("get_scipt_manager",               &CCore::GetScriptManager)
+        .def("get_input_manager",               &CCore::GetInputManager)
+        .def("get_action_manager",              &CCore::GetActionManager)
+        .def("get_particle_manager",            &CCore::GetParticleManager)
+        .def("get_sound_manager",               &CCore::GetSoundManager);
+
+  RegisterCore(l_core);
+
   module(m_pLS) [
-    class_<CCore>("Core")
-      .def("get_renderable_objects_manager",  &CCore::GetRenderableObjectsManager)
-      .def("get_console",                     &CCore::GetConsole)
-      .def("get_gui_manager",                 &CCore::GetGUIManager)
-      .def("get_light_manager",               &CCore::GetLightManager)
-      .def("get_static_mesh_manager",         &CCore::GetStaticMeshManager)
-      .def("get_engine",                      &CCore::GetEngine)
-      .def("get_scipt_manager",               &CCore::GetScriptManager)
-      .def("get_input_manager",               &CCore::GetInputManager)
-      .def("get_action_manager",              &CCore::GetActionManager)
-      .def("get_particle_manager",            &CCore::GetParticleManager)
-      .def("get_sound_manager",               &CCore::GetSoundManager)
+    l_core
 
   //Process
     ,class_<CProcess,CBaseControl>("Process")

@@ -11,6 +11,7 @@ extern "C"
 #include <luabind/class.hpp>
 #include <luabind/operator.hpp>
 
+#include "Core.h"
 #include "EntityDefines.h"
 #include "EntitiesToLua.h"
 #include "EntityManager.h"
@@ -124,6 +125,11 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("get_entity_from_name",  (CGameEntity*(CEntityManager::*)(const string&)const)&CEntityManager::GetEntity)
       .def("remove_entity_from_id", (void(CEntityManager::*)(int)               )&CEntityManager::RemoveEntity)
       .def("remove_entity",         (void(CEntityManager::*)(const CGameEntity*))&CEntityManager::RemoveEntity)
+
+      .def("load_entities",         &CEntityManager::LoadEntitiesFromXML)
+      .def("init_player",           &CEntityManager::InitPlayer)
+      .def("init_enemy",            &CEntityManager::InitEnemy)
+      .def("init_miner",            &CEntityManager::InitMiner)
   ];
 
   module(_pLS) [
@@ -236,4 +242,10 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("revert_state",         &CScriptedStateMachine::RevertState)
       .def("receive_event",        &CScriptedStateMachine::ReceiveEvent)
   ];
+}
+
+
+void RegisterCore(class_<CCore>& _Core)
+{
+  _Core.def("get_entity_manager",              &CCore::GetEntityManager);
 }
