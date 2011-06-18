@@ -26,18 +26,6 @@
 #include <XML/XMLTreeNode.h>
 #include <sstream>
 
-/*
-enum ECollisionGroup {
-  ECG_ESCENARI = 1,
-  ECG_PERSONATGE = 2,
-  ECG_ENEMICS = 4,
-  ECG_TRIGGERS = 8,
-  ECG_COBERTURES = 16,
-  ECG_OBJECTES_DINAMICS = 32,
-  ECG_EXPLOSIONS = 64
-}
-*/
-
 void LoadComponentObject3D(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCreant component d'Object3D.");
@@ -198,6 +186,40 @@ void LoadComponentLowCover(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
   }
 }
 
+// -------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------
+
+void LoadPlayer(CEntityManager* _pEM, CXMLTreeNode& _TreePlayer)
+{
+  LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Player");
+
+  string l_szName    = _TreePlayer.GetPszISOProperty("name", "Player", false);
+  Vect3f l_vPosition = _TreePlayer.GetVect3fProperty("position", Vect3f(0,0,0),true);
+  float  l_fYaw      = _TreePlayer.GetFloatProperty("yaw",0,true);
+
+  
+  LOGGER->AddNewLog(ELL_INFORMATION, "\t\t\tPlayer name \"%s\", pos %f,%f,%f, yaw %f", l_szName.c_str(),
+                                     l_vPosition.x, l_vPosition.y, l_vPosition.z, l_fYaw);
+
+  _pEM->InitPlayer(l_szName, l_vPosition, l_fYaw);
+}
+
+void LoadMiner(CEntityManager* _pEM, CXMLTreeNode& _TreeMiner)
+{
+  LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Miner");
+  
+  string l_szName       = _TreeMiner.GetPszISOProperty("name", "", false);
+  string l_szPlayerName = _TreeMiner.GetPszISOProperty("player", "Player", false);
+  Vect3f l_vPosition    = _TreeMiner.GetVect3fProperty("position", Vect3f(0,0,0),true);
+
+  
+  LOGGER->AddNewLog(ELL_INFORMATION, "\t\t\tMiner name \"%s\", pos %f,%f,%f, Player %s", l_szName.c_str(),
+                                      l_vPosition.x, l_vPosition.y, l_vPosition.z, l_szPlayerName.c_str());
+
+  _pEM->InitMiner(l_szPlayerName, l_vPosition, l_szName);
+}
 
 // -------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------
@@ -287,7 +309,12 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
               LOGGER->AddNewLog(ELL_WARNING,"\tNode \"%s\" no reconegut!", l_TreeComponent.GetName());
             }
           }
-
+        } else if(strcmp(l_TreeEntity.GetName(),"Player") == 0)
+        {
+          LoadPlayer(this, l_TreeEntity);
+        } else if(strcmp(l_TreeEntity.GetName(),"Miner") == 0)
+        {
+          LoadMiner(this, l_TreeEntity);
         } else if(!l_TreeEntity.IsComment())
         {
           LOGGER->AddNewLog(ELL_WARNING,"\tNode \"%s\" no reconegut!", l_TreeEntities.GetName());

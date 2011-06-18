@@ -217,4 +217,6 @@
     <Object3D position="-25.5666 1.97678 2.59864" yaw="0.0" pitch="0.0" roll="0.0" />
     <HighCover shape="box" size="1.26949 3.94839 1.11326" collision_group="cobertura" cover_size="1" />
   </Entity>
+  <Player name="Player" position="-8.0 2.0 -4.0" yaw="0.0" />
+  <Miner position="8.0 2.0 4.0" name="Gordo Cabrón" player="Player" />
 </Entities>
