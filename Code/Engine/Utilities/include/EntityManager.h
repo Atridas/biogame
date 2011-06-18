@@ -48,6 +48,8 @@ public:
 
   CGameEntity* InitMiner(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName = "");
 
+  CGameEntity* InitMilitar(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName = "");
+
 protected:
   virtual void Release();
 
