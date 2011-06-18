@@ -272,5 +272,5 @@
     <Object3D />
     <RenderableObject name="Focus_conic" />
   </Entity>
-  <Player position="-11.342 -7.76992 0.427748" yaw="0.0" />
+  <Player position="-11.342 0.427748 -7.76992" yaw="0.0" />
 </Entities>
