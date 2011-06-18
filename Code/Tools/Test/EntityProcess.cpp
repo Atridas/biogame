@@ -18,6 +18,7 @@
 #include "ComponentRenderableObject.h"
 #include "ComponentVida.h"
 #include "ComponentRagdoll.h"
+#include "ComponentMirilla.h"
 #include "LightManager.h"
 #include "SpotLight.h"
 #include "Camera.h"
@@ -105,6 +106,9 @@ bool CEntityProcess::Init()
   (new CComponentStateMachine())->Init(m_pPlayerEntity, "State_Player_Neutre");
 
   //(new CComponentRagdoll())->Init(m_pPlayerEntity, "Data/Animated Models/Riggle/Skeleton.xml");
+  (new CComponentMirilla())->Init(m_pPlayerEntity, "laser_pilota");
+  
+  //CComponentMirilla *l_pComponentPhysXController = new CComponentMirilla();
 
   //Carregar entitats de l'escenari ----------------------------------------------------------------------------------------
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/NivellProves/XML/GameEntities.xml");

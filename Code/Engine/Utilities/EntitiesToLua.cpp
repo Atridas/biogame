@@ -28,6 +28,7 @@ extern "C"
 #include "ScriptedStateMachine.h"
 #include "ComponentVida.h"
 #include "ComponentRagdoll.h"
+#include "ComponentMirilla.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -101,7 +102,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("animation",            CBaseComponent::ECT_ANIMATION),
           value("ia_brain",             CBaseComponent::ECT_IA_BRAIN),
           value("ragdoll",              CBaseComponent::ECT_RAGDOLL),
-          value("cover",                CBaseComponent::ECT_COVER)
+          value("cover",                CBaseComponent::ECT_COVER),
+          value("mirilla",              CBaseComponent::ECT_MIRILLA)
       ]
       .def("get_type",     &CBaseComponent::GetType)
       .def("get_entity",   &CBaseComponent::GetEntity)
@@ -217,6 +219,9 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponentRagdoll, CBaseComponent>("ComponentRagdoll")
       .def("init",                     &CComponentRagdoll::Init)
       .def("set_active",               &CComponentRagdoll::SetActive)
+    // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentMirilla, CBaseComponent>("ComponentMirilla")
+      .def("set_active",               &CComponentMirilla::SetActive)
   
   ];
   

@@ -83,6 +83,7 @@
     <ClCompile Include="ComponentIAWalkToPlayer.cpp" />
     <ClCompile Include="ComponentLaser.cpp" />
     <ClCompile Include="ComponentLowCover.cpp" />
+    <ClCompile Include="ComponentMirilla.cpp" />
     <ClCompile Include="ComponentMovement.cpp" />
     <ClCompile Include="Component3rdPSCamera.cpp" />
     <ClCompile Include="ComponentPhysXActor.cpp" />
@@ -116,6 +117,7 @@
     <ClInclude Include="include\ComponentIAWalkToPlayer.h" />
     <ClInclude Include="include\ComponentLaser.h" />
     <ClInclude Include="include\ComponentLowCover.h" />
+    <ClInclude Include="include\ComponentMirilla.h" />
     <ClInclude Include="include\ComponentMovement.h" />
     <ClInclude Include="include\Component3rdPSCamera.h" />
     <ClInclude Include="include\ComponentObject3D.h" />

@@ -195,10 +195,14 @@ State_Player_Apuntar['Enter'] = function(_jugador)
   
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
+  local mirilla = _jugador:get_component(BaseComponent.mirilla)
+  
   if player_controller.current_animation ~= 'aim' then
     animation:clear_cycle(0.3)
     animation:set_cycle('aim', 0.3)
     player_controller.current_animation = 'aim'
+	mirilla:set_active(true)
+	
   end
   
 end
@@ -209,14 +213,16 @@ State_Player_Apuntar['Exit'] = function(_jugador)
   
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
-  
-  
+  local mirilla = _jugador:get_component(BaseComponent.mirilla)
+   
   if player_controller.current_animation ~= 'aim' then
     animation:clear_cycle(player_controller.current_animation,0.3)
   end
   animation:clear_cycle('aim',0.3)
+  mirilla:set_active(false)
   
   player_controller.current_animation = ''
+
 end
 
 -------------------------------------------------------------------------------------------------
@@ -226,8 +232,10 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
   local moviment = _jugador:get_component(BaseComponent.movement)
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   
+  
   if not ACTION_MANAGER:is_action_active('Aim') then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+	
     return
   end
   
