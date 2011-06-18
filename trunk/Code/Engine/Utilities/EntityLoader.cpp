@@ -275,7 +275,10 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
           if(l_TreeEntity.ExistsProperty("name"))
           {
             LOGGER->AddNewLog(ELL_INFORMATION,"\t\tDefinint nom \"%s\"", l_TreeEntity.GetPszISOProperty("name").c_str());
-            SetName(l_TreeEntity.GetPszISOProperty("name"), l_pEntity);
+            if(!SetName(l_TreeEntity.GetPszISOProperty("name"), l_pEntity))
+            {
+              LOGGER->AddNewLog(ELL_WARNING,"\t\tNo s'ha pogut definir nom \"%s\", probablement repetit", l_TreeEntity.GetPszISOProperty("name").c_str());
+            }
           }
 
           int l_iNumComponents = l_TreeEntity.GetNumChildren();
@@ -347,7 +350,10 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
 CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3f& _vPosition, float _fYaw)
 {
   CGameEntity* l_pPlayer = CreateEntity();
-  SetName(_szEntityName, l_pPlayer);
+  if(!SetName(_szEntityName, l_pPlayer))
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"\t\tNo s'ha pogut definir nom \"%s\", probablement repetit", _szEntityName.c_str());
+  }
 
   CComponentObject3D *l_pComponentObject3D = new CComponentObject3D();
   l_pComponentObject3D->Init(l_pPlayer);
