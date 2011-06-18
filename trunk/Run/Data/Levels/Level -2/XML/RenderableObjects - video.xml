@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<RenderableObjects>
+	<RenderableObject name="Box20" class="StaticMesh" resource="Box20" position="6.08947 -0.101723 10.0979" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Box22" class="StaticMesh" resource="Box22" position="2.7272 -0.112341 8.60257" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="mapa marte_olograma" class="StaticMesh" resource="mapa marte_olograma" position="4.44702 2.52424 9.07804" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Plataforma" class="StaticMesh" resource="Plataforma" position="4.32035 -0.365994 9.32081" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Box21" class="StaticMesh" resource="Box21" position="2.14886 0.140294 10.1636" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="comandos" class="StaticMesh" resource="comandos" position="3.36863 0.0872047 11.0166" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Box19" class="StaticMesh" resource="Box19" position="2.67402 0.140026 10.821" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Sala de videogililacia" class="StaticMesh" resource="Sala de videogililacia" position="4.66581 0.5 8.52625" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="balla2" class="StaticMesh" resource="balla2" position="3.61607 -0.467532 7.20589" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="marc" class="StaticMesh" resource="marc" position="6.63588 -0.369022 3.27345" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="llum1" class="StaticMesh" resource="llum1" position="10.6757 -0.770058 8.27569" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="llum2" class="StaticMesh" resource="llum2" position="-1.69907 -0.770058 9.82827" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tubos1" class="StaticMesh" resource="tubos1" position="10.0234 -0.0973442 11.4245" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tubos2" class="StaticMesh" resource="tubos2" position="6.68524 -0.270436 14.6046" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tubos3" class="StaticMesh" resource="tubos3" position="2.02475 -0.107213 14.4984" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="balla1" class="StaticMesh" resource="balla1" position="6.40848 -0.467531 8.38445" yaw="0.0" pitch="0.0" roll="0.0" />
+</RenderableObjects>

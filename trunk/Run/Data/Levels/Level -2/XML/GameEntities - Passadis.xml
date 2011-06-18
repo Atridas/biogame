@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Entities>
+  <Entity name="marc_porta02">
+    <Object3D />
+    <RenderableObject name="marc_porta02" />
+  </Entity>
+  <Entity name="porta_sub2">
+    <Object3D />
+    <RenderableObject name="porta_sub2" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="fluorescente_DEF18">
+    <Object3D />
+    <RenderableObject name="fluorescente_DEF18" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="Llum09">
+    <Object3D />
+    <RenderableObject name="Llum09" />
+  </Entity>
+  <Entity name="luz_florescente09">
+    <Object3D />
+    <RenderableObject name="luz_florescente09" />
+  </Entity>
+  <Entity name="fluorescente_DEF17">
+    <Object3D />
+    <RenderableObject name="fluorescente_DEF17" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="luz_florescente08">
+    <Object3D />
+    <RenderableObject name="luz_florescente08" />
+  </Entity>
+  <Entity name="viga5">
+    <Object3D />
+    <RenderableObject name="viga5" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="viga4">
+    <Object3D />
+    <RenderableObject name="viga4" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="porta_sub1">
+    <Object3D />
+    <RenderableObject name="porta_sub1" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="Llum08">
+    <Object3D />
+    <RenderableObject name="Llum08" />
+  </Entity>
+  <Entity name="fluorescente_DEF15">
+    <Object3D />
+    <RenderableObject name="fluorescente_DEF15" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="Llum07">
+    <Object3D />
+    <RenderableObject name="Llum07" />
+  </Entity>
+  <Entity name="fluorescente_DEF16">
+    <Object3D />
+    <RenderableObject name="fluorescente_DEF16" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="luz_florescente06">
+    <Object3D />
+    <RenderableObject name="luz_florescente06" />
+  </Entity>
+  <Entity name="viga1">
+    <Object3D />
+    <RenderableObject name="viga1" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="Llum06">
+    <Object3D />
+    <RenderableObject name="Llum06" />
+  </Entity>
+  <Entity name="luz_florescente07">
+    <Object3D />
+    <RenderableObject name="luz_florescente07" />
+  </Entity>
+  <Entity name="viga2">
+    <Object3D />
+    <RenderableObject name="viga2" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="tubo_dret">
+    <Object3D />
+    <RenderableObject name="tubo_dret" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="tubo_esq1">
+    <Object3D />
+    <RenderableObject name="tubo_esq1" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="tubo_esq2">
+    <Object3D />
+    <RenderableObject name="tubo_esq2" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="marc_passadis1">
+    <Object3D />
+    <RenderableObject name="marc_passadis1" />
+  </Entity>
+  <Entity name="pass01">
+    <Object3D />
+    <RenderableObject name="pass01" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="pas_video">
+    <Object3D />
+    <RenderableObject name="pas_video" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="marc_porta01">
+    <Object3D />
+    <RenderableObject name="marc_porta01" />
+  </Entity>
+  <Entity name="tubo3">
+    <Object3D />
+    <RenderableObject name="tubo3" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="Llum10">
+    <Object3D />
+    <RenderableObject name="Llum10" />
+  </Entity>
+  <Entity name="fluorescente_DEF19">
+    <Object3D />
+    <RenderableObject name="fluorescente_DEF19" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="luz_florescente10">
+    <Object3D />
+    <RenderableObject name="luz_florescente10" />
+  </Entity>
+  <Entity name="viga3">
+    <Object3D />
+    <RenderableObject name="viga3" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="HighCoverPas02">
+    <Object3D position="11.9283 0.904164 -4.75336" yaw="10.2766" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="0.42265 1.9508 0.242799" collision_group="cobertura" cover_size="0" />
+  </Entity>
+  <Entity name="HighCoverPas01">
+    <Object3D position="9.77666 0.904164 -5.66533" yaw="10.2766" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="0.42265 1.9508 0.242799" collision_group="cobertura" cover_size="0" />
+  </Entity>
+</Entities>
