@@ -13,87 +13,87 @@
   <Entity name="CaixaPetita00">
     <Object3D />
     <RenderableObject name="CaixaPetita00" />
-    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="CaixaGrossa00">
     <Object3D />
     <RenderableObject name="CaixaGrossa00" />
-    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="CaixaPetita01">
     <Object3D />
     <RenderableObject name="CaixaPetita01" />
-    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="CaixaPetita02">
     <Object3D />
     <RenderableObject name="CaixaPetita02" />
-    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="CaixaPetita03">
     <Object3D />
     <RenderableObject name="CaixaPetita03" />
-    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="CaixaPetita04">
     <Object3D />
     <RenderableObject name="CaixaPetita04" />
-    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="CaixaGrossa01">
     <Object3D />
     <RenderableObject name="CaixaGrossa01" />
-    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="CaixaPetita05">
     <Object3D />
     <RenderableObject name="CaixaPetita05" />
-    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="CaixaPetita06">
     <Object3D />
     <RenderableObject name="CaixaPetita06" />
-    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="Wall">
     <Object3D />
     <RenderableObject name="Wall" />
-    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="CaixaGrossa02">
     <Object3D />
     <RenderableObject name="CaixaGrossa02" />
-    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="CaixaGrossa03">
     <Object3D />
     <RenderableObject name="CaixaGrossa03" />
-    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="CaixaPetita08">
     <Object3D />
     <RenderableObject name="CaixaPetita08" />
-    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="CaixaGrossa04">
     <Object3D />
     <RenderableObject name="CaixaGrossa04" />
-    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="CaixaPetita09">
     <Object3D />
     <RenderableObject name="CaixaPetita09" />
-    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="CaixaPetita10">
     <Object3D />
     <RenderableObject name="CaixaPetita10" />
-    <PhysXBox fromRenderableObject="true" density="1" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="CaixaPetita11">
     <Object3D />
     <RenderableObject name="CaixaPetita11" />
-    <PhysXBox fromRenderableObject="true" density="1" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="Llum">
     <Object3D />
@@ -150,7 +150,7 @@
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="DummyTrigger">
-    <Object3D position="-25.1552 2.03947 33.689" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-25.1552 2.03947 33.689" yaw="18.397" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="8.04462 5.83092 10.3979" collision_group="trigger" onEnter="triggerDeProvesEntrar" onExit="triggerDeProvesSortir" />
   </Entity>
   <Entity name="LowCover01">
@@ -161,13 +161,13 @@
     <Object3D position="-30.8337 0.498033 14.1835" yaw="0.0" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="1.00318 0.999353 0.99641" collision_group="cobertura" cover_size="1" />
   </Entity>
-  <Entity name="LowCover03">
+  <Entity name="HighCover09">
     <Object3D position="-30.4229 0.736625 9.94757" yaw="0.0" pitch="0.0" roll="0.0" />
-    <LowCover shape="box" size="1.96762 1.46503 1.96762" collision_group="cobertura" cover_size="2" />
+    <HighCover shape="box" size="1.96762 1.46503 1.96762" collision_group="cobertura" cover_size="2" />
   </Entity>
-  <Entity name="LowCover04">
+  <Entity name="HighCover08">
     <Object3D position="-30.4269 0.736625 4.18548" yaw="0.0" pitch="0.0" roll="0.0" />
-    <LowCover shape="box" size="1.96762 1.46503 1.96762" collision_group="cobertura" cover_size="2" />
+    <HighCover shape="box" size="1.96762 1.46503 1.96762" collision_group="cobertura" cover_size="2" />
   </Entity>
   <Entity name="LowCover05">
     <Object3D position="-30.9704 0.499021 -1.5646" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -177,13 +177,13 @@
     <Object3D position="-31.0421 0.505118 -6.14529" yaw="0.0" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="1.10358 1.00999 2.23394" collision_group="cobertura" cover_size="2" />
   </Entity>
-  <Entity name="LowCover07">
+  <Entity name="HighCover05">
     <Object3D position="-31.272 0.736625 -8.26481" yaw="12.0707" pitch="0.0" roll="0.0" />
-    <LowCover shape="box" size="1.96762 1.46503 1.96762" collision_group="cobertura" cover_size="2" />
+    <HighCover shape="box" size="1.96762 1.46503 1.96762" collision_group="cobertura" cover_size="2" />
   </Entity>
-  <Entity name="LowCover08">
+  <Entity name="HighCover06">
     <Object3D position="-31.3143 0.736625 -10.6122" yaw="-12.0707" pitch="0.0" roll="0.0" />
-    <LowCover shape="box" size="1.96762 1.46503 1.96762" collision_group="cobertura" cover_size="2" />
+    <HighCover shape="box" size="1.96762 1.46503 1.96762" collision_group="cobertura" cover_size="2" />
   </Entity>
   <Entity name="LowCover10">
     <Object3D position="-31.973 0.498918 -12.1066" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -205,9 +205,9 @@
     <Object3D position="-22.8876 1.00374 5.75254" yaw="0.0" pitch="0.0" roll="0.0" />
     <HighCover shape="box" size="0.998535 2.00141 0.998535" collision_group="cobertura" cover_size="1" />
   </Entity>
-  <Entity name="LowCover13">
+  <Entity name="HighCover07">
     <Object3D position="-22.3955 0.736625 4.24436" yaw="0.0" pitch="0.0" roll="0.0" />
-    <LowCover shape="box" size="1.96762 1.46503 1.96762" collision_group="cobertura" cover_size="2" />
+    <HighCover shape="box" size="1.96762 1.46503 1.96762" collision_group="cobertura" cover_size="2" />
   </Entity>
   <Entity name="HighCover03">
     <Object3D position="-25.5666 1.97678 7.00511" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -217,7 +217,7 @@
     <Object3D position="-25.5666 1.97678 2.59864" yaw="0.0" pitch="0.0" roll="0.0" />
     <HighCover shape="box" size="1.26949 3.94839 1.11326" collision_group="cobertura" cover_size="1" />
   </Entity>
-  <Player name="Player" position="-8.0 2.0 -4.0" yaw="0.0" />
-  <Miner position="8.0 2.0 4.0" name="Gordo Cabrón" player="Player" />
-  <Militar position="8.0 2.0 -4.0" player="Player" />
+  <Player position="-16.8764 2.0 -15.9165" yaw="0.0" />
+  <Miner position="50.3014 2.0 39.1446" yaw="0.0" name="Miner" />
+  <Militar position="48.3709 2.0 -18.4613" yaw="0.0" name="Militar" />
 </Entities>

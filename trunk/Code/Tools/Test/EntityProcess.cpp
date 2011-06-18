@@ -106,7 +106,7 @@ void CEntityProcess::RenderScene(CRenderManager* _pRM)
 
 void CEntityProcess::RenderINFO(CRenderManager* _pRM)
 {
-  //CORE->GetPhysicsManager()->DebugRender(_pRM);
+  CORE->GetPhysicsManager()->DebugRender(_pRM);
 
   //CRenderableObject *l_pRO = CORE->GetEntityManager()->GetEntity("Gordo Cabrón")->GetComponent<CComponentRenderableObject>()->GetRenderableObject();
   //
