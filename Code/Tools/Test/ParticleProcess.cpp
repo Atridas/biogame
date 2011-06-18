@@ -50,6 +50,8 @@ bool CParticleProcess::Init()
   //m_pBillBoard.SetPos( Vect3f(0.332061f, 2.5184f, 8.16266f));
   //m_pBillBoard.SetSize( 1.79023f, 1.61947f);
   
+
+  CORE->GetParticleManager()->SetAllEmittersActive(true);
   m_pObject = new CObject3D();
   m_fVelocity = 1;
   angle=0;

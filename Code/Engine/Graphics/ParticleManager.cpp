@@ -422,8 +422,8 @@ void CParticleManager::Init(CRenderManager* _pRM)
 
 void CParticleManager::SetAllEmittersActive(bool _bActive)
 {
- /* for (size_t i=0;i<m_vEmitterParticle.size();++i)
+  for (size_t i=0;i<m_vEmitterParticle.size();++i)
   {
     m_vEmitterParticle[i]->SetActive(_bActive);
-  }*/
+  }
 }

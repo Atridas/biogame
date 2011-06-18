@@ -131,8 +131,8 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
 void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
 {
   string l_nom=m_szName;
-  if(!m_bActive)
-    return;
+  //if(!m_bActive)
+  //  return;
   
   //1.] Updatejar les particules i en cas de que s'hagi acabat el seu temps de vida, posar 
   //    en el vector que la posicio esta lliure
@@ -152,8 +152,8 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
 	  }
   }
   
-  //if(!m_bActive)
-  //  return;
+  if(!m_bActive)
+    return;
   //2.] Si es temps de crear particules noves fer-ho:
   if(m_bBucleInfinit==false && m_fRandomRebootEmitter==0)
   {
@@ -162,7 +162,7 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
 	  {
 		  m_bActive=false;
       m_iCont=5;
-      m_iNumBucle=m_iNumBucleAux;
+      m_iNumBucle=m_iNumBucleAux+1;
     }else
     {
       m_iCont=0;
