@@ -17,8 +17,8 @@ public:
   int          GetMaxHistoricEntities() {return m_vEntities.size() + m_vNewEntities.size();};
 
   CGameEntity* CreateEntity();
-  void         SetName(const string&,int);
-  void         SetName(const string&,const CGameEntity*);
+  bool         SetName(const string&,int);
+  bool         SetName(const string&,const CGameEntity*);
   CGameEntity* GetEntity(int) const;
   CGameEntity* GetEntity(const string&) const;
   

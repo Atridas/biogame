@@ -63,16 +63,19 @@ CGameEntity* CEntityManager::GetEntity(int _iId) const
 }
 
 
-void CEntityManager::SetName(const string& _szName,const CGameEntity* _pEntity)
+bool CEntityManager::SetName(const string& _szName,const CGameEntity* _pEntity)
 {
-  SetName(_szName, _pEntity->GetGUID());
+  return SetName(_szName, _pEntity->GetGUID());
 }
 
-void CEntityManager::SetName(const string& _szName, int _iId)
+bool CEntityManager::SetName(const string& _szName, int _iId)
 {
   assert(m_vEntities.size() + m_vNewEntities.size() > (uint32) _iId);
   for(uint32 i = 0; i < m_vFreeIDs.size(); ++i) assert(m_vFreeIDs[i] != _iId);
-  assert(m_vNames.find(_szName) == m_vNames.end());
+  if(m_vNames.find(_szName) != m_vNames.end())
+  {
+    return false;
+  }
 
   m_vNames[_szName] = _iId;
 
@@ -84,11 +87,12 @@ void CEntityManager::SetName(const string& _szName, int _iId)
     if(l_pEntity->GetGUID() == _iId)
     {
       l_pEntity->m_pszName = &(m_vNames.find(_szName)->first);
-      return;
+      return true;
     }
   }
 
   m_vEntities[_iId]->m_pszName = &(m_vNames.find(_szName)->first); //TODO hi ha d'haver una manera més correcte de fer això
+  return true;
 }
 
 CGameEntity* CEntityManager::GetEntity(const string& _szName) const

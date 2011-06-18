@@ -14,7 +14,7 @@
 bool CComponentPhysXMesh::Init(CGameEntity* _pEntity, float _fDensity, int _iCollisionGroup)
 {
   assert(_pEntity->IsOk());
-  SetEntity(_pEntity);
+  SetOk(false);
 
   m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
   assert(m_pObject3D); //TODO fer missatges d'error més elavorats
@@ -22,7 +22,10 @@ bool CComponentPhysXMesh::Init(CGameEntity* _pEntity, float _fDensity, int _iCol
 
   //Agafem el static mesh -----------------------------------------
   CComponentRenderableObject* l_pComponentRenderableObject = _pEntity->GetComponent<CComponentRenderableObject>(ECT_RENDERABLE_OBJECT);
-  assert(l_pComponentRenderableObject);
+  if(!l_pComponentRenderableObject)
+  {
+    return false;
+  }
 
   CRenderableObject* l_pRenderableObject = l_pComponentRenderableObject->GetRenderableObject();
   CInstanceMesh* l_pInstanceMesh = dynamic_cast<CInstanceMesh*>(l_pRenderableObject);
@@ -53,7 +56,8 @@ bool CComponentPhysXMesh::Init(CGameEntity* _pEntity, float _fDensity, int _iCol
 
   CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXActor);
   m_pPhysXActor->SetMat44( m_pObject3D->GetMat44() );
-
+  
+  SetEntity(_pEntity);
   SetOk(true);
   return IsOk();
 }
