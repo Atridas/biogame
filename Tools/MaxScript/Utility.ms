@@ -305,10 +305,13 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			)
 		)
 		
-		--Default riggle actor
-		format "\n\t" to:l_file
-		l_params = #(#("name","riggle_mainchar"),#("class","AnimatedModel"),#("resource","riggle"),#("cycle","idle"),#("position","0.0 0.0 0.0"),#("yaw","-90.0"),#("pitch","0.0"),#("roll","0.0"))
-		format (InlineTagParamXML "RenderableObject" l_params) to:l_file
+		--Default riggle actor at viewer
+		if dropNivell.text == "Viewer" then
+		(
+			format "\n\t" to:l_file
+			l_params = #(#("name","riggle_mainchar"),#("class","AnimatedModel"),#("resource","riggle"),#("cycle","idle"),#("position","0.0 0.0 0.0"),#("yaw","-90.0"),#("pitch","0.0"),#("roll","0.0"))
+			format (InlineTagParamXML "RenderableObject" l_params) to:l_file
+		)
 		
 		for i=1 to _AnimatedModels.count do
 		(
@@ -649,7 +652,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		return true
 	)
   
-  function ExportEntities _entites =
+  function ExportEntities _entities =
 	(
 		local l_pathToFile = getXMLPath() 
 		makeDir l_pathToFile all:true
@@ -669,11 +672,11 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		format "%" (OpenTagXML "Entities") to:l_file
 		
 		------------------------------------------------------
-		for i=1 to _entites.count do
+		for i=1 to _entities.count do
 		(
-			if IsMesh _entites[i] then
+			if IsMesh _entities[i] then
 			(
-				local l_instance = _entites[i]
+				local l_instance = _entities[i]
 				
 				if l_instance.name == undefined then
 				(
@@ -733,9 +736,9 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				
 				format "\n  %" (CloseTagXML "Entity") to:l_file
 			)
-			else if IsTrigger _entites[i] then
+			else if IsTrigger _entities[i] then
 			(
-				local l_instance = _entites[i]
+				local l_instance = _entities[i]
 				if l_instance.name == undefined then
 				(
 					format "\n  %" (OpenTagXML "Entity") to:l_file
@@ -792,9 +795,9 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				
 				format "\n  %" (CloseTagXML "Entity") to:l_file
 			)
-			else if IsCover _entites[i] then
+			else if IsCover _entities[i] then
 			(
-				local l_instance = _entites[i]
+				local l_instance = _entities[i]
 				if l_instance.name == undefined then
 				(
 					format "\n  %" (OpenTagXML "Entity") to:l_file
@@ -862,6 +865,60 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				)
 				
 				format "\n  %" (CloseTagXML "Entity") to:l_file
+			)
+		)
+		
+		local l_player = GetPlayerEntity _entities
+		if l_player != undefined then
+		(
+			l_params = #()
+			
+			l_aux = "" as stringStream
+			local l_tmp = l_player.position
+			format "% % %" l_tmp.x l_tmp.y l_tmp.z to:l_aux
+			append l_params #("position",l_aux)
+			
+			l_aux = "" as stringStream
+			l_tmp = GetYaw (l_player.transform)
+			format "%" l_tmp to:l_aux
+			append l_params #("yaw",l_aux)
+			
+			format "\n  %" (InlineTagParamXML "Player" l_params) to:l_file
+			
+			local l_enemies = GetEnemiesEntities _entities
+			if l_enemies != undefined then
+			(
+				local l_enemyType = undefined
+				local l_current = undefined
+				
+				for i = 1 to l_enemies.count do
+				(
+					l_current = l_enemies[i]
+					l_enemyType = GetUserProp l_enemies[i] "entity"
+					
+					if l_enemyType != undefined then
+					(
+						l_params = #()
+			
+						l_aux = "" as stringStream
+						local l_tmp = l_current.position
+						format "% % %" l_tmp.x l_tmp.y l_tmp.z to:l_aux
+						append l_params #("position",l_aux)
+						
+						l_aux = "" as stringStream
+						l_tmp = GetYaw (l_current.transform)
+						format "%" l_tmp to:l_aux
+						append l_params #("yaw",l_aux)
+						
+						l_tmp = l_current.name
+						append l_params #("name",l_tmp)
+						
+						if l_tmp != "Player" then
+						(
+							format "\n  %" (InlineTagParamXML l_enemyType l_params) to:l_file
+						)
+					)
+				)
 			)
 		)
 		
@@ -968,28 +1025,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				normal = RHVectorToLH (normalize normal)
 				l_auxNormal = ""as stringStream
 				format "% % %" normal.x normal.y normal.z to:l_auxNormal
-				append  l_params #("Direction",l_auxNormal)
-				
-				
-
-							
-										
-				/*l_aux = "" as stringStream
-				local l_yaw = GetYaw l_current.transform
-				format "%" l_yaw to:l_aux
-				append l_params #("yaw",l_aux)
-				
-				l_aux = "" as stringStream
-				local l_pitch = GetPitch l_current.transform
-				format "%" l_pitch to:l_aux
-				append l_params #("pitch",l_aux)
-				
-				l_aux = "" as stringStream
-				local l_roll = GetRoll l_current.transform
-				format "%" l_roll to:l_aux
-				append l_params #("roll",l_aux)*/
-
-				
+				append  l_params #("Direction",l_auxNormal)				
 
 			) else if classof l_current == line then
 			(	
@@ -1276,19 +1312,6 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		
 		local l_cores = #()
 		local l_instances = #()
-		
-		/*
-		--Check
-		/*
-		local l_check = true
-		l_check = CheckSceneObjects $*
-			
-		if l_check != true then
-		(
-			ShowError l_check
-			return false
-		)
-		*/
 		
 		if ExportEntities $* then
 		(
