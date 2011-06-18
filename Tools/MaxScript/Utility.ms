@@ -911,14 +911,6 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			local l_translation = RHVectorToLH l_current.transform.translation
 			format "% % %" l_translation.x l_translation.y l_translation.z to:l_aux2
 			append l_params #("position",l_aux2)
-								
-				
-				
-				
-
-				
-				
-				
 			
 			if classof l_current == Point then
 			(
@@ -1285,6 +1277,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		local l_cores = #()
 		local l_instances = #()
 		
+		/*
 		--Check
 		/*
 		local l_check = true
@@ -1293,7 +1286,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		if l_check != true then
 		(
 			ShowError l_check
-			--return false
+			return false
 		)
 		*/
 		

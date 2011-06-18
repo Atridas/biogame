@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<meshes>
+	<mesh name="Box20" path="Data/Meshes/Box20.mesh" max="0.359195 0.189839 0.646133" min="-0.438528 -0.202258 -0.575287" />
+	<mesh name="Box22" path="Data/Meshes/Box22.mesh" max="0.477662 0.207202 0.530527" min="-0.569056 -0.182853 -0.652633" />
+	<mesh name="mapa marte_olograma" path="Data/Meshes/mapa marte_olograma.mesh" max="3.31385 0.560728 3.55338" min="-3.31385 -0.56073 -3.55338" />
+	<mesh name="Plataforma" path="Data/Meshes/Plataforma.mesh" max="3.85874 1.65033 4.06687" min="-3.85874 -1.65033 -4.06687" />
+	<mesh name="Box21" path="Data/Meshes/Box21.mesh" max="0.212476 0.119416 0.544066" min="-0.232652 -0.101736 -0.395144" />
+	<mesh name="comandos" path="Data/Meshes/comandos.mesh" max="0.714991 0.211972 0.454144" min="-0.279887 -0.11008 -0.277165" />
+	<mesh name="Box19" path="Data/Meshes/Box19.mesh" max="0.577739 0.190645 0.538088" min="-0.678234 -0.197844 -0.530226" />
+	<mesh name="Sala de videogililacia" path="Data/Meshes/Sala de videogililacia.mesh" max="6.3841 2.5 7.06581" min="-6.77732 -2.5 -6.08477" />
+	<mesh name="balla2" path="Data/Meshes/balla2.mesh" max="0.734769 0.345991 0.676573" min="-0.734769 -0.345991 -0.676573" />
+	<mesh name="marc" path="Data/Meshes/marc.mesh" max="1.79984 1.6687 0.875995" min="-1.79984 -1.6687 -0.875995" />
+	<mesh name="llum1" path="Data/Meshes/llum1.mesh" max="0.12377 1.22494 0.218279" min="-0.123771 -1.22494 -0.218279" />
+	<mesh name="llum2" path="Data/Meshes/llum2.mesh" max="0.12377 1.22494 0.218279" min="-0.123771 -1.22494 -0.218279" />
+	<mesh name="tubos1" path="Data/Meshes/tubos1.mesh" max="1.21956 1.91968 2.67029" min="-1.21956 -1.91968 -2.6703" />
+	<mesh name="tubos2" path="Data/Meshes/tubos2.mesh" max="2.78843 1.72663 1.15079" min="-2.78843 -1.72663 -1.15079" />
+	<mesh name="tubos3" path="Data/Meshes/tubos3.mesh" max="2.77853 1.91968 1.28361" min="-2.77853 -1.91968 -1.28361" />
+	<mesh name="balla1" path="Data/Meshes/balla1.mesh" max="0.110274 0.345991 0.985543" min="-0.110274 -0.345991 -0.985543" />
+</meshes>

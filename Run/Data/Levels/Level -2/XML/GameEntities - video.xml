@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Entities>
+  <Entity name="Box20">
+    <Object3D />
+    <RenderableObject name="Box20" />
+  </Entity>
+  <Entity name="Box22">
+    <Object3D />
+    <RenderableObject name="Box22" />
+  </Entity>
+  <Entity name="mapa marte_olograma">
+    <Object3D />
+    <RenderableObject name="mapa marte_olograma" />
+  </Entity>
+  <Entity name="Plataforma">
+    <Object3D />
+    <RenderableObject name="Plataforma" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="Box21">
+    <Object3D />
+    <RenderableObject name="Box21" />
+  </Entity>
+  <Entity name="comandos">
+    <Object3D />
+    <RenderableObject name="comandos" />
+  </Entity>
+  <Entity name="Box19">
+    <Object3D />
+    <RenderableObject name="Box19" />
+  </Entity>
+  <Entity name="Sala de videogililacia">
+    <Object3D />
+    <RenderableObject name="Sala de videogililacia" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="balla2">
+    <Object3D />
+    <RenderableObject name="balla2" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="marc">
+    <Object3D />
+    <RenderableObject name="marc" />
+  </Entity>
+  <Entity name="llum1">
+    <Object3D />
+    <RenderableObject name="llum1" />
+  </Entity>
+  <Entity name="llum2">
+    <Object3D />
+    <RenderableObject name="llum2" />
+  </Entity>
+  <Entity name="tubos1">
+    <Object3D />
+    <RenderableObject name="tubos1" />
+  </Entity>
+  <Entity name="tubos2">
+    <Object3D />
+    <RenderableObject name="tubos2" />
+  </Entity>
+  <Entity name="tubos3">
+    <Object3D />
+    <RenderableObject name="tubos3" />
+  </Entity>
+  <Entity name="balla1">
+    <Object3D />
+    <RenderableObject name="balla1" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+</Entities>

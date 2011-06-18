@@ -121,3 +121,18 @@ function PrintArray _array =
 		format "%\n" _array
 	)
 )
+
+--Imprimeix totes les transformacions i instàncies dels objectes sel·leccionats
+function CheckInstancing _objects =
+(
+	if (_objects != undefined) and (classof _objects == ObjectSet) then
+	(
+		local l_total = _objects.count
+		local l_current = undefined
+		for i = 1 to l_total do
+		(
+			l_current = _objects[i]
+			format "name: % -> instancia: % -> position: % -> rotation: %\n" l_current.name (GetUserProp l_current "resource") l_current.position l_current.rotation
+		)
+	)
+)
