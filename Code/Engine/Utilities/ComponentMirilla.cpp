@@ -62,7 +62,7 @@ void CComponentMirilla::PostUpdate(float _fDeltaTime)
     CPhysicUserData* l_pUserData = 0;
   
     SCollisionInfo l_CInfo;
-    l_pUserData = l_pPhysManager->RaycastClosestActor(l_PosCamera,l_DirCamera,l_pPhysManager->GetCollisionMask(ECG_RAY_SHOOT),l_pUserData,l_CInfo);
+    l_pUserData = l_pPhysManager->RaycastClosestActor(l_PosCamera,l_DirCamera,l_pPhysManager->GetCollisionMask(ECG_RAY_SHOOT),l_CInfo);
 
     Mat44f l_vMat;
     l_vMat.SetIdentity();

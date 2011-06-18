@@ -975,7 +975,7 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
         g_pUserDataSHOOT->SetColor(colWHITE);
       }
       
-      g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActor(l_PosCamera,l_DirCamera,4,g_pUserDataSHOOT,l_CInfo);
+      g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActor(l_PosCamera,l_DirCamera,4,l_CInfo);
       Vect3f l_vDirection(l_CInfo.m_CollisionPoint.x - l_vVect.x, l_CInfo.m_CollisionPoint.y - l_vVect.y, l_CInfo.m_CollisionPoint.z - l_vVect.z);
       l_vDirection.Normalize();
 
@@ -1156,7 +1156,7 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
         g_pUserDataSHOOT->SetColor(colWHITE);
       }
       
-      g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActor(l_PosCamera,l_DirCamera,6,g_pUserDataSHOOT,l_CInfo);
+      g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActor(l_PosCamera,l_DirCamera,6,l_CInfo);
       Vect3f l_vDirection(l_CInfo.m_CollisionPoint.x - l_vVect.x, l_CInfo.m_CollisionPoint.y - l_vVect.y, l_CInfo.m_CollisionPoint.z - l_vVect.z);
       l_vDirection.Normalize();
 
@@ -1235,7 +1235,7 @@ void CPhysXProcess::RenderLaserPoint(CRenderManager* _pRM)
   const Vect3f& l_DirCamera = m_pCamera->GetDirection().Normalize();
   
   SCollisionInfo l_CInfo;
-  g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActor(l_PosCamera,l_DirCamera,6,g_pUserDataSHOOT,l_CInfo);
+  g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActor(l_PosCamera,l_DirCamera,6,l_CInfo);
   //vCollisions.push_back(l_CInfo);
 
   /*Mat44f t;

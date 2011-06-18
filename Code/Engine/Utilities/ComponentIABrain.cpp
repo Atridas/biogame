@@ -62,7 +62,7 @@ void CComponentIABrain::Shoot()
 
   CPhysicsManager *l_pPM = CORE->GetPhysicsManager();
 
-  l_pUserData = l_pPM->RaycastClosestActor(l_vPos,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT),l_pUserData,l_CInfo);
+  l_pUserData = l_pPM->RaycastClosestActor(l_vPos,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT),l_CInfo);
 
   if( l_pUserData )
   {

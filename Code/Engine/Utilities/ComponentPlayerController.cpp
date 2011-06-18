@@ -161,7 +161,7 @@ void CComponentPlayerController::Shoot()
 
   CPhysicsManager *l_pPM = CORE->GetPhysicsManager();
 
-  l_pUserData = l_pPM->RaycastClosestActor(l_vPos,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT),l_pUserData,l_CInfo);
+  l_pUserData = l_pPM->RaycastClosestActor(l_vPos,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT),l_CInfo);
 
   if( l_pUserData )
   {
@@ -273,15 +273,16 @@ void CComponentPlayerController::CheckCover()
 
   CPhysicsManager *l_pPM = CORE->GetPhysicsManager();
 
-  l_pUserData = l_pPM->RaycastClosestActor(l_vPos,l_vDir,l_pPM->GetCollisionMask(ECG_COBERTURES),l_pUserData,l_CInfo);
+  l_pUserData = l_pPM->RaycastClosestActor(l_vPos,l_vDir,l_pPM->GetCollisionMask(ECG_COBERTURES),l_CInfo);
 
-  if( l_pUserData )
+  if( l_pUserData && l_CInfo.m_fDistance <= 2.0f)
   {
-    Vect3f l_vCenterPoint = l_CInfo.m_CollisionPoint;
     CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
     (new CComponentLaser())->Init(l_pLaser,
                                   l_vPos,
-                                  l_vCenterPoint,
+                                  l_CInfo.m_CollisionPoint,
                                   1.f);
+
+    l_pUserData->GetEntity();
   }
 }
