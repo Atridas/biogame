@@ -1000,4 +1000,124 @@
     <RenderableObject name="fluorescente_DEF20" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
+  <Entity name="LowCover_menjador04">
+    <Object3D position="24.6168 0.497101 19.6786" yaw="-21.4192" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.00513 0.955183 1.00513" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="LowCover_menjador02">
+    <Object3D position="24.3614 0.497101 25.1972" yaw="-43.2523" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="2.85055 0.955183 8.3864" collision_group="cobertura" cover_size="5" />
+  </Entity>
+  <Entity name="LowCover_menjador01">
+    <Object3D position="19.6524 0.497101 22.3344" yaw="-36.6177" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="3.82101 0.955183 2.79245" collision_group="cobertura" cover_size="2" />
+  </Entity>
+  <Entity name="LowCover_menjador00">
+    <Object3D position="19.3874 0.497101 30.5392" yaw="-40.7374" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="2.82282 0.955183 4.00443" collision_group="cobertura" cover_size="2" />
+  </Entity>
+  <Entity name="HighCover_menjador01">
+    <Object3D position="19.8638 0.497101 34.4004" yaw="-11.7246" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.94643 0.955183 1.94643" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="HighCover_menjador02">
+    <Object3D position="20.6873 0.497101 36.5274" yaw="-41.0927" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.99988 0.955183 1.99988" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="HighCover_menjador03">
+    <Object3D position="13.7399 0.497101 37.9652" yaw="-35.0645" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.96631 0.955183 1.96631" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="LowCover_menjador08">
+    <Object3D position="12.713 0.497101 33.7615" yaw="-24.0126" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="2.86713 0.955183 3.96414" collision_group="cobertura" cover_size="2" />
+  </Entity>
+  <Entity name="LowCover_menjador03">
+    <Object3D position="5.11094 0.497101 34.252" yaw="-44.2786" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="2.90975 0.955183 8.64131" collision_group="cobertura" cover_size="5" />
+  </Entity>
+  <Entity name="HighCover_menjador04">
+    <Object3D position="6.03567 0.497101 39.9516" yaw="-21.1266" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.90683 0.955183 1.90683" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="HighCover_menjador05">
+    <Object3D position="8.87351 0.497101 38.464" yaw="-35.0869" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.95296 0.955183 1.95296" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="LowCover_menjador05">
+    <Object3D position="15.6853 0.497101 21.115" yaw="-39.8137" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.00513 0.955183 5.56704" collision_group="cobertura" cover_size="4" />
+  </Entity>
+  <Entity name="LowCover_menjador06">
+    <Object3D position="13.0729 0.497101 25.727" yaw="-43.6796" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="9.70463 0.955183 0.462951" collision_group="cobertura" cover_size="5" />
+  </Entity>
+  <Entity name="LowCover_menjador07">
+    <Object3D position="8.29005 0.497101 25.8247" yaw="-35.9472" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.00513 0.955183 3.40028" collision_group="cobertura" cover_size="2" />
+  </Entity>
+  <Entity name="HighCover_menjador06">
+    <Object3D position="21.1031 0.497101 32.822" yaw="-28.0049" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.10576 0.955183 1.10576" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="HighCover_menjador07">
+    <Object3D position="27.1313 0.497101 30.0087" yaw="-28.0049" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.10576 0.955183 1.10576" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="HighCover_menjador08">
+    <Object3D position="13.4923 0.497101 36.3739" yaw="-28.0049" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.10576 0.955183 1.10576" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="HighCover_menjador09">
+    <Object3D position="7.47334 0.497101 39.1828" yaw="-28.0049" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.10576 0.955183 1.10576" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="HighCover_menjador10">
+    <Object3D position="22.6356 0.497101 20.3736" yaw="-28.0049" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.10576 0.955183 1.10576" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="HighCover_menjador00">
+    <Object3D position="23.5536 0.497101 19.9452" yaw="-26.666" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="0.994262 0.955183 0.994262" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="LowCover_menjador09">
+    <Object3D position="12.7332 0.497101 25.0149" yaw="-42.8201" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="7.78328 0.955183 1.14768" collision_group="cobertura" cover_size="5" />
+  </Entity>
+  <Entity name="HighCover_menjador11">
+    <Object3D position="2.94613 0.497101 29.5463" yaw="-27.2892" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.03869 0.955183 0.982459" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="HighCover_menjador12">
+    <Object3D position="3.65986 0.497101 23.6295" yaw="-21.1494" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.03869 0.955183 0.213394" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="HighCover_menjador13">
+    <Object3D position="6.40992 0.497101 22.3234" yaw="-21.1494" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.03869 0.955183 0.213394" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="HighCover_menjador14">
+    <Object3D position="14.9677 0.497101 18.3465" yaw="-21.1494" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.03869 0.955183 0.213394" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="HighCover_menjador15">
+    <Object3D position="17.7112 0.497101 17.0435" yaw="-21.1494" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.03869 0.955183 0.213394" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="HighCover_menjador16">
+    <Object3D position="21.3141 0.497101 13.2154" yaw="-86.5702" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.03869 0.955183 0.213394" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="HighCover_menjador17">
+    <Object3D position="20.0287 0.497101 10.4647" yaw="-86.5702" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.03869 0.955183 0.213394" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="HighCover_menjador18">
+    <Object3D position="20.9311 0.497101 9.60995" yaw="158.394" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.03869 0.955183 0.213394" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="HighCover_menjador19">
+    <Object3D position="23.6894 0.497101 8.31715" yaw="159.67" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.03869 0.955183 0.213394" collision_group="cobertura" cover_size="1" />
+  </Entity>
 </Entities>
