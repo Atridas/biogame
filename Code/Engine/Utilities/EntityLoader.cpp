@@ -33,9 +33,9 @@ void LoadComponentObject3D(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
   if(l_pComponentObject3D->Init(_pEntity))
   {
     Vect3f l_vPos   = _TreeComponent.GetVect3fProperty("position", Vect3f(0,0,0), false);
-    float  l_fYaw   = _TreeComponent.GetFloatProperty("yaw"  , 0.0f, false);
-    float  l_fPitch = _TreeComponent.GetFloatProperty("pitch", 0.0f, false);
-    float  l_fRoll  = _TreeComponent.GetFloatProperty("roll" , 0.0f, false);
+    float  l_fYaw   = _TreeComponent.GetFloatProperty("yaw"  , 0.0f, false) * FLOAT_PI_VALUE / 180.0f;
+    float  l_fPitch = _TreeComponent.GetFloatProperty("pitch", 0.0f, false) * FLOAT_PI_VALUE / 180.0f;
+    float  l_fRoll  = _TreeComponent.GetFloatProperty("roll" , 0.0f, false) * FLOAT_PI_VALUE / 180.0f;
                 
     l_pComponentObject3D->SetPosition(l_vPos);
     l_pComponentObject3D->SetYaw(l_fYaw);
@@ -197,7 +197,7 @@ void LoadPlayer(CEntityManager* _pEM, CXMLTreeNode& _TreePlayer)
 
   string l_szName    = _TreePlayer.GetPszISOProperty("name", "Player", false);
   Vect3f l_vPosition = _TreePlayer.GetVect3fProperty("position", Vect3f(0,0,0),true);
-  float  l_fYaw      = _TreePlayer.GetFloatProperty("yaw",0,true);
+  float  l_fYaw      = _TreePlayer.GetFloatProperty("yaw",0,true) * FLOAT_PI_VALUE / 180.0f;
 
   
   LOGGER->AddNewLog(ELL_INFORMATION, "\t\t\tPlayer name \"%s\", pos %f,%f,%f, yaw %f", l_szName.c_str(),
@@ -419,9 +419,13 @@ CGameEntity* CEntityManager::InitMiner(const string& _szPlayerName, const Vect3f
 
 CGameEntity* CEntityManager::InitMilitar(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName)
 {
-  return InitEnemy(_szPlayerName, _vPosition, 
+  CGameEntity* l_pMilitar = InitEnemy(_szPlayerName, _vPosition, 
                     "State_Enemy_Idle", "Militar", "Data/Animated Models/Militar/Skeleton.xml",
                     _szEntityName);
+
+  l_pMilitar->GetComponent<CComponentRenderableObject>()->m_fHeightAdjustment = -1.5f;
+
+  return l_pMilitar;
 }
 
 CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f& _vPosition,
@@ -449,7 +453,7 @@ CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f
 
   l_pComponentRenderableObject->InitAnimatedModel(l_peEnemy, l_szInstanceModelName.str(), _szRenderableModel);
   l_pComponentRenderableObject->m_bBlockPitchRoll = true;
-  l_pComponentRenderableObject->m_fHeightAdjustment = -1.f;
+  l_pComponentRenderableObject->m_fHeightAdjustment = -1.4f;
   l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
 
   //(new CComponentIAWalkToPlayer())->Init(l_peEnemy,"Player",2,"walk","impact");

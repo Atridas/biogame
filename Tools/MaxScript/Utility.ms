@@ -874,7 +874,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			l_params = #()
 			
 			l_aux = "" as stringStream
-			local l_tmp = l_player.position
+			local l_tmp = RHVectorToLH l_player.position
 			format "% % %" l_tmp.x l_tmp.y l_tmp.z to:l_aux
 			append l_params #("position",l_aux)
 			
@@ -901,7 +901,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 						l_params = #()
 			
 						l_aux = "" as stringStream
-						local l_tmp = l_current.position
+						local l_tmp = RHVectorToLH l_current.position
 						format "% % %" l_tmp.x l_tmp.y l_tmp.z to:l_aux
 						append l_params #("position",l_aux)
 						
