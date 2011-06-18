@@ -65,6 +65,43 @@ function IsCover _object =
 	)
 )
 
+-- Cerca l'entitat de player
+function GetPlayerEntity _entities =
+(
+	for i = 1 to _entities.count do
+	(
+		if (GetUserProp _entities[i] "entity") == "Player" then
+		(
+			return _entities[i]
+		)
+	)
+	return undefined
+)
+
+-- Cerca les entitats d'enemics
+function GetEnemiesEntities _entities =
+(
+	local l_enemies = #()
+	local l_property = undefined
+	
+	for i = 1 to _entities.count do
+	(
+		l_property = GetUserProp _entities[i] "entity"
+		if l_property == "Miner" or l_property == "Militar" or l_property == "Robot" then
+		(
+			append l_enemies _entities[i]
+		)
+	)
+	
+	if l_enemies.count == 0 then
+	(
+		return undefined
+	)else
+	(
+		return l_enemies
+	)
+)
+
 -- Cerca l'índex de la core segons el nom
 function GetCoreName _object =
 (
