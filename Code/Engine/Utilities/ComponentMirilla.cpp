@@ -49,7 +49,7 @@ void CComponentMirilla::SetActive(bool _bActive)
   }
 }
 
-void CComponentMirilla::UpdatePostAnim(float _fDeltaTime)
+void CComponentMirilla::PostUpdate(float _fDeltaTime)
 {
   if(m_bActive)
   {

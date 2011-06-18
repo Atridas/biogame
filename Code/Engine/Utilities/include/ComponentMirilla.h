@@ -25,7 +25,7 @@ public:
   bool Init(CGameEntity* _pEntity, const string& _szMeshName);
   void SetActive(bool _bActive);
   
-  virtual void UpdatePostAnim(float _fDeltaTime);
+  virtual void PostUpdate(float _fDeltaTime);
 
 protected:
   virtual void Release();
