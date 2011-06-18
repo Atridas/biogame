@@ -46,18 +46,22 @@ bool CEntityProcess::Init()
 
   CPhysicsManager* l_pPM = CORE->GetPhysicsManager();
 
-  // Creem la entitat del jugador ----------------------------------------------------------------
-
-  m_pPlayerEntity = CORE->GetEntityManager()->InitPlayer("Player",Vect3f(-8.0f,2.0f,-4.0f), 0);
-  m_pCamera = m_pPlayerEntity->GetComponent<CComponent3rdPSCamera>()->GetCamera();
 
   //Carregar entitats de l'escenari ----------------------------------------------------------------------------------------
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/NivellProves/XML/GameEntities.xml");
 
+  
+  m_pPlayerEntity = CORE->GetEntityManager()->GetEntity("Player");
+  m_pCamera = m_pPlayerEntity->GetComponent<CComponent3rdPSCamera>()->GetCamera();
 
-  // un enemic --------------------------------------------------------------------------------------------------------------
-
-  CGameEntity* l_peEnemy = CORE->GetEntityManager()->InitMiner("Player", Vect3f(8.0f,2.0f,4.0f), "Gordo Cabrón");
+  //// Creem la entitat del jugador ----------------------------------------------------------------
+  //
+  //m_pPlayerEntity = CORE->GetEntityManager()->InitPlayer("Player",Vect3f(-8.0f,2.0f,-4.0f), 0);
+  //m_pCamera = m_pPlayerEntity->GetComponent<CComponent3rdPSCamera>()->GetCamera();
+  //
+  //// un enemic --------------------------------------------------------------------------------------------------------------
+  //
+  //CGameEntity* l_peEnemy = CORE->GetEntityManager()->InitMiner("Player", Vect3f(8.0f,2.0f,4.0f), "Gordo Cabrón");
 
   // llum ----------------------------------------
   
@@ -97,12 +101,12 @@ void CEntityProcess::RenderScene(CRenderManager* _pRM)
 {
   CORE->GetRenderableObjectsManager()->Render(_pRM);
 
-  CORE->GetEntityManager()->DebugRender(_pRM);
+  //CORE->GetEntityManager()->DebugRender(_pRM);
 }
 
 void CEntityProcess::RenderINFO(CRenderManager* _pRM)
 {
-  CORE->GetPhysicsManager()->DebugRender(_pRM);
+  //CORE->GetPhysicsManager()->DebugRender(_pRM);
 
   //CRenderableObject *l_pRO = CORE->GetEntityManager()->GetEntity("Gordo Cabrón")->GetComponent<CComponentRenderableObject>()->GetRenderableObject();
   //
