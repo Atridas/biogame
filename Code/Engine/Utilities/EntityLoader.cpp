@@ -12,6 +12,11 @@
 #include "ComponentRenderableObject.h"
 #include "ComponentTrigger.h"
 #include "ComponentLowCover.h"
+#include "ComponentAnimation.h"
+#include "ComponentVida.h"
+#include "ComponentMirilla.h"
+#include "ComponentStateMachine.h"
+#include "ComponentIABrain.h"
 
 #include "PhysicsManager.h"
 
@@ -19,6 +24,7 @@
 #include "Core.h"
 
 #include <XML/XMLTreeNode.h>
+#include <sstream>
 
 /*
 enum ECollisionGroup {
@@ -289,4 +295,117 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
       }
     }
   }
+}
+
+
+
+CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3f& _vPosition, float _fYaw)
+{
+  CGameEntity* l_pPlayer = CreateEntity();
+  SetName(_szEntityName, l_pPlayer);
+
+  CComponentObject3D *l_pComponentObject3D = new CComponentObject3D();
+  l_pComponentObject3D->Init(l_pPlayer);
+  l_pComponentObject3D->SetPosition(_vPosition);
+  l_pComponentObject3D->SetYaw(_fYaw);
+
+  (new CComponentMovement)->Init(l_pPlayer);
+
+  CComponentRenderableObject * l_pComponentRenderableObject = new CComponentRenderableObject();
+  l_pComponentRenderableObject->InitAnimatedModel(l_pPlayer, "Player Character", "riggle");
+  l_pComponentRenderableObject->m_bBlockPitchRoll = true;
+  l_pComponentRenderableObject->m_fHeightAdjustment = -1.f;
+  l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
+
+
+  (new CComponentAnimation())->Init(l_pPlayer);
+
+
+  CComponentPlayerController *l_pComponentPlayerController = new CComponentPlayerController();
+  l_pComponentPlayerController->Init(l_pPlayer,
+                                      //Actions
+                                     "MoveFwd",
+                                     "MoveBack",
+                                     "MoveLeft",
+                                     "MoveRight",
+                                     "Walk",
+                                     "Run",
+                                     "Aim",
+                                     "Shoot",
+                                      //Animations
+                                     "idle",
+                                     "walk",
+                                     "walk",
+                                     "walk",
+                                     "walk",
+                                     "point",
+                                     "shoot",
+                                      //Speed
+                                     4, 10, 1, 1,
+                                      FLOAT_PI_VALUE/3,
+                                     -FLOAT_PI_VALUE/3);
+
+  CComponent3rdPSCamera *l_pComponent3rdPSCamera = new CComponent3rdPSCamera();
+  //l_pComponent3rdPSCamera->Init(m_pPlayerEntity, 0, 0);
+  //((CThPSCamera*)l_pComponent3rdPSCamera->GetCamera())->SetZoom(0);
+  l_pComponent3rdPSCamera->Init(l_pPlayer, 0.55f, 0.85f, 1.8f);
+
+  //m_pCamera = l_pComponent3rdPSCamera->GetCamera();
+
+  CComponentPhysXController *l_pComponentPhysXController = new CComponentPhysXController();
+  l_pComponentPhysXController->Init(l_pPlayer, 0.3f, 1.5f, 10.0f, 0.1f, 0.01f, ECG_PERSONATGE );
+
+  (new CComponentVida())->Init(l_pPlayer, 100.f);
+
+  (new CComponentStateMachine())->Init(l_pPlayer, "State_Player_Neutre");
+
+  //(new CComponentRagdoll())->Init(m_pPlayerEntity, "Data/Animated Models/Riggle/Skeleton.xml");
+  (new CComponentMirilla())->Init(l_pPlayer, "laser_pilota");
+
+  return l_pPlayer;
+}
+
+CGameEntity* CEntityManager::InitMiner(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName)
+{
+  return InitEnemy(_szPlayerName, _vPosition, 
+                    "State_Enemy_Idle", "miner", "Data/Animated Models/Miner/Skeleton.xml",
+                    _szEntityName);
+}
+
+CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f& _vPosition,
+                         const string& _szInitialState, const string& _szRenderableModel, const string& _szRagdollModell,
+                         const string& _szEntityName)
+{
+  CGameEntity* l_peEnemy = CreateEntity();
+  if(_szEntityName != "")
+  {
+    SetName(_szEntityName, l_peEnemy);
+  }
+
+  CComponentObject3D *l_pComponentObject3D = new CComponentObject3D();
+  l_pComponentObject3D->Init(l_peEnemy);
+  l_pComponentObject3D->SetPosition(_vPosition);
+  (new CComponentMovement)->Init(l_peEnemy);
+
+  (new CComponentPhysXController())->Init(l_peEnemy, 0.7f, 1.5f, 10.0f, 0.1f, 0.5f,  ECG_ENEMICS );
+
+  CComponentRenderableObject *l_pComponentRenderableObject = new CComponentRenderableObject();
+
+  stringstream l_szInstanceModelName(_szRenderableModel);
+
+  l_szInstanceModelName << " " << l_peEnemy->GetGUID();
+
+  l_pComponentRenderableObject->InitAnimatedModel(l_peEnemy, l_szInstanceModelName.str(), _szRenderableModel);
+  l_pComponentRenderableObject->m_bBlockPitchRoll = true;
+  l_pComponentRenderableObject->m_fHeightAdjustment = -1.f;
+  l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
+
+  //(new CComponentIAWalkToPlayer())->Init(l_peEnemy,"Player",2,"walk","impact");
+  (new CComponentIABrain())->Init(l_peEnemy,_szPlayerName,_szRagdollModell);
+  (new CComponentAnimation())->Init(l_peEnemy);
+  (new CComponentVida())->Init(l_peEnemy, 100.f);
+
+  (new CComponentStateMachine())->Init(l_peEnemy, _szInitialState);
+
+  return l_peEnemy;
 }

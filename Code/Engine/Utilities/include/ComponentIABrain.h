@@ -15,7 +15,7 @@ public:
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_IA_BRAIN;};
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_IA_BRAIN;};
 
-  bool Init(CGameEntity* _pEntity, const string& _szPlayerEntityName);
+  bool Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName);
 
   void Shoot();
   void Die();
@@ -26,6 +26,8 @@ public:
 
 protected:
   virtual void Release() {};
+
+  string m_szRagdollName;
 };
 
 #endif

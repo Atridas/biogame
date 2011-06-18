@@ -35,6 +35,9 @@
 
     <script action="SOUND_MANAGER                 = CORE:get_sound_manager()"/>
     <script action="SOUND                         = CORE:get_sound_manager()"/>
+
+    <script action="ENTITY_MANAGER                = CORE:get_entity_manager()"/>
+    <script action="EM                            = CORE:get_entity_manager()"/>
     
     <script action="GUI_MANAGER                   = CORE:get_gui_manager()"/>
 

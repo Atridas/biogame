@@ -10,10 +10,12 @@
 #include "cal3d\cal3d.h"
 
 
-bool CComponentIABrain::Init(CGameEntity* _pEntity, const string& _szPlayerEntityName)
+bool CComponentIABrain::Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName)
 {
   assert(_pEntity);
   SetEntity(_pEntity);
+
+  m_szRagdollName = _szRagdollName;
 
   m_pPlayer = CORE->GetEntityManager()->GetEntity(_szPlayerEntityName);
 
@@ -104,7 +106,7 @@ void CComponentIABrain::Die()
   if(!l_pRC)
   {
     l_pRC = new CComponentRagdoll();
-    if(!l_pRC->Init(GetEntity(), "Data/Animated Models/Miner/Skeleton.xml"))
+    if(!l_pRC->Init(GetEntity(), m_szRagdollName))
     {
       delete l_pRC;
       return;

@@ -102,7 +102,7 @@ CGameEntity* CEntityManager::GetEntity(const string& _szName) const
 
     vector<CGameEntity*>::const_iterator l_it2  = m_vNewEntities.begin();
     vector<CGameEntity*>::const_iterator l_end2 = m_vNewEntities.end();
-    for(; l_it2 != l_end2; ++l_it)
+    for(; l_it2 != l_end2; ++l_it2)
     {
       CGameEntity* l_pEntity = *l_it2;
       if(l_pEntity->GetGUID() == l_it->second)
