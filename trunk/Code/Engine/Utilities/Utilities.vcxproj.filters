@@ -91,6 +91,9 @@
     <Filter Include="EntitySystem\Components\ComponentCover\ComponentHighCover">
       <UniqueIdentifier>{c41180ce-ab1c-4228-8046-7f7d0bcadad8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentMirilla">
+      <UniqueIdentifier>{1d39df22-570d-4b0d-abd3-657f9c270861}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -183,7 +186,12 @@
     <ClCompile Include="ComponentLowCover.cpp">
       <Filter>EntitySystem\Components\ComponentCover\ComponentLowCover</Filter>
     </ClCompile>
-    <ClCompile Include="ComponentCover.cpp" />
+    <ClCompile Include="ComponentCover.cpp">
+      <Filter>EntitySystem\Components\ComponentCover</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentMirilla.cpp">
+      <Filter>EntitySystem\Components\ComponentMirilla</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GameObject.h">
@@ -285,6 +293,11 @@
     <ClInclude Include="include\ComponentLowCover.h">
       <Filter>EntitySystem\Components\ComponentCover\ComponentLowCover</Filter>
     </ClInclude>
-    <ClInclude Include="include\ComponentCover.h" />
+    <ClInclude Include="include\ComponentCover.h">
+      <Filter>EntitySystem\Components\ComponentCover</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentMirilla.h">
+      <Filter>EntitySystem\Components\ComponentMirilla</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
