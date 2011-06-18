@@ -130,6 +130,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("init_player",           &CEntityManager::InitPlayer)
       .def("init_enemy",            &CEntityManager::InitEnemy)
       .def("init_miner",            &CEntityManager::InitMiner)
+      .def("init_militar",          &CEntityManager::InitMilitar)
   ];
 
   module(_pLS) [

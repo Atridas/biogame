@@ -221,6 +221,21 @@ void LoadMiner(CEntityManager* _pEM, CXMLTreeNode& _TreeMiner)
   _pEM->InitMiner(l_szPlayerName, l_vPosition, l_szName);
 }
 
+void LoadMilitar(CEntityManager* _pEM, CXMLTreeNode& _TreeMiner)
+{
+  LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Militar");
+  
+  string l_szName       = _TreeMiner.GetPszISOProperty("name", "", false);
+  string l_szPlayerName = _TreeMiner.GetPszISOProperty("player", "Player", false);
+  Vect3f l_vPosition    = _TreeMiner.GetVect3fProperty("position", Vect3f(0,0,0),true);
+
+  
+  LOGGER->AddNewLog(ELL_INFORMATION, "\t\t\tMilitar name \"%s\", pos %f,%f,%f, Player %s", l_szName.c_str(),
+                                      l_vPosition.x, l_vPosition.y, l_vPosition.z, l_szPlayerName.c_str());
+
+  _pEM->InitMilitar(l_szPlayerName, l_vPosition, l_szName);
+}
+
 // -------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------
@@ -315,6 +330,9 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
         } else if(strcmp(l_TreeEntity.GetName(),"Miner") == 0)
         {
           LoadMiner(this, l_TreeEntity);
+        } else if(strcmp(l_TreeEntity.GetName(),"Militar") == 0)
+        {
+          LoadMilitar(this, l_TreeEntity);
         } else if(!l_TreeEntity.IsComment())
         {
           LOGGER->AddNewLog(ELL_WARNING,"\tNode \"%s\" no reconegut!", l_TreeEntities.GetName());
@@ -396,6 +414,13 @@ CGameEntity* CEntityManager::InitMiner(const string& _szPlayerName, const Vect3f
 {
   return InitEnemy(_szPlayerName, _vPosition, 
                     "State_Enemy_Idle", "miner", "Data/Animated Models/Miner/Skeleton.xml",
+                    _szEntityName);
+}
+
+CGameEntity* CEntityManager::InitMilitar(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName)
+{
+  return InitEnemy(_szPlayerName, _vPosition, 
+                    "State_Enemy_Idle", "Militar", "Data/Animated Models/Militar/Skeleton.xml",
                     _szEntityName);
 }
 

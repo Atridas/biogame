@@ -422,10 +422,9 @@ State_Player_Morint['Update'] = function(_jugador, _dt)
   player_controller.time = player_controller.time + _dt
   
   if player_controller.time > Player_Constants["Temps Morint"] then
-    log('Por què?')
     _jugador:get_component(BaseComponent.vida).vida = 100
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
-    --SOUND:play_sample('pipip')
+    SOUND:play_sample('pipip')
     --_jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Mort')
   end
 end

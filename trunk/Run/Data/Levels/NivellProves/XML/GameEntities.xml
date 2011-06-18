@@ -219,4 +219,5 @@
   </Entity>
   <Player name="Player" position="-8.0 2.0 -4.0" yaw="0.0" />
   <Miner position="8.0 2.0 4.0" name="Gordo Cabrón" player="Player" />
+  <Militar position="8.0 2.0 -4.0" player="Player" />
 </Entities>
