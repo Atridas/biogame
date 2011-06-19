@@ -36,7 +36,7 @@ bool CComponentPhysXMesh::Init(CGameEntity* _pEntity, float _fDensity, int _iCol
 
   m_pPhysXData = new CPhysicUserData(_pEntity->GetName().c_str());
   m_pPhysXData->SetPaint(true);
-  m_pPhysXData->SetColor(colBLUE);
+  m_pPhysXData->SetColor(colRED);
   m_pPhysXData->SetEntity(_pEntity);
   
   const vector<uint32> l_vIndexBuff = l_pStaticMesh->GetIndexBuffer();

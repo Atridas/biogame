@@ -6,6 +6,7 @@
 #include "LightManager.h"
 #include "EntityManager.h"
 #include "Component3rdPSCamera.h"
+#include "PhysicsManager.h"
 
 #include "Core.h"
 
@@ -18,16 +19,21 @@ void CGameProcess::RenderScene(CRenderManager* _pRM)
   CORE->GetRenderableObjectsManager()->Render(_pRM);
 }
 
+void CGameProcess::RenderINFO(CRenderManager* _pRM)
+{
+  CORE->GetPhysicsManager()->DebugRender(_pRM);
+}
+
 bool CGameProcess::Init()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"CGameProcess::Init");
+  //LOGGER->SaveLogsInFile();
 
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
   CORE->GetLightManager()->SetLightsEnabled(true);
 
   
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Laboratori.xml");
-  LOGGER->SaveLogsInFile();
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Menjador.xml");
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Passadis.xml");
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - video.xml");
