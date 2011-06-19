@@ -119,7 +119,7 @@ public:
 
 	//--- Intersection Functions:
 	CPhysicUserData*		RaycastClosestActor					(const Vect3f posRay, const Vect3f& dirRay, uint32 impactMask, SCollisionInfo& info);
-  CPhysicUserData*		RaycastClosestActorShoot		(const Vect3f posRay, const Vect3f& dirRay, uint32 impactMask, CPhysicUserData* impactObject, SCollisionInfo& info, float _fPower);
+  CPhysicUserData*		RaycastClosestActorShoot		(const Vect3f posRay, const Vect3f& dirRay, uint32 impactMask, SCollisionInfo& info, float _fPower);
 	void								OverlapSphereActor					(float radiusSphere, const Vect3f& posSphere, std::vector<CPhysicUserData*> impactObjects);
   void								OverlapSphereActorGrenade		(float radiusSphere, const Vect3f& posSphere, std::vector<CPhysicUserData*> impactObjects, float _fPower);
   void                ApplyExplosion              (NxActor* _pActor, const Vect3f& _vPosSphere, float _fEffectRadius, float _fPower);
