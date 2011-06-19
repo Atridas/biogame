@@ -8,31 +8,31 @@
 	<mesh name="bido_verd09" path="Data/Meshes/bido_verd09.mesh" max="0.310001 0.294828 0.0" min="-0.310001 -0.294828 -0.938025" />
 	<mesh name="bido_verd" path="Data/Meshes/bido_verd.mesh" max="0.309999 0.938024 0.294828" min="-0.309999 0.0 -0.294828" />
 	<mesh name="columna08" path="Data/Meshes/columna08.mesh" max="0.70207 1.75504 0.702066" min="-0.70207 -1.75504 -0.702068" />
-	<mesh name="vitrina" path="Data/Meshes/vitrina.mesh" max="4.32372 0.0325929 2.15332" min="-4.32372 -0.0325929 -2.15332" />
+	<mesh name="vitrina" path="Data/Meshes/vitrina.mesh" max="53.7652 0.316339 -25.5516" min="-53.7864 -0.83681 25.4555" />
 	<mesh name="altaveus" path="Data/Meshes/altaveus.mesh" max="0.208044 0.377919 0.142527" min="-0.315865 -0.0265853 -0.514853" />
-	<mesh name="barra3" path="Data/Meshes/barra3.mesh" max="1.18728 0.5 1.74591" min="-1.18728 -0.5 -1.74591" />
-	<mesh name="barra1" path="Data/Meshes/barra1.mesh" max="1.64717 0.5 2.82181" min="-1.64717 -0.5 -2.82181" />
-	<mesh name="barra2" path="Data/Meshes/barra2.mesh" max="3.75243 0.652337 2.21027" min="-3.75243 -0.652337 -2.21027" />
+	<mesh name="barra3" path="Data/Meshes/barra3.mesh" max="3.66443 0.573675 6.357" min="-3.66858 -0.579473 -6.3473" />
+	<mesh name="barra1" path="Data/Meshes/barra1.mesh" max="8.91515 0.573675 17.4226" min="-8.85608 -0.579474 -17.5082" />
+	<mesh name="barra2" path="Data/Meshes/barra2.mesh" max="34.9617 0.421339 -15.7295" min="-34.8607 -0.73181 15.7346" />
 	<mesh name="Cables_menjador" path="Data/Meshes/Cables_menjador.mesh" max="22.9058 3.75323 22.0316" min="-13.5156 -0.655823 -8.70855" />
-	<mesh name="taula2" path="Data/Meshes/taula2.mesh" max="15.7073 0.386737 6.71205" min="9.508 -0.650018 -2.18005" />
-	<mesh name="taula1" path="Data/Meshes/taula1.mesh" max="10.2756 0.950191 1.50998" min="5.48886 -0.636489 -2.75957" />
-	<mesh name="taula3" path="Data/Meshes/taula3.mesh" max="9.80419 0.386737 10.1107" min="5.47349 -0.650018 5.25428" />
-	<mesh name="taula4" path="Data/Meshes/taula4.mesh" max="2.86994 0.386737 13.1094" min="-0.979238 -0.650018 8.49169" />
-	<mesh name="taula05" path="Data/Meshes/taula05.mesh" max="-3.49261 0.386737 15.8521" min="-9.83399 -0.650018 6.89913" />
-	<mesh name="Caixa_gran04" path="Data/Meshes/Caixa_gran04.mesh" max="10.3144 0.847663 15.0004" min="7.58239 -0.652337 12.2683" />
-	<mesh name="Caixa_gran02" path="Data/Meshes/Caixa_gran02.mesh" max="3.32628 0.847663 16.3432" min="0.668424 -0.652337 13.6853" />
-	<mesh name="Caixa_gran01" path="Data/Meshes/Caixa_gran01.mesh" max="-1.54177 0.847663 16.8711" min="-4.19962 -0.653327 14.2132" />
-	<mesh name="Caixa_gran00" path="Data/Meshes/Caixa_gran00.mesh" max="-4.48996 0.847663 18.2461" min="-6.93945 -0.652337 15.7966" />
-	<mesh name="Caixa_gran03" path="Data/Meshes/Caixa_gran03.mesh" max="9.25316 0.847663 12.602" min="6.93625 -0.653327 10.2851" />
-	<mesh name="Caixa_estatica_petita00" path="Data/Meshes/Caixa_estatica_petita00.mesh" max="13.5048 0.347663 -2.62708" min="12.2231 -0.652337 -3.90879" />
+	<mesh name="taula2" path="Data/Meshes/taula2.mesh" max="35.9943 0.421338 40.399" min="-10.7607 -0.73181 -35.8981" />
+	<mesh name="taula1" path="Data/Meshes/taula1.mesh" max="18.3274 0.421338 0.306356" min="-2.51172 -0.73181 -1.53115" />
+	<mesh name="taula3" path="Data/Meshes/taula3.mesh" max="16.5476 0.421338 14.5747" min="-1.26203 -0.73181 0.610266" />
+	<mesh name="taula4" path="Data/Meshes/taula4.mesh" max="8.56447 0.421338 19.0553" min="-6.62755 -0.73181 2.57423" />
+	<mesh name="taula05" path="Data/Meshes/taula05.mesh" max="18.4446 0.421338 51.6352" min="-31.7119 -0.73181 -29.0248" />
+	<mesh name="Caixa_gran04" path="Data/Meshes/Caixa_gran04.mesh" max="12.3848 2.71504 14.5442" min="5.50059 -2.05014 12.617" />
+	<mesh name="Caixa_gran02" path="Data/Meshes/Caixa_gran02.mesh" max="5.24683 2.71504 16.1878" min="-1.25624 -2.05014 13.8491" />
+	<mesh name="Caixa_gran01" path="Data/Meshes/Caixa_gran01.mesh" max="0.337856 2.71504 16.6669" min="-6.08002 -2.05014 14.3676" />
+	<mesh name="Caixa_gran00" path="Data/Meshes/Caixa_gran00.mesh" max="-2.88407 2.71504 18.611" min="-8.53378 -2.05014 15.3987" />
+	<mesh name="Caixa_gran03" path="Data/Meshes/Caixa_gran03.mesh" max="10.8406 2.71504 13.4682" min="5.39778 -2.05014 9.43907" />
+	<mesh name="Caixa_estatica_petita00" path="Data/Meshes/Caixa_estatica_petita00.mesh" max="13.6905 0.421338 -2.88654" min="12.0539 -0.73181 -3.6497" />
 	<mesh name="Caixa_estatica_petita01" path="Data/Meshes/Caixa_estatica_petita01.mesh" max="12.5518 1.34278 -2.34272" min="11.1858 0.34278 -3.70874" />
-	<mesh name="Caixa_estatica_petita02" path="Data/Meshes/Caixa_estatica_petita02.mesh" max="12.494 0.347663 -2.35065" min="11.165 -0.652337 -3.67957" />
+	<mesh name="Caixa_estatica_petita02" path="Data/Meshes/Caixa_estatica_petita02.mesh" max="12.6393 3.6121 -2.69964" min="10.9787 -2.64072 -3.30346" />
 	<mesh name="ventilacio1" path="Data/Meshes/ventilacio1.mesh" max="17.9483 2.85257 9.73118" min="0.872689 2.30444 -7.7122" />
 	<mesh name="ventilacio2" path="Data/Meshes/ventilacio2.mesh" max="23.2047 2.771 22.156" min="-7.52509 1.80717 7.1172" />
 	<mesh name="Caixes_separadores" path="Data/Meshes/Caixes_separadores.mesh" max="-1.33304 1.85904 -1.84115" min="-7.25918 -0.653327 -7.48756" />
-	<mesh name="Jukebox" path="Data/Meshes/Jukebox.mesh" max="-9.38 0.94149 3.10427" min="-11.3707 -0.64985 1.5593" />
-	<mesh name="tauletas" path="Data/Meshes/tauletas.mesh" max="-11.1883 0.50028 4.8729" min="-15.1939 -0.649722 2.36675" />
-	<mesh name="tauleta" path="Data/Meshes/tauleta.mesh" max="-13.1527 0.50028 6.68362" min="-14.8136 -0.649722 4.49064" />
+	<mesh name="Jukebox" path="Data/Meshes/Jukebox.mesh" max="-8.7995 1.70914 1.03172" min="-11.9246 -1.39192 3.66417" />
+	<mesh name="tauletas" path="Data/Meshes/tauletas.mesh" max="-3.57847 0.421338 -0.296566" min="-22.797 -0.73181 7.55491" />
+	<mesh name="tauleta" path="Data/Meshes/tauleta.mesh" max="-12.499 0.441786 7.56451" min="-15.454 -0.752258 3.61174" />
 	<mesh name="Quadres" path="Data/Meshes/Quadres.mesh" max="20.7537 2.28444 20.6685" min="-13.1557 -0.653112 -5.59697" />
 	<mesh name="Object04" path="Data/Meshes/Object04.mesh" max="0.438524 0.163706 0.267303" min="-0.438526 -0.163706 -0.267303" />
 	<mesh name="Object05" path="Data/Meshes/Object05.mesh" max="0.262474 0.435029 0.311974" min="-0.262474 -0.435029 -0.311975" />
@@ -48,9 +48,9 @@
 	<mesh name="cartell02" path="Data/Meshes/cartell02.mesh" max="3.65077 0.635811 1.7819" min="-3.65077 -0.635812 -1.78189" />
 	<mesh name="cartell03" path="Data/Meshes/cartell03.mesh" max="0.609918 0.63577 1.03746" min="-0.609917 -0.63577 -1.03746" />
 	<mesh name="columna01" path="Data/Meshes/columna01.mesh" max="0.70207 1.75504 0.702068" min="-0.70207 -1.75504 -0.702066" />
-	<mesh name="columna02" path="Data/Meshes/columna02.mesh" max="0.70207 1.75504 0.702066" min="-0.70207 -1.75504 -0.702068" />
+	<mesh name="columna02" path="Data/Meshes/columna02.mesh" max="1.00629 5.50113 0.362979" min="-1.04762 -5.97084 -0.383857" />
 	<mesh name="columna03" path="Data/Meshes/columna03.mesh" max="0.70207 1.75504 0.702066" min="-0.70207 -1.75504 -0.702068" />
-	<mesh name="columna04" path="Data/Meshes/columna04.mesh" max="0.70207 1.75504 0.702065" min="-0.70207 -1.75504 -0.702068" />
+	<mesh name="columna04" path="Data/Meshes/columna04.mesh" max="1.02405 5.50129 0.356984" min="-1.02986 -5.97068 -0.389852" />
 	<mesh name="columna05" path="Data/Meshes/columna05.mesh" max="0.70207 1.75504 0.702066" min="-0.70207 -1.75504 -0.702068" />
 	<mesh name="columna06" path="Data/Meshes/columna06.mesh" max="0.70207 1.75504 0.702068" min="-0.70207 -1.75504 -0.702068" />
 	<mesh name="colunma07" path="Data/Meshes/colunma07.mesh" max="0.70207 1.75504 0.702065" min="-0.70207 -1.75504 -0.702068" />
