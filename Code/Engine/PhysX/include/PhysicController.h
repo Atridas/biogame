@@ -49,6 +49,7 @@ public:
 	float											GetGravity							() const {return m_fGravity;}
 	void											SetGravity							(float gravity)  {m_fGravity = gravity;}
   void                      SetGroup                (int _iGroup);
+  void                      SetHeight               (float _fHeight);
 
 	//---PhsX Info---
 	NxController*							GetPhXController				() {return m_pPhXController;}

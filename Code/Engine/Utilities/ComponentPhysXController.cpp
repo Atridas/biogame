@@ -57,6 +57,10 @@ void CComponentPhysXController::UpdatePostPhysX(float _fDeltaTime)
   m_pObject3D->SetPosition(l_vPhy2);
 }
 
+void CComponentPhysXController::SetHeight(float _fHeight)
+{
+  m_pPhysXController->SetHeight(_fHeight);
+}
 
 void CComponentPhysXController::Release(void)
 {
