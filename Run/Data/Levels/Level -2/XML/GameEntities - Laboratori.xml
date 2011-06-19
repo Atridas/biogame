@@ -208,17 +208,9 @@
     <Object3D />
     <RenderableObject name="Vidre_cap02" />
   </Entity>
-  <Entity name="Vidre_cap03">
-    <Object3D />
-    <RenderableObject name="Vidre_cap03" />
-  </Entity>
   <Entity name="fluorescente_apagat01">
     <Object3D />
     <RenderableObject name="fluorescente_apagat01" />
-  </Entity>
-  <Entity name="Vidre_cap04">
-    <Object3D />
-    <RenderableObject name="Vidre_cap04" />
   </Entity>
   <Entity name="Llum_emergengia_autoilum01">
     <Object3D />
@@ -272,5 +264,5 @@
     <Object3D />
     <RenderableObject name="Focus_conic" />
   </Entity>
-  <Player position="-11.342 1.43678 -7.76992" yaw="0.0" />
+  <Player position="-11.342 1.72829 -7.76992" yaw="0.0" />
 </Entities>

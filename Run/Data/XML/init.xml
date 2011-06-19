@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Config>
-	<RenderManager resolution="1024 768" position="50 5" fullscreenMode="false"/>
+  <RenderManager resolution="1280 720" position="50 5" fullscreenMode="false"/>
   
 	<StaticMeshManager>
     <StaticMeshes xml="Data/XML/StaticMeshes.xml"/>

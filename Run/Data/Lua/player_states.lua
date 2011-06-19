@@ -15,6 +15,7 @@ State_Player_Tocat = {}
 State_Player_Morint = {}
 State_Player_Mort = {}
 State_Player_Cobertura_Baixa = {}
+State_Player_Cobertura_Alta = {}
 
 -------------------------------------------------------------------------------------------------
 camera_player = function(_jugador, _dt)
@@ -97,7 +98,11 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   
   if ACTION_MANAGER:is_action_active('Cover') then
     if player_controller:cover() then
-      _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Baixa')
+      if player_controller.cover_entity:get_component(BaseComponent.cover):get_cover_type() == ComponentCover.cover_high then
+        _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Alta')
+      else
+        _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Baixa')
+      end
       return
     end
   end
@@ -244,6 +249,7 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
   
   if ACTION_MANAGER:is_action_active('Shoot') then
     player_controller:shoot()
+    SOUND:play_sample('disparar')
   end
   
   local animation = _jugador:get_component(BaseComponent.animation)
@@ -353,6 +359,7 @@ State_Player_Tocat['Enter'] = function(_jugador)
   animation:set_animation('impact', 0.3)
   player_controller.time = 0
   
+  SOUND:play_sample('impacte')
 end
 
 -------------------------------------------------------------------------------------------------
@@ -428,6 +435,8 @@ State_Player_Morint['Update'] = function(_jugador, _dt)
     _jugador:get_component(BaseComponent.vida).vida = 100
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
     SOUND:play_sample('pipip')
+    _jugador:get_component(BaseComponent.object_3d):set_position(Vect3f(player_controller.pos_inicial))
+    
     --_jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Mort')
   end
 end
@@ -538,6 +547,68 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Cobertura_Baixa['Receive'] = function(_jugador, _event)
+
+  if _event.msg == Event.rebre_impacte then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Tocat')
+  elseif _event.msg == Event.morir then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Morint')
+  end
+  
+end
+
+
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-- Cobertura Alta!!!! --------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+
+
+
+-------------------------------------------------------------------------------------------------
+State_Player_Cobertura_Alta['Enter'] = function(_jugador)
+  
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  local animation = _jugador:get_component(BaseComponent.animation)
+  local moviment = _jugador:get_component(BaseComponent.movement)
+  local object3d = _jugador:get_component(BaseComponent.object_3d)
+  local renderable_object = _jugador:get_component(BaseComponent.renderable_object)
+  
+  moviment.movement = moviment.movement + player_controller.cover_position + player_controller.cover_normal * 1.0 - object3d:get_position()
+  
+  object3d:set_yaw(-((player_controller.cover_normal):get_angle_y()) - math.pi*0.5)
+  
+  --renderable_object:set_yaw(object3d:get_yaw()) VULL FER AIXO
+  
+  animation:set_cycle('CoverDretaIdle', 1.0)
+  animation:set_animation('CoverDreta', 0.0)
+  player_controller.time = 0
+  
+  renderable_object.block_yaw = true
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Cobertura_Alta['Exit'] = function(_jugador)
+
+  local animation = _jugador:get_component(BaseComponent.animation)
+  animation:clear_cycle(0.3)
+  
+  _jugador:get_component(BaseComponent.renderable_object).block_yaw = false
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Cobertura_Alta['Update'] = function(_jugador, _dt)
+
+  local pitch, yaw, object3d = camera_player(_jugador, _dt)
+  
+  if ACTION_MANAGER:is_action_active('Cover') then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+  end
+
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Cobertura_Alta['Receive'] = function(_jugador, _event)
 
   if _event.msg == Event.rebre_impacte then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Tocat')

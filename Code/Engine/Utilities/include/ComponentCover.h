@@ -12,7 +12,7 @@ public:
 
   enum COVER_TYPE
   {
-    COVER_LOW = 0,
+    COVER_LOW,
     COVER_HIGH
   };
 

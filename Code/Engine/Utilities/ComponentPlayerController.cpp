@@ -13,6 +13,7 @@
 #include "ComponentLaser.h"
 #include "ComponentRenderableObject.h"
 #include "ComponentRagdoll.h"
+#include "ComponentCover.h"
 
 #include "PhysicsManager.h"
 
@@ -264,6 +265,8 @@ bool CComponentPlayerController::Cover()
   {
     m_vCoverNormal = l_sCInfo.m_Normal;
     m_vCoverPosition = l_sCInfo.m_CollisionPoint;
+    m_pCoverEntity = l_pUserData->GetEntity();
+
     return true;
   }
 

@@ -192,6 +192,9 @@
     <ClCompile Include="ComponentMirilla.cpp">
       <Filter>EntitySystem\Components\ComponentMirilla</Filter>
     </ClCompile>
+    <ClCompile Include="ComponentHighCover.cpp">
+      <Filter>EntitySystem\Components\ComponentCover\ComponentHighCover</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GameObject.h">
@@ -298,6 +301,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentMirilla.h">
       <Filter>EntitySystem\Components\ComponentMirilla</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentHighCover.h">
+      <Filter>EntitySystem\Components\ComponentCover\ComponentHighCover</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

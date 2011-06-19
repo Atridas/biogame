@@ -186,24 +186,24 @@
 	<RenderableObject name="luz_florescente10" class="StaticMesh" resource="bombeta_florescent" position="24.5262 3.0267 15.7795" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
 	<RenderableObject name="luz_florescente11" class="StaticMesh" resource="bombeta_florescent" position="27.3458 3.0267 21.8705" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
 	<RenderableObject name="fluorescente_DEF11" class="StaticMesh" resource="fluorescente_DEF11" position="2.04748 3.09934 34.3481" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="Llum03" class="StaticMesh" resource="focus" position="-0.648828 2.51455 28.4963" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="Llum04" class="StaticMesh" resource="focus" position="2.06863 2.51455 34.337" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="Llum05" class="StaticMesh" resource="focus" position="7.61793 2.51455 31.7124" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="Llum06" class="StaticMesh" resource="focus" position="10.6576 2.51455 38.2136" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="Llum07" class="StaticMesh" resource="focus" position="17.3771 2.51455 34.7698" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="Llum08" class="StaticMesh" resource="focus" position="21.2862 2.51455 25.5539" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="Llum09" class="StaticMesh" resource="focus" position="18.3851 2.51455 19.2865" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="Llum10" class="StaticMesh" resource="focus" position="24.784 2.51455 16.4006" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="Llum11" class="StaticMesh" resource="focus" position="27.6037 2.51455 22.4916" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Llum_menjador00" class="StaticMesh" resource="Llum_menjador00" position="-0.648828 2.51455 28.4963" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="fluorescente_DEF12" class="StaticMesh" resource="fluorescente_DEF12" position="-0.643127 3.09934 28.4948" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="fluorescente_DEF14" class="StaticMesh" resource="fluorescente_DEF14" position="7.63609 3.09934 31.6725" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="fluorescente_apagat02" class="StaticMesh" resource="fluorescente_apagat02" position="5.19611 3.09934 40.8284" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Llum_menjador01" class="StaticMesh" resource="Llum_menjador01" position="2.06863 2.51455 34.337" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Llum_menjador02" class="StaticMesh" resource="Llum_menjador02" position="7.61793 2.51455 31.7124" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="fluorescente_apagat03" class="StaticMesh" resource="fluorescente_apagat03" position="24.1751 3.09934 31.6555" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="fluorescente_apagat04" class="StaticMesh" resource="fluorescente_apagat04" position="30.5091 3.09934 28.722" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Llum_menjador03" class="StaticMesh" resource="Llum_menjador03" position="10.6576 2.51455 38.2136" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="fluorescente_DEF15" class="StaticMesh" resource="fluorescente_DEF15" position="10.6758 3.09934 38.1737" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Llum_menjador04" class="StaticMesh" resource="Llum_menjador04" position="17.3771 2.51455 34.7698" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="fluorescente_DEF16" class="StaticMesh" resource="fluorescente_DEF16" position="17.3953 3.09934 34.73" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Llum_menjador05" class="StaticMesh" resource="Llum_menjador05" position="21.2862 2.51455 25.5539" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="fluorescente_DEF17" class="StaticMesh" resource="fluorescente_DEF17" position="21.3043 3.09934 25.5141" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Llum_menjador06" class="StaticMesh" resource="Llum_menjador06" position="18.3851 2.51455 19.2865" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="fluorescente_DEF18" class="StaticMesh" resource="fluorescente_DEF18" position="18.3778 3.09934 19.2707" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Llum_menjador07" class="StaticMesh" resource="Llum_menjador07" position="24.784 2.51455 16.4006" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="fluorescente_DEF19" class="StaticMesh" resource="fluorescente_DEF19" position="24.8022 3.09934 16.3608" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Llum_menjador08" class="StaticMesh" resource="Llum_menjador08" position="27.6037 2.51455 22.4916" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="fluorescente_DEF20" class="StaticMesh" resource="fluorescente_DEF20" position="27.6218 3.09934 22.4518" yaw="0.0" pitch="0.0" roll="0.0" />
 </RenderableObjects>

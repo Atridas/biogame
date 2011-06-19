@@ -17,6 +17,7 @@
 #include "ComponentMirilla.h"
 #include "ComponentStateMachine.h"
 #include "ComponentIABrain.h"
+#include "ComponentHighCover.h"
 
 #include "PhysicsManager.h"
 
@@ -149,28 +150,25 @@ void LoadComponentTrigger(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 
 void LoadComponentHighCover(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 {
-  LOGGER->AddNewLog(ELL_WARNING,"\tHigh Cover no implementat");
-  //LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant Cobertura.");
-  //
-  ////TODO mascares
-  //int l_iCollisionMask = 1;
-  //Vect3f l_vSize = _TreeComponent.GetVect3fProperty("size", Vect3f(1), true);
-  //int l_iSpots = _TreeComponent.GetPszISOProperty("cover_size", "", false);
-  //
-  //LOGGER->AddNewLog(ELL_INFORMATION,"\t\t\t HighCover: \"%d\" spots.", l_iSpots);
+  LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant Cobertura Alta.");
+  
+  Vect3f l_vSize = _TreeComponent.GetVect3fProperty("size", Vect3f(1), true);
+  int l_iSpots = _TreeComponent.GetIntProperty("cover_size", 1, false);
+  
+  LOGGER->AddNewLog(ELL_INFORMATION,"\t\t\t HighCover: \"%d\" spots.", l_iSpots);
 
-  //CComponentHighCover* l_pComponentHighCover = new CComponentHighCover();
+  CComponentHighCover* l_pComponentHighCover = new CComponentHighCover();
 
-  //if(!l_pComponentHighCover->Init(_pEntity, l_vSize, l_iSpots, l_iCollisionMask))
-  //{
-  //  LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
-  //  delete l_pComponentHighCover;
-  //}
+  if(!l_pComponentHighCover->Init(_pEntity, l_vSize, l_iSpots))
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
+    delete l_pComponentHighCover;
+  }
 }
 
 void LoadComponentLowCover(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 {
-  LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant Cobertura.");
+  LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant Cobertura Baixa.");
   
   Vect3f l_vSize = _TreeComponent.GetVect3fProperty("size", Vect3f(1), true);
   int l_iSpots = _TreeComponent.GetIntProperty("cover_size", 1, false);
@@ -395,6 +393,8 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
                                      4, 10, 1, 1,
                                       FLOAT_PI_VALUE/3,
                                      -FLOAT_PI_VALUE/3);
+
+  l_pComponentPlayerController->m_vPosInicial = _vPosition;
 
   CComponent3rdPSCamera *l_pComponent3rdPSCamera = new CComponent3rdPSCamera();
   //l_pComponent3rdPSCamera->Init(m_pPlayerEntity, 0, 0);
