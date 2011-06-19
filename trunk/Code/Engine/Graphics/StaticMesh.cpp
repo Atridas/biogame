@@ -215,6 +215,9 @@ bool CStaticMesh::Load()
     m_vMaterials.push_back(l_pMaterial);
   }
 
+  m_vIndexBuffer.clear();
+  m_vVertexBuffer.clear();
+
   int l_i = 0;
   // ----------------------------- BUFFERS ----------------------------------------
   for(int i = 0; i < l_usNumMaterials; i++)
@@ -267,8 +270,19 @@ bool CStaticMesh::Load()
     
 
     //CARREGUEM LES VERSIONS SIMPLES DELS VB I IB PER LA FISICA
-    m_vIndexBuffer = CalcSimpleIndexBuffer(l_pIndexList,sizeof(uint32),l_IndexCount);
-    m_vVertexBuffer = CalcSimpleVertexBuffer(l_pVertexBuffer,l_usVertexSize,l_VertexCount);
+    vector<uint32> l_vIndexBuffer = CalcSimpleIndexBuffer(l_pIndexList,sizeof(uint32),l_IndexCount);
+    vector<Vect3f> l_vVertexBuffer = CalcSimpleVertexBuffer(l_pVertexBuffer,l_usVertexSize,l_VertexCount);
+
+    int l_vOldVertexNum = m_vVertexBuffer.size();
+    for(uint32 k= 0; k < l_vIndexBuffer.size(); ++k)
+    {
+      m_vIndexBuffer.push_back(l_vIndexBuffer[k] + l_vOldVertexNum);
+    }
+
+    for(uint32 k= 0; k < l_vVertexBuffer.size(); ++k)
+    {
+      m_vVertexBuffer.push_back(l_vVertexBuffer[k]);
+    }
 
     if(l_pusVertexType[l_i] == SNORMALTEXTUREDVERTEX::GetVertexType())
     {

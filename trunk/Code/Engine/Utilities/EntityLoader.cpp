@@ -404,7 +404,7 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
   //m_pCamera = l_pComponent3rdPSCamera->GetCamera();
 
   CComponentPhysXController *l_pComponentPhysXController = new CComponentPhysXController();
-  l_pComponentPhysXController->Init(l_pPlayer, 0.3f, 1.5f, 10.0f, 0.1f, 0.01f, ECG_PERSONATGE );
+  l_pComponentPhysXController->Init(l_pPlayer, 0.3f, 1.5f, 45.0f, 0.1f, 0.2f, ECG_PERSONATGE );
 
   (new CComponentVida())->Init(l_pPlayer, 100.f);
 
