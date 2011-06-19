@@ -154,12 +154,6 @@
     <Filter Include="Materials\MaterialDecorators\PropertyDecorators\BumpDecorator">
       <UniqueIdentifier>{a24fea53-9e85-4afe-88c7-b8a388d55234}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Explosions">
-      <UniqueIdentifier>{59c6741d-2480-44b1-bcfa-d5ef75e232b7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Explosions\ExplosionsManager">
-      <UniqueIdentifier>{842fe1c4-9a1c-4016-bd90-e28c474102d5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Materials\MaterialDecorators\PropertyDecorators\SpecularPropertyDecorator">
       <UniqueIdentifier>{a3105cc8-1c04-4baa-991f-e56ac65adb6f}</UniqueIdentifier>
     </Filter>
@@ -318,15 +312,6 @@
     <ClCompile Include="ParticleManager.cpp">
       <Filter>Particle\ParticleManager</Filter>
     </ClCompile>
-    <ClCompile Include="BillBoard.cpp">
-      <Filter>Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="ExplosionsManager.cpp">
-      <Filter>Explosions\ExplosionsManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Explosion.cpp">
-      <Filter>Explosions</Filter>
-    </ClCompile>
     <ClCompile Include="Room.cpp">
       <Filter>Portalling\Room</Filter>
     </ClCompile>
@@ -458,9 +443,6 @@
     <ClInclude Include="include\ParticleManager.h">
       <Filter>Particle\ParticleManager</Filter>
     </ClInclude>
-    <ClInclude Include="include\BillBoard.h">
-      <Filter>Particle</Filter>
-    </ClInclude>
     <ClInclude Include="include\Material.h">
       <Filter>Materials</Filter>
     </ClInclude>
@@ -502,12 +484,6 @@
     </ClInclude>
     <ClInclude Include="include\PropertyDecorator.h">
       <Filter>Materials\MaterialDecorators\PropertyDecorators</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ExplosionsManager.h">
-      <Filter>Explosions\ExplosionsManager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Explosion.h">
-      <Filter>Explosions</Filter>
     </ClInclude>
     <ClInclude Include="include\SpecularPropertyDecorator.h">
       <Filter>Materials\MaterialDecorators\PropertyDecorators\SpecularPropertyDecorator</Filter>

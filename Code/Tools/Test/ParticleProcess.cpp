@@ -30,7 +30,6 @@
 #include "InstanceMesh.h"
 #include "GameObject.h"
 #include "ParticleManager.h"
-#include "BillBoard.h"
 
 #include "ComponentObject3D.h"
 #include "ComponentMovement.h"
@@ -47,10 +46,7 @@
 bool CParticleProcess::Init()
 {
 
-  //m_pBillBoard.SetPos( Vect3f(0.332061f, 2.5184f, 8.16266f));
-  //m_pBillBoard.SetSize( 1.79023f, 1.61947f);
   
-
   CORE->GetParticleManager()->SetAllEmittersActive(true);
   m_pObject = new CObject3D();
   m_fVelocity = 1;
@@ -89,54 +85,7 @@ bool CParticleProcess::Init()
   }
   m_bRenderLights = false;
 
- /* // Creem la entitat del jugador ----------------------------------------------------------------
-
-  m_pPlayerEntity = CORE->GetEntityManager()->CreateEntity();
-  CORE->GetEntityManager()->SetName("Player", m_pPlayerEntity);
-
-  CComponentObject3D *l_pComponentObject3D = new CComponentObject3D();
-  l_pComponentObject3D->Init(m_pPlayerEntity);
-  l_pComponentObject3D->SetPosition(Vect3f(3.1f,1.0f,-8.56f));
-  
-
-  (new CComponentMovement)->Init(m_pPlayerEntity);
-
-  CComponentRenderableObject * l_pComponentRenderableObject = new CComponentRenderableObject();
-  l_pComponentRenderableObject->InitAnimatedModel(m_pPlayerEntity, "Player Character", "riggle");
-  l_pComponentRenderableObject->m_bBlockPitchRoll = true;
-  l_pComponentRenderableObject->m_fHeightAdjustment = -1.f;
-  l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
-
-  CComponentPlayerController *l_pComponentPlayerController = new CComponentPlayerController();
-  l_pComponentPlayerController->Init(m_pPlayerEntity,
-                                      //Actions
-                                     "MoveFwd",
-                                     "MoveBack",
-                                     "MoveLeft",
-                                     "MoveRight",
-                                     "Walk",
-                                     "Run",
-                                      //Animations
-                                     "idle",
-                                     "walk",
-                                     "walk",
-                                     "walk",
-                                     "walk",
-                                      //Speed
-                                     4, 10, 1, 1,
-                                      FLOAT_PI_VALUE/3,
-                                     -FLOAT_PI_VALUE/3);
-
-  CComponent3rdPSCamera *l_pComponent3rdPSCamera = new CComponent3rdPSCamera();
-  //l_pComponent3rdPSCamera->Init(m_pPlayerEntity, 0, 0);
-  //((CThPSCamera*)l_pComponent3rdPSCamera->GetCamera())->SetZoom(0);
-  l_pComponent3rdPSCamera->Init(m_pPlayerEntity, 1, 0.5f);
-
-  m_pCamera = l_pComponent3rdPSCamera->GetCamera();
-
-  CComponentPhysXController *l_pComponentPhysXController = new CComponentPhysXController();
-  l_pComponentPhysXController->Init(m_pPlayerEntity, 0.3f, 1.5f, 10.0f, 0.1f, 0.5f, 1);
-  */
+ 
 
   SetOk(true);
   return IsOk();
@@ -153,10 +102,7 @@ void CParticleProcess::Update(float _fElapsedTime)
    if(m_pObject)// && m_pObjectBot) 
   {
 
-    //m_pBillBoard.Update(_fElapsedTime,m_pObjectCamera);
-    //update del player
-    //CObject3D* m_pPlayerPos = CORE->GetEntityManager()->GetEntity("Player")->GetComponent<CComponentObject3D>(CBaseComponent::ECT_OBJECT_3D);
-
+    
     CORE->GetParticleManager()->Update(_fElapsedTime,m_pObjectCamera);
     //Actualitze el pitch i el yaw segons els delta del mouse
     float l_fPitch, l_fYaw;
@@ -212,31 +158,19 @@ void CParticleProcess::RenderScene(CRenderManager* _pRM)
   //*******************************************************
   
   //Render Objects
-  // Ensenya tot el Hangar i els seus objectes
+  // Ensenya tot l'escenari
   CORE->GetRenderableObjectsManager()->Render(_pRM);
 
   _pRM->DrawGrid(0.1f,colCYAN,1,1);
   //_pRM->DrawPlane(10,Vect3f(0,1,0),0,colBLUE,10,10);
   CORE->GetParticleManager()->Render(_pRM);
-  //CTexture*  texture = CORE->GetTextureManager()->GetResource("Data/Textures/texturas particulas/cartaAjuste.png");
-  //m_pBillBoard.Render(_pRM->GetDevice(), texture->GetD3DTexture() );
-  
-   
+ 
   
 }
 
 void CParticleProcess::RenderINFO(CRenderManager* _pRM)
 {
-  /*uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("xfiles");
- 
-  int l_iPosicio = 0;
-  int l_iPosicio2 = 130;
-  string l_szMsg("Sense Objecte");
   
-  stringstream l_SStreamHelp;
-
- 
-  _pRM->DrawAxis();  */
 }
 
 

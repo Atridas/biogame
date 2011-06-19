@@ -3,7 +3,6 @@
 #include "Process.h"
 #include "ParticleEmitter.h"
 #include <base.h>
-#include "BillBoard.h"
 #include "EntityManager.h"
 
 
@@ -65,7 +64,6 @@ private:
   float                 m_fVelocity;
   bool                  m_bRenderLights;
   float                 m_fPhysxVelocity;
-  CBillBoard            m_pBillBoard;
   CGameEntity*          m_pPlayerEntity;
   CPhysicUserData*      m_pUserData;
   CPhysicActor*         m_pPActorPlane;

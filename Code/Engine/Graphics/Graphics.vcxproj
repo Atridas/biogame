@@ -94,15 +94,12 @@
     <ClCompile Include="AnimatedCoreModel.cpp" />
     <ClCompile Include="AnimatedInstanceModel.cpp" />
     <ClCompile Include="AnimatedModelManager.cpp" />
-    <ClCompile Include="BillBoard.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="DrawQuadSceneEffect.cpp" />
     <ClCompile Include="DrawQuadToTextureSceneEffect.cpp" />
     <ClCompile Include="Effect.cpp" />
     <ClCompile Include="EffectManager.cpp" />
-    <ClCompile Include="Explosion.cpp" />
-    <ClCompile Include="ExplosionsManager.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="FPSCamera.cpp" />
     <ClCompile Include="Frustum.cpp" />
@@ -141,7 +138,6 @@
     <ClInclude Include="include\AnimatedInstanceModel.h" />
     <ClInclude Include="include\AnimatedMeshEmptyMaterial.h" />
     <ClInclude Include="include\AnimatedModelManager.h" />
-    <ClInclude Include="include\BillBoard.h" />
     <ClInclude Include="include\BumpPropertyDecorator.h" />
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\DiffuseTextureDecorator.h" />
@@ -151,8 +147,6 @@
     <ClInclude Include="include\Effect.h" />
     <ClInclude Include="include\EffectManager.h" />
     <ClInclude Include="include\EmptyMaterial.h" />
-    <ClInclude Include="include\Explosion.h" />
-    <ClInclude Include="include\ExplosionsManager.h" />
     <ClInclude Include="include\FontManager.h" />
     <ClInclude Include="include\FPSCamera.h" />
     <ClInclude Include="include\Frustum.h" />
