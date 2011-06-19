@@ -997,7 +997,7 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
       }
 
 
-      g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActorShoot(l_vVect,l_vDirection,4,g_pUserDataSHOOT,l_CInfo, 20.0f);
+      g_pUserDataSHOOT = l_pPhysManager->RaycastClosestActorShoot(l_vVect,l_vDirection,4,l_CInfo, 20.0f);
       g_vCollisions.push_back(l_CInfo);
 
       

@@ -656,7 +656,7 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActor (const Vect3f posRay, cons
 }
 
 
-CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot (const Vect3f posRay, const Vect3f& dirRay, uint32 impactMask, CPhysicUserData* impactObject, SCollisionInfo& info, float _fPower)
+CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot (const Vect3f posRay, const Vect3f& dirRay, uint32 impactMask, SCollisionInfo& info, float _fPower)
 {
   
   //NxUserRaycastReport::ALL_SHAPES
@@ -676,7 +676,7 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot (const Vect3f posRay,
 		return NULL;
 	}
 	NxActor* actor = &closestShape->getActor();
-	impactObject =(CPhysicUserData*)actor->userData;
+	CPhysicUserData* impactObject =(CPhysicUserData*)actor->userData;
 	//Si está petando aquí quiere decir que se ha registrado un objeto físico sin proporcionarle UserData
 	assert(impactObject);
 
