@@ -9,7 +9,7 @@
 #include "PhysicsManager.h"
 #include "ComponentObject3D.h"
 #include "OmniLight.h"
-//#include "ParticleManager.h"
+#include "ParticleManager.h"
 
 #include "Core.h"
 
@@ -18,11 +18,13 @@ void CGameProcess::Update(float _fElapsedTime)
   CObject3D* m_pPlayerPos = CORE->GetEntityManager()->GetEntity("Player")->GetComponent<CComponentObject3D>(CBaseComponent::ECT_OBJECT_3D);
 
   m_pOmniLight->SetPosition(m_pPlayerPos->GetPosition());
+  CORE->GetParticleManager()->Update(_fElapsedTime,m_pCamera);
 }
 
 void CGameProcess::RenderScene(CRenderManager* _pRM)
 {
   CORE->GetRenderableObjectsManager()->Render(_pRM);
+  CORE->GetParticleManager()->Render(_pRM);
 }
 
 void CGameProcess::RenderINFO(CRenderManager* _pRM)
@@ -33,7 +35,7 @@ void CGameProcess::RenderINFO(CRenderManager* _pRM)
 bool CGameProcess::Init()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"CGameProcess::Init");
-  //LOGGER->SaveLogsInFile();
+  LOGGER->SaveLogsInFile();
 
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
   CORE->GetLightManager()->SetLightsEnabled(true);
@@ -53,7 +55,7 @@ bool CGameProcess::Init()
   m_pOmniLight->SetActive(true);
 
 
-  //CORE->GetParticleManager()->SetAllEmittersActive(true);
+  CORE->GetParticleManager()->SetAllEmittersActive(true);
 
   SetOk(true);
   return IsOk();
