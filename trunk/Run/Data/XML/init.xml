@@ -16,6 +16,7 @@
   </AnimatedModelManager>
     
 	<EffectManager xml="Data/XML/Effects.xml"/>
+  <ParticleManager xml="Data/XML/Particles.xml"/>
 	<FontManager fontsXML="./Data/XML/Fonts.xml"/>
 	<Languages default="cat">
 		<Language languageXML="./Data/Language/spanish.xml"/>
