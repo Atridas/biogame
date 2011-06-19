@@ -14,8 +14,11 @@
 #include "ComponentRenderableObject.h"
 #include "ComponentRagdoll.h"
 #include "ComponentCover.h"
+#include "ComponentVida.h"
 
 #include "PhysicsManager.h"
+#include "AnimatedCoreModel.h"
+#include "Material.h"
 
 bool CComponentPlayerController::Init(CGameEntity *_pEntity)
 {
@@ -112,22 +115,6 @@ void CComponentPlayerController::Update(float _fDeltaTime)
 {
   assert(IsOk());
 
-  float l_fPitch, l_fYaw;
-
-  Vect3i l_vVec = INPUT_MANAGER->GetMouseDelta();
-
-  l_fPitch = m_pObject3D->GetPitch();
-  l_fYaw = m_pObject3D->GetYaw();
-  
-  l_fYaw -= l_vVec.x*_fDeltaTime*m_fYawSpeed;
-
-  l_fPitch -= l_vVec.y*_fDeltaTime*m_fPitchSpeed;
-  if(l_fPitch < m_fMinPitchAngle) l_fPitch = m_fMinPitchAngle;
-  if(l_fPitch > m_fMaxPitchAngle) l_fPitch = m_fMaxPitchAngle;
-  
-  //m_pObject3D->SetPitch(l_fPitch);
-  //m_pObject3D->SetYaw(l_fYaw);
-
   
   CActionManager* l_pActionManager = CORE->GetActionManager();
 
@@ -137,6 +124,21 @@ void CComponentPlayerController::Update(float _fDeltaTime)
   } else if(l_pActionManager->IsActionActive(m_szWalk))
   {
     m_fSpeed = m_fWalkSpeed;
+  }
+
+  CComponentVida* l_pComponentVida = GetEntity()->GetComponent<CComponentVida>();
+  const vector<CMaterial*>& l_vMaterials = m_pAnimatedModel->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetMaterials();
+
+  float l_fMin = 0.3f;
+  float l_fMax = 1.5f;
+  float l_fGlowIntensity = l_pComponentVida->m_fVida/100 * (l_fMax - l_fMin) + l_fMin;
+
+  vector<CMaterial*>::const_iterator l_itMaterial = l_vMaterials.begin();
+
+  while(l_itMaterial != l_vMaterials.end())
+  {
+    (*l_itMaterial)->SetGlowIntensity(l_fGlowIntensity);
+    ++l_itMaterial;
   }
 }
 

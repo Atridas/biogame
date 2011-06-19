@@ -183,6 +183,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPhysXController,CBaseComponent>("ComponentPhysXController")
       .def("init", &CComponentPhysXController::Init)
+      .def("set_height", &CComponentPhysXController::SetHeight)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPhysXBox, CBaseComponent>("ComponentPhysXBox")

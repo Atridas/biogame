@@ -234,3 +234,13 @@ void CPhysicController::SetGroup(int _iGroup)
     shapes[i]->setGroup(_iGroup);
   }
 }
+
+
+void CPhysicController::SetHeight(float _fHeight)
+{
+  NxCapsuleController* l_CC = dynamic_cast<NxCapsuleController*>(m_pPhXController);
+  if(l_CC)
+  {
+    l_CC->setHeight(_fHeight);
+  }
+}

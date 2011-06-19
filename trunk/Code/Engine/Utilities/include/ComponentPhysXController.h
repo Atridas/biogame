@@ -35,6 +35,8 @@ public:
   void UpdatePrePhysX(float _fDeltaTime);
   void UpdatePostPhysX(float _fDeltaTime);
 
+  void SetHeight(float _fHeight);
+
   virtual ~CComponentPhysXController(void) {Done();};
 
 protected:

@@ -413,6 +413,7 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
   //(new CComponentRagdoll())->Init(m_pPlayerEntity, "Data/Animated Models/Riggle/Skeleton.xml");
   (new CComponentMirilla())->Init(l_pPlayer, "laser_pilota");
 
+
   return l_pPlayer;
 }
 
