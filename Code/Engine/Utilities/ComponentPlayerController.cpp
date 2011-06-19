@@ -252,12 +252,25 @@ void CComponentPlayerController::Respawn()
   }
 }
 
-void CComponentPlayerController::Cover()
+bool CComponentPlayerController::Cover()
 {
-  CheckCover();
+  SCollisionInfo l_sCInfo;
+  CPhysicUserData* l_pUserData = CheckCover(l_sCInfo);
+
+  m_vCoverNormal = Vect3f(0.0f);
+  m_vCoverPosition = Vect3f(0.0f);
+
+  if(l_pUserData && l_sCInfo.m_fDistance <= 2.0f)
+  {
+    m_vCoverNormal = l_sCInfo.m_Normal;
+    m_vCoverPosition = l_sCInfo.m_CollisionPoint;
+    return true;
+  }
+
+  return false;
 }
 
-void CComponentPlayerController::CheckCover()
+CPhysicUserData* CComponentPlayerController::CheckCover(SCollisionInfo& _sCInfo)
 {  
   CCamera* l_pCamera = GetEntity()->GetComponent<CComponent3rdPSCamera>(ECT_3RD_PERSON_SHOOTER_CAMERA)->GetCamera();
   Vect3f l_vPos = m_pObject3D->GetPosition() - Vect3f(0.0f,0.5f,0.0f);
@@ -268,21 +281,9 @@ void CComponentPlayerController::CheckCover()
 
   Vect3f l_vDir = l_mRot*Vect3f(1.0f,0.0f,0.0f);
 
-  SCollisionInfo l_CInfo;
-  CPhysicUserData* l_pUserData = 0;
-
   CPhysicsManager *l_pPM = CORE->GetPhysicsManager();
 
-  l_pUserData = l_pPM->RaycastClosestActor(l_vPos,l_vDir,l_pPM->GetCollisionMask(ECG_COBERTURES),l_CInfo);
+  CPhysicUserData* l_pUserData = l_pPM->RaycastClosestActor(l_vPos,l_vDir,l_pPM->GetCollisionMask(ECG_COBERTURES),_sCInfo);
 
-  if( l_pUserData && l_CInfo.m_fDistance <= 2.0f)
-  {
-    CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
-    (new CComponentLaser())->Init(l_pLaser,
-                                  l_vPos,
-                                  l_CInfo.m_CollisionPoint,
-                                  1.f);
-
-    l_pUserData->GetEntity();
-  }
+  return l_pUserData;
 }

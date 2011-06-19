@@ -10,6 +10,8 @@
 class CComponentObject3D;
 class CComponentMovement;
 class CRenderableAnimatedInstanceModel;
+class CPhysicUserData;
+struct SCollisionInfo;
 //--------------------
 
 class CComponentPlayerController :
@@ -19,7 +21,7 @@ public:
 
 
   CComponentPlayerController():
-      m_pObject3D(0), m_pMovement(0),
+      m_pObject3D(0), m_pMovement(0), m_pCoverEntity(0),
 
       m_pAnimatedModel(0),
       m_szCurrentAnimation(""),
@@ -33,7 +35,10 @@ public:
       m_fTime(0),
      
       m_fMaxPitchAngle( FLOAT_PI_VALUE/3),
-      m_fMinPitchAngle(-FLOAT_PI_VALUE/3)
+      m_fMinPitchAngle(-FLOAT_PI_VALUE/3),
+
+      m_vCoverNormal(Vect3f(0.0f)),
+      m_vCoverPosition(Vect3f(0.0))
      
       {};
 
@@ -102,6 +107,9 @@ public:
   float m_fMaxPitchAngle;
   float m_fMinPitchAngle;
   
+  Vect3f m_vCoverNormal;
+  Vect3f m_vCoverPosition;
+  CGameEntity* m_pCoverEntity;
 
   float m_fSpeed;
   string m_szCurrentAnimation;
@@ -111,13 +119,13 @@ public:
   void Shoot();
   void Die();
   void Respawn();
-  void Cover();
+  bool Cover();
 
 protected:
   virtual void Release() {};
 
 private:
-  void CheckCover();
+  CPhysicUserData* CheckCover(SCollisionInfo& _sCInfo);
   //Altres components referenciats
   CComponentMovement * m_pMovement;
   CComponentObject3D * m_pObject3D;

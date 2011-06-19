@@ -24,6 +24,7 @@ public:
 
       m_bRemoveRenderableObject(false),
       m_bBlockPitchRoll(false),
+      m_bBlockYaw(false),
       m_fHeightAdjustment(0),
       m_fYawAdjustment(0),
       m_bActive(true)
@@ -43,6 +44,7 @@ public:
 
   bool m_bRemoveRenderableObject;
   bool m_bBlockPitchRoll;
+  bool m_bBlockYaw;
   float m_fHeightAdjustment;
   float m_fYawAdjustment;
 

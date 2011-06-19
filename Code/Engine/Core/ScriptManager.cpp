@@ -384,6 +384,7 @@ void CScriptManager::RegisterLUAFunctions()
       .def("length_sq",    &Vect3f::SquaredLength)
       .def("normalize",    &Vect3f::Normalize)
       .def("get_proj_zx",  &Vect3f::GetProjZX)
+      .def("get_angle_y",  &Vect3f::GetAngleY)
   ];
 
   //Vect3f

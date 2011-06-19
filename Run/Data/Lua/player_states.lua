@@ -14,6 +14,7 @@ State_Player_Apuntar = {}
 State_Player_Tocat = {}
 State_Player_Morint = {}
 State_Player_Mort = {}
+State_Player_Cobertura_Baixa = {}
 
 -------------------------------------------------------------------------------------------------
 camera_player = function(_jugador, _dt)
@@ -92,11 +93,13 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   
   local direction, left
   local isMoving = false
+ 
   
   if ACTION_MANAGER:is_action_active('Cover') then
-	log('sergi')
-    player_controller:cover()
-    return
+    if player_controller:cover() then
+      _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Baixa')
+      return
+    end
   end
 
   if ACTION_MANAGER:is_action_active('Aim') then
@@ -481,4 +484,67 @@ end
 State_Player_Mort['Receive'] = function(_jugador, _event)
 
 end
+
+
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-- Cobertura Baixa!!!! --------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+
+
+
+-------------------------------------------------------------------------------------------------
+State_Player_Cobertura_Baixa['Enter'] = function(_jugador)
+  
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  local animation = _jugador:get_component(BaseComponent.animation)
+  local moviment = _jugador:get_component(BaseComponent.movement)
+  local object3d = _jugador:get_component(BaseComponent.object_3d)
+  local renderable_object = _jugador:get_component(BaseComponent.renderable_object)
+  
+  moviment.movement = moviment.movement + player_controller.cover_position + player_controller.cover_normal * 1.0 - object3d:get_position()
+  
+  object3d:set_yaw(-((player_controller.cover_normal):get_angle_y()) - math.pi*0.5)
+  
+  --renderable_object:set_yaw(object3d:get_yaw()) VULL FER AIXO
+  
+  animation:set_cycle('CoverAvallDretaIdle', 1.0)
+  animation:set_animation('CoverAvallDreta', 0.0)
+  player_controller.time = 0
+  
+  renderable_object.block_yaw = true
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Cobertura_Baixa['Exit'] = function(_jugador)
+
+  local animation = _jugador:get_component(BaseComponent.animation)
+  animation:clear_cycle(0.3)
+  
+  _jugador:get_component(BaseComponent.renderable_object).block_yaw = false
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Cobertura_Baixa['Update'] = function(_jugador, _dt)
+
+  local pitch, yaw, object3d = camera_player(_jugador, _dt)
+  
+  if ACTION_MANAGER:is_action_active('Cover') then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+  end
+
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Cobertura_Baixa['Receive'] = function(_jugador, _event)
+
+  if _event.msg == Event.rebre_impacte then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Tocat')
+  elseif _event.msg == Event.morir then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Morint')
+  end
+  
+end
+
 
