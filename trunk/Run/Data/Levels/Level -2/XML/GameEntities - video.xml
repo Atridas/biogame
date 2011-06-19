@@ -68,4 +68,5 @@
     <RenderableObject name="balla1" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
+  <Miner position="4.24393 1.04204 10.0279" yaw="0.0" name="Miner_video00" />
 </Entities>

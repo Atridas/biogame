@@ -113,6 +113,7 @@ public:
 
   float m_fSpeed;
   string m_szCurrentAnimation;
+  Vect3f m_vPosInicial;
 
   float m_fTime;
 

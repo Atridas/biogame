@@ -48,9 +48,7 @@
 	<mesh name="Lampada_autoilum" path="Data/Meshes/Lampada_autoilum.mesh" max="0.285697 0.179001 0.285697" min="-0.285697 0.0 -0.285697" />
 	<mesh name="Vidre_cap1" path="Data/Meshes/Vidre_cap1.mesh" max="0.334446 0.916121 0.460365" min="-0.334447 -0.916121 -0.460364" />
 	<mesh name="Vidre_cap02" path="Data/Meshes/Vidre_cap02.mesh" max="0.460364 0.916121 0.334447" min="-0.460365 -0.916121 -0.334447" />
-	<mesh name="Vidre_cap03" path="Data/Meshes/Vidre_cap03.mesh" max="0.318278 0.916121 0.43811" min="-0.318279 -0.916121 -0.438109" />
 	<mesh name="fluorescente_apagat01" path="Data/Meshes/fluorescente_apagat01.mesh" max="0.772501 2.49151 0.104" min="-0.772499 -0.115818 -0.104" />
-	<mesh name="Vidre_cap04" path="Data/Meshes/Vidre_cap04.mesh" max="0.437122 0.916121 0.317562" min="-0.437123 -0.916121 -0.317562" />
 	<mesh name="bombeta_florescent" path="Data/Meshes/bombeta_florescent.mesh" max="1.3 0.039633 0.0620251" min="0.0 -0.0396333 -0.0620246" />
 	<mesh name="fluorescente_DEF11" path="Data/Meshes/fluorescente_DEF11.mesh" max="0.772501 2.49151 0.104" min="-0.772499 -0.115818 -0.104" />
 	<mesh name="focus" path="Data/Meshes/focus.mesh" max="1.46449 0.491696 0.527504" min="-1.46449 -0.491696 -0.527504" />

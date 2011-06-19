@@ -7,12 +7,11 @@
   <Entity name="porta_sub2">
     <Object3D />
     <RenderableObject name="porta_sub2" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="fluorescente_DEF18">
     <Object3D />
     <RenderableObject name="fluorescente_DEF18" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="Llum09">
     <Object3D />
@@ -25,7 +24,6 @@
   <Entity name="fluorescente_DEF17">
     <Object3D />
     <RenderableObject name="fluorescente_DEF17" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="luz_florescente08">
     <Object3D />
@@ -44,7 +42,7 @@
   <Entity name="porta_sub1">
     <Object3D />
     <RenderableObject name="porta_sub1" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="Llum08">
     <Object3D />
@@ -53,7 +51,6 @@
   <Entity name="fluorescente_DEF15">
     <Object3D />
     <RenderableObject name="fluorescente_DEF15" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="Llum07">
     <Object3D />
@@ -62,7 +59,6 @@
   <Entity name="fluorescente_DEF16">
     <Object3D />
     <RenderableObject name="fluorescente_DEF16" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="luz_florescente06">
     <Object3D />
@@ -122,7 +118,7 @@
   <Entity name="tubo3">
     <Object3D />
     <RenderableObject name="tubo3" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="Llum10">
     <Object3D />
@@ -131,7 +127,6 @@
   <Entity name="fluorescente_DEF19">
     <Object3D />
     <RenderableObject name="fluorescente_DEF19" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="luz_florescente10">
     <Object3D />
@@ -140,14 +135,14 @@
   <Entity name="viga3">
     <Object3D />
     <RenderableObject name="viga3" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="HighCoverPas02">
-    <Object3D position="11.9283 0.904164 -4.75336" yaw="10.2766" pitch="0.0" roll="0.0" />
-    <HighCover shape="box" size="0.42265 1.9508 0.242799" collision_group="cobertura" cover_size="0" />
+    <Object3D position="12.3813 0.904164 -4.42643" yaw="20.7563" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.60328 1.9508 0.242798" collision_group="cobertura" cover_size="0" />
   </Entity>
   <Entity name="HighCoverPas01">
-    <Object3D position="9.77666 0.904164 -5.66533" yaw="10.2766" pitch="0.0" roll="0.0" />
-    <HighCover shape="box" size="0.42265 1.9508 0.242799" collision_group="cobertura" cover_size="0" />
+    <Object3D position="9.23893 0.904164 -5.81932" yaw="20.5083" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.56504 1.9508 0.242798" collision_group="cobertura" cover_size="0" />
   </Entity>
+  <Miner position="20.8841 1.9223 5.44801" yaw="0.0" name="Dummy01" />
 </Entities>

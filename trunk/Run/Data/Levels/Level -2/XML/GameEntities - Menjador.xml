@@ -623,12 +623,12 @@
   <Entity name="columna08">
     <Object3D />
     <RenderableObject name="columna08" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="vitrina">
     <Object3D />
     <RenderableObject name="vitrina" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="Altaveus00">
     <Object3D />
@@ -645,17 +645,17 @@
   <Entity name="barra3">
     <Object3D />
     <RenderableObject name="barra3" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="barra1">
     <Object3D />
     <RenderableObject name="barra1" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="barra2">
     <Object3D />
     <RenderableObject name="barra2" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="Cables_menjador">
     <Object3D />
@@ -664,67 +664,67 @@
   <Entity name="taula2">
     <Object3D />
     <RenderableObject name="taula2" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="taula1">
     <Object3D />
     <RenderableObject name="taula1" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="taula3">
     <Object3D />
     <RenderableObject name="taula3" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="taula4">
     <Object3D />
     <RenderableObject name="taula4" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="taula05">
     <Object3D />
     <RenderableObject name="taula05" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="Caixa_gran04">
     <Object3D />
     <RenderableObject name="Caixa_gran04" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="Caixa_gran02">
     <Object3D />
     <RenderableObject name="Caixa_gran02" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="Caixa_gran01">
     <Object3D />
     <RenderableObject name="Caixa_gran01" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="Caixa_gran00">
     <Object3D />
     <RenderableObject name="Caixa_gran00" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="Caixa_gran03">
     <Object3D />
     <RenderableObject name="Caixa_gran03" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="Caixa_estatica_petita00">
     <Object3D />
     <RenderableObject name="Caixa_estatica_petita00" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="Caixa_estatica_petita01">
     <Object3D />
     <RenderableObject name="Caixa_estatica_petita01" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="Caixa_estatica_petita02">
     <Object3D />
     <RenderableObject name="Caixa_estatica_petita02" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="ventilacio1">
     <Object3D />
@@ -737,21 +737,22 @@
   <Entity name="Caixes_separadores">
     <Object3D />
     <RenderableObject name="Caixes_separadores" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="Jukebox">
     <Object3D />
     <RenderableObject name="Jukebox" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="tauletas">
     <Object3D />
     <RenderableObject name="tauletas" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="tauleta">
     <Object3D />
     <RenderableObject name="tauleta" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="Quadres">
     <Object3D />
@@ -821,42 +822,42 @@
   <Entity name="columna01">
     <Object3D />
     <RenderableObject name="columna01" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="columna02">
     <Object3D />
     <RenderableObject name="columna02" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="columna03">
     <Object3D />
     <RenderableObject name="columna03" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="columna04">
     <Object3D />
     <RenderableObject name="columna04" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="columna05">
     <Object3D />
     <RenderableObject name="columna05" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="columna06">
     <Object3D />
     <RenderableObject name="columna06" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="colunma07">
     <Object3D />
     <RenderableObject name="colunma07" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="fogons">
     <Object3D />
     <RenderableObject name="fogons" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="fluorescente_apagat">
     <Object3D />
@@ -877,9 +878,9 @@
     <RenderableObject name="fluorescente_DEF11" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="Llum03">
+  <Entity name="Llum_menjador00">
     <Object3D />
-    <RenderableObject name="Llum03" />
+    <RenderableObject name="Llum_menjador00" />
   </Entity>
   <Entity name="fluorescente_DEF12">
     <Object3D />
@@ -904,13 +905,13 @@
     <RenderableObject name="fluorescente_apagat02" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="Llum04">
+  <Entity name="Llum_menjador01">
     <Object3D />
-    <RenderableObject name="Llum04" />
+    <RenderableObject name="Llum_menjador01" />
   </Entity>
-  <Entity name="Llum05">
+  <Entity name="Llum_menjador02">
     <Object3D />
-    <RenderableObject name="Llum05" />
+    <RenderableObject name="Llum_menjador02" />
   </Entity>
   <Entity name="fluorescente_apagat03">
     <Object3D />
@@ -926,9 +927,9 @@
     <Object3D />
     <RenderableObject name="luz_florescente06" />
   </Entity>
-  <Entity name="Llum06">
+  <Entity name="Llum_menjador03">
     <Object3D />
-    <RenderableObject name="Llum06" />
+    <RenderableObject name="Llum_menjador03" />
   </Entity>
   <Entity name="fluorescente_DEF15">
     <Object3D />
@@ -939,9 +940,9 @@
     <Object3D />
     <RenderableObject name="luz_florescente07" />
   </Entity>
-  <Entity name="Llum07">
+  <Entity name="Llum_menjador04">
     <Object3D />
-    <RenderableObject name="Llum07" />
+    <RenderableObject name="Llum_menjador04" />
   </Entity>
   <Entity name="fluorescente_DEF16">
     <Object3D />
@@ -952,9 +953,9 @@
     <Object3D />
     <RenderableObject name="luz_florescente08" />
   </Entity>
-  <Entity name="Llum08">
+  <Entity name="Llum_menjador05">
     <Object3D />
-    <RenderableObject name="Llum08" />
+    <RenderableObject name="Llum_menjador05" />
   </Entity>
   <Entity name="fluorescente_DEF17">
     <Object3D />
@@ -965,9 +966,9 @@
     <Object3D />
     <RenderableObject name="luz_florescente09" />
   </Entity>
-  <Entity name="Llum09">
+  <Entity name="Llum_menjador06">
     <Object3D />
-    <RenderableObject name="Llum09" />
+    <RenderableObject name="Llum_menjador06" />
   </Entity>
   <Entity name="fluorescente_DEF18">
     <Object3D />
@@ -978,9 +979,9 @@
     <Object3D />
     <RenderableObject name="luz_florescente10" />
   </Entity>
-  <Entity name="Llum10">
+  <Entity name="Llum_menjador07">
     <Object3D />
-    <RenderableObject name="Llum10" />
+    <RenderableObject name="Llum_menjador07" />
   </Entity>
   <Entity name="fluorescente_DEF19">
     <Object3D />
@@ -991,9 +992,9 @@
     <Object3D />
     <RenderableObject name="luz_florescente11" />
   </Entity>
-  <Entity name="Llum11">
+  <Entity name="Llum_menjador08">
     <Object3D />
-    <RenderableObject name="Llum11" />
+    <RenderableObject name="Llum_menjador08" />
   </Entity>
   <Entity name="fluorescente_DEF20">
     <Object3D />
@@ -1120,4 +1121,23 @@
     <Object3D position="23.6894 1.52447 8.31715" yaw="21.9893" pitch="0.0" roll="0.0" />
     <HighCover shape="box" size="1.03869 3.01275 0.213394" collision_group="cobertura" cover_size="1" />
   </Entity>
+  <Entity name="HighCover_menjador20">
+    <Object3D position="6.99745 0.941787 17.3044" yaw="-35.1559" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="4.46026 1.86137 1.963" collision_group="cobertura" cover_size="2" />
+  </Entity>
+  <Entity name="LowCover_menjador11">
+    <Object3D position="8.919 0.511709 19.315" yaw="-36.9816" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="2.07298 0.982579 3.09318" collision_group="cobertura" cover_size="2" />
+  </Entity>
+  <Entity name="LowCover_menjador12">
+    <Object3D position="7.03398 0.511709 19.0505" yaw="-26.2522" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="0.983363 0.982579 1.01717" collision_group="cobertura" cover_size="2" />
+  </Entity>
+  <Miner position="-0.281395 2.34739 22.2964" yaw="0.0" name="Miner_menjador00" />
+  <Militar position="16.3101 2.34739 13.9439" yaw="0.0" name="Militar_menjador00" />
+  <Militar position="20.4234 2.34739 25.4376" yaw="0.0" name="Militar_menjador01" />
+  <Militar position="23.2716 2.34739 30.8669" yaw="0.0" name="Militar_menjador02" />
+  <Militar position="11.5827 2.34739 29.0349" yaw="0.0" name="Militar_menjador03" />
+  <Militar position="0.702496 2.34739 27.8419" yaw="0.0" name="Militar_menjador04" />
+  <Militar position="3.49921 2.34739 36.8697" yaw="0.0" name="Militar_menjador05" />
 </Entities>

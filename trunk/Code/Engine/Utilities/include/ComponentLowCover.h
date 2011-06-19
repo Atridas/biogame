@@ -16,8 +16,6 @@ public:
 
   virtual COVER_TYPE GetCoverType() {return COVER_LOW;};
 
-  virtual void ReceiveEvent(const SEvent& _Event);
-
 };
 
 #endif

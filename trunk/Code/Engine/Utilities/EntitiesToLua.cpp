@@ -30,6 +30,9 @@ extern "C"
 #include "ComponentVida.h"
 #include "ComponentRagdoll.h"
 #include "ComponentMirilla.h"
+#include "ComponentCover.h"
+#include "ComponentHighCover.h"
+#include "ComponentLowCover.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -139,11 +142,12 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPlayerController, CBaseComponent>("ComponentPlayerController")
-      .def("init",    (bool(CComponentPlayerController::*)(CGameEntity*))&CComponentPlayerController::Init)
-      .def("shoot",   &CComponentPlayerController::Shoot)
-      .def("cover",   &CComponentPlayerController::Cover)
-      .def("die",     &CComponentPlayerController::Die)
-      .def("respawn", &CComponentPlayerController::Respawn)
+      .def("init",        (bool(CComponentPlayerController::*)(CGameEntity*))&CComponentPlayerController::Init)
+      .def("shoot",       &CComponentPlayerController::Shoot)
+      .def("cover",       &CComponentPlayerController::Cover)
+      .def("die",         &CComponentPlayerController::Die)
+      .def("respawn",     &CComponentPlayerController::Respawn)
+      .def_readwrite("pos_inicial", &CComponentPlayerController::m_vPosInicial)
 
       .def_readwrite("move_fwd",   &CComponentPlayerController::m_szMoveForward)
       .def_readwrite("move_back",  &CComponentPlayerController::m_szMoveBack)
@@ -168,6 +172,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
 
       .def_readwrite("cover_normal", &CComponentPlayerController::m_vCoverNormal)
       .def_readwrite("cover_position", &CComponentPlayerController::m_vCoverPosition)
+      .def_readwrite("cover_entity",&CComponentPlayerController::m_pCoverEntity)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponent3rdPSCamera, CBaseComponent>("Component3rdPSCamera")
@@ -230,10 +235,23 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponentRagdoll, CBaseComponent>("ComponentRagdoll")
       .def("init",                     &CComponentRagdoll::Init)
       .def("set_active",               &CComponentRagdoll::SetActive)
+
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentMirilla, CBaseComponent>("ComponentMirilla")
       .def("set_active",               &CComponentMirilla::SetActive)
-  
+
+    // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentCover, CBaseComponent>("ComponentCover")
+      .def("get_cover_type",               &CComponentCover::GetCoverType)
+      .enum_("CoverType")
+      [
+          value("cover_low",            CComponentCover::COVER_LOW),
+          value("cover_high",             CComponentCover::COVER_HIGH)
+      ]
+    ,class_<CComponentHighCover, CBaseComponent>("ComponentHighCover")
+      .def("get_cover_type",               &CComponentCover::GetCoverType)
+    ,class_<CComponentLowCover, CBaseComponent>("ComponentLowCover")
+      .def("get_cover_type",               &CComponentCover::GetCoverType)
   ];
   
 
