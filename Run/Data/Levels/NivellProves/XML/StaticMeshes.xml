@@ -22,12 +22,12 @@
 	<mesh name="Llum" path="Data/Meshes/Llum.mesh" max="1.5527 2.0 0.842842" min="-1.5527 0.606994 -0.842842" />
 	<mesh name="CaixaPetita12" path="Data/Meshes/CaixaPetita12.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
 	<mesh name="CaixaPetita13" path="Data/Meshes/CaixaPetita13.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
-	<mesh name="BoxGlow" path="Data/Meshes/BoxGlow.mesh" max="5.74997 3.10692 4.44316" min="-5.74997 0.0 -4.44316" />
+	<mesh name="BoxGlow" path="Data/Meshes/BoxGlow.mesh" max="5.74997 4.62657 4.1752" min="-5.74997 -1.51965 -4.1752" />
 	<mesh name="BoxNormal" path="Data/Meshes/BoxNormal.mesh" max="5.74997 3.10692 4.44316" min="-5.74997 0.0 -4.44316" />
 	<mesh name="BoxAlpha" path="Data/Meshes/BoxAlpha.mesh" max="5.74998 3.10692 4.44316" min="-5.74997 0.0 -4.44316" />
 	<mesh name="BoxSpecular" path="Data/Meshes/BoxSpecular.mesh" max="5.74997 3.10692 4.44316" min="-5.74997 0.0 -4.44316" />
 	<mesh name="BoxAlpha01" path="Data/Meshes/BoxAlpha01.mesh" max="5.74997 3.10692 4.44316" min="-5.74997 0.0 -4.44316" />
 	<mesh name="Habitacio1" path="Data/Meshes/Habitacio1.mesh" max="-38.1271 3.45273 49.6658" min="-66.8544 0.0 -49.6658" />
-	<mesh name="BoxParallax" path="Data/Meshes/BoxParallax.mesh" max="5.74997 3.10692 4.44316" min="-5.74997 0.0 -4.44316" />
-	<mesh name="BoxGlowAlpha" path="Data/Meshes/BoxGlowAlpha.mesh" max="5.74997 3.10692 4.44316" min="-5.74997 0.0 -4.44316" />
+	<mesh name="BoxParallax" path="Data/Meshes/BoxParallax.mesh" max="5.4032 3.10692 6.40976" min="-5.40321 0.0 -6.40976" />
+	<mesh name="BoxGlowAlpha" path="Data/Meshes/BoxGlowAlpha.mesh" max="6.01972 3.08332 4.44316" min="-6.01973 0.0236011 -4.44316" />
 </meshes>

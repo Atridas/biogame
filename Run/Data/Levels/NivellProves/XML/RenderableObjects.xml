@@ -22,14 +22,12 @@
 	<RenderableObject name="Llum" class="StaticMesh" resource="Llum" position="-5.82813 2.0 28.9546" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="CaixaPetita12" class="StaticMesh" resource="CaixaPetita12" position="-22.8825 1.00344 5.75414" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="CaixaPetita13" class="StaticMesh" resource="CaixaPetita13" position="-22.8825 0.0 5.75432" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="BoxGlow" class="StaticMesh" resource="BoxGlow" position="-54.6592 0.0376649 7.0358" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="BoxGlow" class="StaticMesh" resource="BoxGlow" position="-54.6592 0.0376649 7.0358" yaw="0.0" pitch="0.0" roll="10.0" />
 	<RenderableObject name="BoxNormal" class="StaticMesh" resource="BoxNormal" position="-54.6592 0.0376649 -5.08054" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="BoxAlpha" class="StaticMesh" resource="BoxAlpha" position="-57.4588 0.0376649 -18.0876" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="BoxSpecular" class="StaticMesh" resource="BoxSpecular" position="-54.6592 0.0376649 -36.8326" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="BoxAlpha01" class="StaticMesh" resource="BoxAlpha01" position="-50.0065 0.0376649 -24.0954" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Habitacio1" class="StaticMesh" resource="Habitacio1" position="0.0 0.0 0.193104" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="BoxParallax" class="StaticMesh" resource="BoxParallax" position="-54.6592 0.0376668 30.1002" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="BoxGlowAlpha" class="StaticMesh" resource="BoxGlowAlpha" position="-54.6592 0.0376649 18.6366" yaw="0.0" pitch="0.0" roll="0.0" />
-  <RenderableObject name="ariggle" class="AnimatedModel" resource="riggle" position="5.1793 0.0 -5.2768" yaw="-90.0" pitch="0.0" roll="0" cycle="walk"/>
-  <RenderableObject name="rigglebot" class="AnimatedModel" resource="riggle" position="5.1793 0.0 -5.2768" yaw="-90.0" pitch="0.0" roll="0" cycle="walk"/>
+	<RenderableObject name="BoxParallax" class="StaticMesh" resource="BoxParallax" position="-54.6592 0.0376668 36.6172" yaw="-10.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="BoxGlowAlpha" class="StaticMesh" resource="BoxGlowAlpha" position="-54.6592 0.0376649 21.9762" yaw="0.0" pitch="5.0" roll="0.0" />
 </RenderableObjects>

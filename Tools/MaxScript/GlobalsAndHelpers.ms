@@ -44,7 +44,7 @@ function GetYaw transform =
 
 function GetPitch transform =
 (
-	return (transform as eulerangles).y
+	return -1 * (transform as eulerangles).y
 )
 
 function GetRoll transform =

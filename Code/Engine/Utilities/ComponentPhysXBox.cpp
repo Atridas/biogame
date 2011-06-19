@@ -33,7 +33,7 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity,
     m_pPhysXActor->CreateBody(_fDensity);
   }
 
-  m_pPhysXActor->AddBoxSphape(Vect3f( _fSizeX, _fSizeY, _fSizeZ), 
+  m_pPhysXActor->AddBoxSphape(Vect3f( _fSizeX * .5f, _fSizeY * .5f, _fSizeZ * .5f), 
                             Vect3f( _fPosX , _fPosY , _fPosZ ),
                             NULL, _iCollisionGroup);
 
