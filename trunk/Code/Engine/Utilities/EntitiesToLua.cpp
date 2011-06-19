@@ -165,6 +165,9 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def_readwrite("current_animation", &CComponentPlayerController::m_szCurrentAnimation)
 
       .def_readwrite("time", &CComponentPlayerController::m_fTime)
+
+      .def_readwrite("cover_normal", &CComponentPlayerController::m_vCoverNormal)
+      .def_readwrite("cover_position", &CComponentPlayerController::m_vCoverPosition)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponent3rdPSCamera, CBaseComponent>("Component3rdPSCamera")
@@ -187,6 +190,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("init_animated_model",                &CComponentRenderableObject::InitAnimatedModel)
       .def_readwrite("remove_renderable_object", &CComponentRenderableObject::m_bRemoveRenderableObject)
       .def_readwrite("active",                   &CComponentRenderableObject::m_bActive)
+      .def_readwrite("block_yaw",                &CComponentRenderableObject::m_bBlockYaw)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentMovement, CBaseComponent>("ComponentMovement")

@@ -100,7 +100,11 @@ void CComponentRenderableObject::PostUpdate(float _fDeltaTime)
       Vect3f l_vPosition = m_pObject3D->GetPosition();
       l_vPosition.y += m_fHeightAdjustment;
       m_pRenderableObject->SetPosition(l_vPosition);
-      m_pRenderableObject->SetYaw (m_pObject3D->GetYaw() + m_fYawAdjustment);
+
+      if(!m_bBlockYaw)
+      {
+        m_pRenderableObject->SetYaw (m_pObject3D->GetYaw() + m_fYawAdjustment);
+      }
     }
     else
     {   
