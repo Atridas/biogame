@@ -161,7 +161,7 @@ void CParticleProcess::RenderScene(CRenderManager* _pRM)
   // Ensenya tot l'escenari
   CORE->GetRenderableObjectsManager()->Render(_pRM);
 
-  _pRM->DrawGrid(0.1f,colCYAN,1,1);
+  //_pRM->DrawGrid(0.1f,colCYAN,1,1);
   //_pRM->DrawPlane(10,Vect3f(0,1,0),0,colBLUE,10,10);
   CORE->GetParticleManager()->Render(_pRM);
  
