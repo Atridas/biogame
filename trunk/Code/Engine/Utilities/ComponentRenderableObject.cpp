@@ -83,6 +83,11 @@ bool CComponentRenderableObject::InitAnimatedModel(CGameEntity *_pEntity, const 
   return IsOk();
 }
 
+void CComponentRenderableObject::SetYaw(float _fYaw)
+{
+  m_pRenderableObject->SetYaw(_fYaw);
+}
+
 void CComponentRenderableObject::PostUpdate(float _fDeltaTime)
 {
   assert(IsOk());
