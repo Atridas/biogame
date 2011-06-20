@@ -22,8 +22,9 @@
 
 
 
-bool CPhysxSkeleton::Init(const string& _szFileName, CalModel* _pCalModel, Mat44f _vMat, int _iColisionGroup)
+bool CPhysxSkeleton::Init(const string& _szFileName, CalModel* _pCalModel, Mat44f _vMat, int _iColisionGroup, CGameEntity *_pEntity)
 {
+  m_pEntity = _pEntity;
   m_mTransform = _vMat;
   SetSkeleton(_pCalModel->getSkeleton());
   vector<CalBone*> l_vLlistaBones = m_pCalSkeleton->getVectorBone();
@@ -115,17 +116,17 @@ bool CPhysxSkeleton::Load(const string& _szFileName)
     {
       if (l_szType=="box")
       {
-        l_pBone->AddBoxActor(l_XMLObject);
+        l_pBone->AddBoxActor(l_XMLObject, m_pEntity);
       }
 
       if (l_szType=="sphere")
       {
-        l_pBone->AddSphereActor(l_XMLObject);
+        l_pBone->AddSphereActor(l_XMLObject, m_pEntity);
       }
 
       if (l_szType=="capsule")
       {
-        l_pBone->AddCapsuleActor(l_XMLObject);
+        l_pBone->AddCapsuleActor(l_XMLObject, m_pEntity);
       }
     }
   }

@@ -85,7 +85,7 @@ Mat44f CPhysxBone::GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone)
 
 
 //Funcions per afegir els actors de fisica.
-bool CPhysxBone::AddBoxActor(CXMLTreeNode _XMLObjects)
+bool CPhysxBone::AddBoxActor(CXMLTreeNode _XMLObjects, CGameEntity* _pEntity)
 {
   string l_szName;
   Vect3f l_vSize,l_fMiddlePoint; 
@@ -120,7 +120,7 @@ bool CPhysxBone::AddBoxActor(CXMLTreeNode _XMLObjects)
   return true;
 }
 
-bool CPhysxBone::AddSphereActor(CXMLTreeNode _XMLObjects)
+bool CPhysxBone::AddSphereActor(CXMLTreeNode _XMLObjects, CGameEntity* _pEntity)
 {
   string l_szName;
   Vect3f l_vSize,l_fMiddlePoint; 
@@ -155,7 +155,7 @@ bool CPhysxBone::AddSphereActor(CXMLTreeNode _XMLObjects)
 }
 
 
-bool CPhysxBone::AddCapsuleActor(CXMLTreeNode _XMLObjects)
+bool CPhysxBone::AddCapsuleActor(CXMLTreeNode _XMLObjects, CGameEntity* _pEntity)
 {
 
   return true;

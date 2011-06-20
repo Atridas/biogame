@@ -17,7 +17,7 @@ bool CComponentRagdoll::Init(CGameEntity* _pEntity, const string& _szSkeletonFil
 
   m_pRagdoll = new CPhysxSkeleton(false);
   CalModel* l_pCalModel = m_pRAIM->GetAnimatedInstanceModel()->GetAnimatedCalModel();
-  bool l_bOk = m_pRagdoll->Init(_szSkeletonFile,l_pCalModel,m_pRAIM->GetMat44(),ECG_OBJECTES_DINAMICS);
+  bool l_bOk = m_pRagdoll->Init(_szSkeletonFile,l_pCalModel,m_pRAIM->GetMat44(),ECG_OBJECTES_DINAMICS, _pEntity);
 
   SetOk(l_bOk);
   return IsOk();
