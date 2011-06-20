@@ -516,7 +516,7 @@ State_Player_Cobertura_Baixa['Enter'] = function(_jugador)
   
   object3d:set_yaw(-((player_controller.cover_normal):get_angle_y()) - math.pi*0.5)
   
-  --renderable_object:set_yaw(object3d:get_yaw()) VULL FER AIXO
+  renderable_object:set_yaw(-((player_controller.cover_normal):get_angle_y()) + math.pi)
   
   animation:set_cycle('CoverAvallDretaIdle', 1.0)
   animation:set_animation('CoverAvallDreta', 0.0)
@@ -578,7 +578,7 @@ State_Player_Cobertura_Alta['Enter'] = function(_jugador)
   
   object3d:set_yaw(-((player_controller.cover_normal):get_angle_y()) - math.pi*0.5)
   
-  --renderable_object:set_yaw(object3d:get_yaw()) VULL FER AIXO
+  renderable_object:set_yaw(-((player_controller.cover_normal):get_angle_y()) + math.pi)
   
   animation:set_cycle('CoverDretaIdle', 1.0)
   animation:set_animation('CoverDreta', 0.0)

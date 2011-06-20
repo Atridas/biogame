@@ -197,6 +197,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def_readwrite("remove_renderable_object", &CComponentRenderableObject::m_bRemoveRenderableObject)
       .def_readwrite("active",                   &CComponentRenderableObject::m_bActive)
       .def_readwrite("block_yaw",                &CComponentRenderableObject::m_bBlockYaw)
+      .def("set_yaw",                            &CComponentRenderableObject::SetYaw)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentMovement, CBaseComponent>("ComponentMovement")

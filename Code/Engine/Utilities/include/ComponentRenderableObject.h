@@ -42,6 +42,8 @@ public:
 
   CRenderableObject* GetRenderableObject() const {return m_pRenderableObject;};
 
+  void SetYaw(float _fYaw);
+
   bool m_bRemoveRenderableObject;
   bool m_bBlockPitchRoll;
   bool m_bBlockYaw;
