@@ -13,16 +13,17 @@ class CPhysicSphericalJoint;
 class CPhysicRevoluteJoint;
 class CXMLTreeNode;
 struct SSphericalLimitInfo;
+class CGameEntity;
 
 class CPhysxSkeleton : public CBaseControl
 {
 public:
-  CPhysxSkeleton(bool _bActive) : m_pCalSkeleton(0), m_bRagdollActive(_bActive) {};
+  CPhysxSkeleton(bool _bActive) : m_pCalSkeleton(0), m_bRagdollActive(_bActive),m_pEntity(0) {};
   ~CPhysxSkeleton() {Done();};
 
   virtual void Release();
 
-  bool              Init(const string& _szFileName, CalModel* _pCalModel, Mat44f _vMat, int _iColisionGroup);
+  bool              Init(const string& _szFileName, CalModel* _pCalModel, Mat44f _vMat, int _iColisionGroup, CGameEntity *_pEntity = 0);
   const CalSkeleton* GetSkeleton()                        {return m_pCalSkeleton;};
   void              SetSkeleton(CalSkeleton* _pSkeleton)  {m_pCalSkeleton = _pSkeleton;};
   const Mat44f&     GetTransform()                 {return m_mTransform;};
@@ -63,6 +64,7 @@ private:
   vector<CPhysicSphericalJoint*>  m_vSphericalJoints;
   vector<CPhysicRevoluteJoint*>   m_vRevoluteJoints;
   bool                            m_bRagdollActive;
+  CGameEntity*                    m_pEntity;
 };
 
 #endif 
