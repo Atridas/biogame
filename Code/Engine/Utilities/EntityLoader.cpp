@@ -347,6 +347,12 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
 
 CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3f& _vPosition, float _fYaw)
 {
+  float l_fCapsuleHeigh = 1.5f;
+  float l_fCapsuleRadius = 0.3f;
+  float l_fCapsuleSkin   = 0.01f;
+
+  float l_fTotalHeight = ((l_fCapsuleHeigh+2*l_fCapsuleRadius)*0.5f + l_fCapsuleSkin);
+
   CGameEntity* l_pPlayer = CreateEntity();
   if(!SetName(_szEntityName, l_pPlayer))
   {
@@ -363,7 +369,7 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
   CComponentRenderableObject * l_pComponentRenderableObject = new CComponentRenderableObject();
   l_pComponentRenderableObject->InitAnimatedModel(l_pPlayer, "Player Character", "riggle");
   l_pComponentRenderableObject->m_bBlockPitchRoll = true;
-  l_pComponentRenderableObject->m_fHeightAdjustment = -1.f;
+  l_pComponentRenderableObject->m_fHeightAdjustment = -l_fTotalHeight;
   l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
 
 
@@ -399,12 +405,12 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
   CComponent3rdPSCamera *l_pComponent3rdPSCamera = new CComponent3rdPSCamera();
   //l_pComponent3rdPSCamera->Init(m_pPlayerEntity, 0, 0);
   //((CThPSCamera*)l_pComponent3rdPSCamera->GetCamera())->SetZoom(0);
-  l_pComponent3rdPSCamera->Init(l_pPlayer, 0.55f, 0.85f, 1.8f);
+  l_pComponent3rdPSCamera->Init(l_pPlayer, 0.55f, 0.85f, 1.4f);
 
   //m_pCamera = l_pComponent3rdPSCamera->GetCamera();
 
   CComponentPhysXController *l_pComponentPhysXController = new CComponentPhysXController();
-  l_pComponentPhysXController->Init(l_pPlayer, 0.3f, 1.5f, 45.0f, 0.1f, 0.2f, ECG_PERSONATGE );
+  l_pComponentPhysXController->Init(l_pPlayer, l_fCapsuleRadius, l_fCapsuleHeigh, 45.0f, l_fCapsuleSkin, 0.2f, ECG_PERSONATGE );
 
   (new CComponentVida())->Init(l_pPlayer, 100.f);
 

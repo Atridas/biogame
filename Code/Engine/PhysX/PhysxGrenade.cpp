@@ -79,7 +79,7 @@ void CPhysxGrenade::Init(float _fSphereRadius, float _fDensity, int _iColGroup, 
 {
   CPhysicsManager* l_pPM = CORE->GetPhysicsManager();
 
-  m_pParticleEmitter = CORE->GetParticleManager()->GetParticleEmitter(_szEmitter);
+  //m_pParticleEmitter = CORE->GetParticleManager()->GetParticleEmitter(_szEmitter);
 
   m_pPhysxUserData = new CPhysicUserData(GetName());
   m_pPhysxUserData->SetPaint(true);

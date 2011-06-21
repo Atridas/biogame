@@ -33,4 +33,6 @@
 	<RenderableObject name="Habitacio1" class="StaticMesh" resource="Habitacio1" position="0.0 0.0 0.193104" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="BoxParallax" class="StaticMesh" resource="BoxParallax" position="-54.6592 0.0376668 36.6172" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="BoxGlowAlpha" class="StaticMesh" resource="BoxGlowAlpha" position="-54.6592 0.0376649 21.9762" yaw="0.0" pitch="0.0" roll="0.0" />
+  <RenderableObject name="ariggle" class="AnimatedModel" resource="riggle" position="5.1793 0.0 -5.2768" yaw="-90.0" pitch="0.0" roll="0" cycle="walk"/>
+  <RenderableObject name="rigglebot" class="AnimatedModel" resource="riggle" position="5.1793 0.0 -5.2768" yaw="-90.0" pitch="0.0" roll="0" cycle="walk"/>
 </RenderableObjects>
