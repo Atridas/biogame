@@ -349,7 +349,7 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
 {
   float l_fCapsuleHeigh = 1.5f;
   float l_fCapsuleRadius = 0.3f;
-  float l_fCapsuleSkin   = 0.01f;
+  float l_fCapsuleSkin   = 0.1f;
 
   float l_fTotalHeight = ((l_fCapsuleHeigh+2*l_fCapsuleRadius)*0.5f + l_fCapsuleSkin);
 
