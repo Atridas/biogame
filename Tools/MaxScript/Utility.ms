@@ -884,8 +884,9 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			append l_params #("yaw",l_aux)
 			
 			format "\n  %" (InlineTagParamXML "Player" l_params) to:l_file
-			
-			local l_enemies = GetEnemiesEntities _entities
+		)
+		
+		local l_enemies = GetEnemiesEntities _entities
 			if l_enemies != undefined then
 			(
 				local l_enemyType = undefined
@@ -920,7 +921,6 @@ utility BioUtility "Eon-Utility" width:160 height:549
 					)
 				)
 			)
-		)
 		
 		-------------------------------------------------------
 		
