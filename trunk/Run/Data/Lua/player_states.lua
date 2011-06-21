@@ -2,8 +2,8 @@
 
 Player_Constants = {}
 
-Player_Constants["Walk Speed"] = 4
-Player_Constants["Run Speed"] = 10
+Player_Constants["Walk Speed"] = 2
+Player_Constants["Run Speed"] = 5
 Player_Constants["Temps Tocat"] = 0.3
 Player_Constants["Temps Morint"] = 2.6
 
@@ -63,7 +63,7 @@ State_Player_Neutre['Enter'] = function(_jugador)
   
   if player_controller.current_animation ~= 'idle' then
     animation:clear_cycle(0.3)
-    animation:set_cycle('idle', 0.3)
+    animation:set_cycle('idle', 1.0)
     player_controller.current_animation = 'idle'
   end
   
@@ -518,8 +518,9 @@ State_Player_Cobertura_Baixa['Enter'] = function(_jugador)
   
   renderable_object:set_yaw(-((player_controller.cover_normal):get_angle_y()) + math.pi)
   
-  animation:set_cycle('CoverAvallDretaIdle', 1.0)
+  animation:set_cycle('CoverAvallDretaIdle', 0.3)
   animation:set_animation('CoverAvallDreta', 0.0)
+  player_controller.current_animation = 'CoverAvallDretaIdle'
   player_controller.time = 0
   
   renderable_object.block_yaw = true
@@ -529,7 +530,9 @@ end
 State_Player_Cobertura_Baixa['Exit'] = function(_jugador)
 
   local animation = _jugador:get_component(BaseComponent.animation)
-  animation:clear_cycle(0.3)
+  animation:clear_cycle(1.0)
+  --animation:set_cycle('idle', 0.3)
+  animation:set_animation('CoverSortidaAvallDreta', 0.0)
   
   _jugador:get_component(BaseComponent.renderable_object).block_yaw = false
 end
@@ -591,7 +594,10 @@ end
 State_Player_Cobertura_Alta['Exit'] = function(_jugador)
 
   local animation = _jugador:get_component(BaseComponent.animation)
-  animation:clear_cycle(0.3)
+  animation:clear_cycle(1.0)
+  --animation:set_cycle('idle', 1.0)
+  animation:set_animation('CoverSortidaDreta', 0.0)
+  --player_controller.current_animation = 'idle'
   
   _jugador:get_component(BaseComponent.renderable_object).block_yaw = false
 end
