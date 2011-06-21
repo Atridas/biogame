@@ -39,17 +39,17 @@ global DEFAULT_PARALLAX_VALUE        = 0.02
 
 function GetYaw transform =
 (
-	return (transform as eulerangles).z
+	return (transform.rotation as eulerangles).z
 )
 
 function GetPitch transform =
 (
-	return -1 * (transform as eulerangles).y
+	return -1 * (transform.rotation as eulerangles).y
 )
 
 function GetRoll transform =
 (
-	return -1 * (transform as eulerangles).x
+	return -1 * (transform.rotation as eulerangles).x
 )
 
 -- Max treballa en RH

@@ -6,28 +6,31 @@
 	<RenderableObject name="CaixaGrossa00" class="StaticMesh" resource="CaixaGrossa00" position="-30.4231 0.0 9.9367" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="CaixaPetita01" class="StaticMesh" resource="CaixaPetita01" position="-30.8622 0.0 16.8709" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="CaixaPetita02" class="StaticMesh" resource="CaixaPetita02" position="-30.9255 0.0 2.69175" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="CaixaPetita03" class="StaticMesh" resource="CaixaPetita03" position="-30.9653 0.0 -2.56802" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="CaixaPetita03" class="StaticMesh" resource="CaixaPetita03" position="-31.4716 0.0 -2.44387" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="CaixaPetita04" class="StaticMesh" resource="CaixaPetita04" position="-30.8322 -0.00296688 14.1841" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="CaixaGrossa01" class="StaticMesh" resource="CaixaGrossa01" position="-30.4231 0.0 4.19834" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="CaixaPetita05" class="StaticMesh" resource="CaixaPetita05" position="-30.9653 0.0 -1.56407" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="CaixaPetita06" class="StaticMesh" resource="CaixaPetita06" position="-30.9653 1.00344 -2.56819" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="CaixaPetita06" class="StaticMesh" resource="CaixaPetita06" position="-31.4716 1.00344 -2.44405" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Wall" class="StaticMesh" resource="Wall" position="-25.5656 0.0 4.80554" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="CaixaGrossa02" class="StaticMesh" resource="CaixaGrossa02" position="-22.3861 0.0 4.23714" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="CaixaGrossa03" class="StaticMesh" resource="CaixaGrossa03" position="-31.3156 0.0 -10.6048" yaw="-11.0158" pitch="0.0" roll="0.0" />
+	<RenderableObject name="CaixaGrossa03" class="StaticMesh" resource="CaixaGrossa03" position="-31.3156 0.0 -10.6048" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="CaixaPetita08" class="StaticMesh" resource="CaixaPetita08" position="-31.9764 0.0 -12.1037" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="CaixaGrossa04" class="StaticMesh" resource="CaixaGrossa04" position="-31.2776 0.0 -8.27065" yaw="9.04183" pitch="0.0" roll="0.0" />
+	<RenderableObject name="CaixaGrossa04" class="StaticMesh" resource="CaixaGrossa04" position="-31.2776 0.0 -8.27065" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="CaixaPetita09" class="StaticMesh" resource="CaixaPetita09" position="-30.6888 0.0 -12.3158" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="CaixaPetita10" class="StaticMesh" resource="CaixaPetita10" position="-31.02 0.0 -6.68225" yaw="8.71476" pitch="0.0" roll="0.0" />
+	<RenderableObject name="CaixaPetita10" class="StaticMesh" resource="CaixaPetita10" position="-31.02 0.0 -6.68225" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="CaixaPetita11" class="StaticMesh" resource="CaixaPetita11" position="-31.0784 0.0 -5.56841" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Llum" class="StaticMesh" resource="Llum" position="-5.82813 2.0 28.9546" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="CaixaPetita12" class="StaticMesh" resource="CaixaPetita12" position="-22.8825 1.00344 5.75414" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="CaixaPetita13" class="StaticMesh" resource="CaixaPetita13" position="-22.8825 0.0 5.75432" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="BoxGlow" class="StaticMesh" resource="BoxGlow" position="-54.6592 0.0376649 7.0358" yaw="0.0" pitch="0.0" roll="10.0" />
+	<RenderableObject name="CaixaPetita14" class="StaticMesh" resource="CaixaPetita14" position="-28.1784 0.0 -3.2059" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="CaixaPetita15" class="StaticMesh" resource="CaixaPetita15" position="-28.1784 1.00344 -3.20607" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="CaixaPetita16" class="StaticMesh" resource="CaixaPetita16" position="-28.6072 0.0 -2.29994" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="BoxGlow" class="StaticMesh" resource="BoxGlow" position="-54.6592 0.0376649 7.0358" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="BoxNormal" class="StaticMesh" resource="BoxNormal" position="-54.6592 0.0376649 -5.08054" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="BoxAlpha" class="StaticMesh" resource="BoxAlpha" position="-57.4588 0.0376649 -18.0876" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="BoxSpecular" class="StaticMesh" resource="BoxSpecular" position="-54.6592 0.0376649 -36.8326" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="BoxAlpha01" class="StaticMesh" resource="BoxAlpha01" position="-50.0065 0.0376649 -24.0954" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Habitacio1" class="StaticMesh" resource="Habitacio1" position="0.0 0.0 0.193104" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="BoxParallax" class="StaticMesh" resource="BoxParallax" position="-54.6592 0.0376668 36.6172" yaw="-10.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="BoxGlowAlpha" class="StaticMesh" resource="BoxGlowAlpha" position="-54.6592 0.0376649 21.9762" yaw="0.0" pitch="5.0" roll="0.0" />
+	<RenderableObject name="BoxParallax" class="StaticMesh" resource="BoxParallax" position="-54.6592 0.0376668 36.6172" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="BoxGlowAlpha" class="StaticMesh" resource="BoxGlowAlpha" position="-54.6592 0.0376649 21.9762" yaw="0.0" pitch="0.0" roll="0.0" />
 </RenderableObjects>
