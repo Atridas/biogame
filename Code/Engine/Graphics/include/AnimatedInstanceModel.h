@@ -78,7 +78,7 @@ public:
    * @param _fTime Duració de l'animació.
   **/
   void RemoveAction          (int _iId);
-  void ExecuteAction          (int _iId, float _fTime, float _fWeight = 1.0f, bool _bAutoLock = false);
+  void ExecuteAction         (int _iId, float _fTime, float _fWeight = 1.0f, bool _bAutoLock = false);
   /**
    * Mètode per ajuntar animacions.
    * Aquest mètode inicialitzarà l'execució d'una animació del model instanciat, juntant-la amb altres animacions que tingués actives.
@@ -86,7 +86,7 @@ public:
    * @param _fTime Duració de l'animació.
   **/
   void BlendCycle             (int _iId, float _fTime, float _fWeight = 1.0f);
-  void BlendCycle             (const std::string &AnimationName, float _fTime);
+  void BlendCycle             (const std::string &AnimationName, float _fTime, float _fWeight = 1.0f);
   /**
    * Mètode per acabar les animacions actives.
    * Aquest mètode acabarà les animacions actives que tingués el model, fent que a final de cicle no es repeteixin més.

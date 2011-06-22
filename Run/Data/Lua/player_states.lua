@@ -61,11 +61,7 @@ State_Player_Neutre['Enter'] = function(_jugador)
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
   
-  if player_controller.current_animation ~= 'idle' then
-    animation:clear_cycle(0.3)
-    animation:set_cycle('idle', 1.0)
-    player_controller.current_animation = 'idle'
-  end
+  animation:clear_all_cycles()
   
 end
 
@@ -74,10 +70,8 @@ State_Player_Neutre['Exit'] = function(_jugador)
   --log('exit player neutre')
   
   local animation = _jugador:get_component(BaseComponent.animation)
-  animation:clear_cycle(0.3)
-  
+    
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
-  player_controller.current_animation = ''
 end
 
 -------------------------------------------------------------------------------------------------
@@ -94,7 +88,8 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   
   local direction, left
   local isMoving = false
- 
+  local isBack = false
+  local isRunning = false
   
   if ACTION_MANAGER:is_action_active('Cover') then
     if player_controller:cover() then
@@ -115,24 +110,14 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   if ACTION_MANAGER:is_action_active('MoveLeft') then
     left = Vect3f(math.cos(yaw + math.pi / 2), 0, math.sin(yaw + math.pi / 2) )
     moviment.movement = moviment.movement + left * (_dt) * speed
-    
-    if player_controller.current_animation ~= 'walk' then
-      animation:clear_cycle(0.3)
-      animation:set_cycle('walk', 0.3)
-      player_controller.current_animation = 'walk'
-    end
+
     isMoving = true
   end
   
   if ACTION_MANAGER:is_action_active('MoveRight') then
     left = Vect3f(math.cos(yaw + math.pi / 2), 0, math.sin(yaw + math.pi / 2) )
     moviment.movement = moviment.movement - left * (_dt) * speed
-    
-    if player_controller.current_animation ~= 'walk' then
-      animation:clear_cycle(0.3)
-      animation:set_cycle('walk', 0.3)
-      player_controller.current_animation = 'walk'
-    end
+
     isMoving = true
   end
   
@@ -143,16 +128,9 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
     
     if ACTION_MANAGER:is_action_active('Run') then
       moviment.movement = moviment.movement + direction * (_dt) * run_speed
-      anim = 'run'
+      isRunning = true
     else
       moviment.movement = moviment.movement + direction * (_dt) * speed
-      anim = 'walk'
-    end
-    
-    if player_controller.current_animation ~= anim then
-      animation:clear_cycle(0.3)
-      animation:set_cycle(anim, 0.3)
-      player_controller.current_animation = anim
     end
     
     isMoving = true
@@ -160,20 +138,32 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
     direction = Vect3f(math.cos(yaw), 0, math.sin(yaw) )
     moviment.movement = moviment.movement - direction * (_dt) * speed
     
-    if player_controller.current_animation ~= 'walk back' then
-      animation:clear_cycle(0.3)
-      animation:set_cycle('walk back', 0.3)
-      player_controller.current_animation = 'walk back'
-    end
     isMoving = true
+    isBack = true
   end
   
-  if not isMoving then
-    if player_controller.current_animation ~= 'idle' then
-      animation:clear_cycle(0.3)
-      animation:set_cycle('idle', 0.3)
-      player_controller.current_animation = 'idle'
+  if isMoving then
+    animation:clear_cycle('idle', 0.3)
+    if isRunning then
+      animation:stop_cycle('walk back',0.3)
+      animation:stop_cycle('walk',0.3)
+      animation:play_cycle('run',0.3)
+    else
+      if isBack then
+        animation:play_cycle('walk back',0.3)
+        animation:stop_cycle('walk',0.3)
+        animation:stop_cycle('run',0.3)
+      else
+        animation:stop_cycle('walk back',0.3)
+        animation:play_cycle('walk',0.3)
+        animation:stop_cycle('run',0.3)
+      end
     end
+  else
+    animation:play_cycle('idle', 0.3)
+    animation:clear_cycle('walk',0.3)
+    animation:clear_cycle('run',0.3)
+    animation:clear_cycle('walk back',0.3)
   end
   
 end
@@ -205,13 +195,10 @@ State_Player_Apuntar['Enter'] = function(_jugador)
   local animation = _jugador:get_component(BaseComponent.animation)
   local mirilla = _jugador:get_component(BaseComponent.mirilla)
   
-  if player_controller.current_animation ~= 'aim' then
-    animation:clear_cycle(0.3)
-    animation:set_cycle('aim', 0.3)
-    player_controller.current_animation = 'aim'
+  animation:play_cycle('aim', 0.3)
 	mirilla:set_active(true)
 	
-  end
+  --end
   
 end
 
@@ -223,9 +210,6 @@ State_Player_Apuntar['Exit'] = function(_jugador)
   local animation = _jugador:get_component(BaseComponent.animation)
   local mirilla = _jugador:get_component(BaseComponent.mirilla)
    
-  if player_controller.current_animation ~= 'aim' then
-    animation:clear_cycle(player_controller.current_animation,0.3)
-  end
   animation:clear_cycle('aim',0.3)
   mirilla:set_active(false)
   
@@ -239,6 +223,12 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
   local pitch, yaw, object3d = camera_player(_jugador, _dt)
   local moviment = _jugador:get_component(BaseComponent.movement)
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  local animation = _jugador:get_component(BaseComponent.animation)
+  local speed = Player_Constants["Walk Speed"]
+  
+  local direction, left
+  local isMoving = false
+  local isBack = false
   
   
   if not ACTION_MANAGER:is_action_active('Aim') then
@@ -252,24 +242,10 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
     SOUND:play_sample('disparar')
   end
   
-  local animation = _jugador:get_component(BaseComponent.animation)
-  local speed = Player_Constants["Walk Speed"]
-  
-  local direction, left
-  local isMoving = false
-  
   if ACTION_MANAGER:is_action_active('MoveFwd') then
     direction = Vect3f(math.cos(yaw), 0, math.sin(yaw) )
     moviment.movement = moviment.movement + direction * (_dt) * speed
     
-    
-    if player_controller.current_animation ~= 'walk' then
-      if player_controller.current_animation ~= 'aim' then
-        animation:clear_cycle(player_controller.current_animation,0.3)
-      end
-      animation:set_cycle('walk', 0.3)
-      player_controller.current_animation = 'walk'
-    end
     isMoving = true
   end
   
@@ -278,27 +254,14 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
     moviment.movement = moviment.movement - direction * (_dt) * speed
     
     
-    if player_controller.current_animation ~= 'walk back' then
-      if player_controller.current_animation ~= 'aim' then
-        animation:clear_cycle(player_controller.current_animation,0.3)
-      end
-      animation:set_cycle('walk back', 0.3)
-      player_controller.current_animation = 'walk back'
-    end
     isMoving = true
+    isBack = true
   end
   
   if ACTION_MANAGER:is_action_active('MoveLeft') then
     left = Vect3f(math.cos(yaw + math.pi / 2), 0, math.sin(yaw + math.pi / 2) )
     moviment.movement = moviment.movement + left * (_dt) * speed
     
-    if player_controller.current_animation ~= 'walk' then
-      if player_controller.current_animation ~= 'aim' then
-        animation:clear_cycle(player_controller.current_animation,0.3)
-      end
-      animation:set_cycle('walk', 0.3)
-      player_controller.current_animation = 'walk'
-    end
     isMoving = true
   end
   
@@ -306,23 +269,26 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
     left = Vect3f(math.cos(yaw + math.pi / 2), 0, math.sin(yaw + math.pi / 2) )
     moviment.movement = moviment.movement - left * (_dt) * speed
     
-    if player_controller.current_animation ~= 'walk' then
-      if player_controller.current_animation ~= 'aim' then
-        animation:clear_cycle(player_controller.current_animation,0.3)
-      end
-      animation:set_cycle('walk', 0.3)
-      player_controller.current_animation = 'walk'
-    end
     isMoving = true
   end
   
   
-  if not isMoving then
-    if player_controller.current_animation ~= 'aim' then
-      animation:clear_cycle(player_controller.current_animation,0.3)
-      --animation:set_cycle('aim', 0.3)
-      player_controller.current_animation = 'aim'
+  if isMoving then
+    animation:clear_cycle('idle', 0.3)
+    if isBack then
+      animation:play_cycle('walk back',0.3)
+      animation:stop_cycle('walk',0.3)
+      animation:stop_cycle('run',0.3)
+    else
+      animation:stop_cycle('walk back',0.3)
+      animation:play_cycle('walk',0.3)
+      animation:stop_cycle('run',0.3)
     end
+  else
+    animation:play_cycle('idle', 0.3)
+    animation:clear_cycle('walk',0.3)
+    animation:clear_cycle('run',0.3)
+    animation:clear_cycle('walk back',0.3)
   end
 end
 
@@ -355,8 +321,8 @@ State_Player_Tocat['Enter'] = function(_jugador)
   
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
-  animation:set_cycle('idle', 0.3)
-  animation:set_animation('impact', 0.3)
+  --animation:set_cycle('idle', 0.3)
+  animation:play('impact', 0.3, 1.0, false)
   player_controller.time = 0
   
   SOUND:play_sample('impacte')
@@ -369,7 +335,7 @@ State_Player_Tocat['Exit'] = function(_jugador)
   vida.immortal = false
   
   local animation = _jugador:get_component(BaseComponent.animation)
-  animation:clear_cycle(0.3)
+  --animation:clear_cycle(0.3)
   
 end
 
@@ -415,7 +381,7 @@ State_Player_Morint['Enter'] = function(_jugador)
   
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
-  animation:set_animation('dead', 0.3)
+  animation:play('dead', 0.3, 1.0, true)
   player_controller.time = 0
   
 end
@@ -518,9 +484,9 @@ State_Player_Cobertura_Baixa['Enter'] = function(_jugador)
   
   renderable_object:set_yaw(-((player_controller.cover_normal):get_angle_y()) + math.pi)
   
-  animation:set_cycle('CoverAvallDretaIdle', 0.3)
-  animation:set_animation('CoverAvallDreta', 0.0)
-  player_controller.current_animation = 'CoverAvallDretaIdle'
+  animation:clear_all_cycles()
+  animation:play_cycle('CoverAvallDretaIdle', 1.0)
+  animation:play('CoverAvallDreta', 0.3, 1.0, false)
   player_controller.time = 0
   
   renderable_object.block_yaw = true
@@ -530,9 +496,8 @@ end
 State_Player_Cobertura_Baixa['Exit'] = function(_jugador)
 
   local animation = _jugador:get_component(BaseComponent.animation)
-  animation:clear_cycle(1.0)
-  --animation:set_cycle('idle', 0.3)
-  animation:set_animation('CoverSortidaAvallDreta', 0.0)
+  animation:clear_cycle('CoverAvallDretaIdle',0.2)
+  animation:play('CoverSortidaAvallDreta', 0.3, 1.0, false)
   
   _jugador:get_component(BaseComponent.renderable_object).block_yaw = false
 end
@@ -583,8 +548,9 @@ State_Player_Cobertura_Alta['Enter'] = function(_jugador)
   
   renderable_object:set_yaw(-((player_controller.cover_normal):get_angle_y()) + math.pi)
   
-  animation:set_cycle('CoverDretaIdle', 1.0)
-  animation:set_animation('CoverDreta', 0.0)
+  animation:clear_all_cycles()
+  animation:play_cycle('CoverDretaIdle', 1.0)
+  animation:play('CoverDreta', 0.3, 1.0, false)
   player_controller.time = 0
   
   renderable_object.block_yaw = true
@@ -594,10 +560,8 @@ end
 State_Player_Cobertura_Alta['Exit'] = function(_jugador)
 
   local animation = _jugador:get_component(BaseComponent.animation)
-  animation:clear_cycle(1.0)
-  --animation:set_cycle('idle', 1.0)
-  animation:set_animation('CoverSortidaDreta', 0.0)
-  --player_controller.current_animation = 'idle'
+  animation:clear_cycle('CoverDretaIdle', 0.5)
+  animation:play('CoverSortidaDreta', 0.3, 1.0, false)
   
   _jugador:get_component(BaseComponent.renderable_object).block_yaw = false
 end
@@ -623,5 +587,3 @@ State_Player_Cobertura_Alta['Receive'] = function(_jugador, _event)
   end
   
 end
-
-
