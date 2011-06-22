@@ -207,12 +207,14 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentAnimation, CBaseComponent>("ComponentAnimation")
       .def("init",                     &CComponentAnimation::Init)
+      .def("play",                     &CComponentAnimation::Play)
+      .def("stop",                     &CComponentAnimation::Stop)
+      .def("play_cycle",               &CComponentAnimation::PlayCycle)
+      .def("stop_cycle",               &CComponentAnimation::StopCycle)
       .def("clear_cycle",              (void(CComponentAnimation::*)(float))&CComponentAnimation::ClearCycle)
       .def("clear_cycle",              (void(CComponentAnimation::*)(const string&, float))&CComponentAnimation::ClearCycle)
-      .def("set_cycle",                &CComponentAnimation::SetCycle)
-      .def("set_animation",            &CComponentAnimation::SetAnimation)
-      .def("get_current_cycle",        &CComponentAnimation::GetCurrentCycle)
-      
+      .def("clear_all_cycles",         &CComponentAnimation::ClearAllCycles)
+
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentStateMachine, CBaseComponent>("ComponentStateMachine")
       .def("init",                     &CComponentStateMachine::Init)

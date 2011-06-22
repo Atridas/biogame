@@ -323,10 +323,10 @@ void CAnimatedInstanceModel::BlendCycle(int _iId, float _fTime, float _fWeight)
   m_iCurrentCycle = _iId;
 }
 
-void CAnimatedInstanceModel::BlendCycle(const std::string &AnimationName, float _fTime)
+void CAnimatedInstanceModel::BlendCycle(const std::string &AnimationName, float _fTime, float _fWeight)
 {
   int l_AnimationId=m_pAnimatedCoreModel->GetCoreModel()->getCoreAnimationId(AnimationName);
-  BlendCycle(l_AnimationId, _fTime);
+  BlendCycle(l_AnimationId, _fTime, _fWeight);
 }
 
 int CAnimatedInstanceModel::GetAnimationId(const std::string &AnimationName) const

@@ -10,6 +10,7 @@
 #include <vector>
 #include <map>
 #include <string>
+#include <set>
 #include <assert.h>
 #include "Utils/Logger.h"
 #include "Utils/Types.h"
