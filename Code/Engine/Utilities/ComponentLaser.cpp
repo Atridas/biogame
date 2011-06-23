@@ -3,11 +3,24 @@
 #include "Core.h"
 
 
+CComponentLaser* CComponentLaser::AddToEntity(CGameEntity *_pEntity, const Vect3f& _vPosInit, const Vect3f& _vPosEnd, float _fTime)
+{
+  CComponentLaser *l_pComp = new CComponentLaser();
+  assert(_pEntity && _pEntity->IsOk());
+  if(l_pComp->Init(_pEntity, _vPosInit, _vPosEnd, _fTime))
+  {
+    l_pComp->SetEntity(_pEntity);
+    return l_pComp;
+  }
+  else
+  {
+    delete l_pComp;
+    return 0;
+  }
+}
+
 bool CComponentLaser::Init(CGameEntity* _pEntity, const Vect3f& _vPosInit, const Vect3f& _vPosEnd, float _fTime)
 {
-  assert(_pEntity);
-  SetEntity(_pEntity);
-
   m_vPosInit = _vPosInit;
   m_vPosEnd  = _vPosEnd ;
   m_fTime    = _fTime   ;

@@ -9,12 +9,15 @@ class CComponentHighCover:
   public CComponentCover
 {
 public:
-  CComponentHighCover() {};
   ~CComponentHighCover() {Done();}
 
-  bool Init(CGameEntity* _pEntity, const Vect3f& _vSize, const int _iNumPlaces);
+  static CComponentHighCover* AddToEntity(CGameEntity* _pEntity, const Vect3f& _vSize, const int _iNumPlaces);
 
   virtual COVER_TYPE GetCoverType() {return COVER_HIGH;};
+  
+private:
+  CComponentHighCover() {};
+  bool Init(CGameEntity* _pEntity, const Vect3f& _vSize, const int _iNumPlaces);
 
 };
 

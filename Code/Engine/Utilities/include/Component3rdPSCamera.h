@@ -16,28 +16,19 @@ class CComponent3rdPSCamera :
   public CBaseComponent
 {
 public:
-
-
-  CComponent3rdPSCamera():
-      m_pObject3D(0),
-      m_pCamera(0),
-     
-      m_fCameraHeight(0)
-      {};
+  virtual ~CComponent3rdPSCamera(void) {Done();};
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_3RD_PERSON_SHOOTER_CAMERA;};
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_3RD_PERSON_SHOOTER_CAMERA;};
 
-  bool Init(CGameEntity *_pEntity,
-            float _fCameraHeight,
-            float _fCameraRight,
-            float _fZoom);
+  static CComponent3rdPSCamera* AddToEntity(CGameEntity *_pEntity,
+                          float _fCameraHeight,
+                          float _fCameraRight,
+                          float _fZoom);
 
   void PostUpdate(float _fDeltaTime);
 
   CCamera* GetCamera() const;
-
-  virtual ~CComponent3rdPSCamera(void) {Done();};
 
   //Dades pròpies dels components
   float m_fCameraHeight;
@@ -47,6 +38,18 @@ public:
 protected:
   virtual void Release();
 
+  CComponent3rdPSCamera():
+      m_pObject3D(0),
+      m_pCamera(0),
+     
+      m_fCameraHeight(0)
+      {};
+
+  bool Init(CGameEntity *_pEntity,
+            float _fCameraHeight,
+            float _fCameraRight,
+            float _fZoom);
+  
 private:
   //Altres components referenciats
   CComponentObject3D * m_pObject3D;

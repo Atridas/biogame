@@ -17,24 +17,12 @@ class CComponentRenderableObject :
 public:
 
 
-  CComponentRenderableObject():
-      m_pObject3D(0), 
-
-      m_pRenderableObject(0),
-
-      m_bRemoveRenderableObject(false),
-      m_bBlockPitchRoll(false),
-      m_bBlockYaw(false),
-      m_fHeightAdjustment(0),
-      m_fYawAdjustment(0),
-      m_bActive(true)
-      {};
       
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_RENDERABLE_OBJECT;};
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_RENDERABLE_OBJECT;};
   
-  bool Init(CGameEntity *_pEntity, const string& _szName);
-  bool InitAnimatedModel(CGameEntity *_pEntity, const string& _szName, const string& _szCore);
+  static CComponentRenderableObject* AddToEntity(CGameEntity *_pEntity, const string& _szName);
+  static CComponentRenderableObject* AddToEntityWithAnimatedModel(CGameEntity *_pEntity, const string& _szName, const string& _szCore);
 
   void PostUpdate(float _fDeltaTime);
 
@@ -54,6 +42,20 @@ public:
   bool m_bActive;
 
 protected:
+  CComponentRenderableObject():
+      m_pObject3D(0), 
+
+      m_pRenderableObject(0),
+
+      m_bRemoveRenderableObject(false),
+      m_bBlockPitchRoll(false),
+      m_bBlockYaw(false),
+      m_fHeightAdjustment(0),
+      m_fYawAdjustment(0),
+      m_bActive(true)
+      {};
+  bool Init(CGameEntity *_pEntity, const string& _szName);
+  bool InitAnimatedModel(CGameEntity *_pEntity, const string& _szName, const string& _szCore);
   virtual void Release();
 
 private:

@@ -9,19 +9,20 @@ class CComponentLaser:
   public CBaseComponent
 {
 public:
-  CComponentLaser() {};
   ~CComponentLaser() {Done();}
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_LASER;};
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_LASER;};
-
-  bool Init(CGameEntity* _pEntity, const Vect3f& _vPosInit, const Vect3f& _vPosEnd, float _fTime);
+  
+  static CComponentLaser* AddToEntity(CGameEntity* _pEntity, const Vect3f& _vPosInit, const Vect3f& _vPosEnd, float _fTime);
 
   virtual void Update(float _fDeltaTime);
 
   virtual void DebugRender(CRenderManager*);
 
 protected:
+  CComponentLaser() {};
+  bool Init(CGameEntity* _pEntity, const Vect3f& _vPosInit, const Vect3f& _vPosEnd, float _fTime);
   virtual void Release() {};
 private:
   Vect3f m_vPosInit;

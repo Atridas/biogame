@@ -71,7 +71,4 @@ private:
   CGameEntity*   m_pEntity;
 };
 
-
-
-
 #endif

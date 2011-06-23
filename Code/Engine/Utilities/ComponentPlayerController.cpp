@@ -20,52 +20,25 @@
 #include "AnimatedCoreModel.h"
 #include "Material.h"
 
-bool CComponentPlayerController::Init(CGameEntity *_pEntity)
+
+CComponentPlayerController* CComponentPlayerController::AddToEntity(CGameEntity *_pEntity)
 {
-  assert(_pEntity->IsOk());
-  SetEntity(_pEntity);
-
-  m_pMovement = _pEntity->GetComponent<CComponentMovement>(ECT_MOVEMENT);
-  assert(m_pMovement); //TODO fer missatges d'error més elavorats
-
-  m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
-  assert(m_pObject3D); //TODO fer missatges d'error més elavorats
-
-  SetOk(true);
-  return IsOk();
+  CComponentPlayerController *l_pComp = new CComponentPlayerController();
+  assert(_pEntity && _pEntity->IsOk());
+  if(l_pComp->Init(_pEntity))
+  {
+    l_pComp->SetEntity(_pEntity);
+    return l_pComp;
+  }
+  else
+  {
+    delete l_pComp;
+    return 0;
+  }
 }
 
-bool CComponentPlayerController::Init(CGameEntity *_pEntity,
-            const string& _szMoveForward,
-            const string& _szMoveBack,
-            const string& _szMoveLeft,
-            const string& _szMoveRight,
-
-            const string& _szWalk,
-            const string& _szRun,
-
-            const string& _szAim,
-            const string& _szShoot,
-
-            const string& _szIdleAnimation,
-            const string& _szForwardAnimation,
-            const string& _szBackAnimation,
-            const string& _szLeftAnimation,
-            const string& _szRightAnimation,
-            const string& _szAimAnimation,
-            const string& _szShootAnimation,
-  
-            float _fWalkSpeed,
-            float _fRunSpeed,
-            float _fYawSpeed,
-            float _fPitchSpeed,
-  
-            float _fMaxPitchAngle,
-            float _fMinPitchAngle)
+bool CComponentPlayerController::Init(CGameEntity *_pEntity)
 {
-  assert(_pEntity->IsOk());
-  SetEntity(_pEntity);
-
   m_pMovement = _pEntity->GetComponent<CComponentMovement>(ECT_MOVEMENT);
   assert(m_pMovement); //TODO fer missatges d'error més elavorats
 
@@ -76,36 +49,6 @@ bool CComponentPlayerController::Init(CGameEntity *_pEntity,
   assert(l_pComponentRO); //TODO fer missatges d'error més elavorats
   m_pAnimatedModel = dynamic_cast<CRenderableAnimatedInstanceModel*>(l_pComponentRO->GetRenderableObject());
   assert(m_pAnimatedModel); //TODO fer missatges d'error més elavorats
-  
-  //m_iCurrentAnimation = m_pAnimatedModel->GetAnimatedInstanceModel()->GetAnimationId(_szIdleAnimation);
-  //m_pAnimatedModel->GetAnimatedInstanceModel()->BlendCycle(m_iCurrentAnimation,0.f);
-
-  m_szMoveForward   = _szMoveForward;
-  m_szMoveBack      = _szMoveBack;
-  m_szMoveLeft      = _szMoveLeft;
-  m_szMoveRight     = _szMoveRight;
-  
-  m_szRun  = _szRun;
-  m_szWalk = _szWalk;
-
-  m_szAim = _szAim;
-  m_szShoot = _szShoot;
-
-  m_szIdleAnimation    = _szIdleAnimation;
-  m_szForwardAnimation = _szForwardAnimation;
-  m_szBackAnimation    = _szBackAnimation;
-  m_szLeftAnimation    = _szLeftAnimation;
-  m_szRightAnimation   = _szRightAnimation;
-  m_szAimAnimation     = _szAimAnimation;
-  m_szShootAnimation   = _szShootAnimation;
-
-  m_fSpeed = m_fWalkSpeed  = _fWalkSpeed;
-  m_fRunSpeed   = _fRunSpeed;
-  m_fYawSpeed   = _fYawSpeed;
-  m_fPitchSpeed = _fPitchSpeed;
-
-  m_fMaxPitchAngle = _fMaxPitchAngle;
-  m_fMinPitchAngle = _fMinPitchAngle;
 
   SetOk(true);
   return IsOk();
@@ -114,17 +57,6 @@ bool CComponentPlayerController::Init(CGameEntity *_pEntity,
 void CComponentPlayerController::Update(float _fDeltaTime)
 {
   assert(IsOk());
-
-  
-  CActionManager* l_pActionManager = CORE->GetActionManager();
-
-  if(l_pActionManager->IsActionActive(m_szRun))
-  {
-    m_fSpeed = m_fRunSpeed;
-  } else if(l_pActionManager->IsActionActive(m_szWalk))
-  {
-    m_fSpeed = m_fWalkSpeed;
-  }
 
   CComponentVida* l_pComponentVida = GetEntity()->GetComponent<CComponentVida>();
   const vector<CMaterial*>& l_vMaterials = m_pAnimatedModel->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetMaterials();
@@ -149,8 +81,8 @@ void CComponentPlayerController::Shoot()
   CAnimatedInstanceModel *l_pAnimatedInstanceModel = m_pAnimatedModel->GetAnimatedInstanceModel();
 
 
-  int l_iAnim = l_pAnimatedInstanceModel->GetAnimationId(m_szShootAnimation);
-  l_pAnimatedInstanceModel->ExecuteAction(l_iAnim,0.2f);
+  //int l_iAnim = l_pAnimatedInstanceModel->GetAnimationId(m_szShootAnimation);
+  //l_pAnimatedInstanceModel->ExecuteAction(l_iAnim,0.2f);
 
   CCamera* l_pCamera = GetEntity()->GetComponent<CComponent3rdPSCamera>(ECT_3RD_PERSON_SHOOTER_CAMERA)->GetCamera();
   //Vect3f l_vPos = m_pObject3D->GetPosition();
@@ -185,7 +117,7 @@ void CComponentPlayerController::Shoot()
 
 
     CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
-    (new CComponentLaser())->Init(l_pLaser,
+    CComponentLaser::AddToEntity(l_pLaser,
                                   Vect3f(l_vTanslationBone2.x,l_vTanslationBone2.y,l_vTanslationBone2.z),
                                   l_vCenterPoint,
                                   1.f);
@@ -224,7 +156,7 @@ void CComponentPlayerController::Shoot()
 
 
     CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
-    (new CComponentLaser())->Init(l_pLaser,
+    CComponentLaser::AddToEntity(l_pLaser,
                                   Vect3f(l_vTanslationBone2.x,l_vTanslationBone2.y,l_vTanslationBone2.z),
                                   l_vCenterPoint,
                                   1.f);
@@ -236,10 +168,8 @@ void CComponentPlayerController::Die()
   CComponentRagdoll *l_pRC = GetEntity()->GetComponent<CComponentRagdoll>();
   if(!l_pRC)
   {
-    l_pRC = new CComponentRagdoll();
-    if(!l_pRC->Init(GetEntity(), "Data/Animated Models/Riggle/Skeleton.xml"))
+    if(!(l_pRC = CComponentRagdoll::AddToEntity(GetEntity(), "Data/Animated Models/Riggle/Skeleton.xml")))
     {
-      delete l_pRC;
       return;
     }
   }

@@ -9,13 +9,14 @@ class CComponentLowCover:
   public CComponentCover
 {
 public:
-  CComponentLowCover() {};
   ~CComponentLowCover() {Done();}
 
-  bool Init(CGameEntity* _pEntity, const Vect3f& _vSize, const int _iNumPlaces);
-
+  static CComponentLowCover* AddToEntity(CGameEntity *_pEntity, const Vect3f& _vSize, const int _iNumPlaces);
   virtual COVER_TYPE GetCoverType() {return COVER_LOW;};
-
+  
+private:
+  CComponentLowCover() {};
+  bool Init(CGameEntity* _pEntity, const Vect3f& _vSize, const int _iNumPlaces);
 };
 
 #endif

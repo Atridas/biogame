@@ -4,9 +4,42 @@
 #include "RenderableAnimatedInstanceModel.h"
 #include "Core.h"
 
+
+CComponentRenderableObject* CComponentRenderableObject::AddToEntity(CGameEntity *_pEntity, const string& _szName)
+{
+  CComponentRenderableObject *l_pComp = new CComponentRenderableObject();
+  assert(_pEntity && _pEntity->IsOk());
+  if(l_pComp->Init(_pEntity, _szName))
+  {
+    l_pComp->SetEntity(_pEntity);
+    return l_pComp;
+  }
+  else
+  {
+    delete l_pComp;
+    return 0;
+  }
+}
+
+
+CComponentRenderableObject* CComponentRenderableObject::AddToEntityWithAnimatedModel(CGameEntity *_pEntity, const string& _szName, const string& _szCore)
+{
+  CComponentRenderableObject *l_pComp = new CComponentRenderableObject();
+  assert(_pEntity && _pEntity->IsOk());
+  if(l_pComp->InitAnimatedModel(_pEntity, _szName, _szCore))
+  {
+    l_pComp->SetEntity(_pEntity);
+    return l_pComp;
+  }
+  else
+  {
+    delete l_pComp;
+    return 0;
+  }
+}
+
 bool CComponentRenderableObject::Init(CGameEntity *_pEntity, const string& _szName)
 {
-  assert(_pEntity->IsOk());
 
   m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
   if(!m_pObject3D)
@@ -29,11 +62,6 @@ bool CComponentRenderableObject::Init(CGameEntity *_pEntity, const string& _szNa
     Mat44f l_Matrix;
     m_pRenderableObject->GetMat44(l_Matrix);
     m_pObject3D->SetMat44(l_Matrix);
-  }
-
-  if(IsOk())
-  {
-    SetEntity(_pEntity);
   }
 
   return IsOk();

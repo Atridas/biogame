@@ -10,15 +10,53 @@
 
 #include "ComponentPhysXBox.h"
 
+
+
+
+CComponentPhysXBox* CComponentPhysXBox::AddToEntity(CGameEntity *_pEntity,
+            float _fSizeX, float _fSizeY, float _fSizeZ,
+            float _fPosX , float _fPosY , float _fPosZ,
+            float _fDensity, int _iCollisionGroup
+            )
+{
+  CComponentPhysXBox *l_pComp = new CComponentPhysXBox();
+  assert(_pEntity && _pEntity->IsOk());
+  if(l_pComp->Init(_pEntity, _fSizeX, _fSizeY, _fSizeZ,
+            _fPosX , _fPosY , _fPosZ,
+            _fDensity, _iCollisionGroup))
+  {
+    l_pComp->SetEntity(_pEntity);
+    return l_pComp;
+  }
+  else
+  {
+    delete l_pComp;
+    return 0;
+  }
+}
+
+CComponentPhysXBox* CComponentPhysXBox::AddToEntity(CGameEntity *_pEntity, float _fDensity, int _iCollisionGroup)
+{
+  CComponentPhysXBox *l_pComp = new CComponentPhysXBox();
+  assert(_pEntity && _pEntity->IsOk());
+  if(l_pComp->Init(_pEntity, _fDensity, _iCollisionGroup))
+  {
+    l_pComp->SetEntity(_pEntity);
+    return l_pComp;
+  }
+  else
+  {
+    delete l_pComp;
+    return 0;
+  }
+}
+
 bool CComponentPhysXBox::Init(CGameEntity *_pEntity,
             float _fSizeX, float _fSizeY, float _fSizeZ,
             float _fPosX , float _fPosY , float _fPosZ,
             float _fDensity, int _iCollisionGroup
             )
 {
-  assert(_pEntity->IsOk());
-  SetEntity(_pEntity);
-
   m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
   assert(m_pObject3D); //TODO fer missatges d'error més elavorats
 
@@ -48,8 +86,6 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity,
 
 bool CComponentPhysXBox::Init(CGameEntity *_pEntity, float _fDensity, int _iCollisionGroup)
 {
-  assert(_pEntity->IsOk());
-
   m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
   if(!m_pObject3D)
   {
@@ -86,8 +122,6 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity, float _fDensity, int _iColl
   CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXActor);
   m_pPhysXActor->SetMat44( m_pObject3D->GetMat44() );
   
-
-  SetEntity(_pEntity);
   SetOk(true);
   return IsOk();
 }

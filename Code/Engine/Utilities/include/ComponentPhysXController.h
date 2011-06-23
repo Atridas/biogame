@@ -18,16 +18,11 @@ class CComponentPhysXController :
 public:
 
 
-  CComponentPhysXController():
-      m_pObject3D(0), m_pMovement(0),
-      m_pPhysXController(0),
-      m_pPhysXData(0)
-      {};
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_PHYSX_CONTROLLER;};
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_PHYSX_CONTROLLER;};
 
-  bool Init(CGameEntity *_Entity,
+  static CComponentPhysXController* AddToEntity(CGameEntity *_Entity,
             float radius, float height, float slope, float skinwidth, 
 		        float stepOffset, uint32 _iCollisionGroup 
             );
@@ -40,6 +35,15 @@ public:
   virtual ~CComponentPhysXController(void) {Done();};
 
 protected:
+  CComponentPhysXController():
+      m_pObject3D(0), m_pMovement(0),
+      m_pPhysXController(0),
+      m_pPhysXData(0)
+      {};
+  bool Init(CGameEntity *_Entity,
+            float radius, float height, float slope, float skinwidth, 
+		        float stepOffset, uint32 _iCollisionGroup 
+            );
   virtual void Release();
 
 private:

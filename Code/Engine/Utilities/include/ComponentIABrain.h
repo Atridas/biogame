@@ -9,13 +9,12 @@ class CComponentIABrain:
   public CBaseComponent
 {
 public:
-  CComponentIABrain():m_pPlayer(0),m_fTime(0),m_bShooted(false) {};
   ~CComponentIABrain() {Done();}
+
+  static CComponentIABrain* AddToEntity(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName);
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_IA_BRAIN;};
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_IA_BRAIN;};
-
-  bool Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName);
 
   void Shoot();
   void Die();
@@ -25,6 +24,9 @@ public:
   bool         m_bShooted;
 
 protected:
+  CComponentIABrain():m_pPlayer(0),m_fTime(0),m_bShooted(false) {};
+  bool Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName);
+
   virtual void Release() {};
 
   string m_szRagdollName;

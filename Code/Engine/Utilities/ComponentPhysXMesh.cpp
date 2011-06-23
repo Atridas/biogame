@@ -11,6 +11,23 @@
 
 #include "ComponentPhysXMesh.h"
 
+
+CComponentPhysXMesh* CComponentPhysXMesh::AddToEntity(CGameEntity* _pEntity, float _fDensity, int _iCollisionGroup)
+{
+  CComponentPhysXMesh *l_pComp = new CComponentPhysXMesh();
+  assert(_pEntity && _pEntity->IsOk());
+  if(l_pComp->Init(_pEntity, _fDensity, _iCollisionGroup))
+  {
+    l_pComp->SetEntity(_pEntity);
+    return l_pComp;
+  }
+  else
+  {
+    delete l_pComp;
+    return 0;
+  }
+}
+
 bool CComponentPhysXMesh::Init(CGameEntity* _pEntity, float _fDensity, int _iCollisionGroup)
 {
   assert(_pEntity->IsOk());
@@ -57,7 +74,6 @@ bool CComponentPhysXMesh::Init(CGameEntity* _pEntity, float _fDensity, int _iCol
   CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXActor);
   m_pPhysXActor->SetMat44( m_pObject3D->GetMat44() );
   
-  SetEntity(_pEntity);
   SetOk(true);
   return IsOk();
 }

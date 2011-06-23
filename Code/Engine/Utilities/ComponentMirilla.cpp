@@ -11,11 +11,26 @@
 #include "Camera.h"
 #include "Core.h"
 
+
+CComponentMirilla* CComponentMirilla::AddToEntity(CGameEntity *_pEntity, const string& _szMeshName)
+{
+  CComponentMirilla *l_pComp = new CComponentMirilla();
+  assert(_pEntity && _pEntity->IsOk());
+  if(l_pComp->Init(_pEntity, _szMeshName))
+  {
+    l_pComp->SetEntity(_pEntity);
+    return l_pComp;
+  }
+  else
+  {
+    delete l_pComp;
+    return 0;
+  }
+}
+
+
 bool CComponentMirilla::Init(CGameEntity* _pEntity, const string& _szMeshName)
 {
-  assert(_pEntity && _pEntity->IsOk());
-  SetEntity(_pEntity);
-
   CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
   m_pRenderableObject = l_pROM->AddMeshInstance(_szMeshName,_szMeshName);
   m_pRenderableObject->SetVisible(m_bActive);

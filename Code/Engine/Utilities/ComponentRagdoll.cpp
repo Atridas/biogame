@@ -6,11 +6,25 @@
 #include "PhysicsManager.h"
 #include "PhysicActor.h"
 
+
+CComponentRagdoll* CComponentRagdoll::AddToEntity(CGameEntity *_pEntity, const string& _szSkeletonFile)
+{
+  CComponentRagdoll *l_pComp = new CComponentRagdoll();
+  assert(_pEntity && _pEntity->IsOk());
+  if(l_pComp->Init(_pEntity, _szSkeletonFile))
+  {
+    l_pComp->SetEntity(_pEntity);
+    return l_pComp;
+  }
+  else
+  {
+    delete l_pComp;
+    return 0;
+  }
+}
+
 bool CComponentRagdoll::Init(CGameEntity* _pEntity, const string& _szSkeletonFile)
 {
-  assert(_pEntity && _pEntity->IsOk());
-  SetEntity(_pEntity);
-
   CComponentRenderableObject* l_pCRO = _pEntity->GetComponent<CComponentRenderableObject>();
 
   m_pRAIM = dynamic_cast<CRenderableAnimatedInstanceModel*>(l_pCRO->GetRenderableObject());

@@ -5,11 +5,11 @@
 #include "ComponentPhysXBox.h"
 #include "PhysicsManager.h"
 
+
+
+
 bool CComponentCover::Init(CGameEntity* _pEntity, const Vect3f& _vSize, const int _iNumPlaces)
 {
-  assert(_pEntity->IsOk());
-  SetEntity(_pEntity);
-
   m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
   assert(m_pObject3D); //TODO fer missatges d'error més elavorats
 
