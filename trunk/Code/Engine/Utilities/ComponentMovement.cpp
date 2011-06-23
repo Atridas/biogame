@@ -1,10 +1,24 @@
 #include "ComponentMovement.h"
 
+
+CComponentMovement* CComponentMovement::AddToEntity(CGameEntity *_pEntity)
+{
+  CComponentMovement *l_pComp = new CComponentMovement();
+  assert(_pEntity && _pEntity->IsOk());
+  if(l_pComp->Init(_pEntity))
+  {
+    l_pComp->SetEntity(_pEntity);
+    return l_pComp;
+  }
+  else
+  {
+    delete l_pComp;
+    return 0;
+  }
+}
+
 bool CComponentMovement::Init(CGameEntity *_pEntity)
 {
-  assert(_pEntity->IsOk());
-  SetEntity(_pEntity);
-
   SetOk(true);
   return IsOk();
 }

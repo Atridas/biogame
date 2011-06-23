@@ -7,14 +7,32 @@
 
 #include "ComponentPhysXController.h"
 
+
+CComponentPhysXController* CComponentPhysXController::AddToEntity(CGameEntity *_pEntity,
+            float radius, float height, float slope, float skinwidth, 
+		        float stepOffset, uint32 _iCollisionGroup 
+            )
+{
+  CComponentPhysXController *l_pComp = new CComponentPhysXController();
+  assert(_pEntity && _pEntity->IsOk());
+  if(l_pComp->Init(_pEntity, radius, height, slope,
+            skinwidth , stepOffset , _iCollisionGroup))
+  {
+    l_pComp->SetEntity(_pEntity);
+    return l_pComp;
+  }
+  else
+  {
+    delete l_pComp;
+    return 0;
+  }
+}
+
 bool CComponentPhysXController::Init(CGameEntity *_pEntity,
             float radius, float height, float slope, float skinwidth, 
 		        float stepOffset, uint32 _iCollisionGroup 
             )
 {
-  assert(_pEntity->IsOk());
-  SetEntity(_pEntity);
-
   CPhysicsManager *l_pPM = CORE->GetPhysicsManager();
 
   m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);

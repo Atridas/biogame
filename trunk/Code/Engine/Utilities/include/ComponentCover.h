@@ -16,10 +16,7 @@ public:
     COVER_HIGH
   };
 
-  CComponentCover(): m_iNumPlaces(0) {};
   ~CComponentCover() {Done();}
-
-  bool Init(CGameEntity* _pEntity, const Vect3f& _vSize, const int _iNumPlaces);
   
   virtual COVER_TYPE GetCoverType() = 0;
 
@@ -28,6 +25,11 @@ public:
 
   virtual void ReceiveEvent(const SEvent& _Event);
   
+protected:
+
+  bool Init(CGameEntity* _pEntity, const Vect3f& _vSize, const int _iNumPlaces);
+  CComponentCover(): m_iNumPlaces(0) {};
+
 private:
 
   int m_iNumPlaces;

@@ -138,18 +138,18 @@ void RegisterEntitiesToLua(lua_State* _pLS)
 
   module(_pLS) [
     class_<CComponentObject3D, bases<CObject3D,CBaseComponent>>("ComponentObject3D")
-      .def("init", &CComponentObject3D::Init)
+      .def("add_to_entity", &CComponentObject3D::AddToEntity)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPlayerController, CBaseComponent>("ComponentPlayerController")
-      .def("init",        (bool(CComponentPlayerController::*)(CGameEntity*))&CComponentPlayerController::Init)
-      .def("shoot",       &CComponentPlayerController::Shoot)
-      .def("cover",       &CComponentPlayerController::Cover)
-      .def("die",         &CComponentPlayerController::Die)
-      .def("respawn",     &CComponentPlayerController::Respawn)
+      .def("add_to_entity",         (bool(*)(CGameEntity*))&CComponentPlayerController::AddToEntity)
+      .def("shoot",                 &CComponentPlayerController::Shoot)
+      .def("cover",                 &CComponentPlayerController::Cover)
+      .def("die",                   &CComponentPlayerController::Die)
+      .def("respawn",               &CComponentPlayerController::Respawn)
       .def_readwrite("pos_inicial", &CComponentPlayerController::m_vPosInicial)
 
-      .def_readwrite("move_fwd",   &CComponentPlayerController::m_szMoveForward)
+      /*.def_readwrite("move_fwd",   &CComponentPlayerController::m_szMoveForward)
       .def_readwrite("move_back",  &CComponentPlayerController::m_szMoveBack)
       .def_readwrite("move_left",  &CComponentPlayerController::m_szMoveLeft)
       .def_readwrite("move_right", &CComponentPlayerController::m_szMoveRight)
@@ -163,7 +163,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def_readwrite("pitch_speed", &CComponentPlayerController::m_fPitchSpeed)
 
       .def_readwrite("min_pitch_angle", &CComponentPlayerController::m_fMaxPitchAngle)
-      .def_readwrite("max_pitch_angle", &CComponentPlayerController::m_fMinPitchAngle)
+      .def_readwrite("max_pitch_angle", &CComponentPlayerController::m_fMinPitchAngle)*/
 
       .def_readwrite("speed", &CComponentPlayerController::m_fSpeed)
       .def_readwrite("current_animation", &CComponentPlayerController::m_szCurrentAnimation)
@@ -176,24 +176,24 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponent3rdPSCamera, CBaseComponent>("Component3rdPSCamera")
-      .def("init", &CComponent3rdPSCamera::Init)
+      .def("add_to_entity", &CComponent3rdPSCamera::AddToEntity)
       .def_readwrite("camera_height", &CComponent3rdPSCamera::m_fCameraHeight)
       .def_readwrite("camera_right", &CComponent3rdPSCamera::m_fCameraRight)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPhysXController,CBaseComponent>("ComponentPhysXController")
-      .def("init", &CComponentPhysXController::Init)
+      .def("add_to_entity", &CComponentPhysXController::AddToEntity)
       .def("set_height", &CComponentPhysXController::SetHeight)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPhysXBox, CBaseComponent>("ComponentPhysXBox")
-      .def("init",     (bool(CComponentPhysXBox::*)(CGameEntity*,float,float,float,float,float,float,float,int))&CComponentPhysXBox::Init)
-      .def("init",     (bool(CComponentPhysXBox::*)(CGameEntity*,float,int))&CComponentPhysXBox::Init)
+      .def("add_to_entity",     (CComponentPhysXBox*(*)(CGameEntity*,float,float,float,float,float,float,float,int))&CComponentPhysXBox::AddToEntity)
+      .def("add_to_entity",     (CComponentPhysXBox*(*)(CGameEntity*,float,int))&CComponentPhysXBox::AddToEntity)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentRenderableObject, CBaseComponent>("ComponentRenderableObject")
-      .def("init",                               &CComponentRenderableObject::Init)
-      .def("init_animated_model",                &CComponentRenderableObject::InitAnimatedModel)
+      .def("add_to_entity",                      &CComponentRenderableObject::AddToEntity)
+      .def("add_to_entity_with_animated_model",  &CComponentRenderableObject::AddToEntityWithAnimatedModel)
       .def_readwrite("remove_renderable_object", &CComponentRenderableObject::m_bRemoveRenderableObject)
       .def_readwrite("active",                   &CComponentRenderableObject::m_bActive)
       .def_readwrite("block_yaw",                &CComponentRenderableObject::m_bBlockYaw)
@@ -201,12 +201,12 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentMovement, CBaseComponent>("ComponentMovement")
-      .def("init",                               &CComponentMovement::Init)
+      .def("add_to_entity",                      &CComponentMovement::AddToEntity)
       .def_readwrite("movement",                 &CComponentMovement::m_vMovement)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentAnimation, CBaseComponent>("ComponentAnimation")
-      .def("init",                     &CComponentAnimation::Init)
+      .def("add_to_entity",            &CComponentAnimation::AddToEntity)
       .def("play",                     &CComponentAnimation::Play)
       .def("stop",                     &CComponentAnimation::Stop)
       .def("play_cycle",               &CComponentAnimation::PlayCycle)
@@ -217,12 +217,12 @@ void RegisterEntitiesToLua(lua_State* _pLS)
 
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentStateMachine, CBaseComponent>("ComponentStateMachine")
-      .def("init",                     &CComponentStateMachine::Init)
+      .def("add_to_entity",            &CComponentStateMachine::AddToEntity)
       .def("get_state_machine",        &CComponentStateMachine::GetStateMachine)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentIABrain, CBaseComponent>("ComponentIABrain")
-      .def("init",                     &CComponentIABrain::Init)
+      .def("add_to_entity",            &CComponentIABrain::AddToEntity)
       .def("shoot",                    &CComponentIABrain::Shoot)
       .def("die",                      &CComponentIABrain::Die)
       .def_readonly("player",          &CComponentIABrain::m_pPlayer)
@@ -230,14 +230,14 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def_readwrite("shooted",        &CComponentIABrain::m_bShooted)
       
     // ----------------------------------------------------------------------------------------------------
-    ,class_<CComponentVida, CBaseComponent>("ComponentIABrain")
-      .def("init",                     &CComponentVida::Init)
+    ,class_<CComponentVida, CBaseComponent>("ComponentVida")
+      .def("add_to_entity",            &CComponentVida::AddToEntity)
       .def_readwrite("vida",           &CComponentVida::m_fVida)
       .def_readwrite("immortal",       &CComponentVida::m_bImmortal)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentRagdoll, CBaseComponent>("ComponentRagdoll")
-      .def("init",                     &CComponentRagdoll::Init)
+      .def("add_to_entity",            &CComponentRagdoll::AddToEntity)
       .def("set_active",               &CComponentRagdoll::SetActive)
 
     // ----------------------------------------------------------------------------------------------------

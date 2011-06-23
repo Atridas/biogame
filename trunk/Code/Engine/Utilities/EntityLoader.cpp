@@ -30,14 +30,13 @@
 void LoadComponentObject3D(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCreant component d'Object3D.");
-  CComponentObject3D *l_pComponentObject3D = new CComponentObject3D();
-  if(l_pComponentObject3D->Init(_pEntity))
+  if(CComponentObject3D* l_pComponentObject3D = CComponentObject3D::AddToEntity(_pEntity))
   {
     Vect3f l_vPos   = _TreeComponent.GetVect3fProperty("position", Vect3f(0,0,0), false);
     float  l_fYaw   = _TreeComponent.GetFloatProperty("yaw"  , 0.0f, false) * FLOAT_PI_VALUE / 180.0f;
     float  l_fPitch = _TreeComponent.GetFloatProperty("pitch", 0.0f, false) * FLOAT_PI_VALUE / 180.0f;
     float  l_fRoll  = _TreeComponent.GetFloatProperty("roll" , 0.0f, false) * FLOAT_PI_VALUE / 180.0f;
-                
+    
     l_pComponentObject3D->SetPosition(l_vPos);
     l_pComponentObject3D->SetYaw(l_fYaw);
     l_pComponentObject3D->SetPitch(l_fPitch);
@@ -45,7 +44,6 @@ void LoadComponentObject3D(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
   } else
   {
     LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
-    delete l_pComponentObject3D;
   }
 }
 
@@ -54,11 +52,9 @@ void LoadComponentRenderableObject(CXMLTreeNode& _TreeComponent, CGameEntity* _p
   if(_TreeComponent.ExistsProperty("name"))
   {
     LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCreant component de Renderable Object amb nom \"%s\".", _TreeComponent.GetPszISOProperty("name").c_str());
-    CComponentRenderableObject *l_pComponentRenderableObject = new CComponentRenderableObject();
-    if(!l_pComponentRenderableObject->Init(_pEntity, _TreeComponent.GetPszISOProperty("name")))
+    if(!CComponentRenderableObject::AddToEntity(_pEntity, _TreeComponent.GetPszISOProperty("name")))
     {
       LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
-      delete l_pComponentRenderableObject;
     }
   } else
   {
@@ -76,11 +72,9 @@ void LoadComponentPhysXBox(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
   if(strcmp(_TreeComponent.GetPszISOProperty("fromRenderableObject").c_str(),"true") == 0)
   {
     LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant Box física des del Renderable Object.");
-    CComponentPhysXBox* l_pComponentPhysXBox = new CComponentPhysXBox();
-    if(!l_pComponentPhysXBox->Init(_pEntity, l_fDensity, l_iCollisionMask))
+    if(!CComponentPhysXBox::AddToEntity(_pEntity, l_fDensity, l_iCollisionMask))
     {
       LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
-      delete l_pComponentPhysXBox;
     }
   } else if(strcmp(_TreeComponent.GetPszISOProperty("fromRenderableObject").c_str(),"false") == 0)
   {
@@ -88,15 +82,13 @@ void LoadComponentPhysXBox(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
     Vect3f l_vMidpoint = _TreeComponent.GetVect3fProperty("midpoint", Vect3f(), true);
     Vect3f l_vSize = _TreeComponent.GetVect3fProperty("size", Vect3f(1), true);
 
-    CComponentPhysXBox* l_pComponentPhysXBox = new CComponentPhysXBox();
-    if(!l_pComponentPhysXBox->Init( _pEntity, 
+    if(!CComponentPhysXBox::AddToEntity( _pEntity, 
                                     l_vSize.x, l_vSize.y, l_vSize.z,
                                     l_vMidpoint.x, l_vMidpoint.y, l_vMidpoint.z,
                                     l_fDensity, l_iCollisionMask)
       )
     {
       LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
-      delete l_pComponentPhysXBox;
     }
   } else
   {
@@ -112,11 +104,9 @@ void LoadComponentPhysXMesh(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
   int l_iCollisionMask = GetCollisionGroup(_TreeComponent.GetPszISOProperty("collision_group", "", true));
 
   LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant Mesh física des del Renderable Object.");
-  CComponentPhysXMesh* l_pComponentPhysXMesh = new CComponentPhysXMesh();
-  if(!l_pComponentPhysXMesh->Init(_pEntity, l_fDensity, l_iCollisionMask))
+  if(!CComponentPhysXMesh::AddToEntity(_pEntity, l_fDensity, l_iCollisionMask))
   {
     LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
-    delete l_pComponentPhysXMesh;
   }
 }
 
@@ -139,12 +129,9 @@ void LoadComponentTrigger(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
     LOGGER->AddNewLog(ELL_WARNING,"\t\t\tTrigger sense cap script!.");
   }
 
-  CComponentTrigger* l_pComponentTrigger = new CComponentTrigger();
-
-  if(!l_pComponentTrigger->Init(_pEntity, l_vSize, l_szOnEnter, l_szOnExit, l_iCollisionMask))
+  if(!CComponentTrigger::AddToEntity(_pEntity, l_vSize, l_szOnEnter, l_szOnExit, l_iCollisionMask))
   {
     LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
-    delete l_pComponentTrigger;
   }
 }
 
@@ -157,12 +144,9 @@ void LoadComponentHighCover(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
   
   LOGGER->AddNewLog(ELL_INFORMATION,"\t\t\t HighCover: \"%d\" spots.", l_iSpots);
 
-  CComponentHighCover* l_pComponentHighCover = new CComponentHighCover();
-
-  if(!l_pComponentHighCover->Init(_pEntity, l_vSize, l_iSpots))
+  if(!CComponentHighCover::AddToEntity(_pEntity, l_vSize, l_iSpots))
   {
     LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
-    delete l_pComponentHighCover;
   }
 }
 
@@ -175,12 +159,9 @@ void LoadComponentLowCover(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
   
   LOGGER->AddNewLog(ELL_INFORMATION,"\t\t\t LowCover: \"%d\" spots.", l_iSpots);
 
-  CComponentLowCover* l_pComponentLowCover = new CComponentLowCover();
-
-  if(!l_pComponentLowCover->Init(_pEntity, l_vSize, l_iSpots))
+  if(!CComponentLowCover::AddToEntity(_pEntity, l_vSize, l_iSpots))
   {
     LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
-    delete l_pComponentLowCover;
   }
 }
 
@@ -359,25 +340,25 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
     LOGGER->AddNewLog(ELL_WARNING,"\t\tNo s'ha pogut definir nom \"%s\", probablement repetit", _szEntityName.c_str());
   }
 
-  CComponentObject3D *l_pComponentObject3D = new CComponentObject3D();
-  l_pComponentObject3D->Init(l_pPlayer);
+  CComponentObject3D::AddToEntity(l_pPlayer);
+  CComponentObject3D *l_pComponentObject3D = l_pPlayer->GetComponent<CComponentObject3D>();
   l_pComponentObject3D->SetPosition(_vPosition);
   l_pComponentObject3D->SetYaw(_fYaw);
 
-  (new CComponentMovement)->Init(l_pPlayer);
+  CComponentMovement::AddToEntity(l_pPlayer);
 
-  CComponentRenderableObject * l_pComponentRenderableObject = new CComponentRenderableObject();
-  l_pComponentRenderableObject->InitAnimatedModel(l_pPlayer, "Player Character", "riggle");
+  CComponentRenderableObject * l_pComponentRenderableObject = 
+                    CComponentRenderableObject::AddToEntityWithAnimatedModel(l_pPlayer, "Player Character", "riggle");
   l_pComponentRenderableObject->m_bBlockPitchRoll = true;
   l_pComponentRenderableObject->m_fHeightAdjustment = -l_fTotalHeight;
   l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
 
 
-  (new CComponentAnimation())->Init(l_pPlayer);
+  CComponentAnimation::AddToEntity(l_pPlayer);
 
 
-  CComponentPlayerController *l_pComponentPlayerController = new CComponentPlayerController();
-  l_pComponentPlayerController->Init(l_pPlayer,
+  CComponentPlayerController *l_pComponentPlayerController = CComponentPlayerController::AddToEntity(l_pPlayer);
+                                  /*,
                                       //Actions
                                      "MoveFwd",
                                      "MoveBack",
@@ -398,26 +379,27 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
                                       //Speed
                                      4, 10, 1, 1,
                                       FLOAT_PI_VALUE/3,
-                                     -FLOAT_PI_VALUE/3);
+                                     -FLOAT_PI_VALUE/3);*/
 
   l_pComponentPlayerController->m_vPosInicial = _vPosition;
 
-  CComponent3rdPSCamera *l_pComponent3rdPSCamera = new CComponent3rdPSCamera();
+  //CComponent3rdPSCamera *l_pComponent3rdPSCamera = new CComponent3rdPSCamera();
   //l_pComponent3rdPSCamera->Init(m_pPlayerEntity, 0, 0);
   //((CThPSCamera*)l_pComponent3rdPSCamera->GetCamera())->SetZoom(0);
-  l_pComponent3rdPSCamera->Init(l_pPlayer, 0.55f, 0.85f, 1.4f);
+  //l_pComponent3rdPSCamera->Init(l_pPlayer, 0.55f, 0.85f, 1.4f);
+
+  CComponent3rdPSCamera::AddToEntity(l_pPlayer, 0.55f, 0.85f, 1.4f);
 
   //m_pCamera = l_pComponent3rdPSCamera->GetCamera();
 
-  CComponentPhysXController *l_pComponentPhysXController = new CComponentPhysXController();
-  l_pComponentPhysXController->Init(l_pPlayer, l_fCapsuleRadius, l_fCapsuleHeigh, 45.0f, l_fCapsuleSkin, 0.2f, ECG_PERSONATGE );
+  CComponentPhysXController::AddToEntity(l_pPlayer, l_fCapsuleRadius, l_fCapsuleHeigh, 45.0f, l_fCapsuleSkin, 0.2f, ECG_PERSONATGE );
 
-  (new CComponentVida())->Init(l_pPlayer, 100.f);
+  CComponentVida::AddToEntity(l_pPlayer, 100.f);
 
-  (new CComponentStateMachine())->Init(l_pPlayer, "State_Player_Neutre");
+  CComponentStateMachine::AddToEntity(l_pPlayer, "State_Player_Neutre");
 
   //(new CComponentRagdoll())->Init(m_pPlayerEntity, "Data/Animated Models/Riggle/Skeleton.xml");
-  (new CComponentMirilla())->Init(l_pPlayer, "laser_pilota");
+  CComponentMirilla::AddToEntity(l_pPlayer, "laser_pilota");
 
 
   return l_pPlayer;
@@ -451,30 +433,29 @@ CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f
     SetName(_szEntityName, l_peEnemy);
   }
 
-  CComponentObject3D *l_pComponentObject3D = new CComponentObject3D();
-  l_pComponentObject3D->Init(l_peEnemy);
+  CComponentObject3D::AddToEntity(l_peEnemy);
+  CComponentObject3D *l_pComponentObject3D = l_peEnemy->GetComponent<CComponentObject3D>();
   l_pComponentObject3D->SetPosition(_vPosition);
-  (new CComponentMovement)->Init(l_peEnemy);
+  CComponentMovement::AddToEntity(l_peEnemy);
 
-  (new CComponentPhysXController())->Init(l_peEnemy, 0.7f, 1.5f, 10.0f, 0.1f, 0.5f,  ECG_ENEMICS );
+  CComponentPhysXController::AddToEntity(l_peEnemy, 0.7f, 1.5f, 10.0f, 0.1f, 0.5f,  ECG_ENEMICS );
 
-  CComponentRenderableObject *l_pComponentRenderableObject = new CComponentRenderableObject();
 
   stringstream l_szInstanceModelName(_szRenderableModel);
 
   l_szInstanceModelName << " " << l_peEnemy->GetGUID();
-
-  l_pComponentRenderableObject->InitAnimatedModel(l_peEnemy, l_szInstanceModelName.str(), _szRenderableModel);
+  
+  CComponentRenderableObject *l_pComponentRenderableObject = CComponentRenderableObject::AddToEntityWithAnimatedModel(l_peEnemy, l_szInstanceModelName.str(), _szRenderableModel);
   l_pComponentRenderableObject->m_bBlockPitchRoll = true;
   l_pComponentRenderableObject->m_fHeightAdjustment = -1.4f;
   l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
 
   //(new CComponentIAWalkToPlayer())->Init(l_peEnemy,"Player",2,"walk","impact");
-  (new CComponentIABrain())->Init(l_peEnemy,_szPlayerName,_szRagdollModell);
-  (new CComponentAnimation())->Init(l_peEnemy);
-  (new CComponentVida())->Init(l_peEnemy, 100.f);
+  CComponentIABrain::AddToEntity(l_peEnemy,_szPlayerName,_szRagdollModell);
+  CComponentAnimation::AddToEntity(l_peEnemy);
+  CComponentVida::AddToEntity(l_peEnemy, 100.f);
 
-  (new CComponentStateMachine())->Init(l_peEnemy, _szInitialState);
+  CComponentStateMachine::AddToEntity(l_peEnemy, _szInitialState);
 
   return l_peEnemy;
 }

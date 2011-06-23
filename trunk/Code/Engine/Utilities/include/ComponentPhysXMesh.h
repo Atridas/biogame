@@ -9,10 +9,13 @@ class CComponentPhysXMesh :
   public CComponentPhysXActor
 {
 public:
-
-  bool Init(CGameEntity* _pEntity, float _fDensity, int _iCollisionGroup);
-
+  
+  static CComponentPhysXMesh* AddToEntity(CGameEntity* _pEntity, float _fDensity, int _iCollisionGroup);
   virtual ~CComponentPhysXMesh(void) {Done();};
+
+protected:
+  CComponentPhysXMesh(){};
+  bool Init(CGameEntity* _pEntity, float _fDensity, int _iCollisionGroup);
 };
 
 #endif

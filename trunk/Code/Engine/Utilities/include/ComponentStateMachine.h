@@ -11,13 +11,12 @@ class CComponentStateMachine:
   public CBaseComponent
 {
 public:
-  CComponentStateMachine() {};
   ~CComponentStateMachine() {Done();}
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_STATE_MACHINE;};
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_STATE_MACHINE;};
 
-  bool Init(CGameEntity* _pEntity, const string& _pEstatInicial);
+  static CComponentStateMachine* AddToEntity(CGameEntity* _pEntity, const string& _pEstatInicial);
   
   virtual void Update(float _fDeltaTime);
   virtual void ReceiveEvent(const SEvent& _Event);
@@ -25,6 +24,8 @@ public:
   CScriptedStateMachine* GetStateMachine() const { return m_pStateMachine; };
 
 protected:
+  CComponentStateMachine() {};
+  bool Init(CGameEntity* _pEntity, const string& _pEstatInicial);
   virtual void Release();
 private:
   CScriptedStateMachine* m_pStateMachine;

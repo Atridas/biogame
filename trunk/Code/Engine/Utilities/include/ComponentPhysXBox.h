@@ -10,6 +10,16 @@ class CComponentPhysXBox :
 {
 public:
   
+  static CComponentPhysXBox* AddToEntity(CGameEntity *_pEntity, float _fDensity, int _iCollisionGroup);
+
+  static CComponentPhysXBox* AddToEntity(CGameEntity *_pEntity,
+            float _fSizeX, float _fSizeY, float _fSizeZ,
+            float _fPosX , float _fPosY , float _fPosZ,
+            float _fDensity, int _iCollisionGroup
+            );
+  
+protected:
+  CComponentPhysXBox() {};
   bool Init(CGameEntity *_pEntity, float _fDensity, int _iCollisionGroup);
 
   bool Init(CGameEntity *_pEntity,

@@ -17,8 +17,18 @@ void CGameProcess::Update(float _fElapsedTime)
 {
   CObject3D* m_pPlayerPos = CORE->GetEntityManager()->GetEntity("Player")->GetComponent<CComponentObject3D>(CBaseComponent::ECT_OBJECT_3D);
 
-  m_pOmniLight->SetPosition(m_pPlayerPos->GetPosition());
+
+  Vect3f l_vPlayerPos = m_pPlayerPos->GetPosition();
+  Vect3f l_vDirCampera = m_pCamera->GetDirection();
+
+  Vect3f l_vLightMod(l_vDirCampera.x, 0, l_vDirCampera.z);
+  l_vLightMod.Normalize();
+  l_vLightMod = Vect3f(0,1,0) - l_vLightMod;
+
+  m_pOmniLight->SetPosition(l_vPlayerPos + l_vLightMod);
   CORE->GetParticleManager()->Update(_fElapsedTime,m_pCamera);
+
+
 }
 
 void CGameProcess::RenderScene(CRenderManager* _pRM)

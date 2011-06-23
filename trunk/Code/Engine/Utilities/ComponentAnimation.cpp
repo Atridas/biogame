@@ -2,11 +2,25 @@
 #include "ComponentRenderableObject.h"
 #include "RenderableAnimatedInstanceModel.h"
 
+
+CComponentAnimation* CComponentAnimation::AddToEntity(CGameEntity *_pEntity)
+{
+  CComponentAnimation *l_pComp = new CComponentAnimation();
+  assert(_pEntity && _pEntity->IsOk());
+  if(l_pComp->Init(_pEntity))
+  {
+    l_pComp->SetEntity(_pEntity);
+    return l_pComp;
+  }
+  else
+  {
+    delete l_pComp;
+    return 0;
+  }
+}
+
 bool CComponentAnimation::Init(CGameEntity* _pEntity)
 {
-  assert(_pEntity && _pEntity->IsOk());
-  SetEntity(_pEntity);
-
   CComponentRenderableObject *l_pComponentRO = _pEntity->GetComponent<CComponentRenderableObject>(ECT_RENDERABLE_OBJECT);
   assert(l_pComponentRO); //TODO fer missatges d'error més elavorats
   m_pAnimatedModel = dynamic_cast<CRenderableAnimatedInstanceModel*>(l_pComponentRO->GetRenderableObject());

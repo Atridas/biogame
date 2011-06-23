@@ -15,22 +15,14 @@ class CComponentIAWalkToPlayer :
   public CBaseComponent
 {
 public:
-
-
-  CComponentIAWalkToPlayer():
-      m_pObject3D(0), m_pMovement(0),
-
-      m_fWalkSpeed(1)
-      {};
-
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_IA_WALK_TO_PLAYER;};
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_IA_WALK_TO_PLAYER;};
-
-  bool Init(CGameEntity *_pEntity,
-            const string& _szPlayerEntityName,
-            float _fWalkSpeed,
-            const string& _szWalkAnimation,
-            const string& _szRebreImpacte);
+  
+  static CComponentIAWalkToPlayer* AddToEntity(CGameEntity *_pEntity,
+                          const string& _szPlayerEntityName,
+                          float _fWalkSpeed,
+                          const string& _szWalkAnimation,
+                          const string& _szRebreImpacte);
 
   void Update(float _fDeltaTime);
   
@@ -42,6 +34,16 @@ public:
   float m_fWalkSpeed;
 
 protected:
+  CComponentIAWalkToPlayer():
+      m_pObject3D(0), m_pMovement(0),
+
+      m_fWalkSpeed(1)
+      {};
+  bool Init(CGameEntity *_pEntity,
+            const string& _szPlayerEntityName,
+            float _fWalkSpeed,
+            const string& _szWalkAnimation,
+            const string& _szRebreImpacte);
   virtual void Release() {};
 
 private:

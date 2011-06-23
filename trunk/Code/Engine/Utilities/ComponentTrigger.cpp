@@ -22,15 +22,33 @@ extern "C"
 #include "ComponentObject3D.h"
 #include "Utils\Logger.h"
 
+
+CComponentTrigger* CComponentTrigger::AddToEntity(
+            CGameEntity* _pEntity,
+            const Vect3f& _vSize,
+            const string& _szOnEnter, const string& _szOnExit,
+            int _iCollisionGroup)
+{
+  CComponentTrigger *l_pComp = new CComponentTrigger();
+  assert(_pEntity && _pEntity->IsOk());
+  if(l_pComp->Init(_pEntity, _vSize, _szOnEnter, _szOnExit, _iCollisionGroup))
+  {
+    l_pComp->SetEntity(_pEntity);
+    return l_pComp;
+  }
+  else
+  {
+    delete l_pComp;
+    return 0;
+  }
+}
+
 bool CComponentTrigger::Init(
             CGameEntity* _pEntity,
             const Vect3f& _vSize,
             const string& _szOnEnter, const string& _szOnExit,
-            int _iCollisionMask)
+            int _iCollisionGroup)
 {
-  assert(_pEntity->IsOk());
-  SetEntity(_pEntity);
-
   m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
   assert(m_pObject3D); //TODO fer missatges d'error més elavorats
 
@@ -41,7 +59,7 @@ bool CComponentTrigger::Init(
 
   m_pPhysXActor = new CPhysicActor(m_pPhysXData);
 
-  m_pPhysXActor->CreateBoxTrigger(_vSize * .5f, _iCollisionMask);
+  m_pPhysXActor->CreateBoxTrigger(_vSize * .5f, _iCollisionGroup);
 
   CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXActor);
   m_pPhysXActor->SetMat44( m_pObject3D->GetMat44() );

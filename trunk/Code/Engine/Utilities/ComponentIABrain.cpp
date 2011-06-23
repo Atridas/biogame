@@ -10,11 +10,25 @@
 #include "cal3d\cal3d.h"
 
 
+
+CComponentIABrain* CComponentIABrain::AddToEntity(CGameEntity *_pEntity, const string& _szPlayerEntityName, const string& _szRagdollName)
+{
+  CComponentIABrain *l_pComp = new CComponentIABrain();
+  assert(_pEntity && _pEntity->IsOk());
+  if(l_pComp->Init(_pEntity, _szPlayerEntityName, _szRagdollName))
+  {
+    l_pComp->SetEntity(_pEntity);
+    return l_pComp;
+  }
+  else
+  {
+    delete l_pComp;
+    return 0;
+  }
+}
+
 bool CComponentIABrain::Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName)
 {
-  assert(_pEntity);
-  SetEntity(_pEntity);
-
   m_szRagdollName = _szRagdollName;
 
   m_pPlayer = CORE->GetEntityManager()->GetEntity(_szPlayerEntityName);
@@ -69,7 +83,7 @@ void CComponentIABrain::Shoot()
     Vect3f l_vCenterPoint = l_CInfo.m_CollisionPoint;
 
     CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
-    (new CComponentLaser())->Init(l_pLaser,
+    CComponentLaser::AddToEntity(l_pLaser,
                                   Vect3f(l_vMyHand.x,l_vMyHand.y,l_vMyHand.z),
                                   l_vCenterPoint,
                                   1.f);
@@ -91,10 +105,10 @@ void CComponentIABrain::Shoot()
     Vect3f l_vCenterPoint = l_vMyHand + l_vDir * 100;
 
     CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
-    (new CComponentLaser())->Init(l_pLaser,
-                                  l_vMyHand,
-                                  l_vCenterPoint,
-                                  1.f);
+    CComponentLaser::AddToEntity(l_pLaser,
+                                l_vMyHand,
+                                l_vCenterPoint,
+                                1.f);
   }
 }
 
@@ -105,10 +119,8 @@ void CComponentIABrain::Die()
   CComponentRagdoll *l_pRC = GetEntity()->GetComponent<CComponentRagdoll>();
   if(!l_pRC)
   {
-    l_pRC = new CComponentRagdoll();
-    if(!l_pRC->Init(GetEntity(), m_szRagdollName))
+    if(!(l_pRC = CComponentRagdoll::AddToEntity(GetEntity(), m_szRagdollName)))
     {
-      delete l_pRC;
       return;
     }
     GetEntity()->DeleteComponent(CBaseComponent::ECT_PHYSX_CONTROLLER);

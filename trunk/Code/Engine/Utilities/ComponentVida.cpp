@@ -1,12 +1,24 @@
 #include "ComponentVida.h"
 #include "Core.h"
 
+CComponentVida* CComponentVida::AddToEntity(CGameEntity* _pEntity, float _fVidaInicial)
+{
+  CComponentVida *l_pComp = new CComponentVida();
+  assert(_pEntity && _pEntity->IsOk());
+  if(l_pComp->Init(_pEntity, _fVidaInicial))
+  {
+    l_pComp->SetEntity(_pEntity);
+    return l_pComp;
+  }
+  else
+  {
+    delete l_pComp;
+    return 0;
+  }
+}
 
 bool CComponentVida::Init(CGameEntity* _pEntity, float _fVidaInicial)
 {
-  assert(_pEntity->IsOk());
-  SetEntity(_pEntity);
-
   m_fVida = _fVidaInicial;
 
   SetOk(true);

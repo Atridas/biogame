@@ -238,6 +238,7 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
   end
   
   if ACTION_MANAGER:is_action_active('Shoot') then
+    animation:play('Shoot', 0.3, 1.0, false)
     player_controller:shoot()
     SOUND:play_sample('disparar')
   end

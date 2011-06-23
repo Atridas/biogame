@@ -5,11 +5,29 @@
 #include "PhysicsManager.h"
 #include "Core.h"
 
+
+CComponent3rdPSCamera* CComponent3rdPSCamera::AddToEntity(CGameEntity *_pEntity,
+                                        float _fCameraHeight,
+                                        float _fCameraRight,
+                                        float _fZoom)
+{
+  CComponent3rdPSCamera *l_pComp = new CComponent3rdPSCamera();
+  assert(_pEntity && _pEntity->IsOk());
+  if(l_pComp->Init(_pEntity, _fCameraHeight, _fCameraRight, _fZoom))
+  {
+    l_pComp->SetEntity(_pEntity);
+    return l_pComp;
+  }
+  else
+  {
+    delete l_pComp;
+    return 0;
+  }
+}
+
 bool CComponent3rdPSCamera::Init(CGameEntity *_pEntity,
             float _fCameraHeight, float _fCameraRight, float _fZoom)
 {
-  assert(_pEntity->IsOk());
-  SetEntity(_pEntity);
 
   m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
   assert(m_pObject3D); //TODO fer missatges d'error més elavorats
@@ -19,12 +37,12 @@ bool CComponent3rdPSCamera::Init(CGameEntity *_pEntity,
   m_fZoom         = _fZoom;
 
   m_pCamera = new CShoulderCamera(
-                      0.1f,
-                      100.0f,
-                      55.0f * FLOAT_PI_VALUE/180.0f,
-                      ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
-                      &m_CameraObject,
-                      m_fZoom,m_fCameraRight,m_fCameraHeight);
+                            0.1f,
+                            100.0f,
+                            55.0f * FLOAT_PI_VALUE/180.0f,
+                            ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
+                            &m_CameraObject,
+                            m_fZoom,m_fCameraRight,m_fCameraHeight);
 
   SetOk(true);
   return IsOk();

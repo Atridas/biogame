@@ -7,15 +7,34 @@
 #include "ComponentRenderableObject.h"
 #include "RenderableAnimatedInstanceModel.h"
 
+
+
+CComponentIAWalkToPlayer* CComponentIAWalkToPlayer::AddToEntity(CGameEntity *_pEntity,
+            const string& _szPlayerEntityName,
+            float _fWalkSpeed,
+            const string& _szWalkAnimation,
+            const string& _szRebreImpacte)
+{
+  CComponentIAWalkToPlayer *l_pComp = new CComponentIAWalkToPlayer();
+  assert(_pEntity && _pEntity->IsOk());
+  if(l_pComp->Init(_pEntity, _szPlayerEntityName, _fWalkSpeed, _szWalkAnimation, _szRebreImpacte))
+  {
+    l_pComp->SetEntity(_pEntity);
+    return l_pComp;
+  }
+  else
+  {
+    delete l_pComp;
+    return 0;
+  }
+}
+
 bool CComponentIAWalkToPlayer::Init(CGameEntity *_pEntity,
             const string& _szPlayerEntityName,
             float _fWalkSpeed,
             const string& _szWalkAnimation,
             const string& _szRebreImpacte)
 {
-  assert(_pEntity->IsOk());
-  SetEntity(_pEntity);
-
   m_pMovement = _pEntity->GetComponent<CComponentMovement>(ECT_MOVEMENT);
   assert(m_pMovement); //TODO fer missatges d'error més elavorats
 

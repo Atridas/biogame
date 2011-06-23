@@ -12,12 +12,11 @@ class CComponentMovement :
 public:
 
 
-  CComponentMovement() {};
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_MOVEMENT;};
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_MOVEMENT;};
 
-  bool Init(CGameEntity *_pEntity);
+  static CComponentMovement* AddToEntity(CGameEntity *_pEntity);
 
   void PreUpdate(float _fDeltaTime);
 
@@ -27,6 +26,8 @@ public:
   Vect3f m_vMovement;
 
 protected:
+  CComponentMovement() {};
+  bool Init(CGameEntity *_pEntity);
   virtual void Release() {};
 };
 
