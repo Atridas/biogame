@@ -99,7 +99,8 @@ void CComponent3rdPSCamera::PostUpdate(float _fDeltaTime)
 
   if(m_pCamera->GetShoulderDistance() != m_fTargetRightDistance)
   {
-    m_pCamera->SetShoulderDistance(m_fTargetRightDistance - (m_fTargetRightDistance - m_fPrevRightDistance) * RightDistanceSystem(_fDeltaTime));
+    m_fTimeRightDistance += _fDeltaTime;
+    m_pCamera->SetShoulderDistance(m_fPrevRightDistance + FirstOrderSystem((m_fTargetRightDistance - m_fPrevRightDistance),m_tTimeConstantRightDistance,m_fTimeRightDistance));
   }
 
   l_pUserDataSHOOT = 0;
@@ -132,22 +133,14 @@ void CComponent3rdPSCamera::PostUpdate(float _fDeltaTime)
 
   if(m_pCamera->GetZoom() != m_fTargetObjectDistance)
   {
-    m_pCamera->SetZoom(m_fTargetObjectDistance - (m_fTargetObjectDistance - m_fPrevObjectDistance) * ObjectDistanceSystem(_fDeltaTime));
+    m_fTimeObjectDistance += _fDeltaTime;
+    m_pCamera->SetZoom(m_fPrevObjectDistance + FirstOrderSystem(m_fTargetObjectDistance - m_fPrevObjectDistance, m_tTimeConstantObjectDistance, m_fTimeObjectDistance));
   }
 }
 
-float CComponent3rdPSCamera::ObjectDistanceSystem(float _fDeltaTime)
+float CComponent3rdPSCamera::FirstOrderSystem(float _fInput, float _fTimeConstant, float _fTime)
 {
-  m_fTimeObjectDistance += _fDeltaTime;
-
-  return exp(-m_tTimeConstantObjectDistance*m_fTimeObjectDistance);
-}
-
-float CComponent3rdPSCamera::RightDistanceSystem(float _fDeltaTime)
-{
-  m_fTimeRightDistance += _fDeltaTime;
-
-  return exp(-m_tTimeConstantRightDistance*m_fTimeRightDistance);
+  return _fInput*(1 - exp(-_fTimeConstant*_fTime));
 }
 
 CCamera* CComponent3rdPSCamera::GetCamera() const 

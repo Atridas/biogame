@@ -71,8 +71,7 @@ private:
   float m_fTargetRightDistance;
   float m_fPrevRightDistance;
 
-  float ObjectDistanceSystem(float _fDeltaTime);
-  float RightDistanceSystem(float _fDeltaTime);
+  float FirstOrderSystem(float _fInput, float _fTimeConstant, float _fTime);
 
   //Altres components referenciats
   CComponentObject3D * m_pObject3D;
