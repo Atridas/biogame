@@ -44,6 +44,9 @@ bool CComponent3rdPSCamera::Init(CGameEntity *_pEntity,
                             &m_CameraObject,
                             m_fZoom,m_fCameraRight,m_fCameraHeight);
 
+  m_tTimeConstantRightDistance = 6.8f;
+  m_tTimeConstantObjectDistance = 8.7f;
+
   SetOk(true);
   return IsOk();
 }
@@ -55,6 +58,9 @@ void CComponent3rdPSCamera::Release()
 
 void CComponent3rdPSCamera::PostUpdate(float _fDeltaTime)
 {
+  float l_fPrevTargetRightDistance = m_fTargetRightDistance;
+  float l_fPrevTargetObjectDistance = m_fTargetObjectDistance;
+
   m_CameraObject.SetPosition( m_pObject3D->GetPosition() );
   m_CameraObject.SetPitch( m_pObject3D->GetPitch() );
   m_CameraObject.SetYaw  (  m_pObject3D->GetYaw() );
@@ -67,26 +73,82 @@ void CComponent3rdPSCamera::PostUpdate(float _fDeltaTime)
   
   l_pUserDataSHOOT = l_pPM->RaycastClosestActor(m_CameraObject.GetPosition()+Vect3f(0.0f,m_fCameraHeight,0.0f),(m_pCamera->GetLookAt()-(m_CameraObject.GetPosition()+Vect3f(0.0f,m_fCameraHeight,0.0f))).Normalize(),l_pPM->GetCollisionMask(ECG_CAMERA),l_CInfo);
 
-  if(l_pUserDataSHOOT && l_CInfo.m_fDistance - 0.25f < m_fCameraRight)
+  if(l_pUserDataSHOOT)
   {
-    m_pCamera->SetShoulderDistance(l_CInfo.m_fDistance - 0.25f);
-  }else{
-    m_pCamera->SetShoulderDistance(m_fCameraRight);
+    float l_fDistance = l_CInfo.m_fDistance - 0.4f;
+
+    if(l_fDistance < 0.01f)
+    {
+      l_fDistance = 0.01f;
+    }
+
+    if(l_fDistance < m_fCameraRight)
+    {
+      m_fTargetRightDistance = l_fDistance;
+   
+    }else{
+      m_fTargetRightDistance = m_fCameraRight;
+    }
+  }
+
+  if(m_fTargetRightDistance != l_fPrevTargetRightDistance)
+  {
+    m_fTimeRightDistance = 0.0f;
+    m_fPrevRightDistance = m_pCamera->GetShoulderDistance();
+  }
+
+  if(m_pCamera->GetShoulderDistance() != m_fTargetRightDistance)
+  {
+    m_pCamera->SetShoulderDistance(m_fTargetRightDistance - (m_fTargetRightDistance - m_fPrevRightDistance) * RightDistanceSystem(_fDeltaTime));
   }
 
   l_pUserDataSHOOT = 0;
 
 	l_pUserDataSHOOT = l_pPM->RaycastClosestActor(m_pCamera->GetLookAt(),-m_pCamera->GetDirection().Normalize(),l_pPM->GetCollisionMask(ECG_CAMERA),l_CInfo);
 
-  if(l_pUserDataSHOOT && l_CInfo.m_fDistance - 0.25f < m_fZoom)
+  if(l_pUserDataSHOOT)
   {
-    m_pCamera->SetZoom(l_CInfo.m_fDistance - 0.25f);
-  }else{
-    m_pCamera->SetZoom(m_fZoom);
+    float l_fDistance = l_CInfo.m_fDistance - 0.4f;
+
+    if(l_fDistance < 0.01f)
+    {
+      l_fDistance = 0.01f;
+    }
+
+    if(l_fDistance < m_fZoom)
+    {
+      m_fTargetObjectDistance = l_fDistance;
+    
+    }else{
+      m_fTargetObjectDistance = m_fZoom;
+    }
   }
   
+  if(m_fTargetObjectDistance != l_fPrevTargetObjectDistance)
+  {
+    m_fTimeObjectDistance = 0.0f;
+    m_fPrevObjectDistance = m_pCamera->GetZoom();
+  }
+
+  if(m_pCamera->GetZoom() != m_fTargetObjectDistance)
+  {
+    m_pCamera->SetZoom(m_fTargetObjectDistance - (m_fTargetObjectDistance - m_fPrevObjectDistance) * ObjectDistanceSystem(_fDeltaTime));
+  }
 }
 
+float CComponent3rdPSCamera::ObjectDistanceSystem(float _fDeltaTime)
+{
+  m_fTimeObjectDistance += _fDeltaTime;
+
+  return exp(-m_tTimeConstantObjectDistance*m_fTimeObjectDistance);
+}
+
+float CComponent3rdPSCamera::RightDistanceSystem(float _fDeltaTime)
+{
+  m_fTimeRightDistance += _fDeltaTime;
+
+  return exp(-m_tTimeConstantRightDistance*m_fTimeRightDistance);
+}
 
 CCamera* CComponent3rdPSCamera::GetCamera() const 
 {

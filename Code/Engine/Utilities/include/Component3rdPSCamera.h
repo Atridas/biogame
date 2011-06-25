@@ -41,8 +41,15 @@ protected:
   CComponent3rdPSCamera():
       m_pObject3D(0),
       m_pCamera(0),
-     
-      m_fCameraHeight(0)
+      m_fCameraHeight(0),
+      m_fTimeObjectDistance(0.0f),
+      m_fTargetObjectDistance(0.0f),
+      m_fPrevObjectDistance(0.0f),
+      m_fTargetRightDistance(0.0f),
+      m_fTimeRightDistance(0.0f),
+      m_tTimeConstantRightDistance(0.0f),
+      m_tTimeConstantObjectDistance(0.0f),
+      m_fPrevRightDistance(0.0f)
       {};
 
   bool Init(CGameEntity *_pEntity,
@@ -51,6 +58,22 @@ protected:
             float _fZoom);
   
 private:
+
+  float m_tTimeConstantRightDistance;
+  float m_tTimeConstantObjectDistance;
+
+  float m_fTimeObjectDistance;
+  float m_fTimeRightDistance;
+
+  float m_fTargetObjectDistance;
+  float m_fPrevObjectDistance;
+
+  float m_fTargetRightDistance;
+  float m_fPrevRightDistance;
+
+  float ObjectDistanceSystem(float _fDeltaTime);
+  float RightDistanceSystem(float _fDeltaTime);
+
   //Altres components referenciats
   CComponentObject3D * m_pObject3D;
 
