@@ -142,8 +142,102 @@ void CRoom::RemoveRendeableObject(CRenderableObject* _pRO)
   m_RenderableObjects.erase(_pRO);
 }
 
-bool CRoom::IsObject3DInRoom(const CObject3D&)
+bool CRoom::IsObject3DSphereInRoom(const CObject3D& _Object3D) const
 {
+  vector<CObject3D>::const_iterator l_it  = m_Boundings.cbegin();
+  vector<CObject3D>::const_iterator l_end = m_Boundings.cend();
+
+  Mat44f l_matObject = _Object3D.GetMat44();
+  
+  Vect3f l_vCenterObject = _Object3D.GetBoundingSphere()->GetMiddlePoint();
+  float  l_fRadius       = _Object3D.GetBoundingSphere()->GetRadius();
+
+  Vect4f l_aux = l_matObject * Vect4f(l_vCenterObject.x, l_vCenterObject.y, l_vCenterObject.z, 1);
+  l_vCenterObject.x = l_aux.x / l_aux.w;
+  l_vCenterObject.y = l_aux.y / l_aux.w;
+  l_vCenterObject.z = l_aux.z / l_aux.w;
+
+  for(; l_it != l_end; ++l_it)
+  {
+    Mat44f l_marRoom         = l_it->GetMat44();
+    const CBoundingBox *l_BB = l_it->GetBoundingBox();
+    bool l_bInsideTheBox = true;
+    for(int i = 0; i < 3; ++i)
+    {
+      Vect3f l_vBasis;
+      float l_fBoxR;
+      //agafem el vector que toca segons la iteració.
+      switch(i)
+      { 
+      case 0: 
+        l_vBasis = Vect3f(1,0,0);
+        l_fBoxR = l_BB->GetDimension().x;
+        break;
+      case 1: 
+        l_vBasis = Vect3f(0,1,0);
+        l_fBoxR = l_BB->GetDimension().y;
+        break;
+      case 2: 
+        l_vBasis = Vect3f(0,0,1);
+        l_fBoxR = l_BB->GetDimension().z;
+        break;
+      }
+      //movem el vector segons la transformada
+      l_aux = l_marRoom.GetInverted().Transpose() * Vect4f(l_vBasis.x,l_vBasis.y,l_vBasis.z,0);
+      l_vBasis.x = l_aux.x;
+      l_vBasis.y = l_aux.y;
+      l_vBasis.z = l_aux.z;
+
+      //calculem el "radi" de la box segon l'eix
+      l_fBoxR = l_fBoxR * (l_vBasis * l_vBasis) *.5f;
+
+      //minim i maxim de la box projectat
+      Vect3f l_fMiddlePoint = l_BB->GetMiddlePoint();
+      l_aux = l_marRoom * Vect4f(l_fMiddlePoint.x,l_fMiddlePoint.y,l_fMiddlePoint.z,1);
+      l_fMiddlePoint.x = l_aux.x / l_aux.w;
+      l_fMiddlePoint.y = l_aux.y / l_aux.w;
+      l_fMiddlePoint.z = l_aux.z / l_aux.w;
+
+      float l_fProjCenter = l_fMiddlePoint * l_vBasis;
+      float l_fBoxMin = l_fProjCenter - l_fBoxR;
+      float l_fBoxMax = l_fProjCenter + l_fBoxR;
+
+
+      //centre de la esfera projectat
+      float l_fSphereCenter = l_vCenterObject * l_vBasis;
+
+      if(l_fSphereCenter + l_fRadius < l_fBoxMin ||
+         l_fSphereCenter - l_fRadius > l_fBoxMax)
+      {
+        l_bInsideTheBox = false;
+        break;
+      }
+    }
+    if(l_bInsideTheBox)
+    {
+      return true;
+    }
+  }
 
   return false;
+}
+
+
+
+void CRoom::DebugRender(CRenderManager* _pRM) const
+{
+  
+  vector<CObject3D>::const_iterator l_it  = m_Boundings.cbegin();
+  vector<CObject3D>::const_iterator l_end = m_Boundings.cend();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    Mat44f scale;
+    scale.SetIdentity();
+    scale.SetScale(l_it->GetBoundingBox()->GetDimension().x, l_it->GetBoundingBox()->GetDimension().y, l_it->GetBoundingBox()->GetDimension().z);
+
+    _pRM->SetTransform( l_it->GetMat44() * scale);
+
+    _pRM->DrawCube(1, colBLACK);
+  }
 }

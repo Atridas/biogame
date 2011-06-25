@@ -10,6 +10,7 @@
 class CRoom;
 class CXMLTreeNode;
 class CPortalManager;
+class CRenderManager;
 // ----------------------------
 
 class CPortal:
@@ -25,6 +26,8 @@ public:
   
   CRoom* GetRoomA() const {return m_pRoomA;};
   CRoom* GetRoomB() const {return m_pRoomB;};
+  
+  void DebugRender(CRenderManager* _pRM) const;
 
 protected:
   virtual void Release() {m_pRoomA = m_pRoomB = 0;};
