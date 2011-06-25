@@ -1,4 +1,6 @@
 #include "PortalManager.h"
+#include "RenderManager.h"
+#include "Camera.h"
 
 #include <XML\XMLTreeNode.h>
 
@@ -147,4 +149,9 @@ CPortal* CPortalManager::GetPortal(const string& _szName)
   {
     return &(l_it->second);
   }
+}
+
+void CPortalManager::Render(CRenderManager* _pRM)
+{
+  
 }
