@@ -24,18 +24,20 @@ public:
 	virtual ~CObject3D(void) {/*Nothing*/;}
 
 	//---Get Functions
-	float						    GetYaw			    () const {return m_fYaw;}
-	float						    GetRoll			    () const {return m_fRoll;}
-	float						    GetPitch		    () const {return m_fPitch;}
-	const Vect3f&		    GetPosition	    () const {return m_vPosition;}
-  Vect3f		          GetCenterPosition	    ();
-  bool						    GetVisible	    () const {return m_bVisible;}
-  Mat44f              GetMat44        () const {return m_vMat44;}
-  void                GetMat44        (Mat44f& _Mat) const {_Mat = m_vMat44;}
-  bool						    GetRenderBoundingBox  () const {return m_bRenderBoundingBox;}
-  bool						    GetRenderBoundingSphere  () const {return m_bRenderBoundingSphere;}
-  CBoundingBox*		    GetBoundingBox	() {return &m_BoundingBox;}
-  CBoundingSphere*		GetBoundingSphere	() {return &m_BoundingSphere;}
+	float						         GetYaw			    () const {return m_fYaw;}
+	float						         GetRoll			    () const {return m_fRoll;}
+	float						         GetPitch		    () const {return m_fPitch;}
+	const Vect3f&		         GetPosition	    () const {return m_vPosition;}
+  Vect3f		               GetCenterPosition	    ();
+  bool						         GetVisible	    () const {return m_bVisible;}
+  Mat44f                   GetMat44        () const {return m_vMat44;}
+  void                     GetMat44        (Mat44f& _Mat) const {_Mat = m_vMat44;}
+  bool						         GetRenderBoundingBox  () const {return m_bRenderBoundingBox;}
+  bool						         GetRenderBoundingSphere  () const {return m_bRenderBoundingSphere;}
+  CBoundingBox*		         GetBoundingBox	    ()       {return &m_BoundingBox;}
+  CBoundingSphere*		     GetBoundingSphere	()       {return &m_BoundingSphere;}
+  const CBoundingBox*		   GetBoundingBox	    () const {return &m_BoundingBox;}
+  const CBoundingSphere*	 GetBoundingSphere	() const {return &m_BoundingSphere;}
 
 	//---Set Functions
 	void    SetPosition	( const Vect3f& _vPos );

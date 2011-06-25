@@ -2,6 +2,7 @@
 
 #include "XML\XMLTreeNode.h"
 #include "PortalManager.h"
+#include "RenderManager.h"
 
 bool CPortal::Init(CXMLTreeNode& _xmlPortal, CPortalManager* _pPortalManager)
 {
@@ -62,9 +63,23 @@ bool CPortal::Init(CXMLTreeNode& _xmlPortal, CPortalManager* _pPortalManager)
       SetPosition(l_vPosition);
 
       GetBoundingBox()->Init(l_vSize);
+      
+      m_pRoomA->AddPortal(this);
+      m_pRoomB->AddPortal(this);
     }
   }
 
   return IsOk();
 }
 
+
+void CPortal::DebugRender(CRenderManager* _pRM) const
+{
+  Mat44f scale;
+  scale.SetIdentity();
+  scale.SetScale(GetBoundingBox()->GetDimension().x, GetBoundingBox()->GetDimension().y, GetBoundingBox()->GetDimension().z);
+
+  _pRM->SetTransform( GetMat44() * scale);
+
+  _pRM->DrawCube(1, colWHITE);
+}

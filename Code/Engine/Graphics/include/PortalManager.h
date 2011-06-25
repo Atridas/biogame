@@ -22,6 +22,7 @@ public:
   CPortal* GetPortal(const string& _szName);
 
   void Render(CRenderManager* _pRM);
+  void DebugRender(CRenderManager* _pRM) const;
 
 protected:
   virtual void Release() {};
@@ -29,6 +30,8 @@ private:
 
   map<string,CRoom>   m_Rooms;
   map<string,CPortal> m_Portals;
+
+  string              m_szCameraLastRoom;
 };
 
 #endif

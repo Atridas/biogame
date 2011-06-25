@@ -106,7 +106,9 @@
     <None Include="..\..\..\Run\Data\XML\enemigos.xml" />
     <None Include="..\..\..\Run\Data\XML\fonts.xml" />
     <None Include="..\..\..\Run\Data\XML\IA.xml" />
-    <None Include="..\..\..\Run\Data\XML\init.xml" />
+    <None Include="..\..\..\Run\Data\XML\init.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="..\..\..\Run\Data\XML\Lights.xml" />
     <None Include="..\..\..\Run\Data\XML\Lua.xml" />
     <None Include="..\..\..\Run\Data\XML\Particles.xml">

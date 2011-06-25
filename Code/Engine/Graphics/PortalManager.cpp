@@ -1,6 +1,9 @@
 #include "PortalManager.h"
 #include "RenderManager.h"
 #include "Camera.h"
+#include "Core.h"
+#include "EffectManager.h"
+#include "Portal.h"
 
 #include <XML\XMLTreeNode.h>
 
@@ -95,12 +98,10 @@ bool CPortalManager::Init(CXMLTreeNode& _xmlLevel)
           if(m_Portals.find(l_szName) == m_Portals.end())
           {
             CPortal l_Portal;
-            if(l_Portal.Init(l_xmlPortal, this))
+            m_Portals[l_szName] = l_Portal;
+            if(!m_Portals[l_szName].Init(l_xmlPortal, this))
             {
-              m_Portals[l_szName] = l_Portal;
-            }
-            else
-            {
+              m_Portals.erase(l_szName);
               LOGGER->AddNewLog(ELL_WARNING, "CPortalManager::Init Portal \"%s\" no OK", l_szName.c_str());
             }
           }
@@ -151,7 +152,150 @@ CPortal* CPortalManager::GetPortal(const string& _szName)
   }
 }
 
+
+struct SRP { 
+  CRoom* r; 
+  CPortal* p;
+  SRP(CRoom* _r, CPortal* _p):r(_r),p(_p) {};
+};
+
+void RenderPortals(CRoom *_pRoom, CRenderManager* _pRM, const CFrustum& _Frustum, set<CPortal*> _PrevPortals, CRoom::TBlendQueue& _BlendQueue)
+{
+  _pRoom->Render(_pRM,_Frustum,_BlendQueue);
+  const vector<CPortal*>& l_Portals = _pRoom->GetPortals();
+    
+  vector<SRP> l_NextRooms;
+
+  {
+    vector<CPortal*>::const_iterator l_it  = l_Portals.cbegin();
+    vector<CPortal*>::const_iterator l_end = l_Portals.cend();
+    for(; l_it != l_end; ++l_it)
+    {
+      CPortal* l_pPortal = *l_it;
+      if(_PrevPortals.find(l_pPortal) == _PrevPortals.cend())
+      {
+        _PrevPortals.insert(l_pPortal);
+        if(l_pPortal->GetRoomA() == _pRoom)
+        {
+          assert(l_pPortal->GetRoomB() != _pRoom);
+          l_NextRooms.push_back( SRP(l_pPortal->GetRoomB(),l_pPortal) );
+        }
+        else
+        {
+          assert(l_pPortal->GetRoomB() == _pRoom);
+          l_NextRooms.push_back( SRP(l_pPortal->GetRoomA(),l_pPortal) );
+        }
+      }
+    }
+  }
+  {
+    vector<SRP>::const_iterator l_it  = l_NextRooms.cbegin();
+    vector<SRP>::const_iterator l_end = l_NextRooms.cend();
+    for(; l_it != l_end; ++l_it)
+    {
+      const Vect3f * l_PortalPoints = l_it->p->GetBoundingBox()->GetBox();
+      Vect3f l_TransformedPoints[8];
+      Mat44f l_matPortal = l_it->p->GetMat44();
+
+      for(int i = 0; i < 8; ++i)
+      {
+        l_TransformedPoints[i] = l_matPortal * l_PortalPoints[i];
+      }
+
+      if(_Frustum.BoxVisibleByVertexs(l_TransformedPoints))
+      {
+        //TODO refer el frustum
+        RenderPortals(l_it->r,_pRM,_Frustum,_PrevPortals,_BlendQueue);
+      }
+    }
+  }
+}
+
+
 void CPortalManager::Render(CRenderManager* _pRM)
 {
+  // 1 busquem en quina habitació està la camera.
+
+  CCamera *l_pCamera = _pRM->GetCamera();
+
+  map<string,CRoom>::iterator l_it = m_Rooms.find(m_szCameraLastRoom);
+  CRoom *l_pCameraRoom = 0;
+
+  CObject3D l_CameraObject;
+  l_CameraObject.SetPosition( l_pCamera->GetEye() );
+  l_CameraObject.GetBoundingSphere()->Init(Vect3f(0,0,0),0.2f);
+
+  if(l_it != m_Rooms.end())
+  {
+    l_pCameraRoom = &(l_it->second);
+    if(!l_pCameraRoom->IsObject3DSphereInRoom(l_CameraObject))
+    {
+      l_pCameraRoom = 0;
+    }
+  }
   
+  if(!l_pCameraRoom)
+  {
+    map<string,CRoom>::iterator l_end = m_Rooms.end();
+    for(l_it = m_Rooms.begin(); l_it != l_end; ++l_it)
+    {
+      if(l_it->second.IsObject3DSphereInRoom(l_CameraObject))
+      {
+        m_szCameraLastRoom = l_it->first;
+        l_pCameraRoom = &(l_it->second);
+        break;
+      }
+    }
+  }
+
+  CFrustum l_Frustum = _pRM->GetFrustum();
+
+  Vect3f   l_vEye    = (l_pCamera)? l_pCamera->GetEye() : Vect3f(0,0,-1);
+  CRenderableObjectOrdering l_Ordering(l_vEye);
+
+  CRoom::TBlendQueue l_BlendQueue(l_Ordering);
+
+  if(!l_pCameraRoom)
+  {
+    map<string,CRoom>::iterator l_end = m_Rooms.end();
+    for(l_it = m_Rooms.begin(); l_it != l_end; ++l_it)
+    {
+      l_it->second.Render(_pRM,l_Frustum,l_BlendQueue);
+    }
+  }
+  else
+  {
+    set<CPortal*> l_PrevPortals;
+    RenderPortals(l_pCameraRoom, _pRM, l_Frustum, l_PrevPortals, l_BlendQueue);
+  }
+
+
+  CORE->GetEffectManager()->ActivateAlphaRendering();
+
+  while(!l_BlendQueue.empty())
+  {
+    CRenderableObject* l_pRenderableObject = l_BlendQueue.top();
+    l_pRenderableObject->Render(_pRM);
+    l_BlendQueue.pop();
+  }
+}
+
+void CPortalManager::DebugRender(CRenderManager* _pRM) const
+{
+  
+  map<string,CPortal>::const_iterator l_itP  = m_Portals.cbegin();
+  map<string,CPortal>::const_iterator l_endP = m_Portals.cend();
+
+  for(; l_itP != l_endP; ++l_itP)
+  {
+    l_itP->second.DebugRender(_pRM);
+  }
+
+  map<string,CRoom>::const_iterator l_itR  = m_Rooms.cbegin();
+  map<string,CRoom>::const_iterator l_endR = m_Rooms.cend();
+
+  for(; l_itR != l_endR; ++l_itR)
+  {
+    l_itR->second.DebugRender(_pRM);
+  }
 }

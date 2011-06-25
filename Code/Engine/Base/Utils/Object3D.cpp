@@ -10,7 +10,7 @@ CObject3D::CObject3D(const Vect3f& _vPos, float _fYaw, float _fPitch, float _fRo
 , m_bRenderBoundingBox(false)
 , m_bRenderBoundingSphere(false)
 {
-  m_vMat44.SetIdentity();
+  InitMat44();
 }
 
 void CObject3D::SetPosition(const Vect3f& _vPos)

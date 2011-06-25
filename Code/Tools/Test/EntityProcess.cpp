@@ -98,8 +98,8 @@ void CEntityProcess::Update(float _fElapsedTime)
 
 void CEntityProcess::RenderScene(CRenderManager* _pRM)
 {
-  CORE->GetRenderableObjectsManager()->Render(_pRM);
-  //m_PortalManager.
+  //CORE->GetRenderableObjectsManager()->Render(_pRM);
+  m_PortalManager.Render(_pRM);
 
   //CORE->GetEntityManager()->DebugRender(_pRM);
 }
@@ -107,6 +107,7 @@ void CEntityProcess::RenderScene(CRenderManager* _pRM)
 void CEntityProcess::RenderINFO(CRenderManager* _pRM)
 {
   CORE->GetPhysicsManager()->DebugRender(_pRM);
+  m_PortalManager.DebugRender(_pRM);
 
   //CRenderableObject *l_pRO = CORE->GetEntityManager()->GetEntity("Gordo Cabrón")->GetComponent<CComponentRenderableObject>()->GetRenderableObject();
   //
