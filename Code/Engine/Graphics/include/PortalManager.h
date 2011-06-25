@@ -6,6 +6,8 @@
 #include "Room.h"
 #include "Portal.h"
 
+class CRenderManager;
+
 class CPortalManager:
   public CBaseControl
 {
@@ -18,6 +20,8 @@ public:
   
   CRoom*   GetRoom  (const string& _szName);
   CPortal* GetPortal(const string& _szName);
+
+  void Render(CRenderManager* _pRM);
 
 protected:
   virtual void Release() {};

@@ -35,7 +35,6 @@
 
 bool CEntityProcess::Init()
 {
-  CPortalManager m_PortalManager;
   m_PortalManager.Init("./Data/Levels/NivellProves/XML/Level.xml");
 
 
@@ -100,6 +99,7 @@ void CEntityProcess::Update(float _fElapsedTime)
 void CEntityProcess::RenderScene(CRenderManager* _pRM)
 {
   CORE->GetRenderableObjectsManager()->Render(_pRM);
+  //m_PortalManager.
 
   //CORE->GetEntityManager()->DebugRender(_pRM);
 }

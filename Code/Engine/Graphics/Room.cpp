@@ -103,9 +103,8 @@ bool CRoom::Init(CXMLTreeNode& _xmlRoom, set<string>& _UsedNames)
   return IsOk();
 }
 
-void CRoom::Render(CRenderManager* _pRM, priority_queue<CRenderableObject*,vector< CRenderableObject*>, CRenderableObjectOrdering>& _BlendQueue) const
+void CRoom::Render(CRenderManager* _pRM, const CFrustum& _Frustum, TBlendQueue& _BlendQueue) const
 {
-  const CFrustum& l_Frustum = _pRM->GetFrustum();
   
   set<CRenderableObject*>::const_iterator l_it  = m_RenderableObjects.cbegin();
   set<CRenderableObject*>::const_iterator l_end = m_RenderableObjects.cend();
@@ -118,7 +117,7 @@ void CRoom::Render(CRenderManager* _pRM, priority_queue<CRenderableObject*,vecto
       Vect3f l_Center = l_pRenderableObject->GetBoundingSphere()->GetMiddlePoint() + l_pRenderableObject->GetPosition();
       D3DXVECTOR3 l_d3Center(l_Center.x,l_Center.y,l_Center.z);
 
-      if(l_Frustum.SphereVisible(l_d3Center, l_pRenderableObject->GetBoundingSphere()->GetRadius()))
+      if(_Frustum.SphereVisible(l_d3Center, l_pRenderableObject->GetBoundingSphere()->GetRadius()))
       {
         if(l_pRenderableObject->IsAlphaBlended())
         {
@@ -141,4 +140,10 @@ void CRoom::AddRendeableObject(CRenderableObject* _pRO)
 void CRoom::RemoveRendeableObject(CRenderableObject* _pRO)
 {
   m_RenderableObjects.erase(_pRO);
+}
+
+bool CRoom::IsObject3DInRoom(const CObject3D&)
+{
+
+  return false;
 }
