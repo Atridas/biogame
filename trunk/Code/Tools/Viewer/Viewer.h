@@ -55,8 +55,22 @@ public:
   void IncrementAmbientLight();
   void DecrementAmbientLight();
 
-  void IncrementGlow();
-  void DecrementGlow();
+  void IncrementGlowMesh();
+  void DecrementGlowMesh();
+  void IncrementGlowAnimated();
+  void DecrementGlowAnimated();
+  void IncrementSpecMesh();
+  void DecrementSpecMesh();
+  void IncrementSpecAnimated();
+  void DecrementSpecAnimated();
+  void IncrementGlossMesh();
+  void DecrementGlossMesh();
+  void IncrementGlossAnimated();
+  void DecrementGlossAnimated();
+  void IncrementBumpMesh();
+  void DecrementBumpMesh();
+  void IncrementBumpAnimated();
+  void DecrementBumpAnimated();
 
   void ToggleLights();
   void ToggleHelp();
@@ -111,12 +125,12 @@ private:
   bool ExecuteAnimatedModeAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction);
   string ShowMaterialProperties(const vector<CMaterial*>& _vMaterials);
 
+  void ReloadMaterialValues(const vector<CMaterial*>& _vMaterials);
+
   CCamera* m_pObjectCamera;
   CObject3D* m_pTargetObject;
   CRenderableAnimatedInstanceModel* m_pCharacter;
   CDirectionalLight* m_pObjectModeLight;
-  CSpotLight* m_pSpotLight;
-  COmniLight* m_pOmniLight;
   Vect3f m_vAmbientLight;
   Vect3f m_vOmniColor;
   bool m_bEnableLights;
@@ -140,6 +154,12 @@ private:
   bool m_bNormalRendering;
   bool m_bShowBoxes;
   bool m_bShowSpheres;
+
+  //material info
+  float m_fGlowIntensity;
+  float m_fSpecIntensity;
+  float m_fGlossiness;
+  float m_fBump;
 
   vector<CRenderableObject*>::iterator m_itCurrentMesh;
   vector<CRenderableObject*>::iterator m_itCurrentAnimated;

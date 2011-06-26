@@ -40,6 +40,94 @@ function switch_view(_old, _new)
   show_gui()
 end
 
+--Puja el nivell de glow de l'objecte actual
+function glow_up()
+  local l_iState = VIEWER:get_current_mode()
+  
+  if l_iState == Viewer.MESH then
+    VIEWER:glow_inc_mesh()
+  elseif l_iState == Viewer.ANIMATED then
+    VIEWER:glow_inc_anim()
+  end
+end
+
+--Disminueix el nivell de glow de l'objecte actual
+function glow_down()
+  local l_iState = VIEWER:get_current_mode()
+  
+  if l_iState == Viewer.MESH then
+    VIEWER:glow_dec_mesh()
+  elseif l_iState == Viewer.ANIMATED then
+    VIEWER:glow_dec_anim()
+  end
+end
+
+--Puja el nivell d'especular de l'objecte actual
+function spec_up()
+  local l_iState = VIEWER:get_current_mode()
+  
+  if l_iState == Viewer.MESH then
+    VIEWER:spec_inc_mesh()
+  elseif l_iState == Viewer.ANIMATED then
+    VIEWER:spec_inc_anim()
+  end
+end
+
+--Disminueix el nivell d'especular de l'objecte actual
+function spec_down()
+  local l_iState = VIEWER:get_current_mode()
+  
+  if l_iState == Viewer.MESH then
+    VIEWER:spec_dec_mesh()
+  elseif l_iState == Viewer.ANIMATED then
+    VIEWER:spec_dec_anim()
+  end
+end
+
+--Puja el nivell de glossiness de l'objecte actual
+function gloss_up()
+  local l_iState = VIEWER:get_current_mode()
+  
+  if l_iState == Viewer.MESH then
+    VIEWER:gloss_inc_mesh()
+  elseif l_iState == Viewer.ANIMATED then
+    VIEWER:gloss_inc_anim()
+  end
+end
+
+--Disminueix el nivell de glossiness de l'objecte actual
+function gloss_down()
+  local l_iState = VIEWER:get_current_mode()
+  
+  if l_iState == Viewer.MESH then
+    VIEWER:gloss_dec_mesh()
+  elseif l_iState == Viewer.ANIMATED then
+    VIEWER:gloss_dec_anim()
+  end
+end
+
+--Puja el nivell de bump de l'objecte actual
+function bump_up()
+  local l_iState = VIEWER:get_current_mode()
+  
+  if l_iState == Viewer.MESH then
+    VIEWER:bump_inc_mesh()
+  elseif l_iState == Viewer.ANIMATED then
+    VIEWER:bump_inc_anim()
+  end
+end
+
+--Puja el nivell de bump de l'objecte actual
+function bump_down()
+  local l_iState = VIEWER:get_current_mode()
+  
+  if l_iState == Viewer.MESH then
+    VIEWER:bump_dec_mesh()
+  elseif l_iState == Viewer.ANIMATED then
+    VIEWER:bump_dec_anim()
+  end
+end
+
 --següent mesh o animated model
 function next()
   local l_iState = VIEWER:get_current_mode()
