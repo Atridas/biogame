@@ -33,6 +33,9 @@ public:
   virtual float GetSpecularFactor() const = 0;
   virtual float GetGlowIntensity()  const = 0;
   virtual void SetGlowIntensity(const float& _fGlowIntensity) = 0;
+  virtual void SetSpecularFactor(const float& _fSpecularFactor) = 0;
+  virtual void SetGlossines(const float& _fGlossiness) = 0;
+  virtual void SetBump(const float& _fBump) = 0;
 
   virtual bool HasAlphaBlending()      const = 0;
   virtual bool HasSpecularParameters() const = 0;

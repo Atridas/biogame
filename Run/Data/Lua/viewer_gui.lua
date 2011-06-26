@@ -98,6 +98,30 @@ function show_mesh()
   GUI_MANAGER:setActiveGuiElement( 'Sphere',true)
   GUI_MANAGER:setVisibleGuiElement('Sphere',true)
   
+  GUI_MANAGER:setActiveGuiElement( 'GlowUp',true)
+  GUI_MANAGER:setVisibleGuiElement('GlowUp',true)
+  
+  GUI_MANAGER:setActiveGuiElement( 'GlowDown',true)
+  GUI_MANAGER:setVisibleGuiElement('GlowDown',true)
+  
+  GUI_MANAGER:setActiveGuiElement( 'SpecUp',true)
+  GUI_MANAGER:setVisibleGuiElement('SpecUp',true)
+  
+  GUI_MANAGER:setActiveGuiElement( 'SpecDown',true)
+  GUI_MANAGER:setVisibleGuiElement('SpecDown',true)
+  
+  GUI_MANAGER:setActiveGuiElement( 'GlossUp',true)
+  GUI_MANAGER:setVisibleGuiElement('GlossUp',true)
+  
+  GUI_MANAGER:setActiveGuiElement( 'GlossDown',true)
+  GUI_MANAGER:setVisibleGuiElement('GlossDown',true)
+  
+  GUI_MANAGER:setActiveGuiElement( 'BumpUp',true)
+  GUI_MANAGER:setVisibleGuiElement('BumpUp',true)
+  
+  GUI_MANAGER:setActiveGuiElement( 'BumpDown',true)
+  GUI_MANAGER:setVisibleGuiElement('BumpDown',true)
+  
   GUI_MANAGER:setActiveGuiElement( 'Previous',true)
   GUI_MANAGER:setVisibleGuiElement('Previous',true)
   
@@ -113,6 +137,30 @@ function hide_mesh()
   GUI_MANAGER:setActiveGuiElement( 'Sphere',false)
   GUI_MANAGER:setVisibleGuiElement('Sphere',false)
   
+  GUI_MANAGER:setActiveGuiElement( 'GlowUp',false)
+  GUI_MANAGER:setVisibleGuiElement('GlowUp',false)
+  
+  GUI_MANAGER:setActiveGuiElement( 'GlowDown',false)
+  GUI_MANAGER:setVisibleGuiElement('GlowDown',false)
+  
+  GUI_MANAGER:setActiveGuiElement( 'SpecUp',false)
+  GUI_MANAGER:setVisibleGuiElement('SpecUp',false)
+  
+  GUI_MANAGER:setActiveGuiElement( 'SpecDown',false)
+  GUI_MANAGER:setVisibleGuiElement('SpecDown',false)
+  
+  GUI_MANAGER:setActiveGuiElement( 'GlossUp',false)
+  GUI_MANAGER:setVisibleGuiElement('GlossUp',false)
+  
+  GUI_MANAGER:setActiveGuiElement( 'GlossDown',false)
+  GUI_MANAGER:setVisibleGuiElement('GlossDown',false)
+  
+  GUI_MANAGER:setActiveGuiElement( 'BumpUp',false)
+  GUI_MANAGER:setVisibleGuiElement('BumpUp',false)
+  
+  GUI_MANAGER:setActiveGuiElement( 'BumpDown',false)
+  GUI_MANAGER:setVisibleGuiElement('BumpDown',false)
+  
   GUI_MANAGER:setActiveGuiElement( 'Previous',false)
   GUI_MANAGER:setVisibleGuiElement('Previous',false)
   
@@ -127,6 +175,30 @@ function show_animated()
   
   GUI_MANAGER:setActiveGuiElement( 'Sphere',true)
   GUI_MANAGER:setVisibleGuiElement('Sphere',true)
+  
+  GUI_MANAGER:setActiveGuiElement( 'GlowUp',true)
+  GUI_MANAGER:setVisibleGuiElement('GlowUp',true)
+  
+  GUI_MANAGER:setActiveGuiElement( 'GlowDown',true)
+  GUI_MANAGER:setVisibleGuiElement('GlowDown',true)
+  
+  GUI_MANAGER:setActiveGuiElement( 'SpecUp',true)
+  GUI_MANAGER:setVisibleGuiElement('SpecUp',true)
+  
+  GUI_MANAGER:setActiveGuiElement( 'SpecDown',true)
+  GUI_MANAGER:setVisibleGuiElement('SpecDown',true)
+  
+  GUI_MANAGER:setActiveGuiElement( 'GlossUp',true)
+  GUI_MANAGER:setVisibleGuiElement('GlossUp',true)
+  
+  GUI_MANAGER:setActiveGuiElement( 'GlossDown',true)
+  GUI_MANAGER:setVisibleGuiElement('GlossDown',true)
+  
+  GUI_MANAGER:setActiveGuiElement( 'BumpUp',true)
+  GUI_MANAGER:setVisibleGuiElement('BumpUp',true)
+  
+  GUI_MANAGER:setActiveGuiElement( 'BumpDown',true)
+  GUI_MANAGER:setVisibleGuiElement('BumpDown',true)
   
   GUI_MANAGER:setActiveGuiElement( 'Previous',true)
   GUI_MANAGER:setVisibleGuiElement('Previous',true)
@@ -148,6 +220,30 @@ function hide_animated()
   
   GUI_MANAGER:setActiveGuiElement( 'Sphere',false)
   GUI_MANAGER:setVisibleGuiElement('Sphere',false)
+  
+  GUI_MANAGER:setActiveGuiElement( 'GlowUp',false)
+  GUI_MANAGER:setVisibleGuiElement('GlowUp',false)
+  
+  GUI_MANAGER:setActiveGuiElement( 'GlowDown',false)
+  GUI_MANAGER:setVisibleGuiElement('GlowDown',false)
+  
+  GUI_MANAGER:setActiveGuiElement( 'SpecUp',false)
+  GUI_MANAGER:setVisibleGuiElement('SpecUp',false)
+  
+  GUI_MANAGER:setActiveGuiElement( 'SpecDown',false)
+  GUI_MANAGER:setVisibleGuiElement('SpecDown',false)
+  
+  GUI_MANAGER:setActiveGuiElement( 'GlossUp',false)
+  GUI_MANAGER:setVisibleGuiElement('GlossUp',false)
+  
+  GUI_MANAGER:setActiveGuiElement( 'GlossDown',false)
+  GUI_MANAGER:setVisibleGuiElement('GlossDown',false)
+  
+  GUI_MANAGER:setActiveGuiElement( 'BumpUp',false)
+  GUI_MANAGER:setVisibleGuiElement('BumpUp',false)
+  
+  GUI_MANAGER:setActiveGuiElement( 'BumpDown',false)
+  GUI_MANAGER:setVisibleGuiElement('BumpDown',false)
   
   GUI_MANAGER:setActiveGuiElement( 'Previous',false)
   GUI_MANAGER:setVisibleGuiElement('Previous',false)
