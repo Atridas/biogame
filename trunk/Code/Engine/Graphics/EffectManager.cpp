@@ -218,6 +218,7 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     m_pSpecularActiveParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"SpecularActive");
     m_pGlossiness    = l_pD3DEffect->GetParameterBySemantic(NULL,"Glossiness");
     m_pSpecularLevel = l_pD3DEffect->GetParameterBySemantic(NULL,"SpecularLevel");
+    m_pBump          = l_pD3DEffect->GetParameterBySemantic(NULL,"BumpAmount");
 
     m_bSemanticsUpdated = false;
   }
@@ -416,6 +417,12 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     l_pD3DEffect->SetFloat(m_pGlowIntensityParameter,(FLOAT)m_fGlowIntensity);
     m_bGlowUpdated = false;
   }
+
+  if(m_bBumpUpdated)
+  {
+    l_pD3DEffect->SetFloat(m_pBump,(FLOAT)m_fBump);
+    m_bBumpUpdated = false;
+  }
   
 }
 
@@ -443,8 +450,8 @@ CEffect* CEffectManager::ActivateMaterial(CMaterial* _pMaterial)
 
     if(l_pEffect && l_pEffect->IsOk())
     {
-      float l_fBump = _pMaterial->GetBump();
       float l_fParallax = _pMaterial->GetParallaxHeight();
+      SetBump(_pMaterial->GetBump());
 
     }else{
       l_pEffect = GetResource("White");

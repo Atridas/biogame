@@ -55,6 +55,8 @@ public:
                     m_bGlowUpdated(false),
                     m_bSpecularUpdated(false),
                     m_bSpecularActive(false),
+                    m_bBumpUpdated(false),
+                    m_fBump(0.f),
                     m_fGlossiness(0.f),
                     m_fSpecularLevel(0.f),
                     m_pWorldMatrixParameter(0),
@@ -135,6 +137,8 @@ public:
   void SetGlow(bool _bGlow) {m_bGlowActive = _bGlow; m_bGlowUpdated = true;};
   void SetGlowIntensity(float _fGlowIntensity) {m_fGlowIntensity = _fGlowIntensity; m_bGlowUpdated = true;};
 
+  void SetBump(float _fBump) {m_fBump = _fBump; m_bBumpUpdated = true;};
+
   void ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _mProjectionMatrix, const Vect3f& _vCameraEye);
 
   void Begin(void) {m_bLightsUpdated = true; ActivateDefaultRendering();};
@@ -200,6 +204,7 @@ private:
   bool m_bSpecularParamsUpdated;
   bool m_bGlowUpdated;
   bool m_bSpecularUpdated;
+  bool m_bBumpUpdated;
 
   //Matrius compostes recalculades
   bool m_bViewProjectionUpdated;
@@ -215,6 +220,7 @@ private:
   bool m_bSpecularActive;
   bool m_bGlowActive;
   float m_fGlowIntensity;
+  float m_fBump;
 
   D3DXHANDLE m_pWorldMatrixParameter;
   D3DXHANDLE m_pViewMatrixParameter;
