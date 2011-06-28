@@ -13,7 +13,7 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 	local l_opacityMap = false
 	local l_specularLevel = 0
 	local l_glow = false
-	local l_glossiness = 1.0f
+	local l_glowness = 1.0f
 	
 	if _material.glossiness != undefined and _material.specularLevel != undefined then
 	(
@@ -94,11 +94,11 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 		local tmp = _material.filtermapamount * .02
 		if tmp < 0 or tmp > 2 then
 		(
-			l_glossiness = 1.0
+			l_glowness = 1.0
 		)
 		else
 		(
-			l_glossiness = tmp
+			l_glowness = tmp
 		)
 	)
 	
@@ -200,8 +200,8 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 		if l_glow then
 		(
 			WriteShort _file GLOW_PROPERTY_TYPE #unsigned
-			WriteFloat _file l_glossiness
-			format "	->	Glossiness: %\n" l_glossiness
+			WriteFloat _file l_glowness
+			format "	->	Glowness: %\n" l_glowness
 		)
 	)
 )

@@ -15,7 +15,7 @@ shared float4x4 g_WorldViewProjectionMatrix : WorldViewProjection;
 shared float4x4 g_ViewToLightProjectionMatrix : ViewToLightProjection;
 shared float3x4 g_Bones[MAXBONES] : Bones;
 
-float g_Bump = 2.4;
+shared float g_Bump : BumpAmount; // = 0.6;
 float g_BumpMaxHeight =  0.7;
 float g_BumpMinHeight = -0.7;
 float g_BumpDiff = 0.6;
