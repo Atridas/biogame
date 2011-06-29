@@ -159,9 +159,19 @@ struct SRP {
   SRP(CRoom* _r, CPortal* _p):r(_r),p(_p) {};
 };
 
-void RenderPortals(CRoom *_pRoom, CRenderManager* _pRM, const Vect3f& _vCameraEye, const CFrustum& _Frustum, set<CPortal*> _PrevPortals, CRoom::TBlendQueue& _BlendQueue)
+void RenderPortals(
+          CRoom *_pRoom,
+          CRenderManager* _pRM,
+          const CCamera* _vCamera,
+          const CFrustum& _Frustum,
+          set<CPortal*> _PrevPortals,
+          CRoom::TBlendQueue& _BlendQueue,
+          bool _bDebug)
 {
-  _pRoom->Render(_pRM,_Frustum,_BlendQueue);
+  if(!_bDebug)
+  {
+    _pRoom->Render(_pRM,_Frustum,_BlendQueue);
+  }
   const vector<CPortal*>& l_Portals = _pRoom->GetPortals();
     
   vector<SRP> l_NextRooms;
@@ -205,23 +215,25 @@ void RenderPortals(CRoom *_pRoom, CRenderManager* _pRM, const Vect3f& _vCameraEy
       if(_Frustum.BoxVisibleByVertexs(l_TransformedPoints))
       {
         CFrustum l_Frustum(_Frustum);
-        l_Frustum.Update(_vCameraEye, l_TransformedPoints, 8);
+        //l_Frustum.Update(_vCameraEye, l_TransformedPoints, 8);
+        l_Frustum.Update(_vCamera, l_TransformedPoints);
 
-        {//TODO moure-ho a debug-render
+        if(_bDebug)
+        {
           Mat44f i;
           i.SetIdentity();
           _pRM->SetTransform(i);
           _pRM->DrawFrustum(&l_Frustum, colYELLOW);
         }
 
-        RenderPortals(l_it->r,_pRM,_vCameraEye,l_Frustum,_PrevPortals,_BlendQueue);
+        RenderPortals(l_it->r,_pRM,_vCamera,l_Frustum,_PrevPortals,_BlendQueue,_bDebug);
       }
     }
   }
 }
 
 
-void CPortalManager::Render(CRenderManager* _pRM)
+void CPortalManager::Render(CRenderManager* _pRM, bool _bDebug)
 {
   // 1 busquem en quina habitació està la camera.
 
@@ -276,7 +288,7 @@ void CPortalManager::Render(CRenderManager* _pRM)
   else
   {
     set<CPortal*> l_PrevPortals;
-    RenderPortals(l_pCameraRoom, _pRM, l_vCameraEye, l_Frustum, l_PrevPortals, l_BlendQueue);
+    RenderPortals(l_pCameraRoom, _pRM, l_pCamera, l_Frustum, l_PrevPortals, l_BlendQueue,_bDebug);
   }
 
 
@@ -290,7 +302,7 @@ void CPortalManager::Render(CRenderManager* _pRM)
   }
 }
 
-void CPortalManager::DebugRender(CRenderManager* _pRM) const
+void CPortalManager::DebugRender(CRenderManager* _pRM)
 {
   
   map<string,CPortal>::const_iterator l_itP  = m_Portals.cbegin();
@@ -308,4 +320,6 @@ void CPortalManager::DebugRender(CRenderManager* _pRM) const
   {
     l_itR->second.DebugRender(_pRM);
   }
+
+  Render(_pRM,true);
 }

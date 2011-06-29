@@ -199,6 +199,9 @@
     <Filter Include="Texture\TextureManager">
       <UniqueIdentifier>{3f3fdabc-e06f-4485-b1eb-201001e4132e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Cameras\SphereCamera">
+      <UniqueIdentifier>{185d838f-fd40-4824-b803-ef242acee42d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -323,6 +326,9 @@
     </ClCompile>
     <ClCompile Include="ShoulderCamera.cpp">
       <Filter>Cameras\ShoulderCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereCamera.cpp">
+      <Filter>Cameras\SphereCamera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -505,6 +511,9 @@
     </ClInclude>
     <ClInclude Include="include\ShoulderCamera.h">
       <Filter>Cameras\ShoulderCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SphereCamera.h">
+      <Filter>Cameras\SphereCamera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
