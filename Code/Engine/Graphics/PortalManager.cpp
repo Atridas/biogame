@@ -159,7 +159,7 @@ struct SRP {
   SRP(CRoom* _r, CPortal* _p):r(_r),p(_p) {};
 };
 
-void RenderPortals(CRoom *_pRoom, CRenderManager* _pRM, const CFrustum& _Frustum, set<CPortal*> _PrevPortals, CRoom::TBlendQueue& _BlendQueue)
+void RenderPortals(CRoom *_pRoom, CRenderManager* _pRM, const Vect3f& _vCameraEye, const CFrustum& _Frustum, set<CPortal*> _PrevPortals, CRoom::TBlendQueue& _BlendQueue)
 {
   _pRoom->Render(_pRM,_Frustum,_BlendQueue);
   const vector<CPortal*>& l_Portals = _pRoom->GetPortals();
@@ -204,8 +204,17 @@ void RenderPortals(CRoom *_pRoom, CRenderManager* _pRM, const CFrustum& _Frustum
 
       if(_Frustum.BoxVisibleByVertexs(l_TransformedPoints))
       {
-        //TODO refer el frustum
-        RenderPortals(l_it->r,_pRM,_Frustum,_PrevPortals,_BlendQueue);
+        CFrustum l_Frustum(_Frustum);
+        l_Frustum.Update(_vCameraEye, l_TransformedPoints, 8);
+
+        {//TODO moure-ho a debug-render
+          Mat44f i;
+          i.SetIdentity();
+          _pRM->SetTransform(i);
+          _pRM->DrawFrustum(&l_Frustum, colYELLOW);
+        }
+
+        RenderPortals(l_it->r,_pRM,_vCameraEye,l_Frustum,_PrevPortals,_BlendQueue);
       }
     }
   }
@@ -217,12 +226,13 @@ void CPortalManager::Render(CRenderManager* _pRM)
   // 1 busquem en quina habitació està la camera.
 
   CCamera *l_pCamera = _pRM->GetCamera();
+  Vect3f l_vCameraEye = l_pCamera->GetEye();
 
   map<string,CRoom>::iterator l_it = m_Rooms.find(m_szCameraLastRoom);
   CRoom *l_pCameraRoom = 0;
 
   CObject3D l_CameraObject;
-  l_CameraObject.SetPosition( l_pCamera->GetEye() );
+  l_CameraObject.SetPosition( l_vCameraEye );
   l_CameraObject.GetBoundingSphere()->Init(Vect3f(0,0,0),0.2f);
 
   if(l_it != m_Rooms.end())
@@ -266,7 +276,7 @@ void CPortalManager::Render(CRenderManager* _pRM)
   else
   {
     set<CPortal*> l_PrevPortals;
-    RenderPortals(l_pCameraRoom, _pRM, l_Frustum, l_PrevPortals, l_BlendQueue);
+    RenderPortals(l_pCameraRoom, _pRM, l_vCameraEye, l_Frustum, l_PrevPortals, l_BlendQueue);
   }
 
 

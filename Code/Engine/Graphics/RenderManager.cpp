@@ -711,6 +711,30 @@ void CRenderManager::DrawCamera(CCamera* camera)
 	m_pD3DDevice->SetTransform( D3DTS_WORLD, &matrix );
 }
 
+
+void CRenderManager::DrawFrustum(CFrustum* frustum, const CColor& _Color)
+{
+  Vect3f l_vPoints[8];
+  frustum->GetPoints(l_vPoints);
+  
+  //bottom
+  DrawLine(l_vPoints[0],l_vPoints[1],_Color);
+  DrawLine(l_vPoints[1],l_vPoints[3],_Color);
+  DrawLine(l_vPoints[3],l_vPoints[2],_Color);
+  DrawLine(l_vPoints[2],l_vPoints[0],_Color);
+  //top
+  DrawLine(l_vPoints[4],l_vPoints[5],_Color);
+  DrawLine(l_vPoints[5],l_vPoints[7],_Color);
+  DrawLine(l_vPoints[7],l_vPoints[6],_Color);
+  DrawLine(l_vPoints[6],l_vPoints[4],_Color);
+  //arestes
+  DrawLine(l_vPoints[0],l_vPoints[4],_Color);
+  DrawLine(l_vPoints[1],l_vPoints[5],_Color);
+  DrawLine(l_vPoints[2],l_vPoints[6],_Color);
+  DrawLine(l_vPoints[3],l_vPoints[7],_Color);
+
+}
+
 void CRenderManager::DrawGrid(float Size, CColor Color, int GridX, int32 GridZ )
 {
   assert(IsOk());
