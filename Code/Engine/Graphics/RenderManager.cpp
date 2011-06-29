@@ -213,14 +213,15 @@ void CRenderManager::Present()
 	m_pD3DDevice->Present( NULL, NULL, NULL, NULL );
 }
 
-void CRenderManager::SetupMatrices(CCamera* _pCamera, bool _bOrtho)
+void CRenderManager::SetupMatrices(CCamera* _pCamera, bool _bOrtho, bool _bSaveCamera)
 {
   assert(IsOk());
 	D3DXMATRIX l_matView;
 	D3DXMATRIX l_matProject;
   Vect3f eye;
 
-  m_pCamera = _pCamera;
+  if(_bSaveCamera)
+    m_pCamera = _pCamera;
 
 	if(!_pCamera)
 	{
@@ -281,13 +282,16 @@ void CRenderManager::SetupMatrices(CCamera* _pCamera, bool _bOrtho)
 	m_pD3DDevice->SetTransform( D3DTS_PROJECTION, &l_matProject );
   CORE->GetEffectManager()->ActivateCamera(l_matView, l_matProject, eye);
 
-  if(_pCamera)
+  if(_bSaveCamera)
   {
-    m_Frustum.Update(_pCamera);
-  }
-  else
-  {
-    m_Frustum.Update(l_matView * l_matProject);
+    if(_pCamera)
+    {
+      m_Frustum.Update(_pCamera);
+    }
+    else
+    {
+      m_Frustum.Update(l_matView * l_matProject);
+    }
   }
 
   /*m_pEffectManager->SetProjectionMatrix(m_matProject);
@@ -575,7 +579,7 @@ void CRenderManager::DrawCube(const Vect3f &_Pos, const Vect3f &_Size, const CCo
 	m_pD3DDevice->DrawPrimitiveUP( D3DPT_LINELIST,12, v,sizeof(SDIFFUSEVERTEX));
 }
 
-void CRenderManager::DrawCamera(CCamera* camera)
+void CRenderManager::DrawCamera(const CCamera* camera)
 {
   assert(IsOk());
 
@@ -712,7 +716,7 @@ void CRenderManager::DrawCamera(CCamera* camera)
 }
 
 
-void CRenderManager::DrawFrustum(CFrustum* frustum, const CColor& _Color)
+void CRenderManager::DrawFrustum(const CFrustum* frustum, const CColor& _Color)
 {
   Vect3f l_vPoints[8];
   frustum->GetPoints(l_vPoints);

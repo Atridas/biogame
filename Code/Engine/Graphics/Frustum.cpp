@@ -101,7 +101,7 @@ void ComputePlane(const Vect3f& p0,const Vect3f& p1,const Vect3f& p2, float* pla
   plane[3] = -(n * p0);
 }
 
-void CFrustum::Update(CCamera* _pCamera) 
+void CFrustum::Update(const CCamera* _pCamera) 
 {
   float  l_fFov    = _pCamera->GetFov();
 	float  l_fAspect = _pCamera->GetAspectRatio();
@@ -272,75 +272,27 @@ void  CFrustum::Update( const Vect3f& _vCameraEye, const Vect3f* _vPoints, uint3
   delete l_vDirections;
 }
 
-bool IsPointInPlane(const Vect3f& _vPoint, const float _pfPlane[4])
+inline float DistPointPlane(const Vect3f& _vPoint, const float _pfPlane[4])
 {
-  Vect3f l_vPlaneNormal(_pfPlane[0],_pfPlane[1],_pfPlane[2]);
-  float aux = _vPoint * l_vPlaneNormal;
-
-  return aux+.01f > -_pfPlane[3] && aux-.01f < -_pfPlane[3];
+  return _vPoint.x * _pfPlane[0] + _vPoint.y * _pfPlane[1] + _vPoint.z * _pfPlane[2] + _pfPlane[3];
 }
 
-bool IsPointInPlane(float _pfPoint[3] , const float _pfPlane[4])
+inline bool IsPointInPlane(const Vect3f& _vPoint, const float _pfPlane[4])
+{
+  return abs(DistPointPlane(_vPoint,_pfPlane)) < .05f;
+}
+
+inline bool IsPointInPlane(float _pfPoint[3] , const float _pfPlane[4])
 {
   return IsPointInPlane(Vect3f(_pfPoint[0], _pfPoint[1], _pfPoint[2]), _pfPlane);
 }
 
-
-//inline void swap(int& a, int& b)
-//{
-//  a ^= b;
-//  b ^= a;
-//  a ^= b;
-//}
-//inline void swap(float& a, float& b)
-//{
-//  float aux = a;
-//  a = b;
-//  b = aux;
-//}
-
 void CFrustum::UpdatePlane(uint32 _iPlane, const Vect3f& _vCameraEye, const Vect3f* _vPoints, const Vect3f* _vDirections, uint32 _iNumPoints)
 {
-  //TODO treure la merda de proves...
   Vect3f l_vPlaneNormal(m_frustum[_iPlane][0], m_frustum[_iPlane][1], m_frustum[_iPlane][2]);
   assert(l_vPlaneNormal.SquaredLength() > 0.99f && l_vPlaneNormal.SquaredLength() < 1.01f);
 
   uint32 l_iPoint1 = 0, l_iPoint2 = 0;
-  /*float  l_fDistance1 = _vPoints[0] * l_vPlaneNormal + m_frustum[_iPlane][3], l_fDistance2 = _vPoints[1] * l_vPlaneNormal + m_frustum[_iPlane][3];
-
-  if(l_fDistance2 < l_fDistance1)
-  {
-    float aux = l_fDistance1;
-    l_fDistance1 = l_fDistance2;
-    l_fDistance2 = aux;
-    int aux2 = l_iPoint1;
-    l_iPoint1 = l_iPoint2;
-    l_iPoint2 = aux2;
-  }
-
-  for(uint32 i = 2; i < _iNumPoints; ++i)
-  {
-    float l_fDistance = _vPoints[i] * l_vPlaneNormal + m_frustum[_iPlane][3];
-    if(l_fDistance < l_fDistance2)
-    {
-      if(l_fDistance < l_fDistance1)
-      {
-        l_fDistance2 = l_fDistance1;
-        l_fDistance1 = l_fDistance;
-        
-        l_iPoint2 = l_iPoint1;
-        l_iPoint1 = i;
-      }
-      else
-      {
-        l_fDistance2 = l_fDistance;
-        l_iPoint2 = i;
-      }
-    }
-  }*/
-
-
-
   float  l_fMaxDot = -1.f;
 
   for(uint32 i = 0; i < _iNumPoints-1; ++i)
@@ -373,13 +325,9 @@ void CFrustum::UpdatePlane(uint32 _iPlane, const Vect3f& _vCameraEye, const Vect
     }
   }
   
-  //if(l_fDistance1 >= 0 && l_fDistance2 >= 0)
-  //{
   if(l_iPoint1 != l_iPoint2)
   {
     ComputePlane(_vCameraEye, _vPoints[l_iPoint1],_vPoints[l_iPoint2], m_frustum[_iPlane]);
-    //if(Vect3f(m_frustum[_iPlane][0], m_frustum[_iPlane][1], m_frustum[_iPlane][2]) * l_vPlaneNormal < 0)
-    //  for(int i = 0; i < 4; ++i) m_frustum[_iPlane][i] = -m_frustum[_iPlane][i];
     assert(Vect3f(m_frustum[_iPlane][0], m_frustum[_iPlane][1], m_frustum[_iPlane][2]) * l_vPlaneNormal > 0);
 
   
@@ -405,7 +353,7 @@ Vect3f SolveMatrix(const float _fPlane1[4], const float _fPlane2[4], const float
   {
     ++l_iCol1;
     if(l_iCol1 == 3)
-      return Vect3f();
+      return Vect3f(0);
   }
   
   l_fAux = l_Row2[l_iCol1] / l_Row1[l_iCol1];
@@ -418,7 +366,7 @@ Vect3f SolveMatrix(const float _fPlane1[4], const float _fPlane2[4], const float
   {
     ++l_iCol2;
     if(l_iCol2 == 3)
-      return Vect3f();
+      return Vect3f(0);
   }
   
   l_fAux = l_Row3[l_iCol2] / l_Row2[l_iCol2];
@@ -431,7 +379,7 @@ Vect3f SolveMatrix(const float _fPlane1[4], const float _fPlane2[4], const float
   {
     ++l_iCol3;
     if(l_iCol3 == 3)
-      return Vect3f();
+      return Vect3f(0);
   }
 
   
@@ -448,6 +396,18 @@ Vect3f SolveMatrix(const float _fPlane1[4], const float _fPlane2[4], const float
   return Vect3f(res[0], res[1], res[2]); 
 }
 
+void CFrustum::GetPoints( Vect3f* _vPoints ) const
+{
+  _vPoints[0] = SolveMatrix(m_frustum[2], m_frustum[1], m_frustum[4]);
+  _vPoints[1] = SolveMatrix(m_frustum[2], m_frustum[0], m_frustum[4]);
+  _vPoints[2] = SolveMatrix(m_frustum[2], m_frustum[1], m_frustum[5]);
+  _vPoints[3] = SolveMatrix(m_frustum[2], m_frustum[0], m_frustum[5]);
+  _vPoints[4] = SolveMatrix(m_frustum[3], m_frustum[1], m_frustum[4]);
+  _vPoints[5] = SolveMatrix(m_frustum[3], m_frustum[0], m_frustum[4]);
+  _vPoints[6] = SolveMatrix(m_frustum[3], m_frustum[1], m_frustum[5]);
+  _vPoints[7] = SolveMatrix(m_frustum[3], m_frustum[0], m_frustum[5]);
+}
+
 void CFrustum::GetPoints( Vect3f* _vPoints )
 {
   _vPoints[0] = SolveMatrix(m_frustum[2], m_frustum[1], m_frustum[4]);
@@ -459,8 +419,9 @@ void CFrustum::GetPoints( Vect3f* _vPoints )
   _vPoints[6] = SolveMatrix(m_frustum[3], m_frustum[1], m_frustum[5]);
   _vPoints[7] = SolveMatrix(m_frustum[3], m_frustum[0], m_frustum[5]);
   
-  
-  /*assert(IsPointInPlane(_vPoints[0], m_frustum[2]));
+  //TODO encara hi ha alguns problemes de planos que es fan paralels misteriosament, etc...
+  /*
+  assert(IsPointInPlane(_vPoints[0], m_frustum[2]));
   assert(IsPointInPlane(_vPoints[0], m_frustum[1]));
   assert(IsPointInPlane(_vPoints[0], m_frustum[4]));
   
@@ -491,5 +452,152 @@ void CFrustum::GetPoints( Vect3f* _vPoints )
   
   assert(IsPointInPlane(_vPoints[7], m_frustum[3]));
   assert(IsPointInPlane(_vPoints[7], m_frustum[0]));
-  assert(IsPointInPlane(_vPoints[7], m_frustum[5]));*/
+  assert(IsPointInPlane(_vPoints[7], m_frustum[5]));
+  */
 }
+
+inline Vect3f PuntAresta(const Vect3f _vPoints[8], int n)
+{
+
+  switch(n)
+  {
+  case 0 : return (_vPoints[0] + _vPoints[1]) * .5f;
+  case 1 : return (_vPoints[1] + _vPoints[3]) * .5f;
+  case 2 : return (_vPoints[3] + _vPoints[2]) * .5f;
+  case 3 : return (_vPoints[2] + _vPoints[0]) * .5f;
+         
+  case 4 : return (_vPoints[4] + _vPoints[5]) * .5f;
+  case 5 : return (_vPoints[5] + _vPoints[7]) * .5f;
+  case 6 : return (_vPoints[7] + _vPoints[6]) * .5f;
+  case 7 : return (_vPoints[6] + _vPoints[4]) * .5f;
+         
+  case 8 : return (_vPoints[0] + _vPoints[4]) * .5f;
+  case 9 : return (_vPoints[1] + _vPoints[5]) * .5f;
+  case 10: return (_vPoints[3] + _vPoints[7]) * .5f;
+  case 11: return (_vPoints[2] + _vPoints[6]) * .5f;
+  }
+  assert(false);
+  return Vect3f(0);
+}
+
+inline Vect3f PuntAresta1(const Vect3f _vPoints[8], uint32 n)
+{
+
+  switch(n)
+  {
+  case 0 : return _vPoints[0];
+  case 1 : return _vPoints[1];
+  case 2 : return _vPoints[3];
+  case 3 : return _vPoints[2];
+         
+  case 4 : return _vPoints[4];
+  case 5 : return _vPoints[5];
+  case 6 : return _vPoints[7];
+  case 7 : return _vPoints[6];
+         
+  case 8 : return _vPoints[0];
+  case 9 : return _vPoints[1];
+  case 10: return _vPoints[3];
+  case 11: return _vPoints[2];
+  }
+  assert(false);
+  return Vect3f(0);
+}
+
+inline Vect3f PuntAresta2(const Vect3f _vPoints[8], uint32 n)
+{
+
+  switch(n)
+  {
+  case 0 : return _vPoints[1];
+  case 1 : return _vPoints[3];
+  case 2 : return _vPoints[2];
+  case 3 : return _vPoints[0];
+         
+  case 4 : return _vPoints[5];
+  case 5 : return _vPoints[7];
+  case 6 : return _vPoints[6];
+  case 7 : return _vPoints[4];
+         
+  case 8 : return _vPoints[4];
+  case 9 : return _vPoints[5];
+  case 10: return _vPoints[7];
+  case 11: return _vPoints[6];
+  }
+  assert(false);
+  return Vect3f(0);
+}
+
+inline uint32 GetNumArestaVertical(uint32 n)
+{
+  assert(n < 4);
+  return n + 8;
+}
+
+inline uint32 GetNumArestaHoritzontal(uint32 n)
+{
+  assert(n < 8);
+  return n;
+}
+
+Vect3f ProjectLineOnPlane(const Vect3f& _vPoint, const float _pfPlane[4])
+{
+  float l_fParam = _vPoint.x * _pfPlane[0] + _vPoint.y * _pfPlane[1] + _vPoint.z * _pfPlane[2] + _pfPlane[3];
+  l_fParam /= _pfPlane[0] * _pfPlane[0] + _pfPlane[1] * _pfPlane[1] + _pfPlane[2] * _pfPlane[2];
+
+  return Vect3f(  _vPoint.x - _pfPlane[0] * l_fParam, 
+                  _vPoint.y - _pfPlane[1] * l_fParam,
+                  _vPoint.z - _pfPlane[2] * l_fParam );
+}
+
+void CFrustum::ClosePlane(const Vect3f& _vEye, const Vect3f& _vDir, const Vect3f _vPoints[8], uint32 _iPlane)
+{
+  assert(_iPlane < 4);
+  Vect3f l_DirProjected = (ProjectLineOnPlane(_vEye + _vDir, m_frustum[_iPlane]) - _vEye).GetNormalized();
+
+  int l_iArestaProx = 0;
+  float l_fCosArestaProx = -1;
+
+  uint32 l_iNumArestes = (_iPlane < 2)? 4 : 8;
+  for(uint32 i = 0; i < l_iNumArestes; ++i)
+  {
+    int l_iAresta = (_iPlane < 2)? GetNumArestaVertical(i) : GetNumArestaHoritzontal(i);
+    Vect3f l_vPuntAresta = PuntAresta(_vPoints, l_iAresta);
+    
+    if(DistPointPlane(l_vPuntAresta, m_frustum[_iPlane]) < 0)
+    {
+      return; // descartem tancar el pla
+    }
+    
+    Vect3f l_vDirAresta  = (l_vPuntAresta - _vEye).GetNormalized();
+
+    float l_fCosAresta = l_vDirAresta * l_DirProjected;
+    if(l_fCosAresta > l_fCosArestaProx)
+    {
+      l_fCosArestaProx = l_fCosAresta;
+      l_iArestaProx = l_iAresta;
+    }
+  }
+  
+  Vect3f l_vPunt1 = PuntAresta1(_vPoints, l_iArestaProx);
+  Vect3f l_vPunt2 = PuntAresta2(_vPoints, l_iArestaProx);
+
+  Vect3f l_vOldPlaneNormal = Vect3f(m_frustum[_iPlane][0], m_frustum[_iPlane][1], m_frustum[_iPlane][2]);
+
+  ComputePlane(_vEye, l_vPunt1, l_vPunt2, m_frustum[_iPlane]);
+  
+  Vect3f l_vNewPlaneNormal = Vect3f(m_frustum[_iPlane][0], m_frustum[_iPlane][1], m_frustum[_iPlane][2]);
+
+  if(l_vOldPlaneNormal * l_vNewPlaneNormal < 0) for(int i = 0; i < 4; ++i) m_frustum[_iPlane][i] = -m_frustum[_iPlane][i];
+}
+
+void  CFrustum::Update( const CCamera* _pCamera, const Vect3f _vPoints[8])
+{
+  Vect3f l_vEye = _pCamera->GetEye();
+  Vect3f l_vDir = _pCamera->GetDirection();
+  for(uint32 i = 0; i < 4; ++i)
+  {
+    ClosePlane(l_vEye, l_vDir, _vPoints, i);
+  }
+}
+

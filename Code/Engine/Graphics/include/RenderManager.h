@@ -45,7 +45,7 @@ public:
 
   //----Matrix Functions-----------------------------------------------
   void                  Setup2DCamera     ();
-  void                  SetupMatrices     (CCamera* _pCamera, bool m_bOrtho = false);
+  void                  SetupMatrices     (CCamera* _pCamera, bool m_bOrtho = false, bool _bSaveCamera = true);
   void                  SetTransform      (D3DXMATRIX& matrix);
   void                  SetTransform      (Mat44f& m);
   //-------------------------------------------------------------------
@@ -75,8 +75,8 @@ public:
   void                  DrawCube             (const Vect3f &_Pos, const Vect3f &_Size, const CColor& _Color);
   void                  DrawCube             (float _fSize, const CColor& _Color);
   void                  DrawCube             (Vect3f &_fSize, const CColor& _Color);
-  void                  DrawCamera           (CCamera* camera);
-  void                  DrawFrustum          (CFrustum* frustum, const CColor& _Color);
+  void                  DrawCamera           (const CCamera* camera);
+  void                  DrawFrustum          (const CFrustum* frustum, const CColor& _Color);
  	void									DrawGrid				     (float Size, CColor Color=colWHITE, int GridX=10, int32 GridZ=10 );
   void                  RenderBoundingBox    (CBoundingBox* _pBBox);
   void                  RenderBoundingSphere (CBoundingSphere* _pBSphere);
