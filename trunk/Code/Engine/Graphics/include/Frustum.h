@@ -20,16 +20,22 @@ public:
 	
   void	Update							( const D3DXMATRIX &viewproj );
   void  Update              ( CCamera* _pCamera );
+  void  Update              ( const Vect3f& _vCameraEye, const Vect3f* _vPoints, uint32 _iNumPoints);
   bool	SphereVisible				( const D3DXVECTOR3 &p, float radius ) const;
   bool	BoxVisible					( const D3DXVECTOR3 &max, const D3DXVECTOR3 &min ) const;
   bool  BoxVisibleByVertexs	( const Vect3f* points) const;
+
+  //els punts van en el mateix ordre que a bounding box
+  void  GetPoints           ( Vect3f* _vPoints );
    
 private:
 
-  //float m_proj[16];
-  //float m_modl[16];
-  //float m_clip[16];
+  void UpdatePlane(uint32 _iPlane, const Vect3f& _vCameraEye, const Vect3f* _vPoints, const Vect3f* _vDirections, uint32 _iNumPoints);
+
+  //rigt/left / bottom/top / far/near
   float m_frustum[6][4];
+
+  //f[0] * x + f[1] * y + f[2] * z + f[3] = 0
 };
 
 #endif //INC_FRUSTUM_H_

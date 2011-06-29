@@ -76,6 +76,7 @@ public:
   void                  DrawCube             (float _fSize, const CColor& _Color);
   void                  DrawCube             (Vect3f &_fSize, const CColor& _Color);
   void                  DrawCamera           (CCamera* camera);
+  void                  DrawFrustum          (CFrustum* frustum, const CColor& _Color);
  	void									DrawGrid				     (float Size, CColor Color=colWHITE, int GridX=10, int32 GridZ=10 );
   void                  RenderBoundingBox    (CBoundingBox* _pBBox);
   void                  RenderBoundingSphere (CBoundingSphere* _pBSphere);

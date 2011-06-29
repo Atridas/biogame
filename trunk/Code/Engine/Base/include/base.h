@@ -23,6 +23,7 @@
 #include "Math/Vector3.h"
 #include "Math/Vector4.h"
 #include "Math/MathTypes.h"
+#include "Math/MathUtils.h"
 
 using namespace std;
 
