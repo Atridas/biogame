@@ -9,6 +9,7 @@
     <effect name="SpecularNormalmapTextured" texture_mask="22" file="Data/Effects/SpecularNormalmapTexturedEffect.fx" technique="SpecularNormalmapTexturedTechnique" />
     <effect name="SpecularLightmapTextured" texture_mask="26" file="Data/Effects/SpecularLightmapTexturedEffect.fx" technique="SpecularLightmapTexturedTechnique" />
     <effect name="SpecularLightmapNormalmapTextured" texture_mask="30" file="Data/Effects/SpecularLightmapNormalmapTexturedEffect.fx" technique="SpecularLightmapNormalmapTexturedTechnique" />
+    <effect name="SpecularRadiosityNormalmapTexturedTechnique" texture_mask="150" file="Data/Effects/SpecularRadiosityNormalmapTexturedTechnique.fx" technique="SpecularRadiosityNormalmapTexturedTechnique" />
     <effect name="ShowNormals" texture_mask="0" file="Data/Effects/ShowNormalsEffect.fx" technique="ShowNormalsTechnique" />
     <effect name="ShowNormalmap" texture_mask="4" file="Data/Effects/ShowNormalmapEffect.fx" technique="ShowNormalmapTechnique" />
     <effect name="ShowTangent" texture_mask="4" file="Data/Effects/ShowTangentEffect.fx" technique="ShowTangentTechnique" />
@@ -17,6 +18,7 @@
     <effect name="ShowUVCoords" texture_mask="0" file="Data/Effects/ShowUVCoordsEffect.fx" technique="ShowUVCoordsTechnique" />
     <effect name="Lightmap" texture_mask="10" file="Data/Effects/LightmapNormalTexturedEffect.fx" technique="LightmapTechnique" />
     <effect name="LightmapNormalmap" texture_mask="14" file="Data/Effects/LightmapNormalmapNormalTexturedEffect.fx" technique="LightmapNormalmapTechnique" />
+    <effect name="RadiosityNormalmap" texture_mask="134" file="Data/Effects/RadiosityNormalMap.fx" technique="RadiosityNormalmapTechnique" />
     <effect name="White" texture_mask="0" file="Data/Effects/WhiteEffect.fx" technique="WhiteTechnique" instanced_technique="WhiteInstancedTechnique" />
     <effect name="No" texture_mask="0" file="Data/Effects/NoEffect.fx" technique="NoTechnique" />
     <!-- Animats -->
@@ -50,22 +52,24 @@
 
   </effects>
   <default_effects>
-    <default_effect material_type="0" effect="Diffused" />
-    <default_effect material_type="2" effect="Textured" />
-    <default_effect material_type="3" effect="AnimatedTextured" />
-    <default_effect material_type="6" effect="Normalmap" />
-    <default_effect material_type="7" effect="AnimatedNormalmap" />
-    <default_effect material_type="34" effect="Textured" />
-    <default_effect material_type="38" effect="Normalmap" />
-    <default_effect material_type="39" effect="AnimatedNormalmap" />
-    <default_effect material_type="10" effect="Lightmap" />
-    <default_effect material_type="14" effect="LightmapNormalmap" />
-    <default_effect material_type="18" effect="SpecularTextured" />
-    <default_effect material_type="22" effect="SpecularNormalmapTextured" />
-    <default_effect material_type="23" effect="AnimatedSpecularNormalmapTextured" />
-    <default_effect material_type="26" effect="SpecularLightmapTextured" />
-    <default_effect material_type="30" effect="SpecularLightmapNormalmapTextured" />
-    <default_effect material_type="55" effect="AnimatedSpecularNormalmapTextured" />
+    <default_effect material_type="0"   effect="Diffused" />
+    <default_effect material_type="2"   effect="Textured" />
+    <default_effect material_type="3"   effect="AnimatedTextured" />
+    <default_effect material_type="6"   effect="Normalmap" />
+    <default_effect material_type="7"   effect="AnimatedNormalmap" />
+    <default_effect material_type="34"  effect="Textured" />
+    <default_effect material_type="38"  effect="Normalmap" />
+    <default_effect material_type="39"  effect="AnimatedNormalmap" />
+    <default_effect material_type="10"  effect="Lightmap" />
+    <default_effect material_type="14"  effect="LightmapNormalmap" />
+    <default_effect material_type="134" effect="RadiosityNormalmap" />
+    <default_effect material_type="18"  effect="SpecularTextured" />
+    <default_effect material_type="22"  effect="SpecularNormalmapTextured" />
+    <default_effect material_type="23"  effect="AnimatedSpecularNormalmapTextured" />
+    <default_effect material_type="26"  effect="SpecularLightmapTextured" />
+    <default_effect material_type="30"  effect="SpecularLightmapNormalmapTextured" />
+    <default_effect material_type="150"  effect="SpecularRadiosityNormalmapTexturedTechnique" />
+    <default_effect material_type="55"  effect="AnimatedSpecularNormalmapTextured" />
   </default_effects>
 
 

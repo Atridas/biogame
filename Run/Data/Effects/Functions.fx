@@ -129,6 +129,17 @@ float3 ComputeAllLights(
   return out_;
 }
 
+float4 RadiosityNormalLightmapColor(float3 _Normal, float2 _UV)
+{
+  float4 l_LightR = tex2D(Radiosity_R_TextureSampler,_UV);
+  float4 l_LightG = tex2D(Radiosity_G_TextureSampler,_UV);
+  float4 l_LightB = tex2D(Radiosity_B_TextureSampler,_UV);
+  
+  return l_LightR * dot(_Normal, g_RadiosityNormalR)
+       + l_LightG * dot(_Normal, g_RadiosityNormalG)
+       + l_LightB * dot(_Normal, g_RadiosityNormalB);
+}
+
 float3 ComputeLightTangentSpace(float3 _Normal, float3 _Position, float3 _DiffuseColor, 
                                 float3 _LightPosition, float3 _LightDirection, int lightID,
                                 float3 _DirectionToEye)

@@ -17,20 +17,21 @@ global TEXTURE_TYPE_ENVIRONMENT  = 0X0008
 global TEXTURE_TYPE_GLOW             = 0X0010
 */
 
-global DIFFUSE_MATERIAL_MASK         = 0x0002
-global NORMALMAP_MATERIAL_MASK    = 0x0004
-global LIGHTMAP_MATERIAL_MASK       = 0x0008
-global SPECULARMAP_MATERIAL_MASK  = 0x0010
-global GLOW_MATERIAL_MASK             = 0x0020
-global PARALLAX_MATERIAL_MASK        = 0x0040
-global SPECULAR_MATERIAL_MASK        = 0x0080
-global ALPHA_MATERIAL_MASK             = 0x0100
+global DIFFUSE_MATERIAL_MASK                           = 0x0002
+global NORMALMAP_MATERIAL_MASK                       = 0x0004
+global LIGHTMAP_MATERIAL_MASK                         = 0x0008
+global SPECULARMAP_MATERIAL_MASK                    = 0x0010
+global GLOW_MATERIAL_MASK                               = 0x0020
+global PARALLAX_MATERIAL_MASK                          = 0x0040
+global SPECULAR_MATERIAL_MASK                          = 0x0080
+global ALPHA_MATERIAL_MASK                               = 0x0100
 
-global PARALLAX_PROPERTY_TYPE        = 1
-global BUMP_PROPERTY_TYPE              = 2
-global SPECULAR_PROPERTY_TYPE        = 3
-global ALPHA_PROPERTY_TYPE             = 4
-global GLOW_PROPERTY_TYPE              = 5
+global PARALLAX_PROPERTY_TYPE                     = 1
+global BUMP_PROPERTY_TYPE                           = 2
+global SPECULAR_PROPERTY_TYPE                     = 3
+global ALPHA_PROPERTY_TYPE                          = 4
+global GLOW_PROPERTY_TYPE                           = 5
+global RADIOSITY_NORMAL_PROPERTY_TYPE        = 6
 
 global DEFAULT_BUMP_VALUE              = 0.6
 global DEFAULT_PARALLAX_VALUE        = 0.02

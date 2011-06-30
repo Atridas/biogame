@@ -207,6 +207,9 @@ bool CStaticMesh::Load()
           l_File.read((char*)&l_fValue, sizeof(float));
           l_pMaterial = new CGlowPropertyDecorator(l_pMaterial,l_fValue);
           break;
+        case RADIOSITY_NORMAL_PROPERTY_TYPE:
+          l_pMaterial->ActivateRadiosityNormal();
+          break;
         default:
           break;
       }

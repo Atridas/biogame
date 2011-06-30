@@ -30,6 +30,20 @@ float4 LightmapNormalmapPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _in) : C
 	return l_LightResult;
 }
 
+float4 RadiosityNormalmapPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _in) : COLOR {
+	float3 l_Normal = CalcNormalmap((float3)_in.WorldTangent, 
+                                  (float3)_in.WorldBinormal, 
+                                  (float3)_in.WorldNormal, 
+                                  _in.UV);
+	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
+	float4 l_LightmapColor = RadiosityNormalLightmapColor(l_Normal, _in.UV2)+float4(g_AmbientLight,1.0);
+	float4 l_LightResult = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
+                                                  l_LightmapColor, g_SpotlightFactor,
+                                                  _in.PosLight)
+                                ,l_DiffuseColor.a);
+	return l_LightResult;
+}
+
 float4 ShowNormalsPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
 	float3 l_normal = normalize(_in.WorldNormal);
 	//return float4(0.5*l_normal + 0.5,1.0);
@@ -194,6 +208,30 @@ float4 SpecularLightmapNormalmapTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VE
                                   _in.UV);
 	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
 	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2)+float4(g_AmbientLight,1.0);
+	
+	float  l_SpotlightFactor;
+	
+	if(g_SpecularActive)
+	{
+	  l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x * g_SpotlightFactor;
+	}else{
+	  l_SpotlightFactor = g_SpotlightFactor;
+	}
+
+	float4 l_LightResult = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
+                                                  l_LightmapColor, l_SpotlightFactor,
+                                                  _in.PosLight)
+                                ,l_DiffuseColor.a);
+	return l_LightResult;
+}
+
+float4 SpecularRadiosityNormalmapTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _in) : COLOR {
+	float3 l_Normal = CalcNormalmap((float3)_in.WorldTangent, 
+                                  (float3)_in.WorldBinormal, 
+                                  (float3)_in.WorldNormal, 
+                                  _in.UV);
+	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
+	float4 l_LightmapColor = RadiosityNormalLightmapColor(l_Normal, _in.UV2) + float4(g_AmbientLight,1.0);
 	
 	float  l_SpotlightFactor;
 	

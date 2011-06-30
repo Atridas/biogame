@@ -1,5 +1,5 @@
 -- Escriu a fitxer la informació del material
-function ExportMaterial _object _material _vertexType _file _relativePath = 
+function ExportMaterial _object _material _vertexType _file _relativePath _normalRadiosity = 
 (
 	local l_materialMask = 0
 	local l_numTextures = 0
@@ -73,7 +73,16 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 	(
 		--l_materialMask = bit.or l_materialMask TEXTURE_TYPE_LIGHTMAP
 		l_numTextures = l_numTextures + 1
-		format "	->	LIGHTMAP\n"
+		
+		if _normalRadiosity then
+		(
+			l_numProperties = l_numProperties + 1
+			format "	-> NORMAL RADIOSITY\n"
+		)
+		else
+		(
+			format "	->	LIGHTMAP\n"
+		)
 	)
 	
 	if _material.SpecularLevelMapEnable == true and _material.SpecularLevelMap != undefined then
@@ -202,6 +211,12 @@ function ExportMaterial _object _material _vertexType _file _relativePath =
 			WriteShort _file GLOW_PROPERTY_TYPE #unsigned
 			WriteFloat _file l_glowness
 			format "	->	Glowness: %\n" l_glowness
+		)
+		
+		if _normalRadiosity and _material.selfIllumMapEnable == true and _material.selfIllumMap != undefined then
+		(
+			WriteShort _file RADIOSITY_NORMAL_PROPERTY_TYPE #unsigned
+			format "	->	Radiosity Normalmap:\n"
 		)
 	)
 )

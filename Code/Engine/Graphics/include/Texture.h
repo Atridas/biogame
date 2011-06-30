@@ -35,7 +35,7 @@ public:
    * Getter del path de la textura.
    * @return Path relatiu al fitxer de textura.
   **/
-  const string & GetFileName() const {m_szFileName;};
+  const string & GetFileName() const {return m_szFileName;};
   /**
    * Mètode de càrrega.
    * Aquest mètode instanciarà i carregarà la textura especificada.

@@ -98,17 +98,20 @@ void CEntityProcess::Update(float _fElapsedTime)
 
 void CEntityProcess::RenderScene(CRenderManager* _pRM)
 {
-  //CObject3D l_Poslluny;
-  //l_Poslluny.SetPosition(Vect3f(0,25,0));
-  //CObject3D* m_pPlayerPos = CORE->GetEntityManager()->GetEntity("Player")->GetComponent<CComponentObject3D>(CBaseComponent::ECT_OBJECT_3D);
-  //
-  //
-  //CSphereCamera l_SphereCamera( 1, 700, 55.0f * FLOAT_PI_VALUE/180.0f,
-  //                              ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
-  //                              &l_Poslluny,m_pPlayerPos);
-  //
-  //
-  //_pRM->SetupMatrices(&l_SphereCamera,false,false);
+  if(CORE->GetActionManager()->IsActionActive("ToggleDebug"))
+  {
+    CObject3D l_Poslluny;
+    l_Poslluny.SetPosition(Vect3f(0,25,0));
+    CObject3D* m_pPlayerPos = CORE->GetEntityManager()->GetEntity("Player")->GetComponent<CComponentObject3D>(CBaseComponent::ECT_OBJECT_3D);
+  
+  
+    CSphereCamera l_SphereCamera( 1, 700, 55.0f * FLOAT_PI_VALUE/180.0f,
+                                  ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
+                                  &l_Poslluny,m_pPlayerPos);
+  
+  
+    _pRM->SetupMatrices(&l_SphereCamera,false,false);
+  }
 
   //CORE->GetRenderableObjectsManager()->Render(_pRM);
   m_PortalManager.Render(_pRM);
@@ -118,17 +121,20 @@ void CEntityProcess::RenderScene(CRenderManager* _pRM)
 
 void CEntityProcess::RenderINFO(CRenderManager* _pRM)
 {
-  CORE->GetPhysicsManager()->DebugRender(_pRM);
-  m_PortalManager.DebugRender(_pRM);
+  if(CORE->GetActionManager()->IsActionActive("ToggleDebug"))
+  {
+    CORE->GetPhysicsManager()->DebugRender(_pRM);
+    m_PortalManager.DebugRender(_pRM);
 
-  //CFrustum l_Frustum;
-  //l_Frustum.Update(m_pCamera);
-  //
-  //Mat44f i;
-  //i.SetIdentity();
-  //_pRM->SetTransform(i);
-  //
-  //_pRM->DrawFrustum(&l_Frustum, colBLACK);
+    CFrustum l_Frustum;
+    l_Frustum.Update(m_pCamera);
+  
+    Mat44f i;
+    i.SetIdentity();
+    _pRM->SetTransform(i);
+  
+    _pRM->DrawFrustum(&l_Frustum, colBLACK);
+  }
 }
 
 bool CEntityProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
