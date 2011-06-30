@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<meshes>
+	<mesh name="castellet" path="Data/Meshes/castellet.mesh" max="13.2433 6.70784 18.3031" min="-13.2433 -6.70784 -18.3031" />
+	<mesh name="PlaneCastellet" path="Data/Meshes/PlaneCastellet.mesh" max="121.18 0.0 79.0885" min="-121.18 0.0 -79.0885" />
+</meshes>

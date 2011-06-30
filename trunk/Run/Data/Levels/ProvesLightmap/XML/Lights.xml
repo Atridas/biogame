@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<lights ambient="0.01 0.01 0.01">
+	<light type="omni" name="Omni01" pos="53.0536 22.9026 23.7759" color="1.0 1.0 1.0" att_start_range="0.0" att_end_range="200.0" render_shadows="false" />
+	<light type="omni" name="Omni02" pos="-54.7026 4.47937 0.023941" color="1.0 1.0 1.0" att_start_range="0.0" att_end_range="200.0" render_shadows="false" />
+</lights>

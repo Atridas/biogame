@@ -3,7 +3,8 @@
 	<RenderManager resolution="1280 720" position="50 5" fullscreenMode="false"/>
   
 	<StaticMeshManager>
-    <StaticMeshes xml="Data/Levels/Viewer/XML/StaticMeshes.xml"/>
+    <!-- <StaticMeshes xml="Data/Levels/Viewer/XML/StaticMeshes.xml"/> -->
+    <StaticMeshes xml="Data/Levels/ProvesLightmap/XML/StaticMeshes.xml"/>
   </StaticMeshManager>
   
 	<AnimatedModelManager>
@@ -24,7 +25,8 @@
   <!-- RenderableObjectsManager file="Data/XML/RenderableObjects.xml" -->
 	<!-- RenderableObjectsManager file="Data/Levels/Level -2/XML/RenderableObjects.xml" -->
 	<!--RenderableObjectsManager file="Data/Levels/Proves/XML/RenderableObjects.xml"-->
-  <RenderableObjectsManager file="Data/Levels/Viewer/XML/RenderableObjects.xml">
+  <!-- <RenderableObjectsManager file="Data/Levels/Viewer/XML/RenderableObjects.xml"> -->
+  <RenderableObjectsManager file="Data/Levels/ProvesLightmap/XML/RenderableObjects.xml">
 		<!--
     <Level xml="Data/XML/RenderableObjects.xml"/>
     <Level xml="Data/Levels/Level -1/XML/RenderableObjects.xml"/>
@@ -34,7 +36,8 @@
     -->
 	</RenderableObjectsManager>
 
-  <LightsManager file="Data/Levels/Viewer/XML/Lights.xml"/>
+  <LightsManager file="Data/Levels/ProvesLightmap/XML/NoLights.xml"/>
+  <!--<LightsManager file="Data/Levels/Viewer/XML/Lights.xml"/>-->
   <!--<LightsManager file="Data/XML/Lights.xml"/>-->
 
 	<SceneEffectManager file="Data/XML/SceneEffects_Viewer.xml"/>

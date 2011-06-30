@@ -107,6 +107,7 @@
     <ClCompile Include="InstanceMesh.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="LightManager.cpp" />
+    <ClCompile Include="LightmapTextureDecorator.cpp" />
     <ClCompile Include="OmniLight.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleEmitter.cpp" />

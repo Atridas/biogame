@@ -336,7 +336,7 @@ function CheckSceneObjects _objectArray =
 	return true
 )
 
-function ExportMesh _object0 _filename _relativeTexturePath = 
+function ExportMesh _object0 _filename _relativeTexturePath _normalRadiosity = 
 (
 	format "\nExportant objecte: % com a core %\n" _object0.name (GetCoreName _object0)
 	
@@ -438,7 +438,7 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 				--WriteShort l_file l_materialInfo #unsigned
 				--tipus de vertex i material en si
 				--WriteShort l_file l_vertexType2 #unsigned
-				ExportMaterial _object l_material[i] l_vertexType2 l_file _relativeTexturePath
+				ExportMaterial _object l_material[i] l_vertexType2 l_file _relativeTexturePath _normalRadiosity
 			)
 		)
 	)
@@ -472,7 +472,7 @@ function ExportMesh _object0 _filename _relativeTexturePath =
 		--WriteShort l_file l_materialInfo #unsigned
 		--tipus de vertex i material en si
 		--WriteShort l_file l_vertexType2 #unsigned
-		ExportMaterial _object l_material l_vertexType2 l_file _relativeTexturePath
+		ExportMaterial _object l_material l_vertexType2 l_file _relativeTexturePath _normalRadiosity
 	)
   
 	local l_VertexList =#()

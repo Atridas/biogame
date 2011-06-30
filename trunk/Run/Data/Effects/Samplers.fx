@@ -64,4 +64,31 @@ sampler EnvironmentTextureSampler : register(s6) = sampler_state
   AddressV  = WRAP;
 };
 
+sampler Radiosity_R_TextureSampler : register(s7) = sampler_state
+{
+  MipFilter = LINEAR;
+  MinFilter = LINEAR;  
+  MagFilter = LINEAR;
+  AddressU  = WRAP;
+  AddressV  = WRAP;
+};
+
+sampler Radiosity_G_TextureSampler : register(s8) = sampler_state
+{
+  MipFilter = LINEAR;
+  MinFilter = LINEAR;  
+  MagFilter = LINEAR;
+  AddressU  = WRAP;
+  AddressV  = WRAP;
+};
+
+sampler Radiosity_B_TextureSampler : register(s9) = sampler_state
+{
+  MipFilter = LINEAR;
+  MinFilter = LINEAR;  
+  MagFilter = LINEAR;
+  AddressU  = WRAP;
+  AddressV  = WRAP;
+};
+
 #endif

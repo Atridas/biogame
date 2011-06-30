@@ -330,6 +330,9 @@
     <ClCompile Include="SphereCamera.cpp">
       <Filter>Cameras\SphereCamera</Filter>
     </ClCompile>
+    <ClCompile Include="LightmapTextureDecorator.cpp">
+      <Filter>Materials\MaterialDecorators\TextureDecorators\LightmapTexture</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RenderManager.h">

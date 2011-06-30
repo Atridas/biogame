@@ -21,6 +21,7 @@ public:
   virtual void SetSpecularFactor(const float& _fSpecularFactor) {};
   virtual void SetGlossines(const float& _fGlossiness) {};
   virtual void SetBump(const float& _fBump) {};
+  virtual void ActivateRadiosityNormal() {};
 
   virtual bool HasAlphaBlending()      const {return false; };
   virtual bool HasSpecularParameters() const {return false; };

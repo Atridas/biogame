@@ -33,6 +33,11 @@ shared float g_GlowIntensity : GlowIntensity;
 #define LIGHT_DIRECTIONAL 1
 #define LIGHT_SPOT        2
 
+
+float3 g_RadiosityNormalR = { sqrt(2/3) ,  0        , 1/sqrt(3) };
+float3 g_RadiosityNormalG = { -1/sqrt(6),  1/sqrt(2), 1/sqrt(3) };
+float3 g_RadiosityNormalB = { -1/sqrt(6), -1/sqrt(2), 1/sqrt(3) };
+
 //Shadows
 #define SHADOW_EPSILON 0.0005f
 

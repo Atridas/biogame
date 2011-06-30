@@ -8,9 +8,10 @@ fileIn "Particles.ms"
 utility BioUtility "Eon-Utility" width:160 height:549
 (
 	button buttonPath "Set Path" pos:[8,8] width:144 height:24
-	label labelPath "Marian" pos:[8,52] width:137 height:24
+	label labelPath "Marian" pos:[8,46] width:137 height:24
 	checkbox checkMeshes "Export Mesh" pos:[13,74] width:114 height:16
-	checkbox checkTextures "Export Textures" pos:[13,98] width:115 height:16
+	checkbox checkTextures "Export Textures" pos:[13,90] width:115 height:16
+	checkbox checkNormalRadiosity "Normal Radiosity" pos:[13,106] width:112 height:17
 	dropdownList dropNivell "Nivell" pos:[11,125] width:131 height:40
 	GroupBox grp1 "Export" pos:[11,170] width:131 height:171
 	button buttonMesh "Mesh" pos:[23,188] width:100 height:19
@@ -216,7 +217,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				
 				local l_outName = l_MeshTotalPath + l_name + ".mesh"
 				
-				if ExportMesh l_object l_outName l_relativeTexPath == false then
+				if (ExportMesh l_object l_outName l_relativeTexPath checkNormalRadiosity.checked) == false then
 				(
 					--close l_file
 					
@@ -1069,13 +1070,22 @@ utility BioUtility "Eon-Utility" width:160 height:549
 	-- Fi exportadors
 	
 	-- Funcionalitats botons	
+	
+	
+	
+	
+	
+	
+	
+	
+	-- Fi funcionalitats botons
+
 	on BioUtility open do
 	(
 		labelPath.text = g_DefaultPath
 		dropNivell.items = g_LevelArray
 		DropListPhysX.items = g_PhysXArray
 	)
-	
 	on buttonPath pressed do
 	(
 		local l_outPath=GetSavePath initialDir:labelPath.text caption:"Select output file to export file" types:" mesh(*.mesh)|*.mesh|All Files(*.*)|*.*|"
@@ -1084,7 +1094,6 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			labelPath.text = l_outPath
 		)
 	)
-	
 	on buttonMesh pressed do
 	(
 		if $ != undefined and IsMesh $ then
@@ -1113,7 +1122,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				
 				local l_relativeTexPath = getRelativeTexturePath()
 				
-				if (ExportMesh $ l_outName l_relativeTexPath) == true then
+				if (ExportMesh $ l_outName l_relativeTexPath checkNormalRadiosity.checked) == true then
 				(
 					ShowMessage "File Saved"
 				)
@@ -1128,7 +1137,6 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			ShowError "Sel·lecciona un únic objecte a exportar."
 		)
 	)
-	
 	on buttonMeshManager pressed do
 	(
 		--Check
@@ -1169,7 +1177,6 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			format "Export finalitzat\n"
 		)
 	)
-	
 	on buttonScene pressed do
 	(
 		local l_cores = #()
@@ -1243,7 +1250,6 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		
 		ShowMessage "Fi"
 	)
-	
 	on buttonLight pressed do
 	(
 		local l_lights = #()
@@ -1265,7 +1271,20 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			ShowError "Problema inidentificat"
 		)
 	)
+	on buttonParticles pressed do
+	(
+		
+		format "Export Particles...\n"
 	
+		if ExportParticleEmitters() then
+		(
+			ShowMessage "Export de les partícules finalitzat\n"
+		)
+		else
+		(
+			ShowMessage "Hi ha hagut un error"
+		)
+	)
 	on ButtonPhysX pressed do
 	(
 		local l_cores = #()
@@ -1306,7 +1325,6 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			ShowMessage "Export de la Fisica finalitzat\n"
 		)
 	)
-	
 	on ButtonEntities pressed do
 	(
 		
@@ -1322,7 +1340,6 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			ShowMessage "Hi ha hagut un error"
 		)
 	)
-	
 	on ButtonNivell pressed do
 	(
 		
@@ -1335,19 +1352,4 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			ShowMessage "Hi ha hagut un error"
 		)
 	)
-	on buttonParticles pressed do
-	(
-		
-		format "Export Particles...\n"
-
-		if ExportParticleEmitters() then
-		(
-			ShowMessage "Export de les partícules finalitzat\n"
-		)
-		else
-		(
-			ShowMessage "Hi ha hagut un error"
-		)
-	)
-	-- Fi funcionalitats botons
 )
