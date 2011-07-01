@@ -16,7 +16,8 @@ struct SParticleInfo;
 
 
 class CParticleEmitter:
-  public CBaseControl
+  public CBaseControl,
+  public CObject3D
 {
 public:
   CParticleEmitter();
@@ -27,8 +28,8 @@ public:
   //  Set
   void SetName              (string _szName)                        {m_szName = _szName;};
   void SetId                (string _szId)                          {m_szId = _szId;};
-  void SetPosition          (D3DXVECTOR3& _vPos)                    {m_vPos=_vPos;};
-  void SetPositionFormEmitter   (D3DXVECTOR3& _vPosFormEmitter)         {m_vPosFormEmitter=_vPosFormEmitter;};
+  //void SetPosition          (D3DXVECTOR3& _vPos)                    {m_vPos=_vPos;};
+  void SetPositionFormEmitter   (Vect3f& _vPosFormEmitter)         {m_vPosFormEmitter=_vPosFormEmitter;};
   void SetFormEmitter           (string _szFormEmitter)                 {m_szFormEmitter = _szFormEmitter;};
   void SetMinEmitRate       (float _fMinEmitRate)                   {m_fMinEmitRate = _fMinEmitRate;};
   void SetMaxEmitRate       (float _fMaxEmitRate)                   {m_fMaxEmitRate = _fMaxEmitRate;};
@@ -36,14 +37,14 @@ public:
   void SetColor2            (D3DXCOLOR& _Color2)                    {m_Color2 = _Color2;};
   void SetMinSize           (float _fMinSize)                       {m_fMinSize = _fMinSize;};
   void SetMaxSize           (float _fMaxSize)                       {m_fMaxSize = _fMaxSize;};
-  void SetSpawnDir1         (D3DXVECTOR3& _vSpawnDir1)              {m_vSpawnDir1 = _vSpawnDir1;};
-  void SetSpawnDir2         (D3DXVECTOR3& _vSpawnDir2)              {m_vSpawnDir2 = _vSpawnDir2;};
+  void SetSpawnDir1         (Vect3f&      _vSpawnDir1)              {m_vSpawnDir1 = _vSpawnDir1;};
+  void SetSpawnDir2         (Vect3f&      _vSpawnDir2)              {m_vSpawnDir2 = _vSpawnDir2;};
   void SetTexParticle       (CTexture* _pTexParticle)               {m_pTexParticle = _pTexParticle;};
   void SetNumNewPartsExcess (float _fNumNewPartsExcess)             {m_fNumNewPartsExcess = _fNumNewPartsExcess;};
   void SetParticle          (LPDIRECT3DVERTEXBUFFER9 _vbParticles)  {m_vbParticles = _vbParticles;};
   void SetActive            (bool _Active)                          {m_bActive = _Active;};
-  void SetVel               (D3DXVECTOR3& _vVel)                    {m_vVel = _vVel;};
-  void SetGravity           (D3DXVECTOR3& _vGravity)                {m_vGravity = _vGravity;};
+  void SetVel               (Vect3f&      _vVel)                    {m_vVel = _vVel;};
+  void SetGravity           (Vect3f&      _vGravity)                {m_vGravity = _vGravity;};
   void SetAngle1            (float _fAngle1)                        {m_fAngle1 = _fAngle1;};
   void SetAngle2            (float _fAngle2)                        {m_fAngle2 = _fAngle2;};
   void SetNumDirections     (int _iNumDirections)                   {m_iNumDirections = _iNumDirections;};
@@ -54,23 +55,23 @@ public:
   //Get
   string                          GetName             () const {return m_szName;};
   string                          GetId               () const {return m_szId;};
-  string                          GetFormEmitter               () const {return m_szFormEmitter;};
-  const D3DXVECTOR3&				      GetPositionFormEmitter         () const {return m_vPosFormEmitter;};
-  const D3DXVECTOR3&				      GetPosition         () const {return m_vPos;};
+  string                          GetFormEmitter        () const {return m_szFormEmitter;};
+  const Vect3f&                   GetPositionFormEmitter() const {return m_vPosFormEmitter;};
+  //const D3DXVECTOR3&				      GetPosition         () const {return m_vPos;};
   float                           GetMinEmitRate      () const {return m_fMinEmitRate;};
   float                           GetMaxEmitRate      () const {return m_fMaxEmitRate;};
   const D3DXCOLOR&                GetColor1           () const {return m_Color1;};
   const D3DXCOLOR&                GetColor2           () const {return m_Color2;};
   float                           GetMinSize          () const {return m_fMinSize;};
   float                           GetMaxSize          () const {return m_fMaxSize;};
-  const D3DXVECTOR3&              GetSpawnDir1        () const {return m_vSpawnDir1;};
-  const D3DXVECTOR3&              GetSpawnDir2        () const {return m_vSpawnDir2;};
+  const Vect3f&                   GetSpawnDir1        () const {return m_vSpawnDir1;};
+  const Vect3f&                   GetSpawnDir2        () const {return m_vSpawnDir2;};
   CTexture*                       GetTexParticle      () const {return m_pTexParticle;};        
   float                           GetNumNewPartsExcess() const {return m_fNumNewPartsExcess;};
   const LPDIRECT3DVERTEXBUFFER9   GetParticle         () const {return m_vbParticles;};
   const bool                      GetActive           () const {return m_bActive;};
-  const D3DXVECTOR3&              GetVel              () const {return m_vVel;};
-  const D3DXVECTOR3&              GetGravity          () const {return m_vGravity;};
+  const Vect3f&                   GetVel              () const {return m_vVel;};
+  const Vect3f&                   GetGravity          () const {return m_vGravity;};
   float                           GetAngle1            () const {return m_fAngle1;};
   float                           GetAngle2            () const {return m_fAngle2;};
   float                           GetSizeY            () const {return m_vSize[1];};
@@ -82,8 +83,8 @@ public:
   void            SetAttributes       (SParticleInfo* _info);
 
 
-  vector<D3DXVECTOR3>                       m_vDirection;
-  vector<D3DXVECTOR3>                       m_vNewDirection;
+  vector<Vect3f>                            m_vDirection;
+  vector<Vect3f>                            m_vNewDirection;
   vector<float>                             m_vTimeDirection;
   vector<float>                             m_vTimeDirectionInterpolation;
 
@@ -92,16 +93,16 @@ private:
   string                                    m_szName;
   string                                    m_szId;
   string									                  m_szFormEmitter; // forma del emissor
-  D3DXVECTOR3                               m_vPosFormEmitter;//posicio a la que surt la particula segons al forma del emissor
-  D3DXVECTOR3                               m_vPos;
+  Vect3f                                    m_vPosFormEmitter;//posicio a la que surt la particula segons al forma del emissor
+  //D3DXVECTOR3                               m_vPos;
   float                                     m_fMinEmitRate;
   float                                     m_fMaxEmitRate;
   D3DXCOLOR                                 m_Color1;
   D3DXCOLOR                                 m_Color2;
   float                                     m_fMinSize;
   float                                     m_fMaxSize;
-  D3DXVECTOR3                               m_vSpawnDir1;
-  D3DXVECTOR3                               m_vSpawnDir2;
+  Vect3f                                    m_vSpawnDir1;
+  Vect3f                                    m_vSpawnDir2;
   float                                     m_fNumNewPartsExcess;
   CTexture*                                 m_pTexParticle;
   float                                     m_fLife1;
@@ -123,8 +124,8 @@ private:
   //vector<float>                             m_vTimeDirectionInterpolation;
   bool                                      m_bActive;
   bool                                      m_bActiveAux;
-  D3DXVECTOR3                               m_vVel; //velocitat de la particula
-  D3DXVECTOR3                               m_vGravity; // forçes gravitatories
+  Vect3f                                    m_vVel; //velocitat de la particula
+  Vect3f                                    m_vGravity; // forçes gravitatories
   float                                     m_fAngle1;
   float                                     m_fAngle2;
   float                                     m_fSizeX;

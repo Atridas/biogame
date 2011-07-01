@@ -94,8 +94,13 @@ using namespace std;
 
 float RandomNumber(float _fMin, float _fMax);
 int   RandomNumber(int _iMin, int _iMax);
-D3DXVECTOR3 InterPolaterNumber(D3DXVECTOR3& _vInicial, D3DXVECTOR3& _vFinal,float _fTime, float _fTimeDelta);
-D3DXCOLOR InterPolaterNumber(D3DXCOLOR& _vInicial, D3DXCOLOR& _vFinal,float _fTime, float _fTimeDelta);
+
+
+D3DXVECTOR3 InterPolaterNumber(const D3DXVECTOR3& _vInicial, const D3DXVECTOR3& _vFinal,float _fTime, float _fTimeDelta);
+Vect3f InterPolaterNumber(const Vect3f& _vInicial, const Vect3f& _vFinal,float _fTime, float _fTimeDelta);
+D3DXCOLOR InterPolaterNumber(const D3DXCOLOR& _vInicial, const D3DXCOLOR& _vFinal,float _fTime, float _fTimeDelta);
 float InterPolaterNumber(float _fInicial, float _fFinal,float _fTime, float _fTimeDelta);
+
+
 
 #endif

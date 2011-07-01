@@ -47,7 +47,8 @@ void CParticleManager::Release()
 
 bool CParticleManager::Load(const string& _szFileName)
 {
-  
+
+
   m_szFileName = _szFileName;
   LOGGER->AddNewLog(ELL_INFORMATION, "CParticleManager::Load \"%s\"", m_szFileName.c_str());
 
@@ -79,32 +80,30 @@ bool CParticleManager::Load(const string& _szFileName)
         Vect3f l_vVec3;
 			  Vect4f l_vVec4;
 
-       	l_pInfo->m_szId = l_treeParticleEmitter.GetPszISOProperty("id" ,"");
-			  l_pInfo->m_fMinEmitRate = l_treeParticleEmitter.GetFloatProperty("MinEmitRate");
-			  l_pInfo->m_fMaxEmitRate = l_treeParticleEmitter.GetFloatProperty("MaxEmitRate");
+       	l_pInfo->m_szId = l_treeParticleEmitter.GetPszISOProperty("id" ,"",true);
+			  l_pInfo->m_fMinEmitRate = l_treeParticleEmitter.GetFloatProperty("MinEmitRate",1,true);
+			  l_pInfo->m_fMaxEmitRate = l_treeParticleEmitter.GetFloatProperty("MaxEmitRate",l_pInfo->m_fMinEmitRate,false);
 			  l_vVec4 = l_treeParticleEmitter.GetVect4fProperty("Color1",Vect4f(0.0f),true);
 			  l_Event.m_Color1 = D3DXCOLOR(l_vVec4.x,l_vVec4.y,l_vVec4.z,l_vVec4.w);
-			  l_vVec4 = l_treeParticleEmitter.GetVect4fProperty("Color2",Vect4f(0.0f),true);
+			  l_vVec4 = l_treeParticleEmitter.GetVect4fProperty("Color2",l_vVec4,false);
 			  l_Event.m_Color2 = D3DXCOLOR(l_vVec4.x,l_vVec4.y,l_vVec4.z,l_vVec4.w);
-			  l_Event.m_fMinSize = l_treeParticleEmitter.GetFloatProperty("MinSize");
-			  l_Event.m_fMaxSize = l_treeParticleEmitter.GetFloatProperty("MaxSize");
-			  l_pInfo->m_pTexParticle = CORE->GetTextureManager()->GetResource(l_treeParticleEmitter.GetPszProperty("TexParticle",""));
-        l_pInfo->m_fLife1 = l_treeParticleEmitter.GetFloatProperty("Life1");
-        l_pInfo->m_fLife2 = l_treeParticleEmitter.GetFloatProperty("Life2");
-        l_pInfo->m_fAngle1 = l_treeParticleEmitter.GetFloatProperty("Angle1");
-        l_pInfo->m_fAngle2 = l_treeParticleEmitter.GetFloatProperty("Angle2");
-        l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Gravity",Vect3f(0.0f));
-        l_pInfo->m_vGravity = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
-        l_vVec3 = l_treeParticleEmitter.GetVect3fProperty("Velocitate",Vect3f(0.0f));
-        l_pInfo->m_vVel = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
+			  l_Event.m_fMinSize = l_treeParticleEmitter.GetFloatProperty("MinSize",1,true);
+			  l_Event.m_fMaxSize = l_treeParticleEmitter.GetFloatProperty("MaxSize",l_Event.m_fMinSize,false);
+			  l_pInfo->m_pTexParticle = CORE->GetTextureManager()->GetResource(l_treeParticleEmitter.GetPszProperty("TexParticle","",true));
+        l_pInfo->m_fLife1 = l_treeParticleEmitter.GetFloatProperty("Life1", 1, true);
+        l_pInfo->m_fLife2 = l_treeParticleEmitter.GetFloatProperty("Life2", l_pInfo->m_fLife2, false);
+        l_pInfo->m_fAngle1 = l_treeParticleEmitter.GetFloatProperty("Angle1", 0, false);
+        l_pInfo->m_fAngle2 = l_treeParticleEmitter.GetFloatProperty("Angle2", l_pInfo->m_fAngle1, false);
+        l_pInfo->m_vGravity = l_treeParticleEmitter.GetVect3fProperty("Gravity",Vect3f(0.0f),false);
+        l_pInfo->m_vVel = l_treeParticleEmitter.GetVect3fProperty("Velocitate",Vect3f(1,1,1),false);
         l_pInfo->m_bAnimated = false; // si te animacio despres la canvio
-        l_pInfo->m_bBucleInfinit=l_treeParticleEmitter.GetBoolProperty("Bucle");
+        l_pInfo->m_bBucleInfinit=l_treeParticleEmitter.GetBoolProperty("Bucle",true,false);
         if(l_pInfo->m_bBucleInfinit==false)
         {
-          l_pInfo->m_iNumBucle=l_treeParticleEmitter.GetIntProperty("NumBucle");
-          l_pInfo->m_fRebootEmitter1=l_treeParticleEmitter.GetFloatProperty("RebootEmitter1");
-          l_pInfo->m_fRebootEmitter2=l_treeParticleEmitter.GetFloatProperty("RebootEmitter2");
-          l_pInfo->m_bTotDeCop=l_treeParticleEmitter.GetBoolProperty("TotDeCop");
+          l_pInfo->m_iNumBucle=l_treeParticleEmitter.GetIntProperty("NumBucle",1,true);
+          l_pInfo->m_fRebootEmitter1=l_treeParticleEmitter.GetFloatProperty("RebootEmitter1",1,true);
+          l_pInfo->m_fRebootEmitter2=l_treeParticleEmitter.GetFloatProperty("RebootEmitter2",l_pInfo->m_fRebootEmitter1,false);
+          l_pInfo->m_bTotDeCop=l_treeParticleEmitter.GetBoolProperty("TotDeCop",true,true);
         }else
         {
           l_pInfo->m_iNumBucle=0;
@@ -148,11 +147,11 @@ bool CParticleManager::Load(const string& _szFileName)
 
             
 
-                l_Event.m_fTime = l_treeParticleEmittersSize.GetFloatProperty("time");
-                l_Event.m_fTimeInterpolation = l_treeParticleEmittersSize.GetFloatProperty("timeInterpolation");
+                l_Event.m_fTime = l_treeParticleEmittersSize.GetFloatProperty("time",0,true);
+                l_Event.m_fTimeInterpolation = l_treeParticleEmittersSize.GetFloatProperty("timeInterpolation",0,false);
             
-                l_Event.m_fMinSize = l_treeParticleEmittersSize.GetFloatProperty("MinSize");
-			          l_Event.m_fMaxSize = l_treeParticleEmittersSize.GetFloatProperty("MaxSize");
+                l_Event.m_fMinSize = l_treeParticleEmittersSize.GetFloatProperty("MinSize",1,true);
+			          l_Event.m_fMaxSize = l_treeParticleEmittersSize.GetFloatProperty("MaxSize",l_Event.m_fMinSize,false);
 
                 l_pInfo->m_vTimeSize.push_back(l_Event.m_fTime);
                 l_pInfo->m_vTimeSizeInterpolation.push_back(l_Event.m_fTimeInterpolation);
@@ -179,13 +178,13 @@ bool CParticleManager::Load(const string& _szFileName)
                 if(l_treeParticleEmittersColor.IsComment())
 				        continue;
           
-                l_Event.m_fTime = l_treeParticleEmittersColor.GetFloatProperty("time");
-                l_Event.m_fTimeInterpolation = l_treeParticleEmittersColor.GetFloatProperty("timeInterpolation");
+                l_Event.m_fTime = l_treeParticleEmittersColor.GetFloatProperty("time", 0, true);
+                l_Event.m_fTimeInterpolation = l_treeParticleEmittersColor.GetFloatProperty("timeInterpolation",0, false);
             
 
                 l_vVec4 = l_treeParticleEmittersColor.GetVect4fProperty("Color1",Vect4f(0.0f),true);
 			          l_Event.m_Color1 = D3DXCOLOR(l_vVec4.x,l_vVec4.y,l_vVec4.z,l_vVec4.w);
-			          l_vVec4 = l_treeParticleEmittersColor.GetVect4fProperty("Color2",Vect4f(0.0f),true);
+			          l_vVec4 = l_treeParticleEmittersColor.GetVect4fProperty("Color2",l_vVec4,false);
 			          l_Event.m_Color2 = D3DXCOLOR(l_vVec4.x,l_vVec4.y,l_vVec4.z,l_vVec4.w);
 
                 l_pInfo->m_vTimeColor.push_back(l_Event.m_fTime);
@@ -215,16 +214,16 @@ bool CParticleManager::Load(const string& _szFileName)
 
             
 			          l_pInfo->m_bAnimated = true;
-                l_Event.m_fTime = l_treeParticleEmittersAnimated.GetFloatProperty("time");
+                l_Event.m_fTime = l_treeParticleEmittersAnimated.GetFloatProperty("time",0,true);
 			          l_pInfo->m_vTimeAnimated.push_back(l_Event.m_fTime);
-			          l_Event.m_fTime = l_treeParticleEmittersAnimated.GetFloatProperty("TimeDiapo");
+			          l_Event.m_fTime = l_treeParticleEmittersAnimated.GetFloatProperty("TimeDiapo",1,true);
 			          l_pInfo->m_vTimeAnimated.push_back(l_Event.m_fTime);
-                l_Event.m_fTimeInterpolation = l_treeParticleEmittersAnimated.GetFloatProperty("timeInterpolation");
+                l_Event.m_fTimeInterpolation = l_treeParticleEmittersAnimated.GetFloatProperty("timeInterpolation",0,false);
                 l_pInfo->m_vTimeAnimatedInterpolation.push_back(l_Event.m_fTimeInterpolation);
-                l_pInfo->m_pTexParticle = CORE->GetTextureManager()->GetResource(l_treeParticleEmittersAnimated.GetPszProperty("TexParticle",""));
+                l_pInfo->m_pTexParticle = CORE->GetTextureManager()->GetResource(l_treeParticleEmittersAnimated.GetPszProperty("TexParticle","",true));
             			
-			          l_Event.m_iTexNumFiles = l_treeParticleEmittersAnimated.GetIntProperty("NumFiles");
-			          l_Event.m_iTexNumColumnes = l_treeParticleEmittersAnimated.GetIntProperty("NumColumnes");
+			          l_Event.m_iTexNumFiles = l_treeParticleEmittersAnimated.GetIntProperty("NumFiles",1,true);
+			          l_Event.m_iTexNumColumnes = l_treeParticleEmittersAnimated.GetIntProperty("NumColumnes",1,true);
 			          l_pInfo->m_vFilesColumnes.push_back(l_Event.m_iTexNumFiles);
 			          l_pInfo->m_vFilesColumnes.push_back(l_Event.m_iTexNumColumnes);
                 l_pInfo->m_vTextureAnimation.push_back(l_pInfo->m_pTexParticle);
@@ -254,7 +253,7 @@ bool CParticleManager::Load(const string& _szFileName)
 				  continue;
       
         
-			  string l_szType = l_treeInstanceParticle.GetPszProperty("type","");
+			  string l_szType = l_treeInstanceParticle.GetPszProperty("type","",true);
         SParticleInfo* l_pInfo = GetResource(l_szType);
         CParticleEmitter* l_pParticleEmitter = new CParticleEmitter();
         			  
@@ -265,34 +264,31 @@ bool CParticleManager::Load(const string& _szFileName)
           continue;
         }
 
-			  Vect3f l_vVec3 = l_treeInstanceParticle.GetVect3fProperty("position",Vect3f(0.0f));
-			  l_pParticleEmitter->SetPosition(D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z));
-        l_pParticleEmitter->SetName(l_treeInstanceParticle.GetPszISOProperty("id" ,""));
-        l_vVec3 = l_treeInstanceParticle.GetVect3fProperty("Direction",Vect3f(0.0f));
-        m_vSpawnDir = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
-		    l_vVec3 = l_treeInstanceParticle.GetVect3fProperty("Desviacion",Vect3f(0.0f));
-        m_vDesviacionSpawnDir = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
+			  Vect3f l_vVec3 = l_treeInstanceParticle.GetVect3fProperty("position",Vect3f(0.0f),true);
+			  l_pParticleEmitter->SetPosition(l_vVec3);
+        l_pParticleEmitter->SetName(l_treeInstanceParticle.GetPszISOProperty("id" ,"",true));
+        Vect3f l_vSpawnDir = l_treeInstanceParticle.GetVect3fProperty("Direction",Vect3f(0,1,0),true);
+		    Vect3f l_vDesviacionSpawnDir = l_treeInstanceParticle.GetVect3fProperty("Desviacion",Vect3f(0.0f),false);
 		
-		    m_szFormEmitter = l_treeInstanceParticle.GetPszISOProperty("FormEmitter","");
+		    m_szFormEmitter = l_treeInstanceParticle.GetPszISOProperty("FormEmitter","dummy",false);
         l_pParticleEmitter->SetFormEmitter(m_szFormEmitter);
 
    
 		    if(m_szFormEmitter=="dummy")
 		    {
-			    m_fSizeX = l_treeInstanceParticle.GetFloatProperty("sizeX");
-			    m_fSizeY = l_treeInstanceParticle.GetFloatProperty("sizeY");
-			    m_fSizeZ = l_treeInstanceParticle.GetFloatProperty("sizeZ");
-			    m_vPosFormEmitter.x=m_fSizeX;
-          m_vPosFormEmitter.y=m_fSizeY;
-          m_vPosFormEmitter.z=m_fSizeZ;
-			    l_pParticleEmitter->SetPositionFormEmitter(m_vPosFormEmitter);
+			    m_fSizeX = l_treeInstanceParticle.GetFloatProperty("sizeX",1,true);
+			    m_fSizeY = l_treeInstanceParticle.GetFloatProperty("sizeY",1,true);
+			    m_fSizeZ = l_treeInstanceParticle.GetFloatProperty("sizeZ",1,true);
+          Vect3f l_vPosFormEmitter(m_fSizeX, m_fSizeY, m_fSizeZ);
+
+			    l_pParticleEmitter->SetPositionFormEmitter(l_vPosFormEmitter);
 			    l_pParticleEmitter->SetFormEmitter(m_szFormEmitter);
 		    }
 
         l_pParticleEmitter->m_vTimeDirection.push_back(0);
-        D3DXVECTOR3 l_vAux = m_vSpawnDir- m_vDesviacionSpawnDir;
+        Vect3f l_vAux = l_vSpawnDir- l_vDesviacionSpawnDir;
         l_pParticleEmitter->m_vDirection.push_back(l_vAux);
-        l_vAux = m_vSpawnDir+ m_vDesviacionSpawnDir;
+        l_vAux = l_vSpawnDir + l_vDesviacionSpawnDir;
         l_pParticleEmitter->m_vDirection.push_back(l_vAux);
 
         
@@ -323,20 +319,18 @@ bool CParticleManager::Load(const string& _szFileName)
 
          
 
-                m_fTime = l_treeParticleInstanceDiredtion.GetFloatProperty("time");
-                m_fTimeInterpolation = l_treeParticleInstanceDiredtion.GetFloatProperty("timeInterpolation");
+                m_fTime = l_treeParticleInstanceDiredtion.GetFloatProperty("time",1,true);
+                m_fTimeInterpolation = l_treeParticleInstanceDiredtion.GetFloatProperty("timeInterpolation",0,false);
             
 			
-			          l_vVec3 = l_treeParticleInstanceDiredtion.GetVect3fProperty("Direction",Vect3f(0.0f));
-                m_vSpawnDir = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
-			          l_vVec3 = l_treeParticleInstanceDiredtion.GetVect3fProperty("Desviacion",Vect3f(0.0f));
-                m_vDesviacionSpawnDir = D3DXVECTOR3(l_vVec3.x,l_vVec3.y,l_vVec3.z);
+			          l_vSpawnDir = l_treeParticleInstanceDiredtion.GetVect3fProperty("Direction",Vect3f(0,1,0),true);
+			          l_vDesviacionSpawnDir = l_treeParticleInstanceDiredtion.GetVect3fProperty("Desviacion",Vect3f(0.0f),false);
             
             
-		            D3DXVECTOR3 l_vAux = m_vSpawnDir- m_vDesviacionSpawnDir;
+		            Vect3f l_vAux = l_vSpawnDir - l_vDesviacionSpawnDir;
 		           l_pParticleEmitter->m_vTimeDirection.push_back(m_fTime);
                l_pParticleEmitter->m_vDirection.push_back(l_vAux);
-               l_vAux = m_vSpawnDir+ m_vDesviacionSpawnDir;
+               l_vAux = l_vSpawnDir+ l_vDesviacionSpawnDir;
                l_pParticleEmitter->m_vDirection.push_back(l_vAux);
 		           l_pParticleEmitter->m_vTimeDirectionInterpolation.push_back(m_fTimeInterpolation);
                l_pInfo->m_iNumDirections++;
@@ -393,10 +387,21 @@ void CParticleManager::Update(const float _fElapsedTime, CCamera* camera)
 
 void CParticleManager::Render(CRenderManager* _pRM)
 {
-  Mat44f l_mat;
+  /*Mat44f l_mat;
   l_mat.SetIdentity();
+  _pRM->SetTransform(l_mat);*/
 
-  _pRM->SetTransform(l_mat);
+  LPDIRECT3DDEVICE9 l_pd3dDevice = _pRM->GetDevice();
+  _pRM->EnableAlphaBlend();
+  l_pd3dDevice->SetRenderState( D3DRS_POINTSPRITEENABLE, TRUE );
+  l_pd3dDevice->SetRenderState( D3DRS_POINTSCALEENABLE,  TRUE );
+  l_pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
+  l_pd3dDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
+  l_pd3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
+  
+  l_pd3dDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
+  l_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
+
 
   vector<CParticleEmitter*>::iterator it  = m_vEmitterParticle.begin(),
                                       end = m_vEmitterParticle.end();

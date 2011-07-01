@@ -7,59 +7,48 @@
 
 
 CParticleEmitter::CParticleEmitter():
-m_Particles(NUMPARTICLES)
-{
- 
-  //SetGravity(D3DXVECTOR3(0.0f,0.0f,0.0f));
-  SetPosition(D3DXVECTOR3(5.0f,4.0f,3.0f));
-  SetMinEmitRate(10.0f);
-  SetMaxEmitRate(30.0f);
-  SetColor1(D3DXCOLOR(1.0f,1.0f,1.0f,1.0f));
-  SetColor2(D3DXCOLOR(1.0f,1.0f,1.0f,1.0f));
-  SetMinSize(1.0f);
-  SetMaxSize(3.0f);
-  SetSpawnDir1(D3DXVECTOR3(-5.0f, -5.0f, -5.0f));
-  SetSpawnDir2(D3DXVECTOR3(5.0f, 5.0f, 5.0f));
-  SetVel(D3DXVECTOR3(1.0f,1.0f,1.0f));
-  SetGravity(D3DXVECTOR3(0.0f,0.0f,0.0f));
-
-  //******
- 
- 
-  // initialize misc. other things
-  m_szName        = "";
-  m_szId          = "";
-  m_pTexParticle  = NULL;
-  m_vbParticles   = NULL;
-  //SetVBSize(NUMPARTICLES / 10);
-  m_fNumNewPartsExcess = 0.0f;
-  m_fLife1 = 0.0f;
-  m_fLife2 = 0.0f;
-  m_fAngle1 = 0.0f;
-  m_fAngle2 = 0.0f;
-  //m_fAngle = 0.0f;
-  m_fSizeX= 1.0f;
-  m_fSizeY=1.0f;
-  m_bBucleInfinit=true;
-  m_iNumBucle=0;
-  m_iNumBucleAux=0;
-  m_iCont=5;
-  m_fContElapsedTime=0.0f;
-  m_fRandomRebootEmitter=0.0f;
-  m_fRebootEmitter1=0.0f;
-  m_fRebootEmitter2=0.0f;
-  m_iNumDirections=1;
-  m_bTotDeCop=false;
-  m_fAgeParticle=0.0f;
+m_Particles(NUMPARTICLES),
+m_fMinEmitRate(10.0f),
+m_fMaxEmitRate(30.0f),
+m_Color1(1.0f,1.0f,1.0f,1.0f),
+m_Color2(1.0f,1.0f,1.0f,1.0f),
+m_fMinSize(1.0f),
+m_fMaxSize(3.0f),
+m_vSpawnDir1(-5.0f, -5.0f, -5.0f),
+m_vSpawnDir2(5.0f, 5.0f, 5.0f),
+m_vVel(1.0f,1.0f,1.0f),
+m_vGravity(0.0f,0.0f,0.0f),
+m_pTexParticle(0),
+m_vbParticles(0),
+m_fNumNewPartsExcess  (0.0f ),
+m_fLife1              (0.0f ),
+m_fLife2              (0.0f ),
+m_fAngle1             (0.0f ),
+m_fAngle2             (0.0f ),
+//m_fAngle            (0.0f ),
+m_fSizeX              (1.0f ),
+m_fSizeY              (1.0f ),
+m_bBucleInfinit       (true ),
+m_iNumBucle           (0    ),
+m_iNumBucleAux        (0    ),
+m_iCont               (5    ),
+m_fContElapsedTime    (0.0f ),
+m_fRandomRebootEmitter(0.0f ),
+m_fRebootEmitter1     (0.0f ),
+m_fRebootEmitter2     (0.0f ),
+m_iNumDirections      (1    ),
+m_bTotDeCop           (false),
+m_fAgeParticle        (0.0f ),
 
  /* m_PointA=(D3DXVECTOR3(0.0f,0.0f,0.0f));
   m_PointB=(D3DXVECTOR3(0.0f,0.0f,0.0f));
   m_PointC=(D3DXVECTOR3(0.0f,0.0f,0.0f)); 
   m_PointD=(D3DXVECTOR3(0.0f,0.0f,0.0f));*/
-  m_bAnimated= false;
-  m_bActive = false;
-  m_bActiveAux = true;
-
+m_bAnimated  ( false),
+m_bActive    ( false),
+m_bActiveAux ( true )
+  
+{
   //TODO inicialitzar els vector de color i temps
 }
 
@@ -228,7 +217,7 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
 			    float fRandZ = RandomNumber(m_vDirection[i*2].z, m_vDirection[(i*2)+1].z);
         		    
         
-				    m_vNewDirection[i] = D3DXVECTOR3(fRandX, fRandY, fRandZ);
+				    m_vNewDirection[i] = Vect3f(fRandX, fRandY, fRandZ);
 				    i--;
         
 		    }	  
@@ -272,13 +261,21 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
         
 		    }	
 //****************************************
-        D3DXVECTOR3 l_vPos_aux;
+        Vect3f l_vPos_aux;
 
 		    if(m_szFormEmitter=="dummy")
 		    {
-		      l_vPos_aux.x = m_vPos.x+RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
+		      /*l_vPos_aux.x = m_vPos.x+RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
           l_vPos_aux.y = m_vPos.y+RandomNumber(m_vPosFormEmitter.y/-2,m_vPosFormEmitter.y/2);
-          l_vPos_aux.z = m_vPos.z+RandomNumber(m_vPosFormEmitter.z/-2,m_vPosFormEmitter.z/2);
+          l_vPos_aux.z = m_vPos.z+RandomNumber(m_vPosFormEmitter.z/-2,m_vPosFormEmitter.z/2);*/
+
+          //l_vPos_aux.x = m_vPosition.x+RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
+          //l_vPos_aux.y = m_vPosition.y+RandomNumber(m_vPosFormEmitter.y/-2,m_vPosFormEmitter.y/2);
+          //l_vPos_aux.z = m_vPosition.z+RandomNumber(m_vPosFormEmitter.z/-2,m_vPosFormEmitter.z/2);
+
+          l_vPos_aux.x = RandomNumber(m_vPosFormEmitter.x/-2,m_vPosFormEmitter.x/2);
+          l_vPos_aux.y = RandomNumber(m_vPosFormEmitter.y/-2,m_vPosFormEmitter.y/2);
+          l_vPos_aux.z = RandomNumber(m_vPosFormEmitter.z/-2,m_vPosFormEmitter.z/2);
 		    }
 		    part->SetGravity(m_vGravity);
 		    part->SetVel(m_vVel);
@@ -412,20 +409,8 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
     return;
 
   
-
-  LPDIRECT3DDEVICE9 l_pd3dDevice = _pRM->GetDevice();
-
- 
-
- _pRM->EnableAlphaBlend();
-
-  l_pd3dDevice->SetRenderState( D3DRS_POINTSPRITEENABLE, TRUE );
-  l_pd3dDevice->SetRenderState( D3DRS_POINTSCALEENABLE,  TRUE );
+  _pRM->SetTransform(GetMat44());
   
-  l_pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
- 
-  l_pd3dDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
-  l_pd3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
 //POINTSIZE ***************************************************
  /*
   float l_fPointSize    = 100.0f;
@@ -442,9 +427,6 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
   l_pd3dDevice->SetRenderState(D3DRS_POINTSCALE_A,  *((DWORD*)&l_fPointScaleA));    
   l_pd3dDevice->SetRenderState(D3DRS_POINTSCALE_B,  *((DWORD*)&l_fPointScaleB));    
   l_pd3dDevice->SetRenderState(D3DRS_POINTSCALE_C,  *((DWORD*)&l_fPointScaleC));*/
-  
-  l_pd3dDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
-  l_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
   
  /*  
   // Set up the vertex buffer to be rendered
@@ -543,6 +525,7 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
  
 //BILLBOARD**********************************************************
   m_pTexParticle->Activate(0);
+  LPDIRECT3DDEVICE9 l_pd3dDevice = _pRM->GetDevice();
   l_pd3dDevice->SetStreamSource( 0, m_vbParticles,0, sizeof(VERTEX_TEXTURED));// no se si serveix aki
   l_pd3dDevice->SetFVF(D3DFVF_XYZ|D3DFVF_DIFFUSE|D3DFVF_TEX1);
   l_pd3dDevice->DrawIndexedPrimitiveUP(D3DPT_TRIANGLELIST,0,4*l_cont,2*l_cont,l_Indexes,D3DFMT_INDEX16,l_Points,sizeof(VERTEX_TEXTURED));

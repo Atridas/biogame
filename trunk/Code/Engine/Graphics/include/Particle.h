@@ -19,18 +19,18 @@ public:
   void SetLifeTimer         (float _fLifetime)                {m_fLifetime = _fLifetime;};
   void SetAge               (float _fAge)                     {m_fAge = _fAge;};
   void SetColor             (const D3DXCOLOR& _Color)         {m_Color = _Color;};
-  void SetPos               (const D3DXVECTOR3& _vPos)        {m_vPos = _vPos;};
-  void SetDir               (const D3DXVECTOR3& _vDir)        {m_vDir = _vDir;};
-  void SetVel               (const D3DXVECTOR3& _vVel)        {m_vVel = _vVel;};
-  void SetGravity           (const D3DXVECTOR3& _vGravity)    {m_vGravity = _vGravity;};
+  void SetPos               (const Vect3f& _vPos)        {m_vPos = _vPos;};
+  void SetDir               (const Vect3f& _vDir)        {m_vDir = _vDir;};
+  void SetVel               (const Vect3f& _vVel)        {m_vVel = _vVel;};
+  void SetGravity           (const Vect3f& _vGravity)    {m_vGravity = _vGravity;};
   void SetTexParticle       (CTexture* _pTexParticle)               {m_pTexParticle = _pTexParticle;};
   void SetAngle             (float _fAngle)                         {m_fAngle = _fAngle;};
   void SetInitAngle         (float _iIncrementAngle)          {m_iIncrementAngle = _iIncrementAngle;};
   //void SetSize	            ( const float sizeX, const float sizeY ) {m_fSizeX = sizeX; m_fSizeY = sizeY;}
-  void SetPointA            (const D3DXVECTOR3& _pointA)      {m_PointA=_pointA;};
-  void SetPointB            (const D3DXVECTOR3& _pointB)      {m_PointB=_pointB;};
-  void SetPointC            (const D3DXVECTOR3& _pointC)      {m_PointC=_pointC;};
-  void SetPointD            (const D3DXVECTOR3& _pointD)      {m_PointD=_pointD;};
+  void SetPointA            (const Vect3f& _pointA)      {m_PointA=_pointA;};
+  void SetPointB            (const Vect3f& _pointB)      {m_PointB=_pointB;};
+  void SetPointC            (const Vect3f& _pointC)      {m_PointC=_pointC;};
+  void SetPointD            (const Vect3f& _pointD)      {m_PointD=_pointD;};
   void SetAU                (float _fAU)                      {m_fAU = _fAU;};
   void SetAV                (float _fAV)                      {m_fAV = _fAV;};
   void SetBU                (float _fBU)                      {m_fBU = _fBU;};
@@ -51,16 +51,16 @@ public:
   float GetLifeTimer              () const              {return m_fLifetime;};
   float GetAge                    () const              {return m_fAge;};
   const D3DXCOLOR& GetColor       () const              {return m_Color;};
-  const D3DXVECTOR3& GetPos       () const              {return m_vPos;};
-  const D3DXVECTOR3& GetDir       () const              {return m_vDir;};
-  const D3DXVECTOR3& GetVel       () const              {return m_vVel;};
-  const D3DXVECTOR3& GetGravity   () const              {return m_vGravity;};
+  const Vect3f& GetPos            () const                   {return m_vPos;};
+  const Vect3f& GetDir            () const                   {return m_vDir;};
+  const Vect3f& GetVel            () const                   {return m_vVel;};
+  const Vect3f& GetGravity        () const                   {return m_vGravity;};
   CTexture*   GetTexParticle      () const              {return m_pTexParticle;};  
   float GetAngle                  () const              {return m_fAngle;};
-  const D3DXVECTOR3& GetPointA    () const              {return m_PointA;};
-  const D3DXVECTOR3& GetPointB    () const              {return m_PointB;};
-  const D3DXVECTOR3& GetPointC    () const              {return m_PointC;};
-  const D3DXVECTOR3& GetPointD    () const              {return m_PointD;};
+  const Vect3f& GetPointA         () const                   {return m_PointA;};
+  const Vect3f& GetPointB         () const                   {return m_PointB;};
+  const Vect3f& GetPointC         () const                   {return m_PointC;};
+  const Vect3f& GetPointD         () const                   {return m_PointD;};
 
   float GetAU                     () const              {return m_fAU;};
   float GetAV                     () const              {return m_fAV;};
@@ -78,7 +78,7 @@ public:
   bool  GetAnimated               () const              {return m_bAnimated;};
   
   
-  virtual bool  Update               (float fTimeDelta, CCamera* camera);
+  virtual bool  Update               (float _fDeltaTime, CCamera* _pCamera, bool _bComputeBillboard = true);
   //void  Render	             (LPDIRECT3DDEVICE9 device, CTexture* texture);
   virtual void  Release              ();
 
@@ -89,7 +89,7 @@ public:
   vector<float>          m_vSize;
   vector<float>          m_vTimeSize; 
   vector<float>          m_vTimeSizeInterpolation;
-  vector<D3DXVECTOR3>    m_vDirection;
+  vector<Vect3f>         m_vDirection;
   vector<float>          m_vTimeDirection;
   vector<float>          m_vTimeDirectionInterpolation;
   // animated
@@ -99,26 +99,30 @@ public:
   vector<CTexture*>      m_vTextureAnimation;
 
 private:
+  bool UpdateState(float _fDeltaTime);
+  void UpdateBillboard(CCamera* _pCamera);
+
+
   float             m_fSize;
   float             m_fLifetime; // temps de vida que tindra
   float             m_fAge; //la edat que te, es a dir, temps que porta inicialitzada
   D3DXCOLOR         m_Color;
   //D3DXVECTOR3       m_vPos;
-  D3DXVECTOR3       m_vDir; 
-  D3DXVECTOR3       m_vVel;
-  D3DXVECTOR3       m_vGravity;
+  Vect3f            m_vDir; 
+  Vect3f            m_vVel;
+  Vect3f            m_vGravity;
   float             m_fAngle;
   float             m_iIncrementAngle;
-  D3DXVECTOR3       m_vPos;
+  Vect3f            m_vPos;
   // float             m_fSizeX;
   //float             m_fSizeY;
-  D3DXVECTOR3		    m_PointA;
-  D3DXVECTOR3       m_PointB;
-  D3DXVECTOR3       m_PointC; 
-  D3DXVECTOR3       m_PointD;
-  D3DXVECTOR3       m_VDirection;
-  D3DXVECTOR3       m_VUp;
-  D3DXVECTOR3       m_VRight;
+  Vect3f     		    m_PointA;
+  Vect3f            m_PointB;
+  Vect3f            m_PointC; 
+  Vect3f            m_PointD;
+  Vect3f            m_VDirection;
+  Vect3f            m_VUp;
+  Vect3f            m_VRight;
   //**************************
   int                 m_iTexNumFiles;// numero de files que te la texture
   int                 m_iTexNumColumnes;// numero de columnes que te la textura
@@ -144,12 +148,6 @@ private:
   float      m_fCV;
   float      m_fDU;
   float      m_fDV;
-
- 
-  
- 
-
-  
   
 };
 #endif

@@ -2,40 +2,32 @@
 #include "base.h"
 
 
-CParticle::CParticle()
+CParticle::CParticle():
+  m_fSize     (1.0f),
+  m_fLifetime (2.0f),
+  m_fAge      (0.0f),
+  m_Color     (1.f, 1.f, 1.f, 1.f),
+  m_vPos      (0.f, 0.f, 0.f),
+  m_vDir      (0.f, 0.f, 0.f),
+  m_vVel      (1.f, 1.1f, 1.f),
+  m_vGravity  (0.f, 0.0f, 0.f),
+  m_PointA(0.0f,0.0f,0.0f),
+  m_PointB(0.0f,0.0f,0.0f),
+  m_PointC(0.0f,0.0f,0.0f),
+  m_PointD(0.0f,0.0f,0.0f),
+  m_fAngle    (0.0f),
+  m_iIncrementAngle(0.0f),
+  m_fTimeInterpolation(0.0f),
+
+  m_fAU ( 0.0f),
+  m_fAV ( 1.0f),
+  m_fBU ( 1.0f),
+  m_fBV ( 1.0f),
+  m_fCU ( 0.0f),
+  m_fCV ( 0.0f),
+  m_fDU ( 1.0f),
+  m_fDV ( 0.0f)
 {
-  m_fSize     = 1.0f;
-  m_fLifetime = 2.0f;
-  m_fAge      = 0.0f;
-  m_Color     = D3DXCOLOR(1.f, 1.f, 1.f, 1.f);
-  m_vPos      = D3DXVECTOR3(0.f, 0.f, 0.f);
-  m_vDir      = D3DXVECTOR3(0.f, 0.f, 0.f);
-  m_vVel      = D3DXVECTOR3(1.f, 1.1f, 1.f);
-  m_vGravity  = D3DXVECTOR3(0.f, 0.0f, 0.f);
-  //m_fAngle    =0.0f;
-  m_PointA=(D3DXVECTOR3(0.0f,0.0f,0.0f));
-  m_PointB=(D3DXVECTOR3(0.0f,0.0f,0.0f));
-  m_PointC=(D3DXVECTOR3(0.0f,0.0f,0.0f)); 
-  m_PointD=(D3DXVECTOR3(0.0f,0.0f,0.0f));
-  m_fAngle    = 0.0f;
-  m_iIncrementAngle=0.0f;
-  m_fTimeInterpolation=0.0f;
-
-  //*******
-/*  m_iTexNumFiles=0;
-  m_iTexNumColumnes=0;
-  m_fTimeAnimationDiapo=0.0f;
-  m_bAnimated=true;*/
-  
-
-  m_fAU = 0.0f;
-  m_fAV = 1.0f;
-  m_fBU = 1.0f;
-  m_fBV = 1.0f;
-  m_fCU = 0.0f;
-  m_fCV = 0.0f;
-  m_fDU = 1.0f;
-  m_fDV = 0.0f;
 }
 
 void CParticle::Release()
@@ -55,68 +47,72 @@ void CParticle::Release()
 
 }
 
-bool CParticle::Update(float fTimeDelta,CCamera* camera)
+bool CParticle::UpdateState(float _fDeltaTime)
 {
-
-  m_fAge += fTimeDelta;
-  m_iIncrementAngle = m_iIncrementAngle+(m_fAngle*fTimeDelta);
+  //Actualitzem el temps
+  m_fAge += _fDeltaTime;
   //m_fAngle += 0.01f;
   if (m_fAge >= m_fLifetime )
   {
     //its time to die..
     return false;
   }
+  
+  // actualitzem l'angle de rotació
+  m_iIncrementAngle = m_iIncrementAngle+(m_fAngle*_fDeltaTime);
 
+
+  //****************************** Actualitzem el Color ************************************************************
   int i= m_vTimeColor.size()-1;
   int i_aux=i;
   while (i>=0)
   {
     if(m_vTimeColor[i]<m_fAge)
-	 {
-	   m_Color = m_vColor[i];
+	  {
+	    m_Color = m_vColor[i];
       if(i<i_aux)
-     {
-       float l_time_aux=m_vTimeColor[i+1]-m_fAge;
-       m_fTimeInterpolation=m_vTimeColorInterpolation[i];
-      if(l_time_aux<m_fTimeInterpolation)
       {
-        m_Color = InterPolaterNumber(m_Color,m_vColor[i+1],m_fTimeInterpolation,fTimeDelta);
+        float l_time_aux=m_vTimeColor[i+1]-m_fAge;
+        m_fTimeInterpolation=m_vTimeColorInterpolation[i];
+        if(l_time_aux<m_fTimeInterpolation)
+        {
+          m_Color = InterPolaterNumber(m_Color,m_vColor[i+1],m_fTimeInterpolation,_fDeltaTime);
+        }
       }
-     }
-     m_vColor[i]=m_Color;
+      m_vColor[i]=m_Color;
     
-     i=0;
-	 }
+      i=0;
+	  }
     i--;
   }
-  //m_Color= m_Color;
-  
+
+  //************************************** Actualitzem la direcció *************************************************
   i= m_vTimeDirection.size()-1;
   i_aux=i;
   while (i>=0)
   {
     if(m_vTimeDirection[i]<m_fAge)
-	 {
-     m_vDir = m_vDirection[i];
+	  {
+      m_vDir = m_vDirection[i];
 
-     // nomes per interpolar
+      // nomes per interpolar
      
-     if(i<i_aux)
-     {
+      if(i<i_aux)
+      {
       float l_time_aux=m_vTimeDirection[i+1]-m_fAge;
       m_fTimeInterpolation=m_vTimeDirectionInterpolation[i];
       if(l_time_aux<m_fTimeInterpolation)
       {
-        m_vDir = InterPolaterNumber(m_vDir,m_vDirection[i+1],m_fTimeInterpolation,fTimeDelta);
+        m_vDir = InterPolaterNumber(m_vDir,m_vDirection[i+1],m_fTimeInterpolation,_fDeltaTime);
       }
-     }
-     m_vDirection[i]=m_vDir;
-     i=0;
-	 }
+      }
+      m_vDirection[i]=m_vDir;
+      i=0;
+	  }
     i--;
   }
 
-  //**************
+  //**************************************** Actualitza el tamany **************************************************
   i= m_vTimeSize.size()-1;
   i_aux=i;
   while (i>=0)
@@ -133,7 +129,7 @@ bool CParticle::Update(float fTimeDelta,CCamera* camera)
       m_fTimeInterpolation=m_vTimeSizeInterpolation[i];
       if(l_time_aux<m_fTimeInterpolation)
       {
-        m_fSize = InterPolaterNumber(m_fSize,m_vSize[i+1],m_fTimeInterpolation,fTimeDelta);
+        m_fSize = InterPolaterNumber(m_fSize,m_vSize[i+1],m_fTimeInterpolation,_fDeltaTime);
       }
      }
      m_vSize[i]=m_fSize;
@@ -141,16 +137,36 @@ bool CParticle::Update(float fTimeDelta,CCamera* camera)
 	 }
     i--;
   }
-  //******************
+  //****************************************************************************************************************
+
   
   //m_vPos=m_vPos+m_vDir*fTimeDelta;
-  m_vPos.x= m_vPos.x+(m_vDir.x*m_vVel.x*fTimeDelta); 
-  m_vPos.y= m_vPos.y+(m_vDir.y*m_vVel.y*fTimeDelta); 
-  m_vPos.z= m_vPos.z+(m_vDir.z*m_vVel.z*fTimeDelta); 
-  m_vVel= m_vVel+m_vGravity*fTimeDelta;
+  m_vPos.x= m_vPos.x+(m_vDir.x*m_vVel.x*_fDeltaTime); 
+  m_vPos.y= m_vPos.y+(m_vDir.y*m_vVel.y*_fDeltaTime); 
+  m_vPos.z= m_vPos.z+(m_vDir.z*m_vVel.z*_fDeltaTime); 
+  m_vVel = m_vVel + m_vGravity * _fDeltaTime;
 
-  Vect3f l_cameraDirection = camera->GetDirection();
-  Vect3f l_cameraVecUp = camera->GetVecUp();
+  
+		
+  if(m_bAnimated)
+  {
+	  m_fTimeAnimationActual += _fDeltaTime;
+
+
+    if(m_fTimeAnimationActual>m_fTimeAnimationDiapo)
+    {
+      m_iNumDiapo++;
+      m_fTimeAnimationActual=0;
+    }
+  }
+
+  return true;
+}
+
+void CParticle::UpdateBillboard(CCamera* _pCamera)
+{
+  Vect3f l_cameraDirection = _pCamera->GetDirection();
+  Vect3f l_cameraVecUp = _pCamera->GetVecUp();
 
  
   m_VDirection.x = l_cameraDirection.x;
@@ -164,9 +180,11 @@ bool CParticle::Update(float fTimeDelta,CCamera* camera)
   m_VUp.z = l_cameraVecUp.z;
 
       
-	D3DXVec3Cross(&m_VRight, &m_VUp, &m_VDirection);// producte vectorial ok
-      
-  D3DXVec3Normalize(&m_VRight, &m_VRight);
+	//D3DXVec3Cross(&m_VRight, &m_VUp, &m_VDirection);// producte vectorial ok
+  m_VRight = m_VUp ^ m_VDirection;
+
+  m_VRight.Normalize();
+
   m_PointA = m_vPos - (m_VRight*m_fSize*0.5f) - (m_VUp*m_fSize*0.5f);
 	m_PointB = m_vPos + (m_VRight*m_fSize*0.5f) - (m_VUp*m_fSize*0.5f);
 	m_PointC = m_vPos - (m_VRight*m_fSize*0.5f) + (m_VUp*m_fSize*0.5f);
@@ -197,15 +215,6 @@ bool CParticle::Update(float fTimeDelta,CCamera* camera)
     m_fIncrementU = m_fIncrementU/m_pTexParticle->GetHeight();
 	  m_iTotalDiapos=m_iTexNumFiles*m_iTexNumColumnes;
 	  int l_canviDiapo=1;
-		
-	  m_fTimeAnimationActual += fTimeDelta;
-
-
-    if(m_fTimeAnimationActual>m_fTimeAnimationDiapo)
-    {
-      m_iNumDiapo++;
-      m_fTimeAnimationActual=0;
-    }
 
 
     if(m_iNumDiapo>m_iTotalDiapos)
@@ -243,19 +252,6 @@ bool CParticle::Update(float fTimeDelta,CCamera* camera)
     m_fDU = m_fBU;
     m_fDV = m_fCV;
 
-    
-    /*CParticle::m_fAU = m_fIncrementU*(l_Columna-1);
-    CParticle::m_fAV = m_fIncrementV*(fila-1);//1- (m_fIncrementV*(fila-1));
-
-    CParticle::m_fBU = m_fAU+m_fIncrementU;
-    CParticle::m_fBV = m_fAV;
-
-    CParticle::m_fCU = m_fAU;
-    CParticle::m_fCV = m_fAV-m_fIncrementV;
-
-    CParticle::m_fDU = m_fBU;
-    CParticle::m_fDV = m_fCV;*/
-
   }else
   {
     m_fAU = 0.0f;
@@ -267,6 +263,19 @@ bool CParticle::Update(float fTimeDelta,CCamera* camera)
     m_fDU = 1.0f;
     m_fDV = 0.0f;
   }
+}
 
+bool CParticle::Update(float _fDeltaTime, CCamera* _pCamera, bool _bComputeBillboard)
+{
+  if(!UpdateState(_fDeltaTime))
+  {
+    return false;
+  }
+
+  if(_bComputeBillboard)
+  {
+    UpdateBillboard(_pCamera);
+  }
+  
   return true;
 }
