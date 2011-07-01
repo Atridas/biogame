@@ -110,11 +110,12 @@ void CViewer::Init()
   m_bEnableLights = true;
   m_bGuiActive = false;
   m_bShowHelp = true;
-  m_bNormalRendering = false;
+  m_eNormalRendering = NO_NORMALS;
   m_bShowBoxes = false;
   m_bShowSpheres = false;
 
   //materials
+  m_eLightmapMode  = CMaterial::RADIOSITY_NORMAL;
   m_fGlowIntensity = 0.0f;
   m_fGlowIntensity = 0.0f;
   m_fGlossiness = 0.0f;
@@ -653,7 +654,14 @@ void CViewer::SetPrevAnimation()
 
 void CViewer::ToggleNormalRendering()
 {
-  m_bNormalRendering = !m_bNormalRendering;
+  int l_iNormalRendering = m_eNormalRendering;
+  l_iNormalRendering++;
+
+  if(l_iNormalRendering == MAX_NORMAL_MODE)
+  {
+    l_iNormalRendering = 0;
+  }
+  m_eNormalRendering = (ENormalModes)l_iNormalRendering;
 }
 
 void CViewer::ToggleShowBoxes()
@@ -1037,6 +1045,43 @@ bool CViewer::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pc
     m_vMouseDelta.y = (int)_fDelta;
     return true;
   }
+  
+  if(strcmp(_pcAction, "Change Lightmap Mode") == 0)
+  {
+    /*switch(m_eLightmapMode)
+    {
+    case CMaterial::FLAT            : m_eLightmapMode = CMaterial::RADIOSITY_NORMAL ; break;
+    case CMaterial::RADIOSITY_NORMAL: m_eLightmapMode = CMaterial::SHOW_R           ; break;
+    case CMaterial::SHOW_R          : m_eLightmapMode = CMaterial::SHOW_G           ; break;
+    case CMaterial::SHOW_G          : m_eLightmapMode = CMaterial::SHOW_B           ; break;
+    case CMaterial::SHOW_B          : m_eLightmapMode = CMaterial::FLAT             ; break;
+    };*/
+    switch(m_eLightmapMode)
+    {
+    case CMaterial::FLAT            : m_eLightmapMode = CMaterial::RADIOSITY_NORMAL ; break;
+    case CMaterial::RADIOSITY_NORMAL: m_eLightmapMode = CMaterial::FLAT             ; break;
+    };
+
+
+    vector<CRenderableObject*>::iterator l_it  = m_vMeshes.begin();
+    vector<CRenderableObject*>::iterator l_end = m_vMeshes.end();
+
+    for(; l_it != l_end; ++l_it)
+    {
+      CInstanceMesh* l_pRenderMesh = (CInstanceMesh*)(*l_it);
+      const vector<CMaterial*>& l_vMaterials = l_pRenderMesh->GetStaticMesh()->GetMaterials();
+
+      vector<CMaterial*>::const_iterator l_itMat  = l_vMaterials.cbegin();
+      vector<CMaterial*>::const_iterator l_endMat = l_vMaterials.cend();
+
+      for(; l_itMat != l_endMat; ++l_itMat)
+      {
+        (*l_itMat)->ActivateRadiosityNormal(m_eLightmapMode);
+      }
+    }
+
+    return true;
+  }
 
   switch(m_iMode) {
   case FREE_MODE:
@@ -1387,7 +1432,19 @@ void CViewer::ShowFreeModeInfo()
   int l_iPosicio2 = 400;
   string l_szMsg3("Mode Escena");
   stringstream l_SStream;
-  stringstream l_SStreamHelp;
+
+  
+  l_SStream << "  Mode Lights -> ";
+  switch(m_eLightmapMode)
+  {
+  case CMaterial::FLAT            : l_SStream << "Flat" ; break;
+  case CMaterial::RADIOSITY_NORMAL: l_SStream << "Radiosity Normal" ; break;
+  case CMaterial::SHOW_R          : l_SStream << "Show R" ; break;
+  case CMaterial::SHOW_G          : l_SStream << "Show G" ; break;
+  case CMaterial::SHOW_B          : l_SStream << "Show B" ; break;
+  }
+
+  FONT_MANAGER->DrawText(550,40,colGREEN,l_uiFontType,l_SStream.str().c_str());
 
   //FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg3.c_str());
 

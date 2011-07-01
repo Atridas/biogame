@@ -24,6 +24,15 @@ public:
   CMaterial() {};
   virtual ~CMaterial() {};
 
+  enum ELightmapMode
+  {
+    FLAT,
+    RADIOSITY_NORMAL,
+    SHOW_R,
+    SHOW_G,
+    SHOW_B
+  };
+
   virtual bool ReloadTextures()     const = 0;
 
   virtual void Activate() = 0;
@@ -38,7 +47,8 @@ public:
   virtual void SetSpecularFactor(const float& _fSpecularFactor) = 0;
   virtual void SetGlossines(const float& _fGlossiness) = 0;
   virtual void SetBump(const float& _fBump) = 0;
-  virtual void ActivateRadiosityNormal()    = 0;
+
+  virtual void ActivateRadiosityNormal(ELightmapMode _eMode) = 0;
 
   virtual bool HasAlphaBlending()      const = 0;
   virtual bool HasSpecularParameters() const = 0;

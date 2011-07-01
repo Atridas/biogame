@@ -19,7 +19,7 @@ public:
   virtual void SetSpecularFactor(const float& _fSpecularFactor) {m_pDecoratedMaterial->SetSpecularFactor(_fSpecularFactor);};
   virtual void SetGlossines(const float& _fGlossiness) {m_pDecoratedMaterial->SetGlossines(_fGlossiness);};
   virtual void SetBump(const float& _fBump) {m_pDecoratedMaterial->SetBump(_fBump);};
-  virtual void ActivateRadiosityNormal() {m_pDecoratedMaterial->ActivateRadiosityNormal();};
+  virtual void ActivateRadiosityNormal(ELightmapMode _eMode) {m_pDecoratedMaterial->ActivateRadiosityNormal(_eMode);};
 
   virtual bool  HasAlphaBlending()     const { return m_pDecoratedMaterial->HasAlphaBlending(); };
   virtual bool  HasSpecularParameters() const { return m_pDecoratedMaterial->HasSpecularParameters(); };

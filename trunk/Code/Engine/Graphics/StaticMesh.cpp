@@ -208,7 +208,7 @@ bool CStaticMesh::Load()
           l_pMaterial = new CGlowPropertyDecorator(l_pMaterial,l_fValue);
           break;
         case RADIOSITY_NORMAL_PROPERTY_TYPE:
-          l_pMaterial->ActivateRadiosityNormal();
+          l_pMaterial->ActivateRadiosityNormal(CMaterial::RADIOSITY_NORMAL);
           break;
         default:
           break;

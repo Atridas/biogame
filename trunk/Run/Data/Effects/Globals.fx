@@ -33,6 +33,21 @@ shared float g_GlowIntensity : GlowIntensity;
 #define LIGHT_DIRECTIONAL 1
 #define LIGHT_SPOT        2
 
+//     X/red                       
+//     0.908248                 -> 232.512
+//     0.5                           -> 128
+//     0.788675                 -> 201.9
+//                                     
+//     Y/green                    
+//     0.295876                 -> 75.744
+//     0.853555                 -> 218.509
+//     0.788675                 -> 201.9
+//                                     
+//     Z/blue                      
+//     0.295876                 -> 75.744
+//     0.146446                 -> 37.49
+//     0.788675                 -> 201.9
+
 
 float3 g_RadiosityNormalR = { sqrt(2/3) ,  0        , 1/sqrt(3) };
 float3 g_RadiosityNormalG = { -1/sqrt(6),  1/sqrt(2), 1/sqrt(3) };

@@ -145,12 +145,36 @@ void CViewerProcess::ToggleNormalRendering()
 {
   m_pViewer->ToggleNormalRendering();
 
-  if(m_pViewer->GetNormalRendering())
+  switch(m_pViewer->GetNormalRendering())
   {
+  case CViewer::NORMALS:
     m_pStaticMeshEffect = CORE->GetEffectManager()->GetEffect("ShowNormals");
     m_pAnimatedMeshEffect = CORE->GetEffectManager()->GetEffect("AnimatedShowNormals");
-  }else{
+    break;
+  case CViewer::NORMALMAP:
+    m_pStaticMeshEffect = CORE->GetEffectManager()->GetEffect("ShowNormalmap");
+    m_pAnimatedMeshEffect = CORE->GetEffectManager()->GetEffect("AnimatedShowNormals");
+    break;
+  case CViewer::FLAT_NORMALMAP:
+    m_pStaticMeshEffect = CORE->GetEffectManager()->GetEffect("ShowFlatNormalmap");
+    m_pAnimatedMeshEffect = CORE->GetEffectManager()->GetEffect("AnimatedShowNormals");
+    break;
+  case CViewer::TANGENT:
+    m_pStaticMeshEffect = CORE->GetEffectManager()->GetEffect("ShowTangent");
+    m_pAnimatedMeshEffect = CORE->GetEffectManager()->GetEffect("AnimatedShowNormals");
+    break;
+  case CViewer::COTANGENT:
+    m_pStaticMeshEffect = CORE->GetEffectManager()->GetEffect("ShowBitangent");
+    m_pAnimatedMeshEffect = CORE->GetEffectManager()->GetEffect("AnimatedShowNormals");
+    break;
+  case CViewer::UV_COORDS:
+    m_pStaticMeshEffect = CORE->GetEffectManager()->GetEffect("ShowUVCoords");
+    m_pAnimatedMeshEffect = CORE->GetEffectManager()->GetEffect("AnimatedShowNormals");
+    break;
+  case CViewer::NO_NORMALS:
+  default:
     m_pStaticMeshEffect = 0;
     m_pAnimatedMeshEffect = 0;
+    break;
   }
 }
