@@ -39,7 +39,7 @@ float3 ComputeLight(float3 _Normal,          //Normal of the pixel
 	  
   if(ndoth > 0.0)	
   {
-    _out += pow(abs(ndoth), _MaterialSpecularPow) * l_AuxColor * _MaterialSpotlightFactor;
+    _out += pow(abs(ndoth), _MaterialSpecularPow) * l_AuxColor * _MaterialSpotlightFactor * g_SpotlightFactor;
   }
   
   return _out;
@@ -49,7 +49,7 @@ float3 ComputeLight(float3 _Normal,          //Normal of the pixel
 float3 ComputeAllLights(
                         float3 _Normal, float3 _WorldPosition, float3 _DiffuseColor, 
                         float3 _AmbientLight, float _SpotlightFactor, 
-                        float4 _PosLight
+                        float4 _PosLight, bool _DynamicObject
                        )
 {
   float3 out_ = _DiffuseColor * _AmbientLight;
@@ -63,7 +63,7 @@ float3 ComputeAllLights(
       l_iShadowAmount = ShadowAmount(_PosLight);
     }
 
-    if(g_LightsEnabled[i] && l_iShadowAmount < 1)
+    if(g_LightsEnabled[i] && l_iShadowAmount < 1 && (_DynamicObject || !g_DynamicObjectsOnly[i]))
     {
 
       float3 l_LightDirection;

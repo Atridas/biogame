@@ -6,40 +6,49 @@
 #include "Samplers.fx"
 
 float4 LightmapPS(TNORMAL_TEXTURED2_VERTEX_PS _in) : COLOR {
+
+  bool l_DynamicObject = false;
+  
 	float3 l_Normal = normalize(_in.WorldNormal);
 	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
-	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2)+float4(g_AmbientLight,1.0);
+	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2);
 	float4 l_LightResult = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   l_LightmapColor, g_SpotlightFactor,
-                                                  _in.PosLight)
+                                                  _in.PosLight,l_DynamicObject)
                                 ,l_DiffuseColor.a);
 	return l_LightResult;
 }
 
 float4 LightmapNormalmapPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _in) : COLOR {
+
+  bool l_DynamicObject = false;
+  
 	float3 l_Normal = CalcNormalmap((float3)_in.WorldTangent, 
                                   (float3)_in.WorldBinormal, 
                                   (float3)_in.WorldNormal, 
                                   _in.UV);
 	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
-	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2)+float4(g_AmbientLight,1.0);
+	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2);
 	float4 l_LightResult = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   l_LightmapColor, g_SpotlightFactor,
-                                                  _in.PosLight)
+                                                  _in.PosLight,l_DynamicObject)
                                 ,l_DiffuseColor.a);
 	return l_LightResult;
 }
 
 float4 RadiosityNormalmapPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _in) : COLOR {
+
+  bool l_DynamicObject = false;
+  
 	float3 l_Normal = CalcNormalmap((float3)_in.WorldTangent, 
                                   (float3)_in.WorldBinormal, 
                                   (float3)_in.WorldNormal, 
                                   _in.UV);
 	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
-	float4 l_LightmapColor = RadiosityNormalLightmapColor(_in.UV, _in.UV2)+float4(g_AmbientLight,1.0);
+	float4 l_LightmapColor = RadiosityNormalLightmapColor(_in.UV, _in.UV2);
 	float4 l_LightResult = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   l_LightmapColor, g_SpotlightFactor,
-                                                  _in.PosLight)
+                                                  _in.PosLight,l_DynamicObject)
                                 ,l_DiffuseColor.a);
 	return l_LightResult;
 }
@@ -76,12 +85,15 @@ float4 ShowUVCoordsPS(TTEXTURED_VERTEX_VS _in) : COLOR {
 }
 
 float4 NormalTexturedPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
+
+  bool l_DynamicObject = true;
+  
   float3 l_Normal = normalize(_in.WorldNormal);
 
   float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
   float4 out_ = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   g_AmbientLight, g_SpotlightFactor,
-                                                  _in.PosLight)
+                                                  _in.PosLight,l_DynamicObject)
                                 ,l_DiffuseColor.a);
   
   return out_;
@@ -95,13 +107,16 @@ float4 TexturedPS(TTEXTURED_VERTEX_PS _in) : COLOR {
 }
 
 float4 NormalDiffusedPS(TNORMAL_DIFFUSED_VERTEX_PS _in) : COLOR {
+
+  bool l_DynamicObject = true;
+  
   float3 l_Normal = normalize(_in.WorldNormal);
 
   float4 l_DiffuseColor = _in.Color;
 
   float4 out_ = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   g_AmbientLight, g_SpotlightFactor,
-                                                  _in.PosLight)
+                                                  _in.PosLight,l_DynamicObject)
                                 ,l_DiffuseColor.a);
   
   return out_;
@@ -109,6 +124,8 @@ float4 NormalDiffusedPS(TNORMAL_DIFFUSED_VERTEX_PS _in) : COLOR {
 
 float4 TangentBinormalNormalTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
   float2 l_OUT;
+  
+  bool l_DynamicObject = true;
 
   float3 l_Normal = normalize(CalcParallaxMap(_in.WorldPosition, _in.WorldNormal, _in.WorldTangent, _in.WorldBinormal, _in.UV, l_OUT));
 	
@@ -116,7 +133,7 @@ float4 TangentBinormalNormalTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_
   
   float4 out_ = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   g_AmbientLight, g_SpotlightFactor,
-                                                  _in.PosLight)
+                                                  _in.PosLight,l_DynamicObject)
                                 ,l_DiffuseColor.a);
 
   return out_;
@@ -124,127 +141,133 @@ float4 TangentBinormalNormalTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_
 
 float4 TangentBinormalNormalTexturedNoParallaxPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
 
+  bool l_DynamicObject = true;
+  
   float3 l_Normal = normalize(CalcNormalmap(_in.WorldTangent, _in.WorldBinormal, _in.WorldNormal, _in.UV));
 	
   float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
   
   float4 out_ = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   g_AmbientLight, g_SpotlightFactor,
-                                                  _in.PosLight)
+                                                  _in.PosLight,l_DynamicObject)
                                 ,l_DiffuseColor.a);
 
   return out_;
 }
 
 float4 SpecularTexturedPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
+  
+  bool l_DynamicObject = true;
+  
   float3 l_Normal = normalize(_in.WorldNormal);
 
   float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
 
-  float  l_SpotlightFactor;
+  float  l_SpotlightFactor = 1.0;
 	
   if(g_SpecularActive)
   {
-	l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x * g_SpotlightFactor;
-  }else{
-	l_SpotlightFactor = g_SpotlightFactor;
+	l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x;
   }
 
   float4 out_ = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   g_AmbientLight, l_SpotlightFactor,
-                                                  _in.PosLight)
+                                                  _in.PosLight,l_DynamicObject)
                                 ,l_DiffuseColor.a);
   
   return out_;
 }
 
 float4 SpecularNormalmapTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
+
+  bool l_DynamicObject = true;
+  
   float3 l_Normal = normalize(CalcNormalmap(_in.WorldTangent, _in.WorldBinormal, _in.WorldNormal, _in.UV));
 
   float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
   
-  float  l_SpotlightFactor;
+  float  l_SpotlightFactor = 1.0;
 	
   if(g_SpecularActive)
   {
-	l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x * g_SpotlightFactor;
-  }else{
-	l_SpotlightFactor = g_SpotlightFactor;
+	l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x;
   }
 
   float4 out_ = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   g_AmbientLight, l_SpotlightFactor,
-                                                  _in.PosLight)
+                                                  _in.PosLight,l_DynamicObject)
                                 ,l_DiffuseColor.a);
   
   return out_;
 }
 
 float4 SpecularLightmapTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _in) : COLOR {
+
+  bool l_DynamicObject = false;
+  
 	float3 l_Normal = normalize(_in.WorldNormal);
 	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
-	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2)+float4(g_AmbientLight,1.0);
-	
-	float  l_SpotlightFactor;
+	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2);
+
+	float  l_SpotlightFactor = 1.0;
 	
 	if(g_SpecularActive)
 	{
-	  l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x * g_SpotlightFactor;
-	}else{
-	  l_SpotlightFactor = g_SpotlightFactor;
+		l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x;
 	}
 
 	float4 l_LightResult = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   l_LightmapColor, l_SpotlightFactor,
-                                                  _in.PosLight)
+                                                  _in.PosLight,l_DynamicObject)
                                 ,l_DiffuseColor.a);
 	return l_LightResult;
 }
 
 float4 SpecularLightmapNormalmapTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _in) : COLOR {
+
+  bool l_DynamicObject = false;
+  
 	float3 l_Normal = CalcNormalmap((float3)_in.WorldTangent, 
                                   (float3)_in.WorldBinormal, 
                                   (float3)_in.WorldNormal, 
                                   _in.UV);
 	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
-	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2)+float4(g_AmbientLight,1.0);
-	
-	float  l_SpotlightFactor;
+	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2);
+
+	float  l_SpotlightFactor = 1.0;
 	
 	if(g_SpecularActive)
 	{
-	  l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x * g_SpotlightFactor;
-	}else{
-	  l_SpotlightFactor = g_SpotlightFactor;
+		l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x;
 	}
 
 	float4 l_LightResult = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   l_LightmapColor, l_SpotlightFactor,
-                                                  _in.PosLight)
-                                ,l_DiffuseColor.a);
+                                                  _in.PosLight,l_DynamicObject),l_DiffuseColor.a);
 	return l_LightResult;
 }
 
 float4 SpecularRadiosityNormalmapTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _in) : COLOR {
+
+  bool l_DynamicObject = false;
+  
 	float3 l_Normal = CalcNormalmap((float3)_in.WorldTangent, 
                                   (float3)_in.WorldBinormal, 
                                   (float3)_in.WorldNormal, 
                                   _in.UV);
 	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
-	float4 l_LightmapColor = RadiosityNormalLightmapColor(_in.UV, _in.UV2) + float4(g_AmbientLight,1.0);
+	float4 l_LightmapColor = RadiosityNormalLightmapColor(_in.UV, _in.UV2);
 	
-	float  l_SpotlightFactor;
+	float  l_SpotlightFactor = 1.0;
 	
 	if(g_SpecularActive)
 	{
-	  l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x * g_SpotlightFactor;
-	}else{
-	  l_SpotlightFactor = g_SpotlightFactor;
+		l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x;
 	}
 
 	float4 l_LightResult = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   l_LightmapColor, l_SpotlightFactor,
-                                                  _in.PosLight)
+                                                  _in.PosLight,l_DynamicObject)
                                 ,l_DiffuseColor.a);
 	return l_LightResult;
 }

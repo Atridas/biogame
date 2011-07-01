@@ -27,6 +27,7 @@
 	<!--RenderableObjectsManager file="Data/Levels/Proves/XML/RenderableObjects.xml"-->
   <!-- <RenderableObjectsManager file="Data/Levels/Viewer/XML/RenderableObjects.xml"> -->
   <RenderableObjectsManager file="Data/Levels/ProvesLightmap/XML/RenderableObjects.xml">
+  <!--<RenderableObjectsManager file="Data/Levels/NivellProves/XML/RenderableObjects.xml">-->
 		<!--
     <Level xml="Data/XML/RenderableObjects.xml"/>
     <Level xml="Data/Levels/Level -1/XML/RenderableObjects.xml"/>
@@ -36,7 +37,8 @@
     -->
 	</RenderableObjectsManager>
 
-  <LightsManager file="Data/Levels/ProvesLightmap/XML/NoLights.xml"/>
+  <!--<LightsManager file="Data/Levels/ProvesLightmap/XML/NoLights.xml"/>-->
+  <LightsManager file="Data/Levels/ProvesLightmap/XML/Lights.xml"/>
   <!--<LightsManager file="Data/Levels/Viewer/XML/Lights.xml"/>-->
   <!--<LightsManager file="Data/XML/Lights.xml"/>-->
 

@@ -77,6 +77,7 @@ void CViewer::Init()
       2.0f,0.6f,1.5f);
 
   m_pObjectModeLight = 0;
+  m_pSpotLight = 0;
 
   m_pObjectModeLight = CORE->GetLightManager()->CreateDirectionalLight("ObjectModeLight",
                                                                         Vect3f(0.0f),
@@ -206,11 +207,11 @@ void CViewer::InitFreeMode()
     m_pObjectModeLight->SetActive(false);
   }
 
-  //if(m_pSpotLight)
-  //{
-  //  m_pSpotLight->SetActive(m_bEnableLights);
-  //}
-  //
+  if(m_pSpotLight)
+  {
+    m_pSpotLight->SetActive(m_bEnableLights);
+  }
+  
   //if(m_pOmniLight)
   //{
   //  m_pOmniLight->SetActive(m_bEnableLights);
@@ -287,12 +288,12 @@ void CViewer::ProcessFreeMode(const float _fElapsedTime)
 
   CORE->GetLightManager()->SetAmbientLight(m_vAmbientLight);
   
-  //CORE->GetLightManager()->SetLightsEnabled(m_bEnableLights);
-  //if(m_pSpotLight)
-  //{
-  //  m_pSpotLight->SetActive(m_bEnableLights);
-  //}
-  //
+  CORE->GetLightManager()->SetLightsEnabled(m_bEnableLights);
+  if(m_pSpotLight)
+  {
+    m_pSpotLight->SetActive(m_bEnableLights);
+  }
+  
   //if(m_pOmniLight)
   //{
   //  m_pOmniLight->SetActive(m_bEnableLights);
@@ -376,13 +377,13 @@ void CViewer::ProcessFreeMode(const float _fElapsedTime)
   UpdatePosition(l_vPosDelta,l_fDeltaPitch,l_fDeltaYaw);
   UpdateCamera(l_fDeltaPitch, l_fDeltaYaw);
 
-  //if(m_pSpotLight)
-  //{
-  //  Vect3f l_vPosition = m_pTargetObject->GetPosition();
-  //  m_pSpotLight->SetPosition(l_vPosition);
-  //  m_pSpotLight->SetDirection(m_pObjectCamera->GetDirection());
-  //}
-  //
+  if(m_pSpotLight)
+  {
+    Vect3f l_vPosition = m_pTargetObject->GetPosition() + Vect3f(0.0f,((CShoulderCamera*)m_pObjectCamera)->GetShoulderHeight(),0.0f);
+    m_pSpotLight->SetPosition(l_vPosition);
+    m_pSpotLight->SetDirection(m_pObjectCamera->GetDirection());
+  }
+  
   //if(m_pOmniLight)
   //{
   //  Vect3f l_vPosition = m_pObjectCamera->GetEye();

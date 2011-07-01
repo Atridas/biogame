@@ -35,6 +35,7 @@ public:
               m_colColor(colWHITE),
               m_Type(OMNI),
               m_bRenderShadows(false),
+              m_bDynamicObjectsOnly(false),
               m_fStartRangeAttenuation(0.0f),
               m_fEndRangeAttenuation(0.0f)    {};
 
@@ -54,6 +55,9 @@ public:
   void SetRenderShadows(bool _bRenderShadows) {m_bRenderShadows = _bRenderShadows;};
   bool GetRenderShadows() const {return m_bRenderShadows;};
 
+  void SetDynamicObjectsOnly(bool _bDynamicObjectsOnly) {m_bDynamicObjectsOnly = _bDynamicObjectsOnly;};
+  bool GetDynamicObjectsOnly() {return m_bDynamicObjectsOnly;};
+
   void SetType(const TLightType _Type) {m_Type = _Type;};
   TLightType GetType() const {return m_Type;};
 
@@ -72,6 +76,8 @@ protected:
   bool m_bRenderShadows;
   float m_fStartRangeAttenuation;
   float m_fEndRangeAttenuation;
+
+  bool m_bDynamicObjectsOnly;
  
 };
 #endif
