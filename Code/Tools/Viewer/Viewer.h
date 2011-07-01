@@ -1,6 +1,7 @@
 #pragma once
 
 #include <base.h>
+#include "Material.h"
 
 //Forward declarations---------------------
 class CObject3D;
@@ -11,7 +12,6 @@ class CDirectionalLight;
 class CSpotLight;
 class COmniLight;
 class CRenderManager;
-class CMaterial;
 //-----------------------------------------
 
 class CViewer
@@ -27,6 +27,19 @@ public:
     ANIMATED_MODE
   };
 
+  enum ENormalModes
+  {
+    NO_NORMALS,
+    NORMALS,
+    NORMALMAP,
+    FLAT_NORMALMAP,
+    TANGENT,
+    COTANGENT,
+    UV_COORDS,
+
+    MAX_NORMAL_MODE
+  };
+
   //Process
   void Init();
 
@@ -39,9 +52,10 @@ public:
 
   //getters
   bool GetRenderLights() {return m_bRenderLights;};
-  bool GetNormalRendering() {return m_bNormalRendering;};
+  ENormalModes GetNormalRendering() {return m_eNormalRendering;};
   CCamera* GetCamera() {return m_pObjectCamera;};
   int GetCurrentMode() { return m_iMode; };
+  CMaterial::ELightmapMode GetLightmapMode() {return m_eLightmapMode;};
 
   //actions
   void SetRunning();
@@ -151,11 +165,12 @@ private:
   bool m_bMoveUp;
   bool m_bMoveDown;
 
-  bool m_bNormalRendering;
+  ENormalModes m_eNormalRendering;
   bool m_bShowBoxes;
   bool m_bShowSpheres;
 
   //material info
+  CMaterial::ELightmapMode m_eLightmapMode;
   float m_fGlowIntensity;
   float m_fSpecIntensity;
   float m_fGlossiness;

@@ -129,15 +129,30 @@ float3 ComputeAllLights(
   return out_;
 }
 
-float4 RadiosityNormalLightmapColor(float3 _Normal, float2 _UV)
+float4 RadiosityNormalLightmapColor(float2 _UV, float2 _UV2)
 {
-  float4 l_LightR = tex2D(Radiosity_R_TextureSampler,_UV);
-  float4 l_LightG = tex2D(Radiosity_G_TextureSampler,_UV);
-  float4 l_LightB = tex2D(Radiosity_B_TextureSampler,_UV);
+  float4 l_LightR = tex2D(Radiosity_R_TextureSampler,_UV2);
+  float4 l_LightG = tex2D(Radiosity_G_TextureSampler,_UV2);
+  float4 l_LightB = tex2D(Radiosity_B_TextureSampler,_UV2);
   
-  return l_LightR * dot(_Normal, g_RadiosityNormalR)
-       + l_LightG * dot(_Normal, g_RadiosityNormalG)
-       + l_LightB * dot(_Normal, g_RadiosityNormalB);
+  float3 l_Normal = tex2D(NormalTextureSampler,_UV).rgb * 2.0 - 1.0;
+  
+  //return l_LightR * dot(l_Normal, g_RadiosityNormalR)
+  //     + l_LightG * dot(l_Normal, g_RadiosityNormalG)
+  //     + l_LightB * dot(l_Normal, g_RadiosityNormalB);
+  
+  float3 dp;
+  dp.x = saturate( dot(l_Normal, g_RadiosityNormalR) );
+  dp.y = saturate( dot(l_Normal, g_RadiosityNormalG) );
+  dp.z = saturate( dot(l_Normal, g_RadiosityNormalB) );
+  dp *= dp;
+  
+  float sum = dot(dp, float3(1, 1, 1));
+  float4 diffuse = dp.x * l_LightR 
+                 + dp.y * l_LightG 
+                 + dp.z * l_LightB;
+
+  return diffuse / sum;
 }
 
 float3 ComputeLightTangentSpace(float3 _Normal, float3 _Position, float3 _DiffuseColor, 
@@ -217,7 +232,7 @@ float3 CalcNormalmap(float3 _Tangent, float3 _Binormal, float3 _Normal, float2 _
   float3 l_Normal   = normalize(_Normal);
   
   //La variable g_Bump es una constante que nos dará la profundidad, podemos utilizar un valor de
-  float3 l_Bump=g_Bump*(tex2D(NormalTextureSampler,_UV).rgb - float3(0.5,0.5,0.5));
+  float3 l_Bump= tex2D(NormalTextureSampler,_UV).rgb * 2.0 - 1.0;
 
   return normalize(l_Bump.x*l_Tangent + l_Bump.y*l_Binormal + l_Bump.z*l_Normal);
 }

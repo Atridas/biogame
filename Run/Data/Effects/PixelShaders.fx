@@ -36,7 +36,7 @@ float4 RadiosityNormalmapPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _in) : 
                                   (float3)_in.WorldNormal, 
                                   _in.UV);
 	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
-	float4 l_LightmapColor = RadiosityNormalLightmapColor(l_Normal, _in.UV2)+float4(g_AmbientLight,1.0);
+	float4 l_LightmapColor = RadiosityNormalLightmapColor(_in.UV, _in.UV2)+float4(g_AmbientLight,1.0);
 	float4 l_LightResult = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   l_LightmapColor, g_SpotlightFactor,
                                                   _in.PosLight)
@@ -59,11 +59,11 @@ float4 ShowNormalmapPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS _in) : COLOR 
 }
 
 float4 ShowTangentPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
-	return float4(_in.WorldTangent.xyz*0.5+0.5, 1.0);
+	return float4(_in.WorldTangent.xyz, 1.0);
 }
 
 float4 ShowBitangentPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
-	return float4(_in.WorldBinormal.xyz*0.5+0.5, 1.0);
+	return float4(_in.WorldBinormal.xyz, 1.0);
 }
 
 float4 ShowFlatNormalmapPS(TTEXTURED_VERTEX_VS _in) : COLOR {
@@ -231,7 +231,7 @@ float4 SpecularRadiosityNormalmapTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_V
                                   (float3)_in.WorldNormal, 
                                   _in.UV);
 	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
-	float4 l_LightmapColor = RadiosityNormalLightmapColor(l_Normal, _in.UV2) + float4(g_AmbientLight,1.0);
+	float4 l_LightmapColor = RadiosityNormalLightmapColor(_in.UV, _in.UV2) + float4(g_AmbientLight,1.0);
 	
 	float  l_SpotlightFactor;
 	
