@@ -145,6 +145,7 @@ private:
   CObject3D* m_pTargetObject;
   CRenderableAnimatedInstanceModel* m_pCharacter;
   CDirectionalLight* m_pObjectModeLight;
+  CSpotLight* m_pSpotLight;
   Vect3f m_vAmbientLight;
   Vect3f m_vOmniColor;
   bool m_bEnableLights;

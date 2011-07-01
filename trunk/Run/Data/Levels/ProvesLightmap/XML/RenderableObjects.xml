@@ -2,4 +2,5 @@
 <RenderableObjects>
 	<RenderableObject name="castellet" class="StaticMesh" resource="castellet" position="0.0 6.63539 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="PlaneCastellet" class="StaticMesh" resource="PlaneCastellet" position="0.134048 0.0 -0.670242" yaw="0.0" pitch="0.0" roll="0.0" />
+  <RenderableObject name="ariggle" class="AnimatedModel" resource="riggle" position="5.1793 0.0 -5.2768" yaw="-90.0" pitch="0.0" roll="0" cycle="walk"/>
 </RenderableObjects>

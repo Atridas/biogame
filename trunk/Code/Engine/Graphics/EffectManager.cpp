@@ -206,6 +206,7 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     m_pLightsStartRangeAttenuationParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsStartRangeSQ");
     m_pLightsEndRangeAttenuationParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsEndRangeSQ");
     m_pShadowsEnabledParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"ShadowEnabled");
+    m_pDynamicObjectsOnly = l_pD3DEffect->GetParameterBySemantic(NULL,"DynamicObjectsOnly");
     m_pBonesParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"Bones");
     m_pTimeParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"Time");
     m_pGlowActiveParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"GlowActive");
@@ -254,9 +255,11 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     Vect3f l_aLightsDirection[MAX_LIGHTS_BY_SHADER];
     CColor l_aLightsColor[MAX_LIGHTS_BY_SHADER];
     BOOL l_aShadowsEnabled[MAX_LIGHTS_BY_SHADER];
+    BOOL l_aDynamicObjectsOnly[MAX_LIGHTS_BY_SHADER];
 
     memset(l_aLightsEnabled,FALSE,sizeof(BOOL)*MAX_LIGHTS_BY_SHADER);
     memset(l_aShadowsEnabled,FALSE,sizeof(BOOL)*MAX_LIGHTS_BY_SHADER);
+    memset(l_aDynamicObjectsOnly,FALSE,sizeof(BOOL)*MAX_LIGHTS_BY_SHADER);
 
     const Vect3f& l_vAmbient = m_pLightManager->GetAmbientLight();
     l_aAmbientLight[0] = l_vAmbient.x;
@@ -282,6 +285,7 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
       l_aLightsPosition[i] = l_pLight->GetPosition();
       l_aLightsColor[i] = l_pLight->GetColor();
       l_aShadowsEnabled[i] = l_pLight->GetRenderShadows();
+      l_aDynamicObjectsOnly[i] = l_pLight->GetDynamicObjectsOnly();
 
       if(l_pLight->GetType() == CLight::DIRECTIONAL || l_pLight->GetType() == CLight::SPOT)
       {
@@ -316,6 +320,7 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     l_pD3DEffect->SetFloatArray   (m_pLightsDirectionParameter,    (float*)l_aLightsDirection,              l_iNumOfLights * 3);
     l_pD3DEffect->SetFloatArray   (m_pLightsColorParameter,        (float*)l_aLightsColor,                  l_iNumOfLights * 4);
     l_pD3DEffect->SetBoolArray    (m_pShadowsEnabledParameter,      (BOOL*)l_aShadowsEnabled,               l_iNumOfLights);
+    l_pD3DEffect->SetBoolArray    (m_pDynamicObjectsOnly,           (BOOL*)l_aDynamicObjectsOnly,           l_iNumOfLights);
    
     m_bLightsUpdated = false;
   }

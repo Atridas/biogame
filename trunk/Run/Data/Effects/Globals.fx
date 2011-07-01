@@ -72,6 +72,7 @@ shared float   g_LightsStartRangeSQ[MAXLIGHTS]: LightsStartRangeSQ;
 shared float   g_LightsEndRangeSQ[MAXLIGHTS]  : LightsEndRangeSQ;
 
 shared bool    g_ShadowEnabled[MAXLIGHTS]     : ShadowEnabled;
+shared bool    g_DynamicObjectsOnly[MAXLIGHTS]: DynamicObjectsOnly;
 
 //Other
 shared float3 g_CameraPosition : CameraPosition;

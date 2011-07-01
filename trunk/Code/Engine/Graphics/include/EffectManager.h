@@ -78,6 +78,7 @@ public:
                     m_pLightsStartRangeAttenuationParameter(0),
                     m_pLightsEndRangeAttenuationParameter(0),
                     m_pShadowsEnabledParameter(0),
+                    m_pDynamicObjectsOnly(0),
                     m_pBonesParameter(0),
                     m_pTimeParameter(0),
                     m_pGlowActiveParameter(0),
@@ -242,6 +243,7 @@ private:
   D3DXHANDLE m_pLightsStartRangeAttenuationParameter;
   D3DXHANDLE m_pLightsEndRangeAttenuationParameter;
   D3DXHANDLE m_pShadowsEnabledParameter;
+  D3DXHANDLE m_pDynamicObjectsOnly;
 
   D3DXHANDLE m_pBonesParameter;
 

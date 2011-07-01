@@ -48,7 +48,7 @@
 	<!--.......VIEWER ACTIONS.........-->
 
   <action name="Change Lightmap Mode">
-    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_L"/>
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_K"/>
   </action>
   
   <action name="toggleGUI" script="toggle_gui()">
