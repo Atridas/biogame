@@ -38,8 +38,8 @@ struct SParticleInfo
   //vector<D3DXVECTOR3>   m_vDirection;
   //vector<float>         m_vTimeDirection;
   //vector<float>         m_vTimeDirectionInterpolation;
-  D3DXVECTOR3           m_vVel; 
-  D3DXVECTOR3           m_vGravity;
+  Vect3f                m_vVel; 
+  Vect3f                m_vGravity;
   bool                  m_bAnimated;
   bool                  m_bBucleInfinit;//si es false s'ha d'indicar quantes pasades de crear particules volem, si es true crea infinitament
   int                   m_iNumBucle;//numero de vegades que volem crear particlues
@@ -94,8 +94,7 @@ private:
   CRenderManager*           m_pRM;
   vector<CParticleEmitter*> m_vEmitterParticle;
   bool                      m_bReload;
-  D3DXVECTOR3			          m_vDesviacionSpawnDir;
-  D3DXVECTOR3               m_vSpawnDir;
+
   vector<D3DXVECTOR3>       m_vDirection;
   vector<float>             m_vTimeDirection;
   vector<float>             m_vTimeDirectionInterpolation;
@@ -103,7 +102,7 @@ private:
    float                    m_fTime;
    float                    m_fTimeInterpolation;
    string				            m_szFormEmitter;
-   D3DXVECTOR3              m_vPosFormEmitter;
+   //Vect3f                   m_vPosFormEmitter;
    float				            m_fSizeX;
    float				            m_fSizeY;
    float				            m_fSizeZ;

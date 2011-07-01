@@ -45,7 +45,7 @@ void CPhysxGrenade::Explosion()
   if (m_pParticleEmitter != 0)
   {
     float l_sizeY=m_pParticleEmitter->GetSizeY()/2;
-    m_pParticleEmitter->SetPosition(D3DXVECTOR3(l_vTranslationVector.x,l_vTranslationVector.y+l_sizeY,l_vTranslationVector.z));
+    m_pParticleEmitter->SetPosition(l_vTranslationVector);
     m_pParticleEmitter->SetActive(true);
   }
 
