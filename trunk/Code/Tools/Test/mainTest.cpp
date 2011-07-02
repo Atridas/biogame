@@ -16,6 +16,11 @@
 #include "Utils/MemLeaks.h" 
 #endif
 
+//#define __T_PARTICULES__
+//#define __T_PYSX__
+#define __T_ENTITIES__
+
+
 #define APPLICATION_NAME	"TEST"
 
 void ShowErrorMessage (const std::string& message);
@@ -73,9 +78,15 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
     CEngine l_Engine;
     SInitParams l_InitParams;
 
-    //ReadXMLInitParams(l_InitParams,"./Data/XML/init_test_physx.xml");
+#ifdef __T_PYSX__
+    ReadXMLInitParams(l_InitParams,"./Data/XML/init_test_physx.xml");
+#endif
+#ifdef __T_PARTICULES__
     ReadXMLInitParams(l_InitParams,"./Data/XML/init_test_particulas.xml");
-    //ReadXMLInitParams(l_InitParams,"./Data/XML/init_test_entities.xml");
+#endif
+#ifdef __T_ENTITIES__
+    ReadXMLInitParams(l_InitParams,"./Data/XML/init_test_entities.xml");
+#endif
 
     // Create the application's window
     HWND hWnd = CreateWindow(	
@@ -104,10 +115,21 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
     l_Engine.AddProcess(l_pIAProcess);
     l_Engine.AddProcess(l_pEntityProcess);
 
+
+#ifdef __T_PYSX__
+    l_Engine.ActivateProcess(l_PhysX);
+#endif
+#ifdef __T_PARTICULES__
+    l_Engine.ActivateProcess(l_Particle);
+#endif
+#ifdef __T_ENTITIES__
+    l_Engine.ActivateProcess(l_pEntityProcess);
+#endif
+
     //l_Engine.ActivateProcess(l_Test);
     //l_Engine.ActivateProcess(l_pSoundTestProcess);
     //l_Engine.ActivateProcess(l_PhysX);
-    l_Engine.ActivateProcess(l_Particle);
+    //l_Engine.ActivateProcess(l_Particle);
     //l_Engine.ActivateProcess(l_pIAProcess);
     //l_Engine.ActivateProcess(l_pEntityProcess);
 

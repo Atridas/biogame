@@ -32,7 +32,7 @@ public:
    
 private:
 
-  void ClosePlane(const Vect3f& _vEye, const Vect3f& _vDir, const Vect3f _vPoints[8], uint32 _iPlane);
+  void ClosePlane(const Vect3f& _vEye, const Vect3f& _vDir, const Vect3f _vPoints[8], const int _iArestes[4], uint32 _iPlane);
   void UpdatePlane(uint32 _iPlane, const Vect3f& _vCameraEye, const Vect3f* _vPoints, const Vect3f* _vDirections, uint32 _iNumPoints);
 
   //rigt/left / bottom/top / far/near

@@ -87,7 +87,8 @@ void CViewer::Init()
                                                                         80.0f,
                                                                         false);
 
-  /*m_pSpotLight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
+  
+  m_pSpotLight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
                                                           Vect3f(-2.15715f,0.0f,-7.32758f),
                                                           Vect3f(-5.4188f,0.0f,3.75613f),
                                                           CColor(Vect3f(1.0f,1.0f,1.0f)),
@@ -95,7 +96,7 @@ void CViewer::Init()
                                                           80.0f,
                                                           10.0f,
                                                           45.0f,
-                                                          false );*/
+                                                          false );
 
   //m_vOmniColor = Vect3f(1.0f,1.0f,1.0f);
   //m_pOmniLight = CORE->GetLightManager()->CreateOmniLight("OmniViewerLight",Vect3f(0.0f),CColor(m_vOmniColor),0.1f,17.0f);
