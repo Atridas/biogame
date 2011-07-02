@@ -1,7 +1,7 @@
 #include "VertexShaders.fx"
 #include "PixelShaders.fx"
 
-technique AnimatedSpecularNormalmapTexturedTechnique {
+technique Cal3dShowFlatNormalmapTechnique {
 	pass p0 {
 		//Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar
     ZEnable = true;
@@ -12,7 +12,7 @@ technique AnimatedSpecularNormalmapTexturedTechnique {
     //Tipo de culling que queremos utilizar
     CullMode = CW;
     //Vertex / Pixel shader
-		VertexShader = compile vs_3_0 RenderTangentBitangentCal3DHWVS();
-		PixelShader = compile ps_3_0 SpecularNormalmapTexturedPS();
+		VertexShader = compile vs_3_0 RenderCal3DHWVS();
+		PixelShader = compile ps_3_0 ShowFlatNormalmapPS();
 	}
 }

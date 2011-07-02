@@ -20,7 +20,12 @@
     <effect name="AnimatedNormalmap" texture_mask="6" file="Data/Effects/AnimatedTangentBinormalNormalTexturedEffect.fx" technique="Cal3DNormalMapTechnique" />
     <effect name="AnimatedSpecularNormalmapTextured" texture_mask="22" file="Data/Effects/AnimatedSpecularNormalmapTexturedEffect.fx" technique="AnimatedSpecularNormalmapTexturedTechnique" />
     <effect name="AnimatedShowNormals" texture_mask="0" file="Data/Effects/AnimatedShowNormalsEffect.fx" technique="Cal3dShowNormalsTechnique" />
-    
+    <effect name="AnimatedShowNormalmap" texture_mask="4" file="Data/Effects/AnimatedShowNormalmapEffect.fx" technique="Cal3dShowNormalmapTechnique" />
+	<effect name="AnimatedShowTangent" texture_mask="4" file="Data/Effects/AnimatedShowTangentEffect.fx" technique="Cal3dShowTangentTechnique" />
+	<effect name="AnimatedShowFlatNormalmap" texture_mask="4" file="Data/Effects/AnimatedShowFlatNormalmapEffect.fx" technique="Cal3dShowFlatNormalmapTechnique" />
+	<effect name="AnimatedShowBitangent" texture_mask="4" file="Data/Effects/AnimatedShowBitangentEffect.fx" technique="Cal3dShowBitangentTechnique" />
+	<effect name="AnimatedShowUVCoords" texture_mask="0" file="Data/Effects/AnimatedShowUVCoordsEffect.fx" technique="Cal3dShowUVCoordsTechnique" />
+	
     <!-- Show -->
     <effect name="ShowNormals" texture_mask="0" file="Data/Effects/ShowNormalsEffect.fx" technique="ShowNormalsTechnique" />
     <effect name="ShowNormalmap" texture_mask="4" file="Data/Effects/ShowNormalmapEffect.fx" technique="ShowNormalmapTechnique" />

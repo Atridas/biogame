@@ -1,7 +1,7 @@
 #include "VertexShaders.fx"
 #include "PixelShaders.fx"
 
-technique AnimatedSpecularNormalmapTexturedTechnique {
+technique Cal3dShowBitangentTechnique {
 	pass p0 {
 		//Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar
     ZEnable = true;
@@ -13,6 +13,6 @@ technique AnimatedSpecularNormalmapTexturedTechnique {
     CullMode = CW;
     //Vertex / Pixel shader
 		VertexShader = compile vs_3_0 RenderTangentBitangentCal3DHWVS();
-		PixelShader = compile ps_3_0 SpecularNormalmapTexturedPS();
+		PixelShader = compile ps_3_0 ShowBitangentPS();
 	}
 }
