@@ -527,7 +527,7 @@ inline Vect3f PuntAresta2(const Vect3f _vPoints[8], uint32 n)
   assert(false);
   return Vect3f(0);
 }
-
+/*
 inline uint32 GetNumArestaVertical(uint32 n)
 {
   assert(n < 4);
@@ -538,7 +538,7 @@ inline uint32 GetNumArestaHoritzontal(uint32 n)
 {
   assert(n < 8);
   return n;
-}
+}*/
 
 Vect3f ProjectLineOnPlane(const Vect3f& _vPoint, const float _pfPlane[4])
 {
@@ -550,7 +550,57 @@ Vect3f ProjectLineOnPlane(const Vect3f& _vPoint, const float _pfPlane[4])
                   _vPoint.z - _pfPlane[2] * l_fParam );
 }
 
-void CFrustum::ClosePlane(const Vect3f& _vEye, const Vect3f& _vDir, const Vect3f _vPoints[8], uint32 _iPlane)
+#define SWAP(a, b) a ^= b; b ^= a; a ^= b
+
+void Select4Edges(const Vect3f _vPoints[8], const Vect3f& _ParalelVector, int iResult_[4])
+{
+  assert(_ParalelVector.SquaredLength() > 0.95f && _ParalelVector.SquaredLength() < 1.05f);
+
+  float l_fCos[4] = { 0, 0, 0, 0};
+  float l_fAux;
+
+  for(int i = 0; i < 12; ++i)
+  {
+    Vect3f l_vPunt1 = PuntAresta1(_vPoints, i);
+    Vect3f l_vPunt2 = PuntAresta2(_vPoints, i);
+
+    Vect3f l_vEdge = (l_vPunt2 - l_vPunt1).GetNormalized();
+
+    float l_fCosEdge = abs(l_vEdge * _ParalelVector);
+    if(l_fCosEdge > l_fCos[0])
+    {
+      l_fCos[0] = l_fCosEdge;
+      iResult_[0] = i;
+      if(l_fCos[0] > l_fCos[1])
+      {
+        l_fAux    = l_fCos[0];
+        l_fCos[0] = l_fCos[1];
+        l_fCos[1] = l_fAux;
+
+        SWAP(iResult_[0], iResult_[1]);
+        if(l_fCos[1] > l_fCos[2])
+        {
+          l_fAux    = l_fCos[2];
+          l_fCos[2] = l_fCos[1];
+          l_fCos[1] = l_fAux;
+
+          SWAP(iResult_[2], iResult_[1]);
+          if(l_fCos[2] > l_fCos[3])
+          {
+            l_fAux    = l_fCos[2];
+            l_fCos[2] = l_fCos[3];
+            l_fCos[3] = l_fAux;
+
+            SWAP(iResult_[2], iResult_[3]);
+          }
+        }
+      }
+    }
+  }
+}
+
+
+void CFrustum::ClosePlane(const Vect3f& _vEye, const Vect3f& _vDir, const Vect3f _vPoints[8], const int _iArestes[4], uint32 _iPlane)
 {
   assert(_iPlane < 4);
   Vect3f l_DirProjected = (ProjectLineOnPlane(_vEye + _vDir, m_frustum[_iPlane]) - _vEye).GetNormalized();
@@ -558,10 +608,10 @@ void CFrustum::ClosePlane(const Vect3f& _vEye, const Vect3f& _vDir, const Vect3f
   int l_iArestaProx = 0;
   float l_fCosArestaProx = -1;
 
-  uint32 l_iNumArestes = (_iPlane < 2)? 4 : 8;
-  for(uint32 i = 0; i < l_iNumArestes; ++i)
+
+  for(uint32 i = 0; i < 4; ++i)
   {
-    int l_iAresta = (_iPlane < 2)? GetNumArestaVertical(i) : GetNumArestaHoritzontal(i);
+    int l_iAresta = _iArestes[i];
     Vect3f l_vPuntAresta = PuntAresta(_vPoints, l_iAresta);
     
     if(DistPointPlane(l_vPuntAresta, m_frustum[_iPlane]) < 0)
@@ -595,9 +645,17 @@ void  CFrustum::Update( const CCamera* _pCamera, const Vect3f _vPoints[8])
 {
   Vect3f l_vEye = _pCamera->GetEye();
   Vect3f l_vDir = _pCamera->GetDirection();
-  for(uint32 i = 0; i < 4; ++i)
-  {
-    ClosePlane(l_vEye, l_vDir, _vPoints, i);
-  }
+  Vect3f l_vUp  = _pCamera->GetVecUp();
+  Vect3f l_vRight = (l_vDir ^ l_vUp).GetNormalized();
+
+
+  int l_VerticalEdges[4], l_HorizontalEdges[4];
+  Select4Edges(_vPoints, l_vUp, l_VerticalEdges);
+  Select4Edges(_vPoints, l_vRight, l_HorizontalEdges);
+  
+  ClosePlane(l_vEye, l_vDir, _vPoints, l_VerticalEdges,   0);//right
+  ClosePlane(l_vEye, l_vDir, _vPoints, l_VerticalEdges,   1);//left 
+  ClosePlane(l_vEye, l_vDir, _vPoints, l_HorizontalEdges, 2);//bottom
+  ClosePlane(l_vEye, l_vDir, _vPoints, l_HorizontalEdges, 3);//top
 }
 
