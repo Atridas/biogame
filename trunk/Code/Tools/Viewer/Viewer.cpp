@@ -87,7 +87,8 @@ void CViewer::Init()
                                                                         80.0f,
                                                                         false);
 
-  
+  m_pObjectModeLight->SetDynamicObjectsOnly(true);
+
   m_pSpotLight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
                                                           Vect3f(-2.15715f,0.0f,-7.32758f),
                                                           Vect3f(-5.4188f,0.0f,3.75613f),

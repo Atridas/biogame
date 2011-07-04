@@ -54,15 +54,29 @@ bool CEffect::Init(const CXMLTreeNode& _xmlEffect, LPD3DXEFFECTPOOL _pEffectPool
 bool CEffect::LoadEffect(LPD3DXEFFECTPOOL _pEffectPool)
 {
   LPD3DXBUFFER l_ErrorBuffer=NULL;
-  HRESULT l_HR = D3DXCreateEffectFromFile(
+
+#ifdef _DEBUG
+    HRESULT l_HR = D3DXCreateEffectFromFile(
                           RENDER_MANAGER->GetDevice(),
                           m_szFileName.c_str(),
                           NULL,
                           NULL,
-                          NULL,
+                          D3DXSHADER_OPTIMIZATION_LEVEL0,
                           _pEffectPool,
                           &m_pD3DEffect,
                           &l_ErrorBuffer);
+#else
+    HRESULT l_HR = D3DXCreateEffectFromFile(
+                          RENDER_MANAGER->GetDevice(),
+                          m_szFileName.c_str(),
+                          NULL,
+                          NULL,
+                          D3DXSHADER_OPTIMIZATION_LEVEL3,
+                          _pEffectPool,
+                          &m_pD3DEffect,
+                          &l_ErrorBuffer);
+#endif
+
   if(l_ErrorBuffer)
   {
     LOGGER->AddNewLog(ELL_ERROR,"CEffect::Init Error creating effect '%s':\n%s", m_szFileName.c_str(), l_ErrorBuffer->GetBufferPointer());
