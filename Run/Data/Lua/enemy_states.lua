@@ -8,7 +8,7 @@ Enemy_Constants["Distance Walk"] = 20 * 20 -- al quadrat!
 Enemy_Constants["Distance Stop Walk"] = 5 * 5 -- "
 Enemy_Constants["Distance Lose Walk"] = 30 * 30
 
-Enemy_Constants["Time Hit"] = 1.1
+Enemy_Constants["Time Hit"] = 0.5
 
 Enemy_Constants["Time Dying"] = 0.5
 
@@ -41,16 +41,15 @@ State_Enemy_Hit = {}
 State_Enemy_Idle["Enter"] = function(_enemic)
 
   local animation = _enemic:get_component(BaseComponent.animation)
-  animation:set_cycle('idle', 0.3)
-  
+  animation:clear_all_cycles()
+  animation:play_cycle('idle', 0.3)
 end
 
 -------------------------------------------------------------------------------------------------
 State_Enemy_Idle["Exit"] = function(_enemic)
-
-  local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_cycle(0.3)
   
+  local animation = _enemic:get_component(BaseComponent.animation)
+  animation:clear_cycle('idle',0.3)
 end
 
 -------------------------------------------------------------------------------------------------
@@ -88,7 +87,8 @@ end
 State_Enemy_Caminant["Enter"] = function(_enemic)
 
   local animation = _enemic:get_component(BaseComponent.animation)
-  animation:set_cycle('walk', 0.3)
+  animation:clear_all_cycles()
+  animation:play_cycle('walk', 0.3)
   
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
   ia_brain.time = 0
@@ -98,7 +98,7 @@ end
 State_Enemy_Caminant["Exit"] = function(_enemic)
 
   local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_cycle(0.3)
+  animation:clear_cycle('walk',0.3)
   
 end
 
@@ -146,19 +146,18 @@ State_Enemy_Caminant['Update'] = function(_enemic, _dt)
   --log('pos: ' .. direction.x .. ' ' .. direction.y .. ' ' .. direction.z)
 
   
-  if dist_sq > Enemy_Constants["Distance Stop Walk"] then
+  --if dist_sq > Enemy_Constants["Distance Stop Walk"] then
     moviment.movement = moviment.movement + direction * _dt * Enemy_Constants["Walk Speed"]
     
+    --local animation = _enemic:get_component(BaseComponent.animation)
+    --animation:clear_cycle(0.3)
+    --animation:set_cycle('walk', 0.3)
+  --else
     
-    local animation = _enemic:get_component(BaseComponent.animation)
-    animation:clear_cycle(0.3)
-    animation:set_cycle('walk', 0.3)
-  else
-    
-    local animation = _enemic:get_component(BaseComponent.animation)
-    animation:clear_cycle(0.3)
-    animation:set_cycle('idle', 0.3)
-  end
+    --local animation = _enemic:get_component(BaseComponent.animation)
+    --animation:clear_cycle(0.3)
+    --animation:set_cycle('idle', 0.3)
+  --end
   object3d:set_yaw(angle);
   
 end
@@ -182,8 +181,9 @@ end
 State_Enemy_Hit["Enter"] = function(_enemic)
 
   local animation = _enemic:get_component(BaseComponent.animation)
-  animation:set_cycle('idle', 0.3)
-  animation:set_animation('impact', 0.3)
+  animation:clear_all_cycles();
+  animation:play_cycle('idle', 0.3)
+  animation:play('impact', 0.3, 1.0,false)
   
   local vida = _enemic:get_component(BaseComponent.vida)
   
@@ -201,8 +201,8 @@ State_Enemy_Hit["Exit"] = function(_enemic)
   local vida = _enemic:get_component(BaseComponent.vida)
   vida.immortal = false
 
-  local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_cycle(0.3)
+  --local animation = _enemic:get_component(BaseComponent.animation)
+  --animation:clear_cycle(0.3)
   
 end
 
@@ -234,7 +234,7 @@ end
 State_Enemy_Morint["Enter"] = function(_enemic)
 
   local animation = _enemic:get_component(BaseComponent.animation)
-  animation:set_animation('dead', 0.3)
+  animation:play('dead', 0.3,1.0,true)
   
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
   ia_brain.time = 0
@@ -268,7 +268,8 @@ end
 
 State_Enemy_Disparant["Enter"] = function(_enemic)
   local animation = _enemic:get_component(BaseComponent.animation)
-  animation:set_cycle('shoot', 0.3)
+  animation:clear_all_cycles();
+  animation:play_cycle('shoot', 0.3)
   
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
   ia_brain.time = 0
@@ -278,7 +279,7 @@ end
 -------------------------------------------------------------------------------------------------
 State_Enemy_Disparant["Exit"] = function(_enemic)
   local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_cycle(0.3)
+  animation:clear_cycle('shoot',0.3)
 
 end
 
@@ -321,7 +322,8 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Enemy_Mort["Exit"] = function(_enemic)
-
+  local animation = _enemic:get_component(BaseComponent.animation)
+  animation:stop('dead')
 end
 
 -------------------------------------------------------------------------------------------------

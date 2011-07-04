@@ -56,22 +56,14 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Neutre['Enter'] = function(_jugador)
-  --log('enter player neutre')
-  
-  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+
   local animation = _jugador:get_component(BaseComponent.animation)
-  
   animation:clear_all_cycles()
-  
 end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Neutre['Exit'] = function(_jugador)
-  --log('exit player neutre')
-  
-  local animation = _jugador:get_component(BaseComponent.animation)
-    
-  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+
 end
 
 -------------------------------------------------------------------------------------------------
@@ -195,6 +187,7 @@ State_Player_Apuntar['Enter'] = function(_jugador)
   local animation = _jugador:get_component(BaseComponent.animation)
   local mirilla = _jugador:get_component(BaseComponent.mirilla)
   
+  animation:clear_all_cycles()
   animation:play_cycle('aim', 0.3)
 	mirilla:set_active(true)
 	
@@ -212,8 +205,6 @@ State_Player_Apuntar['Exit'] = function(_jugador)
    
   animation:clear_cycle('aim',0.3)
   mirilla:set_active(false)
-  
-  player_controller.current_animation = ''
 
 end
 
@@ -238,7 +229,7 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
   end
   
   if ACTION_MANAGER:is_action_active('Shoot') then
-    animation:play('Shoot', 0.3, 1.0, false)
+    animation:play('shoot', 0.3, 1.0, false)
     player_controller:shoot()
     SOUND:play_sample('disparar')
   end
@@ -274,7 +265,7 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
   end
   
   
-  if isMoving then
+  --[[if isMoving then
     animation:clear_cycle('idle', 0.3)
     if isBack then
       animation:play_cycle('walk back',0.3)
@@ -290,7 +281,7 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
     animation:clear_cycle('walk',0.3)
     animation:clear_cycle('run',0.3)
     animation:clear_cycle('walk back',0.3)
-  end
+  end]]
 end
 
 -------------------------------------------------------------------------------------------------
@@ -396,6 +387,8 @@ end
 State_Player_Morint['Update'] = function(_jugador, _dt)
   
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  local animation = _jugador:get_component(BaseComponent.animation)
+  
   player_controller.time = player_controller.time + _dt
   
   if player_controller.time > Player_Constants["Temps Morint"] then
@@ -403,7 +396,7 @@ State_Player_Morint['Update'] = function(_jugador, _dt)
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
     SOUND:play_sample('pipip')
     _jugador:get_component(BaseComponent.object_3d):set_position(Vect3f(player_controller.pos_inicial))
-    
+    animation:stop('dead')
     --_jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Mort')
   end
 end

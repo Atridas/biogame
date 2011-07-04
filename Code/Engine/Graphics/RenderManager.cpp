@@ -31,7 +31,8 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
 			d3dpp.Windowed          = FALSE;
       d3dpp.BackBufferWidth   = _params.v2iResolution.x;
       d3dpp.BackBufferHeight  = _params.v2iResolution.y;
-			d3dpp.BackBufferFormat  = D3DFMT_R5G6B5;
+			d3dpp.BackBufferFormat  = D3DFMT_X8R8G8B8;
+      d3dpp.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
 		}
 		else
 		{
@@ -39,7 +40,7 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
 			d3dpp.BackBufferFormat	= D3DFMT_UNKNOWN;
 		}
 
-		d3dpp.SwapEffect				= D3DSWAPEFFECT_DISCARD;
+		d3dpp.SwapEffect				= D3DSWAPEFFECT_FLIP;
 		d3dpp.AutoDepthStencilFormat	= D3DFMT_D16;
 		d3dpp.EnableAutoDepthStencil	= TRUE;
 		d3dpp.AutoDepthStencilFormat	= D3DFMT_D24S8;
