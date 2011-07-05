@@ -15,7 +15,9 @@ State_Player_Tocat = {}
 State_Player_Morint = {}
 State_Player_Mort = {}
 State_Player_Cobertura_Baixa = {}
+State_Player_Cobertura_Baixa_Sortir = {}
 State_Player_Cobertura_Alta = {}
+State_Player_Cobertura_Alta_Sortir = {}
 
 -------------------------------------------------------------------------------------------------
 camera_player = function(_jugador, _dt)
@@ -58,7 +60,8 @@ end
 State_Player_Neutre['Enter'] = function(_jugador)
 
   local animation = _jugador:get_component(BaseComponent.animation)
-  animation:clear_all_cycles()
+  animation:clear_all_cycles(0.3)
+  animation:play_cycle('idle', 0.3)
 end
 
 -------------------------------------------------------------------------------------------------
@@ -187,7 +190,7 @@ State_Player_Apuntar['Enter'] = function(_jugador)
   local animation = _jugador:get_component(BaseComponent.animation)
   local mirilla = _jugador:get_component(BaseComponent.mirilla)
   
-  animation:clear_all_cycles()
+  animation:clear_all_cycles(0.0)
   animation:play_cycle('aim', 0.3)
 	mirilla:set_active(true)
 	
@@ -478,9 +481,15 @@ State_Player_Cobertura_Baixa['Enter'] = function(_jugador)
   
   renderable_object:set_yaw(-((player_controller.cover_normal):get_angle_y()) + math.pi)
   
-  animation:clear_all_cycles()
-  animation:play_cycle('CoverAvallDretaIdle', 1.0)
-  animation:play('CoverAvallDreta', 0.3, 1.0, false)
+  --Amb animacio
+  --animation:clear_all_cycles(0.0)
+  --animation:play_cycle('CoverAvallDretaIdle', 1.0)
+  --animation:play('CoverAvallDreta', 0.3, 1.0, false)
+  
+  --Nomes blend
+  animation:clear_all_cycles(0.3)
+  animation:play_cycle('CoverAvallDretaIdle', 0.3)
+  
   player_controller.time = 0
   
   renderable_object.block_yaw = true
@@ -489,11 +498,7 @@ end
 -------------------------------------------------------------------------------------------------
 State_Player_Cobertura_Baixa['Exit'] = function(_jugador)
 
-  local animation = _jugador:get_component(BaseComponent.animation)
-  animation:clear_cycle('CoverAvallDretaIdle',0.2)
-  animation:play('CoverSortidaAvallDreta', 0.3, 1.0, false)
-  
-  _jugador:get_component(BaseComponent.renderable_object).block_yaw = false
+
 end
 
 -------------------------------------------------------------------------------------------------
@@ -502,7 +507,7 @@ State_Player_Cobertura_Baixa['Update'] = function(_jugador, _dt)
   local pitch, yaw, object3d = camera_player(_jugador, _dt)
   
   if ACTION_MANAGER:is_action_active('Cover') then
-    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Baixa_Sortir')
   end
 
 end
@@ -518,6 +523,52 @@ State_Player_Cobertura_Baixa['Receive'] = function(_jugador, _event)
   
 end
 
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-- Cobertura Baixa Sortir -----------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+State_Player_Cobertura_Baixa_Sortir['Enter'] = function(_jugador)
+  
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  local animation = _jugador:get_component(BaseComponent.animation)
+  animation:stop_cycle('CoverAvallDretaIdle',0.4)
+
+  _jugador:get_component(BaseComponent.renderable_object).block_yaw = false
+  player_controller.time = 0
+  
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Cobertura_Baixa_Sortir['Exit'] = function(_jugador)
+
+
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Cobertura_Baixa_Sortir['Update'] = function(_jugador, _dt)
+
+  local pitch, yaw, object3d = camera_player(_jugador, _dt)
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  
+  player_controller.time = player_controller.time + _dt
+  
+  if player_controller.time >= 0.1 then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+  end
+
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Cobertura_Baixa_Sortir['Receive'] = function(_jugador, _event)
+
+  if _event.msg == Event.rebre_impacte then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Tocat')
+  elseif _event.msg == Event.morir then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Morint')
+  end
+  
+end
 
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
@@ -542,7 +593,7 @@ State_Player_Cobertura_Alta['Enter'] = function(_jugador)
   
   renderable_object:set_yaw(-((player_controller.cover_normal):get_angle_y()) + math.pi)
   
-  animation:clear_all_cycles()
+  animation:clear_all_cycles(0.0)
   animation:play_cycle('CoverDretaIdle', 1.0)
   animation:play('CoverDreta', 0.3, 1.0, false)
   player_controller.time = 0
@@ -553,11 +604,6 @@ end
 -------------------------------------------------------------------------------------------------
 State_Player_Cobertura_Alta['Exit'] = function(_jugador)
 
-  local animation = _jugador:get_component(BaseComponent.animation)
-  animation:clear_cycle('CoverDretaIdle', 0.5)
-  animation:play('CoverSortidaDreta', 0.3, 1.0, false)
-  
-  _jugador:get_component(BaseComponent.renderable_object).block_yaw = false
 end
 
 -------------------------------------------------------------------------------------------------
@@ -566,13 +612,61 @@ State_Player_Cobertura_Alta['Update'] = function(_jugador, _dt)
   local pitch, yaw, object3d = camera_player(_jugador, _dt)
   
   if ACTION_MANAGER:is_action_active('Cover') then
-    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Alta_Sortir')
   end
 
 end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Cobertura_Alta['Receive'] = function(_jugador, _event)
+
+  if _event.msg == Event.rebre_impacte then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Tocat')
+  elseif _event.msg == Event.morir then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Morint')
+  end
+  
+end
+
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-- Cobertura Alta Sortir ------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+State_Player_Cobertura_Alta_Sortir['Enter'] = function(_jugador)
+  
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  local animation = _jugador:get_component(BaseComponent.animation)
+  animation:clear_all_cycles(0.3)
+  animation:play('CoverSortidaDreta',0.3,1.0,false)
+  
+  _jugador:get_component(BaseComponent.renderable_object).block_yaw = true
+  player_controller.time = 0
+  
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Cobertura_Alta_Sortir['Exit'] = function(_jugador)
+  _jugador:get_component(BaseComponent.renderable_object).block_yaw = false
+  
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Cobertura_Alta_Sortir['Update'] = function(_jugador, _dt)
+
+  local pitch, yaw, object3d = camera_player(_jugador, _dt)
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+
+  player_controller.time = player_controller.time + _dt
+  
+  if player_controller.time >= 0.45 then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+  end
+
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Cobertura_Alta_Sortir['Receive'] = function(_jugador, _event)
 
   if _event.msg == Event.rebre_impacte then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Tocat')

@@ -215,6 +215,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("clear_cycle",              (void(CComponentAnimation::*)(const string&, float))&CComponentAnimation::ClearCycle)
       .def("clear_all_cycles",         &CComponentAnimation::ClearAllCycles)
 
+
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentStateMachine, CBaseComponent>("ComponentStateMachine")
       .def("add_to_entity",            &CComponentStateMachine::AddToEntity)
