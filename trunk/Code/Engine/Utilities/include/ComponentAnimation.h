@@ -27,7 +27,7 @@ public:
   void StopCycle(const string& _szAnimation, float _fBlendTime);
   void ClearCycle(float _fBlend);
   void ClearCycle(const string& _szAnimation, float _fBlend);
-  void ClearAllCycles();
+  void ClearAllCycles(float _fBlend);
 
 
 protected:

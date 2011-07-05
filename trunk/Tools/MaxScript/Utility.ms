@@ -404,10 +404,13 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				l_aux = "" as StringStream
 				format "% % %" l_translation.x l_translation.y l_translation.z to:l_aux
 				append l_params #("direction",l_aux)
+				format "Exportant llum direccional %\n" l_light.name
+				
 			) else if classof l_light == Omnilight then
 			(
 				--omni
 				append l_params #("type","omni")
+				format "Exportant llum omni %\n" l_light.name
 			) else if classof l_light == targetSpot then
 			(
 				-- spot
@@ -427,6 +430,8 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				l_aux = "" as StringStream
 				format "%" l_light.falloff to:l_aux
 				append l_params #("fall_off",l_aux)
+				
+				format "Exportant llum spot %\n" l_light.name
 			) else
 			(
 				--res, és un mesh o algo així

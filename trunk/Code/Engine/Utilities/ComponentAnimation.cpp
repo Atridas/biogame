@@ -96,20 +96,20 @@ void CComponentAnimation::ClearCycle  (const string& _szAnimation, float _fBlend
   
 }
 
-void CComponentAnimation::ClearAllCycles()
+void CComponentAnimation::ClearAllCycles(float _fBlend)
 {
   set<string>::iterator l_stIt;
 
   for(l_stIt = m_stActiveCycles.begin(); l_stIt != m_stActiveCycles.end(); ++l_stIt)
   {
-    m_pAnimatedModel->GetAnimatedInstanceModel()->ClearCycle(*l_stIt, 0.0f);
+    m_pAnimatedModel->GetAnimatedInstanceModel()->ClearCycle(*l_stIt, _fBlend);
   }
 
   m_stActiveCycles.clear();
 
   for(l_stIt = m_stInactiveCycles.begin(); l_stIt != m_stInactiveCycles.end(); ++l_stIt)
   {
-    m_pAnimatedModel->GetAnimatedInstanceModel()->ClearCycle(*l_stIt, 0.0f);
+    m_pAnimatedModel->GetAnimatedInstanceModel()->ClearCycle(*l_stIt, _fBlend);
   }
 
   m_stInactiveCycles.clear();

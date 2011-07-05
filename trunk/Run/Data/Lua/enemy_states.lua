@@ -41,7 +41,7 @@ State_Enemy_Hit = {}
 State_Enemy_Idle["Enter"] = function(_enemic)
 
   local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_all_cycles()
+  animation:clear_all_cycles(0.0)
   animation:play_cycle('idle', 0.3)
 end
 
@@ -87,7 +87,7 @@ end
 State_Enemy_Caminant["Enter"] = function(_enemic)
 
   local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_all_cycles()
+  animation:clear_all_cycles(0.0)
   animation:play_cycle('walk', 0.3)
   
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
@@ -181,7 +181,7 @@ end
 State_Enemy_Hit["Enter"] = function(_enemic)
 
   local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_all_cycles();
+  animation:clear_all_cycles(0.0);
   animation:play_cycle('idle', 0.3)
   animation:play('impact', 0.3, 1.0,false)
   
@@ -268,7 +268,7 @@ end
 
 State_Enemy_Disparant["Enter"] = function(_enemic)
   local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_all_cycles();
+  animation:clear_all_cycles(0.0);
   animation:play_cycle('shoot', 0.3)
   
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
