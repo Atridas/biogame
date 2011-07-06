@@ -14,10 +14,13 @@ State_Player_Apuntar = {}
 State_Player_Tocat = {}
 State_Player_Morint = {}
 State_Player_Mort = {}
+
 State_Player_Cobertura_Baixa = {}
-State_Player_Cobertura_Baixa_Sortir = {}
+State_Player_Cobertura_Baixa_Tocat = {}
+
 State_Player_Cobertura_Alta = {}
 State_Player_Cobertura_Alta_Sortir = {}
+
 State_Player_Cobertura_Baixa_Apuntar = {}
 
 -------------------------------------------------------------------------------------------------
@@ -306,9 +309,6 @@ end
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 
-
-
--------------------------------------------------------------------------------------------------
 State_Player_Tocat['Enter'] = function(_jugador)
   --log('enter player apuntant')
   
@@ -344,12 +344,13 @@ State_Player_Tocat['Update'] = function(_jugador, _dt)
   local pitch, yaw, object3d = camera_player(_jugador, _dt)
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   
-  if player_controller.time > Player_Constants["Temps Tocat"] then
-    if not ACTION_MANAGER:is_action_active('Aim') then
-      _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
-    else
-      _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Apuntar')
-    end
+  if player_controller.time >= Player_Constants["Temps Tocat"] then
+    --if not ACTION_MANAGER:is_action_active('Aim') then
+    --  _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+    --else
+    --  _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Apuntar')
+    --end
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():revert_state()
   end
 end
 
@@ -478,7 +479,7 @@ State_Player_Cobertura_Baixa['Enter'] = function(_jugador)
   
   moviment.movement = moviment.movement + player_controller.cover_position + player_controller.cover_normal * 1.0 - object3d:get_position()
   
-  object3d:set_yaw(-((player_controller.cover_normal):get_angle_y()) - math.pi*0.5)
+  --object3d:set_yaw(-((player_controller.cover_normal):get_angle_y()) - math.pi*0.5)
   
   renderable_object:set_yaw(-((player_controller.cover_normal):get_angle_y()) + math.pi)
   
@@ -498,8 +499,10 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Cobertura_Baixa['Exit'] = function(_jugador)
-
-
+  
+  local renderable_object = _jugador:get_component(BaseComponent.renderable_object)
+  renderable_object.block_yaw = false
+  
 end
 
 -------------------------------------------------------------------------------------------------
@@ -508,7 +511,7 @@ State_Player_Cobertura_Baixa['Update'] = function(_jugador, _dt)
   local pitch, yaw, object3d = camera_player(_jugador, _dt)
   
   if ACTION_MANAGER:is_action_active('Cover') then
-    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Baixa_Sortir')
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
   end
 
   if ACTION_MANAGER:is_action_active('Aim') then
@@ -521,7 +524,7 @@ end
 State_Player_Cobertura_Baixa['Receive'] = function(_jugador, _event)
 
   if _event.msg == Event.rebre_impacte then
-    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Tocat')
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Baixa_Tocat')
   elseif _event.msg == Event.morir then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Morint')
   end
@@ -530,49 +533,59 @@ end
 
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
--- Cobertura Baixa Sortir -----------------------------------------------------------------------
+-- State_Player_Cobertura_Baixa_Tocat -----------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
-State_Player_Cobertura_Baixa_Sortir['Enter'] = function(_jugador)
+
+State_Player_Cobertura_Baixa_Tocat['Enter'] = function(_jugador)
+
+  local vida = _jugador:get_component(BaseComponent.vida)
+  vida.immortal = true
   
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
-  animation:stop_cycle('CoverAvallDretaIdle',0.4)
-
-  _jugador:get_component(BaseComponent.renderable_object).block_yaw = false
+  local renderable_object = _jugador:get_component(BaseComponent.renderable_object)
+  renderable_object.block_yaw = true
+  
+  --animation:set_cycle('idle', 0.3)
+  --animation:play('impact', 0.3, 1.0, false)
+  
   player_controller.time = 0
+  
+  SOUND:play_sample('impacte')
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Cobertura_Baixa_Tocat['Exit'] = function(_jugador)
+
+  local renderable_object = _jugador:get_component(BaseComponent.renderable_object)
+  renderable_object.block_yaw = false
+  
+  local vida = _jugador:get_component(BaseComponent.vida)
+  vida.immortal = false
+  
+  --local animation = _jugador:get_component(BaseComponent.animation)
+  --animation:clear_cycle(0.3)
   
 end
 
 -------------------------------------------------------------------------------------------------
-State_Player_Cobertura_Baixa_Sortir['Exit'] = function(_jugador)
-
-
-end
-
--------------------------------------------------------------------------------------------------
-State_Player_Cobertura_Baixa_Sortir['Update'] = function(_jugador, _dt)
-
+State_Player_Cobertura_Baixa_Tocat['Update'] = function(_jugador, _dt)
+  
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  player_controller.time = player_controller.time + _dt
+  
   local pitch, yaw, object3d = camera_player(_jugador, _dt)
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   
-  player_controller.time = player_controller.time + _dt
-  
-  if player_controller.time >= 0.1 then
-    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+  if player_controller.time >= Player_Constants["Temps Tocat"] then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Baixa')
   end
-
 end
 
 -------------------------------------------------------------------------------------------------
-State_Player_Cobertura_Baixa_Sortir['Receive'] = function(_jugador, _event)
+State_Player_Cobertura_Baixa_Tocat['Receive'] = function(_jugador, _event)
 
-  if _event.msg == Event.rebre_impacte then
-    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Tocat')
-  elseif _event.msg == Event.morir then
-    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Morint')
-  end
-  
 end
 
 -------------------------------------------------------------------------------------------------
@@ -731,7 +744,9 @@ State_Player_Cobertura_Baixa_Apuntar['Exit'] = function(_jugador)
 
   log('Michael Jackson YEAH!')
   --_jugador:get_component(BaseComponent.renderable_object).block_yaw = false
+  local mirilla = _jugador:get_component(BaseComponent.mirilla)
   
+  mirilla:set_active(false)
 end
 
 -------------------------------------------------------------------------------------------------
@@ -742,7 +757,7 @@ State_Player_Cobertura_Baixa_Apuntar['Update'] = function(_jugador, _dt)
   local animation = _jugador:get_component(BaseComponent.animation)
   
   if not ACTION_MANAGER:is_action_active('Aim') then
-    _jugador:get_component(BaseComponent.state_machine):get_state_machine():revert_state()
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Baixa')
   end
   
   if ACTION_MANAGER:is_action_active('Shoot') then
