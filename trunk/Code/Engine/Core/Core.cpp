@@ -75,18 +75,18 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
     SetOk(false);
   }
 
+  if(!m_pStaticMeshManager->Load(_InitParams.StaticMeshManagerParams))
+  {
+    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al manager de Static Meshes.");
+    SetOk(false);
+  }
+
   if(!m_pParticleManager->Load(_InitParams.PaticleManagerParams.szFile))
   {
     LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al manager de particulas");
     SetOk(false);
   }
   m_pParticleManager->Init(CORE->GetRenderManager());
-
-  if(!m_pStaticMeshManager->Load(_InitParams.StaticMeshManagerParams))
-  {
-    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al manager de Static Meshes.");
-    SetOk(false);
-  }
 
   if(!m_pAnimatedModelManager->Load(_InitParams.AnimatedModelManagerParams))
   {

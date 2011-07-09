@@ -127,6 +127,7 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
   TNORMALTANGENTBINORMALTEXTUREDVERTEX::GetVertexDeclaration();
   TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetVertexDeclaration();
   TCAL3D_HW_VERTEX::GetVertexDeclaration();
+  SPARTICLE_VERTEX::GetVertexDeclaration();
 
 #ifdef _DEBUG // Clear the backbuffer to magenta color in a Debug mode
   m_cClearColor = colMAGENTA;
@@ -162,6 +163,7 @@ void CRenderManager::Release(void)
   TNORMALTANGENTBINORMALTEXTUREDVERTEX::ReleaseVertexDeclaration();
   TNORMALTANGENTBINORMALTEXTURED2VERTEX::ReleaseVertexDeclaration();
   TCAL3D_HW_VERTEX::ReleaseVertexDeclaration();
+  SPARTICLE_VERTEX::ReleaseVertexDeclaration();
 
 	//Release main devices of render
 	CHECKED_RELEASE(m_pD3DDevice)
@@ -219,7 +221,7 @@ void CRenderManager::SetupMatrices(CCamera* _pCamera, bool _bOrtho, bool _bSaveC
   assert(IsOk());
 	D3DXMATRIX l_matView;
 	D3DXMATRIX l_matProject;
-  Vect3f eye;
+  Vect3f eye, up, right;
 
   if(_bSaveCamera)
     m_pCamera = _pCamera;
@@ -230,6 +232,8 @@ void CRenderManager::SetupMatrices(CCamera* _pCamera, bool _bOrtho, bool _bSaveC
 
 		//Setup Matrix view
     eye=Vect3f(0.0f,0.0f,-1.0f);
+    up=Vect3f(0.0f,1.0f,0.0f);
+    right = (up ^ Vect3f(0.0f,0.0f,1.0f)).GetNormalized();
 		D3DXVECTOR3 l_Eye(eye.x, eye.y, eye.z), l_LookAt(0.0f,0.0f,0.0f), l_VUP(0.0f,1.0f,0.0f);
 		D3DXMatrixLookAtLH( &l_matView, &l_Eye, &l_LookAt, &l_VUP);
 
@@ -255,8 +259,10 @@ void CRenderManager::SetupMatrices(CCamera* _pCamera, bool _bOrtho, bool _bSaveC
 	else
 	{
 		eye = _pCamera->GetEye();
+    up  = _pCamera->GetVecUp().GetNormalized();
 		D3DXVECTOR3 l_Eye(eye.x, eye.y, eye.z);
 		Vect3f lookat = _pCamera->GetLookAt();
+    right = (up ^ (lookat - eye)).GetNormalized();
 		D3DXVECTOR3 l_LookAt(lookat.x, lookat.y, lookat.z);
 		Vect3f vup = _pCamera->GetVecUp();
 		D3DXVECTOR3 l_VUP(vup.x, vup.y, vup.z);
@@ -281,7 +287,7 @@ void CRenderManager::SetupMatrices(CCamera* _pCamera, bool _bOrtho, bool _bSaveC
 
 	m_pD3DDevice->SetTransform( D3DTS_VIEW, &l_matView );
 	m_pD3DDevice->SetTransform( D3DTS_PROJECTION, &l_matProject );
-  CORE->GetEffectManager()->ActivateCamera(l_matView, l_matProject, eye);
+  CORE->GetEffectManager()->ActivateCamera(l_matView, l_matProject, eye, up, right);
 
   if(_bSaveCamera)
   {
@@ -305,13 +311,15 @@ void CRenderManager::Setup2DCamera()
   assert(IsOk());
 	D3DXMATRIX m_matView;
 	D3DXMATRIX m_matProject;
-  Vect3f eye;
+  Vect3f eye, right, up;
 
 	//Set default view and projection matrix
   float l_fCenterW = m_uWidth /2.0f;
   float l_fCenterH = m_uHeight/2.0f;
 	//Setup Matrix view
-  eye=Vect3f(l_fCenterW,l_fCenterH,-1.0f);
+  eye= Vect3f(l_fCenterW,l_fCenterH,-1.0f);
+  up = Vect3f(0.f,1.f,0.f);
+  right = (up ^ (Vect3f(l_fCenterW,l_fCenterH,0.0f) - eye)).GetNormalized();
 	D3DXVECTOR3 l_Eye(eye.x, eye.y, eye.z), l_LookAt(l_fCenterW,l_fCenterH,0.0f), l_VUP(0.0f,1.0f,0.0f);
 	D3DXMatrixLookAtLH( &m_matView, &l_Eye, &l_LookAt, &l_VUP);
 
@@ -327,7 +335,7 @@ void CRenderManager::Setup2DCamera()
 
 	m_pD3DDevice->SetTransform( D3DTS_VIEW, &m_matView );
 	m_pD3DDevice->SetTransform( D3DTS_PROJECTION, &m_matProject );
-  CORE->GetEffectManager()->ActivateCamera(m_matView, m_matProject, eye);
+  CORE->GetEffectManager()->ActivateCamera(m_matView, m_matProject, eye, up, right);
   /*m_pEffectManager->SetProjectionMatrix(m_matProject);
   m_pEffectManager->SetViewMatrix(m_matView);
   */

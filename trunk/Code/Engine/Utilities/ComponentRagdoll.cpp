@@ -7,11 +7,11 @@
 #include "PhysicActor.h"
 
 
-CComponentRagdoll* CComponentRagdoll::AddToEntity(CGameEntity *_pEntity, const string& _szSkeletonFile)
+CComponentRagdoll* CComponentRagdoll::AddToEntity(CGameEntity *_pEntity, const string& _szSkeletonFile, int _iCollisionGroup)
 {
   CComponentRagdoll *l_pComp = new CComponentRagdoll();
   assert(_pEntity && _pEntity->IsOk());
-  if(l_pComp->Init(_pEntity, _szSkeletonFile))
+  if(l_pComp->Init(_pEntity, _szSkeletonFile, _iCollisionGroup))
   {
     l_pComp->SetEntity(_pEntity);
     return l_pComp;
@@ -23,7 +23,7 @@ CComponentRagdoll* CComponentRagdoll::AddToEntity(CGameEntity *_pEntity, const s
   }
 }
 
-bool CComponentRagdoll::Init(CGameEntity* _pEntity, const string& _szSkeletonFile)
+bool CComponentRagdoll::Init(CGameEntity* _pEntity, const string& _szSkeletonFile, int _iCollisionGroup)
 {
   CComponentRenderableObject* l_pCRO = _pEntity->GetComponent<CComponentRenderableObject>();
 
@@ -31,7 +31,7 @@ bool CComponentRagdoll::Init(CGameEntity* _pEntity, const string& _szSkeletonFil
 
   m_pRagdoll = new CPhysxSkeleton(false);
   CalModel* l_pCalModel = m_pRAIM->GetAnimatedInstanceModel()->GetAnimatedCalModel();
-  bool l_bOk = m_pRagdoll->Init(_szSkeletonFile,l_pCalModel,m_pRAIM->GetMat44(),ECG_OBJECTES_DINAMICS, _pEntity);
+  bool l_bOk = m_pRagdoll->Init(_szSkeletonFile,l_pCalModel,m_pRAIM->GetMat44(),_iCollisionGroup/*ECG_OBJECTES_DINAMICS*/, _pEntity);
 
   SetOk(l_bOk);
   return IsOk();

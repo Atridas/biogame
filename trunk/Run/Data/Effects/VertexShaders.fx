@@ -227,6 +227,58 @@ TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS RenderTangentBitangentCal3DHWVS(CAL3
 	return out_;
 }
 
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+/*
+struct PARTICLE_VS {
+	float3 Position : POSITION;
+	float4 Parameters1 : TEXCOORD0; // x, y, z, size
+	float4 Parameters2 : TEXCOORD1; // u, v, angleSin, angleCos
+	float4 Color : COLOR;
+};
+
+struct TTEXTURED_DIFFUSSED_VERTEX_PS {
+	float4 HPosition : POSITION;
+	float4 Color : COLOR;
+	float2 UV : TEXCOORD0;
+};
+*/
+
+TTEXTURED_DIFFUSSED_VERTEX_PS ParticleVS(PARTICLE_VS _in)
+{
+	TTEXTURED_DIFFUSSED_VERTEX_PS out_=(TTEXTURED_DIFFUSSED_VERTEX_PS)0;
+  
+  float3 l_WorldPos = mul(float4(_in.Parameters1.xyz,1.0),g_WorldMatrix);
+  
+  
+  float3 l_Right, l_Up;
+  
+  if( sign(_in.Position.x) == sign(_in.Position.y) )
+  {
+    l_Right = _in.Position.x * SQRT2 * _in.Parameters2.z * _in.Parameters1.w * g_CameraRight;
+    l_Up    = _in.Position.y * SQRT2 * _in.Parameters2.w * _in.Parameters1.w * g_CameraUp;
+  }
+  else
+  {
+    l_Right = _in.Position.x * SQRT2 * _in.Parameters2.w * _in.Parameters1.w * g_CameraRight;
+    l_Up    = _in.Position.y * SQRT2 * _in.Parameters2.z * _in.Parameters1.w * g_CameraUp;
+  }
+  
+  l_WorldPos = l_WorldPos + l_Right + l_Up;
+  
+  //l_WorldPos = l_WorldPos + _in.Parameters1.w * _in.Position.x * g_CameraRight + _in.Parameters1.w * _in.Position.y * g_CameraUp;
+	
+  out_.UV.x      = (_in.Position.x + 1.0) / 2.0;
+  out_.UV.y      = (1.0 - _in.Position.y) / 2.0;
+	out_.HPosition = mul(float4(l_WorldPos,1.0),g_ViewProjectionMatrix);
+  out_.Color     = _in.Color;
+  
+	return out_;
+}
+
+
+// ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 //Vertex Shader
 void VertShadow(float4 Pos : POSITION,
                 out float4 oPos : POSITION,

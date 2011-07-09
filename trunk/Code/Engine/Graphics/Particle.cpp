@@ -1,5 +1,6 @@
 #include "Particle.h"
 #include "base.h"
+#include "ParticleEmitter.h"
 
 
 CParticle::CParticle():
@@ -16,7 +17,7 @@ CParticle::CParticle():
   m_PointC(0.0f,0.0f,0.0f),
   m_PointD(0.0f,0.0f,0.0f),
   m_fAngle    (0.0f),
-  m_iIncrementAngle(0.0f),
+  m_fIncrementAngle(0.0f),
   m_fTimeInterpolation(0.0f),
 
   m_fAU ( 0.0f),
@@ -59,8 +60,8 @@ bool CParticle::UpdateState(float _fDeltaTime)
   }
   
   // actualitzem l'angle de rotació
-  m_iIncrementAngle = m_iIncrementAngle+(m_fAngle*_fDeltaTime);
-
+  m_fIncrementAngle = m_fIncrementAngle+(m_fAngle*_fDeltaTime);
+  m_fIncrementAngle = (m_fIncrementAngle > FLOAT_PI_VALUE * 2) ? m_fIncrementAngle - FLOAT_PI_VALUE * 2 : m_fIncrementAngle;
 
   //****************************** Actualitzem el Color ************************************************************
   int i= m_vTimeColor.size()-1;
@@ -169,26 +170,29 @@ void CParticle::UpdateBillboard(CCamera* _pCamera)
   Vect3f l_cameraVecUp = _pCamera->GetVecUp();
 
  
-  m_VDirection.x = l_cameraDirection.x;
-  m_VDirection.y = l_cameraDirection.y;
-  m_VDirection.z = l_cameraDirection.z;
+  m_VDirection = l_cameraDirection.GetNormalized();
     
   Mat33f mat;
-  l_cameraVecUp = mat.FromAxisAngle(l_cameraDirection.Normalize(), m_iIncrementAngle)* l_cameraVecUp.Normalize();
-  m_VUp.x = l_cameraVecUp.x;
-  m_VUp.y = l_cameraVecUp.y;
-  m_VUp.z = l_cameraVecUp.z;
-
+  l_cameraVecUp = mat.FromAxisAngle(l_cameraDirection.Normalize(), m_fIncrementAngle)* l_cameraVecUp.Normalize();
+  m_VUp = l_cameraVecUp.GetNormalized();
       
 	//D3DXVec3Cross(&m_VRight, &m_VUp, &m_VDirection);// producte vectorial ok
-  m_VRight = m_VUp ^ m_VDirection;
-
-  m_VRight.Normalize();
+  m_VRight = (m_VUp ^ m_VDirection).GetNormalized();
 
   m_PointA = m_vPos - (m_VRight*m_fSize*0.5f) - (m_VUp*m_fSize*0.5f);
 	m_PointB = m_vPos + (m_VRight*m_fSize*0.5f) - (m_VUp*m_fSize*0.5f);
 	m_PointC = m_vPos - (m_VRight*m_fSize*0.5f) + (m_VUp*m_fSize*0.5f);
 	m_PointD = m_vPos + (m_VRight*m_fSize*0.5f) + (m_VUp*m_fSize*0.5f);
+  
+  //float l_fSin = sin(m_iIncrementAngle + FLOAT_PI_VALUE * .25f);
+  //float l_fCos = cos(m_iIncrementAngle + FLOAT_PI_VALUE * .25f);
+  //
+  //float l_fSqrt2 = sqrt(2.f);
+  //
+  //m_PointA = m_vPos - (m_fSize*l_fSqrt2*l_fSin*m_VRight) - (m_fSize*l_fSqrt2*l_fCos*m_VUp);
+  //m_PointB = m_vPos + (m_fSize*l_fSqrt2*l_fCos*m_VRight) - (m_fSize*l_fSqrt2*l_fSin*m_VUp);
+  //m_PointC = m_vPos - (m_fSize*l_fSqrt2*l_fSin*m_VRight) + (m_fSize*l_fSqrt2*l_fCos*m_VUp);
+  //m_PointD = m_vPos + (m_fSize*l_fSqrt2*l_fCos*m_VRight) + (m_fSize*l_fSqrt2*l_fSin*m_VUp);
 
 
   //***** NOMES SI ES ANIMADA
@@ -199,14 +203,14 @@ void CParticle::UpdateBillboard(CCamera* _pCamera)
     while (i>=0)
     {
       if(m_vTimeAnimated[i]<m_fAge)
-	   {
-       
-       m_iTexNumFiles=m_vFilesColumnes[i-1];
-       m_iTexNumColumnes=m_vFilesColumnes[i];
-       m_fTimeAnimationDiapo=m_vTimeAnimated[i];
-       //m_pTexParticle=m_vTextureAnimation[i]; aki resta de 2 en 2 i nomes te una textura per temsp, per aixo peta
-	     i=0;
-	   }
+	    {
+        
+        m_iTexNumFiles=m_vFilesColumnes[i-1];
+        m_iTexNumColumnes=m_vFilesColumnes[i];
+        m_fTimeAnimationDiapo=m_vTimeAnimated[i];
+        //m_pTexParticle=m_vTextureAnimation[i]; aki resta de 2 en 2 i nomes te una textura per temsp, per aixo peta
+	      i=0;
+	    }
       i=i-2;
     }
     m_fIncrementV = (float)m_pTexParticle->GetHeight()/m_iTexNumFiles;
@@ -278,4 +282,20 @@ bool CParticle::Update(float _fDeltaTime, CCamera* _pCamera, bool _bComputeBillb
   }
   
   return true;
+}
+
+
+void  CParticle::FillInstanceData(SParticleRenderInfo* data)
+{
+  data->x = m_vPos.x;
+  data->y = m_vPos.y;
+  data->z = m_vPos.z;
+  data->size = m_fSize;
+
+  //data->u = 
+  data->angleCos = cos(m_fIncrementAngle + FLOAT_PI_VALUE * .25f);
+  data->angleSin = sin(m_fIncrementAngle + FLOAT_PI_VALUE * .25f);
+  //data->active = (m_fAge >= m_fLifetime) ? 0.f : 1.f;
+  
+  data->color=(DWORD)GetColor();
 }

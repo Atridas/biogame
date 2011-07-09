@@ -20,6 +20,8 @@ LPDIRECT3DVERTEXDECLARATION9 TNORMALTANGENTBINORMALTEXTURED2VERTEX::s_VertexDecl
 
 LPDIRECT3DVERTEXDECLARATION9 TCAL3D_HW_VERTEX::s_VertexDeclaration=0;
 
+LPDIRECT3DVERTEXDECLARATION9 SPARTICLE_VERTEX::s_VertexDeclaration=0;
+
 // Instanced declarations ------------------------------------------------------
 
 LPDIRECT3DVERTEXDECLARATION9 SDIFFUSEVERTEX::s_VertexInstancedDeclaration = 0;
@@ -39,6 +41,8 @@ LPDIRECT3DVERTEXDECLARATION9 TNORMALTANGENTBINORMALTEXTUREDVERTEX::s_VertexInsta
 LPDIRECT3DVERTEXDECLARATION9 TNORMALTANGENTBINORMALTEXTURED2VERTEX::s_VertexInstancedDeclaration=0;
 
 LPDIRECT3DVERTEXDECLARATION9 TCAL3D_HW_VERTEX::s_VertexInstancedDeclaration=0;
+
+LPDIRECT3DVERTEXDECLARATION9 SPARTICLE_VERTEX::s_VertexInstancedDeclaration=0;
 
 //---------------------------------------------------------------------------------------------
 
@@ -78,6 +82,9 @@ uint16 GetVertexSize(uint16 _usVertexType)
   } else if(_usVertexType == TNORMALTANGENTBINORMALTEXTURED2VERTEX::GetVertexType())
   {
     return sizeof(TNORMALTANGENTBINORMALTEXTURED2VERTEX);
+  } else if(_usVertexType == SPARTICLE_VERTEX::GetVertexType())
+  {
+    return sizeof(SPARTICLE_VERTEX);
   } else {
     return 0;
   }
@@ -775,6 +782,54 @@ LPDIRECT3DVERTEXDECLARATION9& TCAL3D_HW_VERTEX::GetInstancedVertexDeclaration()
       { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
       { 1, 16 * 2, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 4 },
       { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
+      D3DDECL_END()
+    };
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexInstancedDeclaration);
+    assert(result == D3D_OK);
+  }
+  return s_VertexInstancedDeclaration;
+}
+
+
+
+// Particle Texture ---------------------------------------------------------------------------------------------------
+
+
+LPDIRECT3DVERTEXDECLARATION9& SPARTICLE_VERTEX::GetVertexDeclaration()
+{
+  if(s_VertexDeclaration==NULL)
+  {
+    D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+    {
+      /*
+      { 0, 0 ,               D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION,     0 },
+      D3DDECL_END()
+      */
+      { 0, 0,                D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION,     0 },
+      //Buffer
+      { 1, 0              , D3DDECLTYPE_FLOAT4,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+      { 1, sizeof(float)*4, D3DDECLTYPE_FLOAT4,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
+      { 1, sizeof(float)*8, D3DDECLTYPE_D3DCOLOR, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,  0 },
+      D3DDECL_END()
+    };
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    assert(result == D3D_OK);
+  }
+  return s_VertexDeclaration;
+}
+
+
+LPDIRECT3DVERTEXDECLARATION9& SPARTICLE_VERTEX::GetInstancedVertexDeclaration()
+{
+  if(s_VertexInstancedDeclaration==NULL)
+  {
+    D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+    {
+      { 0, 0,                D3DDECLTYPE_FLOAT3, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION,     0 },
+      //Buffer
+      { 1, 0              , D3DDECLTYPE_FLOAT4,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+      { 1, sizeof(float)*4, D3DDECLTYPE_FLOAT4,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
+      { 1, sizeof(float)*8, D3DDECLTYPE_D3DCOLOR, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,  0 },
       D3DDECL_END()
     };
     HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexInstancedDeclaration);

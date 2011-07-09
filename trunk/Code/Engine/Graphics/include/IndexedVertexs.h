@@ -107,7 +107,8 @@ CIndexedVertexs<T>::CIndexedVertexs(CRenderManager *_pRM, char *_pVertexAddress,
   m_iIndexCount   = _iIndexCount;
   m_iVertexCount  = _iVertexCount;
   LPDIRECT3DDEVICE9 l_pDevice = _pRM->GetDevice();
-  l_pDevice->CreateVertexBuffer(GetVertexSize()*_iVertexCount,0,GetVertexType(),D3DPOOL_DEFAULT,&m_pVB,NULL);
+  //l_pDevice->CreateVertexBuffer(GetVertexSize()*_iVertexCount,0,GetVertexType(),D3DPOOL_DEFAULT,&m_pVB,NULL);
+  l_pDevice->CreateVertexBuffer(GetVertexSize()*_iVertexCount,0,T::GetFVF(),D3DPOOL_DEFAULT,&m_pVB,NULL);
   l_pDevice->CreateIndexBuffer(GetIndexSize()*_iIndexCount,0,D3DFMT_INDEX16,D3DPOOL_DEFAULT,&m_pIB,NULL);
 
   void* l_p;

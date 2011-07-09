@@ -13,11 +13,13 @@
 #include <XML/XMLTreeNode.h>
 
 
-void CEffectManager::ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _mProjectionMatrix, const Vect3f& _vCameraEye)
+void CEffectManager::ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _mProjectionMatrix, const Vect3f& _vCameraEye, const Vect3f& _vCameraUp, const Vect3f& _vCameraRight)
 {
   SetProjectionMatrix(_mProjectionMatrix);
   SetViewMatrix(_mViewMatrix);
   SetCameraEye(_vCameraEye);
+  SetCameraUp(_vCameraUp);
+  SetCameraRight(_vCameraRight);
 }
 
 //TODO: UPDATE FORMAT!!!
@@ -195,6 +197,8 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     m_pWorldViewProjectionMatrixParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"WorldViewProjection");
     m_pViewToLightProjectionMatrixParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"ViewToLightProjection");
     m_pCameraPositionParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"CameraPosition");
+    m_pCameraUpParameter       = l_pD3DEffect->GetParameterBySemantic(NULL,"CameraUp");
+    m_pCameraRightParameter    = l_pD3DEffect->GetParameterBySemantic(NULL,"CameraRight");
     m_pAmbientLight = l_pD3DEffect->GetParameterBySemantic(NULL,"AmbientLight");
     m_pLightsEnabledParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsEnabled");
     m_pLightsTypeParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsType");
@@ -383,6 +387,20 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     const float l_vfPos[3] = {m_vCameraEye.x,m_vCameraEye.y,m_vCameraEye.z};
     l_pD3DEffect->SetFloatArray(m_pCameraPositionParameter,l_vfPos,3);
     m_bCameraEyeUpdated = false;
+  }
+  
+  if(m_bCameraUpUpdated)
+  {
+    const float l_vfUp[3] = {m_vCameraUp.x,m_vCameraUp.y,m_vCameraUp.z};
+    l_pD3DEffect->SetFloatArray(m_pCameraUpParameter,l_vfUp,3);
+    m_bCameraUpUpdated = false;
+  }
+  
+  if(m_bCameraRightUpdated)
+  {
+    const float l_vfRight[3] = {m_vCameraRight.x,m_vCameraRight.y,m_vCameraRight.z};
+    l_pD3DEffect->SetFloatArray(m_pCameraRightParameter,l_vfRight,3);
+    m_bCameraRightUpdated = false;
   }
 
   if(m_bViewProjectionMatrixUpdated)

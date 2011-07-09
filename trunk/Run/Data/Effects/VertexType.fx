@@ -260,4 +260,13 @@ struct CAL3D_TANGENT_BITANGENT_HW_VERTEX_VS {
 	float2 TexCoord : TEXCOORD0;
 };
 
+// Partícules --------------------------------------------------------------------------------------------------------------------------
+
+struct PARTICLE_VS {
+	float3 Position : POSITION;
+	float4 Parameters1 : TEXCOORD0; // x, y, z, size
+	float4 Parameters2 : TEXCOORD1; // u, v, angleSin, angleCos
+	float4 Color : COLOR;
+};
+
 #endif

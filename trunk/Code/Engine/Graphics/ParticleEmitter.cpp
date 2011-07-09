@@ -4,6 +4,10 @@
 #include "VertexsStructs.h"
 #include "TextureManager.h"
 #include "ParticleManager.h"
+#include "Effect.h"
+#include "EffectManager.h"
+#include "StaticMeshEmptyMaterial.h"
+#include "DiffuseTextureDecorator.h"
 
 
 CParticleEmitter::CParticleEmitter():
@@ -46,9 +50,12 @@ m_fAgeParticle        (0.0f ),
   m_PointD=(D3DXVECTOR3(0.0f,0.0f,0.0f));*/
 m_bAnimated  ( false),
 m_bActive    ( false),
-m_bActiveAux ( true )
+m_bActiveAux ( true ),
+
+m_InstancedData()
   
 {
+  m_pMaterial = new CStaticMeshEmptyMaterial();
   //TODO inicialitzar els vector de color i temps
 }
 
@@ -63,7 +70,7 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
   m_fMaxSize = _info->m_fMaxSize;
  // m_vSpawnDir1 = _info->m_vSpawnDir1;
  // m_vSpawnDir2 = _info->m_vSpawnDir2;
-  m_pTexParticle = _info->m_pTexParticle;
+  SetTexParticle( _info->m_pTexParticle );
   m_fLife1 = _info->m_fLife1;
   m_fLife2 = _info->m_fLife2;
   m_vColor = _info->m_vColor;
@@ -364,6 +371,11 @@ void CParticleEmitter::Init(CRenderManager* rm)
 			  bIsOk = false;
 		  }
     }
+
+    if(bIsOk)
+    {
+      bIsOk = m_InstancedData.Init(rm, NUMPARTICLES);
+    }
 		  
   }
   
@@ -379,6 +391,7 @@ void CParticleEmitter::Release()
 {
 
   CHECKED_RELEASE(m_vbParticles);
+  CHECKED_DELETE(m_pMaterial);
   
   m_Particles.DeleteAllElements();
   if ( m_vbParticles!= NULL)
@@ -402,14 +415,87 @@ void CParticleEmitter::Release()
   m_vTextureAnimation.clear();
   
 }
+
+void CParticleEmitter::SetTexParticle(CTexture* _pTexParticle)
+{
+  m_pTexParticle = _pTexParticle;
+
   
+  CHECKED_DELETE(m_pMaterial);
+
+  m_pMaterial = new CStaticMeshEmptyMaterial();
+  m_pMaterial = new CDiffuseTextureDecorator(m_pMaterial,m_pTexParticle);
+};
+  
+void CParticleEmitter::RenderHW(CRenderManager* _pRM)
+{
+  CEffectManager* l_pEM = CORE->GetEffectManager();
+
+  assert(l_pEM && l_pEM->IsOk());
+  CEffect* l_pEffect = l_pEM->GetEffect("Particle");
+  CEffect* l_pPrevEffect = l_pEM->GetForcedStaticMeshEffect();
+  l_pEM->SetForcedStaticMeshEffect(l_pEffect);
+
+  //omplim el buffer----------------------------------------------------------------------------------------------------------
+
+  SParticleRenderInfo* l_mBuffer = m_InstancedData.GetBuffer(NUMPARTICLES, _pRM);
+
+  CParticle* l_pParticula = 0;
+  int cont = 0;
+  for (int i =0; i<NUMPARTICLES;i++)
+  {
+    if(!m_Particles.IsFree(i))
+    {
+      l_pParticula = m_Particles.GetAt(i);
+      if(l_pParticula->GetAge() > 0)
+      {
+        l_pParticula->FillInstanceData(&(l_mBuffer[cont]));
+        cont++;
+      }
+
+      //l_mBuffer[cont] = (*l_itInst)->GetMat44().GetD3DXMatrix();
+    }
+  }
+  // Omplim el buffer -----------------------------------------------------------------------------------------
+  bool result = m_InstancedData.SetData(l_mBuffer, cont, _pRM);
+  assert(result);// ---
+
+
+  // renderitzem -----------------------------------------------------------------------------------------------------------------
+
+
+  LPDIRECT3DDEVICE9 l_pDevice = _pRM->GetDevice();
+
+  // Fem els set stream sources
+  l_pDevice->SetStreamSourceFreq(0, (D3DSTREAMSOURCE_INDEXEDDATA  | cont));
+
+  l_pDevice->SetStreamSourceFreq(1, (D3DSTREAMSOURCE_INSTANCEDATA | 1   ));
+
+  result = m_InstancedData.SetStreamSource(_pRM, 1);
+  assert(result);// ---
+
+  //l_it->first->Render(_pRM, true);
+  l_pEffect = l_pEM->ActivateMaterial(m_pMaterial);
+  CORE->GetParticleManager()->GetRenderableVertexs()->Render(_pRM, l_pEffect);
+
+  
+  //TODO al manager tot això
+  l_pDevice->SetStreamSourceFreq(0, 1);
+  l_pDevice->SetStreamSourceFreq(1, 1);
+  l_pEM->SetForcedStaticMeshEffect(l_pPrevEffect);
+
+}
+
 void CParticleEmitter::Render(CRenderManager* _pRM)
 {
   if(!m_bActive)
     return;
 
-  
   _pRM->SetTransform(GetMat44());
+
+  RenderHW(_pRM);
+
+  return;
   
 //POINTSIZE ***************************************************
  /*

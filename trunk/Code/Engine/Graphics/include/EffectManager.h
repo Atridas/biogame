@@ -43,6 +43,8 @@ public:
                     m_bWorldViewMatrixUpdated(false),
                     m_bWorldViewProjectionMatrixUpdated(false),
                     m_bCameraEyeUpdated(false),
+                    m_bCameraUpUpdated(false),
+                    m_bCameraRightUpdated(false),
                     m_bViewProjectionUpdated(false),
                     m_bWorldViewUpdated(false),
                     m_bWorldViewProjectionUpdated(false),
@@ -71,6 +73,8 @@ public:
                     m_pLightsEnabledParameter(0),
                     m_pLightsTypeParameter(0),
                     m_pLightsPositionParameter(0),
+                    m_pCameraUpParameter(0),
+                    m_pCameraRightParameter(0),
                     m_pLightsDirectionParameter(0),
                     m_pLightsAngleParameter(0),
                     m_pLightsColorParameter(0),
@@ -102,6 +106,8 @@ public:
   void SetShadowProjectionMatrix(const Mat44f& _mMatrix) { m_mShadowProjectionMatrix = _mMatrix; m_bLightViewMatrixUpdated=true; };
   
   void SetCameraEye(const Vect3f& _vCameraEye) { m_vCameraEye = _vCameraEye; m_bCameraEyeUpdated=true; };
+  void SetCameraUp(const Vect3f& _vCameraUp) { m_vCameraUp = _vCameraUp; m_bCameraUpUpdated=true; };
+  void SetCameraRight(const Vect3f& _vCameraRight) { m_vCameraRight = _vCameraRight; m_bCameraRightUpdated=true; };
 
   void SetSpecular(bool _bSpecular) {m_bSpecularActive = _bSpecular; m_bSpecularUpdated = true;};
   void SetSpecularParams(float _fGlossiness, float _fSpecularLevel);
@@ -140,7 +146,7 @@ public:
 
   void SetBump(float _fBump) {m_fBump = _fBump; m_bBumpUpdated = true;};
 
-  void ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _mProjectionMatrix, const Vect3f& _vCameraEye);
+  void ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _mProjectionMatrix, const Vect3f& _vCameraEye, const Vect3f& _vCameraUp, const Vect3f& _vCameraRight);
 
   void Begin(void) {m_bLightsUpdated = true; ActivateDefaultRendering();};
   
@@ -183,6 +189,8 @@ private:
   Mat44f m_mWorldViewMatrix;
   Mat44f m_mWorldViewProjectionMatrix;
   Vect3f m_vCameraEye;
+  Vect3f m_vCameraUp;
+  Vect3f m_vCameraRight;
   
   int m_iTextureWidth;
   int m_iTextureHeight;
@@ -199,6 +207,8 @@ private:
   bool m_bWorldViewMatrixUpdated;
   bool m_bWorldViewProjectionMatrixUpdated;
   bool m_bCameraEyeUpdated;
+  bool m_bCameraUpUpdated;
+  bool m_bCameraRightUpdated;
   bool m_bSkeletonUpdated;
   bool m_bTextureWidthHeightUpdated;
   bool m_bPoissonBlurKernelUpdated;
@@ -231,6 +241,8 @@ private:
   D3DXHANDLE m_pWorldViewProjectionMatrixParameter;
   D3DXHANDLE m_pViewToLightProjectionMatrixParameter;
   D3DXHANDLE m_pCameraPositionParameter;
+  D3DXHANDLE m_pCameraUpParameter;
+  D3DXHANDLE m_pCameraRightParameter;
 
   D3DXHANDLE m_pAmbientLight;
   D3DXHANDLE m_pLightsEnabledParameter;

@@ -4,6 +4,7 @@
 
 #define MAXBONES 29
 #define MAXLIGHTS 4
+#define SQRT2     1.414213562373095
 
 // Matrixes
 shared float4x4 g_WorldMatrix : World; 
@@ -53,6 +54,8 @@ float3 g_RadiosityNormalR = { sqrt(2/3) ,  0        , 1/sqrt(3) };
 float3 g_RadiosityNormalG = { -1/sqrt(6),  1/sqrt(2), 1/sqrt(3) };
 float3 g_RadiosityNormalB = { -1/sqrt(6), -1/sqrt(2), 1/sqrt(3) };
 
+
+
 //Shadows
 #define SHADOW_EPSILON 0.0005f
 
@@ -75,6 +78,8 @@ shared bool    g_ShadowEnabled[MAXLIGHTS]     : ShadowEnabled;
 shared bool    g_DynamicObjectsOnly[MAXLIGHTS]: DynamicObjectsOnly;
 
 //Other
+shared float3 g_CameraUp       : CameraUp;
+shared float3 g_CameraRight    : CameraRight;
 shared float3 g_CameraPosition : CameraPosition;
 shared float g_Time : Time;
 shared float g_GlowActive : GlowActive;
