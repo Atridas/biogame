@@ -45,9 +45,18 @@ void CShadowMapRenderToTexture::PreRender(CRenderManager *_pRM, CProcess *_pProc
       Mat44f l_LightViewMatrix = l_pDirLight->GetLightViewMatrix();
       Mat44f l_LightProjectionMatrix = l_pDirLight->GetLightProjectionMatrix();
       Vect3f l_LightPosition = l_pDirLight->GetPosition();
+      Vect3f l_LightRight       = Vect3f(0,1,0) ^ (l_pDirLight->GetDirection()).GetNormalized();
+      if(l_LightRight.SquaredLength() < 0.05f)
+      {
+        l_LightRight       = (l_pDirLight->GetDirection() ^ Vect3f(0,0,1)).GetNormalized();
+      }
+      else
+      {
+        l_LightRight.Normalize();
+      }
+      Vect3f l_LightUp = (l_pDirLight->GetDirection() ^ l_LightRight).GetNormalized();
 
-
-      l_pEffectManager->ActivateCamera(l_LightViewMatrix, l_LightProjectionMatrix, l_LightPosition);
+      l_pEffectManager->ActivateCamera(l_LightViewMatrix, l_LightProjectionMatrix, l_LightPosition,l_LightUp,l_LightRight);
       l_pEffectManager->SetShadowProjectionMatrix(l_LightProjectionMatrix);
       l_pEffectManager->SetLightViewMatrix(l_LightViewMatrix);
       m_pTexture->SetAsRenderTarget();

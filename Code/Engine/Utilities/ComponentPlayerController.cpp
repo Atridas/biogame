@@ -168,7 +168,7 @@ void CComponentPlayerController::Die()
   CComponentRagdoll *l_pRC = GetEntity()->GetComponent<CComponentRagdoll>();
   if(!l_pRC)
   {
-    if(!(l_pRC = CComponentRagdoll::AddToEntity(GetEntity(), "Data/Animated Models/Riggle/Skeleton.xml")))
+    if(!(l_pRC = CComponentRagdoll::AddToEntity(GetEntity(), "Data/Animated Models/Riggle/Skeleton.xml",ECG_OBJECTES_DINAMICS)))
     {
       return;
     }

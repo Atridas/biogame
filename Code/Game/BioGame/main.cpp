@@ -11,7 +11,7 @@
 #include "Utils/MemLeaks.h" 
 #endif
 
-#define APPLICATION_NAME	"SAUNA EON"
+#define APPLICATION_NAME	"BIOGAME"
 
 void ShowErrorMessage (const std::string& message);
 

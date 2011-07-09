@@ -100,9 +100,6 @@
     <Filter Include="SceneEffects\HDR Pipeline">
       <UniqueIdentifier>{9fed3f9b-f795-408e-a3a8-28924e5f726e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="RenderableObject\InstancedData">
-      <UniqueIdentifier>{46fa5196-5f97-4c66-a85a-0f318061bed4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Particle">
       <UniqueIdentifier>{71afdec6-0767-4def-9a85-eafdbf63f3e9}</UniqueIdentifier>
     </Filter>
@@ -201,6 +198,9 @@
     </Filter>
     <Filter Include="Cameras\SphereCamera">
       <UniqueIdentifier>{185d838f-fd40-4824-b803-ef242acee42d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vertex\InstancedData">
+      <UniqueIdentifier>{46fa5196-5f97-4c66-a85a-0f318061bed4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -441,7 +441,7 @@
       <Filter>SceneEffects\HDR Pipeline</Filter>
     </ClInclude>
     <ClInclude Include="include\InstancedData.h">
-      <Filter>RenderableObject\InstancedData</Filter>
+      <Filter>Vertex\InstancedData</Filter>
     </ClInclude>
     <ClInclude Include="include\Particle.h">
       <Filter>Particle</Filter>

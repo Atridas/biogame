@@ -568,15 +568,37 @@ private:
 struct SPARTICLE_VERTEX
 {
   float   x, y, z;
-  float   pointsize;
-  uint32  color;
 
+  static inline unsigned short GetVertexType()
+  {
+    return VERTEX_TYPE_GEOMETRY;
+  }
+
+ /**
+   * Getter del tipus de vèrtex.
+   * @return El tipus del vèrtex segons la codificació de DirectX9.
+  **/
   static inline unsigned int GetFVF()
   {
-    return D3DFVF_XYZ|D3DFVF_DIFFUSE|D3DFVF_PSIZE;
+    return D3DFVF_XYZ;
   }
+
+  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+  static LPDIRECT3DVERTEXDECLARATION9& GetInstancedVertexDeclaration();
+
+  static void ReleaseVertexDeclaration()
+  {
+    CHECKED_RELEASE(s_VertexDeclaration);
+    CHECKED_RELEASE(s_VertexInstancedDeclaration);
+  }
+
+private:
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexInstancedDeclaration;
 };
 
+
+/// ----------------------------------------------------------------------------------------------------------------
 struct VERTEX_TEXTURED
 {
 	float x, y, z;

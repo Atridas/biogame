@@ -8,6 +8,8 @@
 #include "Camera.h"
 #include "Texture.h"
 
+struct SParticleRenderInfo;
+
 class CParticle
 {
 public:
@@ -25,7 +27,7 @@ public:
   void SetGravity           (const Vect3f& _vGravity)    {m_vGravity = _vGravity;};
   void SetTexParticle       (CTexture* _pTexParticle)               {m_pTexParticle = _pTexParticle;};
   void SetAngle             (float _fAngle)                         {m_fAngle = _fAngle;};
-  void SetInitAngle         (float _iIncrementAngle)          {m_iIncrementAngle = _iIncrementAngle;};
+  void SetInitAngle         (float _fIncrementAngle)          {m_fIncrementAngle = _fIncrementAngle;};
   //void SetSize	            ( const float sizeX, const float sizeY ) {m_fSizeX = sizeX; m_fSizeY = sizeY;}
   void SetPointA            (const Vect3f& _pointA)      {m_PointA=_pointA;};
   void SetPointB            (const Vect3f& _pointB)      {m_PointB=_pointB;};
@@ -70,6 +72,8 @@ public:
   float GetCV                     () const              {return m_fCV;};
   float GetDU                     () const              {return m_fDU;};
   float GetDV                     () const              {return m_fDV;};
+
+  void  FillInstanceData          (SParticleRenderInfo*);
  
 
   int   GetNumFiles               () const              {return m_iTexNumFiles;};
@@ -77,6 +81,7 @@ public:
   float GetTimeAnimationDiapo     () const              {return m_fTimeAnimationDiapo;};
   bool  GetAnimated               () const              {return m_bAnimated;};
   
+  bool          IsAlive           () const              { return m_fAge < m_fLifetime; };
   
   virtual bool  Update               (float _fDeltaTime, CCamera* _pCamera, bool _bComputeBillboard = true);
   //void  Render	             (LPDIRECT3DDEVICE9 device, CTexture* texture);
@@ -112,7 +117,7 @@ private:
   Vect3f            m_vVel;
   Vect3f            m_vGravity;
   float             m_fAngle;
-  float             m_iIncrementAngle;
+  float             m_fIncrementAngle;
   Vect3f            m_vPos;
   // float             m_fSizeX;
   //float             m_fSizeY;

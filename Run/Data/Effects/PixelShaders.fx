@@ -99,6 +99,13 @@ float4 NormalTexturedPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
   return out_;
 }
 
+float4 DiffuseTexturedPS(TTEXTURED_DIFFUSSED_VERTEX_PS _in) : COLOR {
+
+  float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
+  
+  return l_DiffuseColor * _in.Color;
+}
+
 float4 TexturedPS(TTEXTURED_VERTEX_PS _in) : COLOR {
 
   float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);

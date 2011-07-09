@@ -11,8 +11,18 @@
 #include "RenderManager.h"
 #include <XML/XMLTreeNode.h>
 #include "Camera.h"
+#include "InstancedData.h"
+
+class CMaterial;
 
 struct SParticleInfo;
+
+struct SParticleRenderInfo 
+{
+  float x, y, z, size;
+  float u, v, angleSin, angleCos;
+  uint32 color;
+};
 
 
 class CParticleEmitter:
@@ -39,7 +49,7 @@ public:
   void SetMaxSize           (float _fMaxSize)                       {m_fMaxSize = _fMaxSize;};
   void SetSpawnDir1         (Vect3f&      _vSpawnDir1)              {m_vSpawnDir1 = _vSpawnDir1;};
   void SetSpawnDir2         (Vect3f&      _vSpawnDir2)              {m_vSpawnDir2 = _vSpawnDir2;};
-  void SetTexParticle       (CTexture* _pTexParticle)               {m_pTexParticle = _pTexParticle;};
+  void SetTexParticle       (CTexture* _pTexParticle);
   void SetNumNewPartsExcess (float _fNumNewPartsExcess)             {m_fNumNewPartsExcess = _fNumNewPartsExcess;};
   void SetParticle          (LPDIRECT3DVERTEXBUFFER9 _vbParticles)  {m_vbParticles = _vbParticles;};
   void SetActive            (bool _Active)                          {m_bActive = _Active;};
@@ -90,6 +100,10 @@ public:
 
   
 private:
+
+  void                                      RenderHW(CRenderManager* _pRM);
+
+
   string                                    m_szName;
   string                                    m_szId;
   string									                  m_szFormEmitter; // forma del emissor
@@ -113,6 +127,8 @@ private:
   vector<D3DXCOLOR>                         m_vNewColor;
   vector<float>                             m_vTimeColor;
   vector<float>                             m_vTimeColorInterpolation;
+
+  CInstancedData<SParticleRenderInfo>       m_InstancedData;
 
   vector<float>                             m_vSize;
   vector<float>                             m_vNewSize;
@@ -152,7 +168,7 @@ private:
   D3DXVECTOR3            m_PointB;
   D3DXVECTOR3            m_PointC; 
   D3DXVECTOR3            m_PointD;*/
-
+  CMaterial*                                m_pMaterial;
 };
 
 

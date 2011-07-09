@@ -9,6 +9,7 @@
 #include "params.h"
 #include <Utils/MapManager.h>
 #include "Camera.h"
+#include "RenderableVertexs.h"
 
 class CRenderManager;
 
@@ -87,7 +88,7 @@ public:
   CParticleEmitter* GetParticleEmitter(const string& _szName);
   void SetAllEmittersActive(bool _bActive);
  
-
+  CRenderableVertexs* GetRenderableVertexs() {return m_pParticleVertex;};
 
 private:
   string                    m_szFileName;
@@ -107,5 +108,6 @@ private:
    float				            m_fSizeY;
    float				            m_fSizeZ;
 
+   CRenderableVertexs*      m_pParticleVertex;
 };
 #endif

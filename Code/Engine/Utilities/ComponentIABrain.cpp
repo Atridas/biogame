@@ -119,7 +119,7 @@ void CComponentIABrain::Die()
   CComponentRagdoll *l_pRC = GetEntity()->GetComponent<CComponentRagdoll>();
   if(!l_pRC)
   {
-    if(!(l_pRC = CComponentRagdoll::AddToEntity(GetEntity(), m_szRagdollName)))
+    if(!(l_pRC = CComponentRagdoll::AddToEntity(GetEntity(), m_szRagdollName, ECG_OBJECTES_DINAMICS)))
     {
       return;
     }

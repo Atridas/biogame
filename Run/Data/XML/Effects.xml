@@ -2,29 +2,31 @@
 <shaders>
   <effects>
 
-    <effect name="Diffused" texture_mask="0" file="Data/Effects/NormalDiffusedEffect.fx" technique="NormalDiffusedTechnique" />
-    <effect name="Textured" texture_mask="2" file="Data/Effects/NormalTexturedEffect.fx" technique="NormalTexturedTechnique" alpha_technique="NormalTexturedAlphaTechnique" />
-    <effect name="Normalmap" texture_mask="6" file="Data/Effects/TangentBinormalNormalTexturedEffect.fx" technique="TangentBinormalNormalTexturedTechnique" />
-    <effect name="SpecularTextured" texture_mask="18" file="Data/Effects/SpecularTexturedEffect.fx" technique="SpecularTexturedTechnique" />
-    <effect name="SpecularNormalmapTextured" texture_mask="22" file="Data/Effects/SpecularNormalmapTexturedEffect.fx" technique="SpecularNormalmapTexturedTechnique" />
-    <effect name="SpecularLightmapTextured" texture_mask="26" file="Data/Effects/SpecularLightmapTexturedEffect.fx" technique="SpecularLightmapTexturedTechnique" />
-    <effect name="SpecularLightmapNormalmapTextured" texture_mask="30" file="Data/Effects/SpecularLightmapNormalmapTexturedEffect.fx" technique="SpecularLightmapNormalmapTexturedTechnique" />
-    <effect name="SpecularRadiosityNormalmapTexturedTechnique" texture_mask="150" file="Data/Effects/SpecularRadiosityNormalmapTexturedTechnique.fx" technique="SpecularRadiosityNormalmapTexturedTechnique" />
-    <effect name="Lightmap" texture_mask="10" file="Data/Effects/LightmapNormalTexturedEffect.fx" technique="LightmapTechnique" />
-    <effect name="LightmapNormalmap" texture_mask="14" file="Data/Effects/LightmapNormalmapNormalTexturedEffect.fx" technique="LightmapNormalmapTechnique" />
-    <effect name="RadiosityNormalmap" texture_mask="134" file="Data/Effects/RadiosityNormalMap.fx" technique="RadiosityNormalmapTechnique" />
-    <effect name="White" texture_mask="0" file="Data/Effects/WhiteEffect.fx" technique="WhiteTechnique" instanced_technique="WhiteInstancedTechnique" />
-    <effect name="No" texture_mask="0" file="Data/Effects/NoEffect.fx" technique="NoTechnique" />
-    <!-- Animats -->
-    <effect name="AnimatedTextured" texture_mask="2" file="Data/Effects/AnimatedNormalTexturedEffect.fx" technique="Cal3DTechnique" />
-    <effect name="AnimatedNormalmap" texture_mask="6" file="Data/Effects/AnimatedTangentBinormalNormalTexturedEffect.fx" technique="Cal3DNormalMapTechnique" />
-    <effect name="AnimatedSpecularNormalmapTextured" texture_mask="22" file="Data/Effects/AnimatedSpecularNormalmapTexturedEffect.fx" technique="AnimatedSpecularNormalmapTexturedTechnique" />
-    <effect name="AnimatedShowNormals" texture_mask="0" file="Data/Effects/AnimatedShowNormalsEffect.fx" technique="Cal3dShowNormalsTechnique" />
-    <effect name="AnimatedShowNormalmap" texture_mask="4" file="Data/Effects/AnimatedShowNormalmapEffect.fx" technique="Cal3dShowNormalmapTechnique" />
+  <effect name="Diffused" texture_mask="0" file="Data/Effects/NormalDiffusedEffect.fx" technique="NormalDiffusedTechnique" />
+  <effect name="Textured" texture_mask="2" file="Data/Effects/NormalTexturedEffect.fx" technique="NormalTexturedTechnique" alpha_technique="NormalTexturedAlphaTechnique" />
+  <effect name="Normalmap" texture_mask="6" file="Data/Effects/TangentBinormalNormalTexturedEffect.fx" technique="TangentBinormalNormalTexturedTechnique" />
+  <effect name="SpecularTextured" texture_mask="18" file="Data/Effects/SpecularTexturedEffect.fx" technique="SpecularTexturedTechnique" />
+  <effect name="SpecularNormalmapTextured" texture_mask="22" file="Data/Effects/SpecularNormalmapTexturedEffect.fx" technique="SpecularNormalmapTexturedTechnique" />
+  <effect name="SpecularLightmapTextured" texture_mask="26" file="Data/Effects/SpecularLightmapTexturedEffect.fx" technique="SpecularLightmapTexturedTechnique" />
+  <effect name="SpecularLightmapNormalmapTextured" texture_mask="30" file="Data/Effects/SpecularLightmapNormalmapTexturedEffect.fx" technique="SpecularLightmapNormalmapTexturedTechnique" />
+  <effect name="SpecularRadiosityNormalmapTexturedTechnique" texture_mask="150" file="Data/Effects/SpecularRadiosityNormalmapTexturedTechnique.fx" technique="SpecularRadiosityNormalmapTexturedTechnique" />
+  <effect name="Lightmap" texture_mask="10" file="Data/Effects/LightmapNormalTexturedEffect.fx" technique="LightmapTechnique" />
+  <effect name="LightmapNormalmap" texture_mask="14" file="Data/Effects/LightmapNormalmapNormalTexturedEffect.fx" technique="LightmapNormalmapTechnique" />
+  <effect name="RadiosityNormalmap" texture_mask="134" file="Data/Effects/RadiosityNormalMap.fx" technique="RadiosityNormalmapTechnique" />
+  <effect name="White" texture_mask="0" file="Data/Effects/WhiteEffect.fx" technique="WhiteTechnique" instanced_technique="WhiteInstancedTechnique" />
+  <effect name="No" texture_mask="0" file="Data/Effects/NoEffect.fx" technique="NoTechnique" />
+  <!-- Animats -->
+  <effect name="AnimatedTextured" texture_mask="2" file="Data/Effects/AnimatedNormalTexturedEffect.fx" technique="Cal3DTechnique" />
+  <effect name="AnimatedNormalmap" texture_mask="6" file="Data/Effects/AnimatedTangentBinormalNormalTexturedEffect.fx" technique="Cal3DNormalMapTechnique" />
+  <effect name="AnimatedSpecularNormalmapTextured" texture_mask="22" file="Data/Effects/AnimatedSpecularNormalmapTexturedEffect.fx" technique="AnimatedSpecularNormalmapTexturedTechnique" />
+  <effect name="AnimatedShowNormals" texture_mask="0" file="Data/Effects/AnimatedShowNormalsEffect.fx" technique="Cal3dShowNormalsTechnique" />
+  <effect name="AnimatedShowNormalmap" texture_mask="4" file="Data/Effects/AnimatedShowNormalmapEffect.fx" technique="Cal3dShowNormalmapTechnique" />
 	<effect name="AnimatedShowTangent" texture_mask="4" file="Data/Effects/AnimatedShowTangentEffect.fx" technique="Cal3dShowTangentTechnique" />
 	<effect name="AnimatedShowFlatNormalmap" texture_mask="4" file="Data/Effects/AnimatedShowFlatNormalmapEffect.fx" technique="Cal3dShowFlatNormalmapTechnique" />
 	<effect name="AnimatedShowBitangent" texture_mask="4" file="Data/Effects/AnimatedShowBitangentEffect.fx" technique="Cal3dShowBitangentTechnique" />
 	<effect name="AnimatedShowUVCoords" texture_mask="0" file="Data/Effects/AnimatedShowUVCoordsEffect.fx" technique="Cal3dShowUVCoordsTechnique" />
+  <!-- Particules -->
+  <effect name="Particle" texture_mask="2" file="Data/Effects/ParticleEffect.fx" technique="ParticleTechnique" />
 	
     <!-- Show -->
     <effect name="ShowNormals" texture_mask="0" file="Data/Effects/ShowNormalsEffect.fx" technique="ShowNormalsTechnique" />
