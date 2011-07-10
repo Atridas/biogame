@@ -125,7 +125,7 @@ void CEntityProcess::RenderINFO(CRenderManager* _pRM)
   if(CORE->GetActionManager()->IsActionActive("ToggleDebug"))
   {
     CORE->GetPhysicsManager()->DebugRender(_pRM);
-    //m_PortalManager.DebugRender(_pRM);
+    CORE->GetPortalManager()->DebugRender(_pRM);
 
     CFrustum l_Frustum;
     l_Frustum.Update(m_pCamera);

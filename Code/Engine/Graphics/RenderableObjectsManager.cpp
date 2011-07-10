@@ -182,10 +182,6 @@ CRenderableObject* CRenderableObjectsManager::AddMeshInstance(
   }
 
   AddResource(_szInstanceName, l_pInstanceMesh);
-  if(CORE->GetPortalManager()->IsOk())
-  {
-    CORE->GetPortalManager()->InsertRenderableObject(l_pInstanceMesh);
-  }
 
   AddHWStaticInstance(l_pInstanceMesh);
 
@@ -213,10 +209,6 @@ CRenderableObject* CRenderableObjectsManager::AddAnimatedModel(
   }
 
   AddResource(_szInstanceName, l_pAnimatedModel);
-  if(CORE->GetPortalManager()->IsOk())
-  {
-    CORE->GetPortalManager()->InsertRenderableObject(l_pAnimatedModel);
-  }
   return l_pAnimatedModel;
 }
 
@@ -224,6 +216,10 @@ void CRenderableObjectsManager::AddResource(const string& _szName, CRenderableOb
 {
   CMapManager::AddResource(_szName,_pRenderableObject);
   m_RenderableObjects.push_back(_pRenderableObject);
+  if(CORE->GetPortalManager()->IsOk())
+  {
+    CORE->GetPortalManager()->InsertRenderableObject(_pRenderableObject);
+  }
 }
 
 void CRenderableObjectsManager::RemoveResource(const string& _szName)

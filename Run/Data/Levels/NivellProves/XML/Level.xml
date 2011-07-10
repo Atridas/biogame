@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Level>
   <Rooms>
-    <Room undefined="true">
-      <Boundings>
-      </Boundings>
-      <Objects>
-      </Objects>
-    </Room>
-    <Room undefined="false" name="Room3">
+    <Room name="Room3">
       <Boundings>
         <Box name="DummyRoom3" size="40.4178 18.3362 127.458" position="50.9588 0.0 -4.06221" yaw="0.0" pitch="0.0" roll="0.0" />
       </Boundings>
@@ -15,7 +9,7 @@
         <GameObject name="Habitacio3" />
       </Objects>
     </Room>
-    <Room undefined="false" name="Room2">
+    <Room name="Room2">
       <Boundings>
         <Box name="DummyRoom2" size="70.3198 21.4648 104.844" position="-4.52313 0.0 0.428096" yaw="0.0" pitch="0.0" roll="0.0" />
       </Boundings>
@@ -46,7 +40,7 @@
         <GameObject name="CaixaPetita16" />
       </Objects>
     </Room>
-    <Room undefined="false" name="Room1">
+    <Room name="Room1">
       <Boundings>
         <Box name="DummyRoom1" size="34.6099 10.5069 106.106" position="-56.1092 0.0 -0.902355" yaw="0.0" pitch="0.0" roll="0.0" />
       </Boundings>
