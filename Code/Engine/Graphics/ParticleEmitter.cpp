@@ -430,11 +430,7 @@ void CParticleEmitter::SetTexParticle(CTexture* _pTexParticle)
 void CParticleEmitter::RenderHW(CRenderManager* _pRM)
 {
   CEffectManager* l_pEM = CORE->GetEffectManager();
-
   assert(l_pEM && l_pEM->IsOk());
-  CEffect* l_pEffect = l_pEM->GetEffect("Particle");
-  CEffect* l_pPrevEffect = l_pEM->GetForcedStaticMeshEffect();
-  l_pEM->SetForcedStaticMeshEffect(l_pEffect);
 
   //omplim el buffer----------------------------------------------------------------------------------------------------------
 
@@ -475,14 +471,8 @@ void CParticleEmitter::RenderHW(CRenderManager* _pRM)
   assert(result);// ---
 
   //l_it->first->Render(_pRM, true);
-  l_pEffect = l_pEM->ActivateMaterial(m_pMaterial);
+  CEffect* l_pEffect = l_pEM->ActivateMaterial(m_pMaterial);
   CORE->GetParticleManager()->GetRenderableVertexs()->Render(_pRM, l_pEffect);
-
-  
-  //TODO al manager tot això
-  l_pDevice->SetStreamSourceFreq(0, 1);
-  l_pDevice->SetStreamSourceFreq(1, 1);
-  l_pEM->SetForcedStaticMeshEffect(l_pPrevEffect);
 
 }
 
@@ -493,10 +483,9 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
 
   _pRM->SetTransform(GetMat44());
 
+#ifdef __PARTICLE_VIA_SHADER__
   RenderHW(_pRM);
-
-  return;
-  
+#else
 //POINTSIZE ***************************************************
  /*
   float l_fPointSize    = 100.0f;
@@ -615,5 +604,5 @@ void CParticleEmitter::Render(CRenderManager* _pRM)
   l_pd3dDevice->SetStreamSource( 0, m_vbParticles,0, sizeof(VERTEX_TEXTURED));// no se si serveix aki
   l_pd3dDevice->SetFVF(D3DFVF_XYZ|D3DFVF_DIFFUSE|D3DFVF_TEX1);
   l_pd3dDevice->DrawIndexedPrimitiveUP(D3DPT_TRIANGLELIST,0,4*l_cont,2*l_cont,l_Indexes,D3DFMT_INDEX16,l_Points,sizeof(VERTEX_TEXTURED));
- 
+#endif
 }

@@ -269,17 +269,16 @@ void CParticle::UpdateBillboard(CCamera* _pCamera)
   }
 }
 
-bool CParticle::Update(float _fDeltaTime, CCamera* _pCamera, bool _bComputeBillboard)
+bool CParticle::Update(float _fDeltaTime, CCamera* _pCamera)
 {
   if(!UpdateState(_fDeltaTime))
   {
     return false;
   }
 
-  if(_bComputeBillboard)
-  {
-    UpdateBillboard(_pCamera);
-  }
+#ifndef __PARTICLE_VIA_SHADER__
+  UpdateBillboard(_pCamera);
+#endif
   
   return true;
 }

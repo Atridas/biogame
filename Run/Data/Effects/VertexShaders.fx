@@ -255,13 +255,13 @@ TTEXTURED_DIFFUSSED_VERTEX_PS ParticleVS(PARTICLE_VS _in)
   
   if( sign(_in.Position.x) == sign(_in.Position.y) )
   {
-    l_Right = _in.Position.x * SQRT2 * _in.Parameters2.z * _in.Parameters1.w * g_CameraRight;
-    l_Up    = _in.Position.y * SQRT2 * _in.Parameters2.w * _in.Parameters1.w * g_CameraUp;
-  }
-  else
-  {
-    l_Right = _in.Position.x * SQRT2 * _in.Parameters2.w * _in.Parameters1.w * g_CameraRight;
-    l_Up    = _in.Position.y * SQRT2 * _in.Parameters2.z * _in.Parameters1.w * g_CameraUp;
+    l_Right = _in.Position.x * _in.Parameters2.z * _in.Parameters1.w * g_CameraRight;
+    l_Up    = _in.Position.y * _in.Parameters2.w * _in.Parameters1.w * g_CameraUp;   
+  }                                                                                  
+  else                                                                               
+  {                                                                                  
+    l_Right = _in.Position.x * _in.Parameters2.w * _in.Parameters1.w * g_CameraRight;
+    l_Up    = _in.Position.y * _in.Parameters2.z * _in.Parameters1.w * g_CameraUp;   
   }
   
   l_WorldPos = l_WorldPos + l_Right + l_Up;
