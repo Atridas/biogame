@@ -2,12 +2,12 @@ global MATERIAL_INFO_VERTEXTYPE   = 0X0001
 global MATERIAL_INFO_TEXTURETYPE = 0x0002
 
 global VERTEX_TYPE_GEOMETRY        = 0x0001
-global VERTEX_TYPE_NORMAL            = 0x0002
+global VERTEX_TYPE_NORMAL           = 0x0002
 global VERTEX_TYPE_TANGENT          = 0x0004
 global VERTEX_TYPE_BINORMAL         = 0x0008
 global VERTEX_TYPE_TEXTURE1         = 0x0010
 global VERTEX_TYPE_TEXTURE2         = 0x0020
-global VERTEX_TYPE_DIFFUSE           = 0x0040
+global VERTEX_TYPE_DIFFUSE            = 0x0040
                                  
 /*                                 
 global TEXTURE_TYPE_DIFFUSSE        = 0X0001

@@ -2,7 +2,16 @@
 #include "RenderManager.h"
 #include "RenderableObjectsManager.h"
 #include "Core.h"
+#include "Portal.h"
+#include "PortalManager.h"
 
+
+bool CRoom::Init()
+{
+  SetName("undefinded");
+  SetOk(true);
+  return IsOk();
+}
 
 bool CRoom::Init(CXMLTreeNode& _xmlRoom, set<string>& _UsedNames)
 {
@@ -99,6 +108,7 @@ bool CRoom::Init(CXMLTreeNode& _xmlRoom, set<string>& _UsedNames)
     }
   }
 
+
   SetOk(true);
   return IsOk();
 }
@@ -132,25 +142,95 @@ void CRoom::Render(CRenderManager* _pRM, const CFrustum& _Frustum, TBlendQueue& 
   }
 }
 
+void CRoom::Update(CPortalManager* _pPM)
+{
+  set<CRenderableObject*> l_Remove;
+  {
+    set<CRenderableObject*>::const_iterator l_it  = m_RenderableObjects.cbegin();
+    set<CRenderableObject*>::const_iterator l_end = m_RenderableObjects.cend();
+    for(; l_it != l_end; ++l_it)
+    {
+      CRenderableObject* l_pRenderableObject = *l_it;
+
+      if(m_Boundings.size() != 0)
+      {
+        //som en una habitació
+        if(!IsObject3DSphereInRoom(l_pRenderableObject))
+        {
+          l_Remove.insert(l_pRenderableObject);
+
+          vector<CPortal*>::const_iterator l_it = m_Portals.cbegin();
+          vector<CPortal*>::const_iterator l_end = m_Portals.cend();
+          for(; l_it != l_end; ++l_it)
+          {
+            CPortal* l_pPortal = *l_it;
+            CRoom*   l_pOtherRoom = (l_pPortal->GetRoomA() == this) ? l_pPortal->GetRoomB() : l_pPortal->GetRoomA();
+            if(l_pOtherRoom->IsObject3DSphereInRoom(l_pRenderableObject))
+            {
+              l_pOtherRoom->AddRendeableObject(l_pRenderableObject);
+              goto FI_BUCLE_RENDERABLE_OBJECTS; //Moriu tots
+            }
+          }
+          _pPM->InsertRenderableObject(l_pRenderableObject);
+        }
+      }
+      else
+      {
+        //Som a undefined
+        set<string>::const_iterator l_it  = _pPM->GetRoomNames().cbegin();
+        set<string>::const_iterator l_end = _pPM->GetRoomNames().cend();
+        for(; l_it != l_end; ++l_it)
+        {
+          CRoom* l_pOtherRoom = _pPM->GetRoom(*l_it);
+          if(l_pOtherRoom->IsObject3DSphereInRoom(l_pRenderableObject))
+          {
+            l_pOtherRoom->AddRendeableObject(l_pRenderableObject);
+            l_Remove.insert(l_pRenderableObject);
+            goto FI_BUCLE_RENDERABLE_OBJECTS; //Moriu tots
+          }
+        }
+      }
+      FI_BUCLE_RENDERABLE_OBJECTS:;
+    }
+  }
+  {
+    set<CRenderableObject*>::iterator l_it  = l_Remove.begin();
+    set<CRenderableObject*>::iterator l_end = l_Remove.end();
+    for(; l_it != l_end; ++l_it)
+    {
+      m_RenderableObjects.erase(*l_it);
+    }
+  }
+}
+
 void CRoom::AddRendeableObject(CRenderableObject* _pRO)
 {
   m_RenderableObjects.insert(_pRO);
 }
 
-void CRoom::RemoveRendeableObject(CRenderableObject* _pRO)
+bool CRoom::RemoveRendeableObject(CRenderableObject* _pRO)
 {
-  m_RenderableObjects.erase(_pRO);
+  set<CRenderableObject*>::iterator l_it = m_RenderableObjects.find(_pRO);
+  if(l_it != m_RenderableObjects.end())
+  {
+    m_RenderableObjects.erase(l_it);
+    return true;
+  }
+  else
+  {
+    return false;
+  }
 }
 
-bool CRoom::IsObject3DSphereInRoom(const CObject3D& _Object3D) const
+bool CRoom::IsObject3DSphereInRoom(const CObject3D* _pObject3D) const
 {
   vector<CObject3D>::const_iterator l_it  = m_Boundings.cbegin();
   vector<CObject3D>::const_iterator l_end = m_Boundings.cend();
 
-  Mat44f l_matObject = _Object3D.GetMat44();
+  Mat44f l_matObject = _pObject3D->GetMat44();
   
-  Vect3f l_vCenterObject = _Object3D.GetBoundingSphere()->GetMiddlePoint();
-  float  l_fRadius       = _Object3D.GetBoundingSphere()->GetRadius();
+  Vect3f l_vCenterObject = _pObject3D->GetBoundingSphere()->GetMiddlePoint();
+  float  l_fRadius       = _pObject3D->GetBoundingSphere()->GetRadius();
 
   Vect4f l_aux = l_matObject * Vect4f(l_vCenterObject.x, l_vCenterObject.y, l_vCenterObject.z, 1);
   l_vCenterObject.x = l_aux.x / l_aux.w;
