@@ -4,6 +4,7 @@
 #include "RenderManager.h"
 #include "IndexedVertexs.h"
 #include "VertexsStructs.h"
+#include "EffectManager.h"
 
 CParticleManager::CParticleManager():
 m_pParticleVertex(0)
@@ -389,21 +390,24 @@ void CParticleManager::Update(const float _fElapsedTime, CCamera* camera)
 
 void CParticleManager::Render(CRenderManager* _pRM)
 {
-  /*Mat44f l_mat;
-  l_mat.SetIdentity();
-  _pRM->SetTransform(l_mat);*/
-
   LPDIRECT3DDEVICE9 l_pd3dDevice = _pRM->GetDevice();
+
+#ifdef __PARTICLE_VIA_SHADER__
+  CEffectManager* l_pEM = CORE->GetEffectManager();
+
+  assert(l_pEM && l_pEM->IsOk());
+  CEffect* l_pEffect = l_pEM->GetEffect("Particle");
+  CEffect* l_pPrevEffect = l_pEM->GetForcedStaticMeshEffect();
+  l_pEM->SetForcedStaticMeshEffect(l_pEffect);
+#else
   _pRM->EnableAlphaBlend();
-  //l_pd3dDevice->SetRenderState( D3DRS_POINTSPRITEENABLE, TRUE );
-  //l_pd3dDevice->SetRenderState( D3DRS_POINTSCALEENABLE,  TRUE );
   l_pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );
   l_pd3dDevice->SetRenderState( D3DRS_SRCBLEND, D3DBLEND_SRCALPHA );
   l_pd3dDevice->SetRenderState( D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA );
   
   l_pd3dDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
   l_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
-
+#endif
 
   vector<CParticleEmitter*>::iterator it  = m_vEmitterParticle.begin(),
                                       end = m_vEmitterParticle.end();
@@ -412,6 +416,13 @@ void CParticleManager::Render(CRenderManager* _pRM)
     (*it)->Render(_pRM);
     ++it;
   }
+
+  
+#ifdef __PARTICLE_VIA_SHADER__
+  l_pd3dDevice->SetStreamSourceFreq(0, 1);
+  l_pd3dDevice->SetStreamSourceFreq(1, 1);
+  l_pEM->SetForcedStaticMeshEffect(l_pPrevEffect);
+#endif
 }
 
 void CParticleManager::Init(CRenderManager* _pRM)

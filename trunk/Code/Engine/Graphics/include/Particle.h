@@ -8,6 +8,8 @@
 #include "Camera.h"
 #include "Texture.h"
 
+#define __PARTICLE_VIA_SHADER__
+
 struct SParticleRenderInfo;
 
 class CParticle
@@ -83,7 +85,7 @@ public:
   
   bool          IsAlive           () const              { return m_fAge < m_fLifetime; };
   
-  virtual bool  Update               (float _fDeltaTime, CCamera* _pCamera, bool _bComputeBillboard = true);
+  virtual bool  Update               (float _fDeltaTime, CCamera* _pCamera);
   //void  Render	             (LPDIRECT3DDEVICE9 device, CTexture* texture);
   virtual void  Release              ();
 
