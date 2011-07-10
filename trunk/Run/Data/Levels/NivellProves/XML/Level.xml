@@ -41,6 +41,9 @@
         <GameObject name="Llum" />
         <GameObject name="CaixaPetita12" />
         <GameObject name="CaixaPetita13" />
+        <GameObject name="CaixaPetita14" />
+        <GameObject name="CaixaPetita15" />
+        <GameObject name="CaixaPetita16" />
       </Objects>
     </Room>
     <Room undefined="false" name="Room1">

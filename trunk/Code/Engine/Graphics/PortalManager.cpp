@@ -19,7 +19,7 @@ bool CPortalManager::Init(const string& _szFileName)
   else
   {
     SetOk(false);
-    LOGGER->AddNewLog(ELL_ERROR, "CPortalManager::Init file \"%s\" not found or incorrect.");
+    LOGGER->AddNewLog(ELL_ERROR, "CPortalManager::Init file \"%s\" not found or incorrect.", _szFileName.c_str());
   }
 
   return IsOk();
@@ -33,9 +33,17 @@ bool CPortalManager::Init(CXMLTreeNode& _xmlLevel)
   LOGGER->AddNewLog(ELL_INFORMATION, "CPortalManager::Init");
 
   {
-    CXMLTreeNode l_xmlRooms = _xmlLevel["Rooms"];
+    /*CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
+    int l_iROn = l_pROM->GetRenderableVectorSize();
+    for(int i = 0; i < l_iROn; ++i)
+    {
+      CRenderableObject* l_pRO = l_pROM->GetRenderableObject(i);
+      m_UnlocatedROs.insert( l_pRO );
+    }*/
 
-    set<string> _UsedGameObjects;
+
+    CXMLTreeNode l_xmlRooms = _xmlLevel["Rooms"];
+    set<string> l_UsedGameObjects;
 
     if(l_xmlRooms.Exists())
     {
@@ -47,15 +55,15 @@ bool CPortalManager::Init(CXMLTreeNode& _xmlLevel)
         CXMLTreeNode l_xmlRoom = l_xmlRooms(i);
         if(strcmp(l_xmlRoom.GetName(), "Room") == 0)
         {
-          bool l_bUndefined = l_xmlRoom.GetBoolProperty("undefined",false,false);
-          string l_szName = l_xmlRoom.GetPszISOProperty("name", "undefined", !l_bUndefined);
+          string l_szName = l_xmlRoom.GetPszISOProperty("name", "undefined", true);
 
           if(m_Rooms.find(l_szName) == m_Rooms.end())
           {
             CRoom l_Room;
-            if(l_Room.Init(l_xmlRoom, _UsedGameObjects))
+            if(l_Room.Init(l_xmlRoom, l_UsedGameObjects))
             {
               m_Rooms[l_szName] = l_Room;
+              m_RoomNames.insert(l_szName);
             }
             else
             {
@@ -232,6 +240,18 @@ void RenderPortals(
   }
 }
 
+void CPortalManager::Update()
+{
+  map<string,CRoom>::iterator l_it  = m_Rooms.begin();
+  map<string,CRoom>::iterator l_end = m_Rooms.end();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    l_it->second.Update(this);
+  }
+
+  m_UnlocatedROs.Update(this);
+}
 
 void CPortalManager::Render(CRenderManager* _pRM, bool _bDebug)
 {
@@ -250,7 +270,7 @@ void CPortalManager::Render(CRenderManager* _pRM, bool _bDebug)
   if(l_it != m_Rooms.end())
   {
     l_pCameraRoom = &(l_it->second);
-    if(!l_pCameraRoom->IsObject3DSphereInRoom(l_CameraObject))
+    if(!l_pCameraRoom->IsObject3DSphereInRoom(&l_CameraObject))
     {
       l_pCameraRoom = 0;
     }
@@ -261,7 +281,7 @@ void CPortalManager::Render(CRenderManager* _pRM, bool _bDebug)
     map<string,CRoom>::iterator l_end = m_Rooms.end();
     for(l_it = m_Rooms.begin(); l_it != l_end; ++l_it)
     {
-      if(l_it->second.IsObject3DSphereInRoom(l_CameraObject))
+      if(l_it->second.IsObject3DSphereInRoom(&l_CameraObject))
       {
         m_szCameraLastRoom = l_it->first;
         l_pCameraRoom = &(l_it->second);
@@ -291,6 +311,7 @@ void CPortalManager::Render(CRenderManager* _pRM, bool _bDebug)
     RenderPortals(l_pCameraRoom, _pRM, l_pCamera, l_Frustum, l_PrevPortals, l_BlendQueue,_bDebug);
   }
 
+  m_UnlocatedROs.Render(_pRM,l_Frustum,l_BlendQueue);
 
   CORE->GetEffectManager()->ActivateAlphaRendering();
 
@@ -322,4 +343,31 @@ void CPortalManager::DebugRender(CRenderManager* _pRM)
   }
 
   Render(_pRM,true);
+}
+
+
+void CPortalManager::InsertRenderableObject(CRenderableObject* _pRO)
+{
+  m_UnlocatedROs.AddRendeableObject( _pRO );
+}
+
+void CPortalManager::RemoveRenderableObject(CRenderableObject* _pRO)
+{
+  if(m_UnlocatedROs.RemoveRendeableObject(_pRO))
+  {
+    return;
+  }
+  else
+  {
+    map<string,CRoom>::iterator l_itR  = m_Rooms.begin();
+    map<string,CRoom>::iterator l_endR = m_Rooms.end();
+
+    for(; l_itR != l_endR; ++l_itR)
+    {
+      if(l_itR->second.RemoveRendeableObject(_pRO))
+      {
+        return;//es trobava en aquesta habitació, no cal que continuem...
+      }
+    }
+  }
 }

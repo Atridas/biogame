@@ -114,6 +114,16 @@ struct SRenderableObjectsManagerParams
   vector<string> vXMLFiles;
 };
 
+struct SPortalManagerParams
+{
+  string szFile;
+  
+  //Default Params
+  SPortalManagerParams():
+    szFile("Data/XML/Level.xml")
+  {};
+};
+
 
 struct SLightsManagerParams
 {
@@ -257,6 +267,7 @@ struct SInitParams
   SGUIManagerParams               GUIManagerParams;
   SSoundManagerParams             SoundManagerParams;
   SPhysXManagerParams             PhysXManagerParams;
+  SPortalManagerParams            PortalManagerParams;
 };
 
 void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML);

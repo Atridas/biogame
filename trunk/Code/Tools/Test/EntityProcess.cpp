@@ -35,7 +35,7 @@
 
 bool CEntityProcess::Init()
 {
-  m_PortalManager.Init("./Data/Levels/NivellProves/XML/Level.xml");
+  //m_PortalManager.Init("./Data/Levels/NivellProves/XML/Level.xml");
 
 
   LOGGER->AddNewLog(ELL_INFORMATION,"CEntityProcess::Init");
@@ -112,9 +112,10 @@ void CEntityProcess::RenderScene(CRenderManager* _pRM)
   
     _pRM->SetupMatrices(&l_SphereCamera,false,false);
   }
-
+  
   //CORE->GetRenderableObjectsManager()->Render(_pRM);
-  m_PortalManager.Render(_pRM);
+  CORE->GetPortalManager()->Render(_pRM);
+  //m_PortalManager.Render(_pRM);
 
   //CORE->GetEntityManager()->DebugRender(_pRM);
 }
@@ -124,7 +125,7 @@ void CEntityProcess::RenderINFO(CRenderManager* _pRM)
   if(CORE->GetActionManager()->IsActionActive("ToggleDebug"))
   {
     CORE->GetPhysicsManager()->DebugRender(_pRM);
-    m_PortalManager.DebugRender(_pRM);
+    //m_PortalManager.DebugRender(_pRM);
 
     CFrustum l_Frustum;
     l_Frustum.Update(m_pCamera);

@@ -2,7 +2,6 @@
 
 #include "Process.h"
 #include "EntityManager.h"
-#include "PortalManager.h"
 #include <base.h>
 
 //Forward declarations---------------------
@@ -41,5 +40,5 @@ private:
 
   CSpotLight*           m_pSpotLight;
   
-  CPortalManager        m_PortalManager;
+  //CPortalManager        m_PortalManager;
 };

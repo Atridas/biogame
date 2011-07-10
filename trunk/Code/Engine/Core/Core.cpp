@@ -26,6 +26,7 @@
 #include <ParticleManager.h>
 #include <SoundManager.h>
 #include <EntityManager.h>
+#include <PortalManager.h>
 
 #include "Utils\MemLeaks.h"
 //#include <AnimatedModelManager.h>
@@ -56,6 +57,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pSoundManager             = new CSoundManager();
   m_pEntityManager            = new CEntityManager();
   m_pPhysicTriggerReport      = new CPhysXTriggerEntityController();
+  m_pPortalManager            = new CPortalManager();
 
   m_pEngine                   = _pEngine;
 
@@ -98,8 +100,9 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pFontManager->Init(m_pRenderManager,_InitParams.FontManagerParams.pcFontsXML);
   m_pInputManager->Init(hWnd,Vect2i(_InitParams.RenderManagerParams.v2iResolution.x,_InitParams.RenderManagerParams.v2iResolution.y),_InitParams.InputManagerParams.bExclusiveMouse);
   m_pActionManager->Init(_InitParams.ActionToInputParams.pcFile);
-
+  
   m_pRenderableObjectsManager->Load(_InitParams.RenderableObjectsManagerParams.vXMLFiles);
+  m_pPortalManager->Init(_InitParams.PortalManagerParams.szFile);
   m_pLightManager->Load(_InitParams.LightsManagerParams.szFile);
   m_pSceneEffectManager->Load(_InitParams.SceneEffectParams.szFile);
   m_pScriptManager->Initialize();
@@ -138,6 +141,7 @@ void CCore::Release()
   CHECKED_DELETE(m_pScriptManager)
   CHECKED_DELETE(m_pSceneEffectManager)
   CHECKED_DELETE(m_pLightManager)
+  CHECKED_DELETE(m_pPortalManager);
   CHECKED_DELETE(m_pRenderableObjectsManager)
   CHECKED_DELETE(m_pActionManager)
   CHECKED_DELETE(m_pInputManager)
@@ -178,4 +182,6 @@ void CCore::Update()
   m_pEntityManager->UpdatePostAnim(l_fElapsedTime);
   
   m_pEntityManager->PostUpdate(l_fElapsedTime);
+
+  m_pPortalManager->Update();
 }

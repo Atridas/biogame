@@ -40,6 +40,8 @@
     <Level xml="Data/Levels/Proves/XML/RenderableObjects.xml"/>
     -->
   </RenderableObjectsManager>
+  <PortalManager file="./Data/Levels/NivellProves/XML/Level.xml"/>
+  
 
   <LightsManager file="Data/Levels/PhysX/XML/Lights.xml"/>
 

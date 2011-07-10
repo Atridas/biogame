@@ -396,16 +396,33 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
     //PhysX Manager -----------------------------------------------------------------------------------------------------------------------------------------
     //-------------------------------------------------------------------------------------------------------------------------------------------------------
     {
-      CXMLTreeNode l_TreeSoundManager = l_TreeConfig["PhysXManager"];
-      if(l_TreeSoundManager.Exists())
+      CXMLTreeNode l_PhysXManager = l_TreeConfig["PhysXManager"];
+      if(l_PhysXManager.Exists())
       {
-        string l_pcFile = l_TreeSoundManager.GetPszISOProperty("file", InitParams_.PhysXManagerParams.szFile.c_str(), true);
+        string l_pcFile = l_PhysXManager.GetPszISOProperty("file", InitParams_.PhysXManagerParams.szFile.c_str(), true);
 
         InitParams_.PhysXManagerParams.szFile = l_pcFile;
-        LOGGER->AddNewLog(ELL_INFORMATION, "\tSoundManager base \"%s\"",l_pcFile.c_str());
+        LOGGER->AddNewLog(ELL_INFORMATION, "\tPhysXManager base \"%s\"",l_pcFile.c_str());
 
       } else {
         LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"PhysXManager\". Usant valors per defecte.");
+      }
+    }
+
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Portal Manager -----------------------------------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
+    {
+      CXMLTreeNode l_PortalManager = l_TreeConfig["PortalManager"];
+      if(l_PortalManager.Exists())
+      {
+        string l_pcFile = l_PortalManager.GetPszISOProperty("file", InitParams_.PortalManagerParams.szFile.c_str(), true);
+
+        InitParams_.PortalManagerParams.szFile = l_pcFile;
+        LOGGER->AddNewLog(ELL_INFORMATION, "\tPortalManager base \"%s\"",l_pcFile.c_str());
+
+      } else {
+        LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"PortalManager\". Usant valors per defecte.");
       }
     }
   }

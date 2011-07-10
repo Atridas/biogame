@@ -8,6 +8,7 @@
 #include "Core.h"
 #include "Camera.h"
 #include "EffectManager.h"
+#include "PortalManager.h"
 
 #include <queue>
 
@@ -26,6 +27,7 @@ void CRenderableObjectsManager::Release()
     l_it++;
   }
   m_mapHWStaticInstances.clear();
+  //TODO liar-la amb el portal manager una mica?
   CMapManager<CRenderableObject>::Release();
 }
 
@@ -180,6 +182,10 @@ CRenderableObject* CRenderableObjectsManager::AddMeshInstance(
   }
 
   AddResource(_szInstanceName, l_pInstanceMesh);
+  if(CORE->GetPortalManager()->IsOk())
+  {
+    CORE->GetPortalManager()->InsertRenderableObject(l_pInstanceMesh);
+  }
 
   AddHWStaticInstance(l_pInstanceMesh);
 
@@ -207,7 +213,10 @@ CRenderableObject* CRenderableObjectsManager::AddAnimatedModel(
   }
 
   AddResource(_szInstanceName, l_pAnimatedModel);
-
+  if(CORE->GetPortalManager()->IsOk())
+  {
+    CORE->GetPortalManager()->InsertRenderableObject(l_pAnimatedModel);
+  }
   return l_pAnimatedModel;
 }
 
@@ -226,6 +235,7 @@ void CRenderableObjectsManager::RemoveResource(const string& _szName)
   }
   else
   {
+    CORE->GetPortalManager()->RemoveRenderableObject(l_it->second);
     delete l_it->second;
     m_Resources.erase(l_it);
   }
