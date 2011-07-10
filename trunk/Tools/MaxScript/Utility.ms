@@ -549,11 +549,13 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			
 			if room == undefined then
 			(
-				l_params = #(#("undefined", "true"))
+				--l_params = #(#("undefined", "true"))
+				continue;
 			)
 			else
 			(
-				l_params = #(#("undefined", "false"),#("name", room.name))
+				--l_params = #(#("undefined", "false"),#("name", room.name))
+				l_params = #(#("name", room.name))
 			)
 			format "\n    %" (OpenTagParamXML "Room" l_params) to:l_file
 			

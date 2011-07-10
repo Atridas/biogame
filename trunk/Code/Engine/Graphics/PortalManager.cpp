@@ -4,6 +4,8 @@
 #include "Core.h"
 #include "EffectManager.h"
 #include "Portal.h"
+#include "RenderableObjectsManager.h"
+#include "RenderableObject.h"
 
 #include <XML\XMLTreeNode.h>
 
@@ -33,15 +35,6 @@ bool CPortalManager::Init(CXMLTreeNode& _xmlLevel)
   LOGGER->AddNewLog(ELL_INFORMATION, "CPortalManager::Init");
 
   {
-    /*CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
-    int l_iROn = l_pROM->GetRenderableVectorSize();
-    for(int i = 0; i < l_iROn; ++i)
-    {
-      CRenderableObject* l_pRO = l_pROM->GetRenderableObject(i);
-      m_UnlocatedROs.insert( l_pRO );
-    }*/
-
-
     CXMLTreeNode l_xmlRooms = _xmlLevel["Rooms"];
     set<string> l_UsedGameObjects;
 
@@ -85,6 +78,18 @@ bool CPortalManager::Init(CXMLTreeNode& _xmlLevel)
     {
       LOGGER->AddNewLog(ELL_ERROR, "CPortalManager::Init No Rooms!");
       SetOk(false);
+    }
+
+    //Afegir la resta de RObjects.
+    CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
+    int l_iROn = l_pROM->GetRenderableVectorSize();
+    for(int i = 0; i < l_iROn; ++i)
+    {
+      CRenderableObject* l_pRO = l_pROM->GetRenderableObject(i);
+      if(l_UsedGameObjects.find( l_pRO->GetName() ) == l_UsedGameObjects.end())
+      {
+        m_UnlocatedROs.AddRendeableObject( l_pRO );
+      }
     }
   }
 
@@ -240,8 +245,18 @@ void RenderPortals(
   }
 }
 
-void CPortalManager::Update()
+void CPortalManager::Update(float _fDT)
 {
+  m_fLastUpdate += _fDT;
+  if(m_fLastUpdate < PORTAL_MANAGER_UPDATE_PERIOD)
+  {
+    return;
+  }
+  else
+  {
+    m_fLastUpdate = 0;
+  }
+
   map<string,CRoom>::iterator l_it  = m_Rooms.begin();
   map<string,CRoom>::iterator l_end = m_Rooms.end();
 

@@ -6,6 +6,8 @@
 #include "Room.h"
 #include "Portal.h"
 
+#define PORTAL_MANAGER_UPDATE_PERIOD 1.f / 5.f
+
 class CRenderManager;
 class CRenderableObject;
 
@@ -13,7 +15,7 @@ class CPortalManager:
   public CBaseControl
 {
 public:
-  CPortalManager() {};
+  CPortalManager():m_fLastUpdate(0) {};
   ~CPortalManager() {Done();};
   
   bool Init(const string& _szFileName);
@@ -26,7 +28,7 @@ public:
   void InsertRenderableObject(CRenderableObject* _pRO);
   void RemoveRenderableObject(CRenderableObject* _pRO);
 
-  void Update();
+  void Update(float _fDT);
   void Render(CRenderManager* _pRM) {Render(_pRM,false);};
   void DebugRender(CRenderManager* _pRM);
 
@@ -43,7 +45,7 @@ private:
 
   string              m_szCameraLastRoom;
 
-  
+  float               m_fLastUpdate;
 };
 
 #endif

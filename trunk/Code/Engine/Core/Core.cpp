@@ -183,5 +183,5 @@ void CCore::Update()
   
   m_pEntityManager->PostUpdate(l_fElapsedTime);
 
-  m_pPortalManager->Update();
+  m_pPortalManager->Update(l_fElapsedTime);
 }
