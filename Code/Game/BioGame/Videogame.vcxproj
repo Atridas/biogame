@@ -115,6 +115,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="..\..\..\Run\Data\XML\RenderableObjects.xml" />
+    <None Include="..\..\..\Run\Data\XML\SceneEffects.xml" />
     <None Include="..\..\..\Run\Data\XML\StaticMeshes.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
