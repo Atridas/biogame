@@ -252,6 +252,20 @@
     <Object3D position="-31.0164 0.505118 -6.6859" yaw="9.0" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="1.00877 1.00999 1.01209" collision_group="cobertura" cover_size="2" />
   </Entity>
+  <Entity name="Porta01">
+    <Object3D position="-39.4743 1.56408 2.94355" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="true" name="Porta" />
+    <PhysXBox fromRenderableObject="false" density="0" collision_group="escenari" shape="box" midpoint="0 0 0" size="0.976215 3.05175 2.56453" />
+    <Door open="false" />
+  </Entity>
+  <Entity name="TriggerPorta01">
+    <Object3D position="-39.5838 1.84525 2.51199" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="9.23271 3.66754 9.23271" collision_group="trigger" onEnter="open_door" onExit="close_door" />
+  </Entity>
+  <Entity name="BoxReflection">
+    <Object3D />
+    <RenderableObject name="BoxReflection" />
+  </Entity>
   <Player position="-16.8764 2.0 -15.9165" yaw="0.0" />
   <Miner position="50.3014 2.0 39.1446" yaw="0.0" name="Miner" />
   <Militar position="48.3709 2.0 -18.4613" yaw="0.0" name="Militar" />

@@ -94,6 +94,9 @@
     <Filter Include="EntitySystem\Components\ComponentPhysXActor\ComponentPhysXMesh">
       <UniqueIdentifier>{b5251dd6-e9f1-484c-b681-42323275fa90}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentDoor">
+      <UniqueIdentifier>{17c5f82b-1ae6-45b6-bfb6-436203f6d74f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -194,6 +197,9 @@
     </ClCompile>
     <ClCompile Include="ComponentHighCover.cpp">
       <Filter>EntitySystem\Components\ComponentCover\ComponentHighCover</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentDoor.cpp">
+      <Filter>EntitySystem\Components\ComponentDoor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -304,6 +310,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentHighCover.h">
       <Filter>EntitySystem\Components\ComponentCover\ComponentHighCover</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentDoor.h">
+      <Filter>EntitySystem\Components\ComponentDoor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

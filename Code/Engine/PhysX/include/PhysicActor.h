@@ -50,6 +50,9 @@ public:
 	void							CreateBoxTrigger	(const Vect3f& size, uint32 group = 0);
   void              ActivateAllTriggers();
 
+  //---Activate---
+  void              Activate          (bool _bActivate);
+
 	//---Get Info-------
 	void							GetMat44					(Mat44f& matrix) const;
 	void							SetMat44					(const Mat44f& matrix);

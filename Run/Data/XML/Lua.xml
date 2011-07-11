@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Lua>
   <files>
-    <file path="Data/Lua/first.lua" />
     <file path="Data/Lua/globals.lua" />
+    <file path="Data/Lua/functions.lua" />
     <file path="Data/Lua/biogame_gui.lua" />
     <file path="Data/Lua/nivell_proves_triggers.lua" />
     <file path="Data/Lua/player_states.lua" />
     <file path="Data/Lua/enemy_states.lua" />
+    <file path="Data/Lua/door_states.lua" />
   </files>
   <initscripts>
     <script action="CORE                          = get_core()"/>

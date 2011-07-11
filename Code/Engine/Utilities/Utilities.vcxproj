@@ -79,6 +79,7 @@
     <ClCompile Include="BaseComponent.cpp" />
     <ClCompile Include="ComponentAnimation.cpp" />
     <ClCompile Include="ComponentCover.cpp" />
+    <ClCompile Include="ComponentDoor.cpp" />
     <ClCompile Include="ComponentHighCover.cpp" />
     <ClCompile Include="ComponentIABrain.cpp" />
     <ClCompile Include="ComponentIAWalkToPlayer.cpp" />
@@ -114,6 +115,7 @@
     <ClInclude Include="include\BaseComponent.h" />
     <ClInclude Include="include\ComponentAnimation.h" />
     <ClInclude Include="include\ComponentCover.h" />
+    <ClInclude Include="include\ComponentDoor.h" />
     <ClInclude Include="include\ComponentHighCover.h" />
     <ClInclude Include="include\ComponentIABrain.h" />
     <ClInclude Include="include\ComponentIAWalkToPlayer.h" />

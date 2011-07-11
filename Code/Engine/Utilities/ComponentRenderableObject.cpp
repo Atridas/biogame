@@ -2,6 +2,7 @@
 #include "ComponentObject3D.h"
 #include "RenderableObjectsManager.h"
 #include "RenderableAnimatedInstanceModel.h"
+#include "ComponentAnimation.h"
 #include "Core.h"
 
 
@@ -104,6 +105,9 @@ bool CComponentRenderableObject::InitAnimatedModel(CGameEntity *_pEntity, const 
   if(IsOk())
   {
     SetEntity(_pEntity);
+    //s'agrega el component d'animacions
+    if(!CComponentAnimation::AddToEntity(_pEntity))
+      LOGGER->AddNewLog(ELL_WARNING, "CComponentRenderableObject::InitAnimatedModel No s'ha pogut inicialitzar el component d'animació.");
   }
 
 

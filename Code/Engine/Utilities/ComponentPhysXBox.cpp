@@ -79,6 +79,8 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity,
   CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXActor);
   m_pPhysXActor->SetMat44( m_pObject3D->GetMat44() );
 
+  m_vSize = Vect3f(_fSizeX, _fSizeY, _fSizeZ);
+
   SetOk(true);
   return IsOk();
 }
@@ -118,6 +120,7 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity, float _fDensity, int _iColl
                             l_pBB->GetMiddlePoint(),
                             NULL, _iCollisionGroup);
 
+  m_vSize = l_pBB->GetDimension();
 
   CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXActor);
   m_pPhysXActor->SetMat44( m_pObject3D->GetMat44() );

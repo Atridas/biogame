@@ -106,7 +106,7 @@ void CComponentTrigger::OnExit (CGameEntity* _pOther)
       CScriptManager::PrintError(_TheError);
 
       LOGGER->AddNewLog(ELL_ERROR,"\tEntity \"%s\" has exited trigger \"%s\" and script \"%s\" has failed.", 
-                            _pOther->GetName().c_str(), GetEntity()->GetName().c_str(), m_szOnEnter.c_str());
+                            _pOther->GetName().c_str(), GetEntity()->GetName().c_str(), m_szOnExit.c_str());
     }
   }
 }

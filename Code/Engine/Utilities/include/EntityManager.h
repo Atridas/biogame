@@ -34,6 +34,7 @@ public:
   void RemoveEntity(const CGameEntity*);
   void RemoveEntity(int);
   
+  SEvent GetEvent() { return m_EmptyEvent; };
   void SendEvent(const SEvent& _Event);
 
   
@@ -58,6 +59,8 @@ private:
   void RemoveEntities();
   void CreateEntities();
   void SendEvents(float _fDeltaTime);
+
+  SEvent m_EmptyEvent;
 
   vector<CGameEntity*> m_vEntities;
   vector<int>          m_vFreeIDs;

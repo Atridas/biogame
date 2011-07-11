@@ -17,9 +17,11 @@ public:
             float _fPosX , float _fPosY , float _fPosZ,
             float _fDensity, int _iCollisionGroup
             );
+
+  const Vect3f& GetSize() { return m_vSize; };
   
 protected:
-  CComponentPhysXBox() {};
+  CComponentPhysXBox(): m_vSize(Vect3f(0.0f)) {};
   bool Init(CGameEntity *_pEntity, float _fDensity, int _iCollisionGroup);
 
   bool Init(CGameEntity *_pEntity,
@@ -27,6 +29,8 @@ protected:
             float _fPosX , float _fPosY , float _fPosZ,
             float _fDensity, int _iCollisionGroup
             );
+
+  Vect3f m_vSize;
 };
 
 #endif
