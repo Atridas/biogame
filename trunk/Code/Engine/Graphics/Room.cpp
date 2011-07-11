@@ -80,6 +80,7 @@ bool CRoom::Init(CXMLTreeNode& _xmlRoom, set<string>& _UsedNames)
               if(_UsedNames.find(l_szName) == _UsedNames.end())
               {
                 m_RenderableObjects.insert(l_pRO);
+                _UsedNames.insert(l_szName);
               }
               else
               {
