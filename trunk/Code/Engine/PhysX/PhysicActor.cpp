@@ -313,3 +313,14 @@ void CPhysicActor::GetMat44 (Mat44f& matrix) const
 	matrix.m32 = m_aux[11];
 	matrix.m33 = m_aux[15];
 }
+
+void CPhysicActor::Activate(bool _bActivate)
+{
+  if(m_pPhXActor)
+  {
+    if(_bActivate)
+      m_pPhXActor->clearActorFlag(NX_AF_DISABLE_COLLISION);
+    else
+      m_pPhXActor->raiseActorFlag(NX_AF_DISABLE_COLLISION);
+  }
+}

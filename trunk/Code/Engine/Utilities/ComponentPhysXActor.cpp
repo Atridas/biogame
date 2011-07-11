@@ -24,3 +24,11 @@ void CComponentPhysXActor::Release(void)
   CHECKED_DELETE(m_pPhysXActor);
   CHECKED_DELETE(m_pPhysXData);
 }
+
+void CComponentPhysXActor::Activate(bool _bActivate)
+{
+  if(m_pPhysXActor)
+  {
+    m_pPhysXActor->Activate(_bActivate);
+  }
+}

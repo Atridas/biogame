@@ -695,6 +695,8 @@ utility BioUtility "Eon-Utility" width:160 height:549
 					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
 				)
 				
+				format "\tEntitat Mesh %\n" l_instance.name
+				
 				format "\n    %" (InlineTagXML "Object3D") to:l_file
 				  
 				l_params = #(#("name",l_instance.name))
@@ -756,6 +758,8 @@ utility BioUtility "Eon-Utility" width:160 height:549
 					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
 				)
 				
+				format "\tEntitat Trigger %\n" l_instance.name
+				
 				l_params = #()
 				
 				l_aux = "" as stringStream
@@ -815,6 +819,8 @@ utility BioUtility "Eon-Utility" width:160 height:549
 					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
 				)
 				
+				format "\tEntitat Cover %\n" l_instance.name
+				
 				l_params = #()
 				
 				l_aux = "" as stringStream
@@ -871,6 +877,81 @@ utility BioUtility "Eon-Utility" width:160 height:549
 					
 					format "\n    %" (InlineTagParamXML "HighCover" l_params) to:l_file
 				)
+				
+				format "\n  %" (CloseTagXML "Entity") to:l_file
+			)else if IsDoor _entities[i] then
+			(
+				local l_instance = _entities[i]
+				if l_instance.name == undefined then
+				(
+					format "\n  %" (OpenTagXML "Entity") to:l_file
+				)
+				else
+				(
+					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
+				)
+				
+				format "\tEntitat Door %\n" l_instance.name
+				
+				l_params = #()
+				
+				--Object3D
+				l_aux = "" as stringStream
+				local l_translation = RHVectorToLH l_instance.transform.translation
+				format "% % %" l_translation.x l_translation.y l_translation.z to:l_aux
+				append l_params #("position",l_aux)
+				
+				l_aux = "" as stringStream
+				local l_yaw = GetYaw l_instance.transform
+				format "%" l_yaw to:l_aux
+				append l_params #("yaw",l_aux)
+				
+				l_aux = "" as stringStream
+				local l_pitch = GetPitch l_instance.transform
+				format "%" l_pitch to:l_aux
+				append l_params #("pitch",l_aux)
+				
+				l_aux = "" as stringStream
+				local l_roll = GetRoll l_instance.transform
+				format "%" l_roll to:l_aux
+				append l_params #("roll",l_aux)
+				
+				format "\n    %" (InlineTagParamXML "Object3D" l_params) to:l_file
+				
+				--Renderable Object
+				l_aux = "" as stringStream
+				format "%" (GetUserProp l_instance "resource") to:l_aux
+				
+				l_params = #(#("animated","true"),#("name",l_aux))
+					
+				format "\n    %" (InlineTagParamXML "RenderableObject" l_params) to:l_file
+					
+				--PhysXBox
+				l_aux = "" as stringStream
+				local l_midpoint = "" as stringStream
+				local l_size = RHVectorToLH (DummySize l_instance)
+				format "% % %" l_size.x l_size.y l_size.z to:l_aux
+				format "0 0 0" to:l_midpoint
+				
+				l_params = #(#("fromRenderableObject","false"),#("density","0"),#("collision_group", "escenari"),#("shape","box"),#("midpoint",l_midpoint),#("size",l_aux))
+					
+				format "\n    %" (InlineTagParamXML "PhysXBox" l_params) to:l_file
+					
+				--Gate
+				l_aux = "" as stringStream
+				local l_open = GetUserProp l_instance "open"
+				if l_open != undefined then
+				(
+					l_open = "true"
+				)else
+				(
+					l_open = "false"
+				)
+				
+				format "%" l_open to:l_aux
+				l_params = #(#("open",l_aux))
+				
+				format "\n    %" (InlineTagParamXML "Door" l_params) to:l_file
 				
 				format "\n  %" (CloseTagXML "Entity") to:l_file
 			)

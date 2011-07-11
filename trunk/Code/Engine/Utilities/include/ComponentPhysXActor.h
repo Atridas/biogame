@@ -26,6 +26,8 @@ public:
 
   virtual ~CComponentPhysXActor(void) {Done();};
 
+  void Activate(bool _bActivate);
+
 protected:
 
   CComponentPhysXActor():

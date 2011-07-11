@@ -33,6 +33,7 @@ extern "C"
 #include "ComponentCover.h"
 #include "ComponentHighCover.h"
 #include "ComponentLowCover.h"
+#include "ComponentDoor.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -79,7 +80,9 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .enum_("EventType")
       [
         value("rebre_impacte",       SEvent::REBRE_IMPACTE),
-        value("morir",               SEvent::MORIR)
+        value("morir",               SEvent::MORIR),
+        value("obrir",               SEvent::OBRIR),
+        value("tancar",              SEvent::TANCAR)
       ]
       .def_readwrite("sender",       &SEvent::Sender)
       .def_readwrite("receiver",     &SEvent::Receiver)
@@ -107,7 +110,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("ia_brain",             CBaseComponent::ECT_IA_BRAIN),
           value("ragdoll",              CBaseComponent::ECT_RAGDOLL),
           value("cover",                CBaseComponent::ECT_COVER),
-          value("mirilla",              CBaseComponent::ECT_MIRILLA)
+          value("mirilla",              CBaseComponent::ECT_MIRILLA),
+          value("door",                 CBaseComponent::ECT_DOOR)
       ]
       .def("get_type",     &CBaseComponent::GetType)
       .def("get_entity",   &CBaseComponent::GetEntity)
@@ -128,6 +132,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("get_entity_from_name",  (CGameEntity*(CEntityManager::*)(const string&)const)&CEntityManager::GetEntity)
       .def("remove_entity_from_id", (void(CEntityManager::*)(int)               )&CEntityManager::RemoveEntity)
       .def("remove_entity",         (void(CEntityManager::*)(const CGameEntity*))&CEntityManager::RemoveEntity)
+      .def("send_event",            &CEntityManager::SendEvent)
+      .def("get_event",             &CEntityManager::GetEvent)
 
       .def("load_entities",         &CEntityManager::LoadEntitiesFromXML)
       .def("init_player",           &CEntityManager::InitPlayer)
@@ -189,6 +195,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponentPhysXBox, CBaseComponent>("ComponentPhysXBox")
       .def("add_to_entity",     (CComponentPhysXBox*(*)(CGameEntity*,float,float,float,float,float,float,float,int))&CComponentPhysXBox::AddToEntity)
       .def("add_to_entity",     (CComponentPhysXBox*(*)(CGameEntity*,float,int))&CComponentPhysXBox::AddToEntity)
+      .def("activate",          &CComponentPhysXBox::Activate)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentRenderableObject, CBaseComponent>("ComponentRenderableObject")
@@ -247,16 +254,23 @@ void RegisterEntitiesToLua(lua_State* _pLS)
 
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentCover, CBaseComponent>("ComponentCover")
-      .def("get_cover_type",               &CComponentCover::GetCoverType)
+      .def("get_cover_type",           &CComponentCover::GetCoverType)
       .enum_("CoverType")
       [
-          value("cover_low",            CComponentCover::COVER_LOW),
-          value("cover_high",             CComponentCover::COVER_HIGH)
+          value("cover_low",           CComponentCover::COVER_LOW),
+          value("cover_high",          CComponentCover::COVER_HIGH)
       ]
     ,class_<CComponentHighCover, CBaseComponent>("ComponentHighCover")
-      .def("get_cover_type",               &CComponentCover::GetCoverType)
+      .def("get_cover_type",           &CComponentCover::GetCoverType)
     ,class_<CComponentLowCover, CBaseComponent>("ComponentLowCover")
-      .def("get_cover_type",               &CComponentCover::GetCoverType)
+      .def("get_cover_type",           &CComponentCover::GetCoverType)
+    ,class_<CComponentDoor, CBaseComponent>("ComponentDoor")
+      .def("add_to_entity",            &CComponentDoor::AddToEntity)
+      .def("is_open",                  &CComponentDoor::IsOpen)
+      .def("open",                     &CComponentDoor::Open)
+      .def("close",                    &CComponentDoor::Close)
+      .def("block",                    &CComponentDoor::Block)
+      .def_readwrite("time",           &CComponentDoor::m_fTime)
   ];
   
 

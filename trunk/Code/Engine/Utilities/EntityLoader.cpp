@@ -18,6 +18,7 @@
 #include "ComponentStateMachine.h"
 #include "ComponentIABrain.h"
 #include "ComponentHighCover.h"
+#include "ComponentDoor.h"
 
 #include "PhysicsManager.h"
 
@@ -51,10 +52,25 @@ void LoadComponentRenderableObject(CXMLTreeNode& _TreeComponent, CGameEntity* _p
 {
   if(_TreeComponent.ExistsProperty("name"))
   {
-    LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCreant component de Renderable Object amb nom \"%s\".", _TreeComponent.GetPszISOProperty("name").c_str());
-    if(!CComponentRenderableObject::AddToEntity(_pEntity, _TreeComponent.GetPszISOProperty("name")))
+    string l_szResource = _TreeComponent.GetPszISOProperty("name");
+
+    //static
+    if(!_TreeComponent.GetBoolProperty("animated",false,false))
     {
-      LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
+      LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCreant component de Renderable Object Estàtic amb nom \"%s\".", l_szResource.c_str());
+      if(!CComponentRenderableObject::AddToEntity(_pEntity, l_szResource))
+      {
+        LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
+      }
+    } else
+    //animated
+    {
+      string l_szName       = _pEntity->GetName();
+      LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCreant component de Renderable Object Animat amb nom \"%s\" i core \"%s\".", l_szName.c_str(), l_szResource.c_str());
+      if(!CComponentRenderableObject::AddToEntityWithAnimatedModel(_pEntity, l_szName,_TreeComponent.GetPszISOProperty("name")))
+      {
+        LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
+      }
     }
   } else
   {
@@ -163,6 +179,22 @@ void LoadComponentLowCover(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
   {
     LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
   }
+}
+
+void LoadComponentDoor(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
+{
+  
+  string l_szName = _pEntity->GetName();
+  bool l_bOpen    = _TreeComponent.GetBoolProperty("open", false, false);
+
+  LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Porta amb nom \"%s\" i estat \"%d\"",l_szName.c_str(), l_bOpen);
+
+
+  if(!CComponentDoor::AddToEntity(_pEntity, l_bOpen))
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
+  }
+
 }
 
 // -------------------------------------------------------------------------------------------------------------
@@ -301,6 +333,11 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
               LoadComponentLowCover(l_TreeComponent, l_pEntity);
 
             // -----------------------------------------------------------------------------------------------------------
+            } else if(strcmp(l_TreeComponent.GetName(),"Door") == 0)
+            {
+              LoadComponentDoor(l_TreeComponent, l_pEntity);
+
+            // -----------------------------------------------------------------------------------------------------------
             } else if(!l_TreeComponent.IsComment())
             {
               LOGGER->AddNewLog(ELL_WARNING,"\tNode \"%s\" no reconegut!", l_TreeComponent.GetName());
@@ -354,7 +391,7 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
   l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
 
 
-  CComponentAnimation::AddToEntity(l_pPlayer);
+  //CComponentAnimation::AddToEntity(l_pPlayer);
 
 
   CComponentPlayerController *l_pComponentPlayerController = CComponentPlayerController::AddToEntity(l_pPlayer);
@@ -452,7 +489,7 @@ CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f
 
   //(new CComponentIAWalkToPlayer())->Init(l_peEnemy,"Player",2,"walk","impact");
   CComponentIABrain::AddToEntity(l_peEnemy,_szPlayerName,_szRagdollModell);
-  CComponentAnimation::AddToEntity(l_peEnemy);
+  //CComponentAnimation::AddToEntity(l_peEnemy);
   CComponentVida::AddToEntity(l_peEnemy, 100.f);
 
   CComponentStateMachine::AddToEntity(l_peEnemy, _szInitialState);

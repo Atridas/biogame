@@ -41,7 +41,8 @@ public:
     ECT_IA_BRAIN,
     ECT_RAGDOLL,
     ECT_COVER,
-    ECT_MIRILLA
+    ECT_MIRILLA,
+    ECT_DOOR
   };
   
   virtual Type GetType() = 0; //{return m_Type;};

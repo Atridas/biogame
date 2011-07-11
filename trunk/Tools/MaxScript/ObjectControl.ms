@@ -65,6 +65,18 @@ function IsCover _object =
 	)
 )
 
+-- Comprova si l'objecte proporcionat és una porta
+function IsDoor _object =
+(
+	if classof _object == Dummy and (GetUserProp _object "resource") != undefined and (GetUserProp _object "type") == "door" then
+	(
+		return true
+	) else (
+		return false
+	)
+)
+
+
 -- Cerca l'entitat de player
 function GetPlayerEntity _entities =
 (

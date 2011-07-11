@@ -27,7 +27,9 @@ struct SEvent {
 
   enum EEventType {
     REBRE_IMPACTE,
-    MORIR
+    MORIR,
+    OBRIR,
+    TANCAR
   } Msg;
 
   SEvent():Sender(-1),Receiver(-1),DispatchTime(0) {};

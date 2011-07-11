@@ -56,7 +56,7 @@ void CEntityManager::CreateEntities()
 
 CGameEntity* CEntityManager::GetEntity(int _iId) const
 {
-  assert(m_vEntities.size() < (uint32) _iId);
+  assert(m_vEntities.size() > (uint32) _iId);
   for(uint32 i = 0; i < m_vFreeIDs.size(); ++i) assert(m_vFreeIDs[i] != _iId);
 
   return m_vEntities[_iId];

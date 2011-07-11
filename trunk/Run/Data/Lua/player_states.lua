@@ -2,10 +2,24 @@
 
 Player_Constants = {}
 
+--velocitats
 Player_Constants["Walk Speed"] = 2
 Player_Constants["Run Speed"] = 5
+
+--animacions
+Player_Constants["Idle"] = 'idle'
+Player_Constants["Caminar enrere"] = 'walk back'
+Player_Constants["Caminar"] = 'walk'
+Player_Constants["Correr"] = 'run'
+Player_Constants["Apuntar"] = 'aim'
+Player_Constants["Disparar"] = 'shoot'
+Player_Constants["Rebre impacte"] = 'impact'
+Player_Constants["Morir"] = 'dead'
+--temps animacions
 Player_Constants["Temps Tocat"] = 0.3
 Player_Constants["Temps Morint"] = 2.6
+--sons
+Player_Constants["So rebre impacte"] = 'impacte'
 
 
 
@@ -65,7 +79,7 @@ State_Player_Neutre['Enter'] = function(_jugador)
 
   local animation = _jugador:get_component(BaseComponent.animation)
   animation:clear_all_cycles(0.3)
-  animation:play_cycle('idle', 0.3)
+  animation:play_cycle(Player_Constants["Idle"], 0.3)
 end
 
 -------------------------------------------------------------------------------------------------
@@ -142,27 +156,27 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   end
   
   if isMoving then
-    animation:clear_cycle('idle', 0.3)
+    animation:clear_cycle(Player_Constants["Idle"], 0.3)
     if isRunning then
-      animation:stop_cycle('walk back',0.3)
-      animation:stop_cycle('walk',0.3)
-      animation:play_cycle('run',0.3)
+      animation:stop_cycle(Player_Constants["Caminar enrere"],0.3)
+      animation:stop_cycle(Player_Constants["Caminar"],0.3)
+      animation:play_cycle(Player_Constants["Correr"],0.3)
     else
       if isBack then
-        animation:play_cycle('walk back',0.3)
-        animation:stop_cycle('walk',0.3)
-        animation:stop_cycle('run',0.3)
+        animation:play_cycle(Player_Constants["Caminar enrere"],0.3)
+        animation:stop_cycle(Player_Constants["Caminar"],0.3)
+        animation:stop_cycle(Player_Constants["Correr"],0.3)
       else
-        animation:stop_cycle('walk back',0.3)
-        animation:play_cycle('walk',0.3)
-        animation:stop_cycle('run',0.3)
+        animation:stop_cycle(Player_Constants["Caminar enrere"],0.3)
+        animation:play_cycle(Player_Constants["Caminar"],0.3)
+        animation:stop_cycle(Player_Constants["Correr"],0.3)
       end
     end
   else
-    animation:play_cycle('idle', 0.3)
-    animation:clear_cycle('walk',0.3)
-    animation:clear_cycle('run',0.3)
-    animation:clear_cycle('walk back',0.3)
+    animation:play_cycle(Player_Constants["Idle"], 0.3)
+    animation:clear_cycle(Player_Constants["Caminar"],0.3)
+    animation:clear_cycle(Player_Constants["Caminar enrere"],0.3)
+    animation:clear_cycle(Player_Constants["Correr"],0.3)
   end
   
 end
@@ -195,7 +209,7 @@ State_Player_Apuntar['Enter'] = function(_jugador)
   local mirilla = _jugador:get_component(BaseComponent.mirilla)
   
   animation:clear_all_cycles(0.1)
-  animation:play_cycle('aim', 0.1)
+  animation:play_cycle(Player_Constants["Apuntar"], 0.1)
 	mirilla:set_active(true)
 	
   --end
@@ -236,9 +250,9 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
   end
   
   if ACTION_MANAGER:is_action_active('Shoot') then
-    animation:play('shoot', 0.3, 1.0, false)
+    animation:play(Player_Constants["Disparar"], 0.3, 1.0, false)
     player_controller:shoot()
-    SOUND:play_sample('disparar')
+    SOUND:play_sample(Player_Constants["So dispar"])
   end
   
   if ACTION_MANAGER:is_action_active('MoveFwd') then
@@ -272,6 +286,7 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
   end
   
   
+  --TODO: blends amb cames movent-se / cames estàtiques
   --[[if isMoving then
     animation:clear_cycle('idle', 0.3)
     if isBack then
@@ -318,10 +333,10 @@ State_Player_Tocat['Enter'] = function(_jugador)
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
   --animation:set_cycle('idle', 0.3)
-  animation:play('impact', 0.3, 1.0, false)
+  animation:play(Player_Constants["Rebre impacte"], 0.3, 1.0, false)
   player_controller.time = 0
   
-  SOUND:play_sample('impacte')
+  SOUND:play_sample(Player_Constants["So rebre impacte"])
 end
 
 -------------------------------------------------------------------------------------------------
@@ -378,7 +393,7 @@ State_Player_Morint['Enter'] = function(_jugador)
   
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
-  animation:play('dead', 0.3, 1.0, true)
+  animation:play(Player_Constants["Morir"], 0.3, 1.0, true)
   player_controller.time = 0
   
 end
@@ -672,7 +687,7 @@ State_Player_Cobertura_Alta_Sortir['Enter'] = function(_jugador)
   
   --Nomes blend
   animation:clear_all_cycles(0.3)
-  animation:play_cycle('idle',0.3)
+  animation:play_cycle(Player_Constants["Idle"],0.3)
   
   _jugador:get_component(BaseComponent.renderable_object).block_yaw = true
   player_controller.time = 0
@@ -725,7 +740,7 @@ State_Player_Cobertura_Baixa_Apuntar['Enter'] = function(_jugador)
   
   --Nomes blend
   animation:clear_all_cycles(0.2)
-  animation:play_cycle('aim', 0.2)
+  animation:play_cycle(Player_Constants["Apuntar"], 0.2)
   
   --Amb animacio
   --animation:clear_all_cycles(0.3)
@@ -761,9 +776,9 @@ State_Player_Cobertura_Baixa_Apuntar['Update'] = function(_jugador, _dt)
   end
   
   if ACTION_MANAGER:is_action_active('Shoot') then
-    animation:play('shoot', 0.3, 1.0, false)
+    animation:play(Player_Constants["Disparar"], 0.3, 1.0, false)
     player_controller:shoot()
-    SOUND:play_sample('disparar')
+    SOUND:play_sample(Player_Constants["So dispar"])
   end
   
   --local player_controller = _jugador:get_component(BaseComponent.player_controller)
