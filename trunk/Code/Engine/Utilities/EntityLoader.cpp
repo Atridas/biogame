@@ -19,6 +19,7 @@
 #include "ComponentIABrain.h"
 #include "ComponentHighCover.h"
 #include "ComponentDoor.h"
+#include "ComponentShield.h"
 
 #include "PhysicsManager.h"
 
@@ -431,6 +432,7 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
 
   CComponentPhysXController::AddToEntity(l_pPlayer, l_fCapsuleRadius, l_fCapsuleHeigh, 45.0f, l_fCapsuleSkin, 0.2f, ECG_PERSONATGE );
 
+  CComponentShield::AddToEntity(l_pPlayer, 50.f, 50.f, 1.0f, 5.0f);
   CComponentVida::AddToEntity(l_pPlayer, 100.f, 100.f, true, 3.0f);
 
   CComponentStateMachine::AddToEntity(l_pPlayer, "State_Player_Neutre");

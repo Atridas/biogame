@@ -95,6 +95,7 @@
     <ClCompile Include="ComponentPlayerController.cpp" />
     <ClCompile Include="ComponentRagdoll.cpp" />
     <ClCompile Include="ComponentRenderableObject.cpp" />
+    <ClCompile Include="ComponentShield.cpp" />
     <ClCompile Include="ComponentStateMachine.cpp" />
     <ClCompile Include="ComponentTrigger.cpp" />
     <ClCompile Include="ComponentVida.cpp" />
@@ -132,6 +133,7 @@
     <ClInclude Include="include\ComponentPlayerController.h" />
     <ClInclude Include="include\ComponentRagdoll.h" />
     <ClInclude Include="include\ComponentRenderableObject.h" />
+    <ClInclude Include="include\ComponentShield.h" />
     <ClInclude Include="include\ComponentStateMachine.h" />
     <ClInclude Include="include\ComponentTrigger.h" />
     <ClInclude Include="include\ComponentVida.h" />

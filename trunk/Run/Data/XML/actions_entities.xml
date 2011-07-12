@@ -113,6 +113,10 @@
   <action name="Aim">
     <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN" Code="MOUSE_BUTTON_RIGHT"/>
   </action>
+  
+  <action name="Shield">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_C"/>
+  </action>
 
   <action name="Cover">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN" Code="KEY_SPACE"/>

@@ -118,6 +118,7 @@ void CEntityProcess::RenderScene(CRenderManager* _pRM)
   //m_PortalManager.Render(_pRM);
 
   //CORE->GetEntityManager()->DebugRender(_pRM);
+  CORE->GetPhysicsManager()->DebugRender(_pRM);
 }
 
 void CEntityProcess::RenderINFO(CRenderManager* _pRM)
