@@ -63,7 +63,7 @@ void CComponentPlayerController::Update(float _fDeltaTime)
 
   float l_fMin = 0.3f;
   float l_fMax = 1.5f;
-  float l_fGlowIntensity = l_pComponentVida->m_fVida/100 * (l_fMax - l_fMin) + l_fMin;
+  float l_fGlowIntensity = l_pComponentVida->GetHP()/100 * (l_fMax - l_fMin) + l_fMin;
 
   vector<CMaterial*>::const_iterator l_itMaterial = l_vMaterials.begin();
 
