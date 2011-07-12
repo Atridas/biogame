@@ -4,14 +4,22 @@
 #include "Core.h"
 
 
-bool CTexture::LoadFile() 
+bool CTexture::LoadFile(bool _bCubeTexture) 
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "CTexture::Load \"%s\"",m_szFileName.c_str());
 
   LPDIRECT3DDEVICE9 l_pDevice = RENDER_MANAGER->GetDevice();
 
-  HRESULT l_Result = D3DXCreateTextureFromFile( l_pDevice, m_szFileName.c_str(), &m_pTexture);
-
+  HRESULT l_Result;
+  
+  if(_bCubeTexture)
+  {
+    l_Result = D3DXCreateCubeTextureFromFile(l_pDevice, m_szFileName.c_str(),&m_pCubeTexture);
+  }
+  else
+  {
+    l_Result  = D3DXCreateTextureFromFile( l_pDevice, m_szFileName.c_str(), &m_pTexture);
+  }
   D3DXIMAGE_INFO l_pTexInfo;
 
   HRESULT l_InfoResult = D3DXGetImageInfoFromFile(m_szFileName.c_str(),&l_pTexInfo);
@@ -53,10 +61,11 @@ void CTexture::Release()
    LOGGER->AddNewLog(ELL_INFORMATION, "CTexture::Unload");
 
    CHECKED_RELEASE(m_pTexture);
+   CHECKED_RELEASE(m_pCubeTexture);
    CHECKED_RELEASE(m_pDepthStencilRenderTargetTexture);
 }
 
-bool CTexture::Load(const string &_szFileName)
+bool CTexture::Load(const string &_szFileName, bool _bCubeTexture)
 {
   if(m_szFileName != "")
   {
@@ -64,13 +73,15 @@ bool CTexture::Load(const string &_szFileName)
     Release();
   }
   m_szFileName = _szFileName;
-  return LoadFile();
+  SetName(_szFileName);
+  return LoadFile(_bCubeTexture);
 }
 
 bool CTexture::Reload()
 {
+  bool l_bCube = m_pCubeTexture != 0;
   Release();
-  return LoadFile();
+  return LoadFile(l_bCube);
 }
 
 void CTexture::Activate(size_t _StageId)
@@ -78,7 +89,8 @@ void CTexture::Activate(size_t _StageId)
   assert(IsOk());
   LPDIRECT3DDEVICE9 l_pDevice = RENDER_MANAGER->GetDevice();
 
-  HRESULT l_Result = l_pDevice->SetTexture(_StageId,m_pTexture);
+  HRESULT l_Result = l_pDevice->SetTexture(_StageId,
+                                  (m_pTexture)? (IDirect3DBaseTexture9*)m_pTexture : m_pCubeTexture);
 
   if(l_Result == D3D_OK)
     return;

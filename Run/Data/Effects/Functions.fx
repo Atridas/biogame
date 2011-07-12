@@ -46,14 +46,14 @@ float3 ComputeLight(float3 _Normal,          //Normal of the pixel
 }
 
 // normal & eyeDirection han d'estar normalitzades
-float3 ComputeAllLights(
-                        float3 _Normal, float3 _WorldPosition, float3 _DiffuseColor, 
-                        float3 _AmbientLight, float _SpotlightFactor, 
+float3 ComputeAllLightsNew(
+                        float3 _Normal, float3 _WorldPosition, float3 _EyeDirection,
+                        float3 _DiffuseColor, float3 _AmbientLight, float _SpotlightFactor, 
                         float4 _PosLight, bool _DynamicObject
                        )
 {
   float3 out_ = _DiffuseColor * _AmbientLight;
-  float3 l_EyeDirection = normalize(g_CameraPosition - _WorldPosition);
+  //float3 _EyeDirection = normalize(g_CameraPosition - _WorldPosition);
   for(int i = 0; i < MAXLIGHTS; i++)
   {
     int l_iShadowAmount = 0;
@@ -115,7 +115,7 @@ float3 ComputeAllLights(
       }
       if(l_Attenuation > 0.0)
       {
-        float3 l_HalfWayVector = normalize(l_EyeDirection+l_LightDirection);
+        float3 l_HalfWayVector = normalize(_EyeDirection+l_LightDirection);
         out_ += ComputeLight( _Normal, 
                               l_LightDirection, 
                               l_HalfWayVector, 
@@ -129,22 +129,34 @@ float3 ComputeAllLights(
   return out_;
 }
 
-float4 RadiosityNormalLightmapColor(float2 _UV, float2 _UV2)
+
+float3 ComputeAllLights(
+                        float3 _Normal, float3 _WorldPosition, float3 _DiffuseColor, 
+                        float3 _AmbientLight, float _SpotlightFactor, 
+                        float4 _PosLight, bool _DynamicObject
+                       )
+{
+  return ComputeAllLightsNew( _Normal, _WorldPosition, normalize(g_CameraPosition - _WorldPosition),
+                              _DiffuseColor, _AmbientLight, _SpotlightFactor, 
+                              _PosLight, _DynamicObject);
+}
+
+float4 RadiosityNormalLightmapColor(float3 _Normal, float2 _UV2)
 {
   float4 l_LightR = tex2D(Radiosity_R_TextureSampler,_UV2);
   float4 l_LightG = tex2D(Radiosity_G_TextureSampler,_UV2);
   float4 l_LightB = tex2D(Radiosity_B_TextureSampler,_UV2);
   
-  float3 l_Normal = tex2D(NormalTextureSampler,_UV).rgb * 2.0 - 1.0;
+  //float3 l_Normal = tex2D(NormalTextureSampler,_UV).rgb * 2.0 - 1.0;
   
   //return l_LightR * dot(l_Normal, g_RadiosityNormalR)
   //     + l_LightG * dot(l_Normal, g_RadiosityNormalG)
   //     + l_LightB * dot(l_Normal, g_RadiosityNormalB);
   
   float3 dp;
-  dp.x = saturate( dot(l_Normal, g_RadiosityNormalR) );
-  dp.y = saturate( dot(l_Normal, g_RadiosityNormalG) );
-  dp.z = saturate( dot(l_Normal, g_RadiosityNormalB) );
+  dp.x = saturate( dot(_Normal, g_RadiosityNormalR) );
+  dp.y = saturate( dot(_Normal, g_RadiosityNormalG) );
+  dp.z = saturate( dot(_Normal, g_RadiosityNormalB) );
   dp *= dp;
   
   float sum = dot(dp, float3(1, 1, 1));
@@ -220,21 +232,21 @@ float3 ComputeLightTangentSpace(float3 _Normal, float3 _Position, float3 _Diffus
                           g_SpotlightFactor);
     }
   }
-  return float4(0,0,0,0);
+  return float3(0,0,0);
 }
 
 //Normal Mapping / Parallax Mapping
 
-float3 CalcNormalmap(float3 _Tangent, float3 _Binormal, float3 _Normal, float2 _UV)
+float3 CalcNormalmap(float3 _Tangent, float3 _Binormal, float3 _Normal, float2 _UV, out float4 Bump_)
 {
   float3 l_Tangent  = normalize(_Tangent);
   float3 l_Binormal = normalize(_Binormal);
   float3 l_Normal   = normalize(_Normal);
   
   //La variable g_Bump es una constante que nos dará la profundidad, podemos utilizar un valor de
-  float3 l_Bump= tex2D(NormalTextureSampler,_UV).rgb * 2.0 - 1.0;
+  Bump_ = tex2D(NormalTextureSampler,_UV).rgba * 2.0 - 1.0;
 
-  return normalize(l_Bump.x*l_Tangent + l_Bump.y*l_Binormal + l_Bump.z*l_Normal);
+  return normalize(Bump_.x*l_Tangent + Bump_.y*l_Binormal + Bump_.z*l_Normal);
 }
 
 float3 CalcParallaxMap(float3 _Position, float3 WorldNormal, float3 WorldTangent, float3 WorldBinormal, float2 UV, out float2 OutUV)

@@ -18,6 +18,7 @@
 #include "SpecularPropertyDecorator.h"
 #include "AlphaDecorator.h"
 #include "GlowPropertyDecorator.h"
+#include "EnvironmentTextureDecorator.h"
 
 #include <IndexedVertexs.h>
 #include <base.h>
@@ -153,7 +154,14 @@ bool CStaticMesh::Load()
       memset(l_szPath,0,sizeof(char)*(l_usStrLength));
       l_File.read(l_szPath, sizeof(char)*l_usStrLength);
 
-      l_pTexture = l_pTextureManager->GetResource(l_szPath);
+      if(l_usTextureType == ENVIRONMENT_MATERIAL_MASK)
+      {
+        l_pTexture = l_pTextureManager->GetCubeTexture(l_szPath);
+      }
+      else
+      {
+        l_pTexture = l_pTextureManager->GetResource(l_szPath);
+      }
 
       delete[] l_szPath;
 
@@ -174,21 +182,8 @@ bool CStaticMesh::Load()
         case GLOW_MATERIAL_MASK:
           l_pMaterial = new CGlowTextureDecorator(l_pMaterial,l_pTexture);
           break;
-        case AMBIENT_MATERIAL_MASK:
-          //l_pMaterial = new CGlowTextureDecorator(l_pMaterial,l_pTexture);
-          CTexture* l_pCubeMapTextures[6];
-          l_pCubeMapTextures[0] = l_pTexture;
-
-          //llegim les altres 5 textures
-          for(int i = 0; i < 5; ++i)
-          {
-            l_File.read((char*)&l_usStrLength, sizeof(uint16));
-            l_szPath = new char[++l_usStrLength];
-            memset(l_szPath,0,sizeof(char)*(l_usStrLength));
-            l_File.read(l_szPath, sizeof(char)*l_usStrLength);
-            l_pCubeMapTextures[i+1] = l_pTextureManager->GetResource(l_szPath);
-            delete[] l_szPath;
-          }
+        case ENVIRONMENT_MATERIAL_MASK:
+          l_pMaterial = new CEnvironmentTextureDecorator(l_pMaterial,l_pTexture);
           //TODO
           LOGGER->AddNewLog(ELL_WARNING, "Ambient Materials Not yet implementeds");
 

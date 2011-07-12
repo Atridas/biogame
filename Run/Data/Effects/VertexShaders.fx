@@ -178,8 +178,8 @@ TNORMAL_TEXTURED_VERTEX_PS RenderCal3DHWVS(CAL3D_HW_VERTEX_VS IN)
 	//CalcAnimatedNormalTangent(IN.Normal.xyz, IN.Tangent.xyz, IN.Indices, IN.Weight, l_Normal,l_Tangent);
 	float3 l_Position = CalcAnimtedPos(float4(IN.Position.xyz,1.0), IN.Indices, IN.Weight);
 	float3 l_Normal   = CalcAnimtedPos(float4(IN.Normal.xyz,0.0), IN.Indices, IN.Weight);
-	float4 l_WorldPosition=float4(-l_Position.x,l_Position.y,l_Position.z, 1.0);
-	out_.WorldPosition=mul(l_WorldPosition,g_WorldMatrix);  
+	float4 l_LocalPosition=float4(-l_Position.x,l_Position.y,l_Position.z, 1.0);
+	out_.WorldPosition=mul(l_LocalPosition,g_WorldMatrix);  
 	out_.WorldNormal = mul(float4(-l_Normal.x,l_Normal.y,l_Normal.z,0.0),g_WorldMatrix);
 	
   
@@ -187,8 +187,8 @@ TNORMAL_TEXTURED_VERTEX_PS RenderCal3DHWVS(CAL3D_HW_VERTEX_VS IN)
 	//OUT.WorldTangent=normalize(mul(l_Tangent,g_WorldMatrix));
 	//OUT.WorldBinormal=mul(cross(l_Tangent,l_Normal),(float3x3)g_WorldMatrix);
 	out_.UV = IN.TexCoord.xy;
-	out_.HPosition = mul(l_WorldPosition, g_WorldViewProjectionMatrix );
-  float4 vPos = mul(l_WorldPosition,g_WorldViewMatrix);
+	out_.HPosition = mul(l_LocalPosition, g_WorldViewProjectionMatrix );
+  float4 vPos = mul(l_LocalPosition,g_WorldViewMatrix);
   out_.PosLight = mul(vPos, g_ViewToLightProjectionMatrix);
 
 	return out_;
@@ -207,10 +207,10 @@ TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS RenderTangentBitangentCal3DHWVS(CAL3
 	float3 l_Bitangent = CalcAnimtedPos(float4(IN.Bitangent.xyz,0.0), IN.Indices, IN.Weight);
 	
   
-  float4 l_WorldPosition=float4(-l_Position.x,l_Position.y,l_Position.z, 1.0);
+  float4 l_LocalPosition=float4(-l_Position.x,l_Position.y,l_Position.z, 1.0);
   
   
-	out_.WorldPosition=mul(l_WorldPosition,g_WorldMatrix);  
+	out_.WorldPosition=mul(l_LocalPosition,g_WorldMatrix);  
 	out_.WorldNormal = mul(float4(-l_Normal.x,l_Normal.y,l_Normal.z,0.0),g_WorldMatrix);
 	out_.WorldTangent = mul(float4(l_Tangent.x,-l_Tangent.y,-l_Tangent.z,0.0),g_WorldMatrix);
 	out_.WorldBinormal = mul(float4(l_Bitangent.x,-l_Bitangent.y,-l_Bitangent.z,0.0),g_WorldMatrix);
@@ -220,8 +220,8 @@ TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS RenderTangentBitangentCal3DHWVS(CAL3
 	//OUT.WorldTangent=normalize(mul(l_Tangent,g_WorldMatrix));
 	//OUT.WorldBinormal=mul(cross(l_Tangent,l_Normal),(float3x3)g_WorldMatrix);
 	out_.UV = IN.TexCoord.xy;
-	out_.HPosition = mul(l_WorldPosition, g_WorldViewProjectionMatrix );
-  float4 vPos = mul(l_WorldPosition,g_WorldViewMatrix);
+	out_.HPosition = mul(l_LocalPosition, g_WorldViewProjectionMatrix );
+  float4 vPos = mul(l_LocalPosition,g_WorldViewMatrix);
   out_.PosLight = mul(vPos, g_ViewToLightProjectionMatrix);
 
 	return out_;

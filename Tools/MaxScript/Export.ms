@@ -194,31 +194,20 @@ function CheckMesh _object _checkMaterial =
 					(
 						format "El multimaterial % de l'objecte % té la textura de reflexió activada però no definida." i l_name to:l_aux
 						return l_aux
-					)else if classof l_currentMaterial.reflectionMap != Reflect_Refract then
+					)else if classof l_currentMaterial.reflectionMap != Bitmaptexture then
 					(
-						format "El multimaterial % de l'objecte % no té un Reflect_Refract com a textura de reflexió." i l_name to:l_aux
+						format "El multimaterial % de l'objecte % no té un Bitmap com a textura de reflexió." i l_name to:l_aux
 						return l_aux
-					)else if l_currentMaterial.reflectionMap.bitmapName == undefined then
+					)else if l_currentMaterial.reflectionMap.filename == undefined then
 					(
 						format "El multimaterial % de l'objecte % té un Bitmap no definit com a textura de reflexió." i l_name to:l_aux
 						return l_aux
-					)else if classof l_currentMaterial.reflectionMap.bitmapName != ArrayParameter then
-					(
-						format "El multimaterial % de l'objecte % no té un array de Bitmaps com a textura de reflexió." i l_name to:l_aux
-						return l_aux
-					)else if l_currentMaterial.reflectionMap.bitmapName.count != 6 then
-					(
-						format "El multimaterial % de l'objecte % no té 6 Bitmaps com a textura de reflexió, en té %." i l_name l_currentMaterial.filterMap.bitmapName.count to:l_aux
-						return l_aux
 					)else
 					(
-						for j = 1 to 6 do
+						if doesFileExist l_currentMaterial.reflectionMap.filename == false then
 						(
-							if doesFileExist l_currentMaterial.reflectionMap.bitmapName[j] == false then
-							(
-								format "No es troba la textura de reflexió \"%\" del multimaterial % de l'objecte %." l_material[i].reflectionMap.bitmapName[j] i l_name to:l_aux
-								return l_aux
-							)
+							format "No es troba la textura de reflexió \"%\" del multimaterial % de l'objecte %." l_material[i].reflectionMap.filename i l_name to:l_aux
+							return l_aux
 						)
 					)				
 				)
@@ -336,31 +325,20 @@ function CheckMesh _object _checkMaterial =
 					(
 						format "L'objecte % té la textura de reflexió activada però no definida." l_name to:l_aux
 						return l_aux
-					)else if classof l_material.reflectionMap != Reflect_Refract then
+					)else if classof l_material.reflectionMap != Bitmaptexture then
 					(
-						format "L'objecte % no té un Reflect_Refract com a textura de reflexió." l_name to:l_aux
+						format "L'objecte % no té un Bitmap com a textura de reflexió." l_name to:l_aux
 						return l_aux
-					)else if l_material.reflectionMap.bitmapName == undefined then
+					)else if l_material.reflectionMap.filename == undefined then
 					(
 						format "L'objecte % té un Bitmap no definit com a textura de reflexió." l_name to:l_aux
 						return l_aux
-					)else if classof l_material.reflectionMap.bitmapName != ArrayParameter then
-					(
-						format "L'objecte % no té un array de Bitmaps com a textura de reflexió." l_name to:l_aux
-						return l_aux
-					)else if l_material.reflectionMap.bitmapName.count != 6 then
-					(
-						format "L'objecte % no té 6 Bitmaps com a textura de reflexió, en té %." l_name l_currentMaterial.filterMap.bitmapName.count to:l_aux
-						return l_aux
 					)else
 					(
-						for j = 1 to 6 do
+						if doesFileExist l_material.reflectionMap.filename == false then
 						(
-							if doesFileExist l_material.reflectionMap.bitmapName[j] == false then
-							(
-								format "No es troba la textura de reflexió \"%\" de l'objecte %." l_material[i].reflectionMap.bitmapName[j] l_name to:l_aux
-								return l_aux
-							)
+							format "No es troba la textura de reflexió \"%\" de l'objecte %." l_material[i].reflectionMap.filename l_name to:l_aux
+							return l_aux
 						)
 					)				
 				)

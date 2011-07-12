@@ -59,6 +59,24 @@ CTexture* CTextureManager::GetResource(const std::string &_szName)
   return l_pTexture;
 }
 
+//TODO potser millorar això una mica, no?
+CTexture* CTextureManager::GetCubeTexture(const std::string &_szName)
+{
+  CTexture* l_pTexture = CMapManager::GetResource(_szName);
+  if(l_pTexture != 0)
+    return l_pTexture;
+
+  l_pTexture = new CTexture();
+  if(!l_pTexture->Load(_szName,true))
+  {
+    LOGGER->AddNewLog(ELL_WARNING, "CTextureManager::GetResource -> Textura no trobada.");
+    CHECKED_DELETE(l_pTexture);
+    return m_pDefaultTexture;
+  }
+  CMapManager::AddResource(_szName,l_pTexture);
+  return l_pTexture;
+}
+
 void CTextureManager::Release()
 {
   CHECKED_DELETE(m_pDefaultTexture);

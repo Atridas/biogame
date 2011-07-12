@@ -10,7 +10,7 @@
 #define GLOW_MATERIAL_MASK                  0x0020
 #define PARALLAX_MATERIAL_MASK              0x0040
 #define RADIOSITY_NORMAL_MATERIAL_MASK      0x0080
-#define AMBIENT_MATERIAL_MASK               0x0200
+#define ENVIRONMENT_MATERIAL_MASK           0x0200
 
 #define PARALLAX_PROPERTY_TYPE           1
 #define BUMP_PROPERTY_TYPE               2

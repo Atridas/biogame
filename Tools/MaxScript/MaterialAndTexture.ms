@@ -115,7 +115,7 @@ function ExportMaterial _object _material _vertexType _file _relativePath _norma
 	(
 		--l_materialMask = bit.or l_materialMask TEXTURE_TYPE_ENVIRONMENT
 		l_numTextures = l_numTextures + 1
-		format "	->	AMBIENT\n"
+		format "	->	ENVIRONMENT\n"
 	)
 	
 	--volcat a fitxer
@@ -182,16 +182,14 @@ function ExportMaterial _object _material _vertexType _file _relativePath _norma
 	
 	if _material.reflectionMapEnable == true and _material.reflectionMap != undefined then
 	(
-		WriteShort _file AMBIENT_MATERIAL_MASK #unsigned
+		WriteShort _file ENVIRONMENT_MATERIAL_MASK #unsigned
 		
-		for j = 1 to 6 do
-		(
-			l_texture = filenameFromPath _material.reflectionMap.bitmapName[j]
-			l_texture = _relativePath + l_texture
-			
-			WriteShort _file l_texture.count #unsigned
-			WriteString _file l_texture
-		)
+		l_texture = filenameFromPath _material.reflectionMap.filename
+		l_texture = _relativePath + l_texture
+		
+		WriteShort _file l_texture.count #unsigned
+		WriteString _file l_texture
+		
 	)
 	
 	--propietats dels materials	
@@ -345,11 +343,8 @@ function TextureListOne _material =
 	
 	if _material.reflectionMapEnable == true and  _material.reflectionMap != undefined then
 	(
-		for j = 1 to 6 do
-		(
-			l_texture = _material.reflectionMap.bitmapName[j]
-			append l_paths l_texture
-		)
+		l_texture = _material.reflectionMap.filename
+		append l_paths l_texture
 	)
 	
 	return l_paths
