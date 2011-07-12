@@ -18,6 +18,7 @@ public:
    * Constructor per defecte.
   **/
   CTexture(): CNamed(""),m_pTexture(0),
+                         m_pCubeTexture(0),
                          m_pRenderTargetTexture(0),
                          m_pDepthStencilRenderTargetTexture(0),
                          m_pOldRenderTarget(0),
@@ -42,7 +43,7 @@ public:
    * @param _szFileName Path relatiu al fitxer de textura.
    * @return True si s'ha carregat correctament, false sino.
   **/
-  bool Load(const string &_szFileName);
+  bool Load(const string &_szFileName, bool _bCubeTexture = false);
   /**
    * Mètode de recàrrega.
    * Aquest mètode recarregarà la textura especificada anteriorment.
@@ -109,6 +110,7 @@ protected:
    * Textura en format de DirectX9.
   **/
   LPDIRECT3DTEXTURE9 m_pTexture;
+  LPDIRECT3DCUBETEXTURE9 m_pCubeTexture;
   /**
    * Path relatiu a la textura.
   **/
@@ -126,7 +128,7 @@ protected:
    * Aquest mètode carregarà la textura especificada a m_pTexture a la VRAM.
    * @return True si s'ha carregat correctament, false sino.
   **/
-  virtual bool LoadFile();
+  virtual bool LoadFile(bool _bCubeTexture);
   /**
    * Mètode d'alliberament de recursos.
   **/

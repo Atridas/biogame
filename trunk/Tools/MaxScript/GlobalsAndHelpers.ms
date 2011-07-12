@@ -25,7 +25,7 @@ global GLOW_MATERIAL_MASK                               = 0x0020
 global PARALLAX_MATERIAL_MASK                          = 0x0040
 global SPECULAR_MATERIAL_MASK                          = 0x0080
 global ALPHA_MATERIAL_MASK                               = 0x0100
-global AMBIENT_MATERIAL_MASK                            = 0x0200
+global ENVIRONMENT_MATERIAL_MASK                    = 0x0200
 
 global PARALLAX_PROPERTY_TYPE                     = 1
 global BUMP_PROPERTY_TYPE                           = 2

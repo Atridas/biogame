@@ -43,6 +43,7 @@ public:
    * @return Textura sol·licitada.
   **/
   virtual CTexture* GetResource(const std::string &_szName);
+  virtual CTexture* GetCubeTexture(const std::string &_szName);
 
   virtual void Release();
 

@@ -23,10 +23,11 @@ float4 LightmapNormalmapPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _in) : C
 
   bool l_DynamicObject = false;
   
+  float4 l_Bump;
 	float3 l_Normal = CalcNormalmap((float3)_in.WorldTangent, 
                                   (float3)_in.WorldBinormal, 
                                   (float3)_in.WorldNormal, 
-                                  _in.UV);
+                                  _in.UV, l_Bump);
 	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
 	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2);
 	float4 l_LightResult = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
@@ -40,12 +41,13 @@ float4 RadiosityNormalmapPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VERTEX_PS _in) : 
 
   bool l_DynamicObject = false;
   
+  float4 l_Bump;
 	float3 l_Normal = CalcNormalmap((float3)_in.WorldTangent, 
                                   (float3)_in.WorldBinormal, 
                                   (float3)_in.WorldNormal, 
-                                  _in.UV);
+                                  _in.UV, l_Bump);
 	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
-	float4 l_LightmapColor = RadiosityNormalLightmapColor(_in.UV, _in.UV2);
+	float4 l_LightmapColor = RadiosityNormalLightmapColor(l_Bump, _in.UV2);
 	float4 l_LightResult = float4(ComputeAllLights( l_Normal, _in.WorldPosition, l_DiffuseColor, 
                                                   l_LightmapColor, g_SpotlightFactor,
                                                   _in.PosLight,l_DynamicObject)
@@ -60,10 +62,11 @@ float4 ShowNormalsPS(TNORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
 }
 
 float4 ShowNormalmapPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS _in) : COLOR {
+  float4 l_Bump;
   float3 l_DiffuseColor = CalcNormalmap((float3)_in.WorldTangent, 
                                         (float3)_in.WorldBinormal, 
                                         (float3)_in.WorldNormal, 
-                                        _in.UV);
+                                        _in.UV, l_Bump);
 	return float4(l_DiffuseColor, 1.0);
 }
 
@@ -150,7 +153,8 @@ float4 TangentBinormalNormalTexturedNoParallaxPS(TTANGENT_BINORMAL_NORMAL_TEXTUR
 
   bool l_DynamicObject = true;
   
-  float3 l_Normal = normalize(CalcNormalmap(_in.WorldTangent, _in.WorldBinormal, _in.WorldNormal, _in.UV));
+  float4 l_Bump;
+  float3 l_Normal = normalize(CalcNormalmap(_in.WorldTangent, _in.WorldBinormal, _in.WorldNormal, _in.UV, l_Bump));
 	
   float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
   
@@ -189,7 +193,8 @@ float4 SpecularNormalmapTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED_VERTEX_PS _
 
   bool l_DynamicObject = true;
   
-  float3 l_Normal = normalize(CalcNormalmap(_in.WorldTangent, _in.WorldBinormal, _in.WorldNormal, _in.UV));
+  float4 l_Bump;
+  float3 l_Normal = normalize(CalcNormalmap(_in.WorldTangent, _in.WorldBinormal, _in.WorldNormal, _in.UV, l_Bump));
 
   float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
   
@@ -234,10 +239,11 @@ float4 SpecularLightmapNormalmapTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_VE
 
   bool l_DynamicObject = false;
   
+  float4 l_Bump;
 	float3 l_Normal = CalcNormalmap((float3)_in.WorldTangent, 
                                   (float3)_in.WorldBinormal, 
                                   (float3)_in.WorldNormal, 
-                                  _in.UV);
+                                  _in.UV, l_Bump);
 	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
 	float4 l_LightmapColor = tex2D(LightmapTextureSampler,_in.UV2);
 
@@ -258,12 +264,13 @@ float4 SpecularRadiosityNormalmapTexturedPS(TTANGENT_BINORMAL_NORMAL_TEXTURED2_V
 
   bool l_DynamicObject = false;
   
+  float4 l_Bump;
 	float3 l_Normal = CalcNormalmap((float3)_in.WorldTangent, 
                                   (float3)_in.WorldBinormal, 
                                   (float3)_in.WorldNormal, 
-                                  _in.UV);
+                                  _in.UV, l_Bump);
 	float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
-	float4 l_LightmapColor = RadiosityNormalLightmapColor(_in.UV, _in.UV2);
+	float4 l_LightmapColor = RadiosityNormalLightmapColor(l_Bump, _in.UV2);
 	
 	float  l_SpotlightFactor = 1.0;
 	

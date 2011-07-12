@@ -202,6 +202,9 @@
     <Filter Include="Portal Rendering\PortalManager">
       <UniqueIdentifier>{baee1e65-9ac4-4bbb-8cea-7c7cad125267}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Materials\MaterialDecorators\TextureDecorators\EnvironmentTexture">
+      <UniqueIdentifier>{1bcd0d67-a551-42b7-9bd6-98c41929e83d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -517,6 +520,9 @@
     </ClInclude>
     <ClInclude Include="include\SphereCamera.h">
       <Filter>Cameras\SphereCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EnvironmentTextureDecorator.h">
+      <Filter>Materials\MaterialDecorators\TextureDecorators\EnvironmentTexture</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

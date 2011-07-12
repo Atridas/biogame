@@ -1,18 +1,18 @@
 
-
 #define NS_LIGHTING
 #define NS_TEX0
-#define NS_LIGHTMAP
-#define NS_NORMALMAP
+//#define NS_LIGHTMAP
+//#define NS_NORMALMAP
 //#define NS_CAL3D
-#define NS_RADIOSITY_NORMALMAP
+//#define NS_RADIOSITY_NORMALMAP
 //#define NS_SPECULAR
+#define NS_ENVIRONMENT
 
 #include "NewShaders.fx"
 
-technique RadiosityNormalmapTechnique {
+technique NormalTexturedEnvironmentTechnique {
 	pass p0 {
-		//Activamos el Zbuffer, el Zwrite y la funci�n de Z�s que queremos utilizar
+		//Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar
     ZEnable = true;
     ZWriteEnable = true;
     ZFunc = LessEqual;
@@ -26,7 +26,7 @@ technique RadiosityNormalmapTechnique {
 	}
 }
 
-technique RadiosityNormalmapAlphaTechnique {
+technique NormalTexturedEnvironmentAlphaTechnique {
 	pass p0 {
 		//Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar
     ZEnable = true;

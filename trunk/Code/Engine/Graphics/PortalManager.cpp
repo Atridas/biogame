@@ -311,6 +311,7 @@ void CPortalManager::Render(CRenderManager* _pRM, bool _bDebug)
   CRenderableObjectOrdering l_Ordering(l_vEye);
 
   CRoom::TBlendQueue l_BlendQueue(l_Ordering);
+  CORE->GetEffectManager()->ActivateDefaultRendering();
 
   if(!l_pCameraRoom)
   {
