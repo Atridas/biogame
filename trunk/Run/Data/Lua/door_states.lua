@@ -73,6 +73,7 @@ State_Porta_Open['Enter'] = function(_entitat)
   if l_door:is_open() == false then
     if l_door:open() == false then
       _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Closed')
+      return
     end
   end
   
@@ -103,6 +104,7 @@ State_Porta_Open['Receive'] = function(_entitat, _event)
   
   if _event.msg == Event.tancar then
     _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Closing')
+    return
   end
   
 end
@@ -121,6 +123,7 @@ State_Porta_Opening['Enter'] = function(_entitat)
   if l_door:is_open() then
     if l_door:close() == false then
       _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Open')
+      return
     end
   end
   
@@ -148,6 +151,7 @@ State_Porta_Opening['Update'] = function(_entitat, _dt)
   
   if l_door.time >= Porta_Constants["Open Speed"] then
     _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Open')
+    return
   end
 end
 
@@ -158,6 +162,7 @@ State_Porta_Opening['Receive'] = function(_entitat, _event)
   
   if _event.msg == Event.tancar then
     _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Closing')
+    return
   end
 end
 
@@ -167,13 +172,13 @@ end
 -- Closed!!!! -----------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
-
 State_Porta_Closed['Enter'] = function(_entitat)
   --comprovar que la porta no estigui bloquejada
   local l_door = _entitat:get_component(BaseComponent.door)
   if l_door:is_open() then
     if l_door:close() == false then
       _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Open')
+      return
     end
   end
   
@@ -203,6 +208,7 @@ State_Porta_Closed['Receive'] = function(_entitat, _event)
   
   if _event.msg == Event.obrir then
     _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Opening')
+    return
   end
 end
 
@@ -221,6 +227,7 @@ State_Porta_Closing['Enter'] = function(_entitat)
   if l_door:is_open() then
     if l_door:close() == false then
       _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Open')
+      return
     end
   end
   
@@ -247,6 +254,7 @@ State_Porta_Closing['Update'] = function(_entitat, _dt)
   
   if l_door.time >= Porta_Constants["Close Speed"] then
     _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Closed')
+    return
   end
 end
 
@@ -257,5 +265,6 @@ State_Porta_Closing['Receive'] = function(_entitat, _event)
   
   if _event.msg == Event.obrir then
     _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Opening')
+    return
   end
 end
