@@ -240,7 +240,11 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentVida, CBaseComponent>("ComponentVida")
       .def("add_to_entity",            &CComponentVida::AddToEntity)
-      .def_readwrite("vida",           &CComponentVida::m_fVida)
+      .def("get_hp",                   &CComponentVida::GetHP)
+      .def("increase",                 &CComponentVida::Increase)
+      .def("decrease",                 &CComponentVida::Decrease)
+      .def("set",                      &CComponentVida::Set)
+      .def("set_regen",                &CComponentVida::SetRegen)
       .def_readwrite("immortal",       &CComponentVida::m_bImmortal)
       
     // ----------------------------------------------------------------------------------------------------

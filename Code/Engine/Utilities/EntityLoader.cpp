@@ -431,7 +431,7 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
 
   CComponentPhysXController::AddToEntity(l_pPlayer, l_fCapsuleRadius, l_fCapsuleHeigh, 45.0f, l_fCapsuleSkin, 0.2f, ECG_PERSONATGE );
 
-  CComponentVida::AddToEntity(l_pPlayer, 100.f);
+  CComponentVida::AddToEntity(l_pPlayer, 100.f, 100.f, true, 3.0f);
 
   CComponentStateMachine::AddToEntity(l_pPlayer, "State_Player_Neutre");
 
@@ -490,7 +490,7 @@ CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f
   //(new CComponentIAWalkToPlayer())->Init(l_peEnemy,"Player",2,"walk","impact");
   CComponentIABrain::AddToEntity(l_peEnemy,_szPlayerName,_szRagdollModell);
   //CComponentAnimation::AddToEntity(l_peEnemy);
-  CComponentVida::AddToEntity(l_peEnemy, 100.f);
+  CComponentVida::AddToEntity(l_peEnemy, 100.f, 100.f);
 
   CComponentStateMachine::AddToEntity(l_peEnemy, _szInitialState);
 

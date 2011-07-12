@@ -328,7 +328,7 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Enemy_Mort['Update'] = function(_enemic, _dt)
-  --_enemic:get_component(BaseComponent.vida).vida = 100
+  --_enemic:get_component(BaseComponent.vida).set(100)
   --_enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Idle')
 end
 
