@@ -34,6 +34,7 @@ extern "C"
 #include "ComponentHighCover.h"
 #include "ComponentLowCover.h"
 #include "ComponentDoor.h"
+#include "ComponentShield.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -111,7 +112,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("ragdoll",              CBaseComponent::ECT_RAGDOLL),
           value("cover",                CBaseComponent::ECT_COVER),
           value("mirilla",              CBaseComponent::ECT_MIRILLA),
-          value("door",                 CBaseComponent::ECT_DOOR)
+          value("door",                 CBaseComponent::ECT_DOOR),
+          value("shield",               CBaseComponent::ECT_SHIELD)
       ]
       .def("get_type",     &CBaseComponent::GetType)
       .def("get_entity",   &CBaseComponent::GetEntity)
@@ -246,6 +248,19 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("set",                      &CComponentVida::Set)
       .def("set_regen",                &CComponentVida::SetRegen)
       .def_readwrite("immortal",       &CComponentVida::m_bImmortal)
+
+    // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentShield, CBaseComponent>("ComponentShield")
+      .def("add_to_entity",            &CComponentShield::AddToEntity)
+      .def("get_hp",                   &CComponentShield::GetHP)
+      .def("increase",                 &CComponentShield::Increase)
+      .def("decrease",                 &CComponentShield::Decrease)
+      .def("set",                      &CComponentShield::Set)
+      .def("set_regen",                &CComponentShield::SetRegen)
+      .def("activate",                 &CComponentShield::Activate)
+      .def("deactivate",               &CComponentShield::Deactivate)
+      .def("is_active",                &CComponentShield::IsActive)
+      .def("is_ready",                 &CComponentShield::IsReady)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentRagdoll, CBaseComponent>("ComponentRagdoll")

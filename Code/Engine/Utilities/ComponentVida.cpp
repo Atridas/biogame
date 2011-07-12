@@ -1,4 +1,5 @@
 #include "ComponentVida.h"
+#include "ComponentShield.h"
 #include "Core.h"
 
 CComponentVida* CComponentVida::AddToEntity(CGameEntity* _pEntity, float _fVidaInicial, float _fVidaMaxima, bool _bRegen, float _fRegenAmount)
@@ -23,6 +24,8 @@ bool CComponentVida::Init(CGameEntity* _pEntity, float _fVidaInicial, float _fVi
   m_fVidaMaxima = _fVidaMaxima;
   m_bRegen = _bRegen;
   m_fRegenAmount = _fRegenAmount;
+
+  m_pShield = _pEntity->GetComponent<CComponentShield>(ECT_SHIELD);
 
   SetOk(true);
   return IsOk();
@@ -92,7 +95,14 @@ void CComponentVida::ReceiveEvent(const SEvent& _Event)
   {
     assert(_Event.Info[0].Type == SEventInfo::FLOAT);
 
-    Decrease(_Event.Info[0].f);
+    float l_fDamage = _Event.Info[0].f;
+
+    //Si té escut, el mal el rep aquest.
+    //La resta del mal passa al jugador per si l'escut es trenca.
+    if(m_pShield)
+      l_fDamage = m_pShield->Decrease(l_fDamage);
+
+    Decrease(l_fDamage);
 
     if(m_fVida <= 0.f)
     {

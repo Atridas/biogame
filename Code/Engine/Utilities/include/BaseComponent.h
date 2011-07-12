@@ -42,7 +42,8 @@ public:
     ECT_RAGDOLL,
     ECT_COVER,
     ECT_MIRILLA,
-    ECT_DOOR
+    ECT_DOOR,
+    ECT_SHIELD
   };
   
   virtual Type GetType() = 0; //{return m_Type;};

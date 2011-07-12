@@ -5,6 +5,8 @@
 #include "base.h"
 #include "EntityDefines.h"
 
+class CComponentShield;
+
 class CComponentVida:
   public CBaseComponent
 {
@@ -31,7 +33,7 @@ public:
   bool  m_bImmortal;
 protected:
 
-  CComponentVida():m_fVida(100.0f), m_fVidaMaxima(100.0f), m_bImmortal(false), m_fRegenAmount(0.0f), m_bRegen(false) {};
+  CComponentVida():m_fVida(100.0f), m_fVidaMaxima(100.0f), m_bImmortal(false), m_fRegenAmount(0.0f), m_bRegen(false), m_pShield(0) {};
   bool Init(CGameEntity* _pEntity, float _fVidaInicial, float _fVidaMaxima, bool _bRegen = false, float _fRegenAmount = 0.0f);
   virtual void Release() {};
 
@@ -40,6 +42,9 @@ private:
   float m_fVidaMaxima;
   bool  m_bRegen;
   float m_fRegenAmount;
+
+  //escut
+  CComponentShield* m_pShield;
 };
 
 #endif

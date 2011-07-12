@@ -97,6 +97,9 @@
     <Filter Include="EntitySystem\Components\ComponentDoor">
       <UniqueIdentifier>{17c5f82b-1ae6-45b6-bfb6-436203f6d74f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentShield">
+      <UniqueIdentifier>{dfbe7cd2-b786-4549-846a-cd1e982bce13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -200,6 +203,9 @@
     </ClCompile>
     <ClCompile Include="ComponentDoor.cpp">
       <Filter>EntitySystem\Components\ComponentDoor</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentShield.cpp">
+      <Filter>EntitySystem\Components\ComponentShield</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -313,6 +319,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentDoor.h">
       <Filter>EntitySystem\Components\ComponentDoor</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentShield.h">
+      <Filter>EntitySystem\Components\ComponentShield</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
