@@ -15,6 +15,7 @@ Player_Constants["Apuntar"] = 'aim'
 Player_Constants["Disparar"] = 'shoot'
 Player_Constants["Rebre impacte"] = 'impact'
 Player_Constants["Morir"] = 'dead'
+Player_Constants["Escut"] = 'protection'
 --temps animacions
 Player_Constants["Temps Tocat"] = 0.3
 Player_Constants["Temps Morint"] = 2.6
@@ -28,6 +29,7 @@ State_Player_Apuntar = {}
 State_Player_Tocat = {}
 State_Player_Morint = {}
 State_Player_Mort = {}
+State_Player_Escut = {}
 
 State_Player_Cobertura_Baixa = {}
 State_Player_Cobertura_Baixa_Tocat = {}
@@ -118,6 +120,14 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   if ACTION_MANAGER:is_action_active('Aim') then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Apuntar')
     return
+  end
+  
+  if ACTION_MANAGER:is_action_active('Shield') then
+    if _jugador:get_component(BaseComponent.shield):is_ready() then
+      _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Escut')
+      
+      return
+    end
   end
   
   if ACTION_MANAGER:is_action_active('MoveLeft') then
@@ -245,8 +255,15 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
   
   if not ACTION_MANAGER:is_action_active('Aim') then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
-	
     return
+  end
+  
+  if ACTION_MANAGER:is_action_active('Shield') then
+    if _jugador:get_component(BaseComponent.shield):is_ready() then
+      _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Escut')
+      
+      return
+    end
   end
   
   if ACTION_MANAGER:is_action_active('Shoot') then
@@ -366,6 +383,7 @@ State_Player_Tocat['Update'] = function(_jugador, _dt)
     --  _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Apuntar')
     --end
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():revert_state()
+    return
   end
 end
 
@@ -377,6 +395,58 @@ State_Player_Tocat['Receive'] = function(_jugador, _event)
   end
 end
 
+
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-- Escut !!!! -----------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+
+
+State_Player_Escut['Enter'] = function(_jugador)
+  --log('enter player apuntant')
+  local shield = _jugador:get_component(BaseComponent.shield)
+  
+  if shield:activate() == false then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():revert_state()
+    
+    return
+  end
+  
+  local animation = _jugador:get_component(BaseComponent.animation)
+  --animation:play_cycle(Player_Constants["Escut Idle"], 0.3)
+  animation:clear_all_cycles(0.1)
+  animation:play_cycle(Player_Constants["Escut"], 0.1)
+  
+  --SOUND:play_sample(Player_Constants["So escut activat"])
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Escut['Exit'] = function(_jugador)
+  local shield = _jugador:get_component(BaseComponent.shield)
+  shield:deactivate()
+  
+  local animation = _jugador:get_component(BaseComponent.animation)
+  animation:stop_cycle(Player_Constants["Escut"], 0.1)
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Escut['Update'] = function(_jugador, _dt)
+  local shield = _jugador:get_component(BaseComponent.shield)
+  
+  local animation = _jugador:get_component(BaseComponent.animation)
+  --animation:play_cycle(Player_Constants["Escut Idle"], 0.3)
+  
+  if shield:is_active() == false or not ACTION_MANAGER:is_action_active('Shield') then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():revert_state()
+    return
+  end
+  
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Escut['Receive'] = function(_jugador, _event)
+end
 
 
 -------------------------------------------------------------------------------------------------
