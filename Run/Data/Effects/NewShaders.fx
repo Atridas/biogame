@@ -12,7 +12,7 @@
 //#define NS_NORMALMAP
 //#define NS_CAL3D
 //#define NS_RADIOSITY_NORMALMAP
-//#define NS_SPECULAR
+//#define NS_SPECULARMAP
 //#define NS_ENVIRONMENT
 
 
@@ -38,7 +38,7 @@
 
 #endif
 
-#if defined( NS_SPECULAR )
+#if defined( NS_SPECULARMAP )
 
   #if !defined( NS_TEX0 )
     #define NS_TEX0
@@ -191,12 +191,23 @@ float4 NewPS(TNEW_PS _in) : COLOR {
       float4 l_AmbientColor = float4(g_AmbientLight,1.0);
     #endif
     
-    #if defined( NS_SPECULAR )
+    
+    
+    #if defined( NS_SPECULARMAP )
       float  l_SpotlightFactor = 1.0;
       
-      if(g_SpecularActive)
-        l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x;
+      #if defined ( NS_ENVIRONMENT )
+        float l_SpecularTextureValue = tex2D(SpecularTextureSampler,_in.UV).x;
+        if(g_SpecularActive)
+          l_SpotlightFactor;
+      #else
+        if(g_SpecularActive)
+          l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x;
+      #endif
     #else
+      #if defined ( NS_ENVIRONMENT )
+        float l_SpecularTextureValue = 1.0;
+      #endif 
       float  l_SpotlightFactor = g_SpotlightFactor;
     #endif
 
@@ -209,7 +220,9 @@ float4 NewPS(TNEW_PS _in) : COLOR {
     #if defined ( NS_ENVIRONMENT )
       float3 l_ReflectionVector = normalize(reflect(-l_EyeDirection, l_Normal));
       float4 l_EnvColor = texCUBE(EnvironmentTextureSampler, l_ReflectionVector);
-      l_DiffuseColor = l_EnvColor;
+      //l_DiffuseColor += l_SpotlightFactor * l_EnvColor;
+      //l_DiffuseColor = float4(l_SpotlightFactor, l_SpotlightFactor, l_SpotlightFactor, 1);
+      l_DiffuseColor += g_EnvironmentIntensity * l_SpecularTextureValue * l_EnvColor;
     #endif
                                              
   #endif

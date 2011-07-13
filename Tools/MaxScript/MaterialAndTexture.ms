@@ -115,6 +115,7 @@ function ExportMaterial _object _material _vertexType _file _relativePath _norma
 	(
 		--l_materialMask = bit.or l_materialMask TEXTURE_TYPE_ENVIRONMENT
 		l_numTextures = l_numTextures + 1
+		l_numProperties = l_numProperties + 1
 		format "	->	ENVIRONMENT\n"
 	)
 	
@@ -236,6 +237,13 @@ function ExportMaterial _object _material _vertexType _file _relativePath _norma
 		(
 			WriteShort _file RADIOSITY_NORMAL_PROPERTY_TYPE #unsigned
 			format "	->	Radiosity Normalmap:\n"
+		)
+		
+		if _material.reflectionMapEnable == true and _material.reflectionMap != undefined then
+		(
+			WriteShort _file ENVIRONMENT_PROPERTY_TYPE #unsigned
+			WriteFloat _file (_material.reflectionMapAmount / 100)
+			format "	->	Environment Amount %:\n" (_material.reflectionMapAmount / 100)
 		)
 	)
 )

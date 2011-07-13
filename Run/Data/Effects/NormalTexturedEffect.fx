@@ -5,7 +5,7 @@
 //#define NS_NORMALMAP
 //#define NS_CAL3D
 //#define NS_RADIOSITY_NORMALMAP
-//#define NS_SPECULAR
+//#define NS_SPECULARMAP
 
 #include "NewShaders.fx"
 
