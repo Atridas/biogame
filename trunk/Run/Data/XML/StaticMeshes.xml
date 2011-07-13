@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <meshes>
 	<mesh name="laser_pilota" path="Data/Meshes/laser_pilota.mesh" max="0.1 -0.0999877 0.1" min="-0.1 0.1 -0.1" />
+	<mesh name="ARMA" path="Data/Meshes/ARMA.mesh" max="0.0257965 0.0945455 0.0675429" min="-0.413583 -0.114497 -0.0675609" />
 </meshes>

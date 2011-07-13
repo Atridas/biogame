@@ -20,6 +20,7 @@
 #include "ComponentHighCover.h"
 #include "ComponentDoor.h"
 #include "ComponentShield.h"
+#include "ComponentArma.h"
 
 #include "PhysicsManager.h"
 
@@ -439,6 +440,7 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
 
   //(new CComponentRagdoll())->Init(m_pPlayerEntity, "Data/Animated Models/Riggle/Skeleton.xml");
   CComponentMirilla::AddToEntity(l_pPlayer, "laser_pilota");
+  CComponentArma::AddToEntity(l_pPlayer, "ARMA");
 
 
   return l_pPlayer;

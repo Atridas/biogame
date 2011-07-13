@@ -43,7 +43,8 @@ public:
     ECT_COVER,
     ECT_MIRILLA,
     ECT_DOOR,
-    ECT_SHIELD
+    ECT_SHIELD,
+    ECT_ARMA
   };
   
   virtual Type GetType() = 0; //{return m_Type;};

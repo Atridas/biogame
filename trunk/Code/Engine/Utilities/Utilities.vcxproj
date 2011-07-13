@@ -78,6 +78,7 @@
   <ItemGroup>
     <ClCompile Include="BaseComponent.cpp" />
     <ClCompile Include="ComponentAnimation.cpp" />
+    <ClCompile Include="ComponentArma.cpp" />
     <ClCompile Include="ComponentCover.cpp" />
     <ClCompile Include="ComponentDoor.cpp" />
     <ClCompile Include="ComponentHighCover.cpp" />
@@ -115,6 +116,7 @@
   <ItemGroup>
     <ClInclude Include="include\BaseComponent.h" />
     <ClInclude Include="include\ComponentAnimation.h" />
+    <ClInclude Include="include\ComponentArma.h" />
     <ClInclude Include="include\ComponentCover.h" />
     <ClInclude Include="include\ComponentDoor.h" />
     <ClInclude Include="include\ComponentHighCover.h" />

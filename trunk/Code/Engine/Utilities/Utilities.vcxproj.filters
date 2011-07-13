@@ -100,6 +100,9 @@
     <Filter Include="EntitySystem\Components\ComponentShield">
       <UniqueIdentifier>{dfbe7cd2-b786-4549-846a-cd1e982bce13}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentArma">
+      <UniqueIdentifier>{2b277006-1f47-4faa-a605-a972e96bc134}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -206,6 +209,9 @@
     </ClCompile>
     <ClCompile Include="ComponentShield.cpp">
       <Filter>EntitySystem\Components\ComponentShield</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentArma.cpp">
+      <Filter>EntitySystem\Components\ComponentArma</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -322,6 +328,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentShield.h">
       <Filter>EntitySystem\Components\ComponentShield</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentArma.h">
+      <Filter>EntitySystem\Components\ComponentArma</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

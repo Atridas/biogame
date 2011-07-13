@@ -413,6 +413,10 @@ void CPhysXProcess::Update(float _fElapsedTime)
 
   RenderLaserPoint(RENDER_MANAGER);
 
+  CRenderableAnimatedInstanceModel* l_pAnim2 = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("rigglebot");
+  Mat44f l_vMat = GetWeaponMat(RENDER_MANAGER);
+  CORE->GetRenderableObjectsManager()->GetResource("ARMA")->SetMat44(l_pAnim2->GetMat44()*l_vMat);
+
   if(m_pObject) 
   {
     //Actualitze el pitch i el yaw segons els delta del mouse
@@ -587,7 +591,7 @@ void CPhysXProcess::Update(float _fElapsedTime)
 
 Mat44f CPhysXProcess::GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone)
 {
-  //rotacio i translacio del bone (absoluta)
+   //rotacio i translacio del bone (absoluta)
   CalVector l_vTranslation = _pBone->getTranslationAbsolute();
   CalQuaternion l_RotationQuaternion = _pBone->getRotationAbsolute();
 
@@ -613,7 +617,6 @@ Mat44f CPhysXProcess::GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone)
   l_Transform.Translate(Vect3f(-l_vTranslation.x,l_vTranslation.y,l_vTranslation.z));
 
   return l_Transform;
-  
 }
 
 void CPhysXProcess::ExportSkeletonInfo(CalSkeleton* _pSkeleton)
@@ -1272,6 +1275,21 @@ void CPhysXProcess::RenderLaserPoint(CRenderManager* _pRM)
   {
     l_pRenderObject->SetMat44(l_vMat);
   }
+
+}
+
+
+Mat44f CPhysXProcess::GetWeaponMat(CRenderManager* _pRM)
+{
+  CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("rigglebot");
+  CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
+  //l_pSkeleton->calculateBoundingBoxes();
+  
+  int l_iBoneId = l_pSkeleton->getCoreSkeleton()->getCoreBoneId("Bip01 R Hand");
+  CalBone* l_pBone = l_pSkeleton->getBone(l_iBoneId);
+  
+  Mat44f l_vMat = GetBoneLeftHandedAbsoluteTransformation(l_pBone);
+  return l_vMat;
 
 }
 
