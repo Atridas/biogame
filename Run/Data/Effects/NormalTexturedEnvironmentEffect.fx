@@ -11,50 +11,9 @@
 #include "NewShaders.fx"
 
 technique NormalTexturedEnvironmentTechnique {
-	pass p0 {
-		//Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar
-    ZEnable = true;
-    ZWriteEnable = true;
-    ZFunc = LessEqual;
-    //Deshabilitamos el alphablend
-    AlphaBlendEnable = false;
-    //Tipo de culling que queremos utilizar
-    CullMode = CCW;
-    //Vertex / Pixel shader
-		VertexShader = compile vs_3_0 NewVS();
-		PixelShader  = compile ps_3_0 NewPS();
-	}
+	TECHNIQUE_BODY
 }
 
 technique NormalTexturedEnvironmentAlphaTechnique {
-	pass p0 {
-		//Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar
-    ZEnable = true;
-    ZWriteEnable = false;
-    ZFunc = LessEqual;
-    //Deshabilitamos el alphablend
-    AlphaBlendEnable = true;
-    SrcBlend = SrcAlpha;
-    DestBlend = InvSrcAlpha;
-    //Tipo de culling que queremos utilizar
-    CullMode = CW;
-    //Vertex / Pixel shader
-		VertexShader = compile vs_3_0 NewVS();
-		PixelShader  = compile ps_3_0 NewPS();
-	}
-	pass p1 {
-		//Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar
-    ZEnable = true;
-    ZWriteEnable = false;
-    ZFunc = LessEqual;
-    //Deshabilitamos el alphablend
-    AlphaBlendEnable = true;
-    SrcBlend = SrcAlpha;
-    DestBlend = InvSrcAlpha;
-    //Tipo de culling que queremos utilizar
-    CullMode = CCW;
-    //Vertex / Pixel shader
-		VertexShader = compile vs_3_0 NewVS();
-		PixelShader  = compile ps_3_0 NewPS();
-	}
+	ALPHA_TECHNIQUE_BODY
 }

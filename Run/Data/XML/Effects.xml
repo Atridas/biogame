@@ -2,7 +2,7 @@
 <shaders>
   <effects>
 
-  <effect name="Diffused" texture_mask="0" file="Data/Effects/NormalDiffusedEffect.fx" technique="NormalDiffusedTechnique" />
+  <effect name="Diffused" texture_mask="0" file="Data/Effects/NormalDiffusedEffect.fx" technique="NormalDiffusedTechnique" alpha_technique="NormalDiffusedAlphaTechnique" />
   <effect name="Textured" texture_mask="2" file="Data/Effects/NormalTexturedEffect.fx" technique="NormalTexturedTechnique" alpha_technique="NormalTexturedAlphaTechnique" />
   <effect name="TexturedEnvironment" texture_mask="514" file="Data/Effects/NormalTexturedEnvironmentEffect.fx" technique="NormalTexturedEnvironmentTechnique" alpha_technique="NormalTexturedEnvironmentAlphaTechnique" />
   <effect name="Normalmap" texture_mask="6" file="Data/Effects/TangentBinormalNormalTexturedEffect.fx" technique="TangentBinormalNormalTexturedTechnique" />
