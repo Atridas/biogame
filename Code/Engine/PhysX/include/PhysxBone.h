@@ -40,7 +40,7 @@ public:
   
   
   bool                IsBoneRoot()                           {return m_bRoot;};
-  Mat44f              GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone);
+  static Mat44f       GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone);
 
   //Funcions per afegir la info del actor de fisica.
   bool				        AddBoxActor(CXMLTreeNode _XMLObjects, CGameEntity* _pEntity);

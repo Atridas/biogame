@@ -33,6 +33,8 @@ public:
   void                  RenderPhysX             (CRenderManager* _pRM, CRenderableObject* _pRO, Mat44f _mMatTransf);
   void                  RenderImpacts           (CRenderManager* _pRM);
   void                  RenderLaserPoint        (CRenderManager* _pRM);
+  Mat44f                GetWeaponMat            (CRenderManager* _pRM);
+
 
   
 
