@@ -109,7 +109,14 @@ bool CEffectManager::Load(bool _bReload)
           LOGGER->AddNewLog(ELL_INFORMATION,"CEffectManager::Load Reloading effect \"%s\"", l_szEffectName.c_str());
         }
 
-        l_pEffect->Reload(m_pEffectPool);
+        if(!l_pEffect->Reload(m_pEffectPool))
+        {
+          LOGGER->AddNewLog(ELL_ERROR,"CEffectManager::Load Error reloading effect \"%s\"", l_szEffectName.c_str());
+
+          CHECKED_DELETE(l_pEffect);
+
+          m_Resources.erase(l_szEffectName);
+        }
 
       }else{
 
