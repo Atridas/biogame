@@ -5,6 +5,7 @@
   <effect name="Diffused" texture_mask="0" file="Data/Effects/NormalDiffusedEffect.fx" technique="NormalDiffusedTechnique" alpha_technique="NormalDiffusedAlphaTechnique" />
   <effect name="Textured" texture_mask="2" file="Data/Effects/NormalTexturedEffect.fx" technique="NormalTexturedTechnique" alpha_technique="NormalTexturedAlphaTechnique" />
   <effect name="TexturedEnvironment" texture_mask="514" file="Data/Effects/NormalTexturedEnvironmentEffect.fx" technique="NormalTexturedEnvironmentTechnique" alpha_technique="NormalTexturedEnvironmentAlphaTechnique" />
+  <effect name="NormalmapEnvironment" texture_mask="518" file="Data/Effects/NormalmapTexturedEnvironmentEffect.fx" technique="NormalmapTexturedEnvironmentTechnique" alpha_technique="NormalmapTexturedEnvironmentAlphaTechnique" />
   <effect name="Normalmap" texture_mask="6" file="Data/Effects/TangentBinormalNormalTexturedEffect.fx" technique="TangentBinormalNormalTexturedTechnique" />
   <effect name="SpecularTextured" texture_mask="18" file="Data/Effects/SpecularTexturedEffect.fx" technique="SpecularTexturedTechnique" />
   <effect name="SpecularNormalmapTextured" texture_mask="22" file="Data/Effects/SpecularNormalmapTexturedEffect.fx" technique="SpecularNormalmapTexturedTechnique" />
@@ -64,6 +65,7 @@
     <default_effect material_type="0"   effect="Diffused" />
     <default_effect material_type="2"   effect="Textured" />
     <default_effect material_type="514" effect="TexturedEnvironment" />
+    <default_effect material_type="518" effect="NormalmapEnvironment" />
     <default_effect material_type="3"   effect="AnimatedTextured" />
     <default_effect material_type="6"   effect="Normalmap" />
     <default_effect material_type="7"   effect="AnimatedNormalmap" />

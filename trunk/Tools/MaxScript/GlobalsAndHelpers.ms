@@ -33,6 +33,7 @@ global SPECULAR_PROPERTY_TYPE                     = 3
 global ALPHA_PROPERTY_TYPE                          = 4
 global GLOW_PROPERTY_TYPE                           = 5
 global RADIOSITY_NORMAL_PROPERTY_TYPE        = 6
+global ENVIRONMENT_PROPERTY_TYPE                = 7
 
 global DEFAULT_BUMP_VALUE              = 0.6
 global DEFAULT_PARALLAX_VALUE        = 0.02

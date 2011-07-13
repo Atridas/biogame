@@ -58,6 +58,8 @@ public:
                     m_bSpecularUpdated(false),
                     m_bSpecularActive(false),
                     m_bBumpUpdated(false),
+                    m_bEnvironmentUpdated(false),
+                    m_fEnvironmentIntensity(0.f),
                     m_fBump(0.f),
                     m_fGlossiness(0.f),
                     m_fSpecularLevel(0.f),
@@ -94,7 +96,8 @@ public:
                     m_pParallaxHeight(0),
                     m_pGlossiness(0),
                     m_pSpecularLevel(0),
-                    m_pGlowIntensityParameter(0)
+                    m_pGlowIntensityParameter(0),
+                    m_pEnvironmentIntensityParameter(0)
                     {SetOk(true);};
 
   ~CEffectManager() {Done();};
@@ -143,6 +146,7 @@ public:
 
   void SetGlow(bool _bGlow) {m_bGlowActive = _bGlow; m_bGlowUpdated = true;};
   void SetGlowIntensity(float _fGlowIntensity) {m_fGlowIntensity = _fGlowIntensity; m_bGlowUpdated = true;};
+  void SetEnvironmentIntensity(float _fEnvironmentIntensity) {if(_fEnvironmentIntensity != m_fEnvironmentIntensity) {m_fEnvironmentIntensity = _fEnvironmentIntensity; m_bEnvironmentUpdated = true;}};
 
   void SetBump(float _fBump) {m_fBump = _fBump; m_bBumpUpdated = true;};
 
@@ -216,6 +220,7 @@ private:
   bool m_bGlowUpdated;
   bool m_bSpecularUpdated;
   bool m_bBumpUpdated;
+  bool m_bEnvironmentUpdated;
 
   //Matrius compostes recalculades
   bool m_bViewProjectionUpdated;
@@ -232,6 +237,7 @@ private:
   bool m_bGlowActive;
   float m_fGlowIntensity;
   float m_fBump;
+  float m_fEnvironmentIntensity;
 
   D3DXHANDLE m_pWorldMatrixParameter;
   D3DXHANDLE m_pViewMatrixParameter;
@@ -271,6 +277,7 @@ private:
   D3DXHANDLE m_pGlossiness;
   D3DXHANDLE m_pSpecularLevel;
   D3DXHANDLE m_pGlowIntensityParameter;
+  D3DXHANDLE m_pEnvironmentIntensityParameter;
 
 
   //bool m_bInverseProjectionUpdated, m_bInverseViewUpdated, m_bInverseWorldUpdated;

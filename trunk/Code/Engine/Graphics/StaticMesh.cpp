@@ -184,9 +184,6 @@ bool CStaticMesh::Load()
           break;
         case ENVIRONMENT_MATERIAL_MASK:
           l_pMaterial = new CEnvironmentTextureDecorator(l_pMaterial,l_pTexture);
-          //TODO
-          LOGGER->AddNewLog(ELL_WARNING, "Ambient Materials Not yet implementeds");
-
           break;
         default:
           break;
@@ -224,6 +221,10 @@ bool CStaticMesh::Load()
         case RADIOSITY_NORMAL_PROPERTY_TYPE:
           l_pMaterial->ActivateRadiosityNormal(CMaterial::RADIOSITY_NORMAL);
           break;
+        case ENVIRONMENT_PROPERTY_TYPE:
+          //TODO
+          LOGGER->AddNewLog(ELL_WARNING, "Environment parameter Not yet implemented");
+          l_File.read((char*)&l_fValue, sizeof(float));
         default:
           break;
       }
