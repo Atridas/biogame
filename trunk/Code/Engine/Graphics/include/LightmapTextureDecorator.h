@@ -14,6 +14,8 @@ public:
   virtual void Activate(int _iTextureMask);
 
   virtual void ActivateRadiosityNormal(ELightmapMode _eMode);
+  
+  virtual bool ReloadTextures()        const;
 
 private:
   ELightmapMode m_eMode;

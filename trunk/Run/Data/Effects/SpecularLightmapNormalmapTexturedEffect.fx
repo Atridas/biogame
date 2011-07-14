@@ -1,3 +1,23 @@
+#define NS_LIGHTING
+#define NS_TEX0
+#define NS_LIGHTMAP
+#define NS_NORMALMAP
+//#define NS_CAL3D
+//#define NS_RADIOSITY_NORMALMAP
+#define NS_SPECULAR
+
+#include "NewShaders.fx"
+
+technique SpecularLightmapNormalmapTexturedTechnique {
+	TECHNIQUE_BODY
+}
+
+technique SpecularLightmapNormalmapTexturedAlphaTechnique {
+	ALPHA_TECHNIQUE_BODY
+}
+
+/*
+
 #include "VertexShaders.fx"
 #include "PixelShaders.fx"
 
@@ -16,3 +36,4 @@ technique SpecularLightmapNormalmapTexturedTechnique {
 		PixelShader = compile ps_3_0 SpecularLightmapNormalmapTexturedPS();
 	}
 }
+*/

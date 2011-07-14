@@ -183,9 +183,9 @@ float4 NewPS(TNEW_PS _in) : COLOR {
   
     #if defined( NS_LIGHTMAP )
       #if defined( NS_RADIOSITY_NORMALMAP )
-        float4 l_AmbientColor = RadiosityNormalLightmapColor(l_Bump, _in.UV2);
+        float4 l_AmbientColor = RadiosityNormalLightmapColor(l_Bump, _in.UV2) * 2.0;
       #else
-        float4 l_AmbientColor = tex2D(LightmapTextureSampler,_in.UV2);
+        float4 l_AmbientColor = tex2D(LightmapTextureSampler,_in.UV2) * 2.0;
       #endif
     #else
       float4 l_AmbientColor = float4(g_AmbientLight,1.0);

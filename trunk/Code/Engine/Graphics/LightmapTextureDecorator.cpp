@@ -78,3 +78,23 @@ void CLightmapTextureDecorator::ActivateRadiosityNormal(ELightmapMode _eMode)
     m_pTextureB = CORE->GetTextureManager()->GetResource(l_szB);
   }
 }
+
+
+bool CLightmapTextureDecorator::ReloadTextures() const
+{
+  if(! CTextureDecorator::ReloadTextures() )
+  {
+    return false;
+  }
+
+  if(m_pTextureR)
+  {
+    return m_pTextureR->Reload()
+        && m_pTextureG->Reload()
+        && m_pTextureB->Reload();
+  }
+  else
+  {
+    return true;
+  }
+}
