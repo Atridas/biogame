@@ -314,7 +314,7 @@ function GetNumGoodMaterials _object =
 
 -- Unkown
 
-function TextureListOne _material = 
+function TextureListOne _material _normalRadiosity = 
 (
 	local l_texture
 	local l_paths = #()
@@ -335,6 +335,27 @@ function TextureListOne _material =
 	(
 		l_texture = _material.selfIllumMap.filename
 		append l_paths l_texture
+		
+		--Exportant radiosity
+		if _normalRadiosity then
+		(
+			local l_path = getFilenamePath l_texture
+			local l_name = getFilenameFile l_texture
+			local l_type = getFilenameType l_texture
+			local l_radiosity = ""
+			
+			--Red
+			l_radiosity = l_path + l_name + "_R" + l_type
+			append l_paths l_radiosity
+			
+			--Green
+			l_radiosity = l_path + l_name + "_G" + l_type
+			append l_paths l_radiosity
+			
+			--Blue
+			l_radiosity = l_path + l_name + "_B" + l_type
+			append l_paths l_radiosity
+		)
 	)
 	
 	if _material.SpecularLevelMapEnable == true and  _material.SpecularLevelMap != undefined then
@@ -358,7 +379,7 @@ function TextureListOne _material =
 	return l_paths
 )
 
-function TextureList _textures _object =
+function TextureList _textures _object _normalRadiosity =
 (
 	local l_material = _object.material
 	
@@ -369,7 +390,7 @@ function TextureList _textures _object =
 		
 		for i = 1 to l_numMaterials do
 		(
-			local l_texTemp = TextureListOne l_material[i]
+			local l_texTemp = TextureListOne l_material[i] _normalRadiosity
 			
 			for j = 1 to l_texTemp.count do
 			(
@@ -382,7 +403,7 @@ function TextureList _textures _object =
 	)
 	else if classof(l_material) == Standardmaterial then
 	(
-		local l_texTemp = TextureListOne l_material
+		local l_texTemp = TextureListOne l_material _normalRadiosity
 			
 		for j = 1 to l_texTemp.count do
 		(

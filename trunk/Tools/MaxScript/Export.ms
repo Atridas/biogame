@@ -4,7 +4,7 @@ fileIn "IndexAndVertex.ms"
 fileIn "ObjectControl.ms"
 
 --comprova si l'objecte cumpleix les especificacions
-function CheckMesh _object _checkMaterial =
+function CheckMesh _object _checkMaterial _normalRadiosity =
 (
 	local l_aux = "" as stringStream
 	--propietats d'objecte
@@ -137,6 +137,39 @@ function CheckMesh _object _checkMaterial =
 							format "No es troba la textura d'auto il·luminació \"%\" del multimaterial % de l'objecte %." l_material[i].selfIllumMap.filename i l_name to:l_aux
 							return l_aux
 						)
+						--Comprovar radiosity
+						if _normalRadiosity then
+						(
+							local l_filename = l_currentMaterial.selfIllumMap.filename
+							local l_path = getFilenamePath l_filename
+							local l_name = getFilenameFile l_filename
+							local l_type = getFilenameType l_filename
+							local l_radiosity = ""
+							
+							--Red
+							l_radiosity = l_path + l_name + "_R" + l_type
+							if doesFileExist l_radiosity == false then
+							(
+								format "No es troba la textura RED del radiosity \"%\" del multimaterial % de l'objecte %." l_material[i].selfIllumMap.filename i l_name to:l_aux
+								return l_aux
+							)
+							
+							--Green
+							l_radiosity = l_path + l_name + "_G" + l_type
+							if doesFileExist l_radiosity == false then
+							(
+								format "No es troba la textura GREEN del radiosity \"%\" del multimaterial % de l'objecte %." l_material[i].selfIllumMap.filename i l_name to:l_aux
+								return l_aux
+							)
+							
+							--Blue
+							l_radiosity = l_path + l_name + "_B" + l_type
+							if doesFileExist l_radiosity == false then
+							(
+								format "No es troba la textura BLUE del radiosity \"%\" del multimaterial % de l'objecte %." l_material[i].selfIllumMap.filename i l_name to:l_aux
+								return l_aux
+							)
+						)
 					)				
 				)
 				
@@ -212,6 +245,7 @@ function CheckMesh _object _checkMaterial =
 					)				
 				)
 			)
+			
 		)else
 		(
 			if classof l_material != Standardmaterial then
@@ -275,6 +309,39 @@ function CheckMesh _object _checkMaterial =
 					if doesFileExist l_material.selfIllumMap.filename == false then
 					(
 						return "No es troba la textura d'auto il·luminació \"" + l_material.selfIllumMap.filename + "\" de l'objecte " + l_name + "."
+					)
+					--Comprovar radiosity
+					if _normalRadiosity then
+					(
+						local l_filename = l_material.selfIllumMap.filename
+						local l_path = getFilenamePath l_filename
+						local l_name = getFilenameFile l_filename
+						local l_type = getFilenameType l_filename
+						local l_radiosity = ""
+						
+						--Red
+						l_radiosity = l_path + l_name + "_R" + l_type
+						if doesFileExist l_radiosity == false then
+						(
+							return "No es troba la textura RED del radiosity \"" + l_material.selfIllumMap.filename + "\" de l'objecte " + l_name + "."
+							return l_aux
+						)
+						
+						--Green
+						l_radiosity = l_path + l_name + "_G" + l_type
+						if doesFileExist l_radiosity == false then
+						(
+							return "No es troba la textura GREEN del radiosity \"" + l_material.selfIllumMap.filename + "\" de l'objecte " + l_name + "."
+							return l_aux
+						)
+						
+						--Blue
+						l_radiosity = l_path + l_name + "_B" + l_type
+						if doesFileExist l_radiosity == false then
+						(
+							return "No es troba la textura BLUE del radiosity \"" + l_material.selfIllumMap.filename + "\" de l'objecte " + l_name + "."
+							return l_aux
+						)
 					)
 				)				
 			)
@@ -351,7 +418,7 @@ function CheckMesh _object _checkMaterial =
 )
 
 -- comprova si un array d'objectes compleix les especificacions
-function CheckSceneObjects _objectArray = 
+function CheckSceneObjects _objectArray _normalRadiosity = 
 (
 	--s'evita tornar a comprovar els materials, ja que al mirar les rutes dels fitxers es relenteix molt.
 	local l_materials = #()
@@ -363,7 +430,7 @@ function CheckSceneObjects _objectArray =
 		if (Member l_materials l_mat) == false then
 		(
 			append l_materials l_mat
-			l_check = CheckMesh _objectArray[i] true
+			l_check = CheckMesh _objectArray[i] true _normalRadiosity
 			
 			if l_check != true then
 			(
@@ -371,7 +438,7 @@ function CheckSceneObjects _objectArray =
 			)
 		)else
 		(
-			l_check = CheckMesh _objectArray[i] false
+			l_check = CheckMesh _objectArray[i] false _normalRadiosity
 			
 			if l_check != true then
 			(
