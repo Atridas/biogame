@@ -231,7 +231,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			
 			if checkTextures.checked then
 			(
-				TextureList l_textures l_object
+				TextureList l_textures l_object checkNormalRadiosity.checked
 			)
 		)
 		
@@ -1186,7 +1186,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 	(
 		if $ != undefined and IsMesh $ then
 		(
-			local l_check = CheckMesh $ true
+			local l_check = CheckMesh $ true checkNormalRadiosity.checked
 			
 			if l_check != true then
 			(
@@ -1218,7 +1218,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				-- copiar textures
 				if checkTextures.checked == true then
 				(
-					TextureList l_textures $
+					TextureList l_textures $ checkNormalRadiosity.checked
 				)
 			)
 		) else (
@@ -1229,7 +1229,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 	(
 		--Check
 		local l_check = true
-		l_check = CheckSceneObjects $*
+		l_check = CheckSceneObjects $* checkNormalRadiosity.checked
 			
 		if l_check != true then
 		(
@@ -1275,7 +1275,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		
 		--Check
 		local l_check = true
-		l_check = CheckSceneObjects $*
+		l_check = CheckSceneObjects $* checkNormalRadiosity.checked
 			
 		if l_check != true then
 		(
@@ -1380,7 +1380,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		
 		--Check
 		local l_check = true
-		l_check = CheckSceneObjects $*
+		l_check = CheckSceneObjects $* checkNormalRadiosity.checked
 			
 		if l_check != true then
 		(
