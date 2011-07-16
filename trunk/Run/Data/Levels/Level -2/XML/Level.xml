@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Level>
+  <Rooms>
+    <Room name="Laboratori">
+      <Boundings>
+        <Box name="Lab Bounding" size="10.4774 5.97491 12.4822" position="-9.7839 2.417 -4.99221" yaw="0.0" pitch="0.0" roll="0.0" />
+      </Boundings>
+      <Objects>
+        <GameObject name="Cadira_de_força" />
+        <GameObject name="BancRadiografies" />
+        <GameObject name="radiografia" />
+        <GameObject name="radiografia01" />
+        <GameObject name="radiografia04" />
+        <GameObject name="Taula" />
+        <GameObject name="radiografia05" />
+        <GameObject name="radiografia06" />
+        <GameObject name="Ventilacion" />
+        <GameObject name="cadira_oficina" />
+        <GameObject name="fluorescente_DEF" />
+        <GameObject name="Carpeta03" />
+        <GameObject name="Carpeta02" />
+        <GameObject name="Cable_Lampada" />
+        <GameObject name="pot01" />
+        <GameObject name="proveta" />
+        <GameObject name="viga" />
+        <GameObject name="vigueta" />
+        <GameObject name="viga_pilar" />
+        <GameObject name="Lampada" />
+        <GameObject name="Bido" />
+        <GameObject name="Edvac" />
+        <GameObject name="CAPSULA_DEF" />
+        <GameObject name="autopsia_taula" />
+        <GameObject name="Aixeta_autopsia" />
+        <GameObject name="Pissarra" />
+        <GameObject name="Caixa_oberta_DEF" />
+        <GameObject name="caixa_tapada_DEF" />
+        <GameObject name="Cable_florescent" />
+        <GameObject name="Botiquin_medic_DEF" />
+        <GameObject name="Carpeta01" />
+        <GameObject name="Carpeta00" />
+        <GameObject name="radiografia07" />
+        <GameObject name="radiografia08" />
+        <GameObject name="radiografia09" />
+        <GameObject name="radiografia10" />
+        <GameObject name="radiografia11" />
+        <GameObject name="viga01" />
+        <GameObject name="viga02" />
+        <GameObject name="vigueta01" />
+        <GameObject name="vigueta02" />
+        <GameObject name="cadira_oficina01" />
+        <GameObject name="Taula01" />
+        <GameObject name="pot_petit" />
+        <GameObject name="pot_Mitja" />
+        <GameObject name="proveta01" />
+        <GameObject name="proveta02" />
+        <GameObject name="CAPSULA_trencada" />
+        <GameObject name="Lampada01" />
+        <GameObject name="Cable_Lampada01" />
+        <GameObject name="Cable_florescent01" />
+        <GameObject name="Cable_florescent02" />
+        <GameObject name="Cable_florescent03" />
+        <GameObject name="Cable_florescent04" />
+        <GameObject name="Cable_florescent05" />
+        <GameObject name="Cable_florescent06" />
+        <GameObject name="Cable_florescent07" />
+        <GameObject name="Cable_florescent08" />
+        <GameObject name="Cable_florescent09" />
+        <GameObject name="Cable_florescent10" />
+        <GameObject name="Ordinador_DEF" />
+        <GameObject name="tub_estret_DEF" />
+        <GameObject name="Frigorific_DEF" />
+        <GameObject name="Frigorific_DEF01" />
+        <GameObject name="Ordinador_DEF01" />
+        <GameObject name="tub_estret_DEF01" />
+        <GameObject name="tub_Petit" />
+        <GameObject name="tub_Petit01" />
+        <GameObject name="tub_Petit02" />
+        <GameObject name="tub_Petit03" />
+        <GameObject name="tub_Petit04" />
+        <GameObject name="tub_Petit05" />
+        <GameObject name="tub_Petit06" />
+        <GameObject name="tub_Petit07" />
+        <GameObject name="tub_Gros" />
+        <GameObject name="tub_Gros01" />
+        <GameObject name="tub_Gros02" />
+        <GameObject name="Arxivador19" />
+        <GameObject name="Arxivador20" />
+        <GameObject name="Arxivador22" />
+        <GameObject name="Arxivador23" />
+        <GameObject name="Arxivador26" />
+        <GameObject name="Arxivador25" />
+        <GameObject name="Arxivador27" />
+        <GameObject name="Arxivador16" />
+        <GameObject name="Arxivador15" />
+        <GameObject name="Arxivador14" />
+        <GameObject name="Arxivador10" />
+        <GameObject name="Arxivador09" />
+        <GameObject name="Arxivador08" />
+        <GameObject name="Arxivador02" />
+        <GameObject name="Arxivador03" />
+        <GameObject name="Arxivador04" />
+        <GameObject name="Arxivador07" />
+        <GameObject name="Arxivador06" />
+        <GameObject name="Arxivador21" />
+        <GameObject name="Arxivador24" />
+        <GameObject name="Arxivador05" />
+        <GameObject name="Arxivador13" />
+        <GameObject name="Arxivador12" />
+        <GameObject name="Arxivador11" />
+        <GameObject name="Arxivador00" />
+        <GameObject name="Arxivador01" />
+        <GameObject name="Arxivador29" />
+        <GameObject name="Arxivador28" />
+        <GameObject name="Arxivador18" />
+        <GameObject name="Arxivador17" />
+        <GameObject name="Estanteria_DEF" />
+        <GameObject name="Estanteria_DEF01" />
+        <GameObject name="Taula_DEF" />
+        <GameObject name="Maleta_DEF" />
+        <GameObject name="Maleta_DEF01" />
+        <GameObject name="Maleta_DEF02" />
+        <GameObject name="Suero_DEF" />
+        <GameObject name="fluorescente_DEF01" />
+        <GameObject name="fluorescente_DEF02" />
+        <GameObject name="fluorescente_DEF03" />
+        <GameObject name="fluorescente_DEF04" />
+        <GameObject name="fluorescente_DEF05" />
+        <GameObject name="Caixa_oberta_DEF01" />
+        <GameObject name="caixa_tapada_DEF01" />
+        <GameObject name="caixa_tapada_DEF02" />
+        <GameObject name="Provetas_prestatge" />
+        <GameObject name="Provetas_prestatge01" />
+        <GameObject name="Provetas_prestatge02" />
+        <GameObject name="Provetas_prestatge03" />
+        <GameObject name="pot02" />
+        <GameObject name="pot_petit01" />
+        <GameObject name="pot_petit02" />
+        <GameObject name="pot_prim01" />
+        <GameObject name="pot03" />
+        <GameObject name="pot_Mitja01" />
+        <GameObject name="pot_prim02" />
+        <GameObject name="pot_petit03" />
+        <GameObject name="pot_Mitja02" />
+        <GameObject name="Maleta_DEF03" />
+        <GameObject name="CAPSULA_DEF03" />
+        <GameObject name="Caixa de llums01" />
+        <GameObject name="Laboratori_parets" />
+        <GameObject name="Pantalla_pizarra" />
+        <GameObject name="Tubs_Autoilum" />
+        <GameObject name="Tubs_autoilum1" />
+        <GameObject name="Tubs_autoilum2" />
+        <GameObject name="Tubs_autoilum3" />
+        <GameObject name="Tubs_autoilum_assaig" />
+        <GameObject name="Tubs_autoilum_assaig2" />
+        <GameObject name="Pantalla_ordinador_autoilum" />
+        <GameObject name="Pantalla_ordinador_autoilum01" />
+        <GameObject name="Flore_autoilum" />
+        <GameObject name="Lampada_autoilum" />
+        <GameObject name="flores_autoilum" />
+        <GameObject name="radiografia02" />
+        <GameObject name="radiografia03" />
+        <GameObject name="Vidre_cap1" />
+        <GameObject name="Vidre_cap02" />
+        <GameObject name="flores_autoilum04" />
+        <GameObject name="Vidre_cap03" />
+      </Objects>
+    </Room>
+    <Room name="Passadis 1">
+      <Boundings>
+        <Box name="Pass1 Bounding" size="13.7912 3.11871 5.57699" position="2.01298 0.0 -8.52763" yaw="0.0" pitch="0.0" roll="0.0" />
+      </Boundings>
+      <Objects>
+        <GameObject name="Parets" />
+        <GameObject name="Vigues" />
+      </Objects>
+    </Room>
+    <Room name="Passadis 2">
+      <Boundings>
+        <Box name="Pass 2 Bounding 2" size="4.62777 4.62777 5.50601" position="14.1845 1.85217 -7.15744" yaw="60.5503" pitch="0.0" roll="0.0" />
+        <Box name="Pass 2 Bounding 3" size="4.41052 4.41052 4.41052" position="11.7702 1.85217 -6.90453" yaw="23.9322" pitch="0.0" roll="0.0" />
+        <Box name="Pass 2 Bounding 1" size="4.22535 4.22535 5.70437" position="10.6203 1.85217 -8.5097" yaw="0.0" pitch="0.0" roll="0.0" />
+      </Boundings>
+      <Objects>
+        <GameObject name="Pass_2" />
+      </Objects>
+    </Room>
+    <Room name="Passadis 3">
+      <Boundings>
+        <Box name="Passadis 3 Bounding" size="5.26417 5.26417 16.0328" position="18.8168 1.1438 1.75733" yaw="-26.6151" pitch="0.0" roll="0.0" />
+      </Boundings>
+      <Objects>
+        <GameObject name="pareds_sostre_pass3" />
+        <GameObject name="Portes_pass3" />
+      </Objects>
+    </Room>
+    <Room name="Menjador">
+      <Boundings>
+        <Box name="Menjador Bounding" size="28.2444 17.9074 40.2185" position="14.4078 0.0 27.0307" yaw="65.4548" pitch="0.0" roll="0.0" />
+      </Boundings>
+      <Objects>
+        <GameObject name="vitrina" />
+        <GameObject name="Ultim_Passadis" />
+      </Objects>
+    </Room>
+    <Room name="Sala Video">
+      <Boundings>
+        <Box name="Sala video Bounding" size="12.84 6.05955 12.84" position="4.5987 0.413147 8.88025" yaw="25.8376" pitch="0.0" roll="0.0" />
+      </Boundings>
+      <Objects>
+        <GameObject name="Sala de videogililacia" />
+        <GameObject name="Cuadro de mandos" />
+        <GameObject name="Plataforma" />
+        <GameObject name="tub_estret_DEF11" />
+        <GameObject name="tub_estret_DEF12" />
+        <GameObject name="tub_estret_DEF02" />
+        <GameObject name="tub_estret_DEF03" />
+        <GameObject name="tub_estret_DEF04" />
+        <GameObject name="tub_estret_DEF05" />
+        <GameObject name="tub_estret_DEF07" />
+        <GameObject name="tub_estret_DEF08" />
+        <GameObject name="tub_estret_DEF09" />
+        <GameObject name="tub_estret_DEF10" />
+        <GameObject name="Esglao01" />
+        <GameObject name="Box19" />
+        <GameObject name="Box21" />
+        <GameObject name="Box22" />
+      </Objects>
+    </Room>
+    <Room name="Passadis Video">
+      <Boundings>
+        <Box name="Passadis Video Bounding" size="5.11731 4.1248 9.41784" position="8.91778 1.08283 -1.02921" yaw="24.3334" pitch="2.13443e-007" roll="15.6605" />
+      </Boundings>
+      <Objects>
+        <GameObject name="Pasadis sala video" />
+      </Objects>
+    </Room>
+  </Rooms>
+  <Portals>
+    <Portal name="Porta lab_passadis" roomA="Laboratori" roomB="Passadis 1" size="1.82234 2.89527 3.1248" position="-4.50991 1.51514 -7.85784" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Portal name="Portal passadis 1" roomA="Passadis 1" roomB="Passadis 2" size="1.05269 3.71149 5.02466" position="8.50182 1.71142 -8.44906" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Portal name="Portal passadis 2" roomA="Passadis 2" roomB="Passadis 3" size="1.13858 3.82294 5.17555" position="15.2212 1.85135 -5.28539" yaw="60.5972" pitch="0.0" roll="0.0" />
+    <Portal name="Portal passadis 2" roomA="Passadis Video" roomB="Passadis 2" size="2.56095 3.27714 1.67757" position="10.8373 1.49512 -5.06832" yaw="25.8695" pitch="0.0" roll="0.0" />
+    <Portal name="Portal Video" roomA="Passadis Video" roomB="Sala Video" size="2.85362 2.59855 1.39105" position="6.99345 -0.666382 3.21161" yaw="26.6152" pitch="0.0" roll="0.0" />
+    <Portal name="Porta menjador" roomA="Passadis 3" roomB="Menjador" size="2.86808 2.86808 1.02465" position="22.3001 1.38858 9.02744" yaw="-24.6974" pitch="0.0" roll="0.0" />
+  </Portals>
+</Level>
