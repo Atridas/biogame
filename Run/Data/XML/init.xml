@@ -42,7 +42,8 @@
     <Level xml="Data/Levels/Proves/XML/RenderableObjects.xml"/>
     -->
 	</RenderableObjectsManager>
-
+  <PortalManager file="./Data/Levels/Level -2/XML/Level.xml"/>
+  
 	<LightsManager file="Data/XML/Lights.xml"/>
 
 	<SceneEffectManager file="Data/XML/SceneEffects_Viewer.xml"/>
