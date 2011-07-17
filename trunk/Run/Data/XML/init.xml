@@ -42,7 +42,11 @@
     <Level xml="Data/Levels/Proves/XML/RenderableObjects.xml"/>
     -->
 	</RenderableObjectsManager>
-  <PortalManager file="./Data/Levels/Level -2/XML/Level.xml"/>
+  <PortalManager file="./Data/Levels/Level -2/XML/Level - Laboratori.xml">
+    <Level file="Data/Levels/Level -2/XML/Level - Passadis.xml"/>
+    <Level file="Data/Levels/Level -2/XML/Level - Menjador.xml"/>
+    <Level file="Data/Levels/Level -2/XML/Level - video.xml"/>
+  </PortalManager>
   
 	<LightsManager file="Data/XML/Lights.xml"/>
 

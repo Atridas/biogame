@@ -12,6 +12,7 @@
 
 bool CPortalManager::Init(const string& _szFileName)
 {
+  SetOk(true);
   CXMLTreeNode l_xmlLevel;
 
   if(l_xmlLevel.LoadFile(_szFileName.c_str()))
@@ -24,6 +25,45 @@ bool CPortalManager::Init(const string& _szFileName)
     LOGGER->AddNewLog(ELL_ERROR, "CPortalManager::Init file \"%s\" not found or incorrect.", _szFileName.c_str());
   }
 
+  return IsOk();
+}
+
+
+bool CPortalManager::Init(const vector<string>& _szFileNames)
+{
+  SetOk(true);
+  set<string> l_UsedGameObjects;
+  //vector<CXMLTreeNode> l_vxmlPortals;
+  for(uint32 i = 0; i < _szFileNames.size(); ++i)
+  {
+    CXMLTreeNode l_xmlLevel;
+
+    if(l_xmlLevel.LoadFile(_szFileNames[i].c_str()))
+    {
+      ReadRooms(l_xmlLevel["Rooms"], l_UsedGameObjects);
+      ReadPortals(l_xmlLevel["Portals"]);
+      //l_vxmlPortals.push_back(l_xmlLevel["Portals"]);
+    }
+    else
+    {
+      LOGGER->AddNewLog(ELL_WARNING, "CPortalManager::Init file \"%s\" not found or incorrect.", _szFileNames[i].c_str());
+    }
+  }
+  //Afegir la resta de RObjects.
+  CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
+  int l_iROn = l_pROM->GetRenderableVectorSize();
+  for(int i = 0; i < l_iROn; ++i)
+  {
+    CRenderableObject* l_pRO = l_pROM->GetRenderableObject(i);
+    if(l_UsedGameObjects.find( l_pRO->GetName() ) == l_UsedGameObjects.end())
+    {
+      m_UnlocatedROs.AddRendeableObject( l_pRO );
+    }
+  }
+  /*for(uint32 i = 0; i < l_vxmlPortals.size(); ++i)
+  {
+    ReadPortals(l_vxmlPortals[i]);
+  }*/
   return IsOk();
 }
 
@@ -137,6 +177,93 @@ bool CPortalManager::Init(CXMLTreeNode& _xmlLevel)
   }
 
   return IsOk();
+}
+
+void CPortalManager::ReadRooms(CXMLTreeNode& _xmlRooms, set<string>& _UsedGameObjects)
+{
+  if(_xmlRooms.Exists())
+  {
+    LOGGER->AddNewLog(ELL_INFORMATION, "CPortalManager::ReadRooms Recorrent Rooms");
+
+    int l_iRooms = _xmlRooms.GetNumChildren();
+    for(int i = 0; i < l_iRooms; ++i)
+    {
+      CXMLTreeNode l_xmlRoom = _xmlRooms(i);
+      if(strcmp(l_xmlRoom.GetName(), "Room") == 0)
+      {
+        string l_szName = l_xmlRoom.GetPszISOProperty("name", "undefined", true);
+
+        if(m_Rooms.find(l_szName) == m_Rooms.end())
+        {
+          CRoom l_Room;
+          if(l_Room.Init(l_xmlRoom, _UsedGameObjects))
+          {
+            m_Rooms[l_szName] = l_Room;
+            m_RoomNames.insert(l_szName);
+          }
+          else
+          {
+            LOGGER->AddNewLog(ELL_WARNING, "CPortalManager::ReadRooms Room \"%s\" no OK", l_szName.c_str());
+          }
+        }
+        else
+        {
+          LOGGER->AddNewLog(ELL_WARNING, "CPortalManager::ReadRooms Room \"%s\" repetida", l_szName.c_str());
+        }
+      }
+      else if(!l_xmlRoom.IsComment())
+      {
+        LOGGER->AddNewLog(ELL_WARNING, "CPortalManager::ReadRooms Element no reconegut! \"%s\"", l_xmlRoom.GetName());
+      }
+    }
+  }
+  else
+  {
+    LOGGER->AddNewLog(ELL_ERROR, "CPortalManager::ReadRooms No Rooms!");
+    SetOk(false);
+  }
+}
+
+void CPortalManager::ReadPortals(CXMLTreeNode& _xmlPortals)
+{
+  if(_xmlPortals.Exists())
+  {
+    LOGGER->AddNewLog(ELL_INFORMATION, "CPortalManager::ReadPortals Recorrent Portals");
+
+    int l_iPortals = _xmlPortals.GetNumChildren();
+    for(int i = 0; i < l_iPortals; ++i)
+    {
+      CXMLTreeNode l_xmlPortal = _xmlPortals(i);
+      if(strcmp(l_xmlPortal.GetName(), "Portal") == 0)
+      {
+        string l_szName = l_xmlPortal.GetPszISOProperty("name", "", true);
+
+        if(m_Portals.find(l_szName) == m_Portals.end())
+        {
+          CPortal l_Portal;
+          m_Portals[l_szName] = l_Portal;
+          if(!m_Portals[l_szName].Init(l_xmlPortal, this))
+          {
+            m_Portals.erase(l_szName);
+            LOGGER->AddNewLog(ELL_WARNING, "CPortalManager::ReadPortals Portal \"%s\" no OK", l_szName.c_str());
+          }
+        }
+        else
+        {
+          LOGGER->AddNewLog(ELL_WARNING, "CPortalManager::ReadPortals Portal \"%s\" repetit", l_szName.c_str());
+        }
+      }
+      else if(!l_xmlPortal.IsComment())
+      {
+        LOGGER->AddNewLog(ELL_WARNING, "CPortalManager::ReadPortals Element no reconegut! \"%s\"", l_xmlPortal.GetName());
+      }
+    }
+  }
+  else
+  {
+    LOGGER->AddNewLog(ELL_ERROR, "CPortalManager::ReadPortals No Portals!");
+    SetOk(false);
+  }
 }
 
 CRoom* CPortalManager::GetRoom  (const string& _szName)

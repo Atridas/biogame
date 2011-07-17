@@ -18,6 +18,7 @@ public:
   CPortalManager():m_fLastUpdate(0) {};
   ~CPortalManager() {Done();};
   
+  bool Init(const vector<string>& _szFileNames);
   bool Init(const string& _szFileName);
   bool Init(CXMLTreeNode& _xmlLevel);
   
@@ -36,6 +37,8 @@ protected:
   virtual void Release() {m_UnlocatedROs.Done();m_Rooms.clear();m_Portals.clear();};
 private:
   void Render(CRenderManager* _pRM, bool _bDebug);
+  void ReadRooms(CXMLTreeNode& _xmlRooms, set<string>& _UsedGameObjects);
+  void ReadPortals(CXMLTreeNode& _xmlPortals);
 
   CRoom               m_UnlocatedROs;
 
