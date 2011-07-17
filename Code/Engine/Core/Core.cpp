@@ -102,7 +102,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pActionManager->Init(_InitParams.ActionToInputParams.pcFile);
   
   m_pRenderableObjectsManager->Load(_InitParams.RenderableObjectsManagerParams.vXMLFiles);
-  m_pPortalManager->Init(_InitParams.PortalManagerParams.szFile);
+  m_pPortalManager->Init(_InitParams.PortalManagerParams.szFiles);
   m_pLightManager->Load(_InitParams.LightsManagerParams.szFile);
   m_pSceneEffectManager->Load(_InitParams.SceneEffectParams.szFile);
   m_pScriptManager->Initialize();

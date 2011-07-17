@@ -116,12 +116,7 @@ struct SRenderableObjectsManagerParams
 
 struct SPortalManagerParams
 {
-  string szFile;
-  
-  //Default Params
-  SPortalManagerParams():
-    szFile("Data/XML/Level.xml")
-  {};
+  vector<string> szFiles;
 };
 
 

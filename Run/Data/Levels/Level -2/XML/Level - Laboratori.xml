@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Level>
+  <Rooms>
+    <Room name="Laboratori">
+      <Boundings>
+        <Box name="Laboratori Bounding" size="11.0675 6.55454 12.2426" position="-9.82146 2.38684 -5.06401" yaw="0.0" pitch="0.0" roll="0.0" />
+      </Boundings>
+      <Objects>
+        <GameObject name="Llum_emergencia01" />
+        <GameObject name="fluorescente_apagat" />
+        <GameObject name="Cadira_de_força" />
+        <GameObject name="BancRadiografies" />
+        <GameObject name="cadira_oficina" />
+        <GameObject name="Marc Porta" />
+        <GameObject name="Cable_Lampada" />
+        <GameObject name="viga" />
+        <GameObject name="vigueta" />
+        <GameObject name="viga_pilar" />
+        <GameObject name="Lampada" />
+        <GameObject name="Bido" />
+        <GameObject name="Edvac" />
+        <GameObject name="CAPSULA_DEF" />
+        <GameObject name="autopsia_taula" />
+        <GameObject name="Aixeta_autopsia" />
+        <GameObject name="Pissarra" />
+        <GameObject name="Botiquin_medic_DEF" />
+        <GameObject name="viga01" />
+        <GameObject name="viga02" />
+        <GameObject name="vigueta01" />
+        <GameObject name="vigueta02" />
+        <GameObject name="cadira_oficina01" />
+        <GameObject name="Taula01" />
+        <GameObject name="CAPSULA_trencada" />
+        <GameObject name="Lampada01" />
+        <GameObject name="Cable_Lampada01" />
+        <GameObject name="Ordinador_DEF" />
+        <GameObject name="Frigorific_DEF" />
+        <GameObject name="Ordinador_DEF01" />
+        <GameObject name="tub_Gros" />
+        <GameObject name="tub_Gros02" />
+        <GameObject name="Estanteria_01_DEF" />
+        <GameObject name="Estanteria_02_DEF01" />
+        <GameObject name="Taula_DEF" />
+        <GameObject name="Maleta_DEF01" />
+        <GameObject name="Maleta_DEF02" />
+        <GameObject name="pot_Mitja02" />
+        <GameObject name="Maleta_DEF03" />
+        <GameObject name="CAPSULA_DEF03" />
+        <GameObject name="Laboratori_parets" />
+        <GameObject name="Tubs_autoilum2" />
+        <GameObject name="Tubs_autoilum3" />
+        <GameObject name="Pantalla_ordinador_autoilum" />
+        <GameObject name="Pantalla_ordinador_autoilum01" />
+        <GameObject name="Lampada_autoilum" />
+        <GameObject name="Vidre_cap1" />
+        <GameObject name="Vidre_cap02" />
+        <GameObject name="fluorescente_apagat01" />
+        <GameObject name="Llum_emergengia_autoilum01" />
+        <GameObject name="luz_florescente02" />
+        <GameObject name="fluorescente_DEF11" />
+        <GameObject name="Llum03" />
+        <GameObject name="fluorescente_DEF12" />
+        <GameObject name="luz_florescente03" />
+        <GameObject name="fluorescente_DEF14" />
+        <GameObject name="luz_florescente05" />
+        <GameObject name="fluorescente_apagat02" />
+        <GameObject name="carpeta_eon" />
+        <GameObject name="Llum04" />
+        <GameObject name="Llum05" />
+        <GameObject name="Focus_conic" />
+      </Objects>
+    </Room>
+  </Rooms>
+  <Portals>
+  </Portals>
+</Level>
