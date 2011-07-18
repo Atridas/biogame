@@ -742,6 +742,35 @@ utility BioUtility "Eon-Utility" width:160 height:549
 					l_params = XMLEntityPhysXMesh l_instance &l_TagName l_colgroup
 					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 				)
+				--PickUp
+				else if (GetUserProp l_instance "pickup") != undefined then
+				(
+					--Trigger
+					l_params = XMLEntityTrigger l_instance &l_TagName "pickup" (GetUserProp l_instance "pickup") undefined
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+				)
+				--Interactive
+				else if (GetUserProp l_instance "interactive") != undefined then
+				(					
+					--PhysXBox
+					l_params = XMLEntityPhysXBox l_instance &l_TagName "escenari" true
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--Interactive
+					l_params = XMLEntityInteractive l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+				)
+				--Destroyable
+				else if (GetUserProp l_instance "onDestroy") != undefined and (GetUserProp l_instance "destroyedResource") != undefined then
+				(
+					--PhysXBox
+					l_params = XMLEntityPhysXBox l_instance &l_TagName "escenari" true
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--Trigger
+					l_params = XMLEntityDestroyable l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+				)
 				
 				format "\n  %" (CloseTagXML "Entity") to:l_file
 			)
@@ -764,7 +793,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 				
 				--Trigger
-				l_params = XMLEntityTrigger l_instance &l_TagName
+				l_params = XMLEntityTrigger l_instance &l_TagName "trigger" (GetUserProp l_instance "TriggerEnter") (GetUserProp l_instance "TriggerExit")
 				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 				
 				format "\n  %" (CloseTagXML "Entity") to:l_file
@@ -778,7 +807,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				)
 				else
 				(
-					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
+					format "\n  %" (OpenTagParamXML "Entity" #(#("name", l_instance.name))) to:l_file
 				)
 				
 				format "\tEntitat Cover %\n" l_instance.name
@@ -792,7 +821,8 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 				
 				format "\n  %" (CloseTagXML "Entity") to:l_file
-			)else if IsDoor _entities[i] then
+			)
+			else if IsDoor _entities[i] then
 			(
 				local l_instance = _entities[i]
 				if l_instance.name == undefined then
@@ -801,7 +831,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				)
 				else
 				(
-					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
+					format "\n  %" (OpenTagParamXML "Entity" #(#("name", l_instance.name))) to:l_file
 				)
 				
 				format "\tEntitat Door %\n" l_instance.name
@@ -826,6 +856,104 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				
 				format "\n  %" (CloseTagXML "Entity") to:l_file
 			)
+			else if IsPickUp _entities[i] then
+			(
+				local l_instance = _entities[i]
+				if l_instance.name == undefined then
+				(
+					format "\n  %" (OpenTagXML "Entity") to:l_file
+				)
+				else
+				(
+					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
+				)
+				
+				format "\tEntitat PickUp %\n" l_instance.name
+				
+				l_params = #()
+				
+				--Object3D
+				l_params = XMLEntityObject3D l_instance &l_TagName
+				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+				--Renderable Object
+				l_params = XMLEntityRenderableObject l_instance &l_TagName false
+				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+				
+				--Trigger
+				l_params = XMLEntityTrigger l_instance &l_TagName "objecte interactiu" (GetUserProp l_instance "pickup") undefined
+				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+				
+				format "\n  %" (CloseTagXML "Entity") to:l_file
+			)
+			else if IsInteractive _entities[i] then
+			(
+				local l_instance = _entities[i]
+				if l_instance.name == undefined then
+				(
+					format "\n  %" (OpenTagXML "Entity") to:l_file
+				)
+				else
+				(
+					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
+				)
+				
+				format "\tEntitat PickUp %\n" l_instance.name
+				
+				l_params = #()
+				
+				--Object3D
+				l_params = XMLEntityObject3D l_instance &l_TagName
+				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+				--Renderable Object
+				l_params = XMLEntityRenderableObject l_instance &l_TagName false
+				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+				
+				--PhysXBox
+				l_params = XMLEntityPhysXBox l_instance &l_TagName "objecte interactiu" true
+				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+				
+				--Interactiu
+				l_params = XMLEntityInteractive l_instance &l_TagName
+				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+				
+				format "\n  %" (CloseTagXML "Entity") to:l_file
+			)
+			else if IsDestroyable _entities[i] then
+			(
+				local l_instance = _entities[i]
+				if l_instance.name == undefined then
+				(
+					format "\n  %" (OpenTagXML "Entity") to:l_file
+				)
+				else
+				(
+					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
+				)
+				
+				format "\tEntitat PickUp %\n" l_instance.name
+				
+				l_params = #()
+				
+				--Object3D
+				l_params = XMLEntityObject3D l_instance &l_TagName
+				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+				--Renderable Object
+				l_params = XMLEntityRenderableObject l_instance &l_TagName false
+				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+				
+				--PhysXBox
+				l_params = XMLEntityPhysXBox l_instance &l_TagName "escenari" true
+				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+				
+				--Destroyable
+				l_params = XMLEntityDestroyable l_instance &l_TagName
+				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+				
+				format "\n  %" (CloseTagXML "Entity") to:l_file
+			)
 		)
 		
 		local l_player = GetPlayerEntity _entities
@@ -840,7 +968,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		(				
 			for i = 1 to l_enemies.count do
 			(
-				l_params = XMLEntityPlayer l_enemies[i] &l_TagName
+				l_params = XMLEntityEnemy l_enemies[i] &l_TagName
 				format "\n  %" (InlineTagParamXML l_TagName l_params) to:l_file
 			)
 		)

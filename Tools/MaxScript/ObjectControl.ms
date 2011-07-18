@@ -76,6 +76,38 @@ function IsDoor _object =
 	)
 )
 
+-- Comprova si l'objecte proporcionat és un pick up
+function IsPickUp _object =
+(
+	if classof _object == Dummy and (GetUserProp _object "pickup") != undefined and (GetUserProp _object "resource") != undefined then
+	(
+		return true
+	) else (
+		return false
+	)
+)
+
+-- Comprova si l'objecte proporcionat és un objecte interactiu
+function IsInteractive _object =
+(
+	if classof _object == Dummy and (GetUserProp _object "interactive") != undefined and (GetUserProp _object "resource") != undefined then
+	(
+		return true
+	) else (
+		return false
+	)
+)
+
+-- Comprova si l'objecte proporcionat és un objecte destructible
+function IsDestroyable _object =
+(
+	if classof _object == Dummy and (GetUserProp _object "onDestroy") != undefined and (GetUserProp _object "resource") != undefined and (GetUserProp _object "destroyedResource") != undefined then
+	(
+		return true
+	) else (
+		return false
+	)
+)
 
 -- Cerca l'entitat de player
 function GetPlayerEntity _entities =
@@ -257,6 +289,25 @@ function IsInfo _object =
 	)
 )
 
+--retorna la mida x,y,z d'una mesh
+function MeshSize _mesh=
+(
+	local l_transformX = _mesh.transform[1]
+	local l_transformY = _mesh.transform[2]
+	local l_transformZ = _mesh.transform[3]
+	
+	local l_sizeX = sqrt(l_transformX[1] * l_transformX[1] + l_transformX[2] * l_transformX[2] + l_transformX[3] * l_transformX[3])
+	local l_sizeY = sqrt(l_transformY[1] * l_transformY[1] + l_transformY[2] * l_transformY[2] + l_transformY[3] * l_transformY[3])
+	local l_sizeZ = sqrt(l_transformZ[1] * l_transformZ[1] + l_transformZ[2] * l_transformZ[2] + l_transformZ[3] * l_transformZ[3])
+	
+	local l_max = _mesh.max
+	local l_min = _mesh.min
+	local boxsize = [abs(l_max.x - l_min.x), abs(l_max.y - l_min.y), abs(l_max.z - l_min.z)]
+	
+	return [boxsize.x * l_sizeX, boxsize.y * l_sizeY, boxsize.z * l_sizeZ]
+)
+
+--retorna la mida x,y,z d'un dummy
 function DummySize _dummy =
 (
 	local l_transformX = _dummy.transform[1]
