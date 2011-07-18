@@ -57,11 +57,11 @@ function XMLEntityRenderableObject _instance &_TagName _animated =
 	
 	--name
 	local l_resource = GetUserProp _instance "resource"
-	if l_resource == undefined or classof l_resource != string then
+	if l_resource == undefined or classof l_resource != String then
 	(
 		l_resource = _instance.name
 	)
-	append l_params #("name",_instance.name)
+	append l_params #("name", l_resource)
 	
 	return l_params
 )
@@ -188,13 +188,13 @@ function XMLEntityTrigger _instance &_TagName _colGroup _onEnter _onExit =
 	l_params = #(#("shape","box"),#("size",l_aux), #("collision_group", _colGroup))
 	
 	--onEnter
-	if _onEnter != undefined and classof _onEnter  ==  string then
+	if _onEnter != undefined and classof _onEnter  ==  String then
 	(
 		append l_params #("onEnter", _onEnter)
 	)
 	
 	--onExit
-	if _onExit != undefined  and classof _onExit  ==  string then
+	if _onExit != undefined  and classof _onExit  ==  String then
 	(
 		append l_params #("onExit", _onExit)
 	)
