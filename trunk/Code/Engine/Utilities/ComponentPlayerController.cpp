@@ -50,6 +50,8 @@ bool CComponentPlayerController::Init(CGameEntity *_pEntity)
   m_pAnimatedModel = dynamic_cast<CRenderableAnimatedInstanceModel*>(l_pComponentRO->GetRenderableObject());
   assert(m_pAnimatedModel); //TODO fer missatges d'error més elavorats
 
+  m_vPickUps.clear();
+
   SetOk(true);
   return IsOk();
 }
@@ -221,4 +223,51 @@ CPhysicUserData* CComponentPlayerController::CheckCover(SCollisionInfo& _sCInfo)
   CPhysicUserData* l_pUserData = l_pPM->RaycastClosestActor(l_vPos,l_vDir,l_pPM->GetCollisionMask(ECG_COBERTURES),_sCInfo);
 
   return l_pUserData;
+}
+
+
+bool CComponentPlayerController::HasPickUp(const string& _szPickUp)
+{
+  vector<string>::iterator l_vIt;
+
+  for(l_vIt = m_vPickUps.begin(); l_vIt != m_vPickUps.end(); ++l_vIt)
+  {
+    if((*l_vIt) == _szPickUp)
+      return true;
+  }
+
+  return false;
+}
+
+void CComponentPlayerController::AddPickUp(const string& _szPickUp)
+{
+  m_vPickUps.push_back(_szPickUp);
+}
+
+bool CComponentPlayerController::RemovePickUp(const string& _szPickUp)
+{
+  vector<string>::iterator l_vIt;
+
+  for(l_vIt = m_vPickUps.begin(); l_vIt != m_vPickUps.end(); ++l_vIt)
+  {
+    if((*l_vIt) == _szPickUp)
+    {
+      m_vPickUps.erase(l_vIt);
+      return true;
+    }
+  }
+
+  return false;
+}
+
+void CComponentPlayerController::ReceiveEvent(const SEvent& _Event)
+{
+  if(_Event.Receiver == GetEntity()->GetGUID())
+  {
+    if(_Event.Msg == SEvent::PICKUP)
+    {
+      if(_Event.Info[0].Type == SEventInfo::STRING)
+        AddPickUp(_Event.Info[0].str);
+    }
+  }
 }

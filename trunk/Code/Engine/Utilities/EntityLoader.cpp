@@ -55,6 +55,7 @@ void LoadComponentRenderableObject(CXMLTreeNode& _TreeComponent, CGameEntity* _p
   if(_TreeComponent.ExistsProperty("name"))
   {
     string l_szResource = _TreeComponent.GetPszISOProperty("name");
+    string l_szName     = _pEntity->GetName();
 
     //static
     if(!_TreeComponent.GetBoolProperty("animated",false,false))
@@ -67,9 +68,8 @@ void LoadComponentRenderableObject(CXMLTreeNode& _TreeComponent, CGameEntity* _p
     } else
     //animated
     {
-      string l_szName       = _pEntity->GetName();
       LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCreant component de Renderable Object Animat amb nom \"%s\" i core \"%s\".", l_szName.c_str(), l_szResource.c_str());
-      if(!CComponentRenderableObject::AddToEntityWithAnimatedModel(_pEntity, l_szName,_TreeComponent.GetPszISOProperty("name")))
+      if(!CComponentRenderableObject::AddToEntityWithAnimatedModel(_pEntity, l_szName, _TreeComponent.GetPszISOProperty("name")))
       {
         LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
       }

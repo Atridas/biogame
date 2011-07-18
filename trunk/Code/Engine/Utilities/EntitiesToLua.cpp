@@ -65,17 +65,19 @@ void RegisterEntitiesToLua(lua_State* _pLS)
 {
   module(_pLS) [
     class_<SEventInfo>("EventInfo")
-      .enum_("Type")
+      .enum_("TYPE")
       [
         value("int"   ,SEventInfo::INT),
         value("float" ,SEventInfo::FLOAT),
         value("vector",SEventInfo::VECTOR),
         value("string",SEventInfo::STRING)
       ]
+      .def_readwrite("Type", &SEventInfo::Type)
       .def_readwrite("i",    &SEventInfo::i)
       .def_readwrite("f",    &SEventInfo::f)
       .def_readwrite("v",    &SEventInfo::v)
       .def_readwrite("str",  &SEventInfo::str)
+      .def("set_str",        &SEventInfo::SetStr)
       
     ,class_<SEvent>("Event")
       .enum_("EventType")
@@ -83,14 +85,16 @@ void RegisterEntitiesToLua(lua_State* _pLS)
         value("rebre_impacte",       SEvent::REBRE_IMPACTE),
         value("morir",               SEvent::MORIR),
         value("obrir",               SEvent::OBRIR),
-        value("tancar",              SEvent::TANCAR)
+        value("tancar",              SEvent::TANCAR),
+        value("pickup",              SEvent::PICKUP)
       ]
       .def_readwrite("sender",       &SEvent::Sender)
       .def_readwrite("receiver",     &SEvent::Receiver)
       .def_readwrite("msg",          &SEvent::Msg)
       .def_readwrite("dispatch_time",&SEvent::DispatchTime)
-      .property("Info", GetEventInfo, SetEventInfo, raw(_2)) 
-      //.def_readwrite("Info",        &SEvent::Info)
+      .def("get_info",               &SEvent::GetInfo)
+      .def("set_info",               &SEvent::SetInfo)
+      //.property("Info", &GetEventInfo, &SetEventInfo, raw(_2))
 
     ,class_<CBaseComponent>("BaseComponent")
       .enum_("ComponentType")
@@ -155,6 +159,9 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("cover",                 &CComponentPlayerController::Cover)
       .def("die",                   &CComponentPlayerController::Die)
       .def("respawn",               &CComponentPlayerController::Respawn)
+      .def("has_pickup",            &CComponentPlayerController::HasPickUp)
+      .def("add_pickup",            &CComponentPlayerController::AddPickUp)
+      .def("remove_pickup",         &CComponentPlayerController::RemovePickUp)
       .def_readwrite("pos_inicial", &CComponentPlayerController::m_vPosInicial)
 
       /*.def_readwrite("move_fwd",   &CComponentPlayerController::m_szMoveForward)

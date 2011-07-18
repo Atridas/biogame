@@ -19,8 +19,6 @@ class CComponentPlayerController :
 {
 public:
 
-
-
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_PLAYER_CONTROLLER;};
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_PLAYER_CONTROLLER;};
 
@@ -29,6 +27,8 @@ public:
   void Update(float _fDeltaTime);
 
   virtual ~CComponentPlayerController(void) {Done();};
+
+  virtual void ReceiveEvent(const SEvent& _Event);
 
   //Dades pròpies dels components
   
@@ -47,6 +47,10 @@ public:
   void Respawn();
   bool Cover();
 
+  bool HasPickUp(const string& _szPickUp);
+  void AddPickUp(const string& _szPickUp);
+  bool RemovePickUp(const string& _szPickUp);
+
 protected:
   CComponentPlayerController():
       m_pObject3D(0), m_pMovement(0), m_pCoverEntity(0),
@@ -62,15 +66,18 @@ protected:
      
       {};
   bool Init(CGameEntity *_pEntity);
-  virtual void Release() {};
+  virtual void Release() { m_vPickUps.clear(); };
 
 private:
+
   CPhysicUserData* CheckCover(SCollisionInfo& _sCInfo);
   //Altres components referenciats
   CComponentMovement * m_pMovement;
   CComponentObject3D * m_pObject3D;
 
   CRenderableAnimatedInstanceModel* m_pAnimatedModel;
+
+  vector<string> m_vPickUps;
 };
 
 #endif
