@@ -28,14 +28,11 @@ sampler PrevFilterSampler : register(s0) = sampler_state
 //float g_GaussianKernel[GLOW_KERNEL_HALF] = {0.315, 0.234375 , 0.09375, 0.015625};
 
 #define GLOW_KERNEL_HALF 7
-float g_GaussianKernel[7] = { 0.3989422804,
+float g_GaussianKernel[7] = {
+                        0.3989422804,
                         0.2419707245,
+                        0.2419707245,
+                        0.0539909665,
                         0.0539909665,
                         0.0044318484,
-                        0.2419707245,
-                        0.0539909665,
                         0.0044318484};
-
-
-
-

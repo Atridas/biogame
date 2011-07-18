@@ -168,7 +168,7 @@ function ExportMaterial _object _material _vertexType _file _relativePath _norma
 	)
 	else
 	(
-		l_specularLevel = _material.specularLevel
+		l_specularLevel = _material.specularLevel * 0.03
 	)
 	
 	if _material.filterMapEnable == true and _material.filterMap != undefined then
