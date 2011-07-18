@@ -34,4 +34,7 @@
 	<RenderableObject name="BoxParallax" class="StaticMesh" resource="BoxParallax" position="-54.6592 0.0376668 36.6172" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="BoxGlowAlpha" class="StaticMesh" resource="BoxGlowAlpha" position="-54.6592 0.0376649 21.9762" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="BoxReflection" class="StaticMesh" resource="BoxReflection" position="-25.0811 1.25635 -5.30342" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="TeteraPickUp" class="StaticMesh" resource="TeteraPickUp" position="-24.3621 0.624995 21.6316" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="EsferaInteractiva" class="StaticMesh" resource="EsferaInteractiva" position="-24.4011 0.968018 24.6365" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="EsferaDestructible" class="StaticMesh" resource="EsferaDestructible" position="-16.8264 1.42554 23.2763" yaw="0.0" pitch="0.0" roll="0.0" />
 </RenderableObjects>

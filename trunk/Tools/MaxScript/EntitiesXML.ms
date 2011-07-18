@@ -46,23 +46,22 @@ function XMLEntityRenderableObject _instance &_TagName _animated =
 	
 	_TagName = "RenderableObject"
 	
+	--animated
 	if _animated == true then
 	(
-		local l_resource = GetUserProp _instance "resource"
-		
-		if classof l_resource != string then
-		(
-			l_resource = _instance.name
-		)
-		
 		append l_params #("animated","true")
-		append l_params #("name",l_resource)
 	)else
 	(
 		append l_params #("animated","false")
-		append l_params #("name",_instance.name)
 	)
 	
+	--name
+	local l_resource = GetUserProp _instance "resource"
+	if l_resource == undefined or classof l_resource != string then
+	(
+		l_resource = _instance.name
+	)
+	append l_params #("name",_instance.name)
 	
 	return l_params
 )
@@ -167,7 +166,7 @@ function XMLEntityPhysXMesh _instance &_TagName _colGroup =
 -- collision_group
 -- onEnter
 -- onExit
-function XMLEntityTrigger _instance &_TagName =
+function XMLEntityTrigger _instance &_TagName _colGroup _onEnter _onExit =
 (
 	local l_params = #()
 	local l_aux = "" as stringStream
@@ -175,22 +174,29 @@ function XMLEntityTrigger _instance &_TagName =
 	_TagName = "Trigger"
 	
 	--size
-	local l_size = RHVectorToLH (DummySize _instance)
-	format "% % %" l_size.x l_size.y l_size.z to:l_aux
+	if classof _instance != Dummy then
+	(
+		local l_size = RHVectorToLH (MeshSize _instance)
+		format "% % %" l_size.x l_size.y l_size.z to:l_aux
+	)else
+	(
+		local l_size = RHVectorToLH (DummySize _instance)
+		format "% % %" l_size.x l_size.y l_size.z to:l_aux
+	)
 	
 	--shape, size, collision
-	l_params = #(#("shape","box"),#("size",l_aux), #("collision_group", "trigger"))
+	l_params = #(#("shape","box"),#("size",l_aux), #("collision_group", _colGroup))
 	
 	--onEnter
-	if (GetUserProp _instance "TriggerEnter") != undefined then
+	if _onEnter != undefined and classof _onEnter  ==  string then
 	(
-		append l_params #("onEnter", (GetUserProp _instance "TriggerEnter"))
+		append l_params #("onEnter", _onEnter)
 	)
 	
 	--onExit
-	if (GetUserProp _instance "TriggerExit") != undefined then
+	if _onExit != undefined  and classof _onExit  ==  string then
 	(
-		append l_params #("onExit", (GetUserProp _instance "TriggerExit"))
+		append l_params #("onExit", _onExit)
 	)
 	
 	return l_params
@@ -298,11 +304,10 @@ function XMLEntityEnemy _instance &_TagName =
 	local l_params = #()
 	local l_aux
 	local l_tmp
-	local l_enemyType = GetUserProp _instance "entity"
 	
 	_TagName = "UnknownEnemy"
 	
-	if l_enemyType != undefined then
+	if (GetUserProp _instance "entity") != undefined then
 	(
 		--name
 		l_tmp = _instance.name
@@ -321,11 +326,51 @@ function XMLEntityEnemy _instance &_TagName =
 		append l_params #("yaw",l_aux)
 		
 		--Enemy Type
-		if l_tmp != "Player" then
+		if (GetUserProp _instance "entity") != "Player" then
 		(
-			_TagName = l_tmp
+			_TagName = GetUserProp _instance "entity"
 		)
 	)
+	
+	return l_params
+)
+
+--Genera els paràmetres d'un tag XML d'entitat Interactuable. Conté:
+-- action
+function XMLEntityInteractive _instance &_TagName =
+(
+	local l_params = #()
+	local l_ss
+	
+	_TagName = "Interactive"
+	
+	--action
+	l_ss = "" as stringStream
+	format "%" (GetUserProp _instance "interactive") to:l_ss
+	append l_params #("action", l_ss)
+	
+	return l_params
+)
+
+--Genera els paràmetres d'un tag XML d'entitat Destructible. Conté:
+-- onDestroy
+-- destroyedResource
+function XMLEntityDestroyable _instance &_TagName =
+(
+	local l_params = #()
+	local l_ss
+	
+	_TagName = "Destroyable"
+	
+	--onDestroy
+	l_ss = "" as stringStream
+	format "%" (GetUserProp _instance "onDestroy") to:l_ss
+	append l_params #("onDestroy", l_ss)
+	
+	--destroyedResource
+	l_ss = "" as stringStream
+	format "%" (GetUserProp _instance "destroyedResource") to:l_ss
+	append l_params #("destroyedResource", l_ss)
 	
 	return l_params
 )
