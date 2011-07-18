@@ -31,7 +31,7 @@ public:
 
 
 protected:
-  virtual void Release() {};
+  virtual void Release() { m_stActiveCycles.clear(); m_stInactiveCycles.clear(); };
 private:
   
   CComponentAnimation(): m_pAnimatedModel(0), m_szCurrentCycle("") {};
