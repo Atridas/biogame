@@ -103,6 +103,9 @@
     <Filter Include="EntitySystem\Components\ComponentArma">
       <UniqueIdentifier>{2b277006-1f47-4faa-a605-a972e96bc134}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentInteractive">
+      <UniqueIdentifier>{4a0e7c8b-d341-4af1-a5bf-accbb116df95}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -212,6 +215,9 @@
     </ClCompile>
     <ClCompile Include="ComponentArma.cpp">
       <Filter>EntitySystem\Components\ComponentArma</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentInteractive.cpp">
+      <Filter>EntitySystem\Components\ComponentInteractive</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -331,6 +337,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentArma.h">
       <Filter>EntitySystem\Components\ComponentArma</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentInteractive.h">
+      <Filter>EntitySystem\Components\ComponentInteractive</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

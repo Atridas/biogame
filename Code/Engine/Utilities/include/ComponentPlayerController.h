@@ -46,6 +46,7 @@ public:
   void Die();
   void Respawn();
   bool Cover();
+  void Use();
 
   bool HasPickUp(const string& _szPickUp);
   void AddPickUp(const string& _szPickUp);

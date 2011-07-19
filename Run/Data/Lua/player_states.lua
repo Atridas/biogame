@@ -130,6 +130,11 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
     end
   end
   
+  if ACTION_MANAGER:is_action_active('Use') then
+    log('using')
+    player_controller:use()
+  end
+  
   if ACTION_MANAGER:is_action_active('MoveLeft') then
     left = Vect3f(math.cos(yaw + math.pi / 2), 0, math.sin(yaw + math.pi / 2) )
     moviment.movement = moviment.movement + left * (_dt) * speed

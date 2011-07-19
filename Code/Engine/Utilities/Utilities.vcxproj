@@ -84,6 +84,7 @@
     <ClCompile Include="ComponentHighCover.cpp" />
     <ClCompile Include="ComponentIABrain.cpp" />
     <ClCompile Include="ComponentIAWalkToPlayer.cpp" />
+    <ClCompile Include="ComponentInteractive.cpp" />
     <ClCompile Include="ComponentLaser.cpp" />
     <ClCompile Include="ComponentLowCover.cpp" />
     <ClCompile Include="ComponentMirilla.cpp" />
@@ -122,6 +123,7 @@
     <ClInclude Include="include\ComponentHighCover.h" />
     <ClInclude Include="include\ComponentIABrain.h" />
     <ClInclude Include="include\ComponentIAWalkToPlayer.h" />
+    <ClInclude Include="include\ComponentInteractive.h" />
     <ClInclude Include="include\ComponentLaser.h" />
     <ClInclude Include="include\ComponentLowCover.h" />
     <ClInclude Include="include\ComponentMirilla.h" />

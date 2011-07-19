@@ -86,7 +86,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
         value("morir",               SEvent::MORIR),
         value("obrir",               SEvent::OBRIR),
         value("tancar",              SEvent::TANCAR),
-        value("pickup",              SEvent::PICKUP)
+        value("pickup",              SEvent::PICKUP),
+        value("interaccio",          SEvent::INTERACCIO)
       ]
       .def_readwrite("sender",       &SEvent::Sender)
       .def_readwrite("receiver",     &SEvent::Receiver)
@@ -157,6 +158,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("add_to_entity",         (bool(*)(CGameEntity*))&CComponentPlayerController::AddToEntity)
       .def("shoot",                 &CComponentPlayerController::Shoot)
       .def("cover",                 &CComponentPlayerController::Cover)
+      .def("use",                   &CComponentPlayerController::Use)
       .def("die",                   &CComponentPlayerController::Die)
       .def("respawn",               &CComponentPlayerController::Respawn)
       .def("has_pickup",            &CComponentPlayerController::HasPickUp)

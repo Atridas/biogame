@@ -21,6 +21,7 @@
 #include "ComponentDoor.h"
 #include "ComponentShield.h"
 #include "ComponentArma.h"
+#include "ComponentInteractive.h"
 
 #include "PhysicsManager.h"
 
@@ -199,6 +200,22 @@ void LoadComponentDoor(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 
 }
 
+void LoadComponentInteractive(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
+{
+  
+  string l_szName   = _pEntity->GetName();
+  string l_szAction = _TreeComponent.GetPszISOProperty("action", "", false);
+
+  LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Interactiu amb nom \"%s\" i acció \"%s\"",l_szName.c_str(), l_szAction.c_str());
+
+
+  if(!CComponentInteractive::AddToEntity(_pEntity, l_szAction))
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
+  }
+
+}
+
 // -------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------
@@ -338,6 +355,11 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
             } else if(strcmp(l_TreeComponent.GetName(),"Door") == 0)
             {
               LoadComponentDoor(l_TreeComponent, l_pEntity);
+
+            // -----------------------------------------------------------------------------------------------------------
+            } else if(strcmp(l_TreeComponent.GetName(),"Interactive") == 0)
+            {
+              LoadComponentInteractive(l_TreeComponent, l_pEntity);
 
             // -----------------------------------------------------------------------------------------------------------
             } else if(!l_TreeComponent.IsComment())
