@@ -96,7 +96,7 @@ void CComponentPlayerController::Shoot()
   SCollisionInfo l_CInfo;
   CPhysicUserData* l_pUserData = 0;
 
-  CPhysicsManager *l_pPM = CORE->GetPhysicsManager();
+  CPhysicsManager *l_pPM = PHYSICS_MANAGER;
 
   l_pUserData = l_pPM->RaycastClosestActorShoot(l_vPos,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT),l_CInfo,20.0f);
 
@@ -133,8 +133,7 @@ void CComponentPlayerController::Shoot()
       l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
       l_impacte.Sender = GetEntity()->GetGUID();
 
-      //TODO usar un manager
-      CORE->GetEntityManager()->SendEvent(l_impacte);
+      ENTITY_MANAGER->SendEvent(l_impacte);
       //l_pUserData->GetEntity()->ReceiveEvent(l_impacte);
     }
   }
@@ -162,6 +161,37 @@ void CComponentPlayerController::Shoot()
                                   Vect3f(l_vTanslationBone2.x,l_vTanslationBone2.y,l_vTanslationBone2.z),
                                   l_vCenterPoint,
                                   1.f);
+  }
+}
+
+void CComponentPlayerController::Use()
+{
+  CEntityManager* l_pEM = ENTITY_MANAGER;
+  CPhysicsManager *l_pPM = PHYSICS_MANAGER;
+  vector<CPhysicUserData*> l_vImpactObjects;
+
+  //missatge
+  SEvent l_Missatge;
+  l_Missatge.Msg = SEvent::INTERACCIO;
+  l_Missatge.Sender = GetEntity()->GetGUID();
+
+
+  //esfera d'us
+  l_pPM->OverlapSphereActor( 5.0f                               //radiusSphere
+                            ,m_pObject3D->GetCenterPosition()   //posSphere
+                            ,l_vImpactObjects                   // impactObjects
+                            );
+
+  //TODO usar un manager
+
+  vector<CPhysicUserData*>::iterator l_itInit = l_vImpactObjects.begin();
+  vector<CPhysicUserData*>::iterator l_itEnd  = l_vImpactObjects.end();
+  vector<CPhysicUserData*>::iterator l_itIt;
+  
+  for(l_itIt = l_itInit; l_itIt < l_itEnd; ++l_itIt)
+  {
+    l_Missatge.Receiver = (*l_itIt)->GetEntity()->GetGUID();
+    l_pEM->SendEvent(l_Missatge);
   }
 }
 

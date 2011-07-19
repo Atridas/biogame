@@ -90,6 +90,14 @@ using namespace std;
  * @define Macro d'accés a Sound Manager.
 **/
 #define SOUND_MANAGER CORE->GetSoundManager()
+/**
+ * @define Macro d'accés al Physx Manager.
+**/
+#define PHYSICS_MANAGER CORE->GetPhysicsManager()
+/**
+ * @define Macro d'accés a Entity Manager.
+**/
+#define ENTITY_MANAGER CORE->GetEntityManager()
 
 
 float RandomNumber(float _fMin, float _fMax);

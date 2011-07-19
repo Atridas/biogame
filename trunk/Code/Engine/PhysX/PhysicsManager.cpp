@@ -695,7 +695,7 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot (const Vect3f posRay,
 	return impactObject;
 }
 
-void CPhysicsManager::OverlapSphereActor (float radiusSphere, const Vect3f& posSphere, std::vector<CPhysicUserData*> impactObjects)
+void CPhysicsManager::OverlapSphereActor (float radiusSphere, const Vect3f& posSphere, std::vector<CPhysicUserData*> &impactObjects)
 {
 	assert(m_pScene);
 
@@ -732,8 +732,10 @@ void CPhysicsManager::OverlapSphereActor (float radiusSphere, const Vect3f& posS
 			if(!find)
 				impactObjects.push_back(physicObject);
 		}
-    
 	}
+
+  delete shapes;
+
 }
 
 void CPhysicsManager::OverlapSphereActorGrenade (float radiusSphere, const Vect3f& posSphere, std::vector<CPhysicUserData*> impactObjects, float _fPower)

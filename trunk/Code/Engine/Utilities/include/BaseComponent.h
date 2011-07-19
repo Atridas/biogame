@@ -44,7 +44,8 @@ public:
     ECT_MIRILLA,
     ECT_DOOR,
     ECT_SHIELD,
-    ECT_ARMA
+    ECT_ARMA,
+    ECT_INTERACTIVE
   };
   
   virtual Type GetType() = 0; //{return m_Type;};
