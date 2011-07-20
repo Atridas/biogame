@@ -149,6 +149,7 @@
     <ClInclude Include="include\Effect.h" />
     <ClInclude Include="include\EffectManager.h" />
     <ClInclude Include="include\EmptyMaterial.h" />
+    <ClInclude Include="include\EnvirondmentPropertyDecorator.h" />
     <ClInclude Include="include\EnvironmentTextureDecorator.h" />
     <ClInclude Include="include\FontManager.h" />
     <ClInclude Include="include\FPSCamera.h" />
