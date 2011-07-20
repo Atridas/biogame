@@ -89,6 +89,7 @@ shared float g_SpecularActive : SpecularActive;
 
 shared int g_TextureWidth  : TextureWidth;
 shared int g_TextureHeight : TextureHeight;
+shared float g_AlphaFactor : AlphaFactor;
 
 #define POISON_BLUR_KERNEL_SIZE 16
 

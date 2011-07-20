@@ -29,5 +29,5 @@
   <collision group1="camera" group2="escenari" />
   <!--<collision group1="camera" group2="objecte dinamic" />-->
 
-  <!--<collision group1="cobertura" group2="cobertura" />-->
+  <collision group1="cobertura" group2="cobertura" />
 </physX>

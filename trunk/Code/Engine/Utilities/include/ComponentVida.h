@@ -27,7 +27,7 @@ public:
   void Increase(float _fAmount);
   void Decrease(float _fAmount);
   void Set(float _fAmount);
-
+  float GetMaxHP() {return m_fVidaMaxima;};
   void SetRegen(float _fRegenAmount);
   
   bool  m_bImmortal;

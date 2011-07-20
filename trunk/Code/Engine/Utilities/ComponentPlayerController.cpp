@@ -4,6 +4,8 @@
 #include "Core.h"
 #include "InputManager.h"
 #include "ActionManager.h"
+#include "SceneEffectManager.h"
+#include "DrawQuadSceneEffect.h"
 #include "RenderableAnimatedInstanceModel.h"
 #include "ComponentRenderableObject.h"
 #include "Component3rdPSCamera.h"
@@ -63,9 +65,14 @@ void CComponentPlayerController::Update(float _fDeltaTime)
   CComponentVida* l_pComponentVida = GetEntity()->GetComponent<CComponentVida>();
   const vector<CMaterial*>& l_vMaterials = m_pAnimatedModel->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetMaterials();
 
+  CDrawQuadSceneEffect* l_pDamage = (CDrawQuadSceneEffect*)CORE->GetSceneEffectManager()->GetResource("damage");
+
+  float l_fHP = l_pComponentVida->GetHP();
+  float l_fMaxHP = l_pComponentVida->GetMaxHP();
+
   float l_fMin = 0.3f;
   float l_fMax = 1.5f;
-  float l_fGlowIntensity = l_pComponentVida->GetHP()/100 * (l_fMax - l_fMin) + l_fMin;
+  float l_fGlowIntensity = l_fHP/100 * (l_fMax - l_fMin) + l_fMin;
 
   vector<CMaterial*>::const_iterator l_itMaterial = l_vMaterials.begin();
 
@@ -74,6 +81,26 @@ void CComponentPlayerController::Update(float _fDeltaTime)
     (*l_itMaterial)->SetGlowIntensity(l_fGlowIntensity);
     ++l_itMaterial;
   }
+
+  if(l_pDamage)
+  {
+    if(l_fHP < l_fMaxHP)
+    {
+      float l_fDamageAlpha = 1.0f - (l_fHP/l_fMaxHP);
+      l_fDamageAlpha = l_fDamageAlpha + abs(l_fDamageAlpha*0.8f*sinf(5.0f*m_fTime));
+      if(l_fDamageAlpha > 1.0f)
+      {
+        l_fDamageAlpha = 1.0f;
+      }
+
+      l_pDamage->SetActive(true);
+      l_pDamage->SetAlphaFactor(l_fDamageAlpha);
+    }else{
+      l_pDamage->SetActive(false);
+    }
+  }
+
+  m_fTime += _fDeltaTime;
 }
 
 

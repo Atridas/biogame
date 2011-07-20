@@ -52,6 +52,7 @@ public:
                     m_bLightsUpdated(false),
                     m_bSkeletonUpdated(false),
                     m_bTextureWidthHeightUpdated(false),
+                    m_bAlphaFactorUpdated(false),
                     m_bPoissonBlurKernelUpdated(true),
                     m_bSpecularParamsUpdated(true),
                     m_bGlowUpdated(false),
@@ -90,7 +91,8 @@ public:
                     m_pGlowActiveParameter(0),
                     m_pSpecularActiveParameter(0),
                     m_pTextureWidth(0),
-                    m_pTextureHeight(0), 
+                    m_pTextureHeight(0),
+                    m_pAlphaFactorParameter(0),
                     m_pPoissonBlurKernelParameter(0),
                     m_pBump(0),
                     m_pParallaxHeight(0),
@@ -143,6 +145,7 @@ public:
   void SetSkeleton(CalSkeleton* _pSkeleton, CalHardwareModel* _pCalHardwareModel) {m_pCalSkeleton = _pSkeleton; m_pCalHardwareModel = _pCalHardwareModel; m_bSkeletonUpdated = true;};
 
   void SetTextureWidthHeight(int _iWidth, int _iHeight) {m_iTextureWidth  = _iWidth; m_iTextureHeight = _iHeight; m_bTextureWidthHeightUpdated = true;};
+  void SetAlphaFactor(float _fAlphaFactor) {m_fAlphaFactor = _fAlphaFactor; m_bAlphaFactorUpdated = true;};
 
   void SetGlow(bool _bGlow) {m_bGlowActive = _bGlow; m_bGlowUpdated = true;};
   void SetGlowIntensity(float _fGlowIntensity) {m_fGlowIntensity = _fGlowIntensity; m_bGlowUpdated = true;};
@@ -198,6 +201,7 @@ private:
   
   int m_iTextureWidth;
   int m_iTextureHeight;
+  float m_fAlphaFactor;
 
   float m_pfPoissonBlurKernel[32];
 
@@ -215,6 +219,7 @@ private:
   bool m_bCameraRightUpdated;
   bool m_bSkeletonUpdated;
   bool m_bTextureWidthHeightUpdated;
+  bool m_bAlphaFactorUpdated;
   bool m_bPoissonBlurKernelUpdated;
   bool m_bSpecularParamsUpdated;
   bool m_bGlowUpdated;
@@ -269,7 +274,8 @@ private:
   D3DXHANDLE m_pGlowActiveParameter;
   D3DXHANDLE m_pSpecularActiveParameter;
   D3DXHANDLE m_pTextureWidth;
-  D3DXHANDLE m_pTextureHeight; 
+  D3DXHANDLE m_pTextureHeight;
+  D3DXHANDLE m_pAlphaFactorParameter;
   D3DXHANDLE m_pPoissonBlurKernelParameter;
   
   D3DXHANDLE m_pBump;

@@ -48,6 +48,8 @@
     <effect name="PostProcessBloom" file="Data/Effects/PostProcessBloomEffect.fx" technique="PostProcessBloomTechnique" />
     <effect name="PostProcessBloom2" file="Data/Effects/PostProcessBloomEffect2.fx" technique="PostProcessBloomTechnique2" />
     
+    <effect name="TextureAlphaFactor" file="Data/Effects/TextureAlphaFactorEffect.fx" technique="TextureAlphaFactorTechnique" />
+    
     <!--<effect name="HDR" file="Data/Effects/HDR.fx"/>-->
     <!--<effect name="Blur" file="Data/Effects/Blur.fx" />-->
     

@@ -79,8 +79,8 @@ void CTestProcess::RenderScene(CRenderManager* _pRM)
 
 void CTestProcess::RenderINFO(CRenderManager* _pRM)
 {
-  //if(CORE->GetActionManager()->IsActionActive("ToggleDebug"))
-  //{
+  if(CORE->GetActionManager()->IsActionActive("ToggleDebug"))
+  {
     CORE->GetPhysicsManager()->DebugRender(_pRM);
     //m_PortalManager.DebugRender(_pRM);
 
@@ -92,7 +92,7 @@ void CTestProcess::RenderINFO(CRenderManager* _pRM)
     //_pRM->SetTransform(i);
   
     //_pRM->DrawFrustum(&l_Frustum, colBLACK);
-  //}
+  }
 }
 
 bool CTestProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)

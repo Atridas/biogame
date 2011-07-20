@@ -18,49 +18,16 @@ CSceneEffectManager::CSceneEffectManager(void) : m_pShadowMapEffect(0)
 
 void CSceneEffectManager::Release()
 {
-  vector<CSceneEffect*>::iterator l_begin, l_end, l_it;
 
   m_pShadowMapEffect = 0;
 
-  l_begin = m_vRenderSceneEffects.begin();
-  l_end   = m_vRenderSceneEffects.end();
-  for(l_it = l_begin; l_it != l_end; ++l_it)
-  {
-    delete *l_it;
-  }
   m_vRenderSceneEffects.clear();
-
-  l_begin = m_vPreRenderSceneEffects.begin();
-  l_end   = m_vPreRenderSceneEffects.end();
-  for(l_it = l_begin; l_it != l_end; ++l_it)
-  {
-    delete *l_it;
-  }
   m_vPreRenderSceneEffects.clear();
-
-  l_begin = m_vCaptureFrameBufferSceneEffects.begin();
-  l_end   = m_vCaptureFrameBufferSceneEffects.end();
-  for(l_it = l_begin; l_it != l_end; ++l_it)
-  {
-    delete *l_it;
-  }
   m_vCaptureFrameBufferSceneEffects.clear();
-
-  l_begin = m_vCaptureFrameBufferSceneEffectsAfterPostRender.begin();
-  l_end   = m_vCaptureFrameBufferSceneEffectsAfterPostRender.end();
-  for(l_it = l_begin; l_it != l_end; ++l_it)
-  {
-    delete *l_it;
-  }
   m_vCaptureFrameBufferSceneEffectsAfterPostRender.clear();
-
-  l_begin = m_vPostRenderSceneEffects.begin();
-  l_end   = m_vPostRenderSceneEffects.end();
-  for(l_it = l_begin; l_it != l_end; ++l_it)
-  {
-    delete *l_it;
-  }
   m_vPostRenderSceneEffects.clear();
+
+  CMapManager::Release();
 
 }
   
@@ -84,14 +51,39 @@ bool CSceneEffectManager::Load()
   }
 
   int l_iNumChildren = l_treeSceneEffects.GetNumChildren();
+
+  string l_szName;
+  CSceneEffect* l_pSceneEffect = 0;
+
   for(int i = 0; i < l_iNumChildren; i++)
   {
     CXMLTreeNode l_treeSceneEffect = l_treeSceneEffects(i);
-    if(strcmp(l_treeSceneEffect.GetName(),"pre_render") == 0)
+
+    if(!l_treeSceneEffect.ExistsProperty("name"))
+    {
+      LOGGER->AddNewLog(ELL_WARNING,"CSceneEffectManager::Load Skipping SceneEffect with no name property.");
+      continue;
+    }
+
+    l_szName = l_treeSceneEffect.GetPszISOProperty("name","",false);
+
+    if(l_szName.compare("") == 0)
+    {
+      LOGGER->AddNewLog(ELL_WARNING,"CSceneEffectManager::Load Skipping SceneEffect with no name property.");
+      continue;
+    }
+
+    if(GetResource(l_szName) != 0)
+    {
+      LOGGER->AddNewLog(ELL_WARNING,"CSceneEffectManager::Load SceneEffect \"%s\" already exsists.",l_szName.c_str());
+      continue;
+    }
+
+    if(string(l_treeSceneEffect.GetName()).compare("pre_render") == 0)
     {
       //Pre-render
       string l_szType = l_treeSceneEffect.GetPszISOProperty("type", "");
-      CSceneEffect* l_pSceneEffect = 0;
+        
       if(l_szType == "shadow_map_render_to_texture")
       {
         l_pSceneEffect = new CShadowMapRenderToTexture();
@@ -113,56 +105,66 @@ bool CSceneEffectManager::Load()
         LOGGER->AddNewLog(ELL_WARNING,"CSceneEffectManager::Load  Scene effect incorrecte \"%s\".", l_treeSceneEffect.GetName());
         delete l_pSceneEffect;
       } else {
+        AddResource(l_szName,l_pSceneEffect);
         m_vPreRenderSceneEffects.push_back(l_pSceneEffect);
       }
     } else if(strcmp(l_treeSceneEffect.GetName(),"render") == 0)
     {
       //Render
-      CSceneEffect * l_pSceneEffect = new CSceneEffect();
+      l_pSceneEffect = new CSceneEffect();
+
       if(!l_pSceneEffect->Init(l_treeSceneEffect))
       {
         LOGGER->AddNewLog(ELL_WARNING,"CSceneEffectManager::Load  Scene effect incorrecte \"%s\".", l_treeSceneEffect.GetName());
         delete l_pSceneEffect;
       } else {
+        AddResource(l_szName,l_pSceneEffect);
         m_vRenderSceneEffects.push_back(l_pSceneEffect);
       }
     } else if(strcmp(l_treeSceneEffect.GetName(),"capture_frame_buffer") == 0)
     {
       //capture_frame_buffer
-      CRenderTextureSceneEffect * l_pRenderTextureSceneEffect = new CRenderTextureSceneEffect();
+      CRenderTextureSceneEffect* l_pRenderTextureSceneEffect = new CRenderTextureSceneEffect();
+
       if(!l_pRenderTextureSceneEffect->Init(l_treeSceneEffect))
       {
         LOGGER->AddNewLog(ELL_WARNING,"CSceneEffectManager::Load  Scene effect incorrecte \"%s\".", l_treeSceneEffect.GetName());
         delete l_pRenderTextureSceneEffect;
       } else {
+        AddResource(l_szName,l_pRenderTextureSceneEffect);
         m_vCaptureFrameBufferSceneEffects.push_back(l_pRenderTextureSceneEffect);
       }
     } else if(strcmp(l_treeSceneEffect.GetName(),"capture_frame_buffer_post_fx") == 0)
     {
       //capture_frame_buffer_post_fx
-      CRenderTextureSceneEffect * l_pRenderTextureSceneEffect = new CRenderTextureSceneEffect();
+      CRenderTextureSceneEffect* l_pRenderTextureSceneEffect = new CRenderTextureSceneEffect();
+
       if(!l_pRenderTextureSceneEffect->Init(l_treeSceneEffect))
       {
         LOGGER->AddNewLog(ELL_WARNING,"CSceneEffectManager::Load  Scene effect incorrecte \"%s\".", l_treeSceneEffect.GetName());
         delete l_pRenderTextureSceneEffect;
       } else {
+        AddResource(l_szName,l_pRenderTextureSceneEffect);
         m_vCaptureFrameBufferSceneEffectsAfterPostRender.push_back(l_pRenderTextureSceneEffect);
       }
     } else if(strcmp(l_treeSceneEffect.GetName(),"post_render") == 0)
     {
       //post_render
-      CDrawQuadSceneEffect * l_pDrawQuad = new CDrawQuadSceneEffect();
+      CDrawQuadSceneEffect* l_pDrawQuad = new CDrawQuadSceneEffect();
+
       if(!l_pDrawQuad->Init(l_treeSceneEffect))
       {
         LOGGER->AddNewLog(ELL_WARNING,"CSceneEffectManager::Load  Scene effect incorrecte \"%s\".", l_treeSceneEffect.GetName());
         delete l_pDrawQuad;
       } else {
+        AddResource(l_szName,l_pDrawQuad);
         m_vPostRenderSceneEffects.push_back(l_pDrawQuad);
       }
     } else if(!l_treeSceneEffect.IsComment())
     {
       LOGGER->AddNewLog(ELL_WARNING,"CSceneEffectManager::Load  Element no reconegut a l'xml.", l_treeSceneEffect.GetName());
     }
+
   }
   return IsOk();
 }

@@ -56,7 +56,9 @@
     <None Include="..\..\..\Run\Data\XML\SceneEffects_Test.xml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="..\..\..\Run\Data\XML\SceneEffects_Viewer.xml" />
+    <None Include="..\..\..\Run\Data\XML\SceneEffects_Viewer.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="..\..\..\Run\Data\XML\ScenneEffects_PhysX.xml" />
     <None Include="..\..\..\Run\Data\XML\test.xml" />
   </ItemGroup>

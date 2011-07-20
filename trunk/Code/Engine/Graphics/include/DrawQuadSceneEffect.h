@@ -15,21 +15,24 @@ class CTexture;
 class CDrawQuadSceneEffect : public CSceneEffect
 {
 public:
-  CDrawQuadSceneEffect(): m_pEffect(0)/*,m_pEffectMaterial(0)*/,m_szEffect("") {};
+  CDrawQuadSceneEffect(): m_pEffect(0),m_iPos(0),m_iSize(0),m_fAlphaFactor(1.0),m_szEffect("") {};
   ~CDrawQuadSceneEffect() {Done();};
 
   virtual bool Init(const CXMLTreeNode& _params);
 
+  void SetAlphaFactor(float _fAlphaFactor) {m_fAlphaFactor = _fAlphaFactor;};
 
   void PostRender(CRenderManager *RM);
 protected:
   void Release();
   CEffect *m_pEffect;
-  string            m_szEffect;
-  //CEffectMaterial*  m_pEffectMaterial;
-  int m_iWidth;
-  int m_iHeight;
+  string m_szEffect;
+
+  Vect2i m_iSize;
+  Vect2i m_iPos;
+  
   CColor m_Color;
+  float m_fAlphaFactor;
 };
 
 #endif
