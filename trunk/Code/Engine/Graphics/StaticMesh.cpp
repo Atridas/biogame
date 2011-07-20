@@ -19,6 +19,7 @@
 #include "AlphaDecorator.h"
 #include "GlowPropertyDecorator.h"
 #include "EnvironmentTextureDecorator.h"
+#include "EnvirondmentPropertyDecorator.h"
 
 #include <IndexedVertexs.h>
 #include <base.h>
@@ -222,9 +223,8 @@ bool CStaticMesh::Load()
           l_pMaterial->ActivateRadiosityNormal(CMaterial::RADIOSITY_NORMAL);
           break;
         case ENVIRONMENT_PROPERTY_TYPE:
-          //TODO
-          LOGGER->AddNewLog(ELL_WARNING, "Environment parameter Not yet implemented");
           l_File.read((char*)&l_fValue, sizeof(float));
+          l_pMaterial = new CEnvirondmentPropertyDecorator(l_pMaterial,l_fValue);
         default:
           break;
       }

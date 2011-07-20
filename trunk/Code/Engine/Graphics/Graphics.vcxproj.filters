@@ -205,6 +205,9 @@
     <Filter Include="Materials\MaterialDecorators\TextureDecorators\EnvironmentTexture">
       <UniqueIdentifier>{1bcd0d67-a551-42b7-9bd6-98c41929e83d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Materials\MaterialDecorators\PropertyDecorators\EnvironmentDecorator">
+      <UniqueIdentifier>{5a7a5439-99bf-40d0-8801-640002dba94a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -523,6 +526,9 @@
     </ClInclude>
     <ClInclude Include="include\EnvironmentTextureDecorator.h">
       <Filter>Materials\MaterialDecorators\TextureDecorators\EnvironmentTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EnvirondmentPropertyDecorator.h">
+      <Filter>Materials\MaterialDecorators\PropertyDecorators\EnvironmentDecorator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
