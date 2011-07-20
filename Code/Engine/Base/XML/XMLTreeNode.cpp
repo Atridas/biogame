@@ -208,7 +208,7 @@ int CXMLTreeNode::GetNumChildren () const
 //----------------------------------------------------------------------------
 // Returns if a property exists
 //----------------------------------------------------------------------------
-bool CXMLTreeNode::ExistsProperty(const char* _pszKey)
+bool CXMLTreeNode::ExistsProperty(const char* _pszKey) const
 {
   return 0 != GetProperty(_pszKey);
 }

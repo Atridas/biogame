@@ -21,7 +21,7 @@ Player_Constants["Temps Tocat"] = 0.3
 Player_Constants["Temps Morint"] = 2.6
 --sons
 Player_Constants["So rebre impacte"] = 'impacte'
-
+Player_Constants["So disparar"] = 'disparar'
 
 
 State_Player_Neutre = {}
@@ -274,7 +274,7 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
   if ACTION_MANAGER:is_action_active('Shoot') then
     animation:play(Player_Constants["Disparar"], 0.3, 1.0, false)
     player_controller:shoot()
-    SOUND:play_sample(Player_Constants["So dispar"])
+    SOUND:play_sample(Player_Constants["So disparar"])
   end
   
   if ACTION_MANAGER:is_action_active('MoveFwd') then
@@ -567,7 +567,7 @@ State_Player_Cobertura_Baixa['Enter'] = function(_jugador)
   local object3d = _jugador:get_component(BaseComponent.object_3d)
   local renderable_object = _jugador:get_component(BaseComponent.renderable_object)
   
-  moviment.movement = moviment.movement + player_controller.cover_position + player_controller.cover_normal * 1.0 - object3d:get_position()
+  moviment.movement = moviment.movement + player_controller.cover_position + player_controller.cover_normal * 0.0 - object3d:get_position()
   
   --object3d:set_yaw(-((player_controller.cover_normal):get_angle_y()) - math.pi*0.5)
   
@@ -697,7 +697,7 @@ State_Player_Cobertura_Alta['Enter'] = function(_jugador)
   local object3d = _jugador:get_component(BaseComponent.object_3d)
   local renderable_object = _jugador:get_component(BaseComponent.renderable_object)
   
-  moviment.movement = moviment.movement + player_controller.cover_position + player_controller.cover_normal * 1.0 - object3d:get_position()
+  moviment.movement = moviment.movement + player_controller.cover_position + player_controller.cover_normal * 0.0 - object3d:get_position()
   
   object3d:set_yaw(-((player_controller.cover_normal):get_angle_y()) - math.pi*0.5)
   

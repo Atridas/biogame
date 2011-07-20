@@ -3,6 +3,7 @@
 #define __SCENE_EFFECT_MANAGER_H__
 
 #include "base.h"
+#include "Utils/MapManager.h"
 #include "SceneEffect.h"
 //Forward declarations-------------
 class CXMLTreeNode;
@@ -14,7 +15,7 @@ class CProcess;
 
 
 class CSceneEffectManager :
-  public CBaseControl
+  public CMapManager<CSceneEffect>
 {
 
 public:

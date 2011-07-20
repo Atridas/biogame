@@ -223,6 +223,7 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     m_pGlowActiveParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"GlowActive");
     m_pTextureWidth = l_pD3DEffect->GetParameterBySemantic(NULL,"TextureWidth");
     m_pTextureHeight = l_pD3DEffect->GetParameterBySemantic(NULL,"TextureHeight");
+    m_pAlphaFactorParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"AlphaFactor");
     m_pPoissonBlurKernelParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"PoissonBlurKernel");
     m_pGlowIntensityParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"GlowIntensity");
 
@@ -440,6 +441,12 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     l_pD3DEffect->SetInt(m_pTextureWidth,m_iTextureWidth);
     l_pD3DEffect->SetInt(m_pTextureHeight,m_iTextureHeight);
     m_bTextureWidthHeightUpdated = false;
+  }
+
+  if(m_bAlphaFactorUpdated)
+  {
+    l_pD3DEffect->SetFloat(m_pAlphaFactorParameter,m_fAlphaFactor);
+    m_bAlphaFactorUpdated = false;
   }
 
   if(m_bPoissonBlurKernelUpdated)
