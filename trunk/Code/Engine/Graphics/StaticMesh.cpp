@@ -282,10 +282,12 @@ bool CStaticMesh::Load()
     uint16 * l_pIndexList = new uint16[l_IndexCount];
     l_File.read((char *)&l_pIndexList[0], sizeof(uint16)*l_IndexCount);
 
+    
+    //Optimitzar l'ordre
+    VertexCacheOptimisation( l_pVertexBuffer, l_pIndexList, l_VertexCount, l_IndexCount, l_usVertexSize );
+
     //CIndexedVertexs<SNORMALTEXTUREDVERTEX> *l_IndexedVertexs=new CIndexedVertexs<SNORMALTEXTUREDVERTEX>(RENDER_MANAGER, (SNORMALTEXTUREDVERTEX*)l_pVertexBuffer, l_pIndexList, l_VertexCount, l_IndexCount);
     CRenderableVertexs* l_RenderableVertexs = 0;
-
-    
 
     //CARREGUEM LES VERSIONS SIMPLES DELS VB I IB PER LA FISICA
     vector<uint32> l_vIndexBuffer = CalcSimpleIndexBuffer(l_pIndexList,sizeof(uint32),l_IndexCount);
