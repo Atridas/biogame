@@ -12,6 +12,7 @@
 #include <XML/XMLTreeNode.h>
 #include "Camera.h"
 #include "InstancedData.h"
+#include "ParticleCore.h"
 
 class CMaterial;
 
@@ -67,7 +68,6 @@ public:
   string                          GetId               () const {return m_szId;};
   string                          GetFormEmitter        () const {return m_szFormEmitter;};
   const Vect3f&                   GetPositionFormEmitter() const {return m_vPosFormEmitter;};
-  //const D3DXVECTOR3&				      GetPosition         () const {return m_vPos;};
   float                           GetMinEmitRate      () const {return m_fMinEmitRate;};
   float                           GetMaxEmitRate      () const {return m_fMaxEmitRate;};
   const D3DXCOLOR&                GetColor1           () const {return m_Color1;};
@@ -86,11 +86,12 @@ public:
   float                           GetAngle2            () const {return m_fAngle2;};
   float                           GetSizeY            () const {return m_vSize[1];};
 
+
   void            Update              (float fElapsedTime, CCamera* camera);
   void            Init                (CRenderManager* rm);
   void            Release             ();
   void            Render              (CRenderManager* _pRM);
-  void            SetAttributes       (SParticleInfo* _info);
+  void            SetAttributes       (CParticleCore* _info);
 
 
   vector<Vect3f>                            m_vDirection;
