@@ -208,6 +208,9 @@
     <Filter Include="Materials\MaterialDecorators\PropertyDecorators\EnvironmentDecorator">
       <UniqueIdentifier>{5a7a5439-99bf-40d0-8801-640002dba94a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Particle\ParticleCore">
+      <UniqueIdentifier>{14f6b098-170e-4e7c-985e-a7e798846343}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -338,6 +341,9 @@
     </ClCompile>
     <ClCompile Include="LightmapTextureDecorator.cpp">
       <Filter>Materials\MaterialDecorators\TextureDecorators\LightmapTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleCore.cpp">
+      <Filter>Particle\ParticleCore</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -529,6 +535,9 @@
     </ClInclude>
     <ClInclude Include="include\EnvirondmentPropertyDecorator.h">
       <Filter>Materials\MaterialDecorators\PropertyDecorators\EnvironmentDecorator</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ParticleCore.h">
+      <Filter>Particle\ParticleCore</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

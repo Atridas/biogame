@@ -110,6 +110,7 @@
     <ClCompile Include="LightmapTextureDecorator.cpp" />
     <ClCompile Include="OmniLight.cpp" />
     <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="ParticleCore.cpp" />
     <ClCompile Include="ParticleEmitter.cpp" />
     <ClCompile Include="ParticleManager.cpp" />
     <ClCompile Include="Portal.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="include\OmniLight.h" />
     <ClInclude Include="include\ParallaxPropertyDecorator.h" />
     <ClInclude Include="include\Particle.h" />
+    <ClInclude Include="include\ParticleCore.h" />
     <ClInclude Include="include\ParticleEmitter.h" />
     <ClInclude Include="include\ParticleManager.h" />
     <ClInclude Include="include\Portal.h" />

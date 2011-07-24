@@ -13,7 +13,7 @@
 
 class CRenderManager;
 
-struct SParticleInfo
+/*struct SParticleInfo
 {
   string                m_szId;
   float                 m_fMinEmitRate;
@@ -55,9 +55,9 @@ struct SParticleInfo
   vector<float>			    m_vTimeAnimatedInterpolation;
   int                   m_iNumDirections;
   
-};
+};*/
 
-struct SParticleEvent
+/*struct SParticleEvent
 {
   
   float                 m_fTime;
@@ -71,9 +71,9 @@ struct SParticleEvent
   int                   m_iTexNumColumnes;
   float                 m_fTimeInterpolation;
  
-};
+};*/
 
-class CParticleManager : public CMapManager<SParticleInfo>
+class CParticleManager : public CMapManager<CParticleCore>
 {
 public:
   CParticleManager();
@@ -107,6 +107,7 @@ private:
    float				            m_fSizeX;
    float				            m_fSizeY;
    float				            m_fSizeZ;
+   int                      m_iNumDirections;
 
    CRenderableVertexs*      m_pParticleVertex;
 };

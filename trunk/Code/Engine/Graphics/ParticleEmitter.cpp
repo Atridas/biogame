@@ -59,20 +59,19 @@ m_InstancedData()
   //TODO inicialitzar els vector de color i temps
 }
 
-void CParticleEmitter::SetAttributes(SParticleInfo* _info) 
+void CParticleEmitter::SetAttributes(CParticleCore* _info) 
 {
-  m_szId  = _info->m_szId;
-  m_fMinEmitRate = _info->m_fMinEmitRate;
-  m_fMaxEmitRate = _info->m_fMaxEmitRate;
-  m_Color1 = _info->m_Color1; 
-  m_Color2 = _info->m_Color2;
-  m_fMinSize = _info->m_fMinSize;
-  m_fMaxSize = _info->m_fMaxSize;
- // m_vSpawnDir1 = _info->m_vSpawnDir1;
- // m_vSpawnDir2 = _info->m_vSpawnDir2;
-  SetTexParticle( _info->m_pTexParticle );
-  m_fLife1 = _info->m_fLife1;
-  m_fLife2 = _info->m_fLife2;
+  m_szId  = _info->GetId();
+  m_fMinEmitRate = _info->GetMinEmitRate();
+  m_fMaxEmitRate = _info->GetMaxEmitRate();
+  m_Color1 = _info->GetColor1(); 
+  m_Color2 = _info->GetColor2();
+  m_fMinSize = _info->GetMinSize();
+  m_fMaxSize = _info->GetMaxSize();
+
+  m_pTexParticle = _info->GetTexParticle();
+  m_fLife1 = _info->GetLife1();
+  m_fLife2 = _info->GetLife2();
   m_vColor = _info->m_vColor;
   m_vTimeColor = _info->m_vTimeColor;
   m_vTimeColorInterpolation=_info->m_vTimeColorInterpolation;
@@ -86,24 +85,23 @@ void CParticleEmitter::SetAttributes(SParticleInfo* _info)
  // m_vDirection = _info->m_vDirection;
  // m_vTimeDirection = _info->m_vTimeDirection;
   //m_vTimeDirectionInterpolation= _info->m_vTimeDirectionInterpolation;
-  m_vGravity = _info->m_vGravity;
-  m_vVel = _info->m_vVel;
-  m_fAngle1 = _info->m_fAngle1;
-  m_fAngle2 = _info->m_fAngle2;
-  m_bBucleInfinit  = _info->m_bBucleInfinit;
-  m_iNumBucle = _info->m_iNumBucle;
-  m_iNumBucleAux = _info->m_iNumBucle;
-  m_fRebootEmitter1 = _info->m_fRebootEmitter1;
-  m_fRebootEmitter2 = _info->m_fRebootEmitter2;
-  m_bTotDeCop = _info->m_bTotDeCop;
+  m_vGravity = _info->GetGravity();
+  m_vVel = _info->GetVel();
+  m_fAngle1 = _info->GetAngle1();
+  m_fAngle2 = _info->GetAngle2();
+  m_bBucleInfinit  = _info->GetBucleInfinit();
+  m_iNumBucle = m_iNumBucleAux = _info->GetNumBucle();
+  m_fRebootEmitter1 = _info->GetRebootEmitter1();
+  m_fRebootEmitter2 = _info->GetRebootEmitter2();
+  m_bTotDeCop = _info->GetTotDeCop();
+  
   //*** per animació
-
-  m_bAnimated = _info->m_bAnimated;
+  m_bAnimated = _info->GetAnimated();
   m_vFilesColumnes = _info->m_vFilesColumnes;
   m_vTimeAnimated = _info->m_vTimeAnimated;
   m_vTimeAnimatedInterpolation = _info->m_vTimeAnimatedInterpolation;
-  m_vTextureAnimation=_info->m_vTextureAnimation;
-  m_iNumDirections=_info->m_iNumDirections;
+  //m_vTextureAnimation=_info->m_vTextureAnimation;
+  //m_iNumDirections=_info->m_iNumDirections;
 
   //crear un vector de direccion de tantas posicions com estat pot tenir (segons vector temps)
   //int j=m_vTimeDirection.size();
@@ -303,7 +301,7 @@ void CParticleEmitter::Update(float fElapsedTime,CCamera *camera)
 		    part->m_vTimeAnimatedInterpolation = m_vTimeAnimatedInterpolation;
 		    part->SetTexParticle(m_pTexParticle);
         //retorna el valor de la textura. Aixo serveix per si vol canviar de textura una particula ja creada
-        m_pTexParticle=part->GetTexParticle();
+        //m_pTexParticle=part->GetTexParticle();
         
 
 		    //**************************
