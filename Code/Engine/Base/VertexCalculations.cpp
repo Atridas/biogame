@@ -241,3 +241,358 @@ vector<uint32> CalcSimpleIndexBuffer(uint16* _pIndexBuffer, unsigned short _usIn
 
   return l_vBuffer;
 }
+// ------------------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------------------
+// Vertex Cache Optimization ----------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------------------
+
+struct SVCO_Triangle {
+  bool added;
+  float score;
+  uint16 vertexs[3];
+};
+
+struct SVCO_Vertex {
+  int cachePos;
+  float score;
+  int useInTris;
+  int unusedTris;
+  vector<uint16> tris;
+};
+
+#define FVS_CacheDecayPower     1.5f
+#define FVS_LastTriScore        0.75f
+#define FVS_ValenceBoostScale   2.0f
+#define FVS_ValenceBoostPower   0.5f
+#define FVS_MaxSizeVertexCache  32
+float FindVertexScore ( const SVCO_Vertex &_VData )
+{
+  if ( _VData.unusedTris == 0 )
+  {
+    // No tri needs this vertex!
+    return -1.0f;
+  }
+  float l_fScore = 0.0f;
+  int l_iCachePosition = _VData.cachePos;
+  if ( l_iCachePosition < 0 )
+  {
+    // Vertex is not in FIFO cache - no score.
+  }
+  else
+  {
+    if ( l_iCachePosition < 3 )
+    {
+      // This vertex was used in the last triangle,
+      // so it has a fixed score, whichever of the three
+      // it's in. Otherwise, you can get very different
+      // answers depending on whether you add
+      // the triangle 1,2,3 or 3,1,2 - which is silly.
+      l_fScore = FVS_LastTriScore;
+    }
+    else
+    {
+      assert ( l_iCachePosition < FVS_MaxSizeVertexCache );
+      // Points for being high in the cache.
+      const float Scaler = 1.0f / ( FVS_MaxSizeVertexCache - 3 );
+      l_fScore = 1.0f - ( l_iCachePosition - 3 ) * Scaler;
+      l_fScore = powf ( l_fScore, FVS_CacheDecayPower );
+    }
+  }
+
+  // Bonus points for having a low number of tris still to
+  // use the vert, so we get rid of lone verts quickly.
+  float l_fValenceBoost = powf ( (float)_VData.unusedTris, -FVS_ValenceBoostPower );
+  l_fScore += FVS_ValenceBoostScale * l_fValenceBoost;
+  return l_fScore;
+}
+
+float FindTriangleScore ( const SVCO_Triangle& _VTriangle, SVCO_Vertex *_VData )
+{
+  return _VData[_VTriangle.vertexs[0]].score + _VData[_VTriangle.vertexs[1]].score + _VData[_VTriangle.vertexs[2]].score;
+}
+
+
+void CopyVertex(void* _pDstBuffer, void* _pSrcBuffer, size_t _iVStride, uint32 _iDstIndex, uint32 _iSrcIndex)
+{
+  memcpy((void*)&(((char*)_pDstBuffer)[_iDstIndex * _iVStride]), (void*)&(((char*)_pSrcBuffer)[_iSrcIndex * _iVStride]), _iVStride);
+}
+
+struct DiscartedVertices {
+  int a, b, c;
+};
+
+DiscartedVertices UpdateCache(int* _Cache, uint32 _V1, uint32 _V2, uint32 _V3)
+{
+  DiscartedVertices l_dv;
+  l_dv.a = _V1;
+  l_dv.b = _V2;
+  l_dv.c = _V3;
+
+  uint16 l_iReplaced = 0;
+  for(uint16 i = 0; i < FVS_MaxSizeVertexCache; ++i)
+  {
+    if(_V1 == _Cache[i] || _V2 == _Cache[i] || _V3 == _Cache[i])
+    {
+      l_iReplaced++;
+      _Cache[i] = l_dv.a;
+      l_dv.a = l_dv.b;
+      l_dv.b = l_dv.c;
+      l_dv.c = -1;
+    }
+    else
+    {
+      int aux = _Cache[i];
+      _Cache[i] = l_dv.a;
+      l_dv.a = l_dv.b;
+      l_dv.b = l_dv.c;
+      l_dv.c = aux;
+    }
+  }
+  return l_dv;
+}
+
+int RecomputeScores(int* _Cache, const DiscartedVertices& _dv, SVCO_Vertex* _vVertex, SVCO_Triangle* _vTriangles, uint16 _iNumTriangles)
+{
+  //Recompute Vertex scores
+  for(uint16 i = 0; i < FVS_MaxSizeVertexCache; ++i)
+  {
+    if(_Cache[i] < 0) break; //No hi ha res més a la cache
+
+    SVCO_Vertex* l_pVertex = _vVertex + _Cache[i];
+    l_pVertex->cachePos = i;
+    l_pVertex->score = FindVertexScore(*l_pVertex);
+  }
+  if(_dv.a >= 0)
+  {
+    SVCO_Vertex* l_pVertex = _vVertex + _dv.a;
+    l_pVertex->cachePos = -1;
+    l_pVertex->score = FindVertexScore(*l_pVertex);
+  }
+  if(_dv.b >= 0)
+  {
+    SVCO_Vertex* l_pVertex = _vVertex + _dv.b;
+    l_pVertex->cachePos = -1;
+    l_pVertex->score = FindVertexScore(*l_pVertex);
+  }
+  if(_dv.c >= 0)
+  {
+    SVCO_Vertex* l_pVertex = _vVertex + _dv.c;
+    l_pVertex->cachePos = -1;
+    l_pVertex->score = FindVertexScore(*l_pVertex);
+  }
+
+  //Recompute Triangle Scores
+  int l_iBestTriangle = -1;
+  for(uint16 i = 0; i < FVS_MaxSizeVertexCache; ++i)
+  {
+    if(_Cache[i] < 0) break; //No hi ha res més a la cache
+    SVCO_Vertex* l_pVertex = _vVertex + _Cache[i];
+    for(uint16 j = 0; j < l_pVertex->tris.size(); ++j)
+    {
+      SVCO_Triangle* l_pTriangle = _vTriangles + l_pVertex->tris[j];
+      if(!l_pTriangle->added)
+      {
+        l_pTriangle->score = FindTriangleScore(*l_pTriangle, _vVertex);
+        if(l_iBestTriangle < 0 || l_pTriangle->score > _vTriangles[l_iBestTriangle].score)
+        {
+          l_iBestTriangle = l_pVertex->tris[j];
+        }
+      }
+    }
+  }
+  if(_dv.a >= 0)
+  {
+    SVCO_Vertex* l_pVertex = _vVertex + _dv.a;
+    for(uint16 j = 0; j < l_pVertex->tris.size(); ++j)
+    {
+      SVCO_Triangle* l_pTriangle = _vTriangles + l_pVertex->tris[j];
+      if(!l_pTriangle->added)
+      {
+        l_pTriangle->score = FindTriangleScore(*l_pTriangle, _vVertex);
+        if(l_iBestTriangle < 0 || l_pTriangle->score > _vTriangles[l_iBestTriangle].score)
+        {
+          l_iBestTriangle = l_pVertex->tris[j];
+        }
+      }
+    }
+  }
+  if(_dv.b >= 0)
+  {
+    SVCO_Vertex* l_pVertex = _vVertex + _dv.b;
+    for(uint16 j = 0; j < l_pVertex->tris.size(); ++j)
+    {
+      SVCO_Triangle* l_pTriangle = _vTriangles + l_pVertex->tris[j];
+      if(!l_pTriangle->added)
+      {
+        l_pTriangle->score = FindTriangleScore(*l_pTriangle, _vVertex);
+        if(l_iBestTriangle < 0 || l_pTriangle->score > _vTriangles[l_iBestTriangle].score)
+        {
+          l_iBestTriangle = l_pVertex->tris[j];
+        }
+      }
+    }
+  }
+  if(_dv.c >= 0)
+  {
+    SVCO_Vertex* l_pVertex = _vVertex + _dv.c;
+    for(uint16 j = 0; j < l_pVertex->tris.size(); ++j)
+    {
+      SVCO_Triangle* l_pTriangle = _vTriangles + l_pVertex->tris[j];
+      if(!l_pTriangle->added)
+      {
+        l_pTriangle->score = FindTriangleScore(*l_pTriangle, _vVertex);
+        if(l_iBestTriangle < 0 || l_pTriangle->score > _vTriangles[l_iBestTriangle].score)
+        {
+          l_iBestTriangle = l_pVertex->tris[j];
+        }
+      }
+    }
+  }
+
+  if(l_iBestTriangle < 0)
+  {
+    for(uint16 i = 0; i < _iNumTriangles; ++i)
+    {
+      if(!_vTriangles[i].added && (l_iBestTriangle < 0 || _vTriangles[i].score > _vTriangles[l_iBestTriangle].score))
+      {
+        l_iBestTriangle = i;
+      }
+    }
+  }
+
+  return l_iBestTriangle;
+}
+
+void VertexCacheOptimisation( void *_VData, uint16 *_IData, size_t _iVCount,
+                              size_t _iICount, size_t _iVStride              )
+{
+  uint16         l_iNumTriangles     = _iICount / 3;
+  char*          l_vData             = new char[_iVStride * _iVCount];
+  SVCO_Vertex*   l_vVertex           = new SVCO_Vertex[_iVCount];
+  SVCO_Triangle* l_vTriangles        = new SVCO_Triangle[l_iNumTriangles];
+  uint16 *       l_iTrianglesInOrder = new uint16[l_iNumTriangles];
+  int*           l_MappedIndexes     = new int[_iVCount];
+  for(uint16 i = 0; i < _iVCount; ++i) l_MappedIndexes[i] = -1;
+
+
+  // Initialization ------------------------------------------------------------------------------------------
+  memcpy((void*)l_vData,_VData,_iVStride*_iVCount); //Copiem les dades a un buffer per separat (després les voldrem reordenar)
+
+  // Inicialitzem els vertexos
+  for(uint16 i = 0; i < _iVCount; ++i)
+  {
+    //CopyVertex(l_vData,_VData,_iVStride,i,i);
+    l_vVertex[i].cachePos   = -1;
+    l_vVertex[i].useInTris  = 0;
+    l_vVertex[i].unusedTris = 0;
+  }
+
+
+  //Inicialitzem els triangles
+  for(uint16 i = 0; i < l_iNumTriangles; ++i)
+  {
+    l_vTriangles[i].added      = false;
+    // Per cada vertex
+    for(uint16 j = 0; j < 3; ++j)
+    {
+      //n'agafem l'index
+      uint32 l_iVertexIndex = _IData[i*3 + j];
+      l_vTriangles[i].vertexs[j] = l_iVertexIndex;
+
+      //indiquem al vertex corresponent que ès adjacent a un triangle.
+      l_vVertex[l_iVertexIndex].useInTris  ++;
+      l_vVertex[l_iVertexIndex].unusedTris ++;
+
+      l_vVertex[l_iVertexIndex].tris.push_back(i);
+    }
+  }
+
+  //Calculem les puntuacions per vertex...
+  for(uint16 i = 0; i < _iVCount; ++i)
+  {
+    l_vVertex[i].score = FindVertexScore(l_vVertex[i]);
+  }
+
+  //... i per triangle (ja que hi som, agafem el millor triangle)
+  int l_iBestTriangle = 0;
+  for(uint16 i = 0; i < l_iNumTriangles; ++i)
+  {
+    l_vTriangles[i].score = FindTriangleScore(l_vTriangles[i],l_vVertex);
+    if(l_vTriangles[i].score > l_vTriangles[l_iBestTriangle].score)
+    {
+      l_iBestTriangle = i;
+    }
+  }
+
+  // Main Body ---------------------------------------------------------------------------------------------------
+  int l_Cache[FVS_MaxSizeVertexCache];
+  
+  // inicialitzem la cache
+  for(uint16 i = 0; i < FVS_MaxSizeVertexCache; ++i)
+  {
+    l_Cache[i] = -1;
+  }
+
+  //El cos s'ha de fer un cop per triangle (busquem sempre el millor triangle a afegim i l'afegim, mai es fa backtracking ni lookahead)
+  for(uint16 i = 0; i < l_iNumTriangles; ++i)
+  {
+    assert(!l_vTriangles[l_iBestTriangle].added);
+    l_iTrianglesInOrder[i] = l_iBestTriangle;
+    if(i == l_iNumTriangles-1) break; // És l'últim triangle, no cal que recalculem res!
+
+    // Setejem com a afegit el triangle
+    l_vTriangles[l_iBestTriangle].added = true;
+
+    // Indiquem als vertexos utilitzats que ja els fa servir un triangle menys
+    l_vVertex[l_vTriangles[l_iBestTriangle].vertexs[0]].unusedTris--;
+    l_vVertex[l_vTriangles[l_iBestTriangle].vertexs[1]].unusedTris--;
+    l_vVertex[l_vTriangles[l_iBestTriangle].vertexs[2]].unusedTris--;
+
+    // Actualitzem la cache amb els 3 vertexos nous (ens retorna els descartats)
+    DiscartedVertices l_dv = UpdateCache(l_Cache, 
+                                          l_vTriangles[l_iBestTriangle].vertexs[0],
+                                          l_vTriangles[l_iBestTriangle].vertexs[1],
+                                          l_vTriangles[l_iBestTriangle].vertexs[2]);
+
+    // Actualitzem les puntuacions i agafem el millor triangle.
+    l_iBestTriangle = RecomputeScores(l_Cache, l_dv, l_vVertex, l_vTriangles, l_iNumTriangles);
+  }
+
+
+  // Reordering pre-transform cache -------------------------------------------------------------
+  uint16 l_iVertexPos = 0;
+  for(uint16 i = 0; i < l_iNumTriangles; ++i)
+  {
+    SVCO_Triangle* l_pTriangle = l_vTriangles + l_iTrianglesInOrder[i];
+
+    for(uint16 j = 0; j < 3; ++j)
+    {
+      if(l_MappedIndexes[l_pTriangle->vertexs[j]] < 0)
+      {
+        //No està afegit al nou vertex buffer
+        // 1 - Afegim les dades
+        CopyVertex(_VData,l_vData,_iVStride,l_iVertexPos,l_pTriangle->vertexs[j]);
+        // 2 - Afegim el "mapejat" del vell index al nou index
+        l_MappedIndexes[l_pTriangle->vertexs[j]] = l_iVertexPos;
+        // 3 - Actualitzem la posició al nou buffer
+        ++l_iVertexPos;
+      }
+      // Copiem els indexos reordenats
+      _IData[i * 3 + j] = l_MappedIndexes[l_pTriangle->vertexs[j]];
+    }
+  }
+
+  //netejem
+  delete[] l_MappedIndexes;
+  delete[] l_iTrianglesInOrder;
+  delete[] l_vTriangles;
+  delete[] l_vVertex;
+  delete[] l_vData;
+}
+
+// ------------------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------------------------------
