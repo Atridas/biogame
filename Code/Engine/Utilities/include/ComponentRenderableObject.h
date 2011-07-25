@@ -21,7 +21,7 @@ public:
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_RENDERABLE_OBJECT;};
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_RENDERABLE_OBJECT;};
   
-  static CComponentRenderableObject* AddToEntity(CGameEntity *_pEntity, const string& _szName);
+  static CComponentRenderableObject* AddToEntity(CGameEntity *_pEntity, const string& _szName, const string& _szCore);
   static CComponentRenderableObject* AddToEntityWithAnimatedModel(CGameEntity *_pEntity, const string& _szName, const string& _szCore);
 
   void PostUpdate(float _fDeltaTime);
@@ -32,12 +32,13 @@ public:
 
   void SetYaw(float _fYaw);
 
+  bool ChangeInstance(const string& _szName);
+
   bool m_bRemoveRenderableObject;
   bool m_bBlockPitchRoll;
   bool m_bBlockYaw;
   float m_fHeightAdjustment;
   float m_fYawAdjustment;
-
 
   bool m_bActive;
 
@@ -54,7 +55,7 @@ protected:
       m_fYawAdjustment(0),
       m_bActive(true)
       {};
-  bool Init(CGameEntity *_pEntity, const string& _szName);
+  bool Init(CGameEntity *_pEntity, const string& _szName, const string& _szCore);
   bool InitAnimatedModel(CGameEntity *_pEntity, const string& _szName, const string& _szCore);
   virtual void Release();
 

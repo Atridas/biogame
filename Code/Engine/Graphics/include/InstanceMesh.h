@@ -30,6 +30,9 @@ public:
 
   virtual bool IsAlphaBlended() const;
 
+  //TODO
+  virtual bool ChangeInstance(const string& _szName);
+
 protected:
   virtual void          Release                   ();
 

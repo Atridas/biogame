@@ -59,6 +59,7 @@ private:
   void RemoveEntities();
   void CreateEntities();
   void SendEvents(float _fDeltaTime);
+  void DeliverEvent(const SEvent& _Event);
 
   SEvent m_EmptyEvent;
 

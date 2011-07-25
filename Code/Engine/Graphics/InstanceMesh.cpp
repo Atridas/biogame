@@ -52,6 +52,11 @@ void CInstanceMesh::InitFromXML(CXMLTreeNode& l_XMLObject)
   }
 }
 
+bool CInstanceMesh::ChangeInstance(const string& _szName)
+{
+  return Init(_szName);
+}
+
 
 bool CInstanceMesh::IsAlphaBlended() const 
 { 

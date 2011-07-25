@@ -277,13 +277,18 @@ void CEntityManager::DebugRender(CRenderManager* _pRM)
 
 void CEntityManager::SendEvent(const SEvent& _Event)
 {
+  m_vEvents.push_back(_Event);
+}
+
+void CEntityManager::DeliverEvent(const SEvent& _Event)
+{
   if(_Event.DispatchTime <= 0)
   {
     if(_Event.Receiver < 0)
     {
       vector<CGameEntity*>::iterator l_it  = m_vEntities.begin();
       vector<CGameEntity*>::iterator l_end = m_vEntities.end();
-
+  
       for(; l_it != l_end; ++l_it)
       {
         CGameEntity* l_pEntity = (*l_it);
@@ -297,12 +302,7 @@ void CEntityManager::SendEvent(const SEvent& _Event)
       m_vEntities[_Event.Receiver]->ReceiveEvent(_Event);
     }
   }
-  else
-  {
-    m_vEvents.push_back(_Event);
-  }
 }
-
 
 void CEntityManager::SendEvents(float _fDeltaTime)
 {
@@ -311,7 +311,7 @@ void CEntityManager::SendEvents(float _fDeltaTime)
     m_vEvents[i].DispatchTime -= _fDeltaTime;
     if(m_vEvents[i].DispatchTime <= 0)
     {
-      SendEvent(m_vEvents[i]);
+      DeliverEvent(m_vEvents[i]);
 
       m_vEvents[i] = m_vEvents[m_vEvents.size() - 1];
 

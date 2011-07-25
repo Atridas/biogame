@@ -13,6 +13,8 @@ public:
   static CComponentPhysXMesh* AddToEntity(CGameEntity* _pEntity, float _fDensity, int _iCollisionGroup);
   virtual ~CComponentPhysXMesh(void) {Done();};
 
+  virtual void Reload() {};
+
 protected:
   CComponentPhysXMesh(){};
   bool Init(CGameEntity* _pEntity, float _fDensity, int _iCollisionGroup);

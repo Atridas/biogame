@@ -22,6 +22,7 @@
 #include "ComponentShield.h"
 #include "ComponentArma.h"
 #include "ComponentInteractive.h"
+#include "ComponentDestroyable.h"
 
 #include "PhysicsManager.h"
 
@@ -62,7 +63,7 @@ void LoadComponentRenderableObject(CXMLTreeNode& _TreeComponent, CGameEntity* _p
     if(!_TreeComponent.GetBoolProperty("animated",false,false))
     {
       LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCreant component de Renderable Object Estàtic amb nom \"%s\".", l_szResource.c_str());
-      if(!CComponentRenderableObject::AddToEntity(_pEntity, l_szResource))
+      if(!CComponentRenderableObject::AddToEntity(_pEntity, _pEntity->GetName(), l_szResource))
       {
         LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
       }
@@ -192,10 +193,23 @@ void LoadComponentDoor(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 
   LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Porta amb nom \"%s\" i estat \"%d\"",l_szName.c_str(), l_bOpen);
 
-
+  //component porta
   if(!CComponentDoor::AddToEntity(_pEntity, l_bOpen))
   {
     LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
+  }
+
+  //màquina d'estats de la porta:
+  string l_szInitialState = "";
+  if(l_bOpen)
+    l_szInitialState = "State_Porta_Open";
+  else
+    l_szInitialState = "State_Porta_Closed";
+
+  if(!CComponentStateMachine::AddToEntity(_pEntity, l_szInitialState))
+  {
+    LOGGER->AddNewLog(ELL_WARNING, "\tError al carregar la màquina d'estats del component Door.");
+    assert(false);
   }
 
 }
@@ -212,6 +226,27 @@ void LoadComponentInteractive(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntit
   if(!CComponentInteractive::AddToEntity(_pEntity, l_szAction))
   {
     LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
+  }
+
+}
+
+void LoadComponentDestroyable(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
+{
+  string l_szName   = _pEntity->GetName();
+  string l_szAction = _TreeComponent.GetPszISOProperty("onDestroy", "", false);
+  string l_szResource = _TreeComponent.GetPszISOProperty("destroyedResource", "", false);
+  float l_fHP = _TreeComponent.GetFloatProperty("HP", 50.f, false);
+
+  LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Destroyable amb nom \"%s\", acció \"%s\" i model destruit \"%s\".",l_szName.c_str(), l_szAction.c_str(), l_szResource.c_str());
+
+  if(!CComponentVida::AddToEntity(_pEntity, l_fHP, l_fHP))
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"\tError al crear el component de vida per l'objecte destructible \"%s\"",_pEntity->GetName());
+  }
+
+  if(!CComponentDestroyable::AddToEntity(_pEntity, l_szAction, l_szResource))
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"\tError al crear el component destructible de l'objecte destructible \"%s\"",_pEntity->GetName());
   }
 
 }
@@ -360,6 +395,11 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
             } else if(strcmp(l_TreeComponent.GetName(),"Interactive") == 0)
             {
               LoadComponentInteractive(l_TreeComponent, l_pEntity);
+
+            // -----------------------------------------------------------------------------------------------------------
+            } else if(strcmp(l_TreeComponent.GetName(),"Destroyable") == 0)
+            {
+              LoadComponentDestroyable(l_TreeComponent, l_pEntity);
 
             // -----------------------------------------------------------------------------------------------------------
             } else if(!l_TreeComponent.IsComment())

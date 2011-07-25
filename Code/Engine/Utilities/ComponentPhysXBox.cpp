@@ -57,6 +57,9 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity,
             float _fDensity, int _iCollisionGroup
             )
 {
+  m_fDensity = _fDensity;
+  m_iCollisionGroup = _iCollisionGroup;
+
   m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
   assert(m_pObject3D); //TODO fer missatges d'error més elavorats
 
@@ -88,6 +91,9 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity,
 
 bool CComponentPhysXBox::Init(CGameEntity *_pEntity, float _fDensity, int _iCollisionGroup)
 {
+  m_fDensity = _fDensity;
+  m_iCollisionGroup = _iCollisionGroup;
+
   m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
   if(!m_pObject3D)
   {
@@ -127,4 +133,10 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity, float _fDensity, int _iColl
   
   SetOk(true);
   return IsOk();
+}
+
+void CComponentPhysXBox::Reload()
+{
+  Release();
+  Init(GetEntity(), m_fDensity, m_iCollisionGroup);
 }

@@ -23,6 +23,8 @@ public:
   void Render(CRenderManager *_pRM);
 
   virtual bool IsAlphaBlended() const = 0;
+
+  virtual bool ChangeInstance(const string& _szName) = 0;
   
 protected:
   virtual void RenderRenderableObject(CRenderManager *RM) = 0;

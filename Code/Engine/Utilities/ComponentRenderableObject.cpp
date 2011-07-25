@@ -3,14 +3,15 @@
 #include "RenderableObjectsManager.h"
 #include "RenderableAnimatedInstanceModel.h"
 #include "ComponentAnimation.h"
+#include "ComponentPhysXActor.h"
 #include "Core.h"
 
 
-CComponentRenderableObject* CComponentRenderableObject::AddToEntity(CGameEntity *_pEntity, const string& _szName)
+CComponentRenderableObject* CComponentRenderableObject::AddToEntity(CGameEntity *_pEntity, const string& _szName, const string& _szCore)
 {
   CComponentRenderableObject *l_pComp = new CComponentRenderableObject();
   assert(_pEntity && _pEntity->IsOk());
-  if(l_pComp->Init(_pEntity, _szName))
+  if(l_pComp->Init(_pEntity, _szName, _szCore))
   {
     l_pComp->SetEntity(_pEntity);
     return l_pComp;
@@ -39,7 +40,7 @@ CComponentRenderableObject* CComponentRenderableObject::AddToEntityWithAnimatedM
   }
 }
 
-bool CComponentRenderableObject::Init(CGameEntity *_pEntity, const string& _szName)
+bool CComponentRenderableObject::Init(CGameEntity *_pEntity, const string& _szName, const string& _szCore)
 {
 
   m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
@@ -52,7 +53,8 @@ bool CComponentRenderableObject::Init(CGameEntity *_pEntity, const string& _szNa
   CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
 
   m_szResourceName = _szName;
-  m_pRenderableObject = l_pROM->GetResource(_szName);
+  m_pRenderableObject = l_pROM->AddMeshInstance(_szCore, _szName);
+  //m_pRenderableObject = l_pROM->GetResource(_szCore);
 
   if(!m_pRenderableObject)
   {
@@ -79,20 +81,20 @@ bool CComponentRenderableObject::InitAnimatedModel(CGameEntity *_pEntity, const 
     return false;
   }
 
-  CRenderableAnimatedInstanceModel* l_pAnimatedModel = new CRenderableAnimatedInstanceModel(_szName);
-  if(!l_pAnimatedModel->Init(_szCore))
-  {
-    LOGGER->AddNewLog(ELL_WARNING, "CComponentRenderableObject::InitAnimatedModel No s'ha pogut carregar el CRenderableAnimatedInstanceModel de la core \"%s\"", _szCore.c_str());
-    delete l_pAnimatedModel;
-    return false;
-  }
+  //CRenderableAnimatedInstanceModel* l_pAnimatedModel = new CRenderableAnimatedInstanceModel(_szName);
+  //if(!l_pAnimatedModel->Init(_szCore))
+  //{
+  //  LOGGER->AddNewLog(ELL_WARNING, "CComponentRenderableObject::InitAnimatedModel No s'ha pogut carregar el CRenderableAnimatedInstanceModel de la core \"%s\"", _szCore.c_str());
+  //  delete l_pAnimatedModel;
+  //  return false;
+  //}
 
   CRenderableObjectsManager* l_pROM = CORE->GetRenderableObjectsManager();
 
   m_szResourceName = _szName;
-  m_pRenderableObject = l_pAnimatedModel;
+  m_pRenderableObject = l_pROM->AddAnimatedModel(_szCore, _szName);//l_pAnimatedModel;
 
-  l_pROM->AddResource(_szName, m_pRenderableObject);
+  //l_pROM->AddResource(_szName, m_pRenderableObject);
   m_bRemoveRenderableObject = true;
 
   if(!m_pRenderableObject)
@@ -151,6 +153,21 @@ void CComponentRenderableObject::PostUpdate(float _fDeltaTime)
       m_pRenderableObject->SetMat44(l_Matrix);
     }
   }
+}
+
+bool CComponentRenderableObject::ChangeInstance(const string& _szName)
+{
+  if(m_pRenderableObject)
+  {
+    if(m_pRenderableObject->ChangeInstance(_szName))
+    {
+      CComponentPhysXActor* l_pPsXActor = GetEntity()->GetComponent<CComponentPhysXActor>(ECT_PHYSX_ACTOR);
+      if(l_pPsXActor)
+        l_pPsXActor->Reload();
+      return true;
+    }
+  }
+  return false;
 }
 
 

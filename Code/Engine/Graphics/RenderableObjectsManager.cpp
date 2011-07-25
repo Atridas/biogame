@@ -162,18 +162,18 @@ void CRenderableObjectsManager::RenderOld(CRenderManager* _pRM)
   }
 }
 
-//TODO
 CRenderableObject* CRenderableObjectsManager::AddMeshInstance(
                                                       const string& _szCoreMeshName,
                                                       const string& _szInstanceName)
 {
-  if(GetResource(_szInstanceName) != 0)
+  CInstanceMesh* l_pInstanceMesh = 0;
+  if((l_pInstanceMesh = (CInstanceMesh*) GetResource(_szInstanceName)) != 0)
   {
     LOGGER->AddNewLog(ELL_WARNING, "CRenderableObjectsManager:: CInstanceMesh amb nom repetit \"%s\"", _szCoreMeshName.c_str());
-    return 0;
+    return l_pInstanceMesh;
   }
 
-  CInstanceMesh* l_pInstanceMesh = new CInstanceMesh(_szInstanceName);
+  l_pInstanceMesh = new CInstanceMesh(_szInstanceName);
   if(!l_pInstanceMesh->Init(_szCoreMeshName))
   {
     LOGGER->AddNewLog(ELL_WARNING, "CRenderableObjectsManager:: No s'ha pogut carregar el CInstanceMesh \"%s\" de la core \"%s\"", _szInstanceName.c_str(), _szCoreMeshName.c_str());
@@ -194,13 +194,14 @@ CRenderableObject* CRenderableObjectsManager::AddAnimatedModel(
                                                       const string& _szCoreModelName,
                                                       const string& _szInstanceName)
 {
-  if(GetResource(_szInstanceName) != 0)
+  CRenderableAnimatedInstanceModel* l_pAnimatedModel = 0;
+  if((l_pAnimatedModel = (CRenderableAnimatedInstanceModel*) GetResource(_szInstanceName)) != 0)
   {
     LOGGER->AddNewLog(ELL_WARNING, "CRenderableObjectsManager:: CAnimatedModel amb nom repetit \"%s\"", _szCoreModelName.c_str());
-    return 0;
+    return l_pAnimatedModel;
   }
 
-  CRenderableAnimatedInstanceModel* l_pAnimatedModel = new CRenderableAnimatedInstanceModel(_szInstanceName);
+  l_pAnimatedModel = new CRenderableAnimatedInstanceModel(_szInstanceName);
   if(!l_pAnimatedModel->Init(_szCoreModelName))
   {
     LOGGER->AddNewLog(ELL_WARNING, "CRenderableObjectsManager:: No s'ha pogut carregar el CRenderableAnimatedInstanceModel \"%s\" de la core \"%s\"", _szInstanceName.c_str(), _szCoreModelName.c_str());
