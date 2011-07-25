@@ -20,6 +20,9 @@ class CRenderableAnimatedInstanceModel: public CRenderableObject
     virtual void  RenderRenderableObject(CRenderManager* _pRM);
 
     CAnimatedInstanceModel* GetAnimatedInstanceModel(){return m_pAnimatedInstanceModel;}
+
+    //TODO
+    virtual bool ChangeInstance(const string& _szName) {return true;};
     
     virtual bool IsAlphaBlended() const {return false;};
   protected:

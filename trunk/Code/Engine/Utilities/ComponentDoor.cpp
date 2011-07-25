@@ -1,5 +1,4 @@
 #include "ComponentDoor.h"
-#include "ComponentStateMachine.h"
 #include "ComponentPhysXBox.h"
 #include "ComponentRenderableObject.h"
 
@@ -22,19 +21,6 @@ CComponentDoor* CComponentDoor::AddToEntity(CGameEntity *_pEntity, bool _bOpen)
 bool CComponentDoor::Init(CGameEntity* _pEntity, bool _bOpen)
 {
   m_bOpen = _bOpen;
-
-  string l_szInitialState = "";
-  if(m_bOpen)
-    l_szInitialState = "State_Porta_Open";
-  else
-    l_szInitialState = "State_Porta_Closed";
-
-  //màquina d'estats de la porta:
-  if(!CComponentStateMachine::AddToEntity(_pEntity, l_szInitialState))
-  {
-    LOGGER->AddNewLog(ELL_WARNING, "\tError al carregar la màquina d'estats del component Door.");
-    assert(false);
-  }
 
   //correcció d'alçada i posició de l'objecte animat
   CComponentPhysXBox* l_pComponentPhysXBox = dynamic_cast<CComponentPhysXBox*>(_pEntity->GetComponent<CComponentPhysXActor>(ECT_PHYSX_ACTOR));

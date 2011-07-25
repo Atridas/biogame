@@ -106,6 +106,9 @@
     <Filter Include="EntitySystem\Components\ComponentInteractive">
       <UniqueIdentifier>{4a0e7c8b-d341-4af1-a5bf-accbb116df95}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentDestroyable">
+      <UniqueIdentifier>{781de273-ef3b-46cc-b989-142dfce9beab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -137,9 +140,6 @@
     </ClCompile>
     <ClCompile Include="Component3rdPSCamera.cpp">
       <Filter>EntitySystem\Components\Component3rdPSCamera</Filter>
-    </ClCompile>
-    <ClCompile Include="BaseComponent.cpp">
-      <Filter>EntitySystem\Components</Filter>
     </ClCompile>
     <ClCompile Include="EntityManager.cpp">
       <Filter>EntitySystem\EntityManager</Filter>
@@ -219,6 +219,12 @@
     <ClCompile Include="ComponentInteractive.cpp">
       <Filter>EntitySystem\Components\ComponentInteractive</Filter>
     </ClCompile>
+    <ClCompile Include="BaseComponent.cpp">
+      <Filter>EntitySystem\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentDestroyable.cpp">
+      <Filter>EntitySystem\Components\ComponentDestroyable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GameObject.h">
@@ -262,9 +268,6 @@
     </ClInclude>
     <ClInclude Include="include\Component3rdPSCamera.h">
       <Filter>EntitySystem\Components\Component3rdPSCamera</Filter>
-    </ClInclude>
-    <ClInclude Include="include\BaseComponent.h">
-      <Filter>EntitySystem\Components</Filter>
     </ClInclude>
     <ClInclude Include="include\EntityManager.h">
       <Filter>EntitySystem\EntityManager</Filter>
@@ -340,6 +343,12 @@
     </ClInclude>
     <ClInclude Include="include\ComponentInteractive.h">
       <Filter>EntitySystem\Components\ComponentInteractive</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BaseComponent.h">
+      <Filter>EntitySystem\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentDestroyable.h">
+      <Filter>EntitySystem\Components\ComponentDestroyable</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

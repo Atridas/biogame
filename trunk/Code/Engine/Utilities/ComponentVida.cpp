@@ -95,22 +95,25 @@ void CComponentVida::ReceiveEvent(const SEvent& _Event)
   {
     assert(_Event.Info[0].Type == SEventInfo::FLOAT);
 
-    float l_fDamage = _Event.Info[0].f;
-
-    //Si té escut, el mal el rep aquest.
-    //La resta del mal passa al jugador per si l'escut es trenca.
-    if(m_pShield)
-      l_fDamage = m_pShield->Decrease(l_fDamage);
-
-    Decrease(l_fDamage);
-
-    if(m_fVida <= 0.f)
+    if(m_fVida > 0.f)
     {
-      SEvent l_morir;
-      l_morir.Msg = SEvent::MORIR;
-      l_morir.Receiver = l_morir.Sender = GetEntity()->GetGUID();
+      float l_fDamage = _Event.Info[0].f;
+
+      //Si té escut, el mal el rep aquest.
+      //La resta del mal passa al jugador per si l'escut es trenca.
+      if(m_pShield)
+        l_fDamage = m_pShield->Decrease(l_fDamage);
+
+      Decrease(l_fDamage);
+
+      if(m_fVida <= 0.f)
+      {
+        SEvent l_morir;
+        l_morir.Msg = SEvent::MORIR;
+        l_morir.Receiver = l_morir.Sender = GetEntity()->GetGUID();
       
-      CORE->GetEntityManager()->SendEvent(l_morir);
+        CORE->GetEntityManager()->SendEvent(l_morir);
+      }
     }
   }
 }

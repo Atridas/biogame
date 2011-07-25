@@ -19,9 +19,11 @@ public:
             );
 
   const Vect3f& GetSize() { return m_vSize; };
+
+  virtual void Reload();
   
 protected:
-  CComponentPhysXBox(): m_vSize(Vect3f(0.0f)) {};
+  CComponentPhysXBox(): m_vSize(Vect3f(0.0f)), m_iCollisionGroup(0), m_fDensity(.0f) {};
   bool Init(CGameEntity *_pEntity, float _fDensity, int _iCollisionGroup);
 
   bool Init(CGameEntity *_pEntity,
@@ -31,6 +33,9 @@ protected:
             );
 
   Vect3f m_vSize;
+
+  int m_iCollisionGroup;
+  float m_fDensity;
 };
 
 #endif

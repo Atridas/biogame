@@ -119,6 +119,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("mirilla",              CBaseComponent::ECT_MIRILLA),
           value("door",                 CBaseComponent::ECT_DOOR),
           value("shield",               CBaseComponent::ECT_SHIELD)
+          //value("interactive",          CBaseComponent::ECT_INTERACTIVE),
+          //value("destroyable",          CBaseComponent::ECT_DESTROYABLE)
       ]
       .def("get_type",     &CBaseComponent::GetType)
       .def("get_entity",   &CBaseComponent::GetEntity)

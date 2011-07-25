@@ -80,6 +80,7 @@
     <ClCompile Include="ComponentAnimation.cpp" />
     <ClCompile Include="ComponentArma.cpp" />
     <ClCompile Include="ComponentCover.cpp" />
+    <ClCompile Include="ComponentDestroyable.cpp" />
     <ClCompile Include="ComponentDoor.cpp" />
     <ClCompile Include="ComponentHighCover.cpp" />
     <ClCompile Include="ComponentIABrain.cpp" />
@@ -119,6 +120,7 @@
     <ClInclude Include="include\ComponentAnimation.h" />
     <ClInclude Include="include\ComponentArma.h" />
     <ClInclude Include="include\ComponentCover.h" />
+    <ClInclude Include="include\ComponentDestroyable.h" />
     <ClInclude Include="include\ComponentDoor.h" />
     <ClInclude Include="include\ComponentHighCover.h" />
     <ClInclude Include="include\ComponentIABrain.h" />

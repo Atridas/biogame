@@ -28,6 +28,8 @@ public:
 
   void Activate(bool _bActivate);
 
+  virtual void Reload() {};
+
 protected:
 
   CComponentPhysXActor():

@@ -61,6 +61,8 @@ void CGameEntity::DeleteComponents()
       }
     }
   }
+
+  m_vDeleteEntities.clear();
 }
 
 void CGameEntity::PreUpdate(float deltaTime)

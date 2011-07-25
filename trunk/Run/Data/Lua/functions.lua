@@ -48,3 +48,7 @@ function esfera_interactiva(_self, _player)
     end
   end
 end
+
+function esfera_destructible(_self)
+  log('Sóc ' .. _self:get_name() .. ' i m\'ha matat ')
+end
