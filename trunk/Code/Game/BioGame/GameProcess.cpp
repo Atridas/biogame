@@ -45,13 +45,13 @@ void CGameProcess::RenderINFO(CRenderManager* _pRM)
 bool CGameProcess::Init()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"CGameProcess::Init");
-  LOGGER->SaveLogsInFile();
 
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
   CORE->GetLightManager()->SetLightsEnabled(true);
 
   
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Laboratori.xml");
+  LOGGER->SaveLogsInFile();
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Menjador.xml");
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Passadis.xml");
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - video.xml");
