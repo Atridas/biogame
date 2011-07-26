@@ -15,7 +15,9 @@ function pick_up_tetera(_trigger, _actor)
     --Send
     EM:send_event(l_message)
     
-    log('Has agafat una tetera!')
+    _trigger:get_component(BaseComponent.renderable_object).remove_renderable_object = true
+    
+    EM:remove_entity(_trigger)
   end
 end
 
