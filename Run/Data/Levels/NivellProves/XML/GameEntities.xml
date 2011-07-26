@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Entities>
+  <Entity name="Porta02">
+    <Object3D position="-10.8607 1.56408 2.94355" yaw="0.0" pitch="-9.9" roll="0.0" />
+    <RenderableObject animated="true" name="Porta" />
+    <PhysXBox fromRenderableObject="false" shape="box" size="0.976215 3.05175 2.56453" midpoint="0 0 0" density="0" collision_group="escenari" />
+    <Door open="false" />
+  </Entity>
+  <Entity name="Porta03">
+    <Object3D position="-4.35187 1.56408 2.94355" yaw="10.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="true" name="Porta" />
+    <PhysXBox fromRenderableObject="false" shape="box" size="0.976215 3.05175 2.56453" midpoint="0 0 0" density="0" collision_group="escenari" />
+    <Door open="false" />
+  </Entity>
   <Entity name="Habitacio3">
     <Object3D position="0.0 0.0 0.193104" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Habitacio3" />
@@ -255,7 +267,7 @@
   <Entity name="Porta01">
     <Object3D position="-39.4743 1.56408 2.94355" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta" />
-    <PhysXBox fromRenderableObject="false" shape="box" size="0.976215 3.05175 2.56453" density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="false" shape="box" size="0.976215 3.05175 2.56453" midpoint="0 0 0" density="0" collision_group="escenari" />
     <Door open="false" />
   </Entity>
   <Entity name="TriggerPorta01">

@@ -3,7 +3,7 @@
   <Rooms>
     <Room name="Laboratori">
       <Boundings>
-        <Box name="Laboratori Bounding" size="11.0675 6.55454 12.2426" position="-9.82146 2.38684 -5.06401" yaw="0.0" pitch="0.0" roll="0.0" />
+        <Box name="Bounding Laboratori" size="12.285 6.25291 12.9608" position="-9.75657 2.3526 -5.19563" yaw="0.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
         <GameObject name="Llum_emergencia01" />

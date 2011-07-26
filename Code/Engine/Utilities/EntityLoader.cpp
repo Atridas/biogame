@@ -235,13 +235,16 @@ void LoadComponentDestroyable(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntit
   string l_szName   = _pEntity->GetName();
   string l_szAction = _TreeComponent.GetPszISOProperty("onDestroy", "", false);
   string l_szResource = _TreeComponent.GetPszISOProperty("destroyedResource", "", false);
-  float l_fHP = _TreeComponent.GetFloatProperty("HP", 50.f, false);
+  float l_fHP = _TreeComponent.GetFloatProperty("hitPoints", 20.f, false);
 
   LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Destroyable amb nom \"%s\", acció \"%s\" i model destruit \"%s\".",l_szName.c_str(), l_szAction.c_str(), l_szResource.c_str());
 
-  if(!CComponentVida::AddToEntity(_pEntity, l_fHP, l_fHP))
+  if(_pEntity->GetComponent<CComponentVida>() == 0)
   {
-    LOGGER->AddNewLog(ELL_WARNING,"\tError al crear el component de vida per l'objecte destructible \"%s\"",_pEntity->GetName());
+    if(!CComponentVida::AddToEntity(_pEntity, l_fHP, l_fHP))
+    {
+      LOGGER->AddNewLog(ELL_WARNING,"\tError al crear el component de vida per l'objecte destructible \"%s\"",_pEntity->GetName());
+    }
   }
 
   if(!CComponentDestroyable::AddToEntity(_pEntity, l_szAction, l_szResource))

@@ -30,6 +30,7 @@ bool CComponentDoor::Init(CGameEntity* _pEntity, bool _bOpen)
 
   l_pComponentRenderableObject->m_fHeightAdjustment = -l_fTotalHeight;
   l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
+  l_pComponentRenderableObject->m_bBlockPitchRoll = false;
 
   SetOk(true);
   return IsOk();

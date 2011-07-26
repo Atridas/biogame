@@ -103,6 +103,8 @@ function XMLEntityPhysXBox _instance &_TagName _colGroup _fromRenderableObject =
 		--midpoint
 		l_ss = "" as stringstream
 		format "0 0 0" to:l_ss
+		
+		append l_params #("midpoint", l_ss)
 	)
 	
 	--density
@@ -355,6 +357,7 @@ function XMLEntityInteractive _instance &_TagName =
 --Genera els paràmetres d'un tag XML d'entitat Destructible. Conté:
 -- onDestroy
 -- destroyedResource
+-- hitPoints
 function XMLEntityDestroyable _instance &_TagName =
 (
 	local l_params = #()
@@ -371,6 +374,14 @@ function XMLEntityDestroyable _instance &_TagName =
 	l_ss = "" as stringStream
 	format "%" (GetUserProp _instance "destroyedResource") to:l_ss
 	append l_params #("destroyedResource", l_ss)
+	
+	if  (GetUserProp _instance "hitPoints") != undefined then
+	(
+		--hit points
+		l_ss = "" as stringStream
+		format "%" (GetUserProp _instance "hitPoints") to:l_ss
+		append l_params #("hitPoints", l_ss)
+	)
 	
 	return l_params
 )

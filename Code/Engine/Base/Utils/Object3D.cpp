@@ -54,8 +54,8 @@ void CObject3D::SetRoll( float _fRoll )
 
     t.Translate(m_vPosition);
     r.SetFromAngleY(-m_fYaw);
-    r2.SetFromAngleZ(m_fPitch);
-    r3.SetFromAngleX(m_fRoll);
+    r2.SetFromAngleX(m_fPitch);
+    r3.SetFromAngleZ(m_fRoll);
 
     m_vMat44 = t*r*r2*r3;
  }
@@ -63,9 +63,12 @@ void CObject3D::SetRoll( float _fRoll )
  void CObject3D::SetMat44(Mat44f _vMat44) 
  {
    m_vMat44 = _vMat44;
-   m_fPitch = _vMat44.GetPitch();
-   m_fYaw = _vMat44.GetYaw();
-   m_fRoll = _vMat44.GetRoll();
+   //m_fPitch = _vMat44.GetPitch();
+   //m_fYaw = _vMat44.GetYaw();
+   //m_fRoll = _vMat44.GetRoll();
+   m_fPitch =  _vMat44.GetAngleX();
+   m_fYaw   = -_vMat44.GetAngleY();
+   m_fRoll  =  _vMat44.GetAngleZ();
    m_vPosition = _vMat44.GetPos();
  }
 	
