@@ -11,6 +11,7 @@ void CalcTangentsAndBinormalsBis( void *VtxsData, uint16 *IdxsData, size_t VtxCo
                                   size_t IdxCount, size_t VertexStride, size_t GeometryStride, size_t NormalStride,
                                   size_t TangentStride, size_t BitangentStride, size_t TextureCoordsStride);
 
+// http://home.comcast.net/~tom_forsyth/papers/fast_vert_cache_opt.html
 void VertexCacheOptimisation( void *_VData, uint16 *_IData, size_t _iVCount,
                               size_t _iICount, size_t _iVStride              );
 

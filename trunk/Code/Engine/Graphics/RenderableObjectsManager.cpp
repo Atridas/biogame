@@ -233,6 +233,41 @@ void CRenderableObjectsManager::RemoveResource(const string& _szName)
   else
   {
     CORE->GetPortalManager()->RemoveRenderableObject(l_it->second);
+    
+    for(uint32 i = 0; i < m_RenderableObjects.size(); ++i)
+    {
+      if( l_it->second == m_RenderableObjects[i] )
+      {
+        if(i < m_RenderableObjects.size() - 1)
+        {
+          m_RenderableObjects[i] = m_RenderableObjects[m_RenderableObjects.size() - 1];
+        }
+        m_RenderableObjects.pop_back();
+      }
+    }
+    for(uint32 i = 0; i < m_vMeshes.size(); ++i)
+    {
+      if( l_it->second == m_vMeshes[i] )
+      {
+        if(i < m_vMeshes.size() - 1)
+        {
+          m_vMeshes[i] = m_vMeshes[m_vMeshes.size() - 1];
+        }
+        m_vMeshes.pop_back();
+      }
+    }
+    for(uint32 i = 0; i < m_vAnimatedModels.size(); ++i)
+    {
+      if( l_it->second == m_vAnimatedModels[i] )
+      {
+        if(i < m_vAnimatedModels.size() - 1)
+        {
+          m_vAnimatedModels[i] = m_vAnimatedModels[m_vAnimatedModels.size() - 1];
+        }
+        m_vAnimatedModels.pop_back();
+      }
+    }
+
     delete l_it->second;
     m_Resources.erase(l_it);
   }
