@@ -211,6 +211,9 @@
     <Filter Include="Particle\ParticleCore">
       <UniqueIdentifier>{14f6b098-170e-4e7c-985e-a7e798846343}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BillBoard">
+      <UniqueIdentifier>{61153b82-daf7-427b-9730-2a7ef1cdb280}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -344,6 +347,12 @@
     </ClCompile>
     <ClCompile Include="ParticleCore.cpp">
       <Filter>Particle\ParticleCore</Filter>
+    </ClCompile>
+    <ClCompile Include="BillBoardManager.cpp">
+      <Filter>BillBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="BillBoard.cpp">
+      <Filter>BillBoard</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -538,6 +547,12 @@
     </ClInclude>
     <ClInclude Include="include\ParticleCore.h">
       <Filter>Particle\ParticleCore</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BillBoardManager.h">
+      <Filter>BillBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BillBoard.h">
+      <Filter>BillBoard</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

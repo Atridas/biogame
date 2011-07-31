@@ -37,7 +37,7 @@ void CParticleManager::Release()
   
   while(it != end)
   {
-    CHECKED_DELETE(*it);
+              CHECKED_DELETE(*it);
     ++it;
   }
   
@@ -113,9 +113,6 @@ bool CParticleManager::Load(const string& _szFileName)
         l_vAux = l_vSpawnDir + l_vDesviacionSpawnDir;
         l_pParticleEmitter->m_vDirection.push_back(l_vAux);
 
-        
-        //********************************************
-
         int numDirections = l_treeInstanceParticle.GetNumChildren();
       
 		    for(int k=0;k<numDirections;++k)
@@ -164,13 +161,14 @@ bool CParticleManager::Load(const string& _szFileName)
         }
 
     
-        CParticleCore* l_pCore = new CParticleCore();//posar el nom
-       /* if(!l_pCore)
+        CParticleCore* l_pCore = new CParticleCore();
+        
+        l_pCore->LoadParticleCore("./Data/XML/ParticleCore.xml",l_szType);//posar aki el xml de les cores.
+        if(!l_pCore)
         {
           LOGGER->AddNewLog(ELL_WARNING, "CParticleManager:: No existeix el emiter de tipus %s", l_szType);
           continue;
-        }*/
-        l_pCore->LoadParticleCore("./Data/XML/ParticleCore.xml",l_szType);//posar aki el xml de les cores.
+        }
         l_pParticleEmitter->SetAttributes(l_pCore);
         l_pParticleEmitter->SetTexParticle(l_pCore->GetTexParticle());
 			  m_vEmitterParticle.push_back(l_pParticleEmitter);

@@ -15,6 +15,7 @@
 #include "LogRender.h"
 #include "Console.h"
 #include "ParticleManager.h"
+#include "BillBoardManager.h"
 
 void CProcess::DebugInformation()
 {
@@ -100,8 +101,10 @@ bool CProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _p
 
   } else if(strcmp(_pcAction, "Particle") == 0) 
   {
+    // OJO!!! Fa el reload de les particules i dels billboards
     CORE->GetParticleManager()->Reload();
-    return true;         
+    CORE->GetBillBoardManager()->Reload();
+    return true;
     
   } else if(strcmp(_pcAction, "Console") == 0)
   {

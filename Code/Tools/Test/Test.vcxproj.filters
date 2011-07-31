@@ -68,5 +68,8 @@
     <None Include="..\..\..\Run\Data\XML\SceneEffects_Viewer.xml">
       <Filter>Data</Filter>
     </None>
+    <None Include="..\..\..\Run\Data\XML\Billboard.xml">
+      <Filter>Data</Filter>
+    </None>
   </ItemGroup>
 </Project>

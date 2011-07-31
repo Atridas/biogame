@@ -142,3 +142,29 @@
 
   
 </ParticleCore>
+
+<!-- como hacer Cores para emisores de particulas.
+
+id= La id, es el identificador de la Core. Podriem dir que es el tipus de font que crida el manager.
+MinEmitRate i MaxEmitRate= Numero de particules que es crean per segon. Entre el maxim i el minim es fa un Random(son floats)
+Color1 i Color2 = Els colors es posen en RGB+alpha. Es fa un randam de cada valor, per treure el color resultant ex:Color1="1.0 1.0 1.0 1.0"
+MinSize i MaxSize = tamany de la particula. Es fa random entre les 2  
+Life1 i Life2 = Temps de vida de la particula en segons (son floats)
+Bucle = Es per indicar si el emissor a d'emetre tota l'estona, o durant un temps determinat. True indica que no para de produir particules    
+NumBucle = numero de vegades que volem crear particlues. El numero introduit son els segons que crea particules
+m_fRebootEmitter1 i m_fRebootEmitter2 = Temps que tarda en tornar a emetre particules. Si esta a 0, no torna. Nomes te sentit el bucle NO es infinit
+TotDeCop = En lloc de calcular a cada update les particules que crea, i les va creant poc a poc, si posem aquesta a TRUE,
+crea totes les particules a la vegada. Es ideal per fer explosions de chispes i coses d'aquest estil.
+                      
+Angle1 i Angle2 = angle de rotacio de la particula. Es recomenable posa el mateix valor en els 2, pero un negatiu, aixi fent el 
+random la particula pot girar tan dreta com esquerra. Si es posen els 2 valors positius o negatius, giraran totes les particules
+en el mateix sentit, pero en diferentes velocitats
+                   
+Gravity = Pot produir el efecte de gravetat, encara que el fa es anar modificant la velocitat dels objectes. Indicar valor per x y z 
+Velocitate = Multiplica la direccio per la velocitat. Amb aixo fem que les particules es desplasin + rapid a + lent
+TexParticle = S'ha indicar l'ubicacio i el nom de la textura que volem utilitzar. ex: "Data/Textures/texturas particulas/DustPoof.dds">
+      
+
+
+
+-->
