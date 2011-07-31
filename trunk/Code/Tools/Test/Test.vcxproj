@@ -36,6 +36,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="..\..\..\Run\Data\XML\actions_physx.xml" />
+    <None Include="..\..\..\Run\Data\XML\Billboard.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="..\..\..\Run\Data\XML\Explosions.xml">
       <SubType>Designer</SubType>
     </None>

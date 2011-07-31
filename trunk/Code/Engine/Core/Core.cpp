@@ -24,6 +24,7 @@
 #include <GUIManager.h>
 #include <PhysicsManager.h>
 #include <ParticleManager.h>
+#include <BillBoardManager.h>
 #include <SoundManager.h>
 #include <EntityManager.h>
 #include <PortalManager.h>
@@ -54,6 +55,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pGUIManager               = new CGUIManager(_InitParams.RenderManagerParams.v2iResolution);
   m_pPhysicsManager           = new CPhysicsManager();
   m_pParticleManager          = new CParticleManager();
+  m_pBillBoardManager         = new CBillBoardManager();
   m_pSoundManager             = new CSoundManager();
   m_pEntityManager            = new CEntityManager();
   m_pPhysicTriggerReport      = new CPhysXTriggerEntityController();
@@ -89,6 +91,13 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
     SetOk(false);
   }
   m_pParticleManager->Init(CORE->GetRenderManager());
+
+  if(!m_pBillBoardManager->Load(_InitParams.BillBoardManagerParams.szFile))
+  {
+    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al manager de particulas");
+    SetOk(false);
+  }
+  m_pBillBoardManager->Init(CORE->GetRenderManager());
 
   if(!m_pAnimatedModelManager->Load(_InitParams.AnimatedModelManagerParams))
   {
@@ -133,6 +142,7 @@ void CCore::Release()
   CHECKED_DELETE(m_pPhysicTriggerReport);
   CHECKED_DELETE(m_pEntityManager);
   CHECKED_DELETE(m_pSoundManager);
+  CHECKED_DELETE(m_pBillBoardManager);
   CHECKED_DELETE(m_pParticleManager);
   CHECKED_DELETE(m_pPhysicsManager);
   CHECKED_DELETE(m_pGUIManager);

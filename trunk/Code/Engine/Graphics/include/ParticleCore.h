@@ -60,8 +60,8 @@ public:
 
   virtual ~CParticleCore(void) {Done();};
 
-  //bool Init(const CXMLTreeNode& _xmlEffect,LPD3DXEFFECTPOOL _pEffectPool);
-  bool Reload(const string& _szFileName);
+
+  
   bool LoadParticleCore(const string& _szFileName, const string& _type);
 
   //  Set

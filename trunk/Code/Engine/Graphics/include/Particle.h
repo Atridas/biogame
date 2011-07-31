@@ -86,7 +86,6 @@ public:
   bool          IsAlive           () const              { return m_fAge < m_fLifetime; };
   
   virtual bool  Update               (float _fDeltaTime, CCamera* _pCamera);
-  //void  Render	             (LPDIRECT3DDEVICE9 device, CTexture* texture);
   virtual void  Release              ();
 
   
@@ -114,15 +113,12 @@ private:
   float             m_fLifetime; // temps de vida que tindra
   float             m_fAge; //la edat que te, es a dir, temps que porta inicialitzada
   D3DXCOLOR         m_Color;
-  //D3DXVECTOR3       m_vPos;
   Vect3f            m_vDir; 
   Vect3f            m_vVel;
   Vect3f            m_vGravity;
   float             m_fAngle;
   float             m_fIncrementAngle;
   Vect3f            m_vPos;
-  // float             m_fSizeX;
-  //float             m_fSizeY;
   Vect3f     		    m_PointA;
   Vect3f            m_PointB;
   Vect3f            m_PointC; 

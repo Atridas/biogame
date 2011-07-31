@@ -140,6 +140,16 @@ struct SPaticleManagerParams
   {};
 };
 
+struct SBillBoardManagerParams
+{
+  string szFile;
+
+  //Default Params
+  SBillBoardManagerParams():
+    szFile("Data/XML/Billboard.xml")
+  {};
+};
+
 struct SSceneEffectManagerParams
 {
   string szFile;
@@ -256,6 +266,7 @@ struct SInitParams
   SRenderableObjectsManagerParams RenderableObjectsManagerParams;
   SLightsManagerParams            LightsManagerParams;
   SPaticleManagerParams           PaticleManagerParams;
+  SBillBoardManagerParams         BillBoardManagerParams;
   SSceneEffectManagerParams       SceneEffectParams;
   SScriptManagerParams            ScriptManagerParams;
   SLogRenderParams                LogRenderParams;

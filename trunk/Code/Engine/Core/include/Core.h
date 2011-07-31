@@ -28,6 +28,7 @@ class CConsole;
 class CGUIManager;
 class CPhysicsManager;
 class CParticleManager;
+class CBillBoardManager;
 class CSoundManager;
 class CEngine;
 class CEntityManager;
@@ -53,8 +54,8 @@ public:
                                                   m_pActionManager(0),m_pRenderableObjectsManager(0),m_pLightManager(0),
                                                   m_pSceneEffectManager(0), m_pTimer(0), m_pScriptManager(0),m_pTextureManager(0),
                                                   m_pStaticMeshManager(0),m_pAnimatedModelManager(0),m_pEffectManager(0),
-                                                  m_pGUIManager(0),m_pPhysicsManager(0),m_pParticleManager(0),m_pSoundManager(0),
-                                                  m_pEngine(0), m_pEntityManager(0), m_pPortalManager(0)
+                                                  m_pGUIManager(0),m_pPhysicsManager(0),m_pParticleManager(0), m_pBillBoardManager(0),
+                                                  m_pSoundManager(0), m_pEngine(0), m_pEntityManager(0), m_pPortalManager(0)
                                                   {};
   /**
    * Destructor.
@@ -147,6 +148,8 @@ public:
 
   CParticleManager*   GetParticleManager    () const                        {return m_pParticleManager;};
 
+  CBillBoardManager*  GetBillBoardManager   () const                        {return m_pBillBoardManager;};
+
   CSoundManager*      GetSoundManager       () const                        {return m_pSoundManager;};
 
   CEngine*            GetEngine             () const                        {return m_pEngine;};
@@ -224,6 +227,8 @@ private:
   CPhysicsManager*            m_pPhysicsManager;
 
   CParticleManager*           m_pParticleManager;
+
+  CBillBoardManager*          m_pBillBoardManager;
 
   CSoundManager*              m_pSoundManager;
 

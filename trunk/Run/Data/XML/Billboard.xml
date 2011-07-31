@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Billboards>
+  
+  <InstanceBillboard>
+    
+       
+    <BillboardInstance id="EXPLOSIO"  position="-0.98981 1.16939 -2.77892" sizeX="1.0" sizeY="1.0" TexParticle="Data/Textures/texturas particulas/explosprite.dds" >
+      <Animateds>
+        <Animated     NumFiles="4"    NumColumnes="4"   TimeDiapo="0.05"/>
+       </Animateds>
+    </BillboardInstance>
+    <BillboardInstance id="Barril_explosiu"  position="9.40583 0.991046 28.5388" sizeX="0.5" sizeY="0.5" TexParticle="Data/Textures/texturas particulas/explosiu.png" />
+    <!--<BillboardInstance id="bubbles1" type="bubble" position="-14.6275 0.833153 -4.08485" FormEmitter="dummy" sizeX="0.391403" sizeY="0.702762" sizeZ="0.194437" Direction="0.0 1.0 0.0" Desviacion="0.1 0.0 0.1" />
+    <BillboardInstance id="bubbles2" type="bubble" position="-8.24538 0.801696 0.638917" FormEmitter="dummy" sizeX="0.391403" sizeY="0.702762" sizeZ="0.194437" Direction="0.0 1.0 0.0" Desviacion="0.1 0.0 0.1"/>
+    <BillboardInstance id="efecte_fred" type="efecte_fred" position="-5.75139 0.2 -10.35" FormEmitter="dummy" sizeX="1.7593" sizeY="0.338507" sizeZ="0.338507" Direction="0.0 0.0 1.0" Desviacion="0.0 0.0 0.0" />
+    <BillboardInstance id="frigo" type="efecte_fred" position="-14.5 0.10 -6.91671" FormEmitter="dummy" sizeX="0.3" sizeY="0.162571" sizeZ="1.94475" Direction="1.0 0.0 0.0" />-->
+    
+  </InstanceBillboard>
+  
+</Billboards>
