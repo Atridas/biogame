@@ -24,6 +24,7 @@ bool CParticleManager::Reload()
   {
     Init(CORE->GetRenderManager());
   }
+  SetAllEmittersActive(true);
   return isOk;
 }
 
