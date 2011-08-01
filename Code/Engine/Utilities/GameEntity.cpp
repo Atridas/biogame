@@ -4,13 +4,20 @@
 
 void CGameEntity::AddComponent(CBaseComponent* _pComponent)
 {
-  m_vNewEntities[_pComponent->GetType()] = _pComponent;
+  assert(m_vNewComponents.find(_pComponent->GetType()) == m_vNewComponents.end());
+  m_vNewComponents[_pComponent->GetType()] = _pComponent;
 }
+
+void CGameEntity::DeleteComponent(CBaseComponent::Type _type) 
+{
+  //assert(m_vDeleteComponents.find(_pComponent->GetType()) == m_vDeleteComponents.end());
+  m_vDeleteComponents.insert(_type);
+};
 
 void CGameEntity::AddCachedComponents()
 {
-  map<CBaseComponent::Type, CBaseComponent*>::iterator l_it  = m_vNewEntities.begin();
-  map<CBaseComponent::Type, CBaseComponent*>::iterator l_end = m_vNewEntities.end();
+  map<CBaseComponent::Type, CBaseComponent*>::iterator l_it  = m_vNewComponents.begin();
+  map<CBaseComponent::Type, CBaseComponent*>::iterator l_end = m_vNewComponents.end();
 
   for(; l_it != l_end; ++l_it)
   {
@@ -30,14 +37,14 @@ void CGameEntity::AddCachedComponents()
     }
   }
 
-  m_vNewEntities.clear();
+  m_vNewComponents.clear();
 }
 
 void CGameEntity::DeleteComponents()
 {
   //TODO optimitzar!
-  set<CBaseComponent::Type>::iterator l_it  = m_vDeleteEntities.begin();
-  set<CBaseComponent::Type>::iterator l_end = m_vDeleteEntities.end();
+  set<CBaseComponent::Type>::iterator l_it  = m_vDeleteComponents.begin();
+  set<CBaseComponent::Type>::iterator l_end = m_vDeleteComponents.end();
 
   for(; l_it != l_end; ++l_it)
   {
@@ -62,7 +69,7 @@ void CGameEntity::DeleteComponents()
     }
   }
 
-  m_vDeleteEntities.clear();
+  m_vDeleteComponents.clear();
 }
 
 void CGameEntity::PreUpdate(float deltaTime)

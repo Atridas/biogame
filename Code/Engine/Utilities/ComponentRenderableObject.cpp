@@ -31,6 +31,9 @@ CComponentRenderableObject* CComponentRenderableObject::AddToEntityWithAnimatedM
   if(l_pComp->InitAnimatedModel(_pEntity, _szName, _szCore))
   {
     l_pComp->SetEntity(_pEntity);
+    //s'agrega el component d'animacions
+    if(!CComponentAnimation::AddToEntity(_pEntity))
+      LOGGER->AddNewLog(ELL_WARNING, "CComponentRenderableObject::InitAnimatedModel No s'ha pogut inicialitzar el component d'animació.");
     return l_pComp;
   }
   else
@@ -102,14 +105,6 @@ bool CComponentRenderableObject::InitAnimatedModel(CGameEntity *_pEntity, const 
     SetOk(false);
   } else {
     SetOk(true);
-  }
-
-  if(IsOk())
-  {
-    SetEntity(_pEntity);
-    //s'agrega el component d'animacions
-    if(!CComponentAnimation::AddToEntity(_pEntity))
-      LOGGER->AddNewLog(ELL_WARNING, "CComponentRenderableObject::InitAnimatedModel No s'ha pogut inicialitzar el component d'animació.");
   }
 
 
