@@ -114,6 +114,7 @@
     <None Include="..\..\..\Run\Data\XML\Particles.xml">
       <SubType>Designer</SubType>
     </None>
+    <None Include="..\..\..\Run\Data\XML\PhysX.xml" />
     <None Include="..\..\..\Run\Data\XML\RenderableObjects.xml" />
     <None Include="..\..\..\Run\Data\XML\SceneEffects.xml" />
     <None Include="..\..\..\Run\Data\XML\StaticMeshes.xml" />

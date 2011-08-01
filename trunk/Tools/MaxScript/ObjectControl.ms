@@ -109,6 +109,18 @@ function IsDestroyable _object =
 	)
 )
 
+-- Comprova si l'objecte proporcionat és un node del graf de navegació
+function IsNavNode _object =
+(
+	-- TODO [[ IsPortal _object ]]
+	if classof _object == Dummy and (GetUserProp _object "navNode") != undefined then
+	(
+		return true
+	) else (
+		return false
+	)
+)
+
 -- Cerca l'entitat de player
 function GetPlayerEntity _entities =
 (
