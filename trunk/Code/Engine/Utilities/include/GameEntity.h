@@ -30,7 +30,7 @@ public:
   template<class T>
   T* GetComponent() const;
   
-  void         DeleteComponent(CBaseComponent::Type _type) {m_vDeleteEntities.insert(_type);};
+  void         DeleteComponent(CBaseComponent::Type _type);
   
   void         PreUpdate(float _fDeltaTime)      ;
   void         Update(float _fDeltaTime)         ;
@@ -58,8 +58,8 @@ private:
 
   void ReceiveEvent(const SEvent& _Event);
   
-  map<CBaseComponent::Type, CBaseComponent*> m_vNewEntities;
-  set<CBaseComponent::Type>                  m_vDeleteEntities;
+  map<CBaseComponent::Type, CBaseComponent*> m_vNewComponents;
+  set<CBaseComponent::Type>                  m_vDeleteComponents;
 
   map<CBaseComponent::Type, CBaseComponent*> m_mComponents;
   vector<CBaseComponent*>                    m_vComponents;
@@ -78,8 +78,8 @@ T* CGameEntity::GetComponent(CBaseComponent::Type _type) const
 
   if(l_it == m_mComponents.cend())
   {
-    l_it = m_vNewEntities.find(_type);
-    if(l_it == m_vNewEntities.cend())
+    l_it = m_vNewComponents.find(_type);
+    if(l_it == m_vNewComponents.cend())
     {
       return 0;
     }
@@ -95,8 +95,8 @@ T* CGameEntity::GetComponent() const
 
   if(l_it == m_mComponents.cend())
   {
-    l_it = m_vNewEntities.find(T::GetStaticType());
-    if(l_it == m_vNewEntities.cend())
+    l_it = m_vNewComponents.find(T::GetStaticType());
+    if(l_it == m_vNewComponents.cend())
     {
       return 0;
     }
