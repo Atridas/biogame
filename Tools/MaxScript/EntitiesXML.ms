@@ -385,3 +385,15 @@ function XMLEntityDestroyable _instance &_TagName =
 	
 	return l_params
 )
+
+--Genera els paràmetres d'un tag XML d'entitat NavNode. Conté:
+-- de moment res
+function XMLEntityNavNode _instance &_TagName =
+(
+	local l_params = #()
+	local l_ss
+	
+	_TagName = "NavNode"
+	
+	return l_params
+)

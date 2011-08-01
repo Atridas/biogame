@@ -407,7 +407,7 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
             // -----------------------------------------------------------------------------------------------------------
             } else if(!l_TreeComponent.IsComment())
             {
-              LOGGER->AddNewLog(ELL_WARNING,"\tNode \"%s\" no reconegut!", l_TreeComponent.GetName());
+              LOGGER->AddNewLog(ELL_WARNING,"\tComponent \"%s\" no reconegut!", l_TreeComponent.GetName());
             }
           }
         } else if(strcmp(l_TreeEntity.GetName(),"Player") == 0)

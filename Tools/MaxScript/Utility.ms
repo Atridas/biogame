@@ -954,6 +954,32 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				
 				format "\n  %" (CloseTagXML "Entity") to:l_file
 			)
+			else if IsNavNode _entities[i] then
+			(
+				local l_instance = _entities[i]
+				if l_instance.name == undefined then
+				(
+					format "\n  %" (OpenTagXML "Entity") to:l_file
+				)
+				else
+				(
+					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
+				)
+				
+				format "\tEntitat NavNode %\n" l_instance.name
+				
+				l_params = #()
+				
+				--Object3D
+				l_params = XMLEntityObject3D l_instance &l_TagName
+				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+				
+				--NavNode
+				l_params = XMLEntityNavNode l_instance &l_TagName
+				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+				
+				format "\n  %" (CloseTagXML "Entity") to:l_file
+			)
 		)
 		
 		local l_player = GetPlayerEntity _entities

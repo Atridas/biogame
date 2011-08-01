@@ -1,17 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Entities>
-  <Entity name="Porta02">
-    <Object3D position="-10.8607 1.56408 2.94355" yaw="0.0" pitch="-9.9" roll="0.0" />
-    <RenderableObject animated="true" name="Porta" />
-    <PhysXBox fromRenderableObject="false" shape="box" size="0.976215 3.05175 2.56453" midpoint="0 0 0" density="0" collision_group="escenari" />
-    <Door open="false" />
-  </Entity>
-  <Entity name="Porta03">
-    <Object3D position="-4.35187 1.56408 2.94355" yaw="10.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="true" name="Porta" />
-    <PhysXBox fromRenderableObject="false" shape="box" size="0.976215 3.05175 2.56453" midpoint="0 0 0" density="0" collision_group="escenari" />
-    <Door open="false" />
-  </Entity>
   <Entity name="Habitacio3">
     <Object3D position="0.0 0.0 0.193104" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Habitacio3" />
@@ -294,6 +282,206 @@
     <RenderableObject animated="false" name="EsferaDestructible" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
     <Destroyable onDestroy="esfera_destructible" destroyedResource="BoxAlpha" />
+  </Entity>
+  <Entity name="navNode01">
+    <Object3D position="38.7529 1.88202 42.6325" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode02">
+    <Object3D position="60.5474 1.88202 42.6325" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode03">
+    <Object3D position="60.5474 1.88202 22.6177" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode04">
+    <Object3D position="38.6239 1.88202 22.6177" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode05">
+    <Object3D position="38.6239 1.88202 2.73638" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode06">
+    <Object3D position="59.8892 1.88202 2.73638" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode07">
+    <Object3D position="59.8892 1.88202 -10.0611" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode08">
+    <Object3D position="38.033 1.88202 -10.0611" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode09">
+    <Object3D position="38.033 1.88202 -30.3861" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode10">
+    <Object3D position="60.6927 1.88202 -30.3861" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode11">
+    <Object3D position="47.0427 1.88202 -43.9594" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode12">
+    <Object3D position="20.6721 1.88202 2.73638" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode13">
+    <Object3D position="20.6721 1.88202 26.7755" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode14">
+    <Object3D position="1.98357 1.88202 43.134" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode15">
+    <Object3D position="-24.6987 1.88202 40.7297" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode16">
+    <Object3D position="-24.6987 1.88202 33.0325" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode17">
+    <Object3D position="-24.6987 1.88202 28.062" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode18">
+    <Object3D position="-24.6987 1.88202 20.9145" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode19">
+    <Object3D position="-24.6987 1.88202 15.3672" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode20">
+    <Object3D position="-24.6987 1.88202 8.73758" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode21">
+    <Object3D position="5.11145 1.88202 8.73758" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode22">
+    <Object3D position="-28.5225 1.88202 7.54753" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode23">
+    <Object3D position="-28.5225 1.88202 0.400584" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode24">
+    <Object3D position="-34.3289 1.88202 0.400584" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode25">
+    <Object3D position="-34.3289 1.88202 7.63214" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode26">
+    <Object3D position="-34.3289 1.88202 16.2427" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode27">
+    <Object3D position="-34.3289 1.88202 40.6214" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode28">
+    <Object3D position="-9.59263 1.88202 -2.26676" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode29">
+    <Object3D position="5.31225 1.88202 -16.3656" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode30">
+    <Object3D position="-25.8857 1.88202 -36.5659" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode31">
+    <Object3D position="-35.4042 1.88202 -21.6439" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode32">
+    <Object3D position="21.2548 1.88202 -41.1343" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode33">
+    <Object3D position="-44.515 1.88202 -13.9605" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode34">
+    <Object3D position="-44.61 1.88202 3.16974" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode35">
+    <Object3D position="-48.0757 1.88202 0.984592" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode36">
+    <Object3D position="-62.3059 1.88202 1.05007" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode37">
+    <Object3D position="-63.0397 1.88202 -11.6186" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode38">
+    <Object3D position="-63.3982 1.88202 -30.2599" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode39">
+    <Object3D position="-53.7219 1.88202 -23.9664" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode40">
+    <Object3D position="-53.7219 1.88202 -17.9477" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode41">
+    <Object3D position="-44.3793 1.88202 -30.2599" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode42">
+    <Object3D position="-54.7789 1.88202 -30.2599" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode43">
+    <Object3D position="-45.974 1.88202 -45.3296" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode44">
+    <Object3D position="-63.0201 1.88202 -45.3296" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode45">
+    <Object3D position="-62.3059 1.88202 14.5483" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode46">
+    <Object3D position="-62.3059 1.88202 28.7744" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode47">
+    <Object3D position="-62.3059 1.88202 45.9192" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode48">
+    <Object3D position="-44.1298 1.88202 45.9192" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode49">
+    <Object3D position="-44.1298 1.88202 29.3291" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="navNode50">
+    <Object3D position="-44.1298 1.88202 14.5442" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
   </Entity>
   <Player position="-16.8764 2.0 -15.9165" yaw="0.0" />
   <Miner name="Miner" position="50.3014 2.0 39.1446" yaw="0.0" />
