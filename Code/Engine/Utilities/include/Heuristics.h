@@ -76,4 +76,8 @@ private:
 
 
 
+CHeuristicEuclid& GetHeuristicEuclid();
+CHeuristicNoisyEuclidian& GetHeuristicNoisyEuclid();
+CHeuristicDijkstra& GetHeuristicDijkstra();
+
 #endif

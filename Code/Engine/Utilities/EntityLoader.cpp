@@ -23,6 +23,7 @@
 #include "ComponentArma.h"
 #include "ComponentInteractive.h"
 #include "ComponentDestroyable.h"
+#include "ComponentNavNode.h"
 
 #include "PhysicsManager.h"
 
@@ -254,6 +255,18 @@ void LoadComponentDestroyable(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntit
 
 }
 
+void LoadComponentNavNode(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
+{
+
+  LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant NavNode.");
+
+  if(!CComponentNavNode::AddToEntity(_pEntity))
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"\tError al crear el component NavNode de l'objecte \"%s\"",_pEntity->GetName());
+  }
+
+}
+
 // -------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------
@@ -403,6 +416,11 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
             } else if(strcmp(l_TreeComponent.GetName(),"Destroyable") == 0)
             {
               LoadComponentDestroyable(l_TreeComponent, l_pEntity);
+
+            // -----------------------------------------------------------------------------------------------------------
+            } else if(strcmp(l_TreeComponent.GetName(),"NavNode") == 0)
+            {
+              LoadComponentNavNode(l_TreeComponent, l_pEntity);
 
             // -----------------------------------------------------------------------------------------------------------
             } else if(!l_TreeComponent.IsComment())
