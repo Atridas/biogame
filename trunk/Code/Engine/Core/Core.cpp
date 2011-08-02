@@ -28,9 +28,49 @@
 #include <SoundManager.h>
 #include <EntityManager.h>
 #include <PortalManager.h>
+#include <IAManager.h>
 
 #include "Utils\MemLeaks.h"
 //#include <AnimatedModelManager.h>
+
+
+
+//Macros d'inicialitzacio
+#define INIT_NO_ARGUMENTS(object, name)                        \
+  if(!object->Init())                                          \
+  {                                                            \
+    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al %s.", name);  \
+    SetOk(false);                                              \
+  }
+
+#define LOAD(object, name, argument)                          \
+  if(!object->Load(argument))                                 \
+  {                                                           \
+    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al %s.", name); \
+    SetOk(false);                                             \
+  }
+
+#define INIT(object, name, argument)                          \
+  if(!object->Init(argument))                                 \
+  {                                                           \
+    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al %s.", name); \
+    SetOk(false);                                             \
+  }
+
+#define INIT2(object, name, argument, argument2)              \
+  if(!object->Init(argument, argument2))                      \
+  {                                                           \
+    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al %s.", name); \
+    SetOk(false);                                             \
+  }
+
+#define INIT3(object, name, argument, argument2, argument3)   \
+  if(!object->Init(argument, argument2, argument3))           \
+  {                                                           \
+    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al %s.", name); \
+    SetOk(false);                                             \
+  }
+
 
 bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
 {
@@ -60,6 +100,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pEntityManager            = new CEntityManager();
   m_pPhysicTriggerReport      = new CPhysXTriggerEntityController();
   m_pPortalManager            = new CPortalManager();
+  m_pIAManager                = new CIAManager();
 
   m_pEngine                   = _pEngine;
 
@@ -67,69 +108,59 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
 
   SetOk(true);
 
-  if(!m_pTextureManager->Init()) 
-  {
-    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al manager de textures.");
-    SetOk(false);
-  }
+  INIT_NO_ARGUMENTS(m_pTextureManager, "manager de textures");
 
-  if(!m_pEffectManager->Load(_InitParams.EffectManagerParams))
-  {
-    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al manager d'Effects.");
-    SetOk(false);
-  }
-
-  if(!m_pStaticMeshManager->Load(_InitParams.StaticMeshManagerParams))
-  {
-    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al manager de Static Meshes.");
-    SetOk(false);
-  }
-
-  if(!m_pParticleManager->Load(_InitParams.PaticleManagerParams.szFile))
-  {
-    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al manager de particulas");
-    SetOk(false);
-  }
-  m_pParticleManager->Init(CORE->GetRenderManager());
-
-  if(!m_pBillBoardManager->Load(_InitParams.BillBoardManagerParams.szFile))
-  {
-    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al manager de particulas");
-    SetOk(false);
-  }
-  m_pBillBoardManager->Init(CORE->GetRenderManager());
-
-  if(!m_pAnimatedModelManager->Load(_InitParams.AnimatedModelManagerParams))
-  {
-    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al manager d'Animated Models.");
-    SetOk(false);
-  }
-
-  m_pLanguageManager->Init(_InitParams.LanguageManagerParams);
-  m_pFontManager->Init(m_pRenderManager,_InitParams.FontManagerParams.pcFontsXML);
-  m_pInputManager->Init(hWnd,Vect2i(_InitParams.RenderManagerParams.v2iResolution.x,_InitParams.RenderManagerParams.v2iResolution.y),_InitParams.InputManagerParams.bExclusiveMouse);
-  m_pActionManager->Init(_InitParams.ActionToInputParams.pcFile);
+  LOAD(m_pEffectManager, "Manager d'Effects", _InitParams.EffectManagerParams);
   
-  m_pRenderableObjectsManager->Load(_InitParams.RenderableObjectsManagerParams.vXMLFiles);
-  m_pPortalManager->Init(_InitParams.PortalManagerParams.szFiles);
-  m_pLightManager->Load(_InitParams.LightsManagerParams.szFile);
-  m_pSceneEffectManager->Load(_InitParams.SceneEffectParams.szFile);
+  LOAD(m_pStaticMeshManager, "Manager de Static Meshes", _InitParams.StaticMeshManagerParams);
+  
+  LOAD(m_pParticleManager, "Manager de Partícules", _InitParams.PaticleManagerParams.szFile);
+  if(m_pParticleManager->IsOk())
+  {
+    m_pParticleManager->Init(CORE->GetRenderManager());
+  }
+  
+  LOAD(m_pBillBoardManager, "Manager de Billboards", _InitParams.BillBoardManagerParams.szFile);
+  if(m_pBillBoardManager->IsOk())
+  {
+    m_pBillBoardManager->Init(CORE->GetRenderManager());
+  }
+  
+  LOAD(m_pAnimatedModelManager, "Manager d'Animated Models", _InitParams.AnimatedModelManagerParams);
+  
+  INIT(m_pLanguageManager, "Language Manager", _InitParams.LanguageManagerParams);
+  INIT2(m_pFontManager, "Font Manager", m_pRenderManager,_InitParams.FontManagerParams.pcFontsXML);
+  INIT3(m_pInputManager, "Input Manager", hWnd, Vect2i(_InitParams.RenderManagerParams.v2iResolution.x,_InitParams.RenderManagerParams.v2iResolution.y),_InitParams.InputManagerParams.bExclusiveMouse);
+  INIT(m_pActionManager, "Action Manager", _InitParams.ActionToInputParams.pcFile);
+  
+  LOAD(m_pRenderableObjectsManager, "Manager de Renderable Objects", _InitParams.RenderableObjectsManagerParams.vXMLFiles);
+  INIT(m_pPortalManager, "Portal Manager", _InitParams.PortalManagerParams.szFiles);
+  LOAD(m_pLightManager, "Manager de Llums", _InitParams.LightsManagerParams.szFile);
+  LOAD(m_pSceneEffectManager, "Manager de Effectes d'Escena", _InitParams.SceneEffectParams.szFile);
+
   m_pScriptManager->Initialize();
   m_pScriptManager->Load(_InitParams.ScriptManagerParams.szFile);
   m_pLogRender->SetWindowsPos(_InitParams.LogRenderParams.vPosition);
-  m_pConsole->Init(m_pScriptManager);
-  m_pGUIManager->Init(_InitParams.GUIManagerParams.szXML);
-  m_pGUIManager->ActiveWindows(_InitParams.GUIManagerParams.szInitWindow);
-  m_pGUIManager->SetVisiblePointerMouse(_InitParams.GUIManagerParams.bRenderMouse);
-  m_pPhysicsManager->Init(_InitParams.PhysXManagerParams.szFile);
-  m_pPhysicsManager->SetTriggerReport(m_pPhysicTriggerReport);
+
+  INIT(m_pConsole, "Consola", m_pScriptManager);
   
-  if(!m_pSoundManager->Init(_InitParams.SoundManagerParams.szFile))
+  INIT(m_pGUIManager, "Manager de GUI", _InitParams.GUIManagerParams.szXML);
+  if(m_pGUIManager->IsOk())
   {
-    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error inicialitzant SoundManager.");
-    SetOk(false);  
+    m_pGUIManager->ActiveWindows(_InitParams.GUIManagerParams.szInitWindow);
+    m_pGUIManager->SetVisiblePointerMouse(_InitParams.GUIManagerParams.bRenderMouse);
   }
   
+  INIT(m_pPhysicsManager, "Manager de Physics", _InitParams.PhysXManagerParams.szFile);
+  if(m_pPhysicsManager->IsOk())
+  {
+    m_pPhysicsManager->SetTriggerReport(m_pPhysicTriggerReport);
+  }
+  
+  INIT(m_pSoundManager, "Manager de Sons", _InitParams.SoundManagerParams.szFile);
+  
+  INIT_NO_ARGUMENTS(m_pIAManager, "Manager d'IA");
+
   return IsOk();
 }
 
@@ -139,6 +170,7 @@ void CCore::Release()
   
 
   //delete a l'inrevès de com s'ha fet l'init
+  CHECKED_DELETE(m_pIAManager);
   CHECKED_DELETE(m_pPhysicTriggerReport);
   CHECKED_DELETE(m_pEntityManager);
   CHECKED_DELETE(m_pSoundManager);
