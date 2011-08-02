@@ -10,12 +10,6 @@
     <Filter Include="EntitySystem">
       <UniqueIdentifier>{31371ca7-252d-4b80-82a7-15e00a685721}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Grafs">
-      <UniqueIdentifier>{c652030f-faa7-46f0-a5ee-142c49841b03}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="A%2a">
-      <UniqueIdentifier>{25923e21-a69a-435b-b8ae-8a286d9042d2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EntitySystem\Components">
       <UniqueIdentifier>{7edf2a8a-3fb3-4167-8ebb-c0648f680b8c}</UniqueIdentifier>
     </Filter>
@@ -109,6 +103,21 @@
     <Filter Include="EntitySystem\Components\PhysXTriggerEntityController">
       <UniqueIdentifier>{6e93f928-016e-4dd3-b175-8e254b892348}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentNavNode">
+      <UniqueIdentifier>{7a237d76-f374-44d6-bfdc-1ad7514f87f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IAShit">
+      <UniqueIdentifier>{938509a0-8d48-47fb-9825-cc7c15a231f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IAShit\Grafs">
+      <UniqueIdentifier>{c652030f-faa7-46f0-a5ee-142c49841b03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IAShit\Grafs\A%2a">
+      <UniqueIdentifier>{25923e21-a69a-435b-b8ae-8a286d9042d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IAShit\IAManager">
+      <UniqueIdentifier>{c4fdf07b-f049-446c-9299-356321394b91}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -124,16 +133,16 @@
       <Filter>ScriptedStateMachine</Filter>
     </ClCompile>
     <ClCompile Include="SparseGraph.cpp">
-      <Filter>Grafs</Filter>
+      <Filter>IAShit\Grafs</Filter>
     </ClCompile>
     <ClCompile Include="GraphDefines.cpp">
-      <Filter>Grafs</Filter>
+      <Filter>IAShit\Grafs</Filter>
     </ClCompile>
     <ClCompile Include="SearchAStar.cpp">
-      <Filter>A%2a</Filter>
+      <Filter>IAShit\Grafs\A%2a</Filter>
     </ClCompile>
     <ClCompile Include="Heuristics.cpp">
-      <Filter>A%2a</Filter>
+      <Filter>IAShit\Grafs\A%2a</Filter>
     </ClCompile>
     <ClCompile Include="ComponentPlayerController.cpp">
       <Filter>EntitySystem\Components\ComponentPlayerController</Filter>
@@ -225,6 +234,15 @@
     <ClCompile Include="ComponentDestroyable.cpp">
       <Filter>EntitySystem\Components\ComponentDestroyable</Filter>
     </ClCompile>
+    <ClCompile Include="IAManger.cpp">
+      <Filter>IAShit\IAManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentNavNode.cpp">
+      <Filter>EntitySystem\Components\ComponentNavNode</Filter>
+    </ClCompile>
+    <ClCompile Include="IAToLua.cpp">
+      <Filter>IAShit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GameObject.h">
@@ -246,22 +264,22 @@
       <Filter>EntitySystem\Components\ComponentPhysXController</Filter>
     </ClInclude>
     <ClInclude Include="include\GraphNode.h">
-      <Filter>Grafs</Filter>
+      <Filter>IAShit\Grafs</Filter>
     </ClInclude>
     <ClInclude Include="include\GraphDefines.h">
-      <Filter>Grafs</Filter>
+      <Filter>IAShit\Grafs</Filter>
     </ClInclude>
     <ClInclude Include="include\GraphEdge.h">
-      <Filter>Grafs</Filter>
+      <Filter>IAShit\Grafs</Filter>
     </ClInclude>
     <ClInclude Include="include\SparseGraph.h">
-      <Filter>Grafs</Filter>
+      <Filter>IAShit\Grafs</Filter>
     </ClInclude>
     <ClInclude Include="include\SearchAStar.h">
-      <Filter>A%2a</Filter>
+      <Filter>IAShit\Grafs\A%2a</Filter>
     </ClInclude>
     <ClInclude Include="include\Heuristics.h">
-      <Filter>A%2a</Filter>
+      <Filter>IAShit\Grafs\A%2a</Filter>
     </ClInclude>
     <ClInclude Include="include\ComponentPlayerController.h">
       <Filter>EntitySystem\Components\ComponentPlayerController</Filter>
@@ -349,6 +367,15 @@
     </ClInclude>
     <ClInclude Include="include\ComponentDestroyable.h">
       <Filter>EntitySystem\Components\ComponentDestroyable</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IAManager.h">
+      <Filter>IAShit\IAManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentNavNode.h">
+      <Filter>EntitySystem\Components\ComponentNavNode</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IAToLua.h">
+      <Filter>IAShit</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

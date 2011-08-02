@@ -115,7 +115,7 @@ CGraphEdge& CSparseGraph::GetEdge(int from, int to)
 //  graph is a digraph then a similar edge connecting the nodes in the opposite
 //  direction will be automatically added.
 //-----------------------------------------------------------------------------
-void CSparseGraph::AddEdge(CGraphEdge edge)
+void CSparseGraph::AddEdge(const CGraphEdge& edge)
 {
   //first make sure the from and to nodes exist within the graph 
   assert( (edge.GetFrom() < m_iNextNodeIndex) && (edge.GetTo() < m_iNextNodeIndex) &&
@@ -184,7 +184,7 @@ void CSparseGraph::RemoveEdge(int from, int to)
 //  If the node has not been added previously, it is checked to make sure its
 //  index matches the next node index before being added to the graph
 //------------------------------------------------------------------------
-int CSparseGraph::AddNode(CGraphNode node)
+int CSparseGraph::AddNode(const CGraphNode& node)
 {
   if (node.GetIndex() < (int)m_Nodes.size())
   {

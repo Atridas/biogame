@@ -25,6 +25,11 @@ bool CEngine::Init(const SInitParams& _InitParams,  HWND hWnd)
 
   bool result = m_pCore->Init(hWnd, _InitParams, this);
 
+  if(!result)
+  {
+    LOGGER->SaveLogsInFile();
+  }
+
   assert(result);
   
   if(m_pActiveProcess) //TODO: Comprovar excepcio m_pProcess == NULL i logejar

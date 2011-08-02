@@ -39,6 +39,7 @@ extern "C"
 #include "ParticleManager.h"
 
 #include "EntitiesToLua.h"
+#include "IAToLua.h"
 
 
 using namespace luabind;
@@ -467,8 +468,9 @@ void CScriptManager::RegisterLUAFunctions()
         .def("get_action_manager",              &CCore::GetActionManager)
         .def("get_particle_manager",            &CCore::GetParticleManager)
         .def("get_sound_manager",               &CCore::GetSoundManager);
-
-  RegisterCore(l_core);
+  
+  RegisterCore_Entities(l_core);
+  RegisterCore_IA(l_core);
 
   module(m_pLS) [
     l_core
@@ -577,4 +579,5 @@ void CScriptManager::RegisterLUAFunctions()
 
   RegisterGUI();
   RegisterEntitiesToLua(m_pLS);
+  RegisterIAToLua(m_pLS);
 }

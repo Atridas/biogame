@@ -35,6 +35,7 @@ extern "C"
 #include "ComponentLowCover.h"
 #include "ComponentDoor.h"
 #include "ComponentShield.h"
+#include "ComponentNavNode.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -118,9 +119,10 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("cover",                CBaseComponent::ECT_COVER),
           value("mirilla",              CBaseComponent::ECT_MIRILLA),
           value("door",                 CBaseComponent::ECT_DOOR),
-          value("shield",               CBaseComponent::ECT_SHIELD)
-          //value("interactive",          CBaseComponent::ECT_INTERACTIVE),
-          //value("destroyable",          CBaseComponent::ECT_DESTROYABLE)
+          value("shield",               CBaseComponent::ECT_SHIELD),
+          value("interactive",          CBaseComponent::ECT_INTERACTIVE),
+          value("destroyable",          CBaseComponent::ECT_DESTROYABLE),
+          value("nav_node",             CBaseComponent::ECT_NAV_NODE)
       ]
       .def("get_type",     &CBaseComponent::GetType)
       .def("get_entity",   &CBaseComponent::GetEntity)
@@ -303,23 +305,14 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("close",                    &CComponentDoor::Close)
       .def("block",                    &CComponentDoor::Block)
       .def_readwrite("time",           &CComponentDoor::m_fTime)
-  ];
-  
-
-
-  module(_pLS) [
-   
-    class_<CScriptedStateMachine>("ScriptedStateMachine")
-      .def("set_current_state",    &CScriptedStateMachine::SetCurrentState)
-      .def("change_state",         &CScriptedStateMachine::ChangeState)
-      .def("current_state",        &CScriptedStateMachine::CurrentState)
-      .def("revert_state",         &CScriptedStateMachine::RevertState)
-      .def("receive_event",        &CScriptedStateMachine::ReceiveEvent)
+    ,class_<CComponentNavNode, CBaseComponent>("ComponentNavNode")
+      .def("add_to_entity",            &CComponentNavNode::AddToEntity)
+      .def("get_graph_node_index",     &CComponentNavNode::GetGraphNodeIndex)
   ];
 }
 
 
-void RegisterCore(class_<CCore>& _Core)
+void RegisterCore_Entities(class_<CCore>& _Core)
 {
   _Core.def("get_entity_manager",              &CCore::GetEntityManager);
 }

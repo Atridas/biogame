@@ -73,7 +73,7 @@ public:
   int   GetNextFreeNodeIndex()const{return m_iNextNodeIndex;}
   
   //adds a node to the graph and returns its index
-  int   AddNode(CGraphNode node);
+  int   AddNode(const CGraphNode& node);
 
   //removes a node by setting its index to invalid_node_index
   void  RemoveNode(int node);
@@ -82,7 +82,7 @@ public:
   //edge passed as a parameter is valid before adding it to the graph. If the
   //graph is a digraph then a similar edge connecting the nodes in the opposite
   //direction will be automatically added.
-  void  AddEdge(CGraphEdge edge);
+  void  AddEdge(const CGraphEdge& edge);
 
   //removes the edge connecting from and to from the graph (if present). If
   //a digraph then the edge connecting the nodes in the opposite direction 
