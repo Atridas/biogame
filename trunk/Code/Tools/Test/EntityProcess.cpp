@@ -25,6 +25,8 @@
 #include "ComponentStateMachine.h"
 #include "ComponentAnimation.h"
 #include "ComponentIABrain.h"
+#include "IAManager.h"
+#include "GraphDefines.h"
 
 #include "PhysicActor.h"
 #include <PhysicsManager.h>
@@ -136,6 +138,8 @@ void CEntityProcess::RenderINFO(CRenderManager* _pRM)
     _pRM->SetTransform(i);
   
     _pRM->DrawFrustum(&l_Frustum, colBLACK);
+
+    CORE->GetIAManager()->GetGraph()->DebugRender(_pRM);
   }
 }
 

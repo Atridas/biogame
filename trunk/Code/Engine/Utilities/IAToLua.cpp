@@ -16,6 +16,8 @@ extern "C"
 #include "IAManager.h"
 #include "ScriptedStateMachine.h"
 #include "GraphDefines.h"
+#include "Heuristics.h"
+#include "SearchAStar.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -96,6 +98,33 @@ void RegisterIAToLua(lua_State* _pLS)
       .def("next",   &CSparseGraph::ConstNodeIterator::next)
       .def("end",    &CSparseGraph::ConstNodeIterator::end)
 
+    //GraphDefines
+    ,def("valid_neighbour", &ValidNeighbour)
+    ,def("GraphHelper_add_all_neighbours_to_grid_node",&GraphHelper_AddAllNeighboursToGridNode)
+    ,def("GraphHelper_create_grid",&GraphHelper_CreateGrid)
+    
+    //Heuristics
+    ,class_<CHeuristic>("Heuristic")
+      .def("calculate", &CHeuristic::Calculate)
+    ,class_<CHeuristicEuclid, CHeuristic>("HeuristicEuclid")
+      .def("calculate", &CHeuristicEuclid::Calculate)
+    ,class_<CHeuristicNoisyEuclidian,CHeuristic>("HeuristicNoisyEuclidian")
+      .def("calculate", &CHeuristicNoisyEuclidian::Calculate)
+    ,class_<CHeuristicDijkstra>("HeuristicDijkstra")
+      .def("calculate", &CHeuristicDijkstra::Calculate)
+      
+    ,def("get_heuristic_euclid",       &GetHeuristicEuclid)
+    ,def("get_heuristic_noisy_euclid", &GetHeuristicNoisyEuclid)
+    ,def("get_heuristic_dijkstra",     &GetHeuristicDijkstra)
+
+    //SearchAStar
+    ,class_<CSearchAStar>("SearchAStar")
+      .def(constructor<const CSparseGraph&,const CHeuristic*,int,int>())
+      .def("get_SPT"           ,  &CSearchAStar::GetSPT)
+      .def("get_path_to_target",  &CSearchAStar::GetPathToTarget)
+      .def("get_cost_to_target",  &CSearchAStar::GetCostToTarget)
+
+    //Scripted State Machine
     ,class_<CScriptedStateMachine>("ScriptedStateMachine")
       .def("set_current_state",    &CScriptedStateMachine::SetCurrentState)
       .def("change_state",         &CScriptedStateMachine::ChangeState)
