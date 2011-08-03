@@ -47,7 +47,11 @@ enum ECollisionGroup {
   ECG_OBJECTES_DINAMICS,
   ECG_EXPLOSIONS,
   ECG_RAY_SHOOT,
-  ECG_CAMERA
+  ECG_CAMERA,
+  ECG_RAGDOLL,
+
+  //aquest ha de ser l'últim sempre!!!!
+  ECG_LAST_GROUP
 };
 
 int GetCollisionGroup(const string& _szGroup);

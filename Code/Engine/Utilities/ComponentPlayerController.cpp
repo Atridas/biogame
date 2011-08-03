@@ -22,6 +22,7 @@
 #include "AnimatedCoreModel.h"
 #include "Material.h"
 
+#define BLOOD_FADEOUT_TIME 2.5
 
 CComponentPlayerController* CComponentPlayerController::AddToEntity(CGameEntity *_pEntity)
 {
@@ -66,13 +67,14 @@ void CComponentPlayerController::Update(float _fDeltaTime)
   const vector<CMaterial*>& l_vMaterials = m_pAnimatedModel->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetMaterials();
 
   CDrawQuadSceneEffect* l_pDamage = (CDrawQuadSceneEffect*)CORE->GetSceneEffectManager()->GetResource("damage");
+  CDrawQuadSceneEffect* l_pBlood = (CDrawQuadSceneEffect*)CORE->GetSceneEffectManager()->GetResource("blood_decal");
 
   float l_fHP = l_pComponentVida->GetHP();
   float l_fMaxHP = l_pComponentVida->GetMaxHP();
 
   float l_fMin = 0.3f;
   float l_fMax = 1.5f;
-  float l_fGlowIntensity = l_fHP/100 * (l_fMax - l_fMin) + l_fMin;
+  float l_fGlowIntensity = l_fHP/l_fMaxHP * (l_fMax - l_fMin) + l_fMin;
 
   vector<CMaterial*>::const_iterator l_itMaterial = l_vMaterials.begin();
 
@@ -100,7 +102,27 @@ void CComponentPlayerController::Update(float _fDeltaTime)
     }
   }
 
+  if(m_fBloodFadeOutTime > 0.0f)
+  {
+    l_pBlood->SetAlphaFactor(m_fBloodFadeOutTime/(float)BLOOD_FADEOUT_TIME);
+    l_pBlood->SetActive(true);
+
+    m_fBloodFadeOutTime -= _fDeltaTime;
+
+  }else{
+    l_pBlood->SetActive(false);
+    m_fBloodFadeOutTime = 0.0f;
+  }
+
+  
   m_fTime += _fDeltaTime;
+
+  //if(m_iNumUpdates < 3)
+  //  m_iNumUpdates++;
+  //if(m_iNumUpdates == 2)
+  //{
+  //  CComponentRagdoll::AddToEntity(GetEntity(), "Data/Animated Models/Riggle/Skeleton.xml", ECG_RAGDOLL);
+  //}
 }
 
 
@@ -217,8 +239,12 @@ void CComponentPlayerController::Use()
   
   for(l_itIt = l_itInit; l_itIt < l_itEnd; ++l_itIt)
   {
-    l_Missatge.Receiver = (*l_itIt)->GetEntity()->GetGUID();
-    l_pEM->SendEvent(l_Missatge);
+    CGameEntity* l_pEntity = (*l_itIt)->GetEntity();
+    if(l_pEntity)
+    {
+      l_Missatge.Receiver = l_pEntity->GetGUID();
+      l_pEM->SendEvent(l_Missatge);
+    }
   }
 }
 
@@ -325,6 +351,10 @@ void CComponentPlayerController::ReceiveEvent(const SEvent& _Event)
     {
       if(_Event.Info[0].Type == SEventInfo::STRING)
         AddPickUp(_Event.Info[0].str);
+    }else if(_Event.Msg == SEvent::REBRE_IMPACTE)
+    {
+      m_fBloodFadeOutTime = BLOOD_FADEOUT_TIME;
     }
+
   }
 }

@@ -138,6 +138,14 @@ bool CPhysicsManager::Init (const string& _physXConfig)
     }
     else
     {
+      for(int i = 0; i < ECG_LAST_GROUP; ++i)
+      {
+        for(int j = i+1; j < ECG_LAST_GROUP; ++j)
+        {
+          m_pScene->setGroupCollisionFlag(i,j,false);
+        }
+      }
+
       LOGGER->AddNewLog(ELL_INFORMATION, "Carregant init del PhysX Manager \"%s\"", _physXConfig.c_str());
       int l_iNumC = l_xmlPhysX.GetNumChildren();
       for(int i = 0; i < l_iNumC; ++i)
@@ -885,6 +893,10 @@ int GetCollisionGroup(const string& _szGroup)
   else if(_szGroup == "camera")
   {
     return ECG_CAMERA;
+  }
+  else if(_szGroup == "ragdoll")
+  {
+    return ECG_RAGDOLL;
   }
   else
   {

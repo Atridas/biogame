@@ -21,8 +21,11 @@
   
   <!-- Dispars -->
   <collision group1="ray shoot" group2="escenari" />
+  <!--
   <collision group1="ray shoot" group2="personatge" />
   <collision group1="ray shoot" group2="enemic" />
+-->
+  <collision group1="ray shoot" group2="ragdoll" />
   <collision group1="ray shoot" group2="objecte dinamic" />
   
   <!-- Càmara -->
@@ -30,4 +33,9 @@
   <!--<collision group1="camera" group2="objecte dinamic" />-->
 
   <collision group1="cobertura" group2="cobertura" />
+  
+  <!-- Ragdoll -->
+  <collision group1="ragdoll" group2="escenari"/>
+  <collision group1="ragdoll" group2="objecte dinamic"/>
+  <collision group1="ragdoll" group2="explosio"/>
 </physX>
