@@ -112,18 +112,27 @@ void CComponentIABrain::Shoot()
   }
 }
 
-
+void CComponentIABrain::Update(float _fDeltaTime)
+{
+  //if(m_iNumUpdates < 3)
+  //  m_iNumUpdates++;
+  //if(m_iNumUpdates == 2)
+  //{
+  //  CComponentRagdoll::AddToEntity(GetEntity(), m_szRagdollName, ECG_RAGDOLL);
+  //}
+}
 
 void CComponentIABrain::Die()
 {
   CComponentRagdoll *l_pRC = GetEntity()->GetComponent<CComponentRagdoll>();
   if(!l_pRC)
   {
-    if(!(l_pRC = CComponentRagdoll::AddToEntity(GetEntity(), m_szRagdollName, ECG_OBJECTES_DINAMICS)))
+    if(!(l_pRC = CComponentRagdoll::AddToEntity(GetEntity(), m_szRagdollName, ECG_RAGDOLL)))
     {
       return;
     }
-    GetEntity()->DeleteComponent(CBaseComponent::ECT_PHYSX_CONTROLLER);
+    
   }
+  GetEntity()->DeleteComponent(CBaseComponent::ECT_PHYSX_CONTROLLER);
   l_pRC->SetActive(true);
 }

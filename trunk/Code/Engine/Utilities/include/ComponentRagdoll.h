@@ -23,7 +23,7 @@ public:
   static CComponentRagdoll* AddToEntity(CGameEntity* _pEntity, const string& _szSkeletonFile, int _iCollisionGroup);
   void SetActive(bool _bActive);
   
-  virtual void UpdatePostAnim(float _fDeltaTime);
+  void UpdatePostAnim(float _fDeltaTime);
 
 protected:
   CComponentRagdoll():m_bActive(false),m_pRagdoll(0),m_pRAIM(0) {};

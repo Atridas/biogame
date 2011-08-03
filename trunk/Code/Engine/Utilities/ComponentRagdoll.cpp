@@ -65,6 +65,7 @@ void CComponentRagdoll::SetActive(bool _bActive)
 
 void CComponentRagdoll::UpdatePostAnim(float _fDeltaTime)
 {
+  
   if(m_bActive)
   {
     m_pRagdoll->Update();
@@ -89,5 +90,14 @@ void CComponentRagdoll::UpdatePostAnim(float _fDeltaTime)
     m_pRAIM->GetBoundingSphere()->Init(l_BB.GetMiddlePoint() - m.GetTranslationVector(), l_BS.GetRadius());
 
     //Això funciona però encara no se sap pq.
+  }
+  else
+  {
+    Mat44f m;
+    m_pRAIM->GetMat44(m);
+    m_pRagdoll->SetTransform(m);
+    
+
+    m_pRagdoll->Update();
   }
 }

@@ -37,7 +37,7 @@ bool CPhysxSkeleton::Init(const string& _szFileName, CalModel* _pCalModel, Mat44
     CPhysxBone* l_pPhysXBone = new CPhysxBone(l_pBone->getCoreBone()->getName());
     l_pPhysXBone->Init(l_pBone,_vMat,_iColisionGroup);
     m_vBones.push_back(l_pPhysXBone);
-    
+
   }
 
 
@@ -475,10 +475,8 @@ void CPhysxSkeleton::SetRagdollActive(bool _bRagdollActive)
 
   if(m_bRagdollActive)
   {
-    SleepPhysxBones();
+    //SleepPhysxBones();
     WakeUpPhysxBones();
-    
-    
   }
   else
   {
@@ -500,6 +498,7 @@ void CPhysxSkeleton::WakeUpPhysxBones()
       //l_pActor->GetPhXActor()->raiseBodyFlag(NX_);
       l_pActor->GetPhXActor()->clearBodyFlag(NX_BF_DISABLE_GRAVITY);
       l_pActor->GetPhXActor()->wakeUp();
+      l_pActor->GetPhXActor()->clearBodyFlag(NX_BF_KINEMATIC);
       
     }
   }
@@ -515,6 +514,8 @@ void CPhysxSkeleton::SleepPhysxBones()
     {
       l_pActor->GetPhXActor()->putToSleep();
       l_pActor->GetPhXActor()->raiseBodyFlag(NX_BF_DISABLE_GRAVITY);
+      l_pActor->GetPhXActor()->raiseBodyFlag(NX_BF_KINEMATIC);
+      
     }
   }
 };

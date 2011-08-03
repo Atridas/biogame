@@ -24,6 +24,7 @@
 #include "ComponentInteractive.h"
 #include "ComponentDestroyable.h"
 #include "ComponentNavNode.h"
+#include "ComponentRagdoll.h"
 
 #include "PhysicsManager.h"
 
@@ -525,20 +526,22 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
   CComponentMirilla::AddToEntity(l_pPlayer, "laser_pilota");
   CComponentArma::AddToEntity(l_pPlayer, "ARMA");
 
+  CComponentRagdoll::AddToEntity(l_pPlayer, "Data/Animated Models/Riggle/Skeleton.xml", ECG_RAGDOLL);
+
 
   return l_pPlayer;
 }
 
 CGameEntity* CEntityManager::InitMiner(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName)
 {
-  return InitEnemy(_szPlayerName, _vPosition, 
+  return InitEnemy(_szPlayerName, _vPosition, 1.f, 
                     "State_Enemy_Idle", "miner", "Data/Animated Models/Miner/Skeleton.xml",
                     _szEntityName);
 }
 
 CGameEntity* CEntityManager::InitMilitar(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName)
 {
-  CGameEntity* l_pMilitar = InitEnemy(_szPlayerName, _vPosition, 
+  CGameEntity* l_pMilitar = InitEnemy(_szPlayerName, _vPosition, 0.7f, 
                     "State_Enemy_Idle", "Militar", "Data/Animated Models/Militar/Skeleton.xml",
                     _szEntityName);
 
@@ -547,7 +550,7 @@ CGameEntity* CEntityManager::InitMilitar(const string& _szPlayerName, const Vect
   return l_pMilitar;
 }
 
-CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f& _vPosition,
+CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f& _vPosition, float _fRadius,
                          const string& _szInitialState, const string& _szRenderableModel, const string& _szRagdollModell,
                          const string& _szEntityName)
 {
@@ -562,7 +565,7 @@ CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f
   l_pComponentObject3D->SetPosition(_vPosition);
   CComponentMovement::AddToEntity(l_peEnemy);
 
-  CComponentPhysXController::AddToEntity(l_peEnemy, 0.7f, 1.5f, 10.0f, 0.1f, 0.5f,  ECG_ENEMICS );
+  CComponentPhysXController::AddToEntity(l_peEnemy, _fRadius, 1.5f, 10.0f, 0.1f, 0.5f,  ECG_ENEMICS );
 
 
   stringstream l_szInstanceModelName(_szRenderableModel);
@@ -580,6 +583,8 @@ CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f
   CComponentVida::AddToEntity(l_peEnemy, 100.f, 100.f);
 
   CComponentStateMachine::AddToEntity(l_peEnemy, _szInitialState);
+
+  CComponentRagdoll::AddToEntity(l_peEnemy, _szRagdollModell, ECG_RAGDOLL);
 
   return l_peEnemy;
 }

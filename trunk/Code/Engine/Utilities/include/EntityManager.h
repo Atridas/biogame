@@ -43,7 +43,7 @@ public:
 
   CGameEntity* InitPlayer(const string& _szEntityName, const Vect3f& _vPosition, float _fYaw);
 
-  CGameEntity* InitEnemy(const string& _szPlayerName, const Vect3f& _vPosition,
+  CGameEntity* InitEnemy(const string& _szPlayerName, const Vect3f& _vPosition, float _fRadius,
                          const string& _szInitialState, const string& _szRenderableModel, const string& _szRagdollModell,
                          const string& _szEntityName = "");
 

@@ -61,15 +61,20 @@ protected:
       m_fSpeed(1),
 
       m_fTime(0),
+      m_fBloodFadeOutTime(0.0f),
 
       m_vCoverNormal(Vect3f(0.0f)),
-      m_vCoverPosition(Vect3f(0.0))
+      m_vCoverPosition(Vect3f(0.0)),
+
+      m_iNumUpdates(0)
      
       {};
   bool Init(CGameEntity *_pEntity);
   virtual void Release() { m_vPickUps.clear(); };
 
 private:
+
+  float m_fBloodFadeOutTime;
 
   CPhysicUserData* CheckCover(SCollisionInfo& _sCInfo);
   //Altres components referenciats
@@ -79,6 +84,7 @@ private:
   CRenderableAnimatedInstanceModel* m_pAnimatedModel;
 
   vector<string> m_vPickUps;
+  int m_iNumUpdates;
 };
 
 #endif
