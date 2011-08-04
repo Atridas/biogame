@@ -141,7 +141,7 @@ bool CPhysxBone::AddSphereActor(CXMLTreeNode _XMLObjects, CGameEntity* _pEntity)
   l_pUserData->SetColor(colYELLOW);
   l_pUserData->SetEntity(_pEntity);
   CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
-  l_pActor->AddSphereShape(l_vSize.x*0.5f,Vect3f(l_fMiddlePoint.x,0.0f,0.0f),NULL,GROUP_COLLIDABLE_PUSHABLE);
+  l_pActor->AddSphereShape(l_vSize.x*0.5f,Vect3f(l_fMiddlePoint.x,0.0f,0.0f),NULL,m_iCollisionGroup);
   l_pActor->CreateBody(l_fDensity,1.0f);
 
   l_pPM->AddPhysicActor(l_pActor);

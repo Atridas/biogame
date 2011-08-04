@@ -63,12 +63,13 @@ void CComponentRagdoll::SetActive(bool _bActive)
   }
 }
 
-void CComponentRagdoll::UpdatePostAnim(float _fDeltaTime)
+void CComponentRagdoll::PostUpdate(float _fDeltaTime)
 {
-  
+  m_pRagdoll->Update();
+
   if(m_bActive)
   {
-    m_pRagdoll->Update();
+    //m_pRagdoll->Update();
     Mat44f m = m_pRagdoll->GetTransform();
     m_pRAIM->SetMat44(m);
 
@@ -93,11 +94,9 @@ void CComponentRagdoll::UpdatePostAnim(float _fDeltaTime)
   }
   else
   {
+    //m_pRagdoll->Update();
     Mat44f m;
     m_pRAIM->GetMat44(m);
     m_pRagdoll->SetTransform(m);
-    
-
-    m_pRagdoll->Update();
   }
 }

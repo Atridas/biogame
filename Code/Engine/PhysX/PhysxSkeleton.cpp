@@ -492,12 +492,12 @@ void CPhysxSkeleton::WakeUpPhysxBones()
 
     if (l_pActor != 0)
     {
-      //l_pActor->GetPhXActor()->setSleepAngularVelocity(0.0f);
-      l_pActor->GetPhXActor()->setSleepEnergyThreshold(0.0f);
-      //l_pActor->GetPhXActor()->setSleepLinearVelocity(0.0f);
-      //l_pActor->GetPhXActor()->raiseBodyFlag(NX_);
-      l_pActor->GetPhXActor()->clearBodyFlag(NX_BF_DISABLE_GRAVITY);
-      l_pActor->GetPhXActor()->wakeUp();
+      ////l_pActor->GetPhXActor()->setSleepAngularVelocity(0.0f);
+      //l_pActor->GetPhXActor()->setSleepEnergyThreshold(0.0f);
+      ////l_pActor->GetPhXActor()->setSleepLinearVelocity(0.0f);
+      ////l_pActor->GetPhXActor()->raiseBodyFlag(NX_);
+      //l_pActor->GetPhXActor()->clearBodyFlag(NX_BF_DISABLE_GRAVITY);
+      //l_pActor->GetPhXActor()->wakeUp();
       l_pActor->GetPhXActor()->clearBodyFlag(NX_BF_KINEMATIC);
       
     }
@@ -512,8 +512,8 @@ void CPhysxSkeleton::SleepPhysxBones()
 
     if (l_pActor != 0)
     {
-      l_pActor->GetPhXActor()->putToSleep();
-      l_pActor->GetPhXActor()->raiseBodyFlag(NX_BF_DISABLE_GRAVITY);
+      //l_pActor->GetPhXActor()->putToSleep();
+      //l_pActor->GetPhXActor()->raiseBodyFlag(NX_BF_DISABLE_GRAVITY);
       l_pActor->GetPhXActor()->raiseBodyFlag(NX_BF_KINEMATIC);
       
     }
