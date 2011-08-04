@@ -95,6 +95,7 @@ void CPhysicController::CreateController (NxController* controller, NxScene* sce
 	assert(m_pPhXScene);
 	assert(m_pPhXController);
 	CHECKED_DELETE(m_pPhXControllerDesc);
+
 }
 
 void CPhysicController::SetPosition	(const Vect3f& pos)

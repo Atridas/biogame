@@ -584,7 +584,7 @@ CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f
 
   CComponentStateMachine::AddToEntity(l_peEnemy, _szInitialState);
 
-  CComponentRagdoll::AddToEntity(l_peEnemy, _szRagdollModell, ECG_RAGDOLL);
+  //CComponentRagdoll::AddToEntity(l_peEnemy, _szRagdollModell, ECG_RAGDOLL);
 
   return l_peEnemy;
 }
