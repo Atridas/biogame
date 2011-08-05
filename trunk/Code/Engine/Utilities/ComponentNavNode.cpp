@@ -5,11 +5,11 @@
 #include "GraphDefines.h"
 #include "ComponentObject3D.h"
 
-CComponentNavNode* CComponentNavNode::AddToEntity(CGameEntity* _pEntity)
+CComponentNavNode* CComponentNavNode::AddToEntity(CGameEntity* _pEntity, bool _bAutoroute, float _fMaxAutoDistance, const set<string>& _DefaultEdges)
 {
   CComponentNavNode *l_pComp = new CComponentNavNode();
   assert(_pEntity && _pEntity->IsOk());
-  if(l_pComp->Init(_pEntity))
+  if(l_pComp->Init(_pEntity, _bAutoroute, _fMaxAutoDistance, _DefaultEdges))
   {
     l_pComp->SetEntity(_pEntity);
     return l_pComp;
@@ -21,7 +21,7 @@ CComponentNavNode* CComponentNavNode::AddToEntity(CGameEntity* _pEntity)
   }
 }
 
-bool CComponentNavNode::Init(CGameEntity* _pEntity)
+bool CComponentNavNode::Init(CGameEntity* _pEntity, bool _bAutoroute, float _fMaxAutoDistance, const set<string>& _DefaultEdges)
 {
   CComponentObject3D* m_pCO3D = _pEntity->GetComponent<CComponentObject3D>();
   if(!m_pCO3D)
@@ -40,6 +40,10 @@ bool CComponentNavNode::Init(CGameEntity* _pEntity)
 
   l_pGraph->AddNode(l_GraphNode);
   m_iGraphNodeIndex = l_GraphNode.GetIndex();
+
+  m_bAutoroute       = _bAutoroute;
+  m_DefaultEdges     = _DefaultEdges;
+  m_fMaxAutoDistance = _fMaxAutoDistance;
 
   SetOk(true);
   return IsOk();

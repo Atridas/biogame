@@ -78,6 +78,9 @@ bool CEntityProcess::Init()
 
   m_pSpotLight->SetActive(true);
 
+
+  CORE->GetIAManager()->TraceEdges();
+
   SetOk(true);
   return IsOk();
 }
@@ -139,8 +142,8 @@ void CEntityProcess::RenderINFO(CRenderManager* _pRM)
   
     _pRM->DrawFrustum(&l_Frustum, colBLACK);
 
-    CORE->GetIAManager()->GetGraph()->DebugRender(_pRM);
   }
+    CORE->GetIAManager()->GetGraph()->DebugRender(_pRM);
 }
 
 bool CEntityProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
