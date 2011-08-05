@@ -31,7 +31,8 @@ void RegisterIAToLua(lua_State* _pLS)
   module(_pLS) [
 
     class_<CIAManager, CBaseControl>("IAManager")
-      .def("get_graph",         &CIAManager::GetGraph)
+      .def("get_graph",         &CIAManager::GetGraph       )
+      .def("get_closest_node"  ,&CIAManager::GetClosestNode ) 
 
     ,class_<CGraphNode, CBaseControl>("GraphNode")
       .def(constructor<>())
@@ -58,7 +59,8 @@ void RegisterIAToLua(lua_State* _pLS)
       .def(constructor<bool>())
       .def("get_node"                 ,(const CGraphNode&(CSparseGraph::*)(int)const)&CSparseGraph::GetNode              ) // const CGraphNode&  GetNode(int idx)const;
       .def("get_node"                 ,(      CGraphNode&(CSparseGraph::*)(int)     )&CSparseGraph::GetNode              ) // CGraphNode&  GetNode(int idx);
-      .def("get_closest_node"         ,&CSparseGraph::GetClosestNode       ) 
+      //No vui que es faci servir aquesta funció, s'ha de fer servir la de l'IAManager
+      //.def("get_closest_node"         ,&CSparseGraph::GetClosestNode       ) 
       .def("get_edge"                 ,(const CGraphEdge&(CSparseGraph::*)(int, int)const)&CSparseGraph::GetEdge              ) // const CGraphEdge& GetEdge(int from, int to)const;
       .def("get_edge"                 ,(      CGraphEdge&(CSparseGraph::*)(int, int)     )&CSparseGraph::GetEdge              ) // CGraphEdge& GetEdge(int from, int to);
       .def("get_next_free_node_index" ,&CSparseGraph::GetNextFreeNodeIndex ) 

@@ -898,6 +898,10 @@ int GetCollisionGroup(const string& _szGroup)
   {
     return ECG_RAGDOLL;
   }
+  else if(_szGroup == "ray ia graph")
+  {
+    return ECG_RAY_IA_GRAPH;
+  }
   else
   {
     return 0;

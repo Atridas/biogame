@@ -11,6 +11,7 @@
 #include "OmniLight.h"
 #include "ParticleManager.h"
 #include "BillBoardManager.h"
+#include "IAManager.h"
 
 #include "Core.h"
 
@@ -67,7 +68,8 @@ bool CGameProcess::Init()
   m_pOmniLight = CORE->GetLightManager()->CreateOmniLight("OmniViewerLight",Vect3f(0.0f),CColor(l_vOmniColor),0.1f,17.0f);
   m_pOmniLight->SetActive(true);*/
 
-
+  
+  CORE->GetIAManager()->TraceEdges();
   CORE->GetParticleManager()->SetAllEmittersActive(true);
 
   SetOk(true);

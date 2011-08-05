@@ -387,7 +387,8 @@ function XMLEntityDestroyable _instance &_TagName =
 )
 
 --Genera els paràmetres d'un tag XML d'entitat NavNode. Conté:
--- de moment res
+-- autoroute
+-- maxDistance
 function XMLEntityNavNode _instance &_TagName =
 (
 	local l_params = #()
@@ -395,5 +396,17 @@ function XMLEntityNavNode _instance &_TagName =
 	
 	_TagName = "NavNode"
 	
+	if  (GetUserProp _instance "autoroute") != undefined then
+	(
+		l_ss = "" as stringStream
+		format "%" (GetUserProp _instance "autoroute") to:l_ss
+		append l_params #("autoroute", l_ss)
+	)
+	if (GetUserProp _instance "maxNavDistance") != undefined then
+	(
+		l_ss = "" as stringStream
+		format "%" (GetUserProp _instance "maxNavDistance") to:l_ss
+		append l_params #("maxDistance", l_ss)
+	)
 	return l_params
 )

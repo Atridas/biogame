@@ -260,8 +260,10 @@ void LoadComponentNavNode(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 {
 
   LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant NavNode.");
+  bool l_bAutoroute = _TreeComponent.GetBoolProperty("autoroute", true, false);
+  float l_fMaxautoroute = _TreeComponent.GetFloatProperty("maxDistance", -1, false);
 
-  if(!CComponentNavNode::AddToEntity(_pEntity))
+  if(!CComponentNavNode::AddToEntity(_pEntity, l_bAutoroute, l_fMaxautoroute))
   {
     LOGGER->AddNewLog(ELL_WARNING,"\tError al crear el component NavNode de l'objecte \"%s\"",_pEntity->GetName());
   }
