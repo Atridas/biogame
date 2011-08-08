@@ -4,6 +4,8 @@
 #include "ComponentNavNode.h"
 #include "Core.h"
 #include "PhysicsManager.h"
+#include "SearchAStar.h"
+#include "Heuristics.h"
 
 
 bool CIAManager::Init()
@@ -109,4 +111,53 @@ int CIAManager::GetClosestNode(const Vect3f& _vPosition)
 {
   //TODO optimitzacions
   return m_pGraph->GetClosestNode(_vPosition);
+}
+
+
+vector<CGraphNode*> CIAManager::SearchPath   (const Vect3f& _vOrigin, const Vect3f& _vDestination)
+{
+  vector<CGraphNode*> Path_;
+
+  int l_iOrigin      = GetClosestNode(_vOrigin);
+  int l_iDestination = GetClosestNode(_vDestination);
+
+  if(l_iOrigin == l_iDestination)
+  {
+    Path_.push_back( &(m_pGraph->GetNode(l_iDestination)) );
+    return Path_;
+  }
+
+
+  CSearchAStar search( *m_pGraph, &CHeuristicEuclid::instance, l_iOrigin, l_iDestination);
+
+  list<int> l_Path = search.GetPathToTarget();
+
+  list<int>::iterator l_it  = l_Path.begin();
+  list<int>::iterator l_end = l_Path.end();
+
+  for(;l_it != l_end; ++l_it)
+  {
+    Path_.push_back( &(m_pGraph->GetNode(*l_it)) );
+  }
+
+  return Path_;
+}
+
+vector<Vect3f>      CIAManager::SearchPathVec(const Vect3f& _vOrigin, const Vect3f& _vDestination)
+{
+  vector<CGraphNode*> l_Path = SearchPath(_vOrigin, _vDestination);
+  vector<Vect3f> Path_;
+  
+  Path_.push_back(_vOrigin);
+
+  vector<CGraphNode*>::iterator l_it  = l_Path.begin();
+  vector<CGraphNode*>::iterator l_end = l_Path.end();
+
+  for(;l_it != l_end; ++l_it)
+  {
+    Path_.push_back((*l_it)->GetPosition());
+  }
+  
+  Path_.push_back(_vDestination);
+  return Path_;
 }

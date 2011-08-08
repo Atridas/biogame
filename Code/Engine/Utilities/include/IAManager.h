@@ -22,6 +22,9 @@ public:
 
   void TraceEdges();
   int GetClosestNode(const Vect3f& _vPosition); //Utilitzar aquest, i no el del graf!!!! El del graf no s'optimitzarà!
+  
+  vector<CGraphNode*> SearchPath   (const Vect3f& _vOrigin, const Vect3f& _vDestination);
+  vector<Vect3f>      SearchPathVec(const Vect3f& _vOrigin, const Vect3f& _vDestination);
 
 protected:
   virtual void Release();
