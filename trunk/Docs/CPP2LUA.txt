@@ -1,0 +1,1115 @@
+GLOBALS
+  Methods:
+    log(const string)
+    exit()
+
+  Class:
+			Vect2f
+			Vect2f
+			
+			Constructor:
+				constructor<>()
+				constructor<const Vect2f&>()
+				constructor<const float>()
+				constructor<const float, const float>()
+			
+			Methods:
+				length
+				Length
+				
+				length_sq
+				SquaredLength
+				
+				normalize
+				Normalize
+			
+			Operators:
+				const_self    + const_self
+				const_self    - const_self
+				const_self    * const_self
+				const_self    * float
+				float   		  * const_self
+				const_self    / float
+			
+			Attributes:
+				x
+				x
+				
+				y
+				y
+  
+  Class:
+			Vect2i
+			Vect2i
+			
+			Constructor:
+				constructor<>()
+				constructor<const Vect2i&>()
+				constructor<const int>()
+				constructor<const int, const int>()
+			
+			Methods:
+				length
+				Length
+				
+				length_sq
+				SquaredLength
+			
+			Operators:
+				const_self    + const_self
+				const_self    - const_self
+				const_self    * const_self
+				const_self    * int
+				int      		  * const_self
+				const_self    / int
+			
+			Attributes:
+				x
+				x
+				
+				y
+				y
+  
+  Class:
+    Vect3f
+    Vect3f
+    
+    Constructor:
+      constructor<>()
+      constructor<const Vect3f&>()
+      constructor<const float>()
+      constructor<const float, const float, const float>()
+      
+    Methods:
+      length
+      Length
+      
+      length_sq
+      SquaredLength
+      
+      normalize
+      Normalize
+      
+      get_proj_zx
+      GetProjZX
+      
+      get_angle_y
+      GetAngleY
+      
+    Operators:    
+      const_self    + const_self
+      const_self    - const_self
+      const_self    * const_self
+      const_self    ^ const_self
+      const_self    * float
+      float         * const_self
+      const_self    / float
+    
+    Attributes:
+      x
+      x
+      
+      y
+      y
+      
+      z
+      z
+      
+  Class:
+    Vect3i
+    Vect3i
+    
+    Constructor:
+      constructor<>()
+      constructor<const Vect3i&>()
+      constructor<const int>()
+      constructor<const int, const int, const int>()
+      
+    Methods:
+      length
+      Length
+      
+      length_sq
+      SquaredLength
+      
+    Operators:    
+      const_self    + const_self
+      const_self    - const_self
+      const_self    * const_self
+      const_self    ^ const_self
+      const_self    * int
+      int           * const_self
+      const_self    / int
+    
+    Attributes:
+      x
+      x
+      
+      y
+      y
+      
+      z
+      z
+	
+ENGINE
+  GETTERS DE MANAGERS
+      CORE
+      CONSOLE
+      RENDERABLE_OBJECTS_MANAGER / ROM
+      STATIC_MESH_MANAGER / SMM
+      LIGHT_MANAGER / LM
+      SCRIPT_MANAGER / SM
+      INPUT_MANAGER / IM
+      ACTION_MANAGER / AM
+      PARTICLE_MANAGER / PM
+      SOUND_MANAGER / SOUND
+      ENTITY_MANAGER / EM
+      IA_MANAGER / IA
+      GUI_MANAGER
+      ENGINE
+	
+  BASE
+    Class:
+      Object3D
+      CObject3D
+      
+      Constructor:
+        constructor<>()
+        constructor<Vect3f,float,float,float>()
+        
+      Methods:
+        get_yaw
+        GetYaw
+        
+        get_roll
+        GetRoll
+        
+        get_pitch
+        GetPitch
+        
+        get_position
+        GetPosition
+        
+        get_visible
+        GetVisible
+        
+        set_yaw
+        SetYaw
+        
+        set_roll
+        SetRoll
+        
+        set_pitch
+        SetPitch
+        
+        set_position
+        SetPosition
+        
+        set_visible
+        SetVisible
+  
+    Class:
+      BaseControl
+      CBaseControl
+    
+    Methods:
+      is_ok
+      IsOk
+      
+      Done
+      Done
+      
+  CORE
+    Class:
+      Core
+      CCore
+      
+      Methods:
+        get_renderable_objects_manager
+        GetRenderableObjectsManager
+        
+        get_console
+        GetConsole
+        
+        get_gui_manager
+        GetGUIManager
+        
+        get_light_manager
+        GetLightManager
+        
+        get_static_mesh_manager
+        GetStaticMeshManager
+        
+        get_engine
+        GetEngine
+        
+        get_script_manager
+        GetScriptManager
+        
+        get_input_manager
+        GetInputManager
+        
+        get_action_manager
+        GetActionManager
+        
+        get_particle_manager
+        GetParticleManager
+        
+        get_sound_manager
+        GetSoundManager
+        
+        get_entity_manager
+        GetEntityManager
+        
+        get_ia_manager
+        GetIAManager
+        
+    Class:
+      Process
+      CProcess
+      
+    Class:
+      Engine
+      CEngine
+      
+      Methods:
+        get_active_process
+        GetActiveProcess
+        
+        set_exit
+        SetExit
+        
+        get_exit
+        GetExit
+  
+  GRAPHICS
+    Class:
+      RenderableObjectMapManager
+      CMapManager<CRenderableObject>
+      
+    Class:
+      RenderableObjectsManager
+      CRenderableObjectsManager
+      
+      Methods:
+        get_resource
+        GetResource
+        
+        add_static
+        AddMeshInstance
+        
+        add_animated
+        AddAnimatedModel
+        
+        add_resource
+        AddResource
+        
+        set_instanced
+        SetInstanced
+        
+        reload
+        Reload
+        
+        reload_file
+        Reload
+        
+    Class:
+      StaticMeshMapManager
+      CMapManager<CStaticMesh>
+      
+    Class:
+      StaticMeshManager
+      CStaticMeshManager
+      
+      Methods:
+        add_file
+        AddXMLFile
+        
+        reload
+        Reload
+        
+    Class:
+      RenderableObject
+      CRenderableObject
+    
+    Class:
+      InstanceMesh
+      CInstanceMesh
+      
+    Class:
+      AnimatedInstance
+      CRenderableAnimatedInstance
+      
+    Class:
+      LightMapManager
+      CMapManager<CLight>
+      
+    Class:
+      LightManager
+      CLightManager
+      
+      Methods:
+        load
+        Load
+        
+    Class:
+      ScriptManager
+      CScriptManager
+      
+      Methods:
+        reload
+        Reload
+        
+    Class:
+      ParticleManager
+      CParticleManager
+      
+      Methods:
+        reload
+        Reload
+        
+        load
+        Load
+        
+  SOUND  
+    Class:
+      SoundManager
+      CSoundManager
+      
+      Methods:
+        play_sample
+        PlaySample
+        
+        play_sample_3D
+        PlaySample3D
+        
+        change_music
+        Change_music
+        
+        play_music
+        PlayMusic
+        
+        set_music_position_3D
+        SetMusic3DPosition
+        
+        stop_all
+        StopAll
+        
+        stop_musics
+        StopMusics
+        
+        stop_sounds
+        StopSounds
+        
+        set_master_volume
+        SetMasterVolume
+        
+        pause_music
+        Pause
+        
+        resume_music
+        Resume
+        
+        fade_music_volume
+        FadeMusicVolume
+      
+  INPUT
+    Class:
+      InputManager
+      CInputManager
+      
+      Methods:
+        get_mouse_delta
+        GetMouseDelta
+        
+    Class:
+      ActionManager
+      CActionManager
+      
+      Methods:
+        is_action_active
+        IsActionActive
+        
+    
+	GUI
+    Class:
+      Console
+      CConsole
+      
+      Methods:
+        toggle
+        Toggle
+        
+		Class:
+			CGUIManager
+			CGUIManager
+			
+			Constructor:
+				<const Vect2i&>()
+			Methods:
+				lua: activeWindows
+				c++: ActiveWindows
+				
+				activeWindowsWithEffect
+				ActiveWindowsWithEffect
+				
+				pushWindows
+				PushWindows
+				
+				popWindows
+				PopWindows
+				
+				setScreenResolution
+				SetScreenResolution
+				
+				loadGuiFiles
+				LoadGuiFiles
+				
+				reloadGui
+				ReloadGuiFiles
+				
+				setMessageBox
+				SetMessageBox
+				
+				isVisibleMessage
+				IsVisibleMessage
+				
+				setVisiblePointerMouse
+				SetVisiblePointerMouse
+				
+				setActiveGuiElement
+				SetActiveGuiElement
+				
+				setVisibleGuiElement
+				SetVisibleGuiElement
+				
+				getProgressBarValue
+				GetProgressBarValue
+				
+				setProgressBarValue
+				SetProgressBarValue
+				
+				nextBlockInRadioBox
+				NextBlockInRadioBox
+				
+				prevBlockInRadioBox
+				PrevBlockInRadioBox
+				
+				getButtonCheckInRadioBox
+				GetButtonCheckInRadioBox
+				
+				setButtonCheckInRadioBox
+				SetButtonCheckInRadioBox
+				
+				setStateCheckButton
+				SetStateCheckButton
+				
+				getStateCheckButton
+				GetStateCheckButton
+				
+				setStateSlider
+				SetStateSlider
+				
+				getStateSlider
+				GetStateSlider
+				
+				setLiteralInStaticText
+				SetLiteralInStaticText
+				
+				setEditableTextBox
+				SetEditableTextBox
+				
+				getEditableTextBox
+				GetEditableTextBox
+				
+				setImage
+				SetImage
+				
+				getImage
+				GetImage
+				
+				playImage
+				PlayImage
+		
+ENTITIES
+  Class:
+    EventInfo
+    SEventInfo
+    
+    Enum:
+      int
+      INT
+      
+      float
+      FLOAT
+      
+      vector
+      VECTOR
+      
+      string
+      STRING
+    
+    Methods:
+      set_str
+      SetStr
+    
+    Attributes:
+      Type
+      Type
+      
+      i
+      i
+      
+      f
+      f
+      
+      v
+      v
+      
+      str
+      str
+      
+  Class:
+    Event
+    SEvent
+    
+    Enum:
+      rebre_impacte
+      REBRE_IMPACTE
+      
+      morir
+      MORIR
+      
+      obrir
+      OBRIR
+      
+      tancar
+      TANCAR
+      
+      pickup
+      PICKUP
+      
+      interaccio
+      INTERACCIO
+      
+    Methods:
+      get_info
+      GetInfo
+      
+      set_info
+      SetInfo
+      
+    Attributes:
+      sender
+      Sender
+      
+      receiver
+      Receiver
+      
+      msg
+      Msg
+      
+      dispatch_time
+      DispatchTime
+      
+  Class:
+    BaseComponent
+    CBaseComponent
+    
+    Enum:
+      object_3d
+      ECT_OBJECT_3D
+      
+      movement
+      ECT_MOVEMENT
+      
+      player_controller
+      ECT_PLAYER_CONTROLLER
+      
+      ia_walk_to_player
+      ECT_IA_WALK_TO_PLAYER
+      
+      physx_controller
+      ECT_PHYSX_CONTROLLER
+      
+      physx_controller
+      ECT_PHYSX_ACTOR
+      
+      renderable_object
+      ECT_RENDERABLE_OBJECT
+      
+      thps_camera
+      ECT_3RD_PERSON_SHOOTER_CAMERA
+      
+      trigger
+      ECT_TRIGGER
+      
+      vida
+      ECT_VIDA
+      
+      laser
+      ECT_LASER
+      
+      state_machine
+      ECT_STATE_MACHINE
+      
+      animation
+      ECT_ANIMATION
+      
+      ia_brain
+      ECT_IA_BRAIN
+      
+      ragdoll
+      ECT_RAGDOLL
+      
+      cover
+      ECT_COVER
+      
+      mirilla
+      ECT_MIRILLA
+      
+      door
+      ECT_DOOR
+      
+      shield
+      ECT_SHIELD
+      
+      interactive
+      ECT_INTERACTIVE
+      
+      destroyable
+      ECT_DESTROYABLE
+      
+      nav_node
+      ECT_NAV_NODE
+      
+    Methods:
+      get_type
+      GetType
+      
+      get_entity
+      GetEntity
+      
+      is_type
+      IsType
+      
+      receive_event
+      ReceiveEvent
+      
+  Class:
+    GameEntity
+    CGameEntity
+    
+    Methods:
+      get_guid
+      GetGUID
+      
+      get_component
+      GetComponent
+      
+      get_name
+      GetName
+      
+      delete_component
+      DeleteComponent
+      
+  Class:
+    EntityManager
+    CEntityManager
+    
+    Methods:
+      create_entity
+      CreateEntity
+      
+      set_name_from_id
+      SetName
+      
+      set_name
+      SetName
+      
+      get_entity
+      GetEntity
+      
+      get_entity
+      GetEntity
+      
+      get_entity_from_name
+      GetEntity
+      
+      remove_entity_from_id
+      RemoveEntity
+      
+      remove_entity
+      RemoveEntity
+      
+      remove_entity
+      RemoveEntity
+      
+      send_event
+      SendEvent
+      
+      get_event
+      GetEvent
+      
+      load_entities
+      LoadEntitiesFromXML
+      
+      init_player
+      InitPlayer
+      
+      init_enemy
+      InitEnemy
+      
+      init_miner
+      InitMiner
+      
+      init_militar
+      InitMilitar
+      
+  Class:
+    ComponentObject3D
+    CComponentObject3D
+    
+    Methods:
+      add_to_entity
+      AddToEntity
+      
+  Class:
+    ComponentPlayerController
+    CComponentPlayerController
+    
+    Methods:
+      add_to_entity
+      AddToEntity
+      
+      shoot
+      Shoot
+      
+      cover
+      Cover
+      
+      use
+      Use
+      
+      die
+      Die
+      
+      respawn
+      Respawn
+      
+      has_pickup
+      HasPickUp
+      
+      add_pickup
+      AddPickUp
+      
+      remove_pickup
+      RemovePickUp
+      
+    Attributes:
+      pos_inicial
+      m_vPosInicial
+      
+      speed
+      m_fSpeed
+      
+      current_animation
+      m_szCurrentAnimation
+      
+      time
+      m_fTime
+      
+      cover_normal
+      m_vCoverNormal
+      
+      cover_position
+      m_vCoverPosition
+      
+      cover_entity
+      m_pCoverEntity
+      
+  Class:
+    Component3rdPSCamera
+    CComponent3rdPSCamera
+    
+    Methods:
+      add_to_entity
+      AddToEntity
+      
+    Attributes:
+      camera_height
+      m_fCameraHeight
+      
+      camera_right
+      m_fCameraRight
+      
+  Class:
+    ComponentPhysXController
+    CComponentPhysXController
+    
+    Methods:
+      add_to_entity
+      AddToEntity
+      
+      set_height
+      SetHeight
+      
+  Class:
+    ComponentPhysXBox
+    CComponentPhysXBox
+    
+    Methods:
+      add_to_entity
+      AddToEntity
+      
+      add_to_entity
+      AddToEntity
+      
+      activate
+      Activate
+      
+  Class:
+    ComponentRenderableObject
+    CComponentRenderableObject
+    
+    Methods:
+      add_to_entity
+      AddToEntity
+      
+      add_to_entity_with_animated_model
+      AddToEntityWithAnimatedModel
+      
+      set_yaw
+      SetYaw
+      
+    Attributes:
+      remove_renderable_object
+      m_bRemoveRenderableObject
+      
+      active
+      m_bActive
+      
+      block_yaw
+      m_bBlockYaw
+      
+  Class:
+    ComponentMovement
+    CComponentMovement
+    
+    Methods:
+      add_to_entity
+      AddToEntity
+      
+    Attributes:
+      movement
+      m_vMovement
+      
+  Class:
+    ComponentAnimation
+    CComponentAnimation
+    
+    Methods:
+      add_to_entity
+      AddToEntity
+      
+      play
+      Play
+      
+      stop
+      Stop
+      
+      play_cycle
+      PlayCyle
+      
+      stop_cycle
+      StopCycle
+      
+      clear_cycle
+      ClearCycle
+      
+      clear_cycle
+      ClearCycle
+      
+      clear_all_cycles
+      ClearAllCycles
+      
+  Class:
+    ComponentStateMachine
+    CComponentStateMachine
+    
+    Methods:
+      add_to_entity
+      AddToEntity
+      
+      get_state_machine
+      GetStateMachine
+      
+  Class:
+    ComponentIABrain
+    CComponentIABrain
+    
+    Methods:
+      add_to_entity
+      AddToEntity
+      
+      shoot
+      Shoot
+      
+      die
+      Die
+      
+    Attributes:
+      player
+      m_pPlayer
+      
+      time
+      m_fTime
+      
+      shooted
+      m_bShooted
+      
+  Class:
+    ComponentVida
+    CComponentVida
+    
+    Methods:
+      add_to_entity
+      AddToEntity
+      
+      get_hp
+      GetHP
+      
+      increase
+      Increase
+      
+      Decrease
+      decrease
+      
+      set
+      Set
+      
+      set_regen
+      SetRegen
+      
+    Attributes:
+      immortal
+      m_bImmortal
+      
+  Class:
+    ComponentShield
+    CComponentShield
+    
+    Methods:
+      add_to_entity
+      AddToEntity
+      
+      get_hp
+      GetHP
+      
+      increase
+      Increase
+      
+      decrease
+      Decrease
+      
+      set
+      Set
+      
+      set_regen
+      SetRegen
+      
+      activate
+      Activate
+      
+      deactivate
+      Deactivate
+      
+      is_active
+      IsActive
+      
+      is_ready
+      IsReady
+      
+  Class:
+    ComponentRagdoll
+    CComponentRagdoll
+    
+    Methods:
+      add_to_entity
+      AddToEntity
+      
+  Class:
+    ComponentMirilla
+    CComponentMirilla
+    
+    Methods:
+      set_active
+      SetActive
+  
+  Class:
+    ComponentCover
+    CComponentCover
+    
+    Enum:
+      cover_low
+      COVER_LOW
+      
+      cover_high
+      COVER_HIGH
+    
+    Methods:
+      get_cover_type
+      GetCoverType
+      
+  Class:
+    ComponentHighCover
+    CComponentHighCover
+    
+    Methods:
+      get_cover_type
+      GetCoverType
+      
+  Class:
+    ComponentLowCover
+    CComponentLowCover
+    
+    Methods:
+      get_cover_type
+      GetCoverType
+      
+  Class:
+    ComponentDoor
+    CComponentDoor
+    
+    Methods:
+      add_to_entity
+      AddToEntity
+      
+      is_open
+      IsOpen
+      
+      open
+      Open
+      
+      close
+      Close
+      
+      block
+      Block
+      
+    Attributes:
+      time
+      m_fTime
+      
+  Class:
+    ComponentNavNode
+    CComponentNavNode
+    
+    Methods:
+      add_to_entity
+      AddToEntity
+      
+      get_graph_node_index
+      GetGraphNodeIndex
+
+VIEWER
