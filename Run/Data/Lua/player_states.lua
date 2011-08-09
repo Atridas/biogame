@@ -18,7 +18,7 @@ Player_Constants["Morir"] = 'dead'
 Player_Constants["Escut"] = 'protection'
 --temps animacions
 Player_Constants["Temps Tocat"] = 0.3
-Player_Constants["Temps Morint"] = 2.6
+Player_Constants["Temps Morint"] = 2.0
 --sons
 Player_Constants["So rebre impacte"] = 'impacte'
 Player_Constants["So disparar"] = 'disparar'
@@ -383,11 +383,11 @@ State_Player_Tocat['Update'] = function(_jugador, _dt)
   
   if player_controller.time >= Player_Constants["Temps Tocat"] then
     --if not ACTION_MANAGER:is_action_active('Aim') then
-    --  _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+      _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
     --else
     --  _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Apuntar')
     --end
-    _jugador:get_component(BaseComponent.state_machine):get_state_machine():revert_state()
+    --_jugador:get_component(BaseComponent.state_machine):get_state_machine():revert_state()
     return
   end
 end
@@ -464,7 +464,7 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Morint['Enter'] = function(_jugador)
-  --log('enter player apuntant')
+  --log('morint')
   
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
@@ -483,16 +483,19 @@ State_Player_Morint['Update'] = function(_jugador, _dt)
   
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
+  local vida = _jugador:get_component(BaseComponent.vida)
   
   player_controller.time = player_controller.time + _dt
   
   if player_controller.time > Player_Constants["Temps Morint"] then
-    _jugador:get_component(BaseComponent.vida).set(100)
-    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
-    SOUND:play_sample('pipip')
-    _jugador:get_component(BaseComponent.object_3d):set_position(Vect3f(player_controller.pos_inicial))
-    animation:stop('dead')
-    --_jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Mort')
+    --log('respawn')
+    --vida:set(100.0)
+    --_jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+    --SOUND:play_sample('pipip')
+    --_jugador:get_component(BaseComponent.object_3d):set_position(Vect3f(player_controller.pos_inicial))
+    --animation:stop('dead')
+    --vida.immortal = false
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Mort')
   end
 end
 
@@ -516,7 +519,7 @@ State_Player_Mort['Enter'] = function(_jugador)
   --log('enter player apuntant')
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   player_controller.time = 0
-  player_controller:die()
+  --player_controller:die()
   
   --local ragdoll = _jugador:get_component(BaseComponent.ragdoll)
   --ragdoll:activate_ragdoll()
@@ -524,7 +527,9 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Mort['Exit'] = function(_jugador)
-  
+  _jugador:get_component(BaseComponent.vida).immortal = false
+  local animation = _jugador:get_component(BaseComponent.animation)
+  animation:stop(Player_Constants["Morir"])
 end
 
 -------------------------------------------------------------------------------------------------
@@ -537,7 +542,7 @@ State_Player_Mort['Update'] = function(_jugador, _dt)
   
   if player_controller.time > 5 then
     player_controller:respawn()
-    _jugador:get_component(BaseComponent.vida).set(100)
+    _jugador:get_component(BaseComponent.vida):set(100)
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
   end
   --local animation = _jugador:get_component(BaseComponent.animation)

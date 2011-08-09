@@ -105,15 +105,15 @@ void CComponentVida::ReceiveEvent(const SEvent& _Event)
         l_fDamage = m_pShield->Decrease(l_fDamage);
 
       Decrease(l_fDamage);
+    }
 
-      if(m_fVida <= 0.f)
-      {
-        SEvent l_morir;
-        l_morir.Msg = SEvent::MORIR;
-        l_morir.Receiver = l_morir.Sender = GetEntity()->GetGUID();
+    if(m_fVida <= 0.f)
+    {
+      SEvent l_morir;
+      l_morir.Msg = SEvent::MORIR;
+      l_morir.Receiver = l_morir.Sender = GetEntity()->GetGUID();
       
-        CORE->GetEntityManager()->SendEvent(l_morir);
-      }
+      CORE->GetEntityManager()->SendEvent(l_morir);
     }
   }
 }

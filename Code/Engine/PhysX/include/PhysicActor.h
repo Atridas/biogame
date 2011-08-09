@@ -56,6 +56,7 @@ public:
 	//---Get Info-------
 	void							GetMat44					(Mat44f& matrix) const;
 	void							SetMat44					(const Mat44f& matrix);
+  void              MoveGlobalPoseMat44 (const Mat44f& matrix);
 
 	//---Get PhsX Info---
 	void							CreateActor				(NxActor* actor);
