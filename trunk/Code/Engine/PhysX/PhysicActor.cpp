@@ -291,6 +291,31 @@ void CPhysicActor::SetMat44 (const Mat44f& matrix)
 	m_pPhXActor->setGlobalPose(mat);
 }
 
+void CPhysicActor::MoveGlobalPoseMat44 (const Mat44f& matrix)
+{
+	assert(m_pPhXActor);
+	NxF32 m_aux[16];
+	m_aux[0]	= matrix.m00;
+	m_aux[4]	= matrix.m01;
+	m_aux[8]	= matrix.m02;
+	m_aux[12]	= matrix.m03;
+	m_aux[1]	= matrix.m10;
+	m_aux[5]	= matrix.m11;
+	m_aux[9]	= matrix.m12;
+	m_aux[13]	= matrix.m13;
+	m_aux[2]	= matrix.m20;
+	m_aux[6]	= matrix.m21;
+	m_aux[10]	= matrix.m22;
+	m_aux[14]	= matrix.m23;
+	m_aux[3]	= matrix.m30;
+	m_aux[7]	= matrix.m31;
+	m_aux[11]	= matrix.m32;
+	m_aux[15]	= matrix.m33; 
+	NxMat34 mat;
+	mat.setColumnMajor44(m_aux);
+	m_pPhXActor->moveGlobalPose(mat);
+}
+
 void CPhysicActor::GetMat44 (Mat44f& matrix) const
 {
 	assert(m_pPhXActor);

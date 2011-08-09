@@ -3,6 +3,7 @@
 #include "PhysxBone.h"
 #include "ComponentRenderableObject.h"
 #include "RenderableAnimatedInstanceModel.h"
+#include "ComponentObject3D.h"
 #include "PhysicsManager.h"
 #include "PhysicActor.h"
 
@@ -29,9 +30,11 @@ bool CComponentRagdoll::Init(CGameEntity* _pEntity, const string& _szSkeletonFil
 
   m_pRAIM = dynamic_cast<CRenderableAnimatedInstanceModel*>(l_pCRO->GetRenderableObject());
 
+  Mat44f l_mat44 = _pEntity->GetComponent<CComponentObject3D>()->GetMat44();
+
   m_pRagdoll = new CPhysxSkeleton(false);
   CalModel* l_pCalModel = m_pRAIM->GetAnimatedInstanceModel()->GetAnimatedCalModel();
-  bool l_bOk = m_pRagdoll->Init(_szSkeletonFile,l_pCalModel,m_pRAIM->GetMat44(),_iCollisionGroup/*ECG_OBJECTES_DINAMICS*/, _pEntity);
+  bool l_bOk = m_pRagdoll->Init(_szSkeletonFile,l_pCalModel,l_mat44/*m_pRAIM->GetMat44()*/,_iCollisionGroup/*ECG_OBJECTES_DINAMICS*/, _pEntity);
 
   SetOk(l_bOk);
   return IsOk();

@@ -117,12 +117,12 @@ void CComponentPlayerController::Update(float _fDeltaTime)
   
   m_fTime += _fDeltaTime;
 
-  //if(m_iNumUpdates < 3)
-  //  m_iNumUpdates++;
-  //if(m_iNumUpdates == 2)
-  //{
-  //  CComponentRagdoll::AddToEntity(GetEntity(), "Data/Animated Models/Riggle/Skeleton.xml", ECG_RAGDOLL);
-  //}
+  if(m_iNumUpdates < 3)
+    m_iNumUpdates++;
+  if(m_iNumUpdates == 2)
+  {
+    CComponentRagdoll::AddToEntity(GetEntity(), "Data/Animated Models/Riggle/Skeleton.xml", ECG_RAGDOLL);
+  }
 }
 
 

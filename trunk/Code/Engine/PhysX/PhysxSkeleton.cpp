@@ -498,8 +498,9 @@ void CPhysxSkeleton::WakeUpPhysxBones()
       ////l_pActor->GetPhXActor()->raiseBodyFlag(NX_);
       //l_pActor->GetPhXActor()->clearBodyFlag(NX_BF_DISABLE_GRAVITY);
       //l_pActor->GetPhXActor()->wakeUp();
-      l_pActor->GetPhXActor()->clearBodyFlag(NX_BF_KINEMATIC);
       
+      l_pActor->GetPhXActor()->clearBodyFlag(NX_BF_KINEMATIC);
+      l_pActor->GetPhXActor()->clearActorFlag(NX_AF_DISABLE_COLLISION);
     }
   }
 };
@@ -514,8 +515,9 @@ void CPhysxSkeleton::SleepPhysxBones()
     {
       //l_pActor->GetPhXActor()->putToSleep();
       //l_pActor->GetPhXActor()->raiseBodyFlag(NX_BF_DISABLE_GRAVITY);
-      l_pActor->GetPhXActor()->raiseBodyFlag(NX_BF_KINEMATIC);
       
+      l_pActor->GetPhXActor()->raiseBodyFlag(NX_BF_KINEMATIC);
+      l_pActor->GetPhXActor()->raiseActorFlag(NX_AF_DISABLE_COLLISION);
     }
   }
 };
