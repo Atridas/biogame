@@ -165,6 +165,14 @@ bool CComponentRenderableObject::ChangeInstance(const string& _szName)
   return false;
 }
 
+void CComponentRenderableObject::SetVisible(bool m_bHide)
+{
+  if(m_pRenderableObject)
+  {
+    m_pRenderableObject->SetVisible(m_bHide);
+  }
+}
+
 
 void CComponentRenderableObject::Release()
 {

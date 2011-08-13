@@ -101,7 +101,7 @@ function IsInteractive _object =
 -- Comprova si l'objecte proporcionat és un objecte destructible
 function IsDestroyable _object =
 (
-	if classof _object == Dummy and (GetUserProp _object "onDestroy") != undefined and (GetUserProp _object "resource") != undefined and (GetUserProp _object "destroyedResource") != undefined then
+	if classof _object == Dummy and (GetUserProp _object "onDestroy") != undefined and (GetUserProp _object "resource") != undefined then
 	(
 		return true
 	) else (
