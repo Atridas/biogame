@@ -157,6 +157,21 @@ GLOBALS
       z
       Vect3i::z
 	
+
+  Class:
+    Vect3fVector
+    vector<Vect3f>
+    
+    Methods:
+      size
+      size()
+
+      at
+      Vect3f& at(int i)
+
+      const_at
+      const Vect3f& at(int i) const
+
 ENGINE
   GETTERS DE MANAGERS:
       CORE
@@ -1158,6 +1173,21 @@ IA
       
       search_path_vec
       vector<Vect3f> SearchPathVec(const Vect3f& _vOrigin, const Vect3f& _vDestination)
+
+
+  Class:
+    GraphNodeVector
+    vector<CGraphNode*>
+    
+    Methods:
+      size
+      size()
+
+      at
+      CGraphNode* at(int i)
+
+      const_at
+      const CGraphNode* at(int i) const
       
   Class:
     GraphNode

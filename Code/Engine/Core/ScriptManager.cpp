@@ -428,6 +428,12 @@ void CScriptManager::RegisterLUAFunctions()
       .def("length_sq", &Vect3i::SquaredLength)
   ];
 
+  module(m_pLS) [
+    class_<vector<Vect3f>>("Vect3fVector")
+      .def("size",              &vector<Vect3f>::size)
+      .def("at",                (vector<Vect3f>::reference (vector<Vect3f>::*) (vector<Vect3f>::size_type))&vector<Vect3f>::at)
+      .def("const_at",          (vector<Vect3f>::const_reference (vector<Vect3f>::*) (vector<Vect3f>::size_type) const)&vector<Vect3f>::at)
+  ];
   //Object3D
   module(m_pLS) [
     class_<CObject3D>("Object3D")
