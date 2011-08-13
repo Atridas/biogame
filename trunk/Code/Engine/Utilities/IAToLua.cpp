@@ -35,6 +35,11 @@ void RegisterIAToLua(lua_State* _pLS)
       .def("get_closest_node",  &CIAManager::GetClosestNode ) 
       .def("search_path",       &CIAManager::SearchPath     )
       .def("search_path_vec",   &CIAManager::SearchPathVec  ) 
+
+    ,class_<vector<CGraphNode*>>("GraphNodeVector")
+      .def("size",              &vector<CGraphNode*>::size)
+      .def("at",                (vector<CGraphNode*>::reference (vector<CGraphNode*>::*) (vector<CGraphNode*>::size_type))&vector<CGraphNode*>::at)
+      .def("const_at",          (vector<CGraphNode*>::const_reference (vector<CGraphNode*>::*) (vector<CGraphNode*>::size_type) const)&vector<CGraphNode*>::at)
       
     ,class_<CGraphNode, CBaseControl>("GraphNode")
       .def(constructor<>())
