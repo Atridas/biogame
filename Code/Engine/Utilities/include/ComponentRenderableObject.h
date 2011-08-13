@@ -34,6 +34,8 @@ public:
 
   bool ChangeInstance(const string& _szName);
 
+  void SetVisible(bool m_bHide);
+
   bool m_bRemoveRenderableObject;
   bool m_bBlockPitchRoll;
   bool m_bBlockYaw;

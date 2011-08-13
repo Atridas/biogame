@@ -371,13 +371,16 @@ function XMLEntityDestroyable _instance &_TagName =
 	append l_params #("onDestroy", l_ss)
 	
 	--destroyedResource
-	l_ss = "" as stringStream
-	format "%" (GetUserProp _instance "destroyedResource") to:l_ss
-	append l_params #("destroyedResource", l_ss)
-	
-	if  (GetUserProp _instance "hitPoints") != undefined then
+	if (GetUserProp _instance "destroyedResource") != undefined then
 	(
-		--hit points
+		l_ss = "" as stringStream
+		format "%" (GetUserProp _instance "destroyedResource") to:l_ss
+		append l_params #("destroyedResource", l_ss)
+	)
+	
+	--hit points
+	if (GetUserProp _instance "hitPoints") != undefined then
+	(
 		l_ss = "" as stringStream
 		format "%" (GetUserProp _instance "hitPoints") to:l_ss
 		append l_params #("hitPoints", l_ss)
