@@ -25,7 +25,8 @@ public:
   void Init(CRenderManager* _pRM);
   bool Reload();
   void Release();
-  CBillBoard* GetParticleEmitter(const string& _szName);
+  CBillBoard* GetBillBorad(const string& _szName);
+  void SetAllBillboardsActive(bool _bActive);
 
 private:
   string                    m_szFileName;

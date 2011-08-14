@@ -29,7 +29,7 @@ void CGameProcess::Update(float _fElapsedTime)
 
   //m_pOmniLight->SetPosition(l_vPlayerPos + l_vLightMod);
   CORE->GetParticleManager()->Update(_fElapsedTime,m_pCamera);
-  //CORE->GetBillBoardManager()->Update(_fElapsedTime,m_pCamera);
+  CORE->GetBillBoardManager()->Update(_fElapsedTime,m_pCamera);
 
 
 }
@@ -38,7 +38,7 @@ void CGameProcess::RenderScene(CRenderManager* _pRM)
 {
   CORE->GetRenderableObjectsManager()->Render(_pRM);
   CORE->GetParticleManager()->Render(_pRM);
-  //CORE->GetBillBoardManager()->Render(_pRM);
+  CORE->GetBillBoardManager()->Render(_pRM);
 }
 
 void CGameProcess::RenderINFO(CRenderManager* _pRM)
