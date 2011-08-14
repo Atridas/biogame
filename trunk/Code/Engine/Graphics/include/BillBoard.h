@@ -28,11 +28,14 @@ public:
 	void SetSizeX	            ( const float &sizeX)                   {m_fSizeX = sizeX;}
   void SetSizeY	            ( const float &sizeY)                   {m_fSizeY = sizeY;}
   void SetTexture           (CTexture* _pTexParticle)               {m_pTexParticle = _pTexParticle;};
+  void SetActive            (const bool &_bActive)                  {m_bActive = _bActive;};
 
   void SetAnimated          (const bool &_bAnimated)                {m_bAnimated = _bAnimated;};
   void SetTimeDiapo         (const float &_fTimeAnimationDiapo)     {m_fTimeAnimationDiapo = _fTimeAnimationDiapo;};
   void SetNumFiles          (const int &_iTexNumFiles)              {m_iTexNumFiles = _iTexNumFiles;};
   void SetColumnes          (const int &_iTexNumColumnes)           {m_iTexNumColumnes = _iTexNumColumnes;};
+  //void SetTimeLife          (const float &_fTimeLife)               {m_fTimeLife = _fTimeLife;};
+  void SetBucleInfinit      (const bool &_bBucleInfinit)            {m_bBucleInfinit = _bBucleInfinit;};
 
   //Get
 
@@ -41,27 +44,33 @@ public:
   float                           GetSizeX            () const {return m_fSizeX;};
   float                           GetSizeY            () const {return m_fSizeY;};
   CTexture*                       GetTexture          () const {return m_pTexParticle;};
+  bool                            GetActive           () const {return m_bActive;};
   float                           GetTimeDiapo        () const {return m_fTimeAnimationDiapo;};
   int                             GetNumFiles         () const {return m_iTexNumFiles;};
   int                             GetNumColumnes      () const {return m_iTexNumColumnes;};
   bool                            GetAnimated         () const {return m_bAnimated;};
+  //float                           GetTimeLife         () const {return m_fTimeLife;};
+  bool                            GetBucleInfinit     () const {return m_bBucleInfinit;}; 
 
 private:
   LPDIRECT3DVERTEXBUFFER9                   m_vBillboards;
-  string    m_szId;
-	Vect3f		m_vPosition;
-	Vect3f		m_PointA, m_PointB, m_PointC, m_PointD;
-	float			m_fSizeX, m_fSizeY;
-	CTexture*  m_pTexParticle; 
-  int        m_iTexNumFiles;// numero de files que te la texture
-  int        m_iTexNumColumnes;// numero de columnes que te la textura
-  float      m_fTimeAnimationActual;//temps k porta durant l'animacio
-  float      m_fTimeAnimationDiapo;//(akest valor es pasa per el xml)temps que es destina a cada diapositiva
-  int        m_iNumDiapo;//numero de diapositiva a la que ens trobem
-  float      m_fIncrementV; //alçada de cada diapositiva 
-  float      m_fIncrementU; //amplada de cada diapositiva
-  int        m_iTotalDiapos;
-  bool       m_bAnimated; //indica si el billboard es animat
+  string      m_szId;
+	Vect3f		  m_vPosition;
+	Vect3f		  m_PointA, m_PointB, m_PointC, m_PointD;
+	float			  m_fSizeX, m_fSizeY;
+	CTexture*   m_pTexParticle; 
+  int         m_iTexNumFiles;// numero de files que te la texture
+  int         m_iTexNumColumnes;// numero de columnes que te la textura
+  float       m_fTimeAnimationActual;//temps k porta durant l'animacio
+  float       m_fTimeAnimationDiapo;//(akest valor es pasa per el xml)temps que es destina a cada diapositiva
+  int         m_iNumDiapo;//numero de diapositiva a la que ens trobem
+  float       m_fIncrementV; //alçada de cada diapositiva 
+  float       m_fIncrementU; //amplada de cada diapositiva
+  int         m_iTotalDiapos;
+  bool        m_bAnimated; //indica si el billboard es animat
+  bool        m_bActive;
+  bool        m_bBucleInfinit;
+  //float       m_fTimeLife;
   // cordenades de textura per a cada punt.
   float      m_fAU;
   float      m_fAV;

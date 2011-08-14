@@ -76,6 +76,13 @@ bool CBillBoardManager::Load(const string& _szFileName)
 			  float l_fSizeY = l_treeInstanceBillboard.GetFloatProperty("sizeY",1,true);
         l_pBillboard->SetSizeX(l_fSizeX);
         l_pBillboard->SetSizeY(l_fSizeY);
+        bool l_bBucleInfinit = l_treeInstanceBillboard.GetBoolProperty("Bucle",true,false);
+        l_pBillboard->SetBucleInfinit(l_bBucleInfinit);
+        /*if(!l_bBucleInfinit)
+        {
+          float l_fTimeLife = l_treeInstanceBillboard.GetFloatProperty("Life",1,false);
+          l_pBillboard->SetTimeLife(l_fTimeLife);
+        }*/
         m_pTexParticle = CORE->GetTextureManager()->GetResource(l_treeInstanceBillboard.GetPszProperty("TexParticle","",true));
         l_pBillboard->SetTexture(m_pTexParticle);
        
@@ -128,7 +135,7 @@ bool CBillBoardManager::Load(const string& _szFileName)
   return true;
 }
 
-CBillBoard* CBillBoardManager::GetParticleEmitter(const string& _szName)
+CBillBoard* CBillBoardManager::GetBillBorad(const string& _szName)
 {
   string l_szNameEmitter;
   vector<CBillBoard*>::iterator it  = m_vBillboards.begin(),
@@ -145,6 +152,16 @@ CBillBoard* CBillBoardManager::GetParticleEmitter(const string& _szName)
   }
   LOGGER->AddNewLog(ELL_WARNING, "CBillboardManager:: No existeix el emiter de tipus %s", _szName);
   return NULL;
+}
+
+
+void CBillBoardManager::SetAllBillboardsActive(bool _bActive)
+{
+  
+  for (size_t i=0;i<m_vBillboards.size();++i)
+  {
+    m_vBillboards[i]->SetActive(_bActive);
+  }
 }
 
 void CBillBoardManager::Update(const float _fElapsedTime, CCamera* camera)

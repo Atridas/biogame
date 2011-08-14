@@ -17,6 +17,7 @@
 #include "ComponentRagdoll.h"
 #include "ComponentCover.h"
 #include "ComponentVida.h"
+#include "ComponentParticleShootPlayer.h"
 
 #include "PhysicsManager.h"
 #include "AnimatedCoreModel.h"
@@ -52,6 +53,8 @@ bool CComponentPlayerController::Init(CGameEntity *_pEntity)
   assert(l_pComponentRO); //TODO fer missatges d'error més elavorats
   m_pAnimatedModel = dynamic_cast<CRenderableAnimatedInstanceModel*>(l_pComponentRO->GetRenderableObject());
   assert(m_pAnimatedModel); //TODO fer missatges d'error més elavorats
+
+ 
 
   m_vPickUps.clear();
 
@@ -173,6 +176,11 @@ void CComponentPlayerController::Shoot()
                                   l_vCenterPoint,
                                   1.f);
 
+    CGameEntity * l_pParticleShoot = CORE->GetEntityManager()->CreateEntity();
+    CComponentParticleShootPlayer::AddToEntity(l_pParticleShoot,
+                                                Vect3f(l_vTanslationBone2.x,l_vTanslationBone2.y,l_vTanslationBone2.z),
+                                                l_vCenterPoint);
+    
     if(l_pUserData->GetEntity())
     {
       SEvent l_impacte;
@@ -210,6 +218,11 @@ void CComponentPlayerController::Shoot()
                                   Vect3f(l_vTanslationBone2.x,l_vTanslationBone2.y,l_vTanslationBone2.z),
                                   l_vCenterPoint,
                                   1.f);
+
+    CGameEntity * l_pParticleShoot = CORE->GetEntityManager()->CreateEntity();
+    CComponentParticleShootPlayer::AddToEntity(l_pParticleShoot,
+                                                Vect3f(l_vTanslationBone2.x,l_vTanslationBone2.y,l_vTanslationBone2.z),
+                                                l_vCenterPoint);
   }
 }
 

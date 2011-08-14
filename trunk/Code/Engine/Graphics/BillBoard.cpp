@@ -7,14 +7,15 @@
 
 
 CBillBoard::CBillBoard()
-	: m_vPosition(Vect3f(0,0,0))
+	:m_vPosition(Vect3f(0,0,0))
   ,m_PointA(Vect3f(0,0,0))
-  , m_PointB(Vect3f(0,0,0))
-  , m_PointC(Vect3f(0,0,0))
-  , m_PointD(Vect3f(0,0,0))
-  , m_bAnimated(false)
-	, m_fSizeX(2)
-	, m_fSizeY(2)
+  ,m_PointB(Vect3f(0,0,0))
+  ,m_PointC(Vect3f(0,0,0))
+  ,m_PointD(Vect3f(0,0,0))
+  ,m_bAnimated(false)
+  ,m_bActive(false)
+	,m_fSizeX(2)
+	,m_fSizeY(2)
   ,m_vBillboards(0)
 	,m_fTimeAnimationDiapo(0.05f)
   ,m_iTexNumFiles(4)
@@ -22,10 +23,12 @@ CBillBoard::CBillBoard()
   ,m_fTimeAnimationActual(0)
   ,m_iNumDiapo(1)
   ,m_pTexParticle(0)
-  ,m_Color1(0,1,0,1)
-  ,m_Color2(1,0,0,1)
-  ,m_Color3(0,0,1,1)
-  ,m_Color4(1,1,0,1)
+  ,m_bBucleInfinit(true)
+  //,m_fTimeLife(0.0f)
+  ,m_Color1(1,1,1,1)
+  ,m_Color2(1,1,1,1)
+  ,m_Color3(1,1,1,1)
+  ,m_Color4(1,1,1,1)
 	{}
 
 
@@ -80,6 +83,16 @@ void CBillBoard::Update(float fTimeDelta,CCamera *camera)
 	C	\------------------/	D
 
 	*/
+
+  if (!m_bActive)
+    return;
+  if(!m_bBucleInfinit)
+  {
+    if(m_iTotalDiapos==m_iNumDiapo)
+    {
+      m_bActive=false;
+    }
+  }
   Vect3f l_VDirection = camera->GetDirection();
   Vect3f l_VUp = camera->GetVecUp();
   Mat33f mat;
@@ -100,11 +113,13 @@ void CBillBoard::Update(float fTimeDelta,CCamera *camera)
     //***** NOMES SI ES ANIMADA
   if(m_bAnimated)
   {
-    
+   
     m_fIncrementV = (float)m_pTexParticle->GetHeight()/m_iTexNumFiles;
     m_fIncrementV= m_fIncrementV/m_pTexParticle->GetHeight();
+    
     m_fIncrementU = (float)m_pTexParticle->GetWidth()/m_iTexNumColumnes;
-    m_fIncrementU = m_fIncrementU/m_pTexParticle->GetHeight();
+    m_fIncrementU = m_fIncrementU/m_pTexParticle->GetWidth();
+    
 	  m_iTotalDiapos=m_iTexNumFiles*m_iTexNumColumnes;
 	  int l_canviDiapo=1;
 		
@@ -169,7 +184,8 @@ void CBillBoard::Update(float fTimeDelta,CCamera *camera)
 void CBillBoard::Render(CRenderManager* _pRM)
 
 {
-
+  if (!m_bActive)
+    return;
   LPDIRECT3DDEVICE9 l_pd3dDevice = _pRM->GetDevice();
 
 	VERTEX_TEXTURED l_Points[4];
