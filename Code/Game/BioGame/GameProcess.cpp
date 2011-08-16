@@ -12,6 +12,7 @@
 #include "ParticleManager.h"
 #include "BillBoardManager.h"
 #include "IAManager.h"
+#include "PortalManager.h"
 
 #include "Core.h"
 
@@ -28,7 +29,7 @@ void CGameProcess::Update(float _fElapsedTime)
   //l_vLightMod = Vect3f(0,1,0) - l_vLightMod;
 
   //m_pOmniLight->SetPosition(l_vPlayerPos + l_vLightMod);
-  CORE->GetParticleManager()->Update(_fElapsedTime,m_pCamera);
+  //CORE->GetParticleManager()->Update(_fElapsedTime,m_pCamera);
   CORE->GetBillBoardManager()->Update(_fElapsedTime,m_pCamera);
 
 
@@ -36,7 +37,8 @@ void CGameProcess::Update(float _fElapsedTime)
 
 void CGameProcess::RenderScene(CRenderManager* _pRM)
 {
-  CORE->GetRenderableObjectsManager()->Render(_pRM);
+  //CORE->GetRenderableObjectsManager()->Render(_pRM);
+  CORE->GetPortalManager()->Render(_pRM);
   CORE->GetParticleManager()->Render(_pRM);
   CORE->GetBillBoardManager()->Render(_pRM);
 }
@@ -55,7 +57,6 @@ bool CGameProcess::Init()
 
   
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Laboratori.xml");
-  LOGGER->SaveLogsInFile();
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Menjador.xml");
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Passadis.xml");
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - video.xml");

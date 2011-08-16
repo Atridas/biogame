@@ -8,8 +8,7 @@
 #include "Camera.h"
 #include "Texture.h"
 
-//#define __PARTICLE_VIA_SHADER__
-#define __SURRUT__
+#define __PARTICLE_VIA_SHADER__
 struct SParticleRenderInfo;
 
 class CParticle
