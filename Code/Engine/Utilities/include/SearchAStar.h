@@ -6,7 +6,7 @@
 
 class CHeuristic;
 
-
+using namespace std;
 //------------------------------- Graph_SearchAStar --------------------------
 //
 //  this searchs a graph using the distance between the target node and the 
@@ -17,7 +17,7 @@ class CHeuristic;
 class CSearchAStar
 {
 public:
-
+  
   CSearchAStar(const CSparseGraph& graph,
                const CHeuristic*   heuristic,
                       int          source,
@@ -27,9 +27,27 @@ public:
                                            m_SearchFrontier(graph.NumNodes()),
                                            m_GCosts(graph.NumNodes(), 0.0),
                                            m_FCosts(graph.NumNodes(), 0.0),
-                                           m_iSource(source),
-                                           m_iTarget(target)
+                                           m_iSource(source)
   {
+    m_Targets.insert(target);
+    Search();   
+  }
+
+
+  CSearchAStar(const CSparseGraph&     graph,
+               const CHeuristic*       heuristic,
+                      int              source,
+                      const set<int>&  targets):m_Graph(graph),
+                                                m_pHeuristic(heuristic),
+                                                m_ShortestPathTree(graph.NumNodes()),                              
+                                                m_SearchFrontier(graph.NumNodes()),
+                                                m_GCosts(graph.NumNodes(), 0.0),
+                                                m_FCosts(graph.NumNodes(), 0.0),
+                                                m_iSource(source)
+  {
+    set<int>::iterator l_it  = targets.begin();
+    set<int>::iterator l_end = targets.end();
+    for(; l_it != l_end; ++l_it) m_Targets.insert(*l_it);
     Search();   
   }
  
@@ -41,7 +59,7 @@ public:
   std::list<int> GetPathToTarget()const;
 
   //returns the total cost to the target
-  double GetCostToTarget()const{return m_GCosts[m_iTarget];}
+  double GetCostToTarget()const{return m_GCosts[m_iTargetFinal];}
 
 
 private:
@@ -62,7 +80,9 @@ private:
   std::vector<const CGraphEdge*>  m_SearchFrontier;
 
   int                            m_iSource;
-  int                            m_iTarget;
+  std::set<int>                  m_Targets;
+
+  int                            m_iTargetFinal;
 
   //the A* search algorithm
   void Search();

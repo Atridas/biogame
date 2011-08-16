@@ -6,6 +6,8 @@
     <file path="Data/Lua/biogame_gui.lua" />
     <file path="Data/Lua/nivell_proves_triggers.lua" />
     <file path="Data/Lua/player_states.lua" />
+    <file path="Data/Lua/enemy_constants.lua" />
+    <file path="Data/Lua/soldier_states.lua" />
     <file path="Data/Lua/enemy_states.lua" />
     <file path="Data/Lua/door_states.lua" />
   </files>

@@ -81,6 +81,30 @@ void CIAManager::TraceEdges()
   }
 }
 
+void CIAManager::CompleteGraph()
+{
+  assert(IsOk());
+  TraceEdges();
+
+  m_NodesCobertura.clear();
+
+  CEntityManager *l_pEM = CORE->GetEntityManager();
+
+  int l_iNumNodes = m_pGraph->NumNodes();
+  for(int i = 0; i < l_iNumNodes; ++i)
+  {
+    CGraphNode l_Node = m_pGraph->GetNode(i);
+    CGameEntity *l_pNodeEntity = l_Node.GetEntity();
+    if(l_pNodeEntity)
+    {
+      CComponentNavNode *l_pCNN = l_pNodeEntity->GetComponent<CComponentNavNode>();
+      if(l_pCNN && l_pCNN->m_bCoberturaBaixa)
+      {
+        m_NodesCobertura.insert(i); //El node de la cobertura
+      }
+    }
+  }
+}
 
 bool CIAManager::EdgeValid(const CGraphNode& _Node1, const CGraphNode& _Node2)
 {
@@ -159,5 +183,63 @@ vector<Vect3f>      CIAManager::SearchPathVec(const Vect3f& _vOrigin, const Vect
   }
   
   Path_.push_back(_vDestination);
+  return Path_;
+}
+
+
+vector<CGraphNode*> CIAManager::GetClosestCobertura   (const Vect3f& _vPosition)
+{
+  vector<CGraphNode*> Path_;
+
+  int l_iOrigin      = GetClosestNode(_vPosition);
+  
+
+  set<int> l_CoberturesLliures;
+  {
+    set<int>::iterator l_it  = m_NodesCobertura.begin();
+    set<int>::iterator l_end = m_NodesCobertura.end();
+    for(; l_it != l_end; ++l_it)
+    {
+      CGraphNode l_Node = m_pGraph->GetNode(*l_it);
+      CGameEntity *l_pNodeEntity = l_Node.GetEntity();
+      CComponentNavNode *l_pCNN = l_pNodeEntity->GetComponent<CComponentNavNode>();
+      if(!l_pCNN->m_bOcupat)
+      {
+        l_CoberturesLliures.insert(*l_it); //El node de la cobertura
+      }
+    }
+  }
+
+  CSearchAStar search( *m_pGraph, &CHeuristicEuclid::instance, l_iOrigin, l_CoberturesLliures);
+
+  list<int> l_Path = search.GetPathToTarget();
+
+  {
+    list<int>::iterator l_it  = l_Path.begin();
+    list<int>::iterator l_end = l_Path.end();
+
+    for(;l_it != l_end; ++l_it)
+    {
+      Path_.push_back( &(m_pGraph->GetNode(*l_it)) );
+    }
+  }
+
+  return Path_;
+}
+
+vector<Vect3f>      CIAManager::GetClosestCoberturaVec(const Vect3f& _vPosition)
+{
+  vector<CGraphNode*> l_Path = GetClosestCobertura(_vPosition);
+  vector<Vect3f> Path_;
+  
+  Path_.push_back(_vPosition);
+
+  vector<CGraphNode*>::iterator l_it  = l_Path.begin();
+  vector<CGraphNode*>::iterator l_end = l_Path.end();
+
+  for(;l_it != l_end; ++l_it)
+  {
+    Path_.push_back((*l_it)->GetPosition());
+  }
   return Path_;
 }

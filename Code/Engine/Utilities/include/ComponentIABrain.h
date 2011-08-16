@@ -5,6 +5,8 @@
 #include "base.h"
 #include "EntityDefines.h"
 
+class CGraphNode;
+
 class CComponentIABrain:
   public CBaseComponent
 {
@@ -20,10 +22,18 @@ public:
 
   void Shoot();
   void Die();
+  
+  //Path planning
+  void PlanPathToCobertura();
+  Vect3f GetNextNodePosition() const;
+  bool ArrivedAtDestination() const;
+  bool ArrivedAtNode(float _fDistanceSq) const;
+  void SetNextNode();
 
   CGameEntity* m_pPlayer;
   float        m_fTime;
   bool         m_bShooted;
+  vector<CGraphNode*> m_PathToCobertura;
 
 protected:
   CComponentIABrain():m_pPlayer(0),m_fTime(0),m_bShooted(false),m_iNumUpdates(0) {};

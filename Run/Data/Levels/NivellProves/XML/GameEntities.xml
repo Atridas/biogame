@@ -312,7 +312,7 @@
     <NavNode maxDistance="40" />
   </Entity>
   <Entity name="navNode08">
-    <Object3D position="38.033 0.821378 -10.0611" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="37.4903 0.821378 -11.7531" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode maxDistance="40" />
   </Entity>
   <Entity name="navNode09">
@@ -482,6 +482,14 @@
   <Entity name="navNode50">
     <Object3D position="-44.1298 0.821378 14.5442" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode maxDistance="40" />
+  </Entity>
+  <Entity name="navNodeCobertura">
+    <Object3D position="48.768 0.821378 -5.24231" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode maxDistance="40" cobertura="baixa" />
+  </Entity>
+  <Entity name="navNodeCobertura01">
+    <Object3D position="35.0102 0.821378 -21.5325" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode maxDistance="40" cobertura="baixa" />
   </Entity>
   <Player position="-16.8764 2.0 -15.9165" yaw="0.0" />
   <Miner name="Miner" position="50.3014 2.0 39.1446" yaw="0.0" />

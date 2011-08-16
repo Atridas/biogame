@@ -18,13 +18,14 @@ class CFrustum
 {
 public:
 	
-  void	Update							( const D3DXMATRIX &viewproj );
-  void  Update              ( const CCamera* _pCamera );
-  void  Update              ( const CCamera* _pCamera, const Vect3f _vPoints[8]);
-  void  Update              ( const Vect3f& _vCameraEye, const Vect3f* _vPoints, uint32 _iNumPoints);
-  bool	SphereVisible				( const D3DXVECTOR3 &p, float radius ) const;
-  bool	BoxVisible					( const D3DXVECTOR3 &max, const D3DXVECTOR3 &min ) const;
-  bool  BoxVisibleByVertexs	( const Vect3f* points) const;
+  void	Update							      ( const D3DXMATRIX &viewproj );
+  void  Update                    ( const CCamera* _pCamera );
+  void  Update                    ( const CCamera* _pCamera, const Vect3f _vPoints[8]);
+  void  Update                    ( const Vect3f& _vCameraEye, const Vect3f* _vPoints, uint32 _iNumPoints);
+  bool	SphereVisible				      ( const D3DXVECTOR3 &p, float radius ) const;
+  bool	BoxVisible					      ( const D3DXVECTOR3 &max, const D3DXVECTOR3 &min ) const;
+  bool  BoxVisibleByVertexs	      ( const Vect3f* points) const;
+  bool  BoxVisibleByVertexsNoNear	( const Vect3f* points) const;
 
   //els punts van en el mateix ordre que a bounding box
   void  GetPoints           ( Vect3f* _vPoints );

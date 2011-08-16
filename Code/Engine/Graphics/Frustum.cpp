@@ -193,6 +193,28 @@ bool CFrustum::BoxVisibleByVertexs( const Vect3f* points) const
 	return true;
 }
 
+bool CFrustum::BoxVisibleByVertexsNoNear	( const Vect3f* points) const
+{  
+  int iInCount;
+	for(int p=0; p<5; p++) //No tallem el near plane
+	{
+		iInCount = 8;
+		for(int i=0; i<8; i++)
+		{
+			// Probamos el punto contra todos los planos
+			if( (m_frustum[p][0]*points[i].x + m_frustum[p][1]*points[i].y + m_frustum[p][2]*points[i].z + m_frustum[p][3]) <= 0 )
+				--iInCount;
+		}
+		// ¿Están todos los puntos fuera?
+		if (iInCount == 0)
+			return false;
+	}
+	
+	// Si todos los puntos están dentro, entonces la caja
+	// está dentro del frustum o parcialmente
+	return true;
+}
+
 bool CFrustum::BoxVisible( const D3DXVECTOR3 &max, const D3DXVECTOR3 &min) const 
 {
 	float points[24];
