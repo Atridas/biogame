@@ -20,8 +20,10 @@ public:
 
   CSparseGraph* GetGraph() const {return m_pGraph;};
 
-  void TraceEdges();
+  void CompleteGraph();
   int GetClosestNode(const Vect3f& _vPosition); //Utilitzar aquest, i no el del graf!!!! El del graf no s'optimitzarà!
+  vector<CGraphNode*> GetClosestCobertura   (const Vect3f& _vPosition);
+  vector<Vect3f>      GetClosestCoberturaVec(const Vect3f& _vPosition);
   
   vector<CGraphNode*> SearchPath   (const Vect3f& _vOrigin, const Vect3f& _vDestination);
   vector<Vect3f>      SearchPathVec(const Vect3f& _vOrigin, const Vect3f& _vDestination);
@@ -29,10 +31,13 @@ public:
 protected:
   virtual void Release();
 private:
-
+  
+  void TraceEdges();
   bool EdgeValid(const CGraphNode&, const CGraphNode&);
 
   CSparseGraph * m_pGraph;
+
+  set<int> m_NodesCobertura;
 };
 
 #endif

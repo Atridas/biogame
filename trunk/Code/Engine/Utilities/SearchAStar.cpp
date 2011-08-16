@@ -23,7 +23,11 @@ void CSearchAStar::Search()
     m_ShortestPathTree[NextClosestNode] = m_SearchFrontier[NextClosestNode];
 
     //if the target has been found exit
-    if (NextClosestNode == m_iTarget) return;
+    if (m_Targets.find(NextClosestNode) != m_Targets.end())
+    {
+      m_iTargetFinal = NextClosestNode;
+      return;
+    }
 
     //now to test all the edges attached to this node
     CSparseGraph::ConstEdgeIterator ConstEdgeItr(m_Graph, NextClosestNode);
@@ -32,8 +36,19 @@ void CSearchAStar::Search()
         !ConstEdgeItr.end(); 
          pE=ConstEdgeItr.next())
     {
-      //calculate the heuristic cost from this node to the target (H)                       
-      float HCost = m_pHeuristic->Calculate(m_Graph, m_iTarget, pE->GetTo()); 
+      //calculate the heuristic cost from this node to the target (H)         
+      set<int>::iterator l_it  = m_Targets.begin();
+      set<int>::iterator l_end = m_Targets.end();
+      float HCost = m_pHeuristic->Calculate(m_Graph, *l_it, pE->GetTo()); 
+
+      for(++l_it; l_it != l_end; ++l_it) //saltem el primer, que ja l'hem fet!
+      {
+        float l_fNewHeuristic = m_pHeuristic->Calculate(m_Graph, *l_it, pE->GetTo());
+        if(l_fNewHeuristic < HCost)
+        {
+          HCost = l_fNewHeuristic;
+        }
+      }
 
       //calculate the 'real' cost to this node from the source (G)
       float GCost = m_GCosts[NextClosestNode] + pE->GetCost();
@@ -72,9 +87,9 @@ std::list<int> CSearchAStar::GetPathToTarget()const
   std::list<int> path;
 
   //just return an empty path if no target or no path found
-  if (m_iTarget < 0)  return path;    
+  if (m_iTargetFinal < 0)  return path;    
 
-  int nd = m_iTarget;
+  int nd = m_iTargetFinal;
 
   path.push_front(nd);
     

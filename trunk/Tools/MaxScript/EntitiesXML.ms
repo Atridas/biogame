@@ -411,5 +411,11 @@ function XMLEntityNavNode _instance &_TagName =
 		format "%" (GetUserProp _instance "maxNavDistance") to:l_ss
 		append l_params #("maxDistance", l_ss)
 	)
+	if (GetUserProp _instance "nodeCobertura") != undefined then
+	(
+		l_ss = "" as stringStream
+		format "%" (GetUserProp _instance "nodeCobertura") to:l_ss
+		append l_params #("cobertura", l_ss)
+	)
 	return l_params
 )

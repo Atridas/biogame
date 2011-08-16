@@ -70,7 +70,7 @@ bool CGameProcess::Init()
   m_pOmniLight->SetActive(true);*/
 
   
-  CORE->GetIAManager()->TraceEdges();
+  CORE->GetIAManager()->CompleteGraph();
   CORE->GetParticleManager()->SetAllEmittersActive(true);
 
   SetOk(true);

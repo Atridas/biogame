@@ -263,9 +263,18 @@ void LoadComponentNavNode(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
   bool l_bAutoroute = _TreeComponent.GetBoolProperty("autoroute", true, false);
   float l_fMaxautoroute = _TreeComponent.GetFloatProperty("maxDistance", -1, false);
 
-  if(!CComponentNavNode::AddToEntity(_pEntity, l_bAutoroute, l_fMaxautoroute))
+  CComponentNavNode *l_pcNavNode;
+
+  if(!(l_pcNavNode = CComponentNavNode::AddToEntity(_pEntity, l_bAutoroute, l_fMaxautoroute)))
   {
     LOGGER->AddNewLog(ELL_WARNING,"\tError al crear el component NavNode de l'objecte \"%s\"",_pEntity->GetName());
+  }
+  else
+  {
+    if(_TreeComponent.GetPszISOProperty("cobertura", "", false) == "baixa")
+    {
+      l_pcNavNode->m_bCoberturaBaixa = true;
+    }
   }
 
 }
@@ -544,7 +553,7 @@ CGameEntity* CEntityManager::InitMiner(const string& _szPlayerName, const Vect3f
 CGameEntity* CEntityManager::InitMilitar(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName)
 {
   CGameEntity* l_pMilitar = InitEnemy(_szPlayerName, _vPosition, 0.7f, 
-                    "State_Enemy_Idle", "Militar", "Data/Animated Models/Militar/Skeleton.xml",
+                    "State_Soldier_Idle", "Militar", "Data/Animated Models/Militar/Skeleton.xml",
                     _szEntityName);
 
   l_pMilitar->GetComponent<CComponentRenderableObject>()->m_fHeightAdjustment = -1.5f;

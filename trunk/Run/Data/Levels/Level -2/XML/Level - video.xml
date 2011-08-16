@@ -26,6 +26,6 @@
     </Room>
   </Rooms>
   <Portals>
-    <Portal name="Porta Video" roomA="Sala Video" roomB="Passadis Video" size="3.11871 3.11871 0.823618" position="7.19229 -0.675806 3.41286" yaw="25.0" pitch="0.0" roll="0.0" />
+    <Portal name="Porta Video" roomA="Sala Video" roomB="Passadis Video" size="5.70498 3.11871 1.17429" position="6.95914 -0.675806 3.30414" yaw="25.0" pitch="0.0" roll="0.0" />
   </Portals>
 </Level>

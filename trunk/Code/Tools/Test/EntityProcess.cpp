@@ -81,7 +81,7 @@ bool CEntityProcess::Init()
   m_pSpotLight->SetActive(true);
 
 
-  CORE->GetIAManager()->TraceEdges();
+  CORE->GetIAManager()->CompleteGraph();
 
   SetOk(true);
   return IsOk();

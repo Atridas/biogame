@@ -1,16 +1,22 @@
 
 
-State_Enemy_Idle = {}
+-----------------------------------------------
 
-State_Enemy_Caminant = {}
+State_Soldier_Idle = {}
 
-State_Enemy_Disparant = {}
+State_Soldier_Buscant_Cobertura = {}
 
-State_Enemy_Morint = {}
+State_Soldier_Disparant = {}
 
-State_Enemy_Mort = {}
+State_Soldier_Cobrint = {}
 
-State_Enemy_Hit = {}
+State_Soldier_Cobrint_Disparant = {}
+
+State_Soldier_Morint = {}
+
+State_Soldier_Mort = {}
+
+State_Soldier_Hit = {}
 
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
@@ -18,7 +24,7 @@ State_Enemy_Hit = {}
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 
-State_Enemy_Idle["Enter"] = function(_enemic)
+State_Soldier_Idle["Enter"] = function(_enemic)
 
   local animation = _enemic:get_component(BaseComponent.animation)
   animation:clear_all_cycles(0.0)
@@ -26,14 +32,14 @@ State_Enemy_Idle["Enter"] = function(_enemic)
 end
 
 -------------------------------------------------------------------------------------------------
-State_Enemy_Idle["Exit"] = function(_enemic)
+State_Soldier_Idle["Exit"] = function(_enemic)
   
   local animation = _enemic:get_component(BaseComponent.animation)
   animation:clear_cycle('idle',0.3)
 end
 
 -------------------------------------------------------------------------------------------------
-State_Enemy_Idle['Update'] = function(_enemic, _dt)
+State_Soldier_Idle['Update'] = function(_enemic, _dt)
 
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
   
@@ -43,18 +49,18 @@ State_Enemy_Idle['Update'] = function(_enemic, _dt)
   local dist_sq = (ia_pos - player_pos):length_sq()
   
   if dist_sq < Enemy_Constants["Distance Walk"] then
-    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Caminant')
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Buscant_Cobertura')
     return
   end
 end
 
 -------------------------------------------------------------------------------------------------
-State_Enemy_Idle['Receive'] = function(_enemic, _event)
+State_Soldier_Idle['Receive'] = function(_enemic, _event)
   if _event.msg == Event.rebre_impacte then
-    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Hit')
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Hit')
   end
   if _event.msg == Event.morir then
-    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Morint')
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Morint')
   end
 end
 
@@ -64,18 +70,19 @@ end
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 
-State_Enemy_Caminant["Enter"] = function(_enemic)
+State_Soldier_Buscant_Cobertura["Enter"] = function(_enemic)
 
   local animation = _enemic:get_component(BaseComponent.animation)
   animation:clear_all_cycles(0.0)
   animation:play_cycle('walk', 0.3)
   
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
+  ia_brain:plan_path_to_cobertura()
   ia_brain.time = 0
 end
 
 -------------------------------------------------------------------------------------------------
-State_Enemy_Caminant["Exit"] = function(_enemic)
+State_Soldier_Buscant_Cobertura["Exit"] = function(_enemic)
 
   local animation = _enemic:get_component(BaseComponent.animation)
   animation:clear_cycle('walk',0.3)
@@ -83,29 +90,40 @@ State_Enemy_Caminant["Exit"] = function(_enemic)
 end
 
 -------------------------------------------------------------------------------------------------
-State_Enemy_Caminant['Update'] = function(_enemic, _dt)
+State_Soldier_Buscant_Cobertura['Update'] = function(_enemic, _dt)
 
   local object3d = _enemic:get_component(BaseComponent.object_3d)
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
   local moviment = _enemic:get_component(BaseComponent.movement)
   
   local ia_pos     = object3d:get_position()
+  
+  if ia_brain:arrived_at_node(Enemy_Constants["Node Distance"]) then
+    if ia_brain:arrived_at_destination() then
+      --TODO
+    else
+      ia_brain:set_next_node()
+    end
+  end
+  
+  
+  local node_pos = ia_brain:get_next_node_position()
   local player_pos = ia_brain.player:get_component(BaseComponent.object_3d):get_position()
   
-  local dist_sq = (ia_pos - player_pos):length_sq()
+  local dist_sq_player = (ia_pos - node_pos):length_sq()
   
-  if dist_sq > Enemy_Constants["Distance Lose Walk"] then
-    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Idle')
+  if dist_sq_player > Enemy_Constants["Distance Lose Walk"] then
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Idle')
     return
   end
   
   ia_brain.time = ia_brain.time + _dt
   if ia_brain.time > Enemy_Constants["Time Btw Shoot"] then
-    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Disparant')
-    return
+    --_enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Disparant')
+    --return
   end
 
-  local direction = (player_pos - ia_pos)
+  local direction = (node_pos - ia_pos)
   
   dist_sq = direction:length_sq()
   
@@ -143,12 +161,12 @@ State_Enemy_Caminant['Update'] = function(_enemic, _dt)
 end
 
 -------------------------------------------------------------------------------------------------
-State_Enemy_Caminant['Receive'] = function(_enemic, _event)
+State_Soldier_Buscant_Cobertura['Receive'] = function(_enemic, _event)
   if _event.msg == Event.rebre_impacte then
-    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Hit')
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Hit')
   end
   if _event.msg == Event.morir then
-    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Morint')
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Morint')
   end
 end
 

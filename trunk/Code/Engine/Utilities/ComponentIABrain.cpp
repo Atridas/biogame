@@ -2,11 +2,13 @@
 #include "Core.h"
 #include "RenderableAnimatedInstanceModel.h"
 #include "ComponentRenderableObject.h"
-#include "Core.h"
 #include "PhysicsManager.h"
 #include "ComponentObject3D.h"
 #include "ComponentLaser.h"
 #include "ComponentRagdoll.h" 
+#include "ComponentNavNode.h"
+#include "IAManager.h"
+#include "GraphDefines.h"
 #include "cal3d\cal3d.h"
 
 
@@ -134,4 +136,44 @@ void CComponentIABrain::Die()
   }
   
   
+}
+
+void CComponentIABrain::PlanPathToCobertura()
+{
+  m_PathToCobertura = CORE->GetIAManager()->GetClosestCobertura(GetEntity()->GetComponent<CComponentObject3D>()->GetPosition());
+  
+  vector<CGraphNode*>::iterator first = m_PathToCobertura.begin();
+  vector<CGraphNode*>::iterator last  = m_PathToCobertura.end();
+  while ((first!=last)&&(first!=--last))
+    swap (*first++,*last);
+}
+
+Vect3f CComponentIABrain::GetNextNodePosition() const
+{
+  return m_PathToCobertura[m_PathToCobertura.size() - 1]->GetPosition();
+}
+
+bool CComponentIABrain::ArrivedAtDestination() const
+{
+  return m_PathToCobertura.size() == 1;
+}
+
+bool CComponentIABrain::ArrivedAtNode(float _fDistanceSq) const
+{
+  Vect3f l_vPos = GetEntity()->GetComponent<CComponentObject3D>()->GetPosition();
+  Vect3f l_vNodePos = GetNextNodePosition();
+
+  if(l_vPos.SqDistance(l_vNodePos) < _fDistanceSq)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+void CComponentIABrain::SetNextNode()
+{
+  m_PathToCobertura.pop_back();
 }

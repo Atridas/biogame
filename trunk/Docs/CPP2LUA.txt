@@ -979,6 +979,21 @@ ENTITIES
       die
       void Die()
       
+      plan_path_to_cobertura
+      void PlanPathToCobertura();
+      
+      get_next_node_position
+      Vect3f GetNextNodePosition() const;
+      
+      arrived_at_destination
+      bool ArrivedAtDestination() const;
+      
+      arrived_at_node
+      bool ArrivedAtNode() const;
+      
+      set_next_node
+      void SetNextNode();
+  
     Attributes:
       player
       CComponentIABrain::m_pPlayer
