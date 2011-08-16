@@ -27,6 +27,8 @@
 #include "ComponentIABrain.h"
 #include "IAManager.h"
 #include "GraphDefines.h"
+#include "ParticleManager.h"
+#include "BillboardManager.h"
 
 #include "PhysicActor.h"
 #include <PhysicsManager.h>
@@ -99,6 +101,9 @@ void CEntityProcess::Update(float _fElapsedTime)
 
   m_pSpotLight->SetPosition(m_pPlayerPos->GetPosition());
   m_pSpotLight->SetDirection(m_pCamera->GetDirection());
+
+  CORE->GetParticleManager()->Update(_fElapsedTime, m_pCamera);
+  CORE->GetBillBoardManager()->Update(_fElapsedTime, m_pCamera);
 }
 
 void CEntityProcess::RenderScene(CRenderManager* _pRM)
@@ -120,6 +125,8 @@ void CEntityProcess::RenderScene(CRenderManager* _pRM)
   
   //CORE->GetRenderableObjectsManager()->Render(_pRM);
   CORE->GetPortalManager()->Render(_pRM);
+  CORE->GetParticleManager()->Render(_pRM);
+  CORE->GetBillBoardManager()->Render(_pRM);
   //m_PortalManager.Render(_pRM);
 
   //CORE->GetEntityManager()->DebugRender(_pRM);
