@@ -46,8 +46,8 @@
 	<!--<capture_frame_buffer name="capture_frame_buffer_scene_effect_without_post_fx" texture="FrameBufferTextureWithoutPostFX"
                         texture_size_as_frame_buffer="true" active="true" format_type="A8R8G8B8"/>-->
 
-	<!--<capture_frame_buffer_post_fx name="capture_frame_buffer_scene_effect_with_post_fx" texture="FrameBufferTextureWithPostFX"
-                                texture_size_as_frame_buffer="true" active="true" format_type="A8R8G8B8"/>-->
+	<capture_frame_buffer_post_fx name="capture_frame_buffer_scene_effect_with_post_fx" texture="FrameBufferTextureWithPostFX"
+                                texture_size_as_frame_buffer="true" active="false" format_type="A8R8G8B8"/>
 
 
 
@@ -64,21 +64,21 @@
     <texture stage_id="0" texture="GlowTexture"/>
   </post_render>
 
-  <!--<post_render type="draw_quad" name="Shockwave" effect="Shockwave" active="true">
-    <texture stage_id="0" texture="FrameBufferTextureWithoutPostFX"/>
-  </post_render>-->
+  <warp type="draw_quad" name="Shockwave" effect="Shockwave" use_time="true" active="false">
+    <texture stage_id="0" texture="FrameBufferTextureWithPostFX"/>
+  </warp>
   
-  <post_render type="draw_quad" name="damage" effect="TextureAlphaFactor" active="false">
+  <gui  name="damage" effect="TextureAlphaFactor" active="false">
     <texture stage_id="0" texture="Data/Textures/damage.png"/>
-  </post_render>
+  </gui>
   
-  <post_render type="draw_quad" size_x="0.6" position="0.3 -0.2" name="blood_decal" effect="TextureAlphaFactor" active="false">
+  <gui type="draw_quad" size_x="0.6" position="0.3 -0.2" name="blood_decal" effect="TextureAlphaFactor" active="false">
     <texture stage_id="0" texture="Data/Textures/Blood_Decal.png"/>
-  </post_render>
+  </gui>
 
-  <post_render type="draw_quad" position="0.5 0.5" size_x="0.02" alignment="center" name="aim" effect="TextureAlphaFactor" active="false">
+  <gui type="draw_quad" position="0.5 0.5" size_x="0.02" alignment="center" name="aim" effect="TextureAlphaFactor" active="false">
     <texture stage_id="0" texture="Data/Textures/aim.png"/>
-  </post_render>
+  </gui>
   
 	<!--<post_render type="draw_quad" name="noise_and_vignetting_scene_effect" technique="RenderNoiseAndVignettingTechnique" active="true" color="1.0 1.0 1.0 1.0">
 		<texture stage_id="0" texture="Data/Textures/noise.tga"/>

@@ -23,7 +23,8 @@
 #include "AnimatedCoreModel.h"
 #include "Material.h"
 
-#define BLOOD_FADEOUT_TIME 2.5
+#define BLOOD_FADEOUT_TIME 2.5f
+#define SHOCK_WAVE_VELOCITY 2.5f
 
 CComponentPlayerController* CComponentPlayerController::AddToEntity(CGameEntity *_pEntity)
 {
@@ -117,8 +118,25 @@ void CComponentPlayerController::Update(float _fDeltaTime)
     m_fBloodFadeOutTime = 0.0f;
   }
 
-  
   m_fBloodTime += _fDeltaTime;
+
+
+  CDrawQuadSceneEffect* l_pShockWave = (CDrawQuadSceneEffect*)CORE->GetSceneEffectManager()->GetResource("Shockwave");
+  CDrawQuadSceneEffect* l_pCaptureFrameBuffers = (CDrawQuadSceneEffect*)CORE->GetSceneEffectManager()->GetResource("capture_frame_buffer_scene_effect_with_post_fx");
+
+  
+  if(l_pShockWave->IsActive() == true)
+  {
+    m_fForceTime += _fDeltaTime;
+
+    l_pShockWave->SetTime(m_fForceTime*SHOCK_WAVE_VELOCITY);
+
+    if(m_fForceTime > 3.0f)
+    {
+      l_pShockWave->SetActive(false);
+      l_pCaptureFrameBuffers->SetActive(false);
+    }
+  }
 
   if(m_iNumUpdates < 3)
     m_iNumUpdates++;
@@ -224,6 +242,19 @@ void CComponentPlayerController::Shoot()
                                                 Vect3f(l_vTanslationBone2.x,l_vTanslationBone2.y,l_vTanslationBone2.z),
                                                 l_vCenterPoint);
   }
+}
+
+void CComponentPlayerController::Force()
+{
+  CDrawQuadSceneEffect* l_pShockWave = (CDrawQuadSceneEffect*)CORE->GetSceneEffectManager()->GetResource("Shockwave");
+  CDrawQuadSceneEffect* l_pCaptureFrameBuffers = (CDrawQuadSceneEffect*)CORE->GetSceneEffectManager()->GetResource("capture_frame_buffer_scene_effect_with_post_fx");
+
+  //if(l_pShockWave->IsActive() == false)
+  //{
+    l_pCaptureFrameBuffers->SetActive(true);
+    l_pShockWave->SetActive(true);
+    m_fForceTime = 0.0f;
+  //}
 }
 
 void CComponentPlayerController::Use()

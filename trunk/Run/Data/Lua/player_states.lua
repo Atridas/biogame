@@ -30,6 +30,7 @@ State_Player_Tocat = {}
 State_Player_Morint = {}
 State_Player_Mort = {}
 State_Player_Escut = {}
+State_Player_Force = {}
 
 State_Player_Cobertura_Baixa = {}
 State_Player_Cobertura_Baixa_Tocat = {}
@@ -124,7 +125,7 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   
   if ACTION_MANAGER:is_action_active('Shield') then
     if _jugador:get_component(BaseComponent.shield):is_ready() then
-      _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Escut')
+      _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Force')
       
       return
     end
@@ -453,6 +454,48 @@ end
 State_Player_Escut['Receive'] = function(_jugador, _event)
 end
 
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-- Force !!!! -----------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+
+
+State_Player_Force['Enter'] = function(_jugador)
+
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  local animation = _jugador:get_component(BaseComponent.animation)
+  --animation:play_cycle(Player_Constants["Escut Idle"], 0.3)
+  animation:clear_all_cycles(0.1)
+  animation:play_cycle(Player_Constants["Escut"], 0.1)
+  player_controller.time = 0
+  player_controller:force()
+  --SOUND:play_sample(Player_Constants["So escut activat"])
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Force['Exit'] = function(_jugador)
+  
+  --local animation = _jugador:get_component(BaseComponent.animation)
+  --animation:stop_cycle(Player_Constants["Escut"], 0.2)
+  
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Force['Update'] = function(_jugador, _dt)
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  
+  player_controller.time = player_controller.time + _dt
+  
+  if player_controller.time > 0.3 then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+  end
+  
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Force['Receive'] = function(_jugador, _event)
+end
 
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------

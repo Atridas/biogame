@@ -13,6 +13,8 @@ bool CDrawQuadSceneEffect::Init(const CXMLTreeNode& _params)
   if(!CSceneEffect::Init(_params))
     return false;
 
+  m_bUseTime = _params.GetBoolProperty("use_time",false,false);
+
   string l_szAlignment = _params.GetPszISOProperty("alignment","",false);
 
   if(l_szAlignment.compare("center") == 0)
@@ -71,6 +73,12 @@ void CDrawQuadSceneEffect::PostRender(CRenderManager *_pRM)
     CEffectManager* l_pEffectManager = CORE->GetEffectManager();
     l_pEffectManager->SetTextureWidthHeight(m_iSize.x,m_iSize.y);
     l_pEffectManager->SetAlphaFactor(m_fAlphaFactor);
+
+    if(m_bUseTime)
+    {
+      l_pEffectManager->SetTime(m_fTime);
+    }
+
     l_pEffectManager->LoadShaderData(m_pEffect);
 
     ActivateTextures();

@@ -43,6 +43,7 @@ public:
   float m_fTime;
 
   void Shoot();
+  void Force();
   void Die();
   void Respawn();
   bool Cover();
@@ -63,6 +64,7 @@ protected:
       m_fTime(0),
       m_fBloodFadeOutTime(0.0f),
       m_fBloodTime(0.0f),
+      m_fForceTime(0.0f),
 
       m_vCoverNormal(Vect3f(0.0f)),
       m_vCoverPosition(Vect3f(0.0)),
@@ -77,6 +79,8 @@ private:
 
   float m_fBloodFadeOutTime;
   float m_fBloodTime;
+
+  float m_fForceTime;
 
   CPhysicUserData* CheckCover(SCollisionInfo& _sCInfo);
   //Altres components referenciats
