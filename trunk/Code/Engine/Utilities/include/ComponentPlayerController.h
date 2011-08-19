@@ -62,6 +62,7 @@ protected:
 
       m_fTime(0),
       m_fBloodFadeOutTime(0.0f),
+      m_fBloodTime(0.0f),
 
       m_vCoverNormal(Vect3f(0.0f)),
       m_vCoverPosition(Vect3f(0.0)),
@@ -75,6 +76,7 @@ protected:
 private:
 
   float m_fBloodFadeOutTime;
+  float m_fBloodTime;
 
   CPhysicUserData* CheckCover(SCollisionInfo& _sCInfo);
   //Altres components referenciats

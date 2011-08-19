@@ -468,6 +468,10 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     m_bBumpUpdated = false;
   }
   
+  if(m_bTimeUpdated)
+  {
+    l_pD3DEffect->SetFloat(m_pTimeParameter,(FLOAT)m_fTime);
+  }
 }
 
 CEffect* CEffectManager::ActivateMaterial(CMaterial* _pMaterial)

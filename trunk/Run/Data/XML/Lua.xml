@@ -24,8 +24,8 @@
     <script action="LIGHT_MANAGER                 = CORE:get_light_manager()"/>
     <script action="LM                            = CORE:get_light_manager()"/>
 
-    <script action="SCRIPT_MANAGER                = CORE:get_scipt_manager()"/>
-    <script action="SM                            = CORE:get_scipt_manager()"/>
+    <script action="SCRIPT_MANAGER                = CORE:get_script_manager()"/>
+    <script action="SM                            = CORE:get_script_manager()"/>
 
     <script action="INPUT_MANAGER                 = CORE:get_input_manager()"/>
     <script action="IM                            = CORE:get_input_manager()"/>
@@ -43,6 +43,9 @@
     <script action="EM                            = CORE:get_entity_manager()"/>
     
     <script action="GUI_MANAGER                   = CORE:get_gui_manager()"/>
+    
+    <script action="IA_MANAGER                    = CORE:get_ia_manager()"/>
+    <script action="IA                            = CORE:get_ia_manager()"/>
 
     <script action="ENGINE                        = CORE:get_engine()"/>
   </initscripts>

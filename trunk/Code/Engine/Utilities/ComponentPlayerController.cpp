@@ -92,7 +92,7 @@ void CComponentPlayerController::Update(float _fDeltaTime)
     if(l_fHP < l_fMaxHP)
     {
       float l_fDamageAlpha = 1.0f - (l_fHP/l_fMaxHP);
-      l_fDamageAlpha = l_fDamageAlpha + abs(l_fDamageAlpha*0.8f*sinf(5.0f*m_fTime));
+      l_fDamageAlpha = l_fDamageAlpha + abs(l_fDamageAlpha*0.8f*sinf(5.0f*m_fBloodTime));
       if(l_fDamageAlpha > 1.0f)
       {
         l_fDamageAlpha = 1.0f;
@@ -118,7 +118,7 @@ void CComponentPlayerController::Update(float _fDeltaTime)
   }
 
   
-  m_fTime += _fDeltaTime;
+  m_fBloodTime += _fDeltaTime;
 
   if(m_iNumUpdates < 3)
     m_iNumUpdates++;
@@ -363,6 +363,7 @@ void CComponentPlayerController::ReceiveEvent(const SEvent& _Event)
     }else if(_Event.Msg == SEvent::REBRE_IMPACTE)
     {
       m_fBloodFadeOutTime = BLOOD_FADEOUT_TIME;
+      m_fBloodTime = 0.0f;
     }
 
   }

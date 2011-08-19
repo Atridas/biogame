@@ -13,6 +13,13 @@ bool CDrawQuadSceneEffect::Init(const CXMLTreeNode& _params)
   if(!CSceneEffect::Init(_params))
     return false;
 
+  string l_szAlignment = _params.GetPszISOProperty("alignment","",false);
+
+  if(l_szAlignment.compare("center") == 0)
+  {
+    m_Alignment = CENTER;
+  }
+
   Vect2f l_fPos = _params.GetVect2fProperty("position",Vect2f(0),false);
 
   m_iPos.x = (int) (l_fPos.x * RENDER_MANAGER->GetScreenWidth());
@@ -77,7 +84,7 @@ void CDrawQuadSceneEffect::PostRender(CRenderManager *_pRM)
       for (UINT iPass = 0; iPass < l_NumPasses; iPass++)
       {
         l_pD3DEffect->BeginPass(iPass);
-        _pRM->DrawColoredTexturedQuad2D(m_iPos,m_iSize.x,m_iSize.y,UPPER_LEFT,m_Color);
+        _pRM->DrawColoredTexturedQuad2D(m_iPos,m_iSize.x,m_iSize.y,m_Alignment,m_Color);
         l_pD3DEffect->EndPass();
       }
       l_pD3DEffect->End();
