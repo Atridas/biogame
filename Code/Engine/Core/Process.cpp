@@ -164,5 +164,9 @@ void CProcess::PostRender(CRenderManager* _pRM, bool _bCaptureNoPostFX)
     m_pSceneEffectManager->PostRender(_pRM);
     //Capturamos el Frame Buffer después de los efectos de post render
     m_pSceneEffectManager->CaptureFrameBuffersAfterPostRender(_pRM);
+
+    m_pSceneEffectManager->WarpRender(_pRM);
+
+    m_pSceneEffectManager->GUIRender(_pRM);
   }
 }

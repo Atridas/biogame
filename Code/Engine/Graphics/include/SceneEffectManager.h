@@ -29,6 +29,8 @@ public:
   void ActivateRenderSceneEffects();
   void CaptureFrameBuffers(CRenderManager* _pRM);
   void PostRender(CRenderManager* _pRM);
+  void GUIRender(CRenderManager* _pRM);
+  void WarpRender(CRenderManager* _pRM);
   void CaptureFrameBuffersAfterPostRender(CRenderManager* _pRM);
 
   void SetShadowMapLightCast(CLight* _pLight);
@@ -40,6 +42,9 @@ private:
   vector<CSceneEffect*> m_vCaptureFrameBufferSceneEffects;
   vector<CSceneEffect*> m_vCaptureFrameBufferSceneEffectsAfterPostRender;
   vector<CSceneEffect*> m_vPostRenderSceneEffects;
+  vector<CSceneEffect*> m_vGUISceneEffects;
+  vector<CSceneEffect*> m_vWarpSceneEffects;
+
   bool Load();
   string m_szFileName;
 

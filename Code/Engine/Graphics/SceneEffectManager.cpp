@@ -26,6 +26,8 @@ void CSceneEffectManager::Release()
   m_vCaptureFrameBufferSceneEffects.clear();
   m_vCaptureFrameBufferSceneEffectsAfterPostRender.clear();
   m_vPostRenderSceneEffects.clear();
+  m_vGUISceneEffects.clear();
+  m_vWarpSceneEffects.clear();
 
   CMapManager::Release();
 
@@ -160,6 +162,32 @@ bool CSceneEffectManager::Load()
         AddResource(l_szName,l_pDrawQuad);
         m_vPostRenderSceneEffects.push_back(l_pDrawQuad);
       }
+    } else if(strcmp(l_treeSceneEffect.GetName(),"gui") == 0)
+    {
+      //gui
+      CDrawQuadSceneEffect* l_pDrawQuad = new CDrawQuadSceneEffect();
+
+      if(!l_pDrawQuad->Init(l_treeSceneEffect))
+      {
+        LOGGER->AddNewLog(ELL_WARNING,"CSceneEffectManager::Load  Scene effect incorrecte \"%s\".", l_treeSceneEffect.GetName());
+        delete l_pDrawQuad;
+      } else {
+        AddResource(l_szName,l_pDrawQuad);
+        m_vGUISceneEffects.push_back(l_pDrawQuad);
+      }
+    } else if(strcmp(l_treeSceneEffect.GetName(),"warp") == 0)
+    {
+      //warp
+      CDrawQuadSceneEffect* l_pDrawQuad = new CDrawQuadSceneEffect();
+
+      if(!l_pDrawQuad->Init(l_treeSceneEffect))
+      {
+        LOGGER->AddNewLog(ELL_WARNING,"CSceneEffectManager::Load  Scene effect incorrecte \"%s\".", l_treeSceneEffect.GetName());
+        delete l_pDrawQuad;
+      } else {
+        AddResource(l_szName,l_pDrawQuad);
+        m_vWarpSceneEffects.push_back(l_pDrawQuad);
+      }
     } else if(!l_treeSceneEffect.IsComment())
     {
       LOGGER->AddNewLog(ELL_WARNING,"CSceneEffectManager::Load  Element no reconegut a l'xml.", l_treeSceneEffect.GetName());
@@ -207,7 +235,25 @@ void CSceneEffectManager::PostRender(CRenderManager* _pRM)
   }
   
 }
-  
+
+void CSceneEffectManager::GUIRender(CRenderManager* _pRM)
+{
+  for(size_t i=0; i < m_vGUISceneEffects.size() ; i++)
+  {
+    if(m_vGUISceneEffects[i]->IsActive())
+      m_vGUISceneEffects[i]->PostRender(_pRM);
+  }
+}
+
+void CSceneEffectManager::WarpRender(CRenderManager* _pRM)
+{
+  for(size_t i=0; i < m_vWarpSceneEffects.size() ; i++)
+  {
+    if(m_vWarpSceneEffects[i]->IsActive())
+      m_vWarpSceneEffects[i]->PostRender(_pRM);
+  }
+}
+
 void CSceneEffectManager::CaptureFrameBuffersAfterPostRender(CRenderManager* _pRM)
 {
   for(size_t i=0; i < m_vCaptureFrameBufferSceneEffectsAfterPostRender.size() ; i++)

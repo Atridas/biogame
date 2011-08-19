@@ -806,6 +806,9 @@ ENTITIES
       shoot
       void Shoot()
       
+      force
+      void Force()
+      
       cover
       bool Cover()
       
