@@ -7,7 +7,7 @@
 
 // -------------------------------------------------
 class CPhysxSkeleton;
-class CRenderableAnimatedInstanceModel;
+class CDrawQuadSceneEffect;
 class CRenderableObject;
 // -------------------------------------------------
 
@@ -21,18 +21,18 @@ public:
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_MIRILLA;};
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_MIRILLA;};
 
-  static CComponentMirilla* AddToEntity(CGameEntity* _pEntity, const string& _szMeshName);
+  static CComponentMirilla* AddToEntity(CGameEntity* _pEntity, const string& _szName);
   void SetActive(bool _bActive);
   
   virtual void PostUpdate(float _fDeltaTime);
 
 protected:
-  CComponentMirilla():m_bActive(false),m_pRenderableObject(0) {};
-  bool Init(CGameEntity* _pEntity, const string& _szMeshName);
+  CComponentMirilla():m_bActive(false),m_pAim(0) {};
+  bool Init(CGameEntity* _pEntity, const string& _szName);
   virtual void Release();
 private:
 
-  CRenderableObject*                m_pRenderableObject;
+  CDrawQuadSceneEffect* m_pAim;
   bool m_bActive;
 };
 

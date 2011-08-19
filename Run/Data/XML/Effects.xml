@@ -49,6 +49,7 @@
     <effect name="PostProcessBloom2" file="Data/Effects/PostProcessBloomEffect2.fx" technique="PostProcessBloomTechnique2" />
     
     <effect name="TextureAlphaFactor" file="Data/Effects/TextureAlphaFactorEffect.fx" technique="TextureAlphaFactorTechnique" />
+    <effect name="Shockwave" file="Data/Effects/ShockWaveEffect.fx" technique="ShockWaveTechnique" />
     
     <!--<effect name="HDR" file="Data/Effects/HDR.fx"/>-->
     <!--<effect name="Blur" file="Data/Effects/Blur.fx" />-->

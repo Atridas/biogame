@@ -55,7 +55,7 @@
 		<texture stage_id="0" texture="FrameBufferTextureWithoutPostFX"/>
 		<texture stage_id="1" texture="ZBlurTexture"/>
 	</post_render>-->
-
+  
 	<post_render type="draw_quad" name="post_glow" effect="PostProcessBloom" active="true">
 		<texture stage_id="0" texture="GlowTexture3"/>
 	</post_render>
@@ -64,12 +64,20 @@
     <texture stage_id="0" texture="GlowTexture"/>
   </post_render>
 
+  <!--<post_render type="draw_quad" name="Shockwave" effect="Shockwave" active="true">
+    <texture stage_id="0" texture="FrameBufferTextureWithoutPostFX"/>
+  </post_render>-->
+  
   <post_render type="draw_quad" name="damage" effect="TextureAlphaFactor" active="false">
     <texture stage_id="0" texture="Data/Textures/damage.png"/>
   </post_render>
   
-  <post_render type="draw_quad" size_x="0.5" position="0.4 -0.4" name="blood_decal" effect="TextureAlphaFactor" active="false">
+  <post_render type="draw_quad" size_x="0.6" position="0.3 -0.2" name="blood_decal" effect="TextureAlphaFactor" active="false">
     <texture stage_id="0" texture="Data/Textures/Blood_Decal.png"/>
+  </post_render>
+
+  <post_render type="draw_quad" position="0.5 0.5" size_x="0.02" alignment="center" name="aim" effect="TextureAlphaFactor" active="false">
+    <texture stage_id="0" texture="Data/Textures/aim.png"/>
   </post_render>
   
 	<!--<post_render type="draw_quad" name="noise_and_vignetting_scene_effect" technique="RenderNoiseAndVignettingTechnique" active="true" color="1.0 1.0 1.0 1.0">

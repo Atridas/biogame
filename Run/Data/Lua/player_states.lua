@@ -858,7 +858,7 @@ State_Player_Cobertura_Baixa_Apuntar['Update'] = function(_jugador, _dt)
   if ACTION_MANAGER:is_action_active('Shoot') then
     animation:play(Player_Constants["Disparar"], 0.3, 1.0, false)
     player_controller:shoot()
-    SOUND:play_sample(Player_Constants["So dispar"])
+    SOUND:play_sample(Player_Constants["So disparar"])
   end
   
   --local player_controller = _jugador:get_component(BaseComponent.player_controller)

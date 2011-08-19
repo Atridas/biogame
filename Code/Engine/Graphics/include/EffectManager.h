@@ -60,6 +60,8 @@ public:
                     m_bSpecularActive(false),
                     m_bBumpUpdated(false),
                     m_bEnvironmentUpdated(false),
+                    m_bTimeUpdated(false),
+                    m_fTime(0.0f),
                     m_fEnvironmentIntensity(0.f),
                     m_fBump(0.f),
                     m_fGlossiness(0.f),
@@ -146,6 +148,8 @@ public:
 
   void SetTextureWidthHeight(int _iWidth, int _iHeight) {m_iTextureWidth  = _iWidth; m_iTextureHeight = _iHeight; m_bTextureWidthHeightUpdated = true;};
   void SetAlphaFactor(float _fAlphaFactor) {m_fAlphaFactor = _fAlphaFactor; m_bAlphaFactorUpdated = true;};
+
+  void SetTime(float _bTime) {m_fTime = _bTime; m_bTimeUpdated = true;};
 
   void SetGlow(bool _bGlow) {m_bGlowActive = _bGlow; m_bGlowUpdated = true;};
   void SetGlowIntensity(float _fGlowIntensity) {m_fGlowIntensity = _fGlowIntensity; m_bGlowUpdated = true;};
@@ -235,6 +239,8 @@ private:
   bool m_bSemanticsUpdated;
   bool m_bLightsUpdated;
 
+  float m_bTimeUpdated;
+
   //Parametres
   float m_fGlossiness;
   float m_fSpecularLevel;
@@ -243,6 +249,7 @@ private:
   float m_fGlowIntensity;
   float m_fBump;
   float m_fEnvironmentIntensity;
+  float m_fTime;
 
   D3DXHANDLE m_pWorldMatrixParameter;
   D3DXHANDLE m_pViewMatrixParameter;
