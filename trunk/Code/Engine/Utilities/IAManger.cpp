@@ -210,17 +210,20 @@ vector<CGraphNode*> CIAManager::GetClosestCobertura   (const Vect3f& _vPosition)
     }
   }
 
-  CSearchAStar search( *m_pGraph, &CHeuristicEuclid::instance, l_iOrigin, l_CoberturesLliures);
-
-  list<int> l_Path = search.GetPathToTarget();
-
+  if(!l_CoberturesLliures.empty())
   {
-    list<int>::iterator l_it  = l_Path.begin();
-    list<int>::iterator l_end = l_Path.end();
+    CSearchAStar search( *m_pGraph, &CHeuristicEuclid::instance, l_iOrigin, l_CoberturesLliures);
 
-    for(;l_it != l_end; ++l_it)
+    list<int> l_Path = search.GetPathToTarget();
+
     {
-      Path_.push_back( &(m_pGraph->GetNode(*l_it)) );
+      list<int>::iterator l_it  = l_Path.begin();
+      list<int>::iterator l_end = l_Path.end();
+
+      for(;l_it != l_end; ++l_it)
+      {
+        Path_.push_back( &(m_pGraph->GetNode(*l_it)) );
+      }
     }
   }
 
