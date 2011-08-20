@@ -142,15 +142,22 @@ void CComponentIABrain::PlanPathToCobertura()
 {
   m_PathToCobertura = CORE->GetIAManager()->GetClosestCobertura(GetEntity()->GetComponent<CComponentObject3D>()->GetPosition());
   
-  vector<CGraphNode*>::iterator first = m_PathToCobertura.begin();
-  vector<CGraphNode*>::iterator last  = m_PathToCobertura.end();
-  while ((first!=last)&&(first!=--last))
-    swap (*first++,*last);
+  if( !m_PathToCobertura.empty() )
+  {
+    vector<CGraphNode*>::iterator first = m_PathToCobertura.begin();
+    vector<CGraphNode*>::iterator last  = m_PathToCobertura.end();
+
+    while ((first!=last)&&(first!=--last))
+      swap (*first++,*last);
+  }
 }
 
 Vect3f CComponentIABrain::GetNextNodePosition() const
 {
-  return m_PathToCobertura[m_PathToCobertura.size() - 1]->GetPosition();
+  if(!m_PathToCobertura.empty())
+    return m_PathToCobertura[m_PathToCobertura.size() - 1]->GetPosition();
+  else
+    return GetEntity()->GetComponent<CComponentObject3D>()->GetPosition();
 }
 
 bool CComponentIABrain::ArrivedAtDestination() const
@@ -175,5 +182,6 @@ bool CComponentIABrain::ArrivedAtNode(float _fDistanceSq) const
 
 void CComponentIABrain::SetNextNode()
 {
-  m_PathToCobertura.pop_back();
+  if(!m_PathToCobertura.empty())
+    m_PathToCobertura.pop_back();
 }
