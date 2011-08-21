@@ -782,10 +782,10 @@ ENTITIES
       CGameEntity* InitEnemy(const string& _szPlayerName, const Vect3f& _vPosition, float _fRadius, const string& _szInitialState, const string& _szRenderableModel, const string& _szRagdollModell, const string& _szEntityName = "")
       
       init_miner
-      CGameEntity* InitMiner(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName = "")
+      CGameEntity* InitMiner(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName = "", const bool _bActive = true)
       
       init_militar
-      CGameEntity* InitMilitar(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName = "")
+      CGameEntity* InitMilitar(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName = "", const bool _bActive = true)
       
   Class:
     ComponentObject3D
@@ -970,6 +970,9 @@ ENTITIES
       
       get_state_machine
       CScriptedStateMachine* GetStateMachine()
+      
+      set_active
+      void SetActive(bool _bActive)
       
   Class:
     ComponentIABrain

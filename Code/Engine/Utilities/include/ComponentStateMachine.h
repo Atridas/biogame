@@ -21,13 +21,16 @@ public:
   virtual void Update(float _fDeltaTime);
   virtual void ReceiveEvent(const SEvent& _Event);
 
+  void SetActive(bool _bActive);
+
   CScriptedStateMachine* GetStateMachine() const { return m_pStateMachine; };
 
 protected:
-  CComponentStateMachine() {};
+  CComponentStateMachine():m_bActive(true), m_pStateMachine(0) {};
   bool Init(CGameEntity* _pEntity, const string& _pEstatInicial);
   virtual void Release();
 private:
+  bool m_bActive;
   CScriptedStateMachine* m_pStateMachine;
 };
 

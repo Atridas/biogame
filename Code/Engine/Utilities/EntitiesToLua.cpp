@@ -247,6 +247,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponentStateMachine, CBaseComponent>("ComponentStateMachine")
       .def("add_to_entity",            &CComponentStateMachine::AddToEntity)
       .def("get_state_machine",        &CComponentStateMachine::GetStateMachine)
+      .def("set_active",               &CComponentStateMachine::SetActive)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentIABrain, CBaseComponent>("ComponentIABrain")

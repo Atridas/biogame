@@ -36,6 +36,8 @@ public:
 
   virtual ~CComponentPhysXController(void) {Done();};
 
+  void Activate(bool m_bActive);
+
 protected:
   CComponentPhysXController():
       m_pObject3D(0), m_pMovement(0),

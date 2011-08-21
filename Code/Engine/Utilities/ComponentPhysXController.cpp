@@ -115,3 +115,9 @@ void CComponentPhysXController::Release(void)
   CHECKED_DELETE(m_pPhysXController);
   CHECKED_DELETE(m_pPhysXData);
 }
+
+void CComponentPhysXController::Activate(bool _bActive)
+{
+  if(m_pPhysXController)
+    m_pPhysXController->SetCollision(_bActive);
+}
