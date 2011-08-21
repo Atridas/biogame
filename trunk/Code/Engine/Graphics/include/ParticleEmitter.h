@@ -18,13 +18,7 @@ class CMaterial;
 
 struct SParticleInfo;
 
-struct SParticleRenderInfo 
-{
-  float x, y, z, size;
-  float u, v, angleSin, angleCos;
-  uint32 color;
-};
-
+struct SParticleRenderInfo;
 
 class CParticleEmitter:
   public CBaseControl,

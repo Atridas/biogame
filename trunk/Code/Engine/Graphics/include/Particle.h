@@ -9,7 +9,14 @@
 #include "Texture.h"
 
 #define __PARTICLE_VIA_SHADER__
-struct SParticleRenderInfo;
+
+struct SParticleRenderInfo 
+{
+  float x, y, z, size;
+  float minU, minV, maxU, maxV;
+  float angleSin, angleCos;
+  uint32 color;
+};
 
 class CParticle
 {
@@ -142,6 +149,7 @@ private:
 
 
   // cordenades de textura per a cada punt.
+  // la mínima (0,0) és la C i la màxima (1,1) la B
   float      m_fAU;
   float      m_fAV;
   float      m_fBU;

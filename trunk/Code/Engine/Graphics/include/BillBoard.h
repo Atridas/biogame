@@ -4,15 +4,21 @@
 #include "vector"
 #include "Camera.h"
 #include "Texture.h"
+#include "InstancedData.h"
+#include "Particle.h"
 
+// ---------------------------
 class CRenderManager;
+class CMaterial;
+// ---------------------------
 
-class CBillBoard
+class CBillBoard:
+  public CBaseControl
 {
 public:
 
 	CBillBoard();
-  ~CBillBoard(){};
+  ~CBillBoard(){Done();};
 
 	void Init         (CRenderManager* rm);
   void Update	      (float fTimeDelta, CCamera *camera );
@@ -27,7 +33,7 @@ public:
   void SetPos		            ( const Vect3f & position )             {m_vPosition = position;}
 	void SetSizeX	            ( const float &sizeX)                   {m_fSizeX = sizeX;}
   void SetSizeY	            ( const float &sizeY)                   {m_fSizeY = sizeY;}
-  void SetTexture           (CTexture* _pTexParticle)               {m_pTexParticle = _pTexParticle;};
+  void SetTexture           (CTexture* _pTexParticle);
   void SetActive            (const bool &_bActive)                  {m_bActive = _bActive;};
 
   void SetAnimated          (const bool &_bAnimated)                {m_bAnimated = _bAnimated;};
@@ -53,6 +59,8 @@ public:
   bool                            GetBucleInfinit     () const {return m_bBucleInfinit;}; 
 
 private:
+  void RenderHW(CRenderManager* _pRM);
+
   LPDIRECT3DVERTEXBUFFER9                   m_vBillboards;
   string      m_szId;
 	Vect3f		  m_vPosition;
@@ -70,6 +78,7 @@ private:
   bool        m_bAnimated; //indica si el billboard es animat
   bool        m_bActive;
   bool        m_bBucleInfinit;
+  float       m_fAngle;
   //float       m_fTimeLife;
   // cordenades de textura per a cada punt.
   float      m_fAU;
@@ -80,9 +89,9 @@ private:
   float      m_fCV;
   float      m_fDU;
   float      m_fDV;
-  D3DXCOLOR       m_Color1;
-  D3DXCOLOR       m_Color2;
-  D3DXCOLOR       m_Color3;
-  D3DXCOLOR       m_Color4;
+  D3DXCOLOR       m_Color;
+  
+  CMaterial*                                m_pMaterial;
+  CInstancedData<SParticleRenderInfo>       m_InstancedData;
 };
 

@@ -43,7 +43,7 @@
 
   <LightsManager file="Data/XML/Lights.xml"/>
 
-  <SceneEffectManager file="Data/XML/SceneEffects_PhysX.xml"/>
+  <SceneEffectManager file="Data/XML/SceneEffects_Viewer.xml"/>
   
   <ScriptManager file="Data/XML/Lua.xml"/>
 

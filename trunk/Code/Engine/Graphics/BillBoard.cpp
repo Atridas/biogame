@@ -3,7 +3,12 @@
 #include "Camera.h"
 #include <math.h>
 #include "VertexsStructs.h"
-
+#include "EffectManager.h"
+#include "Effect.h"
+#include "Core.h"
+#include "ParticleManager.h"
+#include "StaticMeshEmptyMaterial.h"
+#include "DiffuseTextureDecorator.h"
 
 
 CBillBoard::CBillBoard()
@@ -25,11 +30,12 @@ CBillBoard::CBillBoard()
   ,m_pTexParticle(0)
   ,m_bBucleInfinit(true)
   //,m_fTimeLife(0.0f)
-  ,m_Color1(1,1,1,1)
-  ,m_Color2(1,1,1,1)
-  ,m_Color3(1,1,1,1)
-  ,m_Color4(1,1,1,1)
-	{}
+  ,m_Color(1,1,1,1)
+  ,m_fAngle(0)
+  ,m_pMaterial(0)
+{
+  m_pMaterial = new CStaticMeshEmptyMaterial();
+}
 
 
 void CBillBoard::Init(CRenderManager* rm)
@@ -57,11 +63,19 @@ void CBillBoard::Init(CRenderManager* rm)
 		  }
     }
   }
+
+  if(bIsOk)
+  { 
+    bIsOk = m_InstancedData.Init(rm, 1);
+  }
+
+  SetOk(bIsOk);
 }
 
 void CBillBoard::Release()
 {
   CHECKED_RELEASE(m_vBillboards);
+  CHECKED_DELETE(m_pMaterial);
 
   if ( m_vBillboards!= NULL)
   {
@@ -70,6 +84,18 @@ void CBillBoard::Release()
 
 
 }
+
+
+void CBillBoard::SetTexture(CTexture* _pTexParticle)              
+{
+  m_pTexParticle = _pTexParticle;
+
+  
+  CHECKED_DELETE(m_pMaterial);
+
+  m_pMaterial = new CStaticMeshEmptyMaterial();
+  m_pMaterial = new CDiffuseTextureDecorator(m_pMaterial,m_pTexParticle);
+};
 
 void CBillBoard::Update(float fTimeDelta,CCamera *camera)
 {
@@ -93,22 +119,26 @@ void CBillBoard::Update(float fTimeDelta,CCamera *camera)
       m_bActive=false;
     }
   }
-  Vect3f l_VDirection = camera->GetDirection();
-  Vect3f l_VUp = camera->GetVecUp();
-  Mat33f mat;
-  //per si es vol rotar amb un cert angle
-  //l_VUp = mat.FromAxisAngle(l_VDirection.Normalize(), angle)* l_VUp;
-   
- // angle+=0.01f;
-  
-  Vect3f l_VRight = l_VUp^l_VDirection; // producte vectorial
-  l_VRight.Normalize();
-  l_VUp.Normalize();
-  m_PointA = m_vPosition - (l_VRight*m_fSizeX*0.5f) - (l_VUp*m_fSizeY*0.5f);
-	m_PointB = m_vPosition + (l_VRight*m_fSizeX*0.5f) - (l_VUp*m_fSizeY*0.5f);
-	m_PointC = m_vPosition - (l_VRight*m_fSizeX*0.5f) + (l_VUp*m_fSizeY*0.5f);
-	m_PointD = m_vPosition + (l_VRight*m_fSizeX*0.5f) + (l_VUp*m_fSizeY*0.5f);
 
+
+  if(camera)
+  {
+    Vect3f l_VDirection = camera->GetDirection();
+    Vect3f l_VUp = camera->GetVecUp();
+    Mat33f mat;
+    //per si es vol rotar amb un cert angle
+    //l_VUp = mat.FromAxisAngle(l_VDirection.Normalize(), angle)* l_VUp;
+   
+   // angle+=0.01f;
+  
+    Vect3f l_VRight = l_VUp^l_VDirection; // producte vectorial
+    l_VRight.Normalize();
+    l_VUp.Normalize();
+    m_PointA = m_vPosition - (l_VRight*m_fSizeX*0.5f) - (l_VUp*m_fSizeY*0.5f);
+	  m_PointB = m_vPosition + (l_VRight*m_fSizeX*0.5f) - (l_VUp*m_fSizeY*0.5f);
+	  m_PointC = m_vPosition - (l_VRight*m_fSizeX*0.5f) + (l_VUp*m_fSizeY*0.5f);
+	  m_PointD = m_vPosition + (l_VRight*m_fSizeX*0.5f) + (l_VUp*m_fSizeY*0.5f);
+  }
  
     //***** NOMES SI ES ANIMADA
   if(m_bAnimated)
@@ -186,6 +216,10 @@ void CBillBoard::Render(CRenderManager* _pRM)
 {
   if (!m_bActive)
     return;
+  
+#ifdef __PARTICLE_VIA_SHADER__
+  RenderHW(_pRM);
+#else
   LPDIRECT3DDEVICE9 l_pd3dDevice = _pRM->GetDevice();
 
 	VERTEX_TEXTURED l_Points[4];
@@ -224,6 +258,58 @@ void CBillBoard::Render(CRenderManager* _pRM)
   //l_pd3dDevice->SetStreamSource( 0, m_vBillboards,0, sizeof(VERTEX_TEXTURED));// no se si serveix aki
  	l_pd3dDevice->SetFVF(D3DFVF_XYZ|D3DFVF_DIFFUSE|D3DFVF_TEX1);
 	l_pd3dDevice->DrawIndexedPrimitiveUP(D3DPT_TRIANGLELIST,0,6,2,l_Indexes,D3DFMT_INDEX16,l_Points,sizeof(VERTEX_TEXTURED));
+#endif
 		
-		
+}
+
+
+void CBillBoard::RenderHW(CRenderManager* _pRM)
+{
+  
+  CEffectManager* l_pEM = CORE->GetEffectManager();
+  assert(l_pEM && l_pEM->IsOk());
+
+  //omplim el buffer----------------------------------------------------------------------------------------------------------
+
+  SParticleRenderInfo* l_mBuffer = m_InstancedData.GetBuffer(1, _pRM);
+  
+  l_mBuffer->x = m_vPosition.x;
+  l_mBuffer->y = m_vPosition.y;
+  l_mBuffer->z = m_vPosition.z;
+
+  //TODO refer size
+  l_mBuffer->size = (m_fSizeX + m_fSizeY)*.5f;
+
+  l_mBuffer->angleSin = sin(m_fAngle + FLOAT_PI_VALUE * .25f);
+  l_mBuffer->angleCos = cos(m_fAngle + FLOAT_PI_VALUE * .25f);
+  
+  l_mBuffer->minU = m_fCU;
+  l_mBuffer->minV = m_fCV;
+  l_mBuffer->maxU = m_fBU;
+  l_mBuffer->maxV = m_fBV;
+
+  l_mBuffer->color=(DWORD)m_Color;
+
+
+  // Omplim el buffer -----------------------------------------------------------------------------------------
+  bool result = m_InstancedData.SetData(l_mBuffer, 1, _pRM);
+  assert(result);// ---
+
+
+  // renderitzem -----------------------------------------------------------------------------------------------------------------
+
+
+  LPDIRECT3DDEVICE9 l_pDevice = _pRM->GetDevice();
+
+  // Fem els set stream sources
+  l_pDevice->SetStreamSourceFreq(0, (D3DSTREAMSOURCE_INDEXEDDATA  | 1   ));
+  l_pDevice->SetStreamSourceFreq(1, (D3DSTREAMSOURCE_INSTANCEDATA | 1   ));
+
+
+  result = m_InstancedData.SetStreamSource(_pRM, 1);
+  assert(result);// ---
+
+  //l_it->first->Render(_pRM, true);
+  CEffect* l_pEffect = l_pEM->ActivateMaterial(m_pMaterial);
+  CORE->GetParticleManager()->GetRenderableVertexs()->Render(_pRM, l_pEffect);
 }

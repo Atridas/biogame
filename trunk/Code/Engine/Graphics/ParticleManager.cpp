@@ -227,6 +227,8 @@ void CParticleManager::Render(CRenderManager* _pRM)
   CEffect* l_pEffect = l_pEM->GetEffect("Particle");
   CEffect* l_pPrevEffect = l_pEM->GetForcedStaticMeshEffect();
   l_pEM->SetForcedStaticMeshEffect(l_pEffect);
+
+  //l_pd3dDevice->SetStreamSourceFreq(1, (D3DSTREAMSOURCE_INSTANCEDATA | 1   ));
 #else
   _pRM->EnableAlphaBlend();
   l_pd3dDevice->SetRenderState( D3DRS_ALPHABLENDENABLE, TRUE );

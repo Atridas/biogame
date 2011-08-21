@@ -1,6 +1,8 @@
 #include "BillBoardManager.h"
 #include "RenderManager.h"
-
+#include "Particle.h"
+#include "Effect.h"
+#include "EffectManager.h"
 
 CBillBoardManager::CBillBoardManager()
 {
@@ -22,15 +24,15 @@ bool CBillBoardManager::Reload()
 
 void CBillBoardManager::Release()
 {
-  vector<CBillBoard*>::iterator it  = m_vBillboards.begin(),
-                                end = m_vBillboards.end();
+  map<string,CBillBoard*>::iterator it  = m_Billboards.begin(),
+                                    end = m_Billboards.end();
   
   while(it != end)
   {
-    CHECKED_DELETE(*it);
+    CHECKED_DELETE(it->second);
     ++it;
   }
-  m_vBillboards.clear();
+  m_Billboards.clear();
 }
 
 bool CBillBoardManager::Load(const string& _szFileName)
@@ -126,7 +128,7 @@ bool CBillBoardManager::Load(const string& _szFileName)
             }
 			    }
         }
-        m_vBillboards.push_back(l_pBillboard);
+        m_Billboards[l_pBillboard->GetId()] = l_pBillboard;
       }
     }
 	
@@ -135,10 +137,10 @@ bool CBillBoardManager::Load(const string& _szFileName)
   return true;
 }
 
-CBillBoard* CBillBoardManager::GetBillBorad(const string& _szName)
+CBillBoard* CBillBoardManager::GetBillBoard(const string& _szName)
 {
   string l_szNameEmitter;
-  vector<CBillBoard*>::iterator it  = m_vBillboards.begin(),
+  /*vector<CBillBoard*>::iterator it  = m_vBillboards.begin(),
                                       end = m_vBillboards.end();
 
   while(it != end)
@@ -149,7 +151,14 @@ CBillBoard* CBillBoardManager::GetBillBorad(const string& _szName)
       return (*it);
     }
     ++it;
+  }*/
+
+  map<string,CBillBoard*>::iterator it  = m_Billboards.find(_szName);
+  if(it != m_Billboards.end())
+  {
+    return it->second;
   }
+
   LOGGER->AddNewLog(ELL_WARNING, "CBillboardManager:: No existeix el emiter de tipus %s", _szName);
   return NULL;
 }
@@ -157,22 +166,25 @@ CBillBoard* CBillBoardManager::GetBillBorad(const string& _szName)
 
 void CBillBoardManager::SetAllBillboardsActive(bool _bActive)
 {
+  map<string,CBillBoard*>::iterator it  = m_Billboards.begin(),
+                                    end = m_Billboards.end();
   
-  for (size_t i=0;i<m_vBillboards.size();++i)
+  while(it != end)
   {
-    m_vBillboards[i]->SetActive(_bActive);
+    it->second->SetActive(_bActive);
+    ++it;
   }
 }
 
 void CBillBoardManager::Update(const float _fElapsedTime, CCamera* camera)
 {
-  vector<CBillBoard*>::iterator it  = m_vBillboards.begin(),
-                                      end = m_vBillboards.end();
+  map<string,CBillBoard*>::iterator it  = m_Billboards.begin(),
+                                    end = m_Billboards.end();
 
 
   while(it != end)
   {
-    (*it)->Update(_fElapsedTime,camera);
+    it->second->Update(_fElapsedTime,camera);
     
     ++it;
   }
@@ -184,6 +196,17 @@ void CBillBoardManager::Render(CRenderManager* _pRM)
   l_mat.SetIdentity();
 
   _pRM->SetTransform(l_mat);
+  
+#ifdef __PARTICLE_VIA_SHADER__
+  CEffectManager* l_pEM = CORE->GetEffectManager();
+
+  assert(l_pEM && l_pEM->IsOk());
+  CEffect* l_pEffect = l_pEM->GetEffect("Particle");
+  CEffect* l_pPrevEffect = l_pEM->GetForcedStaticMeshEffect();
+  l_pEM->SetForcedStaticMeshEffect(l_pEffect);
+
+  //l_pd3dDevice->SetStreamSourceFreq(1, (D3DSTREAMSOURCE_INSTANCEDATA | 1   ));
+#else
   LPDIRECT3DDEVICE9 l_pd3dDevice = _pRM->GetDevice();
 
   _pRM->EnableAlphaBlend();
@@ -193,24 +216,31 @@ void CBillBoardManager::Render(CRenderManager* _pRM)
   
   l_pd3dDevice->SetRenderState(D3DRS_ZENABLE, TRUE);
   l_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE);
-  
+#endif
 
-  vector<CBillBoard*>::iterator it  = m_vBillboards.begin(),
-                                      end = m_vBillboards.end();
+  map<string,CBillBoard*>::iterator it  = m_Billboards.begin(),
+                                    end = m_Billboards.end();
   while(it != end)
   {
-    (*it)->Render(_pRM);
+    it->second->Render(_pRM);
     ++it;
   }
+  
+#ifdef __PARTICLE_VIA_SHADER__
+  LPDIRECT3DDEVICE9 l_pd3dDevice = _pRM->GetDevice();
+  l_pd3dDevice->SetStreamSourceFreq(0, 1);
+  l_pd3dDevice->SetStreamSourceFreq(1, 1);
+  l_pEM->SetForcedStaticMeshEffect(l_pPrevEffect);
+#endif
 }
 
 void CBillBoardManager::Init(CRenderManager* _pRM)
 {
-  vector<CBillBoard*>::iterator it  = m_vBillboards.begin(),
-                                      end = m_vBillboards.end();
+  map<string,CBillBoard*>::iterator it  = m_Billboards.begin(),
+                                    end = m_Billboards.end();
   while(it != end)
   {
-    (*it)->Init(_pRM);
+    it->second->Init(_pRM);
     ++it;
   }
 }

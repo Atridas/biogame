@@ -10,6 +10,7 @@
 #include <Utils/MapManager.h>
 #include "Camera.h"
 #include "RenderableVertexs.h"
+#include "Particle.h"
 
 //forward declarations ----------------------------------------------
 class CRenderManager;
