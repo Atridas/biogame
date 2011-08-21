@@ -39,7 +39,7 @@ bool CComponentParticleShootPlayer::Init(CGameEntity *_pEntity, const Vect3f& _v
   m_vPosInit = _vPosInit;
   m_vPosActual = _vPosInit;
   m_vPosEnd  = _vPosEnd ;
-  m_pBillboard = CORE->GetBillBoardManager()->GetBillBorad("shoot");
+  m_pBillboard = CORE->GetBillBoardManager()->GetBillBoard("shoot");
   m_pBillboard->SetPos(m_vPosActual);
   m_pBillboard->SetActive(true);
   m_bActive=true;
@@ -74,7 +74,7 @@ void CComponentParticleShootPlayer::Update(float _fDeltaTime)
       if(m_vPosDiferencial1.z>l_fCompara)
       {
         m_pBillboard->SetActive(false);
-        m_pBillboard = CORE->GetBillBoardManager()->GetBillBorad("impacteShootPlayer");
+        m_pBillboard = CORE->GetBillBoardManager()->GetBillBoard("impacteShootPlayer");
         m_pBillboard->SetPos(m_vPosActual);
         m_pBillboard->SetActive(true);
         m_bActive=false;

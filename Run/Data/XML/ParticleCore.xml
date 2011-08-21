@@ -102,10 +102,14 @@
                       Color1="0.0 1.0 0.0 1.0"           Color2="0.0 1.0 0.0 1.0"      MinSize="0.02"        MaxSize="0.1"
                       Life1="2.5"                        Life2="3.0"                   Angle1="-0.5"         Angle2="0.5"
                       Bucle="false"                      RebootEmitter1="1.0"          RebootEmitter2="1.5"  TotDeCop="false"
-                      NumBucle="10"                      Gravity="0.0 -0.25 0.0"       Velocitate="1.0 1.0 1.0"         
-                      TexParticle="Data/Textures/texturas particulas/soapbubble.dds">
-      
-
+                      NumBucle="10"                      Gravity="0.0 -0.25 0.0"       Velocitate="1.0 1.0 1.0"   
+                      TexParticle="Data/Textures/texturas particulas/soapbubble.dds">      
+                     <!-- TexParticle="Data/Textures/texturas particulas/explosprite.dds" -->
+      <!--
+      <Animateds>
+        <Animated     NumFiles="4"    NumColumnes="4"   TimeDiapo="0.2" TexParticle="Data/Textures/texturas particulas/explosprite.dds"/>
+      </Animateds>
+      -->
     </ParticleEmitter>
 
  
@@ -136,6 +140,7 @@
 
     </ParticleEmitter>
 
+    
    
   </ParticleEmitters>
  

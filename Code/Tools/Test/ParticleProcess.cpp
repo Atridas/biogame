@@ -104,7 +104,9 @@ void CParticleProcess::Update(float _fElapsedTime)
   {
 
     
+#ifndef __PARTICLE_VIA_SHADER__
     CORE->GetParticleManager()->Update(_fElapsedTime,m_pObjectCamera);
+#endif
     CORE->GetBillBoardManager()->Update(_fElapsedTime,m_pObjectCamera);
     //Actualitze el pitch i el yaw segons els delta del mouse
     float l_fPitch, l_fYaw;

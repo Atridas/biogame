@@ -10,12 +10,12 @@
        </Animateds>
     </BillboardInstance>
     <BillboardInstance id="Barril_explosiu"  position="0.40583 0.991046 28.5388" sizeX="0.5" sizeY="0.5" TexParticle="Data/Textures/texturas particulas/explosiu.png" />-->
-    <BillboardInstance id="shoot"  position="-0.98981 1.16939 -6.77892" sizeX="0.5" sizeY="0.5" TexParticle="Data/Textures/texturas particulas/texture_shoot_player.png" >
+    <BillboardInstance id="shoot" sizeX="0.5" sizeY="0.5" TexParticle="Data/Textures/texturas particulas/texture_shoot_player.png" >
       <Animateds>
         <Animated     NumFiles="2"    NumColumnes="2"   TimeDiapo="0.2"/>
       </Animateds>
     </BillboardInstance>
-    <BillboardInstance id="impacteShootPlayer"  position="-0.98981 1.16939 -6.77892" sizeX="0.5" sizeY="0.5" Bucle="false" TexParticle="Data/Textures/texturas particulas/impacte_shoot_player.png" >
+    <BillboardInstance id="impacteShootPlayer" sizeX="0.5" sizeY="0.5" Bucle="false" TexParticle="Data/Textures/texturas particulas/impacte_shoot_player.png" >
       <Animateds>
         <Animated     NumFiles="3"    NumColumnes="4"   TimeDiapo="0.02"/>
       </Animateds>
