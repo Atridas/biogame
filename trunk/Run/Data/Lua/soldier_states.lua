@@ -29,6 +29,12 @@ State_Soldier_Hit_Cobertura = {}
 State_Soldier_Idle["Enter"] = function(_enemic)
 
   local animation = _enemic:get_component(BaseComponent.animation)
+  
+  local ragdoll = _enemic:get_component(BaseComponent.ragdoll)
+  if ragdoll then
+    ragdoll:set_active(false)
+  end
+  
   animation:clear_all_cycles(0.0)
   animation:play_cycle('idle', 0.3)
 end

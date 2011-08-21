@@ -306,12 +306,17 @@ void LoadMiner(CEntityManager* _pEM, CXMLTreeNode& _TreeMiner)
   string l_szName       = _TreeMiner.GetPszISOProperty("name", "", false);
   string l_szPlayerName = _TreeMiner.GetPszISOProperty("player", "Player", false);
   Vect3f l_vPosition    = _TreeMiner.GetVect3fProperty("position", Vect3f(0,0,0),true);
-
+  bool l_bActive        = _TreeMiner.GetBoolProperty("active", true, false);
   
   LOGGER->AddNewLog(ELL_INFORMATION, "\t\t\tMiner name \"%s\", pos %f,%f,%f, Player %s", l_szName.c_str(),
                                       l_vPosition.x, l_vPosition.y, l_vPosition.z, l_szPlayerName.c_str());
 
-  _pEM->InitMiner(l_szPlayerName, l_vPosition, l_szName);
+  CGameEntity* l_pEntity = _pEM->InitMiner(l_szPlayerName, l_vPosition, l_szName);
+
+  CComponentStateMachine* l_pSM = l_pEntity->GetComponent<CComponentStateMachine>();
+
+  if(l_pSM)
+    l_pSM->SetActive(l_bActive);
 }
 
 void LoadMilitar(CEntityManager* _pEM, CXMLTreeNode& _TreeMiner)
@@ -321,12 +326,17 @@ void LoadMilitar(CEntityManager* _pEM, CXMLTreeNode& _TreeMiner)
   string l_szName       = _TreeMiner.GetPszISOProperty("name", "", false);
   string l_szPlayerName = _TreeMiner.GetPszISOProperty("player", "Player", false);
   Vect3f l_vPosition    = _TreeMiner.GetVect3fProperty("position", Vect3f(0,0,0),true);
-
+  bool l_bActive        = _TreeMiner.GetBoolProperty("active", true, false);
   
   LOGGER->AddNewLog(ELL_INFORMATION, "\t\t\tMilitar name \"%s\", pos %f,%f,%f, Player %s", l_szName.c_str(),
                                       l_vPosition.x, l_vPosition.y, l_vPosition.z, l_szPlayerName.c_str());
 
-  _pEM->InitMilitar(l_szPlayerName, l_vPosition, l_szName);
+  CGameEntity* l_pEntity = _pEM->InitMilitar(l_szPlayerName, l_vPosition, l_szName, l_bActive);
+
+  CComponentStateMachine* l_pSM = l_pEntity->GetComponent<CComponentStateMachine>();
+
+  if(l_pSM)
+    l_pSM->SetActive(l_bActive);
 }
 
 // -------------------------------------------------------------------------------------------------------------
@@ -533,6 +543,7 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
 
   CComponentStateMachine::AddToEntity(l_pPlayer, "State_Player_Neutre");
 
+
   //(new CComponentRagdoll())->Init(m_pPlayerEntity, "Data/Animated Models/Riggle/Skeleton.xml");
   CComponentMirilla::AddToEntity(l_pPlayer, "laser_pilota");
   CComponentArma::AddToEntity(l_pPlayer, "ARMA");
@@ -543,18 +554,18 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
   return l_pPlayer;
 }
 
-CGameEntity* CEntityManager::InitMiner(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName)
+CGameEntity* CEntityManager::InitMiner(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName, const bool _bActive)
 {
   return InitEnemy(_szPlayerName, _vPosition, 1.f, 
                     "State_Enemy_Idle", "miner", "Data/Animated Models/Miner/Skeleton.xml",
-                    _szEntityName);
+                    _szEntityName, _bActive);
 }
 
-CGameEntity* CEntityManager::InitMilitar(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName)
+CGameEntity* CEntityManager::InitMilitar(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName, const bool _bActive)
 {
   CGameEntity* l_pMilitar = InitEnemy(_szPlayerName, _vPosition, 0.7f, 
                     "State_Soldier_Idle", "Militar", "Data/Animated Models/Militar/Skeleton.xml",
-                    _szEntityName);
+                    _szEntityName, _bActive);
 
   l_pMilitar->GetComponent<CComponentRenderableObject>()->m_fHeightAdjustment = -1.5f;
 
@@ -563,7 +574,7 @@ CGameEntity* CEntityManager::InitMilitar(const string& _szPlayerName, const Vect
 
 CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f& _vPosition, float _fRadius,
                          const string& _szInitialState, const string& _szRenderableModel, const string& _szRagdollModell,
-                         const string& _szEntityName)
+                         const string& _szEntityName, const bool _bActive)
 {
   CGameEntity* l_peEnemy = CreateEntity();
   if(_szEntityName != "")

@@ -344,9 +344,15 @@ void CPhysicActor::Activate(bool _bActivate)
   if(m_pPhXActor)
   {
     if(_bActivate)
+    {
+      m_pPhXActor->clearBodyFlag(NX_BF_KINEMATIC);
       m_pPhXActor->clearActorFlag(NX_AF_DISABLE_COLLISION);
+    }
     else
+    {
+      m_pPhXActor->raiseBodyFlag(NX_BF_KINEMATIC);
       m_pPhXActor->raiseActorFlag(NX_AF_DISABLE_COLLISION);
+    }
   }
 }
 

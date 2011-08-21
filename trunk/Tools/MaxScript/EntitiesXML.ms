@@ -327,6 +327,16 @@ function XMLEntityEnemy _instance &_TagName =
 		format "%" l_tmp to:l_aux
 		append l_params #("yaw",l_aux)
 		
+		--active
+		local l_active = GetUserProp _instance "active"
+		if l_active == undefined then
+		(
+			l_active = "false"
+		)
+		l_aux = "" as stringStream
+		format "%" l_active to:l_aux
+		append l_params #("active", l_aux)
+		
 		--Enemy Type
 		if (GetUserProp _instance "entity") != "Player" then
 		(

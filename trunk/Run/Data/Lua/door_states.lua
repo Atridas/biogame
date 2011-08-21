@@ -117,7 +117,7 @@ State_Porta_Open['Enter'] = function(_entitat)
   l_animation:play(Porta_Constants["Open"], 0.0, 1.0, true)
 
   --física
-  local l_physx = _entitat:get_component(BaseComponent.physx_controller)
+  local l_physx = _entitat:get_component(BaseComponent.physx_actor)
   l_physx:activate(false)
 end
 
@@ -167,7 +167,7 @@ State_Porta_Opening['Enter'] = function(_entitat)
   l_animation:play(Porta_Constants["Open Animation"], 0.0, 1.0, true)
 
   --física
-  local l_physx = _entitat:get_component(BaseComponent.physx_controller)
+  local l_physx = _entitat:get_component(BaseComponent.physx_actor)
   l_physx:activate(true)
   
   
@@ -222,7 +222,7 @@ State_Porta_Closed['Enter'] = function(_entitat)
   l_animation:play(Porta_Constants["Closed"], 0.0, 1.0, true)
 
   --física
-  local l_physx = _entitat:get_component(BaseComponent.physx_controller)
+  local l_physx = _entitat:get_component(BaseComponent.physx_actor)
   l_physx:activate(true)
 end
 
@@ -271,7 +271,7 @@ State_Porta_Closing['Enter'] = function(_entitat)
   l_animation:play(Porta_Constants["Close Animation"], 0.0, 1.0, true)
   
   --física
-  local l_physx = _entitat:get_component(BaseComponent.physx_controller)
+  local l_physx = _entitat:get_component(BaseComponent.physx_actor)
   l_physx:activate(true)
 end
 

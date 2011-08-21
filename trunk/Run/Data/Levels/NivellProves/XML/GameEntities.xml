@@ -491,7 +491,15 @@
     <Object3D position="35.0102 0.821378 -21.5325" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode maxDistance="40" cobertura="baixa" />
   </Entity>
+  <Entity name="TriggerMilitar">
+    <Object3D position="37.3651 2.73018 -5.75634" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="5.44028 5.44028 11.5583" collision_group="trigger" onEnter="activarMilitar" />
+  </Entity>
+  <Entity name="TriggerEnemic">
+    <Object3D position="37.3651 2.73018 12.3636" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="5.44028 5.44028 11.5583" collision_group="trigger" onEnter="activarEnemic" />
+  </Entity>
   <Player position="-16.8764 2.0 -15.9165" yaw="0.0" />
-  <Miner name="Miner" position="50.3014 2.0 39.1446" yaw="0.0" />
-  <Militar name="Militar" position="48.3709 2.0 -18.4613" yaw="0.0" />
+  <Miner name="Miner" position="50.3014 2.0 39.1446" yaw="0.0" active="false" />
+  <Militar name="Militar" position="48.3709 2.0 -18.4613" yaw="0.0" active="false" />
 </Entities>
