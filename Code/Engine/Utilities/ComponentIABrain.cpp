@@ -9,6 +9,8 @@
 #include "ComponentNavNode.h"
 #include "IAManager.h"
 #include "GraphDefines.h"
+#include "PhysxBone.h"
+#include "PhysicActor.h"
 #include "cal3d\cal3d.h"
 
 
@@ -111,6 +113,41 @@ void CComponentIABrain::Shoot()
                                 l_vMyHand,
                                 l_vCenterPoint,
                                 1.f);
+  }
+}
+
+void CComponentIABrain::ReciveForce(SEvent _sEvent)
+{
+  Mat44f l_matBonePos;
+  CPhysxBone* l_pPhysxBone = 0;
+  CComponentRagdoll* l_pRagdoll = 0;
+  Vect3f l_vSenderPos;
+  Vect3f l_vDirection;
+
+  if(_sEvent.Msg == SEvent::REBRE_FORCE)
+  {
+    l_pRagdoll = GetEntity()->GetComponent<CComponentRagdoll>();
+    l_pRagdoll->SetActive(true);
+
+    l_vSenderPos = ENTITY_MANAGER->GetEntity(_sEvent.Sender)->GetComponent<CComponentObject3D>()->GetPosition();
+
+    l_pPhysxBone = l_pRagdoll->GetBone("Bip01 Spine");
+    assert(l_pPhysxBone);
+    l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
+    l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
+    l_pPhysxBone->GetPhysxActor()->AddForceAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
+
+    l_pPhysxBone = l_pRagdoll->GetBone("Bip01 Spine1");
+    assert(l_pPhysxBone);
+    l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
+    l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
+    l_pPhysxBone->GetPhysxActor()->AddForceAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
+
+    l_pPhysxBone = l_pRagdoll->GetBone("Bip01 Spine2");
+    assert(l_pPhysxBone);
+    l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
+    l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
+    l_pPhysxBone->GetPhysxActor()->AddForceAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
   }
 }
 

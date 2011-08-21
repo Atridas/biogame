@@ -349,3 +349,14 @@ void CPhysicActor::Activate(bool _bActivate)
       m_pPhXActor->raiseActorFlag(NX_AF_DISABLE_COLLISION);
   }
 }
+
+void CPhysicActor::AddForceAtLocalPos(Vect3f _vDirection, Vect3f _vLocalPos, float _fPower)
+{
+  if(m_pPhXActor)
+  {
+    NxVec3 l_vDirection(_vDirection.x,_vDirection.y,_vDirection.z);
+    NxVec3 l_vLocalPos(_vLocalPos.x,_vLocalPos.y,_vLocalPos.z);
+    NxF32 l_fCoeff = m_pPhXActor->getMass() * _fPower;
+    m_pPhXActor->addForceAtLocalPos(l_vDirection*l_fCoeff, l_vLocalPos, NX_IMPULSE,true);
+  }
+}

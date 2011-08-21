@@ -18,6 +18,8 @@ public:
             float _fDensity, int _iCollisionGroup
             );
 
+  virtual void ReceiveEvent(const SEvent& _Event);
+
   const Vect3f& GetSize() { return m_vSize; };
 
   virtual void Reload();

@@ -8,6 +8,7 @@
 // -------------------------------------------------
 class CPhysxSkeleton;
 class CRenderableAnimatedInstanceModel;
+class CPhysxBone;
 // -------------------------------------------------
 
 
@@ -22,7 +23,8 @@ public:
 
   static CComponentRagdoll* AddToEntity(CGameEntity* _pEntity, const string& _szSkeletonFile, int _iCollisionGroup);
   void SetActive(bool _bActive);
-  
+  CPhysxBone* GetBone(const string& _szBoneName);
+  CPhysxSkeleton* GetRagdoll() const {return m_pRagdoll;};
   void PostUpdate(float _fDeltaTime);
 
 protected:

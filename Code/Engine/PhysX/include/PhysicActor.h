@@ -39,6 +39,8 @@ public:
 	void							CreateBody				(float density, float angularDamping = 0.5f, float linearDamping = 0.5f);
 	void							SetGlobalPosition	(const Vect3f& pos = Vect3f(0.f,0.f,0.f));
 
+  void              AddForceAtLocalPos(Vect3f _vDirection, Vect3f _vLocalPos, float _fPower);
+
 	//---AddShape Functions-----
 	void							AddSphereShape		(float radius, const Vect3f& localPos = v3fZERO, NxCCDSkeleton* skeleton = 0, uint32 group = 0);
 	void							AddBoxSphape			(const Vect3f& size, const Vect3f& localPos = v3fZERO, NxCCDSkeleton* skeleton = 0, uint32 group = 0);

@@ -28,6 +28,7 @@ struct SEvent {
 
   enum EEventType {
     REBRE_IMPACTE,
+    REBRE_FORCE,
     MORIR,
     OBRIR,
     TANCAR,

@@ -30,7 +30,9 @@ public:
   void UpdatePrePhysX(float _fDeltaTime);
   void UpdatePostPhysX(float _fDeltaTime);
 
+  void SetPositionFromRagdoll();
   void SetHeight(float _fHeight);
+  void SetActive(bool _bActive);
 
   virtual ~CComponentPhysXController(void) {Done();};
 

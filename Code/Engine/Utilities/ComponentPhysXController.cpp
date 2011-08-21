@@ -4,6 +4,9 @@
 #include "PhysicController.h"
 #include "PhysicsManager.h"
 #include "Core.h"
+#include "PhysxSkeleton.h"
+
+#include "ComponentRagdoll.h"
 
 #include "ComponentPhysXController.h"
 
@@ -79,6 +82,30 @@ void CComponentPhysXController::SetHeight(float _fHeight)
 {
   m_pPhysXController->SetHeight(_fHeight);
 }
+
+void CComponentPhysXController::SetActive(bool _bActive)
+{
+  m_pPhysXController->SetActive(_bActive);
+}
+
+void CComponentPhysXController::SetPositionFromRagdoll()
+{
+  CComponentRagdoll * l_pCRagdoll = GetEntity()->GetComponent<CComponentRagdoll>();
+  if(l_pCRagdoll)
+  {
+    CPhysxSkeleton* l_pRagdoll = l_pCRagdoll->GetRagdoll();
+
+    Mat44f l_mRagdollTransform = l_pRagdoll->GetTransform();
+    Vect3f l_vRagdollPosition  = l_mRagdollTransform.GetPos();
+    m_pPhysXController->SetPosition(l_vRagdollPosition);
+    m_pObject3D->SetPosition(l_vRagdollPosition);
+  }
+  else
+  {
+    //TODO missatge d'error al logger
+  }
+}
+
 
 void CComponentPhysXController::Release(void)
 {

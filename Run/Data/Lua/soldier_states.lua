@@ -64,6 +64,11 @@ State_Soldier_Idle['Receive'] = function(_enemic, _event)
   if _event.msg == Event.morir then
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Morint')
   end
+  if _event.msg == Event.rebre_force then
+    --g_force_event = _event
+    _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Mort')
+  end
 end
 
 -------------------------------------------------------------------------------------------------
@@ -159,6 +164,11 @@ State_Soldier_Buscant_Cobertura['Receive'] = function(_enemic, _event)
   end
   if _event.msg == Event.morir then
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Morint')
+  end
+  if _event.msg == Event.rebre_force then
+    --g_force_event = _event
+    _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Mort')
   end
 end
 
@@ -284,6 +294,11 @@ State_Soldier_Disparant['Receive'] = function(_enemic, _event)
   if _event.msg == Event.morir then
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Morint')
   end
+  if _event.msg == Event.rebre_force then
+    --g_force_event = _event
+    _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Mort')
+  end
 end
 
 -------------------------------------------------------------------------------------------------
@@ -357,6 +372,11 @@ State_Soldier_Cobrint_Disparant['Receive'] = function(_enemic, _event)
   if _event.msg == Event.morir then
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Morint')
   end
+  if _event.msg == Event.rebre_force then
+    --g_force_event = _event
+    _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Mort')
+  end
 end
 
 -------------------------------------------------------------------------------------------------
@@ -411,6 +431,11 @@ State_Soldier_Hit['Receive'] = function(_enemic, _event)
   if _event.msg == Event.morir then
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Morint')
     return
+  end
+  if _event.msg == Event.rebre_force then
+    --g_force_event = _event
+    _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Mort')
   end
 end
 
@@ -500,7 +525,11 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Soldier_Morint['Receive'] = function(_enemic, _event)
-  
+  if _event.msg == Event.rebre_force then
+    --g_force_event = _event
+    _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Mort')
+  end
 end
 
 -------------------------------------------------------------------------------------------------
@@ -528,5 +557,9 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Soldier_Mort['Receive'] = function(_enemic, _event)
-
+  if _event.msg == Event.rebre_force then
+    --g_force_event = _event
+    _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Mort')
+  end
 end

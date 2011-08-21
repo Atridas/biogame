@@ -6,6 +6,7 @@
 #include "ComponentObject3D.h"
 #include "PhysicsManager.h"
 #include "PhysicActor.h"
+#include "ComponentPhysXController.h"
 
 
 CComponentRagdoll* CComponentRagdoll::AddToEntity(CGameEntity *_pEntity, const string& _szSkeletonFile, int _iCollisionGroup)
@@ -51,7 +52,7 @@ void CComponentRagdoll::SetActive(bool _bActive)
   if(m_bActive != _bActive)
   {
     m_bActive = _bActive;
-    
+
     CComponentRenderableObject* l_pCRO = GetEntity()->GetComponent<CComponentRenderableObject>();
     if(m_bActive)
     {
@@ -60,10 +61,24 @@ void CComponentRagdoll::SetActive(bool _bActive)
     }
     else
     {
+      CComponentObject3D* l_pO3d = GetEntity()->GetComponent<CComponentObject3D>();
+      Mat44f l_matTransform;
+
+      l_matTransform.SetIdentity();
+
+      l_matTransform.SetPos(l_pO3d->GetPosition());
+
+      m_pRAIM->SetMat44(l_matTransform);
+      
       l_pCRO->m_bActive = true;
       m_pRagdoll->SetRagdollActive(false);
     }
   }
+}
+
+CPhysxBone* CComponentRagdoll::GetBone(const string& _szBoneName)
+{
+  return m_pRagdoll->GetPhysxBoneByName(_szBoneName);
 }
 
 void CComponentRagdoll::PostUpdate(float _fDeltaTime)
@@ -76,9 +91,7 @@ void CComponentRagdoll::PostUpdate(float _fDeltaTime)
     Mat44f m = m_pRagdoll->GetTransform();
     m_pRAIM->SetMat44(m);
 
-
-
-    CPhysxBone *l_pPBone = m_pRagdoll->GetPhysxBoneByName("Bip01 Spine");
+    //CPhysxBone *l_pPBone = m_pRagdoll->GetPhysxBoneByName("Bip01 Spine");
     
     //Mat44f m2;
     //l_pPBone->GetPhysxActor()->GetMat44(m2);

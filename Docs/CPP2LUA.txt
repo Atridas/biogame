@@ -653,7 +653,7 @@ ENTITIES
       physx_controller
       CBaseComponent::ECT_PHYSX_CONTROLLER
       
-      physx_controller
+      physx_actor
       CBaseComponent::ECT_PHYSX_ACTOR
       
       renderable_object
@@ -877,6 +877,9 @@ ENTITIES
       
       set_height
       void SetHeight(float _fHeight)
+      
+      set_position_from_ragdoll
+      void SetPositionFromRagdoll()
       
   Class:
     ComponentPhysXBox

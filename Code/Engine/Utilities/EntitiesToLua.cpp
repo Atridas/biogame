@@ -84,6 +84,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .enum_("EventType")
       [
         value("rebre_impacte",       SEvent::REBRE_IMPACTE),
+        value("rebre_force",         SEvent::REBRE_FORCE),
         value("morir",               SEvent::MORIR),
         value("obrir",               SEvent::OBRIR),
         value("tancar",              SEvent::TANCAR),
@@ -106,7 +107,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("player_controller",    CBaseComponent::ECT_PLAYER_CONTROLLER),
           value("ia_walk_to_player",    CBaseComponent::ECT_IA_WALK_TO_PLAYER),
           value("physx_controller",     CBaseComponent::ECT_PHYSX_CONTROLLER),
-          value("physx_controller",     CBaseComponent::ECT_PHYSX_ACTOR),
+          value("physx_actor",          CBaseComponent::ECT_PHYSX_ACTOR),
           value("renderable_object",    CBaseComponent::ECT_RENDERABLE_OBJECT),
           value("thps_camera",          CBaseComponent::ECT_3RD_PERSON_SHOOTER_CAMERA),
           value("trigger",              CBaseComponent::ECT_TRIGGER),
@@ -206,8 +207,9 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPhysXController,CBaseComponent>("ComponentPhysXController")
-      .def("add_to_entity", &CComponentPhysXController::AddToEntity)
-      .def("set_height", &CComponentPhysXController::SetHeight)
+      .def("add_to_entity",            &CComponentPhysXController::AddToEntity)
+      .def("set_height",               &CComponentPhysXController::SetHeight)
+      .def("set_position_from_ragdoll",&CComponentPhysXController::SetPositionFromRagdoll)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPhysXBox, CBaseComponent>("ComponentPhysXBox")
@@ -250,6 +252,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponentIABrain, CBaseComponent>("ComponentIABrain")
       .def("add_to_entity",            &CComponentIABrain::AddToEntity)
       .def("shoot",                    &CComponentIABrain::Shoot)
+      .def("recive_force",             &CComponentIABrain::ReciveForce)
       .def("die",                      &CComponentIABrain::Die)
       .def("plan_path_to_cobertura",   &CComponentIABrain::PlanPathToCobertura) 
       .def("get_next_node_position",   &CComponentIABrain::GetNextNodePosition)
