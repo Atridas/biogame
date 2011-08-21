@@ -115,5 +115,11 @@ void CComponentVida::ReceiveEvent(const SEvent& _Event)
       
       CORE->GetEntityManager()->SendEvent(l_morir);
     }
+  }else if(_Event.Msg == SEvent::REBRE_FORCE)
+  {
+    float l_fDamage = _Event.Info[0].f;
+
+    Decrease(l_fDamage);
+
   }
 }

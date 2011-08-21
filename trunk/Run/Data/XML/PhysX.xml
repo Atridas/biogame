@@ -11,7 +11,7 @@
 	<collision group1="personatge" group2="objecte dinamic" />
 	<collision group1="personatge" group2="explosio" />
   <collision group1="personatge" group2="pickup" />
-  <!--<collision group1="personatge" group2="ragdoll" />-->
+  <collision group1="personatge" group2="ragdoll" />
   
   <!-- Enemics -->
 	<collision group1="enemic" group2="objecte dinamic" />
@@ -30,6 +30,7 @@
   <collision group1="ray shoot" group2="objecte dinamic" />
 
   <collision group1="force" group2="ragdoll" />
+  <collision group1="force" group2="enemic" />
   <collision group1="force" group2="objecte dinamic" />
   
   <!-- Càmara -->

@@ -703,7 +703,7 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActorShoot (const Vect3f posRay,
 	return impactObject;
 }
 
-void CPhysicsManager::OverlapSphereActor (float radiusSphere, const Vect3f& posSphere, std::vector<CPhysicUserData*> &impactObjects)
+void CPhysicsManager::OverlapSphereActor (float radiusSphere, const Vect3f& posSphere, std::vector<CPhysicUserData*> &impactObjects, uint32 impactMask)
 {
 	assert(m_pScene);
 
@@ -715,7 +715,7 @@ void CPhysicsManager::OverlapSphereActor (float radiusSphere, const Vect3f& posS
 		shapes[i] = NULL;
 	}
 
-	m_pScene->overlapSphereShapes(worldSphere, NX_ALL_SHAPES, nbShapes, shapes, NULL);
+	m_pScene->overlapSphereShapes(worldSphere, NX_ALL_SHAPES, nbShapes, shapes, NULL,impactMask);
 
 	for (NxU32 i = 0; i < nbShapes; i++) 
 	{
@@ -889,6 +889,10 @@ int GetCollisionGroup(const string& _szGroup)
   else if(_szGroup == "ray shoot")
   {
     return ECG_RAY_SHOOT;
+  }
+  else if(_szGroup == "force")
+  {
+    return ECG_FORCE;
   }
   else if(_szGroup == "camera")
   {

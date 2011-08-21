@@ -25,6 +25,7 @@
 
 #define BLOOD_FADEOUT_TIME 2.5f
 #define SHOCK_WAVE_VELOCITY 2.5f
+#define DAMAGE_FORCE 100.0f
 
 CComponentPlayerController* CComponentPlayerController::AddToEntity(CGameEntity *_pEntity)
 {
@@ -276,7 +277,7 @@ void CComponentPlayerController::Force()
 
     Vect3f l_vDir = l_mRot*Vect3f(1.0f,0.0f,0.0f);
 
-    l_pPM->OverlapSphereActor(2.0f,l_vPos+2.0f*l_vDir,l_vImpactObjects);
+    l_pPM->OverlapSphereActor(2.0f,l_vPos+3.0f*l_vDir,l_vImpactObjects,l_pPM->GetCollisionMask(ECG_FORCE));
 
     vector<CPhysicUserData*>::iterator l_itUserData;
     vector<CPhysicUserData*>::iterator l_itUserDataEnd = l_vImpactObjects.end();
@@ -301,7 +302,7 @@ void CComponentPlayerController::Force()
         SEvent l_impacte;
         l_impacte.Msg = SEvent::REBRE_FORCE;
         l_impacte.Info[0].Type = SEventInfo::FLOAT;
-        l_impacte.Info[0].f    = 60.f;
+        l_impacte.Info[0].f    = DAMAGE_FORCE;
         l_impacte.Receiver = l_pEntity->GetGUID();
         l_impacte.Sender = l_pPlayerEntity->GetGUID();
 
@@ -326,10 +327,10 @@ void CComponentPlayerController::Use()
 
 
   //esfera d'us
-  l_pPM->OverlapSphereActor( 5.0f                               //radiusSphere
-                            ,m_pObject3D->GetCenterPosition()   //posSphere
-                            ,l_vImpactObjects                   // impactObjects
-                            );
+  l_pPM->OverlapSphereActor( 5.0f                                  //radiusSphere
+                            ,m_pObject3D->GetCenterPosition()      //posSphere
+                            ,l_vImpactObjects,                     //impactObjects
+                            l_pPM->GetCollisionMask(ECG_ESCENARI));//collision_mask
 
   //TODO usar un manager
 
