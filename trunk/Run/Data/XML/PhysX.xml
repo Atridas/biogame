@@ -28,6 +28,9 @@
 -->
   <collision group1="ray shoot" group2="ragdoll" />
   <collision group1="ray shoot" group2="objecte dinamic" />
+
+  <collision group1="force" group2="ragdoll" />
+  <collision group1="force" group2="objecte dinamic" />
   
   <!-- Càmara -->
   <collision group1="camera" group2="escenari" />

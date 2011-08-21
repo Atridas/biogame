@@ -50,7 +50,7 @@ public:
 	void											SetGravity							(float gravity)  {m_fGravity = gravity;}
   void                      SetGroup                (int _iGroup);
   void                      SetHeight               (float _fHeight);
-
+  void                      SetActive               (bool _bActive);
 	//---PhsX Info---
 	NxController*							GetPhXController				() {return m_pPhXController;}
 	NxCapsuleControllerDesc*	GetPhXControllerDesc		() {return m_pPhXControllerDesc;}

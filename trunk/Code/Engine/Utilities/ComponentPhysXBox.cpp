@@ -140,3 +140,15 @@ void CComponentPhysXBox::Reload()
   Release();
   Init(GetEntity(), m_fDensity, m_iCollisionGroup);
 }
+
+void CComponentPhysXBox::ReceiveEvent(const SEvent& _Event)
+{
+  if(_Event.Msg == SEvent::REBRE_FORCE)
+  {
+    Vect3f l_vSenderPos = ENTITY_MANAGER->GetEntity(_Event.Sender)->GetComponent<CComponentObject3D>()->GetPosition();
+
+    Vect3f l_vDirection = (GetEntity()->GetComponent<CComponentObject3D>()->GetPosition() - l_vSenderPos).Normalize();
+
+    m_pPhysXActor->AddForceAtLocalPos(l_vDirection,Vect3f(0.0f),20.0f);
+  }
+}

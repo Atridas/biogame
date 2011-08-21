@@ -245,3 +245,13 @@ void CPhysicController::SetHeight(float _fHeight)
     l_CC->setHeight(_fHeight);
   }
 }
+
+void CPhysicController::SetActive(bool _bActive)
+{
+  if(_bActive)
+  {
+    m_pPhXController->getActor()->clearActorFlag(NX_AF_DISABLE_COLLISION);
+  }else{
+    m_pPhXController->getActor()->raiseActorFlag(NX_AF_DISABLE_COLLISION);
+  }
+}

@@ -21,6 +21,7 @@ public:
   void Update(float _fDeltaTime);
 
   void Shoot();
+  void ReciveForce(SEvent _sEvent);
   void Die();
   
   //Path planning
