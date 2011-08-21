@@ -22,14 +22,16 @@ public:
 	void			Update					();
   void      Reset           ()       { m_fRelativeTime = 0.0f; }; //Resets the relative time
 
-	float			GetElapsedTime	() const { return m_fElapsedTime; }
-  float			GetTotalTime  	() const { return m_fTotalTime; }
-  float			GetRelativeTime	() const { return m_fRelativeTime; }
-	float			GetFPS					() const { return m_fFPS; }
+	float			GetElapsedTime	() const { return m_fElapsedTime*m_fBulletTimeFactor; };
+  float			GetTotalTime  	() const { return m_fTotalTime; };
+  float			GetRelativeTime	() const { return m_fRelativeTime; };
+	float			GetFPS					() const { return m_fFPS; };
+  void      SetBulletTimeFactor(float _fFactor);
 
 private:
 
 	float			m_fElapsedTime; // ElapsedTime
+  float     m_fBulletTimeFactor;
   float     m_fTotalTime;   // Time since the app started
   float     m_fRelativeTime;// Time since last's reset
 	float			m_fFPS;					// FPS

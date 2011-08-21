@@ -9,6 +9,7 @@
 CTimer::CTimer (uint32 avgSamples)
 : m_uSamples(avgSamples)
 , m_fElapsedTime(0.f)
+, m_fBulletTimeFactor(1.f)
 , m_fTotalTime(0.0f)
 , m_fRelativeTime(0.0f)
 , m_dLastTime(0)
@@ -76,3 +77,14 @@ void CTimer::Update( void )
   m_fRelativeTime += m_fElapsedTime;
 
 }
+
+void CTimer::SetBulletTimeFactor(float _fFactor)
+{
+  if(_fFactor > 1.0f)
+    _fFactor = 1.0f;
+
+  if(_fFactor <= 0.0f)
+    _fFactor = 1.0f;
+
+  m_fBulletTimeFactor = _fFactor;
+};

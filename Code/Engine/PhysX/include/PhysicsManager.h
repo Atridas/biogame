@@ -47,6 +47,7 @@ enum ECollisionGroup {
   ECG_OBJECTES_DINAMICS,
   ECG_EXPLOSIONS,
   ECG_RAY_SHOOT,
+  ECG_FORCE,
   ECG_RAY_IA_GRAPH,
   ECG_CAMERA,
   ECG_RAGDOLL,
@@ -125,7 +126,7 @@ public:
 	//--- Intersection Functions:
 	CPhysicUserData*		RaycastClosestActor					(const Vect3f posRay, const Vect3f& dirRay, uint32 impactMask, SCollisionInfo& info);
   CPhysicUserData*		RaycastClosestActorShoot		(const Vect3f posRay, const Vect3f& dirRay, uint32 impactMask, SCollisionInfo& info, float _fPower);
-	void								OverlapSphereActor					(float radiusSphere, const Vect3f& posSphere, std::vector<CPhysicUserData*> &impactObjects);
+	void								OverlapSphereActor					(float radiusSphere, const Vect3f& posSphere, std::vector<CPhysicUserData*> &impactObjects, uint32 impactMask);
   void								OverlapSphereActorGrenade		(float radiusSphere, const Vect3f& posSphere, std::vector<CPhysicUserData*> impactObjects, float _fPower);
   void                ApplyExplosion              (NxActor* _pActor, const Vect3f& _vPosSphere, float _fEffectRadius, float _fPower);
 
