@@ -159,8 +159,39 @@ bool CParticle::UpdateState(float _fDeltaTime)
     {
       m_iNumDiapo++;
       m_fTimeAnimationActual=0;
+      if(m_iNumDiapo>m_iTotalDiapos)
+      {
+        m_iNumDiapo=1;
+      }
     }
+  }
 
+  return true;
+}
+
+void CParticle::UpdateBillboard(CCamera* _pCamera)
+{
+  Vect3f l_cameraDirection = _pCamera->GetDirection();
+  Vect3f l_cameraVecUp = _pCamera->GetVecUp();
+
+ 
+  m_VDirection = l_cameraDirection.GetNormalized();
+    
+  Mat33f mat;
+  l_cameraVecUp = mat.FromAxisAngle(l_cameraDirection.Normalize(), m_fIncrementAngle)* l_cameraVecUp.Normalize();
+  m_VUp = l_cameraVecUp.GetNormalized();
+      
+	//D3DXVec3Cross(&m_VRight, &m_VUp, &m_VDirection);// producte vectorial ok
+  m_VRight = (m_VUp ^ m_VDirection).GetNormalized();
+
+  m_PointA = m_vPos - (m_VRight*m_fSize*0.5f) - (m_VUp*m_fSize*0.5f);
+	m_PointB = m_vPos + (m_VRight*m_fSize*0.5f) - (m_VUp*m_fSize*0.5f);
+	m_PointC = m_vPos - (m_VRight*m_fSize*0.5f) + (m_VUp*m_fSize*0.5f);
+	m_PointD = m_vPos + (m_VRight*m_fSize*0.5f) + (m_VUp*m_fSize*0.5f);
+
+  
+  if(m_bAnimated)
+  {
     int i= m_vFilesColumnes.size()-1;
     //int j=i
     while (i>=0)
@@ -184,11 +215,6 @@ bool CParticle::UpdateState(float _fDeltaTime)
 	  int l_canviDiapo=1;
 
 
-    if(m_iNumDiapo>m_iTotalDiapos)
-    {
-      m_iNumDiapo=1;
-      m_fTimeAnimationActual=0;
-    }
     //Per saber en quina posició esta la diapositiva que volem ensenyar
     bool l_bOk=false;
     int l_Columna=0, fila=2, AuxNumDiapo;
@@ -230,29 +256,6 @@ bool CParticle::UpdateState(float _fDeltaTime)
     m_fDU = 1.0f;
     m_fDV = 0.0f;
   }
-
-  return true;
-}
-
-void CParticle::UpdateBillboard(CCamera* _pCamera)
-{
-  Vect3f l_cameraDirection = _pCamera->GetDirection();
-  Vect3f l_cameraVecUp = _pCamera->GetVecUp();
-
- 
-  m_VDirection = l_cameraDirection.GetNormalized();
-    
-  Mat33f mat;
-  l_cameraVecUp = mat.FromAxisAngle(l_cameraDirection.Normalize(), m_fIncrementAngle)* l_cameraVecUp.Normalize();
-  m_VUp = l_cameraVecUp.GetNormalized();
-      
-	//D3DXVec3Cross(&m_VRight, &m_VUp, &m_VDirection);// producte vectorial ok
-  m_VRight = (m_VUp ^ m_VDirection).GetNormalized();
-
-  m_PointA = m_vPos - (m_VRight*m_fSize*0.5f) - (m_VUp*m_fSize*0.5f);
-	m_PointB = m_vPos + (m_VRight*m_fSize*0.5f) - (m_VUp*m_fSize*0.5f);
-	m_PointC = m_vPos - (m_VRight*m_fSize*0.5f) + (m_VUp*m_fSize*0.5f);
-	m_PointD = m_vPos + (m_VRight*m_fSize*0.5f) + (m_VUp*m_fSize*0.5f);
   
   //float l_fSin = sin(m_iIncrementAngle + FLOAT_PI_VALUE * .25f);
   //float l_fCos = cos(m_iIncrementAngle + FLOAT_PI_VALUE * .25f);
@@ -285,17 +288,22 @@ void  CParticle::FillInstanceData(SParticleRenderInfo* data)
   data->x = m_vPos.x;
   data->y = m_vPos.y;
   data->z = m_vPos.z;
-  data->size = m_fSize;
+  data->sizeX = 
+  data->sizeY = m_fSize;
 
   //data->u = 
   data->angleCos = cos(m_fIncrementAngle + FLOAT_PI_VALUE * .25f);
   data->angleSin = sin(m_fIncrementAngle + FLOAT_PI_VALUE * .25f);
   //data->active = (m_fAge >= m_fLifetime) ? 0.f : 1.f;
   
-  data->minU = m_fCU;
-  data->minV = m_fCV;
-  data->maxU = m_fBU;
-  data->maxV = m_fBV;
+  if(m_bAnimated)
+    data->diapo = (float)m_iNumDiapo - 1.f;
+  else
+    data->diapo = 0.f;
+  //data->minU = m_fCU;
+  //data->minV = m_fCV;
+  //data->maxU = m_fBU;
+  //data->maxV = m_fBV;
   
   data->color=(DWORD)GetColor();
 }

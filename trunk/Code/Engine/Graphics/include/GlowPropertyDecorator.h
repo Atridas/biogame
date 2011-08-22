@@ -12,7 +12,7 @@ public:
   virtual ~CGlowPropertyDecorator() {};
   
   virtual float GetGlowIntensity() const { return m_fGlowIntensity; };
-  virtual void SetGlowIntensity(const float& _fGlowIntensity) {m_fGlowIntensity = _fGlowIntensity;};
+  virtual void SetGlowIntensity(float _fGlowIntensity) {m_fGlowIntensity = _fGlowIntensity;};
 
 private:
 

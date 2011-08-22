@@ -9,7 +9,7 @@ public:
   virtual ~CBumpPropertyDecorator() {};
 
   virtual float GetBump() const {return m_fBump;};
-  virtual void  SetBump(const float& _fBump) {m_fBump = _fBump;};
+  virtual void  SetBump(float _fBump) {m_fBump = _fBump;};
 
 private:
   float m_fBump;

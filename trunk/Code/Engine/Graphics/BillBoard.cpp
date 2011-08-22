@@ -9,6 +9,7 @@
 #include "ParticleManager.h"
 #include "StaticMeshEmptyMaterial.h"
 #include "DiffuseTextureDecorator.h"
+#include "SpritePropertyDecorator.h"
 
 
 CBillBoard::CBillBoard()
@@ -92,8 +93,9 @@ void CBillBoard::SetTexture(CTexture* _pTexParticle)
 
   
   CHECKED_DELETE(m_pMaterial);
-
+  
   m_pMaterial = new CStaticMeshEmptyMaterial();
+  m_pMaterial = new CSpritePropertyDecorator(m_pMaterial, Vect2f(1.f, 1.f));
   m_pMaterial = new CDiffuseTextureDecorator(m_pMaterial,m_pTexParticle);
 };
 
@@ -278,15 +280,20 @@ void CBillBoard::RenderHW(CRenderManager* _pRM)
   l_mBuffer->z = m_vPosition.z;
 
   //TODO refer size
-  l_mBuffer->size = (m_fSizeX + m_fSizeY)*.5f;
+  l_mBuffer->sizeX = m_fSizeX;
+  l_mBuffer->sizeY = m_fSizeY;
 
   l_mBuffer->angleSin = sin(m_fAngle + FLOAT_PI_VALUE * .25f);
   l_mBuffer->angleCos = cos(m_fAngle + FLOAT_PI_VALUE * .25f);
   
-  l_mBuffer->minU = m_fCU;
-  l_mBuffer->minV = m_fCV;
-  l_mBuffer->maxU = m_fBU;
-  l_mBuffer->maxV = m_fBV;
+  //l_mBuffer->minU = m_fCU;
+  //l_mBuffer->minV = m_fCV;
+  //l_mBuffer->maxU = m_fBU;
+  //l_mBuffer->maxV = m_fBV;
+  if(m_bAnimated)
+    l_mBuffer->diapo = (float)m_iNumDiapo - 1.f;
+  else
+    l_mBuffer->diapo = 0.f;
 
   l_mBuffer->color=(DWORD)m_Color;
 
@@ -310,6 +317,7 @@ void CBillBoard::RenderHW(CRenderManager* _pRM)
   assert(result);// ---
 
   //l_it->first->Render(_pRM, true);
+  m_pMaterial->SetSpriteSize(Vect2f(1.f / m_iTexNumColumnes, 1.f / m_iTexNumFiles));
   CEffect* l_pEffect = l_pEM->ActivateMaterial(m_pMaterial);
   CORE->GetParticleManager()->GetRenderableVertexs()->Render(_pRM, l_pEffect);
 }

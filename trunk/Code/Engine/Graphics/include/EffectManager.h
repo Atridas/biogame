@@ -61,6 +61,7 @@ public:
                     m_bBumpUpdated(false),
                     m_bEnvironmentUpdated(false),
                     m_bTimeUpdated(false),
+                    m_bSpriteSizeUpdated(false),
                     m_fTime(0.0f),
                     m_fEnvironmentIntensity(0.f),
                     m_fBump(0.f),
@@ -101,7 +102,8 @@ public:
                     m_pGlossiness(0),
                     m_pSpecularLevel(0),
                     m_pGlowIntensityParameter(0),
-                    m_pEnvironmentIntensityParameter(0)
+                    m_pEnvironmentIntensityParameter(0),
+                    m_pSpriteSizeParameter(0)
                     {SetOk(true);};
 
   ~CEffectManager() {Done();};
@@ -154,6 +156,7 @@ public:
   void SetGlow(bool _bGlow) {m_bGlowActive = _bGlow; m_bGlowUpdated = true;};
   void SetGlowIntensity(float _fGlowIntensity) {m_fGlowIntensity = _fGlowIntensity; m_bGlowUpdated = true;};
   void SetEnvironmentIntensity(float _fEnvironmentIntensity) {if(_fEnvironmentIntensity != m_fEnvironmentIntensity) {m_fEnvironmentIntensity = _fEnvironmentIntensity; m_bEnvironmentUpdated = true;}};
+  void SetSpriteSize(const Vect2f _vSpriteSize) {if(_vSpriteSize != m_vSpriteSize) { m_vSpriteSize = _vSpriteSize; m_bSpriteSizeUpdated = true; } };
 
   void SetBump(float _fBump) {m_fBump = _fBump; m_bBumpUpdated = true;};
 
@@ -238,6 +241,7 @@ private:
 
   bool m_bSemanticsUpdated;
   bool m_bLightsUpdated;
+  bool m_bSpriteSizeUpdated;
 
   float m_bTimeUpdated;
 
@@ -250,6 +254,7 @@ private:
   float m_fBump;
   float m_fEnvironmentIntensity;
   float m_fTime;
+  Vect2f m_vSpriteSize;
 
   D3DXHANDLE m_pWorldMatrixParameter;
   D3DXHANDLE m_pViewMatrixParameter;
@@ -291,6 +296,7 @@ private:
   D3DXHANDLE m_pSpecularLevel;
   D3DXHANDLE m_pGlowIntensityParameter;
   D3DXHANDLE m_pEnvironmentIntensityParameter;
+  D3DXHANDLE m_pSpriteSizeParameter;
 
 
   //bool m_bInverseProjectionUpdated, m_bInverseViewUpdated, m_bInverseWorldUpdated;

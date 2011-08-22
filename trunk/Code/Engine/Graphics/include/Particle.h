@@ -12,9 +12,9 @@
 
 struct SParticleRenderInfo 
 {
-  float x, y, z, size;
-  float minU, minV, maxU, maxV;
-  float angleSin, angleCos;
+  float x, y, z, diapo;
+  //float minU, minV, maxU, maxV;
+  float angleSin, angleCos, sizeX, sizeY;
   uint32 color;
 };
 

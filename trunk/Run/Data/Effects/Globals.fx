@@ -30,6 +30,7 @@ shared float g_EnvironmentIntensity : EnvironmentIntensity;
 
 float g_GlowBlurIntensity = 1.15;
 shared float g_GlowIntensity : GlowIntensity;
+shared float2 g_SpriteSize : SpriteSize;
 
 //Lights
 #define LIGHT_OMNI        0
