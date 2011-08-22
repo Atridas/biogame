@@ -196,6 +196,7 @@
     <ClInclude Include="include\SpecularTextureDecorator.h" />
     <ClInclude Include="include\SphereCamera.h" />
     <ClInclude Include="include\SpotLight.h" />
+    <ClInclude Include="include\SpritePropertyDecorator.h" />
     <ClInclude Include="include\StaticMesh.h" />
     <ClInclude Include="include\StaticMeshEmptyMaterial.h" />
     <ClInclude Include="include\StaticMeshManager.h" />

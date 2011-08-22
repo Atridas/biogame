@@ -8,6 +8,7 @@
 #include "EffectManager.h"
 #include "StaticMeshEmptyMaterial.h"
 #include "DiffuseTextureDecorator.h"
+#include "SpritePropertyDecorator.h"
 
 
 CParticleEmitter::CParticleEmitter():
@@ -56,6 +57,7 @@ m_InstancedData()
   
 {
   m_pMaterial = new CStaticMeshEmptyMaterial();
+  m_pMaterial = new CSpritePropertyDecorator(m_pMaterial, Vect2f( 1.f, 1.f));
   //TODO inicialitzar els vector de color i temps
 }
 
@@ -102,6 +104,10 @@ void CParticleEmitter::SetAttributes(CParticleCore* _info)
   m_vTimeAnimatedInterpolation = _info->m_vTimeAnimatedInterpolation;
   //m_vTextureAnimation=_info->m_vTextureAnimation;
   //m_iNumDirections=_info->m_iNumDirections;
+  if(m_bAnimated)
+    m_pMaterial->SetSpriteSize(Vect2f( 1.f / m_vFilesColumnes[1], 1.f / m_vFilesColumnes[0] ));
+  else
+    m_pMaterial->SetSpriteSize(Vect2f( 1.f , 1.f ));
 
   //crear un vector de direccion de tantas posicions com estat pot tenir (segons vector temps)
   //int j=m_vTimeDirection.size();
@@ -422,6 +428,10 @@ void CParticleEmitter::SetTexParticle(CTexture* _pTexParticle)
   CHECKED_DELETE(m_pMaterial);
 
   m_pMaterial = new CStaticMeshEmptyMaterial();
+  if(m_bAnimated)
+    m_pMaterial = new CSpritePropertyDecorator(m_pMaterial, Vect2f( 1.f / m_vFilesColumnes[1], 1.f / m_vFilesColumnes[0]));
+  else
+    m_pMaterial = new CSpritePropertyDecorator(m_pMaterial, Vect2f( 1.f, 1.f ));
   m_pMaterial = new CDiffuseTextureDecorator(m_pMaterial,m_pTexParticle);
 };
   

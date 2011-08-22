@@ -12,7 +12,7 @@ public:
   virtual ~CEnvirondmentPropertyDecorator() {};
   
   virtual float GetEnvironmentIntensity() const { return m_fEnvironmentIntensity; };
-  virtual void SetEnvironmentIntensity(const float& _fEnvironmentIntensity) {m_fEnvironmentIntensity = _fEnvironmentIntensity;};
+  virtual void SetEnvironmentIntensity(float _fEnvironmentIntensity) {m_fEnvironmentIntensity = _fEnvironmentIntensity;};
 
 private:
 

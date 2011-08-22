@@ -264,9 +264,8 @@ struct CAL3D_TANGENT_BITANGENT_HW_VERTEX_VS {
 
 struct PARTICLE_VS {
 	float3 Position : POSITION;
-	float4 Parameters1 : TEXCOORD0; // x, y, z, size
-	float4 Parameters2 : TEXCOORD1; // minU, minV, maxU, maxV
-	float2 Parameters3 : TEXCOORD2; // angleSin, angleCos
+	float4 Parameters1 : TEXCOORD0; // x, y, z, diapo
+	float4 Parameters2 : TEXCOORD1; // angleSin, angleCos, sizeX, sizeY
 	float4 Color : COLOR;
 };
 

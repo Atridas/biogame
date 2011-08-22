@@ -214,6 +214,9 @@
     <Filter Include="BillBoard">
       <UniqueIdentifier>{61153b82-daf7-427b-9730-2a7ef1cdb280}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Materials\MaterialDecorators\PropertyDecorators\SpriteDecorator">
+      <UniqueIdentifier>{070271a6-87d3-4241-94bd-d03f611db3ce}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -553,6 +556,9 @@
     </ClInclude>
     <ClInclude Include="include\BillBoard.h">
       <Filter>BillBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SpritePropertyDecorator.h">
+      <Filter>Materials\MaterialDecorators\PropertyDecorators\SpriteDecorator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -233,6 +233,7 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     m_pSpecularLevel = l_pD3DEffect->GetParameterBySemantic(NULL,"SpecularLevel");
     m_pBump          = l_pD3DEffect->GetParameterBySemantic(NULL,"BumpAmount");
     m_pEnvironmentIntensityParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"EnvironmentIntensity");
+    m_pSpriteSizeParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"SpriteSize");
 
     m_bSemanticsUpdated = false;
   }
@@ -467,6 +468,11 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     l_pD3DEffect->SetFloat(m_pBump,(FLOAT)m_fBump);
     m_bBumpUpdated = false;
   }
+
+  if(m_bSpriteSizeUpdated)
+  {
+    l_pD3DEffect->SetFloatArray(m_pSpriteSizeParameter, (FLOAT*)&m_vSpriteSize, 2);
+  }
   
   if(m_bTimeUpdated)
   {
@@ -519,6 +525,8 @@ CEffect* CEffectManager::ActivateMaterial(CMaterial* _pMaterial)
     SetSpecularParams(_pMaterial->GetGlossiness(), _pMaterial->GetSpecularFactor());
 
     SetEnvironmentIntensity(_pMaterial->GetEnvironmentIntensity());
+
+    SetSpriteSize(_pMaterial->GetSpriteSize());
 
     _pMaterial->Activate(l_pEffect->GetTextureMask());
 

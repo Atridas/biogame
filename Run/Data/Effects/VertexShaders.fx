@@ -253,23 +253,34 @@ TTEXTURED_DIFFUSSED_VERTEX_PS ParticleVS(PARTICLE_VS _in)
   
   float3 l_Right, l_Up;
   
+  float2 l_fSize = _in.Parameters2.zw;
+  
+  float l_fAngleSin = _in.Parameters2.x;
+  float l_fAngleCos = _in.Parameters2.y;
+  
+  float2 l_MinUV = float2(
+                      g_SpriteSize.x * _in.Parameters1.w,
+                      g_SpriteSize.y * floor(g_SpriteSize.x * _in.Parameters1.w) // la x és 1/diapos horitzontal
+                          );
+  float2 l_MaxUV = l_MinUV + g_SpriteSize;
+  
   if( sign(_in.Position.x) == sign(_in.Position.y) )
   {
-    l_Right = _in.Position.x * _in.Parameters3.x * _in.Parameters1.w * g_CameraRight;
-    l_Up    = _in.Position.y * _in.Parameters3.y * _in.Parameters1.w * g_CameraUp;   
+    l_Right = _in.Position.x * l_fAngleSin * l_fSize.x * g_CameraRight;
+    l_Up    = _in.Position.y * l_fAngleCos * l_fSize.y * g_CameraUp;   
   }                                                                                  
   else                                                                               
   {                                                                                  
-    l_Right = _in.Position.x * _in.Parameters3.y * _in.Parameters1.w * g_CameraRight;
-    l_Up    = _in.Position.y * _in.Parameters3.x * _in.Parameters1.w * g_CameraUp;   
+    l_Right = _in.Position.x * l_fAngleCos * l_fSize.x * g_CameraRight;
+    l_Up    = _in.Position.y * l_fAngleSin * l_fSize.y * g_CameraUp;   
   }
   
   l_WorldPos = l_WorldPos + l_Right + l_Up;
   
   //l_WorldPos = l_WorldPos + _in.Parameters1.w * _in.Position.x * g_CameraRight + _in.Parameters1.w * _in.Position.y * g_CameraUp;
 	
-  out_.UV.x      = _in.Parameters2.x + (_in.Parameters2.z - _in.Parameters2.x ) * (_in.Position.x + 1.0) / 2.0;
-  out_.UV.y      = _in.Parameters2.y + (_in.Parameters2.w - _in.Parameters2.y ) * (1.0 - _in.Position.y) / 2.0;
+  out_.UV.x      = l_MinUV.x + (l_MaxUV.x - l_MinUV.x ) * (_in.Position.x + 1.0) / 2.0;
+  out_.UV.y      = l_MinUV.y + (l_MaxUV.y - l_MinUV.y ) * (1.0 - _in.Position.y) / 2.0;
 	out_.HPosition = mul(float4(l_WorldPos,1.0),g_ViewProjectionMatrix);
   out_.Color     = _in.Color;
   

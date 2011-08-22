@@ -17,8 +17,8 @@ public:
   virtual float GetGlossiness()        const {return m_fGlossiness;};
   virtual float GetSpecularFactor()    const {return m_fSpecularLevel;};
 
-  virtual void SetSpecularFactor(const float& _fSpecularFactor) {m_fSpecularLevel = _fSpecularFactor;};
-  virtual void SetGlossines(const float& _fGlossiness) {m_fGlossiness = _fGlossiness;};
+  virtual void SetSpecularFactor(float _fSpecularFactor) {m_fSpecularLevel = _fSpecularFactor;};
+  virtual void SetGlossines(float _fGlossiness) {m_fGlossiness = _fGlossiness;};
 
 private:
   float m_fGlossiness;
