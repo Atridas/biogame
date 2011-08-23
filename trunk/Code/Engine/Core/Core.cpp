@@ -24,6 +24,7 @@
 #include <GUIManager.h>
 #include <PhysicsManager.h>
 #include <ParticleManager.h>
+#include <Particle.h>
 #include <BillBoardManager.h>
 #include <SoundManager.h>
 #include <EntityManager.h>

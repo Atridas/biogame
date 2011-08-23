@@ -24,6 +24,9 @@ public:
   static CComponentArma* AddToEntity(CGameEntity* _pEntity, const string& _szMeshName);
   void SetActive(bool _bActive);
   
+  Vect3f GetPosition();
+  Vect3f GetAimDirection();
+
   virtual void PostUpdate(float _fDeltaTime);
 
 protected:

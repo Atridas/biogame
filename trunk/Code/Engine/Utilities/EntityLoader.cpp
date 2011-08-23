@@ -472,9 +472,9 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
 
 CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3f& _vPosition, float _fYaw)
 {
-  float l_fCapsuleHeigh = 1.5f;
-  float l_fCapsuleRadius = 0.3f;
-  float l_fCapsuleSkin   = 0.1f;
+  float l_fCapsuleHeigh = 0.7f;
+  float l_fCapsuleRadius = 0.7f;
+  float l_fCapsuleSkin   = 0.01f;
 
   float l_fTotalHeight = ((l_fCapsuleHeigh+2*l_fCapsuleRadius)*0.5f + l_fCapsuleSkin);
 
@@ -494,7 +494,6 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
   CComponentRenderableObject * l_pComponentRenderableObject = 
                     CComponentRenderableObject::AddToEntityWithAnimatedModel(l_pPlayer, "Player Character", "riggle");
   l_pComponentRenderableObject->m_bBlockPitchRoll = true;
-  l_pComponentRenderableObject->m_fHeightAdjustment = -l_fTotalHeight;
   l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
 
 
@@ -536,7 +535,9 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
 
   //m_pCamera = l_pComponent3rdPSCamera->GetCamera();
 
-  CComponentPhysXController::AddToEntity(l_pPlayer, l_fCapsuleRadius, l_fCapsuleHeigh, 45.0f, l_fCapsuleSkin, 0.2f, ECG_PERSONATGE );
+  CComponentPhysXController::AddToEntity(l_pPlayer, l_fCapsuleRadius, l_fCapsuleHeigh, 45.0f, l_fCapsuleSkin, 0.5f, ECG_PERSONATGE );
+
+  l_pComponentRenderableObject->m_fHeightAdjustment = -l_fTotalHeight;
 
   CComponentShield::AddToEntity(l_pPlayer, 50.f, 50.f, 1.0f, 5.0f);
   CComponentVida::AddToEntity(l_pPlayer, 100.f, 100.f, true, 3.0f);
@@ -556,18 +557,22 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
 
 CGameEntity* CEntityManager::InitMiner(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName, const bool _bActive)
 {
-  return InitEnemy(_szPlayerName, _vPosition, 1.f, 
+  CGameEntity* l_pMiner = InitEnemy(_szPlayerName, _vPosition, 0.8f, 
                     "State_Enemy_Idle", "miner", "Data/Animated Models/Miner/Skeleton.xml",
                     _szEntityName, _bActive);
+
+  l_pMiner->GetComponent<CComponentRenderableObject>()->m_fHeightAdjustment = -1.1f;
+
+  return l_pMiner;
 }
 
 CGameEntity* CEntityManager::InitMilitar(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName, const bool _bActive)
 {
-  CGameEntity* l_pMilitar = InitEnemy(_szPlayerName, _vPosition, 0.7f, 
+  CGameEntity* l_pMilitar = InitEnemy(_szPlayerName, _vPosition, 0.8f, 
                     "State_Soldier_Idle", "Militar", "Data/Animated Models/Militar/Skeleton.xml",
                     _szEntityName, _bActive);
 
-  l_pMilitar->GetComponent<CComponentRenderableObject>()->m_fHeightAdjustment = -1.5f;
+  l_pMilitar->GetComponent<CComponentRenderableObject>()->m_fHeightAdjustment = -1.0f;
 
   return l_pMilitar;
 }
@@ -587,7 +592,7 @@ CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f
   l_pComponentObject3D->SetPosition(_vPosition);
   CComponentMovement::AddToEntity(l_peEnemy);
 
-  CComponentPhysXController::AddToEntity(l_peEnemy, _fRadius, 1.5f, 10.0f, 0.1f, 0.5f,  ECG_ENEMICS );
+  CComponentPhysXController::AddToEntity(l_peEnemy, _fRadius, 0.5f, 45.0f, 0.01f, 0.5f,  ECG_ENEMICS );
 
 
   stringstream l_szInstanceModelName(_szRenderableModel);
@@ -596,7 +601,7 @@ CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f
   
   CComponentRenderableObject *l_pComponentRenderableObject = CComponentRenderableObject::AddToEntityWithAnimatedModel(l_peEnemy, l_szInstanceModelName.str(), _szRenderableModel);
   l_pComponentRenderableObject->m_bBlockPitchRoll = true;
-  l_pComponentRenderableObject->m_fHeightAdjustment = -1.4f;
+  l_pComponentRenderableObject->m_fHeightAdjustment = -1.5f;
   l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
 
   //(new CComponentIAWalkToPlayer())->Init(l_peEnemy,"Player",2,"walk","impact");

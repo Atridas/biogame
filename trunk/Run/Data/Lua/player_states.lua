@@ -22,7 +22,7 @@ Player_Constants["Temps Morint"] = 2.0
 --sons
 Player_Constants["So rebre impacte"] = 'impacte'
 Player_Constants["So disparar"] = 'disparar'
-
+Player_Constants["So force"] = 'force'
 
 State_Player_Neutre = {}
 State_Player_Apuntar = {}
@@ -470,7 +470,7 @@ State_Player_Force['Enter'] = function(_jugador)
   animation:play_cycle(Player_Constants["Escut"], 0.1)
   player_controller.time = 0
   player_controller:force()
-  --SOUND:play_sample(Player_Constants["So escut activat"])
+  SOUND:play_sample(Player_Constants["So force"])
 end
 
 -------------------------------------------------------------------------------------------------

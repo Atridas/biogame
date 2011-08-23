@@ -134,11 +134,12 @@ void CEntityProcess::RenderScene(CRenderManager* _pRM)
 
 void CEntityProcess::RenderINFO(CRenderManager* _pRM)
 {
-  //CORE->GetPhysicsManager()->DebugRender(_pRM);
+ 
   if(CORE->GetActionManager()->IsActionActive("ToggleDebug"))
   {
     CORE->GetPhysicsManager()->DebugRender(_pRM);
     CORE->GetPortalManager()->DebugRender(_pRM);
+    CORE->GetEntityManager()->DebugRender(_pRM);
 
     CFrustum l_Frustum;
     l_Frustum.Update(m_pCamera);
