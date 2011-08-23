@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Biotest.cpp" />
     <ClCompile Include="EntityProcess.cpp" />
     <ClCompile Include="IAProcess.cpp" />
     <ClCompile Include="mainTest.cpp" />
@@ -20,6 +21,7 @@
     <ClCompile Include="TestProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Biotest.h" />
     <ClInclude Include="EntityProcess.h" />
     <ClInclude Include="IAProcess.h" />
     <ClInclude Include="ParticleProcess.h" />
