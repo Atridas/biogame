@@ -11,6 +11,7 @@
 #include "SoundTestProcess.h"
 #include "IAProcess.h"
 #include "EntityProcess.h"
+#include "Biotest.h"
 
 #if defined( _DEBUG )  
 #include "Utils/MemLeaks.h" 
@@ -18,7 +19,8 @@
 
 //#define __T_PARTICULES__
 //#define __T_PYSX__
-#define __T_ENTITIES__
+//#define __T_ENTITIES__
+#define __T_BIOTEST__
 
 
 #define APPLICATION_NAME	"TEST"
@@ -87,6 +89,9 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 #ifdef __T_ENTITIES__
     ReadXMLInitParams(l_InitParams,"./Data/XML/init_test_entities.xml");
 #endif
+#ifdef __T_BIOTEST__
+    ReadXMLInitParams(l_InitParams,"./Data/XML/init.xml");
+#endif
 
     // Create the application's window
     HWND hWnd = CreateWindow(	
@@ -107,6 +112,7 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
     CSoundTestProcess* l_pSoundTestProcess = new CSoundTestProcess();
     CIAProcess* l_pIAProcess = new CIAProcess();
     CEntityProcess* l_pEntityProcess = new CEntityProcess();
+    CBiotestProcess* l_pBiotestProcess = new CBiotestProcess();
 
     l_Engine.AddProcess(l_Test);
     l_Engine.AddProcess(l_PhysX);
@@ -114,6 +120,7 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
     l_Engine.AddProcess(l_pSoundTestProcess);
     l_Engine.AddProcess(l_pIAProcess);
     l_Engine.AddProcess(l_pEntityProcess);
+    l_Engine.AddProcess(l_pBiotestProcess);
 
 
 #ifdef __T_PYSX__
@@ -124,6 +131,9 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 #endif
 #ifdef __T_ENTITIES__
     l_Engine.ActivateProcess(l_pEntityProcess);
+#endif
+#ifdef __T_BIOTEST__
+    l_Engine.ActivateProcess(l_pBiotestProcess);
 #endif
 
     //l_Engine.ActivateProcess(l_Test);
