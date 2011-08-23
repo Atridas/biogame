@@ -54,8 +54,36 @@ end
 function esfera_destructible(_self)
   log('Sóc ' .. _self:get_name() .. ' i m\'ha matat ')
 end
+-------------------------------------------- GLOBALS  -------------------------------------------
+function activar_enemic(_name)
+  local l_enemic = EM:get_entity(_name)
+  if l_enemic then
+    local l_SM = l_enemic:get_component(BaseComponent.state_machine)
+    if l_SM then
+      l_SM:set_active(true)
+    else
+      log('L\'enemic ' .. _name .. ' no té màquina d\'estats')
+    end
+  else
+    log('Error: no es troba l\'enemic: ' .. _name)
+  end
+end
 
+function desactivar_enemic(_name)
+  local l_enemic = EM:get_entity(_name)
+  if l_enemic then
+    local l_SM = l_enemic:get_component(BaseComponent.state_machine)
+    if l_SM then
+      l_SM:set_active(false)
+    else
+      log('L\'enemic ' .. _name .. ' no té màquina d\'estats')
+    end
+  else
+    log('Error: no es troba l\'enemic: ' .. _name)
+  end
+end
 
+-------------------------------------------- LEVEL -2 -------------------------------------------
 function laboratori_petar_llum_porta(_self)
   local l_door = EM:get_entity("Porta_Laboratori")
   if l_door then
