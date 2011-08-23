@@ -4,6 +4,7 @@
   <sound name="bgm2" file="./Data/Sounds/bgm2.mp3" sound3D="false" type="music" loop="true" priority="1" volume="1.0"/>
   <sound name="music3d" file="./Data/Sounds/music3d.mp3" sound3D="true" type="music" loop="true" minDistance="1.0" maxDistance="100.0" priority="1" volume="1.0"/>
   <sound name="pipip" file="./Data/Sounds/pipipipipi.mp3" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />  
-  <sound name="disparar" file="./Data/Sounds/disparar.mp3" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />  
+  <sound name="disparar" file="./Data/Sounds/laser_short.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />  
   <sound name="impacte" file="./Data/Sounds/impactedelaostia.mp3" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />  
+  <sound name="force" file="./Data/Sounds/shockwave.mp3" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />  
 </sounds>

@@ -111,3 +111,31 @@ void CComponentArma::PostUpdate(float _fDeltaTime)
 
   }
 }
+
+Vect3f CComponentArma::GetPosition()
+{
+  if(m_pRenderableObject)
+  {
+    return m_pRenderableObject->GetMat44().GetPos();
+  }
+
+  return Vect3f(0.0f);
+}
+
+Vect3f CComponentArma::GetAimDirection()
+{
+  if(m_pRenderableObject)
+  {
+    Vect3f l_vDir(1.0f,0.0f,0.0f);
+
+    Mat44f l_mTransform = m_pRenderableObject->GetMat44();
+    Mat33f l_mRot;
+    l_mRot.SetIdentity();
+    l_mRot.RotByAnglesYXZ(l_mTransform.GetAngleY()-FLOAT_PI_VALUE,l_mTransform.GetAngleX(),l_mTransform.GetAngleZ());
+
+    return l_mRot*l_vDir;
+    //return m_pRenderableObject->GetMat44().Get33RotationNormalized()*l_vDir;
+  }
+
+  return Vect3f(1.0f,0.0f,0.0f);
+}

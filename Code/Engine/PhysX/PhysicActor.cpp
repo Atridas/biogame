@@ -1,5 +1,7 @@
 #define __DONT_INCLUDE_MEM_LEAKS__
 #include "PhysicActor.h"
+#include "PhysicsManager.h"
+
 //#include "Base/Math/Matrix44.h"
 
 //----PhysX Includes-------------
@@ -16,6 +18,7 @@ CPhysicActor::CPhysicActor(CPhysicUserData* userData)
 {
 
 	assert(m_pUserData);
+  userData->SetActor(this);
 	m_pPhXActorDesc = new NxActorDesc();
 	m_pPhXBodyDesc = new NxBodyDesc();
 }
