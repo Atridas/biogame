@@ -1126,113 +1126,138 @@
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="Menjador_Navnode_00">
-    <Object3D position="4.21359 0.0 37.2267" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="4.21359 0.653691 37.2267" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode cobertura="true" />
   </Entity>
   <Entity name="Menjador_Navnode_01">
-    <Object3D position="2.31391 0.0 33.2547" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="2.31391 0.653691 33.2547" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode cobertura="true" />
   </Entity>
   <Entity name="Menjador_Navnode_02">
-    <Object3D position="10.7465 0.0 34.2877" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="10.7465 0.653691 34.2877" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode cobertura="true" />
   </Entity>
   <Entity name="Menjador_Navnode_03">
-    <Object3D position="15.7482 0.0 25.4252" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="15.7482 0.653691 25.4252" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode cobertura="true" />
   </Entity>
   <Entity name="Menjador_Navnode_04">
-    <Object3D position="13.0321 0.0 23.0533" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="13.0321 0.653691 23.0533" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode cobertura="true" />
   </Entity>
   <Entity name="Menjador_Navnode_05">
-    <Object3D position="21.0127 0.0 23.9804" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="21.0127 0.653691 23.9804" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode cobertura="true" />
   </Entity>
   <Entity name="Menjador_Navnode_06">
-    <Object3D position="17.0917 0.0 30.4291" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="17.0917 0.653691 30.4291" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode cobertura="true" />
   </Entity>
   <Entity name="Menjador_Navnode_07">
-    <Object3D position="18.0232 0.0 32.4711" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="18.0232 0.653691 32.4711" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode cobertura="true" />
   </Entity>
   <Entity name="Menjador_Navnode_08">
-    <Object3D position="15.9083 0.0 28.1123" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="15.9083 0.653691 28.1123" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
   <Entity name="Menjador_Navnode_09">
-    <Object3D position="19.0533 0.0 26.5189" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="19.0533 0.653691 26.5189" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
   <Entity name="Menjador_Navnode_10">
-    <Object3D position="22.6472 0.0 28.5481" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="22.6472 0.653691 28.5481" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
   <Entity name="Menjador_Navnode_11">
-    <Object3D position="26.6324 0.0 31.7828" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="26.6324 0.653691 31.7828" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
   <Entity name="Menjador_Navnode_12">
-    <Object3D position="29.6435 0.0 29.7328" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="29.6435 0.653691 29.7328" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
   <Entity name="Menjador_Navnode_13">
-    <Object3D position="27.6772 0.0 19.0805" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="27.6772 0.653691 19.0805" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
   <Entity name="Menjador_Navnode_14">
-    <Object3D position="23.7255 0.0 16.6871" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="23.7255 0.653691 16.6871" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
   <Entity name="Menjador_Navnode_15">
-    <Object3D position="16.8262 0.0 19.3398" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="16.8262 0.653691 19.3398" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
   <Entity name="Menjador_Navnode_16">
-    <Object3D position="12.9662 0.0 29.8858" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="12.9662 0.653691 29.8858" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
   <Entity name="Menjador_Navnode_17">
-    <Object3D position="8.37499 0.0 32.4956" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="8.37499 0.653691 32.4956" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
   <Entity name="Menjador_Navnode_18">
-    <Object3D position="5.79266 0.0 27.6458" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="5.79266 0.653691 27.6458" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
   <Entity name="Menjador_Navnode_19">
-    <Object3D position="6.59412 0.0 23.2662" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="6.59412 0.653691 23.2662" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
   <Entity name="Menjador_Navnode_20">
-    <Object3D position="10.8422 0.0 22.6001" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="10.8422 0.653691 22.6001" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
   <Entity name="Menjador_Navnode_21">
-    <Object3D position="0.493988 0.0 29.4841" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="0.493988 0.653691 29.4841" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
   <Entity name="Menjador_Navnode_22">
-    <Object3D position="11.144 0.0 38.2628" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="11.144 0.653691 38.2628" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
   <Entity name="Menjador_Navnode_23">
-    <Object3D position="9.63182 0.0 41.6073" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="9.63182 0.653691 41.6073" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
   <Entity name="Menjador_Navnode_24">
-    <Object3D position="4.99703 0.0 42.4683" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="4.99703 0.653691 42.4683" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
-  <Miner name="Miner_menjador00" position="-0.281395 2.34739 22.2964" yaw="0.0" active="false" />
-  <Militar name="Militar_menjador00" position="16.3101 2.34739 13.9439" yaw="0.0" active="false" />
-  <Militar name="Militar_menjador01" position="20.4234 2.34739 25.4376" yaw="0.0" active="false" />
-  <Militar name="Militar_menjador02" position="23.2716 2.34739 30.8669" yaw="0.0" active="false" />
-  <Militar name="Militar_menjador03" position="11.5827 2.34739 29.0349" yaw="0.0" active="false" />
-  <Militar name="Militar_menjador04" position="0.702496 2.34739 27.8419" yaw="0.0" active="false" />
-  <Militar name="Militar_menjador05" position="3.49921 2.34739 36.8697" yaw="0.0" active="false" />
-  <Militar name="Militar_menjador06" position="1.3219 2.34739 32.9813" yaw="0.0" active="false" />
-  <Militar name="Militar_menjador07" position="17.8768 2.34739 19.5611" yaw="0.0" active="false" />
-  <Militar name="Militar_menjador08" position="15.9623 2.34739 32.4562" yaw="0.0" active="false" />
+  <Entity name="Menjador_Navnode_25">
+    <Object3D position="25.7135 0.653691 29.8917" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="true" />
+  </Entity>
+  <Entity name="Menjador_trigger01">
+    <Object3D position="17.6872 1.41708 13.7996" yaw="-25.5885" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="2.58267 2.58267 5.7926" collision_group="trigger" onEnter="activarMenjador01" />
+  </Entity>
+  <Entity name="Menjador_trigger02">
+    <Object3D position="27.8034 1.41708 22.2714" yaw="64.257" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="2.58267 2.58267 5.7926" collision_group="trigger" onEnter="activarMenjador02" />
+  </Entity>
+  <Entity name="Menjador_trigger03">
+    <Object3D position="22.3562 1.41708 28.8525" yaw="64.257" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="2.58267 2.58267 4.48994" collision_group="trigger" onEnter="activarMenjador03" />
+  </Entity>
+  <Entity name="Menjador_trigger04">
+    <Object3D position="14.4386 1.41708 32.2794" yaw="-26.8138" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="2.58267 2.58267 15.3813" collision_group="trigger" onEnter="activarMenjador04" />
+  </Entity>
+  <Entity name="Menjador_Navnode_26">
+    <Object3D position="7.89675 0.653691 27.489" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="true" />
+  </Entity>
+  <Miner name="Miner_menjador00" position="0.524845 1.62554 22.3385" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador00" position="25.1514 2.11998 30.7663" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador01" position="17.2852 2.11998 25.9949" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador02" position="15.2447 2.11998 29.5691" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador03" position="11.5827 2.11998 24.0272" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador05" position="3.49921 2.11998 36.8697" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador06" position="1.3219 2.11998 32.9813" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador07" position="20.8774 2.11998 24.1651" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador08" position="15.9623 2.11998 32.4562" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador09" position="10.9714 2.11998 36.8411" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador10" position="6.61613 2.11998 25.4096" yaw="0.0" active="false" />
 </Entities>
