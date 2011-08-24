@@ -7,13 +7,14 @@
 #include "ComponentLaser.h"
 #include "ComponentRagdoll.h" 
 #include "ComponentNavNode.h"
+#include "ComponentVida.h"
 #include "IAManager.h"
 #include "GraphDefines.h"
 #include "PhysxBone.h"
 #include "PhysicActor.h"
 #include "cal3d\cal3d.h"
 
-
+#define SHOOT_POWER 30.0f
 
 CComponentIABrain* CComponentIABrain::AddToEntity(CGameEntity *_pEntity, const string& _szPlayerEntityName, const string& _szRagdollName)
 {
@@ -116,6 +117,51 @@ void CComponentIABrain::Shoot()
   }
 }
 
+void CComponentIABrain::ReciveShoot(SEvent _sEvent)
+{
+  CPhysxBone* l_pHeadBone = 0;
+  CPhysicActor* l_pActor = 0;
+  CComponentRagdoll* l_pRagdoll = 0;
+
+  if(_sEvent.Msg == SEvent::REBRE_IMPACTE)
+  {
+    l_pRagdoll = GetEntity()->GetComponent<CComponentRagdoll>();
+
+    assert(l_pRagdoll);
+
+    float l_fVida = GetEntity()->GetComponent<CComponentVida>()->GetHP();
+
+    if(l_fVida > 0.0f)
+    {
+
+      l_pHeadBone = l_pRagdoll->GetBone("Bip01 Head");
+
+      assert(l_pHeadBone);
+
+      l_pActor = (CPhysicActor*)_sEvent.Info[2].i;
+
+      if(l_pHeadBone->GetPhysxActor() == l_pActor)
+      {
+        Die();
+
+        Vect3f l_vDir(_sEvent.Info[1].v.x,_sEvent.Info[1].v.y,_sEvent.Info[1].v.z);
+
+        l_pActor->AddForceAtLocalPos(l_vDir,Vect3f(0.0f),SHOOT_POWER);
+      }
+
+    }else{
+
+      l_pActor = (CPhysicActor*)_sEvent.Info[2].i;
+
+      Vect3f l_vDir(_sEvent.Info[1].v.x,_sEvent.Info[1].v.y,_sEvent.Info[1].v.z);
+
+      l_pActor->AddForceAtLocalPos(l_vDir,Vect3f(0.0f),SHOOT_POWER);
+    }
+  }
+
+
+}
+
 void CComponentIABrain::ReciveForce(SEvent _sEvent)
 {
   Mat44f l_matBonePos;
@@ -126,28 +172,32 @@ void CComponentIABrain::ReciveForce(SEvent _sEvent)
 
   if(_sEvent.Msg == SEvent::REBRE_FORCE)
   {
+    Die();
+
     l_pRagdoll = GetEntity()->GetComponent<CComponentRagdoll>();
-    l_pRagdoll->SetActive(true);
 
-    l_vSenderPos = ENTITY_MANAGER->GetEntity(_sEvent.Sender)->GetComponent<CComponentObject3D>()->GetPosition();
+    if(l_pRagdoll)
+    {
+      l_vSenderPos = ENTITY_MANAGER->GetEntity(_sEvent.Sender)->GetComponent<CComponentObject3D>()->GetPosition();
 
-    l_pPhysxBone = l_pRagdoll->GetBone("Bip01 Spine");
-    assert(l_pPhysxBone);
-    l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
-    l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
-    l_pPhysxBone->GetPhysxActor()->AddForceAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
+      l_pPhysxBone = l_pRagdoll->GetBone("Bip01 Spine");
+      assert(l_pPhysxBone);
+      l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
+      l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
+      l_pPhysxBone->GetPhysxActor()->AddForceAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
 
-    l_pPhysxBone = l_pRagdoll->GetBone("Bip01 Spine1");
-    assert(l_pPhysxBone);
-    l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
-    l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
-    l_pPhysxBone->GetPhysxActor()->AddForceAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
+      l_pPhysxBone = l_pRagdoll->GetBone("Bip01 Spine1");
+      assert(l_pPhysxBone);
+      l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
+      l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
+      l_pPhysxBone->GetPhysxActor()->AddForceAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
 
-    l_pPhysxBone = l_pRagdoll->GetBone("Bip01 Spine2");
-    assert(l_pPhysxBone);
-    l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
-    l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
-    l_pPhysxBone->GetPhysxActor()->AddForceAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
+      l_pPhysxBone = l_pRagdoll->GetBone("Bip01 Spine2");
+      assert(l_pPhysxBone);
+      l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
+      l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
+      l_pPhysxBone->GetPhysxActor()->AddForceAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
+    }
   }
 }
 
@@ -172,7 +222,11 @@ void CComponentIABrain::Die()
     l_pRC->SetActive(true);
   }
   
-  
+  SEvent l_morir;
+  l_morir.Msg = SEvent::MORIR;
+  l_morir.Receiver = l_morir.Sender = GetEntity()->GetGUID();
+      
+  ENTITY_MANAGER->SendEvent(l_morir);
 }
 
 void CComponentIABrain::PlanPathToCobertura()
@@ -221,4 +275,15 @@ void CComponentIABrain::SetNextNode()
 {
   if(!m_PathToCobertura.empty())
     m_PathToCobertura.pop_back();
+}
+
+void CComponentIABrain::ReceiveEvent(const SEvent& _Event)
+{
+  if(_Event.Msg == SEvent::REBRE_IMPACTE)
+  {
+    ReciveShoot(_Event);
+  }else if(_Event.Msg == SEvent::REBRE_FORCE)
+  {
+    ReciveForce(_Event);
+  }
 }

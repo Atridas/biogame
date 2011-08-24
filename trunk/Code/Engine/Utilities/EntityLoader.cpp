@@ -605,9 +605,12 @@ CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f
   l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
 
   //(new CComponentIAWalkToPlayer())->Init(l_peEnemy,"Player",2,"walk","impact");
-  CComponentIABrain::AddToEntity(l_peEnemy,_szPlayerName,_szRagdollModell);
+
   //CComponentAnimation::AddToEntity(l_peEnemy);
   CComponentVida::AddToEntity(l_peEnemy, 100.f, 100.f);
+  //Important IABrain despres de ComponentVida, sinó IABrain no te la informacio actualitzada de la vida
+  CComponentIABrain::AddToEntity(l_peEnemy,_szPlayerName,_szRagdollModell);
+  
 
   CComponentStateMachine::AddToEntity(l_peEnemy, _szInitialState);
 

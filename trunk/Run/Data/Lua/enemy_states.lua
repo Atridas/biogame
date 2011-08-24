@@ -59,16 +59,22 @@ end
 -------------------------------------------------------------------------------------------------
 State_Enemy_Idle['Receive'] = function(_enemic, _event)
   if _event.msg == Event.rebre_impacte then
+    --_enemic:get_component(BaseComponent.ia_brain):recive_shoot(_event)
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Hit')
+    --if _enemic:get_component(BaseComponent.ia_brain):recive_shoot(_event) then
+    --  _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Mort')
+    --else
+    --  _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Hit')
+    --end
   end
   if _event.msg == Event.morir then
-    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Morint')
-  end
-  if _event.msg == Event.rebre_force then
-    --g_force_event = _event
-    _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Mort')
   end
+  --if _event.msg == Event.rebre_force then
+    --g_force_event = _event
+  --  _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
+  --  _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Mort')
+  --end
 end
 
 -------------------------------------------------------------------------------------------------
@@ -158,16 +164,22 @@ end
 -------------------------------------------------------------------------------------------------
 State_Enemy_Caminant['Receive'] = function(_enemic, _event)
   if _event.msg == Event.rebre_impacte then
+    --_enemic:get_component(BaseComponent.ia_brain):recive_shoot(_event)
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Hit')
+    --if _enemic:get_component(BaseComponent.ia_brain):recive_shoot(_event) then
+    --  _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Mort')
+    --else
+    --  _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Hit')
+    --end
   end
   if _event.msg == Event.morir then
-    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Morint')
-  end
-  if _event.msg == Event.rebre_force then
-    --g_force_event = _event
-    _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Mort')
   end
+  --if _event.msg == Event.rebre_force then
+    --g_force_event = _event
+  --  _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
+  --  _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Mort')
+  --end
 end
 
 -------------------------------------------------------------------------------------------------
@@ -219,7 +231,7 @@ end
 State_Enemy_Hit['Receive'] = function(_enemic, _event)
 
   if _event.msg == Event.morir then
-    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Morint')
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Mort')
   end
 end
 
@@ -269,38 +281,38 @@ end
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 
-State_Enemy_Morint["Enter"] = function(_enemic)
-
-  local animation = _enemic:get_component(BaseComponent.animation)
-  animation:play('dead', 0.3,1.0,true)
-  
-  local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
-  ia_brain.time = 0
-end
-
--------------------------------------------------------------------------------------------------
-State_Enemy_Morint["Exit"] = function(_enemic)
-
-end
-
--------------------------------------------------------------------------------------------------
-State_Enemy_Morint['Update'] = function(_enemic, _dt)
-  local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
-  ia_brain.time = ia_brain.time + _dt
-  
-  if ia_brain.time > Enemy_Constants["Time Dying"] then
-    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Mort')
-  end
-end
-
--------------------------------------------------------------------------------------------------
-State_Enemy_Morint['Receive'] = function(_enemic, _event)
-  if _event.msg == Event.rebre_force then
-    --g_force_event = _event
-    _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
-    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Mort')
-  end
-end
+--State_Enemy_Morint["Enter"] = function(_enemic)
+--
+--  local animation = _enemic:get_component(BaseComponent.animation)
+--  animation:play('dead', 0.3,1.0,true)
+--  
+--  local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
+--  ia_brain.time = 0
+--end
+--
+---------------------------------------------------------------------------------------------------
+--State_Enemy_Morint["Exit"] = function(_enemic)
+--
+--end
+--
+---------------------------------------------------------------------------------------------------
+--State_Enemy_Morint['Update'] = function(_enemic, _dt)
+--  local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
+--  ia_brain.time = ia_brain.time + _dt
+--  
+--  if ia_brain.time > Enemy_Constants["Time Dying"] then
+--    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Mort')
+--  end
+--end
+--
+---------------------------------------------------------------------------------------------------
+--State_Enemy_Morint['Receive'] = function(_enemic, _event)
+--  if _event.msg == Event.rebre_force then
+--    --g_force_event = _event
+--    _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
+--    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Mort')
+--  end
+--end
 
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
@@ -344,16 +356,22 @@ end
 -------------------------------------------------------------------------------------------------
 State_Enemy_Disparant['Receive'] = function(_enemic, _event)
   if _event.msg == Event.rebre_impacte then
+    --_enemic:get_component(BaseComponent.ia_brain):recive_shoot(_event)
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Hit')
+    --if _enemic:get_component(BaseComponent.ia_brain):recive_shoot(_event) then
+    --  _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Mort')
+    --else
+    --  _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Hit')
+    --end
   end
   if _event.msg == Event.morir then
-    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Morint')
-  end
-  if _event.msg == Event.rebre_force then
-    --g_force_event = _event
-    _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Mort')
   end
+  --if _event.msg == Event.rebre_force then
+  --  --g_force_event = _event
+  --  _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
+  --  _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Mort')
+  --end
 end
 
 -------------------------------------------------------------------------------------------------
@@ -381,9 +399,12 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Enemy_Mort['Receive'] = function(_enemic, _event)
-  if _event.msg == Event.rebre_force then
+  --if _event.msg == Event.rebre_impacte then
+  --  _enemic:get_component(BaseComponent.ia_brain):recive_shoot(_event)
+  --end
+  --if _event.msg == Event.rebre_force then
     --g_force_event = _event
-    _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
+  --  _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
     --_enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Mort')
-  end
+  --end
 end
