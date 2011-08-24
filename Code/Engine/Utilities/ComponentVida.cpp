@@ -121,5 +121,8 @@ void CComponentVida::ReceiveEvent(const SEvent& _Event)
 
     Decrease(l_fDamage);
 
+  }else if(_Event.Msg == SEvent::MORIR)
+  {
+    m_fVida = 0.0f;
   }
 }

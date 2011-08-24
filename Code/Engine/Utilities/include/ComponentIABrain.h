@@ -18,9 +18,12 @@ public:
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_IA_BRAIN;};
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_IA_BRAIN;};
 
+  virtual void ReceiveEvent(const SEvent& _Event);
+
   void Update(float _fDeltaTime);
 
   void Shoot();
+  void ReciveShoot(SEvent _sEvent);
   void ReciveForce(SEvent _sEvent);
   void Die();
   

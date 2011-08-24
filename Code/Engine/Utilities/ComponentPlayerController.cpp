@@ -169,7 +169,7 @@ void CComponentPlayerController::Shoot()
   SCollisionInfo l_CInfo;
   CPhysicUserData* l_pUserData = 0;
 
-  l_vPosArma -= l_vDirArma*1.0f;
+  l_vPosArma -= l_vDirArma*0.1f;
 
   CPhysicsManager *l_pPM = PHYSICS_MANAGER;
 
@@ -199,10 +199,13 @@ void CComponentPlayerController::Shoot()
         l_impacte.Info[0].f    = 20.f;
         l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
         l_impacte.Sender = l_pPlayerEntity->GetGUID();
-
+        l_impacte.Info[1].Type = SEventInfo::VECTOR;
+        l_impacte.Info[1].v.x = l_vDir.x;
+        l_impacte.Info[1].v.y = l_vDir.y;
+        l_impacte.Info[1].v.z = l_vDir.z;
+        l_impacte.Info[2].Type = SEventInfo::INT;
+        l_impacte.Info[2].i = (int)(l_pUserData->GetActor());
         ENTITY_MANAGER->SendEvent(l_impacte);
-
-        l_pUserData->GetActor()->AddForceAtLocalPos(l_vDir,Vect3f(0.0f),SHOOT_POWER);
       }
     }
 
@@ -230,11 +233,15 @@ void CComponentPlayerController::Shoot()
         l_impacte.Info[0].f    = 20.f;
         l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
         l_impacte.Sender = l_pPlayerEntity->GetGUID();
-
+        l_impacte.Info[1].Type = SEventInfo::VECTOR;
+        l_impacte.Info[1].v.x = l_vDir.x;
+        l_impacte.Info[1].v.y = l_vDir.y;
+        l_impacte.Info[1].v.z = l_vDir.z;
+        l_impacte.Info[2].Type = SEventInfo::INT;
+        l_impacte.Info[2].i = (int)(l_pUserData->GetActor());
         ENTITY_MANAGER->SendEvent(l_impacte);
-
-        l_pUserData->GetActor()->AddForceAtLocalPos(l_vDir,Vect3f(0.0f),SHOOT_POWER);
       }
+
     }else{
       CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
       CComponentLaser::AddToEntity( l_pLaser,
