@@ -21,12 +21,12 @@
 	<collision group1="objecte dinamic" group2="explosio" />
   
   <!-- Dispars -->
+  <collision group1="ray shoot player" group2="escenari" />
+  <collision group1="ray shoot player" group2="ragdoll" />
+  <collision group1="ray shoot player" group2="objecte dinamic" />
+
   <collision group1="ray shoot" group2="escenari" />
-  <!--
-  <collision group1="ray shoot" group2="personatge" />
-  <collision group1="ray shoot" group2="enemic" />
--->
-  <collision group1="ray shoot" group2="ragdoll" />
+  <collision group1="ray shoot" group2="ragdoll player" />
   <collision group1="ray shoot" group2="objecte dinamic" />
 
   <collision group1="force" group2="ragdoll" />
@@ -43,7 +43,11 @@
   <collision group1="ragdoll" group2="escenari"/>
   <collision group1="ragdoll" group2="objecte dinamic"/>
   <collision group1="ragdoll" group2="explosio"/>
-  
+
+  <!-- Ragdoll Player -->
+  <collision group1="ragdoll player" group2="escenari"/>
+  <collision group1="ragdoll player" group2="objecte dinamic"/>
+  <collision group1="ragdoll player" group2="explosio"/>
   
   <!-- Raig de la IA amb l'escenari -->
   <collision group1="escenari" group2="ray ia graph"/>

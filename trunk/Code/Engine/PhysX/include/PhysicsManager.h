@@ -47,10 +47,12 @@ enum ECollisionGroup {
   ECG_OBJECTES_DINAMICS,
   ECG_EXPLOSIONS,
   ECG_RAY_SHOOT,
+  ECG_RAY_SHOOT_PLAYER,
   ECG_FORCE,
   ECG_RAY_IA_GRAPH,
   ECG_CAMERA,
   ECG_RAGDOLL,
+  ECG_RAGDOLL_PLAYER,
 
   //aquest ha de ser l'últim sempre!!!!
   ECG_LAST_GROUP
