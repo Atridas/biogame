@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<BillboardsCore>
+
+  <CoreBillboard>
+
+
+    <!--<Core type="EXPLOSIO"  sizeX="1.0" sizeY="1.0" TexParticle="Data/Textures/texturas particulas/explosprite.dds" >
+      <Animateds>
+        <Animated     NumFiles="4"    NumColumnes="4"   TimeDiapo="0.05"/>
+       </Animateds>
+    </Core>
+    <Core type="Barril_explosiu"  sizeX="0.5" sizeY="0.5" TexParticle="Data/Textures/texturas particulas/explosiu.png" />-->
+    <Core type="shoot" sizeX="0.5" sizeY="0.5" TexParticle="Data/Textures/texturas particulas/texture_shoot_player.png" >
+      <Animateds>
+        <Animated     NumFiles="2"    NumColumnes="2"   TimeDiapo="0.2"/>
+      </Animateds>
+    </Core>
+    <Core type="impacteShootPlayer" sizeX="0.5" sizeY="0.5" Bucle="false" TexParticle="Data/Textures/texturas particulas/impacte_shoot_player.png" >
+      <Animateds>
+        <Animated     NumFiles="3"    NumColumnes="4"   TimeDiapo="0.02"/>
+      </Animateds>
+    </Core>
+    <Core type="shootMiner"  sizeX="0.5" sizeY="0.5" Bucle="true" TexParticle="Data/Textures/texturas particulas/shootMiner.png" >
+      <Animateds>
+        <Animated     NumFiles="2"    NumColumnes="2"   TimeDiapo="0.2"/>
+      </Animateds>
+    </Core>
+    
+    <Core type="shootBuzzo"   sizeX="0.5" sizeY="0.5" TexParticle="Data/Textures/texturas particulas/shootBuzzo.png" >
+      <Animateds>
+        <Animated     NumFiles="4"    NumColumnes="4"   TimeDiapo="0.2"/>
+      </Animateds>
+    </Core>
+    <Core type="impacteShootBuzzo"  sizeX="0.5" sizeY="0.5" Bucle="false" TexParticle="Data/Textures/texturas particulas/impacteShootBuzzo.png" >
+      <Animateds>
+        <Animated     NumFiles="3"    NumColumnes="3"   TimeDiapo="0.02"/>
+      </Animateds>
+    </Core>
+   
+  </CoreBillboard>
+
+</BillboardsCore>

@@ -27,15 +27,15 @@ public:
   void Release();
   CBillBoard* GetBillBoard(const string& _szName);
   void SetAllBillboardsActive(bool _bActive);
-
-  //TODO create billboard
-  //CBillBoard* CreateBillBorad(const string& _szName, const string& _szCore, const Vect3f& _vPosition);
-
+  CBillBoard* CreateBillBorad(const string& _szName, const string& _szCore, const Vect3f& _vPosition);
+  
+  
 private:
   string                    m_szFileName;
   CRenderManager*           m_pRM;
-  //TODO map de cores de billboards (els mateixos parametres que un bilboard pero sense posició
   map<string,CBillBoard*>   m_Billboards;
+  
+  
   bool                      m_bReload;
   CTexture*                 m_pTexParticle;
 

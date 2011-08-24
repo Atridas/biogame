@@ -4,7 +4,7 @@
     
      
 
-    <ParticleEmitter  id="vapor"                        MinEmitRate="15.0"             MaxEmitRate="20.0"
+    <!--<ParticleEmitter  id="vapor"                        MinEmitRate="15.0"             MaxEmitRate="20.0"
                       Color1="0.10 0.10 0.10 0.8"       Color2="0.10 0.10 0.10 0.8"    MinSize="0.05"        MaxSize="0.05"
                       Life1="1.0"                       Life2="1.0"                    Bucle="true"    
                       Angle1="-0.1"                     Angle2="0.1"                   Gravity="0.0 5.5 0.0" 
@@ -102,14 +102,10 @@
                       Color1="0.0 1.0 0.0 1.0"           Color2="0.0 1.0 0.0 1.0"      MinSize="0.02"        MaxSize="0.1"
                       Life1="2.5"                        Life2="3.0"                   Angle1="-0.5"         Angle2="0.5"
                       Bucle="false"                      RebootEmitter1="1.0"          RebootEmitter2="1.5"  TotDeCop="false"
-                      NumBucle="10"                      Gravity="0.0 -0.25 0.0"       Velocitate="1.0 1.0 1.0"   
-                      TexParticle="Data/Textures/texturas particulas/soapbubble.dds">      
-                     <!-- TexParticle="Data/Textures/texturas particulas/explosprite.dds" -->
-      <!--
-      <Animateds>
-        <Animated     NumFiles="4"    NumColumnes="4"   TimeDiapo="0.2" TexParticle="Data/Textures/texturas particulas/explosprite.dds"/>
-      </Animateds>
-      -->
+                      NumBucle="10"                      Gravity="0.0 -0.25 0.0"       Velocitate="1.0 1.0 1.0"         
+                      TexParticle="Data/Textures/texturas particulas/soapbubble.dds">
+      
+
     </ParticleEmitter>
 
  
@@ -138,9 +134,43 @@
         <Color        time="2.0"        Color1="1.0 1.0 1.0 0.1"        Color2="1.0 1.0 1.0 0.15"/>
       </Colors>
 
+    </ParticleEmitter>-->
+    <ParticleEmitter  id="explosio_granada"             MinEmitRate="1.0"            MaxEmitRate="1.0"
+                      Color1="1.0 1.0 1.0 1.0"          Color2="1.0 1.0 1.0 1.0"     MinSize="1.5"          MaxSize="1.7"
+                      Life1="0.8"                      Life2="0.8"                 Angle1="0.0"           Angle2="0.0"
+                      Bucle="false"                     RebootEmitter1="2.0"         RebootEmitter2="2.0"   TotDeCop="true"
+                      NumBucle="1"                      Gravity="0.0 0.0 0.0"        Velocitate="2.0 1.0 2.0"
+                      TexParticle="Data/Textures/texturas particulas/explosprite.dds">
+
+
+      <!--<Sizes>
+        <Size        time="0.0"         timeInterpolation="0.5"     MinSize="8.0"          MaxSize="8.0"/>
+      </Sizes>-->
+<!--TimeDiapo="0.03"-->
+      <Animateds>
+        <Animated     time="0.0"        NumFiles="4"                NumColumnes="4"        TimeDiapo="0.05" 
+                      TexParticle="Data/Textures/texturas particulas/explosprite.dds"/>
+      </Animateds>
+
     </ParticleEmitter>
 
-    
+    <ParticleEmitter  id="chispes_explosio"             MinEmitRate="70.0"            MaxEmitRate="80.0"
+                      Color1="1.0 1.0 1.0 1.0"          Color2="1.0 1.0 1.0 1.0"      MinSize="0.1"        MaxSize="0.1"
+                      Life1="1.5"                       Life2="1.5"                   Angle1="-0.5"         Angle2="0.5"
+                      Bucle="false"                     RebootEmitter1="2.0"          RebootEmitter2="2.0"  TotDeCop="true"
+                      NumBucle="1"                      Gravity="0.0 -1.2 0.0"        Velocitate="7.0 5.0 7.0"
+                      TexParticle="Data/Textures/texturas particulas/flameD.dds">
+
+
+      <!--<Colors>
+        <Color        time="0.0"        Color1="1.0 1.0 1.0 0.6"        Color2="1.0 1.0 1.0 0.65"/>
+        <Color        time="1.0"        Color1="1.0 1.0 1.0 1.0"        Color2="1.0 1.0 1.0 1.0"/>
+        <Color        time="1.5"        Color1="1.0 1.0 1.0 0.6"        Color2="1.0 1.0 1.0 0.65"/>
+        <Color        time="2.0"        Color1="1.0 1.0 1.0 0.1"        Color2="1.0 1.0 1.0 0.15"/>
+      </Colors>-->
+
+    </ParticleEmitter>
+
    
   </ParticleEmitters>
  

@@ -92,6 +92,7 @@
     <ClCompile Include="ComponentMovement.cpp" />
     <ClCompile Include="Component3rdPSCamera.cpp" />
     <ClCompile Include="ComponentNavNode.cpp" />
+    <ClCompile Include="ComponentParticleShootMiner.cpp" />
     <ClCompile Include="ComponentParticleShootPlayer.cpp" />
     <ClCompile Include="ComponentPhysXActor.cpp" />
     <ClCompile Include="ComponentPhysXBox.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="include\Component3rdPSCamera.h" />
     <ClInclude Include="include\ComponentNavNode.h" />
     <ClInclude Include="include\ComponentObject3D.h" />
+    <ClInclude Include="include\ComponentParticleShootMiner.h" />
     <ClInclude Include="include\ComponentParticleShootPlayer.h" />
     <ClInclude Include="include\ComponentPhysXActor.h" />
     <ClInclude Include="include\ComponentPhysXBox.h" />

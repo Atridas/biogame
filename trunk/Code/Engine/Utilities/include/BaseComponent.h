@@ -48,7 +48,9 @@ public:
     ECT_INTERACTIVE,
     ECT_DESTROYABLE,
     ECT_NAV_NODE,
-    ECT_PARTICLE_SHOOT
+    ECT_PARTICLE_SHOOT_PLAYER,
+    ECT_PARTICLE_SHOOT_MINER,
+    ECT_PARTICLE_SHOOT_MILITAR
   };
   
   virtual Type GetType() = 0; //{return m_Type;};

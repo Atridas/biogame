@@ -30,6 +30,7 @@ public:
   //  Set
   
   void SetId                (string _szId)                          {m_szId = _szId;};
+  void SetType				(string _szType)						{m_szType = _szType;};
   void SetPos		            ( const Vect3f & position )             {m_vPosition = position;}
 	void SetSizeX	            ( const float &sizeX)                   {m_fSizeX = sizeX;}
   void SetSizeY	            ( const float &sizeY)                   {m_fSizeY = sizeY;}
@@ -40,12 +41,12 @@ public:
   void SetTimeDiapo         (const float &_fTimeAnimationDiapo)     {m_fTimeAnimationDiapo = _fTimeAnimationDiapo;};
   void SetNumFiles          (const int &_iTexNumFiles)              {m_iTexNumFiles = _iTexNumFiles;};
   void SetColumnes          (const int &_iTexNumColumnes)           {m_iTexNumColumnes = _iTexNumColumnes;};
-  //void SetTimeLife          (const float &_fTimeLife)               {m_fTimeLife = _fTimeLife;};
   void SetBucleInfinit      (const bool &_bBucleInfinit)            {m_bBucleInfinit = _bBucleInfinit;};
 
   //Get
 
   string                          GetId               () const {return m_szId;};
+  string 						  GetType			  () const {return m_szType;};
   Vect3f                          GetPos              () const {return m_vPosition;};
   float                           GetSizeX            () const {return m_fSizeX;};
   float                           GetSizeY            () const {return m_fSizeY;};
@@ -54,7 +55,6 @@ public:
   float                           GetTimeDiapo        () const {return m_fTimeAnimationDiapo;};
   int                             GetNumFiles         () const {return m_iTexNumFiles;};
   int                             GetNumColumnes      () const {return m_iTexNumColumnes;};
-  bool                            GetAnimated         () const {return m_bAnimated;};
   //float                           GetTimeLife         () const {return m_fTimeLife;};
   bool                            GetBucleInfinit     () const {return m_bBucleInfinit;}; 
 
@@ -63,6 +63,7 @@ private:
 
   LPDIRECT3DVERTEXBUFFER9                   m_vBillboards;
   string      m_szId;
+  string 	m_szType;
 	Vect3f		  m_vPosition;
 	Vect3f		  m_PointA, m_PointB, m_PointC, m_PointD;
 	float			  m_fSizeX, m_fSizeY;

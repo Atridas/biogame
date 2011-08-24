@@ -1,24 +1,13 @@
-#include "ComponentParticleShootPlayer.h"
-//#include "RenderableObjectsManager.h"
+#include "ComponentParticleShootMiner.h"
 #include "Core.h"
 #include "BillBoardManager.h"
 
-//---------------------------------------------
-/*#include "AnimatedInstanceModel.h"
-#include "cal3d/cal3d.h"
-#include "ComponentRenderableObject.h"
-#include "Component3rdPSCamera.h"
-#include "PhysicsManager.h"
-#include "RenderableAnimatedInstanceModel.h"
-#include "ComponentRenderableObject.h"
-#include "ComponentMovement.h"*/
 
 
-
-CComponentParticleShootPlayer* CComponentParticleShootPlayer::AddToEntity(CGameEntity *_pEntity, const Vect3f& _vPosInit, const Vect3f& _vPosEnd)
+CComponentParticleShootMiner* CComponentParticleShootMiner::AddToEntity(CGameEntity *_pEntity, const Vect3f& _vPosInit, const Vect3f& _vPosEnd)
 {
 
-  CComponentParticleShootPlayer *l_pComp = new CComponentParticleShootPlayer();
+  CComponentParticleShootMiner *l_pComp = new CComponentParticleShootMiner();
   assert(_pEntity && _pEntity->IsOk());
   if(l_pComp->Init(_pEntity, _vPosInit, _vPosEnd))
   {
@@ -33,17 +22,18 @@ CComponentParticleShootPlayer* CComponentParticleShootPlayer::AddToEntity(CGameE
 }
 
 
-bool CComponentParticleShootPlayer::Init(CGameEntity *_pEntity, const Vect3f& _vPosInit, const Vect3f& _vPosEnd)
+bool CComponentParticleShootMiner::Init(CGameEntity *_pEntity, const Vect3f& _vPosInit, const Vect3f& _vPosEnd)
 {
   
   m_vPosInit = _vPosInit;
   m_vPosActual = _vPosInit;
   m_vPosEnd  = _vPosEnd ;
-  m_pBillboard = CORE->GetBillBoardManager()->CreateBillBorad("shoots","shootPlayer",m_vPosInit);
+  m_pBillboard = CORE->GetBillBoardManager()->CreateBillBorad("disparBuzzo","shootBuzzo1",m_vPosInit);
   m_pBillboard->SetPos(m_vPosActual);
   m_pBillboard->SetActive(true);
   m_bActive=true;
   m_vPosDiferencial1 = (0.2f, 0.2f, 0.2f);
+  m_fTime= 0.0f;
   
 
   SetOk(true);
@@ -51,13 +41,13 @@ bool CComponentParticleShootPlayer::Init(CGameEntity *_pEntity, const Vect3f& _v
 }
 
 
-void CComponentParticleShootPlayer::Release()
+void CComponentParticleShootMiner::Release()
 {
 
 }
 
 
-void CComponentParticleShootPlayer::Update(float _fDeltaTime)
+void CComponentParticleShootMiner::Update(float _fDeltaTime)
 {
   if(!m_bActive)
     return;
@@ -74,12 +64,19 @@ void CComponentParticleShootPlayer::Update(float _fDeltaTime)
       if(m_vPosDiferencial1.z>l_fCompara)
       {
         m_pBillboard->SetActive(false);
-        m_pBillboard = CORE->GetBillBoardManager()->CreateBillBorad("impacteShoots","impacteShootPlayer1",m_vPosActual);
+        m_pBillboard = CORE->GetBillBoardManager()->CreateBillBorad("impacte","impacteShootBuzzo1",m_vPosActual);
         //m_pBillboard->SetPos(m_vPosActual);
         m_pBillboard->SetActive(true);
         m_bActive=false;
       }
     }
   }
+ /* m_fTime+=_fDeltaTime;
+  m_pBillboard->SetPos(m_vPosActual);
+  if(m_fTime>1)
+  {
+    m_pBillboard->SetActive(false);
+    m_bActive=false;
+    m_fTime=0.0f;
+  }*/
 }
-

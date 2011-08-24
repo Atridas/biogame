@@ -13,6 +13,7 @@
 #include "PhysxBone.h"
 #include "PhysicActor.h"
 #include "cal3d\cal3d.h"
+#include "ComponentParticleShootMiner.h"
 
 #define SHOOT_POWER 30.0f
 
@@ -92,6 +93,10 @@ void CComponentIABrain::Shoot()
                                   Vect3f(l_vMyHand.x,l_vMyHand.y,l_vMyHand.z),
                                   l_vCenterPoint,
                                   1.f);
+    CGameEntity * l_pParticleShoot = CORE->GetEntityManager()->CreateEntity();
+    CComponentParticleShootMiner::AddToEntity(l_pParticleShoot,
+                                                Vect3f(l_vMyHand.x,l_vMyHand.y,l_vMyHand.z),
+                                                l_vCenterPoint);
 
     if(l_pUserData->GetEntity())
     {
@@ -114,6 +119,10 @@ void CComponentIABrain::Shoot()
                                 l_vMyHand,
                                 l_vCenterPoint,
                                 1.f);
+    CGameEntity * l_pParticleShoot = CORE->GetEntityManager()->CreateEntity();
+    CComponentParticleShootMiner::AddToEntity(l_pParticleShoot,
+                                                Vect3f(l_vMyHand.x,l_vMyHand.y,l_vMyHand.z),
+                                                l_vCenterPoint);
   }
 }
 
