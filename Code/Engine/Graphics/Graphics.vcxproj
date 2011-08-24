@@ -95,6 +95,7 @@
     <ClCompile Include="AnimatedInstanceModel.cpp" />
     <ClCompile Include="AnimatedModelManager.cpp" />
     <ClCompile Include="BillBoard.cpp" />
+    <ClCompile Include="BillBoardCore.cpp" />
     <ClCompile Include="BillBoardManager.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="include\AnimatedMeshEmptyMaterial.h" />
     <ClInclude Include="include\AnimatedModelManager.h" />
     <ClInclude Include="include\BillBoard.h" />
+    <ClInclude Include="include\BillBoardCore.h" />
     <ClInclude Include="include\BillBoardManager.h" />
     <ClInclude Include="include\BumpPropertyDecorator.h" />
     <ClInclude Include="include\Camera.h" />

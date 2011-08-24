@@ -23,8 +23,8 @@ public:
   CComponentParticleShootPlayer(){/*m_bBlock=true;*/};
   ~CComponentParticleShootPlayer(){Done();}
   
-  CBaseComponent::Type GetType() {return CBaseComponent::ECT_PARTICLE_SHOOT;};
-  static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_PARTICLE_SHOOT;};
+  CBaseComponent::Type GetType() {return CBaseComponent::ECT_PARTICLE_SHOOT_PLAYER;};
+  static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_PARTICLE_SHOOT_PLAYER;};
 
   static CComponentParticleShootPlayer* AddToEntity(CGameEntity* _pEntity, const Vect3f& _vPosInit, const Vect3f& _vPosEnd);
   void Update(float _fDeltaTime);

@@ -357,6 +357,9 @@
     <ClCompile Include="BillBoard.cpp">
       <Filter>BillBoard</Filter>
     </ClCompile>
+    <ClCompile Include="BillBoardCore.cpp">
+      <Filter>BillBoard</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\RenderManager.h">
@@ -559,6 +562,9 @@
     </ClInclude>
     <ClInclude Include="include\SpritePropertyDecorator.h">
       <Filter>Materials\MaterialDecorators\PropertyDecorators\SpriteDecorator</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BillBoardCore.h">
+      <Filter>BillBoard</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -49,6 +49,7 @@ bool CParticleProcess::Init()
 
   
   CORE->GetParticleManager()->SetAllEmittersActive(true);
+  CORE->GetBillBoardManager()->SetAllBillboardsActive(true);
   m_pObject = new CObject3D();
   m_fVelocity = 1;
   angle=0;
@@ -166,8 +167,8 @@ void CParticleProcess::RenderScene(CRenderManager* _pRM)
   CORE->GetRenderableObjectsManager()->Render(_pRM);
 
   //_pRM->DrawGrid(0.1f,colCYAN,1,1);
-  //_pRM->DrawPlane(10,Vect3f(0,1,0),0,colBLUE,10,10);
-  CORE->GetParticleManager()->Render(_pRM);
+  _pRM->DrawPlane(10,Vect3f(0,1,0),0,colBLUE,10,10);
+  //CORE->GetParticleManager()->Render(_pRM);
   CORE->GetBillBoardManager()->Render(_pRM);
  
   

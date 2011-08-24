@@ -17,10 +17,10 @@
 #include "Utils/MemLeaks.h" 
 #endif
 
-//#define __T_PARTICULES__
+#define __T_PARTICULES__
 //#define __T_PYSX__
 //#define __T_ENTITIES__
-#define __T_BIOTEST__
+//#define __T_BIOTEST__
 
 
 #define APPLICATION_NAME	"TEST"

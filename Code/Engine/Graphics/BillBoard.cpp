@@ -13,7 +13,9 @@
 
 
 CBillBoard::CBillBoard()
-	:m_vPosition(Vect3f(0,0,0))
+	: m_szId("")
+  ,m_szType("")
+  ,m_vPosition(Vect3f(0,0,0))
   ,m_PointA(Vect3f(0,0,0))
   ,m_PointB(Vect3f(0,0,0))
   ,m_PointC(Vect3f(0,0,0))

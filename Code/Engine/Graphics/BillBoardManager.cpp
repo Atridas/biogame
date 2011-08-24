@@ -3,9 +3,14 @@
 #include "Particle.h"
 #include "Effect.h"
 #include "EffectManager.h"
+#include "BillBoardCore.h"
 
 CBillBoardManager::CBillBoardManager()
 {
+	m_szFileName="";
+	m_pRM=NULL;
+	m_bReload=false;
+	m_pTexParticle=NULL;
 }
 
 
@@ -38,7 +43,8 @@ void CBillBoardManager::Release()
 bool CBillBoardManager::Load(const string& _szFileName)
 {
 
-
+  CBillBoardCore* l_pBillboardCore = new CBillBoardCore();
+  l_pBillboardCore->Load("./Data/XML/BillboardCore.xml");
   m_szFileName = _szFileName;
   LOGGER->AddNewLog(ELL_INFORMATION, "CBillBoardManager::Load \"%s\"", m_szFileName.c_str());
 
@@ -68,91 +74,54 @@ bool CBillBoardManager::Load(const string& _szFileName)
         if(l_treeInstanceBillboard.IsComment())
 				  continue;
 
-        CBillBoard* l_pBillboard = new CBillBoard();
+        
  
-			  
+		    string l_szType = l_treeInstanceBillboard.GetPszISOProperty("type" ,"",true);
+		    
+        CBillBoard* l_pBillboard = l_pBillboardCore->GetBillBoard(l_szType);
+        if(!l_pBillboard)
+        {
+          LOGGER->AddNewLog(ELL_WARNING, "CBillboardManagerManager:: No existeix de tipus Billboard seleccionat %s", l_szType);
+          continue;
+        }
         Vect3f l_vVec3 = l_treeInstanceBillboard.GetVect3fProperty("position",Vect3f(0.0f),true);
 			  l_pBillboard->SetPos(l_vVec3);
         l_pBillboard->SetId(l_treeInstanceBillboard.GetPszISOProperty("id" ,"",true));
-       	float l_fSizeX = l_treeInstanceBillboard.GetFloatProperty("sizeX",1,true);
-			  float l_fSizeY = l_treeInstanceBillboard.GetFloatProperty("sizeY",1,true);
-        l_pBillboard->SetSizeX(l_fSizeX);
-        l_pBillboard->SetSizeY(l_fSizeY);
-        bool l_bBucleInfinit = l_treeInstanceBillboard.GetBoolProperty("Bucle",true,false);
-        l_pBillboard->SetBucleInfinit(l_bBucleInfinit);
-        /*if(!l_bBucleInfinit)
-        {
-          float l_fTimeLife = l_treeInstanceBillboard.GetFloatProperty("Life",1,false);
-          l_pBillboard->SetTimeLife(l_fTimeLife);
-        }*/
-        m_pTexParticle = CORE->GetTextureManager()->GetResource(l_treeInstanceBillboard.GetPszProperty("TexParticle","",true));
-        l_pBillboard->SetTexture(m_pTexParticle);
-       
-        int Animations = l_treeInstanceBillboard.GetNumChildren();
-      
-		    for(int k=0;k<Animations;++k)
-		    {
-			    const char *l_Name=l_treeInstanceBillboard(k).GetName();
-			    if(strcmp(l_Name,"Animateds")==0)
-			    {
-				    CXMLTreeNode l_treeInstanceBillboardAnimateds = l_treeInstanceBillboard["Animateds"];
-
-            if(l_treeInstanceBillboardAnimateds.Exists())
-            {
-              int l_iNumChildrenAnimateds = l_treeInstanceBillboardAnimateds.GetNumChildren();
-
-              LOGGER->AddNewLog(ELL_INFORMATION,"CBillboardManager::Load Loading %d BillboardAnimated.", l_iNumChildrenAnimateds);
-
-              for(int j = 0; j < l_iNumChildrenAnimateds; j++)
-              {
-            
-                CXMLTreeNode l_treeInstanceBillboardAnimated = l_treeInstanceBillboardAnimateds(j);
-                if(l_treeInstanceBillboardAnimated.IsComment())
-				        continue;
-
-            
-			          bool l_bAnimated = true;
-                l_pBillboard->SetAnimated(l_bAnimated);
-                // el temps no fa falta si nomes te 1 animacio que es el que faig
-                //float l_fTime = l_treeInstanceBillboardAnimated.GetFloatProperty("time",0,true);
-			          float l_fTimeDiapo = l_treeInstanceBillboardAnimated.GetFloatProperty("TimeDiapo",1,true);
-                l_pBillboard->SetTimeDiapo(l_fTimeDiapo);
-			          // de moement nomes fare billboards amb 1 estat. es dir no cambia de textura en el temps
-                //m_pTexParticle = CORE->GetTextureManager()->GetResource(l_treeInstanceBillboardAnimated.GetPszProperty("TexParticle","",true));
-            			
-			          int l_iTexNumFiles = l_treeInstanceBillboardAnimated.GetIntProperty("NumFiles",1,true);
-                l_pBillboard->SetNumFiles(l_iTexNumFiles);
-			          int l_iTexNumColumnes = l_treeInstanceBillboardAnimated.GetIntProperty("NumColumnes",1,true);
-                l_pBillboard->SetColumnes(l_iTexNumColumnes);
-              }
-            }
-			    }
-        }
+       	
+        
         m_Billboards[l_pBillboard->GetId()] = l_pBillboard;
       }
     }
-	
+	  
 		SetOk(true);
-	}
+  }
+  
   return true;
+}
+
+CBillBoard* CBillBoardManager::CreateBillBorad(const string& _szName, const string& _szId, const Vect3f& _vPosition)
+{
+ 
+  map<string,CBillBoard*>::iterator it  = m_Billboards.find(_szId);
+  if(it != m_Billboards.end())
+  {
+    CBillBoard* l_pBillboard = it->second;
+	  l_pBillboard->SetPos(_vPosition);
+	  l_pBillboard->SetId(_szName);
+    //m_Billboards[l_pBillboard->GetId()] = l_pBillboard;
+    return l_pBillboard;
+	
+  }else
+  {
+    LOGGER->AddNewLog(ELL_WARNING, "CBillboardManager:: No existeix el emiter de tipus %s", _szName);
+    return NULL;
+  }
 }
 
 CBillBoard* CBillBoardManager::GetBillBoard(const string& _szName)
 {
   string l_szNameEmitter;
-  /*vector<CBillBoard*>::iterator it  = m_vBillboards.begin(),
-                                      end = m_vBillboards.end();
-
-  while(it != end)
-  {
-    l_szNameEmitter=(*it)->GetId();
-    if(_szName==l_szNameEmitter)
-    {
-      return (*it);
-    }
-    ++it;
-  }*/
-
+ 
   map<string,CBillBoard*>::iterator it  = m_Billboards.find(_szName);
   if(it != m_Billboards.end())
   {
