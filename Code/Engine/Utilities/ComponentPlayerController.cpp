@@ -146,7 +146,7 @@ void CComponentPlayerController::Update(float _fDeltaTime)
     m_iNumUpdates++;
   if(m_iNumUpdates == 2)
   {
-    CComponentRagdoll::AddToEntity(GetEntity(), "Data/Animated Models/Riggle/Skeleton.xml", ECG_RAGDOLL);
+    CComponentRagdoll::AddToEntity(GetEntity(), "Data/Animated Models/Riggle/Skeleton.xml", ECG_RAGDOLL_PLAYER);
   }
 }
 
@@ -162,17 +162,18 @@ void CComponentPlayerController::Shoot()
   CComponentArma* l_pArma = GetEntity()->GetComponent<CComponentArma>();
 
   Vect3f l_vPosArma = l_pArma->GetPosition();
+  Vect3f l_vDirArma = l_pArma->GetAimDirection();
   Vect3f l_vPos = l_pCamera->GetEye();
   Vect3f l_vDir = l_pCamera->GetDirection().Normalize();
-
-  //l_vPos -= l_vDir*0.5;
 
   SCollisionInfo l_CInfo;
   CPhysicUserData* l_pUserData = 0;
 
+  l_vPosArma -= l_vDirArma*1.0f;
+
   CPhysicsManager *l_pPM = PHYSICS_MANAGER;
 
-  l_pUserData = l_pPM->RaycastClosestActor(l_vPos,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT),l_CInfo);
+  l_pUserData = l_pPM->RaycastClosestActor(l_vPos,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER),l_CInfo);
 
   if(l_pUserData && l_pUserData->GetEntity() != l_pPlayerEntity)
   {
@@ -180,15 +181,15 @@ void CComponentPlayerController::Shoot()
 
     l_vDir = (l_vCenterPoint-l_vPosArma).Normalize();
 
-    l_pUserData = l_pPM->RaycastClosestActor(l_vPosArma,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT),l_CInfo);
+    l_pUserData = l_pPM->RaycastClosestActor(l_vPosArma,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER),l_CInfo);
 
     if(l_pUserData)
     {
-      /*CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
+      CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
       CComponentLaser::AddToEntity( l_pLaser,
                                     l_vPosArma,
                                     l_CInfo.m_CollisionPoint,
-                                    1.f);*/
+                                    1.f);
 
       if(l_pUserData->GetEntity() != l_pPlayerEntity)
       {
@@ -211,15 +212,15 @@ void CComponentPlayerController::Shoot()
 
     l_vDir = ((l_vPos+100.f*l_vDir)-l_vPosArma).Normalize();
 
-    l_pUserData = l_pPM->RaycastClosestActor(l_vPosArma,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT),l_CInfo);
+    l_pUserData = l_pPM->RaycastClosestActor(l_vPosArma,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER),l_CInfo);
 
     if(l_pUserData)
     {
-      /*CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
+      CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
       CComponentLaser::AddToEntity( l_pLaser,
                                     l_vPosArma,
                                     l_CInfo.m_CollisionPoint,
-                                    1.f);*/
+                                    1.f);
 
       if(l_pUserData->GetEntity() != l_pPlayerEntity)
       {
@@ -235,11 +236,11 @@ void CComponentPlayerController::Shoot()
         l_pUserData->GetActor()->AddForceAtLocalPos(l_vDir,Vect3f(0.0f),SHOOT_POWER);
       }
     }else{
-      /*CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
+      CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
       CComponentLaser::AddToEntity( l_pLaser,
                                     l_vPosArma,
                                     l_vPuntLlunya,
-                                    1.f);*/
+                                    1.f);
     }
   }
 

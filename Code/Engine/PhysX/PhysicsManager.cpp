@@ -890,6 +890,10 @@ int GetCollisionGroup(const string& _szGroup)
   {
     return ECG_RAY_SHOOT;
   }
+  else if(_szGroup == "ray shoot player")
+  {
+    return ECG_RAY_SHOOT_PLAYER;
+  }
   else if(_szGroup == "force")
   {
     return ECG_FORCE;
@@ -901,6 +905,10 @@ int GetCollisionGroup(const string& _szGroup)
   else if(_szGroup == "ragdoll")
   {
     return ECG_RAGDOLL;
+  }
+  else if(_szGroup == "ragdoll player")
+  {
+    return ECG_RAGDOLL_PLAYER;
   }
   else if(_szGroup == "ray ia graph")
   {

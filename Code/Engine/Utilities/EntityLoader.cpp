@@ -472,8 +472,8 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
 
 CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3f& _vPosition, float _fYaw)
 {
-  float l_fCapsuleHeigh = 0.7f;
-  float l_fCapsuleRadius = 0.7f;
+  float l_fCapsuleHeigh = 0.5f;
+  float l_fCapsuleRadius = 0.8f;
   float l_fCapsuleSkin   = 0.01f;
 
   float l_fTotalHeight = ((l_fCapsuleHeigh+2*l_fCapsuleRadius)*0.5f + l_fCapsuleSkin);
