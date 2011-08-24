@@ -10,7 +10,7 @@
 
 bool CIAManager::Init()
 {
-  m_pGraph = new CSparseGraph(true);
+  m_pGraph = new CSparseGraph(false);
 
   SetOk(true);
   return IsOk();
