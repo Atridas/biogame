@@ -549,7 +549,7 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
   CComponentMirilla::AddToEntity(l_pPlayer, "laser_pilota");
   CComponentArma::AddToEntity(l_pPlayer, "ARMA");
 
-  CComponentRagdoll::AddToEntity(l_pPlayer, "Data/Animated Models/Riggle/Skeleton.xml", ECG_RAGDOLL);
+  CComponentRagdoll::AddToEntity(l_pPlayer, "Data/Animated Models/Riggle/Skeleton.xml", ECG_RAGDOLL_PLAYER);
 
 
   return l_pPlayer;
