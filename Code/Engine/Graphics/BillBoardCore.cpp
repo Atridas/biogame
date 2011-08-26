@@ -125,7 +125,7 @@ CBillBoard* CBillBoardCore::GetBillBoard(const string& _szName)
     return it->second;
   }
 
-  LOGGER->AddNewLog(ELL_WARNING, "CBillboardManager:: No existeix el emiter de tipus %s", _szName);
+  LOGGER->AddNewLog(ELL_WARNING, "CBillboardManager:: No existeix el emiter de tipus %s", _szName.c_str());
   return NULL;
 }
 

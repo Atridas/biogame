@@ -81,7 +81,7 @@ bool CBillBoardManager::Load(const string& _szFileName)
         CBillBoard* l_pBillboard = l_pBillboardCore->GetBillBoard(l_szType);
         if(!l_pBillboard)
         {
-          LOGGER->AddNewLog(ELL_WARNING, "CBillboardManagerManager:: No existeix de tipus Billboard seleccionat %s", l_szType);
+          LOGGER->AddNewLog(ELL_WARNING, "CBillboardManagerManager:: No existeix de tipus Billboard seleccionat %s", l_szType.c_str());
           continue;
         }
         Vect3f l_vVec3 = l_treeInstanceBillboard.GetVect3fProperty("position",Vect3f(0.0f),true);
@@ -113,7 +113,7 @@ CBillBoard* CBillBoardManager::CreateBillBorad(const string& _szName, const stri
 	
   }else
   {
-    LOGGER->AddNewLog(ELL_WARNING, "CBillboardManager:: No existeix el emiter de tipus %s", _szName);
+    LOGGER->AddNewLog(ELL_WARNING, "CBillboardManager:: No existeix el emiter de tipus %s", _szName.c_str());
     return NULL;
   }
 }
@@ -128,7 +128,7 @@ CBillBoard* CBillBoardManager::GetBillBoard(const string& _szName)
     return it->second;
   }
 
-  LOGGER->AddNewLog(ELL_WARNING, "CBillboardManager:: No existeix el emiter de tipus %s", _szName);
+  LOGGER->AddNewLog(ELL_WARNING, "CBillboardManager:: No existeix el emiter de tipus %s", _szName.c_str());
   return NULL;
 }
 
