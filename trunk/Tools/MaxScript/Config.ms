@@ -7,7 +7,7 @@
 --g_DefaultPath = "D:\biogame\Run\Data"
 --g_DefaultPath = "C:/Treballs/Directoris v2/Run/Data"
 --g_DefaultPath = "C:/Treballs/biogame/Run/Data"
-g_DefaultPath = "D:/treballs/master/biogame/Run/Data"
+g_DefaultPath = "C:\Users\Phantom\Desktop\Run\Data"
 --g_DefaultPath = "C:\Documents and Settings\Administrador\Escritorio\master videojocs"
 
 
