@@ -264,13 +264,13 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
     return
   end
   
-  if ACTION_MANAGER:is_action_active('Shield') then
-    if _jugador:get_component(BaseComponent.shield):is_ready() then
-      _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Escut')
-      
-      return
-    end
-  end
+  --if ACTION_MANAGER:is_action_active('Shield') then
+  --  if _jugador:get_component(BaseComponent.shield):is_ready() then
+  --    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Escut')
+  --    
+  --    return
+  --  end
+  --end
   
   if ACTION_MANAGER:is_action_active('Shoot') then
     animation:play(Player_Constants["Disparar"], 0.3, 1.0, false)
@@ -551,7 +551,7 @@ end
 
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
--- Morint!!!! -----------------------------------------------------------------------------------
+-- Mort!!!! -------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 
@@ -584,7 +584,7 @@ State_Player_Mort['Update'] = function(_jugador, _dt)
   player_controller.time = player_controller.time + _dt
   
   if player_controller.time > 5 then
-    player_controller:respawn()
+    --player_controller:respawn()
     _jugador:get_component(BaseComponent.vida):set(100)
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
   end

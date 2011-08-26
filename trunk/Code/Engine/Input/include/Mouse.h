@@ -17,10 +17,10 @@ class CMouse : public CInputDevice
 {
 public:
 	// Init and End protocols
-	CMouse() {}
+	CMouse() : m_fSensitivity(0.0f) {}
 	virtual ~CMouse() { Done(); } 
 
-	bool                Init              (LPDIRECTINPUT8, HWND, const Vect2i& screenRes, bool exclusiveMode);
+	bool                Init              (LPDIRECTINPUT8, HWND, const Vect2i& screenRes, bool exclusiveMode, float _fSensitivity);
 	void	              Done			        ();
 
 	//----CInputDevice Interface----
@@ -48,6 +48,7 @@ private:
 	bool								m_bIsDownUp[3];
 	Vect3i							m_Delta;
 	Vect2i							m_ScreenResolution;
+  float               m_fSensitivity;
 };
 
 

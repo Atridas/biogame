@@ -6,12 +6,13 @@
 #include "base.h"
 
 struct SEventInfo {
-  enum { INT, FLOAT, VECTOR, STRING } Type;
+  enum { INT, FLOAT, VECTOR, STRING, PTR } Type;
   union {
     int i;
     float f;
     struct {float x,y,z;} v;
     const char* str;
+    void* ptr;
   };
   void SetStr(const char* _cInput) { str = _cInput; };
 };
@@ -68,6 +69,9 @@ struct SEvent {
       Info[_iIndex].v.x = _Info.v.x;
       Info[_iIndex].v.y = _Info.v.y;
       Info[_iIndex].v.z = _Info.v.z;
+      break;
+    case (SEventInfo::PTR):
+      Info[_iIndex].ptr = _Info.ptr;
       break;
     default:
       break;

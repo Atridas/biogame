@@ -569,6 +569,9 @@ ENTITIES
       
       string
       SEventInfo::STRING
+      
+      pointer
+      SEventInfo::PTR
     
     Methods:
       set_str
@@ -576,7 +579,7 @@ ENTITIES
     
     Attributes:
       Type
-      enum { INT, FLOAT, VECTOR, STRING } Type
+      enum { INT, FLOAT, VECTOR, STRING, PTR } Type
       
       i
       SEventInfo::i
@@ -589,6 +592,9 @@ ENTITIES
       
       str
       SEventInfo::str
+      
+      ptr
+      SEventInfo::ptr
       
   Class:
     Event
@@ -1019,7 +1025,7 @@ ENTITIES
     
     Methods:
       add_to_entity
-      static CComponentVida* AddToEntity(CGameEntity* _pEntity, float _fVidaInicial, float _fVidaMaxima, bool _bRegen = false, float _fRegenAmount = 0.0f)
+      static CComponentVida* AddToEntity(CGameEntity* _pEntity, float _fVidaInicial, float _fVidaMaxima, bool _bRegen = false, float _fRegenAmount = 0.0f, float _fTimeForRegen = 5.0f)
       
       get_hp
       float GetHP()

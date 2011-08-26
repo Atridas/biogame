@@ -83,9 +83,10 @@ struct SLanguageManagerParams
 struct SInputManagerParams
 {
   bool bExclusiveMouse;
+  float fSensitivity;
 
   SInputManagerParams():
-  bExclusiveMouse(false)
+  bExclusiveMouse(false), fSensitivity(1.0f)
   {}
 };
 

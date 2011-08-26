@@ -72,6 +72,13 @@
     SetOk(false);                                             \
   }
 
+#define INIT4(object, name, argument, argument2, argument3, argument4)   \
+  if(!object->Init(argument, argument2, argument3, argument4))           \
+  {                                                                      \
+    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al %s.", name);            \
+    SetOk(false);                                                        \
+  }
+
 
 bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
 {
@@ -131,7 +138,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   
   INIT(m_pLanguageManager, "Language Manager", _InitParams.LanguageManagerParams);
   INIT2(m_pFontManager, "Font Manager", m_pRenderManager,_InitParams.FontManagerParams.pcFontsXML);
-  INIT3(m_pInputManager, "Input Manager", hWnd, Vect2i(_InitParams.RenderManagerParams.v2iResolution.x,_InitParams.RenderManagerParams.v2iResolution.y),_InitParams.InputManagerParams.bExclusiveMouse);
+  INIT4(m_pInputManager, "Input Manager", hWnd, Vect2i(_InitParams.RenderManagerParams.v2iResolution.x,_InitParams.RenderManagerParams.v2iResolution.y),_InitParams.InputManagerParams.bExclusiveMouse,_InitParams.InputManagerParams.fSensitivity);
   INIT(m_pActionManager, "Action Manager", _InitParams.ActionToInputParams.pcFile);
   
   LOAD(m_pRenderableObjectsManager, "Manager de Renderable Objects", _InitParams.RenderableObjectsManagerParams.vXMLFiles);
@@ -200,6 +207,8 @@ void CCore::Release()
 
 void CCore::Update()
 {
+  m_pPhysicsManager->WaitForSimulation();
+
   //Time update
   m_pTimer->Update();
   float l_fElapsedTime = m_pTimer->GetElapsedTime();

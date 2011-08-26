@@ -235,6 +235,7 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
       if(l_TreeInputManager.Exists())
       {
         InitParams_.InputManagerParams.bExclusiveMouse = l_TreeInputManager.GetBoolProperty("exclusiveMouse", InitParams_.InputManagerParams.bExclusiveMouse);
+        InitParams_.InputManagerParams.fSensitivity = l_TreeInputManager.GetFloatProperty("sensitivity", InitParams_.InputManagerParams.fSensitivity);
         LOGGER->AddNewLog(ELL_INFORMATION, "\tMouse exclusiu: %s", (InitParams_.InputManagerParams.bExclusiveMouse)?"cert":"falç");
       } else {
         LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat element \"InputManager\". Usant valors per defecte.");

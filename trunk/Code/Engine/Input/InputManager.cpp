@@ -43,7 +43,7 @@ void CInputManager::Release ()
 // If present joystick will also be initialized, but is not mandatory.
 //-> IN: HWND      - handle to main application window
 //----------------------------------------------------------------------------
-bool CInputManager::Init (HWND hWnd, const Vect2i& screenRes, bool exclusiveModeinMouse)
+bool CInputManager::Init (HWND hWnd, const Vect2i& screenRes, bool exclusiveModeinMouse, float _fSensitivity)
 {
 	HRESULT hr;
 	m_hWndMain = hWnd;
@@ -64,7 +64,7 @@ bool CInputManager::Init (HWND hWnd, const Vect2i& screenRes, bool exclusiveMode
 		m_bIsOk = m_pKB->Init(m_pDI, hWnd);
 		if (m_bIsOk)
 		{
-			m_bIsOk	= m_pMouse->Init(m_pDI, hWnd, screenRes, exclusiveModeinMouse);
+			m_bIsOk	= m_pMouse->Init(m_pDI, hWnd, screenRes, exclusiveModeinMouse,_fSensitivity);
 
 			if (m_bIsOk)
 			{

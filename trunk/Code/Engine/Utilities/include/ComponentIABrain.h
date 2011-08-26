@@ -23,8 +23,8 @@ public:
   void Update(float _fDeltaTime);
 
   void Shoot();
-  void ReciveShoot(SEvent _sEvent);
-  void ReciveForce(SEvent _sEvent);
+  void ReceiveShoot(SEvent _sEvent);
+  void ReceiveForce(SEvent _sEvent);
   void Die();
   
   //Path planning
