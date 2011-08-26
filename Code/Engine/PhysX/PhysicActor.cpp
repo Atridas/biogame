@@ -366,6 +366,9 @@ void CPhysicActor::AddForceAtLocalPos(Vect3f _vDirection, Vect3f _vLocalPos, flo
     NxVec3 l_vDirection(_vDirection.x,_vDirection.y,_vDirection.z);
     NxVec3 l_vLocalPos(_vLocalPos.x,_vLocalPos.y,_vLocalPos.z);
     NxF32 l_fCoeff = m_pPhXActor->getMass() * _fPower;
-    m_pPhXActor->addForceAtLocalPos(l_vDirection*l_fCoeff, l_vLocalPos, NX_IMPULSE,true);
+    if(l_vDirection.isFinite() && l_vLocalPos.isFinite() && NxMath::isFinite(l_fCoeff))
+    {
+      m_pPhXActor->addForceAtLocalPos(l_vDirection*l_fCoeff, l_vLocalPos, NX_IMPULSE,true);
+    }
   }
 }

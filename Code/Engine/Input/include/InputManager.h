@@ -30,7 +30,7 @@ public:
 	CInputManager(): m_bIsOk(false), m_pDI( NULL ), m_pKB( NULL ), m_pMouse( NULL ), m_pGamePad(NULL) {}
 	virtual ~CInputManager() { Done(); }  
 
-	bool		      	Init		              					(HWND, const Vect2i& screenRes, bool exclusiveModeinMouse);
+	bool		      	Init		              					(HWND, const Vect2i& screenRes, bool exclusiveModeinMouse, float _fSensitivity);
 	void		      	Done                  					();
 	bool		      	IsOk                  					() const { return m_bIsOk; }
 

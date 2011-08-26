@@ -2,11 +2,11 @@
 #include "ComponentShield.h"
 #include "Core.h"
 
-CComponentVida* CComponentVida::AddToEntity(CGameEntity* _pEntity, float _fVidaInicial, float _fVidaMaxima, bool _bRegen, float _fRegenAmount)
+CComponentVida* CComponentVida::AddToEntity(CGameEntity* _pEntity, float _fVidaInicial, float _fVidaMaxima, bool _bRegen, float _fRegenAmount, float _fTimeForRegen)
 {
   CComponentVida *l_pComp = new CComponentVida();
   assert(_pEntity && _pEntity->IsOk());
-  if(l_pComp->Init(_pEntity, _fVidaInicial, _fVidaMaxima, _bRegen, _fRegenAmount))
+  if(l_pComp->Init(_pEntity, _fVidaInicial, _fVidaMaxima, _bRegen, _fRegenAmount, _fTimeForRegen))
   {
     l_pComp->SetEntity(_pEntity);
     return l_pComp;
@@ -18,12 +18,15 @@ CComponentVida* CComponentVida::AddToEntity(CGameEntity* _pEntity, float _fVidaI
   }
 }
 
-bool CComponentVida::Init(CGameEntity* _pEntity, float _fVidaInicial, float _fVidaMaxima, bool _bRegen, float _fRegenAmount)
+bool CComponentVida::Init(CGameEntity* _pEntity, float _fVidaInicial, float _fVidaMaxima, bool _bRegen, float _fRegenAmount, float _fTimeForRegen)
 {
   m_fVida = _fVidaInicial;
   m_fVidaMaxima = _fVidaMaxima;
   m_bRegen = _bRegen;
   m_fRegenAmount = _fRegenAmount;
+  //passar com a variable?
+  m_fTimeForRegen = _fTimeForRegen;
+  m_fTimeSinceHit = 0.0f;
 
   m_pShield = _pEntity->GetComponent<CComponentShield>(ECT_SHIELD);
 
@@ -34,7 +37,15 @@ bool CComponentVida::Init(CGameEntity* _pEntity, float _fVidaInicial, float _fVi
 void CComponentVida::Update(float _fDeltaTime)
 {
   if(m_bRegen)
-    Increase(m_fRegenAmount * _fDeltaTime);
+  {
+    
+    if(m_fTimeSinceHit <= m_fTimeForRegen)
+    {
+      m_fTimeSinceHit += _fDeltaTime;
+    }else{
+      Increase(m_fRegenAmount * _fDeltaTime);
+    }
+  }
 }
 
 void CComponentVida::Increase(float _fAmount)
@@ -94,6 +105,7 @@ void CComponentVida::ReceiveEvent(const SEvent& _Event)
   if(_Event.Msg == SEvent::REBRE_IMPACTE)
   {
     assert(_Event.Info[0].Type == SEventInfo::FLOAT);
+    m_fTimeSinceHit = 0.0f;
 
     if(m_fVida > 0.f)
     {

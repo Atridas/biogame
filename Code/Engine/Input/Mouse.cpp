@@ -23,10 +23,11 @@ void CMouse::Done ()
 /**
 * Initializes the mouse device
 */
-bool CMouse::Init(LPDIRECTINPUT8 pDI, HWND hWnd, const Vect2i& screenRes, bool exclusiveMode) 
+bool CMouse::Init(LPDIRECTINPUT8 pDI, HWND hWnd, const Vect2i& screenRes, bool exclusiveMode, float _fSensitivity) 
 {
 	bool bIsOk = Inherited::Init(pDI, hWnd);
 	m_ScreenResolution = screenRes;
+  m_fSensitivity = _fSensitivity;
 
 	if (bIsOk)
 	{
@@ -202,6 +203,10 @@ HRESULT CMouse::Update(void)
 		 break;
 		}; // END switch (od[i].dwOfs)
 	} // END for (DWORD i=0; i<dwNumElem; i++)
+
+  m_Delta.x = (int)(m_Delta.x * m_fSensitivity);
+  m_Delta.y = (int)(m_Delta.y * m_fSensitivity);
+  m_Delta.z = (int)(m_Delta.z * m_fSensitivity);
 
 	return S_OK;
 } 

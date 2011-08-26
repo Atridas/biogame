@@ -142,12 +142,12 @@ void CComponentPlayerController::Update(float _fDeltaTime)
     }
   }
 
-  if(m_iNumUpdates < 3)
-    m_iNumUpdates++;
-  if(m_iNumUpdates == 2)
-  {
-    CComponentRagdoll::AddToEntity(GetEntity(), "Data/Animated Models/Riggle/Skeleton.xml", ECG_RAGDOLL_PLAYER);
-  }
+  //if(m_iNumUpdates < 3)
+  //  m_iNumUpdates++;
+  //if(m_iNumUpdates == 2)
+  //{
+  //  CComponentRagdoll::AddToEntity(GetEntity(), "Data/Animated Models/Riggle/Skeleton.xml", ECG_RAGDOLL_PLAYER);
+  //}
 }
 
 
@@ -203,8 +203,8 @@ void CComponentPlayerController::Shoot()
         l_impacte.Info[1].v.x = l_vDir.x;
         l_impacte.Info[1].v.y = l_vDir.y;
         l_impacte.Info[1].v.z = l_vDir.z;
-        l_impacte.Info[2].Type = SEventInfo::INT;
-        l_impacte.Info[2].i = (int)(l_pUserData->GetActor());
+        l_impacte.Info[2].Type = SEventInfo::PTR;
+        l_impacte.Info[2].ptr = (void*)(l_pUserData->GetActor());
         ENTITY_MANAGER->SendEvent(l_impacte);
       }
     }
@@ -237,8 +237,8 @@ void CComponentPlayerController::Shoot()
         l_impacte.Info[1].v.x = l_vDir.x;
         l_impacte.Info[1].v.y = l_vDir.y;
         l_impacte.Info[1].v.z = l_vDir.z;
-        l_impacte.Info[2].Type = SEventInfo::INT;
-        l_impacte.Info[2].i = (int)(l_pUserData->GetActor());
+        l_impacte.Info[2].Type = SEventInfo::PTR;
+        l_impacte.Info[2].ptr = (void*)(l_pUserData->GetActor());
         ENTITY_MANAGER->SendEvent(l_impacte);
       }
 

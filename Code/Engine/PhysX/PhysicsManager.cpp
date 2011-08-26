@@ -397,11 +397,16 @@ void CPhysicsManager::Update (float elapsedTime)
 
 	// Fetch simulation results
 	m_pScene->flushStream();
-	m_pScene->fetchResults(NX_RIGID_BODY_FINISHED,  true);
+  //m_pScene->fetchResults(NX_RIGID_BODY_FINISHED,  true);
 
-	m_pControllerManager->updateControllers();	
+  
 }
 
+void CPhysicsManager::WaitForSimulation()
+{
+  m_pScene->fetchResults(NX_RIGID_BODY_FINISHED,  true);
+  m_pControllerManager->updateControllers();
+}
 
 void CPhysicsManager::SetTriggerReport (CPhysicTriggerReport* report)
 {

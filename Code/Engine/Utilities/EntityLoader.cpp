@@ -473,7 +473,7 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
 CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3f& _vPosition, float _fYaw)
 {
   float l_fCapsuleHeigh = 0.5f;
-  float l_fCapsuleRadius = 0.8f;
+  float l_fCapsuleRadius = 0.7f;
   float l_fCapsuleSkin   = 0.01f;
 
   float l_fTotalHeight = ((l_fCapsuleHeigh+2*l_fCapsuleRadius)*0.5f + l_fCapsuleSkin);
@@ -540,7 +540,7 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
   l_pComponentRenderableObject->m_fHeightAdjustment = -l_fTotalHeight;
 
   CComponentShield::AddToEntity(l_pPlayer, 50.f, 50.f, 1.0f, 5.0f);
-  CComponentVida::AddToEntity(l_pPlayer, 100.f, 100.f, true, 3.0f);
+  CComponentVida::AddToEntity(l_pPlayer, 100.f, 100.f, true, 30.0f, 7.0f);
 
   CComponentStateMachine::AddToEntity(l_pPlayer, "State_Player_Neutre");
 
@@ -549,7 +549,7 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
   CComponentMirilla::AddToEntity(l_pPlayer, "laser_pilota");
   CComponentArma::AddToEntity(l_pPlayer, "ARMA");
 
-  //CComponentRagdoll::AddToEntity(l_pPlayer, "Data/Animated Models/Riggle/Skeleton.xml", ECG_RAGDOLL);
+  CComponentRagdoll::AddToEntity(l_pPlayer, "Data/Animated Models/Riggle/Skeleton.xml", ECG_RAGDOLL);
 
 
   return l_pPlayer;
@@ -614,7 +614,7 @@ CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f
 
   CComponentStateMachine::AddToEntity(l_peEnemy, _szInitialState);
 
-  //CComponentRagdoll::AddToEntity(l_peEnemy, _szRagdollModell, ECG_RAGDOLL);
+  CComponentRagdoll::AddToEntity(l_peEnemy, _szRagdollModell, ECG_RAGDOLL);
 
   return l_peEnemy;
 }

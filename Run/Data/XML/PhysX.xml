@@ -30,7 +30,7 @@
   <collision group1="ray shoot" group2="objecte dinamic" />
 
   <collision group1="force" group2="ragdoll" />
-  <!--<collision group1="force" group2="enemic" />-->
+  <collision group1="force" group2="enemic" />
   <collision group1="force" group2="objecte dinamic" />
   
   <!-- Càmara -->

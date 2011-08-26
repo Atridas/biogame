@@ -15,7 +15,7 @@
 #include "cal3d\cal3d.h"
 #include "ComponentParticleShootMiner.h"
 
-#define SHOOT_POWER 30.0f
+#define SHOOT_POWER 20.0f
 
 CComponentIABrain* CComponentIABrain::AddToEntity(CGameEntity *_pEntity, const string& _szPlayerEntityName, const string& _szRagdollName)
 {
@@ -126,7 +126,7 @@ void CComponentIABrain::Shoot()
   }
 }
 
-void CComponentIABrain::ReciveShoot(SEvent _sEvent)
+void CComponentIABrain::ReceiveShoot(SEvent _sEvent)
 {
   CPhysxBone* l_pHeadBone = 0;
   CPhysicActor* l_pActor = 0;
@@ -147,7 +147,13 @@ void CComponentIABrain::ReciveShoot(SEvent _sEvent)
 
       assert(l_pHeadBone);
 
-      l_pActor = (CPhysicActor*)_sEvent.Info[2].i;
+      if(_sEvent.Info[2].Type == SEventInfo::PTR)
+      {
+        l_pActor = (CPhysicActor*)_sEvent.Info[2].ptr;
+      }else{
+        LOGGER->AddNewLog(ELL_ERROR,"CComponentIABrain::ReciveShoot El missatge a Info[2] no es del tipus PTR");
+        return;
+      }
 
       if(l_pHeadBone->GetPhysxActor() == l_pActor)
       {
@@ -171,7 +177,7 @@ void CComponentIABrain::ReciveShoot(SEvent _sEvent)
 
 }
 
-void CComponentIABrain::ReciveForce(SEvent _sEvent)
+void CComponentIABrain::ReceiveForce(SEvent _sEvent)
 {
   Mat44f l_matBonePos;
   CPhysxBone* l_pPhysxBone = 0;
@@ -212,12 +218,12 @@ void CComponentIABrain::ReciveForce(SEvent _sEvent)
 
 void CComponentIABrain::Update(float _fDeltaTime)
 {
-  if(m_iNumUpdates < 3)
-    m_iNumUpdates++;
-  if(m_iNumUpdates == 2)
-  {
-    CComponentRagdoll::AddToEntity(GetEntity(), m_szRagdollName, ECG_RAGDOLL);
-  }
+  //if(m_iNumUpdates < 3)
+  //  m_iNumUpdates++;
+  //if(m_iNumUpdates == 2)
+  //{
+  //  CComponentRagdoll::AddToEntity(GetEntity(), m_szRagdollName, ECG_RAGDOLL);
+  //}
 }
 
 void CComponentIABrain::Die()
@@ -290,9 +296,9 @@ void CComponentIABrain::ReceiveEvent(const SEvent& _Event)
 {
   if(_Event.Msg == SEvent::REBRE_IMPACTE)
   {
-    ReciveShoot(_Event);
+    ReceiveShoot(_Event);
   }else if(_Event.Msg == SEvent::REBRE_FORCE)
   {
-    ReciveForce(_Event);
+    ReceiveForce(_Event);
   }
 }

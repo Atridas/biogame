@@ -146,6 +146,7 @@ public:
 
 	//----Update
 	void								Update											(float elapsedTime);
+  void                WaitForSimulation           ();
 
 	//--- Add/Release Actors
 	bool								AddPhysicActor							(CPhysicActor* actor);

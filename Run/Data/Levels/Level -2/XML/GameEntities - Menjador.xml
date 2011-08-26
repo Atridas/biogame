@@ -1138,7 +1138,7 @@
     <NavNode cobertura="baixa" />
   </Entity>
   <Entity name="Menjador_Navnode_03">
-    <Object3D position="15.7482 0.653691 25.4252" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="18.8453 0.653691 24.8507" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode cobertura="baixa" />
   </Entity>
   <Entity name="Menjador_Navnode_04">
@@ -1146,7 +1146,7 @@
     <NavNode cobertura="baixa" />
   </Entity>
   <Entity name="Menjador_Navnode_05">
-    <Object3D position="21.0127 0.653691 23.9804" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="21.4858 0.653691 23.8204" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode cobertura="baixa" />
   </Entity>
   <Entity name="Menjador_Navnode_06">
@@ -1256,7 +1256,7 @@
   <Militar name="Militar_menjador03" position="11.5827 2.11998 24.0272" yaw="0.0" active="false" />
   <Militar name="Militar_menjador05" position="3.49921 2.11998 36.8697" yaw="0.0" active="false" />
   <Militar name="Militar_menjador06" position="1.3219 2.11998 32.9813" yaw="0.0" active="false" />
-  <Militar name="Militar_menjador07" position="20.8774 2.11998 24.1651" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador07" position="19.9514 2.11998 24.8848" yaw="0.0" active="false" />
   <Militar name="Militar_menjador08" position="15.9623 2.11998 32.4562" yaw="0.0" active="false" />
   <Militar name="Militar_menjador09" position="10.9714 2.11998 36.8411" yaw="0.0" active="false" />
   <Militar name="Militar_menjador10" position="6.61613 2.11998 25.4096" yaw="0.0" active="false" />

@@ -71,13 +71,15 @@ void RegisterEntitiesToLua(lua_State* _pLS)
         value("int"   ,SEventInfo::INT),
         value("float" ,SEventInfo::FLOAT),
         value("vector",SEventInfo::VECTOR),
-        value("string",SEventInfo::STRING)
+        value("string",SEventInfo::STRING),
+        value("pointer",SEventInfo::PTR)
       ]
       .def_readwrite("Type", &SEventInfo::Type)
       .def_readwrite("i",    &SEventInfo::i)
       .def_readwrite("f",    &SEventInfo::f)
       .def_readwrite("v",    &SEventInfo::v)
       .def_readwrite("str",  &SEventInfo::str)
+      .def_readwrite("ptr",  &SEventInfo::ptr)
       .def("set_str",        &SEventInfo::SetStr)
       
     ,class_<SEvent>("Event")
@@ -253,8 +255,6 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponentIABrain, CBaseComponent>("ComponentIABrain")
       .def("add_to_entity",            &CComponentIABrain::AddToEntity)
       .def("shoot",                    &CComponentIABrain::Shoot)
-      .def("recive_shoot",             &CComponentIABrain::ReciveShoot)
-      .def("recive_force",             &CComponentIABrain::ReciveForce)
       .def("die",                      &CComponentIABrain::Die)
       .def("plan_path_to_cobertura",   &CComponentIABrain::PlanPathToCobertura) 
 //      .def("get_next_node_position",   &CComponentIABrain::GetNextNodePosition)

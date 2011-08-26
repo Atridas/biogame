@@ -26,6 +26,7 @@ bool CPhysxSkeleton::Init(const string& _szFileName, CalModel* _pCalModel, Mat44
 {
   m_pEntity = _pEntity;
   m_mTransform = _vMat;
+  _pCalModel->getSkeleton()->calculateState();
   SetSkeleton(_pCalModel->getSkeleton());
   vector<CalBone*> l_vLlistaBones = m_pCalSkeleton->getVectorBone();
 
