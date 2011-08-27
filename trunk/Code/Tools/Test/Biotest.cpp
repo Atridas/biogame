@@ -14,6 +14,8 @@
 #include "IAManager.h"
 #include "PortalManager.h"
 #include "GraphDefines.h"
+#include "SphereCamera.h"
+#include "ActionManager.h"
 
 #include "Core.h"
 
@@ -38,6 +40,21 @@ void CBiotestProcess::Update(float _fElapsedTime)
 
 void CBiotestProcess::RenderScene(CRenderManager* _pRM)
 {
+  if(CORE->GetActionManager()->IsActionActive("ToggleDebug"))
+  {
+    CObject3D l_Poslluny;
+    l_Poslluny.SetPosition(Vect3f(0,25,0));
+    CObject3D* m_pPlayerPos = CORE->GetEntityManager()->GetEntity("Player")->GetComponent<CComponentObject3D>(CBaseComponent::ECT_OBJECT_3D);
+  
+  
+    CSphereCamera l_SphereCamera( 1, 700, 55.0f * FLOAT_PI_VALUE/180.0f,
+                                  ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
+                                  &l_Poslluny,m_pPlayerPos);
+  
+  
+    _pRM->SetupMatrices(&l_SphereCamera,false,false);
+  }
+
   //CORE->GetRenderableObjectsManager()->Render(_pRM);
   CORE->GetPortalManager()->Render(_pRM);
   CORE->GetParticleManager()->Render(_pRM);

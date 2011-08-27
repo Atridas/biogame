@@ -29,6 +29,7 @@ void CGameProcess::Update(float _fElapsedTime)
   //l_vLightMod = Vect3f(0,1,0) - l_vLightMod;
 
   //m_pOmniLight->SetPosition(l_vPlayerPos + l_vLightMod);
+
   CORE->GetParticleManager()->Update(_fElapsedTime,m_pCamera);
   CORE->GetBillBoardManager()->Update(_fElapsedTime,m_pCamera);
 

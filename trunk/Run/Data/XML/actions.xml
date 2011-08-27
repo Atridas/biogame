@@ -103,6 +103,11 @@
 
 
 	<!--.......TEST ACTIONS.........................................-->
+  
+  <action name="ToggleDebug">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_P"/>
+  </action>
+  
 	<action name="Run">
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_UP_DOWN" Code="KEY_LSHIFT"/>
 	</action>

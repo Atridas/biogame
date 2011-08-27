@@ -172,37 +172,40 @@ void CBillBoard::Update(float fTimeDelta,CCamera *camera)
       m_iNumDiapo=1;
       m_fTimeAnimationActual=0;
     }
-    //Per saber en quina posició esta la diapositiva que volem ensenyar
-    bool l_bOk=false;
-    int l_Columna=0, fila=2, AuxNumDiapo;
-    AuxNumDiapo=m_iNumDiapo;
-    while (l_bOk==false)
+
+    if(camera)
     {
-      if(m_iTexNumColumnes<AuxNumDiapo)
+      //Per saber en quina posició esta la diapositiva que volem ensenyar
+      bool l_bOk=false;
+      int l_Columna=0, fila=2, AuxNumDiapo;
+      AuxNumDiapo=m_iNumDiapo;
+      while (l_bOk==false)
       {
-        AuxNumDiapo -= m_iTexNumColumnes;
-        fila++;
-      }else
-      {
-        l_Columna = AuxNumDiapo;
-        l_bOk=true;
-      }
-	  }
+        if(m_iTexNumColumnes<AuxNumDiapo)
+        {
+          AuxNumDiapo -= m_iTexNumColumnes;
+          fila++;
+        }else
+        {
+          l_Columna = AuxNumDiapo;
+          l_bOk=true;
+        }
+	    }
 
-    //Extreure les cordenades de textura concretas
-    m_fAU = m_fIncrementU*(l_Columna-1);
-    m_fAV = m_fIncrementV*(fila-1);//1- (m_fIncrementV*(fila-1));
+      //Extreure les cordenades de textura concretas
+      m_fAU = m_fIncrementU*(l_Columna-1);
+      m_fAV = m_fIncrementV*(fila-1);//1- (m_fIncrementV*(fila-1));
 
-    m_fBU = m_fAU+m_fIncrementU;
-    m_fBV = m_fAV;
+      m_fBU = m_fAU+m_fIncrementU;
+      m_fBV = m_fAV;
 
-    m_fCU = m_fAU;
-    m_fCV = m_fAV-m_fIncrementV;
+      m_fCU = m_fAU;
+      m_fCV = m_fAV-m_fIncrementV;
    
-    m_fDU = m_fBU;
-    m_fDV = m_fCV;
-
-  }else
+      m_fDU = m_fBU;
+      m_fDV = m_fCV;
+    }
+  }else if(camera)
   {
     m_fAU = 0.0f;
     m_fAV = 1.0f;

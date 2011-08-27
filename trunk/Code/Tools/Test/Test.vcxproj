@@ -34,9 +34,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="..\..\..\Run\Data\Levels\NivellProves\XML\GameObjects.xml" />
-    <None Include="..\..\..\Run\Data\XML\actions.xml">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="..\..\..\Run\Data\XML\actions_entities.xml" />
     <None Include="..\..\..\Run\Data\XML\actions_physx.xml" />
     <None Include="..\..\..\Run\Data\XML\Billboard.xml">
       <SubType>Designer</SubType>

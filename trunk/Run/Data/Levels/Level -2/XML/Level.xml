@@ -1,221 +1,56 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Level>
   <Rooms>
-    <Room name="Menjador">
+    <Room name="Passadis Video">
       <Boundings>
-        <Box name="Menjador Bounding" size="38.327 9.08467 25.5518" position="13.7585 1.51416 26.6763" yaw="-25.9482" pitch="0.0" roll="0.0" />
+        <Box name="Passadis Video Bounding" size="4.82898 4.01453 10.9213" position="9.02441 1.06795 -1.26889" yaw="24.1256" pitch="-0.555944" roll="12.6672" />
       </Boundings>
       <Objects>
-        <GameObject name="Plats_physc00" />
-        <GameObject name="Bido_vermell00" />
-        <GameObject name="Llauna00" />
-        <GameObject name="Llauna01" />
-        <GameObject name="Llauna02" />
-        <GameObject name="Llauna03" />
-        <GameObject name="Llauna04" />
-        <GameObject name="Llauna05" />
-        <GameObject name="Llauna06" />
-        <GameObject name="Llauna07" />
-        <GameObject name="Llauna08" />
-        <GameObject name="Llauna09" />
-        <GameObject name="Llauna10" />
-        <GameObject name="Llauna11" />
-        <GameObject name="Llauna12" />
-        <GameObject name="Llauna13" />
-        <GameObject name="Llauna14" />
-        <GameObject name="Llauna15" />
-        <GameObject name="Llauna16" />
-        <GameObject name="Llauna17" />
-        <GameObject name="Got07" />
-        <GameObject name="Got06" />
-        <GameObject name="Got05" />
-        <GameObject name="Got04" />
-        <GameObject name="Got03" />
-        <GameObject name="Got02" />
-        <GameObject name="Got01" />
-        <GameObject name="Got00" />
-        <GameObject name="Plats_physc01" />
-        <GameObject name="Plats_physc02" />
-        <GameObject name="Plats_physc03" />
-        <GameObject name="Plats_physc04" />
-        <GameObject name="Plats_physc05" />
-        <GameObject name="Plats_physc06" />
-        <GameObject name="Plats_physc07" />
-        <GameObject name="Plats_physc08" />
-        <GameObject name="Plats_physc09" />
-        <GameObject name="Plats_physc10" />
-        <GameObject name="Plats_physc11" />
-        <GameObject name="Plats_physc12" />
-        <GameObject name="Plats_physc13" />
-        <GameObject name="Plats_physc14" />
-        <GameObject name="Plats_physc15" />
-        <GameObject name="Plats_physc16" />
-        <GameObject name="Plats_physc17" />
-        <GameObject name="Plats_physc18" />
-        <GameObject name="Plats_physc19" />
-        <GameObject name="Plats_physc20" />
-        <GameObject name="Plats_physc21" />
-        <GameObject name="Plats_physc22" />
-        <GameObject name="Plats_physc23" />
-        <GameObject name="Plats_physc24" />
-        <GameObject name="Plats_physc25" />
-        <GameObject name="Plats_physc26" />
-        <GameObject name="Plats_physc27" />
-        <GameObject name="Plats_physc28" />
-        <GameObject name="Plats_physc29" />
-        <GameObject name="Plats_physc30" />
-        <GameObject name="Plats_physc31" />
-        <GameObject name="bido_verd00" />
-        <GameObject name="Plats_physc32" />
-        <GameObject name="Plats_physc33" />
-        <GameObject name="Plats_physc34" />
-        <GameObject name="Plats_physc35" />
-        <GameObject name="Plats_physc36" />
-        <GameObject name="Plats_physc37" />
-        <GameObject name="Plats_physc38" />
-        <GameObject name="Plats_physc39" />
-        <GameObject name="Plats_physc40" />
-        <GameObject name="Plats_physc41" />
-        <GameObject name="Plats_physc42" />
-        <GameObject name="Plats_physc43" />
-        <GameObject name="Plats_physc44" />
-        <GameObject name="Plats_physc45" />
-        <GameObject name="Plats_physc46" />
-        <GameObject name="Plats_physc47" />
-        <GameObject name="Plats_physc48" />
-        <GameObject name="Plats_physc49" />
-        <GameObject name="Plats_physc50" />
-        <GameObject name="Plats_physc51" />
-        <GameObject name="Plats_physc52" />
-        <GameObject name="Plats_physc53" />
-        <GameObject name="Plats_physc54" />
-        <GameObject name="Plats_physc55" />
-        <GameObject name="Plats_physc56" />
-        <GameObject name="Plats_physc57" />
-        <GameObject name="Plats_physc58" />
-        <GameObject name="Plats_physc59" />
-        <GameObject name="Plats_physc60" />
-        <GameObject name="Plats_physc61" />
-        <GameObject name="Plats_physc62" />
-        <GameObject name="Plats_physc63" />
-        <GameObject name="Plats_physc64" />
-        <GameObject name="Plats_physc65" />
-        <GameObject name="Plats_physc66" />
-        <GameObject name="Plats_physc67" />
-        <GameObject name="Plats_physc68" />
-        <GameObject name="Plats_physc69" />
-        <GameObject name="Plats_physc70" />
-        <GameObject name="Plats_physc71" />
-        <GameObject name="Plats_physc72" />
-        <GameObject name="Plats_physc73" />
-        <GameObject name="Plats_physc74" />
-        <GameObject name="Plats_physc75" />
-        <GameObject name="Plats_physc76" />
-        <GameObject name="Plats_physc77" />
-        <GameObject name="Plats_physc78" />
-        <GameObject name="Plats_physc79" />
-        <GameObject name="Plats_physc80" />
-        <GameObject name="Plats_physc81" />
-        <GameObject name="Plats_physc82" />
-        <GameObject name="Plats_physc83" />
-        <GameObject name="Plats_physc84" />
-        <GameObject name="bido_verd09" />
-        <GameObject name="Bido_vermell04" />
-        <GameObject name="bido_verd07" />
-        <GameObject name="Bido_vermell03" />
-        <GameObject name="bido_verd05" />
-        <GameObject name="Bido_vermell02" />
-        <GameObject name="bido_verd06" />
-        <GameObject name="bido_verd01" />
-        <GameObject name="Bido_vermell01" />
-        <GameObject name="bido_verd04" />
-        <GameObject name="bido_verd03" />
-        <GameObject name="columna08" />
-        <GameObject name="vitrina" />
-        <GameObject name="Altaveus00" />
-        <GameObject name="Altaveus01" />
-        <GameObject name="Altaveus02" />
-        <GameObject name="barra3" />
-        <GameObject name="barra1" />
-        <GameObject name="barra2" />
-        <GameObject name="Cables_menjador" />
-        <GameObject name="taula2" />
-        <GameObject name="taula1" />
-        <GameObject name="taula3" />
-        <GameObject name="taula4" />
-        <GameObject name="taula05" />
-        <GameObject name="Caixa_gran04" />
-        <GameObject name="Caixa_gran02" />
-        <GameObject name="Caixa_gran01" />
-        <GameObject name="Caixa_gran00" />
-        <GameObject name="Caixa_gran03" />
-        <GameObject name="Caixa_estatica_petita00" />
-        <GameObject name="Caixa_estatica_petita01" />
-        <GameObject name="Caixa_estatica_petita02" />
-        <GameObject name="ventilacio1" />
-        <GameObject name="ventilacio2" />
-        <GameObject name="Caixes_separadores" />
-        <GameObject name="Jukebox" />
-        <GameObject name="tauletas" />
-        <GameObject name="tauleta" />
-        <GameObject name="Quadres" />
-        <GameObject name="Object04" />
-        <GameObject name="Object05" />
-        <GameObject name="Papereras00" />
-        <GameObject name="Papereras01" />
-        <GameObject name="Papereras02" />
-        <GameObject name="Papereras03" />
-        <GameObject name="Papereras04" />
-        <GameObject name="Estractor" />
-        <GameObject name="Altaveus03" />
-        <GameObject name="Parets_menjador" />
-        <GameObject name="cartell01" />
-        <GameObject name="cartell02" />
-        <GameObject name="cartell03" />
-        <GameObject name="columna01" />
-        <GameObject name="columna02" />
-        <GameObject name="columna03" />
-        <GameObject name="columna04" />
-        <GameObject name="columna05" />
-        <GameObject name="columna06" />
-        <GameObject name="colunma07" />
-        <GameObject name="fogons" />
-        <GameObject name="fluorescente_apagat" />
-        <GameObject name="fluorescente_apagat01" />
-        <GameObject name="luz_florescente02" />
-        <GameObject name="fluorescente_DEF11" />
-        <GameObject name="Llum_menjador00" />
-        <GameObject name="fluorescente_DEF12" />
-        <GameObject name="luz_florescente03" />
-        <GameObject name="fluorescente_DEF14" />
-        <GameObject name="luz_florescente05" />
-        <GameObject name="fluorescente_apagat02" />
-        <GameObject name="Llum_menjador01" />
-        <GameObject name="Llum_menjador02" />
-        <GameObject name="fluorescente_apagat03" />
-        <GameObject name="fluorescente_apagat04" />
-        <GameObject name="luz_florescente06" />
-        <GameObject name="Llum_menjador03" />
-        <GameObject name="fluorescente_DEF15" />
-        <GameObject name="luz_florescente07" />
-        <GameObject name="Llum_menjador04" />
-        <GameObject name="fluorescente_DEF16" />
-        <GameObject name="luz_florescente08" />
-        <GameObject name="Llum_menjador05" />
-        <GameObject name="fluorescente_DEF17" />
-        <GameObject name="luz_florescente09" />
-        <GameObject name="Llum_menjador06" />
-        <GameObject name="fluorescente_DEF18" />
-        <GameObject name="luz_florescente10" />
-        <GameObject name="Llum_menjador07" />
+        <GameObject name="tubo3" />
+        <GameObject name="Llum10" />
+        <GameObject name="pas_video" />
         <GameObject name="fluorescente_DEF19" />
-        <GameObject name="luz_florescente11" />
-        <GameObject name="Llum_menjador08" />
-        <GameObject name="fluorescente_DEF20" />
+        <GameObject name="viga3" />
+        <GameObject name="luz_florescente10" />
+      </Objects>
+    </Room>
+    <Room name="Passadis">
+      <Boundings>
+        <Box name="Passadis Bounding 2" size="5.06012 3.11871 16.8864" position="18.7181 1.69028 1.75074" yaw="-25.6346" pitch="0.0" roll="0.0" />
+        <Box name="Passadis Bounding 3" size="11.0884 3.92354 5.39125" position="11.7346 1.69028 -7.39122" yaw="24.8753" pitch="0.0" roll="0.0" />
+        <Box name="Passadis Bounding 1" size="13.1503 4.22421 5.0794" position="1.98404 1.69028 -8.47477" yaw="0.0" pitch="0.0" roll="0.0" />
+      </Boundings>
+      <Objects>
+        <GameObject name="marc_porta02" />
+        <GameObject name="porta_sub2" />
+        <GameObject name="fluorescente_DEF18" />
+        <GameObject name="Llum09" />
+        <GameObject name="luz_florescente09" />
+        <GameObject name="fluorescente_DEF17" />
+        <GameObject name="luz_florescente08" />
+        <GameObject name="viga5" />
+        <GameObject name="viga4" />
+        <GameObject name="porta_sub1" />
+        <GameObject name="Llum08" />
+        <GameObject name="fluorescente_DEF15" />
+        <GameObject name="Llum07" />
+        <GameObject name="fluorescente_DEF16" />
+        <GameObject name="luz_florescente06" />
+        <GameObject name="viga1" />
+        <GameObject name="Llum06" />
+        <GameObject name="luz_florescente07" />
+        <GameObject name="viga2" />
+        <GameObject name="tubo_dret" />
+        <GameObject name="tubo_esq1" />
+        <GameObject name="tubo_esq2" />
+        <GameObject name="marc_passadis1" />
+        <GameObject name="pass01" />
+        <GameObject name="marc_porta01" />
       </Objects>
     </Room>
   </Rooms>
   <Portals>
-    <Portal name="Porta Menjador" roomA="Menjador" roomB="Passadis" size="2.62138 2.75072 1.37273" position="22.3859 1.22325 8.90523" yaw="-26.0241" pitch="0.0" roll="0.0" />
+    <Portal name="Porta laboratori" roomA="Laboratori" roomB="Passadis" size="0.922438 3.15931 2.55351" position="-4.3681 1.32979 -7.77577" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Portal name="Porta Passadis" roomA="Passadis Video" roomB="Passadis" size="5.10477 5.37587 2.04928" position="10.949 1.88875 -5.61124" yaw="24.3554" pitch="0.0" roll="0.0" />
   </Portals>
 </Level>

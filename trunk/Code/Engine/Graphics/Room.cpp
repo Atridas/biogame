@@ -37,9 +37,9 @@ bool CRoom::Init(CXMLTreeNode& _xmlRoom, set<string>& _UsedNames)
         {
           Vect3f l_Size     = l_xmlBounding.GetVect3fProperty("size", Vect3f(1));
           Vect3f l_Position = l_xmlBounding.GetVect3fProperty("position", Vect3f());
-          float l_fYaw      = l_xmlBounding.GetFloatProperty("yaw");
-          float l_fPitch    = l_xmlBounding.GetFloatProperty("pitch");
-          float l_fRoll     = l_xmlBounding.GetFloatProperty("roll");
+          float l_fYaw      = l_xmlBounding.GetFloatProperty("yaw")   * FLOAT_PI_VALUE / 180.0f;
+          float l_fPitch    = l_xmlBounding.GetFloatProperty("pitch") * FLOAT_PI_VALUE / 180.0f;
+          float l_fRoll     = l_xmlBounding.GetFloatProperty("roll")  * FLOAT_PI_VALUE / 180.0f;
 
           CObject3D l_O3D(l_Position, l_fYaw, l_fPitch, l_fRoll);
           l_O3D.GetBoundingBox()->Init(l_Size);
