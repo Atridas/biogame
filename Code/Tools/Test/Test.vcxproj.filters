@@ -37,9 +37,6 @@
     <None Include="..\..\..\Run\Data\XML\ScenneEffects_PhysX.xml">
       <Filter>Data</Filter>
     </None>
-    <None Include="..\..\..\Run\Data\XML\actions.xml">
-      <Filter>Data</Filter>
-    </None>
     <None Include="..\..\..\Run\Data\XML\actions_physx.xml">
       <Filter>Data</Filter>
     </None>
@@ -71,6 +68,9 @@
       <Filter>Data</Filter>
     </None>
     <None Include="..\..\..\Run\Data\XML\Billboard.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\actions_entities.xml">
       <Filter>Data</Filter>
     </None>
   </ItemGroup>

@@ -21,9 +21,9 @@ bool CPortal::Init(CXMLTreeNode& _xmlPortal, CPortalManager* _pPortalManager)
   
   Vect3f l_vSize     = _xmlPortal.GetVect3fProperty("size", Vect3f(), true);
   Vect3f l_vPosition = _xmlPortal.GetVect3fProperty("position", Vect3f(), true);
-  float  l_fYaw      = _xmlPortal.GetFloatProperty("yaw");
-  float  l_fPitch    = _xmlPortal.GetFloatProperty("pitch");
-  float  l_fRoll     = _xmlPortal.GetFloatProperty("roll");
+  float  l_fYaw      = _xmlPortal.GetFloatProperty("yaw")    * FLOAT_PI_VALUE / 180.0f;
+  float  l_fPitch    = _xmlPortal.GetFloatProperty("pitch")  * FLOAT_PI_VALUE / 180.0f;
+  float  l_fRoll     = _xmlPortal.GetFloatProperty("roll")   * FLOAT_PI_VALUE / 180.0f;
 
   if(l_szRoomA == "")
   {
