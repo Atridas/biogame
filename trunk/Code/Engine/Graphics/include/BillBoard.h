@@ -6,6 +6,7 @@
 #include "Texture.h"
 #include "InstancedData.h"
 #include "Particle.h"
+#include "VertexsStructs.h"
 
 // ---------------------------
 class CRenderManager;

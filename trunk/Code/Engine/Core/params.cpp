@@ -1,5 +1,6 @@
 #include "params.h"
 
+#include <time.h>
 #include <XML/XMLTreeNode.h>
 
 void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
@@ -473,6 +474,61 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
 
       } else {
         LOGGER->AddNewLog(ELL_WARNING, "\tNo s'ha trobat l'element \"PortalManager\". Usant valors per defecte.");
+      }
+    }
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+    //Core Emiter Manager -----------------------------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+    {
+      CXMLTreeNode l_TreeCoreEmiterManager = l_TreeConfig["CoreEmiterlManager"];
+      if(l_TreeCoreEmiterManager.Exists())
+      {
+        int l_iNumChildren = l_TreeCoreEmiterManager.GetNumChildren();
+      
+        for(int i = 0; i < l_iNumChildren; i++)
+        {
+          CXMLTreeNode l_TreeChild = l_TreeCoreEmiterManager(i);
+
+          if(strcmp("Core", l_TreeChild.GetName()) == 0)
+          {
+            string l_szFile = l_TreeChild.GetPszProperty("file","Data/XML/CoreEmiters.xml");
+
+            if(InitParams_.CoreEmiterManagerParams.sFiles.find(l_szFile) == InitParams_.CoreEmiterManagerParams.sFiles.end())
+            {
+              InitParams_.CoreEmiterManagerParams.sFiles.insert(l_szFile);
+              LOGGER->AddNewLog(ELL_INFORMATION, "\tFitxer \"%s\"", l_szFile.c_str());
+            }
+            else
+            {
+              LOGGER->AddNewLog(ELL_WARNING, "\tRepetint fitxer \"%s\"", l_szFile.c_str());
+            }
+          } 
+          else if(!l_TreeChild.IsComment())
+          {
+            LOGGER->AddNewLog(ELL_WARNING, "No s'ha identificat l'element \"%s\"", l_TreeChild.GetName());
+          }
+        }
+      }
+      else
+      {
+        LOGGER->AddNewLog(ELL_WARNING, "No s'ha trobat l'element \"CoreEmiterlManager\", insertant \"Data/XML/CoreEmiters.xml\" per defecte.");
+        InitParams_.CoreEmiterManagerParams.sFiles.insert("Data/XML/CoreEmiters.xml");
+      }
+    }
+
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
+    //Random Seed -----------------------------------------------------------------------------------------------------------------------------------------
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------
+    {
+      CXMLTreeNode l_xmlRandomSeed = l_TreeConfig["RandomSeed"];
+      if(l_xmlRandomSeed.Exists())
+      {
+        InitParams_.RandomSeed = (uint32)l_xmlRandomSeed.GetIntProperty("value", (int)time(0), true);
+        
+        LOGGER->AddNewLog(ELL_INFORMATION, "\tUsant llavor rnd: %d", InitParams_.RandomSeed);
+      } else {
+        InitParams_.RandomSeed = (uint32)time(0);
+        LOGGER->AddNewLog(ELL_INFORMATION, "\tNo s'ha trobat l'element \"RandomSeed\". Usant temps (%d).", InitParams_.RandomSeed);
       }
     }
   }

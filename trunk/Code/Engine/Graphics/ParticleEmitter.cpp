@@ -480,7 +480,7 @@ void CParticleEmitter::RenderHW(CRenderManager* _pRM)
 
   //l_it->first->Render(_pRM, true);
   CEffect* l_pEffect = l_pEM->ActivateMaterial(m_pMaterial);
-  CORE->GetParticleManager()->GetRenderableVertexs()->Render(_pRM, l_pEffect);
+  _pRM->GetParticleVertexs()->Render(_pRM, l_pEffect);
 
 }
 

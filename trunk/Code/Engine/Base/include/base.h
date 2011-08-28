@@ -100,15 +100,17 @@ using namespace std;
 #define ENTITY_MANAGER CORE->GetEntityManager()
 
 
-float RandomNumber(float _fMin, float _fMax);
-int   RandomNumber(int _iMin, int _iMax);
+float Random01();
+float RandomNumber(float _fNumA, float _fNumB);
+int   RandomNumber(int   _iNumA, int   _iNumB);
 
 
-D3DXVECTOR3 InterPolaterNumber(const D3DXVECTOR3& _vInicial, const D3DXVECTOR3& _vFinal,float _fTime, float _fTimeDelta);
-Vect3f InterPolaterNumber(const Vect3f& _vInicial, const Vect3f& _vFinal,float _fTime, float _fTimeDelta);
-D3DXCOLOR InterPolaterNumber(const D3DXCOLOR& _vInicial, const D3DXCOLOR& _vFinal,float _fTime, float _fTimeDelta);
-float InterPolaterNumber(float _fInicial, float _fFinal,float _fTime, float _fTimeDelta);
+D3DXVECTOR3 InterpolateNumber(const D3DXVECTOR3& _vInicial, const D3DXVECTOR3& _vFinal,float _fTime, float _fTimeDelta);
+Vect3f InterpolateNumber(const Vect3f& _vInicial, const Vect3f& _vFinal,float _fTime, float _fTimeDelta);
+D3DXCOLOR InterpolateNumber(const D3DXCOLOR& _vInicial, const D3DXCOLOR& _vFinal,float _fTime, float _fTimeDelta);
+float InterpolateNumber(float _fInicial, float _fFinal,float _fTime, float _fTimeDelta);
 
-
+//Entrar números, mai funcions!!!!!!!
+#define SIMPLE_INTERPOLATION(a, b, t) ((a * (1-t)) + (b * t))
 
 #endif

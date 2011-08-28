@@ -70,7 +70,16 @@ void CBiotestProcess::RenderINFO(CRenderManager* _pRM)
 
 bool CBiotestProcess::Init()
 {
-  LOGGER->AddNewLog(ELL_INFORMATION,"CGameProcess::Init");
+  LOGGER->AddNewLog(ELL_INFORMATION,"CBiotestProcess::Init");
+
+  
+  // ------------------------- noves partícules ----------------------------------------
+
+  //m_pCoreEmiterManager = new CCoreEmiterManager();
+  //m_pCoreEmiterManager->Load("Data/XML/CoreEmiters.xml");
+
+  // -----------------------------------------------------------------------------------
+
 
   m_pSceneEffectManager = CORE->GetSceneEffectManager();
   CORE->GetLightManager()->SetLightsEnabled(true);

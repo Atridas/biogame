@@ -217,6 +217,21 @@
     <Filter Include="Materials\MaterialDecorators\PropertyDecorators\SpriteDecorator">
       <UniqueIdentifier>{070271a6-87d3-4241-94bd-d03f611db3ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ParticleNew">
+      <UniqueIdentifier>{e0ca5353-8222-49a9-a58c-8c9cba375613}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ParticleNew\CoreEmiter">
+      <UniqueIdentifier>{be4f82ed-f0b4-4811-8fbd-c79efb934255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ParticleNew\CoreEmiterManager">
+      <UniqueIdentifier>{217447cb-eb19-453a-b171-b2c7fa7c1011}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ParticleNew\EmiterInstance">
+      <UniqueIdentifier>{06a128c0-a525-4bec-9373-f434fd527df8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ParticleNew\ParticleInstance">
+      <UniqueIdentifier>{dce80815-01d3-4cc0-8083-d8c62b3323af}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -359,6 +374,18 @@
     </ClCompile>
     <ClCompile Include="BillBoardCore.cpp">
       <Filter>BillBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreEmiter.cpp">
+      <Filter>ParticleNew\CoreEmiter</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreEmiterManager.cpp">
+      <Filter>ParticleNew\CoreEmiterManager</Filter>
+    </ClCompile>
+    <ClCompile Include="EmiterInstance.cpp">
+      <Filter>ParticleNew\EmiterInstance</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleInstance.cpp">
+      <Filter>ParticleNew\ParticleInstance</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -565,6 +592,21 @@
     </ClInclude>
     <ClInclude Include="include\BillBoardCore.h">
       <Filter>BillBoard</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CoreEmiter.h">
+      <Filter>ParticleNew\CoreEmiter</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CoreEmiterManager.h">
+      <Filter>ParticleNew\CoreEmiterManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EmiterInstance.h">
+      <Filter>ParticleNew\EmiterInstance</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ParticleInstance.h">
+      <Filter>ParticleNew\ParticleInstance</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ParticleConstants.h">
+      <Filter>ParticleNew</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

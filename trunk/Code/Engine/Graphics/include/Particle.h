@@ -10,13 +10,7 @@
 
 #define __PARTICLE_VIA_SHADER__
 
-struct SParticleRenderInfo 
-{
-  float x, y, z, diapo;
-  //float minU, minV, maxU, maxV;
-  float angleSin, angleCos, sizeX, sizeY;
-  uint32 color;
-};
+struct SParticleRenderInfo;
 
 class CParticle
 {

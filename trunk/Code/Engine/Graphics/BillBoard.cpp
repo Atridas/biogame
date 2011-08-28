@@ -324,5 +324,5 @@ void CBillBoard::RenderHW(CRenderManager* _pRM)
   //l_it->first->Render(_pRM, true);
   m_pMaterial->SetSpriteSize(Vect2f(1.f / m_iTexNumColumnes, 1.f / m_iTexNumFiles));
   CEffect* l_pEffect = l_pEM->ActivateMaterial(m_pMaterial);
-  CORE->GetParticleManager()->GetRenderableVertexs()->Render(_pRM, l_pEffect);
+  _pRM->GetParticleVertexs()->Render(_pRM, l_pEffect);
 }

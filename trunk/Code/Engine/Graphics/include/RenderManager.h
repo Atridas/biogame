@@ -12,6 +12,7 @@ class CCamera;
 class CTexture;
 class CBoundingBox;
 class CBoundingSphere;
+class CRenderableVertexs;
 //-------------------------------------------------------------------
 
 typedef enum ETypeAlignment { CENTER, UPPER_LEFT, UPPER_RIGHT, LOWER_LEFT, LOWER_RIGHT };
@@ -28,7 +29,7 @@ class CRenderManager:
 public:
 	                      CRenderManager    (void):	m_pD3D(0), m_pD3DDevice(0),
 												                          m_uWidth(0), m_uHeight(0),
-                                                  m_pCamera(0)
+                                                  m_pCamera(0), m_pParticleVertex(0)
                                                                                   {};
 
 
@@ -98,7 +99,8 @@ public:
   
   void                    SetClearColor           (const CColor& _cColor) {m_cClearColor = _cColor;};
   CColor                  GetClearColor           () const                {return m_cClearColor;};
-
+  
+  CRenderableVertexs*     GetParticleVertexs() {return m_pParticleVertex;};
 private:
 	virtual void            Release					  ();
 
@@ -113,5 +115,6 @@ private:
 
   CCamera*                m_pCamera;
   CFrustum                m_Frustum;
-
+  
+   CRenderableVertexs*    m_pParticleVertex;
 };

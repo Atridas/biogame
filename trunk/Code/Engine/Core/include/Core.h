@@ -35,6 +35,7 @@ class CEntityManager;
 class CPhysicTriggerReport;
 class CPortalManager;
 class CIAManager;
+class CCoreEmiterManager;
 // --------------------------
 
 /**
@@ -56,7 +57,8 @@ public:
                                                   m_pSceneEffectManager(0), m_pTimer(0), m_pScriptManager(0),m_pTextureManager(0),
                                                   m_pStaticMeshManager(0),m_pAnimatedModelManager(0),m_pEffectManager(0),
                                                   m_pGUIManager(0),m_pPhysicsManager(0),m_pParticleManager(0), m_pBillBoardManager(0),
-                                                  m_pSoundManager(0), m_pEngine(0), m_pEntityManager(0), m_pPortalManager(0), m_pIAManager(0)
+                                                  m_pSoundManager(0), m_pEngine(0), m_pEntityManager(0), m_pPortalManager(0), m_pIAManager(0),
+                                                  m_pCoreEmiterManager(0)
                                                   {};
   /**
    * Destructor.
@@ -161,6 +163,8 @@ public:
 
   CIAManager*         GetIAManager          () const                        {return m_pIAManager;};
 
+  CCoreEmiterManager* GetCoreEmiterManager  () const                        {return m_pCoreEmiterManager;};
+
 private:
 
   /**
@@ -244,5 +248,7 @@ private:
   CPortalManager*             m_pPortalManager;
 
   CIAManager*                 m_pIAManager;
+
+  CCoreEmiterManager*         m_pCoreEmiterManager;
 };
 
