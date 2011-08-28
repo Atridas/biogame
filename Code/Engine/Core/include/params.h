@@ -237,6 +237,13 @@ struct SPhysXManagerParams
   {};
 };
 
+struct SCoreEmiterManagerParams
+{
+  set<string> sFiles;
+
+  // default "Data/XML/CoreEmiters.xml"
+};
+
 /**
  * Paràmetres d'inicialització del procés.
  * Estructura que conté els paràmetres de configuració que es poden trobar al config del procés.
@@ -275,6 +282,8 @@ struct SInitParams
   SSoundManagerParams             SoundManagerParams;
   SPhysXManagerParams             PhysXManagerParams;
   SPortalManagerParams            PortalManagerParams;
+  SCoreEmiterManagerParams        CoreEmiterManagerParams;
+  uint32                          RandomSeed;
 };
 
 void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML);

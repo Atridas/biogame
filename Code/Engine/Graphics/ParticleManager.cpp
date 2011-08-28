@@ -7,8 +7,7 @@
 #include "EffectManager.h"
 #include "ParticleCore.h"
 
-CParticleManager::CParticleManager():
-m_pParticleVertex(0)
+CParticleManager::CParticleManager()
 {
   m_iNumDirections=1;
   m_szFileName = "";
@@ -46,8 +45,6 @@ void CParticleManager::Release()
   m_vDirection.clear();
   m_vTimeDirection.clear();
   m_vTimeDirectionInterpolation.clear();
-
-  CHECKED_DELETE(m_pParticleVertex);
 }
 
 
@@ -257,32 +254,6 @@ void CParticleManager::Render(CRenderManager* _pRM)
 
 void CParticleManager::Init(CRenderManager* _pRM)
 {
-  SPARTICLE_VERTEX l_pVertexBuffer[4];
-
-  l_pVertexBuffer[0].x = -1;
-  l_pVertexBuffer[0].y = -1;
-  l_pVertexBuffer[0].z =  0;
-
-  l_pVertexBuffer[1].x =  1;
-  l_pVertexBuffer[1].y = -1;
-  l_pVertexBuffer[1].z =  0;
-
-  l_pVertexBuffer[2].x = -1;
-  l_pVertexBuffer[2].y =  1;
-  l_pVertexBuffer[2].z =  0;
-
-  l_pVertexBuffer[3].x =  1;
-  l_pVertexBuffer[3].y =  1;
-  l_pVertexBuffer[3].z =  0;
-
-  uint16 l_iIndex[6] = {0,2,1,1,2,3};
-
-
-  m_pParticleVertex = new CIndexedVertexs<SPARTICLE_VERTEX>(  _pRM,
-                                                              (char*)l_pVertexBuffer,
-                                                              l_iIndex,
-                                                              4, 
-                                                              6);
 
   vector<CParticleEmitter*>::iterator it  = m_vEmitterParticle.begin(),
                                       end = m_vEmitterParticle.end();

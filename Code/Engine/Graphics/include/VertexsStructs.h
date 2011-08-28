@@ -565,6 +565,15 @@ private:
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexInstancedDeclaration;
 };
 
+
+struct SParticleRenderInfo 
+{
+  float x, y, z, diapo;
+  //float minU, minV, maxU, maxV;
+  float angleSin, angleCos, sizeX, sizeY;
+  uint32 color;
+};
+
 struct SPARTICLE_VERTEX
 {
   float   x, y, z;

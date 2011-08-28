@@ -30,6 +30,7 @@
 #include <EntityManager.h>
 #include <PortalManager.h>
 #include <IAManager.h>
+#include <CoreEmiterManager.h>
 
 #include "Utils\MemLeaks.h"
 //#include <AnimatedModelManager.h>
@@ -38,6 +39,7 @@
 
 //Macros d'inicialitzacio
 #define INIT_NO_ARGUMENTS(object, name)                        \
+  if(IsOk())                                                   \
   if(!object->Init())                                          \
   {                                                            \
     LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al %s.", name);  \
@@ -45,6 +47,7 @@
   }
 
 #define LOAD(object, name, argument)                          \
+  if(IsOk())                                                  \
   if(!object->Load(argument))                                 \
   {                                                           \
     LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al %s.", name); \
@@ -52,6 +55,7 @@
   }
 
 #define INIT(object, name, argument)                          \
+  if(IsOk())                                                  \
   if(!object->Init(argument))                                 \
   {                                                           \
     LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al %s.", name); \
@@ -59,6 +63,7 @@
   }
 
 #define INIT2(object, name, argument, argument2)              \
+  if(IsOk())                                                  \
   if(!object->Init(argument, argument2))                      \
   {                                                           \
     LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al %s.", name); \
@@ -66,6 +71,7 @@
   }
 
 #define INIT3(object, name, argument, argument2, argument3)   \
+  if(IsOk())                                                  \
   if(!object->Init(argument, argument2, argument3))           \
   {                                                           \
     LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al %s.", name); \
@@ -73,6 +79,7 @@
   }
 
 #define INIT4(object, name, argument, argument2, argument3, argument4)   \
+  if(IsOk())                                                             \
   if(!object->Init(argument, argument2, argument3, argument4))           \
   {                                                                      \
     LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al %s.", name);            \
@@ -102,6 +109,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pConsole                  = new CConsole();
   m_pGUIManager               = new CGUIManager(_InitParams.RenderManagerParams.v2iResolution);
   m_pPhysicsManager           = new CPhysicsManager();
+  m_pCoreEmiterManager        = new CCoreEmiterManager();
   m_pParticleManager          = new CParticleManager();
   m_pBillBoardManager         = new CBillBoardManager();
   m_pSoundManager             = new CSoundManager();
@@ -165,9 +173,14 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
     m_pPhysicsManager->SetTriggerReport(m_pPhysicTriggerReport);
   }
   
+  //TODO
+  LOAD(m_pCoreEmiterManager, "Manager de Cores d'emisors de partícules", _InitParams.CoreEmiterManagerParams.sFiles);
+
   INIT(m_pSoundManager, "Manager de Sons", _InitParams.SoundManagerParams.szFile);
   
   INIT_NO_ARGUMENTS(m_pIAManager, "Manager d'IA");
+
+  srand(_InitParams.RandomSeed);
 
   return IsOk();
 }
@@ -184,6 +197,7 @@ void CCore::Release()
   CHECKED_DELETE(m_pSoundManager);
   CHECKED_DELETE(m_pBillBoardManager);
   CHECKED_DELETE(m_pParticleManager);
+  CHECKED_DELETE(m_pCoreEmiterManager);
   CHECKED_DELETE(m_pPhysicsManager);
   CHECKED_DELETE(m_pGUIManager);
   CHECKED_DELETE(m_pConsole);

@@ -30,8 +30,6 @@ public:
   void Release();
   CParticleEmitter* GetParticleEmitter(const string& _szName);
   void SetAllEmittersActive(bool _bActive);
- 
-  CRenderableVertexs* GetRenderableVertexs() {return m_pParticleVertex;};
 
 private:
   string                    m_szFileName;
@@ -50,7 +48,5 @@ private:
    float				            m_fSizeY;
    float				            m_fSizeZ;
    int                      m_iNumDirections;
-
-   CRenderableVertexs*      m_pParticleVertex;
 };
 #endif

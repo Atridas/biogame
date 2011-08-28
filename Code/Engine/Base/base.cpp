@@ -1,37 +1,46 @@
 #include "base.h"
 
-float RandomNumber(float _fMin, float _fMax)
-{
-  float l_fNumber;
-  if(_fMin> _fMax)
-  {
-    float l_fAux = _fMax;
-    _fMax = _fMin;
-    _fMin=l_fAux;
-  }
-  l_fNumber=( (rand()/static_cast<float>(RAND_MAX)) * (_fMax - _fMin) + _fMin);
 
-  return l_fNumber;
+float Random01()
+{
+  return rand()/static_cast<float>(RAND_MAX);
 }
 
-int RandomNumber(int _iMin, int _iMax)
+
+float RandomNumber(float _fNumA, float _fNumB)
+{
+  float l_fNumber = Random01();
+
+  return SIMPLE_INTERPOLATION(_fNumA, _fNumB, l_fNumber);
+}
+
+int RandomNumber(int _iNumA, int _iNumB)
 {
   int l_iNumber;
-  if(_iMin > _iMax)
+  if(_iNumA > _iNumB)
   {
     //ofuscar coses mola
-    _iMin ^= _iMax;
-    _iMax ^= _iMin;
-    _iMin ^= _iMax;
+    _iNumA ^= _iNumB;
+    _iNumB ^= _iNumA;
+    _iNumA ^= _iNumB;
   }
-  //millorar això per no esbiaixar els resultats
-  l_iNumber=( rand() % (_iMax - _iMin) + _iMin) ;// / RAND_MAX;
+  int l_iDiff = (_iNumB - _iNumA);
+  l_iNumber = rand();
 
-  return l_iNumber;
+  int l_iLlindarMaxim = RAND_MAX / l_iDiff;
+  l_iLlindarMaxim *= l_iDiff;
+  while( l_iLlindarMaxim < l_iNumber )
+  {
+    l_iNumber = rand(); // això es fa per evitar esviaixaments
+  }
+
+
+
+  return ( l_iNumber % l_iDiff ) + _iNumA;
 }
 
 
-D3DXVECTOR3 InterPolaterNumber(const D3DXVECTOR3& _vInicial, const D3DXVECTOR3& _vFinal,float _fTime,float _fTimeDelta)
+D3DXVECTOR3 InterpolateNumber(const D3DXVECTOR3& _vInicial, const D3DXVECTOR3& _vFinal,float _fTime,float _fTimeDelta)
 {
   D3DXVECTOR3 l_vVectAux;
   l_vVectAux=_vInicial-_vFinal;
@@ -42,7 +51,7 @@ D3DXVECTOR3 InterPolaterNumber(const D3DXVECTOR3& _vInicial, const D3DXVECTOR3& 
   return l_vVectAux;
 }
 
-Vect3f InterPolaterNumber(const Vect3f& _vInicial, const Vect3f& _vFinal,float _fTime,float _fTimeDelta)
+Vect3f InterpolateNumber(const Vect3f& _vInicial, const Vect3f& _vFinal,float _fTime,float _fTimeDelta)
 {
   Vect3f l_vVectAux;
   l_vVectAux=_vInicial-_vFinal;
@@ -53,7 +62,7 @@ Vect3f InterPolaterNumber(const Vect3f& _vInicial, const Vect3f& _vFinal,float _
   return l_vVectAux;
 }
 
-D3DXCOLOR InterPolaterNumber(const D3DXCOLOR& _vInicial, const D3DXCOLOR& _vFinal,float _fTime,float _fTimeDelta)
+D3DXCOLOR InterpolateNumber(const D3DXCOLOR& _vInicial, const D3DXCOLOR& _vFinal,float _fTime,float _fTimeDelta)
 {
   D3DXCOLOR l_vVectAux;
   l_vVectAux=_vInicial-_vFinal;
@@ -64,7 +73,7 @@ D3DXCOLOR InterPolaterNumber(const D3DXCOLOR& _vInicial, const D3DXCOLOR& _vFina
   return l_vVectAux;
 }
 
-float InterPolaterNumber(float _fInicial, float _fFinal,float _fTime, float _fTimeDelta)
+float InterpolateNumber(float _fInicial, float _fFinal,float _fTime, float _fTimeDelta)
 {
   float l_fAux;
   l_fAux=_fInicial-_fFinal;

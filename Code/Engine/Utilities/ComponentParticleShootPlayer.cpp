@@ -61,7 +61,7 @@ void CComponentParticleShootPlayer::Update(float _fDeltaTime)
 {
   if(!m_bActive)
     return;
-  m_vPosActual = InterPolaterNumber(m_vPosActual,m_vPosEnd,0.1f,_fDeltaTime);
+  m_vPosActual = InterpolateNumber(m_vPosActual,m_vPosEnd,0.1f,_fDeltaTime);
   m_pBillboard->SetPos(m_vPosActual);
   float l_fCompara;
   l_fCompara = abs(m_vPosActual.x-m_vPosEnd.x);

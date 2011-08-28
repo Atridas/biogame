@@ -24,6 +24,7 @@ public:
   bool IsFree(uint32 _uiIndex) const;
   
   T* New();
+  int NewIndex();
   void Free(uint32 _uiIndex);
   void DeleteAllElements();
 
@@ -123,6 +124,35 @@ T* CRecyclingArray<T>::New(void)
     return &(m_vRecyclingArray[l_uiIndex]);
   }else
     return 0;
+};
+
+template<class T>
+int CRecyclingArray<T>::NewIndex(void)
+{
+  assert(IsOk());
+
+  bool   l_bFound  = false;
+  uint32 l_uiIndex = 0;
+  
+  if(m_uiFreeElements > 0)
+  {
+    while(!l_bFound && l_uiIndex < m_uiTotalElements)
+    {
+      l_bFound = m_vRecyclingArrayStatus[l_uiIndex];
+      l_uiIndex++;
+    }
+  }
+
+  if(l_bFound)
+  {
+    l_uiIndex--;
+    m_uiFreeElements--;
+    m_uiUsedElements++;
+    m_vRecyclingArrayStatus[l_uiIndex] = false;
+    m_vRecyclingArray[l_uiIndex] = m_TDefault;
+    return l_uiIndex;
+  }else
+    return -1;
 };
 
 template<class T>

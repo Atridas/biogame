@@ -13,6 +13,7 @@
 #include "Camera.h"
 #include "InstancedData.h"
 #include "ParticleCore.h"
+#include "VertexsStructs.h"
 
 class CMaterial;
 

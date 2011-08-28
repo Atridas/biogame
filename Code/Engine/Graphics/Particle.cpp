@@ -77,7 +77,7 @@ bool CParticle::UpdateState(float _fDeltaTime)
         m_fTimeInterpolation=m_vTimeColorInterpolation[i];
         if(l_time_aux<m_fTimeInterpolation)
         {
-          m_Color = InterPolaterNumber(m_Color,m_vColor[i+1],m_fTimeInterpolation,_fDeltaTime);
+          m_Color = InterpolateNumber(m_Color,m_vColor[i+1],m_fTimeInterpolation,_fDeltaTime);
         }
       }
       m_vColor[i]=m_Color;
@@ -104,7 +104,7 @@ bool CParticle::UpdateState(float _fDeltaTime)
       m_fTimeInterpolation=m_vTimeDirectionInterpolation[i];
       if(l_time_aux<m_fTimeInterpolation)
       {
-        m_vDir = InterPolaterNumber(m_vDir,m_vDirection[i+1],m_fTimeInterpolation,_fDeltaTime);
+        m_vDir = InterpolateNumber(m_vDir,m_vDirection[i+1],m_fTimeInterpolation,_fDeltaTime);
       }
       }
       m_vDirection[i]=m_vDir;
@@ -130,7 +130,7 @@ bool CParticle::UpdateState(float _fDeltaTime)
       m_fTimeInterpolation=m_vTimeSizeInterpolation[i];
       if(l_time_aux<m_fTimeInterpolation)
       {
-        m_fSize = InterPolaterNumber(m_fSize,m_vSize[i+1],m_fTimeInterpolation,_fDeltaTime);
+        m_fSize = InterpolateNumber(m_fSize,m_vSize[i+1],m_fTimeInterpolation,_fDeltaTime);
       }
      }
      m_vSize[i]=m_fSize;

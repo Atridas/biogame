@@ -6,6 +6,8 @@
 #include "VertexsStructs.h"
 #include "Texture.h"
 #include "EffectManager.h"
+#include "IndexedVertexs.h"
+#include "VertexsStructs.h"
 
 
 bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
@@ -129,6 +131,36 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
   TCAL3D_HW_VERTEX::GetVertexDeclaration();
   SPARTICLE_VERTEX::GetVertexDeclaration();
 
+
+  if(IsOk())
+  {
+    SPARTICLE_VERTEX l_pVertexBuffer[4];
+
+    l_pVertexBuffer[0].x = -1;
+    l_pVertexBuffer[0].y = -1;
+    l_pVertexBuffer[0].z =  0;
+
+    l_pVertexBuffer[1].x =  1;
+    l_pVertexBuffer[1].y = -1;
+    l_pVertexBuffer[1].z =  0;
+
+    l_pVertexBuffer[2].x = -1;
+    l_pVertexBuffer[2].y =  1;
+    l_pVertexBuffer[2].z =  0;
+
+    l_pVertexBuffer[3].x =  1;
+    l_pVertexBuffer[3].y =  1;
+    l_pVertexBuffer[3].z =  0;
+
+    uint16 l_iIndex[6] = {0,2,1,1,2,3};
+
+    m_pParticleVertex = new CIndexedVertexs<SPARTICLE_VERTEX>(  this,
+                                                                (char*)l_pVertexBuffer,
+                                                                l_iIndex,
+                                                                4, 
+                                                                6);
+  }
+
 #ifdef _DEBUG // Clear the backbuffer to magenta color in a Debug mode
   m_cClearColor = colMAGENTA;
 #else // Clear the backbuffer to black color in a Release mode
@@ -154,6 +186,8 @@ void CRenderManager::Release(void)
   assert(IsOk());
   LOGGER->AddNewLog(ELL_INFORMATION, "RenderManager::Release",m_uWidth,m_uHeight);
 
+
+  CHECKED_DELETE(m_pParticleVertex);
   STEXTUREDVERTEX::ReleaseVertexDeclaration();
   STEXTURED2VERTEX::ReleaseVertexDeclaration();
   SNORMALTEXTUREDVERTEX::ReleaseVertexDeclaration();
