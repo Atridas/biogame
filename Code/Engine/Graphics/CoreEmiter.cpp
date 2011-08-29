@@ -58,7 +58,18 @@ bool CCoreEmiter::Init(CXMLTreeNode& _xmlEmiter)
                                       l_Color1.GetRed(), l_Color1.GetGreen(), l_Color1.GetBlue(), l_Color1.GetAlpha(), 
                                       l_Color2.GetRed(), l_Color2.GetGreen(), l_Color2.GetBlue(), l_Color2.GetAlpha());
   {
-    CXMLTreeNode l_xmlColors = _xmlEmiter["Colors"];
+    //CXMLTreeNode l_xmlColors = _xmlEmiter["Colors"];
+    CXMLTreeNode l_xmlColors;
+    int l_iNumChildren = _xmlEmiter.GetNumChildren();
+    for(int i = 0; i < l_iNumChildren; ++i)
+    {
+      if(strcmp("Colors", _xmlEmiter(i).GetName()) == 0)
+      {
+        l_xmlColors = _xmlEmiter(i);
+        break;
+      }
+    }
+
     if(l_xmlColors.Exists())
     {
       LOGGER->AddNewLog(ELL_INFORMATION, "Parsing Colors");
@@ -95,7 +106,18 @@ bool CCoreEmiter::Init(CXMLTreeNode& _xmlEmiter)
   m_SizeAnimations.push_back(SSizeAnimation(l_fSize1, 0.f, l_fSize2, 0.f));
 
   {
-    CXMLTreeNode l_xmlSizes = _xmlEmiter["Sizes"];
+    //CXMLTreeNode l_xmlSizes = _xmlEmiter["Sizes"];
+    CXMLTreeNode l_xmlSizes;
+    int l_iNumChildren = _xmlEmiter.GetNumChildren();
+    for(int i = 0; i < l_iNumChildren; ++i)
+    {
+      if(strcmp("Sizes", _xmlEmiter(i).GetName()) == 0)
+      {
+        l_xmlSizes = _xmlEmiter(i);
+        break;
+      }
+    }
+
     if(l_xmlSizes.Exists())
     {
       LOGGER->AddNewLog(ELL_INFORMATION, "Parsing Sizes");

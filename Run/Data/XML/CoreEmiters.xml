@@ -1,6 +1,41 @@
 ﻿<?xml version="1.0" encoding="iso-8859-1"?>
 <CoreEmiters>
 
+  <!--
+    Tots aquells valors que tinguin (1/2) s'agafa un valor aleatori entre els 2 mostrats
+    id: nom de la core
+    emit_rate(1/2): nombre de partícules creades per segon per unitat de volum
+    life(1/2): temps de vida de la partícula
+    is_bucle: encara no s'utilitza
+    starting_angle(1/2): angle (en radiants) en que comença la partícula
+    starting_speed(1/2): velocitat inicial, en unitats per segon
+    acceleration(1/2): accelaració de la partícula, en unitats per segon al quadrat
+    starting_angular_speed(1/2): rotació de la partícula, en radiants per segon
+    angular_acceleration(1/2): accelaració de la rotació, en radiants per segon al quadrat
+    color(1/2): color inicial de la partícula
+    size(1/2): tamany inicial de la partícula, en unitats
+    texture: textura que usa la partícula
+    
+    Animacions per Sprite
+      is_sprite: (boolean) indica si és un sprite o no
+      num_rows: nombre de files a l'sprite
+      num_columns: nombre de columnes a l'sprite
+      num_frames: nombre de frames (per si no s'omplen totes les caselles, no és un camp necessàri)
+      time_per_frame: temps que tarda en canviar de frame
+      
+    Animacions per keyframes
+    Les animacions van de posar valors i punts en el temps. Aleshores la partícula agafa aquell valor en aquell
+    moment
+      Sizes
+        control_time(1/2): temps del keyframe
+        size(1/2): tamany que agafa la partícula en aquell moment
+      Colors
+        control_time(1/2): temps del keyframe
+        color(1/2): color que agafa la partícula en aquell moment
+        
+        
+  -->
+
   <!-- ParticleEmitter  id="vapor"                        MinEmitRate="15.0"             MaxEmitRate="20.0"
                       Color1="0.10 0.10 0.10 0.8"       Color2="0.10 0.10 0.10 0.8"    MinSize="0.05"        MaxSize="0.05"
                       Life1="1.0"                       Life2="1.0"                    Bucle="true"    
@@ -194,6 +229,38 @@
  
   -->
   
+  <CoreEmiter id="test tot"                        
+              emit_rate1="7.0"                   emit_rate2="10.0"
+              life1="3.5"                        life2="4.0"                    
+              is_bucle="false"    
+              
+              starting_angle1="-3.14159"         starting_angle2="3.14159"
+              
+              starting_speed1="0.1 0.5 0.0"      starting_speed2="0.0 0.5 0.1"
+              acceleration1="0.0 -0.125 0.0"     acceleration2="0.0 -0.125 0.0"
+              starting_angular_speed1="-0.5"     starting_angular_speed2="0.5"
+              angular_acceleration1="-0.1"       angular_acceleration2="0.1"
+              
+              
+              color1="0.0 0.0 0.0 1.0"          color2="1.0 1.0 1.0 1.0" 
+              size1="0.02"                      size2="0.1"
+              
+              is_sprite="true"
+              num_rows="3"                       num_columns="4"
+              num_frames="5"
+              time_per_frame="0.2"
+              
+              texture="Data/Textures/texturas particulas/impacte_shoot_player.png">
+    <Sizes>
+      <Size   control_time1="0.8"       control_time2="1.2"        size1="0.2"          size2="0.4"/>
+      <Size   control_time1="1.8"       control_time2="2.2"        size1="0.02"         size2="0.1"/>
+    </Sizes>
+  
+    <Colors>
+      <Color   control_time1="0.8"       control_time2="1.2"        color1="0.0 0.0 0.0 1.0"         color2="1.0 0.0 0.0 1.0"/>
+      <Color   control_time1="1.8"       control_time2="2.2"        color1="0.0 0.0 0.0 1.0"         color2="0.0 1.0 0.0 1.0"/>
+    </Colors>
+  </CoreEmiter>
 </CoreEmiters>
 
 <!-- como hacer Cores para emisores de particulas.

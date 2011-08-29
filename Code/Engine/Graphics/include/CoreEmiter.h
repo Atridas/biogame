@@ -68,7 +68,7 @@ public:
   float  GetAngularAcceleration() const;
   
   int GetNumColorFrames() const { return m_ColorAnimations.size(); }
-  int GetNumSizeFrames() const { return m_ColorAnimations.size(); }
+  int GetNumSizeFrames() const { return m_SizeAnimations.size(); }
 
   CColor GetColor(int _iColorFrame) const;
   float  GetSize(int _iSizeFrame) const;
