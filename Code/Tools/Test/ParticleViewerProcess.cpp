@@ -89,6 +89,11 @@ bool CParticleViewerProcess::Init()
 void CParticleViewerProcess::Release()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"CEntityProcess::Release");
+
+  for(int i = 0; i < NUM_EMISORS; ++i)
+  {
+    CHECKED_DELETE( m_pEmiters[i] );
+  }
 }
 
 void CParticleViewerProcess::Update(float _fElapsedTime)
