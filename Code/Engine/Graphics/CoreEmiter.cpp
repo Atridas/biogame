@@ -231,7 +231,7 @@ float CCoreEmiter::GetLife() const
 float CCoreEmiter::GetStartingAngle() const
 {
   float l_fRnd = Random01();
-  float l_fStartingAngle = SIMPLE_INTERPOLATION(m_fStartingAngle1, m_fStartingAngle1, l_fRnd);
+  float l_fStartingAngle = SIMPLE_INTERPOLATION(m_fStartingAngle1, m_fStartingAngle2, l_fRnd);
   return l_fStartingAngle;
 }
 

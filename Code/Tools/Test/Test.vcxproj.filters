@@ -9,6 +9,7 @@
     <ClCompile Include="IAProcess.cpp" />
     <ClCompile Include="EntityProcess.cpp" />
     <ClCompile Include="Biotest.cpp" />
+    <ClCompile Include="ParticleViewerProcess.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Data">
@@ -23,6 +24,7 @@
     <ClInclude Include="IAProcess.h" />
     <ClInclude Include="EntityProcess.h" />
     <ClInclude Include="Biotest.h" />
+    <ClInclude Include="ParticleViewerProcess.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\Run\Data\XML\init_test.xml">
