@@ -5,15 +5,6 @@
 #include "EffectManager.h"
 #include "BillBoardCore.h"
 
-CBillBoardManager::CBillBoardManager()
-{
-	m_szFileName="";
-	m_pRM=NULL;
-	m_bReload=false;
-	m_pTexParticle=NULL;
-}
-
-
 bool CBillBoardManager::Reload()
 {
   
@@ -32,19 +23,22 @@ void CBillBoardManager::Release()
   map<string,CBillBoard*>::iterator it  = m_Billboards.begin(),
                                     end = m_Billboards.end();
   
-  while(it != end)
-  {
-    CHECKED_DELETE(it->second);
-    ++it;
-  }
+  //això és una puta merda
+  //while(it != end)
+  //{
+  //  CHECKED_DELETE(it->second);
+  //  ++it;
+  //}
   m_Billboards.clear();
+
+  CHECKED_DELETE(m_pBillboardCore);
 }
 
 bool CBillBoardManager::Load(const string& _szFileName)
 {
 
-  CBillBoardCore* l_pBillboardCore = new CBillBoardCore();
-  l_pBillboardCore->Load("./Data/XML/BillboardCore.xml");
+  m_pBillboardCore = new CBillBoardCore();
+  m_pBillboardCore->Load("./Data/XML/BillboardCore.xml");
   m_szFileName = _szFileName;
   LOGGER->AddNewLog(ELL_INFORMATION, "CBillBoardManager::Load \"%s\"", m_szFileName.c_str());
 
@@ -78,7 +72,7 @@ bool CBillBoardManager::Load(const string& _szFileName)
  
 		    string l_szType = l_treeInstanceBillboard.GetPszISOProperty("type" ,"",true);
 		    
-        CBillBoard* l_pBillboard = l_pBillboardCore->GetBillBoard(l_szType);
+        CBillBoard* l_pBillboard = m_pBillboardCore->GetBillBoard(l_szType);
         if(!l_pBillboard)
         {
           LOGGER->AddNewLog(ELL_WARNING, "CBillboardManagerManager:: No existeix de tipus Billboard seleccionat %s", l_szType.c_str());

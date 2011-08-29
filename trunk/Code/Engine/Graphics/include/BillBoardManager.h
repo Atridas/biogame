@@ -11,12 +11,19 @@
 
 
 class CRenderManager;
+class CBillBoardCore;
 
 class CBillBoardManager:
   public CBaseControl
 {
 public:
-  CBillBoardManager();
+  CBillBoardManager():
+    m_pBillboardCore(0),
+    m_szFileName(""),
+    m_pRM(0),
+    m_bReload(false),
+    m_pTexParticle(0)
+    {}
   ~CBillBoardManager(){Done();};
 
   bool Load(const string& _szFileName);
@@ -34,7 +41,7 @@ private:
   string                    m_szFileName;
   CRenderManager*           m_pRM;
   map<string,CBillBoard*>   m_Billboards;
-  
+  CBillBoardCore*           m_pBillboardCore;
   
   bool                      m_bReload;
   CTexture*                 m_pTexParticle;
