@@ -2,13 +2,12 @@
 
 #include <Process.h>
 
-#include <CoreEmiterManager.h>
-
 //Forward declarations---------------------
 class CRenderManager;
 class CCamera;
 class CObject3D;
 class COmniLight;
+class CEmiterInstance;
 //-----------------------------------------
 
 class CBiotestProcess :
@@ -28,5 +27,7 @@ private:
   void                  Release           ();
 
   COmniLight* m_pOmniLight;
+
+  CEmiterInstance* m_pEmiter;
 };
 

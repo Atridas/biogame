@@ -13,9 +13,10 @@ bool CEmiterInstance::Init(const string& _szCoreName, const CObject3D& _Position
   m_szCoreName  = _szCoreName;
   m_vMaxVolume  = _vVolume * .5f;
   m_vMinVolume  = -m_vMaxVolume;
+  m_fVolume     = _vVolume.x * _vVolume.y * _vVolume.z;
   m_pCoreEmiter = CORE->GetCoreEmiterManager()->GetCoreEmiter(m_szCoreName);
 
-  m_fTimeToNextParticle = 1.f / m_pCoreEmiter->GetEmitRate();
+  m_fTimeToNextParticle = 1.f / (m_pCoreEmiter->GetEmitRate() * m_fVolume);
   m_iActiveParticles = 0;
   memset(m_Particles, 0, sizeof(m_Particles));
 
@@ -31,10 +32,11 @@ void CEmiterInstance::Reset( const CObject3D& _Position, const Vect3f& _vVolume 
   SetMat44( _Position.GetMat44() );
   m_vMaxVolume  = _vVolume * .5f;
   m_vMinVolume  = -m_vMaxVolume;
+  m_fVolume     = _vVolume.x * _vVolume.y * _vVolume.z;
   m_pCoreEmiter = CORE->GetCoreEmiterManager()->GetCoreEmiter(m_szCoreName);
 
   m_RecyclingParticles.DeleteAllElements();
-  m_fTimeToNextParticle = 1.f / m_pCoreEmiter->GetEmitRate();
+  m_fTimeToNextParticle = 1.f / (m_pCoreEmiter->GetEmitRate() * m_fVolume);
   m_iActiveParticles = 0;
   memset(m_Particles, 0, sizeof(m_Particles));
 }
@@ -74,17 +76,17 @@ void CEmiterInstance::Update(float _fDeltaTime)
   {
 
     _fDeltaTime -= m_fTimeToNextParticle;
-    m_fTimeToNextParticle = 1.f / m_pCoreEmiter->GetEmitRate(); //carreguem el temps fins la següent partícula
+    m_fTimeToNextParticle = 1.f / (m_pCoreEmiter->GetEmitRate() * m_fVolume); //carreguem el temps fins la següent partícula
 
-    int l_iParticle = m_RecyclingParticles.NewIndex(); //agafem una partícula del buffer
-    if(l_iParticle >= 0) //comprovem que el buffer no hagi quedat ple
+    if(m_iActiveParticles < MAX_PARTICLES_PER_EMITER) //comprovem que el buffer no hagi quedat ple
     {
+      int l_iParticle = m_RecyclingParticles.NewIndex(); //agafem una partícula del buffer
       CParticleInstance* l_pParticle = m_RecyclingParticles.GetAt(l_iParticle);
 
       //creem la partícula dintre de la caixa inicial
       Vect3f l_vRnd(Random01(),Random01(),Random01());
       Vect3f l_v_1_Minus_Rnd(1.f - l_vRnd.x, 1.f - l_vRnd.y, 1.f - l_vRnd.z);
-      Vect3f l_vInitialPosition = ( m_vMinVolume * l_v_1_Minus_Rnd ) + ( m_vMaxVolume * l_vRnd );
+      Vect3f l_vInitialPosition = ( l_v_1_Minus_Rnd.Scale(m_vMinVolume) ) + ( l_vRnd.Scale(m_vMaxVolume) );
 
       //inicialitzem la partícula
       l_pParticle->Init(m_pCoreEmiter, l_vInitialPosition);
@@ -107,6 +109,7 @@ void CEmiterInstance::Update(float _fDeltaTime)
     }
     else
     {
+      m_fTimeToNextParticle = _fDeltaTime;
       break;
     }
   }
@@ -121,11 +124,15 @@ void CEmiterInstance::Update(float _fDeltaTime)
 
 void CEmiterInstance::Render(CRenderManager* _pRM)
 {
+
+
+
   assert(IsOk());
 
   CEffectManager* l_pEM = CORE->GetEffectManager();
   assert(l_pEM && l_pEM->IsOk());
 
+   _pRM->SetTransform(GetMat44());
   
   // renderitzem -----------------------------------------------------------------------------------------------------------------
 
@@ -142,4 +149,15 @@ void CEmiterInstance::Render(CRenderManager* _pRM)
 
   CEffect* l_pEffect = l_pEM->ActivateMaterial(m_pCoreEmiter->GetMaterial());
   _pRM->GetParticleVertexs()->Render(_pRM, l_pEffect);
+
+  
+}
+
+
+void CEmiterInstance::DebugRender(CRenderManager* _pRM)
+{
+  assert(IsOk());
+  _pRM->SetTransform(GetMat44());
+  _pRM->DrawCube(m_vMaxVolume - m_vMinVolume, colRED);
+  
 }

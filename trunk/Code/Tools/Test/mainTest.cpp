@@ -11,6 +11,7 @@
 #include "SoundTestProcess.h"
 #include "IAProcess.h"
 #include "EntityProcess.h"
+#include "ParticleViewerProcess.h"
 #include "Biotest.h"
 
 #if defined( _DEBUG )  
@@ -20,7 +21,58 @@
 //#define __T_PARTICULES__
 //#define __T_PYSX__
 //#define __T_ENTITIES__
-#define __T_BIOTEST__
+//#define __T_BIOTEST__
+#define __T_PARTICLE_VIEWER__
+
+
+
+
+
+
+
+#ifdef __T_PARTICULES__
+#ifdef __T_PYSX__
+#error "Definit particules i pysx a la vegada"
+#endif
+#ifdef __T_ENTITIES__
+#error "Definit particules i entities a la vegada"
+#endif
+#ifdef __T_BIOTEST__
+#error "Definit particules i biotest a la vegada"
+#endif
+#ifdef __T_PARTICLE_VIEWER__
+#error "Definit particules i particle viewer a la vegada"
+#endif
+#endif
+
+#ifdef __T_PYSX__
+#ifdef __T_ENTITIES__
+#error "Definit pysx i entities a la vegada"
+#endif
+#ifdef __T_BIOTEST__
+#error "Definit pysx i biotest a la vegada"
+#endif
+#ifdef __T_PARTICLE_VIEWER__
+#error "Definit pysx i particle viewer a la vegada"
+#endif
+#endif
+
+#ifdef __T_ENTITIES__
+#ifdef __T_BIOTEST__
+#error "Definit entities i biotest a la vegada"
+#endif
+#ifdef __T_PARTICLE_VIEWER__
+#error "Definit entities i particle viewer a la vegada"
+#endif
+#endif
+
+#ifdef __T_BIOTEST__
+#ifdef __T_PARTICLE_VIEWER__
+#error "Definit biotest i particle viewer a la vegada"
+#endif
+#endif
+
+
 
 
 #define APPLICATION_NAME	"TEST"
@@ -92,6 +144,9 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 #ifdef __T_BIOTEST__
     ReadXMLInitParams(l_InitParams,"./Data/XML/init.xml");
 #endif
+#ifdef __T_PARTICLE_VIEWER__
+    ReadXMLInitParams(l_InitParams,"./Data/XML/init_test_entities.xml");
+#endif
 
     // Create the application's window
     HWND hWnd = CreateWindow(	
@@ -113,6 +168,7 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
     CIAProcess* l_pIAProcess = new CIAProcess();
     CEntityProcess* l_pEntityProcess = new CEntityProcess();
     CBiotestProcess* l_pBiotestProcess = new CBiotestProcess();
+    CParticleViewerProcess* l_pParticleViewerProcess = new CParticleViewerProcess();
 
     l_Engine.AddProcess(l_Test);
     l_Engine.AddProcess(l_PhysX);
@@ -121,6 +177,7 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
     l_Engine.AddProcess(l_pIAProcess);
     l_Engine.AddProcess(l_pEntityProcess);
     l_Engine.AddProcess(l_pBiotestProcess);
+    l_Engine.AddProcess(l_pParticleViewerProcess);
 
 
 #ifdef __T_PYSX__
@@ -134,6 +191,9 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 #endif
 #ifdef __T_BIOTEST__
     l_Engine.ActivateProcess(l_pBiotestProcess);
+#endif
+#ifdef __T_PARTICLE_VIEWER__
+    l_Engine.ActivateProcess(l_pParticleViewerProcess);
 #endif
 
     //l_Engine.ActivateProcess(l_Test);

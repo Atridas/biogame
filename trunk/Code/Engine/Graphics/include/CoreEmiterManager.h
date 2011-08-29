@@ -23,11 +23,14 @@ public:
   bool Reload();
 
   CCoreEmiter * GetCoreEmiter(const string &_szName);
+  const set<string>& GetCoreNames() const {return m_sCores;};
 
 private:
   bool LoadFile(const string &_szFileName, bool _bReload);
 
   set<string> m_sFiles;
+
+  set<string> m_sCores;
 
   CCoreEmiter m_NullEmiter;
 };

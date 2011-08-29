@@ -19,6 +19,10 @@
 
 #include "Core.h"
 
+
+#include <CoreEmiterManager.h>
+#include <EmiterInstance.h>
+
 void CBiotestProcess::Update(float _fElapsedTime)
 {
   //CObject3D* m_pPlayerPos = CORE->GetEntityManager()->GetEntity("Player")->GetComponent<CComponentObject3D>(CBaseComponent::ECT_OBJECT_3D);
@@ -36,6 +40,7 @@ void CBiotestProcess::Update(float _fElapsedTime)
   CORE->GetBillBoardManager()->Update(_fElapsedTime,m_pCamera);
 
 
+  m_pEmiter->Update(_fElapsedTime);
 }
 
 void CBiotestProcess::RenderScene(CRenderManager* _pRM)
@@ -57,15 +62,17 @@ void CBiotestProcess::RenderScene(CRenderManager* _pRM)
 
   //CORE->GetRenderableObjectsManager()->Render(_pRM);
   CORE->GetPortalManager()->Render(_pRM);
-  CORE->GetParticleManager()->Render(_pRM);
-  CORE->GetBillBoardManager()->Render(_pRM);
+  //CORE->GetParticleManager()->Render(_pRM);
+  //CORE->GetBillBoardManager()->Render(_pRM);
+
+  m_pEmiter->Render(_pRM);
 }
 
 void CBiotestProcess::RenderINFO(CRenderManager* _pRM)
 {
-  CORE->GetPhysicsManager()->DebugRender(_pRM);
-  CORE->GetPortalManager()->DebugRender(_pRM);
-  CORE->GetIAManager()->GetGraph()->DebugRender(_pRM);
+  //CORE->GetPhysicsManager()->DebugRender(_pRM);
+  //CORE->GetPortalManager()->DebugRender(_pRM);
+  //CORE->GetIAManager()->GetGraph()->DebugRender(_pRM);
 }
 
 bool CBiotestProcess::Init()
@@ -77,6 +84,10 @@ bool CBiotestProcess::Init()
 
   //m_pCoreEmiterManager = new CCoreEmiterManager();
   //m_pCoreEmiterManager->Load("Data/XML/CoreEmiters.xml");
+
+  m_pEmiter  = new CEmiterInstance();
+  m_pEmiter->Init("bubble", CObject3D(Vect3f(-14.6275f, 0.833153f, -4.08485f),0,0), Vect3f(0.391403f, 0.702762f, 0.194437f));
+
 
   // -----------------------------------------------------------------------------------
 
@@ -109,6 +120,7 @@ bool CBiotestProcess::Init()
 void CBiotestProcess::Release()
 {
 	// ----
+  CHECKED_DELETE(m_pEmiter);
 }
 
 bool CBiotestProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _szAction)

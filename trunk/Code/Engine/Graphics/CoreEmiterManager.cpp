@@ -41,6 +41,7 @@ bool CCoreEmiterManager::LoadFile(const string &_szFileName, bool _bReload)
           else
           {
             AddResource(l_pCoreEmiter->GetName(), l_pCoreEmiter);
+            m_sCores.insert(l_pCoreEmiter->GetName());
           }
         }
         else
