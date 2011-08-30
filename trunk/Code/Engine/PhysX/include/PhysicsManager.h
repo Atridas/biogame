@@ -32,6 +32,7 @@ class CPhysicSphericalJoint;
 class CPhysicRevoluteJoint;
 class CPhysicFixedJoint;
 class CPhysicTriggerReport;
+class CPhysicCollisionReport;
 class CScriptManager;
 
 //--------------------------
@@ -168,6 +169,8 @@ public:
 	NxCCDSkeleton*			CreateCCDSkeleton						(float size);
 
 	void								SetTriggerReport						(CPhysicTriggerReport* report);
+
+  void								SetCollisionReport					(CPhysicCollisionReport* report);
   
   int GetCollisionMask (ECollisionGroup _szGroup) {return m_CollisionMasks[_szGroup];};
 

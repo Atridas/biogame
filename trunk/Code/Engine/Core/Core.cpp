@@ -1,5 +1,6 @@
 #define __DONT_INCLUDE_MEM_LEAKS__
 #include "PhysXTriggerEntityController.h"
+#include "PhysXCollisionEntityController.h"
 #include "Core.h"
 
 #include <base.h>
@@ -115,6 +116,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pSoundManager             = new CSoundManager();
   m_pEntityManager            = new CEntityManager();
   m_pPhysicTriggerReport      = new CPhysXTriggerEntityController();
+  m_pPhysicCollisionReport    = new CPhysXCollisionEntityController();
   m_pPortalManager            = new CPortalManager();
   m_pIAManager                = new CIAManager();
 
@@ -171,6 +173,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   if(m_pPhysicsManager->IsOk())
   {
     m_pPhysicsManager->SetTriggerReport(m_pPhysicTriggerReport);
+    m_pPhysicsManager->SetCollisionReport(m_pPhysicCollisionReport);
   }
   
   //TODO
@@ -192,6 +195,7 @@ void CCore::Release()
 
   //delete a l'inrevès de com s'ha fet l'init
   CHECKED_DELETE(m_pIAManager);
+  CHECKED_DELETE(m_pPhysicCollisionReport);
   CHECKED_DELETE(m_pPhysicTriggerReport);
   CHECKED_DELETE(m_pEntityManager);
   CHECKED_DELETE(m_pSoundManager);
@@ -243,7 +247,7 @@ void CCore::Update()
   m_pEntityManager->UpdatePostPhysX(l_fElapsedTime);
 
 #ifdef __PARTICLE_VIA_SHADER__
-  m_pParticleManager->Update(l_fElapsedTime, 0);// -------------
+  //m_pParticleManager->Update(l_fElapsedTime, 0);// -------------
 #endif
   m_pRenderableObjectsManager->Update(l_fElapsedTime);// ----
   

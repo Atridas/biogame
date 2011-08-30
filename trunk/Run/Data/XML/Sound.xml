@@ -6,5 +6,6 @@
   <sound name="pipip" file="./Data/Sounds/pipipipipi.mp3" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />  
   <sound name="disparar" file="./Data/Sounds/laser_short.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />  
   <sound name="impacte" file="./Data/Sounds/impactedelaostia.mp3" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />  
-  <sound name="force" file="./Data/Sounds/shockwave.mp3" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />  
+  <sound name="force" file="./Data/Sounds/shockwave.mp3" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />
+  <sound name="body_fall" file="./Data/Sounds/body_fall_mono2.wav" sound3D="true" type="sample" loop="false" priority="1" maxSamples="1" />  
 </sounds>

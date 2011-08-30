@@ -18,7 +18,7 @@
 #include "ActionManager.h"
 
 #include "Core.h"
-
+#include "SoundManager.h"
 
 #include <CoreEmiterManager.h>
 #include <EmiterInstance.h>
@@ -39,6 +39,8 @@ void CBiotestProcess::Update(float _fElapsedTime)
   //CORE->GetParticleManager()->Update(_fElapsedTime,m_pCamera);
   CORE->GetBillBoardManager()->Update(_fElapsedTime,m_pCamera);
 
+  CObject3D* m_pPlayerPos = CORE->GetEntityManager()->GetEntity("Player")->GetComponent<CComponentObject3D>(CBaseComponent::ECT_OBJECT_3D);
+  CORE->GetSoundManager()->UpdateSound3DSystem(m_pPlayerPos->GetPosition(),m_pCamera->GetDirection());
 
   m_pEmiter->Update(_fElapsedTime);
 }

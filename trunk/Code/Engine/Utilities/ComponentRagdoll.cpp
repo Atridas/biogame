@@ -81,6 +81,17 @@ CPhysxBone* CComponentRagdoll::GetBone(const string& _szBoneName)
   return m_pRagdoll->GetPhysxBoneByName(_szBoneName);
 }
 
+Vect3f CComponentRagdoll::GetPosition()
+{
+  if(m_pRagdoll)
+  {
+    Mat44f m = m_pRagdoll->GetTransform();
+    return m.GetPos();
+  }
+
+  return Vect3f(0.0f);
+}
+
 void CComponentRagdoll::PostUpdate(float _fDeltaTime)
 {
   m_pRagdoll->Update();

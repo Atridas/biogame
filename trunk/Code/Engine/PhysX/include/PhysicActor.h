@@ -54,6 +54,7 @@ public:
 
   //---Activate---
   void              Activate          (bool _bActivate);
+  void              SetKinematic      (bool _bValue);
 
 	//---Get Info-------
 	void							GetMat44					(Mat44f& matrix) const;
@@ -66,6 +67,9 @@ public:
 	NxActorDesc*			GetActorDesc			() {return m_pPhXActorDesc;}
 
   void              SetActorSolverIterationCount(int _iCount);
+
+  void              SetContactReportFlags(unsigned int _uiFlags);
+  void              SetContactReportThreshold(float _fThreshold);
 
 private:
 	void							DeInit						();

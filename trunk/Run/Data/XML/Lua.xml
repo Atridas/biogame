@@ -11,6 +11,7 @@
     <file path="Data/Lua/soldier_states.lua" />
     <file path="Data/Lua/enemy_states.lua" />
     <file path="Data/Lua/door_states.lua" />
+    <file path="Data/Lua/enemy_collisions.lua" />
   </files>
   <initscripts>
     <script action="CORE                          = get_core()"/>

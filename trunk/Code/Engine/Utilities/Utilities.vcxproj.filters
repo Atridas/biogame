@@ -127,6 +127,12 @@
     <Filter Include="EntitySystem\Components\ComponentShootMilitar">
       <UniqueIdentifier>{ee5b84d0-c299-4a22-988a-08575d5f8a7f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\PhysXCollisionEntityController">
+      <UniqueIdentifier>{cd45921c-cc96-4a40-89f7-9c9d34600bda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentCollisionReport">
+      <UniqueIdentifier>{6c59f69d-3e4b-485c-9a82-5c7af81b271b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -257,6 +263,12 @@
     </ClCompile>
     <ClCompile Include="ComponentParticleShootMiner.cpp">
       <Filter>EntitySystem\Components\ComponentShootMiner</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXCollisionEntityController.cpp">
+      <Filter>EntitySystem\Components\PhysXCollisionEntityController</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentCollisionReport.cpp">
+      <Filter>EntitySystem\Components\ComponentCollisionReport</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -397,6 +409,12 @@
     </ClInclude>
     <ClInclude Include="include\ComponentParticleShootMiner.h">
       <Filter>EntitySystem\Components\ComponentShootMiner</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PhysXCollisionEntityController.h">
+      <Filter>EntitySystem\Components\PhysXCollisionEntityController</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentCollisionReport.h">
+      <Filter>EntitySystem\Components\ComponentCollisionReport</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

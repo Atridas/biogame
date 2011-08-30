@@ -7,6 +7,7 @@
 #include "ScriptManager.h"
 #include "ThPSCamera.h"
 
+#include "SoundManager.h"
 #include "ComponentObject3D.h"
 #include "ComponentMovement.h"
 #include "ComponentPhysXController.h"
@@ -97,13 +98,15 @@ void CEntityProcess::Release()
 
 void CEntityProcess::Update(float _fElapsedTime)
 {
-  CObject3D* m_pPlayerPos = CORE->GetEntityManager()->GetEntity("Player")->GetComponent<CComponentObject3D>(CBaseComponent::ECT_OBJECT_3D);
+  CObject3D* m_pPlayerPos = CORE->GetEntityManager()->GetEntity("Player")->GetComponent<CComponentObject3D>();
 
   m_pSpotLight->SetPosition(m_pPlayerPos->GetPosition());
   m_pSpotLight->SetDirection(m_pCamera->GetDirection());
 
   CORE->GetParticleManager()->Update(_fElapsedTime, m_pCamera);
   CORE->GetBillBoardManager()->Update(_fElapsedTime, m_pCamera);
+
+  CORE->GetSoundManager()->UpdateSound3DSystem(m_pPlayerPos->GetPosition(),m_pCamera->GetDirection());
 }
 
 void CEntityProcess::RenderScene(CRenderManager* _pRM)

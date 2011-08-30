@@ -72,6 +72,8 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity,
   if(_fDensity > 0)
   {
     m_pPhysXActor->CreateBody(_fDensity);
+  }else{
+    m_pPhysXActor->CreateBody(100.0f);
   }
 
   m_pPhysXActor->AddBoxSphape(Vect3f( _fSizeX * .5f, _fSizeY * .5f, _fSizeZ * .5f), 
@@ -80,6 +82,12 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity,
 
 
   CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXActor);
+
+  if(_fDensity == 0)
+  {
+    m_pPhysXActor->SetKinematic(true);
+  }
+
   m_pPhysXActor->SetMat44( m_pObject3D->GetMat44() );
 
   m_vSize = Vect3f(_fSizeX, _fSizeY, _fSizeZ);
@@ -120,6 +128,8 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity, float _fDensity, int _iColl
   if(_fDensity > 0)
   {
     m_pPhysXActor->CreateBody(_fDensity);
+  }else{
+    m_pPhysXActor->CreateBody(100.0f);
   }
 
   m_pPhysXActor->AddBoxSphape(l_pBB->GetDimension() * .5f, 
@@ -129,6 +139,12 @@ bool CComponentPhysXBox::Init(CGameEntity *_pEntity, float _fDensity, int _iColl
   m_vSize = l_pBB->GetDimension();
 
   CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXActor);
+
+  if(_fDensity == 0)
+  {
+    m_pPhysXActor->SetKinematic(true);
+  }
+
   m_pPhysXActor->SetMat44( m_pObject3D->GetMat44() );
   
   SetOk(true);

@@ -39,6 +39,9 @@ public:
   bool              IsRagdollPhysXActor(const string& _szName);
   CPhysxBone*       GetPhysxBoneByName(const string& _szName);
 
+  void              SetContactReportFlags(unsigned int _uiFlags);
+  void              SetContactReportThreshold(float _fThreshold);
+
   void Update();
 
 

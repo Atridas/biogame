@@ -1092,6 +1092,9 @@ ENTITIES
       set_active
       void SetActive(bool _bActive)
       
+      get_position
+      Vect3f GetPosition()
+      
   Class:
     ComponentMirilla
     CComponentMirilla
