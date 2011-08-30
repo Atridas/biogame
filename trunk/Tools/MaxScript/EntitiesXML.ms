@@ -429,3 +429,50 @@ function XMLEntityNavNode _instance &_TagName =
 	)
 	return l_params
 )
+
+--Genera els paràmetres d'un tag XML d'entitat Spawner. Conté:
+-- spawner
+-- spawn_time
+-- max_enemy
+-- active
+function XMLEntitySpawner _instance &_TagName =
+(
+	local l_params = #()
+	local l_ss
+	
+	_TagName = "EnemySpawner"
+	
+	if  (GetUserProp _instance "spawner") != undefined then
+	(
+		l_ss = "" as stringStream
+		format "%" (GetUserProp _instance "spawner") to:l_ss
+		append l_params #("enemy_type", l_ss)
+	)
+	
+	if (GetUserProp _instance "spawn_time") != undefined then
+	(
+		l_ss = "" as stringStream
+		format "%" (GetUserProp _instance "spawn_time") to:l_ss
+		append l_params #("spawn_time", l_ss)
+	)
+	
+	if (GetUserProp _instance "total_enemy") != undefined then
+	(
+		l_ss = "" as stringStream
+		format "%" (GetUserProp _instance "total_enemy") to:l_ss
+		append l_params #("total_enemy", l_ss)
+	)
+	
+	l_ss = "" as stringStream
+	if (GetUserProp _instance "active") != undefined then
+	(
+		format "%" (GetUserProp _instance "active") to:l_ss
+		append l_params #("active", l_ss)
+	)
+	else
+	(
+		append l_params #("active", "false")
+	)
+	
+	return l_params
+)

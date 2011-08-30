@@ -8,6 +8,18 @@ end
 -- surts del trigger
 function triggerDeProvesSortir(_EntityTrigger, _Entity)
   log('sortir ' .. _EntityTrigger:get_name() .. ' amb ' .. _Entity:get_name())
+  
+  local l_spawner = EM:get_entity("EnemySpawner")
+  if l_spawner then
+    local l_SP = l_spawner:get_component(BaseComponent.spawner)
+    if l_SP then
+      l_SP.active = false
+    else
+      log("Error: no es troba el component spawner!")
+    end
+  else
+    log("Error: no es troba l'entitat EnemySpawner!")
+  end
 end
 
 --activar el militar
@@ -23,6 +35,19 @@ function activarEnemic(_trigger, _entity)
   else
     log('Error: no es troba el miner!!!!')
   end
+  
+  local l_spawner = EM:get_entity("EnemySpawner")
+  if l_spawner then
+    local l_SP = l_spawner:get_component(BaseComponent.spawner)
+    if l_SP then
+      l_SP.active = true
+      l_SP:set_enemy_type(ComponentSpawner.enemy_miner)
+    else
+      log("Error: no es troba el component spawner!")
+    end
+  else
+    log("Error: no es troba l'entitat EnemySpawner!")
+  end
 end
 
 --activar l'altre
@@ -37,5 +62,18 @@ function activarMilitar(_trigger, _entity)
     end
   else
     log('Error: no es troba el militar!!!!')
+  end
+  
+  local l_spawner = EM:get_entity("EnemySpawner")
+  if l_spawner then
+    local l_SP = l_spawner:get_component(BaseComponent.spawner)
+    if l_SP then
+      l_SP.active = true
+      l_SP:set_enemy_type(ComponentSpawner.enemy_militar)
+    else
+      log("Error: no es troba el component spawner!")
+    end
+  else
+    log("Error: no es troba l'entitat EnemySpawner!")
   end
 end

@@ -37,6 +37,7 @@ extern "C"
 #include "ComponentShield.h"
 #include "ComponentNavNode.h"
 #include "ComponentEmiter.h"
+#include "ComponentSpawner.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -127,7 +128,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("interactive",          CBaseComponent::ECT_INTERACTIVE),
           value("destroyable",          CBaseComponent::ECT_DESTROYABLE),
           value("nav_node",             CBaseComponent::ECT_NAV_NODE),
-          value("emiter",               CBaseComponent::ECT_EMITER)
+          value("emiter",               CBaseComponent::ECT_EMITER),
+          value("spawner",              CBaseComponent::ECT_SPAWNER)
       ]
       .def("get_type",     &CBaseComponent::GetType)
       .def("get_entity",   &CBaseComponent::GetEntity)
@@ -308,8 +310,10 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("cover_low",           CComponentCover::COVER_LOW),
           value("cover_high",          CComponentCover::COVER_HIGH)
       ]
+
     ,class_<CComponentHighCover, CBaseComponent>("ComponentHighCover")
       .def("get_cover_type",           &CComponentCover::GetCoverType)
+
     ,class_<CComponentLowCover, CBaseComponent>("ComponentLowCover")
       .def("get_cover_type",           &CComponentCover::GetCoverType)
     // ----------------------------------------------------------------------------------------------------
@@ -332,6 +336,18 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("add_to_entity",         &CComponentEmiter::AddToEntity)
       .def("change_core",           &CComponentEmiter::ChangeCore)
       .def("change_volume",         &CComponentEmiter::ChangeVolume)
+
+    // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentSpawner, CBaseComponent>("ComponentSpawner")
+      .enum_("EEnemyType")
+      [
+        value("enemy_militar",         CComponentSpawner::EE_MILITAR),
+        value("enemy_miner",           CComponentSpawner::EE_MINER)
+      ]
+      .def("add_to_entity",            &CComponentSpawner::AddToEntity)
+      .def("set_enemy_type",           &CComponentSpawner::SetEnemyType)
+      .def("get_enemy_type",           &CComponentSpawner::GetEnemyType)
+      .def_readwrite("active",         &CComponentSpawner::m_bActive)
   ];
 }
 

@@ -136,6 +136,9 @@
     <Filter Include="EntitySystem\Components\ComponentEmiter">
       <UniqueIdentifier>{51189221-de1c-4b6a-a261-fa1be5ad108c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentSpawner">
+      <UniqueIdentifier>{1315c314-9b6c-4e34-b81b-94121d4b33bd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -275,6 +278,9 @@
     </ClCompile>
     <ClCompile Include="ComponentEmiter.cpp">
       <Filter>EntitySystem\Components\ComponentEmiter</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentSpawner.cpp">
+      <Filter>EntitySystem\Components\ComponentSpawner</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -424,6 +430,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentEmiter.h">
       <Filter>EntitySystem\Components\ComponentEmiter</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentSpawner.h">
+      <Filter>EntitySystem\Components\ComponentSpawner</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
