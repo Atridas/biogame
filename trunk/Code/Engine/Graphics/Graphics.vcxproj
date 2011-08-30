@@ -106,6 +106,7 @@
     <ClCompile Include="EffectManager.cpp" />
     <ClCompile Include="CoreEmiter.cpp" />
     <ClCompile Include="EmiterInstance.cpp" />
+    <ClCompile Include="EmiterManager.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="FPSCamera.cpp" />
     <ClCompile Include="Frustum.cpp" />
@@ -162,6 +163,7 @@
     <ClInclude Include="include\EffectManager.h" />
     <ClInclude Include="include\CoreEmiter.h" />
     <ClInclude Include="include\EmiterInstance.h" />
+    <ClInclude Include="include\EmiterManager.h" />
     <ClInclude Include="include\EmptyMaterial.h" />
     <ClInclude Include="include\EnvirondmentPropertyDecorator.h" />
     <ClInclude Include="include\EnvironmentTextureDecorator.h" />

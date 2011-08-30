@@ -32,6 +32,7 @@
 #include <PortalManager.h>
 #include <IAManager.h>
 #include <CoreEmiterManager.h>
+#include <EmiterManager.h>
 
 #include "Utils\MemLeaks.h"
 //#include <AnimatedModelManager.h>
@@ -119,6 +120,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pPhysicCollisionReport    = new CPhysXCollisionEntityController();
   m_pPortalManager            = new CPortalManager();
   m_pIAManager                = new CIAManager();
+  m_pEmiterManager            = new CEmiterManager();
 
   m_pEngine                   = _pEngine;
 
@@ -201,6 +203,7 @@ void CCore::Release()
   CHECKED_DELETE(m_pSoundManager);
   CHECKED_DELETE(m_pBillBoardManager);
   CHECKED_DELETE(m_pParticleManager);
+  CHECKED_DELETE(m_pEmiterManager);
   CHECKED_DELETE(m_pCoreEmiterManager);
   CHECKED_DELETE(m_pPhysicsManager);
   CHECKED_DELETE(m_pGUIManager);
@@ -250,7 +253,8 @@ void CCore::Update()
   //m_pParticleManager->Update(l_fElapsedTime, 0);// -------------
 #endif
   m_pRenderableObjectsManager->Update(l_fElapsedTime);// ----
-  
+  m_pEmiterManager->Update(l_fElapsedTime);
+
   m_pEntityManager->UpdatePostAnim(l_fElapsedTime);
   
   m_pEntityManager->PostUpdate(l_fElapsedTime);

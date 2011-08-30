@@ -29,9 +29,9 @@ public:
    * @param _szName Index on es troba el recurs a retornar.
    * @return El recurs.
   **/
-  virtual T * GetResource(const std::string &_szName) 
+  virtual T * GetResource(const std::string &_szName) const
   {
-    TMapResource::iterator l_It = m_Resources.find(_szName);
+    TMapResource::const_iterator l_It = m_Resources.find(_szName);
     if(l_It == m_Resources.end()) 
     {
       return 0;

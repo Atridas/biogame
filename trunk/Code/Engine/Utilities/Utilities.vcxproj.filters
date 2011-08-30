@@ -133,6 +133,9 @@
     <Filter Include="EntitySystem\Components\ComponentCollisionReport">
       <UniqueIdentifier>{6c59f69d-3e4b-485c-9a82-5c7af81b271b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentEmiter">
+      <UniqueIdentifier>{51189221-de1c-4b6a-a261-fa1be5ad108c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -269,6 +272,9 @@
     </ClCompile>
     <ClCompile Include="ComponentCollisionReport.cpp">
       <Filter>EntitySystem\Components\ComponentCollisionReport</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentEmiter.cpp">
+      <Filter>EntitySystem\Components\ComponentEmiter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -415,6 +421,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentCollisionReport.h">
       <Filter>EntitySystem\Components\ComponentCollisionReport</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentEmiter.h">
+      <Filter>EntitySystem\Components\ComponentEmiter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

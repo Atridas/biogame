@@ -1,5 +1,5 @@
 #include <XML\XMLTreeNode.h>
-
+#include "EmiterManager.h"
 
 // Main include
 #include "CoreEmiterManager.h"
@@ -105,6 +105,8 @@ bool CCoreEmiterManager::Reload()
     if(!LoadFile(*l_it, true))
       l_bOk = false;
   }
+
+  CORE->GetEmiterManager()->ResetEmiters();
   return l_bOk; // False si n'hi ha algun de mal carregat. True en altre cas.
 }
 

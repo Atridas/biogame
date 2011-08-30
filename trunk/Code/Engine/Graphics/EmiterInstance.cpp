@@ -23,6 +23,7 @@ bool CEmiterInstance::Init(const string& _szCoreName, const CObject3D& _Position
   m_bAwake = true;
   m_fTimeToAwakeOrSleep = m_pCoreEmiter->GetAwakeTime();
 
+  m_pObjectReference = 0;
   bool l_bIsOk = m_InstancedData.Init(CORE->GetRenderManager(), MAX_PARTICLES_PER_EMITER);
   SetOk(l_bIsOk);
   return l_bIsOk;
@@ -144,15 +145,19 @@ void CEmiterInstance::Update(float _fDeltaTime)
 
 void CEmiterInstance::Render(CRenderManager* _pRM)
 {
-
-
-
   assert(IsOk());
 
   CEffectManager* l_pEM = CORE->GetEffectManager();
   assert(l_pEM && l_pEM->IsOk());
 
-   _pRM->SetTransform(GetMat44());
+  if(m_pObjectReference)
+  {
+    _pRM->SetTransform(m_pObjectReference->GetMat44());
+  }
+  else
+  {
+    _pRM->SetTransform(GetMat44());
+  }
   
   // renderitzem -----------------------------------------------------------------------------------------------------------------
 
@@ -177,7 +182,14 @@ void CEmiterInstance::Render(CRenderManager* _pRM)
 void CEmiterInstance::DebugRender(CRenderManager* _pRM)
 {
   assert(IsOk());
-  _pRM->SetTransform(GetMat44());
+  if(m_pObjectReference)
+  {
+    _pRM->SetTransform(m_pObjectReference->GetMat44());
+  }
+  else
+  {
+    _pRM->SetTransform(GetMat44());
+  }
   _pRM->DrawCube(m_vMaxVolume - m_vMinVolume, colRED);
   
 }
