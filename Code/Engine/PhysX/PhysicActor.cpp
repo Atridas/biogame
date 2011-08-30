@@ -105,11 +105,42 @@ void CPhysicActor::CreateActor(NxActor* actor)
 	DeInit();
 }
 
+void CPhysicActor::SetKinematic(bool _bValue)
+{
+  if(m_pPhXActor)
+  {
+    if(_bValue)
+    {
+      m_pPhXActor->raiseBodyFlag(NX_BF_KINEMATIC);
+    }
+    else
+    {
+      m_pPhXActor->clearBodyFlag(NX_BF_KINEMATIC);
+    }
+  }
+}
+
 void CPhysicActor::SetActorSolverIterationCount(int _iCount)
 {
   if(m_pPhXActor)
   {
     m_pPhXActor->setSolverIterationCount(_iCount);
+  }
+}
+
+void CPhysicActor::SetContactReportFlags(unsigned int _uiFlags)
+{
+  if(m_pPhXActor)
+  {
+    m_pPhXActor->setContactReportFlags(_uiFlags);
+  }
+}
+
+void CPhysicActor::SetContactReportThreshold(float _fThreshold)
+{
+  if(m_pPhXActor)
+  {
+    m_pPhXActor->setContactReportThreshold(_fThreshold);
   }
 }
 
@@ -348,12 +379,12 @@ void CPhysicActor::Activate(bool _bActivate)
   {
     if(_bActivate)
     {
-      m_pPhXActor->clearBodyFlag(NX_BF_KINEMATIC);
+      //m_pPhXActor->clearBodyFlag(NX_BF_KINEMATIC);
       m_pPhXActor->clearActorFlag(NX_AF_DISABLE_COLLISION);
     }
     else
     {
-      m_pPhXActor->raiseBodyFlag(NX_BF_KINEMATIC);
+      //m_pPhXActor->raiseBodyFlag(NX_BF_KINEMATIC);
       m_pPhXActor->raiseActorFlag(NX_AF_DISABLE_COLLISION);
     }
   }

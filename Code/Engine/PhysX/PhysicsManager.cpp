@@ -416,6 +416,14 @@ void CPhysicsManager::SetTriggerReport (CPhysicTriggerReport* report)
 	m_pScene->setUserTriggerReport(report);
 }
 
+void CPhysicsManager::SetCollisionReport(CPhysicCollisionReport* report)
+{
+  assert(m_pScene);
+	assert(report);
+  NxUserContactReport* nxContactReport = (NxUserContactReport*) report;
+  m_pScene->setUserContactReport(nxContactReport);
+}
+
 bool CPhysicsManager::AddPhysicActor (CPhysicActor* actor)
 {
 	assert(actor != NULL);

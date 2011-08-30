@@ -9,6 +9,7 @@
 #include "Component3rdPSCamera.h"
 #include "ComponentPhysXBox.h"
 #include "ComponentPhysXMesh.h"
+#include "ComponentCollisionReport.h"
 #include "ComponentRenderableObject.h"
 #include "ComponentTrigger.h"
 #include "ComponentLowCover.h"
@@ -563,6 +564,8 @@ CGameEntity* CEntityManager::InitMiner(const string& _szPlayerName, const Vect3f
 
   l_pMiner->GetComponent<CComponentRenderableObject>()->m_fHeightAdjustment = -1.1f;
 
+  CComponentCollisionReport::AddToEntity(l_pMiner,"","","","enemy_on_start_colision","","",0.1f);
+
   return l_pMiner;
 }
 
@@ -573,6 +576,8 @@ CGameEntity* CEntityManager::InitMilitar(const string& _szPlayerName, const Vect
                     _szEntityName, _bActive);
 
   l_pMilitar->GetComponent<CComponentRenderableObject>()->m_fHeightAdjustment = -1.0f;
+
+  CComponentCollisionReport::AddToEntity(l_pMilitar,"","","","enemy_on_start_colision","","",0.1f);
 
   return l_pMilitar;
 }

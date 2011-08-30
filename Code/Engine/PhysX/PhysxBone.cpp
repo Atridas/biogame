@@ -68,7 +68,7 @@ Mat44f CPhysxBone::GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone)
 
   Mat33f l_Rotation = Mat33f( l_RotationMatrix.dxdx   ,l_RotationMatrix.dydx  ,l_RotationMatrix.dzdx,
                               l_RotationMatrix.dxdy   ,l_RotationMatrix.dydy  ,l_RotationMatrix.dzdy,
-                              l_RotationMatrix.dxdz   ,l_RotationMatrix.dydz  ,l_RotationMatrix.dzdz);
+                              l_RotationMatrix.dxdz   ,l_RotationMatrix.dydz  ,l_RotationMatrix.dzdz).Get33RotationNormalized();
 
   float l_fAngleX = FLOAT_PI_VALUE - l_Rotation.GetAngleX();
   float l_fAngleY = FLOAT_PI_VALUE - l_Rotation.GetAngleY();
@@ -144,7 +144,7 @@ bool CPhysxBone::AddSphereActor(CXMLTreeNode _XMLObjects, CGameEntity* _pEntity)
   l_pActor->CreateBody(l_fDensity,1.0f);
 
   l_pPM->AddPhysicActor(l_pActor);
-  l_pActor->SetActorSolverIterationCount(55);
+  l_pActor->SetActorSolverIterationCount(75);
   l_pActor->SetMat44(m_vMatAnimatedModel*l_vMatActor);
 
   //l_pActor->GetPhXActor()->putToSleep();
@@ -232,7 +232,8 @@ void CPhysxBone::UpdatePhysxFromCal3d(const Mat44f& _mTransform)
     //Mat44f l_vMatActor;
     //l_vMatActor = GetBoneLeftHandedAbsoluteTransformation(m_pCalBone);
     //m_pActor->SetMat44(m_vMatAnimatedModel*l_vMatActor);
-    m_pActor->SetMat44(_mTransform*GetBoneLeftHandedAbsoluteTransformation(m_pCalBone));
+    //m_pActor->SetMat44(_mTransform*GetBoneLeftHandedAbsoluteTransformation(m_pCalBone));
+    m_pActor->MoveGlobalPoseMat44(_mTransform*GetBoneLeftHandedAbsoluteTransformation(m_pCalBone));
   }
 }
 

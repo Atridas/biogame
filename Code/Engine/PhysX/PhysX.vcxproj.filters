@@ -76,6 +76,9 @@
     <ClCompile Include="PhysxGrenade.cpp">
       <Filter>PhysXGrenades</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicCollisionReport.cpp">
+      <Filter>Actor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\PhysicSphericalJoint.h">
@@ -123,6 +126,9 @@
     </ClInclude>
     <ClInclude Include="include\PhysxGrenade.h">
       <Filter>PhysXGrenades</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PhysicCollisionReport.h">
+      <Filter>Actor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

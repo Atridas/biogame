@@ -25,6 +25,7 @@ public:
   void SetActive(bool _bActive);
   CPhysxBone* GetBone(const string& _szBoneName);
   CPhysxSkeleton* GetRagdoll() const {return m_pRagdoll;};
+  Vect3f GetPosition();
   void PostUpdate(float _fDeltaTime);
 
 protected:

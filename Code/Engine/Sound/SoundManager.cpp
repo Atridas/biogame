@@ -198,7 +198,27 @@ void CSoundManager::PlaySample(const string& _szSample)
 
 void CSoundManager::PlaySample3D(const string& _szSample, Vect3f _vPosition)
 {
+  SSoundChannel* l_pSample = GetSample(_szSample);
 
+  if(l_pSample)
+  {
+    HCHANNEL l_Channel = BASS_SampleGetChannel(l_pSample->m_iHandle,false);
+
+    if(l_Channel)
+    {
+      BASS_ChannelSetAttribute(l_Channel, BASS_ATTRIB_VOL, l_pSample->m_fVolume);
+
+      BASS_3DVECTOR l_pos;
+
+      l_pos.x = _vPosition.x;
+      l_pos.y = _vPosition.y;
+      l_pos.z = _vPosition.z;
+
+      BASS_ChannelSet3DPosition(l_Channel, &l_pos, 0, 0);
+
+      BASS_ChannelPlay(l_Channel,false);
+    }
+  }
 }
 
 void CSoundManager::ChangeMusic(const string& _szMusic, unsigned long _ulFadeOutTimeMs, bool _bRestart)

@@ -33,6 +33,7 @@ class CSoundManager;
 class CEngine;
 class CEntityManager;
 class CPhysicTriggerReport;
+class CPhysicCollisionReport;
 class CPortalManager;
 class CIAManager;
 class CCoreEmiterManager;
@@ -244,6 +245,8 @@ private:
   CEntityManager*             m_pEntityManager;
 
   CPhysicTriggerReport*       m_pPhysicTriggerReport;
+
+  CPhysicCollisionReport*     m_pPhysicCollisionReport;
 
   CPortalManager*             m_pPortalManager;
 

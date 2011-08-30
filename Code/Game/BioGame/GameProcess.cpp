@@ -13,7 +13,7 @@
 #include "BillBoardManager.h"
 #include "IAManager.h"
 #include "PortalManager.h"
-
+#include "SoundManager.h"
 #include "Core.h"
 
 void CGameProcess::Update(float _fElapsedTime)
@@ -33,7 +33,8 @@ void CGameProcess::Update(float _fElapsedTime)
   CORE->GetParticleManager()->Update(_fElapsedTime,m_pCamera);
   CORE->GetBillBoardManager()->Update(_fElapsedTime,m_pCamera);
 
-
+  CObject3D* m_pPlayerPos = CORE->GetEntityManager()->GetEntity("Player")->GetComponent<CComponentObject3D>(CBaseComponent::ECT_OBJECT_3D);
+  CORE->GetSoundManager()->UpdateSound3DSystem(m_pPlayerPos->GetPosition(),m_pCamera->GetDirection());
 }
 
 void CGameProcess::RenderScene(CRenderManager* _pRM)

@@ -501,7 +501,7 @@ void CPhysxSkeleton::WakeUpPhysxBones()
       //l_pActor->GetPhXActor()->wakeUp();
       
       l_pActor->GetPhXActor()->clearBodyFlag(NX_BF_KINEMATIC);
-      l_pActor->GetPhXActor()->clearActorFlag(NX_AF_DISABLE_COLLISION);
+      //l_pActor->GetPhXActor()->clearActorFlag(NX_AF_DISABLE_COLLISION);
     }
   }
 };
@@ -518,7 +518,7 @@ void CPhysxSkeleton::SleepPhysxBones()
       //l_pActor->GetPhXActor()->raiseBodyFlag(NX_BF_DISABLE_GRAVITY);
       
       l_pActor->GetPhXActor()->raiseBodyFlag(NX_BF_KINEMATIC);
-      l_pActor->GetPhXActor()->raiseActorFlag(NX_AF_DISABLE_COLLISION);
+      //l_pActor->GetPhXActor()->raiseActorFlag(NX_AF_DISABLE_COLLISION);
     }
   }
 };
@@ -540,6 +540,32 @@ bool CPhysxSkeleton::IsRagdollPhysXActor(const string& _szName)
   }
 
   return false;
+}
+
+void CPhysxSkeleton::SetContactReportFlags(unsigned int _uiFlags)
+{
+  for(size_t i=0;i<m_vBones.size();++i)
+  {
+    CPhysicActor* l_pActor = m_vBones[i]->GetPhysxActor();
+
+    if (l_pActor != 0)
+    {
+      l_pActor->SetContactReportFlags(_uiFlags);
+    }
+  }
+}
+
+void CPhysxSkeleton::SetContactReportThreshold(float _fThreshold)
+{
+  for(size_t i=0;i<m_vBones.size();++i)
+  {
+    CPhysicActor* l_pActor = m_vBones[i]->GetPhysxActor();
+
+    if (l_pActor != 0)
+    {
+      l_pActor->SetContactReportThreshold(_fThreshold);
+    }
+  }
 }
 
 CBoundingBox CPhysxSkeleton::ComputeBoundingBox()

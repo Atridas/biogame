@@ -292,6 +292,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponentRagdoll, CBaseComponent>("ComponentRagdoll")
       .def("add_to_entity",            &CComponentRagdoll::AddToEntity)
       .def("set_active",               &CComponentRagdoll::SetActive)
+      .def("get_position",             &CComponentRagdoll::GetPosition)
 
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentMirilla, CBaseComponent>("ComponentMirilla")
