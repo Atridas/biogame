@@ -37,7 +37,8 @@ public:
       CNamed(""),
       m_fEmitRate1(0.f), m_fEmitRate2(0.f),
       m_fLife1(0.f), m_fLife2(0.f),
-      m_bBucle(false),
+      m_fAwakeTime1(1.f), m_fAwakeTime2(1.f),
+      m_fSleepTime1(0.f), m_fSleepTime2(0.f),
       m_fStartingAngle1(0.f), m_fStartingAngle2(0.f),
       m_vStartingSpeed1(0.f), m_vStartingSpeed2(0.f),
       m_fStartingAngularSpeed1(0.f), m_fStartingAngularSpeed2(0.f),
@@ -57,7 +58,8 @@ public:
   
   float GetEmitRate() const;
   float GetLife() const;
-  bool  IsBucle() const { return m_bBucle; };
+  float GetAwakeTime() const;
+  float GetSleepTime() const;
   
   float  GetStartingAngle() const;
 
@@ -90,7 +92,9 @@ private:
   
   float m_fEmitRate1, m_fEmitRate2;
   float m_fLife1    , m_fLife2;
-  bool  m_bBucle;
+  
+  float m_fAwakeTime1, m_fAwakeTime2;
+  float m_fSleepTime1, m_fSleepTime2;
   
   float m_fStartingAngle1, m_fStartingAngle2;
 

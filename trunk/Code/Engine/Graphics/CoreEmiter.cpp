@@ -21,9 +21,16 @@ bool CCoreEmiter::Init(CXMLTreeNode& _xmlEmiter)
   m_fLife1 = _xmlEmiter.GetFloatProperty("life1", 0, true);
   m_fLife2 = _xmlEmiter.GetFloatProperty("life2", 0, true);
   LOGGER->AddNewLog(ELL_INFORMATION, "Life: %f - %f", m_fLife1, m_fLife2);
+  
+  m_fAwakeTime1 = _xmlEmiter.GetFloatProperty("awake_time1", 1, false);
+  m_fAwakeTime2 = _xmlEmiter.GetFloatProperty("awake_time2", m_fAwakeTime2, false);
+  LOGGER->AddNewLog(ELL_INFORMATION, "Awake Time: %f - %f", m_fAwakeTime1, m_fAwakeTime2);
+  
+  m_fSleepTime1 = _xmlEmiter.GetFloatProperty("sleep_time1", 0, false);
+  m_fSleepTime2 = _xmlEmiter.GetFloatProperty("sleep_time2", m_fSleepTime2, false);
+  LOGGER->AddNewLog(ELL_INFORMATION, "Sleep Time: %f - %f", m_fSleepTime1, m_fSleepTime2);
 
-  m_bBucle = _xmlEmiter.GetBoolProperty("is_bucle", false, true);
-  LOGGER->AddNewLog(ELL_INFORMATION, "Bucle (%s)", (m_bBucle)? "true" : "false");
+
   
   m_fStartingAngle1 = _xmlEmiter.GetFloatProperty("starting_angle1", 0, true);
   m_fStartingAngle2 = _xmlEmiter.GetFloatProperty("starting_angle2", 0, true);
@@ -189,8 +196,13 @@ void CCoreEmiter::Init()
   
   m_fLife1 = 0;
   m_fLife2 = 0;
+  
+  m_fAwakeTime1 = 1;
+  m_fAwakeTime2 = 1;
+  
+  m_fSleepTime1 = 0;
+  m_fSleepTime2 = 0;
 
-  m_bBucle = false;
 
   m_fStartingAngle1 = 0;
   m_fStartingAngle2 = 0;
@@ -248,6 +260,20 @@ float CCoreEmiter::GetLife() const
   float l_fRnd = Random01();
   float l_fLife = SIMPLE_INTERPOLATION(m_fLife1, m_fLife2, l_fRnd);
   return l_fLife;
+}
+
+float CCoreEmiter::GetAwakeTime() const
+{
+  float l_fRnd = Random01();
+  float l_fAwakeTime = SIMPLE_INTERPOLATION(m_fAwakeTime1, m_fAwakeTime2, l_fRnd);
+  return l_fAwakeTime;
+}
+
+float CCoreEmiter::GetSleepTime() const
+{
+  float l_fRnd = Random01();
+  float l_fSleepTime = SIMPLE_INTERPOLATION(m_fSleepTime1, m_fSleepTime2, l_fRnd);
+  return l_fSleepTime;
 }
 
 float CCoreEmiter::GetStartingAngle() const

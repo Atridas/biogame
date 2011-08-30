@@ -75,8 +75,9 @@ bool CParticleViewerProcess::Init()
     m_szEmiter = *l_it;
     m_pEmiters[0]->Init(m_szEmiter, CObject3D(Vect3f(0, 0, 0),0,0), Vect3f(1, 1, 1));
     m_pEmiters[1]->Init(m_szEmiter, CObject3D(Vect3f(5, 0, 0),0,0), Vect3f(.1f, .1f, .1f));
-    m_pEmiters[2]->Init(m_szEmiter, CObject3D(Vect3f(10, 0, 10),0,0), Vect3f(10, 10, 10));
+    m_pEmiters[2]->Init(m_szEmiter, CObject3D(Vect3f(-5, 0, 5),0,0), Vect3f(.5f, .5f, .5f));
     m_pEmiters[3]->Init(m_szEmiter, CObject3D(Vect3f(10, 0, -10),0,0), Vect3f(10, 1, 10));
+    m_pEmiters[4]->Init(m_szEmiter, CObject3D(Vect3f(10, 0, 10),0,0), Vect3f(10, 10, 10));
   }
   //m_pEmiter->Init("bubble", CObject3D(Vect3f(-14.6275f, 0.833153f, -4.08485f),0,0), Vect3f(0.391403f, 0.702762f, 0.194437f));
 

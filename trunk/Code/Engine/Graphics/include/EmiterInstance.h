@@ -24,9 +24,11 @@ public:
       m_pCoreEmiter(0),
       m_RecyclingParticles(MAX_PARTICLES_PER_EMITER),
       m_fTimeToNextParticle(0),
+      m_fTimeToAwakeOrSleep(0),
       m_iActiveParticles(0),
       m_vMinVolume(-.5f), m_vMaxVolume(.5f),
-      m_fVolume(1)
+      m_fVolume(1),
+      m_bAwake(true)
       {};
   virtual ~CEmiterInstance() {Done();};
 
@@ -53,6 +55,9 @@ private:
   float        m_fVolume;
 
   float m_fTimeToNextParticle;
+
+  float m_fTimeToAwakeOrSleep;
+  bool  m_bAwake;
 
   int m_iActiveParticles; //nombre de partícules actives
   CRecyclingArray<CParticleInstance>  m_RecyclingParticles;                  //array de partícules en si

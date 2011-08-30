@@ -95,7 +95,7 @@ bool CParticleInstance::Update(float _fDeltaTime)
         m_fNextColorTime = m_pCoreEmiter->GetColorControlTime(m_iCurrentColor + 1);
 
 
-        float l_fInterpolationFactor = (m_fLivedTime - m_fLastColorTime) / (m_fNextColorTime / m_fLastColorTime);
+        float l_fInterpolationFactor = (m_fLivedTime - m_fLastColorTime) / (m_fNextColorTime - m_fLastColorTime);
         m_Color = SIMPLE_INTERPOLATION(m_LastColor, m_NextColor, l_fInterpolationFactor);
       }
       else
@@ -106,7 +106,7 @@ bool CParticleInstance::Update(float _fDeltaTime)
     }
     else
     {
-      float l_fInterpolationFactor = (m_fLivedTime - m_fLastColorTime) / (m_fNextColorTime / m_fLastColorTime);
+      float l_fInterpolationFactor = (m_fLivedTime - m_fLastColorTime) / (m_fNextColorTime - m_fLastColorTime);
       m_Color = SIMPLE_INTERPOLATION(m_LastColor, m_NextColor, l_fInterpolationFactor);
     }
   }
@@ -132,7 +132,7 @@ bool CParticleInstance::Update(float _fDeltaTime)
         m_fNextSizeTime = m_pCoreEmiter->GetSizeControlTime(m_iCurrentSize + 1);
 
 
-        float l_fInterpolationFactor = (m_fLivedTime - m_fLastSizeTime) / (m_fNextSizeTime / m_fLastSizeTime);
+        float l_fInterpolationFactor = (m_fLivedTime - m_fLastSizeTime) / (m_fNextSizeTime - m_fLastSizeTime);
         m_fSize = SIMPLE_INTERPOLATION(m_fLastSize, m_fNextSize, l_fInterpolationFactor);
       }
       else
@@ -143,7 +143,7 @@ bool CParticleInstance::Update(float _fDeltaTime)
     }
     else
     {
-      float l_fInterpolationFactor = (m_fLivedTime - m_fLastSizeTime) / (m_fNextSizeTime / m_fLastSizeTime);
+      float l_fInterpolationFactor = (m_fLivedTime - m_fLastSizeTime) / (m_fNextSizeTime - m_fLastSizeTime);
       m_fSize = SIMPLE_INTERPOLATION(m_fLastSize, m_fNextSize, l_fInterpolationFactor);
     }
   }

@@ -20,6 +20,9 @@ bool CEmiterInstance::Init(const string& _szCoreName, const CObject3D& _Position
   m_iActiveParticles = 0;
   memset(m_Particles, 0, sizeof(m_Particles));
 
+  m_bAwake = true;
+  m_fTimeToAwakeOrSleep = m_pCoreEmiter->GetAwakeTime();
+
   bool l_bIsOk = m_InstancedData.Init(CORE->GetRenderManager(), MAX_PARTICLES_PER_EMITER);
   SetOk(l_bIsOk);
   return l_bIsOk;
@@ -39,6 +42,9 @@ void CEmiterInstance::Reset( const CObject3D& _Position, const Vect3f& _vVolume 
   m_fTimeToNextParticle = 1.f / (m_pCoreEmiter->GetEmitRate() * m_fVolume);
   m_iActiveParticles = 0;
   memset(m_Particles, 0, sizeof(m_Particles));
+
+  m_bAwake = true;
+  m_fTimeToAwakeOrSleep = m_pCoreEmiter->GetAwakeTime();
 }
 
 void CEmiterInstance::Update(float _fDeltaTime)
@@ -69,16 +75,30 @@ void CEmiterInstance::Update(float _fDeltaTime)
         --i;
     }
   }
-
+  
+  m_fTimeToAwakeOrSleep -= _fDeltaTime;
+  while(m_fTimeToAwakeOrSleep <= 0)
+  {
+    m_bAwake = !m_bAwake;
+    if(m_bAwake)
+    {
+      m_fTimeToAwakeOrSleep += m_pCoreEmiter->GetAwakeTime();
+    }
+    else
+    {
+      m_fTimeToAwakeOrSleep += m_pCoreEmiter->GetSleepTime();
+    }
+  }
 
   // si ha passat prou temps com per crear una partícula nova
   while(_fDeltaTime > m_fTimeToNextParticle)
   {
 
     _fDeltaTime -= m_fTimeToNextParticle;
+
     m_fTimeToNextParticle = 1.f / (m_pCoreEmiter->GetEmitRate() * m_fVolume); //carreguem el temps fins la següent partícula
 
-    if(m_iActiveParticles < MAX_PARTICLES_PER_EMITER) //comprovem que el buffer no hagi quedat ple
+    if(m_bAwake && m_iActiveParticles < MAX_PARTICLES_PER_EMITER) //comprovem que el buffer no hagi quedat ple
     {
       int l_iParticle = m_RecyclingParticles.NewIndex(); //agafem una partícula del buffer
       CParticleInstance* l_pParticle = m_RecyclingParticles.GetAt(l_iParticle);
