@@ -710,6 +710,9 @@ ENTITIES
       nav_node
       CBaseComponent::ECT_NAV_NODE
       
+      emiter
+      CBaseComponent::ECT_EMITER
+      
     Methods:
       get_type
       Type GetType()
@@ -1168,6 +1171,20 @@ ENTITIES
       
       get_graph_node_index
       int GetGraphNodeIndex() const
+      
+  Class:
+    ComponentEmiter
+    CComponentEmiter
+    
+    Methods:
+      add_to_entity
+      static ComponentEmiter* AddToEntity(CGameEntity* _pEntity, const string& _szCore, const Vect3f& _vVolume)
+      
+      change_core
+      void ChangeCore(const string& _szCore)
+      
+      change_volume
+      void ChangeVolume(const Vect3f& _vVolume)
 
 IA
   Globals:

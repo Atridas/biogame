@@ -32,6 +32,7 @@
 #include "EmiterInstance.h"
 #include "CoreEmiterManager.h"
 #include "EffectManager.h"
+#include "EmiterManager.h"
 
 #include "PhysicActor.h"
 #include <PhysicsManager.h>
@@ -63,21 +64,27 @@ bool CParticleViewerProcess::Init()
   m_pCamera = m_pPlayerEntity->GetComponent<CComponent3rdPSCamera>()->GetCamera();
 
   /// -----------------------------------------------------------------------------------------------------------------------
-  for(int i = 0; i < NUM_EMISORS; ++i)
-    m_pEmiters[i]  = new CEmiterInstance();
+  //for(int i = 0; i < NUM_EMISORS; ++i)
+  //  m_pEmiters[i]  = new CEmiterInstance();
 
   CCoreEmiterManager* l_pCoreEmiterManager = CORE->GetCoreEmiterManager();
   const set<string>& l_szEmiterNames = l_pCoreEmiterManager->GetCoreNames();
   set<string>::const_iterator l_it = l_szEmiterNames.begin();
   if(l_it != l_szEmiterNames.end())
   {
+    CEmiterManager* l_pEM = CORE->GetEmiterManager();
     //
     m_szEmiter = *l_it;
-    m_pEmiters[0]->Init(m_szEmiter, CObject3D(Vect3f(0, 0, 0),0,0), Vect3f(1, 1, 1));
-    m_pEmiters[1]->Init(m_szEmiter, CObject3D(Vect3f(5, 0, 0),0,0), Vect3f(.1f, .1f, .1f));
-    m_pEmiters[2]->Init(m_szEmiter, CObject3D(Vect3f(-5, 0, 5),0,0), Vect3f(.5f, .5f, .5f));
-    m_pEmiters[3]->Init(m_szEmiter, CObject3D(Vect3f(10, 0, -10),0,0), Vect3f(10, 1, 10));
-    m_pEmiters[4]->Init(m_szEmiter, CObject3D(Vect3f(10, 0, 10),0,0), Vect3f(10, 10, 10));
+    m_pEmiters[0] = l_pEM->CreateEmiter("emiter 1", m_szEmiter, CObject3D(Vect3f(0, 0, 0),0,0), Vect3f(1, 1, 1));
+    m_pEmiters[1] = l_pEM->CreateEmiter("emiter 2", m_szEmiter, CObject3D(Vect3f(5, 0, 0),0,0), Vect3f(.1f, .1f, .1f));
+    m_pEmiters[2] = l_pEM->CreateEmiter("emiter 3", m_szEmiter, CObject3D(Vect3f(-5, 0, 5),0,0), Vect3f(.5f, .5f, .5f));
+    m_pEmiters[3] = l_pEM->CreateEmiter("emiter 4", m_szEmiter, CObject3D(Vect3f(10, 0, -10),0,0), Vect3f(10, 1, 10));
+    m_pEmiters[4] = l_pEM->CreateEmiter("emiter 5", m_szEmiter, CObject3D(Vect3f(10, 0, 10),0,0), Vect3f(10, 10, 10));
+    //m_pEmiters[0]->Init(m_szEmiter, CObject3D(Vect3f(0, 0, 0),0,0), Vect3f(1, 1, 1));
+    //m_pEmiters[1]->Init(m_szEmiter, CObject3D(Vect3f(5, 0, 0),0,0), Vect3f(.1f, .1f, .1f));
+    //m_pEmiters[2]->Init(m_szEmiter, CObject3D(Vect3f(-5, 0, 5),0,0), Vect3f(.5f, .5f, .5f));
+    //m_pEmiters[3]->Init(m_szEmiter, CObject3D(Vect3f(10, 0, -10),0,0), Vect3f(10, 1, 10));
+    //m_pEmiters[4]->Init(m_szEmiter, CObject3D(Vect3f(10, 0, 10),0,0), Vect3f(10, 10, 10));
   }
   //m_pEmiter->Init("bubble", CObject3D(Vect3f(-14.6275f, 0.833153f, -4.08485f),0,0), Vect3f(0.391403f, 0.702762f, 0.194437f));
 
@@ -91,16 +98,16 @@ void CParticleViewerProcess::Release()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"CEntityProcess::Release");
 
-  for(int i = 0; i < NUM_EMISORS; ++i)
-  {
-    CHECKED_DELETE( m_pEmiters[i] );
-  }
+  //for(int i = 0; i < NUM_EMISORS; ++i)
+  //{
+  //  CHECKED_DELETE( m_pEmiters[i] );
+  //}
 }
 
 void CParticleViewerProcess::Update(float _fElapsedTime)
 {
-  for(int i = 0; i < NUM_EMISORS; ++i)
-    m_pEmiters[i]->Update(_fElapsedTime);
+  //for(int i = 0; i < NUM_EMISORS; ++i)
+  //  m_pEmiters[i]->Update(_fElapsedTime);
 }
 
 void CParticleViewerProcess::RenderScene(CRenderManager* _pRM)
@@ -127,25 +134,7 @@ void CParticleViewerProcess::RenderScene(CRenderManager* _pRM)
 
   
   //----------------------------------------------------------------------------------------
-  LPDIRECT3DDEVICE9 l_pd3dDevice = _pRM->GetDevice();
-
-  CEffectManager* l_pEM = CORE->GetEffectManager();
-
-  assert(l_pEM && l_pEM->IsOk());
-  CEffect* l_pEffect = l_pEM->GetEffect("Particle");
-  CEffect* l_pPrevEffect = l_pEM->GetForcedStaticMeshEffect();
-  if(!l_pPrevEffect)
-  {
-    l_pEM->SetForcedStaticMeshEffect(l_pEffect);
-
-
-    for(int i = 0; i < NUM_EMISORS; ++i)
-      m_pEmiters[i]->Render(_pRM);
-  
-    l_pd3dDevice->SetStreamSourceFreq(0, 1);
-    l_pd3dDevice->SetStreamSourceFreq(1, 1);
-    l_pEM->SetForcedStaticMeshEffect(0);
-  }
+  CORE->GetEmiterManager()->Render(_pRM);
   //----------------------------------------------------------------------------------------
 }
 
@@ -169,8 +158,7 @@ void CParticleViewerProcess::RenderINFO(CRenderManager* _pRM)
     _pRM->DrawFrustum(&l_Frustum, colBLACK);
 
   }
-  for(int i = 0; i < NUM_EMISORS; ++i)
-    m_pEmiters[i]->DebugRender(_pRM);
+  CORE->GetEmiterManager()->DebugRender(_pRM);
 
 
 }
@@ -188,8 +176,6 @@ bool CParticleViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _f
   if(strcmp("ReloadParticles",_pcAction) == 0)
   {
     CORE->GetCoreEmiterManager()->Reload();
-    for(int i = 0; i < NUM_EMISORS; ++i)
-      m_pEmiters[i]->Reset();
   }
   return false;
 }

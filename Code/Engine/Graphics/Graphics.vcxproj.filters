@@ -217,20 +217,23 @@
     <Filter Include="Materials\MaterialDecorators\PropertyDecorators\SpriteDecorator">
       <UniqueIdentifier>{070271a6-87d3-4241-94bd-d03f611db3ce}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ParticleNew">
+    <Filter Include="Emiters">
       <UniqueIdentifier>{e0ca5353-8222-49a9-a58c-8c9cba375613}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ParticleNew\CoreEmiter">
+    <Filter Include="Emiters\CoreEmiter">
       <UniqueIdentifier>{be4f82ed-f0b4-4811-8fbd-c79efb934255}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ParticleNew\CoreEmiterManager">
+    <Filter Include="Emiters\CoreEmiterManager">
       <UniqueIdentifier>{217447cb-eb19-453a-b171-b2c7fa7c1011}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ParticleNew\EmiterInstance">
+    <Filter Include="Emiters\EmiterInstance">
       <UniqueIdentifier>{06a128c0-a525-4bec-9373-f434fd527df8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ParticleNew\ParticleInstance">
+    <Filter Include="Emiters\ParticleInstance">
       <UniqueIdentifier>{dce80815-01d3-4cc0-8083-d8c62b3323af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Emiters\EmiterManager">
+      <UniqueIdentifier>{2bf44c1c-1497-4a33-8a70-f8b8b2eeeaa3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -376,16 +379,19 @@
       <Filter>BillBoard</Filter>
     </ClCompile>
     <ClCompile Include="CoreEmiter.cpp">
-      <Filter>ParticleNew\CoreEmiter</Filter>
+      <Filter>Emiters\CoreEmiter</Filter>
     </ClCompile>
     <ClCompile Include="CoreEmiterManager.cpp">
-      <Filter>ParticleNew\CoreEmiterManager</Filter>
+      <Filter>Emiters\CoreEmiterManager</Filter>
     </ClCompile>
     <ClCompile Include="EmiterInstance.cpp">
-      <Filter>ParticleNew\EmiterInstance</Filter>
+      <Filter>Emiters\EmiterInstance</Filter>
     </ClCompile>
     <ClCompile Include="ParticleInstance.cpp">
-      <Filter>ParticleNew\ParticleInstance</Filter>
+      <Filter>Emiters\ParticleInstance</Filter>
+    </ClCompile>
+    <ClCompile Include="EmiterManager.cpp">
+      <Filter>Emiters\EmiterManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -594,19 +600,22 @@
       <Filter>BillBoard</Filter>
     </ClInclude>
     <ClInclude Include="include\CoreEmiter.h">
-      <Filter>ParticleNew\CoreEmiter</Filter>
+      <Filter>Emiters\CoreEmiter</Filter>
     </ClInclude>
     <ClInclude Include="include\CoreEmiterManager.h">
-      <Filter>ParticleNew\CoreEmiterManager</Filter>
+      <Filter>Emiters\CoreEmiterManager</Filter>
     </ClInclude>
     <ClInclude Include="include\EmiterInstance.h">
-      <Filter>ParticleNew\EmiterInstance</Filter>
+      <Filter>Emiters\EmiterInstance</Filter>
     </ClInclude>
     <ClInclude Include="include\ParticleInstance.h">
-      <Filter>ParticleNew\ParticleInstance</Filter>
+      <Filter>Emiters\ParticleInstance</Filter>
     </ClInclude>
     <ClInclude Include="include\ParticleConstants.h">
-      <Filter>ParticleNew</Filter>
+      <Filter>Emiters</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EmiterManager.h">
+      <Filter>Emiters\EmiterManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -36,6 +36,7 @@ extern "C"
 #include "ComponentDoor.h"
 #include "ComponentShield.h"
 #include "ComponentNavNode.h"
+#include "ComponentEmiter.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -125,7 +126,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("shield",               CBaseComponent::ECT_SHIELD),
           value("interactive",          CBaseComponent::ECT_INTERACTIVE),
           value("destroyable",          CBaseComponent::ECT_DESTROYABLE),
-          value("nav_node",             CBaseComponent::ECT_NAV_NODE)
+          value("nav_node",             CBaseComponent::ECT_NAV_NODE),
+          value("emiter",               CBaseComponent::ECT_EMITER)
       ]
       .def("get_type",     &CBaseComponent::GetType)
       .def("get_entity",   &CBaseComponent::GetEntity)
@@ -310,6 +312,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("get_cover_type",           &CComponentCover::GetCoverType)
     ,class_<CComponentLowCover, CBaseComponent>("ComponentLowCover")
       .def("get_cover_type",           &CComponentCover::GetCoverType)
+    // ----------------------------------------------------------------------------------------------------
+
     ,class_<CComponentDoor, CBaseComponent>("ComponentDoor")
       .def("add_to_entity",            &CComponentDoor::AddToEntity)
       .def("is_open",                  &CComponentDoor::IsOpen)
@@ -317,9 +321,17 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("close",                    &CComponentDoor::Close)
       .def("block",                    &CComponentDoor::Block)
       .def_readwrite("time",           &CComponentDoor::m_fTime)
+    // ----------------------------------------------------------------------------------------------------
+
     ,class_<CComponentNavNode, CBaseComponent>("ComponentNavNode")
       .def("add_to_entity",            &CComponentNavNode::AddToEntity)
       .def("get_graph_node_index",     &CComponentNavNode::GetGraphNodeIndex)
+
+    // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentEmiter, CBaseComponent>("ComponentEmiter")
+      .def("add_to_entity",         &CComponentEmiter::AddToEntity)
+      .def("change_core",           &CComponentEmiter::ChangeCore)
+      .def("change_volume",         &CComponentEmiter::ChangeVolume)
   ];
 }
 

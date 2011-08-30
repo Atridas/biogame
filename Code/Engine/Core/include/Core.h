@@ -37,6 +37,7 @@ class CPhysicCollisionReport;
 class CPortalManager;
 class CIAManager;
 class CCoreEmiterManager;
+class CEmiterManager;
 // --------------------------
 
 /**
@@ -59,7 +60,7 @@ public:
                                                   m_pStaticMeshManager(0),m_pAnimatedModelManager(0),m_pEffectManager(0),
                                                   m_pGUIManager(0),m_pPhysicsManager(0),m_pParticleManager(0), m_pBillBoardManager(0),
                                                   m_pSoundManager(0), m_pEngine(0), m_pEntityManager(0), m_pPortalManager(0), m_pIAManager(0),
-                                                  m_pCoreEmiterManager(0)
+                                                  m_pCoreEmiterManager(0), m_pEmiterManager(0)
                                                   {};
   /**
    * Destructor.
@@ -166,6 +167,8 @@ public:
 
   CCoreEmiterManager* GetCoreEmiterManager  () const                        {return m_pCoreEmiterManager;};
 
+  CEmiterManager*     GetEmiterManager      () const                        {return m_pEmiterManager;};
+
 private:
 
   /**
@@ -253,5 +256,7 @@ private:
   CIAManager*                 m_pIAManager;
 
   CCoreEmiterManager*         m_pCoreEmiterManager;
+
+  CEmiterManager*             m_pEmiterManager;
 };
 

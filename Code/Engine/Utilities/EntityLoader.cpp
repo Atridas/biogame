@@ -26,6 +26,7 @@
 #include "ComponentDestroyable.h"
 #include "ComponentNavNode.h"
 #include "ComponentRagdoll.h"
+#include "ComponentEmiter.h"
 
 #include "PhysicsManager.h"
 
@@ -259,7 +260,6 @@ void LoadComponentDestroyable(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntit
 
 void LoadComponentNavNode(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 {
-
   LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant NavNode.");
   bool l_bAutoroute = _TreeComponent.GetBoolProperty("autoroute", true, false);
   float l_fMaxautoroute = _TreeComponent.GetFloatProperty("maxDistance", -1, false);
@@ -277,7 +277,20 @@ void LoadComponentNavNode(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
       l_pcNavNode->m_bCoberturaBaixa = true;
     }
   }
+}
 
+void LoadComponentEmiter(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
+{
+  LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Emiter.");
+  string l_szCore  = _TreeComponent.GetPszISOProperty("core",   "",            true);
+  Vect3f l_vVolume = _TreeComponent.GetVect3fProperty("volume", Vect3f(1,1,1), true);
+
+  CComponentEmiter *l_pCEmiter;
+
+  if(!(l_pCEmiter = CComponentEmiter::AddToEntity(_pEntity, l_szCore, l_vVolume)))
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"\tError al crear el component Emiter de l'objecte \"%s\"",_pEntity->GetName());
+  }
 }
 
 // -------------------------------------------------------------------------------------------------------------
@@ -445,6 +458,11 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
             {
               LoadComponentNavNode(l_TreeComponent, l_pEntity);
 
+            // -----------------------------------------------------------------------------------------------------------
+            } else if(strcmp(l_TreeComponent.GetName(),"Emiter") == 0)
+            {
+              LoadComponentEmiter(l_TreeComponent, l_pEntity);
+              
             // -----------------------------------------------------------------------------------------------------------
             } else if(!l_TreeComponent.IsComment())
             {
