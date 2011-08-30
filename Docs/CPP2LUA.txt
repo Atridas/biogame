@@ -713,6 +713,9 @@ ENTITIES
       emiter
       CBaseComponent::ECT_EMITER
       
+      spawner
+      CBaseComponent::ECT_SPAWNER
+      
     Methods:
       get_type
       Type GetType()
@@ -1185,6 +1188,30 @@ ENTITIES
       
       change_volume
       void ChangeVolume(const Vect3f& _vVolume)
+  Class:
+    ComponentSpawner
+    CComponentSpawner
+    
+    Enum:
+      enemy_militar
+      CComponentSpawner::EE_MILITAR
+      
+      enemy_miner
+      CComponentSpawner::EE_MINER
+    
+    Methods:
+      add_to_entity
+      static CComponentSpawner* AddToEntity(CGameEntity* _pEntity, bool _bActive, float _fSpawnTime, int _iMaxEnemy, EEnemyType _EnemyType)
+      
+      get_enemy_type
+      EEnemyType GetEnemyType()
+      
+      set_enemy_type
+      void SetEnemyType(EEnemyType _Type)
+      
+    Attributes:
+      active
+      CComponentSpawner::m_bActive
 
 IA
   Globals:

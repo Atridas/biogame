@@ -121,6 +121,17 @@ function IsNavNode _object =
 	)
 )
 
+-- Comprova si l'objecte proporcionat és un spawner d'enemics
+function IsSpawner _object =
+(
+	if classof _object == Dummy and (GetUserProp _object "spawner") != undefined and (GetUserProp _object "spawn_time") != undefined and (GetUserProp _object "total_enemy") != undefined then
+	(
+		return true
+	) else (
+		return false
+	)
+)
+
 -- Cerca l'entitat de player
 function GetPlayerEntity _entities =
 (

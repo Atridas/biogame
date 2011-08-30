@@ -27,6 +27,7 @@
 #include "ComponentNavNode.h"
 #include "ComponentRagdoll.h"
 #include "ComponentEmiter.h"
+#include "ComponentSpawner.h"
 
 #include "PhysicsManager.h"
 
@@ -293,6 +294,26 @@ void LoadComponentEmiter(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
   }
 }
 
+void LoadComponentSpawner(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
+{
+  LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Spawner.");
+  bool l_bActive = _TreeComponent.GetBoolProperty("active", true, false);
+  float l_fSpawnTime = _TreeComponent.GetFloatProperty("spawn_time", -1, false);
+  int l_iMaxEnemy = _TreeComponent.GetIntProperty("total_enemy", -1, false);
+  string l_szEnemyType = _TreeComponent.GetPszISOProperty("enemy_type", "militar", false);
+  CComponentSpawner::EEnemyType l_EnemyType = CComponentSpawner::EE_MILITAR;
+
+  if(l_szEnemyType == "miner")
+    l_EnemyType = CComponentSpawner::EE_MINER;
+
+  CComponentSpawner *l_pcSpawner;
+
+  if(!(l_pcSpawner = CComponentSpawner::AddToEntity(_pEntity, l_bActive, l_fSpawnTime, l_iMaxEnemy, l_EnemyType)))
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"\tError al crear el component Spawner de l'objecte \"%s\"",_pEntity->GetName());
+  }
+}
+
 // -------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------
@@ -463,6 +484,11 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
             {
               LoadComponentEmiter(l_TreeComponent, l_pEntity);
               
+            // -----------------------------------------------------------------------------------------------------------
+            } else if(strcmp(l_TreeComponent.GetName(),"EnemySpawner") == 0)
+            {
+              LoadComponentSpawner(l_TreeComponent, l_pEntity);
+
             // -----------------------------------------------------------------------------------------------------------
             } else if(!l_TreeComponent.IsComment())
             {
