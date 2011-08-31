@@ -144,7 +144,7 @@ void CPhysicController::Jump(float ammount)
 	m_Jump.StartJump(ammount);
 }
 
-void CPhysicController::Move (const Vect3f& direction, float elapsedTime)
+void CPhysicController::Move(const Vect3f& direction, float elapsedTime)
 {
 	assert (m_pPhXController!=NULL);
 
@@ -172,7 +172,6 @@ void CPhysicController::Move (const Vect3f& direction, float elapsedTime)
 	CObject3D::m_vPosition.z = (float)tmp.z;
   CObject3D::InitMat44();
 }
-
 
 void CPhysicController::SetCollision (bool flag)
 {

@@ -540,58 +540,24 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
                     CComponentRenderableObject::AddToEntityWithAnimatedModel(l_pPlayer, "Player Character", "riggle");
   l_pComponentRenderableObject->m_bBlockPitchRoll = true;
   l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
-
-
-  //CComponentAnimation::AddToEntity(l_pPlayer);
+  l_pComponentRenderableObject->m_fHeightAdjustment = -l_fTotalHeight;
 
 
   CComponentPlayerController *l_pComponentPlayerController = CComponentPlayerController::AddToEntity(l_pPlayer);
-                                  /*,
-                                      //Actions
-                                     "MoveFwd",
-                                     "MoveBack",
-                                     "MoveLeft",
-                                     "MoveRight",
-                                     "Walk",
-                                     "Run",
-                                     "Aim",
-                                     "Shoot",
-                                      //Animations
-                                     "idle",
-                                     "walk",
-                                     "walk",
-                                     "walk",
-                                     "walk",
-                                     "point",
-                                     "shoot",
-                                      //Speed
-                                     4, 10, 1, 1,
-                                      FLOAT_PI_VALUE/3,
-                                     -FLOAT_PI_VALUE/3);*/
-
   l_pComponentPlayerController->m_vPosInicial = _vPosition;
-
-  //CComponent3rdPSCamera *l_pComponent3rdPSCamera = new CComponent3rdPSCamera();
-  //l_pComponent3rdPSCamera->Init(m_pPlayerEntity, 0, 0);
-  //((CThPSCamera*)l_pComponent3rdPSCamera->GetCamera())->SetZoom(0);
-  //l_pComponent3rdPSCamera->Init(l_pPlayer, 0.55f, 0.85f, 1.4f);
 
   CComponent3rdPSCamera::AddToEntity(l_pPlayer, 0.55f, 0.85f, 1.4f);
 
-  //m_pCamera = l_pComponent3rdPSCamera->GetCamera();
-
   CComponentPhysXController::AddToEntity(l_pPlayer, l_fCapsuleRadius, l_fCapsuleHeigh, 45.0f, l_fCapsuleSkin, 0.5f, ECG_PERSONATGE );
 
-  l_pComponentRenderableObject->m_fHeightAdjustment = -l_fTotalHeight;
-
   CComponentShield::AddToEntity(l_pPlayer, 50.f, 50.f, 1.0f, 5.0f);
+
   CComponentVida::AddToEntity(l_pPlayer, 100.f, 100.f, true, 30.0f, 7.0f);
 
   CComponentStateMachine::AddToEntity(l_pPlayer, "State_Player_Neutre");
 
-
-  //(new CComponentRagdoll())->Init(m_pPlayerEntity, "Data/Animated Models/Riggle/Skeleton.xml");
   CComponentMirilla::AddToEntity(l_pPlayer, "laser_pilota");
+
   CComponentArma::AddToEntity(l_pPlayer, "ARMA");
 
   CComponentRagdoll::AddToEntity(l_pPlayer, "Data/Animated Models/Riggle/Skeleton.xml", ECG_RAGDOLL_PLAYER);

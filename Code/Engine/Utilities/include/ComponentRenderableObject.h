@@ -24,7 +24,7 @@ public:
   static CComponentRenderableObject* AddToEntity(CGameEntity *_pEntity, const string& _szName, const string& _szCore);
   static CComponentRenderableObject* AddToEntityWithAnimatedModel(CGameEntity *_pEntity, const string& _szName, const string& _szCore);
 
-  void PostUpdate(float _fDeltaTime);
+  void UpdatePostAnim(float _fDeltaTime);
 
   virtual ~CComponentRenderableObject(void) {Done();};
 

@@ -405,7 +405,17 @@ void CPhysicsManager::Update (float elapsedTime)
 void CPhysicsManager::WaitForSimulation()
 {
   m_pScene->fetchResults(NX_RIGID_BODY_FINISHED,  true);
-  m_pControllerManager->updateControllers();
+
+  NxReal maxTimestep;
+	NxTimeStepMethod method;
+	NxU32 maxIter;
+	NxU32 numSubSteps;
+
+  m_pScene->getTiming(maxTimestep, maxIter, method, &numSubSteps);
+	if(numSubSteps)
+  {
+    m_pControllerManager->updateControllers();
+  }
 }
 
 void CPhysicsManager::SetTriggerReport (CPhysicTriggerReport* report)

@@ -117,7 +117,7 @@ void CComponentRenderableObject::SetYaw(float _fYaw)
   m_pRenderableObject->SetYaw(_fYaw);
 }
 
-void CComponentRenderableObject::PostUpdate(float _fDeltaTime)
+void CComponentRenderableObject::UpdatePostAnim(float _fDeltaTime)
 {
   assert(IsOk());
 

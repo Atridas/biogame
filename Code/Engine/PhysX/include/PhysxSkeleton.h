@@ -28,6 +28,7 @@ public:
   void              SetSkeleton(CalSkeleton* _pSkeleton)  {m_pCalSkeleton = _pSkeleton;};
   const Mat44f&     GetTransform()                 {return m_mTransform;};
   void              SetTransform(const Mat44f& _mTransform) {m_mTransform = _mTransform;};
+  void              SetTransformAfterUpdate(const Mat44f& _mTransform);
   CBoundingBox      ComputeBoundingBox();
 
   bool              IsRagdollActive()                     {return m_bRagdollActive;};  

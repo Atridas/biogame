@@ -24,7 +24,7 @@ public:
 
   static CComponentPlayerController* AddToEntity(CGameEntity *_pEntity);
 
-  void Update(float _fDeltaTime);
+  void UpdatePostPhysX(float _fDeltaTime);
 
   virtual ~CComponentPlayerController(void) {Done();};
 
