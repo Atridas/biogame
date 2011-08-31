@@ -74,60 +74,59 @@ void CComponentIABrain::Shoot()
   // ------------------------------------------------------------------------------------------------------
   Vect3f l_vPos = l_vMyHand;//l_pPlayerPos + Vect3f(0, .75f, 0);
   Vect3f l_vDir = (l_vPlayerPos - l_vMyHand).GetNormalized();
+  
+  CEntityManager* l_pEM = ENTITY_MANAGER;
+  l_pEM->InitParticles("disparar", l_vPos, Vect3f(.5f,.5f,.5f), 5.f);
+  l_pEM->InitLaser(l_vPos,l_vDir,20.f, CORE->GetPhysicsManager()->GetCollisionMask(ECG_RAY_SHOOT));
 
-  //l_vPos += l_vDir;
-
-  SCollisionInfo l_CInfo;
-  CPhysicUserData* l_pUserData = 0;
-
-  CPhysicsManager *l_pPM = CORE->GetPhysicsManager();
-
-  l_pUserData = l_pPM->RaycastClosestActor(l_vPos,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT),l_CInfo);
-
-  if( l_pUserData )
-  {
-    Vect3f l_vCenterPoint = l_CInfo.m_CollisionPoint;
-
-    CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
-    CComponentLaser::AddToEntity(l_pLaser,
-                                  Vect3f(l_vMyHand.x,l_vMyHand.y,l_vMyHand.z),
-                                  l_vCenterPoint,
-                                  1.f);
-    /*CGameEntity * l_pParticleShoot = CORE->GetEntityManager()->CreateEntity();
-    CComponentParticleShootMiner::AddToEntity(l_pParticleShoot,
-                                                Vect3f(l_vMyHand.x,l_vMyHand.y,l_vMyHand.z),
-                                                l_vCenterPoint);*/
-
-    if(l_pUserData->GetEntity())
-    {
-      SEvent l_impacte;
-      l_impacte.Msg = SEvent::REBRE_IMPACTE;
-      l_impacte.Info[0].Type = SEventInfo::FLOAT;
-      l_impacte.Info[0].f    = 20.f;
-      l_impacte.Info[3].Type = SEventInfo::VECTOR;
-      l_impacte.Info[3].v.x = l_CInfo.m_CollisionPoint.x;
-      l_impacte.Info[3].v.y = l_CInfo.m_CollisionPoint.y;
-      l_impacte.Info[3].v.z = l_CInfo.m_CollisionPoint.z;
-      l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
-      l_impacte.Sender = GetEntity()->GetGUID();
-
-      CORE->GetEntityManager()->SendEvent(l_impacte);
-    }
-  }
-  else
-  {
-    Vect3f l_vCenterPoint = l_vMyHand + l_vDir * 100;
-
-    CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
-    CComponentLaser::AddToEntity(l_pLaser,
-                                l_vMyHand,
-                                l_vCenterPoint,
-                                1.f);
-    /*CGameEntity * l_pParticleShoot = CORE->GetEntityManager()->CreateEntity();
-    CComponentParticleShootMiner::AddToEntity(l_pParticleShoot,
-                                                Vect3f(l_vMyHand.x,l_vMyHand.y,l_vMyHand.z),
-                                                l_vCenterPoint);*/
-  }
+  //SCollisionInfo l_CInfo;
+  //CPhysicUserData* l_pUserData = 0;
+  //
+  //CPhysicsManager *l_pPM = CORE->GetPhysicsManager();
+  //
+  //
+  //l_pUserData = l_pPM->RaycastClosestActor(l_vPos,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT),l_CInfo);
+  //
+  //if( l_pUserData )
+  //{
+  //  Vect3f l_vCenterPoint = l_CInfo.m_CollisionPoint;
+  //
+  //  //CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
+  //  //CComponentLaser::AddToEntity(l_pLaser,
+  //  //                              Vect3f(l_vMyHand.x,l_vMyHand.y,l_vMyHand.z),
+  //  //                              l_vCenterPoint,
+  //  //                              1.f);
+  //  
+  //  l_pEM->InitLaser(l_vPos,l_vDir,20.f);
+  //  if(l_pUserData->GetEntity())
+  //  {
+  //    l_pEM->InitLaser(l_vPos,l_vDir,20.f);
+  //
+  //    //SEvent l_impacte;
+  //    //l_impacte.Msg = SEvent::REBRE_IMPACTE;
+  //    //l_impacte.Info[0].Type = SEventInfo::FLOAT;
+  //    //l_impacte.Info[0].f    = 20.f;
+  //    //l_impacte.Info[3].Type = SEventInfo::VECTOR;
+  //    //l_impacte.Info[3].v.x = l_CInfo.m_CollisionPoint.x;
+  //    //l_impacte.Info[3].v.y = l_CInfo.m_CollisionPoint.y;
+  //    //l_impacte.Info[3].v.z = l_CInfo.m_CollisionPoint.z;
+  //    //l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
+  //    //l_impacte.Sender = GetEntity()->GetGUID();
+  //    //
+  //    //CORE->GetEntityManager()->SendEvent(l_impacte);
+  //  }
+  //}
+  //else
+  //{
+  //  l_pEM->InitLaser(l_vPos,l_vDir,20.f);
+  //  //Vect3f l_vCenterPoint = l_vMyHand + l_vDir * 100;
+  //
+  //  //CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
+  //  //CComponentLaser::AddToEntity(l_pLaser,
+  //  //                            l_vMyHand,
+  //  //                            l_vCenterPoint,
+  //  //                            1.f);
+  //}
 }
 
 void CComponentIABrain::ReceiveShoot(SEvent _sEvent)

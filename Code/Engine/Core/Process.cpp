@@ -16,6 +16,7 @@
 #include "Console.h"
 #include "ParticleManager.h"
 #include "BillBoardManager.h"
+#include "CoreEmiterManager.h"
 
 void CProcess::DebugInformation()
 {
@@ -73,6 +74,10 @@ bool CProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _p
   } else if(strcmp(_pcAction, "ReloadMeshes") == 0)
   {
     CORE->GetRenderableObjectsManager()->Reload();
+    return true;
+  }else if(strcmp("ReloadParticles",_pcAction) == 0)
+  {
+    CORE->GetCoreEmiterManager()->Reload();
     return true;
   } else if(strcmp(_pcAction, "ReloadScript") == 0)
   {

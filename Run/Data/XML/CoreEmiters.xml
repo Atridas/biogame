@@ -138,6 +138,33 @@
               
               color1="1.0 1.0 1.0 0.8"          color2="1.0 1.0 1.0 0.8" 
               size1="0.2"                       size2="0.2"
+              texture="Data/Textures/amapola.png">
+    <Sizes>
+      <Size   control_time1="0.3"       control_time2="0.3"        size1="0.02"          size2="0.02"/>
+    </Sizes>
+
+    <Colors>
+      <Color   control_time1="0.3"       control_time2="0.3"        color1="1.0 1.0 1.0 0.0"         color2="1.0 1.0 1.0 0.0"/>
+    </Colors>
+  </CoreEmiter>
+  
+  
+  <CoreEmiter id="disparar"                        
+              emit_rate1="500.0"                 emit_rate2="500.0"
+              life1="0.1"                        life2="0.1"           
+              awake_time1="0.2"                  awake_time2="0.2"
+              sleep_time1="5.0"                  sleep_time2="5.0"  
+              
+              starting_angle1="-3.14159"         starting_angle2="3.14159"
+              
+              starting_speed1="0.5 0.5 0.5"      starting_speed2="-0.5 -0.5 -0.5"
+              acceleration1="2.0 2.0 2.0"        acceleration2="-2.0 -2.0 -2.0"
+              starting_angular_speed1="-0.1"     starting_angular_speed2="0.1"
+              angular_acceleration1="0.0"        angular_acceleration2="0.0"
+              
+              
+              color1="1.0 1.0 1.0 0.8"          color2="1.0 1.0 1.0 0.8" 
+              size1="0.2"                       size2="0.2"
               texture="Data/Textures/margarita.png">
     <Sizes>
       <Size   control_time1="0.3"       control_time2="0.3"        size1="0.02"          size2="0.02"/>

@@ -42,9 +42,6 @@ void CComponentPhysXActor::ReceiveEvent(const SEvent& _Event)
     assert(_Event.Info[3].Type == SEventInfo::VECTOR);
     Vect3f l_vPos(_Event.Info[3].v.x, _Event.Info[3].v.y, _Event.Info[3].v.z);
 
-    CGameEntity* l_pEmiterEntity = ENTITY_MANAGER->CreateEntity();
-    CComponentObject3D::AddToEntity(l_pEmiterEntity)->SetPosition(l_vPos);
-    CComponentEmiter  ::AddToEntity(l_pEmiterEntity, m_szParticulaImpacte, Vect3f(.5f,.5f,.5f));
-    CComponentLifetime::AddToEntity(l_pEmiterEntity, 5.f);
+    ENTITY_MANAGER->InitParticles(m_szParticulaImpacte, l_vPos, Vect3f(.5f,.5f,.5f), 5.f);
   }
 }

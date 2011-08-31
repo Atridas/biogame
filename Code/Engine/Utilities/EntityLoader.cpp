@@ -28,6 +28,8 @@
 #include "ComponentRagdoll.h"
 #include "ComponentEmiter.h"
 #include "ComponentSpawner.h"
+#include "ComponentLaser.h"
+#include "ComponentLifetime.h"
 
 #include "PhysicsManager.h"
 
@@ -632,4 +634,36 @@ CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f
   CComponentRagdoll::AddToEntity(l_peEnemy, _szRagdollModell, ECG_RAGDOLL);
 
   return l_peEnemy;
+}
+
+
+CGameEntity* CEntityManager::InitLaser(const Vect3f& _vPosInit, const Vect3f& _vDir, float _fDany, uint32 _uiCollisionMask)
+{
+  CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
+
+  CComponentObject3D *l_pComponentObject3D = CComponentObject3D::AddToEntity(l_pLaser);
+  l_pComponentObject3D->SetPosition(_vPosInit);
+
+  CComponentLaser::AddToEntity( l_pLaser, _vDir, _fDany, _uiCollisionMask );
+
+  CComponentRenderableObject *l_pCRO= CComponentRenderableObject::AddToEntity(l_pLaser, "laser " + l_pLaser->GetName(), "laser");
+  l_pCRO->m_bActive = true;
+  l_pCRO->m_bRemoveRenderableObject = true;
+  l_pComponentObject3D->SetPosition(_vPosInit);
+
+  CComponentLifetime::AddToEntity(l_pLaser, 60);
+
+  return l_pLaser;
+}
+
+
+CGameEntity* CEntityManager::InitParticles(const string& _szCore, const Vect3f& _vPos, const Vect3f& _vSize, float _fTime)
+{
+  CGameEntity* l_pEmiterEntity = ENTITY_MANAGER->CreateEntity();
+  CComponentObject3D::AddToEntity(l_pEmiterEntity)->SetPosition(_vPos);
+  CComponentEmiter  ::AddToEntity(l_pEmiterEntity, _szCore, _vSize);
+  if(_fTime > 0)
+    CComponentLifetime::AddToEntity(l_pEmiterEntity, _fTime);
+
+  return l_pEmiterEntity;
 }
