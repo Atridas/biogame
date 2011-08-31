@@ -464,6 +464,8 @@ void CParticleEmitter::RenderHW(CRenderManager* _pRM)
   bool result = m_InstancedData.SetData(l_mBuffer, cont, _pRM);
   assert(result);// ---
 
+  if(cont == 0)
+    return;
 
   // renderitzem -----------------------------------------------------------------------------------------------------------------
 

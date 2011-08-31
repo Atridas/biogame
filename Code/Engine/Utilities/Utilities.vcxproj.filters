@@ -139,6 +139,9 @@
     <Filter Include="EntitySystem\Components\ComponentSpawner">
       <UniqueIdentifier>{1315c314-9b6c-4e34-b81b-94121d4b33bd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentLifetime">
+      <UniqueIdentifier>{5ef374c5-b3e3-4481-bdf5-34742313c41f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -281,6 +284,9 @@
     </ClCompile>
     <ClCompile Include="ComponentSpawner.cpp">
       <Filter>EntitySystem\Components\ComponentSpawner</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentLifetime.cpp">
+      <Filter>EntitySystem\Components\ComponentLifetime</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -433,6 +439,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentSpawner.h">
       <Filter>EntitySystem\Components\ComponentSpawner</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentLifetime.h">
+      <Filter>EntitySystem\Components\ComponentLifetime</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

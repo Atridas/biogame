@@ -104,6 +104,10 @@ void CComponentIABrain::Shoot()
       l_impacte.Msg = SEvent::REBRE_IMPACTE;
       l_impacte.Info[0].Type = SEventInfo::FLOAT;
       l_impacte.Info[0].f    = 20.f;
+      l_impacte.Info[3].Type = SEventInfo::VECTOR;
+      l_impacte.Info[3].v.x = l_CInfo.m_CollisionPoint.x;
+      l_impacte.Info[3].v.y = l_CInfo.m_CollisionPoint.y;
+      l_impacte.Info[3].v.z = l_CInfo.m_CollisionPoint.z;
       l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
       l_impacte.Sender = GetEntity()->GetGUID();
 

@@ -23,6 +23,7 @@ public:
   CPhysicUserData* GetUserData()  {return m_pPhysXData;}
 
   virtual void UpdatePostPhysX(float _fDeltaTime);
+  virtual void ReceiveEvent(const SEvent& _Event);
 
   virtual ~CComponentPhysXActor(void) {Done();};
 
@@ -30,12 +31,15 @@ public:
 
   virtual void Reload() {};
 
+
+  string m_szParticulaImpacte;
 protected:
 
   CComponentPhysXActor():
       m_pObject3D(0),
       m_pPhysXActor(0),
-      m_pPhysXData(0)
+      m_pPhysXData(0),
+      m_szParticulaImpacte("impacte")
       {};
 
   virtual void Release();

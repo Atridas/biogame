@@ -53,7 +53,8 @@ public:
     ECT_PARTICLE_SHOOT_PLAYER,
     ECT_PARTICLE_SHOOT_MINER,
     ECT_PARTICLE_SHOOT_MILITAR,
-    ECT_COLLISION_REPORT
+    ECT_COLLISION_REPORT,
+    ECT_LIFETIME
   };
   
   virtual Type GetType() = 0; //{return m_Type;};

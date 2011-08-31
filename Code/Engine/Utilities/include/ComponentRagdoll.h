@@ -26,8 +26,10 @@ public:
   CPhysxBone* GetBone(const string& _szBoneName);
   CPhysxSkeleton* GetRagdoll() const {return m_pRagdoll;};
   Vect3f GetPosition();
-  void PostUpdate(float _fDeltaTime);
   void UpdatePrePhysX(float _fDeltaTime);
+
+  virtual void PostUpdate(float _fDeltaTime);
+  virtual void ReceiveEvent(const SEvent& _Event);
 
 protected:
   CComponentRagdoll():m_bActive(false),m_pRagdoll(0),m_pRAIM(0) {};
