@@ -259,6 +259,7 @@ function XMLEntityDoor _instance &_TagName =
 	
 	_TagName = "Door"
 	
+	--open
 	local l_open = GetUserProp _instance "open"
 	if l_open != undefined then
 	(
@@ -269,6 +270,12 @@ function XMLEntityDoor _instance &_TagName =
 	)
 	
 	append l_params #("open",l_open)
+	
+	--size
+	l_aux = "" as stringStream
+	local l_size = RHVectorToLH (DummySize _instance)
+	format "% % %" l_size.x l_size.y l_size.z to:l_aux
+	append l_params #("size",l_aux)
 	
 	return l_params
 )

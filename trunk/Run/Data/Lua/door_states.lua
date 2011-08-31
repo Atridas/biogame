@@ -44,6 +44,22 @@ function open_door(_trigger, _actor)
         l_message.receiver = l_door:get_guid()
       
         EM:send_event(l_message)
+        
+        --activar el miner de la sala
+        local l_miner = EM:get_entity("Miner_video00")
+        
+        if l_miner then
+          local l_SM = l_miner:get_component(BaseComponent.state_machine)
+          if l_SM then
+            l_SM:set_active(true)
+          else
+            log('El Miner_video00 no té màquina d\'estats')
+          end
+        else
+          log('Error: no es troba Miner_video00')
+        end
+      else
+        log('No es troba la porta: Porta_Videovigilancia')
       end
     end
   end
