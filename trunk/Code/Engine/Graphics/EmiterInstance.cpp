@@ -147,6 +147,9 @@ void CEmiterInstance::Render(CRenderManager* _pRM)
 {
   assert(IsOk());
 
+  if(m_iActiveParticles == 0)
+    return;
+
   CEffectManager* l_pEM = CORE->GetEffectManager();
   assert(l_pEM && l_pEM->IsOk());
 

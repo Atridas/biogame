@@ -205,6 +205,10 @@ void CComponentPlayerController::Shoot()
         l_impacte.Info[1].v.z = l_vDir.z;
         l_impacte.Info[2].Type = SEventInfo::PTR;
         l_impacte.Info[2].ptr = (void*)(l_pUserData->GetActor());
+        l_impacte.Info[3].Type = SEventInfo::VECTOR;
+        l_impacte.Info[3].v.x = l_CInfo.m_CollisionPoint.x;
+        l_impacte.Info[3].v.y = l_CInfo.m_CollisionPoint.y;
+        l_impacte.Info[3].v.z = l_CInfo.m_CollisionPoint.z;
         ENTITY_MANAGER->SendEvent(l_impacte);
       }
     }

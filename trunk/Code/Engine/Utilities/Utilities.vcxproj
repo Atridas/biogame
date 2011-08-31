@@ -91,6 +91,7 @@
     <ClCompile Include="ComponentIAWalkToPlayer.cpp" />
     <ClCompile Include="ComponentInteractive.cpp" />
     <ClCompile Include="ComponentLaser.cpp" />
+    <ClCompile Include="ComponentLifetime.cpp" />
     <ClCompile Include="ComponentLowCover.cpp" />
     <ClCompile Include="ComponentMirilla.cpp" />
     <ClCompile Include="ComponentMovement.cpp" />
@@ -140,6 +141,7 @@
     <ClInclude Include="include\ComponentIAWalkToPlayer.h" />
     <ClInclude Include="include\ComponentInteractive.h" />
     <ClInclude Include="include\ComponentLaser.h" />
+    <ClInclude Include="include\ComponentLifetime.h" />
     <ClInclude Include="include\ComponentLowCover.h" />
     <ClInclude Include="include\ComponentMirilla.h" />
     <ClInclude Include="include\ComponentMovement.h" />

@@ -13,6 +13,7 @@
 bool CCoreEmiter::Init(CXMLTreeNode& _xmlEmiter)
 {
   SetName(_xmlEmiter.GetPszISOProperty("id"));
+  LOGGER->AddNewLog(ELL_INFORMATION, "CCoreEmiter::Init Reading Particle Core: \"%s\"", _xmlEmiter.GetPszISOProperty("id").c_str());
   
   m_fEmitRate1 = _xmlEmiter.GetFloatProperty("emit_rate1", 0, true);
   m_fEmitRate2 = _xmlEmiter.GetFloatProperty("emit_rate2", 0, true);
@@ -285,8 +286,9 @@ float CCoreEmiter::GetStartingAngle() const
 
 Vect3f CCoreEmiter::GetStartingSpeed() const
 {
-  float l_fRnd = Random01();
-  Vect3f l_vStartingSpeed = SIMPLE_INTERPOLATION(m_vStartingSpeed1, m_vStartingSpeed2, l_fRnd);
+  Vect3f l_vRnd(Random01(),Random01(),Random01());
+  Vect3f l_v_1_Minus_Rnd(1.f - l_vRnd.x, 1.f - l_vRnd.y, 1.f - l_vRnd.z);
+  Vect3f l_vStartingSpeed = ( l_v_1_Minus_Rnd.Scale(m_vStartingSpeed1) ) + ( l_vRnd.Scale(m_vStartingSpeed2) );
   return l_vStartingSpeed;
 }
 
@@ -300,8 +302,9 @@ float CCoreEmiter::GetStartingAngularSpeed() const
 
 Vect3f CCoreEmiter::GetAcceleration() const
 {
-  float l_fRnd = Random01();
-  Vect3f l_vAcceleration = SIMPLE_INTERPOLATION(m_vAcceleration1, m_vAcceleration2, l_fRnd);
+  Vect3f l_vRnd(Random01(),Random01(),Random01());
+  Vect3f l_v_1_Minus_Rnd(1.f - l_vRnd.x, 1.f - l_vRnd.y, 1.f - l_vRnd.z);
+  Vect3f l_vAcceleration = ( l_v_1_Minus_Rnd.Scale(m_vAcceleration1) ) + ( l_vRnd.Scale(m_vAcceleration2) );
   return l_vAcceleration;
 }
 

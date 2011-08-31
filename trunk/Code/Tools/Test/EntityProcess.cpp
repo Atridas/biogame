@@ -30,6 +30,7 @@
 #include "GraphDefines.h"
 #include "ParticleManager.h"
 #include "BillboardManager.h"
+#include "EmiterManager.h"
 
 #include "PhysicActor.h"
 #include <PhysicsManager.h>
@@ -126,11 +127,8 @@ void CEntityProcess::RenderScene(CRenderManager* _pRM)
     _pRM->SetupMatrices(&l_SphereCamera,false,false);
   }
   
-  //CORE->GetRenderableObjectsManager()->Render(_pRM);
   CORE->GetPortalManager()->Render(_pRM);
-  CORE->GetParticleManager()->Render(_pRM);
-  CORE->GetBillBoardManager()->Render(_pRM);
-  //m_PortalManager.Render(_pRM);
+  CORE->GetEmiterManager()->Render(_pRM);
 
   //CORE->GetEntityManager()->DebugRender(_pRM);
 }
