@@ -269,20 +269,11 @@
   <Entity name="Porta_Laboratori">
     <Object3D position="-4.52435 1.29745 -7.73442" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta" />
-    <PhysXBox fromRenderableObject="false" shape="box" size="0.241218 2.55448 2.57899" midpoint="0 0 0" density="0" collision_group="escenari" />
-    <Door open="false" />
+    <Door open="false" size="0.241218 2.55448 2.57899" />
   </Entity>
   <Entity name="Lab_Trigger_Sortida">
     <Object3D position="-1.46803 1.40201 -8.01836" yaw="0.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="5.27558 5.27558 5.27558" collision_group="trigger" onEnter="close_door" />
-  </Entity>
-  <Entity name="lab_bubbles01">
-    <Object3D position="-8.21172 0.348145 0.540135" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Emiter core="bubble" volume="0.417512 0.417512 0.417512" />
-  </Entity>
-  <Entity name="lab_bubbles02">
-    <Object3D position="-14.5503 0.348145 -4.01852" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Emiter core="bubble" volume="0.417512 0.417512 0.417512" />
   </Entity>
   <Player position="-11.342 1.72829 -7.76992" yaw="0.0" />
 </Entities>

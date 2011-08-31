@@ -54,6 +54,7 @@ end
 function esfera_destructible(_self)
   log('Sóc ' .. _self:get_name() .. ' i m\'ha matat ')
 end
+
 -------------------------------------------- GLOBALS  -------------------------------------------
 function activar_enemic(_name)
   local l_enemic = EM:get_entity(_name)
@@ -115,6 +116,20 @@ function salavideo_palanca(_self, _player)
       l_message.dispatch_time = 0
       
       EM:send_event(l_message)
+      
+      --activar el miner del passadís
+      local l_miner = EM:get_entity("pas_miner00")
+      
+      if l_miner then
+        local l_SM = l_miner:get_component(BaseComponent.state_machine)
+        if l_SM then
+          l_SM:set_active(true)
+        else
+          log('El pas_miner00 no té màquina d\'estats')
+        end
+      else
+        log('Error: no es troba pas_miner00')
+      end
     else
       log('error, no es troba la porta')
     end

@@ -147,18 +147,16 @@
   <Entity name="Porta_Laser">
     <Object3D position="15.9594 1.73938 -3.77328" yaw="64.0728" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta" />
-    <PhysXBox fromRenderableObject="false" shape="box" size="2.29047 4.30355 5.02548" midpoint="0 0 0" density="0" collision_group="escenari" />
-    <Door open="false" />
+    <Door open="false" size="2.29047 4.30355 5.02548" />
   </Entity>
   <Entity name="Porta_Videovigilancia">
-    <Object3D position="6.99897 -0.78575 3.50021" yaw="114.214" pitch="0.0" roll="0.0" />
+    <Object3D position="6.99897 0.300004 3.50021" yaw="114.214" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta" />
-    <PhysXBox fromRenderableObject="false" shape="box" size="1.2108 2.43068 2.50564" midpoint="0 0 0" density="0" collision_group="escenari" />
-    <Door open="false" />
+    <Door open="false" size="1.47035 5.17896 5.2054" />
   </Entity>
   <Entity name="Trigger_Porta_Video">
     <Object3D position="7.94775 0.0 1.60195" yaw="23.0405" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="7.13034 8.93156 10.1565" collision_group="trigger" onEnter="open_door" onExit="close_door" />
   </Entity>
-  <Miner name="Dummy01" position="20.8841 1.9223 5.44801" yaw="0.0" />
+  <Miner name="pas_miner00" position="20.8841 1.9223 5.44801" yaw="0.0" active="false" />
 </Entities>

@@ -255,8 +255,7 @@
   <Entity name="Porta01">
     <Object3D position="-39.4743 1.56408 2.94355" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta" />
-    <PhysXBox fromRenderableObject="false" shape="box" size="0.976215 3.05175 2.56453" midpoint="0 0 0" density="0" collision_group="escenari" />
-    <Door open="false" />
+    <Door open="false" size="0.976215 3.05175 2.56453" />
   </Entity>
   <Entity name="TriggerPorta01">
     <Object3D position="-39.5838 1.84525 2.51199" yaw="0.0" pitch="0.0" roll="0.0" />
