@@ -121,6 +121,17 @@ function IsNavNode _object =
 	)
 )
 
+-- Comprova si l'objecte proporcionat és un emisor de particules
+function IsEmiter _object =
+(
+	if classof _object == Dummy and (GetUserProp _object "emiter") != undefined then
+	(
+		return true
+	) else (
+		return false
+	)
+)
+
 -- Comprova si l'objecte proporcionat és un spawner d'enemics
 function IsSpawner _object =
 (

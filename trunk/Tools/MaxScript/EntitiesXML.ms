@@ -476,3 +476,29 @@ function XMLEntitySpawner _instance &_TagName =
 	
 	return l_params
 )
+
+--Genera els paràmetres d'un tag XML d'entitat Emiter (de partícules). Conté:
+-- core
+-- volume
+function XMLEntityEmiter _instance &_TagName =
+(
+	local l_params = #()
+	local l_ss
+	
+	_TagName = "Emiter"
+	
+	if  (GetUserProp _instance "emiter") != undefined then
+	(
+		l_ss = "" as stringStream
+		format "%" (GetUserProp _instance "emiter") to:l_ss
+		append l_params #("core", l_ss)
+	)
+	
+	--size
+	l_ss = "" as stringstream
+	l_aux = RHVectorToLH (DummySize _instance)
+	format "% % %" l_aux.x l_aux.y l_aux.z to:l_ss
+	append l_params #("volume", l_ss)
+	
+	return l_params
+)

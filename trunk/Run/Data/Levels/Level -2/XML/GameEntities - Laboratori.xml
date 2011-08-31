@@ -216,7 +216,7 @@
     <Object3D position="-4.73019 3.26819 -7.74813" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Llum_emergengia_autoilum01" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Destroyable onDestroy="laboratori_petar_llum_porta" destroyedResource="llum_emergencia" />
+    <Destroyable onDestroy="laboratori_petar_llum_porta" destroyedResource="llum_emergencia" hitPoints="5" />
   </Entity>
   <Entity name="luz_florescente02">
     <Object3D position="-12.7607 3.6634 -5.00073" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
@@ -275,6 +275,14 @@
   <Entity name="Lab_Trigger_Sortida">
     <Object3D position="-1.46803 1.40201 -8.01836" yaw="0.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="5.27558 5.27558 5.27558" collision_group="trigger" onEnter="close_door" />
+  </Entity>
+  <Entity name="lab_bubbles01">
+    <Object3D position="-8.21172 0.348145 0.540135" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="bubble" volume="0.417512 0.417512 0.417512" />
+  </Entity>
+  <Entity name="lab_bubbles02">
+    <Object3D position="-14.5503 0.348145 -4.01852" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="bubble" volume="0.417512 0.417512 0.417512" />
   </Entity>
   <Player position="-11.342 1.72829 -7.76992" yaw="0.0" />
 </Entities>
