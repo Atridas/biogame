@@ -568,6 +568,16 @@ void CPhysxSkeleton::SetContactReportThreshold(float _fThreshold)
   }
 }
 
+void CPhysxSkeleton::SetTransformAfterUpdate(const Mat44f& _mTransform)
+{
+  m_mTransform = _mTransform;
+
+  for(size_t i=0;i<m_vBones.size();++i)
+  {
+    m_vBones[i]->SetTransformAfterUpdate(m_mTransform);
+  }
+}
+
 CBoundingBox CPhysxSkeleton::ComputeBoundingBox()
 {
   vector<CPhysxBone*>::iterator l_it  = m_vBones.begin();

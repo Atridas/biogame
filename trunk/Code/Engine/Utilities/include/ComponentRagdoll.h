@@ -27,6 +27,7 @@ public:
   CPhysxSkeleton* GetRagdoll() const {return m_pRagdoll;};
   Vect3f GetPosition();
   void PostUpdate(float _fDeltaTime);
+  void UpdatePrePhysX(float _fDeltaTime);
 
 protected:
   CComponentRagdoll():m_bActive(false),m_pRagdoll(0),m_pRAIM(0) {};

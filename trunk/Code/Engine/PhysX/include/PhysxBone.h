@@ -37,6 +37,7 @@ public:
   void                SetCalBone(CalBone* _pCalBone)         {m_pCalBone = _pCalBone;};
   void                SetParent(CPhysxBone* _pParent)        {m_pParent = _pParent;};
   const Mat44f&       GetTransform()                         {return m_vMatActor;};
+  void                SetTransformAfterUpdate(const Mat44f& _mTransform);
   
   
   bool                IsBoneRoot()                           {return m_bRoot;};

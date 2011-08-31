@@ -228,11 +228,23 @@ void CCore::Release()
 
 void CCore::Update()
 {
-  m_pPhysicsManager->WaitForSimulation();
-
   //Time update
   m_pTimer->Update();
   float l_fElapsedTime = m_pTimer->GetElapsedTime();
+
+  m_pPhysicsManager->WaitForSimulation();  
+
+  m_pEntityManager->UpdatePostPhysX(l_fElapsedTime);
+
+#ifdef __PARTICLE_VIA_SHADER__
+  //m_pParticleManager->Update(l_fElapsedTime, 0);// -------------
+#endif
+  m_pRenderableObjectsManager->Update(l_fElapsedTime);// ----
+  m_pEmiterManager->Update(l_fElapsedTime);
+
+  m_pEntityManager->UpdatePostAnim(l_fElapsedTime);
+  
+  m_pEntityManager->PostUpdate(l_fElapsedTime);
 
   //Manager Updates
   m_pInputManager->Update();
@@ -246,18 +258,7 @@ void CCore::Update()
   m_pEntityManager->UpdatePrePhysX(l_fElapsedTime);
 
   m_pPhysicsManager->Update(l_fElapsedTime);// -------------
-  
-  m_pEntityManager->UpdatePostPhysX(l_fElapsedTime);
-
-#ifdef __PARTICLE_VIA_SHADER__
-  //m_pParticleManager->Update(l_fElapsedTime, 0);// -------------
-#endif
-  m_pRenderableObjectsManager->Update(l_fElapsedTime);// ----
-  m_pEmiterManager->Update(l_fElapsedTime);
-
-  m_pEntityManager->UpdatePostAnim(l_fElapsedTime);
-  
-  m_pEntityManager->PostUpdate(l_fElapsedTime);
+  //m_pPhysicsManager->WaitForSimulation();  
 
   m_pPortalManager->Update(l_fElapsedTime);
 }

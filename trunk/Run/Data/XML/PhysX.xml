@@ -2,6 +2,7 @@
 <physX>
   <!-- Escenari -->
 	<collision group1="escenari" group2="personatge" />
+  <collision group1="escenari" group2="ragdoll player" />
 	<collision group1="escenari" group2="enemic" />
 	<collision group1="escenari" group2="objecte dinamic" />
   
@@ -9,7 +10,7 @@
   <collision group1="personatge" group2="enemic" />
 	<collision group1="personatge" group2="trigger" />
 	<!--<collision group1="personatge" group2="objecte dinamic" />-->
-	<collision group1="personatge" group2="explosio" />
+	<!--<collision group1="personatge" group2="explosio" />-->
   <collision group1="personatge" group2="pickup" />
   <!--<collision group1="personatge" group2="ragdoll" />-->
   
@@ -30,7 +31,7 @@
   <collision group1="ray shoot" group2="objecte dinamic" />
 
   <collision group1="force" group2="ragdoll" />
-  <collision group1="force" group2="enemic" />
+  <!--<collision group1="force" group2="enemic" />-->
   <collision group1="force" group2="objecte dinamic" />
   
   <!-- Càmara -->
@@ -45,7 +46,8 @@
   <collision group1="ragdoll" group2="explosio"/>
 
   <!-- Ragdoll Player -->
-  <collision group1="ragdoll player" group2="escenari"/>
+  <!--<collision group1="ragdoll player" group2="escenari"/>-->
+  <!--<collision group1="ragdoll player" group2="enemic"/>-->
   <collision group1="ragdoll player" group2="objecte dinamic"/>
   <collision group1="ragdoll player" group2="explosio"/>
   <collision group1="ragdoll player" group2="ragdoll"/>

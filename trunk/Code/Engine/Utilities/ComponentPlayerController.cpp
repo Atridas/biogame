@@ -67,7 +67,7 @@ bool CComponentPlayerController::Init(CGameEntity *_pEntity)
   return IsOk();
 }
 
-void CComponentPlayerController::Update(float _fDeltaTime)
+void CComponentPlayerController::UpdatePostPhysX(float _fDeltaTime)
 {
   assert(IsOk());
 

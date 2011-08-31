@@ -7,7 +7,8 @@
 #include "PhysicsManager.h"
 #include "PhysicActor.h"
 #include "ComponentPhysXController.h"
-
+#include "ComponentMovement.h"
+#include "ComponentObject3D.h"
 
 CComponentRagdoll* CComponentRagdoll::AddToEntity(CGameEntity *_pEntity, const string& _szSkeletonFile, int _iCollisionGroup)
 {
@@ -92,38 +93,48 @@ Vect3f CComponentRagdoll::GetPosition()
   return Vect3f(0.0f);
 }
 
+void CComponentRagdoll::UpdatePrePhysX(float _fDeltaTime)
+{
+  if(!m_bActive)
+  {
+    CComponentMovement* l_pMovement = GetEntity()->GetComponent<CComponentMovement>();
+    CComponentObject3D* l_pObject3D = GetEntity()->GetComponent<CComponentObject3D>();
+
+    Mat44f l_matTransformMovement;
+    Mat44f l_matTransform = m_pRAIM->GetMat44();
+
+    l_matTransformMovement.SetIdentity();
+    l_matTransformMovement.RotByAngleY(-l_pObject3D->GetYaw() + FLOAT_PI_VALUE/2.0f);
+    l_matTransformMovement.Translate(l_pMovement->m_vMovement + l_matTransform.GetPos());
+
+    m_pRagdoll->SetTransform(l_matTransformMovement);
+    
+    m_pRagdoll->Update();
+  }
+
+}
+
 void CComponentRagdoll::PostUpdate(float _fDeltaTime)
 {
-  m_pRagdoll->Update();
-
   if(m_bActive)
   {
-    //m_pRagdoll->Update();
+    m_pRagdoll->Update();
+
     Mat44f m = m_pRagdoll->GetTransform();
     m_pRAIM->SetMat44(m);
-
-    //CPhysxBone *l_pPBone = m_pRagdoll->GetPhysxBoneByName("Bip01 Spine");
-    
-    //Mat44f m2;
-    //l_pPBone->GetPhysxActor()->GetMat44(m2);
-    //Vect3f v = m2.GetTranslationVector();
-    //
-    //float radius = m_pRAIM->GetBoundingSphere()->GetRadius();
-    //m_pRAIM->GetBoundingSphere()->Init(v - m.GetTranslationVector(), radius);
 
     CBoundingBox l_BB = m_pRagdoll->ComputeBoundingBox();
     CBoundingSphere l_BS;
     l_BS.Init(l_BB.GetMin(), l_BB.GetMax());
-    //m_pRAIM->GetBoundingBox()->Init( l_BB.GetMax(), l_BB.GetMin());
+
     m_pRAIM->GetBoundingSphere()->Init(l_BB.GetMiddlePoint() - m.GetTranslationVector(), l_BS.GetRadius());
 
-    //Això funciona però encara no se sap pq.
+  }else{
+   
+    Mat44f l_matTransform;
+    m_pRAIM->GetMat44(l_matTransform);
+
+    m_pRagdoll->SetTransformAfterUpdate(l_matTransform);
   }
-  else
-  {
-    //m_pRagdoll->Update();
-    Mat44f m;
-    m_pRAIM->GetMat44(m);
-    m_pRagdoll->SetTransform(m);
-  }
+  
 }
