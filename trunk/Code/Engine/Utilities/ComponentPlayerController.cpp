@@ -153,7 +153,7 @@ void CComponentPlayerController::UpdatePostPhysX(float _fDeltaTime)
 
 void CComponentPlayerController::Shoot()
 {
-
+  CEntityManager* l_pEM = ENTITY_MANAGER;
   CGameEntity* l_pPlayerEntity = GetEntity();
 
   CAnimatedInstanceModel *l_pAnimatedInstanceModel = m_pAnimatedModel->GetAnimatedInstanceModel();
@@ -170,6 +170,8 @@ void CComponentPlayerController::Shoot()
   CPhysicUserData* l_pUserData = 0;
 
   l_vPosArma -= l_vDirArma*0.1f;
+  
+  l_pEM->InitParticles("disparar", l_vPosArma + l_vDirArma*0.2f, Vect3f(.5f,.5f,.5f), 5.f);
 
   CPhysicsManager *l_pPM = PHYSICS_MANAGER;
 
@@ -185,31 +187,27 @@ void CComponentPlayerController::Shoot()
 
     if(l_pUserData)
     {
-      CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
-      CComponentLaser::AddToEntity( l_pLaser,
-                                    l_vPosArma,
-                                    l_CInfo.m_CollisionPoint,
-                                    1.f);
 
       if(l_pUserData->GetEntity() != l_pPlayerEntity)
       {
-        SEvent l_impacte;
-        l_impacte.Msg = SEvent::REBRE_IMPACTE;
-        l_impacte.Info[0].Type = SEventInfo::FLOAT;
-        l_impacte.Info[0].f    = 20.f;
-        l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
-        l_impacte.Sender = l_pPlayerEntity->GetGUID();
-        l_impacte.Info[1].Type = SEventInfo::VECTOR;
-        l_impacte.Info[1].v.x = l_vDir.x;
-        l_impacte.Info[1].v.y = l_vDir.y;
-        l_impacte.Info[1].v.z = l_vDir.z;
-        l_impacte.Info[2].Type = SEventInfo::PTR;
-        l_impacte.Info[2].ptr = (void*)(l_pUserData->GetActor());
-        l_impacte.Info[3].Type = SEventInfo::VECTOR;
-        l_impacte.Info[3].v.x = l_CInfo.m_CollisionPoint.x;
-        l_impacte.Info[3].v.y = l_CInfo.m_CollisionPoint.y;
-        l_impacte.Info[3].v.z = l_CInfo.m_CollisionPoint.z;
-        ENTITY_MANAGER->SendEvent(l_impacte);
+        l_pEM->InitLaser(l_vPosArma,l_vDir,20.f, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
+        //SEvent l_impacte;
+        //l_impacte.Msg = SEvent::REBRE_IMPACTE;
+        //l_impacte.Info[0].Type = SEventInfo::FLOAT;
+        //l_impacte.Info[0].f    = 20.f;
+        //l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
+        //l_impacte.Sender = l_pPlayerEntity->GetGUID();
+        //l_impacte.Info[1].Type = SEventInfo::VECTOR;
+        //l_impacte.Info[1].v.x = l_vDir.x;
+        //l_impacte.Info[1].v.y = l_vDir.y;
+        //l_impacte.Info[1].v.z = l_vDir.z;
+        //l_impacte.Info[2].Type = SEventInfo::PTR;
+        //l_impacte.Info[2].ptr = (void*)(l_pUserData->GetActor());
+        //l_impacte.Info[3].Type = SEventInfo::VECTOR;
+        //l_impacte.Info[3].v.x = l_CInfo.m_CollisionPoint.x;
+        //l_impacte.Info[3].v.y = l_CInfo.m_CollisionPoint.y;
+        //l_impacte.Info[3].v.z = l_CInfo.m_CollisionPoint.z;
+        //ENTITY_MANAGER->SendEvent(l_impacte);
       }
     }
 
@@ -223,35 +221,31 @@ void CComponentPlayerController::Shoot()
 
     if(l_pUserData)
     {
-      CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
-      CComponentLaser::AddToEntity( l_pLaser,
-                                    l_vPosArma,
-                                    l_CInfo.m_CollisionPoint,
-                                    1.f);
 
       if(l_pUserData->GetEntity() != l_pPlayerEntity)
       {
-        SEvent l_impacte;
-        l_impacte.Msg = SEvent::REBRE_IMPACTE;
-        l_impacte.Info[0].Type = SEventInfo::FLOAT;
-        l_impacte.Info[0].f    = 20.f;
-        l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
-        l_impacte.Sender = l_pPlayerEntity->GetGUID();
-        l_impacte.Info[1].Type = SEventInfo::VECTOR;
-        l_impacte.Info[1].v.x = l_vDir.x;
-        l_impacte.Info[1].v.y = l_vDir.y;
-        l_impacte.Info[1].v.z = l_vDir.z;
-        l_impacte.Info[2].Type = SEventInfo::PTR;
-        l_impacte.Info[2].ptr = (void*)(l_pUserData->GetActor());
-        ENTITY_MANAGER->SendEvent(l_impacte);
+        l_pEM->InitLaser(l_vPosArma,l_vDir,20.f, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
+        //SEvent l_impacte;
+        //l_impacte.Msg = SEvent::REBRE_IMPACTE;
+        //l_impacte.Info[0].Type = SEventInfo::FLOAT;
+        //l_impacte.Info[0].f    = 20.f;
+        //l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
+        //l_impacte.Sender = l_pPlayerEntity->GetGUID();
+        //l_impacte.Info[1].Type = SEventInfo::VECTOR;
+        //l_impacte.Info[1].v.x = l_vDir.x;
+        //l_impacte.Info[1].v.y = l_vDir.y;
+        //l_impacte.Info[1].v.z = l_vDir.z;
+        //l_impacte.Info[2].Type = SEventInfo::PTR;
+        //l_impacte.Info[2].ptr = (void*)(l_pUserData->GetActor());
+        //l_impacte.Info[3].Type = SEventInfo::VECTOR;
+        //l_impacte.Info[3].v.x = l_CInfo.m_CollisionPoint.x;
+        //l_impacte.Info[3].v.y = l_CInfo.m_CollisionPoint.y;
+        //l_impacte.Info[3].v.z = l_CInfo.m_CollisionPoint.z;
+        //ENTITY_MANAGER->SendEvent(l_impacte);
       }
 
     }else{
-      CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
-      CComponentLaser::AddToEntity( l_pLaser,
-                                    l_vPosArma,
-                                    l_vPuntLlunya,
-                                    1.f);
+      l_pEM->InitLaser(l_vPosArma,l_vDir,20.f, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
     }
   }
 
