@@ -16,6 +16,7 @@
 #include "GraphDefines.h"
 #include "SphereCamera.h"
 #include "ActionManager.h"
+#include "EmiterManager.h"
 
 #include "Core.h"
 #include "SoundManager.h"
@@ -64,6 +65,7 @@ void CBiotestProcess::RenderScene(CRenderManager* _pRM)
 
   //CORE->GetRenderableObjectsManager()->Render(_pRM);
   CORE->GetPortalManager()->Render(_pRM);
+  CORE->GetEmiterManager()->Render(_pRM);
   //CORE->GetParticleManager()->Render(_pRM);
   //CORE->GetBillBoardManager()->Render(_pRM);
 
@@ -72,6 +74,7 @@ void CBiotestProcess::RenderScene(CRenderManager* _pRM)
 
 void CBiotestProcess::RenderINFO(CRenderManager* _pRM)
 {
+  CORE->GetEmiterManager()->DebugRender(_pRM);
   //CORE->GetPhysicsManager()->DebugRender(_pRM);
   //CORE->GetPortalManager()->DebugRender(_pRM);
   //CORE->GetIAManager()->GetGraph()->DebugRender(_pRM);

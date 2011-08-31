@@ -15,6 +15,7 @@
 #include "PortalManager.h"
 #include "SoundManager.h"
 #include "Core.h"
+#include "EmiterManager.h"
 
 void CGameProcess::Update(float _fElapsedTime)
 {
@@ -41,8 +42,9 @@ void CGameProcess::RenderScene(CRenderManager* _pRM)
 {
   //CORE->GetRenderableObjectsManager()->Render(_pRM);
   CORE->GetPortalManager()->Render(_pRM);
-  CORE->GetParticleManager()->Render(_pRM);
-  CORE->GetBillBoardManager()->Render(_pRM);
+  CORE->GetEmiterManager()->Render(_pRM);
+  //CORE->GetParticleManager()->Render(_pRM);
+  //CORE->GetBillBoardManager()->Render(_pRM);
 }
 
 void CGameProcess::RenderINFO(CRenderManager* _pRM)
