@@ -648,7 +648,7 @@ CGameEntity* CEntityManager::InitLaser(const Vect3f& _vPosInit, const Vect3f& _v
   CComponentObject3D *l_pComponentObject3D = CComponentObject3D::AddToEntity(l_pLaser);
   l_pComponentObject3D->SetMat44(l_mO3D);
 
-  CComponentLaser::AddToEntity( l_pLaser, _vDir, _fDany, _uiCollisionMask )->m_fSpeed = 5;
+  CComponentLaser::AddToEntity( l_pLaser, _vDir, _fDany, _uiCollisionMask );
 
   CComponentRenderableObject *l_pCRO= CComponentRenderableObject::AddToEntity(l_pLaser, "laser " + l_pLaser->GetName(), "laser");
   l_pCRO->m_bActive = true;
