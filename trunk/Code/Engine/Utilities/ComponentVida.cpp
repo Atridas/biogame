@@ -24,9 +24,11 @@ bool CComponentVida::Init(CGameEntity* _pEntity, float _fVidaInicial, float _fVi
   m_fVidaMaxima = _fVidaMaxima;
   m_bRegen = _bRegen;
   m_fRegenAmount = _fRegenAmount;
-  //passar com a variable?
   m_fTimeForRegen = _fTimeForRegen;
   m_fTimeSinceHit = 0.0f;
+
+  m_fDoTTime = 0.0f;
+  m_fHoTTime = 0.0f;
 
   m_pShield = _pEntity->GetComponent<CComponentShield>(ECT_SHIELD);
 
@@ -36,9 +38,26 @@ bool CComponentVida::Init(CGameEntity* _pEntity, float _fVidaInicial, float _fVi
 
 void CComponentVida::Update(float _fDeltaTime)
 {
-  if(m_bRegen)
+  if(m_fHoTTime > 0.0f)
   {
-    
+    m_fHoTTime -= _fDeltaTime;
+    Increase(m_fHoT * _fDeltaTime);
+  }else
+  {
+    m_fHoTTime = 0.0f;
+  }
+
+  if(m_fDoTTime > 0.0f)
+  {
+    m_fDoTTime -= _fDeltaTime;
+    Decrease(m_fDoT * _fDeltaTime);
+  }else
+  {
+    m_fDoTTime = 0.0f;
+  }
+
+  if(m_bRegen)
+  {    
     if(m_fTimeSinceHit <= m_fTimeForRegen)
     {
       m_fTimeSinceHit += _fDeltaTime;
@@ -66,7 +85,8 @@ void CComponentVida::Decrease(float _fAmount)
 {
   if(!m_bImmortal && m_fVida > 0.0f)
   {
-    //TODO: check escuts a l'entitat
+    m_fTimeSinceHit = 0.0f;
+
     if(_fAmount < 0.0f)
       _fAmount *= -1;
 
@@ -105,7 +125,6 @@ void CComponentVida::ReceiveEvent(const SEvent& _Event)
   if(_Event.Msg == SEvent::REBRE_IMPACTE)
   {
     assert(_Event.Info[0].Type == SEventInfo::FLOAT);
-    m_fTimeSinceHit = 0.0f;
 
     if(m_fVida > 0.f)
     {
@@ -138,3 +157,22 @@ void CComponentVida::ReceiveEvent(const SEvent& _Event)
     m_fVida = 0.0f;
   }
 }
+
+void CComponentVida::AddDoT(float _fDamagePerSecond, float _fDoTTime)
+{
+  if(_fDamagePerSecond > 0.0f && _fDoTTime > 0.0f)
+  {
+    m_fDoT = _fDamagePerSecond;
+    m_fDoTTime = _fDoTTime;
+  }
+}
+
+void CComponentVida::AddHoT(float _fHealPerSecond, float _fHoTTime)
+{
+  if(_fHealPerSecond > 0.0f && _fHoTTime > 0.0f)
+  {
+    m_fHoT = _fHealPerSecond;
+    m_fHoTTime = _fHoTTime;
+  }
+}
+  

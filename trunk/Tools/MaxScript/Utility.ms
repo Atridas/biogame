@@ -796,6 +796,13 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				l_params = XMLEntityTrigger l_instance &l_TagName "trigger" (GetUserProp l_instance "TriggerEnter") (GetUserProp l_instance "TriggerExit")
 				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 				
+				--[Emiter de partícules]
+				if IsEmiter l_instance then
+				(
+					l_params = XMLEntityEmiter l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+				)
+				
 				format "\n  %" (CloseTagXML "Entity") to:l_file
 			)
 			else if IsCover _entities[i] then

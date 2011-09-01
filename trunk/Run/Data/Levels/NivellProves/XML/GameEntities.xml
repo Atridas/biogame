@@ -239,6 +239,7 @@
   <Entity name="TriggerYaw">
     <Object3D position="11.9221 3.1656 33.045" yaw="20.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="5.91054 5.91054 5.91054" collision_group="trigger" onEnter="triggerDeProvesEntrar" onExit="triggerDeProvesSortir" />
+    <Emiter core="vapor" volume="5.91054 5.91054 5.91054" />
   </Entity>
   <Entity name="HighCover10">
     <Object3D position="-28.1834 1.00374 -3.20767" yaw="115.0" pitch="0.0" roll="0.0" />
@@ -255,6 +256,7 @@
   <Entity name="Porta01">
     <Object3D position="-39.4743 1.56408 2.94355" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta" />
+    <PhysXBox fromRenderableObject="false" shape="box" size="0.976215 3.05175 2.56453" midpoint="0 0 0" density="0" collision_group="escenari" />
     <Door open="false" size="0.976215 3.05175 2.56453" />
   </Entity>
   <Entity name="TriggerPorta01">

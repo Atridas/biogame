@@ -3,6 +3,12 @@
 -- entres al trigger
 function triggerDeProvesEntrar(_EntityTrigger, _Entity)
   log('entrar ' .. _EntityTrigger:get_name() .. ' amb ' .. _Entity:get_name())
+  
+  --aplicar un DoT
+  local l_vida = _Entity:get_component(BaseComponent.vida)
+  if l_vida then
+    l_vida:add_dot(15.0,2.0)
+  end
 end
 
 -- surts del trigger
@@ -19,6 +25,12 @@ function triggerDeProvesSortir(_EntityTrigger, _Entity)
     end
   else
     log("Error: no es troba l'entitat EnemySpawner!")
+  end
+  
+  --aplicar un HoT
+  local l_vida = _Entity:get_component(BaseComponent.vida)
+  if l_vida then
+    l_vida:add_hot(15.0,2.0)
   end
 end
 
