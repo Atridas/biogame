@@ -222,6 +222,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("add_to_entity",     (CComponentPhysXBox*(*)(CGameEntity*,float,float,float,float,float,float,float,int))&CComponentPhysXBox::AddToEntity)
       .def("add_to_entity",     (CComponentPhysXBox*(*)(CGameEntity*,float,int))&CComponentPhysXBox::AddToEntity)
       .def("activate",          &CComponentPhysXBox::Activate)
+      .def("set_position",      &CComponentPhysXBox::SetPosition)
+      .def("get_position",      &CComponentPhysXBox::GetPosition)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentRenderableObject, CBaseComponent>("ComponentRenderableObject")
