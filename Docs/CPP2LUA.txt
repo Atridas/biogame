@@ -1054,6 +1054,12 @@ ENTITIES
       set_regen
       void SetRegen(float _fRegenAmount)
       
+      add_dot
+      void AddDoT(float _fDamagePerSecond, float _fDoTTime)
+      
+      add_hot
+      void AddHoT(float _fHealPerSecond, float _fHoTTime)
+      
     Attributes:
       immortal
       CComponentVida::m_bImmortal

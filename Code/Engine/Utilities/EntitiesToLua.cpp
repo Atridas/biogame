@@ -279,6 +279,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("decrease",                 &CComponentVida::Decrease)
       .def("set",                      &CComponentVida::Set)
       .def("set_regen",                &CComponentVida::SetRegen)
+      .def("add_dot",                  &CComponentVida::AddDoT)
+      .def("add_hot",                  &CComponentVida::AddHoT)
       .def_readwrite("immortal",       &CComponentVida::m_bImmortal)
 
     // ----------------------------------------------------------------------------------------------------
