@@ -742,30 +742,33 @@ utility BioUtility "Eon-Utility" width:160 height:549
 					l_params = XMLEntityPhysXMesh l_instance &l_TagName l_colgroup
 					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 				)
+				
 				--PickUp
-				else if (GetUserProp l_instance "pickup") != undefined then
+				if IsPickUp l_instance then
 				(
 					--Trigger
 					l_params = XMLEntityTrigger l_instance &l_TagName "pickup" (GetUserProp l_instance "pickup") undefined
 					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 				)
+				
 				--Interactive
-				else if (GetUserProp l_instance "interactive") != undefined then
+				if IsInteractive l_instance then
 				(					
 					--PhysXBox
-					l_params = XMLEntityPhysXBox l_instance &l_TagName "escenari" true
-					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					--l_params = XMLEntityPhysXBox l_instance &l_TagName "escenari" true
+					--format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 					
 					--Interactive
 					l_params = XMLEntityInteractive l_instance &l_TagName
 					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 				)
+				
 				--Destroyable
-				else if (GetUserProp l_instance "onDestroy") != undefined and (GetUserProp l_instance "destroyedResource") != undefined then
+				if IsDestroyable l_instance then
 				(
 					--PhysXBox
-					l_params = XMLEntityPhysXBox l_instance &l_TagName "escenari" true
-					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					--l_params = XMLEntityPhysXBox l_instance &l_TagName "escenari" true
+					--format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 					
 					--Trigger
 					l_params = XMLEntityDestroyable l_instance &l_TagName

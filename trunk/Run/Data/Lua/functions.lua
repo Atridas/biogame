@@ -55,6 +55,15 @@ function esfera_destructible(_self)
   log('Sóc ' .. _self:get_name() .. ' i m\'ha matat ')
 end
 
+--prova d'explosio
+function prova_explosio(_self)  
+  local l_o3d = _self:get_component(BaseComponent.object_3d)
+  if l_o3d then
+    local l_position = l_o3d:get_position()
+    EM:init_trigger_with_emiter("bubble", l_position, Vect3f(2.0, 3.0, 2.0), get_collision_group("trigger"), "triggerDeProvesEntrar", "triggerDeProvesSortir", 10, Vect3f(0,1,0))
+  end
+end
+
 -------------------------------------------- GLOBALS  -------------------------------------------
 function activar_enemic(_name)
   local l_enemic = EM:get_entity(_name)
@@ -81,6 +90,14 @@ function desactivar_enemic(_name)
     end
   else
     log('Error: no es troba l\'enemic: ' .. _name)
+  end
+end
+
+function bido_toxic(_self)
+  local l_o3d = _self:get_component(BaseComponent.object_3d)
+  if l_o3d then
+    local l_position = l_o3d:get_position()
+    EM:init_trigger_with_emiter("bubble", l_position, Vect3f(2.0, 3.0, 2.0), get_collision_group("trigger"), "triggerBidoToxic", "", 10, Vect3f(0,1,0))
   end
 end
 

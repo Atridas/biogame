@@ -37,4 +37,5 @@
 	<RenderableObject name="TeteraPickUp" class="StaticMesh" resource="TeteraPickUp" position="-24.3621 0.624995 21.6316" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="EsferaInteractiva" class="StaticMesh" resource="EsferaInteractiva" position="-24.4011 0.968018 24.6365" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="EsferaDestructible" class="StaticMesh" resource="EsferaDestructible" position="-16.8264 1.42554 23.2763" yaw="0.0" pitch="0.0" roll="0.0" />
+  <RenderableObject name="EsferaDestructible01" class="StaticMesh" resource="EsferaDestructible" position="-13.2122 0.387946 23.2763" yaw="0.0" pitch="0.0" roll="0.0" />
 </RenderableObjects>

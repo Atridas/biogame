@@ -83,6 +83,10 @@ function IsPickUp _object =
 	(
 		return true
 	) else (
+		if classof _object != Dummy and (GetUserProp _object "pickup") != undefined then
+		(
+			return true
+		)
 		return false
 	)
 )
@@ -94,6 +98,10 @@ function IsInteractive _object =
 	(
 		return true
 	) else (
+		if classof _object != Dummy and (GetUserProp _object "interactive") != undefined then
+		(
+			return true
+		)
 		return false
 	)
 )
@@ -101,10 +109,14 @@ function IsInteractive _object =
 -- Comprova si l'objecte proporcionat és un objecte destructible
 function IsDestroyable _object =
 (
-	if classof _object == Dummy and (GetUserProp _object "onDestroy") != undefined and (GetUserProp _object "resource") != undefined then
+	if (GetUserProp _object "onDestroy") != undefined and (GetUserProp _object "resource") != undefined then
 	(
 		return true
 	) else (
+		if classof _object != Dummy and (GetUserProp _object "onDestroy") != undefined then
+		(
+			return true
+		)
 		return false
 	)
 )

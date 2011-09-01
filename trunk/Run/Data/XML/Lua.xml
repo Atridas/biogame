@@ -4,6 +4,7 @@
     <file path="Data/Lua/globals.lua" />
     <file path="Data/Lua/functions.lua" />
     <file path="Data/Lua/biogame_gui.lua" />
+    <file path="Data/Lua/triggers_globals.lua" />
     <file path="Data/Lua/nivell_proves_triggers.lua" />
     <file path="Data/Lua/nivell_-2_triggers.lua" />
     <file path="Data/Lua/player_states.lua" />
