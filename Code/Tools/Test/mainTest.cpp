@@ -26,7 +26,59 @@
 
 
 
-
+/*
+                                               `:/+osyhhhhhhhyyss+:.`                               
+                                        `:+o+sdhs+/:..`     ```.-/oyhdyo:`                          
+                                     `+hddhs+-`        `            ``-/ohdy/.                      
+                                  `:yds-              :+            :o`  -::ohds:`                  
+                                .ody:`                .:.        `   /h` //:  `:yhy+.               
+                              :ydo.                        -.   .-`   sy  ./.    `-odh/`            
+                            `ym/`                                `::  `h/ .s/+/`    `-sdy-          
+                            sm.                                    ./. -s `+```:+/.    `/ds.        
+                           +N:                                ..     //`o`   -+:`        `sm/       
+                          -No                          .:://:.`+/`    .:::`./.             :ms`     
+                         `dh`                          `..--./+-:ds:`   .+/+       `        .hh.    
+                         sm.                         -+::/:-.--:/-hNms:``+s+    `-/+         `hd`   
+                        /N:                         `s``dNNy` .-.:`ys+/--``-:/ydhys+/:-.`     .hh`  
+                       `my                           /` omdo..`: ``smo:``--+-:yy.-:-:-::--`    .ms  
+                       +N-                           `---:+--:/``-oo//s:--.:./y-o-/:./+:-:`     +N- 
+                      `my                           .://////---:::.` `:-``-+--+-o:``hMMd-/      `dy 
+                      +N-                          `..--:::-..`` .-`   `   -`.-o/:-.:so/-:       /N-
+                     `my                           .+/` ```----//-`.           +s---:--.`        `ms
+                     `N+                            ``  .:+o+/-.   :o:--.```   `s:.-...`          hh
+                     `N+                                           `hyshso/...``/+.  ``           hh
+                     `N+                                           so/-:/:+s+::-`-h/              hh
+                     `N+                                          `d/---.``:.`./`-o+`             hh
+                     `No                                          /+-.-/oo/`   `  `/`             my
+                      dd                      .                  .s```` `.s+.`   `:+             .N+
+                      +N.             -.      .                  //-:++/. -ddyyyhd:              om.
+                      .mo             ..             .-         `+dmNNds+::y/:/yho`             `dy 
+                       dh                            ``         `:ymho....:///-:hh+.            -N/ 
+                       oN.                         `            `++/.:+os/oyds/--ms:            oN` 
+                       `Ny                         `            `s.-/++s:::/++/o y/`           `my  
+                        +N:                  `/.                +h+hhhoy:/+-o/o-/m:            /N-  
+                         sm:                  .`               -s+ysNmdhysyyoy/ooy:           -mo   
+                          om/`                                .:.-/-+o:///+ys/so`.-`         -dy`   
+                           /dy/.`                             .  ```.:-:-:::/ .o.`         `od+`    
+                           .+mmdh:`                      -  `::/+/+/.`  ```.` -:         `/hy-      
+                         .ods:`./yhs:`                 `+: `:-oo+///oos+/:---:+s`      .+hs:        
+                       .sds-      ./yhs/.`          ``/s:  :o:`       `.-::::. so  `./shs-          
+                    `-ydo.  +o-      `:ohho/-.`   .:os:`  `+.                  -Nosyyo:`            
+                  ./hh/`    -+ms.        .:+syysosyh/.``   ``-            `.-+shy+-`                
+                -sds-`        .yd+`           `-/osyyyyyyssooooo++///++osyyhs+-`                    
+             ./yh+.             -hd:`                 ``.--::/hNy+/////:-.`             `.    //    
+           .ods:`                `/dh-`                     -hmmo-        `             -ds-..ms./  
+          +mo.                     `+dh:                  `omo`-ody:` .y. yo` -`         .mmddNhdo  
+        .yd:                         `+dy-               `hm-    `/hh+:my`oM.`N+       .+dy. .--`   
+       :dy`                            `+dy/`           -dd.    ``-+hNmNNdNNyhd:-   `/ydo.          
+      +N/                                `/hd/`  ``...-oNdssssyhhhyo/..omy/oddydy./yds:`            
+    :sm/                                    :dhshhhyshMh+/:---.``       .sms:-/yhds-                
+  -yd/`                                      `/:.   -ms`                  `+ddy+.                   
+.yd/`                                              `hy                                              
+yh`                                               .dh`                                              
+-`                                               -my`                                               
+`                                               -ms            
+*/
 
 
 
@@ -75,7 +127,25 @@
 
 
 
+#ifdef __T_PYSX__
+#define APPLICATION_NAME	"TEST PhysX"
+#endif
+#ifdef __T_PARTICULES__
+#define APPLICATION_NAME	"TEST Particulas"
+#endif
+#ifdef __T_ENTITIES__
+#define APPLICATION_NAME	"TEST Entities"
+#endif
+#ifdef __T_BIOTEST__
+#define APPLICATION_NAME	"BioTEST"
+#endif
+#ifdef __T_PARTICLE_VIEWER__
+#define APPLICATION_NAME	"Particle Viewer"
+#endif
+
+#ifndef APPLICATION_NAME
 #define APPLICATION_NAME	"TEST"
+#endif
 
 void ShowErrorMessage (const std::string& message);
 
