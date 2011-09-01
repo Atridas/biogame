@@ -141,6 +141,8 @@ void CEntityProcess::RenderINFO(CRenderManager* _pRM)
     CORE->GetPhysicsManager()->DebugRender(_pRM);
     CORE->GetPortalManager()->DebugRender(_pRM);
     CORE->GetEntityManager()->DebugRender(_pRM);
+    CORE->GetIAManager()->GetGraph()->DebugRender(_pRM);
+    CORE->GetEmiterManager()->DebugRender(_pRM);
 
     CFrustum l_Frustum;
     l_Frustum.Update(m_pCamera);
@@ -150,9 +152,8 @@ void CEntityProcess::RenderINFO(CRenderManager* _pRM)
     _pRM->SetTransform(i);
   
     _pRM->DrawFrustum(&l_Frustum, colBLACK);
-
   }
-  CORE->GetIAManager()->GetGraph()->DebugRender(_pRM);
+
 }
 
 bool CEntityProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)

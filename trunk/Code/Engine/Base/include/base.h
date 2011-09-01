@@ -100,15 +100,22 @@ using namespace std;
 #define ENTITY_MANAGER CORE->GetEntityManager()
 
 
-float Random01();
-float RandomNumber(float _fNumA, float _fNumB);
-int   RandomNumber(int   _iNumA, int   _iNumB);
+float  Random01();
+float  RandomNumber(float _fNumA, float _fNumB);
+int    RandomNumber(int   _iNumA, int   _iNumB);
+Vect3f RandomUnitVector();
+Mat33f RandomRotationMatrix(float _fMaxAngle);
 
 
 D3DXVECTOR3 InterpolateNumber(const D3DXVECTOR3& _vInicial, const D3DXVECTOR3& _vFinal,float _fTime, float _fTimeDelta);
 Vect3f InterpolateNumber(const Vect3f& _vInicial, const Vect3f& _vFinal,float _fTime, float _fTimeDelta);
 D3DXCOLOR InterpolateNumber(const D3DXCOLOR& _vInicial, const D3DXCOLOR& _vFinal,float _fTime, float _fTimeDelta);
 float InterpolateNumber(float _fInicial, float _fFinal,float _fTime, float _fTimeDelta);
+
+Mat33f GetFastestRotationFromDirToDir(const Vect3f& _vOriginalDir, const Vect3f& _vDestinationDir);
+Mat33f GetRotationFromOrientationToOrientation(
+                              const Vect3f& _vOriginalDir,    const Vect3f& _vOriginalUp, 
+                              const Vect3f& _vDestinationDir, const Vect3f& _vDestinationUp);
 
 //Entrar números, mai funcions!!!!!!!
 #define SIMPLE_INTERPOLATION(a, b, t) ((a * (1-t)) + (b * t))

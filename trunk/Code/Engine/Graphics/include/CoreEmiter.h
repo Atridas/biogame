@@ -41,8 +41,10 @@ public:
       m_fSleepTime1(0.f), m_fSleepTime2(0.f),
       m_fStartingAngle1(0.f), m_fStartingAngle2(0.f),
       m_vStartingSpeed1(0.f), m_vStartingSpeed2(0.f),
+      m_fStartingDirectionAngle(0.f),
       m_fStartingAngularSpeed1(0.f), m_fStartingAngularSpeed2(0.f),
       m_vAcceleration1(0.f), m_vAcceleration2(0.f),
+      m_fAccelerationDirectionAngle(0.f),
       m_fAngularAcceleration1(0.f), m_fAngularAcceleration2(0.f),
       //vector<SColorAnimation> m_ColorAnimations;
       //vector<SSizeAnimation>  m_SizeAnimations;
@@ -99,9 +101,12 @@ private:
   float m_fStartingAngle1, m_fStartingAngle2;
 
   Vect3f m_vStartingSpeed1       , m_vStartingSpeed2;
+  float  m_fStartingDirectionAngle;
   float  m_fStartingAngularSpeed1, m_fStartingAngularSpeed2;
   
+
   Vect3f m_vAcceleration1       , m_vAcceleration2;
+  float  m_fAccelerationDirectionAngle;
   float  m_fAngularAcceleration1, m_fAngularAcceleration2;
 
   vector<SColorAnimation> m_ColorAnimations;

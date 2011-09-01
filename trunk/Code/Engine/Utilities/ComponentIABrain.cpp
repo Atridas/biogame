@@ -76,7 +76,7 @@ void CComponentIABrain::Shoot()
   Vect3f l_vDir = (l_vPlayerPos - l_vMyHand).GetNormalized();
   
   CEntityManager* l_pEM = ENTITY_MANAGER;
-  l_pEM->InitParticles("disparar", l_vPos, Vect3f(.5f,.5f,.5f), 5.f);
+  l_pEM->InitParticles("disparar", l_vPos, Vect3f(.5f,.5f,.5f), 2.5f, l_vDir);
   l_pEM->InitLaser(l_vPos,l_vDir,20.f, CORE->GetPhysicsManager()->GetCollisionMask(ECG_RAY_SHOOT));
 
   //SCollisionInfo l_CInfo;
