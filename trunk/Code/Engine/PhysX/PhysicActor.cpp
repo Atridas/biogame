@@ -300,7 +300,7 @@ void CPhysicActor::CreateBoxTrigger(const Vect3f& size, uint32 group)
 void CPhysicActor::ActivateAllTriggers()
 {
   uint32 size = m_pPhXActorDesc->shapes.size();
-  for(int i = 0; i < size; ++i)
+  for(uint32 i = 0; i < size; ++i)
   {
     m_pPhXActorDesc->shapes[i]->shapeFlags |= NX_TRIGGER_ENABLE;
   }
