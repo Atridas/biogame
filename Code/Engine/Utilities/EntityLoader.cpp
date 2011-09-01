@@ -679,3 +679,23 @@ CGameEntity* CEntityManager::InitParticles(const string& _szCore, const Vect3f& 
 
   return l_pEmiterEntity;
 }
+
+CGameEntity* CEntityManager::InitTriggerWithParticles(const string& _szCore, const Vect3f& _vPos, const Vect3f& _vSize, uint32 _uiCollisionMask, const string& _szOnEnter, const string& _szOnExit, float _fTime, const Vect3f& _vYdir)
+{
+  assert(abs(_vYdir.SquaredLength() - 1.f) < 0.01f && "CEntityManager::InitTriggerWithParticles _vYdir cal que sigui unitari");
+
+  Mat33f l_mRot = GetFastestRotationFromDirToDir(Vect3f(0,1,0), _vYdir);
+  Mat44f l_mO3D(l_mRot);
+  l_mO3D.SetPos(_vPos);
+
+  CGameEntity* l_pTriggerEmiterEntity = ENTITY_MANAGER->CreateEntity();
+  CComponentObject3D* l_pCO3D = CComponentObject3D::AddToEntity(l_pTriggerEmiterEntity);
+  l_pCO3D->SetMat44(l_mO3D);
+
+  CComponentTrigger ::AddToEntity(l_pTriggerEmiterEntity, _vSize, _szOnEnter, _szOnExit, _uiCollisionMask);
+  CComponentEmiter  ::AddToEntity(l_pTriggerEmiterEntity, _szCore, _vSize);
+  if(_fTime > 0)
+    CComponentLifetime::AddToEntity(l_pTriggerEmiterEntity, _fTime);
+
+  return l_pTriggerEmiterEntity;
+}

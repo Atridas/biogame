@@ -282,7 +282,7 @@
     <Object3D position="-16.8264 1.42554 23.2763" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="EsferaDestructible" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Destroyable onDestroy="esfera_destructible" destroyedResource="BoxAlpha" />
+    <Destroyable onDestroy="esfera_destructible" destroyedResource="TeteraPickUp" />
   </Entity>
   <Entity name="navNode01">
     <Object3D position="38.7529 0.821378 42.6325" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -503,6 +503,12 @@
   <Entity name="EnemySpawner">
     <Object3D position="50.9588 2.0 3.34681" yaw="0.0" pitch="0.0" roll="0.0" />
     <EnemySpawner enemy_type="miner" spawn_time="5.0" total_enemy="10" active="false" />
+  </Entity>
+  <Entity name="EsferaDestructible01">
+    <Object3D position="-13.2122 0.387946 23.2763" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="EsferaDestructible01" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <Destroyable onDestroy="prova_explosio" />
   </Entity>
   <Player position="-16.8764 2.0 -15.9165" yaw="0.0" />
   <Miner name="Miner" position="50.3014 2.0 39.1446" yaw="0.0" active="false" />

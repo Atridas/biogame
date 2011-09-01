@@ -55,6 +55,8 @@ public:
 
   CGameEntity* InitParticles(const string& _szCore, const Vect3f& _vPos, const Vect3f& _vSize, float _fTime = 0, const Vect3f& _vYdir = Vect3f(0,1,0));
 
+  CGameEntity* InitTriggerWithParticles(const string& _szCore, const Vect3f& _vPos, const Vect3f& _vSize, uint32 _uiCollisionMask, const string& _szOnEnter = "", const string& _szOnExit = "", float _fTime = 0, const Vect3f& _vYdir = Vect3f(0,1,0));
+
 protected:
   virtual void Release();
 

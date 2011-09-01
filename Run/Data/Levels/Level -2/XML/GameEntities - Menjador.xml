@@ -423,6 +423,7 @@
     <Object3D position="9.40583 0.291046 28.5388" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="bido_verd00" />
     <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_toxic" />
   </Entity>
   <Entity name="Plats_physc32">
     <Object3D position="15.0233 1.21854 19.9578" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -693,6 +694,7 @@
     <Object3D position="34.0709 0.299438 30.8373" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="bido_verd09" />
     <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_toxic" />
   </Entity>
   <Entity name="Bido_vermell04">
     <Object3D position="33.5255 0.0 31.1549" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -703,6 +705,7 @@
     <Object3D position="28.5492 0.0 29.7531" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="bido_verd" />
     <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_toxic" />
   </Entity>
   <Entity name="Bido_vermell03">
     <Object3D position="27.8766 0.0 29.6178" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -713,6 +716,7 @@
     <Object3D position="28.0759 0.935213 29.9004" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="bido_verd" />
     <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_toxic" />
   </Entity>
   <Entity name="Bido_vermell02">
     <Object3D position="28.1648 0.0 30.23" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -723,11 +727,13 @@
     <Object3D position="28.0759 0.935213 29.9004" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="bido_verd" />
     <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_toxic" />
   </Entity>
   <Entity name="bido_verd01">
     <Object3D position="9.01941 0.0 28.2464" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="bido_verd" />
     <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_toxic" />
   </Entity>
   <Entity name="Bido_vermell01">
     <Object3D position="9.66882 0.0 27.9152" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -738,11 +744,13 @@
     <Object3D position="2.31746 0.0 30.3777" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="bido_verd" />
     <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_toxic" />
   </Entity>
   <Entity name="bido_verd03">
     <Object3D position="1.64265 0.0 30.2441" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="bido_verd" />
     <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_toxic" />
   </Entity>
   <Entity name="columna08">
     <Object3D position="2.96589 1.75826 29.5427" yaw="0.0" pitch="0.0" roll="0.0" />

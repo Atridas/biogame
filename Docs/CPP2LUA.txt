@@ -8,6 +8,9 @@ GLOBALS
     
     get_core
     CCore* GetCore()
+    
+    get_collision_group
+    int GetCollisionGroup(const string& _szGroup)
 
   Class:
 			Vect2f
@@ -799,6 +802,12 @@ ENTITIES
       init_militar
       CGameEntity* InitMilitar(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName = "", const bool _bActive = true)
       
+      init_emiter
+      CGameEntity* InitParticles(const string& _szCore, const Vect3f& _vPos, const Vect3f& _vSize, float _fTime = 0, const Vect3f& _vYdir = Vect3f(0,1,0))
+      
+      init_trigger_with_emiter
+      CGameEntity* InitTriggerWithParticles(const string& _szCore, const Vect3f& _vPos, const Vect3f& _vSize, uint32 _uiCollisionMask, const string& _szOnEnter = "", const string& _szOnExit = "", float _fTime = 0, const Vect3f& _vYdir = Vect3f(0,1,0))
+      
   Class:
     ComponentObject3D
     CComponentObject3D
@@ -806,6 +815,9 @@ ENTITIES
     Methods:
       add_to_entity
       static CComponentObject3D* AddToEntity(CGameEntity *_pEntity)
+      
+      get_position
+      const Vect3f&	GetPosition() const
       
   Class:
     ComponentPlayerController

@@ -27,6 +27,7 @@ extern "C"
 #include "StaticMeshManager.h"
 #include "LightManager.h"
 #include "SoundManager.h"
+#include "PhysicsManager.h"
 
 #include "Utils/Object3D.h"
 #include "Utils/BaseControl.h"
@@ -342,6 +343,8 @@ void CScriptManager::RegisterLUAFunctions()
     ,def("get_core", &GetCore)
     //open/close console
     ,def("exit", &CloseConsole)
+    //collision group
+    ,def("get_collision_group", &GetCollisionGroup)
   ];
 
   //Vect3f
