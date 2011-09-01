@@ -171,7 +171,7 @@ void CComponentPlayerController::Shoot()
 
   l_vPosArma -= l_vDirArma*0.1f;
   
-  l_pEM->InitParticles("disparar", l_vPosArma + l_vDirArma*0.2f, Vect3f(.5f,.5f,.5f), 5.f);
+  l_pEM->InitParticles("disparar", l_vPosArma + l_vDirArma*0.2f, Vect3f(.25f,.5f,.25f), 2.5f, l_vDir);
 
   CPhysicsManager *l_pPM = PHYSICS_MANAGER;
 

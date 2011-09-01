@@ -10,7 +10,9 @@
     life(1/2): temps de vida de la partícula
     starting_angle(1/2): angle (en radiants) en que comença la partícula
     starting_speed(1/2): velocitat inicial, en unitats per segon
+    starting_direction_angle: angle (en radiants) de desviació en la direcció inicial (per defecte: 0)
     acceleration(1/2): accelaració de la partícula, en unitats per segon al quadrat
+    acceleration_direction_angle: angle (en radiants) de desviació en la accelaració (per defecte: 0)
     starting_angular_speed(1/2): rotació de la partícula, en radiants per segon
     angular_acceleration(1/2): accelaració de la rotació, en radiants per segon al quadrat
     color(1/2): color inicial de la partícula
@@ -37,7 +39,8 @@
         
   -->
 
-  <!-- ParticleEmitter  id="vapor"                        MinEmitRate="15.0"             MaxEmitRate="20.0"
+  <!--
+  <ParticleEmitter  id="vapor"                        MinEmitRate="15.0"             MaxEmitRate="20.0"
                       Color1="0.10 0.10 0.10 0.8"       Color2="0.10 0.10 0.10 0.8"    MinSize="0.05"        MaxSize="0.05"
                       Life1="1.0"                       Life2="1.0"                    Bucle="true"    
                       Angle1="-0.1"                     Angle2="0.1"                   Gravity="0.0 5.5 0.0" 
@@ -45,7 +48,9 @@
       <Sizes>
         <Size         time="1.0"       timeInterpolation="1.0"        MinSize="0.9"          MaxSize="0.9"/>
       </Sizes>
-  </ParticleEmitter -->
+  </ParticleEmitter>
+  -->
+  
   <CoreEmiter id="vapor"                        
               emit_rate1="15.0"                  emit_rate2="20.0"
               life1="1.0"                        life2="1.0"       
@@ -68,23 +73,26 @@
 
   </CoreEmiter>
   
-  <!-- ParticleEmitter  id="bubble"                        MinEmitRate="7.0"             MaxEmitRate="10.0"
+  <!--
+  <ParticleEmitter  id="bubble"                        MinEmitRate="7.0"             MaxEmitRate="10.0"
                       Color1="0.0 1.0 0.0 1.0"           Color2="0.0 1.0 0.0 1.0"      MinSize="0.02"        MaxSize="0.1"
                       Life1="2.5"                        Life2="3.0"                   Angle1="-0.5"         Angle2="0.5"
                       Bucle="false"                      RebootEmitter1="1.0"          RebootEmitter2="1.5"  TotDeCop="false"
                       NumBucle="10"                      Gravity="0.0 -0.25 0.0"       Velocitate="1.0 1.0 1.0"   
                       TexParticle="Data/Textures/texturas particulas/soapbubble.dds">      
                      
-  </ParticleEmitter -->
+  </ParticleEmitter>
+  -->
   <CoreEmiter id="bubble"                        
-              emit_rate1="7.0"                   emit_rate2="10.0"
+              emit_rate1="10.0"                  emit_rate2="15.0"
               life1="2.5"                        life2="3.0"              
               awake_time1="0.8"                  awake_time2="1.2"
               sleep_time1="1.3"                  sleep_time2="1.7"
               
               starting_angle1="-3.14159"         starting_angle2="3.14159"
               
-              starting_speed1="0.1 1.0 0.0"      starting_speed2="0.0 1.0 0.1"
+              starting_speed1="0.0 1.0 0.0"      starting_speed2="0.0 1.0 0.0"
+              starting_direction_angle="0.1"
               acceleration1="0.0 -0.25 0.0"      acceleration2="0.0 -0.25 0.0"
               starting_angular_speed1="-0.5"     starting_angular_speed2="0.5"
               angular_acceleration1="-0.1"       angular_acceleration2="0.1"
@@ -93,7 +101,12 @@
               color1="0.0 1.0 0.0 1.0"          color2="0.0 1.0 0.0 1.0" 
               size1="0.02"                      size2="0.1"
               texture="Data/Textures/texturas particulas/soapbubble.dds">
+    <Sizes>
+      <Size   control_time1="1.5"       control_time2="2.0"        size1="0.02"          size2="0.05"/>
+      <Size   control_time1="3.0"       control_time2="3.0"        size1="0.09"          size2="0.1"/>
+    </Sizes>
   </CoreEmiter>
+  
   
   
   <CoreEmiter id="impacte"                        
@@ -104,8 +117,10 @@
               
               starting_angle1="-3.14159"         starting_angle2="3.14159"
               
-              starting_speed1="0.5 0.5 0.5"      starting_speed2="-0.5 -0.5 -0.5"
-              acceleration1="2.0 2.0 2.0"        acceleration2="-2.0 -2.0 -2.0"
+              starting_speed1="0.5 0.5 0.5"      starting_speed2="0.5 0.5 0.5"
+              starting_direction_angle="3.14159"
+              acceleration1="2.0 2.0 2.0"        acceleration2="2.0 2.0 2.0"
+              acceleration_direction_angle="3.14159"
               starting_angular_speed1="-0.1"     starting_angular_speed2="0.1"
               angular_acceleration1="0.0"        angular_acceleration2="0.0"
               
@@ -131,8 +146,10 @@
               
               starting_angle1="-3.14159"         starting_angle2="3.14159"
               
-              starting_speed1="0.5 0.5 0.5"      starting_speed2="-0.5 -0.5 -0.5"
-              acceleration1="2.0 2.0 2.0"        acceleration2="-2.0 -2.0 -2.0"
+              starting_speed1="0.5 0.5 0.5"      starting_speed2="0.5 0.5 0.5"
+              starting_direction_angle="3.14159"
+              acceleration1="2.0 2.0 2.0"        acceleration2="2.0 2.0 2.0"
+              acceleration_direction_angle="3.14159"
               starting_angular_speed1="-0.1"     starting_angular_speed2="0.1"
               angular_acceleration1="0.0"        angular_acceleration2="0.0"
               
@@ -151,15 +168,16 @@
   
   
   <CoreEmiter id="disparar"                        
-              emit_rate1="500.0"                 emit_rate2="500.0"
-              life1="0.1"                        life2="0.1"           
+              emit_rate1="5000.0"                emit_rate2="5000.0"
+              life1="0.1"                        life2="1.0"           
               awake_time1="0.2"                  awake_time2="0.2"
               sleep_time1="5.0"                  sleep_time2="5.0"  
               
               starting_angle1="-3.14159"         starting_angle2="3.14159"
               
-              starting_speed1="0.5 0.5 0.5"      starting_speed2="-0.5 -0.5 -0.5"
-              acceleration1="2.0 2.0 2.0"        acceleration2="-2.0 -2.0 -2.0"
+              starting_speed1="0.0 5.0 0.0"     starting_speed2="0.0 5.0 0.0"
+              starting_direction_angle="0.3"
+              acceleration1="0.0 -5.0 0.0"       acceleration2="0.0 -5.0 0.0"
               starting_angular_speed1="-0.1"     starting_angular_speed2="0.1"
               angular_acceleration1="0.0"        angular_acceleration2="0.0"
               
@@ -175,8 +193,8 @@
       <Color   control_time1="0.3"       control_time2="0.3"        color1="1.0 1.0 1.0 0.0"         color2="1.0 1.0 1.0 0.0"/>
     </Colors>
   </CoreEmiter>
-  
-  <!--ParticleEmitter  id="vapor2"                        MinEmitRate="15.0"             MaxEmitRate="20.0"
+  <!--
+  <ParticleEmitter  id="vapor2"                        MinEmitRate="15.0"             MaxEmitRate="20.0"
                     Color1="0.1 0.1 0.1 0.8"           Color2="0.1 0.1 0.1 0.8"       MinSize="0.05"        MaxSize="0.05"
                     Life1="1.0"                        Life2="1.0"                    Bucle="true"   
                     Angle1="-0.1"                      Angle2="0.1"                   Gravity="0.0 -0.5 0.0" 
@@ -185,7 +203,8 @@
       <Size        time="1.0"       timeInterpolation="1.0"   MinSize="0.9"          MaxSize="0.9"/>
     </Sizes>
 
-  </ParticleEmitter-->
+  </ParticleEmitter>
+  -->
   <CoreEmiter id="vapor2"                        
               emit_rate1="15.0"                   emit_rate2="20.0"
               life1="1.0"                         life2="1.0"                    
@@ -203,14 +222,12 @@
               color1="0.1 0.1 0.1 0.8"          color2="0.1 0.1 0.1 0.8" 
               size1="0.05"                      size2="0.05"
               texture="Data/Textures/texturas particulas/smokepuff1.dds">
-	<Sizes>
+	  <Sizes>
       <Size   control_time1="1.0"       control_time2="1.0"        size1="0.9"          size2="0.9"/>
     </Sizes>
   </CoreEmiter>
+  
   <!--
-    
-
-
     <ParticleEmitter  id="FumMenjar"                        MinEmitRate="7.0"             MaxEmitRate="10.0"
                       Color1="1.0 1.0 1.0 0.5"              Color2="1.0 1.0 1.0 0.5"      MinSize="0.2"        MaxSize="0.5"
                       Life1="5.0"                           Life2="5.0"                   Bucle="true"   
@@ -222,7 +239,8 @@
         <Color        time="4.0"        Color1="0.43 0.43 0.43 0.20"       Color2="0.44 0.44 0.44 0.21"/>
         <Color        time="6.0"        Color1="1.0 1.0 1.0 0.0"           Color2="1.0 1.0 1.0 0.0"/>
        </Colors>
-     </ParticleEmitter>    -->
+     </ParticleEmitter>    
+  -->
   <CoreEmiter id="FumMenjar"                        
               emit_rate1="7.0"                   emit_rate2="10.0"
               life1="5.0"                         life2="5.0"                    
@@ -246,9 +264,8 @@
         <Color        control_time1="2.0"        color1="0.39 0.39 0.39 0.22"       color2="0.41 0.41 0.41 0.24"/>
         <Color        control_time1="4.0"        color1="0.43 0.43 0.43 0.20"       color2="0.44 0.44 0.44 0.21"/>
         <Color        control_time1="6.0"        color1="1.0 1.0 1.0 0.0"           color2="1.0 1.0 1.0 0.0"/>
-       </Colors>
+    </Colors>
   </CoreEmiter>
-  
   <!--
     <ParticleEmitter  id="efecte_fred"                      MinEmitRate="20.0"             MaxEmitRate="30.0"
                       Color1="1.0 1.0 1.0 0.0"              Color2="1.0 1.0 1.0 0.0"       MinSize="0.3"        MaxSize="0.5"   
@@ -262,7 +279,8 @@
           <Color        time="4.0"       timeInterpolation="1.0"   Color1="1.0 1.0 1.0 0.0"          Color2="1.0 1.0 1.0 0.0"/>
         </Colors>
 
-      </ParticleEmitter>  -->
+      </ParticleEmitter>  
+  -->
 	  
 	<CoreEmiter id="efecte_fred"                        
               emit_rate1="20.0"                   emit_rate2="30.0"
@@ -287,9 +305,8 @@
           <Color        control_time1="2.0"       control_time2="1.0"   color1="1.0 1.0 1.0 0.3"          color2="1.0 1.0 1.0 0.3"/>
           <Color        control_time1="3.0"       control_time2="1.0"   color1="1.0 1.0 1.0 0.1"          color2="1.0 1.0 1.0 0.1"/>
           <Color        control_time1="4.0"       control_time2="1.0"   color1="1.0 1.0 1.0 0.0"          color2="1.0 1.0 1.0 0.0"/>
-        </Colors>
+    </Colors>
   </CoreEmiter>
-
 <!--
     <ParticleEmitter  id="boira"                              MinEmitRate="6.0"             MaxEmitRate="6.0"
                       Color1="0.14 0.14 0.14 0.0"             Color2="0.14 0.14 0.14 0.0"   MinSize="1.5"        MaxSize="1.7"
@@ -302,8 +319,8 @@
         <Color        time="20.5"      timeInterpolation="1.5"    Color1="0.30 0.30 0.30 0.06"         Color2="0.30 0.30 0.30 0.06"/>
         <Color        time="22.0"      timeInterpolation="3"      Color1="0.30 0.30 0.30 0.0"          Color2="0.30 0.30 0.30 0.0"/>
       </Colors>
-    </ParticleEmitter>  -->
-	
+    </ParticleEmitter>  
+  -->
 	<CoreEmiter id="boira"                        
               emit_rate1="6.0"                   emit_rate2="6.0"
               life1="25.0"                         life2="25.0"                    
@@ -327,9 +344,8 @@
         <Color        control_time1="3.0"       control_time2="17.5"   color1="0.30 0.30 0.30 0.12"         color2="0.30 0.30 0.30 0.12"/>
         <Color        control_time1="20.5"      control_time2="1.5"    color1="0.30 0.30 0.30 0.06"         color2="0.30 0.30 0.30 0.06"/>
         <Color        control_time1="22.0"      control_time2="3"      color1="0.30 0.30 0.30 0.0"          color2="0.30 0.30 0.30 0.0"/>
-        </Colors>
+     </Colors>
   </CoreEmiter>
-  
 <!--
     <ParticleEmitter  id="frigo"                              MinEmitRate="16.0"             MaxEmitRate="16.0"
                       Color1="0.7 0.7 0.7 0.0"                Color2="0.7 0.7 0.7 0.0"       MinSize="1.5"        MaxSize="1.7"
@@ -345,7 +361,8 @@
 
 
 
-    </ParticleEmitter> -->
+    </ParticleEmitter> 
+  -->
 	
 	<CoreEmiter id="frigo"                        
               emit_rate1="16.0"                   emit_rate2="16.0"
@@ -372,7 +389,6 @@
       <Color        control_time1="22.0"      control_time2="3"      color1="0.7 0.7 0.7 0.0"          color2="0.7 0.7 0.7 0.0"/>
     </Colors>
   </CoreEmiter>
-  
 <!--
     <ParticleEmitter  id="fum_proveta"                        MinEmitRate="15.0"             MaxEmitRate="20.0"
                       Color1="0.63 0.93 0.89 0.05"            Color2="0.65 0.95 0.9 0.05"    MinSize="0.05"        MaxSize="0.05"
@@ -385,7 +401,8 @@
 
       
 
-    </ParticleEmitter> -->
+    </ParticleEmitter> 
+  -->
 
    <CoreEmiter id="fum_proveta"
                 emit_rate1="15.0"                   emit_rate2="20.0"
@@ -410,7 +427,6 @@
     </Sizes>
     
   </CoreEmiter>
-  
 <!--
     <ParticleEmitter  id="goteo"                        MinEmitRate="1.0"             MaxEmitRate="1.0"
                       Color1="1.0 1.0 1.0 1.0"          Color2="1.0 1.0 1.0 1.0"      MinSize="0.03"        MaxSize="0.05"
@@ -419,7 +435,8 @@
                       Velocitate="1.0 1.0 1.0"          TexParticle="Data/Textures/texturas particulas/DustPoof.dds">
       
 
-    </ParticleEmitter> -->
+    </ParticleEmitter> 
+  -->
 	<CoreEmiter id="goteo"
                 emit_rate1="1.0"                   emit_rate2="1.0"
                 life1="2.0"                         life2="2.0"
@@ -442,12 +459,11 @@
   </CoreEmiter>
 	
 
-
-    
-   <!--
-  </ParticleEmitters>
- 
-  -->
+  
+  <!-- ····························································································· -->
+  <!-- ····························································································· -->
+  <!-- ····························································································· -->
+  <!-- ····························································································· -->
   
   <CoreEmiter id="test tot"                        
               emit_rate1="7.0"                   emit_rate2="10.0"
@@ -457,8 +473,10 @@
               
               starting_angle1="-3.14159"         starting_angle2="3.14159"
               
-              starting_speed1="0.1 0.5 0.0"      starting_speed2="0.0 0.5 0.1"
-              acceleration1="0.0 -0.125 0.0"     acceleration2="0.0 -0.125 0.0"
+              starting_speed1="0.0 0.5 0.0"      starting_speed2="0.0 0.5 0.0"
+              starting_direction_angle="3.14159"
+              acceleration1="0.0 -0.125 0.0"        acceleration2="0.0 -0.125 0.0"
+              acceleration_direction_angle="0.5"
               starting_angular_speed1="-0.5"     starting_angular_speed2="0.5"
               angular_acceleration1="-0.1"       angular_acceleration2="0.1"
               
@@ -483,29 +501,3 @@
     </Colors>
   </CoreEmiter>
 </CoreEmiters>
-
-<!-- como hacer Cores para emisores de particulas.
-
-id= La id, es el identificador de la Core. Podriem dir que es el tipus de font que crida el manager.
-MinEmitRate i MaxEmitRate= Numero de particules que es crean per segon. Entre el maxim i el minim es fa un Random(son floats)
-Color1 i Color2 = Els colors es posen en RGB+alpha. Es fa un randam de cada valor, per treure el color resultant ex:Color1="1.0 1.0 1.0 1.0"
-MinSize i MaxSize = tamany de la particula. Es fa random entre les 2  
-Life1 i Life2 = Temps de vida de la particula en segons (son floats)
-Bucle = Es per indicar si el emissor a d'emetre tota l'estona, o durant un temps determinat. True indica que no para de produir particules    
-NumBucle = numero de vegades que volem crear particlues. El numero introduit son els segons que crea particules
-m_fRebootEmitter1 i m_fRebootEmitter2 = Temps que tarda en tornar a emetre particules. Si esta a 0, no torna. Nomes te sentit el bucle NO es infinit
-TotDeCop = En lloc de calcular a cada update les particules que crea, i les va creant poc a poc, si posem aquesta a TRUE,
-crea totes les particules a la vegada. Es ideal per fer explosions de chispes i coses d'aquest estil.
-                      
-Angle1 i Angle2 = angle de rotacio de la particula. Es recomenable posa el mateix valor en els 2, pero un negatiu, aixi fent el 
-random la particula pot girar tan dreta com esquerra. Si es posen els 2 valors positius o negatius, giraran totes les particules
-en el mateix sentit, pero en diferentes velocitats
-                   
-Gravity = Pot produir el efecte de gravetat, encara que el fa es anar modificant la velocitat dels objectes. Indicar valor per x y z 
-Velocitate = Multiplica la direccio per la velocitat. Amb aixo fem que les particules es desplasin + rapid a + lent
-TexParticle = S'ha indicar l'ubicacio i el nom de la textura que volem utilitzar. ex: "Data/Textures/texturas particulas/DustPoof.dds">
-      
-
-
-
--->

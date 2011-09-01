@@ -43,6 +43,9 @@ bool CCoreEmiter::Init(CXMLTreeNode& _xmlEmiter)
                                       m_vStartingSpeed1.x, m_vStartingSpeed1.y, m_vStartingSpeed1.z,
                                       m_vStartingSpeed2.x, m_vStartingSpeed2.y, m_vStartingSpeed2.z);
   
+  m_fStartingDirectionAngle = _xmlEmiter.GetFloatProperty("starting_direction_angle", 0, false);
+  LOGGER->AddNewLog(ELL_INFORMATION, "Starting Direction Angle: %f", m_fStartingDirectionAngle);
+
   m_fStartingAngularSpeed1 = _xmlEmiter.GetFloatProperty("starting_angular_speed1", 0, true);
   m_fStartingAngularSpeed2 = _xmlEmiter.GetFloatProperty("starting_angular_speed2", 0, true);
   LOGGER->AddNewLog(ELL_INFORMATION, "Starting Angular Speed: %f - %f", m_fStartingAngularSpeed1, m_fStartingAngularSpeed2);
@@ -53,6 +56,9 @@ bool CCoreEmiter::Init(CXMLTreeNode& _xmlEmiter)
                                       m_vAcceleration1.x, m_vAcceleration1.y, m_vAcceleration1.z,
                                       m_vAcceleration2.x, m_vAcceleration2.y, m_vAcceleration2.z);
   
+  m_fAccelerationDirectionAngle = _xmlEmiter.GetFloatProperty("acceleration_direction_angle", 0, false);
+  LOGGER->AddNewLog(ELL_INFORMATION, "Acceleration Direction Angle: %f", m_fStartingDirectionAngle);
+
   m_fAngularAcceleration1 =  _xmlEmiter.GetFloatProperty("angular_acceleration1", 0, true);
   m_fAngularAcceleration2 =  _xmlEmiter.GetFloatProperty("angular_acceleration2", 0, true);
   LOGGER->AddNewLog(ELL_INFORMATION, "Angular Acceleration: %f - %f", m_fAngularAcceleration1, m_fAngularAcceleration2);
@@ -286,10 +292,20 @@ float CCoreEmiter::GetStartingAngle() const
 
 Vect3f CCoreEmiter::GetStartingSpeed() const
 {
-  Vect3f l_vRnd(Random01(),Random01(),Random01());
-  Vect3f l_v_1_Minus_Rnd(1.f - l_vRnd.x, 1.f - l_vRnd.y, 1.f - l_vRnd.z);
-  Vect3f l_vStartingSpeed = ( l_v_1_Minus_Rnd.Scale(m_vStartingSpeed1) ) + ( l_vRnd.Scale(m_vStartingSpeed2) );
-  return l_vStartingSpeed;
+  //Vect3f l_vRnd(Random01(),Random01(),Random01());
+  //Vect3f l_v_1_Minus_Rnd(1.f - l_vRnd.x, 1.f - l_vRnd.y, 1.f - l_vRnd.z);
+  //Vect3f l_vStartingSpeed = ( l_v_1_Minus_Rnd.Scale(m_vStartingSpeed1) ) + ( l_vRnd.Scale(m_vStartingSpeed2) );
+  //return l_vStartingSpeed;
+
+  
+  float l_fRnd = Random01();
+  Vect3f l_vStartingSpeed = SIMPLE_INTERPOLATION(m_vStartingSpeed1, m_vStartingSpeed2, l_fRnd);
+
+  Mat33f l_mRotation = RandomRotationMatrix(m_fStartingDirectionAngle);
+
+  Vect3f vStartingSpeed_ = l_mRotation * l_vStartingSpeed;
+
+  return vStartingSpeed_;
 }
 
 float CCoreEmiter::GetStartingAngularSpeed() const
@@ -302,10 +318,19 @@ float CCoreEmiter::GetStartingAngularSpeed() const
 
 Vect3f CCoreEmiter::GetAcceleration() const
 {
-  Vect3f l_vRnd(Random01(),Random01(),Random01());
-  Vect3f l_v_1_Minus_Rnd(1.f - l_vRnd.x, 1.f - l_vRnd.y, 1.f - l_vRnd.z);
-  Vect3f l_vAcceleration = ( l_v_1_Minus_Rnd.Scale(m_vAcceleration1) ) + ( l_vRnd.Scale(m_vAcceleration2) );
-  return l_vAcceleration;
+  //Vect3f l_vRnd(Random01(),Random01(),Random01());
+  //Vect3f l_v_1_Minus_Rnd(1.f - l_vRnd.x, 1.f - l_vRnd.y, 1.f - l_vRnd.z);
+  //Vect3f l_vAcceleration = ( l_v_1_Minus_Rnd.Scale(m_vAcceleration1) ) + ( l_vRnd.Scale(m_vAcceleration2) );
+  //return l_vAcceleration;
+
+  
+  float l_fRnd = Random01();
+  Vect3f l_vAcceleration = SIMPLE_INTERPOLATION(m_vAcceleration1, m_vAcceleration2, l_fRnd);
+
+  Mat33f l_mRotation = RandomRotationMatrix(m_fAccelerationDirectionAngle);
+
+  Vect3f vAcceleration_ = l_mRotation * l_vAcceleration;
+  return vAcceleration_;
 }
 
 float CCoreEmiter::GetAngularAcceleration() const

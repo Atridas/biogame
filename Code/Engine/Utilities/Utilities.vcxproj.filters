@@ -118,15 +118,6 @@
     <Filter Include="IAShit\IAManager">
       <UniqueIdentifier>{c4fdf07b-f049-446c-9299-356321394b91}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EntitySystem\Components\ComponentShootPlayer">
-      <UniqueIdentifier>{98c1bc24-e45c-450a-9c7d-04fbd6612a97}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EntitySystem\Components\ComponentShootMiner">
-      <UniqueIdentifier>{868fb138-4d5b-46d2-bdf1-f242dd6daaa3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="EntitySystem\Components\ComponentShootMilitar">
-      <UniqueIdentifier>{ee5b84d0-c299-4a22-988a-08575d5f8a7f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="EntitySystem\Components\PhysXCollisionEntityController">
       <UniqueIdentifier>{cd45921c-cc96-4a40-89f7-9c9d34600bda}</UniqueIdentifier>
     </Filter>
@@ -266,12 +257,6 @@
     </ClCompile>
     <ClCompile Include="IAToLua.cpp">
       <Filter>IAShit</Filter>
-    </ClCompile>
-    <ClCompile Include="ComponentParticleShootPlayer.cpp">
-      <Filter>EntitySystem\Components\ComponentShootPlayer</Filter>
-    </ClCompile>
-    <ClCompile Include="ComponentParticleShootMiner.cpp">
-      <Filter>EntitySystem\Components\ComponentShootMiner</Filter>
     </ClCompile>
     <ClCompile Include="PhysXCollisionEntityController.cpp">
       <Filter>EntitySystem\Components\PhysXCollisionEntityController</Filter>
@@ -421,12 +406,6 @@
     </ClInclude>
     <ClInclude Include="include\IAToLua.h">
       <Filter>IAShit</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ComponentParticleShootPlayer.h">
-      <Filter>EntitySystem\Components\ComponentShootPlayer</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ComponentParticleShootMiner.h">
-      <Filter>EntitySystem\Components\ComponentShootMiner</Filter>
     </ClInclude>
     <ClInclude Include="include\PhysXCollisionEntityController.h">
       <Filter>EntitySystem\Components\PhysXCollisionEntityController</Filter>

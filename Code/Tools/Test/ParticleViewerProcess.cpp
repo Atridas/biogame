@@ -80,6 +80,7 @@ bool CParticleViewerProcess::Init()
     m_pEmiters[2] = l_pEM->CreateEmiter("emiter 3", m_szEmiter, CObject3D(Vect3f(-5, 0, 5),0,0), Vect3f(.5f, .5f, .5f));
     m_pEmiters[3] = l_pEM->CreateEmiter("emiter 4", m_szEmiter, CObject3D(Vect3f(10, 0, -10),0,0), Vect3f(10, 1, 10));
     m_pEmiters[4] = l_pEM->CreateEmiter("emiter 5", m_szEmiter, CObject3D(Vect3f(10, 0, 10),0,0), Vect3f(10, 10, 10));
+    m_pEmiters[5] = l_pEM->CreateEmiter("emiter 6", m_szEmiter, CObject3D(Vect3f(-5, 0, -5),0,0), Vect3f(.25f, .5f, .25f));
     //m_pEmiters[0]->Init(m_szEmiter, CObject3D(Vect3f(0, 0, 0),0,0), Vect3f(1, 1, 1));
     //m_pEmiters[1]->Init(m_szEmiter, CObject3D(Vect3f(5, 0, 0),0,0), Vect3f(.1f, .1f, .1f));
     //m_pEmiters[2]->Init(m_szEmiter, CObject3D(Vect3f(-5, 0, 5),0,0), Vect3f(.5f, .5f, .5f));

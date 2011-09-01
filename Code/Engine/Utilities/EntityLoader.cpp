@@ -637,20 +637,23 @@ CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f
   return l_peEnemy;
 }
 
-
 CGameEntity* CEntityManager::InitLaser(const Vect3f& _vPosInit, const Vect3f& _vDir, float _fDany, uint32 _uiCollisionMask)
 {
+  Mat33f l_mRot = GetFastestRotationFromDirToDir(Vect3f(0,0,1), _vDir);
+  Mat44f l_mO3D(l_mRot);
+  l_mO3D.SetPos(_vPosInit);
+
   CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
 
   CComponentObject3D *l_pComponentObject3D = CComponentObject3D::AddToEntity(l_pLaser);
-  l_pComponentObject3D->SetPosition(_vPosInit);
+  l_pComponentObject3D->SetMat44(l_mO3D);
 
-  CComponentLaser::AddToEntity( l_pLaser, _vDir, _fDany, _uiCollisionMask );
+  CComponentLaser::AddToEntity( l_pLaser, _vDir, _fDany, _uiCollisionMask )->m_fSpeed = 5;
 
   CComponentRenderableObject *l_pCRO= CComponentRenderableObject::AddToEntity(l_pLaser, "laser " + l_pLaser->GetName(), "laser");
   l_pCRO->m_bActive = true;
   l_pCRO->m_bRemoveRenderableObject = true;
-  l_pComponentObject3D->SetPosition(_vPosInit);
+  l_pComponentObject3D->SetMat44(l_mO3D);
 
   CComponentLifetime::AddToEntity(l_pLaser, 60);
 
@@ -658,10 +661,18 @@ CGameEntity* CEntityManager::InitLaser(const Vect3f& _vPosInit, const Vect3f& _v
 }
 
 
-CGameEntity* CEntityManager::InitParticles(const string& _szCore, const Vect3f& _vPos, const Vect3f& _vSize, float _fTime)
+CGameEntity* CEntityManager::InitParticles(const string& _szCore, const Vect3f& _vPos, const Vect3f& _vSize, float _fTime, const Vect3f& _vYdir)
 {
+  assert(abs(_vYdir.SquaredLength() - 1.f) < 0.01f && "CEntityManager::InitParticles _vYdir cal que sigui unitari");
+
+  Mat33f l_mRot = GetFastestRotationFromDirToDir(Vect3f(0,1,0), _vYdir);
+  Mat44f l_mO3D(l_mRot);
+  l_mO3D.SetPos(_vPos);
+
   CGameEntity* l_pEmiterEntity = ENTITY_MANAGER->CreateEntity();
-  CComponentObject3D::AddToEntity(l_pEmiterEntity)->SetPosition(_vPos);
+  CComponentObject3D* l_pCO3D = CComponentObject3D::AddToEntity(l_pEmiterEntity);
+  l_pCO3D->SetMat44(l_mO3D);
+
   CComponentEmiter  ::AddToEntity(l_pEmiterEntity, _szCore, _vSize);
   if(_fTime > 0)
     CComponentLifetime::AddToEntity(l_pEmiterEntity, _fTime);
