@@ -197,11 +197,12 @@ void LoadComponentDoor(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
   
   string l_szName = _pEntity->GetName();
   bool l_bOpen    = _TreeComponent.GetBoolProperty("open", false, false);
+  Vect3f l_vSize = _TreeComponent.GetVect3fProperty("size", Vect3f(1.0f), false);
 
   LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Porta amb nom \"%s\" i estat \"%d\"",l_szName.c_str(), l_bOpen);
 
   //component porta
-  if(!CComponentDoor::AddToEntity(_pEntity, l_bOpen))
+  if(!CComponentDoor::AddToEntity(_pEntity, l_bOpen, l_vSize))
   {
     LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
   }

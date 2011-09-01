@@ -907,6 +907,12 @@ ENTITIES
       activate
       void Activate(bool _bActivate)
       
+      set_position
+      void SetPosition(Vect3f _vPos);
+      
+      get_position
+      Vect3f GetPosition();
+      
   Class:
     ComponentRenderableObject
     CComponentRenderableObject

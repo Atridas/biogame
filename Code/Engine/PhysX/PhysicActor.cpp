@@ -267,8 +267,15 @@ void CPhysicActor::CreateBody (float density, float angularDamping, float linear
 
 void CPhysicActor::SetGlobalPosition	(const Vect3f& pos)
 {
-	assert(m_pPhXActorDesc);
-	m_pPhXActorDesc->globalPose.t  = NxVec3(pos.x, pos.y, pos.z);;
+	if(m_pPhXActorDesc)
+  {
+	  m_pPhXActorDesc->globalPose.t  = NxVec3(pos.x, pos.y, pos.z);
+  }
+
+  if(m_pPhXActor)
+  {
+    m_pPhXActor->setGlobalPosition(NxVec3(pos.x, pos.y, pos.z));
+  }
 }
 
 Vect3f CPhysicActor::GetPosition ()

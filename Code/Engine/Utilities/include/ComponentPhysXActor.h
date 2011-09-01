@@ -22,6 +22,9 @@ public:
   CPhysicActor*    GetActor()     {return m_pPhysXActor;}
   CPhysicUserData* GetUserData()  {return m_pPhysXData;}
 
+  Vect3f GetPosition();
+  void SetPosition(Vect3f _vPos);
+
   virtual void UpdatePostPhysX(float _fDeltaTime);
   virtual void ReceiveEvent(const SEvent& _Event);
 

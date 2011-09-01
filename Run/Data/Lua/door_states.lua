@@ -132,9 +132,6 @@ State_Porta_Open['Enter'] = function(_entitat)
   local l_animation = _entitat:get_component(BaseComponent.animation)
   l_animation:play(Porta_Constants["Open"], 0.0, 1.0, true)
 
-  --física
-  local l_physx = _entitat:get_component(BaseComponent.physx_actor)
-  l_physx:activate(false)
 end
 
 -------------------------------------------------------------------------------------------------
@@ -181,11 +178,6 @@ State_Porta_Opening['Enter'] = function(_entitat)
   --animacio
   local l_animation = _entitat:get_component(BaseComponent.animation)
   l_animation:play(Porta_Constants["Open Animation"], 0.0, 1.0, true)
-
-  --física
-  local l_physx = _entitat:get_component(BaseComponent.physx_actor)
-  l_physx:activate(true)
-  
   
 end
 
@@ -199,6 +191,10 @@ end
 State_Porta_Opening['Update'] = function(_entitat, _dt)
   local l_door = _entitat:get_component(BaseComponent.door)
   l_door.time = l_door.time + _dt
+  
+  if l_door:is_open() == false and l_door.time >= Porta_Constants["Open Speed"] * 0.5 then
+    l_door:open()
+  end
   
   if l_door.time >= Porta_Constants["Open Speed"] then
     _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Open')
@@ -237,9 +233,6 @@ State_Porta_Closed['Enter'] = function(_entitat)
   local l_animation = _entitat:get_component(BaseComponent.animation)
   l_animation:play(Porta_Constants["Closed"], 0.0, 1.0, true)
 
-  --física
-  local l_physx = _entitat:get_component(BaseComponent.physx_actor)
-  l_physx:activate(true)
 end
 
 -------------------------------------------------------------------------------------------------
@@ -286,9 +279,6 @@ State_Porta_Closing['Enter'] = function(_entitat)
   local l_animation = _entitat:get_component(BaseComponent.animation)
   l_animation:play(Porta_Constants["Close Animation"], 0.0, 1.0, true)
   
-  --física
-  local l_physx = _entitat:get_component(BaseComponent.physx_actor)
-  l_physx:activate(true)
 end
 
 -------------------------------------------------------------------------------------------------

@@ -35,6 +35,24 @@ void CComponentPhysXActor::Activate(bool _bActivate)
   }
 }
 
+Vect3f CComponentPhysXActor::GetPosition()
+{
+  if(m_pPhysXActor)
+  {
+    return m_pPhysXActor->GetPosition();
+  }
+
+  return Vect3f(0.0f);
+}
+
+void CComponentPhysXActor::SetPosition(Vect3f _vPos)
+{
+  if(m_pPhysXActor)
+  {
+    m_pPhysXActor->SetGlobalPosition(_vPos);
+  }
+}
+
 void CComponentPhysXActor::ReceiveEvent(const SEvent& _Event)
 {
   if(_Event.Msg == SEvent::REBRE_IMPACTE)
