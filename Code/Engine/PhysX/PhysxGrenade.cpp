@@ -12,7 +12,6 @@
 #include <cal3d/cal3d.h>
 #include <XML/XMLTreeNode.h>
 #include "RenderManager.h"
-#include "ParticleManager.h"
 #include "Core.h"
 #include "base.h"
 //---PhysX Includes---//
@@ -42,12 +41,12 @@ void CPhysxGrenade::Explosion()
   Vect3f l_vTranslationVector = l_vMat44.GetTranslationVector();
   //Particules
 
-  if (m_pParticleEmitter != 0)
-  {
-    float l_sizeY=m_pParticleEmitter->GetSizeY()/2;
-    m_pParticleEmitter->SetPosition(l_vTranslationVector);
-    m_pParticleEmitter->SetActive(true);
-  }
+  //if (m_pParticleEmitter != 0)
+  //{
+  //  float l_sizeY=m_pParticleEmitter->GetSizeY()/2;
+  //  m_pParticleEmitter->SetPosition(l_vTranslationVector);
+  //  m_pParticleEmitter->SetActive(true);
+  //}
 
   l_pPM->OverlapSphereActorGrenade(m_fEffectRadius,l_vTranslationVector,l_vUserDatas,m_fFirePower);
 

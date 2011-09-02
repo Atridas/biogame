@@ -9,8 +9,6 @@
 #include "PhysicsManager.h"
 #include "ComponentObject3D.h"
 #include "OmniLight.h"
-#include "ParticleManager.h"
-#include "BillBoardManager.h"
 #include "IAManager.h"
 #include "PortalManager.h"
 #include "GraphDefines.h"
@@ -37,8 +35,6 @@ void CBiotestProcess::Update(float _fElapsedTime)
   //l_vLightMod = Vect3f(0,1,0) - l_vLightMod;
 
   //m_pOmniLight->SetPosition(l_vPlayerPos + l_vLightMod);
-  //CORE->GetParticleManager()->Update(_fElapsedTime,m_pCamera);
-  CORE->GetBillBoardManager()->Update(_fElapsedTime,m_pCamera);
 
   CObject3D* m_pPlayerPos = CORE->GetEntityManager()->GetEntity("Player")->GetComponent<CComponentObject3D>(CBaseComponent::ECT_OBJECT_3D);
   CORE->GetSoundManager()->UpdateSound3DSystem(m_pPlayerPos->GetPosition(),m_pCamera->GetDirection());
@@ -63,11 +59,8 @@ void CBiotestProcess::RenderScene(CRenderManager* _pRM)
     _pRM->SetupMatrices(&l_SphereCamera,false,false);
   }
 
-  //CORE->GetRenderableObjectsManager()->Render(_pRM);
   CORE->GetPortalManager()->Render(_pRM);
   CORE->GetEmiterManager()->Render(_pRM);
-  //CORE->GetParticleManager()->Render(_pRM);
-  //CORE->GetBillBoardManager()->Render(_pRM);
 
   m_pEmiter->Render(_pRM);
 }
@@ -116,7 +109,6 @@ bool CBiotestProcess::Init()
 
   
   CORE->GetIAManager()->CompleteGraph();
-  CORE->GetParticleManager()->SetAllEmittersActive(true);
 
   SetOk(true);
   return IsOk();

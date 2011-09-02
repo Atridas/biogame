@@ -18,7 +18,6 @@
 #include "ComponentRagdoll.h"
 #include "ComponentCover.h"
 #include "ComponentVida.h"
-#include "ComponentParticleShootPlayer.h"
 
 #include "PhysicsManager.h"
 #include "PhysicActor.h"

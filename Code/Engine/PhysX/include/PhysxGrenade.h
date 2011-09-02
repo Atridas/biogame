@@ -10,7 +10,6 @@ class CPhysicActor;
 class CPhysicUserData;
 class CXMLTreeNode;
 class CalSkeleton;
-class CParticleEmitter;
 
 
 
@@ -24,7 +23,6 @@ public:
   CPhysxGrenade(string _szName,float _fEffectRadius, float _fDuration, float _fPower):  m_bExploted(false),
                                                                                         m_fLifeTime(0.0f),
                                                                                         m_pPhysxActor(0),
-                                                                                        m_pParticleEmitter(0),
                                                                                         m_fEffectRadius(_fEffectRadius),
                                                                                         m_fDuration(_fDuration),
                                                                                         m_fFirePower(_fPower),
@@ -45,7 +43,6 @@ private:
   float             m_fLifeTime;
   CPhysicActor*     m_pPhysxActor;
   CPhysicUserData*  m_pPhysxUserData;
-  CParticleEmitter* m_pParticleEmitter;
 };
 
 #endif 

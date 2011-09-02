@@ -100,15 +100,6 @@
     <Filter Include="SceneEffects\HDR Pipeline">
       <UniqueIdentifier>{9fed3f9b-f795-408e-a3a8-28924e5f726e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Particle">
-      <UniqueIdentifier>{71afdec6-0767-4def-9a85-eafdbf63f3e9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Particle\ParticleEmitter">
-      <UniqueIdentifier>{affdfcee-9a85-4c4a-98c1-f80e53f90f04}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Particle\ParticleManager">
-      <UniqueIdentifier>{bb2d63d0-cd3c-4495-a701-f2d877e97105}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Materials">
       <UniqueIdentifier>{cbbece00-30db-40c8-888b-e60fb2b41183}</UniqueIdentifier>
     </Filter>
@@ -207,12 +198,6 @@
     </Filter>
     <Filter Include="Materials\MaterialDecorators\PropertyDecorators\EnvironmentDecorator">
       <UniqueIdentifier>{5a7a5439-99bf-40d0-8801-640002dba94a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Particle\ParticleCore">
-      <UniqueIdentifier>{14f6b098-170e-4e7c-985e-a7e798846343}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="BillBoard">
-      <UniqueIdentifier>{61153b82-daf7-427b-9730-2a7ef1cdb280}</UniqueIdentifier>
     </Filter>
     <Filter Include="Materials\MaterialDecorators\PropertyDecorators\SpriteDecorator">
       <UniqueIdentifier>{070271a6-87d3-4241-94bd-d03f611db3ce}</UniqueIdentifier>
@@ -339,15 +324,6 @@
     <ClCompile Include="HDRPipeline.cpp">
       <Filter>SceneEffects\HDR Pipeline</Filter>
     </ClCompile>
-    <ClCompile Include="Particle.cpp">
-      <Filter>Particle</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleEmitter.cpp">
-      <Filter>Particle\ParticleEmitter</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleManager.cpp">
-      <Filter>Particle\ParticleManager</Filter>
-    </ClCompile>
     <ClCompile Include="Room.cpp">
       <Filter>Portal Rendering\Room</Filter>
     </ClCompile>
@@ -365,18 +341,6 @@
     </ClCompile>
     <ClCompile Include="LightmapTextureDecorator.cpp">
       <Filter>Materials\MaterialDecorators\TextureDecorators\LightmapTexture</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleCore.cpp">
-      <Filter>Particle\ParticleCore</Filter>
-    </ClCompile>
-    <ClCompile Include="BillBoardManager.cpp">
-      <Filter>BillBoard</Filter>
-    </ClCompile>
-    <ClCompile Include="BillBoard.cpp">
-      <Filter>BillBoard</Filter>
-    </ClCompile>
-    <ClCompile Include="BillBoardCore.cpp">
-      <Filter>BillBoard</Filter>
     </ClCompile>
     <ClCompile Include="CoreEmiter.cpp">
       <Filter>Emiters\CoreEmiter</Filter>
@@ -503,15 +467,6 @@
     <ClInclude Include="include\InstancedData.h">
       <Filter>Vertex\InstancedData</Filter>
     </ClInclude>
-    <ClInclude Include="include\Particle.h">
-      <Filter>Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ParticleEmitter.h">
-      <Filter>Particle\ParticleEmitter</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ParticleManager.h">
-      <Filter>Particle\ParticleManager</Filter>
-    </ClInclude>
     <ClInclude Include="include\Material.h">
       <Filter>Materials</Filter>
     </ClInclude>
@@ -584,20 +539,8 @@
     <ClInclude Include="include\EnvirondmentPropertyDecorator.h">
       <Filter>Materials\MaterialDecorators\PropertyDecorators\EnvironmentDecorator</Filter>
     </ClInclude>
-    <ClInclude Include="include\ParticleCore.h">
-      <Filter>Particle\ParticleCore</Filter>
-    </ClInclude>
-    <ClInclude Include="include\BillBoardManager.h">
-      <Filter>BillBoard</Filter>
-    </ClInclude>
-    <ClInclude Include="include\BillBoard.h">
-      <Filter>BillBoard</Filter>
-    </ClInclude>
     <ClInclude Include="include\SpritePropertyDecorator.h">
       <Filter>Materials\MaterialDecorators\PropertyDecorators\SpriteDecorator</Filter>
-    </ClInclude>
-    <ClInclude Include="include\BillBoardCore.h">
-      <Filter>BillBoard</Filter>
     </ClInclude>
     <ClInclude Include="include\CoreEmiter.h">
       <Filter>Emiters\CoreEmiter</Filter>

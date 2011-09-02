@@ -29,8 +29,7 @@
 #include "SpotLight.h"
 #include "InstanceMesh.h"
 #include "GameObject.h"
-#include "ParticleManager.h"
-#include "BillBoardManager.h"
+#include "EmiterManager.h"
 
 #include "ComponentObject3D.h"
 #include "ComponentMovement.h"
@@ -46,8 +45,6 @@
 
 bool CParticleProcess::Init()
 {
-  CORE->GetParticleManager()->SetAllEmittersActive(true);
-  CORE->GetBillBoardManager()->SetAllBillboardsActive(true);
   m_pObject = new CObject3D();
   m_fVelocity = 1;
   angle=0;
@@ -101,12 +98,6 @@ void CParticleProcess::Update(float _fElapsedTime)
 {
    if(m_pObject)// && m_pObjectBot) 
   {
-
-    
-#ifndef __PARTICLE_VIA_SHADER__
-    CORE->GetParticleManager()->Update(_fElapsedTime,m_pObjectCamera);
-#endif
-    CORE->GetBillBoardManager()->Update(_fElapsedTime,m_pObjectCamera);
     //Actualitze el pitch i el yaw segons els delta del mouse
     float l_fPitch, l_fYaw;
 
@@ -163,11 +154,7 @@ void CParticleProcess::RenderScene(CRenderManager* _pRM)
   //Render Objects
   // Ensenya tot l'escenari
   CORE->GetRenderableObjectsManager()->Render(_pRM);
-
-  //_pRM->DrawGrid(0.1f,colCYAN,1,1);
-  //_pRM->DrawPlane(10,Vect3f(0,1,0),0,colBLUE,10,10);
-  CORE->GetParticleManager()->Render(_pRM);
-  CORE->GetBillBoardManager()->Render(_pRM);
+  CORE->GetEmiterManager()->Render(_pRM);
  
   
 }

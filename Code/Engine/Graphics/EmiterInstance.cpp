@@ -24,6 +24,7 @@ bool CEmiterInstance::Init(const string& _szCoreName, const CObject3D& _Position
   m_fTimeToAwakeOrSleep = m_pCoreEmiter->GetAwakeTime();
 
   m_pObjectReference = 0;
+  m_bActive = true;
   bool l_bIsOk = m_InstancedData.Init(CORE->GetRenderManager(), MAX_PARTICLES_PER_EMITER);
   SetOk(l_bIsOk);
   return l_bIsOk;
@@ -51,6 +52,8 @@ void CEmiterInstance::Reset( const CObject3D& _Position, const Vect3f& _vVolume 
 void CEmiterInstance::Update(float _fDeltaTime)
 {
   assert(IsOk());
+
+  if(!m_bActive) return;
   //mirem si el delta time és massa gran, per no fer actualitzacions massa a saco, les capem a un min de framerate
   if(_fDeltaTime > MAX_PARTICLE_DELTA_TIME) _fDeltaTime = MAX_PARTICLE_DELTA_TIME;
 
@@ -147,7 +150,7 @@ void CEmiterInstance::Render(CRenderManager* _pRM)
 {
   assert(IsOk());
 
-  if(m_iActiveParticles == 0)
+  if(!m_bActive || m_iActiveParticles == 0)
     return;
 
   CEffectManager* l_pEM = CORE->GetEffectManager();
@@ -193,6 +196,9 @@ void CEmiterInstance::DebugRender(CRenderManager* _pRM)
   {
     _pRM->SetTransform(GetMat44());
   }
-  _pRM->DrawCube(m_vMaxVolume - m_vMinVolume, colRED);
+  if(m_bActive)
+    _pRM->DrawCube(m_vMaxVolume - m_vMinVolume, colGREEN);
+  else
+    _pRM->DrawCube(m_vMaxVolume - m_vMinVolume, colRED);
   
 }

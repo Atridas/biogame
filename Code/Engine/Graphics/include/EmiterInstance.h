@@ -29,7 +29,8 @@ public:
       m_vMinVolume(-.5f), m_vMaxVolume(.5f),
       m_fVolume(1),
       m_pObjectReference(0),
-      m_bAwake(true)
+      m_bAwake(true),
+      m_bActive(true)
       {};
   virtual ~CEmiterInstance() {Done();};
 
@@ -49,7 +50,9 @@ public:
   void Update(float _fDeltaTime);
   void Render(CRenderManager* _pRM);
   void DebugRender(CRenderManager* _pRM);
-
+  
+  void Activate() { m_bActive = true; Reset(); }
+  void Deactivate() { m_bActive = false; }
 
   void SetReference(CObject3D* _pObjectReference) {_pObjectReference = m_pObjectReference;};
 
@@ -57,6 +60,8 @@ protected:
   virtual void Release() {m_pObjectReference=0;};
 
 private:
+
+  bool         m_bActive;
 
   CObject3D*   m_pObjectReference;
   CCoreEmiter* m_pCoreEmiter;
