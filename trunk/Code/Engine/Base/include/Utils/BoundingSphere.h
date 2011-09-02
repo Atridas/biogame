@@ -4,6 +4,8 @@
 #include "base.h"
 #include "Utils/BaseControl.h"
 
+class CBoundingBox;
+
 class CBoundingSphere:
   public CBaseControl
 {
@@ -13,6 +15,8 @@ public:
   ~CBoundingSphere() { Done(); };
 
   bool Init(const Vect3f& _vMin, const Vect3f& _vMax);
+
+  bool Init(const CBoundingBox& _BBox);
 
   bool Init(const Vect3f& _vMiddlePoint, float _fRadius);
 

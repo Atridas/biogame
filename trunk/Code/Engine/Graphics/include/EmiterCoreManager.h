@@ -4,25 +4,26 @@
 
 #include "base.h"
 #include "Utils/MapManager.h"
-#include "CoreEmiter.h"
+#include "EmiterCore.h"
+#include "SimpleEmiterCore.h"
 #include "ParticleConstants.h"
 
 // Forward declarations -------------
 // ----------------------------------
 
 
-class CCoreEmiterManager:
-  private CMapManager<CCoreEmiter>
+class CEmiterCoreManager:
+  private CMapManager<CEmiterCore>
 {
 public:
-  CCoreEmiterManager() {m_NullEmiter.Init(); SetOk(true);};
-  ~CCoreEmiterManager(void)  {Done();};
+  CEmiterCoreManager() {m_NullEmiter.Init(); SetOk(true);};
+  ~CEmiterCoreManager(void)  {Done();};
   
   bool Load(const string &_szFileName);
   bool Load(const set<string> &_sFiles);
   bool Reload();
 
-  CCoreEmiter * GetCoreEmiter(const string &_szName);
+  CEmiterCore * GetEmiterCore(const string &_szName);
   const set<string>& GetCoreNames() const {return m_sCores;};
 
 private:
@@ -32,7 +33,7 @@ private:
 
   set<string> m_sCores;
 
-  CCoreEmiter m_NullEmiter;
+  CSimpleEmiterCore m_NullEmiter;
 };
 
 #endif

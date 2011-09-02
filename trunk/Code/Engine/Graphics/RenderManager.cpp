@@ -1221,3 +1221,37 @@ void CRenderManager::DrawSphere( float Radius, const CColor& Color, int Aristas)
   }
 }
 
+
+
+void CRenderManager::DrawSphere(const Vect3f &_Pos, float Radius, const CColor& Color, int Aristas)
+{
+  assert(IsOk());
+  for(int t=0;t<Aristas;++t)
+  {
+    float l_RadiusRing=Radius*sin(mathUtils::Deg2Rad(180.0f*((float)t))/((float)Aristas));
+    for(int b=0;b<Aristas;++b)
+    {
+      Vect3f l_PosA(  l_RadiusRing*cos(mathUtils::Deg2Rad((float)(360.0f*(float)b)/((float)Aristas))),
+                      Radius*cos(mathUtils::Deg2Rad((180.0f*((float)t))/((float)Aristas))),
+                      l_RadiusRing*sin(mathUtils::Deg2Rad(((float)(360.0f*(float)b)/((float)Aristas)))));
+
+      Vect3f l_PosB(  l_RadiusRing*cos(mathUtils::Deg2Rad((float)(360.0f*(float)(b+1))/((float)Aristas))),
+                      Radius*cos(mathUtils::Deg2Rad((180.0f*((float)t))/((float)Aristas))),
+                      l_RadiusRing*sin(mathUtils::Deg2Rad(((float)(360.0f*(float)(b+1))/((float)Aristas)))));
+
+      DrawLine(_Pos + l_PosA, _Pos + l_PosB, Color);
+
+      float l_RadiusNextRing=Radius*sin(mathUtils::Deg2Rad(180.0f*((float)(t+1)))/((float)Aristas));
+
+      Vect3f l_PosC(  l_RadiusRing*cos(mathUtils::Deg2Rad((float)(360.0f*(float)b)/((float)Aristas))),
+                      Radius*cos(mathUtils::Deg2Rad((180.0f*((float)t))/((float)Aristas))),
+                      l_RadiusRing*sin(mathUtils::Deg2Rad(((float)(360.0f*(float)b)/((float)Aristas)))));
+      Vect3f l_PosD(  l_RadiusNextRing*cos(mathUtils::Deg2Rad((float)(360.0f*(float)b)/((float)Aristas))),
+                      Radius*cos(mathUtils::Deg2Rad((180.0f*((float)(t+1)))/((float)Aristas))),
+                      l_RadiusNextRing*sin(mathUtils::Deg2Rad(((float)(360.0f*(float)b)/((float)Aristas)))));
+
+      DrawLine(_Pos + l_PosC, _Pos + l_PosD, Color);
+    }
+  }
+}
+

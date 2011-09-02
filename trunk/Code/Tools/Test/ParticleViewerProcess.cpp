@@ -28,7 +28,7 @@
 #include "IAManager.h"
 #include "GraphDefines.h"
 #include "EmiterInstance.h"
-#include "CoreEmiterManager.h"
+#include "EmiterCoreManager.h"
 #include "EffectManager.h"
 #include "EmiterManager.h"
 
@@ -65,8 +65,8 @@ bool CParticleViewerProcess::Init()
   //for(int i = 0; i < NUM_EMISORS; ++i)
   //  m_pEmiters[i]  = new CEmiterInstance();
 
-  CCoreEmiterManager* l_pCoreEmiterManager = CORE->GetCoreEmiterManager();
-  const set<string>& l_szEmiterNames = l_pCoreEmiterManager->GetCoreNames();
+  CEmiterCoreManager* l_pEmiterCoreManager = CORE->GetEmiterCoreManager();
+  const set<string>& l_szEmiterNames = l_pEmiterCoreManager->GetCoreNames();
   set<string>::const_iterator l_it = l_szEmiterNames.begin();
   if(l_it != l_szEmiterNames.end())
   {
@@ -111,27 +111,6 @@ void CParticleViewerProcess::Update(float _fElapsedTime)
 
 void CParticleViewerProcess::RenderScene(CRenderManager* _pRM)
 {
-  if(CORE->GetActionManager()->IsActionActive("ToggleDebug"))
-  {
-    CObject3D l_Poslluny;
-    l_Poslluny.SetPosition(Vect3f(0,25,0));
-    CObject3D* m_pPlayerPos = CORE->GetEntityManager()->GetEntity("Player")->GetComponent<CComponentObject3D>(CBaseComponent::ECT_OBJECT_3D);
-  
-  
-    CSphereCamera l_SphereCamera( 1, 700, 55.0f * FLOAT_PI_VALUE/180.0f,
-                                  ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
-                                  &l_Poslluny,m_pPlayerPos);
-  
-  
-    _pRM->SetupMatrices(&l_SphereCamera,false,false);
-  }
-  //CORE->GetPortalManager()->Render(_pRM);
-
-
-
-
-
-  
   //----------------------------------------------------------------------------------------
   CORE->GetEmiterManager()->Render(_pRM);
   //----------------------------------------------------------------------------------------
@@ -141,23 +120,8 @@ void CParticleViewerProcess::RenderINFO(CRenderManager* _pRM)
 {
 
   FONT_MANAGER->DrawText(0,30,colBLUE,FONT_MANAGER->GetTTF_Id("Titania"),m_szEmiter.c_str());
-  if(CORE->GetActionManager()->IsActionActive("ToggleDebug"))
-  {
-    CORE->GetPhysicsManager()->DebugRender(_pRM);
-    CORE->GetPortalManager()->DebugRender(_pRM);
-    CORE->GetEntityManager()->DebugRender(_pRM);
 
-    CFrustum l_Frustum;
-    l_Frustum.Update(m_pCamera);
-  
-    Mat44f i;
-    i.SetIdentity();
-    _pRM->SetTransform(i);
-  
-    _pRM->DrawFrustum(&l_Frustum, colBLACK);
-
-  }
-  CORE->GetEmiterManager()->DebugRender(_pRM);
+  CORE->GetEmiterManager()->DebugRender(_pRM, CORE->GetActionManager()->IsActionActive("ToggleDebug"));
 
 
 }
@@ -172,18 +136,14 @@ bool CParticleViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _f
   {
     PrevEmiter();
   }
-  if(strcmp("ReloadParticles",_pcAction) == 0)
-  {
-    CORE->GetCoreEmiterManager()->Reload();
-  }
   return false;
 }
 
 
 void CParticleViewerProcess::NextEmiter()
 {
-  CCoreEmiterManager* l_pCoreEmiterManager = CORE->GetCoreEmiterManager();
-  const set<string>& l_szEmiterNames = l_pCoreEmiterManager->GetCoreNames();
+  CEmiterCoreManager* l_pEmiterCoreManager = CORE->GetEmiterCoreManager();
+  const set<string>& l_szEmiterNames = l_pEmiterCoreManager->GetCoreNames();
   set<string>::const_iterator l_it = l_szEmiterNames.find(m_szEmiter);
   if(l_it == l_szEmiterNames.end())
   {
@@ -202,13 +162,18 @@ void CParticleViewerProcess::NextEmiter()
   
   m_szEmiter = *l_it;
   for(int i = 0; i < NUM_EMISORS; ++i)
-    m_pEmiters[i]->Reset(m_szEmiter);
+  {
+    if(!m_pEmiters[i]->Reset(m_szEmiter))
+    {
+      LOGGER->AddNewLog(ELL_ERROR, "CParticleViewerProcess::PrevEmiter este... waw");
+    }
+  }
 }
 
 void CParticleViewerProcess::PrevEmiter()
 {
-  CCoreEmiterManager* l_pCoreEmiterManager = CORE->GetCoreEmiterManager();
-  const set<string>& l_szEmiterNames = l_pCoreEmiterManager->GetCoreNames();
+  CEmiterCoreManager* l_pEmiterCoreManager = CORE->GetEmiterCoreManager();
+  const set<string>& l_szEmiterNames = l_pEmiterCoreManager->GetCoreNames();
   set<string>::const_iterator l_it = l_szEmiterNames.find(m_szEmiter);
   if(l_it == l_szEmiterNames.end())
   {
@@ -227,5 +192,10 @@ void CParticleViewerProcess::PrevEmiter()
   
   m_szEmiter = *l_it;
   for(int i = 0; i < NUM_EMISORS; ++i)
-    m_pEmiters[i]->Reset(m_szEmiter);
+  {
+    if(!m_pEmiters[i]->Reset(m_szEmiter))
+    {
+      LOGGER->AddNewLog(ELL_ERROR, "CParticleViewerProcess::PrevEmiter este... waw");
+    }
+  }
 }

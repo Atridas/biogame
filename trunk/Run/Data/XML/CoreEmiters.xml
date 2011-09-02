@@ -51,7 +51,7 @@
   </ParticleEmitter>
   -->
   
-  <CoreEmiter id="vapor"                        
+  <SimpleEmiter id="vapor"                        
               emit_rate1="15.0"                  emit_rate2="20.0"
               life1="1.0"                        life2="1.0"       
               awake_time1="0.8"                  awake_time2="1.2"
@@ -71,7 +71,7 @@
       <Size   control_time1="1.0"       control_time2="1.0"        size1="0.9"          size2="0.9"/>
     </Sizes>
 
-  </CoreEmiter>
+  </SimpleEmiter>
   
   <!--
   <ParticleEmitter  id="bubble"                        MinEmitRate="7.0"             MaxEmitRate="10.0"
@@ -83,7 +83,7 @@
                      
   </ParticleEmitter>
   -->
-  <CoreEmiter id="bubble"                        
+  <SimpleEmiter id="bubble"                        
               emit_rate1="10.0"                  emit_rate2="15.0"
               life1="2.5"                        life2="3.0"              
               awake_time1="0.8"                  awake_time2="1.2"
@@ -105,11 +105,11 @@
       <Size   control_time1="1.5"       control_time2="2.0"        size1="0.02"          size2="0.05"/>
       <Size   control_time1="3.0"       control_time2="3.0"        size1="0.09"          size2="0.1"/>
     </Sizes>
-  </CoreEmiter>
+  </SimpleEmiter>
   
   
   
-  <CoreEmiter id="impacte"                        
+  <SimpleEmiter id="impacte"                        
               emit_rate1="500.0"                 emit_rate2="500.0"
               life1="0.1"                        life2="0.1"           
               awake_time1="0.2"                  awake_time2="0.2"
@@ -135,10 +135,10 @@
     <Colors>
       <Color   control_time1="0.3"       control_time2="0.3"        color1="1.0 1.0 1.0 0.0"         color2="1.0 1.0 1.0 0.0"/>
     </Colors>
-  </CoreEmiter>
+  </SimpleEmiter>
   
   
-  <CoreEmiter id="impacte ragdoll"                        
+  <SimpleEmiter id="impacte ragdoll"                        
               emit_rate1="500.0"                 emit_rate2="500.0"
               life1="0.1"                        life2="0.1"           
               awake_time1="0.2"                  awake_time2="0.2"
@@ -164,10 +164,10 @@
     <Colors>
       <Color   control_time1="0.3"       control_time2="0.3"        color1="1.0 1.0 1.0 0.0"         color2="1.0 1.0 1.0 0.0"/>
     </Colors>
-  </CoreEmiter>
+  </SimpleEmiter>
   
   
-  <CoreEmiter id="disparar"                        
+  <SimpleEmiter id="disparar"                        
               emit_rate1="5000.0"                emit_rate2="5000.0"
               life1="0.1"                        life2="1.0"           
               awake_time1="0.2"                  awake_time2="0.2"
@@ -192,7 +192,7 @@
     <Colors>
       <Color   control_time1="0.3"       control_time2="0.3"        color1="1.0 1.0 1.0 0.0"         color2="1.0 1.0 1.0 0.0"/>
     </Colors>
-  </CoreEmiter>
+  </SimpleEmiter>
   <!--
   <ParticleEmitter  id="vapor2"                        MinEmitRate="15.0"             MaxEmitRate="20.0"
                     Color1="0.1 0.1 0.1 0.8"           Color2="0.1 0.1 0.1 0.8"       MinSize="0.05"        MaxSize="0.05"
@@ -205,7 +205,7 @@
 
   </ParticleEmitter>
   -->
-  <CoreEmiter id="vapor2"                        
+  <SimpleEmiter id="vapor2"                        
               emit_rate1="15.0"                   emit_rate2="20.0"
               life1="1.0"                         life2="1.0"                    
               awake_time1="0.8"                  awake_time2="1.2"
@@ -225,7 +225,7 @@
 	  <Sizes>
       <Size   control_time1="1.0"       control_time2="1.0"        size1="0.9"          size2="0.9"/>
     </Sizes>
-  </CoreEmiter>
+  </SimpleEmiter>
   
   <!--
     <ParticleEmitter  id="FumMenjar"                        MinEmitRate="7.0"             MaxEmitRate="10.0"
@@ -241,7 +241,7 @@
        </Colors>
      </ParticleEmitter>    
   -->
-  <CoreEmiter id="FumMenjar"                        
+  <SimpleEmiter id="FumMenjar"                        
               emit_rate1="7.0"                   emit_rate2="10.0"
               life1="5.0"                         life2="5.0"                    
               awake_time1="0.8"                  awake_time2="1.2"
@@ -265,7 +265,7 @@
         <Color        control_time1="4.0"        color1="0.43 0.43 0.43 0.20"       color2="0.44 0.44 0.44 0.21"/>
         <Color        control_time1="6.0"        color1="1.0 1.0 1.0 0.0"           color2="1.0 1.0 1.0 0.0"/>
     </Colors>
-  </CoreEmiter>
+  </SimpleEmiter>
   <!--
     <ParticleEmitter  id="efecte_fred"                      MinEmitRate="20.0"             MaxEmitRate="30.0"
                       Color1="1.0 1.0 1.0 0.0"              Color2="1.0 1.0 1.0 0.0"       MinSize="0.3"        MaxSize="0.5"   
@@ -282,7 +282,7 @@
       </ParticleEmitter>  
   -->
 	  
-	<CoreEmiter id="efecte_fred"                        
+	<SimpleEmiter id="efecte_fred"                        
               emit_rate1="20.0"                   emit_rate2="30.0"
               life1="5.0"                         life2="5.0"                    
               awake_time1="0.8"                  awake_time2="1.2"
@@ -306,7 +306,7 @@
           <Color        control_time1="3.0"       control_time2="1.0"   color1="1.0 1.0 1.0 0.1"          color2="1.0 1.0 1.0 0.1"/>
           <Color        control_time1="4.0"       control_time2="1.0"   color1="1.0 1.0 1.0 0.0"          color2="1.0 1.0 1.0 0.0"/>
     </Colors>
-  </CoreEmiter>
+  </SimpleEmiter>
 <!--
     <ParticleEmitter  id="boira"                              MinEmitRate="6.0"             MaxEmitRate="6.0"
                       Color1="0.14 0.14 0.14 0.0"             Color2="0.14 0.14 0.14 0.0"   MinSize="1.5"        MaxSize="1.7"
@@ -321,7 +321,7 @@
       </Colors>
     </ParticleEmitter>  
   -->
-	<CoreEmiter id="boira"                        
+	<SimpleEmiter id="boira"                        
               emit_rate1="6.0"                   emit_rate2="6.0"
               life1="25.0"                         life2="25.0"                    
               awake_time1="0.8"                  awake_time2="1.2"
@@ -345,7 +345,7 @@
         <Color        control_time1="20.5"      control_time2="1.5"    color1="0.30 0.30 0.30 0.06"         color2="0.30 0.30 0.30 0.06"/>
         <Color        control_time1="22.0"      control_time2="3"      color1="0.30 0.30 0.30 0.0"          color2="0.30 0.30 0.30 0.0"/>
      </Colors>
-  </CoreEmiter>
+  </SimpleEmiter>
 <!--
     <ParticleEmitter  id="frigo"                              MinEmitRate="16.0"             MaxEmitRate="16.0"
                       Color1="0.7 0.7 0.7 0.0"                Color2="0.7 0.7 0.7 0.0"       MinSize="1.5"        MaxSize="1.7"
@@ -364,7 +364,7 @@
     </ParticleEmitter> 
   -->
 	
-	<CoreEmiter id="frigo"                        
+	<SimpleEmiter id="frigo"                        
               emit_rate1="16.0"                   emit_rate2="16.0"
               life1="15.0"                         life2="15.0"                    
               awake_time1="0.8"                  awake_time2="1.2"
@@ -388,7 +388,7 @@
       <Color        control_time1="20.5"      control_time2="1.5"    color1="0.7 0.7 0.7 0.06"         color2="0.7 0.7 0.7 0.06"/>
       <Color        control_time1="22.0"      control_time2="3"      color1="0.7 0.7 0.7 0.0"          color2="0.7 0.7 0.7 0.0"/>
     </Colors>
-  </CoreEmiter>
+  </SimpleEmiter>
 <!--
     <ParticleEmitter  id="fum_proveta"                        MinEmitRate="15.0"             MaxEmitRate="20.0"
                       Color1="0.63 0.93 0.89 0.05"            Color2="0.65 0.95 0.9 0.05"    MinSize="0.05"        MaxSize="0.05"
@@ -404,7 +404,7 @@
     </ParticleEmitter> 
   -->
 
-   <CoreEmiter id="fum_proveta"
+   <SimpleEmiter id="fum_proveta"
                 emit_rate1="15.0"                   emit_rate2="20.0"
                 life1="3.5"                         life2="3.5"
                 awake_time1="0.8"                  awake_time2="1.2"
@@ -426,7 +426,7 @@
       <Size        control_time1="3.6"       control_time2="3.6"   size1="0.7"          size2="0.7"/>
     </Sizes>
     
-  </CoreEmiter>
+  </SimpleEmiter>
 <!--
     <ParticleEmitter  id="goteo"                        MinEmitRate="1.0"             MaxEmitRate="1.0"
                       Color1="1.0 1.0 1.0 1.0"          Color2="1.0 1.0 1.0 1.0"      MinSize="0.03"        MaxSize="0.05"
@@ -437,7 +437,7 @@
 
     </ParticleEmitter> 
   -->
-	<CoreEmiter id="goteo"
+	<SimpleEmiter id="goteo"
                 emit_rate1="1.0"                   emit_rate2="1.0"
                 life1="2.0"                         life2="2.0"
                 awake_time1="0.8"                  awake_time2="1.2"
@@ -456,7 +456,7 @@
                 texture="Data/Textures/texturas particulas/DustPoof.dds">
 
   
-  </CoreEmiter>
+  </SimpleEmiter>
 	
 
   
@@ -465,7 +465,7 @@
   <!-- ····························································································· -->
   <!-- ····························································································· -->
   
-  <CoreEmiter id="test tot"                        
+  <SimpleEmiter id="test tot"                        
               emit_rate1="7.0"                   emit_rate2="10.0"
               life1="2.5"                        life2="4.5"                    
               awake_time1="0.5"                  awake_time2="1.0"
@@ -499,5 +499,5 @@
       <Color   control_time1="0.8"       control_time2="1.2"        color1="0.0 0.0 0.0 1.0"         color2="1.0 0.0 0.0 1.0"/>
       <Color   control_time1="1.8"       control_time2="2.2"        color1="0.0 0.0 0.0 1.0"         color2="0.0 1.0 0.0 1.0"/>
     </Colors>
-  </CoreEmiter>
+  </SimpleEmiter>
 </CoreEmiters>

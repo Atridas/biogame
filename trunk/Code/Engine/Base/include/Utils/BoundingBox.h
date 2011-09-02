@@ -13,7 +13,10 @@ public:
 
   bool Init(const Vect3f& _vMin, const Vect3f& _vMax);
   bool Init(Vect3f _vPoints[8]);
-  bool Init(Vect3f _vDimensions);
+  bool Init(const Vect3f& _vDimensions);
+  
+  bool Adjust(const Vect3f& _vPoint);
+  bool Adjust(const CBoundingBox& _BBox);
   
   const Vect3f& GetMin() const { return m_vBox[0]; };
   const Vect3f& GetMax() const { return m_vBox[7]; };

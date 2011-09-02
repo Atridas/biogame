@@ -2,25 +2,27 @@
 #ifndef __PARTICLE_INSTANCE_H__
 #define __PARTICLE_INSTANCE_H__
 #include "base.h"
-#include "CoreEmiter.h"
+#include "SimpleEmiterCore.h"
 #include "ParticleConstants.h"
 
 // ----------------------------
 struct SParticleRenderInfo;
 // ----------------------------
 
-class CParticleInstance
+class CParticle
 {
 public:
-  CParticleInstance() {};
+  CParticle():m_pEmiterCore(0) {};
 
-  ~CParticleInstance() {};
+  ~CParticle() {};
   
-  void Init(CCoreEmiter* _pCoreEmiter, const Vect3f& _vInitialPosition);
+  void Init(CSimpleEmiterCore* _pCoreEmiter, const Vect3f& _vInitialPosition);
 
   bool Update(float _fDeltaTime);
 
   void FillRenderInfo(SParticleRenderInfo& Info_);
+
+  const Vect3f& GetPosition() const { return m_vPosition; };
 
 private:
 
@@ -44,7 +46,7 @@ private:
   //------------------------------------------
 
 
-  CCoreEmiter* m_pCoreEmiter;
+  CSimpleEmiterCore* m_pEmiterCore;
 
   //rendering information
   Vect3f m_vPosition;

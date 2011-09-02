@@ -1,11 +1,13 @@
 #include <XML\XMLTreeNode.h>
 #include "EmiterManager.h"
+#include "SimpleEmiterCore.h"
+#include "AggregateEmiterCore.h"
 
 // Main include
-#include "CoreEmiterManager.h"
+#include "EmiterCoreManager.h"
 
 
-bool CCoreEmiterManager::LoadFile(const string &_szFileName, bool _bReload)
+bool CEmiterCoreManager::LoadFile(const string &_szFileName, bool _bReload)
 {
   CXMLTreeNode l_xmlCoreEmiters;
 
@@ -21,37 +23,48 @@ bool CCoreEmiterManager::LoadFile(const string &_szFileName, bool _bReload)
     for(int i = 0; i < l_iNumChildren; ++i)
     {
       CXMLTreeNode l_xmlCoreEmiter = l_xmlCoreEmiters(i);
-      if(strcmp("CoreEmiter",l_xmlCoreEmiter.GetName()) == 0)
+      CEmiterCore* l_pEmiterCore;
+      if(strcmp("SimpleEmiter",l_xmlCoreEmiter.GetName()) == 0)
       {
-        CCoreEmiter* l_pCoreEmiter = new CCoreEmiter();
-        if(l_pCoreEmiter->Init(l_xmlCoreEmiter))
+        l_pEmiterCore = new CSimpleEmiterCore();
+      }
+      else if(strcmp("AggregateEmiter",l_xmlCoreEmiter.GetName()) == 0)
+      {
+        l_pEmiterCore = new CAggregateEmiterCore();
+      }
+      else
+      {
+        if(!l_xmlCoreEmiter.IsComment())
         {
-          if(GetResource(l_pCoreEmiter->GetName()))
+          LOGGER->AddNewLog(ELL_WARNING, "CCoreEmiterManager::LoadFile Node \"%s\" desconegut",l_xmlCoreEmiter.GetName());
+        }
+        continue;
+      }
+
+
+      if(l_pEmiterCore->Init(l_xmlCoreEmiter))
+      {
+        if(GetResource(l_pEmiterCore->GetName()))
+        {
+          if(_bReload)
           {
-            if(_bReload)
-            {
-              delete GetResource(l_pCoreEmiter->GetName());
-              AddResource(l_pCoreEmiter->GetName(), l_pCoreEmiter);
-            }
-            else
-            {
-              LOGGER->AddNewLog(ELL_WARNING, "CCoreEmiterManager::LoadFile Core Emiter \"%s\" repetit",l_pCoreEmiter->GetName().c_str());
-            }
+            delete GetResource(l_pEmiterCore->GetName());
+            AddResource(l_pEmiterCore->GetName(), l_pEmiterCore);
           }
           else
           {
-            AddResource(l_pCoreEmiter->GetName(), l_pCoreEmiter);
-            m_sCores.insert(l_pCoreEmiter->GetName());
+            LOGGER->AddNewLog(ELL_WARNING, "CCoreEmiterManager::LoadFile Core Emiter \"%s\" repetit",l_pEmiterCore->GetName().c_str());
           }
         }
         else
         {
-          delete l_pCoreEmiter;
+          AddResource(l_pEmiterCore->GetName(), l_pEmiterCore);
+          m_sCores.insert(l_pEmiterCore->GetName());
         }
       }
-      else if(!l_xmlCoreEmiter.IsComment())
+      else
       {
-        LOGGER->AddNewLog(ELL_WARNING, "CCoreEmiterManager::LoadFile Node \"%s\" desconegut",l_xmlCoreEmiter.GetName());
+        delete l_pEmiterCore;
       }
     }
     return true;
@@ -63,7 +76,7 @@ bool CCoreEmiterManager::LoadFile(const string &_szFileName, bool _bReload)
   }
 }
 
-bool CCoreEmiterManager::Load(const string &_szFileName)
+bool CEmiterCoreManager::Load(const string &_szFileName)
 {
   if(m_sFiles.find(_szFileName) != m_sFiles.end())
   {
@@ -78,7 +91,7 @@ bool CCoreEmiterManager::Load(const string &_szFileName)
 }
 
 
-bool CCoreEmiterManager::Load(const set<string> &_sFiles)
+bool CEmiterCoreManager::Load(const set<string> &_sFiles)
 {
   bool l_bOk = true;
   set<string>::iterator l_it  = _sFiles.begin();
@@ -92,7 +105,7 @@ bool CCoreEmiterManager::Load(const set<string> &_sFiles)
   return l_bOk;
 }
 
-bool CCoreEmiterManager::Reload()
+bool CEmiterCoreManager::Reload()
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "CCoreEmiterManager::Reload");
 
@@ -110,14 +123,14 @@ bool CCoreEmiterManager::Reload()
   return l_bOk; // False si n'hi ha algun de mal carregat. True en altre cas.
 }
 
-CCoreEmiter * CCoreEmiterManager::GetCoreEmiter(const string &_szName)
+CEmiterCore * CEmiterCoreManager::GetEmiterCore(const string &_szName)
 {
-  CCoreEmiter* l_pCoreEmiter = GetResource(_szName);
+  CEmiterCore* l_pEmiterCore = GetResource(_szName);
 
-  if(!l_pCoreEmiter)
+  if(!l_pEmiterCore)
   {
-    l_pCoreEmiter = &m_NullEmiter;
+    l_pEmiterCore = &m_NullEmiter;
   }
 
-  return l_pCoreEmiter;
+  return l_pEmiterCore;
 }

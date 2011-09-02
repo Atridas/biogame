@@ -19,7 +19,7 @@
 #include "Core.h"
 #include "SoundManager.h"
 
-#include <CoreEmiterManager.h>
+#include <EmiterCoreManager.h>
 #include <EmiterInstance.h>
 
 void CBiotestProcess::Update(float _fElapsedTime)

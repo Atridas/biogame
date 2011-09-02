@@ -66,7 +66,7 @@ bool CBoundingBox::Init(Vect3f _vPoints[8])
   return IsOk();
 }
 
-bool CBoundingBox::Init(Vect3f _vDimensions)
+bool CBoundingBox::Init(const Vect3f& _vDimensions)
 {
   CalcBox(_vDimensions * -.5f, _vDimensions *.5f);
   CalcMiddlePoint();
@@ -76,6 +76,83 @@ bool CBoundingBox::Init(Vect3f _vDimensions)
   SetOk(true);
 
   return IsOk();
+}
+  
+bool CBoundingBox::Adjust(const Vect3f& _vPoint)
+{
+  bool l_bModified = false;
+
+  float l_fMinX, l_fMinY, l_fMinZ;
+  if(_vPoint.x < m_vMiddlePoint.x - m_vDimension.x * .5f)
+  {
+    l_fMinX = _vPoint.x;
+    l_bModified = true;
+  }
+  else
+  {  
+    l_fMinX = m_vMiddlePoint.x - m_vDimension.x * .5f;
+  }
+  if(_vPoint.y < m_vMiddlePoint.y - m_vDimension.y * .5f)
+  {
+    l_fMinY = _vPoint.y;
+    l_bModified = true;
+  }
+  else
+  {  
+    l_fMinY = m_vMiddlePoint.y - m_vDimension.y * .5f;
+  }
+  if(_vPoint.z < m_vMiddlePoint.z - m_vDimension.z * .5f)
+  {
+    l_fMinZ = _vPoint.z;
+    l_bModified = true;
+  }
+  else
+  {  
+    l_fMinZ = m_vMiddlePoint.z - m_vDimension.z * .5f;
+  }
+
+  float l_fMaxX, l_fMaxY, l_fMaxZ;
+  if(_vPoint.x > m_vMiddlePoint.x + m_vDimension.x * .5f)
+  {
+    l_fMaxX = _vPoint.x;
+    l_bModified = true;
+  }
+  else
+  {  
+    l_fMaxX = m_vMiddlePoint.x + m_vDimension.x * .5f;
+  }
+  if(_vPoint.y > m_vMiddlePoint.y + m_vDimension.y * .5f)
+  {
+    l_fMaxY = _vPoint.y;
+    l_bModified = true;
+  }
+  else
+  {  
+    l_fMaxY = m_vMiddlePoint.y + m_vDimension.y * .5f;
+  }
+  if(_vPoint.z > m_vMiddlePoint.z + m_vDimension.z * .5f)
+  {
+    l_fMaxZ = _vPoint.z;
+    l_bModified = true;
+  }
+  else
+  {  
+    l_fMaxZ = m_vMiddlePoint.z + m_vDimension.z * .5f;
+  }
+
+  if(l_bModified)
+  {
+    Init(Vect3f(l_fMinX, l_fMinY, l_fMinZ), Vect3f(l_fMaxX, l_fMaxY, l_fMaxZ));
+  }
+  return l_bModified;
+}
+
+bool CBoundingBox::Adjust(const CBoundingBox& _BBox)
+{
+  bool l_bModified = false;
+  l_bModified = Adjust(_BBox.GetMin()) || l_bModified;
+  l_bModified = Adjust(_BBox.GetMax()) || l_bModified;
+  return l_bModified;
 }
 
 void CBoundingBox::CalcBox(const Vect3f& _vMin, const Vect3f& _vMax)

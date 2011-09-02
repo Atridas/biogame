@@ -1,40 +1,22 @@
 #pragma once
-#ifndef __CORE_EMITER_H__
-#define __CORE_EMITER_H__
+#ifndef __CORE_SIMPLE_EMITER_H__
+#define __CORE_SIMPLE_EMITER_H__
+
 #include "base.h"
 #include "Named.h"
 #include "ParticleConstants.h"
-
+#include "EmiterCore.h"
 
 // ----------------------------
 class CXMLTreeNode;
 class CMaterial;
 // ----------------------------
 
-class CCoreEmiter:
-   public CBaseControl,
-   public CNamed
+class CSimpleEmiterCore:
+   public CEmiterCore
 {
 public:
-  
-  struct SColorAnimation {
-    float m_fControlTime1, m_fControlTime2;
-    CColor m_Color1, m_Color2;
-
-    SColorAnimation(const CColor& _Color1, float _fControlTime1, const CColor& _Color2, float _fControlTime2):
-      m_fControlTime1(_fControlTime1),m_fControlTime2(_fControlTime2),m_Color1(_Color1),m_Color2(_Color2){};
-  };
-  struct SSizeAnimation {
-    float m_fControlTime1, m_fControlTime2;
-    float m_fSize1, m_fSize2;
-
-    SSizeAnimation(float _fSize1, float _fControlTime1, float _fSize2, float _fControlTime2):
-      m_fControlTime1(_fControlTime1),m_fControlTime2(_fControlTime2),m_fSize1(_fSize1),m_fSize2(_fSize2){};
-  };
-
-public:
-  CCoreEmiter():
-      CNamed(""),
+  CSimpleEmiterCore():
       m_fEmitRate1(0.f), m_fEmitRate2(0.f),
       m_fLife1(0.f), m_fLife2(0.f),
       m_fAwakeTime1(1.f), m_fAwakeTime2(1.f),
@@ -53,7 +35,7 @@ public:
       m_iNumFrames(1),
       m_fTimePerFrame(1.f),
       m_pMaterial(0) {};
-  virtual ~CCoreEmiter() {Done();};
+  virtual ~CSimpleEmiterCore() {Done();};
 
   bool Init(CXMLTreeNode& _xmlEmiter);
   void Init();
@@ -86,6 +68,9 @@ public:
 
 
   CMaterial* GetMaterial() const { return m_pMaterial; };
+  
+  virtual bool IsSimpleEmiter() { return true; };
+  virtual bool IsAggregateEmiter() { return false; };
 
 protected:
   virtual void Release();

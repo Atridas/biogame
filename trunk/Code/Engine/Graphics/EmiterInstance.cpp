@@ -1,52 +1,81 @@
 #include "EmiterInstance.h"
-#include "CoreEmiterManager.h"
+#include "EmiterCoreManager.h"
 #include "Effect.h"
 #include "EffectManager.h"
 #include "RenderManager.h"
 #include "RenderableVertexs.h"
+#include "SimpleEmiterCore.h"
+#include "AggregateEmiterCore.h"
 
 bool CEmiterInstance::Init(const string& _szCoreName, const CObject3D& _Position, const Vect3f& _vVolume )
 {
   assert(!IsOk());
+  SetOk(true);
   SetMat44( _Position.GetMat44() );
 
   m_szCoreName  = _szCoreName;
   m_vMaxVolume  = _vVolume * .5f;
   m_vMinVolume  = -m_vMaxVolume;
   m_fVolume     = _vVolume.x * _vVolume.y * _vVolume.z;
-  m_pCoreEmiter = CORE->GetCoreEmiterManager()->GetCoreEmiter(m_szCoreName);
+  m_pEmiterCore = CORE->GetEmiterCoreManager()->GetEmiterCore(m_szCoreName);
+  
+  GetBoundingBox()->Init(_vVolume);
 
-  m_fTimeToNextParticle = 1.f / (m_pCoreEmiter->GetEmitRate() * m_fVolume);
-  m_iActiveParticles = 0;
-  memset(m_Particles, 0, sizeof(m_Particles));
+  if(m_pEmiterCore->IsSimpleEmiter())
+  {
+    m_bIsSimple = true;
+    CSimpleEmiterCore *l_pEmiterCore = dynamic_cast<CSimpleEmiterCore*>(m_pEmiterCore);
 
-  m_bAwake = true;
-  m_fTimeToAwakeOrSleep = m_pCoreEmiter->GetAwakeTime();
+    m_fTimeToNextParticle = 1.f / (l_pEmiterCore->GetEmitRate() * m_fVolume);
+    m_iActiveParticles = 0;
+    memset(m_Particles, 0, sizeof(m_Particles));
 
-  m_pObjectReference = 0;
-  m_bActive = true;
-  bool l_bIsOk = m_InstancedData.Init(CORE->GetRenderManager(), MAX_PARTICLES_PER_EMITER);
-  SetOk(l_bIsOk);
-  return l_bIsOk;
-}
+    m_bAwake = true;
+    m_fTimeToAwakeOrSleep = l_pEmiterCore->GetAwakeTime();
 
-void CEmiterInstance::Reset( const CObject3D& _Position, const Vect3f& _vVolume )
-{
-  assert(IsOk());
+    m_pObjectReference = 0;
+    m_bActive = true;
+  }
+  else
+  {
+    m_bIsSimple = false;
+    CAggregateEmiterCore *l_pEmiterCore = dynamic_cast<CAggregateEmiterCore*>(m_pEmiterCore);
 
-  SetMat44( _Position.GetMat44() );
-  m_vMaxVolume  = _vVolume * .5f;
-  m_vMinVolume  = -m_vMaxVolume;
-  m_fVolume     = _vVolume.x * _vVolume.y * _vVolume.z;
-  m_pCoreEmiter = CORE->GetCoreEmiterManager()->GetCoreEmiter(m_szCoreName);
+    vector<CAggregateEmiterCore::SEmiters>::const_iterator l_it  = l_pEmiterCore->GetChilds().begin();
+    vector<CAggregateEmiterCore::SEmiters>::const_iterator l_end = l_pEmiterCore->GetChilds().end();
 
-  m_RecyclingParticles.DeleteAllElements();
-  m_fTimeToNextParticle = 1.f / (m_pCoreEmiter->GetEmitRate() * m_fVolume);
-  m_iActiveParticles = 0;
-  memset(m_Particles, 0, sizeof(m_Particles));
 
-  m_bAwake = true;
-  m_fTimeToAwakeOrSleep = m_pCoreEmiter->GetAwakeTime();
+    for(; l_it != l_end; ++l_it)
+    {
+      CEmiterInstance *l_pChild = new CEmiterInstance();
+      Vect3f l_vChildBox = l_it->volume.GetScaled(_vVolume);
+      bool l_bIsOk = l_pChild->Init(l_it->emiter, l_it->movement, l_vChildBox);
+      if(l_bIsOk)
+      {
+        m_ChildEmiters.push_back(l_pChild);
+        GetBoundingBox()->Adjust(*l_pChild->GetBoundingBox());
+      }
+      else
+      {
+        delete l_pChild;
+        SetOk(false);
+        break;
+      }
+    }
+  }
+
+  if(!IsOk())
+  {
+    Release();
+  }
+  else if(!m_InstancedData.IsOk())
+  {
+    bool l_bIsOk = m_InstancedData.Init(CORE->GetRenderManager(), MAX_PARTICLES_PER_EMITER);
+    SetOk(l_bIsOk);
+  }
+
+  GetBoundingSphere()->Init(*GetBoundingBox());
+  return IsOk();
 }
 
 void CEmiterInstance::Update(float _fDeltaTime)
@@ -57,148 +86,214 @@ void CEmiterInstance::Update(float _fDeltaTime)
   //mirem si el delta time és massa gran, per no fer actualitzacions massa a saco, les capem a un min de framerate
   if(_fDeltaTime > MAX_PARTICLE_DELTA_TIME) _fDeltaTime = MAX_PARTICLE_DELTA_TIME;
 
-  CRenderManager* l_pRM = CORE->GetRenderManager();
-  SParticleRenderInfo* l_pInstanceBuffer = m_InstancedData.GetBuffer(MAX_PARTICLES_PER_EMITER, l_pRM);
-  assert(l_pInstanceBuffer);
+  bool l_bBBModified = false;
 
-  //actualitzem les partícules
-  for(int i = 0; i < m_iActiveParticles; ++i)
+  if(m_bIsSimple)
   {
-    CParticleInstance* l_pParticle = m_RecyclingParticles.GetAt(m_Particles[i]);
-    if(l_pParticle->Update(_fDeltaTime))
+    CRenderManager* l_pRM = CORE->GetRenderManager();
+    SParticleRenderInfo* l_pInstanceBuffer = m_InstancedData.GetBuffer(MAX_PARTICLES_PER_EMITER, l_pRM);
+    assert(l_pInstanceBuffer);
+    CSimpleEmiterCore *l_pEmiterCore = dynamic_cast<CSimpleEmiterCore*>(m_pEmiterCore);
+
+    //actualitzem les partícules
+    for(int i = 0; i < m_iActiveParticles; ++i)
     {
-      //la partícula encara està viva, omplim la informació al buffer de rendetizatge.
-      l_pParticle->FillRenderInfo(l_pInstanceBuffer[i]);
-    }
-    else
-    {
-      m_RecyclingParticles.Free(m_Particles[i]);
-      m_iActiveParticles--;
-      m_Particles[i] = m_Particles[m_iActiveParticles];
-      if(i != m_iActiveParticles)
-        --i;
-    }
-  }
-  
-  m_fTimeToAwakeOrSleep -= _fDeltaTime;
-  while(m_fTimeToAwakeOrSleep <= 0)
-  {
-    m_bAwake = !m_bAwake;
-    if(m_bAwake)
-    {
-      m_fTimeToAwakeOrSleep += m_pCoreEmiter->GetAwakeTime();
-    }
-    else
-    {
-      m_fTimeToAwakeOrSleep += m_pCoreEmiter->GetSleepTime();
-    }
-  }
-
-  // si ha passat prou temps com per crear una partícula nova
-  while(_fDeltaTime > m_fTimeToNextParticle)
-  {
-
-    _fDeltaTime -= m_fTimeToNextParticle;
-
-    m_fTimeToNextParticle = 1.f / (m_pCoreEmiter->GetEmitRate() * m_fVolume); //carreguem el temps fins la següent partícula
-
-    if(m_bAwake && m_iActiveParticles < MAX_PARTICLES_PER_EMITER) //comprovem que el buffer no hagi quedat ple
-    {
-      int l_iParticle = m_RecyclingParticles.NewIndex(); //agafem una partícula del buffer
-      CParticleInstance* l_pParticle = m_RecyclingParticles.GetAt(l_iParticle);
-
-      //creem la partícula dintre de la caixa inicial
-      Vect3f l_vRnd(Random01(),Random01(),Random01());
-      Vect3f l_v_1_Minus_Rnd(1.f - l_vRnd.x, 1.f - l_vRnd.y, 1.f - l_vRnd.z);
-      Vect3f l_vInitialPosition = ( l_v_1_Minus_Rnd.Scale(m_vMinVolume) ) + ( l_vRnd.Scale(m_vMaxVolume) );
-
-      //inicialitzem la partícula
-      l_pParticle->Init(m_pCoreEmiter, l_vInitialPosition);
-      m_Particles[m_iActiveParticles] = l_iParticle;
-
-      //actualitzem aquesta partícula fins al final d'aquest frame
+      CParticle* l_pParticle = m_RecyclingParticles.GetAt(m_Particles[i]);
       if(l_pParticle->Update(_fDeltaTime))
       {
         //la partícula encara està viva, omplim la informació al buffer de rendetizatge.
-        l_pParticle->FillRenderInfo(l_pInstanceBuffer[m_iActiveParticles]);
+        l_pParticle->FillRenderInfo(l_pInstanceBuffer[i]);
+        l_bBBModified = GetBoundingBox()->Adjust(l_pParticle->GetPosition()) | l_bBBModified;
       }
       else
       {
-        m_RecyclingParticles.Free(m_Particles[m_iActiveParticles]);
+        m_RecyclingParticles.Free(m_Particles[i]);
         m_iActiveParticles--;
+        m_Particles[i] = m_Particles[m_iActiveParticles];
+        if(i != m_iActiveParticles)
+          --i;
       }
-
-
-      m_iActiveParticles++;
     }
-    else
+  
+    m_fTimeToAwakeOrSleep -= _fDeltaTime;
+    while(m_fTimeToAwakeOrSleep <= 0)
     {
-      m_fTimeToNextParticle = _fDeltaTime;
-      break;
+      m_bAwake = !m_bAwake;
+      if(m_bAwake)
+      {
+        m_fTimeToAwakeOrSleep += l_pEmiterCore->GetAwakeTime();
+      }
+      else
+      {
+        m_fTimeToAwakeOrSleep += l_pEmiterCore->GetSleepTime();
+      }
+    }
+
+    // si ha passat prou temps com per crear una partícula nova
+    while(_fDeltaTime > m_fTimeToNextParticle)
+    {
+
+      _fDeltaTime -= m_fTimeToNextParticle;
+
+      m_fTimeToNextParticle = 1.f / (l_pEmiterCore->GetEmitRate() * m_fVolume); //carreguem el temps fins la següent partícula
+
+      if(m_bAwake && m_iActiveParticles < MAX_PARTICLES_PER_EMITER) //comprovem que el buffer no hagi quedat ple
+      {
+        int l_iParticle = m_RecyclingParticles.NewIndex(); //agafem una partícula del buffer
+        CParticle* l_pParticle = m_RecyclingParticles.GetAt(l_iParticle);
+
+        //creem la partícula dintre de la caixa inicial
+        Vect3f l_vRnd(Random01(),Random01(),Random01());
+        Vect3f l_v_1_Minus_Rnd(1.f - l_vRnd.x, 1.f - l_vRnd.y, 1.f - l_vRnd.z);
+        Vect3f l_vInitialPosition = ( l_v_1_Minus_Rnd.Scale(m_vMinVolume) ) + ( l_vRnd.Scale(m_vMaxVolume) );
+
+        //inicialitzem la partícula
+        l_pParticle->Init(l_pEmiterCore, l_vInitialPosition);
+        m_Particles[m_iActiveParticles] = l_iParticle;
+
+        //actualitzem aquesta partícula fins al final d'aquest frame
+        if(l_pParticle->Update(_fDeltaTime))
+        {
+          //la partícula encara està viva, omplim la informació al buffer de rendetizatge.
+          l_pParticle->FillRenderInfo(l_pInstanceBuffer[m_iActiveParticles]);
+          l_bBBModified = GetBoundingBox()->Adjust(l_pParticle->GetPosition()) | l_bBBModified;
+        }
+        else
+        {
+          m_RecyclingParticles.Free(m_Particles[m_iActiveParticles]);
+          m_iActiveParticles--;
+        }
+
+
+        m_iActiveParticles++;
+      }
+      else
+      {
+        m_fTimeToNextParticle = _fDeltaTime;
+        break;
+      }
+    }
+
+    m_fTimeToNextParticle -= _fDeltaTime;
+
+    bool l_bResult = m_InstancedData.SetData(l_pInstanceBuffer, m_iActiveParticles, l_pRM);
+    assert(l_bResult);
+  }
+  else
+  {
+    vector<CEmiterInstance*>::iterator l_it  = m_ChildEmiters.begin();
+    vector<CEmiterInstance*>::iterator l_end = m_ChildEmiters.end();
+
+    for(; l_it != l_end; ++l_it)
+    {
+      (*l_it)->Update(_fDeltaTime);
+      l_bBBModified = GetBoundingBox()->Adjust(*(*l_it)->GetBoundingBox()) | l_bBBModified;
     }
   }
-
-  m_fTimeToNextParticle -= _fDeltaTime;
-
-  bool l_bResult = m_InstancedData.SetData(l_pInstanceBuffer, m_iActiveParticles, l_pRM);
-  assert(l_bResult);
+  if(l_bBBModified)
+  {
+    GetBoundingSphere()->Init(*GetBoundingBox());
+  }
 }
 
 
 
-void CEmiterInstance::Render(CRenderManager* _pRM)
+void CEmiterInstance::Render(CRenderManager* _pRM, const Mat44f& _mTransform)
 {
   assert(IsOk());
 
-  if(!m_bActive || m_iActiveParticles == 0)
+  if(!m_bActive)
     return;
 
-  CEffectManager* l_pEM = CORE->GetEffectManager();
-  assert(l_pEM && l_pEM->IsOk());
-
+  Mat44f l_mTransform;
   if(m_pObjectReference)
   {
-    _pRM->SetTransform(m_pObjectReference->GetMat44());
+    //l_mTransform = _mTransform * m_pObjectReference->GetMat44();
+    l_mTransform = m_pObjectReference->GetMat44();
   }
   else
   {
-    _pRM->SetTransform(GetMat44());
+    l_mTransform = _mTransform * GetMat44();
   }
+
+  if(m_bIsSimple)
+  {
+    if(m_iActiveParticles == 0)
+      return;
+    CSimpleEmiterCore *l_pEmiterCore = dynamic_cast<CSimpleEmiterCore*>(m_pEmiterCore);
+    CEffectManager* l_pEM = CORE->GetEffectManager();
+    assert(l_pEM && l_pEM->IsOk());
+
+    _pRM->SetTransform(l_mTransform);
   
-  // renderitzem -----------------------------------------------------------------------------------------------------------------
+    // renderitzem -----------------------------------------------------------------------------------------------------------------
 
 
-  LPDIRECT3DDEVICE9 l_pDevice = _pRM->GetDevice();
+    LPDIRECT3DDEVICE9 l_pDevice = _pRM->GetDevice();
 
-  // Fem els set stream sources
-  l_pDevice->SetStreamSourceFreq(0, (D3DSTREAMSOURCE_INDEXEDDATA  | m_iActiveParticles));
+    // Fem els set stream sources
+    l_pDevice->SetStreamSourceFreq(0, (D3DSTREAMSOURCE_INDEXEDDATA  | m_iActiveParticles));
 
-  l_pDevice->SetStreamSourceFreq(1, (D3DSTREAMSOURCE_INSTANCEDATA | 1   ));
+    l_pDevice->SetStreamSourceFreq(1, (D3DSTREAMSOURCE_INSTANCEDATA | 1   ));
 
-  bool l_bResult = m_InstancedData.SetStreamSource(_pRM, 1);
-  assert(l_bResult);// ---
+    bool l_bResult = m_InstancedData.SetStreamSource(_pRM, 1);
+    assert(l_bResult);// ---
 
-  CEffect* l_pEffect = l_pEM->ActivateMaterial(m_pCoreEmiter->GetMaterial());
-  _pRM->GetParticleVertexs()->Render(_pRM, l_pEffect);
+    CEffect* l_pEffect = l_pEM->ActivateMaterial(l_pEmiterCore->GetMaterial());
+    _pRM->GetParticleVertexs()->Render(_pRM, l_pEffect);
+  }
+  else
+  {
+    vector<CEmiterInstance*>::iterator l_it  = m_ChildEmiters.begin();
+    vector<CEmiterInstance*>::iterator l_end = m_ChildEmiters.end();
 
+    for(; l_it != l_end; ++l_it)
+    {
+      (*l_it)->Render(_pRM, l_mTransform);
+    }
+  }
   
 }
 
 
-void CEmiterInstance::DebugRender(CRenderManager* _pRM)
+void CEmiterInstance::DebugRender(CRenderManager* _pRM, const Mat44f& _mTransform, bool _bDebugRenderBoundings)
 {
   assert(IsOk());
+  
+  Mat44f l_mTransform;
   if(m_pObjectReference)
   {
-    _pRM->SetTransform(m_pObjectReference->GetMat44());
+    //l_mTransform = _mTransform * m_pObjectReference->GetMat44();
+    l_mTransform = m_pObjectReference->GetMat44();
   }
   else
   {
-    _pRM->SetTransform(GetMat44());
+    l_mTransform = _mTransform * GetMat44();
   }
+
+  _pRM->SetTransform(l_mTransform);
+
   if(m_bActive)
     _pRM->DrawCube(m_vMaxVolume - m_vMinVolume, colGREEN);
   else
     _pRM->DrawCube(m_vMaxVolume - m_vMinVolume, colRED);
   
+  //_pRM->DrawCube  (GetBoundingBox   ()->GetMiddlePoint(), GetBoundingBox   ()->GetDimension(), colMAGENTA);
+  if(_bDebugRenderBoundings)
+    _pRM->DrawSphere(GetBoundingSphere()->GetMiddlePoint(), GetBoundingSphere()->GetRadius   (), colMAGENTA, 10);
+}
+
+void CEmiterInstance::Release()
+{
+  m_pObjectReference = 0;
+  vector<CEmiterInstance*>::iterator l_it  = m_ChildEmiters.begin();
+  vector<CEmiterInstance*>::iterator l_end = m_ChildEmiters.end();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    delete *l_it;
+  }
+  m_ChildEmiters.clear();
+
+  m_RecyclingParticles.DeleteAllElements();
 }

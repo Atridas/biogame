@@ -28,7 +28,7 @@
 #include <EntityManager.h>
 #include <PortalManager.h>
 #include <IAManager.h>
-#include <CoreEmiterManager.h>
+#include <EmiterCoreManager.h>
 #include <EmiterManager.h>
 
 #include "Utils\MemLeaks.h"
@@ -108,7 +108,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pConsole                  = new CConsole();
   m_pGUIManager               = new CGUIManager(_InitParams.RenderManagerParams.v2iResolution);
   m_pPhysicsManager           = new CPhysicsManager();
-  m_pCoreEmiterManager        = new CCoreEmiterManager();
+  m_pEmiterCoreManager        = new CEmiterCoreManager();
   m_pSoundManager             = new CSoundManager();
   m_pEntityManager            = new CEntityManager();
   m_pPhysicTriggerReport      = new CPhysXTriggerEntityController();
@@ -162,7 +162,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   }
   
   //TODO
-  LOAD(m_pCoreEmiterManager, "Manager de Cores d'emisors de partícules", _InitParams.CoreEmiterManagerParams.sFiles);
+  LOAD(m_pEmiterCoreManager, "Manager de Cores d'emisors de partícules", _InitParams.CoreEmiterManagerParams.sFiles);
 
   INIT(m_pSoundManager, "Manager de Sons", _InitParams.SoundManagerParams.szFile);
   
@@ -185,7 +185,7 @@ void CCore::Release()
   CHECKED_DELETE(m_pEntityManager);
   CHECKED_DELETE(m_pSoundManager);
   CHECKED_DELETE(m_pEmiterManager);
-  CHECKED_DELETE(m_pCoreEmiterManager);
+  CHECKED_DELETE(m_pEmiterCoreManager);
   CHECKED_DELETE(m_pPhysicsManager);
   CHECKED_DELETE(m_pGUIManager);
   CHECKED_DELETE(m_pConsole);
