@@ -1,5 +1,5 @@
 #include "Utils/BoundingSphere.h"
-
+#include "Utils/BoundingBox.h"
 
 bool CBoundingSphere::Init(const Vect3f& _vMin, const Vect3f& _vMax)
 {
@@ -18,6 +18,11 @@ bool CBoundingSphere::Init(const Vect3f& _vMiddlePoint, float _fRadius)
 
   SetOk(true);
   return IsOk();
+}
+
+bool CBoundingSphere::Init(const CBoundingBox& _BBox)
+{
+  return Init(_BBox.GetMin(), _BBox.GetMax());
 }
 
 void CBoundingSphere::CalcMiddlePoint(const Vect3f& _vMin, const Vect3f& _vMax)

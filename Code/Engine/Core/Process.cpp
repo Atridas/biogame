@@ -14,7 +14,7 @@
 #include "ScriptManager.h"
 #include "LogRender.h"
 #include "Console.h"
-#include "CoreEmiterManager.h"
+#include "EmiterCoreManager.h"
 
 void CProcess::DebugInformation()
 {
@@ -75,7 +75,7 @@ bool CProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _p
     return true;
   }else if(strcmp("ReloadParticles",_pcAction) == 0)
   {
-    CORE->GetCoreEmiterManager()->Reload();
+    CORE->GetEmiterCoreManager()->Reload();
     return true;
   } else if(strcmp(_pcAction, "ReloadScript") == 0)
   {

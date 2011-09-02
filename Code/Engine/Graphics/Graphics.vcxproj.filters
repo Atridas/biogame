@@ -205,20 +205,26 @@
     <Filter Include="Emiters">
       <UniqueIdentifier>{e0ca5353-8222-49a9-a58c-8c9cba375613}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Emiters\CoreEmiter">
-      <UniqueIdentifier>{be4f82ed-f0b4-4811-8fbd-c79efb934255}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Emiters\CoreEmiterManager">
-      <UniqueIdentifier>{217447cb-eb19-453a-b171-b2c7fa7c1011}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Emiters\EmiterInstance">
       <UniqueIdentifier>{06a128c0-a525-4bec-9373-f434fd527df8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Emiters\ParticleInstance">
-      <UniqueIdentifier>{dce80815-01d3-4cc0-8083-d8c62b3323af}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Emiters\EmiterManager">
       <UniqueIdentifier>{2bf44c1c-1497-4a33-8a70-f8b8b2eeeaa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Emiters\EmiterCore">
+      <UniqueIdentifier>{be4f82ed-f0b4-4811-8fbd-c79efb934255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Emiters\EmiterCore\SimpleEmiterCore">
+      <UniqueIdentifier>{a3876f2e-cf3d-4fc3-b348-b58f49dc6553}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Emiters\EmiterCore\AggregateEmiterCore">
+      <UniqueIdentifier>{49c70943-64a2-45bd-87f7-559dbc2773ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Emiters\Particle">
+      <UniqueIdentifier>{dce80815-01d3-4cc0-8083-d8c62b3323af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Emiters\EmiterCoreManager">
+      <UniqueIdentifier>{217447cb-eb19-453a-b171-b2c7fa7c1011}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -342,20 +348,23 @@
     <ClCompile Include="LightmapTextureDecorator.cpp">
       <Filter>Materials\MaterialDecorators\TextureDecorators\LightmapTexture</Filter>
     </ClCompile>
-    <ClCompile Include="CoreEmiter.cpp">
-      <Filter>Emiters\CoreEmiter</Filter>
-    </ClCompile>
-    <ClCompile Include="CoreEmiterManager.cpp">
-      <Filter>Emiters\CoreEmiterManager</Filter>
-    </ClCompile>
     <ClCompile Include="EmiterInstance.cpp">
       <Filter>Emiters\EmiterInstance</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleInstance.cpp">
-      <Filter>Emiters\ParticleInstance</Filter>
-    </ClCompile>
     <ClCompile Include="EmiterManager.cpp">
       <Filter>Emiters\EmiterManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleEmiterCore.cpp">
+      <Filter>Emiters\EmiterCore\SimpleEmiterCore</Filter>
+    </ClCompile>
+    <ClCompile Include="AggregateEmiterCore.cpp">
+      <Filter>Emiters\EmiterCore\AggregateEmiterCore</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Emiters\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="EmiterCoreManager.cpp">
+      <Filter>Emiters\EmiterCoreManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -542,23 +551,29 @@
     <ClInclude Include="include\SpritePropertyDecorator.h">
       <Filter>Materials\MaterialDecorators\PropertyDecorators\SpriteDecorator</Filter>
     </ClInclude>
-    <ClInclude Include="include\CoreEmiter.h">
-      <Filter>Emiters\CoreEmiter</Filter>
-    </ClInclude>
-    <ClInclude Include="include\CoreEmiterManager.h">
-      <Filter>Emiters\CoreEmiterManager</Filter>
-    </ClInclude>
     <ClInclude Include="include\EmiterInstance.h">
       <Filter>Emiters\EmiterInstance</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ParticleInstance.h">
-      <Filter>Emiters\ParticleInstance</Filter>
     </ClInclude>
     <ClInclude Include="include\ParticleConstants.h">
       <Filter>Emiters</Filter>
     </ClInclude>
     <ClInclude Include="include\EmiterManager.h">
       <Filter>Emiters\EmiterManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SimpleEmiterCore.h">
+      <Filter>Emiters\EmiterCore\SimpleEmiterCore</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AggregateEmiterCore.h">
+      <Filter>Emiters\EmiterCore\AggregateEmiterCore</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EmiterCore.h">
+      <Filter>Emiters\EmiterCore</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Particle.h">
+      <Filter>Emiters\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EmiterCoreManager.h">
+      <Filter>Emiters\EmiterCoreManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -8,12 +8,17 @@
 
 
 // Main include
-#include "CoreEmiter.h"
+#include "SimpleEmiterCore.h"
 
-bool CCoreEmiter::Init(CXMLTreeNode& _xmlEmiter)
+bool CSimpleEmiterCore::Init(CXMLTreeNode& _xmlEmiter)
 {
+  if(strcmp(_xmlEmiter.GetName(), "SimpleEmiter") != 0)
+  {
+    LOGGER->AddNewLog(ELL_WARNING, "CSimpleCoreEmiter::Init XML element not correct: \"%s\" and should be \"SimpleEmiter\"", _xmlEmiter.GetName());
+  }
+
   SetName(_xmlEmiter.GetPszISOProperty("id"));
-  LOGGER->AddNewLog(ELL_INFORMATION, "CCoreEmiter::Init Reading Particle Core: \"%s\"", _xmlEmiter.GetPszISOProperty("id").c_str());
+  LOGGER->AddNewLog(ELL_INFORMATION, "CSimpleCoreEmiter::Init Reading Particle Core: \"%s\"", GetName().c_str());
   
   m_fEmitRate1 = _xmlEmiter.GetFloatProperty("emit_rate1", 0, true);
   m_fEmitRate2 = _xmlEmiter.GetFloatProperty("emit_rate2", 0, true);
@@ -194,7 +199,7 @@ bool CCoreEmiter::Init(CXMLTreeNode& _xmlEmiter)
   return IsOk();
 }
 
-void CCoreEmiter::Init()
+void CSimpleEmiterCore::Init()
 {
   SetName("default");
   
@@ -250,47 +255,47 @@ void CCoreEmiter::Init()
   SetOk(true);
 }
 
-void CCoreEmiter::Release() 
+void CSimpleEmiterCore::Release() 
 {
   CHECKED_DELETE(m_pMaterial);
 }
 
-float CCoreEmiter::GetEmitRate() const
+float CSimpleEmiterCore::GetEmitRate() const
 {
   float l_fRnd = Random01();
   float l_fEmitRate = SIMPLE_INTERPOLATION(m_fEmitRate1, m_fEmitRate2, l_fRnd);
   return l_fEmitRate;
 }
 
-float CCoreEmiter::GetLife() const
+float CSimpleEmiterCore::GetLife() const
 {
   float l_fRnd = Random01();
   float l_fLife = SIMPLE_INTERPOLATION(m_fLife1, m_fLife2, l_fRnd);
   return l_fLife;
 }
 
-float CCoreEmiter::GetAwakeTime() const
+float CSimpleEmiterCore::GetAwakeTime() const
 {
   float l_fRnd = Random01();
   float l_fAwakeTime = SIMPLE_INTERPOLATION(m_fAwakeTime1, m_fAwakeTime2, l_fRnd);
   return l_fAwakeTime;
 }
 
-float CCoreEmiter::GetSleepTime() const
+float CSimpleEmiterCore::GetSleepTime() const
 {
   float l_fRnd = Random01();
   float l_fSleepTime = SIMPLE_INTERPOLATION(m_fSleepTime1, m_fSleepTime2, l_fRnd);
   return l_fSleepTime;
 }
 
-float CCoreEmiter::GetStartingAngle() const
+float CSimpleEmiterCore::GetStartingAngle() const
 {
   float l_fRnd = Random01();
   float l_fStartingAngle = SIMPLE_INTERPOLATION(m_fStartingAngle1, m_fStartingAngle2, l_fRnd);
   return l_fStartingAngle;
 }
 
-Vect3f CCoreEmiter::GetStartingSpeed() const
+Vect3f CSimpleEmiterCore::GetStartingSpeed() const
 {
   //Vect3f l_vRnd(Random01(),Random01(),Random01());
   //Vect3f l_v_1_Minus_Rnd(1.f - l_vRnd.x, 1.f - l_vRnd.y, 1.f - l_vRnd.z);
@@ -308,7 +313,7 @@ Vect3f CCoreEmiter::GetStartingSpeed() const
   return vStartingSpeed_;
 }
 
-float CCoreEmiter::GetStartingAngularSpeed() const
+float CSimpleEmiterCore::GetStartingAngularSpeed() const
 {
   float l_fRnd = Random01();
   float l_fStartingAngularSpeed = SIMPLE_INTERPOLATION(m_fStartingAngularSpeed1, m_fStartingAngularSpeed2, l_fRnd);
@@ -316,7 +321,7 @@ float CCoreEmiter::GetStartingAngularSpeed() const
 }
 
 
-Vect3f CCoreEmiter::GetAcceleration() const
+Vect3f CSimpleEmiterCore::GetAcceleration() const
 {
   //Vect3f l_vRnd(Random01(),Random01(),Random01());
   //Vect3f l_v_1_Minus_Rnd(1.f - l_vRnd.x, 1.f - l_vRnd.y, 1.f - l_vRnd.z);
@@ -333,7 +338,7 @@ Vect3f CCoreEmiter::GetAcceleration() const
   return vAcceleration_;
 }
 
-float CCoreEmiter::GetAngularAcceleration() const
+float CSimpleEmiterCore::GetAngularAcceleration() const
 {
   float l_fRnd = Random01();
   float l_fAngularAcceleration = SIMPLE_INTERPOLATION(m_fAngularAcceleration1, m_fAngularAcceleration2, l_fRnd);
@@ -341,14 +346,14 @@ float CCoreEmiter::GetAngularAcceleration() const
 }
 
 
-CColor CCoreEmiter::GetColor(int _iColorFrame) const
+CColor CSimpleEmiterCore::GetColor(int _iColorFrame) const
 {
   float l_fRnd = Random01();
   CColor l_Color = SIMPLE_INTERPOLATION(m_ColorAnimations[_iColorFrame].m_Color1, m_ColorAnimations[_iColorFrame].m_Color2, l_fRnd);
   return l_Color;
 }
 
-float  CCoreEmiter::GetSize(int _iSizeFrame) const
+float  CSimpleEmiterCore::GetSize(int _iSizeFrame) const
 {
   float l_fRnd = Random01();
   float l_fSize = SIMPLE_INTERPOLATION(m_SizeAnimations[_iSizeFrame].m_fSize1, m_SizeAnimations[_iSizeFrame].m_fSize2, l_fRnd);
@@ -356,14 +361,14 @@ float  CCoreEmiter::GetSize(int _iSizeFrame) const
 }
 
 
-float CCoreEmiter::GetColorControlTime(int _iColorFrame) const
+float CSimpleEmiterCore::GetColorControlTime(int _iColorFrame) const
 {
   float l_fRnd = Random01();
   float l_fControlTime = SIMPLE_INTERPOLATION(m_ColorAnimations[_iColorFrame].m_fControlTime1, m_ColorAnimations[_iColorFrame].m_fControlTime2, l_fRnd);
   return l_fControlTime;
 }
 
-float CCoreEmiter::GetSizeControlTime(int _iSizeFrame) const
+float CSimpleEmiterCore::GetSizeControlTime(int _iSizeFrame) const
 {
   float l_fRnd = Random01();
   float l_fControlTime = SIMPLE_INTERPOLATION(m_SizeAnimations[_iSizeFrame].m_fControlTime1, m_SizeAnimations[_iSizeFrame].m_fControlTime2, l_fRnd);

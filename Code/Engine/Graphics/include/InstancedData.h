@@ -7,7 +7,7 @@
 #include <base.h>
 
 template<class T>
-class CInstancedData : CBaseControl
+class CInstancedData : public CBaseControl
 {
 public:
   CInstancedData(void) : m_uiMaxNumInstances(0),m_pVB(0),m_pBuffer(0)

@@ -1,20 +1,20 @@
 #include "VertexsStructs.h"
 
-#include "ParticleInstance.h"
+#include "Particle.h"
 
 
-void CParticleInstance::Init(CCoreEmiter* _pCoreEmiter, const Vect3f& _vInitialPosition)
+void CParticle::Init(CSimpleEmiterCore* _pEmiterCore, const Vect3f& _vInitialPosition)
 {
-  m_pCoreEmiter = _pCoreEmiter;
+  m_pEmiterCore = _pEmiterCore;
 
   m_fLivedTime = 0.f;
-  m_fTotalLifetime = m_pCoreEmiter->GetLife();
+  m_fTotalLifetime = m_pEmiterCore->GetLife();
 
-  m_vSpeed = m_pCoreEmiter->GetStartingSpeed();
-  m_fAngularSpeed = m_pCoreEmiter->GetStartingAngularSpeed();
+  m_vSpeed = m_pEmiterCore->GetStartingSpeed();
+  m_fAngularSpeed = m_pEmiterCore->GetStartingAngularSpeed();
   
-  m_vAcceleration = m_pCoreEmiter->GetAcceleration();
-  m_fAngularAcceleration = m_pCoreEmiter->GetAngularAcceleration();
+  m_vAcceleration = m_pEmiterCore->GetAcceleration();
+  m_fAngularAcceleration = m_pEmiterCore->GetAngularAcceleration();
 
   m_iCurrentColor = 
   m_iCurrentSize  = 0;
@@ -22,14 +22,14 @@ void CParticleInstance::Init(CCoreEmiter* _pCoreEmiter, const Vect3f& _vInitialP
   m_fLastColorTime =
   m_fLastSizeTime  = 0;
 
-  m_LastColor = m_pCoreEmiter->GetColor(0);
-  m_fLastSize = m_pCoreEmiter->GetSize(0);
+  m_LastColor = m_pEmiterCore->GetColor(0);
+  m_fLastSize = m_pEmiterCore->GetSize(0);
 
-  if(m_pCoreEmiter->GetNumColorFrames() > m_iCurrentColor + 1)
+  if(m_pEmiterCore->GetNumColorFrames() > m_iCurrentColor + 1)
   {
     m_bHasNextColor  = true;
-    m_NextColor      = m_pCoreEmiter->GetColor(1);
-    m_fNextColorTime = m_pCoreEmiter->GetColorControlTime(1);
+    m_NextColor      = m_pEmiterCore->GetColor(1);
+    m_fNextColorTime = m_pEmiterCore->GetColorControlTime(1);
   }
   else
   {
@@ -38,11 +38,11 @@ void CParticleInstance::Init(CCoreEmiter* _pCoreEmiter, const Vect3f& _vInitialP
     //m_fNextColorTime = m_fLastColorTime;
   }
 
-  if(m_pCoreEmiter->GetNumSizeFrames() > m_iCurrentSize + 1)
+  if(m_pEmiterCore->GetNumSizeFrames() > m_iCurrentSize + 1)
   {
     m_bHasNextSize  = true;
-    m_fNextSize     = m_pCoreEmiter->GetSize(1);
-    m_fNextSizeTime = m_pCoreEmiter->GetSizeControlTime(1);
+    m_fNextSize     = m_pEmiterCore->GetSize(1);
+    m_fNextSizeTime = m_pEmiterCore->GetSizeControlTime(1);
   }
   else
   {
@@ -53,13 +53,13 @@ void CParticleInstance::Init(CCoreEmiter* _pCoreEmiter, const Vect3f& _vInitialP
 
 
   m_vPosition = _vInitialPosition;
-  m_fAngle    = m_pCoreEmiter->GetStartingAngle();
+  m_fAngle    = m_pEmiterCore->GetStartingAngle();
   m_iFrame    = 0;
   m_Color     = m_LastColor;
   m_fSize     = m_fLastSize;
 }
 
-bool CParticleInstance::Update(float _fDeltaTime)
+bool CParticle::Update(float _fDeltaTime)
 {
   m_fLivedTime += _fDeltaTime;
   if(m_fLivedTime > m_fTotalLifetime)
@@ -72,10 +72,10 @@ bool CParticleInstance::Update(float _fDeltaTime)
   m_fAngle        += m_fAngularSpeed * _fDeltaTime;
 
   // diapositives -------------------------------------------------------------------------------------------------
-  if(m_pCoreEmiter->IsSprite())
+  if(m_pEmiterCore->IsSprite())
   {
-    m_iFrame = (int)floor(m_fLivedTime / m_pCoreEmiter->GetTimePerFrame());
-    int l_iNumFrames = m_pCoreEmiter->GetNumFrames();
+    m_iFrame = (int)floor(m_fLivedTime / m_pEmiterCore->GetTimePerFrame());
+    int l_iNumFrames = m_pEmiterCore->GetNumFrames();
     m_iFrame = (m_iFrame >= l_iNumFrames)? l_iNumFrames - 1 : m_iFrame;
   }
   
@@ -88,11 +88,11 @@ bool CParticleInstance::Update(float _fDeltaTime)
       m_LastColor      = m_NextColor;
       m_fLastColorTime = m_fNextColorTime;
       
-      if(m_pCoreEmiter->GetNumColorFrames() > m_iCurrentColor + 1)
+      if(m_pEmiterCore->GetNumColorFrames() > m_iCurrentColor + 1)
       {
         m_bHasNextColor  = true;
-        m_NextColor      = m_pCoreEmiter->GetColor           (m_iCurrentColor + 1);
-        m_fNextColorTime = m_pCoreEmiter->GetColorControlTime(m_iCurrentColor + 1);
+        m_NextColor      = m_pEmiterCore->GetColor           (m_iCurrentColor + 1);
+        m_fNextColorTime = m_pEmiterCore->GetColorControlTime(m_iCurrentColor + 1);
 
 
         float l_fInterpolationFactor = (m_fLivedTime - m_fLastColorTime) / (m_fNextColorTime - m_fLastColorTime);
@@ -125,11 +125,11 @@ bool CParticleInstance::Update(float _fDeltaTime)
       m_fLastSize     = m_fNextSize;
       m_fLastSizeTime = m_fNextSizeTime;
       
-      if(m_pCoreEmiter->GetNumSizeFrames() > m_iCurrentSize + 1)
+      if(m_pEmiterCore->GetNumSizeFrames() > m_iCurrentSize + 1)
       {
         m_bHasNextSize  = true;
-        m_fNextSize     = m_pCoreEmiter->GetSize           (m_iCurrentSize + 1);
-        m_fNextSizeTime = m_pCoreEmiter->GetSizeControlTime(m_iCurrentSize + 1);
+        m_fNextSize     = m_pEmiterCore->GetSize           (m_iCurrentSize + 1);
+        m_fNextSizeTime = m_pEmiterCore->GetSizeControlTime(m_iCurrentSize + 1);
 
 
         float l_fInterpolationFactor = (m_fLivedTime - m_fLastSizeTime) / (m_fNextSizeTime - m_fLastSizeTime);
@@ -157,7 +157,7 @@ bool CParticleInstance::Update(float _fDeltaTime)
 }
 
 
-void CParticleInstance::FillRenderInfo(SParticleRenderInfo& Info_)
+void CParticle::FillRenderInfo(SParticleRenderInfo& Info_)
 {
   Info_.x = m_vPosition.x;
   Info_.y = m_vPosition.y;

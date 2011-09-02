@@ -6,7 +6,7 @@
 #include "Utils/MapManager.h"
 #include "EmiterInstance.h"
 #include "ParticleConstants.h"
-#include "CoreEmiterManager.h"
+#include "EmiterCoreManager.h"
 
 // Forward declarations -------------
 class CRenderManager;
@@ -27,10 +27,10 @@ public:
 
   void Update(float _fDeltaTime);
   void Render(CRenderManager* _pRM);
-  void DebugRender(CRenderManager* _pRM);
+  void DebugRender(CRenderManager* _pRM, bool _bDebugRenderBoundings = false);
 
 private:
-  friend class CCoreEmiterManager;
+  friend class CEmiterCoreManager;
 
   void ResetEmiters();
 };

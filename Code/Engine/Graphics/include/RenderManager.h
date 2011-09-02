@@ -83,6 +83,7 @@ public:
   void                  RenderBoundingSphere (CBoundingSphere* _pBSphere);
   void                  DrawPlane         (float size, const Vect3f& normal, float distance, CColor Color, int GridX, int GridZ ); 
   void                  DrawSphere        (float Radius, const CColor& Color, int Aristas);
+  void                  DrawSphere        (const Vect3f &_Pos, float Radius, const CColor& Color, int Aristas);
   //void                  DrawSphere        (float Radius, CColor Color=colWHITE, uint32 Aristas=10,  ETypeModePaint mode = PAINT_WIREFRAME,  EtypeSphere typeSphere = COMPLETE);
   //void                  EnableAlphaBlend  ();
   //void                  DisbaleAlphaBlend ();

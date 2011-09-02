@@ -85,14 +85,14 @@ void CEmiterManager::Render(CRenderManager* _pRM)
   }
 }
 
-void CEmiterManager::DebugRender(CRenderManager* _pRM)
+void CEmiterManager::DebugRender(CRenderManager* _pRM, bool _bDebugRenderBoundings)
 {
   TMapResource::iterator l_it  = m_Resources.begin();
   TMapResource::iterator l_end = m_Resources.end  ();
 
   for(; l_it != l_end; ++l_it)
   {
-    l_it->second->DebugRender(_pRM);
+    l_it->second->DebugRender(_pRM,_bDebugRenderBoundings);
   }
 }
 
