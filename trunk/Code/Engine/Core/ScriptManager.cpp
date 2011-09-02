@@ -37,7 +37,6 @@ extern "C"
 #include "GUIManager.h"
 #include "InputManager.h"
 #include "ActionManager.h"
-#include "ParticleManager.h"
 
 #include "EntitiesToLua.h"
 #include "IAToLua.h"
@@ -475,7 +474,6 @@ void CScriptManager::RegisterLUAFunctions()
         .def("get_script_manager",              &CCore::GetScriptManager)
         .def("get_input_manager",               &CCore::GetInputManager)
         .def("get_action_manager",              &CCore::GetActionManager)
-        .def("get_particle_manager",            &CCore::GetParticleManager)
         .def("get_sound_manager",               &CCore::GetSoundManager);
   
   RegisterCore_Entities(l_core);
@@ -526,13 +524,6 @@ void CScriptManager::RegisterLUAFunctions()
   module(m_pLS) [
     class_<CScriptManager>("ScriptManager")
       .def("reload", &CScriptManager::Reload)
-  ];
-
-  //ParticleManager
-  module(m_pLS) [
-    class_<CParticleManager>("ParticleManager")
-      .def("reload", &CParticleManager::Reload)
-      .def("load",   &CParticleManager::Load)
   ];
 
   //SoundManager

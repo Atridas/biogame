@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Process.h"
-#include "ParticleEmitter.h"
 #include <base.h>
 #include "EntityManager.h"
 

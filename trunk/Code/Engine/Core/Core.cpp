@@ -24,9 +24,6 @@
 #include <Console.h>
 #include <GUIManager.h>
 #include <PhysicsManager.h>
-#include <ParticleManager.h>
-#include <Particle.h>
-#include <BillBoardManager.h>
 #include <SoundManager.h>
 #include <EntityManager.h>
 #include <PortalManager.h>
@@ -112,8 +109,6 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pGUIManager               = new CGUIManager(_InitParams.RenderManagerParams.v2iResolution);
   m_pPhysicsManager           = new CPhysicsManager();
   m_pCoreEmiterManager        = new CCoreEmiterManager();
-  m_pParticleManager          = new CParticleManager();
-  m_pBillBoardManager         = new CBillBoardManager();
   m_pSoundManager             = new CSoundManager();
   m_pEntityManager            = new CEntityManager();
   m_pPhysicTriggerReport      = new CPhysXTriggerEntityController();
@@ -133,18 +128,6 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   LOAD(m_pEffectManager, "Manager d'Effects", _InitParams.EffectManagerParams);
   
   LOAD(m_pStaticMeshManager, "Manager de Static Meshes", _InitParams.StaticMeshManagerParams);
-  
-  LOAD(m_pParticleManager, "Manager de Partícules", _InitParams.PaticleManagerParams.szFile);
-  if(m_pParticleManager->IsOk())
-  {
-    m_pParticleManager->Init(CORE->GetRenderManager());
-  }
-  
-  LOAD(m_pBillBoardManager, "Manager de Billboards", _InitParams.BillBoardManagerParams.szFile);
-  if(m_pBillBoardManager->IsOk())
-  {
-    m_pBillBoardManager->Init(CORE->GetRenderManager());
-  }
   
   LOAD(m_pAnimatedModelManager, "Manager d'Animated Models", _InitParams.AnimatedModelManagerParams);
   
@@ -201,8 +184,6 @@ void CCore::Release()
   CHECKED_DELETE(m_pPhysicTriggerReport);
   CHECKED_DELETE(m_pEntityManager);
   CHECKED_DELETE(m_pSoundManager);
-  CHECKED_DELETE(m_pBillBoardManager);
-  CHECKED_DELETE(m_pParticleManager);
   CHECKED_DELETE(m_pEmiterManager);
   CHECKED_DELETE(m_pCoreEmiterManager);
   CHECKED_DELETE(m_pPhysicsManager);
@@ -236,9 +217,6 @@ void CCore::Update()
 
   m_pEntityManager->UpdatePostPhysX(l_fElapsedTime);
 
-#ifdef __PARTICLE_VIA_SHADER__
-  //m_pParticleManager->Update(l_fElapsedTime, 0);// -------------
-#endif
   m_pRenderableObjectsManager->Update(l_fElapsedTime);// ----
   m_pEmiterManager->Update(l_fElapsedTime);
 

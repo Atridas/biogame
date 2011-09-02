@@ -28,8 +28,6 @@
 #include "ComponentIABrain.h"
 #include "IAManager.h"
 #include "GraphDefines.h"
-#include "ParticleManager.h"
-#include "BillboardManager.h"
 #include "EmiterManager.h"
 
 #include "PhysicActor.h"
@@ -103,9 +101,6 @@ void CEntityProcess::Update(float _fElapsedTime)
 
   m_pSpotLight->SetPosition(m_pPlayerPos->GetPosition());
   m_pSpotLight->SetDirection(m_pCamera->GetDirection());
-
-  CORE->GetParticleManager()->Update(_fElapsedTime, m_pCamera);
-  CORE->GetBillBoardManager()->Update(_fElapsedTime, m_pCamera);
 
   CORE->GetSoundManager()->UpdateSound3DSystem(m_pPlayerPos->GetPosition(),m_pCamera->GetDirection());
 }

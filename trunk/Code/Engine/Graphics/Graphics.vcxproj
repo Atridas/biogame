@@ -94,9 +94,6 @@
     <ClCompile Include="AnimatedCoreModel.cpp" />
     <ClCompile Include="AnimatedInstanceModel.cpp" />
     <ClCompile Include="AnimatedModelManager.cpp" />
-    <ClCompile Include="BillBoard.cpp" />
-    <ClCompile Include="BillBoardCore.cpp" />
-    <ClCompile Include="BillBoardManager.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CoreEmiterManager.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
@@ -116,11 +113,7 @@
     <ClCompile Include="LightManager.cpp" />
     <ClCompile Include="LightmapTextureDecorator.cpp" />
     <ClCompile Include="OmniLight.cpp" />
-    <ClCompile Include="Particle.cpp" />
-    <ClCompile Include="ParticleCore.cpp" />
-    <ClCompile Include="ParticleEmitter.cpp" />
     <ClCompile Include="ParticleInstance.cpp" />
-    <ClCompile Include="ParticleManager.cpp" />
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="PortalManager.cpp" />
     <ClCompile Include="RenderableAnimatedInstanceModel.cpp" />
@@ -149,9 +142,6 @@
     <ClInclude Include="include\AnimatedInstanceModel.h" />
     <ClInclude Include="include\AnimatedMeshEmptyMaterial.h" />
     <ClInclude Include="include\AnimatedModelManager.h" />
-    <ClInclude Include="include\BillBoard.h" />
-    <ClInclude Include="include\BillBoardCore.h" />
-    <ClInclude Include="include\BillBoardManager.h" />
     <ClInclude Include="include\BumpPropertyDecorator.h" />
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\CoreEmiterManager.h" />
@@ -184,12 +174,8 @@
     <ClInclude Include="include\NormalTextureDecorator.h" />
     <ClInclude Include="include\OmniLight.h" />
     <ClInclude Include="include\ParallaxPropertyDecorator.h" />
-    <ClInclude Include="include\Particle.h" />
     <ClInclude Include="include\ParticleConstants.h" />
-    <ClInclude Include="include\ParticleCore.h" />
-    <ClInclude Include="include\ParticleEmitter.h" />
     <ClInclude Include="include\ParticleInstance.h" />
-    <ClInclude Include="include\ParticleManager.h" />
     <ClInclude Include="include\Portal.h" />
     <ClInclude Include="include\PortalManager.h" />
     <ClInclude Include="include\PropertyDecorator.h" />

@@ -27,8 +27,6 @@
 #include "ComponentIABrain.h"
 #include "IAManager.h"
 #include "GraphDefines.h"
-#include "ParticleManager.h"
-#include "BillboardManager.h"
 #include "EmiterInstance.h"
 #include "CoreEmiterManager.h"
 #include "EffectManager.h"

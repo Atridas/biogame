@@ -11,7 +11,6 @@
 #include "StaticMeshManager.h"
 #include "RenderableObjectsManager.h"
 #include "AnimatedModelManager.h"
-#include "ParticleManager.h"
 
 #include "AnimatedInstanceModel.h"
 #include "RenderableAnimatedInstanceModel.h"
@@ -351,9 +350,6 @@ bool CPhysXProcess::Init()
   /////////////////////////////////////////////////////////////////////////////////
   /////////////////////////////////////////////////////////////////////////////////
 
-
-  CORE->GetParticleManager()->SetAllEmittersActive(false);
-
   CORE->GetRenderableObjectsManager()->AddMeshInstance("laser_pilota", "Mirilla");
   
   SetOk(true);
@@ -585,8 +581,6 @@ void CPhysXProcess::Update(float _fElapsedTime)
     g_vGrenadesVector[i]->Update(_fElapsedTime);
   }
 
-  CORE->GetParticleManager()->Update(_fElapsedTime,m_pCamera);
-
 }
 
 Mat44f CPhysXProcess::GetBoneLeftHandedAbsoluteTransformation(CalBone* _pBone)
@@ -746,7 +740,6 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
 
   CORE->GetRenderableObjectsManager()->Render(_pRM);
   _pRM->DrawGrid(0.1f,colCYAN,1,1);
-  CORE->GetParticleManager()->Render(_pRM);
 
   if(m_bRenderLights)
     CORE->GetLightManager()->Render(_pRM);
