@@ -36,6 +36,9 @@ CScriptedStateMachine::CScriptedStateMachine(CGameEntity* _owner, const string& 
 {
   SetOk(true);
   g_PreloadedStates[m_pOwner->GetGUID()].resize(8);
+  
+  PreloadState("", false);
+  PreloadGlobalState("", false);
 };
 
 void CScriptedStateMachine::Release()
