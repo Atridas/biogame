@@ -22,24 +22,29 @@ public:
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_RAGDOLL;};
 
   static CComponentRagdoll* AddToEntity(CGameEntity* _pEntity, const string& _szSkeletonFile, int _iCollisionGroup);
-  void SetActive(bool _bActive);
   CPhysxBone* GetBone(const string& _szBoneName);
   CPhysxSkeleton* GetRagdoll() const {return m_pRagdoll;};
   Vect3f GetPosition();
+
+  void ApplyPhysics(bool _bValue);
+
   void UpdatePrePhysX(float _fDeltaTime);
 
   virtual void PostUpdate(float _fDeltaTime);
-  virtual void ReceiveEvent(const SEvent& _Event);
 
 protected:
-  CComponentRagdoll():m_bActive(false),m_pRagdoll(0),m_pRAIM(0) {};
+  CComponentRagdoll():m_pRagdoll(0),m_pRAIM(0) {};
   bool Init(CGameEntity* _pEntity, const string& _szSkeletonFile, int _iCollisionGroup);
+
+  virtual void Enable();
+  virtual void Disable();
+
   virtual void Release();
 private:
 
   CPhysxSkeleton* m_pRagdoll;
   CRenderableAnimatedInstanceModel* m_pRAIM;
-  bool m_bActive;
+
 };
 
 #endif

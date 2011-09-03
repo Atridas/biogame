@@ -368,7 +368,7 @@ void CComponentPlayerController::Respawn()
   CComponentRagdoll *l_pRC = GetEntity()->GetComponent<CComponentRagdoll>();
   if(l_pRC)
   {
-    l_pRC->SetActive(false);
+    l_pRC->ApplyPhysics(false);
   }
 }
 
@@ -457,6 +457,12 @@ void CComponentPlayerController::ReceiveEvent(const SEvent& _Event)
     {
       m_fBloodFadeOutTime = BLOOD_FADEOUT_TIME;
       m_fBloodTime = 0.0f;
+
+      assert(_Event.Info[3].Type == SEventInfo::VECTOR);
+      Vect3f l_vPos(_Event.Info[3].v.x, _Event.Info[3].v.y, _Event.Info[3].v.z);
+    
+      ENTITY_MANAGER->InitParticles("impacte ragdoll", l_vPos, Vect3f(.5f,.5f,.5f), 5.f);
+  
     }
 
   }

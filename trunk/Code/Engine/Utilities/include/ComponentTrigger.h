@@ -23,6 +23,10 @@ protected:
   bool Init(CGameEntity* _pEntity, const Vect3f& _vSize, const string& _szOnEnter, const string& _szOnExit, int _iCollisionMask);
   CComponentTrigger() {};
 private:
+
+  void ExecuteLua(const string& _szLuaCode, CGameEntity* _pOther);
+
+
   string m_szOnEnter, m_szOnExit;
 };
 

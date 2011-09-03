@@ -17,8 +17,6 @@ class CComponentPhysXController :
 {
 public:
 
-
-
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_PHYSX_CONTROLLER;};
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_PHYSX_CONTROLLER;};
 
@@ -32,11 +30,8 @@ public:
 
   void SetPositionFromRagdoll();
   void SetHeight(float _fHeight);
-  void SetActive(bool _bActive);
 
   virtual ~CComponentPhysXController(void) {Done();};
-
-  void Activate(bool m_bActive);
 
 protected:
   CComponentPhysXController():
@@ -48,6 +43,10 @@ protected:
             float radius, float height, float slope, float skinwidth, 
 		        float stepOffset, uint32 _iCollisionGroup 
             );
+
+  virtual void Enable();
+  virtual void Disable();
+
   virtual void Release();
 
 private:

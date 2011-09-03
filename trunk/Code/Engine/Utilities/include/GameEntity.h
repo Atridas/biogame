@@ -44,12 +44,15 @@ public:
 
   string GetName() const;
 
+  void         SetActive(bool _bActive);
+  bool         IsActive() {return m_bActive;};
+
 protected:
 
   virtual void Release();
 
 private:
-  CGameEntity(int _iId):m_iGUID(_iId),m_pszName(0) {SetOk(true);};
+  CGameEntity(int _iId):m_iGUID(_iId),m_pszName(0),m_bActive(true) {SetOk(true);};
   ~CGameEntity() {Done();};
 
   void AddComponent(CBaseComponent* _pComponent);
@@ -65,6 +68,7 @@ private:
   vector<CBaseComponent*>                    m_vComponents;
   int                     m_iGUID;
   const string*           m_pszName;
+  bool m_bActive;
   
   friend class CBaseComponent;
   friend class CEntityManager;

@@ -27,12 +27,16 @@ void CComponentPhysXActor::Release(void)
   CHECKED_DELETE(m_pPhysXData);
 }
 
-void CComponentPhysXActor::Activate(bool _bActivate)
+void CComponentPhysXActor::Enable()
 {
-  if(m_pPhysXActor)
-  {
-    m_pPhysXActor->Activate(_bActivate);
-  }
+  m_pPhysXActor->SetGlobalPosition(m_pObject3D->GetPosition());
+  m_pPhysXActor->Activate(true);
+}
+
+void CComponentPhysXActor::Disable()
+{
+  m_pPhysXActor->Activate(false);
+  m_pPhysXActor->SetGlobalPosition(m_pPhysXActor->GetPosition() - Vect3f(0.0f,1000.0f,0.0f));
 }
 
 Vect3f CComponentPhysXActor::GetPosition()

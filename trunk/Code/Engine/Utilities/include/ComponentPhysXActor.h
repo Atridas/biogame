@@ -30,8 +30,6 @@ public:
 
   virtual ~CComponentPhysXActor(void) {Done();};
 
-  void Activate(bool _bActivate);
-
   virtual void Reload() {};
 
 
@@ -44,6 +42,9 @@ protected:
       m_pPhysXData(0),
       m_szParticulaImpacte("impacte")
       {};
+
+  virtual void Enable();
+  virtual void Disable();
 
   virtual void Release();
 

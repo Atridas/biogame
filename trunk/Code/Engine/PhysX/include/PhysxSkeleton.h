@@ -37,6 +37,7 @@ public:
   void              SetRagdollActive(bool _bRagdollActive);
   void              WakeUpPhysxBones();
   void              SleepPhysxBones();
+  void              SetCollisions(bool _bValue);
   bool              IsRagdollPhysXActor(const string& _szName);
   CPhysxBone*       GetPhysxBoneByName(const string& _szName);
 

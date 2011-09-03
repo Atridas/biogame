@@ -130,6 +130,9 @@ bool CComponentCollisionReport::Init(CGameEntity* _pEntity,
 
 void CComponentCollisionReport::OnStartTouch(CGameEntity* _pOther)
 {
+  if(!IsActive())
+    return;
+
   if(GetEntity() != _pOther) 
   {
     ExecuteLua(m_szOnStartTouch,_pOther);
@@ -138,6 +141,9 @@ void CComponentCollisionReport::OnStartTouch(CGameEntity* _pOther)
 
 void CComponentCollisionReport::OnTouch(CGameEntity* _pOther)
 {
+  if(!IsActive())
+    return;
+
   if(GetEntity() != _pOther) 
   {
     ExecuteLua(m_szOnTouch,_pOther);
@@ -146,6 +152,9 @@ void CComponentCollisionReport::OnTouch(CGameEntity* _pOther)
 
 void CComponentCollisionReport::OnEndTouch(CGameEntity* _pOther)
 {
+  if(!IsActive())
+    return;
+
   if(GetEntity() != _pOther) 
   {
     ExecuteLua(m_szOnEndTouch,_pOther);
@@ -154,6 +163,9 @@ void CComponentCollisionReport::OnEndTouch(CGameEntity* _pOther)
 
 void CComponentCollisionReport::OnStartTouchForceThreshold(CGameEntity* _pOther)
 {
+  if(!IsActive())
+    return;
+
   if(GetEntity() != _pOther) 
   {
     ExecuteLua(m_szOnStartTouchForceThreshold,_pOther);
@@ -162,6 +174,9 @@ void CComponentCollisionReport::OnStartTouchForceThreshold(CGameEntity* _pOther)
 
 void CComponentCollisionReport::OnTouchForceThreshold(CGameEntity* _pOther)
 {
+  if(!IsActive())
+    return;
+
   if(GetEntity() != _pOther) 
   {
     ExecuteLua(m_szOnTouchForceThreshold,_pOther);
@@ -170,6 +185,9 @@ void CComponentCollisionReport::OnTouchForceThreshold(CGameEntity* _pOther)
 
 void CComponentCollisionReport::OnEndTouchForceThreshold(CGameEntity* _pOther)
 {
+  if(!IsActive())
+    return;
+
   if(GetEntity() != _pOther) 
   {
     ExecuteLua(m_szOnEndTouchForceThreshold,_pOther);

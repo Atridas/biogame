@@ -34,15 +34,11 @@ public:
 
   bool ChangeInstance(const string& _szName);
 
-  void SetVisible(bool m_bHide);
-
   bool m_bRemoveRenderableObject;
   bool m_bBlockPitchRoll;
   bool m_bBlockYaw;
   float m_fHeightAdjustment;
   float m_fYawAdjustment;
-
-  bool m_bActive;
 
 protected:
   CComponentRenderableObject():
@@ -54,11 +50,14 @@ protected:
       m_bBlockPitchRoll(false),
       m_bBlockYaw(false),
       m_fHeightAdjustment(0),
-      m_fYawAdjustment(0),
-      m_bActive(true)
+      m_fYawAdjustment(0)
       {};
   bool Init(CGameEntity *_pEntity, const string& _szName, const string& _szCore);
   bool InitAnimatedModel(CGameEntity *_pEntity, const string& _szName, const string& _szCore);
+
+  virtual void Enable();
+  virtual void Disable();
+
   virtual void Release();
 
 private:

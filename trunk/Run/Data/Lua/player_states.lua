@@ -351,7 +351,7 @@ State_Player_Tocat['Enter'] = function(_jugador)
   --log('enter player apuntant')
   
   local vida = _jugador:get_component(BaseComponent.vida)
-  vida.immortal = true
+  vida:set_active(false)
   
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
@@ -366,7 +366,7 @@ end
 State_Player_Tocat['Exit'] = function(_jugador)
 
   local vida = _jugador:get_component(BaseComponent.vida)
-  vida.immortal = false
+  vida:set_active(true)
   
   local animation = _jugador:get_component(BaseComponent.animation)
   --animation:clear_cycle(0.3)
@@ -570,7 +570,7 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Mort['Exit'] = function(_jugador)
-  _jugador:get_component(BaseComponent.vida).immortal = false
+  _jugador:get_component(BaseComponent.vida)set_active(true)
   local animation = _jugador:get_component(BaseComponent.animation)
   animation:stop(Player_Constants["Morir"])
 end
@@ -678,7 +678,7 @@ end
 State_Player_Cobertura_Baixa_Tocat['Enter'] = function(_jugador)
 
   local vida = _jugador:get_component(BaseComponent.vida)
-  vida.immortal = true
+  vida:set_active(false)
   
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
@@ -700,7 +700,7 @@ State_Player_Cobertura_Baixa_Tocat['Exit'] = function(_jugador)
   renderable_object.block_yaw = false
   
   local vida = _jugador:get_component(BaseComponent.vida)
-  vida.immortal = false
+  vida:set_active(true)
   
   --local animation = _jugador:get_component(BaseComponent.animation)
   --animation:clear_cycle(0.3)

@@ -25,7 +25,7 @@ bool CComponentShield::Init(CGameEntity* _pEntity, float _fHP, float _fMaxHP, fl
   m_fCooldown = _fCooldown;
   m_fTime = m_fCooldown;
 
-  m_bActive = false;
+  //m_bActive = false;
 
   SetOk(true);
   return IsOk();
@@ -33,13 +33,13 @@ bool CComponentShield::Init(CGameEntity* _pEntity, float _fHP, float _fMaxHP, fl
 
 void CComponentShield::Update(float _fDeltaTime)
 {
-  if(m_fTime <= m_fCooldown)
+  /*if(m_fTime <= m_fCooldown)
   {
     m_fTime += _fDeltaTime;
   }else if(!m_bActive)
   {
     Increase(m_fRegenAmount * _fDeltaTime);
-  }
+  }*/
 }
 
 void CComponentShield::Increase(float _fAmount)
@@ -58,7 +58,7 @@ void CComponentShield::Increase(float _fAmount)
 
 float CComponentShield::Decrease(float _fAmount)
 {
-  if(m_bActive)
+  /*if(m_bActive)
   {
     if(_fAmount < 0.0f)
         _fAmount *= -1;
@@ -80,7 +80,7 @@ float CComponentShield::Decrease(float _fAmount)
       }
       return 0.0f;
     }
-  }
+  }*/
 
   return _fAmount;
 }

@@ -73,40 +73,36 @@ bool CComponentTrigger::Init(
   
 void CComponentTrigger::OnEnter(CGameEntity* _pOther)
 {
-  if(m_szOnEnter != "") 
+  if(!IsActive())
+    return;
+
+  ExecuteLua(m_szOnEnter,_pOther);
+}
+
+void CComponentTrigger::OnExit (CGameEntity* _pOther)
+{
+  if(!IsActive())
+    return;
+
+  ExecuteLua(m_szOnExit,_pOther);
+}
+
+void CComponentTrigger::ExecuteLua(const string& _szLuaCode, CGameEntity* _pOther)
+{
+  if(_szLuaCode != "")
   {
     CScriptManager* m_pSM = CORE->GetScriptManager();
 
     lua_State *l_pLUA = m_pSM->GetLuaState();
 
     try {
-      luabind::call_function<void>(l_pLUA, m_szOnEnter.c_str(), GetEntity(), _pOther);
+      luabind::call_function<void>(l_pLUA, _szLuaCode.c_str(), GetEntity(), _pOther);
     } catch(const luabind::error& _TheError)
     {
       CScriptManager::PrintError(_TheError);
 
       LOGGER->AddNewLog(ELL_ERROR,"\tEntity \"%s\" has entered trigger \"%s\" and script \"%s\" has failed with error \"%s\"", 
-                          _pOther->GetName().c_str(), GetEntity()->GetName().c_str(), m_szOnEnter.c_str(), _TheError.what());
-    }
-  }
-}
-
-void CComponentTrigger::OnExit (CGameEntity* _pOther)
-{
-  if(m_szOnExit != "")
-  {
-    CScriptManager* m_pSM = CORE->GetScriptManager();
-
-    lua_State *l_pLUA = m_pSM->GetLuaState();
-
-    try {
-      luabind::call_function<void>(l_pLUA, m_szOnExit.c_str(), GetEntity(), _pOther);
-    } catch(const luabind::error& _TheError)
-    {
-      CScriptManager::PrintError(_TheError);
-
-      LOGGER->AddNewLog(ELL_ERROR,"\tEntity \"%s\" has exited trigger \"%s\" and script \"%s\" has failed.", 
-                            _pOther->GetName().c_str(), GetEntity()->GetName().c_str(), m_szOnExit.c_str());
+                          _pOther->GetName().c_str(), GetEntity()->GetName().c_str(), _szLuaCode.c_str(), _TheError.what());
     }
   }
 }

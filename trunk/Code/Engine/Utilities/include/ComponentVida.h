@@ -34,11 +34,10 @@ public:
 
   void AddDoT(float _fDamagePerSecond, float _fDoTTime);
   void AddHoT(float _fHealPerSecond, float _fHoTTime);
-  
-  bool  m_bImmortal;
+
 protected:
 
-  CComponentVida():m_fVida(100.0f), m_fVidaMaxima(100.0f), m_bImmortal(false), m_fRegenAmount(0.0f), m_bRegen(false), m_pShield(0), m_fTimeSinceHit(0.0f), m_fTimeForRegen(5.0f),
+  CComponentVida():m_fVida(100.0f), m_fVidaMaxima(100.0f), m_fRegenAmount(0.0f), m_bRegen(false), m_pShield(0), m_fTimeSinceHit(0.0f), m_fTimeForRegen(5.0f),
                    m_fDoT(0.0f), m_fDoTTime(0.0f), m_fHoT(0.0f), m_fHoTTime(0.0f) {};
   bool Init(CGameEntity* _pEntity, float _fVidaInicial, float _fVidaMaxima, bool _bRegen = false, float _fRegenAmount = 0.0f, float _fTimeForRegen = 5.0f);
   virtual void Release() {};

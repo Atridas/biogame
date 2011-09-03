@@ -83,7 +83,7 @@ void CComponentVida::Increase(float _fAmount)
 
 void CComponentVida::Decrease(float _fAmount)
 {
-  if(!m_bImmortal && m_fVida > 0.0f)
+  if(m_fVida > 0.0f)
   {
     m_fTimeSinceHit = 0.0f;
 

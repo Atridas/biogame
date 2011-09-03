@@ -857,8 +857,8 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 					
 				--PhysXBox
-				l_params = XMLEntityPhysXBox l_instance &l_TagName "escenari" false
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+				--l_params = XMLEntityPhysXBox l_instance &l_TagName "escenari" false
+				--format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 					
 				--Gate
 				l_params = XMLEntityDoor l_instance &l_TagName

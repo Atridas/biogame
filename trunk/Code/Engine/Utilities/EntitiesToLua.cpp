@@ -134,6 +134,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("get_type",     &CBaseComponent::GetType)
       .def("get_entity",   &CBaseComponent::GetEntity)
       .def("is_type",      &CBaseComponent::IsType)
+      .def("set_active",   &CBaseComponent::SetActive)
+      .def("is_active",    &CBaseComponent::IsActive)
       .def("receive_event",&CBaseComponent::ReceiveEvent)
 
     ,class_<CGameEntity>("GameEntity")
@@ -141,6 +143,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("get_component",    (CBaseComponent*(CGameEntity::*)(CBaseComponent::Type)const)&CGameEntity::GetComponent<CBaseComponent>)
       .def("get_name",         &CGameEntity::GetName)
       .def("delete_component", &CGameEntity::DeleteComponent)
+      .def("set_active",       &CGameEntity::SetActive)
 
     ,class_<CEntityManager>("EntityManager")
       .def("create_entity",                     &CEntityManager::CreateEntity)
@@ -224,7 +227,6 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponentPhysXBox, CBaseComponent>("ComponentPhysXBox")
       .def("add_to_entity",     (CComponentPhysXBox*(*)(CGameEntity*,float,float,float,float,float,float,float,int))&CComponentPhysXBox::AddToEntity)
       .def("add_to_entity",     (CComponentPhysXBox*(*)(CGameEntity*,float,int))&CComponentPhysXBox::AddToEntity)
-      .def("activate",          &CComponentPhysXBox::Activate)
       .def("set_position",      &CComponentPhysXBox::SetPosition)
       .def("get_position",      &CComponentPhysXBox::GetPosition)
       
@@ -233,7 +235,6 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("add_to_entity",                      &CComponentRenderableObject::AddToEntity)
       .def("add_to_entity_with_animated_model",  &CComponentRenderableObject::AddToEntityWithAnimatedModel)
       .def_readwrite("remove_renderable_object", &CComponentRenderableObject::m_bRemoveRenderableObject)
-      .def_readwrite("active",                   &CComponentRenderableObject::m_bActive)
       .def_readwrite("block_yaw",                &CComponentRenderableObject::m_bBlockYaw)
       .def("set_yaw",                            &CComponentRenderableObject::SetYaw)
       
@@ -258,7 +259,6 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponentStateMachine, CBaseComponent>("ComponentStateMachine")
       .def("add_to_entity",            &CComponentStateMachine::AddToEntity)
       .def("get_state_machine",        &CComponentStateMachine::GetStateMachine)
-      .def("set_active",               &CComponentStateMachine::SetActive)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentIABrain, CBaseComponent>("ComponentIABrain")
@@ -284,7 +284,6 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("set_regen",                &CComponentVida::SetRegen)
       .def("add_dot",                  &CComponentVida::AddDoT)
       .def("add_hot",                  &CComponentVida::AddHoT)
-      .def_readwrite("immortal",       &CComponentVida::m_bImmortal)
 
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentShield, CBaseComponent>("ComponentShield")
@@ -294,20 +293,19 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("decrease",                 &CComponentShield::Decrease)
       .def("set",                      &CComponentShield::Set)
       .def("set_regen",                &CComponentShield::SetRegen)
-      .def("activate",                 &CComponentShield::Activate)
-      .def("deactivate",               &CComponentShield::Deactivate)
-      .def("is_active",                &CComponentShield::IsActive)
+      //.def("activate",                 &CComponentShield::Activate)
+      //.def("deactivate",               &CComponentShield::Deactivate)
+      //.def("is_active",                &CComponentShield::IsActive)
       .def("is_ready",                 &CComponentShield::IsReady)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentRagdoll, CBaseComponent>("ComponentRagdoll")
       .def("add_to_entity",            &CComponentRagdoll::AddToEntity)
-      .def("set_active",               &CComponentRagdoll::SetActive)
+      .def("apply_physics",            &CComponentRagdoll::ApplyPhysics)
       .def("get_position",             &CComponentRagdoll::GetPosition)
 
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentMirilla, CBaseComponent>("ComponentMirilla")
-      .def("set_active",               &CComponentMirilla::SetActive)
 
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentCover, CBaseComponent>("ComponentCover")
@@ -327,10 +325,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
 
     ,class_<CComponentDoor, CBaseComponent>("ComponentDoor")
       .def("add_to_entity",            &CComponentDoor::AddToEntity)
-      .def("is_open",                  &CComponentDoor::IsOpen)
-      .def("open",                     &CComponentDoor::Open)
-      .def("close",                    &CComponentDoor::Close)
       .def("block",                    &CComponentDoor::Block)
+      .def("is_blocked",               &CComponentDoor::IsBlocked)
       .def_readwrite("time",           &CComponentDoor::m_fTime)
     // ----------------------------------------------------------------------------------------------------
 
@@ -354,7 +350,6 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("add_to_entity",            &CComponentSpawner::AddToEntity)
       .def("set_enemy_type",           &CComponentSpawner::SetEnemyType)
       .def("get_enemy_type",           &CComponentSpawner::GetEnemyType)
-      .def_readwrite("active",         &CComponentSpawner::m_bActive)
   ];
 }
 

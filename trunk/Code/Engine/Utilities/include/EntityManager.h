@@ -45,7 +45,7 @@ public:
 
   CGameEntity* InitEnemy(const string& _szPlayerName, const Vect3f& _vPosition, float _fRadius,
                          const string& _szInitialState, const string& _szRenderableModel, const string& _szRagdollModell,
-                         const string& _szEntityName = "", const bool _bActive = true);
+                         const string& _szEntityName = "");
 
   CGameEntity* InitMiner(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName = "", const bool _bActive = true);
 

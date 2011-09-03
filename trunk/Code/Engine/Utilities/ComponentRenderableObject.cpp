@@ -107,8 +107,6 @@ bool CComponentRenderableObject::InitAnimatedModel(CGameEntity *_pEntity, const 
     SetOk(true);
   }
 
-
-  m_bActive = true;
   return IsOk();
 }
 
@@ -121,32 +119,30 @@ void CComponentRenderableObject::UpdatePostAnim(float _fDeltaTime)
 {
   assert(IsOk());
 
-  if(m_bActive)
+
+  if(m_bBlockPitchRoll || m_fHeightAdjustment != 0.f || m_fYawAdjustment != 0.f)
   {
-    if(m_bBlockPitchRoll || m_fHeightAdjustment != 0.f || m_fYawAdjustment != 0.f)
+    if(!m_bBlockPitchRoll)
     {
-      if(!m_bBlockPitchRoll)
-      {
-        m_pRenderableObject->SetPitch(m_pObject3D->GetPitch());
-        m_pRenderableObject->SetRoll (m_pObject3D->GetRoll());
-      }
-
-      Vect3f l_vPosition = m_pObject3D->GetPosition();
-      l_vPosition.y += m_fHeightAdjustment;
-      m_pRenderableObject->SetPosition(l_vPosition);
-
-      if(!m_bBlockYaw)
-      {
-        m_pRenderableObject->SetYaw (m_pObject3D->GetYaw() + m_fYawAdjustment);
-      }
+      m_pRenderableObject->SetPitch(m_pObject3D->GetPitch());
+      m_pRenderableObject->SetRoll (m_pObject3D->GetRoll());
     }
-    else
-    {   
-      Mat44f l_Matrix;
+
+    Vect3f l_vPosition = m_pObject3D->GetPosition();
+    l_vPosition.y += m_fHeightAdjustment;
+    m_pRenderableObject->SetPosition(l_vPosition);
+
+    if(!m_bBlockYaw)
+    {
+      m_pRenderableObject->SetYaw (m_pObject3D->GetYaw() + m_fYawAdjustment);
+    }
+  }
+  else
+  {   
+    Mat44f l_Matrix;
   
-      m_pObject3D->GetMat44(l_Matrix);
-      m_pRenderableObject->SetMat44(l_Matrix);
-    }
+    m_pObject3D->GetMat44(l_Matrix);
+    m_pRenderableObject->SetMat44(l_Matrix);
   }
 }
 
@@ -165,14 +161,15 @@ bool CComponentRenderableObject::ChangeInstance(const string& _szName)
   return false;
 }
 
-void CComponentRenderableObject::SetVisible(bool m_bHide)
+void CComponentRenderableObject::Enable()
 {
-  if(m_pRenderableObject)
-  {
-    m_pRenderableObject->SetVisible(m_bHide);
-  }
+  m_pRenderableObject->SetVisible(true);
 }
 
+void CComponentRenderableObject::Disable()
+{
+  m_pRenderableObject->SetVisible(false);
+}
 
 void CComponentRenderableObject::Release()
 {

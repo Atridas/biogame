@@ -22,18 +22,19 @@ public:
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_MIRILLA;};
 
   static CComponentMirilla* AddToEntity(CGameEntity* _pEntity, const string& _szName);
-  void SetActive(bool _bActive);
-  
-  virtual void PostUpdate(float _fDeltaTime);
 
 protected:
-  CComponentMirilla():m_bActive(false),m_pAim(0) {};
+  CComponentMirilla():m_pAim(0) {};
   bool Init(CGameEntity* _pEntity, const string& _szName);
+
+  virtual void Enable();
+  virtual void Disable();
+
   virtual void Release();
 private:
 
   CDrawQuadSceneEffect* m_pAim;
-  bool m_bActive;
+
 };
 
 #endif

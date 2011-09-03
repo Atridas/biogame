@@ -36,8 +36,8 @@
     <script action="ACTION_MANAGER                = CORE:get_action_manager()"/>
     <script action="AM                            = CORE:get_action_manager()"/>
 
-    <script action="PARTICLE_MANAGER              = CORE:get_particle_manager()"/>
-    <script action="PM                            = CORE:get_particle_manager()"/>
+    <!--<script action="PARTICLE_MANAGER              = CORE:get_particle_manager()"/>
+    <script action="PM                            = CORE:get_particle_manager()"/>-->
 
     <script action="SOUND_MANAGER                 = CORE:get_sound_manager()"/>
     <script action="SOUND                         = CORE:get_sound_manager()"/>

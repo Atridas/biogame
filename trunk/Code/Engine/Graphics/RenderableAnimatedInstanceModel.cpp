@@ -75,6 +75,6 @@ void CRenderableAnimatedInstanceModel::Update(float _fElapsedTime)
   if(m_pAnimatedInstanceModel)
   {
     m_pAnimatedInstanceModel->Update(_fElapsedTime);
-    CRenderableObject::Update(_fElapsedTime);
+    //CRenderableObject::Update(_fElapsedTime);
   }
 }
