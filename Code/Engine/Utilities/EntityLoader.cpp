@@ -349,12 +349,8 @@ void LoadMiner(CEntityManager* _pEM, CXMLTreeNode& _TreeMiner)
   LOGGER->AddNewLog(ELL_INFORMATION, "\t\t\tMiner name \"%s\", pos %f,%f,%f, Player %s", l_szName.c_str(),
                                       l_vPosition.x, l_vPosition.y, l_vPosition.z, l_szPlayerName.c_str());
 
-  CGameEntity* l_pEntity = _pEM->InitMiner(l_szPlayerName, l_vPosition, l_szName);
+  CGameEntity* l_pEntity = _pEM->InitMiner(l_szPlayerName, l_vPosition, l_szName,l_bActive);
 
-  CComponentStateMachine* l_pSM = l_pEntity->GetComponent<CComponentStateMachine>();
-
-  if(l_pSM)
-    l_pSM->SetActive(l_bActive);
 }
 
 void LoadMilitar(CEntityManager* _pEM, CXMLTreeNode& _TreeMiner)
@@ -371,10 +367,6 @@ void LoadMilitar(CEntityManager* _pEM, CXMLTreeNode& _TreeMiner)
 
   CGameEntity* l_pEntity = _pEM->InitMilitar(l_szPlayerName, l_vPosition, l_szName, l_bActive);
 
-  CComponentStateMachine* l_pSM = l_pEntity->GetComponent<CComponentStateMachine>();
-
-  if(l_pSM)
-    l_pSM->SetActive(l_bActive);
 }
 
 // -------------------------------------------------------------------------------------------------------------
@@ -573,11 +565,13 @@ CGameEntity* CEntityManager::InitMiner(const string& _szPlayerName, const Vect3f
 {
   CGameEntity* l_pMiner = InitEnemy(_szPlayerName, _vPosition, 0.8f, 
                     "State_Enemy_Idle", "miner", "Data/Animated Models/Miner/Skeleton.xml",
-                    _szEntityName, _bActive);
+                    _szEntityName);
 
   l_pMiner->GetComponent<CComponentRenderableObject>()->m_fHeightAdjustment = -1.1f;
 
   CComponentCollisionReport::AddToEntity(l_pMiner,"","","","enemy_on_start_colision","","",0.1f);
+
+  l_pMiner->SetActive(_bActive);
 
   return l_pMiner;
 }
@@ -586,18 +580,20 @@ CGameEntity* CEntityManager::InitMilitar(const string& _szPlayerName, const Vect
 {
   CGameEntity* l_pMilitar = InitEnemy(_szPlayerName, _vPosition, 0.8f, 
                     "State_Soldier_Idle", "Militar", "Data/Animated Models/Militar/Skeleton.xml",
-                    _szEntityName, _bActive);
+                    _szEntityName);
 
   l_pMilitar->GetComponent<CComponentRenderableObject>()->m_fHeightAdjustment = -1.0f;
 
   CComponentCollisionReport::AddToEntity(l_pMilitar,"","","","enemy_on_start_colision","","",0.1f);
+
+  l_pMilitar->SetActive(_bActive);
 
   return l_pMilitar;
 }
 
 CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f& _vPosition, float _fRadius,
                          const string& _szInitialState, const string& _szRenderableModel, const string& _szRagdollModell,
-                         const string& _szEntityName, const bool _bActive)
+                         const string& _szEntityName)
 {
   CGameEntity* l_peEnemy = CreateEntity();
   if(_szEntityName != "")
@@ -651,7 +647,6 @@ CGameEntity* CEntityManager::InitLaser(const Vect3f& _vPosInit, const Vect3f& _v
   CComponentLaser::AddToEntity( l_pLaser, _vDir, _fDany, _uiCollisionMask );
 
   CComponentRenderableObject *l_pCRO= CComponentRenderableObject::AddToEntity(l_pLaser, "laser " + l_pLaser->GetName(), "laser");
-  l_pCRO->m_bActive = true;
   l_pCRO->m_bRemoveRenderableObject = true;
   l_pComponentObject3D->SetMat44(l_mO3D);
 

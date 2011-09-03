@@ -23,19 +23,15 @@ CComponentDoor* CComponentDoor::AddToEntity(CGameEntity *_pEntity, bool _bOpen, 
 
 bool CComponentDoor::Init(CGameEntity* _pEntity, bool _bOpen, Vect3f _vSize)
 {
-  m_bOpen = _bOpen;
-
   m_vSizeBox = _vSize;
 
-  CComponentObject3D* l_pObject3D = _pEntity->GetComponent<CComponentObject3D>();
-  assert(l_pObject3D);
+  m_pObject3D = _pEntity->GetComponent<CComponentObject3D>();
+  assert(m_pObject3D);
 
   CComponentRenderableObject* l_pComponentRenderableObject = _pEntity->GetComponent<CComponentRenderableObject>();
   assert(l_pComponentRenderableObject);
 
   float l_fTotalHeight = _vSize.y * 0.5f;
-
-  m_vPosBox = l_pObject3D->GetPosition();
 
   l_pComponentRenderableObject->m_fHeightAdjustment = -l_fTotalHeight;
   l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
@@ -55,37 +51,30 @@ bool CComponentDoor::Init(CGameEntity* _pEntity, bool _bOpen, Vect3f _vSize)
 
   m_pPhysXActor->SetKinematic(true);
 
-  m_pPhysXActor->SetMat44( l_pObject3D->GetMat44() );
+  m_pPhysXActor->SetMat44( m_pObject3D->GetMat44() );
+
+  SetActive(!_bOpen);
 
   SetOk(true);
   return IsOk();
 }
 
-bool CComponentDoor::Open()
+void CComponentDoor::Enable(void)
 {
   if(!m_bBlock)
   {
-    m_bOpen = true;
-
-    Vect3f a = m_pPhysXActor->GetPosition();
-    m_pPhysXActor->SetGlobalPosition(Vect3f(0.0f,-1000.0f,0.0f));
-
-    return true;
+    m_pPhysXActor->Activate(true);
+    m_pPhysXActor->SetGlobalPosition(m_pObject3D->GetPosition());
   }
-  return false;
 }
 
-bool CComponentDoor::Close()
+void CComponentDoor::Disable(void)
 {
   if(!m_bBlock)
   {
-    m_bOpen = false;
-
-    m_pPhysXActor->SetGlobalPosition(m_vPosBox);
-
-    return true;
+    m_pPhysXActor->Activate(false);
+    m_pPhysXActor->SetGlobalPosition(m_pObject3D->GetPosition() - Vect3f(0.0f,-1000.0f,0.0f));
   }
-  return false;
 }
 
 void CComponentDoor::Release()

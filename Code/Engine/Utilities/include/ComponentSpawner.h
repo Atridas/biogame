@@ -30,10 +30,8 @@ public:
   EEnemyType GetEnemyType() { return m_EnemyType; };
   void SetEnemyType(EEnemyType _Type) { m_EnemyType = _Type; };
 
-  bool m_bActive;
-
 protected:
-  CComponentSpawner(): m_bActive(false), m_fTime(0.0f), m_fSpawnTime(10.0f), m_iMaxEnemy(10), m_iCurrentEnemy(0), m_EnemyType(EE_MILITAR), m_pCObject3D(0) {};
+  CComponentSpawner(): m_fTime(0.0f), m_fSpawnTime(10.0f), m_iMaxEnemy(10), m_iCurrentEnemy(0), m_EnemyType(EE_MILITAR), m_pCObject3D(0) {};
   bool Init(CGameEntity* _pEntity, bool _bActive, float _fSpawnTime, int _iMaxEnemy, EEnemyType _EnemyType);
   virtual void Release() {};
 

@@ -485,6 +485,32 @@ void CPhysxSkeleton::SetRagdollActive(bool _bRagdollActive)
   }
 };
 
+void CPhysxSkeleton::SetCollisions(bool _bValue)
+{
+  if(_bValue)
+  {
+    for(size_t i=0;i<m_vBones.size();++i)
+    {
+      CPhysicActor* l_pActor = m_vBones[i]->GetPhysxActor();
+
+      if (l_pActor != 0)
+      { 
+        l_pActor->GetPhXActor()->clearActorFlag(NX_AF_DISABLE_COLLISION);
+      }
+    }
+  }else{
+    for(size_t i=0;i<m_vBones.size();++i)
+    {
+      CPhysicActor* l_pActor = m_vBones[i]->GetPhysxActor();
+
+      if (l_pActor != 0)
+      { 
+        l_pActor->GetPhXActor()->raiseActorFlag(NX_AF_DISABLE_COLLISION);
+      }
+    }
+  }
+}
+
 void CPhysxSkeleton::WakeUpPhysxBones()
 {
   for(size_t i=0;i<m_vBones.size();++i)

@@ -175,6 +175,12 @@ void CComponentIABrain::ReceiveShoot(SEvent _sEvent)
 
       l_pActor->AddForceAtLocalPos(l_vDir,Vect3f(0.0f),SHOOT_POWER);
     }
+
+    assert(_sEvent.Info[3].Type == SEventInfo::VECTOR);
+    Vect3f l_vPos(_sEvent.Info[3].v.x, _sEvent.Info[3].v.y, _sEvent.Info[3].v.z);
+    
+    ENTITY_MANAGER->InitParticles("impacte ragdoll", l_vPos, Vect3f(.5f,.5f,.5f), 5.f);
+  
   }
 
 
@@ -237,7 +243,7 @@ void CComponentIABrain::Die()
 
   if(l_pRC)
   {
-    l_pRC->SetActive(true);
+    l_pRC->ApplyPhysics(true);
   }
   
   SEvent l_morir;

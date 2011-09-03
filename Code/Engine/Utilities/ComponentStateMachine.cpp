@@ -40,32 +40,13 @@ void CComponentStateMachine::Release()
 
 void CComponentStateMachine::Update(float _fDeltaTime)
 {
-  if(m_bActive && m_pStateMachine)
+  if(m_pStateMachine)
     m_pStateMachine->Update(_fDeltaTime);
 }
 
 void CComponentStateMachine::ReceiveEvent(const SEvent& _Event)
 {
-  if(m_bActive && m_pStateMachine)
+  if(m_pStateMachine)
     m_pStateMachine->ReceiveEvent(_Event);
 }
 
-void CComponentStateMachine::SetActive(bool _bActive)
-{
-  m_bActive = _bActive;
-
-  CComponentRenderableObject* l_pRO = GetEntity()->GetComponent<CComponentRenderableObject>();
-
-  if(l_pRO)
-    l_pRO->SetVisible(m_bActive);
-
-  CComponentPhysXActor* l_pFA = GetEntity()->GetComponent<CComponentPhysXActor>();
-
-  if(l_pFA)
-    l_pFA->Activate(m_bActive);
-
-  CComponentPhysXController* l_pFC = GetEntity()->GetComponent<CComponentPhysXController>();
-
-  if(l_pFC)
-    l_pFC->Activate(m_bActive);
-}

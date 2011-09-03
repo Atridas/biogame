@@ -83,9 +83,16 @@ void CComponentPhysXController::SetHeight(float _fHeight)
   m_pPhysXController->SetHeight(_fHeight);
 }
 
-void CComponentPhysXController::SetActive(bool _bActive)
+void CComponentPhysXController::Enable()
 {
-  m_pPhysXController->SetActive(_bActive);
+  m_pPhysXController->SetPosition(m_pObject3D->GetPosition());
+  m_pPhysXController->SetActive(true);
+}
+
+void CComponentPhysXController::Disable()
+{
+  m_pPhysXController->SetActive(false);
+  m_pPhysXController->SetPosition(m_pPhysXController->GetPosition() - Vect3f(0.0f,1000.0f,0.0f));
 }
 
 void CComponentPhysXController::SetPositionFromRagdoll()
@@ -114,10 +121,4 @@ void CComponentPhysXController::Release(void)
 
   CHECKED_DELETE(m_pPhysXController);
   CHECKED_DELETE(m_pPhysXData);
-}
-
-void CComponentPhysXController::Activate(bool _bActive)
-{
-  if(m_pPhysXController)
-    m_pPhysXController->SetCollision(_bActive);
 }

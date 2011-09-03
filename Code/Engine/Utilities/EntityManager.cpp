@@ -178,8 +178,13 @@ void CEntityManager::PreUpdate(float _fDeltaTime)
   for(; l_it != l_end; ++l_it)
   {
     CGameEntity* l_pEntity = (*l_it);
-    if(l_pEntity) 
-      l_pEntity->PreUpdate(_fDeltaTime);
+    if(l_pEntity)
+    {
+      if(l_pEntity->IsActive())
+      {
+        l_pEntity->PreUpdate(_fDeltaTime);
+      }
+    }
   }
 }
 
@@ -191,8 +196,13 @@ void CEntityManager::Update(float _fDeltaTime)
   for(; l_it != l_end; ++l_it)
   {
     CGameEntity* l_pEntity = (*l_it);
-    if(l_pEntity) 
-      l_pEntity->Update(_fDeltaTime);
+    if(l_pEntity)
+    {
+      if(l_pEntity->IsActive())
+      {
+        l_pEntity->Update(_fDeltaTime);
+      }
+    }
   }
 }
 
@@ -204,8 +214,13 @@ void CEntityManager::UpdatePrePhysX(float _fDeltaTime)
   for(; l_it != l_end; ++l_it)
   {
     CGameEntity* l_pEntity = (*l_it);
-    if(l_pEntity) 
-      l_pEntity->UpdatePrePhysX(_fDeltaTime);
+    if(l_pEntity)
+    {
+      if(l_pEntity->IsActive())
+      {
+        l_pEntity->UpdatePrePhysX(_fDeltaTime);
+      }
+    }
   }
 }
 
@@ -217,8 +232,13 @@ void CEntityManager::UpdatePostPhysX(float _fDeltaTime)
   for(; l_it != l_end; ++l_it)
   {
     CGameEntity* l_pEntity = (*l_it);
-    if(l_pEntity) 
-      l_pEntity->UpdatePostPhysX(_fDeltaTime);
+    if(l_pEntity)
+    {
+      if(l_pEntity->IsActive())
+      {
+        l_pEntity->UpdatePostPhysX(_fDeltaTime);
+      }
+    }
   }
 }
 
@@ -230,8 +250,13 @@ void CEntityManager::UpdatePostAnim(float _fDeltaTime)
   for(; l_it != l_end; ++l_it)
   {
     CGameEntity* l_pEntity = (*l_it);
-    if(l_pEntity) 
-      l_pEntity->UpdatePostAnim(_fDeltaTime);
+    if(l_pEntity)
+    {
+      if(l_pEntity->IsActive())
+      {
+        l_pEntity->UpdatePostAnim(_fDeltaTime);
+      }
+    }
   }
 }
 
@@ -243,8 +268,13 @@ void CEntityManager::PostUpdate(float _fDeltaTime)
   for(; l_it != l_end; ++l_it)
   {
     CGameEntity* l_pEntity = (*l_it);
-    if(l_pEntity) 
-      l_pEntity->PostUpdate(_fDeltaTime);
+    if(l_pEntity)
+    {
+      if(l_pEntity->IsActive())
+      {
+        l_pEntity->PostUpdate(_fDeltaTime);
+      }
+    }
   }
 
   CreateEntities();
@@ -292,14 +322,23 @@ void CEntityManager::DeliverEvent(const SEvent& _Event)
       for(; l_it != l_end; ++l_it)
       {
         CGameEntity* l_pEntity = (*l_it);
-        if(l_pEntity) 
-          l_pEntity->ReceiveEvent(_Event);
+        if(l_pEntity)
+        {
+          if(l_pEntity->IsActive())
+          {
+            l_pEntity->ReceiveEvent(_Event);
+          }
+        }
       }
     }
     else
     {
       //TODO asserts i tal...
-      m_vEntities[_Event.Receiver]->ReceiveEvent(_Event);
+      CGameEntity* l_pEntity = m_vEntities[_Event.Receiver];
+      if(l_pEntity->IsActive())
+      {
+        l_pEntity->ReceiveEvent(_Event);
+      }
     }
   }
 }

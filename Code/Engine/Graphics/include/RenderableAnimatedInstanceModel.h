@@ -16,6 +16,8 @@ class CRenderableAnimatedInstanceModel: public CRenderableObject
     bool          Init      (const string& _szCoreName);
     virtual void  InitFromXML(CXMLTreeNode& l_XMLObject);
 
+    void          Update(float _fElapsedTime);
+
     //Methods
     virtual void  RenderRenderableObject(CRenderManager* _pRM);
 
@@ -27,7 +29,6 @@ class CRenderableAnimatedInstanceModel: public CRenderableObject
     virtual bool IsAlphaBlended() const {return false;};
   protected:
     virtual void          Release                   ();
-    void                  Update                    (float _fElapsedTime);
 
   private:
     CAnimatedInstanceModel * m_pAnimatedInstanceModel;

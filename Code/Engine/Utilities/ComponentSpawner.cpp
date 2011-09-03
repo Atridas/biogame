@@ -27,7 +27,7 @@ bool CComponentSpawner::Init(CGameEntity* _pEntity, bool _bActive, float _fSpawn
   m_fTime = 0.0f;
   m_iCurrentEnemy = 0;
 
-  m_bActive = _bActive;
+  SetActive(_bActive);
   m_fSpawnTime = _fSpawnTime;
   m_iMaxEnemy = _iMaxEnemy;
   m_EnemyType = _EnemyType;
@@ -44,7 +44,7 @@ bool CComponentSpawner::Init(CGameEntity* _pEntity, bool _bActive, float _fSpawn
 
 void CComponentSpawner::Update(float _fDeltaTime)
 {
-  if(m_bActive && (m_iCurrentEnemy < m_iMaxEnemy))
+  if(m_iCurrentEnemy < m_iMaxEnemy)
   {
     m_fTime += _fDeltaTime;
     if(m_fTime >= m_fSpawnTime)
@@ -61,5 +61,7 @@ void CComponentSpawner::Update(float _fDeltaTime)
         
       m_iCurrentEnemy++;
     }
+  }else{
+    SetActive(false);
   }
 }

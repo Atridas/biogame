@@ -46,18 +46,7 @@ function open_door(_trigger, _actor)
         EM:send_event(l_message)
         
         --activar el miner de la sala
-        local l_miner = EM:get_entity("Miner_video00")
-        
-        if l_miner then
-          local l_SM = l_miner:get_component(BaseComponent.state_machine)
-          if l_SM then
-            l_SM:set_active(true)
-          else
-            log('El Miner_video00 no té màquina d\'estats')
-          end
-        else
-          log('Error: no es troba Miner_video00')
-        end
+        activate_entity("Miner_video00")
       else
         log('No es troba la porta: Porta_Videovigilancia')
       end
@@ -121,11 +110,13 @@ State_Porta_Open['Enter'] = function(_entitat)
   --comprovar que la porta no estigui bloquejada
   local l_door = _entitat:get_component(BaseComponent.door)
   
-  if l_door:is_open() == false then
-    if l_door:open() == false then
-      _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Closed')
-      return
-    end
+  if l_door:is_active() then
+    --l_door:set_active(false)
+    
+    --if l_door:open() == false then
+    _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Closed')
+    --  return
+    --end
   end
   
   --animacio
@@ -168,8 +159,11 @@ State_Porta_Opening['Enter'] = function(_entitat)
   l_door.time = 0.0
   
   --comprovar que la porta no estigui bloquejada
-  if l_door:is_open() then
-    if l_door:close() == false then
+  if l_door:is_blocked() then
+   if l_door:is_active() then
+      _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Closed')
+      return
+    else
       _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Open')
       return
     end
@@ -192,8 +186,8 @@ State_Porta_Opening['Update'] = function(_entitat, _dt)
   local l_door = _entitat:get_component(BaseComponent.door)
   l_door.time = l_door.time + _dt
   
-  if l_door:is_open() == false and l_door.time >= Porta_Constants["Open Speed"] * 0.5 then
-    l_door:open()
+  if l_door:is_active() and l_door.time >= Porta_Constants["Open Speed"] * 0.5 then
+    l_door:set_active(false)
   end
   
   if l_door.time >= Porta_Constants["Open Speed"] then
@@ -220,13 +214,11 @@ end
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 State_Porta_Closed['Enter'] = function(_entitat)
-  --comprovar que la porta no estigui bloquejada
+  --comprovar que la porta no estigui oberta
   local l_door = _entitat:get_component(BaseComponent.door)
-  if l_door:is_open() then
-    if l_door:close() == false then
-      _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Open')
-      return
-    end
+  if l_door:is_active() == false then
+    _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Open')
+    return
   end
   
   --animacio
@@ -268,8 +260,11 @@ State_Porta_Closing['Enter'] = function(_entitat)
   l_door.time = 0.0
   
   --comprovar que la porta no estigui bloquejada
-  if l_door:is_open() then
-    if l_door:close() == false then
+  if l_door:is_blocked() then
+    if l_door:is_active() then
+      _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Closed')
+      return
+    else
       _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Open')
       return
     end
@@ -293,17 +288,22 @@ State_Porta_Closing['Update'] = function(_entitat, _dt)
   local l_door = _entitat:get_component(BaseComponent.door)
   l_door.time = l_door.time + _dt
   
+  if l_door:is_active() == false and l_door.time >= Porta_Constants["Close Speed"] * 0.5 then
+    l_door:set_active(true)
+  end
+  
   if l_door.time >= Porta_Constants["Close Speed"] then
     _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Closed')
     return
   end
+  
 end
 
 -------------------------------------------------------------------------------------------------
 State_Porta_Closing['Receive'] = function(_entitat, _event)
   local l_sender = EM:get_entity(_event.sender)
   --log('closing: event received ' .. l_sender:get_name() )
-  
+ 
   if _event.msg == Event.obrir then
     _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Opening')
     return

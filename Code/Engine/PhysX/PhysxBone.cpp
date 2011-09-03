@@ -229,10 +229,6 @@ void CPhysxBone::UpdatePhysxFromCal3d(const Mat44f& _mTransform)
 {
   if (m_pActor != 0)
   {
-    //Mat44f l_vMatActor;
-    //l_vMatActor = GetBoneLeftHandedAbsoluteTransformation(m_pCalBone);
-    //m_pActor->SetMat44(m_vMatAnimatedModel*l_vMatActor);
-    //m_pActor->SetMat44(_mTransform*GetBoneLeftHandedAbsoluteTransformation(m_pCalBone));
     m_pActor->MoveGlobalPoseMat44(_mTransform*GetBoneLeftHandedAbsoluteTransformation(m_pCalBone));
   }
 }
@@ -244,7 +240,6 @@ void CPhysxBone::SetTransformAfterUpdate(const Mat44f& _mTransform)
   if (m_pActor != 0)
   {
     m_pActor->SetMat44(m_vMatActor*GetBoneLeftHandedAbsoluteTransformation(m_pCalBone));
-    //m_pActor->MoveGlobalPoseMat44(_mTransform*GetBoneLeftHandedAbsoluteTransformation(m_pCalBone));
   }
 }
 

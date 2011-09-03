@@ -33,6 +33,11 @@ bool CComponentAnimation::Init(CGameEntity* _pEntity)
   return IsOk();
 }
 
+void CComponentAnimation::PreUpdate(float _fDeltaTime)
+{
+  assert(m_pAnimatedModel);
+  m_pAnimatedModel->Update(_fDeltaTime);
+}
 
 void CComponentAnimation::Play(const string& _szAnimation, float _fBlend, float _fWeight, bool _bLockEnd)
 {

@@ -5,6 +5,7 @@
 #include "base.h"
 #include "EntityDefines.h"
 
+//TODO!! (Si fa falta...
 class CComponentShield:
   public CBaseComponent
 {
@@ -19,9 +20,9 @@ public:
   
   void Update(float _fDeltaTime);
 
-  bool Activate() { m_fTime <= m_fCooldown ? m_bActive = false : m_bActive = true; return m_bActive; };
+  /*bool Activate() { m_fTime <= m_fCooldown ? m_bActive = false : m_bActive = true; return m_bActive; };
   void Deactivate()  { m_bActive = false; m_fTime = 0.0f; };
-  bool IsActive()  { return m_bActive; };
+  bool IsActive()  { return m_bActive; };*/
 
   bool IsReady() { return m_fTime >= m_fCooldown ; };
 
@@ -35,12 +36,12 @@ public:
 
 protected:
 
-  CComponentShield(): m_fHP(100.0f), m_fMaxHP(100.0f), m_fRegenAmount(2.0f), m_fCooldown(5.0f), m_bActive(false), m_fTime(0.0f) {};
+  CComponentShield(): m_fHP(100.0f), m_fMaxHP(100.0f), m_fRegenAmount(2.0f), m_fCooldown(5.0f), /*m_bActive(false),*/ m_fTime(0.0f) {};
   bool Init(CGameEntity* _pEntity, float _fHP, float _fMaxHP, float _fRegenAmount = 2.0f, float _fCooldown = 5.0f);
   virtual void Release() {};
 
 private:
-  bool m_bActive;
+  //bool m_bActive;
 
   float m_fHP;
   float m_fMaxHP;

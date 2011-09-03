@@ -32,7 +32,7 @@ State_Soldier_Idle["Enter"] = function(_enemic)
   
   local ragdoll = _enemic:get_component(BaseComponent.ragdoll)
   if ragdoll then
-    ragdoll:set_active(false)
+    ragdoll:apply_physics(false)
   end
   
   animation:clear_all_cycles(0.0)
@@ -400,7 +400,7 @@ State_Soldier_Hit["Enter"] = function(_enemic)
   
   local vida = _enemic:get_component(BaseComponent.vida)
   
-  vida.immortal = true
+  vida:set_active(false)
   
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
   ia_brain.time = 0
@@ -412,7 +412,7 @@ end
 State_Soldier_Hit["Exit"] = function(_enemic)
 
   local vida = _enemic:get_component(BaseComponent.vida)
-  vida.immortal = false
+  vida:set_active(true)
 
   local animation = _enemic:get_component(BaseComponent.animation)
   animation:clear_cycle('idle', 0.3)
@@ -460,7 +460,7 @@ State_Soldier_Hit_Cobertura["Enter"] = function(_enemic)
   
   local vida = _enemic:get_component(BaseComponent.vida)
   
-  vida.immortal = true
+  vida:set_active(false)
   
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
   ia_brain.time = 0
@@ -470,7 +470,7 @@ end
 State_Soldier_Hit_Cobertura["Exit"] = function(_enemic)
 
   local vida = _enemic:get_component(BaseComponent.vida)
-  vida.immortal = false
+  vida:set_active(true)
 
   local animation = _enemic:get_component(BaseComponent.animation)
   animation:clear_cycle('idle', 0.3)

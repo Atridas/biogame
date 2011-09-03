@@ -29,6 +29,7 @@ public:
   void ClearCycle(const string& _szAnimation, float _fBlend);
   void ClearAllCycles(float _fBlend);
 
+  virtual void PreUpdate(float _fDeltaTime);
 
 protected:
   virtual void Release() { m_stActiveCycles.clear(); m_stInactiveCycles.clear(); };

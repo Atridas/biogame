@@ -68,9 +68,9 @@ void CBiotestProcess::RenderScene(CRenderManager* _pRM)
 void CBiotestProcess::RenderINFO(CRenderManager* _pRM)
 {
   CORE->GetEmiterManager()->DebugRender(_pRM);
-  //CORE->GetPhysicsManager()->DebugRender(_pRM);
-  //CORE->GetPortalManager()->DebugRender(_pRM);
-  //CORE->GetIAManager()->GetGraph()->DebugRender(_pRM);
+  CORE->GetPhysicsManager()->DebugRender(_pRM);
+  CORE->GetPortalManager()->DebugRender(_pRM);
+  CORE->GetIAManager()->GetGraph()->DebugRender(_pRM);
 }
 
 bool CBiotestProcess::Init()

@@ -63,6 +63,9 @@ public:
   
   virtual void ReceiveEvent(const SEvent& _Event) {};
 
+  void SetActive(bool _bActive);
+  bool IsActive() {return m_bActive;};
+
   //updates
   
   virtual void PreUpdate(float _fDeltaTime)        {};
@@ -76,10 +79,16 @@ public:
   virtual void DebugRender(CRenderManager*)        {};
 
 protected:
-  CBaseComponent():m_pEntity(0) {};
+  CBaseComponent():m_pEntity(0),m_bActive(true) {};
   void SetEntity(CGameEntity* _pEntity);
 
+  virtual void Enable(void) {};
+  virtual void Disable(void) {};
+
 private:
+
+  bool m_bActive;
+
   //EComponentType m_Type;
   CGameEntity*   m_pEntity;
 };

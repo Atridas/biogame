@@ -9,10 +9,9 @@
 #include "ComponentPhysXController.h"
 #include "EntityManager.h"
 #include "Core.h"
-#include "ComponentEmiter.h"
-#include "ComponentLifetime.h"
 #include "ComponentMovement.h"
 #include "ComponentObject3D.h"
+#include "ComponentAnimation.h"
 
 CComponentRagdoll* CComponentRagdoll::AddToEntity(CGameEntity *_pEntity, const string& _szSkeletonFile, int _iCollisionGroup)
 {
@@ -40,7 +39,7 @@ bool CComponentRagdoll::Init(CGameEntity* _pEntity, const string& _szSkeletonFil
 
   m_pRagdoll = new CPhysxSkeleton(false);
   CalModel* l_pCalModel = m_pRAIM->GetAnimatedInstanceModel()->GetAnimatedCalModel();
-  bool l_bOk = m_pRagdoll->Init(_szSkeletonFile,l_pCalModel,l_mat44/*m_pRAIM->GetMat44()*/,_iCollisionGroup/*ECG_OBJECTES_DINAMICS*/, _pEntity);
+  bool l_bOk = m_pRagdoll->Init(_szSkeletonFile,l_pCalModel,l_mat44,_iCollisionGroup, _pEntity);
 
   SetOk(l_bOk);
   return IsOk();
@@ -51,34 +50,50 @@ void CComponentRagdoll::Release()
   CHECKED_DELETE(m_pRagdoll);
 }
 
-
-void CComponentRagdoll::SetActive(bool _bActive)
+void CComponentRagdoll::ApplyPhysics(bool _bValue)
 {
-  if(m_bActive != _bActive)
+  CComponentAnimation* l_pAnimation = GetEntity()->GetComponent<CComponentAnimation>();
+
+  if(_bValue)
   {
-    m_bActive = _bActive;
+    if(l_pAnimation)
+      l_pAnimation->SetActive(false);
 
-    CComponentRenderableObject* l_pCRO = GetEntity()->GetComponent<CComponentRenderableObject>();
-    if(m_bActive)
-    {
-      l_pCRO->m_bActive = false;
-      m_pRagdoll->SetRagdollActive(true);
-    }
-    else
-    {
-      CComponentObject3D* l_pO3d = GetEntity()->GetComponent<CComponentObject3D>();
-      Mat44f l_matTransform;
+    m_pRagdoll->SetRagdollActive(true);
 
-      l_matTransform.SetIdentity();
+  }else{
 
-      l_matTransform.SetPos(l_pO3d->GetPosition());
+    CComponentObject3D* l_pO3d = GetEntity()->GetComponent<CComponentObject3D>();
+    Mat44f l_matTransform;
 
-      m_pRAIM->SetMat44(l_matTransform);
-      
-      l_pCRO->m_bActive = true;
-      m_pRagdoll->SetRagdollActive(false);
-    }
+    l_matTransform.SetIdentity();
+
+    l_matTransform.SetPos(l_pO3d->GetPosition());
+
+    m_pRAIM->SetMat44(l_matTransform);
+
+    m_pRagdoll->SetRagdollActive(false);
+
+    if(l_pAnimation)
+      l_pAnimation->SetActive(true);
   }
+}
+
+void CComponentRagdoll::Enable()
+{
+  m_pRagdoll->SetCollisions(true);
+  m_pRagdoll->SetTransformAfterUpdate(m_pRAIM->GetMat44());
+}
+
+void CComponentRagdoll::Disable()
+{
+  m_pRagdoll->SetCollisions(false);
+  m_pRagdoll->SetRagdollActive(false);
+
+  Mat44f l_matTransform = m_pRagdoll->GetTransform();
+  l_matTransform.Translate(l_matTransform.GetPos() - Vect3f(0.0f,1000.0f,0.0f));
+
+  m_pRagdoll->SetTransformAfterUpdate(l_matTransform);
 }
 
 CPhysxBone* CComponentRagdoll::GetBone(const string& _szBoneName)
@@ -99,7 +114,7 @@ Vect3f CComponentRagdoll::GetPosition()
 
 void CComponentRagdoll::UpdatePrePhysX(float _fDeltaTime)
 {
-  if(!m_bActive)
+  if(!m_pRagdoll->IsRagdollActive())
   {
     CComponentMovement* l_pMovement = GetEntity()->GetComponent<CComponentMovement>();
     CComponentObject3D* l_pObject3D = GetEntity()->GetComponent<CComponentObject3D>();
@@ -120,7 +135,7 @@ void CComponentRagdoll::UpdatePrePhysX(float _fDeltaTime)
 
 void CComponentRagdoll::PostUpdate(float _fDeltaTime)
 {
-  if(m_bActive)
+  if(m_pRagdoll->IsRagdollActive())
   {
     m_pRagdoll->Update();
 
@@ -134,22 +149,7 @@ void CComponentRagdoll::PostUpdate(float _fDeltaTime)
     m_pRAIM->GetBoundingSphere()->Init(l_BB.GetMiddlePoint() - m.GetTranslationVector(), l_BS.GetRadius());
 
   }else{
-   
-    Mat44f l_matTransform;
-    m_pRAIM->GetMat44(l_matTransform);
-
-    m_pRagdoll->SetTransformAfterUpdate(l_matTransform);
+    m_pRagdoll->SetTransformAfterUpdate(m_pRAIM->GetMat44());
   }
   
-}
-
-void CComponentRagdoll::ReceiveEvent(const SEvent& _Event)
-{
-  if(_Event.Msg == SEvent::REBRE_IMPACTE)
-  {
-    assert(_Event.Info[3].Type == SEventInfo::VECTOR);
-    Vect3f l_vPos(_Event.Info[3].v.x, _Event.Info[3].v.y, _Event.Info[3].v.z);
-    
-    ENTITY_MANAGER->InitParticles("impacte ragdoll", l_vPos, Vect3f(.5f,.5f,.5f), 5.f);
-  }
 }

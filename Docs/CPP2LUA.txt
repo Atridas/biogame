@@ -231,6 +231,9 @@ ENGINE
         
         set_visible
         void SetVisible(bool _bVisible)
+        
+        set_active
+        void SetActive(bool _bActive)
   
     Class:
       BaseControl
@@ -943,9 +946,6 @@ ENTITIES
       remove_renderable_object
       CComponentRenderableObject::m_bRemoveRenderableObject
       
-      active
-      CComponentRenderableObject::m_bActive
-      
       block_yaw
       CComponentRenderableObject::m_bBlockYaw
       
@@ -1000,9 +1000,6 @@ ENTITIES
       
       get_state_machine
       CScriptedStateMachine* GetStateMachine()
-      
-      set_active
-      void SetActive(bool _bActive)
       
   Class:
     ComponentIABrain
@@ -1073,8 +1070,6 @@ ENTITIES
       void AddHoT(float _fHealPerSecond, float _fHoTTime)
       
     Attributes:
-      immortal
-      CComponentVida::m_bImmortal
       
   Class:
     ComponentShield
@@ -1119,8 +1114,8 @@ ENTITIES
       add_to_entity
       static CComponentRagdoll* AddToEntity(CGameEntity* _pEntity, const string& _szSkeletonFile, int _iCollisionGroup)
       
-      set_active
-      void SetActive(bool _bActive)
+      apply_physics
+      void ApplyPhysics(bool _bActive)
       
       get_position
       Vect3f GetPosition()
@@ -1130,8 +1125,7 @@ ENTITIES
     CComponentMirilla
     
     Methods:
-      set_active
-      void SetActive(bool _bActive)
+
   
   Class:
     ComponentCover
