@@ -14,7 +14,8 @@ bool CEmiterInstance::Init(const string& _szCoreName, const CObject3D& _Position
   SetMat44( _Position.GetMat44() );
 
   m_szCoreName  = _szCoreName;
-  m_vMaxVolume  = _vVolume * .5f;
+  m_vVolume     = _vVolume;
+  m_vMaxVolume  = m_vVolume * .5f;
   m_vMinVolume  = -m_vMaxVolume;
   m_fVolume     = _vVolume.x * _vVolume.y * _vVolume.z;
   m_pEmiterCore = CORE->GetEmiterCoreManager()->GetEmiterCore(m_szCoreName);
@@ -49,7 +50,21 @@ bool CEmiterInstance::Init(const string& _szCoreName, const CObject3D& _Position
     {
       CEmiterInstance *l_pChild = new CEmiterInstance();
       Vect3f l_vChildBox = l_it->volume.GetScaled(_vVolume);
-      bool l_bIsOk = l_pChild->Init(l_it->emiter, l_it->movement, l_vChildBox);
+      //Mat44f l_mChildTransform = Mat44f(_vVolume.x, 0, 0, 0,
+      //                                  0, _vVolume.y, 0, 0,
+      //                                  0, 0, _vVolume.z, 0,
+      //                                  0, 0, 0,          1)
+      //                           * l_it->movement.GetMat44();
+      //CObject3D l_O3D;
+      //l_O3D.SetMat44(l_mChildTransform);
+      Mat44f l_mChildTransform = l_it->movement.GetMat44();
+      Vect3f l_vChildTranslation = l_mChildTransform.GetTranslationVector();
+      l_vChildTranslation.Scale(_vVolume);
+      l_mChildTransform.Translate(l_vChildTranslation);
+      CObject3D l_O3D;
+      l_O3D.SetMat44(l_mChildTransform);
+
+      bool l_bIsOk = l_pChild->Init(l_it->emiter, l_O3D, l_vChildBox);
       if(l_bIsOk)
       {
         m_ChildEmiters.push_back(l_pChild);
@@ -272,12 +287,24 @@ void CEmiterInstance::DebugRender(CRenderManager* _pRM, const Mat44f& _mTransfor
   }
 
   _pRM->SetTransform(l_mTransform);
-
-  if(m_bActive)
-    _pRM->DrawCube(m_vMaxVolume - m_vMinVolume, colGREEN);
+  if(m_bIsSimple)
+  {
+    if(m_bActive)
+      _pRM->DrawCube(m_vMaxVolume - m_vMinVolume, colGREEN);
+    else
+      _pRM->DrawCube(m_vMaxVolume - m_vMinVolume, colRED);
+  }
   else
-    _pRM->DrawCube(m_vMaxVolume - m_vMinVolume, colRED);
-  
+  {
+    vector<CEmiterInstance*>::iterator l_it  = m_ChildEmiters.begin();
+    vector<CEmiterInstance*>::iterator l_end = m_ChildEmiters.end();
+
+    for(; l_it != l_end; ++l_it)
+    {
+      (*l_it)->DebugRender(_pRM, l_mTransform,_bDebugRenderBoundings);
+    }
+  }
+
   //_pRM->DrawCube  (GetBoundingBox   ()->GetMiddlePoint(), GetBoundingBox   ()->GetDimension(), colMAGENTA);
   if(_bDebugRenderBoundings)
     _pRM->DrawSphere(GetBoundingSphere()->GetMiddlePoint(), GetBoundingSphere()->GetRadius   (), colMAGENTA, 10);
