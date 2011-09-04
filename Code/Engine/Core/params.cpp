@@ -480,7 +480,7 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
     //Core Emiter Manager -----------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------------------------------------------------------
     {
-      CXMLTreeNode l_TreeCoreEmiterManager = l_TreeConfig["CoreEmiterlManager"];
+      CXMLTreeNode l_TreeCoreEmiterManager = l_TreeConfig["EmiterCorelManager"];
       if(l_TreeCoreEmiterManager.Exists())
       {
         int l_iNumChildren = l_TreeCoreEmiterManager.GetNumChildren();
@@ -491,7 +491,7 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
 
           if(strcmp("Core", l_TreeChild.GetName()) == 0)
           {
-            string l_szFile = l_TreeChild.GetPszProperty("file","Data/XML/CoreEmiters.xml");
+            string l_szFile = l_TreeChild.GetPszProperty("file","Data/XML/Emiters.xml");
 
             if(InitParams_.CoreEmiterManagerParams.sFiles.find(l_szFile) == InitParams_.CoreEmiterManagerParams.sFiles.end())
             {

@@ -30,7 +30,7 @@ public:
   const set<string>     & GetChildNames() const { return m_ChildNames; };
       
   virtual bool IsSimpleEmiter() { return false; };
-  virtual bool IsAggregateEmiter() { return false; };
+  virtual bool IsAggregateEmiter() { return true; };
 
 protected:
   virtual void Release() {m_Childs.clear();m_ChildNames.clear();};

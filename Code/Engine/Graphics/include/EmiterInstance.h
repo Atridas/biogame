@@ -39,9 +39,9 @@ public:
   bool Reset( const string& _szCoreName, const CObject3D& _Position, const Vect3f& _vVolume )
     { Release(); SetOk(false); return Init(_szCoreName, _Position, _vVolume); };
   bool Reset( const string& _szCoreName )
-    { Release(); SetOk(false); return Init(_szCoreName, *this, m_vMaxVolume - m_vMinVolume); };
+    { Release(); SetOk(false); return Init(_szCoreName, *this, m_vVolume); };
   bool Reset()
-    { Release(); SetOk(false); return Init(m_szCoreName, *this, m_vMaxVolume - m_vMinVolume); };
+    { Release(); SetOk(false); return Init(m_szCoreName, *this, m_vVolume); };
 
   void ChangePos(const CObject3D& _Position)
     {SetMat44(_Position.GetMat44());};
@@ -70,6 +70,7 @@ private:
   CObject3D*   m_pObjectReference;
   CEmiterCore* m_pEmiterCore;
   string       m_szCoreName;
+  Vect3f       m_vVolume;
   Vect3f       m_vMinVolume, m_vMaxVolume;
   float        m_fVolume;
 

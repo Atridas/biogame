@@ -500,4 +500,14 @@
       <Color   control_time1="1.8"       control_time2="2.2"        color1="0.0 0.0 0.0 1.0"         color2="0.0 1.0 0.0 1.0"/>
     </Colors>
   </SimpleEmiter>
+  
+  <AggregateEmiter id="test tot 2">
+    <Emiter id="test tot" position="0.25 0.0 0.0"  volume="0.5 1.0 1.0" />
+    <Emiter id="bubble"   position="-0.25 0.0 0.0" volume="0.5 1.0 1.0" />
+  </AggregateEmiter>
+  
+  <AggregateEmiter id="test tot 3">
+    <Emiter id="fum_proveta" position="0.0  0.25 0.0" volume="1.0 0.5 1.0" />
+    <Emiter id="test tot 2"  position="0.0 -0.25 0.0" volume="1.0 0.5 1.0" />
+  </AggregateEmiter>
 </CoreEmiters>
