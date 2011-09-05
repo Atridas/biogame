@@ -61,6 +61,7 @@ public:
 
   CXMLTreeNode 				operator[]         	(const char* _pszKey) const;
   CXMLTreeNode 				operator()         	(int _iIndex) const;
+  CXMLTreeNode 				GetChild         	  (const char* _pszKey) const;
 
 	bool								IsComment						() const;
 

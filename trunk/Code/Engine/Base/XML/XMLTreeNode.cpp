@@ -130,19 +130,35 @@ const char* CXMLTreeNode::GetName ()
 }
 
 //----------------------------------------------------------------------------
+// Returns a tree node's child
+//----------------------------------------------------------------------------
+CXMLTreeNode CXMLTreeNode::GetChild(const char* _pszKey) const
+{
+  int l_iNumChildren = GetNumChildren();
+  for(int i = 0; i < l_iNumChildren; ++i)
+  {
+    if(strcmp(_pszKey, (*this)(i).GetName()) == 0)
+    {
+      return (*this)(i);
+    }
+  }
+  return CXMLTreeNode();
+}
+
+//----------------------------------------------------------------------------
 // Operator that returns a tree node
 //----------------------------------------------------------------------------
 CXMLTreeNode CXMLTreeNode::operator[] (const char* _pszKey) const
 {
   assert(_pszKey && m_pNode);
-
+  
   CXMLTreeNode TreeFound;
-
+  
   if (_pszKey && m_pNode)
   {
     TreeFound = GetSubTree(_pszKey);
   }
-
+  
   return TreeFound;
 }
 

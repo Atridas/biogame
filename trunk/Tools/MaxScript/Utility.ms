@@ -1049,6 +1049,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		(			
 			l_params = XMLEntityPlayer l_player &l_TagName
 			format "\n  %" (InlineTagParamXML l_TagName l_params) to:l_file
+			format "\tPlayer\n"
 		)
 		
 		local l_enemies = GetEnemiesEntities _entities
@@ -1058,6 +1059,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			(
 				l_params = XMLEntityEnemy l_enemies[i] &l_TagName
 				format "\n  %" (InlineTagParamXML l_TagName l_params) to:l_file
+				format "\tEnemic %\n" l_enemies[i].name
 			)
 		)
 		
