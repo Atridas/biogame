@@ -77,8 +77,8 @@ bool CSimpleEmiterCore::Init(CXMLTreeNode& _xmlEmiter)
                                       l_Color1.GetRed(), l_Color1.GetGreen(), l_Color1.GetBlue(), l_Color1.GetAlpha(), 
                                       l_Color2.GetRed(), l_Color2.GetGreen(), l_Color2.GetBlue(), l_Color2.GetAlpha());
   {
-    //CXMLTreeNode l_xmlColors = _xmlEmiter["Colors"];
-    CXMLTreeNode l_xmlColors;
+    CXMLTreeNode l_xmlColors = _xmlEmiter.GetChild("Colors");
+    /*CXMLTreeNode l_xmlColors;
     int l_iNumChildren = _xmlEmiter.GetNumChildren();
     for(int i = 0; i < l_iNumChildren; ++i)
     {
@@ -87,7 +87,9 @@ bool CSimpleEmiterCore::Init(CXMLTreeNode& _xmlEmiter)
         l_xmlColors = _xmlEmiter(i);
         break;
       }
-    }
+    }*/
+
+
 
     if(l_xmlColors.Exists())
     {

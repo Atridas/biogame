@@ -69,11 +69,13 @@ void CLanguageManager::LoadXML (const std::string& pathFile)
 
 	LOGGER->AddNewLog(ELL_INFORMATION, "LanguageManager::LoadXML-> Parseando fichero de lenguaje: %s", pathFile.c_str());
 	
+  std::string id_language = "";
+  TLanguage language;
+
 	CXMLTreeNode  m = parser["Language"];
-	std::string id_language	= m.GetPszProperty("id");
-	TLanguage language;
 	if (m.Exists())
 	{
+    id_language	= m.GetPszProperty("id");
 		int count = m.GetNumChildren();
     for (int i = 0; i < count; ++i)
     {
