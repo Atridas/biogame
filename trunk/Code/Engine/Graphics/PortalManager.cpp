@@ -306,11 +306,14 @@ void RenderPortals(
           const CFrustum& _Frustum,
           set<CPortal*> _PrevPortals,
           CRoom::TBlendQueue& _BlendQueue,
+          CRoom::TBlendQueue& _EmiterQueue,
           bool _bDebug)
 {
   if(!_bDebug)
   {
-    _pRoom->Render(_pRM,_Frustum,_BlendQueue);
+    _pRoom->Render(_pRM,_Frustum,_BlendQueue,_EmiterQueue);
+    _pRoom->SetRendered(true);  //la marquem com a renderitzada
+    _pRoom->SetNeightbour(true); 
   }
   const vector<CPortal*>& l_Portals = _pRoom->GetPortals();
     
@@ -366,7 +369,11 @@ void RenderPortals(
           _pRM->DrawFrustum(&l_Frustum, colYELLOW);
         }
 
-        RenderPortals(l_it->r,_pRM,_vCamera,l_Frustum,_PrevPortals,_BlendQueue,_bDebug);
+        RenderPortals(l_it->r,_pRM,_vCamera,l_Frustum,_PrevPortals,_BlendQueue,_EmiterQueue,_bDebug);
+      }
+      else
+      {
+        l_it->r->SetNeightbour(true);//si no es renderitza, diem que es habitacio veina.
       }
     }
   }
@@ -397,6 +404,14 @@ void CPortalManager::Update(float _fDT)
 
 void CPortalManager::Render(CRenderManager* _pRM, bool _bDebug)
 {
+  { // 0 resetejem l'estat de les habitacions
+    map<string,CRoom>::iterator l_end = m_Rooms.end();
+    for(map<string,CRoom>::iterator l_it = m_Rooms.begin(); l_it != l_end; ++l_it)
+    {
+      l_it->second.SetRendered  (false);
+      l_it->second.SetNeightbour(false);
+    }
+  }
   // 1 busquem en quina habitació està la camera.
 
   CCamera *l_pCamera = _pRM->GetCamera();
@@ -435,9 +450,10 @@ void CPortalManager::Render(CRenderManager* _pRM, bool _bDebug)
   CFrustum l_Frustum = _pRM->GetFrustum();
 
   Vect3f   l_vEye    = (l_pCamera)? l_pCamera->GetEye() : Vect3f(0,0,-1);
-  CRenderableObjectOrdering l_Ordering(l_vEye);
-
+  CObject3DOrdering l_Ordering(l_vEye);
+  
   CRoom::TBlendQueue l_BlendQueue(l_Ordering);
+  CRoom::TBlendQueue l_EmiterQueue(l_Ordering);
   CORE->GetEffectManager()->ActivateDefaultRendering();
 
   if(!l_pCameraRoom)
@@ -445,25 +461,54 @@ void CPortalManager::Render(CRenderManager* _pRM, bool _bDebug)
     map<string,CRoom>::iterator l_end = m_Rooms.end();
     for(l_it = m_Rooms.begin(); l_it != l_end; ++l_it)
     {
-      l_it->second.Render(_pRM,l_Frustum,l_BlendQueue);
+      l_it->second.Render(_pRM,l_Frustum,l_BlendQueue,l_EmiterQueue);
+      l_it->second.SetRendered(true);
+      l_it->second.SetNeightbour(true);
     }
   }
   else
   {
     set<CPortal*> l_PrevPortals;
-    RenderPortals(l_pCameraRoom, _pRM, l_pCamera, l_Frustum, l_PrevPortals, l_BlendQueue,_bDebug);
+    RenderPortals(l_pCameraRoom, _pRM, l_pCamera, l_Frustum, l_PrevPortals, l_BlendQueue,l_EmiterQueue,_bDebug);
   }
 
-  m_UnlocatedROs.Render(_pRM,l_Frustum,l_BlendQueue);
+  m_UnlocatedROs.Render(_pRM,l_Frustum,l_BlendQueue,l_EmiterQueue);
+  m_UnlocatedROs.SetRendered(true);
+  m_UnlocatedROs.SetNeightbour(true);
 
   CORE->GetEffectManager()->ActivateAlphaRendering();
 
   while(!l_BlendQueue.empty())
   {
-    CRenderableObject* l_pRenderableObject = l_BlendQueue.top();
+    CRenderableObject3D* l_pRenderableObject = l_BlendQueue.top();
     l_pRenderableObject->Render(_pRM);
     l_BlendQueue.pop();
   }
+
+  // particules -------------------------------------------------------
+  LPDIRECT3DDEVICE9 l_pd3dDevice = _pRM->GetDevice();
+
+  CEffectManager* l_pEM = CORE->GetEffectManager();
+
+  assert(l_pEM && l_pEM->IsOk());
+  CEffect* l_pPrevEffect = l_pEM->GetForcedStaticMeshEffect();
+  if(!l_pPrevEffect)
+  {
+    CEffect* l_pEffect = l_pEM->GetEffect("Particle");
+    l_pEM->SetForcedStaticMeshEffect(l_pEffect);
+
+    while(!l_EmiterQueue.empty())
+    {
+      CRenderableObject3D* l_pRenderableObject = l_EmiterQueue.top();
+      l_pRenderableObject->Render(_pRM);
+      l_EmiterQueue.pop();
+    }
+    
+    l_pd3dDevice->SetStreamSourceFreq(0, 1);
+    l_pd3dDevice->SetStreamSourceFreq(1, 1);
+    l_pEM->SetForcedStaticMeshEffect(0);
+  }
+  // -------------------------------------------------------------------
 }
 
 void CPortalManager::DebugRender(CRenderManager* _pRM)
@@ -508,6 +553,32 @@ void CPortalManager::RemoveRenderableObject(CRenderableObject* _pRO)
     for(; l_itR != l_endR; ++l_itR)
     {
       if(l_itR->second.RemoveRendeableObject(_pRO))
+      {
+        return;//es trobava en aquesta habitació, no cal que continuem...
+      }
+    }
+  }
+}
+
+void CPortalManager::InsertEmiter(CEmiterInstance* _pEmiter)
+{
+  m_UnlocatedROs.AddEmiter( _pEmiter );
+}
+
+void CPortalManager::RemoveEmiter(CEmiterInstance* _pEmiter)
+{
+  if(m_UnlocatedROs.RemoveEmiter(_pEmiter))
+  {
+    return;
+  }
+  else
+  {
+    map<string,CRoom>::iterator l_itR  = m_Rooms.begin();
+    map<string,CRoom>::iterator l_endR = m_Rooms.end();
+
+    for(; l_itR != l_endR; ++l_itR)
+    {
+      if(l_itR->second.RemoveEmiter(_pEmiter))
       {
         return;//es trobava en aquesta habitació, no cal que continuem...
       }

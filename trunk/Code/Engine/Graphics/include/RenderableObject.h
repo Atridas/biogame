@@ -12,7 +12,7 @@ class CRenderManager;
 
 
 class CRenderableObject : 
-  public CObject3D,
+  public CRenderableObject3D,
   public CNamed,
   public CBaseControl
 {
@@ -20,7 +20,7 @@ public:
   CRenderableObject(const string& _szName):CNamed(_szName) {};
   virtual void Update(float _fElapsedTime) {};
   virtual void InitFromXML(CXMLTreeNode& l_XMLObject) {};
-  void Render(CRenderManager *_pRM);
+  virtual void Render(CRenderManager *_pRM);
 
   virtual bool IsAlphaBlended() const = 0;
 

@@ -13,11 +13,12 @@
 // ----------------------------
 class CEmiterCore;
 class CRenderManager;
+class CRoom;
 // ----------------------------
 
 class CEmiterInstance:
    public CBaseControl,
-   public CObject3D
+   public CRenderableObject3D
 {
 public:
   CEmiterInstance():
@@ -29,6 +30,7 @@ public:
       m_vMinVolume(-.5f), m_vMaxVolume(.5f),
       m_fVolume(1),
       m_pObjectReference(0),
+      m_pInRoom(0),
       m_bAwake(true),
       m_bActive(true)
       {};
@@ -54,6 +56,7 @@ public:
   void Deactivate() { m_bActive = false; }
 
   void SetReference(CObject3D* _pObjectReference) {_pObjectReference = m_pObjectReference;};
+  void SetRoom(CRoom* _pRoom) { m_pInRoom = _pRoom; };
 
 protected:
   virtual void Release();
@@ -68,6 +71,7 @@ private:
   vector<CEmiterInstance*> m_ChildEmiters;
 
   CObject3D*   m_pObjectReference;
+  CRoom*       m_pInRoom;
   CEmiterCore* m_pEmiterCore;
   string       m_szCoreName;
   Vect3f       m_vVolume;

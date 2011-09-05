@@ -60,7 +60,6 @@ void CBiotestProcess::RenderScene(CRenderManager* _pRM)
   }
 
   CORE->GetPortalManager()->Render(_pRM);
-  CORE->GetEmiterManager()->Render(_pRM);
 
   m_pEmiter->Render(_pRM);
 }

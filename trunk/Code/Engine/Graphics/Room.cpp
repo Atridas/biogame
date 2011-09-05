@@ -4,11 +4,14 @@
 #include "Core.h"
 #include "Portal.h"
 #include "PortalManager.h"
+#include "EmiterInstance.h"
 
 
 bool CRoom::Init()
 {
   SetName("undefinded");
+  m_bRendered = 
+  m_bNeightbour = true;
   SetOk(true);
   return IsOk();
 }
@@ -109,35 +112,54 @@ bool CRoom::Init(CXMLTreeNode& _xmlRoom, set<string>& _UsedNames)
     }
   }
 
-
+  
+  m_bRendered = 
+  m_bNeightbour = true;
   SetOk(true);
   return IsOk();
 }
 
-void CRoom::Render(CRenderManager* _pRM, const CFrustum& _Frustum, TBlendQueue& _BlendQueue) const
+void CRoom::Render(CRenderManager* _pRM, const CFrustum& _Frustum, TBlendQueue& _BlendQueue, TBlendQueue& _EmiterQueue) const
 {
-  
-  set<CRenderableObject*>::const_iterator l_it  = m_RenderableObjects.cbegin();
-  set<CRenderableObject*>::const_iterator l_end = m_RenderableObjects.cend();
-
-  for(; l_it != l_end; ++l_it)
   {
-    CRenderableObject* l_pRenderableObject = *l_it;
-    if(l_pRenderableObject->GetVisible())
+    set<CRenderableObject*>::const_iterator l_it  = m_RenderableObjects.cbegin();
+    set<CRenderableObject*>::const_iterator l_end = m_RenderableObjects.cend();
+
+    for(; l_it != l_end; ++l_it)
     {
-      Vect3f l_Center = l_pRenderableObject->GetBoundingSphere()->GetMiddlePoint() + l_pRenderableObject->GetPosition();
+      CRenderableObject* l_pRenderableObject = *l_it;
+      if(l_pRenderableObject->GetVisible())
+      {
+        Vect3f l_Center = l_pRenderableObject->GetBoundingSphere()->GetMiddlePoint() + l_pRenderableObject->GetPosition();
+        D3DXVECTOR3 l_d3Center(l_Center.x,l_Center.y,l_Center.z);
+
+        if(_Frustum.SphereVisible(l_d3Center, l_pRenderableObject->GetBoundingSphere()->GetRadius()))
+        {
+          if(l_pRenderableObject->IsAlphaBlended())
+          {
+            _BlendQueue.push(l_pRenderableObject);
+          }
+          else
+          {
+            l_pRenderableObject->Render(_pRM);
+          }
+        }
+      }
+    }
+  }
+  {
+    set<CEmiterInstance*>::const_iterator l_it  = m_Emiters.cbegin();
+    set<CEmiterInstance*>::const_iterator l_end = m_Emiters.cend();
+
+    for(; l_it != l_end; ++l_it)
+    {
+      CEmiterInstance* l_pEmiter = *l_it;
+      Vect3f l_Center = l_pEmiter->GetBoundingSphere()->GetMiddlePoint() + l_pEmiter->GetPosition();
       D3DXVECTOR3 l_d3Center(l_Center.x,l_Center.y,l_Center.z);
 
-      if(_Frustum.SphereVisible(l_d3Center, l_pRenderableObject->GetBoundingSphere()->GetRadius()))
+      if(_Frustum.SphereVisible(l_d3Center, l_pEmiter->GetBoundingSphere()->GetRadius()))
       {
-        if(l_pRenderableObject->IsAlphaBlended())
-        {
-          _BlendQueue.push(l_pRenderableObject);
-        }
-        else
-        {
-          l_pRenderableObject->Render(_pRM);
-        }
+        _EmiterQueue.push(l_pEmiter);
       }
     }
   }
@@ -145,61 +167,124 @@ void CRoom::Render(CRenderManager* _pRM, const CFrustum& _Frustum, TBlendQueue& 
 
 void CRoom::Update(CPortalManager* _pPM)
 {
-  set<CRenderableObject*> l_Remove;
   {
-    set<CRenderableObject*>::const_iterator l_it  = m_RenderableObjects.cbegin();
-    set<CRenderableObject*>::const_iterator l_end = m_RenderableObjects.cend();
-    for(; l_it != l_end; ++l_it)
+    set<CRenderableObject*> l_Remove;
     {
-      CRenderableObject* l_pRenderableObject = *l_it;
-
-      if(m_Boundings.size() != 0)
+      set<CRenderableObject*>::const_iterator l_it  = m_RenderableObjects.cbegin();
+      set<CRenderableObject*>::const_iterator l_end = m_RenderableObjects.cend();
+      for(; l_it != l_end; ++l_it)
       {
-        //som en una habitació
-        if(!IsObject3DSphereInRoom(l_pRenderableObject))
-        {
-          l_Remove.insert(l_pRenderableObject);
+        CRenderableObject* l_pRenderableObject = *l_it;
 
-          vector<CPortal*>::const_iterator l_it = m_Portals.cbegin();
-          vector<CPortal*>::const_iterator l_end = m_Portals.cend();
+        if(m_Boundings.size() != 0)
+        {
+          //som en una habitació
+          if(!IsObject3DSphereInRoom(l_pRenderableObject))
+          {
+            l_Remove.insert(l_pRenderableObject);
+
+            vector<CPortal*>::const_iterator l_it = m_Portals.cbegin();
+            vector<CPortal*>::const_iterator l_end = m_Portals.cend();
+            for(; l_it != l_end; ++l_it)
+            {
+              CPortal* l_pPortal = *l_it;
+              CRoom*   l_pOtherRoom = (l_pPortal->GetRoomA() == this) ? l_pPortal->GetRoomB() : l_pPortal->GetRoomA();
+              if(l_pOtherRoom->IsObject3DSphereInRoom(l_pRenderableObject))
+              {
+                l_pOtherRoom->AddRendeableObject(l_pRenderableObject);
+                break;
+              }
+            }
+            if(l_it == l_end)
+              _pPM->InsertRenderableObject(l_pRenderableObject);
+          }
+        }
+        else
+        {
+          //Som a undefined
+          set<string>::const_iterator l_it  = _pPM->GetRoomNames().cbegin();
+          set<string>::const_iterator l_end = _pPM->GetRoomNames().cend();
           for(; l_it != l_end; ++l_it)
           {
-            CPortal* l_pPortal = *l_it;
-            CRoom*   l_pOtherRoom = (l_pPortal->GetRoomA() == this) ? l_pPortal->GetRoomB() : l_pPortal->GetRoomA();
+            CRoom* l_pOtherRoom = _pPM->GetRoom(*l_it);
             if(l_pOtherRoom->IsObject3DSphereInRoom(l_pRenderableObject))
             {
               l_pOtherRoom->AddRendeableObject(l_pRenderableObject);
-              goto FI_BUCLE_RENDERABLE_OBJECTS; //Moriu tots
+              l_Remove.insert(l_pRenderableObject);
+              break;
             }
           }
-          _pPM->InsertRenderableObject(l_pRenderableObject);
         }
       }
-      else
+    }
+    {
+      set<CRenderableObject*>::iterator l_it  = l_Remove.begin();
+      set<CRenderableObject*>::iterator l_end = l_Remove.end();
+      for(; l_it != l_end; ++l_it)
       {
-        //Som a undefined
-        set<string>::const_iterator l_it  = _pPM->GetRoomNames().cbegin();
-        set<string>::const_iterator l_end = _pPM->GetRoomNames().cend();
-        for(; l_it != l_end; ++l_it)
+        m_RenderableObjects.erase(*l_it);
+      }
+    }
+  }
+
+
+  {
+    set<CEmiterInstance*> l_Remove;
+    {
+      set<CEmiterInstance*>::const_iterator l_it  = m_Emiters.cbegin();
+      set<CEmiterInstance*>::const_iterator l_end = m_Emiters.cend();
+      for(; l_it != l_end; ++l_it)
+      {
+        CEmiterInstance* l_pEmiter = *l_it;
+
+        if(m_Boundings.size() != 0)
         {
-          CRoom* l_pOtherRoom = _pPM->GetRoom(*l_it);
-          if(l_pOtherRoom->IsObject3DSphereInRoom(l_pRenderableObject))
+          //som en una habitació
+          if(!IsObject3DSphereInRoom(l_pEmiter))
           {
-            l_pOtherRoom->AddRendeableObject(l_pRenderableObject);
-            l_Remove.insert(l_pRenderableObject);
-            goto FI_BUCLE_RENDERABLE_OBJECTS; //Moriu tots
+            l_Remove.insert(l_pEmiter);
+
+            vector<CPortal*>::const_iterator l_it  = m_Portals.cbegin();
+            vector<CPortal*>::const_iterator l_end = m_Portals.cend();
+            for(; l_it != l_end; ++l_it)
+            {
+              CPortal* l_pPortal = *l_it;
+              CRoom*   l_pOtherRoom = (l_pPortal->GetRoomA() == this) ? l_pPortal->GetRoomB() : l_pPortal->GetRoomA();
+              if(l_pOtherRoom->IsObject3DSphereInRoom(l_pEmiter))
+              {
+                l_pOtherRoom->AddEmiter(l_pEmiter);
+                break;
+              }
+            }
+            if(l_it == l_end)
+              _pPM->InsertEmiter(l_pEmiter);
+          }
+        }
+        else
+        {
+          //Som a undefined
+          set<string>::const_iterator l_it  = _pPM->GetRoomNames().cbegin();
+          set<string>::const_iterator l_end = _pPM->GetRoomNames().cend();
+          for(; l_it != l_end; ++l_it)
+          {
+            CRoom* l_pOtherRoom = _pPM->GetRoom(*l_it);
+            if(l_pOtherRoom->IsObject3DSphereInRoom(l_pEmiter))
+            {
+              l_pOtherRoom->AddEmiter(l_pEmiter);
+              l_Remove.insert(l_pEmiter);
+              break;
+            }
           }
         }
       }
-      FI_BUCLE_RENDERABLE_OBJECTS:;
     }
-  }
-  {
-    set<CRenderableObject*>::iterator l_it  = l_Remove.begin();
-    set<CRenderableObject*>::iterator l_end = l_Remove.end();
-    for(; l_it != l_end; ++l_it)
     {
-      m_RenderableObjects.erase(*l_it);
+      set<CEmiterInstance*>::iterator l_it  = l_Remove.begin();
+      set<CEmiterInstance*>::iterator l_end = l_Remove.end();
+      for(; l_it != l_end; ++l_it)
+      {
+        m_Emiters.erase(*l_it);
+      }
     }
   }
 }
@@ -215,6 +300,26 @@ bool CRoom::RemoveRendeableObject(CRenderableObject* _pRO)
   if(l_it != m_RenderableObjects.end())
   {
     m_RenderableObjects.erase(l_it);
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+void CRoom::AddEmiter(CEmiterInstance* _pEmiter)
+{
+  _pEmiter->SetRoom(this);
+  m_Emiters.insert(_pEmiter);
+}
+
+bool CRoom::RemoveEmiter(CEmiterInstance* _pEmiter)
+{
+  set<CEmiterInstance*>::iterator l_it = m_Emiters.find(_pEmiter);
+  if(l_it != m_Emiters.end())
+  {
+    m_Emiters.erase(l_it);
     return true;
   }
   else

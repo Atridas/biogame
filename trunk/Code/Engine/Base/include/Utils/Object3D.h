@@ -67,4 +67,26 @@ protected:
   CBoundingSphere m_BoundingSphere;
 };
 
+class CRenderableObject3D: public IRenderable, public CObject3D {};
+
+class CObject3DOrdering
+{
+  Vect3f m_vCameraPos;
+public:
+  CObject3DOrdering(const Vect3f& _vCameraPos):m_vCameraPos(_vCameraPos)
+    {;}
+  CObject3DOrdering(const CObject3DOrdering& _other):m_vCameraPos(_other.m_vCameraPos)
+    {;}
+  bool operator() (const CObject3D* lhs, const CObject3D* rhs) const
+  {
+    Vect3f l_LeftDist  = lhs->GetPosition() - m_vCameraPos;
+    Vect3f l_RightDist = rhs->GetPosition() - m_vCameraPos;
+    
+    float l_fLeftDistSQ  = l_LeftDist  * l_LeftDist;
+    float l_fRightDistSQ = l_RightDist * l_RightDist;
+
+    return l_fLeftDistSQ < l_fRightDistSQ;
+  }
+};
+
 #endif //INC_CORE_H_

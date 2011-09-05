@@ -6,6 +6,8 @@
 #include "RenderableVertexs.h"
 #include "SimpleEmiterCore.h"
 #include "AggregateEmiterCore.h"
+#include "PortalManager.h"
+#include "Room.h"
 
 bool CEmiterInstance::Init(const string& _szCoreName, const CObject3D& _Position, const Vect3f& _vVolume )
 {
@@ -90,6 +92,8 @@ bool CEmiterInstance::Init(const string& _szCoreName, const CObject3D& _Position
   }
 
   GetBoundingSphere()->Init(*GetBoundingBox());
+  if(IsOk())
+    CORE->GetPortalManager()->InsertEmiter(this);
   return IsOk();
 }
 
@@ -98,6 +102,8 @@ void CEmiterInstance::Update(float _fDeltaTime)
   assert(IsOk());
 
   if(!m_bActive) return;
+
+  if(!m_pInRoom->GetNeightbour()) return;
   //mirem si el delta time és massa gran, per no fer actualitzacions massa a saco, les capem a un min de framerate
   if(_fDeltaTime > MAX_PARTICLE_DELTA_TIME) _fDeltaTime = MAX_PARTICLE_DELTA_TIME;
 
@@ -323,4 +329,5 @@ void CEmiterInstance::Release()
   m_ChildEmiters.clear();
 
   m_RecyclingParticles.DeleteAllElements();
+  CORE->GetPortalManager()->RemoveEmiter(this);
 }
