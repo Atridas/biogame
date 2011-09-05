@@ -54,5 +54,6 @@
   
   <!-- Raig de la IA amb l'escenari -->
   <collision group1="escenari" group2="ray ia graph"/>
+  <collision group1="cobertura" group2="ray ia graph"/>
   
 </physX>
