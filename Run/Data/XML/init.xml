@@ -16,7 +16,9 @@
   </AnimatedModelManager>
     
 	<EffectManager xml="Data/XML/Effects.xml"/>
-  <ParticleManager xml="Data/XML/Particles.xml"/>
+  <EmiterCorelManager>
+    <Core file="Data/XML/Emiters.xml"/>
+  </EmiterCorelManager>
 	<FontManager fontsXML="./Data/XML/Fonts.xml"/>
 	<Languages default="cat">
 		<Language languageXML="./Data/Language/spanish.xml"/>

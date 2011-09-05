@@ -120,4 +120,12 @@ Mat33f GetRotationFromOrientationToOrientation(
 //Entrar números, mai funcions!!!!!!!
 #define SIMPLE_INTERPOLATION(a, b, t) ((a * (1-t)) + (b * t))
 
+
+class CRenderManager;
+class IRenderable
+{
+public:
+  virtual void Render(CRenderManager *_pRM) = 0;
+};
+
 #endif

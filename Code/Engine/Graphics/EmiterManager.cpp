@@ -64,10 +64,10 @@ void CEmiterManager::Render(CRenderManager* _pRM)
   CEffectManager* l_pEM = CORE->GetEffectManager();
 
   assert(l_pEM && l_pEM->IsOk());
-  CEffect* l_pEffect = l_pEM->GetEffect("Particle");
   CEffect* l_pPrevEffect = l_pEM->GetForcedStaticMeshEffect();
   if(!l_pPrevEffect)
   {
+    CEffect* l_pEffect = l_pEM->GetEffect("Particle");
     l_pEM->SetForcedStaticMeshEffect(l_pEffect);
 
 

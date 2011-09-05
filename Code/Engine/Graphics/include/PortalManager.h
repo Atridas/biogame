@@ -10,6 +10,7 @@
 
 class CRenderManager;
 class CRenderableObject;
+class CEmiterInstance;
 
 class CPortalManager:
   public CBaseControl
@@ -28,6 +29,9 @@ public:
   
   void InsertRenderableObject(CRenderableObject* _pRO);
   void RemoveRenderableObject(CRenderableObject* _pRO);
+  
+  void InsertEmiter(CEmiterInstance* _pEmiter);
+  void RemoveEmiter(CEmiterInstance* _pEmiter);
 
   void Update(float _fDT);
   void Render(CRenderManager* _pRM) {Render(_pRM,false);};

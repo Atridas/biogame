@@ -161,7 +161,6 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
     m_pPhysicsManager->SetCollisionReport(m_pPhysicCollisionReport);
   }
   
-  //TODO
   LOAD(m_pEmiterCoreManager, "Manager de Cores d'emisors de partícules", _InitParams.CoreEmiterManagerParams.sFiles);
 
   INIT(m_pSoundManager, "Manager de Sons", _InitParams.SoundManagerParams.szFile);

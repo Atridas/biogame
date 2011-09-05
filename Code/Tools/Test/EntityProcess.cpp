@@ -123,7 +123,7 @@ void CEntityProcess::RenderScene(CRenderManager* _pRM)
   }
   
   CORE->GetPortalManager()->Render(_pRM);
-  CORE->GetEmiterManager()->Render(_pRM);
+  //CORE->GetEmiterManager()->Render(_pRM);
 
   //CORE->GetEntityManager()->DebugRender(_pRM);
 }
