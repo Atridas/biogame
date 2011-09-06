@@ -6,6 +6,7 @@
 #include "EntityDefines.h"
 
 class CGraphNode;
+class CComponentNavNode;
 
 class CComponentIABrain:
   public CBaseComponent
@@ -39,8 +40,8 @@ public:
   bool         m_bShooted;
   vector<CGraphNode*> m_PathToCobertura;
 
-protected:
-  CComponentIABrain():m_pPlayer(0),m_fTime(0),m_bShooted(false),m_iNumUpdates(0) {};
+private:
+  CComponentIABrain():m_pPlayer(0),m_fTime(0),m_bShooted(false),m_iNumUpdates(0), m_pCover(0) {};
   bool Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName);
 
   int m_iNumUpdates;
@@ -48,6 +49,8 @@ protected:
   virtual void Release() {};
 
   string m_szRagdollName;
+
+  CComponentNavNode* m_pCover;
 };
 
 #endif

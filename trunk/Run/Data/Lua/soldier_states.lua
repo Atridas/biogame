@@ -190,7 +190,10 @@ State_Soldier_Cobrint["Enter"] = function(_enemic)
   
   --temps de dispar
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
-  ia_brain.time = 0
+  ia_brain.time = Enemy_Constants["Time Btw Shoot"] * math.random()
+  if ia_brain.time < 1.5 then
+    ia_brain.time = 1.5
+  end
 end
 
 -------------------------------------------------------------------------------------------------
@@ -204,9 +207,9 @@ end
 State_Soldier_Cobrint['Update'] = function(_enemic, _dt)
 
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)  
-  ia_brain.time = ia_brain.time + _dt
+  ia_brain.time = ia_brain.time - _dt
   
-  if ia_brain.time > Enemy_Constants["Time Shooting"] then
+  if ia_brain.time <= 0 then
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Cobrint_Disparant')
     return
   end

@@ -39,6 +39,8 @@ bool CComponentIABrain::Init(CGameEntity* _pEntity, const string& _szPlayerEntit
 
   m_pPlayer = CORE->GetEntityManager()->GetEntity(_szPlayerEntityName);
 
+  m_pCover = 0;
+
   SetOk(true);
   return IsOk();
 }
@@ -251,6 +253,9 @@ void CComponentIABrain::Die()
   l_morir.Receiver = l_morir.Sender = GetEntity()->GetGUID();
       
   ENTITY_MANAGER->SendEvent(l_morir);
+
+  if(m_pCover)
+    m_pCover->m_bOcupat = false;
 }
 
 void CComponentIABrain::PlanPathToCobertura()
@@ -259,6 +264,9 @@ void CComponentIABrain::PlanPathToCobertura()
   
   if( !m_PathToCobertura.empty() )
   {
+    m_pCover = (*(--m_PathToCobertura.end()))->GetEntity()->GetComponent<CComponentNavNode>();
+    m_pCover->m_bOcupat = true;
+
     vector<CGraphNode*>::iterator first = m_PathToCobertura.begin();
     vector<CGraphNode*>::iterator last  = m_PathToCobertura.end();
 

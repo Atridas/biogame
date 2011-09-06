@@ -132,3 +132,14 @@ function salavideo_palanca(_self, _player)
       
   end
 end
+
+-------------------------------------------- HANGAR -------------------------------------------
+function hang_porta(_self, _player)
+  if _player:get_name() == "Player" then
+    activate_entity('EnemySpawner01')
+    activate_entity('EnemySpawner02')
+    activate_entity('EnemySpawner03')
+    
+    --TODO: obrir porta, finalitzar pantalla.
+  end
+end
