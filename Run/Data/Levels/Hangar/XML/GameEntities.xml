@@ -430,6 +430,7 @@
     <Object3D position="27.3683 1.22994 5.59868" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="caixa_llums" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <Interactive action="hang_porta" />
   </Entity>
   <Entity name="Caixa_llarga07">
     <Object3D position="14.7989 0.0170316 8.03433" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -548,35 +549,35 @@
   </Entity>
   <Entity name="hang_trig_enemics00">
     <Object3D position="-19.9091 1.50084 -10.3116" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Trigger shape="box" size="1.80037 3.04376 3.87849" collision_group="trigger" onEnter="hang_trig_enemics_enter" />
+    <Trigger shape="box" size="1.80037 3.04376 3.87849" collision_group="trigger" onEnter="hang_trig_enemics_enter00" />
   </Entity>
   <Entity name="hang_trig_enemics01">
     <Object3D position="-20.7976 1.50084 -4.41987" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Trigger shape="box" size="12.9427 3.04376 1.5673" collision_group="trigger" onEnter="hang_trig_enemics_enter" />
+    <Trigger shape="box" size="12.9427 3.04376 1.5673" collision_group="trigger" onEnter="hang_trig_enemics_enter01" />
   </Entity>
   <Entity name="hang_trig_enemics02">
     <Object3D position="-5.17045 1.50084 0.0405353" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Trigger shape="box" size="2.19648 3.04376 2.5026" collision_group="trigger" onEnter="hang_trig_enemics_enter" />
+    <Trigger shape="box" size="2.19648 3.04376 2.5026" collision_group="trigger" onEnter="hang_trig_enemics_enter02" />
   </Entity>
-  <Entity name="hang_trig_enemics03">
+  <Entity name="hang_trig_enemics05">
     <Object3D position="-8.07597 1.50084 6.6715" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Trigger shape="box" size="1.80037 3.04376 10.1734" collision_group="trigger" onEnter="hang_trig_enemics_enter" />
+    <Trigger shape="box" size="1.80037 3.04376 10.1734" collision_group="trigger" onEnter="hang_trig_enemics_enter05" />
   </Entity>
   <Entity name="hang_trig_enemics04">
     <Object3D position="-10.2115 1.50084 13.3515" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Trigger shape="box" size="2.29056 3.96703 2.42749" collision_group="trigger" onEnter="hang_trig_enemics_enter" />
+    <Trigger shape="box" size="2.29056 3.96703 2.42749" collision_group="trigger" onEnter="hang_trig_enemics_enter04" />
   </Entity>
-  <Entity name="hang_trig_enemics05">
+  <Entity name="hang_trig_enemics03">
     <Object3D position="-20.6587 1.50084 5.00883" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Trigger shape="box" size="7.34161 3.04376 1.83551" collision_group="trigger" onEnter="hang_trig_enemics_enter" />
+    <Trigger shape="box" size="7.34161 3.04376 1.83551" collision_group="trigger" onEnter="hang_trig_enemics_enter03" />
   </Entity>
   <Entity name="hang_trig_enemics06">
     <Object3D position="3.33765 1.50084 0.0106628" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Trigger shape="box" size="1.90317 3.04376 29.7262" collision_group="trigger" onEnter="hang_trig_enemics_enter" />
+    <Trigger shape="box" size="1.90317 3.04376 29.7262" collision_group="trigger" onEnter="hang_trig_enemics_enter06" />
   </Entity>
   <Entity name="hang_trig_enemics07">
     <Object3D position="17.9359 1.50084 0.0564675" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Trigger shape="box" size="1.80037 3.04376 29.7257" collision_group="trigger" onEnter="hang_trig_enemics_enter" />
+    <Trigger shape="box" size="1.80037 3.04376 29.7257" collision_group="trigger" onEnter="hang_trig_enemics_enter07" />
   </Entity>
   <Entity name="hang_nod_cob00">
     <Object3D position="14.086 0.701781 -6.38418" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -591,7 +592,7 @@
     <NavNode maxDistance="0" cobertura="baixa" />
   </Entity>
   <Entity name="hang_nod_cob04">
-    <Object3D position="3.76533 0.701781 5.17149" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="3.68901 0.701781 5.0849" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode maxDistance="0" cobertura="baixa" />
   </Entity>
   <Entity name="hang_nod_cob05">
@@ -846,13 +847,63 @@
     <Object3D position="23.5141 0.503855 5.24155" yaw="-26.4191" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="0.301612 0.984014 0.890813" collision_group="cobertura" cover_size="1" />
   </Entity>
-  <Player position="-24.8545 1.47647 -10.0431" yaw="0.0" />
-  <Miner name="Miner01" position="-15.4923 1.62848 -4.3154" yaw="0.0" active="false" />
-  <Miner name="Miner02" position="-16.7403 1.62848 -2.29115" yaw="0.0" active="false" />
-  <Miner name="Miner03" position="-19.1808 1.62848 2.1796" yaw="0.0" active="false" />
+  <Entity name="hang_nod14">
+    <Object3D position="0.668942 0.701781 -5.015" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod15">
+    <Object3D position="-2.09771 0.701781 -5.30331" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod16">
+    <Object3D position="-1.34702 0.701781 0.241119" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod17">
+    <Object3D position="6.05758 0.701781 11.4588" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod18">
+    <Object3D position="6.35065 0.701781 8.22631" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="EnemySpawner01">
+    <Object3D position="-4.35423 1.57162 -6.72685" yaw="0.0" pitch="0.0" roll="0.0" />
+    <EnemySpawner enemy_type="militar" spawn_time="7" total_enemy="5" active="false" />
+  </Entity>
+  <Entity name="EnemySpawner02">
+    <Object3D position="-4.42355 1.57162 6.07291" yaw="0.0" pitch="0.0" roll="0.0" />
+    <EnemySpawner enemy_type="militar" spawn_time="7" total_enemy="5" active="false" />
+  </Entity>
+  <Entity name="hang_nod19">
+    <Object3D position="-2.24718 0.701781 4.48108" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="EnemySpawner03">
+    <Object3D position="3.88171 1.57162 13.8411" yaw="0.0" pitch="0.0" roll="0.0" />
+    <EnemySpawner enemy_type="militar" spawn_time="7" total_enemy="5" active="false" />
+  </Entity>
+  <Player position="-24.8545 1.11708 -10.0431" yaw="0.0" />
+  <Miner name="Miner01" position="-17.4714 1.30798 -4.51993" yaw="0.0" active="false" />
+  <Miner name="Miner02" position="-16.7403 1.30798 -2.29115" yaw="0.0" active="false" />
+  <Miner name="Miner03" position="-19.1808 1.30798 2.1796" yaw="0.0" active="false" />
   <Miner name="Miner04" position="-20.3497 9.57111 10.4987" yaw="0.0" active="false" />
   <Miner name="Miner05" position="-16.6131 9.57111 -0.154601" yaw="0.0" active="false" />
-  <Miner name="Miner06" position="-20.1307 1.62848 8.52421" yaw="0.0" active="false" />
+  <Miner name="Miner06" position="-20.1307 1.30798 8.52421" yaw="0.0" active="false" />
   <Miner name="Miner07" position="1.28506 9.36483 -0.282342" yaw="0.0" active="false" />
   <Miner name="Miner08" position="6.71194 9.36483 -11.8793" yaw="0.0" active="false" />
+  <Militar name="Militar01" position="3.88239 1.21245 4.95428" yaw="0.0" active="false" />
+  <Militar name="Militar02" position="15.652 1.21245 9.22886" yaw="0.0" active="false" />
+  <Militar name="Militar03" position="21.2014 1.21245 12.4259" yaw="0.0" active="false" />
+  <Militar name="Militar04" position="23.8683 1.21245 11.0349" yaw="0.0" active="false" />
+  <Militar name="Militar05" position="15.5207 1.21245 0.11872" yaw="0.0" active="false" />
+  <Militar name="Militar06" position="13.9355 1.21245 -6.51465" yaw="0.0" active="false" />
+  <Militar name="Militar07" position="17.8458 1.21245 -10.2115" yaw="0.0" active="false" />
+  <Militar name="Militar08" position="15.5446 1.21245 -12.8318" yaw="0.0" active="false" />
+  <Militar name="Militar09" position="7.324 1.21245 -7.81343" yaw="0.0" active="false" />
+  <Militar name="Militar10" position="7.81691 1.21245 -1.09128" yaw="0.0" active="false" />
+  <Miner name="Miner09" position="-15.4361 1.30798 10.9142" yaw="0.0" active="false" />
+  <Militar name="Militar11" position="5.31268 1.21245 -7.4372" yaw="0.0" active="false" />
+  <Militar name="Militar12" position="5.02298 1.21245 0.497211" yaw="0.0" active="false" />
+  <Militar name="Militar13" position="1.45161 1.21245 5.06477" yaw="0.0" active="false" />
 </Entities>
