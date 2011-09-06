@@ -17,7 +17,7 @@ bool CSoundTestProcess::Init()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"CSoundTestProcess::Init");
   
-  m_pSceneEffectManager = CORE->GetSceneEffectManager();
+  //m_pSceneEffectManager = CORE->GetSceneEffectManager();
 
   g_vMeshes = CORE->GetRenderableObjectsManager()->GetMeshes();
 

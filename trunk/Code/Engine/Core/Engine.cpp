@@ -14,6 +14,7 @@
 #include <GUIManager.h>
 #include <EffectManager.h>
 #include "HDRPipeline.h"
+#include "Renderer.h"
 
 #include "params.h"
 
@@ -23,7 +24,7 @@ bool CEngine::Init(const SInitParams& _InitParams,  HWND hWnd)
 
   m_pCore = new CCore();
 
-  bool result = m_pCore->Init(hWnd, _InitParams, this);
+  bool result = m_pCore->Init(hWnd, _InitParams);
 
   if(!result)
   {
@@ -79,26 +80,9 @@ void CEngine::Update()
 
 void CEngine::Render()
 {
-	CRenderManager* l_pRM = m_pCore->GetRenderManager();
-
   if(m_pActiveProcess != NULL)
   {
-    CEffectManager* l_pEM = m_pCore->GetEffectManager();
-    l_pEM->Begin();
-
-    CColor l_ClearColor = l_pRM->GetClearColor();
-    l_pRM->SetClearColor(colBLACK);
-
-    m_pActiveProcess->PreRender(l_pRM);
-
-    l_pRM->SetClearColor(l_ClearColor);
-
-    if(m_pHDR && m_pHDR->IsActive())
-    {
-      RenderHDR(l_pRM, m_pActiveProcess);
-    } else {
-      RenderNoHDR(l_pRM, m_pActiveProcess);
-    }
+    CORE->GetRenderer()->Render(m_pActiveProcess);
   }
 }
 
@@ -173,6 +157,7 @@ void CEngine::UpdateSystems(float _fElapsedTime)
   CGUIManager* l_pGUI = m_pCore->GetGUIManager();
   if(l_pGUI)
     l_pGUI->Update(_fElapsedTime);
+
 }
 
 void CEngine::AddProcess(CProcess* _pProcess)

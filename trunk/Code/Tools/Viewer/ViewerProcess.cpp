@@ -24,7 +24,7 @@ bool CViewerProcess::Init()
 
   RENDER_MANAGER->SetClearColor(colMAGENTA);
 
-  m_pSceneEffectManager = CORE->GetSceneEffectManager();
+  //m_pSceneEffectManager = CORE->GetSceneEffectManager();
 
   m_pViewer = new CViewer();
   

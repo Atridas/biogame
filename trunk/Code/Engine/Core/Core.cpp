@@ -8,6 +8,7 @@
 #include "params.h"
 
 #include <RenderManager.h>
+#include "Renderer.h"
 #include "TextureManager.h"
 #include "StaticMeshManager.h"
 #include "AnimatedModelManager.h"
@@ -18,7 +19,7 @@
 #include <ActionManager.h>
 #include <RenderableObjectsManager.h>
 #include <LightManager.h>
-#include <SceneEffectManager.h>
+//#include <SceneEffectManager.h>
 #include <ScriptManager.h>
 #include <LogRender.h>
 #include <Console.h>
@@ -31,7 +32,7 @@
 #include <EmiterCoreManager.h>
 #include <EmiterManager.h>
 
-#include "Utils\MemLeaks.h"
+#include "Utils/MemLeaks.h"
 //#include <AnimatedModelManager.h>
 
 
@@ -86,7 +87,7 @@
   }
 
 
-bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
+bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"Core::Init");
   
@@ -102,7 +103,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pActionManager            = new CActionManager();
   m_pRenderableObjectsManager = new CRenderableObjectsManager();
   m_pLightManager             = new CLightManager();
-  m_pSceneEffectManager       = new CSceneEffectManager();
+  //m_pSceneEffectManager       = new CSceneEffectManager();
   m_pScriptManager            = new CScriptManager();
   m_pLogRender                = new CLogRender();
   m_pConsole                  = new CConsole();
@@ -116,8 +117,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   m_pPortalManager            = new CPortalManager();
   m_pIAManager                = new CIAManager();
   m_pEmiterManager            = new CEmiterManager();
-
-  m_pEngine                   = _pEngine;
+  m_pRenderer                 = new CRenderer();
 
   m_pRenderManager->Init(hWnd,_InitParams.RenderManagerParams);
 
@@ -139,7 +139,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   LOAD(m_pRenderableObjectsManager, "Manager de Renderable Objects", _InitParams.RenderableObjectsManagerParams.vXMLFiles);
   INIT(m_pPortalManager, "Portal Manager", _InitParams.PortalManagerParams.szFiles);
   LOAD(m_pLightManager, "Manager de Llums", _InitParams.LightsManagerParams.szFile);
-  LOAD(m_pSceneEffectManager, "Manager de Effectes d'Escena", _InitParams.SceneEffectParams.szFile);
+  //LOAD(m_pSceneEffectManager, "Manager de Effectes d'Escena", _InitParams.SceneEffectParams.szFile);
 
   m_pScriptManager->Initialize();
   m_pScriptManager->Load(_InitParams.ScriptManagerParams.szFile);
@@ -167,6 +167,8 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine)
   
   INIT_NO_ARGUMENTS(m_pIAManager, "Manager d'IA");
 
+  INIT(m_pRenderer,"Renderer","Data/XML/Renderer.xml");
+
   srand(_InitParams.RandomSeed);
 
   return IsOk();
@@ -178,6 +180,7 @@ void CCore::Release()
   
 
   //delete a l'inrevès de com s'ha fet l'init
+  CHECKED_DELETE(m_pRenderer);
   CHECKED_DELETE(m_pIAManager);
   CHECKED_DELETE(m_pPhysicCollisionReport);
   CHECKED_DELETE(m_pPhysicTriggerReport);
@@ -190,7 +193,7 @@ void CCore::Release()
   CHECKED_DELETE(m_pConsole);
   CHECKED_DELETE(m_pLogRender)
   CHECKED_DELETE(m_pScriptManager)
-  CHECKED_DELETE(m_pSceneEffectManager)
+  //CHECKED_DELETE(m_pSceneEffectManager)
   CHECKED_DELETE(m_pLightManager)
   CHECKED_DELETE(m_pPortalManager);
   CHECKED_DELETE(m_pRenderableObjectsManager)

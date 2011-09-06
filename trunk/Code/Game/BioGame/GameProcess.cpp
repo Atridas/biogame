@@ -51,7 +51,7 @@ bool CGameProcess::Init()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"CGameProcess::Init");
 
-  m_pSceneEffectManager = CORE->GetSceneEffectManager();
+  //m_pSceneEffectManager = CORE->GetSceneEffectManager();
   CORE->GetLightManager()->SetLightsEnabled(true);
 
   

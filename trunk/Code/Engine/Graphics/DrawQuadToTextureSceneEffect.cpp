@@ -47,14 +47,13 @@ void CDrawQuadToTextureSceneEffect::Release()
   CRenderTextureSceneEffect::Release();
 }
 
-
 //Copia de RenderToTexture i DrawQuad
 
-void CDrawQuadToTextureSceneEffect::PreRender(CRenderManager* _pRM, CProcess* _pProc)
+void CDrawQuadToTextureSceneEffect::Process(CRenderManager* _pRM)
 {
-  m_pTexture->SetAsRenderTarget();
+  //m_pTexture->SetAsRenderTarget();
 
-  _pRM->BeginRendering();
+  //_pRM->BeginRendering();
 
   //fins aqui codi render to texture
   {
@@ -88,7 +87,25 @@ void CDrawQuadToTextureSceneEffect::PreRender(CRenderManager* _pRM, CProcess* _p
   }
   //a partir d'aqui codi render to texture
 
-  _pRM->EndRendering();
+  //_pRM->EndRendering();
 
   m_pTexture->UnsetAsRenderTarget();
+}
+
+void CDrawQuadToTextureSceneEffect::PreRender(CRenderManager* _pRM, CProcess* _pProc)
+{
+  m_pTexture->SetAsRenderTarget();
+
+  _pRM->BeginRendering();
+
+  Process(_pRM);
+
+  _pRM->EndRendering();
+}
+
+void CDrawQuadToTextureSceneEffect::PostRender(CRenderManager* _pRM)
+{
+  m_pTexture->SetAsRenderTarget();
+
+  Process(_pRM);
 }

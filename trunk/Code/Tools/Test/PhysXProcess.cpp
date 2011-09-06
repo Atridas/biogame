@@ -148,7 +148,7 @@ bool CPhysXProcess::Init()
   m_pCamera = m_pObjectCamera;
 
   ((CThPSCamera*)m_pObjectCamera)->SetZoom(5.0f);
-  m_pSceneEffectManager = CORE->GetSceneEffectManager();
+  //m_pSceneEffectManager = CORE->GetSceneEffectManager();
 
   //CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
 

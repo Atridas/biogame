@@ -26,7 +26,7 @@ public:
   Vect3f GetPosition();
   Vect3f GetAimDirection();
 
-  virtual void PostUpdate(float _fDeltaTime);
+  virtual void Update(float _fDeltaTime);
 
 protected:
   CComponentArma():m_pRenderableObject(0),m_pAnimatedModel(0) {};

@@ -21,12 +21,17 @@ public:
   virtual bool Init(const CXMLTreeNode& _params);
 
   virtual void PreRender(CRenderManager* _pRM, CProcess* _pProc);
+  virtual void PostRender(CRenderManager* _pRM);
 
 protected:
   void Release();
 
   CEffect* m_pEffect;
   CColor m_Color;
+
+private:
+
+  void Process(CRenderManager* _pRM);
 };
 
 #endif

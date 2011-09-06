@@ -94,10 +94,21 @@
     <ClCompile Include="AnimatedCoreModel.cpp" />
     <ClCompile Include="AnimatedInstanceModel.cpp" />
     <ClCompile Include="AnimatedModelManager.cpp" />
+    <ClCompile Include="BackBufferRenderTarget.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="AggregateEmiterCore.cpp" />
     <ClCompile Include="EmiterCoreManager.cpp" />
+    <ClCompile Include="ForwardSceneRendererStep.cpp" />
+    <ClCompile Include="FrameBufferInputSampler.cpp" />
+    <ClCompile Include="InputSampler.cpp" />
     <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="PostSceneRendererStep.cpp" />
+    <ClCompile Include="PreSceneRendererStep.cpp" />
+    <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="RendererStep.cpp" />
+    <ClCompile Include="RenderTarget.cpp" />
+    <ClCompile Include="SceneRendererStep.cpp" />
+    <ClCompile Include="ShadowMapPreRendererStep.cpp" />
     <ClCompile Include="SimpleEmiterCore.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="DrawQuadSceneEffect.cpp" />
@@ -133,7 +144,9 @@
     <ClCompile Include="StaticMesh.cpp" />
     <ClCompile Include="StaticMeshManager.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureInputSampler.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="TextureRenderTarget.cpp" />
     <ClCompile Include="ThPSCamera.cpp" />
     <ClCompile Include="VertexStructs.cpp" />
   </ItemGroup>
@@ -143,12 +156,23 @@
     <ClInclude Include="include\AnimatedInstanceModel.h" />
     <ClInclude Include="include\AnimatedMeshEmptyMaterial.h" />
     <ClInclude Include="include\AnimatedModelManager.h" />
+    <ClInclude Include="include\BackBufferRenderTarget.h" />
     <ClInclude Include="include\BumpPropertyDecorator.h" />
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\AggregateEmiterCore.h" />
     <ClInclude Include="include\EmiterCore.h" />
     <ClInclude Include="include\EmiterCoreManager.h" />
+    <ClInclude Include="include\ForwardSceneRendererStep.h" />
+    <ClInclude Include="include\FrameBufferInputSampler.h" />
+    <ClInclude Include="include\InputSampler.h" />
     <ClInclude Include="include\Particle.h" />
+    <ClInclude Include="include\PostSceneRendererStep.h" />
+    <ClInclude Include="include\PreSceneRendererStep.h" />
+    <ClInclude Include="include\Renderer.h" />
+    <ClInclude Include="include\RendererStep.h" />
+    <ClInclude Include="include\RenderTarget.h" />
+    <ClInclude Include="include\SceneRendererStep.h" />
+    <ClInclude Include="include\ShadowMapPreRendererStep.h" />
     <ClInclude Include="include\SimpleEmiterCore.h" />
     <ClInclude Include="include\DiffuseTextureDecorator.h" />
     <ClInclude Include="include\DirectionalLight.h" />
@@ -204,7 +228,9 @@
     <ClInclude Include="include\StaticMeshManager.h" />
     <ClInclude Include="include\Texture.h" />
     <ClInclude Include="include\TextureDecorator.h" />
+    <ClInclude Include="include\TextureInputSampler.h" />
     <ClInclude Include="include\TextureManager.h" />
+    <ClInclude Include="include\TextureRenderTarget.h" />
     <ClInclude Include="include\ThPSCamera.h" />
     <ClInclude Include="include\VertexsStructs.h" />
   </ItemGroup>

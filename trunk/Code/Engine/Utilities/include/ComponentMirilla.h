@@ -7,7 +7,7 @@
 
 // -------------------------------------------------
 class CPhysxSkeleton;
-class CDrawQuadSceneEffect;
+class CPostSceneRendererStep;
 class CRenderableObject;
 // -------------------------------------------------
 
@@ -33,7 +33,7 @@ protected:
   virtual void Release();
 private:
 
-  CDrawQuadSceneEffect* m_pAim;
+  CPostSceneRendererStep* m_pAim;
 
 };
 

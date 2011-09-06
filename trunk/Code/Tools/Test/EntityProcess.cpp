@@ -37,6 +37,9 @@
 
 #include "SphereCamera.h"
 
+#include "Renderer.h"
+#include "ShadowMapPreRendererStep.h"
+
 bool CEntityProcess::Init()
 {
   //m_PortalManager.Init("./Data/Levels/NivellProves/XML/Level.xml");
@@ -44,7 +47,7 @@ bool CEntityProcess::Init()
 
   LOGGER->AddNewLog(ELL_INFORMATION,"CEntityProcess::Init");
   
-  m_pSceneEffectManager = CORE->GetSceneEffectManager();
+  //m_pSceneEffectManager = CORE->GetSceneEffectManager();
   CORE->GetLightManager()->SetLightsEnabled(true);
 
   CPhysicsManager* l_pPM = CORE->GetPhysicsManager();
@@ -80,6 +83,9 @@ bool CEntityProcess::Init()
 
   m_pSpotLight->SetActive(true);
 
+  //TODO
+  //CShadowMapPreRendererStep* l_pShadowMapPreRenderStep = (CShadowMapPreRendererStep*)CORE->GetRenderer()->GetPreSceneRendererStep("shadow_map_renderer");
+  //l_pShadowMapPreRenderStep->SetShadowMapLightCast(m_pSpotLight);
 
   CORE->GetIAManager()->CompleteGraph();
 
