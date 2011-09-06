@@ -240,7 +240,7 @@ CTexture::TFormatType CTexture::GetFormatTypeFromString(const string &FormatType
   else if(FormatType=="X8R8G8B8")
     return CTexture::X8R8G8B8;
   else
-    //LOG("Format Type '%s' not recognized", FormatType.c_str());
+    LOGGER->AddNewLog(ELL_WARNING,"CTexture::GetFormatTypeFromString Format Type '%s' not recognized", FormatType.c_str());
 
   return CTexture::A8R8G8B8;
 }

@@ -18,7 +18,7 @@ Player_Constants["Morir"] = 'dead'
 Player_Constants["Escut"] = 'protection'
 --temps animacions
 Player_Constants["Temps Tocat"] = 0.3
-Player_Constants["Temps Morint"] = 2.0
+Player_Constants["Temps Morint"] = 0.0
 --sons
 Player_Constants["So rebre impacte"] = 'impacte'
 Player_Constants["So disparar"] = 'disparar'
@@ -200,9 +200,10 @@ end
 -------------------------------------------------------------------------------------------------
 State_Player_Neutre['Receive'] = function(_jugador, _event)
 
-  if _event.msg == Event.rebre_impacte then
-    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Tocat')
-  elseif _event.msg == Event.morir then
+  --if _event.msg == Event.rebre_impacte then
+    --_jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Tocat')
+  --else
+  if _event.msg == Event.morir then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Morint')
   end
   
@@ -332,9 +333,10 @@ end
 -------------------------------------------------------------------------------------------------
 State_Player_Apuntar['Receive'] = function(_jugador, _event)
 
-  if _event.msg == Event.rebre_impacte then
-    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Tocat')
-  elseif _event.msg == Event.morir then
+  --if _event.msg == Event.rebre_impacte then
+    --_jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Tocat')
+  --else
+  if _event.msg == Event.morir then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Morint')
   end
   
@@ -562,7 +564,7 @@ State_Player_Mort['Enter'] = function(_jugador)
   --log('enter player apuntant')
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   player_controller.time = 0
-  --player_controller:die()
+  player_controller:die()
   
   --local ragdoll = _jugador:get_component(BaseComponent.ragdoll)
   --ragdoll:activate_ragdoll()
@@ -570,7 +572,7 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Mort['Exit'] = function(_jugador)
-  _jugador:get_component(BaseComponent.vida)set_active(true)
+  _jugador:get_component(BaseComponent.vida):set_active(true)
   local animation = _jugador:get_component(BaseComponent.animation)
   animation:stop(Player_Constants["Morir"])
 end
@@ -583,8 +585,8 @@ State_Player_Mort['Update'] = function(_jugador, _dt)
   
   player_controller.time = player_controller.time + _dt
   
-  if player_controller.time > 5 then
-    --player_controller:respawn()
+  if player_controller.time > 3 then
+    player_controller:respawn()
     _jugador:get_component(BaseComponent.vida):set(100)
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
   end
@@ -784,9 +786,10 @@ end
 -------------------------------------------------------------------------------------------------
 State_Player_Cobertura_Alta['Receive'] = function(_jugador, _event)
 
-  if _event.msg == Event.rebre_impacte then
-    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Tocat')
-  elseif _event.msg == Event.morir then
+  --if _event.msg == Event.rebre_impacte then
+    --_jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Tocat')
+  --else
+  if _event.msg == Event.morir then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Morint')
   end
   
@@ -840,9 +843,10 @@ end
 -------------------------------------------------------------------------------------------------
 State_Player_Cobertura_Alta_Sortir['Receive'] = function(_jugador, _event)
 
-  if _event.msg == Event.rebre_impacte then
-    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Tocat')
-  elseif _event.msg == Event.morir then
+  --if _event.msg == Event.rebre_impacte then
+    --_jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Tocat')
+  --else
+  if _event.msg == Event.morir then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Morint')
   end
   
@@ -917,9 +921,10 @@ end
 -------------------------------------------------------------------------------------------------
 State_Player_Cobertura_Baixa_Apuntar['Receive'] = function(_jugador, _event)
 
-  if _event.msg == Event.rebre_impacte then
-    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Tocat')
-  elseif _event.msg == Event.morir then
+  --if _event.msg == Event.rebre_impacte then
+    --_jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Tocat')
+  --else
+  if _event.msg == Event.morir then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Morint')
   end
   

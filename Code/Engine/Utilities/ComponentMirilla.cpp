@@ -2,8 +2,8 @@
 #include "PhysxSkeleton.h"
 #include "PhysxBone.h"
 #include "ComponentRenderableObject.h"
-#include "SceneEffectManager.h"
-#include "DrawQuadSceneEffect.h"
+#include "Renderer.h"
+#include "PostSceneRendererStep.h"
 #include "PhysicsManager.h"
 #include "PhysicActor.h"
 #include "Component3rdPSCamera.h"
@@ -30,7 +30,7 @@ CComponentMirilla* CComponentMirilla::AddToEntity(CGameEntity *_pEntity, const s
 
 bool CComponentMirilla::Init(CGameEntity* _pEntity, const string& _szName)
 {
-  m_pAim = (CDrawQuadSceneEffect*)CORE->GetSceneEffectManager()->GetResource("aim");
+  m_pAim = CORE->GetRenderer()->GetPostSceneRendererStep("aim_gui");
 
   if(m_pAim)
   {

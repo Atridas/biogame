@@ -152,7 +152,7 @@ bool CSceneEffectManager::Load()
     } else if(strcmp(l_treeSceneEffect.GetName(),"post_render") == 0)
     {
       //post_render
-      CDrawQuadSceneEffect* l_pDrawQuad = new CDrawQuadSceneEffect();
+      /*CDrawQuadSceneEffect* l_pDrawQuad = new CDrawQuadSceneEffect();
 
       if(!l_pDrawQuad->Init(l_treeSceneEffect))
       {
@@ -161,7 +161,30 @@ bool CSceneEffectManager::Load()
       } else {
         AddResource(l_szName,l_pDrawQuad);
         m_vPostRenderSceneEffects.push_back(l_pDrawQuad);
+      }*/
+
+      string l_szType = l_treeSceneEffect.GetPszISOProperty("type", "");
+
+      if(l_szType == "draw_quad_to_texture")
+      {
+        l_pSceneEffect = new CDrawQuadToTextureSceneEffect();
+      } else if(l_szType == "draw_quad")
+      {
+        l_pSceneEffect = new CDrawQuadSceneEffect();
+      } else {
+        LOGGER->AddNewLog(ELL_WARNING,"CSceneEffectManager::Load  type de pre-render incorrecte o no trobat \"%s\".", l_szType.c_str());
+        continue;
       }
+
+      if(!l_pSceneEffect->Init(l_treeSceneEffect))
+      {
+        LOGGER->AddNewLog(ELL_WARNING,"CSceneEffectManager::Load  Scene effect incorrecte \"%s\".", l_treeSceneEffect.GetName());
+        delete l_pSceneEffect;
+      } else {
+        AddResource(l_szName,l_pSceneEffect);
+        m_vPostRenderSceneEffects.push_back(l_pSceneEffect);
+      }
+
     } else if(strcmp(l_treeSceneEffect.GetName(),"gui") == 0)
     {
       //gui

@@ -15,7 +15,7 @@ bool CIAProcess::Init()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"CIAProcess::Init");
   
-  m_pSceneEffectManager = CORE->GetSceneEffectManager();
+  //m_pSceneEffectManager = CORE->GetSceneEffectManager();
 
   m_pTargetObject = new CObject3D();
   

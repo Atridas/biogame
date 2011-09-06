@@ -43,7 +43,6 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
 		}
 
 		d3dpp.SwapEffect				= D3DSWAPEFFECT_FLIP;
-		d3dpp.AutoDepthStencilFormat	= D3DFMT_D16;
 		d3dpp.EnableAutoDepthStencil	= TRUE;
 		d3dpp.AutoDepthStencilFormat	= D3DFMT_D24S8;
 		d3dpp.Flags						= D3DPRESENTFLAG_DISCARD_DEPTHSTENCIL;

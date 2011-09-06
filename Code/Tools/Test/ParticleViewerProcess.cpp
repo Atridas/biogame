@@ -45,7 +45,7 @@ bool CParticleViewerProcess::Init()
   
   CORE->GetRenderManager()->SetClearColor(colWHITE);
 
-  m_pSceneEffectManager = CORE->GetSceneEffectManager();
+  //m_pSceneEffectManager = CORE->GetSceneEffectManager();
   CORE->GetLightManager()->SetLightsEnabled(true);
 
   CPhysicsManager* l_pPM = CORE->GetPhysicsManager();

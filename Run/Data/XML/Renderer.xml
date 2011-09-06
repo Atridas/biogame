@@ -1,0 +1,172 @@
+<renderer>
+  
+  <pre_scene_renderers>
+
+    <pre_scene_renderer name="shadow_map_renderer" type="shadow_map_scene_renderer" active="false">
+
+      <render_targets format_type="R32F" width="1024" height="1024">
+        <render_target index="0" texture="shadow_map_texture" />
+      </render_targets>
+
+      <material_effects static_mesh_effect="Depth" animated_model_effect="AnimatedDepth" />
+
+    </pre_scene_renderer>
+    
+    <pre_scene_renderer name="glow_renderer" type="pre_scene_renderer" active="true">
+
+      <render_targets>
+        <render_target index="0" texture="glow_texture" />
+      </render_targets>
+
+      <material_effects static_mesh_effect="Glow" animated_model_effect="AnimatedGlow" />
+
+    </pre_scene_renderer>
+    
+  </pre_scene_renderers>
+
+  <scene_renderers default_renderer="forward_renderer">
+    
+    <scene_renderer name="forward_renderer" type="forward_scene_renderer">
+
+      <input_samplers>
+        <input_sampler type="texture" index="5" texture="shadow_map_texture"/>
+      </input_samplers>
+    
+      <!--<render_targets>
+        <render_target index="0" texture="scene_result"/>
+        <render_target index="1" texture="glow_texture"/>
+        <render_target index="2" texture="depth_texture"/>
+      </render_targets>-->
+
+      <material_effects>
+        <material_effect material_type="0"   effect="Diffused" />
+        <material_effect material_type="2"   effect="Textured" />
+        <material_effect material_type="514" effect="TexturedEnvironment" />
+        <material_effect material_type="518" effect="NormalmapEnvironment" />
+        <material_effect material_type="3"   effect="AnimatedTextured" />
+        <material_effect material_type="6"   effect="Normalmap" />
+        <material_effect material_type="7"   effect="AnimatedNormalmap" />
+        <material_effect material_type="34"  effect="Textured" />
+        <material_effect material_type="38"  effect="Normalmap" />
+        <material_effect material_type="39"  effect="AnimatedNormalmap" />
+        <material_effect material_type="10"  effect="Lightmap" />
+        <material_effect material_type="14"  effect="LightmapNormalmap" />
+        <material_effect material_type="134" effect="RadiosityNormalmap" />
+        <material_effect material_type="18"  effect="SpecularTextured" />
+        <material_effect material_type="22"  effect="SpecularNormalmapTextured" />
+        <material_effect material_type="23"  effect="AnimatedSpecularNormalmapTextured" />
+        <material_effect material_type="26"  effect="SpecularLightmapTextured" />
+        <material_effect material_type="30"  effect="SpecularLightmapNormalmapTextured" />
+        <material_effect material_type="150" effect="SpecularRadiosityNormalmapTexturedTechnique" />
+        <material_effect material_type="55"  effect="AnimatedSpecularNormalmapTextured" />
+      </material_effects>
+    
+    </scene_renderer>
+
+    <scene_renderer name="show_normals_renderer" type="scene_renderer">
+      <material_effects static_mesh_effect="ShowNormals" animated_model_effect="AnimatedShowNormals" />
+    </scene_renderer>
+    
+  </scene_renderers>
+
+  <post_scene_renderers>
+    
+    <post_scene_renderer name="down_sample_glow" effect="DownSample4x" active="true">
+      
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="glow_texture"/>
+      </input_samplers>
+
+      <render_targets scale_size="0.5">
+        <render_target index="0" texture="downsampled_glow"/>
+      </render_targets>
+      
+    </post_scene_renderer>
+
+    <post_scene_renderer name="down_sample_glow_2" effect="DownSample4x" active="true">
+
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="downsampled_glow"/>
+      </input_samplers>
+
+      <render_targets scale_size="0.25">
+        <render_target index="0" texture="downsampled_glow_2"/>
+      </render_targets>
+
+    </post_scene_renderer>
+
+    <post_scene_renderer name="vertical_blur" effect="VerticalBloom" active="true">
+
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="downsampled_glow_2"/>
+      </input_samplers>
+
+      <render_targets scale_size="0.25">
+        <render_target index="0" texture="vertical_blur_texture"/>
+      </render_targets>
+
+    </post_scene_renderer>
+
+    <post_scene_renderer name="horizontal_blur" effect="HoritzontalBloom" active="true">
+
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="vertical_blur_texture"/>
+      </input_samplers>
+
+      <render_targets scale_size="0.25">
+        <render_target index="0" texture="horizontal_blur_texture"/>
+      </render_targets>
+
+    </post_scene_renderer>
+
+    <post_scene_renderer name="draw_glow_blur" effect="TextureAlphaFactor" active="true">
+
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="horizontal_blur_texture"/>
+      </input_samplers>
+
+    </post_scene_renderer>
+
+    <post_scene_renderer name="draw_glow" effect="PostProcessBloom2" active="true">
+
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="glow_texture"/>
+      </input_samplers>
+
+    </post_scene_renderer>
+
+    <post_scene_renderer name="shock_wave" effect="Shockwave" use_time="true" active="false">
+
+      <input_samplers>
+        <input_sampler type="frame_buffer" index="0"/>
+      </input_samplers>
+
+    </post_scene_renderer>
+
+    <post_scene_renderer name="damage_gui" effect="TextureAlphaFactor" active="false">
+
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/damage.png"/>
+      </input_samplers>
+
+    </post_scene_renderer>
+
+    <post_scene_renderer name="blood_gui" effect="TextureAlphaFactor" size_x="0.6" position="0.3 -0.2" active="false">
+
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Blood_Decal.png"/>
+      </input_samplers>
+
+    </post_scene_renderer>
+
+    <post_scene_renderer name="aim_gui" effect="TextureAlphaFactor" size_x="0.02" position="0.5 0.5" alignment="center" active="false">
+
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/aim.png"/>
+      </input_samplers>
+
+    </post_scene_renderer>
+  
+  </post_scene_renderers>
+  
+</renderer>

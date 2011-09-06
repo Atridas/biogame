@@ -65,7 +65,7 @@ void CComponentArma::Disable()
 }
 
 
-void CComponentArma::PostUpdate(float _fDeltaTime)
+void CComponentArma::Update(float _fDeltaTime)
 {
   CalSkeleton* l_pSkeleton = m_pAnimatedModel->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
   

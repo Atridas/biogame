@@ -7,6 +7,7 @@
 // -- forward declarations --
 struct SInitParams;
 class CRenderManager;
+class CRenderer;
 class CTextureManager;
 class CStaticMeshManager;
 class CAnimatedModelManager;
@@ -21,7 +22,7 @@ class CActionManager;
 class CRenderableObjectsManager;
 class CAnimatedModelManager;
 class CLightManager;
-class CSceneEffectManager;
+//class CSceneEffectManager;
 class CScriptManager;
 class CLogRender;
 class CConsole;
@@ -54,10 +55,10 @@ public:
   **/
                       CCore               (void): m_pRenderManager(0),m_pLanguageManager(0),m_pFontManager(0),m_pInputManager(0),
                                                   m_pActionManager(0),m_pRenderableObjectsManager(0),m_pLightManager(0),
-                                                  m_pSceneEffectManager(0), m_pTimer(0), m_pScriptManager(0),m_pTextureManager(0),
+                                                  m_pRenderer(0), m_pTimer(0), m_pScriptManager(0),m_pTextureManager(0),
                                                   m_pStaticMeshManager(0),m_pAnimatedModelManager(0),m_pEffectManager(0),
                                                   m_pGUIManager(0),m_pPhysicsManager(0),
-                                                  m_pSoundManager(0), m_pEngine(0), m_pEntityManager(0), m_pPortalManager(0), m_pIAManager(0),
+                                                  m_pSoundManager(0), m_pEntityManager(0), m_pPortalManager(0), m_pIAManager(0),
                                                   m_pEmiterCoreManager(0), m_pEmiterManager(0)
                                                   {};
   /**
@@ -73,7 +74,7 @@ public:
    * @return True si s'ha iniciat correctament. False si no.
    * @see SInitParams
   **/
-  bool                Init(HWND hWnd, const SInitParams& _InitParams, CEngine* _pEngine);
+  bool                Init(HWND hWnd, const SInitParams& _InitParams);
 
 	/**
    * Mètode d'update.
@@ -98,6 +99,9 @@ public:
    * @see RENDER_MANAGER
   **/
   CRenderManager*     GetRenderManager      () const                        {return m_pRenderManager;};
+
+  CRenderer*              GetRenderer() const {return m_pRenderer;};
+
   //void                SetRenderManager      (CRenderManager* _pRm)          {m_pRenderManager = _pRm;};
 
   CTextureManager*        GetTextureManager       () const {return m_pTextureManager;};
@@ -138,7 +142,7 @@ public:
   
   CRenderableObjectsManager*  GetRenderableObjectsManager      () const                        {return m_pRenderableObjectsManager;}
 
-  CSceneEffectManager*GetSceneEffectManager () const                        {return m_pSceneEffectManager;};
+  //CSceneEffectManager* GetSceneEffectManager () const                        {return m_pSceneEffectManager;};
 
   CScriptManager*     GetScriptManager      () const                        {return m_pScriptManager;};
 
@@ -151,8 +155,6 @@ public:
   CPhysicsManager*    GetPhysicsManager     () const                        {return m_pPhysicsManager;};
 
   CSoundManager*      GetSoundManager       () const                        {return m_pSoundManager;};
-
-  CEngine*            GetEngine             () const                        {return m_pEngine;};
 
   CEntityManager*     GetEntityManager      () const                        {return m_pEntityManager;};
 
@@ -187,6 +189,8 @@ private:
   **/
   CRenderManager*             m_pRenderManager;
 
+  CRenderer* m_pRenderer;
+
   CTextureManager*        m_pTextureManager;
 
   CStaticMeshManager*     m_pStaticMeshManager;
@@ -220,7 +224,7 @@ private:
   **/
   CLightManager*              m_pLightManager;
 
-  CSceneEffectManager*        m_pSceneEffectManager;
+  //CSceneEffectManager*        m_pSceneEffectManager;
 
   CScriptManager*             m_pScriptManager;
 
@@ -233,8 +237,6 @@ private:
   CPhysicsManager*            m_pPhysicsManager;
 
   CSoundManager*              m_pSoundManager;
-
-  CEngine*                    m_pEngine;
 
   CEntityManager*             m_pEntityManager;
 

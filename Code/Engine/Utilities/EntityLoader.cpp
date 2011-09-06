@@ -635,7 +635,7 @@ CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f
 
 CGameEntity* CEntityManager::InitLaser(const Vect3f& _vPosInit, const Vect3f& _vDir, float _fDany, uint32 _uiCollisionMask)
 {
-  Mat33f l_mRot = GetFastestRotationFromDirToDir(Vect3f(0,0,1), _vDir);
+  Mat33f l_mRot = GetFastestRotationFromDirToDir(Vect3f(0.0f,0.0f,-1.0f), _vDir);
   Mat44f l_mO3D(l_mRot);
   l_mO3D.SetPos(_vPosInit);
 

@@ -89,7 +89,7 @@ bool CBiotestProcess::Init()
   // -----------------------------------------------------------------------------------
 
 
-  m_pSceneEffectManager = CORE->GetSceneEffectManager();
+  //m_pSceneEffectManager = CORE->GetSceneEffectManager();
   CORE->GetLightManager()->SetLightsEnabled(true);
 
   

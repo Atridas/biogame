@@ -103,6 +103,7 @@ public:
   bool FillTextureFromBuffer (uint32 width, uint32 height, uint8* pImgBuffer);
 
   LPDIRECT3DSURFACE9 GetSurface() const {return m_pTextureSurface0;};
+  LPDIRECT3DSURFACE9 GetDepthStencilSurface() const {return m_pDepthStencilRenderTargetTexture;};
   LPDIRECT3DTEXTURE9 GetD3DTexture() const {return m_pTexture;};
   
 protected:

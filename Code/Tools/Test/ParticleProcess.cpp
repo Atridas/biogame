@@ -71,7 +71,7 @@ bool CParticleProcess::Init()
   m_pCamera = m_pObjectCamera;
 
   ((CThPSCamera*)m_pObjectCamera)->SetZoom(10.0f);
-  m_pSceneEffectManager = CORE->GetSceneEffectManager();
+  //m_pSceneEffectManager = CORE->GetSceneEffectManager();
 
   CSpotLight* l_Spot = (CSpotLight*)CORE->GetLightManager()->GetResource("Spot01");
   

@@ -226,6 +226,45 @@
     <Filter Include="Emiters\EmiterCoreManager">
       <UniqueIdentifier>{217447cb-eb19-453a-b171-b2c7fa7c1011}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{a464d141-a9c7-4dd4-994b-49e87c3891a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RendererStep">
+      <UniqueIdentifier>{a49ae238-3797-4014-bf1c-92586cff3a2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RendererStep\PostSceneRendererStep">
+      <UniqueIdentifier>{0ec655fb-47f7-43be-9bdc-208fa51bd21e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RendererStep\PreSceneRendererStep">
+      <UniqueIdentifier>{f83b71f7-e5ff-474f-9176-b98a47427092}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RendererStep\SceneRendererStep">
+      <UniqueIdentifier>{f3285f80-f39f-4ca4-951d-19204323ced9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RendererStep\PreSceneRendererStep\ShadowMapPreRendererStep">
+      <UniqueIdentifier>{4478cd57-800e-419d-901b-1f28335e07c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RendererStep\SceneRendererStep\ForwardSceneRendererStep">
+      <UniqueIdentifier>{ffb23de3-958c-4b2e-9733-229a5222417a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RenderTarget">
+      <UniqueIdentifier>{827a83e3-f5df-4aec-9334-5801d0f75df3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RenderTarget\TextureRenderTarget">
+      <UniqueIdentifier>{dad2e8b9-bcd2-413d-adf0-01653af8a24c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RenderTarget\BackBufferRenderTarget">
+      <UniqueIdentifier>{dfb300af-157a-4c22-abd7-8807dcb5cb70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\InputSampler">
+      <UniqueIdentifier>{2774dde7-b417-4dbf-8aa3-51f9326c55fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\InputSampler\TextureInputSampler">
+      <UniqueIdentifier>{4fb509ee-a9c0-4341-a690-89483512cc96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\InputSampler\FrameBufferInputSampler">
+      <UniqueIdentifier>{45cd2c5c-64ae-4337-a674-ce4f7ec6f549}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -365,6 +404,45 @@
     </ClCompile>
     <ClCompile Include="EmiterCoreManager.cpp">
       <Filter>Emiters\EmiterCoreManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="RendererStep.cpp">
+      <Filter>Renderer\RendererStep</Filter>
+    </ClCompile>
+    <ClCompile Include="PostSceneRendererStep.cpp">
+      <Filter>Renderer\RendererStep\PostSceneRendererStep</Filter>
+    </ClCompile>
+    <ClCompile Include="PreSceneRendererStep.cpp">
+      <Filter>Renderer\RendererStep\PreSceneRendererStep</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRendererStep.cpp">
+      <Filter>Renderer\RendererStep\SceneRendererStep</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowMapPreRendererStep.cpp">
+      <Filter>Renderer\RendererStep\PreSceneRendererStep\ShadowMapPreRendererStep</Filter>
+    </ClCompile>
+    <ClCompile Include="ForwardSceneRendererStep.cpp">
+      <Filter>Renderer\RendererStep\SceneRendererStep\ForwardSceneRendererStep</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderTarget.cpp">
+      <Filter>Renderer\RenderTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureRenderTarget.cpp">
+      <Filter>Renderer\RenderTarget\TextureRenderTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="BackBufferRenderTarget.cpp">
+      <Filter>Renderer\RenderTarget\BackBufferRenderTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSampler.cpp">
+      <Filter>Renderer\InputSampler</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureInputSampler.cpp">
+      <Filter>Renderer\InputSampler\TextureInputSampler</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameBufferInputSampler.cpp">
+      <Filter>Renderer\InputSampler\FrameBufferInputSampler</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -574,6 +652,45 @@
     </ClInclude>
     <ClInclude Include="include\EmiterCoreManager.h">
       <Filter>Emiters\EmiterCoreManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Renderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RendererStep.h">
+      <Filter>Renderer\RendererStep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PostSceneRendererStep.h">
+      <Filter>Renderer\RendererStep\PostSceneRendererStep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PreSceneRendererStep.h">
+      <Filter>Renderer\RendererStep\PreSceneRendererStep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SceneRendererStep.h">
+      <Filter>Renderer\RendererStep\SceneRendererStep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ShadowMapPreRendererStep.h">
+      <Filter>Renderer\RendererStep\PreSceneRendererStep\ShadowMapPreRendererStep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ForwardSceneRendererStep.h">
+      <Filter>Renderer\RendererStep\SceneRendererStep\ForwardSceneRendererStep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RenderTarget.h">
+      <Filter>Renderer\RenderTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TextureRenderTarget.h">
+      <Filter>Renderer\RenderTarget\TextureRenderTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BackBufferRenderTarget.h">
+      <Filter>Renderer\RenderTarget\BackBufferRenderTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InputSampler.h">
+      <Filter>Renderer\InputSampler</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TextureInputSampler.h">
+      <Filter>Renderer\InputSampler\TextureInputSampler</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FrameBufferInputSampler.h">
+      <Filter>Renderer\InputSampler\FrameBufferInputSampler</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
