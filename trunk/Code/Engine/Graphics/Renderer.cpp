@@ -4,6 +4,7 @@
 #include "PreSceneRendererStep.h"
 #include "SceneRendererStep.h"
 #include "PostSceneRendererStep.h"
+#include "ShadowMapPreRendererStep.h"
 #include "Core.h"
 #include "RenderManager.h"
 #include "Process.h"
@@ -44,15 +45,28 @@ bool CRenderer::Init(const string& _szFileName)
 
         if(string(l_treePreRenderer.GetName()) == "pre_scene_renderer")
         {
-          CPreSceneRendererStep* l_pPreRenderer = new CPreSceneRendererStep();
+          CPreSceneRendererStep* l_pPreRenderer = 0;
 
-          if(!l_pPreRenderer->Init(l_treePreRenderer))
+          if(string(l_treePreRenderer.GetPszProperty("type","",false)) == "shadow_map_scene_renderer")
           {
-            CHECKED_DELETE(l_pPreRenderer);
-            LOGGER->AddNewLog(ELL_ERROR,"CRenderer::Init error inicialitzant PreRenderer");
+            l_pPreRenderer = new CShadowMapPreRendererStep();
+          }else if(string(l_treePreRenderer.GetPszProperty("type","",false)) == "pre_scene_renderer")
+          {
+            l_pPreRenderer = new CPreSceneRendererStep();
           }else{
-            m_vPreSceneRendererSteps.push_back(l_pPreRenderer);
-            m_mapPreSceneRendererSteps[l_pPreRenderer->GetName()] = l_pPreRenderer;
+            LOGGER->AddNewLog(ELL_ERROR,"CRenderer::Init PreRenderer type no reconegut");
+          }
+
+          if(l_pPreRenderer)
+          {
+            if(!l_pPreRenderer->Init(l_treePreRenderer))
+            {
+              CHECKED_DELETE(l_pPreRenderer);
+              LOGGER->AddNewLog(ELL_ERROR,"CRenderer::Init error inicialitzant PreRenderer");
+            }else{
+              m_vPreSceneRendererSteps.push_back(l_pPreRenderer);
+              m_mapPreSceneRendererSteps[l_pPreRenderer->GetName()] = l_pPreRenderer;
+            }
           }
         }
         else if(!l_treePreRenderer.IsComment())
@@ -141,11 +155,11 @@ bool CRenderer::Init(const string& _szFileName)
 
 void CRenderer::Render(CProcess* _pProcess)
 {
-  
+  CRenderManager* l_pRM = RENDER_MANAGER;
   CEffectManager* l_pEM = CORE->GetEffectManager();
   l_pEM->Begin();
 
-  RENDER_MANAGER->BeginRendering();
+  l_pRM->BeginRendering();
 
   vector<CPreSceneRendererStep*>::iterator l_itPreRenderer = m_vPreSceneRendererSteps.begin();
   vector<CPreSceneRendererStep*>::iterator l_itPreRendererEnd = m_vPreSceneRendererSteps.end();
@@ -182,38 +196,12 @@ void CRenderer::Render(CProcess* _pProcess)
     }
   }
 
-  _pProcess->DebugInformation();
+  _pProcess->DebugInformation(l_pRM);
 
-  //RenderSystems(RENDER_MANAGER);
+  l_pRM->EndRendering();
 
-  RENDER_MANAGER->EndRendering();
-
-  RENDER_MANAGER->Present();
+  l_pRM->Present();
 }
-
-/*void CRenderer::RenderSystems(CRenderManager* _pRM)
-{
-  CFontManager* l_pFontManager = CORE->GetFontManager();
-  CLogRender* l_pLR = CORE->GetLogRender();
-
-  _pRM->EnableAlphaBlend();
-
-  if(l_pLR)
-    l_pLR->Render(_pRM,l_pFontManager);
-
-  CConsole* l_pC = CORE->GetConsole();
-  if(l_pC)
-    l_pC->Render(_pRM,l_pFontManager);
-
-  CGUIManager* l_pGUI = CORE->GetGUIManager();
-  if(l_pGUI)
-  {
-    l_pGUI->Render(_pRM,l_pFontManager);
-    l_pGUI->RenderPointerMouse(_pRM,l_pFontManager);
-  }
-
-  _pRM->DisableAlphaBlend();
-}*/
 
 void CRenderer::Release()
 {

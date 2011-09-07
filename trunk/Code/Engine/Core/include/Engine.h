@@ -86,10 +86,10 @@ protected:
 
 private:
   
-  void                      RenderHDR            (CRenderManager* _pRM, CProcess* _pProcess);
+  /*void                      RenderHDR            (CRenderManager* _pRM, CProcess* _pProcess);
   void                      RenderNoHDR          (CRenderManager* _pRM, CProcess* _pProcess);
   
-  void                      RenderSystems        (CRenderManager* _pRM);
+  void                      RenderSystems        (CRenderManager* _pRM);*/
   void                      UpdateSystems        (float _fElapsedTime);
 
 	/**

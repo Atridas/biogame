@@ -39,7 +39,7 @@ public:
    *  - Nom del procés
    *  - FramesPerSecond
   **/
-	void				          DebugInformation();
+	void				          DebugInformation(CRenderManager* _pRM);
   /**
    * Mètode de pre renderitzat.
    * Aquest mètode s'executa a cada iteració. Es realitzarà el prerender dels efectes d'escena.
