@@ -16,14 +16,16 @@
 #include "Console.h"
 #include "EmiterCoreManager.h"
 
-void CProcess::DebugInformation()
+void CProcess::DebugInformation(CRenderManager* _pRM)
 {
   if(m_bRenderInfo)
   {
+    CFontManager* l_pFontManager = CORE->GetFontManager();
+
     stringstream l_SStream;
 	  CColor col = colBLUE;
     CTimer* l_pTimer = CORE->GetTimer();
-    uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("Titania");
+    uint32 l_uiFontType = l_pFontManager->GetTTF_Id("Titania");
     
     l_SStream << "FPS: " << (float) l_pTimer->GetFPS() << endl;
     //l_SStream << "Time: " << (float) l_pTimer->GetRelativeTime() << "s" << endl;
@@ -35,8 +37,15 @@ void CProcess::DebugInformation()
     //FONT_MANAGER->DrawText(0,12,colRED,l_uiFontType,m_szProcessName.c_str());
     FONT_MANAGER->DrawText(0,0,col,l_uiFontType,l_szMsg.c_str());
 
+    CLogRender* l_pLR = CORE->GetLogRender();
+    if(l_pLR)
+      l_pLR->Render(_pRM,l_pFontManager);
 
-    RenderINFO(RENDER_MANAGER);
+    CConsole* l_pC = CORE->GetConsole();
+    if(l_pC)
+      l_pC->Render(_pRM,l_pFontManager);
+
+    RenderINFO(_pRM);
   }
 }
 

@@ -5,6 +5,7 @@
 #include "LightManager.h"
 #include "Light.h"
 #include "DirectionalLight.h"
+#include "RenderManager.h"
 
 bool CShadowMapPreRendererStep::Init(CXMLTreeNode& _treePreSceneRenderer)
 {
@@ -45,6 +46,7 @@ void CShadowMapPreRendererStep::Render(CProcess* _pProcess)
       }
       Vect3f l_LightUp = (l_pDirLight->GetDirection() ^ l_LightRight).GetNormalized();
 
+      
       l_pEM->ActivateCamera(l_LightViewMatrix, l_LightProjectionMatrix, l_LightPosition,l_LightUp,l_LightRight);
       l_pEM->SetShadowProjectionMatrix(l_LightProjectionMatrix);
       l_pEM->SetLightViewMatrix(l_LightViewMatrix);
@@ -64,6 +66,8 @@ void CShadowMapPreRendererStep::Render(CProcess* _pProcess)
       }
 
       CRenderManager* l_pRM = RENDER_MANAGER;
+
+      l_pRM->SetupMatrices(_pProcess->GetCamera());
 
       _pProcess->RenderScene(l_pRM);
   

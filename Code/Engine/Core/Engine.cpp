@@ -86,7 +86,7 @@ void CEngine::Render()
   }
 }
 
-
+/*
 void CEngine::RenderHDR(CRenderManager* _pRM, CProcess* _pProcess)
 {
   assert(m_pHDR->IsOk());
@@ -97,7 +97,7 @@ void CEngine::RenderHDR(CRenderManager* _pRM, CProcess* _pProcess)
   
   m_pHDR->Render(_pRM);
   _pProcess->PostRender(_pRM);
-	_pProcess->DebugInformation();
+	_pProcess->DebugInformation(_pRM);
   
   CEngine::RenderSystems(_pRM);
 
@@ -111,7 +111,7 @@ void CEngine::RenderNoHDR(CRenderManager* _pRM, CProcess* _pProcess)
   _pRM->SetupMatrices(m_pActiveProcess->GetCamera());
   _pProcess->Render(_pRM);
   _pProcess->PostRender(_pRM);
-	_pProcess->DebugInformation();
+	_pProcess->DebugInformation(_pRM);
 
   CEngine::RenderSystems(_pRM);
 
@@ -143,7 +143,7 @@ void CEngine::RenderSystems(CRenderManager* _pRM)
 
   _pRM->DisableAlphaBlend();
 }
-
+*/
 void CEngine::UpdateSystems(float _fElapsedTime)
 {
   CLogRender* l_pLR = m_pCore->GetLogRender();
