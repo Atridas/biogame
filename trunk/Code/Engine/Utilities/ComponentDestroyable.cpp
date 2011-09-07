@@ -2,6 +2,7 @@
 #include "ComponentDestroyable.h"
 #include "ComponentVida.h"
 #include "ComponentRenderableObject.h"
+#include "PhysicsManager.h"
 #include "ScriptManager.h"
 #include "Core.h"
 
@@ -99,4 +100,44 @@ void CComponentDestroyable::ReceiveEvent(const SEvent& _Event)
       }
     }
   }
+}
+
+void CComponentDestroyable::BarrelExplosion(Vect3f _vPos,float _fRadius)
+{
+    vector<CPhysicUserData*> l_vImpactObjects;
+    CPhysicsManager *l_pPM = PHYSICS_MANAGER;
+
+    l_pPM->OverlapSphereActor(_fRadius,_vPos,l_vImpactObjects,l_pPM->GetCollisionMask(ECG_FORCE));
+
+    vector<CPhysicUserData*>::iterator l_itUserData;
+    vector<CPhysicUserData*>::iterator l_itUserDataEnd = l_vImpactObjects.end();
+
+    set<CGameEntity*> l_vImpactEntities;
+
+    for(l_itUserData = l_vImpactObjects.begin(); l_itUserData != l_itUserDataEnd; ++l_itUserData)
+    {
+      CPhysicUserData* l_pUserData = *l_itUserData;
+      l_vImpactEntities.insert(l_pUserData->GetEntity());
+    }
+
+    set<CGameEntity*>::iterator l_itEntity;
+    set<CGameEntity*>::iterator l_itEntityEnd = l_vImpactEntities.end();
+
+    for(l_itEntity = l_vImpactEntities.begin(); l_itEntity != l_itEntityEnd; ++l_itEntity)
+    {
+      CGameEntity* l_pEntity = *l_itEntity;
+
+      if(GetEntity() != l_pEntity)
+      {
+        SEvent l_impacte;
+        l_impacte.Msg = SEvent::REBRE_FORCE;
+        l_impacte.Info[0].Type = SEventInfo::FLOAT;
+        l_impacte.Info[0].f    = 100;
+        l_impacte.Receiver = l_pEntity->GetGUID();
+        l_impacte.Sender = GetEntity()->GetGUID();
+
+        ENTITY_MANAGER->SendEvent(l_impacte);
+      }
+    }
+
 }
