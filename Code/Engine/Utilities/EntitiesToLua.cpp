@@ -38,6 +38,7 @@ extern "C"
 #include "ComponentNavNode.h"
 #include "ComponentEmiter.h"
 #include "ComponentSpawner.h"
+#include "ComponentDestroyable.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -165,6 +166,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("init_militar",                      &CEntityManager::InitMilitar)
       .def("init_emiter",                       &CEntityManager::InitParticles)
       .def("init_trigger_with_emiter",          &CEntityManager::InitTriggerWithParticles)
+
   ];
 
   module(_pLS) [
@@ -350,6 +352,10 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("add_to_entity",            &CComponentSpawner::AddToEntity)
       .def("set_enemy_type",           &CComponentSpawner::SetEnemyType)
       .def("get_enemy_type",           &CComponentSpawner::GetEnemyType)
+
+      // ----------------------------------------------------------------------------------------------------
+      ,class_<CComponentDestroyable, CBaseComponent>("ComponentDestroyable")
+      .def("explode_barrel",        &CComponentDestroyable::BarrelExplosion)
   ];
 }
 

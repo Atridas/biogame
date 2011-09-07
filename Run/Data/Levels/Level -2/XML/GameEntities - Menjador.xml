@@ -133,6 +133,7 @@
     <Object3D position="2.03746 0.0 29.7106" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Bido_vermell" />
     <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_explosiu" />
   </Entity>
   <Entity name="Llauna00">
     <Object3D position="19.3793 1.06519 29.8989" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -700,6 +701,7 @@
     <Object3D position="33.5255 0.0 31.1549" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Bido_vermell" />
     <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_explosiu" />
   </Entity>
   <Entity name="bido_verd07">
     <Object3D position="28.5492 0.0 29.7531" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -711,6 +713,7 @@
     <Object3D position="27.8766 0.0 29.6178" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Bido_vermell" />
     <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_explosiu" />
   </Entity>
   <Entity name="bido_verd05">
     <Object3D position="28.0759 0.935213 29.9004" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -722,6 +725,7 @@
     <Object3D position="28.1648 0.0 30.23" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Bido_vermell" />
     <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_explosiu" />
   </Entity>
   <Entity name="bido_verd06">
     <Object3D position="28.0759 0.935213 29.9004" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -739,6 +743,7 @@
     <Object3D position="9.66882 0.0 27.9152" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Bido_vermell" />
     <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_explosiu" />
   </Entity>
   <Entity name="bido_verd04">
     <Object3D position="2.31746 0.0 30.3777" yaw="0.0" pitch="0.0" roll="0.0" />

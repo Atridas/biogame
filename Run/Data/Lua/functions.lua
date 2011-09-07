@@ -91,6 +91,16 @@ function bido_toxic(_self)
   end
 end
 
+function bido_explosiu(_self)
+  local l_o3d = _self:get_component(BaseComponent.object_3d)
+  local l_dest = _self:get_component(BaseComponent.destroyable)
+  if l_o3d then
+    local l_position = l_o3d:get_position()
+    l_dest:explode_barrel(l_position,4)
+	SOUND:play_sample('explosion')
+  end
+end
+
 -------------------------------------------- LEVEL -2 -------------------------------------------
 function laboratori_petar_llum_porta(_self)
   local l_door = EM:get_entity("Porta_Laboratori")
