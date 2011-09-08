@@ -510,6 +510,6 @@
     <Destroyable onDestroy="prova_explosio" />
   </Entity>
   <Player position="-16.8764 2.0 -15.9165" yaw="0.0" />
-  <Miner name="Miner" position="50.3014 2.0 39.1446" yaw="0.0" active="false" />
+  <Miner name="Miner" position="50.3014 2.0 39.1446" yaw="0.0" active="false" on_death="drop_tetera" />
   <Militar name="Militar" position="48.3709 2.0 -18.4613" yaw="0.0" active="false" />
 </Entities>

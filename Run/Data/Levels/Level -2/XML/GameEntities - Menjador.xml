@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Entities>
   <Entity name="LowCover_menjador04">
-    <Object3D position="24.6041 0.497101 19.6828" yaw="-20.0" pitch="0.0" roll="0.0" />
-    <LowCover shape="box" size="1.07941 0.955183 1.00915" collision_group="cobertura" cover_size="1" />
+    <Object3D position="24.5598 0.497101 19.5362" yaw="-25.2085" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.07941 0.955183 1.10055" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="LowCover_menjador02">
-    <Object3D position="24.3614 0.497101 25.1972" yaw="-24.9097" pitch="0.0" roll="0.0" />
-    <LowCover shape="box" size="2.85055 0.955183 8.3864" collision_group="cobertura" cover_size="5" />
+    <Object3D position="24.2932 0.497101 25.1848" yaw="-24.9097" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="2.85055 0.955183 10.0999" collision_group="cobertura" cover_size="5" />
   </Entity>
   <Entity name="LowCover_menjador01">
-    <Object3D position="19.6524 0.497101 22.3344" yaw="-23.0672" pitch="0.0" roll="0.0" />
-    <LowCover shape="box" size="3.82101 0.955183 2.79245" collision_group="cobertura" cover_size="2" />
+    <Object3D position="19.3737 0.497101 22.3361" yaw="-23.0672" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="4.73231 0.955183 2.79245" collision_group="cobertura" cover_size="2" />
   </Entity>
   <Entity name="LowCover_menjador00">
-    <Object3D position="19.3874 0.497101 30.5392" yaw="-25.4767" pitch="0.0" roll="0.0" />
-    <LowCover shape="box" size="2.82282 0.955183 4.00443" collision_group="cobertura" cover_size="2" />
+    <Object3D position="19.4148 0.497101 30.6249" yaw="-25.4767" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="2.82282 0.955183 4.30657" collision_group="cobertura" cover_size="2" />
   </Entity>
   <Entity name="HighCover_menjador01">
-    <Object3D position="19.8638 0.984785 34.4004" yaw="-8.48851" pitch="0.0" roll="0.0" />
-    <HighCover shape="box" size="1.94643 1.94171 1.94643" collision_group="cobertura" cover_size="1" />
+    <Object3D position="19.9132 0.984785 34.2978" yaw="-8.48851" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="2.04394 1.94171 2.40369" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="HighCover_menjador02">
     <Object3D position="20.6873 0.984785 36.5274" yaw="-29.361" pitch="0.0" roll="0.0" />
@@ -73,12 +73,8 @@
     <HighCover shape="box" size="1.56598 3.01275 1.10576" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="HighCover_menjador10">
-    <Object3D position="22.6356 1.52447 20.3736" yaw="-25.0179" pitch="0.0" roll="0.0" />
-    <HighCover shape="box" size="1.10576 3.01275 1.10576" collision_group="cobertura" cover_size="1" />
-  </Entity>
-  <Entity name="HighCover_menjador00">
-    <Object3D position="23.6011 1.13802 19.923" yaw="-25.0179" pitch="0.0" roll="0.0" />
-    <HighCover shape="box" size="1.04731 2.22424 0.994262" collision_group="cobertura" cover_size="1" />
+    <Object3D position="23.0978 1.52447 20.2239" yaw="-25.0179" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="2.14424 3.01275 1.10576" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="HighCover_menjador11">
     <Object3D position="2.94613 1.52447 29.5463" yaw="-25.4056" pitch="0.0" roll="0.0" />
@@ -1183,7 +1179,7 @@
     <NavNode />
   </Entity>
   <Entity name="Menjador_Navnode_11">
-    <Object3D position="26.6324 0.653691 31.7828" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="27.7782 0.653691 31.4812" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
   <Entity name="Menjador_Navnode_12">
@@ -1264,13 +1260,13 @@
   </Entity>
   <Miner name="Miner_menjador00" position="0.524845 1.62554 22.3385" yaw="0.0" active="false" />
   <Militar name="Militar_menjador00" position="25.1514 2.11998 30.7663" yaw="0.0" active="false" />
-  <Militar name="Militar_menjador01" position="17.2852 2.11998 25.9949" yaw="0.0" active="false" />
-  <Militar name="Militar_menjador02" position="15.2447 2.11998 29.5691" yaw="0.0" active="false" />
-  <Militar name="Militar_menjador03" position="11.5827 2.11998 24.0272" yaw="0.0" active="false" />
-  <Militar name="Militar_menjador05" position="3.49921 2.11998 36.8697" yaw="0.0" active="false" />
-  <Militar name="Militar_menjador06" position="1.3219 2.11998 32.9813" yaw="0.0" active="false" />
-  <Militar name="Militar_menjador07" position="19.9514 2.11998 24.8848" yaw="0.0" active="false" />
-  <Militar name="Militar_menjador08" position="15.9623 2.11998 32.4562" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador01" position="17.4814 2.11998 25.9969" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador02" position="17.3531 2.11998 35.456" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador03" position="7.96004 2.11998 23.4384" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador05" position="4.08143 2.11998 39.9232" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador06" position="0.373384 2.11998 30.8755" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador07" position="21.0356 2.11998 25.1518" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador08" position="17.5105 2.11998 34.1969" yaw="0.0" active="false" />
   <Militar name="Militar_menjador09" position="10.9714 2.11998 36.8411" yaw="0.0" active="false" />
-  <Militar name="Militar_menjador10" position="6.61613 2.11998 25.4096" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador10" position="5.33635 2.11998 26.1044" yaw="0.0" active="false" />
 </Entities>

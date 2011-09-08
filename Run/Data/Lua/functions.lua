@@ -59,8 +59,16 @@ end
 function prova_explosio(_self)  
   local l_o3d = _self:get_component(BaseComponent.object_3d)
   if l_o3d then
-    local l_position = l_o3d:get_position()
-    EM:init_trigger_with_emiter("bubble", l_position, Vect3f(2.0, 3.0, 2.0), get_collision_group("trigger"), "triggerDeProvesEntrar", "triggerDeProvesSortir", 10, Vect3f(0,1,0))
+    EM:init_trigger_with_emiter("bubble", l_o3d:get_position(), Vect3f(2.0, 3.0, 2.0), get_collision_group("trigger"), "triggerDeProvesEntrar", "triggerDeProvesSortir", 10, Vect3f(0,1,0))
+  end
+end
+
+--prova drop tetera
+function drop_tetera(_self)
+  local l_o3d = _self:get_component(BaseComponent.object_3d)
+  if l_o3d then
+    log('estic creant una tetera')
+    EM:init_pickup("tetera_" .. _self:get_name(), "TeteraPickUp", l_o3d:get_position(), "pick_up_tetera")
   end
 end
 

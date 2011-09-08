@@ -31,6 +31,8 @@
 #include "ComponentLaser.h"
 #include "ComponentLifetime.h"
 
+
+#include "RenderableObject.h"
 #include "PhysicsManager.h"
 
 #include "base.h"
@@ -341,15 +343,16 @@ void LoadMiner(CEntityManager* _pEM, CXMLTreeNode& _TreeMiner)
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Miner");
   
-  string l_szName       = _TreeMiner.GetPszISOProperty("name", "", false);
-  string l_szPlayerName = _TreeMiner.GetPszISOProperty("player", "Player", false);
-  Vect3f l_vPosition    = _TreeMiner.GetVect3fProperty("position", Vect3f(0,0,0),true);
-  bool l_bActive        = _TreeMiner.GetBoolProperty("active", true, false);
+  string l_szName          = _TreeMiner.GetPszISOProperty("name", "", false);
+  string l_szPlayerName    = _TreeMiner.GetPszISOProperty("player", "Player", false);
+  Vect3f l_vPosition       = _TreeMiner.GetVect3fProperty("position", Vect3f(0,0,0),true);
+  bool l_bActive           = _TreeMiner.GetBoolProperty("active", true, false);
+  string l_szOnDeathScript = _TreeMiner.GetPszISOProperty("on_death", "", false);
   
   LOGGER->AddNewLog(ELL_INFORMATION, "\t\t\tMiner name \"%s\", pos %f,%f,%f, Player %s", l_szName.c_str(),
                                       l_vPosition.x, l_vPosition.y, l_vPosition.z, l_szPlayerName.c_str());
 
-  CGameEntity* l_pEntity = _pEM->InitMiner(l_szPlayerName, l_vPosition, l_szName,l_bActive);
+  CGameEntity* l_pEntity = _pEM->InitMiner(l_szPlayerName, l_vPosition, l_szName,l_bActive, l_szOnDeathScript);
 
 }
 
@@ -357,15 +360,16 @@ void LoadMilitar(CEntityManager* _pEM, CXMLTreeNode& _TreeMiner)
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Militar");
   
-  string l_szName       = _TreeMiner.GetPszISOProperty("name", "", false);
-  string l_szPlayerName = _TreeMiner.GetPszISOProperty("player", "Player", false);
-  Vect3f l_vPosition    = _TreeMiner.GetVect3fProperty("position", Vect3f(0,0,0),true);
-  bool l_bActive        = _TreeMiner.GetBoolProperty("active", true, false);
+  string l_szName          = _TreeMiner.GetPszISOProperty("name", "", false);
+  string l_szPlayerName    = _TreeMiner.GetPszISOProperty("player", "Player", false);
+  Vect3f l_vPosition       = _TreeMiner.GetVect3fProperty("position", Vect3f(0,0,0),true);
+  bool l_bActive           = _TreeMiner.GetBoolProperty("active", true, false);
+  string l_szOnDeathScript = _TreeMiner.GetPszISOProperty("on_death", "", false);
   
   LOGGER->AddNewLog(ELL_INFORMATION, "\t\t\tMilitar name \"%s\", pos %f,%f,%f, Player %s", l_szName.c_str(),
                                       l_vPosition.x, l_vPosition.y, l_vPosition.z, l_szPlayerName.c_str());
 
-  CGameEntity* l_pEntity = _pEM->InitMilitar(l_szPlayerName, l_vPosition, l_szName, l_bActive);
+  CGameEntity* l_pEntity = _pEM->InitMilitar(l_szPlayerName, l_vPosition, l_szName, l_bActive, l_szOnDeathScript);
 
 }
 
@@ -561,11 +565,11 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
   return l_pPlayer;
 }
 
-CGameEntity* CEntityManager::InitMiner(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName, const bool _bActive)
+CGameEntity* CEntityManager::InitMiner(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName, const bool _bActive, const string& _szOnDeathScript)
 {
   CGameEntity* l_pMiner = InitEnemy(_szPlayerName, _vPosition, 0.8f, 
                     "State_Enemy_Idle", "miner", "Data/Animated Models/Miner/Skeleton.xml",
-                    _szEntityName);
+                    _szEntityName, _szOnDeathScript);
 
   l_pMiner->GetComponent<CComponentRenderableObject>()->m_fHeightAdjustment = -1.1f;
 
@@ -576,11 +580,11 @@ CGameEntity* CEntityManager::InitMiner(const string& _szPlayerName, const Vect3f
   return l_pMiner;
 }
 
-CGameEntity* CEntityManager::InitMilitar(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName, const bool _bActive)
+CGameEntity* CEntityManager::InitMilitar(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName, const bool _bActive, const string& _szOnDeathScript)
 {
   CGameEntity* l_pMilitar = InitEnemy(_szPlayerName, _vPosition, 0.8f, 
                     "State_Soldier_Idle", "Militar", "Data/Animated Models/Militar/Skeleton.xml",
-                    _szEntityName);
+                    _szEntityName, _szOnDeathScript);
 
   l_pMilitar->GetComponent<CComponentRenderableObject>()->m_fHeightAdjustment = -1.0f;
 
@@ -593,7 +597,7 @@ CGameEntity* CEntityManager::InitMilitar(const string& _szPlayerName, const Vect
 
 CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f& _vPosition, float _fRadius,
                          const string& _szInitialState, const string& _szRenderableModel, const string& _szRagdollModell,
-                         const string& _szEntityName)
+                         const string& _szEntityName, const string& _szOnDeathScript)
 {
   CGameEntity* l_peEnemy = CreateEntity();
   if(_szEntityName != "")
@@ -623,7 +627,7 @@ CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f
   //CComponentAnimation::AddToEntity(l_peEnemy);
   CComponentVida::AddToEntity(l_peEnemy, 100.f, 100.f);
   //Important IABrain despres de ComponentVida, sinó IABrain no te la informacio actualitzada de la vida
-  CComponentIABrain::AddToEntity(l_peEnemy,_szPlayerName,_szRagdollModell);
+  CComponentIABrain::AddToEntity(l_peEnemy,_szPlayerName,_szRagdollModell, _szOnDeathScript);
   
 
   CComponentStateMachine::AddToEntity(l_peEnemy, _szInitialState);
@@ -693,4 +697,24 @@ CGameEntity* CEntityManager::InitTriggerWithParticles(const string& _szCore, con
     CComponentLifetime::AddToEntity(l_pTriggerEmiterEntity, _fTime);
 
   return l_pTriggerEmiterEntity;
+}
+
+CGameEntity* CEntityManager::InitPickUp(const string& _szName, const string& _szCore, const Vect3f& _vPos, const string& _szOnPickUp)
+{
+  LOGGER->AddNewLog(ELL_INFORMATION, "CEntityManager::InitPickUp Creant Pick Up amb nom \"%s\" i core \"%s\".", _szName.c_str(), _szCore.c_str());
+  CGameEntity* l_pPickUpEntity = ENTITY_MANAGER->CreateEntity();
+  CComponentObject3D::AddToEntity(l_pPickUpEntity);
+
+  CComponentRenderableObject* l_pRO = CComponentRenderableObject::AddToEntity(l_pPickUpEntity, _szName, _szCore);
+
+  if(l_pRO)
+    CComponentTrigger::AddToEntity(l_pPickUpEntity, l_pRO->GetRenderableObject()->GetBoundingBox()->GetDimension(), _szOnPickUp, "", GetCollisionGroup("pickup"));
+  else
+  {
+    LOGGER->AddNewLog(ELL_ERROR, "CEntityManager::InitPickUp Error al crear el component Renderable Object.");
+    ENTITY_MANAGER->RemoveEntity(l_pPickUpEntity);
+    return 0;
+  }
+
+  return l_pPickUpEntity;
 }

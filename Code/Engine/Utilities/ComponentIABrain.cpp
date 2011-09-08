@@ -1,8 +1,7 @@
+#define __DONT_INCLUDE_MEM_LEAKS__
 #include "ComponentIABrain.h"
-#include "Core.h"
 #include "RenderableAnimatedInstanceModel.h"
 #include "ComponentRenderableObject.h"
-#include "PhysicsManager.h"
 #include "ComponentObject3D.h"
 #include "ComponentLaser.h"
 #include "ComponentRagdoll.h" 
@@ -10,18 +9,36 @@
 #include "ComponentVida.h"
 #include "IAManager.h"
 #include "GraphDefines.h"
+
+#include "ScriptManager.h"
+#include "Core.h"
+#include "PhysicsManager.h"
 #include "PhysxBone.h"
 #include "PhysicActor.h"
 #include "cal3d\cal3d.h"
-//#include "ComponentParticleShootMiner.h"
+
+extern "C"
+{
+#include "lua.h"
+#include "lualib.h"
+#include "lauxlib.h"
+}
+
+#include <luabind/luabind.hpp>
+#include <luabind/function.hpp>
+#include <luabind/class.hpp>
+#include <luabind/operator.hpp>
+
+#include "Utils\MemLeaks.h"
+#include "Utils\Logger.h"
 
 #define SHOOT_POWER 20.0f
 
-CComponentIABrain* CComponentIABrain::AddToEntity(CGameEntity *_pEntity, const string& _szPlayerEntityName, const string& _szRagdollName)
+CComponentIABrain* CComponentIABrain::AddToEntity(CGameEntity *_pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript)
 {
   CComponentIABrain *l_pComp = new CComponentIABrain();
   assert(_pEntity && _pEntity->IsOk());
-  if(l_pComp->Init(_pEntity, _szPlayerEntityName, _szRagdollName))
+  if(l_pComp->Init(_pEntity, _szPlayerEntityName, _szRagdollName, _szOnDeathScript))
   {
     l_pComp->SetEntity(_pEntity);
     return l_pComp;
@@ -33,11 +50,13 @@ CComponentIABrain* CComponentIABrain::AddToEntity(CGameEntity *_pEntity, const s
   }
 }
 
-bool CComponentIABrain::Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName)
+bool CComponentIABrain::Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript)
 {
   m_szRagdollName = _szRagdollName;
 
   m_pPlayer = CORE->GetEntityManager()->GetEntity(_szPlayerEntityName);
+
+  m_szOnDeathScript = _szOnDeathScript;
 
   m_pCover = 0;
 
@@ -256,6 +275,28 @@ void CComponentIABrain::Die()
 
   if(m_pCover)
     m_pCover->m_bOcupat = false;
+
+  RunScript();
+}
+
+void CComponentIABrain::RunScript()
+{
+  if(m_szOnDeathScript != "") 
+  {
+    CScriptManager* m_pSM = CORE->GetScriptManager();
+
+    lua_State *l_pLUA = m_pSM->GetLuaState();
+
+    try {
+      luabind::call_function<void>(l_pLUA, m_szOnDeathScript.c_str(), GetEntity());
+    } catch(const luabind::error& _TheError)
+    {
+      CScriptManager::PrintError(_TheError);
+
+      LOGGER->AddNewLog(ELL_ERROR,"\tEntity \"%s\" has launched script \"%s\" has failed with error \"%s\"", 
+                          GetEntity()->GetName().c_str(), m_szOnDeathScript.c_str(), _TheError.what());
+    }
+  }
 }
 
 void CComponentIABrain::PlanPathToCobertura()
