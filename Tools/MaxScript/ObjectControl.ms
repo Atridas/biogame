@@ -155,6 +155,17 @@ function IsEmiter _object =
 	)
 )
 
+-- Comprova si l'objecte proporcionat és un emisor de particules
+function IsBillboard _object =
+(
+	if classof _object == Dummy and (GetUserProp _object "billboard") != undefined then
+	(
+		return true
+	) else (
+		return false
+	)
+)
+
 -- Comprova si l'objecte proporcionat és un spawner d'enemics
 function IsSpawner _object =
 (

@@ -32,6 +32,8 @@
 #include "ComponentLifetime.h"
 #include "ComponentExplosive.h"
 
+#include "ComponentBillboard.h"
+#include "ParticleConstants.h"
 
 #include "RenderableObject.h"
 #include "PhysicsManager.h"
@@ -298,17 +300,32 @@ void LoadComponentNavNode(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
   }
 }
 
+
 void LoadComponentEmiter(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Emiter.");
-  string l_szCore  = _TreeComponent.GetPszISOProperty("core",   "",            true);
-  Vect3f l_vVolume = _TreeComponent.GetVect3fProperty("volume", Vect3f(1,1,1), true);
+  string l_szCore        = _TreeComponent.GetPszISOProperty("core",   "",            true);
+  Vect3f l_vVolume       = _TreeComponent.GetVect3fProperty("volume", Vect3f(1,1,1), true);
+  int    l_iMaxParticles = _TreeComponent.GetIntProperty   ("max_particles", DEFAULT_MAX_PARTICLES_PER_EMITER, false);
 
   CComponentEmiter *l_pCEmiter;
 
-  if(!(l_pCEmiter = CComponentEmiter::AddToEntity(_pEntity, l_szCore, l_vVolume)))
+  if(!(l_pCEmiter = CComponentEmiter::AddToEntity(_pEntity, l_szCore, l_vVolume, l_iMaxParticles)))
   {
     LOGGER->AddNewLog(ELL_WARNING,"\tError al crear el component Emiter de l'objecte \"%s\"",_pEntity->GetName());
+  }
+}
+
+void LoadComponentBillboard(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
+{
+  LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Billboard.");
+  string l_szCore = _TreeComponent.GetPszISOProperty("core",   "",            true);
+
+  CComponentBillboard *l_pCBillboard;
+
+  if(!(l_pCBillboard = CComponentBillboard::AddToEntity(_pEntity, l_szCore)))
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"\tError al crear el component Billboard de l'objecte \"%s\"",_pEntity->GetName());
   }
 }
 
@@ -500,6 +517,11 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
             } else if(strcmp(l_TreeComponent.GetName(),"Emiter") == 0)
             {
               LoadComponentEmiter(l_TreeComponent, l_pEntity);
+              
+            // -----------------------------------------------------------------------------------------------------------
+            } else if(strcmp(l_TreeComponent.GetName(),"Billboard") == 0)
+            {
+              LoadComponentBillboard(l_TreeComponent, l_pEntity);
               
             // -----------------------------------------------------------------------------------------------------------
             } else if(strcmp(l_TreeComponent.GetName(),"EnemySpawner") == 0)

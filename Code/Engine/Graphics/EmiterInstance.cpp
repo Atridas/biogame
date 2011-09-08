@@ -9,29 +9,46 @@
 #include "PortalManager.h"
 #include "Room.h"
 
-bool CEmiterInstance::Init(const string& _szCoreName, const CObject3D& _Position, const Vect3f& _vVolume )
+bool CEmiterInstance::Init(const string& _szCoreName, const CObject3D& _Position, const Vect3f& _vVolume, int _iMaxParticles, bool _bBillboardMode )
 {
   assert(!IsOk());
   SetOk(true);
   SetMat44( _Position.GetMat44() );
 
-  m_szCoreName  = _szCoreName;
-  m_vVolume     = _vVolume;
-  m_vMaxVolume  = m_vVolume * .5f;
-  m_vMinVolume  = -m_vMaxVolume;
-  m_fVolume     = _vVolume.x * _vVolume.y * _vVolume.z;
-  m_pEmiterCore = CORE->GetEmiterCoreManager()->GetEmiterCore(m_szCoreName);
-  
+  m_szCoreName     = _szCoreName;
+  m_vVolume        = _vVolume;
+  m_vMaxVolume     = m_vVolume * .5f;
+  m_vMinVolume     = -m_vMaxVolume;
+  m_fVolume        = _vVolume.x * _vVolume.y * _vVolume.z;
+  m_pEmiterCore    = CORE->GetEmiterCoreManager()->GetEmiterCore(m_szCoreName);
+  m_bBillboardMode = _bBillboardMode;
+  m_iMaxParticles  = _iMaxParticles;
+
+  m_RecyclingParticles.Reset(m_iMaxParticles);
+  m_iaParticles    = new int[m_iMaxParticles];
+
   GetBoundingBox()->Init(_vVolume);
 
-  if(m_pEmiterCore->IsSimpleEmiter())
+  if(m_bBillboardMode)
+  {
+    if(m_pEmiterCore->IsSimpleEmiter())
+    {
+      m_Billboard.Init(dynamic_cast<const CSimpleEmiterCore*>(m_pEmiterCore), Vect3f(0,0,0),true);
+    }
+    else
+    {
+      LOGGER->AddNewLog(ELL_WARNING, "Trying to initialize billboard with aggregate emiter.");
+      m_pEmiterCore = CORE->GetEmiterCoreManager()->GetNullEmiter();
+      m_Billboard.Init(CORE->GetEmiterCoreManager()->GetNullEmiter(), Vect3f(0,0,0),true);
+    }
+  } else if(m_pEmiterCore->IsSimpleEmiter())
   {
     m_bIsSimple = true;
-    CSimpleEmiterCore *l_pEmiterCore = dynamic_cast<CSimpleEmiterCore*>(m_pEmiterCore);
+    const CSimpleEmiterCore *l_pEmiterCore = dynamic_cast<const CSimpleEmiterCore*>(m_pEmiterCore);
 
     m_fTimeToNextParticle = 1.f / (l_pEmiterCore->GetEmitRate() * m_fVolume);
     m_iActiveParticles = 0;
-    memset(m_Particles, 0, sizeof(m_Particles));
+    memset(m_iaParticles, 0, sizeof(int) * m_iMaxParticles);
 
     m_bAwake = true;
     m_fTimeToAwakeOrSleep = l_pEmiterCore->GetAwakeTime();
@@ -42,7 +59,7 @@ bool CEmiterInstance::Init(const string& _szCoreName, const CObject3D& _Position
   else
   {
     m_bIsSimple = false;
-    CAggregateEmiterCore *l_pEmiterCore = dynamic_cast<CAggregateEmiterCore*>(m_pEmiterCore);
+    const CAggregateEmiterCore *l_pEmiterCore = dynamic_cast<const CAggregateEmiterCore*>(m_pEmiterCore);
 
     vector<CAggregateEmiterCore::SEmiters>::const_iterator l_it  = l_pEmiterCore->GetChilds().begin();
     vector<CAggregateEmiterCore::SEmiters>::const_iterator l_end = l_pEmiterCore->GetChilds().end();
@@ -87,7 +104,7 @@ bool CEmiterInstance::Init(const string& _szCoreName, const CObject3D& _Position
   }
   else if(!m_InstancedData.IsOk())
   {
-    bool l_bIsOk = m_InstancedData.Init(CORE->GetRenderManager(), MAX_PARTICLES_PER_EMITER);
+    bool l_bIsOk = m_InstancedData.Init(CORE->GetRenderManager(), m_iMaxParticles);
     SetOk(l_bIsOk);
   }
 
@@ -109,17 +126,29 @@ void CEmiterInstance::Update(float _fDeltaTime)
 
   bool l_bBBModified = false;
 
-  if(m_bIsSimple)
+  if(m_bBillboardMode)
+  {
+    
+    CRenderManager* l_pRM = CORE->GetRenderManager();
+    SParticleRenderInfo* l_pInstanceBuffer = m_InstancedData.GetBuffer(1, l_pRM);
+    assert(l_pInstanceBuffer);
+
+    m_Billboard.Update(_fDeltaTime);
+    m_Billboard.FillRenderInfo(l_pInstanceBuffer[0]);
+    
+    bool l_bResult = m_InstancedData.SetData(l_pInstanceBuffer, 1, l_pRM);
+    assert(l_bResult);
+  }else if(m_bIsSimple)
   {
     CRenderManager* l_pRM = CORE->GetRenderManager();
-    SParticleRenderInfo* l_pInstanceBuffer = m_InstancedData.GetBuffer(MAX_PARTICLES_PER_EMITER, l_pRM);
+    SParticleRenderInfo* l_pInstanceBuffer = m_InstancedData.GetBuffer(m_iMaxParticles, l_pRM);
     assert(l_pInstanceBuffer);
-    CSimpleEmiterCore *l_pEmiterCore = dynamic_cast<CSimpleEmiterCore*>(m_pEmiterCore);
+    const CSimpleEmiterCore *l_pEmiterCore = dynamic_cast<const CSimpleEmiterCore*>(m_pEmiterCore);
 
     //actualitzem les partícules
     for(int i = 0; i < m_iActiveParticles; ++i)
     {
-      CParticle* l_pParticle = m_RecyclingParticles.GetAt(m_Particles[i]);
+      CParticle* l_pParticle = m_RecyclingParticles.GetAt(m_iaParticles[i]);
       if(l_pParticle->Update(_fDeltaTime))
       {
         //la partícula encara està viva, omplim la informació al buffer de rendetizatge.
@@ -128,9 +157,9 @@ void CEmiterInstance::Update(float _fDeltaTime)
       }
       else
       {
-        m_RecyclingParticles.Free(m_Particles[i]);
+        m_RecyclingParticles.Free(m_iaParticles[i]);
         m_iActiveParticles--;
-        m_Particles[i] = m_Particles[m_iActiveParticles];
+        m_iaParticles[i] = m_iaParticles[m_iActiveParticles];
         if(i != m_iActiveParticles)
           --i;
       }
@@ -158,7 +187,7 @@ void CEmiterInstance::Update(float _fDeltaTime)
 
       m_fTimeToNextParticle = 1.f / (l_pEmiterCore->GetEmitRate() * m_fVolume); //carreguem el temps fins la següent partícula
 
-      if(m_bAwake && m_iActiveParticles < MAX_PARTICLES_PER_EMITER) //comprovem que el buffer no hagi quedat ple
+      if(m_bAwake && m_iActiveParticles < m_iMaxParticles) //comprovem que el buffer no hagi quedat ple
       {
         int l_iParticle = m_RecyclingParticles.NewIndex(); //agafem una partícula del buffer
         CParticle* l_pParticle = m_RecyclingParticles.GetAt(l_iParticle);
@@ -169,8 +198,8 @@ void CEmiterInstance::Update(float _fDeltaTime)
         Vect3f l_vInitialPosition = ( l_v_1_Minus_Rnd.Scale(m_vMinVolume) ) + ( l_vRnd.Scale(m_vMaxVolume) );
 
         //inicialitzem la partícula
-        l_pParticle->Init(l_pEmiterCore, l_vInitialPosition);
-        m_Particles[m_iActiveParticles] = l_iParticle;
+        l_pParticle->Init(l_pEmiterCore, l_vInitialPosition, false);
+        m_iaParticles[m_iActiveParticles] = l_iParticle;
 
         //actualitzem aquesta partícula fins al final d'aquest frame
         if(l_pParticle->Update(_fDeltaTime))
@@ -181,7 +210,7 @@ void CEmiterInstance::Update(float _fDeltaTime)
         }
         else
         {
-          m_RecyclingParticles.Free(m_Particles[m_iActiveParticles]);
+          m_RecyclingParticles.Free(m_iaParticles[m_iActiveParticles]);
           m_iActiveParticles--;
         }
 
@@ -236,12 +265,28 @@ void CEmiterInstance::Render(CRenderManager* _pRM, const Mat44f& _mTransform)
   {
     l_mTransform = _mTransform * GetMat44();
   }
+  if(m_bBillboardMode)
+  {
+    _pRM->SetTransform(l_mTransform);
 
-  if(m_bIsSimple)
+    CEffectManager* l_pEM = CORE->GetEffectManager();
+    assert(l_pEM && l_pEM->IsOk());
+
+    LPDIRECT3DDEVICE9 l_pDevice = _pRM->GetDevice();
+    l_pDevice->SetStreamSourceFreq(0, (D3DSTREAMSOURCE_INDEXEDDATA  | 1 ));
+    l_pDevice->SetStreamSourceFreq(1, (D3DSTREAMSOURCE_INSTANCEDATA | 1 ));
+
+    bool l_bResult = m_InstancedData.SetStreamSource(_pRM, 1);
+    assert(l_bResult);// ---
+
+    const CSimpleEmiterCore *l_pEmiterCore = dynamic_cast<const CSimpleEmiterCore*>(m_pEmiterCore);
+    CEffect* l_pEffect = l_pEM->ActivateMaterial(l_pEmiterCore->GetMaterial());
+    _pRM->GetParticleVertexs()->Render(_pRM, l_pEffect);
+  } else if(m_bIsSimple)
   {
     if(m_iActiveParticles == 0)
       return;
-    CSimpleEmiterCore *l_pEmiterCore = dynamic_cast<CSimpleEmiterCore*>(m_pEmiterCore);
+    const CSimpleEmiterCore *l_pEmiterCore = dynamic_cast<const CSimpleEmiterCore*>(m_pEmiterCore);
     CEffectManager* l_pEM = CORE->GetEffectManager();
     assert(l_pEM && l_pEM->IsOk());
 
@@ -330,4 +375,6 @@ void CEmiterInstance::Release()
 
   m_RecyclingParticles.DeleteAllElements();
   CORE->GetPortalManager()->RemoveEmiter(this);
+
+  CHECKED_DELETE_ARRAY(m_iaParticles);
 }

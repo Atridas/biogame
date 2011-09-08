@@ -16,7 +16,7 @@ public:
 
   ~CParticle() {};
   
-  void Init(CSimpleEmiterCore* _pCoreEmiter, const Vect3f& _vInitialPosition);
+  void Init(const CSimpleEmiterCore* _pCoreEmiter, const Vect3f& _vInitialPosition, bool _bBillboardMode);
 
   bool Update(float _fDeltaTime);
 
@@ -26,8 +26,13 @@ public:
 
 private:
 
+  bool m_bBillboardMode;
+
   float m_fLivedTime;
   float m_fTotalLifetime;
+  
+  float m_fColorAnimationTime, m_fTimeToResetColor;
+  float m_fSizeAnimationTime, m_fTimeToResetSize;
 
   Vect3f m_vSpeed;
   float  m_fAngularSpeed;
@@ -46,7 +51,7 @@ private:
   //------------------------------------------
 
 
-  CSimpleEmiterCore* m_pEmiterCore;
+  const CSimpleEmiterCore* m_pEmiterCore;
 
   //rendering information
   Vect3f m_vPosition;

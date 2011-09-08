@@ -9,18 +9,18 @@ CEmiterInstance* CEmiterManager::GetEmiter(const string &_szName) const
   return GetResource(_szName);
 }
 
-CEmiterInstance* CEmiterManager::CreateEmiter(const string &_szName, const string &_szCore, const CObject3D& _Position, const Vect3f& _vDimensions)
+CEmiterInstance* CEmiterManager::CreateEmiter(const string &_szName, const string &_szCore, const CObject3D& _Position, const Vect3f& _vDimensions, int _iMaxParticles, bool _bBillboardMode)
 {
   CEmiterInstance* l_pEI = GetResource(_szName);
 
   if(l_pEI)
   {
-    l_pEI->Reset(_szCore,_Position,_vDimensions);
+    l_pEI->Reset(_szCore,_Position,_vDimensions, _iMaxParticles, _bBillboardMode);
   }
   else
   {
     l_pEI = new CEmiterInstance();
-    if(l_pEI->Init(_szCore,_Position,_vDimensions))
+    if(l_pEI->Init(_szCore,_Position,_vDimensions, _iMaxParticles, _bBillboardMode))
     {
       AddResource(_szName, l_pEI);
     }

@@ -136,6 +136,9 @@
     <Filter Include="EntitySystem\Components\ComponentExplosive">
       <UniqueIdentifier>{a9108874-b4df-48b0-b5df-7f1e09e3dc5b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentBillboard">
+      <UniqueIdentifier>{2c9a171a-f477-41ea-9b8f-580367a76b99}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -275,6 +278,9 @@
     </ClCompile>
     <ClCompile Include="ComponentLifetime.cpp">
       <Filter>EntitySystem\Components\ComponentLifetime</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentBillboard.cpp">
+      <Filter>EntitySystem\Components\ComponentBillboard</Filter>
     </ClCompile>
     <ClCompile Include="ComponentExplosive.cpp">
       <Filter>EntitySystem\Components\ComponentExplosive</Filter>
@@ -430,6 +436,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentExplosive.h">
       <Filter>EntitySystem\Components\ComponentExplosive</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentBillboard.h">
+      <Filter>EntitySystem\Components\ComponentBillboard</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

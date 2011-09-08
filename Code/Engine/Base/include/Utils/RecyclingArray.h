@@ -10,12 +10,11 @@ class CRecyclingArray:
   public CBaseControl
 {
 public:
-  CRecyclingArray(uint32 _uiMax):
-                    m_uiUsedElements(0),m_uiFreeElements(_uiMax),m_uiTotalElements(_uiMax),
-                    m_vRecyclingArray(0),m_vRecyclingArrayStatus(0)
-                    { Init(); };
+  CRecyclingArray(uint32 _uiMax):m_vRecyclingArray(0),m_vRecyclingArrayStatus(0) { Reset(_uiMax); };
   ~CRecyclingArray() { Done(); };
   
+  void Reset(uint32 _uiMax);
+
   const uint32 GetNumFreeElements() const { return m_uiFreeElements; };
   const uint32 GetNumUsedElements() const { return m_uiUsedElements; };
   const uint32 GetTotalElements() const { return m_uiTotalElements; };
@@ -32,7 +31,6 @@ protected:
   void Release();
 
 private:
-  void Init();
 
   uint32  m_uiFreeElements;
   uint32  m_uiUsedElements;
@@ -44,15 +42,23 @@ private:
 };
 
 template<class T>
-void CRecyclingArray<T>::Init(void)
+void CRecyclingArray<T>::Reset(uint32 _uiMax)
 {
-  if(m_uiTotalElements > 0)
+   m_uiUsedElements = 0;
+   m_uiFreeElements  = 
+   m_uiTotalElements = _uiMax;
+   
+                    
+  if(_uiMax > 0)
     SetOk(true);
   else
   {
     return;
     SetOk(false);
   }
+
+  CHECKED_DELETE_ARRAY(m_vRecyclingArray);
+  CHECKED_DELETE_ARRAY(m_vRecyclingArrayStatus);
 
   m_vRecyclingArray       = new T[m_uiTotalElements];
   m_vRecyclingArrayStatus = new bool[m_uiTotalElements];

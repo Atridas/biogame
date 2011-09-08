@@ -1,14 +1,14 @@
-#include "ComponentEmiter.h"
+#include "ComponentBillboard.h"
 #include "ComponentObject3D.h"
 #include "EmiterManager.h"
 #include "EmiterInstance.h"
 #include "Core.h"
 
-CComponentEmiter* CComponentEmiter::AddToEntity(CGameEntity* _pEntity, const string& _szCore, const Vect3f& _vVolume, int _iMaxParticles)
+CComponentBillboard* CComponentBillboard::AddToEntity(CGameEntity* _pEntity, const string& _szCore)
 {
-  CComponentEmiter *l_pComp = new CComponentEmiter();
+  CComponentBillboard *l_pComp = new CComponentBillboard();
   assert(_pEntity && _pEntity->IsOk());
-  if(l_pComp->Init(_pEntity, _szCore, _vVolume, _iMaxParticles))
+  if(l_pComp->Init(_pEntity, _szCore))
   {
     l_pComp->SetEntity(_pEntity);
     return l_pComp;
@@ -20,7 +20,7 @@ CComponentEmiter* CComponentEmiter::AddToEntity(CGameEntity* _pEntity, const str
   }
 }
 
-bool CComponentEmiter::Init(CGameEntity* _pEntity, const string& _szCore, const Vect3f& _vVolume, int _iMaxParticles)
+bool CComponentBillboard::Init(CGameEntity* _pEntity, const string& _szCore)
 {
   CComponentObject3D* l_pCO3D = _pEntity->GetComponent<CComponentObject3D>();
   if(!l_pCO3D)
@@ -33,14 +33,14 @@ bool CComponentEmiter::Init(CGameEntity* _pEntity, const string& _szCore, const 
   m_szEmiterName  = "Entity Emiter ";
   m_szEmiterName += _pEntity->GetGUID();
 
-  m_pEmiterInstance = CORE->GetEmiterManager()->CreateEmiter(m_szEmiterName, _szCore, *l_pCO3D, _vVolume, _iMaxParticles);
+  m_pEmiterInstance = CORE->GetEmiterManager()->CreateBillboard(m_szEmiterName, _szCore, *l_pCO3D);
   m_pEmiterInstance->SetReference(l_pCO3D);
 
   SetOk(true);
   return IsOk();
 }
 
-void CComponentEmiter::Release()
+void CComponentBillboard::Release()
 {
   CORE->GetEmiterManager()->DeleteEmiter(m_szEmiterName);
 
@@ -48,12 +48,7 @@ void CComponentEmiter::Release()
   m_szEmiterName = "";
 }
 
-void CComponentEmiter::ChangeCore(const string& _szCore)
+void CComponentBillboard::ChangeCore(const string& _szCore)
 {
   m_pEmiterInstance->Reset(_szCore);
-}
-
-void CComponentEmiter::ChangeVolume(const Vect3f& _vVolume)
-{
-  m_pEmiterInstance->Reset(_vVolume);
 }

@@ -38,8 +38,8 @@ public:
 
   virtual bool Init(CXMLTreeNode& _xmlEmiter) = 0;
       
-  virtual bool IsSimpleEmiter() = 0;
-  virtual bool IsAggregateEmiter() = 0;
+  virtual bool IsSimpleEmiter() const = 0;
+  virtual bool IsAggregateEmiter() const = 0;
 };
 
 

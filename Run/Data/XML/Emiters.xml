@@ -28,7 +28,9 @@
       
     Animacions per keyframes
     Les animacions van de posar valors i punts en el temps. Aleshores la partícula agafa aquell valor en aquell
-    moment
+    moment. Es pot resetejar el contador usant:
+    reset_animation="true"
+    reset_animation_time(1/2):temps en el qual es reseteja l'animació.
       Sizes
         control_time(1/2): temps del keyframe
         size(1/2): tamany que agafa la partícula en aquell moment
@@ -84,7 +86,7 @@
   </ParticleEmitter>
   -->
   <SimpleEmiter id="bubble"                        
-              emit_rate1="10.0"                  emit_rate2="15.0"
+              emit_rate1="20.0"                  emit_rate2="30.0"
               life1="2.5"                        life2="3.0"              
               awake_time1="0.8"                  awake_time2="1.2"
               sleep_time1="1.3"                  sleep_time2="1.7"
@@ -514,21 +516,9 @@
   <!-- ····························································································· -->
   <!-- ····························································································· -->
   <!-- ····························································································· -->
-  <SimpleEmiter id="Ins Lab 1"                        
-                emit_rate1="8.0"                   emit_rate2="8.0"
-                life1="1.0"                        life2="1.0"                    
-                awake_time1="1.0"                  awake_time2="1.0"
-                sleep_time1="0.0"                  sleep_time2="0.0"
+  <Billboard    id="Ins Lab 1"                        
                 
-                starting_angle1="0.0"              starting_angle2="0.0"
-                
-                starting_speed1="0.0 0.0 0.0"      starting_speed2="0.0 0.0 0.0"
-                starting_direction_angle="0.0"
-                acceleration1="0.0 0.0 0.0"        acceleration2="0.0 0.0 0.0"
-                acceleration_direction_angle="0.0"
-                starting_angular_speed1="0.0"      starting_angular_speed2="0.0"
-                angular_acceleration1="0.0"        angular_acceleration2="0.0"
-                
+                starting_angle1="0.0"             starting_angle2="0.0"
                 
                 color1="1.0 1.0 1.0 1.0"          color2="1.0 1.0 1.0 1.0" 
                 size1="0.5"                       size2="0.5"
@@ -536,4 +526,14 @@
                 is_sprite="false"
                 
                 texture="Data/Textures/Gameplay/InstruccionsLab1.dds"/>
+  <Billboard    id="Ins Lab 2"                        
+                
+                starting_angle1="0.0"             starting_angle2="0.0"
+                
+                color1="1.0 1.0 1.0 1.0"          color2="1.0 1.0 1.0 1.0" 
+                size1="0.5"                       size2="0.5"
+                
+                is_sprite="false"
+                
+                texture="Data/Textures/Gameplay/InstruccionsLab2.dds"/>
 </CoreEmiters>

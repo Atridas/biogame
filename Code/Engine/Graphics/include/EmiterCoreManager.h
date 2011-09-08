@@ -16,14 +16,17 @@ class CEmiterCoreManager:
   private CMapManager<CEmiterCore>
 {
 public:
-  CEmiterCoreManager() {m_NullEmiter.Init(); SetOk(true);};
+  CEmiterCoreManager() {};
   ~CEmiterCoreManager(void)  {Done();};
+
+  bool Init() {SetOk(m_NullEmiter.Init()); return IsOk();};
   
   bool Load(const string &_szFileName);
   bool Load(const set<string> &_sFiles);
   bool Reload();
-
-  CEmiterCore * GetEmiterCore(const string &_szName);
+  
+  const CEmiterCore * GetEmiterCore(const string &_szName) const;
+  const CSimpleEmiterCore * GetNullEmiter() const { return &m_NullEmiter; };
   const set<string>& GetCoreNames() const {return m_sCores;};
 
 private:

@@ -39,6 +39,8 @@ extern "C"
 #include "ComponentEmiter.h"
 #include "ComponentSpawner.h"
 #include "ComponentExplosive.h"
+#include "ComponentEmiter.h"
+#include "ComponentBillboard.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -131,7 +133,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("nav_node",             CBaseComponent::ECT_NAV_NODE),
           value("emiter",               CBaseComponent::ECT_EMITER),
           value("spawner",              CBaseComponent::ECT_SPAWNER),
-          value("explosive",            CBaseComponent::ECT_EXPLOSIVE)
+          value("explosive",            CBaseComponent::ECT_EXPLOSIVE),
+          value("billboard",            CBaseComponent::ECT_BILLBOARD)
       ]
       .def("get_type",     &CBaseComponent::GetType)
       .def("get_entity",   &CBaseComponent::GetEntity)
@@ -338,12 +341,6 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("get_graph_node_index",     &CComponentNavNode::GetGraphNodeIndex)
 
     // ----------------------------------------------------------------------------------------------------
-    ,class_<CComponentEmiter, CBaseComponent>("ComponentEmiter")
-      .def("add_to_entity",         &CComponentEmiter::AddToEntity)
-      .def("change_core",           &CComponentEmiter::ChangeCore)
-      .def("change_volume",         &CComponentEmiter::ChangeVolume)
-
-    // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentSpawner, CBaseComponent>("ComponentSpawner")
       .enum_("EEnemyType")
       [
@@ -358,6 +355,17 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponentExplosive, CBaseComponent>("ComponentExplosive")
       .def("add_to_entity",            &CComponentExplosive::AddToEntity)
       .def("explode",                  &CComponentExplosive::Explode)
+
+      // ----------------------------------------------------------------------------------------------------
+      ,class_<CComponentEmiter, CBaseComponent>("ComponentEmiter")
+      .def("add_to_entity",        &CComponentEmiter::AddToEntity)
+      .def("change_core",          &CComponentEmiter::ChangeCore)
+      .def("change_volume",        &CComponentEmiter::ChangeVolume)
+
+      // ----------------------------------------------------------------------------------------------------
+      ,class_<CComponentBillboard, CBaseComponent>("ComponentBillboard")
+      .def("add_to_entity",        &CComponentBillboard::AddToEntity)
+      .def("change_core",          &CComponentBillboard::ChangeCore)
   ];
 }
 
