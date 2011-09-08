@@ -198,7 +198,7 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Porta_Opening['Receive'] = function(_entitat, _event)
-  local l_sender = EM:get_entity(_event.sender)
+  --local l_sender = EM:get_entity(_event.sender)
   --log('opening: event received ' .. l_sender:get_name() )
   
   if _event.msg == Event.tancar then
@@ -239,7 +239,7 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Porta_Closed['Receive'] = function(_entitat, _event)
-  local l_sender = EM:get_entity(_event.sender)
+  --local l_sender = EM:get_entity(_event.sender)
   --log('closed: event received ' .. l_sender:get_name() )
   
   if _event.msg == Event.obrir then
@@ -301,7 +301,7 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Porta_Closing['Receive'] = function(_entitat, _event)
-  local l_sender = EM:get_entity(_event.sender)
+  --local l_sender = EM:get_entity(_event.sender)
   --log('closing: event received ' .. l_sender:get_name() )
  
   if _event.msg == Event.obrir then

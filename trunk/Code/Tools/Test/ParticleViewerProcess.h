@@ -8,7 +8,7 @@
 class CEmiterInstance;
 //-----------------------------------------
 
-#define NUM_EMISORS 6
+#define NUM_EMISORS 7
 
 class CParticleViewerProcess:
   public CProcess

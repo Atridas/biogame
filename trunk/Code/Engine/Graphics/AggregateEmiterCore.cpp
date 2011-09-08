@@ -47,7 +47,7 @@ bool CAggregateEmiterCore::Init(CXMLTreeNode& _xmlEmiter)
 
       l_ChildEmiter.emiter = l_szEmiterName;
         
-      CEmiterCore *l_pChildEmiter = l_pCEM->GetEmiterCore(l_szEmiterName);
+      const CEmiterCore *l_pChildEmiter = l_pCEM->GetEmiterCore(l_szEmiterName);
 
       if(l_pChildEmiter->IsSimpleEmiter())
       {
@@ -56,7 +56,7 @@ bool CAggregateEmiterCore::Init(CXMLTreeNode& _xmlEmiter)
       }
       else if(l_pChildEmiter->IsAggregateEmiter())
       {
-        const set<string>& l_GrandchildNames = dynamic_cast<CAggregateEmiterCore*>(l_pChildEmiter)->GetChildNames();
+        const set<string>& l_GrandchildNames = dynamic_cast<const CAggregateEmiterCore*>(l_pChildEmiter)->GetChildNames();
         if(l_GrandchildNames.find(GetName()) == l_GrandchildNames.end())
         {
           m_Childs.push_back(l_ChildEmiter);

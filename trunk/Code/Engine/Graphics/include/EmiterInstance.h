@@ -23,7 +23,8 @@ class CEmiterInstance:
 public:
   CEmiterInstance():
       m_pEmiterCore(0),
-      m_RecyclingParticles(MAX_PARTICLES_PER_EMITER),
+      m_RecyclingParticles(DEFAULT_MAX_PARTICLES_PER_EMITER),
+      m_iaParticles(0),
       m_fTimeToNextParticle(0),
       m_fTimeToAwakeOrSleep(0),
       m_iActiveParticles(0),
@@ -36,17 +37,17 @@ public:
       {};
   virtual ~CEmiterInstance() {Done();};
 
-  bool Init( const string& _szCoreName, const CObject3D& _Position, const Vect3f& _vVolume );
-  bool Reset( const Vect3f& _vVolume ) { return Reset(m_szCoreName, *this, _vVolume );};
-  bool Reset( const string& _szCoreName, const CObject3D& _Position, const Vect3f& _vVolume )
-    { Release(); SetOk(false); return Init(_szCoreName, _Position, _vVolume); };
-  bool Reset( const string& _szCoreName )
-    { Release(); SetOk(false); return Init(_szCoreName, *this, m_vVolume); };
-  bool Reset()
-    { Release(); SetOk(false); return Init(m_szCoreName, *this, m_vVolume); };
+  bool Init ( const string& _szCoreName, const CObject3D& _Position, const Vect3f& _vVolume, int _iMaxParticles = DEFAULT_MAX_PARTICLES_PER_EMITER, bool _bBillboardMode = false );
+  bool Reset( const string& _szCoreName, const CObject3D& _Position, const Vect3f& _vVolume, int _iMaxParticles, bool _bBillboardMode )
+    { Release(); SetOk(false); return Init(_szCoreName, _Position, _vVolume, m_iMaxParticles, m_bBillboardMode); };
+  bool Reset(                                                                                                                         ) { return Reset( m_szCoreName, *this    , m_vVolume, m_iMaxParticles, m_bBillboardMode );};
+  bool Reset( const string& _szCoreName, const CObject3D& _Position, const Vect3f& _vVolume                                           ) { return Reset(  _szCoreName, _Position,  _vVolume, m_iMaxParticles, m_bBillboardMode );};
+  bool Reset( const string& _szCoreName                                                                                               ) { return Reset(  _szCoreName, *this    , m_vVolume, m_iMaxParticles, m_bBillboardMode );};
+  bool Reset(                                                        const Vect3f& _vVolume                                           ) { return Reset( m_szCoreName, *this    ,  _vVolume, m_iMaxParticles, m_bBillboardMode );};
+  bool Reset(                                                                                int _iMaxParticles                       ) { return Reset( m_szCoreName, *this    , m_vVolume,  _iMaxParticles, m_bBillboardMode );};
+  bool Reset(                                                                                                    bool _bBillboardMode ) { return Reset( m_szCoreName, *this    , m_vVolume, m_iMaxParticles,  _bBillboardMode );};
 
-  void ChangePos(const CObject3D& _Position)
-    {SetMat44(_Position.GetMat44());};
+  void ChangePos(const CObject3D& _Position)  {SetMat44(_Position.GetMat44());};
 
   void Update(float _fDeltaTime);
   void Render(CRenderManager* _pRM) { Mat44f m; m.SetIdentity(); Render(_pRM,m); };
@@ -66,17 +67,21 @@ private:
   void Render(CRenderManager* _pRM, const Mat44f& _mTransform);
 
   bool         m_bActive;
+  
+  bool         m_bBillboardMode;
+  CParticle    m_Billboard;
+  int          m_iMaxParticles;
 
   bool                     m_bIsSimple;
   vector<CEmiterInstance*> m_ChildEmiters;
 
-  CObject3D*   m_pObjectReference;
-  CRoom*       m_pInRoom;
-  CEmiterCore* m_pEmiterCore;
-  string       m_szCoreName;
-  Vect3f       m_vVolume;
-  Vect3f       m_vMinVolume, m_vMaxVolume;
-  float        m_fVolume;
+  CObject3D*         m_pObjectReference;
+  CRoom*             m_pInRoom;
+  const CEmiterCore* m_pEmiterCore;
+  string             m_szCoreName;
+  Vect3f             m_vVolume;
+  Vect3f             m_vMinVolume, m_vMaxVolume;
+  float              m_fVolume;
 
   float m_fTimeToNextParticle;
 
@@ -84,9 +89,9 @@ private:
   bool  m_bAwake;
 
   int m_iActiveParticles; //nombre de partícules actives
-  CRecyclingArray<CParticle>          m_RecyclingParticles;                  //array de partícules en si
-  int                                 m_Particles[MAX_PARTICLES_PER_EMITER]; //array d'indexos a l'array anterior
-  CInstancedData<SParticleRenderInfo> m_InstancedData;                       //buffer a la gpu per renderitzar
+  CRecyclingArray<CParticle>          m_RecyclingParticles;  //array de partícules en si
+  int*                                m_iaParticles;         //array d'indexos a l'array anterior
+  CInstancedData<SParticleRenderInfo> m_InstancedData;       //buffer a la gpu per renderitzar
 };
 
 

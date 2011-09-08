@@ -34,11 +34,15 @@ public:
       m_iNumRows(1), m_iNumColumns(1),
       m_iNumFrames(1),
       m_fTimePerFrame(1.f),
+      m_bResetColorAnimation(false),
+      m_fResetColorAnimationTime1(0), m_fResetColorAnimationTime2(0),
+      m_bResetSizeAnimation(false),
+      m_fResetSizeAnimationTime1(0), m_fResetSizeAnimationTime2(0),
       m_pMaterial(0) {};
   virtual ~CSimpleEmiterCore() {Done();};
 
   bool Init(CXMLTreeNode& _xmlEmiter);
-  void Init();
+  bool Init();
   
   float GetEmitRate() const;
   float GetLife() const;
@@ -62,6 +66,11 @@ public:
   float GetColorControlTime(int _iColorFrame) const;
   float GetSizeControlTime(int _iSizeFrame) const;
   
+  bool  HasResetColorAnimation() const { return m_bResetColorAnimation; };
+  float GetResetColorAnimationTime() const;
+  bool  HasResetSizeAnimation() const { return m_bResetSizeAnimation; };
+  float GetResetSizeAnimationTime() const;
+  
   bool  IsSprite()        const { return m_bSprite; };
   int   GetNumFrames()    const { return m_iNumFrames; };
   float GetTimePerFrame() const { return m_fTimePerFrame; };
@@ -69,8 +78,8 @@ public:
 
   CMaterial* GetMaterial() const { return m_pMaterial; };
   
-  virtual bool IsSimpleEmiter() { return true; };
-  virtual bool IsAggregateEmiter() { return false; };
+  virtual bool IsSimpleEmiter() const { return true; };
+  virtual bool IsAggregateEmiter() const { return false; };
 
 protected:
   virtual void Release();
@@ -94,7 +103,11 @@ private:
   float  m_fAccelerationDirectionAngle;
   float  m_fAngularAcceleration1, m_fAngularAcceleration2;
 
+  bool m_bResetColorAnimation;
+  float m_fResetColorAnimationTime1, m_fResetColorAnimationTime2;
   vector<SColorAnimation> m_ColorAnimations;
+  bool m_bResetSizeAnimation;
+  float m_fResetSizeAnimationTime1, m_fResetSizeAnimationTime2;
   vector<SSizeAnimation>  m_SizeAnimations;
 
 

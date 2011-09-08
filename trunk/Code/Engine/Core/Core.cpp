@@ -42,7 +42,7 @@
   if(IsOk())                                                   \
   if(!object->Init())                                          \
   {                                                            \
-    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al %s.", name);  \
+    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al Init de %s.", name);  \
     SetOk(false);                                              \
   }
 
@@ -50,7 +50,7 @@
   if(IsOk())                                                  \
   if(!object->Load(argument))                                 \
   {                                                           \
-    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al %s.", name); \
+    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al Load de %s.", name); \
     SetOk(false);                                             \
   }
 
@@ -58,7 +58,7 @@
   if(IsOk())                                                  \
   if(!object->Init(argument))                                 \
   {                                                           \
-    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al %s.", name); \
+    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al Init de %s.", name); \
     SetOk(false);                                             \
   }
 
@@ -66,7 +66,7 @@
   if(IsOk())                                                  \
   if(!object->Init(argument, argument2))                      \
   {                                                           \
-    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al %s.", name); \
+    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al Init de %s.", name); \
     SetOk(false);                                             \
   }
 
@@ -74,7 +74,7 @@
   if(IsOk())                                                  \
   if(!object->Init(argument, argument2, argument3))           \
   {                                                           \
-    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al %s.", name); \
+    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al Init de %s.", name); \
     SetOk(false);                                             \
   }
 
@@ -82,7 +82,7 @@
   if(IsOk())                                                             \
   if(!object->Init(argument, argument2, argument3, argument4))           \
   {                                                                      \
-    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al %s.", name);            \
+    LOGGER->AddNewLog(ELL_ERROR,"Core:: Error al Init de %s.", name);            \
     SetOk(false);                                                        \
   }
 
@@ -161,6 +161,8 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
     m_pPhysicsManager->SetCollisionReport(m_pPhysicCollisionReport);
   }
   
+  INIT_NO_ARGUMENTS(m_pEmiterCoreManager, "Manager d'Emiters");
+
   LOAD(m_pEmiterCoreManager, "Manager de Cores d'emisors de partícules", _InitParams.CoreEmiterManagerParams.sFiles);
 
   INIT(m_pSoundManager, "Manager de Sons", _InitParams.SoundManagerParams.szFile);

@@ -522,11 +522,37 @@ function XMLEntityEmiter _instance &_TagName =
 		append l_params #("core", l_ss)
 	)
 	
+	if  (GetUserProp _instance "max_particles") != undefined then
+	(
+		l_ss = "" as stringStream
+		format "%" (GetUserProp _instance "max_particles") to:l_ss
+		append l_params #("max_particles", l_ss)
+	)
+	
 	--size
 	l_ss = "" as stringstream
 	l_aux = RHVectorToLH (DummySize _instance)
 	format "% % %" l_aux.x l_aux.y l_aux.z to:l_ss
 	append l_params #("volume", l_ss)
+	
+	return l_params
+)
+
+--Genera els paràmetres d'un tag XML d'entitat Billboard. Conté:
+-- core
+function XMLEntityBillboard _instance &_TagName =
+(
+	local l_params = #()
+	local l_ss
+	
+	_TagName = "Billboard"
+	
+	if  (GetUserProp _instance "billboard") != undefined then
+	(
+		l_ss = "" as stringStream
+		format "%" (GetUserProp _instance "billboard") to:l_ss
+		append l_params #("core", l_ss)
+	)
 	
 	return l_params
 )

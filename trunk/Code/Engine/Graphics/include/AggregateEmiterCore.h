@@ -29,8 +29,8 @@ public:
   const vector<SEmiters>& GetChilds    () const { return m_Childs; };
   const set<string>     & GetChildNames() const { return m_ChildNames; };
       
-  virtual bool IsSimpleEmiter() { return false; };
-  virtual bool IsAggregateEmiter() { return true; };
+  virtual bool IsSimpleEmiter() const { return false; };
+  virtual bool IsAggregateEmiter() const { return true; };
 
 protected:
   virtual void Release() {m_Childs.clear();m_ChildNames.clear();};

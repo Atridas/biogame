@@ -50,12 +50,18 @@ camera_player = function(_jugador, _dt)
 
   local vec = INPUT_MANAGER:get_mouse_delta()
   
+  local velx = vec.x * _dt
+  local vely = vec.y * _dt
+  
+  local vel = math.sqrt(velx*velx + vely*vely) / 2.5
+  
+  
   pitch = object3d:get_pitch()
   yaw   = object3d:get_yaw()
   
-  yaw = yaw - vec.x * _dt
+  yaw = yaw - (vec.x * _dt) * vel
 
-  pitch = pitch - vec.y * _dt
+  pitch = pitch - (vec.y * _dt) * vel
   
   if pitch < -1 then
     pitch = -1;

@@ -24,7 +24,7 @@ bool CEmiterCoreManager::LoadFile(const string &_szFileName, bool _bReload)
     {
       CXMLTreeNode l_xmlCoreEmiter = l_xmlCoreEmiters(i);
       CEmiterCore* l_pEmiterCore;
-      if(strcmp("SimpleEmiter",l_xmlCoreEmiter.GetName()) == 0)
+      if(strcmp("SimpleEmiter",l_xmlCoreEmiter.GetName()) == 0 || strcmp("Billboard",l_xmlCoreEmiter.GetName()) == 0)
       {
         l_pEmiterCore = new CSimpleEmiterCore();
       }
@@ -123,9 +123,9 @@ bool CEmiterCoreManager::Reload()
   return l_bOk; // False si n'hi ha algun de mal carregat. True en altre cas.
 }
 
-CEmiterCore * CEmiterCoreManager::GetEmiterCore(const string &_szName)
+const CEmiterCore * CEmiterCoreManager::GetEmiterCore(const string &_szName) const
 {
-  CEmiterCore* l_pEmiterCore = GetResource(_szName);
+  const CEmiterCore* l_pEmiterCore = GetResource(_szName);
 
   if(!l_pEmiterCore)
   {

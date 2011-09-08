@@ -12,20 +12,26 @@
 
 bool CSimpleEmiterCore::Init(CXMLTreeNode& _xmlEmiter)
 {
+  bool l_bParsingBillboar = false;
   if(strcmp(_xmlEmiter.GetName(), "SimpleEmiter") != 0)
   {
-    LOGGER->AddNewLog(ELL_WARNING, "CSimpleCoreEmiter::Init XML element not correct: \"%s\" and should be \"SimpleEmiter\"", _xmlEmiter.GetName());
+    if(strcmp(_xmlEmiter.GetName(), "Billboard") == 0)
+    {
+      l_bParsingBillboar = true;
+    } else {
+      LOGGER->AddNewLog(ELL_WARNING, "CSimpleCoreEmiter::Init XML element not correct: \"%s\" and should be \"SimpleEmiter\"", _xmlEmiter.GetName());
+    }
   }
 
   SetName(_xmlEmiter.GetPszISOProperty("id"));
   LOGGER->AddNewLog(ELL_INFORMATION, "CSimpleCoreEmiter::Init Reading Particle Core: \"%s\"", GetName().c_str());
   
-  m_fEmitRate1 = _xmlEmiter.GetFloatProperty("emit_rate1", 0, true);
-  m_fEmitRate2 = _xmlEmiter.GetFloatProperty("emit_rate2", 0, true);
+  m_fEmitRate1 = _xmlEmiter.GetFloatProperty("emit_rate1", 0, !l_bParsingBillboar);
+  m_fEmitRate2 = _xmlEmiter.GetFloatProperty("emit_rate2", 0, !l_bParsingBillboar);
   LOGGER->AddNewLog(ELL_INFORMATION, "Emit rate: %f - %f", m_fEmitRate1, m_fEmitRate2);
   
-  m_fLife1 = _xmlEmiter.GetFloatProperty("life1", 0, true);
-  m_fLife2 = _xmlEmiter.GetFloatProperty("life2", 0, true);
+  m_fLife1 = _xmlEmiter.GetFloatProperty("life1", 0, !l_bParsingBillboar);
+  m_fLife2 = _xmlEmiter.GetFloatProperty("life2", 0, !l_bParsingBillboar);
   LOGGER->AddNewLog(ELL_INFORMATION, "Life: %f - %f", m_fLife1, m_fLife2);
   
   m_fAwakeTime1 = _xmlEmiter.GetFloatProperty("awake_time1", 1, false);
@@ -42,8 +48,8 @@ bool CSimpleEmiterCore::Init(CXMLTreeNode& _xmlEmiter)
   m_fStartingAngle2 = _xmlEmiter.GetFloatProperty("starting_angle2", 0, true);
   LOGGER->AddNewLog(ELL_INFORMATION, "Starting Angle: %f - %f", m_fStartingAngle1, m_fStartingAngle2);
   
-  m_vStartingSpeed1 = _xmlEmiter.GetVect3fProperty("starting_speed1", Vect3f(0), true);
-  m_vStartingSpeed2 = _xmlEmiter.GetVect3fProperty("starting_speed2", Vect3f(0), true);
+  m_vStartingSpeed1 = _xmlEmiter.GetVect3fProperty("starting_speed1", Vect3f(0), !l_bParsingBillboar);
+  m_vStartingSpeed2 = _xmlEmiter.GetVect3fProperty("starting_speed2", Vect3f(0), !l_bParsingBillboar);
   LOGGER->AddNewLog(ELL_INFORMATION, "Starting Speed: (%f,%f,%f) - (%f,%f,%f)", 
                                       m_vStartingSpeed1.x, m_vStartingSpeed1.y, m_vStartingSpeed1.z,
                                       m_vStartingSpeed2.x, m_vStartingSpeed2.y, m_vStartingSpeed2.z);
@@ -51,12 +57,12 @@ bool CSimpleEmiterCore::Init(CXMLTreeNode& _xmlEmiter)
   m_fStartingDirectionAngle = _xmlEmiter.GetFloatProperty("starting_direction_angle", 0, false);
   LOGGER->AddNewLog(ELL_INFORMATION, "Starting Direction Angle: %f", m_fStartingDirectionAngle);
 
-  m_fStartingAngularSpeed1 = _xmlEmiter.GetFloatProperty("starting_angular_speed1", 0, true);
-  m_fStartingAngularSpeed2 = _xmlEmiter.GetFloatProperty("starting_angular_speed2", 0, true);
+  m_fStartingAngularSpeed1 = _xmlEmiter.GetFloatProperty("starting_angular_speed1", 0, !l_bParsingBillboar);
+  m_fStartingAngularSpeed2 = _xmlEmiter.GetFloatProperty("starting_angular_speed2", 0, !l_bParsingBillboar);
   LOGGER->AddNewLog(ELL_INFORMATION, "Starting Angular Speed: %f - %f", m_fStartingAngularSpeed1, m_fStartingAngularSpeed2);
   
-  m_vAcceleration1 =  _xmlEmiter.GetVect3fProperty("acceleration1", Vect3f(0), true);
-  m_vAcceleration2 =  _xmlEmiter.GetVect3fProperty("acceleration2", Vect3f(0), true);
+  m_vAcceleration1 =  _xmlEmiter.GetVect3fProperty("acceleration1", Vect3f(0), !l_bParsingBillboar);
+  m_vAcceleration2 =  _xmlEmiter.GetVect3fProperty("acceleration2", Vect3f(0), !l_bParsingBillboar);
   LOGGER->AddNewLog(ELL_INFORMATION, "Acceleration: (%f,%f,%f) - (%f,%f,%f)", 
                                       m_vAcceleration1.x, m_vAcceleration1.y, m_vAcceleration1.z,
                                       m_vAcceleration2.x, m_vAcceleration2.y, m_vAcceleration2.z);
@@ -64,8 +70,8 @@ bool CSimpleEmiterCore::Init(CXMLTreeNode& _xmlEmiter)
   m_fAccelerationDirectionAngle = _xmlEmiter.GetFloatProperty("acceleration_direction_angle", 0, false);
   LOGGER->AddNewLog(ELL_INFORMATION, "Acceleration Direction Angle: %f", m_fStartingDirectionAngle);
 
-  m_fAngularAcceleration1 =  _xmlEmiter.GetFloatProperty("angular_acceleration1", 0, true);
-  m_fAngularAcceleration2 =  _xmlEmiter.GetFloatProperty("angular_acceleration2", 0, true);
+  m_fAngularAcceleration1 =  _xmlEmiter.GetFloatProperty("angular_acceleration1", 0, !l_bParsingBillboar);
+  m_fAngularAcceleration2 =  _xmlEmiter.GetFloatProperty("angular_acceleration2", 0, !l_bParsingBillboar);
   LOGGER->AddNewLog(ELL_INFORMATION, "Angular Acceleration: %f - %f", m_fAngularAcceleration1, m_fAngularAcceleration2);
   
   // Colors ----------------------------------------------------------------------------------
@@ -78,22 +84,22 @@ bool CSimpleEmiterCore::Init(CXMLTreeNode& _xmlEmiter)
                                       l_Color2.GetRed(), l_Color2.GetGreen(), l_Color2.GetBlue(), l_Color2.GetAlpha());
   {
     CXMLTreeNode l_xmlColors = _xmlEmiter.GetChild("Colors");
-    /*CXMLTreeNode l_xmlColors;
-    int l_iNumChildren = _xmlEmiter.GetNumChildren();
-    for(int i = 0; i < l_iNumChildren; ++i)
-    {
-      if(strcmp("Colors", _xmlEmiter(i).GetName()) == 0)
-      {
-        l_xmlColors = _xmlEmiter(i);
-        break;
-      }
-    }*/
 
 
 
     if(l_xmlColors.Exists())
     {
       LOGGER->AddNewLog(ELL_INFORMATION, "Parsing Colors");
+
+      m_bResetColorAnimation = l_xmlColors.GetBoolProperty("reset_animation", false, false);
+      m_fResetColorAnimationTime1 = l_xmlColors.GetFloatProperty("reset_animation_time1", 0, m_bResetColorAnimation);
+      m_fResetColorAnimationTime2 = l_xmlColors.GetFloatProperty("reset_animation_time2", 0, m_bResetColorAnimation);
+
+      if(m_bResetColorAnimation)
+      {
+        LOGGER->AddNewLog(ELL_INFORMATION, "Reset Color Animation: %f - %f", m_fResetColorAnimationTime1, m_fResetColorAnimationTime2);
+      }
+
       int l_iNumChildren = l_xmlColors.GetNumChildren();
       for(int i = 0; i < l_iNumChildren; ++i)
       {
@@ -127,21 +133,21 @@ bool CSimpleEmiterCore::Init(CXMLTreeNode& _xmlEmiter)
   m_SizeAnimations.push_back(SSizeAnimation(l_fSize1, 0.f, l_fSize2, 0.f));
 
   {
-    //CXMLTreeNode l_xmlSizes = _xmlEmiter["Sizes"];
-    CXMLTreeNode l_xmlSizes;
-    int l_iNumChildren = _xmlEmiter.GetNumChildren();
-    for(int i = 0; i < l_iNumChildren; ++i)
-    {
-      if(strcmp("Sizes", _xmlEmiter(i).GetName()) == 0)
-      {
-        l_xmlSizes = _xmlEmiter(i);
-        break;
-      }
-    }
+    CXMLTreeNode l_xmlSizes = _xmlEmiter.GetChild("Sizes");
 
     if(l_xmlSizes.Exists())
     {
       LOGGER->AddNewLog(ELL_INFORMATION, "Parsing Sizes");
+
+      m_bResetSizeAnimation = l_xmlSizes.GetBoolProperty("reset__animation", false, false);
+      m_fResetSizeAnimationTime1 = l_xmlSizes.GetFloatProperty("reset_animation_time1", 0, m_bResetColorAnimation);
+      m_fResetSizeAnimationTime2 = l_xmlSizes.GetFloatProperty("reset_animation_time2", 0, m_bResetColorAnimation);
+
+      if(m_bResetSizeAnimation)
+      {
+        LOGGER->AddNewLog(ELL_INFORMATION, "Reset Size Animation: %f - %f", m_fResetSizeAnimationTime1, m_fResetSizeAnimationTime2);
+      }
+
       int l_iNumChildren = l_xmlSizes.GetNumChildren();
       for(int i = 0; i < l_iNumChildren; ++i)
       {
@@ -201,7 +207,7 @@ bool CSimpleEmiterCore::Init(CXMLTreeNode& _xmlEmiter)
   return IsOk();
 }
 
-void CSimpleEmiterCore::Init()
+bool CSimpleEmiterCore::Init()
 {
   SetName("default");
   
@@ -254,7 +260,9 @@ void CSimpleEmiterCore::Init()
   m_pMaterial = new CDiffuseTextureDecorator(m_pMaterial,l_pTexture);
 
 
-  SetOk(true);
+  SetOk(l_pTexture != 0);
+
+  return IsOk();
 }
 
 void CSimpleEmiterCore::Release() 
@@ -375,4 +383,18 @@ float CSimpleEmiterCore::GetSizeControlTime(int _iSizeFrame) const
   float l_fRnd = Random01();
   float l_fControlTime = SIMPLE_INTERPOLATION(m_SizeAnimations[_iSizeFrame].m_fControlTime1, m_SizeAnimations[_iSizeFrame].m_fControlTime2, l_fRnd);
   return l_fControlTime;
+}
+
+float CSimpleEmiterCore::GetResetColorAnimationTime() const
+{
+  float l_fRnd = Random01();
+  float l_fResetColorAnimationTime = SIMPLE_INTERPOLATION(m_fResetColorAnimationTime1, m_fResetColorAnimationTime2, l_fRnd);
+  return l_fResetColorAnimationTime;
+}
+
+float CSimpleEmiterCore::GetResetSizeAnimationTime() const
+{
+  float l_fRnd = Random01();
+  float l_fResetSizeAnimationTime = SIMPLE_INTERPOLATION(m_fResetSizeAnimationTime1, m_fResetSizeAnimationTime2, l_fRnd);
+  return l_fResetSizeAnimationTime;
 }
