@@ -37,4 +37,6 @@
 	<mesh name="TeteraPickUp" path="Data/Meshes/TeteraPickUp.mesh" max="0.288996 0.265549 0.168602" min="-0.252905 0.0 -0.168602" />
 	<mesh name="EsferaInteractiva" path="Data/Meshes/EsferaInteractiva.mesh" max="0.251547 0.251546 0.251547" min="-0.251547 -0.251546 -0.251547" />
 	<mesh name="EsferaDestructible" path="Data/Meshes/EsferaDestructible.mesh" max="0.251547 0.251546 0.251547" min="-0.251547 -0.251546 -0.251547" />
+	<mesh name="EsferaDestructible01" path="Data/Meshes/EsferaDestructible01.mesh" max="0.251546 0.251546 0.251547" min="-0.251546 -0.251546 -0.251547" />
+	<mesh name="EsferaDestructible02" path="Data/Meshes/EsferaDestructible02.mesh" max="0.251546 0.251546 0.251547" min="-0.251546 -0.251546 -0.251547" />
 </meshes>

@@ -416,6 +416,17 @@ function XMLEntityDestroyable _instance &_TagName =
 	return l_params
 )
 
+--Genera els paràmetres d'un tag XML d'entitat Explosiva.
+function XMLEntityExplosive _instance &_TagName =
+(
+	local l_params = #()
+	local l_ss
+	
+	_TagName = "Explosive"
+	
+	return l_params
+)
+
 --Genera els paràmetres d'un tag XML d'entitat NavNode. Conté:
 -- autoroute
 -- maxDistance

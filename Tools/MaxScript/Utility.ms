@@ -773,6 +773,16 @@ utility BioUtility "Eon-Utility" width:160 height:549
 					--Trigger
 					l_params = XMLEntityDestroyable l_instance &l_TagName
 					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					
+				)
+				
+				--Explosive
+				if IsExplosive l_instance then
+				(
+					--Explosive
+					l_params = XMLEntityExplosive l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 				)
 				
 				format "\n  %" (CloseTagXML "Entity") to:l_file
@@ -961,6 +971,13 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				--Destroyable
 				l_params = XMLEntityDestroyable l_instance &l_TagName
 				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+				
+				--Explosive
+				if IsExplosive l_instance then
+				(
+					l_params = XMLEntityExplosive l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+				)
 				
 				format "\n  %" (CloseTagXML "Entity") to:l_file
 			)
