@@ -722,6 +722,9 @@ ENTITIES
       spawner
       CBaseComponent::ECT_SPAWNER
       
+      explosive
+      CBaseComponent::ECT_EXPLOSIVE
+      
     Methods:
       get_type
       Type GetType()
@@ -1235,15 +1238,15 @@ ENTITIES
       CComponentSpawner::m_bActive
       
   Class:
-    ComponentDestroyable
-    CComponentDestroyable
+    ComponentExplosive
+    CComponentExplosive
     
     Methods:
       add_to_entity
-      static CComponentDestroyable* AddToEntity(CGameEntity* _pEntity, const string& _szAction, const string& _szResource)
+      static CComponentDestroyable* AddToEntity(CGameEntity* _pEntity)
       
-      explosion
-      void Explosion(Vect3f _vOrigin,float _fRadius)
+      explode
+      void Explode(Vect3f _vOrigin,float _fRadius)
 
 IA
   Globals:

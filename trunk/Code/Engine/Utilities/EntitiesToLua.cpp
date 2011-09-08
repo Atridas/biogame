@@ -38,7 +38,7 @@ extern "C"
 #include "ComponentNavNode.h"
 #include "ComponentEmiter.h"
 #include "ComponentSpawner.h"
-#include "ComponentDestroyable.h"
+#include "ComponentExplosive.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -130,7 +130,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("destroyable",          CBaseComponent::ECT_DESTROYABLE),
           value("nav_node",             CBaseComponent::ECT_NAV_NODE),
           value("emiter",               CBaseComponent::ECT_EMITER),
-          value("spawner",              CBaseComponent::ECT_SPAWNER)
+          value("spawner",              CBaseComponent::ECT_SPAWNER),
+          value("explosive",            CBaseComponent::ECT_EXPLOSIVE)
       ]
       .def("get_type",     &CBaseComponent::GetType)
       .def("get_entity",   &CBaseComponent::GetEntity)
@@ -354,9 +355,9 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("get_enemy_type",           &CComponentSpawner::GetEnemyType)
 
       // ----------------------------------------------------------------------------------------------------
-    ,class_<CComponentDestroyable, CBaseComponent>("ComponentDestroyable")
-      .def("add_to_entity",            &CComponentDestroyable::AddToEntity)
-      .def("explosion",                &CComponentDestroyable::Explosion)
+    ,class_<CComponentExplosive, CBaseComponent>("ComponentExplosive")
+      .def("add_to_entity",            &CComponentExplosive::AddToEntity)
+      .def("explode",                  &CComponentExplosive::Explode)
   ];
 }
 

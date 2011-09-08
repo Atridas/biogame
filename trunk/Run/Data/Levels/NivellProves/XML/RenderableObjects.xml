@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <RenderableObjects>
 	<RenderableObject name="Habitacio3" class="StaticMesh" resource="Habitacio3" position="0.0 0.0 0.193104" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="Habitacio2" class="StaticMesh" resource="Habitacio2" position="0.0 0.0 0.193104" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Habitacio2" class="StaticMesh" resource="Habitacio2" position="0.0 0.0 0.0861702" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="CaixaPetita00" class="StaticMesh" resource="CaixaPetita00" position="-30.8657 0.0 17.8758" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="CaixaGrossa00" class="StaticMesh" resource="CaixaGrossa00" position="-30.4231 0.0 9.9367" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="CaixaPetita01" class="StaticMesh" resource="CaixaPetita01" position="-30.8622 0.0 16.8709" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -37,5 +37,6 @@
 	<RenderableObject name="TeteraPickUp" class="StaticMesh" resource="TeteraPickUp" position="-24.3621 0.624995 21.6316" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="EsferaInteractiva" class="StaticMesh" resource="EsferaInteractiva" position="-24.4011 0.968018 24.6365" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="EsferaDestructible" class="StaticMesh" resource="EsferaDestructible" position="-16.8264 1.42554 23.2763" yaw="0.0" pitch="0.0" roll="0.0" />
-  <RenderableObject name="EsferaDestructible01" class="StaticMesh" resource="EsferaDestructible" position="-13.2122 0.387946 23.2763" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="EsferaDestructible01" class="StaticMesh" resource="EsferaDestructible01" position="-13.2122 0.387946 23.2763" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="EsferaDestructible02" class="StaticMesh" resource="EsferaDestructible02" position="-10.3951 0.387946 23.2769" yaw="0.0" pitch="0.0" roll="0.0" />
 </RenderableObjects>

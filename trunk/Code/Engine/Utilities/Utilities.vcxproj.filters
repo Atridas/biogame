@@ -133,6 +133,9 @@
     <Filter Include="EntitySystem\Components\ComponentLifetime">
       <UniqueIdentifier>{5ef374c5-b3e3-4481-bdf5-34742313c41f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentExplosive">
+      <UniqueIdentifier>{a9108874-b4df-48b0-b5df-7f1e09e3dc5b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -272,6 +275,9 @@
     </ClCompile>
     <ClCompile Include="ComponentLifetime.cpp">
       <Filter>EntitySystem\Components\ComponentLifetime</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentExplosive.cpp">
+      <Filter>EntitySystem\Components\ComponentExplosive</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -421,6 +427,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentLifetime.h">
       <Filter>EntitySystem\Components\ComponentLifetime</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentExplosive.h">
+      <Filter>EntitySystem\Components\ComponentExplosive</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -101,10 +101,11 @@ end
 
 function bido_explosiu(_self)
   local l_o3d = _self:get_component(BaseComponent.object_3d)
-  local l_dest = _self:get_component(BaseComponent.destroyable)
+  local l_exp = _self:get_component(BaseComponent.explosive)
   if l_o3d then
     local l_position = l_o3d:get_position()
-    l_dest:explosion(l_position,4)
+    l_exp:explode(l_position,4)
+    EM:init_emiter("impacte ragdoll", l_position, Vect3f(2.0, 3.0, 2.0), 10, Vect3f(0,1,0))
     SOUND:play_sample('explosion')
   end
 end

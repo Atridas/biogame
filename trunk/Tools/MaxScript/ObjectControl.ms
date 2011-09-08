@@ -121,6 +121,17 @@ function IsDestroyable _object =
 	)
 )
 
+-- Comprova si l'objecte proporcionat és un objecte destructible
+function IsExplosive _object =
+(
+	if (GetUserProp _object "explosive") != "true" then
+	(
+		return true
+	) else (
+		return false
+	)
+)
+
 -- Comprova si l'objecte proporcionat és un node del graf de navegació
 function IsNavNode _object =
 (

@@ -86,6 +86,7 @@
     <ClCompile Include="ComponentCover.cpp" />
     <ClCompile Include="ComponentDestroyable.cpp" />
     <ClCompile Include="ComponentDoor.cpp" />
+    <ClCompile Include="ComponentExplosive.cpp" />
     <ClCompile Include="ComponentHighCover.cpp" />
     <ClCompile Include="ComponentIABrain.cpp" />
     <ClCompile Include="ComponentIAWalkToPlayer.cpp" />
@@ -134,6 +135,7 @@
     <ClInclude Include="include\ComponentCover.h" />
     <ClInclude Include="include\ComponentDestroyable.h" />
     <ClInclude Include="include\ComponentDoor.h" />
+    <ClInclude Include="include\ComponentExplosive.h" />
     <ClInclude Include="include\ComponentHighCover.h" />
     <ClInclude Include="include\ComponentIABrain.h" />
     <ClInclude Include="include\ComponentIAWalkToPlayer.h" />

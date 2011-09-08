@@ -30,6 +30,7 @@
 #include "ComponentSpawner.h"
 #include "ComponentLaser.h"
 #include "ComponentLifetime.h"
+#include "ComponentExplosive.h"
 
 
 #include "RenderableObject.h"
@@ -264,6 +265,18 @@ void LoadComponentDestroyable(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntit
 
 }
 
+void LoadComponentExplosive(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
+{
+  string l_szName   = _pEntity->GetName();
+
+  LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Explosive amb nom \"%s\".",l_szName.c_str());
+
+  if(!CComponentExplosive::AddToEntity(_pEntity))
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"\tError al crear el component explosiu de l'objecte \"%s\"", _pEntity->GetName());
+  }
+}
+
 void LoadComponentNavNode(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant NavNode.");
@@ -472,6 +485,11 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
             } else if(strcmp(l_TreeComponent.GetName(),"Destroyable") == 0)
             {
               LoadComponentDestroyable(l_TreeComponent, l_pEntity);
+
+            // -----------------------------------------------------------------------------------------------------------
+            } else if(strcmp(l_TreeComponent.GetName(),"Explosive") == 0)
+            {
+              LoadComponentExplosive(l_TreeComponent, l_pEntity);
 
             // -----------------------------------------------------------------------------------------------------------
             } else if(strcmp(l_TreeComponent.GetName(),"NavNode") == 0)
