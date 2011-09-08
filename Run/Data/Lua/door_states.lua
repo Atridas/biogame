@@ -138,7 +138,7 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Porta_Open['Receive'] = function(_entitat, _event)
-  local l_sender = EM:get_entity(_event.sender)
+  --local l_sender = EM:get_entity(_event.sender)
   --log('open: event received ' .. l_sender:get_name() )
   
   if _event.msg == Event.tancar then

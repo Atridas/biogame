@@ -510,4 +510,30 @@
     <Emiter id="fum_proveta" position="0.0  0.25 0.0" volume="1.0 0.5 1.0" />
     <Emiter id="test tot 2"  position="0.0 -0.25 0.0" volume="1.0 0.5 1.0" />
   </AggregateEmiter>
+  <!-- ····························································································· -->
+  <!-- ····························································································· -->
+  <!-- ····························································································· -->
+  <!-- ····························································································· -->
+  <SimpleEmiter id="Ins Lab 1"                        
+                emit_rate1="8.0"                   emit_rate2="8.0"
+                life1="1.0"                        life2="1.0"                    
+                awake_time1="1.0"                  awake_time2="1.0"
+                sleep_time1="0.0"                  sleep_time2="0.0"
+                
+                starting_angle1="0.0"              starting_angle2="0.0"
+                
+                starting_speed1="0.0 0.0 0.0"      starting_speed2="0.0 0.0 0.0"
+                starting_direction_angle="0.0"
+                acceleration1="0.0 0.0 0.0"        acceleration2="0.0 0.0 0.0"
+                acceleration_direction_angle="0.0"
+                starting_angular_speed1="0.0"      starting_angular_speed2="0.0"
+                angular_acceleration1="0.0"        angular_acceleration2="0.0"
+                
+                
+                color1="1.0 1.0 1.0 1.0"          color2="1.0 1.0 1.0 1.0" 
+                size1="0.5"                       size2="0.5"
+                
+                is_sprite="false"
+                
+                texture="Data/Textures/Gameplay/InstruccionsLab1.dds"/>
 </CoreEmiters>
