@@ -137,6 +137,7 @@ void CComponentVida::ReceiveEvent(const SEvent& _Event)
 
       Decrease(l_fDamage);
     }
+      else return;
 
     if(m_fVida <= 0.f)
     {

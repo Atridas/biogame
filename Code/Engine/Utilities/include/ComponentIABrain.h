@@ -26,7 +26,6 @@ public:
   void Shoot();
   void ReceiveShoot(SEvent _sEvent);
   void ReceiveForce(SEvent _sEvent);
-  void Die();
   
   //Path planning
   void PlanPathToCobertura();
@@ -41,12 +40,15 @@ public:
   vector<CGraphNode*> m_PathToCobertura;
 
 private:
-  CComponentIABrain():m_pPlayer(0),m_fTime(0),m_bShooted(false),m_iNumUpdates(0), m_pCover(0), m_szOnDeathScript("") {};
+  CComponentIABrain():m_pPlayer(0),m_fTime(0),m_bShooted(false),m_iNumUpdates(0), m_pCover(0), m_szOnDeathScript(""), m_bDead(false) {};
   bool Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript = "");
 
+  void Die();
   void RunScript();
+  void ActivateRagdoll();
 
   int m_iNumUpdates;
+  bool m_bDead;
 
   virtual void Release() {};
 

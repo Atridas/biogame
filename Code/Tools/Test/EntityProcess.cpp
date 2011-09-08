@@ -134,11 +134,11 @@ void CEntityProcess::RenderScene(CRenderManager* _pRM)
 
 void CEntityProcess::RenderINFO(CRenderManager* _pRM)
 {
-  CORE->GetPhysicsManager()->DebugRender(_pRM);
-  CORE->GetPortalManager()->DebugRender(_pRM);
+  //CORE->GetPhysicsManager()->DebugRender(_pRM);
+  //CORE->GetPortalManager()->DebugRender(_pRM);
   CORE->GetEntityManager()->DebugRender(_pRM);
-  CORE->GetIAManager()->GetGraph()->DebugRender(_pRM);
-  CORE->GetEmiterManager()->DebugRender(_pRM);
+  //CORE->GetIAManager()->GetGraph()->DebugRender(_pRM);
+  //CORE->GetEmiterManager()->DebugRender(_pRM);
   /*if(CORE->GetActionManager()->IsActionActive("ToggleDebug"))
   {
     CORE->GetPhysicsManager()->DebugRender(_pRM);
