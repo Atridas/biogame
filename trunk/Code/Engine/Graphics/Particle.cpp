@@ -166,8 +166,8 @@ void CParticle::FillRenderInfo(SParticleRenderInfo& Info_)
   Info_.sizeX =
   Info_.sizeY = m_fSize;
   
-  Info_.angleSin = sin(m_fAngle);
-  Info_.angleCos = cos(m_fAngle);
+  Info_.angleSin = sin(m_fAngle + FLOAT_PI_VALUE * .25f);
+  Info_.angleCos = cos(m_fAngle + FLOAT_PI_VALUE * .25f);
     
   Info_.diapo = (float) m_iFrame;
   Info_.color = DWORD (D3DXCOLOR(m_Color.GetRed(), m_Color.GetGreen(), m_Color.GetBlue(), m_Color.GetAlpha()) );
