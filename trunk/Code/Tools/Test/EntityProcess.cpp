@@ -130,14 +130,16 @@ void CEntityProcess::RenderScene(CRenderManager* _pRM)
   
   CORE->GetPortalManager()->Render(_pRM);
   //CORE->GetEmiterManager()->Render(_pRM);
-
-  //CORE->GetEntityManager()->DebugRender(_pRM);
 }
 
 void CEntityProcess::RenderINFO(CRenderManager* _pRM)
 {
- 
-  if(CORE->GetActionManager()->IsActionActive("ToggleDebug"))
+  CORE->GetPhysicsManager()->DebugRender(_pRM);
+  CORE->GetPortalManager()->DebugRender(_pRM);
+  CORE->GetEntityManager()->DebugRender(_pRM);
+  CORE->GetIAManager()->GetGraph()->DebugRender(_pRM);
+  CORE->GetEmiterManager()->DebugRender(_pRM);
+  /*if(CORE->GetActionManager()->IsActionActive("ToggleDebug"))
   {
     CORE->GetPhysicsManager()->DebugRender(_pRM);
     CORE->GetPortalManager()->DebugRender(_pRM);
@@ -153,7 +155,7 @@ void CEntityProcess::RenderINFO(CRenderManager* _pRM)
     _pRM->SetTransform(i);
   
     _pRM->DrawFrustum(&l_Frustum, colBLACK);
-  }
+  }*/
 
 }
 

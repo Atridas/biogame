@@ -308,6 +308,7 @@ function XMLEntityPlayer _instance &_TagName =
 -- name
 -- position
 -- yaw
+-- [on_death]
 function XMLEntityEnemy _instance &_TagName =
 (
 	local l_params = #()
@@ -343,6 +344,15 @@ function XMLEntityEnemy _instance &_TagName =
 		l_aux = "" as stringStream
 		format "%" l_active to:l_aux
 		append l_params #("active", l_aux)
+		
+		--on_death
+		l_tmp = GetUserProp _instance "onDeath"
+		if l_tmp != undefined then
+		(
+			l_aux = "" as stringStream
+			format "%" l_tmp to:l_aux
+			append l_params #("on_death", l_aux)
+		)
 		
 		--Enemy Type
 		if (GetUserProp _instance "entity") != "Player" then
