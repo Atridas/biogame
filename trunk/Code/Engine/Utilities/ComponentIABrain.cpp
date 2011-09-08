@@ -59,6 +59,7 @@ bool CComponentIABrain::Init(CGameEntity* _pEntity, const string& _szPlayerEntit
   m_szOnDeathScript = _szOnDeathScript;
 
   m_pCover = 0;
+  m_bDead = false;
 
   SetOk(true);
   return IsOk();
@@ -181,7 +182,15 @@ void CComponentIABrain::ReceiveShoot(SEvent _sEvent)
 
       if(l_pHeadBone->GetPhysxActor() == l_pActor)
       {
-        Die();
+        if(!m_bDead)
+        {
+          ActivateRagdoll();
+          SEvent l_morir;
+          l_morir.Msg = SEvent::MORIR;
+          l_morir.Receiver = l_morir.Sender = GetEntity()->GetGUID();
+      
+          ENTITY_MANAGER->SendEvent(l_morir);
+        }
 
         Vect3f l_vDir(_sEvent.Info[1].v.x,_sEvent.Info[1].v.y,_sEvent.Info[1].v.z);
 
@@ -217,7 +226,15 @@ void CComponentIABrain::ReceiveForce(SEvent _sEvent)
 
   if(_sEvent.Msg == SEvent::REBRE_FORCE)
   {
-    Die();
+    if(!m_bDead)
+    {
+      ActivateRagdoll();
+      SEvent l_morir;
+      l_morir.Msg = SEvent::MORIR;
+      l_morir.Receiver = l_morir.Sender = GetEntity()->GetGUID();
+      
+      ENTITY_MANAGER->SendEvent(l_morir);
+    }
 
     l_pRagdoll = GetEntity()->GetComponent<CComponentRagdoll>();
 
@@ -256,7 +273,7 @@ void CComponentIABrain::Update(float _fDeltaTime)
   //}
 }
 
-void CComponentIABrain::Die()
+void CComponentIABrain::ActivateRagdoll()
 {
   GetEntity()->DeleteComponent(CBaseComponent::ECT_PHYSX_CONTROLLER);
 
@@ -266,12 +283,12 @@ void CComponentIABrain::Die()
   {
     l_pRC->ApplyPhysics(true);
   }
-  
-  SEvent l_morir;
-  l_morir.Msg = SEvent::MORIR;
-  l_morir.Receiver = l_morir.Sender = GetEntity()->GetGUID();
-      
-  ENTITY_MANAGER->SendEvent(l_morir);
+}
+
+void CComponentIABrain::Die()
+{
+  m_bDead = true;
+  ActivateRagdoll();
 
   if(m_pCover)
     m_pCover->m_bOcupat = false;
@@ -358,5 +375,8 @@ void CComponentIABrain::ReceiveEvent(const SEvent& _Event)
   }else if(_Event.Msg == SEvent::REBRE_FORCE)
   {
     ReceiveForce(_Event);
+  }else if(_Event.Msg == SEvent::MORIR)
+  {
+    Die();
   }
 }

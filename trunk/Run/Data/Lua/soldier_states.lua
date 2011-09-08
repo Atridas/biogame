@@ -544,7 +544,7 @@ end
 
 State_Soldier_Mort["Enter"] = function(_enemic)
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
-  ia_brain:die()
+  --ia_brain:die()
 end
 
 -------------------------------------------------------------------------------------------------

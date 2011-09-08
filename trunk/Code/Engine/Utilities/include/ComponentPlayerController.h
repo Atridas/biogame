@@ -44,7 +44,6 @@ public:
 
   void Shoot();
   void Force();
-  void Die();
   void Respawn();
   bool Cover();
   void Use();
@@ -53,7 +52,7 @@ public:
   void AddPickUp(const string& _szPickUp);
   bool RemovePickUp(const string& _szPickUp);
 
-protected:
+private:
   CComponentPlayerController():
       m_pObject3D(0), m_pMovement(0), m_pCoverEntity(0),
 
@@ -75,7 +74,7 @@ protected:
   bool Init(CGameEntity *_pEntity);
   virtual void Release() { m_vPickUps.clear(); };
 
-private:
+  void Die();
 
   float m_fBloodFadeOutTime;
   float m_fBloodTime;

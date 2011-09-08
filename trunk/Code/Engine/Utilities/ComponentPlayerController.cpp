@@ -463,6 +463,9 @@ void CComponentPlayerController::ReceiveEvent(const SEvent& _Event)
     
       ENTITY_MANAGER->InitParticles("impacte ragdoll", l_vPos, Vect3f(.5f,.5f,.5f), 5.f);
   
+    }else if(_Event.Msg == SEvent::MORIR)
+    {
+      Die();
     }
 
   }

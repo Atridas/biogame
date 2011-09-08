@@ -15,7 +15,7 @@ public:
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_DESTROYABLE;};
 
   static CComponentDestroyable* AddToEntity(CGameEntity* _pEntity, const string& _szAction, const string& _szResource);
-  void BarrelExplosion(Vect3f _vOrigin,float _fRadius);
+  void Explosion(Vect3f _vOrigin,float _fRadius);
   
   virtual void ReceiveEvent(const SEvent& _Event);
 

@@ -564,7 +564,7 @@ State_Player_Mort['Enter'] = function(_jugador)
   --log('enter player apuntant')
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   player_controller.time = 0
-  player_controller:die()
+  --player_controller:die()
   
   --local ragdoll = _jugador:get_component(BaseComponent.ragdoll)
   --ragdoll:activate_ragdoll()

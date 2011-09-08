@@ -102,7 +102,7 @@ void CComponentDestroyable::ReceiveEvent(const SEvent& _Event)
   }
 }
 
-void CComponentDestroyable::BarrelExplosion(Vect3f _vPos,float _fRadius)
+void CComponentDestroyable::Explosion(Vect3f _vPos,float _fRadius)
 {
     vector<CPhysicUserData*> l_vImpactObjects;
     CPhysicsManager *l_pPM = PHYSICS_MANAGER;
@@ -123,18 +123,21 @@ void CComponentDestroyable::BarrelExplosion(Vect3f _vPos,float _fRadius)
     set<CGameEntity*>::iterator l_itEntity;
     set<CGameEntity*>::iterator l_itEntityEnd = l_vImpactEntities.end();
 
+    //missatge de força
+    SEvent l_impacte;
+    l_impacte.Msg = SEvent::REBRE_FORCE;
+    l_impacte.Info[0].Type = SEventInfo::FLOAT;
+    l_impacte.Info[0].f    = 100;
+    l_impacte.Sender = GetEntity()->GetGUID();
+
+
     for(l_itEntity = l_vImpactEntities.begin(); l_itEntity != l_itEntityEnd; ++l_itEntity)
     {
       CGameEntity* l_pEntity = *l_itEntity;
 
       if(GetEntity() != l_pEntity)
       {
-        SEvent l_impacte;
-        l_impacte.Msg = SEvent::REBRE_FORCE;
-        l_impacte.Info[0].Type = SEventInfo::FLOAT;
-        l_impacte.Info[0].f    = 100;
         l_impacte.Receiver = l_pEntity->GetGUID();
-        l_impacte.Sender = GetEntity()->GetGUID();
 
         ENTITY_MANAGER->SendEvent(l_impacte);
       }

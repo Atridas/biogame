@@ -104,8 +104,8 @@ function bido_explosiu(_self)
   local l_dest = _self:get_component(BaseComponent.destroyable)
   if l_o3d then
     local l_position = l_o3d:get_position()
-    l_dest:explode_barrel(l_position,4)
-	SOUND:play_sample('explosion')
+    l_dest:explosion(l_position,4)
+    SOUND:play_sample('explosion')
   end
 end
 
