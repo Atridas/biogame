@@ -173,6 +173,8 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
 
   srand(_InitParams.RandomSeed);
 
+  LOGGER->SaveLogsInFile();
+
   return IsOk();
 }
 

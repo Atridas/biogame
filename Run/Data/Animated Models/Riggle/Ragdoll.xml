@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<CPhysxRagdoll>
+  <!--<Actors>-->
+  <RagdollActor Type="Sphere" 
+                Size="0.1 0.1 0.1" 
+                BoneName="Bip01 Head" 
+                Density="0" 
+                Name="Bip01 Head"/>
+
+  <RagdollActor Type="Box"
+                Size="0.05 0.05 0.05"
+                BoneName="Bip01 Neck"
+                Density="0"
+                Name="Bip01 Neck"/>
+  
+  <RagdollActor Type="Box"
+                Size="0.05 0.05 0.05"
+                BoneName="Bip01 R Clavicle"
+                Density="0"
+                Name="Bip01 R Clavicle"/>
+
+  <RagdollActor Type="Box"
+                Size="0.05 0.05 0.05"
+                BoneName="Bip01 L Clavicle"
+                Density="0"
+                Name="Bip01 L Clavicle"/>
+
+  <RagdollActor Type="Box"
+                Size="0.1 0.1 0.1"
+                BoneName="Bip01 Spine2"
+                Density="0"
+                Name="Bip01 Spine2"/>
+
+  <RagdollActor Type="Box"
+                Size="0.1 0.1 0.1"
+                BoneName="Bip01 Spine1"
+                Density="0"
+                Name="Bip01 Spine1"/>
+
+  <RagdollActor Type="Box"
+                Size="0.1 0.1 0.1"
+                BoneName="Bip01 Spine"
+                Density="0"
+                Name="Bip01 Spine"/>
+  
+  <RagdollActor Type="Box"
+                Size="0.1 0.1 0.1"
+                BoneName="Bip01 Pelvis"
+                Density="0"
+                Name="Bip01 Pelvis"/>
+
+  <RagdollActor Type="Box"
+                Size="0.05 0.05 0.05"
+                BoneName="Bip01 R UpperArm"
+                Density="0"
+                Name="Bip01 R UpperArm"/>
+
+  <RagdollActor Type="Box"
+                Size="0.05 0.05 0.05"
+                BoneName="Bip01 L UpperArm"
+                Density="0"
+                Name="Bip01 L UpperArm"/>
+
+  <RagdollActor Type="Box"
+                Size="0.05 0.05 0.05"
+                BoneName="Bip01 R Forearm"
+                Density="0"
+                Name="Bip01 R Forearm"/>
+
+  <RagdollActor Type="Box"
+                Size="0.05 0.05 0.05"
+                BoneName="Bip01 L Forearm"
+                Density="0"
+                Name="Bip01 L Forearm"/>
+  
+  
+  <RagdollActor Type="Box"
+                Size="0.05 0.05 0.05"
+                BoneName="Bip01 R Hand"
+                Density="0"
+                Name="Bip01 R Hand"/>
+
+  <RagdollActor Type="Box"
+                Size="0.05 0.05 0.05"
+                BoneName="Bip01 L Hand"
+                Density="0"
+                Name="Bip01 L Hand"/>
+
+  <RagdollActor Type="Box"
+                Size="0.05 0.05 0.05"
+                BoneName="Bip01 R Thigh"
+                Density="0"
+                Name="Bip01 R Thigh"/>
+
+  <RagdollActor Type="Box"
+                Size="0.05 0.05 0.05"
+                BoneName="Bip01 L Thigh"
+                Density="0"
+                Name="Bip01 L Thigh"/>
+
+  <RagdollActor Type="Box"
+                Size="0.05 0.05 0.05"
+                BoneName="Bip01 R Calf"
+                Density="0"
+                Name="Bip01 R Calf"/>
+
+  <RagdollActor Type="Box"
+                Size="0.05 0.05 0.05"
+                BoneName="Bip01 L Calf"
+                Density="0"
+                Name="Bip01 L Calf"/>
+
+  <RagdollActor Type="Box"
+                Size="0.05 0.05 0.05"
+                BoneName="Bip01 R Foot"
+                Density="0"
+                Name="Bip01 R Foot"/>
+
+  <RagdollActor Type="Box"
+                Size="0.05 0.05 0.05"
+                BoneName="Bip01 L Foot"
+                Density="0"
+                Name="Bip01 L Foot"/>
+  
+  
+  
+  <!--</Actors>-->
+
+  <!--<Joints>
+    <RagdollJoint Type="Spherical"
+                  BoneName1="Bone01"
+                  BoneName2="Bone02"
+                  Name="Bone01"/>
+  </Joints>-->
+</CPhysxRagdoll>

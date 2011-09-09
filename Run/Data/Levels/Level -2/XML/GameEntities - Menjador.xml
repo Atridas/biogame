@@ -124,12 +124,11 @@
     <Object3D position="14.649 0.95523 19.1562" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Bido_vermell00">
     <Object3D position="2.03746 0.0 29.7106" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Bido_vermell" />
-    <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_explosiu" />
     <Explosive />
   </Entity>
@@ -137,1208 +136,1008 @@
     <Object3D position="19.3793 1.06519 29.8989" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="llauna" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Llauna01">
     <Object3D position="19.6601 1.06519 31.992" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="llauna" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Llauna02">
     <Object3D position="19.7364 1.06519 31.7883" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="llauna" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Llauna03">
     <Object3D position="13.1313 1.06519 34.7613" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="llauna" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Llauna04">
     <Object3D position="13.2076 1.06519 34.5576" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="llauna" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Llauna05">
     <Object3D position="12.3061 1.06519 32.7727" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="llauna" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Llauna06">
     <Object3D position="12.6739 1.06519 33.3048" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="llauna" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Llauna07">
     <Object3D position="23.1296 1.06519 22.5166" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="llauna" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Llauna08">
     <Object3D position="23.6633 1.06519 23.7694" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="llauna" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Llauna09">
     <Object3D position="25.0253 1.06519 26.8226" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="llauna" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Llauna10">
     <Object3D position="25.559 1.06519 28.0754" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="llauna" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Llauna11">
     <Object3D position="24.6857 1.06519 26.6543" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="llauna" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Llauna12">
     <Object3D position="25.2194 1.06519 27.9071" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="llauna" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Llauna13">
     <Object3D position="24.4747 1.06519 26.1322" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="llauna" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Llauna14">
     <Object3D position="25.0084 1.06519 27.385" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="llauna" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Llauna15">
     <Object3D position="5.7652 1.06519 35.7113" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="llauna" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Llauna16">
     <Object3D position="6.71677 1.06519 37.615" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="llauna" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Llauna17">
     <Object3D position="3.51108 1.06519 31.0538" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="llauna" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Got07">
     <Object3D position="12.8613 1.05359 34.2024" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="got" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Got06">
     <Object3D position="4.60775 1.05359 32.9889" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="got" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Got05">
     <Object3D position="5.99062 1.05359 35.8232" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="got" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Got04">
     <Object3D position="25.2968 1.05359 27.2676" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="got" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Got03">
     <Object3D position="25.3112 1.05359 27.7389" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="got" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Got02">
     <Object3D position="23.3408 1.05359 22.6742" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="got" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Got01">
     <Object3D position="19.1447 1.05359 29.6902" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="got" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Got00">
     <Object3D position="20.0712 1.05359 31.793" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="got" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc01">
     <Object3D position="25.8265 1.06778 27.4949" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc02">
     <Object3D position="24.1558 1.06778 24.1677" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc03">
     <Object3D position="25.9911 1.06778 28.7029" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc04">
     <Object3D position="25.1087 1.06778 26.0873" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc05">
     <Object3D position="18.5091 1.06778 29.6758" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc06">
     <Object3D position="19.8538 1.06778 32.2926" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc07">
     <Object3D position="11.8805 1.06778 32.7719" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc08">
     <Object3D position="12.8712 1.06778 33.64" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc09">
     <Object3D position="22.7162 1.06778 22.4092" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc10">
     <Object3D position="12.9741 1.06778 35.1358" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc11">
     <Object3D position="13.5194 1.06778 34.8749" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc12">
     <Object3D position="3.76547 1.06778 30.6808" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc13">
     <Object3D position="5.9122 1.06778 35.2092" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc14">
     <Object3D position="6.40475 1.06778 37.9247" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc15">
     <Object3D position="15.9361 0.95523 21.9074" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc16">
     <Object3D position="15.5965 0.95523 21.155" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc17">
     <Object3D position="15.9361 0.989776 21.9074" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc18">
     <Object3D position="15.5965 0.989776 21.155" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc19">
     <Object3D position="15.9361 1.04153 21.9074" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc20">
     <Object3D position="15.5965 1.04153 21.155" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc21">
     <Object3D position="15.9361 1.08279 21.9074" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc22">
     <Object3D position="15.5965 1.08279 21.155" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc23">
     <Object3D position="15.9361 1.1232 21.9074" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc24">
     <Object3D position="15.9361 1.16421 21.9074" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc25">
     <Object3D position="15.9361 1.21854 21.9074" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc26">
     <Object3D position="14.649 1.21854 19.1562" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc27">
     <Object3D position="14.649 1.16421 19.1562" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc28">
     <Object3D position="14.649 1.08279 19.1562" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc29">
     <Object3D position="14.649 1.1232 19.1562" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc30">
     <Object3D position="14.649 1.04153 19.1562" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc31">
     <Object3D position="14.649 0.989776 19.1562" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="bido_verd00">
     <Object3D position="9.40583 0.291046 28.5388" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="bido_verd00" />
-    <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc32">
     <Object3D position="15.0233 1.21854 19.9578" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc33">
     <Object3D position="15.0233 1.16421 19.9578" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc34">
     <Object3D position="15.0233 1.08279 19.9578" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc35">
     <Object3D position="15.0233 1.1232 19.9578" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc36">
     <Object3D position="15.0233 1.04153 19.9578" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc37">
     <Object3D position="15.0233 0.989776 19.9578" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc38">
     <Object3D position="15.0233 0.95523 19.9578" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc39">
     <Object3D position="8.25824 1.21854 25.7513" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc40">
     <Object3D position="8.25824 1.16421 25.7513" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc41">
     <Object3D position="8.25824 1.1232 25.7513" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc42">
     <Object3D position="8.25824 1.08279 25.7513" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc43">
     <Object3D position="8.25824 1.04153 25.7513" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc44">
     <Object3D position="8.25824 0.989776 25.7513" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc45">
     <Object3D position="8.25824 0.95523 25.7513" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc46">
     <Object3D position="-2.80758 1.16983 27.2379" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc47">
     <Object3D position="-2.80758 1.25613 27.2379" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc48">
     <Object3D position="-2.80758 1.20438 27.2379" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc49">
     <Object3D position="-2.80758 1.37881 27.2379" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc50">
     <Object3D position="-2.80758 1.29739 27.2379" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc51">
     <Object3D position="-2.80758 1.3378 27.2379" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc52">
     <Object3D position="-2.80758 1.43314 27.2379" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc53">
     <Object3D position="-2.54293 1.16983 27.9792" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc54">
     <Object3D position="-2.54293 1.25613 27.9792" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc55">
     <Object3D position="-2.54293 1.20438 27.9792" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc56">
     <Object3D position="-2.54293 1.37881 27.9792" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc57">
     <Object3D position="-2.54293 1.29739 27.9792" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc58">
     <Object3D position="-2.54293 1.3378 27.9792" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc59">
     <Object3D position="-2.54293 1.43314 27.9792" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc60">
     <Object3D position="-2.54293 1.47964 27.9792" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc61">
     <Object3D position="-2.54293 1.56595 27.9792" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc62">
     <Object3D position="-2.54293 1.51419 27.9792" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc63">
     <Object3D position="-2.54293 1.68863 27.9792" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc64">
     <Object3D position="-2.54293 1.60721 27.9792" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc65">
     <Object3D position="-2.54293 1.64761 27.9792" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc66">
     <Object3D position="-2.54293 1.74295 27.9792" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc67">
     <Object3D position="-1.91646 1.18881 26.7473" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc68">
     <Object3D position="-1.91646 1.27512 26.7473" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc69">
     <Object3D position="-1.91646 1.22336 26.7473" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc70">
     <Object3D position="-1.91646 1.3978 26.7473" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc71">
     <Object3D position="-1.91646 1.31638 26.7473" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc72">
     <Object3D position="-1.91646 1.35678 26.7473" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc73">
     <Object3D position="-1.91646 1.45212 26.7473" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc74">
     <Object3D position="-0.078083 1.18881 25.8972" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc75">
     <Object3D position="-0.078083 1.27512 25.8972" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc76">
     <Object3D position="-0.078083 1.22336 25.8972" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc77">
     <Object3D position="-0.078083 1.3978 25.8972" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc78">
     <Object3D position="-0.078083 1.31638 25.8972" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc79">
     <Object3D position="-0.078083 1.35678 25.8972" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc80">
     <Object3D position="-0.078083 1.45212 25.8972" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc81">
     <Object3D position="-0.943058 1.18881 26.2726" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc82">
     <Object3D position="-0.943058 1.22336 26.2726" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc83">
     <Object3D position="-2.03456 1.18881 29.0731" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="Plats_physc84">
     <Object3D position="-2.03456 1.22336 29.0731" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="plat" />
     <PhysXBox fromRenderableObject="true" density="10" collision_group="objecte dinamic" />
-    <Explosive />
   </Entity>
   <Entity name="bido_verd09">
     <Object3D position="34.0709 0.299438 30.8373" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="bido_verd09" />
-    <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" />
-    <Explosive />
   </Entity>
   <Entity name="Bido_vermell04">
-    <Object3D position="33.5255 0.0 31.1549" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="33.2493 0.0 31.2684" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Bido_vermell" />
-    <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_explosiu" />
     <Explosive />
   </Entity>
   <Entity name="bido_verd07">
     <Object3D position="28.5492 0.0 29.7531" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="bido_verd" />
-    <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" />
-    <Explosive />
   </Entity>
   <Entity name="Bido_vermell03">
     <Object3D position="27.8766 0.0 29.6178" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Bido_vermell" />
-    <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_explosiu" />
     <Explosive />
   </Entity>
   <Entity name="bido_verd05">
     <Object3D position="28.0759 0.935213 29.9004" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="bido_verd" />
-    <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" />
-    <Explosive />
   </Entity>
   <Entity name="Bido_vermell02">
     <Object3D position="28.1648 0.0 30.23" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Bido_vermell" />
-    <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_explosiu" />
     <Explosive />
   </Entity>
   <Entity name="bido_verd06">
     <Object3D position="28.0759 0.935213 29.9004" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="bido_verd" />
-    <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" />
-    <Explosive />
   </Entity>
   <Entity name="bido_verd01">
     <Object3D position="9.01941 0.0 28.2464" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="bido_verd" />
-    <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" />
-    <Explosive />
   </Entity>
   <Entity name="Bido_vermell01">
     <Object3D position="9.66882 0.0 27.9152" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Bido_vermell" />
-    <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_explosiu" />
     <Explosive />
   </Entity>
   <Entity name="bido_verd04">
     <Object3D position="2.31746 0.0 30.3777" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="bido_verd" />
-    <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" />
-    <Explosive />
   </Entity>
   <Entity name="bido_verd03">
     <Object3D position="1.64265 0.0 30.2441" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="bido_verd" />
-    <PhysXBox fromRenderableObject="true" density="30" collision_group="objecte dinamic" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" />
-    <Explosive />
   </Entity>
   <Entity name="columna08">
     <Object3D position="2.96589 1.75826 29.5427" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="columna08" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="vitrina">
     <Object3D position="13.0836 0.757336 25.775" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="vitrina" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Altaveus00">
     <Object3D position="3.62272 2.97921 29.4155" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="altaveus" />
-    <Explosive />
+    <RenderableObject animated="false" name="Altaveus00" />
   </Entity>
   <Entity name="Altaveus01">
     <Object3D position="13.4356 2.99697 35.7358" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="altaveus" />
-    <Explosive />
+    <RenderableObject animated="false" name="Altaveus01" />
   </Entity>
   <Entity name="Altaveus02">
     <Object3D position="21.6214 2.88801 32.3563" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="altaveus" />
-    <Explosive />
+    <RenderableObject animated="false" name="Altaveus02" />
   </Entity>
   <Entity name="barra3">
     <Object3D position="8.29213 0.5 25.8198" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="barra3" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="barra1">
     <Object3D position="15.6558 0.5 21.1578" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="barra1" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="barra2">
     <Object3D position="12.6827 0.652336 25.0123" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="barra2" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Cables_menjador">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Cables_menjador" />
-    <Explosive />
   </Entity>
   <Entity name="taula2">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="taula2" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="taula1">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="taula1" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="taula3">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="taula3" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="taula4">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="taula4" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="taula05">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="taula05" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Caixa_gran04">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Caixa_gran04" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Caixa_gran02">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Caixa_gran02" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Caixa_gran01">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Caixa_gran01" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Caixa_gran00">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Caixa_gran00" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Caixa_gran03">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Caixa_gran03" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Caixa_estatica_petita00">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Caixa_estatica_petita00" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Caixa_estatica_petita01">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Caixa_estatica_petita01" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Caixa_estatica_petita02">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Caixa_estatica_petita02" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="ventilacio1">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="ventilacio1" />
-    <Explosive />
   </Entity>
   <Entity name="ventilacio2">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="ventilacio2" />
-    <Explosive />
   </Entity>
   <Entity name="Caixes_separadores">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Caixes_separadores" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Jukebox">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Jukebox" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="tauletas">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="tauletas" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="tauleta">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="tauleta" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Quadres">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Quadres" />
-    <Explosive />
   </Entity>
   <Entity name="Object04">
     <Object3D position="31.3912 0.166878 24.3476" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Object04" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Object05">
     <Object3D position="28.113 0.435029 16.4468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Object05" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Papereras00">
     <Object3D position="17.4989 0.375909 24.0731" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Papereras00" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Papereras01">
     <Object3D position="15.505 0.435029 22.3841" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Papereras01" />
-    <Explosive />
   </Entity>
   <Entity name="Papereras02">
     <Object3D position="7.19798 0.435029 25.0596" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Papereras02" />
-    <Explosive />
   </Entity>
   <Entity name="Papereras03">
     <Object3D position="7.76996 0.435029 39.822" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Papereras03" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Papereras04">
     <Object3D position="11.7446 0.652337 22.9468" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Papereras04" />
-    <Explosive />
   </Entity>
   <Entity name="Estractor">
     <Object3D position="11.7159 2.96976 20.9005" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Estractor" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Altaveus03">
     <Object3D position="22.3361 3.23134 19.7557" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Altaveus03" />
-    <Explosive />
   </Entity>
   <Entity name="Parets_menjador">
     <Object3D position="14.7119 1.75079 26.5092" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Parets_menjador" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="cartell01">
     <Object3D position="15.5403 2.86907 20.6569" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="cartell01" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="cartell02">
     <Object3D position="12.664 2.88379 25.2248" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="cartell02" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="cartell03">
     <Object3D position="8.52219 2.88383 26.0106" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="cartell03" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="columna01">
     <Object3D position="22.6328 1.75878 20.3719" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="columna01" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="columna02">
     <Object3D position="27.1519 1.75933 30.0192" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="columna02" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="columna03">
     <Object3D position="16.5994 1.7585 23.1535" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="columna03" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="columna04">
     <Object3D position="21.106 1.75917 32.8384" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="columna04" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="columna05">
     <Object3D position="7.83917 1.75842 24.7642" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="columna05" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="columna06">
     <Object3D position="13.531 1.75897 36.3707" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="columna06" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="colunma07">
     <Object3D position="7.48507 1.75881 39.19" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="colunma07" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="fogons">
     <Object3D position="11.521 0.5 20.5381" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="fogons" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="fluorescente_apagat">
     <Object3D position="14.5476 3.09934 28.5958" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="fluorescente_apagat" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="fluorescente_apagat01">
     <Object3D position="4.85336 3.09934 25.7738" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="fluorescente_apagat01" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="luz_florescente02">
     <Object3D position="1.77145 3.0267 33.7667" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="bombeta_florescent" />
-    <Explosive />
   </Entity>
   <Entity name="fluorescente_DEF11">
     <Object3D position="2.04748 3.09934 34.3481" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="fluorescente_DEF11" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Llum_menjador00">
     <Object3D position="-0.648827 2.51455 28.4963" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Llum_menjador00" />
-    <Explosive />
   </Entity>
   <Entity name="fluorescente_DEF12">
     <Object3D position="-0.643127 3.09934 28.4948" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="fluorescente_DEF12" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="luz_florescente03">
     <Object3D position="-0.919151 3.0267 27.9135" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="bombeta_florescent" />
-    <Explosive />
   </Entity>
   <Entity name="fluorescente_DEF14">
     <Object3D position="7.63609 3.09934 31.6725" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="fluorescente_DEF14" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="luz_florescente05">
     <Object3D position="7.36006 3.0267 31.0912" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="bombeta_florescent" />
-    <Explosive />
   </Entity>
   <Entity name="fluorescente_apagat02">
     <Object3D position="5.19611 3.09934 40.8284" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="fluorescente_apagat02" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Llum_menjador01">
     <Object3D position="2.06863 2.51455 34.337" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Llum_menjador01" />
-    <Explosive />
   </Entity>
   <Entity name="Llum_menjador02">
     <Object3D position="7.61793 2.51455 31.7124" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Llum_menjador02" />
-    <Explosive />
   </Entity>
   <Entity name="fluorescente_apagat03">
     <Object3D position="24.1752 3.09934 31.6555" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="fluorescente_apagat03" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="fluorescente_apagat04">
     <Object3D position="30.5091 3.09934 28.722" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="fluorescente_apagat04" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="luz_florescente06">
     <Object3D position="10.3998 3.0267 37.5924" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="bombeta_florescent" />
-    <Explosive />
   </Entity>
   <Entity name="Llum_menjador03">
     <Object3D position="10.6576 2.51455 38.2136" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Llum_menjador03" />
-    <Explosive />
   </Entity>
   <Entity name="fluorescente_DEF15">
     <Object3D position="10.6758 3.09934 38.1737" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="fluorescente_DEF15" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="luz_florescente07">
     <Object3D position="17.1193 3.0267 34.1487" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="bombeta_florescent" />
-    <Explosive />
   </Entity>
   <Entity name="Llum_menjador04">
     <Object3D position="17.3771 2.51455 34.7698" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Llum_menjador04" />
-    <Explosive />
   </Entity>
   <Entity name="fluorescente_DEF16">
     <Object3D position="17.3953 3.09934 34.73" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="fluorescente_DEF16" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="luz_florescente08">
     <Object3D position="21.0283 3.0267 24.9328" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="bombeta_florescent" />
-    <Explosive />
   </Entity>
   <Entity name="Llum_menjador05">
     <Object3D position="21.2862 2.51455 25.5539" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Llum_menjador05" />
-    <Explosive />
   </Entity>
   <Entity name="fluorescente_DEF17">
     <Object3D position="21.3043 3.09934 25.5141" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="fluorescente_DEF17" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="luz_florescente09">
     <Object3D position="18.1017 3.0267 18.6894" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="bombeta_florescent" />
-    <Explosive />
   </Entity>
   <Entity name="Llum_menjador06">
     <Object3D position="18.3851 2.51455 19.2865" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Llum_menjador06" />
-    <Explosive />
   </Entity>
   <Entity name="fluorescente_DEF18">
     <Object3D position="18.3778 3.09934 19.2707" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="fluorescente_DEF18" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="luz_florescente10">
     <Object3D position="24.5262 3.0267 15.7795" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="bombeta_florescent" />
-    <Explosive />
   </Entity>
   <Entity name="Llum_menjador07">
     <Object3D position="24.784 2.51455 16.4006" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Llum_menjador07" />
-    <Explosive />
   </Entity>
   <Entity name="fluorescente_DEF19">
     <Object3D position="24.8022 3.09934 16.3608" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="fluorescente_DEF19" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="luz_florescente11">
     <Object3D position="27.3458 3.0267 21.8705" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="bombeta_florescent" />
-    <Explosive />
   </Entity>
   <Entity name="Llum_menjador08">
     <Object3D position="27.6037 2.51455 22.4916" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Llum_menjador08" />
-    <Explosive />
   </Entity>
   <Entity name="fluorescente_DEF20">
     <Object3D position="27.6218 3.09934 22.4518" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="fluorescente_DEF20" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Menjador_Navnode_00">
     <Object3D position="4.21359 0.653691 37.2267" yaw="0.0" pitch="0.0" roll="0.0" />

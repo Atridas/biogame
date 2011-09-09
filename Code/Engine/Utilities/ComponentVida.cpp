@@ -153,6 +153,15 @@ void CComponentVida::ReceiveEvent(const SEvent& _Event)
 
     Decrease(l_fDamage);
 
+    if(m_fVida <= 0.f)
+    {
+      SEvent l_morir;
+      l_morir.Msg = SEvent::MORIR;
+      l_morir.Receiver = l_morir.Sender = GetEntity()->GetGUID();
+      
+      CORE->GetEntityManager()->SendEvent(l_morir);
+    }
+
   }else if(_Event.Msg == SEvent::MORIR)
   {
     m_fVida = 0.0f;

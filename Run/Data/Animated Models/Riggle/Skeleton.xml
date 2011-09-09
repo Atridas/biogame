@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Ragdoll>
+  <skeleton>
+    <!--<bone name="Bip01" type="box" density="0" bounding_box_size="0.000000 0.000000 0.000000" bounding_box_middle_point="0.088426 -0.001933 -0.039528"/>-->
+    <!--<bone name="Bip01 Footsteps" type="box" density="0" bounding_box_size="0.000000 0.000000 0.000000" bounding_box_middle_point="-0.030869 -0.000000 -0.935355"/>-->
+    <bone name="Bip01 Pelvis" type="box" density="0.5" bounding_box_size="0.088809 0.21737 0.281625" bounding_box_middle_point="-0.020674 0.0 0.0"/>
+    <bone name="Bip01 Spine" type="box" density="0.5" bounding_box_size="0.095285 0.226531 0.281527" bounding_box_middle_point="-0.059697 0.0 0.0"/>
+    <bone name="Bip01 Spine1" type="box" density="0.5" bounding_box_size="0.085285 0.272918 0.257469" bounding_box_middle_point="-0.055762 0.0 0.0"/>
+    <bone name="Bip01 Spine2" type="box" density="0.5" bounding_box_size="0.168745 0.238089 0.335483" bounding_box_middle_point="-0.111857 0.0 0.0"/>
+    <bone name="Bip01 Neck" type="box" density="0.5" bounding_box_size="0.096894 0.090900 0.093998" bounding_box_middle_point="-0.029110 0.0 0.0"/>
+    <bone name="Bip01 Head" type="sphere" density="0.5" bounding_box_size="0.193828 0.180623 0.267640" bounding_box_middle_point="-0.100960 0.033973 0.000598"/>
+    <!--<bone name="Bip01 HeadNub" type="box" density="0" bounding_box_size="0.000000 0.000000 0.000000" bounding_box_middle_point="1.759500 -0.227771 0.252536"/>-->
+    <bone name="Bip01 L Clavicle" type="box" density="1" bounding_box_size="0.203914 0.085763 0.083605" bounding_box_middle_point="-0.108874 0.0 0.0"/>
+    <bone name="Bip01 L UpperArm" type="box" density="0.5" bounding_box_size="0.276607 0.147545 0.189400" bounding_box_middle_point="-0.077885 -0.006843 -0.004828"/>
+    <bone name="Bip01 L Forearm" type="box" density="0.5" bounding_box_size="0.247139 0.154743 0.162649" bounding_box_middle_point="-0.157234 -0.024990 0.000109"/>
+    <bone name="Bip01 L Hand" type="box" density="0.5" bounding_box_size="0.112115 0.192655 0.078994" bounding_box_middle_point="-0.059455 0.003512 -0.037276"/>
+    <bone name="Bip01 L Finger0" type="box" density="0.5" bounding_box_size="0.089541 0.123213 0.065597" bounding_box_middle_point="-0.036118 0.025447 0.000276"/>
+    <!--<bone name="Bip01 L Finger0Nub" type="box" density="0" bounding_box_size="0.000000 0.000000 0.000000" bounding_box_middle_point="0.832349 -0.778258 0.621030"/>-->
+    <!--<bone name="Bone01" type="box" density="0" bounding_box_size="0.207273 0.162664 0.263315" bounding_box_middle_point="-0.032444 0.037619 -0.018949"/>-->
+    <bone name="Bip01 R Clavicle" type="box" density="1" bounding_box_size="0.203914 0.085763 0.083605" bounding_box_middle_point="-0.104747 0.0 0.0"/>
+    <bone name="Bip01 R UpperArm" type="box" density="0.5" bounding_box_size="0.176607 0.147545 0.189400" bounding_box_middle_point="-0.114364 -0.004855 0.021421"/>
+    <bone name="Bip01 R Forearm" type="box" density="0.5" bounding_box_size="0.247959 0.154743 0.163727" bounding_box_middle_point="-0.157655 -0.022067 0.012626"/>
+    <!--<bone name="Bip01 R Hand" type="box" density="0" bounding_box_size="0.000000 0.000000 0.000000" bounding_box_middle_point="-0.159622 0.818820 -1.063359"/>
+    <bone name="Bip01 R Finger0" type="box" density="0" bounding_box_size="0.000000 0.000000 0.000000" bounding_box_middle_point="0.003598 0.627186 -1.116505"/>
+    <bone name="Bip01 R Finger0Nub" type="box" density="0" bounding_box_size="0.000000 0.000000 0.000000" bounding_box_middle_point="-0.052777 -0.546159 -1.138799"/>-->
+    <!--<bone name="Bone02" type="box" density="0" bounding_box_size="0.126651 0.214184 0.158387" bounding_box_middle_point="-0.065206 0.014880 -0.010675"/>-->
+    <bone name="Bip01 L Thigh" type="box" density="0.5" bounding_box_size="0.262404 0.113609 0.133944" bounding_box_middle_point="-0.209343 -0.003081 -0.004184"/>
+    <bone name="Bip01 L Calf" type="box" density="0.5" bounding_box_size="0.356734 0.109719 0.119662" bounding_box_middle_point="-0.225741 -0.049103 -0.015618"/>
+    <bone name="Bip01 L Foot" type="box" density="0.5" bounding_box_size="0.137334 0.126456 0.260189" bounding_box_middle_point="-0.040016 0.051430 -0.001951"/>
+    <bone name="Bip01 L Toe0" type="box" density="0.5" bounding_box_size="0.104950 0.137506 0.082519" bounding_box_middle_point="-0.039132 0.029236 -0.002563"/>
+    <!--<bone name="Bip01 L Toe0Nub" type="box" density="0" bounding_box_size="0.000000 0.000000 0.000000" bounding_box_middle_point="-0.292054 0.001766 0.004243"/>-->
+    <bone name="Bip01 R Thigh" type="box" density="0.5" bounding_box_size="0.262404 0.114158 0.134779" bounding_box_middle_point="-0.227972 -0.002581 0.005968"/>
+    <bone name="Bip01 R Calf" type="box" density="0.5" bounding_box_size="0.351503 0.113178 0.119662" bounding_box_middle_point="-0.228604 -0.049008 0.018857"/>
+    <bone name="Bip01 R Foot" type="box" density="0.5" bounding_box_size="0.139311 0.131350 0.243152" bounding_box_middle_point="-0.040291 0.047039 0.001017"/>
+    <!--<bone name="Bip01 R Toe0" type="box" density="0.5" bounding_box_size="0.100381 0.135672 0.086692" bounding_box_middle_point="-0.041416 0.031573 0.004872"/>-->
+    <!--<bone name="Bip01 R Toe0Nub" type="box" density="0" bounding_box_size="0.000000 0.000000 0.000000" bounding_box_middle_point="-0.097029 0.138150 -0.192903"/>-->
+  </skeleton>
+
+  <joints>
+
+
+    <!--<joint type="fixed" Actor1="Bip01 Head" Actor2="NULL"/>-->
+    <!--<joint type="fixed" Actor1="Bip01 Spine2" Actor2="NULL" Direction="Out"/>-->
+    <!--<joint type="fixed" Actor1="Bip01 Neck" Actor2="NULL"/>-->
+    <!--<joint type="fixed" Actor1="Bip01 R Hand" Actor2="NULL"/>-->
+    
+    <joint type="spherical" Actor1="Bip01 Head" Actor2="Bip01 Neck" Direction="In" TwistLimitLow="-0.1 0.9" TwistLimitHigh="0.1 0.9" SwingLimit="0.16 0.9" />
+    <joint type="spherical" Actor1="Bip01 Neck" Actor2="Bip01 Spine2" Direction="In" TwistLimitLow="-0.1 0.9" TwistLimitHigh="0.1 0.9" SwingLimit="0.07 0.9" />
+    <joint type="spherical" Actor1="Bip01 Spine2" Actor2="Bip01 Spine1" Direction="In" TwistLimitLow="-0.1 0.9" TwistLimitHigh="0.1 0.9" SwingLimit="0.1 0.9" />
+    <joint type="spherical" Actor1="Bip01 Spine1" Actor2="Bip01 Spine" Direction="In" TwistLimitLow="-0.1 0.9" TwistLimitHigh="0.1 0.9" SwingLimit="0.1 0.9" />
+    <joint type="spherical" Actor1="Bip01 Spine" Actor2="Bip01 Pelvis" Direction="In" TwistLimitLow="-0.1 0.9" TwistLimitHigh="0.1 0.9" SwingLimit="0.15 0.9" />
+
+    <!--Joints dels braços-->
+    <joint type="spherical" Actor1="Bip01 R Clavicle" Actor2="Bip01 Spine2" Direction="Out" TwistLimitLow="0.0 0.9" TwistLimitHigh="0.0 0.9" SwingLimit="0.05 0.9" />
+    <joint type="spherical" Actor1="Bip01 L Clavicle" Actor2="Bip01 Spine2" Direction="Out" TwistLimitLow="0.0 0.9" TwistLimitHigh="0.0 0.9" SwingLimit="0.05 0.9" />
+    <joint type="spherical" Actor1="Bip01 R UpperArm" Actor2="Bip01 R Clavicle" Direction="Out" TwistLimitLow="-0.1 0.9" TwistLimitHigh="0.1 0.9" SwingLimit="0.3 0.9" />
+    <joint type="spherical" Actor1="Bip01 L UpperArm" Actor2="Bip01 L Clavicle" Direction="Out" TwistLimitLow="-0.1 0.9" TwistLimitHigh="0.1 0.9" SwingLimit="0.3 0.9" />
+    <joint type="spherical" Actor1="Bip01 R Forearm" Actor2="Bip01 R UpperArm" Direction="Out" TwistLimitLow="0.0 0.9" TwistLimitHigh="0.0 0.9" SwingLimit="0.3 0.9" />
+    <joint type="spherical" Actor1="Bip01 L Forearm" Actor2="Bip01 L UpperArm" Direction="Out" TwistLimitLow="0.0 0.9" TwistLimitHigh="0.0 0.9" SwingLimit="0.3 0.9" />
+    <joint type="spherical" Actor1="Bip01 L Hand" Actor2="Bip01 L Forearm" Direction="Out" TwistLimitLow="-0.16 0.9" TwistLimitHigh="0.16 0.9" SwingLimit="0.1 0.9" />
+    <joint type="spherical" Actor1="Bip01 L Finger0" Actor2="Bip01 L Hand" Direction="Out" TwistLimitLow="-0.16 0.9" TwistLimitHigh="0.16 0.9" SwingLimit="0.05 0.9" />
+    
+    <!--Joints de les cames-->
+    <joint type="spherical" Actor1="Bip01 R Thigh" Actor2="Bip01 Pelvis" Direction="Out" TwistLimitLow="0.0 0.9" TwistLimitHigh="0.0 0.9" SwingLimit="0.16 0.9" />
+    <joint type="spherical" Actor1="Bip01 L Thigh" Actor2="Bip01 Pelvis" Direction="Out" TwistLimitLow="0.0 0.9" TwistLimitHigh="0.0 0.9" SwingLimit="0.16 0.9" />
+    <joint type="spherical" Actor1="Bip01 R Calf" Actor2="Bip01 R Thigh" Direction="Out" TwistLimitLow="-0.0 0.9" TwistLimitHigh="0.0 0.9" SwingLimit="0.25 0.9" />
+    <joint type="spherical" Actor1="Bip01 L Calf" Actor2="Bip01 L Thigh" Direction="Out" TwistLimitLow="-0.0 0.9" TwistLimitHigh="0.0 0.9" SwingLimit="0.25 0.9" />
+    <joint type="spherical" Actor1="Bip01 R Foot" Actor2="Bip01 R Calf" Direction="Out" TwistLimitLow="0.0 0.9" TwistLimitHigh="0.0 0.9" SwingLimit="0.36 0.9" />
+    <joint type="spherical" Actor1="Bip01 L Foot" Actor2="Bip01 L Calf" Direction="Out" TwistLimitLow="0.0 0.9" TwistLimitHigh="0.0 0.9" SwingLimit="0.36 0.9" />
+    <!--<joint type="spherical" Actor1="Bip01 R Toe0" Actor2="Bip01 R Foot" Direction="Out" TwistLimitLow="0.0 0.9" TwistLimitHigh="0.0 0.9" SwingLimit="0.0 0.9" />-->
+    <joint type="spherical" Actor1="Bip01 L Toe0" Actor2="Bip01 L Foot" Direction="Out" TwistLimitLow="0.0 0.9" TwistLimitHigh="0.0 0.9" SwingLimit="0.0 0.9" />
+
+    
+
+  </joints>
+
+  
+</Ragdoll>
+
+
+  

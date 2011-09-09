@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <meshes>
+	<mesh name="tubo3" path="Data/Meshes/tubo3.mesh" max="1.54473 1.09653 3.26029" min="-1.54473 -1.09653 -3.26029" />
+	<mesh name="Llum10" path="Data/Meshes/Llum10.mesh" max="1.07297 0.634523 1.41833" min="-0.998689 -0.807798 -1.62242" />
+	<mesh name="pas_video" path="Data/Meshes/pas_video.mesh" max="4.01797 2.75 5.04998" min="-4.01797 -2.75 -5.04998" />
+	<mesh name="fluorescente_DEF19" path="Data/Meshes/fluorescente_DEF19.mesh" max="0.394096 2.55385 1.03664" min="-0.414108 -0.284417 -0.759481" />
+	<mesh name="viga3" path="Data/Meshes/viga3.mesh" max="2.28866 0.360249 1.28038" min="-2.28866 -0.360249 -1.28038" />
+	<mesh name="luz_florescente10" path="Data/Meshes/luz_florescente10.mesh" max="0.0573225 0.0388396 1.19506" min="-0.54406 -0.325688 -0.0242439" />
 	<mesh name="marc_porta02" path="Data/Meshes/marc_porta02.mesh" max="1.82779 1.47982 0.973099" min="-1.28837 -1.54837 -0.848442" />
 	<mesh name="porta_sub2" path="Data/Meshes/porta_sub2.mesh" max="0.529812 1.5723 0.795646" min="-0.529812 -1.5723 -0.795645" />
 	<mesh name="fluorescente_DEF18" path="Data/Meshes/fluorescente_DEF18.mesh" max="0.448835 2.49151 0.733286" min="-0.448833 -0.115818 -0.733285" />
@@ -24,11 +30,5 @@
 	<mesh name="tubo_esq2" path="Data/Meshes/tubo_esq2.mesh" max="3.37519 1.73343 0.156569" min="-3.37519 -1.73343 -0.156569" />
 	<mesh name="marc_passadis1" path="Data/Meshes/marc_passadis1.mesh" max="0.132786 1.47375 1.78116" min="-0.132785 -1.47375 -1.78116" />
 	<mesh name="pass01" path="Data/Meshes/pass01.mesh" max="14.4488 1.75 10.385" min="-14.4488 -1.75 -10.385" />
-	<mesh name="pas_video" path="Data/Meshes/pas_video.mesh" max="4.01797 2.75 5.04998" min="-4.01797 -2.75 -5.04998" />
 	<mesh name="marc_porta01" path="Data/Meshes/marc_porta01.mesh" max="1.34599 1.47982 0.967236" min="-1.40704 -1.54837 -0.713959" />
-	<mesh name="tubo3" path="Data/Meshes/tubo3.mesh" max="1.54473 1.09653 3.26029" min="-1.54473 -1.09653 -3.26029" />
-	<mesh name="Llum10" path="Data/Meshes/Llum10.mesh" max="1.07297 0.634523 1.41833" min="-0.998689 -0.807798 -1.62242" />
-	<mesh name="fluorescente_DEF19" path="Data/Meshes/fluorescente_DEF19.mesh" max="0.394096 2.55385 1.03664" min="-0.414108 -0.284417 -0.759481" />
-	<mesh name="luz_florescente10" path="Data/Meshes/luz_florescente10.mesh" max="0.0573225 0.0388396 1.19506" min="-0.54406 -0.325688 -0.0242439" />
-	<mesh name="viga3" path="Data/Meshes/viga3.mesh" max="2.28866 0.360249 1.28038" min="-2.28866 -0.360249 -1.28038" />
 </meshes>

@@ -12,137 +12,168 @@
     <Object3D position="7.19064 -0.435044 -2.80313" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="tubo3" />
     <PhysXMesh density="0" collision_group="escenari" />
+    <Explosive />
   </Entity>
   <Entity name="Llum10">
     <Object3D position="8.39006 1.47601 0.0696793" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Llum10" />
+    <Explosive />
   </Entity>
   <Entity name="pas_video">
     <Object3D position="8.82721 0.75 -0.821631" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="pas_video" />
     <PhysXMesh density="0" collision_group="escenari" />
+    <Explosive />
   </Entity>
   <Entity name="fluorescente_DEF19">
     <Object3D position="8.34692 2.04764 0.185399" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="fluorescente_DEF19" />
+    <Explosive />
   </Entity>
   <Entity name="viga3">
     <Object3D position="8.95375 2.27241 -1.16242" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="viga3" />
+    <Explosive />
   </Entity>
   <Entity name="luz_florescente10">
     <Object3D position="8.60228 2.11979 -0.410645" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="luz_florescente10" />
+    <Explosive />
   </Entity>
   <Entity name="marc_porta02">
     <Object3D position="22.1863 1.45995 8.79586" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="marc_porta02" />
+    <Explosive />
   </Entity>
   <Entity name="porta_sub2">
     <Object3D position="21.762 1.61257 3.12543" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="porta_sub2" />
     <PhysXMesh density="0" collision_group="escenari" />
+    <Explosive />
   </Entity>
   <Entity name="fluorescente_DEF18">
     <Object3D position="19.1141 3.26537 2.53251" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="fluorescente_DEF18" />
+    <Explosive />
   </Entity>
   <Entity name="Llum09">
     <Object3D position="19.113 2.68058 2.53829" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Llum09" />
+    <Explosive />
   </Entity>
   <Entity name="luz_florescente09">
     <Object3D position="18.8205 3.19273 1.96038" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="luz_florescente09" />
+    <Explosive />
   </Entity>
   <Entity name="fluorescente_DEF17">
     <Object3D position="16.6137 3.26537 -2.27272" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="fluorescente_DEF17" />
+    <Explosive />
   </Entity>
   <Entity name="luz_florescente08">
     <Object3D position="16.3202 3.19273 -2.84484" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="luz_florescente08" />
+    <Explosive />
   </Entity>
   <Entity name="viga5">
     <Object3D position="20.5766 3.17597 5.77934" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="viga5" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <Explosive />
   </Entity>
   <Entity name="viga4">
     <Object3D position="17.6722 3.17597 -0.195276" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="viga4" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <Explosive />
   </Entity>
   <Entity name="porta_sub1">
     <Object3D position="15.032 1.67098 -0.43577" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="porta_sub1" />
     <PhysXMesh density="0" collision_group="escenari" />
+    <Explosive />
   </Entity>
   <Entity name="Llum08">
     <Object3D position="16.6127 2.68058 -2.26694" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Llum08" />
+    <Explosive />
   </Entity>
   <Entity name="fluorescente_DEF15">
     <Object3D position="-1.73101 3.26537 -8.60308" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="fluorescente_DEF15" />
+    <Explosive />
   </Entity>
   <Entity name="Llum07">
     <Object3D position="4.07964 2.68058 -8.5973" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Llum07" />
+    <Explosive />
   </Entity>
   <Entity name="fluorescente_DEF16">
     <Object3D position="4.08073 3.26537 -8.60308" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="fluorescente_DEF16" />
+    <Explosive />
   </Entity>
   <Entity name="luz_florescente06">
     <Object3D position="-2.37452 3.19273 -8.5986" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="luz_florescente06" />
+    <Explosive />
   </Entity>
   <Entity name="viga1">
     <Object3D position="0.962704 3.17597 -8.4928" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="viga1" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <Explosive />
   </Entity>
   <Entity name="Llum06">
     <Object3D position="-1.7321 2.68058 -8.5973" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Llum06" />
+    <Explosive />
   </Entity>
   <Entity name="luz_florescente07">
     <Object3D position="3.43721 3.19273 -8.5986" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="luz_florescente07" />
+    <Explosive />
   </Entity>
   <Entity name="viga2">
     <Object3D position="6.97785 3.17597 -8.4928" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="viga2" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <Explosive />
   </Entity>
   <Entity name="tubo_dret">
     <Object3D position="3.49449 1.74056 -10.7481" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="tubo_dret" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <Explosive />
   </Entity>
   <Entity name="tubo_esq1">
     <Object3D position="-2.05601 1.75054 -6.26818" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="tubo_esq1" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <Explosive />
   </Entity>
   <Entity name="tubo_esq2">
     <Object3D position="4.95992 1.76873 -6.28466" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="tubo_esq2" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <Explosive />
   </Entity>
   <Entity name="marc_passadis1">
     <Object3D position="-4.39026 1.46722 -8.08447" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="marc_passadis1" />
+    <Explosive />
   </Entity>
   <Entity name="pass01">
     <Object3D position="9.79401 1.75 -0.486599" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="pass01" />
     <PhysXMesh density="0" collision_group="escenari" />
+    <Explosive />
   </Entity>
   <Entity name="marc_porta01">
     <Object3D position="10.786 1.45995 -5.15953" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="marc_porta01" />
+    <Explosive />
   </Entity>
   <Entity name="Porta_Laser">
     <Object3D position="15.9594 1.73938 -3.77328" yaw="64.0728" pitch="0.0" roll="0.0" />
@@ -150,9 +181,9 @@
     <Door open="false" size="2.29047 4.30355 5.02548" />
   </Entity>
   <Entity name="Porta_Videovigilancia">
-    <Object3D position="6.99897 0.300004 3.50021" yaw="114.214" pitch="0.0" roll="0.0" />
+    <Object3D position="6.99001 -0.654852 3.41182" yaw="114.214" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta" />
-    <Door open="false" size="1.47035 5.17896 5.2054" />
+    <Door open="false" size="0.36806 2.62239 2.03725" />
   </Entity>
   <Entity name="Trigger_Porta_Video">
     <Object3D position="7.94775 0.0 1.60195" yaw="23.0405" pitch="0.0" roll="0.0" />
