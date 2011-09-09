@@ -85,7 +85,11 @@ State_Soldier_Buscant_Cobertura["Enter"] = function(_enemic)
   animation:play_cycle('run', 0.3)
   
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
-  ia_brain:plan_path_to_cobertura()
+  
+  --En cas de no trobar cami, es comporta com un enemic standard.
+  if ia_brain:plan_path_to_cobertura() == false then
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Idle')
+  end
   ia_brain.time = 0
 end
 
@@ -123,10 +127,10 @@ State_Soldier_Buscant_Cobertura['Update'] = function(_enemic, _dt)
   local dist_sq_player = (ia_pos - node_pos):length_sq()
   
   --TEMPORAL
-  if dist_sq_player > Enemy_Constants["Distance Lose Walk"] then
-    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Idle')
-    return
-  end
+  --if dist_sq_player > Enemy_Constants["Distance Lose Walk"] then
+  --  _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Idle')
+  --  return
+  --end
   
   ia_brain.time = ia_brain.time + _dt
   if ia_brain.time > Enemy_Constants["Time Btw Shoot"] then

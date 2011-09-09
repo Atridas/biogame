@@ -28,7 +28,7 @@ public:
   void ReceiveForce(SEvent _sEvent);
   
   //Path planning
-  void PlanPathToCobertura();
+  bool PlanPathToCobertura();
   Vect3f GetNextNodePosition() const;
   bool ArrivedAtDestination() const;
   bool ArrivedAtNode(float _fDistanceSq) const;
