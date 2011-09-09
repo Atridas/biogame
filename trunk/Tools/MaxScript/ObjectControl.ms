@@ -124,7 +124,7 @@ function IsDestroyable _object =
 -- Comprova si l'objecte proporcionat és un objecte destructible
 function IsExplosive _object =
 (
-	if (GetUserProp _object "explosive") != "true" then
+	if (GetUserProp _object "explosive") != undefined then
 	(
 		return true
 	) else (

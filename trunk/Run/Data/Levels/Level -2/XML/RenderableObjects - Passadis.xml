@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <RenderableObjects>
+	<RenderableObject name="tubo3" class="StaticMesh" resource="tubo3" position="7.19064 -0.435044 -2.80313" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Llum10" class="StaticMesh" resource="Llum10" position="8.39006 1.47601 0.0696793" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="pas_video" class="StaticMesh" resource="pas_video" position="8.82721 0.75 -0.821631" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="fluorescente_DEF19" class="StaticMesh" resource="fluorescente_DEF19" position="8.34692 2.04764 0.185399" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="viga3" class="StaticMesh" resource="viga3" position="8.95375 2.27241 -1.16242" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="luz_florescente10" class="StaticMesh" resource="luz_florescente10" position="8.60228 2.11979 -0.410645" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
 	<RenderableObject name="marc_porta02" class="StaticMesh" resource="marc_porta02" position="22.1863 1.45995 8.79586" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="porta_sub2" class="StaticMesh" resource="porta_sub2" position="21.762 1.61257 3.12543" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="fluorescente_DEF18" class="StaticMesh" resource="fluorescente_DEF18" position="19.1141 3.26537 2.53251" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -23,12 +29,6 @@
 	<RenderableObject name="tubo_esq1" class="StaticMesh" resource="tubo_esq1" position="-2.05601 1.75054 -6.26818" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="tubo_esq2" class="StaticMesh" resource="tubo_esq2" position="4.95992 1.76873 -6.28466" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="marc_passadis1" class="StaticMesh" resource="marc_passadis1" position="-4.39026 1.46722 -8.08447" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="pass01" class="StaticMesh" resource="pass01" position="9.794 1.75 -0.486599" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="pas_video" class="StaticMesh" resource="pas_video" position="8.82721 0.75 -0.821631" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="pass01" class="StaticMesh" resource="pass01" position="9.79401 1.75 -0.486599" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="marc_porta01" class="StaticMesh" resource="marc_porta01" position="10.786 1.45995 -5.15953" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="tubo3" class="StaticMesh" resource="tubo3" position="7.19064 -0.435044 -2.80313" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="Llum10" class="StaticMesh" resource="Llum10" position="8.39006 1.47601 0.0696793" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="fluorescente_DEF19" class="StaticMesh" resource="fluorescente_DEF19" position="8.34692 2.04764 0.185399" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="luz_florescente10" class="StaticMesh" resource="luz_florescente10" position="8.60228 2.11979 -0.410645" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
-	<RenderableObject name="viga3" class="StaticMesh" resource="viga3" position="8.95375 2.27241 -1.16242" yaw="0.0" pitch="0.0" roll="0.0" />
 </RenderableObjects>

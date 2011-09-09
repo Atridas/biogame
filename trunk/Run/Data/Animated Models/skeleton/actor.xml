@@ -1,0 +1,33 @@
+<actor name="skeleton" radius_bs="2.0" pos_bs="0.0 1.0 0.0" effect="cal3d" technique="cal3dTechnique">
+  <skeleton filename="Data/Animated Models/skeleton/skeleton.csf"/>
+  <mesh filename="Data/Animated Models/skeleton/skeleton_calf_left.cmf"/>
+  <mesh filename="Data/Animated Models/skeleton/skeleton_calf_right.cmf"/>
+  <mesh filename="Data/Animated Models/skeleton/skeleton_chest.cmf"/>
+  <mesh filename="Data/Animated Models/skeleton/skeleton_foot_left.cmf"/>
+  <mesh filename="Data/Animated Models/skeleton/skeleton_foot_right.cmf"/>
+  <mesh filename="Data/Animated Models/skeleton/skeleton_hair.cmf"/>
+  <mesh filename="Data/Animated Models/skeleton/skeleton_hand_left.cmf"/>
+  <mesh filename="Data/Animated Models/skeleton/skeleton_hand_right.cmf"/>
+  <mesh filename="Data/Animated Models/skeleton/skeleton_head.cmf"/>
+  <mesh filename="Data/Animated Models/skeleton/skeleton_lowerarm_left.cmf"/>
+  <mesh filename="Data/Animated Models/skeleton/skeleton_lowerarm_right.cmf"/>
+  <mesh filename="Data/Animated Models/skeleton/skeleton_neck.cmf"/>
+  <mesh filename="Data/Animated Models/skeleton/skeleton_pelvis.cmf"/>
+  <mesh filename="Data/Animated Models/skeleton/skeleton_spine_lower.cmf"/>
+  <mesh filename="Data/Animated Models/skeleton/skeleton_spine_upper.cmf"/>
+  <mesh filename="Data/Animated Models/skeleton/skeleton_thigh_left.cmf"/>
+  <mesh filename="Data/Animated Models/skeleton/skeleton_thigh_right.cmf"/>
+  <mesh filename="Data/Animated Models/skeleton/skeleton_upperarm_left.cmf"/>
+  <mesh filename="Data/Animated Models/skeleton/skeleton_upperarm_right.cmf"/>
+  <material animated="true" vertex_type="799">
+    <texture type="diffusse" filename="Data/Textures/COLOR_2.tga"/>
+    <property type="specularParams" glossiness="200.0" specular_level="10.0" />
+  </material>
+  <animation name="hiphop" filename="Data/Animated Models/skeleton/skeleton_hiphop.caf"/>
+  <animation name="idle" filename="Data/Animated Models/skeleton/skeleton_idle.caf"/>
+  <animation name="jog" filename="Data/Animated Models/skeleton/skeleton_jog.caf"/>
+  <animation name="shoot" filename="Data/Animated Models/skeleton/skeleton_shoot_arrow.caf"/>
+  <animation name="strut" filename="Data/Animated Models/skeleton/skeleton_strut.caf"/>
+  <animation name="walk" filename="Data/Animated Models/skeleton/skeleton_walk.caf"/>
+  <animation name="wave" filename="Data/Animated Models/skeleton/skeleton_wave.caf"/>
+</actor>

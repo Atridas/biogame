@@ -52,7 +52,6 @@ bool CEntityProcess::Init()
 
   CPhysicsManager* l_pPM = CORE->GetPhysicsManager();
 
-
   //Carregar entitats de l'escenari ----------------------------------------------------------------------------------------
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/NivellProves/XML/GameEntities.xml");
 

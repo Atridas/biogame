@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <RenderableObjects>
 	<RenderableObject name="Llum_emergencia01" class="StaticMesh" resource="llum_emergencia" position="-4.73019 3.26819 -7.74813" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="Llum_emergengia_autoilum01" class="StaticMesh" resource="llum_emergencia" position="-4.73019 3.26819 -7.74813" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="fluorescente_apagat" class="StaticMesh" resource="fluorescente_apagat" position="-12.0192 3.73603 -1.24801" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Cadira_de_força" class="StaticMesh" resource="Cadira_de_força" position="-12.5797 0.524603 -9.52603" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="BancRadiografies" class="StaticMesh" resource="BancRadiografies" position="-4.66845 1.93918 -1.39754" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="cadira_oficina" class="StaticMesh" resource="cadira_oficina" position="-5.96507 0.466948 -0.931709" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="cadira_oficina" class="StaticMesh" resource="cadira_oficina" position="-5.96506 0.466948 -0.931709" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Marc Porta" class="StaticMesh" resource="Marc Porta" position="-4.50415 1.39148 -7.74447" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Cable_Lampada" class="StaticMesh" resource="Cable_Lampada" position="-8.62757 3.87092 -2.66007" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="viga" class="StaticMesh" resource="viga" position="-9.74397 4.49129 -4.99318" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="vigueta" class="StaticMesh" resource="vigueta" position="-5.50402 4.08065 -4.88723" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="vigueta" class="StaticMesh" resource="vigueta" position="-5.50403 4.08065 -4.88723" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="viga_pilar" class="StaticMesh" resource="viga_pilar" position="-10.028 2.50687 -10.9012" yaw="5.00896e-006" pitch="5.00896e-006" roll="5.00896e-006" />
 	<RenderableObject name="Lampada" class="StaticMesh" resource="Lampada" position="-8.62544 2.2259 -2.67209" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Bido" class="StaticMesh" resource="Bido" position="-14.2968 0.0 0.0864077" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -18,11 +17,11 @@
 	<RenderableObject name="autopsia_taula" class="StaticMesh" resource="autopsia_taula" position="-9.97162 0.0 -2.69891" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Aixeta_autopsia" class="StaticMesh" resource="Aixeta_autopsia" position="-10.8726 1.04967 -2.59063" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Pissarra" class="StaticMesh" resource="Pissarra" position="-4.65465 1.91763 -4.88916" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="Botiquin_medic_DEF" class="StaticMesh" resource="Botiquin_medic_DEF" position="-4.73131 1.86031 -2.96408" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Botiquin_medic_DEF" class="StaticMesh" resource="Botiquin_medic_DEF" position="-4.73132 1.86031 -2.96408" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="viga01" class="StaticMesh" resource="viga01" position="-9.74397 4.49129 -1.23445" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="viga02" class="StaticMesh" resource="viga02" position="-9.74397 4.49129 -8.58913" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="vigueta01" class="StaticMesh" resource="vigueta01" position="-5.50402 4.08065 -1.23088" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="vigueta02" class="StaticMesh" resource="vigueta02" position="-5.50402 4.08065 -8.58387" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="vigueta01" class="StaticMesh" resource="vigueta01" position="-5.50403 4.08065 -1.23088" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="vigueta02" class="StaticMesh" resource="vigueta02" position="-5.50403 4.08065 -8.58387" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="cadira_oficina01" class="StaticMesh" resource="cadira_oficina01" position="-5.65113 0.323958 -4.44221" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Taula01" class="StaticMesh" resource="Taula01" position="-5.17549 0.00127244 -2.49063" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="CAPSULA_trencada" class="StaticMesh" resource="CAPSULA_trencada" position="-11.3841 1.24775 0.500599" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -38,18 +37,19 @@
 	<RenderableObject name="Taula_DEF" class="StaticMesh" resource="Taula_DEF" position="-13.2161 0.458649 -8.44492" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Maleta_DEF01" class="StaticMesh" resource="Maleta_DEF01" position="-8.53119 0.300873 -10.3701" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Maleta_DEF02" class="StaticMesh" resource="Maleta_DEF02" position="-5.2978 0.357795 -3.30743" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="pot_Mitja02" class="StaticMesh" resource="pot_Mitja02" position="-4.88038 0.921331 -3.12124" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="pot_Mitja02" class="StaticMesh" resource="pot_Mitja02" position="-4.88037 0.921331 -3.12124" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Maleta_DEF03" class="StaticMesh" resource="Maleta_DEF03" position="-8.85657 2.81011 -10.3454" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="CAPSULA_DEF03" class="StaticMesh" resource="CAPSULA_DEF03" position="-7.66585 1.24775 0.500599" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Laboratori_parets" class="StaticMesh" resource="Laboratori_parets" position="-9.78482 2.5 -4.9735" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Tubs_autoilum2" class="StaticMesh" resource="Tubs_autoilum2" position="-4.85249 1.15637 -0.266026" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Tubs_autoilum3" class="StaticMesh" resource="Tubs_autoilum3" position="-4.78328 1.15637 -2.4446" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="Pantalla_ordinador_autoilum" class="StaticMesh" resource="Pantalla_ordinador_autoilum" position="-13.3533 2.38419e-007 -7.54298" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Pantalla_ordinador_autoilum" class="StaticMesh" resource="Pantalla_ordinador_autoilum" position="-13.3533 2.38419e-007 -7.54297" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Pantalla_ordinador_autoilum01" class="StaticMesh" resource="Pantalla_ordinador_autoilum01" position="-11.2085 2.38419e-007 -9.80329" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Lampada_autoilum" class="StaticMesh" resource="Lampada_autoilum" position="-10.1373 2.2259 -2.67209" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Vidre_cap1" class="StaticMesh" resource="Vidre_cap1" position="-14.4715 1.75906 -4.05246" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Vidre_cap02" class="StaticMesh" resource="Vidre_cap02" position="-8.23025 1.75906 0.45821" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="fluorescente_apagat01" class="StaticMesh" resource="fluorescente_apagat01" position="-7.26858 3.73603 -4.99925" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Llum_emergengia_autoilum01" class="StaticMesh" resource="Llum_emergengia_autoilum01" position="-4.73019 3.26819 -7.74813" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="luz_florescente02" class="StaticMesh" resource="bombeta_florescent" position="-12.7607 3.6634 -5.00073" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
 	<RenderableObject name="luz_florescente03" class="StaticMesh" resource="bombeta_florescent" position="-12.7607 3.6634 -8.5986" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
 	<RenderableObject name="luz_florescente05" class="StaticMesh" resource="bombeta_florescent" position="-7.86563 3.6634 -1.23278" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
@@ -60,6 +60,6 @@
 	<RenderableObject name="fluorescente_DEF12" class="StaticMesh" resource="fluorescente_DEF12" position="-12.1172 3.73603 -8.60308" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="fluorescente_DEF14" class="StaticMesh" resource="fluorescente_DEF14" position="-7.22211 3.73603 -1.23727" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="fluorescente_apagat02" class="StaticMesh" resource="fluorescente_apagat02" position="-7.26858 3.73603 -8.59692" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="carpeta_eon" class="StaticMesh" resource="carpeta_eon" position="-4.88038 0.921331 -3.12124" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="carpeta_eon" class="StaticMesh" resource="carpeta_eon" position="-4.88037 0.921331 -3.12124" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="Focus_conic" class="StaticMesh" resource="Focus_conic" position="-10.1299 1.18475 -2.68388" yaw="0.0" pitch="0.0" roll="0.0" />
 </RenderableObjects>

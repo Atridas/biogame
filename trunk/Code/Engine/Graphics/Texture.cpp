@@ -46,7 +46,7 @@ bool CTexture::LoadFile(bool _bCubeTexture)
   } else if(l_Result == E_OUTOFMEMORY) {
     LOGGER->AddNewLog(ELL_ERROR, "CTexture::Load E_OUTOFMEMORY");
   } else {
-    LOGGER->AddNewLog(ELL_ERROR, "CTexture::Load Error no reconegut (probablement, fitxer no trobat).");
+    LOGGER->AddNewLog(ELL_ERROR, "CTexture::Load Error no reconegut[#%d] (probablement, fitxer no trobat).", l_Result);
   }
 
   if(l_InfoResult == D3DERR_INVALIDCALL) {

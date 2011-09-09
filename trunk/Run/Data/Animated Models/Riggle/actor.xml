@@ -1,0 +1,37 @@
+<actor name="riggle" radius_bs="2.0" pos_bs="0.0 1.0 0.0" effect="cal3d" technique="cal3dTechnique">
+  <skeleton filename="Data/Animated Models/Riggle/Skeleton.csf"/>
+  <mesh filename="Data/Animated Models/Riggle/Mesh.cmf"/>
+  <material animated="true" vertex_type="799">
+    <texture type="diffusse" filename="Data/Textures/COLOR_2.dds"/>
+    <texture type="normalmap" filename="Data/Textures/NRM_Complet.dds"/>
+    <texture type="specular" filename="Data/Textures/Riggle_SPEC.dds"/>
+    <texture type="glow" filename="Data/Textures/glow_personatge2.dds"/>
+    <property type="glowIntensity" value="2.0" />
+    <property type="specularParams" glossiness="200.0" specular_level="10.0" />
+  </material>
+  <animation name="idle" filename="Data/Animated Models/Riggle/idle.CAF"/>
+  <animation name="walk" filename="Data/Animated Models/Riggle/walk.CAF"/>
+  <animation name="protection" filename="Data/Animated Models/Riggle/protection.CAF"/>
+  <animation name="shoot" filename="Data/Animated Models/Riggle/shoot.CAF"/>
+  <animation name="impact" filename="Data/Animated Models/Riggle/impact.CAF"/>
+  <animation name="aim" filename="Data/Animated Models/Riggle/point.CAF"/>
+  <animation name="run" filename="Data/Animated Models/Riggle/run.CAF"/>
+  
+  <animation name="walk back" filename="Data/Animated Models/Riggle/WalkEnrera.CAF"/>
+  
+  <animation name="CoverAvallDreta" filename="Data/Animated Models/Riggle/CoverAvallDreta.CAF"/>
+  <animation name="CoverAvallDretaIdle" filename="Data/Animated Models/Riggle/CoverAvallDretaIdle.CAF"/>
+  <animation name="CoverAvallEsquerra" filename="Data/Animated Models/Riggle/CoverAvallEsquerra.CAF"/>
+  <animation name="CoverAvallEsquerraIdle" filename="Data/Animated Models/Riggle/CoverAvallEsquerraIdle.CAF"/>
+  <animation name="CoverDreta" filename="Data/Animated Models/Riggle/CoverDreta.CAF"/>
+  <animation name="CoverDretaIdle" filename="Data/Animated Models/Riggle/CoverDretaIdle.CAF"/>
+  <animation name="CoverEsquerra" filename="Data/Animated Models/Riggle/CoverEsquerra.CAF"/>
+  <animation name="CoverEsquerraIdle" filename="Data/Animated Models/Riggle/CoverEsquerraIdle.CAF"/>
+  <animation name="CoverSortidaDreta" filename="Data/Animated Models/Riggle/CoverSortidaDreta.CAF"/>
+  <animation name="CoverSortidaEsquerra" filename="Data/Animated Models/Riggle/CoverSortidaEsquerra.CAF"/>
+  <animation name="CoverSortidaAvallDreta" filename="Data/Animated Models/Riggle/CoverSortidaAvallDreta.CAF"/>
+  <animation name="CoverSortidaAvallEsquerra" filename="Data/Animated Models/Riggle/CoverSortidaAvallEsquerra.CAF"/>
+  
+  <animation name="dead" filename="Data/Animated Models/Riggle/dead.CAF"/>
+  
+</actor>

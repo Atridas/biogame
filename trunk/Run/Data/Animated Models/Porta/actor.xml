@@ -1,0 +1,10 @@
+<actor name="Porta" radius_bs="2.0" pos_bs="0.0 1.0 0.0" effect="cal3d" technique="cal3dTechnique">
+  <skeleton filename="Data/Animated Models/Porta/skeleton.csf"/>
+  <mesh filename="Data/Animated Models/Porta/mesh.cmf"/>
+  <material animated="true" vertex_type="787">
+    <texture type="diffusse" filename="Data/Textures/DIFF_DEF_Portes_tram4.dds"/>
+  </material>
+  <animation name="obrir" filename="Data/Animated Models/Porta/obrir.CAF"/>
+  <animation name="tancar" filename="Data/Animated Models/Porta/tancar.CAF"/>
+  <animation name="idleopen" filename="Data/Animated Models/Porta/idleopen.CAF"/>
+</actor>
