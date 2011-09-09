@@ -9,6 +9,7 @@ class CSceneRendererStep;
 class CPreSceneRendererStep;
 class CPostSceneRendererStep;
 class CProcess;
+class CCamera;
 
 class CRenderer :
   public CBaseControl
@@ -33,6 +34,8 @@ protected:
 private:
 
   string m_szFileName;
+
+  CCamera* m_pCamera;
 
   CSceneRendererStep* m_pCurrentSceneRenderer;
 

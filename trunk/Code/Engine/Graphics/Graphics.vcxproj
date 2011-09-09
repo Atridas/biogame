@@ -104,6 +104,7 @@
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="PostSceneRendererStep.cpp" />
     <ClCompile Include="PreSceneRendererStep.cpp" />
+    <ClCompile Include="RenderableObject.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RendererStep.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
@@ -129,7 +130,6 @@
     <ClCompile Include="Portal.cpp" />
     <ClCompile Include="PortalManager.cpp" />
     <ClCompile Include="RenderableAnimatedInstanceModel.cpp" />
-    <ClCompile Include="RenderableObject.cpp" />
     <ClCompile Include="RenderableObjectsManager.cpp" />
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="RenderTextureSceneEffect.cpp" />

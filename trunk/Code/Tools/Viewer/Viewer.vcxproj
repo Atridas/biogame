@@ -20,7 +20,9 @@
     <ClInclude Include="ViewerProcess.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Run\Data\XML\actions_viewer.xml" />
+    <None Include="..\..\..\Run\Data\XML\actions_viewer.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="..\..\..\Run\Data\XML\init_viewer.xml">
       <SubType>Designer</SubType>
     </None>

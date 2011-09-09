@@ -10,7 +10,8 @@
 class CRenderTarget;
 class CInputSampler;
 class CXMLTreeNode;
-class CProcess;
+class CRenderManager;
+class CCamera;
 
 class CRendererStep :
   public CActivable, public CBaseControl, public CNamed
@@ -20,7 +21,7 @@ public:
   CRendererStep() : CNamed(""),m_iRenderTargetWidth(0),m_iRenderTargetHeight(0) {};
   virtual ~CRendererStep() {Done();};
 
-  virtual void Render(CProcess* _pProcess) = 0;
+  virtual void Render(CRenderManager* _pRM, CCamera* _pCamera) = 0;
 
 protected:
 

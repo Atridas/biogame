@@ -1,16 +1,10 @@
-#include "VertexShaders.fx"
-#include "PixelShaders.fx"
+#define NS_LIGHTING
+#define NS_TEX0
+#define NS_CAL3D
+
+#include "NewShaders.fx"
 
 technique Cal3DTechnique
 {
-	pass p0
-	{
-		ZEnable = true;
-		ZWriteEnable = true;
-		ZFunc = LessEqual;
-		AlphaBlendEnable = false;
-		CullMode = CW;
-		VertexShader = compile vs_3_0 RenderCal3DHWVS();
-		PixelShader = compile ps_3_0 NormalTexturedPS();
-	}
+	TECHNIQUE_BODY
 }

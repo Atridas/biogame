@@ -28,13 +28,9 @@ void CProcess::DebugInformation(CRenderManager* _pRM)
     uint32 l_uiFontType = l_pFontManager->GetTTF_Id("Titania");
     
     l_SStream << "FPS: " << (float) l_pTimer->GetFPS() << endl;
-    //l_SStream << "Time: " << (float) l_pTimer->GetRelativeTime() << "s" << endl;
-    //l_SStream << "Faces: " << CORE->GetRenderableObjectsManager()->GetActiveFaces() << endl;
-    //l_SStream << "Primitives: " << CORE->GetRenderableObjectsManager()->GetActivePrimitiveCalls() << endl;
     
     string l_szMsg(l_SStream.str());
 
-    //FONT_MANAGER->DrawText(0,12,colRED,l_uiFontType,m_szProcessName.c_str());
     FONT_MANAGER->DrawText(0,0,col,l_uiFontType,l_szMsg.c_str());
 
     CLogRender* l_pLR = CORE->GetLogRender();
@@ -123,55 +119,4 @@ bool CProcess::ExecuteScript(float _fDeltaSeconds, float _fDelta, const char* _p
 {
   CORE->GetScriptManager()->RunCode(_pcScript);
   return true;
-}
-
-
-void CProcess::PreRender(CRenderManager* _pRM)
-{
-  if(m_pSceneEffectManager)
-  {
-    m_pSceneEffectManager->PreRender(_pRM, this);
-  }
-  //Código de Prerender si necesitásemos hacer el pre-render de la GUI
-}
-
-void CProcess::Render(CRenderManager* _pRM)
-{
-  CEffectManager* l_pEM = CORE->GetEffectManager();
-
-  if(m_pSceneEffectManager)
-  {
-    m_pSceneEffectManager->ActivateRenderSceneEffects();
-  }
-
-  if(l_pEM)
-  {
-    l_pEM->SetForcedAnimatedModelEffect(m_pAnimatedMeshEffect);
-    l_pEM->SetForcedStaticMeshEffect(m_pStaticMeshEffect);
-  }
-
-  //Renderizamos la escena
-  RenderScene(_pRM);
-
-  
-}
-
-void CProcess::PostRender(CRenderManager* _pRM, bool _bCaptureNoPostFX)
-{
-  if(m_pSceneEffectManager)
-  {
-    if(_bCaptureNoPostFX)
-    {
-      //Capturamos el Frame Buffer antes de los efectos de post render
-      m_pSceneEffectManager->CaptureFrameBuffers(_pRM);
-    }
-    //Efectuamos los efectos de post render
-    m_pSceneEffectManager->PostRender(_pRM);
-    //Capturamos el Frame Buffer después de los efectos de post render
-    m_pSceneEffectManager->CaptureFrameBuffersAfterPostRender(_pRM);
-
-    m_pSceneEffectManager->WarpRender(_pRM);
-
-    m_pSceneEffectManager->GUIRender(_pRM);
-  }
 }

@@ -97,29 +97,35 @@ struct TNEW_PS {
   #endif
 };
 
-
+struct PS_OUTPUT
+{
+	float4	Color		: COLOR0;
+	float4	Glow		: COLOR1;
+};
 
 TNEW_PS NewVS(TNEW_VS _in) 
 {
 	TNEW_PS out_ = (TNEW_PS)0;
   
   #if defined( NS_CAL3D )
-    float3 l_Position  = CalcAnimtedPos(float4(IN.Position.xyz,1.0), IN.Indices, IN.Weight);
+    float3 l_Position  = CalcAnimtedPos(float4(_in.Position.xyz,1.0), _in.Indices, _in.Weight);
+    float3 l_Normal    = CalcAnimtedPos(float4(_in.Normal.xyz,0.0), _in.Indices, _in.Weight);
     float4 l_LocalPosition=float4(-l_Position.x,l_Position.y,l_Position.z, 1.0);
   #endif
 	
   #if defined( NS_LIGHTING )
     #if defined( NS_CAL3D )
-      float3 l_Normal    = CalcAnimtedPos(float4(IN.Normal.xyz,0.0), IN.Indices, IN.Weight);
-      float3 l_Tangent   = CalcAnimtedPos(float4(IN.Tangent.xyz,0.0), IN.Indices, IN.Weight);
-      float3 l_Bitangent = CalcAnimtedPos(float4(IN.Bitangent.xyz,0.0), IN.Indices, IN.Weight);
+      #if defined( NS_NORMALMAP )
+        float3 l_Tangent   = CalcAnimtedPos(float4(_in.Tangent.xyz,0.0), _in.Indices, _in.Weight);
+        float3 l_Binormal = CalcAnimtedPos(float4(_in.Binormal.xyz,0.0), _in.Indices, _in.Weight);
+        out_.WorldTangent = mul(float4(l_Tangent.x,-l_Tangent.y,-l_Tangent.z,0.0),g_WorldMatrix);
+        out_.WorldBinormal = mul(float4(l_Binormal.x,-l_Binormal.y,-l_Binormal.z,0.0),g_WorldMatrix);
+      #endif
       
       out_.WorldPosition=mul(l_LocalPosition,g_WorldMatrix);  
       out_.WorldNormal = mul(float4(-l_Normal.x,l_Normal.y,l_Normal.z,0.0),g_WorldMatrix);
-      out_.WorldTangent = mul(float4(l_Tangent.x,-l_Tangent.y,-l_Tangent.z,0.0),g_WorldMatrix);
-      out_.WorldBinormal = mul(float4(l_Bitangent.x,-l_Bitangent.y,-l_Bitangent.z,0.0),g_WorldMatrix);
-
-      float4 l_ViewPosition = mul(float4(l_LocalPosition,1.0),g_WorldViewMatrix);
+      
+      float4 l_ViewPosition = mul(float4(l_LocalPosition.xyz,1.0),g_WorldViewMatrix);
     #else
       out_.WorldNormal   = mul(_in.Normal,(float3x3)g_WorldMatrix);
       out_.WorldPosition = mul(float4(_in.Position,1.0),g_WorldMatrix).xyz;
@@ -136,6 +142,7 @@ TNEW_PS NewVS(TNEW_VS _in)
   #if defined( NS_TEX0 )
     out_.UV  = _in.UV.xy;
   #else
+    //out_.Color = float4(_in.Color.rgb,1.0f);
     out_.Color = _in.Color;
   #endif
   
@@ -152,8 +159,10 @@ TNEW_PS NewVS(TNEW_VS _in)
 	return out_;
 }
 
-float4 NewPS(TNEW_PS _in) : COLOR {
-
+PS_OUTPUT NewPS(TNEW_PS _in)
+{
+  PS_OUTPUT l_Output;
+  
   #if defined( NS_LIGHTMAP )
     bool l_DynamicObject = false;
   #else
@@ -174,6 +183,7 @@ float4 NewPS(TNEW_PS _in) : COLOR {
 
   #if defined( NS_TEX0 )
     float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
+    //l_DiffuseColor.a = 1.0;
   #else
     float4 l_DiffuseColor = _in.Color;
   #endif
@@ -227,28 +237,58 @@ float4 NewPS(TNEW_PS _in) : COLOR {
                                              
   #endif
   
-	return l_DiffuseColor;
+  l_Output.Color = l_DiffuseColor;
+  
+  #if defined( NS_TEX0 )
+    if(g_GlowActive)
+    {
+      l_Output.Glow = tex2D(GlowTextureSampler,_in.UV) * g_GlowIntensity;
+      //l_Output.Glow.a = 1.0;
+    } else {
+      l_Output.Glow = float4(0, 0, 0, 0);
+    }
+  #else
+    l_Output.Glow = float4(0, 0, 0, 0);
+  #endif
+  
+  
+	return l_Output;
 }
 
 
 
-
-#define TECHNIQUE_BODY \
-  pass p0 {                                            \
-		/*Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar*/ \
-    ZEnable = true;                                    \
-    ZWriteEnable = true;                               \
-    ZFunc = LessEqual;                                 \
-    /*Deshabilitamos el alphablend*/                              \
-    AlphaBlendEnable = false;                          \
-    /*Tipo de culling que queremos utilizar*/                         \
-    CullMode = CCW;                                    \
-    /*Vertex / Pixel shader*/                                  \
-		VertexShader = compile vs_3_0 NewVS();             \
-		PixelShader  = compile ps_3_0 NewPS();             \
-	}
-
-  
+#if defined( NS_CAL3D )
+  #define TECHNIQUE_BODY \
+    pass p0 {                                            \
+      /*Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar*/ \
+      ZEnable = true;                                    \
+      ZWriteEnable = true;                               \
+      ZFunc = LessEqual;                                 \
+      /*Deshabilitamos el alphablend*/                              \
+      AlphaBlendEnable = false;                          \
+      /*Tipo de culling que queremos utilizar*/                         \
+      CullMode = CW;                                    \
+      /*Vertex / Pixel shader*/                                  \
+      VertexShader = compile vs_3_0 NewVS();             \
+      PixelShader  = compile ps_3_0 NewPS();             \
+    }
+#else
+  #define TECHNIQUE_BODY \
+    pass p0 {                                            \
+      /*Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar*/ \
+      ZEnable = true;                                    \
+      ZWriteEnable = true;                               \
+      ZFunc = LessEqual;                                 \
+      /*Deshabilitamos el alphablend*/                              \
+      AlphaBlendEnable = false;                          \
+      /*Tipo de culling que queremos utilizar*/                         \
+      CullMode = CCW;                                    \
+      /*Vertex / Pixel shader*/                                  \
+      VertexShader = compile vs_3_0 NewVS();             \
+      PixelShader  = compile ps_3_0 NewPS();             \
+    }
+#endif
+    
 #define ALPHA_TECHNIQUE_BODY \
   pass p0 {                                               \
 		/*Activamos el Zbuffer, el Zwrite y la funciÃ³n de Zâ€™s que queremos utilizar*/ \

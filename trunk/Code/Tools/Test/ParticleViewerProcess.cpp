@@ -106,12 +106,14 @@ void CParticleViewerProcess::Update(float _fElapsedTime)
   //  m_pEmiters[i]->Update(_fElapsedTime);
 }
 
+/*
 void CParticleViewerProcess::RenderScene(CRenderManager* _pRM)
 {
   //----------------------------------------------------------------------------------------
   CORE->GetEmiterManager()->Render(_pRM);
   //----------------------------------------------------------------------------------------
 }
+*/
 
 void CParticleViewerProcess::RenderINFO(CRenderManager* _pRM)
 {

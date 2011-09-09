@@ -23,7 +23,7 @@ public:
 
 	void                  Update                  (float elapsedTime);
 	void					        DebugInformation        (float FPS);
-  void                  RenderScene             (CRenderManager* _pRM);
+  //void                  RenderScene             (CRenderManager* _pRM);
   void                  RenderINFO              (CRenderManager* _pRM);
 
   virtual bool          ExecuteProcessAction      (float _fDeltaSeconds, float _fDelta, const char* _pcAction);

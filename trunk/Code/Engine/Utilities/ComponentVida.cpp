@@ -149,17 +149,20 @@ void CComponentVida::ReceiveEvent(const SEvent& _Event)
     }
   }else if(_Event.Msg == SEvent::REBRE_FORCE)
   {
-    float l_fDamage = _Event.Info[0].f;
-
-    Decrease(l_fDamage);
-
-    if(m_fVida <= 0.f)
+    if(m_fVida > 0.f)
     {
-      SEvent l_morir;
-      l_morir.Msg = SEvent::MORIR;
-      l_morir.Receiver = l_morir.Sender = GetEntity()->GetGUID();
+      float l_fDamage = _Event.Info[0].f;
+
+      Decrease(l_fDamage);
+
+      if(m_fVida <= 0.f)
+      {
+        SEvent l_morir;
+        l_morir.Msg = SEvent::MORIR;
+        l_morir.Receiver = l_morir.Sender = GetEntity()->GetGUID();
       
-      CORE->GetEntityManager()->SendEvent(l_morir);
+        CORE->GetEntityManager()->SendEvent(l_morir);
+      }
     }
 
   }else if(_Event.Msg == SEvent::MORIR)

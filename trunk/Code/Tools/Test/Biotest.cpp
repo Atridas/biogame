@@ -42,6 +42,7 @@ void CBiotestProcess::Update(float _fElapsedTime)
   m_pEmiter->Update(_fElapsedTime);
 }
 
+/*
 void CBiotestProcess::RenderScene(CRenderManager* _pRM)
 {
   if(CORE->GetActionManager()->IsActionActive("ToggleDebug"))
@@ -63,6 +64,7 @@ void CBiotestProcess::RenderScene(CRenderManager* _pRM)
 
   m_pEmiter->Render(_pRM);
 }
+*/
 
 void CBiotestProcess::RenderINFO(CRenderManager* _pRM)
 {

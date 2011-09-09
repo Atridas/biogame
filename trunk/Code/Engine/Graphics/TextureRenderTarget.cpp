@@ -62,8 +62,13 @@ bool CTextureRenderTarget::Init(CXMLTreeNode& _treeRenderTarget, int _iWidth, in
 
 void CTextureRenderTarget::Activate()
 {
-  //m_pTexture->FillTextureWithColor(m_iWidth,m_iHeight, colBLACK);
-  RENDER_MANAGER->GetDevice()->ColorFill( m_pSurface, 0, 0x00000000 );
+  CRenderManager* l_pRM = RENDER_MANAGER;
+  CColor l_Color = l_pRM->GetClearColor();
+  uint32 l_uiRed		= (uint32) (l_Color.GetRed() * 255);
+	uint32 l_uiGreen	= (uint32) (l_Color.GetGreen() * 255);
+	uint32 l_uiBlue		= (uint32) (l_Color.GetBlue() * 255);
+
+  l_pRM->GetDevice()->ColorFill( m_pSurface, 0, D3DCOLOR_ARGB(0,l_uiRed,l_uiGreen,l_uiBlue));
 
   CRenderTarget::Activate();
 }

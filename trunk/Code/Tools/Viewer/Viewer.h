@@ -178,10 +178,10 @@ private:
   float m_fBump;
 
   vector<CRenderableObject*>::iterator m_itCurrentMesh;
-  vector<CRenderableObject*>::iterator m_itCurrentAnimated;
+  vector<CRenderableAnimatedInstanceModel*>::iterator m_itCurrentAnimated;
 
   vector<CRenderableObject*> m_vMeshes;
-  vector<CRenderableObject*> m_vAnimatedModels;
+  vector<CRenderableAnimatedInstanceModel*> m_vAnimatedModels;
 
 };
 

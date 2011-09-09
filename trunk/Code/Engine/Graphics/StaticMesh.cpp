@@ -20,6 +20,8 @@
 #include "GlowPropertyDecorator.h"
 #include "EnvironmentTextureDecorator.h"
 #include "EnvirondmentPropertyDecorator.h"
+#include "EffectManager.h"
+#include "Core.h"
 
 #include <IndexedVertexs.h>
 #include <base.h>
@@ -429,23 +431,55 @@ bool CStaticMesh::ReloadTextures()
   return l_bIsOk;
 }
 
-void CStaticMesh::Render(CRenderManager *_pRM, bool _bInstanced) const
+void CStaticMesh::Render(CRenderManager* _pRM, const vector<CEffect*>& _vEffects) const
 {
-    vector<CRenderableVertexs*>::const_iterator l_ItRV = m_RVs.begin();
-    vector<CRenderableVertexs*>::const_iterator l_EndRV = m_RVs.end();
+    vector<CRenderableVertexs*>::const_iterator l_itRV = m_RVs.begin();
+    vector<CRenderableVertexs*>::const_iterator l_itEndRV = m_RVs.end();
 
-    vector<CMaterial*>::const_iterator l_ItMaterialArray = m_vMaterials.begin();
+    vector<CEffect*>::const_iterator l_itEffect = _vEffects.begin();
+    vector<CMaterial*>::const_iterator l_itMaterial = m_vMaterials.begin();
 
-    CEffectManager* m_pEM = CORE->GetEffectManager();
+    CEffectManager* l_pEM = CORE->GetEffectManager();
 
-    while(l_ItRV != l_EndRV) 
-    {
-      CEffect* l_pEffect = m_pEM->ActivateMaterial(*l_ItMaterialArray);
+    CEffect* l_pEffect = 0;
+    CMaterial* l_pMaterial = 0;
 
-      (*l_ItRV)->Render(_pRM,l_pEffect);
+    while(l_itRV != l_itEndRV) 
+    {  
+      if(l_itEffect != _vEffects.end())
+      {
+        l_pEffect = (*l_itEffect);
+        ++l_itEffect;
+      }
 
-      ++l_ItRV;
-      ++l_ItMaterialArray;
+      if(l_itMaterial != m_vMaterials.end())
+      {
+        l_pMaterial = (*l_itMaterial);
+        ++l_itMaterial;
+      }
+
+      if(l_pEffect && l_pMaterial)
+      {
+        l_pMaterial->Activate(l_pEffect->GetTextureMask());
+
+        int l_iMaterialType = l_pMaterial->GetMaterialType();
+
+        l_pEM->SetGlow((l_iMaterialType & GLOW_MATERIAL_MASK) > 0);
+        if(l_iMaterialType & GLOW_MATERIAL_MASK)
+        {
+          l_pEM->SetGlowIntensity(l_pMaterial->GetGlowIntensity());
+        }
+
+        l_pEM->SetSpecular((l_iMaterialType & SPECULARMAP_MATERIAL_MASK) > 0);
+        l_pEM->SetSpecularParams(l_pMaterial->GetGlossiness(), l_pMaterial->GetSpecularFactor());
+        l_pEM->SetEnvironmentIntensity(l_pMaterial->GetEnvironmentIntensity());
+        
+        l_pEM->LoadShaderData(l_pEffect);
+      }
+
+      (*l_itRV)->Render(_pRM,l_pEffect);
+
+      ++l_itRV;
     }
 }
 

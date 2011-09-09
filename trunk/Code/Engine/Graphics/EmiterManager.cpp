@@ -59,16 +59,17 @@ void CEmiterManager::Update(float _fDeltaTime)
   
 void CEmiterManager::Render(CRenderManager* _pRM)
 {
+  /*
   LPDIRECT3DDEVICE9 l_pd3dDevice = _pRM->GetDevice();
 
   CEffectManager* l_pEM = CORE->GetEffectManager();
 
   assert(l_pEM && l_pEM->IsOk());
-  CEffect* l_pPrevEffect = l_pEM->GetForcedStaticMeshEffect();
+  CEffect* l_pPrevEffect = 0;//l_pEM->GetForcedStaticMeshEffect();
   if(!l_pPrevEffect)
   {
     CEffect* l_pEffect = l_pEM->GetEffect("Particle");
-    l_pEM->SetForcedStaticMeshEffect(l_pEffect);
+    //l_pEM->SetForcedStaticMeshEffect(l_pEffect);
 
 
     TMapResource::iterator l_it  = m_Resources.begin();
@@ -81,8 +82,9 @@ void CEmiterManager::Render(CRenderManager* _pRM)
   
     l_pd3dDevice->SetStreamSourceFreq(0, 1);
     l_pd3dDevice->SetStreamSourceFreq(1, 1);
-    l_pEM->SetForcedStaticMeshEffect(0);
+    //l_pEM->SetForcedStaticMeshEffect(0);
   }
+  */
 }
 
 void CEmiterManager::DebugRender(CRenderManager* _pRM, bool _bDebugRenderBoundings)

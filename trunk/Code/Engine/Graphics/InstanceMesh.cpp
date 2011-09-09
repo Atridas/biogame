@@ -3,12 +3,6 @@
 #include "RenderManager.h"
 #include "StaticMeshManager.h"
 
-
-CInstanceMesh::CInstanceMesh(const string& _szName): CRenderableObject(_szName)
-{
-  
-}
-
 bool CInstanceMesh::Init(const string& _szCoreName)
 {
   if(_szCoreName != "") 
@@ -68,8 +62,8 @@ void CInstanceMesh::Release()
   //res, el static mesh el peta el manager.
 }
 
-void CInstanceMesh::RenderRenderableObject(CRenderManager* _pRM)
+void CInstanceMesh::RenderRenderableObject(CRenderManager* _pRM, const vector<CEffect*>& _vEffects)
 {
   if(m_StaticMesh)
-    m_StaticMesh->Render(_pRM);
+    m_StaticMesh->Render(_pRM, _vEffects);
 }

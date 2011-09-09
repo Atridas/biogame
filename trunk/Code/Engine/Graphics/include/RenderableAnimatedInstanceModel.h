@@ -4,34 +4,38 @@
 
 #include "base.h"
 #include "AnimatedInstanceModel.h"
+#include "AnimatedCoreModel.h"
 #include "RenderableObject.h"
 #include <XML/XMLTreeNode.h>
 
+class CEffect;
+
 class CRenderableAnimatedInstanceModel: public CRenderableObject
 {
-  public:
-    CRenderableAnimatedInstanceModel(const string& _szName);
-    virtual ~CRenderableAnimatedInstanceModel() {Done();};
+public:
+  CRenderableAnimatedInstanceModel(const string& _szName) : CRenderableObject(_szName) {};
+  virtual ~CRenderableAnimatedInstanceModel() {Done();};
 
-    bool          Init      (const string& _szCoreName);
-    virtual void  InitFromXML(CXMLTreeNode& l_XMLObject);
+  bool          Init      (const string& _szCoreName);
+  virtual void  InitFromXML(CXMLTreeNode& l_XMLObject);
 
-    void          Update(float _fElapsedTime);
+  void          Update(float _fElapsedTime);
 
-    //Methods
-    virtual void  RenderRenderableObject(CRenderManager* _pRM);
+  CAnimatedInstanceModel* GetAnimatedInstanceModel(){return m_pAnimatedInstanceModel;}
 
-    CAnimatedInstanceModel* GetAnimatedInstanceModel(){return m_pAnimatedInstanceModel;}
+  virtual const vector<CMaterial*>& GetMaterials() const {return m_pAnimatedInstanceModel->GetAnimatedCoreModel()->GetMaterials();};
 
-    //TODO
-    virtual bool ChangeInstance(const string& _szName) {return true;};
+  //TODO
+  virtual bool ChangeInstance(const string& _szName) {return true;};
     
-    virtual bool IsAlphaBlended() const {return false;};
-  protected:
-    virtual void          Release                   ();
+  virtual bool IsAlphaBlended() const {return false;};
+protected:
+  virtual void RenderRenderableObject(CRenderManager* _pRM, const vector<CEffect*>& _vEffects);
 
-  private:
-    CAnimatedInstanceModel * m_pAnimatedInstanceModel;
+  virtual void Release();
+
+private:
+  CAnimatedInstanceModel * m_pAnimatedInstanceModel;
 };
 
 #endif

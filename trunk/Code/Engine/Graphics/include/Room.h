@@ -27,7 +27,7 @@ class CRoom:
 {
 public:
   //typedef priority_queue<CRenderableObject*,vector< CRenderableObject*>, CRenderableObjectOrdering> TBlendQueue;
-  typedef priority_queue<CRenderableObject3D*,vector< CRenderableObject3D*>, CObject3DOrdering> TBlendQueue;
+  typedef priority_queue<CObject3DRenderable*,vector< CObject3DRenderable*>, CObject3DOrdering> TBlendQueue;
 
   CRoom():CNamed("undefined"),m_bRendered(true), m_bNeightbour(true) {};
   ~CRoom() {Done();};
@@ -36,8 +36,9 @@ public:
   bool Init(CXMLTreeNode& _xmlNode, set<string>& _UsedNames);
 
   const vector<CObject3D> GetBoundings() const { return m_Boundings; }
-
+  
   void Render(CRenderManager* _pRM, const CFrustum& _Frustum, TBlendQueue& _BlendQueue, TBlendQueue& _EmiterQueue) const;
+  void GetRenderedObjects(const CFrustum& _Frustum, vector<CRenderableObject*>& OpaqueObjects_, TBlendQueue& _BlendQueue, TBlendQueue& _EmiterQueue) const;
   void DebugRender(CRenderManager* _pRM) const;
   void Update(CPortalManager* _pPM);
 

@@ -12,7 +12,7 @@
 
     </pre_scene_renderer>
     
-    <pre_scene_renderer name="glow_renderer" type="pre_scene_renderer" active="true">
+    <!--<pre_scene_renderer name="glow_renderer" type="pre_scene_renderer" active="true">
 
       <render_targets>
         <render_target index="0" texture="glow_texture" />
@@ -20,7 +20,7 @@
 
       <material_effects static_mesh_effect="Glow" animated_model_effect="AnimatedGlow" />
 
-    </pre_scene_renderer>
+    </pre_scene_renderer>-->
     
   </pre_scene_renderers>
 
@@ -32,13 +32,13 @@
         <input_sampler type="texture" index="5" texture="shadow_map_texture"/>
       </input_samplers>
     
-      <!--<render_targets>
+      <render_targets format_type="A8R8G8B8">
         <render_target index="0" texture="scene_result"/>
         <render_target index="1" texture="glow_texture"/>
-        <render_target index="2" texture="depth_texture"/>
-      </render_targets>-->
+        <!--<render_target index="2" texture="depth_texture"/>-->
+      </render_targets>
 
-      <material_effects>
+      <material_effects particle_effect="Particle">
         <material_effect material_type="0"   effect="Diffused" />
         <material_effect material_type="2"   effect="Textured" />
         <material_effect material_type="514" effect="TexturedEnvironment" />
@@ -67,9 +67,37 @@
       <material_effects static_mesh_effect="ShowNormals" animated_model_effect="AnimatedShowNormals" />
     </scene_renderer>
     
+    <scene_renderer name="show_normalmap_renderer" type="scene_renderer">
+      <material_effects static_mesh_effect="ShowNormalmap" animated_model_effect="AnimatedShowNormalmap" />
+    </scene_renderer>
+    
+    <scene_renderer name="show_flat_normalmap_renderer" type="scene_renderer">
+      <material_effects static_mesh_effect="ShowFlatNormalmap" animated_model_effect="AnimatedShowFlatNormalmap" />
+    </scene_renderer>
+    
+    <scene_renderer name="show_tangent_renderer" type="scene_renderer">
+      <material_effects static_mesh_effect="ShowTangent" animated_model_effect="AnimatedShowTangent" />
+    </scene_renderer>
+    
+    <scene_renderer name="show_bitangent_renderer" type="scene_renderer">
+      <material_effects static_mesh_effect="ShowBitangent" animated_model_effect="AnimatedShowBitangent" />
+    </scene_renderer>
+    
+    <scene_renderer name="show_uv_coords_renderer" type="scene_renderer">
+      <material_effects static_mesh_effect="ShowUVCoords" animated_model_effect="AnimatedShowUVCoords" />
+    </scene_renderer>
+    
   </scene_renderers>
 
   <post_scene_renderers>
+    
+    <post_scene_renderer name="draw_scene" effect="Texture" active="true">
+
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="scene_result"/>
+      </input_samplers>
+
+    </post_scene_renderer>
     
     <post_scene_renderer name="down_sample_glow" effect="DownSample4x" active="true">
       
@@ -143,6 +171,14 @@
 
     </post_scene_renderer>
 
+    <post_scene_renderer name="shadow_map" effect="Texture" size_x="0.25" active="false">
+
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="shadow_map_texture"/>
+      </input_samplers>
+
+    </post_scene_renderer>
+    
     <post_scene_renderer name="damage_gui" effect="TextureAlphaFactor" active="false">
 
       <input_samplers>

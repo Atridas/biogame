@@ -97,7 +97,7 @@ void CRenderableObjectsManager::RenderHWInstanced(CRenderManager* _pRM)
       bool result = l_HWStaticInstances->m_mWorldMats.SetStreamSource(_pRM, 1);
       assert(result);// ---
 
-      l_it->first->Render(_pRM, true);
+      //l_it->first->Render(_pRM, true);
     }
   }
   //Deixem els streams com els teniem
@@ -106,13 +106,13 @@ void CRenderableObjectsManager::RenderHWInstanced(CRenderManager* _pRM)
 
   //objectes animats
   {
-    vector<CRenderableObject*>::iterator l_it, l_end;
+    vector<CRenderableAnimatedInstanceModel*>::iterator l_it, l_end;
     l_end = m_vAnimatedModels.end();
     for(l_it = m_vAnimatedModels.begin(); l_it != l_end; ++l_it)
     {
       if((*l_it)->GetVisible())
       {
-        (*l_it)->Render(_pRM);
+        //(*l_it)->Render(_pRM);
       }
     }
   }
@@ -146,7 +146,7 @@ void CRenderableObjectsManager::RenderOld(CRenderManager* _pRM)
         }
         else
         {
-          m_RenderableObjects[i]->Render(_pRM);
+          //m_RenderableObjects[i]->Render(_pRM);
         }
       }
     }
@@ -157,7 +157,7 @@ void CRenderableObjectsManager::RenderOld(CRenderManager* _pRM)
   while(!l_BlendQueue.empty())
   {
     CRenderableObject* l_pRenderableObject = l_BlendQueue.top();
-    l_pRenderableObject->Render(_pRM);
+    //l_pRenderableObject->Render(_pRM);
     l_BlendQueue.pop();
   }
 }
@@ -333,7 +333,7 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
         if(l_pRenderableObject != 0 && l_pRenderableObject->IsOk())
         {
           l_pRenderableObject->InitFromXML(l_XMLObject);
-          m_vAnimatedModels.push_back(l_pRenderableObject);
+          m_vAnimatedModels.push_back((CRenderableAnimatedInstanceModel*)l_pRenderableObject);
         }
 
       } else 

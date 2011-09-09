@@ -67,7 +67,7 @@ protected:
   CBoundingSphere m_BoundingSphere;
 };
 
-class CRenderableObject3D: public IRenderable, public CObject3D {};
+class CObject3DRenderable: public IRenderable, public CObject3D {};
 
 class CObject3DOrdering
 {

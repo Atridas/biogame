@@ -11,6 +11,7 @@
 class CRenderManager;
 class CRenderableObject;
 class CEmiterInstance;
+class CCamera;
 
 class CPortalManager:
   public CBaseControl
@@ -35,6 +36,7 @@ public:
 
   void Update(float _fDT);
   void Render(CRenderManager* _pRM) {Render(_pRM,false);};
+  void GetRenderedObjects(CCamera *_pCamera, vector<CRenderableObject*>& OpaqueObjects_, CRoom::TBlendQueue& BlendQueue_, CRoom::TBlendQueue& EmiterQueue_);
   void DebugRender(CRenderManager* _pRM);
 
 protected:

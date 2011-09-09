@@ -12,6 +12,7 @@ class CRenderManager;
 struct SHWIntancedMeshes;
 class CStaticMesh;
 class CInstanceMesh;
+class CRenderableAnimatedInstanceModel;
 //---------------------------------
 
 
@@ -29,7 +30,7 @@ public:
 
   void AddResource(const string& _szName, CRenderableObject* _pRenderableObject);
   void RemoveResource(const string& _szName);
-  void CleanUp()                        {Release();m_RenderableObjects.clear();m_vMeshes.clear(),m_vAnimatedModels.clear();};
+  void CleanUp() {Release();m_RenderableObjects.clear();m_vMeshes.clear(),m_vAnimatedModels.clear();};
   virtual void Release();
 
   bool Load(const string& _szFileName)  {return Load(_szFileName,false);};
@@ -45,8 +46,9 @@ public:
   bool Reload()                          {CleanUp(); return Load(m_vXMLFiles);};
   bool Reload(const string& _szFileName) {CleanUp(); return Load(_szFileName);};
 
+  const vector<CRenderableObject*>& GetRenderableObjects() {return m_RenderableObjects;};
   const vector<CRenderableObject*>& GetMeshes() {return m_vMeshes;};
-  const vector<CRenderableObject*>& GetAnimatedModels() {return m_vAnimatedModels;};
+  const vector<CRenderableAnimatedInstanceModel*>& GetAnimatedModels() {return m_vAnimatedModels;};
 
   void SetInstanced(bool _bInstanced) {m_bRenderInstanced = _bInstanced;};
 
@@ -57,7 +59,7 @@ private:
   set<string> m_vXMLFiles;
   vector<CRenderableObject*> m_RenderableObjects;
   vector<CRenderableObject*> m_vMeshes;
-  vector<CRenderableObject*> m_vAnimatedModels;
+  vector<CRenderableAnimatedInstanceModel*> m_vAnimatedModels;
   map<const CStaticMesh*,SHWIntancedMeshes*> m_mapHWStaticInstances;
 
   bool Load(const string& _szFileName, bool _bReload);

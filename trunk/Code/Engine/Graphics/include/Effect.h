@@ -36,6 +36,14 @@ public:
   void ActivateInstancedRendering();
 
   LPD3DXEFFECT GetD3DEffect() const {return m_pD3DEffect;};
+
+  void SetValue(const string& _szParameterName,int _iValue);
+  void SetValue(const string& _szParameterName,float _fValue);
+  void SetValue(const string& _szParameterName,Vect3f& _vValue);
+  void SetValue(const string& _szParameterName,Mat44f _matValue);
+
+  void SetValue(const string& _szParameterName,int _iValue[], uint32 _uiSize);
+  void SetValue(const string& _szParameterName,float _fValue[], uint32 _uiSize);
   
 protected:
   void Release();

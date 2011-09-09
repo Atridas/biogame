@@ -66,16 +66,16 @@ void CTestProcess::Update(float _fElapsedTime)
 
 }
 
-void CTestProcess::RenderScene(CRenderManager* _pRM)
-{
-  CORE->GetRenderableObjectsManager()->Render(_pRM);
+//void CTestProcess::RenderScene(CRenderManager* _pRM)
+//{
+//  CORE->GetRenderableObjectsManager()->Render(_pRM);
 
   //Mat44f m;
 	//_pRM->SetTransform(m.SetIdentity().Translate(m_pCamera->GetLookAt()));
   //_pRM->DrawAxis();
   //_pRM->DrawLine(m_pCamera->GetLookAt(),m_pCamera->GetEye()-Vect3f(0.0f,0.5f,0.0f)+m_pCamera->GetDirection().Normalize()*5.0f,colRED);
   //_pRM->DrawLine(m_pCamera->GetEye(),Vect3f(0.0f),colBLUE);
-}
+//}
 
 void CTestProcess::RenderINFO(CRenderManager* _pRM)
 {

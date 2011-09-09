@@ -2,6 +2,7 @@
 
 #include "RenderManager.h"
 #include "SpotLight.h"
+#include "FPSCamera.h"
 #include <d3d9.h>
 
 void CDirectionalLight::Init(CXMLTreeNode& _XMLParams)
@@ -73,4 +74,22 @@ Mat44f CDirectionalLight::GetLightProjectionMatrix() const
         );
 
   return Mat44f(m_matProject);
+}
+
+void CDirectionalLight::SetFPSCamera(CFPSCamera& Camera_) const
+{
+  float l_fAngle;
+
+  if(GetType() == SPOT)
+  {
+    l_fAngle = ((CSpotLight*)this)->GetFallOff()*2.5f;
+  } else {
+    l_fAngle = 45.0f;
+  }
+  Camera_.Init(
+        0.1f,                                   //z near
+        100.0f,                                  //z far
+        l_fAngle * D3DX_PI / 180.0f,            //angle de visió
+        1.0f,                                   //aspect ratio
+        this);
 }
