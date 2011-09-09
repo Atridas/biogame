@@ -675,10 +675,10 @@ void CPhysXProcess::ExportSkeletonInfo(CalSkeleton* _pSkeleton)
   l_XMLDoc.EndNewFile();
 }
 
-void CPhysXProcess::RenderScene(CRenderManager* _pRM)
-{  
-  CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
-  l_pPhysManager->DebugRender(_pRM);
+//void CPhysXProcess::RenderScene(CRenderManager* _pRM)
+//{  
+  //CPhysicsManager* l_pPhysManager = CORE->GetPhysicsManager();
+  //l_pPhysManager->DebugRender(_pRM);
 
   //CRenderableAnimatedInstanceModel* l_pAnim = (CRenderableAnimatedInstanceModel*)CORE->GetRenderableObjectsManager()->GetResource("ariggle");
   //CalSkeleton* l_pSkeleton = l_pAnim->GetAnimatedInstanceModel()->GetAnimatedCalModel()->getSkeleton();
@@ -738,16 +738,16 @@ void CPhysXProcess::RenderScene(CRenderManager* _pRM)
   //  _pRM->DrawSphere(0.01f,colYELLOW,5);
   //}
 
-  CORE->GetRenderableObjectsManager()->Render(_pRM);
-  _pRM->DrawGrid(0.1f,colCYAN,1,1);
+  //CORE->GetRenderableObjectsManager()->Render(_pRM);
+  //_pRM->DrawGrid(0.1f,colCYAN,1,1);
 
-  if(m_bRenderLights)
-    CORE->GetLightManager()->Render(_pRM);
+  //if(m_bRenderLights)
+  //  CORE->GetLightManager()->Render(_pRM);
 
-  _pRM->SetTransform(Mat44f().SetIdentity());
+  //_pRM->SetTransform(Mat44f().SetIdentity());
   
   //_pRM->DrawAxis();
-}
+//}
 
 
 
@@ -1186,7 +1186,7 @@ void CPhysXProcess::RenderPhysX(CRenderManager* _pRM, CRenderableObject* _pRO, M
    
 
    CInstanceMesh* l_pInstanceMesh = (CInstanceMesh*)_pRO;
-   l_pInstanceMesh->RenderRenderableObject(_pRM);
+   //l_pInstanceMesh->RenderRenderableObject(_pRM);
   // _pRM->RenderBoundingBox(l_pInstanceMesh->GetBoundingBox());
 }
 

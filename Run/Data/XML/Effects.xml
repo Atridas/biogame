@@ -3,24 +3,24 @@
   <effects>
 
   <effect name="Diffused" texture_mask="0" file="Data/Effects/NormalDiffusedEffect.fx" technique="NormalDiffusedTechnique" alpha_technique="NormalDiffusedAlphaTechnique" />
-  <effect name="Textured" texture_mask="2" file="Data/Effects/NormalTexturedEffect.fx" technique="NormalTexturedTechnique" alpha_technique="NormalTexturedAlphaTechnique" />
-  <effect name="TexturedEnvironment" texture_mask="514" file="Data/Effects/NormalTexturedEnvironmentEffect.fx" technique="NormalTexturedEnvironmentTechnique" alpha_technique="NormalTexturedEnvironmentAlphaTechnique" />
-  <effect name="NormalmapEnvironment" texture_mask="518" file="Data/Effects/NormalmapTexturedEnvironmentEffect.fx" technique="NormalmapTexturedEnvironmentTechnique" alpha_technique="NormalmapTexturedEnvironmentAlphaTechnique" />
-  <effect name="Normalmap" texture_mask="6" file="Data/Effects/TangentBinormalNormalTexturedEffect.fx" technique="TangentBinormalNormalTexturedTechnique" />
-  <effect name="SpecularTextured" texture_mask="18" file="Data/Effects/SpecularTexturedEffect.fx" technique="SpecularTexturedTechnique" />
-  <effect name="SpecularNormalmapTextured" texture_mask="22" file="Data/Effects/SpecularNormalmapTexturedEffect.fx" technique="SpecularNormalmapTexturedTechnique" />
-  <effect name="SpecularLightmapTextured" texture_mask="26" file="Data/Effects/SpecularLightmapTexturedEffect.fx" technique="SpecularLightmapTexturedTechnique" />
-  <effect name="SpecularLightmapNormalmapTextured" texture_mask="30" file="Data/Effects/SpecularLightmapNormalmapTexturedEffect.fx" technique="SpecularLightmapNormalmapTexturedTechnique" />
-  <effect name="SpecularRadiosityNormalmapTexturedTechnique" texture_mask="150" file="Data/Effects/SpecularRadiosityNormalmapTexturedTechnique.fx" technique="SpecularRadiosityNormalmapTexturedTechnique" />
-  <effect name="Lightmap" texture_mask="10" file="Data/Effects/LightmapNormalTexturedEffect.fx" technique="LightmapTechnique" />
-  <effect name="LightmapNormalmap" texture_mask="14" file="Data/Effects/LightmapNormalmapNormalTexturedEffect.fx" technique="LightmapNormalmapTechnique" />
-  <effect name="RadiosityNormalmap" texture_mask="134" file="Data/Effects/RadiosityNormalMap.fx" technique="RadiosityNormalmapTechnique" alpha_technique="RadiosityNormalmapAlphaTechnique"/>
+  <effect name="Textured" texture_mask="34" file="Data/Effects/NormalTexturedEffect.fx" technique="NormalTexturedTechnique" alpha_technique="NormalTexturedAlphaTechnique" />
+  <effect name="TexturedEnvironment" texture_mask="546" file="Data/Effects/NormalTexturedEnvironmentEffect.fx" technique="NormalTexturedEnvironmentTechnique" alpha_technique="NormalTexturedEnvironmentAlphaTechnique" />
+  <effect name="NormalmapEnvironment" texture_mask="550" file="Data/Effects/NormalmapTexturedEnvironmentEffect.fx" technique="NormalmapTexturedEnvironmentTechnique" alpha_technique="NormalmapTexturedEnvironmentAlphaTechnique" />
+  <effect name="Normalmap" texture_mask="38" file="Data/Effects/TangentBinormalNormalTexturedEffect.fx" technique="TangentBinormalNormalTexturedTechnique" />
+  <effect name="SpecularTextured" texture_mask="50" file="Data/Effects/SpecularTexturedEffect.fx" technique="SpecularTexturedTechnique" />
+  <effect name="SpecularNormalmapTextured" texture_mask="54" file="Data/Effects/SpecularNormalmapTexturedEffect.fx" technique="SpecularNormalmapTexturedTechnique" />
+  <effect name="SpecularLightmapTextured" texture_mask="58" file="Data/Effects/SpecularLightmapTexturedEffect.fx" technique="SpecularLightmapTexturedTechnique" />
+  <effect name="SpecularLightmapNormalmapTextured" texture_mask="62" file="Data/Effects/SpecularLightmapNormalmapTexturedEffect.fx" technique="SpecularLightmapNormalmapTexturedTechnique" />
+  <effect name="SpecularRadiosityNormalmapTexturedTechnique" texture_mask="182" file="Data/Effects/SpecularRadiosityNormalmapTexturedTechnique.fx" technique="SpecularRadiosityNormalmapTexturedTechnique" />
+  <effect name="Lightmap" texture_mask="42" file="Data/Effects/LightmapNormalTexturedEffect.fx" technique="LightmapTechnique" />
+  <effect name="LightmapNormalmap" texture_mask="46" file="Data/Effects/LightmapNormalmapNormalTexturedEffect.fx" technique="LightmapNormalmapTechnique" />
+  <effect name="RadiosityNormalmap" texture_mask="166" file="Data/Effects/RadiosityNormalMap.fx" technique="RadiosityNormalmapTechnique" alpha_technique="RadiosityNormalmapAlphaTechnique"/>
   <effect name="White" texture_mask="0" file="Data/Effects/WhiteEffect.fx" technique="WhiteTechnique" instanced_technique="WhiteInstancedTechnique" />
   <effect name="No" texture_mask="0" file="Data/Effects/NoEffect.fx" technique="NoTechnique" />
   <!-- Animats -->
-  <effect name="AnimatedTextured" texture_mask="2" file="Data/Effects/AnimatedNormalTexturedEffect.fx" technique="Cal3DTechnique" />
-  <effect name="AnimatedNormalmap" texture_mask="6" file="Data/Effects/AnimatedTangentBinormalNormalTexturedEffect.fx" technique="Cal3DNormalMapTechnique" />
-  <effect name="AnimatedSpecularNormalmapTextured" texture_mask="22" file="Data/Effects/AnimatedSpecularNormalmapTexturedEffect.fx" technique="AnimatedSpecularNormalmapTexturedTechnique" />
+  <effect name="AnimatedTextured" texture_mask="34" file="Data/Effects/AnimatedNormalTexturedEffect.fx" technique="Cal3DTechnique" />
+  <effect name="AnimatedNormalmap" texture_mask="38" file="Data/Effects/AnimatedTangentBinormalNormalTexturedEffect.fx" technique="Cal3DNormalMapTechnique" />
+  <effect name="AnimatedSpecularNormalmapTextured" texture_mask="54" file="Data/Effects/AnimatedSpecularNormalmapTexturedEffect.fx" technique="AnimatedSpecularNormalmapTexturedTechnique" />
   <effect name="AnimatedShowNormals" texture_mask="0" file="Data/Effects/AnimatedShowNormalsEffect.fx" technique="Cal3dShowNormalsTechnique" />
   <effect name="AnimatedShowNormalmap" texture_mask="4" file="Data/Effects/AnimatedShowNormalmapEffect.fx" technique="Cal3dShowNormalmapTechnique" />
 	<effect name="AnimatedShowTangent" texture_mask="4" file="Data/Effects/AnimatedShowTangentEffect.fx" technique="Cal3dShowTangentTechnique" />
@@ -49,6 +49,7 @@
     <effect name="PostProcessBloom2" file="Data/Effects/PostProcessBloomEffect2.fx" technique="PostProcessBloomTechnique2" />
     
     <effect name="TextureAlphaFactor" file="Data/Effects/TextureAlphaFactorEffect.fx" technique="TextureAlphaFactorTechnique" />
+    <effect name="Texture" file="Data/Effects/TextureEffect.fx" technique="TextureTechnique" />
     <effect name="Shockwave" file="Data/Effects/ShockWaveEffect.fx" technique="ShockWaveTechnique" />
     
     <!--<effect name="HDR" file="Data/Effects/HDR.fx"/>-->
@@ -64,28 +65,7 @@
     <!--<effect name="Gas" file="Data/Effects/Gas.fx"/>-->
 
   </effects>
-  <default_effects>
-    <default_effect material_type="0"   effect="Diffused" />
-    <default_effect material_type="2"   effect="Textured" />
-    <default_effect material_type="514" effect="TexturedEnvironment" />
-    <default_effect material_type="518" effect="NormalmapEnvironment" />
-    <default_effect material_type="3"   effect="AnimatedTextured" />
-    <default_effect material_type="6"   effect="Normalmap" />
-    <default_effect material_type="7"   effect="AnimatedNormalmap" />
-    <default_effect material_type="34"  effect="Textured" />
-    <default_effect material_type="38"  effect="Normalmap" />
-    <default_effect material_type="39"  effect="AnimatedNormalmap" />
-    <default_effect material_type="10"  effect="Lightmap" />
-    <default_effect material_type="14"  effect="LightmapNormalmap" />
-    <default_effect material_type="134" effect="RadiosityNormalmap" />
-    <default_effect material_type="18"  effect="SpecularTextured" />
-    <default_effect material_type="22"  effect="SpecularNormalmapTextured" />
-    <default_effect material_type="23"  effect="AnimatedSpecularNormalmapTextured" />
-    <default_effect material_type="26"  effect="SpecularLightmapTextured" />
-    <default_effect material_type="30"  effect="SpecularLightmapNormalmapTextured" />
-    <default_effect material_type="150" effect="SpecularRadiosityNormalmapTexturedTechnique" />
-    <default_effect material_type="55"  effect="AnimatedSpecularNormalmapTextured" />
-  </default_effects>
+
 
 
     --><!-- SCENE EFFECTS --><!--

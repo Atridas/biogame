@@ -1,16 +1,11 @@
-#include "VertexShaders.fx"
-#include "PixelShaders.fx"
+#define NS_LIGHTING
+#define NS_TEX0
+#define NS_NORMALMAP
+#define NS_CAL3D
+
+#include "NewShaders.fx"
 
 technique Cal3DNormalMapTechnique
 {
-	pass p0
-	{
-		ZEnable = true;
-		ZWriteEnable = true;
-		ZFunc = LessEqual;
-		AlphaBlendEnable = false;
-		CullMode = CW;
-		VertexShader = compile vs_3_0 RenderTangentBitangentCal3DHWVS();
-		PixelShader = compile ps_3_0 TangentBinormalNormalTexturedNoParallaxPS();
-	}
+	TECHNIQUE_BODY
 }

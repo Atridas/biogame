@@ -47,8 +47,13 @@ public:
   //----Matrix Functions-----------------------------------------------
   void                  Setup2DCamera     ();
   void                  SetupMatrices     (CCamera* _pCamera, bool m_bOrtho = false, bool _bSaveCamera = true);
+  void SetViewMatrix(Mat44f& _matView);
+  void SetProjectionMatrix(Mat44f& _matProject);
   void                  SetTransform      (D3DXMATRIX& matrix);
   void                  SetTransform      (Mat44f& m);
+
+  Mat44f GetLookAtMatrix(Vect3f& _vEye, Vect3f& _vLookAt,Vect3f& _vUp);
+  Mat44f GetPerspectiveFOVMatrix(float _fFOV, float _fAspectRatio, float _fNear, float _fFar);
   //-------------------------------------------------------------------
 
   //----Utility Functions----------------------------------------------

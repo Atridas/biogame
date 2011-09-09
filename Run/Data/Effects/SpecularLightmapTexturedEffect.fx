@@ -1,18 +1,11 @@
-#include "VertexShaders.fx"
-#include "PixelShaders.fx"
+#define NS_LIGHTING
+#define NS_TEX0
+#define NS_NORMALMAP
+#define NS_LIGHTMAP
+#define NS_SPECULARMAP
+
+#include "NewShaders.fx"
 
 technique SpecularLightmapNormalmapTexturedTechnique {
-	pass p0 {
-		//Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar
-    ZEnable = true;
-    ZWriteEnable = true;
-    ZFunc = LessEqual;
-    //Deshabilitamos el alphablend
-    AlphaBlendEnable = false;
-    //Tipo de culling que queremos utilizar
-    CullMode = CCW;
-    //Vertex / Pixel shader
-		VertexShader = compile vs_3_0 TangentBinormalNormalTextured2VS();
-		PixelShader = compile ps_3_0 SpecularLightmapTexturedPS();
-	}
+	TECHNIQUE_BODY
 }

@@ -71,20 +71,20 @@ bool CEntityProcess::Init()
   // llum ----------------------------------------
   
   m_pSpotLight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
-                                                          Vect3f(-2.15715f,0.0f,-7.32758f),
-                                                          Vect3f(-5.4188f,0.0f,3.75613f),
-                                                          CColor(Vect3f(1.0f,1.0f,1.0f)),
+                                                          Vect3f(0.0f,15.0f,0.0f),
+                                                          Vect3f(0.3f,-1.0f,0.0f),
+                                                          CColor(Vect3f(1.0f,0.0f,1.0f)),
                                                           20.0f,
                                                           80.0f,
                                                           10.0f,
                                                           45.0f,
-                                                          false );
-
+                                                          true );
+  m_pSpotLight->SetPosition(Vect3f(0.0f,15.0f,0.0f));
+  m_pSpotLight->SetDirection(Vect3f(0.3f,-1.0f,0.0f).Normalize());
   m_pSpotLight->SetActive(true);
 
-  //TODO
-  //CShadowMapPreRendererStep* l_pShadowMapPreRenderStep = (CShadowMapPreRendererStep*)CORE->GetRenderer()->GetPreSceneRendererStep("shadow_map_renderer");
-  //l_pShadowMapPreRenderStep->SetShadowMapLightCast(m_pSpotLight);
+  CShadowMapPreRendererStep* l_pShadowMapPreRenderStep = (CShadowMapPreRendererStep*)CORE->GetRenderer()->GetPreSceneRendererStep("shadow_map_renderer");
+  l_pShadowMapPreRenderStep->SetShadowMapLightCast(m_pSpotLight);
 
   CORE->GetIAManager()->CompleteGraph();
 
@@ -104,12 +104,13 @@ void CEntityProcess::Update(float _fElapsedTime)
 {
   CObject3D* m_pPlayerPos = CORE->GetEntityManager()->GetEntity("Player")->GetComponent<CComponentObject3D>();
 
-  m_pSpotLight->SetPosition(m_pPlayerPos->GetPosition());
+  m_pSpotLight->SetPosition(m_pCamera->GetEye());
   m_pSpotLight->SetDirection(m_pCamera->GetDirection());
 
   CORE->GetSoundManager()->UpdateSound3DSystem(m_pPlayerPos->GetPosition(),m_pCamera->GetDirection());
 }
 
+/*
 void CEntityProcess::RenderScene(CRenderManager* _pRM)
 {
   if(CORE->GetActionManager()->IsActionActive("ToggleDebug"))
@@ -130,12 +131,13 @@ void CEntityProcess::RenderScene(CRenderManager* _pRM)
   CORE->GetPortalManager()->Render(_pRM);
   //CORE->GetEmiterManager()->Render(_pRM);
 }
+*/
 
 void CEntityProcess::RenderINFO(CRenderManager* _pRM)
 {
   //CORE->GetPhysicsManager()->DebugRender(_pRM);
   //CORE->GetPortalManager()->DebugRender(_pRM);
-  CORE->GetEntityManager()->DebugRender(_pRM);
+  //CORE->GetEntityManager()->DebugRender(_pRM);
   //CORE->GetIAManager()->GetGraph()->DebugRender(_pRM);
   //CORE->GetEmiterManager()->DebugRender(_pRM);
   /*if(CORE->GetActionManager()->IsActionActive("ToggleDebug"))

@@ -160,6 +160,7 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
                                                                 6);
   }
 
+
 #ifdef _DEBUG // Clear the backbuffer to magenta color in a Debug mode
   m_cClearColor = colMAGENTA;
 #else // Clear the backbuffer to black color in a Release mode
@@ -205,7 +206,7 @@ void CRenderManager::Release(void)
 
 
 // RENDERING STUFF:
-void CRenderManager::BeginRendering ()
+void CRenderManager::BeginRendering()
 {
   assert(IsOk());
 
@@ -213,7 +214,7 @@ void CRenderManager::BeginRendering ()
 	uint32 green	= (uint32) (m_cClearColor.GetGreen() * 255);
 	uint32 blue		= (uint32) (m_cClearColor.GetBlue() * 255);
 
-	m_pD3DDevice->Clear( 0, NULL, D3DCLEAR_TARGET|D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB(0, red, green, blue), 1.0f, 0 );
+	m_pD3DDevice->Clear(0, NULL, D3DCLEAR_TARGET|D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB(0, red, green, blue), 1.0f, 0);
 
 	// Begin the scene
 	HRESULT hr = m_pD3DDevice->BeginScene();
@@ -227,17 +228,17 @@ void CRenderManager::BeginRendering ()
 	m_pD3DDevice->SetRenderState( D3DRS_SPECULARENABLE, FALSE );
 
 	//if(m_bPaintSolid)
-	if(true)
-	{
-		m_pD3DDevice->SetRenderState( D3DRS_FILLMODE, D3DFILL_SOLID  );
-	}
-	else
-	{
-		m_pD3DDevice->SetRenderState( D3DRS_FILLMODE, D3DFILL_WIREFRAME  );
-	}
+	//if(true)
+	//{
+	m_pD3DDevice->SetRenderState( D3DRS_FILLMODE, D3DFILL_SOLID  );
+	//}
+	//else
+	//{
+	//	m_pD3DDevice->SetRenderState( D3DRS_FILLMODE, D3DFILL_WIREFRAME  );
+	//}
 }
 
-void CRenderManager::EndRendering    ()
+void CRenderManager::EndRendering()
 {
   assert(IsOk());
 	m_pD3DDevice->EndScene();
@@ -247,6 +248,42 @@ void CRenderManager::Present()
 {
   // Present the backbuffer contents to the display
 	m_pD3DDevice->Present( NULL, NULL, NULL, NULL );
+}
+
+void CRenderManager::SetViewMatrix(Mat44f& _matView)
+{
+  m_pD3DDevice->SetTransform(D3DTS_VIEW, &_matView.GetD3DXMatrix());
+}
+
+void CRenderManager::SetProjectionMatrix(Mat44f& _matProjection)
+{
+  m_pD3DDevice->SetTransform(D3DTS_PROJECTION, &_matProjection.GetD3DXMatrix());
+}
+
+Mat44f CRenderManager::GetLookAtMatrix(Vect3f& _vEye,Vect3f& _vLookAt,Vect3f& _vUp)
+{
+  D3DXVECTOR3 l_vEyeD3D(_vEye.x, _vEye.y, _vEye.z);
+  D3DXVECTOR3 l_vLookAtD3D(_vLookAt.x,_vLookAt.y,_vLookAt.z);
+  D3DXVECTOR3 l_vUpD3D(_vUp.x,_vUp.y,_vUp.z);
+  D3DXMATRIX l_matViewD3D;
+
+  D3DXMatrixLookAtLH( &l_matViewD3D, &l_vEyeD3D, &l_vLookAtD3D, &l_vUpD3D);
+
+  return Mat44f(l_matViewD3D._11,l_matViewD3D._21,l_matViewD3D._31,l_matViewD3D._41,
+                l_matViewD3D._12,l_matViewD3D._22,l_matViewD3D._32,l_matViewD3D._42,
+                l_matViewD3D._13,l_matViewD3D._23,l_matViewD3D._33,l_matViewD3D._43,
+                l_matViewD3D._14,l_matViewD3D._24,l_matViewD3D._34,l_matViewD3D._44);
+}
+
+Mat44f CRenderManager::GetPerspectiveFOVMatrix(float _fFOV, float _fAspectRatio, float _fNear, float _fFar)
+{
+  D3DXMATRIX l_matProjectionD3D;
+  D3DXMatrixPerspectiveFovLH(	&l_matProjectionD3D, _fFOV, _fAspectRatio, _fNear, _fFar);
+
+  return Mat44f(l_matProjectionD3D._11,l_matProjectionD3D._21,l_matProjectionD3D._31,l_matProjectionD3D._41,
+                l_matProjectionD3D._12,l_matProjectionD3D._22,l_matProjectionD3D._32,l_matProjectionD3D._42,
+                l_matProjectionD3D._13,l_matProjectionD3D._23,l_matProjectionD3D._33,l_matProjectionD3D._43,
+                l_matProjectionD3D._14,l_matProjectionD3D._24,l_matProjectionD3D._34,l_matProjectionD3D._44);
 }
 
 void CRenderManager::SetupMatrices(CCamera* _pCamera, bool _bOrtho, bool _bSaveCamera)
@@ -393,7 +430,7 @@ void CRenderManager::SetTransform(Mat44f& m)
 
   m_pD3DDevice->SetTransform(D3DTS_WORLD, &matrix);
     
-  CORE->GetEffectManager()->SetWorldMatrix(m);
+  //CORE->GetEffectManager()->SetWorldMatrix(m);
 }
 
 void CRenderManager::EnableAlphaBlend ()

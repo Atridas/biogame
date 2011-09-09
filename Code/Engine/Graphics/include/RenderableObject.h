@@ -2,17 +2,20 @@
 #ifndef __RENDERABLEOBJECT_H__
 #define __RENDERABLEOBJECT_H__
 
+#include "base.h"
 #include "Utils/Object3D.h"
 #include "Named.h"
 #include <XML/XMLTreeNode.h>
 
 //forward declarations---------------
 class CRenderManager;
+class CEffect;
+class CMaterial;
 //---------------------------------
 
 
 class CRenderableObject : 
-  public CRenderableObject3D,
+  public CObject3DRenderable,
   public CNamed,
   public CBaseControl
 {
@@ -20,15 +23,16 @@ public:
   CRenderableObject(const string& _szName):CNamed(_szName) {};
   virtual void Update(float _fElapsedTime) {};
   virtual void InitFromXML(CXMLTreeNode& l_XMLObject) {};
-  virtual void Render(CRenderManager *_pRM);
+  virtual void Render(CRenderManager *_pRM, const vector<CEffect*>& _vEffects);
+
+  virtual const vector<CMaterial*>& GetMaterials() const = 0;
 
   virtual bool IsAlphaBlended() const = 0;
 
   virtual bool ChangeInstance(const string& _szName) = 0;
-  
-protected:
-  virtual void RenderRenderableObject(CRenderManager *RM) = 0;
 
+protected:
+  virtual void RenderRenderableObject(CRenderManager *_pRM, const vector<CEffect*>& _vEffects) = 0;
 };
 
 class CRenderableObjectOrdering

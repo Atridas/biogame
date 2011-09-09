@@ -6,7 +6,7 @@
 #include "RenderManager.h"
 
 class CXMLTreeNode;
-class CProcess;
+class CRenderManager;
 
 class CPostSceneRendererStep :
   public CRendererStep
@@ -17,7 +17,7 @@ public:
 
   bool Init(CXMLTreeNode& _treePostSceneRenderer);
 
-  virtual void Render(CProcess* _pProcess) {Render();};
+  virtual void Render(CRenderManager* _pRM, CCamera* _pCamera) {Render();};
 
   void SetTime(float _fTime) {m_fTime = _fTime;};
   void SetAlpha(float _fAlpha) {m_fAlphaFactor = _fAlpha;};

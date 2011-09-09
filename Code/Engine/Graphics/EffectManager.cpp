@@ -12,36 +12,6 @@
 
 #include <XML/XMLTreeNode.h>
 
-
-void CEffectManager::ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _mProjectionMatrix, const Vect3f& _vCameraEye, const Vect3f& _vCameraUp, const Vect3f& _vCameraRight)
-{
-  SetProjectionMatrix(_mProjectionMatrix);
-  SetViewMatrix(_mViewMatrix);
-  SetCameraEye(_vCameraEye);
-  SetCameraUp(_vCameraUp);
-  SetCameraRight(_vCameraRight);
-}
-
-//TODO: UPDATE FORMAT!!!
-/* format inventat de Effects.xml:
-<shaders>
-  <effects>
-    <effect name=".../>
-    <effect name=".../>
-  </effects>
-  <default_techniques>
-    <default_technique .../>
-    <default_technique .../>
-    <default_technique .../>
-  </default_techniques>
-  <techniques>
-    <technique name=".../>
-    <technique name=".../>
-    <technique name=".../>
-  </techniques>
-</shaders>
-*/
-
 bool CEffectManager::Load(const SEffectManagerParams& _params)
 {
   m_pLightManager = CORE->GetLightManager();
@@ -66,7 +36,8 @@ bool CEffectManager::Load(const SEffectManagerParams& _params)
 
   CreatePoissonBlur16x2(m_pfPoissonBlurKernel);
 
-  return Load(false);
+  SetOk(Load(false));
+  return IsOk();
 }
 
 bool CEffectManager::Load(bool _bReload)
@@ -135,29 +106,8 @@ bool CEffectManager::Load(bool _bReload)
         }
       }
     }
-    //----------------------------
 
-    //--------Default effects-------------
-    CXMLTreeNode l_treeDefEffects = l_treeShaders["default_effects"];
-    l_iNumChildren = l_treeDefEffects.GetNumChildren();
-
-    LOGGER->AddNewLog(ELL_INFORMATION,"CEffectManager::Load Loading %d default_effects.", l_iNumChildren);
-
-    for(int i = 0; i < l_iNumChildren; i++)
-    {
-      CXMLTreeNode l_treeDefEffect = l_treeDefEffects(i);
-      if(l_treeDefEffect.IsComment())
-        continue;
-      
-      int l_iMaterialType = l_treeDefEffect.GetIntProperty("material_type");
-      string l_szEffectName = l_treeDefEffect.GetPszISOProperty("effect","");
-
-      m_DefaultEffectMap[l_iMaterialType] = l_szEffectName;
-      
-    }
   }
-
-  m_bSemanticsUpdated = true;
 
   return true;
 }
@@ -172,12 +122,15 @@ void CEffectManager::Release()
   CMapManager::Release();
 
   CHECKED_RELEASE(m_pEffectPool);
+}
 
-  m_DefaultEffectMap.clear();
-
-  m_pForcedStaticMeshEffect = 0;
-  m_pForcedAnimatedModelEffect = 0;
-  
+void CEffectManager::ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _mProjectionMatrix, const Vect3f& _vCameraEye, const Vect3f& _vCameraUp, const Vect3f& _vCameraRight)
+{
+  SetProjectionMatrix(_mProjectionMatrix);
+  SetViewMatrix(_mViewMatrix);
+  SetCameraEye(_vCameraEye);
+  SetCameraUp(_vCameraUp);
+  SetCameraRight(_vCameraRight);
 }
 
 void CEffectManager::SetSpecularParams(float _fGlossiness, float _fSpecularLevel)
@@ -192,69 +145,25 @@ void CEffectManager::SetSpecularParams(float _fGlossiness, float _fSpecularLevel
 
 void CEffectManager::LoadShaderData(CEffect* _pEffect)
 {
-  LPD3DXEFFECT l_pD3DEffect = _pEffect->GetD3DEffect();
+  if(!_pEffect)
+    return;
 
-  if(m_bSemanticsUpdated)
-  {
-    m_pWorldMatrixParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"World");
-    m_pViewMatrixParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"View");
-    m_pProjectionMatrixParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"Projection");
-    m_pWorldViewMatrixParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"WorldView");
-    m_pViewProjectionMatrixParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"ViewProjection");
-    m_pWorldViewProjectionMatrixParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"WorldViewProjection");
-    m_pViewToLightProjectionMatrixParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"ViewToLightProjection");
-    m_pCameraPositionParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"CameraPosition");
-    m_pCameraUpParameter       = l_pD3DEffect->GetParameterBySemantic(NULL,"CameraUp");
-    m_pCameraRightParameter    = l_pD3DEffect->GetParameterBySemantic(NULL,"CameraRight");
-    m_pAmbientLight = l_pD3DEffect->GetParameterBySemantic(NULL,"AmbientLight");
-    m_pLightsEnabledParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsEnabled");
-    m_pLightsTypeParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsType");
-    m_pLightsPositionParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsPosition");
-    m_pLightsDirectionParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsDirection");
-    m_pLightsAngleParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsAngleCos");
-    m_pLightsColorParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsColor");
-    m_pLightsFallOffParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsFallOffCos");
-    m_pLightsStartRangeAttenuationParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsStartRangeSQ");
-    m_pLightsEndRangeAttenuationParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"LightsEndRangeSQ");
-    m_pShadowsEnabledParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"ShadowEnabled");
-    m_pDynamicObjectsOnly = l_pD3DEffect->GetParameterBySemantic(NULL,"DynamicObjectsOnly");
-    m_pBonesParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"Bones");
-    m_pTimeParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"Time");
-    m_pGlowActiveParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"GlowActive");
-    m_pTextureWidth = l_pD3DEffect->GetParameterBySemantic(NULL,"TextureWidth");
-    m_pTextureHeight = l_pD3DEffect->GetParameterBySemantic(NULL,"TextureHeight");
-    m_pAlphaFactorParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"AlphaFactor");
-    m_pPoissonBlurKernelParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"PoissonBlurKernel");
-    m_pGlowIntensityParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"GlowIntensity");
-
-    //m_pParallaxHeight = l_pD3DEffect->GetParameterBySemantic(NULL,"TextureWidth");
-    m_pSpecularActiveParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"SpecularActive");
-    m_pGlossiness    = l_pD3DEffect->GetParameterBySemantic(NULL,"Glossiness");
-    m_pSpecularLevel = l_pD3DEffect->GetParameterBySemantic(NULL,"SpecularLevel");
-    m_pBump          = l_pD3DEffect->GetParameterBySemantic(NULL,"BumpAmount");
-    m_pEnvironmentIntensityParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"EnvironmentIntensity");
-    m_pSpriteSizeParameter = l_pD3DEffect->GetParameterBySemantic(NULL,"SpriteSize");
-
-    m_bSemanticsUpdated = false;
-  }
-
-  //Parametres Especulars
   if(m_bSpecularUpdated)
   {
-    l_pD3DEffect->SetBool(m_pSpecularActiveParameter,(BOOL)m_bSpecularActive);
+    _pEffect->SetValue("SpecularActive", (BOOL)m_bSpecularActive);
     m_bSpecularUpdated = false;
   }
 
   if(m_bEnvironmentUpdated)
   {
-    l_pD3DEffect->SetFloat(m_pEnvironmentIntensityParameter,    m_fEnvironmentIntensity);
+    _pEffect->SetValue("EnvironmentIntensity", m_fEnvironmentIntensity);
     m_bEnvironmentUpdated = false;
   }
 
   if(m_bSpecularParamsUpdated)
   {
-    l_pD3DEffect->SetFloat(m_pGlossiness,    m_fGlossiness);
-    l_pD3DEffect->SetFloat(m_pSpecularLevel, m_fSpecularLevel);
+    _pEffect->SetValue("Glossiness", m_fGlossiness);
+    _pEffect->SetValue("SpecularLevel", m_fSpecularLevel);
     m_bSpecularParamsUpdated = false;
   }
 
@@ -329,18 +238,18 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
       }
     }
 
-    l_pD3DEffect->SetFloatArray   (m_pAmbientLight,                        l_aAmbientLight,                 3);
-    l_pD3DEffect->SetBoolArray    (m_pLightsEnabledParameter,      (BOOL*) l_aLightsEnabled,                MAX_LIGHTS_BY_SHADER);
-    l_pD3DEffect->SetIntArray     (m_pLightsTypeParameter,                 l_aLightsType,                   l_iNumOfLights);
-    l_pD3DEffect->SetFloatArray   (m_pLightsAngleParameter,                l_aLightsAngle,                  l_iNumOfLights);
-    l_pD3DEffect->SetFloatArray   (m_pLightsFallOffParameter,              l_aLightsFallOff,                l_iNumOfLights);
-    l_pD3DEffect->SetFloatArray   (m_pLightsStartRangeAttenuationParameter,l_aLightsStartRangeAttenuation,  l_iNumOfLights);
-    l_pD3DEffect->SetFloatArray   (m_pLightsEndRangeAttenuationParameter,  l_aLightsEndRangeAttenuation,    l_iNumOfLights);
-    l_pD3DEffect->SetFloatArray   (m_pLightsPositionParameter,     (float*)l_aLightsPosition,               l_iNumOfLights * 3);
-    l_pD3DEffect->SetFloatArray   (m_pLightsDirectionParameter,    (float*)l_aLightsDirection,              l_iNumOfLights * 3);
-    l_pD3DEffect->SetFloatArray   (m_pLightsColorParameter,        (float*)l_aLightsColor,                  l_iNumOfLights * 4);
-    l_pD3DEffect->SetBoolArray    (m_pShadowsEnabledParameter,      (BOOL*)l_aShadowsEnabled,               l_iNumOfLights);
-    l_pD3DEffect->SetBoolArray    (m_pDynamicObjectsOnly,           (BOOL*)l_aDynamicObjectsOnly,           l_iNumOfLights);
+    _pEffect->SetValue("AmbientLight", l_aAmbientLight, 3);
+    _pEffect->SetValue("LightsEnabled", (BOOL*) l_aLightsEnabled, MAX_LIGHTS_BY_SHADER);
+    _pEffect->SetValue("LightsType", l_aLightsType, l_iNumOfLights);
+    _pEffect->SetValue("LightsAngleCos", l_aLightsAngle, l_iNumOfLights);
+    _pEffect->SetValue("LightsFallOffCos", l_aLightsFallOff, l_iNumOfLights);
+    _pEffect->SetValue("LightsStartRangeSQ",l_aLightsStartRangeAttenuation,  l_iNumOfLights);
+    _pEffect->SetValue("LightsEndRangeSQ", l_aLightsEndRangeAttenuation, l_iNumOfLights);
+    _pEffect->SetValue("LightsPosition", (float*)l_aLightsPosition, l_iNumOfLights * 3);
+    _pEffect->SetValue("LightsDirection", (float*)l_aLightsDirection, l_iNumOfLights * 3);
+    _pEffect->SetValue("LightsColor", (float*)l_aLightsColor, l_iNumOfLights * 4);
+    _pEffect->SetValue("ShadowEnabled", (BOOL*)l_aShadowsEnabled, l_iNumOfLights);
+    _pEffect->SetValue("DynamicObjectsOnly", (BOOL*)l_aDynamicObjectsOnly, l_iNumOfLights);
    
     m_bLightsUpdated = false;
   }
@@ -365,177 +274,110 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
       memcpy(&l_mMatrix[l_iB*3*4], &l_mTransformation[l_iB],sizeof(float)*3*4);
     }
 
-    l_pD3DEffect->SetFloatArray(m_pBonesParameter, (float *)l_mMatrix,(m_pCalHardwareModel->getBoneCount())*3*4);
+    _pEffect->SetValue("Bones", (float *)l_mMatrix,(m_pCalHardwareModel->getBoneCount())*3*4);
     
     m_bSkeletonUpdated = false;
   }
 
   if(m_bWorldMatrixUpdated)
   {
-    l_pD3DEffect->SetMatrix(m_pWorldMatrixParameter, &(m_mWorldMatrix.GetD3DXMatrix()));
+    _pEffect->SetValue("World",m_mWorldMatrix);
     m_bWorldMatrixUpdated = false;
   }
 
   if(m_bProjectionMatrixUpdated)
   {
-    l_pD3DEffect->SetMatrix(m_pProjectionMatrixParameter, &(m_mProjectionMatrix.GetD3DXMatrix()));
+     _pEffect->SetValue("Projection", m_mProjectionMatrix);
     m_bProjectionMatrixUpdated = false;
   }
 
   if(m_bViewMatrixUpdated)
   {
-    l_pD3DEffect->SetMatrix(m_pViewMatrixParameter, &(m_mViewMatrix.GetD3DXMatrix()));
+    _pEffect->SetValue("View", m_mViewMatrix);
     m_bViewMatrixUpdated = false;
   }
 
   if(m_bLightViewMatrixUpdated)
   {
-    D3DXMATRIX  l_ViewToLightProjectionMatrix = m_mViewMatrix.GetD3DXMatrix();
-    D3DXMatrixInverse(&l_ViewToLightProjectionMatrix, NULL, &l_ViewToLightProjectionMatrix);
-    l_ViewToLightProjectionMatrix = l_ViewToLightProjectionMatrix * m_mLightViewMatrix.GetD3DXMatrix();
-    l_ViewToLightProjectionMatrix = l_ViewToLightProjectionMatrix * m_mShadowProjectionMatrix.GetD3DXMatrix();
-    l_pD3DEffect->SetMatrix(m_pViewToLightProjectionMatrixParameter, &l_ViewToLightProjectionMatrix);
+    Mat44f l_ViewToLightProjectionMatrix = m_mViewMatrix.GetInverted();
+    l_ViewToLightProjectionMatrix = l_ViewToLightProjectionMatrix * m_mLightViewMatrix;
+    m_mLightViewMatrix = m_mLightViewMatrix * m_mShadowProjectionMatrix;
+    _pEffect->SetValue("ViewToLightProjection", l_ViewToLightProjectionMatrix);
     m_bLightViewMatrixUpdated = false;
   }
   
   if(m_bCameraEyeUpdated)
   {
-    const float l_vfPos[3] = {m_vCameraEye.x,m_vCameraEye.y,m_vCameraEye.z};
-    l_pD3DEffect->SetFloatArray(m_pCameraPositionParameter,l_vfPos,3);
+    _pEffect->SetValue("CameraPosition",m_vCameraEye);
     m_bCameraEyeUpdated = false;
   }
   
   if(m_bCameraUpUpdated)
   {
-    const float l_vfUp[3] = {m_vCameraUp.x,m_vCameraUp.y,m_vCameraUp.z};
-    l_pD3DEffect->SetFloatArray(m_pCameraUpParameter,l_vfUp,3);
+    _pEffect->SetValue("CameraUp",m_vCameraUp);
     m_bCameraUpUpdated = false;
   }
   
   if(m_bCameraRightUpdated)
   {
-    const float l_vfRight[3] = {m_vCameraRight.x,m_vCameraRight.y,m_vCameraRight.z};
-    l_pD3DEffect->SetFloatArray(m_pCameraRightParameter,l_vfRight,3);
+    _pEffect->SetValue("CameraRight",m_vCameraRight);
     m_bCameraRightUpdated = false;
   }
 
   if(m_bViewProjectionMatrixUpdated)
   {
-    l_pD3DEffect->SetMatrix(m_pViewProjectionMatrixParameter, &(GetViewProjectionMatrix().GetD3DXMatrix()));
+    _pEffect->SetValue("ViewProjection", GetViewProjectionMatrix());
     m_bViewProjectionMatrixUpdated = false;
   }
 
   if(m_bWorldViewMatrixUpdated)
   {
-    l_pD3DEffect->SetMatrix(m_pWorldViewMatrixParameter, &(GetWorldViewMatrix().GetD3DXMatrix()));
+    _pEffect->SetValue("WorldView", GetWorldViewMatrix());
     m_bWorldViewMatrixUpdated = false;
   }
   
   if(m_bWorldViewProjectionMatrixUpdated)
   {
-    l_pD3DEffect->SetMatrix(m_pWorldViewProjectionMatrixParameter, &(GetWorldViewProjectionMatrix().GetD3DXMatrix()));
+    _pEffect->SetValue("WorldViewProjection", GetWorldViewProjectionMatrix());
     m_bWorldViewProjectionMatrixUpdated = false;
   }
   
   if(m_bTextureWidthHeightUpdated)
   {
-    l_pD3DEffect->SetInt(m_pTextureWidth,m_iTextureWidth);
-    l_pD3DEffect->SetInt(m_pTextureHeight,m_iTextureHeight);
+    _pEffect->SetValue("TextureWidth",m_iTextureWidth);
+    _pEffect->SetValue("TextureHeight",m_iTextureHeight);
     m_bTextureWidthHeightUpdated = false;
   }
 
   if(m_bAlphaFactorUpdated)
   {
-    l_pD3DEffect->SetFloat(m_pAlphaFactorParameter,m_fAlphaFactor);
+    _pEffect->SetValue("AlphaFactor",m_fAlphaFactor);
     m_bAlphaFactorUpdated = false;
   }
 
   if(m_bPoissonBlurKernelUpdated)
   {
-    l_pD3DEffect->SetFloatArray(m_pPoissonBlurKernelParameter, m_pfPoissonBlurKernel, 32);
+    _pEffect->SetValue("PoissonBlurKernel", m_pfPoissonBlurKernel, 32);
     m_bPoissonBlurKernelUpdated = false;
   }
 
   if(m_bGlowUpdated)
   {
-    l_pD3DEffect->SetBool(m_pGlowActiveParameter,(BOOL)m_bGlowActive);
-    l_pD3DEffect->SetFloat(m_pGlowIntensityParameter,(FLOAT)m_fGlowIntensity);
+    _pEffect->SetValue("GlowActive",(BOOL)m_bGlowActive);
+    _pEffect->SetValue("GlowIntensity",m_fGlowIntensity);
     m_bGlowUpdated = false;
-  }
-
-  if(m_bBumpUpdated)
-  {
-    l_pD3DEffect->SetFloat(m_pBump,(FLOAT)m_fBump);
-    m_bBumpUpdated = false;
   }
 
   if(m_bSpriteSizeUpdated)
   {
-    l_pD3DEffect->SetFloatArray(m_pSpriteSizeParameter, (FLOAT*)&m_vSpriteSize, 2);
+    _pEffect->SetValue("SpriteSize",(FLOAT*)&m_vSpriteSize, 2);
   }
   
   if(m_bTimeUpdated)
   {
-    l_pD3DEffect->SetFloat(m_pTimeParameter,(FLOAT)m_fTime);
+    _pEffect->SetValue("Time",m_fTime);
   }
 }
-
-CEffect* CEffectManager::ActivateMaterial(CMaterial* _pMaterial)
-{
-  CEffect* l_pEffect = 0;
-  
-  int l_iMaterialType = _pMaterial->GetMaterialType();
-  bool l_bStaticMesh = (l_iMaterialType & ANIMATED_MESH_MATERIAL_MASK) == 0;
-  bool l_bAnimatedMesh = (l_iMaterialType & ANIMATED_MESH_MATERIAL_MASK) > 0;
-
-  if(l_bStaticMesh && m_pForcedStaticMeshEffect)
-  {
-    l_pEffect = m_pForcedStaticMeshEffect;
-  }
-
-  if(l_bAnimatedMesh && m_pForcedAnimatedModelEffect)
-  {
-    l_pEffect = m_pForcedAnimatedModelEffect;
-  }
-
-  if(!l_pEffect || !l_pEffect->IsOk())
-  {
-    l_pEffect = GetResource(m_DefaultEffectMap[l_iMaterialType]);
-
-    if(l_pEffect && l_pEffect->IsOk())
-    {
-      float l_fParallax = _pMaterial->GetParallaxHeight();
-      SetBump(_pMaterial->GetBump());
-
-    }else{
-      l_pEffect = GetResource("White");
-    }
-  }
-
-  if(l_pEffect)
-  {
-    SetGlow((l_iMaterialType & GLOW_MATERIAL_MASK) > 0);
-    if(m_bGlowActive)
-    {
-      SetGlowIntensity(_pMaterial->GetGlowIntensity());
-    }
-
-    SetSpecular((l_iMaterialType & SPECULARMAP_MATERIAL_MASK) > 0);
-
-    SetSpecularParams(_pMaterial->GetGlossiness(), _pMaterial->GetSpecularFactor());
-
-    SetEnvironmentIntensity(_pMaterial->GetEnvironmentIntensity());
-
-    SetSpriteSize(_pMaterial->GetSpriteSize());
-
-    _pMaterial->Activate(l_pEffect->GetTextureMask());
-
-    LoadShaderData(l_pEffect);
-  }
-
-  return l_pEffect;
-}
-
 
 void CEffectManager::ActivateDefaultRendering(void)
 {

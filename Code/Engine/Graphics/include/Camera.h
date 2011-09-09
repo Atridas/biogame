@@ -19,7 +19,7 @@ public:
 
 public:
 
-	CCamera(float zn, float zf, float fov, float aspect, CObject3D* object3D, ETypeCamera typeCamera);
+	CCamera(float zn, float zf, float fov, float aspect, const CObject3D* object3D, ETypeCamera typeCamera);
 	CCamera();
 	virtual ~CCamera(){ m_pObject3D = NULL; }
 
@@ -28,7 +28,7 @@ public:
 	virtual Vect3f					GetLookAt			   () const = 0;
 	virtual Vect3f					GetEye				   () const = 0;
 	virtual Vect3f					GetVecUp			   () const = 0;
-	CObject3D*				      GetObject3D	     () {return m_pObject3D;}
+	//CObject3D*				GetObject3D	     () {return m_pObject3D;}
 	const CObject3D*				GetObject3D	     () const {return m_pObject3D;}
 	float										GetZf						 () const { return m_fZFar;}
 	float										GetZn						 () const { return m_fZNear;}
@@ -39,8 +39,8 @@ public:
 
 	//--- SET FUNCTIONS ---
 	void										SetZn						 (float amount )	{ m_fZNear = amount; }
-	void										SetZf						 (float amount )	{ m_fZFar = amount; }
-	void										SetObject3D			 (CObject3D* object3D )	{ m_pObject3D = object3D;}
+	void										SetZf						 (float amount )	{ m_fZFar  = amount; }
+	void										SetObject3D			 (const CObject3D* object3D )	{ m_pObject3D = object3D;}
 
 	//--- ADD FUNCTIONS ---
 	void										AddZf						 (float amount )			{ m_fZFar += amount; }
@@ -49,8 +49,9 @@ public:
 	void										AddViewD				 (float amount )			{ if( m_fView_d + amount > 1) m_fView_d += amount; }
 
 protected:
+	void										SetFov	  			 (float amount )	{ m_fFOV   = amount; }
 
-	CObject3D*	m_pObject3D;
+	const CObject3D*	m_pObject3D;
 	float				m_fView_d;					// variable de debug utilizada para pintar el objeto de la camara.	
 	float				m_fFOV;
 	float				m_fAspectRatio;

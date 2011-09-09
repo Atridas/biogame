@@ -3,7 +3,7 @@
 #include "Assert.h"
 #include "Math\MathUtils.h"
 
-CCamera::CCamera(float zn, float zf, float fov, float aspect, CObject3D* object3D, ETypeCamera typeCamera)
+CCamera::CCamera(float zn, float zf, float fov, float aspect, const CObject3D* object3D, ETypeCamera typeCamera)
 : m_pObject3D(object3D)
 ,	m_fFOV(fov)
 ,	m_fAspectRatio(aspect)

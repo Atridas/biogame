@@ -306,9 +306,6 @@
     <ClCompile Include="InstanceMesh.cpp">
       <Filter>RenderableObject\InstanceMesh</Filter>
     </ClCompile>
-    <ClCompile Include="RenderableObject.cpp">
-      <Filter>RenderableObject</Filter>
-    </ClCompile>
     <ClCompile Include="AnimatedCoreModel.cpp">
       <Filter>AnimatedModel\AnimatedCoreModel</Filter>
     </ClCompile>
@@ -443,6 +440,9 @@
     </ClCompile>
     <ClCompile Include="FrameBufferInputSampler.cpp">
       <Filter>Renderer\InputSampler\FrameBufferInputSampler</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableObject.cpp">
+      <Filter>RenderableObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

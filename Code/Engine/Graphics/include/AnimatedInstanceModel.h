@@ -10,8 +10,7 @@
 class CRenderManager;
 class CalModel;
 class CAnimatedCoreModel;
-class CEffectMaterial;
-class CEffectTechnique;
+class CEffect;
 // ----------------------------------
 
 
@@ -42,7 +41,7 @@ public:
    * Aquest mètode s'encarregarà de fer un pintat del model especificat via hardware, sense càlculs adicionals.
    * @param _pRM RenderManager.
   **/
-  void Render                 (CRenderManager *_pRM);
+  void Render                 (CRenderManager *_pRM, const vector<CEffect*>& _vEffects);
   /**
    * Mètode de pintat per pantalla via software.
    * Aquest mètode s'encarregarà de fer un pintat del model especificat via software, efectuant els càlculs a RAM.

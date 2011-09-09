@@ -18,7 +18,7 @@ class CRoom;
 
 class CEmiterInstance:
    public CBaseControl,
-   public CRenderableObject3D
+   public CObject3DRenderable
 {
 public:
   CEmiterInstance():
@@ -50,7 +50,7 @@ public:
   void ChangePos(const CObject3D& _Position)  {SetMat44(_Position.GetMat44());};
 
   void Update(float _fDeltaTime);
-  void Render(CRenderManager* _pRM) { Mat44f m; m.SetIdentity(); Render(_pRM,m); };
+  void Render(CRenderManager* _pRM, const vector<CEffect*>& _vEffects) { assert(_vEffects.size() == 1); Mat44f m; m.SetIdentity(); Render(_pRM,_vEffects[0],m); };
   void DebugRender(CRenderManager* _pRM, bool _bRenderBoundingSphere = false) { Mat44f m; m.SetIdentity(); DebugRender(_pRM,m,_bRenderBoundingSphere); };
   
   void Activate() { m_bActive = true; Reset(); }
@@ -59,12 +59,14 @@ public:
   void SetReference(CObject3D* _pObjectReference) {_pObjectReference = m_pObjectReference;};
   void SetRoom(CRoom* _pRoom) { m_pInRoom = _pRoom; };
 
+  virtual const vector<CMaterial*>& GetMaterials() const;
+
 protected:
   virtual void Release();
 
 private:
   void DebugRender(CRenderManager* _pRM, const Mat44f& _mTransform, bool _bRenderBoundingSphere);
-  void Render(CRenderManager* _pRM, const Mat44f& _mTransform);
+  void Render(CRenderManager* _pRM, CEffect* _pEffect, const Mat44f& _mTransform);
 
   bool         m_bActive;
   

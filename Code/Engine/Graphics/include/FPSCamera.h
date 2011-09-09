@@ -17,9 +17,11 @@ class CFPSCamera: public CCamera
 
 public:
 
-	CFPSCamera(float zn, float zf, float fov, float aspect, CObject3D* object3D);
+  CFPSCamera(float zn, float zf, float fov, float aspect, const CObject3D* object3D): CCamera( zn, zf, fov, aspect, object3D, TC_FPS) {};
 	CFPSCamera();
 	virtual ~CFPSCamera(){/*Nothing*/;}
+
+  void Init(float zn, float zf, float fov, float aspect, const CObject3D* object3D);
 
 	//---Interfaz de CCamera
 	virtual Vect3f					GetDirection		() const;

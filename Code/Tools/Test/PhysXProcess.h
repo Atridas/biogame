@@ -28,7 +28,7 @@ public:
 
 	void                  Update                  (float elapsedTime);
 	void					        DebugInformation        (float FPS);
-  void                  RenderScene             (CRenderManager* _pRM);
+  //void                  RenderScene             (CRenderManager* _pRM);
   void                  RenderINFO              (CRenderManager* _pRM);
   void                  RenderPhysX             (CRenderManager* _pRM, CRenderableObject* _pRO, Mat44f _mMatTransf);
   void                  RenderImpacts           (CRenderManager* _pRM);

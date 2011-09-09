@@ -6,6 +6,8 @@
 #include "base.h"
 #include "Light.h"
 
+class CFPSCamera;
+
 class CDirectionalLight : public CLight
 {
 public:
@@ -22,6 +24,7 @@ public:
   Vect3f GetDirection() const {return m_vDirection;};
   virtual void Render(CRenderManager *RM) const;
 
+  void   SetFPSCamera(CFPSCamera& Camera_) const;
   Mat44f GetLightViewMatrix()       const;
   Mat44f GetLightProjectionMatrix() const;
 

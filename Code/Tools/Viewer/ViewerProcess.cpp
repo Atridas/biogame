@@ -5,7 +5,6 @@
 #include "InputManager.h"
 #include "RenderManager.h"
 #include "RenderableObjectsManager.h"
-
 #include "LightManager.h"
 
 #include "ScriptManager.h"
@@ -128,8 +127,8 @@ void CViewerProcess::RegisterLuaFunctions()
       .def("previous_animation",  &CViewer::SetPrevAnimation)
     ];
 
-  CORE->GetScriptManager()->RunCode("VIEWER_PROCESS = ENGINE:get_active_process()");
-  CORE->GetScriptManager()->RunCode("VIEWER         = VIEWER_PROCESS:get_viewer()");
+  //CORE->GetScriptManager()->RunCode("VIEWER_PROCESS = ENGINE:get_active_process()");
+  //CORE->GetScriptManager()->RunCode("VIEWER         = VIEWER_PROCESS:get_viewer()");
 }
 
 void CViewerProcess::ResetViewer() 
@@ -143,38 +142,5 @@ void CViewerProcess::ResetViewer()
 
 void CViewerProcess::ToggleNormalRendering()
 {
-  m_pViewer->ToggleNormalRendering();
 
-  switch(m_pViewer->GetNormalRendering())
-  {
-  case CViewer::NORMALS:
-    m_pStaticMeshEffect = CORE->GetEffectManager()->GetEffect("ShowNormals");
-    m_pAnimatedMeshEffect = CORE->GetEffectManager()->GetEffect("AnimatedShowNormals");
-    break;
-  case CViewer::NORMALMAP:
-    m_pStaticMeshEffect = CORE->GetEffectManager()->GetEffect("ShowNormalmap");
-    m_pAnimatedMeshEffect = CORE->GetEffectManager()->GetEffect("AnimatedShowNormalmap");
-    break;
-  case CViewer::FLAT_NORMALMAP:
-    m_pStaticMeshEffect = CORE->GetEffectManager()->GetEffect("ShowFlatNormalmap");
-    m_pAnimatedMeshEffect = CORE->GetEffectManager()->GetEffect("AnimatedShowFlatNormalmap");
-    break;
-  case CViewer::TANGENT:
-    m_pStaticMeshEffect = CORE->GetEffectManager()->GetEffect("ShowTangent");
-    m_pAnimatedMeshEffect = CORE->GetEffectManager()->GetEffect("AnimatedShowTangent");
-    break;
-  case CViewer::COTANGENT:
-    m_pStaticMeshEffect = CORE->GetEffectManager()->GetEffect("ShowBitangent");
-    m_pAnimatedMeshEffect = CORE->GetEffectManager()->GetEffect("AnimatedShowBitangent");
-    break;
-  case CViewer::UV_COORDS:
-    m_pStaticMeshEffect = CORE->GetEffectManager()->GetEffect("ShowUVCoords");
-    m_pAnimatedMeshEffect = CORE->GetEffectManager()->GetEffect("AnimatedShowUVCoords");
-    break;
-  case CViewer::NO_NORMALS:
-  default:
-    m_pStaticMeshEffect = 0;
-    m_pAnimatedMeshEffect = 0;
-    break;
-  }
 }

@@ -53,12 +53,12 @@ void CRenderToTextureSceneEffect::PreRender(CRenderManager* _pRM, CProcess* _pPr
   _pRM->SetupMatrices(_pProc->GetCamera());
   m_pTexture->SetAsRenderTarget();
 
-  l_pEffectManager->SetForcedStaticMeshEffect(m_pStaticMeshEffect);
-  l_pEffectManager->SetForcedAnimatedModelEffect(m_pAnimatedModelEffect);
+  //l_pEffectManager->SetForcedStaticMeshEffect(m_pStaticMeshEffect);
+  //l_pEffectManager->SetForcedAnimatedModelEffect(m_pAnimatedModelEffect);
 
-  _pRM->BeginRendering();
-  _pProc->RenderScene(_pRM);
-  _pRM->EndRendering();
+  //_pRM->BeginRendering();
+  //_pProc->RenderScene(_pRM);
+  //_pRM->EndRendering();
 
   m_pTexture->UnsetAsRenderTarget();
 }

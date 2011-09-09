@@ -151,6 +151,7 @@ void CIAProcess::UpdateIA(float _fDT)
   }
 }
 
+/*
 void CIAProcess::RenderScene(CRenderManager* _pRM)
 {
   CORE->GetRenderableObjectsManager()->Render(_pRM);
@@ -203,7 +204,7 @@ void CIAProcess::RenderScene(CRenderManager* _pRM)
     }
   }
 }
-
+*/
 void CIAProcess::RenderINFO(CRenderManager* _pRM)
 {
 

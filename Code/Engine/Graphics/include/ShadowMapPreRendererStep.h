@@ -3,6 +3,7 @@
 #define __SHADOW_MAP_PRE_SCENE_RENDERER_STEP_H__
 
 #include "PreSceneRendererStep.h"
+#include "FPSCamera.h"
 
 class CXMLTreeNode;
 class CLight;
@@ -16,7 +17,8 @@ public:
 
   bool Init(CXMLTreeNode& _treePreSceneRenderer);
 
-  virtual void Render(CProcess* _pProcess);
+  virtual void SetViewProjectionMatrices(CRenderManager* _pRM);
+  virtual void Render(CRenderManager* _pRM, CCamera* _pCamera);
 
   void SetShadowMapLightCast(CLight* _pLight) {m_pLightShadowCast = _pLight;};
 
@@ -26,6 +28,8 @@ protected:
 private:
 
   CLight* m_pLightShadowCast;
+
+  CFPSCamera m_FPSCamera;
 };
 
 #endif

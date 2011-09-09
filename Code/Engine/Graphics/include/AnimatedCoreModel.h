@@ -61,7 +61,7 @@ public:
   **/
   //size_t GetNumTextures                 ( ) const                   { return m_vTextureFilenameList.size(); };
 
-  const vector<CMaterial*>& GetMaterials        () const      { return m_vMaterials;};
+  const vector<CMaterial*>& GetMaterials() const { return m_vMaterials;};
 
   /**
    * Getter del model cal3d.

@@ -4,12 +4,6 @@
 #include "base.h"
 #include "AnimatedModelManager.h"
 
-
-CRenderableAnimatedInstanceModel::CRenderableAnimatedInstanceModel(const string& _szName): CRenderableObject(_szName)
-{
-  
-}
-
 bool CRenderableAnimatedInstanceModel::Init(const string& _szCoreName)
 {
   if(_szCoreName != "") 
@@ -57,10 +51,10 @@ void CRenderableAnimatedInstanceModel::InitFromXML(CXMLTreeNode& l_XMLObject)
   }
 }
 
-void CRenderableAnimatedInstanceModel::RenderRenderableObject(CRenderManager* _pRM)
+void CRenderableAnimatedInstanceModel::RenderRenderableObject(CRenderManager* _pRM, const vector<CEffect*>& _vEffects)
 {
   if(m_pAnimatedInstanceModel)
-    m_pAnimatedInstanceModel->Render(_pRM);
+    m_pAnimatedInstanceModel->Render(_pRM, _vEffects);
 }
 
 
@@ -75,6 +69,5 @@ void CRenderableAnimatedInstanceModel::Update(float _fElapsedTime)
   if(m_pAnimatedInstanceModel)
   {
     m_pAnimatedInstanceModel->Update(_fElapsedTime);
-    //CRenderableObject::Update(_fElapsedTime);
   }
 }

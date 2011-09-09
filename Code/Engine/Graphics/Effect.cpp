@@ -152,3 +152,65 @@ void CEffect::ActivateInstancedRendering()
     m_pD3DEffect->SetTechnique( m_pD3DInstancedTechnique );
   }
 };
+
+void CEffect::SetValue(const string& _szParameterName,int _iValue)
+{
+  D3DXHANDLE l_pParameter = 0;
+  l_pParameter = m_pD3DEffect->GetParameterBySemantic(NULL,_szParameterName.c_str());
+
+  if(l_pParameter)
+  {
+    m_pD3DEffect->SetInt(l_pParameter,_iValue);
+  }
+}
+
+void CEffect::SetValue(const string& _szParameterName,float _fValue)
+{
+  D3DXHANDLE l_pParameter = 0;
+  l_pParameter = m_pD3DEffect->GetParameterBySemantic(NULL,_szParameterName.c_str());
+
+  if(l_pParameter)
+  {
+    m_pD3DEffect->SetFloat(l_pParameter,_fValue);
+  }
+}
+
+void CEffect::SetValue(const string& _szParameterName,Vect3f& _vValue)
+{
+  float l_vVector[3] = {_vValue.x,_vValue.y,_vValue.z};
+
+  SetValue(_szParameterName,l_vVector,3);
+}
+
+void CEffect::SetValue(const string& _szParameterName,Mat44f _matValue)
+{
+  D3DXHANDLE l_pParameter = 0;
+  l_pParameter = m_pD3DEffect->GetParameterBySemantic(NULL,_szParameterName.c_str());
+
+  if(l_pParameter)
+  {
+    m_pD3DEffect->SetMatrix(l_pParameter,&(_matValue.GetD3DXMatrix()));
+  }
+}
+
+void CEffect::SetValue(const string& _szParameterName,int _iValue[], uint32 _uiSize)
+{
+  D3DXHANDLE l_pParameter = 0;
+  l_pParameter = m_pD3DEffect->GetParameterBySemantic(NULL,_szParameterName.c_str());
+
+  if(l_pParameter)
+  {
+    m_pD3DEffect->SetIntArray(l_pParameter,_iValue,_uiSize);
+  }
+}
+
+void CEffect::SetValue(const string& _szParameterName,float _fValue[], uint32 _uiSize)
+{
+  D3DXHANDLE l_pParameter = 0;
+  l_pParameter = m_pD3DEffect->GetParameterBySemantic(NULL,_szParameterName.c_str());
+
+  if(l_pParameter)
+  {
+    m_pD3DEffect->SetFloatArray(l_pParameter,_fValue,_uiSize);
+  }
+}

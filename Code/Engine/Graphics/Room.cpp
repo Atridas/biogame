@@ -137,11 +137,58 @@ void CRoom::Render(CRenderManager* _pRM, const CFrustum& _Frustum, TBlendQueue& 
         {
           if(l_pRenderableObject->IsAlphaBlended())
           {
+            //_BlendQueue.push(l_pRenderableObject);
+          }
+          else
+          {
+            //l_pRenderableObject->Render(_pRM);
+          }
+        }
+      }
+    }
+  }
+  {
+    set<CEmiterInstance*>::const_iterator l_it  = m_Emiters.cbegin();
+    set<CEmiterInstance*>::const_iterator l_end = m_Emiters.cend();
+
+    for(; l_it != l_end; ++l_it)
+    {
+      CEmiterInstance* l_pEmiter = *l_it;
+      Vect3f l_Center = l_pEmiter->GetBoundingSphere()->GetMiddlePoint() + l_pEmiter->GetPosition();
+      D3DXVECTOR3 l_d3Center(l_Center.x,l_Center.y,l_Center.z);
+
+      if(_Frustum.SphereVisible(l_d3Center, l_pEmiter->GetBoundingSphere()->GetRadius()))
+      {
+        _EmiterQueue.push(l_pEmiter);
+      }
+    }
+  }
+}
+
+
+void CRoom::GetRenderedObjects(const CFrustum& _Frustum, vector<CRenderableObject*>& OpaqueObjects_, TBlendQueue& _BlendQueue, TBlendQueue& _EmiterQueue) const
+{
+  {
+    set<CRenderableObject*>::const_iterator l_it  = m_RenderableObjects.cbegin();
+    set<CRenderableObject*>::const_iterator l_end = m_RenderableObjects.cend();
+
+    for(; l_it != l_end; ++l_it)
+    {
+      CRenderableObject* l_pRenderableObject = *l_it;
+      if(l_pRenderableObject->GetVisible())
+      {
+        Vect3f l_Center = l_pRenderableObject->GetBoundingSphere()->GetMiddlePoint() + l_pRenderableObject->GetPosition();
+        D3DXVECTOR3 l_d3Center(l_Center.x,l_Center.y,l_Center.z);
+
+        if(_Frustum.SphereVisible(l_d3Center, l_pRenderableObject->GetBoundingSphere()->GetRadius()))
+        {
+          if(l_pRenderableObject->IsAlphaBlended())
+          {
             _BlendQueue.push(l_pRenderableObject);
           }
           else
           {
-            l_pRenderableObject->Render(_pRM);
+            OpaqueObjects_.push_back( l_pRenderableObject );
           }
         }
       }

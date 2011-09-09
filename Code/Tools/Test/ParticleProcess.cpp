@@ -142,6 +142,7 @@ void CParticleProcess::Update(float _fElapsedTime)
   }
 }
 
+/*
 void CParticleProcess::RenderScene(CRenderManager* _pRM)
 {
 
@@ -158,7 +159,7 @@ void CParticleProcess::RenderScene(CRenderManager* _pRM)
  
   
 }
-
+*/
 void CParticleProcess::RenderINFO(CRenderManager* _pRM)
 {
   

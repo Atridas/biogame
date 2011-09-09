@@ -122,10 +122,14 @@ Mat33f GetRotationFromOrientationToOrientation(
 
 
 class CRenderManager;
+class CEffect;
+class CMaterial;
+
 class IRenderable
 {
 public:
-  virtual void Render(CRenderManager *_pRM) = 0;
+  virtual void Render(CRenderManager *_pRM, const vector<CEffect*>& _vEffects) = 0;
+  virtual const vector<CMaterial*>& GetMaterials() const = 0;
 };
 
 #endif

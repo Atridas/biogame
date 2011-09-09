@@ -20,7 +20,7 @@
 #include "ScriptManager.h"
 #include "ActionManager.h"
 #include "Material.h"
-
+#include "Renderer.h"
 #include "Utils/MemLeaks.h"
 
 
@@ -461,6 +461,8 @@ void CViewer::Update(const float _fElapsedTime)
     break;
   }
 
+  CORE->GetRenderableObjectsManager()->Update(_fElapsedTime);
+
   m_vMouseDelta = 0;
 }
 
@@ -665,6 +667,32 @@ void CViewer::ToggleNormalRendering()
     l_iNormalRendering = 0;
   }
   m_eNormalRendering = (ENormalModes)l_iNormalRendering;
+
+  switch(m_eNormalRendering)
+  {
+  case CViewer::NORMALS:
+    CORE->GetRenderer()->SetSceneRenderer("show_normals_renderer");
+    break;
+  case CViewer::NORMALMAP:
+    CORE->GetRenderer()->SetSceneRenderer("show_normalmap_renderer");
+    break;
+  case CViewer::FLAT_NORMALMAP:
+    CORE->GetRenderer()->SetSceneRenderer("show_flat_normalmap_renderer");
+    break;
+  case CViewer::TANGENT:
+    CORE->GetRenderer()->SetSceneRenderer("show_tangent_renderer");
+    break;
+  case CViewer::COTANGENT:
+    CORE->GetRenderer()->SetSceneRenderer("show_bitangent_renderer");
+    break;
+  case CViewer::UV_COORDS:
+    CORE->GetRenderer()->SetSceneRenderer("show_uv_coords_renderer");
+    break;
+  case CViewer::NO_NORMALS:
+  default:
+    CORE->GetRenderer()->SetSceneRenderer("forward_renderer");
+    break;
+  }
 }
 
 void CViewer::ToggleShowBoxes()
@@ -1019,11 +1047,17 @@ void CViewer::DecrementBumpAnimated()
 
 bool CViewer::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
 {
-  //if(strcmp(_pcAction, "ChangeMode") == 0)
-  //{
-  //  SetNextMode(); 
-  //  return true;
-  //}
+  if(strcmp(_pcAction, "setNextMode") == 0)
+  {
+    SetNextMode(); 
+    return true;
+  }
+
+  if(strcmp(_pcAction, "showNormals") == 0)
+  {
+    ToggleNormalRendering(); 
+    return true;
+  }
 
   if(strcmp(_pcAction, "ShowAjuda") == 0)
   {

@@ -147,11 +147,13 @@ void CSoundTestProcess::UpdatePosition(Vect3f& _PosDelta, float _fDeltaPitch, fl
 
 }
 
+/*
 void CSoundTestProcess::RenderScene(CRenderManager* _pRM)
 {
   CORE->GetRenderableObjectsManager()->Render(_pRM);
   CORE->GetLightManager()->Render(_pRM);
 }
+*/
 
 void CSoundTestProcess::RenderINFO(CRenderManager* _pRM)
 {

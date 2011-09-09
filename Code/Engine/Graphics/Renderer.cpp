@@ -9,8 +9,7 @@
 #include "RenderManager.h"
 #include "Process.h"
 #include "EffectManager.h"
-//#include "Console.h"
-//#include "GUIManager.h"
+#include "Camera.h"
 
 bool CRenderer::Init(const string& _szFileName)
 {
@@ -156,6 +155,9 @@ bool CRenderer::Init(const string& _szFileName)
 void CRenderer::Render(CProcess* _pProcess)
 {
   CRenderManager* l_pRM = RENDER_MANAGER;
+
+  m_pCamera = _pProcess->GetCamera();
+
   CEffectManager* l_pEM = CORE->GetEffectManager();
   l_pEM->Begin();
 
@@ -171,7 +173,7 @@ void CRenderer::Render(CProcess* _pProcess)
 
     if(l_pPreSceneRenderer->IsActive())
     {
-      l_pPreSceneRenderer->Render(_pProcess);
+      l_pPreSceneRenderer->Render(l_pRM,m_pCamera);
     }
   }
 
@@ -179,7 +181,7 @@ void CRenderer::Render(CProcess* _pProcess)
 
   if(m_pCurrentSceneRenderer)
   {
-    m_pCurrentSceneRenderer->Render(_pProcess);
+    m_pCurrentSceneRenderer->Render(l_pRM,m_pCamera);
   }
   
 
@@ -192,7 +194,7 @@ void CRenderer::Render(CProcess* _pProcess)
 
     if(l_pPostSceneRenderer->IsActive())
     {
-      l_pPostSceneRenderer->Render(_pProcess);
+      l_pPostSceneRenderer->Render(l_pRM,m_pCamera);
     }
   }
 

@@ -19,7 +19,7 @@ public:
 
   virtual bool          Init              ();
   void                  Update            (float elT);
-  void                  RenderScene       (CRenderManager* _pRM);
+  //void                  RenderScene       (CRenderManager* _pRM);
   void                  RenderINFO        (CRenderManager* _pRM);
   bool                  ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction);
 private:
