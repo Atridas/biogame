@@ -1022,7 +1022,7 @@ ENTITIES
       void Die()
       
       plan_path_to_cobertura
-      void PlanPathToCobertura();
+      bool PlanPathToCobertura();
       
       get_next_node_position
       Vect3f GetNextNodePosition() const;

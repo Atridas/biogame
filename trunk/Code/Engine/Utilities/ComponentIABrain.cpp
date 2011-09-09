@@ -316,8 +316,11 @@ void CComponentIABrain::RunScript()
   }
 }
 
-void CComponentIABrain::PlanPathToCobertura()
+bool CComponentIABrain::PlanPathToCobertura()
 {
+  if(m_pCover)
+    return true;
+
   m_PathToCobertura = CORE->GetIAManager()->GetClosestCobertura(GetEntity()->GetComponent<CComponentObject3D>()->GetPosition());
   
   if( !m_PathToCobertura.empty() )
@@ -330,7 +333,11 @@ void CComponentIABrain::PlanPathToCobertura()
 
     while ((first!=last)&&(first!=--last))
       swap (*first++,*last);
+
+    return true;
   }
+
+  return false;
 }
 
 Vect3f CComponentIABrain::GetNextNodePosition() const

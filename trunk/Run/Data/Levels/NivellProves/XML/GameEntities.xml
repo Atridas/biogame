@@ -4,198 +4,165 @@
     <Object3D position="0.0 0.0 0.193104" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Habitacio3" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Habitacio2">
     <Object3D position="0.0 0.0 0.0861702" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Habitacio2" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="CaixaPetita00">
     <Object3D position="-30.8657 0.0 17.8758" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="CaixaPetita00" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="CaixaGrossa00">
     <Object3D position="-30.4231 0.0 9.9367" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="CaixaGrossa00" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="CaixaPetita01">
     <Object3D position="-30.8622 0.0 16.8709" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="CaixaPetita01" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="CaixaPetita02">
     <Object3D position="-30.9255 0.0 2.69175" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="CaixaPetita02" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="CaixaPetita03">
     <Object3D position="-31.4716 0.0 -2.44387" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="CaixaPetita03" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="CaixaPetita04">
     <Object3D position="-30.8322 -0.00296688 14.1841" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="CaixaPetita04" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="CaixaGrossa01">
     <Object3D position="-30.4231 0.0 4.19834" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="CaixaGrossa01" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="CaixaPetita05">
     <Object3D position="-30.9653 0.0 -1.56407" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="CaixaPetita05" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="CaixaPetita06">
     <Object3D position="-31.4716 1.00344 -2.44405" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="CaixaPetita06" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Wall">
     <Object3D position="-25.5656 0.0 4.80554" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Wall" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="CaixaGrossa02">
     <Object3D position="-22.3861 0.0 4.23714" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="CaixaGrossa02" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="CaixaGrossa03">
     <Object3D position="-31.3156 0.0 -10.6048" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="CaixaGrossa03" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="CaixaPetita08">
     <Object3D position="-31.9764 0.0 -12.1037" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="CaixaPetita08" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="CaixaGrossa04">
     <Object3D position="-31.2776 0.0 -8.27065" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="CaixaGrossa04" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="CaixaPetita09">
     <Object3D position="-30.6888 0.0 -12.3158" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="CaixaPetita09" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="CaixaPetita10">
     <Object3D position="-31.02 0.0 -6.68225" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="CaixaPetita10" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="CaixaPetita11">
     <Object3D position="-31.0784 0.0 -5.56841" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="CaixaPetita11" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Llum">
     <Object3D position="-5.82813 2.0 28.9546" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Llum" />
-    <Explosive />
   </Entity>
   <Entity name="CaixaPetita12">
     <Object3D position="-22.8825 1.00344 5.75414" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="CaixaPetita12" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="CaixaPetita13">
     <Object3D position="-22.8825 0.0 5.75432" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="CaixaPetita13" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="CaixaPetita14">
     <Object3D position="-28.1784 0.0 -3.2059" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="CaixaPetita14" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="CaixaPetita15">
     <Object3D position="-28.1784 1.00344 -3.20607" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="CaixaPetita15" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="CaixaPetita16">
     <Object3D position="-28.6072 0.0 -2.29994" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="CaixaPetita16" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="BoxGlow">
     <Object3D position="-54.6592 0.0376649 7.0358" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="BoxGlow" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="BoxNormal">
     <Object3D position="-54.6592 0.0376649 -5.08054" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="BoxNormal" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="BoxAlpha">
     <Object3D position="-57.4588 0.0376649 -18.0876" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="BoxAlpha" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="BoxSpecular">
     <Object3D position="-54.6592 0.0376649 -36.8326" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="BoxSpecular" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="BoxAlpha01">
     <Object3D position="-50.0065 0.0376649 -24.0954" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="BoxAlpha01" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Habitacio1">
     <Object3D position="0.0 0.0 0.193104" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Habitacio1" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="BoxParallax">
     <Object3D position="-54.6592 0.0376668 36.6172" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="BoxParallax" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="BoxGlowAlpha">
     <Object3D position="-54.6592 0.0376649 21.9762" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="BoxGlowAlpha" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="TriggerDummy">
     <Object3D position="-25.1552 2.03947 33.689" yaw="-1.70755e-006" pitch="0.0" roll="0.0" />
@@ -298,27 +265,23 @@
   <Entity name="BoxReflection">
     <Object3D position="-25.0811 1.25635 -5.30342" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="BoxReflection" />
-    <Explosive />
   </Entity>
   <Entity name="TeteraPickUp">
     <Object3D position="-24.3621 0.624995 21.6316" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="TeteraPickUp" />
     <Trigger shape="box" size="0.541901 0.265549 0.337204" collision_group="pickup" onEnter="pick_up_tetera" />
-    <Explosive />
   </Entity>
   <Entity name="EsferaInteractiva">
     <Object3D position="-24.4011 0.968018 24.6365" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="EsferaInteractiva" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
     <Interactive action="esfera_interactiva" />
-    <Explosive />
   </Entity>
   <Entity name="EsferaDestructible">
     <Object3D position="-16.8264 1.42554 23.2763" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="EsferaDestructible" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
     <Destroyable onDestroy="esfera_destructible" destroyedResource="TeteraPickUp" />
-    <Explosive />
   </Entity>
   <Entity name="navNode01">
     <Object3D position="38.7529 0.821378 42.6325" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -545,7 +508,6 @@
     <RenderableObject animated="false" name="EsferaDestructible01" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
     <Destroyable onDestroy="prova_explosio" />
-    <Explosive />
   </Entity>
   <Entity name="EsferaDestructible02">
     <Object3D position="-10.3951 0.387946 23.2769" yaw="0.0" pitch="0.0" roll="0.0" />
