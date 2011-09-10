@@ -80,7 +80,10 @@
 
   <!--.......TEST ACTIONS.........................................-->
 
-  
+
+  <action name="Hangar">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_H"/>
+  </action>
   
   <action name="ToggleDebug">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_P"/>

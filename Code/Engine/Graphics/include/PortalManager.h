@@ -40,7 +40,7 @@ public:
   void DebugRender(CRenderManager* _pRM);
 
 protected:
-  virtual void Release() {m_UnlocatedROs.Done();m_Rooms.clear();m_Portals.clear();};
+  virtual void Release();
 private:
   void Render(CRenderManager* _pRM, bool _bDebug);
   void ReadRooms(CXMLTreeNode& _xmlRooms, set<string>& _UsedGameObjects);

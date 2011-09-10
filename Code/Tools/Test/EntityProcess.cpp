@@ -29,6 +29,7 @@
 #include "IAManager.h"
 #include "GraphDefines.h"
 #include "EmiterManager.h"
+#include "StaticMeshManager.h"
 
 #include "PhysicActor.h"
 #include <PhysicsManager.h>
@@ -162,7 +163,21 @@ void CEntityProcess::RenderINFO(CRenderManager* _pRM)
 
 bool CEntityProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
 {
+  if(strcmp(_pcAction, "Hangar") == 0)
+  {
+    CORE->GetEntityManager()->Done();
+    CORE->GetPortalManager()->Done();
+    CORE->GetRenderableObjectsManager()->Done();
+    CORE->GetStaticMeshManager()->Done();
+    
+    CORE->GetStaticMeshManager()->Load("Data/Levels/Hangar/XML/StaticMeshes.xml");
+    CORE->GetRenderableObjectsManager()->Load("Data/Levels/Hangar/XML/RenderableObjects.xml");
+    CORE->GetPortalManager()->Init("Data/Levels/Hangar/XML/Level.xml");
+    CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Hangar/XML/GameEntities.xml");
 
+    m_pPlayerEntity = CORE->GetEntityManager()->GetEntity("Player");
+    m_pCamera = m_pPlayerEntity->GetComponent<CComponent3rdPSCamera>()->GetCamera();
+  }
   return false;
 }
 

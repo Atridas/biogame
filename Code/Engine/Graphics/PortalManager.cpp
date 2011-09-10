@@ -13,6 +13,8 @@
 bool CPortalManager::Init(const string& _szFileName)
 {
   SetOk(true);
+  if(!m_UnlocatedROs.IsOk())
+    m_UnlocatedROs.Init();
   CXMLTreeNode l_xmlLevel;
 
   if(l_xmlLevel.LoadFile(_szFileName.c_str()))
@@ -32,6 +34,8 @@ bool CPortalManager::Init(const string& _szFileName)
 bool CPortalManager::Init(const vector<string>& _szFileNames)
 {
   SetOk(true);
+  if(!m_UnlocatedROs.IsOk())
+    m_UnlocatedROs.Init();
   set<string> l_UsedGameObjects;
   //vector<CXMLTreeNode> l_vxmlPortals;
   for(uint32 i = 0; i < _szFileNames.size(); ++i)
@@ -71,6 +75,8 @@ bool CPortalManager::Init(CXMLTreeNode& _xmlLevel)
 {
   assert(strcmp(_xmlLevel.GetName(), "Level") == 0);
   SetOk(true);
+  if(!m_UnlocatedROs.IsOk())
+    m_UnlocatedROs.Init();
 
   LOGGER->AddNewLog(ELL_INFORMATION, "CPortalManager::Init");
 
@@ -265,6 +271,17 @@ void CPortalManager::ReadPortals(CXMLTreeNode& _xmlPortals)
     SetOk(false);
   }
 }
+
+void CPortalManager::Release() 
+{
+  m_UnlocatedROs.Done();
+  m_Rooms.clear();
+  m_Portals.clear();
+  m_RoomNames.clear();
+  m_szCameraLastRoom="";
+  m_fLastUpdate=0;
+};
+
 
 CRoom* CPortalManager::GetRoom  (const string& _szName)
 {
