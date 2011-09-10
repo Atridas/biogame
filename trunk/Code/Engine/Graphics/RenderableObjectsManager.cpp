@@ -27,6 +27,10 @@ void CRenderableObjectsManager::Release()
     l_it++;
   }
   m_mapHWStaticInstances.clear();
+
+  m_RenderableObjects.clear();
+  m_vMeshes.clear();
+  m_vAnimatedModels.clear();
   //TODO liar-la amb el portal manager una mica?
   CMapManager<CRenderableObject>::Release();
 }

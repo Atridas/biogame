@@ -59,7 +59,7 @@ public:
   bool GetNeightbour( ) const { return m_bNeightbour;}
 
 protected:
-  virtual void Release() {m_Boundings.clear();m_Portals.clear();m_RenderableObjects.clear();};
+  virtual void Release() {m_Boundings.clear();m_Portals.clear();m_RenderableObjects.clear();m_Emiters.clear();};
 private:
 
   bool m_bRendered, m_bNeightbour;
