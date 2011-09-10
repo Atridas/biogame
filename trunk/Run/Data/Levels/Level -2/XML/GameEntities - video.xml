@@ -3,87 +3,72 @@
   <Entity name="Box20">
     <Object3D position="6.08947 -0.101723 10.0979" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Box20" />
-    <Explosive />
   </Entity>
   <Entity name="Box22">
     <Object3D position="2.7272 -0.112341 8.60257" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Box22" />
-    <Explosive />
   </Entity>
   <Entity name="mapa marte_olograma">
     <Object3D position="4.44702 2.52424 9.07804" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="mapa marte_olograma" />
-    <Explosive />
   </Entity>
   <Entity name="Plataforma">
     <Object3D position="4.32035 -0.365994 9.32081" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Plataforma" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="Box21">
     <Object3D position="2.14886 0.140294 10.1636" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Box21" />
-    <Explosive />
   </Entity>
   <Entity name="comandos">
     <Object3D position="3.36863 0.0872047 11.0166" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="comandos" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
     <Interactive action="salavideo_palanca" />
-    <Explosive />
   </Entity>
   <Entity name="Box19">
     <Object3D position="2.67402 0.140026 10.821" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Box19" />
-    <Explosive />
   </Entity>
   <Entity name="Sala de videogililacia">
     <Object3D position="4.66581 0.5 8.52625" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="Sala de videogililacia" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="balla2">
     <Object3D position="3.61607 -0.467532 7.20589" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="balla2" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Entity name="marc">
     <Object3D position="6.63588 -0.369022 3.27345" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="marc" />
-    <Explosive />
   </Entity>
   <Entity name="llum1">
     <Object3D position="10.6757 -0.770058 8.27569" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="llum1" />
-    <Explosive />
   </Entity>
   <Entity name="llum2">
     <Object3D position="-1.69907 -0.770058 9.82827" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="llum2" />
-    <Explosive />
   </Entity>
   <Entity name="tubos1">
     <Object3D position="10.0234 -0.0973442 11.4245" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="tubos1" />
-    <Explosive />
   </Entity>
   <Entity name="tubos2">
     <Object3D position="6.68524 -0.270436 14.6046" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="tubos2" />
-    <Explosive />
   </Entity>
   <Entity name="tubos3">
     <Object3D position="2.02475 -0.107213 14.4984" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="tubos3" />
-    <Explosive />
   </Entity>
   <Entity name="balla1">
     <Object3D position="6.40848 -0.467531 8.38445" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="balla1" />
     <PhysXMesh density="0" collision_group="escenari" />
-    <Explosive />
   </Entity>
   <Miner name="Miner_video00" position="4.24393 1.04204 10.0279" yaw="0.0" active="false" />
 </Entities>

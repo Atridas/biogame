@@ -91,7 +91,11 @@ void CComponentDestroyable::ReceiveEvent(const SEvent& _Event)
         if(m_szResource != "")
         {
           if(!l_pRO->ChangeInstance(m_szResource))
+          {
             LOGGER->AddNewLog(ELL_WARNING, "CComponentDestroyable::No s'ha pogut crear l'objecte destruït.");
+            l_pRO->m_bRemoveRenderableObject = true;
+            ENTITY_MANAGER->RemoveEntity(l_pEntity);
+          }
         }else
         {
           l_pRO->m_bRemoveRenderableObject = true;

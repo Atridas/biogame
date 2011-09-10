@@ -2,7 +2,7 @@
   <skeleton filename="Data/Animated Models/Militar/skeleton.csf"/>
   <mesh filename="Data/Animated Models/Militar/mesh.cmf"/>
   <material animated="true" vertex_type="787">
-    <texture type="diffusse" filename="Data/Textures/uW_MILITAR.dds"/>
+    <texture type="diffusse" filename="Data/Textures/uW_MILITAR.tga"/>
     <!--<texture type="normalmap" filename="Data/Textures/NRM_Complet.tga"/>
     <texture type="glow" filename="Data/Textures/glow_personatge2.tga"/>
     <property type="glowIntensity" value="2.0" />-->

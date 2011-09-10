@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <meshes>
-	<mesh name="llum_emergencia" path="Data/Meshes/llum_emergencia.mesh" max="0.0711188 0.0 0.22954" min="-0.0108624 -0.168595 -0.22954" />
-	<mesh name="fluorescente_apagat" path="Data/Meshes/fluorescente_apagat.mesh" max="0.772501 2.49151 0.104" min="-0.772499 -0.115818 -0.104" />
+	<mesh name="lab_Llum_emergencia01" path="Data/Meshes/lab_Llum_emergencia01.mesh" max="0.0711188 0.0 0.22954" min="-0.0108624 -0.168595 -0.22954" />
+	<mesh name="lab_fluorescent_apagat00" path="Data/Meshes/lab_fluorescent_apagat00.mesh" max="0.772501 2.49151 0.104" min="-0.772499 -0.115818 -0.104" />
 	<mesh name="Cadira_de_força" path="Data/Meshes/Cadira_de_força.mesh" max="0.543912 0.965604 0.531702" min="-0.591162 -0.515307 -0.574816" />
 	<mesh name="BancRadiografies" path="Data/Meshes/BancRadiografies.mesh" max="0.0 0.5 1.0" min="-0.158181 -0.5 -1.0" />
 	<mesh name="cadira_oficina" path="Data/Meshes/cadira_oficina.mesh" max="0.339309 0.624955 0.341559" min="-0.38486 -0.466017 -0.341623" />
@@ -27,7 +27,7 @@
 	<mesh name="CAPSULA_trencada" path="Data/Meshes/CAPSULA_trencada.mesh" max="1.08412 1.95578 0.419604" min="-1.08412 -1.24812 -0.419604" />
 	<mesh name="Lampada01" path="Data/Meshes/Lampada01.mesh" max="0.302282 0.217546 0.302282" min="-0.302282 0.0 -0.302282" />
 	<mesh name="Cable_Lampada01" path="Data/Meshes/Cable_Lampada01.mesh" max="0.0293798 1.43301 0.0133998" min="-0.0293798 -1.43301 -0.0426164" />
-	<mesh name="Ordinador_DEF" path="Data/Meshes/Ordinador_DEF.mesh" max="0.265423 1.21788 0.425139" min="-0.304674 0.0 -0.265532" />
+	<mesh name="Ordinador_DEF" path="Data/Meshes/Ordinador_DEF.mesh" max="0.265423 1.21788 0.425139" min="-0.304674 0.0 -0.265533" />
 	<mesh name="Frigorific_DEF" path="Data/Meshes/Frigorific_DEF.mesh" max="1.48375 1.48375 0.289523" min="-1.48375 -1.48375 0.0" />
 	<mesh name="Ordinador_DEF01" path="Data/Meshes/Ordinador_DEF01.mesh" max="0.412947 1.21788 0.275592" min="-0.250526 0.0 -0.250401" />
 	<mesh name="tub_Gros" path="Data/Meshes/tub_Gros.mesh" max="0.439825 2.3473 5.05694" min="0.111259 -2.67362 -6.84036" />
@@ -48,13 +48,14 @@
 	<mesh name="Lampada_autoilum" path="Data/Meshes/Lampada_autoilum.mesh" max="0.285697 0.179001 0.285697" min="-0.285697 0.0 -0.285697" />
 	<mesh name="Vidre_cap1" path="Data/Meshes/Vidre_cap1.mesh" max="0.334446 0.916121 0.460365" min="-0.334447 -0.916121 -0.460364" />
 	<mesh name="Vidre_cap02" path="Data/Meshes/Vidre_cap02.mesh" max="0.460364 0.916121 0.334447" min="-0.460365 -0.916121 -0.334447" />
-	<mesh name="fluorescente_apagat01" path="Data/Meshes/fluorescente_apagat01.mesh" max="0.772501 2.49151 0.104" min="-0.772499 -0.115818 -0.104" />
-	<mesh name="bombeta_florescent" path="Data/Meshes/bombeta_florescent.mesh" max="1.3 0.039633 0.0620251" min="0.0 -0.0396333 -0.0620246" />
-	<mesh name="fluorescente_DEF11" path="Data/Meshes/fluorescente_DEF11.mesh" max="0.772501 2.49151 0.104" min="-0.772499 -0.115818 -0.104" />
+	<mesh name="lab_fluorescent_apagat01" path="Data/Meshes/lab_fluorescent_apagat01.mesh" max="0.772501 2.49151 0.104" min="-0.772499 -0.115818 -0.104" />
+	<mesh name="lab_Llum_emergengia_autoilum01" path="Data/Meshes/lab_Llum_emergengia_autoilum01.mesh" max="-0.0108624 -0.00116014 0.223081" min="-0.0774603 -0.167435 -0.223081" />
+	<mesh name="bombeta_florescent" path="Data/Meshes/bombeta_florescent.mesh" max="1.3 0.039633 0.0620255" min="0.0 -0.0396333 -0.0620246" />
+	<mesh name="lab_fluorescente00" path="Data/Meshes/lab_fluorescente00.mesh" max="0.772501 2.49151 0.104" min="-0.772499 -0.115818 -0.104" />
 	<mesh name="focus" path="Data/Meshes/focus.mesh" max="1.46449 0.491696 0.527504" min="-1.46449 -0.491696 -0.527504" />
-	<mesh name="fluorescente_DEF12" path="Data/Meshes/fluorescente_DEF12.mesh" max="0.772501 2.49151 0.104" min="-0.772499 -0.115818 -0.104" />
-	<mesh name="fluorescente_DEF14" path="Data/Meshes/fluorescente_DEF14.mesh" max="0.772501 2.49151 0.104" min="-0.772499 -0.115818 -0.104" />
-	<mesh name="fluorescente_apagat02" path="Data/Meshes/fluorescente_apagat02.mesh" max="0.772501 2.49151 0.104" min="-0.772499 -0.115818 -0.104" />
+	<mesh name="lab_fluorescente01" path="Data/Meshes/lab_fluorescente01.mesh" max="0.772501 2.49151 0.104" min="-0.772499 -0.115818 -0.104" />
+	<mesh name="lab_fluorescente02" path="Data/Meshes/lab_fluorescente02.mesh" max="0.772501 2.49151 0.104" min="-0.772499 -0.115818 -0.104" />
+	<mesh name="lab_fluorescent_apagat02" path="Data/Meshes/lab_fluorescent_apagat02.mesh" max="0.772501 2.49151 0.104" min="-0.772499 -0.115818 -0.104" />
 	<mesh name="carpeta_eon" path="Data/Meshes/carpeta_eon.mesh" max="-0.250171 -0.000523925 0.803741" min="-0.564054 -0.00614637 0.466333" />
 	<mesh name="Focus_conic" path="Data/Meshes/Focus_conic.mesh" max="0.716578 1.04208 0.681506" min="-0.716578 0.0 -0.681506" />
 </meshes>

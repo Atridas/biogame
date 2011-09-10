@@ -7,11 +7,11 @@
       </Boundings>
       <Objects>
         <GameObject name="tubo3" />
-        <GameObject name="Llum10" />
+        <GameObject name="pass_llum00" />
         <GameObject name="pas_video" />
-        <GameObject name="fluorescente_DEF19" />
+        <GameObject name="pass_fluor00" />
         <GameObject name="viga3" />
-        <GameObject name="luz_florescente10" />
+        <GameObject name="pass_luz_florescente04" />
       </Objects>
     </Room>
     <Room name="Passadis">
@@ -23,22 +23,22 @@
       <Objects>
         <GameObject name="marc_porta02" />
         <GameObject name="porta_sub2" />
-        <GameObject name="fluorescente_DEF18" />
-        <GameObject name="Llum09" />
-        <GameObject name="luz_florescente09" />
-        <GameObject name="fluorescente_DEF17" />
-        <GameObject name="luz_florescente08" />
+        <GameObject name="pass_fluor01" />
+        <GameObject name="pass_llum01" />
+        <GameObject name="pass_luz_florescente03" />
+        <GameObject name="pass_fluor02" />
+        <GameObject name="pass_luz_florescente02" />
         <GameObject name="viga5" />
         <GameObject name="viga4" />
         <GameObject name="porta_sub1" />
-        <GameObject name="Llum08" />
-        <GameObject name="fluorescente_DEF15" />
-        <GameObject name="Llum07" />
-        <GameObject name="fluorescente_DEF16" />
-        <GameObject name="luz_florescente06" />
+        <GameObject name="pass_llum02" />
+        <GameObject name="pass_fluor03" />
+        <GameObject name="pass_llum03" />
+        <GameObject name="pass_fluor04" />
+        <GameObject name="pass_luz_florescente00" />
         <GameObject name="viga1" />
-        <GameObject name="Llum06" />
-        <GameObject name="luz_florescente07" />
+        <GameObject name="pass_llum04" />
+        <GameObject name="pass_luz_florescente01" />
         <GameObject name="viga2" />
         <GameObject name="tubo_dret" />
         <GameObject name="tubo_esq1" />
@@ -50,7 +50,7 @@
     </Room>
   </Rooms>
   <Portals>
-    <Portal name="Porta laboratori" roomA="Laboratori" roomB="Passadis" size="0.969641 3.15931 5.60738" position="-4.3681 1.32979 -8.51297" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Portal name="Porta Passadis" roomA="Passadis Video" roomB="Passadis" size="2.79672 3.28474 1.24681" position="10.7294 1.18233 -5.12611" yaw="24.3554" pitch="0.0" roll="0.0" />
+    <Portal name="Porta laboratori" roomA="Laboratori" roomB="Passadis" size="1.8483 3.15931 2.55351" position="-3.89968 1.32979 -7.77577" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Portal name="Porta Passadis" roomA="Passadis Video" roomB="Passadis" size="5.10477 5.37587 2.04928" position="10.949 1.88875 -5.61124" yaw="24.3554" pitch="0.0" roll="0.0" />
   </Portals>
 </Level>

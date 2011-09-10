@@ -1,10 +1,14 @@
 function test()
-  local a = EM:get_entity('tetera_Miner')
-  if a then
-    log(a:get_name())
-    local position = a:get_component(BaseComponent.object3d):get_position()
-    log('Vect3f(' .. position:length())-- .. ', ' .. position.y .. ', ' position.z .. ')')
+  local entity = EM:get_entity('Llum_emergengia_autoilum01')
+  if entity then
+    log(entity:get_name())
+    local component = entity:get_component(BaseComponent.renderable_object)
+    if component then
+      component:set_yaw(20)
+    else
+      log('component no trobat')
+    end
   else
-    log('a es nil')
+    log('entity no trobada')
   end
 end
