@@ -6,8 +6,8 @@
         <Box name="Bounding Laboratori" size="12.285 6.25291 12.9608" position="-9.75657 2.3526 -5.19563" yaw="0.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
-        <GameObject name="Llum_emergencia01" />
-        <GameObject name="fluorescente_apagat" />
+        <GameObject name="lab_Llum_emergencia01" />
+        <GameObject name="lab_fluorescent_apagat00" />
         <GameObject name="Cadira_de_força" />
         <GameObject name="BancRadiografies" />
         <GameObject name="cadira_oficina" />
@@ -54,19 +54,19 @@
         <GameObject name="Lampada_autoilum" />
         <GameObject name="Vidre_cap1" />
         <GameObject name="Vidre_cap02" />
-        <GameObject name="fluorescente_apagat01" />
-        <GameObject name="Llum_emergengia_autoilum01" />
-        <GameObject name="luz_florescente02" />
-        <GameObject name="fluorescente_DEF11" />
-        <GameObject name="Llum03" />
-        <GameObject name="fluorescente_DEF12" />
-        <GameObject name="luz_florescente03" />
-        <GameObject name="fluorescente_DEF14" />
-        <GameObject name="luz_florescente05" />
-        <GameObject name="fluorescente_apagat02" />
+        <GameObject name="lab_fluorescent_apagat01" />
+        <GameObject name="lab_Llum_emergengia_autoilum01" />
+        <GameObject name="lab_luz_florescente00" />
+        <GameObject name="lab_fluorescente00" />
+        <GameObject name="lab_llum00" />
+        <GameObject name="lab_fluorescente01" />
+        <GameObject name="lab_luz_florescente01" />
+        <GameObject name="lab_fluorescente02" />
+        <GameObject name="lab_luz_florescente02" />
+        <GameObject name="lab_fluorescent_apagat02" />
         <GameObject name="carpeta_eon" />
-        <GameObject name="Llum04" />
-        <GameObject name="Llum05" />
+        <GameObject name="lab_llum01" />
+        <GameObject name="lab_llum02" />
         <GameObject name="Focus_conic" />
       </Objects>
     </Room>

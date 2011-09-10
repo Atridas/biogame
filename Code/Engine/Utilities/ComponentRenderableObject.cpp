@@ -173,6 +173,7 @@ void CComponentRenderableObject::Disable()
 
 void CComponentRenderableObject::Release()
 {
+  //TODO: eliminar correctament els renderable objects. Portal manager etc.
   if(m_bRemoveRenderableObject)
   {
     CORE->GetRenderableObjectsManager()->RemoveResource(m_szResourceName);

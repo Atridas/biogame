@@ -997,147 +997,133 @@
     <RenderableObject animated="false" name="fogons" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="fluorescente_apagat">
+  <Entity name="menj_floresc_apagat00">
     <Object3D position="14.5476 3.09934 28.5958" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="fluorescente_apagat" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <RenderableObject animated="false" name="menj_floresc_apagat00" />
   </Entity>
-  <Entity name="fluorescente_apagat01">
+  <Entity name="menj_floresc_apagat01">
     <Object3D position="4.85336 3.09934 25.7738" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="fluorescente_apagat01" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <RenderableObject animated="false" name="menj_floresc_apagat01" />
   </Entity>
-  <Entity name="luz_florescente02">
+  <Entity name="menj_llum_florescent00">
     <Object3D position="1.77145 3.0267 33.7667" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
-    <RenderableObject animated="false" name="bombeta_florescent" />
+    <RenderableObject animated="false" name="menj_llum_florescent00" />
   </Entity>
-  <Entity name="fluorescente_DEF11">
+  <Entity name="menj_floresc00">
     <Object3D position="2.04748 3.09934 34.3481" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="fluorescente_DEF11" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <RenderableObject animated="false" name="menj_floresc00" />
   </Entity>
-  <Entity name="Llum_menjador00">
+  <Entity name="menj_llum00">
     <Object3D position="-0.648827 2.51455 28.4963" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="Llum_menjador00" />
+    <RenderableObject animated="false" name="menj_llum00" />
   </Entity>
-  <Entity name="fluorescente_DEF12">
+  <Entity name="menj_floresc01">
     <Object3D position="-0.643127 3.09934 28.4948" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="fluorescente_DEF12" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <RenderableObject animated="false" name="menj_floresc01" />
   </Entity>
-  <Entity name="luz_florescente03">
+  <Entity name="menj_llum_florescent01">
     <Object3D position="-0.919151 3.0267 27.9135" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
-    <RenderableObject animated="false" name="bombeta_florescent" />
+    <RenderableObject animated="false" name="menj_llum_florescent01" />
   </Entity>
-  <Entity name="fluorescente_DEF14">
+  <Entity name="menj_floresc02">
     <Object3D position="7.63609 3.09934 31.6725" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="fluorescente_DEF14" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <RenderableObject animated="false" name="menj_floresc02" />
   </Entity>
-  <Entity name="luz_florescente05">
+  <Entity name="menj_llum_florescent02">
     <Object3D position="7.36006 3.0267 31.0912" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
-    <RenderableObject animated="false" name="bombeta_florescent" />
+    <RenderableObject animated="false" name="menj_llum_florescent02" />
   </Entity>
-  <Entity name="fluorescente_apagat02">
+  <Entity name="menj_floresc_apagat02">
     <Object3D position="5.19611 3.09934 40.8284" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="fluorescente_apagat02" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <RenderableObject animated="false" name="menj_floresc_apagat02" />
   </Entity>
-  <Entity name="Llum_menjador01">
+  <Entity name="menj_llum01">
     <Object3D position="2.06863 2.51455 34.337" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="Llum_menjador01" />
+    <RenderableObject animated="false" name="menj_llum01" />
   </Entity>
-  <Entity name="Llum_menjador02">
+  <Entity name="menj_llum02">
     <Object3D position="7.61793 2.51455 31.7124" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="Llum_menjador02" />
+    <RenderableObject animated="false" name="menj_llum02" />
   </Entity>
-  <Entity name="fluorescente_apagat03">
+  <Entity name="menj_floresc_apagat03">
     <Object3D position="24.1752 3.09934 31.6555" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="fluorescente_apagat03" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <RenderableObject animated="false" name="menj_floresc_apagat03" />
   </Entity>
-  <Entity name="fluorescente_apagat04">
+  <Entity name="menj_floresc_apagat04">
     <Object3D position="30.5091 3.09934 28.722" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="fluorescente_apagat04" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <RenderableObject animated="false" name="menj_floresc_apagat04" />
   </Entity>
-  <Entity name="luz_florescente06">
+  <Entity name="menj_llum_florescent03">
     <Object3D position="10.3998 3.0267 37.5924" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
-    <RenderableObject animated="false" name="bombeta_florescent" />
+    <RenderableObject animated="false" name="menj_llum_florescent03" />
   </Entity>
-  <Entity name="Llum_menjador03">
+  <Entity name="menj_llum03">
     <Object3D position="10.6576 2.51455 38.2136" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="Llum_menjador03" />
+    <RenderableObject animated="false" name="menj_llum03" />
   </Entity>
-  <Entity name="fluorescente_DEF15">
+  <Entity name="menj_floresc03">
     <Object3D position="10.6758 3.09934 38.1737" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="fluorescente_DEF15" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <RenderableObject animated="false" name="menj_floresc03" />
   </Entity>
-  <Entity name="luz_florescente07">
+  <Entity name="menj_llum_florescent04">
     <Object3D position="17.1193 3.0267 34.1487" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
-    <RenderableObject animated="false" name="bombeta_florescent" />
+    <RenderableObject animated="false" name="menj_llum_florescent04" />
   </Entity>
-  <Entity name="Llum_menjador04">
+  <Entity name="menj_llum04">
     <Object3D position="17.3771 2.51455 34.7698" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="Llum_menjador04" />
+    <RenderableObject animated="false" name="menj_llum04" />
   </Entity>
-  <Entity name="fluorescente_DEF16">
+  <Entity name="menj_floresc04">
     <Object3D position="17.3953 3.09934 34.73" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="fluorescente_DEF16" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <RenderableObject animated="false" name="menj_floresc04" />
   </Entity>
-  <Entity name="luz_florescente08">
+  <Entity name="menj_llum_florescent05">
     <Object3D position="21.0283 3.0267 24.9328" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
-    <RenderableObject animated="false" name="bombeta_florescent" />
+    <RenderableObject animated="false" name="menj_llum_florescent05" />
   </Entity>
-  <Entity name="Llum_menjador05">
+  <Entity name="menj_llum05">
     <Object3D position="21.2862 2.51455 25.5539" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="Llum_menjador05" />
+    <RenderableObject animated="false" name="menj_llum05" />
   </Entity>
-  <Entity name="fluorescente_DEF17">
+  <Entity name="menj_floresc05">
     <Object3D position="21.3043 3.09934 25.5141" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="fluorescente_DEF17" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <RenderableObject animated="false" name="menj_floresc05" />
   </Entity>
-  <Entity name="luz_florescente09">
+  <Entity name="menj_llum_florescent06">
     <Object3D position="18.1017 3.0267 18.6894" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
-    <RenderableObject animated="false" name="bombeta_florescent" />
+    <RenderableObject animated="false" name="menj_llum_florescent06" />
   </Entity>
-  <Entity name="Llum_menjador06">
+  <Entity name="menj_llum06">
     <Object3D position="18.3851 2.51455 19.2865" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="Llum_menjador06" />
+    <RenderableObject animated="false" name="menj_llum06" />
   </Entity>
-  <Entity name="fluorescente_DEF18">
+  <Entity name="menj_floresc06">
     <Object3D position="18.3778 3.09934 19.2707" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="fluorescente_DEF18" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <RenderableObject animated="false" name="menj_floresc06" />
   </Entity>
-  <Entity name="luz_florescente10">
+  <Entity name="menj_llum_florescent07">
     <Object3D position="24.5262 3.0267 15.7795" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
-    <RenderableObject animated="false" name="bombeta_florescent" />
+    <RenderableObject animated="false" name="menj_llum_florescent07" />
   </Entity>
-  <Entity name="Llum_menjador07">
+  <Entity name="menj_llum07">
     <Object3D position="24.784 2.51455 16.4006" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="Llum_menjador07" />
+    <RenderableObject animated="false" name="menj_llum07" />
   </Entity>
-  <Entity name="fluorescente_DEF19">
+  <Entity name="menj_floresc07">
     <Object3D position="24.8022 3.09934 16.3608" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="fluorescente_DEF19" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <RenderableObject animated="false" name="menj_floresc07" />
   </Entity>
-  <Entity name="luz_florescente11">
+  <Entity name="menj_llum_florescent08">
     <Object3D position="27.3458 3.0267 21.8705" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
-    <RenderableObject animated="false" name="bombeta_florescent" />
+    <RenderableObject animated="false" name="menj_llum_florescent08" />
   </Entity>
-  <Entity name="Llum_menjador08">
+  <Entity name="menj_llum08">
     <Object3D position="27.6037 2.51455 22.4916" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="Llum_menjador08" />
+    <RenderableObject animated="false" name="menj_llum08" />
   </Entity>
-  <Entity name="fluorescente_DEF20">
+  <Entity name="menj_floresc08">
     <Object3D position="27.6218 3.09934 22.4518" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="fluorescente_DEF20" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <RenderableObject animated="false" name="menj_floresc08" />
   </Entity>
   <Entity name="Menjador_Navnode_00">
     <Object3D position="4.21359 0.653691 37.2267" yaw="0.0" pitch="0.0" roll="0.0" />

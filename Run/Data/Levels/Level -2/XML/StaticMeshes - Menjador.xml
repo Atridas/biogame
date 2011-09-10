@@ -57,8 +57,36 @@
 	<mesh name="columna06" path="Data/Meshes/columna06.mesh" max="0.70207 1.75504 0.702068" min="-0.70207 -1.75504 -0.702068" />
 	<mesh name="colunma07" path="Data/Meshes/colunma07.mesh" max="0.70207 1.75504 0.702065" min="-0.70207 -1.75504 -0.702068" />
 	<mesh name="fogons" path="Data/Meshes/fogons.mesh" max="2.93023 0.5 1.72101" min="-2.93023 -0.5 -1.72101" />
-	<mesh name="florescent_apagat" path="Data/Meshes/florescent_apagat.mesh" max="0.42073 2.49151 0.744076" min="-0.420729 -0.115818 -0.744074" />
-	<mesh name="bombeta_florescent" path="Data/Meshes/bombeta_florescent.mesh" max="0.605617 0.0396333 1.20441" min="-0.0562139 -0.039633 -0.0262146" />
-	<mesh name="florescent_ences" path="Data/Meshes/florescent_ences.mesh" max="0.420729 2.49151 0.744076" min="-0.420728 -0.115818 -0.744076" />
-	<mesh name="focus" path="Data/Meshes/focus.mesh" max="1.097 0.491696 1.55021" min="-1.097 -0.491696 -1.55021" />
+	<mesh name="menj_floresc_apagat00" path="Data/Meshes/menj_floresc_apagat00.mesh" max="0.42073 2.49151 0.744076" min="-0.420729 -0.115818 -0.744074" />
+	<mesh name="menj_floresc_apagat01" path="Data/Meshes/menj_floresc_apagat01.mesh" max="0.420729 2.49151 0.744076" min="-0.420728 -0.115818 -0.744074" />
+	<mesh name="menj_llum_florescent00" path="Data/Meshes/menj_llum_florescent00.mesh" max="0.605617 0.0396333 1.20441" min="-0.0562139 -0.039633 -0.0262146" />
+	<mesh name="menj_floresc08" path="Data/Meshes/menj_floresc08.mesh" max="0.420729 2.49151 0.744076" min="-0.420728 -0.115818 -0.744076" />
+	<mesh name="menj_llum00" path="Data/Meshes/menj_llum00.mesh" max="1.097 0.491696 1.55021" min="-1.097 -0.491696 -1.55021" />
+	<mesh name="menj_floresc07" path="Data/Meshes/menj_floresc07.mesh" max="0.420729 2.49151 0.744076" min="-0.420728 -0.115818 -0.744074" />
+	<mesh name="menj_llum_florescent01" path="Data/Meshes/menj_llum_florescent01.mesh" max="0.605616 0.0396333 1.20441" min="-0.0562137 -0.039633 -0.0262127" />
+	<mesh name="menj_floresc06" path="Data/Meshes/menj_floresc06.mesh" max="0.420729 2.49151 0.744074" min="-0.420728 -0.115818 -0.744074" />
+	<mesh name="menj_llum_florescent02" path="Data/Meshes/menj_llum_florescent02.mesh" max="0.605617 0.0396333 1.20441" min="-0.0562139 -0.039633 -0.0262127" />
+	<mesh name="menj_floresc_apagat02" path="Data/Meshes/menj_floresc_apagat02.mesh" max="0.420729 2.49151 0.744076" min="-0.420728 -0.115818 -0.744076" />
+	<mesh name="menj_llum01" path="Data/Meshes/menj_llum01.mesh" max="1.097 0.491696 1.55021" min="-1.097 -0.491696 -1.55021" />
+	<mesh name="menj_llum02" path="Data/Meshes/menj_llum02.mesh" max="1.097 0.491696 1.55021" min="-1.097 -0.491696 -1.55021" />
+	<mesh name="menj_floresc_apagat03" path="Data/Meshes/menj_floresc_apagat03.mesh" max="0.420729 2.49151 0.744074" min="-0.420729 -0.115818 -0.744074" />
+	<mesh name="menj_floresc_apagat04" path="Data/Meshes/menj_floresc_apagat04.mesh" max="0.420729 2.49151 0.744076" min="-0.420729 -0.115818 -0.744074" />
+	<mesh name="menj_llum_florescent03" path="Data/Meshes/menj_llum_florescent03.mesh" max="0.605617 0.0396335 1.20441" min="-0.0562134 -0.039633 -0.0262146" />
+	<mesh name="menj_llum03" path="Data/Meshes/menj_llum03.mesh" max="1.097 0.491696 1.55021" min="-1.097 -0.491696 -1.55021" />
+	<mesh name="menj_floresc05" path="Data/Meshes/menj_floresc05.mesh" max="0.42073 2.49151 0.744076" min="-0.420729 -0.115818 -0.744076" />
+	<mesh name="menj_llum_florescent04" path="Data/Meshes/menj_llum_florescent04.mesh" max="0.605616 0.0396333 1.20441" min="-0.0562134 -0.039633 -0.0262146" />
+	<mesh name="menj_llum04" path="Data/Meshes/menj_llum04.mesh" max="1.097 0.491696 1.55021" min="-1.097 -0.491696 -1.55021" />
+	<mesh name="menj_floresc04" path="Data/Meshes/menj_floresc04.mesh" max="0.420729 2.49151 0.744076" min="-0.420729 -0.115818 -0.744076" />
+	<mesh name="menj_llum_florescent05" path="Data/Meshes/menj_llum_florescent05.mesh" max="0.605616 0.0396333 1.20441" min="-0.0562134 -0.039633 -0.0262127" />
+	<mesh name="menj_llum05" path="Data/Meshes/menj_llum05.mesh" max="1.097 0.491696 1.55021" min="-1.097 -0.491696 -1.55021" />
+	<mesh name="menj_floresc03" path="Data/Meshes/menj_floresc03.mesh" max="0.420729 2.49151 0.744076" min="-0.420729 -0.115818 -0.744074" />
+	<mesh name="menj_llum_florescent06" path="Data/Meshes/menj_llum_florescent06.mesh" max="0.605616 0.0396333 1.20441" min="-0.0562134 -0.039633 -0.0262127" />
+	<mesh name="menj_llum06" path="Data/Meshes/menj_llum06.mesh" max="1.097 0.491696 1.55021" min="-1.097 -0.491696 -1.55021" />
+	<mesh name="menj_floresc02" path="Data/Meshes/menj_floresc02.mesh" max="0.420729 2.49151 0.744076" min="-0.420729 -0.115818 -0.744074" />
+	<mesh name="menj_llum_florescent07" path="Data/Meshes/menj_llum_florescent07.mesh" max="0.605618 0.0396335 1.20441" min="-0.0562134 -0.039633 -0.0262127" />
+	<mesh name="menj_llum07" path="Data/Meshes/menj_llum07.mesh" max="1.097 0.491696 1.55021" min="-1.097 -0.491696 -1.55021" />
+	<mesh name="menj_floresc01" path="Data/Meshes/menj_floresc01.mesh" max="0.420729 2.49151 0.744076" min="-0.420729 -0.115818 -0.744074" />
+	<mesh name="menj_llum_florescent08" path="Data/Meshes/menj_llum_florescent08.mesh" max="0.605616 0.0396333 1.20441" min="-0.0562134 -0.039633 -0.0262127" />
+	<mesh name="menj_llum08" path="Data/Meshes/menj_llum08.mesh" max="1.097 0.491696 1.55021" min="-1.097 -0.491696 -1.55021" />
+	<mesh name="menj_floresc00" path="Data/Meshes/menj_floresc00.mesh" max="0.420729 2.49151 0.744076" min="-0.420729 -0.115818 -0.744074" />
 </meshes>
