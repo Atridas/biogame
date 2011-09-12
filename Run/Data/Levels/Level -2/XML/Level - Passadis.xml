@@ -6,12 +6,12 @@
         <Box name="Passadis Video Bounding" size="4.82898 4.01453 10.9213" position="9.02441 1.06795 -1.26889" yaw="24.1256" pitch="-0.555944" roll="12.6672" />
       </Boundings>
       <Objects>
-        <GameObject name="tubo3" />
-        <GameObject name="pass_llum00" />
-        <GameObject name="pas_video" />
-        <GameObject name="pass_fluor00" />
-        <GameObject name="viga3" />
-        <GameObject name="pass_luz_florescente04" />
+        <GameObject name="lvl2_pass_tubo3" />
+        <GameObject name="lvl2_pass_pass_llum00" />
+        <GameObject name="lvl2_pass_pas_video" />
+        <GameObject name="lvl2_pass_pass_fluor00" />
+        <GameObject name="lvl2_pass_viga3" />
+        <GameObject name="lvl2_pass_pass_luz_florescente04" />
       </Objects>
     </Room>
     <Room name="Passadis">
@@ -21,31 +21,31 @@
         <Box name="Passadis Bounding 1" size="13.1503 4.22421 5.0794" position="1.98404 1.69028 -8.47477" yaw="0.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
-        <GameObject name="marc_porta02" />
-        <GameObject name="porta_sub2" />
-        <GameObject name="pass_fluor01" />
-        <GameObject name="pass_llum01" />
-        <GameObject name="pass_luz_florescente03" />
-        <GameObject name="pass_fluor02" />
-        <GameObject name="pass_luz_florescente02" />
-        <GameObject name="viga5" />
-        <GameObject name="viga4" />
-        <GameObject name="porta_sub1" />
-        <GameObject name="pass_llum02" />
-        <GameObject name="pass_fluor03" />
-        <GameObject name="pass_llum03" />
-        <GameObject name="pass_fluor04" />
-        <GameObject name="pass_luz_florescente00" />
-        <GameObject name="viga1" />
-        <GameObject name="pass_llum04" />
-        <GameObject name="pass_luz_florescente01" />
-        <GameObject name="viga2" />
-        <GameObject name="tubo_dret" />
-        <GameObject name="tubo_esq1" />
-        <GameObject name="tubo_esq2" />
-        <GameObject name="marc_passadis1" />
-        <GameObject name="pass01" />
-        <GameObject name="marc_porta01" />
+        <GameObject name="lvl2_pass_marc_porta02" />
+        <GameObject name="lvl2_pass_porta_sub2" />
+        <GameObject name="lvl2_pass_pass_fluor01" />
+        <GameObject name="lvl2_pass_pass_llum01" />
+        <GameObject name="lvl2_pass_pass_luz_florescente03" />
+        <GameObject name="lvl2_pass_pass_fluor02" />
+        <GameObject name="lvl2_pass_pass_luz_florescente02" />
+        <GameObject name="lvl2_pass_viga5" />
+        <GameObject name="lvl2_pass_viga4" />
+        <GameObject name="lvl2_pass_porta_sub1" />
+        <GameObject name="lvl2_pass_pass_llum02" />
+        <GameObject name="lvl2_pass_pass_fluor03" />
+        <GameObject name="lvl2_pass_pass_llum03" />
+        <GameObject name="lvl2_pass_pass_fluor04" />
+        <GameObject name="lvl2_pass_pass_luz_florescente00" />
+        <GameObject name="lvl2_pass_viga1" />
+        <GameObject name="lvl2_pass_pass_llum04" />
+        <GameObject name="lvl2_pass_pass_luz_florescente01" />
+        <GameObject name="lvl2_pass_viga2" />
+        <GameObject name="lvl2_pass_tubo_dret" />
+        <GameObject name="lvl2_pass_tubo_esq1" />
+        <GameObject name="lvl2_pass_tubo_esq2" />
+        <GameObject name="lvl2_pass_marc_passadis1" />
+        <GameObject name="lvl2_pass_pass01" />
+        <GameObject name="lvl2_pass_marc_porta01" />
       </Objects>
     </Room>
   </Rooms>

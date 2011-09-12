@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<lights ambient="0.3 0.3 0.3">
+	<light type="spot" direction="0.0 -2.10961 0.0" angle="43.0" fall_off="74.0" name="Spot01" pos="-11.9471 3.63118 -8.60123" color="0.866667 0.968628 1.0" att_start_range="0.0" att_end_range="2.9334" render_shadows="false" />
+	<light type="spot" direction="0.0 -2.10961 0.0" angle="43.0" fall_off="74.0" name="Spot02" pos="-11.9471 3.63118 -5.01465" color="0.866667 0.968628 1.0" att_start_range="0.0" att_end_range="2.9334" render_shadows="false" />
+	<light type="spot" direction="0.0 -2.10961 1.19209e-007" angle="43.0" fall_off="74.0" name="Spot03" pos="-7.16475 3.63118 -1.25278" color="0.866667 0.968628 1.0" att_start_range="0.0" att_end_range="2.9334" render_shadows="false" />
+</lights>

@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Level>
+  <Rooms>
+    <Room name="PassInici">
+      <Boundings>
+        <Box name="RoomSizeInici" size="4.94711 3.88874 15.3722" position="-0.0122204 1.71399 -14.8357" yaw="0.0" pitch="0.0" roll="0.0" />
+      </Boundings>
+      <Objects>
+        <GameObject name="lvl1_Passadis_inicial01" />
+        <GameObject name="lvl1_Lum10" />
+        <GameObject name="lvl1_aguanta_llums10" />
+        <GameObject name="lvl1_Lum11" />
+        <GameObject name="lvl1_aguanta_llums11" />
+        <GameObject name="lvl1_Lum12" />
+        <GameObject name="lvl1_aguanta_llums12" />
+        <GameObject name="lvl1_Lum13" />
+        <GameObject name="lvl1_aguanta_llums13" />
+      </Objects>
+    </Room>
+    <Room name="Pass03">
+      <Boundings>
+        <Box name="RoomSizePass03" size="20.9667 5.13183 5.31552" position="-17.4104 2.13095 -0.0230565" yaw="0.0" pitch="0.0" roll="0.0" />
+      </Boundings>
+      <Objects>
+        <GameObject name="lvl1_aguanta_llums22" />
+        <GameObject name="lvl1_Lum22" />
+        <GameObject name="lvl1_aguanta_llums23" />
+        <GameObject name="lvl1_Lum23" />
+        <GameObject name="lvl1_aguanta_llums24" />
+        <GameObject name="lvl1_Lum24" />
+        <GameObject name="lvl1_aguanta_llums25" />
+        <GameObject name="lvl1_Lum25" />
+        <GameObject name="lvl1_aguanta_llums26" />
+        <GameObject name="lvl1_Lum26" />
+        <GameObject name="lvl1_Lum27" />
+        <GameObject name="lvl1_aguanta_llums27" />
+        <GameObject name="lvl1_Caixa_estatica_petita33" />
+        <GameObject name="lvl1_caixa_llarga_dife10" />
+        <GameObject name="lvl1_Caixa_estatica_petita34" />
+        <GameObject name="lvl1_Caixa_estatica_petita35" />
+        <GameObject name="lvl1_Caixa_estatica_petita38" />
+        <GameObject name="lvl1_Passadis03" />
+      </Objects>
+    </Room>
+    <Room name="Room01">
+      <Boundings>
+        <Box name="RoomSizeRoom01" size="6.32806 1.58218 8.6325" position="-30.2591 0.0 0.0344453" yaw="0.0" pitch="0.0" roll="0.0" />
+      </Boundings>
+      <Objects>
+        <GameObject name="lvl1_habitacio_municio" />
+        <GameObject name="lvl1_Porta_planta-1_02" />
+      </Objects>
+    </Room>
+    <Room name="SalaControls">
+      <Boundings>
+        <Box name="Dummy01" size="6.24808 4.38677 8.50394" position="-7.33707 2.06297 7.41136" yaw="-45.0" pitch="0.0" roll="0.0" />
+      </Boundings>
+      <Objects>
+        <GameObject name="lvl1_habitacio_claus" />
+      </Objects>
+    </Room>
+    <Room name="PassFinal">
+      <Boundings>
+        <Box name="RoomSizeFinal" size="4.9288 4.04311 15.3684" position="-0.029007 1.67459 15.0397" yaw="0.0" pitch="0.0" roll="0.0" />
+      </Boundings>
+      <Objects>
+        <GameObject name="lvl1_Passadis_final01" />
+        <GameObject name="lvl1_aguanta_llums18" />
+        <GameObject name="lvl1_Lum18" />
+        <GameObject name="lvl1_aguanta_llums19" />
+        <GameObject name="lvl1_Lum19" />
+        <GameObject name="lvl1_aguanta_llums20" />
+        <GameObject name="lvl1_Lum20" />
+        <GameObject name="lvl1_aguanta_llums21" />
+        <GameObject name="lvl1_Lum21" />
+      </Objects>
+    </Room>
+    <Room name="Pass01">
+      <Boundings>
+        <Box name="RoomSizePass01" size="5.66496 4.39727 20.8539" position="12.6211 1.89219 12.3142" yaw="-45.0" pitch="0.0" roll="0.0" />
+      </Boundings>
+      <Objects>
+        <GameObject name="lvl1_Passadis01" />
+        <GameObject name="lvl1_Porta_planta-1_17" />
+        <GameObject name="lvl1_aguanta_llums14" />
+        <GameObject name="lvl1_Lum14" />
+        <GameObject name="lvl1_aguanta_llums15" />
+        <GameObject name="lvl1_Lum15" />
+        <GameObject name="lvl1_Lum16" />
+        <GameObject name="lvl1_aguanta_llums16" />
+        <GameObject name="lvl1_aguanta_llums17" />
+        <GameObject name="lvl1_Lum17" />
+        <GameObject name="lvl1_caixa_llarga16" />
+        <GameObject name="lvl1_Caixa_estatica_petita36" />
+        <GameObject name="lvl1_Caixa_estatica_petita37" />
+      </Objects>
+    </Room>
+    <Room name="Room03">
+      <Boundings>
+        <Box name="RoomSizeRoom03" size="15.6751 8.18424 21.3881" position="29.306 3.18794 24.1956" yaw="-45.0" pitch="0.0" roll="0.0" />
+      </Boundings>
+      <Objects>
+        <GameObject name="lvl1_escala_peque01" />
+        <GameObject name="lvl1_escala_peque02" />
+        <GameObject name="lvl1_escala_peque03" />
+        <GameObject name="lvl1_escala_peque04" />
+        <GameObject name="lvl1_escala_peque05" />
+        <GameObject name="lvl1_escala_peque06" />
+        <GameObject name="lvl1_escala_peque07" />
+        <GameObject name="lvl1_escala_peque" />
+        <GameObject name="lvl1_litera_pared12" />
+        <GameObject name="lvl1_litera_pared13" />
+        <GameObject name="lvl1_litera_pared14" />
+        <GameObject name="lvl1_litera_pared15" />
+        <GameObject name="lvl1_litera_pared107" />
+        <GameObject name="lvl1_litera_pared108" />
+        <GameObject name="lvl1_litera_pared105" />
+        <GameObject name="lvl1_litera_pared106" />
+        <GameObject name="lvl1_litera_pared101" />
+        <GameObject name="lvl1_litera_pared102" />
+        <GameObject name="lvl1_litera_pared99" />
+        <GameObject name="lvl1_litera_pared100" />
+        <GameObject name="lvl1_litera_pared04" />
+        <GameObject name="lvl1_litera_pared05" />
+        <GameObject name="lvl1_litera_pared06" />
+        <GameObject name="lvl1_litera_pared07" />
+        <GameObject name="lvl1_litera_pared64" />
+        <GameObject name="lvl1_litera_pared65" />
+        <GameObject name="lvl1_litera_pared66" />
+        <GameObject name="lvl1_litera_pared67" />
+        <GameObject name="lvl1_litera_pared97" />
+        <GameObject name="lvl1_litera_pared98" />
+        <GameObject name="lvl1_litera_pared68" />
+        <GameObject name="lvl1_litera_pared69" />
+        <GameObject name="lvl1_litera_pared70" />
+        <GameObject name="lvl1_litera_pared71" />
+        <GameObject name="lvl1_litera_pared72" />
+        <GameObject name="lvl1_litera_pared73" />
+        <GameObject name="lvl1_litera_pared74" />
+        <GameObject name="lvl1_litera_pared75" />
+        <GameObject name="lvl1_litera_pared76" />
+        <GameObject name="lvl1_litera_pared77" />
+        <GameObject name="lvl1_litera_pared78" />
+        <GameObject name="lvl1_litera_pared79" />
+        <GameObject name="lvl1_litera_pared80" />
+        <GameObject name="lvl1_litera_pared81" />
+        <GameObject name="lvl1_litera_pared82" />
+        <GameObject name="lvl1_litera_pared83" />
+        <GameObject name="lvl1_litera_pared84" />
+        <GameObject name="lvl1_litera_pared85" />
+        <GameObject name="lvl1_litera_pared86" />
+        <GameObject name="lvl1_litera_pared87" />
+        <GameObject name="lvl1_litera_pared95" />
+        <GameObject name="lvl1_litera_pared96" />
+        <GameObject name="lvl1_litera_pared94" />
+        <GameObject name="lvl1_litera_pared93" />
+        <GameObject name="lvl1_litera_pared88" />
+        <GameObject name="lvl1_litera_pared89" />
+        <GameObject name="lvl1_litera_pared90" />
+        <GameObject name="lvl1_litera_pared91" />
+        <GameObject name="lvl1_litera_pared60" />
+        <GameObject name="lvl1_litera_pared61" />
+        <GameObject name="lvl1_litera_pared62" />
+        <GameObject name="lvl1_litera_pared63" />
+        <GameObject name="lvl1_litera_pared56" />
+        <GameObject name="lvl1_litera_pared57" />
+        <GameObject name="lvl1_litera_pared58" />
+        <GameObject name="lvl1_litera_pared59" />
+        <GameObject name="lvl1_litera_pared16" />
+        <GameObject name="lvl1_litera_pared17" />
+        <GameObject name="lvl1_litera_pared18" />
+        <GameObject name="lvl1_litera_pared19" />
+        <GameObject name="lvl1_litera_pared103" />
+        <GameObject name="lvl1_litera_pared104" />
+        <GameObject name="lvl1_cadenas25" />
+        <GameObject name="lvl1_cadenas26" />
+        <GameObject name="lvl1_cadenas28" />
+        <GameObject name="lvl1_cadenas30" />
+        <GameObject name="lvl1_Box58" />
+        <GameObject name="lvl1_escala03" />
+        <GameObject name="lvl1_escala04" />
+        <GameObject name="lvl1_escala05" />
+        <GameObject name="lvl1_escala06" />
+        <GameObject name="lvl1_escala07" />
+        <GameObject name="lvl1_escala08" />
+        <GameObject name="lvl1_escala09" />
+        <GameObject name="lvl1_escala10" />
+        <GameObject name="lvl1_escala11" />
+        <GameObject name="lvl1_escala12" />
+        <GameObject name="lvl1_taquilla12" />
+        <GameObject name="lvl1_taquilla13" />
+        <GameObject name="lvl1_taquilla14" />
+        <GameObject name="lvl1_taquilla15" />
+        <GameObject name="lvl1_cadenas213" />
+        <GameObject name="lvl1_cadenas214" />
+        <GameObject name="lvl1_cadenas215" />
+        <GameObject name="lvl1_cadenas216" />
+        <GameObject name="lvl1_cadenas209" />
+        <GameObject name="lvl1_cadenas210" />
+        <GameObject name="lvl1_cadenas211" />
+        <GameObject name="lvl1_cadenas212" />
+        <GameObject name="lvl1_cadenas201" />
+        <GameObject name="lvl1_cadenas202" />
+        <GameObject name="lvl1_cadenas197" />
+        <GameObject name="lvl1_cadenas198" />
+        <GameObject name="lvl1_cadenas199" />
+        <GameObject name="lvl1_cadenas200" />
+        <GameObject name="lvl1_cadenas08" />
+        <GameObject name="lvl1_cadenas11" />
+        <GameObject name="lvl1_cadenas13" />
+        <GameObject name="lvl1_cadenas15" />
+        <GameObject name="lvl1_cadenas128" />
+        <GameObject name="lvl1_cadenas129" />
+        <GameObject name="lvl1_cadenas130" />
+        <GameObject name="lvl1_cadenas131" />
+        <GameObject name="lvl1_cadenas132" />
+        <GameObject name="lvl1_cadenas133" />
+        <GameObject name="lvl1_cadenas134" />
+        <GameObject name="lvl1_cadenas135" />
+        <GameObject name="lvl1_cadenas193" />
+        <GameObject name="lvl1_cadenas194" />
+        <GameObject name="lvl1_cadenas195" />
+        <GameObject name="lvl1_cadenas196" />
+        <GameObject name="lvl1_cadenas136" />
+        <GameObject name="lvl1_cadenas137" />
+        <GameObject name="lvl1_cadenas138" />
+        <GameObject name="lvl1_cadenas139" />
+        <GameObject name="lvl1_cadenas140" />
+        <GameObject name="lvl1_cadenas141" />
+        <GameObject name="lvl1_cadenas142" />
+        <GameObject name="lvl1_cadenas143" />
+        <GameObject name="lvl1_cadenas144" />
+        <GameObject name="lvl1_cadenas145" />
+        <GameObject name="lvl1_cadenas146" />
+        <GameObject name="lvl1_cadenas147" />
+        <GameObject name="lvl1_cadenas148" />
+        <GameObject name="lvl1_cadenas149" />
+        <GameObject name="lvl1_cadenas150" />
+        <GameObject name="lvl1_cadenas151" />
+        <GameObject name="lvl1_cadenas152" />
+        <GameObject name="lvl1_cadenas153" />
+        <GameObject name="lvl1_cadenas154" />
+        <GameObject name="lvl1_cadenas155" />
+        <GameObject name="lvl1_cadenas156" />
+        <GameObject name="lvl1_cadenas157" />
+        <GameObject name="lvl1_cadenas158" />
+        <GameObject name="lvl1_cadenas159" />
+        <GameObject name="lvl1_cadenas160" />
+        <GameObject name="lvl1_cadenas161" />
+        <GameObject name="lvl1_cadenas162" />
+        <GameObject name="lvl1_cadenas163" />
+        <GameObject name="lvl1_cadenas164" />
+        <GameObject name="lvl1_cadenas165" />
+        <GameObject name="lvl1_cadenas166" />
+        <GameObject name="lvl1_cadenas167" />
+        <GameObject name="lvl1_cadenas168" />
+        <GameObject name="lvl1_cadenas169" />
+        <GameObject name="lvl1_cadenas170" />
+        <GameObject name="lvl1_cadenas171" />
+        <GameObject name="lvl1_cadenas172" />
+        <GameObject name="lvl1_cadenas173" />
+        <GameObject name="lvl1_cadenas174" />
+        <GameObject name="lvl1_cadenas175" />
+        <GameObject name="lvl1_cadenas189" />
+        <GameObject name="lvl1_cadenas190" />
+        <GameObject name="lvl1_cadenas191" />
+        <GameObject name="lvl1_cadenas192" />
+        <GameObject name="lvl1_cadenas188" />
+        <GameObject name="lvl1_cadenas187" />
+        <GameObject name="lvl1_cadenas186" />
+        <GameObject name="lvl1_cadenas185" />
+        <GameObject name="lvl1_cadenas176" />
+        <GameObject name="lvl1_cadenas177" />
+        <GameObject name="lvl1_cadenas178" />
+        <GameObject name="lvl1_cadenas179" />
+        <GameObject name="lvl1_cadenas180" />
+        <GameObject name="lvl1_cadenas181" />
+        <GameObject name="lvl1_cadenas182" />
+        <GameObject name="lvl1_cadenas183" />
+        <GameObject name="lvl1_cadenas121" />
+        <GameObject name="lvl1_cadenas122" />
+        <GameObject name="lvl1_cadenas124" />
+        <GameObject name="lvl1_cadenas126" />
+        <GameObject name="lvl1_cadenas112" />
+        <GameObject name="lvl1_cadenas115" />
+        <GameObject name="lvl1_cadenas117" />
+        <GameObject name="lvl1_cadenas119" />
+        <GameObject name="lvl1_cadenas32" />
+        <GameObject name="lvl1_cadenas33" />
+        <GameObject name="lvl1_cadenas34" />
+        <GameObject name="lvl1_cadenas35" />
+        <GameObject name="lvl1_cadenas36" />
+        <GameObject name="lvl1_cadenas37" />
+        <GameObject name="lvl1_cadenas38" />
+        <GameObject name="lvl1_cadenas39" />
+        <GameObject name="lvl1_viga24" />
+        <GameObject name="lvl1_viga25" />
+        <GameObject name="lvl1_viga26" />
+        <GameObject name="lvl1_viga27" />
+        <GameObject name="lvl1_viga28" />
+        <GameObject name="lvl1_viga29" />
+        <GameObject name="lvl1_viga30" />
+        <GameObject name="lvl1_viga31" />
+        <GameObject name="lvl1_fluorescente_ences06" />
+        <GameObject name="lvl1_fluorescente_ences08" />
+        <GameObject name="lvl1_fluorescente_ences09" />
+        <GameObject name="lvl1_fluorescente_ences11" />
+        <GameObject name="lvl1_fluorescente_ences12" />
+        <GameObject name="lvl1_fluorescente_ences13" />
+        <GameObject name="lvl1_fluorescente_apagat02" />
+        <GameObject name="lvl1_fluorescente_apagat03" />
+        <GameObject name="lvl1_fluorescente_apagat04" />
+        <GameObject name="lvl1_Box56" />
+        <GameObject name="lvl1_cadenas205" />
+        <GameObject name="lvl1_cadenas206" />
+        <GameObject name="lvl1_cadenas207" />
+        <GameObject name="lvl1_cadenas208" />
+        <GameObject name="lvl1_Plane20" />
+        <GameObject name="lvl1_Plane21" />
+        <GameObject name="lvl1_Plane22" />
+        <GameObject name="lvl1_Plane23" />
+        <GameObject name="lvl1_Plane25" />
+        <GameObject name="lvl1_caixa_llarga17" />
+        <GameObject name="lvl1_caixa_llarga18" />
+        <GameObject name="lvl1_Plane24" />
+      </Objects>
+    </Room>
+    <Room name="Room04">
+      <Boundings>
+        <Box name="RoomSizeRoom04" size="14.2987 8.63202 21.4906" position="18.8738 2.69026 39.9325" yaw="45.0" pitch="0.0" roll="0.0" />
+      </Boundings>
+      <Objects>
+        <GameObject name="lvl1_fluorescente_ences" />
+        <GameObject name="lvl1_barra_dutxes" />
+        <GameObject name="lvl1_Aixeta" />
+        <GameObject name="lvl1_Aixeta01" />
+        <GameObject name="lvl1_Aixeta02" />
+        <GameObject name="lvl1_Aixeta03" />
+        <GameObject name="lvl1_Aixeta04" />
+        <GameObject name="lvl1_Aixeta05" />
+        <GameObject name="lvl1_Aixeta06" />
+        <GameObject name="lvl1_Aixeta07" />
+        <GameObject name="lvl1_Aixeta08" />
+        <GameObject name="lvl1_Aixeta09" />
+        <GameObject name="lvl1_Aixeta10" />
+        <GameObject name="lvl1_Aixeta11" />
+        <GameObject name="lvl1_Aixeta12" />
+        <GameObject name="lvl1_Aixeta13" />
+        <GameObject name="lvl1_Aixeta14" />
+        <GameObject name="lvl1_Aixeta15" />
+        <GameObject name="lvl1_dutxa15" />
+        <GameObject name="lvl1_viga" />
+        <GameObject name="lvl1_viga01" />
+        <GameObject name="lvl1_viga02" />
+        <GameObject name="lvl1_viga03" />
+        <GameObject name="lvl1_viga04" />
+        <GameObject name="lvl1_viga05" />
+        <GameObject name="lvl1_Plane01" />
+        <GameObject name="lvl1_Plane02" />
+        <GameObject name="lvl1_Plane03" />
+        <GameObject name="lvl1_Plane04" />
+        <GameObject name="lvl1_Box04" />
+        <GameObject name="lvl1_Banc04" />
+        <GameObject name="lvl1_taquilla07" />
+        <GameObject name="lvl1_taquilla08" />
+        <GameObject name="lvl1_taquilla10" />
+        <GameObject name="lvl1_taquilla11" />
+        <GameObject name="lvl1_porta4" />
+        <GameObject name="lvl1_porta2" />
+        <GameObject name="lvl1_porta3" />
+        <GameObject name="lvl1_Plane07" />
+        <GameObject name="lvl1_Plane09" />
+        <GameObject name="lvl1_Plane10" />
+        <GameObject name="lvl1_Plane15" />
+        <GameObject name="lvl1_dutxa16" />
+        <GameObject name="lvl1_dutxa17" />
+        <GameObject name="lvl1_dutxa18" />
+        <GameObject name="lvl1_dutxa19" />
+        <GameObject name="lvl1_dutxa20" />
+        <GameObject name="lvl1_dutxa21" />
+        <GameObject name="lvl1_dutxa22" />
+        <GameObject name="lvl1_dutxa23" />
+        <GameObject name="lvl1_dutxa24" />
+        <GameObject name="lvl1_dutxa25" />
+        <GameObject name="lvl1_dutxa26" />
+        <GameObject name="lvl1_dutxa27" />
+        <GameObject name="lvl1_dutxa28" />
+        <GameObject name="lvl1_dutxa29" />
+        <GameObject name="lvl1_dutxa30" />
+        <GameObject name="lvl1_Plane17" />
+        <GameObject name="lvl1_Plane18" />
+        <GameObject name="lvl1_LAVABO" />
+        <GameObject name="lvl1_LAVABO01" />
+        <GameObject name="lvl1_LAVABO02" />
+        <GameObject name="lvl1_LAVABO03" />
+        <GameObject name="lvl1_Plane19" />
+        <GameObject name="lvl1_Banc06" />
+        <GameObject name="lvl1_Banc09" />
+        <GameObject name="lvl1_Banc10" />
+        <GameObject name="lvl1_Banc08" />
+        <GameObject name="lvl1_Banc07" />
+        <GameObject name="lvl1_Plane11" />
+        <GameObject name="lvl1_Plane14" />
+        <GameObject name="lvl1_Plane12" />
+        <GameObject name="lvl1_viga06" />
+        <GameObject name="lvl1_Plane06" />
+        <GameObject name="lvl1_taquilla09" />
+        <GameObject name="lvl1_taquilla04" />
+        <GameObject name="lvl1_Plane05" />
+        <GameObject name="lvl1_Plane08" />
+        <GameObject name="lvl1_Plane13" />
+        <GameObject name="lvl1_Plane16" />
+        <GameObject name="lvl1_taquilla" />
+        <GameObject name="lvl1_fluorescente_apagat" />
+        <GameObject name="lvl1_fluorescente_ences01" />
+        <GameObject name="lvl1_fluorescente_ences02" />
+        <GameObject name="lvl1_fluorescente_ences03" />
+        <GameObject name="lvl1_fluorescente_ences04" />
+        <GameObject name="lvl1_fluorescente_ences05" />
+        <GameObject name="lvl1_fluorescente_apagat01" />
+        <GameObject name="lvl1_taquilla06" />
+        <GameObject name="lvl1_taquilla01" />
+      </Objects>
+    </Room>
+    <Room name="Pass04">
+      <Boundings>
+        <Box name="RoomSizePass04_01" size="29.8163 9.45167 5.4821" position="21.5183 0.86612 0.0885215" yaw="0.0" pitch="0.0" roll="0.0" />
+        <Box name="RoomSizePass04_02" size="5.48209 15.968 23.8873" position="33.6639 -5.49098 -9.06759" yaw="0.0" pitch="0.0" roll="0.0" />
+      </Boundings>
+      <Objects>
+        <GameObject name="lvl1_escalas" />
+        <GameObject name="lvl1_escala02" />
+        <GameObject name="lvl1_Passadis04" />
+        <GameObject name="lvl1_Lum02" />
+        <GameObject name="lvl1_aguanta_llums02" />
+        <GameObject name="lvl1_Lum01" />
+        <GameObject name="lvl1_aguanta_llums01" />
+        <GameObject name="lvl1_Lum" />
+        <GameObject name="lvl1_aguanta_llums" />
+        <GameObject name="lvl1_Lum03" />
+        <GameObject name="lvl1_aguanta_llums03" />
+        <GameObject name="lvl1_Lum04" />
+        <GameObject name="lvl1_aguanta_llums04" />
+        <GameObject name="lvl1_Lum05" />
+        <GameObject name="lvl1_aguanta_llums05" />
+        <GameObject name="lvl1_Lum06" />
+        <GameObject name="lvl1_aguanta_llums06" />
+        <GameObject name="lvl1_Lum07" />
+        <GameObject name="lvl1_aguanta_llums07" />
+        <GameObject name="lvl1_Lum08" />
+        <GameObject name="lvl1_aguanta_llums08" />
+        <GameObject name="lvl1_Caixa_estatica_petita39" />
+        <GameObject name="lvl1_Caixa_estatica_petita40" />
+      </Objects>
+    </Room>
+    <Room name="Room02">
+      <Boundings>
+        <Box name="RoomSizeRoom02" size="21.6679 7.16879 21.6679" position="32.1222 -6.95723 -31.2108" yaw="0.0" pitch="0.0" roll="0.0" />
+      </Boundings>
+      <Objects>
+        <GameObject name="lvl1_armeria" />
+        <GameObject name="lvl1_viga08" />
+        <GameObject name="lvl1_viga09" />
+        <GameObject name="lvl1_viga10" />
+        <GameObject name="lvl1_viga11" />
+        <GameObject name="lvl1_viga12" />
+        <GameObject name="lvl1_viga13" />
+        <GameObject name="lvl1_viga14" />
+        <GameObject name="lvl1_viga15" />
+        <GameObject name="lvl1_viga16" />
+        <GameObject name="lvl1_viga17" />
+        <GameObject name="lvl1_viga18" />
+        <GameObject name="lvl1_viga19" />
+        <GameObject name="lvl1_Box03" />
+        <GameObject name="lvl1_Box02" />
+        <GameObject name="lvl1_lat" />
+        <GameObject name="lvl1_lat01" />
+        <GameObject name="lvl1_stan1" />
+        <GameObject name="lvl1_lat02" />
+        <GameObject name="lvl1_Box01" />
+        <GameObject name="lvl1_Box05" />
+        <GameObject name="lvl1_Box06" />
+        <GameObject name="lvl1_lat03" />
+        <GameObject name="lvl1_lat04" />
+        <GameObject name="lvl1_stan02" />
+        <GameObject name="lvl1_lat05" />
+        <GameObject name="lvl1_Box07" />
+        <GameObject name="lvl1_Box08" />
+        <GameObject name="lvl1_Box09" />
+        <GameObject name="lvl1_lat06" />
+        <GameObject name="lvl1_lat07" />
+        <GameObject name="lvl1_stan03" />
+        <GameObject name="lvl1_lat08" />
+        <GameObject name="lvl1_Box10" />
+        <GameObject name="lvl1_Box11" />
+        <GameObject name="lvl1_Box12" />
+        <GameObject name="lvl1_lat09" />
+        <GameObject name="lvl1_lat10" />
+        <GameObject name="lvl1_stan04" />
+        <GameObject name="lvl1_lat11" />
+        <GameObject name="lvl1_Box13" />
+        <GameObject name="lvl1_lat12" />
+        <GameObject name="lvl1_Box14" />
+        <GameObject name="lvl1_Box15" />
+        <GameObject name="lvl1_lat13" />
+        <GameObject name="lvl1_lat14" />
+        <GameObject name="lvl1_stan05" />
+        <GameObject name="lvl1_Box16" />
+        <GameObject name="lvl1_lat15" />
+        <GameObject name="lvl1_Box17" />
+        <GameObject name="lvl1_Box18" />
+        <GameObject name="lvl1_lat16" />
+        <GameObject name="lvl1_lat17" />
+        <GameObject name="lvl1_stan06" />
+        <GameObject name="lvl1_Box19" />
+        <GameObject name="lvl1_Box20" />
+        <GameObject name="lvl1_Box21" />
+        <GameObject name="lvl1_lat18" />
+        <GameObject name="lvl1_lat19" />
+        <GameObject name="lvl1_stan07" />
+        <GameObject name="lvl1_lat20" />
+        <GameObject name="lvl1_Box22" />
+        <GameObject name="lvl1_lat21" />
+        <GameObject name="lvl1_Box23" />
+        <GameObject name="lvl1_Box24" />
+        <GameObject name="lvl1_lat22" />
+        <GameObject name="lvl1_lat23" />
+        <GameObject name="lvl1_stan08" />
+        <GameObject name="lvl1_Box25" />
+        <GameObject name="lvl1_lat24" />
+        <GameObject name="lvl1_Box26" />
+        <GameObject name="lvl1_Box27" />
+        <GameObject name="lvl1_lat25" />
+        <GameObject name="lvl1_lat26" />
+        <GameObject name="lvl1_stan09" />
+        <GameObject name="lvl1_Box28" />
+        <GameObject name="lvl1_lat27" />
+        <GameObject name="lvl1_Box29" />
+        <GameObject name="lvl1_Box30" />
+        <GameObject name="lvl1_lat28" />
+        <GameObject name="lvl1_lat29" />
+        <GameObject name="lvl1_stan10" />
+        <GameObject name="lvl1_Box31" />
+        <GameObject name="lvl1_lat30" />
+        <GameObject name="lvl1_Box32" />
+        <GameObject name="lvl1_Box33" />
+        <GameObject name="lvl1_lat31" />
+        <GameObject name="lvl1_lat32" />
+        <GameObject name="lvl1_stan11" />
+        <GameObject name="lvl1_Box34" />
+        <GameObject name="lvl1_lat33" />
+        <GameObject name="lvl1_Box35" />
+        <GameObject name="lvl1_Box36" />
+        <GameObject name="lvl1_lat34" />
+        <GameObject name="lvl1_lat35" />
+        <GameObject name="lvl1_stan12" />
+        <GameObject name="lvl1_Box37" />
+        <GameObject name="lvl1_lat36" />
+        <GameObject name="lvl1_Box38" />
+        <GameObject name="lvl1_Box39" />
+        <GameObject name="lvl1_lat37" />
+        <GameObject name="lvl1_lat38" />
+        <GameObject name="lvl1_stan13" />
+        <GameObject name="lvl1_Box40" />
+        <GameObject name="lvl1_lat39" />
+        <GameObject name="lvl1_Box41" />
+        <GameObject name="lvl1_Box42" />
+        <GameObject name="lvl1_lat40" />
+        <GameObject name="lvl1_lat41" />
+        <GameObject name="lvl1_stan14" />
+        <GameObject name="lvl1_Box43" />
+        <GameObject name="lvl1_lat45" />
+        <GameObject name="lvl1_Box47" />
+        <GameObject name="lvl1_Box48" />
+        <GameObject name="lvl1_lat46" />
+        <GameObject name="lvl1_lat47" />
+        <GameObject name="lvl1_stan16" />
+        <GameObject name="lvl1_Box49" />
+        <GameObject name="lvl1_lat48" />
+        <GameObject name="lvl1_Box50" />
+        <GameObject name="lvl1_Box51" />
+        <GameObject name="lvl1_lat49" />
+        <GameObject name="lvl1_lat50" />
+        <GameObject name="lvl1_stan17" />
+        <GameObject name="lvl1_Box52" />
+        <GameObject name="lvl1_lat51" />
+        <GameObject name="lvl1_Box53" />
+        <GameObject name="lvl1_Box54" />
+        <GameObject name="lvl1_lat52" />
+        <GameObject name="lvl1_lat53" />
+        <GameObject name="lvl1_stan18" />
+        <GameObject name="lvl1_Box55" />
+        <GameObject name="lvl1_viga20" />
+        <GameObject name="lvl1_viga21" />
+        <GameObject name="lvl1_viga22" />
+        <GameObject name="lvl1_viga23" />
+        <GameObject name="lvl1_Caixa_gran02" />
+        <GameObject name="lvl1_Caixa_gran03" />
+        <GameObject name="lvl1_Caixa_estatica_petita00" />
+        <GameObject name="lvl1_Caixa_estatica_petita01" />
+        <GameObject name="lvl1_Caixa_gran05" />
+        <GameObject name="lvl1_Caixa_gran06" />
+        <GameObject name="lvl1_Caixa_gran07" />
+        <GameObject name="lvl1_Caixa_gran08" />
+        <GameObject name="lvl1_Caixa_gran09" />
+        <GameObject name="lvl1_Caixa_gran10" />
+        <GameObject name="lvl1_Caixa_gran11" />
+        <GameObject name="lvl1_Caixa_gran12" />
+        <GameObject name="lvl1_Caixa_gran13" />
+        <GameObject name="lvl1_Caixa_gran14" />
+        <GameObject name="lvl1_Caixa_gran15" />
+        <GameObject name="lvl1_Caixa_gran16" />
+        <GameObject name="lvl1_Caixa_gran17" />
+        <GameObject name="lvl1_Caixa_gran18" />
+        <GameObject name="lvl1_Caixa_gran19" />
+        <GameObject name="lvl1_Caixa_gran20" />
+        <GameObject name="lvl1_Caixa_gran21" />
+        <GameObject name="lvl1_caixa_llarga" />
+        <GameObject name="lvl1_caixa_llarga01" />
+        <GameObject name="lvl1_caixa_llarga02" />
+        <GameObject name="lvl1_caixa_llarga03" />
+        <GameObject name="lvl1_caixa_llarga04" />
+        <GameObject name="lvl1_caixa_llarga05" />
+        <GameObject name="lvl1_caixa_llarga06" />
+        <GameObject name="lvl1_caixa_llarga07" />
+        <GameObject name="lvl1_caixa_llarga08" />
+        <GameObject name="lvl1_caixa_llarga09" />
+        <GameObject name="lvl1_caixa_llarga10" />
+        <GameObject name="lvl1_caixa_llarga11" />
+        <GameObject name="lvl1_caixa_llarga_dife" />
+        <GameObject name="lvl1_caixa_llarga_dife01" />
+        <GameObject name="lvl1_caixa_llarga_dife02" />
+        <GameObject name="lvl1_caixa_llarga_dife03" />
+        <GameObject name="lvl1_Caixa_gran22" />
+        <GameObject name="lvl1_caixa_llarga_dife04" />
+        <GameObject name="lvl1_caixa_llarga_dife05" />
+        <GameObject name="lvl1_caixa_llarga_dife06" />
+        <GameObject name="lvl1_caixa_llarga_dife07" />
+        <GameObject name="lvl1_Caixa_gran23" />
+        <GameObject name="lvl1_Caixa_estatica_petita02" />
+        <GameObject name="lvl1_Caixa_estatica_petita03" />
+        <GameObject name="lvl1_Caixa_estatica_petita04" />
+        <GameObject name="lvl1_Caixa_estatica_petita05" />
+        <GameObject name="lvl1_Caixa_estatica_petita06" />
+        <GameObject name="lvl1_Caixa_estatica_petita07" />
+        <GameObject name="lvl1_Caixa_estatica_petita08" />
+        <GameObject name="lvl1_Caixa_estatica_petita09" />
+        <GameObject name="lvl1_Caixa_estatica_petita10" />
+        <GameObject name="lvl1_Caixa_estatica_petita11" />
+        <GameObject name="lvl1_Caixa_estatica_petita12" />
+        <GameObject name="lvl1_Caixa_estatica_petita13" />
+        <GameObject name="lvl1_Caixa_estatica_petita14" />
+        <GameObject name="lvl1_Caixa_estatica_petita15" />
+        <GameObject name="lvl1_Caixa_gran24" />
+        <GameObject name="lvl1_Caixa_estatica_petita16" />
+        <GameObject name="lvl1_Caixa_estatica_petita17" />
+        <GameObject name="lvl1_Caixa_estatica_petita18" />
+        <GameObject name="lvl1_Caixa_estatica_petita19" />
+        <GameObject name="lvl1_Caixa_estatica_petita20" />
+        <GameObject name="lvl1_Caixa_estatica_petita21" />
+        <GameObject name="lvl1_caixa_llarga_dife08" />
+        <GameObject name="lvl1_Caixa_estatica_petita22" />
+        <GameObject name="lvl1_Caixa_estatica_petita23" />
+        <GameObject name="lvl1_Lum09" />
+        <GameObject name="lvl1_aguanta_llums09" />
+        <GameObject name="lvl1_Porta_planta-1_18" />
+        <GameObject name="lvl1_porta_falsa" />
+        <GameObject name="lvl1_caixa_llarga12" />
+        <GameObject name="lvl1_Caixa_estatica_petita24" />
+        <GameObject name="lvl1_Caixa_gran25" />
+        <GameObject name="lvl1_Caixa_estatica_petita25" />
+        <GameObject name="lvl1_Caixa_gran26" />
+        <GameObject name="lvl1_Caixa_estatica_petita26" />
+        <GameObject name="lvl1_Caixa_estatica_petita27" />
+        <GameObject name="lvl1_caixa_llarga13" />
+        <GameObject name="lvl1_Caixa_gran27" />
+        <GameObject name="lvl1_Caixa_estatica_petita28" />
+        <GameObject name="lvl1_Caixa_estatica_petita29" />
+        <GameObject name="lvl1_caixa_llarga_dife09" />
+        <GameObject name="lvl1_Caixa_gran28" />
+        <GameObject name="lvl1_Caixa_estatica_petita30" />
+        <GameObject name="lvl1_Caixa_estatica_petita31" />
+        <GameObject name="lvl1_caixa_llarga14" />
+        <GameObject name="lvl1_caixa_llarga15" />
+      </Objects>
+    </Room>
+    <Room name="SalaCentral">
+      <Boundings>
+        <Box name="RoomSizeCentral00" size="6.74554 8.57687 15.5031" position="-0.00137615 3.85108 -0.00928164" yaw="0.0" pitch="0.0" roll="0.0" />
+        <Box name="RoomSizeCentral01" size="5.93803 8.57687 15.5031" position="0.030407 3.85108 -0.00919962" yaw="-45.0" pitch="0.0" roll="0.0" />
+        <Box name="RoomSizeCentral02" size="6.85588 8.57687 15.5031" position="0.00213814 3.85108 -0.00911808" yaw="-90.0" pitch="0.0" roll="0.0" />
+        <Box name="RoomSizeCentral03" size="5.93803 8.57687 15.5031" position="-0.00595093 3.85108 -0.00939989" yaw="45.0" pitch="0.0" roll="0.0" />
+      </Boundings>
+      <Objects>
+        <GameObject name="lvl1_Sala_central" />
+        <GameObject name="lvl1_Porta_planta-1_09" />
+        <GameObject name="lvl1_porta" />
+        <GameObject name="lvl1_Porta_planta-1_10" />
+        <GameObject name="lvl1_Porta_planta-1_11" />
+        <GameObject name="lvl1_Porta_planta-1_12" />
+        <GameObject name="lvl1_Porta_planta-1_13" />
+        <GameObject name="lvl1_Porta_planta-1_14" />
+        <GameObject name="lvl1_Porta_planta-1_15" />
+        <GameObject name="lvl1_Porta_planta-1_16" />
+        <GameObject name="lvl1_terra_elevat" />
+        <GameObject name="lvl1_elice" />
+        <GameObject name="lvl1_porta05" />
+        <GameObject name="lvl1_porta06" />
+        <GameObject name="lvl1_porta07" />
+        <GameObject name="lvl1_porta08" />
+        <GameObject name="lvl1_porta09" />
+        <GameObject name="lvl1_porta10" />
+        <GameObject name="lvl1_porta11" />
+      </Objects>
+    </Room>
+  </Rooms>
+  <Portals>
+    <Portal name="PortalR03R04" roomA="Room03" roomB="Room04" size="0.628793 3.24569 2.46673" position="28.2098 1.23221 34.1674" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalP01R03" roomA="Pass01" roomB="Room03" size="3.66242 3.39706 0.789786" position="19.4937 1.35503 19.278" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalRCP01" roomA="SalaCentral" roomB="Pass01" size="3.66242 3.39706 0.789786" position="5.25939 1.35503 5.23637" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalRCP04" roomA="SalaCentral" roomB="Pass04" size="3.66242 3.39706 0.789785" position="7.40228 1.35503 -0.155607" yaw="-90.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalRCPI" roomA="SalaCentral" roomB="PassInici" size="3.66242 3.39706 0.789785" position="0.149349 1.35503 -7.50984" yaw="-180.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalRCP03" roomA="SalaCentral" roomB="Pass03" size="3.66242 3.39706 0.789785" position="-7.36296 1.35503 -0.156072" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalRCPF" roomA="SalaCentral" roomB="PassFinal" size="3.66242 3.39706 0.789785" position="0.124609 1.35503 7.39967" yaw="-180.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalP03R01" roomA="Pass03" roomB="Room01" size="3.66242 3.39706 0.789785" position="-27.4283 1.35503 0.019357" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalP04R02" roomA="Pass04" roomB="Room02" size="3.66242 3.39706 0.789785" position="33.6818 -8.55704 -20.6985" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+  </Portals>
+</Level>

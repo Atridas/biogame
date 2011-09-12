@@ -6,7 +6,7 @@
         <Box name="DummyRoom3" size="40.4178 18.3362 127.458" position="50.9588 0.0 -4.06221" yaw="0.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
-        <GameObject name="Habitacio3" />
+        <GameObject name="proves_Habitacio3" />
       </Objects>
     </Room>
     <Room name="Room2">
@@ -14,30 +14,30 @@
         <Box name="DummyRoom2" size="70.3198 21.4648 104.844" position="-4.52313 0.0 0.428096" yaw="0.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
-        <GameObject name="Habitacio2" />
-        <GameObject name="CaixaPetita00" />
-        <GameObject name="CaixaGrossa00" />
-        <GameObject name="CaixaPetita01" />
-        <GameObject name="CaixaPetita02" />
-        <GameObject name="CaixaPetita03" />
-        <GameObject name="CaixaPetita04" />
-        <GameObject name="CaixaGrossa01" />
-        <GameObject name="CaixaPetita05" />
-        <GameObject name="CaixaPetita06" />
-        <GameObject name="Wall" />
-        <GameObject name="CaixaGrossa02" />
-        <GameObject name="CaixaGrossa03" />
-        <GameObject name="CaixaPetita08" />
-        <GameObject name="CaixaGrossa04" />
-        <GameObject name="CaixaPetita09" />
-        <GameObject name="CaixaPetita10" />
-        <GameObject name="CaixaPetita11" />
-        <GameObject name="Llum" />
-        <GameObject name="CaixaPetita12" />
-        <GameObject name="CaixaPetita13" />
-        <GameObject name="CaixaPetita14" />
-        <GameObject name="CaixaPetita15" />
-        <GameObject name="CaixaPetita16" />
+        <GameObject name="proves_Habitacio2" />
+        <GameObject name="proves_CaixaPetita00" />
+        <GameObject name="proves_CaixaGrossa00" />
+        <GameObject name="proves_CaixaPetita01" />
+        <GameObject name="proves_CaixaPetita02" />
+        <GameObject name="proves_CaixaPetita03" />
+        <GameObject name="proves_CaixaPetita04" />
+        <GameObject name="proves_CaixaGrossa01" />
+        <GameObject name="proves_CaixaPetita05" />
+        <GameObject name="proves_CaixaPetita06" />
+        <GameObject name="proves_Wall" />
+        <GameObject name="proves_CaixaGrossa02" />
+        <GameObject name="proves_CaixaGrossa03" />
+        <GameObject name="proves_CaixaPetita08" />
+        <GameObject name="proves_CaixaGrossa04" />
+        <GameObject name="proves_CaixaPetita09" />
+        <GameObject name="proves_CaixaPetita10" />
+        <GameObject name="proves_CaixaPetita11" />
+        <GameObject name="proves_Llum" />
+        <GameObject name="proves_CaixaPetita12" />
+        <GameObject name="proves_CaixaPetita13" />
+        <GameObject name="proves_CaixaPetita14" />
+        <GameObject name="proves_CaixaPetita15" />
+        <GameObject name="proves_CaixaPetita16" />
       </Objects>
     </Room>
     <Room name="Room1">
@@ -45,14 +45,14 @@
         <Box name="DummyRoom1" size="34.6099 10.5069 106.106" position="-56.1092 0.0 -0.902355" yaw="0.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
-        <GameObject name="BoxGlow" />
-        <GameObject name="BoxNormal" />
-        <GameObject name="BoxAlpha" />
-        <GameObject name="BoxSpecular" />
-        <GameObject name="BoxAlpha01" />
-        <GameObject name="Habitacio1" />
-        <GameObject name="BoxParallax" />
-        <GameObject name="BoxGlowAlpha" />
+        <GameObject name="proves_BoxGlow" />
+        <GameObject name="proves_BoxNormal" />
+        <GameObject name="proves_BoxAlpha" />
+        <GameObject name="proves_BoxSpecular" />
+        <GameObject name="proves_BoxAlpha01" />
+        <GameObject name="proves_Habitacio1" />
+        <GameObject name="proves_BoxParallax" />
+        <GameObject name="proves_BoxGlowAlpha" />
       </Objects>
     </Room>
   </Rooms>
