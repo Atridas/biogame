@@ -6,26 +6,26 @@
         <Box name="Video Bounding" size="12.3023 5.87767 12.8626" position="4.54751 0.5691 8.96852" yaw="25.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
-        <GameObject name="Box20" />
-        <GameObject name="Box22" />
-        <GameObject name="mapa marte_olograma" />
-        <GameObject name="Plataforma" />
-        <GameObject name="Box21" />
-        <GameObject name="comandos" />
-        <GameObject name="Box19" />
-        <GameObject name="Sala de videogililacia" />
-        <GameObject name="balla2" />
-        <GameObject name="marc" />
-        <GameObject name="llum1" />
-        <GameObject name="llum2" />
-        <GameObject name="tubos1" />
-        <GameObject name="tubos2" />
-        <GameObject name="tubos3" />
-        <GameObject name="balla1" />
+        <GameObject name="lvl2_video_Box20" />
+        <GameObject name="lvl2_video_Box22" />
+        <GameObject name="lvl2_video_mapa marte_olograma" />
+        <GameObject name="lvl2_video_Plataforma" />
+        <GameObject name="lvl2_video_Box21" />
+        <GameObject name="lvl2_video_comandos" />
+        <GameObject name="lvl2_video_Box19" />
+        <GameObject name="lvl2_video_Sala de videogililacia" />
+        <GameObject name="lvl2_video_balla2" />
+        <GameObject name="lvl2_video_marc" />
+        <GameObject name="lvl2_video_llum1" />
+        <GameObject name="lvl2_video_llum2" />
+        <GameObject name="lvl2_video_tubos1" />
+        <GameObject name="lvl2_video_tubos2" />
+        <GameObject name="lvl2_video_tubos3" />
+        <GameObject name="lvl2_video_balla1" />
       </Objects>
     </Room>
   </Rooms>
   <Portals>
-    <Portal name="Porta Video" roomA="Sala Video" roomB="Passadis Video" size="5.70498 3.11871 1.17429" position="6.95914 -0.675806 3.30414" yaw="25.0" pitch="0.0" roll="0.0" />
+    <Portal name="Porta Video" roomA="Sala Video" roomB="Passadis Video" size="5.70498 3.11871 1.50749" position="6.95914 -0.675806 3.30414" yaw="25.0" pitch="0.0" roll="0.0" />
   </Portals>
 </Level>

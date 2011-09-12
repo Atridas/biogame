@@ -1,73 +1,73 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Entities>
-  <Entity name="Box20">
+  <Entity name="lvl2_video_Box20">
     <Object3D position="6.08947 -0.101723 10.0979" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="Box20" />
+    <RenderableObject animated="false" name="lvl2_video_Box20" />
   </Entity>
-  <Entity name="Box22">
+  <Entity name="lvl2_video_Box22">
     <Object3D position="2.7272 -0.112341 8.60257" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="Box22" />
+    <RenderableObject animated="false" name="lvl2_video_Box22" />
   </Entity>
-  <Entity name="mapa marte_olograma">
+  <Entity name="lvl2_video_mapa marte_olograma">
     <Object3D position="4.44702 2.52424 9.07804" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="mapa marte_olograma" />
+    <RenderableObject animated="false" name="lvl2_video_mapa marte_olograma" />
   </Entity>
-  <Entity name="Plataforma">
+  <Entity name="lvl2_video_Plataforma">
     <Object3D position="4.32035 -0.365994 9.32081" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="Plataforma" />
+    <RenderableObject animated="false" name="lvl2_video_Plataforma" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="Box21">
+  <Entity name="lvl2_video_Box21">
     <Object3D position="2.14886 0.140294 10.1636" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="Box21" />
+    <RenderableObject animated="false" name="lvl2_video_Box21" />
   </Entity>
-  <Entity name="comandos">
+  <Entity name="lvl2_video_comandos">
     <Object3D position="3.36863 0.0872047 11.0166" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="comandos" />
+    <RenderableObject animated="false" name="lvl2_video_comandos" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
     <Interactive action="salavideo_palanca" />
   </Entity>
-  <Entity name="Box19">
+  <Entity name="lvl2_video_Box19">
     <Object3D position="2.67402 0.140026 10.821" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="Box19" />
+    <RenderableObject animated="false" name="lvl2_video_Box19" />
   </Entity>
-  <Entity name="Sala de videogililacia">
+  <Entity name="lvl2_video_Sala de videogililacia">
     <Object3D position="4.66581 0.5 8.52625" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="Sala de videogililacia" />
+    <RenderableObject animated="false" name="lvl2_video_Sala de videogililacia" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="balla2">
+  <Entity name="lvl2_video_balla2">
     <Object3D position="3.61607 -0.467532 7.20589" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="balla2" />
+    <RenderableObject animated="false" name="lvl2_video_balla2" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="marc">
+  <Entity name="lvl2_video_marc">
     <Object3D position="6.63588 -0.369022 3.27345" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="marc" />
+    <RenderableObject animated="false" name="lvl2_video_marc" />
   </Entity>
-  <Entity name="llum1">
+  <Entity name="lvl2_video_llum1">
     <Object3D position="10.6757 -0.770058 8.27569" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="llum1" />
+    <RenderableObject animated="false" name="lvl2_video_llum1" />
   </Entity>
-  <Entity name="llum2">
+  <Entity name="lvl2_video_llum2">
     <Object3D position="-1.69907 -0.770058 9.82827" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="llum2" />
+    <RenderableObject animated="false" name="lvl2_video_llum2" />
   </Entity>
-  <Entity name="tubos1">
+  <Entity name="lvl2_video_tubos1">
     <Object3D position="10.0234 -0.0973442 11.4245" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tubos1" />
+    <RenderableObject animated="false" name="lvl2_video_tubos1" />
   </Entity>
-  <Entity name="tubos2">
+  <Entity name="lvl2_video_tubos2">
     <Object3D position="6.68524 -0.270436 14.6046" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tubos2" />
+    <RenderableObject animated="false" name="lvl2_video_tubos2" />
   </Entity>
-  <Entity name="tubos3">
+  <Entity name="lvl2_video_tubos3">
     <Object3D position="2.02475 -0.107213 14.4984" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tubos3" />
+    <RenderableObject animated="false" name="lvl2_video_tubos3" />
   </Entity>
-  <Entity name="balla1">
+  <Entity name="lvl2_video_balla1">
     <Object3D position="6.40848 -0.467531 8.38445" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="balla1" />
+    <RenderableObject animated="false" name="lvl2_video_balla1" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Miner name="Miner_video00" position="4.24393 1.04204 10.0279" yaw="0.0" active="false" />

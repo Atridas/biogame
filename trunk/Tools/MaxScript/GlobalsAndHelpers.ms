@@ -139,3 +139,25 @@ function CheckInstancing _objects =
 		)
 	)
 )
+
+--Imprimeix tots els objectes amb resource i el seu nom original.
+function CheckResources =
+(
+	format "Checking resources...\n"
+	local _objects = $*
+	if (_objects != undefined) and (classof _objects == PathName) then
+	(
+		local l_total = _objects.count
+		local l_current = undefined
+		for i = 1 to l_total do
+		(
+			l_current = _objects[i]
+			if (GetUserProp l_current "resource") != undefined then
+			(
+				format "name: % -> resource: %\n" l_current.name (GetUserProp l_current "resource")
+			)
+		)
+	)
+	
+	format "End\n"
+)

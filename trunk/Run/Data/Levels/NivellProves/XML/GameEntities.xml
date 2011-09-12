@@ -1,167 +1,167 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Entities>
-  <Entity name="Habitacio3">
+  <Entity name="proves_Habitacio3">
     <Object3D position="0.0 0.0 0.193104" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="Habitacio3" />
+    <RenderableObject animated="false" name="proves_Habitacio3" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="Habitacio2">
+  <Entity name="proves_Habitacio2">
     <Object3D position="0.0 0.0 0.0861702" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="Habitacio2" />
+    <RenderableObject animated="false" name="proves_Habitacio2" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="CaixaPetita00">
+  <Entity name="proves_CaixaPetita00">
     <Object3D position="-30.8657 0.0 17.8758" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="CaixaPetita00" />
+    <RenderableObject animated="false" name="proves_CaixaPetita00" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="CaixaGrossa00">
+  <Entity name="proves_CaixaGrossa00">
     <Object3D position="-30.4231 0.0 9.9367" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="CaixaGrossa00" />
+    <RenderableObject animated="false" name="proves_CaixaGrossa00" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="CaixaPetita01">
+  <Entity name="proves_CaixaPetita01">
     <Object3D position="-30.8622 0.0 16.8709" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="CaixaPetita01" />
+    <RenderableObject animated="false" name="proves_CaixaPetita01" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="CaixaPetita02">
+  <Entity name="proves_CaixaPetita02">
     <Object3D position="-30.9255 0.0 2.69175" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="CaixaPetita02" />
+    <RenderableObject animated="false" name="proves_CaixaPetita02" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="CaixaPetita03">
+  <Entity name="proves_CaixaPetita03">
     <Object3D position="-31.4716 0.0 -2.44387" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="CaixaPetita03" />
+    <RenderableObject animated="false" name="proves_CaixaPetita03" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="CaixaPetita04">
+  <Entity name="proves_CaixaPetita04">
     <Object3D position="-30.8322 -0.00296688 14.1841" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="CaixaPetita04" />
+    <RenderableObject animated="false" name="proves_CaixaPetita04" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="CaixaGrossa01">
+  <Entity name="proves_CaixaGrossa01">
     <Object3D position="-30.4231 0.0 4.19834" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="CaixaGrossa01" />
+    <RenderableObject animated="false" name="proves_CaixaGrossa01" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="CaixaPetita05">
+  <Entity name="proves_CaixaPetita05">
     <Object3D position="-30.9653 0.0 -1.56407" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="CaixaPetita05" />
+    <RenderableObject animated="false" name="proves_CaixaPetita05" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="CaixaPetita06">
+  <Entity name="proves_CaixaPetita06">
     <Object3D position="-31.4716 1.00344 -2.44405" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="CaixaPetita06" />
+    <RenderableObject animated="false" name="proves_CaixaPetita06" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="Wall">
+  <Entity name="proves_Wall">
     <Object3D position="-25.5656 0.0 4.80554" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="Wall" />
+    <RenderableObject animated="false" name="proves_Wall" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="CaixaGrossa02">
+  <Entity name="proves_CaixaGrossa02">
     <Object3D position="-22.3861 0.0 4.23714" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="CaixaGrossa02" />
+    <RenderableObject animated="false" name="proves_CaixaGrossa02" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="CaixaGrossa03">
+  <Entity name="proves_CaixaGrossa03">
     <Object3D position="-31.3156 0.0 -10.6048" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="CaixaGrossa03" />
+    <RenderableObject animated="false" name="proves_CaixaGrossa03" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="CaixaPetita08">
+  <Entity name="proves_CaixaPetita08">
     <Object3D position="-31.9764 0.0 -12.1037" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="CaixaPetita08" />
+    <RenderableObject animated="false" name="proves_CaixaPetita08" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="CaixaGrossa04">
+  <Entity name="proves_CaixaGrossa04">
     <Object3D position="-31.2776 0.0 -8.27065" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="CaixaGrossa04" />
+    <RenderableObject animated="false" name="proves_CaixaGrossa04" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="CaixaPetita09">
+  <Entity name="proves_CaixaPetita09">
     <Object3D position="-30.6888 0.0 -12.3158" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="CaixaPetita09" />
+    <RenderableObject animated="false" name="proves_CaixaPetita09" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="CaixaPetita10">
+  <Entity name="proves_CaixaPetita10">
     <Object3D position="-31.02 0.0 -6.68225" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="CaixaPetita10" />
+    <RenderableObject animated="false" name="proves_CaixaPetita10" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="CaixaPetita11">
+  <Entity name="proves_CaixaPetita11">
     <Object3D position="-31.0784 0.0 -5.56841" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="CaixaPetita11" />
+    <RenderableObject animated="false" name="proves_CaixaPetita11" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="Llum">
+  <Entity name="proves_Llum">
     <Object3D position="-5.82813 2.0 28.9546" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="Llum" />
+    <RenderableObject animated="false" name="proves_Llum" />
   </Entity>
-  <Entity name="CaixaPetita12">
+  <Entity name="proves_CaixaPetita12">
     <Object3D position="-22.8825 1.00344 5.75414" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="CaixaPetita12" />
+    <RenderableObject animated="false" name="proves_CaixaPetita12" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="CaixaPetita13">
+  <Entity name="proves_CaixaPetita13">
     <Object3D position="-22.8825 0.0 5.75432" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="CaixaPetita13" />
+    <RenderableObject animated="false" name="proves_CaixaPetita13" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="CaixaPetita14">
+  <Entity name="proves_CaixaPetita14">
     <Object3D position="-28.1784 0.0 -3.2059" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="CaixaPetita14" />
+    <RenderableObject animated="false" name="proves_CaixaPetita14" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="CaixaPetita15">
+  <Entity name="proves_CaixaPetita15">
     <Object3D position="-28.1784 1.00344 -3.20607" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="CaixaPetita15" />
+    <RenderableObject animated="false" name="proves_CaixaPetita15" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="CaixaPetita16">
+  <Entity name="proves_CaixaPetita16">
     <Object3D position="-28.6072 0.0 -2.29994" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="CaixaPetita16" />
+    <RenderableObject animated="false" name="proves_CaixaPetita16" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="BoxGlow">
+  <Entity name="proves_BoxGlow">
     <Object3D position="-54.6592 0.0376649 7.0358" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="BoxGlow" />
+    <RenderableObject animated="false" name="proves_BoxGlow" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="BoxNormal">
+  <Entity name="proves_BoxNormal">
     <Object3D position="-54.6592 0.0376649 -5.08054" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="BoxNormal" />
+    <RenderableObject animated="false" name="proves_BoxNormal" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="BoxAlpha">
+  <Entity name="proves_BoxAlpha">
     <Object3D position="-57.4588 0.0376649 -18.0876" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="BoxAlpha" />
+    <RenderableObject animated="false" name="proves_BoxAlpha" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="BoxSpecular">
+  <Entity name="proves_BoxSpecular">
     <Object3D position="-54.6592 0.0376649 -36.8326" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="BoxSpecular" />
+    <RenderableObject animated="false" name="proves_BoxSpecular" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="BoxAlpha01">
+  <Entity name="proves_BoxAlpha01">
     <Object3D position="-50.0065 0.0376649 -24.0954" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="BoxAlpha01" />
+    <RenderableObject animated="false" name="proves_BoxAlpha01" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="Habitacio1">
+  <Entity name="proves_Habitacio1">
     <Object3D position="0.0 0.0 0.193104" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="Habitacio1" />
+    <RenderableObject animated="false" name="proves_Habitacio1" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="BoxParallax">
+  <Entity name="proves_BoxParallax">
     <Object3D position="-54.6592 0.0376668 36.6172" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="BoxParallax" />
+    <RenderableObject animated="false" name="proves_BoxParallax" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="BoxGlowAlpha">
+  <Entity name="proves_BoxGlowAlpha">
     <Object3D position="-54.6592 0.0376649 21.9762" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="BoxGlowAlpha" />
+    <RenderableObject animated="false" name="proves_BoxGlowAlpha" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="TriggerDummy">
@@ -262,24 +262,24 @@
     <Object3D position="-39.5838 1.84525 2.51199" yaw="0.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="9.23271 3.66754 9.23271" collision_group="trigger" onEnter="open_door" onExit="close_door" />
   </Entity>
-  <Entity name="BoxReflection">
+  <Entity name="proves_BoxReflection">
     <Object3D position="-25.0811 1.25635 -5.30342" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="BoxReflection" />
+    <RenderableObject animated="false" name="proves_BoxReflection" />
   </Entity>
-  <Entity name="TeteraPickUp">
+  <Entity name="proves_TeteraPickUp">
     <Object3D position="-24.3621 0.624995 21.6316" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="TeteraPickUp" />
+    <RenderableObject animated="false" name="proves_TeteraPickUp" />
     <Trigger shape="box" size="0.541901 0.265549 0.337204" collision_group="pickup" onEnter="pick_up_tetera" />
   </Entity>
-  <Entity name="EsferaInteractiva">
+  <Entity name="proves_EsferaInteractiva">
     <Object3D position="-24.4011 0.968018 24.6365" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="EsferaInteractiva" />
+    <RenderableObject animated="false" name="proves_EsferaInteractiva" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
     <Interactive action="esfera_interactiva" />
   </Entity>
-  <Entity name="EsferaDestructible">
+  <Entity name="proves_EsferaDestructible">
     <Object3D position="-16.8264 1.42554 23.2763" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="EsferaDestructible" />
+    <RenderableObject animated="false" name="proves_EsferaDestructible" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
     <Destroyable onDestroy="esfera_destructible" destroyedResource="TeteraPickUp" />
   </Entity>
@@ -503,15 +503,15 @@
     <Object3D position="50.9588 2.0 3.34681" yaw="0.0" pitch="0.0" roll="0.0" />
     <EnemySpawner enemy_type="miner" spawn_time="5.0" total_enemy="10" active="false" />
   </Entity>
-  <Entity name="EsferaDestructible01">
+  <Entity name="proves_EsferaDestructible01">
     <Object3D position="-13.2122 0.387946 23.2763" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="EsferaDestructible01" />
+    <RenderableObject animated="false" name="proves_EsferaDestructible01" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
     <Destroyable onDestroy="prova_explosio" />
   </Entity>
-  <Entity name="EsferaDestructible02">
+  <Entity name="proves_EsferaDestructible02">
     <Object3D position="-10.3951 0.387946 23.2769" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="EsferaDestructible02" />
+    <RenderableObject animated="false" name="proves_EsferaDestructible02" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
     <Destroyable onDestroy="bido_explosiu" />
     <Explosive />
