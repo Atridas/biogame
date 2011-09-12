@@ -4,6 +4,7 @@
 #include "PreSceneRendererStep.h"
 #include "SceneRendererStep.h"
 #include "PostSceneRendererStep.h"
+#include "DeferredPostSceneRendererStep.h"
 #include "ShadowMapPreRendererStep.h"
 #include "Core.h"
 #include "RenderManager.h"
@@ -126,7 +127,16 @@ bool CRenderer::Init(const string& _szFileName)
 
         if(string(l_treePostRenderer.GetName()) == "post_scene_renderer")
         {
-          CPostSceneRendererStep* l_pPostRenderer = new CPostSceneRendererStep();
+          CPostSceneRendererStep* l_pPostRenderer = 0;
+
+          string l_szType = l_treePostRenderer.GetPszISOProperty("type","post_scene_renderer",false);
+
+          if(l_szType == "deferred_post_scene_renderer")
+          {
+            l_pPostRenderer = new CDeferredPostSceneRendererStep();
+          }else{
+            l_pPostRenderer = new CPostSceneRendererStep();
+          }
 
           if(!l_pPostRenderer->Init(l_treePostRenderer))
           {
@@ -157,9 +167,6 @@ void CRenderer::Render(CProcess* _pProcess)
   CRenderManager* l_pRM = RENDER_MANAGER;
 
   m_pCamera = _pProcess->GetCamera();
-
-  CEffectManager* l_pEM = CORE->GetEffectManager();
-  l_pEM->Begin();
 
   l_pRM->BeginRendering();
 

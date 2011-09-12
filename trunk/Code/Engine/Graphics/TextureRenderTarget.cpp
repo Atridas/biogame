@@ -5,10 +5,11 @@
 #include "Core.h"
 #include "RenderManager.h"
 
-bool CTextureRenderTarget::Init(CXMLTreeNode& _treeRenderTarget, int _iWidth, int _iHeight, const string& _szFormat)
+bool CTextureRenderTarget::Init(CXMLTreeNode& _treeRenderTarget, int _iWidth, int _iHeight)
 {
   int l_iIndex = _treeRenderTarget.GetIntProperty("index",0,false);
   string l_szTextureName = _treeRenderTarget.GetPszISOProperty("texture","",false);
+  string l_szFormatType = _treeRenderTarget.GetPszISOProperty("format_type","A8R8G8B8");
 
   m_iWidth = _iWidth;
   m_iHeight = _iHeight;
@@ -26,7 +27,7 @@ bool CTextureRenderTarget::Init(CXMLTreeNode& _treeRenderTarget, int _iWidth, in
                           1,
                           CTexture::RENDERTARGET,
                           CTexture::DEFAULT,
-                          CTexture::GetFormatTypeFromString(_szFormat)))
+                          CTexture::GetFormatTypeFromString(l_szFormatType)))
     {
       m_pSurface = m_pTexture->GetSurface();
       m_pDepthStencilSurface = m_pTexture->GetDepthStencilSurface();
@@ -60,9 +61,8 @@ bool CTextureRenderTarget::Init(CXMLTreeNode& _treeRenderTarget, int _iWidth, in
   return IsOk();
 }
 
-void CTextureRenderTarget::Activate()
+void CTextureRenderTarget::Activate(CRenderManager* l_pRM)
 {
-  CRenderManager* l_pRM = RENDER_MANAGER;
   CColor l_Color = l_pRM->GetClearColor();
   uint32 l_uiRed		= (uint32) (l_Color.GetRed() * 255);
 	uint32 l_uiGreen	= (uint32) (l_Color.GetGreen() * 255);
@@ -70,7 +70,7 @@ void CTextureRenderTarget::Activate()
 
   l_pRM->GetDevice()->ColorFill( m_pSurface, 0, D3DCOLOR_ARGB(0,l_uiRed,l_uiGreen,l_uiBlue));
 
-  CRenderTarget::Activate();
+  CRenderTarget::Activate(l_pRM);
 }
 
 void CTextureRenderTarget::Release()

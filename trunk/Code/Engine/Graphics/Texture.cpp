@@ -151,6 +151,11 @@ bool CTexture::Create(const string& _szName,
   case R32F:
     l_Format=D3DFMT_R32F;
     break;
+  case R16G16F:
+    l_Format=D3DFMT_G16R16F;
+    break;
+  case A16B16G16R16F:
+    l_Format = D3DFMT_A16B16G16R16F;
   }
 
   HRESULT hr=RENDER_MANAGER->GetDevice()->CreateTexture(_uiWidth,
@@ -239,6 +244,10 @@ CTexture::TFormatType CTexture::GetFormatTypeFromString(const string &FormatType
    return CTexture::R8G8B8;
   else if(FormatType=="X8R8G8B8")
     return CTexture::X8R8G8B8;
+  else if(FormatType=="R16G16F")
+    return CTexture::R16G16F;
+  else if(FormatType=="A16B16G16R16F")
+    return CTexture::A16B16G16R16F;
   else
     LOGGER->AddNewLog(ELL_WARNING,"CTexture::GetFormatTypeFromString Format Type '%s' not recognized", FormatType.c_str());
 

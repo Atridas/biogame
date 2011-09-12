@@ -8,6 +8,7 @@ class CCamera;
 class CObject3D;
 class COmniLight;
 class CEmiterInstance;
+class CSpotLight;
 //-----------------------------------------
 
 class CBiotestProcess :
@@ -27,6 +28,7 @@ private:
   void                  Release           ();
 
   COmniLight* m_pOmniLight;
+  CSpotLight*           m_pSpotLight;
 
   CEmiterInstance* m_pEmiter;
 };

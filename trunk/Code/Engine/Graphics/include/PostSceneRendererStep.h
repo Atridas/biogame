@@ -17,15 +17,17 @@ public:
 
   bool Init(CXMLTreeNode& _treePostSceneRenderer);
 
-  virtual void Render(CRenderManager* _pRM, CCamera* _pCamera) {Render();};
+  virtual void Render(CRenderManager* _pRM, CCamera* _pCamera) {Render(_pRM);};
 
   void SetTime(float _fTime) {m_fTime = _fTime;};
   void SetAlpha(float _fAlpha) {m_fAlphaFactor = _fAlpha;};
 
 protected:
-  virtual void Render();
+  virtual void Render(CRenderManager* _pRM);
 
   virtual void Release();
+
+  string m_szEffect;
 
   float m_fTime;
   bool m_bUseTime;
@@ -33,10 +35,6 @@ protected:
   Vect2i m_iSize;
   Vect2i m_iPos;
   ETypeAlignment m_Alignment;
-
-private:
-
-  string m_szEffect;
 };
 
 #endif

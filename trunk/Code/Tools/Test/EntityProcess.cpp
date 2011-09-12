@@ -74,7 +74,7 @@ bool CEntityProcess::Init()
   m_pSpotLight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
                                                           Vect3f(0.0f,15.0f,0.0f),
                                                           Vect3f(0.3f,-1.0f,0.0f),
-                                                          CColor(Vect3f(1.0f,0.0f,1.0f)),
+                                                          CColor(Vect3f(1.0f,1.0f,1.0f)),
                                                           20.0f,
                                                           80.0f,
                                                           10.0f,
@@ -84,8 +84,8 @@ bool CEntityProcess::Init()
   m_pSpotLight->SetDirection(Vect3f(0.3f,-1.0f,0.0f).Normalize());
   m_pSpotLight->SetActive(true);
 
-  CShadowMapPreRendererStep* l_pShadowMapPreRenderStep = (CShadowMapPreRendererStep*)CORE->GetRenderer()->GetPreSceneRendererStep("shadow_map_renderer");
-  l_pShadowMapPreRenderStep->SetShadowMapLightCast(m_pSpotLight);
+  //CShadowMapPreRendererStep* l_pShadowMapPreRenderStep = (CShadowMapPreRendererStep*)CORE->GetRenderer()->GetPreSceneRendererStep("shadow_map_renderer");
+  //l_pShadowMapPreRenderStep->SetShadowMapLightCast(m_pSpotLight);
 
   CORE->GetIAManager()->CompleteGraph();
 

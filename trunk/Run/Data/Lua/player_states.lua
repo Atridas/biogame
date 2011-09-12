@@ -53,8 +53,11 @@ camera_player = function(_jugador, _dt)
   local velx = vec.x * _dt
   local vely = vec.y * _dt
   
-  local vel = math.sqrt(velx*velx + vely*vely) / 2.5
+  local vel = math.sqrt(velx*velx + vely*vely) / 2.0
   
+  if vel > 1.0 then
+    vel = 1.0
+  end
   
   pitch = object3d:get_pitch()
   yaw   = object3d:get_yaw()

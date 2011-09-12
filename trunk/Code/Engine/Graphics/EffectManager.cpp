@@ -143,6 +143,61 @@ void CEffectManager::SetSpecularParams(float _fGlossiness, float _fSpecularLevel
   }
 }
 
+void CEffectManager::SetLight(CLight* _pLight)
+{
+  m_bLightEnabled = false;
+  m_iLightType = 0;
+  m_fLightAngleCos = 0.0f;
+  m_fLightFallOffCos = 0.0f;
+  m_fLightStartRangeSQ = 0.0f;
+  m_fLightEndRangeSQ = 0.0f;
+  m_vLightPosition = Vect3f(0.0f);
+  m_vLightDirection = Vect3f(0.0f);
+  m_cLightColor = CColor(Vect4f(1.0f));
+  m_bLightShadowEnabled = false;
+  m_bLightDynamicOnly = false;
+
+  m_bLightEnabled = _pLight->IsActive();
+
+  if(m_bLightEnabled)
+  {
+    m_iLightType = _pLight->GetType();
+    m_fLightStartRangeSQ = _pLight->GetStartRangeAttenuation();
+    m_fLightStartRangeSQ *= m_fLightStartRangeSQ;
+    m_fLightEndRangeSQ = _pLight->GetEndRangeAttenuation();
+    m_fLightEndRangeSQ *= m_fLightEndRangeSQ;
+    Vect4f l_vLightPosition = m_mViewMatrix * Vect4f(_pLight->GetPosition().x, _pLight->GetPosition().y, _pLight->GetPosition().z, 1.0f);
+    m_vLightPosition = Vect3f(l_vLightPosition.x, l_vLightPosition.y, l_vLightPosition.z);
+    m_cLightColor = _pLight->GetColor();
+    m_bLightShadowEnabled = _pLight->GetRenderShadows();
+    m_bLightDynamicOnly = _pLight->GetDynamicObjectsOnly();
+
+    if(_pLight->GetType() == CLight::DIRECTIONAL || _pLight->GetType() == CLight::SPOT)
+    {
+      CDirectionalLight* l_pDirectional = (CDirectionalLight*) _pLight;
+
+      Vect4f l_vLightDirection = m_mViewMatrix * Vect4f(l_pDirectional->GetDirection().x, l_pDirectional->GetDirection().y, l_pDirectional->GetDirection().z, 0.0f);
+      m_vLightDirection = Vect3f(l_vLightDirection.x, l_vLightDirection.y, l_vLightDirection.z);
+      
+      if(_pLight->GetType() == CLight::SPOT)
+      {
+        CSpotLight* l_pSpot = (CSpotLight*) l_pDirectional;
+
+        m_fLightAngleCos   = l_pSpot->GetAngle() * FLOAT_PI_VALUE / 180.0f;
+        m_fLightFallOffCos = l_pSpot->GetFallOff() * FLOAT_PI_VALUE / 180.0f;
+
+        m_fLightAngleCos   *= 0.5f; // agafar només la meitat
+        m_fLightFallOffCos *= 0.5f;
+
+        m_fLightAngleCos   = cosf(m_fLightAngleCos); // volem el cosinus, que calcular-lo al shader val un iogurt.
+        m_fLightFallOffCos = cosf(m_fLightFallOffCos);
+      }
+    }
+  }
+
+  m_bLightUpdated = true;
+}
+
 void CEffectManager::LoadShaderData(CEffect* _pEffect)
 {
   if(!_pEffect)
@@ -165,6 +220,23 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     _pEffect->SetValue("Glossiness", m_fGlossiness);
     _pEffect->SetValue("SpecularLevel", m_fSpecularLevel);
     m_bSpecularParamsUpdated = false;
+  }
+
+  if(m_bLightUpdated)
+  {
+    //_pEffect->SetValue("LightEnabled", m_bLightEnabled);
+    _pEffect->SetValue("LightType", m_iLightType);
+    _pEffect->SetValue("LightPosition", m_vLightPosition);
+    _pEffect->SetValue("LightDirection", m_vLightDirection);
+    _pEffect->SetValue("LightColor", Vect4f(m_cLightColor.GetRed(),m_cLightColor.GetGreen(),m_cLightColor.GetBlue(),m_cLightColor.GetAlpha()));
+    _pEffect->SetValue("LightAngleCos", m_fLightAngleCos);
+    _pEffect->SetValue("LightFallOffCos", m_fLightFallOffCos);
+    _pEffect->SetValue("LightStartRangeSQ", m_fLightStartRangeSQ);
+    _pEffect->SetValue("LightEndRangeSQ", m_fLightEndRangeSQ);
+    _pEffect->SetValue("LightShadowEnabled", m_bLightShadowEnabled);
+    _pEffect->SetValue("LightDynamicObjectsOnly", m_bLightDynamicOnly);
+
+    m_bLightUpdated = false;
   }
 
   if(m_bLightsUpdated)

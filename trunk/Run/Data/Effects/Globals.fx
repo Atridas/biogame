@@ -80,6 +80,20 @@ shared float   g_LightsEndRangeSQ[MAXLIGHTS]  : LightsEndRangeSQ;
 shared bool    g_ShadowEnabled[MAXLIGHTS]     : ShadowEnabled;
 shared bool    g_DynamicObjectsOnly[MAXLIGHTS]: DynamicObjectsOnly;
 
+//Deferred
+
+shared bool    g_LightEnabled       : LightEnabled;
+shared int     g_LightType          : LightType;
+shared float3  g_LightPosition      : LightPosition;
+shared float3  g_LightDirection     : LightDirection;
+shared float4  g_LightColor         : LightColor;
+shared float   g_LightAngleCos      : LightAngleCos;
+shared float   g_LightFallOffCos    : LightFallOffCos;
+shared float   g_LightStartRangeSQ  : LightStartRangeSQ;
+shared float   g_LightEndRangeSQ    : LightEndRangeSQ;
+shared bool    g_LightShadowEnabled : LightShadowEnabled;
+shared bool    g_LightDynamicOnly   : LightDynamicObjectsOnly;
+
 //Other
 shared float3 g_CameraUp       : CameraUp;
 shared float3 g_CameraRight    : CameraRight;

@@ -39,7 +39,7 @@ float3 ComputeLight(float3 _Normal,          //Normal of the pixel
 	  
   if(ndoth > 0.0)	
   {
-    _out += pow(abs(ndoth), _MaterialSpecularPow) * l_AuxColor * _MaterialSpotlightFactor * g_SpotlightFactor;
+    _out += pow(abs(ndoth), _MaterialSpecularPow) * l_AuxColor * _MaterialSpotlightFactor;
   }
   
   return _out;

@@ -15,7 +15,7 @@
 #include "SphereCamera.h"
 #include "ActionManager.h"
 #include "EmiterManager.h"
-
+#include "SpotLight.h"
 #include "Core.h"
 #include "SoundManager.h"
 
@@ -35,8 +35,11 @@ void CBiotestProcess::Update(float _fElapsedTime)
   //l_vLightMod = Vect3f(0,1,0) - l_vLightMod;
 
   //m_pOmniLight->SetPosition(l_vPlayerPos + l_vLightMod);
+  CObject3D* m_pPlayerPos = CORE->GetEntityManager()->GetEntity("Player")->GetComponent<CComponentObject3D>();
 
-  CObject3D* m_pPlayerPos = CORE->GetEntityManager()->GetEntity("Player")->GetComponent<CComponentObject3D>(CBaseComponent::ECT_OBJECT_3D);
+  m_pSpotLight->SetPosition(m_pPlayerPos->GetPosition());
+  m_pSpotLight->SetDirection(m_pCamera->GetDirection());
+
   CORE->GetSoundManager()->UpdateSound3DSystem(m_pPlayerPos->GetPosition(),m_pCamera->GetDirection());
 
   m_pEmiter->Update(_fElapsedTime);
@@ -69,7 +72,7 @@ void CBiotestProcess::RenderScene(CRenderManager* _pRM)
 void CBiotestProcess::RenderINFO(CRenderManager* _pRM)
 {
   //CORE->GetEmiterManager()->DebugRender(_pRM);
-  CORE->GetPhysicsManager()->DebugRender(_pRM);
+  //CORE->GetPhysicsManager()->DebugRender(_pRM);
   //CORE->GetPortalManager()->DebugRender(_pRM);
   //CORE->GetIAManager()->GetGraph()->DebugRender(_pRM);
 }
@@ -110,6 +113,18 @@ bool CBiotestProcess::Init()
 
   
   CORE->GetIAManager()->CompleteGraph();
+
+  m_pSpotLight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
+                                                          Vect3f(0.0f,15.0f,0.0f),
+                                                          Vect3f(0.3f,-1.0f,0.0f),
+                                                          CColor(Vect3f(1.0f,1.0f,1.0f)),
+                                                          20.0f,
+                                                          80.0f,
+                                                          10.0f,
+                                                          45.0f,
+                                                          false );
+
+  m_pSpotLight->SetActive(true);
 
   SetOk(true);
   return IsOk();
