@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Config>
+  <RenderManager resolution="1280 720" position="50 5" fullscreenMode="false"/>
+  
+	<StaticMeshManager>
+    <StaticMeshes xml="Data/XML/StaticMeshes.xml"/>
+    <StaticMeshes xml="Data/Levels/Hangar/XML/StaticMeshes.xml"/>
+  </StaticMeshManager>
+  
+	<AnimatedModelManager>
+    <AnimatedModels xml="Data/XML/AnimatedModels.xml"/>
+  </AnimatedModelManager>
+    
+	<EffectManager xml="Data/XML/Effects.xml"/>
+  <EmiterCorelManager>
+    <Core file="Data/XML/Emiters.xml"/>
+  </EmiterCorelManager>
+	<FontManager fontsXML="./Data/XML/Fonts.xml"/>
+	<Languages default="cat">
+		<Language languageXML="./Data/Language/spanish.xml"/>
+		<Language languageXML="./Data/Language/catalan.xml"/>
+		<Language languageXML="./Data/Language/english.xml"/>
+	</Languages>
+	<InputManager exclusiveMouse="true" sensitivity="2.0"/>
+	<ActionToInput file="./Data/XML/actions_entities.xml"/>
+
+	<!-- RenderableObjectsManager file="Data/XML/RenderableObjects.xml" -->
+	<!-- RenderableObjectsManager file="Data/Levels/Level -2/XML/RenderableObjects.xml" -->
+	<!--RenderableObjectsManager file="Data/Levels/Proves/XML/RenderableObjects.xml"-->
+	<RenderableObjectsManager file="Data/Levels/Hangar/XML/RenderableObjects.xml">
+    <!-- Level xml="Data/Levels/Level -2/XML/RenderableObjects - Laboratori.xml"/ -->
+    <!--
+    <Level xml="Data/XML/RenderableObjects.xml"/>
+    <Level xml="Data/Levels/Level -1/XML/RenderableObjects.xml"/>
+    <Level xml="Data/Levels/Level -2/XML/RenderableObjects.xml"/>
+    <Level xml="Data/Levels/Hangar/XML/RenderableObjects.xml"/>
+    <Level xml="Data/Levels/Proves/XML/RenderableObjects.xml"/>
+    -->
+	</RenderableObjectsManager>
+  <PortalManager file="./Data/Levels/Hangar/XML/Level.xml">
+  </PortalManager>
+  
+	<LightsManager file="Data/Levels/Hangar/XML/Lights.xml"/>
+
+	<SceneEffectManager file="Data/XML/SceneEffects_Viewer.xml"/>
+  
+  <ScriptManager file="Data/XML/Lua.xml"/>
+
+  <!-- GUIManager xml="Data/XML/GUI.xml" start="Main.xml" render_mouse="true"/ -->
+  <GUIManager xml="Data/XML/GUI_test.xml" start="Main.xml" render_mouse="false"/>
+
+  <SoundManager file="Data/XML/Sound.xml"/>
+
+  <EmiterCorelManager>
+    <Core file="Data/XML/Emiters.xml"/>
+  </EmiterCorelManager>
+  
+</Config>
