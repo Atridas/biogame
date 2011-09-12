@@ -64,5 +64,14 @@
     <None Include="..\..\..\Run\Data\XML\actions.xml">
       <Filter>Data</Filter>
     </None>
+    <None Include="..\..\..\Run\Data\XML\init -2.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\init Hangar.xml">
+      <Filter>Data</Filter>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\init -1.xml">
+      <Filter>Data</Filter>
+    </None>
   </ItemGroup>
 </Project>

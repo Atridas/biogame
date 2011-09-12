@@ -2,6 +2,12 @@
 
 Player_Constants = {}
 
+
+--mouse
+Player_Constants["Mouse Speed Divisor"] = 2.5
+Player_Constants["Mouse Max Speed"] = 0.75
+
+
 --velocitats
 Player_Constants["Walk Speed"] = 2
 Player_Constants["Run Speed"] = 5
@@ -53,10 +59,12 @@ camera_player = function(_jugador, _dt)
   local velx = vec.x * _dt
   local vely = vec.y * _dt
   
-  local vel = math.sqrt(velx*velx + vely*vely) / 2.0
+  local vel = math.sqrt(velx*velx + vely*vely) / Player_Constants["Mouse Speed Divisor"]
   
-  if vel > 1.0 then
-    vel = 1.0
+
+
+  if vel > Player_Constants["Mouse Max Speed"] then
+    vel = Player_Constants["Mouse Max Speed"]
   end
   
   pitch = object3d:get_pitch()
