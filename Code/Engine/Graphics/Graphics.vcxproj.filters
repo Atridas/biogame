@@ -265,6 +265,9 @@
     <Filter Include="Renderer\InputSampler\FrameBufferInputSampler">
       <UniqueIdentifier>{45cd2c5c-64ae-4337-a674-ce4f7ec6f549}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer\RendererStep\PostSceneRendererStep\DeferredPostSceneRendererStep">
+      <UniqueIdentifier>{3ca5d5ba-6508-45a4-bb0d-72549d8b78b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -443,6 +446,9 @@
     </ClCompile>
     <ClCompile Include="RenderableObject.cpp">
       <Filter>RenderableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="DeferredPostSceneRendererStep.cpp">
+      <Filter>Renderer\RendererStep\PostSceneRendererStep\DeferredPostSceneRendererStep</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -691,6 +697,9 @@
     </ClInclude>
     <ClInclude Include="include\FrameBufferInputSampler.h">
       <Filter>Renderer\InputSampler\FrameBufferInputSampler</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DeferredPostSceneRendererStep.h">
+      <Filter>Renderer\RendererStep\PostSceneRendererStep\DeferredPostSceneRendererStep</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

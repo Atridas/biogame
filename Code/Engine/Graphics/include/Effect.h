@@ -40,6 +40,7 @@ public:
   void SetValue(const string& _szParameterName,int _iValue);
   void SetValue(const string& _szParameterName,float _fValue);
   void SetValue(const string& _szParameterName,Vect3f& _vValue);
+  void SetValue(const string& _szParameterName,Vect4f& _vValue);
   void SetValue(const string& _szParameterName,Mat44f _matValue);
 
   void SetValue(const string& _szParameterName,int _iValue[], uint32 _uiSize);

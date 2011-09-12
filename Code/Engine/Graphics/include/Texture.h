@@ -82,7 +82,9 @@ public:
     A8R8G8B8=0,
     R8G8B8,
     X8R8G8B8,
-    R32F
+    R32F,
+    R16G16F,
+    A16B16G16R16F
   };
 
   bool Create(const string& _szName,

@@ -63,7 +63,15 @@
     <effect name="DownSample4x" file="Data/Effects/Downsampling.fx" technique="DownSample4xTechnique" />
     
     <!--<effect name="Gas" file="Data/Effects/Gas.fx"/>-->
-
+    
+    <effect name="DeferredLightPass" file="Data/Effects/DeferredLightPass.fx" technique="DeferredLightPassTechnique" />
+    <effect name="DeferredAmbientPass" file="Data/Effects/DeferredAmbientPass.fx" technique="DeferredAmbientPassTechnique" />
+    <effect name="ShowDepth" file="Data/Effects/ShowDepth.fx" technique="ShowDepthTechnique" />
+    <effect name="NormalDiffusedDeferred" texture_mask="0" file="Data/Effects/NormalDiffusedDeferred.fx" technique="NormalDiffusedDeferredTechnique" />
+    <effect name="NormalTexturedDeferred" texture_mask="34" file="Data/Effects/NormalTexturedDeferred.fx" technique="NormalTexturedDeferredTechnique" />
+    <effect name="AnimatedNormalTexturedDeferred" texture_mask="34" file="Data/Effects/AnimatedNormalTexturedDeferred.fx" technique="AnimatedNormalTexturedDeferredTechnique" />
+    <effect name="NormalmapTexturedDeferred" texture_mask="38" file="Data/Effects/NormalmapTexturedDeferred.fx" technique="NormalmapTexturedDeferredTechnique" />
+    <effect name="AnimatedNormalmapTexturedDeferred" texture_mask="38" file="Data/Effects/AnimatedNormalmapTexturedDeferred.fx" technique="AnimatedNormalmapTexturedDeferredTechnique" />
   </effects>
 
 

@@ -15,8 +15,8 @@ public:
   CRenderTarget() : m_iIndex(0),m_pSurface(0),m_pDepthStencilSurface(0),m_pPrevSurface(0),m_pPrevDepthStencilSurface(0) {};
   virtual ~CRenderTarget() {Done();};
   
-  virtual void Activate();
-  void Deactivate();
+  virtual void Activate(CRenderManager* l_pRM);
+  void Deactivate(CRenderManager* l_pRM);
 
 protected:
 

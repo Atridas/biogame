@@ -16,7 +16,7 @@
 //#define NS_ENVIRONMENT
 
 
-//Tangent, radiosity i Specular necessiten tenir les primeres coordenades de textura i la normal (iluminació) per funcionar.
+//Tangent, radiosity i Specular necessiten tenir les primeres coordenades de textura i la normal (iluminaci�) per funcionar.
 
 #if defined( NS_RADIOSITY_NORMALMAP )
 
@@ -55,9 +55,7 @@
 struct TNEW_VS
 {
 	float3 Position : POSITION;
-  #if defined( NS_LIGHTING )
-    float3 Normal : NORMAL;
-  #endif
+  float3 Normal : NORMAL;
   #if defined( NS_TEX0 )
     float4 UV : TEXCOORD0;
   #else
@@ -77,7 +75,7 @@ struct TNEW_VS
 };
 
 struct TNEW_PS {
-	float4 HPosition : POSITION;
+  float4 HPosition : POSITION;
   #if defined( NS_TEX0 )
     float2 UV : TEXCOORD0;
   #else
@@ -86,21 +84,22 @@ struct TNEW_PS {
   #if defined( NS_LIGHTMAP )
     float2 UV2 : TEXCOORD1;
   #endif
-  #if defined( NS_LIGHTING )
-    float3 WorldPosition : TEXCOORD2;
-    float3 WorldNormal : TEXCOORD3;
-    float4 PosLight      : TEXCOORD6;
-  #endif
   #if defined( NS_NORMALMAP )
+    float3 WorldNormal : TEXCOORD3;
     float3 WorldTangent : TEXCOORD4;
     float3 WorldBinormal : TEXCOORD5;
+  #else
+    float3 ViewNormal : TEXCOORD3;
   #endif
+  float4 ViewPosition : TEXCOORD6;
 };
 
 struct PS_OUTPUT
 {
 	float4	Color		: COLOR0;
-	float4	Glow		: COLOR1;
+	float4	Normals : COLOR1;
+  float4	PosXY   : COLOR2;
+  float4	Depth   : COLOR3;
 };
 
 TNEW_PS NewVS(TNEW_VS _in) 
@@ -111,32 +110,31 @@ TNEW_PS NewVS(TNEW_VS _in)
     float3 l_Position  = CalcAnimtedPos(float4(_in.Position.xyz,1.0), _in.Indices, _in.Weight);
     float3 l_Normal    = CalcAnimtedPos(float4(_in.Normal.xyz,0.0), _in.Indices, _in.Weight);
     float4 l_LocalPosition=float4(-l_Position.x,l_Position.y,l_Position.z, 1.0);
-  #endif
-	
-  #if defined( NS_LIGHTING )
-    #if defined( NS_CAL3D )
-      #if defined( NS_NORMALMAP )
-        float3 l_Tangent   = CalcAnimtedPos(float4(_in.Tangent.xyz,0.0), _in.Indices, _in.Weight);
-        float3 l_Binormal = CalcAnimtedPos(float4(_in.Binormal.xyz,0.0), _in.Indices, _in.Weight);
-        out_.WorldTangent = mul(float4(l_Tangent.x,-l_Tangent.y,-l_Tangent.z,0.0),g_WorldMatrix);
-        out_.WorldBinormal = mul(float4(l_Binormal.x,-l_Binormal.y,-l_Binormal.z,0.0),g_WorldMatrix);
-      #endif
+    
+    #if defined( NS_NORMALMAP )
+      float3 l_Tangent   = CalcAnimtedPos(float4(_in.Tangent.xyz,0.0), _in.Indices, _in.Weight);
+      float3 l_Binormal = CalcAnimtedPos(float4(_in.Binormal.xyz,0.0), _in.Indices, _in.Weight);
       
-      out_.WorldPosition=mul(l_LocalPosition,g_WorldMatrix);  
-      out_.WorldNormal = mul(float4(-l_Normal.x,l_Normal.y,l_Normal.z,0.0),g_WorldMatrix);
-      
-      float4 l_ViewPosition = mul(float4(l_LocalPosition.xyz,1.0),g_WorldViewMatrix);
-    #else
-      out_.WorldNormal   = mul(_in.Normal,(float3x3)g_WorldMatrix);
-      out_.WorldPosition = mul(float4(_in.Position,1.0),g_WorldMatrix).xyz;
-      float4 l_ViewPosition = mul(float4(_in.Position,1.0),g_WorldViewMatrix);
+      l_Tangent = float3(l_Tangent.x,-l_Tangent.y,-l_Tangent.z);
+      l_Binormal = float3(l_Binormal.x,-l_Binormal.y,-l_Binormal.z);
     #endif
-    out_.PosLight = mul(l_ViewPosition, g_ViewToLightProjectionMatrix);
+    l_Normal = float3(-l_Normal.x,l_Normal.y,l_Normal.z);
+  #else
+    float4 l_LocalPosition = float4(_in.Position,1.0);
+    float3 l_Normal    = _in.Normal.xyz;
+    
+    #if defined( NS_NORMALMAP )
+      float3 l_Tangent   = _in.Tangent.xyz;
+      float3 l_Binormal  = _in.Binormal.xyz;
+    #endif
   #endif
   
   #if defined( NS_NORMALMAP )
-    out_.WorldTangent  = mul(_in.Tangent,(float3x3)g_WorldMatrix);
-    out_.WorldBinormal = mul(_in.Binormal,(float3x3)g_WorldMatrix);
+    out_.WorldNormal   = mul(l_Normal  , (float3x3)g_WorldMatrix);
+    out_.WorldTangent  = mul(l_Tangent , (float3x3)g_WorldMatrix);
+    out_.WorldBinormal = mul(l_Binormal, (float3x3)g_WorldMatrix);
+  #else
+    out_.ViewNormal    = mul(l_Normal, (float3x3)g_WorldViewMatrix);
   #endif
 
   #if defined( NS_TEX0 )
@@ -149,14 +147,16 @@ TNEW_PS NewVS(TNEW_VS _in)
     out_.UV2 = _in.UV2.xy;
   #endif
 
-  #if defined( NS_CAL3D )
-    out_.HPosition = mul(l_LocalPosition, g_WorldViewProjectionMatrix );
-  #else
-    out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
-  #endif
-	
+	out_.HPosition = mul(l_LocalPosition, g_WorldViewProjectionMatrix );
+  out_.ViewPosition=mul(l_LocalPosition,g_WorldViewMatrix);
+  
 	return out_;
 }
+
+
+
+
+
 
 PS_OUTPUT NewPS(TNEW_PS _in)
 {
@@ -170,14 +170,14 @@ PS_OUTPUT NewPS(TNEW_PS _in)
   
   #if defined( NS_NORMALMAP )
     float4 l_Bump;
-    float3 l_Normal = CalcNormalmap((float3)_in.WorldTangent, 
-                                    (float3)_in.WorldBinormal, 
-                                    (float3)_in.WorldNormal, 
-                                    _in.UV, l_Bump);
+    float3 l_WorldNormal = CalcNormalmap((float3)_in.WorldTangent, 
+                                         (float3)_in.WorldBinormal, 
+                                         (float3)_in.WorldNormal, 
+                                         _in.UV, l_Bump);
+                                         
+    float3 l_ViewNormal = mul(l_WorldNormal, (float3x3)g_ViewMatrix);
   #else
-    #if defined( NS_LIGHTING )
-      float3 l_Normal = normalize(_in.WorldNormal);
-    #endif
+    float3 l_ViewNormal = normalize(_in.ViewNormal);
   #endif
 
   #if defined( NS_TEX0 )
@@ -186,68 +186,23 @@ PS_OUTPUT NewPS(TNEW_PS _in)
     float4 l_DiffuseColor = _in.Color;
   #endif
 
-
-  #if defined( NS_LIGHTING )
-  
-    #if defined( NS_LIGHTMAP )
-      #if defined( NS_RADIOSITY_NORMALMAP )
-        float4 l_AmbientColor = RadiosityNormalLightmapColor(l_Bump, _in.UV2) * 2.0;
-      #else
-        float4 l_AmbientColor = tex2D(LightmapTextureSampler,_in.UV2) * 2.0;
-      #endif
-    #else
-      float4 l_AmbientColor = float4(g_AmbientLight,1.0);
-    #endif
-    
-    
-    
-    #if defined( NS_SPECULARMAP )
-      float  l_SpotlightFactor = 1.0;
-      
-      #if defined ( NS_ENVIRONMENT )
-        float l_SpecularTextureValue = tex2D(SpecularTextureSampler,_in.UV).x;
-        if(g_SpecularActive)
-          l_SpotlightFactor;
-      #else
-        if(g_SpecularActive)
-          l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x;
-      #endif
-    #else
-      #if defined ( NS_ENVIRONMENT )
-        float l_SpecularTextureValue = 1.0;
-      #endif 
-      float  l_SpotlightFactor = g_SpotlightFactor;
-    #endif
-
-    float3 l_EyeDirection = normalize(g_CameraPosition - _in.WorldPosition);
-    l_DiffuseColor = float4(ComputeAllLightsNew( l_Normal, _in.WorldPosition, l_EyeDirection,
-                                              l_DiffuseColor, l_AmbientColor, l_SpotlightFactor * g_SpotlightFactor,
-                                              _in.PosLight,l_DynamicObject)
-                                             ,l_DiffuseColor.a);    
-          
-    #if defined ( NS_ENVIRONMENT )
-      float3 l_ReflectionVector = normalize(reflect(-l_EyeDirection, l_Normal));
-      float4 l_EnvColor = texCUBE(EnvironmentTextureSampler, l_ReflectionVector);
-      //l_DiffuseColor += l_SpotlightFactor * l_EnvColor;
-      //l_DiffuseColor = float4(l_SpotlightFactor, l_SpotlightFactor, l_SpotlightFactor, 1);
-      l_DiffuseColor += g_EnvironmentIntensity * l_SpecularTextureValue * l_EnvColor;
-    #endif
-                                             
-  #endif
   
   l_Output.Color = l_DiffuseColor;
+  l_Output.Normals = float4(l_ViewNormal.xyz * 0.5 + 0.5, 0.0);
+  l_Output.PosXY = float4(_in.ViewPosition.xy, 0, 0);
+	l_Output.Depth = float4(_in.ViewPosition.z, 0, 0, 0);
   
-  #if defined( NS_TEX0 )
-    if(g_GlowActive)
-    {
-      l_Output.Glow = tex2D(GlowTextureSampler,_in.UV) * g_GlowIntensity;
-      //l_Output.Glow.a = 1.0;
-    } else {
-      l_Output.Glow = float4(0, 0, 0, 0);
-    }
-  #else
-    l_Output.Glow = float4(0, 0, 0, 0);
-  #endif
+  //#if defined( NS_TEX0 )
+  //  if(g_GlowActive)
+  //  {
+  //    l_Output.Glow = tex2D(GlowTextureSampler,_in.UV) * g_GlowIntensity;
+  //    //l_Output.Glow.a = 1.0;
+  //  } else {
+  //    l_Output.Glow = float4(0, 0, 0, 0);
+  //  }
+  //#else
+  //  l_Output.Glow = float4(0, 0, 0, 0);
+  //#endif
   
   
 	return l_Output;
@@ -258,7 +213,7 @@ PS_OUTPUT NewPS(TNEW_PS _in)
 #if defined( NS_CAL3D )
   #define TECHNIQUE_BODY \
     pass p0 {                                            \
-      /*Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar*/ \
+      /*Activamos el Zbuffer, el Zwrite y la funci�n de Z�s que queremos utilizar*/ \
       ZEnable = true;                                    \
       ZWriteEnable = true;                               \
       ZFunc = LessEqual;                                 \
@@ -273,7 +228,7 @@ PS_OUTPUT NewPS(TNEW_PS _in)
 #else
   #define TECHNIQUE_BODY \
     pass p0 {                                            \
-      /*Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar*/ \
+      /*Activamos el Zbuffer, el Zwrite y la funci�n de Z�s que queremos utilizar*/ \
       ZEnable = true;                                    \
       ZWriteEnable = true;                               \
       ZFunc = LessEqual;                                 \
@@ -289,7 +244,7 @@ PS_OUTPUT NewPS(TNEW_PS _in)
     
 #define ALPHA_TECHNIQUE_BODY \
   pass p0 {                                               \
-		/*Activamos el Zbuffer, el Zwrite y la funciÃ³n de Zâ€™s que queremos utilizar*/ \
+		/*Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar*/ \
     ZEnable = true;                                       \
     ZWriteEnable = false;                                 \
     ZFunc = LessEqual;                                    \
@@ -304,7 +259,7 @@ PS_OUTPUT NewPS(TNEW_PS _in)
 		PixelShader  = compile ps_3_0 NewPS();                \
 	}                                                       \
 	pass p1 {                                               \
-		/*Activamos el Zbuffer, el Zwrite y la funciÃ³n de Zâ€™s que queremos utilizar*/ \
+		/*Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar*/ \
     ZEnable = true;                                       \
     ZWriteEnable = false;                                 \
     ZFunc = LessEqual;                                    \

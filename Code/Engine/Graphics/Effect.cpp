@@ -182,6 +182,13 @@ void CEffect::SetValue(const string& _szParameterName,Vect3f& _vValue)
   SetValue(_szParameterName,l_vVector,3);
 }
 
+void CEffect::SetValue(const string& _szParameterName,Vect4f& _vValue)
+{
+  float l_vVector[4] = {_vValue.x,_vValue.y,_vValue.z,_vValue.w};
+
+  SetValue(_szParameterName,l_vVector,4);
+}
+
 void CEffect::SetValue(const string& _szParameterName,Mat44f _matValue)
 {
   D3DXHANDLE l_pParameter = 0;

@@ -15,9 +15,9 @@ public:
   CTextureRenderTarget() : m_szTextureName(""),m_iWidth(0),m_iHeight(0),m_pTexture(0) {};
   virtual ~CTextureRenderTarget() {Done();};
 
-  bool Init(CXMLTreeNode& _treeRenderTarget, int _iWidth, int _iHeight, const string& _szFormat);
+  bool Init(CXMLTreeNode& _treeRenderTarget, int _iWidth, int _iHeight);
 
-  virtual void Activate();
+  virtual void Activate(CRenderManager* l_pRM);
 
 protected:
   virtual void Release();

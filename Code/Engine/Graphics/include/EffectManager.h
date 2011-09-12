@@ -11,10 +11,10 @@
 #define MAX_LIGHTS_BY_SHADER 4
 
 //forward declarations ----------------------------------------------
-class CMaterial;
 class CLightManager;
 class CalSkeleton;
 class CalHardwareModel;
+class CLight;
 //-------------------------------------------------------------------
 
 class CEffectManager:
@@ -46,6 +46,7 @@ public:
                     m_bWorldViewUpdated(false),
                     m_bWorldViewProjectionUpdated(false),
                     m_bLightsUpdated(false),
+                    m_bLightUpdated(false),
                     m_bSkeletonUpdated(false),
                     m_bTextureWidthHeightUpdated(false),
                     m_bAlphaFactorUpdated(false),
@@ -133,6 +134,8 @@ public:
     m_bSpecularActive = _bSpecular;
     m_bSpecularUpdated = true;
   };
+
+  void SetLight(CLight* _pLight);
 
   void SetSpecularParams(float _fGlossiness, float _fSpecularLevel);
   const Mat44f& GetWorldMatrix() const {return m_mWorldMatrix;};
@@ -236,6 +239,7 @@ private:
   bool m_bWorldViewProjectionUpdated;
 
   bool m_bLightsUpdated;
+  bool m_bLightUpdated;
   bool m_bSpriteSizeUpdated;
 
   float m_bTimeUpdated;
@@ -250,6 +254,17 @@ private:
   float m_fTime;
   Vect2f m_vSpriteSize;
 
+  bool    m_bLightEnabled;
+  int     m_iLightType;
+  Vect3f  m_vLightPosition;
+  Vect3f  m_vLightDirection;
+  CColor  m_cLightColor;
+  float   m_fLightAngleCos;
+  float   m_fLightFallOffCos;
+  float   m_fLightStartRangeSQ;
+  float   m_fLightEndRangeSQ;
+  bool    m_bLightShadowEnabled;
+  bool    m_bLightDynamicOnly;
 
   //bool m_bInverseProjectionUpdated, m_bInverseViewUpdated, m_bInverseWorldUpdated;
   

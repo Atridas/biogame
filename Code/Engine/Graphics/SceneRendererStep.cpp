@@ -136,14 +136,18 @@ void CSceneRendererStep::Render(CRenderManager* _pRM, CCamera* _pCamera)
 {
   m_pCamera = _pCamera;
 
+  
+  CEffectManager* l_pEM = CORE->GetEffectManager();
+  l_pEM->Begin();
+
   ActivateInputSamplers();
-  ActivateRenderTargets();
+  ActivateRenderTargets(_pRM);
 
   SetViewProjectionMatrices(_pRM);
   
   RenderScene(_pRM);
   
-  DeactivateRenderTargets();
+  DeactivateRenderTargets(_pRM);
   DeactivateInputSamplers();
 }
 

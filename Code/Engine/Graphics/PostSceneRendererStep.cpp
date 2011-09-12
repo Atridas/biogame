@@ -57,6 +57,17 @@ bool CPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer)
 
         m_iSize.x = (int) (l_fSizeX * m_iRenderTargetWidth);
         m_iSize.y = m_iSize.x;
+
+        if(_treePostSceneRenderer.ExistsProperty("aspect_ratio"))
+        {
+          bool l_bAspectRatio = _treePostSceneRenderer.GetBoolProperty("aspect_ratio",true,false);
+
+          if(l_bAspectRatio)
+          {
+            m_iSize.y = (int)(m_iSize.x * m_iRenderTargetHeight/(float)m_iRenderTargetWidth);
+          }
+        }
+
       }else{
         m_iSize.x = m_iRenderTargetWidth; 
         m_iSize.y = m_iRenderTargetHeight;
@@ -69,11 +80,8 @@ bool CPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer)
   return IsOk();
 }
 
-void CPostSceneRendererStep::Render()
+void CPostSceneRendererStep::Render(CRenderManager* _pRM)
 {
-  ActivateInputSamplers();
-  ActivateRenderTargets();
-
   CEffectManager* l_pEM = CORE->GetEffectManager();
   l_pEM->SetTextureWidthHeight(m_iRenderTargetWidth,m_iRenderTargetHeight);
 
@@ -86,25 +94,31 @@ void CPostSceneRendererStep::Render()
 
   CEffect* l_pEffect = l_pEM->GetResource(m_szEffect);
 
-  l_pEM->LoadShaderData(l_pEffect);
-
-  LPD3DXEFFECT l_pD3DEffect = l_pEffect->GetD3DEffect();
-
-  if(l_pD3DEffect!=NULL)
+  if(l_pEffect)
   {
-    UINT l_NumPasses;
-    l_pD3DEffect->Begin(&l_NumPasses, 0);
-    for (UINT iPass = 0; iPass < l_NumPasses; iPass++)
+    ActivateInputSamplers();
+    ActivateRenderTargets(_pRM);
+
+    l_pEM->LoadShaderData(l_pEffect);
+
+    LPD3DXEFFECT l_pD3DEffect = l_pEffect->GetD3DEffect();
+
+    if(l_pD3DEffect!=NULL)
     {
-      l_pD3DEffect->BeginPass(iPass);
-      RENDER_MANAGER->DrawColoredTexturedQuad2D(m_iPos,m_iSize.x,m_iSize.y,m_Alignment,CColor(Vect4f(0,0,0,0)));
-      l_pD3DEffect->EndPass();
+      UINT l_NumPasses;
+      l_pD3DEffect->Begin(&l_NumPasses, 0);
+      for (UINT iPass = 0; iPass < l_NumPasses; iPass++)
+      {
+        l_pD3DEffect->BeginPass(iPass);
+        _pRM->DrawColoredTexturedQuad2D(m_iPos,m_iSize.x,m_iSize.y,m_Alignment,CColor(Vect4f(0,0,0,0)));
+        l_pD3DEffect->EndPass();
+      }
+      l_pD3DEffect->End();
     }
-    l_pD3DEffect->End();
-  }
   
-  DeactivateRenderTargets();
-  DeactivateInputSamplers();
+    DeactivateRenderTargets(_pRM);
+    DeactivateInputSamplers();
+  }
 }
 
 void CPostSceneRendererStep::Release()

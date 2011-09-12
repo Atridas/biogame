@@ -2,9 +2,9 @@
 #include "Core.h"
 #include "RenderManager.h"
 
-void CRenderTarget::Activate()
+void CRenderTarget::Activate(CRenderManager* l_pRM)
 {
-  LPDIRECT3DDEVICE9 l_pDevice=RENDER_MANAGER->GetDevice();
+  LPDIRECT3DDEVICE9 l_pDevice=l_pRM->GetDevice();
 
   if(m_iIndex == 0)
   {
@@ -19,9 +19,9 @@ void CRenderTarget::Activate()
   l_pDevice->SetRenderTarget(m_iIndex, m_pSurface);
 }
 
-void CRenderTarget::Deactivate()
+void CRenderTarget::Deactivate(CRenderManager* l_pRM)
 {
-  LPDIRECT3DDEVICE9 l_pDevice=RENDER_MANAGER->GetDevice();
+  LPDIRECT3DDEVICE9 l_pDevice=l_pRM->GetDevice();
 
   if(m_iIndex == 0)
   {

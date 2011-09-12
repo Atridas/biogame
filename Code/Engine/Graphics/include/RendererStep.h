@@ -34,10 +34,10 @@ protected:
   bool InitInputSamplers(CXMLTreeNode& _treeInputSamplers);
 
   void ActivateInputSamplers();
-  void ActivateRenderTargets();
+  void ActivateRenderTargets(CRenderManager* l_pRM);
 
   void DeactivateInputSamplers() {};
-  void DeactivateRenderTargets();
+  void DeactivateRenderTargets(CRenderManager* l_pRM);
 
 private:
   vector<CRenderTarget*> m_vRenderTargets;

@@ -13,8 +13,6 @@ bool CRendererStep::InitRenderTargets(CXMLTreeNode& _treeRenderTargets)
 {
   if(_treeRenderTargets.Exists())
   {
-    string l_szFormatType = _treeRenderTargets.GetPszISOProperty("format_type","A8R8G8B8");
-
     float l_fScale = _treeRenderTargets.GetFloatProperty("scale_size",1.0f,false);
     int l_iWidth = _treeRenderTargets.GetIntProperty("width",(int)(RENDER_MANAGER->GetScreenWidth()*l_fScale),false);
     int l_iHeight = _treeRenderTargets.GetIntProperty("height",(int)(RENDER_MANAGER->GetScreenHeight()*l_fScale),false);
@@ -34,7 +32,7 @@ bool CRendererStep::InitRenderTargets(CXMLTreeNode& _treeRenderTargets)
 
         l_pRenderTarget = new CTextureRenderTarget();
 
-        if(l_pRenderTarget->Init(l_pRenderTargetNode,l_iWidth,l_iHeight,l_szFormatType))
+        if(l_pRenderTarget->Init(l_pRenderTargetNode,l_iWidth,l_iHeight))
         {
           m_vRenderTargets.push_back(l_pRenderTarget);
         }else{
@@ -153,7 +151,7 @@ void CRendererStep::ActivateInputSamplers()
   }
 }
 
-void CRendererStep::ActivateRenderTargets()
+void CRendererStep::ActivateRenderTargets(CRenderManager* l_pRM)
 {
   vector<CRenderTarget*>::iterator l_itRendertarget = m_vRenderTargets.begin();
   vector<CRenderTarget*>::iterator l_itRendertargetEnd = m_vRenderTargets.end();
@@ -161,12 +159,13 @@ void CRendererStep::ActivateRenderTargets()
   for(;l_itRendertarget != l_itRendertargetEnd;++l_itRendertarget)
   {
     CRenderTarget* l_pRenderTarget = (*l_itRendertarget);
-    l_pRenderTarget->Activate();
+    l_pRenderTarget->Activate(l_pRM);
   }
-  RENDER_MANAGER->GetDevice()->Clear( 0, NULL, D3DCLEAR_ZBUFFER, 0x00000000, 1.0f, 0 );
+
+  l_pRM->GetDevice()->Clear( 0, NULL, D3DCLEAR_ZBUFFER, 0x00000000, 1.0f, 0 );
 }
 
-void CRendererStep::DeactivateRenderTargets()
+void CRendererStep::DeactivateRenderTargets(CRenderManager* l_pRM)
 {
   vector<CRenderTarget*>::iterator l_itRendertarget = m_vRenderTargets.begin();
   vector<CRenderTarget*>::iterator l_itRendertargetEnd = m_vRenderTargets.end();
@@ -174,7 +173,7 @@ void CRendererStep::DeactivateRenderTargets()
   for(;l_itRendertarget != l_itRendertargetEnd;++l_itRendertarget)
   {
     CRenderTarget* l_pRenderTarget = (*l_itRendertarget);
-    l_pRenderTarget->Deactivate();
+    l_pRenderTarget->Deactivate(l_pRM);
   }
 }
 
