@@ -129,7 +129,7 @@
 
   <post_scene_renderers>
     
-    <post_scene_renderer name="deferred_ambient" effect="DeferredAmbientPass" size_x="0.5" aspect_ratio="true" position="0.5 0.0" active="true">
+    <post_scene_renderer name="deferred_ambient" effect="DeferredAmbientPass" active="true">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="scene_color"/>
@@ -138,7 +138,7 @@
       
     </post_scene_renderer>
     <!-- size_x="0.5" aspect_ratio="true" position="0.5 0.0" -->
-    <post_scene_renderer name="deferred_lighting" type="deferred_post_scene_renderer" effect="DeferredLightPass" size_x="0.5" aspect_ratio="true" position="0.5 0.0" active="true">
+    <post_scene_renderer name="deferred_lighting" type="deferred_post_scene_renderer" effect="DeferredLightPass" active="true">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="scene_color"/>
@@ -149,7 +149,7 @@
 
     </post_scene_renderer>
     
-    <post_scene_renderer name="scene_color" effect="Texture" size_x="0.5" aspect_ratio="true" active="true">
+    <post_scene_renderer name="scene_color" effect="Texture" size_x="0.5" aspect_ratio="true" active="false">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="scene_color"/>
@@ -157,7 +157,7 @@
 
     </post_scene_renderer>
     
-    <post_scene_renderer name="scene_normals" effect="Texture" size_x="0.5" aspect_ratio="true" position="0.0 0.5" active="true">
+    <post_scene_renderer name="scene_normals" effect="Texture" size_x="0.5" aspect_ratio="true" position="0.0 0.5" active="false">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="scene_normals"/>
@@ -165,7 +165,7 @@
 
     </post_scene_renderer>
     
-    <post_scene_renderer name="show_depth" effect="ShowDepth" size_x="0.5" aspect_ratio="true" position="0.5 0.5" active="true">
+    <post_scene_renderer name="show_depth" effect="ShowDepth" size_x="0.5" aspect_ratio="true" position="0.5 0.5" active="false">
 
       <input_samplers>
         <input_sampler type="texture" index="2" texture="scene_position"/>

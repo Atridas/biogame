@@ -20,6 +20,8 @@ bool CRendererStep::InitRenderTargets(CXMLTreeNode& _treeRenderTargets)
     m_iRenderTargetWidth = l_iWidth;
     m_iRenderTargetHeight = l_iHeight;
 
+    bool l_bDefaultDepthBuffer = (l_fScale == 1.f);
+
     int l_iNumRenderTargets = _treeRenderTargets.GetNumChildren();
 
     for(int l_iIndex = 0; l_iIndex < l_iNumRenderTargets;l_iIndex++)
@@ -32,7 +34,7 @@ bool CRendererStep::InitRenderTargets(CXMLTreeNode& _treeRenderTargets)
 
         l_pRenderTarget = new CTextureRenderTarget();
 
-        if(l_pRenderTarget->Init(l_pRenderTargetNode,l_iWidth,l_iHeight))
+        if(l_pRenderTarget->Init(l_pRenderTargetNode, l_iWidth, l_iHeight, l_bDefaultDepthBuffer))
         {
           m_vRenderTargets.push_back(l_pRenderTarget);
         }else{

@@ -5,7 +5,7 @@
 #include "Core.h"
 #include "RenderManager.h"
 
-bool CTextureRenderTarget::Init(CXMLTreeNode& _treeRenderTarget, int _iWidth, int _iHeight)
+bool CTextureRenderTarget::Init(CXMLTreeNode& _treeRenderTarget, int _iWidth, int _iHeight, bool _bDefaultDepthBuffer)
 {
   int l_iIndex = _treeRenderTarget.GetIntProperty("index",0,false);
   string l_szTextureName = _treeRenderTarget.GetPszISOProperty("texture","",false);
@@ -30,7 +30,17 @@ bool CTextureRenderTarget::Init(CXMLTreeNode& _treeRenderTarget, int _iWidth, in
                           CTexture::GetFormatTypeFromString(l_szFormatType)))
     {
       m_pSurface = m_pTexture->GetSurface();
-      m_pDepthStencilSurface = m_pTexture->GetDepthStencilSurface();
+      if(l_iIndex == 0)
+      {
+        if(_bDefaultDepthBuffer)
+        {
+          RENDER_MANAGER->GetDevice()->GetDepthStencilSurface(&m_pDepthStencilSurface);
+        }
+        else
+        {
+          m_pDepthStencilSurface = m_pTexture->GetDepthStencilSurface();
+        }
+      }
     } else
     {
       m_pSurface = 0;
