@@ -160,6 +160,15 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
                                                                 6);
   }
 
+  if(IsOk())
+  {
+    m_pD3DDevice->GetRenderTarget(0,&m_pBackBuffer);
+    m_pD3DDevice->GetDepthStencilSurface(&m_pDefaultDepthStencilBuffer);
+
+    m_pSettedBackBuffer=0;
+    m_pSettedDepthStencilBuffer=0;
+  }
+
 
 #ifdef _DEBUG // Clear the backbuffer to magenta color in a Debug mode
   m_cClearColor = colMAGENTA;
@@ -186,6 +195,9 @@ void CRenderManager::Release(void)
   assert(IsOk());
   LOGGER->AddNewLog(ELL_INFORMATION, "RenderManager::Release",m_uWidth,m_uHeight);
 
+  
+  CHECKED_RELEASE(m_pBackBuffer);
+  CHECKED_RELEASE(m_pDefaultDepthStencilBuffer);
 
   CHECKED_DELETE(m_pParticleVertex);
   STEXTUREDVERTEX::ReleaseVertexDeclaration();
@@ -249,6 +261,33 @@ void CRenderManager::Present()
   // Present the backbuffer contents to the display
 	m_pD3DDevice->Present( NULL, NULL, NULL, NULL );
 }
+
+
+void CRenderManager::SetRenderTarget(int _iIndex, LPDIRECT3DSURFACE9 _pRenderTarget)
+{
+  if(_iIndex == 0)
+  {
+    if(_pRenderTarget != m_pSettedBackBuffer)
+    {
+      m_pD3DDevice->SetRenderTarget(0, _pRenderTarget);
+      m_pSettedBackBuffer = _pRenderTarget;
+    }
+  }
+  else
+  {
+    m_pD3DDevice->SetRenderTarget(_iIndex, _pRenderTarget);
+  }
+}
+
+void CRenderManager::SetDepthStencilBuffer (LPDIRECT3DSURFACE9 _pDepthStencilBuffer)
+{
+  if(_pDepthStencilBuffer != m_pSettedDepthStencilBuffer)
+  {
+    m_pD3DDevice->SetDepthStencilSurface(_pDepthStencilBuffer);
+    m_pSettedDepthStencilBuffer = _pDepthStencilBuffer;
+  }
+}
+
 
 void CRenderManager::SetViewMatrix(Mat44f& _matView)
 {

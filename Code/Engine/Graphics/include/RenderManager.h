@@ -29,7 +29,9 @@ class CRenderManager:
 public:
 	                      CRenderManager    (void):	m_pD3D(0), m_pD3DDevice(0),
 												                          m_uWidth(0), m_uHeight(0),
-                                                  m_pCamera(0), m_pParticleVertex(0)
+                                                  m_pCamera(0), m_pParticleVertex(0),
+                                                  m_pBackBuffer(0),m_pDefaultDepthStencilBuffer(0),
+                                                  m_pSettedBackBuffer(0),m_pSettedDepthStencilBuffer(0)
                                                                                   {};
 
 
@@ -106,6 +108,12 @@ public:
   void                    SetClearColor           (const CColor& _cColor) {m_cClearColor = _cColor;};
   CColor                  GetClearColor           () const                {return m_cClearColor;};
   
+  LPDIRECT3DSURFACE9 GetBackBuffer         () const { return m_pBackBuffer; };
+  LPDIRECT3DSURFACE9 GetDepthStencilBuffer () const { return m_pDefaultDepthStencilBuffer; }
+
+  void SetRenderTarget       (int _iIndex, LPDIRECT3DSURFACE9 _pRenderTarget);
+  void SetDepthStencilBuffer (LPDIRECT3DSURFACE9 _pDepthStencilBuffer);
+
   CRenderableVertexs*     GetParticleVertexs() {return m_pParticleVertex;};
 private:
 	virtual void            Release					  ();
@@ -123,4 +131,12 @@ private:
   CFrustum                m_Frustum;
   
    CRenderableVertexs*    m_pParticleVertex;
+   
+  LPDIRECT3DSURFACE9      m_pBackBuffer;
+  LPDIRECT3DSURFACE9      m_pDefaultDepthStencilBuffer;
+
+  LPDIRECT3DSURFACE9      m_pSettedBackBuffer;
+  LPDIRECT3DSURFACE9      m_pSettedDepthStencilBuffer;
+
+
 };

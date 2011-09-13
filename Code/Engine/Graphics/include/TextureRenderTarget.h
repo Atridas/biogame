@@ -15,7 +15,7 @@ public:
   CTextureRenderTarget() : m_szTextureName(""),m_iWidth(0),m_iHeight(0),m_pTexture(0) {};
   virtual ~CTextureRenderTarget() {Done();};
 
-  bool Init(CXMLTreeNode& _treeRenderTarget, int _iWidth, int _iHeight);
+  bool Init(CXMLTreeNode& _treeRenderTarget, int _iWidth, int _iHeight, bool _bDefaultDepthBuffer);
 
   virtual void Activate(CRenderManager* l_pRM);
 

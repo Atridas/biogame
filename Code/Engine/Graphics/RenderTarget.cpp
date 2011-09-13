@@ -8,15 +8,17 @@ void CRenderTarget::Activate(CRenderManager* l_pRM)
 
   if(m_iIndex == 0)
   {
-    l_pDevice->GetRenderTarget(0,&m_pPrevSurface);
-    l_pDevice->GetDepthStencilSurface(&m_pPrevDepthStencilSurface);
+    //l_pDevice->GetRenderTarget(0,&m_pPrevSurface);
+    //l_pDevice->GetDepthStencilSurface(&m_pPrevDepthStencilSurface);
     
     //TODO: Un sol DepthStencil per tots els render_targets actius
-    l_pDevice->SetDepthStencilSurface(m_pDepthStencilSurface);
+    //l_pDevice->SetDepthStencilSurface(m_pDepthStencilSurface);
+    l_pRM->SetDepthStencilBuffer(m_pDepthStencilSurface);
   }
 
 
-  l_pDevice->SetRenderTarget(m_iIndex, m_pSurface);
+  //l_pDevice->SetRenderTarget(m_iIndex, m_pSurface);
+  l_pRM->SetRenderTarget(m_iIndex, m_pSurface);
 }
 
 void CRenderTarget::Deactivate(CRenderManager* l_pRM)
@@ -25,11 +27,11 @@ void CRenderTarget::Deactivate(CRenderManager* l_pRM)
 
   if(m_iIndex == 0)
   {
-    l_pDevice->SetRenderTarget(0,m_pPrevSurface);
-    l_pDevice->SetDepthStencilSurface(m_pPrevDepthStencilSurface);
-    
-    CHECKED_RELEASE(m_pPrevSurface);
-    CHECKED_RELEASE(m_pPrevDepthStencilSurface);
+    //l_pDevice->SetRenderTarget(0,m_pPrevSurface);
+    //l_pDevice->SetDepthStencilSurface(m_pPrevDepthStencilSurface);
+    //
+    //CHECKED_RELEASE(m_pPrevSurface);
+    //CHECKED_RELEASE(m_pPrevDepthStencilSurface);
   }
   else
   {

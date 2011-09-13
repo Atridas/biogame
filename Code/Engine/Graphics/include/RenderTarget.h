@@ -12,7 +12,7 @@ class CRenderTarget :
   public CBaseControl
 {
 public:
-  CRenderTarget() : m_iIndex(0),m_pSurface(0),m_pDepthStencilSurface(0),m_pPrevSurface(0),m_pPrevDepthStencilSurface(0) {};
+  CRenderTarget() : m_iIndex(0),m_pSurface(0),m_pDepthStencilSurface(0)/*,m_pPrevSurface(0),m_pPrevDepthStencilSurface(0)*/ {};
   virtual ~CRenderTarget() {Done();};
   
   virtual void Activate(CRenderManager* l_pRM);
@@ -26,8 +26,8 @@ protected:
   LPDIRECT3DSURFACE9 m_pSurface;
   LPDIRECT3DSURFACE9 m_pDepthStencilSurface;
 
-  LPDIRECT3DSURFACE9 m_pPrevSurface;
-  LPDIRECT3DSURFACE9 m_pPrevDepthStencilSurface;
+  //LPDIRECT3DSURFACE9 m_pPrevSurface;
+  //LPDIRECT3DSURFACE9 m_pPrevDepthStencilSurface;
 
   int m_iIndex;
 };
