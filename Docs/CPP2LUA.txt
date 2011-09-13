@@ -656,6 +656,9 @@ ENTITIES
       movement
       CBaseComponent::ECT_MOVEMENT
       
+      rotative
+      CBaseComponent::ECT_ROTATIVE
+      
       player_controller
       CBaseComponent::ECT_PLAYER_CONTROLLER
       
@@ -1170,7 +1173,7 @@ ENTITIES
     
     Methods:
       add_to_entity
-      static CComponentDoor* AddToEntity(CGameEntity *_pEntity, bool _bOpen)
+      static CComponentDoor* AddToEntity(CGameEntity *_pEntity, bool _bOpen, const float _fOpenTime = 2.0f, const float _fCloseTime = 0.5f)
       
       is_open
       bool IsOpen()
@@ -1183,6 +1186,12 @@ ENTITIES
       
       block
       void Block(bool _bBlock)
+      
+      get_open_time
+      float GetOpenTime()
+      
+      get_close_time
+      float GetCloseTime()
       
     Attributes:
       time
@@ -1247,6 +1256,18 @@ ENTITIES
       
       explode
       void Explode(Vect3f _vOrigin,float _fRadius)
+      
+  Class:
+    ComponentRotative
+    CComponentRotative
+    
+    Methods:
+      add_to_entity
+      static CComponentRotative* AddToEntity(CGameEntity *_pEntity, const Vect3f& _vRotation)
+    
+    Attributes:
+      rotation
+      CComponentRotative::m_vRotation
 
 IA
   Globals:

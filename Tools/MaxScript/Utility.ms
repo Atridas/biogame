@@ -723,6 +723,14 @@ utility BioUtility "Eon-Utility" width:160 height:549
 					
 					l_params = XMLEntityPhysXBox l_instance &l_TagName l_colgroup true
 					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--Rotative
+					if IsRotative l_instance then
+					(
+						--Rotative
+						l_params = XMLEntityRotation l_instance &l_TagName
+						format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					)
 				)
 				--PhysXMesh
 				else if (GetUserProp l_instance "physXMesh") != undefined then
@@ -741,6 +749,14 @@ utility BioUtility "Eon-Utility" width:160 height:549
 					
 					l_params = XMLEntityPhysXMesh l_instance &l_TagName l_colgroup
 					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--Rotative
+					if IsRotative l_instance then
+					(
+						--Rotative
+						l_params = XMLEntityRotation l_instance &l_TagName
+						format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					)
 				)
 				
 				--PickUp
@@ -749,6 +765,14 @@ utility BioUtility "Eon-Utility" width:160 height:549
 					--Trigger
 					l_params = XMLEntityTrigger l_instance &l_TagName "pickup" (GetUserProp l_instance "pickup") undefined
 					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--Rotative
+					if IsRotative l_instance then
+					(
+						--Rotative
+						l_params = XMLEntityRotation l_instance &l_TagName
+						format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					)
 				)
 				
 				--Interactive
@@ -809,10 +833,18 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				l_params = XMLEntityTrigger l_instance &l_TagName "trigger" (GetUserProp l_instance "TriggerEnter") (GetUserProp l_instance "TriggerExit")
 				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 				
-				--[Emiter de partícules]
+				--Emiter de partícules
 				if IsEmiter l_instance then
 				(
 					l_params = XMLEntityEmiter l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+				)
+				
+				--Rotative
+				if IsRotative l_instance then
+				(
+					--Rotative
+					l_params = XMLEntityRotation l_instance &l_TagName
 					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 				)
 				
@@ -904,6 +936,14 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				l_params = XMLEntityTrigger l_instance &l_TagName "objecte interactiu" (GetUserProp l_instance "pickup") undefined
 				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 				
+				--Rotative
+				if IsRotative l_instance then
+				(
+					--Rotative
+					l_params = XMLEntityRotation l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+				)
+				
 				format "\n  %" (CloseTagXML "Entity") to:l_file
 			)
 			else if IsInteractive _entities[i] then
@@ -918,7 +958,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
 				)
 				
-				format "\tEntitat PickUp %\n" l_instance.name
+				format "\tEntitat Interactiva %\n" l_instance.name
 				
 				l_params = #()
 				
@@ -938,6 +978,14 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				l_params = XMLEntityInteractive l_instance &l_TagName
 				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 				
+				--Rotative
+				if IsRotative l_instance then
+				(
+					--Rotative
+					l_params = XMLEntityRotation l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+				)
+				
 				format "\n  %" (CloseTagXML "Entity") to:l_file
 			)
 			else if IsDestroyable _entities[i] then
@@ -952,7 +1000,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
 				)
 				
-				format "\tEntitat PickUp %\n" l_instance.name
+				format "\tEntitat Destroyable %\n" l_instance.name
 				
 				l_params = #()
 				
@@ -976,6 +1024,14 @@ utility BioUtility "Eon-Utility" width:160 height:549
 				if IsExplosive l_instance then
 				(
 					l_params = XMLEntityExplosive l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+				)
+				
+				--Rotative
+				if IsRotative l_instance then
+				(
+					--Rotative
+					l_params = XMLEntityRotation l_instance &l_TagName
 					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 				)
 				

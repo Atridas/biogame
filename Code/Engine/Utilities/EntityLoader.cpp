@@ -31,7 +31,7 @@
 #include "ComponentLaser.h"
 #include "ComponentLifetime.h"
 #include "ComponentExplosive.h"
-
+#include "ComponentRotative.h"
 #include "ComponentBillboard.h"
 #include "ParticleConstants.h"
 
@@ -200,14 +200,16 @@ void LoadComponentLowCover(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 void LoadComponentDoor(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 {
   
-  string l_szName = _pEntity->GetName();
-  bool l_bOpen    = _TreeComponent.GetBoolProperty("open", false, false);
-  Vect3f l_vSize = _TreeComponent.GetVect3fProperty("size", Vect3f(1.0f), false);
+  string l_szName    = _pEntity->GetName();
+  bool l_bOpen       = _TreeComponent.GetBoolProperty("open", false, false);
+  Vect3f l_vSize     = _TreeComponent.GetVect3fProperty("size", Vect3f(1.0f), false);
+  float l_fOpenTime  = _TreeComponent.GetFloatProperty("open_time", 2.0f, false);
+  float l_fCloseTime = _TreeComponent.GetFloatProperty("close_time", 0.5f, false);
 
   LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Porta amb nom \"%s\" i estat \"%d\"",l_szName.c_str(), l_bOpen);
 
   //component porta
-  if(!CComponentDoor::AddToEntity(_pEntity, l_bOpen, l_vSize))
+  if(!CComponentDoor::AddToEntity(_pEntity, l_bOpen, l_vSize, l_fOpenTime, l_fCloseTime))
   {
     LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
   }
@@ -276,6 +278,22 @@ void LoadComponentExplosive(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
   if(!CComponentExplosive::AddToEntity(_pEntity))
   {
     LOGGER->AddNewLog(ELL_WARNING,"\tError al crear el component explosiu de l'objecte \"%s\"", _pEntity->GetName());
+  }
+}
+
+void LoadComponentRotative(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
+{
+  LOGGER->AddNewLog(ELL_INFORMATION,"\t\tCarregant component de rotació.");
+  
+  float l_fYaw   = _TreeComponent.GetFloatProperty("yaw", 0.0f, false);
+  float l_fPitch = _TreeComponent.GetFloatProperty("pitch", 0.0f, false);
+  float l_fRoll  = _TreeComponent.GetFloatProperty("roll", 0.0f, false);
+
+  Vect3f l_vRotation = Vect3f(l_fYaw, l_fPitch, l_fRoll);
+  
+  if(!CComponentRotative::AddToEntity(_pEntity, l_vRotation))
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
   }
 }
 
@@ -507,6 +525,11 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
             } else if(strcmp(l_TreeComponent.GetName(),"Explosive") == 0)
             {
               LoadComponentExplosive(l_TreeComponent, l_pEntity);
+
+            // -----------------------------------------------------------------------------------------------------------
+            } else if(strcmp(l_TreeComponent.GetName(),"Rotative") == 0)
+            {
+              LoadComponentRotative(l_TreeComponent, l_pEntity);
 
             // -----------------------------------------------------------------------------------------------------------
             } else if(strcmp(l_TreeComponent.GetName(),"NavNode") == 0)
@@ -745,6 +768,7 @@ CGameEntity* CEntityManager::InitPickUp(const string& _szName, const string& _sz
   LOGGER->AddNewLog(ELL_INFORMATION, "CEntityManager::InitPickUp Creant Pick Up amb nom \"%s\" i core \"%s\".", _szName.c_str(), _szCore.c_str());
   CGameEntity* l_pPickUpEntity = ENTITY_MANAGER->CreateEntity();
   CComponentObject3D* l_pO3D = CComponentObject3D::AddToEntity(l_pPickUpEntity);
+  CComponentRotative::AddToEntity(l_pPickUpEntity, Vect3f(0.5f,.0f,.0f));
 
   CComponentRenderableObject* l_pRO = CComponentRenderableObject::AddToEntity(l_pPickUpEntity, _szName, _szCore);
 

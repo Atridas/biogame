@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <meshes>
 	<mesh name="lvl2_menj_plat" path="Data/Meshes/lvl2_menj_plat.mesh" max="0.27 0.0100004 0.256784" min="-0.27 -0.0318173 -0.256784" />
-	<mesh name="lvl2_menj_bido_vermell" path="Data/Meshes/lvl2_menj_bido_vermell.mesh" max="0.31 0.938024 0.294828" min="-0.31 0.0 -0.294828" />
+	<mesh name="global_bido_vermell" path="Data/Meshes/global_bido_vermell.mesh" max="0.31 0.938024 0.294828" min="-0.31 0.0 -0.294828" />
 	<mesh name="lvl2_menj_llauna" path="Data/Meshes/lvl2_menj_llauna.mesh" max="0.0499992 0.21 0.0475521" min="-0.0499992 0.0 -0.0475521" />
 	<mesh name="lvl2_menj_got" path="Data/Meshes/lvl2_menj_got.mesh" max="0.0606422 0.203443 0.0576744" min="-0.0606422 0.0 -0.0576744" />
-	<mesh name="lvl2_menj_bido_verd00" path="Data/Meshes/lvl2_menj_bido_verd00.mesh" max="0.960601 0.294828 0.307949" min="-0.0261469 -0.294828 -0.389875" />
-	<mesh name="lvl2_menj_bido_verd09" path="Data/Meshes/lvl2_menj_bido_verd09.mesh" max="0.310001 0.294828 0.0" min="-0.310001 -0.294828 -0.938025" />
-	<mesh name="lvl2_menj_bido_verd" path="Data/Meshes/lvl2_menj_bido_verd.mesh" max="0.309999 0.938024 0.294828" min="-0.309999 0.0 -0.294828" />
+	<mesh name="global_bido_verd" path="Data/Meshes/global_bido_verd.mesh" max="0.309999 0.938024 0.294828" min="-0.309999 0.0 -0.294828" />
 	<mesh name="lvl2_menj_columna08" path="Data/Meshes/lvl2_menj_columna08.mesh" max="0.70207 1.75504 0.702066" min="-0.70207 -1.75504 -0.702068" />
 	<mesh name="lvl2_menj_vitrina" path="Data/Meshes/lvl2_menj_vitrina.mesh" max="4.32372 0.0325929 2.15332" min="-4.32372 -0.0325929 -2.15332" />
 	<mesh name="lvl2_menj_Altaveus00" path="Data/Meshes/lvl2_menj_Altaveus00.mesh" max="0.208044 0.377919 0.142527" min="-0.315865 -0.0265853 -0.514853" />

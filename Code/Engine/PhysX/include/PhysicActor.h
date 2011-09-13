@@ -36,8 +36,10 @@ public:
 	CPhysicUserData*	GetUserData				() {return m_pUserData;}
 	void							SetLinearVelocity	(const Vect3f& velocity);
 	Vect3f						GetPosition				();
+  Vect3f						GetRotation				();
 	void							CreateBody				(float density, float angularDamping = 0.5f, float linearDamping = 0.5f);
 	void							SetGlobalPosition	(const Vect3f& pos = Vect3f(0.f,0.f,0.f));
+  void							SetRotation     	(const Vect3f& _vRot);
 
   void              AddForceAtLocalPos(Vect3f _vDirection, Vect3f _vLocalPos, float _fPower);
 

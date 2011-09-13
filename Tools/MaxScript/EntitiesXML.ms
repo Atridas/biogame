@@ -260,22 +260,80 @@ function XMLEntityDoor _instance &_TagName =
 	_TagName = "Door"
 	
 	--open
-	local l_open = GetUserProp _instance "open"
-	if l_open != undefined then
+	local l_tmp = GetUserProp _instance "open"
+	if l_tmp != undefined then
 	(
-		l_open = "true"
+		l_tmp = "true"
 	)else
 	(
-		l_open = "false"
+		l_tmp = "false"
 	)
 	
-	append l_params #("open",l_open)
+	append l_params #("open",l_tmp)
+	
+	--open_time
+	local l_tmp = GetUserProp _instance "open_time"
+	if l_tmp != undefined then
+	(
+		l_aux = "" as stringStream
+		format "%" l_tmp to:l_aux
+		append l_params #("open_time",l_aux)
+	)
+	
+	--close_time
+	local l_tmp = GetUserProp _instance "close_time"
+	if l_tmp != undefined then
+	(
+		l_aux = "" as stringStream
+		format "%" l_tmp to:l_aux
+		append l_params #("close_time",l_aux)
+	)
 	
 	--size
 	l_aux = "" as stringStream
 	local l_size = RHVectorToLH (DummySize _instance)
 	format "% % %" l_size.x l_size.y l_size.z to:l_aux
 	append l_params #("size",l_aux)
+	
+	return l_params
+)
+
+--Genera els paràmetres d'un tag XML d'entitat Rotation. Conté:
+-- [yaw]
+-- [pitch]
+-- [roll]
+function XMLEntityRotation _instance &_TagName =
+(
+	local l_params = #()
+	
+	_TagName = "Rotative"
+	
+	--yaw
+	local l_tmp = GetUserProp _instance "yaw"
+	if l_tmp != undefined then
+	(
+		l_aux = "" as stringStream
+		format "%" l_tmp to:l_aux
+		append l_params #("yaw",l_aux)
+	)
+	
+	--pitch
+	local l_tmp = GetUserProp _instance "pitch"
+	if l_tmp != undefined then
+	(
+		l_aux = "" as stringStream
+		format "%" l_tmp to:l_aux
+		append l_params #("pitch",l_aux)
+	)
+	
+	--roll
+	local l_tmp = GetUserProp _instance "roll"
+	if l_tmp != undefined then
+	(
+		l_aux = "" as stringStream
+		format "%" l_tmp to:l_aux
+		append l_params #("roll",l_aux)
+	)
 	
 	return l_params
 )
