@@ -65,9 +65,9 @@ float4 DeferredLightPassPS(float2 _UV: TEXCOORD0) : COLOR
 
   l_vWorldNrm = normalize(l_vWorldNrm);
   
-	float3 l_vWorldPos;
-	l_vWorldPos.xy = tex2D(PosXYTextureSampler, _UV).xy;
-	l_vWorldPos.z = tex2D(DepthTextureSampler, _UV).x;
+	//l_vWorldPos.xy = tex2D(PosXYTextureSampler, _UV).xy;
+	float z = tex2D(DepthTextureSampler, _UV).x;
+	float3 l_vWorldPos = PositionFromZ(z,_UV);
   
   float3 l_EyeDirection = normalize(- l_vWorldPos);
   

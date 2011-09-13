@@ -20,8 +20,8 @@
 
 //#define __T_PARTICULES__
 //#define __T_PYSX__
-//#define __T_ENTITIES__
-#define __T_BIOTEST__
+#define __T_ENTITIES__
+//#define __T_BIOTEST__
 //#define __T_PARTICLE_VIEWER__
 
 

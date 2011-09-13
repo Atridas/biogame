@@ -316,6 +316,23 @@ void CalcAnimatedNormalTangent(float3 Normal,
 
 // --------------------------------------------------------------------------------------------------------------------------------
 
+
+
+float3 PositionFromZ(float z, float2 uv)
+{
+  float x_p = (uv.x - 0.5) * 2;
+  float y_p = (0.5 - uv.y) * 2;
+  //float z_h = _UV.y * z;
+  
+  float4 view = mul( g_InvProjectionMatrix, float4(x_p,y_p,1,1) );
+  
+  float lamda = z /* view.z*/;
+  
+  return float3(view.x * lamda, view.y * lamda, z);
+}
+
+// --------------------------------------------------------------------------------------------------------------------------------
+
 float4x4 GetWorldMatrix(float4 WorldMatrix0, float4 WorldMatrix1, float4 WorldMatrix2, float4 WorldMatrix3)
 {
   /*

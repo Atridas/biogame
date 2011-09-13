@@ -50,6 +50,10 @@ public:
 
   void AddXMLFile(const string &_szFileName) {m_vXMLFiles.insert(_szFileName);};
 
+protected:
+
+  virtual void Release();
+
 private:
   /**
    * Mètode de càrrega.

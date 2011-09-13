@@ -103,7 +103,11 @@ void CEntityProcess::Release()
 
 void CEntityProcess::Update(float _fElapsedTime)
 {
-  CObject3D* m_pPlayerPos = CORE->GetEntityManager()->GetEntity("Player")->GetComponent<CComponentObject3D>();
+  m_pPlayerEntity = CORE->GetEntityManager()->GetEntity("Player");
+  m_pCamera = m_pPlayerEntity->GetComponent<CComponent3rdPSCamera>()->GetCamera();
+
+
+  CObject3D* m_pPlayerPos = m_pPlayerEntity->GetComponent<CComponentObject3D>();
 
   m_pSpotLight->SetPosition(m_pCamera->GetEye());
   m_pSpotLight->SetDirection(m_pCamera->GetDirection());
@@ -165,18 +169,34 @@ bool CEntityProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
 {
   if(strcmp(_pcAction, "Hangar") == 0)
   {
-    CORE->GetEntityManager()->Done();
-    CORE->GetPortalManager()->Done();
-    CORE->GetRenderableObjectsManager()->Done();
-    CORE->GetStaticMeshManager()->Done();
-    
-    CORE->GetStaticMeshManager()->Load("Data/Levels/Hangar/XML/StaticMeshes.xml");
-    CORE->GetRenderableObjectsManager()->Load("Data/Levels/Hangar/XML/RenderableObjects.xml");
-    CORE->GetPortalManager()->Init("Data/Levels/Hangar/XML/Level.xml");
-    CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Hangar/XML/GameEntities.xml");
+    CORE->SetLoadLevel("Hangar");
 
-    m_pPlayerEntity = CORE->GetEntityManager()->GetEntity("Player");
-    m_pCamera = m_pPlayerEntity->GetComponent<CComponent3rdPSCamera>()->GetCamera();
+    //CORE->GetEntityManager()->Done();
+    //CORE->GetPortalManager()->Done();
+    //CORE->GetRenderableObjectsManager()->Done();
+    //CORE->GetStaticMeshManager()->Done();
+    //CORE->GetIAManager()->Done();
+    //
+    //string m_szPhysxFile = CORE->GetPhysicsManager()->GetConfigFileName();
+    //CORE->GetPhysicsManager()->Done();
+    //
+    //CORE->GetStaticMeshManager()->Load("Data/XML/StaticMeshes.xml");
+    //CORE->GetStaticMeshManager()->Load("Data/Levels/Hangar/XML/StaticMeshes.xml");
+    //CORE->GetRenderableObjectsManager()->Load("Data/Levels/Hangar/XML/RenderableObjects.xml");
+    //CORE->GetPortalManager()->Init("Data/Levels/Hangar/XML/Level.xml");
+    //CORE->GetPhysicsManager()->Init(m_szPhysxFile);
+    //if(CORE->GetPhysicsManager()->IsOk())
+    //{
+    //  CORE->GetPhysicsManager()->SetTriggerReport  (CORE->GetPhysicTriggerReport());
+    //  CORE->GetPhysicsManager()->SetCollisionReport(CORE->GetPhysicCollisionReport());
+    //}
+    //CORE->GetIAManager()->Init();
+    //CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Hangar/XML/GameEntities.xml");
+    //
+    //CORE->GetIAManager()->CompleteGraph();
+    //
+    //m_pPlayerEntity = CORE->GetEntityManager()->GetEntity("Player");
+    //m_pCamera = m_pPlayerEntity->GetComponent<CComponent3rdPSCamera>()->GetCamera();
   }
   return false;
 }

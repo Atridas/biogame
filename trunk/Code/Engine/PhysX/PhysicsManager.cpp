@@ -39,6 +39,8 @@
 //----------------------------------------------------------------------------
 bool CPhysicsManager::Init (const string& _physXConfig)
 {
+  m_szConfigFileName = _physXConfig;
+
 	m_pMyAllocator = new CPhysicUserAllocator;
 	assert(m_pMyAllocator);
 	m_bIsOk = (m_pMyAllocator != NULL);

@@ -359,7 +359,8 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
 
   if(m_bProjectionMatrixUpdated)
   {
-     _pEffect->SetValue("Projection", m_mProjectionMatrix);
+    _pEffect->SetValue("Projection", m_mProjectionMatrix);
+    _pEffect->SetValue("InvProjection", m_mProjectionMatrix.GetInverted());
     m_bProjectionMatrixUpdated = false;
   }
 

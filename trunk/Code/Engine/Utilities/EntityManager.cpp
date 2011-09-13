@@ -2,6 +2,9 @@
 
 void CEntityManager::Release()
 {
+  CreateEntities();
+  RemoveEntities();
+
   vector<CGameEntity*>::iterator l_it  = m_vEntities.begin();
   vector<CGameEntity*>::iterator l_end = m_vEntities.end();
 
@@ -9,10 +12,11 @@ void CEntityManager::Release()
   {
     delete *l_it;
   }
-  
+
   m_vEntities.clear();
   m_vFreeIDs.clear();
   m_vNames.clear();
+  m_vEvents.clear();
 }
 
 CGameEntity* CEntityManager::CreateEntity()

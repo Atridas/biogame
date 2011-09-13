@@ -53,7 +53,7 @@ public:
    * Constructor per defecte.
    * Core està implementat segons el patró de Singleton.
   **/
-                      CCore               (void): m_pRenderManager(0),m_pLanguageManager(0),m_pFontManager(0),m_pInputManager(0),
+                      CCore               (void): m_szLoadLevel(""),m_pRenderManager(0),m_pLanguageManager(0),m_pFontManager(0),m_pInputManager(0),
                                                   m_pActionManager(0),m_pRenderableObjectsManager(0),m_pLightManager(0),
                                                   m_pRenderer(0), m_pTimer(0), m_pScriptManager(0),m_pTextureManager(0),
                                                   m_pStaticMeshManager(0),m_pAnimatedModelManager(0),m_pEffectManager(0),
@@ -81,6 +81,10 @@ public:
    * Aquest mètode s'executa a cada iteració. Durant aquest es calcularà i realitzarà la lògica d'inputs desde l'última iteració.
   **/
   void Update();
+
+
+  void SetLoadLevel(const string& _szLevel) {m_szLoadLevel = _szLevel;};
+
  /**
    * Mètode de render.
    * Aquest mètode s'executa a cada iteració. Durant aquest es farà render de tots els RenderableObjects.
@@ -166,7 +170,14 @@ public:
 
   CEmiterManager*     GetEmiterManager      () const                        {return m_pEmiterManager;};
 
+  CPhysicTriggerReport*    GetPhysicTriggerReport()   const { return   m_pPhysicTriggerReport;   };
+  CPhysicCollisionReport*  GetPhysicCollisionReport() const { return   m_pPhysicCollisionReport; };
+
 private:
+
+  void CheckLoadLevel();
+
+
 
   /**
    * Constructor per còpia.
@@ -179,6 +190,9 @@ private:
    * Aquest mètode alliberarà tots els recursos del Core.
   **/
   void                 Release             ();
+
+
+  string m_szLoadLevel, m_szLuaInitFile;
 
   /**
    * Timer.

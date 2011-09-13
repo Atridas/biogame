@@ -174,6 +174,9 @@ public:
   
   int GetCollisionMask (ECollisionGroup _szGroup) {return m_CollisionMasks[_szGroup];};
 
+
+  string GetConfigFileName() const {return m_szConfigFileName;};
+
 private:
 	void								Release											();
 	void								DrawActor										(NxActor* actor, CRenderManager* render);
@@ -182,6 +185,8 @@ private:
 private:
 	bool									m_bIsOk;
 	bool									m_bDebugRenderMode;
+
+  string                m_szConfigFileName;
 
   map<int, int> m_CollisionMasks;
 

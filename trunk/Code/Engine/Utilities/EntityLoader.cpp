@@ -550,6 +550,7 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
       }
     }
   }
+  SetOk(true);
 }
 
 

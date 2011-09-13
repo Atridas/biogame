@@ -10,6 +10,7 @@
 shared float4x4 g_WorldMatrix : World; 
 shared float4x4 g_ViewMatrix : View;
 shared float4x4 g_ProjectionMatrix : Projection; 
+shared float4x4 g_InvProjectionMatrix : InvProjection; 
 shared float4x4 g_WorldViewMatrix : WorldView; 
 shared float4x4 g_ViewProjectionMatrix : ViewProjection; 
 shared float4x4 g_WorldViewProjectionMatrix : WorldViewProjection; 
