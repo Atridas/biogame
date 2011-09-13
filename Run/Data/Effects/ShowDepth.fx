@@ -1,5 +1,5 @@
 #include "Globals.fx"
-
+#include "Functions.fx"
 
 sampler PosXYTextureSampler : register(s2) = sampler_state
 {
@@ -32,16 +32,20 @@ float LinearizeDepth(float2 uv)
 
 float4 ShowDepthPS(float2 _UV: TEXCOORD0) : COLOR
 {
-  float d;
-  d = LinearizeDepth(_UV);
+  //float d;
+  //d = LinearizeDepth(_UV);
+  //
+  //return float4(d,d,d,1.0);
   
-  return float4(d,d,d,1.0);
+  float z = tex2D(DepthTextureSampler, _UV).x;
+  
+  return frac(float4(PositionFromZ(z,_UV),1.0));
   
 	//float3 l_vWorldPos;
 	//l_vWorldPos.xy = tex2D(PosXYTextureSampler, _UV).xy;
 	//l_vWorldPos.z = tex2D(DepthTextureSampler, _UV).x;
-  
-  //return float4(frac(l_vWorldPos),1.0);
+  //
+  //return float4(frac(abs(float3(view.x, view.y, z) - l_vWorldPos)),1.0);
 }
 
 technique ShowDepthTechnique

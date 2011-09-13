@@ -142,7 +142,8 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   //LOAD(m_pSceneEffectManager, "Manager de Effectes d'Escena", _InitParams.SceneEffectParams.szFile);
 
   m_pScriptManager->Initialize();
-  m_pScriptManager->Load(_InitParams.ScriptManagerParams.szFile);
+  m_szLuaInitFile = _InitParams.ScriptManagerParams.szFile;
+  m_pScriptManager->Load(m_szLuaInitFile);
   m_pLogRender->SetWindowsPos(_InitParams.LogRenderParams.vPosition);
 
   INIT(m_pConsole, "Consola", m_pScriptManager);
@@ -161,8 +162,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
     m_pPhysicsManager->SetCollisionReport(m_pPhysicCollisionReport);
   }
   
-  INIT_NO_ARGUMENTS(m_pEmiterCoreManager, "Manager d'Emiters");
-
+  INIT_NO_ARGUMENTS(m_pEmiterCoreManager, "Manager de Cores d'Emiters");
   LOAD(m_pEmiterCoreManager, "Manager de Cores d'emisors de partícules", _InitParams.CoreEmiterManagerParams.sFiles);
 
   INIT(m_pSoundManager, "Manager de Sons", _InitParams.SoundManagerParams.szFile);
@@ -174,6 +174,8 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   srand(_InitParams.RandomSeed);
 
   LOGGER->SaveLogsInFile();
+
+  m_szLoadLevel = "";
 
   return IsOk();
 }
@@ -246,4 +248,62 @@ void CCore::Update()
   m_pEmiterManager->Update(l_fElapsedTime);
 
   m_pPortalManager->Update(l_fElapsedTime);
+
+  CheckLoadLevel();
+}
+
+void CCore::CheckLoadLevel()
+{
+  if(m_szLoadLevel == "Hangar")
+  {
+    //m_pEntityManager->Done();
+    //m_pPortalManager->Done();
+    //m_pRenderableObjectsManager->Done();
+    //m_pStaticMeshManager->Done();
+    //m_pIAManager->Done();
+
+    string l_szPhysxFile = m_pPhysicsManager->GetConfigFileName();
+    //m_pPhysicsManager->Done();
+
+    CHECKED_DELETE( m_pEntityManager            );
+    CHECKED_DELETE( m_pPortalManager            );
+    CHECKED_DELETE( m_pEmiterManager            );
+    CHECKED_DELETE( m_pRenderableObjectsManager );
+    CHECKED_DELETE( m_pStaticMeshManager        );
+    CHECKED_DELETE( m_pIAManager                );
+    CHECKED_DELETE( m_pScriptManager            );
+    CHECKED_DELETE( m_pPhysicsManager           );
+
+    m_pEntityManager            = new CEntityManager           ();
+    m_pPortalManager            = new CPortalManager           ();
+    m_pRenderableObjectsManager = new CRenderableObjectsManager();
+    m_pStaticMeshManager        = new CStaticMeshManager       ();
+    m_pIAManager                = new CIAManager               ();
+    m_pEmiterManager            = new CEmiterManager           ();
+    m_pScriptManager            = new CScriptManager           ();
+    m_pPhysicsManager           = new CPhysicsManager          ();
+    
+    m_pStaticMeshManager->Load("Data/XML/StaticMeshes.xml");
+    m_pStaticMeshManager->Load("Data/Levels/Hangar/XML/StaticMeshes.xml");
+    m_pRenderableObjectsManager->Load("Data/Levels/Hangar/XML/RenderableObjects.xml");
+    m_pPortalManager->Init("Data/Levels/Hangar/XML/Level.xml");
+    
+    m_pScriptManager->Initialize();
+    m_pScriptManager->Load(m_szLuaInitFile);
+    m_pPhysicsManager->Init(l_szPhysxFile);
+    if(m_pPhysicsManager->IsOk())
+    {
+      m_pPhysicsManager->SetTriggerReport  (m_pPhysicTriggerReport);
+      m_pPhysicsManager->SetCollisionReport(m_pPhysicCollisionReport);
+    }
+    m_pIAManager->Init();
+    m_pEntityManager->LoadEntitiesFromXML("Data/Levels/Hangar/XML/GameEntities.xml");
+
+    m_pIAManager->CompleteGraph();
+
+    //m_pPlayerEntity = CORE->GetEntityManager()->GetEntity("Player");
+    //m_pCamera = m_pPlayerEntity->GetComponent<CComponent3rdPSCamera>()->GetCamera();
+
+    m_szLoadLevel = "";
+  }
 }

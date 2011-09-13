@@ -46,7 +46,8 @@ bool CStaticMeshManager::Load(const string &_szFileName, bool _bReload)
         LOGGER->AddNewLog(ELL_WARNING,"CStaticMeshManager:: Mesh \"%s\" repetit", l_szName.c_str());
     }
   }
-
+  
+  SetOk(true);
   return true;
 }
 
@@ -83,4 +84,11 @@ bool CStaticMeshManager::Reload()
     }
   }
   return l_res;
+}
+
+
+void CStaticMeshManager::Release()
+{
+  CMapManager<CStaticMesh>::Release();
+  m_vXMLFiles.clear();
 }

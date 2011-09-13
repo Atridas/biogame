@@ -362,6 +362,7 @@ bool CRenderableObjectsManager::Load(const string& _szFileName, bool _bReload)
   }
 
   FillBuffers(CORE->GetRenderManager());
+  SetOk(true);
   return true;
 }
 
