@@ -278,11 +278,41 @@ void CPhysicActor::SetGlobalPosition	(const Vect3f& pos)
   }
 }
 
+void CPhysicActor::SetRotation(const Vect3f& _vRot)
+{
+  assert(m_pPhXActor);
+
+  Mat44f l_mat44;
+  GetMat44(l_mat44);
+  Mat44f l_rot44;
+  l_rot44.SetIdentity();
+
+  l_rot44.RotByAnglesYXZ(_vRot.y, _vRot.x, _vRot.z);
+
+  l_rot44.Translate(l_mat44.GetPos());
+
+  SetMat44(l_rot44);
+
+}
+
 Vect3f CPhysicActor::GetPosition ()
 {
 	assert(m_pPhXActor);
 	NxVec3 pos = m_pPhXActor->getGlobalPosition();
 	return Vect3f(pos.x, pos.y, pos.z);
+}
+
+Vect3f CPhysicActor::GetRotation ()
+{
+	assert(m_pPhXActor);
+  
+  Mat44f l_mat44;
+  GetMat44(l_mat44);
+
+  Vect3f l_vRot;
+  l_mat44.GetAnglesYXZ(l_vRot.y, l_vRot.x, l_vRot.z);
+
+	return l_vRot;
 }
 
 void CPhysicActor::CreateBoxTrigger(const Vect3f& size, uint32 group)

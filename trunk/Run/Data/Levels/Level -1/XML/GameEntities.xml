@@ -1664,7 +1664,7 @@
     <RenderableObject animated="false" name="lvl1_aguanta_llums08" />
   </Entity>
   <Entity name="lvl1_Caixa_estatica_petita39">
-    <Object3D position="32.5762 -2.46012 1.48839" yaw="50.0" pitch="0.0" roll="0.0" />
+    <Object3D position="31.96 -2.46012 -1.60717" yaw="50.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Caixa_estatica_petita39" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
@@ -2580,7 +2580,7 @@
     <RenderableObject animated="false" name="lvl1_Porta_planta-1_09" />
   </Entity>
   <Entity name="lvl1_porta">
-    <Object3D position="0.0 -0.116802 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="0.0028863 1.30378 7.38938" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_porta" />
   </Entity>
   <Entity name="lvl1_Porta_planta-1_10">
@@ -2619,35 +2619,37 @@
   <Entity name="lvl1_elice">
     <Object3D position="0.0 5.17398 0.0" yaw="0.000160287" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_elice" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <Rotative yaw="1.5" />
   </Entity>
   <Entity name="lvl1_porta05">
-    <Object3D position="0.0 -0.116802 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-5.22304 1.30378 5.22713" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_porta05" />
   </Entity>
   <Entity name="lvl1_porta06">
-    <Object3D position="0.0 -0.116802 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-7.38938 1.30378 0.00288677" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_porta06" />
   </Entity>
   <Entity name="lvl1_porta07">
-    <Object3D position="0.0 -0.116802 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-5.22713 1.30378 -5.22304" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_porta07" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_porta08">
-    <Object3D position="0.0 -0.116802 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-0.00288725 1.30378 -7.38938" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_porta08" />
   </Entity>
   <Entity name="lvl1_porta09">
-    <Object3D position="0.0 -0.116802 0.0" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="5.22305 1.30378 -5.22712" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_porta09" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_porta10">
-    <Object3D position="0.0 -0.116802 0.0" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="7.38938 1.30378 -0.002882" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_porta10" />
   </Entity>
   <Entity name="lvl1_porta11">
-    <Object3D position="0.0 -0.116802 0.0" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="5.22712 1.30378 5.22305" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_porta11" />
   </Entity>
   <Player position="0.0685836 1.08272 -21.2531" yaw="0.0" />

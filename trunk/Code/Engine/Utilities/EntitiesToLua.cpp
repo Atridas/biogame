@@ -41,6 +41,7 @@ extern "C"
 #include "ComponentExplosive.h"
 #include "ComponentEmiter.h"
 #include "ComponentBillboard.h"
+#include "ComponentRotative.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -111,6 +112,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       [
           value("object_3d",            CBaseComponent::ECT_OBJECT_3D),
           value("movement",             CBaseComponent::ECT_MOVEMENT),
+          value("rotative",             CBaseComponent::ECT_ROTATIVE),
           value("player_controller",    CBaseComponent::ECT_PLAYER_CONTROLLER),
           value("ia_walk_to_player",    CBaseComponent::ECT_IA_WALK_TO_PLAYER),
           value("physx_controller",     CBaseComponent::ECT_PHYSX_CONTROLLER),
@@ -333,6 +335,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("add_to_entity",            &CComponentDoor::AddToEntity)
       .def("block",                    &CComponentDoor::Block)
       .def("is_blocked",               &CComponentDoor::IsBlocked)
+      .def("get_open_time",            &CComponentDoor::GetOpenTime)
+      .def("get_close_time",           &CComponentDoor::GetCloseTime)
       .def_readwrite("time",           &CComponentDoor::m_fTime)
     // ----------------------------------------------------------------------------------------------------
 
@@ -357,15 +361,20 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("explode",                  &CComponentExplosive::Explode)
 
       // ----------------------------------------------------------------------------------------------------
-      ,class_<CComponentEmiter, CBaseComponent>("ComponentEmiter")
+    ,class_<CComponentEmiter, CBaseComponent>("ComponentEmiter")
       .def("add_to_entity",        &CComponentEmiter::AddToEntity)
       .def("change_core",          &CComponentEmiter::ChangeCore)
       .def("change_volume",        &CComponentEmiter::ChangeVolume)
 
       // ----------------------------------------------------------------------------------------------------
-      ,class_<CComponentBillboard, CBaseComponent>("ComponentBillboard")
+    ,class_<CComponentBillboard, CBaseComponent>("ComponentBillboard")
       .def("add_to_entity",        &CComponentBillboard::AddToEntity)
       .def("change_core",          &CComponentBillboard::ChangeCore)
+
+      // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentRotative, CBaseComponent>("ComponentRotative")
+      .def("add_to_entity",        &CComponentRotative::AddToEntity)
+      .def_readwrite("rotation",   &CComponentRotative::m_vRotation)
   ];
 }
 

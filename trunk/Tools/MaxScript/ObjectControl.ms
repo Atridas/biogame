@@ -76,6 +76,16 @@ function IsDoor _object =
 	)
 )
 
+--Comprova si l'objecte proporcionat té rotació fixa aplicada
+function IsRotative _object =
+(
+	if (GetUserProp _object "rotative") != undefined then
+	(
+		return true
+	)
+	return false
+)
+
 -- Comprova si l'objecte proporcionat és un pick up
 function IsPickUp _object =
 (

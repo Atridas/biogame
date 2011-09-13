@@ -23,7 +23,9 @@ public:
   CPhysicUserData* GetUserData()  {return m_pPhysXData;}
 
   Vect3f GetPosition();
+  Vect3f GetRotation();
   void SetPosition(Vect3f _vPos);
+  void SetRotation(Vect3f _vRot);
 
   virtual void UpdatePostPhysX(float _fDeltaTime);
   virtual void ReceiveEvent(const SEvent& _Event);

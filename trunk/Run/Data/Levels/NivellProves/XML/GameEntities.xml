@@ -256,7 +256,7 @@
   <Entity name="Porta01">
     <Object3D position="-39.4743 1.56408 2.94355" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta" />
-    <Door open="false" size="0.976215 3.05175 2.56453" />
+    <Door open="false" open_time="2.0" close_time="0.5" size="0.976215 3.05175 2.56453" />
   </Entity>
   <Entity name="TriggerPorta01">
     <Object3D position="-39.5838 1.84525 2.51199" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -270,6 +270,7 @@
     <Object3D position="-24.3621 0.624995 21.6316" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="proves_TeteraPickUp" />
     <Trigger shape="box" size="0.541901 0.265549 0.337204" collision_group="pickup" onEnter="pick_up_tetera" />
+    <Rotative yaw="0.5" />
   </Entity>
   <Entity name="proves_EsferaInteractiva">
     <Object3D position="-24.4011 0.968018 24.6365" yaw="0.0" pitch="0.0" roll="0.0" />

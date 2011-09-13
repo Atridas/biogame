@@ -139,6 +139,9 @@
     <Filter Include="EntitySystem\Components\ComponentBillboard">
       <UniqueIdentifier>{2c9a171a-f477-41ea-9b8f-580367a76b99}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentRotative">
+      <UniqueIdentifier>{f9550e12-a06c-4654-a0fc-191e11f6c9a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -284,6 +287,9 @@
     </ClCompile>
     <ClCompile Include="ComponentExplosive.cpp">
       <Filter>EntitySystem\Components\ComponentExplosive</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentRotative.cpp">
+      <Filter>EntitySystem\Components\ComponentRotative</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -439,6 +445,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentBillboard.h">
       <Filter>EntitySystem\Components\ComponentBillboard</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentRotative.h">
+      <Filter>EntitySystem\Components\ComponentRotative</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

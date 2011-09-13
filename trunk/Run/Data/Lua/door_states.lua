@@ -186,11 +186,11 @@ State_Porta_Opening['Update'] = function(_entitat, _dt)
   local l_door = _entitat:get_component(BaseComponent.door)
   l_door.time = l_door.time + _dt
   
-  if l_door:is_active() and l_door.time >= Porta_Constants["Open Speed"] * 0.5 then
+  if l_door:is_active() and l_door.time >= l_door:get_open_time() * 0.5 then
     l_door:set_active(false)
   end
   
-  if l_door.time >= Porta_Constants["Open Speed"] then
+  if l_door.time >= l_door:get_open_time() then
     _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Open')
     return
   end
@@ -288,11 +288,11 @@ State_Porta_Closing['Update'] = function(_entitat, _dt)
   local l_door = _entitat:get_component(BaseComponent.door)
   l_door.time = l_door.time + _dt
   
-  if l_door:is_active() == false and l_door.time >= Porta_Constants["Close Speed"] * 0.5 then
+  if l_door:is_active() == false and l_door.time >= l_door:get_close_time() * 0.5 then
     l_door:set_active(true)
   end
   
-  if l_door.time >= Porta_Constants["Close Speed"] then
+  if l_door.time >= l_door:get_close_time() then
     _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Porta_Closed')
     return
   end
