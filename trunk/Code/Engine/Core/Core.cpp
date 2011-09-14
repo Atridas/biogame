@@ -265,6 +265,7 @@ void CCore::CheckLoadLevel()
     string l_szPhysxFile = m_pPhysicsManager->GetConfigFileName();
     //m_pPhysicsManager->Done();
 
+    
     CHECKED_DELETE( m_pEntityManager            );
     CHECKED_DELETE( m_pPortalManager            );
     CHECKED_DELETE( m_pEmiterManager            );
@@ -273,6 +274,7 @@ void CCore::CheckLoadLevel()
     CHECKED_DELETE( m_pIAManager                );
     CHECKED_DELETE( m_pScriptManager            );
     CHECKED_DELETE( m_pPhysicsManager           );
+    
 
     m_pEntityManager            = new CEntityManager           ();
     m_pPortalManager            = new CPortalManager           ();
@@ -282,6 +284,13 @@ void CCore::CheckLoadLevel()
     m_pEmiterManager            = new CEmiterManager           ();
     m_pScriptManager            = new CScriptManager           ();
     m_pPhysicsManager           = new CPhysicsManager          ();
+
+    m_pPhysicsManager->Init(l_szPhysxFile);
+    if(m_pPhysicsManager->IsOk())
+    {
+      m_pPhysicsManager->SetTriggerReport  (m_pPhysicTriggerReport);
+      m_pPhysicsManager->SetCollisionReport(m_pPhysicCollisionReport);
+    }
     
     m_pStaticMeshManager->Load("Data/XML/StaticMeshes.xml");
     m_pStaticMeshManager->Load("Data/Levels/Hangar/XML/StaticMeshes.xml");
@@ -290,12 +299,7 @@ void CCore::CheckLoadLevel()
     
     m_pScriptManager->Initialize();
     m_pScriptManager->Load(m_szLuaInitFile);
-    m_pPhysicsManager->Init(l_szPhysxFile);
-    if(m_pPhysicsManager->IsOk())
-    {
-      m_pPhysicsManager->SetTriggerReport  (m_pPhysicTriggerReport);
-      m_pPhysicsManager->SetCollisionReport(m_pPhysicCollisionReport);
-    }
+   
     m_pIAManager->Init();
     m_pEntityManager->LoadEntitiesFromXML("Data/Levels/Hangar/XML/GameEntities.xml");
 
