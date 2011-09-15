@@ -72,8 +72,7 @@
       <render_targets>
         <render_target index="0" format_type="A8R8G8B8" texture="scene_color"/>
         <render_target index="1" format_type="X8R8G8B8" texture="scene_normals"/>
-        <render_target index="2" format_type="R16G16F" texture="scene_position"/>
-        <render_target index="3" format_type="R16G16F" texture="scene_depth"/>
+        <render_target index="2" format_type="R16G16F" texture="scene_depth"/>
       </render_targets>
       
       <material_effects>
@@ -129,7 +128,7 @@
 
   <post_scene_renderers>
     
-    <post_scene_renderer name="deferred_ambient" effect="DeferredAmbientPass" active="true">
+    <post_scene_renderer name="deferred_ambient" effect="DeferredAmbientPass" size_x="0.5" aspect_ratio="true" position="0.5 0.0" active="true">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="scene_color"/>
@@ -138,18 +137,17 @@
       
     </post_scene_renderer>
     <!-- size_x="0.5" aspect_ratio="true" position="0.5 0.0" -->
-    <post_scene_renderer name="deferred_lighting" type="deferred_post_scene_renderer" effect="DeferredLightPass" active="true">
+    <post_scene_renderer name="deferred_lighting" type="deferred_post_scene_renderer" effect="DeferredLightPass" size_x="0.5" aspect_ratio="true" position="0.5 0.0" active="true">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="scene_color"/>
         <input_sampler type="texture" index="1" texture="scene_normals"/>
-        <input_sampler type="texture" index="2" texture="scene_position"/>
-        <input_sampler type="texture" index="3" texture="scene_depth"/>
+        <input_sampler type="texture" index="2" texture="scene_depth"/>
       </input_samplers>
 
     </post_scene_renderer>
     
-    <post_scene_renderer name="scene_color" effect="Texture" size_x="0.5" aspect_ratio="true" active="false">
+    <post_scene_renderer name="scene_color" effect="Texture" size_x="0.5" aspect_ratio="true" active="true">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="scene_color"/>
@@ -157,7 +155,7 @@
 
     </post_scene_renderer>
     
-    <post_scene_renderer name="scene_normals" effect="Texture" size_x="0.5" aspect_ratio="true" position="0.0 0.5" active="false">
+    <post_scene_renderer name="scene_normals" effect="Texture" size_x="0.5" aspect_ratio="true" position="0.0 0.5" active="true">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="scene_normals"/>
@@ -165,11 +163,10 @@
 
     </post_scene_renderer>
     
-    <post_scene_renderer name="show_depth" effect="ShowDepth" size_x="0.5" aspect_ratio="true" position="0.5 0.5" active="false">
+    <post_scene_renderer name="show_depth" effect="ShowDepth" size_x="0.5" aspect_ratio="true" position="0.5 0.5" active="true">
 
       <input_samplers>
-        <input_sampler type="texture" index="2" texture="scene_position"/>
-        <input_sampler type="texture" index="3" texture="scene_depth"/>
+        <input_sampler type="texture" index="0" texture="scene_depth"/>
       </input_samplers>
 
     </post_scene_renderer>

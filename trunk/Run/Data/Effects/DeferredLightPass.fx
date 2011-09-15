@@ -19,16 +19,7 @@ sampler NormalsTextureSampler : register(s1) = sampler_state
   AddressV  = WRAP;
 };
 
-sampler PosXYTextureSampler : register(s2) = sampler_state
-{
-  MipFilter = LINEAR;
-  MinFilter = LINEAR;  
-  MagFilter = LINEAR;
-  AddressU  = WRAP;
-  AddressV  = WRAP;
-};
-
-sampler DepthTextureSampler : register(s3) = sampler_state
+sampler DepthTextureSampler : register(s2) = sampler_state
 {
   MipFilter = LINEAR;
   MinFilter = LINEAR;  
