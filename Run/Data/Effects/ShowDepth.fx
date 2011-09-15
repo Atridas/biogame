@@ -1,16 +1,7 @@
 #include "Globals.fx"
 #include "Functions.fx"
 
-sampler PosXYTextureSampler : register(s2) = sampler_state
-{
-  MipFilter = LINEAR;
-  MinFilter = LINEAR;  
-  MagFilter = LINEAR;
-  AddressU  = WRAP;
-  AddressV  = WRAP;
-};
-
-sampler DepthTextureSampler : register(s3) = sampler_state
+sampler DepthTextureSampler : register(s0) = sampler_state
 {
   MipFilter = LINEAR;
   MinFilter = LINEAR;  
@@ -40,12 +31,6 @@ float4 ShowDepthPS(float2 _UV: TEXCOORD0) : COLOR
   float z = tex2D(DepthTextureSampler, _UV).x;
   
   return frac(float4(PositionFromZ(z,_UV),1.0));
-  
-	//float3 l_vWorldPos;
-	//l_vWorldPos.xy = tex2D(PosXYTextureSampler, _UV).xy;
-	//l_vWorldPos.z = tex2D(DepthTextureSampler, _UV).x;
-  //
-  //return float4(frac(abs(float3(view.x, view.y, z) - l_vWorldPos)),1.0);
 }
 
 technique ShowDepthTechnique

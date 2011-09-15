@@ -98,8 +98,7 @@ struct PS_OUTPUT
 {
 	float4	Color		: COLOR0;
 	float4	Normals : COLOR1;
-  float4	PosXY   : COLOR2;
-  float4	Depth   : COLOR3;
+  float4	Depth   : COLOR2;
 };
 
 TNEW_PS NewVS(TNEW_VS _in) 
@@ -189,7 +188,7 @@ PS_OUTPUT NewPS(TNEW_PS _in)
   
   l_Output.Color = l_DiffuseColor;
   l_Output.Normals = float4(l_ViewNormal.xyz * 0.5 + 0.5, 0.0);
-  l_Output.PosXY = float4(_in.ViewPosition.xy, 0, 0);
+  //l_Output.PosXY = float4(_in.ViewPosition.xy, 0, 0);
 	l_Output.Depth = float4(_in.ViewPosition.z, 0, 0, 0);
   
   //#if defined( NS_TEX0 )

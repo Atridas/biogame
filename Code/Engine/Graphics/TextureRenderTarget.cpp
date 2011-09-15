@@ -34,12 +34,17 @@ bool CTextureRenderTarget::Init(CXMLTreeNode& _treeRenderTarget, int _iWidth, in
       {
         if(_bDefaultDepthBuffer)
         {
-          RENDER_MANAGER->GetDevice()->GetDepthStencilSurface(&m_pDepthStencilSurface);
+          //RENDER_MANAGER->GetDevice()->GetDepthStencilSurface(&m_pDepthStencilSurface);
+          m_pDepthStencilSurface = RENDER_MANAGER->GetDepthStencilBuffer();
         }
         else
         {
           m_pDepthStencilSurface = m_pTexture->GetDepthStencilSurface();
         }
+      }
+      else
+      {
+        m_pDepthStencilSurface = RENDER_MANAGER->GetDepthStencilBuffer();
       }
     } else
     {
