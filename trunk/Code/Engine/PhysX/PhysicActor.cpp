@@ -282,13 +282,27 @@ void CPhysicActor::SetRotation(const Vect3f& _vRot)
 {
   assert(m_pPhXActor);
 
+
+  //no va bé, només rota de 0 a pi i repeteix.
+  //angles between -pi and pi
+  Vect3f l_vRot = _vRot;
+
+  while(l_vRot.x > FLOAT_PI_VALUE)  l_vRot.x -= FLOAT_PI_VALUE;
+  while(l_vRot.x < -FLOAT_PI_VALUE) l_vRot.x += FLOAT_PI_VALUE;
+
+  while(l_vRot.y > FLOAT_PI_VALUE)  l_vRot.y -= FLOAT_PI_VALUE;
+  while(l_vRot.y < -FLOAT_PI_VALUE) l_vRot.y += FLOAT_PI_VALUE;
+
+  while(l_vRot.z > FLOAT_PI_VALUE)  l_vRot.z -= FLOAT_PI_VALUE;
+  while(l_vRot.z < -FLOAT_PI_VALUE) l_vRot.z += FLOAT_PI_VALUE;
+
   Mat44f l_mat44;
   GetMat44(l_mat44);
   Mat44f l_rot44;
   l_rot44.SetIdentity();
 
-  l_rot44.RotByAnglesYXZ(_vRot.y, _vRot.x, _vRot.z);
-
+  
+  l_rot44.RotByAnglesYXZ(l_vRot.y, l_vRot.x, l_vRot.z);
   l_rot44.Translate(l_mat44.GetPos());
 
   SetMat44(l_rot44);

@@ -68,7 +68,7 @@ function drop_tetera(_self)
   local l_o3d = _self:get_component(BaseComponent.object_3d)
   if l_o3d then
     log('estic creant una tetera')
-    EM:init_pickup("tetera_" .. _self:get_name(), "TeteraPickUp", l_o3d:get_position(), "pick_up_tetera")
+    EM:init_pickup("tetera_" .. _self:get_name(), "proves_TeteraPickUp", l_o3d:get_position(), "pick_up_tetera")
   end
 end
 

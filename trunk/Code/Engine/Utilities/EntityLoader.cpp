@@ -768,7 +768,6 @@ CGameEntity* CEntityManager::InitPickUp(const string& _szName, const string& _sz
   LOGGER->AddNewLog(ELL_INFORMATION, "CEntityManager::InitPickUp Creant Pick Up amb nom \"%s\" i core \"%s\".", _szName.c_str(), _szCore.c_str());
   CGameEntity* l_pPickUpEntity = ENTITY_MANAGER->CreateEntity();
   CComponentObject3D* l_pO3D = CComponentObject3D::AddToEntity(l_pPickUpEntity);
-  CComponentRotative::AddToEntity(l_pPickUpEntity, Vect3f(0.5f,.0f,.0f));
 
   CComponentRenderableObject* l_pRO = CComponentRenderableObject::AddToEntity(l_pPickUpEntity, _szName, _szCore);
 
@@ -776,10 +775,12 @@ CGameEntity* CEntityManager::InitPickUp(const string& _szName, const string& _sz
   {
     l_pO3D->SetPosition(_vPos);
     CComponentTrigger::AddToEntity(l_pPickUpEntity, l_pRO->GetRenderableObject()->GetBoundingBox()->GetDimension(), _szOnPickUp, "", GetCollisionGroup("pickup"));
+    CComponentRotative::AddToEntity(l_pPickUpEntity, Vect3f(0.5f,.0f,.0f));
   }
   else
   {
     LOGGER->AddNewLog(ELL_ERROR, "CEntityManager::InitPickUp Error al crear el component Renderable Object.");
+    l_pPickUpEntity->SetActive(false);
     ENTITY_MANAGER->RemoveEntity(l_pPickUpEntity);
     return 0;
   }
