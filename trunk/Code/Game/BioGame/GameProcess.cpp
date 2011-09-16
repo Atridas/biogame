@@ -15,6 +15,8 @@
 #include "Core.h"
 #include "EmiterManager.h"
 
+#include "NivellInicial.h"
+
 void CGameProcess::Update(float _fElapsedTime)
 {
   //CObject3D* m_pPlayerPos = CORE->GetEntityManager()->GetEntity("Player")->GetComponent<CComponentObject3D>(CBaseComponent::ECT_OBJECT_3D);
@@ -56,11 +58,24 @@ bool CGameProcess::Init()
 
   
   //CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Hangar/XML/GameEntities.xml");
+#ifdef BIOGAME_NIVELLS_DEFAULT
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Laboratori.xml");
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Menjador.xml");
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Passadis.xml");
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - video.xml");
-
+#endif
+#ifdef BIOGAME_NIVELLS_NIVELL_MENYS_2
+  CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Laboratori.xml");
+  CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Menjador.xml");
+  CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Passadis.xml");
+  CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - video.xml");
+#endif
+#ifdef BIOGAME_NIVELLS_NIVELL_MENYS_1
+  CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -1/XML/GameEntities.xml");
+#endif
+#ifdef BIOGAME_NIVELLS_HANGAR
+  CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Hangar/XML/GameEntities.xml");
+#endif
   
   CGameEntity* l_pPlayerEntity = CORE->GetEntityManager()->GetEntity("Player");
   m_pCamera = l_pPlayerEntity->GetComponent<CComponent3rdPSCamera>()->GetCamera();

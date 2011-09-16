@@ -2,6 +2,8 @@
 
 #include <Process.h>
 
+#include "NivellInicial.h"
+
 //Forward declarations---------------------
 class CRenderManager;
 class CCamera;

@@ -73,7 +73,7 @@ bool CPortalManager::Init(const vector<string>& _szFileNames)
 
 bool CPortalManager::Init(CXMLTreeNode& _xmlLevel)
 {
-  assert(strcmp(_xmlLevel.GetName(), "Level") == 0);
+  assert(strcmp(_xmlLevel.GetName(), "PortalManager") == 0);
   SetOk(true);
   if(!m_UnlocatedROs.IsOk())
     m_UnlocatedROs.Init();

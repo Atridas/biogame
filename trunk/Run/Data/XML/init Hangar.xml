@@ -37,7 +37,7 @@
     <Level xml="Data/Levels/Proves/XML/RenderableObjects.xml"/>
     -->
 	</RenderableObjectsManager>
-  <PortalManager file="./Data/Levels/Hangar/XML/Level.xml">
+  <PortalManager file="./Data/Levels/Hangar/XML/Portals.xml">
   </PortalManager>
   
 	<LightsManager file="Data/Levels/Hangar/XML/Lights.xml"/>

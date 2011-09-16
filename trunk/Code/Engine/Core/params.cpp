@@ -450,26 +450,34 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
       CXMLTreeNode l_xmlPortalManager = l_TreeConfig["PortalManager"];
       if(l_xmlPortalManager.Exists())
       {
-        string l_pcFile = l_xmlPortalManager.GetPszISOProperty("file", "", true);
+        if(l_xmlPortalManager.ExistsProperty("file"))
+        {
+          string l_szFile = l_xmlPortalManager.GetPszISOProperty("file", "", true);
 
-        InitParams_.PortalManagerParams.szFiles.push_back( l_pcFile );
-        LOGGER->AddNewLog(ELL_INFORMATION, "\tPortalManager base \"%s\"",l_pcFile.c_str());
-
+          InitParams_.PortalManagerParams.szFiles.push_back( l_szFile );
+          LOGGER->AddNewLog(ELL_INFORMATION, "\tPortalManager base \"%s\"",l_szFile.c_str());
+        }
         for(int i = 0; i < l_xmlPortalManager.GetNumChildren(); ++i)
         {
           CXMLTreeNode l_xmlLevel = l_xmlPortalManager(i);
           if(strcmp(l_xmlLevel.GetName(), "Level") == 0)
           {
-            l_pcFile = l_xmlLevel.GetPszISOProperty("file", "", true);
+            string l_szFile = l_xmlLevel.GetPszISOProperty("file", "", true);
 
-            InitParams_.PortalManagerParams.szFiles.push_back( l_pcFile );
-            LOGGER->AddNewLog(ELL_INFORMATION, "\tPortalManager base \"%s\"",l_pcFile.c_str());
+            InitParams_.PortalManagerParams.szFiles.push_back( l_szFile );
+            LOGGER->AddNewLog(ELL_INFORMATION, "\tPortalManager base \"%s\"",l_szFile.c_str());
           }
           else if(!l_xmlLevel.IsComment())
           {
             LOGGER->AddNewLog(ELL_WARNING, "\tElement extrany \"%s\".", l_xmlLevel.GetName());
           }
 
+        }
+
+        if(InitParams_.PortalManagerParams.szFiles.size() == 0)
+        {
+          LOGGER->AddNewLog(ELL_WARNING, "\tNo hi ha portals valids, inicialitzant per defecte \"Data/XML/Empty Portals.xml\".");
+          InitParams_.PortalManagerParams.szFiles.push_back("Data/XML/Empty Portals.xml");
         }
 
       } else {

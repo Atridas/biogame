@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<Level>
+<PortalManager>
   <Rooms>
     <Room name="PassInici">
       <Boundings>
@@ -725,4 +725,4 @@
     <Portal name="PortalP03R01" roomA="Pass03" roomB="Room01" size="3.66242 3.39706 0.789785" position="-27.4283 1.35503 0.019357" yaw="90.0" pitch="0.0" roll="0.0" />
     <Portal name="PortalP04R02" roomA="Pass04" roomB="Room02" size="3.66242 3.39706 0.789785" position="33.6818 -8.55704 -20.6985" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
   </Portals>
-</Level>
+</PortalManager>

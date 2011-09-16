@@ -30,7 +30,7 @@
 	<!--RenderableObjectsManager file="Data/Levels/Proves/XML/RenderableObjects.xml"-->
 	<RenderableObjectsManager file="Data/Levels/Level -1/XML/RenderableObjects.xml">
 	</RenderableObjectsManager>
-  <PortalManager file="./Data/Levels/Level -1/XML/Level.xml">
+  <PortalManager file="./Data/Levels/Level -1/XML/Portals.xml">
   </PortalManager>
   
 	<LightsManager file="Data/Levels/Level -1/XML/Lights.xml"/>

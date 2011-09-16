@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<Level>
+<PortalManager>
   <Rooms>
     <Room name="Menjador">
       <Boundings>
@@ -217,4 +217,4 @@
   <Portals>
     <Portal name="Porta Menjador" roomA="Menjador" roomB="Passadis" size="5.0277 2.75072 2.10598" position="22.1182 1.22325 9.0359" yaw="-26.0241" pitch="0.0" roll="0.0" />
   </Portals>
-</Level>
+</PortalManager>

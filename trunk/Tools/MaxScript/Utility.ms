@@ -24,7 +24,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 	dropdownList DropListPhysX "Type" pos:[33,385] width:95 height:40
 	button ButtonPhysX "Create" pos:[36,437] width:88 height:23
 	button ButtonEntities "Exportar Entitats" pos:[24,488] width:116 height:26
-	button ButtonNivell "Exportar Nivell" pos:[24,520] width:114 height:23
+	button ButtonNivell "Exportar Portals" pos:[24,520] width:114 height:23
 	
 	-- Control de Paths
   
@@ -525,7 +525,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 	(
 		local l_pathToFile = getXMLPath() 
 		makeDir l_pathToFile all:true
-		l_pathToFile = l_pathToFile + "Level.xml"
+		l_pathToFile = l_pathToFile + "Portals.xml"
 		local l_file = createfile l_pathToFile
 		
 		local l_aux
@@ -533,7 +533,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		
 		format "%" (GetInitTagXML()) to:l_file
 		
-		format "\n%" (OpenTagXML "Level") to:l_file
+		format "\n%" (OpenTagXML "PortalManager") to:l_file
 		
 		
 		local rooms = CreateRooms $*
@@ -652,7 +652,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		format "\n  %" (CloseTagXML "Portals") to:l_file
 		-------------------------------------------------------
 		
-		format "\n%" (CloseTagXML "Level") to:l_file
+		format "\n%" (CloseTagXML "PortalManager") to:l_file
 		
 		format "\n" to:l_file
 		
@@ -1584,7 +1584,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		
 		if ExportPortalsAndRooms() then
 		(
-			ShowMessage "Export del nivell finalitzat\n"
+			ShowMessage "Export de portals finalitzat\n"
 		)
 		else
 		(

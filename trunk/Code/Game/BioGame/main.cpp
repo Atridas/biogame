@@ -7,6 +7,8 @@
 #include "GameProcess.h"
 #include "Utils/Exception.h"
 
+#include "NivellInicial.h"
+
 #if defined( _DEBUG )  
 #include "Utils/MemLeaks.h" 
 #endif
@@ -66,9 +68,19 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
   try {
     CEngine l_Engine;
     SInitParams l_InitParams;
-
+    
+#ifdef BIOGAME_NIVELLS_DEFAULT
     ReadXMLInitParams(l_InitParams,"./Data/XML/init.xml");
-
+#endif
+#ifdef BIOGAME_NIVELLS_NIVELL_MENYS_2
+    ReadXMLInitParams(l_InitParams,"./Data/XML/init -2.xml");
+#endif
+#ifdef BIOGAME_NIVELLS_NIVELL_MENYS_1
+    ReadXMLInitParams(l_InitParams,"./Data/XML/init -1.xml");
+#endif
+#ifdef BIOGAME_NIVELLS_HANGAR
+    ReadXMLInitParams(l_InitParams,"./Data/XML/init Hangar.xml");
+#endif
     // Create the application's window
     HWND hWnd = CreateWindow(	
                     APPLICATION_NAME, 
