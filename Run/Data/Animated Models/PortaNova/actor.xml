@@ -1,6 +1,6 @@
 <actor name="PortaNova" radius_bs="2.0" pos_bs="0.0 1.0 0.0" effect="cal3d" technique="cal3dTechnique">
-  <skeleton filename="Data/Animated Models/Porta/Skeleton.csf"/>
-  <mesh filename="Data/Animated Models/Porta/Mesh.cmf"/>
+  <skeleton filename="Data/Animated Models/PortaNova/Skeleton.csf"/>
+  <mesh filename="Data/Animated Models/PortaNova/Mesh.cmf"/>
   <material animated="true" vertex_type="787">
     <texture type="diffusse" filename="Data/Textures/DIFF_DEF_Portes_tram4.tga"/>
   </material>
