@@ -7,8 +7,11 @@ bool CBackBufferRenderTarget::Init()
   CRenderTarget::Init(0);
 
   //TODO: assegurarse que el Device té el back buffer com a RenderTarget en aquest moment!
-  RENDER_MANAGER->GetDevice()->GetRenderTarget(0,&m_pSurface);
-  RENDER_MANAGER->GetDevice()->GetDepthStencilSurface(&m_pDepthStencilSurface);
+  //RENDER_MANAGER->GetDevice()->GetRenderTarget(0,&m_pSurface);
+  //RENDER_MANAGER->GetDevice()->GetDepthStencilSurface(&m_pDepthStencilSurface);
+  
+  m_pSurface = RENDER_MANAGER->GetBackBuffer();
+  m_pDepthStencilSurface = RENDER_MANAGER->GetDepthStencilBuffer();
 
   SetOk(true);
   return IsOk();
@@ -17,6 +20,6 @@ bool CBackBufferRenderTarget::Init()
 void CBackBufferRenderTarget::Release()
 {
   CRenderTarget::Release();
-  CHECKED_RELEASE(m_pSurface);
-  CHECKED_RELEASE(m_pDepthStencilSurface);
+  //CHECKED_RELEASE(m_pSurface);
+  //CHECKED_RELEASE(m_pDepthStencilSurface);
 }
