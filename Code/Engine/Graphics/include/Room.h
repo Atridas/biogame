@@ -61,13 +61,12 @@ public:
 protected:
   virtual void Release() {m_Boundings.clear();m_Portals.clear();m_RenderableObjects.clear();m_Emiters.clear();};
 private:
-
   bool m_bRendered, m_bNeightbour;
 
   vector<CObject3D>       m_Boundings;
   vector<CPortal*>        m_Portals;
-  set<CRenderableObject*> m_RenderableObjects;
-  set<CEmiterInstance*>   m_Emiters;
+  map<CRenderableObject*, Vect3f> m_RenderableObjects;
+  map<CEmiterInstance*, Vect3f>   m_Emiters;
 };
 
 #endif

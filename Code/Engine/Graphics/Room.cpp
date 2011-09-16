@@ -82,7 +82,7 @@ bool CRoom::Init(CXMLTreeNode& _xmlRoom, set<string>& _UsedNames)
             {
               if(_UsedNames.find(l_szName) == _UsedNames.end())
               {
-                m_RenderableObjects.insert(l_pRO);
+                m_RenderableObjects[l_pRO] = l_pRO->GetPosition();
                 _UsedNames.insert(l_szName);
               }
               else
@@ -122,12 +122,12 @@ bool CRoom::Init(CXMLTreeNode& _xmlRoom, set<string>& _UsedNames)
 void CRoom::Render(CRenderManager* _pRM, const CFrustum& _Frustum, TBlendQueue& _BlendQueue, TBlendQueue& _EmiterQueue) const
 {
   {
-    set<CRenderableObject*>::const_iterator l_it  = m_RenderableObjects.cbegin();
-    set<CRenderableObject*>::const_iterator l_end = m_RenderableObjects.cend();
+    map<CRenderableObject*,Vect3f>::const_iterator l_it  = m_RenderableObjects.cbegin();
+    map<CRenderableObject*,Vect3f>::const_iterator l_end = m_RenderableObjects.cend();
 
     for(; l_it != l_end; ++l_it)
     {
-      CRenderableObject* l_pRenderableObject = *l_it;
+      CRenderableObject* l_pRenderableObject = l_it->first;
       if(l_pRenderableObject->GetVisible())
       {
         Vect3f l_Center = l_pRenderableObject->GetBoundingSphere()->GetMiddlePoint() + l_pRenderableObject->GetPosition();
@@ -148,12 +148,12 @@ void CRoom::Render(CRenderManager* _pRM, const CFrustum& _Frustum, TBlendQueue& 
     }
   }
   {
-    set<CEmiterInstance*>::const_iterator l_it  = m_Emiters.cbegin();
-    set<CEmiterInstance*>::const_iterator l_end = m_Emiters.cend();
+    map<CEmiterInstance*,Vect3f>::const_iterator l_it  = m_Emiters.cbegin();
+    map<CEmiterInstance*,Vect3f>::const_iterator l_end = m_Emiters.cend();
 
     for(; l_it != l_end; ++l_it)
     {
-      CEmiterInstance* l_pEmiter = *l_it;
+      CEmiterInstance* l_pEmiter = l_it->first;
       Vect3f l_Center = l_pEmiter->GetBoundingSphere()->GetMiddlePoint() + l_pEmiter->GetPosition();
       D3DXVECTOR3 l_d3Center(l_Center.x,l_Center.y,l_Center.z);
 
@@ -169,12 +169,12 @@ void CRoom::Render(CRenderManager* _pRM, const CFrustum& _Frustum, TBlendQueue& 
 void CRoom::GetRenderedObjects(const CFrustum& _Frustum, vector<CRenderableObject*>& OpaqueObjects_, TBlendQueue& _BlendQueue, TBlendQueue& _EmiterQueue) const
 {
   {
-    set<CRenderableObject*>::const_iterator l_it  = m_RenderableObjects.cbegin();
-    set<CRenderableObject*>::const_iterator l_end = m_RenderableObjects.cend();
+    map<CRenderableObject*,Vect3f>::const_iterator l_it  = m_RenderableObjects.cbegin();
+    map<CRenderableObject*,Vect3f>::const_iterator l_end = m_RenderableObjects.cend();
 
     for(; l_it != l_end; ++l_it)
     {
-      CRenderableObject* l_pRenderableObject = *l_it;
+      CRenderableObject* l_pRenderableObject = l_it->first;
       if(l_pRenderableObject->GetVisible())
       {
         Vect3f l_Center = l_pRenderableObject->GetBoundingSphere()->GetMiddlePoint() + l_pRenderableObject->GetPosition();
@@ -195,12 +195,12 @@ void CRoom::GetRenderedObjects(const CFrustum& _Frustum, vector<CRenderableObjec
     }
   }
   {
-    set<CEmiterInstance*>::const_iterator l_it  = m_Emiters.cbegin();
-    set<CEmiterInstance*>::const_iterator l_end = m_Emiters.cend();
+    map<CEmiterInstance*,Vect3f>::const_iterator l_it  = m_Emiters.cbegin();
+    map<CEmiterInstance*,Vect3f>::const_iterator l_end = m_Emiters.cend();
 
     for(; l_it != l_end; ++l_it)
     {
-      CEmiterInstance* l_pEmiter = *l_it;
+      CEmiterInstance* l_pEmiter = l_it->first;
       Vect3f l_Center = l_pEmiter->GetBoundingSphere()->GetMiddlePoint() + l_pEmiter->GetPosition();
       D3DXVECTOR3 l_d3Center(l_Center.x,l_Center.y,l_Center.z);
 
@@ -216,12 +216,25 @@ void CRoom::Update(CPortalManager* _pPM)
 {
   {
     set<CRenderableObject*> l_Remove;
+    map<CRenderableObject*,Vect3f> l_UpdateTranslation;
     {
-      set<CRenderableObject*>::const_iterator l_it  = m_RenderableObjects.cbegin();
-      set<CRenderableObject*>::const_iterator l_end = m_RenderableObjects.cend();
+      map<CRenderableObject*,Vect3f>::const_iterator l_it  = m_RenderableObjects.cbegin();
+      map<CRenderableObject*,Vect3f>::const_iterator l_end = m_RenderableObjects.cend();
       for(; l_it != l_end; ++l_it)
       {
-        CRenderableObject* l_pRenderableObject = *l_it;
+        CRenderableObject* l_pRenderableObject = l_it->first;
+        Vect3f l_TranslationOld = l_it->second;
+        Vect3f l_TranslationNew = l_pRenderableObject->GetPosition();
+
+
+        if(l_TranslationNew == l_TranslationOld)
+        {
+          continue;
+        }
+        else
+        {
+          l_UpdateTranslation[l_pRenderableObject] = l_TranslationNew;
+        }
 
         if(m_Boundings.size() != 0)
         {
@@ -229,6 +242,7 @@ void CRoom::Update(CPortalManager* _pPM)
           if(!IsObject3DSphereInRoom(l_pRenderableObject))
           {
             l_Remove.insert(l_pRenderableObject);
+            l_UpdateTranslation.erase(l_pRenderableObject);
 
             vector<CPortal*>::const_iterator l_it = m_Portals.cbegin();
             vector<CPortal*>::const_iterator l_end = m_Portals.cend();
@@ -258,6 +272,7 @@ void CRoom::Update(CPortalManager* _pPM)
             {
               l_pOtherRoom->AddRendeableObject(l_pRenderableObject);
               l_Remove.insert(l_pRenderableObject);
+              l_UpdateTranslation.erase(l_pRenderableObject);
               break;
             }
           }
@@ -272,17 +287,38 @@ void CRoom::Update(CPortalManager* _pPM)
         m_RenderableObjects.erase(*l_it);
       }
     }
+    {
+      map<CRenderableObject*,Vect3f>::iterator l_it  = l_UpdateTranslation.begin();
+      map<CRenderableObject*,Vect3f>::iterator l_end = l_UpdateTranslation.end();
+      for(; l_it != l_end; ++l_it)
+      {
+        m_RenderableObjects[l_it->first] = l_it->second;
+      }
+    }
   }
 
 
   {
     set<CEmiterInstance*> l_Remove;
+    map<CEmiterInstance*,Vect3f> l_UpdateTranslation;
     {
-      set<CEmiterInstance*>::const_iterator l_it  = m_Emiters.cbegin();
-      set<CEmiterInstance*>::const_iterator l_end = m_Emiters.cend();
+      map<CEmiterInstance*,Vect3f>::const_iterator l_it  = m_Emiters.cbegin();
+      map<CEmiterInstance*,Vect3f>::const_iterator l_end = m_Emiters.cend();
       for(; l_it != l_end; ++l_it)
       {
-        CEmiterInstance* l_pEmiter = *l_it;
+        CEmiterInstance* l_pEmiter = l_it->first;
+        Vect3f l_TranslationOld = l_it->second;
+        Vect3f l_TranslationNew = l_pEmiter->GetPosition();
+
+
+        if(l_TranslationNew == l_TranslationOld)
+        {
+          continue;
+        }
+        else
+        {
+          l_UpdateTranslation[l_pEmiter] = l_TranslationNew;
+        }
 
         if(m_Boundings.size() != 0)
         {
@@ -290,6 +326,7 @@ void CRoom::Update(CPortalManager* _pPM)
           if(!IsObject3DSphereInRoom(l_pEmiter))
           {
             l_Remove.insert(l_pEmiter);
+            l_UpdateTranslation.erase(l_pEmiter);
 
             vector<CPortal*>::const_iterator l_it  = m_Portals.cbegin();
             vector<CPortal*>::const_iterator l_end = m_Portals.cend();
@@ -319,6 +356,7 @@ void CRoom::Update(CPortalManager* _pPM)
             {
               l_pOtherRoom->AddEmiter(l_pEmiter);
               l_Remove.insert(l_pEmiter);
+              l_UpdateTranslation.erase(l_pEmiter);
               break;
             }
           }
@@ -333,17 +371,25 @@ void CRoom::Update(CPortalManager* _pPM)
         m_Emiters.erase(*l_it);
       }
     }
+    {
+      map<CEmiterInstance*,Vect3f>::iterator l_it  = l_UpdateTranslation.begin();
+      map<CEmiterInstance*,Vect3f>::iterator l_end = l_UpdateTranslation.end();
+      for(; l_it != l_end; ++l_it)
+      {
+        m_Emiters[l_it->first] = l_it->second;
+      }
+    }
   }
 }
 
 void CRoom::AddRendeableObject(CRenderableObject* _pRO)
 {
-  m_RenderableObjects.insert(_pRO);
+  m_RenderableObjects[_pRO] = _pRO->GetPosition();
 }
 
 bool CRoom::RemoveRendeableObject(CRenderableObject* _pRO)
 {
-  set<CRenderableObject*>::iterator l_it = m_RenderableObjects.find(_pRO);
+  map<CRenderableObject*, Vect3f>::iterator l_it = m_RenderableObjects.find(_pRO);
   if(l_it != m_RenderableObjects.end())
   {
     m_RenderableObjects.erase(l_it);
@@ -358,12 +404,12 @@ bool CRoom::RemoveRendeableObject(CRenderableObject* _pRO)
 void CRoom::AddEmiter(CEmiterInstance* _pEmiter)
 {
   _pEmiter->SetRoom(this);
-  m_Emiters.insert(_pEmiter);
+  m_Emiters[_pEmiter] = _pEmiter->GetPosition();
 }
 
 bool CRoom::RemoveEmiter(CEmiterInstance* _pEmiter)
 {
-  set<CEmiterInstance*>::iterator l_it = m_Emiters.find(_pEmiter);
+  map<CEmiterInstance*, Vect3f>::iterator l_it = m_Emiters.find(_pEmiter);
   if(l_it != m_Emiters.end())
   {
     m_Emiters.erase(l_it);
@@ -439,8 +485,8 @@ bool CRoom::IsObject3DSphereInRoom(const CObject3D* _pObject3D) const
       //centre de la esfera projectat
       float l_fSphereCenter = l_vCenterObject * l_vBasis;
 
-      if(l_fSphereCenter + l_fRadius < l_fBoxMin ||
-         l_fSphereCenter - l_fRadius > l_fBoxMax)
+      if(l_fSphereCenter - l_fRadius < l_fBoxMin ||
+         l_fSphereCenter + l_fRadius > l_fBoxMax)
       {
         l_bInsideTheBox = false;
         break;
