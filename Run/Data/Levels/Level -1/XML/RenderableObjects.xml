@@ -406,7 +406,7 @@
 	<RenderableObject name="lvl1_aguanta_llums07" class="StaticMesh" resource="lvl1_aguanta_llums07" position="35.7645 -5.46596 -13.8602" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Lum08" class="StaticMesh" resource="lvl1_Lum08" position="35.7866 -1.92346 -6.81349" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_aguanta_llums08" class="StaticMesh" resource="lvl1_aguanta_llums08" position="35.7645 -2.01137 -6.67658" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_Caixa_estatica_petita39" class="StaticMesh" resource="lvl1_Caixa_estatica_petita39" position="32.5762 -2.46012 1.48839" yaw="50.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_Caixa_estatica_petita39" class="StaticMesh" resource="lvl1_Caixa_estatica_petita39" position="31.96 -2.46012 -1.60717" yaw="50.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Caixa_estatica_petita40" class="StaticMesh" resource="lvl1_Caixa_estatica_petita40" position="18.2369 0.52294 -1.6804" yaw="50.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_armeria" class="StaticMesh" resource="lvl1_armeria" position="33.6163 -10.0 -23.6384" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_viga08" class="StaticMesh" resource="lvl1_viga08" position="24.951 -5.01891 -31.1149" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -634,7 +634,6 @@
 	<RenderableObject name="lvl1_caixa_llarga15" class="StaticMesh" resource="lvl1_caixa_llarga15" position="37.6176 -7.29944 -36.1153" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Sala_central" class="StaticMesh" resource="lvl1_Sala_central" position="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Porta_planta-1_09" class="StaticMesh" resource="lvl1_Porta_planta-1_09" position="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_porta" class="StaticMesh" resource="lvl1_porta" position="0.0 -0.116802 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Porta_planta-1_10" class="StaticMesh" resource="lvl1_Porta_planta-1_10" position="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Porta_planta-1_11" class="StaticMesh" resource="lvl1_Porta_planta-1_11" position="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Porta_planta-1_12" class="StaticMesh" resource="lvl1_Porta_planta-1_12" position="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -644,11 +643,6 @@
 	<RenderableObject name="lvl1_Porta_planta-1_16" class="StaticMesh" resource="lvl1_Porta_planta-1_16" position="0.0 0.0 0.0" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_terra_elevat" class="StaticMesh" resource="lvl1_terra_elevat" position="0.0 -0.116802 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_elice" class="StaticMesh" resource="lvl1_elice" position="0.0 5.17398 0.0" yaw="0.000160287" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_porta05" class="StaticMesh" resource="lvl1_porta05" position="0.0 -0.116802 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_porta06" class="StaticMesh" resource="lvl1_porta06" position="0.0 -0.116802 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_porta07" class="StaticMesh" resource="lvl1_porta07" position="0.0 -0.116802 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_porta08" class="StaticMesh" resource="lvl1_porta08" position="0.0 -0.116802 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_porta09" class="StaticMesh" resource="lvl1_porta09" position="0.0 -0.116802 0.0" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_porta10" class="StaticMesh" resource="lvl1_porta10" position="0.0 -0.116802 0.0" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_porta11" class="StaticMesh" resource="lvl1_porta11" position="0.0 -0.116802 0.0" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_porta07" class="StaticMesh" resource="lvl1_porta07" position="-5.22713 1.30378 -5.22304" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_porta09" class="StaticMesh" resource="lvl1_porta09" position="5.22305 1.30378 -5.22712" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
 </RenderableObjects>

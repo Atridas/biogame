@@ -254,7 +254,7 @@
     <LowCover shape="box" size="1.00877 1.00999 1.01209" collision_group="cobertura" cover_size="2" />
   </Entity>
   <Entity name="Porta01">
-    <Object3D position="-39.4743 1.56408 2.94355" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-39.4743 1.56408 5.21449" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta" />
     <Door open="false" open_time="2.0" close_time="0.5" size="0.976215 3.05175 2.56453" />
   </Entity>
@@ -516,6 +516,11 @@
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
     <Destroyable onDestroy="bido_explosiu" />
     <Explosive />
+  </Entity>
+  <Entity name="Porta02">
+    <Object3D position="-39.4743 1.56408 1.67592" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="true" name="Porta1" />
+    <Door open="false" open_time="1.0" close_time="1.0" size="0.976215 3.05175 2.56453" />
   </Entity>
   <Player position="-16.8764 2.0 -15.9165" yaw="0.0" />
   <Miner name="Miner" position="50.3014 2.0 39.1446" yaw="0.0" active="false" on_death="drop_tetera" />

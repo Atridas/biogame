@@ -22,6 +22,107 @@ State_Porta_Closing = {}
 function open_door(_trigger, _actor)
   local l_trigger = _trigger:get_name()
   
+  --LEVEL PROVES
+  if l_trigger == "TriggerPorta01" then
+    send_open_door("Porta01", _actor)
+    send_open_door("Porta02", _actor)
+    
+  --LEVEL -2
+  elseif l_trigger == "Trigger_Porta_Video" then
+    if _actor:get_name() == "Player" then
+      send_open_door("Porta_Videovigilancia", _actor)
+      activate_entity("Miner_video00")
+    end
+    
+  --LEVEL -1 : Sala Central
+  elseif l_trigger == "lvl1_trigger_porta_inici" then
+    if _actor:get_name() == "Player" then
+      send_open_door("lvl1_door_inici", _actor)
+    end
+    
+  elseif l_trigger == "lvl1_trigger_porta04" then
+    if _actor:get_name() == "Player" then
+      send_open_door("lvl1_door04", _actor)
+    end
+    
+  elseif l_trigger == "lvl1_trigger_porta01" then
+    if _actor:get_name() == "Player" then
+      send_open_door("lvl1_door01", _actor)
+    end
+    
+  elseif l_trigger == "lvl1_trigger_porta_final" then
+    if _actor:get_name() == "Player" then
+      send_open_door("lvl1_door_final", _actor)
+    end
+    
+  elseif l_trigger == "lvl1_trigger_porta_claus" then
+    if _actor:get_name() == "Player" then
+      send_open_door("lvl1_door_claus", _actor)
+    end
+    
+  elseif l_trigger == "lvl1_trigger_porta03" then
+    if _actor:get_name() == "Player" then
+      send_open_door("lvl1_door03", _actor)
+    end
+    
+  end
+end
+
+
+function close_door(_trigger, _actor)
+  local l_trigger = _trigger:get_name()
+
+  --LEVEL PROVES
+  if l_trigger == "TriggerPorta01" then
+    send_close_door("Porta01", _actor)
+    send_close_door("Porta02", _actor)
+
+  --LEVEL -2    
+  elseif l_trigger == "Lab_Trigger_Sortida" then
+    if _actor:get_name() == "Player" then
+      send_close_door("Porta_Laboratori", _actor)
+    end
+    
+  elseif l_trigger == "Trigger_Porta_Video" then
+    if _actor:get_name() == "Player" then
+      send_close_door("Porta_Videovigilancia", _actor)
+    end
+  
+  --LEVEL -1 : Sala Central
+  elseif l_trigger == "lvl1_trigger_porta_inici" then
+    if _actor:get_name() == "Player" then
+      send_close_door("lvl1_door_inici", _actor)
+    end
+    
+  elseif l_trigger == "lvl1_trigger_porta04" then
+    if _actor:get_name() == "Player" then
+      send_close_door("lvl1_door04", _actor)
+    end
+    
+  elseif l_trigger == "lvl1_trigger_porta01" then
+    if _actor:get_name() == "Player" then
+      send_close_door("lvl1_door01", _actor)
+    end
+    
+  elseif l_trigger == "lvl1_trigger_porta_final" then
+    if _actor:get_name() == "Player" then
+      send_close_door("lvl1_door_final", _actor)
+    end
+    
+  elseif l_trigger == "lvl1_trigger_porta_claus" then
+    if _actor:get_name() == "Player" then
+      send_close_door("lvl1_door_claus", _actor)
+    end
+    
+  elseif l_trigger == "lvl1_trigger_porta03" then
+    if _actor:get_name() == "Player" then
+      send_close_door("lvl1_door03", _actor)
+    end
+    
+  end
+end
+
+function send_open_door(_doorName, _actor)
   --Missatge
   local l_message = EM:get_event()
 
@@ -29,35 +130,17 @@ function open_door(_trigger, _actor)
   l_message.sender = _actor:get_guid()
   l_message.dispatch_time = 0
   
-  if l_trigger == "TriggerPorta01" then
-    local l_door = EM:get_entity_from_name("Porta01")
-    
+  local l_door = EM:get_entity_from_name(_doorName)    
+  if l_door then
     l_message.receiver = l_door:get_guid()
     
     EM:send_event(l_message)
-  --LEVEL -2 : Passadís
-  elseif l_trigger == "Trigger_Porta_Video" then
-    if _actor:get_name() == "Player" then
-      local l_door = EM:get_entity_from_name("Porta_Videovigilancia")
-    
-      if l_door then
-        l_message.receiver = l_door:get_guid()
-      
-        EM:send_event(l_message)
-        
-        --activar el miner de la sala
-        activate_entity("Miner_video00")
-      else
-        log('No es troba la porta: Porta_Videovigilancia')
-      end
-    end
+  else
+    log('Error al buscar la porta: '.. _doorName)
   end
 end
 
-
-function close_door(_trigger, _actor)
-  local l_trigger = _trigger:get_name()
-  
+function send_close_door(_doorName, _actor)
   --Missatge
   local l_message = EM:get_event()
 
@@ -65,38 +148,13 @@ function close_door(_trigger, _actor)
   l_message.sender = _actor:get_guid()
   l_message.dispatch_time = 0
   
-  if l_trigger == "TriggerPorta01" then
-    local l_door = EM:get_entity_from_name("Porta01")
+  local l_door = EM:get_entity_from_name(_doorName)    
+  if l_door then
+    l_message.receiver = l_door:get_guid()
     
-    if l_door then
-      l_message.receiver = l_door:get_guid()
-      
-      EM:send_event(l_message)
-    else
-      log('Error al buscar la porta')
-    end
-  --LEVEL -2 : Laboratori    
-  elseif l_trigger == "Lab_Trigger_Sortida" then
-    local l_door = EM:get_entity_from_name("Porta_Laboratori")
-
-    if l_door and (_actor:get_name() == "Player") then
-      l_message.receiver = l_door:get_guid()
-      
-      EM:send_event(l_message)
-    else
-      log('Error al buscar la porta')
-    end
-  --LEVEL -2 : Passadís
-  elseif l_trigger == "Trigger_Porta_Video" then
-    if _actor:get_name() == "Player" then
-      local l_door = EM:get_entity_from_name("Porta_Videovigilancia")
-    
-      if l_door then
-        l_message.receiver = l_door:get_guid()
-      
-        EM:send_event(l_message)
-      end
-    end
+    EM:send_event(l_message)
+  else
+    log('Error al buscar la porta: '.. _doorName)
   end
 end
 
