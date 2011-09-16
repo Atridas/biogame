@@ -694,7 +694,6 @@
       <Objects>
         <GameObject name="lvl1_Sala_central" />
         <GameObject name="lvl1_Porta_planta-1_09" />
-        <GameObject name="lvl1_porta" />
         <GameObject name="lvl1_Porta_planta-1_10" />
         <GameObject name="lvl1_Porta_planta-1_11" />
         <GameObject name="lvl1_Porta_planta-1_12" />
@@ -704,13 +703,8 @@
         <GameObject name="lvl1_Porta_planta-1_16" />
         <GameObject name="lvl1_terra_elevat" />
         <GameObject name="lvl1_elice" />
-        <GameObject name="lvl1_porta05" />
-        <GameObject name="lvl1_porta06" />
         <GameObject name="lvl1_porta07" />
-        <GameObject name="lvl1_porta08" />
         <GameObject name="lvl1_porta09" />
-        <GameObject name="lvl1_porta10" />
-        <GameObject name="lvl1_porta11" />
       </Objects>
     </Room>
   </Rooms>
@@ -724,5 +718,6 @@
     <Portal name="PortalRCPF" roomA="SalaCentral" roomB="PassFinal" size="3.66242 3.39706 0.789785" position="0.124609 1.35503 7.39967" yaw="-180.0" pitch="0.0" roll="0.0" />
     <Portal name="PortalP03R01" roomA="Pass03" roomB="Room01" size="3.66242 3.39706 0.789785" position="-27.4283 1.35503 0.019357" yaw="90.0" pitch="0.0" roll="0.0" />
     <Portal name="PortalP04R02" roomA="Pass04" roomB="Room02" size="3.66242 3.39706 0.789785" position="33.6818 -8.55704 -20.6985" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Portal name="PortalRCRCt01" roomA="SalaCentral" roomB="SalaControls" size="3.66242 3.39706 0.789785" position="-5.37087 1.35503 5.13457" yaw="-135.0" pitch="0.0" roll="0.0" />
   </Portals>
 </PortalManager>

@@ -2579,10 +2579,6 @@
     <Object3D position="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Porta_planta-1_09" />
   </Entity>
-  <Entity name="lvl1_porta">
-    <Object3D position="0.0028863 1.30378 7.38938" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl1_porta" />
-  </Entity>
   <Entity name="lvl1_Porta_planta-1_10">
     <Object3D position="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Porta_planta-1_10" />
@@ -2622,35 +2618,69 @@
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
     <Rotative yaw="1.5" />
   </Entity>
-  <Entity name="lvl1_porta05">
-    <Object3D position="-5.22304 1.30378 5.22713" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl1_porta05" />
-  </Entity>
-  <Entity name="lvl1_porta06">
-    <Object3D position="-7.38938 1.30378 0.00288677" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl1_porta06" />
-  </Entity>
   <Entity name="lvl1_porta07">
     <Object3D position="-5.22713 1.30378 -5.22304" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_porta07" />
     <PhysXMesh density="0" collision_group="escenari" />
-  </Entity>
-  <Entity name="lvl1_porta08">
-    <Object3D position="-0.00288725 1.30378 -7.38938" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl1_porta08" />
   </Entity>
   <Entity name="lvl1_porta09">
     <Object3D position="5.22305 1.30378 -5.22712" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_porta09" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="lvl1_porta10">
-    <Object3D position="7.38938 1.30378 -0.002882" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl1_porta10" />
+  <Entity name="lvl1_door04">
+    <Object3D position="7.3721 1.25049 0.010658" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="true" name="Porta1" />
+    <Door open="false" size="0.514184 2.50021 2.15901" />
   </Entity>
-  <Entity name="lvl1_porta11">
-    <Object3D position="5.22712 1.30378 5.22305" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl1_porta11" />
+  <Entity name="lvl1_door01">
+    <Object3D position="5.23365 1.25049 5.18079" yaw="45.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="true" name="Porta1" />
+    <Door open="false" size="0.514184 2.50021 2.15901" />
+  </Entity>
+  <Entity name="lvl1_door_final">
+    <Object3D position="0.0924268 1.25049 7.32848" yaw="-90.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="true" name="Porta1" />
+    <Door open="false" size="0.514184 2.50021 2.15901" />
+  </Entity>
+  <Entity name="lvl1_door_claus">
+    <Object3D position="-5.25572 1.25049 5.19641" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="true" name="Porta1" />
+    <Door open="false" size="0.514184 2.50021 2.15901" />
+  </Entity>
+  <Entity name="lvl1_door03">
+    <Object3D position="-7.32329 1.25049 -0.00545454" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="true" name="Porta1" />
+    <Door open="false" size="0.514184 2.50021 2.15901" />
+  </Entity>
+  <Entity name="lvl1_trigger_porta04">
+    <Object3D position="7.94197 1.66002 -0.0568679" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="4.05259 3.57803 6.05252" collision_group="trigger" onEnter="open_door" onExit="close_door" />
+  </Entity>
+  <Entity name="lvl1_trigger_porta01">
+    <Object3D position="5.59769 1.66002 5.52761" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="4.05259 3.57803 6.05252" collision_group="trigger" onEnter="open_door" onExit="close_door" />
+  </Entity>
+  <Entity name="lvl1_trigger_porta_final">
+    <Object3D position="0.0669897 1.66002 8.22876" yaw="-90.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="4.05259 3.57803 6.05252" collision_group="trigger" onEnter="open_door" onExit="close_door" />
+  </Entity>
+  <Entity name="lvl1_trigger_porta_claus">
+    <Object3D position="-4.97296 1.66002 5.00973" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="4.05259 3.57803 6.05252" collision_group="trigger" onEnter="open_door" onExit="close_door" />
+  </Entity>
+  <Entity name="lvl1_trigger_porta03">
+    <Object3D position="-7.92217 1.66002 0.013145" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="4.05259 3.57803 6.05252" collision_group="trigger" onEnter="open_door" onExit="close_door" />
+  </Entity>
+  <Entity name="lvl1_door_inici">
+    <Object3D position="-0.00534996 1.25049 -7.38634" yaw="90.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="true" name="Porta1" />
+    <Door open="false" size="0.514184 2.50021 2.15901" />
+  </Entity>
+  <Entity name="lvl1_trigger_porta_inici">
+    <Object3D position="-0.0239495 1.66002 -7.98522" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="4.05259 3.57803 6.05252" collision_group="trigger" onEnter="open_door" onExit="close_door" />
   </Entity>
   <Player position="0.0685836 1.08272 -21.2531" yaw="0.0" />
 </Entities>

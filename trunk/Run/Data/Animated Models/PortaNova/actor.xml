@@ -1,10 +1,14 @@
-<actor name="PortaNova" radius_bs="2.0" pos_bs="0.0 1.0 0.0" effect="cal3d" technique="cal3dTechnique">
+<actor name="Porta1" radius_bs="2.0" pos_bs="0.0 1.0 0.0" effect="cal3d" technique="cal3dTechnique">
   <skeleton filename="Data/Animated Models/PortaNova/Skeleton.csf"/>
   <mesh filename="Data/Animated Models/PortaNova/Mesh.cmf"/>
   <material animated="true" vertex_type="787">
-    <texture type="diffusse" filename="Data/Textures/DIFF_DEF_Portes_tram4.tga"/>
+    <texture type="diffusse" filename="Data/Textures/portesplanta1.tga"/>
+    <texture type="glow" filename="Data/Textures/portesplanta1glow.tga"/>
+    <property type="glowIntensity" value="2.0" />
+    <property type="specularParams" glossiness="200.0" specular_level="10.0" />
   </material>
   <animation name="obrir" filename="Data/Animated Models/PortaNova/obrir.CAF"/>
   <animation name="tancar" filename="Data/Animated Models/PortaNova/tancar.CAF"/>
   <animation name="idleopen" filename="Data/Animated Models/PortaNova/idleopen.CAF"/>
+  <animation name="idleclose" filename="Data/Animated Models/PortaNova/idleclose.CAF"/>
 </actor>

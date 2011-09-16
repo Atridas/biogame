@@ -385,7 +385,7 @@
 	<mesh name="lvl1_aguanta_llums07" path="Data/Meshes/lvl1_aguanta_llums07.mesh" max="0.130722 0.0 -0.0450411" min="-0.0445366 -0.37025 -0.22109" />
 	<mesh name="lvl1_Lum08" path="Data/Meshes/lvl1_Lum08.mesh" max="0.0798302 0.0 0.0798302" min="-0.0798302 -0.569623 -0.0798302" />
 	<mesh name="lvl1_aguanta_llums08" path="Data/Meshes/lvl1_aguanta_llums08.mesh" max="0.130722 0.0 -0.0450406" min="-0.0445366 -0.37025 -0.22109" />
-	<mesh name="lvl1_Caixa_estatica_petita39" path="Data/Meshes/lvl1_Caixa_estatica_petita39.mesh" max="1.39813 0.5 -0.12232" min="-1.39813 -0.5 0.122322" />
+	<mesh name="lvl1_Caixa_estatica_petita39" path="Data/Meshes/lvl1_Caixa_estatica_petita39.mesh" max="1.39813 0.5 -0.122318" min="-1.39813 -0.5 0.122322" />
 	<mesh name="lvl1_Caixa_estatica_petita40" path="Data/Meshes/lvl1_Caixa_estatica_petita40.mesh" max="1.39813 0.5 -0.12232" min="-1.39813 -0.5 0.122321" />
 	<mesh name="lvl1_armeria" path="Data/Meshes/lvl1_armeria.mesh" max="8.14388 6.0 2.93201" min="-11.1439 0.0 -17.932" />
 	<mesh name="lvl1_viga08" path="Data/Meshes/lvl1_viga08.mesh" max="0.237833 0.789214 10.5043" min="-0.237833 0.0 -10.5043" />
@@ -613,7 +613,6 @@
 	<mesh name="lvl1_caixa_llarga15" path="Data/Meshes/lvl1_caixa_llarga15.mesh" max="1.33253 0.5 1.05801" min="-1.33253 -0.5 -1.05801" />
 	<mesh name="lvl1_Sala_central" path="Data/Meshes/lvl1_Sala_central.mesh" max="7.39104 7.91334 7.39104" min="-7.39104 -0.0313183 -7.39104" />
 	<mesh name="lvl1_Porta_planta-1_09" path="Data/Meshes/lvl1_Porta_planta-1_09.mesh" max="1.45497 2.94098 -7.12897" min="-1.42735 -0.00277019 -7.655" />
-	<mesh name="lvl1_porta" path="Data/Meshes/lvl1_porta.mesh" max="1.05243 2.72436 7.48938" min="-1.04666 0.116802 7.28938" />
 	<mesh name="lvl1_Porta_planta-1_10" path="Data/Meshes/lvl1_Porta_planta-1_10.mesh" max="-4.07577 2.94098 -4.09531" min="-6.35854 -0.00277019 -6.37807" />
 	<mesh name="lvl1_Porta_planta-1_11" path="Data/Meshes/lvl1_Porta_planta-1_11.mesh" max="-7.12897 2.94098 1.42735" min="-7.655 -0.00277019 -1.45497" />
 	<mesh name="lvl1_Porta_planta-1_12" path="Data/Meshes/lvl1_Porta_planta-1_12.mesh" max="-4.09531 2.94098 6.35854" min="-6.37807 -0.00277019 4.07577" />
@@ -623,11 +622,6 @@
 	<mesh name="lvl1_Porta_planta-1_16" path="Data/Meshes/lvl1_Porta_planta-1_16.mesh" max="6.37807 2.94098 -4.07577" min="4.09531 -0.00277019 -6.35853" />
 	<mesh name="lvl1_terra_elevat" path="Data/Meshes/lvl1_terra_elevat.mesh" max="7.39104 0.116821 7.39104" min="-7.39104 0.0268216 -7.39104" />
 	<mesh name="lvl1_elice" path="Data/Meshes/lvl1_elice.mesh" max="3.26702 2.73942 3.2706" min="-3.27681 -0.23126 -3.27319" />
-	<mesh name="lvl1_porta05" path="Data/Meshes/lvl1_porta05.mesh" max="-4.41019 2.72436 6.03998" min="-6.0359 0.116802 4.41427" />
-	<mesh name="lvl1_porta06" path="Data/Meshes/lvl1_porta06.mesh" max="-7.28938 2.72436 1.05243" min="-7.48938 0.116802 -1.04666" />
-	<mesh name="lvl1_porta07" path="Data/Meshes/lvl1_porta07.mesh" max="-4.41427 2.72436 -4.41019" min="-6.03998 0.116802 -6.0359" />
-	<mesh name="lvl1_porta08" path="Data/Meshes/lvl1_porta08.mesh" max="1.04666 2.72436 -7.28938" min="-1.05243 0.116802 -7.48938" />
-	<mesh name="lvl1_porta09" path="Data/Meshes/lvl1_porta09.mesh" max="6.0359 2.72436 -4.41427" min="4.41019 0.116802 -6.03997" />
-	<mesh name="lvl1_porta10" path="Data/Meshes/lvl1_porta10.mesh" max="7.48939 2.72436 1.04666" min="7.28938 0.116802 -1.05243" />
-	<mesh name="lvl1_porta11" path="Data/Meshes/lvl1_porta11.mesh" max="6.03998 2.72436 6.0359" min="4.41427 0.116802 4.41019" />
+	<mesh name="lvl1_porta07" path="Data/Meshes/lvl1_porta07.mesh" max="0.812852 1.30378 0.812852" min="-0.812852 -1.30378 -0.812852" />
+	<mesh name="lvl1_porta09" path="Data/Meshes/lvl1_porta09.mesh" max="0.812853 1.30378 0.812852" min="-0.812853 -1.30378 -0.812852" />
 </meshes>

@@ -615,7 +615,7 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
 
   CComponentShield::AddToEntity(l_pPlayer, 50.f, 50.f, 1.0f, 5.0f);
 
-  CComponentVida::AddToEntity(l_pPlayer, 100.f, 100.f, true, 30.0f, 7.0f);
+  CComponentVida::AddToEntity(l_pPlayer, 100.f, 100.f, true, 25.0f, 5.0f);
 
   CComponentStateMachine::AddToEntity(l_pPlayer, "State_Player_Neutre");
 
