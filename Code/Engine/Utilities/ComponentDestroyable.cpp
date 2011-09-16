@@ -92,7 +92,8 @@ void CComponentDestroyable::ReceiveEvent(const SEvent& _Event)
         {
           if(!l_pRO->ChangeInstance(m_szResource))
           {
-            LOGGER->AddNewLog(ELL_WARNING, "CComponentDestroyable::No s'ha pogut crear l'objecte destruït.");
+            LOGGER->AddNewLog(ELL_WARNING, "CComponentDestroyable::No s'ha trobat la mesh \"%s\" de l'objecte destruït. Procedint a eliminar l'entitat \"%s\"", m_szResource.c_str(), l_pEntity->GetName().c_str());
+            l_pRO->SetActive(false);
             l_pRO->m_bRemoveRenderableObject = true;
             ENTITY_MANAGER->RemoveEntity(l_pEntity);
           }

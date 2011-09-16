@@ -282,7 +282,7 @@
     <Object3D position="-16.8264 1.42554 23.2763" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="proves_EsferaDestructible" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Destroyable onDestroy="esfera_destructible" destroyedResource="TeteraPickUp" />
+    <Destroyable onDestroy="esfera_destructible" destroyedResource="proves_TeteraPickUp" />
   </Entity>
   <Entity name="navNode01">
     <Object3D position="38.7529 0.821378 42.6325" yaw="0.0" pitch="0.0" roll="0.0" />
