@@ -23,7 +23,7 @@
   
   <RenderableObjectsManager file="Data/Levels/NivellProves/XML/RenderableObjects.xml">
   </RenderableObjectsManager>
-  <PortalManager file="./Data/Levels/NivellProves/XML/Level.xml"/>
+  <PortalManager file="./Data/Levels/NivellProves/XML/Portals.xml"/>
   
 
   <LightsManager file="Data/Levels/PhysX/XML/Lights.xml"/>

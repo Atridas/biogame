@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<Level>
+<PortalManager>
   <Rooms>
     <Room name="Sala Video">
       <Boundings>
@@ -28,4 +28,4 @@
   <Portals>
     <Portal name="Porta Video" roomA="Sala Video" roomB="Passadis Video" size="5.70498 3.11871 1.50749" position="6.95914 -0.675806 3.30414" yaw="25.0" pitch="0.0" roll="0.0" />
   </Portals>
-</Level>
+</PortalManager>
