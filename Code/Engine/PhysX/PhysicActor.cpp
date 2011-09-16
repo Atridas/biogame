@@ -287,14 +287,14 @@ void CPhysicActor::SetRotation(const Vect3f& _vRot)
   //angles between -pi and pi
   Vect3f l_vRot = _vRot;
 
-  while(l_vRot.x > FLOAT_PI_VALUE)  l_vRot.x -= FLOAT_PI_VALUE;
-  while(l_vRot.x < -FLOAT_PI_VALUE) l_vRot.x += FLOAT_PI_VALUE;
+  while(l_vRot.x > FLOAT_PI_VALUE)  l_vRot.x -= 2 * FLOAT_PI_VALUE;
+  while(l_vRot.x < -FLOAT_PI_VALUE) l_vRot.x += 2 * FLOAT_PI_VALUE;
 
-  while(l_vRot.y > FLOAT_PI_VALUE)  l_vRot.y -= FLOAT_PI_VALUE;
-  while(l_vRot.y < -FLOAT_PI_VALUE) l_vRot.y += FLOAT_PI_VALUE;
+  while(l_vRot.y > FLOAT_PI_VALUE)  l_vRot.y -= 2 * FLOAT_PI_VALUE;
+  while(l_vRot.y < -FLOAT_PI_VALUE) l_vRot.y += 2 * FLOAT_PI_VALUE;
 
-  while(l_vRot.z > FLOAT_PI_VALUE)  l_vRot.z -= FLOAT_PI_VALUE;
-  while(l_vRot.z < -FLOAT_PI_VALUE) l_vRot.z += FLOAT_PI_VALUE;
+  while(l_vRot.z > FLOAT_PI_VALUE)  l_vRot.z -= 2 * FLOAT_PI_VALUE;
+  while(l_vRot.z < -FLOAT_PI_VALUE) l_vRot.z += 2 * FLOAT_PI_VALUE;
 
   Mat44f l_mat44;
   GetMat44(l_mat44);
