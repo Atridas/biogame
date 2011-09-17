@@ -127,6 +127,8 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
 
   INIT_NO_ARGUMENTS(m_pTextureManager, "manager de textures");
 
+  INIT(m_pRenderer,"Renderer","Data/XML/Renderer.xml");
+
   LOAD(m_pEffectManager, "Manager d'Effects", _InitParams.EffectManagerParams);
   
   LOAD(m_pStaticMeshManager, "Manager de Static Meshes", _InitParams.StaticMeshManagerParams);
@@ -170,8 +172,6 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   INIT(m_pSoundManager, "Manager de Sons", _InitParams.SoundManagerParams.szFile);
   
   INIT_NO_ARGUMENTS(m_pIAManager, "Manager d'IA");
-
-  INIT(m_pRenderer,"Renderer","Data/XML/Renderer.xml");
 
   INIT(m_pLevelChanger, "Level Changer", _InitParams.LevelChangerParams.szFile);
 

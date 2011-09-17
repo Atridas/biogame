@@ -265,18 +265,18 @@ void CRenderManager::Present()
 
 void CRenderManager::SetRenderTarget(int _iIndex, LPDIRECT3DSURFACE9 _pRenderTarget)
 {
-  if(_iIndex == 0)
-  {
-    if(_pRenderTarget != m_pSettedBackBuffer)
-    {
-      m_pD3DDevice->SetRenderTarget(0, _pRenderTarget);
-      m_pSettedBackBuffer = _pRenderTarget;
-    }
-  }
-  else
-  {
-    m_pD3DDevice->SetRenderTarget(_iIndex, _pRenderTarget);
-  }
+  //if(_iIndex == 0)
+  //{
+  //  if(_pRenderTarget != m_pSettedBackBuffer)
+  //  {
+  //    m_pD3DDevice->SetRenderTarget(0, _pRenderTarget);
+  //    m_pSettedBackBuffer = _pRenderTarget;
+  //  }
+  //}
+  //else
+  //{
+  m_pD3DDevice->SetRenderTarget(_iIndex, _pRenderTarget);
+  //}
 }
 
 void CRenderManager::SetDepthStencilBuffer (LPDIRECT3DSURFACE9 _pDepthStencilBuffer)

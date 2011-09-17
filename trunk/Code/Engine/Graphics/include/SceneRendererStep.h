@@ -20,7 +20,7 @@ public:
   CSceneRendererStep() : m_szStaticMeshEffect(""),m_szAnimatedModelEffect(""),m_bUseMap(false) {};
   ~CSceneRendererStep() {Done();};
 
-  bool Init(CXMLTreeNode& _treeSceneRenderer);
+  bool Init(CXMLTreeNode& _treeSceneRenderer, const string& _szDefaultRenderTarget);
 
   virtual void SetViewProjectionMatrices(CRenderManager* _pRM);
   virtual void Render(CRenderManager* _pRM, CCamera* _pCamera);

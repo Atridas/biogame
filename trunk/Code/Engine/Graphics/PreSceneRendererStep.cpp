@@ -1,7 +1,7 @@
 #include "PreSceneRendererStep.h"
 #include "XML/XMLTreeNode.h"
 
-bool CPreSceneRendererStep::Init(CXMLTreeNode& _treePreSceneRenderer)
+bool CPreSceneRendererStep::Init(CXMLTreeNode& _treePreSceneRenderer, const string& _szDefaultRenderTarget)
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"CPreSceneRendererStep::Init PreSceneRenderer:");
 
@@ -9,7 +9,7 @@ bool CPreSceneRendererStep::Init(CXMLTreeNode& _treePreSceneRenderer)
 
   SetActive(l_bActive);
 
-  SetOk(CSceneRendererStep::Init(_treePreSceneRenderer));
+  SetOk(CSceneRendererStep::Init(_treePreSceneRenderer, _szDefaultRenderTarget));
 
   return IsOk();
 }

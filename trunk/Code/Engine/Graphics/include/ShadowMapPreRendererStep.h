@@ -15,7 +15,7 @@ public:
   CShadowMapPreRendererStep() : m_pLightShadowCast(0) {};
   virtual ~CShadowMapPreRendererStep() {Done();};
 
-  bool Init(CXMLTreeNode& _treePreSceneRenderer);
+  bool Init(CXMLTreeNode& _treePreSceneRenderer, const string& _szDefaultRenderTarget);
 
   virtual void SetViewProjectionMatrices(CRenderManager* _pRM);
   virtual void Render(CRenderManager* _pRM, CCamera* _pCamera);

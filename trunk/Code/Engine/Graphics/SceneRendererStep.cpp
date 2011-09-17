@@ -11,29 +11,27 @@
 #include "cal3d/cal3d.h"
 #include "PortalManager.h"
 
-bool CSceneRendererStep::Init(CXMLTreeNode& _treeSceneRenderer)
+bool CSceneRendererStep::Init(CXMLTreeNode& _treeSceneRenderer, const string& _szDefaultRenderTarget)
 {
-  string l_szName = _treeSceneRenderer.GetPszISOProperty("name","",false);
+  //string l_szName = _treeSceneRenderer.GetPszISOProperty("name","",false);
+  //string l_szRenderTarget = _treeSceneRenderer.GetPszISOProperty("render_target","",false);
 
-  if(l_szName == "")
+  if(!CRendererStep::Init(_treeSceneRenderer,_szDefaultRenderTarget))
   {
     LOGGER->AddNewLog(ELL_ERROR,"CSceneRendererStep::Init SceneRenderer sense nom");
     SetOk(false);
   }else{
     
-    LOGGER->AddNewLog(ELL_INFORMATION,"CSceneRendererStep::Init iniciant %s",l_szName.c_str());
+    LOGGER->AddNewLog(ELL_INFORMATION,"CSceneRendererStep::Init iniciant %s",GetName().c_str());
+
+    //CRendererStep::Init(l_szRenderTarget);
 
     CXMLTreeNode l_treeSamplers = _treeSceneRenderer.GetChild("input_samplers");
-    CXMLTreeNode l_treeRenderTargets = _treeSceneRenderer.GetChild("render_targets");
     CXMLTreeNode l_treeMaterialEffects = _treeSceneRenderer.GetChild("material_effects");
 
     if(!InitInputSamplers(l_treeSamplers))
     {
       LOGGER->AddNewLog(ELL_ERROR,"CSceneRendererStep::Init error inicialitzant input_samplers");
-      SetOk(false);
-    }else if(!InitRenderTargets(l_treeRenderTargets))
-    {
-      LOGGER->AddNewLog(ELL_ERROR,"CSceneRendererStep::Init error inicialitzant render_targets");
       SetOk(false);
     }else if(!InitMaterialEffects(l_treeMaterialEffects))
     {
@@ -41,7 +39,7 @@ bool CSceneRendererStep::Init(CXMLTreeNode& _treeSceneRenderer)
       SetOk(false);
     }else{
 
-      SetName(l_szName);
+      //SetName(l_szName);
 
       SetOk(true);
     }
@@ -136,18 +134,17 @@ void CSceneRendererStep::Render(CRenderManager* _pRM, CCamera* _pCamera)
 {
   m_pCamera = _pCamera;
 
-  
   CEffectManager* l_pEM = CORE->GetEffectManager();
   l_pEM->Begin();
 
   ActivateInputSamplers();
-  ActivateRenderTargets(_pRM);
+  //ActivateRenderTargets(_pRM);
 
   SetViewProjectionMatrices(_pRM);
   
   RenderScene(_pRM);
   
-  DeactivateRenderTargets(_pRM);
+  //DeactivateRenderTargets(_pRM);
   DeactivateInputSamplers();
 }
 

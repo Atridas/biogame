@@ -4,6 +4,7 @@
 
 #include "base.h"
 
+class CRenderTarget;
 class CRendererStep;
 class CSceneRendererStep;
 class CPreSceneRendererStep;
@@ -14,6 +15,13 @@ class CCamera;
 class CRenderer :
   public CBaseControl
 {
+  struct SRenderPath
+  {
+    set<string> m_PreSceneRenderSteps;
+    set<string> m_PostSceneRenderSteps;
+    string m_szSceneRenderer;
+    bool m_bActive;
+  };
 
 public:
 
@@ -27,6 +35,8 @@ public:
 
   void SetSceneRenderer(const string& _szRendererName);
 
+  void ActivateRenderPath(const string& _szRenderPath);
+
   void Render(CProcess* _pProcess);
 
 protected:
@@ -39,6 +49,9 @@ private:
 
   CSceneRendererStep* m_pCurrentSceneRenderer;
 
+  map<string,CRenderTarget*> m_mapRenderTargets;
+  string m_szDefaultRenderTarget;
+
   map<string,CPostSceneRendererStep*> m_mapPostSceneRendererSteps;
   map<string,CPreSceneRendererStep*> m_mapPreSceneRendererSteps;
 
@@ -46,6 +59,7 @@ private:
   vector<CSceneRendererStep*> m_vSceneRendererSteps;
   vector<CPostSceneRendererStep*> m_vPostSceneRendererSteps;
 
+  map<string, SRenderPath> m_RenderPaths;
 };
 
 #endif

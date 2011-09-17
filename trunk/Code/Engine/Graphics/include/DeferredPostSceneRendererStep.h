@@ -11,7 +11,7 @@ public:
   CDeferredPostSceneRendererStep() {};
   virtual ~CDeferredPostSceneRendererStep() {Done();};
 
-  bool Init(CXMLTreeNode& _treePostSceneRenderer);
+  bool Init(CXMLTreeNode& _treePostSceneRenderer, const string& _szDefaultRenderTarget);
 
 protected:
   virtual void Render(CRenderManager* _pRM);

@@ -99,6 +99,7 @@ struct PS_OUTPUT
 	float4	Color		: COLOR0;
 	float4	Normals : COLOR1;
   float4	Depth   : COLOR2;
+  float4	Glow    : COLOR3;
 };
 
 TNEW_PS NewVS(TNEW_VS _in) 
@@ -159,7 +160,7 @@ TNEW_PS NewVS(TNEW_VS _in)
 
 PS_OUTPUT NewPS(TNEW_PS _in)
 {
-  PS_OUTPUT l_Output;
+  PS_OUTPUT l_Output = (PS_OUTPUT)0;
   
   #if defined( NS_LIGHTMAP )
     bool l_DynamicObject = false;
@@ -187,21 +188,15 @@ PS_OUTPUT NewPS(TNEW_PS _in)
 
   
   l_Output.Color = l_DiffuseColor;
-  l_Output.Normals = float4(l_ViewNormal.xyz * 0.5 + 0.5, 0.0);
-  //l_Output.PosXY = float4(_in.ViewPosition.xy, 0, 0);
+  l_Output.Normals = float4(l_ViewNormal.xy * 0.5 + 0.5,0,0);
 	l_Output.Depth = float4(_in.ViewPosition.z, 0, 0, 0);
   
-  //#if defined( NS_TEX0 )
-  //  if(g_GlowActive)
-  //  {
-  //    l_Output.Glow = tex2D(GlowTextureSampler,_in.UV) * g_GlowIntensity;
-  //    //l_Output.Glow.a = 1.0;
-  //  } else {
-  //    l_Output.Glow = float4(0, 0, 0, 0);
-  //  }
-  //#else
-  //  l_Output.Glow = float4(0, 0, 0, 0);
-  //#endif
+  #if defined( NS_TEX0 )
+    if(g_GlowActive)
+    {
+      l_Output.Glow = tex2D(GlowTextureSampler,_in.UV) * g_GlowIntensity;
+    }
+  #endif
   
   
 	return l_Output;

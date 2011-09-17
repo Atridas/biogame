@@ -66,6 +66,7 @@
     
     <effect name="DeferredLightPass" file="Data/Effects/DeferredLightPass.fx" technique="DeferredLightPassTechnique" />
     <effect name="DeferredAmbientPass" file="Data/Effects/DeferredAmbientPass.fx" technique="DeferredAmbientPassTechnique" />
+
     <effect name="ShowDepth" file="Data/Effects/ShowDepth.fx" technique="ShowDepthTechnique" />
     <effect name="NormalDiffusedDeferred" texture_mask="0" file="Data/Effects/NormalDiffusedDeferred.fx" technique="NormalDiffusedDeferredTechnique" />
     <effect name="NormalTexturedDeferred" texture_mask="34" file="Data/Effects/NormalTexturedDeferred.fx" technique="NormalTexturedDeferredTechnique" />
@@ -76,7 +77,7 @@
 
 
 
-    --><!-- SCENE EFFECTS --><!--
+    <!-- SCENE EFFECTS --><!--
     <technique name="RenderNoiseAndVignettingTechnique" effect="Noise And Vignetting" use_time="true"/>
     <technique name="GasTechnique" effect="Gas" use_time="true"/>
     --><!--<technique name="BloomTechnique" effect="Bloom"/> --><!--

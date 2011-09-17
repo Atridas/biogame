@@ -26,7 +26,7 @@
   <PortalManager file="./Data/Levels/NivellProves/XML/Portals.xml"/>
   
 
-  <LightsManager file="Data/Levels/PhysX/XML/Lights.xml"/>
+  <LightsManager file="Data/Levels/NivellProves/XML/Lights.xml"/>
 
   <SceneEffectManager file="Data/XML/SceneEffects_Viewer.xml"/>
   
