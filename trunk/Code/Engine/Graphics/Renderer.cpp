@@ -26,7 +26,9 @@ bool CRenderer::Init(const string& _szFileName)
   {
     LOGGER->AddNewLog(ELL_ERROR,"CRenderer::Init Error al carregar el fitxer XML %s",_szFileName.c_str());
     SetOk(false);
-  }else{
+  } 
+  else 
+  {
   
     LOGGER->AddNewLog(ELL_INFORMATION,"CRenderer::Init inicialitzant fitxer XML %s",_szFileName.c_str());
 
@@ -253,6 +255,7 @@ bool CRenderer::Init(const string& _szFileName)
           }else{
 
             m_vSceneRendererSteps.push_back(l_pRenderer);
+            m_mapSceneRendererSteps[l_pRenderer->GetName()] = l_pRenderer;
           }
         }
         else if(!l_treeRenderer.IsComment())
@@ -310,7 +313,47 @@ bool CRenderer::Init(const string& _szFileName)
 
     if(l_treeRenderPaths.Exists())
     {
-      //TODO
+      LOGGER->AddNewLog(ELL_WARNING, "CRenderer::Init Llegint render_paths");
+      int l_iNumChilds = l_treeRenderPaths.GetNumChildren();
+      for(int i = 0; i < l_iNumChilds; ++i)
+      {
+        CXMLTreeNode l_treeRenderPath = l_treeRenderPaths(i);
+        if(strcmp(l_treeRenderPath.GetName(), "render_path") == 0)
+        {
+          SRenderPath *l_pRenderPath = new SRenderPath;
+          string l_szName = l_treeRenderPath.GetPszISOProperty("name");
+          l_pRenderPath->m_bActive = l_treeRenderPath.GetBoolProperty("active", false, false);
+
+          int l_iNumChilds = l_treeRenderPath.GetNumChildren();
+          for(int i = 0; i < l_iNumChilds; ++i)
+          {
+            CXMLTreeNode l_treeRenderer = l_treeRenderPath(i);
+            if(strcmp(l_treeRenderer.GetName(), "pre_scene_renderer") == 0)
+            {
+              l_pRenderPath->m_PreSceneRenderSteps.insert( l_treeRenderer.GetPszISOProperty("name") );
+            }
+            else if(strcmp(l_treeRenderer.GetName(), "post_scene_renderer") == 0)
+            {
+              l_pRenderPath->m_PostSceneRenderSteps.insert( l_treeRenderer.GetPszISOProperty("name") );
+            }
+            else if(strcmp(l_treeRenderer.GetName(), "scene_renderer") == 0)
+            {
+              l_pRenderPath->m_szSceneRenderer = l_treeRenderer.GetPszISOProperty("name");
+            }
+            else
+            {
+              LOGGER->AddNewLog(ELL_WARNING, "CRenderer::Init element no reconegut %s", l_treeRenderer.GetName());
+            }
+          }
+
+          m_mapRenderPaths[l_szName] = l_pRenderPath;
+        }
+        else if(!l_treeRenderPath.IsComment())
+        {
+          LOGGER->AddNewLog(ELL_WARNING, "CRenderer::Init element no reconegut %s", l_treeRenderPath.GetName());
+        }
+      }
+      ActivateRenderPaths();
     }
     
     SetOk(true);
@@ -321,6 +364,11 @@ bool CRenderer::Init(const string& _szFileName)
 
 void CRenderer::Render(CProcess* _pProcess)
 {
+  if(m_bRenderPathsChanged)
+  {
+    ActivateRenderPaths();
+  }
+
   CRenderManager* l_pRM = RENDER_MANAGER;
   CEffectManager* l_pEM = CORE->GetEffectManager();
 
@@ -431,6 +479,7 @@ void CRenderer::Release()
   }
 
   m_vSceneRendererSteps.clear();
+  m_mapSceneRendererSteps.clear();
 
   vector<CPostSceneRendererStep*>::iterator l_itPostRenderer = m_vPostSceneRendererSteps.begin();
   vector<CPostSceneRendererStep*>::iterator l_itPostRendererEnd = m_vPostSceneRendererSteps.end();
@@ -443,6 +492,15 @@ void CRenderer::Release()
   m_vPostSceneRendererSteps.clear();
   m_mapPostSceneRendererSteps.clear();
 
+  map<string, SRenderPath*>::iterator l_itRendererPaths    = m_mapRenderPaths.begin();
+  map<string, SRenderPath*>::iterator l_itRendererPathsEnd = m_mapRenderPaths.end();
+
+  for(;l_itRendererPaths != l_itRendererPathsEnd; ++l_itRendererPaths)
+  {
+    CHECKED_DELETE(l_itRendererPaths->second);
+  }
+
+  m_mapRenderPaths.clear();
 }
 
 CPostSceneRendererStep* CRenderer::GetPostSceneRendererStep(string _szName)
@@ -469,22 +527,84 @@ void CRenderer::SetSceneRenderer(const string& _szRendererName)
 {
   m_pCurrentSceneRenderer = 0;
 
-  vector<CSceneRendererStep*>::iterator l_itRenderer = m_vSceneRendererSteps.begin();
-  vector<CSceneRendererStep*>::iterator l_itRendererEnd = m_vSceneRendererSteps.end();
-
-  if(l_itRenderer != l_itRendererEnd)
+  map<string,CSceneRendererStep*>::iterator l_it = m_mapSceneRendererSteps.find(_szRendererName);
+  if(l_it != m_mapSceneRendererSteps.end())
   {
-    m_pCurrentSceneRenderer = *l_itRenderer;
+    m_pCurrentSceneRenderer = l_it->second;
   }
-
-  for(;l_itRenderer != l_itRendererEnd; ++l_itRenderer)
+  else
   {
-    CSceneRendererStep* l_pSceneRenderer = *l_itRenderer;
+    m_pCurrentSceneRenderer = 0;
+  }
+}
 
-    if(l_pSceneRenderer->GetName() == _szRendererName)
+void CRenderer::ActivateRenderPath  (const string& _szRenderPath)
+{
+  map<string, SRenderPath*>::iterator l_it = m_mapRenderPaths.find(_szRenderPath);
+  if(l_it != m_mapRenderPaths.end() && !l_it->second->m_bActive )
+  {
+    l_it->second->m_bActive = true;
+    m_bRenderPathsChanged  = true;
+  }
+}
+
+void CRenderer::DeactivateRenderPath(const string& _szRenderPath)
+{
+  map<string, SRenderPath*>::iterator l_it = m_mapRenderPaths.find(_szRenderPath);
+  if(l_it != m_mapRenderPaths.end() && l_it->second->m_bActive )
+  {
+    l_it->second->m_bActive = false;
+    m_bRenderPathsChanged  = true;
+  }
+}
+
+void CRenderer::ActivateRenderPaths()
+{
+  //desactivar els steps
+  for(uint32 i = 0; i < m_vPreSceneRendererSteps.size(); ++i)
+  {
+    m_vPreSceneRendererSteps[i]->SetActive(false);
+  }
+  for(uint32 i = 0; i < m_vPostSceneRendererSteps.size(); ++i)
+  {
+    m_vPostSceneRendererSteps[i]->SetActive(false);
+  }
+  m_pCurrentSceneRenderer = 0;
+
+  map<string, SRenderPath*>::iterator l_it  = m_mapRenderPaths.begin();
+  map<string, SRenderPath*>::iterator l_end = m_mapRenderPaths.end();
+  for(; l_it != l_end; ++l_it)
+  {
+    if(l_it->second->m_bActive)
     {
-      m_pCurrentSceneRenderer = l_pSceneRenderer;
-      break;
+      set<string>::iterator l_it2  = l_it->second->m_PreSceneRenderSteps.begin();
+      set<string>::iterator l_end2 = l_it->second->m_PreSceneRenderSteps.end  ();
+      for(; l_it2 != l_end2; ++l_it2)
+      {
+        map<string,CPreSceneRendererStep*>::iterator l_it = m_mapPreSceneRendererSteps.find(*l_it2);
+        if(l_it != m_mapPreSceneRendererSteps.end())
+        {
+          l_it->second->SetActive(true);
+        }
+      }
+
+      l_it2  = l_it->second->m_PostSceneRenderSteps.begin();
+      l_end2 = l_it->second->m_PostSceneRenderSteps.end  ();
+      for(; l_it2 != l_end2; ++l_it2)
+      {
+        map<string,CPostSceneRendererStep*>::iterator l_it = m_mapPostSceneRendererSteps.find(*l_it2);
+        if(l_it != m_mapPostSceneRendererSteps.end())
+        {
+          l_it->second->SetActive(true);
+        }
+      }
+
+      if(l_it->second->m_szSceneRenderer != "")
+      {
+        SetSceneRenderer(l_it->second->m_szSceneRenderer);
+      }
     }
   }
+
+  m_bRenderPathsChanged = false;
 }
