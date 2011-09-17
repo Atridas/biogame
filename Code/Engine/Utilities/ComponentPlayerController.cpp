@@ -73,8 +73,10 @@ void CComponentPlayerController::UpdatePostPhysX(float _fDeltaTime)
   CComponentVida* l_pComponentVida = GetEntity()->GetComponent<CComponentVida>();
   const vector<CMaterial*>& l_vMaterials = m_pAnimatedModel->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetMaterials();
 
-  CPostSceneRendererStep* l_pDamage = CORE->GetRenderer()->GetPostSceneRendererStep("damage_gui");
-  CPostSceneRendererStep* l_pBlood = CORE->GetRenderer()->GetPostSceneRendererStep("blood_gui");
+  CRenderer *l_pRenderer = CORE->GetRenderer();
+
+  CPostSceneRendererStep* l_pDamage = l_pRenderer->GetPostSceneRendererStep("damage_gui");
+  CPostSceneRendererStep* l_pBlood  = l_pRenderer->GetPostSceneRendererStep("blood_gui");
 
   float l_fHP = l_pComponentVida->GetHP();
   float l_fMaxHP = l_pComponentVida->GetMaxHP();
@@ -102,33 +104,37 @@ void CComponentPlayerController::UpdatePostPhysX(float _fDeltaTime)
         l_fDamageAlpha = 1.0f;
       }
 
-      l_pDamage->SetActive(true);
+      //l_pDamage->SetActive(true);
+      l_pRenderer->ActivateRenderPath("damage_gui");
       l_pDamage->SetAlpha(l_fDamageAlpha);
     }else{
-      l_pDamage->SetActive(false);
+      l_pRenderer->DeactivateRenderPath("damage_gui");
+      //l_pDamage->SetActive(false);
     }
   }
 
   if(m_fBloodFadeOutTime > 0.0f)
   {
     l_pBlood->SetAlpha(m_fBloodFadeOutTime/(float)BLOOD_FADEOUT_TIME);
-    l_pBlood->SetActive(true);
+    l_pRenderer->ActivateRenderPath("blood_gui");
+    //l_pBlood->SetActive(true);
 
     m_fBloodFadeOutTime -= _fDeltaTime;
 
   }else{
-    l_pBlood->SetActive(false);
+    l_pRenderer->DeactivateRenderPath("blood_gui");
+    //l_pBlood->SetActive(false);
     m_fBloodFadeOutTime = 0.0f;
   }
 
   m_fBloodTime += _fDeltaTime;
 
 
-  CPostSceneRendererStep* l_pShockWave = CORE->GetRenderer()->GetPostSceneRendererStep("shock_wave");
+  CPostSceneRendererStep* l_pShockWave = l_pRenderer->GetPostSceneRendererStep("shock_wave");
   //CPostSceneRendererStep* l_pCaptureFrameBuffers = (CDrawQuadSceneEffect*)CORE->GetSceneEffectManager()->GetResource("capture_frame_buffer_scene_effect_with_post_fx");
 
   
-  if(l_pShockWave->IsActive() == true)
+  if(m_fForceTime < 3.f)
   {
     m_fForceTime += _fDeltaTime;
 
@@ -136,7 +142,8 @@ void CComponentPlayerController::UpdatePostPhysX(float _fDeltaTime)
 
     if(m_fForceTime > 3.0f)
     {
-      l_pShockWave->SetActive(false);
+      l_pRenderer->DeactivateRenderPath("shock_wave");
+      //l_pShockWave->SetActive(false);
       //l_pCaptureFrameBuffers->SetActive(false);
     }
   }
@@ -253,6 +260,7 @@ void CComponentPlayerController::Shoot()
 void CComponentPlayerController::Force()
 {
   CGameEntity* l_pPlayerEntity = GetEntity();
+  CRenderer *l_pRenderer = CORE->GetRenderer();
 
   assert(l_pPlayerEntity);
 
@@ -260,7 +268,7 @@ void CComponentPlayerController::Force()
 
   assert(l_pObject3d);
 
-  CPostSceneRendererStep* l_pShockWave = CORE->GetRenderer()->GetPostSceneRendererStep("shock_wave");
+  CPostSceneRendererStep* l_pShockWave = l_pRenderer->GetPostSceneRendererStep("shock_wave");
   //CDrawQuadSceneEffect* l_pCaptureFrameBuffers = (CDrawQuadSceneEffect*)CORE->GetSceneEffectManager()->GetResource("capture_frame_buffer_scene_effect_with_post_fx");
 
   assert(l_pShockWave);
@@ -269,7 +277,8 @@ void CComponentPlayerController::Force()
   //if(l_pShockWave->IsActive() == false)
   //{
     //l_pCaptureFrameBuffers->SetActive(true);
-    l_pShockWave->SetActive(true);
+    //l_pShockWave->SetActive(true);
+    l_pRenderer->ActivateRenderPath("shock_wave");
     m_fForceTime = 0.0f;
 
     Vect3f l_vPos = l_pObject3d->GetPosition();

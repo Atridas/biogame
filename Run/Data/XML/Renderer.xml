@@ -159,8 +159,30 @@
       </input_samplers>
       
     </post_scene_renderer>
+    <post_scene_renderer name="deferred lighting debug" 
+                         type="deferred_post_scene_renderer" 
+                         effect="DeferredLightPass" 
+                         render_target="RT2_ARGB_8" 
+                         >
+
+      <input_samplers>
+        <!--<input_sampler type="texture" index="0" texture="scene_color"/>-->
+        <input_sampler type="texture" index="1" texture="RT3_ARGB_8"/>
+        <input_sampler type="texture" index="2" texture="RT1_RG_16F"/>
+      </input_samplers>
+      
+    </post_scene_renderer>
     
     <post_scene_renderer name="deferred_ambient" effect="DeferredAmbientPass" active="true" >
+
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
+        <input_sampler type="texture" index="1" texture="RT2_ARGB_8"/>
+      </input_samplers>
+
+    </post_scene_renderer>
+    
+    <post_scene_renderer name="deferred ambient debug" effect="DeferredAmbientPass" size_x="0.5" aspect_ratio="true" position="0.5 0.0" >
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
@@ -299,19 +321,42 @@
   
   </post_scene_renderers>
   
-  <!--
   <render_paths>
-    <render_path name="deferred">
-      <scene_renderer="deferred_renderer"/>
+    <render_path name="deferred" active="true">
+      <scene_renderer name="deferred_renderer"/>
       <post_scene_renderer name="deferred_lighting"/>
       <post_scene_renderer name="deferred_ambient"/>
     </render_path>
     
-    <render_path name="forward">
-      <scene_renderer="forward_renderer"/>
+    <render_path name="deferred debug" active="false">
+      <scene_renderer name="deferred_renderer"/>
+      <post_scene_renderer name="deferred lighting debug"/>
+      <post_scene_renderer name="deferred ambient debug"/>
+      
+      <post_scene_renderer name="scene_color"/>
+      <post_scene_renderer name="scene_normals"/>
+      <post_scene_renderer name="show_depth"/>
     </render_path>
     
+    <render_path name="forward">
+      <scene_renderer name="forward_renderer"/>
+    </render_path>
+    
+    <render_path name="aim_gui">
+      <post_scene_renderer name="aim_gui"/>
+    </render_path>
+    
+    <render_path name="damage_gui">
+      <post_scene_renderer name="damage_gui"/>
+    </render_path>
+    
+    <render_path name="blood_gui">
+      <post_scene_renderer name="blood_gui"/>
+    </render_path>
+    
+    <render_path name="shock_wave">
+      <post_scene_renderer name="shock_wave"/>
+    </render_path>
   </render_paths>
-  -->
   
 </renderer>

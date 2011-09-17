@@ -25,7 +25,7 @@ class CRenderer :
 
 public:
 
-  CRenderer() : m_szFileName(""), m_pCurrentSceneRenderer(0) {};
+  CRenderer() : m_szFileName(""), m_pCurrentSceneRenderer(0),m_bRenderPathsChanged(false) {};
   ~CRenderer() {Done();};
 
   bool Init(const string& _szFileName);
@@ -34,14 +34,17 @@ public:
   CPreSceneRendererStep* GetPreSceneRendererStep(string _szName);
 
   void SetSceneRenderer(const string& _szRendererName);
-
-  void ActivateRenderPath(const string& _szRenderPath);
+  
+  void ActivateRenderPath  (const string& _szRenderPath);
+  void DeactivateRenderPath(const string& _szRenderPath);
 
   void Render(CProcess* _pProcess);
 
 protected:
   virtual void Release();
 private:
+
+  void ActivateRenderPaths();
 
   string m_szFileName;
 
@@ -51,7 +54,8 @@ private:
 
   map<string,CRenderTarget*> m_mapRenderTargets;
   string m_szDefaultRenderTarget;
-
+  
+  map<string,CSceneRendererStep*> m_mapSceneRendererSteps;
   map<string,CPostSceneRendererStep*> m_mapPostSceneRendererSteps;
   map<string,CPreSceneRendererStep*> m_mapPreSceneRendererSteps;
 
@@ -59,7 +63,8 @@ private:
   vector<CSceneRendererStep*> m_vSceneRendererSteps;
   vector<CPostSceneRendererStep*> m_vPostSceneRendererSteps;
 
-  map<string, SRenderPath> m_RenderPaths;
+  map<string, SRenderPath*> m_mapRenderPaths;
+  bool m_bRenderPathsChanged;
 };
 
 #endif
