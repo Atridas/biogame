@@ -244,6 +244,15 @@ struct SCoreEmiterManagerParams
   // default "Data/XML/CoreEmiters.xml"
 };
 
+struct SLevelChangerParams
+{
+  string szFile;
+
+  SLevelChangerParams():
+    szFile("Data/XML/Levels.xml")
+  {};
+};
+
 /**
  * Paràmetres d'inicialització del procés.
  * Estructura que conté els paràmetres de configuració que es poden trobar al config del procés.
@@ -283,6 +292,7 @@ struct SInitParams
   SPhysXManagerParams             PhysXManagerParams;
   SPortalManagerParams            PortalManagerParams;
   SCoreEmiterManagerParams        CoreEmiterManagerParams;
+  SLevelChangerParams             LevelChangerParams;
   uint32                          RandomSeed;
 };
 

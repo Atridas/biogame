@@ -31,6 +31,7 @@
 #include <IAManager.h>
 #include <EmiterCoreManager.h>
 #include <EmiterManager.h>
+#include "LevelChanger.h"
 
 #include "Utils/MemLeaks.h"
 //#include <AnimatedModelManager.h>
@@ -118,6 +119,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pIAManager                = new CIAManager();
   m_pEmiterManager            = new CEmiterManager();
   m_pRenderer                 = new CRenderer();
+  m_pLevelChanger             = new CLevelChanger();
 
   m_pRenderManager->Init(hWnd,_InitParams.RenderManagerParams);
 
@@ -171,11 +173,11 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
 
   INIT(m_pRenderer,"Renderer","Data/XML/Renderer.xml");
 
+  INIT(m_pLevelChanger, "Level Changer", _InitParams.LevelChangerParams.szFile);
+
   srand(_InitParams.RandomSeed);
 
   LOGGER->SaveLogsInFile();
-
-  m_szLoadLevel = "";
 
   return IsOk();
 }
@@ -186,6 +188,7 @@ void CCore::Release()
   
 
   //delete a l'inrevès de com s'ha fet l'init
+  CHECKED_DELETE(m_pLevelChanger);
   CHECKED_DELETE(m_pRenderer);
   CHECKED_DELETE(m_pIAManager);
   CHECKED_DELETE(m_pPhysicCollisionReport);
@@ -218,96 +221,38 @@ void CCore::Release()
 void CCore::Update()
 {
   
-
   //Time update
   m_pTimer->Update();
   float l_fElapsedTime = m_pTimer->GetElapsedTime();
-
-  m_pPhysicsManager->WaitForSimulation();  
-
-  m_pEntityManager->UpdatePostPhysX(l_fElapsedTime);
-
-  m_pEntityManager->UpdatePostAnim(l_fElapsedTime);
-  
-  m_pEntityManager->PostUpdate(l_fElapsedTime);
-
-  //Manager Updates
-  m_pInputManager->Update();
-  if(!m_pConsole->IsActive())
+  if(!m_pLevelChanger->ChangingLevel())
   {
-    m_pActionManager->Update(l_fElapsedTime);
-  }
+
+    m_pPhysicsManager->WaitForSimulation();  
+
+    m_pEntityManager->UpdatePostPhysX(l_fElapsedTime);
+
+    m_pEntityManager->UpdatePostAnim(l_fElapsedTime);
   
-  m_pEntityManager->PreUpdate(l_fElapsedTime);
-  m_pEntityManager->Update(l_fElapsedTime);
-  m_pEntityManager->UpdatePrePhysX(l_fElapsedTime);
+    m_pEntityManager->PostUpdate(l_fElapsedTime);
 
-  m_pPhysicsManager->Update(l_fElapsedTime);// -------------
-  //m_pPhysicsManager->WaitForSimulation();
-
-  m_pEmiterManager->Update(l_fElapsedTime);
-
-  m_pPortalManager->Update(l_fElapsedTime);
-
-  CheckLoadLevel();
-}
-
-void CCore::CheckLoadLevel()
-{
-  if(m_szLoadLevel == "Hangar")
-  {
-    //m_pEntityManager->Done();
-    //m_pPortalManager->Done();
-    //m_pRenderableObjectsManager->Done();
-    //m_pStaticMeshManager->Done();
-    //m_pIAManager->Done();
-
-    string l_szPhysxFile = m_pPhysicsManager->GetConfigFileName();
-    //m_pPhysicsManager->Done();
-
-    
-    CHECKED_DELETE( m_pEntityManager            );
-    CHECKED_DELETE( m_pPortalManager            );
-    CHECKED_DELETE( m_pEmiterManager            );
-    CHECKED_DELETE( m_pRenderableObjectsManager );
-    CHECKED_DELETE( m_pStaticMeshManager        );
-    CHECKED_DELETE( m_pIAManager                );
-    CHECKED_DELETE( m_pScriptManager            );
-    CHECKED_DELETE( m_pPhysicsManager           );
-    
-
-    m_pEntityManager            = new CEntityManager           ();
-    m_pPortalManager            = new CPortalManager           ();
-    m_pRenderableObjectsManager = new CRenderableObjectsManager();
-    m_pStaticMeshManager        = new CStaticMeshManager       ();
-    m_pIAManager                = new CIAManager               ();
-    m_pEmiterManager            = new CEmiterManager           ();
-    m_pScriptManager            = new CScriptManager           ();
-    m_pPhysicsManager           = new CPhysicsManager          ();
-
-    m_pPhysicsManager->Init(l_szPhysxFile);
-    if(m_pPhysicsManager->IsOk())
+    //Manager Updates
+    m_pInputManager->Update();
+    if(!m_pConsole->IsActive())
     {
-      m_pPhysicsManager->SetTriggerReport  (m_pPhysicTriggerReport);
-      m_pPhysicsManager->SetCollisionReport(m_pPhysicCollisionReport);
+      m_pActionManager->Update(l_fElapsedTime);
     }
-    
-    m_pStaticMeshManager->Load("Data/XML/StaticMeshes.xml");
-    m_pStaticMeshManager->Load("Data/Levels/Hangar/XML/StaticMeshes.xml");
-    m_pRenderableObjectsManager->Load("Data/Levels/Hangar/XML/RenderableObjects.xml");
-    m_pPortalManager->Init("Data/Levels/Hangar/XML/Level.xml");
-    
-    m_pScriptManager->Initialize();
-    m_pScriptManager->Load(m_szLuaInitFile);
-   
-    m_pIAManager->Init();
-    m_pEntityManager->LoadEntitiesFromXML("Data/Levels/Hangar/XML/GameEntities.xml");
+  
+    m_pEntityManager->PreUpdate(l_fElapsedTime);
+    m_pEntityManager->Update(l_fElapsedTime);
+    m_pEntityManager->UpdatePrePhysX(l_fElapsedTime);
 
-    m_pIAManager->CompleteGraph();
+    m_pPhysicsManager->Update(l_fElapsedTime);// -------------
+    //m_pPhysicsManager->WaitForSimulation();
 
-    //m_pPlayerEntity = CORE->GetEntityManager()->GetEntity("Player");
-    //m_pCamera = m_pPlayerEntity->GetComponent<CComponent3rdPSCamera>()->GetCamera();
+    m_pEmiterManager->Update(l_fElapsedTime);
 
-    m_szLoadLevel = "";
+    m_pPortalManager->Update(l_fElapsedTime);
   }
+
+  m_pLevelChanger->Update(l_fElapsedTime);
 }

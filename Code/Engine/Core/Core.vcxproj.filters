@@ -19,6 +19,9 @@
     <Filter Include="Engine\LogRender">
       <UniqueIdentifier>{254d7347-6db2-4348-8286-cb76d4458b49}</UniqueIdentifier>
     </Filter>
+    <Filter Include="LevelChanger">
+      <UniqueIdentifier>{5c779cfa-6fa4-42c2-85be-d0bfe1b2ee9c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -42,6 +45,9 @@
     <ClCompile Include="LogRender.cpp">
       <Filter>Engine\LogRender</Filter>
     </ClCompile>
+    <ClCompile Include="LevelChanger.cpp">
+      <Filter>LevelChanger</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Core.h">
@@ -61,6 +67,9 @@
     </ClInclude>
     <ClInclude Include="include\LogRender.h">
       <Filter>Engine\LogRender</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LevelChanger.h">
+      <Filter>LevelChanger</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
