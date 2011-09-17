@@ -303,6 +303,15 @@ void CPhysicActor::SetRotation(const Vect3f& _vRot)
 
   
   l_rot44.RotByAnglesYXZ(l_vRot.y, l_vRot.x, l_vRot.z);
+  
+  Vect3f l_rotScaleX(l_rot44.m00, l_rot44.m10, l_rot44.m20);
+  Vect3f l_rotScaleY(l_rot44.m01, l_rot44.m11, l_rot44.m21);
+  Vect3f l_rotScaleZ(l_rot44.m02, l_rot44.m12, l_rot44.m22);
+  
+  assert(l_rotScaleX * l_rotScaleX < 1.01f && l_rotScaleX * l_rotScaleX > 0.99f);
+  assert(l_rotScaleY * l_rotScaleY < 1.01f && l_rotScaleY * l_rotScaleY > 0.99f);
+  assert(l_rotScaleZ * l_rotScaleZ < 1.01f && l_rotScaleZ * l_rotScaleZ > 0.99f);
+
   l_rot44.Translate(l_mat44.GetPos());
 
   SetMat44(l_rot44);

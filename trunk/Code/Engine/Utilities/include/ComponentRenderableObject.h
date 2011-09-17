@@ -38,7 +38,7 @@ public:
   bool m_bBlockPitchRoll;
   bool m_bBlockYaw;
   float m_fHeightAdjustment;
-  float m_fYawAdjustment;
+  float m_fYawAdjustment, m_fPitchAdjustment, m_fRollAdjustment;
 
 protected:
   CComponentRenderableObject():
@@ -50,7 +50,9 @@ protected:
       m_bBlockPitchRoll(false),
       m_bBlockYaw(false),
       m_fHeightAdjustment(0),
-      m_fYawAdjustment(0)
+      m_fYawAdjustment(0),
+      m_fPitchAdjustment(0),
+      m_fRollAdjustment(0)
       {};
   bool Init(CGameEntity *_pEntity, const string& _szName, const string& _szCore);
   bool InitAnimatedModel(CGameEntity *_pEntity, const string& _szName, const string& _szCore);

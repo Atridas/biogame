@@ -373,8 +373,10 @@ void RegisterEntitiesToLua(lua_State* _pLS)
 
       // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentRotative, CBaseComponent>("ComponentRotative")
-      .def("add_to_entity",        &CComponentRotative::AddToEntity)
-      .def_readwrite("rotation",   &CComponentRotative::m_vRotation)
+      .def("add_to_entity",            &CComponentRotative::AddToEntity)
+      .def_readwrite("yaw_rotation",   &CComponentRotative::m_fYawRotation)
+      .def_readwrite("pitch_rotation", &CComponentRotative::m_fPitchRotation)
+      .def_readwrite("roll_rotation",  &CComponentRotative::m_fRollRotation)
   ];
 }
 

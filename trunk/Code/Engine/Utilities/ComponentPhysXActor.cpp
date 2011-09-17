@@ -48,7 +48,7 @@ Vect3f CComponentPhysXActor::GetPosition()
 
   return Vect3f(0.0f);
 }
-
+/*
 Vect3f CComponentPhysXActor::GetRotation()
 {
   if(m_pPhysXActor)
@@ -57,7 +57,7 @@ Vect3f CComponentPhysXActor::GetRotation()
   }
 
   return Vect3f(.0f);
-}
+}*/
 
 void CComponentPhysXActor::SetPosition(Vect3f _vPos)
 {
@@ -66,14 +66,14 @@ void CComponentPhysXActor::SetPosition(Vect3f _vPos)
     m_pPhysXActor->SetGlobalPosition(_vPos);
   }
 }
-
+/*
 void CComponentPhysXActor::SetRotation(Vect3f _vRot)
 {
   if(m_pPhysXActor)
   {
     m_pPhysXActor->SetRotation(_vRot);
   }
-}
+}*/
 
 void CComponentPhysXActor::ReceiveEvent(const SEvent& _Event)
 {
