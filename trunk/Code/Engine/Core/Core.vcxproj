@@ -94,6 +94,7 @@
   <ItemGroup>
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="LevelChanger.cpp" />
     <ClCompile Include="LogRender.cpp" />
     <ClCompile Include="params.cpp" />
     <ClCompile Include="Process.cpp" />
@@ -102,6 +103,7 @@
   <ItemGroup>
     <ClInclude Include="include\Core.h" />
     <ClInclude Include="include\Engine.h" />
+    <ClInclude Include="include\LevelChanger.h" />
     <ClInclude Include="include\LogRender.h" />
     <ClInclude Include="include\params.h" />
     <ClInclude Include="include\Process.h" />

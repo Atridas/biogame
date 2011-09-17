@@ -30,6 +30,7 @@
 #include "GraphDefines.h"
 #include "EmiterManager.h"
 #include "StaticMeshManager.h"
+#include "LevelChanger.h"
 
 #include "PhysicActor.h"
 #include <PhysicsManager.h>
@@ -169,7 +170,8 @@ bool CEntityProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
 {
   if(strcmp(_pcAction, "Hangar") == 0)
   {
-    CORE->SetLoadLevel("Hangar");
+    //CORE->SetLoadLevel("Hangar");
+    CORE->GetLevelChanger()->SetNewLevel("Hangar");
 
     //CORE->GetEntityManager()->Done();
     //CORE->GetPortalManager()->Done();

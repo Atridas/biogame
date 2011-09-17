@@ -30,6 +30,8 @@ public:
   void Render(CRenderManager* _pRM);
   void DebugRender(CRenderManager* _pRM, bool _bDebugRenderBoundings = false);
 
+  void Done() {CMapManager<CEmiterInstance>::Done();};
+
 private:
   friend class CEmiterCoreManager;
 

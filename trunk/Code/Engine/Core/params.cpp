@@ -523,6 +523,20 @@ void ReadXMLInitParams(SInitParams& InitParams_, const char* _pcPathXML)
         InitParams_.CoreEmiterManagerParams.sFiles.insert("Data/XML/CoreEmiters.xml");
       }
     }
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+    //Level Changer -----------------------------------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------------------------------------------------------
+    {
+      CXMLTreeNode l_LevelsManager = l_TreeConfig["Levels"];
+      if(l_LevelsManager.Exists() && l_LevelsManager.ExistsProperty("file"))
+      {
+        InitParams_.LevelChangerParams.szFile = l_LevelsManager.GetPszISOProperty("file");
+      }
+      else
+      {
+        LOGGER->AddNewLog(ELL_WARNING, "No s'ha trobat l'element \"Levels\", usant \"%s\" per defecte.", InitParams_.LevelChangerParams.szFile.c_str());
+      }
+    }
 
     //-------------------------------------------------------------------------------------------------------------------------------------------------------
     //Random Seed -----------------------------------------------------------------------------------------------------------------------------------------
