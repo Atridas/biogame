@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<RenderableObjects>
+	<RenderableObject name="proves_Habitacio3" class="StaticMesh" resource="proves_Habitacio3" position="0.0 0.0 0.193104" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_Habitacio2" class="StaticMesh" resource="proves_Habitacio2" position="0.0 0.0 0.0861702" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_CaixaPetita00" class="StaticMesh" resource="proves_CaixaPetita00" position="-30.8657 0.0 17.8758" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_CaixaGrossa00" class="StaticMesh" resource="proves_CaixaGrossa00" position="-30.4231 0.0 9.9367" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_CaixaPetita01" class="StaticMesh" resource="proves_CaixaPetita01" position="-30.8622 0.0 16.8709" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_CaixaPetita02" class="StaticMesh" resource="proves_CaixaPetita02" position="-30.9255 0.0 2.69175" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_CaixaPetita03" class="StaticMesh" resource="proves_CaixaPetita03" position="-31.4716 0.0 -2.44387" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_CaixaPetita04" class="StaticMesh" resource="proves_CaixaPetita04" position="-30.8322 -0.00296688 14.1841" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_CaixaGrossa01" class="StaticMesh" resource="proves_CaixaGrossa01" position="-30.4231 0.0 4.19834" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_CaixaPetita05" class="StaticMesh" resource="proves_CaixaPetita05" position="-30.9653 0.0 -1.56407" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_CaixaPetita06" class="StaticMesh" resource="proves_CaixaPetita06" position="-31.4716 1.00344 -2.44405" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_Wall" class="StaticMesh" resource="proves_Wall" position="-25.5656 0.0 4.80554" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_CaixaGrossa02" class="StaticMesh" resource="proves_CaixaGrossa02" position="-22.3861 0.0 4.23714" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_CaixaGrossa03" class="StaticMesh" resource="proves_CaixaGrossa03" position="-31.3156 0.0 -10.6048" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_CaixaPetita08" class="StaticMesh" resource="proves_CaixaPetita08" position="-31.9764 0.0 -12.1037" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_CaixaGrossa04" class="StaticMesh" resource="proves_CaixaGrossa04" position="-31.2776 0.0 -8.27065" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_CaixaPetita09" class="StaticMesh" resource="proves_CaixaPetita09" position="-30.6888 0.0 -12.3158" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_CaixaPetita10" class="StaticMesh" resource="proves_CaixaPetita10" position="-31.02 0.0 -6.68225" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_CaixaPetita11" class="StaticMesh" resource="proves_CaixaPetita11" position="-31.0784 0.0 -5.56841" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_Llum" class="StaticMesh" resource="proves_Llum" position="-5.82813 2.0 28.9546" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_CaixaPetita12" class="StaticMesh" resource="proves_CaixaPetita12" position="-22.8825 1.00344 5.75414" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_CaixaPetita13" class="StaticMesh" resource="proves_CaixaPetita13" position="-22.8825 0.0 5.75432" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_CaixaPetita14" class="StaticMesh" resource="proves_CaixaPetita14" position="-28.1784 0.0 -3.2059" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_CaixaPetita15" class="StaticMesh" resource="proves_CaixaPetita15" position="-28.1784 1.00344 -3.20607" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_CaixaPetita16" class="StaticMesh" resource="proves_CaixaPetita16" position="-28.6072 0.0 -2.29994" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_BoxGlow" class="StaticMesh" resource="proves_BoxGlow" position="-54.6592 0.0376649 7.0358" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_BoxNormal" class="StaticMesh" resource="proves_BoxNormal" position="-54.6592 0.0376649 -5.08054" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_BoxAlpha" class="StaticMesh" resource="proves_BoxAlpha" position="-57.4588 0.0376649 -18.0876" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_BoxSpecular" class="StaticMesh" resource="proves_BoxSpecular" position="-54.6592 0.0376649 -36.8326" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_BoxAlpha01" class="StaticMesh" resource="proves_BoxAlpha01" position="-50.0065 0.0376649 -24.0954" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_Habitacio1" class="StaticMesh" resource="proves_Habitacio1" position="0.0 0.0 0.193104" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_BoxParallax" class="StaticMesh" resource="proves_BoxParallax" position="-54.6592 0.0376668 36.6172" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_BoxGlowAlpha" class="StaticMesh" resource="proves_BoxGlowAlpha" position="-54.6592 0.0376649 21.9762" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_BoxReflection" class="StaticMesh" resource="proves_BoxReflection" position="-25.0811 1.25635 -5.30342" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_TeteraPickUp" class="StaticMesh" resource="proves_TeteraPickUp" position="-24.3621 0.624995 21.6316" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_EsferaInteractiva" class="StaticMesh" resource="proves_EsferaInteractiva" position="-24.4011 0.968018 24.6365" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_EsferaDestructible" class="StaticMesh" resource="proves_EsferaDestructible" position="-16.8264 1.42554 23.2763" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_EsferaDestructible01" class="StaticMesh" resource="proves_EsferaDestructible01" position="-13.2122 0.387946 23.2763" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="proves_EsferaDestructible02" class="StaticMesh" resource="proves_EsferaDestructible02" position="-10.3951 0.387946 23.2769" yaw="0.0" pitch="0.0" roll="0.0" />
+</RenderableObjects>

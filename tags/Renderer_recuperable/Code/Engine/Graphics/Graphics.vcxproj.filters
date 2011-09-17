@@ -1,0 +1,705 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="RenderManager">
+      <UniqueIdentifier>{615848bf-0cbe-47d7-a219-7f941ea3c4ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="FontManager">
+      <UniqueIdentifier>{cebecdda-b9fc-4c4c-a8fe-2998b8af51e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StaticMesh">
+      <UniqueIdentifier>{cdc76e40-6e6b-4649-bbfe-0683ecafa07d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vertex">
+      <UniqueIdentifier>{483096e6-c696-44d6-a564-80e5aae8de6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vertex\Vertex Structs">
+      <UniqueIdentifier>{db8c6700-9040-4636-8328-0fb316a65dab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vertex\RenderableVertexs">
+      <UniqueIdentifier>{8feee727-1829-413f-94c1-815584a2657f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras">
+      <UniqueIdentifier>{97e95f05-6983-4920-9f00-9e2b25c95ec7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras\Camera">
+      <UniqueIdentifier>{73f14994-50ac-4c20-89e7-61c9bb7bc307}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras\FPSCamera">
+      <UniqueIdentifier>{4f4b678d-5d1e-4fe7-82e7-8860bd92e792}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras\ThPSCamera">
+      <UniqueIdentifier>{4cf3c62b-31fc-477e-8c26-8c88fa970f94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras\Frustum">
+      <UniqueIdentifier>{ab4a0200-a9d8-440e-85d2-4c3681967061}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderableObject">
+      <UniqueIdentifier>{2ab488b0-47e1-4df3-9f94-830f04a08180}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderableObject\RenderableObjectsManager">
+      <UniqueIdentifier>{1026726e-05f0-438f-a546-7904101a1ad0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderableObject\InstanceMesh">
+      <UniqueIdentifier>{8fe22f16-e6eb-4c9d-a12d-38b678b78575}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vertex\IndexedVertexs">
+      <UniqueIdentifier>{7c0d44b5-3c41-4c82-88f6-fe8f8ca448f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effects">
+      <UniqueIdentifier>{08e1d337-4ef0-42c3-b345-a993af4ac1f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effects\Effect">
+      <UniqueIdentifier>{b77dbc03-72bb-4ff3-b6d3-98a6e58cf77d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Effects\EffectManager">
+      <UniqueIdentifier>{3760ea8b-bd5a-40a6-b073-d5f95085f5c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AnimatedModel">
+      <UniqueIdentifier>{393ff171-639d-4bb7-b91e-5afa57554a24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AnimatedModel\AnimatedCoreModel">
+      <UniqueIdentifier>{94707ca1-3968-45c8-b406-0a018414e440}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AnimatedModel\AnimatedInstanceModel">
+      <UniqueIdentifier>{ced25332-831b-4e63-b82c-281f95d60c99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="RenderableObject\RenderableAnimatedInstanceModel">
+      <UniqueIdentifier>{aada233b-7012-4223-bb63-9fac627959df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneEffects">
+      <UniqueIdentifier>{f103fe91-1e9f-42d7-a3a5-ffeea6e10be4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneEffects\SceneEffectManager">
+      <UniqueIdentifier>{2a874a02-1265-4e7f-b786-22284aafc705}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneEffects\SceneEffect">
+      <UniqueIdentifier>{f3be4292-7da7-40a3-9a52-e311d48c885e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneEffects\RenderToTextureSceneEffect">
+      <UniqueIdentifier>{5848d5dd-7322-450b-b0bb-cae4a275fdaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StaticMesh\StaticMeshManager">
+      <UniqueIdentifier>{fc572106-303d-4ba5-9b42-417814b133b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneEffects\RenderTextureSceneEffect">
+      <UniqueIdentifier>{26e1cfa2-0558-4de2-a0f5-d481c053b5a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneEffects\DrawQuadSceneEffect">
+      <UniqueIdentifier>{645f202a-97ec-4bf9-a968-52306fbcce33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AnimatedModel\AnimatedModelManager">
+      <UniqueIdentifier>{c52e837d-037d-4ea7-a9a7-be14ebfb2f5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneEffects\ShadowMapRenderToTexture">
+      <UniqueIdentifier>{8d361bcc-c2a9-4450-ae07-9597e726c960}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneEffects\DrawQuadToTextureSceneEffect">
+      <UniqueIdentifier>{c1bd35f1-7aaa-4fd9-841b-8ef82e9536db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SceneEffects\HDR Pipeline">
+      <UniqueIdentifier>{9fed3f9b-f795-408e-a3a8-28924e5f726e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials">
+      <UniqueIdentifier>{cbbece00-30db-40c8-888b-e60fb2b41183}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\EmptyMaterials">
+      <UniqueIdentifier>{8e32ee1f-30b3-4c2a-b759-75ccedba0083}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\EmptyMaterials\AnimatedMeshEmptyMaterial">
+      <UniqueIdentifier>{049e484b-5059-4cec-9928-a8468f220c31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\EmptyMaterials\StaticMeshEmptyMaterial">
+      <UniqueIdentifier>{1629c1e9-c23c-485b-aa95-c4dada919c23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators">
+      <UniqueIdentifier>{4cea3814-5e88-40d7-9d73-647676c3940e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\TextureDecorators">
+      <UniqueIdentifier>{f495d972-3b87-411c-9723-95e147b85431}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\TextureDecorators\DiffuseTexture">
+      <UniqueIdentifier>{8b77695d-7664-4715-b574-fb6009bbbcb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\TextureDecorators\NormalmapTexture">
+      <UniqueIdentifier>{50930022-3650-4920-a66e-9d90e1908425}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\TextureDecorators\LightmapTexture">
+      <UniqueIdentifier>{5caf5a64-5f00-4f25-8486-1bdd7d5a1551}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\TextureDecorators\GlowTexture">
+      <UniqueIdentifier>{32b244d4-4626-4327-8083-aa5f90ed1fc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\TextureDecorators\SpecularTexture">
+      <UniqueIdentifier>{7b8d75c3-4b0d-4b87-8b25-f2bd945e1f09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\PropertyDecorators">
+      <UniqueIdentifier>{694df533-2c9c-4544-9a0e-eb9b746bb1e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\PropertyDecorators\ParallaxDecorator">
+      <UniqueIdentifier>{8ff9a178-86a8-4834-9a7f-ca03cd9c5f76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\PropertyDecorators\BumpDecorator">
+      <UniqueIdentifier>{a24fea53-9e85-4afe-88c7-b8a388d55234}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\PropertyDecorators\SpecularPropertyDecorator">
+      <UniqueIdentifier>{a3105cc8-1c04-4baa-991f-e56ac65adb6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\PropertyDecorators\AlphaDecorator">
+      <UniqueIdentifier>{e29af470-f754-4bf1-b101-f50d5379fa13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\PropertyDecorators\GlowDecorator">
+      <UniqueIdentifier>{2d472e9e-657f-4c9d-bd4b-900f5e314477}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras\ShoulderCamera">
+      <UniqueIdentifier>{f39a4cd2-9965-4de5-9db8-a815d561adc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights">
+      <UniqueIdentifier>{1e8f55d6-65d4-48a1-9679-20a345809126}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights\LightManager">
+      <UniqueIdentifier>{f3955089-6989-41a9-9564-72b249e2412c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights\DirectionalLight">
+      <UniqueIdentifier>{d8de0390-5cef-487d-8425-bfb590c8a424}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights\OmniLight">
+      <UniqueIdentifier>{ded3d3d6-496e-4049-b1b4-a8e000bcf984}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Lights\SpotLight">
+      <UniqueIdentifier>{6128b30f-f93f-4f4d-8a5a-075a90330764}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Texture">
+      <UniqueIdentifier>{21842c9d-8f5a-4376-b635-ffc94bfcb203}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Texture\TextureManager">
+      <UniqueIdentifier>{3f3fdabc-e06f-4485-b1eb-201001e4132e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cameras\SphereCamera">
+      <UniqueIdentifier>{185d838f-fd40-4824-b803-ef242acee42d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Vertex\InstancedData">
+      <UniqueIdentifier>{46fa5196-5f97-4c66-a85a-0f318061bed4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Portal Rendering">
+      <UniqueIdentifier>{6069133a-1b94-496b-a766-ff3fb1c36cb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Portal Rendering\Room">
+      <UniqueIdentifier>{ea9f0ae1-497d-4f16-8f76-5c1cbc370686}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Portal Rendering\Portal">
+      <UniqueIdentifier>{ef2de508-9577-4d30-93ec-322e777b6e8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Portal Rendering\PortalManager">
+      <UniqueIdentifier>{baee1e65-9ac4-4bbb-8cea-7c7cad125267}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\TextureDecorators\EnvironmentTexture">
+      <UniqueIdentifier>{1bcd0d67-a551-42b7-9bd6-98c41929e83d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\PropertyDecorators\EnvironmentDecorator">
+      <UniqueIdentifier>{5a7a5439-99bf-40d0-8801-640002dba94a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Materials\MaterialDecorators\PropertyDecorators\SpriteDecorator">
+      <UniqueIdentifier>{070271a6-87d3-4241-94bd-d03f611db3ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Emiters">
+      <UniqueIdentifier>{e0ca5353-8222-49a9-a58c-8c9cba375613}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Emiters\EmiterInstance">
+      <UniqueIdentifier>{06a128c0-a525-4bec-9373-f434fd527df8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Emiters\EmiterManager">
+      <UniqueIdentifier>{2bf44c1c-1497-4a33-8a70-f8b8b2eeeaa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Emiters\EmiterCore">
+      <UniqueIdentifier>{be4f82ed-f0b4-4811-8fbd-c79efb934255}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Emiters\EmiterCore\SimpleEmiterCore">
+      <UniqueIdentifier>{a3876f2e-cf3d-4fc3-b348-b58f49dc6553}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Emiters\EmiterCore\AggregateEmiterCore">
+      <UniqueIdentifier>{49c70943-64a2-45bd-87f7-559dbc2773ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Emiters\Particle">
+      <UniqueIdentifier>{dce80815-01d3-4cc0-8083-d8c62b3323af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Emiters\EmiterCoreManager">
+      <UniqueIdentifier>{217447cb-eb19-453a-b171-b2c7fa7c1011}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{a464d141-a9c7-4dd4-994b-49e87c3891a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RendererStep">
+      <UniqueIdentifier>{a49ae238-3797-4014-bf1c-92586cff3a2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RendererStep\PostSceneRendererStep">
+      <UniqueIdentifier>{0ec655fb-47f7-43be-9bdc-208fa51bd21e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RendererStep\PreSceneRendererStep">
+      <UniqueIdentifier>{f83b71f7-e5ff-474f-9176-b98a47427092}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RendererStep\SceneRendererStep">
+      <UniqueIdentifier>{f3285f80-f39f-4ca4-951d-19204323ced9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RendererStep\PreSceneRendererStep\ShadowMapPreRendererStep">
+      <UniqueIdentifier>{4478cd57-800e-419d-901b-1f28335e07c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RendererStep\SceneRendererStep\ForwardSceneRendererStep">
+      <UniqueIdentifier>{ffb23de3-958c-4b2e-9733-229a5222417a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RenderTarget">
+      <UniqueIdentifier>{827a83e3-f5df-4aec-9334-5801d0f75df3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RenderTarget\TextureRenderTarget">
+      <UniqueIdentifier>{dad2e8b9-bcd2-413d-adf0-01653af8a24c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RenderTarget\BackBufferRenderTarget">
+      <UniqueIdentifier>{dfb300af-157a-4c22-abd7-8807dcb5cb70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\InputSampler">
+      <UniqueIdentifier>{2774dde7-b417-4dbf-8aa3-51f9326c55fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\InputSampler\TextureInputSampler">
+      <UniqueIdentifier>{4fb509ee-a9c0-4341-a690-89483512cc96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\InputSampler\FrameBufferInputSampler">
+      <UniqueIdentifier>{45cd2c5c-64ae-4337-a674-ce4f7ec6f549}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RendererStep\PostSceneRendererStep\DeferredPostSceneRendererStep">
+      <UniqueIdentifier>{3ca5d5ba-6508-45a4-bb0d-72549d8b78b9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>RenderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="FontManager.cpp">
+      <Filter>FontManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Frustum.cpp">
+      <Filter>Cameras\Frustum</Filter>
+    </ClCompile>
+    <ClCompile Include="ThPSCamera.cpp">
+      <Filter>Cameras\ThPSCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="FPSCamera.cpp">
+      <Filter>Cameras\FPSCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Cameras\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Texture\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticMesh.cpp">
+      <Filter>StaticMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="StaticMeshManager.cpp">
+      <Filter>StaticMesh\StaticMeshManager</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableObjectsManager.cpp">
+      <Filter>RenderableObject\RenderableObjectsManager</Filter>
+    </ClCompile>
+    <ClCompile Include="InstanceMesh.cpp">
+      <Filter>RenderableObject\InstanceMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedCoreModel.cpp">
+      <Filter>AnimatedModel\AnimatedCoreModel</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedInstanceModel.cpp">
+      <Filter>AnimatedModel\AnimatedInstanceModel</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimatedModelManager.cpp">
+      <Filter>AnimatedModel\AnimatedModelManager</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableAnimatedInstanceModel.cpp">
+      <Filter>RenderableObject\RenderableAnimatedInstanceModel</Filter>
+    </ClCompile>
+    <ClCompile Include="LightManager.cpp">
+      <Filter>Lights\LightManager</Filter>
+    </ClCompile>
+    <ClCompile Include="OmniLight.cpp">
+      <Filter>Lights\OmniLight</Filter>
+    </ClCompile>
+    <ClCompile Include="SpotLight.cpp">
+      <Filter>Lights\SpotLight</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectionalLight.cpp">
+      <Filter>Lights\DirectionalLight</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Lights</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
+      <Filter>Effects\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="EffectManager.cpp">
+      <Filter>Effects\EffectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexStructs.cpp">
+      <Filter>Vertex\Vertex Structs</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneEffectManager.cpp">
+      <Filter>SceneEffects\SceneEffectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneEffect.cpp">
+      <Filter>SceneEffects\SceneEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderToTextureSceneEffect.cpp">
+      <Filter>SceneEffects\RenderToTextureSceneEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderTextureSceneEffect.cpp">
+      <Filter>SceneEffects\RenderTextureSceneEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawQuadSceneEffect.cpp">
+      <Filter>SceneEffects\DrawQuadSceneEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowMapRenderToTexture.cpp">
+      <Filter>SceneEffects\ShadowMapRenderToTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawQuadToTextureSceneEffect.cpp">
+      <Filter>SceneEffects\DrawQuadToTextureSceneEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="HDRPipeline.cpp">
+      <Filter>SceneEffects\HDR Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
+      <Filter>Portal Rendering\Room</Filter>
+    </ClCompile>
+    <ClCompile Include="Portal.cpp">
+      <Filter>Portal Rendering\Portal</Filter>
+    </ClCompile>
+    <ClCompile Include="PortalManager.cpp">
+      <Filter>Portal Rendering\PortalManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ShoulderCamera.cpp">
+      <Filter>Cameras\ShoulderCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="SphereCamera.cpp">
+      <Filter>Cameras\SphereCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="LightmapTextureDecorator.cpp">
+      <Filter>Materials\MaterialDecorators\TextureDecorators\LightmapTexture</Filter>
+    </ClCompile>
+    <ClCompile Include="EmiterInstance.cpp">
+      <Filter>Emiters\EmiterInstance</Filter>
+    </ClCompile>
+    <ClCompile Include="EmiterManager.cpp">
+      <Filter>Emiters\EmiterManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SimpleEmiterCore.cpp">
+      <Filter>Emiters\EmiterCore\SimpleEmiterCore</Filter>
+    </ClCompile>
+    <ClCompile Include="AggregateEmiterCore.cpp">
+      <Filter>Emiters\EmiterCore\AggregateEmiterCore</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Emiters\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="EmiterCoreManager.cpp">
+      <Filter>Emiters\EmiterCoreManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="RendererStep.cpp">
+      <Filter>Renderer\RendererStep</Filter>
+    </ClCompile>
+    <ClCompile Include="PostSceneRendererStep.cpp">
+      <Filter>Renderer\RendererStep\PostSceneRendererStep</Filter>
+    </ClCompile>
+    <ClCompile Include="PreSceneRendererStep.cpp">
+      <Filter>Renderer\RendererStep\PreSceneRendererStep</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneRendererStep.cpp">
+      <Filter>Renderer\RendererStep\SceneRendererStep</Filter>
+    </ClCompile>
+    <ClCompile Include="ShadowMapPreRendererStep.cpp">
+      <Filter>Renderer\RendererStep\PreSceneRendererStep\ShadowMapPreRendererStep</Filter>
+    </ClCompile>
+    <ClCompile Include="ForwardSceneRendererStep.cpp">
+      <Filter>Renderer\RendererStep\SceneRendererStep\ForwardSceneRendererStep</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderTarget.cpp">
+      <Filter>Renderer\RenderTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureRenderTarget.cpp">
+      <Filter>Renderer\RenderTarget\TextureRenderTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="BackBufferRenderTarget.cpp">
+      <Filter>Renderer\RenderTarget\BackBufferRenderTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSampler.cpp">
+      <Filter>Renderer\InputSampler</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureInputSampler.cpp">
+      <Filter>Renderer\InputSampler\TextureInputSampler</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameBufferInputSampler.cpp">
+      <Filter>Renderer\InputSampler\FrameBufferInputSampler</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderableObject.cpp">
+      <Filter>RenderableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="DeferredPostSceneRendererStep.cpp">
+      <Filter>Renderer\RendererStep\PostSceneRendererStep\DeferredPostSceneRendererStep</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\RenderManager.h">
+      <Filter>RenderManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FontManager.h">
+      <Filter>FontManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FPSCamera.h">
+      <Filter>Cameras\FPSCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Frustum.h">
+      <Filter>Cameras\Frustum</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ThPSCamera.h">
+      <Filter>Cameras\ThPSCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Camera.h">
+      <Filter>Cameras\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Texture.h">
+      <Filter>Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TextureManager.h">
+      <Filter>Texture\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RenderableVertexs.h">
+      <Filter>Vertex\RenderableVertexs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IndexedVertexs.h">
+      <Filter>Vertex\IndexedVertexs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\VertexsStructs.h">
+      <Filter>Vertex\Vertex Structs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\StaticMesh.h">
+      <Filter>StaticMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="include\StaticMeshManager.h">
+      <Filter>StaticMesh\StaticMeshManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RenderableObjectsManager.h">
+      <Filter>RenderableObject\RenderableObjectsManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RenderableObject.h">
+      <Filter>RenderableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InstanceMesh.h">
+      <Filter>RenderableObject\InstanceMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AnimatedCoreModel.h">
+      <Filter>AnimatedModel\AnimatedCoreModel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AnimatedInstanceModel.h">
+      <Filter>AnimatedModel\AnimatedInstanceModel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AnimatedModelManager.h">
+      <Filter>AnimatedModel\AnimatedModelManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RenderableAnimatedInstanceModel.h">
+      <Filter>RenderableObject\RenderableAnimatedInstanceModel</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Light.h">
+      <Filter>Lights</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LightManager.h">
+      <Filter>Lights\LightManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DirectionalLight.h">
+      <Filter>Lights\DirectionalLight</Filter>
+    </ClInclude>
+    <ClInclude Include="include\OmniLight.h">
+      <Filter>Lights\OmniLight</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SpotLight.h">
+      <Filter>Lights\SpotLight</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Effect.h">
+      <Filter>Effects\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EffectManager.h">
+      <Filter>Effects\EffectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SceneEffect.h">
+      <Filter>SceneEffects\SceneEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SceneEffectManager.h">
+      <Filter>SceneEffects\SceneEffectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RenderToTextureSceneEffect.h">
+      <Filter>SceneEffects\RenderToTextureSceneEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RenderTextureSceneEffect.h">
+      <Filter>SceneEffects\RenderTextureSceneEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DrawQuadSceneEffect.h">
+      <Filter>SceneEffects\DrawQuadSceneEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ShadowMapRenderToTexture.h">
+      <Filter>SceneEffects\ShadowMapRenderToTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DrawQuadToTextureSceneEffect.h">
+      <Filter>SceneEffects\DrawQuadToTextureSceneEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="include\HDRPipeline.h">
+      <Filter>SceneEffects\HDR Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InstancedData.h">
+      <Filter>Vertex\InstancedData</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Material.h">
+      <Filter>Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AnimatedMeshEmptyMaterial.h">
+      <Filter>Materials\EmptyMaterials\AnimatedMeshEmptyMaterial</Filter>
+    </ClInclude>
+    <ClInclude Include="include\StaticMeshEmptyMaterial.h">
+      <Filter>Materials\EmptyMaterials\StaticMeshEmptyMaterial</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MaterialDecorator.h">
+      <Filter>Materials\MaterialDecorators</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DiffuseTextureDecorator.h">
+      <Filter>Materials\MaterialDecorators\TextureDecorators\DiffuseTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\NormalTextureDecorator.h">
+      <Filter>Materials\MaterialDecorators\TextureDecorators\NormalmapTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\LightmapTextureDecorator.h">
+      <Filter>Materials\MaterialDecorators\TextureDecorators\LightmapTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GlowTextureDecorator.h">
+      <Filter>Materials\MaterialDecorators\TextureDecorators\GlowTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SpecularTextureDecorator.h">
+      <Filter>Materials\MaterialDecorators\TextureDecorators\SpecularTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TextureDecorator.h">
+      <Filter>Materials\MaterialDecorators\TextureDecorators</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ParallaxPropertyDecorator.h">
+      <Filter>Materials\MaterialDecorators\PropertyDecorators\ParallaxDecorator</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BumpPropertyDecorator.h">
+      <Filter>Materials\MaterialDecorators\PropertyDecorators\BumpDecorator</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EmptyMaterial.h">
+      <Filter>Materials\EmptyMaterials</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PropertyDecorator.h">
+      <Filter>Materials\MaterialDecorators\PropertyDecorators</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SpecularPropertyDecorator.h">
+      <Filter>Materials\MaterialDecorators\PropertyDecorators\SpecularPropertyDecorator</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AlphaDecorator.h">
+      <Filter>Materials\MaterialDecorators\PropertyDecorators\AlphaDecorator</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Room.h">
+      <Filter>Portal Rendering\Room</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Portal.h">
+      <Filter>Portal Rendering\Portal</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PortalManager.h">
+      <Filter>Portal Rendering\PortalManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GlowPropertyDecorator.h">
+      <Filter>Materials\MaterialDecorators\PropertyDecorators\GlowDecorator</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ShoulderCamera.h">
+      <Filter>Cameras\ShoulderCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SphereCamera.h">
+      <Filter>Cameras\SphereCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EnvironmentTextureDecorator.h">
+      <Filter>Materials\MaterialDecorators\TextureDecorators\EnvironmentTexture</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EnvirondmentPropertyDecorator.h">
+      <Filter>Materials\MaterialDecorators\PropertyDecorators\EnvironmentDecorator</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SpritePropertyDecorator.h">
+      <Filter>Materials\MaterialDecorators\PropertyDecorators\SpriteDecorator</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EmiterInstance.h">
+      <Filter>Emiters\EmiterInstance</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ParticleConstants.h">
+      <Filter>Emiters</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EmiterManager.h">
+      <Filter>Emiters\EmiterManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SimpleEmiterCore.h">
+      <Filter>Emiters\EmiterCore\SimpleEmiterCore</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AggregateEmiterCore.h">
+      <Filter>Emiters\EmiterCore\AggregateEmiterCore</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EmiterCore.h">
+      <Filter>Emiters\EmiterCore</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Particle.h">
+      <Filter>Emiters\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EmiterCoreManager.h">
+      <Filter>Emiters\EmiterCoreManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Renderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RendererStep.h">
+      <Filter>Renderer\RendererStep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PostSceneRendererStep.h">
+      <Filter>Renderer\RendererStep\PostSceneRendererStep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PreSceneRendererStep.h">
+      <Filter>Renderer\RendererStep\PreSceneRendererStep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SceneRendererStep.h">
+      <Filter>Renderer\RendererStep\SceneRendererStep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ShadowMapPreRendererStep.h">
+      <Filter>Renderer\RendererStep\PreSceneRendererStep\ShadowMapPreRendererStep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ForwardSceneRendererStep.h">
+      <Filter>Renderer\RendererStep\SceneRendererStep\ForwardSceneRendererStep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\RenderTarget.h">
+      <Filter>Renderer\RenderTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TextureRenderTarget.h">
+      <Filter>Renderer\RenderTarget\TextureRenderTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BackBufferRenderTarget.h">
+      <Filter>Renderer\RenderTarget\BackBufferRenderTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="include\InputSampler.h">
+      <Filter>Renderer\InputSampler</Filter>
+    </ClInclude>
+    <ClInclude Include="include\TextureInputSampler.h">
+      <Filter>Renderer\InputSampler\TextureInputSampler</Filter>
+    </ClInclude>
+    <ClInclude Include="include\FrameBufferInputSampler.h">
+      <Filter>Renderer\InputSampler\FrameBufferInputSampler</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DeferredPostSceneRendererStep.h">
+      <Filter>Renderer\RendererStep\PostSceneRendererStep\DeferredPostSceneRendererStep</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

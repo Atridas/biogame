@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Enemy">
+      <UniqueIdentifier>{4ab6a035-bbbc-46fb-980f-9ceab5ac55c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemy\EnemyManager">
+      <UniqueIdentifier>{111a63c7-b461-4194-a5fd-93e6f32c8e00}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemy\Militar">
+      <UniqueIdentifier>{b38e2107-68f9-4f75-a685-003cbb9581b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemy\Miner">
+      <UniqueIdentifier>{bc902cff-0dec-42f7-b3fb-f6cc9d4bbe43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemy\Vigia">
+      <UniqueIdentifier>{6e32080b-9b9a-4b69-a7a3-bd0293cd6d4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemy\EnemyInstance">
+      <UniqueIdentifier>{1182e713-61df-4582-a879-1f33b4b4d8d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateMachine">
+      <UniqueIdentifier>{56eaa720-15fd-45ce-be6a-5ec95fc3b24c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateMachine\States">
+      <UniqueIdentifier>{cefe1b1a-faf5-46dc-80f6-4dc0d2bd06d3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\EnemyManager.h">
+      <Filter>Enemy\EnemyManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Enemy.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Militar.h">
+      <Filter>Enemy\Militar</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Miner.h">
+      <Filter>Enemy\Miner</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Vigia.h">
+      <Filter>Enemy\Vigia</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EnemyInstance.h">
+      <Filter>Enemy\EnemyInstance</Filter>
+    </ClInclude>
+    <ClInclude Include="include\StateMachine.h">
+      <Filter>StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Attack.h">
+      <Filter>StateMachine\States</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Patrol.h">
+      <Filter>StateMachine\States</Filter>
+    </ClInclude>
+    <ClInclude Include="include\State.h">
+      <Filter>StateMachine\States</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>Enemy\EnemyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Militar.cpp">
+      <Filter>Enemy\Militar</Filter>
+    </ClCompile>
+    <ClCompile Include="Miner.cpp">
+      <Filter>Enemy\Miner</Filter>
+    </ClCompile>
+    <ClCompile Include="Vigia.cpp">
+      <Filter>Enemy\Vigia</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyInstance.cpp">
+      <Filter>Enemy\EnemyInstance</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine.cpp">
+      <Filter>StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="Attack.cpp">
+      <Filter>StateMachine\States</Filter>
+    </ClCompile>
+    <ClCompile Include="Patrol.cpp">
+      <Filter>StateMachine\States</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>StateMachine\States</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

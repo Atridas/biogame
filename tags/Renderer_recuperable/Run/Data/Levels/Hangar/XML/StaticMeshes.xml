@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<meshes>
+	<mesh name="hangar_Pasarela superior" path="Data/Meshes/hangar_Pasarela superior.mesh" max="24.604 1.65178 12.9949" min="-23.2161 -0.0999999 -12.9936" />
+	<mesh name="hangar_Caixa_gran" path="Data/Meshes/hangar_Caixa_gran.mesh" max="1.00242 1.5 1.00242" min="-1.00242 0.0 -1.00242" />
+	<mesh name="hangar_mur divisor" path="Data/Meshes/hangar_mur divisor.mesh" max="0.400034 1.0795 0.554314" min="-0.489122 0.0 -0.811184" />
+	<mesh name="hangar_mur divisor01" path="Data/Meshes/hangar_mur divisor01.mesh" max="0.437885 1.0795 0.558808" min="-0.552788 0.0 -0.805215" />
+	<mesh name="hangar_mur divisor02" path="Data/Meshes/hangar_mur divisor02.mesh" max="0.400034 1.0795 0.554314" min="-0.489122 0.0 -0.811184" />
+	<mesh name="hangar_mur divisor03" path="Data/Meshes/hangar_mur divisor03.mesh" max="0.583865 1.0795 0.420234" min="-0.590862 0.0 -0.692025" />
+	<mesh name="hangar_mur divisor04" path="Data/Meshes/hangar_mur divisor04.mesh" max="0.583865 1.0795 0.420234" min="-0.590862 0.0 -0.692025" />
+	<mesh name="hangar_mur divisor05" path="Data/Meshes/hangar_mur divisor05.mesh" max="0.262784 1.0795 0.506268" min="-0.269781 0.0 -0.778058" />
+	<mesh name="hangar_mur divisor06" path="Data/Meshes/hangar_mur divisor06.mesh" max="0.262784 1.0795 0.506268" min="-0.269781 0.0 -0.778058" />
+	<mesh name="hangar_mur divisor07" path="Data/Meshes/hangar_mur divisor07.mesh" max="0.25 1.0795 0.5" min="-0.25 0.0 -0.77188" />
+	<mesh name="hangar_container_middle00" path="Data/Meshes/hangar_container_middle00.mesh" max="4.5 3.0 1.5" min="-4.5 0.0 -1.5" />
+	<mesh name="hangar_container_middle03" path="Data/Meshes/hangar_container_middle03.mesh" max="4.5 3.0 1.5" min="-4.5 0.0 -1.5" />
+	<mesh name="hangar_container" path="Data/Meshes/hangar_container.mesh" max="4.74103 3.0 2.7243" min="-4.74103 0.0 -2.7243" />
+	<mesh name="hangar_container_middle06" path="Data/Meshes/hangar_container_middle06.mesh" max="4.5 3.0 1.5" min="-4.5 0.0 -1.5" />
+	<mesh name="hangar_container_middle07" path="Data/Meshes/hangar_container_middle07.mesh" max="4.5 3.0 1.5" min="-4.5 0.0 -1.5" />
+	<mesh name="hangar_container_middle08" path="Data/Meshes/hangar_container_middle08.mesh" max="2.94863 3.0 4.74165" min="-2.94863 0.0 -4.74165" />
+	<mesh name="hangar_container_middle09" path="Data/Meshes/hangar_container_middle09.mesh" max="3.54904 3.0 4.64711" min="-3.54904 0.0 -4.64711" />
+	<mesh name="hangar_container_low00" path="Data/Meshes/hangar_container_low00.mesh" max="2.94863 3.0 4.74165" min="-2.94863 0.0 -4.74165" />
+	<mesh name="hangar_container_middle11" path="Data/Meshes/hangar_container_middle11.mesh" max="4.5 3.0 1.5" min="-4.5 0.0 -1.5" />
+	<mesh name="hangar_container_middle10" path="Data/Meshes/hangar_container_middle10.mesh" max="4.5 3.0 1.5" min="-4.5 0.0 -1.5" />
+	<mesh name="hangar_container_middle05" path="Data/Meshes/hangar_container_middle05.mesh" max="4.5 3.0 1.5" min="-4.5 0.0 -1.5" />
+	<mesh name="hangar_container_middle04" path="Data/Meshes/hangar_container_middle04.mesh" max="2.61357 3.0 4.73489" min="-2.61357 0.0 -4.7349" />
+	<mesh name="hangar_container_middle02" path="Data/Meshes/hangar_container_middle02.mesh" max="1.5 3.0 4.5" min="-1.5 0.0 -4.5" />
+	<mesh name="hangar_container_middle01" path="Data/Meshes/hangar_container_middle01.mesh" max="1.5 3.0 4.5" min="-1.5 0.0 -4.5" />
+	<mesh name="hangar_container_low02" path="Data/Meshes/hangar_container_low02.mesh" max="1.5 3.0 4.5" min="-1.5 0.0 -4.5" />
+	<mesh name="hangar_container_low01" path="Data/Meshes/hangar_container_low01.mesh" max="4.5 3.0 1.5" min="-4.5 0.0 -1.5" />
+	<mesh name="hangar_Caixa_gran01" path="Data/Meshes/hangar_Caixa_gran01.mesh" max="1.00242 1.5 1.00242" min="-1.00242 0.0 -1.00242" />
+	<mesh name="hangar_Caixa_gran02" path="Data/Meshes/hangar_Caixa_gran02.mesh" max="1.00242 1.5 1.00242" min="-1.00242 0.0 -1.00242" />
+	<mesh name="hangar_Caixa_gran03" path="Data/Meshes/hangar_Caixa_gran03.mesh" max="1.00242 1.5 1.00242" min="-1.00242 0.0 -1.00242" />
+	<mesh name="hangar_Caixa_gran04" path="Data/Meshes/hangar_Caixa_gran04.mesh" max="1.00242 1.5 1.00242" min="-1.00242 0.0 -1.00242" />
+	<mesh name="hangar_Caixa_gran08" path="Data/Meshes/hangar_Caixa_gran08.mesh" max="1.00242 1.5 1.00242" min="-1.00242 0.0 -1.00242" />
+	<mesh name="hangar_Caixa_gran09" path="Data/Meshes/hangar_Caixa_gran09.mesh" max="1.00242 1.5 1.00242" min="-1.00242 0.0 -1.00242" />
+	<mesh name="hangar_Cables_menjador" path="Data/Meshes/hangar_Cables_menjador.mesh" max="24.546 11.4773 0.0171862" min="-22.7047 -12.4773 -0.0171862" />
+	<mesh name="hangar_Cables_menjador01" path="Data/Meshes/hangar_Cables_menjador01.mesh" max="15.1815 21.879 0.0171833" min="-13.3467 -12.0446 -0.0171862" />
+	<mesh name="hangar_Caixa_estatica_petita" path="Data/Meshes/hangar_Caixa_estatica_petita.mesh" max="0.499998 1.0 0.5" min="-0.500004 0.0 -0.5" />
+	<mesh name="hangar_Caixa_estatica_petita01" path="Data/Meshes/hangar_Caixa_estatica_petita01.mesh" max="0.579226 1.0 0.579228" min="-0.57923 0.0 -0.579227" />
+	<mesh name="hangar_Caixa_estatica_petita02" path="Data/Meshes/hangar_Caixa_estatica_petita02.mesh" max="0.499998 1.0 0.5" min="-0.500004 0.0 -0.5" />
+	<mesh name="hangar_Caixa_estatica_petita03" path="Data/Meshes/hangar_Caixa_estatica_petita03.mesh" max="0.579226 1.0 0.579228" min="-0.57923 0.0 -0.579227" />
+	<mesh name="hangar_Caixa_estatica_petita04" path="Data/Meshes/hangar_Caixa_estatica_petita04.mesh" max="0.579226 1.0 0.579228" min="-0.57923 0.0 -0.579227" />
+	<mesh name="hangar_Caixa_estatica_petita05" path="Data/Meshes/hangar_Caixa_estatica_petita05.mesh" max="0.683011 1.0 0.683014" min="-0.683015 0.0 -0.683011" />
+	<mesh name="hangar_Caixa_estatica_petita06" path="Data/Meshes/hangar_Caixa_estatica_petita06.mesh" max="0.683011 1.0 0.683014" min="-0.683015 0.0 -0.683011" />
+	<mesh name="hangar_Caixa_estatica_petita07" path="Data/Meshes/hangar_Caixa_estatica_petita07.mesh" max="0.683011 1.0 0.683014" min="-0.683015 0.0 -0.683011" />
+	<mesh name="hangar_Caixa_estatica_petita08" path="Data/Meshes/hangar_Caixa_estatica_petita08.mesh" max="0.683011 1.0 0.683016" min="-0.683014 0.0 -0.68301" />
+	<mesh name="hangar_Caixa_estatica_petita09" path="Data/Meshes/hangar_Caixa_estatica_petita09.mesh" max="0.68301 1.0 0.683012" min="-0.683016 0.0 -0.683014" />
+	<mesh name="hangar_Caixa_estatica_petita10" path="Data/Meshes/hangar_Caixa_estatica_petita10.mesh" max="0.685441 1.0 0.685443" min="-0.685447 0.0 -0.685446" />
+	<mesh name="hangar_Caixa_estatica_petita11" path="Data/Meshes/hangar_Caixa_estatica_petita11.mesh" max="0.685441 1.0 0.685443" min="-0.685447 0.0 -0.685446" />
+	<mesh name="hangar_Caixa_estatica_petita12" path="Data/Meshes/hangar_Caixa_estatica_petita12.mesh" max="0.685441 1.0 0.685443" min="-0.685447 0.0 -0.685446" />
+	<mesh name="hangar_Caixa_estatica_petita13" path="Data/Meshes/hangar_Caixa_estatica_petita13.mesh" max="0.499998 1.0 0.5" min="-0.500004 0.0 -0.5" />
+	<mesh name="hangar_Caixa_estatica_petita14" path="Data/Meshes/hangar_Caixa_estatica_petita14.mesh" max="0.499998 1.0 0.5" min="-0.500004 0.0 -0.5" />
+	<mesh name="hangar_Caixa_estatica_petita15" path="Data/Meshes/hangar_Caixa_estatica_petita15.mesh" max="0.499998 1.0 0.5" min="-0.500004 0.0 -0.5" />
+	<mesh name="hangar_Caixa_estatica_petita16" path="Data/Meshes/hangar_Caixa_estatica_petita16.mesh" max="0.499998 1.0 0.5" min="-0.500004 0.0 -0.5" />
+	<mesh name="hangar_Caixa_estatica_petita17" path="Data/Meshes/hangar_Caixa_estatica_petita17.mesh" max="0.499998 1.0 0.5" min="-0.500004 0.0 -0.5" />
+	<mesh name="hangar_Caixa_estatica_petita18" path="Data/Meshes/hangar_Caixa_estatica_petita18.mesh" max="0.499998 1.0 0.5" min="-0.500004 0.0 -0.5" />
+	<mesh name="hangar_Caixa_estatica_petita19" path="Data/Meshes/hangar_Caixa_estatica_petita19.mesh" max="0.499998 1.0 0.5" min="-0.500004 0.0 -0.5" />
+	<mesh name="hangar_Caixa_estatica_petita20" path="Data/Meshes/hangar_Caixa_estatica_petita20.mesh" max="0.499998 1.0 0.5" min="-0.500004 0.0 -0.5" />
+	<mesh name="hangar_Caixa_llarga" path="Data/Meshes/hangar_Caixa_llarga.mesh" max="1.31783 1.00023 0.709464" min="-1.31783 0.000228405 -0.709465" />
+	<mesh name="hangar_Caixa_llarga01" path="Data/Meshes/hangar_Caixa_llarga01.mesh" max="0.806486 1.00023 1.33682" min="-0.806488 0.000228405 -1.33682" />
+	<mesh name="hangar_Caixa_llarga02" path="Data/Meshes/hangar_Caixa_llarga02.mesh" max="1.33682 1.00023 0.806487" min="-1.33682 0.000228405 -0.806486" />
+	<mesh name="hangar_Caixa_llarga03" path="Data/Meshes/hangar_Caixa_llarga03.mesh" max="0.806486 1.00023 1.33682" min="-0.806489 0.000228405 -1.33682" />
+	<mesh name="hangar_Caixa_llarga04" path="Data/Meshes/hangar_Caixa_llarga04.mesh" max="1.31073 1.00023 1.12655" min="-1.31073 0.000228405 -1.12655" />
+	<mesh name="hangar_Caixa_llarga05" path="Data/Meshes/hangar_Caixa_llarga05.mesh" max="1.33253 1.00023 1.05801" min="-1.33253 0.000228405 -1.05801" />
+	<mesh name="hangar_Caixa_llarga06" path="Data/Meshes/hangar_Caixa_llarga06.mesh" max="1.00023 1.25 0.5" min="0.000228405 -1.25 -0.500001" />
+	<mesh name="global_bido_verd" path="Data/Meshes/global_bido_verd.mesh" max="0.309999 0.938024 0.294827" min="-0.31 0.0 -0.294827" />
+	<mesh name="global_bido_vermell" path="Data/Meshes/global_bido_vermell.mesh" max="0.299437 0.938024 0.309575" min="-0.299437 0.0 -0.309575" />
+	<mesh name="hangar_florescent_apagat" path="Data/Meshes/hangar_florescent_apagat.mesh" max="0.772501 2.49151 0.104" min="-0.772499 -0.115818 -0.104" />
+	<mesh name="hangar_Bido" path="Data/Meshes/hangar_Bido.mesh" max="0.62291 6.29725 1.07907" min="-1.09572 0.0 -0.801797" />
+	<mesh name="hangar_Frigorific_DEF" path="Data/Meshes/hangar_Frigorific_DEF.mesh" max="1.48375 1.48375 1.22256" min="-1.48375 -1.48375 0.0" />
+	<mesh name="hangar_caixa_llums" path="Data/Meshes/hangar_caixa_llums.mesh" max="0.0595894 1.22494 0.215432" min="-0.0485458 -1.22494 -0.215433" />
+	<mesh name="hangar_Caixa_llarga07" path="Data/Meshes/hangar_Caixa_llarga07.mesh" max="0.806486 1.00023 1.33682" min="-0.806489 0.000228405 -1.33682" />
+	<mesh name="hangar_Caixa_llarga08" path="Data/Meshes/hangar_Caixa_llarga08.mesh" max="0.709463 1.00023 1.31783" min="-0.709467 0.000228405 -1.31784" />
+	<mesh name="hangar_Caixa_llarga09" path="Data/Meshes/hangar_Caixa_llarga09.mesh" max="1.00023 1.25 0.5" min="0.000228882 -1.25 -0.500001" />
+	<mesh name="hangar_Caixa_llarga10" path="Data/Meshes/hangar_Caixa_llarga10.mesh" max="1.00023 1.25 0.5" min="0.000228882 -1.25 -0.500001" />
+	<mesh name="hangar_mur divisor08" path="Data/Meshes/hangar_mur divisor08.mesh" max="0.25 1.0795 0.5" min="-0.25 0.0 -0.77188" />
+	<mesh name="hangar_mur divisor09" path="Data/Meshes/hangar_mur divisor09.mesh" max="0.25 1.0795 0.5" min="-0.25 0.0 -0.77188" />
+	<mesh name="hangar_Caixa_estatica_petita21" path="Data/Meshes/hangar_Caixa_estatica_petita21.mesh" max="0.661102 1.0 0.661106" min="-0.661107 0.0 -0.661103" />
+	<mesh name="hangar_Caixa_estatica_petita22" path="Data/Meshes/hangar_Caixa_estatica_petita22.mesh" max="0.661102 1.0 0.661106" min="-0.661107 0.0 -0.661103" />
+	<mesh name="hangar_Caixa_estatica_petita23" path="Data/Meshes/hangar_Caixa_estatica_petita23.mesh" max="0.661102 1.0 0.661106" min="-0.661108 0.0 -0.661103" />
+	<mesh name="hangar_Caixa_estatica_petita24" path="Data/Meshes/hangar_Caixa_estatica_petita24.mesh" max="0.705189 1.0 0.705193" min="-0.705193 0.0 -0.705188" />
+	<mesh name="hangar_Caixa_estatica_petita25" path="Data/Meshes/hangar_Caixa_estatica_petita25.mesh" max="0.661102 1.0 0.661106" min="-0.661108 0.0 -0.661103" />
+	<mesh name="hangar_Caixa_llarga11" path="Data/Meshes/hangar_Caixa_llarga11.mesh" max="1.25 1.00023 0.499999" min="-1.25 0.000228405 -0.500003" />
+	<mesh name="hangar_Caixa_llarga12" path="Data/Meshes/hangar_Caixa_llarga12.mesh" max="1.27895 1.00023 1.18651" min="-1.27895 0.000228405 -1.18651" />
+	<mesh name="hangar_Caixa_llarga13" path="Data/Meshes/hangar_Caixa_llarga13.mesh" max="1.11622 1.25 0.933127" min="-0.249803 -1.25 -0.432899" />
+	<mesh name="hangar_Frigorific_DEF02" path="Data/Meshes/hangar_Frigorific_DEF02.mesh" max="-1.28497 1.48375 -0.741877" min="1.28497 -1.48375 1.96444" />
+	<mesh name="hangar_Base Hangar" path="Data/Meshes/hangar_Base Hangar.mesh" max="28.0428 30.1399 14.9102" min="-29.5781 -0.100904 -14.91" />
+	<mesh name="hangar_mur divisor10" path="Data/Meshes/hangar_mur divisor10.mesh" max="0.437885 1.0795 0.558808" min="-0.552788 0.0 -0.805215" />
+	<mesh name="hangar_mur divisor11" path="Data/Meshes/hangar_mur divisor11.mesh" max="0.437885 1.0795 0.558808" min="-0.552788 0.0 -0.805215" />
+	<mesh name="hangar_mur divisor12" path="Data/Meshes/hangar_mur divisor12.mesh" max="0.437885 1.0795 0.558808" min="-0.552788 0.0 -0.805215" />
+	<mesh name="hangar_mur divisor13" path="Data/Meshes/hangar_mur divisor13.mesh" max="0.437885 1.0795 0.558808" min="-0.552788 0.0 -0.805215" />
+	<mesh name="hangar_mur divisor14" path="Data/Meshes/hangar_mur divisor14.mesh" max="0.437885 1.0795 0.558808" min="-0.552788 0.0 -0.805215" />
+	<mesh name="hangar_mur divisor15" path="Data/Meshes/hangar_mur divisor15.mesh" max="0.400034 1.0795 0.554314" min="-0.489122 0.0 -0.811184" />
+	<mesh name="hangar_Pasarela interior" path="Data/Meshes/hangar_Pasarela interior.mesh" max="24.604 1.65178 12.9949" min="-23.2161 -0.0999999 -12.9936" />
+</meshes>

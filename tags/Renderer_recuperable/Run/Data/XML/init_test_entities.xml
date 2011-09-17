@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Config>
+  <RenderManager resolution="1280 720" position="50 5" fullscreenMode="false"/>
+  
+  <StaticMeshManager>
+    <StaticMeshes xml="Data/XML/StaticMeshes.xml"/>
+    <StaticMeshes xml="Data/Levels/NivellProves/XML/StaticMeshes.xml"/>
+  </StaticMeshManager>
+
+  <AnimatedModelManager>
+    <AnimatedModels xml="Data/XML/AnimatedModels.xml"/>
+  </AnimatedModelManager>
+    
+  <EffectManager xml="Data/XML/Effects.xml"/>
+  <FontManager fontsXML="Data/XML/Fonts.xml"/>
+  <Languages default="cat">
+    <Language languageXML="Data/Language/spanish.xml"/>
+    <Language languageXML="Data/Language/catalan.xml"/>
+    <Language languageXML="Data/Language/english.xml"/>
+  </Languages>
+  <InputManager exclusiveMouse="true" sensitivity="2.0"/>
+  <ActionToInput file="Data/XML/actions_entities.xml"/>
+  
+  <RenderableObjectsManager file="Data/Levels/NivellProves/XML/RenderableObjects.xml">
+  </RenderableObjectsManager>
+  <PortalManager file="./Data/Levels/NivellProves/XML/Portals.xml"/>
+  
+
+  <LightsManager file="Data/Levels/PhysX/XML/Lights.xml"/>
+
+  <SceneEffectManager file="Data/XML/SceneEffects_Viewer.xml"/>
+  
+  <ScriptManager file="Data/XML/Lua.xml"/>
+
+  <LogRender position="10 0"/>
+
+  <GUIManager xml="Data/XML/GUI_test.xml" start="Main.xml" render_mouse="false"/>
+
+  <EmiterCorelManager>
+    <Core file="Data/XML/Emiters.xml"/>
+  </EmiterCorelManager>
+  
+</Config>

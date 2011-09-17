@@ -1,0 +1,16 @@
+<actor name="miner" radius_bs="2.0" pos_bs="0.0 1.0 0.0" effect="cal3d" technique="cal3dTechnique">
+  <skeleton filename="Data/Animated Models/Miner/Skeleton.csf"/>
+  <mesh filename="Data/Animated Models/Miner/Mesh.cmf"/>
+  <material animated="true" vertex_type="787">
+    <texture type="diffusse" filename="Data/Textures/DIF_MINER.tga"/>
+    <!--texture type="normalmap" filename="Data/Textures/normal_eonita.jpg"/-->
+  </material>
+  <animation name="idle" filename="Data/Animated Models/Miner/idle.CAF"/>
+  <animation name="walk" filename="Data/Animated Models/Miner/walk.CAF"/>
+  <animation name="shoot" filename="Data/Animated Models/Miner/shoot.CAF"/>
+  <animation name="impact" filename="Data/Animated Models/Miner/impact.CAF"/>
+  <animation name="dead" filename="Data/Animated Models/Miner/dead.CAF"/>
+  <animation name="cover" filename="Data/Animated Models/Miner/cover.CAF"/>
+  <animation name="coverstatic" filename="Data/Animated Models/Miner/coverstatic.CAF"/>
+
+</actor>

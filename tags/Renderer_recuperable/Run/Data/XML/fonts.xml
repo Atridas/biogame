@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Fonts>
+
+  <font id="arial"    name="Arial"                        file="Data/Fonts/arial.ttf"               size="16" bold="true"   italica="false" default="false" />
+  <font id="xfiles"   name="X-Files"                      file="Data/Fonts/XFILES.TTF"              size="32" bold="false"  italica="false" default="false" />
+  <font id="futurama" name="Futurama Alien Alphabet One"  file="Data/Fonts/fr-fal1-2.ttf"           size="32" bold="false"  italica="false" default="false" />
+  <font id="Annabel"  name="Annabel Script"               file="Data/Fonts/AnnabelScript.ttf"       size="32" bold="false"  italica="false" default="false" />
+  <font id="Slap"     name="SF Slapstick Comic"           file="Data/Fonts/SF Slapstick Comic.ttf"  size="32" bold="false"  italica="false" default="false" />
+  <font id="gui"      name="kk"                           file="Data/Fonts/SF Slapstick Comic.ttf"  size="20" bold="true"   italica="false" default="false" />
+  <font id="Deco"     name="Market Deco"                  file="Data/Fonts/Market_Deco.ttf"         size="20" bold="false"  italica="false" default="false" />
+  <font id="Titania"  name="Titania"                      file="Data/Fonts/Titania-Regular.ttf"     size="20" bold="false"  italica="false" default="false" />
+  
+</Fonts>

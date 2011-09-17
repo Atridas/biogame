@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Lua>
+  <files>
+    <file path="Data/Lua/globals.lua" />
+    <file path="Data/Lua/functions.lua" />
+    <file path="Data/Lua/biogame_gui.lua" />
+    <file path="Data/Lua/triggers_globals.lua" />
+    <file path="Data/Lua/nivell_proves_triggers.lua" />
+    <file path="Data/Lua/nivell_-2_triggers.lua" />
+    <file path="Data/Lua/hangar_triggers.lua" />
+    <file path="Data/Lua/player_states.lua" />
+    <file path="Data/Lua/enemy_constants.lua" />
+    <file path="Data/Lua/soldier_states.lua" />
+    <file path="Data/Lua/enemy_states.lua" />
+    <file path="Data/Lua/door_states.lua" />
+    <file path="Data/Lua/enemy_collisions.lua" />
+    
+    <file path="Data/Lua/test.lua" />
+  </files>
+  <initscripts>
+    <script action="CORE                          = get_core()"/>
+    <script action="CONSOLE                       = CORE:get_console()"/>
+    
+    <script action="RENDERABLE_OBJECTS_MANAGER    = CORE:get_renderable_objects_manager()"/>
+    <script action="ROM                           = CORE:get_renderable_objects_manager()"/>
+    
+    <script action="STATIC_MESH_MANAGER           = CORE:get_static_mesh_manager()"/>
+    <script action="SMM                           = CORE:get_static_mesh_manager()"/>
+
+    <script action="LIGHT_MANAGER                 = CORE:get_light_manager()"/>
+    <script action="LM                            = CORE:get_light_manager()"/>
+
+    <script action="SCRIPT_MANAGER                = CORE:get_script_manager()"/>
+    <script action="SM                            = CORE:get_script_manager()"/>
+
+    <script action="INPUT_MANAGER                 = CORE:get_input_manager()"/>
+    <script action="IM                            = CORE:get_input_manager()"/>
+
+    <script action="ACTION_MANAGER                = CORE:get_action_manager()"/>
+    <script action="AM                            = CORE:get_action_manager()"/>
+
+    <!--<script action="PARTICLE_MANAGER              = CORE:get_particle_manager()"/>
+    <script action="PM                            = CORE:get_particle_manager()"/>-->
+
+    <script action="SOUND_MANAGER                 = CORE:get_sound_manager()"/>
+    <script action="SOUND                         = CORE:get_sound_manager()"/>
+
+    <script action="ENTITY_MANAGER                = CORE:get_entity_manager()"/>
+    <script action="EM                            = CORE:get_entity_manager()"/>
+    
+    <script action="GUI_MANAGER                   = CORE:get_gui_manager()"/>
+    
+    <script action="IA_MANAGER                    = CORE:get_ia_manager()"/>
+    <script action="IA                            = CORE:get_ia_manager()"/>
+  </initscripts>
+</Lua>

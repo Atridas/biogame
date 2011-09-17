@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<GameObjectManager>
+	<GameObject name="Habitacio3" Physx="true" PhysxType="mesh" RenderableObject="Habitacio3" PhysxActor="Habitacio3" Pushable="false" Body="0" />
+	<GameObject name="Habitacio2" Physx="true" PhysxType="mesh" RenderableObject="Habitacio2" PhysxActor="Habitacio2" Pushable="false" Body="0" />
+	<GameObject name="CaixaPetita00" Physx="true" PhysxType="BoundingBox" RenderableObject="CaixaPetita00" PhysxActor="CaixaPetita00" Pushable="true" Body="1" />
+	<GameObject name="CaixaGrossa00" Physx="true" PhysxType="BoundingBox" RenderableObject="CaixaGrossa00" PhysxActor="CaixaGrossa00" Pushable="true" Body="1" />
+	<GameObject name="CaixaPetita01" Physx="true" PhysxType="BoundingBox" RenderableObject="CaixaPetita01" PhysxActor="CaixaPetita01" Pushable="true" Body="1" />
+	<GameObject name="CaixaPetita02" Physx="true" PhysxType="BoundingBox" RenderableObject="CaixaPetita02" PhysxActor="CaixaPetita02" Pushable="true" Body="1" />
+	<GameObject name="CaixaPetita03" Physx="true" PhysxType="BoundingBox" RenderableObject="CaixaPetita03" PhysxActor="CaixaPetita03" Pushable="true" Body="1" />
+	<GameObject name="CaixaPetita04" Physx="true" PhysxType="BoundingBox" RenderableObject="CaixaPetita04" PhysxActor="CaixaPetita04" Pushable="true" Body="1" />
+	<GameObject name="CaixaGrossa01" Physx="true" PhysxType="BoundingBox" RenderableObject="CaixaGrossa01" PhysxActor="CaixaGrossa01" Pushable="true" Body="1" />
+	<GameObject name="CaixaPetita05" Physx="true" PhysxType="BoundingBox" RenderableObject="CaixaPetita05" PhysxActor="CaixaPetita05" Pushable="true" Body="1" />
+	<GameObject name="CaixaPetita06" Physx="true" PhysxType="BoundingBox" RenderableObject="CaixaPetita06" PhysxActor="CaixaPetita06" Pushable="true" Body="1" />
+	<GameObject name="Wall" Physx="true" PhysxType="BoundingBox" RenderableObject="Wall" PhysxActor="Wall" Pushable="true" Body="1" />                     
+	<GameObject name="CaixaGrossa02" Physx="true" PhysxType="BoundingBox" RenderableObject="CaixaGrossa02" PhysxActor="CaixaGrossa02" Pushable="true" Body="1" />
+	<GameObject name="CaixaGrossa03" Physx="true" PhysxType="BoundingBox" RenderableObject="CaixaGrossa03" PhysxActor="CaixaGrossa03" Pushable="true" Body="1" />
+	<GameObject name="CaixaPetita08" Physx="true" PhysxType="BoundingBox" RenderableObject="CaixaPetita08" PhysxActor="CaixaPetita08" Pushable="true" Body="1" />
+	<GameObject name="CaixaGrossa04" Physx="true" PhysxType="BoundingBox" RenderableObject="CaixaGrossa04" PhysxActor="CaixaGrossa04" Pushable="true" Body="1" />
+	<GameObject name="CaixaPetita09" Physx="true" PhysxType="BoundingBox" RenderableObject="CaixaPetita09" PhysxActor="CaixaPetita09" Pushable="true" Body="1" />
+	<GameObject name="CaixaPetita10" Physx="true" PhysxType="BoundingBox" RenderableObject="CaixaPetita10" PhysxActor="CaixaPetita10" Pushable="true" Body="1" />
+	<GameObject name="CaixaPetita11" Physx="true" PhysxType="BoundingBox" RenderableObject="CaixaPetita11" PhysxActor="CaixaPetita11" Pushable="true" Body="1" />
+	<GameObject name="Llum" Physx="true" PhysxType="BoundingBox" RenderableObject="Llum" PhysxActor="Llum" Pushable="false" Body="1" />                     1
+	<GameObject name="CaixaPetita12" Physx="true" PhysxType="BoundingBox" RenderableObject="CaixaPetita12" PhysxActor="CaixaPetita12" Pushable="true" Body="1" />
+	<GameObject name="CaixaPetita13" Physx="true" PhysxType="BoundingBox" RenderableObject="CaixaPetita13" PhysxActor="CaixaPetita13" Pushable="true" Body="1" />
+	<GameObject name="BoxGlow" Physx="true" PhysxType="BoundingBox" RenderableObject="BoxGlow" PhysxActor="BoxGlow" Pushable="true" Body="1" />
+	<GameObject name="BoxNormal" Physx="true" PhysxType="BoundingBox" RenderableObject="BoxNormal" PhysxActor="BoxNormal" Pushable="true" Body="1" />
+	<GameObject name="BoxAlpha" Physx="true" PhysxType="BoundingBox" RenderableObject="BoxAlpha" PhysxActor="BoxAlpha" Pushable="true" Body="1" />
+	<GameObject name="BoxSpecular" Physx="true" PhysxType="BoundingBox" RenderableObject="BoxSpecular" PhysxActor="BoxSpecular" Pushable="true" Body="1" />
+	<GameObject name="BoxAlpha01" Physx="true" PhysxType="BoundingBox" RenderableObject="BoxAlpha01" PhysxActor="BoxAlpha01" Pushable="true" Body="1" />
+	<GameObject name="Habitacio1" Physx="true" PhysxType="mesh" RenderableObject="Habitacio1" PhysxActor="Habitacio1" Pushable="false" Body="0" />
+	<GameObject name="BoxParallax" Physx="true" PhysxType="BoundingBox" RenderableObject="BoxParallax" PhysxActor="BoxParallax" Pushable="true" Body="1" />
+	<GameObject name="BoxGlowAlpha" Physx="true" PhysxType="BoundingBox" RenderableObject="BoxGlowAlpha" PhysxActor="BoxGlowAlpha" Pushable="true" Body="1" />
+</GameObjectManager>

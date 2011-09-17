@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Windows OnLoadWindows=""
+         OnSaveWindows=""
+         OnUpdateWindows="">
+
+  
+  <Image name="Menu_Background" posx="0.00" posy="0.00" height="100.00" width="100.0" visible="true" active="true"
+       default="img1" OnLoadValue="" OnSaveValue="" flip="" backGround="true">
+    <texture name="img1" name_texture="./Data/Textures/GUI/background.png"/>
+    <texture name="img2" name_texture="./Data/Textures/GUI/main_menu_background.jpg"/>
+  </Image>
+  
+  <Button name="Play" posx="37.00" posy="28.00" height="8.00" width="15.00" visible="true" active="true" 
+          texture_normal=       "./Data/Textures/GUI/play_normal.png"
+          texture_over=         "./Data/Textures/GUI/play_over.png" 
+          texture_clicked=      "./Data/Textures/GUI/play_normal.png"
+          texture_deactivated=  "./Data/Textures/GUI/play_over.png" 
+          OnClickedAction="gui_init_game()" 
+          OnOverAction=""/>
+          
+  <Button name="Exit" posx="37.00" posy="48.00" height="8.00" width="15.00" visible="true" active="true" 
+          texture_normal=       "./Data/Textures/GUI/Exit_normal.png"
+          texture_over=         "./Data/Textures/GUI/Exit_over.png" 
+          texture_clicked=      "./Data/Textures/GUI/Exit_normal.png"
+          texture_deactivated=  "./Data/Textures/GUI/Exit_over.png" 
+          OnClickedAction="gui_exit_game()" 
+          OnOverAction=""/>
+  
+</Windows>

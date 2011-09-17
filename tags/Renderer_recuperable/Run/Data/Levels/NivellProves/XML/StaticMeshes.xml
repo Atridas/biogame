@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<meshes>
+	<mesh name="proves_Habitacio3" path="Data/Meshes/proves_Habitacio3.mesh" max="66.8544 3.45273 49.6658" min="28.5196 0.0 -49.6658" />
+	<mesh name="proves_Habitacio2" path="Data/Meshes/proves_Habitacio2.mesh" max="28.6901 3.43498 49.6613" min="-38.1287 -0.629509 -49.6526" />
+	<mesh name="proves_CaixaPetita00" path="Data/Meshes/proves_CaixaPetita00.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
+	<mesh name="proves_CaixaGrossa00" path="Data/Meshes/proves_CaixaGrossa00.mesh" max="1.0 1.5 1.0" min="-1.0 0.0 -1.0" />
+	<mesh name="proves_CaixaPetita01" path="Data/Meshes/proves_CaixaPetita01.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
+	<mesh name="proves_CaixaPetita02" path="Data/Meshes/proves_CaixaPetita02.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
+	<mesh name="proves_CaixaPetita03" path="Data/Meshes/proves_CaixaPetita03.mesh" max="0.683012 1.0 0.683013" min="-0.683014 0.0 -0.683013" />
+	<mesh name="proves_CaixaPetita04" path="Data/Meshes/proves_CaixaPetita04.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
+	<mesh name="proves_CaixaGrossa01" path="Data/Meshes/proves_CaixaGrossa01.mesh" max="1.0 1.5 1.0" min="-1.0 0.0 -1.0" />
+	<mesh name="proves_CaixaPetita05" path="Data/Meshes/proves_CaixaPetita05.mesh" max="0.683012 1.0 0.683013" min="-0.683012 0.0 -0.683013" />
+	<mesh name="proves_CaixaPetita06" path="Data/Meshes/proves_CaixaPetita06.mesh" max="0.683012 1.0 0.683013" min="-0.683014 0.0 -0.683013" />
+	<mesh name="proves_Wall" path="Data/Meshes/proves_Wall.mesh" max="0.642471 3.97046 2.7743" min="-0.642471 0.0 -2.7743" />
+	<mesh name="proves_CaixaGrossa02" path="Data/Meshes/proves_CaixaGrossa02.mesh" max="1.0 1.5 1.0" min="-1.0 0.0 -1.0" />
+	<mesh name="proves_CaixaGrossa03" path="Data/Meshes/proves_CaixaGrossa03.mesh" max="1.17266 1.5 1.17265" min="-1.17265 0.0 -1.17265" />
+	<mesh name="proves_CaixaPetita08" path="Data/Meshes/proves_CaixaPetita08.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
+	<mesh name="proves_CaixaGrossa04" path="Data/Meshes/proves_CaixaGrossa04.mesh" max="1.14473 1.5 1.14473" min="-1.14473 0.0 -1.14473" />
+	<mesh name="proves_CaixaPetita09" path="Data/Meshes/proves_CaixaPetita09.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
+	<mesh name="proves_CaixaPetita10" path="Data/Meshes/proves_CaixaPetita10.mesh" max="0.569984 1.0 0.569985" min="-0.569984 0.0 -0.569985" />
+	<mesh name="proves_CaixaPetita11" path="Data/Meshes/proves_CaixaPetita11.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
+	<mesh name="proves_Llum" path="Data/Meshes/proves_Llum.mesh" max="1.5527 2.0 0.842842" min="-1.5527 0.606994 -0.842842" />
+	<mesh name="proves_CaixaPetita12" path="Data/Meshes/proves_CaixaPetita12.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
+	<mesh name="proves_CaixaPetita13" path="Data/Meshes/proves_CaixaPetita13.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
+	<mesh name="proves_CaixaPetita14" path="Data/Meshes/proves_CaixaPetita14.mesh" max="0.664463 1.0 0.664463" min="-0.664463 0.0 -0.664463" />
+	<mesh name="proves_CaixaPetita15" path="Data/Meshes/proves_CaixaPetita15.mesh" max="0.664463 1.0 0.664463" min="-0.664463 0.0 -0.664463" />
+	<mesh name="proves_CaixaPetita16" path="Data/Meshes/proves_CaixaPetita16.mesh" max="0.664463 1.0 0.664463" min="-0.664463 0.0 -0.664463" />
+	<mesh name="proves_BoxGlow" path="Data/Meshes/proves_BoxGlow.mesh" max="5.74997 3.83127 4.91517" min="-5.74997 -0.771546 -4.37566" />
+	<mesh name="proves_BoxNormal" path="Data/Meshes/proves_BoxNormal.mesh" max="5.74997 3.10692 4.44316" min="-5.74997 0.0 -4.44316" />
+	<mesh name="proves_BoxAlpha" path="Data/Meshes/proves_BoxAlpha.mesh" max="2.86737 3.10692 4.44316" min="-2.86737 0.0 -4.44316" />
+	<mesh name="proves_BoxSpecular" path="Data/Meshes/proves_BoxSpecular.mesh" max="5.74997 3.10692 4.44316" min="-5.74997 0.0 -4.44316" />
+	<mesh name="proves_BoxAlpha01" path="Data/Meshes/proves_BoxAlpha01.mesh" max="2.86737 3.10692 4.44316" min="-2.86737 0.0 -4.44316" />
+	<mesh name="proves_Habitacio1" path="Data/Meshes/proves_Habitacio1.mesh" max="-38.1271 3.45273 49.6658" min="-66.8544 0.0 -49.6658" />
+	<mesh name="proves_BoxParallax" path="Data/Meshes/proves_BoxParallax.mesh" max="6.43416 3.10692 5.37413" min="-6.43416 0.0 -5.37413" />
+	<mesh name="proves_BoxGlowAlpha" path="Data/Meshes/proves_BoxGlowAlpha.mesh" max="5.72809 3.59624 4.44316" min="-5.99887 -0.501143 -4.44316" />
+	<mesh name="proves_BoxReflection" path="Data/Meshes/proves_BoxReflection.mesh" max="0.5 1.0 0.5" min="-0.5 0.0 -0.5" />
+	<mesh name="proves_TeteraPickUp" path="Data/Meshes/proves_TeteraPickUp.mesh" max="0.288996 0.265549 0.168602" min="-0.252905 0.0 -0.168602" />
+	<mesh name="proves_EsferaInteractiva" path="Data/Meshes/proves_EsferaInteractiva.mesh" max="0.251547 0.251546 0.251547" min="-0.251547 -0.251546 -0.251547" />
+	<mesh name="proves_EsferaDestructible" path="Data/Meshes/proves_EsferaDestructible.mesh" max="0.251547 0.251546 0.251547" min="-0.251547 -0.251546 -0.251547" />
+	<mesh name="proves_EsferaDestructible01" path="Data/Meshes/proves_EsferaDestructible01.mesh" max="0.251546 0.251546 0.251547" min="-0.251546 -0.251546 -0.251547" />
+	<mesh name="proves_EsferaDestructible02" path="Data/Meshes/proves_EsferaDestructible02.mesh" max="0.251546 0.251546 0.251547" min="-0.251546 -0.251546 -0.251547" />
+</meshes>

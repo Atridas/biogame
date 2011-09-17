@@ -1,0 +1,453 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{ee37027d-224a-4da1-90f1-7d6183deccc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ScriptedStateMachine">
+      <UniqueIdentifier>{dce18fb9-8713-45a7-9ed8-7aa372441619}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem">
+      <UniqueIdentifier>{31371ca7-252d-4b80-82a7-15e00a685721}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components">
+      <UniqueIdentifier>{7edf2a8a-3fb3-4167-8ebb-c0648f680b8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\Component3rdPSCamera">
+      <UniqueIdentifier>{4c659c11-6c6c-4331-b80a-6989d147dce1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentObject3D">
+      <UniqueIdentifier>{70bb2498-4de9-48c7-8ade-33dc159a33fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentPhysXController">
+      <UniqueIdentifier>{48735945-4a40-47e9-b996-1336c150102f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentPlayerController">
+      <UniqueIdentifier>{42f1b943-eb42-4882-a91b-88e6e156a311}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\EntityManager">
+      <UniqueIdentifier>{39da934c-176c-443b-8956-5ba463ad5e16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentMovement">
+      <UniqueIdentifier>{32195c11-2c3d-4bd1-95da-c65c1970b228}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentRenderableObject">
+      <UniqueIdentifier>{7f7dea5e-8134-40cc-ad32-cf66ab93171b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentIAWalkToPlayer">
+      <UniqueIdentifier>{6217f4e8-cc45-4ca5-a7bd-853b47b854ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\GameEntity">
+      <UniqueIdentifier>{2819fc5f-6384-412c-8068-8524ed25ce86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\EntitiesToLua">
+      <UniqueIdentifier>{604b0f2e-e76d-4658-9d99-b2c40b51ab51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentPhysXActor">
+      <UniqueIdentifier>{a472c37a-cd85-40a9-a921-3bdd53371dea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentTrigger">
+      <UniqueIdentifier>{4960b2dd-9849-4cec-b553-9ca9e8c9a774}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentVida">
+      <UniqueIdentifier>{ac9ab43b-9dc5-4698-8448-b7be319f31d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentLaser">
+      <UniqueIdentifier>{b9f7e52f-6856-457f-931b-007d23436f0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentStateMachine">
+      <UniqueIdentifier>{2219db10-2e44-4e7d-942a-c2e23e3e8597}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentAnimation">
+      <UniqueIdentifier>{25a80eb2-c540-47f4-acbc-6ad117b3f517}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentIABrain">
+      <UniqueIdentifier>{5142ecb9-e959-442c-ba78-8bac9075a33b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentRagdoll">
+      <UniqueIdentifier>{65730fd3-8119-4cb5-baba-15f6f57433e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentCover">
+      <UniqueIdentifier>{2a7fe0ef-08cf-465c-ac3a-344df96f5cdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentCover\ComponentLowCover">
+      <UniqueIdentifier>{fe424e2e-4b09-4b7b-861b-511fa1c78177}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentCover\ComponentHighCover">
+      <UniqueIdentifier>{c41180ce-ab1c-4228-8046-7f7d0bcadad8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentMirilla">
+      <UniqueIdentifier>{1d39df22-570d-4b0d-abd3-657f9c270861}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentPhysXActor\ComponentPhysXBox">
+      <UniqueIdentifier>{a9c09e6a-5b85-4558-92fb-c38a3c5567dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentPhysXActor\ComponentPhysXMesh">
+      <UniqueIdentifier>{b5251dd6-e9f1-484c-b681-42323275fa90}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentDoor">
+      <UniqueIdentifier>{17c5f82b-1ae6-45b6-bfb6-436203f6d74f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentShield">
+      <UniqueIdentifier>{dfbe7cd2-b786-4549-846a-cd1e982bce13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentArma">
+      <UniqueIdentifier>{2b277006-1f47-4faa-a605-a972e96bc134}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentInteractive">
+      <UniqueIdentifier>{4a0e7c8b-d341-4af1-a5bf-accbb116df95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentDestroyable">
+      <UniqueIdentifier>{781de273-ef3b-46cc-b989-142dfce9beab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\PhysXTriggerEntityController">
+      <UniqueIdentifier>{6e93f928-016e-4dd3-b175-8e254b892348}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentNavNode">
+      <UniqueIdentifier>{7a237d76-f374-44d6-bfdc-1ad7514f87f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IAShit">
+      <UniqueIdentifier>{938509a0-8d48-47fb-9825-cc7c15a231f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IAShit\Grafs">
+      <UniqueIdentifier>{c652030f-faa7-46f0-a5ee-142c49841b03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IAShit\Grafs\A%2a">
+      <UniqueIdentifier>{25923e21-a69a-435b-b8ae-8a286d9042d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IAShit\IAManager">
+      <UniqueIdentifier>{c4fdf07b-f049-446c-9299-356321394b91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\PhysXCollisionEntityController">
+      <UniqueIdentifier>{cd45921c-cc96-4a40-89f7-9c9d34600bda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentCollisionReport">
+      <UniqueIdentifier>{6c59f69d-3e4b-485c-9a82-5c7af81b271b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentEmiter">
+      <UniqueIdentifier>{51189221-de1c-4b6a-a261-fa1be5ad108c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentSpawner">
+      <UniqueIdentifier>{1315c314-9b6c-4e34-b81b-94121d4b33bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentLifetime">
+      <UniqueIdentifier>{5ef374c5-b3e3-4481-bdf5-34742313c41f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentExplosive">
+      <UniqueIdentifier>{a9108874-b4df-48b0-b5df-7f1e09e3dc5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentBillboard">
+      <UniqueIdentifier>{2c9a171a-f477-41ea-9b8f-580367a76b99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentRotative">
+      <UniqueIdentifier>{f9550e12-a06c-4654-a0fc-191e11f6c9a3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectManager.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentPhysXController.cpp">
+      <Filter>EntitySystem\Components\ComponentPhysXController</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptedStateMachine.cpp">
+      <Filter>ScriptedStateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="SparseGraph.cpp">
+      <Filter>IAShit\Grafs</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphDefines.cpp">
+      <Filter>IAShit\Grafs</Filter>
+    </ClCompile>
+    <ClCompile Include="SearchAStar.cpp">
+      <Filter>IAShit\Grafs\A%2a</Filter>
+    </ClCompile>
+    <ClCompile Include="Heuristics.cpp">
+      <Filter>IAShit\Grafs\A%2a</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentPlayerController.cpp">
+      <Filter>EntitySystem\Components\ComponentPlayerController</Filter>
+    </ClCompile>
+    <ClCompile Include="Component3rdPSCamera.cpp">
+      <Filter>EntitySystem\Components\Component3rdPSCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>EntitySystem\EntityManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentPhysXBox.cpp">
+      <Filter>EntitySystem\Components\ComponentPhysXActor\ComponentPhysXBox</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentMovement.cpp">
+      <Filter>EntitySystem\Components\ComponentMovement</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentRenderableObject.cpp">
+      <Filter>EntitySystem\Components\ComponentRenderableObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentPhysXMesh.cpp">
+      <Filter>EntitySystem\Components\ComponentPhysXActor\ComponentPhysXMesh</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentIAWalkToPlayer.cpp">
+      <Filter>EntitySystem\Components\ComponentIAWalkToPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEntity.cpp">
+      <Filter>EntitySystem\GameEntity</Filter>
+    </ClCompile>
+    <ClCompile Include="EntitiesToLua.cpp">
+      <Filter>EntitySystem\EntitiesToLua</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentPhysXActor.cpp">
+      <Filter>EntitySystem\Components\ComponentPhysXActor</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentTrigger.cpp">
+      <Filter>EntitySystem\Components\ComponentTrigger</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXTriggerEntityController.cpp">
+      <Filter>EntitySystem\Components\PhysXTriggerEntityController</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentVida.cpp">
+      <Filter>EntitySystem\Components\ComponentVida</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentLaser.cpp">
+      <Filter>EntitySystem\Components\ComponentLaser</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityLoader.cpp">
+      <Filter>EntitySystem\EntityManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentStateMachine.cpp">
+      <Filter>EntitySystem\Components\ComponentStateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentAnimation.cpp">
+      <Filter>EntitySystem\Components\ComponentAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentIABrain.cpp">
+      <Filter>EntitySystem\Components\ComponentIABrain</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentRagdoll.cpp">
+      <Filter>EntitySystem\Components\ComponentRagdoll</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentLowCover.cpp">
+      <Filter>EntitySystem\Components\ComponentCover\ComponentLowCover</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentCover.cpp">
+      <Filter>EntitySystem\Components\ComponentCover</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentMirilla.cpp">
+      <Filter>EntitySystem\Components\ComponentMirilla</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentHighCover.cpp">
+      <Filter>EntitySystem\Components\ComponentCover\ComponentHighCover</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentDoor.cpp">
+      <Filter>EntitySystem\Components\ComponentDoor</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentShield.cpp">
+      <Filter>EntitySystem\Components\ComponentShield</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentArma.cpp">
+      <Filter>EntitySystem\Components\ComponentArma</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentInteractive.cpp">
+      <Filter>EntitySystem\Components\ComponentInteractive</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseComponent.cpp">
+      <Filter>EntitySystem\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentDestroyable.cpp">
+      <Filter>EntitySystem\Components\ComponentDestroyable</Filter>
+    </ClCompile>
+    <ClCompile Include="IAManger.cpp">
+      <Filter>IAShit\IAManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentNavNode.cpp">
+      <Filter>EntitySystem\Components\ComponentNavNode</Filter>
+    </ClCompile>
+    <ClCompile Include="IAToLua.cpp">
+      <Filter>IAShit</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysXCollisionEntityController.cpp">
+      <Filter>EntitySystem\Components\PhysXCollisionEntityController</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentCollisionReport.cpp">
+      <Filter>EntitySystem\Components\ComponentCollisionReport</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentEmiter.cpp">
+      <Filter>EntitySystem\Components\ComponentEmiter</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentSpawner.cpp">
+      <Filter>EntitySystem\Components\ComponentSpawner</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentLifetime.cpp">
+      <Filter>EntitySystem\Components\ComponentLifetime</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentBillboard.cpp">
+      <Filter>EntitySystem\Components\ComponentBillboard</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentExplosive.cpp">
+      <Filter>EntitySystem\Components\ComponentExplosive</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentRotative.cpp">
+      <Filter>EntitySystem\Components\ComponentRotative</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameObjectManager.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ScriptedStateMachine.h">
+      <Filter>ScriptedStateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EntityDefines.h">
+      <Filter>EntitySystem</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentObject3D.h">
+      <Filter>EntitySystem\Components\ComponentObject3D</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentPhysXController.h">
+      <Filter>EntitySystem\Components\ComponentPhysXController</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphNode.h">
+      <Filter>IAShit\Grafs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphDefines.h">
+      <Filter>IAShit\Grafs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GraphEdge.h">
+      <Filter>IAShit\Grafs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SparseGraph.h">
+      <Filter>IAShit\Grafs</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SearchAStar.h">
+      <Filter>IAShit\Grafs\A%2a</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Heuristics.h">
+      <Filter>IAShit\Grafs\A%2a</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentPlayerController.h">
+      <Filter>EntitySystem\Components\ComponentPlayerController</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Component3rdPSCamera.h">
+      <Filter>EntitySystem\Components\Component3rdPSCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EntityManager.h">
+      <Filter>EntitySystem\EntityManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentPhysXBox.h">
+      <Filter>EntitySystem\Components\ComponentPhysXActor\ComponentPhysXBox</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentMovement.h">
+      <Filter>EntitySystem\Components\ComponentMovement</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentRenderableObject.h">
+      <Filter>EntitySystem\Components\ComponentRenderableObject</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentPhysXMesh.h">
+      <Filter>EntitySystem\Components\ComponentPhysXActor\ComponentPhysXMesh</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentIAWalkToPlayer.h">
+      <Filter>EntitySystem\Components\ComponentIAWalkToPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GameEntity.h">
+      <Filter>EntitySystem\GameEntity</Filter>
+    </ClInclude>
+    <ClInclude Include="include\EntitiesToLua.h">
+      <Filter>EntitySystem\EntitiesToLua</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentPhysXActor.h">
+      <Filter>EntitySystem\Components\ComponentPhysXActor</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentTrigger.h">
+      <Filter>EntitySystem\Components\ComponentTrigger</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PhysXTriggerEntityController.h">
+      <Filter>EntitySystem\Components\PhysXTriggerEntityController</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentVida.h">
+      <Filter>EntitySystem\Components\ComponentVida</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentLaser.h">
+      <Filter>EntitySystem\Components\ComponentLaser</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentStateMachine.h">
+      <Filter>EntitySystem\Components\ComponentStateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentAnimation.h">
+      <Filter>EntitySystem\Components\ComponentAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentIABrain.h">
+      <Filter>EntitySystem\Components\ComponentIABrain</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentRagdoll.h">
+      <Filter>EntitySystem\Components\ComponentRagdoll</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentLowCover.h">
+      <Filter>EntitySystem\Components\ComponentCover\ComponentLowCover</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentCover.h">
+      <Filter>EntitySystem\Components\ComponentCover</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentMirilla.h">
+      <Filter>EntitySystem\Components\ComponentMirilla</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentHighCover.h">
+      <Filter>EntitySystem\Components\ComponentCover\ComponentHighCover</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentDoor.h">
+      <Filter>EntitySystem\Components\ComponentDoor</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentShield.h">
+      <Filter>EntitySystem\Components\ComponentShield</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentArma.h">
+      <Filter>EntitySystem\Components\ComponentArma</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentInteractive.h">
+      <Filter>EntitySystem\Components\ComponentInteractive</Filter>
+    </ClInclude>
+    <ClInclude Include="include\BaseComponent.h">
+      <Filter>EntitySystem\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentDestroyable.h">
+      <Filter>EntitySystem\Components\ComponentDestroyable</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IAManager.h">
+      <Filter>IAShit\IAManager</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentNavNode.h">
+      <Filter>EntitySystem\Components\ComponentNavNode</Filter>
+    </ClInclude>
+    <ClInclude Include="include\IAToLua.h">
+      <Filter>IAShit</Filter>
+    </ClInclude>
+    <ClInclude Include="include\PhysXCollisionEntityController.h">
+      <Filter>EntitySystem\Components\PhysXCollisionEntityController</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentCollisionReport.h">
+      <Filter>EntitySystem\Components\ComponentCollisionReport</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentEmiter.h">
+      <Filter>EntitySystem\Components\ComponentEmiter</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentSpawner.h">
+      <Filter>EntitySystem\Components\ComponentSpawner</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentLifetime.h">
+      <Filter>EntitySystem\Components\ComponentLifetime</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentExplosive.h">
+      <Filter>EntitySystem\Components\ComponentExplosive</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentBillboard.h">
+      <Filter>EntitySystem\Components\ComponentBillboard</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentRotative.h">
+      <Filter>EntitySystem\Components\ComponentRotative</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

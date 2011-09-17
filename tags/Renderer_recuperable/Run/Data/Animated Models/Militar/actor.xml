@@ -1,0 +1,25 @@
+<actor name="Militar" radius_bs="2.0" pos_bs="0.0 1.0 0.0" effect="cal3d" technique="cal3dTechnique">
+  <skeleton filename="Data/Animated Models/Militar/skeleton.csf"/>
+  <mesh filename="Data/Animated Models/Militar/mesh.cmf"/>
+  <material animated="true" vertex_type="787">
+    <texture type="diffusse" filename="Data/Textures/uW_MILITAR.tga"/>
+    <!--<texture type="normalmap" filename="Data/Textures/NRM_Complet.tga"/>
+    <texture type="glow" filename="Data/Textures/glow_personatge2.tga"/>
+    <property type="glowIntensity" value="2.0" />-->
+  </material>
+  <animation name="idle" filename="Data/Animated Models/Militar/idle.CAF"/>
+  <animation name="apuntar" filename="Data/Animated Models/Militar/apunta.CAF"/>
+  <animation name="shoot" filename="Data/Animated Models/Militar/shoot.CAF"/>
+  <animation name="impact" filename="Data/Animated Models/Militar/impact.CAF"/>
+  <animation name="dead" filename="Data/Animated Models/Militar/dead.CAF"/>
+  <animation name="run" filename="Data/Animated Models/Militar/run.CAF"/>
+  <animation name="walk" filename="Data/Animated Models/Militar/run.CAF"/>
+  <animation name="CoverDown" filename="Data/Animated Models/Militar/coverDown.CAF"/>
+  <animation name="CoverDownRight" filename="Data/Animated Models/Militar/coverDownRight.CAF"/>
+  <animation name="CoverDownRightIdle" filename="Data/Animated Models/Militar/coverDownRightIdle.CAF"/>
+  <animation name="CoverDownLeft" filename="Data/Animated Models/Militar/coverDownLeft.CAF"/>
+  <animation name="CoverDownLeftIdle" filename="Data/Animated Models/Militar/coverDownLeftIdle.CAF"/>
+  <animation name="CoverDownIdle" filename="Data/Animated Models/Militar/coverDownIdle.CAF"/>
+  
+  
+</actor>

@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Biotest.cpp" />
+    <ClCompile Include="EntityProcess.cpp" />
+    <ClCompile Include="IAProcess.cpp" />
+    <ClCompile Include="mainTest.cpp" />
+    <ClCompile Include="ParticleProcess.cpp" />
+    <ClCompile Include="ParticleViewerProcess.cpp" />
+    <ClCompile Include="PhysXProcess.cpp" />
+    <ClCompile Include="SoundTestProcess.cpp" />
+    <ClCompile Include="TestProcess.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Biotest.h" />
+    <ClInclude Include="EntityProcess.h" />
+    <ClInclude Include="IAProcess.h" />
+    <ClInclude Include="ParticleProcess.h" />
+    <ClInclude Include="ParticleViewerProcess.h" />
+    <ClInclude Include="PhysXProcess.h" />
+    <ClInclude Include="SoundTestProcess.h" />
+    <ClInclude Include="TestProcess.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\Run\Data\Levels\NivellProves\XML\GameEntities.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\..\..\Run\Data\Levels\NivellProves\XML\GameObjects.xml" />
+    <None Include="..\..\..\Run\Data\XML\actions_entities.xml" />
+    <None Include="..\..\..\Run\Data\XML\actions_physx.xml" />
+    <None Include="..\..\..\Run\Data\XML\Billboard.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\Explosions.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\init_test.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\init_test_entities.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\init_test_ia.xml" />
+    <None Include="..\..\..\Run\Data\XML\init_test_particulas.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\init_test_physx.xml" />
+    <None Include="..\..\..\Run\Data\XML\Particles.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\SceneEffects_Test.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\SceneEffects_Viewer.xml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\..\..\Run\Data\XML\ScenneEffects_PhysX.xml" />
+    <None Include="..\..\..\Run\Data\XML\test.xml" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{52606329-0594-4B34-879A-B11B8787A7F1}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Test</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)Bin\</OutDir>
+    <IntDir>$(SolutionDir)Bin\Intermediate_d\$(ProjectName)\</IntDir>
+    <TargetName>$(ProjectName)_d</TargetName>
+    <IncludePath>C:\Archivos de programa\Microsoft DirectX SDK %28June 2010%29\Include;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;C:\Archivos de programa\Microsoft DirectX SDK %28August 2009%29\Include;E:\Archivos de programa\Microsoft DirectX SDK (August 2009)\Include;$(IncludePath);c:\Archivos de programa\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Foundation\include;C:\Archivos de programa\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Foundation\include;C:\Archivos de programa\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\NxCharacter\include;C:\Archivos de programa\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Physics\include;C:\Archivos de programa\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\PhysXLoader\include;C:\Archivos de programa\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Cooking\include;D:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Foundation\include;D:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\NxCharacter\include;D:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Physics\include;D:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\PhysXLoader\include;D:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Cooking\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Foundation\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\NxCharacter\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Physics\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\PhysXLoader\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Cooking\include</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;C:\Archivos de programa\Microsoft DirectX SDK %28August 2009%29\Lib\x86;D:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\lib\Win32;E:\Archivos de programa\Microsoft DirectX SDK %28August 2009%29\Lib\x86;C:\Archivos de programa\Microsoft DirectX SDK %28June 2010%29\Lib\x86;C:\Archivos de programa\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\lib\Win32;$(LibraryPath);C:\Program Files(x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\lib\Win32;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\lib\Win32</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)Bin\</OutDir>
+    <IntDir>$(SolutionDir)Bin\Intermediate\$(ProjectName)\</IntDir>
+    <IncludePath>C:\Archivos de programa\Microsoft DirectX SDK %28June 2010%29\Include;C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;C:\Archivos de programa\Microsoft DirectX SDK %28August 2009%29\Include;E:\Archivos de programa\Microsoft DirectX SDK (August 2009)\Include;$(IncludePath);c:\Archivos de programa\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Foundation\include;C:\Archivos de programa\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Foundation\include;C:\Archivos de programa\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\NxCharacter\include;C:\Archivos de programa\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Physics\include;C:\Archivos de programa\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\PhysXLoader\include;C:\Archivos de programa\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Cooking\include;D:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Foundation\include;D:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\NxCharacter\include;D:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Physics\include;D:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\PhysXLoader\include;D:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Cooking\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Foundation\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\NxCharacter\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Physics\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\PhysXLoader\include;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\Cooking\include</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;C:\Archivos de programa\Microsoft DirectX SDK %28August 2009%29\Lib\x86;D:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\lib\Win32;E:\Archivos de programa\Microsoft DirectX SDK %28August 2009%29\Lib\x86;C:\Archivos de programa\Microsoft DirectX SDK %28June 2010%29\Lib\x86;C:\Archivos de programa\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\lib\Win32;$(LibraryPath);C:\Program Files(x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\lib\Win32;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\lib\Win32;C:\Program Files (x86)\NVIDIA Corporation\NVIDIA PhysX SDK\v2.8.1\SDKs\lib\Win32</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\Input\include;$(SolutionDir)Engine\Graphics\include;$(SolutionDir)Engine\Core\include;$(SolutionDir)Engine\Base\include;$(SolutionDir)3rdParty\libxml2-2.7.2.win32\include;$(SolutionDir)3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)Engine\GUI\include;$(SolutionDir)Engine\PhysX\include;$(SolutionDir)Engine\Utilities\include;$(SolutionDir)Engine\Sound\include;$(SolutionDir)3rdParty\cal3d-0.11rc2\src</AdditionalIncludeDirectories>
+      <TreatWarningAsError>true</TreatWarningAsError>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)Bin\lib\;$(SolutionDir)3rdParty\BASS\lib;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>bass.lib;Sound_d.lib;Utilities_d.lib;PhysXLoader.lib;NxCooking.lib;NxCharacter.lib;LuaBind_d.lib;Lua_d.lib;cal3d_d.lib;Graphics_d.lib;Core_d.lib;GUI_d.lib;Base_d.lib;Input_d.lib;d3dx9d.lib;d3d9.lib;d3dxof.lib;dxguid.lib;dinput8.lib;xinput.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;winmm.lib;Winmm.lib;%(AdditionalDependencies);PhysX_d.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)Engine\Input\include;$(SolutionDir)Engine\Graphics\include;$(SolutionDir)Engine\Core\include;$(SolutionDir)Engine\Base\include;$(SolutionDir)3rdParty\libxml2-2.7.2.win32\include;$(SolutionDir)3rdParty\iconv-1.9.2.win32\include;$(SolutionDir)Engine\GUI\include;$(SolutionDir)Engine\PhysX\include;$(SolutionDir)Engine\Utilities\include;$(SolutionDir)Engine\Sound\include;$(SolutionDir)3rdParty\cal3d-0.11rc2\src</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)Bin\lib\;$(SolutionDir)3rdParty\BASS\lib;</AdditionalLibraryDirectories>
+      <AdditionalDependencies>bass.lib;Sound.lib;Utilities.lib;PhysXLoader.lib;NxCooking.lib;NxCharacter.lib;LuaBind.lib;Lua.lib;GUI.lib;cal3d.lib;Graphics.lib;Core.lib;Base.lib;Input.lib;d3dx9.lib;d3d9.lib;d3dxof.lib;dxguid.lib;dinput8.lib;xinput.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies);Winmm.lib;PhysX.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

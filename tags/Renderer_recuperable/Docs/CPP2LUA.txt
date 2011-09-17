@@ -1,0 +1,1704 @@
+GLOBALS
+  Methods:
+    log
+    void LogTextLua(const string)
+    
+    exit
+    void CloseConsole()
+    
+    get_core
+    CCore* GetCore()
+    
+    get_collision_group
+    int GetCollisionGroup(const string& _szGroup)
+
+  Class:
+			Vect2f
+			Vect2f
+			
+			Constructor:
+				constructor<>()
+				constructor<const Vect2f&>()
+				constructor<const float>()
+				constructor<const float, const float>()
+			
+			Methods:
+				length
+				T Length() const
+				
+				length_sq
+				T SquaredLength() const
+				
+				normalize
+				Vector2<T>& Normalize(const T tk = One<T>())
+			
+			Operators:
+				const_self    + const_self
+				const_self    - const_self
+				const_self    * const_self
+				const_self    * float
+				float   		  * const_self
+				const_self    / float
+			
+			Attributes:
+				x
+				Vect2f::x
+				
+				y
+				Vect2f::y
+  
+  Class:
+			Vect2i
+			Vect2i
+			
+			Constructor:
+				constructor<>()
+				constructor<const Vect2i&>()
+				constructor<const int>()
+				constructor<const int, const int>()
+			
+			Methods:
+				length
+				T Length() const
+				
+				length_sq
+				T SquaredLength() const
+			
+			Operators:
+				const_self    + const_self
+				const_self    - const_self
+				const_self    * const_self
+				const_self    * int
+				int      		  * const_self
+				const_self    / int
+			
+			Attributes:
+				x
+				Vect2i::x
+				
+				y
+				Vect2i::y
+  
+  Class:
+    Vect3f
+    Vect3f
+    
+    Constructor:
+      constructor<>()
+      constructor<const Vect3f&>()
+      constructor<const float>()
+      constructor<const float, const float, const float>()
+      
+    Methods:
+      length
+      T Length() const
+      
+      length_sq
+      T SquaredLength() const
+      
+      normalize
+      Vector3<T>& Normalize(const T tk = One<T>())
+      
+      get_proj_zx
+      Vector2<T> GetProjZX() const
+      
+      get_angle_y
+      T GetAngleY() const
+      
+    Operators:    
+      const_self    + const_self
+      const_self    - const_self
+      const_self    * const_self
+      const_self    ^ const_self
+      const_self    * float
+      float         * const_self
+      const_self    / float
+    
+    Attributes:
+      x
+      Vect3f::x
+      
+      y
+      Vect3f::y
+      
+      z
+      Vect3f::z
+      
+  Class:
+    Vect3i
+    Vect3i
+    
+    Constructor:
+      constructor<>()
+      constructor<const Vect3i&>()
+      constructor<const int>()
+      constructor<const int, const int, const int>()
+      
+    Methods:
+      length
+      T Length() const
+      
+      length_sq
+      T SquaredLength() const
+      
+    Operators:    
+      const_self    + const_self
+      const_self    - const_self
+      const_self    * const_self
+      const_self    ^ const_self
+      const_self    * int
+      int           * const_self
+      const_self    / int
+    
+    Attributes:
+      x
+      Vect3i::x
+      
+      y
+      Vect3i::y
+      
+      z
+      Vect3i::z
+	
+
+  Class:
+    Vect3fVector
+    vector<Vect3f>
+    
+    Methods:
+      size
+      size()
+
+      at
+      Vect3f& at(int i)
+
+      const_at
+      const Vect3f& at(int i) const
+
+ENGINE
+  GETTERS DE MANAGERS:
+      CORE
+      CONSOLE
+      RENDERABLE_OBJECTS_MANAGER / ROM
+      STATIC_MESH_MANAGER / SMM
+      LIGHT_MANAGER / LM
+      SCRIPT_MANAGER / SM
+      INPUT_MANAGER / IM
+      ACTION_MANAGER / AM
+      PARTICLE_MANAGER / PM
+      SOUND_MANAGER / SOUND
+      ENTITY_MANAGER / EM
+      IA_MANAGER / IA
+      GUI_MANAGER
+      ENGINE
+	
+  BASE:
+    Class:
+      Object3D
+      CObject3D
+      
+      Constructor:
+        constructor<>()
+        constructor<Vect3f,float,float,float>()
+        
+      Methods:
+        get_yaw
+        float GetYaw() const
+        
+        get_roll
+        float GetRoll() const
+        
+        get_pitch
+        float GetPitch() const
+        
+        get_position
+        const Vect3f& GetPosition() const
+        
+        get_visible
+        bool GetVisible() const
+        
+        set_yaw
+        void SetYaw(float _fYaw)
+        
+        set_roll
+        void SetRoll(float _fRoll)
+        
+        set_pitch
+        void SetPitch(float _fPitch)
+        
+        set_position
+        void SetPosition(const Vect3f& _vPos)
+        
+        set_visible
+        void SetVisible(bool _bVisible)
+        
+        set_active
+        void SetActive(bool _bActive)
+  
+    Class:
+      BaseControl
+      CBaseControl
+    
+    Methods:
+      is_ok
+      bool IsOk() const
+      
+      Done
+      void Done() const
+      
+  CORE
+    Class:
+      Core
+      CCore
+      
+      Methods:
+        get_renderable_objects_manager
+        CRenderableObjectsManager* GetRenderableObjectsManager() const
+        
+        get_console
+        CConsole* GetConsole() const
+        
+        get_gui_manager
+        CGUIManager* GetGUIManager() const
+        
+        get_light_manager
+        CLightManager* GetLightManager() const
+        
+        get_static_mesh_manager
+        CStaticMeshManager* GetStaticMeshManager() const
+        
+        get_engine
+        CEngine* GetEngine() const
+        
+        get_script_manager
+        CScriptManager* GetScriptManager() const
+        
+        get_input_manager
+        CInputManager* GetInputManager() const
+        
+        get_action_manager
+        CActionManager* GetActionManager() const
+        
+        get_particle_manager
+        CParticleManager* GetParticleManager() const
+        
+        get_sound_manager
+        CSoundManager* GetSoundManager() const
+        
+        get_entity_manager
+        CEntityManager* GetEntityManager() const
+        
+        get_ia_manager
+        CIAManager* GetIAManager() const
+        
+    Class:
+      Process
+      CProcess
+      
+    Class:
+      Engine
+      CEngine
+      
+      Methods:
+        get_active_process
+        CProcess* GetActiveProcess() const
+        
+        set_exit
+        void SetExit(bool _bExit)
+        
+        get_exit
+        bool GetExit() const
+  
+  GRAPHICS
+    Class:
+      RenderableObjectMapManager
+      CMapManager<CRenderableObject>
+      
+    Class:
+      RenderableObjectsManager
+      CRenderableObjectsManager
+      
+      Methods:
+        get_resource
+        T* GetResource(const std::string &_szName)
+        
+        add_static
+        CRenderableObject* AddMeshInstance(const string& _szCoreMeshName, const string& _szInstanceName)
+        
+        add_animated
+        CRenderableObject* AddAnimatedModel(const string& _szCoreModelName, const string& _szInstanceName)
+        
+        add_resource
+        void AddResource(const string& _szName, CRenderableObject* _pRenderableObject)
+        
+        set_instanced
+        void SetInstanced(bool _bInstanced)
+        
+        reload
+        bool Reload()
+        
+        reload_file
+        bool Reload(const string& _szFileName)
+        
+    Class:
+      StaticMeshMapManager
+      CMapManager<CStaticMesh>
+      
+    Class:
+      StaticMeshManager
+      CStaticMeshManager
+      
+      Methods:
+        add_file
+        void AddXMLFile(const string &_szFileName)
+        
+        reload
+        bool Reload()
+        
+    Class:
+      RenderableObject
+      CRenderableObject
+    
+    Class:
+      InstanceMesh
+      CInstanceMesh
+      
+    Class:
+      AnimatedInstance
+      CRenderableAnimatedInstance
+      
+    Class:
+      LightMapManager
+      CMapManager<CLight>
+      
+    Class:
+      LightManager
+      CLightManager
+      
+      Methods:
+        load
+        bool Load(const string& _szFileName)
+        
+    Class:
+      ScriptManager
+      CScriptManager
+      
+      Methods:
+        reload
+        void Reload()
+        
+    Class:
+      ParticleManager
+      CParticleManager
+      
+      Methods:
+        reload
+        bool Reload()
+        
+        load
+        bool Load(const string& _szFileName)
+        
+  SOUND  
+    Class:
+      SoundManager
+      CSoundManager
+      
+      Methods:
+        play_sample
+        void PlaySample(const string& _szSample)
+        
+        play_sample_3D
+        void PlaySample3D(const string& _szSample, Vect3f _vPosition)
+        
+        change_music
+        void ChangeMusic(const string& _szMusic, unsigned long _ulFadeOutTimeMs, bool _bRestart = true)
+        
+        play_music
+        void PlayMusic(const string& _szMusic, bool _bRestart = true)
+        
+        set_music_position_3D
+        void SetMusic3DPosition(const string& _szMusic, const Vect3f& _vSoundEmmiterPosition)
+        
+        stop_all
+        void StopAll()
+        
+        stop_musics
+        void StopMusics()
+        
+        stop_sounds
+        void StopSounds()
+        
+        set_master_volume
+        void SetMasterVolume(float _fVolume)
+        
+        pause_music
+        void Pause(const string& _szMusic)
+        
+        resume_music
+        void Resume(const string& _szMusic)
+        
+        fade_music_volume
+        void FadeMusicVolume(const string& _szMusic, float _fVolume, unsigned long _iTimeMs)
+      
+  INPUT
+    Class:
+      InputManager
+      CInputManager
+      
+      Methods:
+        get_mouse_delta
+        const Vect3i& GetMouseDelta()
+        
+    Class:
+      ActionManager
+      CActionManager
+      
+      Methods:
+        is_action_active
+        bool IsActionActive(const string& _szActionName)
+    
+	GUI
+    Class:
+      Console
+      CConsole
+      
+      Methods:
+        toggle
+        void Toggle()
+        
+		Class:
+			CGUIManager
+			CGUIManager
+			
+			Constructor:
+				constructor<const Vect2i&>()
+        
+			Methods:
+				activeWindows
+				void ActiveWindows(const std::string& inNameWindow)
+				
+				activeWindowsWithEffect
+				void ActiveWindowsWithEffect(const std::string& inNameWindow, EtypeTransitionEffect type, float transitionTime )
+				
+				pushWindows
+				void PushWindows(const std::string& inNameWindow)
+				
+				popWindows
+				void PopWindows()
+				
+				setScreenResolution
+				void SetScreenResolution(const Vect2i& resolution)
+				
+				loadGuiFiles
+				bool LoadGuiFiles(const std::string& pathWindows)
+				
+				reloadGui
+				void ReloadGuiFiles()
+				
+				setMessageBox
+				void SetMessageBox(const std::string& text)
+				
+				isVisibleMessage
+				bool IsVisibleMessage() const
+				
+				setVisiblePointerMouse
+				void SetVisiblePointerMouse(bool flag)
+				
+				setActiveGuiElement
+				void SetActiveGuiElement(const std::string& inNameGuiElement, bool flag)
+				
+				setVisibleGuiElement
+				void SetVisibleGuiElement(const std::string& inNameGuiElement, bool flag)
+				
+				getProgressBarValue
+				bool GetProgressBarValue(const std::string& inNameGuiElement, float& outValue)
+				
+				setProgressBarValue
+				bool SetProgressBarValue(const std::string& inNameGuiElement, float inValue)
+				
+				nextBlockInRadioBox
+				bool NextBlockInRadioBox(const std::string& inNameRadioBox)
+				
+				prevBlockInRadioBox
+				bool PrevBlockInRadioBox(const std::string& inNameRadioBox)
+				
+				getButtonCheckInRadioBox
+				std::string GetButtonCheckInRadioBox(const std::string& inNameRadioBox)
+				
+				setButtonCheckInRadioBox
+				void SetButtonCheckInRadioBox(const std::string& inNameRadioBox, const std::string& button)
+				
+				setStateCheckButton
+				void SetStateCheckButton(const std::string& inCheckButtonName, bool state)
+				
+				getStateCheckButton
+				bool GetStateCheckButton(const std::string& inCheckButtonName)
+				
+				setStateSlider
+				void SetStateSlider(const std::string& inSliderName, float amount)
+				
+				getStateSlider
+				float GetStateSlider(const std::string& inSliderName)
+				
+				setLiteralInStaticText
+				void SetLiteralInStaticText(const std::string& inStaticText, const std::string& lit)
+				
+				setEditableTextBox
+				void SetEditableTextBox(const std::string& inEditableTextName, const std::string& text)
+				
+				getEditableTextBox
+				std::string GetEditableTextBox(const std::string& inEditableTextName)
+				
+				setImage
+				void SetImage(const std::string& inImageName, const std::string& activeImage)
+				
+				getImage
+				std::string GetImage(const std::string& inImageName)
+				
+				playImage
+				void PlayImage(const std::string& inImageName, float timePerImage, bool loop)
+		
+ENTITIES
+  Class:
+    EventInfo
+    SEventInfo
+    
+    Enum:
+      int
+      SEventInfo::INT
+      
+      float
+      SEventInfo::FLOAT
+      
+      vector
+      SEventInfo::VECTOR
+      
+      string
+      SEventInfo::STRING
+      
+      pointer
+      SEventInfo::PTR
+    
+    Methods:
+      set_str
+      void SetStr(const char* _cInput)
+    
+    Attributes:
+      Type
+      enum { INT, FLOAT, VECTOR, STRING, PTR } Type
+      
+      i
+      SEventInfo::i
+      
+      f
+      SEventInfo::f
+      
+      v
+      SEventInfo::v
+      
+      str
+      SEventInfo::str
+      
+      ptr
+      SEventInfo::ptr
+      
+  Class:
+    Event
+    SEvent
+    
+    Enum:
+      rebre_impacte
+      SEvent::REBRE_IMPACTE
+      
+      morir
+      SEvent::MORIR
+      
+      obrir
+      SEvent::OBRIR
+      
+      tancar
+      SEvent::TANCAR
+      
+      pickup
+      SEvent::PICKUP
+      
+      interaccio
+      SEvent::INTERACCIO
+      
+    Methods:
+      get_info
+      SEventInfo GetInfo(int _iIndex) const
+      
+      set_info
+      void SetInfo(int _iIndex, SEventInfo _Info)
+      
+    Attributes:
+      sender
+      SEvent::Sender
+      
+      receiver
+      SEvent::Receiver
+      
+      msg
+      SEvent::Msg
+      
+      dispatch_time
+      SEvent::DispatchTime
+      
+  Class:
+    BaseComponent
+    CBaseComponent
+    
+    Enum:
+      object_3d
+      CBaseComponent::ECT_OBJECT_3D
+      
+      movement
+      CBaseComponent::ECT_MOVEMENT
+      
+      rotative
+      CBaseComponent::ECT_ROTATIVE
+      
+      player_controller
+      CBaseComponent::ECT_PLAYER_CONTROLLER
+      
+      ia_walk_to_player
+      CBaseComponent::ECT_IA_WALK_TO_PLAYER
+      
+      physx_controller
+      CBaseComponent::ECT_PHYSX_CONTROLLER
+      
+      physx_actor
+      CBaseComponent::ECT_PHYSX_ACTOR
+      
+      renderable_object
+      CBaseComponent::ECT_RENDERABLE_OBJECT
+      
+      thps_camera
+      CBaseComponent::ECT_3RD_PERSON_SHOOTER_CAMERA
+      
+      trigger
+      CBaseComponent::ECT_TRIGGER
+      
+      vida
+      CBaseComponent::ECT_VIDA
+      
+      laser
+      CBaseComponent::ECT_LASER
+      
+      state_machine
+      CBaseComponent::ECT_STATE_MACHINE
+      
+      animation
+      CBaseComponent::ECT_ANIMATION
+      
+      ia_brain
+      CBaseComponent::ECT_IA_BRAIN
+      
+      ragdoll
+      CBaseComponent::ECT_RAGDOLL
+      
+      cover
+      CBaseComponent::ECT_COVER
+      
+      mirilla
+      CBaseComponent::ECT_MIRILLA
+      
+      door
+      CBaseComponent::ECT_DOOR
+      
+      shield
+      CBaseComponent::ECT_SHIELD
+      
+      interactive
+      CBaseComponent::ECT_INTERACTIVE
+      
+      destroyable
+      CBaseComponent::ECT_DESTROYABLE
+      
+      nav_node
+      CBaseComponent::ECT_NAV_NODE
+      
+      emiter
+      CBaseComponent::ECT_EMITER
+      
+      spawner
+      CBaseComponent::ECT_SPAWNER
+      
+      explosive
+      CBaseComponent::ECT_EXPLOSIVE
+      
+    Methods:
+      get_type
+      Type GetType()
+      
+      get_entity
+      CGameEntity* GetEntity() const
+      
+      is_type
+      bool IsType(Type _Type)
+      
+      receive_event
+      void ReceiveEvent(const SEvent& _Event)
+      
+  Class:
+    GameEntity
+    CGameEntity
+    
+    Methods:
+      get_guid
+      int GetGUID() const
+      
+      get_component
+      T* GetComponent(CBaseComponent::Type _type) const
+      
+      get_name
+      string GetName() const
+      
+      delete_component
+      void DeleteComponent(CBaseComponent::Type _type)
+      
+  Class:
+    EntityManager
+    CEntityManager
+    
+    Methods:
+      create_entity
+      CGameEntity* CreateEntity()
+      
+      set_name_from_id
+      bool SetName(const string&,int)
+      
+      set_name
+      bool SetName(const string&,const CGameEntity*)
+      
+      get_entity
+      CGameEntity* GetEntity(int) const
+      
+      get_entity
+      CGameEntity* GetEntity(const string&) const
+      
+      get_entity_from_name
+      CGameEntity* GetEntity(const string&) const
+      
+      remove_entity_from_id
+      void RemoveEntity(int)
+      
+      remove_entity
+      void RemoveEntity(int)
+      
+      remove_entity
+      void RemoveEntity(const CGameEntity*)
+      
+      send_event
+      void SendEvent(const SEvent& _Event)
+      
+      get_event
+      SEvent GetEvent()
+      
+      load_entities
+      void LoadEntitiesFromXML(const string& _szFile)
+      
+      init_player
+      CGameEntity* InitPlayer(const string& _szEntityName, const Vect3f& _vPosition, float _fYaw)
+      
+      init_enemy
+      CGameEntity* InitEnemy(const string& _szPlayerName, const Vect3f& _vPosition, float _fRadius, const string& _szInitialState, const string& _szRenderableModel, const string& _szRagdollModell, const string& _szEntityName = "", const string& _szOnDeathScript = "")
+      
+      init_miner
+      CGameEntity* InitMiner(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName = "", const bool _bActive = true, const string& _szOnDeathScript = "")
+      
+      init_militar
+      CGameEntity* InitMilitar(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName = "", const bool _bActive = true, const string& _szOnDeathScript = "")
+      
+      init_emiter
+      CGameEntity* InitParticles(const string& _szCore, const Vect3f& _vPos, const Vect3f& _vSize, float _fTime = 0, const Vect3f& _vYdir = Vect3f(0,1,0))
+      
+      init_trigger_with_emiter
+      CGameEntity* InitTriggerWithParticles(const string& _szCore, const Vect3f& _vPos, const Vect3f& _vSize, uint32 _uiCollisionMask, const string& _szOnEnter = "", const string& _szOnExit = "", float _fTime = 0, const Vect3f& _vYdir = Vect3f(0,1,0))
+      
+      init_pickup
+      CGameEntity* InitPickUp(const string& _szName, const string& _szCore, const Vect3f& _vPos, const string& _szOnPickUp)
+      
+  Class:
+    ComponentObject3D
+    CComponentObject3D
+    
+    Methods:
+      add_to_entity
+      static CComponentObject3D* AddToEntity(CGameEntity *_pEntity)
+      
+      get_position
+      const Vect3f&	GetPosition() const
+      
+  Class:
+    ComponentPlayerController
+    CComponentPlayerController
+    
+    Methods:
+      add_to_entity
+      static CComponentPlayerController* AddToEntity(CGameEntity *_pEntity)
+      
+      shoot
+      void Shoot()
+      
+      force
+      void Force()
+      
+      cover
+      bool Cover()
+      
+      use
+      void Use()
+      
+      die
+      void Die()
+      
+      respawn
+      void Respawn()
+      
+      has_pickup
+      bool HasPickUp(const string& _szPickUp)
+      
+      add_pickup
+      void AddPickUp(const string& _szPickUp)
+      
+      remove_pickup
+      bool RemovePickUp(const string& _szPickUp)
+      
+    Attributes:
+      pos_inicial
+      CComponentPlayerController::m_vPosInicial
+      
+      speed
+      CComponentPlayerController::m_fSpeed
+      
+      current_animation
+      CComponentPlayerController::m_szCurrentAnimation
+      
+      time
+      CComponentPlayerController::m_fTime
+      
+      cover_normal
+      CComponentPlayerController::m_vCoverNormal
+      
+      cover_position
+      CComponentPlayerController::m_vCoverPosition
+      
+      cover_entity
+      CComponentPlayerController::m_pCoverEntity
+      
+  Class:
+    Component3rdPSCamera
+    CComponent3rdPSCamera
+    
+    Methods:
+      add_to_entity
+      static CComponent3rdPSCamera* AddToEntity(CGameEntity *_pEntity, float _fCameraHeight, float _fCameraRight, float _fZoom)
+      
+    Attributes:
+      camera_height
+      CComponent3rdPSCamera::m_fCameraHeight
+      
+      camera_right
+      CComponent3rdPSCamera::m_fCameraRight
+      
+  Class:
+    ComponentPhysXController
+    CComponentPhysXController
+    
+    Methods:
+      add_to_entity
+      static CComponentPhysXController* AddToEntity(CGameEntity *_Entity, float radius, float height, float slope, float skinwidth, float stepOffset, uint32 _iCollisionGroup)
+      
+      set_height
+      void SetHeight(float _fHeight)
+      
+      set_position_from_ragdoll
+      void SetPositionFromRagdoll()
+      
+  Class:
+    ComponentPhysXBox
+    CComponentPhysXBox
+    
+    Methods:
+      add_to_entity
+      static CComponentPhysXBox* AddToEntity(CGameEntity *_pEntity, float _fDensity, int _iCollisionGroup)
+      
+      add_to_entity
+      static CComponentPhysXBox* AddToEntity(CGameEntity *_pEntity, float _fSizeX, float _fSizeY, float _fSizeZ, float _fPosX , float _fPosY , float _fPosZ, float _fDensity, int _iCollisionGroup)
+      
+      activate
+      void Activate(bool _bActivate)
+      
+      set_position
+      void SetPosition(Vect3f _vPos);
+      
+      get_position
+      Vect3f GetPosition();
+      
+  Class:
+    ComponentRenderableObject
+    CComponentRenderableObject
+    
+    Methods:
+      add_to_entity
+      static CComponentRenderableObject* AddToEntity(CGameEntity *_pEntity, const string& _szName, const string& _szCore)
+      
+      add_to_entity_with_animated_model
+      static CComponentRenderableObject* AddToEntityWithAnimatedModel(CGameEntity *_pEntity, const string& _szName, const string& _szCore)
+      
+      set_yaw
+      void SetYaw(float _fYaw)
+      
+    Attributes:
+      remove_renderable_object
+      CComponentRenderableObject::m_bRemoveRenderableObject
+      
+      block_yaw
+      CComponentRenderableObject::m_bBlockYaw
+      
+  Class:
+    ComponentMovement
+    CComponentMovement
+    
+    Methods:
+      add_to_entity
+      static CComponentMovement* AddToEntity(CGameEntity *_pEntity)
+      
+    Attributes:
+      movement
+      CComponentMovement::m_vMovement
+      
+  Class:
+    ComponentAnimation
+    CComponentAnimation
+    
+    Methods:
+      add_to_entity
+      static CComponentAnimation* AddToEntity(CGameEntity* _pEntity)
+      
+      play
+      void Play(const string& _szAnimation, float _fBlend, float _fWeight = 1.0f, bool _bLockEnd = false)
+      
+      stop
+      void Stop(const string& _szAnimation)
+      
+      play_cycle
+      void PlayCycle(const string& _szAnimation, float _fBlendTime)
+      
+      stop_cycle
+      void StopCycle(const string& _szAnimation, float _fBlendTime)
+      
+      clear_cycle
+      void ClearCycle(float _fBlend)
+      
+      clear_cycle
+      void ClearCycle(const string& _szAnimation, float _fBlend)
+      
+      clear_all_cycles
+      void ClearAllCycles(float _fBlend)
+      
+  Class:
+    ComponentStateMachine
+    CComponentStateMachine
+    
+    Methods:
+      add_to_entity
+      static CComponentStateMachine* AddToEntity(CGameEntity* _pEntity, const string& _pEstatInicial)
+      
+      get_state_machine
+      CScriptedStateMachine* GetStateMachine()
+      
+  Class:
+    ComponentIABrain
+    CComponentIABrain
+    
+    Methods:
+      add_to_entity
+      static CComponentIABrain* AddToEntity(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript = "")
+      
+      shoot
+      void Shoot()
+      
+      die
+      void Die()
+      
+      plan_path_to_cobertura
+      bool PlanPathToCobertura();
+      
+      get_next_node_position
+      Vect3f GetNextNodePosition() const;
+      
+      arrived_at_destination
+      bool ArrivedAtDestination() const;
+      
+      arrived_at_node
+      bool ArrivedAtNode() const;
+      
+      set_next_node
+      void SetNextNode();
+  
+    Attributes:
+      player
+      CComponentIABrain::m_pPlayer
+      
+      time
+      CComponentIABrain::m_fTime
+      
+      shooted
+      CComponentIABrain::m_bShooted
+      
+  Class:
+    ComponentVida
+    CComponentVida
+    
+    Methods:
+      add_to_entity
+      static CComponentVida* AddToEntity(CGameEntity* _pEntity, float _fVidaInicial, float _fVidaMaxima, bool _bRegen = false, float _fRegenAmount = 0.0f, float _fTimeForRegen = 5.0f)
+      
+      get_hp
+      float GetHP()
+      
+      increase
+      void Increase(float _fAmount)
+      
+      Decrease
+      void Decrease(float _fAmount)
+      
+      set
+      void Set(float _fAmount)
+      
+      set_regen
+      void SetRegen(float _fRegenAmount)
+      
+      add_dot
+      void AddDoT(float _fDamagePerSecond, float _fDoTTime)
+      
+      add_hot
+      void AddHoT(float _fHealPerSecond, float _fHoTTime)
+      
+    Attributes:
+      
+  Class:
+    ComponentShield
+    CComponentShield
+    
+    Methods:
+      add_to_entity
+      static CComponentShield* AddToEntity(CGameEntity* _pEntity, float _fHP, float _fMaxHP, float _fRegenAmount = 2.0f, float _fCooldown = 5.0f)
+      
+      get_hp
+      float GetHP()
+      
+      increase
+      void Increase(float _fAmount)
+      
+      decrease
+      float Decrease(float _fAmount)
+      
+      set
+      void Set(float _fAmount)
+      
+      set_regen
+      void SetRegen(float _fRegenAmount)
+      
+      activate
+      bool Activate()
+      
+      deactivate
+      void Deactivate()
+      
+      is_active
+      bool IsActive()
+      
+      is_ready
+      bool IsReady()
+      
+  Class:
+    ComponentRagdoll
+    CComponentRagdoll
+    
+    Methods:
+      add_to_entity
+      static CComponentRagdoll* AddToEntity(CGameEntity* _pEntity, const string& _szSkeletonFile, int _iCollisionGroup)
+      
+      apply_physics
+      void ApplyPhysics(bool _bActive)
+      
+      get_position
+      Vect3f GetPosition()
+      
+  Class:
+    ComponentMirilla
+    CComponentMirilla
+    
+    Methods:
+
+  
+  Class:
+    ComponentCover
+    CComponentCover
+    
+    Enum:
+      cover_low
+      CComponentCover::COVER_LOW
+      
+      cover_high
+      CComponentCover::COVER_HIGH
+    
+    Methods:
+      get_cover_type
+      COVER_TYPE GetCoverType()
+      
+  Class:
+    ComponentHighCover
+    CComponentHighCover
+    
+    Methods:
+      get_cover_type
+      COVER_TYPE GetCoverType()
+      
+  Class:
+    ComponentLowCover
+    CComponentLowCover
+    
+    Methods:
+      get_cover_type
+      COVER_TYPE GetCoverType()
+      
+  Class:
+    ComponentDoor
+    CComponentDoor
+    
+    Methods:
+      add_to_entity
+      static CComponentDoor* AddToEntity(CGameEntity *_pEntity, bool _bOpen, const float _fOpenTime = 2.0f, const float _fCloseTime = 0.5f)
+      
+      is_open
+      bool IsOpen()
+      
+      open
+      bool Open()
+      
+      close
+      bool Close()
+      
+      block
+      void Block(bool _bBlock)
+      
+      get_open_time
+      float GetOpenTime()
+      
+      get_close_time
+      float GetCloseTime()
+      
+    Attributes:
+      time
+      CComponentDoor::m_fTime
+      
+  Class:
+    ComponentNavNode
+    CComponentNavNode
+    
+    Methods:
+      add_to_entity
+      static CComponentNavNode* AddToEntity(CGameEntity* _pEntity, bool _bAutoroute = true, float _fMaxAutoDistance = -1.f, const set<string>& _DefaultEdges = set<string>())
+      
+      get_graph_node_index
+      int GetGraphNodeIndex() const
+      
+  Class:
+    ComponentEmiter
+    CComponentEmiter
+    
+    Methods:
+      add_to_entity
+      static ComponentEmiter* AddToEntity(CGameEntity* _pEntity, const string& _szCore, const Vect3f& _vVolume)
+      
+      change_core
+      void ChangeCore(const string& _szCore)
+      
+      change_volume
+      void ChangeVolume(const Vect3f& _vVolume)
+  Class:
+    ComponentSpawner
+    CComponentSpawner
+    
+    Enum:
+      enemy_militar
+      CComponentSpawner::EE_MILITAR
+      
+      enemy_miner
+      CComponentSpawner::EE_MINER
+    
+    Methods:
+      add_to_entity
+      static CComponentSpawner* AddToEntity(CGameEntity* _pEntity, bool _bActive, float _fSpawnTime, int _iMaxEnemy, EEnemyType _EnemyType)
+      
+      get_enemy_type
+      EEnemyType GetEnemyType()
+      
+      set_enemy_type
+      void SetEnemyType(EEnemyType _Type)
+      
+    Attributes:
+      active
+      CComponentSpawner::m_bActive
+      
+  Class:
+    ComponentExplosive
+    CComponentExplosive
+    
+    Methods:
+      add_to_entity
+      static CComponentDestroyable* AddToEntity(CGameEntity* _pEntity)
+      
+      explode
+      void Explode(Vect3f _vOrigin,float _fRadius)
+      
+  Class:
+    ComponentRotative
+    CComponentRotative
+    
+    Methods:
+      add_to_entity
+      static CComponentRotative* AddToEntity(CGameEntity *_pEntity, const Vect3f& _vRotation)
+    
+    Attributes:
+      rotation
+      CComponentRotative::m_vRotation
+
+IA
+  Globals:
+    Methods:
+      valid_neighbour
+      bool ValidNeighbour(int x, int y, int NumCellsX, int NumCellsY)
+      
+      GraphHelper_add_all_neigbours_to_grid_node
+      void GraphHelper_AddAllNeighboursToGridNode(CSparseGraph& graph, int row, int col, int NumCellsX, int NumCellsZ)
+      
+      GraphHelper_create_grid
+      void GraphHelper_CreateGrid(CSparseGraph& graph, int czSize, int cxSize, int NumCellsZ, int NumCellsX)
+      
+      get_heuristic_euclid
+      CHeuristicEuclid& GetHeuristicEuclid()
+      
+      get_heuristic_noisy_euclid
+      CHeuristicNoisyEuclidian& GetHeuristicNoisyEuclid()
+      
+      get_heuristic_dijkstra
+      CHeuristicDijkstra& GetHeuristicDijkstra()
+      
+  Class:
+    IAManager
+    CIAManager
+    
+    Methods:
+      get_graph
+      CSparseGraph* GetGraph() const
+      
+      get_closest_node
+      int GetClosestNode(const Vect3f& _vPosition)
+      
+      search_path
+      vector<CGraphNode*> SearchPath(const Vect3f& _vOrigin, const Vect3f& _vDestination)
+      
+      search_path_vec
+      vector<Vect3f> SearchPathVec(const Vect3f& _vOrigin, const Vect3f& _vDestination)
+
+
+  Class:
+    GraphNodeVector
+    vector<CGraphNode*>
+    
+    Methods:
+      size
+      size()
+
+      at
+      CGraphNode* at(int i)
+
+      const_at
+      const CGraphNode* at(int i) const
+      
+  Class:
+    GraphNode
+    CGraphNode
+    
+    Constructor:
+      constructor<>()
+      constructor<int, const Vect3f&>()
+      
+    Methods:
+      get_index
+      int GetIndex() const
+      
+      get_position
+      const Vect3f& GetPosition() const
+      
+      get_entity
+      CGameEntity* GetEntity() const
+      
+      set_index
+      void SetIndex(int _iIndex)
+      
+      set_position
+      void SetPosition(const Vect3f& _vPosition)
+      
+      set_entity
+      void SetEntity(CGameEntity*  _pEntity)
+      
+  Class:
+    GraphEdge
+    CGraphEdge
+    
+    Constructor:
+      constructor<>()
+      constructor<int, int>()
+      constructor<int, int, float>()
+    
+    Methods:
+      get_from
+      int GetFrom() const
+      
+      get_to
+      int GetTo() const
+      
+      get_cost
+      float GetCost() const
+      
+      set_from
+      void SetFrom(int _iFrom)
+      
+      set_to
+      void SetTo(int _iTo)
+      
+      set_cost
+      void SetCost(float _fCost)
+      
+  Class:
+    SparseGraph
+    CSparseGraph
+    
+    Constructor:
+      constructor<bool>()
+      
+    Methods:
+      getnode
+      const CGraphNode& GetNode(int idx) const
+      
+      get_node
+      CGraphNode& GetNode(int idx)
+      
+      get_edge
+      const CGraphEdge& GetEdge(int from, int to)const
+      
+      get_edge
+      CGraphEdge& GetEdge(int from, int to)
+      
+      get_next_free_node_index
+      int GetNextFreeNodeIndex() const
+      
+      add_node
+      int AddNode(const CGraphNode& node)
+      
+      remove_node
+      void RemoveNode(int node)
+      
+      add_edge
+      void AddEdge(const CGraphEdge& edge)
+      
+      remove_edge
+      void RemoveEdge(int from, int to)
+      
+      set_edge_cost
+      void SetEdgeCost(int from, int to, float cost)
+      
+      num_nodes
+      int   NumNodes() const
+      
+      num_active_nodes
+      int NumActiveNodes() const
+      
+      num_edges
+      int NumEdges() const
+      
+      is_digraph
+      bool isDigraph() const
+      
+      is_empty
+      bool isEmpty() const
+      
+      is_node_present
+      bool isNodePresent(int nd) const
+      
+      is_edge_present
+      bool isEdgePresent(int from, int to) const
+      
+      clear
+      void Clear()
+      
+      remove_edges
+      void RemoveEdges()
+      
+  Class:
+    EdgeIterator
+    CSparseGraph::EdgeIterator
+    
+    Constructor:
+      constructor<CSparseGraph&, int>()
+      
+    Methods:
+      begin
+      begin
+      
+      next
+      next
+      
+      end
+      end
+      
+  Class:
+    ConstEdgeIterator
+    CSparseGraph::ConstEdgeIterator
+    
+    Constructor:
+      constructor<CSparseGraph&, int>()
+      
+    Methods:
+      begin
+      CSparseGraph::ConstEdgeIterator::begin
+      
+      next
+      CSparseGraph::ConstEdgeIterator::next
+      
+      end
+      CSparseGraph::ConstEdgeIterator::end
+      
+  Class:
+    NodeIterator
+    CSparseGraph::NodeIterator
+    
+    Constructor:
+      constructor<CSparseGraph&, int>()
+      
+    Methods:
+      begin
+      CSparseGraph::NodeIterator::begin
+      
+      next
+      CSparseGraph::NodeIterator::next
+      
+      end
+      CSparseGraph::NodeIterator::end
+      
+  Class:
+    ConstNodeIterator
+    CSparseGraph::ConstNodeIterator
+    
+    Constructor:
+      constructor<CSparseGraph&, int>()
+      
+    Methods:
+      begin
+      CSparseGraph::ConstNodeIterator::begin
+      
+      next
+      CSparseGraph::ConstNodeIterator::next
+      
+      end
+      CSparseGraph::ConstNodeIterator::end
+    
+  Class:
+    Heuristic
+    CHeuristic
+    
+    Methods:
+      calculate
+      virtual float Calculate(const CSparseGraph& G, int nd1, int nd2) const
+      
+  Class:
+    HeuristicEuclid
+    CHeuristicEuclid
+    
+    Methods:
+      calculate
+      virtual float Calculate(const CSparseGraph& G, int nd1, int nd2) const
+      
+  Class:
+    HeuristicNoisyEuclidian
+    CHeuristicNoisyEuclidian
+    
+    Methods:
+      calculate
+      virtual float Calculate(const CSparseGraph& G, int nd1, int nd2) const
+      
+  Class:
+    HeuristicDijkstra
+    CHeuristicDijkstra
+    
+    Methods:
+      calculate
+      virtual float Calculate(const CSparseGraph& G, int nd1, int nd2) const
+      
+  Class:
+    SearchAStar
+    CSearchAStar
+    
+    Constructor:
+      constructor<const CSparseGraph&, const CHeuristic*, int, int>()
+      
+    Methods:
+      get_SPT
+      std::vector<const CGraphEdge*> GetSPT() const
+      
+      get_path_to_target
+      std::list<int> GetPathToTarget() const
+      
+      get_cost_to_target
+      double GetCostToTarget() const
+      
+  Class:
+    ScriptedStateMachine
+    CScriptedStateMachine
+    
+    Methods:
+      set_current_state
+      void SetCurrentState(const string& s)
+      
+      change_state
+      void  ChangeState(const string& _pNewState)
+      
+      current_state
+      const string& CurrentState() const
+      
+      revert_state
+      void  RevertState()
+      
+      receive_event
+      void ReceiveEvent(const SEvent& _Event)
+
+VIEWER
+  Globals:
+    VIEWER_PROCESS
+    CEngine::GetActiveProcess()
+    
+    VIEWER
+    CViewerProcess::GetViewer()
+    
+  Class:
+    ViewerProcess
+    CViewerProcess
+    
+    Methods:
+      reset_viewer
+      ResetViewer
+      
+      get_viewer
+      GetViewer
+      
+      toggle_normals
+      ToggleNormalRendering
+      
+  Class:
+    Viewer
+    CViewer
+    
+    Enum:
+      FREE
+      CViewer::FREE_MODE
+      
+      MESH
+      CViewer::MESH_MODE
+      
+      ANIMATED
+      CViewer::ANIMATED_MODE
+      
+    Methods:
+      get_current_mode
+      int GetCurrentMode()
+      
+      set_mode
+      void SetMode(EModes _eMode)
+      
+      activate_gui
+      void ActivateGui(bool _bValue)
+      
+      is_gui_active
+      bool IsGuiActive()
+      
+      toggle_boxes
+      void ToggleShowBoxes()
+      
+      toggle_spheres
+      void ToggleShowSpheres()
+      
+      next_mode
+      void SetNextMode()
+      
+      glow_inc_mesh
+      void IncrementGlowMesh()
+      
+      glow_dec_mesh
+      void DecrementGlowMesh()
+      
+      glow_inc_anim
+      void IncrementGlowAnimated()
+      
+      glow_dec_anim
+      void DecrementGlowAnimated()
+      
+      spec_inc_mesh
+      void IncrementSpecMesh()
+      
+      spec_dec_mesh
+      void DecrementSpecMesh()
+      
+      spec_inc_anim
+      void IncrementSpecAnimated()
+      
+      spec_dec_anim
+      void DecrementSpecAnimated()
+      
+      gloss_inc_mesh
+      void IncrementGlossMesh()
+      
+      gloss_dec_mesh
+      void DecrementGlossMesh()
+      
+      gloss_inc_anim
+      void IncrementGlossAnimated()
+      
+      gloss_dec_anim
+      void DecrementGlossAnimated()
+      
+      bump_inc_mesh
+      void IncrementBumpMesh()
+      
+      bump_dec_mesh
+      void DecrementBumpMesh()
+      
+      bump_inc_anim
+      void IncrementBumpAnimated()
+      
+      bump_dec_anim
+      void DecrementBumpAnimated()
+      
+      next_mesh
+      void SelectNextMesh()
+      
+      previous_mesh
+      void SelectPrevMesh()
+      
+      next_model
+      void SelectNextAnimatedModel()
+      
+      previous_model
+      void SelectPrevAnimatedModel()
+      
+      next_animation
+      void SetNextAnimation()
+      
+      previous_animation
+      void SetPrevAnimation()

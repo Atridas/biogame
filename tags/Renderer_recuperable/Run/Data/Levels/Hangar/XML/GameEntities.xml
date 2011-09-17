@@ -1,0 +1,933 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Entities>
+  <Entity name="hangar_Pasarela superior">
+    <Object3D position="0.0162411 7.5308 1.51297e-007" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Pasarela superior" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_gran">
+    <Object3D position="14.9213 0.0 13.9103" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_gran" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_mur divisor">
+    <Object3D position="-3.47563 0.0 1.95046" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_mur divisor" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_mur divisor01">
+    <Object3D position="18.4336 0.0 -6.32987" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_mur divisor01" />
+  </Entity>
+  <Entity name="hangar_mur divisor02">
+    <Object3D position="-3.05295 0.0 3.18323" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_mur divisor02" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_mur divisor03">
+    <Object3D position="2.7577 0.0 5.08249" yaw="15.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_mur divisor03" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_mur divisor04">
+    <Object3D position="3.07745 0.0 3.78974" yaw="15.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_mur divisor04" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_mur divisor05">
+    <Object3D position="6.48966 0.0 -7.04902" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_mur divisor05" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_mur divisor06">
+    <Object3D position="6.46393 0.0 -8.39256" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_mur divisor06" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_mur divisor07">
+    <Object3D position="18.711 0.0 -5.00007" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_mur divisor07" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_container_middle00">
+    <Object3D position="-14.3687 0.0 -13.38" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_container_middle00" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_container_middle03">
+    <Object3D position="-5.22733 0.0 -13.6498" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_container_middle03" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_container">
+    <Object3D position="1.47629 0.0 -8.98209" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_container" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_container_middle06">
+    <Object3D position="-13.5 0.0 13.38" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_container_middle06" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_container_middle07">
+    <Object3D position="-4.50751 0.0 13.0869" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_container_middle07" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_container_middle08">
+    <Object3D position="-15.7403 0.0 5.27324" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_container_middle08" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_container_middle09">
+    <Object3D position="0.551215 0.0 9.33864" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_container_middle09" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_container_low00">
+    <Object3D position="-15.7403 3.0 5.27324" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_container_low00" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_container_middle11">
+    <Object3D position="-8.38531 0.0 0.0576587" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_container_middle11" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_container_middle10">
+    <Object3D position="-22.88 0.0 -6.88" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_container_middle10" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_container_middle05">
+    <Object3D position="-22.88 0.0 -0.164223" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_container_middle05" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_container_middle04">
+    <Object3D position="-8.68073 0.0 -6.25408" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_container_middle04" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_container_middle02">
+    <Object3D position="-25.88 0.0 5.83578" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_container_middle02" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_container_middle01">
+    <Object3D position="-12.8973 0.0 -7.38" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_container_middle01" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_container_low02">
+    <Object3D position="-25.6686 3.0 5.83578" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_container_low02" />
+  </Entity>
+  <Entity name="hangar_container_low01">
+    <Object3D position="-4.5 3.0 -13.0532" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_container_low01" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_gran01">
+    <Object3D position="12.9213 0.0 13.9103" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_gran01" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_gran02">
+    <Object3D position="10.9213 0.0 13.9103" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_gran02" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_gran03">
+    <Object3D position="8.9213 0.0 13.9103" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_gran03" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_gran04">
+    <Object3D position="6.92131 0.0 13.9103" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_gran04" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_gran08">
+    <Object3D position="4.77872 0.0 -13.7384" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_gran08" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_gran09">
+    <Object3D position="6.77872 0.0 -13.7384" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_gran09" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Cables_menjador">
+    <Object3D position="-1.29082 15.1679 14.6748" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Cables_menjador" />
+  </Entity>
+  <Entity name="hangar_Cables_menjador01">
+    <Object3D position="4.71452 10.0604 -14.8264" yaw="5.00896e-006" pitch="5.00896e-006" roll="5.00896e-006" />
+    <RenderableObject animated="false" name="hangar_Cables_menjador01" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita">
+    <Object3D position="11.3987 0.0 6.40991" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita01">
+    <Object3D position="13.6326 1.02004 6.4968" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita01" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita02">
+    <Object3D position="10.4237 1.5 13.4184" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita02" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita03">
+    <Object3D position="14.6384 1.02004 6.32846" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita03" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita04">
+    <Object3D position="14.4603 1.02004 5.33635" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita04" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita05">
+    <Object3D position="6.31659 1.5 -14.0937" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita05" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita06">
+    <Object3D position="5.46037 1.5 -13.5994" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita06" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita07">
+    <Object3D position="6.50865 1.5 -13.0499" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita07" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita08">
+    <Object3D position="13.1389 0.0254238 -5.53956" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita08" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita09">
+    <Object3D position="11.3987 0.0 -6.54926" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita09" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita10">
+    <Object3D position="5.67862 0.0 -2.08973" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita10" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita11">
+    <Object3D position="5.15446 0.0 -1.20977" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita11" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita12">
+    <Object3D position="5.23246 1.0 -1.33719" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita12" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita13">
+    <Object3D position="9.42373 1.5 13.4184" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita13" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita14">
+    <Object3D position="8.42373 1.5 13.4184" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita14" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita15">
+    <Object3D position="12.9299 1.5 13.4184" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita15" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita16">
+    <Object3D position="12.9299 1.5 14.4079" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita16" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita17">
+    <Object3D position="8.42373 1.5 14.4219" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita17" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita18">
+    <Object3D position="9.42373 2.5 13.4184" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita18" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita19">
+    <Object3D position="11.7518 0.0 12.3828" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita19" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita20">
+    <Object3D position="11.7518 1.00415 12.3828" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita20" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_llarga">
+    <Object3D position="15.1278 -0.000228405 -11.6558" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_llarga" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_llarga01">
+    <Object3D position="20.1835 0.0170316 11.6189" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_llarga01" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_llarga02">
+    <Object3D position="19.9165 -0.000228405 9.72705" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_llarga02" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_llarga03">
+    <Object3D position="14.9649 1.49977 13.5732" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_llarga03" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_llarga04">
+    <Object3D position="13.9949 2.49977 13.5732" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_llarga04" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_llarga05">
+    <Object3D position="6.67245 -0.000228405 -0.304627" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_llarga05" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_llarga06">
+    <Object3D position="6.43849 1.25 1.23641" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_llarga06" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_bido_verd">
+    <Object3D position="15.8146 0.0 -10.7229" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_verd" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_toxic" />
+  </Entity>
+  <Entity name="hangar_bido_verd01">
+    <Object3D position="12.1726 0.0 -4.8167" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_verd" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_toxic" />
+  </Entity>
+  <Entity name="hangar_bido_verd02">
+    <Object3D position="11.1278 0.0 7.39667" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_verd" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_toxic" />
+  </Entity>
+  <Entity name="hangar_bido_verd03">
+    <Object3D position="19.6163 0.0 10.4933" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_verd" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_toxic" />
+  </Entity>
+  <Entity name="hangar_Bido_vermell">
+    <Object3D position="3.89436 0.0 3.20539" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_vermell" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_explosiu" />
+    <Explosive />
+  </Entity>
+  <Entity name="hangar_Bido_vermell01">
+    <Object3D position="6.31014 0.0 -6.0589" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_vermell" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_explosiu" />
+    <Explosive />
+  </Entity>
+  <Entity name="hangar_Bido_vermell02">
+    <Object3D position="13.7274 0.0 9.57732" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_vermell" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_explosiu" />
+    <Explosive />
+  </Entity>
+  <Entity name="hangar_Bido_vermell03">
+    <Object3D position="10.3853 0.0 6.86543" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_vermell" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_explosiu" />
+    <Explosive />
+  </Entity>
+  <Entity name="hangar_Bido_vermell04">
+    <Object3D position="11.6251 0.0 -5.33932" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_vermell" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_explosiu" />
+    <Explosive />
+  </Entity>
+  <Entity name="hangar_Bido_vermell05">
+    <Object3D position="-3.4454 0.0 0.363315" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_vermell" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_explosiu" />
+    <Explosive />
+  </Entity>
+  <Entity name="hangar_fluorescente_apagat01">
+    <Object3D position="17.2789 15.0359 12.3501" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_florescent_apagat" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_fluorescente_apagat03">
+    <Object3D position="4.58823 15.0359 12.3501" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_florescent_apagat" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_fluorescente_apagat05">
+    <Object3D position="-7.4995 15.0359 12.3501" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_florescent_apagat" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_fluorescente_apagat07">
+    <Object3D position="-17.4359 15.0359 12.3501" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_florescent_apagat" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_fluorescente_apagat08">
+    <Object3D position="-17.4359 15.0359 0.575183" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_florescent_apagat" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_fluorescente_apagat09">
+    <Object3D position="-7.4995 15.0359 0.575183" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_florescent_apagat" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_fluorescente_apagat10">
+    <Object3D position="4.58823 15.0359 0.575183" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_florescent_apagat" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_fluorescente_apagat11">
+    <Object3D position="17.2789 15.0359 0.575183" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_florescent_apagat" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_fluorescente_apagat12">
+    <Object3D position="-17.4359 15.0359 -11.1997" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_florescent_apagat" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_fluorescente_apagat13">
+    <Object3D position="-7.4995 15.0359 -11.1997" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_florescent_apagat" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_fluorescente_apagat14">
+    <Object3D position="4.58823 15.0359 -11.1997" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_florescent_apagat" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_fluorescente_apagat15">
+    <Object3D position="17.2789 15.0359 -11.1997" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_florescent_apagat" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Bido">
+    <Object3D position="26.9315 0.00499561 -12.0301" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Bido" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Frigorific_DEF">
+    <Object3D position="16.265 1.48875 -14.91" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Frigorific_DEF" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_caixa_llums">
+    <Object3D position="27.3683 1.22994 5.59868" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_caixa_llums" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <Interactive action="hang_porta" />
+  </Entity>
+  <Entity name="hangar_Caixa_llarga07">
+    <Object3D position="14.7989 0.0170316 8.03433" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_llarga07" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_llarga08">
+    <Object3D position="16.7243 0.0170316 -10.6155" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_llarga08" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_llarga09">
+    <Object3D position="21.5037 1.2868 -2.21165" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_llarga09" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_llarga10">
+    <Object3D position="23.2507 1.25 4.4091" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_llarga10" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_mur divisor08">
+    <Object3D position="22.1916 0.0 -0.927294" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_mur divisor08" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_mur divisor09">
+    <Object3D position="23.9529 0.0 3.41364" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_mur divisor09" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita21">
+    <Object3D position="14.3146 0.0 0.1879" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita21" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita22">
+    <Object3D position="14.7347 0.0 1.122" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita22" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Bido_vermell06">
+    <Object3D position="13.7405 0.0 1.68778" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_vermell" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_explosiu" />
+    <Explosive />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita23">
+    <Object3D position="22.7577 0.0215772 -3.41846" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita23" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita24">
+    <Object3D position="24.3037 0.0 5.62412" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita24" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_estatica_petita25">
+    <Object3D position="21.4449 0.0117798 -3.53186" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_estatica_petita25" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_bido_verd04">
+    <Object3D position="23.2907 0.0 5.51813" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_verd" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_toxic" />
+  </Entity>
+  <Entity name="hangar_Caixa_llarga11">
+    <Object3D position="13.1617 0.0170316 6.41503" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_llarga11" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_llarga12">
+    <Object3D position="15.0824 0.0170316 5.76829" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_llarga12" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Caixa_llarga13">
+    <Object3D position="11.8347 1.25 -6.29281" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Caixa_llarga13" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Frigorific_DEF02">
+    <Object3D position="23.0907 1.50608 13.6054" yaw="165.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Frigorific_DEF02" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_Base Hangar">
+    <Object3D position="0.0 0.0175781 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Base Hangar" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_mur divisor10">
+    <Object3D position="18.4336 0.0 -6.32987" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_mur divisor10" />
+  </Entity>
+  <Entity name="hangar_mur divisor11">
+    <Object3D position="18.4336 0.0 -6.32987" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_mur divisor11" />
+  </Entity>
+  <Entity name="hangar_mur divisor12">
+    <Object3D position="18.4336 0.0 -6.32987" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_mur divisor12" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_mur divisor13">
+    <Object3D position="18.4336 0.0 -6.32987" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_mur divisor13" />
+  </Entity>
+  <Entity name="hangar_mur divisor14">
+    <Object3D position="18.4336 0.0 -6.32987" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_mur divisor14" />
+  </Entity>
+  <Entity name="hangar_mur divisor15">
+    <Object3D position="-3.47563 0.0 1.95046" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_mur divisor15" />
+  </Entity>
+  <Entity name="hang_trig_enemics00">
+    <Object3D position="-19.9091 1.50084 -10.3116" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="1.80037 3.04376 3.87849" collision_group="trigger" onEnter="hang_trig_enemics_enter00" />
+  </Entity>
+  <Entity name="hang_trig_enemics01">
+    <Object3D position="-20.7976 1.50084 -4.41987" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="12.9427 3.04376 1.5673" collision_group="trigger" onEnter="hang_trig_enemics_enter01" />
+  </Entity>
+  <Entity name="hang_trig_enemics02">
+    <Object3D position="-5.17045 1.50084 0.0405353" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="2.19648 3.04376 2.5026" collision_group="trigger" onEnter="hang_trig_enemics_enter02" />
+  </Entity>
+  <Entity name="hang_trig_enemics05">
+    <Object3D position="-8.07597 1.50084 6.6715" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="1.80037 3.04376 10.1734" collision_group="trigger" onEnter="hang_trig_enemics_enter05" />
+  </Entity>
+  <Entity name="hang_trig_enemics04">
+    <Object3D position="-10.2115 1.50084 13.3515" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="2.29056 3.96703 2.42749" collision_group="trigger" onEnter="hang_trig_enemics_enter04" />
+  </Entity>
+  <Entity name="hang_trig_enemics03">
+    <Object3D position="-20.6587 1.50084 5.00883" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="7.34161 3.04376 1.83551" collision_group="trigger" onEnter="hang_trig_enemics_enter03" />
+  </Entity>
+  <Entity name="hang_trig_enemics06">
+    <Object3D position="3.33765 1.50084 0.0106628" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="1.90317 3.04376 29.7262" collision_group="trigger" onEnter="hang_trig_enemics_enter06" />
+  </Entity>
+  <Entity name="hang_trig_enemics07">
+    <Object3D position="17.9359 1.50084 0.0564675" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="1.80037 3.04376 29.7257" collision_group="trigger" onEnter="hang_trig_enemics_enter07" />
+  </Entity>
+  <Entity name="hang_nod_cob00">
+    <Object3D position="14.086 0.701781 -6.38418" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode maxDistance="0" cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob02">
+    <Object3D position="15.6377 0.701781 -12.8298" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob03">
+    <Object3D position="7.75498 0.701781 -1.04948" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode maxDistance="0" cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob04">
+    <Object3D position="3.68901 0.701781 5.0849" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode maxDistance="0" cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob05">
+    <Object3D position="1.66135 0.701781 4.77218" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob06">
+    <Object3D position="2.23009 0.701781 3.23473" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob07">
+    <Object3D position="5.1195 0.701781 0.210195" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob08">
+    <Object3D position="5.59842 0.701781 -7.18997" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob09">
+    <Object3D position="17.8616 0.701781 -10.1856" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode maxDistance="0" cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob10">
+    <Object3D position="15.8361 0.701781 0.250607" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode maxDistance="0" cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob11">
+    <Object3D position="13.155 0.701781 0.776913" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob12">
+    <Object3D position="21.8927 0.701781 10.4866" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode maxDistance="0" cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob13">
+    <Object3D position="21.2352 0.701781 12.4573" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode maxDistance="0" cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob14">
+    <Object3D position="15.7479 0.701781 9.11503" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode maxDistance="0" cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob15">
+    <Object3D position="4.39589 0.701781 -2.54385" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob16">
+    <Object3D position="7.30746 0.701781 -7.72178" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode maxDistance="0" cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob17">
+    <Object3D position="13.4178 0.701781 7.87887" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob18">
+    <Object3D position="18.7168 0.701781 11.2509" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob19">
+    <Object3D position="12.8697 0.701781 -11.7621" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod">
+    <Object3D position="-0.434673 0.701781 3.14078" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod01">
+    <Object3D position="1.80014 0.701781 0.291525" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod02">
+    <Object3D position="4.95317 0.701781 -4.96288" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod03">
+    <Object3D position="-0.304089 0.701781 -2.85371" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod04">
+    <Object3D position="3.06866 0.701781 -5.86197" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod05">
+    <Object3D position="10.9067 0.701781 -9.401" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod06">
+    <Object3D position="4.42772 0.701781 8.13046" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod07">
+    <Object3D position="2.10493 0.701781 6.93929" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod08">
+    <Object3D position="8.1043 0.701781 9.34058" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod09">
+    <Object3D position="12.1729 0.701781 9.63691" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod10">
+    <Object3D position="15.5382 0.701781 11.2905" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod11">
+    <Object3D position="9.79237 0.701781 -6.02035" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod_cob20">
+    <Object3D position="15.3659 0.701781 -10.098" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod12">
+    <Object3D position="13.5283 0.701781 -9.12575" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod_cob21">
+    <Object3D position="11.5033 0.701781 -5.00465" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod13">
+    <Object3D position="10.9883 0.701781 -2.6006" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_cobertura_baixa">
+    <Object3D position="11.9885 0.503855 6.47145" yaw="0.0" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="2.18896 0.984014 1.23183" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa01">
+    <Object3D position="14.8073 0.503855 8.01557" yaw="-75.0418" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="2.57182 0.984014 1.10088" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa02">
+    <Object3D position="15.561 0.503855 6.16305" yaw="-48.7693" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.04173 0.984014 1.20536" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa03">
+    <Object3D position="19.9161 0.503855 9.72476" yaw="14.9048" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="2.51045 0.984014 1.00444" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa04">
+    <Object3D position="20.1714 0.503855 11.6285" yaw="15.0864" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.04173 0.984014 2.52309" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa05">
+    <Object3D position="24.2937 0.503855 5.63275" yaw="-49.0303" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.04173 0.984014 1.0441" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa06">
+    <Object3D position="22.6982 0.503855 -3.35775" yaw="-24.7989" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.14573 0.984014 1.07173" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa07">
+    <Object3D position="21.512 0.503855 -3.40024" yaw="65.7876" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.24402 0.984014 1.00444" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa10">
+    <Object3D position="16.7195 0.503855 -10.6092" yaw="9.62562" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.04173 0.984014 2.54886" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa11">
+    <Object3D position="15.138 0.503855 -11.6697" yaw="9.85852" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="2.47758 0.984014 1.00444" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa12">
+    <Object3D position="11.3926 0.503855 -6.55475" yaw="30.7502" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.04173 0.984014 1.00444" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa13">
+    <Object3D position="13.1396 0.503855 -5.53806" yaw="30.0103" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.00682 0.984014 1.00444" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa15">
+    <Object3D position="5.667 0.503855 -2.08159" yaw="31.4461" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.04173 0.984014 1.00444" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa16">
+    <Object3D position="6.67119 0.503855 -0.312003" yaw="30.4904" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="2.50773 0.984014 1.00444" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa17">
+    <Object3D position="14.502 0.503855 0.673509" yaw="-24.7151" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="1.04173 0.984014 2.0661" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa20">
+    <Object3D position="23.9568 0.503855 3.28152" yaw="-0.0123761" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="0.487274 0.984014 1.24937" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa21">
+    <Object3D position="22.2299 0.503855 -1.07116" yaw="-0.0123761" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="0.546557 0.984014 1.24937" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa22">
+    <Object3D position="18.7045 0.503855 -5.18013" yaw="-0.0123761" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="0.487274 0.984014 1.38957" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa23">
+    <Object3D position="18.4188 0.503855 -6.38797" yaw="-24.2348" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="0.550976 0.984014 1.37772" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa24">
+    <Object3D position="6.49986 0.503855 -7.86493" yaw="-0.0123761" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="0.487274 0.984014 2.62178" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa25">
+    <Object3D position="2.95831 0.503855 4.31677" yaw="13.7509" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="0.487274 0.984014 2.64117" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa26">
+    <Object3D position="-3.32351 0.503855 2.42453" yaw="-19.9634" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="0.487274 0.984014 2.58965" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_alta">
+    <Object3D position="5.1463 1.00738 -1.24677" yaw="31.4461" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.08568 2.01105 1.00444" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_alta01">
+    <Object3D position="6.95281 1.00738 1.24001" yaw="0.130692" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.08568 2.01105 1.00318" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_alta02">
+    <Object3D position="13.8667 1.00738 6.45955" yaw="-0.45227" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.58546 2.01105 1.23686" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_alta03">
+    <Object3D position="14.5235 1.00738 5.35645" yaw="40.5673" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.41034 2.01105 1.20283" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_alta04">
+    <Object3D position="23.7342 1.00738 4.40463" yaw="0.388385" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.08568 2.01105 1.01326" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_alta05">
+    <Object3D position="21.9995 1.00738 -2.2181" yaw="-89.5167" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.08568 2.01105 1.00444" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_alta06">
+    <Object3D position="12.2787 1.00738 -6.04027" yaw="30.7938" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="1.00667 2.01105 1.00678" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_alta07">
+    <Object3D position="13.4989 1.00738 5.70023" yaw="40.5673" pitch="0.0" roll="0.0" />
+    <HighCover shape="box" size="0.296413 2.01105 0.646457" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa27">
+    <Object3D position="6.57588 0.503855 0.419242" yaw="0.15872" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="0.324986 0.984014 0.639084" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_cobertura_baixa28">
+    <Object3D position="23.5141 0.503855 5.24155" yaw="-26.4191" pitch="0.0" roll="0.0" />
+    <LowCover shape="box" size="0.301612 0.984014 0.890813" collision_group="cobertura" cover_size="1" />
+  </Entity>
+  <Entity name="hang_nod14">
+    <Object3D position="0.668942 0.701781 -5.015" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod15">
+    <Object3D position="-2.09771 0.701781 -5.30331" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod16">
+    <Object3D position="-1.34702 0.701781 0.241119" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod17">
+    <Object3D position="6.05758 0.701781 11.4588" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod18">
+    <Object3D position="6.35065 0.701781 8.22631" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="EnemySpawner01">
+    <Object3D position="-4.35423 1.57162 -6.72685" yaw="0.0" pitch="0.0" roll="0.0" />
+    <EnemySpawner enemy_type="militar" spawn_time="7" total_enemy="5" active="false" />
+  </Entity>
+  <Entity name="EnemySpawner02">
+    <Object3D position="-4.42355 1.57162 6.07291" yaw="0.0" pitch="0.0" roll="0.0" />
+    <EnemySpawner enemy_type="militar" spawn_time="7" total_enemy="5" active="false" />
+  </Entity>
+  <Entity name="hang_nod19">
+    <Object3D position="-2.24718 0.701781 4.48108" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="EnemySpawner03">
+    <Object3D position="3.88171 1.57162 13.8411" yaw="0.0" pitch="0.0" roll="0.0" />
+    <EnemySpawner enemy_type="militar" spawn_time="7" total_enemy="5" active="false" />
+  </Entity>
+  <Entity name="hangar_Pasarela interior">
+    <Object3D position="0.0162411 7.5308 1.51297e-007" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Pasarela interior" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Player position="-24.8545 1.11708 -10.0431" yaw="0.0" />
+  <Miner name="Miner01" position="-17.4714 1.30798 -4.51993" yaw="0.0" active="false" />
+  <Miner name="Miner02" position="-16.7403 1.30798 -2.29115" yaw="0.0" active="false" />
+  <Miner name="Miner03" position="-19.1808 1.30798 2.1796" yaw="0.0" active="false" />
+  <Miner name="Miner04" position="-20.3497 9.57111 10.4987" yaw="0.0" active="false" />
+  <Miner name="Miner05" position="-16.6131 9.57111 -0.154601" yaw="0.0" active="false" />
+  <Miner name="Miner06" position="-20.1307 1.30798 8.52421" yaw="0.0" active="false" />
+  <Miner name="Miner07" position="1.28506 9.36483 -0.282342" yaw="0.0" active="false" />
+  <Miner name="Miner08" position="6.71194 9.36483 -11.8793" yaw="0.0" active="false" />
+  <Militar name="Militar01" position="3.88239 1.21245 4.95428" yaw="0.0" active="false" />
+  <Militar name="Militar02" position="15.652 1.21245 9.22886" yaw="0.0" active="false" />
+  <Militar name="Militar03" position="21.2014 1.21245 12.4259" yaw="0.0" active="false" />
+  <Militar name="Militar04" position="23.8683 1.21245 11.0349" yaw="0.0" active="false" />
+  <Militar name="Militar05" position="15.5207 1.21245 0.11872" yaw="0.0" active="false" />
+  <Militar name="Militar06" position="13.9355 1.21245 -6.51465" yaw="0.0" active="false" />
+  <Militar name="Militar07" position="17.8458 1.21245 -10.2115" yaw="0.0" active="false" />
+  <Militar name="Militar08" position="15.5446 1.21245 -12.8318" yaw="0.0" active="false" />
+  <Militar name="Militar09" position="7.324 1.21245 -7.81343" yaw="0.0" active="false" />
+  <Militar name="Militar10" position="7.81691 1.21245 -1.09128" yaw="0.0" active="false" />
+  <Miner name="Miner09" position="-15.4361 1.30798 10.9142" yaw="0.0" active="false" />
+  <Militar name="Militar11" position="5.31268 1.21245 -7.4372" yaw="0.0" active="false" />
+  <Militar name="Militar12" position="5.02298 1.21245 0.497211" yaw="0.0" active="false" />
+  <Militar name="Militar13" position="1.45161 1.21245 5.06477" yaw="0.0" active="false" />
+</Entities>

@@ -1,0 +1,15 @@
+<actor name="Vigia" radius_bs="2.0" pos_bs="0.0 1.0 0.0" effect="cal3d" technique="cal3dTechnique">
+  <skeleton filename="Data/Animated Models/Vigia/skeleton.csf"/>
+  <mesh filename="Data/Animated Models/Vigia/mesh.cmf"/>
+  <material animated="true" vertex_type="799">
+    <texture type="diffusse" filename="Data/Textures/Color_Robot_vigia.tga"/>
+    <texture type="normalmap" filename="Data/Textures/Color_Robot_vigia_NRM.png"/>
+    <!--<texture type="specular" filename="Data/Textures/Color_Robot_vigia_SPEC.png"/>
+    <property type="specularParams" glossiness="200.0" specular_level="20.0" />-->
+    
+  </material>
+  <animation name="moviment" filename="Data/Animated Models/Vigia/moviment.CAF"/>
+  <animation name="shoot" filename="Data/Animated Models/Vigia/shoot.CAF"/>
+  <animation name="obertura" filename="Data/Animated Models/Vigia/obertura.CAF"/>
+  <animation name="frenada" filename="Data/Animated Models/Vigia/frenada.CAF"/>
+</actor>

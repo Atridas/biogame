@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<animatedModels>
+	<!--animatedModel name="bot" path="Data/Animated Models/actor.xml"/-->
+  <animatedModel name="riggle" path="Data/Animated Models/Riggle/actor.xml"/>
+  <animatedModel name="miner" path="Data/Animated Models/Miner/actor.xml"/>
+  <animatedModel name="Militar" path="Data/Animated Models/Militar/actor.xml"/>
+  <animatedModel name="Porta" path="Data/Animated Models/Porta/actor.xml"/>
+  <animatedModel name="Porta1" path="Data/Animated Models/PortaNova/actor.xml"/>
+  <!--animatedModel name="Vigia" path="Data/Animated Models/Vigia/actor.xml"/-->
+  <!--animatedModel name="skeleton" path="Data/Animated Models/skeleton/actor.xml"/-->
+</animatedModels>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<Config>
+  <RenderManager resolution="1080 720" position="50 5" fullscreenMode="false"/>
+  
+  <StaticMeshManager>
+    <StaticMeshes xml="Data/Levels/PhysX/XML/StaticMeshes.xml"/>
+    <!--
+    <StaticMeshManager xml="Data/Levels/Proves/XML/StaticMeshes.xml"/>
+    <StaticMeshManager xml="Data/Levels/Hangar/XML/StaticMeshes.xml"/>
+    <StaticMeshManager xml="Data/Levels/Level -2/XML/StaticMeshes.xml"/>
+    <StaticMeshManager xml="Data/XML/StaticMeshes.xml"/>
+    -->
+  </StaticMeshManager>
+
+  <AnimatedModelManager>
+    <AnimatedModels xml="Data/XML/AnimatedModels.xml"/>
+  </AnimatedModelManager>
+    
+  <EffectManager xml="Data/XML/Effects.xml"/>
+  <ParticleManager xml="Data/XML/Particles.xml"/>
+  <FontManager fontsXML="Data/XML/Fonts.xml"/>
+  <Languages default="cat">
+    <Language languageXML="Data/Language/spanish.xml"/>
+    <Language languageXML="Data/Language/catalan.xml"/>
+    <Language languageXML="Data/Language/english.xml"/>
+  </Languages>
+  <InputManager exclusiveMouse="true"/>
+  <ActionToInput file="Data/XML/actions_physx.xml"/>
+  
+
+  <!-- RenderableObjectsManager file="Data/XML/RenderableObjects.xml" -->
+  <!-- RenderableObjectsManager file="Data/Levels/Level -2/XML/RenderableObjects.xml" -->
+  <!--RenderableObjectsManager file="Data/Levels/Proves/XML/RenderableObjects.xml"-->
+  <RenderableObjectsManager file="Data/Levels/PhysX/XML/RenderableObjects.xml">
+    <!--
+    <Level xml="Data/XML/RenderableObjects.xml"/>
+    <Level xml="Data/Levels/Level -1/XML/RenderableObjects.xml"/>
+    <Level xml="Data/Levels/Level -2/XML/RenderableObjects.xml"/>
+    <Level xml="Data/Levels/Hangar/XML/RenderableObjects.xml"/>
+    <Level xml="Data/Levels/Proves/XML/RenderableObjects.xml"/>
+    -->
+  </RenderableObjectsManager>
+
+  <LightsManager file="Data/Levels/PhysX/XML/Lights.xml"/>
+
+  <SceneEffectManager file="Data/XML/SceneEffects_PhysX.xml"/>
+  
+  <ScriptManager file="Data/XML/Lua.xml"/>
+
+  <LogRender position="10 0"/>
+
+  <GUIManager xml="Data/XML/GUI_test.xml" start="Main.xml" render_mouse="false"/>
+    
+  <!--<AnimatedModelManager file="Data/XML/AnimatedModels.xml">
+  </AnimatedModelManager>-->
+  
+  <!--<Console_Logger activateConsole="true" Log_Level="INFORMATION" activateLogger="true" linesPerPageInLogger="20"/>
+  <Mouse exclusiveModeinMouse="true" drawPointerMouse="true"/>
+  <ActionToInput fileXML="./Data/actions.xml"/>
+  <GUI initGuiXML="./Data/GUI/initGui_tests.xml"/>
+  <Sound soundXML="./Data/Sounds/Sounds.xml"/>
+  <Avi aviXML="./Data/AviFiles/aviFiles.xml"/>
+  <PhysX initPhysX="true"/>
+  <ComputerVision initComputerVision="false"/>
+  <InitScripts>
+    <Script action="_core          = getCore();"/>
+    <Script action="_inputM        = getCore():getInput();"/>
+    <Script action="_renderM       = getCore():getRender();"/>
+    <Script action="_physicM       = getCore():getPhysic();"/>
+    <Script action="_textureM      = getCore():getTexture();"/>
+    <Script action="_effectM       = getCore():getEffect();"/>
+    <Script action="_guiM          = getCore():getGui();"/>
+    <Script action="_soundM        = getCore():getSound();"/>
+    <Script action="_aviPM         = getCore():getAviPlayer();"/>
+    <Script action="_networkM      = getCore():getNetwork();"/>
+    <Script action="_cvM           = getCore():getComputerVision();"/>
+    <Script action="_GprahicTest   = getGrpahicTest();"/>
+    <Script action="_aVITest       = getAVITest();"/>
+    <Script action="_guiTest       = getGuiTest();"/>
+    <Script action="_physXTest     = getPhysXTest();"/>
+    <Script action="_spriteTest    = getSpriteTest();"/>
+    <Script action="_partSystTest  = getPartSystTest();"/>
+  </InitScripts>-->
+
+  <!--<Process initProcess="AVITest"/>-->
+  <!--<Process initProcess="PhysXTest"/>-->
+  <!--<Process initProcess="GuiTest"/>-->
+  <!--<Process initProcess="GuiTest"/>-->
+  <!--<Process initProcess="SpriteTest"/>-->
+  <!--<Process initProcess="ParticleSystemTest"/>-->
+  <!--<Process initProcess=""/>-->
+  <!--<Process initProcess="AVITest"/>-->
+
+</Config>

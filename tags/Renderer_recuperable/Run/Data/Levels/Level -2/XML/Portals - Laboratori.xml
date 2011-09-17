@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<PortalManager>
+  <Rooms>
+    <Room name="Laboratori">
+      <Boundings>
+        <Box name="Bounding Laboratori" size="12.285 6.25291 12.9608" position="-9.75657 2.3526 -5.19563" yaw="0.0" pitch="0.0" roll="0.0" />
+      </Boundings>
+      <Objects>
+        <GameObject name="lvl2_lab_lab_Llum_emergencia01" />
+        <GameObject name="lvl2_lab_lab_fluorescent_apagat00" />
+        <GameObject name="lvl2_lab_Cadira_de_força" />
+        <GameObject name="lvl2_lab_BancRadiografies" />
+        <GameObject name="lvl2_lab_cadira_oficina" />
+        <GameObject name="lvl2_lab_Marc Porta" />
+        <GameObject name="lvl2_lab_Cable_Lampada" />
+        <GameObject name="lvl2_lab_viga" />
+        <GameObject name="lvl2_lab_vigueta" />
+        <GameObject name="lvl2_lab_viga_pilar" />
+        <GameObject name="lvl2_lab_Lampada" />
+        <GameObject name="lvl2_lab_Bido" />
+        <GameObject name="lvl2_lab_Edvac" />
+        <GameObject name="lvl2_lab_CAPSULA_DEF" />
+        <GameObject name="lvl2_lab_autopsia_taula" />
+        <GameObject name="lvl2_lab_Aixeta_autopsia" />
+        <GameObject name="lvl2_lab_Pissarra" />
+        <GameObject name="lvl2_lab_Botiquin_medic_DEF" />
+        <GameObject name="lvl2_lab_viga01" />
+        <GameObject name="lvl2_lab_viga02" />
+        <GameObject name="lvl2_lab_vigueta01" />
+        <GameObject name="lvl2_lab_vigueta02" />
+        <GameObject name="lvl2_lab_cadira_oficina01" />
+        <GameObject name="lvl2_lab_Taula01" />
+        <GameObject name="lvl2_lab_CAPSULA_trencada" />
+        <GameObject name="lvl2_lab_Lampada01" />
+        <GameObject name="lvl2_lab_Cable_Lampada01" />
+        <GameObject name="lvl2_lab_Ordinador_DEF" />
+        <GameObject name="lvl2_lab_Frigorific_DEF" />
+        <GameObject name="lvl2_lab_Ordinador_DEF01" />
+        <GameObject name="lvl2_lab_tub_Gros" />
+        <GameObject name="lvl2_lab_tub_Gros02" />
+        <GameObject name="lvl2_lab_Estanteria_01_DEF" />
+        <GameObject name="lvl2_lab_Estanteria_02_DEF01" />
+        <GameObject name="lvl2_lab_Taula_DEF" />
+        <GameObject name="lvl2_lab_Maleta_DEF01" />
+        <GameObject name="lvl2_lab_Maleta_DEF02" />
+        <GameObject name="lvl2_lab_pot_Mitja02" />
+        <GameObject name="lvl2_lab_Maleta_DEF03" />
+        <GameObject name="lvl2_lab_CAPSULA_DEF03" />
+        <GameObject name="lvl2_lab_Laboratori_parets" />
+        <GameObject name="lvl2_lab_Tubs_autoilum2" />
+        <GameObject name="lvl2_lab_Tubs_autoilum3" />
+        <GameObject name="lvl2_lab_Pantalla_ordinador_autoilum" />
+        <GameObject name="lvl2_lab_Pantalla_ordinador_autoilum01" />
+        <GameObject name="lvl2_lab_Lampada_autoilum" />
+        <GameObject name="lvl2_lab_Vidre_cap1" />
+        <GameObject name="lvl2_lab_Vidre_cap02" />
+        <GameObject name="lvl2_lab_lab_fluorescent_apagat01" />
+        <GameObject name="lvl2_lab_lab_Llum_emergengia_autoilum01" />
+        <GameObject name="lvl2_lab_lab_luz_florescente00" />
+        <GameObject name="lvl2_lab_lab_fluorescente00" />
+        <GameObject name="lvl2_lab_lab_llum00" />
+        <GameObject name="lvl2_lab_lab_fluorescente01" />
+        <GameObject name="lvl2_lab_lab_luz_florescente01" />
+        <GameObject name="lvl2_lab_lab_fluorescente02" />
+        <GameObject name="lvl2_lab_lab_luz_florescente02" />
+        <GameObject name="lvl2_lab_lab_fluorescent_apagat02" />
+        <GameObject name="lvl2_lab_carpeta_eon" />
+        <GameObject name="lvl2_lab_lab_llum01" />
+        <GameObject name="lvl2_lab_lab_llum02" />
+        <GameObject name="lvl2_lab_Focus_conic" />
+      </Objects>
+    </Room>
+  </Rooms>
+  <Portals>
+  </Portals>
+</PortalManager>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><RenderableObject name="ariggle" class="AnimatedModel" resource="riggle" position="5.1793 0.0 -5.2768" yaw="-90.0" pitch="0.0" roll="0" cycle="walk"/>
+  <!--
+  <RenderableObject name="riggle2" class="AnimatedModel" resource="riggle" position="-5.1793 0.0 5.2768" yaw="0.0" pitch="0.0" roll="0" cycle="walk"/>
+  <RenderableObject name="miner" class="AnimatedModel" resource="miner" position="-5.1793 0.0 8.2768" yaw="0.0" pitch="0.0" roll="0" cycle="idle"/>
+  <RenderableObject name="miner2" class="AnimatedModel" resource="miner" position="-5.1793 0.0 15.2768" yaw="0.0" pitch="0.0" roll="0" cycle="walk"/>
+  -->
+</RenderableObjects>

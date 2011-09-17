@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<meshes>
+	<mesh name="lvl2_pass_tubo3" path="Data/Meshes/lvl2_pass_tubo3.mesh" max="1.54473 1.09653 3.26029" min="-1.54473 -1.09653 -3.26029" />
+	<mesh name="lvl2_pass_pass_llum00" path="Data/Meshes/lvl2_pass_pass_llum00.mesh" max="1.07297 0.634523 1.41833" min="-0.998689 -0.807798 -1.62242" />
+	<mesh name="lvl2_pass_pas_video" path="Data/Meshes/lvl2_pass_pas_video.mesh" max="4.01797 2.75 5.04998" min="-4.01797 -2.75 -5.04998" />
+	<mesh name="lvl2_pass_pass_fluor00" path="Data/Meshes/lvl2_pass_pass_fluor00.mesh" max="0.394096 2.55385 1.03664" min="-0.414108 -0.284417 -0.759481" />
+	<mesh name="lvl2_pass_viga3" path="Data/Meshes/lvl2_pass_viga3.mesh" max="2.28866 0.360249 1.28038" min="-2.28866 -0.360249 -1.28038" />
+	<mesh name="lvl2_pass_pass_luz_florescente04" path="Data/Meshes/lvl2_pass_pass_luz_florescente04.mesh" max="0.0573225 0.0388396 1.19506" min="-0.54406 -0.325688 -0.0242439" />
+	<mesh name="lvl2_pass_marc_porta02" path="Data/Meshes/lvl2_pass_marc_porta02.mesh" max="1.82779 1.47982 0.973099" min="-1.28837 -1.54837 -0.848442" />
+	<mesh name="lvl2_pass_porta_sub2" path="Data/Meshes/lvl2_pass_porta_sub2.mesh" max="0.529812 1.5723 0.795646" min="-0.529812 -1.5723 -0.795645" />
+	<mesh name="lvl2_pass_pass_fluor01" path="Data/Meshes/lvl2_pass_pass_fluor01.mesh" max="0.448835 2.49151 0.733286" min="-0.448833 -0.115818 -0.733285" />
+	<mesh name="lvl2_pass_pass_llum01" path="Data/Meshes/lvl2_pass_pass_llum01.mesh" max="1.14394 0.491696 1.54263" min="-1.14394 -0.491696 -1.54263" />
+	<mesh name="lvl2_pass_pass_luz_florescente03" path="Data/Meshes/lvl2_pass_pass_luz_florescente03.mesh" max="0.655085 0.039633 1.18185" min="-0.0550213 -0.0396333 -0.0286298" />
+	<mesh name="lvl2_pass_pass_fluor02" path="Data/Meshes/lvl2_pass_pass_fluor02.mesh" max="0.448835 2.49151 0.733286" min="-0.448833 -0.115818 -0.733285" />
+	<mesh name="lvl2_pass_pass_luz_florescente02" path="Data/Meshes/lvl2_pass_pass_luz_florescente02.mesh" max="0.655085 0.039633 1.18185" min="-0.0550213 -0.0396333 -0.0286298" />
+	<mesh name="lvl2_pass_viga5" path="Data/Meshes/lvl2_pass_viga5.mesh" max="2.27244 0.312056 1.28275" min="-2.27244 -0.312056 -1.28275" />
+	<mesh name="lvl2_pass_viga4" path="Data/Meshes/lvl2_pass_viga4.mesh" max="2.27244 0.312056 1.28275" min="-2.27244 -0.312056 -1.28275" />
+	<mesh name="lvl2_pass_porta_sub1" path="Data/Meshes/lvl2_pass_porta_sub1.mesh" max="0.546013 1.5723 0.789196" min="-0.546013 -1.5723 -0.789196" />
+	<mesh name="lvl2_pass_pass_llum02" path="Data/Meshes/lvl2_pass_pass_llum02.mesh" max="1.14394 0.491696 1.54263" min="-1.14394 -0.491696 -1.54263" />
+	<mesh name="lvl2_pass_pass_fluor03" path="Data/Meshes/lvl2_pass_pass_fluor03.mesh" max="0.772501 2.49151 0.104" min="-0.772499 -0.115818 -0.104" />
+	<mesh name="lvl2_pass_pass_llum03" path="Data/Meshes/lvl2_pass_pass_llum03.mesh" max="1.46449 0.491696 0.527504" min="-1.46449 -0.491696 -0.527504" />
+	<mesh name="lvl2_pass_pass_fluor04" path="Data/Meshes/lvl2_pass_pass_fluor04.mesh" max="0.772501 2.49151 0.104" min="-0.772499 -0.115818 -0.104" />
+	<mesh name="lvl2_pass_pass_luz_florescente00" path="Data/Meshes/lvl2_pass_pass_luz_florescente00.mesh" max="1.3 0.039633 0.0620251" min="0.0 -0.0396333 -0.0620251" />
+	<mesh name="lvl2_pass_viga1" path="Data/Meshes/lvl2_pass_viga1.mesh" max="0.286685 0.312056 2.38059" min="-0.286685 -0.312056 -2.38059" />
+	<mesh name="lvl2_pass_pass_llum04" path="Data/Meshes/lvl2_pass_pass_llum04.mesh" max="1.46449 0.491696 0.527504" min="-1.46449 -0.491696 -0.527504" />
+	<mesh name="lvl2_pass_pass_luz_florescente01" path="Data/Meshes/lvl2_pass_pass_luz_florescente01.mesh" max="1.3 0.039633 0.0620251" min="0.0 -0.0396333 -0.0620251" />
+	<mesh name="lvl2_pass_viga2" path="Data/Meshes/lvl2_pass_viga2.mesh" max="0.286685 0.312056 2.38059" min="-0.286685 -0.312056 -2.38059" />
+	<mesh name="lvl2_pass_tubo_dret" path="Data/Meshes/lvl2_pass_tubo_dret.mesh" max="4.94141 1.76102 0.16307" min="-4.94141 -1.76102 -0.163071" />
+	<mesh name="lvl2_pass_tubo_esq1" path="Data/Meshes/lvl2_pass_tubo_esq1.mesh" max="2.35775 1.74946 0.15657" min="-2.35775 -1.74946 -0.15657" />
+	<mesh name="lvl2_pass_tubo_esq2" path="Data/Meshes/lvl2_pass_tubo_esq2.mesh" max="3.37519 1.73343 0.156569" min="-3.37519 -1.73343 -0.156569" />
+	<mesh name="lvl2_pass_marc_passadis1" path="Data/Meshes/lvl2_pass_marc_passadis1.mesh" max="0.132786 1.47375 1.78116" min="-0.132785 -1.47375 -1.78116" />
+	<mesh name="lvl2_pass_pass01" path="Data/Meshes/lvl2_pass_pass01.mesh" max="14.4488 1.75 10.385" min="-14.4488 -1.75 -10.385" />
+	<mesh name="lvl2_pass_marc_porta01" path="Data/Meshes/lvl2_pass_marc_porta01.mesh" max="1.34599 1.47982 0.967236" min="-1.40704 -1.54837 -0.713959" />
+</meshes>

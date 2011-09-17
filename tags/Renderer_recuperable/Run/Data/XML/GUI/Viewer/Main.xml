@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Windows OnLoadWindows="hide_all()"
+         OnSaveWindows=""
+         OnUpdateWindows="">
+  
+  <!-- DEFAULT BUTTONS -->  
+  <Button name="FreeMode" posx="30.00" posy="02.00" height="4.00" width="10.00" visible="true" active="true"
+      texture_normal="Data/Textures/GUI/Viewer/Free.png"
+      texture_over="Data/Textures/GUI/Viewer/Free.png"
+      texture_clicked="Data/Textures/GUI/Viewer/Free.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/Free.png"
+      OnClickedAction="set_view(Viewer.FREE)"
+      OnOverAction=""/>
+  <Button name="MeshMode" posx="45.00" posy="02.00" height="4.00" width="10.00" visible="true" active="true"
+      texture_normal="Data/Textures/GUI/Viewer/Mesh.png"
+      texture_over="Data/Textures/GUI/Viewer/Mesh.png"
+      texture_clicked="Data/Textures/GUI/Viewer/Mesh.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/Mesh.png"
+      OnClickedAction="set_view(Viewer.MESH)"
+      OnOverAction=""/>
+  <Button name="AnimatedMode" posx="60.00" posy="02.00" height="4.00" width="10.00" visible="true" active="true"
+      texture_normal="Data/Textures/GUI/Viewer/Animated.png"
+      texture_over="Data/Textures/GUI/Viewer/Animated.png"
+      texture_clicked="Data/Textures/GUI/Viewer/Animated.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/Animated.png"
+      OnClickedAction="set_view(Viewer.ANIMATED)"
+      OnOverAction=""/>
+  <Button name="Normals" posx="76.00" posy="02.00" height="4.00" width="4.00" visible="true" active="true"
+      texture_normal="Data/Textures/GUI/Viewer/Normals.png"
+      texture_over="Data/Textures/GUI/Viewer/Normals.png"
+      texture_clicked="Data/Textures/GUI/Viewer/Normals.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/Normals.png"
+      OnClickedAction="VIEWER_PROCESS:toggle_normals()"
+      OnOverAction=""/>
+  <!-- END DEFAULT BUTTONS -->
+  <!-- FREE BUTTONS -->
+  <!-- END FREE BUTTONS -->
+  <!-- MESH AND ANIMATED BUTTONS -->
+  <Button name="Box" posx="85.00" posy="02.00" height="4.00" width="4.80" visible="true" active="true"
+      texture_normal="Data/Textures/GUI/Viewer/Box.png"
+      texture_over="Data/Textures/GUI/Viewer/Box.png"
+      texture_clicked="Data/Textures/GUI/Viewer/Box.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/Box.png"
+      OnClickedAction="VIEWER:toggle_boxes()"
+      OnOverAction=""/>
+  <Button name="Sphere" posx="90.00" posy="02.00" height="4.00" width="4.80" visible="true" active="true"
+      texture_normal="Data/Textures/GUI/Viewer/Sphere.png"
+      texture_over="Data/Textures/GUI/Viewer/Sphere.png"
+      texture_clicked="Data/Textures/GUI/Viewer/Sphere.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/Sphere.png"
+      OnClickedAction="VIEWER:toggle_spheres()"
+      OnOverAction=""/>
+  
+  <Button name="GlowDown" posx="85.00" posy="10.00" height="4.00" width="4.80" visible="true" active="true"
+      texture_normal="Data/Textures/GUI/Viewer/GlowDown.png"
+      texture_over="Data/Textures/GUI/Viewer/GlowDown.png"
+      texture_clicked="Data/Textures/GUI/Viewer/GlowDown.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/GlowDown.png"
+      OnClickedAction="glow_down()"
+      OnOverAction=""/>
+  <Button name="GlowUp" posx="90.00" posy="10.00" height="4.00" width="4.80" visible="true" active="true"
+      texture_normal="Data/Textures/GUI/Viewer/GlowUp.png"
+      texture_over="Data/Textures/GUI/Viewer/GlowUp.png"
+      texture_clicked="Data/Textures/GUI/Viewer/GlowUp.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/GlowUp.png"
+      OnClickedAction="glow_up()"
+      OnOverAction=""/>
+  <Button name="SpecDown" posx="85.00" posy="16.00" height="4.00" width="4.80" visible="true" active="true"
+      texture_normal="Data/Textures/GUI/Viewer/SpecDown.png"
+      texture_over="Data/Textures/GUI/Viewer/SpecDown.png"
+      texture_clicked="Data/Textures/GUI/Viewer/SpecDown.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/SpecDown.png"
+      OnClickedAction="spec_down()"
+      OnOverAction=""/>
+  <Button name="SpecUp" posx="90.00" posy="16.00" height="4.00" width="4.80" visible="true" active="true"
+      texture_normal="Data/Textures/GUI/Viewer/SpecUp.png"
+      texture_over="Data/Textures/GUI/Viewer/SpecUp.png"
+      texture_clicked="Data/Textures/GUI/Viewer/SpecUp.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/SpecUp.png"
+      OnClickedAction="spec_up()"
+      OnOverAction=""/>
+  <Button name="GlossDown" posx="85.00" posy="22.00" height="4.00" width="4.80" visible="true" active="true"
+      texture_normal="Data/Textures/GUI/Viewer/GlossDown.png"
+      texture_over="Data/Textures/GUI/Viewer/GlossDown.png"
+      texture_clicked="Data/Textures/GUI/Viewer/GlossDown.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/GlossDown.png"
+      OnClickedAction="gloss_down()"
+      OnOverAction=""/>
+  <Button name="GlossUp" posx="90.00" posy="22.00" height="4.00" width="4.80" visible="true" active="true"
+      texture_normal="Data/Textures/GUI/Viewer/GlossUp.png"
+      texture_over="Data/Textures/GUI/Viewer/GlossUp.png"
+      texture_clicked="Data/Textures/GUI/Viewer/GlossUp.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/GlossUp.png"
+      OnClickedAction="gloss_up()"
+      OnOverAction=""/>
+  <Button name="BumpDown" posx="85.00" posy="28.00" height="4.00" width="4.80" visible="true" active="true"
+      texture_normal="Data/Textures/GUI/Viewer/BumpDown.png"
+      texture_over="Data/Textures/GUI/Viewer/BumpDown.png"
+      texture_clicked="Data/Textures/GUI/Viewer/BumpDown.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/BumpDown.png"
+      OnClickedAction="bump_down()"
+      OnOverAction=""/>
+  <Button name="BumpUp" posx="90.00" posy="28.00" height="4.00" width="4.80" visible="true" active="true"
+      texture_normal="Data/Textures/GUI/Viewer/BumpUp.png"
+      texture_over="Data/Textures/GUI/Viewer/BumpUp.png"
+      texture_clicked="Data/Textures/GUI/Viewer/BumpUp.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/BumpUp.png"
+      OnClickedAction="bump_up()"
+      OnOverAction=""/>
+  <Button name="Previous" posx="85.00" posy="85.00" height="4.00" width="4.80" visible="true" active="true"
+      texture_normal="Data/Textures/GUI/Viewer/Prev.png"
+      texture_over="Data/Textures/GUI/Viewer/Prev.png"
+      texture_clicked="Data/Textures/GUI/Viewer/Prev.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/Prev.png"
+      OnClickedAction="previous()"
+      OnOverAction=""/>
+  <Button name="Next" posx="90.00" posy="85.00" height="4.00" width="4.80" visible="true" active="true"
+      texture_normal="Data/Textures/GUI/Viewer/Next.png"
+      texture_over="Data/Textures/GUI/Viewer/Next.png"
+      texture_clicked="Data/Textures/GUI/Viewer/Next.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/Next.png"
+      OnClickedAction="next()"
+      OnOverAction=""/>
+  <!-- END MESH ANIMATED BUTTONS -->
+  <!-- MESH BUTTONS -->
+  <!-- END MESH BUTTONS -->
+  <!-- ANIMATED BUTTONS -->
+  <Button name="Previous_Action" posx="85.00" posy="80.00" height="4.00" width="4.80" visible="true" active="true"
+      texture_normal="Data/Textures/GUI/Viewer/Animprev.png"
+      texture_over="Data/Textures/GUI/Viewer/Animprev.png"
+      texture_clicked="Data/Textures/GUI/Viewer/Animprev.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/Animprev.png"
+      OnClickedAction="previous_animation()"
+      OnOverAction=""/>
+  <Button name="Next_Action" posx="90.00" posy="80.00" height="4.00" width="4.80" visible="true" active="true"
+      texture_normal="Data/Textures/GUI/Viewer/Animnext.png"
+      texture_over="Data/Textures/GUI/Viewer/Animnext.png"
+      texture_clicked="Data/Textures/GUI/Viewer/Animnext.png"
+      texture_deactivated="Data/Textures/GUI/Viewer/Animnext.png"
+      OnClickedAction="next_animation()"
+      OnOverAction=""/>
+  <!-- END ANIMATED BUTTONS -->
+</Windows>
