@@ -289,9 +289,9 @@ void LoadComponentRotative(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
   float l_fPitch = _TreeComponent.GetFloatProperty("pitch", 0.0f, false);
   float l_fRoll  = _TreeComponent.GetFloatProperty("roll", 0.0f, false);
 
-  Vect3f l_vRotation = Vect3f(l_fYaw, l_fPitch, l_fRoll);
+  //Vect3f l_vRotation = Vect3f(l_fYaw, l_fPitch, l_fRoll);
   
-  if(!CComponentRotative::AddToEntity(_pEntity, l_vRotation))
+  if(!CComponentRotative::AddToEntity(_pEntity, l_fYaw, l_fPitch, l_fRoll))
   {
     LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
   }
@@ -775,7 +775,7 @@ CGameEntity* CEntityManager::InitPickUp(const string& _szName, const string& _sz
   {
     l_pO3D->SetPosition(_vPos);
     CComponentTrigger::AddToEntity(l_pPickUpEntity, l_pRO->GetRenderableObject()->GetBoundingBox()->GetDimension(), _szOnPickUp, "", GetCollisionGroup("pickup"));
-    CComponentRotative::AddToEntity(l_pPickUpEntity, Vect3f(0.5f,.0f,.0f));
+    CComponentRotative::AddToEntity(l_pPickUpEntity, 0.5f, 0.f, 0.f);
   }
   else
   {

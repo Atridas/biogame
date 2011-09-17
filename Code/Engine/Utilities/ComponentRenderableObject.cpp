@@ -120,12 +120,12 @@ void CComponentRenderableObject::UpdatePostAnim(float _fDeltaTime)
   assert(IsOk());
 
 
-  if(m_bBlockPitchRoll || m_fHeightAdjustment != 0.f || m_fYawAdjustment != 0.f)
+  if(m_bBlockPitchRoll || m_fHeightAdjustment != 0.f || m_fYawAdjustment != 0.f || m_fPitchAdjustment != 0.f || m_fRollAdjustment != 0.f )
   {
     if(!m_bBlockPitchRoll)
     {
-      m_pRenderableObject->SetPitch(m_pObject3D->GetPitch());
-      m_pRenderableObject->SetRoll (m_pObject3D->GetRoll());
+      m_pRenderableObject->SetPitch(m_pObject3D->GetPitch() + m_fPitchAdjustment);
+      m_pRenderableObject->SetRoll (m_pObject3D->GetRoll()  + m_fRollAdjustment );
     }
 
     Vect3f l_vPosition = m_pObject3D->GetPosition();

@@ -5,7 +5,7 @@
 #include "base.h"
 #include "EntityDefines.h"
 
-class CComponentPhysXActor;
+class CComponentRenderableObject;
 
 class CComponentRotative:
   public CBaseComponent
@@ -17,20 +17,20 @@ public:
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_ROTATIVE;};
   static CComponentRotative::Type GetStaticType() {return CBaseComponent::ECT_ROTATIVE;};
 
-  static CComponentRotative* AddToEntity(CGameEntity *_pEntity, const Vect3f& _vRotation);
+  static CComponentRotative* AddToEntity(CGameEntity *_pEntity, float _fYawRotation, float _fPitchRotation, float _fRollRotation);
 
-  virtual void UpdatePrePhysX(float _fDeltaTime);
+  virtual void PreUpdate(float _fDeltaTime);
 
-  Vect3f m_vRotation;
+  float m_fYawRotation, m_fPitchRotation, m_fRollRotation;
 
 protected:
   virtual void Release() {};
 
 private:
-  bool Init(CGameEntity* _pEntity, const Vect3f& _vRotation);
-  CComponentRotative(): m_vRotation(Vect3f(0.0f)), m_pActor(0) {};
+  bool Init(CGameEntity* _pEntity, float _fYawRotation, float _fPitchRotation, float _fRollRotation);
+  CComponentRotative(): m_fYawRotation(0.f), m_fPitchRotation(0.f), m_fRollRotation(0.f), m_pCRO(0) {};
 
-  CComponentPhysXActor* m_pActor;
+  CComponentRenderableObject* m_pCRO;
 };
 
 #endif

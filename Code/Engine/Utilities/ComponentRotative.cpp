@@ -1,12 +1,12 @@
 #include "ComponentRotative.h"
-#include "ComponentPhysXActor.h"
+#include "ComponentRenderableObject.h"
 #include "ComponentTrigger.h"
 
-CComponentRotative* CComponentRotative::AddToEntity(CGameEntity *_pEntity, const Vect3f& _vRotation)
+CComponentRotative* CComponentRotative::AddToEntity(CGameEntity *_pEntity, float _fYawRotation, float _fPitchRotation, float _fRollRotation)
 {
   CComponentRotative *l_pComp = new CComponentRotative();
   assert(_pEntity && _pEntity->IsOk());
-  if(l_pComp->Init(_pEntity, _vRotation))
+  if(l_pComp->Init(_pEntity, _fYawRotation, _fPitchRotation, _fRollRotation))
   {
     l_pComp->SetEntity(_pEntity);
     return l_pComp;
@@ -19,32 +19,41 @@ CComponentRotative* CComponentRotative::AddToEntity(CGameEntity *_pEntity, const
 }
 
 //yaw pitch roll
-bool CComponentRotative::Init(CGameEntity* _pEntity, const Vect3f& _vRotation)
+bool CComponentRotative::Init(CGameEntity* _pEntity, float _fYawRotation, float _fPitchRotation, float _fRollRotation)
 {
-  m_vRotation = Vect3f(_vRotation.y, _vRotation.x, _vRotation.z);
+  m_fYawRotation   = _fYawRotation;
+  m_fPitchRotation = _fPitchRotation;
+  m_fRollRotation  = _fRollRotation;
 
-  m_pActor = _pEntity->GetComponent<CComponentPhysXActor>();
+  m_pCRO = _pEntity->GetComponent<CComponentRenderableObject>();
 
-  if(!m_pActor)
-    m_pActor = _pEntity->GetComponent<CComponentTrigger>();
-
-  if(m_pActor)
+  if(m_pCRO)
   {
     SetOk(true);
   }
   else
   {
-    LOGGER->AddNewLog(ELL_ERROR, "CComponentRotative::Init No s'ha trobat cap actor físic.");
+    LOGGER->AddNewLog(ELL_ERROR, "CComponentRotative::Init No s'ha trobat cap component renderable object.");
     SetOk(false);
   }
 
   return IsOk();
 }
 
-void CComponentRotative::UpdatePrePhysX(float _fDeltaTime)
+void CComponentRotative::PreUpdate(float _fDeltaTime)
 {
-  if(m_pActor)
+  if(m_pCRO)
   {
-    m_pActor->SetRotation(m_pActor->GetRotation() + m_vRotation * _fDeltaTime);
+    m_pCRO->m_fYawAdjustment += m_fYawRotation * _fDeltaTime;
+    if(m_pCRO->m_fYawAdjustment >  FLOAT_PI_VALUE) m_pCRO->m_fYawAdjustment -= 2 * FLOAT_PI_VALUE;
+    if(m_pCRO->m_fYawAdjustment < -FLOAT_PI_VALUE) m_pCRO->m_fYawAdjustment += 2 * FLOAT_PI_VALUE;
+
+    m_pCRO->m_fPitchAdjustment += m_fPitchRotation * _fDeltaTime;
+    if(m_pCRO->m_fPitchAdjustment >  FLOAT_PI_VALUE) m_pCRO->m_fPitchAdjustment -= 2 * FLOAT_PI_VALUE;
+    if(m_pCRO->m_fPitchAdjustment < -FLOAT_PI_VALUE) m_pCRO->m_fPitchAdjustment += 2 * FLOAT_PI_VALUE;
+
+    m_pCRO->m_fRollAdjustment += m_fRollRotation * _fDeltaTime;
+    if(m_pCRO->m_fRollAdjustment >  FLOAT_PI_VALUE) m_pCRO->m_fRollAdjustment -= 2 * FLOAT_PI_VALUE;
+    if(m_pCRO->m_fRollAdjustment < -FLOAT_PI_VALUE) m_pCRO->m_fRollAdjustment += 2 * FLOAT_PI_VALUE;
   }
 }
