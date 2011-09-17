@@ -1,12 +1,41 @@
 <renderer>
+
+  <render_targets default="backbuffer">
+  
+    <backbuffer_render_target name="backbuffer" />
+  
+    <texture_render_targets>
+      
+      <texture_render_target name="RT0_ARGB_8" format="A8R8G8B8" texture="RT0_ARGB_8"/>
+      <texture_render_target name="RT1_ARGB_8" format="A8R8G8B8" texture="RT1_ARGB_8"/>
+      <texture_render_target name="RT2_ARGB_8" format="A8R8G8B8" texture="RT2_ARGB_8"/>
+      <texture_render_target name="RT3_ARGB_8" format="A8R8G8B8" texture="RT3_ARGB_8"/>
+      <texture_render_target name="RT1_RG_16F" format="R16G16F" texture="RT1_RG_16F"/>
+      <texture_render_target name="RT_R_32F" format="R32F" width="1024" height="1024" texture="RT_R_32F" />
+      
+    </texture_render_targets>
+    
+    <multiple_render_targets>
+    
+      <multiple_render_target name="forward_MRT">
+        <texture_render_target name="RT0_ARGB_8" index="0" />
+        <texture_render_target name="RT1_ARGB_8" index="1" />
+      </multiple_render_target>
+      
+      <multiple_render_target name="deferred_MRT">
+        <texture_render_target name="RT0_ARGB_8" index="0" />
+        <texture_render_target name="RT3_ARGB_8" index="1" />
+        <texture_render_target name="RT1_RG_16F" index="2" />
+        <texture_render_target name="RT1_ARGB_8" index="3" />
+      </multiple_render_target>
+      
+    </multiple_render_targets>
+    
+  </render_targets>
   
   <pre_scene_renderers>
 
-    <pre_scene_renderer name="shadow_map_renderer" type="shadow_map_scene_renderer" active="false">
-
-      <render_targets width="1024" height="1024">
-        <render_target index="0" format_type="R32F" texture="shadow_map_texture" />
-      </render_targets>
+    <pre_scene_renderer name="shadow_map_renderer" type="shadow_map_scene_renderer" render_target="RT_R_32F" active="false">
 
       <material_effects static_mesh_effect="Depth" animated_model_effect="AnimatedDepth" />
 
@@ -26,17 +55,11 @@
 
   <scene_renderers default_renderer="deferred_renderer">
     
-    <scene_renderer name="forward_renderer" type="scene_renderer">
+    <scene_renderer name="forward_renderer" type="scene_renderer" render_target="forward_MRT">
 
       <input_samplers>
-        <input_sampler type="texture" index="5" texture="shadow_map_texture"/>
+        <input_sampler type="texture" index="5" texture="RT_R_32F"/>
       </input_samplers>
-    
-      <render_targets>
-        <render_target index="0" format_type="X8R8G8B8" texture="scene_result"/>
-        <render_target index="1" texture="glow_texture"/>
-        <!--<render_target index="2" texture="depth_texture"/>-->
-      </render_targets>
 
       <material_effects particle_effect="Particle">
         <material_effect material_type="0"   effect="Diffused" />
@@ -63,17 +86,11 @@
     
     </scene_renderer>
     
-    <scene_renderer name="deferred_renderer" type="scene_renderer">
+    <scene_renderer name="deferred_renderer" type="scene_renderer" render_target="deferred_MRT">
     
       <!--<input_samplers>
-        <input_sampler type="texture" index="5" texture="shadow_map_texture"/>
+        <input_sampler type="texture" index="5" texture="RT_R_32F"/>
       </input_samplers>-->
-    
-      <render_targets>
-        <render_target index="0" format_type="A8R8G8B8" texture="scene_color"/>
-        <render_target index="1" format_type="X8R8G8B8" texture="scene_normals"/>
-        <render_target index="2" format_type="R16G16F" texture="scene_depth"/>
-      </render_targets>
       
       <material_effects>
         <material_effect material_type="0"   effect="NormalDiffusedDeferred" />
@@ -128,21 +145,26 @@
 
   <post_scene_renderers>
     
-    <post_scene_renderer name="deferred_ambient" effect="DeferredAmbientPass" active="true">
+    <!-- size_x="0.5" aspect_ratio="true" position="0.5 0.0" -->
+    <post_scene_renderer name="deferred_lighting" 
+                         type="deferred_post_scene_renderer" 
+                         effect="DeferredLightPass" 
+                         render_target="RT2_ARGB_8" 
+                         active="true" >
 
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="scene_color"/>
+        <!--<input_sampler type="texture" index="0" texture="scene_color"/>-->
+        <input_sampler type="texture" index="1" texture="RT3_ARGB_8"/>
+        <input_sampler type="texture" index="2" texture="RT1_RG_16F"/>
       </input_samplers>
-
       
     </post_scene_renderer>
-    <!-- size_x="0.5" aspect_ratio="true" position="0.5 0.0" -->
-    <post_scene_renderer name="deferred_lighting" type="deferred_post_scene_renderer" effect="DeferredLightPass" active="true">
+    
+    <post_scene_renderer name="deferred_ambient" effect="DeferredAmbientPass" active="true" >
 
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="scene_color"/>
-        <input_sampler type="texture" index="1" texture="scene_normals"/>
-        <input_sampler type="texture" index="2" texture="scene_depth"/>
+        <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
+        <input_sampler type="texture" index="1" texture="RT2_ARGB_8"/>
       </input_samplers>
 
     </post_scene_renderer>
@@ -150,7 +172,7 @@
     <post_scene_renderer name="scene_color" effect="Texture" size_x="0.5" aspect_ratio="true" active="false">
 
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="scene_color"/>
+        <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
       </input_samplers>
 
     </post_scene_renderer>
@@ -158,7 +180,7 @@
     <post_scene_renderer name="scene_normals" effect="Texture" size_x="0.5" aspect_ratio="true" position="0.0 0.5" active="false">
 
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="scene_normals"/>
+        <input_sampler type="texture" index="0" texture="RT3_ARGB_8"/>
       </input_samplers>
 
     </post_scene_renderer>
@@ -166,24 +188,23 @@
     <post_scene_renderer name="show_depth" effect="ShowDepth" size_x="0.5" aspect_ratio="true" position="0.5 0.5" active="false">
 
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="scene_depth"/>
+        <input_sampler type="texture" index="0" texture="RT1_RG_16F"/>
       </input_samplers>
 
     </post_scene_renderer>
-    
     
     <post_scene_renderer name="draw_scene" effect="TextureAlphaFactor" active="false">
 
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="scene_result"/>
+        <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
       </input_samplers>
 
     </post_scene_renderer>
     
-    <post_scene_renderer name="down_sample_glow" effect="DownSample4x" active="false">
+    <!--<post_scene_renderer name="down_sample_glow" effect="DownSample4x" active="true">
       
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="glow_texture"/>
+        <input_sampler type="texture" index="0" texture="RT1_ARGB_8"/>
       </input_samplers>
 
       <render_targets scale_size="0.5">
@@ -192,7 +213,7 @@
       
     </post_scene_renderer>
 
-    <post_scene_renderer name="down_sample_glow_2" effect="DownSample4x" active="false">
+    <post_scene_renderer name="down_sample_glow_2" effect="DownSample4x" active="true">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="downsampled_glow"/>
@@ -204,7 +225,7 @@
 
     </post_scene_renderer>
 
-    <post_scene_renderer name="vertical_blur" effect="VerticalBloom" active="false">
+    <post_scene_renderer name="vertical_blur" effect="VerticalBloom" active="true">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="downsampled_glow_2"/>
@@ -216,7 +237,7 @@
 
     </post_scene_renderer>
 
-    <post_scene_renderer name="horizontal_blur" effect="HoritzontalBloom" active="false">
+    <post_scene_renderer name="horizontal_blur" effect="HoritzontalBloom" active="true">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="vertical_blur_texture"/>
@@ -228,7 +249,7 @@
 
     </post_scene_renderer>
 
-    <post_scene_renderer name="draw_glow_blur" effect="TextureAlphaFactor" active="false">
+    <post_scene_renderer name="draw_glow_blur" effect="TextureAlphaFactor" active="true">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="horizontal_blur_texture"/>
@@ -236,13 +257,13 @@
 
     </post_scene_renderer>
 
-    <post_scene_renderer name="draw_glow" effect="PostProcessBloom2" active="false">
+    <post_scene_renderer name="draw_glow" effect="PostProcessBloom2" active="true">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="glow_texture"/>
       </input_samplers>
 
-    </post_scene_renderer>
+    </post_scene_renderer>-->
 
     <post_scene_renderer name="shock_wave" effect="Shockwave" use_time="true" active="false">
 
@@ -277,5 +298,20 @@
     </post_scene_renderer>
   
   </post_scene_renderers>
+  
+  <!--
+  <render_paths>
+    <render_path name="deferred">
+      <scene_renderer="deferred_renderer"/>
+      <post_scene_renderer name="deferred_lighting"/>
+      <post_scene_renderer name="deferred_ambient"/>
+    </render_path>
+    
+    <render_path name="forward">
+      <scene_renderer="forward_renderer"/>
+    </render_path>
+    
+  </render_paths>
+  -->
   
 </renderer>

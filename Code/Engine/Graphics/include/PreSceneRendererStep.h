@@ -13,7 +13,7 @@ public:
   CPreSceneRendererStep() {};
   ~CPreSceneRendererStep() {Done();};
 
-  bool Init(CXMLTreeNode& _treePreSceneRenderer);
+  bool Init(CXMLTreeNode& _treePreSceneRenderer, const string& _szDefaultRenderTarget);
 
 protected:
   virtual void Release();

@@ -15,7 +15,7 @@ public:
   CPostSceneRendererStep() : m_szEffect(""),m_fTime(0.0f),m_bUseTime(false),m_iPos(0),m_iSize(0),m_fAlphaFactor(1.0),m_Alignment(UPPER_LEFT) {};
   ~CPostSceneRendererStep() {Done();};
 
-  bool Init(CXMLTreeNode& _treePostSceneRenderer);
+  bool Init(CXMLTreeNode& _treePostSceneRenderer, const string& _szDefaultRenderTarget);
 
   virtual void Render(CRenderManager* _pRM, CCamera* _pCamera) {Render(_pRM);};
 

@@ -250,12 +250,6 @@
     <Filter Include="Renderer\RenderTarget">
       <UniqueIdentifier>{827a83e3-f5df-4aec-9334-5801d0f75df3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Renderer\RenderTarget\TextureRenderTarget">
-      <UniqueIdentifier>{dad2e8b9-bcd2-413d-adf0-01653af8a24c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Renderer\RenderTarget\BackBufferRenderTarget">
-      <UniqueIdentifier>{dfb300af-157a-4c22-abd7-8807dcb5cb70}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Renderer\InputSampler">
       <UniqueIdentifier>{2774dde7-b417-4dbf-8aa3-51f9326c55fe}</UniqueIdentifier>
     </Filter>
@@ -267,6 +261,18 @@
     </Filter>
     <Filter Include="Renderer\RendererStep\PostSceneRendererStep\DeferredPostSceneRendererStep">
       <UniqueIdentifier>{3ca5d5ba-6508-45a4-bb0d-72549d8b78b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RenderTarget\SingleRenderTarget">
+      <UniqueIdentifier>{c9f603b3-a5a8-462e-a5c2-effc10cd5fa8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RenderTarget\SingleRenderTarget\TextureRenderTarget">
+      <UniqueIdentifier>{dad2e8b9-bcd2-413d-adf0-01653af8a24c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RenderTarget\SingleRenderTarget\BackBufferRenderTarget">
+      <UniqueIdentifier>{dfb300af-157a-4c22-abd7-8807dcb5cb70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RenderTarget\MultipleRenderTarget">
+      <UniqueIdentifier>{0a65a14a-b9f6-45cc-af75-c9b417b838d3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -430,10 +436,10 @@
       <Filter>Renderer\RenderTarget</Filter>
     </ClCompile>
     <ClCompile Include="TextureRenderTarget.cpp">
-      <Filter>Renderer\RenderTarget\TextureRenderTarget</Filter>
+      <Filter>Renderer\RenderTarget\SingleRenderTarget\TextureRenderTarget</Filter>
     </ClCompile>
     <ClCompile Include="BackBufferRenderTarget.cpp">
-      <Filter>Renderer\RenderTarget\BackBufferRenderTarget</Filter>
+      <Filter>Renderer\RenderTarget\SingleRenderTarget\BackBufferRenderTarget</Filter>
     </ClCompile>
     <ClCompile Include="InputSampler.cpp">
       <Filter>Renderer\InputSampler</Filter>
@@ -449,6 +455,12 @@
     </ClCompile>
     <ClCompile Include="DeferredPostSceneRendererStep.cpp">
       <Filter>Renderer\RendererStep\PostSceneRendererStep\DeferredPostSceneRendererStep</Filter>
+    </ClCompile>
+    <ClCompile Include="SingleRenderTarget.cpp">
+      <Filter>Renderer\RenderTarget\SingleRenderTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="MultipleRenderTarget.cpp">
+      <Filter>Renderer\RenderTarget\MultipleRenderTarget</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -684,10 +696,10 @@
       <Filter>Renderer\RenderTarget</Filter>
     </ClInclude>
     <ClInclude Include="include\TextureRenderTarget.h">
-      <Filter>Renderer\RenderTarget\TextureRenderTarget</Filter>
+      <Filter>Renderer\RenderTarget\SingleRenderTarget\TextureRenderTarget</Filter>
     </ClInclude>
     <ClInclude Include="include\BackBufferRenderTarget.h">
-      <Filter>Renderer\RenderTarget\BackBufferRenderTarget</Filter>
+      <Filter>Renderer\RenderTarget\SingleRenderTarget\BackBufferRenderTarget</Filter>
     </ClInclude>
     <ClInclude Include="include\InputSampler.h">
       <Filter>Renderer\InputSampler</Filter>
@@ -700,6 +712,12 @@
     </ClInclude>
     <ClInclude Include="include\DeferredPostSceneRendererStep.h">
       <Filter>Renderer\RendererStep\PostSceneRendererStep\DeferredPostSceneRendererStep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\SingleRenderTarget.h">
+      <Filter>Renderer\RenderTarget\SingleRenderTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="include\MultipleRenderTarget.h">
+      <Filter>Renderer\RenderTarget\MultipleRenderTarget</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

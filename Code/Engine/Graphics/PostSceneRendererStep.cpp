@@ -4,13 +4,11 @@
 #include "Core.h"
 #include "RenderManager.h"
 
-bool CPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer)
+bool CPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer, const string& _szDefaultRenderTarget)
 {
-  string l_szName = _treePostSceneRenderer.GetPszISOProperty("name","",false);
   string l_szEffect = _treePostSceneRenderer.GetPszISOProperty("effect","",false);
-  bool l_bActive = _treePostSceneRenderer.GetBoolProperty("active",true,false);
 
-  if(l_szName == "")
+  if(!CRendererStep::Init(_treePostSceneRenderer, _szDefaultRenderTarget))
   {
     LOGGER->AddNewLog(ELL_ERROR,"CPostSceneRendererStep::Init PostSceneRenderer sense nom");
     SetOk(false);
@@ -20,6 +18,8 @@ bool CPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer)
     SetOk(false);
   }else{
     
+    CRendererStep::Init(_treePostSceneRenderer, _szDefaultRenderTarget);
+
     CXMLTreeNode l_treeSamplers = _treePostSceneRenderer.GetChild("input_samplers");
     CXMLTreeNode l_treeRenderTargets = _treePostSceneRenderer.GetChild("render_targets");
 
@@ -27,14 +27,7 @@ bool CPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer)
     {
       LOGGER->AddNewLog(ELL_ERROR,"CPostSceneRendererStep::Init error inicialitzant input_samplers");
       SetOk(false);
-    }else if(!InitRenderTargets(l_treeRenderTargets))
-    {
-      LOGGER->AddNewLog(ELL_ERROR,"CPostSceneRendererStep::Init error inicialitzant render_targets");
-      SetOk(false);
     }else{
-
-      SetName(l_szName);
-      SetActive(l_bActive);
 
       m_szEffect = l_szEffect;
 
@@ -48,14 +41,14 @@ bool CPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer)
 
       Vect2f l_fPos = _treePostSceneRenderer.GetVect2fProperty("position",Vect2f(0),false);
 
-      m_iPos.x = (int) (l_fPos.x * m_iRenderTargetWidth);
-      m_iPos.y = (int) (l_fPos.y * m_iRenderTargetHeight);
+      m_iPos.x = (int) (l_fPos.x * RENDER_MANAGER->GetScreenWidth());
+      m_iPos.y = (int) (l_fPos.y * RENDER_MANAGER->GetScreenHeight());
 
       if(_treePostSceneRenderer.ExistsProperty("size_x"))
       {
         float l_fSizeX = _treePostSceneRenderer.GetFloatProperty("size_x",1.0,false);
 
-        m_iSize.x = (int) (l_fSizeX * m_iRenderTargetWidth);
+        m_iSize.x = (int) (l_fSizeX * RENDER_MANAGER->GetScreenWidth());
         m_iSize.y = m_iSize.x;
 
         if(_treePostSceneRenderer.ExistsProperty("aspect_ratio"))
@@ -64,13 +57,13 @@ bool CPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer)
 
           if(l_bAspectRatio)
           {
-            m_iSize.y = (int)(m_iSize.x * m_iRenderTargetHeight/(float)m_iRenderTargetWidth);
+            m_iSize.y = (int)(m_iSize.x * RENDER_MANAGER->GetScreenHeight()/(float)RENDER_MANAGER->GetScreenWidth());
           }
         }
 
       }else{
-        m_iSize.x = m_iRenderTargetWidth; 
-        m_iSize.y = m_iRenderTargetHeight;
+        m_iSize.x = RENDER_MANAGER->GetScreenWidth(); 
+        m_iSize.y = RENDER_MANAGER->GetScreenHeight();
       }
 
       SetOk(true);
@@ -83,7 +76,7 @@ bool CPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer)
 void CPostSceneRendererStep::Render(CRenderManager* _pRM)
 {
   CEffectManager* l_pEM = CORE->GetEffectManager();
-  l_pEM->SetTextureWidthHeight(m_iRenderTargetWidth,m_iRenderTargetHeight);
+  //l_pEM->SetTextureWidthHeight(m_iRenderTargetWidth,m_iRenderTargetHeight);
 
   l_pEM->SetAlphaFactor(m_fAlphaFactor);
 
@@ -97,7 +90,7 @@ void CPostSceneRendererStep::Render(CRenderManager* _pRM)
   if(l_pEffect)
   {
     ActivateInputSamplers();
-    ActivateRenderTargets(_pRM);
+    //ActivateRenderTargets(_pRM);
 
     l_pEM->LoadShaderData(l_pEffect);
 
@@ -116,7 +109,7 @@ void CPostSceneRendererStep::Render(CRenderManager* _pRM)
       l_pD3DEffect->End();
     }
   
-    DeactivateRenderTargets(_pRM);
+    //DeactivateRenderTargets(_pRM);
     DeactivateInputSamplers();
   }
 }

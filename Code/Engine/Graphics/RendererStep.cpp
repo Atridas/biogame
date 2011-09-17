@@ -1,7 +1,7 @@
 #include "RendererStep.h"
-#include "RenderTarget.h"
-#include "TextureRenderTarget.h"
-#include "BackBufferRenderTarget.h"
+//#include "RenderTarget.h"
+//#include "TextureRenderTarget.h"
+//#include "BackBufferRenderTarget.h"
 #include "InputSampler.h"
 #include "TextureInputSampler.h"
 #include "FrameBufferInputSampler.h"
@@ -9,7 +9,20 @@
 #include "Core.h"
 #include "RenderManager.h"
 
-bool CRendererStep::InitRenderTargets(CXMLTreeNode& _treeRenderTargets)
+bool CRendererStep::Init(CXMLTreeNode& _treeSceneRenderer, const string& _szDefaultRenderTarget) 
+{
+  string l_szName = _treeSceneRenderer.GetPszISOProperty("name","",false);
+  m_szRenderTarget = _treeSceneRenderer.GetPszISOProperty("render_target",_szDefaultRenderTarget.c_str(),false);
+  bool l_bActive = _treeSceneRenderer.GetBoolProperty("active",true,false);
+
+  SetName(l_szName);
+  SetActive(l_bActive);
+
+  SetOk(l_szName != ""); 
+  return IsOk();
+};
+
+/*bool CRendererStep::InitRenderTargets(CXMLTreeNode& _treeRenderTargets)
 {
   if(_treeRenderTargets.Exists())
   {
@@ -34,7 +47,7 @@ bool CRendererStep::InitRenderTargets(CXMLTreeNode& _treeRenderTargets)
 
         l_pRenderTarget = new CTextureRenderTarget();
 
-        if(l_pRenderTarget->Init(l_pRenderTargetNode, l_iWidth, l_iHeight, l_bDefaultDepthBuffer))
+        if(l_pRenderTarget->Init(l_pRenderTargetNode, l_iWidth, l_iHeight, false))
         {
           m_vRenderTargets.push_back(l_pRenderTarget);
         }else{
@@ -73,6 +86,7 @@ bool CRendererStep::InitRenderTargets(CXMLTreeNode& _treeRenderTargets)
 
   return IsOk();
 }
+*/
 
 bool CRendererStep::InitInputSamplers(CXMLTreeNode& _treeInputSamplers)
 {
@@ -153,6 +167,7 @@ void CRendererStep::ActivateInputSamplers()
   }
 }
 
+/*
 void CRendererStep::ActivateRenderTargets(CRenderManager* l_pRM)
 {
   vector<CRenderTarget*>::iterator l_itRendertarget = m_vRenderTargets.begin();
@@ -178,10 +193,11 @@ void CRendererStep::DeactivateRenderTargets(CRenderManager* l_pRM)
     l_pRenderTarget->Deactivate(l_pRM);
   }
 }
+*/
 
 void CRendererStep::Release()
 {
-  vector<CRenderTarget*>::iterator l_itRendertarget = m_vRenderTargets.begin();
+  /*vector<CRenderTarget*>::iterator l_itRendertarget = m_vRenderTargets.begin();
   vector<CRenderTarget*>::iterator l_itRendertargetEnd = m_vRenderTargets.end();
 
   for(;l_itRendertarget != l_itRendertargetEnd;++l_itRendertarget)
@@ -189,6 +205,7 @@ void CRendererStep::Release()
     CHECKED_DELETE(*l_itRendertarget);
   }
   m_vRenderTargets.clear();
+  */
 
   vector<CInputSampler*>::iterator l_itSampler = m_vInputSamplers.begin();
   vector<CInputSampler*>::iterator l_itSamplerEnd = m_vInputSamplers.end();

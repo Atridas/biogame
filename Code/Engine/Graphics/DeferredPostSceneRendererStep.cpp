@@ -4,9 +4,9 @@
 #include "Core.h"
 #include "LightManager.h"
 
-bool CDeferredPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer)
+bool CDeferredPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer, const string& _szDefaultRenderTarget)
 {
-  return CPostSceneRendererStep::Init(_treePostSceneRenderer);
+  return CPostSceneRendererStep::Init(_treePostSceneRenderer, _szDefaultRenderTarget);
 }
 
 void CDeferredPostSceneRendererStep::Release()
@@ -18,13 +18,13 @@ void CDeferredPostSceneRendererStep::Render(CRenderManager* _pRM)
 {
   CLightManager* l_pLightManager = CORE->GetLightManager();
   CEffectManager* l_pEM = CORE->GetEffectManager();
-  l_pEM->SetTextureWidthHeight(m_iRenderTargetWidth,m_iRenderTargetHeight);
+  //l_pEM->SetTextureWidthHeight(m_iRenderTargetWidth,m_iRenderTargetHeight);
 
   CEffect* l_pEffect = l_pEM->GetResource(m_szEffect);
   if(l_pEffect)
   {
     ActivateInputSamplers();
-    ActivateRenderTargets(_pRM);
+    //ActivateRenderTargets(_pRM);
 
     const vector<CLight*>& l_vLights = l_pLightManager->GetLights();
 
@@ -53,7 +53,7 @@ void CDeferredPostSceneRendererStep::Render(CRenderManager* _pRM)
       }
     }
 
-    DeactivateRenderTargets(_pRM);
+    //DeactivateRenderTargets(_pRM);
     DeactivateInputSamplers();
   }
 }

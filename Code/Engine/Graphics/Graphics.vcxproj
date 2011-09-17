@@ -102,6 +102,7 @@
     <ClCompile Include="ForwardSceneRendererStep.cpp" />
     <ClCompile Include="FrameBufferInputSampler.cpp" />
     <ClCompile Include="InputSampler.cpp" />
+    <ClCompile Include="MultipleRenderTarget.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="PostSceneRendererStep.cpp" />
     <ClCompile Include="PreSceneRendererStep.cpp" />
@@ -140,6 +141,7 @@
     <ClCompile Include="SceneEffectManager.cpp" />
     <ClCompile Include="ShadowMapRenderToTexture.cpp" />
     <ClCompile Include="ShoulderCamera.cpp" />
+    <ClCompile Include="SingleRenderTarget.cpp" />
     <ClCompile Include="SphereCamera.cpp" />
     <ClCompile Include="SpotLight.cpp" />
     <ClCompile Include="StaticMesh.cpp" />
@@ -167,6 +169,7 @@
     <ClInclude Include="include\ForwardSceneRendererStep.h" />
     <ClInclude Include="include\FrameBufferInputSampler.h" />
     <ClInclude Include="include\InputSampler.h" />
+    <ClInclude Include="include\MultipleRenderTarget.h" />
     <ClInclude Include="include\Particle.h" />
     <ClInclude Include="include\PostSceneRendererStep.h" />
     <ClInclude Include="include\PreSceneRendererStep.h" />
@@ -220,6 +223,7 @@
     <ClInclude Include="include\SceneEffectManager.h" />
     <ClInclude Include="include\ShadowMapRenderToTexture.h" />
     <ClInclude Include="include\ShoulderCamera.h" />
+    <ClInclude Include="include\SingleRenderTarget.h" />
     <ClInclude Include="include\SpecularPropertyDecorator.h" />
     <ClInclude Include="include\SpecularTextureDecorator.h" />
     <ClInclude Include="include\SphereCamera.h" />

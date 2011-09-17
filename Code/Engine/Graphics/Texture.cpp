@@ -61,6 +61,7 @@ void CTexture::Release()
    LOGGER->AddNewLog(ELL_INFORMATION, "CTexture::Unload");
 
    CHECKED_RELEASE(m_pTexture);
+   CHECKED_RELEASE(m_pTextureSurface0);
    CHECKED_RELEASE(m_pCubeTexture);
    CHECKED_RELEASE(m_pDepthStencilRenderTargetTexture);
 }
@@ -122,7 +123,7 @@ bool CTexture::Create(const string& _szName,
     l_UsageType=D3DUSAGE_DYNAMIC;
     break;
   case RENDERTARGET:
-    l_CreateDepthStencilSurface=true;
+    //l_CreateDepthStencilSurface=true;
     l_UsageType=D3DUSAGE_RENDERTARGET;
     break;
   }

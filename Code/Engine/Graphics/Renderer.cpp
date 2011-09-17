@@ -1,6 +1,10 @@
 #include "Renderer.h"
 #include "RendererStep.h"
 #include "XML/XMLTreeNode.h"
+#include "RenderTarget.h"
+#include "TextureRenderTarget.h"
+#include "BackBufferRenderTarget.h"
+#include "MultipleRenderTarget.h"
 #include "PreSceneRendererStep.h"
 #include "SceneRendererStep.h"
 #include "PostSceneRendererStep.h"
@@ -26,9 +30,157 @@ bool CRenderer::Init(const string& _szFileName)
   
     LOGGER->AddNewLog(ELL_INFORMATION,"CRenderer::Init inicialitzant fitxer XML %s",_szFileName.c_str());
 
-    CXMLTreeNode l_treePreRenderers = l_treeRenderer.GetChild("pre_scene_renderers");
-    CXMLTreeNode l_treeRenderers = l_treeRenderer.GetChild("scene_renderers");
+    m_szDefaultRenderTarget = l_treeRenderer.GetPszISOProperty("default", "backbuffer", true);
+
+    CXMLTreeNode l_treeRenderTargets = l_treeRenderer.GetChild("render_targets");
+    CXMLTreeNode l_treePreRenderers  = l_treeRenderer.GetChild("pre_scene_renderers");
+    CXMLTreeNode l_treeRenderers     = l_treeRenderer.GetChild("scene_renderers");
     CXMLTreeNode l_treePostRenderers = l_treeRenderer.GetChild("post_scene_renderers");
+    CXMLTreeNode l_treeRenderPaths   = l_treeRenderer.GetChild("render_paths");
+
+    map<string,CTextureRenderTarget*> l_mapTextureRenderTargets;
+
+    if(!l_treeRenderTargets.Exists())
+    {
+      LOGGER->AddNewLog(ELL_INFORMATION,"CRenderer::Init no hi ha RenderTargets");
+    }else{
+
+      CXMLTreeNode l_treeBackbufferRenderTargets = l_treeRenderTargets.GetChild("backbuffer_render_target");
+
+      if(l_treeBackbufferRenderTargets.Exists())
+      {
+        CBackBufferRenderTarget* l_pBackBufferRT = new CBackBufferRenderTarget();
+        if(l_pBackBufferRT->Init(l_treeBackbufferRenderTargets.GetPszISOProperty("name", "backbuffer", true)))
+        {
+          m_mapRenderTargets[ l_pBackBufferRT->GetName() ] = l_pBackBufferRT;
+        }
+        else
+        {
+          LOGGER->AddNewLog(ELL_WARNING, "Error a l'init del backbuffer render target");
+          delete l_pBackBufferRT;
+        }
+      }
+      else
+      {
+        LOGGER->AddNewLog(ELL_WARNING, "No hi ha l'element \"backbuffer_render_target\". Inicialitzant amb valors per defecte");
+        CBackBufferRenderTarget* l_pBackBufferRT = new CBackBufferRenderTarget();
+        if(l_pBackBufferRT->Init("backbuffer"))
+        {
+          m_mapRenderTargets[ l_pBackBufferRT->GetName() ] = l_pBackBufferRT;
+        }
+        else
+        {
+          LOGGER->AddNewLog(ELL_WARNING, "Error a l'init del backbuffer render target");
+          delete l_pBackBufferRT;
+        }
+      }
+
+
+      CXMLTreeNode l_treeTextureRenderTargets = l_treeRenderTargets.GetChild("texture_render_targets");
+
+      if(!l_treeTextureRenderTargets.Exists())
+      {
+        LOGGER->AddNewLog(ELL_INFORMATION,"CRenderer::Init no hi ha texture_render_targets");
+      }else{
+
+        int l_iNumChildren = l_treeTextureRenderTargets.GetNumChildren();
+
+        for(int i = 0; i < l_iNumChildren;i++)
+        {
+          CXMLTreeNode l_treeTextureRenderTarget = l_treeTextureRenderTargets(i);
+
+          if(string(l_treeTextureRenderTarget.GetName()) == "texture_render_target")
+          {
+            CTextureRenderTarget* l_pTextureRenderTarget = new CTextureRenderTarget();
+
+            if(l_pTextureRenderTarget->Init(l_treeTextureRenderTarget))
+            {
+              m_mapRenderTargets[l_pTextureRenderTarget->GetName()] = l_pTextureRenderTarget;
+              l_mapTextureRenderTargets[l_pTextureRenderTarget->GetName()] = l_pTextureRenderTarget;
+
+            }else{
+              LOGGER->AddNewLog(ELL_ERROR,"CRenderer::Init error al inicialitzar texture_render_target %s",l_pTextureRenderTarget->GetName().c_str());
+              CHECKED_DELETE(l_pTextureRenderTarget);
+            }
+
+          }else if(!l_treeTextureRenderTarget.IsComment())
+          {
+            LOGGER->AddNewLog(ELL_WARNING,"CRenderer::Init element no reconegut %s",l_treeTextureRenderTarget.GetName());
+          }
+        }
+      }
+
+
+      CXMLTreeNode l_treeMultipleRenderTargets = l_treeRenderTargets.GetChild("multiple_render_targets");
+
+      if(!l_treeMultipleRenderTargets.Exists())
+      {
+        LOGGER->AddNewLog(ELL_INFORMATION,"CRenderer::Init no hi ha multiple_render_targets");
+      }else{
+
+        int l_iNumChildren = l_treeMultipleRenderTargets.GetNumChildren();
+
+        for(int i = 0; i < l_iNumChildren;i++)
+        {
+          CXMLTreeNode l_treeMultipleRenderTarget = l_treeMultipleRenderTargets(i);
+
+          if(string(l_treeMultipleRenderTarget.GetName()) == "multiple_render_target")
+          {
+            string l_szName = l_treeMultipleRenderTarget.GetPszISOProperty("name","",false);
+
+            if(l_szName != "")
+            {
+              CMultipleRenderTarget* l_pMultipleRenderTarget = new CMultipleRenderTarget();
+
+              l_pMultipleRenderTarget->Init(l_szName);
+
+              m_mapRenderTargets[l_pMultipleRenderTarget->GetName()] = l_pMultipleRenderTarget;
+
+              int l_iNumChildren = l_treeMultipleRenderTarget.GetNumChildren();
+
+              for(int i = 0; i < l_iNumChildren;i++)
+              {
+                CXMLTreeNode l_treeTextureRenderTarget = l_treeMultipleRenderTarget(i);
+
+                if(string(l_treeTextureRenderTarget.GetName()) == "texture_render_target")
+                {
+                  string l_szTRTName = l_treeTextureRenderTarget.GetPszISOProperty("name","",false);
+                  int l_iIndex = l_treeTextureRenderTarget.GetIntProperty("index",-1,false);
+
+                  if(l_szTRTName != "")
+                  {
+                    CTextureRenderTarget* l_pTextureRenderTarget = 0;
+                    
+                    map<string,CTextureRenderTarget*>::iterator l_itTRT = l_mapTextureRenderTargets.find(l_szTRTName);
+
+                    if(l_itTRT != l_mapTextureRenderTargets.end())
+                    {
+                      l_pMultipleRenderTarget->AddTextureRenderTarget((*l_itTRT).second,l_iIndex);
+                    }else{
+                      LOGGER->AddNewLog(ELL_ERROR,"CRenderer::Init multiple_render_target: texture_render_target %s no trobat",l_szTRTName.c_str());
+                    }
+
+                  }else{
+                    LOGGER->AddNewLog(ELL_ERROR,"CRenderer::Init multiple_render_target: texture_render_target sense nom");
+                  }
+
+                }else if(!l_treeTextureRenderTarget.IsComment())
+                {
+                  LOGGER->AddNewLog(ELL_ERROR,"CRenderer::Init element no reconegut %s",l_treeTextureRenderTarget.GetName());
+                }
+              }
+
+            }else{
+              LOGGER->AddNewLog(ELL_ERROR,"CRenderer::Init multiple_render_target sense nom");
+            }
+
+          }else if(!l_treeMultipleRenderTargets.IsComment())
+          {
+            LOGGER->AddNewLog(ELL_WARNING,"CRenderer::Init element no reconegut %s",l_treeMultipleRenderTargets.GetName());
+          }
+        }
+      }
+    }
 
     if(!l_treePreRenderers.Exists())
     {
@@ -59,7 +211,7 @@ bool CRenderer::Init(const string& _szFileName)
 
           if(l_pPreRenderer)
           {
-            if(!l_pPreRenderer->Init(l_treePreRenderer))
+            if(!l_pPreRenderer->Init(l_treePreRenderer, m_szDefaultRenderTarget))
             {
               CHECKED_DELETE(l_pPreRenderer);
               LOGGER->AddNewLog(ELL_ERROR,"CRenderer::Init error inicialitzant PreRenderer");
@@ -94,7 +246,7 @@ bool CRenderer::Init(const string& _szFileName)
         {
           CSceneRendererStep* l_pRenderer = new CSceneRendererStep();
 
-          if(!l_pRenderer->Init(l_treeRenderer))
+          if(!l_pRenderer->Init(l_treeRenderer, m_szDefaultRenderTarget))
           {
             CHECKED_DELETE(l_pRenderer);
             LOGGER->AddNewLog(ELL_ERROR,"CRenderer::Init error inicialitzant SceneRenderer");
@@ -138,7 +290,7 @@ bool CRenderer::Init(const string& _szFileName)
             l_pPostRenderer = new CPostSceneRendererStep();
           }
 
-          if(!l_pPostRenderer->Init(l_treePostRenderer))
+          if(!l_pPostRenderer->Init(l_treePostRenderer, m_szDefaultRenderTarget))
           {
             CHECKED_DELETE(l_pPostRenderer);
             LOGGER->AddNewLog(ELL_ERROR,"CRenderer::Init error inicialitzant PostSceneRenderer");
@@ -155,6 +307,11 @@ bool CRenderer::Init(const string& _szFileName)
       }
 
     }
+
+    if(l_treeRenderPaths.Exists())
+    {
+      //TODO
+    }
     
     SetOk(true);
   }
@@ -165,6 +322,7 @@ bool CRenderer::Init(const string& _szFileName)
 void CRenderer::Render(CProcess* _pProcess)
 {
   CRenderManager* l_pRM = RENDER_MANAGER;
+  CEffectManager* l_pEM = CORE->GetEffectManager();
 
   m_pCamera = _pProcess->GetCamera();
 
@@ -180,6 +338,15 @@ void CRenderer::Render(CProcess* _pProcess)
 
     if(l_pPreSceneRenderer->IsActive())
     {
+      string l_szRenderTarget = l_pPreSceneRenderer->GetRenderTarget();
+      map<string,CRenderTarget*>::const_iterator l_it = m_mapRenderTargets.find(l_szRenderTarget);
+      if(l_it != m_mapRenderTargets.end())
+      {
+        l_it->second->Activate(l_pRM);
+      }
+
+      l_pEM->SetTextureWidthHeight(l_it->second->GetWidth(), l_it->second->GetHeight());
+
       l_pPreSceneRenderer->Render(l_pRM,m_pCamera);
     }
   }
@@ -188,6 +355,15 @@ void CRenderer::Render(CProcess* _pProcess)
 
   if(m_pCurrentSceneRenderer)
   {
+    string l_szRenderTarget = m_pCurrentSceneRenderer->GetRenderTarget();
+    map<string,CRenderTarget*>::const_iterator l_it = m_mapRenderTargets.find(l_szRenderTarget);
+    if(l_it != m_mapRenderTargets.end())
+    {
+      l_it->second->Activate(l_pRM);
+    }
+    
+    l_pEM->SetTextureWidthHeight(l_it->second->GetWidth(), l_it->second->GetHeight());
+
     m_pCurrentSceneRenderer->Render(l_pRM,m_pCamera);
   }
   
@@ -201,6 +377,15 @@ void CRenderer::Render(CProcess* _pProcess)
 
     if(l_pPostSceneRenderer->IsActive())
     {
+      string l_szRenderTarget = l_pPostSceneRenderer->GetRenderTarget();
+      map<string,CRenderTarget*>::const_iterator l_it = m_mapRenderTargets.find(l_szRenderTarget);
+      if(l_it != m_mapRenderTargets.end())
+      {
+        l_it->second->Activate(l_pRM);
+      }
+      
+      l_pEM->SetTextureWidthHeight(l_it->second->GetWidth(), l_it->second->GetHeight());
+
       l_pPostSceneRenderer->Render(l_pRM,m_pCamera);
     }
   }
@@ -214,6 +399,16 @@ void CRenderer::Render(CProcess* _pProcess)
 
 void CRenderer::Release()
 {
+  map<string,CRenderTarget*>::iterator l_itMap = m_mapRenderTargets.begin();
+  map<string,CRenderTarget*>::iterator l_itMapEnd = m_mapRenderTargets.end();
+
+  for(;l_itMap != l_itMapEnd; ++l_itMap)
+  {
+    CHECKED_DELETE((*l_itMap).second);
+  }
+
+  m_mapRenderTargets.clear();
+
   m_pCurrentSceneRenderer = 0;
 
   vector<CPreSceneRendererStep*>::iterator l_itPreRenderer = m_vPreSceneRendererSteps.begin();

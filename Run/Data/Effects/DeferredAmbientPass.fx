@@ -9,14 +9,24 @@ sampler ColorTextureSampler : register(s0) = sampler_state
   AddressV  = WRAP;
 };
 
+sampler LightBufferTextureSampler : register(s1) = sampler_state
+{
+  MipFilter = LINEAR;
+  MinFilter = LINEAR;  
+  MagFilter = LINEAR;
+  AddressU  = WRAP;
+  AddressV  = WRAP;
+};
+
 float4 DeferredAmbientPassPS(float2 _UV: TEXCOORD0) : COLOR
 {
-	float3 l_DiffuseColor = tex2D(ColorTextureSampler, _UV).rgb;
+	float4 l_DiffuseColor = tex2D(ColorTextureSampler, _UV);
+  if( dot(l_DiffuseColor.xyz, 1.0) == 0 ) discard;
   
-  float3 l_LightResult = g_AmbientLight * l_DiffuseColor;
+  float4 l_LightColor = tex2D(LightBufferTextureSampler, _UV);
+    
+  return l_DiffuseColor * (float4(g_AmbientLight.rgb,1) + l_LightColor);
   
-  float4 out_ = float4(l_LightResult.xyz,1.0);
-	return out_;
 }
 
 technique DeferredAmbientPassTechnique
@@ -25,9 +35,7 @@ technique DeferredAmbientPassTechnique
 	{
 		ZEnable = false;
 		ZWriteEnable = false;
-		AlphaBlendEnable = true;
-		SrcBlend = One;
-		DestBlend = Zero;
+		AlphaBlendEnable = false;
 		AlphaTestEnable = false;	
 		CullMode = CCW;
 		PixelShader = compile ps_3_0 DeferredAmbientPassPS();

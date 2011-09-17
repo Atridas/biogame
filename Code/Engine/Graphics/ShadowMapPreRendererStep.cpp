@@ -7,9 +7,9 @@
 #include "DirectionalLight.h"
 #include "RenderManager.h"
 
-bool CShadowMapPreRendererStep::Init(CXMLTreeNode& _treePreSceneRenderer)
+bool CShadowMapPreRendererStep::Init(CXMLTreeNode& _treePreSceneRenderer, const string& _szDefaultRenderTarget)
 {
-  SetOk(CPreSceneRendererStep::Init(_treePreSceneRenderer));
+  SetOk(CPreSceneRendererStep::Init(_treePreSceneRenderer, _szDefaultRenderTarget));
   return IsOk();
 }
 

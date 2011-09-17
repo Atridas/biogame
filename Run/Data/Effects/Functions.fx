@@ -326,8 +326,8 @@ float3 PositionFromZ(float z, float2 uv)
   
   float4 view = mul( g_InvProjectionMatrix, float4(x_p,y_p,1,1) );
   
-  float lamda = z /* view.z*/;
-  
+  float lamda = -z * view.z / view.w;
+
   return float3(view.x * lamda, view.y * lamda, z);
 }
 

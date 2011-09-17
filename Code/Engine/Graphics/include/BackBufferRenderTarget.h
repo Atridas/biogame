@@ -2,21 +2,19 @@
 #ifndef __BACK_BUFFER_RENDER_TARGET_H__
 #define __BACK_BUFFER_RENDER_TARGET_H__
 
-#include "RenderTarget.h"
-
-class CXMLTreeNode;
+#include "SingleRenderTarget.h"
 
 class CBackBufferRenderTarget :
-  public CRenderTarget
+  public CSingleRenderTarget
 {
 public:
   CBackBufferRenderTarget() {};
   virtual ~CBackBufferRenderTarget() {Done();};
 
-  bool Init();
-
-protected:
-  virtual void Release();
+  bool Init(const string& _szName);
+  
+  virtual int GetWidth ();
+  virtual int GetHeight();
 
 };
 

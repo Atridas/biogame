@@ -5,90 +5,90 @@
 #include "Core.h"
 #include "RenderManager.h"
 
-bool CTextureRenderTarget::Init(CXMLTreeNode& _treeRenderTarget, int _iWidth, int _iHeight, bool _bDefaultDepthBuffer)
+bool CTextureRenderTarget::Init(CXMLTreeNode& _treeRenderTarget)
 {
-  int l_iIndex = _treeRenderTarget.GetIntProperty("index",0,false);
+  string l_szName =  _treeRenderTarget.GetPszISOProperty("name","",false);
   string l_szTextureName = _treeRenderTarget.GetPszISOProperty("texture","",false);
-  string l_szFormatType = _treeRenderTarget.GetPszISOProperty("format_type","A8R8G8B8");
+  string l_szFormat = _treeRenderTarget.GetPszISOProperty("format","A8R8G8B8");
 
-  m_iWidth = _iWidth;
-  m_iHeight = _iHeight;
+  int l_iWidth = (int)CORE->GetRenderManager()->GetScreenWidth();
 
-  if(l_szTextureName != "")
+  m_iWidth = _treeRenderTarget.GetIntProperty("width",(int)RENDER_MANAGER->GetScreenWidth(),false);
+  m_iHeight = _treeRenderTarget.GetIntProperty("height",(int)RENDER_MANAGER->GetScreenHeight(),false);
+
+  CRenderTarget::Init(m_iWidth, m_iHeight);
+
+  SetOk(true);
+
+  if(l_szName != "")
   {
-    m_szTextureName = l_szTextureName;
-    CRenderTarget::Init(l_iIndex);
+    SetName(l_szName);
 
-    m_pTexture = new CTexture();
-
-    if(m_pTexture->Create(l_szTextureName,
-                          m_iWidth,
-                          m_iHeight,
-                          1,
-                          CTexture::RENDERTARGET,
-                          CTexture::DEFAULT,
-                          CTexture::GetFormatTypeFromString(l_szFormatType)))
+    if(l_szTextureName != "")
     {
-      m_pSurface = m_pTexture->GetSurface();
-      if(l_iIndex == 0)
+      m_szTextureName = l_szTextureName;
+
+      CTexture* l_pTexture = new CTexture();
+
+      if(l_pTexture->Create(l_szTextureName,
+                            m_iWidth,
+                            m_iHeight,
+                            1,
+                            CTexture::RENDERTARGET,
+                            CTexture::DEFAULT,
+                            CTexture::GetFormatTypeFromString(l_szFormat)))
       {
-        if(_bDefaultDepthBuffer)
-        {
-          //RENDER_MANAGER->GetDevice()->GetDepthStencilSurface(&m_pDepthStencilSurface);
-          m_pDepthStencilSurface = RENDER_MANAGER->GetDepthStencilBuffer();
-        }
-        else
-        {
-          m_pDepthStencilSurface = m_pTexture->GetDepthStencilSurface();
-        }
-      }
-      else
+        m_pSurface = l_pTexture->GetSurface();
+        m_pSurface->AddRef();
+      } else
       {
-        m_pDepthStencilSurface = RENDER_MANAGER->GetDepthStencilBuffer();
+        m_pSurface = 0;
       }
-    } else
-    {
-      m_pSurface = 0;
-      m_pDepthStencilSurface = 0;
-    }
 
-    if(m_pTexture->IsOk() && m_pSurface && m_pDepthStencilSurface)
-    {
-      SetOk(true);
-      CORE->GetTextureManager()->AddResource(l_szTextureName, m_pTexture);
-    } else
-    {
-      if(!m_pTexture->IsOk())
-        LOGGER->AddNewLog(ELL_ERROR, "CTextureRenderTarget::Init  Texture is not Ok.");
-      if(!m_pSurface)
-        LOGGER->AddNewLog(ELL_ERROR, "CTextureRenderTarget::Init  Surface is not Ok.");
-      if(!m_pDepthStencilSurface)
-        LOGGER->AddNewLog(ELL_ERROR, "CTextureRenderTarget::Init  DepthStencilSurface is not Ok.");
+      if(l_pTexture->IsOk() && m_pSurface)
+      {
+        SetOk(true);
+        CORE->GetTextureManager()->AddResource(l_szTextureName, l_pTexture);
+      } else
+      {
+        if(!l_pTexture->IsOk())
+          LOGGER->AddNewLog(ELL_ERROR, "CTextureRenderTarget::Init  Texture is not Ok.");
+        if(!m_pSurface)
+          LOGGER->AddNewLog(ELL_ERROR, "CTextureRenderTarget::Init  Surface is not Ok.");
+        SetOk(false);
+        CHECKED_DELETE(l_pTexture);
+      }
+
+    }else{
+      LOGGER->AddNewLog(ELL_WARNING,"CTextureRenderTarget::Init render_target sense textura");
       SetOk(false);
-      CHECKED_DELETE(m_pTexture);
     }
-
   }else{
-    LOGGER->AddNewLog(ELL_WARNING,"CTextureRenderTarget::Init render_target sense textura");
+    LOGGER->AddNewLog(ELL_WARNING,"CTextureRenderTarget::Init render_target sense nom");
     SetOk(false);
   }
           
   return IsOk();
 }
 
-void CTextureRenderTarget::Activate(CRenderManager* l_pRM)
+void CTextureRenderTarget::Activate(CRenderManager* l_pRM, int _iIndex)
 {
   CColor l_Color = l_pRM->GetClearColor();
   uint32 l_uiRed		= (uint32) (l_Color.GetRed() * 255);
 	uint32 l_uiGreen	= (uint32) (l_Color.GetGreen() * 255);
 	uint32 l_uiBlue		= (uint32) (l_Color.GetBlue() * 255);
 
+  //TODO: l_pRM->ClearSurface(...);
   l_pRM->GetDevice()->ColorFill( m_pSurface, 0, D3DCOLOR_ARGB(0,l_uiRed,l_uiGreen,l_uiBlue));
 
-  CRenderTarget::Activate(l_pRM);
+  CSingleRenderTarget::Activate(l_pRM, _iIndex);
 }
 
 void CTextureRenderTarget::Release()
 {
-  CRenderTarget::Release();
+  m_szTextureName = "";
+  m_iWidth = 0;
+  m_iHeight = 0;
+
+  CSingleRenderTarget::Release();
 }
