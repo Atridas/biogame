@@ -319,6 +319,18 @@
 
     </post_scene_renderer>
   
+    <post_scene_renderer name="michelangelo" effect="Texture" active="false">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/michelangelo.jpg"/>
+      </input_samplers>
+    </post_scene_renderer>
+  
+    <post_scene_renderer name="mustafa" effect="Texture" active="false">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/mustafa.jpg"/>
+      </input_samplers>
+    </post_scene_renderer>
+    
   </post_scene_renderers>
   
   <render_paths>
@@ -356,6 +368,14 @@
     
     <render_path name="shock_wave">
       <post_scene_renderer name="shock_wave"/>
+    </render_path>
+    
+    <render_path name="canvi nivell -2 a -1">
+      <post_scene_renderer name="michelangelo"/>
+    </render_path>
+    
+    <render_path name="canvi nivell -1 a Hangar">
+      <post_scene_renderer name="mustafa"/>
     </render_path>
   </render_paths>
   

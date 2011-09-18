@@ -608,3 +608,19 @@ void CRenderer::ActivateRenderPaths()
 
   m_bRenderPathsChanged = false;
 }
+
+
+void CRenderer::GetActiveRenderPaths(set<string>& _RenderPaths) const
+{
+  _RenderPaths.clear();
+
+  map<string, SRenderPath*>::const_iterator l_it  = m_mapRenderPaths.begin();
+  map<string, SRenderPath*>::const_iterator l_end = m_mapRenderPaths.end();
+  for(; l_it != l_end; ++l_it)
+  {
+    if(l_it->second->m_bActive)
+    {
+      _RenderPaths.insert(l_it->first);
+    }
+  }
+}
