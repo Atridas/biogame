@@ -38,7 +38,7 @@ private:
   CPhysicUserData*      m_pUserData;
   CPhysicActor*         m_pPActorPlane;
 
-  CSpotLight*           m_pSpotLight;
+  //CSpotLight*           m_pSpotLight;
   
   //CPortalManager        m_PortalManager;
 };

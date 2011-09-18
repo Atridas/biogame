@@ -8,29 +8,77 @@
 #include "PhysicsManager.h"
 #include "EmiterManager.h"
 #include "Renderer.h"
+#include "LightManager.h"
+#include "XML/XMLTreeNode.h"
 
 #include "LevelChanger.h"
 
 
 bool CLevelChanger::Init(const string& _szXMLLevels)
 {
-  //TODO com una casa
-  SLevel* l_pLevel = new SLevel;
-  
-  l_pLevel->RenderPath = "canvi nivell -1 a Hangar";
+  CXMLTreeNode l_xmlLevels;
 
-  l_pLevel->StaticMeshes.insert("Data/XML/StaticMeshes.xml");
-  l_pLevel->StaticMeshes.insert("Data/Levels/Hangar/XML/StaticMeshes.xml");
-  
-  l_pLevel->RenderableObjects.insert("Data/Levels/Hangar/XML/RenderableObjects.xml");
+  if(!l_xmlLevels.LoadFile(_szXMLLevels.c_str()))
+  {
+    LOGGER->AddNewLog(ELL_ERROR,"CLevelChanger::Init Error al carregar el fitxer XML %s",_szXMLLevels.c_str());
+    SetOk(false);
+  }
+  else
+  {
+    if(strcmp(l_xmlLevels.GetName(), "Levels") != 0)
+    {
+      LOGGER->AddNewLog(ELL_ERROR,"CLevelChanger::Init Element arrel es %s i hauria de ser Levels",l_xmlLevels.GetName());
+    }
 
-  l_pLevel->Portals.insert("Data/Levels/Hangar/XML/Portals.xml");
+    int l_numChild = l_xmlLevels.GetNumChildren();
+    for(int i = 0; i < l_numChild; ++i)
+    {
+      CXMLTreeNode l_xmlLevel = l_xmlLevels(i);
+      if(strcmp(l_xmlLevel.GetName(), "Level") == 0)
+      {
+        SLevel* l_pLevel = new SLevel;
+        string l_szName = l_xmlLevel.GetPszISOProperty("name");
+        l_pLevel->RenderPath = l_xmlLevel.GetPszISOProperty("render_path");
 
-  l_pLevel->Entities.insert("Data/Levels/Hangar/XML/GameEntities.xml");
+        int l_numChild = l_xmlLevel.GetNumChildren();
+        for(int i = 0; i < l_numChild; ++i)
+        {
+          CXMLTreeNode l_xmlElement = l_xmlLevel(i);
+          if(strcmp(l_xmlElement.GetName(), "StaticMesh") == 0)
+          {
+            l_pLevel->StaticMeshes.push_back( l_xmlElement.GetPszISOProperty("file") );
+          }
+          else if(strcmp(l_xmlElement.GetName(), "RenderableObjects") == 0)
+          {
+            l_pLevel->RenderableObjects.push_back( l_xmlElement.GetPszISOProperty("file") );
+          }
+          else if(strcmp(l_xmlElement.GetName(), "Portals") == 0)
+          {
+            l_pLevel->Portals.push_back( l_xmlElement.GetPszISOProperty("file") );
+          }
+          else if(strcmp(l_xmlElement.GetName(), "Entities") == 0)
+          {
+            l_pLevel->Entities.push_back( l_xmlElement.GetPszISOProperty("file") );
+          }
+          else if(strcmp(l_xmlElement.GetName(), "Lights") == 0)
+          {
+            l_pLevel->Lights.push_back( l_xmlElement.GetPszISOProperty("file") );
+          }
+          else if(!l_xmlElement.IsComment())
+          {
+            LOGGER->AddNewLog(ELL_ERROR,"CLevelChanger::Init Element no reconegut %s",l_xmlElement.GetName());
+          }
+        }
+        AddResource(l_szName, l_pLevel);
+      }
+      else if(!l_xmlLevel.IsComment())
+      {
+        LOGGER->AddNewLog(ELL_ERROR,"CLevelChanger::Init Element no reconegut %s",l_xmlLevel.GetName());
+      }
+    }
+    SetOk(true);
+  }
 
-  AddResource("Hangar", l_pLevel);
-
-  SetOk(true);
 
   return IsOk();
 }
@@ -42,7 +90,7 @@ void CLevelChanger::Update(float _fElapsedTime)
   {
     SLevel* l_pLevel = GetResource(m_szNewLevel);
     CCore* l_pCore = CORE;
-    set<string>::iterator l_it;
+    vector<string>::iterator l_it;
     for(l_it = l_pLevel->StaticMeshes.begin(); l_it != l_pLevel->StaticMeshes.end(); ++l_it)
     {
       l_pCore->m_pStaticMeshManager->Load(*l_it);
@@ -54,6 +102,10 @@ void CLevelChanger::Update(float _fElapsedTime)
     for(l_it = l_pLevel->Portals.begin(); l_it != l_pLevel->Portals.end(); ++l_it)
     {
       l_pCore->m_pPortalManager->Init(*l_it);
+    }
+    for(l_it = l_pLevel->Lights.begin(); l_it != l_pLevel->Lights.end(); ++l_it)
+    {
+      l_pCore->m_pLightManager->Load(*l_it);
     }
     
     l_pCore->m_pScriptManager->Initialize();
@@ -99,6 +151,7 @@ void CLevelChanger::Update(float _fElapsedTime)
       CHECKED_DELETE( l_pCore->m_pIAManager                );
       CHECKED_DELETE( l_pCore->m_pScriptManager            );
       CHECKED_DELETE( l_pCore->m_pPhysicsManager           );
+      //CHECKED_DELETE( l_pCore->m_pLightManager             );
     
     
       l_pCore->m_pEntityManager            = new CEntityManager           ();
@@ -109,7 +162,8 @@ void CLevelChanger::Update(float _fElapsedTime)
       l_pCore->m_pEmiterManager            = new CEmiterManager           ();
       l_pCore->m_pScriptManager            = new CScriptManager           ();
       l_pCore->m_pPhysicsManager           = new CPhysicsManager          ();
-      
+      //l_pCore->m_pLightManager             = new CLightManager            ();
+      l_pCore->m_pLightManager->Done();
       
 
       l_pCore->m_pPhysicsManager->Init(l_szPhysxFile);

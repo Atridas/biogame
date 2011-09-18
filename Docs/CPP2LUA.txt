@@ -11,6 +11,9 @@ GLOBALS
     
     get_collision_group
     int GetCollisionGroup(const string& _szGroup)
+    
+    set_new_level
+    void SetNewLevel(const string& _szLevel)
 
   Class:
 			Vect2f
@@ -291,6 +294,9 @@ ENGINE
         get_ia_manager
         CIAManager* GetIAManager() const
         
+        get_level_changer
+        CLevelChanger* GetLevelChanger() const
+        
     Class:
       Process
       CProcess
@@ -308,6 +314,14 @@ ENGINE
         
         get_exit
         bool GetExit() const
+  
+    Class:
+      LevelChanger
+      CLevelChanger
+      
+      Methonds:
+        set_new_level
+        void SetNewLevel(const string& _szNewLevel)
   
   GRAPHICS
     Class:
