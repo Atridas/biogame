@@ -15,6 +15,7 @@
 #include <EffectManager.h>
 #include "HDRPipeline.h"
 #include "Renderer.h"
+#include "LevelChanger.h"
 
 #include "params.h"
 
@@ -70,12 +71,15 @@ void CEngine::Release()
 void CEngine::Update()
 {
 	m_pCore->Update();
-	float l_fElapsedTime = m_pCore->GetTimer()->GetElapsedTime();
+  if(!m_pCore->GetLevelChanger()->ChangingLevel())
+  {
+	  float l_fElapsedTime = m_pCore->GetTimer()->GetElapsedTime();
 
-	if(m_pActiveProcess != NULL)
-		m_pActiveProcess->Update(l_fElapsedTime);
+	  if(m_pActiveProcess != NULL)
+		  m_pActiveProcess->Update(l_fElapsedTime);
 
-  UpdateSystems(l_fElapsedTime);
+    UpdateSystems(l_fElapsedTime);
+  }
 }
 
 void CEngine::Render()

@@ -37,6 +37,7 @@ public:
   
   void ActivateRenderPath  (const string& _szRenderPath);
   void DeactivateRenderPath(const string& _szRenderPath);
+  void GetActiveRenderPaths(set<string>& _RenderPaths) const;
 
   void Render(CProcess* _pProcess);
 

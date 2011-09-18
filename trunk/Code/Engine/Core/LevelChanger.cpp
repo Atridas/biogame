@@ -7,6 +7,7 @@
 #include "ScriptManager.h"
 #include "PhysicsManager.h"
 #include "EmiterManager.h"
+#include "Renderer.h"
 
 #include "LevelChanger.h"
 
@@ -16,6 +17,8 @@ bool CLevelChanger::Init(const string& _szXMLLevels)
   //TODO com una casa
   SLevel* l_pLevel = new SLevel;
   
+  l_pLevel->RenderPath = "canvi nivell -1 a Hangar";
+
   l_pLevel->StaticMeshes.insert("Data/XML/StaticMeshes.xml");
   l_pLevel->StaticMeshes.insert("Data/Levels/Hangar/XML/StaticMeshes.xml");
   
@@ -34,7 +37,47 @@ bool CLevelChanger::Init(const string& _szXMLLevels)
 
 void CLevelChanger::Update(float _fElapsedTime)
 {
-  if(m_szNewLevel != "")
+  //Ja estem canviant de nivell
+  if(m_bChanging)
+  {
+    SLevel* l_pLevel = GetResource(m_szNewLevel);
+    CCore* l_pCore = CORE;
+    set<string>::iterator l_it;
+    for(l_it = l_pLevel->StaticMeshes.begin(); l_it != l_pLevel->StaticMeshes.end(); ++l_it)
+    {
+      l_pCore->m_pStaticMeshManager->Load(*l_it);
+    }
+    for(l_it = l_pLevel->RenderableObjects.begin(); l_it != l_pLevel->RenderableObjects.end(); ++l_it)
+    {
+      l_pCore->m_pRenderableObjectsManager->Load(*l_it);
+    }
+    for(l_it = l_pLevel->Portals.begin(); l_it != l_pLevel->Portals.end(); ++l_it)
+    {
+      l_pCore->m_pPortalManager->Init(*l_it);
+    }
+    
+    l_pCore->m_pScriptManager->Initialize();
+    l_pCore->m_pScriptManager->Load(l_pCore->GetLuaInitFile());
+   
+    l_pCore->m_pIAManager->Init();
+    for(l_it = l_pLevel->Entities.begin(); l_it != l_pLevel->Entities.end(); ++l_it)
+    {
+      l_pCore->m_pEntityManager->LoadEntitiesFromXML(*l_it);
+    }
+
+    l_pCore->m_pIAManager->CompleteGraph();
+    
+    CRenderer* l_pRenderer = l_pCore->GetRenderer();
+    l_pRenderer->DeactivateRenderPath(l_pLevel->RenderPath);
+    for(set<string>::iterator l_it = m_RenderPathsToActivate.begin(); l_it != m_RenderPathsToActivate.end(); ++l_it)
+    {
+      l_pRenderer->ActivateRenderPath(*l_it);
+    }
+
+    m_szNewLevel = "";
+    m_bChanging = false;
+  }
+  else if(m_szNewLevel != "")
   {
     SLevel* l_pLevel = GetResource(m_szNewLevel);
     if(l_pLevel)
@@ -75,36 +118,22 @@ void CLevelChanger::Update(float _fElapsedTime)
         l_pCore->m_pPhysicsManager->SetTriggerReport  (l_pCore->GetPhysicTriggerReport());
         l_pCore->m_pPhysicsManager->SetCollisionReport(l_pCore->GetPhysicCollisionReport());
       }
-    
-      for(l_it = l_pLevel->StaticMeshes.begin(); l_it != l_pLevel->StaticMeshes.end(); ++l_it)
+
+
+      CRenderer* l_pRenderer = l_pCore->GetRenderer();
+      l_pRenderer->GetActiveRenderPaths(m_RenderPathsToActivate);
+      for(set<string>::iterator l_it = m_RenderPathsToActivate.begin(); l_it != m_RenderPathsToActivate.end(); ++l_it)
       {
-        l_pCore->m_pStaticMeshManager->Load(*l_it);
-      }
-      for(l_it = l_pLevel->RenderableObjects.begin(); l_it != l_pLevel->RenderableObjects.end(); ++l_it)
-      {
-        l_pCore->m_pRenderableObjectsManager->Load(*l_it);
-      }
-      for(l_it = l_pLevel->Portals.begin(); l_it != l_pLevel->Portals.end(); ++l_it)
-      {
-        l_pCore->m_pPortalManager->Init(*l_it);
-      }
-    
-      l_pCore->m_pScriptManager->Initialize();
-      l_pCore->m_pScriptManager->Load(l_pCore->GetLuaInitFile());
-   
-      l_pCore->m_pIAManager->Init();
-      for(l_it = l_pLevel->Entities.begin(); l_it != l_pLevel->Entities.end(); ++l_it)
-      {
-        l_pCore->m_pEntityManager->LoadEntitiesFromXML(*l_it);
+        l_pRenderer->DeactivateRenderPath(*l_it);
       }
 
-      l_pCore->m_pIAManager->CompleteGraph();
-
-      m_szNewLevel = "";
+      l_pRenderer->ActivateRenderPath(l_pLevel->RenderPath);
+      m_bChanging = true;
     }
     else
     {
       LOGGER->AddNewLog(ELL_WARNING, "Intentant canviar a nivell no definit! \"%s\"", m_szNewLevel.c_str());
+      m_szNewLevel = "";
     }
   }
 }

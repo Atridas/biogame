@@ -7,6 +7,7 @@
 
 struct SLevel
 {
+  string      RenderPath;
   set<string> StaticMeshes;
   set<string> RenderableObjects;
   set<string> Portals;
@@ -18,13 +19,13 @@ class CLevelChanger:
   private CMapManager<SLevel>
 {
 public:
-  CLevelChanger():m_szNewLevel("") {};
+  CLevelChanger():m_szNewLevel(""),m_bChanging(false) {};
   ~CLevelChanger() {Done();};
 
   bool Init(const string& _szXMLLevels);
 
   void Update(float _fElapsedTime);
-  bool ChangingLevel() const { return false; };
+  bool ChangingLevel() const { return m_bChanging; };
 
   void SetNewLevel(const string& _szNewLevel) {m_szNewLevel = _szNewLevel;};
 
@@ -34,6 +35,9 @@ protected:
 private:
   
   string m_szNewLevel;
+
+  bool m_bChanging;
+  set<string> m_RenderPathsToActivate;
 
 };
 
