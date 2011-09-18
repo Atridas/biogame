@@ -71,19 +71,20 @@ bool CEntityProcess::Init()
   //CGameEntity* l_peEnemy = CORE->GetEntityManager()->InitMiner("Player", Vect3f(8.0f,2.0f,4.0f), "Gordo Cabrón");
 
   // llum ----------------------------------------
-  
-  m_pSpotLight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
-                                                          Vect3f(0.0f,15.0f,0.0f),
-                                                          Vect3f(0.3f,-1.0f,0.0f),
-                                                          CColor(Vect3f(1.0f,1.0f,1.0f)),
-                                                          20.0f,
-                                                          80.0f,
-                                                          10.0f,
-                                                          45.0f,
-                                                          true );
-  m_pSpotLight->SetPosition(Vect3f(0.0f,15.0f,0.0f));
-  m_pSpotLight->SetDirection(Vect3f(0.3f,-1.0f,0.0f).Normalize());
-  m_pSpotLight->SetActive(true);
+  /*
+  CSpotLight* l_pSpotLight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
+                                                                      Vect3f(0.0f,15.0f,0.0f),
+                                                                      Vect3f(0.3f,-1.0f,0.0f),
+                                                                      CColor(Vect3f(1.0f,1.0f,1.0f)),
+                                                                      20.0f,
+                                                                      80.0f,
+                                                                      10.0f,
+                                                                      45.0f,
+                                                                      true );
+  l_pSpotLight->SetPosition(Vect3f(0.0f,15.0f,0.0f));
+  l_pSpotLight->SetDirection(Vect3f(0.3f,-1.0f,0.0f).Normalize());
+  l_pSpotLight->SetActive(true);
+  */
 
   //CShadowMapPreRendererStep* l_pShadowMapPreRenderStep = (CShadowMapPreRendererStep*)CORE->GetRenderer()->GetPreSceneRendererStep("shadow_map_renderer");
   //l_pShadowMapPreRenderStep->SetShadowMapLightCast(m_pSpotLight);
@@ -110,10 +111,28 @@ void CEntityProcess::Update(float _fElapsedTime)
 
   CObject3D* m_pPlayerPos = m_pPlayerEntity->GetComponent<CComponentObject3D>();
 
-  m_pSpotLight->SetPosition(m_pCamera->GetEye());
-  m_pSpotLight->SetDirection(m_pCamera->GetDirection());
+  //m_pSpotLight->SetPosition(m_pCamera->GetEye());
+  //m_pSpotLight->SetDirection(m_pCamera->GetDirection());
 
   CORE->GetSoundManager()->UpdateSound3DSystem(m_pPlayerPos->GetPosition(),m_pCamera->GetDirection());
+
+  CSpotLight* l_pSpotLight = (CSpotLight*)CORE->GetLightManager()->GetResource("FreeModeLight");
+  
+  if(!l_pSpotLight)
+  {
+    l_pSpotLight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
+                                                                        Vect3f(0.0f,15.0f,0.0f),
+                                                                        Vect3f(0.3f,-1.0f,0.0f),
+                                                                        CColor(Vect3f(1.0f,1.0f,1.0f)),
+                                                                        20.0f,
+                                                                        80.0f,
+                                                                        10.0f,
+                                                                        45.0f,
+                                                                        true );
+    l_pSpotLight->SetActive(true);
+  }
+  l_pSpotLight->SetPosition(m_pCamera->GetEye());
+  l_pSpotLight->SetDirection(m_pCamera->GetDirection());
 }
 
 /*

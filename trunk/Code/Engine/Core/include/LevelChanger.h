@@ -8,10 +8,11 @@
 struct SLevel
 {
   string      RenderPath;
-  set<string> StaticMeshes;
-  set<string> RenderableObjects;
-  set<string> Portals;
-  set<string> Entities;
+  vector<string> StaticMeshes;
+  vector<string> RenderableObjects;
+  vector<string> Portals;
+  vector<string> Entities;
+  vector<string> Lights;
 };
 
 

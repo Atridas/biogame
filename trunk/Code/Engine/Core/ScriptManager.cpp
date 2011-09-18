@@ -28,6 +28,7 @@ extern "C"
 #include "LightManager.h"
 #include "SoundManager.h"
 #include "PhysicsManager.h"
+#include "LevelChanger.h"
 
 #include "Utils/Object3D.h"
 #include "Utils/BaseControl.h"
@@ -221,7 +222,10 @@ void CloseConsole()
   CORE->GetConsole()->SetActive(false);
 }
 
-
+void SetNewLevel(const string &_szLevel)
+{
+  CORE->GetLevelChanger()->SetNewLevel(_szLevel);
+}
 
 void CScriptManager::RegisterGUI() {
   module(m_pLS)
@@ -344,6 +348,8 @@ void CScriptManager::RegisterLUAFunctions()
     ,def("exit", &CloseConsole)
     //collision group
     ,def("get_collision_group", &GetCollisionGroup)
+    //canviar de nivell
+    ,def("set_new_level", &SetNewLevel)
   ];
 
   //Vect3f
@@ -474,7 +480,8 @@ void CScriptManager::RegisterLUAFunctions()
         .def("get_script_manager",              &CCore::GetScriptManager)
         .def("get_input_manager",               &CCore::GetInputManager)
         .def("get_action_manager",              &CCore::GetActionManager)
-        .def("get_sound_manager",               &CCore::GetSoundManager);
+        .def("get_sound_manager",               &CCore::GetSoundManager)
+        .def("get_level_changer",               &CCore::GetLevelChanger);
   
   RegisterCore_Entities(l_core);
   RegisterCore_IA(l_core);
@@ -490,6 +497,10 @@ void CScriptManager::RegisterLUAFunctions()
       .def("get_active_process",              &CEngine::GetActiveProcess)
       .def("set_exit",                        &CEngine::SetExit)
       .def("get_exit",                        &CEngine::GetExit)
+
+  //Level Changer
+    ,class_<CLevelChanger>("LevelChanger")
+      .def("set_new_level", &CLevelChanger::SetNewLevel)
   ];
 
   //CRenderableObjectsManager
