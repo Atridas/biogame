@@ -387,6 +387,7 @@
 	<mesh name="lvl1_aguanta_llums08" path="Data/Meshes/lvl1_aguanta_llums08.mesh" max="0.130722 0.0 -0.0450406" min="-0.0445366 -0.37025 -0.22109" />
 	<mesh name="lvl1_Caixa_estatica_petita39" path="Data/Meshes/lvl1_Caixa_estatica_petita39.mesh" max="1.39813 0.5 -0.122318" min="-1.39813 -0.5 0.122322" />
 	<mesh name="lvl1_Caixa_estatica_petita40" path="Data/Meshes/lvl1_Caixa_estatica_petita40.mesh" max="1.39813 0.5 -0.12232" min="-1.39813 -0.5 0.122321" />
+	<mesh name="lvl1_Caixa_estatica_petita41" path="Data/Meshes/lvl1_Caixa_estatica_petita41.mesh" max="1.39813 0.5 -0.122319" min="-1.39813 -0.5 0.122321" />
 	<mesh name="lvl1_armeria" path="Data/Meshes/lvl1_armeria.mesh" max="8.14388 6.0 2.93201" min="-11.1439 0.0 -17.932" />
 	<mesh name="lvl1_viga08" path="Data/Meshes/lvl1_viga08.mesh" max="0.237833 0.789214 10.5043" min="-0.237833 0.0 -10.5043" />
 	<mesh name="lvl1_viga09" path="Data/Meshes/lvl1_viga09.mesh" max="0.237833 0.789214 10.5043" min="-0.237833 0.0 -10.5043" />
@@ -624,4 +625,12 @@
 	<mesh name="lvl1_elice" path="Data/Meshes/lvl1_elice.mesh" max="3.26702 2.73942 3.2706" min="-3.27681 -0.23126 -3.27319" />
 	<mesh name="lvl1_porta07" path="Data/Meshes/lvl1_porta07.mesh" max="0.812852 1.30378 0.812852" min="-0.812852 -1.30378 -0.812852" />
 	<mesh name="lvl1_porta09" path="Data/Meshes/lvl1_porta09.mesh" max="0.812853 1.30378 0.812852" min="-0.812853 -1.30378 -0.812852" />
+	<mesh name="lvl1_key_blue" path="Data/Meshes/lvl1_key_blue.mesh" max="0.525259 0.199613 0.525259" min="-0.525259 -0.199613 -0.525259" />
+	<mesh name="lvl1_key_purple" path="Data/Meshes/lvl1_key_purple.mesh" max="0.525259 0.199613 0.525261" min="-0.525259 -0.199613 -0.525261" />
+	<mesh name="lvl1_key_yellow" path="Data/Meshes/lvl1_key_yellow.mesh" max="0.525259 0.199613 0.525261" min="-0.525259 -0.199613 -0.525261" />
+	<mesh name="lvl1_key_green" path="Data/Meshes/lvl1_key_green.mesh" max="0.525259 0.199613 0.525259" min="-0.525259 -0.199613 -0.525259" />
+	<mesh name="lvl1_unlock_green" path="Data/Meshes/lvl1_unlock_green.mesh" max="0.492911 2.16581 0.492912" min="-0.492911 0.0 -0.492912" />
+	<mesh name="lvl1_unlock_blue" path="Data/Meshes/lvl1_unlock_blue.mesh" max="0.492911 2.16581 0.492911" min="-0.492911 0.0 -0.492912" />
+	<mesh name="lvl1_unlock_purple" path="Data/Meshes/lvl1_unlock_purple.mesh" max="0.492912 2.16581 0.492911" min="-0.492911 0.0 -0.492911" />
+	<mesh name="lvl1_unlock_yellow" path="Data/Meshes/lvl1_unlock_yellow.mesh" max="0.492912 2.16581 0.492911" min="-0.492912 0.0 -0.492911" />
 </meshes>

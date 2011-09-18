@@ -42,11 +42,34 @@ function IsLight _object =
 	)
 )
 
+--Comprova si l'objecte proporcionat ha de ser convertit en entitat o no.
+function WantsEntity _object =
+(
+	if (GetUserProp _object "entity") == false then
+	(
+		return false
+	)
+	
+	return true
+)
+
 -- Comprova si l'objecte proporcionat és un trigger
 function IsTrigger _object =
 (
 	-- TODO acceptar més coses
 	if classof _object == Dummy and ((GetUserProp _object "TriggerEnter") != undefined or (GetUserProp _object "TriggerExit") != undefined) then
+	(
+		return true
+	) else (
+		return false
+	)
+)
+
+-- Comprova si l'objecte proporcionat és un dummy amb propietat física
+function IsPhysxDummy _object =
+(
+	-- TODO acceptar més coses
+	if classof _object == Dummy and (GetUserProp _object "physXBox") != undefined then
 	(
 		return true
 	) else (

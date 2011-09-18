@@ -408,6 +408,7 @@
 	<RenderableObject name="lvl1_aguanta_llums08" class="StaticMesh" resource="lvl1_aguanta_llums08" position="35.7645 -2.01137 -6.67658" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Caixa_estatica_petita39" class="StaticMesh" resource="lvl1_Caixa_estatica_petita39" position="31.96 -2.46012 -1.60717" yaw="50.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Caixa_estatica_petita40" class="StaticMesh" resource="lvl1_Caixa_estatica_petita40" position="18.2369 0.52294 -1.6804" yaw="50.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_Caixa_estatica_petita41" class="StaticMesh" resource="lvl1_Caixa_estatica_petita41" position="14.306 0.52294 1.76423" yaw="50.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_armeria" class="StaticMesh" resource="lvl1_armeria" position="33.6163 -10.0 -23.6384" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_viga08" class="StaticMesh" resource="lvl1_viga08" position="24.951 -5.01891 -31.1149" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_viga09" class="StaticMesh" resource="lvl1_viga09" position="29.767 -5.01891 -31.1149" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -645,4 +646,12 @@
 	<RenderableObject name="lvl1_elice" class="StaticMesh" resource="lvl1_elice" position="0.0 5.17398 0.0" yaw="0.000160287" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_porta07" class="StaticMesh" resource="lvl1_porta07" position="-5.22713 1.30378 -5.22304" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_porta09" class="StaticMesh" resource="lvl1_porta09" position="5.22305 1.30378 -5.22712" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_key_blue" class="StaticMesh" resource="lvl1_key_blue" position="-30.2093 1.47331 -0.10787" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_key_purple" class="StaticMesh" resource="lvl1_key_purple" position="27.8726 -8.49328 -38.4624" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_key_yellow" class="StaticMesh" resource="lvl1_key_yellow" position="13.0062 1.39179 46.8454" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_key_green" class="StaticMesh" resource="lvl1_key_green" position="0.035368 -3.81493 -21.1876" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_unlock_green" class="StaticMesh" resource="lvl1_unlock_green" position="-10.5804 0.005 7.05398" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_unlock_blue" class="StaticMesh" resource="lvl1_unlock_blue" position="-9.21016 0.005 8.37934" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_unlock_purple" class="StaticMesh" resource="lvl1_unlock_purple" position="-8.04286 0.005 9.47855" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_unlock_yellow" class="StaticMesh" resource="lvl1_unlock_yellow" position="-6.80895 0.005 10.6213" yaw="0.0" pitch="0.0" roll="0.0" />
 </RenderableObjects>
