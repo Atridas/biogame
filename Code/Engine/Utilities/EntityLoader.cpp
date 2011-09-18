@@ -202,6 +202,7 @@ void LoadComponentDoor(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
   
   string l_szName    = _pEntity->GetName();
   bool l_bOpen       = _TreeComponent.GetBoolProperty("open", false, false);
+  bool l_bBlocked    = _TreeComponent.GetBoolProperty("block", false, false);
   Vect3f l_vSize     = _TreeComponent.GetVect3fProperty("size", Vect3f(1.0f), false);
   float l_fOpenTime  = _TreeComponent.GetFloatProperty("open_time", 2.0f, false);
   float l_fCloseTime = _TreeComponent.GetFloatProperty("close_time", 0.5f, false);
@@ -209,10 +210,13 @@ void LoadComponentDoor(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
   LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Porta amb nom \"%s\" i estat \"%d\"",l_szName.c_str(), l_bOpen);
 
   //component porta
-  if(!CComponentDoor::AddToEntity(_pEntity, l_bOpen, l_vSize, l_fOpenTime, l_fCloseTime))
+  CComponentDoor* l_pComponentDoor = 0;
+  if((l_pComponentDoor = CComponentDoor::AddToEntity(_pEntity, l_bOpen, l_vSize, l_fOpenTime, l_fCloseTime)) == 0)
   {
     LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
   }
+
+  l_pComponentDoor->Block(l_bBlocked);
 
   //màquina d'estats de la porta:
   string l_szInitialState = "";

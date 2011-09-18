@@ -253,6 +253,9 @@ function XMLEntityCover _instance &_TagName =
 
 --Genera els paràmetres d'un tag XML d'entitat Door. Conté:
 -- open
+-- [block]
+-- [open_time]
+-- [close_time]
 function XMLEntityDoor _instance &_TagName =
 (
 	local l_params = #()
@@ -270,6 +273,15 @@ function XMLEntityDoor _instance &_TagName =
 	)
 	
 	append l_params #("open",l_tmp)
+	
+	--block
+	local l_tmp = GetUserProp _instance "block"
+	if l_tmp != undefined then
+	(
+		l_aux = "" as stringStream
+		format "%" l_tmp to:l_aux
+		append l_params #("block",l_aux)
+	)
 	
 	--open_time
 	local l_tmp = GetUserProp _instance "open_time"

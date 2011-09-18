@@ -683,463 +683,484 @@ utility BioUtility "Eon-Utility" width:160 height:549
 		------------------------------------------------------
 		for i=1 to _entities.count do
 		(
-			if IsMesh _entities[i] then
+			local l_instance = _entities[i]
+			
+			if WantsEntity l_instance then
 			(
-				local l_instance = _entities[i]
-				
-				if l_instance.name == undefined then
+			
+				if IsMesh l_instance then
 				(
-					format "\n  %" (OpenTagXML "Entity") to:l_file
-				)
-				else
-				(
-					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
-				)
-				
-				format "\tEntitat Mesh %\n" l_instance.name
-				
-				--Object3D
-				l_params = XMLEntityObject3D l_instance &l_TagName
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				--RenderableObject
-				l_params = XMLEntityRenderableObject l_instance &l_TagName false
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				--PhysXBox
-				if (GetUserProp l_instance "physXBox") != undefined then
-				(
-					local l_density = GetUserProp l_instance "physXBox"
-					
-					if classof l_density != Integer then
+					local l_rotative = false
+					if l_instance.name == undefined then
 					(
-						l_density = 0
+						format "\n  %" (OpenTagXML "Entity") to:l_file
 					)
-					local l_colgroup = "escenari"
-					if l_density != 0 then
+					else
 					(
-						l_colgroup = "objecte dinamic"
+						format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
 					)
 					
-					l_params = XMLEntityPhysXBox l_instance &l_TagName l_colgroup true
+					format "\tEntitat Mesh %\n" l_instance.name
+					
+					--Object3D
+					l_params = XMLEntityObject3D l_instance &l_TagName
 					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 					
-					--Rotative
-					if IsRotative l_instance then
-					(
-						--Rotative
-						l_params = XMLEntityRotation l_instance &l_TagName
-						format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-					)
-				)
-				--PhysXMesh
-				else if (GetUserProp l_instance "physXMesh") != undefined then
-				(
-					local l_density = GetUserProp l_instance "physXMesh"
-					
-					if classof l_density != Integer then
-					(
-						l_density = 0
-					)
-					local l_colgroup = "escenari"
-					if l_density != 0 then
-					(
-						l_colgroup = "objecte dinamic"
-					)
-					
-					l_params = XMLEntityPhysXMesh l_instance &l_TagName l_colgroup
+					--RenderableObject
+					l_params = XMLEntityRenderableObject l_instance &l_TagName false
 					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 					
-					--Rotative
-					if IsRotative l_instance then
-					(
-						--Rotative
-						l_params = XMLEntityRotation l_instance &l_TagName
-						format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-					)
-				)
-				
-				--PickUp
-				if IsPickUp l_instance then
-				(
-					--Trigger
-					l_params = XMLEntityTrigger l_instance &l_TagName "pickup" (GetUserProp l_instance "pickup") undefined
-					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-					
-					--Rotative
-					if IsRotative l_instance then
-					(
-						--Rotative
-						l_params = XMLEntityRotation l_instance &l_TagName
-						format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-					)
-				)
-				
-				--Interactive
-				if IsInteractive l_instance then
-				(					
 					--PhysXBox
-					--l_params = XMLEntityPhysXBox l_instance &l_TagName "escenari" true
-					--format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					if (GetUserProp l_instance "physXBox") != undefined then
+					(
+						local l_density = GetUserProp l_instance "physXBox"
+						
+						if classof l_density != Integer then
+						(
+							l_density = 0
+						)
+						local l_colgroup = "escenari"
+						if l_density != 0 then
+						(
+							l_colgroup = "objecte dinamic"
+						)
+						
+						l_params = XMLEntityPhysXBox l_instance &l_TagName l_colgroup true
+						format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+						
+						--Rotative
+						if l_rotative == false and IsRotative l_instance then
+						(
+							l_rotative = true
+							--Rotative
+							l_params = XMLEntityRotation l_instance &l_TagName
+							format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+						)
+					)
+					--PhysXMesh
+					else if (GetUserProp l_instance "physXMesh") != undefined then
+					(
+						local l_density = GetUserProp l_instance "physXMesh"
+						
+						if classof l_density != Integer then
+						(
+							l_density = 0
+						)
+						local l_colgroup = "escenari"
+						if l_density != 0 then
+						(
+							l_colgroup = "objecte dinamic"
+						)
+						
+						l_params = XMLEntityPhysXMesh l_instance &l_TagName l_colgroup
+						format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+						
+						--Rotative
+						if l_rotative == false and IsRotative l_instance then
+						(
+							l_rotative = true
+							--Rotative
+							l_params = XMLEntityRotation l_instance &l_TagName
+							format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+						)
+					)
+					
+					--PickUp
+					if IsPickUp l_instance then
+					(
+						--Trigger
+						l_params = XMLEntityTrigger l_instance &l_TagName "pickup" (GetUserProp l_instance "pickup") undefined
+						format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+						
+						--Rotative
+						if l_rotative == false and IsRotative l_instance then
+						(
+							l_rotative = true
+							--Rotative
+							l_params = XMLEntityRotation l_instance &l_TagName
+							format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+						)
+					)
 					
 					--Interactive
-					l_params = XMLEntityInteractive l_instance &l_TagName
-					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					if IsInteractive l_instance then
+					(					
+						--PhysXBox
+						--l_params = XMLEntityPhysXBox l_instance &l_TagName "escenari" true
+						--format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+						
+						--Interactive
+						l_params = XMLEntityInteractive l_instance &l_TagName
+						format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					)
+					
+					--Destroyable
+					if IsDestroyable l_instance then
+					(
+						--PhysXBox
+						--l_params = XMLEntityPhysXBox l_instance &l_TagName "escenari" true
+						--format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+						
+						--Trigger
+						l_params = XMLEntityDestroyable l_instance &l_TagName
+						format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+						
+						
+					)
+					
+					--Explosive
+					if IsExplosive l_instance then
+					(
+						--Explosive
+						l_params = XMLEntityExplosive l_instance &l_TagName
+						format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					)
+					
+					format "\n  %" (CloseTagXML "Entity") to:l_file
 				)
-				
-				--Destroyable
-				if IsDestroyable l_instance then
+				else if IsTrigger l_instance then
 				(
-					--PhysXBox
-					--l_params = XMLEntityPhysXBox l_instance &l_TagName "escenari" true
-					--format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					if l_instance.name == undefined then
+					(
+						format "\n  %" (OpenTagXML "Entity") to:l_file
+					)
+					else
+					(
+						format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
+					)
+					
+					format "\tEntitat Trigger %\n" l_instance.name
+					
+					--Object3D
+					l_params = XMLEntityObject3D l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 					
 					--Trigger
+					l_params = XMLEntityTrigger l_instance &l_TagName "trigger" (GetUserProp l_instance "TriggerEnter") (GetUserProp l_instance "TriggerExit")
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--Emiter de partícules
+					if IsEmiter l_instance then
+					(
+						l_params = XMLEntityEmiter l_instance &l_TagName
+						format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					)
+					
+					--Rotative
+					if IsRotative l_instance then
+					(
+						--Rotative
+						l_params = XMLEntityRotation l_instance &l_TagName
+						format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					)
+					
+					format "\n  %" (CloseTagXML "Entity") to:l_file
+				)
+				else if IsCover l_instance then
+				(
+					if l_instance.name == undefined then
+					(
+						format "\n  %" (OpenTagXML "Entity") to:l_file
+					)
+					else
+					(
+						format "\n  %" (OpenTagParamXML "Entity" #(#("name", l_instance.name))) to:l_file
+					)
+					
+					format "\tEntitat Cover %\n" l_instance.name
+					
+					--Object3D
+					l_params = XMLEntityObject3D l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--Cover
+					l_params = XMLEntityCover l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					format "\n  %" (CloseTagXML "Entity") to:l_file
+				)
+				else if IsDoor l_instance then
+				(
+					if l_instance.name == undefined then
+					(
+						format "\n  %" (OpenTagXML "Entity") to:l_file
+					)
+					else
+					(
+						format "\n  %" (OpenTagParamXML "Entity" #(#("name", l_instance.name))) to:l_file
+					)
+					
+					format "\tEntitat Door %\n" l_instance.name
+					
+					l_params = #()
+					
+					--Object3D
+					l_params = XMLEntityObject3D l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--Renderable Object
+					l_params = XMLEntityRenderableObject l_instance &l_TagName true
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+						
+					--PhysXBox
+					--l_params = XMLEntityPhysXBox l_instance &l_TagName "escenari" false
+					--format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+						
+					--Gate
+					l_params = XMLEntityDoor l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					format "\n  %" (CloseTagXML "Entity") to:l_file
+				)
+				else if IsPickUp l_instance then
+				(
+					if l_instance.name == undefined then
+					(
+						format "\n  %" (OpenTagXML "Entity") to:l_file
+					)
+					else
+					(
+						format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
+					)
+					
+					format "\tEntitat PickUp %\n" l_instance.name
+					
+					l_params = #()
+					
+					--Object3D
+					l_params = XMLEntityObject3D l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+						
+					--Renderable Object
+					l_params = XMLEntityRenderableObject l_instance &l_TagName false
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--Trigger
+					l_params = XMLEntityTrigger l_instance &l_TagName "objecte interactiu" (GetUserProp l_instance "pickup") undefined
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--Rotative
+					if IsRotative l_instance then
+					(
+						--Rotative
+						l_params = XMLEntityRotation l_instance &l_TagName
+						format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					)
+					
+					format "\n  %" (CloseTagXML "Entity") to:l_file
+				)
+				else if IsInteractive l_instance then
+				(
+					if l_instance.name == undefined then
+					(
+						format "\n  %" (OpenTagXML "Entity") to:l_file
+					)
+					else
+					(
+						format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
+					)
+					
+					format "\tEntitat Interactiva %\n" l_instance.name
+					
+					l_params = #()
+					
+					--Object3D
+					l_params = XMLEntityObject3D l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+						
+					--Renderable Object
+					l_params = XMLEntityRenderableObject l_instance &l_TagName false
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--PhysXBox
+					l_params = XMLEntityPhysXBox l_instance &l_TagName "objecte interactiu" true
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--Interactiu
+					l_params = XMLEntityInteractive l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--Rotative
+					if IsRotative l_instance then
+					(
+						--Rotative
+						l_params = XMLEntityRotation l_instance &l_TagName
+						format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					)
+					
+					format "\n  %" (CloseTagXML "Entity") to:l_file
+				)
+				else if IsDestroyable l_instance then
+				(
+					if l_instance.name == undefined then
+					(
+						format "\n  %" (OpenTagXML "Entity") to:l_file
+					)
+					else
+					(
+						format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
+					)
+					
+					format "\tEntitat Destroyable %\n" l_instance.name
+					
+					l_params = #()
+					
+					--Object3D
+					l_params = XMLEntityObject3D l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+						
+					--Renderable Object
+					l_params = XMLEntityRenderableObject l_instance &l_TagName false
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--PhysXBox
+					l_params = XMLEntityPhysXBox l_instance &l_TagName "escenari" true
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--Destroyable
 					l_params = XMLEntityDestroyable l_instance &l_TagName
 					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 					
-					
-				)
-				
-				--Explosive
-				if IsExplosive l_instance then
-				(
 					--Explosive
-					l_params = XMLEntityExplosive l_instance &l_TagName
+					if IsExplosive l_instance then
+					(
+						l_params = XMLEntityExplosive l_instance &l_TagName
+						format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					)
+					
+					--Rotative
+					if IsRotative l_instance then
+					(
+						--Rotative
+						l_params = XMLEntityRotation l_instance &l_TagName
+						format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					)
+					
+					format "\n  %" (CloseTagXML "Entity") to:l_file
+				)
+				else if IsNavNode l_instance then
+				(
+					if l_instance.name == undefined then
+					(
+						format "\n  %" (OpenTagXML "Entity") to:l_file
+					)
+					else
+					(
+						format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
+					)
+					
+					format "\tEntitat NavNode %\n" l_instance.name
+					
+					l_params = #()
+					
+					--Object3D
+					l_params = XMLEntityObject3D l_instance &l_TagName
 					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--NavNode
+					l_params = XMLEntityNavNode l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					format "\n  %" (CloseTagXML "Entity") to:l_file
 				)
-				
-				format "\n  %" (CloseTagXML "Entity") to:l_file
-			)
-			else if IsTrigger _entities[i] then
-			(
-				local l_instance = _entities[i]
-				if l_instance.name == undefined then
+				else if IsSpawner l_instance then
 				(
-					format "\n  %" (OpenTagXML "Entity") to:l_file
+					if l_instance.name == undefined then
+					(
+						format "\n  %" (OpenTagXML "Entity") to:l_file
+					)
+					else
+					(
+						format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
+					)
+					
+					format "\tEntitat Spawner %\n" l_instance.name
+					
+					l_params = #()
+					
+					--Object3D
+					l_params = XMLEntityObject3D l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--Spawner
+					l_params = XMLEntitySpawner l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					format "\n  %" (CloseTagXML "Entity") to:l_file
 				)
-				else
+				else if IsEmiter l_instance then
 				(
-					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
-				)
-				
-				format "\tEntitat Trigger %\n" l_instance.name
-				
-				--Object3D
-				l_params = XMLEntityObject3D l_instance &l_TagName
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				--Trigger
-				l_params = XMLEntityTrigger l_instance &l_TagName "trigger" (GetUserProp l_instance "TriggerEnter") (GetUserProp l_instance "TriggerExit")
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				--Emiter de partícules
-				if IsEmiter l_instance then
-				(
+					if l_instance.name == undefined then
+					(
+						format "\n  %" (OpenTagXML "Entity") to:l_file
+					)
+					else
+					(
+						format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
+					)
+					
+					format "\tEntitat Emiter %\n" l_instance.name
+					
+					l_params = #()
+					
+					--Object3D
+					l_params = XMLEntityObject3D l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--Emiter
 					l_params = XMLEntityEmiter l_instance &l_TagName
 					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				)
-				
-				--Rotative
-				if IsRotative l_instance then
-				(
-					--Rotative
-					l_params = XMLEntityRotation l_instance &l_TagName
-					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				)
-				
-				format "\n  %" (CloseTagXML "Entity") to:l_file
-			)
-			else if IsCover _entities[i] then
-			(
-				local l_instance = _entities[i]
-				if l_instance.name == undefined then
-				(
-					format "\n  %" (OpenTagXML "Entity") to:l_file
-				)
-				else
-				(
-					format "\n  %" (OpenTagParamXML "Entity" #(#("name", l_instance.name))) to:l_file
-				)
-				
-				format "\tEntitat Cover %\n" l_instance.name
-				
-				--Object3D
-				l_params = XMLEntityObject3D l_instance &l_TagName
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				--Cover
-				l_params = XMLEntityCover l_instance &l_TagName
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				format "\n  %" (CloseTagXML "Entity") to:l_file
-			)
-			else if IsDoor _entities[i] then
-			(
-				local l_instance = _entities[i]
-				if l_instance.name == undefined then
-				(
-					format "\n  %" (OpenTagXML "Entity") to:l_file
-				)
-				else
-				(
-					format "\n  %" (OpenTagParamXML "Entity" #(#("name", l_instance.name))) to:l_file
-				)
-				
-				format "\tEntitat Door %\n" l_instance.name
-				
-				l_params = #()
-				
-				--Object3D
-				l_params = XMLEntityObject3D l_instance &l_TagName
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				--Renderable Object
-				l_params = XMLEntityRenderableObject l_instance &l_TagName true
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 					
-				--PhysXBox
-				--l_params = XMLEntityPhysXBox l_instance &l_TagName "escenari" false
-				--format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					format "\n  %" (CloseTagXML "Entity") to:l_file
+				)
+				else if IsBillboard l_instance then
+				(
+					if l_instance.name == undefined then
+					(
+						format "\n  %" (OpenTagXML "Entity") to:l_file
+					)
+					else
+					(
+						format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
+					)
 					
-				--Gate
-				l_params = XMLEntityDoor l_instance &l_TagName
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				format "\n  %" (CloseTagXML "Entity") to:l_file
-			)
-			else if IsPickUp _entities[i] then
-			(
-				local l_instance = _entities[i]
-				if l_instance.name == undefined then
-				(
-					format "\n  %" (OpenTagXML "Entity") to:l_file
-				)
-				else
-				(
-					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
-				)
-				
-				format "\tEntitat PickUp %\n" l_instance.name
-				
-				l_params = #()
-				
-				--Object3D
-				l_params = XMLEntityObject3D l_instance &l_TagName
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					format "\tEntitat Billboard %\n" l_instance.name
 					
-				--Renderable Object
-				l_params = XMLEntityRenderableObject l_instance &l_TagName false
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				--Trigger
-				l_params = XMLEntityTrigger l_instance &l_TagName "objecte interactiu" (GetUserProp l_instance "pickup") undefined
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				--Rotative
-				if IsRotative l_instance then
-				(
-					--Rotative
-					l_params = XMLEntityRotation l_instance &l_TagName
-					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				)
-				
-				format "\n  %" (CloseTagXML "Entity") to:l_file
-			)
-			else if IsInteractive _entities[i] then
-			(
-				local l_instance = _entities[i]
-				if l_instance.name == undefined then
-				(
-					format "\n  %" (OpenTagXML "Entity") to:l_file
-				)
-				else
-				(
-					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
-				)
-				
-				format "\tEntitat Interactiva %\n" l_instance.name
-				
-				l_params = #()
-				
-				--Object3D
-				l_params = XMLEntityObject3D l_instance &l_TagName
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					l_params = #()
 					
-				--Renderable Object
-				l_params = XMLEntityRenderableObject l_instance &l_TagName false
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				--PhysXBox
-				l_params = XMLEntityPhysXBox l_instance &l_TagName "objecte interactiu" true
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				--Interactiu
-				l_params = XMLEntityInteractive l_instance &l_TagName
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				--Rotative
-				if IsRotative l_instance then
-				(
-					--Rotative
-					l_params = XMLEntityRotation l_instance &l_TagName
+					--Object3D
+					l_params = XMLEntityObject3D l_instance &l_TagName
 					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				)
-				
-				format "\n  %" (CloseTagXML "Entity") to:l_file
-			)
-			else if IsDestroyable _entities[i] then
-			(
-				local l_instance = _entities[i]
-				if l_instance.name == undefined then
-				(
-					format "\n  %" (OpenTagXML "Entity") to:l_file
-				)
-				else
-				(
-					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
-				)
-				
-				format "\tEntitat Destroyable %\n" l_instance.name
-				
-				l_params = #()
-				
-				--Object3D
-				l_params = XMLEntityObject3D l_instance &l_TagName
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
 					
-				--Renderable Object
-				l_params = XMLEntityRenderableObject l_instance &l_TagName false
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				--PhysXBox
-				l_params = XMLEntityPhysXBox l_instance &l_TagName "escenari" true
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				--Destroyable
-				l_params = XMLEntityDestroyable l_instance &l_TagName
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				--Explosive
-				if IsExplosive l_instance then
-				(
-					l_params = XMLEntityExplosive l_instance &l_TagName
+					--Emiter
+					l_params = XMLEntityBillboard l_instance &l_TagName
 					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					format "\n  %" (CloseTagXML "Entity") to:l_file
 				)
-				
-				--Rotative
-				if IsRotative l_instance then
+				else if IsPhysxDummy l_instance then
 				(
-					--Rotative
-					l_params = XMLEntityRotation l_instance &l_TagName
+					if l_instance.name == undefined then
+					(
+						format "\n  %" (OpenTagXML "Entity") to:l_file
+					)
+					else
+					(
+						format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
+					)
+					
+					format "\tEntitat Dummy Físic %\n" l_instance.name
+					
+					--Object3D
+					l_params = XMLEntityObject3D l_instance &l_TagName
 					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--PhysXBox
+					l_params = XMLEntityPhysXBox l_instance &l_TagName "escenari" false
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					format "\n  %" (CloseTagXML "Entity") to:l_file
 				)
-				
-				format "\n  %" (CloseTagXML "Entity") to:l_file
-			)
-			else if IsNavNode _entities[i] then
-			(
-				local l_instance = _entities[i]
-				if l_instance.name == undefined then
-				(
-					format "\n  %" (OpenTagXML "Entity") to:l_file
-				)
-				else
-				(
-					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
-				)
-				
-				format "\tEntitat NavNode %\n" l_instance.name
-				
-				l_params = #()
-				
-				--Object3D
-				l_params = XMLEntityObject3D l_instance &l_TagName
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				--NavNode
-				l_params = XMLEntityNavNode l_instance &l_TagName
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				format "\n  %" (CloseTagXML "Entity") to:l_file
-			)
-			else if IsSpawner _entities[i] then
-			(
-				local l_instance = _entities[i]
-				if l_instance.name == undefined then
-				(
-					format "\n  %" (OpenTagXML "Entity") to:l_file
-				)
-				else
-				(
-					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
-				)
-				
-				format "\tEntitat Spawner %\n" l_instance.name
-				
-				l_params = #()
-				
-				--Object3D
-				l_params = XMLEntityObject3D l_instance &l_TagName
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				--Spawner
-				l_params = XMLEntitySpawner l_instance &l_TagName
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				format "\n  %" (CloseTagXML "Entity") to:l_file
-			)
-			else if IsEmiter _entities[i] then
-			(
-				local l_instance = _entities[i]
-				if l_instance.name == undefined then
-				(
-					format "\n  %" (OpenTagXML "Entity") to:l_file
-				)
-				else
-				(
-					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
-				)
-				
-				format "\tEntitat Emiter %\n" l_instance.name
-				
-				l_params = #()
-				
-				--Object3D
-				l_params = XMLEntityObject3D l_instance &l_TagName
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				--Emiter
-				l_params = XMLEntityEmiter l_instance &l_TagName
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				format "\n  %" (CloseTagXML "Entity") to:l_file
-			)
-			else if IsBillboard _entities[i] then
-			(
-				local l_instance = _entities[i]
-				if l_instance.name == undefined then
-				(
-					format "\n  %" (OpenTagXML "Entity") to:l_file
-				)
-				else
-				(
-					format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
-				)
-				
-				format "\tEntitat Billboard %\n" l_instance.name
-				
-				l_params = #()
-				
-				--Object3D
-				l_params = XMLEntityObject3D l_instance &l_TagName
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				--Emiter
-				l_params = XMLEntityBillboard l_instance &l_TagName
-				format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
-				
-				format "\n  %" (CloseTagXML "Entity") to:l_file
 			)
 		)
 		
