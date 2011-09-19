@@ -3157,6 +3157,10 @@
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
     <Interactive action="validate_key" />
   </Entity>
+  <Entity name="Change_Level_Trigger">
+    <Object3D position="-0.0492312 1.67603 22.1723" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="4.88198 4.70728 1.25509" collision_group="trigger" onEnter="change_level_level_1" />
+  </Entity>
   <Player position="-1.01856 1.08272 -19.8829" yaw="90.0" />
   <Miner name="lvl1_miner_green" position="-6.64659 1.6 7.62413" yaw="0.0" active="true" on_death="drop_key" />
 </Entities>

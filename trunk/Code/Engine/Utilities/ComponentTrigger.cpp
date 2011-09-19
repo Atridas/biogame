@@ -67,6 +67,8 @@ bool CComponentTrigger::Init(
   m_szOnEnter = _szOnEnter;
   m_szOnExit  = _szOnExit;
 
+  m_sEntered.clear();
+
   SetOk(true);
   return IsOk();
 }
@@ -76,6 +78,11 @@ void CComponentTrigger::OnEnter(CGameEntity* _pOther)
   if(!IsActive())
     return;
 
+  if(CheckEntered(_pOther))
+    return;
+
+  m_sEntered.insert(_pOther);
+
   ExecuteLua(m_szOnEnter,_pOther);
 }
 
@@ -84,7 +91,22 @@ void CComponentTrigger::OnExit (CGameEntity* _pOther)
   if(!IsActive())
     return;
 
+  if(!CheckEntered(_pOther))
+    return;
+
+  m_sEntered.erase(_pOther);
+
   ExecuteLua(m_szOnExit,_pOther);
+}
+
+bool CComponentTrigger::CheckEntered(CGameEntity* _pEntity)
+{
+  set<CGameEntity*>::iterator l_it;
+  set<CGameEntity*>::iterator l_itEnd = m_sEntered.end();
+
+  l_it = m_sEntered.find(_pEntity);
+
+  return l_it != l_itEnd;
 }
 
 void CComponentTrigger::ExecuteLua(const string& _szLuaCode, CGameEntity* _pOther)
