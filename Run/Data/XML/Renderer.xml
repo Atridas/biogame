@@ -104,6 +104,7 @@
         <material_effect material_type="6"   effect="NormalmapTexturedDeferred" />
         <material_effect material_type="7"   effect="AnimatedNormalmapTexturedDeferred" />
         <material_effect material_type="34"  effect="NormalTexturedDeferred" />
+        <material_effect material_type="35"  effect="AnimatedNormalTexturedDeferred" />
         <material_effect material_type="38"  effect="NormalmapTexturedDeferred" />
         <material_effect material_type="39"  effect="AnimatedNormalmapTexturedDeferred" />
         <material_effect material_type="10"  effect="NormalTexturedDeferred" />
