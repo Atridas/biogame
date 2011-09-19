@@ -11,6 +11,7 @@ class CPreSceneRendererStep;
 class CPostSceneRendererStep;
 class CProcess;
 class CCamera;
+class CObject3DRenderable;
 
 class CRenderer :
   public CBaseControl
@@ -19,7 +20,7 @@ class CRenderer :
   {
     set<string> m_PreSceneRenderSteps;
     set<string> m_PostSceneRenderSteps;
-    string m_szSceneRenderer;
+    set<string> m_SceneRenderers;
     bool m_bActive;
   };
 
@@ -44,6 +45,12 @@ public:
 protected:
   virtual void Release();
 private:
+
+  
+  void InitRenderVectors(CCamera* _pCamera,
+                         vector<CObject3DRenderable*>& _vOpaqueObjects, 
+                         vector<CObject3DRenderable*>& _vAlphaObjects, 
+                         vector<CObject3DRenderable*>& _vParticleEmiters);
 
   void ActivateRenderPaths();
 

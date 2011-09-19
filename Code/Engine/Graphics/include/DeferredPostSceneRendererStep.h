@@ -4,6 +4,9 @@
 
 #include "PostSceneRendererStep.h"
 
+class CLight;
+class CCamera;
+
 class CDeferredPostSceneRendererStep :
   public CPostSceneRendererStep
 {
@@ -11,13 +14,14 @@ public:
   CDeferredPostSceneRendererStep() {};
   virtual ~CDeferredPostSceneRendererStep() {Done();};
 
-  bool Init(CXMLTreeNode& _treePostSceneRenderer, const string& _szDefaultRenderTarget);
-
 protected:
-  virtual void Render(CRenderManager* _pRM);
+  virtual void Render(CRenderManager* _pRM, CCamera* _pCamera);
 
   virtual void Release();
 
+private:
+
+  bool ClipOmniLight(CLight* _pOmni, RECT& _Rect, CCamera* _pCamera);
 };
 
 #endif

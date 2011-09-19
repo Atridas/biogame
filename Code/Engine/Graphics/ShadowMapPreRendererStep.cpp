@@ -19,14 +19,14 @@ void CShadowMapPreRendererStep::Release()
   m_pLightShadowCast = 0;
 }
 
-void CShadowMapPreRendererStep::SetViewProjectionMatrices(CRenderManager* _pRM)
+void CShadowMapPreRendererStep::SetViewProjectionMatrices(CRenderManager* _pRM, CCamera *_pCamera)
 {
   CEffectManager* l_pEM = CORE->GetEffectManager();
 
   const Vect3f &l_Position = m_pLightShadowCast->GetPosition();
   CDirectionalLight* l_pDirLight = ((CDirectionalLight *)m_pLightShadowCast); 
   l_pDirLight->SetFPSCamera(m_FPSCamera);
-  m_pCamera = &m_FPSCamera;
+  //m_pCamera = &m_FPSCamera;
   //Vect3f l_vDirection = l_pDirLight->GetDirection();
 
   //Mat44f l_LightViewMatrix = l_pDirLight->GetLightViewMatrix();
@@ -58,14 +58,14 @@ void CShadowMapPreRendererStep::SetViewProjectionMatrices(CRenderManager* _pRM)
   Vect3f l_vRight;
   Vect3f l_vLookat;
 
-  l_vEye = m_pCamera->GetEye();
-  l_vUp  = m_pCamera->GetVecUp().GetNormalized();
-	l_vLookat = m_pCamera->GetLookAt();
+  l_vEye = m_FPSCamera.GetEye();
+  l_vUp  = m_FPSCamera.GetVecUp().GetNormalized();
+	l_vLookat = m_FPSCamera.GetLookAt();
   l_vRight = (l_vUp ^ (l_vLookat - l_vEye)).GetNormalized();
 
   l_matView = _pRM->GetLookAtMatrix(l_vEye,l_vLookat,l_vUp);
 
-  l_matProjection = _pRM->GetPerspectiveFOVMatrix(m_pCamera->GetFov(),m_pCamera->GetAspectRatio(),m_pCamera->GetZn(),m_pCamera->GetZf());
+  l_matProjection = _pRM->GetPerspectiveFOVMatrix(m_FPSCamera.GetFov(),m_FPSCamera.GetAspectRatio(),m_FPSCamera.GetZn(),m_FPSCamera.GetZf());
   l_pEM->ActivateCamera(l_matView,l_matProjection,l_vEye,l_vUp,l_vRight);
   l_pEM->SetShadowProjectionMatrix(l_matProjection);
   l_pEM->SetLightViewMatrix(l_matView);
@@ -77,7 +77,7 @@ void CShadowMapPreRendererStep::Render(CRenderManager* _pRM, CCamera* _pCamera)
   {
     if(m_pLightShadowCast->GetRenderShadows())
     {
-      CSceneRendererStep::Render(_pRM,_pCamera);
+      CSceneRendererStep::Render(_pRM,&m_FPSCamera);
     }
   }
 }

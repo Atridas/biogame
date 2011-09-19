@@ -8,12 +8,17 @@
 #include "XML/XMLTreeNode.h"
 #include "Core.h"
 #include "RenderManager.h"
+#include "Camera.h"
+#include "EffectManager.h"
 
 bool CRendererStep::Init(CXMLTreeNode& _treeSceneRenderer, const string& _szDefaultRenderTarget) 
 {
   string l_szName = _treeSceneRenderer.GetPszISOProperty("name","",false);
   m_szRenderTarget = _treeSceneRenderer.GetPszISOProperty("render_target",_szDefaultRenderTarget.c_str(),false);
   bool l_bActive = _treeSceneRenderer.GetBoolProperty("active",true,false);
+  
+  m_bRenderOpaque = _treeSceneRenderer.GetBoolProperty("render_opaque",true,false);
+  m_bRenderAlphas = _treeSceneRenderer.GetBoolProperty("render_alpha" ,true,false);
 
   m_bClearColor = _treeSceneRenderer.GetBoolProperty("clear_color",false,false);
   if(m_bClearColor)
@@ -157,4 +162,89 @@ void CRendererStep::Release()
     CHECKED_DELETE(*l_itSampler);
   }
   m_vInputSamplers.clear();
+}
+
+void CRendererStep::SetViewProjectionMatrices(CRenderManager* _pRM, CCamera* _pCamera)
+{
+  Mat44f l_matView;
+  Mat44f l_matProjection;
+  
+  Vect3f l_vEye;
+  Vect3f l_vUp;
+  Vect3f l_vRight;
+  Vect3f l_vLookat;
+
+  l_vEye = _pCamera->GetEye();
+  l_vUp  = _pCamera->GetVecUp().GetNormalized();
+	l_vLookat = _pCamera->GetLookAt();
+  l_vRight = (l_vUp ^ (l_vLookat - l_vEye)).GetNormalized();
+
+  l_matView = _pRM->GetLookAtMatrix(l_vEye,l_vLookat,l_vUp);
+
+  l_matProjection = _pRM->GetPerspectiveFOVMatrix(_pCamera->GetFov(),_pCamera->GetAspectRatio(),_pCamera->GetZn(),_pCamera->GetZf());
+
+  _pRM->SetViewMatrix(l_matView);
+  _pRM->SetProjectionMatrix(l_matProjection);
+  CORE->GetEffectManager()->ActivateCamera(l_matView,l_matProjection,l_vEye,l_vUp,l_vRight);
+}
+
+void CRendererStep::Render(CRenderManager* _pRM, CCamera* _pCamera, 
+                                const vector<CObject3DRenderable*>& _vOpaqueObjects, 
+                                const vector<CObject3DRenderable*>& _vAlphaObjects, 
+                                const vector<CObject3DRenderable*>& _vParticleEmiters)
+{
+  //m_pCamera = _pCamera;
+
+  CEffectManager* l_pEM = CORE->GetEffectManager();
+  l_pEM->Begin();
+
+  ActivateInputSamplers();
+  //ActivateRenderTargets(_pRM);
+
+  SetViewProjectionMatrices(_pRM, _pCamera);
+
+  vector<CObject3DRenderable*>::const_iterator l_it, l_end;
+
+  if(m_bRenderOpaque)
+  {
+
+    CORE->GetEffectManager()->ActivateDefaultRendering();
+  
+    l_it  = _vOpaqueObjects.begin();
+    l_end = _vOpaqueObjects.end  ();
+
+    for(; l_it != l_end; ++l_it)
+    {
+      CObject3DRenderable* l_pRO = *l_it;
+      RenderObject3DRenderable(_pRM,l_pRO);
+    }
+  }
+
+  if(m_bRenderAlphas)
+  {
+    CORE->GetEffectManager()->ActivateAlphaRendering();
+
+    l_it  = _vAlphaObjects.begin();
+    l_end = _vAlphaObjects.end  ();
+  
+    for(; l_it != l_end; ++l_it)
+    {
+      CObject3DRenderable* l_pRO = *l_it;
+      RenderObject3DRenderable(_pRM,l_pRO);
+    }
+  
+    l_it  = _vParticleEmiters.begin();
+    l_end = _vParticleEmiters.end  ();
+  
+    for(; l_it != l_end; ++l_it)
+    {
+      CObject3DRenderable* l_pEmiter = *l_it;
+      RenderEmiter(_pRM,l_pEmiter);
+    }
+    _pRM->GetDevice()->SetStreamSourceFreq(0, 1);
+    _pRM->GetDevice()->SetStreamSourceFreq(1, 1);
+  }
+
+  //DeactivateRenderTargets(_pRM);
+  DeactivateInputSamplers();
 }

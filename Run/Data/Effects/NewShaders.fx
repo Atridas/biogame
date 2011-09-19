@@ -216,7 +216,7 @@ PS_OUTPUT NewPS(TNEW_PS _in)
       #if defined ( NS_ENVIRONMENT )
         float l_SpecularTextureValue = 1.0;
       #endif 
-      float  l_SpotlightFactor = g_SpotlightFactor;
+      float  l_SpotlightFactor = 1.0;
     #endif
 
     float3 l_EyeDirection = normalize(g_CameraPosition - _in.WorldPosition);

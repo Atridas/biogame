@@ -14,6 +14,7 @@ class CInputSampler;
 class CXMLTreeNode;
 class CRenderManager;
 class CCamera;
+class CObject3DRenderable;
 
 class CRendererStep :
   public CActivable, public CBaseControl, public CNamed
@@ -21,7 +22,8 @@ class CRendererStep :
 
 public:
   CRendererStep() : CNamed(""), m_szRenderTarget(""),
-                    m_bClearColor(false), m_bClearDepth(false), m_bClearStencil(false)
+                    m_bClearColor(false), m_bClearDepth(false), m_bClearStencil(false),
+                    m_bRenderOpaque(true), m_bRenderAlphas(true)
                     {};
   virtual ~CRendererStep() {Done();};
 
@@ -31,7 +33,13 @@ public:
 
   void ClearBuffer(CRenderManager* l_pRM) const;
 
+  virtual void Render(CRenderManager* _pRM, CCamera* _pCamera,
+                      const vector<CObject3DRenderable*>& _vOpaqueObjects,
+                      const vector<CObject3DRenderable*>& _vAlphaObjects,
+                      const vector<CObject3DRenderable*>& _vParticleEmiters);
+
 protected:
+  virtual void SetViewProjectionMatrices(CRenderManager* _pRM, CCamera* _pCamera);
 
   //int m_iRenderTargetWidth;
   //int m_iRenderTargetHeight;
@@ -44,7 +52,11 @@ protected:
 
   void ActivateInputSamplers();
   void DeactivateInputSamplers() {};
-
+  
+  virtual void RenderObject3DRenderable(CRenderManager* _pRM, CObject3DRenderable* _pO3DRenderable) const {};
+  virtual void RenderEmiter(CRenderManager* _pRM, CObject3DRenderable* _pO3DRenderable) const {};
+  
+  bool m_bRenderOpaque, m_bRenderAlphas;
 private:
   
   string m_szRenderTarget;
@@ -52,6 +64,7 @@ private:
   //vector<CRenderTarget*> m_vRenderTargets;
 
   vector<CInputSampler*> m_vInputSamplers;
+
 
   bool m_bClearColor, m_bClearDepth, m_bClearStencil;
   D3DCOLOR m_Color;

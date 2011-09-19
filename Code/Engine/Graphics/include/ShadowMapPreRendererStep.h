@@ -17,7 +17,7 @@ public:
 
   bool Init(CXMLTreeNode& _treePreSceneRenderer, const string& _szDefaultRenderTarget);
 
-  virtual void SetViewProjectionMatrices(CRenderManager* _pRM);
+  virtual void SetViewProjectionMatrices(CRenderManager* _pRM, CCamera *_pCamera);
   virtual void Render(CRenderManager* _pRM, CCamera* _pCamera);
 
   void SetShadowMapLightCast(CLight* _pLight) {m_pLightShadowCast = _pLight;};
