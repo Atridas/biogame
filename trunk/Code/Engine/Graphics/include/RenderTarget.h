@@ -14,8 +14,9 @@ class CRenderTarget :
 public:
   CRenderTarget() : CNamed("") {};
   virtual ~CRenderTarget() {};
-
+  
   virtual void Activate(CRenderManager* l_pRM) = 0;
+  virtual void Deactivate(CRenderManager* l_pRM) = 0;
 
   LPDIRECT3DSURFACE9 GetDepthStencilSurface() const { return m_pDepthStencilSurface; };
   

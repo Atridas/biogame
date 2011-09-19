@@ -71,18 +71,17 @@ bool CTextureRenderTarget::Init(CXMLTreeNode& _treeRenderTarget)
   return IsOk();
 }
 
-void CTextureRenderTarget::Activate(CRenderManager* l_pRM, int _iIndex)
-{
-  CColor l_Color = l_pRM->GetClearColor();
-  uint32 l_uiRed		= (uint32) (l_Color.GetRed() * 255);
-	uint32 l_uiGreen	= (uint32) (l_Color.GetGreen() * 255);
-	uint32 l_uiBlue		= (uint32) (l_Color.GetBlue() * 255);
-
-  //TODO: l_pRM->ClearSurface(...);
-  l_pRM->GetDevice()->ColorFill( m_pSurface, 0, D3DCOLOR_ARGB(0,l_uiRed,l_uiGreen,l_uiBlue));
-
-  CSingleRenderTarget::Activate(l_pRM, _iIndex);
-}
+//void CTextureRenderTarget::Activate(CRenderManager* l_pRM, int _iIndex)
+//{
+//  CColor l_Color = l_pRM->GetClearColor();
+//  uint32 l_uiRed		= (uint32) (l_Color.GetRed() * 255);
+//	uint32 l_uiGreen	= (uint32) (l_Color.GetGreen() * 255);
+//	uint32 l_uiBlue		= (uint32) (l_Color.GetBlue() * 255);
+//
+//  l_pRM->GetDevice()->ColorFill( m_pSurface, 0, D3DCOLOR_ARGB(0,l_uiRed,l_uiGreen,l_uiBlue));
+//
+//  CSingleRenderTarget::Activate(l_pRM, _iIndex);
+//}
 
 void CTextureRenderTarget::Release()
 {

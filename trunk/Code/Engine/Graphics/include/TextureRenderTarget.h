@@ -17,7 +17,7 @@ public:
 
   bool Init(CXMLTreeNode& _treeRenderTarget);
 
-  virtual void Activate(CRenderManager* l_pRM, int _iIndex);
+  //virtual void Activate(CRenderManager* l_pRM, int _iIndex);
 
   virtual int GetWidth()  {return m_iWidth;};
   virtual int GetHeight() {return m_iHeight;};

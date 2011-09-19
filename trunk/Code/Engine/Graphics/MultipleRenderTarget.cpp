@@ -87,6 +87,21 @@ void CMultipleRenderTarget::Activate(CRenderManager* l_pRM)
 
 }
 
+void CMultipleRenderTarget::Deactivate(CRenderManager* l_pRM)
+{
+  vector<SIndexedTextureRenderTarget>::iterator l_itTextureRenderTarget = m_vTextureRenderTargets.begin();
+  vector<SIndexedTextureRenderTarget>::iterator l_itTextureRenderTargetEnd = m_vTextureRenderTargets.end();
+
+  for(;l_itTextureRenderTarget != l_itTextureRenderTargetEnd; ++l_itTextureRenderTarget)
+  {
+    CTextureRenderTarget* l_pSingleRenderTarget = (*l_itTextureRenderTarget).m_pTextureRenderTarget;
+    int l_iIndex = (*l_itTextureRenderTarget).m_iIndex;
+
+    if(l_iIndex)
+      l_pRM->SetRenderTarget(l_iIndex,0);
+  }
+}
+
 void CMultipleRenderTarget::Release()
 {
   m_vTextureRenderTargets.clear();

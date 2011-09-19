@@ -56,7 +56,8 @@
 
   <scene_renderers default_renderer="deferred_renderer">
     
-    <scene_renderer name="forward_renderer" type="scene_renderer" render_target="forward_MRT">
+    <scene_renderer name="forward_renderer" type="scene_renderer" render_target="forward_MRT" 
+                    clear_color="true" clear_depth="1.0">
 
       <input_samplers>
         <input_sampler type="texture" index="5" texture="RT_R_32F"/>
@@ -87,7 +88,8 @@
     
     </scene_renderer>
     
-    <scene_renderer name="deferred_renderer" type="scene_renderer" render_target="deferred_MRT">
+    <scene_renderer name="deferred_renderer" type="scene_renderer" render_target="deferred_MRT" 
+                    clear_color="true" clear_depth="1.0">
     
       <!--<input_samplers>
         <input_sampler type="texture" index="5" texture="RT_R_32F"/>
@@ -118,27 +120,27 @@
       
     </scene_renderer>
 
-    <scene_renderer name="show_normals_renderer" type="scene_renderer">
+    <scene_renderer name="show_normals_renderer" type="scene_renderer" clear_color="true" clear_depth="1.0">
       <material_effects static_mesh_effect="ShowNormals" animated_model_effect="AnimatedShowNormals" />
     </scene_renderer>
     
-    <scene_renderer name="show_normalmap_renderer" type="scene_renderer">
+    <scene_renderer name="show_normalmap_renderer" type="scene_renderer" clear_color="true" clear_depth="1.0">
       <material_effects static_mesh_effect="ShowNormalmap" animated_model_effect="AnimatedShowNormalmap" />
     </scene_renderer>
     
-    <scene_renderer name="show_flat_normalmap_renderer" type="scene_renderer">
+    <scene_renderer name="show_flat_normalmap_renderer" type="scene_renderer" clear_color="true" clear_depth="1.0">
       <material_effects static_mesh_effect="ShowFlatNormalmap" animated_model_effect="AnimatedShowFlatNormalmap" />
     </scene_renderer>
     
-    <scene_renderer name="show_tangent_renderer" type="scene_renderer">
+    <scene_renderer name="show_tangent_renderer" type="scene_renderer" clear_color="true" clear_depth="1.0">
       <material_effects static_mesh_effect="ShowTangent" animated_model_effect="AnimatedShowTangent" />
     </scene_renderer>
     
-    <scene_renderer name="show_bitangent_renderer" type="scene_renderer">
+    <scene_renderer name="show_bitangent_renderer" type="scene_renderer" clear_color="true" clear_depth="1.0">
       <material_effects static_mesh_effect="ShowBitangent" animated_model_effect="AnimatedShowBitangent" />
     </scene_renderer>
     
-    <scene_renderer name="show_uv_coords_renderer" type="scene_renderer">
+    <scene_renderer name="show_uv_coords_renderer" type="scene_renderer" clear_color="true" clear_depth="1.0">
       <material_effects static_mesh_effect="ShowUVCoords" animated_model_effect="AnimatedShowUVCoords" />
     </scene_renderer>
     
@@ -147,24 +149,13 @@
   <post_scene_renderers>
     
     <!-- size_x="0.5" aspect_ratio="true" position="0.5 0.0" -->
-    <post_scene_renderer name="deferred_lighting" 
+    <post_scene_renderer name="deferred lighting" 
                          type="deferred_post_scene_renderer" 
                          effect="DeferredLightPass" 
                          render_target="RT2_ARGB_8" 
-                         active="true" >
-
-      <input_samplers>
-        <!--<input_sampler type="texture" index="0" texture="scene_color"/>-->
-        <input_sampler type="texture" index="1" texture="RT3_ARGB_8"/>
-        <input_sampler type="texture" index="2" texture="RT1_RG_16F"/>
-      </input_samplers>
-      
-    </post_scene_renderer>
-    <post_scene_renderer name="deferred lighting debug" 
-                         type="deferred_post_scene_renderer" 
-                         effect="DeferredLightPass" 
-                         render_target="RT2_ARGB_8" 
-                         >
+                         active="true"
+                         clear_color="true"
+                         clear_color_value="0.0 0.0 0.0 0.0">
 
       <input_samplers>
         <!--<input_sampler type="texture" index="0" texture="scene_color"/>-->
@@ -212,6 +203,14 @@
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT1_RG_16F"/>
+      </input_samplers>
+
+    </post_scene_renderer>
+    
+    <post_scene_renderer name="show_lights" effect="Texture" size_x="0.5" aspect_ratio="true" position="0.5 0.0">
+
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="RT2_ARGB_8"/>
       </input_samplers>
 
     </post_scene_renderer>
@@ -337,15 +336,25 @@
   <render_paths>
     <render_path name="deferred" active="true">
       <scene_renderer name="deferred_renderer"/>
-      <post_scene_renderer name="deferred_lighting"/>
+      <post_scene_renderer name="deferred lighting"/>
       <post_scene_renderer name="deferred_ambient"/>
     </render_path>
     
     <render_path name="deferred debug" active="false">
       <scene_renderer name="deferred_renderer"/>
-      <post_scene_renderer name="deferred lighting debug"/>
+      <post_scene_renderer name="deferred lighting"/>
       <post_scene_renderer name="deferred ambient debug"/>
       
+      <post_scene_renderer name="scene_color"/>
+      <post_scene_renderer name="scene_normals"/>
+      <post_scene_renderer name="show_depth"/>
+    </render_path>
+    
+    <render_path name="deferred debug 2" active="false">
+      <scene_renderer name="deferred_renderer"/>
+      <post_scene_renderer name="deferred lighting"/>
+      
+      <post_scene_renderer name="show_lights"/>
       <post_scene_renderer name="scene_color"/>
       <post_scene_renderer name="scene_normals"/>
       <post_scene_renderer name="show_depth"/>

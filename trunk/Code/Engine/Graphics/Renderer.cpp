@@ -395,7 +395,13 @@ void CRenderer::Render(CProcess* _pProcess)
 
       l_pEM->SetTextureWidthHeight(l_it->second->GetWidth(), l_it->second->GetHeight());
 
+      l_pPreSceneRenderer->ClearBuffer(l_pRM);
       l_pPreSceneRenderer->Render(l_pRM,m_pCamera);
+
+      if(l_it != m_mapRenderTargets.end())
+      {
+        l_it->second->Deactivate(l_pRM);
+      }
     }
   }
 
@@ -411,8 +417,14 @@ void CRenderer::Render(CProcess* _pProcess)
     }
     
     l_pEM->SetTextureWidthHeight(l_it->second->GetWidth(), l_it->second->GetHeight());
-
+    
+    m_pCurrentSceneRenderer->ClearBuffer(l_pRM);
     m_pCurrentSceneRenderer->Render(l_pRM,m_pCamera);
+
+    if(l_it != m_mapRenderTargets.end())
+    {
+      l_it->second->Deactivate(l_pRM);
+    }
   }
   
 
@@ -433,8 +445,14 @@ void CRenderer::Render(CProcess* _pProcess)
       }
       
       l_pEM->SetTextureWidthHeight(l_it->second->GetWidth(), l_it->second->GetHeight());
-
+      
+      l_pPostSceneRenderer->ClearBuffer(l_pRM);
       l_pPostSceneRenderer->Render(l_pRM,m_pCamera);
+
+      if(l_it != m_mapRenderTargets.end())
+      {
+        l_it->second->Deactivate(l_pRM);
+      }
     }
   }
 

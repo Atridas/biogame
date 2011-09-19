@@ -16,6 +16,7 @@ public:
 
   void Activate(CRenderManager* l_pRM);
   virtual void Activate(CRenderManager* l_pRM, int _iIndex);
+  virtual void Deactivate(CRenderManager* l_pRM) {};
 
 protected:
 

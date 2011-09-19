@@ -7,6 +7,8 @@
 #include "Named.h"
 #include "Utils/BaseControl.h"
 
+#include <d3d9.h>
+
 //class CRenderTarget;
 class CInputSampler;
 class CXMLTreeNode;
@@ -18,12 +20,16 @@ class CRendererStep :
 {
 
 public:
-  CRendererStep() : CNamed(""), m_szRenderTarget("") {};
+  CRendererStep() : CNamed(""), m_szRenderTarget(""),
+                    m_bClearColor(false), m_bClearDepth(false), m_bClearStencil(false)
+                    {};
   virtual ~CRendererStep() {Done();};
 
   virtual void Render(CRenderManager* _pRM, CCamera* _pCamera) = 0;
 
   const string& GetRenderTarget() {return m_szRenderTarget;};
+
+  void ClearBuffer(CRenderManager* l_pRM) const;
 
 protected:
 
@@ -37,10 +43,7 @@ protected:
   bool InitInputSamplers(CXMLTreeNode& _treeInputSamplers);
 
   void ActivateInputSamplers();
-  //void ActivateRenderTargets(CRenderManager* l_pRM);
-
   void DeactivateInputSamplers() {};
-  //void DeactivateRenderTargets(CRenderManager* l_pRM);
 
 private:
   
@@ -49,6 +52,11 @@ private:
   //vector<CRenderTarget*> m_vRenderTargets;
 
   vector<CInputSampler*> m_vInputSamplers;
+
+  bool m_bClearColor, m_bClearDepth, m_bClearStencil;
+  D3DCOLOR m_Color;
+  float    m_fDepth;
+  uint32   m_iStencil;
 };
 
 #endif
