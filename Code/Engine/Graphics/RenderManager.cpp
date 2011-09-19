@@ -226,7 +226,7 @@ void CRenderManager::BeginRendering()
 	uint32 green	= (uint32) (m_cClearColor.GetGreen() * 255);
 	uint32 blue		= (uint32) (m_cClearColor.GetBlue() * 255);
 
-	m_pD3DDevice->Clear(0, NULL, D3DCLEAR_TARGET|D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB(0, red, green, blue), 1.0f, 0);
+	//m_pD3DDevice->Clear(0, NULL, D3DCLEAR_TARGET|D3DCLEAR_ZBUFFER, D3DCOLOR_ARGB(0, red, green, blue), 1.0f, 0);
 
 	// Begin the scene
 	HRESULT hr = m_pD3DDevice->BeginScene();

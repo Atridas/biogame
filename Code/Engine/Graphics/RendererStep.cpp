@@ -15,78 +15,43 @@ bool CRendererStep::Init(CXMLTreeNode& _treeSceneRenderer, const string& _szDefa
   m_szRenderTarget = _treeSceneRenderer.GetPszISOProperty("render_target",_szDefaultRenderTarget.c_str(),false);
   bool l_bActive = _treeSceneRenderer.GetBoolProperty("active",true,false);
 
+  m_bClearColor = _treeSceneRenderer.GetBoolProperty("clear_color",false,false);
+  if(m_bClearColor)
+  {
+    CColor l_DefaultColor = RENDER_MANAGER->GetClearColor();
+
+    Vect4f l_Color = _treeSceneRenderer.GetVect4fProperty("clear_color_value", 
+                                                          Vect4f(l_DefaultColor.GetRed(),  
+                                                                 l_DefaultColor.GetGreen(),
+                                                                 l_DefaultColor.GetBlue(), 
+                                                                 l_DefaultColor.GetAlpha()),
+                                                          false);
+	  uint32 red		= (uint32) (l_Color.x * 255);
+	  uint32 green	= (uint32) (l_Color.y * 255);
+	  uint32 blue		= (uint32) (l_Color.z * 255);
+	  uint32 alpha	= (uint32) (l_Color.w * 255);
+
+    m_Color = D3DCOLOR_ARGB(alpha, red, green, blue);
+  }
+
+  m_bClearDepth = _treeSceneRenderer.ExistsProperty("clear_depth");
+  if(m_bClearDepth)
+  {
+    m_fDepth = _treeSceneRenderer.GetFloatProperty("clear_depth");
+  }
+
+  m_bClearStencil = _treeSceneRenderer.ExistsProperty("clear_stencil");
+  if(m_bClearStencil)
+  {
+    m_iStencil = _treeSceneRenderer.GetIntProperty("clear_stencil");
+  }
+
   SetName(l_szName);
   SetActive(l_bActive);
 
   SetOk(l_szName != ""); 
   return IsOk();
 };
-
-/*bool CRendererStep::InitRenderTargets(CXMLTreeNode& _treeRenderTargets)
-{
-  if(_treeRenderTargets.Exists())
-  {
-    float l_fScale = _treeRenderTargets.GetFloatProperty("scale_size",1.0f,false);
-    int l_iWidth = _treeRenderTargets.GetIntProperty("width",(int)(RENDER_MANAGER->GetScreenWidth()*l_fScale),false);
-    int l_iHeight = _treeRenderTargets.GetIntProperty("height",(int)(RENDER_MANAGER->GetScreenHeight()*l_fScale),false);
-    
-    m_iRenderTargetWidth = l_iWidth;
-    m_iRenderTargetHeight = l_iHeight;
-
-    bool l_bDefaultDepthBuffer = (l_fScale == 1.f);
-
-    int l_iNumRenderTargets = _treeRenderTargets.GetNumChildren();
-
-    for(int l_iIndex = 0; l_iIndex < l_iNumRenderTargets;l_iIndex++)
-    {
-      CXMLTreeNode l_pRenderTargetNode = _treeRenderTargets(l_iIndex);
-
-      if(string(l_pRenderTargetNode.GetName()) == "render_target")
-      {
-        CTextureRenderTarget* l_pRenderTarget = 0;
-
-        l_pRenderTarget = new CTextureRenderTarget();
-
-        if(l_pRenderTarget->Init(l_pRenderTargetNode, l_iWidth, l_iHeight, false))
-        {
-          m_vRenderTargets.push_back(l_pRenderTarget);
-        }else{
-          CHECKED_DELETE(l_pRenderTarget);
-          LOGGER->AddNewLog(ELL_WARNING,"CRendererStep::InitRenderTargets init render_target ha fallat.");
-        }
-      }
-      else if(!l_pRenderTargetNode.IsComment())
-      {
-        LOGGER->AddNewLog(ELL_WARNING,"CRendererStep::InitRenderTargets element no reconegut %s",l_pRenderTargetNode.GetName());
-      }
-
-    }
-
-    SetOk(true);
-
-  }else{
-
-    m_iRenderTargetWidth = RENDER_MANAGER->GetScreenWidth();
-    m_iRenderTargetHeight = RENDER_MANAGER->GetScreenHeight();
-
-    CBackBufferRenderTarget* l_pRenderTarget = 0;
-
-    l_pRenderTarget = new CBackBufferRenderTarget();
-
-    if(l_pRenderTarget->Init())
-    {
-      m_vRenderTargets.push_back(l_pRenderTarget);
-      SetOk(true);
-    }else{
-      CHECKED_DELETE(l_pRenderTarget);
-      LOGGER->AddNewLog(ELL_WARNING,"CRendererStep::InitRenderTargets init render_target backbuffer ha fallat.");
-      SetOk(false);
-    }
-  }
-
-  return IsOk();
-}
-*/
 
 bool CRendererStep::InitInputSamplers(CXMLTreeNode& _treeInputSamplers)
 {
@@ -167,45 +132,22 @@ void CRendererStep::ActivateInputSamplers()
   }
 }
 
-/*
-void CRendererStep::ActivateRenderTargets(CRenderManager* l_pRM)
+
+void CRendererStep::ClearBuffer(CRenderManager* l_pRM) const
 {
-  vector<CRenderTarget*>::iterator l_itRendertarget = m_vRenderTargets.begin();
-  vector<CRenderTarget*>::iterator l_itRendertargetEnd = m_vRenderTargets.end();
+  uint32 flags = 0;
+  flags |= (m_bClearColor)  ? D3DCLEAR_TARGET  : 0;
+  flags |= (m_bClearDepth)  ? D3DCLEAR_ZBUFFER : 0;
+  flags |= (m_bClearStencil)? D3DCLEAR_STENCIL : 0;
 
-  for(;l_itRendertarget != l_itRendertargetEnd;++l_itRendertarget)
-  {
-    CRenderTarget* l_pRenderTarget = (*l_itRendertarget);
-    l_pRenderTarget->Activate(l_pRM);
-  }
+  if(flags == 0)
+    return;
 
-  l_pRM->GetDevice()->Clear( 0, NULL, D3DCLEAR_ZBUFFER, 0x00000000, 1.0f, 0 );
+  l_pRM->GetDevice()->Clear(0, NULL, flags, m_Color, m_fDepth, m_iStencil);
 }
-
-void CRendererStep::DeactivateRenderTargets(CRenderManager* l_pRM)
-{
-  vector<CRenderTarget*>::iterator l_itRendertarget = m_vRenderTargets.begin();
-  vector<CRenderTarget*>::iterator l_itRendertargetEnd = m_vRenderTargets.end();
-
-  for(;l_itRendertarget != l_itRendertargetEnd;++l_itRendertarget)
-  {
-    CRenderTarget* l_pRenderTarget = (*l_itRendertarget);
-    l_pRenderTarget->Deactivate(l_pRM);
-  }
-}
-*/
 
 void CRendererStep::Release()
 {
-  /*vector<CRenderTarget*>::iterator l_itRendertarget = m_vRenderTargets.begin();
-  vector<CRenderTarget*>::iterator l_itRendertargetEnd = m_vRenderTargets.end();
-
-  for(;l_itRendertarget != l_itRendertargetEnd;++l_itRendertarget)
-  {
-    CHECKED_DELETE(*l_itRendertarget);
-  }
-  m_vRenderTargets.clear();
-  */
 
   vector<CInputSampler*>::iterator l_itSampler = m_vInputSamplers.begin();
   vector<CInputSampler*>::iterator l_itSamplerEnd = m_vInputSamplers.end();

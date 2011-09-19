@@ -18,6 +18,7 @@ public:
   bool Init(const string& _szName);
 
   virtual void Activate(CRenderManager* l_pRM);
+  virtual void Deactivate(CRenderManager* l_pRM);
 
   bool AddTextureRenderTarget(CTextureRenderTarget* _pTextureRenderTarget, int _iIndex);
   
