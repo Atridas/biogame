@@ -158,6 +158,7 @@ public:
 
   void SetSkeleton(CalSkeleton* _pSkeleton, CalHardwareModel* _pCalHardwareModel) {m_pCalSkeleton = _pSkeleton; m_pCalHardwareModel = _pCalHardwareModel; m_bSkeletonUpdated = true;};
   void SetTextureWidthHeight(int _iWidth, int _iHeight) {m_iTextureWidth  = _iWidth; m_iTextureHeight = _iHeight; m_bTextureWidthHeightUpdated = true;};
+  void GetTextureWidthHeight(int& _iWidth, int& _iHeight) {_iWidth = m_iTextureWidth; _iHeight = m_iTextureHeight;};
   void SetAlphaFactor(float _fAlphaFactor) {m_fAlphaFactor = _fAlphaFactor; m_bAlphaFactorUpdated = true;};
   void SetTime(float _bTime) {m_fTime = _bTime; m_bTimeUpdated = true;};
   void SetGlow(bool _bGlow) {m_bGlowActive = _bGlow; m_bGlowUpdated = true;};

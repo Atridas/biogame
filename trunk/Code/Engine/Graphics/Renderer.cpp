@@ -15,6 +15,8 @@
 #include "Process.h"
 #include "EffectManager.h"
 #include "Camera.h"
+#include "PortalManager.h"
+#include "AlphaPostSceneRendererStep.h"
 
 bool CRenderer::Init(const string& _szFileName)
 {
@@ -289,7 +291,10 @@ bool CRenderer::Init(const string& _szFileName)
           if(l_szType == "deferred_post_scene_renderer")
           {
             l_pPostRenderer = new CDeferredPostSceneRendererStep();
-          }else{
+          } else if(l_szType == "alpha_post_scene_renderer")
+          {
+            l_pPostRenderer = new CAlphaPostSceneRendererStep();
+          } else {
             l_pPostRenderer = new CPostSceneRendererStep();
           }
 
@@ -338,7 +343,7 @@ bool CRenderer::Init(const string& _szFileName)
             }
             else if(strcmp(l_treeRenderer.GetName(), "scene_renderer") == 0)
             {
-              l_pRenderPath->m_szSceneRenderer = l_treeRenderer.GetPszISOProperty("name");
+              l_pRenderPath->m_SceneRenderers.insert( l_treeRenderer.GetPszISOProperty("name") );
             }
             else
             {
@@ -346,6 +351,11 @@ bool CRenderer::Init(const string& _szFileName)
             }
           }
 
+          if(m_mapRenderPaths.find(l_szName) != m_mapRenderPaths.end())
+          {
+            LOGGER->AddNewLog(ELL_WARNING, "CRenderer::Init No repetiu els noms dels renderpaths, collons!!!");
+            delete m_mapRenderPaths[l_szName];
+          }
           m_mapRenderPaths[l_szName] = l_pRenderPath;
         }
         else if(!l_treeRenderPath.IsComment())
@@ -405,25 +415,39 @@ void CRenderer::Render(CProcess* _pProcess)
     }
   }
 
+  vector<CObject3DRenderable*> l_vOpaqueObjects, l_vAlphaObjects, l_vParticleEmiters;
 
 
-  if(m_pCurrentSceneRenderer)
+  vector<CSceneRendererStep*>::iterator l_itRenderer = m_vSceneRendererSteps.begin();
+  vector<CSceneRendererStep*>::iterator l_itRendererEnd = m_vSceneRendererSteps.end();
+
+  bool l_bVectorsInitiated = false;
+  for(;l_itRenderer != l_itRendererEnd; ++l_itRenderer)
   {
-    string l_szRenderTarget = m_pCurrentSceneRenderer->GetRenderTarget();
-    map<string,CRenderTarget*>::const_iterator l_it = m_mapRenderTargets.find(l_szRenderTarget);
-    if(l_it != m_mapRenderTargets.end())
+    if((*l_itRenderer)->IsActive())
     {
-      l_it->second->Activate(l_pRM);
-    }
-    
-    l_pEM->SetTextureWidthHeight(l_it->second->GetWidth(), l_it->second->GetHeight());
-    
-    m_pCurrentSceneRenderer->ClearBuffer(l_pRM);
-    m_pCurrentSceneRenderer->Render(l_pRM,m_pCamera);
+      if(!l_bVectorsInitiated)
+      {
+        InitRenderVectors(m_pCamera, l_vOpaqueObjects, l_vAlphaObjects, l_vParticleEmiters);
+        l_bVectorsInitiated = true;
+      }
 
-    if(l_it != m_mapRenderTargets.end())
-    {
-      l_it->second->Deactivate(l_pRM);
+      string l_szRenderTarget = (*l_itRenderer)->GetRenderTarget();
+      map<string,CRenderTarget*>::const_iterator l_it = m_mapRenderTargets.find(l_szRenderTarget);
+      if(l_it != m_mapRenderTargets.end())
+      {
+        l_it->second->Activate(l_pRM);
+      }
+    
+      l_pEM->SetTextureWidthHeight(l_it->second->GetWidth(), l_it->second->GetHeight());
+    
+      (*l_itRenderer)->ClearBuffer(l_pRM);
+      (*l_itRenderer)->Render(l_pRM, m_pCamera, l_vOpaqueObjects, l_vAlphaObjects, l_vParticleEmiters);
+
+      if(l_it != m_mapRenderTargets.end())
+      {
+        l_it->second->Deactivate(l_pRM);
+      }
     }
   }
   
@@ -587,6 +611,10 @@ void CRenderer::ActivateRenderPaths()
   {
     m_vPostSceneRendererSteps[i]->SetActive(false);
   }
+  for(uint32 i = 0; i < m_vSceneRendererSteps.size(); ++i)
+  {
+    m_vSceneRendererSteps[i]->SetActive(false);
+  }
   m_pCurrentSceneRenderer = 0;
 
   map<string, SRenderPath*>::iterator l_it  = m_mapRenderPaths.begin();
@@ -617,9 +645,15 @@ void CRenderer::ActivateRenderPaths()
         }
       }
 
-      if(l_it->second->m_szSceneRenderer != "")
+      l_it2  = l_it->second->m_SceneRenderers.begin();
+      l_end2 = l_it->second->m_SceneRenderers.end  ();
+      for(; l_it2 != l_end2; ++l_it2)
       {
-        SetSceneRenderer(l_it->second->m_szSceneRenderer);
+        map<string,CSceneRendererStep*>::iterator l_it = m_mapSceneRendererSteps.find(*l_it2);
+        if(l_it != m_mapSceneRendererSteps.end())
+        {
+          l_it->second->SetActive(true);
+        }
       }
     }
   }
@@ -640,5 +674,47 @@ void CRenderer::GetActiveRenderPaths(set<string>& _RenderPaths) const
     {
       _RenderPaths.insert(l_it->first);
     }
+  }
+}
+
+void CRenderer::InitRenderVectors(CCamera* _pCamera,
+                                  vector<CObject3DRenderable*>& _vOpaqueObjects, 
+                                  vector<CObject3DRenderable*>& _vAlphaObjects, 
+                                  vector<CObject3DRenderable*>& _vParticleEmiters)
+{
+  CPortalManager* l_pPM = CORE->GetPortalManager();
+
+  Vect3f   l_vEye    = _pCamera->GetEye();
+  CObject3DOrdering l_Ordering(l_vEye);
+  
+  CRoom::TBlendQueue l_BlendQueue(l_Ordering);
+  CRoom::TBlendQueue l_EmiterQueue(l_Ordering);
+
+  vector<CRenderableObject*> l_vOpaqueObjects;
+  l_pPM->GetRenderedObjects(_pCamera, l_vOpaqueObjects, l_BlendQueue, l_EmiterQueue);
+
+  vector<CRenderableObject*>::iterator l_it  = l_vOpaqueObjects.begin();
+  vector<CRenderableObject*>::iterator l_end = l_vOpaqueObjects.end  ();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    CRenderableObject* l_pRO = *l_it;
+    _vOpaqueObjects.push_back(l_pRO);
+  }
+  
+  CORE->GetEffectManager()->ActivateAlphaRendering();
+
+  while(!l_BlendQueue.empty())
+  {
+    CObject3DRenderable* l_pO3DRenderable = l_BlendQueue.top();
+    _vAlphaObjects.push_back(l_pO3DRenderable);
+    l_BlendQueue.pop();
+  }
+  
+  while(!l_EmiterQueue.empty())
+  {
+    CObject3DRenderable* l_pEmiter = l_EmiterQueue.top();
+    _vParticleEmiters.push_back(l_pEmiter);
+    l_EmiterQueue.pop();
   }
 }

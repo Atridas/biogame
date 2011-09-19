@@ -274,6 +274,9 @@
     <Filter Include="Renderer\RenderTarget\MultipleRenderTarget">
       <UniqueIdentifier>{0a65a14a-b9f6-45cc-af75-c9b417b838d3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer\RendererStep\PostSceneRendererStep\AlphaPostSceneRendererStep">
+      <UniqueIdentifier>{92855c82-c6e1-4237-abee-bb8771d8addc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -461,6 +464,9 @@
     </ClCompile>
     <ClCompile Include="MultipleRenderTarget.cpp">
       <Filter>Renderer\RenderTarget\MultipleRenderTarget</Filter>
+    </ClCompile>
+    <ClCompile Include="AlphaPostSceneRendererStep.cpp">
+      <Filter>Renderer\RendererStep\PostSceneRendererStep\AlphaPostSceneRendererStep</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -718,6 +724,9 @@
     </ClInclude>
     <ClInclude Include="include\MultipleRenderTarget.h">
       <Filter>Renderer\RenderTarget\MultipleRenderTarget</Filter>
+    </ClInclude>
+    <ClInclude Include="include\AlphaPostSceneRendererStep.h">
+      <Filter>Renderer\RendererStep\PostSceneRendererStep\AlphaPostSceneRendererStep</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -11,6 +11,7 @@
       <texture_render_target name="RT1_ARGB_8" format="A8R8G8B8" texture="RT1_ARGB_8"/>
       <texture_render_target name="RT2_ARGB_8" format="A8R8G8B8" texture="RT2_ARGB_8"/>
       <texture_render_target name="RT3_ARGB_8" format="A8R8G8B8" texture="RT3_ARGB_8"/>
+      <texture_render_target name="RT4_ARGB_8" format="A8R8G8B8" texture="RT4_ARGB_8"/>
       <texture_render_target name="RT1_RG_16F" format="R16G16F" texture="RT1_RG_16F"/>
       <texture_render_target name="RT_R_32F" format="R32F" width="1024" height="1024" texture="RT_R_32F" />
       
@@ -89,7 +90,7 @@
     </scene_renderer>
     
     <scene_renderer name="deferred_renderer" type="scene_renderer" render_target="deferred_MRT" 
-                    clear_color="true" clear_depth="1.0">
+                    clear_color="true" clear_depth="1.0" render_alpha="false">
     
       <!--<input_samplers>
         <input_sampler type="texture" index="5" texture="RT_R_32F"/>
@@ -118,6 +119,37 @@
         <!--<material_effect material_type="150" effect="SpecularRadiosityNormalmapTexturedTechnique" />-->
         <material_effect material_type="55"  effect="AnimatedNormalmapTexturedDeferred" />
       </material_effects> 
+      
+    </scene_renderer>
+    
+    <scene_renderer name="deferred_alpha" render_target="RT4_ARGB_8" 
+                    render_opaque="false" 
+                    render_alpha="true"
+                    clear_color="true"
+                    clear_color_value="0.0 0.0 0.0 0.0">
+
+      <material_effects particle_effect="Particle">
+        <material_effect material_type="0"   effect="Diffused" />
+        <material_effect material_type="2"   effect="Textured" />
+        <material_effect material_type="514" effect="TexturedEnvironment" />
+        <material_effect material_type="518" effect="NormalmapEnvironment" />
+        <material_effect material_type="3"   effect="AnimatedTextured" />
+        <material_effect material_type="6"   effect="Normalmap" />
+        <material_effect material_type="7"   effect="AnimatedNormalmap" />
+        <material_effect material_type="34"  effect="Textured" />
+        <material_effect material_type="38"  effect="Normalmap" />
+        <material_effect material_type="39"  effect="AnimatedNormalmap" />
+        <material_effect material_type="10"  effect="Lightmap" />
+        <material_effect material_type="14"  effect="LightmapNormalmap" />
+        <material_effect material_type="134" effect="RadiosityNormalmap" />
+        <material_effect material_type="18"  effect="SpecularTextured" />
+        <material_effect material_type="22"  effect="SpecularNormalmapTextured" />
+        <material_effect material_type="23"  effect="AnimatedSpecularNormalmapTextured" />
+        <material_effect material_type="26"  effect="SpecularLightmapTextured" />
+        <material_effect material_type="30"  effect="SpecularLightmapNormalmapTextured" />
+        <material_effect material_type="150" effect="SpecularRadiosityNormalmapTexturedTechnique" />
+        <material_effect material_type="55"  effect="AnimatedSpecularNormalmapTextured" />
+      </material_effects>
       
     </scene_renderer>
 
@@ -171,6 +203,7 @@
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
         <input_sampler type="texture" index="1" texture="RT2_ARGB_8"/>
+        <input_sampler type="texture" index="2" texture="RT4_ARGB_8"/>
       </input_samplers>
 
     </post_scene_renderer>
@@ -180,6 +213,7 @@
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
         <input_sampler type="texture" index="1" texture="RT2_ARGB_8"/>
+        <input_sampler type="texture" index="2" texture="RT4_ARGB_8"/>
       </input_samplers>
 
     </post_scene_renderer>
@@ -216,7 +250,15 @@
 
     </post_scene_renderer>
     
-    <post_scene_renderer name="draw_scene" effect="TextureAlphaFactor" active="false">
+    <post_scene_renderer name="show_alpha" effect="Texture" size_x="0.5" aspect_ratio="true" position="0.5 0.0">
+
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="RT4_ARGB_8"/>
+      </input_samplers>
+
+    </post_scene_renderer>
+    
+    <post_scene_renderer name="draw_scene" effect="Texture" active="false">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
@@ -337,12 +379,14 @@
   <render_paths>
     <render_path name="deferred" active="true">
       <scene_renderer name="deferred_renderer"/>
+      <scene_renderer name="deferred_alpha"/>
       <post_scene_renderer name="deferred lighting"/>
       <post_scene_renderer name="deferred_ambient"/>
     </render_path>
     
     <render_path name="deferred debug" active="false">
       <scene_renderer name="deferred_renderer"/>
+      <scene_renderer name="deferred_alpha"/>
       <post_scene_renderer name="deferred lighting"/>
       <post_scene_renderer name="deferred ambient debug"/>
       
@@ -353,6 +397,7 @@
     
     <render_path name="deferred debug 2" active="false">
       <scene_renderer name="deferred_renderer"/>
+      <scene_renderer name="deferred_alpha"/>
       <post_scene_renderer name="deferred lighting"/>
       
       <post_scene_renderer name="show_lights"/>
@@ -361,8 +406,20 @@
       <post_scene_renderer name="show_depth"/>
     </render_path>
     
-    <render_path name="forward">
+    <render_path name="deferred debug 3" active="false">
+      <scene_renderer name="deferred_renderer"/>
+      <scene_renderer name="deferred_alpha"/>
+      <post_scene_renderer name="deferred lighting"/>
+      
+      <post_scene_renderer name="show_alpha"/>
+      <post_scene_renderer name="scene_color"/>
+      <post_scene_renderer name="scene_normals"/>
+      <post_scene_renderer name="show_depth"/>
+    </render_path>
+    
+    <render_path name="forward" active="false">
       <scene_renderer name="forward_renderer"/>
+      <post_scene_renderer name="draw_scene"/>
     </render_path>
     
     <render_path name="aim_gui">

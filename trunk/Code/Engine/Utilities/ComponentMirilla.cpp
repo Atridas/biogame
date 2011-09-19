@@ -3,7 +3,6 @@
 #include "PhysxBone.h"
 #include "ComponentRenderableObject.h"
 #include "Renderer.h"
-#include "PostSceneRendererStep.h"
 #include "PhysicsManager.h"
 #include "PhysicActor.h"
 #include "Component3rdPSCamera.h"
@@ -30,15 +29,7 @@ CComponentMirilla* CComponentMirilla::AddToEntity(CGameEntity *_pEntity, const s
 
 bool CComponentMirilla::Init(CGameEntity* _pEntity, const string& _szName)
 {
-  m_pAim = CORE->GetRenderer()->GetPostSceneRendererStep("aim_gui");
-
-  if(m_pAim)
-  {
-    SetOk(true);
-  }else{
-    SetOk(false);
-  }
-
+  SetOk(true);
   return IsOk();
 }
 
@@ -49,10 +40,12 @@ void CComponentMirilla::Release()
 
 void CComponentMirilla::Enable()
 {
-  m_pAim->SetActive(true);
+   CRenderer *l_pRenderer = CORE->GetRenderer();
+   l_pRenderer->ActivateRenderPath("aim_gui");
 }
 
 void CComponentMirilla::Disable()
 {
-  m_pAim->SetActive(false);
+  CRenderer *l_pRenderer = CORE->GetRenderer();
+   l_pRenderer->DeactivateRenderPath("aim_gui");
 }

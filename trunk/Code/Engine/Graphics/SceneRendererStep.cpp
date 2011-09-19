@@ -106,33 +106,9 @@ bool CSceneRendererStep::InitMaterialEffects(CXMLTreeNode& _treeMaterialEffects)
   return true;
 }
 
-void CSceneRendererStep::SetViewProjectionMatrices(CRenderManager* _pRM)
-{
-  Mat44f l_matView;
-  Mat44f l_matProjection;
-  
-  Vect3f l_vEye;
-  Vect3f l_vUp;
-  Vect3f l_vRight;
-  Vect3f l_vLookat;
-
-  l_vEye = m_pCamera->GetEye();
-  l_vUp  = m_pCamera->GetVecUp().GetNormalized();
-	l_vLookat = m_pCamera->GetLookAt();
-  l_vRight = (l_vUp ^ (l_vLookat - l_vEye)).GetNormalized();
-
-  l_matView = _pRM->GetLookAtMatrix(l_vEye,l_vLookat,l_vUp);
-
-  l_matProjection = _pRM->GetPerspectiveFOVMatrix(m_pCamera->GetFov(),m_pCamera->GetAspectRatio(),m_pCamera->GetZn(),m_pCamera->GetZf());
-
-  _pRM->SetViewMatrix(l_matView);
-  _pRM->SetProjectionMatrix(l_matProjection);
-  CORE->GetEffectManager()->ActivateCamera(l_matView,l_matProjection,l_vEye,l_vUp,l_vRight);
-}
-
 void CSceneRendererStep::Render(CRenderManager* _pRM, CCamera* _pCamera)
 {
-  m_pCamera = _pCamera;
+  //m_pCamera = _pCamera;
 
   CEffectManager* l_pEM = CORE->GetEffectManager();
   l_pEM->Begin();
@@ -140,26 +116,26 @@ void CSceneRendererStep::Render(CRenderManager* _pRM, CCamera* _pCamera)
   ActivateInputSamplers();
   //ActivateRenderTargets(_pRM);
 
-  SetViewProjectionMatrices(_pRM);
+  SetViewProjectionMatrices(_pRM, _pCamera);
   
-  RenderScene(_pRM);
+  RenderScene(_pRM, _pCamera);
   
   //DeactivateRenderTargets(_pRM);
   DeactivateInputSamplers();
 }
 
-void CSceneRendererStep::RenderScene(CRenderManager* _pRM)
+void CSceneRendererStep::RenderScene(CRenderManager* _pRM, CCamera* _pCamera)
 {
   CPortalManager* l_pPM = CORE->GetPortalManager();
 
-  Vect3f   l_vEye    = m_pCamera->GetEye();
+  Vect3f   l_vEye    = _pCamera->GetEye();
   CObject3DOrdering l_Ordering(l_vEye);
   
   CRoom::TBlendQueue l_BlendQueue(l_Ordering);
   CRoom::TBlendQueue l_EmiterQueue(l_Ordering);
 
   vector<CRenderableObject*> l_vOpaqueObjects;
-  l_pPM->GetRenderedObjects(m_pCamera, l_vOpaqueObjects, l_BlendQueue, l_EmiterQueue);
+  l_pPM->GetRenderedObjects(_pCamera, l_vOpaqueObjects, l_BlendQueue, l_EmiterQueue);
 
   
   CORE->GetEffectManager()->ActivateDefaultRendering();
@@ -189,10 +165,12 @@ void CSceneRendererStep::RenderScene(CRenderManager* _pRM)
     RenderEmiter(_pRM,l_pEmiter);
     l_EmiterQueue.pop();
   }
-
+  
+  _pRM->GetDevice()->SetStreamSourceFreq(0, 1);
+  _pRM->GetDevice()->SetStreamSourceFreq(1, 1);
 }
 
-void CSceneRendererStep::RenderObject3DRenderable(CRenderManager* _pRM, CObject3DRenderable* _pO3DRenderable)
+void CSceneRendererStep::RenderObject3DRenderable(CRenderManager* _pRM, CObject3DRenderable* _pO3DRenderable) const
 {
   CEffectManager* l_pEM = CORE->GetEffectManager();
 
@@ -221,7 +199,10 @@ void CSceneRendererStep::RenderObject3DRenderable(CRenderManager* _pRM, CObject3
       
     }else{
 
-      l_pEffect = l_pEM->GetResource(m_mapMaterialEffects[l_iMaterialType]);
+      map<int,string>::const_iterator l_it = m_mapMaterialEffects.find(l_iMaterialType);
+
+      if(l_it != m_mapMaterialEffects.end())
+        l_pEffect = l_pEM->GetResource(l_it->second);
 
       if(!l_pEffect)
         l_pEffect = l_pEM->GetResource("White");
@@ -237,7 +218,7 @@ void CSceneRendererStep::RenderObject3DRenderable(CRenderManager* _pRM, CObject3
 }
 
 
-void CSceneRendererStep::RenderEmiter(CRenderManager* _pRM, CObject3DRenderable* _pO3DRenderable)
+void CSceneRendererStep::RenderEmiter(CRenderManager* _pRM, CObject3DRenderable* _pO3DRenderable) const
 {
   
   if(m_szParticleEffect == "")
@@ -258,4 +239,3 @@ void CSceneRendererStep::RenderEmiter(CRenderManager* _pRM, CObject3DRenderable*
 
   _pO3DRenderable->Render(_pRM,l_vEffects);
 }
-

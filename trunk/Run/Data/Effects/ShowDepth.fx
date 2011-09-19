@@ -23,14 +23,16 @@ float LinearizeDepth(float2 uv)
 
 float4 ShowDepthPS(float2 _UV: TEXCOORD0) : COLOR
 {
-  //float d;
-  //d = LinearizeDepth(_UV);
-  //
+  float d;
+  d = LinearizeDepth(_UV);
+  
   //return float4(d,d,d,1.0);
   
   float z = tex2D(DepthTextureSampler, _UV).x;
   
-  return frac(float4(PositionFromZ(z,_UV),1.0));
+  float3 xyz = PositionFromZ(z,_UV);
+  
+  return float4(frac(xyz.xy) * d, d, 1.0);
 }
 
 technique ShowDepthTechnique

@@ -7,7 +7,6 @@
 
 // -------------------------------------------------
 class CPhysxSkeleton;
-class CPostSceneRendererStep;
 class CRenderableObject;
 // -------------------------------------------------
 
@@ -24,16 +23,13 @@ public:
   static CComponentMirilla* AddToEntity(CGameEntity* _pEntity, const string& _szName);
 
 protected:
-  CComponentMirilla():m_pAim(0) {};
+  CComponentMirilla() {};
   bool Init(CGameEntity* _pEntity, const string& _szName);
 
   virtual void Enable();
   virtual void Disable();
 
   virtual void Release();
-private:
-
-  CPostSceneRendererStep* m_pAim;
 
 };
 
