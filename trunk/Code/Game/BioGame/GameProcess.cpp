@@ -31,7 +31,11 @@ void CGameProcess::Update(float _fElapsedTime)
 
   //m_pOmniLight->SetPosition(l_vPlayerPos + l_vLightMod);
 
-  CObject3D* m_pPlayerPos = CORE->GetEntityManager()->GetEntity("Player")->GetComponent<CComponentObject3D>(CBaseComponent::ECT_OBJECT_3D);
+  
+  CGameEntity* l_pPlayerEntity = CORE->GetEntityManager()->GetEntity("Player");
+  m_pCamera = l_pPlayerEntity->GetComponent<CComponent3rdPSCamera>()->GetCamera();
+
+  CObject3D* m_pPlayerPos = l_pPlayerEntity->GetComponent<CComponentObject3D>(CBaseComponent::ECT_OBJECT_3D);
   CORE->GetSoundManager()->UpdateSound3DSystem(m_pPlayerPos->GetPosition(),m_pCamera->GetDirection());
 }
 

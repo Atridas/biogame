@@ -150,7 +150,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
   m_pScriptManager->Load(m_szLuaInitFile);
   m_pLogRender->SetWindowsPos(_InitParams.LogRenderParams.vPosition);
 
-  INIT(m_pConsole, "Consola", m_pScriptManager);
+  INIT_NO_ARGUMENTS(m_pConsole, "Consola");
   
   INIT(m_pGUIManager, "Manager de GUI", _InitParams.GUIManagerParams.szXML);
   if(m_pGUIManager->IsOk())
