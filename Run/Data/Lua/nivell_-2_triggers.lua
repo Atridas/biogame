@@ -32,3 +32,10 @@ function activarMenjador04(_EntityTrigger, _Entity)
     activate_entity('Miner_menjador00')
   end
 end
+
+--canviar de nivell
+function change_level_level_2(_EntityTrigger, _Entity)
+  if _Entity:get_name() == "Player" then
+    set_new_level("Nivell -1")
+  end
+end

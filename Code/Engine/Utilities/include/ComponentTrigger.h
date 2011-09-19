@@ -24,10 +24,13 @@ protected:
   CComponentTrigger() {};
 private:
 
+  bool CheckEntered(CGameEntity* _pEntity);
+
   void ExecuteLua(const string& _szLuaCode, CGameEntity* _pOther);
 
-
   string m_szOnEnter, m_szOnExit;
+
+  set<CGameEntity*> m_sEntered;
 };
 
 #endif

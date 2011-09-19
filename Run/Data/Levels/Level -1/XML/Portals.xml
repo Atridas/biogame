@@ -451,6 +451,7 @@
         <GameObject name="lvl1_aguanta_llums08" />
         <GameObject name="lvl1_Caixa_estatica_petita39" />
         <GameObject name="lvl1_Caixa_estatica_petita40" />
+        <GameObject name="lvl1_Caixa_estatica_petita41" />
       </Objects>
     </Room>
     <Room name="Room02">
