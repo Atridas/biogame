@@ -14,7 +14,6 @@
 //----------------------------------------------------------------------------
 void CConsole::Release()
 {
-	m_pScriptManager = NULL;
 	CHECKED_DELETE(m_Result);
 }
 
@@ -33,14 +32,9 @@ void CConsole::Done ()
 //----------------------------------------------------------------------------
 // Init data
 //----------------------------------------------------------------------------
-bool CConsole::Init(CScriptManager* scriptManager)
+bool CConsole::Init()
 {
-	m_bIsOk = false;
-	if (scriptManager)
-	{
-		m_pScriptManager = scriptManager;
-		m_bIsOk = true;
-	}
+	m_bIsOk = true;
 
 	m_Result = new uint16;
 	if (!m_bIsOk)
@@ -145,8 +139,9 @@ if( !m_bIsActive ) return;
 			//LUA con buffer:
 			//primero de todo hemos de quitar el ">" del buffer--> ">funcion()"
 			std::string action = m_sBuffer.substr(1,m_sBuffer.length());
-			assert(m_pScriptManager);
-			m_pScriptManager->RunCode(action);
+      CScriptManager* l_pScriptManager = CORE->GetScriptManager();
+			assert(l_pScriptManager);
+			l_pScriptManager->RunCode(action);
       m_sBuffer = ">";
 
 			//Actualizmoa el historial:
@@ -285,8 +280,9 @@ void CConsole::ProcessAutoComplete (bool reverse)
 	{
 		m_sAutoCInfo.m_Functions.clear();
 		std::string action = m_sBuffer.substr(1,m_sBuffer.length()) + "autoComplete()";
-		assert(m_pScriptManager);
-    m_pScriptManager->RunCode(action);
+    CScriptManager* l_pScriptManager = CORE->GetScriptManager();
+		assert(l_pScriptManager);
+    l_pScriptManager->RunCode(action);
 		if (m_sAutoCInfo.m_Functions.size() > 0)
 		{
 			m_sAutoCInfo.m_sOldBuffer			= m_sBuffer;

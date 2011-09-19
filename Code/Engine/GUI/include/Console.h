@@ -15,7 +15,6 @@
 //---Forward Declarations----
 class CRenderManager;
 class CFontManager;
-class CScriptManager;
 class CInputManager;
 //---------------------------
 
@@ -39,7 +38,7 @@ class CConsole
 {
 public:
 	//---Init and End protocols----
-	CConsole(): m_pScriptManager(NULL),	m_sBuffer( ">" ), 
+	CConsole(): m_sBuffer( ">" ), 
 							m_sFocusObject("_"),		m_bIsActive( false ),
 							m_fTimeCount(0.f),			m_fFocusTime(0.5f),
 							m_Result(NULL),					m_BackTime1(0.f),
@@ -47,7 +46,7 @@ public:
 
 	virtual ~CConsole() { Done(); }  
 
-	bool	Init		  						(CScriptManager* scriptManager);
+	bool	Init		  						();
 	void	Done									();
 	bool	IsOk      						()					const											{return m_bIsOk;}
 	//-----------------------------
@@ -73,7 +72,6 @@ private:
 	typedef std::vector<std::string> tHistory;
 
 	bool											m_bIsOk;
-	CScriptManager*	    			m_pScriptManager;
 	std::string								m_sBuffer;	
 	std::string								m_sFocusObject;
 	bool											m_bIsActive;
