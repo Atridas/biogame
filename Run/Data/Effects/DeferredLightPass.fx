@@ -45,23 +45,31 @@ struct T_DEF_LIGHTPASS_PS {
 //  return Out_;
 //}
 
+//struct PS_OUTPUT {
+//  float4 Light      : COLOR0;
+//  float4 Specular   : COLOR1;
+//};
+
 float4 DeferredLightPassPS(float2 _UV: TEXCOORD0) : COLOR
 {
   float z = tex2D(DepthTextureSampler, _UV).x;
   if(z == 0) discard;
   
-	float3 l_DiffuseColor = float3(1,1,1);
+	float3 l_DiffuseColor = tex2D(ColorTextureSampler, _UV);
   
-	float3 l_vWorldNrm = float3((tex2D(NormalsTextureSampler, _UV).xy - 0.5) * 2,0);
+  float4 l_NormalTextureValue = tex2D(NormalsTextureSampler, _UV);
+  
+	float3 l_vWorldNrm = float3((l_NormalTextureValue.xy - 0.5) * 2,0);
   l_vWorldNrm.z = -sqrt(1 - (l_vWorldNrm.x * l_vWorldNrm.x) - (l_vWorldNrm.y * l_vWorldNrm.y));
   
   l_vWorldNrm = normalize(l_vWorldNrm);
   
 	float3 l_vWorldPos = PositionFromZ(z,_UV);
   
-  float3 l_EyeDirection = normalize(- l_vWorldPos);
+  float l_SpecularFactor = l_NormalTextureValue.z * g_SpotlightFactorMax;
+  float l_SpecularPow = l_NormalTextureValue.a * g_SpecularPowMax;
   
-  float3 l_LightResult = float3(0.0,0.0,0.0);
+  float3 l_EyeDirection = normalize(- l_vWorldPos);
 
   float3 l_LightDirection;
   float  l_Attenuation = 1.0;
@@ -118,19 +126,28 @@ float4 DeferredLightPassPS(float2 _UV: TEXCOORD0) : COLOR
   }
   
   float3 l_HalfWayVector = normalize(l_EyeDirection+l_LightDirection);
-  l_LightResult = ComputeLight( l_vWorldNrm, 
+  float3 l_LightResult = ComputeLight( l_vWorldNrm, 
                         l_LightDirection, 
                         l_HalfWayVector, 
                         g_LightColor * l_Attenuation, 
                         l_DiffuseColor, 
-                        15.0,
-                        1.0); //_SpotlightFactor);      
+                        l_SpecularPow,
+                        l_SpecularFactor); //_SpotlightFactor); 
+  //PS_OUTPUT out_ = (PS_OUTPUT)0;
+  //
+  //float ndotl = saturate(dot(l_vWorldNrm, l_LightDirection));
+  //float ndoth = dot(l_vWorldNrm, l_HalfWayVector);
+  //
+  //float3 l_LightResult = ndotl * g_LightColor * l_Attenuation;
+  //
+  //if( dot(l_LightResult, 1.0) == 0 ) discard;
+  //
+  //out_.Light = float4(l_LightResult.xyz,1.0);
+  //out_.Specular = pow(abs(ndoth), l_SpecularPow) * g_LightColor * l_Attenuation * l_SpecularFactor;
+  
+  if( dot(l_LightResult, 1.0) == 0 ) discard;
 
-  
-  if( dot(l_LightResult.xyz, 1.0) == 0 ) discard;
-  
-  float4 out_ = float4(l_LightResult.xyz,1.0);
-	return out_;
+	return float4(l_LightResult,1.0);
 }
 
 technique DeferredLightPassTechnique

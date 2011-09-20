@@ -72,7 +72,10 @@
     <effect name="NormalTexturedDeferred" texture_mask="34" file="Data/Effects/NormalTexturedDeferred.fx" technique="NormalTexturedDeferredTechnique" />
     <effect name="AnimatedNormalTexturedDeferred" texture_mask="34" file="Data/Effects/AnimatedNormalTexturedDeferred.fx" technique="AnimatedNormalTexturedDeferredTechnique" />
     <effect name="NormalmapTexturedDeferred" texture_mask="38" file="Data/Effects/NormalmapTexturedDeferred.fx" technique="NormalmapTexturedDeferredTechnique" />
+    <effect name="SpecularmapNormalTexturedDeferred" texture_mask="50" file="Data/Effects/SpecularmapNormalTexturedDeferred.fx" technique="SpecularmapNormalTexturedDeferredTechnique" />
+    <effect name="SpecularmapNormalmapTexturedDeferred" texture_mask="54" file="Data/Effects/SpecularmapNormalmapTexturedDeferred.fx" technique="SpecularmapNormalmapTexturedDeferredTechnique" />
     <effect name="AnimatedNormalmapTexturedDeferred" texture_mask="38" file="Data/Effects/AnimatedNormalmapTexturedDeferred.fx" technique="AnimatedNormalmapTexturedDeferredTechnique" />
+    <effect name="AnimatedSpecularmapNormalmapTexturedDeferred" texture_mask="54" file="Data/Effects/AnimatedSpecularmapNormalmapTexturedDeferred.fx" technique="AnimatedSpecularmapNormalmapTexturedDeferredTechnique" />
   </effects>
 
 

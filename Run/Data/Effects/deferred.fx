@@ -186,16 +186,14 @@ PS_OUTPUT NewPS(TNEW_PS _in)
     float4 l_DiffuseColor = _in.Color;
   #endif
 
-  /*#if defined( NS_SPECULARMAP )
-    float  l_SpotlightFactor = 1.0;
+  float  l_SpotlightFactor = g_SpotlightFactor / g_SpotlightFactorMax;
+  #if defined( NS_SPECULARMAP )
     if(g_SpecularActive)
-      l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x;
-  #else
-    float l_SpotlightFactor = g_SpotlightFactor;
-  #endif */
+      l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x * l_SpotlightFactor;
+  #endif
   
   l_Output.Color = l_DiffuseColor;
-  l_Output.Normals = float4(l_ViewNormal.xy * 0.5 + 0.5,0,0);
+  l_Output.Normals = float4(l_ViewNormal.xy * 0.5 + 0.5,l_SpotlightFactor,g_SpecularPow/g_SpecularPowMax);
 	l_Output.Depth = float4(_in.ViewPosition.z, 0, 0, 0);
   
   #if defined( NS_TEX0 )

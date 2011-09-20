@@ -109,15 +109,15 @@
         <material_effect material_type="38"  effect="NormalmapTexturedDeferred" />
         <material_effect material_type="39"  effect="AnimatedNormalmapTexturedDeferred" />
         <material_effect material_type="10"  effect="NormalTexturedDeferred" />
-        <material_effect material_type="14"  effect="NormalTexturedDeferred" />
+        <material_effect material_type="14"  effect="NormalmapTexturedDeferred" />
         <!--<material_effect material_type="134" effect="RadiosityNormalmap" />-->
-        <material_effect material_type="18"  effect="NormalTexturedDeferred" />
-        <material_effect material_type="22"  effect="NormalTexturedDeferred" />
+        <material_effect material_type="18"  effect="SpecularmapNormalTexturedDeferred" />
+        <material_effect material_type="22"  effect="SpecularmapNormalmapTexturedDeferred" />
         <material_effect material_type="23"  effect="AnimatedNormalmapTexturedDeferred" />
-        <material_effect material_type="26"  effect="NormalTexturedDeferred" />
-        <material_effect material_type="30"  effect="NormalTexturedDeferred" />
+        <material_effect material_type="26"  effect="SpecularmapNormalTexturedDeferred" />
+        <material_effect material_type="30"  effect="SpecularmapNormalmapTexturedDeferred" />
         <!--<material_effect material_type="150" effect="SpecularRadiosityNormalmapTexturedTechnique" />-->
-        <material_effect material_type="55"  effect="AnimatedNormalmapTexturedDeferred" />
+        <material_effect material_type="55"  effect="AnimatedSpecularmapNormalmapTexturedDeferred" />
       </material_effects> 
       
     </scene_renderer>
@@ -182,32 +182,26 @@
   </scene_renderers>
 
   <post_scene_renderers>
-    
-    <!-- size_x="0.5" aspect_ratio="true" position="0.5 0.0" -->
-    <post_scene_renderer name="deferred lighting" 
-                         type="deferred_post_scene_renderer" 
-                         effect="DeferredLightPass" 
-                         render_target="RT2_ARGB_8" 
-                         active="true"
-                         clear_color="true"
-                         clear_color_value="0.0 0.0 0.0 0.0">
-
-      <input_samplers>
-        <!--<input_sampler type="texture" index="0" texture="scene_color"/>-->
-        <input_sampler type="texture" index="1" texture="RT3_ARGB_8"/>
-        <input_sampler type="texture" index="2" texture="RT1_RG_16F"/>
-      </input_samplers>
-      
-    </post_scene_renderer>
-    
+   
     <post_scene_renderer name="deferred_ambient" effect="DeferredAmbientPass" active="true" >
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
-        <input_sampler type="texture" index="1" texture="RT2_ARGB_8"/>
-        <input_sampler type="texture" index="2" texture="RT4_ARGB_8"/>
       </input_samplers>
 
+    </post_scene_renderer>
+    
+    <post_scene_renderer name="deferred lighting" 
+                         type="deferred_post_scene_renderer" 
+                         effect="DeferredLightPass" 
+                         active="true">
+
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
+        <input_sampler type="texture" index="1" texture="RT3_ARGB_8"/>
+        <input_sampler type="texture" index="2" texture="RT1_RG_16F"/>
+      </input_samplers>
+      
     </post_scene_renderer>
     
     <post_scene_renderer name="deferred ambient debug" effect="DeferredAmbientPass" size_x="0.5" aspect_ratio="true" position="0.5 0.0" >
