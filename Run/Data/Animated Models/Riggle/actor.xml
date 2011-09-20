@@ -33,5 +33,18 @@
   <animation name="CoverSortidaAvallEsquerra" filename="Data/Animated Models/Riggle/CoverSortidaAvallEsquerra.CAF"/>
   
   <animation name="dead" filename="Data/Animated Models/Riggle/dead.CAF"/>
+
+  <animation name="pointDownIdle" filename="Data/Animated Models/Riggle/pointDownIdle.CAF"/>
+  <animation name="PointUpIdle" filename="Data/Animated Models/Riggle/PointUpIdle.CAF"/>
+  <animation name="PointUpIdleLeft" filename="Data/Animated Models/Riggle/PointUpIdleLeft.CAF"/>
+  <animation name="PointUpIdleRight" filename="Data/Animated Models/Riggle/PointUpIdleRight.CAF"/>
+  <animation name="pointWalk" filename="Data/Animated Models/Riggle/pointWalk.CAF"/>
+  <animation name="pointWalkDown" filename="Data/Animated Models/Riggle/pointWalkDown.CAF"/>
+  <animation name="pointWalkUp" filename="Data/Animated Models/Riggle/pointWalkUp.CAF"/>
+  <animation name="RiggleDance" filename="Data/Animated Models/Riggle/RiggleDance.CAF"/>
+  <animation name="runWeapon" filename="Data/Animated Models/Riggle/runWeapon.CAF"/>
+  <animation name="shootDown" filename="Data/Animated Models/Riggle/shootDown.CAF"/>
+  <animation name="shootUp" filename="Data/Animated Models/Riggle/shootUp.CAF"/>
+  <animation name="walkWeapon" filename="Data/Animated Models/Riggle/walkWeapon.CAF"/>
   
 </actor>
