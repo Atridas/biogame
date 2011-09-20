@@ -12,6 +12,9 @@ class CRenderObjectsPostSceneRendererStep :
   virtual public CPostSceneRendererStep
 {
 public:
+  CRenderObjectsPostSceneRendererStep(): m_pSceneRendererStep(0) {};
+  ~CRenderObjectsPostSceneRendererStep() {Done();};
+
   virtual bool Init(CXMLTreeNode& _treePostSceneRenderer, const string& _szDefaultRenderTarget);
   virtual void Render(CRenderManager* _pRM, CCamera* _pCamera,
                       const vector<CObject3DRenderable*>& _vOpaqueObjects,

@@ -32,6 +32,7 @@ bool CRenderObjectsPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRende
 void CRenderObjectsPostSceneRendererStep::Release()
 {
   CHECKED_DELETE(m_pSceneRendererStep);
+  CPostSceneRendererStep::Release();
 }
 
 void CRenderObjectsPostSceneRendererStep::Render(CRenderManager* _pRM, CCamera* _pCamera,
