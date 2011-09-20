@@ -57,9 +57,9 @@ protected:
   virtual void RenderEmiter(CRenderManager* _pRM, CObject3DRenderable* _pO3DRenderable) const {};
   
   bool m_bRenderOpaque, m_bRenderAlphas;
+  string m_szRenderTarget;
 private:
   
-  string m_szRenderTarget;
 
   //vector<CRenderTarget*> m_vRenderTargets;
 

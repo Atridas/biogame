@@ -12,7 +12,7 @@ class CRenderManager;
 class CCamera;
 
 class CSceneRendererStep :
-  public CRendererStep
+  virtual public CRendererStep
 {
 
 public:

@@ -33,13 +33,14 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
 			d3dpp.Windowed          = FALSE;
       d3dpp.BackBufferWidth   = _params.v2iResolution.x;
       d3dpp.BackBufferHeight  = _params.v2iResolution.y;
-			d3dpp.BackBufferFormat  = D3DFMT_X8R8G8B8;
+			d3dpp.BackBufferFormat  = D3DFMT_A8R8G8B8;
       d3dpp.FullScreen_RefreshRateInHz = D3DPRESENT_RATE_DEFAULT;
 		}
 		else
 		{
 			d3dpp.Windowed          = TRUE;
-			d3dpp.BackBufferFormat	= D3DFMT_UNKNOWN;
+			//d3dpp.BackBufferFormat	= D3DFMT_UNKNOWN;
+			d3dpp.BackBufferFormat  = D3DFMT_A8R8G8B8;
 		}
 
 		d3dpp.SwapEffect				= D3DSWAPEFFECT_FLIP;

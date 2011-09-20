@@ -9,7 +9,7 @@ class CXMLTreeNode;
 class CLight;
 
 class CShadowMapPreRendererStep :
-  public CPreSceneRendererStep
+  virtual public CPreSceneRendererStep
 {
 public:
   CShadowMapPreRendererStep() : m_pLightShadowCast(0) {};

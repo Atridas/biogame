@@ -5,7 +5,7 @@
 #include "SceneRendererStep.h"
 
 class CForwardSceneRendererStep :
-  public CSceneRendererStep
+  virtual public CSceneRendererStep
 {
 
 public:
