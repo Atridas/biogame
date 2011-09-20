@@ -361,4 +361,12 @@ float4x4 GetWorldMatrix(float4 WorldMatrix0, float4 WorldMatrix1, float4 WorldMa
   return aux;
 }
 
+//------------------------------------------------------------------------------------------------------------------------------------------------
+
+float GetLuminance(float3 _fColor)
+{
+  return _fColor.x * 0.2126 + _fColor.y * 0.7152 + _fColor.z * 0.0722;
+  //return max(_fColor.x, max(_fColor.y, _fColor.z));
+}
+
 #endif

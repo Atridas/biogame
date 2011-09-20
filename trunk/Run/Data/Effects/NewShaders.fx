@@ -240,7 +240,8 @@ PS_OUTPUT NewPS(TNEW_PS _in)
   #if defined( NS_TEX0 )
     if(g_GlowActive)
     {
-      l_Output.Glow = tex2D(GlowTextureSampler,_in.UV) * g_GlowIntensity;
+      l_Output.Glow  = tex2D(GlowTextureSampler,_in.UV) * g_GlowIntensity;
+      l_Output.Glow *= g_GlowIntensity * l_Output.Glow.w;
       //l_Output.Glow.a = 1.0;
     } else {
       l_Output.Glow = float4(0, 0, 0, 0);
