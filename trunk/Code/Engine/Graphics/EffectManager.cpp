@@ -441,6 +441,14 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     m_bGlowUpdated = false;
   }
 
+  if(m_bHDRParamsUpdated)
+  {
+    _pEffect->SetValue("BrightPassThreshold", m_fBrightPassThreshold);
+    _pEffect->SetValue("Exposure",            m_fExposure);
+    _pEffect->SetValue("GaussMultiplier",     m_fGaussMultiplier);
+    m_bHDRParamsUpdated = false;
+  }
+
   if(m_bSpriteSizeUpdated)
   {
     _pEffect->SetValue("SpriteSize",(FLOAT*)&m_vSpriteSize, 2);

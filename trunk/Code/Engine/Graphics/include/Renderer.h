@@ -41,6 +41,20 @@ public:
   void GetActiveRenderPaths(set<string>& _RenderPaths) const;
 
   void Render(CProcess* _pProcess);
+  void Update(float _fDeltaTime);
+
+  CRenderTarget* GetRenderTarget(const string& _szRenderTarget) const 
+  { 
+    map<string,CRenderTarget*>::const_iterator l_it = m_mapRenderTargets.find(_szRenderTarget);
+    if(l_it != m_mapRenderTargets.end())
+    {
+      return l_it->second;
+    }
+    else
+    {
+      return 0;
+    }
+  }
 
 protected:
   virtual void Release();
@@ -63,12 +77,12 @@ private:
   map<string,CRenderTarget*> m_mapRenderTargets;
   string m_szDefaultRenderTarget;
   
-  map<string,CSceneRendererStep*> m_mapSceneRendererSteps;
+  map<string,CSceneRendererStep*>     m_mapSceneRendererSteps;
   map<string,CPostSceneRendererStep*> m_mapPostSceneRendererSteps;
-  map<string,CPreSceneRendererStep*> m_mapPreSceneRendererSteps;
+  map<string,CPreSceneRendererStep*>  m_mapPreSceneRendererSteps;
 
-  vector<CPreSceneRendererStep*> m_vPreSceneRendererSteps;
-  vector<CSceneRendererStep*> m_vSceneRendererSteps;
+  vector<CPreSceneRendererStep*>  m_vPreSceneRendererSteps;
+  vector<CSceneRendererStep*>     m_vSceneRendererSteps;
   vector<CPostSceneRendererStep*> m_vPostSceneRendererSteps;
 
   map<string, SRenderPath*> m_mapRenderPaths;

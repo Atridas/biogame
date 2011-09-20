@@ -98,7 +98,6 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="AggregateEmiterCore.cpp" />
     <ClCompile Include="DeferredPostSceneRendererStep.cpp" />
-    <ClCompile Include="DownsamplePostSceneRendererStep.cpp" />
     <ClCompile Include="EmiterCoreManager.cpp" />
     <ClCompile Include="ForwardSceneRendererStep.cpp" />
     <ClCompile Include="FrameBufferInputSampler.cpp" />
@@ -166,7 +165,6 @@
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\AggregateEmiterCore.h" />
     <ClInclude Include="include\DeferredPostSceneRendererStep.h" />
-    <ClInclude Include="include\DownsamplePostSceneRendererStep.h" />
     <ClInclude Include="include\EmiterCore.h" />
     <ClInclude Include="include\EmiterCoreManager.h" />
     <ClInclude Include="include\ForwardSceneRendererStep.h" />

@@ -255,4 +255,5 @@ void CCore::Update()
   }
 
   m_pLevelChanger->Update(l_fElapsedTime);
+  m_pRenderer->Update(l_fElapsedTime);
 }

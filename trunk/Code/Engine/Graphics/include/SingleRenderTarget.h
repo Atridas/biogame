@@ -18,6 +18,8 @@ public:
   virtual void Activate(CRenderManager* l_pRM, int _iIndex);
   virtual void Deactivate(CRenderManager* l_pRM) {};
 
+  LPDIRECT3DSURFACE9 GetSurface() const { return m_pSurface; };
+
 protected:
 
   virtual void Release();

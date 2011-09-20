@@ -33,6 +33,8 @@ public:
 
   void ClearBuffer(CRenderManager* l_pRM) const;
 
+  virtual void Update(float _fDeltaTime) {};
+
   virtual void Render(CRenderManager* _pRM, CCamera* _pCamera,
                       const vector<CObject3DRenderable*>& _vOpaqueObjects,
                       const vector<CObject3DRenderable*>& _vAlphaObjects,

@@ -155,6 +155,9 @@ bool CTexture::Create(const string& _szName,
   case R16G16F:
     l_Format=D3DFMT_G16R16F;
     break;
+  case R32G32F:
+    l_Format=D3DFMT_G32R32F;
+    break;
   case A16B16G16R16F:
     l_Format = D3DFMT_A16B16G16R16F;
   }
@@ -247,6 +250,8 @@ CTexture::TFormatType CTexture::GetFormatTypeFromString(const string &FormatType
     return CTexture::X8R8G8B8;
   else if(FormatType=="R16G16F")
     return CTexture::R16G16F;
+  else if(FormatType=="R32G32F")
+    return CTexture::R32G32F;
   else if(FormatType=="A16B16G16R16F")
     return CTexture::A16B16G16R16F;
   else

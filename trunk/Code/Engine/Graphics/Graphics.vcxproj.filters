@@ -277,9 +277,6 @@
     <Filter Include="Renderer\RendererStep\PostSceneRendererStep\RenderObjectsPostSceneRendererStep">
       <UniqueIdentifier>{92855c82-c6e1-4237-abee-bb8771d8addc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Renderer\RendererStep\PostSceneRendererStep\DownsamplePostSceneRendererStep">
-      <UniqueIdentifier>{c4b2a84c-10af-4147-93c0-dcb3c583ebf0}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -470,9 +467,6 @@
     </ClCompile>
     <ClCompile Include="RenderObjectsPostSceneRendererStep.cpp">
       <Filter>Renderer\RendererStep\PostSceneRendererStep\RenderObjectsPostSceneRendererStep</Filter>
-    </ClCompile>
-    <ClCompile Include="DownsamplePostSceneRendererStep.cpp">
-      <Filter>Renderer\RendererStep\PostSceneRendererStep\DownsamplePostSceneRendererStep</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -733,9 +727,6 @@
     </ClInclude>
     <ClInclude Include="include\RenderObjectsPostSceneRendererStep.h">
       <Filter>Renderer\RendererStep\PostSceneRendererStep\RenderObjectsPostSceneRendererStep</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DownsamplePostSceneRendererStep.h">
-      <Filter>Renderer\RendererStep\PostSceneRendererStep\DownsamplePostSceneRendererStep</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

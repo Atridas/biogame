@@ -13,8 +13,10 @@ bool CTextureRenderTarget::Init(CXMLTreeNode& _treeRenderTarget)
 
   int l_iWidth = (int)CORE->GetRenderManager()->GetScreenWidth();
 
-  m_iWidth = _treeRenderTarget.GetIntProperty("width",(int)RENDER_MANAGER->GetScreenWidth(),false);
-  m_iHeight = _treeRenderTarget.GetIntProperty("height",(int)RENDER_MANAGER->GetScreenHeight(),false);
+  float l_fSize = _treeRenderTarget.GetFloatProperty("size",1.f,false);
+
+  m_iWidth  = _treeRenderTarget.GetIntProperty("width" ,(int)(RENDER_MANAGER->GetScreenWidth()  * l_fSize),false);
+  m_iHeight = _treeRenderTarget.GetIntProperty("height",(int)(RENDER_MANAGER->GetScreenHeight() * l_fSize),false);
 
   CRenderTarget::Init(m_iWidth, m_iHeight);
 
