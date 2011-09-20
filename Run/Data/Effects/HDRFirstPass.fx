@@ -1,6 +1,16 @@
 #include "Globals.fx"
+#include "Functions.fx"
 
 sampler ColorTextureSampler : register(s0) = sampler_state
+{
+  MipFilter = LINEAR;
+  MinFilter = LINEAR;  
+  MagFilter = LINEAR;
+  AddressU  = WRAP;
+  AddressV  = WRAP;
+};
+
+sampler GlowPassTextureSampler : register(s1) = sampler_state
 {
   MipFilter = LINEAR;
   MinFilter = LINEAR;  
@@ -21,9 +31,8 @@ PS_OUTPUT HDRFirstPassPS(float2 _UV: TEXCOORD0)
 
 	float4 l_DiffuseColor = tex2D(ColorTextureSampler, _UV);
   
-  float l_fLuminance = max(l_DiffuseColor.x, max(l_DiffuseColor.y, l_DiffuseColor.z));
   
-  out_.Luminance = float4(log( 1e-5 + l_fLuminance), l_fLuminance, 0.0, 1.0);
+  float l_fLuminance = GetLuminance(l_DiffuseColor);
   
   if(l_fLuminance >= g_BrightPassThreshold)
   {
@@ -33,6 +42,12 @@ PS_OUTPUT HDRFirstPassPS(float2 _UV: TEXCOORD0)
   {
     out_.Bloom = float4(0.0, 0.0, 0.0, 1.0);
   }
+  
+  float4 l_Glow = tex2D(GlowPassTextureSampler, _UV);
+  
+  out_.Bloom += 4 * l_Glow / g_GaussMultiplier;
+  
+  out_.Luminance = float4(log( 1e-5 + l_fLuminance), l_fLuminance, 0.0, 1.0);
   
   return out_;
 }
