@@ -26,6 +26,8 @@ float g_ParallaxHeight = 0.02f;
 
 shared float g_SpecularPow     : Glossiness;    // = 100;
 shared float g_SpotlightFactor : SpecularLevel; //= 0.1;
+float g_SpotlightFactorMax = 10;
+float g_SpecularPowMax = 256;
 
 shared float g_EnvironmentIntensity : EnvironmentIntensity;
 
