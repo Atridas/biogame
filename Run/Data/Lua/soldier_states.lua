@@ -87,7 +87,7 @@ State_Soldier_Buscant_Cobertura["Enter"] = function(_enemic)
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
   
   --En cas de no trobar cami, es comporta com un enemic standard.
-  if ia_brain:plan_path_to_cobertura() == false then
+  if ia_brain:plan_path_to_cobertura(Enemy_Constants["Max Node Distance"]) == false then
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Idle')
   end
   ia_brain.time = 0

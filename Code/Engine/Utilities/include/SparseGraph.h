@@ -62,6 +62,8 @@ public:
 
   int GetClosestNode(const Vect3f& _vPosition);
 
+  int GetClosestNode(const Vect3f& _vPosition, int _iMaxDistance);
+
   //const method for obtaining a reference to an edge
   const CGraphEdge& GetEdge(int from, int to)const;
 

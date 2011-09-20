@@ -258,9 +258,6 @@
     <ClCompile Include="ComponentDestroyable.cpp">
       <Filter>EntitySystem\Components\ComponentDestroyable</Filter>
     </ClCompile>
-    <ClCompile Include="IAManger.cpp">
-      <Filter>IAShit\IAManager</Filter>
-    </ClCompile>
     <ClCompile Include="ComponentNavNode.cpp">
       <Filter>EntitySystem\Components\ComponentNavNode</Filter>
     </ClCompile>
@@ -290,6 +287,9 @@
     </ClCompile>
     <ClCompile Include="ComponentRotative.cpp">
       <Filter>EntitySystem\Components\ComponentRotative</Filter>
+    </ClCompile>
+    <ClCompile Include="IAManager.cpp">
+      <Filter>IAShit\IAManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

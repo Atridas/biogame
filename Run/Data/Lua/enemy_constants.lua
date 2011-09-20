@@ -19,3 +19,5 @@ Enemy_Constants["Time Shooting"]      = 1.7
 Enemy_Constants["Time Btw Shoot"]     = 3
 
 Enemy_Constants["Node Distance"]      = 1 -- distancia (al quadrat) per considerar que s'ha arribat a un node.
+
+Enemy_Constants["Max Node Distance"]  = 10 * 10 -- distancia (al quadrat) màxima per contemplar el node més pròxim.

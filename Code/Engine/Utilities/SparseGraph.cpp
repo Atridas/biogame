@@ -448,6 +448,24 @@ int CSparseGraph::GetClosestNode(const Vect3f& _vPosition)
   return l_iNode;
 }
 
+int CSparseGraph::GetClosestNode(const Vect3f& _vPosition, int _iMaxDistance)
+{
+  //TODO optimitzar amb algun quad-tree o algo
+  int l_iNode = INVALID_GRAPH_NODE_INDEX;
+  float l_fDistanceSquared;
+
+  for(uint32 i = 0; i < m_Nodes.size(); ++i)
+  {
+    float l_fNewDist = m_Nodes[i].GetPosition().SqDistance(_vPosition);
+    if((l_iNode == INVALID_GRAPH_NODE_INDEX || l_fDistanceSquared > l_fNewDist) && l_fNewDist <= _iMaxDistance)
+    {
+      l_iNode = i;
+      l_fDistanceSquared = l_fNewDist;
+    }
+  }
+  return l_iNode;
+}
+
 
 
 // Debug render : ------------------------------------------------------------------------------------------------------

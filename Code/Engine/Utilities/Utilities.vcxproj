@@ -120,7 +120,7 @@
     <ClCompile Include="GameObjectManager.cpp" />
     <ClCompile Include="GraphDefines.cpp" />
     <ClCompile Include="Heuristics.cpp" />
-    <ClCompile Include="IAManger.cpp" />
+    <ClCompile Include="IAManager.cpp" />
     <ClCompile Include="IAToLua.cpp" />
     <ClCompile Include="PhysXCollisionEntityController.cpp" />
     <ClCompile Include="PhysXTriggerEntityController.cpp" />

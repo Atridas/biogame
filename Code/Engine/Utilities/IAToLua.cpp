@@ -32,7 +32,8 @@ void RegisterIAToLua(lua_State* _pLS)
 
     class_<CIAManager, CBaseControl>("IAManager")
       .def("get_graph",         &CIAManager::GetGraph       )
-      .def("get_closest_node",  &CIAManager::GetClosestNode ) 
+      .def("get_closest_node",  (int(CIAManager::*)(const Vect3f&))      &CIAManager::GetClosestNode ) 
+      .def("get_closest_node",  (int(CIAManager::*)(const Vect3f&, int)) &CIAManager::GetClosestNode ) 
       .def("search_path",       &CIAManager::SearchPath     )
       .def("search_path_vec",   &CIAManager::SearchPathVec  ) 
 

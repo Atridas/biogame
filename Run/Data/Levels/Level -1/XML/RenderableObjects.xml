@@ -44,8 +44,8 @@
 	<RenderableObject name="lvl1_Caixa_estatica_petita33" class="StaticMesh" resource="lvl1_Caixa_estatica_petita33" position="-22.6594 0.506695 0.698636" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_caixa_llarga_dife10" class="StaticMesh" resource="lvl1_caixa_llarga_dife10" position="-21.585 1.24397 1.79556" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Caixa_estatica_petita34" class="StaticMesh" resource="lvl1_Caixa_estatica_petita34" position="-22.6248 0.511655 1.78186" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_Caixa_estatica_petita35" class="StaticMesh" resource="lvl1_Caixa_estatica_petita35" position="-12.3763 0.52294 -1.68755" yaw="50.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_Caixa_estatica_petita38" class="StaticMesh" resource="lvl1_Caixa_estatica_petita38" position="-12.3718 0.52294 -0.679873" yaw="50.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_Caixa_estatica_petita35" class="StaticMesh" resource="lvl1_Caixa_estatica_petita35" position="-12.3763 0.52294 -1.3914" yaw="50.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_Caixa_estatica_petita38" class="StaticMesh" resource="lvl1_Caixa_estatica_petita38" position="-12.3718 0.52294 -0.383732" yaw="50.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Passadis03" class="StaticMesh" resource="lvl1_Passadis03" position="-14.9061 -7.15256e-007 0.0436254" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_habitacio_municio" class="StaticMesh" resource="lvl1_habitacio_municio" position="-30.3381 0.0 0.0704956" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Porta_planta-1_02" class="StaticMesh" resource="lvl1_Porta_planta-1_02" position="-27.3872 1.39148 0.00468683" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -300,7 +300,7 @@
 	<RenderableObject name="lvl1_Plane22" class="StaticMesh" resource="lvl1_Plane22" position="17.2437 4.45118 22.8403" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Plane23" class="StaticMesh" resource="lvl1_Plane23" position="26.6329 4.45118 32.2294" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Plane25" class="StaticMesh" resource="lvl1_Plane25" position="40.6358 4.80742 27.6055" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_caixa_llarga17" class="StaticMesh" resource="lvl1_caixa_llarga17" position="25.5196 0.487671 24.5144" yaw="-90.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_caixa_llarga17" class="StaticMesh" resource="lvl1_caixa_llarga17" position="25.8895 0.487671 24.9438" yaw="-90.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_caixa_llarga18" class="StaticMesh" resource="lvl1_caixa_llarga18" position="30.8809 0.487671 31.0204" yaw="-90.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Plane24" class="StaticMesh" resource="lvl1_Plane24" position="20.1025 4.30009 18.6636" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_barra_dutxes" class="StaticMesh" resource="lvl1_barra_dutxes" position="13.8944 0.0 45.1666" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -370,8 +370,8 @@
 	<RenderableObject name="lvl1_Banc06" class="StaticMesh" resource="lvl1_Banc06" position="15.5474 0.421875 43.6625" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Banc09" class="StaticMesh" resource="lvl1_Banc09" position="17.4607 0.421875 37.0519" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Banc10" class="StaticMesh" resource="lvl1_Banc10" position="17.142 0.421875 37.3707" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_Banc08" class="StaticMesh" resource="lvl1_Banc08" position="22.2565 0.421875 34.0585" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_Banc07" class="StaticMesh" resource="lvl1_Banc07" position="22.5726 0.421875 33.7424" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_Banc08" class="StaticMesh" resource="lvl1_Banc08" position="21.7932 0.421875 34.5234" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_Banc07" class="StaticMesh" resource="lvl1_Banc07" position="22.1093 0.421875 34.2073" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Plane11" class="StaticMesh" resource="lvl1_Plane11" position="11.5817 4.45117 47.2806" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Plane14" class="StaticMesh" resource="lvl1_Plane14" position="20.9595 4.45904 47.3138" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Plane12" class="StaticMesh" resource="lvl1_Plane12" position="11.5646 4.45857 37.9315" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -406,9 +406,9 @@
 	<RenderableObject name="lvl1_aguanta_llums07" class="StaticMesh" resource="lvl1_aguanta_llums07" position="35.7645 -5.46596 -13.8602" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Lum08" class="StaticMesh" resource="lvl1_Lum08" position="35.7866 -1.92346 -6.81349" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_aguanta_llums08" class="StaticMesh" resource="lvl1_aguanta_llums08" position="35.7645 -2.01137 -6.67658" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_Caixa_estatica_petita39" class="StaticMesh" resource="lvl1_Caixa_estatica_petita39" position="31.96 -2.46012 -1.60717" yaw="50.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_Caixa_estatica_petita40" class="StaticMesh" resource="lvl1_Caixa_estatica_petita40" position="18.2369 0.52294 -1.6804" yaw="50.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_Caixa_estatica_petita41" class="StaticMesh" resource="lvl1_Caixa_estatica_petita41" position="14.306 0.52294 1.76423" yaw="50.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_Caixa_estatica_petita39" class="StaticMesh" resource="lvl1_Caixa_estatica_petita39" position="34.9567 -2.46012 -1.60717" yaw="50.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_Caixa_estatica_petita40" class="StaticMesh" resource="lvl1_Caixa_estatica_petita40" position="21.129 0.52294 -1.45238" yaw="50.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_Caixa_estatica_petita41" class="StaticMesh" resource="lvl1_Caixa_estatica_petita41" position="17.2005 0.52294 1.53829" yaw="50.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_armeria" class="StaticMesh" resource="lvl1_armeria" position="33.6163 -10.0 -23.6384" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_viga08" class="StaticMesh" resource="lvl1_viga08" position="24.951 -5.01891 -31.1149" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_viga09" class="StaticMesh" resource="lvl1_viga09" position="29.767 -5.01891 -31.1149" yaw="0.0" pitch="0.0" roll="0.0" />
