@@ -22,7 +22,9 @@ public:
 
   void CompleteGraph();
   int GetClosestNode(const Vect3f& _vPosition); //Utilitzar aquest, i no el del graf!!!! El del graf no s'optimitzarà!
+  int GetClosestNode(const Vect3f& _vPosition, int _iMaxDistance); //Utilitzar aquest, i no el del graf!!!! El del graf no s'optimitzarà!
   vector<CGraphNode*> GetClosestCobertura   (const Vect3f& _vPosition);
+  vector<CGraphNode*> GetClosestCobertura   (const Vect3f& _vPosition, int _iMaxDistance);
   vector<Vect3f>      GetClosestCoberturaVec(const Vect3f& _vPosition);
   
   vector<CGraphNode*> SearchPath   (const Vect3f& _vOrigin, const Vect3f& _vDestination);

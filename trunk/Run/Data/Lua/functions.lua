@@ -4,7 +4,7 @@ function activate_entity(_name)
   if l_entity then
     l_entity:set_active(true)
   else
-    log('Error: no es troba l\'entitat: ' .. _name)
+    log('Warning: no es troba l\'entitat: ' .. _name)
   end
 end
 
@@ -13,7 +13,7 @@ function deactivate_entity(_name)
   if l_entity then
     l_entity:set_active(false)
   else
-    log('Error: no es troba l\'entitat: ' .. _name)
+    log('Warning: no es troba l\'entitat: ' .. _name)
   end
 end
 
@@ -170,18 +170,41 @@ end
 function get_key_blue(_self, _actor)
   if _actor:get_name() == "Player" then
     pick_up(_self, _actor, "lvl1_key_blue")
+    --obrim la porta del passadís
+    send_open_door("lvl1_door03", _actor)
+    --activem els enemics
+    activate_entity("lvl1_miner00")
+    activate_entity("lvl1_militar00")
+    activate_entity("lvl1_militar01")
+    --obrim la porta de claus
+    send_open_door("lvl1_door_claus", _actor)
   end
 end
 
 function get_key_purple(_self, _actor)
   if _actor:get_name() == "Player" then
     pick_up(_self, _actor, "lvl1_key_purple")
+    --obrim la porta del passadís
+    send_open_door("lvl1_door04", _actor)
+    activate_entity("lvl1_militar09")
+    activate_entity("lvl1_miner03")
+    --obrim la porta de claus    
+    send_open_door("lvl1_door_claus", _actor)
   end
 end
 
 function get_key_yellow(_self, _actor)
   if _actor:get_name() == "Player" then
     pick_up(_self, _actor, "lvl1_key_yellow")
+    --obrim la porta del passadís
+    send_open_door("lvl1_door01", _actor)
+    activate_entity("lvl1_militar10")
+    activate_entity("lvl1_militar11")
+    activate_entity("lvl1_militar12")
+    activate_entity("lvl1_militar13")
+    activate_entity("lvl1_miner06")
+    --obrim la porta de claus
+    send_open_door("lvl1_door_claus", _actor)
   end
 end
 
@@ -200,8 +223,9 @@ function validate_key(_self, _player)
       unlock(_player, "purple", "lvl1_door01")
     
     elseif l_name == "lvl1_unlock_yellow" then
-      unlock(_player, "yellow", "lvl1_door_final")
-    
+      if unlock(_player, "yellow", "lvl1_door_final") then
+        activate_entity("lvl1_miner07")
+      end
     end
   end
 end
@@ -217,10 +241,14 @@ function unlock(_player, _color, _doorname)
       send_open_door(_doorname, _player)
       --remove key
       player_controller:remove_pickup("lvl1_key_" .. _color)
+      
+      return true
     else
       log("Error: al buscar la porta ".. _doorname)
     end
   end
+  
+  return false
 end
 
 --other

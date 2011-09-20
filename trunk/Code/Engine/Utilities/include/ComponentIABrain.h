@@ -29,6 +29,7 @@ public:
   
   //Path planning
   bool PlanPathToCobertura();
+  bool PlanPathToCobertura(int _iFirstNodeMaxDistance);
   Vect3f GetNextNodePosition() const;
   bool ArrivedAtDestination() const;
   bool ArrivedAtNode(float _fDistanceSq) const;

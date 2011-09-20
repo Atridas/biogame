@@ -340,6 +340,30 @@ bool CComponentIABrain::PlanPathToCobertura()
   return false;
 }
 
+bool CComponentIABrain::PlanPathToCobertura(int _iFirstNodeMaxDistance)
+{
+  if(m_pCover)
+    return true;
+
+  m_PathToCobertura = CORE->GetIAManager()->GetClosestCobertura(GetEntity()->GetComponent<CComponentObject3D>()->GetPosition(), _iFirstNodeMaxDistance);
+  
+  if( !m_PathToCobertura.empty() )
+  {
+    m_pCover = (*(--m_PathToCobertura.end()))->GetEntity()->GetComponent<CComponentNavNode>();
+    m_pCover->m_bOcupat = true;
+
+    vector<CGraphNode*>::iterator first = m_PathToCobertura.begin();
+    vector<CGraphNode*>::iterator last  = m_PathToCobertura.end();
+
+    while ((first!=last)&&(first!=--last))
+      swap (*first++,*last);
+
+    return true;
+  }
+
+  return false;
+}
+
 Vect3f CComponentIABrain::GetNextNodePosition() const
 {
   if(!m_PathToCobertura.empty())

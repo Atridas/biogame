@@ -1039,20 +1039,23 @@ ENTITIES
       void Die()
       
       plan_path_to_cobertura
-      bool PlanPathToCobertura();
+      bool PlanPathToCobertura()
+      
+      plan_path_to_cobertura
+      bool PlanPathToCobertura(int _iFirstNodeMaxDistance)
       
       get_next_node_position
-      Vect3f GetNextNodePosition() const;
+      Vect3f GetNextNodePosition() const
       
       arrived_at_destination
-      bool ArrivedAtDestination() const;
+      bool ArrivedAtDestination() const
       
       arrived_at_node
-      bool ArrivedAtNode() const;
+      bool ArrivedAtNode() const
       
       set_next_node
-      void SetNextNode();
-  
+      void SetNextNode()
+      
     Attributes:
       player
       CComponentIABrain::m_pPlayer
@@ -1314,6 +1317,9 @@ IA
       
       get_closest_node
       int GetClosestNode(const Vect3f& _vPosition)
+      
+      get_closest_node
+      int GetClosestNode(const Vect3f& _vPosition, int _iMaxDistance)
       
       search_path
       vector<CGraphNode*> SearchPath(const Vect3f& _vOrigin, const Vect3f& _vDestination)

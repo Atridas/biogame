@@ -44,7 +44,7 @@
 	<mesh name="lvl1_Caixa_estatica_petita33" path="Data/Meshes/lvl1_Caixa_estatica_petita33.mesh" max="0.541676 0.5 0.541677" min="-0.541676 -0.5 -0.541674" />
 	<mesh name="lvl1_caixa_llarga_dife10" path="Data/Meshes/lvl1_caixa_llarga_dife10.mesh" max="0.5 1.25 0.5" min="-0.5 -1.25 -0.5" />
 	<mesh name="lvl1_Caixa_estatica_petita34" path="Data/Meshes/lvl1_Caixa_estatica_petita34.mesh" max="0.5 0.5 0.500002" min="-0.500004 -0.5 -0.499998" />
-	<mesh name="lvl1_Caixa_estatica_petita35" path="Data/Meshes/lvl1_Caixa_estatica_petita35.mesh" max="1.39813 0.5 -0.122319" min="-1.39813 -0.5 0.122322" />
+	<mesh name="lvl1_Caixa_estatica_petita35" path="Data/Meshes/lvl1_Caixa_estatica_petita35.mesh" max="1.39813 0.5 -0.122319" min="-1.39813 -0.5 0.122321" />
 	<mesh name="lvl1_Caixa_estatica_petita38" path="Data/Meshes/lvl1_Caixa_estatica_petita38.mesh" max="1.39813 0.5 -0.122319" min="-1.39813 -0.5 0.122321" />
 	<mesh name="lvl1_Passadis03" path="Data/Meshes/lvl1_Passadis03.mesh" max="7.50658 4.4 2.25" min="-12.5 -2.38419e-007 -2.25" />
 	<mesh name="lvl1_habitacio_municio" path="Data/Meshes/lvl1_habitacio_municio.mesh" max="2.93201 5.0 4.14388" min="-2.93201 0.0 -4.14388" />
@@ -385,9 +385,9 @@
 	<mesh name="lvl1_aguanta_llums07" path="Data/Meshes/lvl1_aguanta_llums07.mesh" max="0.130722 0.0 -0.0450411" min="-0.0445366 -0.37025 -0.22109" />
 	<mesh name="lvl1_Lum08" path="Data/Meshes/lvl1_Lum08.mesh" max="0.0798302 0.0 0.0798302" min="-0.0798302 -0.569623 -0.0798302" />
 	<mesh name="lvl1_aguanta_llums08" path="Data/Meshes/lvl1_aguanta_llums08.mesh" max="0.130722 0.0 -0.0450406" min="-0.0445366 -0.37025 -0.22109" />
-	<mesh name="lvl1_Caixa_estatica_petita39" path="Data/Meshes/lvl1_Caixa_estatica_petita39.mesh" max="1.39813 0.5 -0.122318" min="-1.39813 -0.5 0.122322" />
-	<mesh name="lvl1_Caixa_estatica_petita40" path="Data/Meshes/lvl1_Caixa_estatica_petita40.mesh" max="1.39813 0.5 -0.12232" min="-1.39813 -0.5 0.122321" />
-	<mesh name="lvl1_Caixa_estatica_petita41" path="Data/Meshes/lvl1_Caixa_estatica_petita41.mesh" max="1.39813 0.5 -0.122319" min="-1.39813 -0.5 0.122321" />
+	<mesh name="lvl1_Caixa_estatica_petita39" path="Data/Meshes/lvl1_Caixa_estatica_petita39.mesh" max="1.39813 0.5 -0.122318" min="-1.39813 -0.5 0.122324" />
+	<mesh name="lvl1_Caixa_estatica_petita40" path="Data/Meshes/lvl1_Caixa_estatica_petita40.mesh" max="1.39813 0.5 -0.122322" min="-1.39813 -0.5 0.12232" />
+	<mesh name="lvl1_Caixa_estatica_petita41" path="Data/Meshes/lvl1_Caixa_estatica_petita41.mesh" max="1.39813 0.5 -0.12232" min="-1.39813 -0.5 0.122321" />
 	<mesh name="lvl1_armeria" path="Data/Meshes/lvl1_armeria.mesh" max="8.14388 6.0 2.93201" min="-11.1439 0.0 -17.932" />
 	<mesh name="lvl1_viga08" path="Data/Meshes/lvl1_viga08.mesh" max="0.237833 0.789214 10.5043" min="-0.237833 0.0 -10.5043" />
 	<mesh name="lvl1_viga09" path="Data/Meshes/lvl1_viga09.mesh" max="0.237833 0.789214 10.5043" min="-0.237833 0.0 -10.5043" />

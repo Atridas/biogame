@@ -93,6 +93,7 @@ State_Enemy_Caminant["Exit"] = function(_enemic)
 
   local animation = _enemic:get_component(BaseComponent.animation)
   animation:clear_cycle('walk',0.3)
+  animation:clear_cycle('idle',0.3)
   
 end
 
@@ -140,18 +141,18 @@ State_Enemy_Caminant['Update'] = function(_enemic, _dt)
   --log('pos: ' .. direction.x .. ' ' .. direction.y .. ' ' .. direction.z)
 
   
-  --if dist_sq > Enemy_Constants["Distance Stop Walk"] then
+  if dist_sq > Enemy_Constants["Distance Stop Walk"] then
     moviment.movement = moviment.movement + direction * _dt * Enemy_Constants["Walk Speed"]
     
-    --local animation = _enemic:get_component(BaseComponent.animation)
-    --animation:clear_cycle(0.3)
-    --animation:set_cycle('walk', 0.3)
-  --else
+    local animation = _enemic:get_component(BaseComponent.animation)
+    animation:clear_cycle('idle',0.3)
+    animation:play_cycle('walk', 0.3)
+  else
     
-    --local animation = _enemic:get_component(BaseComponent.animation)
-    --animation:clear_cycle(0.3)
-    --animation:set_cycle('idle', 0.3)
-  --end
+    local animation = _enemic:get_component(BaseComponent.animation)
+    animation:clear_cycle('walk',0.3)
+    animation:play_cycle('idle', 0.3)
+  end
   object3d:set_yaw(angle);
   
 end
