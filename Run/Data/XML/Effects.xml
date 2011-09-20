@@ -76,6 +76,16 @@
     <effect name="SpecularmapNormalmapTexturedDeferred" texture_mask="54" file="Data/Effects/SpecularmapNormalmapTexturedDeferred.fx" technique="SpecularmapNormalmapTexturedDeferredTechnique" />
     <effect name="AnimatedNormalmapTexturedDeferred" texture_mask="38" file="Data/Effects/AnimatedNormalmapTexturedDeferred.fx" technique="AnimatedNormalmapTexturedDeferredTechnique" />
     <effect name="AnimatedSpecularmapNormalmapTexturedDeferred" texture_mask="54" file="Data/Effects/AnimatedSpecularmapNormalmapTexturedDeferred.fx" technique="AnimatedSpecularmapNormalmapTexturedDeferredTechnique" />
+    
+    <!-- HDR -->
+    <effect name="HDRFirstPass" file="Data/Effects/HDRFirstPass.fx" technique="HDRFirstPassTechnique" />
+    <effect name="HDRFinalPass" file="Data/Effects/HDRFinalPass.fx" technique="HDRFinalPassTechnique" />
+    <effect name="LuminanceBlendPass" file="Data/Effects/LuminanceBlendPass.fx" technique="LuminanceBlendPassTechnique" />
+    <effect name="ShowLuminance" file="Data/Effects/ShowLuminance.fx" technique="ShowLuminanceTechnique" />
+    <effect name="ShowMaxLuminance" file="Data/Effects/ShowLuminance.fx" technique="ShowMaxLuminanceTechnique" />
+    <effect name="DownsampleLuminance" file="Data/Effects/DownsampleLuminance.fx" technique="DownsampleLuminanceTechnique" />
+    <effect name="Smart5BloomVertical" file="Data/Effects/Smart5Bloom.fx" technique="Smart5BloomVerticalTechnique" />
+    <effect name="Smart5BloomHoritzontal" file="Data/Effects/Smart5Bloom.fx" technique="Smart5BloomHoritzontalTechnique" />
   </effects>
 
 

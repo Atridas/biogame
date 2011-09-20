@@ -109,6 +109,11 @@ shared int g_TextureWidth  : TextureWidth;
 shared int g_TextureHeight : TextureHeight;
 shared float g_AlphaFactor : AlphaFactor;
 
+//HDR
+shared float g_BrightPassThreshold : BrightPassThreshold;
+shared float g_Exposure            : Exposure;
+shared float g_GaussMultiplier     : GaussMultiplier;
+
 #define POISON_BLUR_KERNEL_SIZE 16
 
 shared float2 g_PoissonBlurKernel[POISON_BLUR_KERNEL_SIZE] : PoissonBlurKernel;

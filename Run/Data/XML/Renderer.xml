@@ -15,6 +15,22 @@
       <texture_render_target name="RT1_RG_16F" format="R16G16F" texture="RT1_RG_16F"/>
       <texture_render_target name="RT_R_32F" format="R32F" width="1024" height="1024" texture="RT_R_32F" />
       
+      <texture_render_target name="HDR_COLOR"       format="A16B16G16R16F" texture="HDR_COLOR"    />
+      <texture_render_target name="HDR_LUMINANCE"   format="R32G32F"       texture="HDR_LUMINANCE"/>
+      <texture_render_target name="HDR_BLOOM_FIRST" format="A16B16G16R16F" texture="HDR_BLOOM_FIRST"/>
+      
+      <texture_render_target name="HDR_LUMINANCE_243"   format="R16G16F"       texture="HDR_LUMINANCE_243"   width="243" height="243" />
+      <texture_render_target name="HDR_LUMINANCE_81"    format="R16G16F"       texture="HDR_LUMINANCE_81"    width="81"  height="81"/>
+      <texture_render_target name="HDR_LUMINANCE_27"    format="R16G16F"       texture="HDR_LUMINANCE_27"    width="27"  height="27"/>
+      <texture_render_target name="HDR_LUMINANCE_9"     format="R16G16F"       texture="HDR_LUMINANCE_9"     width="9"   height="9"/>
+      <texture_render_target name="HDR_LUMINANCE_3"     format="R16G16F"       texture="HDR_LUMINANCE_3"     width="3"   height="3"/>
+      <texture_render_target name="HDR_LUMINANCE_1"     format="R16G16F"       texture="HDR_LUMINANCE_1"     width="1"   height="1"/>
+      <texture_render_target name="HDR_LUMINANCE_FINAL" format="R16G16F"       texture="HDR_LUMINANCE_FINAL" width="1"   height="1"/>
+      
+      <texture_render_target name="HDR_BLOOM_2"        format="A16B16G16R16F" texture="HDR_BLOOM_2"        size="0.5" />
+      <texture_render_target name="HDR_BLOOM_4"        format="A16B16G16R16F" texture="HDR_BLOOM_4"        size="0.25"/>
+      <texture_render_target name="HDR_BLOOM_VERTICAL" format="A16B16G16R16F" texture="HDR_BLOOM_VERTICAL" size="0.25"/>
+      <texture_render_target name="HDR_BLOOM_FINAL"    format="A16B16G16R16F" texture="HDR_BLOOM_FINAL"    size="0.25"/>
     </texture_render_targets>
     
     <multiple_render_targets>
@@ -29,6 +45,11 @@
         <texture_render_target name="RT3_ARGB_8" index="1" />
         <texture_render_target name="RT1_RG_16F" index="2" />
         <texture_render_target name="RT1_ARGB_8" index="3" />
+      </multiple_render_target>
+      
+      <multiple_render_target name="HDR_MRT">
+        <texture_render_target name="HDR_BLOOM_FIRST" index="0" />
+        <texture_render_target name="HDR_LUMINANCE"   index="1" />
       </multiple_render_target>
       
     </multiple_render_targets>
@@ -204,7 +225,7 @@
       
     </post_scene_renderer>
     
-    <post_scene_renderer name="deferred ambient debug" effect="DeferredAmbientPass" size_x="0.5" aspect_ratio="true" position="0.5 0.0" >
+    <post_scene_renderer name="deferred ambient debug" effect="DeferredAmbientPass" size="0.5" aspect_ratio="true" position="0.5 0.0" >
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
@@ -246,7 +267,7 @@
     
     <post_scene_renderer name="deferred_alpha debug"
                          type="render_objects_post_scene_renderer"
-                         size_x="0.5" aspect_ratio="true" position="0.5 0.0"
+                         size="0.5" aspect_ratio="true" position="0.5 0.0"
                          render_opaque="false" 
                          render_alpha="true">
 
@@ -275,15 +296,286 @@
       
     </post_scene_renderer>
     
-    <post_scene_renderer name="scene_color" effect="Texture" size_x="0.5" aspect_ratio="true" active="false">
-
+    <post_scene_renderer name="HDR_ambient_pass" effect="DeferredAmbientPass" active="true" render_target="HDR_COLOR">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
+        <input_sampler type="texture" index="1" texture="RT2_ARGB_8"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR deferred lighting" 
+                         type="deferred_post_scene_renderer" 
+                         effect="DeferredLightPass" 
+                         render_target="HDR_COLOR"
+                         active="true">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
+        <input_sampler type="texture" index="1" texture="RT3_ARGB_8"/>
+        <input_sampler type="texture" index="2" texture="RT1_RG_16F"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_alpha_pass"
+                         type="render_objects_post_scene_renderer"
+                         render_target="HDR_COLOR"
+                         render_opaque="false" 
+                         render_alpha="true">
+      <material_effects particle_effect="Particle">
+        <material_effect material_type="0"   effect="Diffused" />
+        <material_effect material_type="2"   effect="Textured" />
+        <material_effect material_type="514" effect="TexturedEnvironment" />
+        <material_effect material_type="518" effect="NormalmapEnvironment" />
+        <material_effect material_type="3"   effect="AnimatedTextured" />
+        <material_effect material_type="6"   effect="Normalmap" />
+        <material_effect material_type="7"   effect="AnimatedNormalmap" />
+        <material_effect material_type="34"  effect="Textured" />
+        <material_effect material_type="38"  effect="Normalmap" />
+        <material_effect material_type="39"  effect="AnimatedNormalmap" />
+        <material_effect material_type="10"  effect="Lightmap" />
+        <material_effect material_type="14"  effect="LightmapNormalmap" />
+        <material_effect material_type="134" effect="RadiosityNormalmap" />
+        <material_effect material_type="18"  effect="SpecularTextured" />
+        <material_effect material_type="22"  effect="SpecularNormalmapTextured" />
+        <material_effect material_type="23"  effect="AnimatedSpecularNormalmapTextured" />
+        <material_effect material_type="26"  effect="SpecularLightmapTextured" />
+        <material_effect material_type="30"  effect="SpecularLightmapNormalmapTextured" />
+        <material_effect material_type="150" effect="SpecularRadiosityNormalmapTexturedTechnique" />
+        <material_effect material_type="55"  effect="AnimatedSpecularNormalmapTextured" />
+      </material_effects>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_first_pass" effect="HDRFirstPass" active="true" render_target="HDR_MRT">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_COLOR"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_luminance_243" render_target="HDR_LUMINANCE_243"
+                         effect="DownsampleLuminance" 
+                         size="243"
+                         absolute_size="true"
+                         aspect_ratio="false">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_luminance_81" render_target="HDR_LUMINANCE_81"
+                         effect="DownsampleLuminance" 
+                         size="81"
+                         absolute_size="true"
+                         aspect_ratio="false">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_243"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_luminance_27" render_target="HDR_LUMINANCE_27"
+                         effect="DownsampleLuminance" 
+                         size="27"
+                         absolute_size="true"
+                         aspect_ratio="false">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_81"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_luminance_9" render_target="HDR_LUMINANCE_9"
+                         effect="DownsampleLuminance" 
+                         size="9"
+                         absolute_size="true"
+                         aspect_ratio="false">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_27"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_luminance_3" render_target="HDR_LUMINANCE_3"
+                         effect="DownsampleLuminance" 
+                         size="3"
+                         absolute_size="true"
+                         aspect_ratio="false">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_9"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_luminance_1" render_target="HDR_LUMINANCE_1"
+                         effect="DownsampleLuminance" 
+                         size="1"
+                         absolute_size="true"
+                         aspect_ratio="false">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_3"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_luminance_blend" render_target="HDR_LUMINANCE_FINAL"
+                         effect="LuminanceBlendPass" 
+                         size="1"
+                         absolute_size="true"
+                         aspect_ratio="false"
+                         use_time="true"
+                         use_delta_time="true">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_1"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_bloom_2" render_target="HDR_BLOOM_2"
+                         effect="DownSample4x"
+                         size="0.5"
+                         aspect_ratio="true">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_BLOOM_FIRST"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_bloom_4" render_target="HDR_BLOOM_4"
+                         effect="DownSample4x"
+                         size="0.25"
+                         aspect_ratio="true">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_BLOOM_2"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_bloom_vertical" render_target="HDR_BLOOM_VERTICAL"
+                         effect="Smart5BloomVertical"
+                         size="0.25"
+                         aspect_ratio="true">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_BLOOM_4"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_bloom_final" render_target="HDR_BLOOM_FINAL"
+                         effect="Smart5BloomHoritzontal"
+                         size="0.25"
+                         aspect_ratio="true">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_BLOOM_VERTICAL"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_final" effect="HDRFinalPass">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_COLOR"/>
+        <input_sampler type="texture" index="1" texture="HDR_BLOOM_FINAL"/>
+        <input_sampler type="texture" index="2" texture="HDR_LUMINANCE_FINAL"/>
+      </input_samplers>
+    </post_scene_renderer>
+    
+    
+    
+    <post_scene_renderer name="HDR_color" effect="Texture" size="0.25" aspect_ratio="true">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_COLOR"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_bloom" effect="Texture" size="0.25" aspect_ratio="true" position="0.5 0.0">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_BLOOM_FIRST"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_luminance" effect="ShowLuminance" size="0.25" aspect_ratio="true" position="0.75 0.0">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_max_luminance" effect="ShowMaxLuminance" size="0.25" aspect_ratio="true" position="0.75 0.25">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_luminance_343" effect="ShowLuminance" size="0.125" aspect_ratio="true" position="0.0 0.25">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_243"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_luminance_81" effect="ShowLuminance" size="0.125" aspect_ratio="true" position="0.125 0.25">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_81"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_luminance_27" effect="ShowLuminance" size="0.125" aspect_ratio="true" position="0.0 0.375">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_27"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_luminance_9" effect="ShowLuminance" size="0.125" aspect_ratio="true" position="0.125 0.375">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_9"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_luminance_3" effect="ShowLuminance" size="0.125" aspect_ratio="true" position="0.0 0.5">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_3"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_luminance_1" effect="ShowLuminance" size="0.125" aspect_ratio="true" position="0.125 0.5">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_1"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_max_luminance_343" effect="ShowMaxLuminance" size="0.125" aspect_ratio="true" position="0.0 0.625">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_243"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_max_luminance_81" effect="ShowMaxLuminance" size="0.125" aspect_ratio="true" position="0.125 0.625">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_81"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_max_luminance_27" effect="ShowMaxLuminance" size="0.125" aspect_ratio="true" position="0.0 0.75">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_27"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_max_luminance_9" effect="ShowMaxLuminance" size="0.125" aspect_ratio="true" position="0.125 0.75">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_9"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_max_luminance_3" effect="ShowMaxLuminance" size="0.125" aspect_ratio="true" position="0.0 0.875">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_3"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_max_luminance_1" effect="ShowMaxLuminance" size="0.125" aspect_ratio="true" position="0.125 0.875">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_1"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_max_luminance_final" effect="ShowMaxLuminance" size="0.25" aspect_ratio="true" position="0.5 0.25">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_FINAL"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_bloom_2" effect="Texture" size="0.25" aspect_ratio="true" position="0.25 0.0">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_BLOOM_2"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_bloom_4" effect="Texture" size="0.25" aspect_ratio="true" position="0.25 0.25">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_BLOOM_2"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_bloom_vertical" effect="Texture" size="0.25" aspect_ratio="true" position="0.25 0.5">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_BLOOM_VERTICAL"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_bloom_final" effect="Texture" size="0.25" aspect_ratio="true" position="0.25 0.75">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_BLOOM_FINAL"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_final" effect="HDRFinalPass" size="0.5" aspect_ratio="true" position="0.5 0.5">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_COLOR"/>
+        <input_sampler type="texture" index="1" texture="HDR_BLOOM_FINAL"/>
+        <input_sampler type="texture" index="2" texture="HDR_LUMINANCE_FINAL"/>
+      </input_samplers>
+    </post_scene_renderer>
+    
+    
+    
+    
+    <post_scene_renderer name="scene_color" effect="Texture" size="0.5" aspect_ratio="true" active="false">
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
       </input_samplers>
-
     </post_scene_renderer>
     
-    <post_scene_renderer name="scene_normals" effect="Texture" size_x="0.5" aspect_ratio="true" position="0.0 0.5" active="false">
+    <post_scene_renderer name="scene_normals" effect="Texture" size="0.5" aspect_ratio="true" position="0.0 0.5" active="false">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT3_ARGB_8"/>
@@ -291,7 +583,7 @@
 
     </post_scene_renderer>
     
-    <post_scene_renderer name="show_depth" effect="ShowDepth" size_x="0.5" aspect_ratio="true" position="0.5 0.5" active="false">
+    <post_scene_renderer name="show_depth" effect="ShowDepth" size="0.5" aspect_ratio="true" position="0.5 0.5" active="false">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT1_RG_16F"/>
@@ -299,7 +591,7 @@
 
     </post_scene_renderer>
     
-    <post_scene_renderer name="show_lights" effect="Texture" size_x="0.5" aspect_ratio="true" position="0.5 0.0">
+    <post_scene_renderer name="show_lights" effect="Texture" size="0.5" aspect_ratio="true" position="0.5 0.0">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT2_ARGB_8"/>
@@ -307,7 +599,7 @@
 
     </post_scene_renderer>
     
-    <post_scene_renderer name="show_alpha" effect="Texture" size_x="0.5" aspect_ratio="true" position="0.5 0.0">
+    <post_scene_renderer name="show_alpha" effect="Texture" size="0.5" aspect_ratio="true" position="0.5 0.0">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT4_ARGB_8"/>
@@ -403,7 +695,7 @@
 
     </post_scene_renderer>
 
-    <post_scene_renderer name="blood_gui" effect="TextureAlphaFactor" size_x="0.6" position="0.3 -0.2" active="false">
+    <post_scene_renderer name="blood_gui" effect="TextureAlphaFactor" size="0.6" position="0.3 -0.2" active="false">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="Data/Textures/Blood_Decal.png"/>
@@ -411,7 +703,7 @@
 
     </post_scene_renderer>
 
-    <post_scene_renderer name="aim_gui" effect="TextureAlphaFactor" size_x="0.02" position="0.5 0.5" alignment="center" active="false">
+    <post_scene_renderer name="aim_gui" effect="TextureAlphaFactor" size="0.02" position="0.5 0.5" alignment="center" active="false">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="Data/Textures/aim.png"/>
@@ -434,10 +726,10 @@
   </post_scene_renderers>
   
   <render_paths>
-    <render_path name="deferred" active="true">
+    <render_path name="deferred" active="false">
       <scene_renderer name="deferred_renderer"/>
-      <post_scene_renderer name="deferred lighting"/>
       <post_scene_renderer name="deferred_ambient"/>
+      <post_scene_renderer name="deferred lighting"/>
       <post_scene_renderer name="deferred_alpha"/>
     </render_path>
     
@@ -471,6 +763,71 @@
       <post_scene_renderer name="scene_color"/>
       <post_scene_renderer name="scene_normals"/>
       <post_scene_renderer name="show_depth"/>
+    </render_path>
+    
+    <render_path name="HDR" active="true">
+      <scene_renderer name="deferred_renderer"/>
+      <post_scene_renderer name="HDR_ambient_pass"/>
+      <post_scene_renderer name="HDR deferred lighting"/>
+      <post_scene_renderer name="HDR_alpha_pass"/>
+      
+      <post_scene_renderer name="HDR_first_pass"/>
+      <post_scene_renderer name="HDR_luminance_243"/>
+      <post_scene_renderer name="HDR_luminance_81"/>
+      <post_scene_renderer name="HDR_luminance_27"/>
+      <post_scene_renderer name="HDR_luminance_9"/>
+      <post_scene_renderer name="HDR_luminance_3"/>
+      <post_scene_renderer name="HDR_luminance_1"/>
+      <post_scene_renderer name="HDR_luminance_blend"/>
+      <post_scene_renderer name="HDR_bloom_2"/>
+      <post_scene_renderer name="HDR_bloom_4"/>
+      <post_scene_renderer name="HDR_bloom_vertical"/>
+      <post_scene_renderer name="HDR_bloom_final"/>
+      <post_scene_renderer name="HDR_final"/>
+      
+    </render_path>
+    
+    <render_path name="HDR debug" active="false">
+      <scene_renderer name="deferred_renderer"/>
+      <post_scene_renderer name="HDR_ambient_pass"/>
+      <post_scene_renderer name="HDR deferred lighting"/>
+      <post_scene_renderer name="HDR_alpha_pass"/>
+      
+      <post_scene_renderer name="HDR_first_pass"/>
+      <post_scene_renderer name="HDR_luminance_243"/>
+      <post_scene_renderer name="HDR_luminance_81"/>
+      <post_scene_renderer name="HDR_luminance_27"/>
+      <post_scene_renderer name="HDR_luminance_9"/>
+      <post_scene_renderer name="HDR_luminance_3"/>
+      <post_scene_renderer name="HDR_luminance_1"/>
+      <post_scene_renderer name="HDR_luminance_blend"/>
+      <post_scene_renderer name="HDR_bloom_2"/>
+      <post_scene_renderer name="HDR_bloom_4"/>
+      <post_scene_renderer name="HDR_bloom_vertical"/>
+      <post_scene_renderer name="HDR_bloom_final"/>
+      
+      <post_scene_renderer name="HDR_color"/>
+      <post_scene_renderer name="HDR_bloom"/>
+      <post_scene_renderer name="HDR_show_luminance"/>
+      <post_scene_renderer name="HDR_show_luminance_343"/>
+      <post_scene_renderer name="HDR_show_luminance_81"/>
+      <post_scene_renderer name="HDR_show_luminance_27"/>
+      <post_scene_renderer name="HDR_show_luminance_9"/>
+      <post_scene_renderer name="HDR_show_luminance_3"/>
+      <post_scene_renderer name="HDR_show_luminance_1"/>
+      <post_scene_renderer name="HDR_show_max_luminance"/>
+      <post_scene_renderer name="HDR_show_max_luminance_343"/>
+      <post_scene_renderer name="HDR_show_max_luminance_81"/>
+      <post_scene_renderer name="HDR_show_max_luminance_27"/>
+      <post_scene_renderer name="HDR_show_max_luminance_9"/>
+      <post_scene_renderer name="HDR_show_max_luminance_3"/>
+      <post_scene_renderer name="HDR_show_max_luminance_1"/>
+      <post_scene_renderer name="HDR_show_max_luminance_final"/>
+      <post_scene_renderer name="HDR_show_bloom_2"/>
+      <post_scene_renderer name="HDR_show_bloom_4"/>
+      <post_scene_renderer name="HDR_show_bloom_vertical"/>
+      <post_scene_renderer name="HDR_show_bloom_final"/>
+      <post_scene_renderer name="HDR_show_final"/>
     </render_path>
     
     <render_path name="forward" active="false">

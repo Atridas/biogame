@@ -58,10 +58,14 @@ public:
                     m_bEnvironmentUpdated(false),
                     m_bTimeUpdated(false),
                     m_bSpriteSizeUpdated(false),
+                    m_bHDRParamsUpdated(true),
                     m_fTime(0.0f),
                     m_fEnvironmentIntensity(0.f),
                     m_fGlossiness(0.f),
-                    m_fSpecularLevel(0.f)
+                    m_fSpecularLevel(0.f),
+                    m_fBrightPassThreshold(.8f),
+                    m_fExposure(.5f),
+                    m_fGaussMultiplier(.4f)
                     {SetOk(true);};
 
   ~CEffectManager() {Done();};
@@ -165,7 +169,12 @@ public:
   void SetGlowIntensity(float _fGlowIntensity) {m_fGlowIntensity = _fGlowIntensity; m_bGlowUpdated = true;};
   void SetEnvironmentIntensity(float _fEnvironmentIntensity) {if(_fEnvironmentIntensity != m_fEnvironmentIntensity) {m_fEnvironmentIntensity = _fEnvironmentIntensity; m_bEnvironmentUpdated = true;}};
   void SetSpriteSize(const Vect2f _vSpriteSize) {if(_vSpriteSize != m_vSpriteSize) { m_vSpriteSize = _vSpriteSize; m_bSpriteSizeUpdated = true; } };
+  void SetBrightPassThreshold(float _fBrightPassThreshold) {if(_fBrightPassThreshold != m_fBrightPassThreshold) { m_fBrightPassThreshold = _fBrightPassThreshold; m_bHDRParamsUpdated = true; }};
+  void SetExposure(float _fExposure) {if(_fExposure != m_fExposure) { m_fExposure = _fExposure; m_bHDRParamsUpdated = true; }};
+  void SetGaussMultiplier(float _fGaussMultiplier) {if(_fGaussMultiplier != m_fGaussMultiplier) { m_fGaussMultiplier = _fGaussMultiplier; m_bHDRParamsUpdated = true; }};
 
+
+  
   void ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _mProjectionMatrix, const Vect3f& _vCameraEye, const Vect3f& _vCameraUp, const Vect3f& _vCameraRight);
 
   void Begin(void) {m_bLightsUpdated = true; ActivateDefaultRendering();};
@@ -233,6 +242,7 @@ private:
   bool m_bGlowUpdated;
   bool m_bSpecularUpdated;
   bool m_bEnvironmentUpdated;
+  bool m_bHDRParamsUpdated;
 
   //Matrius compostes recalculades
   bool m_bViewProjectionUpdated;
@@ -254,6 +264,9 @@ private:
   float m_fEnvironmentIntensity;
   float m_fTime;
   Vect2f m_vSpriteSize;
+  float m_fBrightPassThreshold;
+  float m_fExposure;
+  float m_fGaussMultiplier;
 
   bool    m_bLightEnabled;
   int     m_iLightType;

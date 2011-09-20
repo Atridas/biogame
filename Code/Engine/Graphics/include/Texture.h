@@ -84,6 +84,7 @@ public:
     X8R8G8B8,
     R32F,
     R16G16F,
+    R32G32F,
     A16B16G16R16F
   };
 

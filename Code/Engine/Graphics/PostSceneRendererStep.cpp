@@ -33,6 +33,15 @@ bool CPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer, const st
 
       m_bUseTime = _treePostSceneRenderer.GetBoolProperty("use_time",false,false);
 
+      if(m_bUseTime)
+      {
+        m_bUseDeltaTime = _treePostSceneRenderer.GetBoolProperty("use_delta_time",false,false);
+      }
+      else
+      {
+        m_bUseDeltaTime = false;
+      }
+
       string l_szAlignment = _treePostSceneRenderer.GetPszISOProperty("alignment","",false);
       if(l_szAlignment == "center")
       {
@@ -44,12 +53,20 @@ bool CPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer, const st
       m_iPos.x = (int) (l_fPos.x * RENDER_MANAGER->GetScreenWidth());
       m_iPos.y = (int) (l_fPos.y * RENDER_MANAGER->GetScreenHeight());
 
-      if(_treePostSceneRenderer.ExistsProperty("size_x"))
+      if(_treePostSceneRenderer.ExistsProperty("size"))
       {
-        float l_fSizeX = _treePostSceneRenderer.GetFloatProperty("size_x",1.0,false);
+        float l_fSizeX = _treePostSceneRenderer.GetFloatProperty("size",1.0,false);
 
-        m_iSize.x = (int) (l_fSizeX * RENDER_MANAGER->GetScreenWidth());
-        m_iSize.y = m_iSize.x;
+        if(_treePostSceneRenderer.GetBoolProperty("absolute_size",false,false))
+        {
+          m_iSize.x = (int) l_fSizeX;
+          m_iSize.y = m_iSize.x;
+        }
+        else
+        {
+          m_iSize.x = (int) (l_fSizeX * RENDER_MANAGER->GetScreenWidth());
+          m_iSize.y = m_iSize.x;
+        }
 
         if(_treePostSceneRenderer.ExistsProperty("aspect_ratio"))
         {

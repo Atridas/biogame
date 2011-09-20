@@ -291,10 +291,13 @@ bool CRenderer::Init(const string& _szFileName)
           if(l_szType == "deferred_post_scene_renderer")
           {
             l_pPostRenderer = new CDeferredPostSceneRendererStep();
-          } else if(l_szType == "render_objects_post_scene_renderer")
+          } 
+          else if(l_szType == "render_objects_post_scene_renderer")
           {
             l_pPostRenderer = new CRenderObjectsPostSceneRendererStep();
-          } else {
+          } 
+          else 
+          {
             l_pPostRenderer = new CPostSceneRendererStep();
           }
 
@@ -370,6 +373,23 @@ bool CRenderer::Init(const string& _szFileName)
   }
 
   return IsOk();
+}
+
+void CRenderer::Update(float _fDeltaTime)
+{
+  //desactivar els steps
+  for(uint32 i = 0; i < m_vPreSceneRendererSteps.size(); ++i)
+  {
+    m_vPreSceneRendererSteps[i]->Update(_fDeltaTime);
+  }
+  for(uint32 i = 0; i < m_vPostSceneRendererSteps.size(); ++i)
+  {
+    m_vPostSceneRendererSteps[i]->Update(_fDeltaTime);
+  }
+  for(uint32 i = 0; i < m_vSceneRendererSteps.size(); ++i)
+  {
+    m_vSceneRendererSteps[i]->Update(_fDeltaTime);
+  }
 }
 
 void CRenderer::Render(CProcess* _pProcess)
@@ -461,21 +481,28 @@ void CRenderer::Render(CProcess* _pProcess)
 
     if(l_pPostSceneRenderer->IsActive())
     {
-      string l_szRenderTarget = l_pPostSceneRenderer->GetRenderTarget();
-      map<string,CRenderTarget*>::const_iterator l_it = m_mapRenderTargets.find(l_szRenderTarget);
-      if(l_it != m_mapRenderTargets.end())
+      map<string,CRenderTarget*>::const_iterator l_it;
+
+      if(l_pPostSceneRenderer->NeedsToActivateRenderTargets())
       {
-        l_it->second->Activate(l_pRM);
-        l_pEM->SetTextureWidthHeight(l_it->second->GetWidth(), l_it->second->GetHeight());
+        string l_szRenderTarget = l_pPostSceneRenderer->GetRenderTarget();
+        l_it = m_mapRenderTargets.find(l_szRenderTarget);
+        if(l_it != m_mapRenderTargets.end())
+        {
+          l_it->second->Activate(l_pRM);
+          l_pEM->SetTextureWidthHeight(l_it->second->GetWidth(), l_it->second->GetHeight());
+        }
       }
-      
       
       l_pPostSceneRenderer->ClearBuffer(l_pRM);
       l_pPostSceneRenderer->Render(l_pRM, m_pCamera, l_vOpaqueObjects, l_vAlphaObjects, l_vParticleEmiters);
-
-      if(l_it != m_mapRenderTargets.end())
+      
+      if(l_pPostSceneRenderer->NeedsToActivateRenderTargets())
       {
-        l_it->second->Deactivate(l_pRM);
+        if(l_it != m_mapRenderTargets.end())
+        {
+          l_it->second->Deactivate(l_pRM);
+        }
       }
     }
   }
