@@ -10,12 +10,12 @@
     <property type="specularParams" glossiness="200.0" specular_level="10.0" />
   </material>
   <animation name="idle" filename="Data/Animated Models/Riggle/idle.CAF"/>
-  <animation name="walk" filename="Data/Animated Models/Riggle/walk.CAF"/>
+  <animation name="walk" filename="Data/Animated Models/Riggle/walkWeapon.CAF"/>
   <animation name="protection" filename="Data/Animated Models/Riggle/protection.CAF"/>
   <animation name="shoot" filename="Data/Animated Models/Riggle/shoot.CAF"/>
   <animation name="impact" filename="Data/Animated Models/Riggle/impact.CAF"/>
   <animation name="aim" filename="Data/Animated Models/Riggle/point.CAF"/>
-  <animation name="run" filename="Data/Animated Models/Riggle/run.CAF"/>
+  <animation name="run" filename="Data/Animated Models/Riggle/runWeapon.CAF"/>
   
   <animation name="walk back" filename="Data/Animated Models/Riggle/WalkEnrera.CAF"/>
   
@@ -42,9 +42,7 @@
   <animation name="pointWalkDown" filename="Data/Animated Models/Riggle/pointWalkDown.CAF"/>
   <animation name="pointWalkUp" filename="Data/Animated Models/Riggle/pointWalkUp.CAF"/>
   <animation name="RiggleDance" filename="Data/Animated Models/Riggle/RiggleDance.CAF"/>
-  <animation name="runWeapon" filename="Data/Animated Models/Riggle/runWeapon.CAF"/>
   <animation name="shootDown" filename="Data/Animated Models/Riggle/shootDown.CAF"/>
   <animation name="shootUp" filename="Data/Animated Models/Riggle/shootUp.CAF"/>
-  <animation name="walkWeapon" filename="Data/Animated Models/Riggle/walkWeapon.CAF"/>
   
 </actor>
