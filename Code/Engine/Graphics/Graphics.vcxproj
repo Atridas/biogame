@@ -91,7 +91,6 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="AlphaPostSceneRendererStep.cpp" />
     <ClCompile Include="AnimatedCoreModel.cpp" />
     <ClCompile Include="AnimatedInstanceModel.cpp" />
     <ClCompile Include="AnimatedModelManager.cpp" />
@@ -99,6 +98,7 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="AggregateEmiterCore.cpp" />
     <ClCompile Include="DeferredPostSceneRendererStep.cpp" />
+    <ClCompile Include="DownsamplePostSceneRendererStep.cpp" />
     <ClCompile Include="EmiterCoreManager.cpp" />
     <ClCompile Include="ForwardSceneRendererStep.cpp" />
     <ClCompile Include="FrameBufferInputSampler.cpp" />
@@ -110,6 +110,7 @@
     <ClCompile Include="RenderableObject.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="RendererStep.cpp" />
+    <ClCompile Include="RenderObjectsPostSceneRendererStep.cpp" />
     <ClCompile Include="RenderTarget.cpp" />
     <ClCompile Include="SceneRendererStep.cpp" />
     <ClCompile Include="ShadowMapPreRendererStep.cpp" />
@@ -156,7 +157,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\AlphaDecorator.h" />
-    <ClInclude Include="include\AlphaPostSceneRendererStep.h" />
     <ClInclude Include="include\AnimatedCoreModel.h" />
     <ClInclude Include="include\AnimatedInstanceModel.h" />
     <ClInclude Include="include\AnimatedMeshEmptyMaterial.h" />
@@ -166,6 +166,7 @@
     <ClInclude Include="include\Camera.h" />
     <ClInclude Include="include\AggregateEmiterCore.h" />
     <ClInclude Include="include\DeferredPostSceneRendererStep.h" />
+    <ClInclude Include="include\DownsamplePostSceneRendererStep.h" />
     <ClInclude Include="include\EmiterCore.h" />
     <ClInclude Include="include\EmiterCoreManager.h" />
     <ClInclude Include="include\ForwardSceneRendererStep.h" />
@@ -177,6 +178,7 @@
     <ClInclude Include="include\PreSceneRendererStep.h" />
     <ClInclude Include="include\Renderer.h" />
     <ClInclude Include="include\RendererStep.h" />
+    <ClInclude Include="include\RenderObjectsPostSceneRendererStep.h" />
     <ClInclude Include="include\RenderTarget.h" />
     <ClInclude Include="include\SceneRendererStep.h" />
     <ClInclude Include="include\ShadowMapPreRendererStep.h" />

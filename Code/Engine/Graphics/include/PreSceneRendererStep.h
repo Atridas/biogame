@@ -7,7 +7,7 @@
 class CXMLTreeNode;
 
 class CPreSceneRendererStep :
-  public CSceneRendererStep
+  virtual public CSceneRendererStep
 {
 public:
   CPreSceneRendererStep() {};

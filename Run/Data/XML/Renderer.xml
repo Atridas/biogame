@@ -122,11 +122,12 @@
       
     </scene_renderer>
     
-    <scene_renderer name="deferred_alpha" render_target="RT4_ARGB_8" 
-                    render_opaque="false" 
-                    render_alpha="true"
+    <scene_renderer name="deferred_alpha"
+                    render_target="RT4_ARGB_8"
                     clear_color="true"
-                    clear_color_value="0.0 0.0 0.0 0.0">
+                    clear_color_value="0.0 0.0 0.0 0.0"
+                    render_opaque="false" 
+                    render_alpha="true">
 
       <material_effects particle_effect="Particle">
         <material_effect material_type="0"   effect="Diffused" />
@@ -152,6 +153,7 @@
       </material_effects>
       
     </scene_renderer>
+    
 
     <scene_renderer name="show_normals_renderer" type="scene_renderer" clear_color="true" clear_depth="1.0">
       <material_effects static_mesh_effect="ShowNormals" animated_model_effect="AnimatedShowNormals" />
@@ -213,9 +215,70 @@
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
         <input_sampler type="texture" index="1" texture="RT2_ARGB_8"/>
-        <input_sampler type="texture" index="2" texture="RT4_ARGB_8"/>
       </input_samplers>
 
+    </post_scene_renderer>
+    
+    
+    <post_scene_renderer name="deferred_alpha"
+                         type="render_objects_post_scene_renderer"
+                         render_opaque="false" 
+                         render_alpha="true">
+
+      <material_effects particle_effect="Particle">
+        <material_effect material_type="0"   effect="Diffused" />
+        <material_effect material_type="2"   effect="Textured" />
+        <material_effect material_type="514" effect="TexturedEnvironment" />
+        <material_effect material_type="518" effect="NormalmapEnvironment" />
+        <material_effect material_type="3"   effect="AnimatedTextured" />
+        <material_effect material_type="6"   effect="Normalmap" />
+        <material_effect material_type="7"   effect="AnimatedNormalmap" />
+        <material_effect material_type="34"  effect="Textured" />
+        <material_effect material_type="38"  effect="Normalmap" />
+        <material_effect material_type="39"  effect="AnimatedNormalmap" />
+        <material_effect material_type="10"  effect="Lightmap" />
+        <material_effect material_type="14"  effect="LightmapNormalmap" />
+        <material_effect material_type="134" effect="RadiosityNormalmap" />
+        <material_effect material_type="18"  effect="SpecularTextured" />
+        <material_effect material_type="22"  effect="SpecularNormalmapTextured" />
+        <material_effect material_type="23"  effect="AnimatedSpecularNormalmapTextured" />
+        <material_effect material_type="26"  effect="SpecularLightmapTextured" />
+        <material_effect material_type="30"  effect="SpecularLightmapNormalmapTextured" />
+        <material_effect material_type="150" effect="SpecularRadiosityNormalmapTexturedTechnique" />
+        <material_effect material_type="55"  effect="AnimatedSpecularNormalmapTextured" />
+      </material_effects>
+      
+    </post_scene_renderer>
+    
+    <post_scene_renderer name="deferred_alpha debug"
+                         type="render_objects_post_scene_renderer"
+                         size_x="0.5" aspect_ratio="true" position="0.5 0.0"
+                         render_opaque="false" 
+                         render_alpha="true">
+
+      <material_effects particle_effect="Particle">
+        <material_effect material_type="0"   effect="Diffused" />
+        <material_effect material_type="2"   effect="Textured" />
+        <material_effect material_type="514" effect="TexturedEnvironment" />
+        <material_effect material_type="518" effect="NormalmapEnvironment" />
+        <material_effect material_type="3"   effect="AnimatedTextured" />
+        <material_effect material_type="6"   effect="Normalmap" />
+        <material_effect material_type="7"   effect="AnimatedNormalmap" />
+        <material_effect material_type="34"  effect="Textured" />
+        <material_effect material_type="38"  effect="Normalmap" />
+        <material_effect material_type="39"  effect="AnimatedNormalmap" />
+        <material_effect material_type="10"  effect="Lightmap" />
+        <material_effect material_type="14"  effect="LightmapNormalmap" />
+        <material_effect material_type="134" effect="RadiosityNormalmap" />
+        <material_effect material_type="18"  effect="SpecularTextured" />
+        <material_effect material_type="22"  effect="SpecularNormalmapTextured" />
+        <material_effect material_type="23"  effect="AnimatedSpecularNormalmapTextured" />
+        <material_effect material_type="26"  effect="SpecularLightmapTextured" />
+        <material_effect material_type="30"  effect="SpecularLightmapNormalmapTextured" />
+        <material_effect material_type="150" effect="SpecularRadiosityNormalmapTexturedTechnique" />
+        <material_effect material_type="55"  effect="AnimatedSpecularNormalmapTextured" />
+      </material_effects>
+      
     </post_scene_renderer>
     
     <post_scene_renderer name="scene_color" effect="Texture" size_x="0.5" aspect_ratio="true" active="false">
@@ -379,16 +442,16 @@
   <render_paths>
     <render_path name="deferred" active="true">
       <scene_renderer name="deferred_renderer"/>
-      <scene_renderer name="deferred_alpha"/>
       <post_scene_renderer name="deferred lighting"/>
       <post_scene_renderer name="deferred_ambient"/>
+      <post_scene_renderer name="deferred_alpha"/>
     </render_path>
     
     <render_path name="deferred debug" active="false">
       <scene_renderer name="deferred_renderer"/>
-      <scene_renderer name="deferred_alpha"/>
       <post_scene_renderer name="deferred lighting"/>
       <post_scene_renderer name="deferred ambient debug"/>
+      <!-- <post_scene_renderer name="deferred_alpha debug"/> -->
       
       <post_scene_renderer name="scene_color"/>
       <post_scene_renderer name="scene_normals"/>
@@ -397,7 +460,6 @@
     
     <render_path name="deferred debug 2" active="false">
       <scene_renderer name="deferred_renderer"/>
-      <scene_renderer name="deferred_alpha"/>
       <post_scene_renderer name="deferred lighting"/>
       
       <post_scene_renderer name="show_lights"/>

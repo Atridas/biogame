@@ -16,7 +16,7 @@
 #include "EffectManager.h"
 #include "Camera.h"
 #include "PortalManager.h"
-#include "AlphaPostSceneRendererStep.h"
+#include "RenderObjectsPostSceneRendererStep.h"
 
 bool CRenderer::Init(const string& _szFileName)
 {
@@ -291,9 +291,9 @@ bool CRenderer::Init(const string& _szFileName)
           if(l_szType == "deferred_post_scene_renderer")
           {
             l_pPostRenderer = new CDeferredPostSceneRendererStep();
-          } else if(l_szType == "alpha_post_scene_renderer")
+          } else if(l_szType == "render_objects_post_scene_renderer")
           {
-            l_pPostRenderer = new CAlphaPostSceneRendererStep();
+            l_pPostRenderer = new CRenderObjectsPostSceneRendererStep();
           } else {
             l_pPostRenderer = new CPostSceneRendererStep();
           }
@@ -406,7 +406,7 @@ void CRenderer::Render(CProcess* _pProcess)
       l_pEM->SetTextureWidthHeight(l_it->second->GetWidth(), l_it->second->GetHeight());
 
       l_pPreSceneRenderer->ClearBuffer(l_pRM);
-      l_pPreSceneRenderer->Render(l_pRM,m_pCamera);
+      l_pPreSceneRenderer->Render(l_pRM, m_pCamera);
 
       if(l_it != m_mapRenderTargets.end())
       {
@@ -466,12 +466,12 @@ void CRenderer::Render(CProcess* _pProcess)
       if(l_it != m_mapRenderTargets.end())
       {
         l_it->second->Activate(l_pRM);
+        l_pEM->SetTextureWidthHeight(l_it->second->GetWidth(), l_it->second->GetHeight());
       }
       
-      l_pEM->SetTextureWidthHeight(l_it->second->GetWidth(), l_it->second->GetHeight());
       
       l_pPostSceneRenderer->ClearBuffer(l_pRM);
-      l_pPostSceneRenderer->Render(l_pRM,m_pCamera);
+      l_pPostSceneRenderer->Render(l_pRM, m_pCamera, l_vOpaqueObjects, l_vAlphaObjects, l_vParticleEmiters);
 
       if(l_it != m_mapRenderTargets.end())
       {

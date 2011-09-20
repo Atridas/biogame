@@ -4,15 +4,15 @@
 #include "Core.h"
 #include "RenderManager.h"
 
-bool CPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer, const string& _szDefaultRenderTarget)
+bool CPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer, const string& _szDefaultRenderTarget, bool _bNeedsEffect)
 {
-  string l_szEffect = _treePostSceneRenderer.GetPszISOProperty("effect","",false);
+  string l_szEffect = _treePostSceneRenderer.GetPszISOProperty("effect","",!_bNeedsEffect);
 
   if(!CRendererStep::Init(_treePostSceneRenderer, _szDefaultRenderTarget))
   {
     LOGGER->AddNewLog(ELL_ERROR,"CPostSceneRendererStep::Init PostSceneRenderer sense nom");
     SetOk(false);
-  }else if(l_szEffect == "")
+  }else if(l_szEffect == "" && _bNeedsEffect)
   {
     LOGGER->AddNewLog(ELL_ERROR,"CPostSceneRendererStep::Init PostSceneRenderer sense effect");
     SetOk(false);

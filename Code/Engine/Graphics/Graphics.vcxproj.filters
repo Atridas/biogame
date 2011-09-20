@@ -274,8 +274,11 @@
     <Filter Include="Renderer\RenderTarget\MultipleRenderTarget">
       <UniqueIdentifier>{0a65a14a-b9f6-45cc-af75-c9b417b838d3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Renderer\RendererStep\PostSceneRendererStep\AlphaPostSceneRendererStep">
+    <Filter Include="Renderer\RendererStep\PostSceneRendererStep\RenderObjectsPostSceneRendererStep">
       <UniqueIdentifier>{92855c82-c6e1-4237-abee-bb8771d8addc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\RendererStep\PostSceneRendererStep\DownsamplePostSceneRendererStep">
+      <UniqueIdentifier>{c4b2a84c-10af-4147-93c0-dcb3c583ebf0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -465,8 +468,11 @@
     <ClCompile Include="MultipleRenderTarget.cpp">
       <Filter>Renderer\RenderTarget\MultipleRenderTarget</Filter>
     </ClCompile>
-    <ClCompile Include="AlphaPostSceneRendererStep.cpp">
-      <Filter>Renderer\RendererStep\PostSceneRendererStep\AlphaPostSceneRendererStep</Filter>
+    <ClCompile Include="RenderObjectsPostSceneRendererStep.cpp">
+      <Filter>Renderer\RendererStep\PostSceneRendererStep\RenderObjectsPostSceneRendererStep</Filter>
+    </ClCompile>
+    <ClCompile Include="DownsamplePostSceneRendererStep.cpp">
+      <Filter>Renderer\RendererStep\PostSceneRendererStep\DownsamplePostSceneRendererStep</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -725,8 +731,11 @@
     <ClInclude Include="include\MultipleRenderTarget.h">
       <Filter>Renderer\RenderTarget\MultipleRenderTarget</Filter>
     </ClInclude>
-    <ClInclude Include="include\AlphaPostSceneRendererStep.h">
-      <Filter>Renderer\RendererStep\PostSceneRendererStep\AlphaPostSceneRendererStep</Filter>
+    <ClInclude Include="include\RenderObjectsPostSceneRendererStep.h">
+      <Filter>Renderer\RendererStep\PostSceneRendererStep\RenderObjectsPostSceneRendererStep</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DownsamplePostSceneRendererStep.h">
+      <Filter>Renderer\RendererStep\PostSceneRendererStep\DownsamplePostSceneRendererStep</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

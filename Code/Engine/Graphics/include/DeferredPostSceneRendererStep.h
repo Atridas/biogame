@@ -8,7 +8,7 @@ class CLight;
 class CCamera;
 
 class CDeferredPostSceneRendererStep :
-  public CPostSceneRendererStep
+  virtual public CPostSceneRendererStep
 {
 public:
   CDeferredPostSceneRendererStep() {};
