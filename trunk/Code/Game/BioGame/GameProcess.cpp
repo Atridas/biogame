@@ -59,14 +59,18 @@ bool CGameProcess::Init()
 
   //m_pSceneEffectManager = CORE->GetSceneEffectManager();
   CORE->GetLightManager()->SetLightsEnabled(true);
-
   
   //CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Hangar/XML/GameEntities.xml");
-#ifdef BIOGAME_NIVELLS_DEFAULT
+#ifdef BIOGAME_VERSIO_FINAL
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Laboratori.xml");
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Menjador.xml");
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Passadis.xml");
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - video.xml");
+
+  #ifndef _DEBUG
+    SetDebugInfo(false);
+  #endif
+
 #endif
 #ifdef BIOGAME_NIVELLS_NIVELL_MENYS_2
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Laboratori.xml");

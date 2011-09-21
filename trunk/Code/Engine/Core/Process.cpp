@@ -18,10 +18,9 @@
 
 void CProcess::DebugInformation(CRenderManager* _pRM)
 {
+  CFontManager* l_pFontManager = CORE->GetFontManager();
   if(m_bRenderInfo)
   {
-    CFontManager* l_pFontManager = CORE->GetFontManager();
-
     stringstream l_SStream;
 	  CColor col = colBLUE;
     CTimer* l_pTimer = CORE->GetTimer();
@@ -33,16 +32,15 @@ void CProcess::DebugInformation(CRenderManager* _pRM)
 
     FONT_MANAGER->DrawText(0,0,col,l_uiFontType,l_szMsg.c_str());
 
-    CLogRender* l_pLR = CORE->GetLogRender();
-    if(l_pLR)
-      l_pLR->Render(_pRM,l_pFontManager);
-
-    CConsole* l_pC = CORE->GetConsole();
-    if(l_pC)
-      l_pC->Render(_pRM,l_pFontManager);
-
     RenderINFO(_pRM);
   }
+  CLogRender* l_pLR = CORE->GetLogRender();
+  if(l_pLR)
+    l_pLR->Render(_pRM,l_pFontManager);
+
+  CConsole* l_pC = CORE->GetConsole();
+  if(l_pC)
+    l_pC->Render(_pRM,l_pFontManager);
 }
 
 

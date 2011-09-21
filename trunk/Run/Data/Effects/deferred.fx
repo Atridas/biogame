@@ -201,6 +201,7 @@ PS_OUTPUT NewPS(TNEW_PS _in)
     {
       l_Output.Glow  = tex2D(GlowTextureSampler,_in.UV) * g_GlowIntensity;
       l_Output.Glow *= g_GlowIntensity * l_Output.Glow.w;
+      l_Output.Glow = max(0.0, l_Output.Glow);
     }
     else
     {

@@ -113,6 +113,7 @@ shared float g_AlphaFactor : AlphaFactor;
 shared float g_BrightPassThreshold : BrightPassThreshold;
 shared float g_Exposure            : Exposure;
 shared float g_GaussMultiplier     : GaussMultiplier;
+float g_MaxGlowLuminance = 4.0;
 
 #define POISON_BLUR_KERNEL_SIZE 16
 

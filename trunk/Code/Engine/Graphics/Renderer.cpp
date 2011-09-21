@@ -627,6 +627,28 @@ void CRenderer::DeactivateRenderPath(const string& _szRenderPath)
   }
 }
 
+void CRenderer::SetUniqueRenderPath(const string& _szRenderPath)
+{
+  map<string, SRenderPath*>::iterator l_it = m_mapRenderPaths.find(_szRenderPath);
+  map<string, SRenderPath*>::iterator l_end   = m_mapRenderPaths.end();
+  if( l_it != l_end )
+  {
+    map<string, SRenderPath*>::iterator l_begin = m_mapRenderPaths.begin();
+    for(; l_begin != l_end; ++l_begin)
+    {
+      if(l_begin == l_it)
+      {
+        l_begin->second->m_bActive = true;
+      }
+      else
+      {
+        l_begin->second->m_bActive = false;
+      }
+    }
+    m_bRenderPathsChanged  = true;
+  }
+}
+
 void CRenderer::ActivateRenderPaths()
 {
   //desactivar els steps

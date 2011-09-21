@@ -13,8 +13,20 @@ float4 LuminanceBlendPassPS() : COLOR
 {  
   float4 l_Luminance = tex2D(LuminanceTextureSampler, float2(0.5, 0.5));
   
-  return float4(l_Luminance.xy, 0.0, min(1.0,g_Time));
+  //float l_fLuminance = exp(l_Luminance.x);
+  //float l_fMaxLuminance = l_Luminance.y;
   
+  //if(l_fLuminance > g_MaxGlobalLuminance)
+  //{
+  //  l_fLuminance = g_MaxGlobalLuminance;
+  //}
+  //if(l_fMaxLuminance > g_MaxGlobalLuminance)
+  //{
+  //  l_fMaxLuminance = g_MaxGlobalLuminance;
+  //}
+  
+  return float4(l_Luminance.xy, 0.0, min(1.0,g_Time));
+  //return float4(l_Luminance.xy, 0.0, 1.0);
 }
 
 technique LuminanceBlendPassTechnique

@@ -14,6 +14,9 @@ GLOBALS
     
     set_new_level
     void SetNewLevel(const string& _szLevel)
+    
+    set_render_path
+    void SetRenderPath(const string& _szRenderPath)
 
   Class:
 			Vect2f
@@ -297,6 +300,9 @@ ENGINE
         get_level_changer
         CLevelChanger* GetLevelChanger() const
         
+        get_renderer
+        CRenderer* GetRenderer() const
+        
     Class:
       Process
       CProcess
@@ -411,6 +417,25 @@ ENGINE
         
         load
         bool Load(const string& _szFileName)
+        
+    
+    Class:
+      Renderer
+      CRenderer
+      
+      Methods
+        activate_render_path
+        void ActivateRenderPath  (const string& _szRenderPath)
+        
+        deactivate_render_path
+        void DeactivateRenderPath(const string& _szRenderPath)
+        
+        set_unique_render_path
+        void SetUniqueRenderPath(const string&  _szRenderPath)
+        
+        get_active_render_path
+        void GetActiveRenderPaths(set<string>& _RenderPaths) const
+        
         
   SOUND  
     Class:

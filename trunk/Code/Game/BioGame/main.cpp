@@ -69,7 +69,7 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
     CEngine l_Engine;
     SInitParams l_InitParams;
     
-#ifdef BIOGAME_NIVELLS_DEFAULT
+#ifdef BIOGAME_VERSIO_FINAL
     ReadXMLInitParams(l_InitParams,"./Data/XML/init.xml");
 #endif
 #ifdef BIOGAME_NIVELLS_NIVELL_MENYS_2

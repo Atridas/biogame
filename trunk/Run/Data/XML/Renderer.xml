@@ -476,14 +476,24 @@
         <input_sampler type="texture" index="0" texture="HDR_BLOOM_FIRST"/>
       </input_samplers>
     </post_scene_renderer>
-    <post_scene_renderer name="HDR_show_luminance" effect="ShowLuminance" size="0.25" aspect_ratio="true" position="0.75 0.0">
+    <post_scene_renderer name="HDR_show_luminance" effect="ShowLuminance" size="0.125" aspect_ratio="true" position="0.75 0.0">
       <input_samplers>
         <input_sampler type="texture" index="0" texture="HDR_LUMINANCE"/>
       </input_samplers>
     </post_scene_renderer>
-    <post_scene_renderer name="HDR_show_max_luminance" effect="ShowMaxLuminance" size="0.25" aspect_ratio="true" position="0.75 0.25">
+    <post_scene_renderer name="HDR_show_max_luminance" effect="ShowMaxLuminance" size="0.125" aspect_ratio="true" position="0.875 0.0">
       <input_samplers>
         <input_sampler type="texture" index="0" texture="HDR_LUMINANCE"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_luminance_final" effect="ShowLuminance" size="0.125" aspect_ratio="true" position="0.75 0.125">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_FINAL"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="HDR_show_max_luminance_final" effect="ShowMaxLuminance" size="0.125" aspect_ratio="true" position="0.875 0.125">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_FINAL"/>
       </input_samplers>
     </post_scene_renderer>
     <post_scene_renderer name="HDR_show_luminance_343" effect="ShowLuminance" size="0.125" aspect_ratio="true" position="0.0 0.25">
@@ -825,13 +835,15 @@
       <post_scene_renderer name="HDR_color"/>
       <post_scene_renderer name="HDR_bloom"/>
       <post_scene_renderer name="HDR_show_luminance"/>
+      <post_scene_renderer name="HDR_show_max_luminance"/>
+      <post_scene_renderer name="HDR_show_luminance_final"/>
+      <post_scene_renderer name="HDR_show_max_luminance_final"/>
       <post_scene_renderer name="HDR_show_luminance_343"/>
       <post_scene_renderer name="HDR_show_luminance_81"/>
       <post_scene_renderer name="HDR_show_luminance_27"/>
       <post_scene_renderer name="HDR_show_luminance_9"/>
       <post_scene_renderer name="HDR_show_luminance_3"/>
       <post_scene_renderer name="HDR_show_luminance_1"/>
-      <post_scene_renderer name="HDR_show_max_luminance"/>
       <post_scene_renderer name="HDR_show_max_luminance_343"/>
       <post_scene_renderer name="HDR_show_max_luminance_81"/>
       <post_scene_renderer name="HDR_show_max_luminance_27"/>
