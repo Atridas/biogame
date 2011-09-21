@@ -23,7 +23,7 @@ class CRendererStep :
 public:
   CRendererStep() : CNamed(""), m_szRenderTarget(""),
                     m_bClearColor(false), m_bClearDepth(false), m_bClearStencil(false),
-                    m_bRenderOpaque(true), m_bRenderAlphas(true)
+                    m_bRenderOpaque(true), m_bRenderAlphas(true), m_bDefaultClearColor(true)
                     {};
   virtual ~CRendererStep() {Done();};
 
@@ -69,6 +69,7 @@ private:
 
 
   bool m_bClearColor, m_bClearDepth, m_bClearStencil;
+  bool m_bDefaultClearColor;
   D3DCOLOR m_Color;
   float    m_fDepth;
   uint32   m_iStencil;

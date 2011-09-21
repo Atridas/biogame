@@ -23,20 +23,21 @@ bool CRendererStep::Init(CXMLTreeNode& _treeSceneRenderer, const string& _szDefa
   m_bClearColor = _treeSceneRenderer.GetBoolProperty("clear_color",false,false);
   if(m_bClearColor)
   {
-    CColor l_DefaultColor = RENDER_MANAGER->GetClearColor();
+    if(_treeSceneRenderer.ExistsProperty("clear_color_value"))
+    {
+      Vect4f l_Color = _treeSceneRenderer.GetVect4fProperty("clear_color_value", Vect4f(0,0,0,0));
+	    uint32 red		= (uint32) (l_Color.x * 255);
+	    uint32 green	= (uint32) (l_Color.y * 255);
+	    uint32 blue		= (uint32) (l_Color.z * 255);
+	    uint32 alpha	= (uint32) (l_Color.w * 255);
 
-    Vect4f l_Color = _treeSceneRenderer.GetVect4fProperty("clear_color_value", 
-                                                          Vect4f(l_DefaultColor.GetRed(),  
-                                                                 l_DefaultColor.GetGreen(),
-                                                                 l_DefaultColor.GetBlue(), 
-                                                                 l_DefaultColor.GetAlpha()),
-                                                          false);
-	  uint32 red		= (uint32) (l_Color.x * 255);
-	  uint32 green	= (uint32) (l_Color.y * 255);
-	  uint32 blue		= (uint32) (l_Color.z * 255);
-	  uint32 alpha	= (uint32) (l_Color.w * 255);
-
-    m_Color = D3DCOLOR_ARGB(alpha, red, green, blue);
+      m_Color = D3DCOLOR_ARGB(alpha, red, green, blue);
+      m_bDefaultClearColor = false;
+    }
+    else
+    {
+      m_bDefaultClearColor = true;
+    }
   }
 
   m_bClearDepth = _treeSceneRenderer.ExistsProperty("clear_depth");
@@ -148,7 +149,23 @@ void CRendererStep::ClearBuffer(CRenderManager* l_pRM) const
   if(flags == 0)
     return;
 
-  l_pRM->GetDevice()->Clear(0, NULL, flags, m_Color, m_fDepth, m_iStencil);
+  D3DCOLOR l_Color;
+  if(m_bClearColor && m_bDefaultClearColor)
+  {
+    CColor l_DefaultColor = RENDER_MANAGER->GetClearColor();
+	  uint32 red		= (uint32) (l_DefaultColor.GetRed()   * 255);
+	  uint32 green	= (uint32) (l_DefaultColor.GetGreen() * 255);
+	  uint32 blue		= (uint32) (l_DefaultColor.GetBlue()  * 255);
+	  uint32 alpha	= (uint32) (l_DefaultColor.GetAlpha() * 255);
+
+    l_Color = D3DCOLOR_ARGB(alpha, red, green, blue);
+  }
+  else
+  {
+    l_Color = m_Color;
+  }
+
+  l_pRM->GetDevice()->Clear(0, NULL, flags, l_Color, m_fDepth, m_iStencil);
 }
 
 void CRendererStep::Release()
