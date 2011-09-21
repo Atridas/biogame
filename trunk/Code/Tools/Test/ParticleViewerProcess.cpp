@@ -36,6 +36,8 @@
 #include <PhysicsManager.h>
 
 #include "PortalManager.h"
+#include "RenderableObjectsManager.h"
+#include "Renderer.h"
 
 #include "SphereCamera.h"
 
@@ -65,6 +67,15 @@ bool CParticleViewerProcess::Init()
   //for(int i = 0; i < NUM_EMISORS; ++i)
   //  m_pEmiters[i]  = new CEmiterInstance();
 
+  
+  //netejar els renderable objects
+  const vector<CRenderableObject*>& l_vRO = CORE->GetRenderableObjectsManager()->GetRenderableObjects();
+  for(uint32 i = 0; i < l_vRO.size(); ++i)
+  {
+    l_vRO[i]->SetVisible(false);
+  }
+
+  //iniciar els emiters
   CEmiterCoreManager* l_pEmiterCoreManager = CORE->GetEmiterCoreManager();
   const set<string>& l_szEmiterNames = l_pEmiterCoreManager->GetCoreNames();
   set<string>::const_iterator l_it = l_szEmiterNames.begin();
@@ -84,6 +95,9 @@ bool CParticleViewerProcess::Init()
   }
   //m_pEmiter->Init("bubble", CObject3D(Vect3f(-14.6275f, 0.833153f, -4.08485f),0,0), Vect3f(0.391403f, 0.702762f, 0.194437f));
 
+
+  //posar el render "que toca"
+  CORE->GetRenderer()->SetUniqueRenderPath("forward");
 
 
   SetOk(true);
