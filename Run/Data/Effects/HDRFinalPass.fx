@@ -49,14 +49,14 @@ float4 HDRFinalPassPS(float2 _UV: TEXCOORD0) : COLOR
   float l_fLuminance = exp(l_LuminanceColor.r);
   float l_fMaxLuminance = l_LuminanceColor.g;
   
-  //float Lp = (g_Exposure / l_fLuminance) * max( l_fFinalColor.r, max( l_fFinalColor.g, l_fFinalColor.b ) );
-  //
-  //float LmSqr = (l_fMaxLuminance + g_GaussMultiplier * l_fMaxLuminance) * (l_fMaxLuminance + g_GaussMultiplier * l_fMaxLuminance);
-  //
-  //float toneScalar = ( Lp * ( 1.0f + ( Lp / ( LmSqr ) ) ) ) / ( 1.0f + Lp );
+  float Lp = (g_Exposure / l_fLuminance) * max( l_fFinalColor.r, max( l_fFinalColor.g, l_fFinalColor.b ) );
   
-  float Y = GetLuminance(l_DiffuseColor);
-  float toneScalar = g_Exposure * (g_Exposure / l_fMaxLuminance + 1.0) / (g_Exposure + 1.0);
+  float LmSqr = (l_fMaxLuminance + g_GaussMultiplier * l_fMaxLuminance) * (l_fMaxLuminance + g_GaussMultiplier * l_fMaxLuminance);
+  
+  float toneScalar = ( Lp * ( 1.0f + ( Lp / ( LmSqr ) ) ) ) / ( 1.0f + Lp );
+  
+  //float Y = GetLuminance(l_DiffuseColor);
+  //float toneScalar = g_Exposure * (g_Exposure / l_fMaxLuminance + 1.0) / (g_Exposure + 1.0);
   
   return l_fFinalColor * toneScalar;
 }

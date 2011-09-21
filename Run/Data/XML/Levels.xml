@@ -3,23 +3,23 @@
   <Level name="Nivell -2" render_path="canvi nivell -2 a -1">
     <StaticMesh file="Data/XML/StaticMeshes.xml"/>
     <StaticMesh file="Data/Levels/Level -2/XML/StaticMeshes - Laboratori.xml"/>
-    <StaticMesh file="Data/Levels/Level -2/XML/StaticMeshes - Menjador.xml"/>
     <StaticMesh file="Data/Levels/Level -2/XML/StaticMeshes - Passadis.xml"/>
+    <StaticMesh file="Data/Levels/Level -2/XML/StaticMeshes - Menjador.xml"/>
     <StaticMesh file="Data/Levels/Level -2/XML/StaticMeshes - video.xml"/>
     
     <RenderableObjects file="Data/Levels/Level -2/XML/RenderableObjects - Laboratori.xml"/>
-    <RenderableObjects file="Data/Levels/Level -2/XML/RenderableObjects - Menjador.xml"/>
     <RenderableObjects file="Data/Levels/Level -2/XML/RenderableObjects - Passadis.xml"/>
+    <RenderableObjects file="Data/Levels/Level -2/XML/RenderableObjects - Menjador.xml"/>
     <RenderableObjects file="Data/Levels/Level -2/XML/RenderableObjects - video.xml"/>
     
     <Portals file="Data/Levels/Level -2/XML/Portals - Laboratori.xml"/>
-    <Portals file="Data/Levels/Level -2/XML/Portals - Menjador.xml"/>
     <Portals file="Data/Levels/Level -2/XML/Portals - Passadis.xml"/>
+    <Portals file="Data/Levels/Level -2/XML/Portals - Menjador.xml"/>
     <Portals file="Data/Levels/Level -2/XML/Portals - video.xml"/>
     
     <Entities file="Data/Levels/Level -2/XML/GameEntities - Laboratori.xml"/>
-    <Entities file="Data/Levels/Level -2/XML/GameEntities - Menjador.xml"/>
     <Entities file="Data/Levels/Level -2/XML/GameEntities - Passadis.xml"/>
+    <Entities file="Data/Levels/Level -2/XML/GameEntities - Menjador.xml"/>
     <Entities file="Data/Levels/Level -2/XML/GameEntities - video.xml"/>
     
     <Lights file="Data/Levels/Level -2/XML/Lights.xml"/>

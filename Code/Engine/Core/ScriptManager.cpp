@@ -29,6 +29,7 @@ extern "C"
 #include "SoundManager.h"
 #include "PhysicsManager.h"
 #include "LevelChanger.h"
+#include "Renderer.h"
 
 #include "Utils/Object3D.h"
 #include "Utils/BaseControl.h"
@@ -227,6 +228,11 @@ void SetNewLevel(const string &_szLevel)
   CORE->GetLevelChanger()->SetNewLevel(_szLevel);
 }
 
+void SetRenderPath(const string& _szRenderPath)
+{
+  CORE->GetRenderer()->SetUniqueRenderPath(_szRenderPath);
+}
+
 void CScriptManager::RegisterGUI() {
   module(m_pLS)
     [
@@ -350,6 +356,8 @@ void CScriptManager::RegisterLUAFunctions()
     ,def("get_collision_group", &GetCollisionGroup)
     //canviar de nivell
     ,def("set_new_level", &SetNewLevel)
+    //activar un renderpath, desactivant la resta
+    ,def("set_render_path", &SetRenderPath)
   ];
 
   //Vect3f
@@ -481,7 +489,8 @@ void CScriptManager::RegisterLUAFunctions()
         .def("get_input_manager",               &CCore::GetInputManager)
         .def("get_action_manager",              &CCore::GetActionManager)
         .def("get_sound_manager",               &CCore::GetSoundManager)
-        .def("get_level_changer",               &CCore::GetLevelChanger);
+        .def("get_level_changer",               &CCore::GetLevelChanger)
+        .def("get_renderer",                    &CCore::GetRenderer);
   
   RegisterCore_Entities(l_core);
   RegisterCore_IA(l_core);
@@ -576,6 +585,16 @@ void CScriptManager::RegisterLUAFunctions()
   //RenderableAnimatedInstanceModel
   module(m_pLS) [
     class_<CRenderableAnimatedInstanceModel, bases<CRenderableObject>>("AnimatedInstance")
+  ];
+
+  //Renderer
+  module(m_pLS) [
+    class_<CRenderer>("Renderer")
+      .def("activate_render_path"  , &CRenderer::ActivateRenderPath  )
+      .def("deactivate_render_path", &CRenderer::DeactivateRenderPath)
+      .def("set_unique_render_path", &CRenderer::SetUniqueRenderPath)
+      .def("get_active_render_path", &CRenderer::GetActiveRenderPaths)
+
   ];
 
   module(m_pLS) [

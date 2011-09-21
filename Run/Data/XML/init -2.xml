@@ -33,8 +33,8 @@
 	<!--RenderableObjectsManager file="Data/Levels/Proves/XML/RenderableObjects.xml"-->
 	<RenderableObjectsManager file="Data/Levels/Level -2/XML/RenderableObjects - Laboratori.xml">
     <!-- Level xml="Data/Levels/Level -2/XML/RenderableObjects - Laboratori.xml"/ -->
-    <Level xml="Data/Levels/Level -2/XML/RenderableObjects - Menjador.xml"/>
     <Level xml="Data/Levels/Level -2/XML/RenderableObjects - Passadis.xml"/>
+    <Level xml="Data/Levels/Level -2/XML/RenderableObjects - Menjador.xml"/>
     <Level xml="Data/Levels/Level -2/XML/RenderableObjects - video.xml"/>
     <!--
     <Level xml="Data/XML/RenderableObjects.xml"/>
