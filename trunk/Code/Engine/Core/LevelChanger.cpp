@@ -100,10 +100,6 @@ void CLevelChanger::Update(float _fElapsedTime)
       l_pCore->m_pRenderableObjectsManager->Load(*l_it);
     }
     l_pCore->m_pPortalManager->Init(l_pLevel->Portals);
-    //for(l_it = l_pLevel->Portals.begin(); l_it != l_pLevel->Portals.end(); ++l_it)
-    //{
-    //  l_pCore->m_pPortalManager->Init(*l_it);
-    //}
     for(l_it = l_pLevel->Lights.begin(); l_it != l_pLevel->Lights.end(); ++l_it)
     {
       l_pCore->m_pLightManager->Load(*l_it);

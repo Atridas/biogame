@@ -51,7 +51,7 @@ PS_OUTPUT HDRFirstPassPS(float2 _UV: TEXCOORD0)
   
   l_fLuminance += clamp(l_fGlowLuminance, 0.0, g_MaxGlowLuminance);
   
-  out_.Luminance = float4(log( 1e-5 + l_fLuminance), l_fLuminance, 0.0, 1.0);
+  out_.Luminance = float4(l_fLuminance, l_fLuminance, 0.0, 1.0);
   
   return out_;
 }

@@ -13,7 +13,7 @@ float4 ShowLuminancePS(float2 _UV: TEXCOORD0) : COLOR
 {
 	float4 l_Luminance = tex2D(LuminanceTextureSampler, _UV);
   
-  float l_fLum = exp(l_Luminance.x);
+  float l_fLum = l_Luminance.x;
   
   return float4(l_fLum, l_fLum, l_fLum, 1.0);
 }
