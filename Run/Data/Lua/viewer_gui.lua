@@ -13,20 +13,20 @@ end
 --desactiva la GUI
 function hide_gui()
   GUI_MANAGER:setVisiblePointerMouse(false)
-  VIEWER:activate_gui(false)
+  get_viewer():activate_gui(false)
   
-  deactivate_view(VIEWER:get_current_mode())
+  deactivate_view(get_viewer():get_current_mode())
 end
 
 --activa la GUI a l'estat que toca
 function show_gui()
-  VIEWER:activate_gui(true)
+  get_viewer():activate_gui(true)
   GUI_MANAGER:setVisiblePointerMouse(true)
   
   show_common()
   
   -- captura del mode
-  local l_iState = VIEWER:get_current_mode()
+  local l_iState = get_viewer():get_current_mode()
   
   if l_iState == Viewer.FREE then
     show_free()

@@ -3,7 +3,6 @@
 #include <algorithm>
 #include "Process.h"
 #include <base.h>
-#include "Viewer.h"
 
 #define MODE_ESCENA 0
 #define MODE_MESH 1
@@ -20,6 +19,7 @@ class CalHardwareModel;
 class CRenderableVertexs;
 class CEffectMaterial;
 class CRenderableObject;
+class CViewer;
 //-----------------------------------------
 
 class CViewerProcess:
@@ -34,11 +34,11 @@ public:
 
 	void                  Update                  (float elapsedTime);
 	void					        DebugInformation        (float FPS);
-  void                  RenderScene             (CRenderManager* _pRM);
+  //void                  RenderScene             (CRenderManager* _pRM);
   void                  RenderINFO              (CRenderManager* _pRM);
 
   virtual bool          ExecuteProcessAction    (float _fDeltaSeconds, float _fDelta, const char* _pcAction);
-  CViewer*              GetViewer               () { return m_pViewer; };
+  //CViewer*              GetViewer               () { return m_pViewer; };
 
   virtual void          RegisterLuaFunctions      ();
 
@@ -47,7 +47,7 @@ public:
 
 private:
 
-  CViewer* m_pViewer;
+  CViewer*              m_pViewer;
 	void                  Release                 ();
 
 };

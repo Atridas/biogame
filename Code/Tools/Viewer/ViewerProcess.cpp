@@ -8,6 +8,7 @@
 #include "LightManager.h"
 
 #include "ScriptManager.h"
+#include "Viewer.h"
 
 #include <luabind/luabind.hpp>
 #include <luabind/function.hpp>
@@ -16,6 +17,12 @@
 
 #include "Utils/MemLeaks.h"
 
+using namespace luabind;
+
+CViewer* GetViewer(void)
+{
+  return CViewer::GetSingletonPtr();
+}
 
 bool CViewerProcess::Init()
 {
@@ -49,17 +56,19 @@ void CViewerProcess::Release()
 void CViewerProcess::Update(float _fElapsedTime)
 {
   m_pViewer->Update(_fElapsedTime);
+
+  m_pCamera = m_pViewer->GetCamera();
 }
 
-void CViewerProcess::RenderScene(CRenderManager* _pRM)
-{
-  CORE->GetRenderableObjectsManager()->Render(_pRM);
-
-  if(m_pViewer->GetRenderLights())
-    CORE->GetLightManager()->Render(_pRM);
-
-  //m_pViewer->Debug(_pRM);
-}
+//void CViewerProcess::RenderScene(CRenderManager* _pRM)
+//{
+//  CORE->GetRenderableObjectsManager()->Render(_pRM);
+//
+//  if(m_pViewer->GetRenderLights())
+//    CORE->GetLightManager()->Render(_pRM);
+//
+//  m_pViewer->Debug(_pRM);
+//}
 
 bool CViewerProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
 {
@@ -72,34 +81,36 @@ void CViewerProcess::RenderINFO(CRenderManager* _pRM)
   m_pViewer->ShowInfo();
 }
 
-
 void CViewerProcess::RegisterLuaFunctions()
 {
   lua_State* l_LuaState = CORE->GetScriptManager()->GetLuaState();
 
-  luabind::module(l_LuaState)
+  module(l_LuaState)
   [
     //CViewerProcess
-    luabind::class_<CViewerProcess,CProcess>("ViewerProcess")
-      .def("reset_viewer",  &CViewerProcess::ResetViewer)
-      .def("get_viewer",    &CViewerProcess::GetViewer)
-      .def("toggle_normals",&CViewerProcess::ToggleNormalRendering)
-    ,
+    //luabind::class_<CViewerProcess,CProcess>("ViewerProcess")
+    //  .def("reset_viewer"  ,&CViewerProcess::ResetViewer)
+    //  .def("get_viewer"    ,&CViewerProcess::GetViewer)
+    //  .def("toggle_normals",&CViewerProcess::ToggleNormalRendering)
+    //,
+
     //CViewer
-    luabind::class_<CViewer>("Viewer")
+    def("get_viewer", &GetViewer)
+    ,
+    class_<CViewer>("Viewer")
       .enum_("MODE")
       [
-        luabind::value("FREE",    CViewer::FREE_MODE),
-        luabind::value("MESH",    CViewer::MESH_MODE),
-        luabind::value("ANIMATED",CViewer::ANIMATED_MODE)
+        value("FREE",    CViewer::FREE_MODE),
+        value("MESH",    CViewer::MESH_MODE),
+        value("ANIMATED",CViewer::ANIMATED_MODE)
       ]
       //GUI
       .def("get_current_mode",    &CViewer::GetCurrentMode)
-      .def("set_mode",            &CViewer::SetMode)
-      .def("activate_gui",        &CViewer::ActivateGui)
-      .def("is_gui_active",       &CViewer::IsGuiActive)
-      .def("toggle_boxes",        &CViewer::ToggleShowBoxes)
-      .def("toggle_spheres",      &CViewer::ToggleShowSpheres)
+      //.def("set_mode",            &CViewer::SetMode)
+      //.def("activate_gui",        &CViewer::ActivateGui)
+      //.def("is_gui_active",       &CViewer::IsGuiActive)
+      //.def("toggle_boxes",        &CViewer::ToggleShowBoxes)
+      //.def("toggle_spheres",      &CViewer::ToggleShowSpheres)
       .def("next_mode",           &CViewer::SetNextMode)
       .def("glow_inc_mesh",       &CViewer::IncrementGlowMesh)
       .def("glow_dec_mesh",       &CViewer::DecrementGlowMesh)
@@ -113,10 +124,10 @@ void CViewerProcess::RegisterLuaFunctions()
       .def("gloss_dec_mesh",      &CViewer::DecrementGlossMesh)
       .def("gloss_inc_anim",      &CViewer::IncrementGlossAnimated)
       .def("gloss_dec_anim",      &CViewer::DecrementGlossAnimated)
-      .def("bump_inc_mesh",       &CViewer::IncrementBumpMesh)
-      .def("bump_dec_mesh",       &CViewer::DecrementBumpMesh)
-      .def("bump_inc_anim",       &CViewer::IncrementBumpAnimated)
-      .def("bump_dec_anim",       &CViewer::DecrementBumpAnimated)
+      //.def("bump_inc_mesh",       &CViewer::IncrementBumpMesh)
+      //.def("bump_dec_mesh",       &CViewer::DecrementBumpMesh)
+      //.def("bump_inc_anim",       &CViewer::IncrementBumpAnimated)
+      //.def("bump_dec_anim",       &CViewer::DecrementBumpAnimated)
       //MESH
       .def("next_mesh",           &CViewer::SelectNextMesh)
       .def("previous_mesh",       &CViewer::SelectPrevMesh)
