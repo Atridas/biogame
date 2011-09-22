@@ -14,7 +14,8 @@ class COmniLight;
 class CRenderManager;
 //-----------------------------------------
 
-class CViewer
+class CViewer:
+  public CSingleton<CViewer>
 {
 public:
   CViewer(void);
@@ -27,18 +28,18 @@ public:
     ANIMATED_MODE
   };
 
-  enum ENormalModes
-  {
-    NO_NORMALS,
-    NORMALS,
-    NORMALMAP,
-    FLAT_NORMALMAP,
-    TANGENT,
-    COTANGENT,
-    UV_COORDS,
-
-    MAX_NORMAL_MODE
-  };
+  //enum ENormalModes
+  //{
+  //  NO_NORMALS,
+  //  NORMALS,
+  //  NORMALMAP,
+  //  FLAT_NORMALMAP,
+  //  TANGENT,
+  //  COTANGENT,
+  //  UV_COORDS,
+  //
+  //  MAX_NORMAL_MODE
+  //};
 
   //Process
   void Init();
@@ -52,10 +53,10 @@ public:
 
   //getters
   bool GetRenderLights() {return m_bRenderLights;};
-  ENormalModes GetNormalRendering() {return m_eNormalRendering;};
+  //ENormalModes GetNormalRendering() {return m_eNormalRendering;};
   CCamera* GetCamera() {return m_pObjectCamera;};
   int GetCurrentMode() { return m_iMode; };
-  CMaterial::ELightmapMode GetLightmapMode() {return m_eLightmapMode;};
+  //CMaterial::ELightmapMode GetLightmapMode() {return m_eLightmapMode;};
 
   //actions
   void SetRunning();
@@ -81,10 +82,6 @@ public:
   void DecrementGlossMesh();
   void IncrementGlossAnimated();
   void DecrementGlossAnimated();
-  void IncrementBumpMesh();
-  void DecrementBumpMesh();
-  void IncrementBumpAnimated();
-  void DecrementBumpAnimated();
 
   void ToggleLights();
   void ToggleHelp();
@@ -109,8 +106,8 @@ public:
 
   void Reset() {Release(); Init();};
 
-  void ActivateGui(bool _bValue) { m_bGuiActive = _bValue; };
-  bool IsGuiActive() {return m_bGuiActive;};
+  //void ActivateGui(bool _bValue) { m_bGuiActive = _bValue; };
+  //bool IsGuiActive() {return m_bGuiActive;};
 
 private:
   void Release();
@@ -145,9 +142,9 @@ private:
   CObject3D* m_pTargetObject;
   CRenderableAnimatedInstanceModel* m_pCharacter;
   CDirectionalLight* m_pObjectModeLight;
-  CSpotLight* m_pSpotLight;
-  Vect3f m_vAmbientLight;
-  Vect3f m_vOmniColor;
+  //CSpotLight* m_pSpotLight;
+  //Vect3f m_vAmbientLight;
+  //Vect3f m_vOmniColor;
   bool m_bEnableLights;
   float m_fInitialCharacterYaw;
   bool m_bRenderLights;
@@ -156,7 +153,7 @@ private:
   Vect3i m_vMouseDelta;
 
   int  m_iMode;
-  bool m_bGuiActive;
+  //bool m_bGuiActive;
   bool m_bShowHelp;
 
   bool m_bMoveFwd;
@@ -166,16 +163,15 @@ private:
   bool m_bMoveUp;
   bool m_bMoveDown;
 
-  ENormalModes m_eNormalRendering;
+  //ENormalModes m_eNormalRendering;
   bool m_bShowBoxes;
   bool m_bShowSpheres;
 
   //material info
-  CMaterial::ELightmapMode m_eLightmapMode;
+  //CMaterial::ELightmapMode m_eLightmapMode;
   float m_fGlowIntensity;
   float m_fSpecIntensity;
   float m_fGlossiness;
-  float m_fBump;
 
   vector<CRenderableObject*>::iterator m_itCurrentMesh;
   vector<CRenderableAnimatedInstanceModel*>::iterator m_itCurrentAnimated;

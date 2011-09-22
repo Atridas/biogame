@@ -42,8 +42,8 @@ CViewer::CViewer(void)
 
 void CViewer::Init() 
 {
-  m_bRenderLights = false;
-
+  //TEMPORAL PER FER PROVES DESDE LA MERDA DE PORTATIL
+  CORE->GetRenderer()->SetUniqueRenderPath("forward");
 
   m_vMeshes = CORE->GetRenderableObjectsManager()->GetMeshes();
   m_vAnimatedModels = CORE->GetRenderableObjectsManager()->GetAnimatedModels();
@@ -77,7 +77,7 @@ void CViewer::Init()
       2.0f,0.6f,1.5f);
 
   m_pObjectModeLight = 0;
-  m_pSpotLight = 0;
+  //m_pSpotLight = 0;
 
   m_pObjectModeLight = CORE->GetLightManager()->CreateDirectionalLight("ObjectModeLight",
                                                                         Vect3f(0.0f),
@@ -87,17 +87,17 @@ void CViewer::Init()
                                                                         80.0f,
                                                                         false);
 
-  m_pObjectModeLight->SetDynamicObjectsOnly(true);
+  //m_pObjectModeLight->SetDynamicObjectsOnly(true);
 
-  m_pSpotLight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
-                                                          Vect3f(-2.15715f,0.0f,-7.32758f),
-                                                          Vect3f(-5.4188f,0.0f,3.75613f),
-                                                          CColor(Vect3f(1.0f,1.0f,1.0f)),
-                                                          20.0f,
-                                                          80.0f,
-                                                          10.0f,
-                                                          45.0f,
-                                                          false );
+  //m_pSpotLight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
+  //                                                        Vect3f(-2.15715f,0.0f,-7.32758f),
+  //                                                        Vect3f(-5.4188f,0.0f,3.75613f),
+  //                                                        CColor(Vect3f(1.0f,1.0f,1.0f)),
+  //                                                        20.0f,
+  //                                                        80.0f,
+  //                                                        10.0f,
+  //                                                        45.0f,
+  //                                                        false );
 
   //m_vOmniColor = Vect3f(1.0f,1.0f,1.0f);
   //m_pOmniLight = CORE->GetLightManager()->CreateOmniLight("OmniViewerLight",Vect3f(0.0f),CColor(m_vOmniColor),0.1f,17.0f);
@@ -108,21 +108,20 @@ void CViewer::Init()
   //  l_pSceneEffectManager->SetShadowMapLightCast(m_pSpotLight);
   //}
 
-  m_vAmbientLight = CORE->GetLightManager()->GetAmbientLight();
+  //m_vAmbientLight = CORE->GetLightManager()->GetAmbientLight();
 
   m_bEnableLights = true;
-  m_bGuiActive = false;
+  //m_bGuiActive = false;
   m_bShowHelp = true;
-  m_eNormalRendering = NO_NORMALS;
+  //m_eNormalRendering = NO_NORMALS;
   m_bShowBoxes = false;
   m_bShowSpheres = false;
 
   //materials
-  m_eLightmapMode  = CMaterial::RADIOSITY_NORMAL;
+  //m_eLightmapMode  = CMaterial::RADIOSITY_NORMAL;
   m_fGlowIntensity = 0.0f;
   m_fGlowIntensity = 0.0f;
   m_fGlossiness = 0.0f;
-  m_fBump = 0.0f;
 
   m_iMode = FREE_MODE;
 
@@ -162,8 +161,6 @@ void CViewer::InitMode()
   m_bShowBoxes = false;
   m_bShowSpheres = false;
 
-  m_fGlowIntensity = 0.0f;
-
   switch(m_iMode) {
   case FREE_MODE:
     InitFreeMode();
@@ -202,24 +199,10 @@ void CViewer::InitFreeMode()
 
   ((CShoulderCamera*)m_pObjectCamera)->SetShoulderHeight(1.55f);
 
-  CORE->GetLightManager()->SetLightsEnabled(true);
-
   if(m_pObjectModeLight)
   {
     m_pObjectModeLight->SetActive(false);
   }
-
-  if(m_pSpotLight)
-  {
-    m_pSpotLight->SetActive(m_bEnableLights);
-  }
-  
-  //if(m_pOmniLight)
-  //{
-  //  m_pOmniLight->SetActive(m_bEnableLights);
-  //}
-
-  CORE->GetLightManager()->SetAmbientLight(m_vAmbientLight);
 
   UpdatePosition(Vect3f(0.0f),0.0f,0.0f);
   UpdateCamera(0.0f,0.0f);
@@ -282,25 +265,10 @@ void CViewer::ProcessFreeMode(const float _fElapsedTime)
   float l_fDeltaYaw = m_vMouseDelta.x * _fElapsedTime;
   float l_fDeltaPitch = m_vMouseDelta.y * _fElapsedTime;
 
-  if(m_bGuiActive)
-  {
-    l_fDeltaYaw = 0.0f;
-    l_fDeltaPitch = 0.0f;
-  }
-
-  CORE->GetLightManager()->SetAmbientLight(m_vAmbientLight);
+  CORE->GetLightManager()->SetAmbientLight(Vect3f(0.3f));
   
   CORE->GetLightManager()->SetLightsEnabled(m_bEnableLights);
-  if(m_pSpotLight)
-  {
-    m_pSpotLight->SetActive(m_bEnableLights);
-  }
   
-  //if(m_pOmniLight)
-  //{
-  //  m_pOmniLight->SetActive(m_bEnableLights);
-  //}
-
   if(!CORE->GetActionManager()->IsActionActive("Run"))
   {
     SetWalking();
@@ -334,11 +302,6 @@ void CViewer::ProcessFreeMode(const float _fElapsedTime)
   if(!CORE->GetActionManager()->IsActionActive("MoveDown"))
   {
     m_bMoveDown = false;
-  }
-
-  if(m_pObjectModeLight)
-  {
-    m_pObjectModeLight->SetActive(false);
   }
 
   if(m_bMoveFwd)
@@ -379,19 +342,6 @@ void CViewer::ProcessFreeMode(const float _fElapsedTime)
   UpdatePosition(l_vPosDelta,l_fDeltaPitch,l_fDeltaYaw);
   UpdateCamera(l_fDeltaPitch, l_fDeltaYaw);
 
-  if(m_pSpotLight)
-  {
-    Vect3f l_vPosition = m_pTargetObject->GetPosition() + Vect3f(0.0f,((CShoulderCamera*)m_pObjectCamera)->GetShoulderHeight(),0.0f);
-    m_pSpotLight->SetPosition(l_vPosition);
-    m_pSpotLight->SetDirection(m_pObjectCamera->GetDirection());
-  }
-  
-  //if(m_pOmniLight)
-  //{
-  //  Vect3f l_vPosition = m_pObjectCamera->GetEye();
-  //  m_pOmniLight->SetPosition(l_vPosition);
-  //}
-
   if (!m_bMoveFwd && !m_bMoveBack && !m_bMoveLeft && !m_bMoveLeft && !m_bMoveRight)
   {
     if(m_pCharacter)
@@ -410,12 +360,6 @@ void CViewer::ProcessMeshMode(const float _fElapsedTime)
   float l_fDeltaYaw = m_vMouseDelta.x * _fElapsedTime;
   float l_fDeltaPitch = m_vMouseDelta.y * _fElapsedTime;
 
-  if(m_bGuiActive)
-  {
-    l_fDeltaYaw = 0.0f;
-    l_fDeltaPitch = 0.0f;
-  }
-
   UpdateCamera(l_fDeltaPitch,l_fDeltaYaw);
 
   if(m_vMeshes.size() != 0 && m_pObjectModeLight)
@@ -429,12 +373,6 @@ void CViewer::ProcessAnimatedMode(const float _fElapsedTime)
 {
   float l_fDeltaYaw = m_vMouseDelta.x * _fElapsedTime;
   float l_fDeltaPitch = m_vMouseDelta.y * _fElapsedTime;
-
-  if(m_bGuiActive)
-  {
-    l_fDeltaYaw = 0.0f;
-    l_fDeltaPitch = 0.0f;
-  }
 
   UpdateCamera(l_fDeltaPitch,l_fDeltaYaw);
 
@@ -513,7 +451,6 @@ void CViewer::FocusCurrentMesh()
   const vector<CMaterial*>& l_vMaterials = l_pRenderMesh->GetStaticMesh()->GetMaterials();
 
   ReloadMaterialValues(l_vMaterials);
-
 }
 
 void CViewer::FocusCurrentAnimatedModel()
@@ -532,7 +469,6 @@ void CViewer::FocusCurrentAnimatedModel()
   const vector<CMaterial*>& l_vMaterials = l_pRenderMesh->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetMaterials();
 
   ReloadMaterialValues(l_vMaterials);
-
 }
 
 void CViewer::SelectNextMesh()
@@ -657,57 +593,57 @@ void CViewer::SetPrevAnimation()
   }
 }
 
-void CViewer::ToggleNormalRendering()
-{
-  int l_iNormalRendering = m_eNormalRendering;
-  l_iNormalRendering++;
+//void CViewer::ToggleNormalRendering()
+//{
+//  int l_iNormalRendering = m_eNormalRendering;
+//  l_iNormalRendering++;
+//
+//  if(l_iNormalRendering == MAX_NORMAL_MODE)
+//  {
+//    l_iNormalRendering = 0;
+//  }
+//  m_eNormalRendering = (ENormalModes)l_iNormalRendering;
+//
+//  switch(m_eNormalRendering)
+//  {
+//  case CViewer::NORMALS:
+//    CORE->GetRenderer()->SetSceneRenderer("show_normals_renderer");
+//    break;
+//  case CViewer::NORMALMAP:
+//    CORE->GetRenderer()->SetSceneRenderer("show_normalmap_renderer");
+//    break;
+//  case CViewer::FLAT_NORMALMAP:
+//    CORE->GetRenderer()->SetSceneRenderer("show_flat_normalmap_renderer");
+//    break;
+//  case CViewer::TANGENT:
+//    CORE->GetRenderer()->SetSceneRenderer("show_tangent_renderer");
+//    break;
+//  case CViewer::COTANGENT:
+//    CORE->GetRenderer()->SetSceneRenderer("show_bitangent_renderer");
+//    break;
+//  case CViewer::UV_COORDS:
+//    CORE->GetRenderer()->SetSceneRenderer("show_uv_coords_renderer");
+//    break;
+//  case CViewer::NO_NORMALS:
+//  default:
+//    CORE->GetRenderer()->SetSceneRenderer("forward_renderer");
+//    break;
+//  }
+//}
 
-  if(l_iNormalRendering == MAX_NORMAL_MODE)
-  {
-    l_iNormalRendering = 0;
-  }
-  m_eNormalRendering = (ENormalModes)l_iNormalRendering;
-
-  switch(m_eNormalRendering)
-  {
-  case CViewer::NORMALS:
-    CORE->GetRenderer()->SetSceneRenderer("show_normals_renderer");
-    break;
-  case CViewer::NORMALMAP:
-    CORE->GetRenderer()->SetSceneRenderer("show_normalmap_renderer");
-    break;
-  case CViewer::FLAT_NORMALMAP:
-    CORE->GetRenderer()->SetSceneRenderer("show_flat_normalmap_renderer");
-    break;
-  case CViewer::TANGENT:
-    CORE->GetRenderer()->SetSceneRenderer("show_tangent_renderer");
-    break;
-  case CViewer::COTANGENT:
-    CORE->GetRenderer()->SetSceneRenderer("show_bitangent_renderer");
-    break;
-  case CViewer::UV_COORDS:
-    CORE->GetRenderer()->SetSceneRenderer("show_uv_coords_renderer");
-    break;
-  case CViewer::NO_NORMALS:
-  default:
-    CORE->GetRenderer()->SetSceneRenderer("forward_renderer");
-    break;
-  }
-}
-
-void CViewer::ToggleShowBoxes()
-{
-  m_bShowBoxes = !m_bShowBoxes;
-
-  CORE->GetRenderableObjectsManager()->SetAllRenderBoundingBox(m_bShowBoxes);
-}
-
-void CViewer::ToggleShowSpheres()
-{
-  m_bShowSpheres = !m_bShowSpheres;
-
-  CORE->GetRenderableObjectsManager()->SetAllRenderBoundingSphere(m_bShowSpheres);
-}
+//void CViewer::ToggleShowBoxes()
+//{
+//  m_bShowBoxes = !m_bShowBoxes;
+//
+//  CORE->GetRenderableObjectsManager()->SetAllRenderBoundingBox(m_bShowBoxes);
+//}
+//
+//void CViewer::ToggleShowSpheres()
+//{
+//  m_bShowSpheres = !m_bShowSpheres;
+//
+//  CORE->GetRenderableObjectsManager()->SetAllRenderBoundingSphere(m_bShowSpheres);
+//}
 
 void CViewer::IncrementGlowMesh()
 {
@@ -961,90 +897,6 @@ void CViewer::DecrementGlossAnimated()
   }
 }
 
-void CViewer::IncrementBumpMesh()
-{
-  if(m_vMeshes.size() != 0)
-  {
-    CInstanceMesh* l_pRenderMesh = (CInstanceMesh*)(*m_itCurrentMesh);
-    const vector<CMaterial*>& l_vMaterials = l_pRenderMesh->GetStaticMesh()->GetMaterials();
-    vector<CMaterial*>::const_iterator l_itMaterial = l_vMaterials.begin();
-
-    m_fBump += 0.1f;
-
-    while(l_itMaterial != l_vMaterials.end())
-    {
-      CMaterial* l_pMaterial = *l_itMaterial;
-
-      l_pMaterial->SetBump(m_fBump);
-
-      ++l_itMaterial;
-    }
-  }
-}
-
-void CViewer::DecrementBumpMesh()
-{
-  if(m_vMeshes.size() != 0)
-  {
-    CInstanceMesh* l_pRenderMesh = (CInstanceMesh*)(*m_itCurrentMesh);
-    const vector<CMaterial*>& l_vMaterials = l_pRenderMesh->GetStaticMesh()->GetMaterials();
-    vector<CMaterial*>::const_iterator l_itMaterial = l_vMaterials.begin();
-
-    m_fBump -= 0.1f;
-
-    while(l_itMaterial != l_vMaterials.end())
-    {
-      CMaterial* l_pMaterial = *l_itMaterial;
-
-      l_pMaterial->SetBump(m_fBump);
-
-      ++l_itMaterial;
-    }
-  }
-}
-
-void CViewer::IncrementBumpAnimated()
-{
-  if(m_vAnimatedModels.size() != 0)
-  {
-    CRenderableAnimatedInstanceModel* l_pRenderModel = (CRenderableAnimatedInstanceModel*)(*m_itCurrentAnimated);
-    const vector<CMaterial*>& l_vMaterials = l_pRenderModel->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetMaterials();
-    vector<CMaterial*>::const_iterator l_itMaterial = l_vMaterials.begin();
-
-    m_fBump += 0.1f;
-    while(l_itMaterial != l_vMaterials.end())
-    {
-      CMaterial* l_pMaterial = *l_itMaterial;
-
-      l_pMaterial->SetBump(m_fBump);
-
-      ++l_itMaterial;
-    }
-    
-  }
-}
-
-void CViewer::DecrementBumpAnimated()
-{
-  if(m_vAnimatedModels.size() != 0)
-  {
-    CRenderableAnimatedInstanceModel* l_pRenderModel = (CRenderableAnimatedInstanceModel*)(*m_itCurrentAnimated);
-    const vector<CMaterial*>& l_vMaterials = l_pRenderModel->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetMaterials();
-    vector<CMaterial*>::const_iterator l_itMaterial = l_vMaterials.begin();
-
-    m_fBump -= 0.1f;
-
-    while(l_itMaterial != l_vMaterials.end())
-    {
-      CMaterial* l_pMaterial = *l_itMaterial;
-
-      l_pMaterial->SetBump(m_fBump);
-
-      ++l_itMaterial;
-    }
-  }
-}
-
 bool CViewer::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
 {
   if(strcmp(_pcAction, "setNextMode") == 0)
@@ -1055,21 +907,15 @@ bool CViewer::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pc
 
   if(strcmp(_pcAction, "showNormals") == 0)
   {
-    ToggleNormalRendering(); 
+    //ToggleNormalRendering(); 
     return true;
   }
 
   if(strcmp(_pcAction, "ShowAjuda") == 0)
   {
-    ToggleHelp();
+    //ToggleHelp();
     return true;
   }
-
-  //if(strcmp(_pcAction, "ToggleShowBoxes") == 0)
-  //{
-  //  ToggleShowBoxes();
-  //  return true;
-  //}
 
   if(strcmp(_pcAction, "Yaw") == 0)
   {
@@ -1093,7 +939,7 @@ bool CViewer::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pc
     case CMaterial::SHOW_G          : m_eLightmapMode = CMaterial::SHOW_B           ; break;
     case CMaterial::SHOW_B          : m_eLightmapMode = CMaterial::FLAT             ; break;
     };*/
-    switch(m_eLightmapMode)
+    /*switch(m_eLightmapMode)
     {
     case CMaterial::FLAT            : m_eLightmapMode = CMaterial::RADIOSITY_NORMAL ; break;
     case CMaterial::RADIOSITY_NORMAL: m_eLightmapMode = CMaterial::FLAT             ; break;
@@ -1115,8 +961,7 @@ bool CViewer::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pc
       {
         (*l_itMat)->ActivateRadiosityNormal(m_eLightmapMode);
       }
-    }
-
+    }*/
     return true;
   }
 
@@ -1407,7 +1252,7 @@ void CViewer::ReloadMaterialValues(const vector<CMaterial*>& _vMaterials)
   m_fGlowIntensity = 0.0f;
   m_fSpecIntensity = 0.0f;
   m_fGlossiness = 0.0f;
-  m_fBump = 0.0f;
+  //m_fBump = 0.0f;
 
   vector<CMaterial*>::const_iterator l_itMaterial = _vMaterials.begin();
 
@@ -1434,10 +1279,10 @@ void CViewer::ReloadMaterialValues(const vector<CMaterial*>& _vMaterials)
       m_fGlossiness = l_fValue;
 
     //bump
-    l_fValue = l_pMaterial->GetBump();
-
-    if(l_fValue > m_fBump)
-      m_fBump = l_fValue;
+    //l_fValue = l_pMaterial->GetBump();
+    //
+    //if(l_fValue > m_fBump)
+    //  m_fBump = l_fValue;
 
     ++l_itMaterial;
   }
@@ -1445,18 +1290,21 @@ void CViewer::ReloadMaterialValues(const vector<CMaterial*>& _vMaterials)
 
 void CViewer::ShowInfo()
 {
-  switch(m_iMode) {
-  case FREE_MODE:
-    ShowFreeModeInfo();
-    break;
-  case MESH_MODE:
-    ShowMeshModeInfo();
-    break;
-  case ANIMATED_MODE:
-    ShowAnimatedModeInfo();
-    break;
-  default:
-    break;
+  if(m_bShowHelp)
+  {
+    switch(m_iMode) {
+    case FREE_MODE:
+      ShowFreeModeInfo();
+      break;
+    case MESH_MODE:
+      ShowMeshModeInfo();
+      break;
+    case ANIMATED_MODE:
+      ShowAnimatedModeInfo();
+      break;
+    default:
+      break;
+    }
   }
 }
 
@@ -1471,15 +1319,15 @@ void CViewer::ShowFreeModeInfo()
   stringstream l_SStream;
 
   
-  l_SStream << "  Mode Lights -> ";
-  switch(m_eLightmapMode)
-  {
-  case CMaterial::FLAT            : l_SStream << "Flat" ; break;
-  case CMaterial::RADIOSITY_NORMAL: l_SStream << "Radiosity Normal" ; break;
-  case CMaterial::SHOW_R          : l_SStream << "Show R" ; break;
-  case CMaterial::SHOW_G          : l_SStream << "Show G" ; break;
-  case CMaterial::SHOW_B          : l_SStream << "Show B" ; break;
-  }
+  //l_SStream << "  Mode Lights -> ";
+  //switch(m_eLightmapMode)
+  //{
+  //case CMaterial::FLAT            : l_SStream << "Flat" ; break;
+  //case CMaterial::RADIOSITY_NORMAL: l_SStream << "Radiosity Normal" ; break;
+  //case CMaterial::SHOW_R          : l_SStream << "Show R" ; break;
+  //case CMaterial::SHOW_G          : l_SStream << "Show G" ; break;
+  //case CMaterial::SHOW_B          : l_SStream << "Show B" ; break;
+  //}
 
   FONT_MANAGER->DrawText(550,40,colGREEN,l_uiFontType,l_SStream.str().c_str());
 
@@ -1659,7 +1507,6 @@ string CViewer::ShowMaterialProperties(const vector<CMaterial*>& _vMaterials)
     l_SStream << endl;
 
     l_SStream << "Parallax Height: " << l_pMaterial->GetParallaxHeight() << endl;
-    l_SStream << "Bump: " << l_pMaterial->GetBump() << "MAX(" << (l_pMaterial->GetBump()*100.0f) << ")" << endl;
     l_SStream << "Glossiness: " << l_pMaterial->GetGlossiness() << "MAX(" << l_pMaterial->GetGlossiness() << ")" << endl;
     l_SStream << "Specular factor: " << l_pMaterial->GetSpecularFactor() << "MAX(" << (l_pMaterial->GetSpecularFactor()/.03f) << ")" << endl;
     l_SStream << "Glow intensity: " << l_pMaterial->GetGlowIntensity() << "MAX(" << (l_pMaterial->GetGlowIntensity()/.02f) << ")" << endl;

@@ -1625,26 +1625,9 @@ IA
       void ReceiveEvent(const SEvent& _Event)
 
 VIEWER
-  Globals:
-    VIEWER_PROCESS
-    CEngine::GetActiveProcess()
-    
-    VIEWER
-    CViewerProcess::GetViewer()
-    
-  Class:
-    ViewerProcess
-    CViewerProcess
-    
-    Methods:
-      reset_viewer
-      ResetViewer
-      
-      get_viewer
-      GetViewer
-      
-      toggle_normals
-      ToggleNormalRendering
+  Methods:
+    get_viewer
+    CViewer::GetSingletonPtr()
       
   Class:
     Viewer
@@ -1663,21 +1646,6 @@ VIEWER
     Methods:
       get_current_mode
       int GetCurrentMode()
-      
-      set_mode
-      void SetMode(EModes _eMode)
-      
-      activate_gui
-      void ActivateGui(bool _bValue)
-      
-      is_gui_active
-      bool IsGuiActive()
-      
-      toggle_boxes
-      void ToggleShowBoxes()
-      
-      toggle_spheres
-      void ToggleShowSpheres()
       
       next_mode
       void SetNextMode()
@@ -1717,18 +1685,6 @@ VIEWER
       
       gloss_dec_anim
       void DecrementGlossAnimated()
-      
-      bump_inc_mesh
-      void IncrementBumpMesh()
-      
-      bump_dec_mesh
-      void DecrementBumpMesh()
-      
-      bump_inc_anim
-      void IncrementBumpAnimated()
-      
-      bump_dec_anim
-      void DecrementBumpAnimated()
       
       next_mesh
       void SelectNextMesh()
