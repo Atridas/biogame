@@ -4,6 +4,21 @@
 #include "Core.h"
 #include "LightManager.h"
 #include "Camera.h"
+#include <XML\XMLTreeNode.h>
+#include "RenderableVertexs.h"
+
+
+bool CDeferredPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer, const string& _szDefaultRenderTarget)
+{
+  if(!CPostSceneRendererStep::Init(_treePostSceneRenderer, _szDefaultRenderTarget))
+  {
+    return false;
+  }
+  m_szGeometryLightShader = _treePostSceneRenderer.GetPszISOProperty("geometry_light_shader");
+  m_szGeometryInsideLightShader = _treePostSceneRenderer.GetPszISOProperty("geometry_inside_light_shader");
+
+  return true;
+}
 
 void CDeferredPostSceneRendererStep::Release()
 {
@@ -14,8 +29,10 @@ void CDeferredPostSceneRendererStep::Render(CRenderManager* _pRM, CCamera* _pCam
 {
   CLightManager* l_pLightManager = CORE->GetLightManager();
   CEffectManager* l_pEM = CORE->GetEffectManager();
-
+  
   CEffect* l_pEffect = l_pEM->GetResource(m_szEffect);
+  CEffect* l_pGeometryEffect = l_pEM->GetResource(m_szGeometryLightShader);
+  CEffect* l_pGeometryInsidelEffect = l_pEM->GetResource(m_szGeometryInsideLightShader);
   if(l_pEffect)
   {
     ActivateInputSamplers();
@@ -33,12 +50,41 @@ void CDeferredPostSceneRendererStep::Render(CRenderManager* _pRM, CCamera* _pCam
       {
         RECT rect;
 
-        if(!ClipOmniLight(l_vLights[i], rect, _pCamera))
-          continue;
+        if(l_pGeometryEffect)
+        {
+          Vect3f l_vPosition = l_vLights[i]->GetPosition();
+          float l_fRange = l_vLights[i]->GetEndRangeAttenuation();
 
-        _pRM->GetDevice()->SetRenderState(D3DRS_SCISSORTESTENABLE, TRUE);
-        _pRM->GetDevice()->SetScissorRect(&rect);
+          Vect3f l_fCamPosition = _pCamera->GetEye();
+          if(1.5f*1.5f*l_fCamPosition.SqDistance(l_vPosition) + _pCamera->GetZn() > l_fRange*l_fRange)
+          {
+            _pRM->DrawShadedSphere(l_vPosition, l_fRange* 1.5f, l_pGeometryEffect);
 
+            continue;
+          }
+          //else if(l_fCamPosition.SqDistance(l_vPosition) < l_fRange*l_fRange)
+          //{
+          //  _pRM->DrawShadedSphere(l_vPosition, l_fRange* 1.5f, l_pGeometryInsidelEffect);
+          //
+          //  continue;
+          //}
+          else
+          {
+            if(!ClipOmniLight(l_vLights[i], rect, _pCamera))
+              continue;
+        
+            _pRM->GetDevice()->SetRenderState(D3DRS_SCISSORTESTENABLE, TRUE);
+            _pRM->GetDevice()->SetScissorRect(&rect);
+          }
+        }
+        else
+        {
+          if(!ClipOmniLight(l_vLights[i], rect, _pCamera))
+            continue;
+        
+          _pRM->GetDevice()->SetRenderState(D3DRS_SCISSORTESTENABLE, TRUE);
+          _pRM->GetDevice()->SetScissorRect(&rect);
+        }
       }else{
         _pRM->GetDevice()->SetRenderState(D3DRS_SCISSORTESTENABLE, FALSE);
       }
@@ -62,6 +108,7 @@ void CDeferredPostSceneRendererStep::Render(CRenderManager* _pRM, CCamera* _pCam
     }
 
     DeactivateInputSamplers();
+    _pRM->GetDevice()->SetRenderState(D3DRS_SCISSORTESTENABLE, FALSE);
   }
 }
 /*

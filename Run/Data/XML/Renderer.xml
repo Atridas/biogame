@@ -220,8 +220,9 @@
     
     <post_scene_renderer name="deferred lighting" 
                          type="deferred_post_scene_renderer" 
-                         effect="DeferredLightPass" 
-                         active="true">
+                         effect="DeferredLightPass"
+                         geometry_light_shader="DeferredGeometryLightPass"
+                         geometry_inside_light_shader="DeferredGeometryInsideLightPass">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
@@ -235,9 +236,23 @@
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
-        <input_sampler type="texture" index="1" texture="RT2_ARGB_8"/>
       </input_samplers>
 
+    </post_scene_renderer>
+    
+    <post_scene_renderer name="deferred lighting debug" 
+                         type="deferred_post_scene_renderer" 
+                         effect="DeferredLightPass"
+                         size="0.5" aspect_ratio="true" position="0.5 0.0"
+                         geometry_light_shader="DeferredGeometryLightPass"
+                         geometry_inside_light_shader="DeferredGeometryInsideLightPass">
+
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
+        <input_sampler type="texture" index="1" texture="RT3_ARGB_8"/>
+        <input_sampler type="texture" index="2" texture="RT1_RG_16F"/>
+      </input_samplers>
+      
     </post_scene_renderer>
     
     
@@ -312,7 +327,8 @@
                          type="deferred_post_scene_renderer" 
                          effect="DeferredLightPass" 
                          render_target="HDR_COLOR"
-                         active="true">
+                         geometry_light_shader="DeferredGeometryLightPass"
+                         geometry_inside_light_shader="DeferredGeometryInsideLightPass">
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
         <input_sampler type="texture" index="1" texture="RT3_ARGB_8"/>
@@ -759,8 +775,8 @@
     
     <render_path name="deferred debug" active="false">
       <scene_renderer name="deferred_renderer"/>
-      <post_scene_renderer name="deferred lighting"/>
       <post_scene_renderer name="deferred ambient debug"/>
+      <post_scene_renderer name="deferred lighting debug"/>
       <!-- <post_scene_renderer name="deferred_alpha debug"/> -->
       
       <post_scene_renderer name="scene_color"/>

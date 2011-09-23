@@ -129,6 +129,8 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
 
   INIT(m_pRenderer,"Renderer","Data/XML/Renderer.xml");
 
+  m_pRenderManager->InitPostRenderTargets();
+
   LOAD(m_pEffectManager, "Manager d'Effects", _InitParams.EffectManagerParams);
   
   LOAD(m_pStaticMeshManager, "Manager de Static Meshes", _InitParams.StaticMeshManagerParams);

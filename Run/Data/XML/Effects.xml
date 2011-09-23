@@ -65,6 +65,8 @@
     <!--<effect name="Gas" file="Data/Effects/Gas.fx"/>-->
     
     <effect name="DeferredLightPass" file="Data/Effects/DeferredLightPass.fx" technique="DeferredLightPassTechnique" />
+    <effect name="DeferredGeometryLightPass" file="Data/Effects/DeferredLightPass.fx" technique="DeferredGeometryLightPassTechnique" />
+    <effect name="DeferredGeometryInsideLightPass" file="Data/Effects/DeferredLightPass.fx" technique="DeferredGeometryInsideLightPassTechnique" />
     <effect name="DeferredAmbientPass" file="Data/Effects/DeferredAmbientPass.fx" technique="DeferredAmbientPassTechnique" />
 
     <effect name="ShowDepth" file="Data/Effects/ShowDepth.fx" technique="ShowDepthTechnique" />
