@@ -50,6 +50,33 @@ struct T_DEF_LIGHTPASS_PS {
 //  float4 Specular   : COLOR1;
 //};
 
+struct VS_IN {
+  float4 Position : POSITION;
+};
+
+struct VS_OUT {
+  float2 uv: TEXCOORD0;
+  float4 HPosition : POSITION;
+};
+
+VS_OUT OmniVS(float3 _Position : POSITION)
+{
+  VS_OUT out_ = (VS_OUT)0;
+  out_.HPosition = mul(float4(_Position,1.0), g_WorldViewProjectionMatrix );
+  out_.HPosition /= out_.HPosition.w;
+  
+  out_.uv = out_.HPosition.xy;
+  
+  out_.uv = out_.uv * 0.5 + 0.5;
+  
+  out_.uv.y = 1 - out_.uv.y;
+  
+  
+  
+  return out_;
+}
+
+
 float4 DeferredLightPassPS(float2 _UV: TEXCOORD0) : COLOR
 {
   float z = tex2D(DepthTextureSampler, _UV).x;
@@ -150,6 +177,13 @@ float4 DeferredLightPassPS(float2 _UV: TEXCOORD0) : COLOR
 	return float4(l_LightResult,1.0);
 }
 
+float4 white(float2 _UV: TEXCOORD0) : COLOR
+{
+	float3 l_DiffuseColor = tex2D(ColorTextureSampler, _UV);
+  //return float4(_UV.xy, 0, 1);
+  return float4(l_DiffuseColor,1.0);
+}
+
 technique DeferredLightPassTechnique
 {
 	pass p0
@@ -163,5 +197,41 @@ technique DeferredLightPassTechnique
 		CullMode = CCW;
 		//VertexShader = compile ps_3_0 DeferredLightPassVS();
 		PixelShader  = compile ps_3_0 DeferredLightPassPS();
+	}
+}
+
+technique DeferredGeometryLightPassTechnique
+{
+	pass p0
+	{
+		ZEnable = true;
+    ZFunc   = LESSEQUAL;
+		ZWriteEnable = false;
+		AlphaBlendEnable = true;
+		SrcBlend = One;
+		DestBlend = One;
+		AlphaTestEnable = false;	
+		CullMode = CCW;
+		VertexShader = compile vs_3_0 OmniVS();
+		PixelShader  = compile ps_3_0 DeferredLightPassPS();
+		//PixelShader  = compile ps_3_0 white();
+	}
+}
+
+technique DeferredGeometryInsideLightPassTechnique
+{
+	pass p0
+	{
+		ZEnable = true;
+    ZFunc   = GREATEREQUAL;
+		ZWriteEnable = false;
+		AlphaBlendEnable = true;
+		SrcBlend = One;
+		DestBlend = One;
+		AlphaTestEnable = false;	
+		CullMode = CW;
+		VertexShader = compile vs_3_0 OmniVS();
+		PixelShader  = compile ps_3_0 DeferredLightPassPS();
+		//PixelShader  = compile ps_3_0 white();
 	}
 }

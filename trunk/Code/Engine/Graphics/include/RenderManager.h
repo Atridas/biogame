@@ -31,13 +31,15 @@ public:
 												                          m_uWidth(0), m_uHeight(0),
                                                   m_pCamera(0), m_pParticleVertex(0),
                                                   m_pBackBuffer(0),m_pDefaultDepthStencilBuffer(0),
-                                                  m_pSettedBackBuffer(0),m_pSettedDepthStencilBuffer(0)
+                                                  m_pSettedBackBuffer(0),m_pSettedDepthStencilBuffer(0),
+                                                  m_pSphereVertex(0)
                                                                                   {};
 
 
   virtual               ~CRenderManager   (void)                                  {Done();};
 
   bool                  Init              (HWND hWnd, const SRenderManagerParams& _params);
+  bool                  InitPostRenderTargets();
 
   void                  BeginRendering    ();
   void                  EndRendering      ();
@@ -91,6 +93,7 @@ public:
   void                  DrawPlane         (float size, const Vect3f& normal, float distance, CColor Color, int GridX, int GridZ ); 
   void                  DrawSphere        (float Radius, const CColor& Color, int Aristas);
   void                  DrawSphere        (const Vect3f &_Pos, float Radius, const CColor& Color, int Aristas);
+  void                  DrawShadedSphere  (const Vect3f &_vPos, float _fRadius, CEffect* _pEffect);
   //void                  DrawSphere        (float Radius, CColor Color=colWHITE, uint32 Aristas=10,  ETypeModePaint mode = PAINT_WIREFRAME,  EtypeSphere typeSphere = COMPLETE);
   //void                  EnableAlphaBlend  ();
   //void                  DisbaleAlphaBlend ();
@@ -113,8 +116,9 @@ public:
 
   void SetRenderTarget       (int _iIndex, LPDIRECT3DSURFACE9 _pRenderTarget);
   void SetDepthStencilBuffer (LPDIRECT3DSURFACE9 _pDepthStencilBuffer);
-
-  CRenderableVertexs*     GetParticleVertexs() {return m_pParticleVertex;};
+  
+  CRenderableVertexs*     GetParticleVertexs() const {return m_pParticleVertex;};
+  CRenderableVertexs*     GetSphereVertexs()   const {return m_pSphereVertex;};
 private:
 	virtual void            Release					  ();
 
@@ -130,7 +134,7 @@ private:
   CCamera*                m_pCamera;
   CFrustum                m_Frustum;
   
-   CRenderableVertexs*    m_pParticleVertex;
+  CRenderableVertexs*     m_pParticleVertex, *m_pSphereVertex;
    
   LPDIRECT3DSURFACE9      m_pBackBuffer;
   LPDIRECT3DSURFACE9      m_pDefaultDepthStencilBuffer;

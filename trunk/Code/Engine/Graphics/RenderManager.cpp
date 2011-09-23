@@ -8,6 +8,7 @@
 #include "EffectManager.h"
 #include "IndexedVertexs.h"
 #include "VertexsStructs.h"
+#include "VertexCalculations.h"
 
 
 bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
@@ -131,36 +132,6 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
   TCAL3D_HW_VERTEX::GetVertexDeclaration();
   SPARTICLE_VERTEX::GetVertexDeclaration();
 
-
-  if(IsOk())
-  {
-    SPARTICLE_VERTEX l_pVertexBuffer[4];
-
-    l_pVertexBuffer[0].x = -1;
-    l_pVertexBuffer[0].y = -1;
-    l_pVertexBuffer[0].z =  0;
-
-    l_pVertexBuffer[1].x =  1;
-    l_pVertexBuffer[1].y = -1;
-    l_pVertexBuffer[1].z =  0;
-
-    l_pVertexBuffer[2].x = -1;
-    l_pVertexBuffer[2].y =  1;
-    l_pVertexBuffer[2].z =  0;
-
-    l_pVertexBuffer[3].x =  1;
-    l_pVertexBuffer[3].y =  1;
-    l_pVertexBuffer[3].z =  0;
-
-    uint16 l_iIndex[6] = {0,2,1,1,2,3};
-
-    m_pParticleVertex = new CIndexedVertexs<SPARTICLE_VERTEX>(  this,
-                                                                (char*)l_pVertexBuffer,
-                                                                l_iIndex,
-                                                                4, 
-                                                                6);
-  }
-
   if(IsOk())
   {
     m_pD3DDevice->GetRenderTarget(0,&m_pBackBuffer);
@@ -178,6 +149,104 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
 #endif
 
 	return IsOk();
+}
+
+#define SPHERE_STACKS 10
+#define SPHERE_SLICES 10
+
+bool CRenderManager::InitPostRenderTargets()
+{
+  {
+    SPARTICLE_VERTEX l_VertexBuffer[4];
+
+    l_VertexBuffer[0].x = -1;
+    l_VertexBuffer[0].y = -1;
+    l_VertexBuffer[0].z =  0;
+
+    l_VertexBuffer[1].x =  1;
+    l_VertexBuffer[1].y = -1;
+    l_VertexBuffer[1].z =  0;
+
+    l_VertexBuffer[2].x = -1;
+    l_VertexBuffer[2].y =  1;
+    l_VertexBuffer[2].z =  0;
+
+    l_VertexBuffer[3].x =  1;
+    l_VertexBuffer[3].y =  1;
+    l_VertexBuffer[3].z =  0;
+
+    uint16 l_iIndex[6] = {0,2,1,1,2,3};
+
+    m_pParticleVertex = new CIndexedVertexs<SPARTICLE_VERTEX>(  this,
+                                                                (char*)l_VertexBuffer,
+                                                                l_iIndex,
+                                                                4, 
+                                                                6);
+  }
+
+  {
+    SSIMPLEVERTEX l_VertexBuffer[(SPHERE_STACKS+1)*(SPHERE_SLICES+1)];
+    int cont = 0;
+    for (int stackNumber = 0; stackNumber <= SPHERE_STACKS; ++stackNumber)
+    {
+      for (int sliceNumber = 0; sliceNumber <= SPHERE_SLICES; ++sliceNumber) 
+      {
+        float theta = (float)(stackNumber * FLOAT_PI_VALUE / SPHERE_STACKS);
+        float phi = (float)(sliceNumber * 2 * FLOAT_PI_VALUE / SPHERE_SLICES);
+        float sinTheta = sin(theta);
+        float sinPhi = sin(phi);
+        float cosTheta = cos(theta);
+        float cosPhi = cos(phi);
+        
+        l_VertexBuffer[cont].x = cosPhi * sinTheta;
+        l_VertexBuffer[cont].y = sinPhi * sinTheta;
+        l_VertexBuffer[cont].z = cosTheta;
+        
+        cont++;
+      }
+    }
+    
+    int slicesMod = SPHERE_SLICES+1;
+    
+    uint16 l_iIndexBuffer[SPHERE_STACKS * (SPHERE_SLICES+1) * 6];
+    cont = 0;
+    for (int stackNumber = 0; stackNumber < SPHERE_STACKS; ++stackNumber)
+    {
+      for (int sliceNumber = 0; sliceNumber <= SPHERE_SLICES; ++sliceNumber)
+      {
+        //indexBuffer.add((stackNumber * slices) + (sliceNumber % slices));
+        //indexBuffer.add(((stackNumber + 1) * slices) + (sliceNumber % slices));
+        
+        l_iIndexBuffer[(cont * 6) + 0] = (stackNumber * slicesMod) + (sliceNumber % slicesMod);
+        l_iIndexBuffer[(cont * 6) + 1] = ((stackNumber + 1) % SPHERE_STACKS * slicesMod) + (sliceNumber % slicesMod);
+        l_iIndexBuffer[(cont * 6) + 2] = ((stackNumber + 1) % SPHERE_STACKS * slicesMod) + ((sliceNumber+1) % slicesMod);
+        
+        l_iIndexBuffer[(cont * 6) + 3] = (stackNumber * slicesMod) + (sliceNumber % slicesMod);
+        l_iIndexBuffer[(cont * 6) + 4] = ((stackNumber + 1) % SPHERE_STACKS * slicesMod) + ((sliceNumber+1) % slicesMod);
+        l_iIndexBuffer[(cont * 6) + 5] = ((stackNumber) * slicesMod) + ((sliceNumber+1) % slicesMod);
+        
+        cont++;
+      }
+    }
+    
+    //VertexCacheOptimisation( l_VertexBuffer, l_iIndexBuffer, 
+    //                         (SPHERE_STACKS+1)*(SPHERE_SLICES+1), 
+    //                         SPHERE_STACKS * (SPHERE_SLICES+1) * 6, 
+    //                         sizeof(SSIMPLEVERTEX) );
+
+    //Vertex[] vb = vertexBuffer.toArray(new Vertex[vertexBuffer.size()]);
+    //int[] indexes = new int[indexBuffer.size()];
+    //for(int i = 0; i < indexes.length; ++i) {
+    //  indexes[i] = indexBuffer.get(i);
+    //}
+
+    m_pSphereVertex = new CIndexedVertexs<SSIMPLEVERTEX>( this,
+                                                          (char*)l_VertexBuffer,
+                                                          l_iIndexBuffer,
+                                                          (SPHERE_STACKS+1)*(SPHERE_SLICES+1), 
+                                                          SPHERE_STACKS * (SPHERE_SLICES+1) * 6);
+  }
+  return true;
 }
 
 
@@ -199,8 +268,9 @@ void CRenderManager::Release(void)
   
   CHECKED_RELEASE(m_pBackBuffer);
   CHECKED_RELEASE(m_pDefaultDepthStencilBuffer);
-
+  
   CHECKED_DELETE(m_pParticleVertex);
+  CHECKED_DELETE(m_pSphereVertex);
   STEXTUREDVERTEX::ReleaseVertexDeclaration();
   STEXTURED2VERTEX::ReleaseVertexDeclaration();
   SNORMALTEXTUREDVERTEX::ReleaseVertexDeclaration();
@@ -1331,3 +1401,17 @@ void CRenderManager::DrawSphere(const Vect3f &_Pos, float Radius, const CColor& 
   }
 }
 
+void CRenderManager::DrawShadedSphere(const Vect3f &_vPos, float _fRadius, CEffect* _pEffect)
+{
+  CEffectManager* l_pEM = CORE->GetEffectManager();
+  Mat44f m;
+  m.SetIdentity();
+  m.Scale(_fRadius,_fRadius,_fRadius);
+  m.Translate(_vPos);
+  //SetTransform(m);
+  l_pEM->SetWorldMatrix(m);
+
+  l_pEM->LoadShaderData(_pEffect);
+
+  m_pSphereVertex->Render(this, _pEffect);
+}

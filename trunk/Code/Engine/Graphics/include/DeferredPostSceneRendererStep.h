@@ -13,6 +13,8 @@ class CDeferredPostSceneRendererStep :
 public:
   CDeferredPostSceneRendererStep() {};
   virtual ~CDeferredPostSceneRendererStep() {Done();};
+  
+  virtual bool Init(CXMLTreeNode& _treePostSceneRenderer, const string& _szDefaultRenderTarget);
 
 protected:
   virtual void Render(CRenderManager* _pRM, CCamera* _pCamera);
@@ -22,6 +24,8 @@ protected:
 private:
 
   bool ClipOmniLight(CLight* _pOmni, RECT& _Rect, CCamera* _pCamera);
+
+  string m_szGeometryLightShader, m_szGeometryInsideLightShader;
 };
 
 #endif

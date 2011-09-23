@@ -3,6 +3,7 @@
 #include "Texture.h"
 
 LPDIRECT3DVERTEXDECLARATION9 SDIFFUSEVERTEX::s_VertexDeclaration = 0;
+LPDIRECT3DVERTEXDECLARATION9 SSIMPLEVERTEX::s_VertexDeclaration = 0;
 
 LPDIRECT3DVERTEXDECLARATION9 SDIFFUSESCREENVERTEX::s_VertexDeclaration = 0;
 LPDIRECT3DVERTEXDECLARATION9 STEXTUREDSCREENVERTEX::s_VertexDeclaration = 0;
@@ -25,6 +26,7 @@ LPDIRECT3DVERTEXDECLARATION9 SPARTICLE_VERTEX::s_VertexDeclaration=0;
 // Instanced declarations ------------------------------------------------------
 
 LPDIRECT3DVERTEXDECLARATION9 SDIFFUSEVERTEX::s_VertexInstancedDeclaration = 0;
+LPDIRECT3DVERTEXDECLARATION9 SSIMPLEVERTEX::s_VertexInstancedDeclaration = 0;
 
 LPDIRECT3DVERTEXDECLARATION9 SDIFFUSESCREENVERTEX::s_VertexInstancedDeclaration = 0;
 LPDIRECT3DVERTEXDECLARATION9 STEXTUREDSCREENVERTEX::s_VertexInstancedDeclaration = 0;
@@ -52,6 +54,9 @@ uint16 GetVertexSize(uint16 _usVertexType)
   if(_usVertexType == SDIFFUSEVERTEX::GetVertexType())
   {
     return sizeof(SDIFFUSEVERTEX);
+  } else if(_usVertexType == SSIMPLEVERTEX::GetVertexType())
+  {
+    return sizeof(SSIMPLEVERTEX);
   } else if(_usVertexType == STEXTUREDVERTEX::GetVertexType())
   {
     return sizeof(STEXTUREDVERTEX);
@@ -110,6 +115,9 @@ uint16 GetTextureNum(uint16 _usVertexType)
   if(_usVertexType == SDIFFUSEVERTEX::GetVertexType())
   {
     return 1;
+  } else if(_usVertexType == SSIMPLEVERTEX::GetVertexType())
+  {
+    return 0;
   } else if(_usVertexType == STEXTUREDVERTEX::GetVertexType())
   {
     return 2;
@@ -182,6 +190,57 @@ LPDIRECT3DVERTEXDECLARATION9& SDIFFUSEVERTEX::GetInstancedVertexDeclaration()
     {          //type            sempre default (per meshes)    //ús de les dades
       { 0, 0,  D3DDECLTYPE_FLOAT3,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
       { 0, 12, D3DDECLTYPE_D3DCOLOR, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_COLOR,    0 },
+      //Buffer
+      { 1, 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
+      { 1, 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },
+      //World matrix
+      { 1, 16 * 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 2 },
+      { 1, 16 * 1, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 3 },
+      { 1, 16 * 2, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 4 },
+      { 1, 16 * 3, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 5 },
+
+      D3DDECL_END()
+    };
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexInstancedDeclaration);
+    assert(result == D3D_OK);
+  }
+  return s_VertexInstancedDeclaration;
+}
+
+// Simple Vertex -----------------------------------------------------------------------------------------------------------
+
+unsigned short SSIMPLEVERTEX::GetVertexType()
+{
+  return VERTEX_TYPE_GEOMETRY;
+}
+
+unsigned int SSIMPLEVERTEX::GetFVF()
+{
+	return D3DFVF_XYZ;
+}
+
+LPDIRECT3DVERTEXDECLARATION9& SSIMPLEVERTEX::GetVertexDeclaration()
+{
+  if(s_VertexDeclaration==NULL)
+  {
+    D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+    {          //type            sempre default (per meshes)    //ús de les dades
+      { 0, 0,  D3DDECLTYPE_FLOAT3,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0},
+      D3DDECL_END()
+    };
+    HRESULT result = RENDER_MANAGER->GetDevice()->CreateVertexDeclaration(l_VertexDeclaration, &s_VertexDeclaration);
+    assert(result == D3D_OK);
+  }
+  return s_VertexDeclaration;
+}
+
+LPDIRECT3DVERTEXDECLARATION9& SSIMPLEVERTEX::GetInstancedVertexDeclaration()
+{
+  if(s_VertexInstancedDeclaration==NULL)
+  {
+    D3DVERTEXELEMENT9 l_VertexDeclaration[] =
+    {          //type            sempre default (per meshes)    //ús de les dades
+      { 0, 0,  D3DDECLTYPE_FLOAT3,   D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_POSITION, 0 },
       //Buffer
       { 1, 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 0 },
       { 1, 0, D3DDECLTYPE_FLOAT4, D3DDECLMETHOD_DEFAULT, D3DDECLUSAGE_TEXCOORD, 1 },

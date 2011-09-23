@@ -85,6 +85,28 @@ private:
   static LPDIRECT3DVERTEXDECLARATION9 s_VertexInstancedDeclaration;
 };
 
+
+struct SSIMPLEVERTEX
+{
+	float x, y, z;
+  static unsigned short GetVertexType();
+
+	static unsigned int GetFVF();
+  
+  static LPDIRECT3DVERTEXDECLARATION9& GetVertexDeclaration();
+  static LPDIRECT3DVERTEXDECLARATION9& GetInstancedVertexDeclaration();
+
+  static void ReleaseVertexDeclaration()
+  {
+    CHECKED_RELEASE(s_VertexDeclaration);
+    CHECKED_RELEASE(s_VertexInstancedDeclaration);
+  }
+
+private:
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexDeclaration;
+  static LPDIRECT3DVERTEXDECLARATION9 s_VertexInstancedDeclaration;
+};
+
 struct SDIFFUSESCREENVERTEX
 {
   float    x, y, z, w;

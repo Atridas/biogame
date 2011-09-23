@@ -14,6 +14,7 @@
 //#define NS_RADIOSITY_NORMALMAP
 //#define NS_SPECULARMAP
 //#define NS_ENVIRONMENT
+//#define NS_WHITE
 
 
 //Tangent, radiosity i Specular necessiten tenir les primeres coordenades de textura i la normal (iluminació) per funcionar.
@@ -162,95 +163,101 @@ PS_OUTPUT NewPS(TNEW_PS _in)
 {
   PS_OUTPUT l_Output;
   
-  #if defined( NS_LIGHTMAP )
-    bool l_DynamicObject = false;
-  #else
-    bool l_DynamicObject = true;
-  #endif
   
-  #if defined( NS_NORMALMAP )
-    float4 l_Bump;
-    float3 l_Normal = CalcNormalmap((float3)_in.WorldTangent, 
-                                    (float3)_in.WorldBinormal, 
-                                    (float3)_in.WorldNormal, 
-                                    _in.UV, l_Bump);
+  #if defined( NS_WHITE )
+      l_Output.Color = float4(1, 1, 1, 1);
+      l_Output.Glow  = float4(0, 0, 0, 0);
   #else
-    #if defined( NS_LIGHTING )
-      float3 l_Normal = normalize(_in.WorldNormal);
-    #endif
-  #endif
-
-  #if defined( NS_TEX0 )
-    float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
-  #else
-    float4 l_DiffuseColor = _in.Color;
-  #endif
-
-
-  #if defined( NS_LIGHTING )
   
     #if defined( NS_LIGHTMAP )
-      #if defined( NS_RADIOSITY_NORMALMAP )
-        float4 l_AmbientColor = RadiosityNormalLightmapColor(l_Bump, _in.UV2) * 2.0;
-      #else
-        float4 l_AmbientColor = tex2D(LightmapTextureSampler,_in.UV2) * 2.0;
-      #endif
+      bool l_DynamicObject = false;
     #else
-      float4 l_AmbientColor = float4(g_AmbientLight,1.0);
+      bool l_DynamicObject = true;
     #endif
     
-    
-    
-    #if defined( NS_SPECULARMAP )
-      float  l_SpotlightFactor = 1.0;
-      
-      #if defined ( NS_ENVIRONMENT )
-        float l_SpecularTextureValue = tex2D(SpecularTextureSampler,_in.UV).x;
-        if(g_SpecularActive)
-          l_SpotlightFactor;
-      #else
-        if(g_SpecularActive)
-          l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x;
-      #endif
+    #if defined( NS_NORMALMAP )
+      float4 l_Bump;
+      float3 l_Normal = CalcNormalmap((float3)_in.WorldTangent, 
+                                      (float3)_in.WorldBinormal, 
+                                      (float3)_in.WorldNormal, 
+                                      _in.UV, l_Bump);
     #else
-      #if defined ( NS_ENVIRONMENT )
-        float l_SpecularTextureValue = 1.0;
-      #endif 
-      float  l_SpotlightFactor = 1.0;
+      #if defined( NS_LIGHTING )
+        float3 l_Normal = normalize(_in.WorldNormal);
+      #endif
     #endif
 
-    float3 l_EyeDirection = normalize(g_CameraPosition - _in.WorldPosition);
-    l_DiffuseColor = float4(ComputeAllLightsNew( l_Normal, _in.WorldPosition, l_EyeDirection,
-                                              l_DiffuseColor, l_AmbientColor, l_SpotlightFactor * g_SpotlightFactor,
-                                              _in.PosLight,l_DynamicObject)
-                                             ,l_DiffuseColor.a);    
-          
-    #if defined ( NS_ENVIRONMENT )
-      float3 l_ReflectionVector = normalize(reflect(-l_EyeDirection, l_Normal));
-      float4 l_EnvColor = texCUBE(EnvironmentTextureSampler, l_ReflectionVector);
-      //l_DiffuseColor += l_SpotlightFactor * l_EnvColor;
-      //l_DiffuseColor = float4(l_SpotlightFactor, l_SpotlightFactor, l_SpotlightFactor, 1);
-      l_DiffuseColor += g_EnvironmentIntensity * l_SpecularTextureValue * l_EnvColor;
+    #if defined( NS_TEX0 )
+      float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
+    #else
+      float4 l_DiffuseColor = _in.Color;
     #endif
-                                             
-  #endif
-  
-  l_Output.Color = l_DiffuseColor;
-  
-  #if defined( NS_TEX0 )
-    if(g_GlowActive)
-    {
-      l_Output.Glow  = tex2D(GlowTextureSampler,_in.UV) * g_GlowIntensity;
-      l_Output.Glow *= g_GlowIntensity * l_Output.Glow.w;
-      l_Output.Glow = max(0.0, l_Output.Glow);
-      //l_Output.Glow.a = 1.0;
-    } else {
+
+
+    #if defined( NS_LIGHTING )
+    
+      #if defined( NS_LIGHTMAP )
+        #if defined( NS_RADIOSITY_NORMALMAP )
+          float4 l_AmbientColor = RadiosityNormalLightmapColor(l_Bump, _in.UV2) * 2.0;
+        #else
+          float4 l_AmbientColor = tex2D(LightmapTextureSampler,_in.UV2) * 2.0;
+        #endif
+      #else
+        float4 l_AmbientColor = float4(g_AmbientLight,1.0);
+      #endif
+      
+      
+      
+      #if defined( NS_SPECULARMAP )
+        float  l_SpotlightFactor = 1.0;
+        
+        #if defined ( NS_ENVIRONMENT )
+          float l_SpecularTextureValue = tex2D(SpecularTextureSampler,_in.UV).x;
+          if(g_SpecularActive)
+            l_SpotlightFactor;
+        #else
+          if(g_SpecularActive)
+            l_SpotlightFactor = tex2D(SpecularTextureSampler,_in.UV).x;
+        #endif
+      #else
+        #if defined ( NS_ENVIRONMENT )
+          float l_SpecularTextureValue = 1.0;
+        #endif 
+        float  l_SpotlightFactor = 1.0;
+      #endif
+
+      float3 l_EyeDirection = normalize(g_CameraPosition - _in.WorldPosition);
+      l_DiffuseColor = float4(ComputeAllLightsNew( l_Normal, _in.WorldPosition, l_EyeDirection,
+                                                l_DiffuseColor, l_AmbientColor, l_SpotlightFactor * g_SpotlightFactor,
+                                                _in.PosLight,l_DynamicObject)
+                                               ,l_DiffuseColor.a);    
+            
+      #if defined ( NS_ENVIRONMENT )
+        float3 l_ReflectionVector = normalize(reflect(-l_EyeDirection, l_Normal));
+        float4 l_EnvColor = texCUBE(EnvironmentTextureSampler, l_ReflectionVector);
+        //l_DiffuseColor += l_SpotlightFactor * l_EnvColor;
+        //l_DiffuseColor = float4(l_SpotlightFactor, l_SpotlightFactor, l_SpotlightFactor, 1);
+        l_DiffuseColor += g_EnvironmentIntensity * l_SpecularTextureValue * l_EnvColor;
+      #endif
+                                               
+    #endif
+    
+    l_Output.Color = l_DiffuseColor;
+    
+    #if defined( NS_TEX0 )
+      if(g_GlowActive)
+      {
+        l_Output.Glow  = tex2D(GlowTextureSampler,_in.UV) * g_GlowIntensity;
+        l_Output.Glow *= g_GlowIntensity * l_Output.Glow.w;
+        l_Output.Glow = max(0.0, l_Output.Glow);
+        //l_Output.Glow.a = 1.0;
+      } else {
+        l_Output.Glow = float4(0, 0, 0, 0);
+      }
+    #else
       l_Output.Glow = float4(0, 0, 0, 0);
-    }
-  #else
-    l_Output.Glow = float4(0, 0, 0, 0);
+    #endif
   #endif
-  
   
 	return l_Output;
 }
