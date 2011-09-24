@@ -32,6 +32,7 @@ void CDeferredPostSceneRendererStep::Render(CRenderManager* _pRM, CCamera* _pCam
   
   CEffect* l_pEffect = l_pEM->GetResource(m_szEffect);
   CEffect* l_pGeometryEffect = l_pEM->GetResource(m_szGeometryLightShader);
+  //CEffect* l_pGeometryEffect = l_pEM->GetResource("White");
   CEffect* l_pGeometryInsidelEffect = l_pEM->GetResource(m_szGeometryInsideLightShader);
   if(l_pEffect)
   {
@@ -52,11 +53,14 @@ void CDeferredPostSceneRendererStep::Render(CRenderManager* _pRM, CCamera* _pCam
 
         if(l_pGeometryEffect)
         {
+          //TODO optimitzar 
+          _pRM->GetDevice()->Clear(0,0,D3DCLEAR_STENCIL,0,0,0);
+
           Vect3f l_vPosition = l_vLights[i]->GetPosition();
           float l_fRange = l_vLights[i]->GetEndRangeAttenuation();
 
-          Vect3f l_fCamPosition = _pCamera->GetEye();
-          if(1.5f*1.5f*l_fCamPosition.SqDistance(l_vPosition) + _pCamera->GetZn() > l_fRange*l_fRange)
+          //Vect3f l_fCamPosition = _pCamera->GetEye();
+          //if(l_fCamPosition.SqDistance(l_vPosition) + _pCamera->GetZn() > 1.75f*1.75f*l_fRange*l_fRange)
           {
             _pRM->DrawShadedSphere(l_vPosition, l_fRange* 1.5f, l_pGeometryEffect);
 
@@ -68,14 +72,15 @@ void CDeferredPostSceneRendererStep::Render(CRenderManager* _pRM, CCamera* _pCam
           //
           //  continue;
           //}
-          else
-          {
-            if(!ClipOmniLight(l_vLights[i], rect, _pCamera))
-              continue;
-        
-            _pRM->GetDevice()->SetRenderState(D3DRS_SCISSORTESTENABLE, TRUE);
-            _pRM->GetDevice()->SetScissorRect(&rect);
-          }
+          //else
+          //{
+          //  _pRM->GetDevice()->SetRenderState(D3DRS_SCISSORTESTENABLE, FALSE);
+          //  //if(!ClipOmniLight(l_vLights[i], rect, _pCamera))
+          //  //  continue;
+          //  //
+          //  //_pRM->GetDevice()->SetRenderState(D3DRS_SCISSORTESTENABLE, TRUE);
+          //  //_pRM->GetDevice()->SetScissorRect(&rect);
+          //}
         }
         else
         {

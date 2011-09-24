@@ -119,7 +119,7 @@ float3 ComputeAllLightsNew(
         out_ += ComputeLight( _Normal, 
                               l_LightDirection, 
                               l_HalfWayVector, 
-                              g_LightsColor[i] * l_Attenuation, 
+                              (g_LightsColor[i] * l_Attenuation).xyz, 
                               _DiffuseColor, 
                               g_SpecularPow,
                               _SpotlightFactor);
@@ -226,7 +226,7 @@ float3 ComputeLightTangentSpace(float3 _Normal, float3 _Position, float3 _Diffus
       return ComputeLight(_Normal, 
                           l_DirectionToLight, 
                           l_HalfWayVector, 
-                          g_LightsColor[lightID] * l_Attenuation, 
+                          (g_LightsColor[lightID] * l_Attenuation).xyz, 
                           _DiffuseColor, 
                           g_SpecularPow,
                           g_SpotlightFactor);

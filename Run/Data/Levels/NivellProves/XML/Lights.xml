@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <lights ambient="0.3 0.3 0.3">
 
-  <!--light type="omni" name="Omni00" pos="00.0 10.0 00.0" color="1.0 1.0 1.0" att_start_range="20.0" att_end_range="50.0"/-->
   <light type="omni" name="Omni01" pos="10.0 1.0 00.0" color="1.0 0.0 0.0" att_start_range="1.5" att_end_range="2.0"/>
-  <!--
+  
+  <light type="omni" name="Omni00" pos="00.0 10.0 00.0" color="1.0 1.0 1.0" att_start_range="20.0" att_end_range="50.0"/>
   <light type="omni" name="Omni02" pos="10.0 10.0 10.0" color="0.0 1.0 0.0" att_start_range="10.0" att_end_range="15.0"/>
   <light type="omni" name="Omni03" pos="00.0 10.0 10.0" color="0.0 0.0 1.0" att_start_range="10.0" att_end_range="15.0"/>
   <light type="omni" name="Omni04" pos="20.0 10.0 00.0" color="1.0 1.0 0.0" att_start_range="10.0" att_end_range="15.0"/>
   <light type="omni" name="Omni05" pos="00.0 10.0 20.0" color="0.0 1.0 1.0" att_start_range="10.0" att_end_range="15.0"/>
-  -->
+  
 </lights>

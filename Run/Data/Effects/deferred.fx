@@ -221,6 +221,7 @@ PS_OUTPUT NewPS(TNEW_PS _in)
   #define TECHNIQUE_BODY \
     pass p0 {                                            \
       /*Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar*/ \
+      StencilEnable = false;                                \
       ZEnable = true;                                    \
       ZWriteEnable = true;                               \
       ZFunc = LessEqual;                                 \
@@ -236,6 +237,7 @@ PS_OUTPUT NewPS(TNEW_PS _in)
   #define TECHNIQUE_BODY \
     pass p0 {                                            \
       /*Activamos el Zbuffer, el Zwrite y la función de Z’s que queremos utilizar*/ \
+      StencilEnable = false;                                \
       ZEnable = true;                                    \
       ZWriteEnable = true;                               \
       ZFunc = LessEqual;                                 \
@@ -252,6 +254,7 @@ PS_OUTPUT NewPS(TNEW_PS _in)
 #define ALPHA_TECHNIQUE_BODY \
   pass p0 {                                               \
 		/*Activamos el Zbuffer, el Zwrite y la funciÃ³n de Zâ€™s que queremos utilizar*/ \
+    StencilEnable = false;                                \
     ZEnable = true;                                       \
     ZWriteEnable = false;                                 \
     ZFunc = LessEqual;                                    \
@@ -267,6 +270,7 @@ PS_OUTPUT NewPS(TNEW_PS _in)
 	}                                                       \
 	pass p1 {                                               \
 		/*Activamos el Zbuffer, el Zwrite y la funciÃ³n de Zâ€™s que queremos utilizar*/ \
+    StencilEnable = false;                                \
     ZEnable = true;                                       \
     ZWriteEnable = false;                                 \
     ZFunc = LessEqual;                                    \
