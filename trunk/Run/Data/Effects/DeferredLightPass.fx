@@ -59,13 +59,17 @@ struct VS_OUT {
   float4 HPosition : POSITION;
 };
 
-VS_OUT OmniVS(float3 _Position : POSITION)
+VS_OUT GeometryLightVS(float3 _Position : POSITION)
 {
   VS_OUT out_ = (VS_OUT)0;
   out_.HPosition = mul(float4(_Position,1.0), g_WorldViewProjectionMatrix );
-  out_.HPosition /= out_.HPosition.w;
+  //out_.HPosition.xy /= out_.HPosition.w;
+  //out_.HPosition.w = 1.0;
   
-  out_.uv = out_.HPosition.xy;
+  //if(out_.HPosition.z > 
+  out_.HPosition.z = min(out_.HPosition.z, out_.HPosition.w);
+  
+  out_.uv = out_.HPosition.xy / out_.HPosition.w;
   
   out_.uv = out_.uv * 0.5 + 0.5;
   
@@ -77,12 +81,17 @@ VS_OUT OmniVS(float3 _Position : POSITION)
 }
 
 
-float4 DeferredLightPassPS(float2 _UV: TEXCOORD0) : COLOR
+float4 DeferredLightPassPS(float2 _vpos: VPOS) : COLOR
 {
+
+  float2 _UV = _vpos;
+  _UV.x /= g_TextureWidth;
+  _UV.y /= g_TextureHeight;
+  
   float z = tex2D(DepthTextureSampler, _UV).x;
   if(z == 0) discard;
   
-	float3 l_DiffuseColor = tex2D(ColorTextureSampler, _UV);
+	float3 l_DiffuseColor = tex2D(ColorTextureSampler, _UV).xyz;
   
   float4 l_NormalTextureValue = tex2D(NormalsTextureSampler, _UV);
   
@@ -156,7 +165,7 @@ float4 DeferredLightPassPS(float2 _UV: TEXCOORD0) : COLOR
   float3 l_LightResult = ComputeLight( l_vWorldNrm, 
                         l_LightDirection, 
                         l_HalfWayVector, 
-                        g_LightColor * l_Attenuation, 
+                        (g_LightColor * l_Attenuation).xyz, 
                         l_DiffuseColor, 
                         l_SpecularPow,
                         l_SpecularFactor); //_SpotlightFactor); 
@@ -177,11 +186,16 @@ float4 DeferredLightPassPS(float2 _UV: TEXCOORD0) : COLOR
 	return float4(l_LightResult,1.0);
 }
 
-float4 white(float2 _UV: TEXCOORD0) : COLOR
+float4 white(float2 _vpos: VPOS) : COLOR
 {
+
+  float2 _UV = _vpos;
+  _UV.x /= g_TextureWidth;
+  _UV.y /= g_TextureHeight;
 	float3 l_DiffuseColor = tex2D(ColorTextureSampler, _UV);
   //return float4(_UV.xy, 0, 1);
   return float4(l_DiffuseColor,1.0);
+  //return float4(1, 1, 1, 1);
 }
 
 technique DeferredLightPassTechnique
@@ -199,7 +213,95 @@ technique DeferredLightPassTechnique
 		PixelShader  = compile ps_3_0 DeferredLightPassPS();
 	}
 }
-
+/*
+technique DeferredGeometryLightPassTechnique
+{
+	pass p0
+	{
+		ZEnable = true;
+    ZFunc = Greater;
+		ZWriteEnable = false;
+		AlphaBlendEnable = true;
+		SrcBlend = One;
+		DestBlend = One;
+		AlphaTestEnable = false;	
+		CullMode = CW;
+    
+		VertexShader = compile vs_3_0 GeometryLightVS();
+		//PixelShader  = compile ps_3_0 DeferredLightPassPS();
+    
+		PixelShader  = compile ps_3_0 white();
+	}
+}
+*/
+technique DeferredGeometryLightPassTechnique
+{
+	pass p0
+	{
+		ZEnable = true;
+    ZFunc   = LESS;
+		ZWriteEnable = false;
+		AlphaBlendEnable = false;
+		AlphaTestEnable = false;	
+		CullMode = None;
+    
+    StencilEnable = true;
+    TwoSidedStencilMode = false;
+    StencilRef = 1;
+    StencilMask			= 0xFFFFFFFF;
+    StencilWriteMask	= 0xFFFFFFFF;
+    // stencil settings for front facing triangles
+    StencilFunc			= Always;
+    StencilZFail		= Replace;
+    StencilPass			= Keep;
+    StencilFail			= Keep;
+    // stencil settings for back facing triangles 
+    Ccw_StencilFunc		= Always;
+    Ccw_StencilZFail	= Replace;
+    Ccw_StencilPass		= Keep;
+    Ccw_StencilFail		= Keep;
+    
+    ColorWriteEnable = 0x00000000;
+    
+		VertexShader = compile vs_3_0 GeometryLightVS();
+		PixelShader  = null;
+	}
+  
+	pass p1
+	{
+		ZEnable = false;
+		ZWriteEnable = false;
+		AlphaBlendEnable = true;
+		SrcBlend = One;
+		DestBlend = One;
+		AlphaTestEnable = false;	
+		CullMode = CW;
+    
+    StencilEnable = true;
+    TwoSidedStencilMode = true;
+    // stencil settings for front facing triangles
+    StencilFunc			= Equal;
+    StencilZFail		= Keep;
+    StencilPass			= Keep;
+    StencilFail			= Keep;
+    // stencil settings for back facing triangles 
+    Ccw_StencilFunc		= Equal;
+    Ccw_StencilZFail	= Keep;
+    Ccw_StencilPass		= Keep;
+    Ccw_StencilFail		= Keep;
+    StencilRef = 1;
+    StencilMask			= 0xFFFFFFFF;
+    StencilWriteMask	= 0xFFFFFFFF;
+    
+    ColorWriteEnable = 0x0000000f;
+    
+		VertexShader = compile vs_3_0 GeometryLightVS();
+		PixelShader  = compile ps_3_0 DeferredLightPassPS();
+    
+		//PixelShader  = compile ps_3_0 white();
+	}
+}
+/*
 technique DeferredGeometryLightPassTechnique
 {
 	pass p0
@@ -212,12 +314,12 @@ technique DeferredGeometryLightPassTechnique
 		DestBlend = One;
 		AlphaTestEnable = false;	
 		CullMode = CCW;
-		VertexShader = compile vs_3_0 OmniVS();
+		VertexShader = compile vs_3_0 GeometryLightVS();
 		PixelShader  = compile ps_3_0 DeferredLightPassPS();
 		//PixelShader  = compile ps_3_0 white();
 	}
 }
-
+*/
 technique DeferredGeometryInsideLightPassTechnique
 {
 	pass p0
@@ -230,8 +332,86 @@ technique DeferredGeometryInsideLightPassTechnique
 		DestBlend = One;
 		AlphaTestEnable = false;	
 		CullMode = CW;
-		VertexShader = compile vs_3_0 OmniVS();
-		PixelShader  = compile ps_3_0 DeferredLightPassPS();
-		//PixelShader  = compile ps_3_0 white();
+		VertexShader = compile vs_3_0 GeometryLightVS();
+		//PixelShader  = compile ps_3_0 DeferredLightPassPS();
+		PixelShader  = compile ps_3_0 white();
 	}
 }
+
+/*
+//Deferred.fx
+technique StencilConvexLight
+{	
+  pass Pass0_DoubleSidedStencil	
+  {		
+    VertexShader		= compile vs_2_0 pos_vs_main();        
+    PixelShader			= null;                
+    ColorWriteEnable	= 0x0;        
+    CullMode			= none;                
+    // Disable writing to the frame buffer        
+    AlphaBlendEnable	= true;        
+    SrcBlend			= Zero;
+    DestBlend			= One;
+    // Disable writing to depth buffer
+    ZWriteEnable		= false;
+    ZEnable				= true;
+    ZFunc				= Less;
+    // Setup stencil states
+    StencilEnable		= true;
+    TwoSidedStencilMode = true;
+    StencilRef			= 1;
+    StencilMask			= 0xFFFFFFFF;
+    StencilWriteMask	= 0xFFFFFFFF;
+    // stencil settings for front facing triangles
+    StencilFunc			= Always;
+    StencilZFail		= Incr;
+    StencilPass			= Keep;
+    // stencil settings for back facing triangles 
+    Ccw_StencilFunc		= Always;
+    Ccw_StencilZFail	= Decr;
+    Ccw_StencilPass		= Keep;
+  }
+  pass Pass1_PointLightDiffuse
+	{
+    VertexShader	= compile vs_3_0 pos_vs_main();
+		PixelShader		= compile ps_3_0 Pass4_diffuse_point_ps_main();
+    ZEnable			= false;
+		ZWriteEnable	= false;
+    AlphaBlendEnable = true;
+    SrcBlend		= One;
+    DestBlend		= One;
+    CullMode		= CW;
+    ColorWriteEnable = 0xFFFFFFFF;
+    StencilEnable	= true;
+    TwoSidedStencilMode = false;
+    StencilFunc		= Equal;
+		StencilFail		= Keep;
+		StencilZFail	= Keep;
+		StencilPass		= Keep;
+		StencilRef		= 0;
+		StencilMask		= 0xFFFFFFFF;
+    StencilWriteMask = 0xFFFFFFFF;
+  }
+  pass Pass2_ShowStencilResult
+	{
+    VertexShader	= compile vs_3_0 pos_vs_main();
+		PixelShader		= compile ps_3_0 stencil_bright_light_ps_main();
+    ZEnable			= false;
+		ZWriteEnable	= false;
+    AlphaBlendEnable = true;
+    SrcBlend		= One;
+    DestBlend		= One;
+    CullMode		= CW;	
+    ColorWriteEnable = 0xFFFFFFFF;  
+		StencilEnable	= true;  	
+    TwoSidedStencilMode = false;   
+    StencilFunc		= Equal;	
+    StencilFail		= Keep;		
+    StencilZFail	= Keep;	
+    StencilPass		= Keep;	
+    StencilRef		= 0;		
+    StencilMask		= 0xFFFFFFFF;    
+    StencilWriteMask = 0xFFFFFFFF;	
+  }
+}
+*/

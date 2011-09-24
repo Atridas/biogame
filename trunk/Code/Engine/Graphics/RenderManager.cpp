@@ -185,7 +185,7 @@ bool CRenderManager::InitPostRenderTargets()
   }
 
   {
-    SSIMPLEVERTEX l_VertexBuffer[(SPHERE_STACKS+1)*(SPHERE_SLICES+1)];
+    /*SSIMPLEVERTEX l_VertexBuffer[(SPHERE_STACKS+1)*(SPHERE_SLICES+1)];
     int cont = 0;
     for (int stackNumber = 0; stackNumber <= SPHERE_STACKS; ++stackNumber)
     {
@@ -245,6 +245,69 @@ bool CRenderManager::InitPostRenderTargets()
                                                           l_iIndexBuffer,
                                                           (SPHERE_STACKS+1)*(SPHERE_SLICES+1), 
                                                           SPHERE_STACKS * (SPHERE_SLICES+1) * 6);
+
+                                                          */
+
+    uint16 l_iIndexBuffer[] = {
+        1,  2,  0,
+        2,  3,  0,
+        3,  4,  0,
+        4,  5,  0,
+        5,  1,  0,
+
+        6,  11, 7,
+        7,  11, 8,
+        8,  11, 9,
+        9,  11, 10,
+        10, 11, 6,
+
+        2,  1,  6,
+        3,  2,  7,
+        4,  3,  8,
+        5,  4,  9,
+        1,  5,  10,
+                
+        7,  2,  6,
+        8,  3,  7,
+        9,  4,  8,
+        10, 5,  9,
+        6,  1,  10 };
+
+    float Verts[] = {
+         0.000f,  0.000f,  1.000f,
+         0.894f,  0.000f,  0.447f,
+         0.276f,  0.851f,  0.447f,
+        -0.724f,  0.526f,  0.447f,
+        -0.724f, -0.526f,  0.447f,
+         0.276f, -0.851f,  0.447f,
+         0.724f,  0.526f, -0.447f,
+        -0.276f,  0.851f, -0.447f,
+        -0.894f,  0.000f, -0.447f,
+        -0.276f, -0.851f, -0.447f,
+         0.724f, -0.526f, -0.447f,
+         0.000f,  0.000f, -1.000f };
+
+    SSIMPLEVERTEX l_VertexBuffer[12];
+    for(int i = 0; i < 12; ++i)
+    {
+      l_VertexBuffer[i].x = Verts[i*3 + 0];
+      l_VertexBuffer[i].y = Verts[i*3 + 1];
+      l_VertexBuffer[i].z = Verts[i*3 + 2];
+    }
+
+    const int l_iNumIndexos = sizeof(l_iIndexBuffer) / sizeof(l_iIndexBuffer[0]);
+
+    //VertexCacheOptimisation( l_VertexBuffer, l_iIndexBuffer, 
+    //                         12, 
+    //                         l_iNumIndexos,
+    //                         sizeof(SSIMPLEVERTEX) );
+
+    m_pSphereVertex = new CIndexedVertexs<SSIMPLEVERTEX>( this,
+                                                          (char*)l_VertexBuffer,
+                                                          l_iIndexBuffer,
+                                                          12, 
+                                                          l_iNumIndexos);
+
   }
   return true;
 }
