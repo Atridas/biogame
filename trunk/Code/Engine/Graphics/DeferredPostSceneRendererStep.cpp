@@ -34,6 +34,9 @@ void CDeferredPostSceneRendererStep::Render(CRenderManager* _pRM, CCamera* _pCam
   CEffect* l_pGeometryEffect = l_pEM->GetResource(m_szGeometryLightShader);
   //CEffect* l_pGeometryEffect = l_pEM->GetResource("White");
   CEffect* l_pGeometryInsidelEffect = l_pEM->GetResource(m_szGeometryInsideLightShader);
+  int l_iStencilBits = _pRM->GetStencilBits();
+  int l_iLastLight = l_iStencilBits - 1;
+  LPDIRECT3DDEVICE9 l_pDevice = _pRM->GetDevice();
   if(l_pEffect)
   {
     ActivateInputSamplers();
@@ -53,8 +56,15 @@ void CDeferredPostSceneRendererStep::Render(CRenderManager* _pRM, CCamera* _pCam
 
         if(l_pGeometryEffect)
         {
-          //TODO optimitzar 
-          _pRM->GetDevice()->Clear(0,0,D3DCLEAR_STENCIL,0,0,0);
+          l_iLastLight++;
+          if(l_iLastLight == l_iStencilBits)
+          {
+            l_pDevice->Clear(0,0,D3DCLEAR_STENCIL,0,0,0);
+            l_iLastLight = 0;
+          }
+          uint32 mask = 1 << l_iLastLight;
+          l_pDevice->SetRenderState(D3DRS_STENCILMASK, mask);
+          l_pDevice->SetRenderState(D3DRS_STENCILWRITEMASK, mask);
 
           Vect3f l_vPosition = l_vLights[i]->GetPosition();
           float l_fRange = l_vLights[i]->GetEndRangeAttenuation();
@@ -114,6 +124,7 @@ void CDeferredPostSceneRendererStep::Render(CRenderManager* _pRM, CCamera* _pCam
 
     DeactivateInputSamplers();
     _pRM->GetDevice()->SetRenderState(D3DRS_SCISSORTESTENABLE, FALSE);
+    l_pDevice->SetRenderState(D3DRS_STENCILENABLE, false);
   }
 }
 /*

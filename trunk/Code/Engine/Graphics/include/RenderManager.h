@@ -32,7 +32,7 @@ public:
                                                   m_pCamera(0), m_pParticleVertex(0),
                                                   m_pBackBuffer(0),m_pDefaultDepthStencilBuffer(0),
                                                   m_pSettedBackBuffer(0),m_pSettedDepthStencilBuffer(0),
-                                                  m_pSphereVertex(0)
+                                                  m_pSphereVertex(0), m_iStencilBits(8)
                                                                                   {};
 
 
@@ -104,6 +104,8 @@ public:
   uint32                  GetScreenWidth          () const {return m_uWidth;};
   uint32                  GetScreenHeight         () const {return m_uHeight;};
 
+  uint16                  GetStencilBits          () const {return m_iStencilBits;};
+
   LPDIRECT3DDEVICE9       GetDevice               () const {return m_pD3DDevice;};
   CCamera*                GetCamera               () const {return m_pCamera;};
   const CFrustum&         GetFrustum              () const {return m_Frustum;};
@@ -142,5 +144,5 @@ private:
   LPDIRECT3DSURFACE9      m_pSettedBackBuffer;
   LPDIRECT3DSURFACE9      m_pSettedDepthStencilBuffer;
 
-
+  uint16 m_iStencilBits;
 };

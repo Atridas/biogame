@@ -59,25 +59,14 @@ struct VS_OUT {
   float4 HPosition : POSITION;
 };
 
-VS_OUT GeometryLightVS(float3 _Position : POSITION)
+float4 GeometryLightVS(float3 _Position : POSITION) : POSITION
 {
-  VS_OUT out_ = (VS_OUT)0;
-  out_.HPosition = mul(float4(_Position,1.0), g_WorldViewProjectionMatrix );
-  //out_.HPosition.xy /= out_.HPosition.w;
-  //out_.HPosition.w = 1.0;
+  float4 HPosition_ = mul(float4(_Position,1.0), g_WorldViewProjectionMatrix );
   
-  //if(out_.HPosition.z > 
-  out_.HPosition.z = min(out_.HPosition.z, out_.HPosition.w);
+  // fem que la llum mai "desaparegui" per el final del frustum
+  HPosition_.z = min(HPosition_.z, HPosition_.w);
   
-  out_.uv = out_.HPosition.xy / out_.HPosition.w;
-  
-  out_.uv = out_.uv * 0.5 + 0.5;
-  
-  out_.uv.y = 1 - out_.uv.y;
-  
-  
-  
-  return out_;
+  return HPosition_;
 }
 
 
@@ -85,8 +74,8 @@ float4 DeferredLightPassPS(float2 _vpos: VPOS) : COLOR
 {
 
   float2 _UV = _vpos;
-  _UV.x /= g_TextureWidth;
-  _UV.y /= g_TextureHeight;
+  _UV.x /= g_TextureWidth  - 1.0;
+  _UV.y /= g_TextureHeight - 1.0;
   
   float z = tex2D(DepthTextureSampler, _UV).x;
   if(z == 0) discard;
@@ -194,8 +183,8 @@ float4 white(float2 _vpos: VPOS) : COLOR
   _UV.y /= g_TextureHeight;
 	float3 l_DiffuseColor = tex2D(ColorTextureSampler, _UV);
   //return float4(_UV.xy, 0, 1);
-  return float4(l_DiffuseColor,1.0);
-  //return float4(1, 1, 1, 1);
+  //return float4(l_DiffuseColor,1.0);
+  return float4(1, 1, 1, 1);
 }
 
 technique DeferredLightPassTechnique
@@ -247,17 +236,17 @@ technique DeferredGeometryLightPassTechnique
     
     StencilEnable = true;
     TwoSidedStencilMode = false;
-    StencilRef = 1;
-    StencilMask			= 0xFFFFFFFF;
-    StencilWriteMask	= 0xFFFFFFFF;
+    StencilRef = 0;
+    //StencilMask			= 0x0000000F;
+    //StencilWriteMask	= 0x0000000F;
     // stencil settings for front facing triangles
     StencilFunc			= Always;
-    StencilZFail		= Replace;
+    StencilZFail		= Invert;
     StencilPass			= Keep;
     StencilFail			= Keep;
     // stencil settings for back facing triangles 
     Ccw_StencilFunc		= Always;
-    Ccw_StencilZFail	= Replace;
+    Ccw_StencilZFail	= Invert;
     Ccw_StencilPass		= Keep;
     Ccw_StencilFail		= Keep;
     
@@ -280,18 +269,18 @@ technique DeferredGeometryLightPassTechnique
     StencilEnable = true;
     TwoSidedStencilMode = true;
     // stencil settings for front facing triangles
-    StencilFunc			= Equal;
+    StencilFunc			= Less;
     StencilZFail		= Keep;
     StencilPass			= Keep;
     StencilFail			= Keep;
     // stencil settings for back facing triangles 
-    Ccw_StencilFunc		= Equal;
+    Ccw_StencilFunc		= Less;
     Ccw_StencilZFail	= Keep;
     Ccw_StencilPass		= Keep;
     Ccw_StencilFail		= Keep;
-    StencilRef = 1;
-    StencilMask			= 0xFFFFFFFF;
-    StencilWriteMask	= 0xFFFFFFFF;
+    StencilRef = 0;
+    //StencilMask			= 0x0000000F;
+    //StencilWriteMask	= 0x0000000F;
     
     ColorWriteEnable = 0x0000000f;
     

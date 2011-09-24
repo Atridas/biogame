@@ -50,6 +50,8 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
 		d3dpp.Flags						= D3DPRESENTFLAG_DISCARD_DEPTHSTENCIL;
 		d3dpp.PresentationInterval		= D3DPRESENT_INTERVAL_IMMEDIATE;
 
+    m_iStencilBits = 8;
+
 		// Create the D3DDevice
 		SetOk(!FAILED(	m_pD3D->CreateDevice(	D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, _hWnd,
 												D3DCREATE_HARDWARE_VERTEXPROCESSING, &d3dpp, &m_pD3DDevice ) ));
@@ -297,10 +299,10 @@ bool CRenderManager::InitPostRenderTargets()
 
     const int l_iNumIndexos = sizeof(l_iIndexBuffer) / sizeof(l_iIndexBuffer[0]);
 
-    //VertexCacheOptimisation( l_VertexBuffer, l_iIndexBuffer, 
-    //                         12, 
-    //                         l_iNumIndexos,
-    //                         sizeof(SSIMPLEVERTEX) );
+    VertexCacheOptimisation( l_VertexBuffer, l_iIndexBuffer, 
+                             12, 
+                             l_iNumIndexos,
+                             sizeof(SSIMPLEVERTEX) );
 
     m_pSphereVertex = new CIndexedVertexs<SSIMPLEVERTEX>( this,
                                                           (char*)l_VertexBuffer,
