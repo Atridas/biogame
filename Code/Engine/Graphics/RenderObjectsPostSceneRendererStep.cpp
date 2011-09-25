@@ -2,6 +2,7 @@
 #include "SceneRendererStep.h"
 #include "RenderManager.h"
 #include "Core.h"
+#include "EffectManager.h"
 
 bool CRenderObjectsPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer, const string& _szDefaultRenderTarget)
 {
@@ -40,5 +41,6 @@ void CRenderObjectsPostSceneRendererStep::Render(CRenderManager* _pRM, CCamera* 
                                                  const vector<CObject3DRenderable*>& _vAlphaObjects,
                                                  const vector<CObject3DRenderable*>& _vParticleEmiters)
 {
+  CORE->GetEffectManager()->SetViewport(m_iPos.x, m_iPos.y, m_iSize.x, m_iSize.y);
   m_pSceneRendererStep->Render(_pRM, _pCamera,_vOpaqueObjects,_vAlphaObjects,_vParticleEmiters);
 }

@@ -137,7 +137,12 @@ Mat33f GetRotationFromOrientationToOrientation(
   assert(abs(_vOriginalDir.SquaredLength() - 1.f) < 0.01f && abs(_vDestinationDir.SquaredLength() - 1.f) < 0.01f && "GetRotationFromOrientationToOrientation _vOriginalDir i _vDestinationDir cal que siguin unitaris");
   assert(abs(_vOriginalUp.SquaredLength() - 1.f)  < 0.01f && abs(_vDestinationUp.SquaredLength() - 1.f)  < 0.01f && "GetRotationFromOrientationToOrientation _vOriginalUp i _vDestinationUp cal que siguin unitaris");
 
-  //TODO 
-  return GetFastestRotationFromDirToDir(_vOriginalDir, _vDestinationDir);
+  Mat33f m1 = GetFastestRotationFromDirToDir(_vOriginalDir, _vDestinationDir);
+
+  Vect3f l_vTransformedUp = m1 * _vOriginalUp;
+
+  Mat33f m2 = GetFastestRotationFromDirToDir(l_vTransformedUp, _vDestinationUp);
+
+  return m2 * m1;
 }
 

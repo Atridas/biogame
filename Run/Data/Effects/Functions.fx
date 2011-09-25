@@ -314,22 +314,6 @@ void CalcAnimatedNormalTangent(float3 Normal,
 	OutTangent = normalize(OutTangent);
 }
 
-// --------------------------------------------------------------------------------------------------------------------------------
-
-
-
-float3 PositionFromZ(float z, float2 uv)
-{
-  float x_p = (uv.x - 0.5) * 2;
-  float y_p = (0.5 - uv.y) * 2;
-  //float z_h = _UV.y * z;
-  
-  float4 view = mul( g_InvProjectionMatrix, float4(x_p,y_p,1,1) );
-  
-  float lamda = -z * view.z / view.w;
-
-  return float3(view.x * lamda, view.y * lamda, z);
-}
 
 // --------------------------------------------------------------------------------------------------------------------------------
 
@@ -359,6 +343,38 @@ float4x4 GetWorldMatrix(float4 WorldMatrix0, float4 WorldMatrix1, float4 WorldMa
                  */
   //float4x4 aux = g_WorldMatrix;
   return aux;
+}
+// --------------------------------------------------------------------------------------------------------------------------------
+
+
+/*
+float3 PositionFromZ(float z, float2 uv)
+{
+  float x_p = (uv.x - 0.5) * 2;
+  float y_p = (0.5 - uv.y) * 2;
+  //float z_h = _UV.y * z;
+  
+  float4 view = mul( g_InvProjectionMatrix, float4(x_p,y_p,1,1) );
+  
+  float lamda = -z * view.z / view.w;
+
+  return float3(view.x * lamda, view.y * lamda, z);
+}
+*/
+float3 PositionFromZ(float z, float2 uv)
+{
+  float x_p = (uv.x - 0.5) * 2;
+  float y_p = (0.5 - uv.y) * 2;
+  //float z_h = _UV.y * z;
+  
+  //float z_h = mul( float4(0,0,z,0), g_ProjectionMatrix ).z;
+  
+  //float4 view = mul( g_InvProjectionMatrix, float4(x_p * z, y_p * z, 0, z) );
+  float4 view = mul(float4(x_p * z, y_p * z, 0, z) , g_InvProjectionMatrix );
+  
+  //float lamda = -z * view.z / view.w;
+
+  return float3(view.x, view.y, z);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------------------------

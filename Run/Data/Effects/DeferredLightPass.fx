@@ -73,9 +73,12 @@ float4 GeometryLightVS(float3 _Position : POSITION) : POSITION
 float4 DeferredLightPassPS(float2 _vpos: VPOS) : COLOR
 {
 
-  float2 _UV = _vpos;
-  _UV.x /= g_TextureWidth  - 1.0;
-  _UV.y /= g_TextureHeight - 1.0;
+  float2 _UV = _vpos - float2(g_ViewportX, g_ViewportY);
+  _UV.x /= g_ViewportWidth ;
+  _UV.y /= g_ViewportHeight;
+  
+  _UV.x += 0.5 / g_ViewportWidth;
+  _UV.y += 0.5 / g_ViewportHeight;
   
   float z = tex2D(DepthTextureSampler, _UV).x;
   if(z == 0) discard;

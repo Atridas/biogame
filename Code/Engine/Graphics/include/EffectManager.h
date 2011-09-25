@@ -32,6 +32,10 @@ public:
                     m_pCalHardwareModel(0),
                     m_iTextureWidth(0),
                     m_iTextureHeight(0),
+                    m_iViewportX(0),
+                    m_iViewportY(0),
+                    m_iViewportWidth(0),
+                    m_iViewportHeight(0),
                     m_bWorldMatrixUpdated(false),
                     m_bProjectionMatrixUpdated(false),
                     m_bViewMatrixUpdated(false),
@@ -59,6 +63,7 @@ public:
                     m_bTimeUpdated(false),
                     m_bSpriteSizeUpdated(false),
                     m_bHDRParamsUpdated(true),
+                    m_bViewportUpdated(true),
                     m_fTime(0.0f),
                     m_fEnvironmentIntensity(0.f),
                     m_fGlossiness(0.f),
@@ -163,6 +168,8 @@ public:
   void SetSkeleton(CalSkeleton* _pSkeleton, CalHardwareModel* _pCalHardwareModel) {m_pCalSkeleton = _pSkeleton; m_pCalHardwareModel = _pCalHardwareModel; m_bSkeletonUpdated = true;};
   void SetTextureWidthHeight(int _iWidth, int _iHeight) {m_iTextureWidth  = _iWidth; m_iTextureHeight = _iHeight; m_bTextureWidthHeightUpdated = true;};
   void GetTextureWidthHeight(int& _iWidth, int& _iHeight) {_iWidth = m_iTextureWidth; _iHeight = m_iTextureHeight;};
+  void SetViewport(int  _iX, int  _iY, int  _iWidth, int  _iHeight) {m_iViewportX  = _iX; m_iViewportY = _iY; m_iViewportWidth  = _iWidth; m_iViewportHeight = _iHeight; m_bViewportUpdated = true;};
+  void GetViewport(int& _iX, int& _iY, int& _iWidth, int& _iHeight) {_iX = m_iViewportX; _iY = m_iViewportY; _iWidth = m_iViewportWidth; _iHeight = m_iViewportHeight;};
   void SetAlphaFactor(float _fAlphaFactor) {m_fAlphaFactor = _fAlphaFactor; m_bAlphaFactorUpdated = true;};
   void SetTime(float _bTime) {m_fTime = _bTime; m_bTimeUpdated = true;};
   void SetGlow(bool _bGlow) {m_bGlowActive = _bGlow; m_bGlowUpdated = true;};
@@ -218,6 +225,10 @@ private:
   
   int m_iTextureWidth;
   int m_iTextureHeight;
+  int m_iViewportX;
+  int m_iViewportY;
+  int m_iViewportWidth;
+  int m_iViewportHeight;
   float m_fAlphaFactor;
 
   float m_pfPoissonBlurKernel[32];
@@ -236,6 +247,7 @@ private:
   bool m_bCameraRightUpdated;
   bool m_bSkeletonUpdated;
   bool m_bTextureWidthHeightUpdated;
+  bool m_bViewportUpdated;
   bool m_bAlphaFactorUpdated;
   bool m_bPoissonBlurKernelUpdated;
   bool m_bSpecularParamsUpdated;
