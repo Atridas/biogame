@@ -3,6 +3,9 @@
 #include "RenderManager.h"
 #include "SpotLight.h"
 #include "FPSCamera.h"
+#include "Core.h"
+#include "EffectManager.h"
+
 #include <d3d9.h>
 
 void CDirectionalLight::Init(CXMLTreeNode& _XMLParams)

@@ -158,159 +158,166 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
 
 bool CRenderManager::InitPostRenderTargets()
 {
+  SPARTICLE_VERTEX l_ParticleVertexBuffer[4];
+
+  l_ParticleVertexBuffer[0].x = -1;
+  l_ParticleVertexBuffer[0].y = -1;
+  l_ParticleVertexBuffer[0].z =  0;
+
+  l_ParticleVertexBuffer[1].x =  1;
+  l_ParticleVertexBuffer[1].y = -1;
+  l_ParticleVertexBuffer[1].z =  0;
+
+  l_ParticleVertexBuffer[2].x = -1;
+  l_ParticleVertexBuffer[2].y =  1;
+  l_ParticleVertexBuffer[2].z =  0;
+
+  l_ParticleVertexBuffer[3].x =  1;
+  l_ParticleVertexBuffer[3].y =  1;
+  l_ParticleVertexBuffer[3].z =  0;
+
+  uint16 l_iParticleIndex[6] = {0,2,1,1,2,3};
+
+  m_pParticleVertex = new CIndexedVertexs<SPARTICLE_VERTEX>(  this,
+                                                              (char*)l_ParticleVertexBuffer,
+                                                              l_iParticleIndex,
+                                                              4, 
+                                                              6);
+  
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  const int vertexnum = SPHERE_STACKS*SPHERE_SLICES + 2;
+  SSIMPLEVERTEX l_SphereVertexBuffer[vertexnum];
+    
+  l_SphereVertexBuffer[SPHERE_STACKS*SPHERE_SLICES + 0].x =  0;
+  l_SphereVertexBuffer[SPHERE_STACKS*SPHERE_SLICES + 0].y = -1;
+  l_SphereVertexBuffer[SPHERE_STACKS*SPHERE_SLICES + 0].z =  0;
+
+  l_SphereVertexBuffer[SPHERE_STACKS*SPHERE_SLICES + 1].x =  0;
+  l_SphereVertexBuffer[SPHERE_STACKS*SPHERE_SLICES + 1].y =  1;
+  l_SphereVertexBuffer[SPHERE_STACKS*SPHERE_SLICES + 1].z =  0;
+    
+  for(uint32 l_iStack = 0; l_iStack < SPHERE_STACKS; ++l_iStack)
   {
-    SPARTICLE_VERTEX l_VertexBuffer[4];
+    for(uint32 l_iSlice = 0; l_iSlice < SPHERE_SLICES; ++l_iSlice)
+    {
+      int cont = l_iStack * SPHERE_SLICES + l_iSlice;
 
-    l_VertexBuffer[0].x = -1;
-    l_VertexBuffer[0].y = -1;
-    l_VertexBuffer[0].z =  0;
+      float theta = (l_iStack + 1.f) / (SPHERE_STACKS + 1.f);
+      theta = (theta - .5f) * FLOAT_PI_VALUE;
+      float phi = (float)l_iSlice / SPHERE_SLICES;
+      phi *= 2 * FLOAT_PI_VALUE;
+        
+      float sinTheta = sin(theta);
+      float sinPhi = sin(phi);
+      float cosTheta = cos(theta);
+      float cosPhi = cos(phi);
 
-    l_VertexBuffer[1].x =  1;
-    l_VertexBuffer[1].y = -1;
-    l_VertexBuffer[1].z =  0;
-
-    l_VertexBuffer[2].x = -1;
-    l_VertexBuffer[2].y =  1;
-    l_VertexBuffer[2].z =  0;
-
-    l_VertexBuffer[3].x =  1;
-    l_VertexBuffer[3].y =  1;
-    l_VertexBuffer[3].z =  0;
-
-    uint16 l_iIndex[6] = {0,2,1,1,2,3};
-
-    m_pParticleVertex = new CIndexedVertexs<SPARTICLE_VERTEX>(  this,
-                                                                (char*)l_VertexBuffer,
-                                                                l_iIndex,
-                                                                4, 
-                                                                6);
+      l_SphereVertexBuffer[cont].x = cosPhi * cosTheta;
+      l_SphereVertexBuffer[cont].y = sinTheta;
+      l_SphereVertexBuffer[cont].z = sinPhi * cosTheta;
+    }
   }
-
+    
+  const int indexnum = (SPHERE_STACKS-1) * SPHERE_SLICES * 6 + SPHERE_SLICES * 6;
+  uint16 l_iSphereIndexBuffer[indexnum];
+  for(uint32 l_iStack = 0; l_iStack < SPHERE_STACKS-1; ++l_iStack)
   {
-    /*SSIMPLEVERTEX l_VertexBuffer[(SPHERE_STACKS+1)*(SPHERE_SLICES+1)];
-    int cont = 0;
-    for (int stackNumber = 0; stackNumber <= SPHERE_STACKS; ++stackNumber)
+    for(uint32 l_iSlice = 0; l_iSlice < SPHERE_SLICES; ++l_iSlice)
     {
-      for (int sliceNumber = 0; sliceNumber <= SPHERE_SLICES; ++sliceNumber) 
-      {
-        float theta = (float)(stackNumber * FLOAT_PI_VALUE / SPHERE_STACKS);
-        float phi = (float)(sliceNumber * 2 * FLOAT_PI_VALUE / SPHERE_SLICES);
-        float sinTheta = sin(theta);
-        float sinPhi = sin(phi);
-        float cosTheta = cos(theta);
-        float cosPhi = cos(phi);
+      int cont = l_iStack * SPHERE_SLICES + l_iSlice;
         
-        l_VertexBuffer[cont].x = cosPhi * sinTheta;
-        l_VertexBuffer[cont].y = sinPhi * sinTheta;
-        l_VertexBuffer[cont].z = cosTheta;
+      int p0 = l_iStack       * SPHERE_SLICES + l_iSlice;
+      int p1 = (l_iStack + 1) * SPHERE_SLICES + l_iSlice;
+      int p2 = (l_iStack + 1) * SPHERE_SLICES + ((l_iSlice + 1) % SPHERE_SLICES);
+      int p3 = l_iStack       * SPHERE_SLICES + ((l_iSlice + 1) % SPHERE_SLICES);
         
-        cont++;
-      }
+      l_iSphereIndexBuffer[cont * 6 + 0] = p0;
+      l_iSphereIndexBuffer[cont * 6 + 1] = p1;
+      l_iSphereIndexBuffer[cont * 6 + 2] = p2;
+      l_iSphereIndexBuffer[cont * 6 + 3] = p0;
+      l_iSphereIndexBuffer[cont * 6 + 4] = p2;
+      l_iSphereIndexBuffer[cont * 6 + 5] = p3;
     }
-    
-    int slicesMod = SPHERE_SLICES+1;
-    
-    uint16 l_iIndexBuffer[SPHERE_STACKS * (SPHERE_SLICES+1) * 6];
-    cont = 0;
-    for (int stackNumber = 0; stackNumber < SPHERE_STACKS; ++stackNumber)
-    {
-      for (int sliceNumber = 0; sliceNumber <= SPHERE_SLICES; ++sliceNumber)
-      {
-        //indexBuffer.add((stackNumber * slices) + (sliceNumber % slices));
-        //indexBuffer.add(((stackNumber + 1) * slices) + (sliceNumber % slices));
-        
-        l_iIndexBuffer[(cont * 6) + 0] = (stackNumber * slicesMod) + (sliceNumber % slicesMod);
-        l_iIndexBuffer[(cont * 6) + 1] = ((stackNumber + 1) % SPHERE_STACKS * slicesMod) + (sliceNumber % slicesMod);
-        l_iIndexBuffer[(cont * 6) + 2] = ((stackNumber + 1) % SPHERE_STACKS * slicesMod) + ((sliceNumber+1) % slicesMod);
-        
-        l_iIndexBuffer[(cont * 6) + 3] = (stackNumber * slicesMod) + (sliceNumber % slicesMod);
-        l_iIndexBuffer[(cont * 6) + 4] = ((stackNumber + 1) % SPHERE_STACKS * slicesMod) + ((sliceNumber+1) % slicesMod);
-        l_iIndexBuffer[(cont * 6) + 5] = ((stackNumber) * slicesMod) + ((sliceNumber+1) % slicesMod);
-        
-        cont++;
-      }
-    }
-    
-    //VertexCacheOptimisation( l_VertexBuffer, l_iIndexBuffer, 
-    //                         (SPHERE_STACKS+1)*(SPHERE_SLICES+1), 
-    //                         SPHERE_STACKS * (SPHERE_SLICES+1) * 6, 
-    //                         sizeof(SSIMPLEVERTEX) );
-
-    //Vertex[] vb = vertexBuffer.toArray(new Vertex[vertexBuffer.size()]);
-    //int[] indexes = new int[indexBuffer.size()];
-    //for(int i = 0; i < indexes.length; ++i) {
-    //  indexes[i] = indexBuffer.get(i);
-    //}
-
-    m_pSphereVertex = new CIndexedVertexs<SSIMPLEVERTEX>( this,
-                                                          (char*)l_VertexBuffer,
-                                                          l_iIndexBuffer,
-                                                          (SPHERE_STACKS+1)*(SPHERE_SLICES+1), 
-                                                          SPHERE_STACKS * (SPHERE_SLICES+1) * 6);
-
-                                                          */
-
-    uint16 l_iIndexBuffer[] = {
-        1,  2,  0,
-        2,  3,  0,
-        3,  4,  0,
-        4,  5,  0,
-        5,  1,  0,
-
-        6,  11, 7,
-        7,  11, 8,
-        8,  11, 9,
-        9,  11, 10,
-        10, 11, 6,
-
-        2,  1,  6,
-        3,  2,  7,
-        4,  3,  8,
-        5,  4,  9,
-        1,  5,  10,
-                
-        7,  2,  6,
-        8,  3,  7,
-        9,  4,  8,
-        10, 5,  9,
-        6,  1,  10 };
-
-    float Verts[] = {
-         0.000f,  0.000f,  1.000f,
-         0.894f,  0.000f,  0.447f,
-         0.276f,  0.851f,  0.447f,
-        -0.724f,  0.526f,  0.447f,
-        -0.724f, -0.526f,  0.447f,
-         0.276f, -0.851f,  0.447f,
-         0.724f,  0.526f, -0.447f,
-        -0.276f,  0.851f, -0.447f,
-        -0.894f,  0.000f, -0.447f,
-        -0.276f, -0.851f, -0.447f,
-         0.724f, -0.526f, -0.447f,
-         0.000f,  0.000f, -1.000f };
-
-    SSIMPLEVERTEX l_VertexBuffer[12];
-    for(int i = 0; i < 12; ++i)
-    {
-      l_VertexBuffer[i].x = Verts[i*3 + 0];
-      l_VertexBuffer[i].y = Verts[i*3 + 1];
-      l_VertexBuffer[i].z = Verts[i*3 + 2];
-    }
-
-    const int l_iNumIndexos = sizeof(l_iIndexBuffer) / sizeof(l_iIndexBuffer[0]);
-
-    VertexCacheOptimisation( l_VertexBuffer, l_iIndexBuffer, 
-                             12, 
-                             l_iNumIndexos,
-                             sizeof(SSIMPLEVERTEX) );
-
-    m_pSphereVertex = new CIndexedVertexs<SSIMPLEVERTEX>( this,
-                                                          (char*)l_VertexBuffer,
-                                                          l_iIndexBuffer,
-                                                          12, 
-                                                          l_iNumIndexos);
-
   }
+  //tapa i cul
+  for(uint32 l_iSlice = 0; l_iSlice < SPHERE_SLICES; ++l_iSlice)
+  {
+    int cont = (SPHERE_STACKS-1) * SPHERE_SLICES + l_iSlice;
+    
+    int p0 = l_iSlice;
+    int p1 = ((l_iSlice + 1) % SPHERE_SLICES);
+    int p2 = SPHERE_STACKS*SPHERE_SLICES + 0;
+    
+    l_iSphereIndexBuffer[cont * 6 + 0] = p0;
+    l_iSphereIndexBuffer[cont * 6 + 1] = p1;
+    l_iSphereIndexBuffer[cont * 6 + 2] = p2;
+
+    
+    p0 = (SPHERE_STACKS-1) * SPHERE_SLICES + l_iSlice;
+    p1 = (SPHERE_STACKS-1) * SPHERE_SLICES + ((l_iSlice + 1) % SPHERE_SLICES);
+    p2 = SPHERE_STACKS*SPHERE_SLICES + 1;
+    
+    l_iSphereIndexBuffer[cont * 6 + 3] = p0;
+    l_iSphereIndexBuffer[cont * 6 + 4] = p2;
+    l_iSphereIndexBuffer[cont * 6 + 5] = p1;
+  }
+  VertexCacheOptimisation( l_SphereVertexBuffer, l_iSphereIndexBuffer, 
+                           vertexnum, 
+                           indexnum, 
+                           sizeof(SSIMPLEVERTEX) );
+
+  m_pSphereVertex = new CIndexedVertexs<SSIMPLEVERTEX>( this,
+                                                        (char*)l_SphereVertexBuffer,
+                                                        l_iSphereIndexBuffer,
+                                                        vertexnum, 
+                                                        indexnum);
+
+  
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  SSIMPLEVERTEX l_ConeVertexBuffer[5];
+  
+  l_ConeVertexBuffer[0].x =  0;
+  l_ConeVertexBuffer[0].y =  0;
+  l_ConeVertexBuffer[0].z =  0;
+                             
+  l_ConeVertexBuffer[1].x =  1;
+  l_ConeVertexBuffer[1].y =  1;
+  l_ConeVertexBuffer[1].z =  1;
+                             
+  l_ConeVertexBuffer[2].x = -1;
+  l_ConeVertexBuffer[2].y =  1;
+  l_ConeVertexBuffer[2].z =  1;
+                             
+  l_ConeVertexBuffer[3].x = -1;
+  l_ConeVertexBuffer[3].y =  1;
+  l_ConeVertexBuffer[3].z = -1;
+                             
+  l_ConeVertexBuffer[4].x =  1;
+  l_ConeVertexBuffer[4].y =  1;
+  l_ConeVertexBuffer[4].z = -1;
+  
+  uint16 l_iConeIndexBuffer[] = {
+              0, 1, 2,
+              0, 2, 3,
+              0, 3, 4,
+              0, 4, 1,
+              1, 4, 3,
+              1, 3, 2
+  };
+
+  
+  m_pConeVertex = new CIndexedVertexs<SPARTICLE_VERTEX>(  this,
+                                                          (char*)l_ConeVertexBuffer,
+                                                          l_iConeIndexBuffer,
+                                                          5, 
+                                                          18);
+  
+
   return true;
 }
 
@@ -334,6 +341,7 @@ void CRenderManager::Release(void)
   CHECKED_RELEASE(m_pBackBuffer);
   CHECKED_RELEASE(m_pDefaultDepthStencilBuffer);
   
+  CHECKED_DELETE(m_pConeVertex);
   CHECKED_DELETE(m_pParticleVertex);
   CHECKED_DELETE(m_pSphereVertex);
   STEXTUREDVERTEX::ReleaseVertexDeclaration();

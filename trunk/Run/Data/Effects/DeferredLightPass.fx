@@ -198,7 +198,7 @@ technique DeferredLightPassTechnique
 		DestBlend = One;
 		AlphaTestEnable = false;	
 		CullMode = CCW;
-		//VertexShader = compile ps_3_0 DeferredLightPassVS();
+		VertexShader = null;
 		PixelShader  = compile ps_3_0 DeferredLightPassPS();
 	}
 }
@@ -296,7 +296,7 @@ technique DeferredGeometryLightPassTechnique
 	pass p0
 	{
 		ZEnable = true;
-    ZFunc   = LESSEQUAL;
+         ZFunc   = LESSEQUAL;
 		ZWriteEnable = false;
 		AlphaBlendEnable = true;
 		SrcBlend = One;

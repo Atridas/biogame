@@ -15,7 +15,6 @@ bool CDeferredPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer, 
     return false;
   }
   m_szGeometryLightShader = _treePostSceneRenderer.GetPszISOProperty("geometry_light_shader");
-  m_szGeometryInsideLightShader = _treePostSceneRenderer.GetPszISOProperty("geometry_inside_light_shader");
 
   return true;
 }
@@ -31,9 +30,10 @@ void CDeferredPostSceneRendererStep::Render(CRenderManager* _pRM, CCamera* _pCam
   CEffectManager* l_pEM = CORE->GetEffectManager();
   
   CEffect* l_pEffect = l_pEM->GetResource(m_szEffect);
+
   CEffect* l_pGeometryEffect = l_pEM->GetResource(m_szGeometryLightShader);
   //CEffect* l_pGeometryEffect = l_pEM->GetResource("White");
-  CEffect* l_pGeometryInsidelEffect = l_pEM->GetResource(m_szGeometryInsideLightShader);
+
   int l_iStencilBits = _pRM->GetStencilBits();
   int l_iLastLight = l_iStencilBits - 1;
   LPDIRECT3DDEVICE9 l_pDevice = _pRM->GetDevice();
@@ -50,6 +50,42 @@ void CDeferredPostSceneRendererStep::Render(CRenderManager* _pRM, CCamera* _pCam
 
       l_pEM->SetLight(l_vLights[i]);
 
+      if(l_vLights[i]->UsesGeometryInDeferred())
+      {
+        l_iLastLight++;
+        if(l_iLastLight == l_iStencilBits)
+        {
+          l_pDevice->Clear(0,0,D3DCLEAR_STENCIL,0,0,0);
+          l_iLastLight = 0;
+        }
+        uint32 mask = 1 << l_iLastLight;
+        l_pDevice->SetRenderState(D3DRS_STENCILMASK, mask);
+        l_pDevice->SetRenderState(D3DRS_STENCILWRITEMASK, mask);
+
+        l_vLights[i]->RenderDeferredLight(_pRM, l_pGeometryEffect);
+      }
+      else
+      {
+        l_pEM->LoadShaderData(l_pEffect);
+
+        LPD3DXEFFECT l_pD3DEffect = l_pEffect->GetD3DEffect();
+
+        if(l_pD3DEffect!=NULL)
+        {
+          UINT l_NumPasses;
+          l_pD3DEffect->Begin(&l_NumPasses, 0);
+          for (UINT iPass = 0; iPass < l_NumPasses; iPass++)
+          {
+            l_pD3DEffect->BeginPass(iPass);
+            _pRM->DrawColoredTexturedQuad2D(m_iPos,m_iSize.x,m_iSize.y,m_Alignment,CColor(Vect4f(0,0,0,0)));
+            l_pD3DEffect->EndPass();
+          }
+          l_pD3DEffect->End();
+        }
+      }
+
+
+      /*
       if(l_vLights[i]->GetType() == CLight::OMNI)
       {
         RECT rect;
@@ -120,10 +156,11 @@ void CDeferredPostSceneRendererStep::Render(CRenderManager* _pRM, CCamera* _pCam
         }
         l_pD3DEffect->End();
       }
+      */
     }
 
     DeactivateInputSamplers();
-    _pRM->GetDevice()->SetRenderState(D3DRS_SCISSORTESTENABLE, FALSE);
+    //_pRM->GetDevice()->SetRenderState(D3DRS_SCISSORTESTENABLE, FALSE);
     l_pDevice->SetRenderState(D3DRS_STENCILENABLE, false);
   }
 }

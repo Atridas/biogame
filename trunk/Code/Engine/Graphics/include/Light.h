@@ -12,6 +12,7 @@
 // Forward declarations -------------
 class CRenderManager;
 class CColor;
+class CEffect;
 //-----------------------------------
 
 class CLight : 
@@ -47,6 +48,9 @@ public:
   Vect3f GetPosition() const {return m_vPosition;};
   //void SetSpecular(float _fSpecular);
   //float GetSpecular() const;
+
+  virtual bool UsesGeometryInDeferred() = 0;
+  virtual void RenderDeferredLight(CRenderManager* _pRM, CEffect* _pGeometryEffect) {};
 
   void SetStartRangeAttenuation(const float _fStartRangeAttenuation) {m_fStartRangeAttenuation = _fStartRangeAttenuation;};
   float GetStartRangeAttenuation() const {return m_fStartRangeAttenuation;};
