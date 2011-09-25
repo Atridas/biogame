@@ -96,6 +96,7 @@ void CPostSceneRendererStep::Render(CRenderManager* _pRM)
   //l_pEM->SetTextureWidthHeight(m_iRenderTargetWidth,m_iRenderTargetHeight);
 
   l_pEM->SetAlphaFactor(m_fAlphaFactor);
+  l_pEM->SetViewport(m_iPos.x, m_iPos.y, m_iSize.x, m_iSize.y);
 
   if(m_bUseTime)
   {

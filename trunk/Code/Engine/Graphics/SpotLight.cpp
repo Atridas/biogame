@@ -19,13 +19,14 @@ void CSpotLight::RenderDeferredLight(CRenderManager* _pRM, CEffect* _pGeometryEf
   t.Translate(m_vPosition);
 
   float h = m_fEndRangeAttenuation;
-  float b = m_fEndRangeAttenuation * tan(m_fFallOff * .75f * FLOAT_PI_VALUE / 180.f);
-  h *= 1.5f;
-  b *= 1.5f;
+  float b = m_fEndRangeAttenuation * tan(m_fFallOff * .55f * FLOAT_PI_VALUE / 180.f);
+  h *= 1.2f;
+  b *= 1.2f;
   s.SetIdentity();
   s.Scale(b,h,b);
   
   Mat33f r = GetFastestRotationFromDirToDir(Vect3f(0,1,0), m_vDirection);
+  //Mat33f r = GetRotationFromOrientationToOrientation(Vect3f(0,1,0), Vect3f(1,0,0), m_vDirection, ((m_vDirection ^ Vect3f(0,1,0)) ^ m_vDirection).GetNormalized());
 
   m = t * r * s;
   l_pEM->SetWorldMatrix(m);

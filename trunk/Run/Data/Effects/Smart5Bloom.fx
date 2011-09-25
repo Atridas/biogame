@@ -11,7 +11,7 @@ sampler PrevFilterSampler : register(s0) = sampler_state
 
 float4 Smart5BloomVerticalPS(float2 _UV: TEXCOORD0) : COLOR
 {
-  float l_YIncrementTexture = 1.0 / (float)(g_TextureHeight - 1.0);
+  float l_YIncrementTexture = 1.0 / (float)(g_TextureHeight);
   
   float2 l_SamplePositions[]= { {0, 0},
                                 {0, -l_YIncrementTexture * 1.2},
@@ -30,7 +30,7 @@ float4 Smart5BloomVerticalPS(float2 _UV: TEXCOORD0) : COLOR
 
 float4 Smart5BloomHoritzontalPS(float2 _UV: TEXCOORD0) : COLOR
 {
-  float l_XIncrementTexture = 1.0 / (float)(g_TextureWidth - 1.0);
+  float l_XIncrementTexture = 1.0 / (float)(g_TextureWidth);
   
   float2 l_SamplePositions[]= { {0, 0},
                                 {-l_XIncrementTexture * 1.2, 0.0},

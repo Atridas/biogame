@@ -360,7 +360,8 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
   if(m_bProjectionMatrixUpdated)
   {
     _pEffect->SetValue("Projection", m_mProjectionMatrix);
-    _pEffect->SetValue("InvProjection", m_mProjectionMatrix.GetInverted());
+    Mat44f l_mInvProjectionMatrix = m_mProjectionMatrix.GetInverted();
+    _pEffect->SetValue("InvProjection", l_mInvProjectionMatrix);
     m_bProjectionMatrixUpdated = false;
   }
 
@@ -417,9 +418,18 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
   
   if(m_bTextureWidthHeightUpdated)
   {
-    _pEffect->SetValue("TextureWidth",m_iTextureWidth);
+    _pEffect->SetValue("TextureWidth" ,m_iTextureWidth);
     _pEffect->SetValue("TextureHeight",m_iTextureHeight);
     m_bTextureWidthHeightUpdated = false;
+  }
+  
+  if(m_bViewportUpdated)
+  {
+    _pEffect->SetValue("ViewportWidth" ,m_iViewportWidth);
+    _pEffect->SetValue("ViewportHeight",m_iViewportHeight);
+    _pEffect->SetValue("ViewportX"     ,m_iViewportX);
+    _pEffect->SetValue("ViewportY"     ,m_iViewportY);
+    m_bViewportUpdated = false;
   }
 
   if(m_bAlphaFactorUpdated)

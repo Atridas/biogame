@@ -9,11 +9,11 @@
           pos="0.0 0.5 10.0" direction="0.0 -0.5 0.5" 
           angle="15" fall_off="30"
           att_start_range="0.25" att_end_range="5.0"/>
-  
+  <!--
   <light type="omni" name="Omni00" pos="00.0 10.0 00.0" color="1.0 1.0 1.0" att_start_range="20.0" att_end_range="50.0"/>
   <light type="omni" name="Omni02" pos="10.0 10.0 10.0" color="0.0 1.0 0.0" att_start_range="10.0" att_end_range="15.0"/>
   <light type="omni" name="Omni03" pos="00.0 10.0 10.0" color="0.0 0.0 1.0" att_start_range="10.0" att_end_range="15.0"/>
   <light type="omni" name="Omni04" pos="20.0 10.0 00.0" color="1.0 1.0 0.0" att_start_range="10.0" att_end_range="15.0"/>
   <light type="omni" name="Omni05" pos="00.0 10.0 20.0" color="0.0 1.0 1.0" att_start_range="10.0" att_end_range="15.0"/>
-  
+  -->
 </lights>

@@ -30,6 +30,7 @@ void CDeferredPostSceneRendererStep::Render(CRenderManager* _pRM, CCamera* _pCam
   CEffectManager* l_pEM = CORE->GetEffectManager();
   
   CEffect* l_pEffect = l_pEM->GetResource(m_szEffect);
+  l_pEM->SetViewport(m_iPos.x, m_iPos.y, m_iSize.x, m_iSize.y);
 
   CEffect* l_pGeometryEffect = l_pEM->GetResource(m_szGeometryLightShader);
   //CEffect* l_pGeometryEffect = l_pEM->GetResource("White");

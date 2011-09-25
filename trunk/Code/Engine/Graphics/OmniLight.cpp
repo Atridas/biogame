@@ -24,5 +24,5 @@ void COmniLight::Render(CRenderManager* _pRM) const
 
 void COmniLight::RenderDeferredLight(CRenderManager* _pRM, CEffect* _pGeometryEffect)
 {
-  _pRM->DrawShadedSphere(m_vPosition, m_fEndRangeAttenuation* 1.5f, _pGeometryEffect);
+  _pRM->DrawShadedSphere(m_vPosition, m_fEndRangeAttenuation* 1.2f, _pGeometryEffect);
 }
