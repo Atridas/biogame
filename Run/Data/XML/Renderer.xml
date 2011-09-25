@@ -221,8 +221,7 @@
     <post_scene_renderer name="deferred lighting" 
                          type="deferred_post_scene_renderer" 
                          effect="DeferredLightPass"
-                         geometry_light_shader="DeferredGeometryLightPass"
-                         geometry_inside_light_shader="DeferredGeometryInsideLightPass">
+                         geometry_light_shader="DeferredGeometryLightPass">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
@@ -244,8 +243,7 @@
                          type="deferred_post_scene_renderer" 
                          effect="DeferredLightPass"
                          size="0.5" aspect_ratio="true" position="0.5 0.0"
-                         geometry_light_shader="DeferredGeometryLightPass"
-                         geometry_inside_light_shader="DeferredGeometryInsideLightPass">
+                         geometry_light_shader="DeferredGeometryLightPass">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
@@ -327,8 +325,7 @@
                          type="deferred_post_scene_renderer" 
                          effect="DeferredLightPass" 
                          render_target="HDR_COLOR"
-                         geometry_light_shader="DeferredGeometryLightPass"
-                         geometry_inside_light_shader="DeferredGeometryInsideLightPass">
+                         geometry_light_shader="DeferredGeometryLightPass">
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
         <input_sampler type="texture" index="1" texture="RT3_ARGB_8"/>

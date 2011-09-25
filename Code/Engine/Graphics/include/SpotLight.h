@@ -6,6 +6,8 @@
 #include "base.h"
 #include "DirectionalLight.h"
 
+class CRenderableVertexs;
+
 class CSpotLight : public CDirectionalLight
 {
 public:
@@ -23,6 +25,9 @@ public:
   void SetFallOff(const float _fFallOff) {m_fFallOff = _fFallOff;};
   float GetFallOff() const {return m_fFallOff;};
   
+  virtual bool UsesGeometryInDeferred() { return true; };
+  virtual void RenderDeferredLight(CRenderManager* _pRM, CEffect* _pGeometryEffect);
+
 protected:
   void Release() {};
 

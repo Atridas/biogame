@@ -32,7 +32,8 @@ public:
                                                   m_pCamera(0), m_pParticleVertex(0),
                                                   m_pBackBuffer(0),m_pDefaultDepthStencilBuffer(0),
                                                   m_pSettedBackBuffer(0),m_pSettedDepthStencilBuffer(0),
-                                                  m_pSphereVertex(0), m_iStencilBits(8)
+                                                  m_pSphereVertex(0), m_pConeVertex(0),
+                                                  m_iStencilBits(8)
                                                                                   {};
 
 
@@ -121,6 +122,7 @@ public:
   
   CRenderableVertexs*     GetParticleVertexs() const {return m_pParticleVertex;};
   CRenderableVertexs*     GetSphereVertexs()   const {return m_pSphereVertex;};
+  CRenderableVertexs*     GetConeVertexs()     const {return m_pConeVertex;};
 private:
 	virtual void            Release					  ();
 
@@ -136,7 +138,7 @@ private:
   CCamera*                m_pCamera;
   CFrustum                m_Frustum;
   
-  CRenderableVertexs*     m_pParticleVertex, *m_pSphereVertex;
+  CRenderableVertexs     *m_pParticleVertex, *m_pSphereVertex, *m_pConeVertex;
    
   LPDIRECT3DSURFACE9      m_pBackBuffer;
   LPDIRECT3DSURFACE9      m_pDefaultDepthStencilBuffer;

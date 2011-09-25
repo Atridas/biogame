@@ -25,7 +25,7 @@ private:
 
   bool ClipOmniLight(CLight* _pOmni, RECT& _Rect, CCamera* _pCamera);
 
-  string m_szGeometryLightShader, m_szGeometryInsideLightShader;
+  string m_szGeometryLightShader;
 };
 
 #endif

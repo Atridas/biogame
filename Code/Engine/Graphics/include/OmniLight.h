@@ -15,6 +15,9 @@ public:
   virtual void Init(CXMLTreeNode& _XMLParams);
 
   virtual void Render(CRenderManager* _pRM) const;
+  
+  virtual bool UsesGeometryInDeferred() { return true; };
+  virtual void RenderDeferredLight(CRenderManager* _pRM, CEffect* _pGeometryEffect);
 
 protected:
   void Release() {};

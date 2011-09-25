@@ -27,6 +27,8 @@ public:
   void   SetFPSCamera(CFPSCamera& Camera_) const;
   Mat44f GetLightViewMatrix()       const;
   Mat44f GetLightProjectionMatrix() const;
+  
+  virtual bool UsesGeometryInDeferred() { return false; };
 
 protected:
   void Release() {};
