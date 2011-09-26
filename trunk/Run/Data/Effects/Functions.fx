@@ -385,4 +385,9 @@ float GetLuminance(float3 _fColor)
   return max(_fColor.x, max(_fColor.y, _fColor.z));
 }
 
+float GetLuminancePonderat(float3 _fColor)
+{
+  return dot(_fColor, float3( 0.299f, 0.587f, 0.114f ));
+}
+
 #endif
