@@ -90,6 +90,10 @@
     <effect name="DownsampleLuminance" file="Data/Effects/DownsampleLuminance.fx" technique="DownsampleLuminanceTechnique" />
     <effect name="Smart5BloomVertical" file="Data/Effects/Smart5Bloom.fx" technique="Smart5BloomVerticalTechnique" />
     <effect name="Smart5BloomHoritzontal" file="Data/Effects/Smart5Bloom.fx" technique="Smart5BloomHoritzontalTechnique" />
+    
+    <!-- Post Scene Effects -->
+    <effect name="CellShading" file="Data/Effects/PostSceneEffects.fx" technique="CellShadingTechnique" />
+    <effect name="Antialiasing" file="Data/Effects/PostSceneEffects.fx" technique="AntialiasingTechnique" />
   </effects>
 
 

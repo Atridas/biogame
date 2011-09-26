@@ -278,7 +278,28 @@ void CEmiterInstance::Render(CRenderManager* _pRM, CEffect* _pEffect, const Mat4
     assert(l_bResult);// ---
 
     const CSimpleEmiterCore *l_pEmiterCore = dynamic_cast<const CSimpleEmiterCore*>(m_pEmiterCore);
+    
+    CMaterial *l_pMaterial = l_pEmiterCore->GetMaterial();
+    if(_pEffect && l_pMaterial)
+    {
+      l_pMaterial->Activate(_pEffect->GetTextureMask());
 
+      int l_iMaterialType = l_pMaterial->GetMaterialType();
+      
+      CEffectManager* l_pEM = CORE->GetEffectManager();
+      l_pEM->SetGlow((l_iMaterialType & GLOW_MATERIAL_MASK) > 0);
+      if(l_iMaterialType & GLOW_MATERIAL_MASK)
+      {
+        l_pEM->SetGlowIntensity(l_pMaterial->GetGlowIntensity());
+      }
+
+      l_pEM->SetSpecular((l_iMaterialType & SPECULARMAP_MATERIAL_MASK) > 0);
+      l_pEM->SetSpecularParams(l_pMaterial->GetGlossiness(), l_pMaterial->GetSpecularFactor());
+      l_pEM->SetEnvironmentIntensity(l_pMaterial->GetEnvironmentIntensity());
+      l_pEM->SetSpriteSize(l_pMaterial->GetSpriteSize());
+        
+      l_pEM->LoadShaderData(_pEffect);
+    }
     _pRM->GetParticleVertexs()->Render(_pRM, _pEffect);
 
   } else if(m_bIsSimple)

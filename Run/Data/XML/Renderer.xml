@@ -721,6 +721,29 @@
       </input_samplers>
     </post_scene_renderer>
     
+    
+    
+    
+    
+    
+  
+    <post_scene_renderer name="Cell shading" effect="CellShading">
+      <input_samplers>
+        <input_sampler type="frame_buffer" index="0"/>
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="Antialiasing" effect="Antialiasing">
+      <input_samplers>
+        <input_sampler type="frame_buffer" index="0"/>
+        <input_sampler type="texture" texture="RT3_ARGB_8" index="1" />
+        <input_sampler type="texture" texture="RT1_RG_16F" index="2" />
+      </input_samplers>
+    </post_scene_renderer>
+    
+    
+    
+    
+    
   </post_scene_renderers>
   
   <render_paths>
@@ -838,6 +861,13 @@
     <render_path name="forward" active="false">
       <scene_renderer name="forward_renderer"/>
       <post_scene_renderer name="draw_scene"/>
+    </render_path>
+    
+    <render_path name="Cell shading" active="false">
+      <post_scene_renderer name="Cell shading"/>
+    </render_path>
+    <render_path name="Antialiasing" active="true">
+      <post_scene_renderer name="Antialiasing"/>
     </render_path>
     
     <render_path name="aim_gui">
