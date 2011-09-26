@@ -159,7 +159,7 @@ TNEW_PS NewVS(TNEW_VS _in)
 	return out_;
 }
 
-PS_OUTPUT NewPS(TNEW_PS _in)
+PS_OUTPUT NewPS(TNEW_PS _in, float _fFace : VFACE)
 {
   PS_OUTPUT l_Output;
   
@@ -245,17 +245,17 @@ PS_OUTPUT NewPS(TNEW_PS _in)
     l_Output.Color = l_DiffuseColor;
     
     #if defined( NS_TEX0 )
-      if(g_GlowActive)
+      if(g_GlowActive && _fFace > 0)
       {
         l_Output.Glow  = tex2D(GlowTextureSampler,_in.UV) * g_GlowIntensity;
         l_Output.Glow *= g_GlowIntensity * l_Output.Glow.w;
         l_Output.Glow = max(0.0, l_Output.Glow);
-        //l_Output.Glow.a = 1.0;
+        l_Output.Glow.a = l_DiffuseColor.a;
       } else {
-        l_Output.Glow = float4(0, 0, 0, 0);
+        l_Output.Glow = float4(0, 0, 0, l_DiffuseColor.a);
       }
     #else
-      l_Output.Glow = float4(0, 0, 0, 0);
+      l_Output.Glow = float4(0, 0, 0, l_DiffuseColor.a);
     #endif
   #endif
   
