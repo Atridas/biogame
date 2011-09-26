@@ -98,10 +98,10 @@ void CLightManager::Release()
   m_sFileNames.clear();
 }
 
-CDirectionalLight* CLightManager::CreateDirectionalLight(string _szName,
-                                          Vect3f& _vPosition,
-                                          Vect3f& _vDirection,
-                                          CColor& _colColor,
+CDirectionalLight* CLightManager::CreateDirectionalLight(const string& _szName,
+                                          const Vect3f& _vPosition,
+                                          const Vect3f& _vDirection,
+                                          const CColor& _colColor,
                                           float _fStartRangeAtt,
                                           float _fEndRangeAtt,
                                           bool _bRenderShadows)
@@ -140,10 +140,10 @@ CDirectionalLight* CLightManager::CreateDirectionalLight(string _szName,
   return l_pDirectionalLight;
 }
 
-CSpotLight* CLightManager::CreateSpotLight(string _szName,
-                                            Vect3f& _vPosition,
-                                            Vect3f& _vDirection,
-                                            CColor& _colColor,
+CSpotLight* CLightManager::CreateSpotLight(const string& _szName,
+                                            const Vect3f& _vPosition,
+                                            const Vect3f& _vDirection,
+                                            const CColor& _colColor,
                                             float _fStartRangeAtt,
                                             float _fEndRangeAtt,
                                             float _fAngle,
@@ -190,9 +190,9 @@ CSpotLight* CLightManager::CreateSpotLight(string _szName,
   return l_pSpotLight;
 }
 
-COmniLight* CLightManager::CreateOmniLight(string _szName,
-                                          Vect3f& _vPosition,
-                                          CColor& _colColor,
+COmniLight* CLightManager::CreateOmniLight(const string& _szName,
+                                          const Vect3f& _vPosition,
+                                          const CColor& _colColor,
                                           float _fStartRangeAtt,
                                           float _fEndRangeAtt)
 {
@@ -248,3 +248,19 @@ void CLightManager::SetLightsEnabled(bool _bEnabled)
   }
 }
 
+void CLightManager::Remove(const std::string &_szName)
+{
+  vector<CLight*>::const_iterator l_it = m_vLights.cbegin();
+  vector<CLight*>::const_iterator l_end = m_vLights.cend();
+
+  for(;l_it != l_end; ++l_it)
+  {
+    if(_szName == (*l_it)->GetName())
+    {
+      m_vLights.erase(l_it);
+      break;
+    }
+  }
+
+  CMapManager<CLight>::Remove(_szName);
+}

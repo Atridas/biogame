@@ -65,6 +65,19 @@ public:
 
     m_Resources.clear();
   }
+
+  /**
+   * Mètode d'alliberament d'un recurs concret.
+  **/
+  virtual void Remove(const std::string &_szName) 
+  {
+    TMapResource::iterator l_It = m_Resources.find(_szName);
+    TMapResource::iterator l_End = m_Resources.end();
+
+    if(l_It != l_End) 
+      CHECKED_DELETE(l_It->second);
+
+  }
 };
 
 #endif //INC_MAP_MANAGER_H_

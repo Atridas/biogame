@@ -24,6 +24,7 @@ public:
   void Play(const string& _szAnimation, float _fBlend, float _fWeight = 1.0f, bool _bLockEnd = false);
   void Stop(const string& _szAnimation);
   void PlayCycle(const string& _szAnimation, float _fBlendTime);
+  void PlayCycle(const string& _szAnimation, float _fBlendTime, float _fWeight);
   void StopCycle(const string& _szAnimation, float _fBlendTime);
   void ClearCycle(float _fBlend);
   void ClearCycle(const string& _szAnimation, float _fBlend);

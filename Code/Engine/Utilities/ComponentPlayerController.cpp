@@ -189,6 +189,11 @@ void CComponentPlayerController::Shoot()
 
     l_vDir = (l_vCenterPoint-l_vPosArma).Normalize();
 
+    if(l_vDir*l_vDirArma <= 0.86f)
+    {
+      l_vDir = ((l_vPos+100.f*l_vDirArma)-l_vPosArma).Normalize();
+    }
+
     l_pUserData = l_pPM->RaycastClosestActor(l_vPosArma,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER),l_CInfo);
 
     if(l_pUserData)
@@ -222,6 +227,11 @@ void CComponentPlayerController::Shoot()
     Vect3f l_vPuntLlunya = l_vPos+100.f*l_vDir;
 
     l_vDir = ((l_vPos+100.f*l_vDir)-l_vPosArma).Normalize();
+
+    if(l_vDir*l_vDirArma <= 0.96f)
+    {
+      l_vDir = ((l_vPos+100.f*l_vDirArma)-l_vPosArma).Normalize();
+    }
 
     l_pUserData = l_pPM->RaycastClosestActor(l_vPosArma,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER),l_CInfo);
 

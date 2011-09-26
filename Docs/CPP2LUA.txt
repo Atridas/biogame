@@ -767,6 +767,9 @@ ENTITIES
       explosive
       CBaseComponent::ECT_EXPLOSIVE
       
+      omni
+      CBaseComponent::ECT_OMNI
+      
     Methods:
       get_type
       Type GetType()
