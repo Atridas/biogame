@@ -96,15 +96,17 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Neutre['Enter'] = function(_jugador)
-
+  local mirilla = _jugador:get_component(BaseComponent.mirilla)
   local animation = _jugador:get_component(BaseComponent.animation)
   animation:clear_all_cycles(0.3)
   animation:play_cycle(Player_Constants["Idle"], 0.3)
+  mirilla:set_active(true)
 end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Neutre['Exit'] = function(_jugador)
-
+  --local mirilla = _jugador:get_component(BaseComponent.mirilla)
+  --mirilla:set_active(false)
 end
 
 -------------------------------------------------------------------------------------------------
@@ -123,6 +125,7 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   local isMoving = false
   local isBack = false
   local isRunning = false
+  local isAiming = false
   
   if ACTION_MANAGER:is_action_active('Cover') then
     if player_controller:cover() then
@@ -136,16 +139,18 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   end
 
   if ACTION_MANAGER:is_action_active('Aim') then
-    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Apuntar')
-    return
+    --_jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Apuntar')
+    isAiming = true
+  else
+    isAiming = false
   end
   
   if ACTION_MANAGER:is_action_active('Shield') then
-    if _jugador:get_component(BaseComponent.shield):is_ready() then
+    --if _jugador:get_component(BaseComponent.shield):is_ready() then
       _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Force')
       
       return
-    end
+    --end
   end
   
   if ACTION_MANAGER:is_action_active('Use') then
@@ -172,7 +177,7 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
     
     local anim
     
-    if ACTION_MANAGER:is_action_active('Run') then
+    if ACTION_MANAGER:is_action_active('Run') and not isAiming then
       moviment.movement = moviment.movement + direction * (_dt) * run_speed
       isRunning = true
     else
@@ -188,28 +193,76 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
     isBack = true
   end
   
+  if isAiming then
+    if ACTION_MANAGER:is_action_active('Shoot') then
+      player_controller:shoot()
+      SOUND:play_sample(Player_Constants["So disparar"])
+      
+      if isMoving then
+        
+      else
+        animation:play(Player_Constants["Disparar"], 0.5, 1.0, false)
+      end
+    end
+  end
+  
+  local aim_angle = (pitch*1.75 + 1) * 0.5
+  
   if isMoving then
     animation:clear_cycle(Player_Constants["Idle"], 0.3)
+    animation:clear_cycle('PointUpIdle',0.3)
+    animation:clear_cycle('pointDownIdle',0.3)
+    
     if isRunning then
       animation:stop_cycle(Player_Constants["Caminar enrere"],0.3)
       animation:stop_cycle(Player_Constants["Caminar"],0.3)
       animation:play_cycle(Player_Constants["Correr"],0.3)
+      animation:clear_cycle('pointWalkUp',0.3)
+      animation:clear_cycle('pointWalkDown',0.3)
+      animation:clear_cycle('PointUpIdle',0.3)
+      animation:clear_cycle('pointDownIdle',0.3)
     else
-      if isBack then
-        animation:play_cycle(Player_Constants["Caminar enrere"],0.3)
-        animation:stop_cycle(Player_Constants["Caminar"],0.3)
-        animation:stop_cycle(Player_Constants["Correr"],0.3)
+    
+      if isAiming then
+        animation:play_cycle('pointWalkUp',0.15,aim_angle)
+        animation:play_cycle('pointWalkDown',0.15,1-aim_angle)
+        animation:stop_cycle(Player_Constants["Caminar enrere"],0.15)
+        animation:stop_cycle(Player_Constants["Correr"],0.15)
+        animation:stop_cycle(Player_Constants["Caminar"],0.15)
       else
-        animation:stop_cycle(Player_Constants["Caminar enrere"],0.3)
-        animation:play_cycle(Player_Constants["Caminar"],0.3)
-        animation:stop_cycle(Player_Constants["Correr"],0.3)
+        animation:stop_cycle('pointWalkUp',0.3)
+        animation:stop_cycle('pointWalkDown',0.3)
+        
+        if isBack then
+          animation:play_cycle(Player_Constants["Caminar enrere"],0.3)
+          animation:stop_cycle(Player_Constants["Caminar"],0.3)
+          animation:stop_cycle(Player_Constants["Correr"],0.3)
+        else
+          animation:stop_cycle(Player_Constants["Caminar enrere"],0.3)
+          animation:play_cycle(Player_Constants["Caminar"],0.3)
+          animation:stop_cycle(Player_Constants["Correr"],0.3)
+        end
+      
       end
+      
     end
   else
-    animation:play_cycle(Player_Constants["Idle"], 0.3)
     animation:clear_cycle(Player_Constants["Caminar"],0.3)
     animation:clear_cycle(Player_Constants["Caminar enrere"],0.3)
     animation:clear_cycle(Player_Constants["Correr"],0.3)
+    animation:clear_cycle('pointWalkUp',0.3)
+    animation:clear_cycle('pointWalkDown',0.3)
+    
+    if isAiming then
+      animation:play_cycle('PointUpIdle', 0.05, aim_angle)
+      animation:play_cycle('pointDownIdle', 0.05, 1 - aim_angle)
+      animation:clear_cycle(Player_Constants["Idle"], 0.15)
+      
+    else
+      animation:play_cycle(Player_Constants["Idle"], 0.3)
+      animation:clear_cycle('PointUpIdle',0.3)
+      animation:clear_cycle('pointDownIdle',0.3)
+    end
   end
   
 end
@@ -243,7 +296,7 @@ State_Player_Apuntar['Enter'] = function(_jugador)
   local mirilla = _jugador:get_component(BaseComponent.mirilla)
   
   animation:clear_all_cycles(0.1)
-  animation:play_cycle(Player_Constants["Apuntar"], 0.1)
+  --animation:play_cycle(Player_Constants["Apuntar"], 0.1)
 	mirilla:set_active(true)
 	
   --end
@@ -328,23 +381,17 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
   
   
   --TODO: blends amb cames movent-se / cames estàtiques
-  --[[if isMoving then
-    animation:clear_cycle('idle', 0.3)
-    if isBack then
-      animation:play_cycle('walk back',0.3)
-      animation:stop_cycle('walk',0.3)
-      animation:stop_cycle('run',0.3)
-    else
-      animation:stop_cycle('walk back',0.3)
-      animation:play_cycle('walk',0.3)
-      animation:stop_cycle('run',0.3)
-    end
+  if isMoving then 
+    animation:clear_cycle(Player_Constants["Apuntar"], 0.5)
+    animation:play_cycle('pointWalk',0.5)
+    --animation:stop_cycle('walk',0.3)
+    --animation:stop_cycle('run',0.3)
   else
-    animation:play_cycle('idle', 0.3)
-    animation:clear_cycle('walk',0.3)
-    animation:clear_cycle('run',0.3)
-    animation:clear_cycle('walk back',0.3)
-  end]]
+    animation:play_cycle(Player_Constants["Apuntar"], 0.1)
+    animation:clear_cycle('pointWalk',0.1)
+    --animation:clear_cycle('run',0.3)
+    --animation:clear_cycle('walk back',0.3)
+  end
 end
 
 -------------------------------------------------------------------------------------------------

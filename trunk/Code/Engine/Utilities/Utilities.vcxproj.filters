@@ -142,6 +142,9 @@
     <Filter Include="EntitySystem\Components\ComponentRotative">
       <UniqueIdentifier>{f9550e12-a06c-4654-a0fc-191e11f6c9a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentOmni">
+      <UniqueIdentifier>{2c2e2ada-297d-4536-b61c-8141c91a8593}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -290,6 +293,9 @@
     </ClCompile>
     <ClCompile Include="IAManager.cpp">
       <Filter>IAShit\IAManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentOmni.cpp">
+      <Filter>EntitySystem\Components\ComponentOmni</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -448,6 +454,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentRotative.h">
       <Filter>EntitySystem\Components\ComponentRotative</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentOmni.h">
+      <Filter>EntitySystem\Components\ComponentOmni</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

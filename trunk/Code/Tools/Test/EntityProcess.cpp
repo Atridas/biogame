@@ -22,6 +22,7 @@
 #include "ComponentMirilla.h"
 #include "LightManager.h"
 #include "SpotLight.h"
+#include "OmniLight.h"
 #include "Camera.h"
 #include "ComponentStateMachine.h"
 #include "ComponentAnimation.h"
@@ -71,7 +72,18 @@ bool CEntityProcess::Init()
   //CGameEntity* l_peEnemy = CORE->GetEntityManager()->InitMiner("Player", Vect3f(8.0f,2.0f,4.0f), "Gordo Cabrón");
 
   // llum ----------------------------------------
-  /*
+  
+  for(int i = -10; i <= 10; i++ )
+    for(int j = -10; j <= 10; j++ )
+    {
+      COmniLight* l_mOL = CORE->GetLightManager()->CreateOmniLight(string("omni").append(i+10,'i').append(j+10,'j'),
+                                                                      Vect3f(i*4.0f,1.5f,j*4.0f),
+                                                                      CColor(Vect3f((i%10)*0.1f,(j%10)*(i%10)*0.1f,(j%10)*0.1f)),
+                                                                      2.0f,
+                                                                      3.0f);
+      l_mOL->SetActive(true);
+    }
+
   CSpotLight* l_pSpotLight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
                                                                       Vect3f(0.0f,15.0f,0.0f),
                                                                       Vect3f(0.3f,-1.0f,0.0f),
@@ -84,7 +96,7 @@ bool CEntityProcess::Init()
   l_pSpotLight->SetPosition(Vect3f(0.0f,15.0f,0.0f));
   l_pSpotLight->SetDirection(Vect3f(0.3f,-1.0f,0.0f).Normalize());
   l_pSpotLight->SetActive(true);
-  */
+  
 
   //CShadowMapPreRendererStep* l_pShadowMapPreRenderStep = (CShadowMapPreRendererStep*)CORE->GetRenderer()->GetPreSceneRendererStep("shadow_map_renderer");
   //l_pShadowMapPreRenderStep->SetShadowMapLightCast(m_pSpotLight);

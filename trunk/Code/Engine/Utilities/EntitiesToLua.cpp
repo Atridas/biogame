@@ -136,7 +136,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("emiter",               CBaseComponent::ECT_EMITER),
           value("spawner",              CBaseComponent::ECT_SPAWNER),
           value("explosive",            CBaseComponent::ECT_EXPLOSIVE),
-          value("billboard",            CBaseComponent::ECT_BILLBOARD)
+          value("billboard",            CBaseComponent::ECT_BILLBOARD),
+          value("omni",                 CBaseComponent::ECT_OMNI)
       ]
       .def("get_type",     &CBaseComponent::GetType)
       .def("get_entity",   &CBaseComponent::GetEntity)
@@ -256,7 +257,9 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("add_to_entity",            &CComponentAnimation::AddToEntity)
       .def("play",                     &CComponentAnimation::Play)
       .def("stop",                     &CComponentAnimation::Stop)
-      .def("play_cycle",               &CComponentAnimation::PlayCycle)
+      //.def("play_cycle",               &CComponentAnimation::PlayCycle)
+      .def("play_cycle",              (void(CComponentAnimation::*)(const string&, float))&CComponentAnimation::PlayCycle)
+      .def("play_cycle",              (void(CComponentAnimation::*)(const string&, float, float))&CComponentAnimation::PlayCycle)
       .def("stop_cycle",               &CComponentAnimation::StopCycle)
       .def("clear_cycle",              (void(CComponentAnimation::*)(float))&CComponentAnimation::ClearCycle)
       .def("clear_cycle",              (void(CComponentAnimation::*)(const string&, float))&CComponentAnimation::ClearCycle)

@@ -381,8 +381,8 @@ float3 PositionFromZ(float z, float2 uv)
 
 float GetLuminance(float3 _fColor)
 {
-  return _fColor.x * 0.2126 + _fColor.y * 0.7152 + _fColor.z * 0.0722;
-  //return max(_fColor.x, max(_fColor.y, _fColor.z));
+  //return dot(_fColor, float3( 0.299f, 0.587f, 0.114f ));
+  return max(_fColor.x, max(_fColor.y, _fColor.z));
 }
 
 #endif

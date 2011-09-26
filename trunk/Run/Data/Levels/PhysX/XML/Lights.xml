@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <lights ambient="0.3 0.3 0.3">
   <!--<light type="directional" direction="1.20439 0.0 -17.0443" name="Direct01" pos="-20.6773 0.0 8.76726" color="1.0 1.0 1.0" att_start_range="80.0" att_end_range="200.0" render_shadows="false"/>-->
-  <light type="omni" name="Omni01" pos="0.0 40.0 0.0" color="1.0 1.0 1.0" att_start_range="25.0" att_end_range="70.0"/>
+  <light type="omni" name="Omni01" pos="10.0 10.0 00.0" color="1.0 0.0 0.0" att_start_range="10.0" att_end_range="15.0"/>
+  <light type="omni" name="Omni02" pos="10.0 10.0 10.0" color="0.0 1.0 0.0" att_start_range="10.0" att_end_range="15.0"/>
+  <light type="omni" name="Omni03" pos="00.0 10.0 10.0" color="0.0 0.0 1.0" att_start_range="10.0" att_end_range="15.0"/>
+  <!--<light type="omni" name="Omni04" pos="20.0 10.0 00.0" color="1.0 1.0 0.0" att_start_range="10.0" att_end_range="15.0"/>
+  <light type="omni" name="Omni05" pos="00.0 10.0 20.0" color="0.0 1.0 1.0" att_start_range="10.0" att_end_range="15.0"/>-->
 </lights>

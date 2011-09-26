@@ -33,6 +33,7 @@
 #include "ComponentExplosive.h"
 #include "ComponentRotative.h"
 #include "ComponentBillboard.h"
+#include "ComponentOmni.h"
 #include "ParticleConstants.h"
 
 #include "RenderableObject.h"
@@ -723,6 +724,7 @@ CGameEntity* CEntityManager::InitLaser(const Vect3f& _vPosInit, const Vect3f& _v
   l_pComponentObject3D->SetMat44(l_mO3D);
 
   CComponentLifetime::AddToEntity(l_pLaser, 60);
+  CComponentOmni::AddToEntity(l_pLaser,Vect3f(0,0,0), CColor(.5f,0,0), 1.f, 4.f);
 
   return l_pLaser;
 }

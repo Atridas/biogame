@@ -35,27 +35,29 @@ public:
   void SetAmbientLight(Vect3f _vAmbient) {m_vAmbientLight = _vAmbient;};
   void SetLightsEnabled(bool _bEnabled);
 
-  CDirectionalLight* CreateDirectionalLight(string _szName,
-                                            Vect3f& _vPosition,
-                                            Vect3f& _vDirection,
-                                            CColor& _colColor,
+  virtual void Remove(const std::string &_szName);
+
+  CDirectionalLight* CreateDirectionalLight(const string& _szName,
+                                            const Vect3f& _vPosition,
+                                            const Vect3f& _vDirection,
+                                            const CColor& _colColor,
                                             float _fStartRangeAtt,
                                             float _fEndRangeAtt,
                                             bool _bRenderShadows);
 
-  CSpotLight* CreateSpotLight(string _szName,
-                                            Vect3f& _vPosition,
-                                            Vect3f& _vDirection,
-                                            CColor& _colColor,
+  CSpotLight* CreateSpotLight(const string& _szName,
+                                            const Vect3f& _vPosition,
+                                            const Vect3f& _vDirection,
+                                            const CColor& _colColor,
                                             float _fStartRangeAtt,
                                             float _fEndRangeAtt,
                                             float _fAngle,
                                             float _fFallOff,
                                             bool _bRenderShadows);
 
-  COmniLight* CreateOmniLight(string _szName,
-                                          Vect3f& _vPosition,
-                                          CColor& _colColor,
+  COmniLight* CreateOmniLight(const string& _szName,
+                                          const Vect3f& _vPosition,
+                                          const CColor& _colColor,
                                           float _fStartRangeAtt,
                                           float _fEndRangeAtt);
 
