@@ -42,9 +42,6 @@ CViewer::CViewer(void)
 
 void CViewer::Init() 
 {
-  //TEMPORAL PER FER PROVES DESDE LA MERDA DE PORTATIL
-  CORE->GetRenderer()->SetUniqueRenderPath("forward");
-
   m_vMeshes = CORE->GetRenderableObjectsManager()->GetMeshes();
   m_vAnimatedModels = CORE->GetRenderableObjectsManager()->GetAnimatedModels();
 
@@ -112,7 +109,7 @@ void CViewer::Init()
 
   m_bEnableLights = true;
   //m_bGuiActive = false;
-  m_bShowHelp = true;
+  m_bShowInfo = true;
   //m_eNormalRendering = NO_NORMALS;
   m_bShowBoxes = false;
   m_bShowSpheres = false;
@@ -124,6 +121,7 @@ void CViewer::Init()
   m_fGlossiness = 0.0f;
 
   m_iMode = FREE_MODE;
+  m_eCurrentMaterialProperty = CViewer::SPECULAR;
 
   //SOUND_MANAGER->PlayMusic("bgm",true);
 
@@ -178,6 +176,8 @@ void CViewer::InitMode()
 
 void CViewer::InitFreeMode()
 {
+  CORE->GetRenderer()->SetUniqueRenderPath("HDR");
+
   m_fVelocity = 5.0f;
 
   CORE->GetRenderableObjectsManager()->SetAllVisibility(true);
@@ -212,6 +212,8 @@ void CViewer::InitMeshMode()
 {
   if(m_vMeshes.size() != 0)
   {
+    CORE->GetRenderer()->SetUniqueRenderPath("forward");
+
     CORE->GetLightManager()->SetLightsEnabled(false);
 
     m_pTargetObject->SetPitch(0.0f);
@@ -237,6 +239,8 @@ void CViewer::InitAnimatedMode()
 {
   if(m_vAnimatedModels.size() != 0)
   {
+    CORE->GetRenderer()->SetUniqueRenderPath("forward");
+
     CORE->GetLightManager()->SetLightsEnabled(false);
 
     if(m_pObjectModeLight)
@@ -538,10 +542,10 @@ void CViewer::ToggleLights()
   m_bEnableLights = !m_bEnableLights;
 }
 
-void CViewer::ToggleHelp()
-{
-  m_bShowHelp = !m_bShowHelp;
-}
+//void CViewer::ToggleHelp()
+//{
+//  m_bShowHelp = !m_bShowHelp;
+//}
 
 void CViewer::IncreaseZoom()
 {
@@ -911,9 +915,29 @@ bool CViewer::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pc
     return true;
   }
 
-  if(strcmp(_pcAction, "ShowAjuda") == 0)
+  if(strcmp(_pcAction, "toggleMENU") == 0)
   {
-    //ToggleHelp();
+    ToggleInfo();
+    return true;
+  }
+
+  if(strcmp(_pcAction, "SetLightsONOFF") == 0)
+  {
+    ToggleLights();
+    return true;
+  }
+
+  if(strcmp(_pcAction, "ReloadLights") == 0)
+  {
+    CORE->GetLightManager()->Reload();
+    m_pObjectModeLight = CORE->GetLightManager()->CreateDirectionalLight("ObjectModeLight",
+                                                                        Vect3f(0.0f),
+                                                                        Vect3f(1.0f,1.0f,1.0f),
+                                                                        CColor(Vect3f(1.0f,1.0f,1.0f)),
+                                                                        50.0f,
+                                                                        80.0f,
+                                                                        false);
+    InitMode();
     return true;
   }
 
@@ -926,6 +950,12 @@ bool CViewer::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pc
   if(strcmp(_pcAction, "Pitch") == 0)
   {
     m_vMouseDelta.y = (int)_fDelta;
+    return true;
+  }
+
+  if(strcmp(_pcAction, "SetNextMaterial") == 0)
+  {
+    NextMaterialProperty();
     return true;
   }
   
@@ -1043,11 +1073,6 @@ bool CViewer::ExecuteFreeModeAction(float _fDeltaSeconds, float _fDelta, const c
   //  DecrementAmbientLight();
   //  return true;
   //}
-
-  if(strcmp(_pcAction, "SetLightsONOFF") == 0)
-  {
-    ToggleLights();
-  }
 
   //if(strcmp(_pcAction, "ShootBOT") == 0)
   //{
@@ -1224,6 +1249,26 @@ void CViewer::SetNextMode()
   InitMode();
 }
 
+void CViewer::NextMaterialProperty()
+{
+  switch(m_eCurrentMaterialProperty)
+  {
+    case (CViewer::SPECULAR):
+      m_eCurrentMaterialProperty = CViewer::GLOSSINESS;
+      break;
+    case (CViewer::GLOSSINESS):
+      m_eCurrentMaterialProperty = CViewer::GLOW;
+      break;
+    case (CViewer::GLOW):
+      m_eCurrentMaterialProperty = CViewer::SPECULAR;
+      break;
+    default:
+      break;
+  }
+
+  InitMode();
+}
+
 void CViewer::ReloadCurrentMesh()
 {
   CInstanceMesh* l_pCurrentMesh = (CInstanceMesh*)(*m_itCurrentMesh);
@@ -1290,7 +1335,7 @@ void CViewer::ReloadMaterialValues(const vector<CMaterial*>& _vMaterials)
 
 void CViewer::ShowInfo()
 {
-  if(m_bShowHelp)
+  if(m_bShowInfo)
   {
     switch(m_iMode) {
     case FREE_MODE:
@@ -1310,13 +1355,11 @@ void CViewer::ShowInfo()
 
 void CViewer::ShowFreeModeInfo()
 {
-  uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("arial");
-  uint32 l_uiFontTypeTitle = FONT_MANAGER->GetTTF_Id("Deco");
-  uint32 l_uiFontTypeTitle2 = FONT_MANAGER->GetTTF_Id("xfiles");
-  int l_iPosicio = 420;
-  int l_iPosicio2 = 400;
-  string l_szMsg3("Mode Escena");
-  stringstream l_SStream;
+  //uint32 l_uiFontType = FONT_MANAGER->GetTTF_Id("arial");
+  //int l_iPosicio = 420;
+  //int l_iPosicio2 = 400;
+  //string l_szMsg3("Mode Escena");
+  //stringstream l_SStream;
 
   
   //l_SStream << "  Mode Lights -> ";
@@ -1329,26 +1372,25 @@ void CViewer::ShowFreeModeInfo()
   //case CMaterial::SHOW_B          : l_SStream << "Show B" ; break;
   //}
 
-  FONT_MANAGER->DrawText(550,40,colGREEN,l_uiFontType,l_SStream.str().c_str());
+  //FONT_MANAGER->DrawText(550,40,colGREEN,l_uiFontType,l_SStream.str().c_str());
 
   //FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg3.c_str());
 
-  /*
-  if(m_bShowHelp)
-  {
-    l_SStreamHelp << "---<Ajuda>---" <<  endl;
-    l_SStreamHelp << "[Canvi de Mode] Tecla M" <<  endl;
-    l_SStreamHelp << "[Mov. Endavant] W" <<  endl;
-    l_SStreamHelp << "[Mov. Endarrera] S" <<  endl;
-    l_SStreamHelp << "[Mov. Dreta] D" <<  endl;
-    l_SStreamHelp << "[Mov. Esquerra] A" <<  endl;
-    l_SStreamHelp << "[Vista Càmera] Ratolí" <<  endl;
-    l_SStreamHelp << "[Correr] Mantenir L_Shift" <<  endl;
-    l_SStreamHelp << "[Ocultar Ajuda] F1" <<  endl;
-
-    FONT_MANAGER->DrawText(550,l_iPosicio2,colGREEN,l_uiFontType,l_SStreamHelp.str().c_str());
-  }
-  */
+  
+  //if(m_bShowHelp)
+  //{
+  //  l_SStreamHelp << "---<Ajuda>---" <<  endl;
+  //  l_SStreamHelp << "[Canvi de Mode] Tecla M" <<  endl;
+  //  l_SStreamHelp << "[Mov. Endavant] W" <<  endl;
+  //  l_SStreamHelp << "[Mov. Endarrera] S" <<  endl;
+  //  l_SStreamHelp << "[Mov. Dreta] D" <<  endl;
+  //  l_SStreamHelp << "[Mov. Esquerra] A" <<  endl;
+  //  l_SStreamHelp << "[Vista Càmera] Ratolí" <<  endl;
+  //  l_SStreamHelp << "[Correr] Mantenir L_Shift" <<  endl;
+  //  l_SStreamHelp << "[Ocultar Ajuda] F1" <<  endl;
+  //
+  //  FONT_MANAGER->DrawText(550,l_iPosicio2,colGREEN,l_uiFontType,l_SStreamHelp.str().c_str());
+  //}
 
 }
 
@@ -1358,15 +1400,14 @@ void CViewer::ShowMeshModeInfo()
   uint32 l_uiFontTypeTitle = FONT_MANAGER->GetTTF_Id("Deco");
   uint32 l_uiFontTypeTitle2 = FONT_MANAGER->GetTTF_Id("xfiles");
   int l_iPosicio = 100;
-  int l_iPosicio2 = 400;
+  int l_iPosicio2 = 20;
   string l_szMsg("Mode Meshes");
   stringstream l_SStream;
-  stringstream l_SStreamHelp;
+  //stringstream l_SStreamHelp;
   CInstanceMesh* l_pMeshInstance;
 
   if (m_vMeshes.size() > 0)
   {
-    //FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg.c_str());
     l_pMeshInstance = (CInstanceMesh*)(*m_itCurrentMesh);
     Vect3f l_vDimension = l_pMeshInstance->GetBoundingBox()->GetDimension();
 
@@ -1385,24 +1426,25 @@ void CViewer::ShowMeshModeInfo()
     const vector<CMaterial*>& l_vMaterials = l_pMeshInstance->GetStaticMesh()->GetMaterials();
 
     l_SStream << ShowMaterialProperties(l_vMaterials);
-
-    FONT_MANAGER->DrawText(0,l_iPosicio,colBLACK,l_uiFontType,l_SStream.str().c_str());
   }
 
-  /*
-  if(m_bShowHelp)
-  {
-      l_SStreamHelp << "---<Ajuda>---" <<  endl;
-      l_SStreamHelp << "[Canvi de Mode] Tecla M" <<  endl;
-      l_SStreamHelp << "[Següent Mesh] Fletxa Dreta" <<  endl;
-      l_SStreamHelp << "[Anterior Mesh] Fletxa Esquerra" <<  endl;
-      l_SStreamHelp << "[Moure Càmera] Ratolí" <<  endl;
-      l_SStreamHelp << "[Zoom] Rodeta Ratolí" <<  endl;
-      l_SStreamHelp << "[Ocultar Ajuda] F1" <<  endl;
-          
-      FONT_MANAGER->DrawText(550,l_iPosicio2,colGREEN,l_uiFontType,l_SStreamHelp.str().c_str());
-  }
-  */
+  //if(m_bShowHelp)
+  //{
+  //    l_SStreamHelp << "---<Ajuda>---" <<  endl;
+  //    l_SStreamHelp << "[Canvi de Mode] Tecla M" <<  endl;
+  //    l_SStreamHelp << "[Següent Mesh] Fletxa Dreta" <<  endl;
+  //    l_SStreamHelp << "[Anterior Mesh] Fletxa Esquerra" <<  endl;
+  //    l_SStreamHelp << "[Moure Càmera] Ratolí" <<  endl;
+  //    l_SStreamHelp << "[Zoom] Rodeta Ratolí" <<  endl;
+  //    l_SStreamHelp << "[Ocultar Ajuda] F1" <<  endl;
+  //        
+  //    FONT_MANAGER->DrawText(550,l_iPosicio2,colGREEN,l_uiFontType,l_SStreamHelp.str().c_str());
+  //}
+
+  //titol
+  //FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg.c_str());
+  //contingut
+  FONT_MANAGER->DrawText(0,l_iPosicio,colBLACK,l_uiFontType,l_SStream.str().c_str());
 }
 
 void CViewer::ShowAnimatedModeInfo()
@@ -1411,15 +1453,14 @@ void CViewer::ShowAnimatedModeInfo()
   uint32 l_uiFontTypeTitle = FONT_MANAGER->GetTTF_Id("Deco");
   uint32 l_uiFontTypeTitle2 = FONT_MANAGER->GetTTF_Id("xfiles");
   int l_iPosicio = 100;
-  int l_iPosicio2 = 400;
+  int l_iPosicio2 = 20;
   string l_szMsg("Mode Animats");
   stringstream l_SStream;
-  stringstream l_SStreamHelp;
+  //stringstream l_SStreamHelp;
   CRenderableAnimatedInstanceModel* l_pAnimatedInstance;
 
   if (m_vAnimatedModels.size() > 0)
   {
-    //FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg.c_str());
     l_pAnimatedInstance = (CRenderableAnimatedInstanceModel*)(*m_itCurrentAnimated);
     CRenderableAnimatedInstanceModel* l_pRenderModel = (CRenderableAnimatedInstanceModel*)l_pAnimatedInstance;
 
@@ -1435,26 +1476,27 @@ void CViewer::ShowAnimatedModeInfo()
 
     const vector<CMaterial*>& l_vMaterials = l_pAnimatedInstance->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetMaterials();
     l_SStream << ShowMaterialProperties(l_vMaterials);
-
-    FONT_MANAGER->DrawText(0,l_iPosicio,colBLACK,l_uiFontType,l_SStream.str().c_str());
   }
 
-    /*
-    if(m_bShowHelp)
-    {
-        l_SStreamHelp << "---<Ajuda>---" <<  endl;
-        l_SStreamHelp << "[Canvi de Mode] Tecla M" <<  endl;
-        l_SStreamHelp << "[Següent Animat] Fletxa Dreta" <<  endl;
-        l_SStreamHelp << "[Anterior Animat] Fletxa Esquerra" <<  endl;
-        l_SStreamHelp << "[Següent Animacio] Fletxa UP" <<  endl;
-        l_SStreamHelp << "[Anterior Animacio] Fletxa DOWN" <<  endl;
-        l_SStreamHelp << "[Moure Càmera] Ratolí" <<  endl;
-        l_SStreamHelp << "[Zoom] Rodeta Ratolí" <<  endl;
-        l_SStreamHelp << "[Ocultar Ajuda] F1" <<  endl;
-          
-        FONT_MANAGER->DrawText(550,l_iPosicio2,colGREEN,l_uiFontType,l_SStreamHelp.str().c_str());
-    }
-    */
+  //if(m_bShowHelp)
+  //{
+  //    l_SStreamHelp << "---<Ajuda>---" <<  endl;
+  //    l_SStreamHelp << "[Canvi de Mode] Tecla M" <<  endl;
+  //    l_SStreamHelp << "[Següent Animat] Fletxa Dreta" <<  endl;
+  //    l_SStreamHelp << "[Anterior Animat] Fletxa Esquerra" <<  endl;
+  //    l_SStreamHelp << "[Següent Animacio] Fletxa UP" <<  endl;
+  //    l_SStreamHelp << "[Anterior Animacio] Fletxa DOWN" <<  endl;
+  //    l_SStreamHelp << "[Moure Càmera] Ratolí" <<  endl;
+  //    l_SStreamHelp << "[Zoom] Rodeta Ratolí" <<  endl;
+  //    l_SStreamHelp << "[Ocultar Ajuda] F1" <<  endl;
+  //        
+  //    FONT_MANAGER->DrawText(550,l_iPosicio2,colGREEN,l_uiFontType,l_SStreamHelp.str().c_str());
+  //}
+
+  //titol
+  //FONT_MANAGER->DrawText((uint32)300,(uint32)10,colGREEN,l_uiFontTypeTitle,l_szMsg.c_str());
+  //contingut
+  FONT_MANAGER->DrawText(0,l_iPosicio,colBLACK,l_uiFontType,l_SStream.str().c_str());
 }
 
 string CViewer::ShowMaterialProperties(const vector<CMaterial*>& _vMaterials)
@@ -1507,9 +1549,19 @@ string CViewer::ShowMaterialProperties(const vector<CMaterial*>& _vMaterials)
     l_SStream << endl;
 
     l_SStream << "Parallax Height: " << l_pMaterial->GetParallaxHeight() << endl;
-    l_SStream << "Glossiness: " << l_pMaterial->GetGlossiness() << "MAX(" << l_pMaterial->GetGlossiness() << ")" << endl;
-    l_SStream << "Specular factor: " << l_pMaterial->GetSpecularFactor() << "MAX(" << (l_pMaterial->GetSpecularFactor()/.03f) << ")" << endl;
-    l_SStream << "Glow intensity: " << l_pMaterial->GetGlowIntensity() << "MAX(" << (l_pMaterial->GetGlowIntensity()/.02f) << ")" << endl;
+
+    if(m_eCurrentMaterialProperty == CViewer::GLOSSINESS)
+      l_SStream << "---[SELECTED]--->";
+    l_SStream << "Glossiness: " << l_pMaterial->GetGlossiness() << "3dMAX(" << l_pMaterial->GetGlossiness() << ")" << endl;
+
+    if(m_eCurrentMaterialProperty == CViewer::SPECULAR)
+      l_SStream << "---[SELECTED]--->";
+    l_SStream << "Specular factor: " << l_pMaterial->GetSpecularFactor() << "3dMAX(" << (l_pMaterial->GetSpecularFactor()/.03f) << ")" << endl;
+
+    if(m_eCurrentMaterialProperty == CViewer::GLOW)
+      l_SStream << "---[SELECTED]--->";
+    l_SStream << "Glow intensity: " << l_pMaterial->GetGlowIntensity() << "3dMAX(" << (l_pMaterial->GetGlowIntensity()/.02f) << ")" << endl;
+
     l_SStream << "Alfa blend: " << l_pMaterial->HasAlphaBlending() << endl;
 
     ++l_itMaterial;

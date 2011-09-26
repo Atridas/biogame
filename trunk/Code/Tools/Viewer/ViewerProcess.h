@@ -43,7 +43,7 @@ public:
   virtual void          RegisterLuaFunctions      ();
 
   void                  ResetViewer               ();
-  void                  ToggleNormalRendering     ();
+  //void                  ToggleNormalRendering     ();
 
 private:
 

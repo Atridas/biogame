@@ -17,14 +17,15 @@ class COmniLight;
 //TODO fer que puguis canviar de XML dinàmicament BÉ
 class CLightManager : public CMapManager<CLight>
 {
-  string m_szFileName;
 public:
-  CLightManager() : m_szFileName(""),m_vAmbientLight(0) {};
+  CLightManager() : m_vAmbientLight(0) {};
   ~CLightManager()  {Done();};
 
   void Release(void);
 
   bool Load(const string& _szFileName);
+  bool Reload();
+
   void Render(CRenderManager* _pRM) const;
   
   CLight* GetLight (int _i)  const;
@@ -62,6 +63,7 @@ private:
   Vect3f m_vAmbientLight;
 
   vector<CLight*> m_vLights;
+  set<string>     m_sFileNames;
 };
 
 #endif

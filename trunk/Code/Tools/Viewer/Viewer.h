@@ -28,6 +28,13 @@ public:
     ANIMATED_MODE
   };
 
+  enum EMaterialProperty
+  {
+    SPECULAR = 0,
+    GLOSSINESS,
+    GLOW
+  };
+
   //enum ENormalModes
   //{
   //  NO_NORMALS,
@@ -54,6 +61,7 @@ public:
   //getters
   bool GetRenderLights() {return m_bRenderLights;};
   //ENormalModes GetNormalRendering() {return m_eNormalRendering;};
+  EMaterialProperty GetCurrentMaterialProperty() {return m_eCurrentMaterialProperty;};
   CCamera* GetCamera() {return m_pObjectCamera;};
   int GetCurrentMode() { return m_iMode; };
   //CMaterial::ELightmapMode GetLightmapMode() {return m_eLightmapMode;};
@@ -84,7 +92,7 @@ public:
   void DecrementGlossAnimated();
 
   void ToggleLights();
-  void ToggleHelp();
+  //void ToggleHelp();
 
   void IncreaseZoom();
   void DecreaseZoom();
@@ -105,6 +113,11 @@ public:
   bool ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction);
 
   void Reset() {Release(); Init();};
+
+  void NextMaterialProperty();
+
+  void ToggleInfo() { m_bShowInfo = !m_bShowInfo; };
+  bool GetInfoActive() const {return m_bShowInfo;};
 
   //void ActivateGui(bool _bValue) { m_bGuiActive = _bValue; };
   //bool IsGuiActive() {return m_bGuiActive;};
@@ -154,7 +167,7 @@ private:
 
   int  m_iMode;
   //bool m_bGuiActive;
-  bool m_bShowHelp;
+  bool m_bShowInfo;
 
   bool m_bMoveFwd;
   bool m_bMoveBack;
@@ -169,6 +182,7 @@ private:
 
   //material info
   //CMaterial::ELightmapMode m_eLightmapMode;
+  EMaterialProperty m_eCurrentMaterialProperty;
   float m_fGlowIntensity;
   float m_fSpecIntensity;
   float m_fGlossiness;

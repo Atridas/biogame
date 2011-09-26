@@ -9,7 +9,16 @@ bool CLightManager::Load(const string& _szFileName)
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "CLightManager::Load \"%s\"", _szFileName.c_str());
 
-  m_szFileName = _szFileName;
+  if(m_sFileNames.find(_szFileName) == m_sFileNames.cend())
+  {
+    m_sFileNames.insert(_szFileName);
+  }
+  else
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"CLightManager:: Fitxer XML repetit \"%s\"", _szFileName.c_str());
+    SetOk(false);
+    return false;
+  }
 
   CXMLTreeNode l_XMLLights;
   if(!l_XMLLights.LoadFile(_szFileName.c_str()))
@@ -64,10 +73,29 @@ bool CLightManager::Load(const string& _szFileName)
   return IsOk();
 }
 
+bool CLightManager::Reload()
+{
+  set<string> l_sPreviousFileNames = m_sFileNames;
+  Release();
+
+  set<string>::iterator l_itEnd = l_sPreviousFileNames.cend();
+
+  for(set<string>::iterator l_itCurrent = l_sPreviousFileNames.cbegin(); l_itCurrent != l_itEnd; ++l_itCurrent)
+  {
+    if(!Load(*l_itCurrent))
+    {
+      return false;
+    }
+  }
+
+  return true;  
+}
+
 void CLightManager::Release()
 {
   CMapManager::Release();
   m_vLights.clear();
+  m_sFileNames.clear();
 }
 
 CDirectionalLight* CLightManager::CreateDirectionalLight(string _szName,

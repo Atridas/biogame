@@ -36,39 +36,18 @@
 	<action name="ReloadScript">
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F11"/>
 	</action>
- 
- 	<action name="reloadGUI" script="GUI_MANAGER:reloadGui()">
-		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F12"/>
-	</action>
   
   <action name="Console">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_GRAVE"/>
   </action>
 
 	<!--.......VIEWER ACTIONS.........-->
-
-  <action name="Change Lightmap Mode">
-    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_K"/>
+  <action name="toggleMENU">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_SPACE"/>
   </action>
   
-  <action name="toggleGUI" script="toggle_gui()">
-		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_TAB"/>
-	</action>
-  
-  <action name="setNextMode" script="set_next_mode()">
+  <action name="setNextMode">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_M"/>
-  </action>
-  
-  <action name="showNormals" script="VIEWER_PROCESS:toggle_normals()">
-    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_N"/>
-  </action>
-  
-  <action name="showBoxes" script="VIEWER:toggle_boxes()">
-    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_B"/>
-  </action>
-  
-  <action name="toggleSpheres" script="VIEWER:toggle_spheres()">
-    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_P"/>
   </action>
   
   <action name="next" script="next()">
@@ -87,10 +66,34 @@
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_DOWN"/>
   </action>
   
-  <action name="ShowAjuda">
-		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F1"/>
-	</action>
-
+  <action name="ReloadMeshActual">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_R"/>
+  </action>
+  
+  <action name="ReloadLights">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_T"/>
+  </action>
+  
+  <action name="SetNextMaterial">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_TAB"/>
+  </action>
+  
+  <action name="Increase" script="increase()">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_RBRACKET"/>
+  </action>
+  
+  <action name="Decrease" script="decrease()">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_SLASH"/>
+  </action>
+  
+  <action name="NpIncrease" script="increase()">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_NPPLUS"/>
+  </action>
+  
+  <action name="NpDecrease" script="decrease()">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_NPMINUS"/>
+  </action>
+  
   <action name="Yaw">
     <input deviceType="IDV_MOUSE" AxisType="AXIS_MOUSE_X" Delta="1.f"/>
   </action>
@@ -106,28 +109,11 @@
   <action name="SetLightsONOFF">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_L"/>
   </action>
-
-  <action name="ReloadMeshActual">
-    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_R"/>
-  </action>
-  
-  <!--........BOT ACTIONS...........-->
-  <action name="ShootBOT">
-    <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN" Code="MOUSE_BUTTON_LEFT"/>
-  </action>
-  
-  <action name="AimBot">
-    <input deviceType="IDV_MOUSE" EventType="EVENT_DOWN_UP" Code="MOUSE_BUTTON_RIGHT"/>
-  </action>
   
   <!--...........MOVEMENT...........-->
 	<action name="Run">
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_LSHIFT"/>
 	</action>
-
-	<!--action name="Walk">
-		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_LSHIFT"/>
-	</action-->
 
 	<action name="MoveFwd">
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_W"/>

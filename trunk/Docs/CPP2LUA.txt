@@ -1643,12 +1643,33 @@ VIEWER
       ANIMATED
       CViewer::ANIMATED_MODE
       
+      SPECULAR
+      CViewer::SPECULAR
+      
+      GLOSSINESS
+      CViewer::GLOSSINESS
+      
+      GLOW
+      CViewer::GLOW
+      
     Methods:
+      toggle_info
+      void ToggleInfo()
+      
+      info_active
+      bool GetInfoActive() const
+    
       get_current_mode
       int GetCurrentMode()
       
       next_mode
       void SetNextMode()
+      
+      next_material
+      void NextMaterialProperty()
+      
+      get_material
+      EMaterialProperty GetCurrentMaterialProperty()
       
       glow_inc_mesh
       void IncrementGlowMesh()
