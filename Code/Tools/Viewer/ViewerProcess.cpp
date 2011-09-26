@@ -104,7 +104,13 @@ void CViewerProcess::RegisterLuaFunctions()
         value("MESH",    CViewer::MESH_MODE),
         value("ANIMATED",CViewer::ANIMATED_MODE)
       ]
-      //GUI
+      .enum_("MATERIAL")
+      [
+        value("SPECULAR",     CViewer::SPECULAR),
+        value("GLOSSINESS",   CViewer::GLOSSINESS),
+        value("GLOW",         CViewer::GLOW)
+      ]
+      //ACTIONS
       .def("get_current_mode",    &CViewer::GetCurrentMode)
       //.def("set_mode",            &CViewer::SetMode)
       //.def("activate_gui",        &CViewer::ActivateGui)
@@ -112,6 +118,10 @@ void CViewerProcess::RegisterLuaFunctions()
       //.def("toggle_boxes",        &CViewer::ToggleShowBoxes)
       //.def("toggle_spheres",      &CViewer::ToggleShowSpheres)
       .def("next_mode",           &CViewer::SetNextMode)
+      .def("next_material",       &CViewer::NextMaterialProperty)
+      .def("get_material",        &CViewer::GetCurrentMaterialProperty)
+      .def("toggle_info",         &CViewer::ToggleInfo)
+      .def("info_active",         &CViewer::GetInfoActive)
       .def("glow_inc_mesh",       &CViewer::IncrementGlowMesh)
       .def("glow_dec_mesh",       &CViewer::DecrementGlowMesh)
       .def("glow_inc_anim",       &CViewer::IncrementGlowAnimated)
@@ -149,9 +159,4 @@ void CViewerProcess::ResetViewer()
     m_pViewer->Reset(); 
     m_pCamera = m_pViewer->GetCamera();
   }
-}
-
-void CViewerProcess::ToggleNormalRendering()
-{
-
 }

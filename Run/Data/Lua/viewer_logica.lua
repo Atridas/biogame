@@ -18,7 +18,7 @@ function load_level(_szLevel)
 end
 ]]
 
---selecciona el següent mode
+--[[selecciona el següent mode
 function set_next_mode()
   local l_iState = get_viewer():get_current_mode()
   
@@ -28,18 +28,61 @@ function set_next_mode()
     switch_view(l_iState, get_viewer():get_current_mode())
   end
 end
+]]
 
---selecciona un mode concret
+--[[selecciona un mode concret
 function set_view(l_iNewState)
   local l_iState = get_viewer():get_current_mode()
   switch_view(l_iState, l_iNewState)
 end
+]]
 
---canvia a la següent vista i actualitza la GUI
+--[[canvia a la següent vista i actualitza la GUI
 function switch_view(_old, _new)
   deactivate_view(_old)
   get_viewer():set_mode(_new)
   show_gui()
+end
+]]
+
+--següent mesh o animated model
+function next()
+  local l_iState = get_viewer():get_current_mode()
+  
+  if l_iState == Viewer.MESH then
+    get_viewer():next_mesh()
+  elseif l_iState == Viewer.ANIMATED then
+    get_viewer():next_model()
+  end
+end
+
+--anterior mesh o animated model
+function previous()
+  local l_iState = get_viewer():get_current_mode()
+  
+  if l_iState == Viewer.MESH then
+    get_viewer():previous_mesh()
+  elseif l_iState == Viewer.ANIMATED then
+    get_viewer():previous_model()
+  end
+end
+
+--següent animació
+function next_animation()
+  local l_iState = get_viewer():get_current_mode()
+  
+  if l_iState == Viewer.ANIMATED then
+    get_viewer():next_animation()
+  end
+end
+
+--anterior animació
+function previous_animation()
+  local l_iState = get_viewer():get_current_mode()
+  
+  if l_iState == Viewer.ANIMATED then
+    get_viewer():previous_animation()
+  end
 end
 
 --Puja el nivell de glow de l'objecte actual
@@ -108,7 +151,7 @@ function gloss_down()
   end
 end
 
---Puja el nivell de bump de l'objecte actual
+--[[Puja el nivell de bump de l'objecte actual
 function bump_up()
   local l_iState = get_viewer():get_current_mode()
   
@@ -118,8 +161,9 @@ function bump_up()
     get_viewer():bump_inc_anim()
   end
 end
+]]
 
---Puja el nivell de bump de l'objecte actual
+--[[Puja el nivell de bump de l'objecte actual
 function bump_down()
   local l_iState = get_viewer():get_current_mode()
   
@@ -129,43 +173,30 @@ function bump_down()
     get_viewer():bump_dec_anim()
   end
 end
+]]
 
---següent mesh o animated model
-function next()
-  local l_iState = get_viewer():get_current_mode()
+--incrementa la propietat de material sel·leccionat
+function increase()
+  local l_iMaterial = get_viewer():get_material()
   
-  if l_iState == Viewer.MESH then
-    get_viewer():next_mesh()
-  elseif l_iState == Viewer.ANIMATED then
-    get_viewer():next_model()
+  if l_iMaterial == Viewer.SPECULAR then
+    spec_up()
+  elseif l_iMaterial == Viewer.GLOSSINESS then
+    gloss_up()
+  elseif l_iMaterial == Viewer.GLOW then
+    glow_up()
   end
 end
 
---anterior mesh o animated model
-function previous()
-  local l_iState = get_viewer():get_current_mode()
+--decrementa la propietat de material sel·leccionat
+function decrease()
+  local l_iMaterial = get_viewer():get_material()
   
-  if l_iState == Viewer.MESH then
-    get_viewer():previous_mesh()
-  elseif l_iState == Viewer.ANIMATED then
-    get_viewer():previous_model()
-  end
-end
-
---següent animació
-function next_animation()
-  local l_iState = get_viewer():get_current_mode()
-  
-  if l_iState == Viewer.ANIMATED then
-    get_viewer():next_animation()
-  end
-end
-
---anterior animació
-function previous_animation()
-  local l_iState = get_viewer():get_current_mode()
-  
-  if l_iState == Viewer.ANIMATED then
-    get_viewer():previous_animation()
+  if l_iMaterial == Viewer.SPECULAR then
+    spec_down()
+  elseif l_iMaterial == Viewer.GLOSSINESS then
+    gloss_down()
+  elseif l_iMaterial == Viewer.GLOW then
+    glow_down()
   end
 end
