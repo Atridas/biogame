@@ -13,7 +13,6 @@
 #include "StaticMesh.h"
 #include "AnimatedCoreModel.h"
 #include <LightManager.h>
-#include "SceneEffectManager.h"
 #include "SpotLight.h"
 #include "OmniLight.h"
 #include "SoundManager.h"

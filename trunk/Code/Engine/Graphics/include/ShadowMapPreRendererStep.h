@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #ifndef __SHADOW_MAP_PRE_SCENE_RENDERER_STEP_H__
 #define __SHADOW_MAP_PRE_SCENE_RENDERER_STEP_H__
 
@@ -32,5 +32,5 @@ private:
   CFPSCamera m_FPSCamera;
 };
 
-#endif
+#endif*/
 

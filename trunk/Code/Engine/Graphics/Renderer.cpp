@@ -5,7 +5,6 @@
 #include "TextureRenderTarget.h"
 #include "BackBufferRenderTarget.h"
 #include "MultipleRenderTarget.h"
-#include "PreSceneRendererStep.h"
 #include "SceneRendererStep.h"
 #include "PostSceneRendererStep.h"
 #include "DeferredPostSceneRendererStep.h"
@@ -37,7 +36,6 @@ bool CRenderer::Init(const string& _szFileName)
     m_szDefaultRenderTarget = l_treeRenderer.GetPszISOProperty("default", "backbuffer", true);
 
     CXMLTreeNode l_treeRenderTargets = l_treeRenderer.GetChild("render_targets");
-    CXMLTreeNode l_treePreRenderers  = l_treeRenderer.GetChild("pre_scene_renderers");
     CXMLTreeNode l_treeRenderers     = l_treeRenderer.GetChild("scene_renderers");
     CXMLTreeNode l_treePostRenderers = l_treeRenderer.GetChild("post_scene_renderers");
     CXMLTreeNode l_treeRenderPaths   = l_treeRenderer.GetChild("render_paths");
@@ -186,54 +184,6 @@ bool CRenderer::Init(const string& _szFileName)
       }
     }
 
-    if(!l_treePreRenderers.Exists())
-    {
-      LOGGER->AddNewLog(ELL_INFORMATION,"CRenderer::Init no hi ha PreSeceneRenderers");
-    }else{
-
-      int l_iNumChildren = l_treePreRenderers.GetNumChildren();
-
-      LOGGER->AddNewLog(ELL_INFORMATION,"CRenderer::Init inicialitzant %d PreSceneRenderers",l_iNumChildren);
-
-      for(int i = 0; i < l_iNumChildren;i++)
-      {
-        CXMLTreeNode l_treePreRenderer = l_treePreRenderers(i);
-
-        if(string(l_treePreRenderer.GetName()) == "pre_scene_renderer")
-        {
-          CPreSceneRendererStep* l_pPreRenderer = 0;
-
-          if(string(l_treePreRenderer.GetPszProperty("type","",false)) == "shadow_map_scene_renderer")
-          {
-            l_pPreRenderer = new CShadowMapPreRendererStep();
-          }else if(string(l_treePreRenderer.GetPszProperty("type","",false)) == "pre_scene_renderer")
-          {
-            l_pPreRenderer = new CPreSceneRendererStep();
-          }else{
-            LOGGER->AddNewLog(ELL_ERROR,"CRenderer::Init PreRenderer type no reconegut");
-          }
-
-          if(l_pPreRenderer)
-          {
-            if(!l_pPreRenderer->Init(l_treePreRenderer, m_szDefaultRenderTarget))
-            {
-              CHECKED_DELETE(l_pPreRenderer);
-              LOGGER->AddNewLog(ELL_ERROR,"CRenderer::Init error inicialitzant PreRenderer");
-            }else{
-              m_vPreSceneRendererSteps.push_back(l_pPreRenderer);
-              m_mapPreSceneRendererSteps[l_pPreRenderer->GetName()] = l_pPreRenderer;
-            }
-          }
-        }
-        else if(!l_treePreRenderer.IsComment())
-        {
-          LOGGER->AddNewLog(ELL_WARNING,"CRenderer::Init element no reconegut %s",l_treePreRenderer.GetName());
-        }
-
-      }
-
-    }
-
     if(!l_treeRenderers.Exists())
     {
       LOGGER->AddNewLog(ELL_INFORMATION,"CRenderer::Init no hi ha SeceneRenderers");
@@ -264,8 +214,6 @@ bool CRenderer::Init(const string& _szFileName)
         {
           LOGGER->AddNewLog(ELL_WARNING,"CRenderer::Init element no reconegut %s",l_treeRenderer.GetName());
         }
-
-        SetSceneRenderer(l_szDefaultRenderer);
 
       }
 
@@ -377,11 +325,6 @@ bool CRenderer::Init(const string& _szFileName)
 
 void CRenderer::Update(float _fDeltaTime)
 {
-  //desactivar els steps
-  for(uint32 i = 0; i < m_vPreSceneRendererSteps.size(); ++i)
-  {
-    m_vPreSceneRendererSteps[i]->Update(_fDeltaTime);
-  }
   for(uint32 i = 0; i < m_vPostSceneRendererSteps.size(); ++i)
   {
     m_vPostSceneRendererSteps[i]->Update(_fDeltaTime);
@@ -405,35 +348,6 @@ void CRenderer::Render(CProcess* _pProcess)
   m_pCamera = _pProcess->GetCamera();
 
   l_pRM->BeginRendering();
-
-  vector<CPreSceneRendererStep*>::iterator l_itPreRenderer = m_vPreSceneRendererSteps.begin();
-  vector<CPreSceneRendererStep*>::iterator l_itPreRendererEnd = m_vPreSceneRendererSteps.end();
-
-
-  for(;l_itPreRenderer != l_itPreRendererEnd; ++l_itPreRenderer)
-  {
-    CPreSceneRendererStep* l_pPreSceneRenderer = (*l_itPreRenderer);
-
-    if(l_pPreSceneRenderer->IsActive())
-    {
-      string l_szRenderTarget = l_pPreSceneRenderer->GetRenderTarget();
-      map<string,CRenderTarget*>::const_iterator l_it = m_mapRenderTargets.find(l_szRenderTarget);
-      if(l_it != m_mapRenderTargets.end())
-      {
-        l_it->second->Activate(l_pRM);
-        l_pEM->SetTextureWidthHeight(l_it->second->GetWidth(), l_it->second->GetHeight());
-      }
-
-
-      l_pPreSceneRenderer->ClearBuffer(l_pRM);
-      l_pPreSceneRenderer->Render(l_pRM, m_pCamera);
-
-      if(l_it != m_mapRenderTargets.end())
-      {
-        l_it->second->Deactivate(l_pRM);
-      }
-    }
-  }
 
   vector<CObject3DRenderable*> l_vOpaqueObjects, l_vAlphaObjects, l_vParticleEmiters;
 
@@ -526,19 +440,6 @@ void CRenderer::Release()
 
   m_mapRenderTargets.clear();
 
-  m_pCurrentSceneRenderer = 0;
-
-  vector<CPreSceneRendererStep*>::iterator l_itPreRenderer = m_vPreSceneRendererSteps.begin();
-  vector<CPreSceneRendererStep*>::iterator l_itPreRendererEnd = m_vPreSceneRendererSteps.end();
-
-  for(;l_itPreRenderer != l_itPreRendererEnd; ++l_itPreRenderer)
-  {
-    CHECKED_DELETE(*l_itPreRenderer);
-  }
-
-  m_vPreSceneRendererSteps.clear();
-  m_mapPreSceneRendererSteps.clear();
-
   vector<CSceneRendererStep*>::iterator l_itRenderer = m_vSceneRendererSteps.begin();
   vector<CSceneRendererStep*>::iterator l_itRendererEnd = m_vSceneRendererSteps.end();
 
@@ -580,31 +481,6 @@ CPostSceneRendererStep* CRenderer::GetPostSceneRendererStep(string _szName)
     return 0;
   }
   return l_It->second;
-}
-
-CPreSceneRendererStep* CRenderer::GetPreSceneRendererStep(string _szName)
-{
-  map<string,CPreSceneRendererStep*>::const_iterator l_It = m_mapPreSceneRendererSteps.find(_szName);
-  if(l_It == m_mapPreSceneRendererSteps.end()) 
-  {
-    return 0;
-  }
-  return l_It->second;
-}
-
-void CRenderer::SetSceneRenderer(const string& _szRendererName)
-{
-  m_pCurrentSceneRenderer = 0;
-
-  map<string,CSceneRendererStep*>::iterator l_it = m_mapSceneRendererSteps.find(_szRendererName);
-  if(l_it != m_mapSceneRendererSteps.end())
-  {
-    m_pCurrentSceneRenderer = l_it->second;
-  }
-  else
-  {
-    m_pCurrentSceneRenderer = 0;
-  }
 }
 
 void CRenderer::ActivateRenderPath  (const string& _szRenderPath)
@@ -652,10 +528,6 @@ void CRenderer::SetUniqueRenderPath(const string& _szRenderPath)
 void CRenderer::ActivateRenderPaths()
 {
   //desactivar els steps
-  for(uint32 i = 0; i < m_vPreSceneRendererSteps.size(); ++i)
-  {
-    m_vPreSceneRendererSteps[i]->SetActive(false);
-  }
   for(uint32 i = 0; i < m_vPostSceneRendererSteps.size(); ++i)
   {
     m_vPostSceneRendererSteps[i]->SetActive(false);
@@ -664,7 +536,6 @@ void CRenderer::ActivateRenderPaths()
   {
     m_vSceneRendererSteps[i]->SetActive(false);
   }
-  m_pCurrentSceneRenderer = 0;
 
   map<string, SRenderPath*>::iterator l_it  = m_mapRenderPaths.begin();
   map<string, SRenderPath*>::iterator l_end = m_mapRenderPaths.end();
@@ -672,19 +543,8 @@ void CRenderer::ActivateRenderPaths()
   {
     if(l_it->second->m_bActive)
     {
-      set<string>::iterator l_it2  = l_it->second->m_PreSceneRenderSteps.begin();
-      set<string>::iterator l_end2 = l_it->second->m_PreSceneRenderSteps.end  ();
-      for(; l_it2 != l_end2; ++l_it2)
-      {
-        map<string,CPreSceneRendererStep*>::iterator l_it = m_mapPreSceneRendererSteps.find(*l_it2);
-        if(l_it != m_mapPreSceneRendererSteps.end())
-        {
-          l_it->second->SetActive(true);
-        }
-      }
-
-      l_it2  = l_it->second->m_PostSceneRenderSteps.begin();
-      l_end2 = l_it->second->m_PostSceneRenderSteps.end  ();
+      set<string>::iterator l_it2  = l_it->second->m_PostSceneRenderSteps.begin();
+      set<string>::iterator l_end2 = l_it->second->m_PostSceneRenderSteps.end  ();
       for(; l_it2 != l_end2; ++l_it2)
       {
         map<string,CPostSceneRendererStep*>::iterator l_it = m_mapPostSceneRendererSteps.find(*l_it2);

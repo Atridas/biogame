@@ -66,28 +66,8 @@
     </multiple_render_targets>
     
   </render_targets>
-  
-  <pre_scene_renderers>
 
-    <pre_scene_renderer name="shadow_map_renderer" type="shadow_map_scene_renderer" render_target="RT_R_32F">
-
-      <material_effects static_mesh_effect="Depth" animated_model_effect="AnimatedDepth" />
-
-    </pre_scene_renderer>
-    
-    <!--<pre_scene_renderer name="glow_renderer" type="pre_scene_renderer">
-
-      <render_targets>
-        <render_target index="0" texture="glow_texture" />
-      </render_targets>
-
-      <material_effects static_mesh_effect="Glow" animated_model_effect="AnimatedGlow" />
-
-    </pre_scene_renderer>-->
-    
-  </pre_scene_renderers>
-
-  <scene_renderers default_renderer="deferred_renderer">
+  <scene_renderers>
     
     <scene_renderer name="forward_renderer" type="scene_renderer" render_target="forward_MRT" 
                     clear_color="true" clear_depth="1.0">

@@ -159,6 +159,10 @@ void CComponentPlayerController::UpdatePostPhysX(float _fDeltaTime)
 
 void CComponentPlayerController::Shoot()
 {
+  if(!m_bShootActive)
+  {
+    return;
+  }
   CEntityManager* l_pEM = ENTITY_MANAGER;
   CGameEntity* l_pPlayerEntity = GetEntity();
 
@@ -269,6 +273,10 @@ void CComponentPlayerController::Shoot()
 
 void CComponentPlayerController::Force()
 {
+  if(!m_bForceActive)
+  {
+    return;
+  }
   CGameEntity* l_pPlayerEntity = GetEntity();
   CRenderer *l_pRenderer = CORE->GetRenderer();
 

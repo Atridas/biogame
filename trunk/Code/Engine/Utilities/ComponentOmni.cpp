@@ -4,7 +4,7 @@
 #include "LightManager.h"
 #include "OmniLight.h"
 
-CComponentOmni* CComponentOmni::AddToEntity(CGameEntity* _pEntity, Vect3f& _vOffsetPosition, const CColor& _vColor, float _fStartRangeAtt, float _fEndRangeAtt)
+CComponentOmni* CComponentOmni::AddToEntity(CGameEntity* _pEntity, const Vect3f& _vOffsetPosition, const CColor& _vColor, float _fStartRangeAtt, float _fEndRangeAtt)
 {
   CComponentOmni *l_pComp = new CComponentOmni();
   assert(_pEntity && _pEntity->IsOk());
@@ -20,7 +20,7 @@ CComponentOmni* CComponentOmni::AddToEntity(CGameEntity* _pEntity, Vect3f& _vOff
   }
 }
 
-bool CComponentOmni::Init(CGameEntity* _pEntity, Vect3f& _vOffsetPosition, const CColor& _vColor, float _fStartRangeAtt, float _fEndRangeAtt)
+bool CComponentOmni::Init(CGameEntity* _pEntity, const Vect3f& _vOffsetPosition, const CColor& _vColor, float _fStartRangeAtt, float _fEndRangeAtt)
 {
   m_vOffset = _vOffsetPosition;
 

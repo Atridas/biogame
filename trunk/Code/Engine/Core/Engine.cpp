@@ -13,7 +13,6 @@
 #include <Console.h>
 #include <GUIManager.h>
 #include <EffectManager.h>
-#include "HDRPipeline.h"
 #include "Renderer.h"
 #include "LevelChanger.h"
 
@@ -39,11 +38,6 @@ bool CEngine::Init(const SInitParams& _InitParams,  HWND hWnd)
     m_pActiveProcess->Init(); 
     m_pActiveProcess->RegisterLuaFunctions();
   }
-  m_pHDR = new CHDRPipeline();
-  if(!m_pHDR->Init(_InitParams.EngineParams.szHDRFile))
-  {
-    CHECKED_DELETE( m_pHDR );
-  }
 
   m_pCore->GetActionManager()->SetProcess(m_pActiveProcess);
 
@@ -55,8 +49,6 @@ bool CEngine::Init(const SInitParams& _InitParams,  HWND hWnd)
 void CEngine::Release()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"Engine::Release");
-
-  CHECKED_DELETE(m_pHDR);
   
   for(VectorProcessPtr::iterator l_it = m_vProcesses.begin(); l_it != m_vProcesses.end(); ++l_it)
   {
@@ -90,64 +82,6 @@ void CEngine::Render()
   }
 }
 
-/*
-void CEngine::RenderHDR(CRenderManager* _pRM, CProcess* _pProcess)
-{
-  assert(m_pHDR->IsOk());
-
-  m_pHDR->PrepareTextures(_pRM, _pProcess);
-
-  _pRM->BeginRendering();
-  
-  m_pHDR->Render(_pRM);
-  _pProcess->PostRender(_pRM);
-	_pProcess->DebugInformation(_pRM);
-  
-  CEngine::RenderSystems(_pRM);
-
-	_pRM->EndRendering();
-}
-
-void CEngine::RenderNoHDR(CRenderManager* _pRM, CProcess* _pProcess)
-{
-  _pRM->BeginRendering();
-
-  _pRM->SetupMatrices(m_pActiveProcess->GetCamera());
-  _pProcess->Render(_pRM);
-  _pProcess->PostRender(_pRM);
-	_pProcess->DebugInformation(_pRM);
-
-  CEngine::RenderSystems(_pRM);
-
-	_pRM->EndRendering();
-  _pRM->Present();
-}
-
-
-void CEngine::RenderSystems(CRenderManager* _pRM)
-{
-  CFontManager* l_pFontManager = m_pCore->GetFontManager();
-  CLogRender* l_pLR = m_pCore->GetLogRender();
-
-  _pRM->EnableAlphaBlend();
-
-  if(l_pLR)
-    l_pLR->Render(_pRM,l_pFontManager);
-
-  CConsole* l_pC = m_pCore->GetConsole();
-  if(l_pC)
-    l_pC->Render(_pRM,l_pFontManager);
-
-  CGUIManager* l_pGUI = m_pCore->GetGUIManager();
-  if(l_pGUI)
-  {
-    l_pGUI->Render(_pRM,l_pFontManager);
-    l_pGUI->RenderPointerMouse(_pRM,l_pFontManager);
-  }
-
-  _pRM->DisableAlphaBlend();
-}
-*/
 void CEngine::UpdateSystems(float _fElapsedTime)
 {
   CLogRender* l_pLR = m_pCore->GetLogRender();

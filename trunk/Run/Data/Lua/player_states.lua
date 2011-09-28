@@ -138,14 +138,14 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
     end
   end
 
-  if ACTION_MANAGER:is_action_active('Aim') then
+  if ACTION_MANAGER:is_action_active('Aim') and player_controller.shoot_active then
     --_jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Apuntar')
     isAiming = true
   else
     isAiming = false
   end
   
-  if ACTION_MANAGER:is_action_active('Shield') then
+  if ACTION_MANAGER:is_action_active('Shield') and player_controller.force_active then
     --if _jugador:get_component(BaseComponent.shield):is_ready() then
       _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Force')
       
@@ -193,6 +193,8 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
     isBack = true
   end
   
+  local aim_angle = (pitch*1.75 + 1) * 0.5
+  
   if isAiming then
     if ACTION_MANAGER:is_action_active('Shoot') then
       player_controller:shoot()
@@ -201,12 +203,12 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
       if isMoving then
         
       else
-        animation:play(Player_Constants["Disparar"], 0.5, 1.0, false)
+        --animation:play(Player_Constants["Disparar"], 0.5, 1.0, false)
+        animation:play('shootUp', 0.5, aim_angle, false)
+        animation:play('shootDown', 0.5, 1-aim_angle, false)
       end
     end
   end
-  
-  local aim_angle = (pitch*1.75 + 1) * 0.5
   
   if isMoving then
     animation:clear_cycle(Player_Constants["Idle"], 0.3)
@@ -718,7 +720,7 @@ State_Player_Cobertura_Baixa['Update'] = function(_jugador, _dt)
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
   end
 
-  if ACTION_MANAGER:is_action_active('Aim') then
+  if ACTION_MANAGER:is_action_active('Aim') and _jugador:get_component(BaseComponent.player_controller).shoot_active then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Baixa_Apuntar')
     return
   end
@@ -727,9 +729,10 @@ end
 -------------------------------------------------------------------------------------------------
 State_Player_Cobertura_Baixa['Receive'] = function(_jugador, _event)
 
-  if _event.msg == Event.rebre_impacte then
-    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Baixa_Tocat')
-  elseif _event.msg == Event.morir then
+  --if _event.msg == Event.rebre_impacte then
+  --  _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Baixa_Tocat')
+  --else
+  if _event.msg == Event.morir then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Morint')
   end
   

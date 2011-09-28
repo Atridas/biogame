@@ -10,7 +10,6 @@
 #include "RenderManager.h"
 #include "EffectManager.h"
 #include "RenderableObjectsManager.h"
-#include "SceneEffectManager.h"
 #include "ScriptManager.h"
 #include "LogRender.h"
 #include "Console.h"

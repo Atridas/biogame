@@ -7,7 +7,7 @@
 class CRenderTarget;
 class CRendererStep;
 class CSceneRendererStep;
-class CPreSceneRendererStep;
+//class CPreSceneRendererStep;
 class CPostSceneRendererStep;
 class CProcess;
 class CCamera;
@@ -26,15 +26,12 @@ class CRenderer :
 
 public:
 
-  CRenderer() : m_szFileName(""), m_pCurrentSceneRenderer(0),m_bRenderPathsChanged(false) {};
+  CRenderer() : m_szFileName(""), m_bRenderPathsChanged(false) {};
   ~CRenderer() {Done();};
 
   bool Init(const string& _szFileName);
   
   CPostSceneRendererStep* GetPostSceneRendererStep(string _szName);
-  CPreSceneRendererStep* GetPreSceneRendererStep(string _szName);
-
-  void SetSceneRenderer(const string& _szRendererName);
   
   void ActivateRenderPath  (const string& _szRenderPath);
   void DeactivateRenderPath(const string& _szRenderPath);
@@ -73,16 +70,12 @@ private:
 
   CCamera* m_pCamera;
 
-  CSceneRendererStep* m_pCurrentSceneRenderer;
-
   map<string,CRenderTarget*> m_mapRenderTargets;
   string m_szDefaultRenderTarget;
   
   map<string,CSceneRendererStep*>     m_mapSceneRendererSteps;
   map<string,CPostSceneRendererStep*> m_mapPostSceneRendererSteps;
-  map<string,CPreSceneRendererStep*>  m_mapPreSceneRendererSteps;
 
-  vector<CPreSceneRendererStep*>  m_vPreSceneRendererSteps;
   vector<CSceneRendererStep*>     m_vSceneRendererSteps;
   vector<CPostSceneRendererStep*> m_vPostSceneRendererSteps;
 
