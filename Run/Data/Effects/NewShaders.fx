@@ -247,7 +247,7 @@ PS_OUTPUT NewPS(TNEW_PS _in, float _fFace : VFACE)
     #if defined( NS_TEX0 )
       if(g_GlowActive && _fFace > 0)
       {
-        l_Output.Glow  = tex2D(GlowTextureSampler,_in.UV) * g_GlowIntensity;
+        l_Output.Glow  = tex2D(GlowTextureSampler,_in.UV);
         l_Output.Glow *= g_GlowIntensity * l_Output.Glow.w;
         l_Output.Glow = max(0.0, l_Output.Glow);
         l_Output.Glow.a = l_DiffuseColor.a;

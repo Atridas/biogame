@@ -11,7 +11,6 @@ class CProcess;
 class CCore;
 class CRenderManager;
 class CTimer;
-class CHDRPipeline;
 
 struct SInitParams;
 //--------------------------
@@ -33,7 +32,7 @@ public:
   /**
     * Constructor per defecte.
   **/
-	                          CEngine(void):m_pCore(0),m_pHDR(0),m_pActiveProcess(0),m_bExit(false) {};
+	                          CEngine(void):m_pCore(0),m_pActiveProcess(0),m_bExit(false) {};
   /**
    * Destructor.
    * S'encarrega d'alliberar recursos abans de destruir-se.
@@ -101,7 +100,6 @@ private:
   **/
   CTimer*							      m_pTimer;
 
-  CHDRPipeline*             m_pHDR;
 	/**
    * TODO vector de processos.
   **/

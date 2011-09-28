@@ -42,6 +42,7 @@ extern "C"
 #include "ComponentEmiter.h"
 #include "ComponentBillboard.h"
 #include "ComponentRotative.h"
+#include "ComponentOmni.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -183,17 +184,19 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPlayerController, CBaseComponent>("ComponentPlayerController")
-      .def("add_to_entity",         (bool(*)(CGameEntity*))&CComponentPlayerController::AddToEntity)
-      .def("shoot",                 &CComponentPlayerController::Shoot)
-      .def("force",                 &CComponentPlayerController::Force)
-      .def("cover",                 &CComponentPlayerController::Cover)
-      .def("use",                   &CComponentPlayerController::Use)
-      //.def("die",                   &CComponentPlayerController::Die)
-      .def("respawn",               &CComponentPlayerController::Respawn)
-      .def("has_pickup",            &CComponentPlayerController::HasPickUp)
-      .def("add_pickup",            &CComponentPlayerController::AddPickUp)
-      .def("remove_pickup",         &CComponentPlayerController::RemovePickUp)
-      .def_readwrite("pos_inicial", &CComponentPlayerController::m_vPosInicial)
+      .def("add_to_entity",          (bool(*)(CGameEntity*))&CComponentPlayerController::AddToEntity)
+      .def("shoot",                  &CComponentPlayerController::Shoot)
+      .def("force",                  &CComponentPlayerController::Force)
+      .def("cover",                  &CComponentPlayerController::Cover)
+      .def("use",                    &CComponentPlayerController::Use)
+      //.def("die",                    &CComponentPlayerController::Die)
+      .def("respawn",                &CComponentPlayerController::Respawn)
+      .def("has_pickup",             &CComponentPlayerController::HasPickUp)
+      .def("add_pickup",             &CComponentPlayerController::AddPickUp)
+      .def("remove_pickup",          &CComponentPlayerController::RemovePickUp)
+      .def_readwrite("pos_inicial",  &CComponentPlayerController::m_vPosInicial)
+      .def_readwrite("shoot_active", &CComponentPlayerController::m_bShootActive)
+      .def_readwrite("force_active", &CComponentPlayerController::m_bForceActive)
 
       /*.def_readwrite("move_fwd",   &CComponentPlayerController::m_szMoveForward)
       .def_readwrite("move_back",  &CComponentPlayerController::m_szMoveBack)
@@ -381,6 +384,13 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def_readwrite("yaw_rotation",   &CComponentRotative::m_fYawRotation)
       .def_readwrite("pitch_rotation", &CComponentRotative::m_fPitchRotation)
       .def_readwrite("roll_rotation",  &CComponentRotative::m_fRollRotation)
+
+      // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentOmni, CBaseComponent>("ComponentOmni")
+      .scope
+      [
+        def("add_to_entity",            &CComponentOmni::AddToEntity)
+      ]
   ];
 }
 

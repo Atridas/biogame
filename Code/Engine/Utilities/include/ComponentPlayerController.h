@@ -42,6 +42,9 @@ public:
 
   float m_fTime;
 
+  bool m_bShootActive;
+  bool m_bForceActive;
+
   void Shoot();
   void Force();
   void Respawn();
@@ -68,7 +71,10 @@ private:
       m_vCoverNormal(Vect3f(0.0f)),
       m_vCoverPosition(Vect3f(0.0)),
 
-      m_iNumUpdates(0)
+      m_iNumUpdates(0),
+
+      m_bShootActive(false),
+      m_bForceActive(false)
      
       {};
   bool Init(CGameEntity *_pEntity);

@@ -67,38 +67,11 @@
     <Filter Include="RenderableObject\RenderableAnimatedInstanceModel">
       <UniqueIdentifier>{aada233b-7012-4223-bb63-9fac627959df}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SceneEffects">
-      <UniqueIdentifier>{f103fe91-1e9f-42d7-a3a5-ffeea6e10be4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SceneEffects\SceneEffectManager">
-      <UniqueIdentifier>{2a874a02-1265-4e7f-b786-22284aafc705}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SceneEffects\SceneEffect">
-      <UniqueIdentifier>{f3be4292-7da7-40a3-9a52-e311d48c885e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SceneEffects\RenderToTextureSceneEffect">
-      <UniqueIdentifier>{5848d5dd-7322-450b-b0bb-cae4a275fdaa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="StaticMesh\StaticMeshManager">
       <UniqueIdentifier>{fc572106-303d-4ba5-9b42-417814b133b3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="SceneEffects\RenderTextureSceneEffect">
-      <UniqueIdentifier>{26e1cfa2-0558-4de2-a0f5-d481c053b5a7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SceneEffects\DrawQuadSceneEffect">
-      <UniqueIdentifier>{645f202a-97ec-4bf9-a968-52306fbcce33}</UniqueIdentifier>
-    </Filter>
     <Filter Include="AnimatedModel\AnimatedModelManager">
       <UniqueIdentifier>{c52e837d-037d-4ea7-a9a7-be14ebfb2f5f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SceneEffects\ShadowMapRenderToTexture">
-      <UniqueIdentifier>{8d361bcc-c2a9-4450-ae07-9597e726c960}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SceneEffects\DrawQuadToTextureSceneEffect">
-      <UniqueIdentifier>{c1bd35f1-7aaa-4fd9-841b-8ef82e9536db}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="SceneEffects\HDR Pipeline">
-      <UniqueIdentifier>{9fed3f9b-f795-408e-a3a8-28924e5f726e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Materials">
       <UniqueIdentifier>{cbbece00-30db-40c8-888b-e60fb2b41183}</UniqueIdentifier>
@@ -235,14 +208,8 @@
     <Filter Include="Renderer\RendererStep\PostSceneRendererStep">
       <UniqueIdentifier>{0ec655fb-47f7-43be-9bdc-208fa51bd21e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Renderer\RendererStep\PreSceneRendererStep">
-      <UniqueIdentifier>{f83b71f7-e5ff-474f-9176-b98a47427092}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Renderer\RendererStep\SceneRendererStep">
       <UniqueIdentifier>{f3285f80-f39f-4ca4-951d-19204323ced9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Renderer\RendererStep\PreSceneRendererStep\ShadowMapPreRendererStep">
-      <UniqueIdentifier>{4478cd57-800e-419d-901b-1f28335e07c4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Renderer\RendererStep\SceneRendererStep\ForwardSceneRendererStep">
       <UniqueIdentifier>{ffb23de3-958c-4b2e-9733-229a5222417a}</UniqueIdentifier>
@@ -354,30 +321,6 @@
     <ClCompile Include="VertexStructs.cpp">
       <Filter>Vertex\Vertex Structs</Filter>
     </ClCompile>
-    <ClCompile Include="SceneEffectManager.cpp">
-      <Filter>SceneEffects\SceneEffectManager</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneEffect.cpp">
-      <Filter>SceneEffects\SceneEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderToTextureSceneEffect.cpp">
-      <Filter>SceneEffects\RenderToTextureSceneEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="RenderTextureSceneEffect.cpp">
-      <Filter>SceneEffects\RenderTextureSceneEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="DrawQuadSceneEffect.cpp">
-      <Filter>SceneEffects\DrawQuadSceneEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="ShadowMapRenderToTexture.cpp">
-      <Filter>SceneEffects\ShadowMapRenderToTexture</Filter>
-    </ClCompile>
-    <ClCompile Include="DrawQuadToTextureSceneEffect.cpp">
-      <Filter>SceneEffects\DrawQuadToTextureSceneEffect</Filter>
-    </ClCompile>
-    <ClCompile Include="HDRPipeline.cpp">
-      <Filter>SceneEffects\HDR Pipeline</Filter>
-    </ClCompile>
     <ClCompile Include="Room.cpp">
       <Filter>Portal Rendering\Room</Filter>
     </ClCompile>
@@ -423,14 +366,8 @@
     <ClCompile Include="PostSceneRendererStep.cpp">
       <Filter>Renderer\RendererStep\PostSceneRendererStep</Filter>
     </ClCompile>
-    <ClCompile Include="PreSceneRendererStep.cpp">
-      <Filter>Renderer\RendererStep\PreSceneRendererStep</Filter>
-    </ClCompile>
     <ClCompile Include="SceneRendererStep.cpp">
       <Filter>Renderer\RendererStep\SceneRendererStep</Filter>
-    </ClCompile>
-    <ClCompile Include="ShadowMapPreRendererStep.cpp">
-      <Filter>Renderer\RendererStep\PreSceneRendererStep\ShadowMapPreRendererStep</Filter>
     </ClCompile>
     <ClCompile Include="ForwardSceneRendererStep.cpp">
       <Filter>Renderer\RendererStep\SceneRendererStep\ForwardSceneRendererStep</Filter>
@@ -551,30 +488,6 @@
     <ClInclude Include="include\EffectManager.h">
       <Filter>Effects\EffectManager</Filter>
     </ClInclude>
-    <ClInclude Include="include\SceneEffect.h">
-      <Filter>SceneEffects\SceneEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="include\SceneEffectManager.h">
-      <Filter>SceneEffects\SceneEffectManager</Filter>
-    </ClInclude>
-    <ClInclude Include="include\RenderToTextureSceneEffect.h">
-      <Filter>SceneEffects\RenderToTextureSceneEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="include\RenderTextureSceneEffect.h">
-      <Filter>SceneEffects\RenderTextureSceneEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DrawQuadSceneEffect.h">
-      <Filter>SceneEffects\DrawQuadSceneEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ShadowMapRenderToTexture.h">
-      <Filter>SceneEffects\ShadowMapRenderToTexture</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DrawQuadToTextureSceneEffect.h">
-      <Filter>SceneEffects\DrawQuadToTextureSceneEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="include\HDRPipeline.h">
-      <Filter>SceneEffects\HDR Pipeline</Filter>
-    </ClInclude>
     <ClInclude Include="include\InstancedData.h">
       <Filter>Vertex\InstancedData</Filter>
     </ClInclude>
@@ -686,14 +599,8 @@
     <ClInclude Include="include\PostSceneRendererStep.h">
       <Filter>Renderer\RendererStep\PostSceneRendererStep</Filter>
     </ClInclude>
-    <ClInclude Include="include\PreSceneRendererStep.h">
-      <Filter>Renderer\RendererStep\PreSceneRendererStep</Filter>
-    </ClInclude>
     <ClInclude Include="include\SceneRendererStep.h">
       <Filter>Renderer\RendererStep\SceneRendererStep</Filter>
-    </ClInclude>
-    <ClInclude Include="include\ShadowMapPreRendererStep.h">
-      <Filter>Renderer\RendererStep\PreSceneRendererStep\ShadowMapPreRendererStep</Filter>
     </ClInclude>
     <ClInclude Include="include\ForwardSceneRendererStep.h">
       <Filter>Renderer\RendererStep\SceneRendererStep\ForwardSceneRendererStep</Filter>
