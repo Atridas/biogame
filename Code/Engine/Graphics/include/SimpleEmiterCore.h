@@ -21,6 +21,7 @@ public:
       m_fLife1(0.f), m_fLife2(0.f),
       m_fAwakeTime1(1.f), m_fAwakeTime2(1.f),
       m_fSleepTime1(0.f), m_fSleepTime2(0.f),
+      m_fRatioY(1.f),
       m_fStartingAngle1(0.f), m_fStartingAngle2(0.f),
       m_vStartingSpeed1(0.f), m_vStartingSpeed2(0.f),
       m_fStartingDirectionAngle(0.f),
@@ -56,6 +57,8 @@ public:
 
   Vect3f GetAcceleration() const;
   float  GetAngularAcceleration() const;
+
+  float GetRatioY() const {return m_fRatioY;};
   
   int GetNumColorFrames() const { return m_ColorAnimations.size(); }
   int GetNumSizeFrames() const { return m_SizeAnimations.size(); }
@@ -91,6 +94,8 @@ private:
   
   float m_fAwakeTime1, m_fAwakeTime2;
   float m_fSleepTime1, m_fSleepTime2;
+
+  float m_fRatioY;
   
   float m_fStartingAngle1, m_fStartingAngle2;
 

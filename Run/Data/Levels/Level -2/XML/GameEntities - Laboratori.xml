@@ -153,6 +153,7 @@
     <Object3D position="-13.2161 0.458649 -8.44492" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_lab_Taula_DEF" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <Interactive action="recollir_arma" />
   </Entity>
   <Entity name="lvl2_lab_Maleta_DEF01">
     <Object3D position="-8.53119 0.300873 -10.3701" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -287,5 +288,9 @@
     <Object3D position="-11.1112 1.60321 -2.70109" yaw="0.0" pitch="0.0" roll="0.0" />
     <Billboard core="Ins Lab 2" />
   </Entity>
-  <Player position="-11.342 1.72829 -7.76992" yaw="0.0" />
+  <Entity name="Lab_billboard_arma">
+    <Object3D position="-5.40691 1.89178 -1.01261" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Billboard core="Ins Lab 1" />
+  </Entity>
+  <Player position="-10.4473 1.72829 -6.87975" yaw="0.0" shoot_active="false" force_active="false" />
 </Entities>

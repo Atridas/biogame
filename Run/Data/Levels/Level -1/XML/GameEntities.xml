@@ -3307,7 +3307,11 @@
     <Object3D position="-9.30377 0.751921 -1.51048" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode maxDistance="5" />
   </Entity>
-  <Player position="-1.01856 1.08272 -18.6567" yaw="90.0" />
+  <Entity name="lvl1_force_billboard">
+    <Object3D position="26.0903 -7.29258 -38.275" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Billboard core="dont use the force" />
+  </Entity>
+  <Player position="-1.01856 1.08272 -18.6567" yaw="90.0" force_active="false" />
   <Miner name="lvl1_miner_green" position="-7.60811 1.6 7.95127" yaw="0.0" active="false" on_death="drop_key" />
   <Militar name="lvl1_militar00" position="-4.12491 1.6 1.10068" yaw="0.0" active="false" />
   <Militar name="lvl1_militar01" position="-1.84952 1.6 -1.15103" yaw="0.0" active="false" />
