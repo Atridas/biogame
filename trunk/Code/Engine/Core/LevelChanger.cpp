@@ -38,6 +38,8 @@ bool CLevelChanger::Init(const string& _szXMLLevels)
       {
         SLevel* l_pLevel = new SLevel;
         string l_szName = l_xmlLevel.GetPszISOProperty("name");
+        if(m_szCurrentLevel != "")
+          m_szCurrentLevel = l_szName;
         l_pLevel->RenderPath = l_xmlLevel.GetPszISOProperty("render_path");
 
         int l_numChild = l_xmlLevel.GetNumChildren();

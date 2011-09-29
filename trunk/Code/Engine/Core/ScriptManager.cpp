@@ -517,6 +517,7 @@ void CScriptManager::RegisterLUAFunctions()
   //Level Changer
     ,class_<CLevelChanger>("LevelChanger")
       .def("set_new_level", &CLevelChanger::SetNewLevel)
+      .def("reset_level", &CLevelChanger::ResetLevel)
   ];
 
   //CRenderableObjectsManager

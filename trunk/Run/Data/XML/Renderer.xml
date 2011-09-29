@@ -691,13 +691,25 @@
   
     <post_scene_renderer name="michelangelo" effect="Texture">
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="Data/Textures/michelangelo.jpg"/>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/michelangelo.jpg"/>
       </input_samplers>
     </post_scene_renderer>
   
     <post_scene_renderer name="mustafa" effect="Texture">
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="Data/Textures/mustafa.jpg"/>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/mustafa.jpg"/>
+      </input_samplers>
+    </post_scene_renderer>
+  
+    <post_scene_renderer name="pikachusponja" effect="Texture">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/pikachusponja.jpg"/>
+      </input_samplers>
+    </post_scene_renderer>
+  
+    <post_scene_renderer name="testa" effect="Texture">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/testa.png"/>
       </input_samplers>
     </post_scene_renderer>
     
@@ -866,12 +878,20 @@
       <post_scene_renderer name="shock_wave"/>
     </render_path>
     
+    <render_path name="inici nivell -2">
+      <post_scene_renderer name="pikachusponja"/>
+    </render_path>
+    
     <render_path name="canvi nivell -2 a -1">
       <post_scene_renderer name="michelangelo"/>
     </render_path>
     
     <render_path name="canvi nivell -1 a Hangar">
       <post_scene_renderer name="mustafa"/>
+    </render_path>
+    
+    <render_path name="Pantalla d'inici">
+      <post_scene_renderer name="testa"/>
     </render_path>
   </render_paths>
   

@@ -15,7 +15,7 @@ class CGameProcess :
 	public CProcess
 {
 public:
-                        CGameProcess      ():CProcess("CGameProcess"),m_pOmniLight(0)
+                        CGameProcess      ():CProcess("CGameProcess"),m_pOmniLight(0),m_bMenuPrincipal(false)
                                                                       {};
   virtual               ~CGameProcess     ()                          {Done();};
 
@@ -28,5 +28,6 @@ private:
   void                  Release           ();
 
   COmniLight* m_pOmniLight;
+  bool        m_bMenuPrincipal;
 };
 
