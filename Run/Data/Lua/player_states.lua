@@ -930,7 +930,7 @@ State_Player_Cobertura_Baixa_Apuntar['Enter'] = function(_jugador)
   
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
-  local mirilla = _jugador:get_component(BaseComponent.mirilla)
+  --local mirilla = _jugador:get_component(BaseComponent.mirilla)
   
   --Nomes blend
   animation:clear_all_cycles(0.2)
@@ -941,7 +941,7 @@ State_Player_Cobertura_Baixa_Apuntar['Enter'] = function(_jugador)
   --animation:play_cycle('aim', 0.3)
   --animation:play('CoverSortidaAvallDreta', 0.3, 1.0, false)
   
-	mirilla:set_active(true)
+	--mirilla:set_active(true)
   
   _jugador:get_component(BaseComponent.renderable_object).block_yaw = false
   player_controller.time = 0
@@ -953,9 +953,9 @@ State_Player_Cobertura_Baixa_Apuntar['Exit'] = function(_jugador)
 
   log('Michael Jackson YEAH!')
   --_jugador:get_component(BaseComponent.renderable_object).block_yaw = false
-  local mirilla = _jugador:get_component(BaseComponent.mirilla)
+  --local mirilla = _jugador:get_component(BaseComponent.mirilla)
   
-  mirilla:set_active(false)
+  --mirilla:set_active(false)
 end
 
 -------------------------------------------------------------------------------------------------

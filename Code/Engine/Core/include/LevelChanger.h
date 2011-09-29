@@ -20,7 +20,7 @@ class CLevelChanger:
   private CMapManager<SLevel>
 {
 public:
-  CLevelChanger():m_szNewLevel(""),m_bChanging(false) {};
+  CLevelChanger():m_szNewLevel(""),m_bChanging(false),m_szCurrentLevel("") {};
   ~CLevelChanger() {Done();};
 
   bool Init(const string& _szXMLLevels);
@@ -28,7 +28,8 @@ public:
   void Update(float _fElapsedTime);
   bool ChangingLevel() const { return m_bChanging; };
 
-  void SetNewLevel(const string& _szNewLevel) {m_szNewLevel = _szNewLevel;};
+  void SetNewLevel(const string& _szNewLevel) {m_szNewLevel = m_szCurrentLevel = _szNewLevel;};
+  void ResetLevel() {m_szNewLevel = m_szCurrentLevel;};
 
 protected:
   void Release() {m_szNewLevel = ""; CMapManager<SLevel>::Release();};
@@ -36,6 +37,7 @@ protected:
 private:
   
   string m_szNewLevel;
+  string m_szCurrentLevel;
 
   bool m_bChanging;
   set<string> m_RenderPathsToActivate;

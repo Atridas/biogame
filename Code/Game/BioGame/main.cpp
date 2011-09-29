@@ -81,6 +81,11 @@ int APIENTRY WinMain(HINSTANCE _hInstance, HINSTANCE _hPrevInstance, LPSTR _lpCm
 #ifdef BIOGAME_NIVELLS_HANGAR
     ReadXMLInitParams(l_InitParams,"./Data/XML/init Hangar.xml");
 #endif
+
+#ifdef FORCE_FULLSCREEN
+    l_InitParams.RenderManagerParams.bFullscreen = true;
+#endif
+
     // Create the application's window
     HWND hWnd = CreateWindow(	
                     APPLICATION_NAME, 

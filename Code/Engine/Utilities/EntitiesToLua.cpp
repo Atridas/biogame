@@ -180,12 +180,12 @@ void RegisterEntitiesToLua(lua_State* _pLS)
 
   module(_pLS) [
     class_<CComponentObject3D, bases<CObject3D,CBaseComponent>>("ComponentObject3D")
-      .def("add_to_entity", &CComponentObject3D::AddToEntity)
-      .def("get_position",  &CComponentObject3D::GetPosition)
+      .scope[def("add_to_entity",  &CComponentObject3D::AddToEntity)]
+      .def("get_position",         &CComponentObject3D::GetPosition)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPlayerController, CBaseComponent>("ComponentPlayerController")
-      .def("add_to_entity",          (bool(*)(CGameEntity*))&CComponentPlayerController::AddToEntity)
+      .scope[def("add_to_entity",    (bool(*)(CGameEntity*))&CComponentPlayerController::AddToEntity)]
       .def("shoot",                  &CComponentPlayerController::Shoot)
       .def("force",                  &CComponentPlayerController::Force)
       .def("cover",                  &CComponentPlayerController::Cover)
@@ -226,26 +226,26 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponent3rdPSCamera, CBaseComponent>("Component3rdPSCamera")
-      .def("add_to_entity", &CComponent3rdPSCamera::AddToEntity)
+      .scope[def("add_to_entity",     &CComponent3rdPSCamera::AddToEntity)]
       .def_readwrite("camera_height", &CComponent3rdPSCamera::m_fCameraHeight)
-      .def_readwrite("camera_right", &CComponent3rdPSCamera::m_fCameraRight)
+      .def_readwrite("camera_right",  &CComponent3rdPSCamera::m_fCameraRight)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPhysXController,CBaseComponent>("ComponentPhysXController")
-      .def("add_to_entity",            &CComponentPhysXController::AddToEntity)
+      .scope[def("add_to_entity",      &CComponentPhysXController::AddToEntity)]
       .def("set_height",               &CComponentPhysXController::SetHeight)
       .def("set_position_from_ragdoll",&CComponentPhysXController::SetPositionFromRagdoll)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPhysXBox, CBaseComponent>("ComponentPhysXBox")
-      .def("add_to_entity",     (CComponentPhysXBox*(*)(CGameEntity*,float,float,float,float,float,float,float,int))&CComponentPhysXBox::AddToEntity)
-      .def("add_to_entity",     (CComponentPhysXBox*(*)(CGameEntity*,float,int))&CComponentPhysXBox::AddToEntity)
-      .def("set_position",      &CComponentPhysXBox::SetPosition)
-      .def("get_position",      &CComponentPhysXBox::GetPosition)
+      .scope[def("add_to_entity", (CComponentPhysXBox*(*)(CGameEntity*,float,float,float,float,float,float,float,int))&CComponentPhysXBox::AddToEntity)]
+      .scope[def("add_to_entity", (CComponentPhysXBox*(*)(CGameEntity*,float,int))                                    &CComponentPhysXBox::AddToEntity)]
+      .def("set_position",        &CComponentPhysXBox::SetPosition)
+      .def("get_position",        &CComponentPhysXBox::GetPosition)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentRenderableObject, CBaseComponent>("ComponentRenderableObject")
-      .def("add_to_entity",                      &CComponentRenderableObject::AddToEntity)
+      .scope[def("add_to_entity",                &CComponentRenderableObject::AddToEntity)]
       .def("add_to_entity_with_animated_model",  &CComponentRenderableObject::AddToEntityWithAnimatedModel)
       .def_readwrite("remove_renderable_object", &CComponentRenderableObject::m_bRemoveRenderableObject)
       .def_readwrite("block_yaw",                &CComponentRenderableObject::m_bBlockYaw)
@@ -253,12 +253,12 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentMovement, CBaseComponent>("ComponentMovement")
-      .def("add_to_entity",                      &CComponentMovement::AddToEntity)
-      .def_readwrite("movement",                 &CComponentMovement::m_vMovement)
+      .scope[def("add_to_entity",            &CComponentMovement::AddToEntity)]
+      .def_readwrite("movement",             &CComponentMovement::m_vMovement)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentAnimation, CBaseComponent>("ComponentAnimation")
-      .def("add_to_entity",            &CComponentAnimation::AddToEntity)
+      .scope[def("add_to_entity",      &CComponentAnimation::AddToEntity)]
       .def("play",                     &CComponentAnimation::Play)
       .def("stop",                     &CComponentAnimation::Stop)
       //.def("play_cycle",               &CComponentAnimation::PlayCycle)
@@ -272,12 +272,12 @@ void RegisterEntitiesToLua(lua_State* _pLS)
 
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentStateMachine, CBaseComponent>("ComponentStateMachine")
-      .def("add_to_entity",            &CComponentStateMachine::AddToEntity)
+      .scope[def("add_to_entity",      &CComponentStateMachine::AddToEntity)]
       .def("get_state_machine",        &CComponentStateMachine::GetStateMachine)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentIABrain, CBaseComponent>("ComponentIABrain")
-      .def("add_to_entity",            &CComponentIABrain::AddToEntity)
+      .scope[def("add_to_entity",      &CComponentIABrain::AddToEntity)]
       .def("shoot",                    &CComponentIABrain::Shoot)
       //.def("die",                      &CComponentIABrain::Die)
       .def("plan_path_to_cobertura",   (bool(CComponentIABrain::*)(void))&CComponentIABrain::PlanPathToCobertura)
@@ -292,7 +292,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentVida, CBaseComponent>("ComponentVida")
-      .def("add_to_entity",            &CComponentVida::AddToEntity)
+      .scope[def("add_to_entity",      &CComponentVida::AddToEntity)]
       .def("get_hp",                   &CComponentVida::GetHP)
       .def("increase",                 &CComponentVida::Increase)
       .def("decrease",                 &CComponentVida::Decrease)
@@ -303,7 +303,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
 
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentShield, CBaseComponent>("ComponentShield")
-      .def("add_to_entity",            &CComponentShield::AddToEntity)
+      .scope[def("add_to_entity",      &CComponentShield::AddToEntity)]
       .def("get_hp",                   &CComponentShield::GetHP)
       .def("increase",                 &CComponentShield::Increase)
       .def("decrease",                 &CComponentShield::Decrease)
@@ -316,7 +316,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentRagdoll, CBaseComponent>("ComponentRagdoll")
-      .def("add_to_entity",            &CComponentRagdoll::AddToEntity)
+      .scope[def("add_to_entity",      &CComponentRagdoll::AddToEntity)]
       .def("apply_physics",            &CComponentRagdoll::ApplyPhysics)
       .def("get_position",             &CComponentRagdoll::GetPosition)
 
@@ -332,15 +332,17 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("cover_high",          CComponentCover::COVER_HIGH)
       ]
 
-    ,class_<CComponentHighCover, CBaseComponent>("ComponentHighCover")
-      .def("get_cover_type",           &CComponentCover::GetCoverType)
+    ,class_<CComponentHighCover, CComponentCover>("ComponentHighCover")
+      .scope[def("add_to_entity",      &CComponentHighCover::AddToEntity)]
+      .def("get_cover_type",           &CComponentHighCover::GetCoverType)
 
-    ,class_<CComponentLowCover, CBaseComponent>("ComponentLowCover")
-      .def("get_cover_type",           &CComponentCover::GetCoverType)
+    ,class_<CComponentLowCover, CComponentCover>("ComponentLowCover")
+      .scope[def("add_to_entity",      &CComponentLowCover::AddToEntity)]
+      .def("get_cover_type",           &CComponentLowCover::GetCoverType)
     // ----------------------------------------------------------------------------------------------------
 
     ,class_<CComponentDoor, CBaseComponent>("ComponentDoor")
-      .def("add_to_entity",            &CComponentDoor::AddToEntity)
+      .scope[def("add_to_entity",      &CComponentDoor::AddToEntity)]
       .def("block",                    &CComponentDoor::Block)
       .def("is_blocked",               &CComponentDoor::IsBlocked)
       .def("get_open_time",            &CComponentDoor::GetOpenTime)
@@ -349,7 +351,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     // ----------------------------------------------------------------------------------------------------
 
     ,class_<CComponentNavNode, CBaseComponent>("ComponentNavNode")
-      .def("add_to_entity",            &CComponentNavNode::AddToEntity)
+      .scope[def("add_to_entity",      &CComponentNavNode::AddToEntity)]
       .def("get_graph_node_index",     &CComponentNavNode::GetGraphNodeIndex)
 
     // ----------------------------------------------------------------------------------------------------
@@ -359,46 +361,40 @@ void RegisterEntitiesToLua(lua_State* _pLS)
         value("enemy_militar",         CComponentSpawner::EE_MILITAR),
         value("enemy_miner",           CComponentSpawner::EE_MINER)
       ]
-      .def("add_to_entity",            &CComponentSpawner::AddToEntity)
+      .scope[def("add_to_entity",      &CComponentSpawner::AddToEntity)]
       .def("set_enemy_type",           &CComponentSpawner::SetEnemyType)
       .def("get_enemy_type",           &CComponentSpawner::GetEnemyType)
 
       // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentExplosive, CBaseComponent>("ComponentExplosive")
-      .def("add_to_entity",            &CComponentExplosive::AddToEntity)
+      .scope[def("add_to_entity",      &CComponentExplosive::AddToEntity)]
       .def("explode",                  &CComponentExplosive::Explode)
 
       // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentEmiter, CBaseComponent>("ComponentEmiter")
-      .def("add_to_entity",        &CComponentEmiter::AddToEntity)
+      .scope[def("add_to_entity",  &CComponentEmiter::AddToEntity)]
       .def("change_core",          &CComponentEmiter::ChangeCore)
       .def("change_volume",        &CComponentEmiter::ChangeVolume)
 
       // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentBillboard, CBaseComponent>("ComponentBillboard")
-      .def("add_to_entity",        &CComponentBillboard::AddToEntity)
+      .scope[def("add_to_entity",  &CComponentBillboard::AddToEntity)]
       .def("change_core",          &CComponentBillboard::ChangeCore)
 
       // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentRotative, CBaseComponent>("ComponentRotative")
-      .def("add_to_entity",            &CComponentRotative::AddToEntity)
+      .scope[def("add_to_entity",      &CComponentRotative::AddToEntity)]
       .def_readwrite("yaw_rotation",   &CComponentRotative::m_fYawRotation)
       .def_readwrite("pitch_rotation", &CComponentRotative::m_fPitchRotation)
       .def_readwrite("roll_rotation",  &CComponentRotative::m_fRollRotation)
 
       // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentOmni, CBaseComponent>("ComponentOmni")
-      .scope
-      [
-        def("add_to_entity",            &CComponentOmni::AddToEntity)
-      ]
+      .scope[def("add_to_entity",            &CComponentOmni::AddToEntity)]
 
       // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentArma, CBaseComponent>("ComponentArma")
-      .scope
-      [
-        def("add_to_entity",            &CComponentArma::AddToEntity)
-      ]
+      .scope[def("add_to_entity",            &CComponentArma::AddToEntity)]
   ];
 }
 
