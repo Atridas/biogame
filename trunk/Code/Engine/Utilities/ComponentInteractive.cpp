@@ -2,6 +2,10 @@
 #include "ComponentInteractive.h"
 #include "ScriptManager.h"
 #include "Core.h"
+#include "PhysicsManager.h"
+#include "ComponentObject3D.h"
+#include "ComponentPlayerController.h"
+#include "ComponentBillboard.h"
 
 extern "C"
 {
@@ -39,8 +43,22 @@ bool CComponentInteractive::Init(CGameEntity* _pEntity, const string& _szAction)
 {
   m_szAction = _szAction;
 
+  m_bBillboardActive = false;
+  m_fLastUpdate = 0;
+  m_pObject3D = 0;
+
+
   SetOk(true);
   return IsOk();
+}
+
+void CComponentInteractive::Release()
+{
+  if(m_bBillboardActive)
+  {
+    GetEntity()->DeleteComponent(CBaseComponent::ECT_BILLBOARD);
+    m_bBillboardActive = false;
+  }
 }
 
 void CComponentInteractive::CallAction(int _iCaller)
@@ -72,5 +90,59 @@ void CComponentInteractive::ReceiveEvent(const SEvent& _Event)
     {
       CallAction(_Event.Sender);
     }
+  }
+}
+
+void CComponentInteractive::Update(float _fDeltaTime)
+{
+  m_fLastUpdate += _fDeltaTime;
+  if(m_fLastUpdate < UPDATE_BILLBOARD_SECONDS)
+    return;
+
+  if(!m_pObject3D)
+  {
+    m_pObject3D = GetEntity()->GetComponent<CComponentObject3D>();
+    if(!m_pObject3D)
+      return;
+  }
+
+  
+  CPhysicsManager *l_pPM = PHYSICS_MANAGER;
+  vector<CPhysicUserData*> l_vImpactObjects;
+
+  
+  //esfera d'us
+  l_pPM->OverlapSphereActor( RADI_ESFERA_INTERACTUABLES            //radiusSphere
+                            ,m_pObject3D->GetCenterPosition()      //posSphere
+                            ,l_vImpactObjects,                     //impactObjects
+                            l_pPM->GetCollisionMask(ECG_ESCENARI));//collision_mask
+
+  
+  bool l_bPlayerFound = false;
+
+
+  vector<CPhysicUserData*>::iterator l_itInit = l_vImpactObjects.begin();
+  vector<CPhysicUserData*>::iterator l_itEnd  = l_vImpactObjects.end();
+  vector<CPhysicUserData*>::iterator l_itIt;
+  
+  for(l_itIt = l_itInit; l_itIt < l_itEnd; ++l_itIt)
+  {
+    CGameEntity* l_pEntity = (*l_itIt)->GetEntity();
+    if(l_pEntity && l_pEntity->GetComponent<CComponentPlayerController>())
+    {
+      l_bPlayerFound = true;
+      break;
+    }
+  }
+
+  if(l_bPlayerFound && !m_bBillboardActive)
+  {
+    CComponentBillboard::AddToEntity(GetEntity(), "Objecte Interactuable");
+    m_bBillboardActive = true;
+  }
+  else if(!l_bPlayerFound && m_bBillboardActive)
+  {
+    GetEntity()->DeleteComponent(CBaseComponent::ECT_BILLBOARD);
+    m_bBillboardActive = false;
   }
 }

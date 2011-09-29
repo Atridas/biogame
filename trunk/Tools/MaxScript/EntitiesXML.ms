@@ -371,6 +371,24 @@ function XMLEntityPlayer _instance &_TagName =
 	format "%" l_tmp to:l_aux
 	append l_params #("yaw",l_aux)
 	
+	--shoot
+	local l_tmp = GetUserProp _instance "shoot"
+	if l_tmp != undefined then
+	(
+		l_aux = "" as stringStream
+		format "%" l_tmp to:l_aux
+		append l_params #("shoot_active",l_aux)
+	)
+	
+	--force
+	local l_tmp = GetUserProp _instance "force"
+	if l_tmp != undefined then
+	(
+		l_aux = "" as stringStream
+		format "%" l_tmp to:l_aux
+		append l_params #("force_active",l_aux)
+	)
+	
 	return l_params
 )
 

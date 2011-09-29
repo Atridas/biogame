@@ -43,6 +43,9 @@ bool CSimpleEmiterCore::Init(CXMLTreeNode& _xmlEmiter)
   LOGGER->AddNewLog(ELL_INFORMATION, "Sleep Time: %f - %f", m_fSleepTime1, m_fSleepTime2);
 
 
+  m_fRatioY = _xmlEmiter.GetFloatProperty("ratio_y", 1, false);
+  LOGGER->AddNewLog(ELL_INFORMATION, "Ratio Y: %f", m_fRatioY);
+
   
   m_fStartingAngle1 = _xmlEmiter.GetFloatProperty("starting_angle1", 0, true);
   m_fStartingAngle2 = _xmlEmiter.GetFloatProperty("starting_angle2", 0, true);

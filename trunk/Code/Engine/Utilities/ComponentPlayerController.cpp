@@ -18,6 +18,7 @@
 #include "ComponentRagdoll.h"
 #include "ComponentCover.h"
 #include "ComponentVida.h"
+#include "ComponentInteractive.h"
 
 #include "PhysicsManager.h"
 #include "PhysicActor.h"
@@ -359,7 +360,7 @@ void CComponentPlayerController::Use()
 
 
   //esfera d'us
-  l_pPM->OverlapSphereActor( 5.0f                                  //radiusSphere
+  l_pPM->OverlapSphereActor( RADI_ESFERA_INTERACTUABLES            //radiusSphere
                             ,m_pObject3D->GetCenterPosition()      //posSphere
                             ,l_vImpactObjects,                     //impactObjects
                             l_pPM->GetCollisionMask(ECG_ESCENARI));//collision_mask

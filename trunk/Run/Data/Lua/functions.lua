@@ -157,6 +157,14 @@ function salavideo_palanca(_self, _player)
     --activar el miner del passadís
     activate_entity("pas_miner00")
       
+    _self:delete_component(BaseComponent.interactive)
+  end
+end
+
+function recollir_arma(_self, _player)
+  if _player:get_name() == "Player" then 
+    _player:get_component(BaseComponent.player_controller).shoot_active = true
+    _self:delete_component(BaseComponent.interactive)
   end
 end
 
@@ -192,6 +200,8 @@ function get_key_purple(_self, _actor)
     activate_entity("lvl1_miner03")
     --obrim la porta de claus    
     send_open_door("lvl1_door_claus", _actor)
+    
+    _actor:get_component(BaseComponent.player_controller).force_active = true
   end
 end
 
@@ -243,6 +253,8 @@ function unlock(_player, _color, _doorname)
       send_open_door(_doorname, _player)
       --remove key
       player_controller:remove_pickup("lvl1_key_" .. _color)
+      
+      _self:delete_component(BaseComponent.interactive)
       
       return true
     else

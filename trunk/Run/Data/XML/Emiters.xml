@@ -8,6 +8,7 @@
     awake_time(1/2): temps que es passa l'emisor actiu.
     sleep_time(1/2): temps que es passa l'emisor inactiu.
     life(1/2): temps de vida de la partícula
+    ratio_y: nombre per el qual es multiplica el size per donar el size en y (per defecte: 1)
     starting_angle(1/2): angle (en radiants) en que comença la partícula
     starting_speed(1/2): velocitat inicial, en unitats per segon
     starting_direction_angle: angle (en radiants) de desviació en la direcció inicial (per defecte: 0)
@@ -536,4 +537,25 @@
                 is_sprite="false"
                 
                 texture="Data/Textures/Gameplay/InstruccionsLab2.dds"/>
+  <Billboard    id="Objecte Interactuable"                        
+                
+                starting_angle1="0.0"             starting_angle2="0.0"
+                
+                color1="1.0 1.0 1.0 1.0"          color2="1.0 1.0 1.0 1.0" 
+                size1="0.5"                       size2="0.5"
+                
+                is_sprite="false"
+                
+                texture="Data/Textures/Gameplay/Billboard Interactuable.dds"/>
+  <Billboard    id="dont use the force"                        
+                
+                starting_angle1="0.0"             starting_angle2="0.0"
+                
+                color1="1.0 1.0 1.0 1.0"          color2="1.0 1.0 1.0 1.0" 
+                size1="0.32"                      size2="0.32"
+                ratio_y="1.57"
+                
+                is_sprite="false"
+                
+                texture="Data/Textures/Gameplay/dont use the force.dds"/>
 </CoreEmiters>

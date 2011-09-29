@@ -232,8 +232,8 @@ void CParticle::FillRenderInfo(SParticleRenderInfo& Info_)
   Info_.y = m_vPosition.y;
   Info_.z = m_vPosition.z;
   
-  Info_.sizeX =
-  Info_.sizeY = m_fSize;
+  Info_.sizeX = m_fSize;
+  Info_.sizeY = m_fSize * m_pEmiterCore->GetRatioY();
   
   Info_.angleSin = sin(m_fAngle + FLOAT_PI_VALUE * .25f);
   Info_.angleCos = cos(m_fAngle + FLOAT_PI_VALUE * .25f);
