@@ -242,10 +242,14 @@ void LoadComponentInteractive(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntit
 
   LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Interactiu amb nom \"%s\" i acció \"%s\"",l_szName.c_str(), l_szAction.c_str());
 
-
-  if(!CComponentInteractive::AddToEntity(_pEntity, l_szAction))
+  CComponentInteractive * l_pCI = CComponentInteractive::AddToEntity(_pEntity, l_szAction);
+  if(!l_pCI)
   {
     LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
+  }
+  else
+  {
+    l_pCI->m_fBillboardYOffset = _TreeComponent.GetFloatProperty("interactive_billboard_y_offset", 0, false);
   }
 
 }
@@ -629,7 +633,10 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
 
   CComponentStateMachine::AddToEntity(l_pPlayer, "State_Player_Neutre");
 
-  CComponentArma::AddToEntity(l_pPlayer, "ARMA");
+  if(_bShootActive)
+  {
+    CComponentArma::AddToEntity(l_pPlayer, "ARMA");
+  }
 
   CComponentRagdoll::AddToEntity(l_pPlayer, "Data/Animated Models/Riggle/Skeleton.xml", ECG_RAGDOLL_PLAYER);
 

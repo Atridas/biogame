@@ -153,7 +153,7 @@
     <Object3D position="-13.2161 0.458649 -8.44492" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_lab_Taula_DEF" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Interactive action="recollir_arma" />
+    <Interactive action="recollir_arma" interactive_billboard_y_offset="0.6" />
   </Entity>
   <Entity name="lvl2_lab_Maleta_DEF01">
     <Object3D position="-8.53119 0.300873 -10.3701" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -285,7 +285,7 @@
     <Emiter core="bubble" volume="0.417512 0.417512 0.417512" />
   </Entity>
   <Entity name="Lab_billboard_sortida">
-    <Object3D position="-11.1112 1.60321 -2.70109" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-8.83563 1.60321 -2.70109" yaw="0.0" pitch="0.0" roll="0.0" />
     <Billboard core="Ins Lab 2" />
   </Entity>
   <Entity name="Lab_billboard_arma">

@@ -28,8 +28,10 @@ public:
   virtual void ReceiveEvent(const SEvent& _Event);
   virtual void Update(float _fDeltaTime);
 
+  float m_fBillboardYOffset;
+
 protected:
-  CComponentInteractive():m_szAction(""),m_bBillboardActive(false),m_fLastUpdate(0),m_pObject3D(0) {};
+  CComponentInteractive():m_szAction(""),m_bBillboardActive(false),m_fLastUpdate(0),m_pObject3D(0),m_fBillboardYOffset(0) {};
   bool Init(CGameEntity* _pEntity, const string& _szAction);
   virtual void Release();
 

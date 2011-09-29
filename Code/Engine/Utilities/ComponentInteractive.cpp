@@ -6,6 +6,7 @@
 #include "ComponentObject3D.h"
 #include "ComponentPlayerController.h"
 #include "ComponentBillboard.h"
+#include "EmiterInstance.h"
 
 extern "C"
 {
@@ -46,6 +47,7 @@ bool CComponentInteractive::Init(CGameEntity* _pEntity, const string& _szAction)
   m_bBillboardActive = false;
   m_fLastUpdate = 0;
   m_pObject3D = 0;
+  m_fBillboardYOffset = 0;
 
 
   SetOk(true);
@@ -137,7 +139,10 @@ void CComponentInteractive::Update(float _fDeltaTime)
 
   if(l_bPlayerFound && !m_bBillboardActive)
   {
-    CComponentBillboard::AddToEntity(GetEntity(), "Objecte Interactuable");
+    CComponentBillboard *l_pCB = CComponentBillboard::AddToEntity(GetEntity(), "Objecte Interactuable");
+    CObject3D l_Obj3D;
+    l_Obj3D.SetPosition(Vect3f(0.f, m_fBillboardYOffset, 0.f));
+    l_pCB->GetBillboard()->SetOffset(l_Obj3D);
     m_bBillboardActive = true;
   }
   else if(!l_bPlayerFound && m_bBillboardActive)
