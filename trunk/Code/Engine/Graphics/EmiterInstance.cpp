@@ -125,6 +125,19 @@ void CEmiterInstance::Update(float _fDeltaTime)
   //mirem si el delta time és massa gran, per no fer actualitzacions massa a saco, les capem a un min de framerate
   if(_fDeltaTime > MAX_PARTICLE_DELTA_TIME) _fDeltaTime = MAX_PARTICLE_DELTA_TIME;
 
+
+  
+  if(m_pObjectReference)
+  {
+    //l_mTransform = _mTransform * m_pObjectReference->GetMat44();
+    Mat44f m = m_pObjectReference->GetMat44();
+    m = m * m_ObjectOffset.GetMat44();
+    SetMat44(m);
+    //l_mTransform = l_mTransform * GetMat44();
+  }
+
+
+
   bool l_bBBModified = false;
 
   if(m_bBillboardMode)
@@ -256,16 +269,8 @@ void CEmiterInstance::Render(CRenderManager* _pRM, CEffect* _pEffect, const Mat4
   if(!m_bActive)
     return;
 
-  Mat44f l_mTransform;
-  if(m_pObjectReference)
-  {
-    //l_mTransform = _mTransform * m_pObjectReference->GetMat44();
-    l_mTransform = m_pObjectReference->GetMat44();
-  }
-  else
-  {
-    l_mTransform = _mTransform * GetMat44();
-  }
+  Mat44f l_mTransform = _mTransform * GetMat44();
+  
   if(m_bBillboardMode)
   {
     _pRM->SetTransform(l_mTransform);
@@ -366,16 +371,7 @@ void CEmiterInstance::DebugRender(CRenderManager* _pRM, const Mat44f& _mTransfor
 {
   assert(IsOk());
   
-  Mat44f l_mTransform;
-  if(m_pObjectReference)
-  {
-    //l_mTransform = _mTransform * m_pObjectReference->GetMat44();
-    l_mTransform = m_pObjectReference->GetMat44();
-  }
-  else
-  {
-    l_mTransform = _mTransform * GetMat44();
-  }
+  Mat44f l_mTransform = _mTransform * GetMat44();
 
   _pRM->SetTransform(l_mTransform);
   if(m_bIsSimple)

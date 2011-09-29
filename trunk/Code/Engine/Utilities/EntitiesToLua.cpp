@@ -43,6 +43,7 @@ extern "C"
 #include "ComponentBillboard.h"
 #include "ComponentRotative.h"
 #include "ComponentOmni.h"
+#include "ComponentArma.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -390,6 +391,13 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .scope
       [
         def("add_to_entity",            &CComponentOmni::AddToEntity)
+      ]
+
+      // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentArma, CBaseComponent>("ComponentArma")
+      .scope
+      [
+        def("add_to_entity",            &CComponentArma::AddToEntity)
       ]
   ];
 }

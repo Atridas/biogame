@@ -25,7 +25,7 @@
     <Object3D position="3.36863 0.0872047 11.0166" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_video_comandos" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Interactive action="salavideo_palanca" />
+    <Interactive action="salavideo_palanca" interactive_billboard_y_offset="0.2" />
   </Entity>
   <Entity name="lvl2_video_Box19">
     <Object3D position="2.67402 0.140026 10.821" yaw="0.0" pitch="0.0" roll="0.0" />

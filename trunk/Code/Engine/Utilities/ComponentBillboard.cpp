@@ -33,7 +33,7 @@ bool CComponentBillboard::Init(CGameEntity* _pEntity, const string& _szCore)
   m_szEmiterName  = "Entity Emiter ";
   m_szEmiterName += _pEntity->GetGUID();
 
-  m_pEmiterInstance = CORE->GetEmiterManager()->CreateBillboard(m_szEmiterName, _szCore, *l_pCO3D);
+  m_pEmiterInstance = CORE->GetEmiterManager()->CreateBillboard(m_szEmiterName, _szCore, CObject3D());
   m_pEmiterInstance->SetReference(l_pCO3D);
 
   SetOk(true);

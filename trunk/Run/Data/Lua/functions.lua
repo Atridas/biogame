@@ -55,7 +55,7 @@ function bido_explosiu(_self)
     local l_position = l_o3d:get_position()
     l_exp:explode(l_position,4)
     local l_explosion = EM:init_emiter("impacte ragdoll", l_position, Vect3f(2.0, 3.0, 2.0), 1, Vect3f(0,1,0))
-    ComponentOmni:add_to_entity(l_explosion, Vect3f(0.0, 0.0, 0.0), Color(2.0,2.0,2.0, 1.0), 3, 10)
+    ComponentOmni.add_to_entity(l_explosion, Vect3f(0.0, 0.0, 0.0), Color(2.0,2.0,2.0, 1.0), 3, 10)
     
     SOUND:play_sample('explosion')
   end
@@ -165,6 +165,7 @@ function recollir_arma(_self, _player)
   if _player:get_name() == "Player" then 
     _player:get_component(BaseComponent.player_controller).shoot_active = true
     _self:delete_component(BaseComponent.interactive)
+    ComponentArma.add_to_entity(_player,"ARMA")
   end
 end
 
@@ -226,17 +227,24 @@ function validate_key(_self, _player)
     local l_name = _self:get_name()
     
     if l_name == "lvl1_unlock_green" then
-      unlock(_player, "green", "lvl1_door03")
+      if unlock(_player, "green", "lvl1_door03") then
+        _self:delete_component(BaseComponent.interactive)
+      end
 
     elseif l_name == "lvl1_unlock_blue" then
-      unlock(_player, "blue", "lvl1_door04")
+      if unlock(_player, "blue", "lvl1_door04") then
+        _self:delete_component(BaseComponent.interactive)
+      end
     
     elseif l_name == "lvl1_unlock_purple" then
-      unlock(_player, "purple", "lvl1_door01")
+      if unlock(_player, "purple", "lvl1_door01") then
+        _self:delete_component(BaseComponent.interactive)
+      end
     
     elseif l_name == "lvl1_unlock_yellow" then
       if unlock(_player, "yellow", "lvl1_door_final") then
         activate_entity("lvl1_miner07")
+        _self:delete_component(BaseComponent.interactive)
       end
     end
   end
@@ -254,7 +262,6 @@ function unlock(_player, _color, _doorname)
       --remove key
       player_controller:remove_pickup("lvl1_key_" .. _color)
       
-      _self:delete_component(BaseComponent.interactive)
       
       return true
     else

@@ -21,6 +21,8 @@ public:
   
   void ChangeCore(const string& _szCore);
 
+  CEmiterInstance* GetBillboard() const {return m_pEmiterInstance;};
+
 protected:
 
   CComponentBillboard():m_pEmiterInstance(0) {};

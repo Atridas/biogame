@@ -466,6 +466,14 @@ function XMLEntityInteractive _instance &_TagName =
 	format "%" (GetUserProp _instance "interactive") to:l_ss
 	append l_params #("action", l_ss)
 	
+	--destroyedResource
+	if (GetUserProp _instance "interactive_billboard_y_offset") != undefined then
+	(
+		l_ss = "" as stringStream
+		format "%" (GetUserProp _instance "interactive_billboard_y_offset") to:l_ss
+		append l_params #("interactive_billboard_y_offset", l_ss)
+	)
+	
 	return l_params
 )
 

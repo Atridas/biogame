@@ -3139,25 +3139,25 @@
     <Object3D position="-10.5804 0.005 7.05398" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_unlock_green" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Interactive action="validate_key" />
+    <Interactive action="validate_key" interactive_billboard_y_offset="2.2" />
   </Entity>
   <Entity name="lvl1_unlock_blue">
     <Object3D position="-9.21016 0.005 8.37934" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_unlock_blue" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Interactive action="validate_key" />
+    <Interactive action="validate_key" interactive_billboard_y_offset="2.2" />
   </Entity>
   <Entity name="lvl1_unlock_purple">
     <Object3D position="-8.04286 0.005 9.47855" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_unlock_purple" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Interactive action="validate_key" />
+    <Interactive action="validate_key" interactive_billboard_y_offset="2.2" />
   </Entity>
   <Entity name="lvl1_unlock_yellow">
     <Object3D position="-6.80895 0.005 10.6213" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_unlock_yellow" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Interactive action="validate_key" />
+    <Interactive action="validate_key" interactive_billboard_y_offset="2.2" />
   </Entity>
   <Entity name="Change_Level_Trigger">
     <Object3D position="-0.0492312 1.67603 22.1723" yaw="0.0" pitch="0.0" roll="0.0" />

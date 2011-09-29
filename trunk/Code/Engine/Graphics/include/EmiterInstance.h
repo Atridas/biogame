@@ -56,7 +56,8 @@ public:
   void Activate() { m_bActive = true; Reset(); }
   void Deactivate() { m_bActive = false; }
 
-  void SetReference(CObject3D* _pObjectReference) {_pObjectReference = m_pObjectReference;};
+  void SetReference(CObject3D* _pObjectReference) {m_pObjectReference = _pObjectReference;};
+  void SetOffset(const CObject3D& _Offset) {m_ObjectOffset = _Offset;};
   void SetRoom(CRoom* _pRoom) { m_pInRoom = _pRoom; };
 
   virtual const vector<CMaterial*>& GetMaterials() const;
@@ -78,6 +79,7 @@ private:
   vector<CEmiterInstance*> m_ChildEmiters;
 
   CObject3D*         m_pObjectReference;
+  CObject3D          m_ObjectOffset;
   CRoom*             m_pInRoom;
   const CEmiterCore* m_pEmiterCore;
   string             m_szCoreName;
