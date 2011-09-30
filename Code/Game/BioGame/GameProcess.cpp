@@ -73,7 +73,7 @@ bool CGameProcess::Init()
   //CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Menjador.xml");
   //CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Passadis.xml");
   //CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - video.xml");
-
+  CORE->GetEntityManager()->CreateLevelControllerEntity(true);
   CORE->GetRenderer()->SetUniqueRenderPath("Pantalla d'inici");
 
   #ifndef _DEBUG
@@ -88,12 +88,15 @@ bool CGameProcess::Init()
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Menjador.xml");
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Passadis.xml");
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - video.xml");
+  CORE->GetEntityManager()->CreateLevelControllerEntity(false);
 #endif
 #ifdef BIOGAME_NIVELLS_NIVELL_MENYS_1
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -1/XML/GameEntities.xml");
+  CORE->GetEntityManager()->CreateLevelControllerEntity(false);
 #endif
 #ifdef BIOGAME_NIVELLS_HANGAR
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Hangar/XML/GameEntities.xml");
+  CORE->GetEntityManager()->CreateLevelControllerEntity(false);
 #endif
   
   CGameEntity* l_pPlayerEntity = CORE->GetEntityManager()->GetEntity("Player");

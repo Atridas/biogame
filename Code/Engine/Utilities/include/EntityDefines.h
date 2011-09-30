@@ -34,7 +34,9 @@ struct SEvent {
     OBRIR,
     TANCAR,
     PICKUP,
-    INTERACCIO
+    INTERACCIO,
+    ENEMY_ALIVE,
+    ENEMY_DEAD
   } Msg;
 
   //agafar un element info

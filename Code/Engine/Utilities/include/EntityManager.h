@@ -41,6 +41,8 @@ public:
   // Loading functions
   void LoadEntitiesFromXML(const string& _szFile);
 
+  CGameEntity* CreateLevelControllerEntity(bool _bMainMenu);
+
   CGameEntity* InitPlayer(const string& _szEntityName, const Vect3f& _vPosition, float _fYaw, bool _bForceActive = true, bool _bShootActive = true);
 
   CGameEntity* InitEnemy(const string& _szPlayerName, const Vect3f& _vPosition, float _fRadius,

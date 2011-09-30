@@ -2,6 +2,13 @@
 <sounds>
   <sound name="bgm" file="./Data/Sounds/bgm.mp3" sound3D="false" type="music" loop="true" priority="1" volume="0.5"/>
   <sound name="bgm2" file="./Data/Sounds/bgm2.mp3" sound3D="false" type="music" loop="true" priority="1" volume="1.0"/>
+  <sound name="bgm_main_menu_init" file="./Data/Sounds/bgm_main_menu_init_NL.wav" sound3D="false" type="music" loop="false" priority="1"        volume="0.6"/>
+  <sound name="bgm_main_menu" file="./Data/Sounds/bgm_main_menu_L.wav" sound3D="false" type="music" loop="false" priority="1"                   volume="0.6"/>
+  <sound name="bgm_init_level" file="./Data/Sounds/bgm_init_level_NL.wav" sound3D="false" type="music" loop="false" priority="1"                volume="0.6"/>
+  <sound name="bgm_explore" file="./Data/Sounds/bgm_explore_L.wav" sound3D="false" type="music" loop="false" priority="1"                       volume="0.6"/>
+  <sound name="bgm_battle" file="./Data/Sounds/bgm_battle_L.wav" sound3D="false" type="music" loop="false" priority="1"                         volume="0.6"/>
+  <sound name="bgm_battle_end" file="./Data/Sounds/bgm_battle_end_NL.wav" sound3D="false" type="music" loop="false" priority="1"                volume="0.6"/>
+  <sound name="bgm_battle_to_explore" file="./Data/Sounds/bgm_battle_to_explore_NL.wav" sound3D="false" type="music" loop="false" priority="1"  volume="0.6"/>
   <sound name="music3d" file="./Data/Sounds/music3d.mp3" sound3D="true" type="music" loop="true" minDistance="1.0" maxDistance="100.0" priority="1" volume="1.0"/>
   <sound name="pipip" file="./Data/Sounds/pipipipipi.mp3" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />  
   <sound name="disparar" file="./Data/Sounds/laser_short.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />  
