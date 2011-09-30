@@ -293,6 +293,18 @@ void CComponentIABrain::Die()
   if(m_pCover)
     m_pCover->m_bOcupat = false;
 
+  CGameEntity* l_pLevelController = ENTITY_MANAGER->GetEntity("LevelController");
+
+  if(l_pLevelController)
+  {
+    SEvent l_morir;
+    l_morir.Msg = SEvent::ENEMY_DEAD;
+    l_morir.Receiver = l_pLevelController->GetGUID();
+    l_morir.Sender = GetEntity()->GetGUID();
+      
+    ENTITY_MANAGER->SendEvent(l_morir);
+  }
+
   RunScript();
 }
 
@@ -408,6 +420,22 @@ void CComponentIABrain::ReceiveEvent(const SEvent& _Event)
     ReceiveForce(_Event);
   }else if(_Event.Msg == SEvent::MORIR)
   {
-    Die();
+    if(!m_bDead)
+      Die();
+  }
+}
+
+void CComponentIABrain::Enable()
+{
+  CGameEntity* l_pLevelController = ENTITY_MANAGER->GetEntity("LevelController");
+
+  if(l_pLevelController)
+  {
+    SEvent l_alive;
+    l_alive.Msg = SEvent::ENEMY_ALIVE;
+    l_alive.Receiver = l_pLevelController->GetGUID();
+    l_alive.Sender = GetEntity()->GetGUID();
+      
+    ENTITY_MANAGER->SendEvent(l_alive);
   }
 }

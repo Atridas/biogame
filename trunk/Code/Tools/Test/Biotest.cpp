@@ -102,7 +102,7 @@ bool CBiotestProcess::Init()
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Menjador.xml");
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - Passadis.xml");
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Level -2/XML/GameEntities - video.xml");
-
+  CORE->GetEntityManager()->CreateLevelControllerEntity(false);
   
   CGameEntity* l_pPlayerEntity = CORE->GetEntityManager()->GetEntity("Player");
   m_pCamera = l_pPlayerEntity->GetComponent<CComponent3rdPSCamera>()->GetCamera();

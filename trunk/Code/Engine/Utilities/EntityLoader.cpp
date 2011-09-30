@@ -34,6 +34,7 @@
 #include "ComponentRotative.h"
 #include "ComponentBillboard.h"
 #include "ComponentOmni.h"
+#include "ComponentBGMController.h"
 #include "ParticleConstants.h"
 
 #include "RenderableObject.h"
@@ -443,7 +444,7 @@ void LoadMilitar(CEntityManager* _pEM, CXMLTreeNode& _TreeMiner)
 void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "CEntityManager::LoadEntitiesFromXML Carregant el fitxer de Entitats \"%s\" [Utilities/EntityLoader.cpp]", _szFile.c_str());
-  
+
   CXMLTreeNode l_TreeEntities;
   if(!l_TreeEntities.LoadFile(_szFile.c_str()))
   {
@@ -586,7 +587,20 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
   SetOk(true);
 }
 
+CGameEntity* CEntityManager::CreateLevelControllerEntity(bool _bMainMenu)
+{
+  CGameEntity* l_pLevelManager = CreateEntity();
 
+  if(!SetName("LevelController", l_pLevelManager))
+  {
+    LOGGER->AddNewLog(ELL_ERROR, "CEntityManager::CreateLevelManagerEntity error al identificar l'entitat com a \"LevelController\"");
+    return 0;
+  }
+
+  CComponentBGMController* l_pBGM = CComponentBGMController::AddToEntity(l_pLevelManager, _bMainMenu);
+
+  return l_pLevelManager;
+}
 
 CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3f& _vPosition, float _fYaw, bool _bForceActive, bool _bShootActive)
 {
@@ -639,7 +653,6 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
   }
 
   CComponentRagdoll::AddToEntity(l_pPlayer, "Data/Animated Models/Riggle/Skeleton.xml", ECG_RAGDOLL_PLAYER);
-
 
   return l_pPlayer;
 }

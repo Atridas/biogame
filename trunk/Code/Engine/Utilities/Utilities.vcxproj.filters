@@ -145,6 +145,12 @@
     <Filter Include="EntitySystem\Components\ComponentOmni">
       <UniqueIdentifier>{2c2e2ada-297d-4536-b61c-8141c91a8593}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentBGMController">
+      <UniqueIdentifier>{09a6f742-44f6-4401-9564-58e21a13cb78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EntitySystem\Components\ComponentSoundEmiter">
+      <UniqueIdentifier>{e6a717c1-bd41-4992-a159-dc898fa9dcbf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -296,6 +302,12 @@
     </ClCompile>
     <ClCompile Include="ComponentOmni.cpp">
       <Filter>EntitySystem\Components\ComponentOmni</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentBGMController.cpp">
+      <Filter>EntitySystem\Components\ComponentBGMController</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentSoundEmiter.cpp">
+      <Filter>EntitySystem\Components\ComponentSoundEmiter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -457,6 +469,12 @@
     </ClInclude>
     <ClInclude Include="include\ComponentOmni.h">
       <Filter>EntitySystem\Components\ComponentOmni</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentBGMController.h">
+      <Filter>EntitySystem\Components\ComponentBGMController</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentSoundEmiter.h">
+      <Filter>EntitySystem\Components\ComponentSoundEmiter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

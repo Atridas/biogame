@@ -55,9 +55,39 @@ void CComponentSpawner::Update(float _fDeltaTime)
       l_SStream << GetEntity()->GetName() << "_enemy" << m_iCurrentEnemy << endl;
 
       if(m_EnemyType == EE_MILITAR)
+      {
         ENTITY_MANAGER->InitMilitar("Player", m_pCObject3D->GetPosition(), l_SStream.str());
+
+        //avisar al level controller que hi ha un nou enemic
+        CGameEntity* l_pLevelController = ENTITY_MANAGER->GetEntity("LevelController");
+
+        if(l_pLevelController)
+        {
+          SEvent l_alive;
+          l_alive.Msg = SEvent::ENEMY_ALIVE;
+          l_alive.Receiver = l_pLevelController->GetGUID();
+          l_alive.Sender = GetEntity()->GetGUID();
+      
+          ENTITY_MANAGER->SendEvent(l_alive);
+        }
+      }
       else if(m_EnemyType == EE_MINER)
+      {
         ENTITY_MANAGER->InitMiner("Player", m_pCObject3D->GetPosition(), l_SStream.str());
+
+        //avisar al level controller que hi ha un nou enemic
+        CGameEntity* l_pLevelController = ENTITY_MANAGER->GetEntity("LevelController");
+
+        if(l_pLevelController)
+        {
+          SEvent l_alive;
+          l_alive.Msg = SEvent::ENEMY_ALIVE;
+          l_alive.Receiver = l_pLevelController->GetGUID();
+          l_alive.Sender = GetEntity()->GetGUID();
+      
+          ENTITY_MANAGER->SendEvent(l_alive);
+        }
+      }
         
       m_iCurrentEnemy++;
     }

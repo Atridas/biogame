@@ -251,7 +251,6 @@ void CSoundManager::ChangeMusic(const string& _szMusic, unsigned long _ulFadeOut
 }
 
 
-
 void CSoundManager::PlayMusic(const string& _szMusic, bool _bRestart)
 {
   SSoundChannel* l_pMusic = GetMusic(_szMusic);
@@ -261,6 +260,19 @@ void CSoundManager::PlayMusic(const string& _szMusic, bool _bRestart)
     BASS_ChannelSetAttribute(l_pMusic->m_iHandle, BASS_ATTRIB_VOL, l_pMusic->m_fVolume);
     BASS_ChannelPlay(l_pMusic->m_iHandle,_bRestart);
   }
+}
+
+
+unsigned long CSoundManager::GetMusicRemainingTime(const string& _szMusicName)
+{
+  SSoundChannel* l_pMusic = GetMusic(_szMusicName);
+
+  if(l_pMusic)
+  {
+    QWORD l_qwRemaining = BASS_ChannelGetLength(l_pMusic->m_iHandle, BASS_POS_BYTE) - BASS_ChannelGetPosition(l_pMusic->m_iHandle, BASS_POS_BYTE);
+    return (unsigned long) BASS_ChannelBytes2Seconds(l_pMusic->m_iHandle, l_qwRemaining) * 1000;
+  }
+  return 0;
 }
 
 void CSoundManager::SetMusic3DPosition(const string& _szMusic, const Vect3f& _vSoundEmmiterPosition)

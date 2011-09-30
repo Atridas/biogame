@@ -48,6 +48,8 @@ private:
   void RunScript();
   void ActivateRagdoll();
 
+  virtual void Enable();
+
   int m_iNumUpdates;
   bool m_bDead;
 
