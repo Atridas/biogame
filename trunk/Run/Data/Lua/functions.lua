@@ -54,7 +54,7 @@ function bido_explosiu(_self)
   if l_o3d then
     local l_position = l_o3d:get_position()
     l_exp:explode(l_position,4)
-    local l_explosion = EM:init_emiter("impacte ragdoll", l_position, Vect3f(2.0, 3.0, 2.0), 1, Vect3f(0,1,0))
+    local l_explosion = EM:init_emiter("explosio foc", l_position, Vect3f(2.0, 3.0, 2.0), 1, Vect3f(0,1,0))
     ComponentOmni.add_to_entity(l_explosion, Vect3f(0.0, 0.0, 0.0), Color(2.0,2.0,2.0, 1.0), 3, 10)
     
     SOUND:play_sample('explosion')

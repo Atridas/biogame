@@ -5,6 +5,8 @@
 #include "StaticMeshEmptyMaterial.h"
 #include "DiffuseTextureDecorator.h"
 #include "SpritePropertyDecorator.h"
+#include "GlowPropertyDecorator.h"
+#include "GlowTextureDecorator.h"
 
 
 // Main include
@@ -197,13 +199,23 @@ bool CSimpleEmiterCore::Init(CXMLTreeNode& _xmlEmiter)
 
 
 
-  string   l_szTexture = _xmlEmiter.GetPszISOProperty("texture", "", true);
+  string   l_szTexture = _xmlEmiter.GetPszISOProperty("texture");
   CTexture* l_pTexture = CORE->GetTextureManager()->GetResource(l_szTexture);
   
   CHECKED_DELETE(m_pMaterial);
   m_pMaterial = new CStaticMeshEmptyMaterial();
   m_pMaterial = new CSpritePropertyDecorator(m_pMaterial, Vect2f( 1.f / m_iNumColumns, 1.f / m_iNumRows));
   m_pMaterial = new CDiffuseTextureDecorator(m_pMaterial,l_pTexture);
+
+  if(_xmlEmiter.GetBoolProperty("glow", false, false))
+  {
+    float    l_fGlowintensity = _xmlEmiter.GetFloatProperty("glow_intensity");
+    string   l_szGlowTexture  = _xmlEmiter.GetPszISOProperty("glow_texture");
+    CTexture* l_pGlowTexture  = CORE->GetTextureManager()->GetResource(l_szGlowTexture);
+    
+    m_pMaterial = new CGlowPropertyDecorator(m_pMaterial, l_fGlowintensity);
+    m_pMaterial = new CGlowTextureDecorator(m_pMaterial, l_pGlowTexture);
+  }
 
 
   SetOk(true);
