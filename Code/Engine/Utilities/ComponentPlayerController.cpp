@@ -473,6 +473,22 @@ bool CComponentPlayerController::RemovePickUp(const string& _szPickUp)
   return false;
 }
 
+void CComponentPlayerController::SetGodMode(bool _bValue)
+{
+  m_bGodMode = _bValue;
+  CComponentVida* l_pVida = GetEntity()->GetComponent<CComponentVida>();
+  if(m_bGodMode)
+  {
+    LOGGER->AddNewLog(ELL_INFORMATION, "OVER 9000!!!!");
+    l_pVida->SetActive(false);
+  }
+  else
+  {
+    LOGGER->AddNewLog(ELL_INFORMATION, "God mode disabled.");
+    l_pVida->SetActive(true);
+  }
+}
+
 void CComponentPlayerController::ReceiveEvent(const SEvent& _Event)
 {
   if(_Event.Receiver == GetEntity()->GetGUID())
@@ -483,6 +499,9 @@ void CComponentPlayerController::ReceiveEvent(const SEvent& _Event)
         AddPickUp(_Event.Info[0].str);
     }else if(_Event.Msg == SEvent::REBRE_IMPACTE)
     {
+      if(m_bGodMode)
+        return;
+
       m_fBloodFadeOutTime = BLOOD_FADEOUT_TIME;
       m_fBloodTime = 0.0f;
 
@@ -493,6 +512,9 @@ void CComponentPlayerController::ReceiveEvent(const SEvent& _Event)
   
     }else if(_Event.Msg == SEvent::MORIR)
     {
+      if(m_bGodMode)
+        return;
+
       Die();
     }
 

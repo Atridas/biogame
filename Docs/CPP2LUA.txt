@@ -621,6 +621,11 @@ ENGINE
 				void PlayImage(const std::string& inImageName, float timePerImage, bool loop)
 		
 ENTITIES
+  Globals:
+    Methods:
+      god_mode
+      void SetGodMode(bool _bGodMode)
+    
   Class:
     EventInfo
     SEventInfo
