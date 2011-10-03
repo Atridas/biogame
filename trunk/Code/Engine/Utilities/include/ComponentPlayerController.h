@@ -55,8 +55,12 @@ public:
   void AddPickUp(const string& _szPickUp);
   bool RemovePickUp(const string& _szPickUp);
 
+  void SetGodMode(bool _bValue);
+
 private:
   CComponentPlayerController():
+      m_bGodMode(false),
+
       m_pObject3D(0), m_pMovement(0), m_pCoverEntity(0),
 
       m_pAnimatedModel(0),
@@ -81,6 +85,8 @@ private:
   virtual void Release() { m_vPickUps.clear(); };
 
   void Die();
+
+  bool m_bGodMode;
 
   float m_fBloodFadeOutTime;
   float m_fBloodTime;

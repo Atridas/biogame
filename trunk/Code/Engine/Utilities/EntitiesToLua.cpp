@@ -66,14 +66,25 @@ void SetEventInfo(SEvent& x, luabind::argument const& table)
 {
     for (int i = 0; i < EVENT_INFO_SIZE; ++i)
         x.Info[i] = luabind::object_cast<SEventInfo>(table[i + 1]);
-} 
+}
+
+void SetGodMode(bool _bGodMode)
+{
+  CGameEntity* l_pPlayer = ENTITY_MANAGER->GetEntity("Player");
+  if(l_pPlayer)
+    l_pPlayer->GetComponent<CComponentPlayerController>()->SetGodMode(_bGodMode);
+}
 
 // ----------------------------------------------------
 
 void RegisterEntitiesToLua(lua_State* _pLS)
 {
   module(_pLS) [
-    class_<SEventInfo>("EventInfo")
+    //globals
+    def("god_mode", &SetGodMode)
+
+    //Entities
+    ,class_<SEventInfo>("EventInfo")
       .enum_("TYPE")
       [
         value("int"   ,SEventInfo::INT),
