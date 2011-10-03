@@ -652,3 +652,50 @@ function XMLEntityBillboard _instance &_TagName =
 	
 	return l_params
 )
+
+--Genera els paràmetres d'un tag XML d'entitat Light. Conté:
+-- resource
+-- type
+-- [tickle]
+function XMLEntityLight _instance &_TagName =
+(
+	local l_params = #()
+	local l_ss
+	
+	_TagName = "Light"
+	append l_params #("resource", _instance.name)
+	
+	--Omni properties
+	if (classof _instance) == Omnilight then
+	(
+		append l_params #("type", "omni")
+	)
+	
+	--Directional properties
+	if (classof _instance) == TargetDirectionallight then
+	(
+		append l_params #("type", "directional")
+	)
+	
+	-- properties
+	if (classof _instance) == targetSpot then
+	(
+		append l_params #("type", "spot")
+	)
+	
+	if (GetUserProp _instance "tickle") != undefined then
+	(
+		l_ss = "" as stringStream
+		format "%" (GetUserProp _instance "tickle") to:l_ss
+		append l_params #("tickle", l_ss)
+	)
+	
+	if (GetUserProp _instance "script") != undefined then
+	(
+		l_ss = "" as stringStream
+		format "%" (GetUserProp _instance "script") to:l_ss
+		append l_params #("script", l_ss)
+	)
+	
+	return l_params
+)

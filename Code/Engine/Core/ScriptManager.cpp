@@ -26,6 +26,9 @@ extern "C"
 #include "RenderableAnimatedInstanceModel.h"
 #include "StaticMeshManager.h"
 #include "LightManager.h"
+#include "DirectionalLight.h"
+#include "SpotLight.h"
+#include "OmniLight.h"
 #include "SoundManager.h"
 #include "PhysicsManager.h"
 #include "LevelChanger.h"
@@ -545,7 +548,29 @@ void CScriptManager::RegisterLUAFunctions()
   module(m_pLS) [
     class_<CMapManager<CLight>>("LightMapManager"),
     class_<CLightManager, CMapManager<CLight>>("LightManager")
-      .def("load", &CLightManager::Load)
+      .def("load",           &CLightManager::Load)
+      .def("get_resource",   &CLightManager::GetResource)
+  ];
+
+  //Light
+  module(m_pLS) [
+    class_<CLight>("Light")
+      .def("set_active",     &CLight::SetActive)
+  ];
+
+  //Omni
+  module(m_pLS) [
+    class_<COmniLight, CLight>("OmniLight")
+  ];
+
+  //Directional
+  module(m_pLS) [
+    class_<CDirectionalLight, CLight>("DirectionalLight")
+  ];
+
+  //Spot
+  module(m_pLS) [
+    class_<CSpotLight, CDirectionalLight>("SpotLight")
   ];
 
   //ScriptManager

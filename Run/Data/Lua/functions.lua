@@ -133,6 +133,21 @@ function laboratori_petar_llum_porta(_self)
     l_message.dispatch_time = 0
     
     EM:send_event(l_message)
+    
+    --Apagar llums
+    local l_light = LM:get_resource("lvl2_lab_Spot05")
+    if l_light then
+      l_light:set_active(false)
+    else
+      log("No es troba lvl2_lab_Spot05")
+    end
+    
+    local l_light = LM:get_resource("lvl2_lab_Omni03")
+    if l_light then
+      l_light:set_active(false)
+    else
+      log("No es troba lvl2_lab_Omni03")
+    end
   else
     log('error, no es troba la porta')
   end
