@@ -68,6 +68,7 @@ bool CLightManager::Load(const string& _szFileName)
       LOGGER->AddNewLog(ELL_WARNING,"CLightManager:: Unknown light type: \"%s\".", l_szType.c_str());
     }
 
+
   }
   SetOk(true);
   return IsOk();

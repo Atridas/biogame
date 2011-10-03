@@ -229,6 +229,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .scope[def("add_to_entity",     &CComponent3rdPSCamera::AddToEntity)]
       .def_readwrite("camera_height", &CComponent3rdPSCamera::m_fCameraHeight)
       .def_readwrite("camera_right",  &CComponent3rdPSCamera::m_fCameraRight)
+      .def("set_zoom", &CComponent3rdPSCamera::SetZoom)
+      .def("set_fov", &CComponent3rdPSCamera::SetFOV)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPhysXController,CBaseComponent>("ComponentPhysXController")

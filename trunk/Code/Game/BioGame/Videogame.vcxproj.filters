@@ -76,5 +76,8 @@
     <None Include="..\..\..\Run\Data\XML\init -1.xml">
       <Filter>Data</Filter>
     </None>
+    <None Include="..\..\..\Run\Data\XML\Levels.xml">
+      <Filter>Data</Filter>
+    </None>
   </ItemGroup>
 </Project>

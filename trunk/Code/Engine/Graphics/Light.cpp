@@ -9,6 +9,7 @@ void CLight::Init(CXMLTreeNode& _XMLParams)
     m_fStartRangeAttenuation = _XMLParams.GetFloatProperty("att_start_range",false,false);
     m_fEndRangeAttenuation = _XMLParams.GetFloatProperty("att_end_range",false,false);
     m_bDynamicObjectsOnly = _XMLParams.GetBoolProperty("dynamic_objects_only",true,false);
+    SetActive(_XMLParams.GetBoolProperty("active",true,false));
 
     SetOk(true);
 }
