@@ -21,8 +21,11 @@
     <Entities file="Data/Levels/Level -2/XML/GameEntities - Passadis.xml"/>
     <Entities file="Data/Levels/Level -2/XML/GameEntities - Menjador.xml"/>
     <Entities file="Data/Levels/Level -2/XML/GameEntities - video.xml"/>
-    
-    <Lights file="Data/Levels/Level -2/XML/Lights.xml"/>
+
+    <Lights file="Data/Levels/Level -2/XML/Lights - Laboratori.xml"/>
+    <Lights file="Data/Levels/Level -2/XML/Lights - Passadis.xml"/>
+    <Lights file="Data/Levels/Level -2/XML/Lights - Menjador.xml"/>
+    <Lights file="Data/Levels/Level -2/XML/Lights - video.xml"/>
   </Level>
   
   <Level name="Nivell -1" render_path="canvi nivell -2 a -1">

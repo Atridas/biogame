@@ -273,11 +273,13 @@ technique DeferredGeometryLightPassTechnique
     TwoSidedStencilMode = true;
     // stencil settings for front facing triangles
     StencilFunc			= Less;
+    //StencilFunc			= Always;
     StencilZFail		= Keep;
     StencilPass			= Keep;
     StencilFail			= Keep;
     // stencil settings for back facing triangles 
     Ccw_StencilFunc		= Less;
+    //Ccw_StencilFunc		= Always;
     Ccw_StencilZFail	= Keep;
     Ccw_StencilPass		= Keep;
     Ccw_StencilFail		= Keep;

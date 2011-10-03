@@ -123,6 +123,19 @@ Mat33f GetFastestRotationFromDirToDir(const Vect3f& _vOriginalDir, const Vect3f&
     l_vDir.Normalize();
     mRot_.FromAxisAngle(l_vDir,l_fAngle);
   }
+  else if(l_fAngleCos < 0)
+  {
+    Vect3f l_vDir = _vOriginalDir ^ Vect3f(1,0,0);
+    if(l_vDir.SquaredLength() < 0.01f)
+    {
+      l_vDir = _vOriginalDir ^ Vect3f(0,1,0);
+    }
+    
+    float l_fAngle = FLOAT_PI_VALUE;
+
+    l_vDir.Normalize();
+    mRot_.FromAxisAngle(l_vDir,l_fAngle);
+  }
   else
   {
     mRot_.SetIdentity();

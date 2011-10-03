@@ -93,7 +93,6 @@ bool CPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer, const st
 void CPostSceneRendererStep::Render(CRenderManager* _pRM)
 {
   CEffectManager* l_pEM = CORE->GetEffectManager();
-  //l_pEM->SetTextureWidthHeight(m_iRenderTargetWidth,m_iRenderTargetHeight);
 
   l_pEM->SetAlphaFactor(m_fAlphaFactor);
   l_pEM->SetViewport(m_iPos.x, m_iPos.y, m_iSize.x, m_iSize.y);
@@ -108,7 +107,6 @@ void CPostSceneRendererStep::Render(CRenderManager* _pRM)
   if(l_pEffect)
   {
     ActivateInputSamplers();
-    //ActivateRenderTargets(_pRM);
 
     l_pEM->LoadShaderData(l_pEffect);
 
@@ -126,8 +124,7 @@ void CPostSceneRendererStep::Render(CRenderManager* _pRM)
       }
       l_pD3DEffect->End();
     }
-  
-    //DeactivateRenderTargets(_pRM);
+
     DeactivateInputSamplers();
   }
 }

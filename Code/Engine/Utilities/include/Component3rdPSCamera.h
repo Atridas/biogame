@@ -30,6 +30,9 @@ public:
 
   CCamera* GetCamera() const;
 
+  void SetZoom(float _fZoom, float _tTimeConstantObjectDistance);
+  void SetFOV(float _fFOV, float _tTimeConstantFOV);
+
   //Dades pròpies dels components
   float m_fCameraHeight;
   float m_fCameraRight;
@@ -70,6 +73,11 @@ private:
 
   float m_fTargetRightDistance;
   float m_fPrevRightDistance;
+
+  float m_fTimeFOV;
+  float m_fTimeConstantFOV;
+  float m_fTargetFOV;
+  float m_fPrevFOV;
 
   float FirstOrderSystem(float _fInput, float _fTimeConstant, float _fTime);
 

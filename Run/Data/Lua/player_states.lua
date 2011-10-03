@@ -117,6 +117,7 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   
   local animation = _jugador:get_component(BaseComponent.animation)
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  local camera = _jugador:get_component(BaseComponent.thps_camera)
   
   local speed = Player_Constants["Walk Speed"]
   local run_speed = Player_Constants["Run Speed"]
@@ -139,10 +140,13 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   end
 
   if ACTION_MANAGER:is_action_active('Aim') and player_controller.shoot_active then
-    --_jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Apuntar')
     isAiming = true
+    --camera:set_zoom(1.0,12.0)
+    camera:set_fov(44.0,14.0)
   else
     isAiming = false
+    --camera:set_zoom(1.7,6.0)
+    camera:set_fov(55.0,14.0)
   end
   
   if ACTION_MANAGER:is_action_active('Shield') and player_controller.force_active then
@@ -932,6 +936,7 @@ State_Player_Cobertura_Baixa_Apuntar['Enter'] = function(_jugador)
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
   --local mirilla = _jugador:get_component(BaseComponent.mirilla)
+  local camera = _jugador:get_component(BaseComponent.thps_camera)
   
   --Nomes blend
   animation:clear_all_cycles(0.2)
@@ -943,6 +948,7 @@ State_Player_Cobertura_Baixa_Apuntar['Enter'] = function(_jugador)
   --animation:play('CoverSortidaAvallDreta', 0.3, 1.0, false)
   
 	--mirilla:set_active(true)
+  camera:set_fov(44.0,14.0)
   
   _jugador:get_component(BaseComponent.renderable_object).block_yaw = false
   player_controller.time = 0
@@ -952,11 +958,13 @@ end
 -------------------------------------------------------------------------------------------------
 State_Player_Cobertura_Baixa_Apuntar['Exit'] = function(_jugador)
 
-  log('Michael Jackson YEAH!')
+  local camera = _jugador:get_component(BaseComponent.thps_camera)
+  --log('Michael Jackson YEAH!')
   --_jugador:get_component(BaseComponent.renderable_object).block_yaw = false
   --local mirilla = _jugador:get_component(BaseComponent.mirilla)
   
   --mirilla:set_active(false)
+  camera:set_fov(55.0,14.0)
 end
 
 -------------------------------------------------------------------------------------------------
@@ -968,8 +976,8 @@ State_Player_Cobertura_Baixa_Apuntar['Update'] = function(_jugador, _dt)
   
   if not ACTION_MANAGER:is_action_active('Aim') then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Baixa')
-  end
-  
+  end   
+    
   if ACTION_MANAGER:is_action_active('Shoot') then
     animation:play(Player_Constants["Disparar"], 0.3, 1.0, false)
     player_controller:shoot()

@@ -35,17 +35,19 @@ bool CComponent3rdPSCamera::Init(CGameEntity *_pEntity,
   m_fCameraHeight = _fCameraHeight;
   m_fCameraRight  = _fCameraRight;
   m_fZoom         = _fZoom;
+  m_fTargetFOV = 55.0f * FLOAT_PI_VALUE/180.0f;
 
   m_pCamera = new CShoulderCamera(
                             0.1f,
                             100.0f,
-                            55.0f * FLOAT_PI_VALUE/180.0f,
+                            m_fTargetFOV,
                             ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
                             &m_CameraObject,
                             m_fZoom,m_fCameraRight,m_fCameraHeight);
 
   m_tTimeConstantRightDistance = 6.8f;
   m_tTimeConstantObjectDistance = 8.7f;
+  m_fTimeConstantFOV = 5.0f;
 
   SetOk(true);
   return IsOk();
@@ -123,6 +125,8 @@ void CComponent3rdPSCamera::PostUpdate(float _fDeltaTime)
     }else{
       m_fTargetObjectDistance = m_fZoom;
     }
+  }else{
+    m_fTargetObjectDistance = m_fZoom;
   }
   
   if(m_fTargetObjectDistance != l_fPrevTargetObjectDistance)
@@ -136,6 +140,12 @@ void CComponent3rdPSCamera::PostUpdate(float _fDeltaTime)
     m_fTimeObjectDistance += _fDeltaTime;
     m_pCamera->SetZoom(m_fPrevObjectDistance + FirstOrderSystem(m_fTargetObjectDistance - m_fPrevObjectDistance, m_tTimeConstantObjectDistance, m_fTimeObjectDistance));
   }
+
+  if(m_pCamera->GetFov() != m_fTargetFOV)
+  {
+    m_fTimeFOV += _fDeltaTime;
+    m_pCamera->SetFov(m_fPrevFOV + FirstOrderSystem(m_fTargetFOV - m_fPrevFOV, m_fTimeConstantFOV, m_fTimeFOV));
+  }
 }
 
 float CComponent3rdPSCamera::FirstOrderSystem(float _fInput, float _fTimeConstant, float _fTime)
@@ -147,3 +157,22 @@ CCamera* CComponent3rdPSCamera::GetCamera() const
 {
   return m_pCamera;
 };
+
+void CComponent3rdPSCamera::SetZoom(float _fZoom, float _tTimeConstantObjectDistance)
+{
+  m_fZoom = _fZoom;
+  m_tTimeConstantObjectDistance = _tTimeConstantObjectDistance;
+}
+
+void CComponent3rdPSCamera::SetFOV(float _fFOV, float _tTimeConstantFOV)
+{
+  float l_fValue = _fFOV * FLOAT_PI_VALUE/180.0f;
+
+  if(m_fTargetFOV != l_fValue)
+  {
+    m_fTimeFOV = 0.0f;
+    m_fPrevFOV = m_pCamera->GetFov();
+    m_fTargetFOV = l_fValue;
+    m_fTimeConstantFOV = _tTimeConstantFOV;
+  }
+}

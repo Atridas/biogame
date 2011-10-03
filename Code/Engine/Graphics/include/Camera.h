@@ -48,8 +48,8 @@ public:
 	void										AddFov					 (float delta_fov )	{ m_fFOV += delta_fov; }
 	void										AddViewD				 (float amount )			{ if( m_fView_d + amount > 1) m_fView_d += amount; }
 
+  void										SetFov	  			 (float amount )	{ m_fFOV   = amount; }
 protected:
-	void										SetFov	  			 (float amount )	{ m_fFOV   = amount; }
 
 	const CObject3D*	m_pObject3D;
 	float				m_fView_d;					// variable de debug utilizada para pintar el objeto de la camara.	
