@@ -42,6 +42,16 @@ function IsLight _object =
 	)
 )
 
+--Comprova si la llum té paràmetres d'entitat
+function IsLightEntity _object =
+(
+	if (GetUserProp _object "light_entity") != undefined then
+	(
+		return true
+	)
+	return false
+)
+
 --Comprova si l'objecte proporcionat ha de ser convertit en entitat o no.
 function WantsEntity _object =
 (

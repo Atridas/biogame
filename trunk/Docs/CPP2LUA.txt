@@ -399,6 +399,29 @@ ENGINE
         load
         bool Load(const string& _szFileName)
         
+        get_resource
+        virtual CLight * GetResource(const std::string &_szName) const
+        
+    Class:
+      Light
+      CLight
+      
+      Methods:
+        set_active
+        void SetActive(bool _b)
+        
+    Class:
+      OmniLight
+      COmniLight
+      
+    Class:
+      DirectionalLight
+      CDirectionalLight
+    
+    Class:
+      SpotLight
+      CSpotLight
+    
     Class:
       ScriptManager
       CScriptManager

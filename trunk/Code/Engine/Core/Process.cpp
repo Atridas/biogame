@@ -14,6 +14,7 @@
 #include "LogRender.h"
 #include "Console.h"
 #include "EmiterCoreManager.h"
+#include "LightManager.h"
 
 void CProcess::DebugInformation(CRenderManager* _pRM)
 {
@@ -82,6 +83,10 @@ bool CProcess::ExecuteAction(float _fDeltaSeconds, float _fDelta, const char* _p
   } else if(strcmp(_pcAction, "ReloadScript") == 0)
   {
     CORE->GetScriptManager()->Reload();
+    return true;
+  } else if(strcmp(_pcAction, "ReloadLights") == 0)
+  {
+    CORE->GetLightManager()->Reload();
     return true;
   } else if(strcmp(_pcAction, "LogRender") == 0)
   {
