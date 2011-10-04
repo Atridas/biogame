@@ -263,14 +263,14 @@ void CSoundManager::PlayMusic(const string& _szMusic, bool _bRestart)
 }
 
 
-unsigned long CSoundManager::GetMusicRemainingTime(const string& _szMusicName)
+float CSoundManager::GetMusicRemainingTime(const string& _szMusicName)
 {
   SSoundChannel* l_pMusic = GetMusic(_szMusicName);
 
   if(l_pMusic)
   {
     QWORD l_qwRemaining = BASS_ChannelGetLength(l_pMusic->m_iHandle, BASS_POS_BYTE) - BASS_ChannelGetPosition(l_pMusic->m_iHandle, BASS_POS_BYTE);
-    return (unsigned long) BASS_ChannelBytes2Seconds(l_pMusic->m_iHandle, l_qwRemaining) * 1000;
+    return (float) BASS_ChannelBytes2Seconds(l_pMusic->m_iHandle, l_qwRemaining) * 1000;
   }
   return 0;
 }
