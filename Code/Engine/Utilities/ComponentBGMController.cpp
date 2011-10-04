@@ -2,7 +2,7 @@
 #include "Core.h"
 #include "SoundManager.h"
 
-#define BGM_CONTROLLER_FADE_OUT 500
+#define BGM_CONTROLLER_FADE_OUT 50
 
 CComponentBGMController* CComponentBGMController::AddToEntity(CGameEntity* _pEntity, bool _bMain)
 {
@@ -130,15 +130,15 @@ void CComponentBGMController::PlayNextSong(const EMusicState _eState)
   m_szCurrentMusic = GetSongInfo(_eState);
 
   //es comença des del principi
-  l_pSM->ChangeMusic(m_szCurrentMusic, BGM_CONTROLLER_FADE_OUT*2, true);
+  l_pSM->ChangeMusic(m_szCurrentMusic, BGM_CONTROLLER_FADE_OUT, true);
 }
 
 void CComponentBGMController::Update(float _fDeltaTime)
 {
   CSoundManager* l_pSM = CORE->GetSoundManager();
 
-  unsigned long l_pulRemaining = l_pSM->GetMusicRemainingTime(m_szCurrentMusic);
-  if(l_pulRemaining <= BGM_CONTROLLER_FADE_OUT)
+  float l_fRemaining = l_pSM->GetMusicRemainingTime(m_szCurrentMusic);
+  if(l_fRemaining <= BGM_CONTROLLER_FADE_OUT)
     PlayNextSong(GetNextSong());
 }
 
