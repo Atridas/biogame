@@ -14,7 +14,7 @@ class CComponentIABrain:
 public:
   ~CComponentIABrain() {Done();}
 
-  static CComponentIABrain* AddToEntity(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript = "");
+  static CComponentIABrain* AddToEntity(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript = "", const string& _szDestinyNode = "");
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_IA_BRAIN;};
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_IA_BRAIN;};
@@ -42,11 +42,13 @@ public:
 
 private:
   CComponentIABrain():m_pPlayer(0),m_fTime(0),m_bShooted(false),m_iNumUpdates(0), m_pCover(0), m_szOnDeathScript(""), m_bDead(false) {};
-  bool Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript = "");
+  bool Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript = "", const string& _szDestinyNode = "");
 
   void Die();
   void RunScript();
   void ActivateRagdoll();
+
+  bool CheckCoverPath();
 
   virtual void Enable();
 
@@ -58,6 +60,7 @@ private:
   string m_szRagdollName;
 
   string m_szOnDeathScript;
+  string m_szDestinyNode;
 
   CComponentNavNode* m_pCover;
 };
