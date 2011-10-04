@@ -47,11 +47,11 @@ public:
 
   CGameEntity* InitEnemy(const string& _szPlayerName, const Vect3f& _vPosition, float _fRadius,
                          const string& _szInitialState, const string& _szRenderableModel, const string& _szRagdollModell,
-                         const string& _szEntityName = "", const string& _szOnDeathScript = "");
+                         const string& _szEntityName = "", const string& _szOnDeathScript = "", const string& _szDestinyNode = "");
 
   CGameEntity* InitMiner(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName = "", const bool _bActive = true, const string& _szOnDeathScript = "");
 
-  CGameEntity* InitMilitar(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName = "", const bool _bActive = true, const string& _szOnDeathScript = "");
+  CGameEntity* InitMilitar(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName = "", const bool _bActive = true, const string& _szOnDeathScript = "", const string& _szDestinyNode = "");
 
   CGameEntity* InitLaser(const Vect3f& _vPosInit, const Vect3f& _vDir, float _fDany, uint32 _uiCollisionMask);
 

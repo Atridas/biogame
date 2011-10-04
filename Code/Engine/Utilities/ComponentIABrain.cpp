@@ -34,11 +34,11 @@ extern "C"
 
 #define SHOOT_POWER 20.0f
 
-CComponentIABrain* CComponentIABrain::AddToEntity(CGameEntity *_pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript)
+CComponentIABrain* CComponentIABrain::AddToEntity(CGameEntity *_pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript, const string& _szDestinyNode)
 {
   CComponentIABrain *l_pComp = new CComponentIABrain();
   assert(_pEntity && _pEntity->IsOk());
-  if(l_pComp->Init(_pEntity, _szPlayerEntityName, _szRagdollName, _szOnDeathScript))
+  if(l_pComp->Init(_pEntity, _szPlayerEntityName, _szRagdollName, _szOnDeathScript, _szDestinyNode))
   {
     l_pComp->SetEntity(_pEntity);
     return l_pComp;
@@ -50,13 +50,14 @@ CComponentIABrain* CComponentIABrain::AddToEntity(CGameEntity *_pEntity, const s
   }
 }
 
-bool CComponentIABrain::Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript)
+bool CComponentIABrain::Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript, const string& _szDestinyNode)
 {
   m_szRagdollName = _szRagdollName;
 
   m_pPlayer = CORE->GetEntityManager()->GetEntity(_szPlayerEntityName);
 
   m_szOnDeathScript = _szOnDeathScript;
+  m_szDestinyNode = _szDestinyNode;
 
   m_pCover = 0;
   m_bDead = false;
@@ -68,7 +69,6 @@ bool CComponentIABrain::Init(CGameEntity* _pEntity, const string& _szPlayerEntit
 
 void CComponentIABrain::Shoot()
 {
-
   CComponentRenderableObject* l_pCR = GetEntity()->GetComponent<CComponentRenderableObject>();
   CRenderableAnimatedInstanceModel* l_pRAIM = dynamic_cast<CRenderableAnimatedInstanceModel*>(l_pCR->GetRenderableObject());
   CAnimatedInstanceModel *l_pAnimatedInstanceModel = l_pRAIM->GetAnimatedInstanceModel();
@@ -265,6 +265,7 @@ void CComponentIABrain::ReceiveForce(SEvent _sEvent)
 
 void CComponentIABrain::Update(float _fDeltaTime)
 {
+  CComponentObject3D* l_pObject3D = GetEntity()->GetComponent<CComponentObject3D>();
   //if(m_iNumUpdates < 3)
   //  m_iNumUpdates++;
   //if(m_iNumUpdates == 2)
@@ -333,23 +334,36 @@ bool CComponentIABrain::PlanPathToCobertura()
   if(m_pCover)
     return true;
 
-  m_PathToCobertura = CORE->GetIAManager()->GetClosestCobertura(GetEntity()->GetComponent<CComponentObject3D>()->GetPosition());
-  
-  if( !m_PathToCobertura.empty() )
+  if(m_szDestinyNode != "")
   {
-    m_pCover = (*(--m_PathToCobertura.end()))->GetEntity()->GetComponent<CComponentNavNode>();
-    m_pCover->m_bOcupat = true;
+    CGameEntity* l_pNode = ENTITY_MANAGER->GetEntity(m_szDestinyNode);
+    if(l_pNode)
+    {
+      CComponentObject3D* l_pDestPos  = l_pNode->GetComponent<CComponentObject3D>();
+      CComponentObject3D* l_pObject3D = GetEntity()->GetComponent<CComponentObject3D>();
 
-    vector<CGraphNode*>::iterator first = m_PathToCobertura.begin();
-    vector<CGraphNode*>::iterator last  = m_PathToCobertura.end();
-
-    while ((first!=last)&&(first!=--last))
-      swap (*first++,*last);
-
-    return true;
+      if(l_pObject3D && l_pDestPos)
+      {
+        m_PathToCobertura = CORE->GetIAManager()->SearchPathA(l_pObject3D->GetPosition(), l_pDestPos->GetPosition());
+      }
+      else
+      {
+        LOGGER->AddNewLog(ELL_WARNING, "CComponentIABrain::PlanPathToCobertura error al trobar l'object3D del node \"%s\"", m_szDestinyNode.c_str());
+        return false;
+      }
+    }
+    else
+    {
+      LOGGER->AddNewLog(ELL_WARNING, "CComponentIABrain::PlanPathToCobertura error al trobar el node \"%s\"", m_szDestinyNode.c_str());
+      return false;
+    }
   }
-
-  return false;
+  else
+  {
+    m_PathToCobertura = CORE->GetIAManager()->GetClosestCobertura(GetEntity()->GetComponent<CComponentObject3D>()->GetPosition());
+  }
+  
+  return CheckCoverPath();
 }
 
 bool CComponentIABrain::PlanPathToCobertura(int _iFirstNodeMaxDistance)
@@ -357,8 +371,21 @@ bool CComponentIABrain::PlanPathToCobertura(int _iFirstNodeMaxDistance)
   if(m_pCover)
     return true;
 
-  m_PathToCobertura = CORE->GetIAManager()->GetClosestCobertura(GetEntity()->GetComponent<CComponentObject3D>()->GetPosition(), _iFirstNodeMaxDistance);
+  if(m_szDestinyNode != "")
+  {
+    //cerquem el path standard
+    return PlanPathToCobertura();
+  }
+  else
+  {
+    m_PathToCobertura = CORE->GetIAManager()->GetClosestCobertura(GetEntity()->GetComponent<CComponentObject3D>()->GetPosition(), _iFirstNodeMaxDistance);
+  }
   
+  return CheckCoverPath();
+}
+
+bool CComponentIABrain::CheckCoverPath()
+{
   if( !m_PathToCobertura.empty() )
   {
     m_pCover = (*(--m_PathToCobertura.end()))->GetEntity()->GetComponent<CComponentNavNode>();
