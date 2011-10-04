@@ -8,10 +8,6 @@
     <Object3D position="2.7272 -0.112341 8.60257" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_video_Box22" />
   </Entity>
-  <Entity name="lvl2_video_mapa marte_olograma">
-    <Object3D position="4.44702 2.52424 9.07804" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl2_video_mapa marte_olograma" />
-  </Entity>
   <Entity name="lvl2_video_Plataforma">
     <Object3D position="4.32035 -0.365994 9.32081" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_video_Plataforma" />
@@ -24,8 +20,6 @@
   <Entity name="lvl2_video_comandos">
     <Object3D position="3.36863 0.0872047 11.0166" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_video_comandos" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Interactive action="salavideo_palanca" interactive_billboard_y_offset="0.2" />
   </Entity>
   <Entity name="lvl2_video_Box19">
     <Object3D position="2.67402 0.140026 10.821" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -69,6 +63,22 @@
     <Object3D position="6.40848 -0.467531 8.38445" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_video_balla1" />
     <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="lvl2_video_projector">
+    <Object3D position="4.44702 2.52424 9.07804" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_video_projector" />
+  </Entity>
+  <Entity name="lvl2_video_mars">
+    <Object3D position="4.44702 2.68188 9.07804" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_video_mars" />
+  </Entity>
+  <Entity name="lvl2_video_nuvols">
+    <Object3D position="4.44702 2.51588 9.07804" yaw="180.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_video_nuvols" />
+  </Entity>
+  <Entity name="lvl2_video_faloff">
+    <Object3D position="4.44702 2.52424 9.07804" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_video_faloff" />
   </Entity>
   <Miner name="Miner_video00" position="4.24393 1.04204 10.0279" yaw="0.0" active="false" />
 </Entities>

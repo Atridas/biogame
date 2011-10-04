@@ -99,6 +99,24 @@ bool CEntityProcess::Init()
   l_pSpotLight->SetDirection(Vect3f(0.3f,-1.0f,0.0f).Normalize());
   l_pSpotLight->SetActive(true);
   
+  
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+  CGameEntity* l_pBichu = CORE->GetEntityManager()->CreateEntity();
+  CComponentObject3D::AddToEntity(l_pBichu);
+  CComponentRenderableObject *l_pCRO = CComponentRenderableObject::AddToEntityWithAnimatedModel(l_pBichu, "Capsula", "Capsula");
+  CComponentAnimation *l_pCA = l_pBichu->GetComponent<CComponentAnimation>();
+
+  l_pCA->PlayCycle("idle",1,1);
+
+  //l_pCRO->m_bBlockPitchRoll = true;
+  //l_pCRO->m_fPitchAdjustment = 90.f;
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
   //CShadowMapPreRendererStep* l_pShadowMapPreRenderStep = (CShadowMapPreRendererStep*)CORE->GetRenderer()->GetPreSceneRendererStep("shadow_map_renderer");
   //l_pShadowMapPreRenderStep->SetShadowMapLightCast(m_pSpotLight);

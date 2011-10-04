@@ -2,7 +2,6 @@
 <RenderableObjects>
 	<RenderableObject name="lvl2_video_Box20" class="StaticMesh" resource="lvl2_video_Box20" position="6.08947 -0.101723 10.0979" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_video_Box22" class="StaticMesh" resource="lvl2_video_Box22" position="2.7272 -0.112341 8.60257" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl2_video_mapa marte_olograma" class="StaticMesh" resource="lvl2_video_mapa marte_olograma" position="4.44702 2.52424 9.07804" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_video_Plataforma" class="StaticMesh" resource="lvl2_video_Plataforma" position="4.32035 -0.365994 9.32081" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_video_Box21" class="StaticMesh" resource="lvl2_video_Box21" position="2.14886 0.140294 10.1636" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_video_comandos" class="StaticMesh" resource="lvl2_video_comandos" position="3.36863 0.0872047 11.0166" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -16,4 +15,8 @@
 	<RenderableObject name="lvl2_video_tubos2" class="StaticMesh" resource="lvl2_video_tubos2" position="6.68524 -0.270436 14.6046" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_video_tubos3" class="StaticMesh" resource="lvl2_video_tubos3" position="2.02475 -0.107213 14.4984" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_video_balla1" class="StaticMesh" resource="lvl2_video_balla1" position="6.40848 -0.467531 8.38445" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_video_projector" class="StaticMesh" resource="lvl2_video_projector" position="4.44702 2.52424 9.07804" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_video_mars" class="StaticMesh" resource="lvl2_video_mars" position="4.44702 2.68188 9.07804" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_video_nuvols" class="StaticMesh" resource="lvl2_video_nuvols" position="4.44702 2.51588 9.07804" yaw="180.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_video_faloff" class="StaticMesh" resource="lvl2_video_faloff" position="4.44702 2.52424 9.07804" yaw="0.0" pitch="0.0" roll="0.0" />
 </RenderableObjects>

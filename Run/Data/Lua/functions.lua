@@ -185,6 +185,27 @@ function recollir_arma(_self, _player)
   end
 end
 
+function lvl2_lab_update_light(_entity, _dt)
+
+  local l_random = math.random()
+  
+  local l_light = LM:get_resource("lvl2_lab_Spot05")
+  local l_light2 = LM:get_resource("lvl2_lab_Omni03")
+  
+  if l_light and l_light2 then
+  
+    if l_random > 0.5 then
+      l_light:set_active(false)
+      l_light2:set_active(false)
+    else
+      l_light:set_active(true)
+      l_light2:set_active(true)
+    end
+
+  end
+    
+end
+
 ------------------------------------------- LEVEL -1 ------------------------------------------
 
 -- CLAUS

@@ -8,7 +8,6 @@
       <Objects>
         <GameObject name="lvl2_video_Box20" />
         <GameObject name="lvl2_video_Box22" />
-        <GameObject name="lvl2_video_mapa marte_olograma" />
         <GameObject name="lvl2_video_Plataforma" />
         <GameObject name="lvl2_video_Box21" />
         <GameObject name="lvl2_video_comandos" />
@@ -22,6 +21,11 @@
         <GameObject name="lvl2_video_tubos2" />
         <GameObject name="lvl2_video_tubos3" />
         <GameObject name="lvl2_video_balla1" />
+        <GameObject name="lvl2_video_projector" />
+        <GameObject name="lvl2_video_mars" />
+        <GameObject name="lvl2_video_nuvols" />
+        <GameObject name="lvl2_video_faloff" />
+        <GameObject name="lvl2_video_Omni01" />
       </Objects>
     </Room>
   </Rooms>

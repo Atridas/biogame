@@ -27,7 +27,16 @@ sampler LuminanceTextureSampler : register(s2) = sampler_state
   AddressV  = WRAP;
 };
 
-sampler GlowPassTextureSampler : register(s3) = sampler_state
+sampler DepthGlowTextureSampler : register(s3) = sampler_state
+{
+  MipFilter = POINT;
+  MinFilter = POINT;  
+  MagFilter = POINT;
+  AddressU  = WRAP;
+  AddressV  = WRAP;
+};
+
+sampler OriginalColorTextureSampler : register(s4) = sampler_state
 {
   MipFilter = POINT;
   MinFilter = POINT;  
@@ -40,10 +49,13 @@ float4 HDRFinalPassPS(float2 _UV: TEXCOORD0) : COLOR
 {
 	float4 l_DiffuseColor = tex2D(ColorTextureSampler, _UV);
 	float4 l_BloomColor = tex2D(BloomTextureSampler, _UV);
-  float4 l_Glow = tex2D(GlowPassTextureSampler, _UV);
+  float4 l_Glow = tex2D(OriginalColorTextureSampler, _UV) * tex2D(DepthGlowTextureSampler, _UV).y;
 	float4 l_LuminanceColor = tex2D(LuminanceTextureSampler, float2(0.5, 0.5) );
   
-  float4 l_fFinalColor = l_DiffuseColor + l_BloomColor * 0.25 + l_Glow;
+  
+  //return l_BloomColor;
+  
+  float4 l_fFinalColor = l_DiffuseColor + (l_Glow + l_BloomColor) * 0.25;
   
   
   float l_fLuminance = l_LuminanceColor.r;

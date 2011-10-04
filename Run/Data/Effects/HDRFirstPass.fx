@@ -9,8 +9,17 @@ sampler ColorTextureSampler : register(s0) = sampler_state
   AddressU  = WRAP;
   AddressV  = WRAP;
 };
-
+/*
 sampler GlowPassTextureSampler : register(s1) = sampler_state
+{
+  MipFilter = LINEAR;
+  MinFilter = LINEAR;  
+  MagFilter = LINEAR;
+  AddressU  = WRAP;
+  AddressV  = WRAP;
+};
+*/
+sampler GlowDepthTextureSampler : register(s1) = sampler_state
 {
   MipFilter = LINEAR;
   MinFilter = LINEAR;  
@@ -43,7 +52,7 @@ PS_OUTPUT HDRFirstPassPS(float2 _UV: TEXCOORD0)
     out_.Bloom = float4(0.0, 0.0, 0.0, 1.0);
   }
   
-  float4 l_Glow = tex2D(GlowPassTextureSampler, _UV);
+  float4 l_Glow = l_DiffuseColor * tex2D(GlowDepthTextureSampler, _UV).y;
   
   out_.Bloom += max(0.0, 4 * l_Glow / g_GaussMultiplier);
   

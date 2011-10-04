@@ -36,6 +36,10 @@
 	<action name="ReloadScript">
 		<input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F11"/>
 	</action>
+
+  <action name="ReloadLights">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_F12"/>
+  </action>
   
   <action name="Console">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_GRAVE"/>

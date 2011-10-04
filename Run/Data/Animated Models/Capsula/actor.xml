@@ -1,0 +1,21 @@
+<actor name="Capsula" radius_bs="2.0" pos_bs="0.0 1.0 0.0" effect="cal3d" technique="cal3dTechnique">
+  <skeleton filename="Data/Animated Models/Capsula/Skeleton.csf"/>
+  <mesh filename="Data/Animated Models/Capsula/Mesh.cmf"/>
+  <material animated="true" vertex_type="799">
+    <texture type="diffusse" filename="Data/Textures/uW_MILITAR.dds"/>
+  </material>
+  <material animated="true" vertex_type="799">
+    <texture type="diffusse" filename="Data/Textures/tub.jpg"/>
+  </material>
+  <material animated="true" vertex_type="799">
+    <texture type="diffusse" filename="Data/Textures/COLOR_humanoide.tga"/>
+    <texture type="normalmap" filename="Data/Textures/NRM_Complet.tga"/>
+  </material>
+  <material animated="true" vertex_type="799">
+    <texture type="diffusse" filename="Data/Textures/pruevas2.jpg"/>
+  </material>
+  
+  <animation name="idle" filename="Data/Animated Models/Capsula/idle.CAF"/>
+
+  
+</actor>

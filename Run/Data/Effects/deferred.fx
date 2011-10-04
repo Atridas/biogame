@@ -96,10 +96,10 @@ struct TNEW_PS {
 
 struct PS_OUTPUT
 {
-	float4	Color		 : COLOR0;
-	float4	Normals  : COLOR1;
-  float4	Depth    : COLOR2;
-  float4	Glow     : COLOR3;
+	float4	Color		  : COLOR0;
+	float4	Normals   : COLOR1;
+  float4	DepthGlow : COLOR2;
+  float4	Glow      : COLOR3;
   //float4  Position : COLOR3;
 };
 
@@ -195,24 +195,43 @@ PS_OUTPUT NewPS(TNEW_PS _in)
   
   l_Output.Color = l_DiffuseColor;
   l_Output.Normals = float4(l_ViewNormal.xy * 0.5 + 0.5,l_SpotlightFactor,g_SpecularPow/g_SpecularPowMax);
-	l_Output.Depth = float4(_in.ViewPosition.z, 0, 0, 0);
+	l_Output.DepthGlow.x = _in.ViewPosition.z;
   
   //l_Output.Position = float4(_in.ViewPosition.xy, 0, 0);
   
   #if defined( NS_TEX0 )
     if(g_GlowActive)
     {
-      l_Output.Glow  = tex2D(GlowTextureSampler,_in.UV);
-      l_Output.Glow *= g_GlowIntensity * l_Output.Glow.w;
-      l_Output.Glow = max(0.0, l_Output.Glow);
+      //l_Output.Glow  = tex2D(GlowTextureSampler,_in.UV);
+      //l_Output.Glow *= g_GlowIntensity * l_Output.Glow.w;
+      //l_Output.Glow = max(0.0, l_Output.Glow);
+      
+      l_Output.DepthGlow.y = tex2D(GlowTextureSampler,_in.UV).r * g_GlowIntensity;
+      l_Output.DepthGlow.y = max(0.0, l_Output.DepthGlow.y);
+      
     }
     else
     {
-      l_Output.Glow = float4(0.0, 0.0, 0.0, 0.0);
+      l_Output.DepthGlow.y = 0.0;
     }
   #else
-    l_Output.Glow = float4(0, 0, 0, 0);
+    l_Output.DepthGlow.y = 0.0;
   #endif
+  
+  //#if defined( NS_TEX0 )
+  //  if(g_GlowActive)
+  //  {
+  //    l_Output.Glow  = tex2D(GlowTextureSampler,_in.UV);
+  //    l_Output.Glow *= g_GlowIntensity * l_Output.Glow.w;
+  //    l_Output.Glow = max(0.0, l_Output.Glow);
+  //  }
+  //  else
+  //  {
+  //    l_Output.Glow = float4(0.0, 0.0, 0.0, 0.0);
+  //  }
+  //#else
+  //  l_Output.Glow = float4(0, 0, 0, 0);
+  //#endif
   
   
 	return l_Output;
