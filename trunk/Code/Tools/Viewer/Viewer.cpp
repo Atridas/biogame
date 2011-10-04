@@ -83,6 +83,8 @@ void CViewer::Init()
                                                                         80.0f,
                                                                         false);
 
+  m_pObjectModeLight->SetActive(false);
+
   //m_pObjectModeLight->SetDynamicObjectsOnly(true);
 
   //m_pSpotLight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
@@ -271,7 +273,11 @@ void CViewer::ProcessFreeMode(const float _fElapsedTime)
   CORE->GetLightManager()->SetAmbientLight(Vect3f(0.3f));
   
   CORE->GetLightManager()->SetLightsEnabled(m_bEnableLights);
-  
+  if(m_pObjectModeLight)
+  {
+    m_pObjectModeLight->SetActive(false);
+  }
+
   if(!CORE->GetActionManager()->IsActionActive("Run"))
   {
     SetWalking();

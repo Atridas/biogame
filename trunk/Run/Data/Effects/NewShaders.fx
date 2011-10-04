@@ -8,6 +8,7 @@
 
 //#define NS_LIGHTING
 //#define NS_TEX0
+//#define NS_COLOR
 //#define NS_LIGHTMAP
 //#define NS_NORMALMAP
 //#define NS_CAL3D
@@ -61,7 +62,8 @@ struct TNEW_VS
   #endif
   #if defined( NS_TEX0 )
     float4 UV : TEXCOORD0;
-  #else
+  #endif
+  #if defined( NS_COLOR )
     float4 Color : COLOR;
   #endif
   #if defined( NS_LIGHTMAP )
@@ -81,7 +83,8 @@ struct TNEW_PS {
 	float4 HPosition : POSITION;
   #if defined( NS_TEX0 )
     float2 UV : TEXCOORD0;
-  #else
+  #endif
+  #if defined( NS_COLOR )
     float4 Color : COLOR;
   #endif
   #if defined( NS_LIGHTMAP )
@@ -96,12 +99,13 @@ struct TNEW_PS {
     float3 WorldTangent : TEXCOORD4;
     float3 WorldBinormal : TEXCOORD5;
   #endif
+  float4 ViewPosition : TEXCOORD7;
 };
 
 struct PS_OUTPUT
 {
-	float4	Color		: COLOR0;
-	float4	Glow		: COLOR1;
+	float4	Color		  : COLOR0;
+	float4	DepthGlow	: COLOR1;
 };
 
 TNEW_PS NewVS(TNEW_VS _in) 
@@ -142,7 +146,8 @@ TNEW_PS NewVS(TNEW_VS _in)
 
   #if defined( NS_TEX0 )
     out_.UV  = _in.UV.xy;
-  #else
+  #endif
+  #if defined( NS_COLOR )
     out_.Color = _in.Color;
   #endif
   
@@ -152,8 +157,10 @@ TNEW_PS NewVS(TNEW_VS _in)
 
   #if defined( NS_CAL3D )
     out_.HPosition = mul(l_LocalPosition, g_WorldViewProjectionMatrix );
+    out_.ViewPosition = mul(l_LocalPosition, g_WorldViewMatrix );
   #else
     out_.HPosition = mul(float4(_in.Position,1.0),g_WorldViewProjectionMatrix);
+    out_.ViewPosition = mul(float4(_in.Position,1.0), g_WorldViewMatrix );
   #endif
 	
 	return out_;
@@ -161,12 +168,12 @@ TNEW_PS NewVS(TNEW_VS _in)
 
 PS_OUTPUT NewPS(TNEW_PS _in, float _fFace : VFACE)
 {
-  PS_OUTPUT l_Output;
+  PS_OUTPUT l_Output = (PS_OUTPUT)0;
   
   
   #if defined( NS_WHITE )
       l_Output.Color = float4(1, 1, 1, 1);
-      l_Output.Glow  = float4(0, 0, 0, 0);
+      l_Output.DepthGlow.x = _in.ViewPosition.z;
   #else
   
     #if defined( NS_LIGHTMAP )
@@ -189,8 +196,13 @@ PS_OUTPUT NewPS(TNEW_PS _in, float _fFace : VFACE)
 
     #if defined( NS_TEX0 )
       float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
+      #if defined( NS_COLOR )
+        l_DiffuseColor *= _in.Color;
+      #endif
     #else
-      float4 l_DiffuseColor = _in.Color;
+      #if defined( NS_COLOR )
+        float4 l_DiffuseColor = _in.Color;
+      #endif
     #endif
 
 
@@ -243,20 +255,43 @@ PS_OUTPUT NewPS(TNEW_PS _in, float _fFace : VFACE)
     #endif
     
     l_Output.Color = l_DiffuseColor;
+    l_Output.DepthGlow.x = _in.ViewPosition.z;
     
     #if defined( NS_TEX0 )
-      if(g_GlowActive && _fFace > 0)
+      if(g_GlowActive)
       {
-        l_Output.Glow  = tex2D(GlowTextureSampler,_in.UV);
-        l_Output.Glow *= g_GlowIntensity * l_Output.Glow.w;
-        l_Output.Glow = max(0.0, l_Output.Glow);
-        l_Output.Glow.a = l_DiffuseColor.a;
-      } else {
-        l_Output.Glow = float4(0, 0, 0, l_DiffuseColor.a);
+        //l_Output.Glow  = tex2D(GlowTextureSampler,_in.UV);
+        //l_Output.Glow *= g_GlowIntensity * l_Output.Glow.w;
+        //l_Output.Glow = max(0.0, l_Output.Glow);
+        
+        l_Output.DepthGlow.y = tex2D(GlowTextureSampler,_in.UV).r * g_GlowIntensity;
+        l_Output.DepthGlow.y = max(0.0, l_Output.DepthGlow.y);
+        
+      }
+      else
+      {
+        l_Output.DepthGlow.y = 0.0;
       }
     #else
-      l_Output.Glow = float4(0, 0, 0, l_DiffuseColor.a);
+      l_Output.DepthGlow.y = 0.0;
     #endif
+    
+    //#if defined( NS_TEX0 )
+    //  if(g_GlowActive && _fFace > 0)
+    //  {
+    //    l_Output.Glow  = tex2D(GlowTextureSampler,_in.UV);
+    //    l_Output.Glow *= g_GlowIntensity * l_Output.Glow.w;
+    //    #if defined( NS_COLOR )
+    //      l_Output.Glow *= _in.Color;
+    //    #endif
+    //    l_Output.Glow = max(0.0, l_Output.Glow);
+    //    l_Output.Glow.a = l_DiffuseColor.a;
+    //  } else {
+    //    l_Output.Glow = float4(0, 0, 0, 0);
+    //  }
+    //#else
+    //  l_Output.Glow = float4(0, 0, 0, 0);
+    //#endif
   #endif
   
 	return l_Output;
