@@ -85,12 +85,13 @@ void CAnimatedInstanceModel::Render(CRenderManager *_pRM, const vector<CEffect*>
   CEffectManager* l_pEM = CORE->GetEffectManager();
 
   CalSkeleton* l_pSkeleton = m_pCalModel->getSkeleton();
-  l_pEM->SetSkeleton(l_pSkeleton,l_pCalHardwareModel);
 
   if(l_pCalHardwareModel)
   {
     for(int l_iHardwareMeshId=0; l_iHardwareMeshId < l_pCalHardwareModel->getHardwareMeshCount(); l_iHardwareMeshId++)
     {
+      l_pCalHardwareModel->selectHardwareMesh(l_iHardwareMeshId);
+
       CEffect* l_pEffect = 0;
 
       if(l_ItEffect != _vEffects.end())
@@ -120,11 +121,10 @@ void CAnimatedInstanceModel::Render(CRenderManager *_pRM, const vector<CEffect*>
         l_pEM->SetSpecular((l_iMaterialType & SPECULARMAP_MATERIAL_MASK) > 0);
         l_pEM->SetSpecularParams(l_pMaterial->GetGlossiness(), l_pMaterial->GetSpecularFactor());
         l_pEM->SetEnvironmentIntensity(l_pMaterial->GetEnvironmentIntensity());
-        
+        l_pEM->SetSkeleton(l_pSkeleton,l_pCalHardwareModel);
+
         l_pEM->LoadShaderData(l_pEffect);
       }
-
-      l_pCalHardwareModel->selectHardwareMesh(l_iHardwareMeshId);
       
       ((CIndexedVertexs<TCAL3D_HW_VERTEX>*)m_pAnimatedCoreModel->GetRenderableVertexs())->
         Render( _pRM,

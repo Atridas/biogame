@@ -330,7 +330,9 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
   {
     D3DXMATRIX l_mTransformation[MAXBONES];
 
-    for(int l_iBoneId = 0; l_iBoneId < m_pCalHardwareModel->getBoneCount(); l_iBoneId++)
+    int l_iBoneCount = m_pCalHardwareModel->getBoneCount();
+
+    for(int l_iBoneId = 0; l_iBoneId < l_iBoneCount; l_iBoneId++)
     {
       D3DXMatrixRotationQuaternion(&l_mTransformation[l_iBoneId],(CONST D3DXQUATERNION*)& m_pCalHardwareModel->getRotationBoneSpace(l_iBoneId, m_pCalSkeleton));
       CalVector l_vTranslationBoneSpace = m_pCalHardwareModel->getTranslationBoneSpace(l_iBoneId, m_pCalSkeleton);
@@ -341,12 +343,15 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
 
     float l_mMatrix[MAXBONES*3*4];
 
-    for(int l_iB = 0; l_iB < m_pCalHardwareModel->getBoneCount(); ++l_iB)
+    //memset(l_mMatrix,0,sizeof(float)*MAXBONES*3*4);
+
+    for(int l_iB = 0; l_iB < l_iBoneCount; ++l_iB)
     {
       memcpy(&l_mMatrix[l_iB*3*4], &l_mTransformation[l_iB],sizeof(float)*3*4);
     }
 
-    _pEffect->SetValue("Bones", (float *)l_mMatrix,(m_pCalHardwareModel->getBoneCount())*3*4);
+
+    _pEffect->SetValue("Bones", (float *)l_mMatrix,l_iBoneCount*3*4);
     
     m_bSkeletonUpdated = false;
   }
