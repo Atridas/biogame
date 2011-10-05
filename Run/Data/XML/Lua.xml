@@ -55,5 +55,7 @@
     <script action="IA                            = CORE:get_ia_manager()"/>
 
     <script action="RENDERER                      = CORE:get_renderer()"/>
+
+    <script action="EFFECT_MANAGER                = CORE:get_effect_manager()"/>
   </initscripts>
 </Lua>

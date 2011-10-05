@@ -42,6 +42,7 @@ extern "C"
 #include "GUIManager.h"
 #include "InputManager.h"
 #include "ActionManager.h"
+#include "EffectManager.h"
 
 #include "EntitiesToLua.h"
 #include "IAToLua.h"
@@ -500,7 +501,8 @@ void CScriptManager::RegisterLUAFunctions()
         .def("get_action_manager",              &CCore::GetActionManager)
         .def("get_sound_manager",               &CCore::GetSoundManager)
         .def("get_level_changer",               &CCore::GetLevelChanger)
-        .def("get_renderer",                    &CCore::GetRenderer);
+        .def("get_renderer",                    &CCore::GetRenderer)
+        .def("get_effect_manager",              &CCore::GetEffectManager);
   
   RegisterCore_Entities(l_core);
   RegisterCore_IA(l_core);
@@ -630,7 +632,22 @@ void CScriptManager::RegisterLUAFunctions()
 
   ];
 
+  //EffectManager
   module(m_pLS) [
+    class_<CEffectManager>("EffectManager")
+      .def("set_bright_pass_threshold"  , &CEffectManager::SetBrightPassThreshold )
+      .def("set_exposure"               , &CEffectManager::SetExposure            )
+      .def("set_gauss_multiplier"       , &CEffectManager::SetGaussMultiplier     )
+      .def("set_max_luminance_limits"   , &CEffectManager::SetMaxLuminanceLimits  )
+      .def("set_scene_luminance_limits" , &CEffectManager::SetSceneLuminanceLimits)
+      .def("set_bloom_final_scale"      , &CEffectManager::SetBloomFinalScale     )
+      .def("set_glow_to_bloom"          , &CEffectManager::SetGlowToBloom         )
+      .def("set_glow_luminance_scale"   , &CEffectManager::SetGlowLuminanceScale  )
+      .def("print_hdr"                  , &CEffectManager::PrintHDRParams  )
+  ];
+
+
+  module(m_pLS) [                                       
     class_<CConsole>("Console")
       .def("toggle", &CConsole::Toggle)
   ];

@@ -197,6 +197,7 @@ ENGINE
       IA_MANAGER / IA
       GUI_MANAGER
       ENGINE
+      EFFECT_MANAGER
 	
   BASE:
     Class:
@@ -302,6 +303,9 @@ ENGINE
         
         get_renderer
         CRenderer* GetRenderer() const
+        
+        get_effect_manager
+        CEffectManager* GetEffectManager() const
         
     Class:
       Process
@@ -458,6 +462,39 @@ ENGINE
         
         get_active_render_path
         void GetActiveRenderPaths(set<string>& _RenderPaths) const
+        
+    Class:
+      EffectManager
+      CEffectManager
+      
+      Methonds
+        set_bright_pass_threshold
+        void SetBrightPassThreshold (float _fBrightPassThreshold)
+        
+        set_exposure
+        void SetExposure            (float _fExposure)
+        
+        set_gauss_multiplier     
+        void SetGaussMultiplier     (float _fGaussMultiplier)
+        
+        set_max_luminance_limits  
+        void SetMaxLuminanceLimits  (float _fMaxLuminanceLowerLimit, float _fMaxLuminanceUpperLimit)
+        
+        set_scene_luminance_limits
+        void SetSceneLuminanceLimits(float _fSceneLuminanceLowerLimit, float _fSceneLuminanceUpperLimit)
+        
+        set_bloom_final_scale    
+        void SetBloomFinalScale     (float _fBloomFinalScale    )
+        
+        set_glow_to_bloom 
+        void SetGlowToBloom         (float _fGlowToBloom        )
+        
+        set_glow_luminance_scale  
+        void SetGlowLuminanceScale  (float _fGlowLuminanceScale )
+        
+        print_hdr
+        oid PrintHDRParams() constah
+        la bona samaritana
         
         
   SOUND  
