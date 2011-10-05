@@ -2,10 +2,10 @@
   <skeleton filename="Data/Animated Models/Riggle/Skeleton.csf"/>
   <mesh filename="Data/Animated Models/Riggle/Mesh.cmf"/>
   <material animated="true" vertex_type="799">
-    <texture type="diffusse" filename="Data/Textures/COLOR_2.tga"/>
+    <texture type="diffusse" filename="Data/Textures/COLOR_2.dds"/>
     <texture type="normalmap" filename="Data/Textures/NRM_Complet.tga"/>
     <texture type="specular" filename="Data/Textures/Riggle_SPEC.tga"/>
-    <texture type="glow" filename="Data/Textures/glow_personatge2.tga"/>
+    <texture type="glow" filename="Data/Textures/glow_personatge2.dds"/>
     <property type="glowIntensity" value="2.0" />
     <property type="specularParams" glossiness="200.0" specular_level="10.0" />
   </material>
