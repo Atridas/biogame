@@ -125,6 +125,8 @@ public:
 private:
   void Release();
 
+  void CreateObjectModeLight();
+
   void UpdatePosition(Vect3f& _PosDelta, float _fDeltaPitch, float _fDeltaYaw);
   void UpdateCamera(float _fDeltaPitch, float _fDeltaYaw);
   void FocusCurrentMesh();
