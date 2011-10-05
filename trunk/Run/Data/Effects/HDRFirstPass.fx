@@ -56,9 +56,9 @@ PS_OUTPUT HDRFirstPassPS(float2 _UV: TEXCOORD0)
   
   float4 l_Glow = tex2D(GlowPassTextureSampler, _UV);
   
-  out_.Bloom += max(0.0, 4 * l_Glow / g_GaussMultiplier);
+  out_.Bloom += max(0.0, g_GlowToBloom * l_Glow / (g_BloomFinalScale * g_GaussMultiplier * g_GaussMultiplier));
   
-  float l_fGlowLuminance = max(0.0, GetLuminance(l_Glow * 0.5));
+  float l_fGlowLuminance = max(0.0, GetLuminance(l_Glow * g_GlowLuminanceScale));
   
   l_fLuminance += clamp(l_fGlowLuminance, 0.0, g_MaxGlowLuminance);
   

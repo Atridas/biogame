@@ -118,7 +118,9 @@
     </None>
     <None Include="..\..\..\Run\Data\XML\Levels.xml" />
     <None Include="..\..\..\Run\Data\XML\Lights.xml" />
-    <None Include="..\..\..\Run\Data\XML\Lua.xml" />
+    <None Include="..\..\..\Run\Data\XML\Lua.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="..\..\..\Run\Data\XML\Particles.xml">
       <SubType>Designer</SubType>
     </None>

@@ -70,7 +70,12 @@ public:
                     m_fSpecularLevel(0.f),
                     m_fBrightPassThreshold(.8f),
                     m_fExposure(.5f),
-                    m_fGaussMultiplier(.4f)
+                    m_fGaussMultiplier(.4f),
+                    m_fMaxLuminanceLowerLimit  (0.25f), m_fMaxLuminanceUpperLimit  (2.f),
+                    m_fSceneLuminanceLowerLimit(0.25f), m_fSceneLuminanceUpperLimit(1.f),
+                    m_fBloomFinalScale(0.25f),
+                    m_fGlowToBloom(1.f),
+                    m_fGlowLuminanceScale(0.5f)
                     {SetOk(true);};
 
   ~CEffectManager() {Done();};
@@ -176,11 +181,17 @@ public:
   void SetGlowIntensity(float _fGlowIntensity) {m_fGlowIntensity = _fGlowIntensity; m_bGlowUpdated = true;};
   void SetEnvironmentIntensity(float _fEnvironmentIntensity) {if(_fEnvironmentIntensity != m_fEnvironmentIntensity) {m_fEnvironmentIntensity = _fEnvironmentIntensity; m_bEnvironmentUpdated = true;}};
   void SetSpriteSize(const Vect2f _vSpriteSize) {if(_vSpriteSize != m_vSpriteSize) { m_vSpriteSize = _vSpriteSize; m_bSpriteSizeUpdated = true; } };
-  void SetBrightPassThreshold(float _fBrightPassThreshold) {if(_fBrightPassThreshold != m_fBrightPassThreshold) { m_fBrightPassThreshold = _fBrightPassThreshold; m_bHDRParamsUpdated = true; }};
-  void SetExposure(float _fExposure) {if(_fExposure != m_fExposure) { m_fExposure = _fExposure; m_bHDRParamsUpdated = true; }};
-  void SetGaussMultiplier(float _fGaussMultiplier) {if(_fGaussMultiplier != m_fGaussMultiplier) { m_fGaussMultiplier = _fGaussMultiplier; m_bHDRParamsUpdated = true; }};
 
+  void SetBrightPassThreshold (float _fBrightPassThreshold);
+  void SetExposure            (float _fExposure);
+  void SetGaussMultiplier     (float _fGaussMultiplier);
+  void SetMaxLuminanceLimits  (float _fMaxLuminanceLowerLimit, float _fMaxLuminanceUpperLimit);
+  void SetSceneLuminanceLimits(float _fSceneLuminanceLowerLimit, float _fSceneLuminanceUpperLimit);
+  void SetBloomFinalScale     (float _fBloomFinalScale    );
+  void SetGlowToBloom         (float _fGlowToBloom        );
+  void SetGlowLuminanceScale  (float _fGlowLuminanceScale );
 
+  void PrintHDRParams() const;
   
   void ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _mProjectionMatrix, const Vect3f& _vCameraEye, const Vect3f& _vCameraUp, const Vect3f& _vCameraRight);
 
@@ -279,6 +290,11 @@ private:
   float m_fBrightPassThreshold;
   float m_fExposure;
   float m_fGaussMultiplier;
+  float m_fMaxLuminanceLowerLimit,   m_fMaxLuminanceUpperLimit;
+  float m_fSceneLuminanceLowerLimit, m_fSceneLuminanceUpperLimit;
+  float m_fBloomFinalScale;
+  float m_fGlowToBloom;
+  float m_fGlowLuminanceScale;
 
   bool    m_bLightEnabled;
   int     m_iLightType;

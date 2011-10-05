@@ -458,9 +458,16 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
 
   if(m_bHDRParamsUpdated)
   {
-    _pEffect->SetValue("BrightPassThreshold", m_fBrightPassThreshold);
-    _pEffect->SetValue("Exposure",            m_fExposure);
-    _pEffect->SetValue("GaussMultiplier",     m_fGaussMultiplier);
+    _pEffect->SetValue("BrightPassThreshold",      m_fBrightPassThreshold);
+    _pEffect->SetValue("Exposure",                 m_fExposure);
+    _pEffect->SetValue("GaussMultiplier",          m_fGaussMultiplier);
+    _pEffect->SetValue("MaxLuminanceLowerLimit",   m_fMaxLuminanceLowerLimit);
+    _pEffect->SetValue("MaxLuminanceUpperLimit",   m_fMaxLuminanceUpperLimit);
+    _pEffect->SetValue("SceneLuminanceLowerLimit", m_fSceneLuminanceLowerLimit);
+    _pEffect->SetValue("SceneLuminanceUpperLimit", m_fSceneLuminanceUpperLimit);
+    _pEffect->SetValue("BloomFinalScale"         , m_fBloomFinalScale   );
+    _pEffect->SetValue("GlowToBloom"             , m_fGlowToBloom       );
+    _pEffect->SetValue("GlowLuminanceScale"      , m_fGlowLuminanceScale);
     m_bHDRParamsUpdated = false;
   }
 
@@ -543,3 +550,88 @@ const Mat44f& CEffectManager::GetWorldViewProjectionMatrix()
 }
 
 
+void CEffectManager::SetBrightPassThreshold(float _fBrightPassThreshold)
+{
+  if(_fBrightPassThreshold != m_fBrightPassThreshold)
+  {
+    m_fBrightPassThreshold = _fBrightPassThreshold;
+    m_bHDRParamsUpdated = true;
+  }
+}
+
+void CEffectManager::SetExposure(float _fExposure)
+{
+  if(_fExposure != m_fExposure)
+  {
+    m_fExposure = _fExposure;
+    m_bHDRParamsUpdated = true;
+  }
+}
+
+void CEffectManager::SetGaussMultiplier(float _fGaussMultiplier)
+{
+  if(_fGaussMultiplier != m_fGaussMultiplier)
+  {
+    m_fGaussMultiplier = _fGaussMultiplier;
+    m_bHDRParamsUpdated = true;
+  }
+}
+
+void CEffectManager::SetMaxLuminanceLimits(float _fMaxLuminanceLowerLimit, float _fMaxLuminanceUpperLimit)
+{
+  if(_fMaxLuminanceLowerLimit != m_fMaxLuminanceLowerLimit || _fMaxLuminanceUpperLimit != m_fMaxLuminanceUpperLimit)
+  {
+    m_fMaxLuminanceLowerLimit = _fMaxLuminanceLowerLimit;
+    m_fMaxLuminanceUpperLimit = _fMaxLuminanceUpperLimit;
+    m_bHDRParamsUpdated = true;
+  }
+}
+
+void CEffectManager::SetSceneLuminanceLimits(float _fSceneLuminanceLowerLimit, float _fSceneLuminanceUpperLimit)
+{
+  if(_fSceneLuminanceLowerLimit != m_fSceneLuminanceLowerLimit || _fSceneLuminanceUpperLimit != m_fSceneLuminanceUpperLimit)
+  {
+    m_fSceneLuminanceLowerLimit = _fSceneLuminanceLowerLimit;
+    m_fSceneLuminanceUpperLimit = _fSceneLuminanceUpperLimit;
+    m_bHDRParamsUpdated = true;
+  }
+}
+
+void CEffectManager::SetBloomFinalScale   (float _fBloomFinalScale    )
+{
+  if(m_fBloomFinalScale != _fBloomFinalScale)
+  {
+    m_fBloomFinalScale = _fBloomFinalScale;
+    m_bHDRParamsUpdated = true;
+  }
+}
+
+void CEffectManager::SetGlowToBloom       (float _fGlowToBloom        )
+{
+  if(m_fGlowToBloom != _fGlowToBloom)
+  {
+    m_fGlowToBloom = _fGlowToBloom;
+    m_bHDRParamsUpdated = true;
+  }
+}
+
+void CEffectManager::SetGlowLuminanceScale(float _fGlowLuminanceScale )
+{
+  if(m_fGlowLuminanceScale != _fGlowLuminanceScale)
+  {
+    m_fGlowLuminanceScale = _fGlowLuminanceScale;
+    m_bHDRParamsUpdated = true;
+  }
+}
+
+void CEffectManager::PrintHDRParams() const
+{
+  LOGGER->AddNewLog(ELL_INFORMATION, "bright_pass_threshold : %f",      m_fBrightPassThreshold);
+  LOGGER->AddNewLog(ELL_INFORMATION, "exposure              : %f",      m_fExposure);
+  LOGGER->AddNewLog(ELL_INFORMATION, "gauss_multiplier      : %f",      m_fGaussMultiplier);
+  LOGGER->AddNewLog(ELL_INFORMATION, "max_luminance_limits  : %f - %f", m_fMaxLuminanceLowerLimit,   m_fMaxLuminanceUpperLimit);
+  LOGGER->AddNewLog(ELL_INFORMATION, "scene_luminance_limits: %f - %f", m_fSceneLuminanceLowerLimit, m_fSceneLuminanceUpperLimit);
+  LOGGER->AddNewLog(ELL_INFORMATION, "bloom_final_scale     : %f",      m_fBloomFinalScale);
+  LOGGER->AddNewLog(ELL_INFORMATION, "glow_to_bloom         : %f",      m_fGlowToBloom);
+  LOGGER->AddNewLog(ELL_INFORMATION, "glow_luminance_scale  : %f",      m_fGlowLuminanceScale);
+}

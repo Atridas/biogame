@@ -114,9 +114,16 @@ shared int g_ViewportHeight : ViewportHeight;
 shared int g_ViewportX      : ViewportX;
 shared int g_ViewportY      : ViewportY;
 //HDR
-shared float g_BrightPassThreshold : BrightPassThreshold;
-shared float g_Exposure            : Exposure;
-shared float g_GaussMultiplier     : GaussMultiplier;
+shared float g_BrightPassThreshold       : BrightPassThreshold;
+shared float g_Exposure                  : Exposure;
+shared float g_GaussMultiplier           : GaussMultiplier;
+shared float g_MaxLuminanceLowerLimit    : MaxLuminanceLowerLimit;
+shared float g_MaxLuminanceUpperLimit    : MaxLuminanceUpperLimit;
+shared float g_SceneLuminanceLowerLimit  : SceneLuminanceLowerLimit;
+shared float g_SceneLuminanceUpperLimit  : SceneLuminanceUpperLimit;
+shared float g_BloomFinalScale           : BloomFinalScale;
+shared float g_GlowToBloom               : GlowToBloom;
+shared float g_GlowLuminanceScale        : GlowLuminanceScale;
 float g_MaxGlowLuminance = 4.0;
 
 #define POISON_BLUR_KERNEL_SIZE 16
