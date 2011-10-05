@@ -49,7 +49,7 @@
         <texture_render_target name="RT0_ARGB_8" index="0" />
         <texture_render_target name="RT3_ARGB_8" index="1" />
         <texture_render_target name="RT1_RG_16F" index="2" />
-        <texture_render_target name="RT1_ARGB_8" index="3" />
+        <!--texture_render_target name="RT1_ARGB_8" index="3" /-->
         <!--texture_render_target name="DEBUG_POSITION" index="3" /-->
       </multiple_render_target>
       
@@ -60,7 +60,7 @@
       
       <multiple_render_target name="HDR_ALPHA">
         <texture_render_target name="HDR_COLOR"  index="0" />
-        <texture_render_target name="RT1_RG_16F"   index="1" /> <!-- GLOW -->
+        <texture_render_target name="HDR_GLOW"   index="1" /> <!-- GLOW -->
       </multiple_render_target>
       
     </multiple_render_targets>
@@ -317,14 +317,12 @@
         <input_sampler type="texture" index="2" texture="RT1_RG_16F"/>
       </input_samplers>
     </post_scene_renderer>
-    <!--
-    <post_scene_renderer name="HDR_copy_glow" effect="Texture" render_target="HDR_GLOW">
+    <post_scene_renderer name="HDR_copy_glow" effect="ShowBaseGlow" render_target="HDR_GLOW">
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="RT1_RG_16F"/>
-        <input_sampler type="texture" index="1" texture="RT0_ARGB_8"/>
+        <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
+        <input_sampler type="texture" index="1" texture="RT1_RG_16F"/>
       </input_samplers>
     </post_scene_renderer>
-    -->
     <post_scene_renderer name="HDR_alpha_pass"
                          type="render_objects_post_scene_renderer"
                          render_target="HDR_ALPHA"
@@ -356,7 +354,7 @@
     <post_scene_renderer name="HDR_first_pass" effect="HDRFirstPass" render_target="HDR_MRT">
       <input_samplers>
         <input_sampler type="texture" index="0" texture="HDR_COLOR"/>
-        <input_sampler type="texture" index="1" texture="RT1_RG_16F"/>
+        <input_sampler type="texture" index="1" texture="HDR_GLOW"/>
       </input_samplers>
     </post_scene_renderer>
     <post_scene_renderer name="HDR_luminance_243" render_target="HDR_LUMINANCE_243"
@@ -461,8 +459,7 @@
         <input_sampler type="texture" index="0" texture="HDR_COLOR"/>
         <input_sampler type="texture" index="1" texture="HDR_BLOOM_FINAL"/>
         <input_sampler type="texture" index="2" texture="HDR_LUMINANCE_FINAL"/>
-        <input_sampler type="texture" index="3" texture="RT1_RG_16F"/>
-        <input_sampler type="texture" index="4" texture="RT0_ARGB_8"/>
+        <input_sampler type="texture" index="3" texture="HDR_GLOW"/>
       </input_samplers>
     </post_scene_renderer>
     
@@ -558,6 +555,12 @@
         <input_sampler type="texture" index="0" texture="HDR_LUMINANCE_1"/>
       </input_samplers>
     </post_scene_renderer>
+    <!--post_scene_renderer name="HDR_show_glow" effect="ShowBaseGlow" size="0.25" aspect_ratio="true" position="0.5 0.25">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
+        <input_sampler type="texture" index="1" texture="RT1_RG_16F"/>
+      </input_samplers>
+    </post_scene_renderer-->
     <post_scene_renderer name="HDR_show_glow" effect="Texture" size="0.25" aspect_ratio="true" position="0.5 0.25">
       <input_samplers>
         <input_sampler type="texture" index="0" texture="HDR_GLOW"/>
@@ -622,9 +625,15 @@
         <input_sampler type="texture" index="1" texture="DEBUG_POSITION"/>
       </input_samplers>
     </post_scene_renderer-->
-    <post_scene_renderer name="show_deferred_glow" effect="Texture" size="0.3333" aspect_ratio="true" position="0.6666 0.0">
+    <!--post_scene_renderer name="show_deferred_glow" effect="Texture" size="0.3333" aspect_ratio="true" position="0.6666 0.0">
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT1_ARGB_8"/>
+      </input_samplers>
+    </post_scene_renderer-->
+    <post_scene_renderer name="show_deferred_glow" effect="ShowBaseGlow" size="0.3333" aspect_ratio="true" position="0.6666 0.0">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
+        <input_sampler type="texture" index="1" texture="RT1_RG_16F"/>
       </input_samplers>
     </post_scene_renderer>
     
