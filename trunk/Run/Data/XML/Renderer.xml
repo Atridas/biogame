@@ -460,6 +460,7 @@
         <input_sampler type="texture" index="1" texture="HDR_BLOOM_FINAL"/>
         <input_sampler type="texture" index="2" texture="HDR_LUMINANCE_FINAL"/>
         <input_sampler type="texture" index="3" texture="HDR_GLOW"/>
+        <input_sampler type="texture" index="4" texture="RT0_ARGB_8"/>
       </input_samplers>
     </post_scene_renderer>
     
