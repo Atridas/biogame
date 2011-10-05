@@ -39,6 +39,17 @@ CViewer::CViewer(void)
   //--------------------
 }
 
+void CViewer::CreateObjectModeLight()
+{
+  m_pObjectModeLight = CORE->GetLightManager()->CreateDirectionalLight("ObjectModeLight",
+                                                                        Vect3f(0.0f),
+                                                                        Vect3f(1.0f,1.0f,1.0f),
+                                                                        CColor(Vect3f(1.0f,1.0f,1.0f)),
+                                                                        50.0f,
+                                                                        80.0f,
+                                                                        false);
+}
+
 void CViewer::Init() 
 {
   m_vMeshes = CORE->GetRenderableObjectsManager()->GetMeshes();
@@ -74,16 +85,6 @@ void CViewer::Init()
 
   m_pObjectModeLight = 0;
   //m_pSpotLight = 0;
-
-  m_pObjectModeLight = CORE->GetLightManager()->CreateDirectionalLight("ObjectModeLight",
-                                                                        Vect3f(0.0f),
-                                                                        Vect3f(1.0f,1.0f,1.0f),
-                                                                        CColor(Vect3f(1.0f,1.0f,1.0f)),
-                                                                        50.0f,
-                                                                        80.0f,
-                                                                        false);
-
-  m_pObjectModeLight->SetActive(false);
 
   //m_pObjectModeLight->SetDynamicObjectsOnly(true);
 
@@ -200,6 +201,8 @@ void CViewer::InitFreeMode()
 
   ((CShoulderCamera*)m_pObjectCamera)->SetShoulderHeight(1.55f);
 
+  m_pObjectModeLight = (CDirectionalLight*)CORE->GetLightManager()->GetResource("ObjectModeLight");
+
   if(m_pObjectModeLight)
   {
     m_pObjectModeLight->SetActive(false);
@@ -220,12 +223,22 @@ void CViewer::InitMeshMode()
     m_pTargetObject->SetPitch(0.0f);
     m_pTargetObject->SetYaw(0.0f);
 
+    //CLight* l_pLight = CORE->GetLightManager()->GetResource("ObjectModeLight");
+    //
+    //if(l_pLight)
+    //{
+    //  if(l_pLight->GetType() == CLight::DIRECTIONAL)
+    //  {
+    //    m_pObjectModeLight = (CDirectionalLight*)l_pLight;
+    //  }
+    //}else{
+    //  //CreateObjectModeLight();
+    //}
+
     if(m_pObjectModeLight)
     {
       CORE->GetLightManager()->SetAmbientLight(Vect3f(0.0f,0.0f,0.0f));
       m_pObjectModeLight->SetActive(true);
-    }else{
-
     }
 
     ((CShoulderCamera*)m_pObjectCamera)->SetShoulderDistance(0.0f);
@@ -244,12 +257,27 @@ void CViewer::InitAnimatedMode()
 
     CORE->GetLightManager()->SetLightsEnabled(false);
 
+    //CLight* l_pLight = CORE->GetLightManager()->GetResource("ObjectModeLight");
+    //
+    //if(l_pLight)
+    //{
+    //  if(l_pLight->GetType() == CLight::DIRECTIONAL)
+    //  {
+    //    m_pObjectModeLight = (CDirectionalLight*)l_pLight;
+    //  }
+    //}else{
+    //  //CreateObjectModeLight();
+    //}
+    //
+    //if(!m_pObjectModeLight)
+    //{
+    //  CreateObjectModeLight();
+    //}
+
     if(m_pObjectModeLight)
     {
       CORE->GetLightManager()->SetAmbientLight(Vect3f(0.0f,0.0f,0.0f));
       m_pObjectModeLight->SetActive(true);
-    }else{
-
     }
 
     ((CShoulderCamera*)m_pObjectCamera)->SetShoulderDistance(0.0f);
