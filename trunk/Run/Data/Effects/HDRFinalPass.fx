@@ -55,8 +55,9 @@ float4 HDRFinalPassPS(float2 _UV: TEXCOORD0) : COLOR
   
   //return l_BloomColor;
   
-  float4 l_fFinalColor = l_DiffuseColor + (l_Glow + l_BloomColor) * 0.25;
+  float4 l_fFinalColor = l_DiffuseColor + l_BloomColor * 0.25 + l_Glow;
   
+  //return l_fFinalColor;
   
   float l_fLuminance = l_LuminanceColor.r;
   float l_fMaxLuminance = l_LuminanceColor.g;

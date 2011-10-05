@@ -196,6 +196,7 @@ PS_OUTPUT NewPS(TNEW_PS _in)
   l_Output.Color = l_DiffuseColor;
   l_Output.Normals = float4(l_ViewNormal.xy * 0.5 + 0.5,l_SpotlightFactor,g_SpecularPow/g_SpecularPowMax);
 	l_Output.DepthGlow.x = _in.ViewPosition.z;
+  l_Output.DepthGlow.w = 1;
   
   //l_Output.Position = float4(_in.ViewPosition.xy, 0, 0);
   
