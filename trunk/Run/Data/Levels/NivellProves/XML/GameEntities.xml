@@ -522,6 +522,13 @@
     <RenderableObject animated="true" name="Porta1" />
     <Door open="false" open_time="1.0" close_time="1.0" size="0.976215 3.05175 2.56453" />
   </Entity>
+  <Entity name="proves_maquina_claus">
+    <Object3D position="-34.8597 2.05258 32.3023" yaw="44.9991" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="proves_maquina_claus" />
+    <PhysXMesh density="0" collision_group="escenari" />
+    <Interactive action="lvl1_maquina_claus" />
+    <StateMachine initial_state="State_Key_AllOff" />
+  </Entity>
   <Player position="-16.8764 2.0 -15.9165" yaw="0.0" />
   <Miner name="Miner" position="50.3014 2.0 39.1446" yaw="0.0" active="false" on_death="drop_tetera" />
   <Militar name="Militar" position="48.3709 2.0 -18.4613" yaw="0.0" active="false" destiny="navNodeCobertura" />
