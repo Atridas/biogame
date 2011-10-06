@@ -39,7 +39,7 @@ bool CComponentLifetime::Init(CGameEntity *_pEntity, float _fTime, const string&
 {
   assert(_fTime >= 0);
 
-  m_fTime = _fTime;
+  m_fTargetTime = _fTime;
 
   m_szScript = _szScript;
 
@@ -49,8 +49,8 @@ bool CComponentLifetime::Init(CGameEntity *_pEntity, float _fTime, const string&
 
 void CComponentLifetime::Update(float _fDeltaTime) 
 {
-  m_fTime -= _fDeltaTime;
-  if(m_fTime <= 0)
+  m_fTime += _fDeltaTime;
+  if(m_fTime >= m_fTargetTime)
   {
     if(m_szScript != "") 
     {

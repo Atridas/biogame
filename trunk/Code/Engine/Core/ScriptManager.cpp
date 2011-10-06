@@ -26,9 +26,10 @@ extern "C"
 #include "RenderableAnimatedInstanceModel.h"
 #include "StaticMeshManager.h"
 #include "LightManager.h"
+#include "Light.h"
+#include "OmniLight.h"
 #include "DirectionalLight.h"
 #include "SpotLight.h"
-#include "OmniLight.h"
 #include "SoundManager.h"
 #include "PhysicsManager.h"
 #include "LevelChanger.h"
@@ -459,6 +460,7 @@ void CScriptManager::RegisterLUAFunctions()
     class_<CColor>("Color")
       .def(constructor<>())
       .def(constructor<float, float, float, float>())
+      .def("get_vect4f",    &CColor::GetArgb)
       //TODO
   ];
   //Object3D
@@ -558,6 +560,12 @@ void CScriptManager::RegisterLUAFunctions()
   module(m_pLS) [
     class_<CLight>("Light")
       .def("set_active",     &CLight::SetActive)
+      .def("set_color",      &CLight::SetColor)
+      .def("get_color",      &CLight::GetColor)
+      .def("set_start_att",  &CLight::SetStartRangeAttenuation)
+      .def("get_start_att",  &CLight::GetStartRangeAttenuation)
+      .def("set_end_att",    &CLight::SetEndRangeAttenuation)
+      .def("get_end_att",    &CLight::GetEndRangeAttenuation)
   ];
 
   //Omni
@@ -643,6 +651,8 @@ void CScriptManager::RegisterLUAFunctions()
       .def("set_bloom_final_scale"      , &CEffectManager::SetBloomFinalScale     )
       .def("set_glow_to_bloom"          , &CEffectManager::SetGlowToBloom         )
       .def("set_glow_luminance_scale"   , &CEffectManager::SetGlowLuminanceScale  )
+      .def("set_max_glow_luminance"     , &CEffectManager::SetMaxGlowLuminance    )
+      .def("set_glow_final_scale"       , &CEffectManager::SetGlowFinalScale      )
       .def("print_hdr"                  , &CEffectManager::PrintHDRParams  )
   ];
 

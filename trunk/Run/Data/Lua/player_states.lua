@@ -56,16 +56,22 @@ camera_player = function(_jugador, _dt)
 
   local vec = INPUT_MANAGER:get_mouse_delta()
   
-  local velx = vec.x * _dt
-  local vely = vec.y * _dt
-  
-  local vel = math.sqrt(velx*velx + vely*vely) / Player_Constants["Mouse Speed Divisor"]
-  
-
-
-  if vel > Player_Constants["Mouse Max Speed"] then
-    vel = Player_Constants["Mouse Max Speed"]
+  if _dt > 1/60 then
+    _dt = 1/60
   end
+  
+  
+  --local velx = vec.x * _dt
+  --local vely = vec.y * _dt
+  --
+  --local vel = math.sqrt(velx*velx + vely*vely) / Player_Constants["Mouse Speed Divisor"]
+  --
+  --
+  --
+  --if vel > Player_Constants["Mouse Max Speed"] then
+  --  vel = Player_Constants["Mouse Max Speed"]
+  --end
+  local vel = 1
   
   pitch = object3d:get_pitch()
   yaw   = object3d:get_yaw()

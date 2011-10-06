@@ -28,7 +28,7 @@
     <Language languageXML="Data/Language/english.xml"/>
   </Languages>
   
-  <InputManager exclusiveMouse="true" sensitivity="2.0"/>
+  <InputManager exclusiveMouse="true" sensitivity="0.5"/>
   <ActionToInput file="Data/XML/actions_viewer.xml"/>
   
   <LightsManager file="Data/Levels/Viewer/XML/Lights.xml"/>

@@ -19,14 +19,16 @@ public:
 
   void Update(float _fDeltaTime);
 
+  float m_fTime;
+  float m_fTargetTime;
+
 protected:
 
-  CComponentLifetime():m_fTime(1.0f), m_szScript("") {};
+  CComponentLifetime():m_fTime(0.0f),m_fTargetTime(1.0f), m_szScript("") {};
   bool Init(CGameEntity* _pEntity, float _fTime, const string& _szScript = "");
   virtual void Release() {};
 
 private:
-  float m_fTime;
   string m_szScript;
 };
 

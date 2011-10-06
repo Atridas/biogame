@@ -55,11 +55,32 @@ function bido_explosiu(_self)
   if l_o3d then
     local l_position = l_o3d:get_position()
     l_exp:explode(l_position,4)
-    local l_explosion = EM:init_emiter("explosio foc", l_position, Vect3f(2.0, 3.0, 2.0), 1, Vect3f(0,1,0))
-    ComponentOmni.add_to_entity(l_explosion, Vect3f(0.0, 0.0, 0.0), Color(2.0,2.0,2.0, 1.0), 3, 10)
+    local l_explosion = EM:init_emiter("explosio foc", l_position+Vect3f(0, 1.0, 0), Vect3f(1.5, 1.5, 1.5), 1.5, Vect3f(0,1,0))
+    ComponentOmni.add_to_entity(l_explosion, Vect3f(0.0, 0.0, 0.0), Color(2.0,2.0,2.0, 1.0), 3, 10,"llum_bido_explosiu_update")
     
     SOUND:play_sample('explosion')
   end
+end
+
+function llum_bido_explosiu_update(_Entity, delta)
+  local l_life_time = _Entity:get_component(BaseComponent.life_time)
+  
+  if l_life_time then
+  
+    if l_life_time.time > 0.1 then
+      local l_omni_component = _Entity:get_component(BaseComponent.omni)
+      l_omni_component:set_active(false)
+      
+      --local l_omni_light = l_omni_component:get_omni_light()
+      
+      --local l_end_att = l_omni_light:get_end_att()
+      
+      --l_omni_light:set_end_att(l_end_att - 3*delta)
+      
+    end
+    
+  end
+  
 end
 
 -------------------------------------- NIVELL PROVES  -------------------------------------------
