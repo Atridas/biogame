@@ -43,6 +43,9 @@ bool CComponentLifetime::Init(CGameEntity *_pEntity, float _fTime, const string&
 
   m_szScript = _szScript;
 
+  m_bKillEntity = true;
+  m_bTriggered  = false;
+
   SetOk(true);
   return IsOk();
 }
@@ -52,7 +55,7 @@ void CComponentLifetime::Update(float _fDeltaTime)
   m_fTime += _fDeltaTime;
   if(m_fTime >= m_fTargetTime)
   {
-    if(m_szScript != "") 
+    if(m_szScript != "" && !m_bTriggered) 
     {
       CScriptManager* m_pSM = CORE->GetScriptManager();
 
@@ -67,8 +70,11 @@ void CComponentLifetime::Update(float _fDeltaTime)
         LOGGER->AddNewLog(ELL_ERROR,"\tEntity \"%s\" has launched script \"%s\" has failed with error \"%s\"", 
                             GetEntity()->GetName().c_str(), m_szScript.c_str(), _TheError.what());
       }
+
+      m_bTriggered = true;
     }
 
-    ENTITY_MANAGER->RemoveEntity( GetEntity() );
+    if(m_bKillEntity)
+      ENTITY_MANAGER->RemoveEntity( GetEntity() );
   }
 }

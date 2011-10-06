@@ -201,6 +201,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponentPlayerController, CBaseComponent>("ComponentPlayerController")
       .scope[def("add_to_entity",    (bool(*)(CGameEntity*))&CComponentPlayerController::AddToEntity)]
       .def("shoot",                  &CComponentPlayerController::Shoot)
+      .def("shoot_grenade",         &CComponentPlayerController::ShootGrenade)
       .def("force",                  &CComponentPlayerController::Force)
       .def("cover",                  &CComponentPlayerController::Cover)
       .def("use",                    &CComponentPlayerController::Use)
@@ -417,6 +418,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponentLifetime, CBaseComponent>("ComponentLifetime")
       .def_readwrite("time", &CComponentLifetime::m_fTime)
       .def_readwrite("target_time", &CComponentLifetime::m_fTargetTime)
+      .def_readwrite("kill_entity", &CComponentLifetime::m_bKillEntity)
+
   ];
 }
 

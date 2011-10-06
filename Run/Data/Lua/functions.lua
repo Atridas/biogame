@@ -62,6 +62,23 @@ function bido_explosiu(_self)
   end
 end
 
+function granada(_self)
+  local l_o3d = _self:get_component(BaseComponent.object_3d)
+  local l_exp = _self:get_component(BaseComponent.explosive)
+  local l_lifetime = _self:get_component(BaseComponent.life_time)
+  if l_o3d then
+    local l_position = l_o3d:get_position()
+    l_exp:explode(l_position,4)
+	l_lifetime.kill_entity = true
+	l_lifetime.target_time = l_lifetime.target_time + 0.5
+	
+    local l_explosion = EM:init_emiter("explosio foc", l_position+Vect3f(0, 1.0, 0), Vect3f(1.5, 1.5, 1.5), 1.5, Vect3f(0,1,0))
+    ComponentOmni.add_to_entity(l_explosion, Vect3f(0.0, 0.0, 0.0), Color(2.0,2.0,2.0, 1.0), 3, 10,"llum_bido_explosiu_update")
+    
+    SOUND:play_sample('explosion')
+  end
+end
+
 function llum_bido_explosiu_update(_Entity, delta)
   local l_life_time = _Entity:get_component(BaseComponent.life_time)
   

@@ -105,6 +105,7 @@
     <ClCompile Include="ComponentPhysXBox.cpp" />
     <ClCompile Include="ComponentPhysXController.cpp" />
     <ClCompile Include="ComponentPhysXMesh.cpp" />
+    <ClCompile Include="ComponentPhysxSphere.cpp" />
     <ClCompile Include="ComponentPlayerController.cpp" />
     <ClCompile Include="ComponentRagdoll.cpp" />
     <ClCompile Include="ComponentRenderableObject.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="include\ComponentPhysXBox.h" />
     <ClInclude Include="include\ComponentPhysXController.h" />
     <ClInclude Include="include\ComponentPhysXMesh.h" />
+    <ClInclude Include="include\ComponentPhysxSphere.h" />
     <ClInclude Include="include\ComponentPlayerController.h" />
     <ClInclude Include="include\ComponentRagdoll.h" />
     <ClInclude Include="include\ComponentRenderableObject.h" />

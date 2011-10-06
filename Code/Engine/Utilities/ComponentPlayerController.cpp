@@ -272,6 +272,32 @@ void CComponentPlayerController::Shoot()
 
 }
 
+void CComponentPlayerController::ShootGrenade(float _fTime)
+{
+  CEntityManager* l_pEM = ENTITY_MANAGER;
+  CGameEntity* l_pPlayerEntity = GetEntity();
+
+  CAnimatedInstanceModel *l_pAnimatedInstanceModel = m_pAnimatedModel->GetAnimatedInstanceModel();
+
+  CCamera* l_pCamera = GetEntity()->GetComponent<CComponent3rdPSCamera>(ECT_3RD_PERSON_SHOOTER_CAMERA)->GetCamera();
+  CComponentArma* l_pArma = GetEntity()->GetComponent<CComponentArma>();
+
+  Vect3f l_vPosArma = l_pArma->GetPosition();
+  Vect3f l_vDirArma = l_pArma->GetAimDirection();
+  Vect3f l_vPos = l_pCamera->GetEye();
+  Vect3f l_vDir = l_pCamera->GetDirection().Normalize();
+
+  l_vPosArma -= l_vDirArma*0.1f;
+  
+  l_pEM->InitParticles("disparar", l_vPosArma + l_vDirArma*0.2f, Vect3f(.25f,.5f,.25f), 2.5f, l_vDir);
+
+  CPhysicsManager *l_pPM = PHYSICS_MANAGER;
+  Vect3f l_vPuntLlunya = l_vPos+100.f*l_vDir;
+  l_vDir = ((l_vPos+100.f*l_vDir)-l_vPosArma).Normalize();
+  l_pEM->InitGrenade(_fTime,l_vPosArma,l_vDir,l_pPM->GetCollisionMask(ECG_OBJECTES_DINAMICS));
+
+}
+
 void CComponentPlayerController::Force()
 {
   if(!m_bForceActive)

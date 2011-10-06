@@ -35,7 +35,10 @@
 #include "ComponentBillboard.h"
 #include "ComponentOmni.h"
 #include "ComponentBGMController.h"
+#include "ComponentPhysxSphere.h"
 #include "ParticleConstants.h"
+#include "ComponentPhysxSphere.h"
+#include "PhysicActor.h"
 
 #include "RenderableObject.h"
 #include "PhysicsManager.h"
@@ -45,6 +48,8 @@
 
 #include <XML/XMLTreeNode.h>
 #include <sstream>
+
+#define SHOOT_POWER 20.0f
 
 void LoadComponentObject3D(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 {
@@ -834,3 +839,36 @@ CGameEntity* CEntityManager::InitPickUp(const string& _szName, const string& _sz
 
   return l_pPickUpEntity;
 }
+
+CGameEntity* CEntityManager::InitGrenade(float _fLifeTime, const Vect3f& _vPos,const Vect3f& _vDir, uint32 _uiCollisionMask)
+{
+  CPhysicsManager *l_pPM = PHYSICS_MANAGER;
+  Mat33f l_mRot;
+  Mat44f l_mO3D(l_mRot.SetIdentity());
+  l_mO3D.SetPos(_vPos);
+
+	LOGGER->AddNewLog(ELL_INFORMATION, "CEntityManager::InitGrenade creant Grenade");
+	CGameEntity * l_pGrenade = CORE->GetEntityManager()->CreateEntity();
+
+	CComponentObject3D* l_pCO3D = CComponentObject3D::AddToEntity(l_pGrenade);
+	l_pCO3D->SetMat44(l_mO3D);
+
+  CComponentRenderableObject *l_pCRO= CComponentRenderableObject::AddToEntity(l_pGrenade,l_pGrenade->GetName(), "granada");
+  l_pCRO->m_bRemoveRenderableObject = true;
+  l_pCO3D->SetMat44(l_mO3D);
+
+  CComponentPhysXSphere* l_pSphere = CComponentPhysXSphere::AddToEntity(l_pGrenade,10.0f,GetCollisionGroup("objecte dinamic"));
+
+  if(_fLifeTime > 0)
+    CComponentLifetime::AddToEntity(l_pGrenade, _fLifeTime,"granada")->m_bKillEntity = false;
+
+  CComponentExplosive::AddToEntity(l_pGrenade);
+  CComponentOmni::AddToEntity(l_pGrenade,Vect3f(0,0,0), CColor(0,.5f,0), 1.f, 4.f);
+
+  l_pSphere->GetActor()->AddForceAtLocalPos(_vDir,Vect3f(0.0f),SHOOT_POWER);
+  
+
+	return 0;
+}
+
+

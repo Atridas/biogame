@@ -25,9 +25,11 @@ Player_Constants["Escut"] = 'protection'
 --temps animacions
 Player_Constants["Temps Tocat"] = 0.3
 Player_Constants["Temps Morint"] = 0.0
+Player_Constants["Temps Grenade"] = 3
 --sons
 Player_Constants["So rebre impacte"] = 'impacte'
 Player_Constants["So disparar"] = 'disparar'
+Player_Constants["So granada"] = 'granada'
 Player_Constants["So force"] = 'force'
 
 State_Player_Neutre = {}
@@ -218,6 +220,18 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
         animation:play('shootDown', 0.5, 1-aim_angle, false)
       end
     end
+	
+	 if ACTION_MANAGER:is_action_active('Grenade') then
+      player_controller:shoot_grenade(Player_Constants["Temps Grenade"])
+      SOUND:play_sample(Player_Constants["So granada"])
+      
+      if isMoving then
+        
+      else
+        animation:play(Player_Constants["Disparar"], 0.5, 1.0, false)
+      end
+    end
+	
   end
   
   if isMoving then
@@ -359,6 +373,12 @@ State_Player_Apuntar['Update'] = function(_jugador, _dt)
     animation:play(Player_Constants["Disparar"], 0.3, 1.0, false)
     player_controller:shoot()
     SOUND:play_sample(Player_Constants["So disparar"])
+  end
+  
+  if ACTION_MANAGER:is_action_active('Grenade') then
+    animation:play(Player_Constants["Disparar"], 0.3, 1.0, false)
+    player_controller:shoot_grenade(Player_Constants["Temps Grenade"])
+    SOUND:play_sample(Player_Constants["So granada"])
   end
   
   if ACTION_MANAGER:is_action_active('MoveFwd') then
@@ -985,9 +1005,15 @@ State_Player_Cobertura_Baixa_Apuntar['Update'] = function(_jugador, _dt)
   end   
     
   if ACTION_MANAGER:is_action_active('Shoot') then
-    animation:play(Player_Constants["Disparar"], 0.3, 1.0, false)
-    player_controller:shoot()
-    SOUND:play_sample(Player_Constants["So disparar"])
+     animation:play(Player_Constants["Disparar"], 0.3, 1.0, false)
+     player_controller:shoot()
+     SOUND:play_sample(Player_Constants["So disparar"])
+  end
+  
+  if ACTION_MANAGER:is_action_active('Grenade') then
+     animation:play(player_constants["disparar"], 0.3, 1.0, false)
+     player_controller:shoot_grenade(Player_Constants["Temps Grenade"])
+     sound:play_sample(player_constants["so granada"])
   end
   
   --local player_controller = _jugador:get_component(BaseComponent.player_controller)
