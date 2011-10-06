@@ -228,7 +228,9 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
       if isMoving then
         
       else
-        animation:play(Player_Constants["Disparar"], 0.5, 1.0, false)
+        --animation:play(Player_Constants["Disparar"], 0.5, 1.0, false)
+        animation:play('shootUp', 0.5, aim_angle, false)
+        animation:play('shootDown', 0.5, 1-aim_angle, false)
       end
     end
 	

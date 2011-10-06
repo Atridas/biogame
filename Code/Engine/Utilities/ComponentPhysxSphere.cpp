@@ -34,11 +34,11 @@ CComponentPhysXSphere* CComponentPhysXSphere::AddToEntity(CGameEntity *_pEntity,
   }
 }
 
-CComponentPhysXSphere* CComponentPhysXSphere::AddToEntity(CGameEntity *_pEntity, float _fDensity, int _iCollisionGroup)
+CComponentPhysXSphere* CComponentPhysXSphere::AddToEntity(CGameEntity *_pEntity, float _fDensity, float _fRadius, float _fSkeletonSize, int _iCollisionGroup)
 {
   CComponentPhysXSphere *l_pComp = new CComponentPhysXSphere();
   assert(_pEntity && _pEntity->IsOk());
-  if(l_pComp->Init(_pEntity, _fDensity, _iCollisionGroup))
+  if(l_pComp->Init(_pEntity, _fDensity, _fRadius, _fSkeletonSize, _iCollisionGroup))
   {
     l_pComp->SetEntity(_pEntity);
     return l_pComp;
@@ -94,10 +94,12 @@ bool CComponentPhysXSphere::Init(CGameEntity *_pEntity, float _fRadius,
 }
 
 
-bool CComponentPhysXSphere::Init(CGameEntity *_pEntity, float _fDensity, int _iCollisionGroup)
+bool CComponentPhysXSphere::Init(CGameEntity *_pEntity, float _fDensity, float _fRadius, float _fSkeletonSize, int _iCollisionGroup)
 {
   m_fDensity = _fDensity;
   m_iCollisionGroup = _iCollisionGroup;
+  m_fRadius = _fRadius;
+  m_fSkeletonSize = _fSkeletonSize;
 
   m_pObject3D = _pEntity->GetComponent<CComponentObject3D>(ECT_OBJECT_3D);
   if(!m_pObject3D)
@@ -124,7 +126,15 @@ bool CComponentPhysXSphere::Init(CGameEntity *_pEntity, float _fDensity, int _iC
 
   m_pPhysXActor = new CPhysicActor(m_pPhysXData);
   
-  m_pPhysXActor->AddSphereShape(0.08f, v3fZERO, NULL, _iCollisionGroup);
+  if (_fSkeletonSize > 0)
+  {
+    m_pPhysXActor->AddSphereShape(_fRadius, v3fZERO, CORE->GetPhysicsManager()->CreateCCDSkeleton(_fSkeletonSize), _iCollisionGroup);
+  }
+  else
+  {
+    m_pPhysXActor->AddSphereShape(_fRadius, v3fZERO, NULL, _iCollisionGroup);
+  }
+
   m_pPhysXActor->SetGlobalPosition(m_pObject3D->GetPosition());
 
   if(_fDensity > 0)
@@ -156,7 +166,7 @@ bool CComponentPhysXSphere::Init(CGameEntity *_pEntity, float _fDensity, int _iC
 void CComponentPhysXSphere::Reload()
 {
   Release();
-  Init(GetEntity(), m_fDensity, m_iCollisionGroup);
+  Init(GetEntity(), m_fDensity,m_fRadius,m_fSkeletonSize, m_iCollisionGroup);
 }
 
 void CComponentPhysXSphere::ReceiveEvent(const SEvent& _Event)

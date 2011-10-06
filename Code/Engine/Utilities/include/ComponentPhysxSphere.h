@@ -10,7 +10,7 @@ class CComponentPhysXSphere :
 {
 public:
   
-  static CComponentPhysXSphere* AddToEntity(CGameEntity *_pEntity, float _fDensity, int _iCollisionGroup);
+  static CComponentPhysXSphere* AddToEntity(CGameEntity *_pEntity, float _fDensity, float _fRadius, float _fSkeletonSize, int _iCollisionGroup);
 
   static CComponentPhysXSphere* AddToEntity(CGameEntity *_pEntity,float _fRadius,
             float _fPosX , float _fPosY , float _fPosZ,
@@ -24,8 +24,8 @@ public:
   virtual void Reload();
   
 protected:
-  CComponentPhysXSphere(): m_iCollisionGroup(0), m_fDensity(.0f) {};
-  bool Init(CGameEntity *_pEntity, float _fDensity, int _iCollisionGroup);
+  CComponentPhysXSphere(): m_iCollisionGroup(0), m_fDensity(.0f),m_fRadius(.0f),m_fSkeletonSize(.0f) {};
+  bool Init(CGameEntity *_pEntity, float _fDensity, float _fRadius,float _fSkeletonSize, int _iCollisionGroup);
 
   bool Init(CGameEntity *_pEntity,float _fRadius,
             float _fPosX , float _fPosY , float _fPosZ,
@@ -36,6 +36,8 @@ protected:
 
   int m_iCollisionGroup;
   float m_fDensity;
+  float m_fRadius;
+  float m_fSkeletonSize;
 };
 
 
