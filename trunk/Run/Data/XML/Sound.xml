@@ -16,4 +16,6 @@
   <sound name="force" file="./Data/Sounds/shockwave.mp3" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />
   <sound name="body_fall" file="./Data/Sounds/body_fall_mono2.wav" sound3D="true" type="sample" loop="false" priority="1" maxSamples="1" />
   <sound name="explosion" file="./Data/Sounds/explosion.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />
+  <sound name="granada" file="./Data/Sounds/launcher.mp3" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />
+  <sound name="granada" file="./Data/Sounds/launcher.mp3" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />
 </sounds>

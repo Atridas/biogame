@@ -151,6 +151,9 @@
     <Filter Include="EntitySystem\Components\ComponentSoundEmiter">
       <UniqueIdentifier>{e6a717c1-bd41-4992-a159-dc898fa9dcbf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentPhysXActor\ComponentPhysXSphere">
+      <UniqueIdentifier>{6f982283-1173-4529-b1f1-46158df79612}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -308,6 +311,9 @@
     </ClCompile>
     <ClCompile Include="ComponentSoundEmiter.cpp">
       <Filter>EntitySystem\Components\ComponentSoundEmiter</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentPhysxSphere.cpp">
+      <Filter>EntitySystem\Components\ComponentPhysXActor\ComponentPhysXSphere</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -475,6 +481,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentSoundEmiter.h">
       <Filter>EntitySystem\Components\ComponentSoundEmiter</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentPhysxSphere.h">
+      <Filter>EntitySystem\Components\ComponentPhysXActor\ComponentPhysXSphere</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

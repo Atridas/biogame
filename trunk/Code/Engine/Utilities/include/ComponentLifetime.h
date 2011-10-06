@@ -22,14 +22,18 @@ public:
   float m_fTime;
   float m_fTargetTime;
 
+  bool  m_bKillEntity;
+
 protected:
 
-  CComponentLifetime():m_fTime(0.0f),m_fTargetTime(1.0f), m_szScript("") {};
+  CComponentLifetime():m_fTime(0.0f),m_fTargetTime(1.0f), m_szScript(""),m_bKillEntity(true), m_bTriggered(false) {};
   bool Init(CGameEntity* _pEntity, float _fTime, const string& _szScript = "");
   virtual void Release() {};
 
 private:
   string m_szScript;
+
+  bool m_bTriggered;
 };
 
 #endif

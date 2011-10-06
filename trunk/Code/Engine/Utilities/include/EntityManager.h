@@ -61,6 +61,10 @@ public:
 
   CGameEntity* InitPickUp(const string& _szName, const string& _szCore, const Vect3f& _vPos, const string& _szOnPickUp);
 
+  CGameEntity* InitGrenade(float _fLifeTime, const Vect3f& _vPos,const Vect3f& _vDir, uint32 _uiCollisionMask);
+
+  CGameEntity* InitGrenade(const Vect3f& _vPos,const Vect3f& _vDir, uint32 _uiCollisionMask);
+
 protected:
   virtual void Release();
 

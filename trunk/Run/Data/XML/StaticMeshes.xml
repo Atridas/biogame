@@ -3,4 +3,6 @@
 	<mesh name="laser_pilota" path="Data/Meshes/laser_pilota.mesh" max="0.1 -0.0999877 0.1" min="-0.1 0.1 -0.1" />
 	<mesh name="ARMA" path="Data/Meshes/ARMA.mesh" max="0.0257965 0.0945455 0.0675429" min="-0.413583 -0.114497 -0.0675609" />
   <mesh name="laser" path="Data/Meshes/Laser.mesh" max="0.5 0.5 0.5" min="-0.5 -0.5 -0.5" />
+  <mesh name="granada" path="Data/Meshes/granada.mesh" max="-0.0626906 0.0703703 0.0591007" min="0.0626902 -0.0703702 -0.0591011" />
+  <mesh name="granada" path="Data/Meshes/granada.mesh" max="-0.0626906 0.0703703 0.0591007" min="0.0626902 -0.0703702 -0.0591011" />
 </meshes>

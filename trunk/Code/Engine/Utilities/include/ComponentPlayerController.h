@@ -46,6 +46,7 @@ public:
   bool m_bForceActive;
 
   void Shoot();
+  void ShootGrenade(float _fTime);
   void Force();
   void Respawn();
   bool Cover();
