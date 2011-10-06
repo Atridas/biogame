@@ -65,15 +65,24 @@ end
 function granada(_self)
   local l_o3d = _self:get_component(BaseComponent.object_3d)
   local l_exp = _self:get_component(BaseComponent.explosive)
+  local l_render = _self:get_component(BaseComponent.renderable_object)
+  local l_sphere = _self:get_component(BaseComponent.physx_sphere)
   local l_lifetime = _self:get_component(BaseComponent.life_time)
+  local l_omni = _self:get_component(BaseComponent.omni)
   if l_o3d then
     local l_position = l_o3d:get_position()
     l_exp:explode(l_position,4)
-	l_lifetime.kill_entity = true
+	--l_lifetime.kill_entity = false
 	l_lifetime.target_time = l_lifetime.target_time + 0.5
+	
 	
     local l_explosion = EM:init_emiter("explosio foc", l_position+Vect3f(0, 1.0, 0), Vect3f(1.5, 1.5, 1.5), 1.5, Vect3f(0,1,0))
     ComponentOmni.add_to_entity(l_explosion, Vect3f(0.0, 0.0, 0.0), Color(2.0,2.0,2.0, 1.0), 3, 10,"llum_bido_explosiu_update")
+	
+	l_render:set_active(false)
+	l_exp:set_active(false)
+	l_omni:set_active(false)
+	l_sphere:set_active(false)
     
     SOUND:play_sample('explosion')
   end
