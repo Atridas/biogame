@@ -60,7 +60,8 @@ public:
     ECT_PARTICLE_SHOOT_MILITAR,
     ECT_COLLISION_REPORT,
     ECT_EXPLOSIVE,
-    ECT_LIFETIME
+    ECT_LIFETIME,
+    ECT_PHYSXSPHERE
   };
   
   virtual Type GetType() = 0; //{return m_Type;};

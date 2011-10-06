@@ -46,6 +46,7 @@ extern "C"
 #include "ComponentArma.h"
 #include "ComponentLifetime.h"
 #include "OmniLight.h"
+#include "ComponentPhysxSphere.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -153,7 +154,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("explosive",            CBaseComponent::ECT_EXPLOSIVE),
           value("billboard",            CBaseComponent::ECT_BILLBOARD),
           value("omni",                 CBaseComponent::ECT_OMNI),
-          value("life_time",            CBaseComponent::ECT_LIFETIME)
+          value("life_time",            CBaseComponent::ECT_LIFETIME),
+          value("physx_sphere",         CBaseComponent::ECT_PHYSXSPHERE)
       ]
       .def("get_type",     &CBaseComponent::GetType)
       .def("get_entity",   &CBaseComponent::GetEntity)
@@ -267,6 +269,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def_readwrite("remove_renderable_object", &CComponentRenderableObject::m_bRemoveRenderableObject)
       .def_readwrite("block_yaw",                &CComponentRenderableObject::m_bBlockYaw)
       .def("set_yaw",                            &CComponentRenderableObject::SetYaw)
+      .def("set_active",                         &CComponentRenderableObject::SetActive)
+
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentMovement, CBaseComponent>("ComponentMovement")
@@ -386,6 +390,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponentExplosive, CBaseComponent>("ComponentExplosive")
       .scope[def("add_to_entity",      &CComponentExplosive::AddToEntity)]
       .def("explode",                  &CComponentExplosive::Explode)
+      .def("set_active",               &CComponentExplosive::SetActive)
 
       // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentEmiter, CBaseComponent>("ComponentEmiter")
@@ -409,6 +414,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponentOmni, CBaseComponent>("ComponentOmni")
       .scope[def("add_to_entity",            &CComponentOmni::AddToEntity)]
       .def("get_omni_light",                 &CComponentOmni::GetOmniLight)
+      .def("set_active",                     &CComponentOmni::SetActive)
 
       // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentArma, CBaseComponent>("ComponentArma")
@@ -419,6 +425,10 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def_readwrite("time", &CComponentLifetime::m_fTime)
       .def_readwrite("target_time", &CComponentLifetime::m_fTargetTime)
       .def_readwrite("kill_entity", &CComponentLifetime::m_bKillEntity)
+
+      // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentPhysXSphere, CBaseComponent>("ComponentPhysXSphere")
+      .def("set_active",        &CComponentPhysXBox::SetActive)
 
   ];
 }
