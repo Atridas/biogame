@@ -20,6 +20,6 @@ public:
   virtual void RenderDeferredLight(CRenderManager* _pRM, CEffect* _pGeometryEffect);
 
 protected:
-  void Release() {};
+  virtual void Release() {};
 };
 #endif

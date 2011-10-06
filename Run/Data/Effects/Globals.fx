@@ -124,7 +124,8 @@ shared float g_SceneLuminanceUpperLimit  : SceneLuminanceUpperLimit;
 shared float g_BloomFinalScale           : BloomFinalScale;
 shared float g_GlowToBloom               : GlowToBloom;
 shared float g_GlowLuminanceScale        : GlowLuminanceScale;
-float g_MaxGlowLuminance = 4.0;
+shared float g_MaxGlowLuminance          : MaxGlowLuminance;
+shared float g_GlowFinalScale            : GlowFinalScale;
 
 #define POISON_BLUR_KERNEL_SIZE 16
 

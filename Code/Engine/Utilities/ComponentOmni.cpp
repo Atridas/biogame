@@ -21,11 +21,11 @@ extern "C"
 #include "Utils\MemLeaks.h"
 #include "Utils\Logger.h"
 
-CComponentOmni* CComponentOmni::AddToEntity(CGameEntity* _pEntity, const Vect3f& _vOffsetPosition, const CColor& _vColor, float _fStartRangeAtt, float _fEndRangeAtt)
+CComponentOmni* CComponentOmni::AddToEntity(CGameEntity* _pEntity, const Vect3f& _vOffsetPosition, const CColor& _vColor, float _fStartRangeAtt, float _fEndRangeAtt, const string& _szScript)
 {
   CComponentOmni *l_pComp = new CComponentOmni();
   assert(_pEntity && _pEntity->IsOk());
-  if(l_pComp->Init(_pEntity, _vOffsetPosition, _vColor, _fStartRangeAtt, _fEndRangeAtt))
+  if(l_pComp->Init(_pEntity, _vOffsetPosition, _vColor, _fStartRangeAtt, _fEndRangeAtt, _szScript))
   {
     l_pComp->SetEntity(_pEntity);
     return l_pComp;
@@ -53,13 +53,15 @@ CComponentOmni* CComponentOmni::AddToEntityFromResource(CGameEntity* _pEntity, c
   }
 }
 
-bool CComponentOmni::Init(CGameEntity* _pEntity, const Vect3f& _vOffsetPosition, const CColor& _vColor, float _fStartRangeAtt, float _fEndRangeAtt)
+bool CComponentOmni::Init(CGameEntity* _pEntity, const Vect3f& _vOffsetPosition, const CColor& _vColor, float _fStartRangeAtt, float _fEndRangeAtt, const string& _szScript)
 {
   m_bFromResource = false;
 
   m_vOffset = _vOffsetPosition;
 
   m_pObject3D = _pEntity->GetComponent<CComponentObject3D>();
+
+  m_szScript = _szScript;
 
   if(!m_pObject3D)
   {
@@ -86,6 +88,8 @@ bool CComponentOmni::Init(CGameEntity* _pEntity, const Vect3f& _vOffsetPosition,
 bool CComponentOmni::InitFromResource(CGameEntity* _pEntity, const string& _szResource, const string& _szScript)
 {
   CLight* l_pLight = CORE->GetLightManager()->GetResource(_szResource);
+
+  m_szScript = _szScript;
 
   if(l_pLight)
   {
@@ -131,19 +135,21 @@ void CComponentOmni::RunScript(float _fDeltaTime)
   }
 }
 
+void CComponentOmni::Enable(void)
+{
+  m_pOmni->SetActive(true);
+}
+
+void CComponentOmni::Disable(void)
+{
+  m_pOmni->SetActive(false);
+}
+
 void CComponentOmni::Update(float _fDeltaTime)
 {
-  if(m_pOmni->IsActive())
-  {
-    if(!m_bFromResource)
-    {
-      m_pOmni->SetPosition(m_pObject3D->GetPosition() + m_vOffset);
-    }
-    else
-    {
-      RunScript(_fDeltaTime);
-    }
-  }
+  m_pOmni->SetPosition(m_pObject3D->GetPosition() + m_vOffset);
+
+  RunScript(_fDeltaTime);
 }
 
 void CComponentOmni::Release()
@@ -156,4 +162,9 @@ void CComponentOmni::Release()
   {
     m_pOmni->SetActive(false);
   }
+}
+
+COmniLight* CComponentOmni::GetOmniLight()
+{
+  return m_pOmni;
 }

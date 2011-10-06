@@ -468,6 +468,8 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     _pEffect->SetValue("BloomFinalScale"         , m_fBloomFinalScale   );
     _pEffect->SetValue("GlowToBloom"             , m_fGlowToBloom       );
     _pEffect->SetValue("GlowLuminanceScale"      , m_fGlowLuminanceScale);
+    _pEffect->SetValue("MaxGlowLuminance"        , m_fMaxGlowLuminance);
+    _pEffect->SetValue("GlowFinalScale"          , m_fGlowFinalScale);
     m_bHDRParamsUpdated = false;
   }
 
@@ -624,6 +626,25 @@ void CEffectManager::SetGlowLuminanceScale(float _fGlowLuminanceScale )
   }
 }
 
+void CEffectManager::SetMaxGlowLuminance(float _fMaxGlowLuminance )
+{
+  if(m_fMaxGlowLuminance != _fMaxGlowLuminance)
+  {
+    m_fMaxGlowLuminance = _fMaxGlowLuminance;
+    m_bHDRParamsUpdated = true;
+  }
+}
+
+void CEffectManager::SetGlowFinalScale(float _fGlowFinalScale )
+{
+  if(m_fGlowFinalScale != _fGlowFinalScale)
+  {
+    m_fGlowFinalScale = _fGlowFinalScale;
+    m_bHDRParamsUpdated = true;
+  }
+}
+
+
 void CEffectManager::PrintHDRParams() const
 {
   LOGGER->AddNewLog(ELL_INFORMATION, "bright_pass_threshold : %f",      m_fBrightPassThreshold);
@@ -632,6 +653,8 @@ void CEffectManager::PrintHDRParams() const
   LOGGER->AddNewLog(ELL_INFORMATION, "max_luminance_limits  : %f - %f", m_fMaxLuminanceLowerLimit,   m_fMaxLuminanceUpperLimit);
   LOGGER->AddNewLog(ELL_INFORMATION, "scene_luminance_limits: %f - %f", m_fSceneLuminanceLowerLimit, m_fSceneLuminanceUpperLimit);
   LOGGER->AddNewLog(ELL_INFORMATION, "bloom_final_scale     : %f",      m_fBloomFinalScale);
+  LOGGER->AddNewLog(ELL_INFORMATION, "glow_final_scale      : %f",      m_fGlowFinalScale);
   LOGGER->AddNewLog(ELL_INFORMATION, "glow_to_bloom         : %f",      m_fGlowToBloom);
+  LOGGER->AddNewLog(ELL_INFORMATION, "max_glow_luminance    : %f",      m_fMaxGlowLuminance);
   LOGGER->AddNewLog(ELL_INFORMATION, "glow_luminance_scale  : %f",      m_fGlowLuminanceScale);
 }

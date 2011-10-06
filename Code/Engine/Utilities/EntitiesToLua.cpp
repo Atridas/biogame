@@ -44,6 +44,8 @@ extern "C"
 #include "ComponentRotative.h"
 #include "ComponentOmni.h"
 #include "ComponentArma.h"
+#include "ComponentLifetime.h"
+#include "OmniLight.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -150,7 +152,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("spawner",              CBaseComponent::ECT_SPAWNER),
           value("explosive",            CBaseComponent::ECT_EXPLOSIVE),
           value("billboard",            CBaseComponent::ECT_BILLBOARD),
-          value("omni",                 CBaseComponent::ECT_OMNI)
+          value("omni",                 CBaseComponent::ECT_OMNI),
+          value("life_time",            CBaseComponent::ECT_LIFETIME)
       ]
       .def("get_type",     &CBaseComponent::GetType)
       .def("get_entity",   &CBaseComponent::GetEntity)
@@ -404,10 +407,16 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentOmni, CBaseComponent>("ComponentOmni")
       .scope[def("add_to_entity",            &CComponentOmni::AddToEntity)]
+      .def("get_omni_light",                 &CComponentOmni::GetOmniLight)
 
       // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentArma, CBaseComponent>("ComponentArma")
       .scope[def("add_to_entity",            &CComponentArma::AddToEntity)]
+
+      // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentLifetime, CBaseComponent>("ComponentLifetime")
+      .def_readwrite("time", &CComponentLifetime::m_fTime)
+      .def_readwrite("target_time", &CComponentLifetime::m_fTargetTime)
   ];
 }
 

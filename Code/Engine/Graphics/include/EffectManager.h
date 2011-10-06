@@ -75,7 +75,9 @@ public:
                     m_fSceneLuminanceLowerLimit(0.25f), m_fSceneLuminanceUpperLimit(1.f),
                     m_fBloomFinalScale(0.25f),
                     m_fGlowToBloom(1.f),
-                    m_fGlowLuminanceScale(0.5f)
+                    m_fGlowLuminanceScale(0.5f),
+                    m_fMaxGlowLuminance(4.f),
+                    m_fGlowFinalScale(1.f)
                     {SetOk(true);};
 
   ~CEffectManager() {Done();};
@@ -190,6 +192,8 @@ public:
   void SetBloomFinalScale     (float _fBloomFinalScale    );
   void SetGlowToBloom         (float _fGlowToBloom        );
   void SetGlowLuminanceScale  (float _fGlowLuminanceScale );
+  void SetMaxGlowLuminance    (float _fMaxGlowLuminance   );
+  void SetGlowFinalScale      (float _fGlowFinalScale     );
 
   void PrintHDRParams() const;
   
@@ -295,6 +299,8 @@ private:
   float m_fBloomFinalScale;
   float m_fGlowToBloom;
   float m_fGlowLuminanceScale;
+  float m_fMaxGlowLuminance;
+  float m_fGlowFinalScale;
 
   bool    m_bLightEnabled;
   int     m_iLightType;
