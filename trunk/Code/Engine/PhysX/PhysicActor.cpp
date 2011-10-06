@@ -221,7 +221,7 @@ void CPhysicActor::AddCapsuleShape (float radius, float height, const Vect3f& lo
 	m_pPhXActorDesc->shapes.pushBack( capsuleDesc );
 }
 
-void CPhysicActor::AddMeshShape	(NxTriangleMesh* mesh, const Vect3f& localPos, uint32 group)
+void CPhysicActor::AddMeshShape	(NxTriangleMesh* mesh, const Vect3f& localPos, NxCCDSkeleton* skeleton, uint32 group)
 {
 	assert(m_pPhXActorDesc);
 	assert(mesh);
@@ -233,6 +233,13 @@ void CPhysicActor::AddMeshShape	(NxTriangleMesh* mesh, const Vect3f& localPos, u
 	m_vMeshDesc.push_back(triangleMeshDesc);
 	// The actor has mesh shape
 	triangleMeshDesc->meshData = mesh;
+  
+  if (skeleton != NULL)
+	{
+		triangleMeshDesc->ccdSkeleton = skeleton;
+		triangleMeshDesc->shapeFlags |= NX_SF_DYNAMIC_DYNAMIC_CCD; //Activate dynamic-dynamic CCD for this body
+	}
+
 	m_pPhXActorDesc->shapes.pushBack( triangleMeshDesc );
 }
 

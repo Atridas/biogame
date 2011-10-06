@@ -95,11 +95,11 @@ CPhysicActor* CGameObjectManager::AddPhysicActorMesh(CRenderableObject* _pRender
 
   if (_bPushable)
   {
-    l_pPhysicActor->AddMeshShape(l_pMesh,v3fZERO,GROUP_COLLIDABLE_PUSHABLE);
+    l_pPhysicActor->AddMeshShape(l_pMesh,v3fZERO,NULL,GROUP_COLLIDABLE_PUSHABLE);
   }
   else
   {
-    l_pPhysicActor->AddMeshShape(l_pMesh,v3fZERO,GROUP_COLLIDABLE_NON_PUSHABLE);
+    l_pPhysicActor->AddMeshShape(l_pMesh,v3fZERO,NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
   }
 
   

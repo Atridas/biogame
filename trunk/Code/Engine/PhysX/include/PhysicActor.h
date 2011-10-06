@@ -47,7 +47,7 @@ public:
 	void							AddSphereShape		(float radius, const Vect3f& localPos = v3fZERO, NxCCDSkeleton* skeleton = 0, uint32 group = 0);
 	void							AddBoxSphape			(const Vect3f& size, const Vect3f& localPos = v3fZERO, NxCCDSkeleton* skeleton = 0, uint32 group = 0);
 	void							AddCapsuleShape		(float radius, float height, const Vect3f& localPos = v3fZERO, NxCCDSkeleton* skeleton = 0, uint32 group = 0);
-	void							AddMeshShape			(NxTriangleMesh* mesh, const Vect3f& localPos = v3fZERO, uint32 group = 0);
+	void							AddMeshShape			(NxTriangleMesh* mesh, const Vect3f& localPos = v3fZERO, NxCCDSkeleton* skeleton = 0, uint32 group = 0);
 	void							AddPlaneShape			(const Vect3f& normal, float distance, uint32 group = 0);
 
 	//---Trigger Function---

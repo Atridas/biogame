@@ -857,7 +857,8 @@ CGameEntity* CEntityManager::InitGrenade(float _fLifeTime, const Vect3f& _vPos,c
   l_pCRO->m_bRemoveRenderableObject = true;
   l_pCO3D->SetMat44(l_mO3D);
 
-  CComponentPhysXSphere* l_pSphere = CComponentPhysXSphere::AddToEntity(l_pGrenade,10.0f,GetCollisionGroup("objecte dinamic"));
+  CComponentPhysXSphere* l_pSphere = CComponentPhysXSphere::AddToEntity(l_pGrenade,10.0f,0.08f,0.01f,GetCollisionGroup("objecte dinamic"));
+  //CComponentPhysXMesh* l_pSphere = CComponentPhysXMesh::AddToEntity(l_pGrenade,10.0f,GetCollisionGroup("objecte dinamic"));
 
   if(_fLifeTime > 0)
     CComponentLifetime::AddToEntity(l_pGrenade, _fLifeTime,"granada")->m_bKillEntity = false;
