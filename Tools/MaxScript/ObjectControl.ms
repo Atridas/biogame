@@ -63,6 +63,17 @@ function WantsEntity _object =
 	return true
 )
 
+--Comprova si l'objecte proporcionat té màquina d'estats
+function HasStateMachine _object =
+(
+	if (GetUserProp _object "state_machine") != undefined then
+	(
+		return true
+	)
+	
+	return false
+)
+
 -- Comprova si l'objecte proporcionat és un trigger
 function IsTrigger _object =
 (

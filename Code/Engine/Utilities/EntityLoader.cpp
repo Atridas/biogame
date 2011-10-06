@@ -255,6 +255,19 @@ void LoadComponentInteractive(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntit
 
 }
 
+void LoadComponentStateMachine(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
+{
+  string l_szInitialState = _TreeComponent.GetPszISOProperty("initial_state", "", false);
+
+  LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Màquina d'estats per l'entitat \"%s\" i estat inicial \"%s\"",_pEntity->GetName().c_str(), l_szInitialState.c_str());
+
+  CComponentStateMachine * l_pSM = CComponentStateMachine::AddToEntity(_pEntity, l_szInitialState);
+  if(!l_pSM)
+  {
+    LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
+  }
+}
+
 void LoadComponentDestroyable(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
 {
   string l_szName   = _pEntity->GetName();
@@ -527,6 +540,10 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
             } else if(strcmp(l_TreeComponent.GetName(),"Interactive") == 0)
             {
               LoadComponentInteractive(l_TreeComponent, l_pEntity);
+            // -----------------------------------------------------------------------------------------------------------
+            } else if(strcmp(l_TreeComponent.GetName(),"StateMachine") == 0)
+            {
+              LoadComponentStateMachine(l_TreeComponent, l_pEntity);
 
             // -----------------------------------------------------------------------------------------------------------
             } else if(strcmp(l_TreeComponent.GetName(),"Destroyable") == 0)

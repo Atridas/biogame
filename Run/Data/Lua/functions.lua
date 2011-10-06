@@ -89,6 +89,7 @@ function pick_up_tetera(_trigger, _actor)
   if _actor:get_name() == "Player" then
     pick_up(_trigger, _actor, "proves_TeteraPickUp")
   end
+  test()
 end
 
 function esfera_interactiva(_self, _player)
@@ -229,6 +230,10 @@ end
 
 ------------------------------------------- LEVEL -1 ------------------------------------------
 
+function lvl1_maquina_claus(_self, _player)
+  log('usant màquina')
+end
+
 -- CLAUS
 function get_key_green(_self, _actor)
   if _actor:get_name() == "Player" then
@@ -285,22 +290,22 @@ function validate_key(_self, _player)
     local l_name = _self:get_name()
     
     if l_name == "lvl1_unlock_green" then
-      if unlock(_player, "green", "lvl1_door03") then
+      if unlock(_player, "lvl1_key_green", "lvl1_door03") then
         _self:delete_component(BaseComponent.interactive)
       end
 
     elseif l_name == "lvl1_unlock_blue" then
-      if unlock(_player, "blue", "lvl1_door04") then
+      if unlock(_player, "lvl1_key_blue", "lvl1_door04") then
         _self:delete_component(BaseComponent.interactive)
       end
     
     elseif l_name == "lvl1_unlock_purple" then
-      if unlock(_player, "purple", "lvl1_door01") then
+      if unlock(_player, "lvl1_key_purple", "lvl1_door01") then
         _self:delete_component(BaseComponent.interactive)
       end
     
     elseif l_name == "lvl1_unlock_yellow" then
-      if unlock(_player, "yellow", "lvl1_door_final") then
+      if unlock(_player, "lvl1_key_yellow", "lvl1_door_final") then
         activate_entity("lvl1_miner07")
         _self:delete_component(BaseComponent.interactive)
       end
@@ -308,23 +313,24 @@ function validate_key(_self, _player)
   end
 end
 
-function unlock(_player, _color, _doorname)
+function unlock(_player, _keyname, _doorname)
   local player_controller = _player:get_component(BaseComponent.player_controller)
-  if player_controller:has_pickup("lvl1_key_" .. _color) then
-    local l_door = EM:get_entity(_doorname):get_component(BaseComponent.door)
-    if l_door then
+  local l_door = EM:get_entity(_doorname):get_component(BaseComponent.door)
+  if l_door and player_controller then
+    if player_controller:has_pickup(_keyname) then
       --unlock
       l_door:block(false)
+      
       --open
       send_open_door(_doorname, _player)
-      --remove key
-      player_controller:remove_pickup("lvl1_key_" .. _color)
       
+      --remove key
+      player_controller:remove_pickup(_keyname)
       
       return true
-    else
-      log("Error: al buscar la porta ".. _doorname)
     end
+  else
+    log("Error: al buscar la porta ".. _doorname .. " o bé al agafar el component playercontroller de " .. _player:get_name())
   end
   
   return false

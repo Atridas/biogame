@@ -792,6 +792,14 @@ utility BioUtility "Eon-Utility" width:160 height:549
 						--Interactive
 						l_params = XMLEntityInteractive l_instance &l_TagName
 						format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+						
+						--Maquina d'estats
+						if HasStateMachine l_instance then
+						(
+							--StateMachine
+							l_params = XMLEntityStateMachine l_instance &l_TagName
+							format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+						)
 					)
 					
 					--Destroyable
@@ -979,6 +987,14 @@ utility BioUtility "Eon-Utility" width:160 height:549
 					--Interactiu
 					l_params = XMLEntityInteractive l_instance &l_TagName
 					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--Maquina d'estats
+					if HasStateMachine l_instance then
+					(
+						--StateMachine
+						l_params = XMLEntityStateMachine l_instance &l_TagName
+						format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					)
 					
 					--Rotative
 					if IsRotative l_instance then

@@ -476,13 +476,30 @@ function XMLEntityInteractive _instance &_TagName =
 	format "%" (GetUserProp _instance "interactive") to:l_ss
 	append l_params #("action", l_ss)
 	
-	--destroyedResource
+	--billboard offset
 	if (GetUserProp _instance "interactive_billboard_y_offset") != undefined then
 	(
 		l_ss = "" as stringStream
 		format "%" (GetUserProp _instance "interactive_billboard_y_offset") to:l_ss
 		append l_params #("interactive_billboard_y_offset", l_ss)
 	)
+	
+	return l_params
+)
+
+--Genera els paràmetres d'un tag XML d'entitat Màquina d'estats. Conté:
+-- initial_state
+function XMLEntityStateMachine _instance &_TagName =
+(
+	local l_params = #()
+	local l_ss
+	
+	_TagName = "StateMachine"
+	
+	--initial_state
+	l_ss = "" as stringStream
+	format "%" (GetUserProp _instance "state_machine") to:l_ss
+	append l_params #("initial_state", l_ss)
 	
 	return l_params
 )
