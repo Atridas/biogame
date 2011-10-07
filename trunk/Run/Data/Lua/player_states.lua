@@ -38,6 +38,7 @@ State_Player_Morint = {}
 State_Player_Mort = {}
 State_Player_Escut = {}
 State_Player_Force = {}
+State_Player_Force_Cobertura = {}
 
 State_Player_Cobertura_Baixa = {}
 State_Player_Cobertura_Baixa_Tocat = {}
@@ -46,6 +47,15 @@ State_Player_Cobertura_Alta = {}
 State_Player_Cobertura_Alta_Sortir = {}
 
 State_Player_Cobertura_Baixa_Apuntar = {}
+
+
+finite = function(_f)
+  if _f ~= _f or _f == math.inf or -_f == math.inf then
+    return false
+  else
+    return true
+  end
+end
 
 -------------------------------------------------------------------------------------------------
 camera_player = function(_jugador, _dt, _multiplier)
@@ -75,7 +85,11 @@ camera_player = function(_jugador, _dt, _multiplier)
     vel = vel / Player_Constants["Vel Threshold"]
   end
   
-  vel = 1
+  if not finite(vel) then
+    log("xungo! " .. vel)
+    vel = 1
+  end
+  --vel = 1
   
   
   pitch = object3d:get_pitch()
@@ -606,6 +620,49 @@ end
 
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
+-- Force cobertura!!!! -----------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+
+
+State_Player_Force_Cobertura['Enter'] = function(_jugador)
+
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  local animation = _jugador:get_component(BaseComponent.animation)
+  --animation:play_cycle(Player_Constants["Escut Idle"], 0.3)
+  animation:clear_all_cycles(0.1)
+  animation:play_cycle(Player_Constants["Escut"], 0.1)
+  player_controller.time = 0
+  player_controller:force()
+  SOUND:play_sample(Player_Constants["So force"])
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Force_Cobertura['Exit'] = function(_jugador)
+  
+  --local animation = _jugador:get_component(BaseComponent.animation)
+  --animation:stop_cycle(Player_Constants["Escut"], 0.2)
+  
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Force_Cobertura['Update'] = function(_jugador, _dt)
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  
+  player_controller.time = player_controller.time + _dt
+  
+  if player_controller.time > 0.3 then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Baixa_Apuntar')
+  end
+  
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Force_Cobertura['Receive'] = function(_jugador, _event)
+end
+
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
 -- Morint!!!! -----------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
@@ -1020,11 +1077,19 @@ State_Player_Cobertura_Baixa_Apuntar['Update'] = function(_jugador, _dt)
   end
   
   if ACTION_MANAGER:is_action_active('Grenade') then
-     animation:play(player_constants["disparar"], 0.3, 1.0, false)
+     animation:play(Player_Constants["Disparar"], 0.3, 1.0, false)
      player_controller:shoot_grenade(Player_Constants["Temps Grenade"])
-     sound:play_sample(player_constants["so granada"])
+     SOUND:play_sample(Player_Constants["So granada"])
   end
   
+  
+  if ACTION_MANAGER:is_action_active('Shield') and player_controller.force_active then
+    --if _jugador:get_component(BaseComponent.shield):is_ready() then
+      _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Force_Cobertura')
+      
+      return
+    --end
+  end
   --local player_controller = _jugador:get_component(BaseComponent.player_controller)
 
   --player_controller.time = player_controller.time + _dt

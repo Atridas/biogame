@@ -80,12 +80,16 @@ function granada(_self)
     local l_explosion = EM:init_emiter("explosio foc", l_position+Vect3f(0, 1.0, 0), Vect3f(1.5, 1.5, 1.5), 1.5, Vect3f(0,1,0))
     ComponentOmni.add_to_entity(l_explosion, Vect3f(0.0, 0.0, 0.0), Color(2.0,2.0,2.0, 1.0), 3, 10,"llum_bido_explosiu_update")
 	
-	l_render:set_active(false)
-	l_exp:set_active(false)
-	l_omni:set_active(false)
-	l_sphere:set_active(false)
+	  l_render:set_active(false)
+	  l_exp:set_active(false)
+	  l_omni:set_active(false)
     
+    
+    --log('bum')
     SOUND:play_sample('explosion')
+    
+    --aixo peta
+    --l_sphere:set_active(false)
   end
 end
 

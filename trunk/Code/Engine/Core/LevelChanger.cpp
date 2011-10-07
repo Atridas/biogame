@@ -123,16 +123,24 @@ void CLevelChanger::Update(float _fElapsedTime)
     
 
     l_pCore->m_pIAManager->CompleteGraph();
-    
-    CRenderer* l_pRenderer = l_pCore->GetRenderer();
-    l_pRenderer->DeactivateRenderPath(l_pLevel->RenderPath);
-    for(set<string>::iterator l_it = m_RenderPathsToActivate.begin(); l_it != m_RenderPathsToActivate.end(); ++l_it)
-    {
-      l_pRenderer->ActivateRenderPath(*l_it);
-    }
-
-    m_szNewLevel = "";
     m_bChanging = false;
+    m_iCountdown = INITIAL_LEVEL_CHANGER_COUNTDOWN;
+  }
+  else if(m_iCountdown > 0)
+  {
+    m_iCountdown--;
+    if(m_iCountdown == 0)
+    {
+      SLevel* l_pLevel = GetResource(m_szNewLevel);
+      CCore* l_pCore = CORE;
+      CRenderer* l_pRenderer = l_pCore->GetRenderer();
+      l_pRenderer->DeactivateRenderPath(l_pLevel->RenderPath);
+      for(set<string>::iterator l_it = m_RenderPathsToActivate.begin(); l_it != m_RenderPathsToActivate.end(); ++l_it)
+      {
+        l_pRenderer->ActivateRenderPath(*l_it);
+      }
+      m_szNewLevel = "";
+    }
   }
   else if(m_szNewLevel != "")
   {

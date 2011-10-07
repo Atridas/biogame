@@ -15,6 +15,7 @@ struct SLevel
   vector<string> Lights;
 };
 
+#define INITIAL_LEVEL_CHANGER_COUNTDOWN 60
 
 class CLevelChanger: 
   private CMapManager<SLevel>
@@ -40,6 +41,7 @@ private:
   string m_szCurrentLevel;
 
   bool m_bChanging;
+  int  m_iCountdown;
   set<string> m_RenderPathsToActivate;
 
 };
