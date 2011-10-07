@@ -202,6 +202,8 @@ PS_OUTPUT NewPS(TNEW_PS _in, float _fFace : VFACE)
     #else
       #if defined( NS_COLOR )
         float4 l_DiffuseColor = _in.Color;
+      #else
+        float4 l_DiffuseColor = float4(0, 0, 0, 0);
       #endif
     #endif
 

@@ -2,6 +2,7 @@
 //#include "PixelShaders.fx"
 
 #define NS_LIGHTING
+#define NS_COLOR
 
 #include "NewShaders.fx"
 

@@ -112,6 +112,7 @@
     <ClCompile Include="ComponentRotative.cpp" />
     <ClCompile Include="ComponentShield.cpp" />
     <ClCompile Include="ComponentSoundEmiter.cpp" />
+    <ClCompile Include="ComponentSoundListener.cpp" />
     <ClCompile Include="ComponentSpawner.cpp" />
     <ClCompile Include="ComponentStateMachine.cpp" />
     <ClCompile Include="ComponentTrigger.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="include\ComponentRotative.h" />
     <ClInclude Include="include\ComponentShield.h" />
     <ClInclude Include="include\ComponentSoundEmiter.h" />
+    <ClInclude Include="include\ComponentSoundListener.h" />
     <ClInclude Include="include\ComponentSpawner.h" />
     <ClInclude Include="include\ComponentStateMachine.h" />
     <ClInclude Include="include\ComponentTrigger.h" />

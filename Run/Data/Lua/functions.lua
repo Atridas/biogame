@@ -58,6 +58,7 @@ function bido_explosiu(_self)
     local l_explosion = EM:init_emiter("explosio foc", l_position+Vect3f(0, 1.0, 0), Vect3f(1.5, 1.5, 1.5), 1.5, Vect3f(0,1,0))
     ComponentOmni.add_to_entity(l_explosion, Vect3f(0.0, 0.0, 0.0), Color(2.0,2.0,2.0, 1.0), 3, 10,"llum_bido_explosiu_update")
     
+    --SOUND:play_sample_3D('explosion', l_position)
     SOUND:play_sample('explosion')
   end
 end

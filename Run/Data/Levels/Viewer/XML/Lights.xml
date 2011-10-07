@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <lights ambient="0.3 0.3 0.3">
-  <light type="omni" name="lvl2_video_Omni01" pos="4.50994 2.59106 9.16895" color="0.854902 0.313726 0.0509804" att_start_range="2.75" att_end_range="5.27871" render_shadows="false" />
+	<light type="spot" direction="0.0 -2.10961 0.0" angle="10.0" fall_off="50.0" name="lvl2_lab_Spot01" pos="-11.9471 3.63118 -8.60123" color="0.862745 0.764706 0.54902" att_start_range="2.0" att_end_range="5.0" render_shadows="false" />
+	<light type="spot" direction="-0.00507259 -2.08829 -0.00219774" angle="23.0" fall_off="74.0" name="lvl2_lab_Spot04" pos="-10.1467 2.43994 -2.66102" color="0.882353 0.745098 0.329412" att_start_range="0.0" att_end_range="3.0" render_shadows="false" />
+	<light type="omni" name="lvl2_lab_Omni01" pos="-14.5143 1.68523 -4.0126" color="0.176471 0.921569 0.117647" att_start_range="2.0" att_end_range="6.0" render_shadows="false" />
+	<light type="omni" name="lvl2_lab_Omni02" pos="-8.21434 1.68523 0.518984" color="0.176471 0.921569 0.117647" att_start_range="2.0" att_end_range="6.0" render_shadows="false" />
+	<light type="spot" direction="-2.81533 -0.0313354 -0.0520287" angle="23.0" fall_off="120.0" name="lvl2_lab_Spot05" pos="-4.83499 3.19533 -7.74679" color="0.670588 0.243137 0.243137" att_start_range="2.0" att_end_range="7.0" render_shadows="false" />
+	<light type="omni" name="lvl2_lab_Omni03" pos="-5.07491 3.19953 -7.74089" color="1.0 0.211765 0.211765" att_start_range="0.0" att_end_range="1.32" render_shadows="false" />
 </lights>

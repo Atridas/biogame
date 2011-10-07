@@ -4,9 +4,8 @@ Player_Constants = {}
 
 
 --mouse
-Player_Constants["Mouse Speed Divisor"] = 2.5
-Player_Constants["Mouse Max Speed"] = 0.75
-
+Player_Constants["Vel Threshold"] = 1000
+Player_Constants["Apuntant Multiplier"] = 0.5
 
 --velocitats
 Player_Constants["Walk Speed"] = 2
@@ -49,7 +48,7 @@ State_Player_Cobertura_Alta_Sortir = {}
 State_Player_Cobertura_Baixa_Apuntar = {}
 
 -------------------------------------------------------------------------------------------------
-camera_player = function(_jugador, _dt)
+camera_player = function(_jugador, _dt, _multiplier)
   --log('a saco 2')
   local pitch
   local yaw
@@ -58,29 +57,33 @@ camera_player = function(_jugador, _dt)
 
   local vec = INPUT_MANAGER:get_mouse_delta()
   
-  if _dt > 1/60 then
-    _dt = 1/60
+  --if _dt > 1/60 then
+  --  _dt = 1/60
+  --end
+  
+  
+  local velx = vec.x / _dt
+  local vely = vec.y / _dt
+  
+  local vel = math.sqrt(velx*velx + vely*vely)
+  
+  
+  
+  if vel > Player_Constants["Vel Threshold"] then
+    vel = 1
+  else
+    vel = vel / Player_Constants["Vel Threshold"]
   end
   
+  vel = 1
   
-  --local velx = vec.x * _dt
-  --local vely = vec.y * _dt
-  --
-  --local vel = math.sqrt(velx*velx + vely*vely) / Player_Constants["Mouse Speed Divisor"]
-  --
-  --
-  --
-  --if vel > Player_Constants["Mouse Max Speed"] then
-  --  vel = Player_Constants["Mouse Max Speed"]
-  --end
-  local vel = 1
   
   pitch = object3d:get_pitch()
   yaw   = object3d:get_yaw()
   
-  yaw = yaw - (vec.x * _dt) * vel
+  yaw = yaw - (vec.x * _dt) * vel * _multiplier
 
-  pitch = pitch - (vec.y * _dt) * vel
+  pitch = pitch - (vec.y * _dt) * vel * _multiplier
   
   if pitch < -1 then
     pitch = -1;
@@ -120,7 +123,6 @@ end
 -------------------------------------------------------------------------------------------------
 State_Player_Neutre['Update'] = function(_jugador, _dt)
   
-  local pitch, yaw, object3d = camera_player(_jugador, _dt)
   local moviment = _jugador:get_component(BaseComponent.movement)
   
   local animation = _jugador:get_component(BaseComponent.animation)
@@ -135,6 +137,7 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   local isBack = false
   local isRunning = false
   local isAiming = false
+  local mouseSpeed = 1
   
   if ACTION_MANAGER:is_action_active('Cover') then
     if player_controller:cover() then
@@ -151,10 +154,12 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
     isAiming = true
     --camera:set_zoom(1.0,12.0)
     camera:set_fov(44.0,14.0)
+    mouseSpeed = Player_Constants["Apuntant Multiplier"]
   else
     isAiming = false
     --camera:set_zoom(1.7,6.0)
     camera:set_fov(55.0,14.0)
+    mouseSpeed = 1
   end
   
   if ACTION_MANAGER:is_action_active('Shield') and player_controller.force_active then
@@ -169,6 +174,8 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
     log('using')
     player_controller:use()
   end
+  
+  local pitch, yaw, object3d = camera_player(_jugador, _dt, mouseSpeed)
   
   if ACTION_MANAGER:is_action_active('MoveLeft') then
     left = Vect3f(math.cos(yaw + math.pi / 2), 0, math.sin(yaw + math.pi / 2) )
@@ -347,7 +354,7 @@ end
 -------------------------------------------------------------------------------------------------
 State_Player_Apuntar['Update'] = function(_jugador, _dt)
   
-  local pitch, yaw, object3d = camera_player(_jugador, _dt)
+  local pitch, yaw, object3d = camera_player(_jugador, _dt, Player_Constants["Apuntant Multiplier"])
   local moviment = _jugador:get_component(BaseComponent.movement)
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
@@ -479,7 +486,7 @@ State_Player_Tocat['Update'] = function(_jugador, _dt)
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   player_controller.time = player_controller.time + _dt
   
-  local pitch, yaw, object3d = camera_player(_jugador, _dt)
+  local pitch, yaw, object3d = camera_player(_jugador, _dt, 1)
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   
   if player_controller.time >= Player_Constants["Temps Tocat"] then
@@ -677,7 +684,7 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Mort['Update'] = function(_jugador, _dt)
-  camera_player(_jugador, _dt)
+  camera_player(_jugador, _dt, 1)
   
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   
@@ -747,7 +754,7 @@ end
 -------------------------------------------------------------------------------------------------
 State_Player_Cobertura_Baixa['Update'] = function(_jugador, _dt)
 
-  local pitch, yaw, object3d = camera_player(_jugador, _dt)
+  local pitch, yaw, object3d = camera_player(_jugador, _dt, Player_Constants["Apuntant Multiplier"])
   
   if ACTION_MANAGER:is_action_active('Cover') then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
@@ -815,7 +822,7 @@ State_Player_Cobertura_Baixa_Tocat['Update'] = function(_jugador, _dt)
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   player_controller.time = player_controller.time + _dt
   
-  local pitch, yaw, object3d = camera_player(_jugador, _dt)
+  local pitch, yaw, object3d = camera_player(_jugador, _dt, Player_Constants["Apuntant Multiplier"])
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   
   if player_controller.time >= Player_Constants["Temps Tocat"] then
@@ -875,7 +882,7 @@ end
 -------------------------------------------------------------------------------------------------
 State_Player_Cobertura_Alta['Update'] = function(_jugador, _dt)
 
-  local pitch, yaw, object3d = camera_player(_jugador, _dt)
+  local pitch, yaw, object3d = camera_player(_jugador, _dt, Player_Constants["Apuntant Multiplier"])
   
   if ACTION_MANAGER:is_action_active('Cover') then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Alta_Sortir')
@@ -929,7 +936,7 @@ end
 -------------------------------------------------------------------------------------------------
 State_Player_Cobertura_Alta_Sortir['Update'] = function(_jugador, _dt)
 
-  local pitch, yaw, object3d = camera_player(_jugador, _dt)
+  local pitch, yaw, object3d = camera_player(_jugador, _dt, Player_Constants["Apuntant Multiplier"])
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
 
   player_controller.time = player_controller.time + _dt
@@ -998,7 +1005,7 @@ end
 -------------------------------------------------------------------------------------------------
 State_Player_Cobertura_Baixa_Apuntar['Update'] = function(_jugador, _dt)
 
-  local pitch, yaw, object3d = camera_player(_jugador, _dt)
+  local pitch, yaw, object3d = camera_player(_jugador, _dt, Player_Constants["Apuntant Multiplier"])
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
   

@@ -40,7 +40,7 @@ void CBiotestProcess::Update(float _fElapsedTime)
   m_pSpotLight->SetPosition(m_pPlayerPos->GetPosition());
   m_pSpotLight->SetDirection(m_pCamera->GetDirection());
 
-  CORE->GetSoundManager()->UpdateSound3DSystem(m_pPlayerPos->GetPosition(),m_pCamera->GetDirection());
+  //CORE->GetSoundManager()->UpdateSound3DSystem(m_pPlayerPos->GetPosition(),m_pCamera->GetDirection());
 
   m_pEmiter->Update(_fElapsedTime);
 }

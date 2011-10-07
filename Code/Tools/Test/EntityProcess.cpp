@@ -146,7 +146,7 @@ void CEntityProcess::Update(float _fElapsedTime)
   //m_pSpotLight->SetPosition(m_pCamera->GetEye());
   //m_pSpotLight->SetDirection(m_pCamera->GetDirection());
 
-  CORE->GetSoundManager()->UpdateSound3DSystem(m_pPlayerPos->GetPosition(),m_pCamera->GetDirection());
+  //CORE->GetSoundManager()->UpdateSound3DSystem(m_pPlayerPos->GetPosition(),m_pCamera->GetDirection());
 
   CSpotLight* l_pSpotLight = (CSpotLight*)CORE->GetLightManager()->GetResource("FreeModeLight");
   

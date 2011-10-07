@@ -35,7 +35,7 @@
 #include "ComponentBillboard.h"
 #include "ComponentOmni.h"
 #include "ComponentBGMController.h"
-#include "ComponentPhysxSphere.h"
+#include "ComponentSoundListener.h"
 #include "ParticleConstants.h"
 #include "ComponentPhysxSphere.h"
 #include "PhysicActor.h"
@@ -676,6 +676,8 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
   }
 
   CComponentRagdoll::AddToEntity(l_pPlayer, "Data/Animated Models/Riggle/Skeleton.xml", ECG_RAGDOLL_PLAYER);
+
+  CComponentSoundListener::AddToEntity(l_pPlayer);
 
   return l_pPlayer;
 }
