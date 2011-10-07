@@ -151,6 +151,9 @@
     <Filter Include="EntitySystem\Components\ComponentSoundEmiter">
       <UniqueIdentifier>{e6a717c1-bd41-4992-a159-dc898fa9dcbf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentSoundListener">
+      <UniqueIdentifier>{8d1d71a5-b0c3-412e-9c8f-d73b4c145fb2}</UniqueIdentifier>
+    </Filter>
     <Filter Include="EntitySystem\Components\ComponentPhysXActor\ComponentPhysXSphere">
       <UniqueIdentifier>{6f982283-1173-4529-b1f1-46158df79612}</UniqueIdentifier>
     </Filter>
@@ -311,6 +314,9 @@
     </ClCompile>
     <ClCompile Include="ComponentSoundEmiter.cpp">
       <Filter>EntitySystem\Components\ComponentSoundEmiter</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentSoundListener.cpp">
+      <Filter>EntitySystem\Components\ComponentSoundListener</Filter>
     </ClCompile>
     <ClCompile Include="ComponentPhysxSphere.cpp">
       <Filter>EntitySystem\Components\ComponentPhysXActor\ComponentPhysXSphere</Filter>
@@ -481,6 +487,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentSoundEmiter.h">
       <Filter>EntitySystem\Components\ComponentSoundEmiter</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentSoundListener.h">
+      <Filter>EntitySystem\Components\ComponentSoundListener</Filter>
     </ClInclude>
     <ClInclude Include="include\ComponentPhysxSphere.h">
       <Filter>EntitySystem\Components\ComponentPhysXActor\ComponentPhysXSphere</Filter>

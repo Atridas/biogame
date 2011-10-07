@@ -353,9 +353,13 @@ void CEntityManager::DeliverEvent(const SEvent& _Event)
     {
       //TODO asserts i tal...
       CGameEntity* l_pEntity = m_vEntities[_Event.Receiver];
-      if(l_pEntity->IsActive())
+
+      if(l_pEntity)
       {
-        l_pEntity->ReceiveEvent(_Event);
+        if(l_pEntity->IsActive())
+        {
+          l_pEntity->ReceiveEvent(_Event);
+        }
       }
     }
   }

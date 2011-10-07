@@ -428,7 +428,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
 
       // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPhysXSphere, CBaseComponent>("ComponentPhysXSphere")
-      .def("set_active",        &CComponentPhysXBox::SetActive)
+      .def("set_active",        &CComponentPhysXSphere::SetActive)
 
   ];
 }

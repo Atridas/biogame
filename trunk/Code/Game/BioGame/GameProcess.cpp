@@ -38,8 +38,8 @@ void CGameProcess::Update(float _fElapsedTime)
   if(l_pPlayerEntity)
   {
     m_pCamera = l_pPlayerEntity->GetComponent<CComponent3rdPSCamera>()->GetCamera();
-    CObject3D* m_pPlayerPos = l_pPlayerEntity->GetComponent<CComponentObject3D>(CBaseComponent::ECT_OBJECT_3D);
-    CORE->GetSoundManager()->UpdateSound3DSystem(m_pPlayerPos->GetPosition(),m_pCamera->GetDirection());
+    //CObject3D* m_pPlayerPos = l_pPlayerEntity->GetComponent<CComponentObject3D>(CBaseComponent::ECT_OBJECT_3D);
+    //CORE->GetSoundManager()->UpdateSound3DSystem(m_pPlayerPos->GetPosition(),m_pCamera->GetDirection());
   } else {
     m_pCamera = 0;
   }
