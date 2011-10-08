@@ -78,25 +78,37 @@
 
 
 
-  <!--.......TEST ACTIONS.........................................-->
+  <!--.......ACTIONS menu inici.........................................-->
 
 
-  <action name="Init Max">
+  <action name="Init -2">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_1"/>
   </action>
-  <action name="Init Mid">
+  <action name="Init -2">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_RETURN"/>
+  </action>
+  <action name="Init -1">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_2"/>
   </action>
-  <action name="Init Low">
+  <action name="Init Hangar">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_3"/>
   </action>
 
-  <action name="Hangar">
+  
+  <action name="Howto">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_H"/>
   </action>
+  <action name="Credits">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_C"/>
+  </action>
+  <!--.......TEST ACTIONS.........................................-->
   
-  <action name="ToggleDebug">
-    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN" Code="KEY_P"/>
+  <action name="Escape">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_ESCAPE"/>
+  </action>
+  
+  <action name="Pause">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_P"/>
   </action>
   
   <action name="Run">

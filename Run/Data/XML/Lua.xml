@@ -16,6 +16,7 @@
     <file path="Data/Lua/door_states.lua" />
     <file path="Data/Lua/key_machine.lua" />
     <file path="Data/Lua/enemy_collisions.lua" />
+    <file path="Data/Lua/main_menu.lua" />
     
     <file path="Data/Lua/test.lua" />
   </files>

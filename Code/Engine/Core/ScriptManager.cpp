@@ -504,7 +504,9 @@ void CScriptManager::RegisterLUAFunctions()
         .def("get_sound_manager",               &CCore::GetSoundManager)
         .def("get_level_changer",               &CCore::GetLevelChanger)
         .def("get_renderer",                    &CCore::GetRenderer)
-        .def("get_effect_manager",              &CCore::GetEffectManager);
+        .def("get_effect_manager",              &CCore::GetEffectManager)
+        .def("set_exit",                        &CCore::SetExit)
+        .def("set_pause",                       &CCore::SetPause);
   
   RegisterCore_Entities(l_core);
   RegisterCore_IA(l_core);

@@ -119,7 +119,8 @@ void CComponentBGMController::SetCurrentSong(const EMusicState _eState, bool _bR
   m_szCurrentMusic = GetSongInfo(_eState);
 
   //es comença des del principi
-  l_pSM->PlayMusic(m_szCurrentMusic, _bReset);
+  //l_pSM->PlayMusic(m_szCurrentMusic, _bReset);
+  l_pSM->ChangeMusic(m_szCurrentMusic, 0, _bReset);
 }
 
 void CComponentBGMController::PlayNextSong(const EMusicState _eState)

@@ -86,6 +86,8 @@ public:
 
   virtual void DebugRender(CRenderManager*)        {};
 
+  virtual bool UpdateInPause() const {return false;};
+
 protected:
   CBaseComponent():m_pEntity(0),m_bActive(true) {};
   void SetEntity(CGameEntity* _pEntity);

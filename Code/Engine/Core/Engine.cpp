@@ -62,6 +62,11 @@ void CEngine::Release()
 
 void CEngine::Update()
 {
+  if(m_pCore->GetExit())
+  {
+    SetExit(true);
+    return;
+  }
 	m_pCore->Update();
   if(!m_pCore->GetLevelChanger()->ChangingLevel())
   {

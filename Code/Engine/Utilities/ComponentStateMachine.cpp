@@ -27,6 +27,8 @@ bool CComponentStateMachine::Init(CGameEntity* _pEntity, const string& _pEstatIn
 
   m_pStateMachine->SetCurrentState(_pEstatInicial);
 
+  m_bUpdatePause = false;
+
   SetOk(true);
   return IsOk();
 }

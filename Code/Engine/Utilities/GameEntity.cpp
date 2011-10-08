@@ -2,6 +2,8 @@
 
 #include <sstream>
 
+#include "Core.h"
+
 void CGameEntity::AddComponent(CBaseComponent* _pComponent)
 {
   assert(m_vNewComponents.find(_pComponent->GetType()) == m_vNewComponents.end());
@@ -79,10 +81,12 @@ void CGameEntity::PreUpdate(float deltaTime)
   vector<CBaseComponent*>::iterator l_it = m_vComponents.begin();
   vector<CBaseComponent*>::iterator l_end = m_vComponents.end();
 
+  bool l_bPause = CORE->GetPause();
+
   for(; l_it != l_end; ++l_it)
   {
     CBaseComponent* l_pComponent = (*l_it);
-    if(l_pComponent->IsActive())
+    if(l_pComponent->IsActive() && (!l_bPause || l_pComponent->UpdateInPause()))
     {
       l_pComponent->PreUpdate(deltaTime);
     }
@@ -95,10 +99,12 @@ void CGameEntity::Update(float deltaTime)
   vector<CBaseComponent*>::iterator l_it = m_vComponents.begin();
   vector<CBaseComponent*>::iterator l_end = m_vComponents.end();
 
+  bool l_bPause = CORE->GetPause();
+
   for(; l_it != l_end; ++l_it)
   {
     CBaseComponent* l_pComponent = (*l_it);
-    if(l_pComponent->IsActive())
+    if(l_pComponent->IsActive() && (!l_bPause || l_pComponent->UpdateInPause()))
     {
       l_pComponent->Update(deltaTime);
     }
@@ -111,10 +117,12 @@ void CGameEntity::UpdatePrePhysX(float deltaTime)
   vector<CBaseComponent*>::iterator l_it = m_vComponents.begin();
   vector<CBaseComponent*>::iterator l_end = m_vComponents.end();
 
+  bool l_bPause = CORE->GetPause();
+
   for(; l_it != l_end; ++l_it)
   {
     CBaseComponent* l_pComponent = (*l_it);
-    if(l_pComponent->IsActive())
+    if(l_pComponent->IsActive() && (!l_bPause || l_pComponent->UpdateInPause()))
     {
       l_pComponent->UpdatePrePhysX(deltaTime);
     }
@@ -127,10 +135,12 @@ void CGameEntity::UpdatePostPhysX(float deltaTime)
   vector<CBaseComponent*>::iterator l_it = m_vComponents.begin();
   vector<CBaseComponent*>::iterator l_end = m_vComponents.end();
 
+  bool l_bPause = CORE->GetPause();
+
   for(; l_it != l_end; ++l_it)
   {
     CBaseComponent* l_pComponent = (*l_it);
-    if(l_pComponent->IsActive())
+    if(l_pComponent->IsActive() && (!l_bPause || l_pComponent->UpdateInPause()))
     {
       l_pComponent->UpdatePostPhysX(deltaTime);
     }
@@ -143,10 +153,12 @@ void CGameEntity::UpdatePostAnim(float deltaTime)
   vector<CBaseComponent*>::iterator l_it = m_vComponents.begin();
   vector<CBaseComponent*>::iterator l_end = m_vComponents.end();
 
+  bool l_bPause = CORE->GetPause();
+
   for(; l_it != l_end; ++l_it)
   {
     CBaseComponent* l_pComponent = (*l_it);
-    if(l_pComponent->IsActive())
+    if(l_pComponent->IsActive() && (!l_bPause || l_pComponent->UpdateInPause()))
     {
       l_pComponent->UpdatePostAnim(deltaTime);
     }
@@ -159,10 +171,12 @@ void CGameEntity::PostUpdate(float deltaTime)
   vector<CBaseComponent*>::iterator l_it = m_vComponents.begin();
   vector<CBaseComponent*>::iterator l_end = m_vComponents.end();
 
+  bool l_bPause = CORE->GetPause();
+
   for(; l_it != l_end; ++l_it)
   {
     CBaseComponent* l_pComponent = (*l_it);
-    if(l_pComponent->IsActive())
+    if(l_pComponent->IsActive() && (!l_bPause || l_pComponent->UpdateInPause()))
     {
       l_pComponent->PostUpdate(deltaTime);
     }
