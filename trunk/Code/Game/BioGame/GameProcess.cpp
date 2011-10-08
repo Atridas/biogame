@@ -123,28 +123,30 @@ void CGameProcess::Release()
 
 bool CGameProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _szAction)
 {
-  if(m_bMenuPrincipal && strcmp(_szAction, "Init Max") == 0)
-  {
-    CORE->GetRenderer()->SetUniqueRenderPath("HDR");
-    CORE->GetRenderer()->ActivateRenderPath("Antialiasing");
-    CORE->GetLevelChanger()->SetNewLevel("Nivell -2");
-    m_bMenuPrincipal = false;
-    return true;
-  }
-  else if(m_bMenuPrincipal && strcmp(_szAction, "Init Med") == 0)
-  {
-    CORE->GetRenderer()->SetUniqueRenderPath("deferred");
-    CORE->GetLevelChanger()->SetNewLevel("Nivell -2");
-    m_bMenuPrincipal = false;
-    return true;
-  }
-  else if(m_bMenuPrincipal && strcmp(_szAction, "Init Low") == 0)
-  {
-    CORE->GetRenderer()->SetUniqueRenderPath("forward");
-    CORE->GetLevelChanger()->SetNewLevel("Nivell -2");
-    m_bMenuPrincipal = false;
-    return true;
-  }
-
+  //if(m_bMenuPrincipal && strcmp(_szAction, "Init -2") == 0)
+  //{
+  //  CORE->GetRenderer()->SetUniqueRenderPath("HDR");
+  //  CORE->GetRenderer()->ActivateRenderPath("Antialiasing");
+  //  CORE->GetLevelChanger()->SetNewLevel("Nivell -2");
+  //  m_bMenuPrincipal = false;
+  //  return true;
+  //}
+  //else if(m_bMenuPrincipal && strcmp(_szAction, "Init -1") == 0)
+  //{
+  //  CORE->GetRenderer()->SetUniqueRenderPath("HDR");
+  //  CORE->GetRenderer()->ActivateRenderPath("Antialiasing");
+  //  CORE->GetLevelChanger()->SetNewLevel("Nivell -1");
+  //  m_bMenuPrincipal = false;
+  //  return true;
+  //}
+  //else if(m_bMenuPrincipal && strcmp(_szAction, "Init Hangar") == 0)
+  //{
+  //  CORE->GetRenderer()->SetUniqueRenderPath("HDR");
+  //  CORE->GetRenderer()->ActivateRenderPath("Antialiasing");
+  //  CORE->GetLevelChanger()->SetNewLevel("Hangar");
+  //  m_bMenuPrincipal = false;
+  //  return true;
+  //}
+  
 	return false;
 }

@@ -181,6 +181,8 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
 
   LOGGER->SaveLogsInFile();
 
+  m_bExit = false;
+
   return IsOk();
 }
 
@@ -228,8 +230,11 @@ void CCore::Update()
   float l_fElapsedTime = m_pTimer->GetElapsedTime();
   if(!m_pLevelChanger->ChangingLevel())
   {
-
-    m_pPhysicsManager->WaitForSimulation();  
+    
+    if(!m_bPaused)
+    {
+      m_pPhysicsManager->WaitForSimulation(); 
+    }
 
     m_pEntityManager->UpdatePostPhysX(l_fElapsedTime);
 
@@ -248,12 +253,15 @@ void CCore::Update()
     m_pEntityManager->Update(l_fElapsedTime);
     m_pEntityManager->UpdatePrePhysX(l_fElapsedTime);
 
-    m_pPhysicsManager->Update(l_fElapsedTime);// -------------
-    //m_pPhysicsManager->WaitForSimulation();
+    if(!m_bPaused)
+    {
+      m_pPhysicsManager->Update(l_fElapsedTime);// -------------
+      //m_pPhysicsManager->WaitForSimulation();
 
-    m_pEmiterManager->Update(l_fElapsedTime);
+      m_pEmiterManager->Update(l_fElapsedTime);
 
-    m_pPortalManager->Update(l_fElapsedTime);
+      m_pPortalManager->Update(l_fElapsedTime);
+    }
   }
 
   m_pLevelChanger->Update(l_fElapsedTime);

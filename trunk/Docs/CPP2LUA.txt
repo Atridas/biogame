@@ -307,6 +307,9 @@ ENGINE
         get_effect_manager
         CEffectManager* GetEffectManager() const
         
+        set_exit
+        void SetExit(bool _bExit)
+        
     Class:
       Process
       CProcess

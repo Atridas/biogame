@@ -47,6 +47,7 @@ extern "C"
 #include "ComponentLifetime.h"
 #include "OmniLight.h"
 #include "ComponentPhysxSphere.h"
+#include "ComponentBGMController.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -78,6 +79,13 @@ void SetGodMode(bool _bGodMode)
     l_pPlayer->GetComponent<CComponentPlayerController>()->SetGodMode(_bGodMode);
 }
 
+void SetSong(CComponentBGMController::EMusicState _song)
+{
+  CGameEntity* l_pLC = ENTITY_MANAGER->GetEntity("LevelController");
+  if(l_pLC)
+    l_pLC->GetComponent<CComponentBGMController>()->SetCurrentSong(_song);
+}
+
 // ----------------------------------------------------
 
 void RegisterEntitiesToLua(lua_State* _pLS)
@@ -85,6 +93,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
   module(_pLS) [
     //globals
     def("god_mode", &SetGodMode)
+    ,def("set_song", &SetSong)
 
     //Entities
     ,class_<SEventInfo>("EventInfo")
@@ -155,7 +164,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("billboard",            CBaseComponent::ECT_BILLBOARD),
           value("omni",                 CBaseComponent::ECT_OMNI),
           value("life_time",            CBaseComponent::ECT_LIFETIME),
-          value("physx_sphere",         CBaseComponent::ECT_PHYSXSPHERE)
+          value("physx_sphere",         CBaseComponent::ECT_PHYSXSPHERE),
+          value("bgm",                  CBaseComponent::ECT_BGM)
       ]
       .def("get_type",     &CBaseComponent::GetType)
       .def("get_entity",   &CBaseComponent::GetEntity)
@@ -429,6 +439,23 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPhysXSphere, CBaseComponent>("ComponentPhysXSphere")
       .def("set_active",        &CComponentPhysXSphere::SetActive)
+
+
+      // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentBGMController, CBaseComponent>("ComponentBGMController")
+      .def("set_active",        &CComponentBGMController::SetActive)
+      .def("set_current_song",  &CComponentBGMController::SetCurrentSong)
+      .enum_("ComponentType")
+      [
+          value("init_menu",           CComponentBGMController::EMS_INIT_MENU),
+          value("main_menu",           CComponentBGMController::EMS_MAIN_MENU),
+          value("init_level",          CComponentBGMController::EMS_INIT_LEVEL),
+          value("explore",             CComponentBGMController::EMS_EXPLORE),
+          value("battle",              CComponentBGMController::EMS_BATTLE),
+          value("battle_end",          CComponentBGMController::EMS_BATTLE_END),
+          value("battle_to_explore",   CComponentBGMController::EMS_BATTLE_TO_EXPLORE),
+          value("rr",                  CComponentBGMController::EMS_RR)
+      ]
 
   ];
 }

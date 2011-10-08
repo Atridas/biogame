@@ -17,7 +17,8 @@ public:
     EMS_EXPLORE,
     EMS_BATTLE,
     EMS_BATTLE_END,
-    EMS_BATTLE_TO_EXPLORE
+    EMS_BATTLE_TO_EXPLORE,
+    EMS_RR
   };
 
   ~CComponentBGMController() {Done();}
@@ -32,7 +33,8 @@ public:
   void Update(float _fDeltaTime);
 
   virtual void ReceiveEvent(const SEvent& _Event);
-
+  
+  virtual bool UpdateInPause() const {return true;};
 protected:
 
   CComponentBGMController(): m_iAliveEnemy(0), m_eCurrentMusic(CComponentBGMController::EMS_MAIN_MENU), m_szCurrentMusic(""), m_bPlaying(false) {};

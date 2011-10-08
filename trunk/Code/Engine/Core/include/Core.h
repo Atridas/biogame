@@ -60,7 +60,8 @@ public:
                                                   m_pStaticMeshManager(0),m_pAnimatedModelManager(0),m_pEffectManager(0),
                                                   m_pGUIManager(0),m_pPhysicsManager(0),
                                                   m_pSoundManager(0), m_pEntityManager(0), m_pPortalManager(0), m_pIAManager(0),
-                                                  m_pEmiterCoreManager(0), m_pEmiterManager(0), m_pLevelChanger(0)
+                                                  m_pEmiterCoreManager(0), m_pEmiterManager(0), m_pLevelChanger(0),m_bExit(false),
+                                                  m_bPaused(false)
                                                   {};
   /**
    * Destructor.
@@ -173,6 +174,12 @@ public:
   CPhysicTriggerReport*    GetPhysicTriggerReport()   const { return   m_pPhysicTriggerReport;   };
   CPhysicCollisionReport*  GetPhysicCollisionReport() const { return   m_pPhysicCollisionReport; };
   string                   GetLuaInitFile()           const { return   m_szLuaInitFile;          };
+  
+  void SetExit(bool _bExit) {m_bExit = _bExit;};
+  bool GetExit() const      {return m_bExit;};
+
+  void SetPause(bool _bPause) {m_bPaused = _bPause;};
+  bool GetPause() const       {return m_bPaused;};
 
 private:
 
@@ -192,6 +199,8 @@ private:
   **/
   void                 Release             ();
 
+
+  bool   m_bExit, m_bPaused;
 
   string m_szLuaInitFile;
 

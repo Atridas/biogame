@@ -32,18 +32,18 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
       return 0;
     }
     break;
-  case WM_KEYDOWN:
-    {
-      switch( wParam )
-      {
-      case VK_ESCAPE:
-        //Cleanup();
-        PostQuitMessage( 0 );
-        return 0;
-        break;
-      }
-    }
-    break;
+  //case WM_KEYDOWN:
+  //  {
+  //    switch( wParam )
+  //    {
+  //    case VK_ESCAPE:
+  //      //Cleanup();
+  //      PostQuitMessage( 0 );
+  //      return 0;
+  //      break;
+  //    }
+  //  }
+  //  break;
   }//end switch( msg )
 
   return DefWindowProc( hWnd, msg, wParam, lParam );

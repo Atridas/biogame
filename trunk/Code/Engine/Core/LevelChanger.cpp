@@ -92,6 +92,13 @@ void CLevelChanger::Update(float _fElapsedTime)
   {
     SLevel* l_pLevel = GetResource(m_szNewLevel);
     CCore* l_pCore = CORE;
+    
+    l_pCore->m_pScriptManager->Initialize();
+    l_pCore->m_pScriptManager->Load(l_pCore->GetLuaInitFile());
+    //Creem l'entitat de control de nivell.
+    //TODO: Comprovar si s'està al main menu i enviar true o false
+    l_pCore->m_pEntityManager->CreateLevelControllerEntity(false);
+
     vector<string>::iterator l_it;
     for(l_it = l_pLevel->StaticMeshes.begin(); l_it != l_pLevel->StaticMeshes.end(); ++l_it)
     {
@@ -106,9 +113,6 @@ void CLevelChanger::Update(float _fElapsedTime)
     {
       l_pCore->m_pLightManager->Load(*l_it);
     }
-    
-    l_pCore->m_pScriptManager->Initialize();
-    l_pCore->m_pScriptManager->Load(l_pCore->GetLuaInitFile());
    
     l_pCore->m_pIAManager->Init();
 
@@ -117,9 +121,6 @@ void CLevelChanger::Update(float _fElapsedTime)
     {
       l_pCore->m_pEntityManager->LoadEntitiesFromXML(*l_it);
     }
-    //Creem l'entitat de control de nivell.
-    //TODO: Comprovar si s'està al main menu i enviar true o false
-    l_pCore->m_pEntityManager->CreateLevelControllerEntity(false);
     
 
     l_pCore->m_pIAManager->CompleteGraph();

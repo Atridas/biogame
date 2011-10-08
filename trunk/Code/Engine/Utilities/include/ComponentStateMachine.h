@@ -22,9 +22,12 @@ public:
   virtual void ReceiveEvent(const SEvent& _Event);
 
   CScriptedStateMachine* GetStateMachine() const { return m_pStateMachine; };
-
+  
+  virtual bool UpdateInPause() const {return m_bUpdatePause;};
+  
+  bool m_bUpdatePause;
 protected:
-  CComponentStateMachine(): m_pStateMachine(0) {};
+  CComponentStateMachine(): m_pStateMachine(0), m_bUpdatePause(false) {};
   bool Init(CGameEntity* _pEntity, const string& _pEstatInicial);
 
   virtual void Release();

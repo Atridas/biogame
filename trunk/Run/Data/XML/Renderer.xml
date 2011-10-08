@@ -725,6 +725,24 @@
         <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/testa.png"/>
       </input_samplers>
     </post_scene_renderer>
+  
+    <post_scene_renderer name="menu inicial" effect="Texture">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/MenuInicial.jpg"/>
+      </input_samplers>
+    </post_scene_renderer>
+  
+    <post_scene_renderer name="pantalla credits" effect="Texture">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/credits 9000.jpg"/>
+      </input_samplers>
+    </post_scene_renderer>
+  
+    <post_scene_renderer name="trollface" effect="Texture">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/trollface_hd.dds"/>
+      </input_samplers>
+    </post_scene_renderer>
     
     
     
@@ -904,7 +922,19 @@
     </render_path>
     
     <render_path name="Pantalla d'inici">
+      <post_scene_renderer name="menu inicial"/>
+    </render_path>
+    
+    <render_path name="howto">
       <post_scene_renderer name="testa"/>
+    </render_path>
+    
+    <render_path name="credits">
+      <post_scene_renderer name="pantalla credits"/>
+    </render_path>
+    
+    <render_path name="Pause">
+      <post_scene_renderer name="trollface"/>
     </render_path>
   </render_paths>
   

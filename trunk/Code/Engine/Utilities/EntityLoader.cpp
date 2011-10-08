@@ -622,6 +622,15 @@ CGameEntity* CEntityManager::CreateLevelControllerEntity(bool _bMainMenu)
 
   CComponentBGMController* l_pBGM = CComponentBGMController::AddToEntity(l_pLevelManager, _bMainMenu);
 
+  if(_bMainMenu)
+  {
+    CComponentStateMachine::AddToEntity(l_pLevelManager, "State_Main_Menu_Inici")->m_bUpdatePause = true;
+  }
+  else
+  {
+    CComponentStateMachine::AddToEntity(l_pLevelManager, "State_Jugant")->m_bUpdatePause = true;
+  }
+
   return l_pLevelManager;
 }
 
