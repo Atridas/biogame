@@ -199,7 +199,9 @@ void CEmiterInstance::Update(float _fDeltaTime)
 
       _fDeltaTime -= m_fTimeToNextParticle;
 
-      m_fTimeToNextParticle = 1.f / (l_pEmiterCore->GetEmitRate() * m_fVolume); //carreguem el temps fins la següent partícula
+      float l_fMultiplier = l_pEmiterCore->GetEmitAbsolute()? 1 : m_fVolume;
+
+      m_fTimeToNextParticle = 1.f / (l_pEmiterCore->GetEmitRate() * l_fMultiplier); //carreguem el temps fins la següent partícula
 
       if(m_bAwake && m_iActiveParticles < m_iMaxParticles) //comprovem que el buffer no hagi quedat ple
       {
