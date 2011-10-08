@@ -18,6 +18,7 @@ class CSimpleEmiterCore:
 public:
   CSimpleEmiterCore():
       m_fEmitRate1(0.f), m_fEmitRate2(0.f),
+      m_bEmitAbsolute(false),
       m_fLife1(0.f), m_fLife2(0.f),
       m_fAwakeTime1(1.f), m_fAwakeTime2(1.f),
       m_fSleepTime1(0.f), m_fSleepTime2(0.f),
@@ -46,6 +47,7 @@ public:
   bool Init();
   
   float GetEmitRate() const;
+  bool  GetEmitAbsolute() const {return m_bEmitAbsolute;}
   float GetLife() const;
   float GetAwakeTime() const;
   float GetSleepTime() const;
@@ -90,6 +92,7 @@ protected:
 private:
   
   float m_fEmitRate1, m_fEmitRate2;
+  bool m_bEmitAbsolute;
   float m_fLife1    , m_fLife2;
   
   float m_fAwakeTime1, m_fAwakeTime2;

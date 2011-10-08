@@ -32,6 +32,12 @@ bool CSimpleEmiterCore::Init(CXMLTreeNode& _xmlEmiter)
   m_fEmitRate2 = _xmlEmiter.GetFloatProperty("emit_rate2", 0, !l_bParsingBillboar);
   LOGGER->AddNewLog(ELL_INFORMATION, "Emit rate: %f - %f", m_fEmitRate1, m_fEmitRate2);
   
+  m_bEmitAbsolute = _xmlEmiter.GetBoolProperty("emit_absolute", false, false);
+  if(m_bEmitAbsolute)
+    LOGGER->AddNewLog(ELL_INFORMATION, "Emit absolute: true");
+  else
+    LOGGER->AddNewLog(ELL_INFORMATION, "Emit absolute: false");
+
   m_fLife1 = _xmlEmiter.GetFloatProperty("life1", 0, !l_bParsingBillboar);
   m_fLife2 = _xmlEmiter.GetFloatProperty("life2", 0, !l_bParsingBillboar);
   LOGGER->AddNewLog(ELL_INFORMATION, "Life: %f - %f", m_fLife1, m_fLife2);
