@@ -39,5 +39,4 @@
 	<mesh name="proves_EsferaDestructible" path="Data/Meshes/proves_EsferaDestructible.mesh" max="0.251547 0.251546 0.251547" min="-0.251547 -0.251546 -0.251547" />
 	<mesh name="proves_EsferaDestructible01" path="Data/Meshes/proves_EsferaDestructible01.mesh" max="0.251546 0.251546 0.251547" min="-0.251546 -0.251546 -0.251547" />
 	<mesh name="proves_EsferaDestructible02" path="Data/Meshes/proves_EsferaDestructible02.mesh" max="0.251546 0.251546 0.251547" min="-0.251546 -0.251546 -0.251547" />
-	<mesh name="proves_maquina_claus" path="Data/Meshes/proves_maquina_claus.mesh" max="2.41949 1.85528 2.16409" min="-1.33554 -2.05962 -1.56023" />
 </meshes>

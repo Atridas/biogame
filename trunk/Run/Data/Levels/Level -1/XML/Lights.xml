@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <lights ambient="0.3 0.3 0.3">
+	<light type="omni" name="lvl1_porta_claus_light_bot_off" pos="-9.45032 0.250632 8.65779" color="1.0 0.0588235 0.0588235" att_start_range="0.0" att_end_range="0.5" render_shadows="false" />
+	<light type="omni" name="lvl1_porta_claus_light_bot_on" pos="-9.61106 0.265224 8.49196" color="0.0 1.0 0.0470588" att_start_range="0.0" att_end_range="0.5" render_shadows="false" />
+	<light type="omni" name="lvl1_porta_claus_light_left_off" pos="-10.8161 1.93851 7.29229" color="1.0 0.0588235 0.0588235" att_start_range="0.0" att_end_range="0.5" render_shadows="false" />
+	<light type="omni" name="lvl1_porta_claus_light_left_on" pos="-10.8161 2.19773 7.29376" color="0.0 1.0 0.0470588" att_start_range="0.0" att_end_range="0.5" render_shadows="false" />
+	<light type="omni" name="lvl1_porta_claus_light_right_off" pos="-8.27171 1.93851 9.82639" color="1.0 0.0588235 0.0588235" att_start_range="0.0" att_end_range="0.5" render_shadows="false" />
+	<light type="omni" name="lvl1_porta_claus_light_right_on" pos="-8.27319 2.19773 9.82787" color="0.0 1.0 0.0470588" att_start_range="0.0" att_end_range="0.5" render_shadows="false" />
+	<light type="omni" name="lvl1_porta_claus_light_top_off" pos="-9.45079 3.81716 8.65956" color="1.0 0.0588235 0.0588235" att_start_range="0.0" att_end_range="0.5" render_shadows="false" />
+	<light type="omni" name="lvl1_porta_claus_light_top_on" pos="-9.61075 3.81515 8.49298" color="0.0 1.0 0.0470588" att_start_range="0.0" att_end_range="0.5" render_shadows="false" />
 	<light type="spot" direction="-0.0128398 -14.1177 -0.00143671" angle="43.0" fall_off="45.0" name="Spot01" pos="0.0521135 13.8853 0.0" color="0.545098 0.941177 1.0" att_start_range="0.0" att_end_range="20.2286" render_shadows="false" />
 	<light type="omni" name="Omni01" pos="0.0451577 2.48114 -0.0412" color="0.545098 0.941177 1.0" att_start_range="0.0" att_end_range="4.24801" render_shadows="false" />
 	<light type="omni" name="Omni02" pos="12.1518 2.95911 -1.77259" color="0.545098 0.941177 1.0" att_start_range="0.0" att_end_range="1.14696" render_shadows="false" />

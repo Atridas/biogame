@@ -1,11 +1,3 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <lights ambient="0.3 0.3 0.3">
-	<light type="omni" name="proves_key_right_on" pos="-33.3345 2.19773 33.3262" color="0.0 1.0 0.0470588" att_start_range="0.0" att_end_range="0.5" render_shadows="false" />
-	<light type="omni" name="proves_key_right_off" pos="-33.3345 1.93851 33.3262" color="1.0 0.0588235 0.0588235" att_start_range="0.0" att_end_range="0.5" render_shadows="false" />
-	<light type="omni" name="proves_key_left_on" pos="-35.8701 2.19773 30.7845" color="0.0 1.0 0.0470588" att_start_range="0.0" att_end_range="0.5" render_shadows="false" />
-	<light type="omni" name="proves_key_left_off" pos="-35.8701 1.93851 30.7845" color="1.0 0.0588235 0.0588235" att_start_range="0.0" att_end_range="0.5" render_shadows="false" />
-	<light type="omni" name="proves_key_top_on" pos="-34.6469 3.81515 31.969" color="0.0 1.0 0.0470588" att_start_range="0.0" att_end_range="0.5" render_shadows="false" />
-	<light type="omni" name="proves_key_top_off" pos="-34.4924 3.81716 32.1273" color="1.0 0.0588235 0.0588235" att_start_range="0.0" att_end_range="0.5" render_shadows="false" />
-	<light type="omni" name="proves_key_bot_on" pos="-34.6708 0.265224 31.9886" color="0.0 1.0 0.0470588" att_start_range="0.0" att_end_range="0.5" render_shadows="false" />
-	<light type="omni" name="proves_key_bot_off" pos="-34.5114 0.250632 32.1547" color="1.0 0.0588235 0.0588235" att_start_range="0.0" att_end_range="0.5" render_shadows="false" />
 </lights>

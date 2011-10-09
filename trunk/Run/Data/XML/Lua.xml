@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <Lua>
   <files>
+    <!--             FUNCIONS               -->
     <file path="Data/Lua/globals.lua" />
-    <file path="Data/Lua/functions.lua" />
-    <file path="Data/Lua/biogame_gui.lua" />
-    <file path="Data/Lua/triggers_globals.lua" />
-    <file path="Data/Lua/nivell_proves_triggers.lua" />
-    <file path="Data/Lua/nivell_-2_triggers.lua" />
-    <file path="Data/Lua/nivell_-1_triggers.lua" />
-    <file path="Data/Lua/hangar_triggers.lua" />
+    <file path="Data/Lua/nivell_proves.lua" />
+    <file path="Data/Lua/nivell_-2.lua" />
+    <file path="Data/Lua/nivell_-1.lua" />
+    <file path="Data/Lua/hangar.lua" />
+    <file path="Data/Lua/enemy_collisions.lua" />
+    <file path="Data/Lua/test.lua" />
+    
+    <!--       FINITE STATE MACHINES        -->
+    <file path="Data/Lua/main_menu.lua" />
     <file path="Data/Lua/player_states.lua" />
     <file path="Data/Lua/enemy_constants.lua" />
     <file path="Data/Lua/soldier_states.lua" />
     <file path="Data/Lua/enemy_states.lua" />
     <file path="Data/Lua/door_states.lua" />
     <file path="Data/Lua/key_machine.lua" />
-    <file path="Data/Lua/enemy_collisions.lua" />
-    <file path="Data/Lua/main_menu.lua" />
     
-    <file path="Data/Lua/test.lua" />
   </files>
   <initscripts>
     <script action="CORE                          = get_core()"/>

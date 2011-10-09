@@ -50,6 +50,10 @@
 	<mesh name="lvl1_habitacio_municio" path="Data/Meshes/lvl1_habitacio_municio.mesh" max="2.93201 5.0 4.14388" min="-2.93201 0.0 -4.14388" />
 	<mesh name="lvl1_Porta_planta-1_02" path="Data/Meshes/lvl1_Porta_planta-1_02.mesh" max="0.243015 1.5495 1.44116" min="-0.283014 -1.39425 -1.44116" />
 	<mesh name="lvl1_habitacio_claus" path="Data/Meshes/lvl1_habitacio_claus.mesh" max="5.00341 4.0 5.00341" min="-5.00341 0.0 -5.00341" />
+	<mesh name="lvl1_portal_claus" path="Data/Meshes/lvl1_portal_claus.mesh" max="1.55562 1.85528 1.33086" min="-1.33554 -1.85295 -1.56023" />
+	<mesh name="lvl1_claus_porta_sub1" path="Data/Meshes/lvl1_claus_porta_sub1.mesh" max="1.00975 1.5723 -0.638575" min="-1.00975 -1.5723 0.638576" />
+	<mesh name="lvl1_claus_porta_sub2" path="Data/Meshes/lvl1_claus_porta_sub2.mesh" max="1.0494 1.5723 -0.602561" min="-1.0494 -1.5723 0.602562" />
+	<mesh name="lvl1_portal_bidons" path="Data/Meshes/lvl1_portal_bidons.mesh" max="2.41949 -0.0521083 2.16409" min="1.10138 -2.05962 0.945299" />
 	<mesh name="lvl1_Passadis_final01" path="Data/Meshes/lvl1_Passadis_final01.mesh" max="2.25 3.5 7.72481" min="-2.25 -6.55671e-007 -7.5" />
 	<mesh name="lvl1_aguanta_llums18" path="Data/Meshes/lvl1_aguanta_llums18.mesh" max="0.0445364 0.0 0.22109" min="-0.130722 -0.37025 0.0450411" />
 	<mesh name="lvl1_Lum18" path="Data/Meshes/lvl1_Lum18.mesh" max="0.0798299 0.0 0.0798302" min="-0.0798302 -0.569623 -0.0798302" />
@@ -388,6 +392,9 @@
 	<mesh name="lvl1_Caixa_estatica_petita39" path="Data/Meshes/lvl1_Caixa_estatica_petita39.mesh" max="1.39813 0.5 -0.122318" min="-1.39813 -0.5 0.122324" />
 	<mesh name="lvl1_Caixa_estatica_petita40" path="Data/Meshes/lvl1_Caixa_estatica_petita40.mesh" max="1.39813 0.5 -0.122322" min="-1.39813 -0.5 0.12232" />
 	<mesh name="lvl1_Caixa_estatica_petita41" path="Data/Meshes/lvl1_Caixa_estatica_petita41.mesh" max="1.39813 0.5 -0.12232" min="-1.39813 -0.5 0.122321" />
+	<mesh name="lvl1_aguanta_llums28" path="Data/Meshes/lvl1_aguanta_llums28.mesh" max="-0.0450411 0.0 0.0445364" min="-0.22109 -0.37025 -0.130722" />
+	<mesh name="lvl1_aguanta_llums29" path="Data/Meshes/lvl1_aguanta_llums29.mesh" max="-0.0450401 0.0 0.0445364" min="-0.22109 -0.37025 -0.130722" />
+	<mesh name="lvl1_aguanta_llums30" path="Data/Meshes/lvl1_aguanta_llums30.mesh" max="-0.0450401 0.0 0.0445364" min="-0.22109 -0.37025 -0.130722" />
 	<mesh name="lvl1_armeria" path="Data/Meshes/lvl1_armeria.mesh" max="8.14388 6.0 2.93201" min="-11.1439 0.0 -17.932" />
 	<mesh name="lvl1_viga08" path="Data/Meshes/lvl1_viga08.mesh" max="0.237833 0.789214 10.5043" min="-0.237833 0.0 -10.5043" />
 	<mesh name="lvl1_viga09" path="Data/Meshes/lvl1_viga09.mesh" max="0.237833 0.789214 10.5043" min="-0.237833 0.0 -10.5043" />
@@ -629,8 +636,4 @@
 	<mesh name="lvl1_key_purple" path="Data/Meshes/lvl1_key_purple.mesh" max="0.525259 0.199613 0.525261" min="-0.525259 -0.199613 -0.525261" />
 	<mesh name="lvl1_key_yellow" path="Data/Meshes/lvl1_key_yellow.mesh" max="0.525259 0.199613 0.525261" min="-0.525259 -0.199613 -0.525261" />
 	<mesh name="lvl1_key_green" path="Data/Meshes/lvl1_key_green.mesh" max="0.525259 0.199613 0.525259" min="-0.525259 -0.199613 -0.525259" />
-	<mesh name="lvl1_unlock_green" path="Data/Meshes/lvl1_unlock_green.mesh" max="0.492911 2.16581 0.492912" min="-0.492911 0.0 -0.492912" />
-	<mesh name="lvl1_unlock_blue" path="Data/Meshes/lvl1_unlock_blue.mesh" max="0.492911 2.16581 0.492911" min="-0.492911 0.0 -0.492912" />
-	<mesh name="lvl1_unlock_purple" path="Data/Meshes/lvl1_unlock_purple.mesh" max="0.492912 2.16581 0.492911" min="-0.492911 0.0 -0.492911" />
-	<mesh name="lvl1_unlock_yellow" path="Data/Meshes/lvl1_unlock_yellow.mesh" max="0.492912 2.16581 0.492911" min="-0.492912 0.0 -0.492911" />
 </meshes>
