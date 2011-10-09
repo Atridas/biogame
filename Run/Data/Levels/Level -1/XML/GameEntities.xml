@@ -210,6 +210,27 @@
     <RenderableObject animated="false" name="lvl1_habitacio_claus" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
+  <Entity name="lvl1_portal_claus">
+    <Object3D position="-9.84117 2.05258 8.8713" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_portal_claus" />
+    <PhysXMesh density="0" collision_group="escenari" />
+    <Interactive action="interactive_with_state_machine" />
+    <StateMachine initial_state="State_Key_AllOff" />
+  </Entity>
+  <Entity name="lvl1_claus_porta_sub1">
+    <Object3D position="-10.0283 1.69531 4.39831" yaw="72.0063" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_claus_porta_sub1" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="lvl1_claus_porta_sub2">
+    <Object3D position="-4.07232 1.84569 9.83494" yaw="69.6144" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_claus_porta_sub2" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="lvl1_portal_bidons">
+    <Object3D position="-9.84117 2.05258 8.8713" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_portal_bidons" />
+  </Entity>
   <Entity name="lvl1_Passadis_final01">
     <Object3D position="0.0194988 0.0 14.9084" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Passadis_final01" />
@@ -1680,6 +1701,18 @@
     <RenderableObject animated="false" name="lvl1_Caixa_estatica_petita41" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
+  <Entity name="lvl1_aguanta_llums28">
+    <Object3D position="-10.7429 3.0733 -2.07656" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_aguanta_llums28" />
+  </Entity>
+  <Entity name="lvl1_aguanta_llums29">
+    <Object3D position="-17.6091 3.0733 -2.07656" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_aguanta_llums29" />
+  </Entity>
+  <Entity name="lvl1_aguanta_llums30">
+    <Object3D position="-24.4806 3.0733 -2.07656" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_aguanta_llums30" />
+  </Entity>
   <Entity name="lvl1_armeria">
     <Object3D position="33.6163 -10.0 -23.6384" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_armeria" />
@@ -2838,7 +2871,7 @@
   <Entity name="lvl1_elice">
     <Object3D position="0.0 5.17398 0.0" yaw="0.000160287" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_elice" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <PhysXMesh density="0" collision_group="escenari" />
     <Rotative yaw="1.5" />
   </Entity>
   <Entity name="lvl1_porta07">
@@ -3134,30 +3167,6 @@
     <RenderableObject animated="false" name="lvl1_key_yellow" />
     <Trigger shape="box" size="1.05052 0.399226 1.05052" collision_group="pickup" onEnter="get_key_yellow" />
     <Rotative yaw="0.5" />
-  </Entity>
-  <Entity name="lvl1_unlock_green">
-    <Object3D position="-10.5804 0.005 7.05398" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl1_unlock_green" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Interactive action="validate_key" interactive_billboard_y_offset="2.2" />
-  </Entity>
-  <Entity name="lvl1_unlock_blue">
-    <Object3D position="-9.21016 0.005 8.37934" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl1_unlock_blue" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Interactive action="validate_key" interactive_billboard_y_offset="2.2" />
-  </Entity>
-  <Entity name="lvl1_unlock_purple">
-    <Object3D position="-8.04286 0.005 9.47855" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl1_unlock_purple" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Interactive action="validate_key" interactive_billboard_y_offset="2.2" />
-  </Entity>
-  <Entity name="lvl1_unlock_yellow">
-    <Object3D position="-6.80895 0.005 10.6213" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl1_unlock_yellow" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Interactive action="validate_key" interactive_billboard_y_offset="2.2" />
   </Entity>
   <Entity name="Change_Level_Trigger">
     <Object3D position="-0.0492312 1.67603 22.1723" yaw="0.0" pitch="0.0" roll="0.0" />

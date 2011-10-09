@@ -57,6 +57,18 @@
       </Boundings>
       <Objects>
         <GameObject name="lvl1_habitacio_claus" />
+        <GameObject name="lvl1_porta_claus_light_bot_off" />
+        <GameObject name="lvl1_porta_claus_light_bot_on" />
+        <GameObject name="lvl1_porta_claus_light_left_off" />
+        <GameObject name="lvl1_porta_claus_light_left_on" />
+        <GameObject name="lvl1_porta_claus_light_right_off" />
+        <GameObject name="lvl1_porta_claus_light_right_on" />
+        <GameObject name="lvl1_porta_claus_light_top_off" />
+        <GameObject name="lvl1_porta_claus_light_top_on" />
+        <GameObject name="lvl1_portal_claus" />
+        <GameObject name="lvl1_claus_porta_sub1" />
+        <GameObject name="lvl1_claus_porta_sub2" />
+        <GameObject name="lvl1_portal_bidons" />
       </Objects>
     </Room>
     <Room name="PassFinal">
@@ -452,6 +464,9 @@
         <GameObject name="lvl1_Caixa_estatica_petita39" />
         <GameObject name="lvl1_Caixa_estatica_petita40" />
         <GameObject name="lvl1_Caixa_estatica_petita41" />
+        <GameObject name="lvl1_aguanta_llums28" />
+        <GameObject name="lvl1_aguanta_llums29" />
+        <GameObject name="lvl1_aguanta_llums30" />
       </Objects>
     </Room>
     <Room name="Room02">

@@ -7,32 +7,32 @@
 Key_Machine_Constants = {}
 
 -- Llums
-Key_Machine_Constants["LIGHT Top on"]  = "proves_key_top_on"
-Key_Machine_Constants["LIGHT Top off"] = "proves_key_top_off"
+Key_Machine_Constants["LIGHT Top on"]  = "lvl1_porta_claus_light_top_on"
+Key_Machine_Constants["LIGHT Top off"] = "lvl1_porta_claus_light_top_off"
 
-Key_Machine_Constants["LIGHT Right on"]  = "proves_key_right_on"
-Key_Machine_Constants["LIGHT Right off"] = "proves_key_right_off"
+Key_Machine_Constants["LIGHT Bot on"]  = "lvl1_porta_claus_light_bot_on"
+Key_Machine_Constants["LIGHT Bot off"] = "lvl1_porta_claus_light_bot_off"
 
-Key_Machine_Constants["LIGHT Bot on"]  = "proves_key_bot_on"
-Key_Machine_Constants["LIGHT Bot off"] = "proves_key_bot_off"
+Key_Machine_Constants["LIGHT Right on"]  = "lvl1_porta_claus_light_right_on"
+Key_Machine_Constants["LIGHT Right off"] = "lvl1_porta_claus_light_right_off"
 
-Key_Machine_Constants["LIGHT Left on"]  = "proves_key_left_on"
-Key_Machine_Constants["LIGHT Left off"] = "proves_key_left_off"
+Key_Machine_Constants["LIGHT Left on"]  = "lvl1_porta_claus_light_left_on"
+Key_Machine_Constants["LIGHT Left off"] = "lvl1_porta_claus_light_left_off"
 
 -- Claus
-Key_Machine_Constants["KEY Top"]   = "proves_key_top"
-Key_Machine_Constants["KEY Right"] = "proves_key_right"
-Key_Machine_Constants["KEY Bot"]   = "proves_key_bot"
-Key_Machine_Constants["KEY Left"]  = "proves_key_left"
+Key_Machine_Constants["KEY Top"]   = "lvl1_key_green"
+Key_Machine_Constants["KEY Bot"]   = "lvl1_key_blue"
+Key_Machine_Constants["KEY Right"] = "lvl1_key_purple"
+Key_Machine_Constants["KEY Left"]  = "lvl1_key_yellow"
 
 -- Portes
-Key_Machine_Constants["DOOR Top"]   = "Porta01"
-Key_Machine_Constants["DOOR Right"] = "Porta02"
-Key_Machine_Constants["DOOR Bot"]   = "Porta01"
-Key_Machine_Constants["DOOR Left"]  = "Porta02"
+Key_Machine_Constants["DOOR Top"]   = "lvl1_door03"
+Key_Machine_Constants["DOOR Bot"]   = "lvl1_door04"
+Key_Machine_Constants["DOOR Right"] = "lvl1_door01"
+Key_Machine_Constants["DOOR Left"]  = "lvl1_door_final"
 
 -- Temps
-Key_Machine_Constants["Last Door Waiting"] = 5.0
+Key_Machine_Constants["Last Door Waiting"] = 3.0
 Key_Machine_Constants["Last Door Waiting Count"] = 0.0
 
 -------------------------------------------------------------------------------------------------
@@ -152,47 +152,6 @@ State_Key_TopOn['Receive'] = function(_self, _event)
   if _event.msg == Event.interaccio then
     local l_player = EM:get_entity(_event.sender)
     if l_player then
-      if unlock(l_player, Key_Machine_Constants["KEY Right"], Key_Machine_Constants["DOOR Right"]) then
-        _self:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Key_RightOn')
-      end
-    else
-      log("KeyStateMachine::AllOff No es troba l'entitat player a través del missatge")
-    end
-  end
-end
-
--------------------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------
--- RIGHT ON!!!! ---------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------
-
-State_Key_RightOn["Enter"] = function(_self)
-  l_light = LM:get_resource(Key_Machine_Constants["LIGHT Right on"])
-  if l_light then
-    l_light:set_active(true)
-  end
-  l_light = LM:get_resource(Key_Machine_Constants["LIGHT Right off"])
-  if l_light then
-    l_light:set_active(false)
-  end
-end
-
--------------------------------------------------------------------------------------------------
-State_Key_RightOn["Exit"] = function(_self)
-  
-end
-
--------------------------------------------------------------------------------------------------
-State_Key_RightOn['Update'] = function(_self, _dt)
-
-end
-
--------------------------------------------------------------------------------------------------
-State_Key_RightOn['Receive'] = function(_self, _event)
-  if _event.msg == Event.interaccio then
-    local l_player = EM:get_entity(_event.sender)
-    if l_player then
       if unlock(l_player, Key_Machine_Constants["KEY Bot"], Key_Machine_Constants["DOOR Bot"]) then
         _self:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Key_BotOn')
       end
@@ -234,6 +193,47 @@ State_Key_BotOn['Receive'] = function(_self, _event)
   if _event.msg == Event.interaccio then
     local l_player = EM:get_entity(_event.sender)
     if l_player then
+      if unlock(l_player, Key_Machine_Constants["KEY Right"], Key_Machine_Constants["DOOR Right"]) then
+        _self:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Key_RightOn')
+      end
+    else
+      log("KeyStateMachine::AllOff No es troba l'entitat player a través del missatge")
+    end
+  end
+end
+
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-- RIGHT ON!!!! ---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+
+State_Key_RightOn["Enter"] = function(_self)
+  l_light = LM:get_resource(Key_Machine_Constants["LIGHT Right on"])
+  if l_light then
+    l_light:set_active(true)
+  end
+  l_light = LM:get_resource(Key_Machine_Constants["LIGHT Right off"])
+  if l_light then
+    l_light:set_active(false)
+  end
+end
+
+-------------------------------------------------------------------------------------------------
+State_Key_RightOn["Exit"] = function(_self)
+  
+end
+
+-------------------------------------------------------------------------------------------------
+State_Key_RightOn['Update'] = function(_self, _dt)
+
+end
+
+-------------------------------------------------------------------------------------------------
+State_Key_RightOn['Receive'] = function(_self, _event)
+  if _event.msg == Event.interaccio then
+    local l_player = EM:get_entity(_event.sender)
+    if l_player then
       if unlock(l_player, Key_Machine_Constants["KEY Left"], Key_Machine_Constants["DOOR Left"]) then
         _self:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Key_LeftOn')
       end
@@ -258,6 +258,8 @@ State_Key_LeftOn["Enter"] = function(_self)
   if l_light then
     l_light:set_active(false)
   end
+  
+  activate_entity("lvl1_miner07")
   
   Key_Machine_Constants["Last Door Waiting Count"] = 0.0
 end
