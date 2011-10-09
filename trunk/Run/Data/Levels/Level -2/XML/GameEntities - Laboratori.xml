@@ -295,5 +295,9 @@
   <Entity name="lvl2_lab_Omni03">
     <Light resource="lvl2_lab_Omni03" type="omni" script="lvl2_lab_update_light" />
   </Entity>
+  <Entity name="lab_fum_proveta">
+     <Object3D position="-4.98981 1.16939 -2.77892" yaw="0.0" pitch="0.0" roll="0.0" />
+     <Emiter core="fum_proveta_absolut" volume="0.03 0.03 0.03" />
+ </Entity>
   <Player position="-10.4473 1.72829 -6.87975" yaw="0.0" shoot_active="false" force_active="false" />
 </Entities>

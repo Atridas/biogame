@@ -55,8 +55,8 @@ bool CSimpleEmiterCore::Init(CXMLTreeNode& _xmlEmiter)
   LOGGER->AddNewLog(ELL_INFORMATION, "Ratio Y: %f", m_fRatioY);
 
   
-  m_fStartingAngle1 = _xmlEmiter.GetFloatProperty("starting_angle1", 0, true);
-  m_fStartingAngle2 = _xmlEmiter.GetFloatProperty("starting_angle2", 0, true);
+  m_fStartingAngle1 = _xmlEmiter.GetFloatProperty("starting_angle1", 0, true) * FLOAT_PI_VALUE / 180;
+  m_fStartingAngle2 = _xmlEmiter.GetFloatProperty("starting_angle2", 0, true) * FLOAT_PI_VALUE / 180;
   LOGGER->AddNewLog(ELL_INFORMATION, "Starting Angle: %f - %f", m_fStartingAngle1, m_fStartingAngle2);
   
   m_vStartingSpeed1 = _xmlEmiter.GetVect3fProperty("starting_speed1", Vect3f(0), !l_bParsingBillboar);
@@ -65,11 +65,11 @@ bool CSimpleEmiterCore::Init(CXMLTreeNode& _xmlEmiter)
                                       m_vStartingSpeed1.x, m_vStartingSpeed1.y, m_vStartingSpeed1.z,
                                       m_vStartingSpeed2.x, m_vStartingSpeed2.y, m_vStartingSpeed2.z);
   
-  m_fStartingDirectionAngle = _xmlEmiter.GetFloatProperty("starting_direction_angle", 0, false);
+  m_fStartingDirectionAngle = _xmlEmiter.GetFloatProperty("starting_direction_angle", 0, false) * FLOAT_PI_VALUE / 180;
   LOGGER->AddNewLog(ELL_INFORMATION, "Starting Direction Angle: %f", m_fStartingDirectionAngle);
 
-  m_fStartingAngularSpeed1 = _xmlEmiter.GetFloatProperty("starting_angular_speed1", 0, !l_bParsingBillboar);
-  m_fStartingAngularSpeed2 = _xmlEmiter.GetFloatProperty("starting_angular_speed2", 0, !l_bParsingBillboar);
+  m_fStartingAngularSpeed1 = _xmlEmiter.GetFloatProperty("starting_angular_speed1", 0, !l_bParsingBillboar) * FLOAT_PI_VALUE / 180;
+  m_fStartingAngularSpeed2 = _xmlEmiter.GetFloatProperty("starting_angular_speed2", 0, !l_bParsingBillboar) * FLOAT_PI_VALUE / 180;
   LOGGER->AddNewLog(ELL_INFORMATION, "Starting Angular Speed: %f - %f", m_fStartingAngularSpeed1, m_fStartingAngularSpeed2);
   
   m_vAcceleration1 =  _xmlEmiter.GetVect3fProperty("acceleration1", Vect3f(0), !l_bParsingBillboar);
@@ -78,11 +78,11 @@ bool CSimpleEmiterCore::Init(CXMLTreeNode& _xmlEmiter)
                                       m_vAcceleration1.x, m_vAcceleration1.y, m_vAcceleration1.z,
                                       m_vAcceleration2.x, m_vAcceleration2.y, m_vAcceleration2.z);
   
-  m_fAccelerationDirectionAngle = _xmlEmiter.GetFloatProperty("acceleration_direction_angle", 0, false);
+  m_fAccelerationDirectionAngle = _xmlEmiter.GetFloatProperty("acceleration_direction_angle", 0, false) * FLOAT_PI_VALUE / 180;
   LOGGER->AddNewLog(ELL_INFORMATION, "Acceleration Direction Angle: %f", m_fStartingDirectionAngle);
 
-  m_fAngularAcceleration1 =  _xmlEmiter.GetFloatProperty("angular_acceleration1", 0, !l_bParsingBillboar);
-  m_fAngularAcceleration2 =  _xmlEmiter.GetFloatProperty("angular_acceleration2", 0, !l_bParsingBillboar);
+  m_fAngularAcceleration1 =  _xmlEmiter.GetFloatProperty("angular_acceleration1", 0, !l_bParsingBillboar) * FLOAT_PI_VALUE / 180;
+  m_fAngularAcceleration2 =  _xmlEmiter.GetFloatProperty("angular_acceleration2", 0, !l_bParsingBillboar) * FLOAT_PI_VALUE / 180;
   LOGGER->AddNewLog(ELL_INFORMATION, "Angular Acceleration: %f - %f", m_fAngularAcceleration1, m_fAngularAcceleration2);
   
   // Colors ----------------------------------------------------------------------------------

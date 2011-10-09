@@ -46,8 +46,9 @@ bool CEmiterInstance::Init(const string& _szCoreName, const CObject3D& _Position
   {
     m_bIsSimple = true;
     const CSimpleEmiterCore *l_pEmiterCore = dynamic_cast<const CSimpleEmiterCore*>(m_pEmiterCore);
-
-    m_fTimeToNextParticle = 1.f / (l_pEmiterCore->GetEmitRate() * m_fVolume);
+    
+    float l_fMultiplier = l_pEmiterCore->GetEmitAbsolute()? 1 : m_fVolume;
+    m_fTimeToNextParticle = 1.f / (l_pEmiterCore->GetEmitRate() * l_fMultiplier);
     m_iActiveParticles = 0;
     memset(m_iaParticles, 0, sizeof(int) * m_iMaxParticles);
 

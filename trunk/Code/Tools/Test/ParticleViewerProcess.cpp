@@ -45,7 +45,7 @@ bool CParticleViewerProcess::Init()
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"CParticleViewerProcess::Init");
   
-  CORE->GetRenderManager()->SetClearColor(colMAGENTA);
+  CORE->GetRenderManager()->SetClearColor(colWHITE);
 
   //m_pSceneEffectManager = CORE->GetSceneEffectManager();
   CORE->GetLightManager()->SetLightsEnabled(true);
