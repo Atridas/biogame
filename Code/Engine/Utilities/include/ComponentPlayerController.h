@@ -45,12 +45,14 @@ public:
   bool m_bShootActive;
   bool m_bForceActive;
 
-  void Shoot();
-  void ShootGrenade(float _fTime);
+  bool Shoot();
+  bool ShootGrenade(float _fTime);
   void Force();
   void Respawn();
   bool Cover();
   void Use();
+
+  bool IsReadyForce() const;
 
   bool HasPickUp(const string& _szPickUp);
   void AddPickUp(const string& _szPickUp);

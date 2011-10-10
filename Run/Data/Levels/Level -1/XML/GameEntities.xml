@@ -2887,27 +2887,27 @@
   <Entity name="lvl1_door04">
     <Object3D position="7.3721 1.25049 0.010658" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta1" />
-    <Door open="false" block="true" size="0.514184 2.50021 2.15901" />
+    <Door open="false" block="true" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" />
   </Entity>
   <Entity name="lvl1_door01">
     <Object3D position="5.23365 1.25049 5.18079" yaw="45.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta1" />
-    <Door open="false" block="true" size="0.514184 2.50021 2.15901" />
+    <Door open="false" block="true" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" />
   </Entity>
   <Entity name="lvl1_door_final">
     <Object3D position="0.0924268 1.25049 7.32848" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta1" />
-    <Door open="false" block="true" size="0.514184 2.50021 2.15901" />
+    <Door open="false" block="true" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" />
   </Entity>
   <Entity name="lvl1_door_claus">
     <Object3D position="-5.25572 1.25049 5.19641" yaw="-45.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta1" />
-    <Door open="false" size="0.514184 2.50021 2.15901" />
+    <Door open="false" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" />
   </Entity>
   <Entity name="lvl1_door03">
     <Object3D position="-7.32329 1.25049 -0.00545454" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta1" />
-    <Door open="false" block="true" size="0.514184 2.50021 2.15901" />
+    <Door open="false" block="true" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" />
   </Entity>
   <Entity name="lvl1_trigger_porta04">
     <Object3D position="7.94197 1.66002 -0.0568679" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -2932,7 +2932,7 @@
   <Entity name="lvl1_door_inici">
     <Object3D position="-0.00534996 1.25049 -7.38634" yaw="90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta1" />
-    <Door open="false" size="0.514184 2.50021 2.15901" />
+    <Door open="false" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" />
   </Entity>
   <Entity name="lvl1_trigger_porta_inici">
     <Object3D position="-0.0239495 1.66002 -7.98522" yaw="90.0" pitch="0.0" roll="0.0" />

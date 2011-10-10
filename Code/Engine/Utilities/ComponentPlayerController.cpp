@@ -19,6 +19,7 @@
 #include "ComponentCover.h"
 #include "ComponentVida.h"
 #include "ComponentInteractive.h"
+#include "ComponentEnergy.h"
 
 #include "PhysicsManager.h"
 #include "PhysicActor.h"
@@ -29,6 +30,11 @@
 #define SHOCK_WAVE_VELOCITY 2.5f
 #define DAMAGE_FORCE 100.0f
 #define SHOOT_POWER 30.0f
+
+#define ENERGY_FORCE   51.f
+#define ENERGY_GRENADE 15.f
+#define ENERGY_SHOOT    1.f
+
 
 CComponentPlayerController* CComponentPlayerController::AddToEntity(CGameEntity *_pEntity)
 {
@@ -70,8 +76,10 @@ bool CComponentPlayerController::Init(CGameEntity *_pEntity)
 void CComponentPlayerController::UpdatePostPhysX(float _fDeltaTime)
 {
   assert(IsOk());
+  
+  CComponentVida*   l_pComponentVida   = GetEntity()->GetComponent<CComponentVida>();
+  CComponentEnergy* l_pComponentEnergy = GetEntity()->GetComponent<CComponentEnergy>();
 
-  CComponentVida* l_pComponentVida = GetEntity()->GetComponent<CComponentVida>();
   const vector<CMaterial*>& l_vMaterials = m_pAnimatedModel->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetMaterials();
 
   CRenderer *l_pRenderer = CORE->GetRenderer();
@@ -81,10 +89,13 @@ void CComponentPlayerController::UpdatePostPhysX(float _fDeltaTime)
 
   float l_fHP = l_pComponentVida->GetHP();
   float l_fMaxHP = l_pComponentVida->GetMaxHP();
-
-  float l_fMin = 0.3f;
+  
+  float l_fEnergy = l_pComponentEnergy->GetEnergy();
+  float l_fMaxEnergy = l_pComponentEnergy->GetMaxEnergy();
+  
+  float l_fMin = 0.0f;
   float l_fMax = 1.5f;
-  float l_fGlowIntensity = l_fHP/l_fMaxHP * (l_fMax - l_fMin) + l_fMin;
+  float l_fGlowIntensity = l_fEnergy/l_fMaxEnergy * (l_fMax - l_fMin) + l_fMin;
 
   vector<CMaterial*>::const_iterator l_itMaterial = l_vMaterials.begin();
 
@@ -158,144 +169,170 @@ void CComponentPlayerController::UpdatePostPhysX(float _fDeltaTime)
 }
 
 
-void CComponentPlayerController::Shoot()
+bool CComponentPlayerController::Shoot()
 {
   if(!m_bShootActive)
   {
-    return;
+    return false;
   }
-  CEntityManager* l_pEM = ENTITY_MANAGER;
   CGameEntity* l_pPlayerEntity = GetEntity();
+  CComponentEnergy* l_pEnergy = l_pPlayerEntity->GetComponent<CComponentEnergy>();
 
-  CAnimatedInstanceModel *l_pAnimatedInstanceModel = m_pAnimatedModel->GetAnimatedInstanceModel();
-
-  CCamera* l_pCamera = GetEntity()->GetComponent<CComponent3rdPSCamera>(ECT_3RD_PERSON_SHOOTER_CAMERA)->GetCamera();
-  CComponentArma* l_pArma = GetEntity()->GetComponent<CComponentArma>();
-
-  Vect3f l_vPosArma = l_pArma->GetPosition();
-  Vect3f l_vDirArma = l_pArma->GetAimDirection();
-  Vect3f l_vPos = l_pCamera->GetEye();
-  Vect3f l_vDir = l_pCamera->GetDirection().Normalize();
-
-  SCollisionInfo l_CInfo;
-  CPhysicUserData* l_pUserData = 0;
-
-  l_vPosArma -= l_vDirArma*0.1f;
-  
-  l_pEM->InitParticles("disparar", l_vPosArma + l_vDirArma*0.2f, Vect3f(.25f,.5f,.25f), 2.5f, l_vDir);
-
-  CPhysicsManager *l_pPM = PHYSICS_MANAGER;
-
-  l_pUserData = l_pPM->RaycastClosestActor(l_vPos,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER),l_CInfo);
-
-  if(l_pUserData && l_pUserData->GetEntity() != l_pPlayerEntity)
+  if(l_pEnergy->Decrease(ENERGY_SHOOT))
   {
-    Vect3f l_vCenterPoint = l_CInfo.m_CollisionPoint;
+    CEntityManager* l_pEM = ENTITY_MANAGER;
 
-    l_vDir = (l_vCenterPoint-l_vPosArma).Normalize();
+    CAnimatedInstanceModel *l_pAnimatedInstanceModel = m_pAnimatedModel->GetAnimatedInstanceModel();
 
-    if(l_vDir*l_vDirArma <= 0.86f)
+    CCamera* l_pCamera = GetEntity()->GetComponent<CComponent3rdPSCamera>(ECT_3RD_PERSON_SHOOTER_CAMERA)->GetCamera();
+    CComponentArma* l_pArma = GetEntity()->GetComponent<CComponentArma>();
+
+    Vect3f l_vPosArma = l_pArma->GetPosition();
+    Vect3f l_vDirArma = l_pArma->GetAimDirection();
+    Vect3f l_vPos = l_pCamera->GetEye();
+    Vect3f l_vDir = l_pCamera->GetDirection().Normalize();
+
+    SCollisionInfo l_CInfo;
+    CPhysicUserData* l_pUserData = 0;
+
+    l_vPosArma -= l_vDirArma*0.1f;
+  
+    l_pEM->InitParticles("disparar", l_vPosArma + l_vDirArma*0.2f, Vect3f(.25f,.5f,.25f), 2.5f, l_vDir);
+
+    CPhysicsManager *l_pPM = PHYSICS_MANAGER;
+
+    l_pUserData = l_pPM->RaycastClosestActor(l_vPos,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER),l_CInfo);
+
+    if(l_pUserData && l_pUserData->GetEntity() != l_pPlayerEntity)
     {
-      l_vDir = ((l_vPos+100.f*l_vDirArma)-l_vPosArma).Normalize();
-    }
+      Vect3f l_vCenterPoint = l_CInfo.m_CollisionPoint;
 
-    l_pUserData = l_pPM->RaycastClosestActor(l_vPosArma,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER),l_CInfo);
+      l_vDir = (l_vCenterPoint-l_vPosArma).Normalize();
 
-    if(l_pUserData)
-    {
-
-      if(l_pUserData->GetEntity() != l_pPlayerEntity)
+      if(l_vDir*l_vDirArma <= 0.86f)
       {
-        l_pEM->InitLaser(l_vPosArma,l_vDir,20.f, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
-        //SEvent l_impacte;
-        //l_impacte.Msg = SEvent::REBRE_IMPACTE;
-        //l_impacte.Info[0].Type = SEventInfo::FLOAT;
-        //l_impacte.Info[0].f    = 20.f;
-        //l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
-        //l_impacte.Sender = l_pPlayerEntity->GetGUID();
-        //l_impacte.Info[1].Type = SEventInfo::VECTOR;
-        //l_impacte.Info[1].v.x = l_vDir.x;
-        //l_impacte.Info[1].v.y = l_vDir.y;
-        //l_impacte.Info[1].v.z = l_vDir.z;
-        //l_impacte.Info[2].Type = SEventInfo::PTR;
-        //l_impacte.Info[2].ptr = (void*)(l_pUserData->GetActor());
-        //l_impacte.Info[3].Type = SEventInfo::VECTOR;
-        //l_impacte.Info[3].v.x = l_CInfo.m_CollisionPoint.x;
-        //l_impacte.Info[3].v.y = l_CInfo.m_CollisionPoint.y;
-        //l_impacte.Info[3].v.z = l_CInfo.m_CollisionPoint.z;
-        //ENTITY_MANAGER->SendEvent(l_impacte);
+        l_vDir = ((l_vPos+100.f*l_vDirArma)-l_vPosArma).Normalize();
       }
-    }
 
-  }else{
+      l_pUserData = l_pPM->RaycastClosestActor(l_vPosArma,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER),l_CInfo);
 
-    Vect3f l_vPuntLlunya = l_vPos+100.f*l_vDir;
-
-    l_vDir = ((l_vPos+100.f*l_vDir)-l_vPosArma).Normalize();
-
-    if(l_vDir*l_vDirArma <= 0.96f)
-    {
-      l_vDir = ((l_vPos+100.f*l_vDirArma)-l_vPosArma).Normalize();
-    }
-
-    l_pUserData = l_pPM->RaycastClosestActor(l_vPosArma,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER),l_CInfo);
-
-    if(l_pUserData)
-    {
-
-      if(l_pUserData->GetEntity() != l_pPlayerEntity)
+      if(l_pUserData)
       {
-        l_pEM->InitLaser(l_vPosArma,l_vDir,20.f, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
-        //SEvent l_impacte;
-        //l_impacte.Msg = SEvent::REBRE_IMPACTE;
-        //l_impacte.Info[0].Type = SEventInfo::FLOAT;
-        //l_impacte.Info[0].f    = 20.f;
-        //l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
-        //l_impacte.Sender = l_pPlayerEntity->GetGUID();
-        //l_impacte.Info[1].Type = SEventInfo::VECTOR;
-        //l_impacte.Info[1].v.x = l_vDir.x;
-        //l_impacte.Info[1].v.y = l_vDir.y;
-        //l_impacte.Info[1].v.z = l_vDir.z;
-        //l_impacte.Info[2].Type = SEventInfo::PTR;
-        //l_impacte.Info[2].ptr = (void*)(l_pUserData->GetActor());
-        //l_impacte.Info[3].Type = SEventInfo::VECTOR;
-        //l_impacte.Info[3].v.x = l_CInfo.m_CollisionPoint.x;
-        //l_impacte.Info[3].v.y = l_CInfo.m_CollisionPoint.y;
-        //l_impacte.Info[3].v.z = l_CInfo.m_CollisionPoint.z;
-        //ENTITY_MANAGER->SendEvent(l_impacte);
+
+        if(l_pUserData->GetEntity() != l_pPlayerEntity)
+        {
+          l_pEM->InitLaser(l_vPosArma,l_vDir,20.f, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
+          //SEvent l_impacte;
+          //l_impacte.Msg = SEvent::REBRE_IMPACTE;
+          //l_impacte.Info[0].Type = SEventInfo::FLOAT;
+          //l_impacte.Info[0].f    = 20.f;
+          //l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
+          //l_impacte.Sender = l_pPlayerEntity->GetGUID();
+          //l_impacte.Info[1].Type = SEventInfo::VECTOR;
+          //l_impacte.Info[1].v.x = l_vDir.x;
+          //l_impacte.Info[1].v.y = l_vDir.y;
+          //l_impacte.Info[1].v.z = l_vDir.z;
+          //l_impacte.Info[2].Type = SEventInfo::PTR;
+          //l_impacte.Info[2].ptr = (void*)(l_pUserData->GetActor());
+          //l_impacte.Info[3].Type = SEventInfo::VECTOR;
+          //l_impacte.Info[3].v.x = l_CInfo.m_CollisionPoint.x;
+          //l_impacte.Info[3].v.y = l_CInfo.m_CollisionPoint.y;
+          //l_impacte.Info[3].v.z = l_CInfo.m_CollisionPoint.z;
+          //ENTITY_MANAGER->SendEvent(l_impacte);
+        }
       }
 
     }else{
-      l_pEM->InitLaser(l_vPosArma,l_vDir,20.f, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
-    }
-  }
 
+      Vect3f l_vPuntLlunya = l_vPos+100.f*l_vDir;
+
+      l_vDir = ((l_vPos+100.f*l_vDir)-l_vPosArma).Normalize();
+
+      if(l_vDir*l_vDirArma <= 0.96f)
+      {
+        l_vDir = ((l_vPos+100.f*l_vDirArma)-l_vPosArma).Normalize();
+      }
+
+      l_pUserData = l_pPM->RaycastClosestActor(l_vPosArma,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER),l_CInfo);
+
+      if(l_pUserData)
+      {
+
+        if(l_pUserData->GetEntity() != l_pPlayerEntity)
+        {
+          l_pEM->InitLaser(l_vPosArma,l_vDir,20.f, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
+          //SEvent l_impacte;
+          //l_impacte.Msg = SEvent::REBRE_IMPACTE;
+          //l_impacte.Info[0].Type = SEventInfo::FLOAT;
+          //l_impacte.Info[0].f    = 20.f;
+          //l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
+          //l_impacte.Sender = l_pPlayerEntity->GetGUID();
+          //l_impacte.Info[1].Type = SEventInfo::VECTOR;
+          //l_impacte.Info[1].v.x = l_vDir.x;
+          //l_impacte.Info[1].v.y = l_vDir.y;
+          //l_impacte.Info[1].v.z = l_vDir.z;
+          //l_impacte.Info[2].Type = SEventInfo::PTR;
+          //l_impacte.Info[2].ptr = (void*)(l_pUserData->GetActor());
+          //l_impacte.Info[3].Type = SEventInfo::VECTOR;
+          //l_impacte.Info[3].v.x = l_CInfo.m_CollisionPoint.x;
+          //l_impacte.Info[3].v.y = l_CInfo.m_CollisionPoint.y;
+          //l_impacte.Info[3].v.z = l_CInfo.m_CollisionPoint.z;
+          //ENTITY_MANAGER->SendEvent(l_impacte);
+        }
+
+      }else{
+        l_pEM->InitLaser(l_vPosArma,l_vDir,20.f, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
+      }
+    }
+    return true;
+  }
+  else
+  {
+    return false;
+  }
 }
 
-void CComponentPlayerController::ShootGrenade(float _fTime)
+bool CComponentPlayerController::ShootGrenade(float _fTime)
 {
-  CEntityManager* l_pEM = ENTITY_MANAGER;
   CGameEntity* l_pPlayerEntity = GetEntity();
+  CComponentEnergy* l_pEnergy = l_pPlayerEntity->GetComponent<CComponentEnergy>();
 
-  CAnimatedInstanceModel *l_pAnimatedInstanceModel = m_pAnimatedModel->GetAnimatedInstanceModel();
+  if(l_pEnergy->Decrease(ENERGY_GRENADE))
+  {
+    CEntityManager* l_pEM = ENTITY_MANAGER;
+    CAnimatedInstanceModel *l_pAnimatedInstanceModel = m_pAnimatedModel->GetAnimatedInstanceModel();
 
-  CCamera* l_pCamera = GetEntity()->GetComponent<CComponent3rdPSCamera>(ECT_3RD_PERSON_SHOOTER_CAMERA)->GetCamera();
-  CComponentArma* l_pArma = GetEntity()->GetComponent<CComponentArma>();
+    CCamera* l_pCamera = GetEntity()->GetComponent<CComponent3rdPSCamera>(ECT_3RD_PERSON_SHOOTER_CAMERA)->GetCamera();
+    CComponentArma* l_pArma = GetEntity()->GetComponent<CComponentArma>();
 
-  Vect3f l_vPosArma = l_pArma->GetPosition();
-  Vect3f l_vDirArma = l_pArma->GetAimDirection();
-  Vect3f l_vPos = l_pCamera->GetEye();
-  Vect3f l_vDir = l_pCamera->GetDirection().Normalize();
+    Vect3f l_vPosArma = l_pArma->GetPosition();
+    Vect3f l_vDirArma = l_pArma->GetAimDirection();
+    Vect3f l_vPos = l_pCamera->GetEye();
+    Vect3f l_vDir = l_pCamera->GetDirection().Normalize();
 
-  l_vPosArma -= l_vDirArma*0.1f;
+    l_vPosArma -= l_vDirArma*0.1f;
   
-  l_pEM->InitParticles("disparar", l_vPosArma + l_vDirArma*0.2f, Vect3f(.25f,.5f,.25f), 2.5f, l_vDir);
+    l_pEM->InitParticles("disparar", l_vPosArma + l_vDirArma*0.2f, Vect3f(.25f,.5f,.25f), 2.5f, l_vDir);
 
-  CPhysicsManager *l_pPM = PHYSICS_MANAGER;
-  Vect3f l_vPuntLlunya = l_vPos+100.f*l_vDir;
-  l_vDir = ((l_vPos+100.f*l_vDir)-l_vPosArma).Normalize();
-  l_pEM->InitGrenade(_fTime,l_vPosArma,l_vDir,l_pPM->GetCollisionMask(ECG_OBJECTES_DINAMICS));
+    CPhysicsManager *l_pPM = PHYSICS_MANAGER;
+    Vect3f l_vPuntLlunya = l_vPos+100.f*l_vDir;
+    l_vDir = ((l_vPos+100.f*l_vDir)-l_vPosArma).Normalize();
+    l_pEM->InitGrenade(_fTime,l_vPosArma,l_vDir,l_pPM->GetCollisionMask(ECG_OBJECTES_DINAMICS));
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
 
+
+bool CComponentPlayerController::IsReadyForce() const
+{
+  CGameEntity* l_pPlayerEntity = GetEntity();
+  CComponentEnergy* l_pEnergy = l_pPlayerEntity->GetComponent<CComponentEnergy>();
+
+  return m_bForceActive && l_pEnergy->GetEnergy() > ENERGY_FORCE;
 }
 
 void CComponentPlayerController::Force()
@@ -305,72 +342,76 @@ void CComponentPlayerController::Force()
     return;
   }
   CGameEntity* l_pPlayerEntity = GetEntity();
-  CRenderer *l_pRenderer = CORE->GetRenderer();
+  CComponentEnergy* l_pEnergy = l_pPlayerEntity->GetComponent<CComponentEnergy>();
 
-  assert(l_pPlayerEntity);
+  if(l_pEnergy->Decrease(ENERGY_FORCE))
+  {
+    CRenderer *l_pRenderer = CORE->GetRenderer();
 
-  CComponentObject3D* l_pObject3d = l_pPlayerEntity->GetComponent<CComponentObject3D>();
+    assert(l_pPlayerEntity);
 
-  assert(l_pObject3d);
+    CComponentObject3D* l_pObject3d = l_pPlayerEntity->GetComponent<CComponentObject3D>();
 
-  CPostSceneRendererStep* l_pShockWave = l_pRenderer->GetPostSceneRendererStep("shock_wave");
-  //CDrawQuadSceneEffect* l_pCaptureFrameBuffers = (CDrawQuadSceneEffect*)CORE->GetSceneEffectManager()->GetResource("capture_frame_buffer_scene_effect_with_post_fx");
+    assert(l_pObject3d);
 
-  assert(l_pShockWave);
-  //assert(l_pCaptureFrameBuffers);
+    CPostSceneRendererStep* l_pShockWave = l_pRenderer->GetPostSceneRendererStep("shock_wave");
+    //CDrawQuadSceneEffect* l_pCaptureFrameBuffers = (CDrawQuadSceneEffect*)CORE->GetSceneEffectManager()->GetResource("capture_frame_buffer_scene_effect_with_post_fx");
 
-  //if(l_pShockWave->IsActive() == false)
-  //{
-    //l_pCaptureFrameBuffers->SetActive(true);
-    //l_pShockWave->SetActive(true);
-    l_pRenderer->ActivateRenderPath("shock_wave");
-    m_fForceTime = 0.0f;
+    assert(l_pShockWave);
+    //assert(l_pCaptureFrameBuffers);
 
-    Vect3f l_vPos = l_pObject3d->GetPosition();
-    vector<CPhysicUserData*> l_vImpactObjects;
-    CPhysicsManager *l_pPM = PHYSICS_MANAGER;
+    //if(l_pShockWave->IsActive() == false)
+    //{
+      //l_pCaptureFrameBuffers->SetActive(true);
+      //l_pShockWave->SetActive(true);
+      l_pRenderer->ActivateRenderPath("shock_wave");
+      m_fForceTime = 0.0f;
 
-    Mat33f l_mRot;
-    l_mRot.SetIdentity();
-    l_mRot.RotByAngleY(-m_pObject3D->GetYaw());
+      Vect3f l_vPos = l_pObject3d->GetPosition();
+      vector<CPhysicUserData*> l_vImpactObjects;
+      CPhysicsManager *l_pPM = PHYSICS_MANAGER;
 
-    Vect3f l_vDir = l_mRot*Vect3f(1.0f,0.0f,0.0f);
+      Mat33f l_mRot;
+      l_mRot.SetIdentity();
+      l_mRot.RotByAngleY(-m_pObject3D->GetYaw());
 
-    l_pPM->OverlapSphereActor(2.0f,l_vPos+3.0f*l_vDir,l_vImpactObjects,l_pPM->GetCollisionMask(ECG_FORCE));
+      Vect3f l_vDir = l_mRot*Vect3f(1.0f,0.0f,0.0f);
 
-    vector<CPhysicUserData*>::iterator l_itUserData;
-    vector<CPhysicUserData*>::iterator l_itUserDataEnd = l_vImpactObjects.end();
+      l_pPM->OverlapSphereActor(2.0f,l_vPos+3.0f*l_vDir,l_vImpactObjects,l_pPM->GetCollisionMask(ECG_FORCE));
 
-    set<CGameEntity*> l_vImpactEntities;
+      vector<CPhysicUserData*>::iterator l_itUserData;
+      vector<CPhysicUserData*>::iterator l_itUserDataEnd = l_vImpactObjects.end();
 
-    for(l_itUserData = l_vImpactObjects.begin(); l_itUserData != l_itUserDataEnd; ++l_itUserData)
-    {
-      CPhysicUserData* l_pUserData = *l_itUserData;
-      l_vImpactEntities.insert(l_pUserData->GetEntity());
-    }
+      set<CGameEntity*> l_vImpactEntities;
 
-    set<CGameEntity*>::iterator l_itEntity;
-    set<CGameEntity*>::iterator l_itEntityEnd = l_vImpactEntities.end();
-
-    for(l_itEntity = l_vImpactEntities.begin(); l_itEntity != l_itEntityEnd; ++l_itEntity)
-    {
-      CGameEntity* l_pEntity = *l_itEntity;
-
-      if(l_pPlayerEntity != l_pEntity)
+      for(l_itUserData = l_vImpactObjects.begin(); l_itUserData != l_itUserDataEnd; ++l_itUserData)
       {
-        SEvent l_impacte;
-        l_impacte.Msg = SEvent::REBRE_FORCE;
-        l_impacte.Info[0].Type = SEventInfo::FLOAT;
-        l_impacte.Info[0].f    = DAMAGE_FORCE;
-        l_impacte.Receiver = l_pEntity->GetGUID();
-        l_impacte.Sender = l_pPlayerEntity->GetGUID();
-
-        ENTITY_MANAGER->SendEvent(l_impacte);
+        CPhysicUserData* l_pUserData = *l_itUserData;
+        l_vImpactEntities.insert(l_pUserData->GetEntity());
       }
-    }
 
-  //}
+      set<CGameEntity*>::iterator l_itEntity;
+      set<CGameEntity*>::iterator l_itEntityEnd = l_vImpactEntities.end();
 
+      for(l_itEntity = l_vImpactEntities.begin(); l_itEntity != l_itEntityEnd; ++l_itEntity)
+      {
+        CGameEntity* l_pEntity = *l_itEntity;
+
+        if(l_pPlayerEntity != l_pEntity)
+        {
+          SEvent l_impacte;
+          l_impacte.Msg = SEvent::REBRE_FORCE;
+          l_impacte.Info[0].Type = SEventInfo::FLOAT;
+          l_impacte.Info[0].f    = DAMAGE_FORCE;
+          l_impacte.Receiver = l_pEntity->GetGUID();
+          l_impacte.Sender = l_pPlayerEntity->GetGUID();
+
+          ENTITY_MANAGER->SendEvent(l_impacte);
+        }
+      }
+
+    //}
+  }
 }
 
 void CComponentPlayerController::Use()

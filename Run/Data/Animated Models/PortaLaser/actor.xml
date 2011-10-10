@@ -1,0 +1,16 @@
+<actor name="PortaLaser" radius_bs="2.0" pos_bs="0.0 1.0 0.0" effect="cal3d" technique="cal3dTechnique">
+  <skeleton filename="Data/Animated Models/PortaLaser/Skeleton.csf"/>
+  <mesh filename="Data/Animated Models/PortaLaser/porta_laser.CMF"/>
+  <material animated="true" vertex_type="787">
+    <texture type="diffusse" filename="Data/Textures/COLOR_RED.tga"/>
+    <texture type="glow" filename="Data/Textures/COLOR_RED.tga"/>
+    <property type="glowIntensity" value="2.0" />
+    <property type="specularParams" glossiness="200.0" specular_level="10.0" />
+  </material>
+  <material animated="true" vertex_type="787">
+    <texture type="diffusse" filename="portal laser_diff.tga"/>
+    <property type="specularParams" glossiness="200.0" specular_level="10.0" />
+  </material>
+  <animation name="idleopen" filename="Data/Animated Models/PortaLaser/idle_closed.CAF"/>
+  <animation name="idleclose" filename="Data/Animated Models/PortaLaser/idle_closed.CAF"/>
+</actor>

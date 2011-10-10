@@ -950,7 +950,10 @@ ENTITIES
       static CComponentPlayerController* AddToEntity(CGameEntity *_pEntity)
       
       shoot
-      void Shoot()
+      bool Shoot()
+      
+      shoot_grenade
+      bool ShootGrenade(float _fTime)
       
       force
       void Force()
@@ -975,6 +978,9 @@ ENTITIES
       
       remove_pickup
       bool RemovePickUp(const string& _szPickUp)
+      
+      is_ready_force
+      bool IsReadyForce() const
       
     Attributes:
       pos_inicial

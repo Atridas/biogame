@@ -176,7 +176,7 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
     mouseSpeed = 1
   end
   
-  if ACTION_MANAGER:is_action_active('Shield') and player_controller.force_active then
+  if ACTION_MANAGER:is_action_active('Shield') and player_controller:is_ready_force() then
     --if _jugador:get_component(BaseComponent.shield):is_ready() then
       _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Force')
       
@@ -230,31 +230,32 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   
   if isAiming then
     if ACTION_MANAGER:is_action_active('Shoot') then
-      player_controller:shoot()
-      SOUND:play_sample(Player_Constants["So disparar"])
-      
-      if isMoving then
+      if player_controller:shoot() then
+        SOUND:play_sample(Player_Constants["So disparar"])
         
-      else
-        --animation:play(Player_Constants["Disparar"], 0.5, 1.0, false)
-        animation:play('shootUp', 0.5, aim_angle, false)
-        animation:play('shootDown', 0.5, 1-aim_angle, false)
+        if isMoving then
+          
+        else
+          --animation:play(Player_Constants["Disparar"], 0.5, 1.0, false)
+          animation:play('shootUp', 0.5, aim_angle, false)
+          animation:play('shootDown', 0.5, 1-aim_angle, false)
+        end
       end
     end
 	
-	 if ACTION_MANAGER:is_action_active('Grenade') then
-      player_controller:shoot_grenade(Player_Constants["Temps Grenade"])
-      SOUND:play_sample(Player_Constants["So granada"])
-      
-      if isMoving then
+	  if ACTION_MANAGER:is_action_active('Grenade') then
+      if player_controller:shoot_grenade(Player_Constants["Temps Grenade"]) then
+        SOUND:play_sample(Player_Constants["So granada"])
         
-      else
-        --animation:play(Player_Constants["Disparar"], 0.5, 1.0, false)
-        animation:play('shootUp', 0.5, aim_angle, false)
-        animation:play('shootDown', 0.5, 1-aim_angle, false)
+        if isMoving then
+          
+        else
+          --animation:play(Player_Constants["Disparar"], 0.5, 1.0, false)
+          animation:play('shootUp', 0.5, aim_angle, false)
+          animation:play('shootDown', 0.5, 1-aim_angle, false)
+        end
       end
     end
-	
   end
   
   if isMoving then
@@ -1023,7 +1024,7 @@ end
 -------------------------------------------------------------------------------------------------
 State_Player_Cobertura_Baixa_Apuntar['Enter'] = function(_jugador)
   
-  log('Michael Jackson YEAH!')
+  --log('Michael Jackson YEAH!')
   
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
@@ -1066,20 +1067,28 @@ State_Player_Cobertura_Baixa_Apuntar['Update'] = function(_jugador, _dt)
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
   
+  player_controller.time = player_controller.time + _dt
+  
+  if player_controller.time <= 0.15 then
+    return
+  end
+  
   if not ACTION_MANAGER:is_action_active('Aim') then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Baixa')
   end   
     
   if ACTION_MANAGER:is_action_active('Shoot') then
-     animation:play(Player_Constants["Disparar"], 0.3, 1.0, false)
-     player_controller:shoot()
-     SOUND:play_sample(Player_Constants["So disparar"])
+    if player_controller:shoot() then
+      animation:play(Player_Constants["Disparar"], 0.3, 1.0, false)
+      SOUND:play_sample(Player_Constants["So disparar"])
+    end
   end
   
   if ACTION_MANAGER:is_action_active('Grenade') then
-     animation:play(Player_Constants["Disparar"], 0.3, 1.0, false)
-     player_controller:shoot_grenade(Player_Constants["Temps Grenade"])
-     SOUND:play_sample(Player_Constants["So granada"])
+    if player_controller:shoot_grenade(Player_Constants["Temps Grenade"]) then
+      animation:play(Player_Constants["Disparar"], 0.3, 1.0, false)
+      SOUND:play_sample(Player_Constants["So granada"])
+    end
   end
   
   
@@ -1092,7 +1101,6 @@ State_Player_Cobertura_Baixa_Apuntar['Update'] = function(_jugador, _dt)
   end
   --local player_controller = _jugador:get_component(BaseComponent.player_controller)
 
-  --player_controller.time = player_controller.time + _dt
   
   --if player_controller.time >= 0.45 then
   --  _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')

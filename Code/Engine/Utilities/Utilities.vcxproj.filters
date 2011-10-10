@@ -157,6 +157,9 @@
     <Filter Include="EntitySystem\Components\ComponentPhysXActor\ComponentPhysXSphere">
       <UniqueIdentifier>{6f982283-1173-4529-b1f1-46158df79612}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentEnergy">
+      <UniqueIdentifier>{8e813b9a-3316-44cf-ba2a-12c5533cb9ab}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -320,6 +323,9 @@
     </ClCompile>
     <ClCompile Include="ComponentPhysxSphere.cpp">
       <Filter>EntitySystem\Components\ComponentPhysXActor\ComponentPhysXSphere</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentEnergy.cpp">
+      <Filter>EntitySystem\Components\ComponentEnergy</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -493,6 +499,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentPhysxSphere.h">
       <Filter>EntitySystem\Components\ComponentPhysXActor\ComponentPhysXSphere</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentEnergy.h">
+      <Filter>EntitySystem\Components\ComponentEnergy</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
