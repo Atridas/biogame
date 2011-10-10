@@ -45,7 +45,7 @@ end
 -------------------------------------------------------------------------------------------------
 State_Main_Menu_Inici['Update'] = function(_self, _dt)
 
-  if ACTION_MANAGER:is_action_active('Init -2') then
+  if ACTION_MANAGER:is_action_active('Init -2') or ACTION_MANAGER:is_action_active('Intro') then
     RENDERER:set_unique_render_path("HDR")
     RENDERER:activate_render_path("Antialiasing")
     set_new_level("Nivell -2")
@@ -103,7 +103,7 @@ end
 -------------------------------------------------------------------------------------------------
 State_Main_Menu_Howto['Update'] = function(_self, _dt)
 
-  if ACTION_MANAGER:is_action_active('Escape') then
+  if ACTION_MANAGER:is_action_active('Escape') or ACTION_MANAGER:is_action_active('Menu') then
     _self:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Main_Menu_Inici')
     return
   end
@@ -134,7 +134,7 @@ end
 -------------------------------------------------------------------------------------------------
 State_Main_Menu_Credits['Update'] = function(_self, _dt)
 
-  if ACTION_MANAGER:is_action_active('Escape') then
+  if ACTION_MANAGER:is_action_active('Escape') or ACTION_MANAGER:is_action_active('Menu') then
     _self:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Main_Menu_Inici')
     return
   end
@@ -198,11 +198,11 @@ end
 -------------------------------------------------------------------------------------------------
 State_Paused['Update'] = function(_self, _dt)
 
-  if ACTION_MANAGER:is_action_active('Escape') then
+  if  ACTION_MANAGER:is_action_active('Menu')  then
     _self:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Main_Menu_Inici')
     _self:get_component(BaseComponent.bgm):set_current_song(ComponentBGMController.init_menu, true)
     return
-  elseif ACTION_MANAGER:is_action_active('Pause') then
+  elseif ACTION_MANAGER:is_action_active('Pause') or ACTION_MANAGER:is_action_active('Escape') then
     _self:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Jugant')
   end
   

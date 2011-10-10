@@ -84,7 +84,7 @@
   <action name="Init -2">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_1"/>
   </action>
-  <action name="Init -2">
+  <action name="Intro">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_RETURN"/>
   </action>
   <action name="Init -1">
@@ -100,6 +100,9 @@
   </action>
   <action name="Credits">
     <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_C"/>
+  </action>
+  <action name="Menu">
+    <input deviceType="IDV_KEYBOARD" EventType="EVENT_DOWN_UP" Code="KEY_M"/>
   </action>
   <!--.......TEST ACTIONS.........................................-->
   

@@ -726,6 +726,12 @@
       </input_samplers>
     </post_scene_renderer>
   
+    <post_scene_renderer name="howto" effect="Texture">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/controls-cutres.png"/>
+      </input_samplers>
+    </post_scene_renderer>
+  
     <post_scene_renderer name="menu inicial" effect="Texture">
       <input_samplers>
         <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/MenuInicial.jpg"/>
@@ -741,6 +747,12 @@
     <post_scene_renderer name="trollface" effect="Texture">
       <input_samplers>
         <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/trollface_hd.dds"/>
+      </input_samplers>
+    </post_scene_renderer>
+  
+    <post_scene_renderer name="intercanvi professional" effect="Texture">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/pantalla_transicio.jpg"/>
       </input_samplers>
     </post_scene_renderer>
     
@@ -910,15 +922,15 @@
     </render_path>
     
     <render_path name="inici nivell -2">
-      <post_scene_renderer name="pikachusponja"/>
+      <post_scene_renderer name="intercanvi professional"/>
     </render_path>
     
     <render_path name="canvi nivell -2 a -1">
-      <post_scene_renderer name="michelangelo"/>
+      <post_scene_renderer name="intercanvi professional"/>
     </render_path>
     
     <render_path name="canvi nivell -1 a Hangar">
-      <post_scene_renderer name="mustafa"/>
+      <post_scene_renderer name="intercanvi professional"/>
     </render_path>
     
     <render_path name="Pantalla d'inici">
@@ -926,7 +938,7 @@
     </render_path>
     
     <render_path name="howto">
-      <post_scene_renderer name="testa"/>
+      <post_scene_renderer name="howto"/>
     </render_path>
     
     <render_path name="credits">
@@ -934,7 +946,7 @@
     </render_path>
     
     <render_path name="Pause">
-      <post_scene_renderer name="trollface"/>
+      <post_scene_renderer name="howto"/>
     </render_path>
   </render_paths>
   
