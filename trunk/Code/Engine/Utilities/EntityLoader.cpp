@@ -39,6 +39,7 @@
 #include "ParticleConstants.h"
 #include "ComponentPhysxSphere.h"
 #include "PhysicActor.h"
+#include "ComponentEnergy.h"
 
 #include "RenderableObject.h"
 #include "PhysicsManager.h"
@@ -670,8 +671,8 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
   CComponent3rdPSCamera::AddToEntity(l_pPlayer, 0.55f, 0.85f, 1.4f);
 
   CComponentPhysXController::AddToEntity(l_pPlayer, l_fCapsuleRadius, l_fCapsuleHeigh, 45.0f, l_fCapsuleSkin, 0.5f, ECG_PERSONATGE );
-
-  //CComponentShield::AddToEntity(l_pPlayer, 50.f, 50.f, 1.0f, 5.0f);
+  
+  CComponentEnergy::AddToEntity(l_pPlayer, 100.f);
 
   CComponentVida::AddToEntity(l_pPlayer, 100.f, 100.f, true, 25.0f, 5.0f);
 
@@ -731,8 +732,8 @@ CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f
     SetName(_szEntityName, l_peEnemy);
   }
 
-  CComponentObject3D::AddToEntity(l_peEnemy);
-  CComponentObject3D *l_pComponentObject3D = l_peEnemy->GetComponent<CComponentObject3D>();
+  
+  CComponentObject3D *l_pComponentObject3D = CComponentObject3D::AddToEntity(l_peEnemy);
   l_pComponentObject3D->SetPosition(_vPosition);
   CComponentMovement::AddToEntity(l_peEnemy);
 
@@ -747,6 +748,7 @@ CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f
   l_pComponentRenderableObject->m_bBlockPitchRoll = true;
   l_pComponentRenderableObject->m_fHeightAdjustment = -1.5f;
   l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
+  l_pComponentRenderableObject->GetRenderableObject()->SetMat44(l_pComponentObject3D->GetMat44());
 
   //(new CComponentIAWalkToPlayer())->Init(l_peEnemy,"Player",2,"walk","impact");
 
@@ -779,6 +781,7 @@ CGameEntity* CEntityManager::InitLaser(const Vect3f& _vPosInit, const Vect3f& _v
   CComponentRenderableObject *l_pCRO= CComponentRenderableObject::AddToEntity(l_pLaser, "laser " + l_pLaser->GetName(), "laser");
   l_pCRO->m_bRemoveRenderableObject = true;
   l_pComponentObject3D->SetMat44(l_mO3D);
+  l_pCRO->GetRenderableObject()->SetMat44(l_mO3D);
 
   CComponentLifetime::AddToEntity(l_pLaser, 60);
   CComponentOmni::AddToEntity(l_pLaser,Vect3f(0,0,0), CColor(.5f,0,0), 1.f, 4.f);
@@ -866,7 +869,8 @@ CGameEntity* CEntityManager::InitGrenade(float _fLifeTime, const Vect3f& _vPos,c
 
   CComponentRenderableObject *l_pCRO= CComponentRenderableObject::AddToEntity(l_pGrenade,l_pGrenade->GetName(), "granada");
   l_pCRO->m_bRemoveRenderableObject = true;
-  l_pCO3D->SetMat44(l_mO3D);
+	l_pCO3D->SetMat44(l_mO3D);
+  l_pCRO->GetRenderableObject()->SetMat44(l_mO3D);
 
   CComponentPhysXSphere* l_pSphere = CComponentPhysXSphere::AddToEntity(l_pGrenade,10.0f,0.08f,0.01f,GetCollisionGroup("objecte dinamic"));
   //CComponentPhysXMesh* l_pSphere = CComponentPhysXMesh::AddToEntity(l_pGrenade,10.0f,GetCollisionGroup("objecte dinamic"));

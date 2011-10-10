@@ -146,7 +146,7 @@
   </Entity>
   <Entity name="Porta_Laser">
     <Object3D position="15.9594 1.73938 -3.77328" yaw="64.0728" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="true" name="Porta" />
+    <RenderableObject animated="true" name="PortaLaser" />
     <Door open="false" size="2.29047 4.30355 5.02548" />
   </Entity>
   <Entity name="Porta_Videovigilancia">

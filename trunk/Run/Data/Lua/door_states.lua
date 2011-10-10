@@ -7,9 +7,10 @@ Porta_Constants["Open Animation"] = "obrir"
 Porta_Constants["Open"] = "idleopen"
 Porta_Constants["Close Animation"] = "tancar"
 Porta_Constants["Closed"] = "idleclose"
+
 --temps animacions
-Porta_Constants["Open Speed"] = 2.0
-Porta_Constants["Close Speed"] = 0.5
+--Porta_Constants["Open Speed"] = 2.0
+--Porta_Constants["Close Speed"] = 0.5
 
 
 State_Porta_Open    = {}
@@ -180,14 +181,14 @@ State_Porta_Open['Enter'] = function(_entitat)
   
   --animacio
   local l_animation = _entitat:get_component(BaseComponent.animation)
-  l_animation:play(Porta_Constants["Open"], 0.0, 1.0, true)
+  l_animation:play_cycle(Porta_Constants["Open"], 0.0, 1.0)
 
 end
 
 -------------------------------------------------------------------------------------------------
 State_Porta_Open['Exit'] = function(_entitat)
   local l_animation = _entitat:get_component(BaseComponent.animation)
-  l_animation:stop(Porta_Constants["Open"])
+  l_animation:clear_all_cycles(0.0)
 end
 
 -------------------------------------------------------------------------------------------------
@@ -282,12 +283,15 @@ State_Porta_Closed['Enter'] = function(_entitat)
   
   --animacio
   local l_animation = _entitat:get_component(BaseComponent.animation)
-  l_animation:play(Porta_Constants["Closed"], 0.0, 1.0, true)
+  l_animation:play_cycle(Porta_Constants["Closed"], 0.0, 1.0)
 
 end
 
 -------------------------------------------------------------------------------------------------
 State_Porta_Closed['Exit'] = function(_entitat)
+  --animacio
+  local l_animation = _entitat:get_component(BaseComponent.animation)
+  l_animation:clear_all_cycles(0.0)
 
 end
 
@@ -331,7 +335,7 @@ State_Porta_Closing['Enter'] = function(_entitat)
   
   --animacio
   local l_animation = _entitat:get_component(BaseComponent.animation)
-  l_animation:play(Porta_Constants["Close Animation"], 0.0, 1.0, true)
+  l_animation:play(Porta_Constants["Close Animation"], 0.0, 1.0,true)
   
 end
 

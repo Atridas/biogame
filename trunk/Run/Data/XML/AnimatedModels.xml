@@ -6,6 +6,7 @@
   <animatedModel name="Militar" path="Data/Animated Models/Militar/actor.xml"/>
   <animatedModel name="Porta" path="Data/Animated Models/Porta/actor.xml"/>
   <animatedModel name="Porta1" path="Data/Animated Models/PortaNova/actor.xml"/>
+  <animatedModel name="PortaLaser" path="Data/Animated Models/PortaLaser/actor.xml"/>
   <animatedModel name="Capsula" path="Data/Animated Models/Capsula/actor.xml"/>
   <!--animatedModel name="Vigia" path="Data/Animated Models/Vigia/actor.xml"/-->
   <!--animatedModel name="skeleton" path="Data/Animated Models/skeleton/actor.xml"/-->
