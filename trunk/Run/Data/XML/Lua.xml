@@ -9,6 +9,7 @@
     <file path="Data/Lua/hangar.lua" />
     <file path="Data/Lua/enemy_collisions.lua" />
     <file path="Data/Lua/test.lua" />
+    <file path="Data/Lua/tutorials.lua" />
     
     <!--       FINITE STATE MACHINES        -->
     <file path="Data/Lua/main_menu.lua" />

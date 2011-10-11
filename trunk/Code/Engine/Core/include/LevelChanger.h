@@ -8,6 +8,7 @@
 struct SLevel
 {
   string      RenderPath;
+  string      Script;
   vector<string> StaticMeshes;
   vector<string> RenderableObjects;
   vector<string> Portals;

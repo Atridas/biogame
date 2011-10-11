@@ -46,7 +46,7 @@
 bool CEntityProcess::Init()
 {
   //Mr.Merda Portàtil.
-  //CORE->GetRenderer()->SetUniqueRenderPath("forward");
+  CORE->GetRenderer()->SetUniqueRenderPath("forward");
   //m_PortalManager.Init("./Data/Levels/NivellProves/XML/Level.xml");
 
 
@@ -59,7 +59,7 @@ bool CEntityProcess::Init()
 
   //Carregar entitats de l'escenari ----------------------------------------------------------------------------------------
   CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/NivellProves/XML/GameEntities.xml");
-  //CORE->GetEntityManager()->CreateLevelControllerEntity(false);
+  CORE->GetEntityManager()->CreateLevelControllerEntity(false);
   
   m_pPlayerEntity = CORE->GetEntityManager()->GetEntity("Player");
   m_pCamera = m_pPlayerEntity->GetComponent<CComponent3rdPSCamera>()->GetCamera();

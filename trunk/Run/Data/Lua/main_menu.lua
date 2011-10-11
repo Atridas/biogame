@@ -11,6 +11,10 @@ Main_Menu_Constants["Renderpath inici"] = "Pantalla d'inici"
 Main_Menu_Constants["Renderpath howto"] = "howto"
 Main_Menu_Constants["Renderpath credits"] = "credits"
 
+Main_Menu_Constants["Total frames"] = 0
+Main_Menu_Constants["Current frame"] = 0
+Main_Menu_Constants["Frames"]  = {}
+
 
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
@@ -26,6 +30,8 @@ State_Main_Menu_Credits  = {}
 State_Jugant  = {}
 
 State_Paused  = {}
+
+State_Tutorial = {}
 
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
@@ -177,7 +183,6 @@ State_Jugant['Receive'] = function(_self, _event)
 
 end
 
-
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 -- jugant!!!! ----------------------------------------------------------------------------------
@@ -210,5 +215,53 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Paused['Receive'] = function(_self, _event)
+
+end
+
+
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-- tutorial!!!! ---------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+
+State_Tutorial["Enter"] = function(_self)
+  Main_Menu_Constants["Current frame"] = 0
+  
+  RENDERER:activate_render_path(Main_Menu_Constants["Frames"][0])
+  
+  CORE:set_pause(true)
+end
+
+-------------------------------------------------------------------------------------------------
+State_Tutorial["Exit"] = function(_self)
+  Main_Menu_Constants["Current frame"] = 0
+  Main_Menu_Constants["Total frames"]  = 0
+  Main_Menu_Constants["Frames"]        = {}
+end
+
+-------------------------------------------------------------------------------------------------
+State_Tutorial['Update'] = function(_self, _dt)
+
+  if ACTION_MANAGER:is_action_active('Intro') or ACTION_MANAGER:is_action_active('Use') then
+    
+    RENDERER:deactivate_render_path(Main_Menu_Constants["Frames"][Main_Menu_Constants["Current frame"]])
+    Main_Menu_Constants["Current frame"] = Main_Menu_Constants["Current frame"] + 1
+    
+    if Main_Menu_Constants["Current frame"] < Main_Menu_Constants["Total frames"] then
+      --següent imatge
+      RENDERER:activate_render_path(Main_Menu_Constants["Frames"][Main_Menu_Constants["Current frame"]])
+    else
+      --fi del tutorial
+      _self:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Jugant')
+    end
+    
+    return
+  end
+  
+end
+
+-------------------------------------------------------------------------------------------------
+State_Tutorial['Receive'] = function(_self, _event)
 
 end
