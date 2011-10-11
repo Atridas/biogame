@@ -756,21 +756,77 @@
       </input_samplers>
     </post_scene_renderer>
     
+    <!-- TUTORIALS -->
+    
     <post_scene_renderer name="tutorial next" effect="Texture" size="0.10" aspect_ratio="true" position="0.85 0.85">
       <input_samplers>
         <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/tutorial_next.png"/>
       </input_samplers>
     </post_scene_renderer>
     
-    <post_scene_renderer name="tutorial moviment" effect="Texture" size="0.33" aspect_ratio="true" position="0.33 0.2">
+    <post_scene_renderer name="tutorial movement" effect="Texture" size="0.33" aspect_ratio="true" position="0.33 0.2">
       <input_samplers>
         <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/tutorial_moviment.png"/>
       </input_samplers>
     </post_scene_renderer>
     
-    <post_scene_renderer name="tutorial dispar" effect="Texture" size="0.40" aspect_ratio="true" position="0.3 0.2">
+    <post_scene_renderer name="tutorial shoot" effect="Texture" size="0.40" aspect_ratio="true" position="0.3 0.2">
       <input_samplers>
         <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/tutorial_dispar.png"/>
+      </input_samplers>
+    </post_scene_renderer>
+    
+    <post_scene_renderer name="tutorial interactive" effect="Texture" size="0.33" aspect_ratio="true" position="0.33 0.2">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/tutorial_interactive.png"/>
+      </input_samplers>
+    </post_scene_renderer>
+    
+    <post_scene_renderer name="tutorial life" effect="Texture" size="0.33" aspect_ratio="true" position="0.33 0.2">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/tutorial_vida.png"/>
+      </input_samplers>
+    </post_scene_renderer>
+    
+    <post_scene_renderer name="tutorial energy" effect="Texture" size="0.33" aspect_ratio="true" position="0.33 0.2">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/tutorial_energia.png"/>
+      </input_samplers>
+    </post_scene_renderer>
+    
+    <post_scene_renderer name="tutorial cover" effect="Texture" size="0.33" aspect_ratio="true" position="0.33 0.2">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/tutorial_cobertura.png"/>
+      </input_samplers>
+    </post_scene_renderer>
+    
+    <post_scene_renderer name="tutorial barrel explosive" effect="Texture" size="0.33" aspect_ratio="true" position="0.33 0.2">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/tutorial_barril_explosiu.png"/>
+      </input_samplers>
+    </post_scene_renderer>
+    
+    <post_scene_renderer name="tutorial barrel toxic" effect="Texture" size="0.33" aspect_ratio="true" position="0.33 0.2">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/tutorial_barril_toxic.png"/>
+      </input_samplers>
+    </post_scene_renderer>
+    
+    <post_scene_renderer name="tutorial key" effect="Texture" size="0.33" aspect_ratio="true" position="0.33 0.2">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/tutorial_claus.png"/>
+      </input_samplers>
+    </post_scene_renderer>
+    
+    <post_scene_renderer name="tutorial grenade" effect="Texture" size="0.33" aspect_ratio="true" position="0.33 0.2">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/tutorial_granada.png"/>
+      </input_samplers>
+    </post_scene_renderer>
+    
+    <post_scene_renderer name="tutorial force" effect="Texture" size="0.33" aspect_ratio="true" position="0.33 0.2">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/tutorial_force.png"/>
       </input_samplers>
     </post_scene_renderer>
     
@@ -967,15 +1023,61 @@
       <post_scene_renderer name="howto"/>
     </render_path>
     
-    <render_path name="tutorial moviment">
-      <post_scene_renderer name="tutorial moviment"/>
+    <render_path name="tutorial movement">
+      <post_scene_renderer name="tutorial movement"/>
       <post_scene_renderer name="tutorial next"/>
     </render_path>
     
-    <render_path name="tutorial dispar">
-      <post_scene_renderer name="tutorial dispar"/>
+    <render_path name="tutorial interactive">
+      <post_scene_renderer name="tutorial interactive"/>
       <post_scene_renderer name="tutorial next"/>
     </render_path>
+    
+    <render_path name="tutorial life">
+      <post_scene_renderer name="tutorial life"/>
+      <post_scene_renderer name="tutorial next"/>
+    </render_path>
+    
+    <render_path name="tutorial energy">
+      <post_scene_renderer name="tutorial energy"/>
+      <post_scene_renderer name="tutorial next"/>
+    </render_path>
+    
+    <render_path name="tutorial shoot">
+      <post_scene_renderer name="tutorial shoot"/>
+      <post_scene_renderer name="tutorial next"/>
+    </render_path>
+    
+    <render_path name="tutorial cover">
+      <post_scene_renderer name="tutorial cover"/>
+      <post_scene_renderer name="tutorial next"/>
+    </render_path>
+    
+    <render_path name="tutorial barrel explosive">
+      <post_scene_renderer name="tutorial barrel explosive"/>
+      <post_scene_renderer name="tutorial next"/>
+    </render_path>
+    
+    <render_path name="tutorial barrel toxic">
+      <post_scene_renderer name="tutorial barrel toxic"/>
+      <post_scene_renderer name="tutorial next"/>
+    </render_path>
+    
+    <render_path name="tutorial key">
+      <post_scene_renderer name="tutorial key"/>
+      <post_scene_renderer name="tutorial next"/>
+    </render_path>
+    
+    <render_path name="tutorial grenade">
+      <post_scene_renderer name="tutorial grenade"/>
+      <post_scene_renderer name="tutorial next"/>
+    </render_path>
+    
+    <render_path name="tutorial force">
+      <post_scene_renderer name="tutorial force"/>
+      <post_scene_renderer name="tutorial next"/>
+    </render_path>
+    
   </render_paths>
   
 </renderer>

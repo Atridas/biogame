@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Levels>
-  <Level name="Nivell -2" render_path="inici nivell -2" script="tutorial_proves()">
+  <Level name="Nivell -2" render_path="inici nivell -2" script="tutorial_movement()">
     <StaticMesh file="Data/XML/StaticMeshes.xml"/>
     <StaticMesh file="Data/Levels/Level -2/XML/StaticMeshes - Laboratori.xml"/>
     <StaticMesh file="Data/Levels/Level -2/XML/StaticMeshes - Passadis.xml"/>

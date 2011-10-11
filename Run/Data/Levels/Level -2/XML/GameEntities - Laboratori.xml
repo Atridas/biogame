@@ -149,7 +149,6 @@
     <Object3D position="-13.2161 0.458649 -8.44492" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_lab_Taula_DEF" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Interactive action="recollir_arma" interactive_billboard_y_offset="0.6" />
   </Entity>
   <Entity name="lvl2_lab_Maleta_DEF01">
     <Object3D position="-8.53119 0.300873 -10.3701" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -212,8 +211,6 @@
   <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum01">
     <Object3D position="-4.73019 3.26819 -7.74813" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum01" />
-    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Destroyable onDestroy="laboratori_petar_llum_porta" hitPoints="5" />
   </Entity>
   <Entity name="lvl2_lab_lab_luz_florescente00">
     <Object3D position="-12.7607 3.6634 -5.00073" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
@@ -264,21 +261,13 @@
     <Object3D position="-14.4514 0.992515 -4.05778" yaw="0.0" pitch="0.0" roll="0.0" />
     <Emiter core="bubble" volume="0.417512 0.417512 0.417512" />
   </Entity>
-  <Entity name="lab_fum_proveta">
-    <Object3D position="-4.98981 1.16939 -2.77892" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Emiter core="fum_proveta" volume="0.03 0.03 0.03" />
+  <Entity name="Lab_billboard_weapon">
+    <Object3D position="-12.6611 1.79681 -8.53837" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Billboard core="Weapon" />
   </Entity>
-  <Entity name="lab_efecte_fred01">
-    <Object3D position="-5.75139 0.2 -10.35" yaw="00.0" pitch="90.0" roll="10.0" />
-    <Emiter core="efecte_fred" volume="1.7593 0.338507 0.338507" />
-  </Entity>
-  <Entity name="Lab_billboard_sortida">
-    <Object3D position="-8.83563 1.60321 -2.70109" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Billboard core="Ins Lab 2" />
-  </Entity>
-  <Entity name="Lab_billboard_arma">
-    <Object3D position="-5.40691 1.89178 -1.01261" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Billboard core="Ins Lab 1" />
+  <Entity name="Lab_billboard_gethere">
+    <Object3D position="-6.31096 1.89178 -1.88215" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Billboard core="GetHere" />
   </Entity>
   <Entity name="lvl2_lab_Omni03">
     <Light resource="lvl2_lab_Omni03" type="omni" script="lvl2_lab_update_light" />
@@ -286,17 +275,27 @@
   <Entity name="lvl2_lab_panell">
     <Object3D position="-4.50415 1.39148 -7.74447" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_lab_panell" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+    <Destroyable onDestroy="laboratori_obrir_porta" hitPoints="5" />
   </Entity>
   <Entity name="lvl2_lab_Omni05">
     <Light resource="lvl2_lab_Omni05" type="omni" script="lvl2_lab_update_light" />
   </Entity>
-  <Entity name="radios_banc">
+  <Entity name="lvl2_lab_radios_banc">
     <Object3D position="-4.69115 1.93918 -1.39754" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="radios_banc" />
+    <RenderableObject animated="false" name="lvl2_lab_radios_banc" />
   </Entity>
   <Entity name="lab_home_capsula">
     <Object3D position="-14.7525 0.499869 -4.02982" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Capsula" cycle="idle" />
   </Entity>
-  <Player position="-10.4473 1.72829 -6.87975" yaw="0.0" shoot_active="false" force_active="false" />
+  <Entity name="Lab_billboard_shootme">
+    <Object3D position="-4.86632 2.98163 -9.98825" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Billboard core="Shoot Me" />
+  </Entity>
+  <Entity name="lab_got_here">
+    <Object3D position="-6.08738 1.23645 -1.60702" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="2.84626 2.16962 4.02333" collision_group="trigger" onEnter="lvl2_got_there" />
+  </Entity>
+  <Player position="-11.6721 1.72829 -8.74864" yaw="0.0" shoot_active="false" force_active="false" />
 </Entities>

@@ -53,7 +53,7 @@
     </Room>
     <Room name="SalaControls">
       <Boundings>
-        <Box name="Dummy01" size="6.24808 4.38677 8.50394" position="-7.33707 2.06297 7.41136" yaw="-45.0" pitch="0.0" roll="0.0" />
+        <Box name="RoomSizeRoomClaus" size="6.24808 4.38677 8.50394" position="-7.33707 2.06297 7.41136" yaw="-45.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
         <GameObject name="lvl1_habitacio_claus" />

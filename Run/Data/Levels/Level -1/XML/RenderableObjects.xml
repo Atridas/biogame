@@ -653,8 +653,9 @@
 	<RenderableObject name="lvl1_elice" class="StaticMesh" resource="lvl1_elice" position="0.0 5.17398 0.0" yaw="0.000160287" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_porta07" class="StaticMesh" resource="lvl1_porta07" position="-5.22713 1.30378 -5.22304" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_porta09" class="StaticMesh" resource="lvl1_porta09" position="5.22305 1.30378 -5.22712" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_key_blue" class="StaticMesh" resource="lvl1_key_blue" position="-30.2093 1.47331 -0.10787" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_key_blue" class="StaticMesh" resource="lvl1_key_blue" position="-32.3763 1.47331 0.262054" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_key_purple" class="StaticMesh" resource="lvl1_key_purple" position="27.8726 -8.49328 -38.4624" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_key_yellow" class="StaticMesh" resource="lvl1_key_yellow" position="13.0062 1.39179 46.8454" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_key_green" class="StaticMesh" resource="lvl1_key_green" position="0.035368 -3.81493 -21.1876" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_grenade" class="StaticMesh" resource="granada" position="-27.3665 1.47331 0.143002" yaw="0.0" pitch="0.0" roll="0.0" />
 </RenderableObjects>

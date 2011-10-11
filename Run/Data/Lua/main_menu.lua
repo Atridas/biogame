@@ -243,7 +243,7 @@ end
 -------------------------------------------------------------------------------------------------
 State_Tutorial['Update'] = function(_self, _dt)
 
-  if ACTION_MANAGER:is_action_active('Intro') or ACTION_MANAGER:is_action_active('Use') then
+  if ACTION_MANAGER:is_action_active('Shoot') then
     
     RENDERER:deactivate_render_path(Main_Menu_Constants["Frames"][Main_Menu_Constants["Current frame"]])
     Main_Menu_Constants["Current frame"] = Main_Menu_Constants["Current frame"] + 1

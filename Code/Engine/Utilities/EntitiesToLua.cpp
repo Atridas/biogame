@@ -45,6 +45,7 @@ extern "C"
 #include "ComponentOmni.h"
 #include "ComponentArma.h"
 #include "ComponentLifetime.h"
+#include "ComponentInteractive.h"
 #include "OmniLight.h"
 #include "ComponentPhysxSphere.h"
 #include "ComponentBGMController.h"
@@ -380,6 +381,12 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("get_open_time",            &CComponentDoor::GetOpenTime)
       .def("get_close_time",           &CComponentDoor::GetCloseTime)
       .def_readwrite("time",           &CComponentDoor::m_fTime)
+
+    // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentInteractive, CBaseComponent>("ComponentInteractive")
+      .scope[def("add_to_entity",          &CComponentInteractive::AddToEntity)]
+      .def_readwrite("billboard_y_offset", &CComponentInteractive::m_fBillboardYOffset)
+
     // ----------------------------------------------------------------------------------------------------
 
     ,class_<CComponentNavNode, CBaseComponent>("ComponentNavNode")

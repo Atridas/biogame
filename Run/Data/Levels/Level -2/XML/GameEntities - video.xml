@@ -82,5 +82,9 @@
     <Object3D position="4.44702 2.52424 9.07804" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_video_faloff" />
   </Entity>
+  <Entity name="lvl2_video_billboard_laseroff">
+    <Object3D position="3.66 0.930864 11.0277" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Billboard core="Laser Off" />
+  </Entity>
   <Miner name="Miner_video00" position="4.24393 1.04204 10.0279" yaw="0.0" active="false" />
 </Entities>
