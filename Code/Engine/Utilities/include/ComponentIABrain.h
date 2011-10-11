@@ -14,7 +14,7 @@ class CComponentIABrain:
 public:
   ~CComponentIABrain() {Done();}
 
-  static CComponentIABrain* AddToEntity(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript = "", const string& _szDestinyNode = "");
+  static CComponentIABrain* AddToEntity(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript = "", const string& _szDestinyNode = "", float _fShootPrecision = 0.0f);
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_IA_BRAIN;};
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_IA_BRAIN;};
@@ -41,8 +41,8 @@ public:
   vector<CGraphNode*> m_PathToCobertura;
 
 private:
-  CComponentIABrain():m_pPlayer(0),m_fTime(0),m_bShooted(false),m_iNumUpdates(0), m_pCover(0), m_szOnDeathScript(""), m_bDead(false) {};
-  bool Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript = "", const string& _szDestinyNode = "");
+  CComponentIABrain():m_pPlayer(0),m_fTime(0),m_bShooted(false),m_iNumUpdates(0), m_pCover(0), m_szOnDeathScript(""), m_bDead(false),m_fShootPrecision(0.0f) {};
+  bool Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript = "", const string& _szDestinyNode = "", float _fShootPrecision = 0.0f);
 
   void Die();
   void RunScript();
@@ -54,6 +54,8 @@ private:
 
   int m_iNumUpdates;
   bool m_bDead;
+
+  float m_fShootPrecision;
 
   virtual void Release() {};
 
