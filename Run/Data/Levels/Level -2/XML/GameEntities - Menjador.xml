@@ -1241,6 +1241,17 @@
     <Object3D position="-3.12078 1.77784 23.9056" yaw="-25.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="3.38168 3.62117 5.64291" collision_group="trigger" onEnter="change_level_level_2" />
   </Entity>
+  <Miner name="Miner_menjador00" position="0.524845 1.62554 22.3385" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador00" position="24.3474 1.6 33.1077" yaw="0.0" active="false" destiny="Menjador_Navnode_25" />
+  <Militar name="Militar_menjador01" position="17.4814 1.6 25.9969" yaw="0.0" active="false" destiny="Menjador_Navnode_03" />
+  <Militar name="Militar_menjador02" position="18.1575 1.6 37.5072" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador03" position="4.22617 1.6 21.8491" yaw="0.0" active="false" destiny="Menjador_Navnode_04" />
+  <Militar name="Militar_menjador05" position="3.65664 1.6 20.16" yaw="0.0" active="false" destiny="Menjador_Navnode_01" />
+  <Militar name="Militar_menjador06" position="6.40578 1.6 42.524" yaw="0.0" active="false" destiny="Menjador_Navnode_00" />
+  <Militar name="Militar_menjador07" position="21.0356 1.6 25.1518" yaw="0.0" active="false" destiny="Menjador_Navnode_05" />
+  <Militar name="Militar_menjador08" position="18.3149 1.6 36.2481" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador09" position="11.755 1.6 39.1223" yaw="0.0" active="false" />
+  <Militar name="Militar_menjador10" position="5.05961 1.6 24.782" yaw="0.0" active="false" />
   <Entity name="Menjador_FumMenjar01">
     <Object3D position="14.0028 1.10657 24.48" yaw="0.0" pitch="0.0" roll="0.0" />
     <Emiter core="FumMenjar" volume="0.16 0.3 0.16" />
