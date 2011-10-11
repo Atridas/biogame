@@ -40,6 +40,7 @@ function XMLEntityObject3D _instance &_TagName =
 --Genera els paràmetres d'un tag XML d'entitat RenderableObject. Conté:
 -- animated (true/false)
 -- name (identificador de la core)
+-- [cycle]
 function XMLEntityRenderableObject _instance &_TagName _animated =
 (
 	local l_params = #()
@@ -62,6 +63,13 @@ function XMLEntityRenderableObject _instance &_TagName _animated =
 		l_resource = _instance.name
 	)
 	append l_params #("name", l_resource)
+	
+	--cycle
+	local l_cycle = GetUserProp _instance "cycle"
+	if l_cycle != undefined then
+	(
+		append l_params #("cycle",l_cycle)
+	)
 	
 	return l_params
 )

@@ -259,9 +259,10 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   end
   
   if isMoving then
-    animation:clear_cycle(Player_Constants["Idle"], 0.3)
-    animation:clear_cycle('PointUpIdle',0.3)
-    animation:clear_cycle('pointDownIdle',0.3)
+    --animation:clear_cycle(Player_Constants["Idle"], 0.3)
+    --animation:clear_cycle('PointUpIdle',0.3)
+    --animation:clear_cycle('pointDownIdle',0.3)
+    animation:clear_all_cycles(0.3)
     
     if isRunning then
       animation:stop_cycle(Player_Constants["Caminar enrere"],0.3)
@@ -1052,6 +1053,7 @@ end
 State_Player_Cobertura_Baixa_Apuntar['Exit'] = function(_jugador)
 
   local camera = _jugador:get_component(BaseComponent.thps_camera)
+
   --log('Michael Jackson YEAH!')
   --_jugador:get_component(BaseComponent.renderable_object).block_yaw = false
   --local mirilla = _jugador:get_component(BaseComponent.mirilla)
@@ -1099,6 +1101,11 @@ State_Player_Cobertura_Baixa_Apuntar['Update'] = function(_jugador, _dt)
       return
     --end
   end
+  
+  --local aim_angle = (pitch*1.75 + 1) * 0.5
+  --animation:play_cycle('PointUpIdle', 0.05, aim_angle)
+  --animation:play_cycle('pointDownIdle', 0.05, 1 - aim_angle)
+  
   --local player_controller = _jugador:get_component(BaseComponent.player_controller)
 
   

@@ -339,7 +339,7 @@ State_Enemy_Disparant['Update'] = function(_enemic, _dt)
   ia_brain.time = ia_brain.time + _dt
   
   if ia_brain.time > Enemy_Constants["Time Shoot"] and not ia_brain.shooted then
-    ia_brain:shoot()
+    ia_brain:shoot(0.25)
     ia_brain.shooted = true
   end
   

@@ -31,6 +31,17 @@ function isAnimatedModel _object =
 	)
 )
 
+-- Comprova si l'objecte proporcionat és una entitat model animat
+function IsEntityAnimatedModel _object =
+(
+	if classof _object == Dummy and (getUserProp _object "resource") != undefined and (getUserProp _object "cycle") != undefined then
+	(
+		return true
+	)
+	
+	return false
+)
+
 -- Comprova si l'objecte proporcionat és una llum
 function IsLight _object =
 (

@@ -95,6 +95,18 @@ void LoadComponentRenderableObject(CXMLTreeNode& _TreeComponent, CGameEntity* _p
       {
         LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
       }
+      else
+      {
+        string l_szCycle = _TreeComponent.GetPszISOProperty("cycle","",false);
+        if(l_szCycle != "")
+        {
+          CComponentAnimation* l_pCA = _pEntity->GetComponent<CComponentAnimation>();
+          if(l_pCA)
+          {
+            l_pCA->PlayCycle(l_szCycle, 0.0f);
+          }
+        }
+      }
     }
   } else
   {
@@ -696,7 +708,7 @@ CGameEntity* CEntityManager::InitMiner(const string& _szPlayerName, const Vect3f
 {
   CGameEntity* l_pMiner = InitEnemy(_szPlayerName, _vPosition, 0.8f, 
                     "State_Enemy_Idle", "miner", "Data/Animated Models/Miner/Skeleton.xml",
-                    _szEntityName, _szOnDeathScript, "", 0.2f);
+                    _szEntityName, _szOnDeathScript);
 
   l_pMiner->GetComponent<CComponentRenderableObject>()->m_fHeightAdjustment = -1.1f;
 
@@ -711,7 +723,7 @@ CGameEntity* CEntityManager::InitMilitar(const string& _szPlayerName, const Vect
 {
   CGameEntity* l_pMilitar = InitEnemy(_szPlayerName, _vPosition, 0.8f, 
                     "State_Soldier_Idle", "Militar", "Data/Animated Models/Militar/Skeleton.xml",
-                    _szEntityName, _szOnDeathScript, _szDestinyNode, 0.1f);
+                    _szEntityName, _szOnDeathScript, _szDestinyNode);
 
   l_pMilitar->GetComponent<CComponentRenderableObject>()->m_fHeightAdjustment = -1.0f;
 
@@ -724,7 +736,7 @@ CGameEntity* CEntityManager::InitMilitar(const string& _szPlayerName, const Vect
 
 CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f& _vPosition, float _fRadius,
                          const string& _szInitialState, const string& _szRenderableModel, const string& _szRagdollModell,
-                         const string& _szEntityName, const string& _szOnDeathScript, const string& _szDestinyNode, float _fShootPrecision)
+                         const string& _szEntityName, const string& _szOnDeathScript, const string& _szDestinyNode)
 {
   CGameEntity* l_peEnemy = CreateEntity();
   if(_szEntityName != "")
@@ -755,7 +767,7 @@ CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f
   //CComponentAnimation::AddToEntity(l_peEnemy);
   CComponentVida::AddToEntity(l_peEnemy, 100.f, 100.f);
   //Important IABrain despres de ComponentVida, sinó IABrain no te la informacio actualitzada de la vida
-  CComponentIABrain::AddToEntity(l_peEnemy,_szPlayerName,_szRagdollModell, _szOnDeathScript, _szDestinyNode, _fShootPrecision);
+  CComponentIABrain::AddToEntity(l_peEnemy,_szPlayerName,_szRagdollModell, _szOnDeathScript, _szDestinyNode);
   
 
   CComponentStateMachine::AddToEntity(l_peEnemy, _szInitialState);
