@@ -42,6 +42,8 @@ bool CLevelChanger::Init(const string& _szXMLLevels)
           m_szCurrentLevel = l_szName;
         l_pLevel->RenderPath = l_xmlLevel.GetPszISOProperty("render_path");
 
+        l_pLevel->Script = l_xmlLevel.GetPszISOProperty("script", "", false);
+
         int l_numChild = l_xmlLevel.GetNumChildren();
         for(int i = 0; i < l_numChild; ++i)
         {
@@ -140,6 +142,12 @@ void CLevelChanger::Update(float _fElapsedTime)
       {
         l_pRenderer->ActivateRenderPath(*l_it);
       }
+
+      if(l_pLevel->Script != "")
+      {
+        CORE->GetScriptManager()->RunCode(l_pLevel->Script);
+      }
+
       m_szNewLevel = "";
     }
   }

@@ -34,6 +34,8 @@ function esfera_interactiva(_self, _player)
       log('agafa una tetera abans!')
     end
   end
+  
+  tutorial_proves()
 end
 
 function esfera_destructible(_self)
