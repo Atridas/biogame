@@ -1177,6 +1177,30 @@ utility BioUtility "Eon-Utility" width:160 height:549
 					
 					format "\n  %" (CloseTagXML "Entity") to:l_file
 				)
+				else if IsEntityAnimatedModel l_instance then
+				(
+					if l_instance.name == undefined then
+					(
+						format "\n  %" (OpenTagXML "Entity") to:l_file
+					)
+					else
+					(
+						format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
+					)
+					
+					format "\tEntitat Model Animat %\n" l_instance.name
+					
+					--Object3D
+					l_params = XMLEntityObject3D l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--AnimatedModel
+					l_params = XMLEntityRenderableObject l_instance &l_TagName true
+					
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					format "\n  %" (CloseTagXML "Entity") to:l_file
+				)
 				else if IsLight l_instance then
 				(
 					if IsLightEntity l_instance then

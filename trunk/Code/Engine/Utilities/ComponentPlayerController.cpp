@@ -209,10 +209,10 @@ bool CComponentPlayerController::Shoot()
 
       l_vDir = (l_vCenterPoint-l_vPosArma).Normalize();
 
-      if(l_vDir*l_vDirArma <= 0.86f)
-      {
-        l_vDir = ((l_vPos+100.f*l_vDirArma)-l_vPosArma).Normalize();
-      }
+      //if(l_vDir*l_vDirArma <= 0.86f)
+      //{
+      //  l_vDir = ((l_vPos+100.f*l_vDirArma)-l_vPosArma).Normalize();
+      //}
 
       l_pUserData = l_pPM->RaycastClosestActor(l_vPosArma,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER),l_CInfo);
 
@@ -222,23 +222,6 @@ bool CComponentPlayerController::Shoot()
         if(l_pUserData->GetEntity() != l_pPlayerEntity)
         {
           l_pEM->InitLaser(l_vPosArma + 0.2f * l_vDir, l_vDir,20.f, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
-          //SEvent l_impacte;
-          //l_impacte.Msg = SEvent::REBRE_IMPACTE;
-          //l_impacte.Info[0].Type = SEventInfo::FLOAT;
-          //l_impacte.Info[0].f    = 20.f;
-          //l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
-          //l_impacte.Sender = l_pPlayerEntity->GetGUID();
-          //l_impacte.Info[1].Type = SEventInfo::VECTOR;
-          //l_impacte.Info[1].v.x = l_vDir.x;
-          //l_impacte.Info[1].v.y = l_vDir.y;
-          //l_impacte.Info[1].v.z = l_vDir.z;
-          //l_impacte.Info[2].Type = SEventInfo::PTR;
-          //l_impacte.Info[2].ptr = (void*)(l_pUserData->GetActor());
-          //l_impacte.Info[3].Type = SEventInfo::VECTOR;
-          //l_impacte.Info[3].v.x = l_CInfo.m_CollisionPoint.x;
-          //l_impacte.Info[3].v.y = l_CInfo.m_CollisionPoint.y;
-          //l_impacte.Info[3].v.z = l_CInfo.m_CollisionPoint.z;
-          //ENTITY_MANAGER->SendEvent(l_impacte);
         }
       }
 
@@ -248,10 +231,10 @@ bool CComponentPlayerController::Shoot()
 
       l_vDir = ((l_vPos+100.f*l_vDir)-l_vPosArma).Normalize();
 
-      if(l_vDir*l_vDirArma <= 0.96f)
-      {
-        l_vDir = ((l_vPos+100.f*l_vDirArma)-l_vPosArma).Normalize();
-      }
+      //if(l_vDir*l_vDirArma <= 0.96f)
+      //{
+      //  l_vDir = ((l_vPos+100.f*l_vDirArma)-l_vPosArma).Normalize();
+      //}
 
       l_pUserData = l_pPM->RaycastClosestActor(l_vPosArma + 0.2f * l_vDir,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER),l_CInfo);
 
@@ -261,23 +244,6 @@ bool CComponentPlayerController::Shoot()
         if(l_pUserData->GetEntity() != l_pPlayerEntity)
         {
           l_pEM->InitLaser(l_vPosArma + 0.2f * l_vDir,l_vDir,20.f, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
-          //SEvent l_impacte;
-          //l_impacte.Msg = SEvent::REBRE_IMPACTE;
-          //l_impacte.Info[0].Type = SEventInfo::FLOAT;
-          //l_impacte.Info[0].f    = 20.f;
-          //l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
-          //l_impacte.Sender = l_pPlayerEntity->GetGUID();
-          //l_impacte.Info[1].Type = SEventInfo::VECTOR;
-          //l_impacte.Info[1].v.x = l_vDir.x;
-          //l_impacte.Info[1].v.y = l_vDir.y;
-          //l_impacte.Info[1].v.z = l_vDir.z;
-          //l_impacte.Info[2].Type = SEventInfo::PTR;
-          //l_impacte.Info[2].ptr = (void*)(l_pUserData->GetActor());
-          //l_impacte.Info[3].Type = SEventInfo::VECTOR;
-          //l_impacte.Info[3].v.x = l_CInfo.m_CollisionPoint.x;
-          //l_impacte.Info[3].v.y = l_CInfo.m_CollisionPoint.y;
-          //l_impacte.Info[3].v.z = l_CInfo.m_CollisionPoint.z;
-          //ENTITY_MANAGER->SendEvent(l_impacte);
         }
 
       }else{

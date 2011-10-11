@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <RenderableObjects>
-	<RenderableObject name="lvl2_lab_lab_Llum_emergencia01" class="StaticMesh" resource="lvl2_lab_lab_Llum_emergencia01" position="-4.73019 3.26819 -7.74813" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_lab_fluorescent_apagat00" class="StaticMesh" resource="lvl2_lab_lab_fluorescent_apagat00" position="-12.0192 3.73603 -1.24801" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_Cadira_de_força" class="StaticMesh" resource="lvl2_lab_Cadira_de_força" position="-12.5797 0.524603 -9.52603" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_BancRadiografies" class="StaticMesh" resource="lvl2_lab_BancRadiografies" position="-4.66845 1.93918 -1.39754" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -54,12 +53,10 @@
 	<RenderableObject name="lvl2_lab_lab_luz_florescente01" class="StaticMesh" resource="lvl2_lab_bombeta_florescent" position="-12.7607 3.6634 -8.5986" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
 	<RenderableObject name="lvl2_lab_lab_luz_florescente02" class="StaticMesh" resource="lvl2_lab_bombeta_florescent" position="-7.86563 3.6634 -1.23278" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
 	<RenderableObject name="lvl2_lab_lab_fluorescente00" class="StaticMesh" resource="lvl2_lab_lab_fluorescente00" position="-12.1172 3.73603 -5.00521" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl2_lab_lab_llum00" class="StaticMesh" resource="lvl2_lab_llum" position="-12.1183 3.15124 -8.5973" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl2_lab_lab_llum01" class="StaticMesh" resource="lvl2_lab_llum" position="-12.1183 3.15124 -5.02906" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl2_lab_lab_llum02" class="StaticMesh" resource="lvl2_lab_llum" position="-7.19367 3.15124 -1.20397" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_lab_fluorescente01" class="StaticMesh" resource="lvl2_lab_lab_fluorescente01" position="-12.1172 3.73603 -8.60308" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_lab_fluorescente02" class="StaticMesh" resource="lvl2_lab_lab_fluorescente02" position="-7.22211 3.73603 -1.23727" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_lab_fluorescent_apagat02" class="StaticMesh" resource="lvl2_lab_lab_fluorescent_apagat02" position="-7.26858 3.73603 -8.59692" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_carpeta_eon" class="StaticMesh" resource="lvl2_lab_carpeta_eon" position="-4.88037 0.921331 -3.12124" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl2_lab_Focus_conic" class="StaticMesh" resource="lvl2_lab_Focus_conic" position="-10.1299 1.18475 -2.68388" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_lab_panell" class="StaticMesh" resource="lvl2_lab_panell" position="-4.50415 1.39148 -7.74447" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="radios_banc" class="StaticMesh" resource="radios_banc" position="-4.69115 1.93918 -1.39754" yaw="0.0" pitch="0.0" roll="0.0" />
 </RenderableObjects>

@@ -1,7 +1,7 @@
 -------------------------------------------- FUNCIONS  -------------------------------------------
 function hang_porta(_self, _player)
   if _player:get_name() == "Player" then
-    
+    deactivate_entity('EnemySpawner01')
     activate_entity('EnemySpawner01')
     local l_spawner = EM:get_entity('EnemySpawner01')
     if l_spawner then
@@ -13,6 +13,7 @@ function hang_porta(_self, _player)
       end
     end
     
+    deactivate_entity('EnemySpawner02')
     activate_entity('EnemySpawner02')
     l_spawner = EM:get_entity('EnemySpawner02')
     if l_spawner then
@@ -24,7 +25,7 @@ function hang_porta(_self, _player)
       end
     end
   
-    
+    deactivate_entity('EnemySpawner03')
     activate_entity('EnemySpawner03')
     l_spawner = EM:get_entity('EnemySpawner03')
     if l_spawner then

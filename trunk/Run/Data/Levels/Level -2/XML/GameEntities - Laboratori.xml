@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Entities>
-  <Entity name="lvl2_lab_lab_Llum_emergencia01">
-    <Object3D position="-4.73019 3.26819 -7.74813" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergencia01" />
-  </Entity>
   <Entity name="lvl2_lab_lab_fluorescent_apagat00">
     <Object3D position="-12.0192 3.73603 -1.24801" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_lab_lab_fluorescent_apagat00" />
@@ -227,10 +223,6 @@
     <Object3D position="-12.1172 3.73603 -5.00521" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_lab_lab_fluorescente00" />
   </Entity>
-  <Entity name="lvl2_lab_lab_llum00">
-    <Object3D position="-12.1183 3.15124 -8.5973" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl2_lab_llum" />
-  </Entity>
   <Entity name="lvl2_lab_lab_fluorescente01">
     <Object3D position="-12.1172 3.73603 -8.60308" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_lab_lab_fluorescente01" />
@@ -255,18 +247,6 @@
     <Object3D position="-4.88037 0.921331 -3.12124" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_lab_carpeta_eon" />
   </Entity>
-  <Entity name="lvl2_lab_lab_llum01">
-    <Object3D position="-12.1183 3.15124 -5.02906" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl2_lab_llum" />
-  </Entity>
-  <Entity name="lvl2_lab_lab_llum02">
-    <Object3D position="-7.19367 3.15124 -1.20397" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl2_lab_llum" />
-  </Entity>
-  <Entity name="lvl2_lab_Focus_conic">
-    <Object3D position="-10.1299 1.18475 -2.68388" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl2_lab_Focus_conic" />
-  </Entity>
   <Entity name="Porta_Laboratori">
     <Object3D position="-4.52435 1.29745 -7.73442" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta" />
@@ -281,7 +261,7 @@
     <Emiter core="bubble" volume="0.417512 0.417512 0.417512" />
   </Entity>
   <Entity name="lab_bubbles02">
-    <Object3D position="-14.5503 0.348145 -4.01852" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-14.4514 0.992515 -4.05778" yaw="0.0" pitch="0.0" roll="0.0" />
     <Emiter core="bubble" volume="0.417512 0.417512 0.417512" />
   </Entity>
   <Entity name="Lab_billboard_sortida">
@@ -295,9 +275,20 @@
   <Entity name="lvl2_lab_Omni03">
     <Light resource="lvl2_lab_Omni03" type="omni" script="lvl2_lab_update_light" />
   </Entity>
-  <Entity name="lab_fum_proveta">
-     <Object3D position="-4.98981 1.16939 -2.77892" yaw="0.0" pitch="0.0" roll="0.0" />
-     <Emiter core="fum_proveta_absolut" volume="0.03 0.03 0.03" />
- </Entity>
+  <Entity name="lvl2_lab_panell">
+    <Object3D position="-4.50415 1.39148 -7.74447" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_lab_panell" />
+  </Entity>
+  <Entity name="lvl2_lab_Omni05">
+    <Light resource="lvl2_lab_Omni05" type="omni" script="lvl2_lab_update_light" />
+  </Entity>
+  <Entity name="radios_banc">
+    <Object3D position="-4.69115 1.93918 -1.39754" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="radios_banc" />
+  </Entity>
+  <Entity name="lab_home_capsula">
+    <Object3D position="-14.7525 0.499869 -4.02982" yaw="-90.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="true" name="Capsula" cycle="idle" />
+  </Entity>
   <Player position="-10.4473 1.72829 -6.87975" yaw="0.0" shoot_active="false" force_active="false" />
 </Entities>

@@ -34,7 +34,7 @@ extern "C"
 
 #define SHOOT_POWER 20.0f
 
-CComponentIABrain* CComponentIABrain::AddToEntity(CGameEntity *_pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript, const string& _szDestinyNode, float _fShootPrecision)
+CComponentIABrain* CComponentIABrain::AddToEntity(CGameEntity *_pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript, const string& _szDestinyNode)
 {
   CComponentIABrain *l_pComp = new CComponentIABrain();
   assert(_pEntity && _pEntity->IsOk());
@@ -50,7 +50,7 @@ CComponentIABrain* CComponentIABrain::AddToEntity(CGameEntity *_pEntity, const s
   }
 }
 
-bool CComponentIABrain::Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript, const string& _szDestinyNode, float _fShootPrecision)
+bool CComponentIABrain::Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript, const string& _szDestinyNode)
 {
   m_szRagdollName = _szRagdollName;
 
@@ -62,14 +62,12 @@ bool CComponentIABrain::Init(CGameEntity* _pEntity, const string& _szPlayerEntit
   m_pCover = 0;
   m_bDead = false;
 
-  m_fShootPrecision = _fShootPrecision;
-
   SetOk(true);
   return IsOk();
 }
 
 
-void CComponentIABrain::Shoot()
+void CComponentIABrain::Shoot(float _fShootPrecision)
 {
   CComponentRenderableObject* l_pCR = GetEntity()->GetComponent<CComponentRenderableObject>();
   CRenderableAnimatedInstanceModel* l_pRAIM = dynamic_cast<CRenderableAnimatedInstanceModel*>(l_pCR->GetRenderableObject());
@@ -94,61 +92,13 @@ void CComponentIABrain::Shoot()
   
   l_vPos = l_vPos - 0.1f*l_vDir;
 
-  float l_fRandYaw = m_fShootPrecision * (rand()/(float)RAND_MAX * 2.0f - 1.0f);
+  float l_fRandYaw = _fShootPrecision * (rand()/(float)RAND_MAX * 2.0f - 1.0f);
   l_vDir.RotateY(l_fRandYaw);
   
   CEntityManager* l_pEM = ENTITY_MANAGER;
   l_pEM->InitParticles("disparar", l_vPos, Vect3f(.5f,.5f,.5f), 2.5f, l_vDir);
   l_pEM->InitLaser(l_vPos,l_vDir,20.f, CORE->GetPhysicsManager()->GetCollisionMask(ECG_RAY_SHOOT));
 
-  //SCollisionInfo l_CInfo;
-  //CPhysicUserData* l_pUserData = 0;
-  //
-  //CPhysicsManager *l_pPM = CORE->GetPhysicsManager();
-  //
-  //
-  //l_pUserData = l_pPM->RaycastClosestActor(l_vPos,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT),l_CInfo);
-  //
-  //if( l_pUserData )
-  //{
-  //  Vect3f l_vCenterPoint = l_CInfo.m_CollisionPoint;
-  //
-  //  //CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
-  //  //CComponentLaser::AddToEntity(l_pLaser,
-  //  //                              Vect3f(l_vMyHand.x,l_vMyHand.y,l_vMyHand.z),
-  //  //                              l_vCenterPoint,
-  //  //                              1.f);
-  //  
-  //  l_pEM->InitLaser(l_vPos,l_vDir,20.f);
-  //  if(l_pUserData->GetEntity())
-  //  {
-  //    l_pEM->InitLaser(l_vPos,l_vDir,20.f);
-  //
-  //    //SEvent l_impacte;
-  //    //l_impacte.Msg = SEvent::REBRE_IMPACTE;
-  //    //l_impacte.Info[0].Type = SEventInfo::FLOAT;
-  //    //l_impacte.Info[0].f    = 20.f;
-  //    //l_impacte.Info[3].Type = SEventInfo::VECTOR;
-  //    //l_impacte.Info[3].v.x = l_CInfo.m_CollisionPoint.x;
-  //    //l_impacte.Info[3].v.y = l_CInfo.m_CollisionPoint.y;
-  //    //l_impacte.Info[3].v.z = l_CInfo.m_CollisionPoint.z;
-  //    //l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
-  //    //l_impacte.Sender = GetEntity()->GetGUID();
-  //    //
-  //    //CORE->GetEntityManager()->SendEvent(l_impacte);
-  //  }
-  //}
-  //else
-  //{
-  //  l_pEM->InitLaser(l_vPos,l_vDir,20.f);
-  //  //Vect3f l_vCenterPoint = l_vMyHand + l_vDir * 100;
-  //
-  //  //CGameEntity * l_pLaser = CORE->GetEntityManager()->CreateEntity();
-  //  //CComponentLaser::AddToEntity(l_pLaser,
-  //  //                            l_vMyHand,
-  //  //                            l_vCenterPoint,
-  //  //                            1.f);
-  //}
 }
 
 void CComponentIABrain::ReceiveShoot(SEvent _sEvent)
