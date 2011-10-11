@@ -632,8 +632,9 @@
 	<mesh name="lvl1_elice" path="Data/Meshes/lvl1_elice.mesh" max="3.26702 2.73942 3.2706" min="-3.27681 -0.23126 -3.27319" />
 	<mesh name="lvl1_porta07" path="Data/Meshes/lvl1_porta07.mesh" max="0.812852 1.30378 0.812852" min="-0.812852 -1.30378 -0.812852" />
 	<mesh name="lvl1_porta09" path="Data/Meshes/lvl1_porta09.mesh" max="0.812853 1.30378 0.812852" min="-0.812853 -1.30378 -0.812852" />
-	<mesh name="lvl1_key_blue" path="Data/Meshes/lvl1_key_blue.mesh" max="0.525259 0.199613 0.525259" min="-0.525259 -0.199613 -0.525259" />
+	<mesh name="lvl1_key_blue" path="Data/Meshes/lvl1_key_blue.mesh" max="0.525259 0.199613 0.525259" min="-0.525261 -0.199613 -0.525259" />
 	<mesh name="lvl1_key_purple" path="Data/Meshes/lvl1_key_purple.mesh" max="0.525259 0.199613 0.525261" min="-0.525259 -0.199613 -0.525261" />
 	<mesh name="lvl1_key_yellow" path="Data/Meshes/lvl1_key_yellow.mesh" max="0.525259 0.199613 0.525261" min="-0.525259 -0.199613 -0.525261" />
 	<mesh name="lvl1_key_green" path="Data/Meshes/lvl1_key_green.mesh" max="0.525259 0.199613 0.525259" min="-0.525259 -0.199613 -0.525259" />
+	<mesh name="granada" path="Data/Meshes/granada.mesh" max="0.525259 0.199613 0.525259" min="-0.525259 -0.199613 -0.525259" />
 </meshes>

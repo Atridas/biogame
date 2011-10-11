@@ -644,6 +644,51 @@
                 is_sprite="false"
                 
                 texture="Data/Textures/Gameplay/InstruccionsLab2.dds"/>
+                
+  <Billboard    id="GetHere"                        
+                
+                starting_angle1="0.0"             starting_angle2="0.0"
+                
+                color1="1.0 1.0 1.0 1.0"          color2="1.0 1.0 1.0 1.0" 
+                size1="0.5"                       size2="0.5"
+                
+                is_sprite="false"
+                
+                texture="Data/Textures/Gameplay/GetHere.jpg"/>
+                
+  <Billboard    id="Weapon"                        
+                
+                starting_angle1="0.0"             starting_angle2="0.0"
+                
+                color1="1.0 1.0 1.0 1.0"          color2="1.0 1.0 1.0 1.0" 
+                size1="0.5"                       size2="0.5"
+                
+                is_sprite="false"
+                
+                texture="Data/Textures/Gameplay/Gun.jpg"/>
+                
+  <Billboard    id="Shoot Me"                        
+                
+                starting_angle1="0.0"             starting_angle2="0.0"
+                
+                color1="1.0 1.0 1.0 1.0"          color2="1.0 1.0 1.0 1.0" 
+                size1="0.5"                       size2="0.5"
+                
+                is_sprite="false"
+                
+                texture="Data/Textures/Gameplay/ShootMe.jpg"/>
+                
+  <Billboard    id="Laser Off"                        
+                
+                starting_angle1="0.0"             starting_angle2="0.0"
+                
+                color1="1.0 1.0 1.0 1.0"          color2="1.0 1.0 1.0 1.0" 
+                size1="0.5"                       size2="0.5"
+                
+                is_sprite="false"
+                
+                texture="Data/Textures/Gameplay/laser_off.jpg"/>
+                
   <Billboard    id="Objecte Interactuable"                        
                 
                 starting_angle1="0.0"             starting_angle2="0.0"

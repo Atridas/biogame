@@ -2900,7 +2900,7 @@
     <Door open="false" block="true" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" />
   </Entity>
   <Entity name="lvl1_door_claus">
-    <Object3D position="-5.25572 1.25049 5.19641" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-5.25321 1.25049 5.19391" yaw="-45.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta1" />
     <Door open="false" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" />
   </Entity>
@@ -3151,7 +3151,7 @@
     <PhysXBox fromRenderableObject="false" shape="box" size="0.781263 0.58866 0.503842" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_key_blue">
-    <Object3D position="-30.2093 1.47331 -0.10787" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-32.3763 1.47331 0.262054" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_key_blue" />
     <Trigger shape="box" size="1.05052 0.399226 1.05052" collision_group="pickup" onEnter="get_key_blue" />
     <Rotative yaw="0.5" />
@@ -3317,11 +3317,21 @@
     <NavNode maxDistance="5" />
   </Entity>
   <Entity name="lvl1_force_billboard">
-    <Object3D position="26.0903 -7.29258 -38.275" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="30.6931 -8.35435 -38.4911" yaw="0.0" pitch="0.0" roll="0.0" />
     <Billboard core="dont use the force" />
   </Entity>
+  <Entity name="lvl1_grenade">
+    <Object3D position="-27.3665 1.47331 0.143002" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="granada" />
+    <Trigger shape="box" size="1.05052 0.399226 1.05052" collision_group="pickup" onEnter="activate_grenades" />
+    <Rotative yaw="0.5" />
+  </Entity>
+  <Entity name="lvl1_trigger_force">
+    <Object3D position="32.07 -7.55369 -38.9208" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="1.70426 4.88858 3.29635" collision_group="trigger" onEnter="lvl1_trigger_force" />
+  </Entity>
   <Player position="-1.01856 1.08272 -18.6567" yaw="90.0" force_active="false" />
-  <Miner name="lvl1_miner_green" position="-7.60811 1.6 7.95127" yaw="0.0" active="false" on_death="drop_key" />
+  <Miner name="lvl1_miner_green" position="-3.01569 1.6 3.99538" yaw="0.0" active="false" on_death="drop_key" />
   <Militar name="lvl1_militar00" position="-4.12491 1.6 1.10068" yaw="0.0" active="false" />
   <Militar name="lvl1_militar01" position="-1.84952 1.6 -1.15103" yaw="0.0" active="false" />
   <Militar name="lvl1_militar02" position="32.1957 -0.412989 -0.684644" yaw="0.0" active="false" />

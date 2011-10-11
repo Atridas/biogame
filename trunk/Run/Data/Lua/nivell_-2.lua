@@ -1,5 +1,51 @@
 -------------------------------------------- FUNCIONS  -------------------------------------------
-function laboratori_petar_llum_porta(_self)
+function riggle_file(_self, _player)
+  if _player:get_name() == "Player" then
+  
+    --activar billboard de l'arma
+    activate_entity("Lab_billboard_weapon")
+    
+    --crear interactuable per agafar l'arma
+    local l_entity = EM:get_entity("lvl2_lab_Taula_DEF")
+    if l_entity then
+      local l_pCI = l_entity:get_component(BaseComponent.interactive)
+      
+      if l_pCI then
+        -- ja estava creat, així es pot reproduir el tutorial sempre que es vulgui
+      else
+        --Afegir interactuable a l'arma
+        l_pCI = ComponentInteractive.add_to_entity(l_entity, "recollir_arma")
+
+        if l_pCI then
+          l_pCI.billboard_y_offset = 0.6
+        else
+          log("ERROR: No s'ha pogut crear el component interactiu per a recollir_arma")
+        end
+      end
+      
+      --tutorial sobre el rigle
+      tutorial_riggle()
+      
+    else
+      log("ERROR: No es troba lvl2_lab_Taula_DEF")
+    end
+
+  end
+end
+
+function recollir_arma(_self, _player)
+  if _player:get_name() == "Player" then 
+    _player:get_component(BaseComponent.player_controller).shoot_active = true
+    _self:delete_component(BaseComponent.interactive)
+    ComponentArma.add_to_entity(_player,"ARMA")
+    tutorial_weapon()
+    activate_entity("Lab_billboard_shootme")
+  end
+end
+
+function laboratori_obrir_porta(_self)
+  deactivate_entity("Lab_billboard_shootme")
+  
   local l_door = EM:get_entity("Porta_Laboratori")
   if l_door then
     local l_message = EM:get_event()
@@ -12,19 +58,19 @@ function laboratori_petar_llum_porta(_self)
     EM:send_event(l_message)
     
     --Apagar llums
-    local l_light = LM:get_resource("lvl2_lab_Spot05")
-    if l_light then
-      l_light:set_active(false)
-    else
-      log("No es troba lvl2_lab_Spot05")
-    end
-    
-    local l_light = LM:get_resource("lvl2_lab_Omni03")
-    if l_light then
-      l_light:set_active(false)
-    else
-      log("No es troba lvl2_lab_Omni03")
-    end
+    --local l_light = LM:get_resource("lvl2_lab_Spot05")
+    --if l_light then
+    --  l_light:set_active(false)
+    --else
+    --  log("No es troba lvl2_lab_Spot05")
+    --end
+    --
+    --local l_light = LM:get_resource("lvl2_lab_Omni03")
+    --if l_light then
+    --  l_light:set_active(false)
+    --else
+    --  log("No es troba lvl2_lab_Omni03")
+    --end
   else
     log('error, no es troba la porta')
   end
@@ -54,14 +100,6 @@ function salavideo_palanca(_self, _player)
   end
 end
 
-function recollir_arma(_self, _player)
-  if _player:get_name() == "Player" then 
-    _player:get_component(BaseComponent.player_controller).shoot_active = true
-    _self:delete_component(BaseComponent.interactive)
-    ComponentArma.add_to_entity(_player,"ARMA")
-  end
-end
-
 function lvl2_lab_update_light(_entity, _dt)
 
   local l_random = math.random()
@@ -84,21 +122,81 @@ function lvl2_lab_update_light(_entity, _dt)
 end
 
 -------------------------------------------- TRIGGERS  -------------------------------------------
--- activar enemics menjador 1
-function activarMenjador01(_EntityTrigger, _Entity)
-  if _Entity:get_name() == 'Player' then
-    activate_entity('Militar_menjador00')
-    activate_entity('Militar_menjador01')
-    activate_entity('Militar_menjador07')
+--Trigger del GET HERE
+function lvl2_got_there(_EntityTrigger, _Entity)
+  if _Entity:get_name() == "Player" then
+  
+    local l_entity = EM:get_entity("lvl2_lab_Taula01")  
+    if l_entity then
+      --Afegir interactuable a la taula
+      local l_pCI = ComponentInteractive.add_to_entity(l_entity, "riggle_file")
+
+      if l_pCI then
+        l_pCI.billboard_y_offset = 1.6
+        
+        --destruir billboard gethere
+        l_entity = EM:get_entity("Lab_billboard_gethere")
+        if l_entity then
+          EM:remove_entity(l_entity)
+        else
+          log("WARNING: No s'ha pogut trobar el component Lab_billboard_gethere")
+        end
+        
+        --tutorial sobre interactuables
+        tutorial_interactive()
+      else
+        log("ERROR: No s'ha pogut crear el component interactiu per a riggle_file")
+      end
+    else
+      log("ERROR: No es troba lvl2_lab_Taula01")
+    end
+    
+    --destrucció del trigger
+    EM:remove_entity(_EntityTrigger)  
   end
 end
 
--- activar enemics menjador 2
+-- Tutorial de cobertures.
+function trigger_cobertures(_EntityTrigger, _Entity)
+  if _Entity:get_name() == 'Player' then
+    tutorial_cover()
+    
+    --destrucció del trigger
+    EM:remove_entity(_EntityTrigger)
+  end
+end
+
+-- Tutorial de barrils.
+function trigger_barrils(_EntityTrigger, _Entity)
+  if _Entity:get_name() == 'Player' then
+    tutorial_barrel()
+    
+    --destrucció del trigger
+    EM:remove_entity(_EntityTrigger)
+  end
+end
+
+-- activar enemics menjador 1.
+function activarMenjador01(_EntityTrigger, _Entity)
+  if _Entity:get_name() == 'Player' then 
+    activate_entity('Militar_menjador00')
+    activate_entity('Militar_menjador01')
+    activate_entity('Militar_menjador07')
+    
+    --destrucció del trigger
+    EM:remove_entity(_EntityTrigger) 
+  end
+end
+
+-- activar enemics menjador 2.
 function activarMenjador02(_EntityTrigger, _Entity)
   if _Entity:get_name() == 'Player' then
     activate_entity('Militar_menjador02')
     activate_entity('Militar_menjador03')
     activate_entity('Militar_menjador08')
+    
+    --destrucció del trigger
+    EM:remove_entity(_EntityTrigger) 
   end
 end
 
@@ -107,6 +205,9 @@ function activarMenjador03(_EntityTrigger, _Entity)
   if _Entity:get_name() == 'Player' then
     activate_entity('Militar_menjador09')
     activate_entity('Militar_menjador10')
+    
+    --destrucció del trigger
+    EM:remove_entity(_EntityTrigger) 
   end
 end
 
@@ -116,6 +217,9 @@ function activarMenjador04(_EntityTrigger, _Entity)
     activate_entity('Militar_menjador05')
     activate_entity('Militar_menjador06')
     activate_entity('Miner_menjador00')
+    
+    --destrucció del trigger
+    EM:remove_entity(_EntityTrigger) 
   end
 end
 

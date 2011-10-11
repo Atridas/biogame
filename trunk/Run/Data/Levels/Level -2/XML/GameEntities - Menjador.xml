@@ -1218,7 +1218,7 @@
     <NavNode cobertura="baixa" />
   </Entity>
   <Entity name="Menjador_trigger01">
-    <Object3D position="17.6872 1.41708 13.7996" yaw="-25.5885" pitch="0.0" roll="0.0" />
+    <Object3D position="19.2549 1.41708 13.0489" yaw="-25.5885" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="2.58267 2.58267 5.7926" collision_group="trigger" onEnter="activarMenjador01" />
   </Entity>
   <Entity name="Menjador_trigger02">
@@ -1240,6 +1240,14 @@
   <Entity name="Change_Level_Trigger">
     <Object3D position="-3.12078 1.77784 23.9056" yaw="-25.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="3.38168 3.62117 5.64291" collision_group="trigger" onEnter="change_level_level_2" />
+  </Entity>
+  <Entity name="Menjador_trigger_cobertures">
+    <Object3D position="22.2102 1.41708 11.6336" yaw="-25.5885" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="1.34353 2.58267 5.7926" collision_group="trigger" onEnter="trigger_cobertures" />
+  </Entity>
+  <Entity name="Menjador_trigger_barrils">
+    <Object3D position="17.0057 1.41708 14.1259" yaw="-25.5885" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="2.31076 2.58267 5.7926" collision_group="trigger" onEnter="trigger_barrils" />
   </Entity>
   <Miner name="Miner_menjador00" position="0.524845 1.62554 22.3385" yaw="0.0" active="false" />
   <Militar name="Militar_menjador00" position="24.3474 1.6 33.1077" yaw="0.0" active="false" destiny="Menjador_Navnode_25" />

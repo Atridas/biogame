@@ -1,8 +1,22 @@
 -------------------------------------------- FUNCIONS  -------------------------------------------
+-- Granades
+function activate_grenades(_self, _actor)
+  if _actor:get_name() == "Player" then
+    --Rebre la capacitat de tirar granades
+    tutorial_grenade()
+    --_actor:get_component(BaseComponent.player_controller).grenade_active = true
+    
+    --destruim la granada
+    _self:get_component(BaseComponent.renderable_object).remove_renderable_object = true
+    EM:remove_entity(_self)
+  end
+end
+
 -- CLAUS
 function get_key_green(_self, _actor)
   if _actor:get_name() == "Player" then
     pick_up(_self, _actor, "lvl1_key_green")
+    tutorial_key()
   end
 end
 
@@ -17,9 +31,6 @@ function get_key_blue(_self, _actor)
     activate_entity("lvl1_militar01")
     --obrim la porta de claus
     send_open_door("lvl1_door_claus", _actor)
-    
-    --Rebre les primeres granades
-    --_actor:get_component(BaseComponent.player_controller).grenade = _actor:get_component(BaseComponent.player_controller).grenade + 3
   end
 end
 
@@ -32,8 +43,6 @@ function get_key_purple(_self, _actor)
     activate_entity("lvl1_miner03")
     --obrim la porta de claus    
     send_open_door("lvl1_door_claus", _actor)
-    
-    _actor:get_component(BaseComponent.player_controller).force_active = true
   end
 end
 
@@ -164,13 +173,28 @@ function change_level_level_1(_EntityTrigger, _Entity)
 end
 
 --magatzem
+
+function lvl1_trigger_force(_EntityTrigger, _Entity)
+  if _Entity:get_name() == "Player" then
+    _Entity:get_component(BaseComponent.player_controller).force_active = true
+    tutorial_force()
+    
+    --destrucció del trigger
+    EM:remove_entity(_EntityTrigger)
+    deactivate_entity("lvl1_force_billboard")
+  end
+end
+  
 function lvl1_trigger_magatzem01(_EntityTrigger, _Entity)
   if _Entity:get_name() == "Player" then
     local player_controller = _Entity:get_component(BaseComponent.player_controller)
     if player_controller:has_pickup("lvl1_key_purple") then
-    activate_entity("lvl1_miner02")
-    activate_entity("lvl1_militar07")
-    activate_entity("lvl1_militar08")
+      activate_entity("lvl1_miner02")
+      activate_entity("lvl1_militar07")
+      activate_entity("lvl1_militar08")
+      
+      --destrucció del trigger
+      EM:remove_entity(_EntityTrigger)
     end
   end
 end
@@ -182,6 +206,9 @@ function lvl1_trigger_magatzem02(_EntityTrigger, _Entity)
       activate_entity("lvl1_militar06")
       activate_entity("lvl1_militar02")
       activate_entity("lvl1_militar05")
+      
+      --destrucció del trigger
+      EM:remove_entity(_EntityTrigger)
     end
   end
 end
@@ -193,6 +220,9 @@ function lvl1_trigger_pass_mag(_EntityTrigger, _Entity)
       activate_entity("lvl1_miner01")
       activate_entity("lvl1_militar03")
       activate_entity("lvl1_militar04")
+      
+      --destrucció del trigger
+      EM:remove_entity(_EntityTrigger)
     end
   end
 end
@@ -205,6 +235,9 @@ function lvl1_trigger_llits(_EntityTrigger, _Entity)
       activate_entity("lvl1_miner05")
       activate_entity("lvl1_militar14")
       activate_entity("lvl1_militar15")
+      
+      --destrucció del trigger
+      EM:remove_entity(_EntityTrigger)
     end
   end
 end
@@ -221,6 +254,9 @@ function lvl1_trigger_pas_llits(_EntityTrigger, _Entity)
       activate_entity("lvl1_militar17")
       activate_entity("lvl1_militar18")
       activate_entity("lvl1_militar19")
+      
+      --destrucció del trigger
+      EM:remove_entity(_EntityTrigger)
     end
   end
 end

@@ -1317,6 +1317,18 @@ ENTITIES
       CComponentDoor::m_fTime
       
   Class:
+    ComponentInteractive
+    CComponentInteractive
+    
+    Methods:
+      add_to_entity
+      AddToEntity(CGameEntity* _pEntity, const string& _szAction)
+      
+    Attributes:
+      billboard_y_offset
+      CComponentInteractive::m_fBillboardYOffset
+      
+  Class:
     ComponentNavNode
     CComponentNavNode
     
