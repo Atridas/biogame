@@ -158,5 +158,45 @@
     <Object3D position="7.94775 0.0 1.60195" yaw="23.0405" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="7.13034 8.93156 10.1565" collision_group="trigger" onEnter="open_door" onExit="close_door" />
   </Entity>
+  <Entity name="pas_vapor01">
+    <Object3D position="2.21225 0.2783 -6.42139" yaw="0.0" pitch="-90.0" roll="0.0" />
+    <Emiter core="vapor" volume="0.08 0.08 0.08" />
+  </Entity>
+  <Entity name="pas_vapor02">
+    <Object3D position="7.81338 1.55119 -10.6072" yaw="0.0" pitch="70.0" roll="0.0" />
+    <Emiter core="vapor" volume="0.08 0.08 0.08" />
+  </Entity>
+  <Entity name="pas_goteo01">
+    <Object3D position="8.46283 3.45808 -8.12495" yaw="0.0" pitch="180.0" roll="0.0" />
+    <Emiter core="goteo" volume="0.08 0.08 2.25" />
+  </Entity>
+  <Entity name="pas_goteo02">
+    <Object3D position="21.6917 3.45808 5.18945" yaw="0.0" pitch="180.0" roll="0.0" />
+    <Emiter core="goteo" volume="0.08 0.08 2.25" />
+  </Entity>
+  <Entity name="pas_boira01">
+    <Object3D position="20.5521 0.360519 5.81326" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="5.28 0.08 6.65" />
+  </Entity>
+  <Entity name="pas_boira02">
+    <Object3D position="17.5562 0.360519 -0.611503" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="5.28 0.08 6.65" />
+  </Entity>
+  <Entity name="pas_boira03">
+    <Object3D position="11.8908 0.360519 -6.67158" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="5.28 0.08 6.65" />
+  </Entity>
+  <Entity name="pas_boira04">
+    <Object3D position="8.97989 -0.835097 -0.962113" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="5.28 0.08 6.65" />
+  </Entity>
+  <Entity name="pas_boira05">
+    <Object3D position="-1.06901 0.360519 -8.5065" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="5.28 0.08 6.65" />
+  </Entity>
+  <Entity name="pas_boira06">
+    <Object3D position="5.76818 0.360519 -8.5065" yaw="-63.7529" pitch="16.9952" roll="11.8435" />
+    <Emiter core="boira" volume="5.28 0.08 6.65" />
+  </Entity>
   <Miner name="pas_miner00" position="20.8841 1.9223 5.44801" yaw="0.0" active="false" />
 </Entities>

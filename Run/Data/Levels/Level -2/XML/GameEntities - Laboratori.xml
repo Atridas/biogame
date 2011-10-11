@@ -264,6 +264,14 @@
     <Object3D position="-14.4514 0.992515 -4.05778" yaw="0.0" pitch="0.0" roll="0.0" />
     <Emiter core="bubble" volume="0.417512 0.417512 0.417512" />
   </Entity>
+  <Entity name="lab_fum_proveta">
+    <Object3D position="-4.98981 1.16939 -2.77892" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="fum_proveta" volume="0.03 0.03 0.03" />
+  </Entity>
+  <Entity name="lab_efecte_fred01">
+    <Object3D position="-5.75139 0.2 -10.35" yaw="00.0" pitch="90.0" roll="10.0" />
+    <Emiter core="efecte_fred" volume="1.7593 0.338507 0.338507" />
+  </Entity>
   <Entity name="Lab_billboard_sortida">
     <Object3D position="-8.83563 1.60321 -2.70109" yaw="0.0" pitch="0.0" roll="0.0" />
     <Billboard core="Ins Lab 2" />
