@@ -34,7 +34,7 @@ extern "C"
 
 #define SHOOT_POWER 20.0f
 
-CComponentIABrain* CComponentIABrain::AddToEntity(CGameEntity *_pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript, const string& _szDestinyNode)
+CComponentIABrain* CComponentIABrain::AddToEntity(CGameEntity *_pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript, const string& _szDestinyNode, float _fShootPrecision)
 {
   CComponentIABrain *l_pComp = new CComponentIABrain();
   assert(_pEntity && _pEntity->IsOk());
@@ -50,7 +50,7 @@ CComponentIABrain* CComponentIABrain::AddToEntity(CGameEntity *_pEntity, const s
   }
 }
 
-bool CComponentIABrain::Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript, const string& _szDestinyNode)
+bool CComponentIABrain::Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript, const string& _szDestinyNode, float _fShootPrecision)
 {
   m_szRagdollName = _szRagdollName;
 
@@ -61,6 +61,8 @@ bool CComponentIABrain::Init(CGameEntity* _pEntity, const string& _szPlayerEntit
 
   m_pCover = 0;
   m_bDead = false;
+
+  m_fShootPrecision = _fShootPrecision;
 
   SetOk(true);
   return IsOk();
@@ -76,26 +78,24 @@ void CComponentIABrain::Shoot()
   // ---------------------------------------------------------------------------------------------------------
   Vect3f l_vPlayerPos = m_pPlayer->GetComponent<CComponentObject3D>()->GetPosition();
 
-  l_vPlayerPos += Vect3f(0, .5f, 0);
+  float l_fRandY = 0.15f * (rand()/(float)RAND_MAX * 2.0f - 1.0f);
+  l_vPlayerPos += Vect3f(0, 0.5f + l_fRandY, 0);
   // ---------------------------------------------------------------------------------------------------------
   CalSkeleton *l_pSkeleton = l_pAnimatedInstanceModel->GetAnimatedCalModel()->getSkeleton();
   CalCoreSkeleton *l_pCoreSkeleton = l_pSkeleton->getCoreSkeleton();
   CalBone* l_pBone = l_pSkeleton->getBone( l_pCoreSkeleton->getCoreBoneId("Bip01 R Hand") );
 
-  CalVector l_vTanslationBone = l_pBone->getTranslationAbsolute();
-
-  Mat44f l_mat = l_pCR->GetRenderableObject()->GetMat44();
-  //Mat44f l_mat = m_pObject3D->GetMat44();
-
-  Vect4f l_vAux(-l_vTanslationBone.x, l_vTanslationBone.y, l_vTanslationBone.z, 1);
-
-  l_vAux = l_mat * l_vAux;
-
-  Vect3f l_vMyHand(l_vAux.x / l_vAux.w, l_vAux.y / l_vAux.w, l_vAux.z / l_vAux.w);
+  Mat44f l_vMat = CPhysxBone::GetBoneLeftHandedAbsoluteTransformation(l_pBone);
+  Mat44f l_mTransform = l_pRAIM->GetMat44()*l_vMat;
 
   // ------------------------------------------------------------------------------------------------------
-  Vect3f l_vPos = l_vMyHand;//l_pPlayerPos + Vect3f(0, .75f, 0);
-  Vect3f l_vDir = (l_vPlayerPos - l_vMyHand).GetNormalized();
+  Vect3f l_vPos = l_mTransform.GetPos();
+  Vect3f l_vDir = (l_vPlayerPos - l_vPos).GetNormalized();
+  
+  l_vPos = l_vPos - 0.1f*l_vDir;
+
+  float l_fRandYaw = m_fShootPrecision * (rand()/(float)RAND_MAX * 2.0f - 1.0f);
+  l_vDir.RotateY(l_fRandYaw);
   
   CEntityManager* l_pEM = ENTITY_MANAGER;
   l_pEM->InitParticles("disparar", l_vPos, Vect3f(.5f,.5f,.5f), 2.5f, l_vDir);

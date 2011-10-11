@@ -5,10 +5,10 @@
     <texture type="diffusse" filename="Data/Textures/COLOR_RED.tga"/>
     <texture type="glow" filename="Data/Textures/COLOR_RED.tga"/>
     <property type="glowIntensity" value="2.0" />
-    <property type="specularParams" glossiness="200.0" specular_level="10.0" />
+    <property type="specularParams" glossiness="0.0" specular_level="0.0" />
   </material>
   <material animated="true" vertex_type="787">
-    <texture type="diffusse" filename="portal laser_diff.tga"/>
+    <texture type="diffusse" filename="Data/Textures/portal laser_diff.tga"/>
     <property type="specularParams" glossiness="200.0" specular_level="10.0" />
   </material>
   <animation name="idleopen" filename="Data/Animated Models/PortaLaser/idle_closed.CAF"/>

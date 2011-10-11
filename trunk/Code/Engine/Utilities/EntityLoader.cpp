@@ -696,7 +696,7 @@ CGameEntity* CEntityManager::InitMiner(const string& _szPlayerName, const Vect3f
 {
   CGameEntity* l_pMiner = InitEnemy(_szPlayerName, _vPosition, 0.8f, 
                     "State_Enemy_Idle", "miner", "Data/Animated Models/Miner/Skeleton.xml",
-                    _szEntityName, _szOnDeathScript);
+                    _szEntityName, _szOnDeathScript, "", 0.2f);
 
   l_pMiner->GetComponent<CComponentRenderableObject>()->m_fHeightAdjustment = -1.1f;
 
@@ -711,7 +711,7 @@ CGameEntity* CEntityManager::InitMilitar(const string& _szPlayerName, const Vect
 {
   CGameEntity* l_pMilitar = InitEnemy(_szPlayerName, _vPosition, 0.8f, 
                     "State_Soldier_Idle", "Militar", "Data/Animated Models/Militar/Skeleton.xml",
-                    _szEntityName, _szOnDeathScript, _szDestinyNode);
+                    _szEntityName, _szOnDeathScript, _szDestinyNode, 0.1f);
 
   l_pMilitar->GetComponent<CComponentRenderableObject>()->m_fHeightAdjustment = -1.0f;
 
@@ -724,7 +724,7 @@ CGameEntity* CEntityManager::InitMilitar(const string& _szPlayerName, const Vect
 
 CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f& _vPosition, float _fRadius,
                          const string& _szInitialState, const string& _szRenderableModel, const string& _szRagdollModell,
-                         const string& _szEntityName, const string& _szOnDeathScript, const string& _szDestinyNode)
+                         const string& _szEntityName, const string& _szOnDeathScript, const string& _szDestinyNode, float _fShootPrecision)
 {
   CGameEntity* l_peEnemy = CreateEntity();
   if(_szEntityName != "")
@@ -755,7 +755,7 @@ CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f
   //CComponentAnimation::AddToEntity(l_peEnemy);
   CComponentVida::AddToEntity(l_peEnemy, 100.f, 100.f);
   //Important IABrain despres de ComponentVida, sinó IABrain no te la informacio actualitzada de la vida
-  CComponentIABrain::AddToEntity(l_peEnemy,_szPlayerName,_szRagdollModell, _szOnDeathScript, _szDestinyNode);
+  CComponentIABrain::AddToEntity(l_peEnemy,_szPlayerName,_szRagdollModell, _szOnDeathScript, _szDestinyNode, _fShootPrecision);
   
 
   CComponentStateMachine::AddToEntity(l_peEnemy, _szInitialState);
