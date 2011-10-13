@@ -6,7 +6,6 @@
         <Box name="Bounding Laboratori" size="12.285 6.25291 12.9608" position="-9.75657 2.3526 -5.19563" yaw="0.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
-        <GameObject name="lvl2_lab_lab_Llum_emergencia01" />
         <GameObject name="lvl2_lab_lab_fluorescent_apagat00" />
         <GameObject name="lvl2_lab_Cadira_de_força" />
         <GameObject name="lvl2_lab_BancRadiografies" />
@@ -58,16 +57,47 @@
         <GameObject name="lvl2_lab_lab_Llum_emergengia_autoilum01" />
         <GameObject name="lvl2_lab_lab_luz_florescente00" />
         <GameObject name="lvl2_lab_lab_fluorescente00" />
-        <GameObject name="lvl2_lab_lab_llum00" />
         <GameObject name="lvl2_lab_lab_fluorescente01" />
         <GameObject name="lvl2_lab_lab_luz_florescente01" />
         <GameObject name="lvl2_lab_lab_fluorescente02" />
         <GameObject name="lvl2_lab_lab_luz_florescente02" />
         <GameObject name="lvl2_lab_lab_fluorescent_apagat02" />
         <GameObject name="lvl2_lab_carpeta_eon" />
-        <GameObject name="lvl2_lab_lab_llum01" />
-        <GameObject name="lvl2_lab_lab_llum02" />
-        <GameObject name="lvl2_lab_Focus_conic" />
+        <GameObject name="lvl2_lab_Spot01" />
+        <GameObject name="lvl2_lab_Spot01.Target" />
+        <GameObject name="lvl2_lab_Spot04" />
+        <GameObject name="lvl2_lab_Spot04.Target" />
+        <GameObject name="lvl2_lab_Omni01" />
+        <GameObject name="lvl2_lab_Omni03" />
+        <GameObject name="lvl2_lab_panell" />
+        <GameObject name="lvl2_lab_Omni04" />
+        <GameObject name="lvl2_lab_Omni05" />
+        <GameObject name="lvl2_lab_radios_banc" />
+        <GameObject name="Omni01" />
+        <GameObject name="lvl2_Lab_Omni02" />
+        <GameObject name="lvl2_lab_Spot02" />
+        <GameObject name="lvl2_lab_Spot02.Target" />
+        <GameObject name="Omni04" />
+        <GameObject name="lvl2_lab_Spot06.Target" />
+        <GameObject name="lvl2_lab_Spot06" />
+        <GameObject name="lvl2_lab_Spot05.Target" />
+        <GameObject name="lvl2_lab_Spot05" />
+        <GameObject name="Omni05" />
+        <GameObject name="lvl2_lab_Spot08.Target" />
+        <GameObject name="lvl2_lab_Spot08" />
+        <GameObject name="lvl2_lab_Spot07.Target" />
+        <GameObject name="lvl2_lab_Spot07" />
+        <GameObject name="Omni06" />
+        <GameObject name="lvl2_lab_Omni02" />
+        <GameObject name="lvl2_lab_Omni06" />
+        <GameObject name="lvl2_lab_Omni07" />
+        <GameObject name="lvl2_Lab_Omni01" />
+        <GameObject name="lvl2_lab_Spot03" />
+        <GameObject name="lvl2_lab_Spot03.Target" />
+        <GameObject name="lvl2_lab_Spot09" />
+        <GameObject name="lvl2_lab_Spot09.Target" />
+        <GameObject name="lvl2_lab_Spot10.Target" />
+        <GameObject name="lvl2_lab_Spot10" />
       </Objects>
     </Room>
   </Rooms>

@@ -728,7 +728,7 @@
   
     <post_scene_renderer name="howto" effect="Texture">
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/controls-cutres.png"/>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/controles.jpg"/>
       </input_samplers>
     </post_scene_renderer>
   
@@ -740,7 +740,7 @@
   
     <post_scene_renderer name="pantalla credits" effect="Texture">
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/credits 9000.jpg"/>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/credits.jpg"/>
       </input_samplers>
     </post_scene_renderer>
   

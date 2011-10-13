@@ -654,7 +654,7 @@
                 
                 is_sprite="false"
                 
-                texture="Data/Textures/Gameplay/GetHere.jpg"/>
+                texture="Data/Textures/Gameplay/get_here.dds"/>
                 
   <Billboard    id="Weapon"                        
                 
@@ -676,7 +676,7 @@
                 
                 is_sprite="false"
                 
-                texture="Data/Textures/Gameplay/ShootMe.jpg"/>
+                texture="Data/Textures/Gameplay/Shootme.dds"/>
                 
   <Billboard    id="Laser Off"                        
                 
@@ -687,7 +687,7 @@
                 
                 is_sprite="false"
                 
-                texture="Data/Textures/Gameplay/laser_off.jpg"/>
+                texture="Data/Textures/Gameplay/laseroff.dds"/>
                 
   <Billboard    id="Objecte Interactuable"                        
                 
@@ -709,5 +709,5 @@
                 
                 is_sprite="false"
                 
-                texture="Data/Textures/Gameplay/dont use the force.dds"/>
+                texture="Data/Textures/Gameplay/useforcedds.dds"/>
 </CoreEmiters>
