@@ -44,28 +44,35 @@ bool CLightManager::Load(const string& _szFileName)
     l_szName = l_XMLLight.GetPszISOProperty("name" ,"");
     l_szType = l_XMLLight.GetPszISOProperty("type" ,"");
 
-    if(l_szType.compare("omni") == 0)
-    {
-      COmniLight* l_pOmniLight = new COmniLight(l_szName);
-      l_pOmniLight->Init(l_XMLLight);
-      AddResource(l_pOmniLight->GetName(),l_pOmniLight);
-      m_vLights.push_back(l_pOmniLight);
+    CLight* l_pLight = GetResource(l_szName);
 
-    }else if(l_szType.compare("directional") == 0)
+    if(!l_pLight)
     {
-      CDirectionalLight* l_pDirectionalLight = new CDirectionalLight(l_szName);
-      l_pDirectionalLight->Init(l_XMLLight);
-      AddResource(l_pDirectionalLight->GetName(),l_pDirectionalLight);
-      m_vLights.push_back(l_pDirectionalLight);
+      if(l_szType.compare("omni") == 0)
+      {
+        COmniLight* l_pOmniLight = new COmniLight(l_szName);
+        l_pOmniLight->Init(l_XMLLight);
+        AddResource(l_pOmniLight->GetName(),l_pOmniLight);
+        m_vLights.push_back(l_pOmniLight);
 
-    }else if(l_szType.compare("spot") == 0)
-    {
-      CSpotLight* l_pSpotLight = new CSpotLight(l_szName);
-      l_pSpotLight->Init(l_XMLLight);
-      AddResource(l_pSpotLight->GetName(),l_pSpotLight);
-      m_vLights.push_back(l_pSpotLight);
+      }else if(l_szType.compare("directional") == 0)
+      {
+        CDirectionalLight* l_pDirectionalLight = new CDirectionalLight(l_szName);
+        l_pDirectionalLight->Init(l_XMLLight);
+        AddResource(l_pDirectionalLight->GetName(),l_pDirectionalLight);
+        m_vLights.push_back(l_pDirectionalLight);
+
+      }else if(l_szType.compare("spot") == 0)
+      {
+        CSpotLight* l_pSpotLight = new CSpotLight(l_szName);
+        l_pSpotLight->Init(l_XMLLight);
+        AddResource(l_pSpotLight->GetName(),l_pSpotLight);
+        m_vLights.push_back(l_pSpotLight);
+      }else{
+        LOGGER->AddNewLog(ELL_WARNING,"CLightManager:: Unknown light type: \"%s\".", l_szType.c_str());
+      }
     }else{
-      LOGGER->AddNewLog(ELL_WARNING,"CLightManager:: Unknown light type: \"%s\".", l_szType.c_str());
+      LOGGER->AddNewLog(ELL_WARNING,"CLightManager:: Light \"%s\" repetida.", l_szType.c_str());
     }
 
 

@@ -443,6 +443,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def_readwrite("time", &CComponentLifetime::m_fTime)
       .def_readwrite("target_time", &CComponentLifetime::m_fTargetTime)
       .def_readwrite("kill_entity", &CComponentLifetime::m_bKillEntity)
+      .def_readwrite("script",      &CComponentLifetime::m_szScript)
 
       // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPhysXSphere, CBaseComponent>("ComponentPhysXSphere")

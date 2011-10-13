@@ -1585,15 +1585,15 @@ string CViewer::ShowMaterialProperties(const vector<CMaterial*>& _vMaterials)
 
     if(m_eCurrentMaterialProperty == CViewer::GLOSSINESS)
       l_SStream << "---[SELECTED]--->";
-    l_SStream << "Glossiness: " << l_pMaterial->GetGlossiness() << "3dMAX(" << l_pMaterial->GetGlossiness() << ")" << endl;
+    l_SStream << "Glossiness: " << l_pMaterial->GetGlossiness() << " 3dMAX(" << l_pMaterial->GetGlossiness() << ")" << endl;
 
     if(m_eCurrentMaterialProperty == CViewer::SPECULAR)
       l_SStream << "---[SELECTED]--->";
-    l_SStream << "Specular factor: " << l_pMaterial->GetSpecularFactor() << "3dMAX(" << (l_pMaterial->GetSpecularFactor()/.03f) << ")" << endl;
+    l_SStream << "Specular factor: " << l_pMaterial->GetSpecularFactor() << " 3dMAX(" << (l_pMaterial->GetSpecularFactor()/.03f) << ")" << endl;
 
     if(m_eCurrentMaterialProperty == CViewer::GLOW)
       l_SStream << "---[SELECTED]--->";
-    l_SStream << "Glow intensity: " << l_pMaterial->GetGlowIntensity() << "3dMAX(" << (l_pMaterial->GetGlowIntensity()/.02f) << ")" << endl;
+    l_SStream << "Glow intensity: " << l_pMaterial->GetGlowIntensity() << " 3dMAX(" << (l_pMaterial->GetGlowIntensity()/.02f) << ")" << endl;
 
     l_SStream << "Alfa blend: " << l_pMaterial->HasAlphaBlending() << endl;
 

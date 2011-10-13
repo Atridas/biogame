@@ -75,17 +75,17 @@ bool CEntityProcess::Init()
 
   // llum ----------------------------------------
   
-  //for(int i = -10; i <= 10; i++ )
-  //  for(int j = -10; j <= 10; j++ )
-  //  {
-  //    COmniLight* l_mOL = CORE->GetLightManager()->CreateOmniLight(string("omni").append(i+10,'i').append(j+10,'j'),
-  //                                                                    Vect3f(i*4.0f,1.5f,j*4.0f),
-  //                                                                    CColor(Vect3f((i%10)*0.1f,(j%10)*(i%10)*0.1f,(j%10)*0.1f)),
-  //                                                                    2.0f,
-  //                                                                    3.0f);
-  //    l_mOL->SetActive(true);
-  //  }
-  //
+  for(int i = -10; i <= 10; i++ )
+    for(int j = -10; j <= 10; j++ )
+    {
+      COmniLight* l_mOL = CORE->GetLightManager()->CreateOmniLight(string("omni").append(i+10,'i').append(j+10,'j'),
+                                                                      Vect3f(i*4.0f,1.5f,j*4.0f),
+                                                                      CColor(Vect3f(rand()/(float)RAND_MAX,rand()/(float)RAND_MAX,rand()/(float)RAND_MAX)),
+                                                                      2.0f,
+                                                                      3.0f);
+      l_mOL->SetActive(true);
+    }
+  
   //CSpotLight* l_pSpotLight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
   //                                                                    Vect3f(0.0f,15.0f,0.0f),
   //                                                                    Vect3f(0.3f,-1.0f,0.0f),
@@ -192,7 +192,7 @@ void CEntityProcess::RenderScene(CRenderManager* _pRM)
 
 void CEntityProcess::RenderINFO(CRenderManager* _pRM)
 {
-  //CORE->GetPhysicsManager()->DebugRender(_pRM);
+  CORE->GetPhysicsManager()->DebugRender(_pRM);
   //CORE->GetPortalManager()->DebugRender(_pRM);
   //CORE->GetEntityManager()->DebugRender(_pRM);
   //CORE->GetIAManager()->GetGraph()->DebugRender(_pRM);

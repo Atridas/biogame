@@ -55,6 +55,7 @@ void CComponentLifetime::Update(float _fDeltaTime)
   m_fTime += _fDeltaTime;
   if(m_fTime >= m_fTargetTime)
   {
+    bool l_bKillEntity = m_bKillEntity;
     if(m_szScript != "" && !m_bTriggered) 
     {
       CScriptManager* m_pSM = CORE->GetScriptManager();
@@ -74,7 +75,7 @@ void CComponentLifetime::Update(float _fDeltaTime)
       m_bTriggered = true;
     }
 
-    if(m_bKillEntity)
+    if(l_bKillEntity)
       ENTITY_MANAGER->RemoveEntity( GetEntity() );
   }
 }

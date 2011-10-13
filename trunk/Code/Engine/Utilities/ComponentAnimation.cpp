@@ -62,20 +62,20 @@ void CComponentAnimation::PlayCycle(const string& _szAnimation, float _fBlendTim
 {
   pair<set<string>::iterator,bool> l_pairResult;
 
-  l_pairResult = m_stActiveCycles.insert(_szAnimation);
-
-  if(l_pairResult.second)
-  {
-    m_stInactiveCycles.erase(_szAnimation);
-  }
-
   if(_fWeight > 1.0f)
     _fWeight = 1.0f;
 
   if(_fWeight < 0.0f)
     _fWeight = 0.0f;
 
-  m_pAnimatedModel->GetAnimatedInstanceModel()->BlendCycle(_szAnimation,_fBlendTime,_fWeight);
+  l_pairResult = m_stActiveCycles.insert(_szAnimation);
+
+  if(l_pairResult.second)
+  {
+    m_stInactiveCycles.erase(_szAnimation);
+    m_pAnimatedModel->GetAnimatedInstanceModel()->BlendCycle(_szAnimation,_fBlendTime,_fWeight);
+  }
+  
 }
 
 void CComponentAnimation::StopCycle(const string& _szAnimation, float _fBlendTime)

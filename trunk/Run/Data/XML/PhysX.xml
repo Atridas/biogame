@@ -51,6 +51,7 @@
   <collision group1="ragdoll player" group2="objecte dinamic"/>
   <collision group1="ragdoll player" group2="explosio"/>
   <collision group1="ragdoll player" group2="ragdoll"/>
+	<collision group1="ragdoll player" group2="trigger" />
   
   <!-- Raig de la IA amb l'escenari -->
   <collision group1="escenari" group2="ray ia graph"/>

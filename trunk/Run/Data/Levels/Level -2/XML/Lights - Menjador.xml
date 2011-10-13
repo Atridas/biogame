@@ -1,3 +1,20 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <lights ambient="0.3 0.3 0.3">
+	<light type="spot" direction="0.0 -2.10961 0.0" angle="43.0" fall_off="74.0" name="Spot02" pos="24.8333 3.00642 16.6067" color="0.866667 0.968628 1.0" att_start_range="0.0" att_end_range="2.9334" render_shadows="false" />
+	<light type="spot" direction="0.0 -2.10961 0.0" angle="43.0" fall_off="74.0" name="Spot03" pos="27.6125 3.00642 22.5107" color="0.866667 0.968628 1.0" att_start_range="0.0" att_end_range="2.9334" render_shadows="false" />
+	<light type="spot" direction="0.0 -2.10961 0.0" angle="43.0" fall_off="74.0" name="Spot04" pos="21.3252 3.00642 25.6459" color="0.866667 0.968628 1.0" att_start_range="0.0" att_end_range="2.9334" render_shadows="false" />
+	<light type="spot" direction="0.0 -2.10961 0.0" angle="43.0" fall_off="74.0" name="Spot05" pos="17.3976 3.00642 34.7638" color="0.866667 0.968628 1.0" att_start_range="0.0" att_end_range="2.9334" render_shadows="false" />
+	<light type="spot" direction="0.0 -2.10961 0.0" angle="43.0" fall_off="74.0" name="Spot06" pos="10.7052 3.00642 38.2923" color="0.866667 0.968628 1.0" att_start_range="0.0" att_end_range="2.9334" render_shadows="false" />
+	<light type="spot" direction="0.0 -2.10961 0.0" angle="43.0" fall_off="74.0" name="Spot07" pos="7.67049 3.00642 31.7552" color="0.866667 0.968628 1.0" att_start_range="0.0" att_end_range="2.9334" render_shadows="false" />
+	<light type="spot" direction="0.0 -2.10961 0.0" angle="43.0" fall_off="74.0" name="Spot08" pos="2.11556 3.00642 34.3965" color="0.866667 0.968628 1.0" att_start_range="0.0" att_end_range="2.9334" render_shadows="false" />
+	<light type="spot" direction="0.0 -2.10961 0.0" angle="43.0" fall_off="74.0" name="Spot09" pos="-0.549926 3.00642 28.691" color="0.866667 0.968628 1.0" att_start_range="0.0" att_end_range="2.9334" render_shadows="false" />
+	<light type="spot" direction="3.77512 0.119786 7.93136" angle="0.5" fall_off="46.1" name="spot_snak_02" pos="12.75 2.07384 25.4593" color="0.733333 0.705882 0.419608" att_start_range="0.0" att_end_range="13.5355" render_shadows="false" />
+	<light type="omni" name="omni_snak_0" pos="12.9131 5.55035 28.7188" color="0.572549 0.552941 0.317647" att_start_range="0.0" att_end_range="8.37162" render_shadows="false" />
+	<light type="omni" name="omni_snak_01" pos="15.8718 1.74951 20.6542" color="0.717647 0.690196 0.396078" att_start_range="1.1843" att_end_range="2.60363" render_shadows="false" />
+	<light type="spot" direction="4.38424 -2.54772 1.70483" angle="7.20008" fall_off="86.5998" name="spot_snak_05" pos="14.9205 3.00642 18.7897" color="0.694118 0.670588 0.396078" att_start_range="3.20332" att_end_range="7.70636" render_shadows="false" />
+	<light type="omni" name="omni_snak_02" pos="13.7894 2.2339 22.0196" color="0.572549 0.552941 0.317647" att_start_range="0.0" att_end_range="3.62216" render_shadows="false" />
+	<light type="omni" name="omni_snak_03" pos="10.4019 2.2339 23.6712" color="0.572549 0.552941 0.317647" att_start_range="0.0" att_end_range="3.65838" render_shadows="false" />
+	<light type="omni" name="omni_snak_04" pos="12.144 2.04441 22.7691" color="0.572549 0.552941 0.317647" att_start_range="1.11567" att_end_range="2.98922" render_shadows="false" />
+	<light type="spot" direction="11.2899 0.119786 0.838131" angle="6.60008" fall_off="59.4002" name="spot_snak_03" pos="11.0823 2.07384 26.9161" color="0.831373 0.803922 0.47451" att_start_range="0.0" att_end_range="13.5355" render_shadows="false" />
+	<light type="spot" direction="-5.34329 0.119786 7.06928" angle="6.60008" fall_off="59.4002" name="spot_snak_04" pos="14.936 2.07384 25.0913" color="0.831373 0.803922 0.47451" att_start_range="0.0" att_end_range="13.5355" render_shadows="false" />
 </lights>

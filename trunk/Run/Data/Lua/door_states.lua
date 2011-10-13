@@ -217,7 +217,7 @@ end
 State_Porta_Opening['Enter'] = function(_entitat)
   local l_door = _entitat:get_component(BaseComponent.door)
   l_door.time = 0.0
-  
+
   --comprovar que la porta no estigui bloquejada
   if l_door:is_blocked() then
    if l_door:is_active() then
