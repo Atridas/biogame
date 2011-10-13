@@ -24,6 +24,7 @@ public:
 
   bool  m_bKillEntity;
 
+  string m_szScript;
 protected:
 
   CComponentLifetime():m_fTime(0.0f),m_fTargetTime(1.0f), m_szScript(""),m_bKillEntity(true), m_bTriggered(false) {};
@@ -31,7 +32,6 @@ protected:
   virtual void Release() {};
 
 private:
-  string m_szScript;
 
   bool m_bTriggered;
 };

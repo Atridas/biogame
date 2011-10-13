@@ -2,10 +2,12 @@
 
 Player_Constants = {}
 
+Player_Constants["Idle time"] = 30.0
 
 --mouse
 Player_Constants["Vel Threshold"] = 1000
 Player_Constants["Apuntant Multiplier"] = 0.5
+
 
 --velocitats
 Player_Constants["Walk Speed"] = 2
@@ -21,6 +23,7 @@ Player_Constants["Disparar"] = 'shoot'
 Player_Constants["Rebre impacte"] = 'impact'
 Player_Constants["Morir"] = 'dead'
 Player_Constants["Escut"] = 'protection'
+Player_Constants["Dance"] = 'RiggleDance'
 --temps animacions
 Player_Constants["Temps Tocat"] = 0.3
 Player_Constants["Temps Morint"] = 0.0
@@ -32,6 +35,7 @@ Player_Constants["So granada"] = 'granada'
 Player_Constants["So force"] = 'force'
 
 State_Player_Neutre = {}
+State_Player_Dance  = {}
 State_Player_Apuntar = {}
 State_Player_Tocat = {}
 State_Player_Morint = {}
@@ -86,7 +90,7 @@ camera_player = function(_jugador, _dt, _multiplier)
   end
   
   if not finite(vel) then
-    log("xungo! " .. vel)
+    --log("xungo! " .. vel)
     vel = 1
   end
   --vel = 1
@@ -123,6 +127,8 @@ end
 State_Player_Neutre['Enter'] = function(_jugador)
   local mirilla = _jugador:get_component(BaseComponent.mirilla)
   local animation = _jugador:get_component(BaseComponent.animation)
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  player_controller.time = 0
   animation:clear_all_cycles(0.3)
   animation:play_cycle(Player_Constants["Idle"], 0.3)
   mirilla:set_active(true)
@@ -154,6 +160,7 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   local mouseSpeed = 1
   
   if ACTION_MANAGER:is_action_active('Cover') then
+    player_controller.time = 0
     if player_controller:cover() then
       if player_controller.cover_entity:get_component(BaseComponent.cover):get_cover_type() == ComponentCover.cover_high then
         _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Alta')
@@ -165,6 +172,7 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   end
 
   if ACTION_MANAGER:is_action_active('Aim') and player_controller.shoot_active then
+    player_controller.time = 0
     isAiming = true
     --camera:set_zoom(1.0,12.0)
     camera:set_fov(44.0,14.0)
@@ -185,13 +193,15 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   end
   
   if ACTION_MANAGER:is_action_active('Use') then
-    log('using')
+    player_controller.time = 0
+    --log('using')
     player_controller:use()
   end
   
   local pitch, yaw, object3d = camera_player(_jugador, _dt, mouseSpeed)
   
   if ACTION_MANAGER:is_action_active('MoveLeft') then
+    player_controller.time = 0
     left = Vect3f(math.cos(yaw + math.pi / 2), 0, math.sin(yaw + math.pi / 2) )
     moviment.movement = moviment.movement + left * (_dt) * speed
 
@@ -199,6 +209,7 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   end
   
   if ACTION_MANAGER:is_action_active('MoveRight') then
+    player_controller.time = 0
     left = Vect3f(math.cos(yaw + math.pi / 2), 0, math.sin(yaw + math.pi / 2) )
     moviment.movement = moviment.movement - left * (_dt) * speed
 
@@ -206,6 +217,7 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   end
   
   if ACTION_MANAGER:is_action_active('MoveFwd') then
+    player_controller.time = 0
     direction = Vect3f(math.cos(yaw), 0, math.sin(yaw) )
     
     local anim
@@ -219,6 +231,7 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
     
     isMoving = true
   elseif ACTION_MANAGER:is_action_active('MoveBack') then
+    player_controller.time = 0
     direction = Vect3f(math.cos(yaw), 0, math.sin(yaw) )
     moviment.movement = moviment.movement - direction * (_dt) * speed
     
@@ -307,13 +320,21 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
     if isAiming then
       animation:play_cycle('PointUpIdle', 0.05, aim_angle)
       animation:play_cycle('pointDownIdle', 0.05, 1 - aim_angle)
-      animation:clear_cycle(Player_Constants["Idle"], 0.15)
+      animation:stop_cycle(Player_Constants["Idle"], 0.15)
       
     else
       animation:play_cycle(Player_Constants["Idle"], 0.3)
-      animation:clear_cycle('PointUpIdle',0.3)
-      animation:clear_cycle('pointDownIdle',0.3)
+      animation:stop_cycle('PointUpIdle',0.3)
+      animation:stop_cycle('pointDownIdle',0.3)
     end
+  end
+  
+  
+  player_controller.time = player_controller.time + _dt
+  
+  if player_controller.time > Player_Constants["Idle time"] then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Dance')
+    return
   end
   
 end
@@ -324,6 +345,86 @@ State_Player_Neutre['Receive'] = function(_jugador, _event)
   --if _event.msg == Event.rebre_impacte then
     --_jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Tocat')
   --else
+  if _event.msg == Event.morir then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Morint')
+  end
+  
+end
+
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-- Dance!!!! ------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+
+
+-------------------------------------------------------------------------------------------------
+State_Player_Dance['Enter'] = function(_jugador)
+  set_song(ComponentBGMController.rr)
+  
+  local animation = _jugador:get_component(BaseComponent.animation)
+  animation:clear_all_cycles(0.0)
+  animation:play_cycle(Player_Constants["Dance"], 0.3)
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Dance['Exit'] = function(_jugador)
+  set_song(ComponentBGMController.init_level)
+  
+  local animation = _jugador:get_component(BaseComponent.animation)
+  animation:clear_all_cycles(0.0)
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Dance['Update'] = function(_jugador, _dt)
+
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  
+  if ACTION_MANAGER:is_action_active('Cover') then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+    return
+  end
+
+  if ACTION_MANAGER:is_action_active('Aim') and player_controller.shoot_active then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+    return
+  end
+  
+  if ACTION_MANAGER:is_action_active('Shield') and player_controller:is_ready_force() then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+    return
+  end
+  
+  if ACTION_MANAGER:is_action_active('Use') then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+    return
+  end
+  
+  local pitch, yaw, object3d = camera_player(_jugador, _dt, 1.0)
+  
+  if ACTION_MANAGER:is_action_active('MoveLeft') then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+    return
+  end
+  
+  if ACTION_MANAGER:is_action_active('MoveRight') then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+    return
+  end
+  
+  if ACTION_MANAGER:is_action_active('MoveFwd') then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+    return
+  elseif ACTION_MANAGER:is_action_active('MoveBack') then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+    return
+  end
+  
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Dance['Receive'] = function(_jugador, _event)
+
   if _event.msg == Event.morir then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Morint')
   end

@@ -103,6 +103,9 @@ CComponentBGMController::EMusicState CComponentBGMController::GetNextSong() cons
   case (CComponentBGMController::EMS_BATTLE_TO_EXPLORE):
     l_eNextSong = CComponentBGMController::EMS_EXPLORE;
     break;
+  case (CComponentBGMController::EMS_RR):
+    l_eNextSong = CComponentBGMController::EMS_RR;
+    break;
   default:
     l_eNextSong = CComponentBGMController::EMS_MAIN_MENU;
     break;

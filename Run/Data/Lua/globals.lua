@@ -81,6 +81,7 @@ function granada(_self)
     l_exp:explode(l_position,4)
     --l_lifetime.kill_entity = false
     l_lifetime.target_time = l_lifetime.target_time + 0.5
+    --l_lifetime.script = ""
 	
 	
     local l_explosion = EM:init_emiter("explosio foc", l_position+Vect3f(0, 1.0, 0), Vect3f(1.5, 1.5, 1.5), 1.5, Vect3f(0,1,0))

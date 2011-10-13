@@ -79,9 +79,12 @@ void CComponentTrigger::OnEnter(CGameEntity* _pOther)
     return;
 
   if(CheckEntered(_pOther))
+  {
+    m_sEntered[_pOther]++;
     return;
+  }
 
-  m_sEntered.insert(_pOther);
+  m_sEntered[_pOther] = 1;
 
   ExecuteLua(m_szOnEnter,_pOther);
 }
@@ -94,15 +97,18 @@ void CComponentTrigger::OnExit (CGameEntity* _pOther)
   if(!CheckEntered(_pOther))
     return;
 
-  m_sEntered.erase(_pOther);
-
-  ExecuteLua(m_szOnExit,_pOther);
+  m_sEntered[_pOther]--;
+  if(m_sEntered[_pOther] == 0)
+  {
+    m_sEntered.erase(_pOther);
+    ExecuteLua(m_szOnExit,_pOther);
+  }
 }
 
 bool CComponentTrigger::CheckEntered(CGameEntity* _pEntity)
 {
-  set<CGameEntity*>::iterator l_it;
-  set<CGameEntity*>::iterator l_itEnd = m_sEntered.end();
+  map<CGameEntity*,int>::iterator l_it;
+  map<CGameEntity*,int>::iterator l_itEnd = m_sEntered.end();
 
   l_it = m_sEntered.find(_pEntity);
 

@@ -30,7 +30,7 @@ private:
 
   string m_szOnEnter, m_szOnExit;
 
-  set<CGameEntity*> m_sEntered;
+  map<CGameEntity*,int> m_sEntered;
 };
 
 #endif
