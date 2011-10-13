@@ -56,5 +56,5 @@
 	<mesh name="lvl2_lab_lab_fluorescent_apagat02" path="Data/Meshes/lvl2_lab_lab_fluorescent_apagat02.mesh" max="0.772501 2.49151 0.104" min="-0.772499 -0.115818 -0.104" />
 	<mesh name="lvl2_lab_carpeta_eon" path="Data/Meshes/lvl2_lab_carpeta_eon.mesh" max="-0.250171 -0.000523925 0.803741" min="-0.564054 -0.00614637 0.466333" />
 	<mesh name="lvl2_lab_panell" path="Data/Meshes/lvl2_lab_panell.mesh" max="-0.149888 1.06341 -2.01185" min="-0.246927 0.570453 -2.4427" />
-	<mesh name="radios_banc" path="Data/Meshes/radios_banc.mesh" max="-0.158181 0.463373 0.962007" min="-0.158181 -0.459987 -0.774452" />
+	<mesh name="lvl2_lab_radios_banc" path="Data/Meshes/lvl2_lab_radios_banc.mesh" max="-0.158181 0.463373 0.962007" min="-0.158181 -0.459987 -0.774452" />
 </meshes>
