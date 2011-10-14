@@ -289,12 +289,20 @@ bool CComponentIABrain::PlanPathToCobertura()
     CGameEntity* l_pNode = ENTITY_MANAGER->GetEntity(m_szDestinyNode);
     if(l_pNode)
     {
-      CComponentObject3D* l_pDestPos  = l_pNode->GetComponent<CComponentObject3D>();
-      CComponentObject3D* l_pObject3D = GetEntity()->GetComponent<CComponentObject3D>();
+      CComponentObject3D* l_pDestPos   = l_pNode->GetComponent<CComponentObject3D>();
+      CComponentObject3D* l_pObject3D  = GetEntity()->GetComponent<CComponentObject3D>();
+      CComponentNavNode*  l_pGraphNode = l_pNode->GetComponent<CComponentNavNode>();
 
-      if(l_pObject3D && l_pDestPos)
+      if(l_pObject3D && l_pDestPos && l_pGraphNode)
       {
-        m_PathToCobertura = CORE->GetIAManager()->SearchPathA(l_pObject3D->GetPosition(), l_pDestPos->GetPosition());
+        if(!l_pGraphNode->m_bOcupat)
+        {
+          m_PathToCobertura = CORE->GetIAManager()->SearchPathA(l_pObject3D->GetPosition(), l_pDestPos->GetPosition());
+        }
+        else
+        {
+          return false;
+        }
       }
       else
       {

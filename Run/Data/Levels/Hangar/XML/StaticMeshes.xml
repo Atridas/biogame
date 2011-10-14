@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <meshes>
-	<mesh name="hangar_Pasarela superior" path="Data/Meshes/hangar_Pasarela superior.mesh" max="24.604 1.65178 12.9949" min="-23.2161 -0.0999999 -12.9936" />
 	<mesh name="hangar_Caixa_gran" path="Data/Meshes/hangar_Caixa_gran.mesh" max="1.00242 1.5 1.00242" min="-1.00242 0.0 -1.00242" />
 	<mesh name="hangar_mur divisor" path="Data/Meshes/hangar_mur divisor.mesh" max="0.400034 1.0795 0.554314" min="-0.489122 0.0 -0.811184" />
 	<mesh name="hangar_mur divisor01" path="Data/Meshes/hangar_mur divisor01.mesh" max="0.437885 1.0795 0.558808" min="-0.552788 0.0 -0.805215" />
@@ -90,5 +89,5 @@
 	<mesh name="hangar_mur divisor13" path="Data/Meshes/hangar_mur divisor13.mesh" max="0.437885 1.0795 0.558808" min="-0.552788 0.0 -0.805215" />
 	<mesh name="hangar_mur divisor14" path="Data/Meshes/hangar_mur divisor14.mesh" max="0.437885 1.0795 0.558808" min="-0.552788 0.0 -0.805215" />
 	<mesh name="hangar_mur divisor15" path="Data/Meshes/hangar_mur divisor15.mesh" max="0.400034 1.0795 0.554314" min="-0.489122 0.0 -0.811184" />
-	<mesh name="hangar_Pasarela interior" path="Data/Meshes/hangar_Pasarela interior.mesh" max="24.604 1.65178 12.9949" min="-23.2161 -0.0999999 -12.9936" />
+	<mesh name="hangar_plataforma" path="Data/Meshes/hangar_plataforma.mesh" max="27.3488 0.2 15.0245" min="-27.3488 0.0 -15.0245" />
 </meshes>

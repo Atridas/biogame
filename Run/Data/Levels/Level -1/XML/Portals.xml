@@ -44,11 +44,12 @@
     </Room>
     <Room name="Room01">
       <Boundings>
-        <Box name="RoomSizeRoom01" size="6.32806 1.58218 8.6325" position="-30.2591 0.0 0.0344453" yaw="0.0" pitch="0.0" roll="0.0" />
+        <Box name="RoomSizeRoom01" size="6.32806 6.6405 8.6325" position="-30.2591 2.49468 0.0344453" yaw="0.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
         <GameObject name="lvl1_habitacio_municio" />
         <GameObject name="lvl1_Porta_planta-1_02" />
+        <GameObject name="lvl1_key_blue" />
       </Objects>
     </Room>
     <Room name="SalaControls">
@@ -432,6 +433,7 @@
         <GameObject name="lvl1_fluorescente_apagat01" />
         <GameObject name="lvl1_taquilla06" />
         <GameObject name="lvl1_taquilla01" />
+        <GameObject name="lvl1_key_yellow" />
       </Objects>
     </Room>
     <Room name="Pass04">
@@ -698,6 +700,7 @@
         <GameObject name="lvl1_Caixa_estatica_petita31" />
         <GameObject name="lvl1_caixa_llarga14" />
         <GameObject name="lvl1_caixa_llarga15" />
+        <GameObject name="lvl1_key_purple" />
       </Objects>
     </Room>
     <Room name="SalaCentral">

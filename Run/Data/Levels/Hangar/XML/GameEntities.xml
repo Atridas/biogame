@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Entities>
-  <Entity name="hangar_Pasarela superior">
-    <Object3D position="0.0162411 7.5308 1.51297e-007" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="hangar_Pasarela superior" />
-    <PhysXMesh density="0" collision_group="escenari" />
-  </Entity>
   <Entity name="hangar_Caixa_gran">
     <Object3D position="14.9213 0.0 13.9103" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="hangar_Caixa_gran" />
@@ -67,7 +62,6 @@
   <Entity name="hangar_container_middle06">
     <Object3D position="-13.5 0.0 13.38" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="hangar_container_middle06" />
-    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="hangar_container_middle07">
     <Object3D position="-4.50751 0.0 13.0869" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -92,7 +86,6 @@
   <Entity name="hangar_container_middle11">
     <Object3D position="-8.38531 0.0 0.0576587" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="hangar_container_middle11" />
-    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="hangar_container_middle10">
     <Object3D position="-22.88 0.0 -6.88" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -313,39 +306,32 @@
     <Destroyable onDestroy="bido_toxic" />
   </Entity>
   <Entity name="hangar_bido_verd01">
-    <Object3D position="12.1726 0.0 -4.8167" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="6.52627 0.0 -6.10351" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_verd" />
     <PhysXMesh density="0" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" />
   </Entity>
   <Entity name="hangar_bido_verd02">
-    <Object3D position="11.1278 0.0 7.39667" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="10.5009 0.0 6.10023" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_verd" />
     <PhysXMesh density="0" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" />
   </Entity>
   <Entity name="hangar_bido_verd03">
-    <Object3D position="19.6163 0.0 10.4933" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="19.1918 0.0 11.7299" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_verd" />
     <PhysXMesh density="0" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" />
   </Entity>
   <Entity name="hangar_Bido_vermell">
-    <Object3D position="3.89436 0.0 3.20539" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="global_bido_vermell" />
-    <PhysXMesh density="0" collision_group="objecte dinamic" />
-    <Destroyable onDestroy="bido_explosiu" />
-    <Explosive />
-  </Entity>
-  <Entity name="hangar_Bido_vermell01">
-    <Object3D position="6.31014 0.0 -6.0589" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="3.4384 0.0 2.53783" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_vermell" />
     <PhysXMesh density="0" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_explosiu" />
     <Explosive />
   </Entity>
   <Entity name="hangar_Bido_vermell02">
-    <Object3D position="13.7274 0.0 9.57732" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="15.0949 0.0 11.73" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_vermell" />
     <PhysXMesh density="0" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_explosiu" />
@@ -353,13 +339,6 @@
   </Entity>
   <Entity name="hangar_Bido_vermell03">
     <Object3D position="10.3853 0.0 6.86543" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="global_bido_vermell" />
-    <PhysXMesh density="0" collision_group="objecte dinamic" />
-    <Destroyable onDestroy="bido_explosiu" />
-    <Explosive />
-  </Entity>
-  <Entity name="hangar_Bido_vermell04">
-    <Object3D position="11.6251 0.0 -5.33932" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_vermell" />
     <PhysXMesh density="0" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_explosiu" />
@@ -488,13 +467,6 @@
     <RenderableObject animated="false" name="hangar_Caixa_estatica_petita22" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="hangar_Bido_vermell06">
-    <Object3D position="13.7405 0.0 1.68778" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="global_bido_vermell" />
-    <PhysXMesh density="0" collision_group="objecte dinamic" />
-    <Destroyable onDestroy="bido_explosiu" />
-    <Explosive />
-  </Entity>
   <Entity name="hangar_Caixa_estatica_petita23">
     <Object3D position="22.7577 0.0215772 -3.41846" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="hangar_Caixa_estatica_petita23" />
@@ -591,7 +563,7 @@
     <Trigger shape="box" size="7.34161 3.04376 1.83551" collision_group="trigger" onEnter="hang_trig_enemics_enter03" />
   </Entity>
   <Entity name="hang_trig_enemics06">
-    <Object3D position="3.33765 1.50084 0.0106628" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="4.54489 1.50084 0.0106628" yaw="0.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="1.90317 3.04376 29.7262" collision_group="trigger" onEnter="hang_trig_enemics_enter06" />
   </Entity>
   <Entity name="hang_trig_enemics07">
@@ -600,7 +572,7 @@
   </Entity>
   <Entity name="hang_nod_cob00">
     <Object3D position="14.086 0.701781 -6.38418" yaw="0.0" pitch="0.0" roll="0.0" />
-    <NavNode maxDistance="0" cobertura="baixa" />
+    <NavNode />
   </Entity>
   <Entity name="hang_nod_cob02">
     <Object3D position="15.6377 0.701781 -12.8298" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -608,11 +580,11 @@
   </Entity>
   <Entity name="hang_nod_cob03">
     <Object3D position="7.75498 0.701781 -1.04948" yaw="0.0" pitch="0.0" roll="0.0" />
-    <NavNode maxDistance="0" cobertura="baixa" />
+    <NavNode />
   </Entity>
   <Entity name="hang_nod_cob04">
-    <Object3D position="3.68901 0.701781 5.0849" yaw="0.0" pitch="0.0" roll="0.0" />
-    <NavNode maxDistance="0" cobertura="baixa" />
+    <Object3D position="4.29445 0.701781 3.28448" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
   </Entity>
   <Entity name="hang_nod_cob05">
     <Object3D position="1.66135 0.701781 4.77218" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -627,16 +599,16 @@
     <NavNode cobertura="baixa" />
   </Entity>
   <Entity name="hang_nod_cob08">
-    <Object3D position="5.59842 0.701781 -7.18997" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="5.59842 0.701781 -7.74154" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode cobertura="baixa" />
   </Entity>
   <Entity name="hang_nod_cob09">
     <Object3D position="17.8616 0.701781 -10.1856" yaw="0.0" pitch="0.0" roll="0.0" />
-    <NavNode maxDistance="0" cobertura="baixa" />
+    <NavNode />
   </Entity>
   <Entity name="hang_nod_cob10">
-    <Object3D position="15.8361 0.701781 0.250607" yaw="0.0" pitch="0.0" roll="0.0" />
-    <NavNode maxDistance="0" cobertura="baixa" />
+    <Object3D position="15.8782 0.701781 1.07914" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
   </Entity>
   <Entity name="hang_nod_cob11">
     <Object3D position="13.155 0.701781 0.776913" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -644,23 +616,23 @@
   </Entity>
   <Entity name="hang_nod_cob12">
     <Object3D position="21.8927 0.701781 10.4866" yaw="0.0" pitch="0.0" roll="0.0" />
-    <NavNode maxDistance="0" cobertura="baixa" />
+    <NavNode />
   </Entity>
   <Entity name="hang_nod_cob13">
     <Object3D position="21.2352 0.701781 12.4573" yaw="0.0" pitch="0.0" roll="0.0" />
-    <NavNode maxDistance="0" cobertura="baixa" />
+    <NavNode />
   </Entity>
   <Entity name="hang_nod_cob14">
     <Object3D position="15.7479 0.701781 9.11503" yaw="0.0" pitch="0.0" roll="0.0" />
-    <NavNode maxDistance="0" cobertura="baixa" />
+    <NavNode />
   </Entity>
   <Entity name="hang_nod_cob15">
     <Object3D position="4.39589 0.701781 -2.54385" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode cobertura="baixa" />
   </Entity>
   <Entity name="hang_nod_cob16">
-    <Object3D position="7.30746 0.701781 -7.72178" yaw="0.0" pitch="0.0" roll="0.0" />
-    <NavNode maxDistance="0" cobertura="baixa" />
+    <Object3D position="7.30746 0.701781 -8.62544" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
   </Entity>
   <Entity name="hang_nod_cob17">
     <Object3D position="13.4178 0.701781 7.87887" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -683,7 +655,7 @@
     <NavNode />
   </Entity>
   <Entity name="hang_nod02">
-    <Object3D position="4.95317 0.701781 -4.96288" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="4.33947 0.701781 -4.66437" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
   <Entity name="hang_nod03">
@@ -691,7 +663,7 @@
     <NavNode />
   </Entity>
   <Entity name="hang_nod04">
-    <Object3D position="3.06866 0.701781 -5.86197" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="2.51499 0.701781 -5.64509" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
   <Entity name="hang_nod05">
@@ -887,47 +859,299 @@
     <NavNode />
   </Entity>
   <Entity name="EnemySpawner01">
-    <Object3D position="-4.35423 1.57162 -6.72685" yaw="0.0" pitch="0.0" roll="0.0" />
-    <EnemySpawner enemy_type="militar" spawn_time="7" total_enemy="5" active="false" />
-  </Entity>
-  <Entity name="EnemySpawner02">
-    <Object3D position="-4.42355 1.57162 6.07291" yaw="0.0" pitch="0.0" roll="0.0" />
-    <EnemySpawner enemy_type="militar" spawn_time="7" total_enemy="5" active="false" />
+    <Object3D position="-4.42355 1.57162 6.36841" yaw="0.0" pitch="0.0" roll="0.0" />
+    <EnemySpawner enemy_type="militar" spawn_time="10" total_enemy="5" active="false" />
   </Entity>
   <Entity name="hang_nod19">
     <Object3D position="-2.24718 0.701781 4.48108" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
-  <Entity name="EnemySpawner03">
+  <Entity name="EnemySpawner02">
     <Object3D position="3.88171 1.57162 13.8411" yaw="0.0" pitch="0.0" roll="0.0" />
-    <EnemySpawner enemy_type="militar" spawn_time="7" total_enemy="5" active="false" />
+    <EnemySpawner enemy_type="militar" spawn_time="10" total_enemy="5" active="false" />
   </Entity>
-  <Entity name="hangar_Pasarela interior">
-    <Object3D position="0.0162411 7.5308 1.51297e-007" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="hangar_Pasarela interior" />
+  <Entity name="hangar_plataforma">
+    <Object3D position="0.101635 9.44034 -0.0224376" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_plataforma" />
     <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_physx_box00">
+    <Object3D position="-8.39489 1.50853 1.48004" yaw="0.0" pitch="0.0" roll="0.0" />
+    <PhysXBox fromRenderableObject="false" shape="box" size="9.01855 2.97691 0.244077" midpoint="0 0 0" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_physx_box01">
+    <Object3D position="-8.39489 1.50853 -1.37171" yaw="0.0" pitch="0.0" roll="0.0" />
+    <PhysXBox fromRenderableObject="false" shape="box" size="9.01855 2.97691 0.244077" midpoint="0 0 0" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_physx_box02">
+    <Object3D position="-13.5251 1.50853 11.9665" yaw="0.0" pitch="0.0" roll="0.0" />
+    <PhysXBox fromRenderableObject="false" shape="box" size="9.01855 2.97691 0.244077" midpoint="0 0 0" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_physx_box03">
+    <Object3D position="-9.13589 1.50853 13.3953" yaw="-90.3788" pitch="0.0" roll="0.0" />
+    <PhysXBox fromRenderableObject="false" shape="box" size="2.56366 2.97691 0.244077" midpoint="0 0 0" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_physx_box04">
+    <Object3D position="-4.00645 1.50853 0.0609112" yaw="-90.3788" pitch="0.0" roll="0.0" />
+    <PhysXBox fromRenderableObject="false" shape="box" size="2.56366 2.97691 0.244077" midpoint="0 0 0" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_physx_box05">
+    <Object3D position="-8.39905 2.92029 0.0609111" yaw="0.0" pitch="0.0" roll="0.0" />
+    <PhysXBox fromRenderableObject="false" shape="box" size="9.0185 0.150245 3.08748" midpoint="0 0 0" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hangar_physx_box06">
+    <Object3D position="-13.4897 2.92029 13.419" yaw="0.0" pitch="0.0" roll="0.0" />
+    <PhysXBox fromRenderableObject="false" shape="box" size="9.0185 0.150245 3.08748" midpoint="0 0 0" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="hang_nod_cob22">
+    <Object3D position="-3.64031 10.3161 9.77132" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob23">
+    <Object3D position="-22.1456 10.3161 2.28204" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob24">
+    <Object3D position="-4.11942 10.3161 -9.92006" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob25">
+    <Object3D position="8.042 10.3161 -9.90083" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob26">
+    <Object3D position="3.88683 10.3161 -9.88163" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob27">
+    <Object3D position="11.7908 10.3161 -9.86245" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob28">
+    <Object3D position="0.479392 10.3161 -9.84329" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob29">
+    <Object3D position="1.33547 10.3161 9.87894" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob30">
+    <Object3D position="8.17248 10.3161 10.0243" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob31">
+    <Object3D position="12.5903 10.3161 9.86922" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob32">
+    <Object3D position="17.8873 10.3161 9.86446" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_cob33">
+    <Object3D position="-22.1435 10.3161 -2.89712" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode cobertura="baixa" />
+  </Entity>
+  <Entity name="hang_nod_top00">
+    <Object3D position="-24.0779 10.3161 -1.54841" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod_top01">
+    <Object3D position="-24.0601 10.3161 1.52368" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod_top02">
+    <Object3D position="-2.58087 10.3161 -11.4779" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod_top03">
+    <Object3D position="1.87544 10.3161 -11.3067" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod_top04">
+    <Object3D position="6.07873 10.3161 -11.2358" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod_top05">
+    <Object3D position="10.1292 10.3161 -11.265" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod_top06">
+    <Object3D position="10.275 10.3161 11.468" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod_top07">
+    <Object3D position="14.623 10.3161 11.6114" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod_top08">
+    <Object3D position="1.00848 10.3161 11.7046" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod_top09">
+    <Object3D position="-5.14321 10.3161 11.7976" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod20">
+    <Object3D position="7.18658 0.701781 3.32555" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod21">
+    <Object3D position="10.6846 0.701781 2.40292" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod22">
+    <Object3D position="15.5761 0.701781 3.09253" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod23">
+    <Object3D position="19.0546 0.701781 4.78982" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod24">
+    <Object3D position="20.4479 0.701781 7.30103" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod25">
+    <Object3D position="23.4938 0.701781 7.89811" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod26">
+    <Object3D position="17.3902 0.701781 7.85028" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod27">
+    <Object3D position="19.9657 0.701781 0.372912" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod28">
+    <Object3D position="16.0974 0.701781 -2.93867" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod29">
+    <Object3D position="15.9678 0.701781 -6.58981" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod30">
+    <Object3D position="18.3078 0.701781 -8.56164" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod31">
+    <Object3D position="20.088 0.701781 -12.833" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod32">
+    <Object3D position="8.37367 0.701781 -5.97277" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod33">
+    <Object3D position="9.67217 0.701781 0.406628" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod34">
+    <Object3D position="9.22145 0.701781 5.2658" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod35">
+    <Object3D position="6.79552 0.701781 6.23249" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod36">
+    <Object3D position="8.83751 0.701781 7.45569" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod37">
+    <Object3D position="23.0199 0.701781 11.4116" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod38">
+    <Object3D position="24.093 0.701781 9.46471" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hangar_bido_verd05">
+    <Object3D position="13.8492 0.0 1.56041" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_verd" />
+    <PhysXMesh density="0" collision_group="objecte dinamic" />
+    <Destroyable onDestroy="bido_toxic" />
+  </Entity>
+  <Entity name="hang_nod_cob34">
+    <Object3D position="3.80997 0.701781 4.96123" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod_cob35">
+    <Object3D position="7.30746 0.701781 -6.96227" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod39">
+    <Object3D position="18.6727 0.701781 -12.0306" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod40">
+    <Object3D position="20.0813 0.701781 -10.9299" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod41">
+    <Object3D position="19.7541 0.701781 -9.3065" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod_cob36">
+    <Object3D position="19.6578 0.701781 -5.19709" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod42">
+    <Object3D position="7.13562 0.701781 -4.56437" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod43">
+    <Object3D position="13.6936 0.701781 -3.83594" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod44">
+    <Object3D position="14.1623 0.701781 -2.15669" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod_top10">
+    <Object3D position="13.5112 10.3161 -11.265" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="EnemySpawner03">
+    <Object3D position="-4.13431 1.57162 -6.1896" yaw="0.0" pitch="0.0" roll="0.0" />
+    <EnemySpawner enemy_type="militar" spawn_time="10" total_enemy="5" active="false" />
+  </Entity>
+  <Entity name="EnemySpawner04">
+    <Object3D position="4.64452 11.2225 -13.386" yaw="0.0" pitch="0.0" roll="0.0" />
+    <EnemySpawner enemy_type="militar" spawn_time="20" total_enemy="2" active="false" />
+  </Entity>
+  <Entity name="EnemySpawner05">
+    <Object3D position="4.64452 11.2225 13.5591" yaw="0.0" pitch="0.0" roll="0.0" />
+    <EnemySpawner enemy_type="militar" spawn_time="20" total_enemy="2" active="false" />
   </Entity>
   <Player position="-24.8545 1.11708 -10.0431" yaw="0.0" />
   <Miner name="Miner01" position="-17.4714 1.30798 -4.51993" yaw="0.0" active="false" />
   <Miner name="Miner02" position="-16.7403 1.30798 -2.29115" yaw="0.0" active="false" />
   <Miner name="Miner03" position="-19.1808 1.30798 2.1796" yaw="0.0" active="false" />
-  <Miner name="Miner04" position="-20.3497 9.57111 10.4987" yaw="0.0" active="false" />
-  <Miner name="Miner05" position="-16.6131 9.57111 -0.154601" yaw="0.0" active="false" />
   <Miner name="Miner06" position="-20.1307 1.30798 8.52421" yaw="0.0" active="false" />
-  <Miner name="Miner07" position="1.28506 9.36483 -0.282342" yaw="0.0" active="false" />
-  <Miner name="Miner08" position="6.71194 9.36483 -11.8793" yaw="0.0" active="false" />
-  <Militar name="Militar01" position="3.88239 1.21245 4.95428" yaw="0.0" active="false" />
-  <Militar name="Militar02" position="15.652 1.21245 9.22886" yaw="0.0" active="false" />
-  <Militar name="Militar03" position="21.2014 1.21245 12.4259" yaw="0.0" active="false" />
-  <Militar name="Militar04" position="23.8683 1.21245 11.0349" yaw="0.0" active="false" />
-  <Militar name="Militar05" position="15.5207 1.21245 0.11872" yaw="0.0" active="false" />
-  <Militar name="Militar06" position="13.9355 1.21245 -6.51465" yaw="0.0" active="false" />
-  <Militar name="Militar07" position="17.8458 1.21245 -10.2115" yaw="0.0" active="false" />
-  <Militar name="Militar08" position="15.5446 1.21245 -12.8318" yaw="0.0" active="false" />
-  <Militar name="Militar09" position="7.324 1.21245 -7.81343" yaw="0.0" active="false" />
-  <Militar name="Militar10" position="7.81691 1.21245 -1.09128" yaw="0.0" active="false" />
+  <Militar name="Militar01" position="23.6684 1.21245 11.9097" yaw="0.0" active="false" destiny="hang_nod_cob04" />
+  <Militar name="Militar02" position="25.0804 1.21245 12.1012" yaw="0.0" active="false" destiny="hang_nod_cob14" />
+  <Militar name="Militar03" position="24.1922 1.21245 12.2822" yaw="0.0" active="false" destiny="hang_nod_cob13" />
+  <Militar name="Militar04" position="25.3108 1.21245 11.6662" yaw="0.0" active="false" destiny="hang_nod_cob12" />
+  <Militar name="Militar05" position="18.7729 1.21245 -13.1991" yaw="0.0" active="false" destiny="hang_nod_cob10" />
+  <Militar name="Militar06" position="20.9259 1.21245 -12.9643" yaw="0.0" active="false" destiny="hang_nod_cob00" />
+  <Militar name="Militar07" position="18.8195 1.21245 -13.9365" yaw="0.0" active="false" destiny="hang_nod_cob09" />
+  <Militar name="Militar08" position="17.6368 1.21245 -13.933" yaw="0.0" active="false" destiny="hang_nod_cob02" />
+  <Militar name="Militar09" position="17.6149 1.21245 -13.4789" yaw="0.0" active="false" destiny="hang_nod_cob16" />
+  <Militar name="Militar10" position="19.8689 1.21245 -13.9393" yaw="0.0" active="false" destiny="hang_nod_cob35" />
   <Miner name="Miner09" position="-15.4361 1.30798 10.9142" yaw="0.0" active="false" />
-  <Militar name="Militar11" position="5.31268 1.21245 -7.4372" yaw="0.0" active="false" />
-  <Militar name="Militar12" position="5.02298 1.21245 0.497211" yaw="0.0" active="false" />
-  <Militar name="Militar13" position="1.45161 1.21245 5.06477" yaw="0.0" active="false" />
+  <Militar name="Militar11" position="-6.19832 1.21245 -6.69519" yaw="0.0" active="false" destiny="hang_nod_cob08" />
+  <Militar name="Militar12" position="-5.5422 1.21245 -9.46614" yaw="0.0" active="false" destiny="hang_nod_cob15" />
+  <Militar name="Militar13" position="-10.0594 1.21245 5.06477" yaw="0.0" active="false" destiny="hang_nod_cob05" />
+  <Militar name="Militar14" position="2.97888 1.21245 8.30427" yaw="0.0" active="false" destiny="hang_nod_cob34" />
+  <Militar name="Militar15" position="-4.10627 1.21245 -4.88131" yaw="0.0" active="false" destiny="hang_nod_cob03" />
+  <Militar name="Militar16" position="20.8945 1.21245 -14.3707" yaw="0.0" active="false" destiny="hang_nod_cob36" />
+  <Militar name="Militar17" position="-12.2043 1.21245 3.76902" yaw="0.0" active="false" destiny="hang_nod_cob06" />
+  <Militar name="Militar18" position="-25.7829 11.2724 -1.10993" yaw="0.0" active="false" destiny="hang_nod_cob33" />
+  <Militar name="Militar19" position="-25.7149 11.2724 1.1602" yaw="0.0" active="false" destiny="hang_nod_cob23" />
+  <Militar name="Militar20" position="-3.31488 11.2724 13.037" yaw="0.0" active="false" destiny="hang_nod_cob29" />
+  <Militar name="Militar21" position="-0.224407 11.2724 -13.3049" yaw="0.0" active="false" destiny="hang_nod_cob24" />
+  <Militar name="Militar22" position="12.2543 11.2724 12.9106" yaw="0.0" active="false" destiny="hang_nod_cob32" />
+  <Militar name="Militar23" position="12.4619 11.2724 -12.6845" yaw="0.0" active="false" destiny="hang_nod_cob27" />
 </Entities>

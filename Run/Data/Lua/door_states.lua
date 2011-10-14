@@ -39,7 +39,6 @@ function open_door(_trigger, _actor)
   elseif l_trigger == "lvl1_trigger_porta_inici" then
     if _actor:get_name() == "Player" then
       send_open_door("lvl1_door_inici", _actor)
-      activate_entity("lvl1_miner_green")
     end
     
   elseif l_trigger == "lvl1_trigger_porta04" then

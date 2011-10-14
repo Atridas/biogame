@@ -53,7 +53,7 @@ function get_key_yellow(_self, _actor)
     send_open_door("lvl1_door01", _actor)
     activate_entity("lvl1_militar10")
     activate_entity("lvl1_militar11")
-    activate_entity("lvl1_militar12")
+    --activate_entity("lvl1_militar12")
     activate_entity("lvl1_militar13")
     activate_entity("lvl1_miner06")
     --obrim la porta de claus
@@ -169,6 +169,15 @@ end
 function change_level_level_1(_EntityTrigger, _Entity)
   if _Entity:get_name() == "Player" then
     set_new_level("Hangar")
+  end
+end
+
+function activate_green_key(_EntityTrigger, _Entity)
+  if _Entity:get_name() == "Player" then
+    activate_entity("lvl1_miner_green")
+    
+    --destrucció del trigger
+    EM:remove_entity(_EntityTrigger)
   end
 end
 
