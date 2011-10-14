@@ -10,6 +10,7 @@
 
 bool CDeferredPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer, const string& _szDefaultRenderTarget)
 {
+  LOGGER->AddNewLog(ELL_INFORMATION,"CDeferredPostSceneRendererStep::Init");
   if(!CPostSceneRendererStep::Init(_treePostSceneRenderer, _szDefaultRenderTarget))
   {
     return false;

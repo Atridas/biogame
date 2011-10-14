@@ -6,6 +6,7 @@
 
 bool CRenderObjectsPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer, const string& _szDefaultRenderTarget)
 {
+  LOGGER->AddNewLog(ELL_INFORMATION,"CRenderObjectsPostSceneRendererStep::Init");
   //bool l_bOk = CPostSceneRendererStep::Init(_treePostSceneRenderer,_szDefaultRenderTarget, false);
   //if(!l_bOk)
   //  return false;

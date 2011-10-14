@@ -46,7 +46,7 @@
 bool CEntityProcess::Init()
 {
   //Mr.Merda Portàtil.
-  CORE->GetRenderer()->SetUniqueRenderPath("forward");
+  //CORE->GetRenderer()->SetUniqueRenderPath("forward");
   //m_PortalManager.Init("./Data/Levels/NivellProves/XML/Level.xml");
 
 
@@ -192,7 +192,7 @@ void CEntityProcess::RenderScene(CRenderManager* _pRM)
 
 void CEntityProcess::RenderINFO(CRenderManager* _pRM)
 {
-  CORE->GetPhysicsManager()->DebugRender(_pRM);
+  //CORE->GetPhysicsManager()->DebugRender(_pRM);
   //CORE->GetPortalManager()->DebugRender(_pRM);
   //CORE->GetEntityManager()->DebugRender(_pRM);
   //CORE->GetIAManager()->GetGraph()->DebugRender(_pRM);

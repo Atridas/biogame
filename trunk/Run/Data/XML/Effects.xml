@@ -63,6 +63,7 @@
     <effect name="DownSample4x" file="Data/Effects/Downsampling.fx" technique="DownSample4xTechnique" />
     
     <!--<effect name="Gas" file="Data/Effects/Gas.fx"/>-->
+    <effect name="Skybox" file="Data/Effects/SkyboxEffect.fx" technique="SkyboxTechnique" />
     
     <effect name="DeferredLightPass" file="Data/Effects/DeferredLightPass.fx" technique="DeferredLightPassTechnique" />
     <effect name="DeferredGeometryLightPass" file="Data/Effects/DeferredLightPass.fx" technique="DeferredGeometryLightPassTechnique" />

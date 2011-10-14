@@ -63,7 +63,7 @@ bool CRendererStep::InitInputSamplers(CXMLTreeNode& _treeInputSamplers)
 {
   if(!_treeInputSamplers.Exists())
   {
-    LOGGER->AddNewLog(ELL_WARNING,"CRendererStep::InitInputSamplers no hi ha input samplers.");
+    //LOGGER->AddNewLog(ELL_WARNING,"CRendererStep::InitInputSamplers no hi ha input samplers.");
     
   }else{
 
@@ -93,7 +93,8 @@ bool CRendererStep::InitInputSamplers(CXMLTreeNode& _treeInputSamplers)
         {
           CTextureInputSampler *l_pTInputSampler = new CTextureInputSampler();
           string l_szTexturename = l_treeInputSampler.GetPszISOProperty("texture", "", true);
-          if(l_pTInputSampler->Init(l_iIndex, l_szTexturename))
+          bool l_bCubeInputSampler = l_treeInputSampler.GetBoolProperty("cube", false, false);
+          if(l_pTInputSampler->Init(l_iIndex, l_szTexturename, l_bCubeInputSampler))
           {
             l_pInputSampler = l_pTInputSampler;
           }

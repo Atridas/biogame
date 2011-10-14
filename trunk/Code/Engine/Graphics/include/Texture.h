@@ -58,6 +58,7 @@ public:
   **/
   void Activate(size_t _StageId);
 
+  bool IsCube() { return m_pCubeTexture != 0;}
   
   uint32 GetWidth()  const {return m_uiWidth; };
   uint32 GetHeight() const {return m_uiHeight;};
@@ -104,6 +105,7 @@ public:
   bool FillTextureWithColor(uint32 width, uint32 height, const CColor& color);
   bool FillDefaultTexture();
   bool FillTextureFromBuffer (uint32 width, uint32 height, uint8* pImgBuffer);
+  bool CreateDefaultCube(CTexture* _pDefaultTexture);
 
   LPDIRECT3DSURFACE9 GetSurface() const {return m_pTextureSurface0;};
   LPDIRECT3DSURFACE9 GetDepthStencilSurface() const {return m_pDepthStencilRenderTargetTexture;};
