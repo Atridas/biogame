@@ -145,7 +145,7 @@ bool CRenderManager::Init(HWND _hWnd, const SRenderManagerParams& _params)
 
 
 #ifdef _DEBUG // Clear the backbuffer to magenta color in a Debug mode
-  m_cClearColor = colMAGENTA;
+  m_cClearColor = colBLUE;
 #else // Clear the backbuffer to black color in a Release mode
   m_cClearColor = colBLACK;
 #endif

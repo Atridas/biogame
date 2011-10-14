@@ -373,6 +373,8 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
   if(m_bViewMatrixUpdated)
   {
     _pEffect->SetValue("View", m_mViewMatrix);
+    Mat44f l_mInvViewMatrix = m_mViewMatrix.GetInverted();
+    _pEffect->SetValue("InvView", l_mInvViewMatrix);
     m_bViewMatrixUpdated = false;
   }
 

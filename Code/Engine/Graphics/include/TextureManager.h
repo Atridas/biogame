@@ -22,7 +22,7 @@ public:
    * Constructor per defecte.
    * Aquest constructor deixa la classe en Ok.
   **/
-  CTextureManager(): m_pDefaultTexture(0) {};
+  CTextureManager(): m_pDefaultTexture(0),m_pDefaultCubeTexture(0) {};
   /**
    * Destructor.
    * Allibera els recursos abans de destruir-se.
@@ -50,7 +50,7 @@ public:
   CTexture *	GetDefaultTexture	() {return m_pDefaultTexture;}
 
 private:
-  CTexture*													m_pDefaultTexture;
+  CTexture*													m_pDefaultTexture, *m_pDefaultCubeTexture;
 
 };
 

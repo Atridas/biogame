@@ -9,11 +9,12 @@
       
       <texture_render_target name="RT0_ARGB_8" format="A8R8G8B8" texture="RT0_ARGB_8"/>
       <texture_render_target name="RT1_ARGB_8" format="A8R8G8B8" texture="RT1_ARGB_8"/>
-      <texture_render_target name="RT2_ARGB_8" format="A8R8G8B8" texture="RT2_ARGB_8"/>
       <texture_render_target name="RT3_ARGB_8" format="A8R8G8B8" texture="RT3_ARGB_8"/>
       <texture_render_target name="RT4_ARGB_8" format="A8R8G8B8" texture="RT4_ARGB_8"/>
       <texture_render_target name="RT1_RG_16F" format="R16G16F" texture="RT1_RG_16F"/>
       <texture_render_target name="RT_R_32F" format="R32F" width="1024" height="1024" texture="RT_R_32F" />
+      
+      <texture_render_target name="SKY" format="A8R8G8B8" texture="SKY"/>
       
       <texture_render_target name="HDR_COLOR"       format="A16B16G16R16F" texture="HDR_COLOR"      />
       <texture_render_target name="HDR_LUMINANCE"   format="R32G32F"       texture="HDR_LUMINANCE"  />
@@ -195,10 +196,23 @@
 
   <post_scene_renderers>
    
+    <post_scene_renderer name="cuadros skybox" effect="Skybox" render_target="SKY">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="default cube" cube="true" />
+      </input_samplers>
+    </post_scene_renderer>
+    <post_scene_renderer name="test skybox" effect="Skybox" render_target="SKY">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/CubmapDeProves.dds" cube="true" />
+      </input_samplers>
+    </post_scene_renderer>
+   
     <post_scene_renderer name="deferred_ambient" effect="DeferredAmbientPass">
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
+        <input_sampler type="texture" index="1" texture="RT1_RG_16F"/>
+        <input_sampler type="texture" index="2" texture="SKY"/>
       </input_samplers>
 
     </post_scene_renderer>
@@ -220,6 +234,8 @@
 
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
+        <input_sampler type="texture" index="1" texture="RT1_RG_16F"/>
+        <input_sampler type="texture" index="2" texture="SKY"/>
       </input_samplers>
 
     </post_scene_renderer>
@@ -303,7 +319,8 @@
     <post_scene_renderer name="HDR_ambient_pass" effect="DeferredAmbientPass" render_target="HDR_COLOR">
       <input_samplers>
         <input_sampler type="texture" index="0" texture="RT0_ARGB_8"/>
-        <input_sampler type="texture" index="1" texture="RT2_ARGB_8"/>
+        <input_sampler type="texture" index="1" texture="RT1_RG_16F"/>
+        <input_sampler type="texture" index="2" texture="SKY"/>
       </input_samplers>
     </post_scene_renderer>
     <post_scene_renderer name="HDR deferred lighting" 
@@ -638,13 +655,6 @@
     
     
     
-    <post_scene_renderer name="show_lights" effect="Texture" size="0.5" aspect_ratio="true" position="0.5 0.0">
-
-      <input_samplers>
-        <input_sampler type="texture" index="0" texture="RT2_ARGB_8"/>
-      </input_samplers>
-
-    </post_scene_renderer>
     
     <post_scene_renderer name="show_alpha" effect="Texture" size="0.5" aspect_ratio="true" position="0.5 0.0">
 
@@ -856,6 +866,18 @@
   </post_scene_renderers>
   
   <render_paths>
+  
+    <render_path name="cuadros skybox" active="false">
+      <post_scene_renderer name="cuadros skybox"/>
+    </render_path>
+    <render_path name="test skybox" active="true">
+      <post_scene_renderer name="test skybox"/>
+    </render_path>
+    <render_path name="hangar skybox" active="false">
+      <post_scene_renderer name="test skybox"/>
+    </render_path>
+  
+  
     <render_path name="deferred" active="false">
       <scene_renderer name="deferred_renderer"/>
       <post_scene_renderer name="deferred_ambient"/>
@@ -881,7 +903,6 @@
       <scene_renderer name="deferred_renderer"/>
       <post_scene_renderer name="deferred lighting"/>
       
-      <post_scene_renderer name="show_lights"/>
       <post_scene_renderer name="scene_color"/>
       <post_scene_renderer name="scene_normals"/>
       <post_scene_renderer name="show_depth"/>
@@ -1077,6 +1098,9 @@
       <post_scene_renderer name="tutorial force"/>
       <post_scene_renderer name="tutorial next"/>
     </render_path>
+    
+    
+    
     
   </render_paths>
   

@@ -18,6 +18,8 @@ bool CPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer, const st
     SetOk(false);
   }else{
     
+    LOGGER->AddNewLog(ELL_INFORMATION,"CPostSceneRendererStep::Init iniciant %s",GetName().c_str());
+
     CRendererStep::Init(_treePostSceneRenderer, _szDefaultRenderTarget);
 
     CXMLTreeNode l_treeSamplers = _treePostSceneRenderer.GetChild("input_samplers");

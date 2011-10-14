@@ -41,7 +41,7 @@
     <Lights file="Data/Levels/Level -1/XML/Lights.xml"/>
   </Level>
   
-  <Level name="Hangar" render_path="canvi nivell -1 a Hangar">
+  <Level name="Hangar" render_path="canvi nivell -1 a Hangar" script="RENDERER:activate_render_path('hangar skybox')">
     <StaticMesh file="Data/XML/StaticMeshes.xml"/>
     <StaticMesh file="Data/Levels/Hangar/XML/StaticMeshes.xml"/>
     

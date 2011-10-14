@@ -269,7 +269,7 @@ bool CRenderer::Init(const string& _szFileName)
 
     if(l_treeRenderPaths.Exists())
     {
-      LOGGER->AddNewLog(ELL_WARNING, "CRenderer::Init Llegint render_paths");
+      LOGGER->AddNewLog(ELL_INFORMATION, "CRenderer::Init Llegint render_paths");
       int l_iNumChilds = l_treeRenderPaths.GetNumChildren();
       for(int i = 0; i < l_iNumChilds; ++i)
       {
@@ -296,7 +296,7 @@ bool CRenderer::Init(const string& _szFileName)
             {
               l_pRenderPath->m_SceneRenderers.insert( l_treeRenderer.GetPszISOProperty("name") );
             }
-            else
+            else if(!l_treeRenderer.IsComment())
             {
               LOGGER->AddNewLog(ELL_WARNING, "CRenderer::Init element no reconegut %s", l_treeRenderer.GetName());
             }

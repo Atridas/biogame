@@ -199,6 +199,40 @@ bool CTexture::Create(const string& _szName,
   return IsOk();
 }
 
+bool CTexture::CreateDefaultCube(CTexture* _pDefaultTexture)
+{
+  assert(!IsOk());
+  LPDIRECT3DDEVICE9 l_pDevice = RENDER_MANAGER->GetDevice();
+  
+  HRESULT hr;
+  
+  hr = l_pDevice->CreateCubeTexture(32, 1, D3DUSAGE_RENDERTARGET, D3DFMT_A8R8G8B8, D3DPOOL_DEFAULT, &m_pCubeTexture, 0);
+
+  if(FAILED(hr))
+    return false;
+
+  LPDIRECT3DSURFACE9 l_pFace[6];
+  m_pCubeTexture->GetCubeMapSurface(D3DCUBEMAP_FACE_POSITIVE_X, 0, &l_pFace[0]);
+  m_pCubeTexture->GetCubeMapSurface(D3DCUBEMAP_FACE_POSITIVE_Y, 0, &l_pFace[1]);
+  m_pCubeTexture->GetCubeMapSurface(D3DCUBEMAP_FACE_POSITIVE_Z, 0, &l_pFace[2]);
+  m_pCubeTexture->GetCubeMapSurface(D3DCUBEMAP_FACE_NEGATIVE_X, 0, &l_pFace[3]);
+  m_pCubeTexture->GetCubeMapSurface(D3DCUBEMAP_FACE_NEGATIVE_Y, 0, &l_pFace[4]);
+  m_pCubeTexture->GetCubeMapSurface(D3DCUBEMAP_FACE_NEGATIVE_Z, 0, &l_pFace[5]);
+
+  for(int i = 0; i < 6; i++)
+  {
+    hr = l_pDevice->StretchRect(_pDefaultTexture->m_pTextureSurface0, 0, l_pFace[i], 0, D3DTEXF_NONE);
+    
+    if(FAILED(hr))
+      return false;
+
+    l_pFace[i]->Release();
+  }
+
+  SetOk(true);
+  return true;
+}
+
 void CTexture::Deactivate(size_t Stage)
 {
   assert(IsOk());
