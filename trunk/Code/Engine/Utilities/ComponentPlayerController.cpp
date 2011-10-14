@@ -31,8 +31,8 @@
 #define DAMAGE_FORCE 100.0f
 #define SHOOT_POWER 30.0f
 
-#define ENERGY_FORCE   51.f
-#define ENERGY_GRENADE 15.f
+#define ENERGY_FORCE   70.f
+#define ENERGY_GRENADE 35.f
 #define ENERGY_SHOOT    1.f
 
 

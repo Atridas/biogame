@@ -205,6 +205,12 @@
     <Object3D position="-27.3872 1.39148 0.00468683" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Porta_planta-1_02" />
   </Entity>
+  <Entity name="lvl1_key_blue">
+    <Object3D position="-32.376 1.473 0.262" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_key_blue" />
+    <Trigger shape="box" size="0.582664 0.862473 0.166803" collision_group="pickup" onEnter="get_key_blue" />
+    <Rotative yaw="0.5" />
+  </Entity>
   <Entity name="lvl1_habitacio_claus">
     <Object3D position="-7.25854 0.0 7.34167" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_habitacio_claus" />
@@ -1599,6 +1605,12 @@
     <RenderableObject animated="false" name="lvl1_taquilla01" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
+  <Entity name="lvl1_key_yellow">
+    <Object3D position="13.006 1.392 46.845" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_key_yellow" />
+    <Trigger shape="box" size="0.582663 0.862473 0.166801" collision_group="pickup" onEnter="get_key_yellow" />
+    <Rotative yaw="0.5" />
+  </Entity>
   <Entity name="lvl1_escalas">
     <Object3D position="26.1458 -1.5 0.0436258" yaw="0.0" pitch="0.0" roll="1.00179e-005" />
     <RenderableObject animated="false" name="lvl1_escalas" />
@@ -2826,6 +2838,12 @@
     <RenderableObject animated="false" name="lvl1_caixa_llarga15" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
+  <Entity name="lvl1_key_purple">
+    <Object3D position="27.873 -8.493 -38.462" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_key_purple" />
+    <Trigger shape="box" size="0.582664 0.862473 0.166801" collision_group="pickup" onEnter="get_key_purple" />
+    <Rotative yaw="0.5" />
+  </Entity>
   <Entity name="lvl1_Sala_central">
     <Object3D position="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Sala_central" />
@@ -3150,30 +3168,12 @@
     <Object3D position="40.7404 0.488159 25.1032" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="0.781263 0.58866 0.503842" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="lvl1_key_blue">
-    <Object3D position="-32.3763 1.47331 0.262054" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl1_key_blue" />
-    <Trigger shape="box" size="1.05052 0.399226 1.05052" collision_group="pickup" onEnter="get_key_blue" />
-    <Rotative yaw="0.5" />
-  </Entity>
-  <Entity name="lvl1_key_purple">
-    <Object3D position="27.8726 -8.49328 -38.4624" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl1_key_purple" />
-    <Trigger shape="box" size="1.05052 0.399225 1.05052" collision_group="pickup" onEnter="get_key_purple" />
-    <Rotative yaw="0.5" />
-  </Entity>
-  <Entity name="lvl1_key_yellow">
-    <Object3D position="13.0062 1.39179 46.8454" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl1_key_yellow" />
-    <Trigger shape="box" size="1.05052 0.399226 1.05052" collision_group="pickup" onEnter="get_key_yellow" />
-    <Rotative yaw="0.5" />
-  </Entity>
   <Entity name="Change_Level_Trigger">
     <Object3D position="-0.0492312 1.67603 22.1723" yaw="0.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="4.88198 4.70728 1.25509" collision_group="trigger" onEnter="change_level_level_1" />
   </Entity>
   <Entity name="lvl1_node_cobertura">
-    <Object3D position="-11.7042 0.581445 0.181089" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-11.532 0.581445 0.181089" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode maxDistance="5" cobertura="baixa" />
   </Entity>
   <Entity name="lvl1_node_cobertura01">
@@ -3189,7 +3189,7 @@
     <NavNode maxDistance="5" cobertura="baixa" />
   </Entity>
   <Entity name="lvl1_node_cobertura04">
-    <Object3D position="35.4319 -2.31467 -0.634329" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="35.1604 -2.31467 -0.634329" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode maxDistance="5" cobertura="baixa" />
   </Entity>
   <Entity name="lvl1_node_cobertura05">
@@ -3201,7 +3201,7 @@
     <NavNode maxDistance="5" cobertura="baixa" />
   </Entity>
   <Entity name="lvl1_node_cobertura07">
-    <Object3D position="31.8863 0.804861 30.5343" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="32.1896 0.804861 31.0433" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode maxDistance="5" cobertura="baixa" />
   </Entity>
   <Entity name="lvl1_node_cobertura08">
@@ -3213,11 +3213,11 @@
     <NavNode maxDistance="5" cobertura="baixa" />
   </Entity>
   <Entity name="lvl1_node_cobertura10">
-    <Object3D position="12.8555 0.804861 15.7267" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="12.7368 0.804861 15.7587" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode maxDistance="5" cobertura="baixa" />
   </Entity>
   <Entity name="lvl1_node_cobertura11">
-    <Object3D position="14.0835 0.804861 14.4842" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="13.7299 0.804861 14.9041" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode maxDistance="5" cobertura="baixa" />
   </Entity>
   <Entity name="lvl1_node_cobertura12">
@@ -3237,7 +3237,7 @@
     <NavNode maxDistance="5" />
   </Entity>
   <Entity name="lvl1_node02">
-    <Object3D position="7.98122 0.804861 6.82995" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="8.53244 0.804861 7.1333" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode maxDistance="5" />
   </Entity>
   <Entity name="lvl1_node03">
@@ -3253,7 +3253,7 @@
     <NavNode maxDistance="5" />
   </Entity>
   <Entity name="lvl1_node07">
-    <Object3D position="29.277 0.804861 33.8701" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="28.4701 0.804861 33.8529" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode maxDistance="5" />
   </Entity>
   <Entity name="lvl1_node08">
@@ -3281,7 +3281,7 @@
     <NavNode maxDistance="5" />
   </Entity>
   <Entity name="lvl1_node15">
-    <Object3D position="33.0877 -1.76971 0.63182" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="33.2878 -1.76971 0.0224445" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode maxDistance="5" />
   </Entity>
   <Entity name="lvl1_node16">
@@ -3330,35 +3330,54 @@
     <Object3D position="32.07 -7.55369 -38.9208" yaw="0.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="1.70426 4.88858 3.29635" collision_group="trigger" onEnter="lvl1_trigger_force" />
   </Entity>
-  <Player position="-1.01856 1.08272 -18.6567" yaw="90.0" force_active="false" />
-  <Miner name="lvl1_miner_green" position="-3.01569 1.6 3.99538" yaw="0.0" active="false" on_death="drop_key" />
-  <Militar name="lvl1_militar00" position="-4.12491 1.6 1.10068" yaw="0.0" active="false" />
-  <Militar name="lvl1_militar01" position="-1.84952 1.6 -1.15103" yaw="0.0" active="false" />
-  <Militar name="lvl1_militar02" position="32.1957 -0.412989 -0.684644" yaw="0.0" active="false" />
-  <Militar name="lvl1_militar03" position="11.9294 1.6 1.55775" yaw="0.0" active="false" />
-  <Militar name="lvl1_militar04" position="14.1854 1.6 -1.38754" yaw="0.0" active="false" />
-  <Militar name="lvl1_militar05" position="29.9547 -0.452075 1.39366" yaw="0.0" active="false" />
+  <Entity name="lvl1_node19">
+    <Object3D position="32.6731 0.804861 32.045" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode maxDistance="5" />
+  </Entity>
+  <Entity name="lvl1_node20">
+    <Object3D position="35.0307 0.804861 29.8519" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode maxDistance="5" />
+  </Entity>
+  <Entity name="lvl1_node21">
+    <Object3D position="33.5117 0.804861 30.9483" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode maxDistance="5" />
+  </Entity>
+  <Entity name="lvl1_trigger_green_key">
+    <Object3D position="-0.0239495 1.66002 -11.8524" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="1.73412 3.57803 6.05252" collision_group="trigger" onEnter="activate_green_key" />
+  </Entity>
+  <Entity name="lvl1_node22">
+    <Object3D position="29.5241 0.804861 32.5522" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode maxDistance="5" />
+  </Entity>
+  <Player position="-0.315653 1.08272 -20.7719" yaw="90.0" force_active="false" />
+  <Miner name="lvl1_miner_green" position="0.0876412 1.6 4.76067" yaw="0.0" active="false" on_death="drop_key" />
+  <Militar name="lvl1_militar00" position="-4.12491 1.6 1.10068" yaw="0.0" active="false" destiny="lvl1_node_cobertura" />
+  <Militar name="lvl1_militar01" position="-1.84952 1.6 -1.15103" yaw="0.0" active="false" destiny="lvl1_node_cobertura01" />
+  <Militar name="lvl1_militar02" position="34.2674 -0.412989 1.20565" yaw="0.0" active="false" destiny="lvl1_node_cobertura04" />
+  <Militar name="lvl1_militar03" position="11.9294 1.6 1.55775" yaw="0.0" active="false" destiny="lvl1_node_cobertura02" />
+  <Militar name="lvl1_militar04" position="14.1854 1.6 -1.38754" yaw="0.0" active="false" destiny="lvl1_node_cobertura03" />
+  <Militar name="lvl1_militar05" position="32.1479 -0.452075 1.39366" yaw="0.0" active="false" />
   <Militar name="lvl1_militar06" position="35.0941 -6.10473 -15.1002" yaw="0.0" active="false" />
   <Militar name="lvl1_militar07" position="23.544 -7.29258 -28.7595" yaw="0.0" active="false" />
   <Militar name="lvl1_militar08" position="37.915 -7.29258 -28.1546" yaw="0.0" active="false" />
   <Militar name="lvl1_militar09" position="40.8226 -7.29258 -36.4211" yaw="0.0" active="false" />
-  <Militar name="lvl1_militar10" position="31.0258 1.6 35.5794" yaw="0.0" active="false" />
-  <Militar name="lvl1_militar11" position="32.5927 1.6 32.7277" yaw="0.0" active="false" />
-  <Militar name="lvl1_militar12" position="33.2316 1.6 29.9142" yaw="0.0" active="false" />
-  <Militar name="lvl1_militar13" position="31.3154 1.6 33.8734" yaw="0.0" active="false" />
-  <Militar name="lvl1_militar14" position="24.8595 1.6 28.1342" yaw="0.0" active="false" />
-  <Militar name="lvl1_militar15" position="22.7948 1.6 25.8993" yaw="0.0" active="false" />
-  <Militar name="lvl1_militar16" position="11.8186 1.6 12.8496" yaw="0.0" active="false" />
-  <Militar name="lvl1_militar17" position="7.20024 1.6 7.34782" yaw="0.0" active="false" />
-  <Militar name="lvl1_militar18" position="8.07038 1.6 6.27314" yaw="0.0" active="false" />
-  <Militar name="lvl1_militar19" position="5.36795 1.6 7.55063" yaw="0.0" active="false" />
-  <Militar name="lvl1_militar20" position="13.1934 1.6 11.8449" yaw="0.0" active="false" />
+  <Militar name="lvl1_militar10" position="31.8132 1.6 33.1431" yaw="0.0" active="false" destiny="lvl1_node_cobertura08" />
+  <Militar name="lvl1_militar11" position="32.8145 1.6 30.1073" yaw="0.0" active="false" destiny="lvl1_node_cobertura07" />
+  <Militar name="lvl1_militar12" position="35.3502 1.6 29.3826" yaw="0.0" active="false" destiny="lvl1_node_cobertura07" />
+  <Militar name="lvl1_militar13" position="34.0577 1.6 30.9271" yaw="0.0" active="false" destiny="lvl1_node_cobertura09" />
+  <Militar name="lvl1_militar14" position="24.8595 1.6 28.1342" yaw="0.0" active="false" destiny="lvl1_node_cobertura06" />
+  <Militar name="lvl1_militar15" position="22.7948 1.6 25.8993" yaw="0.0" active="false" destiny="lvl1_node_cobertura05" />
+  <Militar name="lvl1_militar16" position="11.4644 1.6 13.712" yaw="0.0" active="false" destiny="lvl1_node_cobertura10" />
+  <Militar name="lvl1_militar17" position="7.51861 1.6 7.73389" yaw="0.0" active="false" destiny="lvl1_node_cobertura12" />
+  <Militar name="lvl1_militar18" position="8.55488 1.6 6.17711" yaw="0.0" active="false" destiny="lvl1_node_cobertura13" />
+  <Militar name="lvl1_militar19" position="12.8393 1.6 12.7073" yaw="0.0" active="false" destiny="lvl1_node_cobertura11" />
   <Miner name="lvl1_miner00" position="-6.33889 1.6 0.0717691" yaw="0.0" active="false" />
   <Miner name="lvl1_miner01" position="21.3448 1.6 0.304681" yaw="0.0" active="false" />
   <Miner name="lvl1_miner02" position="30.8253 -7.32152 -23.8567" yaw="0.0" active="false" />
   <Miner name="lvl1_miner03" position="23.4583 -7.32152 -32.0792" yaw="0.0" active="false" />
-  <Miner name="lvl1_miner04" position="15.6847 1.6 13.9064" yaw="0.0" active="false" />
-  <Miner name="lvl1_miner05" position="30.4016 1.6 24.9931" yaw="0.0" active="false" />
-  <Miner name="lvl1_miner06" position="29.9229 1.6 34.8289" yaw="0.0" active="false" />
+  <Miner name="lvl1_miner04" position="15.9149 1.6 13.4879" yaw="0.0" active="false" />
+  <Miner name="lvl1_miner05" position="28.0411 1.6 22.9145" yaw="0.0" active="false" />
+  <Miner name="lvl1_miner06" position="29.9813 1.6 33.8244" yaw="0.0" active="false" />
   <Miner name="lvl1_miner07" position="0.0353594 1.6 21.0297" yaw="0.0" active="false" />
 </Entities>
