@@ -1,5 +1,5 @@
 #define __DONT_INCLUDE_MEM_LEAKS__
-#include "ComponentLifetime.h"
+#include "ComponentDelayedScript.h"
 #include "ScriptManager.h"
 #include "Core.h"
 
@@ -19,11 +19,11 @@ extern "C"
 #include "Utils\Logger.h"
 
 
-CComponentLifetime* CComponentLifetime::AddToEntity(CGameEntity *_pEntity, float _fTime, const string& _szScript)
+CComponentDelayedScript* CComponentDelayedScript::AddToEntity(CGameEntity *_pEntity, float _fTime, const string& _szScript)
 {
-  CComponentLifetime *l_pComp = new CComponentLifetime();
+  CComponentDelayedScript *l_pComp = new CComponentDelayedScript();
   assert(_pEntity && _pEntity->IsOk());
-  if(l_pComp->Init(_pEntity, _fTime, _szScript))
+  if(l_pComp->Reset(_fTime, _szScript))
   {
     l_pComp->SetEntity(_pEntity);
     return l_pComp;
@@ -35,7 +35,7 @@ CComponentLifetime* CComponentLifetime::AddToEntity(CGameEntity *_pEntity, float
   }
 }
 
-bool CComponentLifetime::Init(CGameEntity *_pEntity, float _fTime, const string& _szScript)
+bool CComponentDelayedScript::Reset(float _fTime, const string& _szScript)
 {
   assert(_fTime >= 0);
 
@@ -45,11 +45,13 @@ bool CComponentLifetime::Init(CGameEntity *_pEntity, float _fTime, const string&
 
   m_bTriggered  = false;
 
+  m_fTime = 0;
+
   SetOk(true);
   return IsOk();
 }
 
-void CComponentLifetime::Update(float _fDeltaTime) 
+void CComponentDelayedScript::Update(float _fDeltaTime) 
 {
   m_fTime += _fDeltaTime;
   if(m_fTime >= m_fTargetTime)
@@ -72,7 +74,5 @@ void CComponentLifetime::Update(float _fDeltaTime)
 
       m_bTriggered = true;
     }
-
-    ENTITY_MANAGER->RemoveEntity( GetEntity() );
   }
 }

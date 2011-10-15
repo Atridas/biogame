@@ -40,6 +40,7 @@
 #include "ComponentPhysxSphere.h"
 #include "PhysicActor.h"
 #include "ComponentEnergy.h"
+#include "ComponentDelayedScript.h"
 
 #include "RenderableObject.h"
 #include "PhysicsManager.h"
@@ -890,8 +891,10 @@ CGameEntity* CEntityManager::InitGrenade(float _fLifeTime, const Vect3f& _vPos,c
   //CComponentPhysXMesh* l_pSphere = CComponentPhysXMesh::AddToEntity(l_pGrenade,10.0f,GetCollisionGroup("objecte dinamic"));
 
   if(_fLifeTime > 0)
-    CComponentLifetime::AddToEntity(l_pGrenade, _fLifeTime,"granada")->m_bKillEntity = false;
-
+  {
+    //CComponentLifetime::AddToEntity(l_pGrenade, _fLifeTime,"granada")->m_bKillEntity = false;
+    CComponentDelayedScript::AddToEntity(l_pGrenade, _fLifeTime,"granada");
+  }
   CComponentExplosive::AddToEntity(l_pGrenade);
   CComponentOmni::AddToEntity(l_pGrenade,Vect3f(0,0,0), CColor(0,.5f,0), 1.f, 4.f);
 

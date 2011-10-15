@@ -45,6 +45,7 @@ extern "C"
 #include "ComponentOmni.h"
 #include "ComponentArma.h"
 #include "ComponentLifetime.h"
+#include "ComponentDelayedScript.h"
 #include "ComponentInteractive.h"
 #include "OmniLight.h"
 #include "ComponentPhysxSphere.h"
@@ -77,7 +78,14 @@ void SetGodMode(bool _bGodMode)
 {
   CGameEntity* l_pPlayer = ENTITY_MANAGER->GetEntity("Player");
   if(l_pPlayer)
+  {
     l_pPlayer->GetComponent<CComponentPlayerController>()->SetGodMode(_bGodMode);
+    if(_bGodMode)
+    {
+      l_pPlayer->GetComponent<CComponentPlayerController>()->m_bForceActive = true;
+      l_pPlayer->GetComponent<CComponentPlayerController>()->m_bGrenadeActive = true;
+    }
+  }
 }
 
 void SetSong(CComponentBGMController::EMusicState _song)
@@ -165,6 +173,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("billboard",            CBaseComponent::ECT_BILLBOARD),
           value("omni",                 CBaseComponent::ECT_OMNI),
           value("life_time",            CBaseComponent::ECT_LIFETIME),
+          value("delayed_script",       CBaseComponent::ECT_DELAYED_SCRIPT),
           value("physx_sphere",         CBaseComponent::ECT_PHYSXSPHERE),
           value("bgm",                  CBaseComponent::ECT_BGM)
       ]
@@ -441,10 +450,16 @@ void RegisterEntitiesToLua(lua_State* _pLS)
 
       // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentLifetime, CBaseComponent>("ComponentLifetime")
-      .def_readwrite("time", &CComponentLifetime::m_fTime)
+      .scope[def("add_to_entity",   &CComponentLifetime::AddToEntity)]
+      .def_readwrite("time",        &CComponentLifetime::m_fTime)
       .def_readwrite("target_time", &CComponentLifetime::m_fTargetTime)
-      .def_readwrite("kill_entity", &CComponentLifetime::m_bKillEntity)
       .def_readwrite("script",      &CComponentLifetime::m_szScript)
+
+      // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentDelayedScript, CBaseComponent>("ComponentDelayedScript")
+      .scope[def("add_to_entity",   &CComponentDelayedScript::AddToEntity)]
+      .def("reset",        (bool(CComponentDelayedScript::*)(float, const string&))&CComponentDelayedScript::Reset)
+      .def("reset",        (void(CComponentDelayedScript::*)(float))               &CComponentDelayedScript::Reset)
 
       // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPhysXSphere, CBaseComponent>("ComponentPhysXSphere")
