@@ -36,6 +36,7 @@ public:
       m_iNumRows(1), m_iNumColumns(1),
       m_iNumFrames(1),
       m_fTimePerFrame(1.f),
+      m_bLoop(false),
       m_bResetColorAnimation(false),
       m_fResetColorAnimationTime1(0), m_fResetColorAnimationTime2(0),
       m_bResetSizeAnimation(false),
@@ -79,7 +80,7 @@ public:
   bool  IsSprite()        const { return m_bSprite; };
   int   GetNumFrames()    const { return m_iNumFrames; };
   float GetTimePerFrame() const { return m_fTimePerFrame; };
-
+  bool  IsLoop()          const { return m_bLoop; };
 
   CMaterial* GetMaterial() const { return m_pMaterial; };
   
@@ -123,6 +124,7 @@ private:
   int   m_iNumRows, m_iNumColumns;
   int   m_iNumFrames;
   float m_fTimePerFrame;
+  bool  m_bLoop;
 
   CMaterial* m_pMaterial;
 };

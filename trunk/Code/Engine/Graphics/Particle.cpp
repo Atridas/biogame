@@ -101,7 +101,10 @@ bool CParticle::Update(float _fDeltaTime)
   {
     m_iFrame = (int)floor(m_fLivedTime / m_pEmiterCore->GetTimePerFrame());
     int l_iNumFrames = m_pEmiterCore->GetNumFrames();
-    m_iFrame = (m_iFrame >= l_iNumFrames)? l_iNumFrames - 1 : m_iFrame;
+    if(m_pEmiterCore->IsLoop())
+      m_iFrame = m_iFrame % l_iNumFrames;
+    else
+      m_iFrame = (m_iFrame >= l_iNumFrames)? l_iNumFrames - 1 : m_iFrame;
   }
   
   //Color ----------------------------------------------------------------------------------------------

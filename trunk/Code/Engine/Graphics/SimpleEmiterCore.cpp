@@ -191,9 +191,15 @@ bool CSimpleEmiterCore::Init(CXMLTreeNode& _xmlEmiter)
     m_iNumColumns   = _xmlEmiter.GetIntProperty("num_columns", 1, true);
     m_iNumFrames    = _xmlEmiter.GetIntProperty("num_frames", m_iNumRows * m_iNumColumns, false);
     m_fTimePerFrame = _xmlEmiter.GetFloatProperty("time_per_frame", 1, true);
+    m_bLoop         = _xmlEmiter.GetBoolProperty("loop", false, false);
 
     LOGGER->AddNewLog(ELL_INFORMATION, "SPRITE    Rows: %d, Columns: %d, Frames: %d, Time per frame: %f",
                                        m_iNumRows, m_iNumColumns, m_iNumFrames, m_fTimePerFrame);
+
+    if(m_bLoop)
+      LOGGER->AddNewLog(ELL_INFORMATION, "SPRITE loop");
+    else
+      LOGGER->AddNewLog(ELL_INFORMATION, "SPRITE no loop");
   }
   else
   {
