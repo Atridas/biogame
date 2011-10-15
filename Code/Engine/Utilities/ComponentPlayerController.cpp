@@ -65,7 +65,9 @@ bool CComponentPlayerController::Init(CGameEntity *_pEntity)
   m_pAnimatedModel = dynamic_cast<CRenderableAnimatedInstanceModel*>(l_pComponentRO->GetRenderableObject());
   assert(m_pAnimatedModel); //TODO fer missatges d'error més elavorats
 
- 
+  m_bShootActive   = 
+  m_bGrenadeActive =
+  m_bForceActive   = false;
 
   m_vPickUps.clear();
 
@@ -260,6 +262,9 @@ bool CComponentPlayerController::Shoot()
 
 bool CComponentPlayerController::ShootGrenade(float _fTime)
 {
+  if(!m_bGrenadeActive)
+    return false;
+
   CGameEntity* l_pPlayerEntity = GetEntity();
   CComponentEnergy* l_pEnergy = l_pPlayerEntity->GetComponent<CComponentEnergy>();
 

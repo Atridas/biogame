@@ -4,7 +4,7 @@ function activate_grenades(_self, _actor)
   if _actor:get_name() == "Player" then
     --Rebre la capacitat de tirar granades
     tutorial_grenade()
-    --_actor:get_component(BaseComponent.player_controller).grenade_active = true
+    _actor:get_component(BaseComponent.player_controller).grenade_active = true
     
     --destruim la granada
     _self:get_component(BaseComponent.renderable_object).remove_renderable_object = true

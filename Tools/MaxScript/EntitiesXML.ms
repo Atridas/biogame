@@ -397,6 +397,15 @@ function XMLEntityPlayer _instance &_TagName =
 		append l_params #("force_active",l_aux)
 	)
 	
+	--grenade
+	local l_tmp = GetUserProp _instance "grenade"
+	if l_tmp != undefined then
+	(
+		l_aux = "" as stringStream
+		format "%" l_tmp to:l_aux
+		append l_params #("grenade_active",l_aux)
+	)
+	
 	return l_params
 )
 

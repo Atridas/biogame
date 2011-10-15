@@ -420,13 +420,14 @@ void LoadPlayer(CEntityManager* _pEM, CXMLTreeNode& _TreePlayer)
   string l_szName    = _TreePlayer.GetPszISOProperty("name", "Player", false);
   Vect3f l_vPosition = _TreePlayer.GetVect3fProperty("position", Vect3f(0,0,0),true);
   float  l_fYaw      = _TreePlayer.GetFloatProperty("yaw",0,true) * FLOAT_PI_VALUE / 180.0f;
-  bool   l_bShootActive = _TreePlayer.GetBoolProperty("shoot_active", true, false);
-  bool   l_bForceActive = _TreePlayer.GetBoolProperty("force_active", true, false);
+  bool   l_bShootActive   = _TreePlayer.GetBoolProperty("shoot_active", true, false);
+  bool   l_bGrenadeActive = _TreePlayer.GetBoolProperty("grenade_active", true, false);
+  bool   l_bForceActive   = _TreePlayer.GetBoolProperty("force_active", true, false);
   
   LOGGER->AddNewLog(ELL_INFORMATION, "\t\t\tPlayer name \"%s\", pos %f,%f,%f, yaw %f", l_szName.c_str(),
                                      l_vPosition.x, l_vPosition.y, l_vPosition.z, l_fYaw);
 
-  _pEM->InitPlayer(l_szName, l_vPosition, l_fYaw, l_bForceActive, l_bShootActive);
+  _pEM->InitPlayer(l_szName, l_vPosition, l_fYaw, l_bForceActive, l_bGrenadeActive, l_bShootActive);
 }
 
 void LoadMiner(CEntityManager* _pEM, CXMLTreeNode& _TreeMiner)
@@ -647,7 +648,7 @@ CGameEntity* CEntityManager::CreateLevelControllerEntity(bool _bMainMenu)
   return l_pLevelManager;
 }
 
-CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3f& _vPosition, float _fYaw, bool _bForceActive, bool _bShootActive)
+CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3f& _vPosition, float _fYaw, bool _bForceActive, bool _bGrenadeActive, bool _bShootActive)
 {
   float l_fCapsuleHeigh = 0.5f;
   float l_fCapsuleRadius = 0.7f;
@@ -676,9 +677,10 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
 
 
   CComponentPlayerController *l_pComponentPlayerController = CComponentPlayerController::AddToEntity(l_pPlayer);
-  l_pComponentPlayerController->m_vPosInicial = _vPosition;
-  l_pComponentPlayerController->m_bForceActive = _bForceActive;
-  l_pComponentPlayerController->m_bShootActive = _bShootActive;
+  l_pComponentPlayerController->m_vPosInicial    = _vPosition;
+  l_pComponentPlayerController->m_bForceActive   = _bForceActive;
+  l_pComponentPlayerController->m_bGrenadeActive = _bGrenadeActive;
+  l_pComponentPlayerController->m_bShootActive   = _bShootActive;
 
   CComponent3rdPSCamera::AddToEntity(l_pPlayer, 0.55f, 0.85f, 1.4f);
 

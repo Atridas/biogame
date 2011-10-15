@@ -3350,7 +3350,7 @@
     <Object3D position="29.5241 0.804861 32.5522" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode maxDistance="5" />
   </Entity>
-  <Player position="-0.315653 1.08272 -20.7719" yaw="90.0" force_active="false" />
+  <Player position="-0.315653 1.08272 -20.7719" yaw="90.0" force_active="false" grenade_active="false" />
   <Miner name="lvl1_miner_green" position="0.0876412 1.6 4.76067" yaw="0.0" active="false" on_death="drop_key" />
   <Militar name="lvl1_militar00" position="-4.12491 1.6 1.10068" yaw="0.0" active="false" destiny="lvl1_node_cobertura" />
   <Militar name="lvl1_militar01" position="-1.84952 1.6 -1.15103" yaw="0.0" active="false" destiny="lvl1_node_cobertura01" />
@@ -3364,7 +3364,6 @@
   <Militar name="lvl1_militar09" position="40.8226 -7.29258 -36.4211" yaw="0.0" active="false" />
   <Militar name="lvl1_militar10" position="31.8132 1.6 33.1431" yaw="0.0" active="false" destiny="lvl1_node_cobertura08" />
   <Militar name="lvl1_militar11" position="32.8145 1.6 30.1073" yaw="0.0" active="false" destiny="lvl1_node_cobertura07" />
-  <Militar name="lvl1_militar12" position="35.3502 1.6 29.3826" yaw="0.0" active="false" destiny="lvl1_node_cobertura07" />
   <Militar name="lvl1_militar13" position="34.0577 1.6 30.9271" yaw="0.0" active="false" destiny="lvl1_node_cobertura09" />
   <Militar name="lvl1_militar14" position="24.8595 1.6 28.1342" yaw="0.0" active="false" destiny="lvl1_node_cobertura06" />
   <Militar name="lvl1_militar15" position="22.7948 1.6 25.8993" yaw="0.0" active="false" destiny="lvl1_node_cobertura05" />
