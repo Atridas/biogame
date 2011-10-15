@@ -838,6 +838,12 @@ ENTITIES
       omni
       CBaseComponent::ECT_OMNI
       
+      delayed_script
+      CBaseComponent::ECT_DELAYED_SCRIPT
+      
+      life_time
+      CBaseComponent::ECT_LIFETIME
+      
     Methods:
       get_type
       Type GetType()
@@ -1352,6 +1358,7 @@ ENTITIES
       
       change_volume
       void ChangeVolume(const Vect3f& _vVolume)
+      
   Class:
     ComponentSpawner
     CComponentSpawner
@@ -1400,6 +1407,39 @@ ENTITIES
       rotation
       CComponentRotative::m_vRotation
 
+  Class
+    ComponentLifetime
+    CComponentLifetime
+    
+    Methods:
+      add_to_entity
+      static CComponentLifetime* AddToEntity(CGameEntity* _pEntity, float _fTime, const string& _szScript)
+    
+    Attributes:
+      time
+      CComponentLifetime::m_fTime
+      
+      target_time
+      CComponentLifetime::m_fTargetTime
+      
+      script
+      CComponentLifetime::m_szScript
+
+  Class
+    ComponentDelayedScript
+    CComponentDelayedScript
+    
+    Methods:
+      add_to_entity
+      static ComponentDelayedScript* AddToEntity(CGameEntity* _pEntity, float _fTime, const string& _szScript)
+    
+      reset
+      bool Reset(float _fTime, const string& _szScript)
+      
+      reset
+      void Reset(float _fTime)
+      
+      
 IA
   Globals:
     Methods:

@@ -160,6 +160,9 @@
     <Filter Include="EntitySystem\Components\ComponentEnergy">
       <UniqueIdentifier>{8e813b9a-3316-44cf-ba2a-12c5533cb9ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentDelayedScript">
+      <UniqueIdentifier>{502367df-b121-40b5-8090-0c6a0386057d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -326,6 +329,9 @@
     </ClCompile>
     <ClCompile Include="ComponentEnergy.cpp">
       <Filter>EntitySystem\Components\ComponentEnergy</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentDelayedScript.cpp">
+      <Filter>EntitySystem\Components\ComponentDelayedScript</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -502,6 +508,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentEnergy.h">
       <Filter>EntitySystem\Components\ComponentEnergy</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentDelayedScript.h">
+      <Filter>EntitySystem\Components\ComponentDelayedScript</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

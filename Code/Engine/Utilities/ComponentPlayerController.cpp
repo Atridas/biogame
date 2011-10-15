@@ -180,7 +180,7 @@ bool CComponentPlayerController::Shoot()
   CGameEntity* l_pPlayerEntity = GetEntity();
   CComponentEnergy* l_pEnergy = l_pPlayerEntity->GetComponent<CComponentEnergy>();
 
-  if(l_pEnergy->Decrease(ENERGY_SHOOT))
+  if(m_bGodMode || l_pEnergy->Decrease(ENERGY_SHOOT))
   {
     CEntityManager* l_pEM = ENTITY_MANAGER;
 
@@ -268,7 +268,7 @@ bool CComponentPlayerController::ShootGrenade(float _fTime)
   CGameEntity* l_pPlayerEntity = GetEntity();
   CComponentEnergy* l_pEnergy = l_pPlayerEntity->GetComponent<CComponentEnergy>();
 
-  if(l_pEnergy->Decrease(ENERGY_GRENADE))
+  if(m_bGodMode || l_pEnergy->Decrease(ENERGY_GRENADE))
   {
     CEntityManager* l_pEM = ENTITY_MANAGER;
     CAnimatedInstanceModel *l_pAnimatedInstanceModel = m_pAnimatedModel->GetAnimatedInstanceModel();
@@ -303,7 +303,7 @@ bool CComponentPlayerController::IsReadyForce() const
   CGameEntity* l_pPlayerEntity = GetEntity();
   CComponentEnergy* l_pEnergy = l_pPlayerEntity->GetComponent<CComponentEnergy>();
 
-  return m_bForceActive && l_pEnergy->GetEnergy() > ENERGY_FORCE;
+  return m_bGodMode || (m_bForceActive && l_pEnergy->GetEnergy() > ENERGY_FORCE);
 }
 
 void CComponentPlayerController::Force()

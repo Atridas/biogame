@@ -81,6 +81,7 @@
     <ClCompile Include="BaseComponent.cpp" />
     <ClCompile Include="ComponentBGMController.cpp" />
     <ClCompile Include="ComponentBillboard.cpp" />
+    <ClCompile Include="ComponentDelayedScript.cpp" />
     <ClCompile Include="ComponentEmiter.cpp" />
     <ClCompile Include="ComponentAnimation.cpp" />
     <ClCompile Include="ComponentArma.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="include\BaseComponent.h" />
     <ClInclude Include="include\ComponentBGMController.h" />
     <ClInclude Include="include\ComponentBillboard.h" />
+    <ClInclude Include="include\ComponentDelayedScript.h" />
     <ClInclude Include="include\ComponentEmiter.h" />
     <ClInclude Include="include\ComponentAnimation.h" />
     <ClInclude Include="include\ComponentArma.h" />
