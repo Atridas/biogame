@@ -43,6 +43,7 @@ public:
   float m_fTime;
 
   bool m_bShootActive;
+  bool m_bGrenadeActive;
   bool m_bForceActive;
 
   bool Shoot();
@@ -81,6 +82,7 @@ private:
       m_iNumUpdates(0),
 
       m_bShootActive(false),
+      m_bGrenadeActive(false),
       m_bForceActive(false)
      
       {};
