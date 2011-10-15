@@ -6,8 +6,9 @@
 
 
 //Inicializamos todas las variables
-CTimer::CTimer (uint32 avgSamples)
-: m_uSamples(avgSamples)
+CTimer::CTimer (uint32 avgSamples, float _fMaxElapsed)
+: m_uSamples(0)
+, m_uMaxSamples(avgSamples)
 , m_fElapsedTime(0.f)
 , m_fBulletTimeFactor(1.f)
 , m_fTotalTime(0.0f)
@@ -18,9 +19,11 @@ CTimer::CTimer (uint32 avgSamples)
 , m_uFPSCount(0)
 , m_fLastFps(0.f)
 , m_uIndex(0)
+, m_fMaxElapsed(_fMaxElapsed)
 {
-	m_Deltas = new float[m_uSamples];
-	for(uint32 j=0;j<m_uSamples;j++)
+  assert(_fMaxElapsed > 0.f);
+	m_Deltas = new float[m_uMaxSamples];
+	for(uint32 j=0;j<m_uMaxSamples;j++)
 	{
 		m_Deltas[j] = 0;
 	}
@@ -44,7 +47,12 @@ void CTimer::Update( void )
 		m_dLastTime = l_dCurTime;
 
 	m_Deltas[m_uIndex] = (float)((l_dCurTime - m_dLastTime) * 0.001);
+  if(m_Deltas[m_uIndex] > m_fMaxElapsed)
+    m_Deltas[m_uIndex] = m_fMaxElapsed;
 	m_dLastTime    = l_dCurTime;
+	m_uIndex = (++m_uIndex) % m_uMaxSamples;
+  if(m_uIndex + 1 > m_uSamples)
+    m_uSamples = m_uIndex + 1;
 
 	float d = 0;
 	for(unsigned int j=0; j<m_uSamples; j++)
@@ -53,7 +61,6 @@ void CTimer::Update( void )
 	}
 	d /= (float)m_uSamples;
 	m_fElapsedTime = d;
-	m_uIndex = (++m_uIndex) % m_uSamples;
 
 
 	//Calculo de los frames por segundo (m_fFPS)
