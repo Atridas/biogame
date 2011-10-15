@@ -1,4 +1,4 @@
-<actor name="skeleton" radius_bs="2.0" pos_bs="0.0 1.0 0.0" effect="cal3d" technique="cal3dTechnique">
+<actor name="skeleton">
   <skeleton filename="Data/Animated Models/skeleton/skeleton.csf"/>
   <mesh filename="Data/Animated Models/skeleton/skeleton_calf_left.cmf"/>
   <mesh filename="Data/Animated Models/skeleton/skeleton_calf_right.cmf"/>

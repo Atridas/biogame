@@ -1,4 +1,4 @@
-<actor name="Porta" radius_bs="2.0" pos_bs="0.0 1.0 0.0" effect="cal3d" technique="cal3dTechnique">
+<actor name="Porta" radius_scale="1.3">
   <skeleton filename="Data/Animated Models/Porta/skeleton.csf"/>
   <mesh filename="Data/Animated Models/Porta/mesh.cmf"/>
   <material animated="true" vertex_type="787">

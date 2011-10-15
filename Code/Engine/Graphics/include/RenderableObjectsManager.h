@@ -24,6 +24,7 @@ public:
 
   void Update(float _fElapsedTime);
   void Render(CRenderManager* _pRM);
+  void DebugRender(CRenderManager* _pRM) const;
 
   CRenderableObject* AddMeshInstance(const string& _szCoreMeshName, const string& _szInstanceName);
   CRenderableObject* AddAnimatedModel(const string& _szCoreModelName, const string& _szInstanceName);
