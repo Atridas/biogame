@@ -92,7 +92,7 @@ bool CCore::Init(HWND hWnd, const SInitParams& _InitParams)
 {
   LOGGER->AddNewLog(ELL_INFORMATION,"Core::Init");
   
-  m_pTimer                    = new CTimer(30);
+  m_pTimer                    = new CTimer(30, .2f);
   m_pRenderManager            = new CRenderManager();
   m_pTextureManager           = new CTextureManager();
   m_pStaticMeshManager        = new CStaticMeshManager();

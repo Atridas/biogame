@@ -9,6 +9,7 @@
 #include "EmiterManager.h"
 #include "Renderer.h"
 #include "LightManager.h"
+#include "Utils/Timer.h"
 #include "XML/XMLTreeNode.h"
 
 #include "LevelChanger.h"
@@ -94,6 +95,41 @@ void CLevelChanger::Update(float _fElapsedTime)
   {
     SLevel* l_pLevel = GetResource(m_szNewLevel);
     CCore* l_pCore = CORE;
+
+    string l_szPhysxFile = l_pCore->m_pPhysicsManager->GetConfigFileName();
+    //m_pPhysicsManager->Done();
+
+    
+    CHECKED_DELETE( l_pCore->m_pEntityManager            );
+    CHECKED_DELETE( l_pCore->m_pPortalManager            );
+    CHECKED_DELETE( l_pCore->m_pEmiterManager            );
+    CHECKED_DELETE( l_pCore->m_pRenderableObjectsManager );
+    CHECKED_DELETE( l_pCore->m_pStaticMeshManager        );
+    CHECKED_DELETE( l_pCore->m_pIAManager                );
+    CHECKED_DELETE( l_pCore->m_pScriptManager            );
+    CHECKED_DELETE( l_pCore->m_pPhysicsManager           );
+    //CHECKED_DELETE( l_pCore->m_pLightManager             );
+    
+    
+    l_pCore->m_pEntityManager            = new CEntityManager           ();
+    l_pCore->m_pPortalManager            = new CPortalManager           ();
+    l_pCore->m_pRenderableObjectsManager = new CRenderableObjectsManager();
+    l_pCore->m_pStaticMeshManager        = new CStaticMeshManager       ();
+    l_pCore->m_pIAManager                = new CIAManager               ();
+    l_pCore->m_pEmiterManager            = new CEmiterManager           ();
+    l_pCore->m_pScriptManager            = new CScriptManager           ();
+    l_pCore->m_pPhysicsManager           = new CPhysicsManager          ();
+    //l_pCore->m_pLightManager             = new CLightManager            ();
+    l_pCore->m_pLightManager->Done();
+      
+
+    l_pCore->m_pPhysicsManager->Init(l_szPhysxFile);
+    if(l_pCore->m_pPhysicsManager->IsOk())
+    {
+      l_pCore->m_pPhysicsManager->SetTriggerReport  (l_pCore->GetPhysicTriggerReport());
+      l_pCore->m_pPhysicsManager->SetCollisionReport(l_pCore->GetPhysicCollisionReport());
+    }
+
     
     l_pCore->m_pScriptManager->Initialize();
     l_pCore->m_pScriptManager->Load(l_pCore->GetLuaInitFile());
@@ -126,6 +162,9 @@ void CLevelChanger::Update(float _fElapsedTime)
     
 
     l_pCore->m_pIAManager->CompleteGraph();
+    l_pCore->m_pTimer->Reset();
+
+
     m_bChanging = false;
     m_iCountdown = INITIAL_LEVEL_CHANGER_COUNTDOWN;
   }
@@ -156,45 +195,7 @@ void CLevelChanger::Update(float _fElapsedTime)
     SLevel* l_pLevel = GetResource(m_szNewLevel);
     if(l_pLevel)
     {
-      set<string>::iterator l_it;
-
       CCore* l_pCore = CORE;
-
-
-      string l_szPhysxFile = l_pCore->m_pPhysicsManager->GetConfigFileName();
-      //m_pPhysicsManager->Done();
-
-    
-      CHECKED_DELETE( l_pCore->m_pEntityManager            );
-      CHECKED_DELETE( l_pCore->m_pPortalManager            );
-      CHECKED_DELETE( l_pCore->m_pEmiterManager            );
-      CHECKED_DELETE( l_pCore->m_pRenderableObjectsManager );
-      CHECKED_DELETE( l_pCore->m_pStaticMeshManager        );
-      CHECKED_DELETE( l_pCore->m_pIAManager                );
-      CHECKED_DELETE( l_pCore->m_pScriptManager            );
-      CHECKED_DELETE( l_pCore->m_pPhysicsManager           );
-      //CHECKED_DELETE( l_pCore->m_pLightManager             );
-    
-    
-      l_pCore->m_pEntityManager            = new CEntityManager           ();
-      l_pCore->m_pPortalManager            = new CPortalManager           ();
-      l_pCore->m_pRenderableObjectsManager = new CRenderableObjectsManager();
-      l_pCore->m_pStaticMeshManager        = new CStaticMeshManager       ();
-      l_pCore->m_pIAManager                = new CIAManager               ();
-      l_pCore->m_pEmiterManager            = new CEmiterManager           ();
-      l_pCore->m_pScriptManager            = new CScriptManager           ();
-      l_pCore->m_pPhysicsManager           = new CPhysicsManager          ();
-      //l_pCore->m_pLightManager             = new CLightManager            ();
-      l_pCore->m_pLightManager->Done();
-      
-
-      l_pCore->m_pPhysicsManager->Init(l_szPhysxFile);
-      if(l_pCore->m_pPhysicsManager->IsOk())
-      {
-        l_pCore->m_pPhysicsManager->SetTriggerReport  (l_pCore->GetPhysicTriggerReport());
-        l_pCore->m_pPhysicsManager->SetCollisionReport(l_pCore->GetPhysicCollisionReport());
-      }
-
 
       CRenderer* l_pRenderer = l_pCore->GetRenderer();
       l_pRenderer->GetActiveRenderPaths(m_RenderPathsToActivate);

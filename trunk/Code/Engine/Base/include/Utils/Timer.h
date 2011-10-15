@@ -16,11 +16,11 @@ class CTimer
 
 public:
 
-	CTimer(uint32 avgSamples);
+	CTimer(uint32 avgSamples, float _fMaxElapsed);
 	~CTimer();
 
 	void			Update					();
-  void      Reset           ()       { m_fRelativeTime = 0.0f; }; //Resets the relative time
+  void      Reset           ()       { m_fRelativeTime = 0.0f; m_uSamples = 0; m_uIndex = 0; }; //Resets the relative time
 
 	float			GetElapsedTime	() const { return m_fElapsedTime*m_fBulletTimeFactor; };
   float			GetTotalTime  	() const { return m_fTotalTime; };
@@ -41,7 +41,9 @@ private:
 	uint32		m_uFPSCount;
 	float*		m_Deltas;				// array of instant delta times
 	uint32		m_uSamples;			// deltas arrays length
+	uint32		m_uMaxSamples;	// deltas arrays length
 	uint32		m_uIndex;				// current array position
+  float     m_fMaxElapsed;
 };
 
 #endif //INC_TIMERMANAGER_H_

@@ -315,7 +315,7 @@ void CComponentPlayerController::Force()
   CGameEntity* l_pPlayerEntity = GetEntity();
   CComponentEnergy* l_pEnergy = l_pPlayerEntity->GetComponent<CComponentEnergy>();
 
-  if(l_pEnergy->Decrease(ENERGY_FORCE))
+  if(m_bGodMode || l_pEnergy->Decrease(ENERGY_FORCE))
   {
     CRenderer *l_pRenderer = CORE->GetRenderer();
 
