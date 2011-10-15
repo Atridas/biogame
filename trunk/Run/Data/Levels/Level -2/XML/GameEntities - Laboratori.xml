@@ -266,7 +266,7 @@
     <Door open="false" size="0.241218 2.55448 2.57899" />
   </Entity>
   <Entity name="Lab_Trigger_Sortida">
-    <Object3D position="-0.605936 1.40201 -8.0917" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="0.8209 1.40201 -8.0917" yaw="0.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="5.27558 5.27558 7.63794" collision_group="trigger" onEnter="close_door" />
   </Entity>
   <Entity name="lab_bubbles01">

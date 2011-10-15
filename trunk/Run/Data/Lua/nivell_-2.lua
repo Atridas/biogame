@@ -57,6 +57,9 @@ function laboratori_obrir_porta(_self)
     
     EM:send_event(l_message)
     
+    --Mostrar tutorial d'objectes destructibles
+    tutorial_barrel()
+    
     --Apagar llums
     --local l_light = LM:get_resource("lvl2_lab_Spot05")
     --if l_light then
@@ -167,14 +170,14 @@ function trigger_cobertures(_EntityTrigger, _Entity)
 end
 
 -- Tutorial de barrils.
-function trigger_barrils(_EntityTrigger, _Entity)
-  if _Entity:get_name() == 'Player' then
-    tutorial_barrel()
-    
-    --destrucció del trigger
-    EM:remove_entity(_EntityTrigger)
-  end
-end
+--function trigger_barrils(_EntityTrigger, _Entity)
+--  if _Entity:get_name() == 'Player' then
+--    tutorial_barrel()
+--    
+--    --destrucció del trigger
+--    EM:remove_entity(_EntityTrigger)
+--  end
+--end
 
 -- activar enemics menjador 1.
 function activarMenjador01(_EntityTrigger, _Entity)
