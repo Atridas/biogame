@@ -2,7 +2,7 @@
 
 Player_Constants = {}
 
-Player_Constants["Idle time"] = 30.0
+Player_Constants["Idle time"] = 300.0
 
 --mouse
 Player_Constants["Vel Threshold"] = 1000

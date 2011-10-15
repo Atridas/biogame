@@ -208,13 +208,13 @@ bool CAnimatedCoreModel::Load(const std::string &_szPath)
     if(LoadVertexBuffer())
       SetOk(true);
 
+
+    if(IsOk())
+    {
+      ComputeBoundings(l_treeActor);
+    }
   } else {
     LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load No s'ha trobat l'arxiu");
-  }
-
-  if(IsOk())
-  {
-    ComputeBoundings();
   }
 
   return IsOk();
@@ -379,7 +379,7 @@ int CAnimatedCoreModel::GetAnimationCount()
 }
 
 
-void CAnimatedCoreModel::ComputeBoundings()
+void CAnimatedCoreModel::ComputeBoundings(CXMLTreeNode& _xmlInit)
 {
   Vect3f l_vMin, l_vMax;
   bool l_bInit = false;
@@ -428,4 +428,13 @@ void CAnimatedCoreModel::ComputeBoundings()
 
   m_BoundingBox.Init(l_Transform*l_vMin, l_Transform*l_vMax);
   m_BoundingSphere.Init(l_Transform*l_vMin, l_Transform*l_vMax);
+
+
+  float  l_fRadScale      = _xmlInit.GetFloatProperty ("radius_scale", 1.f, false);
+  Vect3f l_vfCenterOffset = _xmlInit.GetVect3fProperty("center_offset", Vect3f(0,0,0), false);
+
+  Vect3f l_vfCenter = m_BoundingSphere.GetMiddlePoint();
+  float  l_fRadius  = m_BoundingSphere.GetRadius();
+
+  m_BoundingSphere.Init(l_vfCenter + l_vfCenterOffset, l_fRadius * l_fRadScale);
 }

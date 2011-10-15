@@ -1,4 +1,4 @@
-<actor name="Militar" radius_bs="2.0" pos_bs="0.0 1.0 0.0" effect="cal3d" technique="cal3dTechnique">
+<actor name="Militar">
   <skeleton filename="Data/Animated Models/Militar/skeleton.csf"/>
   <mesh filename="Data/Animated Models/Militar/mesh.cmf"/>
   <material animated="true" vertex_type="787">

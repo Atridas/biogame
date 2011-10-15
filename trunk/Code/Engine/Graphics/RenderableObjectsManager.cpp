@@ -166,6 +166,19 @@ void CRenderableObjectsManager::RenderOld(CRenderManager* _pRM)
   }
 }
 
+void CRenderableObjectsManager::DebugRender(CRenderManager* _pRM) const
+{
+  vector<CRenderableObject*>::const_iterator l_it = m_RenderableObjects.begin(),
+                                            l_end = m_RenderableObjects.end();
+
+  for(; l_it != l_end; ++l_it)
+  {
+    CBoundingSphere* l_pSphere = (*l_it)->GetBoundingSphere();
+    _pRM->SetTransform((*l_it)->GetMat44());
+    _pRM->RenderBoundingSphere(l_pSphere);
+  }
+}
+
 CRenderableObject* CRenderableObjectsManager::AddMeshInstance(
                                                       const string& _szCoreMeshName,
                                                       const string& _szInstanceName)

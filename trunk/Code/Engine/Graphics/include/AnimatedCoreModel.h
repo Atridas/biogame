@@ -15,6 +15,7 @@ class CalCoreModel;
 class CalHardwareModel;
 class CRenderableVertexs;
 class CMaterial;
+class CXMLTreeNode;
 // ----------------------------------
 
 
@@ -117,7 +118,7 @@ protected:
 
 private:
 
-  void ComputeBoundings();
+  void ComputeBoundings(CXMLTreeNode& _xmlInit);
   /**
    * Mètode de càrrega de la malla.
   **/

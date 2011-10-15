@@ -197,6 +197,7 @@ void CEntityProcess::RenderINFO(CRenderManager* _pRM)
   //CORE->GetEntityManager()->DebugRender(_pRM);
   //CORE->GetIAManager()->GetGraph()->DebugRender(_pRM);
   //CORE->GetEmiterManager()->DebugRender(_pRM);
+  CORE->GetRenderableObjectsManager()->DebugRender(_pRM);
   /*if(CORE->GetActionManager()->IsActionActive("ToggleDebug"))
   {
     CORE->GetPhysicsManager()->DebugRender(_pRM);
