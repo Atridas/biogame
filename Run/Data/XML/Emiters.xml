@@ -27,6 +27,7 @@
       num_columns: nombre de columnes a l'sprite
       num_frames: nombre de frames (per si no s'omplen totes les caselles, no és un camp necessàri)
       time_per_frame: temps que tarda en canviar de frame
+      loop: en bucle o clavar l'últim frame (en defecte, false)
       
     Animacions per keyframes
     Les animacions van de posar valors i punts en el temps. Aleshores la partícula agafa aquell valor en aquell
