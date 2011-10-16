@@ -47,11 +47,11 @@ CPhysicActor* CGameObjectManager::AddPhysicActor(CRenderableObject* _pRenderObje
 
   if (_bPushable)
   {
-   l_pPhysicActor->AddBoxSphape(l_vBoxDim/2,l_vMiddlePos,NULL,GROUP_COLLIDABLE_PUSHABLE);
+   l_pPhysicActor->AddBoxSphape(l_vBoxDim/2,v3fZERO,l_vMiddlePos,NULL,GROUP_COLLIDABLE_PUSHABLE);
   }
   else
   {
-    l_pPhysicActor->AddBoxSphape(l_vBoxDim/2,l_vMiddlePos,NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
+    l_pPhysicActor->AddBoxSphape(l_vBoxDim/2,v3fZERO,l_vMiddlePos,NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
   } 
 
  
@@ -95,11 +95,11 @@ CPhysicActor* CGameObjectManager::AddPhysicActorMesh(CRenderableObject* _pRender
 
   if (_bPushable)
   {
-    l_pPhysicActor->AddMeshShape(l_pMesh,v3fZERO,NULL,GROUP_COLLIDABLE_PUSHABLE);
+    l_pPhysicActor->AddMeshShape(l_pMesh,v3fZERO,v3fZERO,NULL,GROUP_COLLIDABLE_PUSHABLE);
   }
   else
   {
-    l_pPhysicActor->AddMeshShape(l_pMesh,v3fZERO,NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
+    l_pPhysicActor->AddMeshShape(l_pMesh,v3fZERO,v3fZERO,NULL,GROUP_COLLIDABLE_NON_PUSHABLE);
   }
 
   

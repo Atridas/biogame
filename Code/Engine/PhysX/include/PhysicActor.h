@@ -44,10 +44,10 @@ public:
   void              AddForceAtLocalPos(Vect3f _vDirection, Vect3f _vLocalPos, float _fPower);
 
 	//---AddShape Functions-----
-	void							AddSphereShape		(float radius, const Vect3f& localPos = v3fZERO, NxCCDSkeleton* skeleton = 0, uint32 group = 0);
-	void							AddBoxSphape			(const Vect3f& size, const Vect3f& localPos = v3fZERO, NxCCDSkeleton* skeleton = 0, uint32 group = 0);
-	void							AddCapsuleShape		(float radius, float height, const Vect3f& localPos = v3fZERO, NxCCDSkeleton* skeleton = 0, uint32 group = 0);
-	void							AddMeshShape			(NxTriangleMesh* mesh, const Vect3f& localPos = v3fZERO, NxCCDSkeleton* skeleton = 0, uint32 group = 0);
+	void							AddSphereShape		(float radius, const Vect3f& globalPos = v3fZERO, const Vect3f& localPos = v3fZERO, NxCCDSkeleton* skeleton = 0, uint32 group = 0);
+	void							AddBoxSphape			(const Vect3f& size, const Vect3f& globalPos = v3fZERO, const Vect3f& localPos = v3fZERO, NxCCDSkeleton* skeleton = 0, uint32 group = 0);
+	void							AddCapsuleShape		(float radius, float height, const Vect3f& globalPos = v3fZERO, const Vect3f& localPos = v3fZERO, NxCCDSkeleton* skeleton = 0, uint32 group = 0);
+	void							AddMeshShape			(NxTriangleMesh* mesh, const Vect3f& globalPos = v3fZERO, const Vect3f& localPos = v3fZERO, NxCCDSkeleton* skeleton = 0, uint32 group = 0);
 	void							AddPlaneShape			(const Vect3f& normal, float distance, uint32 group = 0);
 
 	//---Trigger Function---

@@ -161,7 +161,7 @@ void CPhysicActor::SetLinearVelocity (const Vect3f& velocity)
 }
 
 
-void CPhysicActor::AddSphereShape	(float radius, const Vect3f& localPos, NxCCDSkeleton* skeleton, uint32 group)
+void CPhysicActor::AddSphereShape	(float radius, const Vect3f& globalPos, const Vect3f& localPos, NxCCDSkeleton* skeleton, uint32 group)
 {
 	assert(m_pPhXActorDesc);
 
@@ -172,6 +172,9 @@ void CPhysicActor::AddSphereShape	(float radius, const Vect3f& localPos, NxCCDSk
 	m_vSphereDesc.push_back(sphereDesc);
 	sphereDesc->radius = radius;
 	sphereDesc->localPose.t = NxVec3(localPos.x, localPos.y, localPos.z);
+
+  m_pPhXActorDesc->globalPose.t = NxVec3(globalPos.x, globalPos.y, globalPos.z);
+
 	if (skeleton != NULL)
 	{
 		sphereDesc->ccdSkeleton = skeleton;
@@ -181,7 +184,7 @@ void CPhysicActor::AddSphereShape	(float radius, const Vect3f& localPos, NxCCDSk
   
 }
 
-void CPhysicActor::AddBoxSphape (const Vect3f& size, const Vect3f& localPos, NxCCDSkeleton* skeleton, uint32 group)
+void CPhysicActor::AddBoxSphape (const Vect3f& size, const Vect3f& globalPos, const Vect3f& localPos, NxCCDSkeleton* skeleton, uint32 group)
 {
 	assert(m_pPhXActorDesc);
 
@@ -192,6 +195,9 @@ void CPhysicActor::AddBoxSphape (const Vect3f& size, const Vect3f& localPos, NxC
 	// Add a box shape to the actor descriptor
 	boxDesc->dimensions = NxVec3( size.x, size.y, size.z);
 	boxDesc->localPose.t = NxVec3(localPos.x, localPos.y, localPos.z);
+
+  m_pPhXActorDesc->globalPose.t = NxVec3(globalPos.x, globalPos.y, globalPos.z);
+
 	if (skeleton != NULL)
 	{
 		boxDesc->ccdSkeleton = skeleton;
@@ -201,7 +207,7 @@ void CPhysicActor::AddBoxSphape (const Vect3f& size, const Vect3f& localPos, NxC
   
 }
 
-void CPhysicActor::AddCapsuleShape (float radius, float height, const Vect3f& localPos, NxCCDSkeleton* skeleton, uint32 group)
+void CPhysicActor::AddCapsuleShape (float radius, float height, const Vect3f& globalPos, const Vect3f& localPos, NxCCDSkeleton* skeleton, uint32 group)
 {
 	assert(m_pPhXActorDesc);
 
@@ -213,6 +219,9 @@ void CPhysicActor::AddCapsuleShape (float radius, float height, const Vect3f& lo
 	capsuleDesc->height = height;
 	capsuleDesc->radius = radius;
 	capsuleDesc->localPose.t = NxVec3(localPos.x, localPos.y, localPos.z);
+
+  m_pPhXActorDesc->globalPose.t = NxVec3(globalPos.x, globalPos.y, globalPos.z);
+
 	if (skeleton != NULL)
 	{
 		capsuleDesc->ccdSkeleton = skeleton;
@@ -221,7 +230,7 @@ void CPhysicActor::AddCapsuleShape (float radius, float height, const Vect3f& lo
 	m_pPhXActorDesc->shapes.pushBack( capsuleDesc );
 }
 
-void CPhysicActor::AddMeshShape	(NxTriangleMesh* mesh, const Vect3f& localPos, NxCCDSkeleton* skeleton, uint32 group)
+void CPhysicActor::AddMeshShape	(NxTriangleMesh* mesh, const Vect3f& globalPos, const Vect3f& localPos, NxCCDSkeleton* skeleton, uint32 group)
 {
 	assert(m_pPhXActorDesc);
 	assert(mesh);
@@ -234,6 +243,8 @@ void CPhysicActor::AddMeshShape	(NxTriangleMesh* mesh, const Vect3f& localPos, N
 	// The actor has mesh shape
 	triangleMeshDesc->meshData = mesh;
   
+  m_pPhXActorDesc->globalPose.t = NxVec3(globalPos.x, globalPos.y, globalPos.z);
+
   if (skeleton != NULL)
 	{
 		triangleMeshDesc->ccdSkeleton = skeleton;

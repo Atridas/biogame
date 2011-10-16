@@ -64,6 +64,7 @@ public:
                     m_bSpriteSizeUpdated(false),
                     m_bHDRParamsUpdated(true),
                     m_bViewportUpdated(true),
+                    m_bCenterUpdated(false),
                     m_fTime(0.0f),
                     m_fEnvironmentIntensity(0.f),
                     m_fGlossiness(0.f),
@@ -183,7 +184,7 @@ public:
   void SetGlowIntensity(float _fGlowIntensity) {m_fGlowIntensity = _fGlowIntensity; m_bGlowUpdated = true;};
   void SetEnvironmentIntensity(float _fEnvironmentIntensity) {if(_fEnvironmentIntensity != m_fEnvironmentIntensity) {m_fEnvironmentIntensity = _fEnvironmentIntensity; m_bEnvironmentUpdated = true;}};
   void SetSpriteSize(const Vect2f _vSpriteSize) {if(_vSpriteSize != m_vSpriteSize) { m_vSpriteSize = _vSpriteSize; m_bSpriteSizeUpdated = true; } };
-
+  void SetCenterXY(float _fX, float _fY) {m_fCenterX = _fX; m_fCenterY = _fY; m_bCenterUpdated = true;};
   void SetBrightPassThreshold (float _fBrightPassThreshold);
   void SetExposure            (float _fExposure);
   void SetGaussMultiplier     (float _fGaussMultiplier);
@@ -280,7 +281,9 @@ private:
   bool m_bLightUpdated;
   bool m_bSpriteSizeUpdated;
 
-  float m_bTimeUpdated;
+  bool m_bTimeUpdated;
+
+  bool m_bCenterUpdated;
 
   //Parametres
   float m_fGlossiness;
@@ -301,6 +304,9 @@ private:
   float m_fGlowLuminanceScale;
   float m_fMaxGlowLuminance;
   float m_fGlowFinalScale;
+
+  float m_fCenterX;
+  float m_fCenterY;
 
   bool    m_bLightEnabled;
   int     m_iLightType;

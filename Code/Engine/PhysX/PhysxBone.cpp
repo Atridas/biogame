@@ -106,7 +106,7 @@ bool CPhysxBone::AddBoxActor(CXMLTreeNode _XMLObjects, CGameEntity* _pEntity)
   l_pUserData->SetColor(colGREEN);
   l_pUserData->SetEntity(_pEntity);
   CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
-  l_pActor->AddBoxSphape(Vect3f(l_vSize.x,l_vSize.z,l_vSize.y)*0.5f,l_fMiddlePoint,NULL,m_iCollisionGroup);
+  l_pActor->AddBoxSphape(Vect3f(l_vSize.x,l_vSize.z,l_vSize.y)*0.5f,m_vMatActor.GetPos(),l_fMiddlePoint,NULL,m_iCollisionGroup);
   l_pActor->CreateBody(l_fDensity,1.0f,1.0f);
   l_pPM->AddPhysicActor(l_pActor);
   l_pActor->SetActorSolverIterationCount(75);
@@ -140,7 +140,7 @@ bool CPhysxBone::AddSphereActor(CXMLTreeNode _XMLObjects, CGameEntity* _pEntity)
   l_pUserData->SetColor(colYELLOW);
   l_pUserData->SetEntity(_pEntity);
   CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
-  l_pActor->AddSphereShape(l_vSize.x*0.5f,Vect3f(l_fMiddlePoint.x,0.0f,0.0f),NULL,m_iCollisionGroup);
+  l_pActor->AddSphereShape(l_vSize.x*0.5f,m_vMatActor.GetPos(),Vect3f(l_fMiddlePoint.x,0.0f,0.0f),NULL,m_iCollisionGroup);
   l_pActor->CreateBody(l_fDensity,1.0f);
 
   l_pPM->AddPhysicActor(l_pActor);

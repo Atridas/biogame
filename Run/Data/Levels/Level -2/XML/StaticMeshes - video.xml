@@ -19,4 +19,20 @@
 	<mesh name="lvl2_video_mars" path="Data/Meshes/lvl2_video_mars.mesh" max="2.95366 -0.0367904 3.17378" min="-2.95366 -0.413475 -3.17378" />
 	<mesh name="lvl2_video_nuvols" path="Data/Meshes/lvl2_video_nuvols.mesh" max="-2.95366 -0.0156417 -3.17378" min="2.95366 -0.413475 3.17379" />
 	<mesh name="lvl2_video_faloff" path="Data/Meshes/lvl2_video_faloff.mesh" max="2.95366 0.420728 3.17378" min="-2.95366 0.420728 -3.17378" />
+	<mesh name="ilumonacions _terra" path="Data/Meshes/ilumonacions _terra.mesh" max="0.0793996 0.0218422 0.0755134" min="-0.0793996 -0.0169232 -0.0755134" />
+	<mesh name="ilumonacions _terra01" path="Data/Meshes/ilumonacions _terra01.mesh" max="0.0793996 0.0218422 0.0755134" min="-0.0793996 -0.0169232 -0.0755134" />
+	<mesh name="ilumonacions _terra02" path="Data/Meshes/ilumonacions _terra02.mesh" max="0.0793993 0.0218422 0.0755134" min="-0.0793993 -0.0169232 -0.0755134" />
+	<mesh name="ilumonacions _terra03" path="Data/Meshes/ilumonacions _terra03.mesh" max="0.0793993 0.0218422 0.0755134" min="-0.0793993 -0.0169232 -0.0755134" />
+	<mesh name="ilumonacions _terra04" path="Data/Meshes/ilumonacions _terra04.mesh" max="0.0793995 0.0218422 0.0755134" min="-0.0793995 -0.0169232 -0.0755134" />
+	<mesh name="ilumonacions _terra05" path="Data/Meshes/ilumonacions _terra05.mesh" max="0.0793995 0.0218422 0.0755129" min="-0.0793995 -0.0169232 -0.0755129" />
+	<mesh name="ilumonacions _terra06" path="Data/Meshes/ilumonacions _terra06.mesh" max="0.0793995 0.0218422 0.0755138" min="-0.0793995 -0.0169232 -0.0755138" />
+	<mesh name="ilumonacions _terra07" path="Data/Meshes/ilumonacions _terra07.mesh" max="0.0793995 0.0218422 0.0755129" min="-0.0793995 -0.0169232 -0.0755129" />
+	<mesh name="ilumonacions _terra08" path="Data/Meshes/ilumonacions _terra08.mesh" max="0.0793993 0.0218422 0.0755138" min="-0.0793995 -0.0169232 -0.0755138" />
+	<mesh name="ilumonacions _terra09" path="Data/Meshes/ilumonacions _terra09.mesh" max="0.0793993 0.0218422 0.0755138" min="-0.0793993 -0.0169232 -0.0755138" />
+	<mesh name="ilumonacions _terra10" path="Data/Meshes/ilumonacions _terra10.mesh" max="0.0793996 0.0218422 0.0755129" min="-0.0793996 -0.0169232 -0.0755129" />
+	<mesh name="ilumonacions _terra11" path="Data/Meshes/ilumonacions _terra11.mesh" max="0.0793996 0.0218422 0.0755138" min="-0.0793996 -0.0169232 -0.0755138" />
+	<mesh name="ilumonacions _terra12" path="Data/Meshes/ilumonacions _terra12.mesh" max="0.0793996 0.0218422 0.0755129" min="-0.0793996 -0.0169232 -0.0755129" />
+	<mesh name="ilumonacions _terra13" path="Data/Meshes/ilumonacions _terra13.mesh" max="0.0793991 0.0218422 0.0755129" min="-0.0793991 -0.0169232 -0.0755129" />
+	<mesh name="ilumonacions _terra14" path="Data/Meshes/ilumonacions _terra14.mesh" max="0.0793991 0.0218422 0.0755129" min="-0.0793991 -0.0169232 -0.0755129" />
+	<mesh name="ilumonacions _terra15" path="Data/Meshes/ilumonacions _terra15.mesh" max="0.0793996 0.0218422 0.0755134" min="-0.0793996 -0.0169232 -0.0755134" />
 </meshes>

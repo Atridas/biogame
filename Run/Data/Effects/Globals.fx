@@ -114,6 +114,10 @@ shared int g_ViewportWidth  : ViewportWidth;
 shared int g_ViewportHeight : ViewportHeight;
 shared int g_ViewportX      : ViewportX;
 shared int g_ViewportY      : ViewportY;
+
+float centerX : CenterX;
+float centerY : CenterY;
+
 //HDR
 shared float g_BrightPassThreshold       : BrightPassThreshold;
 shared float g_Exposure                  : Exposure;
