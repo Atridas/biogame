@@ -995,6 +995,10 @@
     <Object3D position="2.04748 3.09934 34.3481" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_menj_menj_floresc08" />
   </Entity>
+  <Entity name="lvl2_menj_menj_llum00">
+    <Object3D position="-0.648827 2.51455 28.4963" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_menj_menj_llum00" />
+  </Entity>
   <Entity name="lvl2_menj_menj_floresc07">
     <Object3D position="-0.643127 3.09934 28.4948" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_menj_menj_floresc07" />
@@ -1015,6 +1019,14 @@
     <Object3D position="5.19611 3.09934 40.8284" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_menj_menj_floresc_apagat02" />
   </Entity>
+  <Entity name="lvl2_menj_menj_llum01">
+    <Object3D position="2.06863 2.51455 34.337" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_menj_menj_llum01" />
+  </Entity>
+  <Entity name="lvl2_menj_menj_llum02">
+    <Object3D position="7.61793 2.51455 31.7124" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_menj_menj_llum02" />
+  </Entity>
   <Entity name="lvl2_menj_menj_floresc_apagat03">
     <Object3D position="24.1752 3.09934 31.6555" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_menj_menj_floresc_apagat03" />
@@ -1027,6 +1039,10 @@
     <Object3D position="10.3998 3.0267 37.5924" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="lvl2_menj_menj_llum_florescent03" />
   </Entity>
+  <Entity name="lvl2_menj_menj_llum03">
+    <Object3D position="10.6576 2.51455 38.2136" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_menj_menj_llum03" />
+  </Entity>
   <Entity name="lvl2_menj_menj_floresc05">
     <Object3D position="10.6758 3.09934 38.1737" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_menj_menj_floresc05" />
@@ -1034,6 +1050,10 @@
   <Entity name="lvl2_menj_menj_llum_florescent04">
     <Object3D position="17.1193 3.0267 34.1487" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="lvl2_menj_menj_llum_florescent04" />
+  </Entity>
+  <Entity name="lvl2_menj_menj_llum04">
+    <Object3D position="17.3771 2.51455 34.7698" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_menj_menj_llum04" />
   </Entity>
   <Entity name="lvl2_menj_menj_floresc04">
     <Object3D position="17.3953 3.09934 34.73" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -1043,6 +1063,10 @@
     <Object3D position="21.0283 3.0267 24.9328" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="lvl2_menj_menj_llum_florescent05" />
   </Entity>
+  <Entity name="lvl2_menj_menj_llum05">
+    <Object3D position="21.2862 2.51455 25.5539" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_menj_menj_llum05" />
+  </Entity>
   <Entity name="lvl2_menj_menj_floresc03">
     <Object3D position="21.3043 3.09934 25.5141" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_menj_menj_floresc03" />
@@ -1050,6 +1074,10 @@
   <Entity name="lvl2_menj_menj_llum_florescent06">
     <Object3D position="18.1017 3.0267 18.6894" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="lvl2_menj_menj_llum_florescent06" />
+  </Entity>
+  <Entity name="lvl2_menj_menj_llum06">
+    <Object3D position="18.3851 2.51455 19.2865" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_menj_menj_llum06" />
   </Entity>
   <Entity name="lvl2_menj_menj_floresc02">
     <Object3D position="18.3778 3.09934 19.2707" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -1059,6 +1087,10 @@
     <Object3D position="24.5262 3.0267 15.7795" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="lvl2_menj_menj_llum_florescent07" />
   </Entity>
+  <Entity name="lvl2_menj_menj_llum07">
+    <Object3D position="24.784 2.51455 16.4006" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_menj_menj_llum07" />
+  </Entity>
   <Entity name="lvl2_menj_menj_floresc01">
     <Object3D position="24.8022 3.09934 16.3608" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_menj_menj_floresc01" />
@@ -1066,6 +1098,10 @@
   <Entity name="lvl2_menj_menj_llum_florescent08">
     <Object3D position="27.3458 3.0267 21.8705" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="lvl2_menj_menj_llum_florescent08" />
+  </Entity>
+  <Entity name="lvl2_menj_menj_llum08">
+    <Object3D position="27.6037 2.51455 22.4916" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_menj_menj_llum08" />
   </Entity>
   <Entity name="lvl2_menj_menj_floresc00">
     <Object3D position="27.6218 3.09934 22.4518" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -1182,7 +1218,7 @@
     <NavNode cobertura="baixa" />
   </Entity>
   <Entity name="Menjador_trigger01">
-    <Object3D position="18.0847 1.41708 13.6092" yaw="-25.5885" pitch="0.0" roll="0.0" />
+    <Object3D position="19.2549 1.41708 13.0489" yaw="-25.5885" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="2.58267 2.58267 5.7926" collision_group="trigger" onEnter="activarMenjador01" />
   </Entity>
   <Entity name="Menjador_trigger02">
@@ -1206,8 +1242,44 @@
     <Trigger shape="box" size="3.38168 3.62117 5.64291" collision_group="trigger" onEnter="change_level_level_2" />
   </Entity>
   <Entity name="Menjador_trigger_cobertures">
-    <Object3D position="19.9395 1.41708 12.721" yaw="-25.5885" pitch="0.0" roll="0.0" />
+    <Object3D position="22.2102 1.41708 11.6336" yaw="-25.5885" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="1.34353 2.58267 5.7926" collision_group="trigger" onEnter="trigger_cobertures" />
+  </Entity>
+  <Entity name="Menjador_trigger_barrils">
+    <Object3D position="17.0057 1.41708 14.1259" yaw="-25.5885" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="2.31076 2.58267 5.7926" collision_group="trigger" onEnter="trigger_barrils" />
+  </Entity>
+  <Entity name="Menjador_FumMenjar01">
+    <Object3D position="14.0028 1.10657 24.48" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="FumMenjar" volume="0.16 0.3 0.16" />
+  </Entity>
+  <Entity name="Menjador_FumMenjar02">
+    <Object3D position="12.4031 1.10657 25.218" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="FumMenjar" volume="0.16 0.3 0.16" />
+  </Entity>
+  <Entity name="Menjador_FumMenjar03">
+    <Object3D position="10.7203 1.10657 25.9327" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="FumMenjar" volume="0.16 0.3 0.16" />
+  </Entity>
+  <Entity name="Menjador_Campana_Extraccio">
+    <Object3D position="11.7734 2.80542 20.9305" yaw="0.0" pitch="180.0" roll="0.0" />
+    <Emiter core="campana_extrancio" volume="5.4 0.7 1.0" />
+  </Entity>
+  <Entity name="Menjador_gota01">
+    <Object3D position="26.1958 2.75636 25.3519" yaw="0.0" pitch="180.0" roll="0.0" />
+    <Emiter core="goteo" volume="0.0466851 0.0376686 0.0466851" />
+  </Entity>
+  <Entity name="Menjador_gota02">
+    <Object3D position="26.1958 2.95876 34.1517" yaw="0.0" pitch="180.0" roll="0.0" />
+    <Emiter core="goteo" volume="0.0466851 0.0376686 0.0466851" />
+  </Entity>
+  <Entity name="Menjador_gota03">
+    <Object3D position="11.8715 2.72969 40.8892" yaw="0.0" pitch="180.0" roll="0.0" />
+    <Emiter core="goteo" volume="0.0466851 0.0376686 0.0466851" />
+  </Entity>
+  <Entity name="Menjador_teletransport01">
+    <Object3D position="-1.36992 1.77784 22.9787" yaw="-25.3839" pitch="0.0" roll="0.0" />
+    <Billboard core="teletransport" />
   </Entity>
   <Miner name="Miner_menjador00" position="0.524845 1.62554 22.3385" yaw="0.0" active="false" />
   <Militar name="Militar_menjador00" position="24.3474 1.6 33.1077" yaw="0.0" active="false" destiny="Menjador_Navnode_25" />

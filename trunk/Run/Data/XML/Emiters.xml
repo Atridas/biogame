@@ -1,96 +1,80 @@
-ï»¿<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="iso-8859-1"?>
 <CoreEmiters>
 
   <!--
     Tots aquells valors que tinguin (1/2) s'agafa un valor aleatori entre els 2 mostrats
     id: nom de la core
-    emit_rate(1/2): nombre de partÃ­cules creades per segon per unitat de volum
+    emit_rate(1/2): nombre de partícules creades per segon per unitat de volum
     emit_absolute: indica si el nombre de particules es per unitat de volum o absolutes (per defecte: false)
     awake_time(1/2): temps que es passa l'emisor actiu.
     sleep_time(1/2): temps que es passa l'emisor inactiu.
-    life(1/2): temps de vida de la partÃ­cula
+    life(1/2): temps de vida de la partícula
     ratio_y: nombre per el qual es multiplica el size per donar el size en y (per defecte: 1)
-    starting_angle(1/2): angle (en graus) en que comenÃ§a la partÃ­cula
+    starting_angle(1/2): angle (en graus) en que comença la partícula
     starting_speed(1/2): velocitat inicial, en unitats per segon
-    starting_direction_angle: angle (en graus) de desviaciÃ³ en la direcciÃ³ inicial (per defecte: 0)
-    acceleration(1/2): accelaraciÃ³ de la partÃ­cula, en unitats per segon al quadrat
-    acceleration_direction_angle: angle (en graus) de desviaciÃ³ en la accelaraciÃ³ (per defecte: 0)
-    starting_angular_speed(1/2): rotaciÃ³ de la partÃ­cula, en graus per segon
-    angular_acceleration(1/2): accelaraciÃ³ de la rotaciÃ³, en graus per segon al quadrat
-    color(1/2): color inicial de la partÃ­cula
-    size(1/2): tamany inicial de la partÃ­cula, en unitats
-    texture: textura que usa la partÃ­cula
+    starting_direction_angle: angle (en graus) de desviació en la direcció inicial (per defecte: 0)
+    acceleration(1/2): accelaració de la partícula, en unitats per segon al quadrat
+    acceleration_direction_angle: angle (en graus) de desviació en la accelaració (per defecte: 0)
+    starting_angular_speed(1/2): rotació de la partícula, en graus per segon
+    angular_acceleration(1/2): accelaració de la rotació, en graus per segon al quadrat
+    color(1/2): color inicial de la partícula
+    size(1/2): tamany inicial de la partícula, en unitats
+    texture: textura que usa la partícula
     
     Animacions per Sprite
-      is_sprite: (boolean) indica si Ã©s un sprite o no
+      is_sprite: (boolean) indica si és un sprite o no
       num_rows: nombre de files a l'sprite
       num_columns: nombre de columnes a l'sprite
-      num_frames: nombre de frames (per si no s'omplen totes les caselles, no Ã©s un camp necessÃ ri)
+      num_frames: nombre de frames (per si no s'omplen totes les caselles, no és un camp necessàri)
       time_per_frame: temps que tarda en canviar de frame
       loop: en bucle o clavar l'Ãºltim frame (en defecte, false)
       
     Animacions per keyframes
-    Les animacions van de posar valors i punts en el temps. Aleshores la partÃ­cula agafa aquell valor en aquell
+    Les animacions van de posar valors i punts en el temps. Aleshores la partícula agafa aquell valor en aquell
     moment. Es pot resetejar el contador usant:
     reset_animation="true"
-    reset_animation_time(1/2):temps en el qual es reseteja l'animaciÃ³.
+    reset_animation_time(1/2):temps en el qual es reseteja l'animació.
       Sizes
         control_time(1/2): temps del keyframe
-        size(1/2): tamany que agafa la partÃ­cula en aquell moment
+        size(1/2): tamany que agafa la partícula en aquell moment
       Colors
         control_time(1/2): temps del keyframe
-        color(1/2): color que agafa la partÃ­cula en aquell moment
+        color(1/2): color que agafa la partícula en aquell moment
         
         
-  -->
-
-  <!--
-  <ParticleEmitter  id="vapor"                        MinEmitRate="15.0"             MaxEmitRate="20.0"
-                      Color1="0.10 0.10 0.10 0.8"       Color2="0.10 0.10 0.10 0.8"    MinSize="0.05"        MaxSize="0.05"
-                      Life1="1.0"                       Life2="1.0"                    Bucle="true"    
-                      Angle1="-0.1"                     Angle2="0.1"                   Gravity="0.0 5.5 0.0" 
-                      Velocitate="1.0 1.0 1.0"          TexParticle="Data/Textures/texturas particulas/smokepuff1.dds">
-      <Sizes>
-        <Size         time="1.0"       timeInterpolation="1.0"        MinSize="0.9"          MaxSize="0.9"/>
-      </Sizes>
-  </ParticleEmitter>
   -->
   
-  <SimpleEmiter id="vapor"                        
+  <!--*********************************EMITERS LEVEL -2 *************************************************-->
+
+   <SimpleEmiter id="vapor"                       emit_absolute="true"
               emit_rate1="15.0"                  emit_rate2="20.0"
-              life1="1.0"                        life2="1.0"       
-              awake_time1="0.8"                  awake_time2="1.2"
-              sleep_time1="1.3"                  sleep_time2="1.7"
+              life1="1.5"                        life2="1.5"
+              awake_time1="1.0"                  awake_time2="1.0"
+              sleep_time1="0.0"                  sleep_time2="0.0"
               starting_angle1="-3.14159"         starting_angle2="3.14159"
               
-              starting_speed1="0.0 1.0 0.0"      starting_speed2="0.0 1.0 0.0"
-              acceleration1="0.0 2.0 0.0"        acceleration2="0.0 2.0 0.0"
+              starting_speed1="0.0 0.2 0.0"      starting_speed2="0.0 0.3 0.0"
+              acceleration1="0.0 0.2 0.0"        acceleration2="0.0 0.3 0.0"
               starting_angular_speed1="-1"       starting_angular_speed2="1"
               angular_acceleration1="0.0"        angular_acceleration2="0.0"
               
               
-              color1="0.10 0.10 0.10 0.8"       color2="0.10 0.10 0.10 0.8" 
-              size1="0.05"                      size2="0.05"
+              color1="0.7 0.7 0.7 0.8"       color2="0.7 0.7 0.7 0.8"
+              size1="0.02"                      size2="0.03"
               texture="Data/Textures/particules/smokepuff1.dds">
     <Sizes>
-      <Size   control_time1="1.0"       control_time2="1.0"        size1="0.9"          size2="0.9"/>
+      <Size   control_time1="1.5"       control_time2="1.5"        size1="0.3"          size2="0.35"/>
     </Sizes>
+    <Colors>
+      <Color        control_time1="1.4"       control_time2="1.4"   color1="0.9 0.9 0.9 0.25" color2="0.9 0.9 0.9 0.25"/>
+    </Colors>
 
   </SimpleEmiter>
   
-  <!--
-  <ParticleEmitter  id="bubble"                        MinEmitRate="7.0"             MaxEmitRate="10.0"
-                      Color1="0.0 1.0 0.0 1.0"           Color2="0.0 1.0 0.0 1.0"      MinSize="0.02"        MaxSize="0.1"
-                      Life1="2.5"                        Life2="3.0"                   Angle1="-0.5"         Angle2="0.5"
-                      Bucle="false"                      RebootEmitter1="1.0"          RebootEmitter2="1.5"  TotDeCop="false"
-                      NumBucle="10"                      Gravity="0.0 -0.25 0.0"       Velocitate="1.0 1.0 1.0"   
-                      TexParticle="Data/Textures/texturas particulas/soapbubble.dds">      
-                     
-  </ParticleEmitter>
-  -->
-  <SimpleEmiter id="bubble"                        
-              emit_rate1="20.0"                  emit_rate2="30.0"
-              life1="2.5"                        life2="3.0"              
+  
+  <SimpleEmiter id="bubble"                      emit_absolute="true"
+              emit_rate1="3.0"                  emit_rate2="5.0"
+              life1="3.5"                        life2="4.0"              
               awake_time1="0.8"                  awake_time2="1.2"
               sleep_time1="1.3"                  sleep_time2="1.7"
               
@@ -98,283 +82,111 @@
               
               starting_speed1="0.0 1.0 0.0"      starting_speed2="0.0 1.0 0.0"
               starting_direction_angle="5"
-              acceleration1="0.0 -0.25 0.0"      acceleration2="0.0 -0.25 0.0"
+              acceleration1="0.0 -0.15 -0.0"      acceleration2="0.0 -0.15 0.0"
               starting_angular_speed1="-30"      starting_angular_speed2="30"
               angular_acceleration1="-0.1"       angular_acceleration2="0.1"
               
               
-              color1="0.0 1.0 0.0 1.0"          color2="0.0 1.0 0.0 1.0" 
+              color1="0.0 1.0 0.0 0.7"          color2="0.0 1.0 0.0 0.7" 
               size1="0.02"                      size2="0.1"
               texture="Data/Textures/particules/soapbubble.dds">
     <Sizes>
-      <Size   control_time1="1.5"       control_time2="2.0"        size1="0.02"          size2="0.05"/>
-      <Size   control_time1="3.0"       control_time2="3.0"        size1="0.09"          size2="0.1"/>
+      <Size   control_time1="3.0"       control_time2="3.0"        size1="0.04"          size2="0.05"/>
     </Sizes>
   </SimpleEmiter>
   
   
   
-  <SimpleEmiter id="impacte"                        
-              emit_rate1="500.0"                 emit_rate2="500.0"
-              life1="0.1"                        life2="0.1"           
-              awake_time1="0.2"                  awake_time2="0.2"
-              sleep_time1="5.0"                  sleep_time2="5.0"  
+  
+  
+  <SimpleEmiter id="FumMenjar"                   emit_absolute="true"
+               emit_rate1="4.0"                   emit_rate2="6.0"
+               life1="5.0"                         life2="5.0"
+               awake_time1="1.0"                  awake_time2="1.0"
+               sleep_time1="0.0"                  sleep_time2="0.0"
               
-              starting_angle1="-3.14159"         starting_angle2="3.14159"
+               starting_angle1="-3.14159"         starting_angle2="3.14159"
               
-              starting_speed1="0.5 0.5 0.5"      starting_speed2="0.5 0.5 0.5"
-              starting_direction_angle="180"
-              acceleration1="2.0 2.0 2.0"        acceleration2="2.0 2.0 2.0"
-              acceleration_direction_angle="180"
-              starting_angular_speed1="-10"     starting_angular_speed2="10"
-              angular_acceleration1="0.0"        angular_acceleration2="0.0"
+               starting_speed1="0.1 0.2 0.0"      starting_speed2="0.0 0.2 0.1"
+               acceleration1="0.0 0.0 0.0"        acceleration2="0.0 0.0 0.0"
+               starting_angular_speed1="-100"     starting_angular_speed2="100"
+               angular_acceleration1="-15"       angular_acceleration2="15"
               
               
-              color1="1.0 1.0 1.0 0.8"          color2="1.0 1.0 1.0 0.8" 
-              size1="0.2"                       size2="0.2"
-              texture="Data/Textures/gohan.png">
-    <Sizes>
-      <Size   control_time1="0.3"       control_time2="0.3"        size1="0.02"          size2="0.02"/>
-    </Sizes>
+               color1="1.0 0.0 0.0 0.1"          color2="1.0 0.0 0.0 0.1"
+               size1="0.2"                      size2="0.5"
+               texture="Data/Textures/particules/smoketest2.dds">
 
     <Colors>
-      <Color   control_time1="0.3"       control_time2="0.3"        color1="1.0 1.0 1.0 0.0"         color2="1.0 1.0 1.0 0.0"/>
+      <Color        control_time1="1.5"        color1="0.42 0.42 0.42 0.07"       color2="0.44 0.44 0.44 0.08"/>
+      <Color        control_time1="2.0"        color1="0.39 0.39 0.39 0.22"       color2="0.41 0.41 0.41 0.24"/>
+      <Color        control_time1="4.0"        color1="0.43 0.43 0.43 0.20"       color2="0.44 0.44 0.44 0.21"/>
+      <Color        control_time1="6.0"        color1="1.0 1.0 1.0 0.0"           color2="1.0 1.0 1.0 0.0"/>
     </Colors>
   </SimpleEmiter>
   
-  
-  <SimpleEmiter id="impacte ragdoll"                        
-              emit_rate1="500.0"                 emit_rate2="500.0"
-              life1="0.1"                        life2="0.1"           
-              awake_time1="0.2"                  awake_time2="0.2"
-              sleep_time1="5.0"                  sleep_time2="5.0"  
+  <SimpleEmiter id="efecte_fred"
+            emit_rate1="70.0"                   emit_rate2="80.0"
+            life1="5.0"                         life2="5.0"
+            awake_time1="1.0"                  awake_time2="1.0"
+            sleep_time1="0.0"                  sleep_time2="0.0"
               
-              starting_angle1="-3.14159"         starting_angle2="3.14159"
+            starting_angle1="-3.14159"         starting_angle2="3.14159"
               
-              starting_speed1="0.5 0.5 0.5"      starting_speed2="0.5 0.5 0.5"
-              starting_direction_angle="180"
-              acceleration1="2.0 2.0 2.0"        acceleration2="2.0 2.0 2.0"
-              acceleration_direction_angle="180"
-              starting_angular_speed1="-10"     starting_angular_speed2="10"
-              angular_acceleration1="0.0"        angular_acceleration2="0.0"
+            starting_speed1="0.1 0.15 0.0"      starting_speed2="0.0 0.2 0.1"
+            acceleration1="0.0 0.0 0.0"        acceleration2="0.0 0.0 0.0"
+            starting_angular_speed1="-20"     starting_angular_speed2="20"
+            angular_acceleration1="-30"       angular_acceleration2="30"
               
               
-              color1="1.0 1.0 1.0 0.8"          color2="1.0 1.0 1.0 0.8" 
-              size1="0.2"                       size2="0.2"
-              texture="Data/Textures/particules/amapola.png">
-    <Sizes>
-      <Size   control_time1="0.3"       control_time2="0.3"        size1="0.02"          size2="0.02"/>
-    </Sizes>
+            color1="1.0 1.0 1.0 0.0"          color2="1.0 1.0 1.0 0.0"
+            size1="0.3"                      size2="0.5"
+            texture="Data/Textures/particules/smoke.dds">
 
     <Colors>
-      <Color   control_time1="0.3"       control_time2="0.3"        color1="1.0 1.0 1.0 0.0"         color2="1.0 1.0 1.0 0.0"/>
+      <Color        control_time1="0.2"       control_time2="0.2"   color1="1.0 1.0 1.0 0.2"          color2="1.0 1.0 1.0 0.2"/>
+      <Color        control_time1="1.0"       control_time2="1.0"   color1="1.0 1.0 1.0 0.5"          color2="1.0 1.0 1.0 0.5"/>
+      <Color        control_time1="3.0"       control_time2="1.0"   color1="1.0 1.0 1.0 0.2"          color2="1.0 1.0 1.0 0.2"/>
+      <Color        control_time1="4.0"       control_time2="1.0"   color1="1.0 1.0 1.0 0.0"          color2="1.0 1.0 1.0 0.0"/>
     </Colors>
   </SimpleEmiter>
-  
-  
-  <SimpleEmiter id="disparar"                        
-              emit_rate1="5000.0"                emit_rate2="5000.0"
-              life1="0.1"                        life2="1.0"           
-              awake_time1="0.2"                  awake_time2="0.2"
-              sleep_time1="5.0"                  sleep_time2="5.0"  
-              
-              starting_angle1="-3.14159"         starting_angle2="3.14159"
-              
-              starting_speed1="0.0 5.0 0.0"     starting_speed2="0.0 5.0 0.0"
-              starting_direction_angle="15"
-              acceleration1="0.0 -5.0 0.0"       acceleration2="0.0 -5.0 0.0"
-              starting_angular_speed1="-10"     starting_angular_speed2="10"
-              angular_acceleration1="0.0"        angular_acceleration2="0.0"
-              
-              
-              color1="1.0 1.0 1.0 0.8"          color2="1.0 1.0 1.0 0.8" 
-              size1="0.2"                       size2="0.2"
-              texture="Data/Textures/particules/margarita.png">
-    <Sizes>
-      <Size   control_time1="0.3"       control_time2="0.3"        size1="0.02"          size2="0.02"/>
-    </Sizes>
+	
 
-    <Colors>
-      <Color   control_time1="0.3"       control_time2="0.3"        color1="1.0 1.0 1.0 0.0"         color2="1.0 1.0 1.0 0.0"/>
-    </Colors>
-  </SimpleEmiter>
-  <!--
-  <ParticleEmitter  id="vapor2"                        MinEmitRate="15.0"             MaxEmitRate="20.0"
-                    Color1="0.1 0.1 0.1 0.8"           Color2="0.1 0.1 0.1 0.8"       MinSize="0.05"        MaxSize="0.05"
-                    Life1="1.0"                        Life2="1.0"                    Bucle="true"   
-                    Angle1="-0.1"                      Angle2="0.1"                   Gravity="0.0 -0.5 0.0" 
-                    Velocitate="1.0 1.0 1.0"           TexParticle="Data/Textures/texturas particulas/smokepuff1.dds">
-    <Sizes>
-      <Size        time="1.0"       timeInterpolation="1.0"   MinSize="0.9"          MaxSize="0.9"/>
-    </Sizes>
-
-  </ParticleEmitter>
-  -->
-  <SimpleEmiter id="vapor2"                        
-              emit_rate1="15.0"                   emit_rate2="20.0"
-              life1="1.0"                         life2="1.0"                    
-              awake_time1="0.8"                  awake_time2="1.2"
-              sleep_time1="1.3"                  sleep_time2="1.7"  
+  <SimpleEmiter id="boira"                       emit_absolute="true"
+              emit_rate1="6.0"                   emit_rate2="8.0"
+              life1="25.0"                         life2="30.0"
               
               starting_angle1="-3.14159"         starting_angle2="3.14159"
               
-              starting_speed1="0.1 1.0 0.0"      starting_speed2="0.0 1.0 0.1"
-              acceleration1="0.0 -0.5 0.0"      acceleration2="0.0 -0.5 0.0"
-              starting_angular_speed1="-10"     starting_angular_speed2="10"
-              angular_acceleration1="-0.0"       angular_acceleration2="0.0"
-              
-              
-              color1="0.1 0.1 0.1 0.8"          color2="0.1 0.1 0.1 0.8" 
-              size1="0.05"                      size2="0.05"
-              texture="Data/Textures/particules/smokepuff1.dds">
-	  <Sizes>
-      <Size   control_time1="1.0"       control_time2="1.0"        size1="0.9"          size2="0.9"/>
-    </Sizes>
-  </SimpleEmiter>
-  
-  <!--
-    <ParticleEmitter  id="FumMenjar"                        MinEmitRate="7.0"             MaxEmitRate="10.0"
-                      Color1="1.0 1.0 1.0 0.5"              Color2="1.0 1.0 1.0 0.5"      MinSize="0.2"        MaxSize="0.5"
-                      Life1="5.0"                           Life2="5.0"                   Bucle="true"   
-                      Angle1="-4.5"                         Angle2="4.5"                  Gravity="0.0 0.0 0.0"
-                      Velocitate="0.7 0.2 0.7"              TexParticle="Data/Textures/texturas particulas/smoketest2.dds">
-      <Colors>
-        <Color        time="1.5"        Color1="0.42 0.42 0.42 0.07"       Color2="0.44 0.44 0.44 0.08"/>
-        <Color        time="2.0"        Color1="0.39 0.39 0.39 0.22"       Color2="0.41 0.41 0.41 0.24"/>
-        <Color        time="4.0"        Color1="0.43 0.43 0.43 0.20"       Color2="0.44 0.44 0.44 0.21"/>
-        <Color        time="6.0"        Color1="1.0 1.0 1.0 0.0"           Color2="1.0 1.0 1.0 0.0"/>
-       </Colors>
-     </ParticleEmitter>    
-  -->
-  <SimpleEmiter id="FumMenjar"                        
-              emit_rate1="7.0"                   emit_rate2="10.0"
-              life1="5.0"                         life2="5.0"                    
-              awake_time1="0.8"                  awake_time2="1.2"
-              sleep_time1="1.3"                  sleep_time2="1.7"
-              
-              starting_angle1="-3.14159"         starting_angle2="3.14159"
-              
-              starting_speed1="0.1 1.0 0.0"      starting_speed2="0.0 1.0 0.1"
+              starting_speed1="-0.1 0.02 -0.1"      starting_speed2="0.1 0.03 0.1"
               acceleration1="0.0 0.0 0.0"        acceleration2="0.0 0.0 0.0"
-              starting_angular_speed1="-100"     starting_angular_speed2="100"
-              angular_acceleration1="-15"       angular_acceleration2="15"
-              
-              
-              color1="1.0 1.0 1.0 0.5"          color2="1.0 1.0 1.0 0.5" 
-              size1="0.2"                      size2="0.5"
-              texture="Data/Textures/particules/smoketest2.dds">
-			  
-		<Colors>
-        <Color        control_time1="1.5"        color1="0.42 0.42 0.42 0.07"       color2="0.44 0.44 0.44 0.08"/>
-        <Color        control_time1="2.0"        color1="0.39 0.39 0.39 0.22"       color2="0.41 0.41 0.41 0.24"/>
-        <Color        control_time1="4.0"        color1="0.43 0.43 0.43 0.20"       color2="0.44 0.44 0.44 0.21"/>
-        <Color        control_time1="6.0"        color1="1.0 1.0 1.0 0.0"           color2="1.0 1.0 1.0 0.0"/>
-    </Colors>
-  </SimpleEmiter>
-  <!--
-    <ParticleEmitter  id="efecte_fred"                      MinEmitRate="20.0"             MaxEmitRate="30.0"
-                      Color1="1.0 1.0 1.0 0.0"              Color2="1.0 1.0 1.0 0.0"       MinSize="0.3"        MaxSize="0.5"   
-                      Life1="5.0"                           Life2="5.0"                    Bucle="true"   
-                      Angle1="-0.5"                         Angle2="0.5"                   Gravity="0.0 0.5 0.0"
-                      Velocitate="0.05 0.7 0.03"            TexParticle="Data/Textures/texturas particulas/smoke.dds">
-        <Colors>
-          <Color        time="1.0"       timeInterpolation="1.0"   Color1="1.0 1.0 1.0 0.1"          Color2="1.0 1.0 1.0 0.1"/>
-          <Color        time="2.0"       timeInterpolation="1.0"   Color1="1.0 1.0 1.0 0.3"          Color2="1.0 1.0 1.0 0.3"/>
-          <Color        time="3.0"       timeInterpolation="1.0"   Color1="1.0 1.0 1.0 0.1"          Color2="1.0 1.0 1.0 0.1"/>
-          <Color        time="4.0"       timeInterpolation="1.0"   Color1="1.0 1.0 1.0 0.0"          Color2="1.0 1.0 1.0 0.0"/>
-        </Colors>
-
-      </ParticleEmitter>  
-  -->
-	  
-	<SimpleEmiter id="efecte_fred"                        
-              emit_rate1="20.0"                   emit_rate2="30.0"
-              life1="5.0"                         life2="5.0"                    
-              awake_time1="0.8"                  awake_time2="1.2"
-              sleep_time1="1.3"                  sleep_time2="1.7"  
-              
-              starting_angle1="-3.14159"         starting_angle2="3.14159"
-              
-              starting_speed1="0.1 1.0 0.0"      starting_speed2="0.0 1.0 0.1"
-              acceleration1="0.0 0.5 0.0"        acceleration2="0.0 0.5 0.0"
-              starting_angular_speed1="-60"     starting_angular_speed2="60"
-              angular_acceleration1="-30"       angular_acceleration2="30"
-              
-              
-              color1="1.0 1.0 1.0 0.0"          color2="1.0 1.0 1.0 0.0" 
-              size1="0.3"                      size2="0.5"
-              texture="Data/Textures/particules/smoke.dds">
-			  
-		<Colors>
-          <Color        control_time1="1.0"       control_time2="1.0"   color1="1.0 1.0 1.0 0.1"          color2="1.0 1.0 1.0 0.1"/>
-          <Color        control_time1="2.0"       control_time2="1.0"   color1="1.0 1.0 1.0 0.3"          color2="1.0 1.0 1.0 0.3"/>
-          <Color        control_time1="3.0"       control_time2="1.0"   color1="1.0 1.0 1.0 0.1"          color2="1.0 1.0 1.0 0.1"/>
-          <Color        control_time1="4.0"       control_time2="1.0"   color1="1.0 1.0 1.0 0.0"          color2="1.0 1.0 1.0 0.0"/>
-    </Colors>
-  </SimpleEmiter>
-<!--
-    <ParticleEmitter  id="boira"                              MinEmitRate="6.0"             MaxEmitRate="6.0"
-                      Color1="0.14 0.14 0.14 0.0"             Color2="0.14 0.14 0.14 0.0"   MinSize="1.5"        MaxSize="1.7"
-                      Life1="25.0"                            Life2="25.0"                  Bucle="true"
-                      Angle1="-0.1"                           Angle2="0.1"                  Gravity="0.0 0.0 0.0"
-                      Velocitate="0.2 0.05 0.2"               TexParticle="Data/Textures/texturas particulas/DustPoof.dds">
-      <Colors>
-        <Color        time="0.5"       timeInterpolation="0.5"    Color1="0.30 0.30 0.30 0.06"         Color2="0.30 0.30 0.30 0.06"/>
-        <Color        time="3.0"       timeInterpolation="17.5"   Color1="0.30 0.30 0.30 0.12"         Color2="0.30 0.30 0.30 0.12"/>
-        <Color        time="20.5"      timeInterpolation="1.5"    Color1="0.30 0.30 0.30 0.06"         Color2="0.30 0.30 0.30 0.06"/>
-        <Color        time="22.0"      timeInterpolation="3"      Color1="0.30 0.30 0.30 0.0"          Color2="0.30 0.30 0.30 0.0"/>
-      </Colors>
-    </ParticleEmitter>  
-  -->
-	<SimpleEmiter id="boira"                        
-              emit_rate1="0.1"                   emit_rate2="0.1"
-              life1="50.0"                         life2="70.0"                    
-              
-              starting_angle1="-3.14159"         starting_angle2="3.14159"
-              
-              starting_speed1="0.0 0.0 0.0"      starting_speed2="0.0 0.0 0.0"
-              acceleration1="0.0 0.0 0.0"        acceleration2="0.0 0.0 0.0"
-              starting_angular_speed1="-50"     starting_angular_speed2="50"
+              starting_angular_speed1="-10"     starting_angular_speed2="10"
               angular_acceleration1="0.0"       angular_acceleration2="0.0"
               
               
-              color1="0.0 0.0 0.0 0.0"          color2="0.0 0.0 0.0 0.0" 
+              color1="0.0 0.0 0.0 0.0"          color2="0.0 0.0 0.0 0.0"
               size1="1.5"                      size2="1.7"
               texture="Data/Textures/particules/DustPoof.dds">
-			  
-      <Colors>
-        <Color        control_time1="0.0"       control_time2="10.0"   color1="0.0 0.0 0.0 0.0"         color2="0.0 0.0 0.0 0.0"/>
-        <Color        control_time1="10.0"      control_time2="40.0"   color1="0.95 0.95 0.95 0.05"     color2="0.9 0.9 0.9 0.05"/>
-        <Color        control_time1="40.0"      control_time2="50.0"   color1="0.0 0.0 0.0 0.0"         color2="0.0 0.0 0.0 0.0"/>
-      </Colors>
+
+    <Colors>
+      <Color        control_time1="0.5"      control_time2="0.7"   color1="0.30 0.30 0.30 0.06"     color2="0.30 0.30 0.30 0.08"/>
+      <Color        control_time1="3.0"      control_time2="3.5"   color1="0.30 0.30 0.30 0.12"     color2="0.30 0.30 0.30 0.14"/>
+      <Color        control_time1="20.0"     control_time2="20.5"  color1="0.30 0.30 0.30 0.06"     color2="0.30 0.30 0.30 0.08"/>
+      <Color        control_time1="24.0"     control_time2="24.5"  color1="0.30 0.30 0.30 0.0"      color2="0.30 0.30 0.30 0.0"/>
+
+    </Colors>
   </SimpleEmiter>
-<!--
-    <ParticleEmitter  id="frigo"                              MinEmitRate="16.0"             MaxEmitRate="16.0"
-                      Color1="0.7 0.7 0.7 0.0"                Color2="0.7 0.7 0.7 0.0"       MinSize="1.5"        MaxSize="1.7"
-                      Life1="15.0"                            Life2="15.0"                   Bucle="true"
-                      Angle1="-0.1"                           Angle2="0.1"                   Gravity="0.0 0.0 0.0"  
-                      Velocitate="0.2 0.05 0.2"               TexParticle="Data/Textures/texturas particulas/DustPoof.dds">
-      <Colors>
-        <Color        time="0.7"       timeInterpolation="0.7"    Color1="0.7 0.7 0.7 0.06"         Color2="0.7 0.7 0.7 0.06"/>
-        <Color        time="3.0"       timeInterpolation="17.5"   Color1="0.7 0.7 0.7 0.12"         Color2="0.7 0.7 0.7 0.12"/>
-        <Color        time="20.5"      timeInterpolation="1.5"    Color1="0.7 0.7 0.7 0.06"         Color2="0.7 0.7 0.7 0.06"/>
-        <Color        time="22.0"      timeInterpolation="3"      Color1="0.7 0.7 0.7 0.0"          Color2="0.7 0.7 0.7 0.0"/>
-      </Colors>
-
-
-
-    </ParticleEmitter> 
-  -->
 	
-	<SimpleEmiter id="frigo"                        
-              emit_rate1="16.0"                   emit_rate2="16.0"
+	
+	<SimpleEmiter id="campana_extrancio"                         
+              emit_rate1="5.0"                   emit_rate2="7.0"
               life1="15.0"                         life2="15.0"                    
               awake_time1="0.8"                  awake_time2="1.2"
               sleep_time1="1.3"                  sleep_time2="1.7"  
               
               starting_angle1="-3.14159"         starting_angle2="3.14159"
               
-              starting_speed1="0.1 1.0 0.0"      starting_speed2="0.0 1.0 0.1"
+              starting_speed1="0.0 0.1 0.0"      starting_speed2="0.0 0.1 0.0"
               acceleration1="0.0 0.0 0.0"        acceleration2="0.0 0.0 0.0"
               starting_angular_speed1="-10"     starting_angular_speed2="10"
               angular_acceleration1="-0.0"       angular_acceleration2="0.0"
@@ -386,35 +198,22 @@
 			  
 		<Colors>
       <Color        control_time1="0.7"       control_time2="0.7"    color1="0.7 0.7 0.7 0.06"         color2="0.7 0.7 0.7 0.06"/>
-      <Color        control_time1="3.0"       control_time2="17.5"   color1="0.7 0.7 0.7 0.12"         color2="0.7 0.7 0.7 0.12"/>
-      <Color        control_time1="20.5"      control_time2="1.5"    color1="0.7 0.7 0.7 0.06"         color2="0.7 0.7 0.7 0.06"/>
-      <Color        control_time1="22.0"      control_time2="3"      color1="0.7 0.7 0.7 0.0"          color2="0.7 0.7 0.7 0.0"/>
+      <Color        control_time1="3.0"       control_time2="4.0"   color1="0.7 0.7 0.7 0.12"         color2="0.7 0.7 0.7 0.12"/>
+      <Color        control_time1="12.0"      control_time2="13.0"    color1="0.7 0.7 0.7 0.06"         color2="0.7 0.7 0.7 0.06"/>
+      <Color        control_time1="15.0"      control_time2="15"      color1="0.7 0.7 0.7 0.0"          color2="0.7 0.7 0.7 0.0"/>
     </Colors>
   </SimpleEmiter>
-<!--
-    <ParticleEmitter  id="fum_proveta"                        MinEmitRate="15.0"             MaxEmitRate="20.0"
-                      Color1="0.63 0.93 0.89 0.05"            Color2="0.65 0.95 0.9 0.05"    MinSize="0.05"        MaxSize="0.05"
-                      Life1="3.5"                             Life2="3.5"                    Bucle="true"   
-                      Angle1="-0.5"                           Angle2="0.5"                   Gravity="0.0 0.0 0.0"
-                      Velocitate="1.0 0.2 1.0"                TexParticle="Data/Textures/texturas particulas/smoke.dds">
-      <Sizes>
-        <Size        time="3.6"       timeInterpolation="3.6"   MinSize="0.7"          MaxSize="0.7"/>
-      </Sizes>
 
-      
 
-    </ParticleEmitter> 
-  -->
-
-   <SimpleEmiter id="fum_proveta"
+   <SimpleEmiter id="fum_proveta"                   emit_absolute="true"
                 emit_rate1="15.0"                   emit_rate2="20.0"
                 life1="3.5"                         life2="3.5"
-                awake_time1="0.8"                  awake_time2="1.2"
-                sleep_time1="1.3"                  sleep_time2="1.7"
+                awake_time1="1.0"                  awake_time2="1.0"
+                sleep_time1="0.0"                  sleep_time2="0.0"
               
                 starting_angle1="-3.14159"         starting_angle2="3.14159"
               
-                starting_speed1="0.1 1.0 0.0"      starting_speed2="0.0 1.0 0.1"
+                starting_speed1="-0.02 0.2 -0.02"      starting_speed2="0.02 0.3 0.02"
                 acceleration1="0.0 0.0 0.0"        acceleration2="0.0 0.0 0.0"
                 starting_angular_speed1="-45"     starting_angular_speed2="45"
                 angular_acceleration1="-0.0"       angular_acceleration2="0.0"
@@ -427,49 +226,16 @@
     <Sizes>
       <Size        control_time1="3.6"       control_time2="3.6"   size1="0.7"          size2="0.7"/>
     </Sizes>
-    
-  </SimpleEmiter>
-
-   <SimpleEmiter id="fum_proveta_absolut"
-                emit_rate1="15.0"                   emit_rate2="20.0"
-                emit_absolute="true"
-                life1="3.5"                         life2="3.5"
-                awake_time1="0.8"                  awake_time2="1.2"
-                sleep_time1="1.3"                  sleep_time2="1.7"
-              
-                starting_angle1="-3.14159"         starting_angle2="3.14159"
-              
-                starting_speed1="0.0 0.4 0.0"      starting_speed2="0.0 0.6 0.0"
-                starting_direction_angle="10"
-                acceleration1="0.0 0.0 0.0"        acceleration2="0.0 0.0 0.0"
-                starting_angular_speed1="-45"     starting_angular_speed2="45"
-                angular_acceleration1="-0.0"       angular_acceleration2="0.0"
-              
-              
-                color1="0.63 0.93 0.89 0.25"          color2="0.65 0.95 0.9 0.25"
-                size1="0.05"                      size2="0.05"
-                texture="Data/Textures/particules/smoke.dds">
-
-    <Sizes>
-      <Size        control_time1="3.6"       control_time2="3.6"   size1="0.2"          size2="0.7"/>
-    </Sizes>
-		<Colors>
-      <Color        control_time1="1.0"       control_time2="3.0"   color1="0.63 0.93 0.89 0.25" color2="0.65 0.95 0.9 0.25"/>
+    <Colors>
+      <Color        control_time1="0.2"       control_time2="3.0"   color1="0.63 0.93 0.89 0.1" color2="0.65 0.95 0.9 0.1"/>
       <Color        control_time1="3.5"       control_time2="3.5"   color1="0.63 0.93 0.89 0.00" color2="0.65 0.95 0.9 0.00"/>
     </Colors>
     
   </SimpleEmiter>
-<!--
-    <ParticleEmitter  id="goteo"                        MinEmitRate="1.0"             MaxEmitRate="1.0"
-                      Color1="1.0 1.0 1.0 1.0"          Color2="1.0 1.0 1.0 1.0"      MinSize="0.03"        MaxSize="0.05"
-                      Life1="2.0"                       Life2="2.0"                   Bucle="true"   
-                      Angle1="-0.5"                     Angle2="0.5"                  Gravity="0.0 4.5 0.0"
-                      Velocitate="1.0 1.0 1.0"          TexParticle="Data/Textures/texturas particulas/DustPoof.dds">
-      
 
-    </ParticleEmitter> 
-  -->
-	<SimpleEmiter id="goteo"
+  
+
+  <SimpleEmiter id="goteo"                         emit_absolute="true"
                 emit_rate1="1.0"                   emit_rate2="1.0"
                 life1="2.0"                         life2="2.0"
                 awake_time1="0.8"                  awake_time2="1.2"
@@ -487,15 +253,186 @@
                 size1="0.03"                      size2="0.05"
                 texture="Data/Textures/particules/DustPoof.dds">
 
-  
-  </SimpleEmiter>
-	
 
-  
-  <!-- Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â· -->
-  <!-- Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â· -->
-  <!-- Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â· -->
-  <!-- Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â· -->
+  </SimpleEmiter>
+  <!--*********************************EMITERS LEVEL -1 *************************************************-->
+  <SimpleEmiter id="peste_eonita"                   emit_absolute="true"
+                  emit_rate1="2.0"                   emit_rate2="3.0"
+                  life1="3.5"                         life2="3.5"
+                  awake_time1="1.0"                  awake_time2="1.0"
+                  sleep_time1="0.0"                  sleep_time2="0.0"
+              
+                  starting_angle1="-3.14159"         starting_angle2="3.14159"
+              
+                  starting_speed1="-0.02 0.07 -0.02"      starting_speed2="0.02 0.07 0.02"
+                  acceleration1="0.0 0.0 0.0"        acceleration2="0.0 0.0 0.0"
+                  starting_angular_speed1="-45"     starting_angular_speed2="45"
+                  angular_acceleration1="-0.0"       angular_acceleration2="0.0"
+              
+              
+                  color1="0.0 1.0 0.0 0.0"          color2="0.0 1.0 0.0 0.0"
+                  size1="0.05"                      size2="0.05"
+                  texture="Data/Textures/particules/smoke.dds">
+
+    <Sizes>
+      <Size        control_time1="3.6"       control_time2="3.6"   size1="0.7"          size2="0.7"/>
+    </Sizes>
+    <Colors>
+      <Color        control_time1="0.2"       control_time2="3.0"   color1="0.63 0.93 0.89 0.05" color2="0.65 0.95 0.9 0.05"/>
+      <Color        control_time1="3.5"       control_time2="3.5"   color1="0.63 0.93 0.89 0.00" color2="0.65 0.95 0.9 0.00"/>
+    </Colors>
+
+  </SimpleEmiter>
+
+  <SimpleEmiter id="ducha"                         emit_absolute="true"
+                emit_rate1="0.0"                   emit_rate2="0.0"
+                life1="2.0"                         life2="2.0"
+                awake_time1="1.0"                  awake_time2="1.0"
+                sleep_time1="0.0"                  sleep_time2="0.0"
+              
+                starting_angle1="-3.14159"         starting_angle2="3.14159"
+              
+                starting_speed1="-1.3 1.0 -1.3"      starting_speed2="1.3 1.0 1.3"
+                acceleration1="0.0 0.5 0.0"        acceleration2="0.0 0.5 0.0"
+                starting_angular_speed1="-45"     starting_angular_speed2="45"
+                angular_acceleration1="-0.0"       angular_acceleration2="0.0"
+              
+              
+                color1="1.0 1.0 1.0 1.0"          color2="1.0 1.0 1.0 1.0"
+                size1="0.03"                      size2="0.05"
+                texture="Data/Textures/particules/DustPoof.dds">
+
+
+  </SimpleEmiter>
+  <SimpleEmiter id="aixeta_trencada"              emit_absolute="true"
+              emit_rate1="0.0"                   emit_rate2="0.0"
+              life1="2.0"                         life2="2.0"
+              awake_time1="1.0"                  awake_time2="1.0"
+              sleep_time1="0.0"                  sleep_time2="0.0"
+              
+              starting_angle1="-3.14159"         starting_angle2="3.14159"
+              
+              starting_speed1="0.1 1.0 0.0"      starting_speed2="0.0 1.0 0.1"
+              acceleration1="0.0 4.5 0.0"        acceleration2="0.0 4.5 0.0"
+              starting_angular_speed1="-45"     starting_angular_speed2="45"
+              angular_acceleration1="-0.0"       angular_acceleration2="0.0"
+              
+              
+              color1="1.0 1.0 1.0 1.0"          color2="1.0 1.0 1.0 1.0"
+              size1="0.03"                      size2="0.05"
+              texture="Data/Textures/particules/DustPoof.dds">
+
+
+  </SimpleEmiter>
+  <SimpleEmiter id="pols"                       
+              emit_rate1="1.0"                   emit_rate2="2.0"
+              life1="2.0"                         life2="2.0"
+              awake_time1="1.0"                  awake_time2="1.0"
+              sleep_time1="0.0"                  sleep_time2="0.0"
+              
+              starting_angle1="-3.14159"         starting_angle2="3.14159"
+              
+              starting_speed1="-0.4 0.3 -0.4"      starting_speed2="0.4 0.6 0.4"
+              acceleration1="0.0 0.5 0.0"        acceleration2="0.0 0.5 0.0"
+              starting_angular_speed1="-45"     starting_angular_speed2="45"
+              angular_acceleration1="-0.0"       angular_acceleration2="0.0"
+              
+              
+              color1="0.5 0.79 0.94 1.0"          color2="0.55 0.8 0.95 1.0"
+              size1="0.03"                      size2="0.05"
+              texture="Data/Textures/particules/circle.dds">
+
+
+  </SimpleEmiter>
+
+  <!--*********************************EMITERS GENERALS *************************************************-->
+  <SimpleEmiter id="impacte"
+              emit_rate1="500.0"                 emit_rate2="500.0"
+              life1="0.1"                        life2="0.1"
+              awake_time1="0.2"                  awake_time2="0.2"
+              sleep_time1="5.0"                  sleep_time2="5.0"
+              
+              starting_angle1="-3.14159"         starting_angle2="3.14159"
+              
+              starting_speed1="0.5 0.5 0.5"      starting_speed2="0.5 0.5 0.5"
+              starting_direction_angle="180"
+              acceleration1="2.0 2.0 2.0"        acceleration2="2.0 2.0 2.0"
+              acceleration_direction_angle="180"
+              starting_angular_speed1="-10"     starting_angular_speed2="10"
+              angular_acceleration1="0.0"        angular_acceleration2="0.0"
+              
+              
+              color1="1.0 1.0 1.0 0.8"          color2="1.0 1.0 1.0 0.8"
+              size1="0.2"                       size2="0.2"
+              texture="Data/Textures/gohan.png">
+    <Sizes>
+      <Size   control_time1="0.3"       control_time2="0.3"        size1="0.02"          size2="0.02"/>
+    </Sizes>
+
+    <Colors>
+      <Color   control_time1="0.3"       control_time2="0.3"        color1="1.0 1.0 1.0 0.0"         color2="1.0 1.0 1.0 0.0"/>
+    </Colors>
+  </SimpleEmiter>
+
+
+  <SimpleEmiter id="impacte ragdoll"
+              emit_rate1="500.0"                 emit_rate2="500.0"
+              life1="0.1"                        life2="0.1"
+              awake_time1="0.2"                  awake_time2="0.2"
+              sleep_time1="5.0"                  sleep_time2="5.0"
+              
+              starting_angle1="-3.14159"         starting_angle2="3.14159"
+              
+              starting_speed1="0.5 0.5 0.5"      starting_speed2="0.5 0.5 0.5"
+              starting_direction_angle="180"
+              acceleration1="2.0 2.0 2.0"        acceleration2="2.0 2.0 2.0"
+              acceleration_direction_angle="180"
+              starting_angular_speed1="-10"     starting_angular_speed2="10"
+              angular_acceleration1="0.0"        angular_acceleration2="0.0"
+              
+              
+              color1="1.0 1.0 1.0 0.8"          color2="1.0 1.0 1.0 0.8"
+              size1="0.2"                       size2="0.2"
+              texture="Data/Textures/particules/amapola.png">
+    <Sizes>
+      <Size   control_time1="0.3"       control_time2="0.3"        size1="0.02"          size2="0.02"/>
+    </Sizes>
+
+    <Colors>
+      <Color   control_time1="0.3"       control_time2="0.3"        color1="1.0 1.0 1.0 0.0"         color2="1.0 1.0 1.0 0.0"/>
+    </Colors>
+  </SimpleEmiter>
+
+
+  <SimpleEmiter id="disparar"
+              emit_rate1="5000.0"                emit_rate2="5000.0"
+              life1="0.1"                        life2="1.0"
+              awake_time1="0.2"                  awake_time2="0.2"
+              sleep_time1="5.0"                  sleep_time2="5.0"
+              
+              starting_angle1="-3.14159"         starting_angle2="3.14159"
+              
+              starting_speed1="0.0 5.0 0.0"     starting_speed2="0.0 5.0 0.0"
+              starting_direction_angle="15"
+              acceleration1="0.0 -5.0 0.0"       acceleration2="0.0 -5.0 0.0"
+              starting_angular_speed1="-10"     starting_angular_speed2="10"
+              angular_acceleration1="0.0"        angular_acceleration2="0.0"
+              
+              
+              color1="1.0 1.0 1.0 0.8"          color2="1.0 1.0 1.0 0.8"
+              size1="0.2"                       size2="0.2"
+              texture="Data/Textures/particules/margarita.png">
+    <Sizes>
+      <Size   control_time1="0.3"       control_time2="0.3"        size1="0.02"          size2="0.02"/>
+    </Sizes>
+
+    <Colors>
+      <Color   control_time1="0.3"       control_time2="0.3"        color1="1.0 1.0 1.0 0.0"         color2="1.0 1.0 1.0 0.0"/>
+    </Colors>
+  </SimpleEmiter>
+  <!-- ····························································································· -->
+  <!-- ····························································································· -->
+  <!-- ····························································································· -->
 	<SimpleEmiter id="explosio foc"
                 emit_rate1="300.0"                  emit_rate2="300.0"
                 life1="1.5"                        life2="1.5"
@@ -571,10 +508,10 @@
 	
 
   
-  <!-- Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â· -->
-  <!-- Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â· -->
-  <!-- Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â· -->
-  <!-- Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â· -->
+  <!-- ····························································································· -->
+  <!-- ····························································································· -->
+  <!-- ····························································································· -->
+  <!-- ····························································································· -->
   
   <SimpleEmiter id="test tot"                        
               emit_rate1="7.0"                   emit_rate2="10.0"
@@ -621,10 +558,11 @@
     <Emiter id="fum_proveta" position="0.0  0.25 0.0" volume="1.0 0.5 1.0" />
     <Emiter id="test tot 2"  position="0.0 -0.25 0.0" volume="1.0 0.5 1.0" />
   </AggregateEmiter>
-  <!-- Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â· -->
-  <!-- Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â· -->
-  <!-- Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â· -->
-  <!-- Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â·Â· -->
+  
+  <!-- ····························································································· -->
+  <!-- ····························································································· -->
+  <!-- ····························································································· -->
+  <!-- ····························································································· -->
   <Billboard    id="Ins Lab 1"                        
                 
                 starting_angle1="0.0"             starting_angle2="0.0"
@@ -700,6 +638,7 @@
                 is_sprite="false"
                 
                 texture="Data/Textures/Gameplay/Billboard Interactuable.dds"/>
+  
   <Billboard    id="dont use the force"                        
                 
                 starting_angle1="0.0"             starting_angle2="0.0"
@@ -711,4 +650,21 @@
                 is_sprite="false"
                 
                 texture="Data/Textures/Gameplay/useforcedds.dds"/>
+
+  <Billboard    id="teletransport"
+                
+               starting_angle1="0.0"             starting_angle2="0.0"
+                
+               color1="1.0 1.0 1.0 1.0"          color2="1.0 1.0 1.0 1.0"
+               size1="3.0"                      size2="3.0"
+                               
+               is_sprite="true"
+               num_rows="4"
+               num_columns="4"
+                num_frames="16"
+               time_per_frame="0.05"
+               loop="true"
+   
+                
+               texture="Data/Textures/particules/tunel.dds"/>
 </CoreEmiters>
