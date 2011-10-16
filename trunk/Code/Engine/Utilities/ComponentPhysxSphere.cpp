@@ -75,7 +75,7 @@ bool CComponentPhysXSphere::Init(CGameEntity *_pEntity, float _fRadius,
   }
 
 
-  m_pPhysXActor->AddSphereShape(_fRadius,Vect3f( _fPosX , _fPosY , _fPosZ ), NULL, _iCollisionGroup);
+  m_pPhysXActor->AddSphereShape(_fRadius,v3fZERO,Vect3f( _fPosX , _fPosY , _fPosZ ), NULL, _iCollisionGroup);
 
 
   CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXActor);
@@ -128,14 +128,14 @@ bool CComponentPhysXSphere::Init(CGameEntity *_pEntity, float _fDensity, float _
   
   if (_fSkeletonSize > 0)
   {
-    m_pPhysXActor->AddSphereShape(_fRadius, v3fZERO, CORE->GetPhysicsManager()->CreateCCDSkeleton(_fSkeletonSize), _iCollisionGroup);
+    m_pPhysXActor->AddSphereShape(_fRadius,m_pObject3D->GetPosition(), v3fZERO, CORE->GetPhysicsManager()->CreateCCDSkeleton(_fSkeletonSize), _iCollisionGroup);
   }
   else
   {
-    m_pPhysXActor->AddSphereShape(_fRadius, v3fZERO, NULL, _iCollisionGroup);
+    m_pPhysXActor->AddSphereShape(_fRadius,m_pObject3D->GetPosition(), v3fZERO, NULL, _iCollisionGroup);
   }
 
-  m_pPhysXActor->SetGlobalPosition(m_pObject3D->GetPosition());
+  //m_pPhysXActor->SetGlobalPosition(m_pObject3D->GetPosition());
 
   if(_fDensity > 0)
   {

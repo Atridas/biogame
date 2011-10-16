@@ -458,6 +458,13 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     m_bGlowUpdated = false;
   }
 
+  if(m_bCenterUpdated)
+  {
+    _pEffect->SetValue("CenterX",m_fCenterX);
+    _pEffect->SetValue("CenterY",m_fCenterY);
+    m_bCenterUpdated = false;
+  }
+
   if(m_bHDRParamsUpdated)
   {
     _pEffect->SetValue("BrightPassThreshold",      m_fBrightPassThreshold);

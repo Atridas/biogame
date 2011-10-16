@@ -85,9 +85,9 @@ void CPhysxGrenade::Init(float _fSphereRadius, float _fDensity, int _iColGroup, 
   m_pPhysxUserData->SetColor(colYELLOW);
 
   m_pPhysxActor = new CPhysicActor(m_pPhysxUserData);
-  m_pPhysxActor->AddSphereShape(_fSphereRadius,v3fZERO,NULL,_iColGroup);
+  m_pPhysxActor->AddSphereShape(_fSphereRadius,_vPosition,v3fZERO,NULL,_iColGroup);
   m_pPhysxActor->CreateBody(_fDensity);
-  m_pPhysxActor->SetGlobalPosition(_vPosition);
+  //m_pPhysxActor->SetGlobalPosition(_vPosition);
 
 
   l_pPM->AddPhysicActor(m_pPhysxActor);

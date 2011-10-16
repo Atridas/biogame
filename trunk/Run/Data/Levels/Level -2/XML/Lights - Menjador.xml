@@ -17,4 +17,5 @@
 	<light type="omni" name="omni_snak_04" pos="12.144 2.04441 22.7691" color="0.572549 0.552941 0.317647" att_start_range="1.11567" att_end_range="2.98922" render_shadows="false" />
 	<light type="spot" direction="11.2899 0.119786 0.838131" angle="6.60008" fall_off="59.4002" name="spot_snak_03" pos="11.0823 2.07384 26.9161" color="0.831373 0.803922 0.47451" att_start_range="0.0" att_end_range="13.5355" render_shadows="false" />
 	<light type="spot" direction="-5.34329 0.119786 7.06928" angle="6.60008" fall_off="59.4002" name="spot_snak_04" pos="14.936 2.07384 25.0913" color="0.831373 0.803922 0.47451" att_start_range="0.0" att_end_range="13.5355" render_shadows="false" />
+	<light type="omni" name="omni_snak_05" pos="37.7203 2.2339 38.4826" color="0.572549 0.552941 0.317647" att_start_range="0.0" att_end_range="29.5649" render_shadows="false" />
 </lights>

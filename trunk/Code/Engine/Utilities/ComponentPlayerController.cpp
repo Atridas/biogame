@@ -326,62 +326,56 @@ void CComponentPlayerController::Force()
     assert(l_pObject3d);
 
     CPostSceneRendererStep* l_pShockWave = l_pRenderer->GetPostSceneRendererStep("shock_wave");
-    //CDrawQuadSceneEffect* l_pCaptureFrameBuffers = (CDrawQuadSceneEffect*)CORE->GetSceneEffectManager()->GetResource("capture_frame_buffer_scene_effect_with_post_fx");
 
     assert(l_pShockWave);
-    //assert(l_pCaptureFrameBuffers);
+    
+    l_pShockWave->SetCenter(Vect2f(0.3f,0.5f));
 
-    //if(l_pShockWave->IsActive() == false)
-    //{
-      //l_pCaptureFrameBuffers->SetActive(true);
-      //l_pShockWave->SetActive(true);
-      l_pRenderer->ActivateRenderPath("shock_wave");
-      m_fForceTime = 0.0f;
+    l_pRenderer->ActivateRenderPath("shock_wave");
+    m_fForceTime = 0.0f;
 
-      Vect3f l_vPos = l_pObject3d->GetPosition();
-      vector<CPhysicUserData*> l_vImpactObjects;
-      CPhysicsManager *l_pPM = PHYSICS_MANAGER;
+    Vect3f l_vPos = l_pObject3d->GetPosition();
+    vector<CPhysicUserData*> l_vImpactObjects;
+    CPhysicsManager *l_pPM = PHYSICS_MANAGER;
 
-      Mat33f l_mRot;
-      l_mRot.SetIdentity();
-      l_mRot.RotByAngleY(-m_pObject3D->GetYaw());
+    Mat33f l_mRot;
+    l_mRot.SetIdentity();
+    l_mRot.RotByAngleY(-m_pObject3D->GetYaw());
 
-      Vect3f l_vDir = l_mRot*Vect3f(1.0f,0.0f,0.0f);
+    Vect3f l_vDir = l_mRot*Vect3f(1.0f,0.0f,0.0f);
 
-      l_pPM->OverlapSphereActor(2.0f,l_vPos+3.0f*l_vDir,l_vImpactObjects,l_pPM->GetCollisionMask(ECG_FORCE));
+    l_pPM->OverlapSphereActor(2.0f,l_vPos+3.0f*l_vDir,l_vImpactObjects,l_pPM->GetCollisionMask(ECG_FORCE));
 
-      vector<CPhysicUserData*>::iterator l_itUserData;
-      vector<CPhysicUserData*>::iterator l_itUserDataEnd = l_vImpactObjects.end();
+    vector<CPhysicUserData*>::iterator l_itUserData;
+    vector<CPhysicUserData*>::iterator l_itUserDataEnd = l_vImpactObjects.end();
 
-      set<CGameEntity*> l_vImpactEntities;
+    set<CGameEntity*> l_vImpactEntities;
 
-      for(l_itUserData = l_vImpactObjects.begin(); l_itUserData != l_itUserDataEnd; ++l_itUserData)
+    for(l_itUserData = l_vImpactObjects.begin(); l_itUserData != l_itUserDataEnd; ++l_itUserData)
+    {
+      CPhysicUserData* l_pUserData = *l_itUserData;
+      l_vImpactEntities.insert(l_pUserData->GetEntity());
+    }
+
+    set<CGameEntity*>::iterator l_itEntity;
+    set<CGameEntity*>::iterator l_itEntityEnd = l_vImpactEntities.end();
+
+    for(l_itEntity = l_vImpactEntities.begin(); l_itEntity != l_itEntityEnd; ++l_itEntity)
+    {
+      CGameEntity* l_pEntity = *l_itEntity;
+
+      if(l_pPlayerEntity != l_pEntity)
       {
-        CPhysicUserData* l_pUserData = *l_itUserData;
-        l_vImpactEntities.insert(l_pUserData->GetEntity());
+        SEvent l_impacte;
+        l_impacte.Msg = SEvent::REBRE_FORCE;
+        l_impacte.Info[0].Type = SEventInfo::FLOAT;
+        l_impacte.Info[0].f    = DAMAGE_FORCE;
+        l_impacte.Receiver = l_pEntity->GetGUID();
+        l_impacte.Sender = l_pPlayerEntity->GetGUID();
+
+        ENTITY_MANAGER->SendEvent(l_impacte);
       }
-
-      set<CGameEntity*>::iterator l_itEntity;
-      set<CGameEntity*>::iterator l_itEntityEnd = l_vImpactEntities.end();
-
-      for(l_itEntity = l_vImpactEntities.begin(); l_itEntity != l_itEntityEnd; ++l_itEntity)
-      {
-        CGameEntity* l_pEntity = *l_itEntity;
-
-        if(l_pPlayerEntity != l_pEntity)
-        {
-          SEvent l_impacte;
-          l_impacte.Msg = SEvent::REBRE_FORCE;
-          l_impacte.Info[0].Type = SEventInfo::FLOAT;
-          l_impacte.Info[0].f    = DAMAGE_FORCE;
-          l_impacte.Receiver = l_pEntity->GetGUID();
-          l_impacte.Sender = l_pPlayerEntity->GetGUID();
-
-          ENTITY_MANAGER->SendEvent(l_impacte);
-        }
-      }
-
-    //}
+    }
   }
 }
 

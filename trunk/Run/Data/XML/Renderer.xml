@@ -680,7 +680,7 @@
     
     
 
-    <post_scene_renderer name="shock_wave" effect="Shockwave" use_time="true">
+    <post_scene_renderer name="shock_wave" effect="Shockwave" use_time="true" use_center="true">
 
       <input_samplers>
         <input_sampler type="frame_buffer" index="0"/>

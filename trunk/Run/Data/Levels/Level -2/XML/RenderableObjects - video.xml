@@ -19,4 +19,20 @@
 	<RenderableObject name="lvl2_video_mars" class="StaticMesh" resource="lvl2_video_mars" position="4.44702 2.68188 9.07804" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_video_nuvols" class="StaticMesh" resource="lvl2_video_nuvols" position="4.44702 2.51588 9.07804" yaw="180.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_video_faloff" class="StaticMesh" resource="lvl2_video_faloff" position="4.44702 2.52424 9.07804" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="ilumonacions _terra" class="StaticMesh" resource="ilumonacions _terra" position="6.90265 -2.00769 6.36975" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="ilumonacions _terra01" class="StaticMesh" resource="ilumonacions _terra01" position="4.75974 -2.00769 5.42151" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="ilumonacions _terra02" class="StaticMesh" resource="ilumonacions _terra02" position="3.82149 -2.00769 5.51722" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="ilumonacions _terra03" class="StaticMesh" resource="ilumonacions _terra03" position="2.24244 -2.00769 6.13978" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="ilumonacions _terra04" class="StaticMesh" resource="ilumonacions _terra04" position="1.24647 -2.00769 7.04187" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="ilumonacions _terra05" class="StaticMesh" resource="ilumonacions _terra05" position="0.468887 -2.00769 8.8984" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="ilumonacions _terra06" class="StaticMesh" resource="ilumonacions _terra06" position="0.571323 -2.00769 10.2646" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="ilumonacions _terra07" class="StaticMesh" resource="ilumonacions _terra07" position="1.1548 -2.00769 11.803" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="ilumonacions _terra08" class="StaticMesh" resource="ilumonacions _terra08" position="1.96889 -2.00769 12.6419" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="ilumonacions _terra09" class="StaticMesh" resource="ilumonacions _terra09" position="3.56136 -2.00769 13.2733" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="ilumonacions _terra10" class="StaticMesh" resource="ilumonacions _terra10" position="4.92339 -2.00769 13.2852" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="ilumonacions _terra11" class="StaticMesh" resource="ilumonacions _terra11" position="6.47908 -2.00769 12.6555" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="ilumonacions _terra12" class="StaticMesh" resource="ilumonacions _terra12" position="7.37189 -2.00769 11.7271" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="ilumonacions _terra13" class="StaticMesh" resource="ilumonacions _terra13" position="8.10072 -2.00769 10.0114" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="ilumonacions _terra14" class="StaticMesh" resource="ilumonacions _terra14" position="8.09986 -2.00769 8.77293" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="ilumonacions _terra15" class="StaticMesh" resource="ilumonacions _terra15" position="7.45745 -2.00769 7.0208" yaw="0.0" pitch="0.0" roll="0.0" />
 </RenderableObjects>

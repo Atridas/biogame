@@ -44,6 +44,8 @@ bool CPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer, const st
         m_bUseDeltaTime = false;
       }
 
+      m_bUseCenter = _treePostSceneRenderer.GetBoolProperty("use_center",false,false);
+
       string l_szAlignment = _treePostSceneRenderer.GetPszISOProperty("alignment","",false);
       if(l_szAlignment == "center")
       {
@@ -102,6 +104,11 @@ void CPostSceneRendererStep::Render(CRenderManager* _pRM)
   if(m_bUseTime)
   {
     l_pEM->SetTime(m_fTime);
+  }
+
+  if(m_bUseCenter)
+  {
+    l_pEM->SetCenterXY(m_vCenter.x,m_vCenter.y);
   }
 
   CEffect* l_pEffect = l_pEM->GetResource(m_szEffect);

@@ -207,9 +207,9 @@ bool CPhysXProcess::Init()
   g_pJointActor3 = new CPhysicActor(g_pUserDataJoint3);
 
 
-  g_pJointActor1->AddBoxSphape(Vect3f(0.5f,0.5f,0.5f),v3fZERO,NULL,GROUP_COLLIDABLE_PUSHABLE);
-  g_pJointActor2->AddSphereShape(0.4f,v3fZERO,NULL,GROUP_COLLIDABLE_PUSHABLE);
-  g_pJointActor3->AddBoxSphape(Vect3f(0.3f,0.3f,0.3f),v3fZERO,NULL,GROUP_COLLIDABLE_PUSHABLE);
+  g_pJointActor1->AddBoxSphape(Vect3f(0.5f,0.5f,0.5f),v3fZERO,v3fZERO,NULL,GROUP_COLLIDABLE_PUSHABLE);
+  g_pJointActor2->AddSphereShape(0.4f,v3fZERO,v3fZERO,NULL,GROUP_COLLIDABLE_PUSHABLE);
+  g_pJointActor3->AddBoxSphape(Vect3f(0.3f,0.3f,0.3f),v3fZERO,v3fZERO,NULL,GROUP_COLLIDABLE_PUSHABLE);
   g_pJointActor1->SetGlobalPosition(Vect3f(-9.0f,1.0f,-3.0f));
   g_pJointActor2->SetGlobalPosition(Vect3f(-9.0f,3.0f,-3.0f));
   g_pJointActor3->SetGlobalPosition(Vect3f(-9.0f,5.0f,-3.0f));

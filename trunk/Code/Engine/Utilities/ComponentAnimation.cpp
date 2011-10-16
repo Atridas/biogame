@@ -73,8 +73,9 @@ void CComponentAnimation::PlayCycle(const string& _szAnimation, float _fBlendTim
   if(l_pairResult.second)
   {
     m_stInactiveCycles.erase(_szAnimation);
-    m_pAnimatedModel->GetAnimatedInstanceModel()->BlendCycle(_szAnimation,_fBlendTime,_fWeight);
   }
+
+  m_pAnimatedModel->GetAnimatedInstanceModel()->BlendCycle(_szAnimation,_fBlendTime,_fWeight);
   
 }
 
