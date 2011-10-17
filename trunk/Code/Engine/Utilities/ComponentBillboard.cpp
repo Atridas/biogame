@@ -52,3 +52,13 @@ void CComponentBillboard::ChangeCore(const string& _szCore)
 {
   m_pEmiterInstance->Reset(_szCore);
 }
+
+void CComponentBillboard::Enable()
+{
+  m_pEmiterInstance->SetVisible(true);
+}
+
+void CComponentBillboard::Disable()
+{
+  m_pEmiterInstance->SetVisible(false);
+}
