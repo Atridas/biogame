@@ -22,7 +22,9 @@ public:
   void ChangeCore(const string& _szCore);
 
   CEmiterInstance* GetBillboard() const {return m_pEmiterInstance;};
-
+  
+  virtual void Enable(void);
+  virtual void Disable(void);
 protected:
 
   CComponentBillboard():m_pEmiterInstance(0) {};
