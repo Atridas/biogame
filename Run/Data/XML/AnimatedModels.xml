@@ -3,7 +3,9 @@
 	<!--animatedModel name="bot" path="Data/Animated Models/actor.xml"/-->
   <animatedModel name="riggle" path="Data/Animated Models/Riggle/actor.xml"/>
   <animatedModel name="miner" path="Data/Animated Models/Miner/actor.xml"/>
-  <animatedModel name="Militar" path="Data/Animated Models/Militar/actor.xml"/>
+  <animatedModel name="Militar1" path="Data/Animated Models/Militar/actor.xml"/>
+  <animatedModel name="Militar2" path="Data/Animated Models/Militar/actor2.xml"/>
+  <animatedModel name="Militar3" path="Data/Animated Models/Militar/actor3.xml"/>
   <animatedModel name="Porta" path="Data/Animated Models/Porta/actor.xml"/>
   <animatedModel name="Porta1" path="Data/Animated Models/PortaNova/actor.xml"/>
   <animatedModel name="PortaLaser" path="Data/Animated Models/PortaLaser/actor.xml"/>

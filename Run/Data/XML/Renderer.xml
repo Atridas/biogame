@@ -874,7 +874,7 @@
       <post_scene_renderer name="test skybox"/>
     </render_path>
     <render_path name="hangar skybox" active="false">
-      <post_scene_renderer name="test skybox"/>
+      <post_scene_renderer name="cuadros skybox"/>
     </render_path>
   
   

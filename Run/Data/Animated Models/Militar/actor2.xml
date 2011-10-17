@@ -1,8 +1,8 @@
-<actor name="Militar1" radius_bs="2.0" pos_bs="0.0 1.0 0.0" effect="cal3d" technique="cal3dTechnique">
+<actor name="Militar2" radius_bs="2.0" pos_bs="0.0 1.0 0.0" effect="cal3d" technique="cal3dTechnique">
   <skeleton filename="Data/Animated Models/Militar/skeleton.csf"/>
   <mesh filename="Data/Animated Models/Militar/mesh.cmf"/>
   <material animated="true" vertex_type="787">
-    <texture type="diffusse" filename="Data/Textures/DIF_Militar1.dds"/>
+    <texture type="diffusse" filename="Data/Textures/DIF_Militar2.dds"/>
     <texture type="normalmap" filename="Data/Textures/MILITAR_NRM.dds"/>
     <texture type="specular" filename="Data/Textures/MILITAR_SPEC.dds"/>
     <property type="specularParams" glossiness="200.0" specular_level="2.0" />

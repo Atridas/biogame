@@ -123,37 +123,61 @@ function hang_trig_enemics_enter05(_EntityTrigger, _Entity)
   if _Entity:get_name() == "Player" then
     --activate_entity('Miner07')
     activate_entity('Militar01')
-    activate_entity('Militar02')
     activate_entity('Militar09')
-    activate_entity('Militar10')
     activate_entity('Militar14')
-    activate_entity('Militar15')
+    activate_entity('Militar15')   
     
     --upper
     activate_entity('Militar19')
     
     --destrucció del trigger
-    EM:remove_entity(_EntityTrigger)
+    _EntityTrigger:delete_component(BaseComponent.trigger)
+    
+    ComponentDelayedScript.add_to_entity(_EntityTrigger, 2.0, "hang_enemics05")
   end
+end
+
+function hang_enemics05(_EntityTrigger)
+  activate_entity('Militar02')
+  activate_entity('Militar10')
+  EM:remove_entity(_EntityTrigger)
 end
 
 function hang_trig_enemics_enter06(_EntityTrigger, _Entity)
   if _Entity:get_name() == "Player" then
     activate_entity('Militar03')
-    activate_entity('Militar04')
     activate_entity('Militar05')
-    activate_entity('Militar06')
-    activate_entity('Militar07')
-    activate_entity('Militar08')
-    activate_entity('Militar16')
     
     --upper
     activate_entity('Militar20')
     activate_entity('Militar21')
     
     --destrucció del trigger
-    EM:remove_entity(_EntityTrigger)
+    _EntityTrigger:delete_component(BaseComponent.trigger)
+    
+    ComponentDelayedScript.add_to_entity(_EntityTrigger, 2.0, "hang_enemics06_1")
   end
+end
+
+function hang_enemics06_1(_EntityTrigger)
+  activate_entity('Militar04')
+  activate_entity('Militar06')
+  _EntityTrigger:get_component(BaseComponent.delayed_script):reset(1.5, "hang_enemics06_2")
+end
+
+function hang_enemics06_2(_EntityTrigger)
+  activate_entity('Militar16')
+  _EntityTrigger:get_component(BaseComponent.delayed_script):reset(1.5, "hang_enemics06_3")
+end
+
+function hang_enemics06_3(_EntityTrigger)
+  activate_entity('Militar07')
+  _EntityTrigger:get_component(BaseComponent.delayed_script):reset(1.5, "hang_enemics06_4")
+end
+
+function hang_enemics06_4(_EntityTrigger)
+  activate_entity('Militar08')
+  EM:remove_entity(_EntityTrigger)
 end
 
 function hang_trig_enemics_enter07(_EntityTrigger, _Entity)

@@ -3,7 +3,7 @@
   <Rooms>
     <Room name="Sala Video">
       <Boundings>
-        <Box name="Video Bounding" size="12.3023 5.87767 12.8626" position="4.54751 0.5691 8.96852" yaw="25.0" pitch="0.0" roll="0.0" />
+        <Box name="Video Bounding" size="12.3023 5.87767 12.8626" position="4.43212 0.5691 9.11398" yaw="25.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
         <GameObject name="lvl2_video_Box20" />
@@ -26,6 +26,84 @@
         <GameObject name="lvl2_video_nuvols" />
         <GameObject name="lvl2_video_faloff" />
         <GameObject name="lvl2_video_Omni01" />
+        <GameObject name="lvl2_video_iluminacions_terra00" />
+        <GameObject name="lvl2_video_iluminacions_terra01" />
+        <GameObject name="lvl2_video_iluminacions_terra02" />
+        <GameObject name="lvl2_video_iluminacions_terra03" />
+        <GameObject name="lvl2_video_iluminacions_terra04" />
+        <GameObject name="lvl2_video_iluminacions_terra05" />
+        <GameObject name="lvl2_video_iluminacions_terra06" />
+        <GameObject name="lvl2_video_iluminacions_terra07" />
+        <GameObject name="lvl2_video_iluminacions_terra08" />
+        <GameObject name="lvl2_video_iluminacions_terra09" />
+        <GameObject name="lvl2_video_iluminacions_terra10" />
+        <GameObject name="lvl2_video_iluminacions_terra11" />
+        <GameObject name="lvl2_video_iluminacions_terra12" />
+        <GameObject name="lvl2_video_iluminacions_terra13" />
+        <GameObject name="lvl2_video_iluminacions_terra14" />
+        <GameObject name="lvl2_video_iluminacions_terra15" />
+        <GameObject name="lvl2_videoOmni01" />
+        <GameObject name="lvl2_videoOmni02" />
+        <GameObject name="lvl2_videoOmni03" />
+        <GameObject name="lvl2_videoOmni04" />
+        <GameObject name="lvl2_videoOmni05" />
+        <GameObject name="lvl2_videoOmni06" />
+        <GameObject name="lvl2_videoOmni07" />
+        <GameObject name="lvl2_videoOmni08" />
+        <GameObject name="lvl2_videoOmni09" />
+        <GameObject name="lvl2_videoOmni10" />
+        <GameObject name="lvl2_videoOmni11" />
+        <GameObject name="lvl2_videoOmni12" />
+        <GameObject name="lvl2_videoOmni13" />
+        <GameObject name="lvl2_videoOmni14" />
+        <GameObject name="lvl2_videoOmni15" />
+        <GameObject name="lvl2_videoOmni16" />
+        <GameObject name="lvl2_videoOmni17" />
+        <GameObject name="lvl2_videoOmni18" />
+        <GameObject name="lvl2_videoOmni19" />
+        <GameObject name="lvl2_videoOmni20" />
+        <GameObject name="lvl2_videoOmni21" />
+        <GameObject name="lvl2_videoOmni22" />
+        <GameObject name="lvl2_videoOmni23" />
+        <GameObject name="lvl2_videoOmni24" />
+        <GameObject name="lvl2_videoOmni25" />
+        <GameObject name="lvl2_videoOmni26" />
+        <GameObject name="lvl2_videoOmni27" />
+        <GameObject name="lvl2_videoOmni28" />
+        <GameObject name="lvl2_videoOmni29" />
+        <GameObject name="lvl2_videoOmni30" />
+        <GameObject name="lvl2_videoOmni31" />
+        <GameObject name="lvl2_videoOmni32" />
+        <GameObject name="lvl2_videoOmni33" />
+        <GameObject name="lvl2_videoOmni34" />
+        <GameObject name="lvl2_videoOmni35" />
+        <GameObject name="lvl2_videoOmni36" />
+        <GameObject name="lvl2_videoOmni37" />
+        <GameObject name="lvl2_videoOmni38" />
+        <GameObject name="lvl2_videoOmni39" />
+        <GameObject name="lvl2_videoOmni40" />
+        <GameObject name="lvl2_videoOmni41" />
+        <GameObject name="lvl2_videoOmni42" />
+        <GameObject name="lvl2_videoOmni43" />
+        <GameObject name="lvl2_videoOmni44" />
+        <GameObject name="lvl2_videoOmni45" />
+        <GameObject name="lvl2_videoOmni46" />
+        <GameObject name="lvl2_videoOmni47" />
+        <GameObject name="lvl2_videoOmni48" />
+        <GameObject name="lvl2_videoOmni49" />
+        <GameObject name="lvl2_videoOmni50" />
+        <GameObject name="lvl2_videoOmni51" />
+        <GameObject name="lvl2_videoOmni52" />
+        <GameObject name="lvl2_videoOmni53" />
+        <GameObject name="lvl2_videoOmni54" />
+        <GameObject name="lvl2_videoOmni55" />
+        <GameObject name="lvl2_videoOmni56" />
+        <GameObject name="lvl2_videoOmni57" />
+        <GameObject name="lvl2_videoOmni58" />
+        <GameObject name="lvl2_videoSpot01" />
+        <GameObject name="lvl2_videolvl2_videoSpot01.Target" />
+        <GameObject name="lvl2_videoSpot02" />
+        <GameObject name="lvl2_videolvl2_videoSpot02.Target" />
       </Objects>
     </Room>
   </Rooms>

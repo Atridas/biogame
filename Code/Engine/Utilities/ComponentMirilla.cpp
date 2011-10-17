@@ -10,11 +10,11 @@
 #include "Core.h"
 
 
-CComponentMirilla* CComponentMirilla::AddToEntity(CGameEntity *_pEntity, const string& _szName)
+CComponentMirilla* CComponentMirilla::AddToEntity(CGameEntity *_pEntity)
 {
   CComponentMirilla *l_pComp = new CComponentMirilla();
   assert(_pEntity && _pEntity->IsOk());
-  if(l_pComp->Init(_pEntity, _szName))
+  if(l_pComp->Init(_pEntity))
   {
     l_pComp->SetEntity(_pEntity);
     return l_pComp;
@@ -27,7 +27,7 @@ CComponentMirilla* CComponentMirilla::AddToEntity(CGameEntity *_pEntity, const s
 }
 
 
-bool CComponentMirilla::Init(CGameEntity* _pEntity, const string& _szName)
+bool CComponentMirilla::Init(CGameEntity* _pEntity)
 {
   SetOk(true);
   return IsOk();

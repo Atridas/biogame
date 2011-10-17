@@ -150,9 +150,11 @@ function XMLEntityPhysXMesh _instance &_TagName _colGroup =
 
 	--density
 	l_ss = "" as stringstream
-	if (l_aux = GetUserProp _instance "PhysXMesh") != undefined then
+	l_aux = GetUserProp _instance "physXMesh"
+
+	if l_aux != undefined then
 	(
-		if classof l_aux != Integer then
+		if (classof l_aux) != Integer then
 		(
 			l_aux = 0
 		)

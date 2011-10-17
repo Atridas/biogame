@@ -14,6 +14,7 @@ public:
 
   bool Init(const string& _szFile);
   void PlaySample(const string& _szSample);
+  void StopSample(const string& _szSample);
   void PlaySample3D(const string& _szSample, Vect3f _vPosition);
   void ChangeMusic(const string& _szMusic, unsigned long _ulFadeOutTimeMs, bool _bRestart = true);
   void PlayMusic(const string& _szMusic, bool _bRestart = true);

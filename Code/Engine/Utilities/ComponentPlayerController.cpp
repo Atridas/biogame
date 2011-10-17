@@ -96,7 +96,7 @@ void CComponentPlayerController::UpdatePostPhysX(float _fDeltaTime)
   float l_fMaxEnergy = l_pComponentEnergy->GetMaxEnergy();
   
   float l_fMin = 0.0f;
-  float l_fMax = 1.5f;
+  float l_fMax = 1.0f;
   float l_fGlowIntensity = l_fEnergy/l_fMaxEnergy * (l_fMax - l_fMin) + l_fMin;
 
   vector<CMaterial*>::const_iterator l_itMaterial = l_vMaterials.begin();
