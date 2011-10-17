@@ -206,7 +206,7 @@
     <RenderableObject animated="false" name="lvl1_Porta_planta-1_02" />
   </Entity>
   <Entity name="lvl1_key_blue">
-    <Object3D position="-32.376 1.473 0.262" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-32.292 1.50598 0.245526" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_key_blue" />
     <Trigger shape="box" size="0.582664 0.862473 0.166803" collision_group="pickup" onEnter="get_key_blue" />
     <Rotative yaw="0.5" />
@@ -1606,7 +1606,7 @@
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_key_yellow">
-    <Object3D position="13.006 1.392 46.845" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="12.9308 1.40354 46.827" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_key_yellow" />
     <Trigger shape="box" size="0.582663 0.862473 0.166801" collision_group="pickup" onEnter="get_key_yellow" />
     <Rotative yaw="0.5" />
@@ -2839,7 +2839,7 @@
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_key_purple">
-    <Object3D position="27.873 -8.493 -38.462" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="27.8245 -8.48401 -38.463" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_key_purple" />
     <Trigger shape="box" size="0.582664 0.862473 0.166801" collision_group="pickup" onEnter="get_key_purple" />
     <Rotative yaw="0.5" />
@@ -3350,46 +3350,6 @@
     <Object3D position="29.5241 0.804861 32.5522" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode maxDistance="5" />
   </Entity>
-  <!--*****************************************************************************-->
-
-  <Entity name="lvl1_teletransport01">
-    <Object3D position="-0.0239495 1.66002 -21.8855" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Billboard core="teletransport" />
-  </Entity>
-  <Entity name="lvl1_teletransport02">
-    <Object3D position="-0.0492312 1.67603 20.9174" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Billboard core="teletransport" />
-  </Entity>
-  <Entity name="lvl1_particules_centre01">
-    <Object3D position="0.0627843 0.0 0.0088048" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Emiter core="pols" volume="2.44587 5.69265 2.58518" />
-  </Entity>
-  <Entity name="lvl1_ducha01">
-    <Object3D position="13.6169 2.71803 48.9638" yaw="0.0" pitch="180.0" roll="0.0" />
-    <Emiter core="ducha" volume="0.0642464 0.0642464 0.0642464" />
-  </Entity>
-  <Entity name="lvl1_ducha02">
-    <Object3D position="10.3499 2.71803 45.7011" yaw="0.0" pitch="180.0" roll="0.0" />
-    <Emiter core="ducha" volume="0.0642464 0.0642464 0.0642464" />
-  </Entity>
-  <Entity name="lvl1_ducha03">
-    <Object3D position="9.68124 2.71803 40.1706" yaw="0.0" pitch="180.0" roll="0.0" />
-    <Emiter core="ducha" volume="0.0642464 0.0642464 0.0642464" />
-  </Entity>
-  <Entity name="lvl1_ducha04">
-    <Object3D position="20.9174 2.71803 47.0651" yaw="0.0" pitch="180.0" roll="0.0" />
-    <Emiter core="ducha" volume="0.0642464 0.0642464 0.0642464" />
-  </Entity>
-  <Entity name="lvl1_peste_eonita">
-    <Object3D position="26.8619 0.494873 40.7041" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Emiter core="peste_eonita" volume="0.182462 0.0887971 0.182462" />
-  </Entity>
-  <Entity name="lvl1_aixeta_trencada01">
-    <Object3D position="18.9332 1.2255 49.2934" yaw="0.0" pitch="-90.0" roll="0.0" />
-    <Emiter core="aixeta_trencada" volume="0.0404746 0.0404746 0.0404746" />
-  </Entity>
-  <!--******************************************************************************-->
-  
   <Player position="-0.315653 1.08272 -20.7719" yaw="90.0" force_active="false" grenade_active="false" />
   <Miner name="lvl1_miner_green" position="0.0876412 1.6 4.76067" yaw="0.0" active="false" on_death="drop_key" />
   <Militar name="lvl1_militar00" position="-4.12491 1.6 1.10068" yaw="0.0" active="false" destiny="lvl1_node_cobertura" />

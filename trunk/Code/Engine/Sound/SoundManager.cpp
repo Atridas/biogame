@@ -196,6 +196,16 @@ void CSoundManager::PlaySample(const string& _szSample)
   }
 }
 
+void CSoundManager::StopSample(const string& _szSample)
+{
+  SSoundChannel* l_pSample = GetSample(_szSample);
+
+  if(l_pSample)
+  {
+    BASS_ChannelStop(l_pSample->m_iHandle);
+  }
+}
+
 void CSoundManager::PlaySample3D(const string& _szSample, Vect3f _vPosition)
 {
   SSoundChannel* l_pSample = GetSample(_szSample);

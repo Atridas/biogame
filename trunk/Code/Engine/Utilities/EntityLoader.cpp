@@ -682,8 +682,9 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
   l_pComponentPlayerController->m_bForceActive   = _bForceActive;
   l_pComponentPlayerController->m_bGrenadeActive = _bGrenadeActive;
   l_pComponentPlayerController->m_bShootActive   = _bShootActive;
-
+  
   CComponent3rdPSCamera::AddToEntity(l_pPlayer, 0.55f, 0.85f, 1.4f);
+  //CComponent3rdPSCamera::AddToEntity(l_pPlayer, 0.55f, 0.55f, 1.9f);
 
   CComponentPhysXController::AddToEntity(l_pPlayer, l_fCapsuleRadius, l_fCapsuleHeigh, 45.0f, l_fCapsuleSkin, 0.5f, ECG_PERSONATGE );
   
@@ -691,7 +692,7 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
 
   CComponentVida::AddToEntity(l_pPlayer, 100.f, 100.f, true, 25.0f, 5.0f);
 
-  CComponentMirilla::AddToEntity(l_pPlayer, "laser_pilota");
+  CComponentMirilla::AddToEntity(l_pPlayer);
 
   CComponentStateMachine::AddToEntity(l_pPlayer, "State_Player_Neutre");
 
@@ -724,9 +725,30 @@ CGameEntity* CEntityManager::InitMiner(const string& _szPlayerName, const Vect3f
 
 CGameEntity* CEntityManager::InitMilitar(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName, const bool _bActive, const string& _szOnDeathScript, const string& _szDestinyNode)
 {
-  CGameEntity* l_pMilitar = InitEnemy(_szPlayerName, _vPosition, 0.8f, 
-                    "State_Soldier_Idle", "Militar", "Data/Animated Models/Militar/Skeleton.xml",
-                    _szEntityName, _szOnDeathScript, _szDestinyNode);
+  CGameEntity* l_pMilitar = 0;
+  
+  int l_iRandom = RandomNumber(1,4);
+
+  string l_szMilitar = "";
+
+  switch(l_iRandom)
+  {
+    case 1:
+      l_szMilitar = "Militar1";
+      break;
+
+    case 2:
+      l_szMilitar = "Militar2";
+      break;
+
+    case 3:
+      l_szMilitar = "Militar3";
+      break;
+  }
+
+  l_pMilitar = InitEnemy(_szPlayerName, _vPosition, 0.8f, 
+                        "State_Soldier_Idle", l_szMilitar, "Data/Animated Models/Militar/Skeleton.xml",
+                        _szEntityName, _szOnDeathScript, _szDestinyNode);
 
   l_pMilitar->GetComponent<CComponentRenderableObject>()->m_fHeightAdjustment = -1.0f;
 
@@ -876,7 +898,7 @@ CGameEntity* CEntityManager::InitGrenade(float _fLifeTime, const Vect3f& _vPos,c
   Mat44f l_mO3D(l_mRot.SetIdentity());
   l_mO3D.SetPos(_vPos);
 
-	LOGGER->AddNewLog(ELL_INFORMATION, "CEntityManager::InitGrenade creant Grenade");
+	//LOGGER->AddNewLog(ELL_INFORMATION, "CEntityManager::InitGrenade creant Grenade");
 	CGameEntity * l_pGrenade = CORE->GetEntityManager()->CreateEntity();
 
 	CComponentObject3D* l_pCO3D = CComponentObject3D::AddToEntity(l_pGrenade);

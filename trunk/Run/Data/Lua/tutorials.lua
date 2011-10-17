@@ -3,7 +3,7 @@ function tutorial_proves()
   local l_LvLC = EM:get_entity("LevelController")
   if l_LvLC then
     local l_sm = l_LvLC:get_component(BaseComponent.state_machine)
-    if l_sm then
+    if l_sm and l_sm:get_state_machine():current_state() == 'State_Jugant' then
       Main_Menu_Constants["Total frames"]  = 2
       Main_Menu_Constants["Frames"][0]     = "tutorial movement"
       Main_Menu_Constants["Frames"][1]     = "tutorial shoot"
@@ -17,7 +17,7 @@ function tutorial_movement()
   local l_LvLC = EM:get_entity("LevelController")
   if l_LvLC then
     local l_sm = l_LvLC:get_component(BaseComponent.state_machine)
-    if l_sm then
+    if l_sm and l_sm:get_state_machine():current_state() == 'State_Jugant' then
       Main_Menu_Constants["Total frames"]  = 1
       Main_Menu_Constants["Frames"][0]     = "tutorial movement"
       l_sm:get_state_machine():change_state('State_Tutorial')
@@ -32,7 +32,7 @@ function tutorial_interactive()
   local l_LvLC = EM:get_entity("LevelController")
   if l_LvLC then
     local l_sm = l_LvLC:get_component(BaseComponent.state_machine)
-    if l_sm then
+    if l_sm and l_sm:get_state_machine():current_state() == 'State_Jugant' then
       Main_Menu_Constants["Total frames"]  = 1
       Main_Menu_Constants["Frames"][0]     = "tutorial interactive"
       l_sm:get_state_machine():change_state('State_Tutorial')
@@ -45,7 +45,7 @@ function tutorial_riggle()
   local l_LvLC = EM:get_entity("LevelController")
   if l_LvLC then
     local l_sm = l_LvLC:get_component(BaseComponent.state_machine)
-    if l_sm then
+    if l_sm and l_sm:get_state_machine():current_state() == 'State_Jugant' then
       Main_Menu_Constants["Total frames"]  = 2
       Main_Menu_Constants["Frames"][0]     = "tutorial life"
       Main_Menu_Constants["Frames"][1]     = "tutorial energy"
@@ -59,7 +59,7 @@ function tutorial_weapon()
   local l_LvLC = EM:get_entity("LevelController")
   if l_LvLC then
     local l_sm = l_LvLC:get_component(BaseComponent.state_machine)
-    if l_sm then
+    if l_sm and l_sm:get_state_machine():current_state() == 'State_Jugant' then
       Main_Menu_Constants["Total frames"]  = 1
       Main_Menu_Constants["Frames"][0]     = "tutorial shoot"
       l_sm:get_state_machine():change_state('State_Tutorial')
@@ -72,7 +72,7 @@ function tutorial_cover()
   local l_LvLC = EM:get_entity("LevelController")
   if l_LvLC then
     local l_sm = l_LvLC:get_component(BaseComponent.state_machine)
-    if l_sm then
+    if l_sm and l_sm:get_state_machine():current_state() == 'State_Jugant' then
       Main_Menu_Constants["Total frames"]  = 1
       Main_Menu_Constants["Frames"][0]     = "tutorial cover"
       l_sm:get_state_machine():change_state('State_Tutorial')
@@ -84,7 +84,7 @@ function tutorial_barrel()
   local l_LvLC = EM:get_entity("LevelController")
   if l_LvLC then
     local l_sm = l_LvLC:get_component(BaseComponent.state_machine)
-    if l_sm then
+    if l_sm and l_sm:get_state_machine():current_state() == 'State_Jugant' then
       Main_Menu_Constants["Total frames"]  = 2
       Main_Menu_Constants["Frames"][0]     = "tutorial barrel explosive"
       Main_Menu_Constants["Frames"][1]     = "tutorial barrel toxic"
@@ -98,7 +98,7 @@ function tutorial_key()
   local l_LvLC = EM:get_entity("LevelController")
   if l_LvLC then
     local l_sm = l_LvLC:get_component(BaseComponent.state_machine)
-    if l_sm then
+    if l_sm and l_sm:get_state_machine():current_state() == 'State_Jugant' then
       Main_Menu_Constants["Total frames"]  = 1
       Main_Menu_Constants["Frames"][0]     = "tutorial key"
       l_sm:get_state_machine():change_state('State_Tutorial')
@@ -110,7 +110,7 @@ function tutorial_grenade()
   local l_LvLC = EM:get_entity("LevelController")
   if l_LvLC then
     local l_sm = l_LvLC:get_component(BaseComponent.state_machine)
-    if l_sm then
+    if l_sm and l_sm:get_state_machine():current_state() == 'State_Jugant' then
       Main_Menu_Constants["Total frames"]  = 1
       Main_Menu_Constants["Frames"][0]     = "tutorial grenade"
       l_sm:get_state_machine():change_state('State_Tutorial')
@@ -122,7 +122,7 @@ function tutorial_force()
   local l_LvLC = EM:get_entity("LevelController")
   if l_LvLC then
     local l_sm = l_LvLC:get_component(BaseComponent.state_machine)
-    if l_sm then
+    if l_sm and l_sm:get_state_machine():current_state() == 'State_Jugant' then
       Main_Menu_Constants["Total frames"]  = 1
       Main_Menu_Constants["Frames"][0]     = "tutorial force"
       l_sm:get_state_machine():change_state('State_Tutorial')

@@ -62,6 +62,7 @@ void CComponentDelayedScript::Update(float _fDeltaTime)
 
       lua_State *l_pLUA = m_pSM->GetLuaState();
 
+      m_bTriggered = true;
       try {
         luabind::call_function<void>(l_pLUA, m_szScript.c_str(), GetEntity());
       } catch(const luabind::error& _TheError)
@@ -72,7 +73,6 @@ void CComponentDelayedScript::Update(float _fDeltaTime)
                             GetEntity()->GetName().c_str(), m_szScript.c_str(), _TheError.what());
       }
 
-      m_bTriggered = true;
     }
   }
 }

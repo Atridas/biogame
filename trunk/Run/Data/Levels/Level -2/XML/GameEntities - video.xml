@@ -77,10 +77,76 @@
   <Entity name="lvl2_video_nuvols">
     <Object3D position="4.44702 2.51588 9.07804" yaw="180.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_video_nuvols" />
+    <PhysXMesh density="0" collision_group="escenari" />
+    <Rotative yaw="0.1" />
   </Entity>
   <Entity name="lvl2_video_faloff">
     <Object3D position="4.44702 2.52424 9.07804" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_video_faloff" />
+  </Entity>
+  <Entity name="lvl2_video_iluminacions_terra00">
+    <Object3D position="6.90265 -2.00769 6.36975" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_video_iluminacions_terra00" />
+  </Entity>
+  <Entity name="lvl2_video_iluminacions_terra01">
+    <Object3D position="4.75974 -2.00769 5.42151" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_video_iluminacions_terra01" />
+  </Entity>
+  <Entity name="lvl2_video_iluminacions_terra02">
+    <Object3D position="3.82148 -2.00769 5.51722" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_video_iluminacions_terra02" />
+  </Entity>
+  <Entity name="lvl2_video_iluminacions_terra03">
+    <Object3D position="2.24244 -2.00769 6.13978" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_video_iluminacions_terra03" />
+  </Entity>
+  <Entity name="lvl2_video_iluminacions_terra04">
+    <Object3D position="1.24647 -2.00769 7.04187" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_video_iluminacions_terra04" />
+  </Entity>
+  <Entity name="lvl2_video_iluminacions_terra05">
+    <Object3D position="0.468887 -2.00769 8.8984" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_video_iluminacions_terra05" />
+  </Entity>
+  <Entity name="lvl2_video_iluminacions_terra06">
+    <Object3D position="0.571323 -2.00769 10.2646" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_video_iluminacions_terra06" />
+  </Entity>
+  <Entity name="lvl2_video_iluminacions_terra07">
+    <Object3D position="1.1548 -2.00769 11.803" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_video_iluminacions_terra07" />
+  </Entity>
+  <Entity name="lvl2_video_iluminacions_terra08">
+    <Object3D position="1.96889 -2.00769 12.6419" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_video_iluminacions_terra08" />
+  </Entity>
+  <Entity name="lvl2_video_iluminacions_terra09">
+    <Object3D position="3.56136 -2.00769 13.2733" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_video_iluminacions_terra09" />
+  </Entity>
+  <Entity name="lvl2_video_iluminacions_terra10">
+    <Object3D position="4.92339 -2.00769 13.2852" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_video_iluminacions_terra10" />
+  </Entity>
+  <Entity name="lvl2_video_iluminacions_terra11">
+    <Object3D position="6.47908 -2.00769 12.6555" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_video_iluminacions_terra11" />
+  </Entity>
+  <Entity name="lvl2_video_iluminacions_terra12">
+    <Object3D position="7.37189 -2.00769 11.7271" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_video_iluminacions_terra12" />
+  </Entity>
+  <Entity name="lvl2_video_iluminacions_terra13">
+    <Object3D position="8.10072 -2.00769 10.0114" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_video_iluminacions_terra13" />
+  </Entity>
+  <Entity name="lvl2_video_iluminacions_terra14">
+    <Object3D position="8.09986 -2.00769 8.77293" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_video_iluminacions_terra14" />
+  </Entity>
+  <Entity name="lvl2_video_iluminacions_terra15">
+    <Object3D position="7.45745 -2.00769 7.0208" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_video_iluminacions_terra15" />
   </Entity>
   <Entity name="lvl2_video_billboard_laseroff">
     <Object3D position="3.66 0.930864 11.0277" yaw="0.0" pitch="0.0" roll="0.0" />

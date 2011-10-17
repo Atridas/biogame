@@ -269,14 +269,6 @@
     <Object3D position="0.8209 1.40201 -8.0917" yaw="0.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="5.27558 5.27558 7.63794" collision_group="trigger" onEnter="close_door" />
   </Entity>
-  <Entity name="lab_fum_proveta">
-    <Object3D position="-4.98901 1.20794 -2.77871" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Emiter core="fum_proveta" volume="0.0436586 0.0436586 0.0579084" />
-  </Entity>
-  <Entity name="lab_efecte_fred01">
-    <Object3D position="-5.75139 0.2 -10.35" yaw="0.0" pitch="90.0" roll="0.0" />
-    <Emiter core="fum_proveta" volume="1.7593 0.338507 0.338507" />
-  </Entity>
   <Entity name="lab_bubbles01">
     <Object3D position="-8.21172 0.348145 0.540135" yaw="0.0" pitch="0.0" roll="0.0" />
     <Emiter core="bubble" volume="0.417512 0.417512 0.417512" />

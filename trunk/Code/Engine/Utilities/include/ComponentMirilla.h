@@ -20,11 +20,11 @@ public:
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_MIRILLA;};
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_MIRILLA;};
 
-  static CComponentMirilla* AddToEntity(CGameEntity* _pEntity, const string& _szName);
+  static CComponentMirilla* AddToEntity(CGameEntity* _pEntity);
 
 protected:
   CComponentMirilla() {};
-  bool Init(CGameEntity* _pEntity, const string& _szName);
+  bool Init(CGameEntity* _pEntity);
 
   virtual void Enable();
   virtual void Disable();

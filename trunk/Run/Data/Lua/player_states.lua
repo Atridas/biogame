@@ -138,6 +138,9 @@ end
 State_Player_Neutre['Exit'] = function(_jugador)
   --local mirilla = _jugador:get_component(BaseComponent.mirilla)
   --mirilla:set_active(false)
+  
+  SOUND:stop_sample('running')
+  SOUND:stop_sample('walking')
 end
 
 -------------------------------------------------------------------------------------------------
@@ -285,8 +288,13 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
       animation:clear_cycle('pointWalkDown',0.3)
       animation:clear_cycle('PointUpIdle',0.3)
       animation:clear_cycle('pointDownIdle',0.3)
+      
+      SOUND:play_sample('running')
+      SOUND:stop_sample('walking')
     else
-    
+      SOUND:stop_sample('running')
+      SOUND:play_sample('walking')
+      
       if isAiming then
         animation:play_cycle('pointWalkUp',0.15,aim_angle)
         animation:play_cycle('pointWalkDown',0.15,1-aim_angle)
@@ -311,6 +319,10 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
       
     end
   else
+  
+    SOUND:stop_sample('running')
+    SOUND:stop_sample('walking')
+    
     animation:clear_cycle(Player_Constants["Caminar"],0.3)
     animation:clear_cycle(Player_Constants["Caminar enrere"],0.3)
     animation:clear_cycle(Player_Constants["Correr"],0.3)

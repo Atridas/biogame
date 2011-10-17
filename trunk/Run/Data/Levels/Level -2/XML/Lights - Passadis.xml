@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <lights ambient="0.3 0.3 0.3">
 	<light type="spot" direction="0.0 -2.83124 0.0" angle="10.0" fall_off="39.1" name="lvl2_pass_Spot01" pos="-1.72332 3.63118 -8.60123" color="0.603922 0.745098 0.72549" att_start_range="0.98" att_end_range="4.26274" render_shadows="false" />
-	<light type="omni" name="Omni01" pos="-1.72204 3.2714 -8.59969" color="0.52549 0.65098 0.631373" att_start_range="0.0" att_end_range="6.53538" render_shadows="false" />
+	<light type="omni" name="lvl2_pass_Omni01" pos="-1.72204 3.2714 -8.59969" color="0.52549 0.65098 0.631373" att_start_range="0.0" att_end_range="6.53538" render_shadows="false" />
 	<light type="spot" direction="0.43224 -2.83124 -0.926941" angle="10.0" fall_off="96.0" name="lvl2_pass_Spot09" pos="8.33144 2.32739 0.261605" color="1.0 0.709804 0.709804" att_start_range="0.98" att_end_range="7.4102" render_shadows="false" />
 	<light type="spot" direction="3.59135 -2.83124 -7.70168" angle="10.0" fall_off="96.0" name="lvl2_pass_Spot10" pos="8.33144 2.32739 0.261605" color="1.0 0.572549 0.572549" att_start_range="0.98" att_end_range="10.5966" render_shadows="false" />
 	<light type="spot" direction="-0.200697 1.94629 0.430396" angle="10.0" fall_off="96.0" name="lvl2_pass_Spot11" pos="8.43477 1.56276 0.0400298" color="0.780392 0.964706 0.937255" att_start_range="0.98" att_end_range="7.4102" render_shadows="false" />
@@ -9,17 +9,17 @@
 	<light type="spot" direction="0.0 2.83233 0.0" angle="10.0" fall_off="148.3" name="lvl2_pass_Spot12" pos="-1.72332 1.86628 -8.60123" color="0.533333 0.658824 0.647059" att_start_range="0.98" att_end_range="6.94827" render_shadows="false" />
 	<light type="spot" direction="0.0 -2.83124 0.0" angle="10.0" fall_off="107.3" name="lvl2_pass_Spot13" pos="4.04064 3.63118 -8.60123" color="0.290196 0.356863 0.34902" att_start_range="0.98" att_end_range="6.94827" render_shadows="false" />
 	<light type="spot" direction="0.0 2.83233 0.0" angle="10.0" fall_off="148.3" name="lvl2_pass_Spot14" pos="4.04064 1.86628 -8.60123" color="0.533333 0.658824 0.647059" att_start_range="0.98" att_end_range="6.94827" render_shadows="false" />
-	<light type="omni" name="Omni02" pos="4.04192 3.2714 -8.59969" color="0.52549 0.65098 0.631373" att_start_range="0.0" att_end_range="6.53538" render_shadows="false" />
+	<light type="omni" name="lvl2_pass_Omni02" pos="4.04192 3.2714 -8.59969" color="0.52549 0.65098 0.631373" att_start_range="0.0" att_end_range="6.53538" render_shadows="false" />
 	<light type="spot" direction="0.0 -2.83124 0.0" angle="10.0" fall_off="39.1" name="lvl2_pass_Spot15" pos="4.04064 3.63118 -8.60123" color="0.603922 0.745098 0.72549" att_start_range="0.98" att_end_range="4.26274" render_shadows="false" />
 	<light type="spot" direction="0.0 -2.83124 0.0" angle="10.0" fall_off="107.3" name="lvl2_pass_Spot16" pos="16.6716 3.63118 -2.14147" color="0.290196 0.356863 0.34902" att_start_range="0.98" att_end_range="6.94827" render_shadows="false" />
 	<light type="spot" direction="0.0 2.83233 0.0" angle="10.0" fall_off="148.3" name="lvl2_pass_Spot17" pos="16.6716 1.86628 -2.14147" color="0.533333 0.658824 0.647059" att_start_range="0.98" att_end_range="6.94827" render_shadows="false" />
-	<light type="omni" name="Omni03" pos="16.6728 3.2714 -2.13992" color="0.52549 0.65098 0.631373" att_start_range="0.0" att_end_range="6.53538" render_shadows="false" />
+	<light type="omni" name="lvl2_pass_Omni03" pos="16.6728 3.2714 -2.13992" color="0.52549 0.65098 0.631373" att_start_range="0.0" att_end_range="6.53538" render_shadows="false" />
 	<light type="spot" direction="0.0 -2.83124 0.0" angle="10.0" fall_off="39.1" name="lvl2_pass_Spot18" pos="16.6716 3.63118 -2.14147" color="0.603922 0.745098 0.72549" att_start_range="0.98" att_end_range="4.26274" render_shadows="false" />
 	<light type="spot" direction="0.0 -2.83124 0.0" angle="10.0" fall_off="107.3" name="lvl2_pass_Spot19" pos="19.0805 3.63118 2.66143" color="0.290196 0.356863 0.34902" att_start_range="0.98" att_end_range="6.94827" render_shadows="false" />
 	<light type="spot" direction="0.0 2.83233 0.0" angle="10.0" fall_off="148.3" name="lvl2_pass_Spot20" pos="19.0805 1.86628 2.66143" color="0.533333 0.658824 0.647059" att_start_range="0.98" att_end_range="6.94827" render_shadows="false" />
-	<light type="omni" name="Omni04" pos="19.0818 3.2714 2.66297" color="0.52549 0.65098 0.631373" att_start_range="0.0" att_end_range="6.53538" render_shadows="false" />
+	<light type="omni" name="lvl2_pass_Omni04" pos="19.0818 3.2714 2.66297" color="0.52549 0.65098 0.631373" att_start_range="0.0" att_end_range="6.53538" render_shadows="false" />
 	<light type="spot" direction="0.0 -2.83124 0.0" angle="10.0" fall_off="39.1" name="lvl2_pass_Spot21" pos="19.0805 3.63118 2.66143" color="0.603922 0.745098 0.72549" att_start_range="0.98" att_end_range="4.26274" render_shadows="false" />
 	<light type="spot" direction="-1.95609 -2.39081 1.71884" angle="10.0" fall_off="66.3" name="lvl2_pass_Spot03" pos="16.6716 3.63118 -2.14147" color="0.662745 0.819608 0.8" att_start_range="0.98" att_end_range="6.94827" render_shadows="false" />
 	<light type="spot" direction="3.90097 -2.39081 0.890536" angle="10.0" fall_off="70.6" name="lvl2_pass_Spot22" pos="19.0313 3.63118 2.6621" color="0.694118 0.862745 0.839216" att_start_range="0.98" att_end_range="9.03275" render_shadows="false" />
-	<light type="omni" name="Omni05" pos="8.41394 2.01697 0.146152" color="1.0 0.560784 0.560784" att_start_range="0.98" att_end_range="5.26124" render_shadows="false" />
+	<light type="omni" name="lvl2_pass_Omni05" pos="8.41394 2.01697 0.146152" color="1.0 0.560784 0.560784" att_start_range="0.98" att_end_range="5.26124" render_shadows="false" />
 </lights>

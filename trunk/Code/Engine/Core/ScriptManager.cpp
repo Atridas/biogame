@@ -595,6 +595,7 @@ void CScriptManager::RegisterLUAFunctions()
   module(m_pLS) [
     class_<CSoundManager>("SoundManager")
       .def("play_sample", &CSoundManager::PlaySample)
+      .def("stop_sample", &CSoundManager::StopSample)
       .def("play_sample_3D", &CSoundManager::PlaySample3D)
       .def("change_music", &CSoundManager::ChangeMusic)
       .def("play_music", &CSoundManager::PlayMusic)
