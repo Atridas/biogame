@@ -11,7 +11,7 @@ function tutorial_proves()
     end
   end
   
-  SOUND:stop_sounds()
+  --SOUND:stop_sounds()
 end
 
 -- PLANTA -2
@@ -29,7 +29,7 @@ function tutorial_movement()
   deactivate_entity("Lab_billboard_weapon")
   deactivate_entity("Lab_billboard_shootme")
   
-  SOUND:stop_sounds()
+  --SOUND:stop_sounds()
 end
 
 function tutorial_interactive()
@@ -44,7 +44,7 @@ function tutorial_interactive()
   end
   --TODO: Activar Objecte interactuable File
   
-  SOUND:stop_sounds()
+  --SOUND:stop_sounds()
 end
 
 function tutorial_riggle()
@@ -60,7 +60,7 @@ function tutorial_riggle()
   end
   --TODO: Activar Objecte interactuable Arma i Billboard Gun
   
-  SOUND:stop_sounds()
+  --SOUND:stop_sounds()
 end
 
 function tutorial_weapon()
@@ -75,7 +75,7 @@ function tutorial_weapon()
   end
   --TODO: Activar Objecte destructible Caixa de llums i BillBoard ShootMe
 
-  SOUND:stop_sounds()
+  --SOUND:stop_sounds()
 end
 
 function tutorial_cover()
@@ -89,7 +89,7 @@ function tutorial_cover()
     end
   end
   
-  SOUND:stop_sounds()
+  --SOUND:stop_sounds()
 end
 
 function tutorial_barrel()
@@ -104,7 +104,7 @@ function tutorial_barrel()
     end
   end
   
-  SOUND:stop_sounds()
+  --SOUND:stop_sounds()
 end
 
 -- PLANTA -1
@@ -119,7 +119,7 @@ function tutorial_key()
     end
   end
   
-  SOUND:stop_sounds()
+  --SOUND:stop_sounds()
 end
 
 function tutorial_grenade()
@@ -133,7 +133,7 @@ function tutorial_grenade()
     end
   end
   
-  SOUND:stop_sounds()
+  --SOUND:stop_sounds()
 end
 
 function tutorial_force()
@@ -147,5 +147,5 @@ function tutorial_force()
     end
   end
   
-  SOUND:stop_sounds()
+  --SOUND:stop_sounds()
 end
