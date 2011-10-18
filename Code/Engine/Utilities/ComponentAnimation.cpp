@@ -132,3 +132,13 @@ void CComponentAnimation::ClearAllCycles(float _fTime)
 
   m_stInactiveCycles.clear();
 }
+
+void CComponentAnimation::SetAnimationState(const string& _szAnimationState)
+{
+  m_pAnimatedModel->GetAnimatedInstanceModel()->SetAnimationState(_szAnimationState);
+}
+
+void CComponentAnimation::SetAnimationParameter(float _fAnimationParameter)
+{
+  m_pAnimatedModel->GetAnimatedInstanceModel()->SetAnimationParameter(_fAnimationParameter);
+}

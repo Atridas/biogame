@@ -62,6 +62,10 @@ bool LoadAnimationFromState(CXMLTreeNode &_xmlAnimation, CalCoreModel* _pCalCore
     LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load Cicle \"%s\" te \"weight_from_parameter\" i \"weight_from_complementary_parameter\" actius a la vegada", l_szCycleName.c_str());
     return false;
   }
+  else if(Animation_.bFromParameter || Animation_.bFromComplementaryParameter)
+  {
+    Animation_.fFadeOnChange = _xmlAnimation.GetFloatProperty("fade_on_change", .15f, false);
+  }
 
   return true;
 }
@@ -73,8 +77,10 @@ bool LoadActionFromState(CXMLTreeNode &_xmlAction, CalCoreModel* _pCalCoreModel,
   if(!LoadAnimationFromState(_xmlAction, _pCalCoreModel, Action_))
     return false;
   
-  Action_.bBlock = _xmlAction.GetBoolProperty("block", false, false);
-  Action_.bStop = _xmlAction.GetBoolProperty("stop", false, false);
+  Action_.bBlock   = _xmlAction.GetBoolProperty("block", false, false);
+  Action_.bStop    = _xmlAction.GetBoolProperty("stop", false, false);
+  Action_.fFadeIn  = _xmlAction.GetFloatProperty("fade_in", .3f,!Action_.bStop);
+  Action_.fFadeOut = _xmlAction.GetFloatProperty("fade_out", .3f, !(Action_.bStop || Action_.bBlock));
 
   if(Action_.bBlock && Action_.bStop)
   {

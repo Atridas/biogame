@@ -30,6 +30,10 @@ public:
   void ClearCycle(const string& _szAnimation, float _fTime);
   void ClearAllCycles(float _fTime);
 
+  
+  void SetAnimationState(const string& _szAnimationState);
+  void SetAnimationParameter(float _fAnimationParameter);
+
   virtual void PreUpdate(float _fDeltaTime);
 
 protected:

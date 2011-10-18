@@ -180,14 +180,14 @@ State_Porta_Open['Enter'] = function(_entitat)
   
   --animacio
   local l_animation = _entitat:get_component(BaseComponent.animation)
-  l_animation:play_cycle(Porta_Constants["Open"], 0.0, 1.0)
-
+  --l_animation:play_cycle(Porta_Constants["Open"], 0.0, 1.0)
+  l_animation:set_animation_state('opened')
 end
 
 -------------------------------------------------------------------------------------------------
 State_Porta_Open['Exit'] = function(_entitat)
-  local l_animation = _entitat:get_component(BaseComponent.animation)
-  l_animation:clear_all_cycles(0.0)
+  --local l_animation = _entitat:get_component(BaseComponent.animation)
+  --l_animation:clear_all_cycles(0.0)
 end
 
 -------------------------------------------------------------------------------------------------
@@ -230,14 +230,15 @@ State_Porta_Opening['Enter'] = function(_entitat)
   
   --animacio
   local l_animation = _entitat:get_component(BaseComponent.animation)
-  l_animation:play(Porta_Constants["Open Animation"], 0.0, 1.0, true)
+  --l_animation:play(Porta_Constants["Open Animation"], 0.0, 1.0, true)
+  l_animation:set_animation_state('opened')
   
 end
 
 -------------------------------------------------------------------------------------------------
 State_Porta_Opening['Exit'] = function(_entitat)
-  local l_animation = _entitat:get_component(BaseComponent.animation)
-  l_animation:stop(Porta_Constants["Open Animation"])
+  --local l_animation = _entitat:get_component(BaseComponent.animation)
+  --l_animation:stop(Porta_Constants["Open Animation"])
 end
 
 -------------------------------------------------------------------------------------------------
@@ -282,15 +283,16 @@ State_Porta_Closed['Enter'] = function(_entitat)
   
   --animacio
   local l_animation = _entitat:get_component(BaseComponent.animation)
-  l_animation:play_cycle(Porta_Constants["Closed"], 0.0, 1.0)
+  --l_animation:play_cycle(Porta_Constants["Closed"], 0.0, 1.0)
+  l_animation:set_animation_state('closed')
 
 end
 
 -------------------------------------------------------------------------------------------------
 State_Porta_Closed['Exit'] = function(_entitat)
   --animacio
-  local l_animation = _entitat:get_component(BaseComponent.animation)
-  l_animation:clear_all_cycles(0.0)
+  --local l_animation = _entitat:get_component(BaseComponent.animation)
+  --l_animation:clear_all_cycles(0.0)
 
 end
 
@@ -334,15 +336,16 @@ State_Porta_Closing['Enter'] = function(_entitat)
   
   --animacio
   local l_animation = _entitat:get_component(BaseComponent.animation)
-  l_animation:play(Porta_Constants["Close Animation"], 0.0, 1.0,true)
+  --l_animation:play(Porta_Constants["Close Animation"], 0.0, 1.0,true)
+  l_animation:set_animation_state('closed')
   
 end
 
 -------------------------------------------------------------------------------------------------
 State_Porta_Closing['Exit'] = function(_entitat)
   --animacio
-  local l_animation = _entitat:get_component(BaseComponent.animation)
-  l_animation:stop(Porta_Constants["Close Animation"])
+  --local l_animation = _entitat:get_component(BaseComponent.animation)
+  --l_animation:stop(Porta_Constants["Close Animation"])
 end
 
 -------------------------------------------------------------------------------------------------

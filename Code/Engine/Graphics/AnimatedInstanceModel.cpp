@@ -1,5 +1,4 @@
 #include "AnimatedInstanceModel.h"
-#include "AnimatedCoreModel.h"
 
 #include "Core.h"
 #include "RenderManager.h"
@@ -15,7 +14,6 @@
 #include <boost/foreach.hpp>
 
 #define foreach         BOOST_FOREACH
-
 
 void CAnimatedInstanceModel::Initialize(CAnimatedCoreModel *_pAnimatedCoreModel)
 {
@@ -56,10 +54,10 @@ void CAnimatedInstanceModel::Initialize(CAnimatedCoreModel *_pAnimatedCoreModel)
     m_szAnimationState = _pAnimatedCoreModel->m_szDefaultAnimationState;
     if(m_szAnimationState != "")
     {
-      map<string, CAnimatedCoreModel::SAnimationState>::iterator l_it = _pAnimatedCoreModel->m_AnimationStates.find(m_szAnimationState);
+      map<string, SAnimationState>::iterator l_it = _pAnimatedCoreModel->m_AnimationStates.find(m_szAnimationState);
       if(l_it != _pAnimatedCoreModel->m_AnimationStates.end())
       {
-        foreach(CAnimatedCoreModel::SCycle cycle, l_it->second.Cycles)
+        foreach(const SCycle& cycle, l_it->second.Cycles)
         {
           float l_fWeight = (cycle.bFromParameter)? m_fAnimationParameter : ((cycle.bFromComplementaryParameter)? 1 - m_fAnimationParameter : 1);
           l_fWeight *= cycle.fWeight;
@@ -68,6 +66,7 @@ void CAnimatedInstanceModel::Initialize(CAnimatedCoreModel *_pAnimatedCoreModel)
 
       } else {
         LOGGER->AddNewLog(ELL_WARNING, "CAnimatedInstanceModel::Initialize Invalid default animation state %s", m_szAnimationState.c_str());
+        m_szAnimationState = "";
       }
     }
 
@@ -324,3 +323,157 @@ int CAnimatedInstanceModel::GetAnimationCount()
   return m_pAnimatedCoreModel->GetAnimationCount();
 }
 
+
+
+void CAnimatedInstanceModel::SetAnimationState(const string& _szAnimationState)
+{
+  if(_szAnimationState == m_szAnimationState)
+  {
+    return;
+  }
+
+  map<string,SAnimationState>::const_iterator l_itNextAnimationState = m_pAnimatedCoreModel->m_AnimationStates.find(_szAnimationState);
+
+  if(l_itNextAnimationState == m_pAnimatedCoreModel->m_AnimationStates.end())
+  {
+    LOGGER->AddNewLog(ELL_WARNING, "CAnimatedInstanceModel::SetAnimationState intentant canviar a un estat inexistent \"%s\"", _szAnimationState.c_str());
+    return;
+  }
+
+  const SAnimationState& l_NextAnimationState = l_itNextAnimationState->second;
+
+  float l_fFade = l_NextAnimationState.fDefaultFadeIn;
+
+  const set<SCycle>& l_CyclesToActivate = l_NextAnimationState.Cycles;
+
+  if(m_szAnimationState != "")
+  {
+    SAnimationState &l_PrevAnimationState = m_pAnimatedCoreModel->m_AnimationStates.find(m_szAnimationState)->second;
+
+    foreach(const SAction& l_Action, l_PrevAnimationState.OnExit)
+    {
+      ExecuteAction(l_Action);
+    }
+
+    const map<string, SAnimationChange>& l_ChangesFromPrev = m_pAnimatedCoreModel->m_AnimationChanges[m_szAnimationState];
+    map<string, SAnimationChange>::const_iterator l_it = l_ChangesFromPrev.find(_szAnimationState);
+
+    if(l_it != l_ChangesFromPrev.end())
+    {
+      l_fFade = ExecuteChange(l_it->second);
+    }
+    else
+    {
+      l_fFade += l_PrevAnimationState.fDefaultFadeOut;
+      l_fFade *= .5f;
+    }
+
+    const set<SCycle>& l_PrevCycles = l_PrevAnimationState.Cycles;
+
+    foreach(const SCycle& l_Cycle, l_PrevAnimationState.Cycles)
+    {
+      if(l_CyclesToActivate.find(l_Cycle) == l_CyclesToActivate.end())
+      {
+        ClearCycle(l_Cycle, l_fFade);
+      }
+    }
+  }
+
+
+  foreach(const SAction& l_Action, l_NextAnimationState.OnEnter)
+  {
+    ExecuteAction(l_Action);
+  }
+
+  foreach(const SCycle& l_Cycle, l_CyclesToActivate)
+  {
+    BlendCycle(l_Cycle, l_fFade);
+  }
+
+  m_szAnimationState = _szAnimationState;
+}
+
+void CAnimatedInstanceModel::SetAnimationParameter(float _fAnimationParameter) 
+{
+  m_fAnimationParameter = _fAnimationParameter;
+  
+  const SAnimationState& l_AnimationState = m_pAnimatedCoreModel->m_AnimationStates.find(m_szAnimationState)->second;
+
+  
+  foreach(const SCycle& l_Cycle, l_AnimationState.Cycles)
+  {
+    float l_fFactor;
+    if(l_Cycle.bFromParameter)
+    {
+      l_fFactor = m_fAnimationParameter * l_Cycle.fWeight;
+    } else if(l_Cycle.bFromComplementaryParameter)
+    {
+      l_fFactor = (1.f - m_fAnimationParameter) * l_Cycle.fWeight;
+    } else
+    {
+      continue;
+    }
+
+    m_pCalModel->getMixer()->blendCycle(l_Cycle.iId,
+                                        l_fFactor,
+                                        l_Cycle.fFadeOnChange);
+  }
+};
+
+//retorna el fade
+float CAnimatedInstanceModel::ExecuteChange(const SAnimationChange& _AnimationChange)
+{
+  foreach(const SAction& l_Action, _AnimationChange.Actions)
+  {
+    ExecuteAction(l_Action);
+  }
+
+  return _AnimationChange.fFade;
+}
+
+void  CAnimatedInstanceModel::ExecuteAction(const SAction& _Action)
+{
+  CalMixer *l_pMixer = m_pCalModel->getMixer();
+  if(_Action.bStop)
+  {
+    l_pMixer->removeAction(_Action.iId);
+  }
+  else
+  {
+    float l_fWeight;
+    if(_Action.bFromParameter)
+    {
+      l_fWeight = m_fAnimationParameter * _Action.fWeight;
+    } else if(_Action.bFromComplementaryParameter)
+    {
+      l_fWeight = (1.f - m_fAnimationParameter) * _Action.fWeight;
+    } else
+    {
+      l_fWeight = _Action.fWeight;
+    }
+
+    l_pMixer->executeAction(_Action.iId, _Action.fFadeIn, _Action.fFadeOut, l_fWeight, _Action.bBlock);
+  }
+}
+
+void  CAnimatedInstanceModel::BlendCycle(const SCycle& _Cycle, float _fBlendTime)
+{
+  float l_fWeight;
+  if(_Cycle.bFromParameter)
+  {
+    l_fWeight = m_fAnimationParameter * _Cycle.fWeight;
+  } else if(_Cycle.bFromComplementaryParameter)
+  {
+    l_fWeight = (1.f - m_fAnimationParameter) * _Cycle.fWeight;
+  } else
+  {
+    l_fWeight = _Cycle.fWeight;
+  }
+
+  m_pCalModel->getMixer()->blendCycle(_Cycle.iId, l_fWeight, _fBlendTime);
+}
+
+void  CAnimatedInstanceModel::ClearCycle(const SCycle& _Cycle, float _fBlendTime)
+{
+  m_pCalModel->getMixer()->clearCycle(_Cycle.iId, _fBlendTime);
+}

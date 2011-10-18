@@ -18,17 +18,19 @@
     <animation_state name="opened" default_fade_in="2.0" default_fade_out="1.0">
       <cycle name="idleopen"/>
     </animation_state>
+    <!-- -->
     <animation_state name="closed" default_fade_in="1.0" default_fade_out="2.0">
       <cycle name="idleclose"/>
     </animation_state>
   </animation_states>
   
   <animation_changes>
-    <animation_change from="opened" to="closed" fade="1.0">
-      <action name="tancar"/>
+    <animation_change from="opened" to="closed" fade="0.25">
+      <action name="tancar" fade_in="0.1" fade_out="0.1"/>
     </animation_change>
+    <!-- -->
     <animation_change from="closed" to="opened" fade="2.0">
-      <action name="obrir"/>
+      <action name="obrir" fade_in="1.0" fade_out="1.0"/>
     </animation_change>
   </animation_changes>
   

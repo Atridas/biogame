@@ -311,6 +311,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("clear_cycle",              (void(CComponentAnimation::*)(float))&CComponentAnimation::ClearCycle)
       .def("clear_cycle",              (void(CComponentAnimation::*)(const string&, float))&CComponentAnimation::ClearCycle)
       .def("clear_all_cycles",         &CComponentAnimation::ClearAllCycles)
+      .def("set_animation_state",      &CComponentAnimation::SetAnimationState)
+      .def("set_animation_parameter",  &CComponentAnimation::SetAnimationParameter)
 
 
     // ----------------------------------------------------------------------------------------------------

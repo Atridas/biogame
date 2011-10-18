@@ -7,4 +7,26 @@
   <animation name="obrir" filename="Data/Animated Models/Porta/obrir.CAF"/>
   <animation name="tancar" filename="Data/Animated Models/Porta/tancar.CAF"/>
   <animation name="idleopen" filename="Data/Animated Models/Porta/idleopen.CAF"/>
+  
+  
+  <animation_states default="closed">
+    <animation_state name="opened" default_fade_in="2.0" default_fade_out="1.0">
+      <cycle name="idleopen"/>
+    </animation_state>
+    <!-- -->
+    <animation_state name="closed" default_fade_in="1.0" default_fade_out="2.0">
+      <on_enter>
+        <action name="tancar" block="true" fade_in="0.3"/>
+      </on_enter>
+      <on_exit>
+        <action name="tancar" stop="true"/>
+      </on_exit>
+    </animation_state>
+  </animation_states>
+  
+  <animation_changes>
+    <animation_change from="closed" to="opened" fade="1.0">
+      <action name="obrir" fade_in="0.2" fade_out="0.2"/>
+    </animation_change>
+  </animation_changes>
 </actor>
