@@ -206,9 +206,9 @@
     <RenderableObject animated="false" name="lvl1_Porta_planta-1_02" />
   </Entity>
   <Entity name="lvl1_key_blue">
-    <Object3D position="-32.292 1.50598 0.245526" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-31.6466 1.48068 0.266254" yaw="90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_key_blue" />
-    <Trigger shape="box" size="0.582664 0.862473 0.166803" collision_group="pickup" onEnter="get_key_blue" />
+    <Trigger shape="box" size="0.166803 0.862473 0.582663" collision_group="pickup" onEnter="get_key_blue" />
     <Rotative yaw="0.5" />
   </Entity>
   <Entity name="lvl1_habitacio_claus">
@@ -1606,9 +1606,9 @@
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_key_yellow">
-    <Object3D position="12.9308 1.40354 46.827" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="13.1035 1.39046 46.5578" yaw="130.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_key_yellow" />
-    <Trigger shape="box" size="0.582663 0.862473 0.166801" collision_group="pickup" onEnter="get_key_yellow" />
+    <Trigger shape="box" size="0.502306 0.862473 0.553562" collision_group="pickup" onEnter="get_key_yellow" />
     <Rotative yaw="0.5" />
   </Entity>
   <Entity name="lvl1_escalas">
@@ -2839,9 +2839,9 @@
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_key_purple">
-    <Object3D position="27.8245 -8.48401 -38.463" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="27.8712 -8.52869 -38.422" yaw="90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_key_purple" />
-    <Trigger shape="box" size="0.582664 0.862473 0.166801" collision_group="pickup" onEnter="get_key_purple" />
+    <Trigger shape="box" size="0.166803 0.862473 0.582664" collision_group="pickup" onEnter="get_key_purple" />
     <Rotative yaw="0.5" />
   </Entity>
   <Entity name="lvl1_Sala_central">
