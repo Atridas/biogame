@@ -32,7 +32,7 @@ extern "C"
 #include "Utils\MemLeaks.h"
 #include "Utils\Logger.h"
 
-#define SHOOT_POWER 20.0f
+#define SHOOT_POWER 10.0f
 
 CComponentIABrain* CComponentIABrain::AddToEntity(CGameEntity *_pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript, const string& _szDestinyNode)
 {
@@ -97,7 +97,7 @@ void CComponentIABrain::Shoot(float _fShootPrecision)
   
   CEntityManager* l_pEM = ENTITY_MANAGER;
   l_pEM->InitParticles("disparar", l_vPos, Vect3f(.5f,.5f,.5f), 2.5f, l_vDir);
-  l_pEM->InitLaser(l_vPos,l_vDir,20.f, CORE->GetPhysicsManager()->GetCollisionMask(ECG_RAY_SHOOT));
+  l_pEM->InitLaser(l_vPos,l_vDir,SHOOT_POWER, CORE->GetPhysicsManager()->GetCollisionMask(ECG_RAY_SHOOT));
 
 }
 

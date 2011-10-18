@@ -30,7 +30,7 @@ bool CComponentLaser::Init(CGameEntity* _pEntity, const Vect3f& _vDir, float _fD
   }
 
   m_vDir            = _vDir.GetNormalized() ;
-  _fDamage          = _fDamage;
+  m_fDamage         = _fDamage;
   m_fSpeed          = DEFAULT_LASER_SPEED;
   m_uiCollisionMask = _uiCollisionMask;
 
@@ -55,7 +55,7 @@ void CComponentLaser::Update(float _fDeltaTime)
     SEvent l_impacte;
     l_impacte.Msg = SEvent::REBRE_IMPACTE;
     l_impacte.Info[0].Type = SEventInfo::FLOAT;
-    l_impacte.Info[0].f    = 20.f;
+    l_impacte.Info[0].f    = m_fDamage;
     l_impacte.Receiver = l_pUserData->GetEntity()->GetGUID();
     l_impacte.Sender = GetEntity()->GetGUID();
     l_impacte.Info[1].Type = SEventInfo::VECTOR;

@@ -332,6 +332,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def_readonly("player",          &CComponentIABrain::m_pPlayer)
       .def_readwrite("time",           &CComponentIABrain::m_fTime)
       .def_readwrite("shooted",        &CComponentIABrain::m_bShooted)
+      .def_readwrite("shoots",        &CComponentIABrain::m_iShoots)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentVida, CBaseComponent>("ComponentVida")

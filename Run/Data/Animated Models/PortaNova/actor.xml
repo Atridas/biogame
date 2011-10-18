@@ -3,8 +3,8 @@
   <mesh filename="Data/Animated Models/PortaNova/Mesh.cmf"/>
   <material animated="true" vertex_type="787">
     <texture type="diffusse" filename="Data/Textures/portes.tga"/>
-    <texture type="glow" filename="Data/Textures/portesplanta1glow.tga"/>
-    <property type="glowIntensity" value="2.0" />
+    <!--<texture type="glow" filename="Data/Textures/portesplanta1glow.tga"/>-->
+    <!--<property type="glowIntensity" value="2.0" />-->
     <property type="specularParams" glossiness="200.0" specular_level="10.0" />
   </material>
   <animation name="obrir" filename="Data/Animated Models/PortaNova/obrir.CAF"/>
