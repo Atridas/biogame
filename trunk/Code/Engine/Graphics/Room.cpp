@@ -201,12 +201,16 @@ void CRoom::GetRenderedObjects(const CFrustum& _Frustum, vector<CRenderableObjec
     for(; l_it != l_end; ++l_it)
     {
       CEmiterInstance* l_pEmiter = l_it->first;
-      Vect3f l_Center = l_pEmiter->GetBoundingSphere()->GetMiddlePoint() + l_pEmiter->GetPosition();
-      D3DXVECTOR3 l_d3Center(l_Center.x,l_Center.y,l_Center.z);
 
-      if(_Frustum.SphereVisible(l_d3Center, l_pEmiter->GetBoundingSphere()->GetRadius()))
+      if(l_pEmiter->GetVisible())
       {
-        _EmiterQueue.push(l_pEmiter);
+        Vect3f l_Center = l_pEmiter->GetBoundingSphere()->GetMiddlePoint() + l_pEmiter->GetPosition();
+        D3DXVECTOR3 l_d3Center(l_Center.x,l_Center.y,l_Center.z);
+
+        if(_Frustum.SphereVisible(l_d3Center, l_pEmiter->GetBoundingSphere()->GetRadius()))
+        {
+          _EmiterQueue.push(l_pEmiter);
+        }
       }
     }
   }

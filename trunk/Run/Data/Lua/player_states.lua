@@ -275,10 +275,12 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   end
   
   if isMoving then
-    --animation:clear_cycle(Player_Constants["Idle"], 0.3)
+    animation:clear_cycle(Player_Constants["Idle"], 0.3)
     --animation:clear_cycle('PointUpIdle',0.3)
     --animation:clear_cycle('pointDownIdle',0.3)
-    animation:clear_all_cycles(0.3)
+    
+    
+    --animation:clear_all_cycles(0.3)
     
     if isRunning then
       animation:stop_cycle(Player_Constants["Caminar enrere"],0.3)
@@ -442,6 +444,8 @@ State_Player_Dance['Receive'] = function(_jugador, _event)
   end
   
 end
+
+--[[
 
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
@@ -637,7 +641,6 @@ State_Player_Tocat['Receive'] = function(_jugador, _event)
   end
 end
 
-
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 -- Escut !!!! -----------------------------------------------------------------------------------
@@ -690,6 +693,7 @@ end
 State_Player_Escut['Receive'] = function(_jugador, _event)
 end
 
+--]]
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 -- Force !!!! -----------------------------------------------------------------------------------
@@ -731,6 +735,10 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Force['Receive'] = function(_jugador, _event)
+
+  if _event.msg == Event.morir then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Morint')
+  end
 end
 
 -------------------------------------------------------------------------------------------------
@@ -774,6 +782,10 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Force_Cobertura['Receive'] = function(_jugador, _event)
+
+  if _event.msg == Event.morir then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Morint')
+  end
 end
 
 -------------------------------------------------------------------------------------------------
@@ -950,6 +962,7 @@ State_Player_Cobertura_Baixa['Receive'] = function(_jugador, _event)
   
 end
 
+--[[
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 -- State_Player_Cobertura_Baixa_Tocat -----------------------------------------------------------
@@ -1006,6 +1019,8 @@ end
 State_Player_Cobertura_Baixa_Tocat['Receive'] = function(_jugador, _event)
 
 end
+--]]
+
 
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------

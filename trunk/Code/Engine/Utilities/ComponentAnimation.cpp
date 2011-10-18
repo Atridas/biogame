@@ -92,42 +92,42 @@ void CComponentAnimation::StopCycle(const string& _szAnimation, float _fBlendTim
   }
 }
 
-void CComponentAnimation::ClearCycle  (float _fBlend)
-{
-  //if(m_stCycles.erase())
-  //{
-  //  string l_szCurrentCycle = m_lCycles.back();
-  //  m_lCycles.pop_back();
+//void CComponentAnimation::ClearCycle  (float _fBlend)
+//{
+//  //if(m_stCycles.erase())
+//  //{
+//  //  string l_szCurrentCycle = m_lCycles.back();
+//  //  m_lCycles.pop_back();
+//
+//  //  m_pAnimatedModel->GetAnimatedInstanceModel()->ClearCycle(_fBlend);
+//  //  //m_szCurrentCycle = "";
+//  //}
+//}
 
-  //  m_pAnimatedModel->GetAnimatedInstanceModel()->ClearCycle(_fBlend);
-  //  //m_szCurrentCycle = "";
-  //}
-}
 
-
-void CComponentAnimation::ClearCycle  (const string& _szAnimation, float _fBlend)
+void CComponentAnimation::ClearCycle  (const string& _szAnimation, float _fTime)
 {
   m_stActiveCycles.erase(_szAnimation);
   m_stInactiveCycles.erase(_szAnimation);
 
-  m_pAnimatedModel->GetAnimatedInstanceModel()->ClearCycle(_szAnimation, _fBlend);
+  m_pAnimatedModel->GetAnimatedInstanceModel()->ClearCycle(_szAnimation, _fTime);
   
 }
 
-void CComponentAnimation::ClearAllCycles(float _fBlend)
+void CComponentAnimation::ClearAllCycles(float _fTime)
 {
   set<string>::iterator l_stIt;
 
   for(l_stIt = m_stActiveCycles.begin(); l_stIt != m_stActiveCycles.end(); ++l_stIt)
   {
-    m_pAnimatedModel->GetAnimatedInstanceModel()->ClearCycle(*l_stIt, _fBlend);
+    m_pAnimatedModel->GetAnimatedInstanceModel()->ClearCycle(*l_stIt, _fTime);
   }
 
   m_stActiveCycles.clear();
 
   for(l_stIt = m_stInactiveCycles.begin(); l_stIt != m_stInactiveCycles.end(); ++l_stIt)
   {
-    m_pAnimatedModel->GetAnimatedInstanceModel()->ClearCycle(*l_stIt, _fBlend);
+    m_pAnimatedModel->GetAnimatedInstanceModel()->ClearCycle(*l_stIt, _fTime);
   }
 
   m_stInactiveCycles.clear();

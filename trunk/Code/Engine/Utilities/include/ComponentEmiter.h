@@ -22,7 +22,9 @@ public:
   
   void ChangeCore(const string& _szCore);
   void ChangeVolume(const Vect3f& _vVolume);
-
+  
+  virtual void Enable(void);
+  virtual void Disable(void);
 protected:
 
   CComponentEmiter():m_pEmiterInstance(0) {};

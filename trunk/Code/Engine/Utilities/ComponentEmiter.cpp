@@ -57,3 +57,13 @@ void CComponentEmiter::ChangeVolume(const Vect3f& _vVolume)
 {
   m_pEmiterInstance->Reset(_vVolume);
 }
+
+void CComponentEmiter::Enable()
+{
+  m_pEmiterInstance->SetVisible(true);
+}
+
+void CComponentEmiter::Disable()
+{
+  m_pEmiterInstance->SetVisible(false);
+}

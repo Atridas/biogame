@@ -9,6 +9,7 @@
 #include "EmiterManager.h"
 #include "Renderer.h"
 #include "LightManager.h"
+#include "SoundManager.h"
 #include "Utils/Timer.h"
 #include "XML/XMLTreeNode.h"
 
@@ -205,6 +206,7 @@ void CLevelChanger::Update(float _fElapsedTime)
       }
 
       l_pRenderer->ActivateRenderPath(l_pLevel->RenderPath);
+      l_pCore->GetSoundManager()->StopSounds();
       m_bChanging = true;
     }
     else

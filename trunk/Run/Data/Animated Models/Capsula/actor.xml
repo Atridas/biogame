@@ -17,5 +17,9 @@
   
   <animation name="idle" filename="Data/Animated Models/Capsula/idle.CAF"/>
 
-  
+  <animation_states default="closed">
+    <animation_state name="idle">
+      <cycle name="idle"/>
+    </animation_state>
+  </animation_states>
 </actor>
