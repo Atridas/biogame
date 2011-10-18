@@ -147,7 +147,7 @@ void CComponentVida::ReceiveEvent(const SEvent& _Event)
       
       CORE->GetEntityManager()->SendEvent(l_morir);
     }
-  }else if(_Event.Msg == SEvent::REBRE_FORCE)
+  }else /*if(_Event.Msg == SEvent::REBRE_FORCE)
   {
     if(m_fVida > 0.f)
     {
@@ -165,7 +165,7 @@ void CComponentVida::ReceiveEvent(const SEvent& _Event)
       }
     }
 
-  }else if(_Event.Msg == SEvent::MORIR)
+  }else*/ if(_Event.Msg == SEvent::MORIR)
   {
     m_fVida = 0.0f;
   }

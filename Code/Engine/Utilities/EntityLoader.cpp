@@ -918,7 +918,7 @@ CGameEntity* CEntityManager::InitGrenade(float _fLifeTime, const Vect3f& _vPos,c
     CComponentDelayedScript::AddToEntity(l_pGrenade, _fLifeTime,"granada");
   }
   CComponentExplosive::AddToEntity(l_pGrenade);
-  CComponentOmni::AddToEntity(l_pGrenade,Vect3f(0,0,0), CColor(0,.5f,0), 1.f, 4.f);
+  CComponentOmni::AddToEntity(l_pGrenade,Vect3f(0,0,0), CColor(1.0f,0.9f,0.5f), 1.f, 4.f);
 
   l_pSphere->GetActor()->AddForceAtLocalPos(_vDir,Vect3f(0.0f),SHOOT_POWER);
   

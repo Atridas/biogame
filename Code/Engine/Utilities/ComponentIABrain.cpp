@@ -174,23 +174,40 @@ void CComponentIABrain::ReceiveForce(SEvent _sEvent)
   Vect3f l_vSenderPos;
   Vect3f l_vDirection;
 
+  CPhysicUserData* l_pUserData = 0;
+  SCollisionInfo l_CInfo;
+  CPhysicsManager *l_pPM = PHYSICS_MANAGER;
+
   if(_sEvent.Msg == SEvent::REBRE_FORCE)
   {
-    if(!m_bDead)
-    {
-      ActivateRagdoll();
-      SEvent l_morir;
-      l_morir.Msg = SEvent::MORIR;
-      l_morir.Receiver = l_morir.Sender = GetEntity()->GetGUID();
-      
-      ENTITY_MANAGER->SendEvent(l_morir);
-    }
-
     l_pRagdoll = GetEntity()->GetComponent<CComponentRagdoll>();
+    l_vSenderPos = ENTITY_MANAGER->GetEntity(_sEvent.Sender)->GetComponent<CComponentObject3D>()->GetPosition();
 
     if(l_pRagdoll)
     {
-      l_vSenderPos = ENTITY_MANAGER->GetEntity(_sEvent.Sender)->GetComponent<CComponentObject3D>()->GetPosition();
+      l_pPhysxBone = l_pRagdoll->GetBone("Bip01 Head");
+      if(l_pPhysxBone)
+      {
+        l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
+        Vect3f l_vBonePos = l_matBonePos.GetPos();
+        Vect3f l_vRayDir = (l_vSenderPos-l_vBonePos).Normalize();
+        l_pUserData = l_pPM->RaycastClosestActor(l_vBonePos,l_vRayDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT),l_CInfo);
+
+        if(l_pUserData->GetEntity() != ENTITY_MANAGER->GetEntity(_sEvent.Sender))
+        {
+          return;
+        }
+      }
+
+      if(!m_bDead)
+      {
+        ActivateRagdoll();
+        SEvent l_morir;
+        l_morir.Msg = SEvent::MORIR;
+        l_morir.Receiver = l_morir.Sender = GetEntity()->GetGUID();
+      
+        ENTITY_MANAGER->SendEvent(l_morir);
+      }
 
       l_pPhysxBone = l_pRagdoll->GetBone("Bip01 Spine");
       assert(l_pPhysxBone);
@@ -210,6 +227,7 @@ void CComponentIABrain::ReceiveForce(SEvent _sEvent)
       l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
       l_pPhysxBone->GetPhysxActor()->AddForceAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
     }
+    
   }
 }
 
