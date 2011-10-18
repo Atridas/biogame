@@ -34,18 +34,20 @@ public:
     int iId;
     float fWeight;
     bool bFromParameter, bFromComplementaryParameter;
-    //virtual bool IsCycle() const = 0;
+    float fFadeOnChange;
 
+    SAnimation():iId(0),fWeight(0),bFromParameter(false),bFromComplementaryParameter(false),fFadeOnChange(0) {};
     bool operator <(const SAnimation& _other) const { return iId < _other.iId; };
   };
 
   struct SCycle: SAnimation {
-    //bool IsCycle() const {return true;};
   };
 
   struct SAction: SAnimation {
     bool bBlock, bStop;
-    //bool IsCycle() const {return false;}
+    float fFadeIn, fFadeOut;
+
+    SAction():bBlock(false),bStop(false),fFadeIn(.3f),fFadeOut(.3f){};
   };
 
   struct SAnimationState {
@@ -53,11 +55,15 @@ public:
     set<SCycle> Cycles;
     set<SAction> OnEnter;
     set<SAction> OnExit;
+
+    SAnimationState():fDefaultFadeIn(0),fDefaultFadeOut(0){};
   };
 
   struct SAnimationChange {
     float fFade;
     set<SAction> Actions;
+
+    SAnimationChange():fFade(0){}
   };
 
 public:

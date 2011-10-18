@@ -1121,6 +1121,12 @@ ENTITIES
       clear_all_cycles
       void ClearAllCycles(float _fBlend)
       
+      set_animation_state
+      void SetAnimationState(const string& _szAnimationState)
+      
+      set_animation_parameter
+      void SetAnimationParameter(float _fAnimationParameter)
+      
   Class:
     ComponentStateMachine
     CComponentStateMachine

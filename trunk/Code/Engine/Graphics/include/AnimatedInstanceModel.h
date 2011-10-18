@@ -3,13 +3,13 @@
 #define __ANIMATED_INSTANCE_MODEL_H__
 
 #include "base.h"
+#include "AnimatedCoreModel.h"
 
 #include <d3d9.h>
 
 // Forward declarations -------------
 class CRenderManager;
 class CalModel;
-class CAnimatedCoreModel;
 class CEffect;
 // ----------------------------------
 
@@ -114,7 +114,7 @@ public:
 
 
   void SetAnimationState(const string& _szAnimationState);
-  void SetAnimationParameter(float _fAnimationParameter) {m_fAnimationParameter = _fAnimationParameter;};
+  void SetAnimationParameter(float _fAnimationParameter);
 
 
   int GetAnimationId          (const std::string &AnimationName) const;
@@ -177,6 +177,20 @@ private:
    * Nombre de Cares del model.
   **/
   int                       m_iNumFaces;
+
+
+  //Coses d'animation states
+  typedef CAnimatedCoreModel::SAnimation       SAnimation;
+  typedef CAnimatedCoreModel::SAction          SAction;
+  typedef CAnimatedCoreModel::SCycle           SCycle;
+  typedef CAnimatedCoreModel::SAnimationState  SAnimationState;
+  typedef CAnimatedCoreModel::SAnimationChange SAnimationChange;
+  
+  
+  float ExecuteChange(const SAnimationChange& _AnimationChange);//retorna el fade
+  void  ExecuteAction(const SAction& _Action);
+  void  BlendCycle(const SCycle& _Cycle, float _fBlendTime);
+  void  ClearCycle(const SCycle& _Cycle, float _fBlendTime);
 
   string m_szAnimationState;
   float  m_fAnimationParameter;

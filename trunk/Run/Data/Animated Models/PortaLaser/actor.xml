@@ -13,4 +13,16 @@
   </material>
   <animation name="idleopen" filename="Data/Animated Models/PortaLaser/idle_closed.CAF"/>
   <animation name="idleclose" filename="Data/Animated Models/PortaLaser/idle_closed.CAF"/>
+  
+  
+  <animation_states default="closed">
+    <animation_state name="opened" default_fade_in="2.0" default_fade_out="1.0">
+      <cycle name="idleopen"/>
+    </animation_state>
+    <!-- -->
+    <animation_state name="closed" default_fade_in="1.0" default_fade_out="2.0">
+      <cycle name="idleclose"/>
+    </animation_state>
+  </animation_states>
+  
 </actor>

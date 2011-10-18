@@ -51,34 +51,42 @@
     <animation_state name="idle" default_fade_in="0.3" default_fade_out="0.3">
       <cycle name="idle"/>
     </animation_state>
+    <!-- -->
     <animation_state name="walk" default_fade_in="0.3" default_fade_out="0.3">
       <cycle name="walk"/>
     </animation_state>
+    <!-- -->
     <animation_state name="walk back" default_fade_in="0.3" default_fade_out="0.3">
       <cycle name="walk back"/>
     </animation_state>
+    <!-- -->
     <animation_state name="run" default_fade_in="0.3" default_fade_out="0.3">
       <cycle name="run"/>
     </animation_state>
+    <!-- -->
     <animation_state name="aim" default_fade_in="0.3" default_fade_out="0.3">
-      <cycle name="PointUpIdle" weight_from_parameter="true"/>
-      <cycle name="pointDownIdle" weight_from_complementary_parameter="true"/>
+      <cycle name="PointUpIdle" weight_from_parameter="true" fade_on_change="0.15"/>
+      <cycle name="pointDownIdle" weight_from_complementary_parameter="true" fade_on_change="0.15"/>
     </animation_state>
+    <!-- -->
     <animation_state name="walk aim" default_fade_in="0.3" default_fade_out="0.3">
-      <cycle name="pointWalkUp" weight_from_parameter="true"/>
-      <cycle name="pointWalkDown" weight_from_complementary_parameter="true"/>
+      <cycle name="pointWalkUp" weight_from_parameter="true" fade_on_change="0.15"/>
+      <cycle name="pointWalkDown" weight_from_complementary_parameter="true" fade_on_change="0.15"/>
     </animation_state>
+    <!-- -->
     <animation_state name="force" default_fade_in="0.3" default_fade_out="0.3">
       <cycle name="protection"/>
     </animation_state>
+    <!-- -->
     <animation_state name="die" default_fade_in="0.3" default_fade_out="0.3">
       <cycle name="idle"/>
     </animation_state>
     
+    
     <animation_state name="cover down" default_fade_in="0.3" default_fade_out="0.3">
       <cycle name="CoverAvallDretaIdle"/>
     </animation_state>
-    
+    <!-- -->
     <animation_state name="cover up" default_fade_in="0.3" default_fade_out="0.3">
       <cycle name="CoverDretaIdle"/>
     </animation_state>
@@ -86,7 +94,7 @@
     
     <animation_state name="dance" default_fade_in="0.3" default_fade_out="0.3">
       <on_enter>
-        <action name="dead" block="true"/>
+        <action name="dead" block="true" fade_in="0.3"/>
       </on_enter>
       <on_exit>
         <action name="dead" stop="true"/>
@@ -94,7 +102,4 @@
       <cycle name="dance"/>
     </animation_state>
   </animation_states>
-  
-  <animation_changes>
-  </animation_changes>
 </actor>
