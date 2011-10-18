@@ -35,6 +35,9 @@
 #define ENERGY_GRENADE 35.f
 #define ENERGY_SHOOT    1.f
 
+#define INIT_SHOOT     0.5f
+#define INIT_GRENADE   0.5f
+#define INIT_PARTICLES 0.3f
 
 CComponentPlayerController* CComponentPlayerController::AddToEntity(CGameEntity *_pEntity)
 {
@@ -199,7 +202,7 @@ bool CComponentPlayerController::Shoot()
 
     l_vPosArma -= l_vDirArma*0.1f;
   
-    l_pEM->InitParticles("disparar", l_vPosArma + l_vDirArma*0.2f, Vect3f(.25f,.5f,.25f), 2.5f, l_vDir);
+    l_pEM->InitParticles("disparar", l_vPosArma + l_vDirArma*INIT_PARTICLES, Vect3f(.25f,.5f,.25f), 2.5f, l_vDir);
 
     CPhysicsManager *l_pPM = PHYSICS_MANAGER;
 
@@ -223,7 +226,7 @@ bool CComponentPlayerController::Shoot()
 
         if(l_pUserData->GetEntity() != l_pPlayerEntity)
         {
-          l_pEM->InitLaser(l_vPosArma + 0.2f * l_vDir, l_vDir,20.f, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
+          l_pEM->InitLaser(l_vPosArma + INIT_SHOOT * l_vDir, l_vDir,20.f, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
         }
       }
 
@@ -238,18 +241,18 @@ bool CComponentPlayerController::Shoot()
       //  l_vDir = ((l_vPos+100.f*l_vDirArma)-l_vPosArma).Normalize();
       //}
 
-      l_pUserData = l_pPM->RaycastClosestActor(l_vPosArma + 0.2f * l_vDir,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER),l_CInfo);
+      l_pUserData = l_pPM->RaycastClosestActor(l_vPosArma + INIT_SHOOT * l_vDir,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER),l_CInfo);
 
       if(l_pUserData)
       {
 
         if(l_pUserData->GetEntity() != l_pPlayerEntity)
         {
-          l_pEM->InitLaser(l_vPosArma + 0.2f * l_vDir,l_vDir,20.f, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
+          l_pEM->InitLaser(l_vPosArma + INIT_SHOOT * l_vDir,l_vDir,20.f, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
         }
 
       }else{
-        l_pEM->InitLaser(l_vPosArma + 0.2f * l_vDir,l_vDir,20.f, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
+        l_pEM->InitLaser(l_vPosArma +INIT_SHOOT * l_vDir,l_vDir,20.f, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
       }
     }
     return true;
@@ -283,12 +286,12 @@ bool CComponentPlayerController::ShootGrenade(float _fTime)
 
     l_vPosArma -= l_vDirArma*0.1f;
   
-    l_pEM->InitParticles("disparar", l_vPosArma + l_vDirArma*0.2f, Vect3f(.25f,.5f,.25f), 2.5f, l_vDir);
+    l_pEM->InitParticles("disparar", l_vPosArma + l_vDirArma*INIT_PARTICLES, Vect3f(.25f,.5f,.25f), 2.5f, l_vDir);
 
     CPhysicsManager *l_pPM = PHYSICS_MANAGER;
     Vect3f l_vPuntLlunya = l_vPos+100.f*l_vDir;
     l_vDir = ((l_vPos+100.f*l_vDir)-l_vPosArma).Normalize();
-    l_pEM->InitGrenade(_fTime,l_vPosArma,l_vDir,l_pPM->GetCollisionMask(ECG_OBJECTES_DINAMICS));
+    l_pEM->InitGrenade(_fTime,l_vPosArma + l_vDir * INIT_GRENADE,l_vDir,l_pPM->GetCollisionMask(ECG_OBJECTES_DINAMICS));
     return true;
   }
   else

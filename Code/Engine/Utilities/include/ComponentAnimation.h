@@ -26,9 +26,9 @@ public:
   void PlayCycle(const string& _szAnimation, float _fBlendTime);
   void PlayCycle(const string& _szAnimation, float _fBlendTime, float _fWeight);
   void StopCycle(const string& _szAnimation, float _fBlendTime);
-  void ClearCycle(float _fBlend);
-  void ClearCycle(const string& _szAnimation, float _fBlend);
-  void ClearAllCycles(float _fBlend);
+  //void ClearCycle(float _fBlend);
+  void ClearCycle(const string& _szAnimation, float _fTime);
+  void ClearAllCycles(float _fTime);
 
   virtual void PreUpdate(float _fDeltaTime);
 

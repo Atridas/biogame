@@ -11,4 +11,23 @@
   <animation name="tancar" filename="Data/Animated Models/PortaNova/tancar.CAF"/>
   <animation name="idleopen" filename="Data/Animated Models/PortaNova/idleopen.CAF"/>
   <animation name="idleclose" filename="Data/Animated Models/PortaNova/idleclose.CAF"/>
+  
+  
+  
+  <animation_states default="closed">
+    <animation_state name="opened" default_fade_in="2.0" default_fade_out="1.0">
+      <cycle name="idleopen"/>
+    </animation_state>
+    <animation_state name="closed" default_fade_in="1.0" default_fade_out="2.0">
+      <cycle name="idleclose"/>
+    </animation_state>
+  </animation_states>
+  <animation_changes>
+    <animation_change from="opened" to="closed" fade="1.0">
+      <action name="tancar"/>
+    </animation_change>
+    <animation_change from="closed" to="opened" fade="2.0">
+      <action name="obrir"/>
+    </animation_change>
+  </animation_changes>
 </actor>
