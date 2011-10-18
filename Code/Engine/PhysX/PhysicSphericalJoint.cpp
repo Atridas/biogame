@@ -191,7 +191,7 @@ void CPhysicSphericalJoint::SetInfoRagdoll	(SSphericalLimitInfo _sInfo, CPhysicA
   //TODO: Passar per parametre
   m_pSphericalDesc->projectionMode = NX_JPM_POINT_MINDIST;
   m_pSphericalDesc->projectionDistance = 0.22f;
-  m_pSphericalDesc->solverExtrapolationFactor = 1.1;
+  m_pSphericalDesc->solverExtrapolationFactor = 1.1f;
   
   //Projection per errors
   /*m_pSphericalDesc->projectionMode = NX_JPM_POINT_MINDIST;

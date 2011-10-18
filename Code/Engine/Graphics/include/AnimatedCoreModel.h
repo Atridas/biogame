@@ -16,6 +16,7 @@ class CalHardwareModel;
 class CRenderableVertexs;
 class CMaterial;
 class CXMLTreeNode;
+class CAnimatedInstanceModel;
 // ----------------------------------
 
 
@@ -28,6 +29,38 @@ class CAnimatedCoreModel:
   public CNamed
 {
 public:
+
+  struct SAnimation {
+    int iId;
+    float fWeight;
+    bool bFromParameter, bFromComplementaryParameter;
+    //virtual bool IsCycle() const = 0;
+
+    bool operator <(const SAnimation& _other) const { return iId < _other.iId; };
+  };
+
+  struct SCycle: SAnimation {
+    //bool IsCycle() const {return true;};
+  };
+
+  struct SAction: SAnimation {
+    bool bBlock, bStop;
+    //bool IsCycle() const {return false;}
+  };
+
+  struct SAnimationState {
+    float fDefaultFadeIn, fDefaultFadeOut;
+    set<SCycle> Cycles;
+    set<SAction> OnEnter;
+    set<SAction> OnExit;
+  };
+
+  struct SAnimationChange {
+    float fFade;
+    set<SAction> Actions;
+  };
+
+public:
   /**
    * Constructor per defecte.
   **/
@@ -35,7 +68,8 @@ public:
                             CNamed(_szName),m_pCalCoreModel(0),
                             m_pRenderableVertexs(0),m_pCalHardwareModel(0),
                             m_szSkeletonFilename(""),
-                            m_szPath(""),m_iNumFaces(0), m_iNumVtxs(0)
+                            m_szPath(""),m_iNumFaces(0), m_iNumVtxs(0),
+                            m_szDefaultAnimationState("")
                                             {};
   /**
    * Destructor.
@@ -175,6 +209,12 @@ private:
   
   CBoundingBox              m_BoundingBox;
   CBoundingSphere           m_BoundingSphere;
+
+  string m_szDefaultAnimationState;
+  map<string, SAnimationState>               m_AnimationStates;
+  map<string, map<string, SAnimationChange>> m_AnimationChanges;
+
+  friend class CAnimatedInstanceModel;
 };
 
 #endif

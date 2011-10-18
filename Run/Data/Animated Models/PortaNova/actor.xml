@@ -22,6 +22,7 @@
       <cycle name="idleclose"/>
     </animation_state>
   </animation_states>
+  
   <animation_changes>
     <animation_change from="opened" to="closed" fade="1.0">
       <action name="tancar"/>
@@ -30,4 +31,5 @@
       <action name="obrir"/>
     </animation_change>
   </animation_changes>
+  
 </actor>
