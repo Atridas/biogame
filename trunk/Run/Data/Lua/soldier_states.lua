@@ -360,13 +360,20 @@ State_Soldier_Cobrint_Disparant['Update'] = function(_enemic, _dt)
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
   ia_brain.time = ia_brain.time + _dt
   
-  if ia_brain.time > Enemy_Constants["Time Shoot"] and not ia_brain.shooted then
+  if ia_brain.time > Enemy_Constants["Time Shoot Cover"] and not ia_brain.shooted then
     ia_brain:shoot(0.05)
+    ia_brain.shoots = ia_brain.shoots + 1
     ia_brain.shooted = true
   end
   
-  if ia_brain.time > Enemy_Constants["Time Shooting"] then
+  if ia_brain.shoots >= 3 and ia_brain.time > Enemy_Constants["Time Shooting Cover"] then
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Cobrint')
+    ia_brain.shoots = 0
+    return
+  end
+  
+  if ia_brain.shoots < 3 and ia_brain.time > Enemy_Constants["Time Shooting Cover"] then
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Cobrint_Disparant')
     return
   end
   

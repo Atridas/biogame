@@ -20,16 +20,18 @@
 #include "ComponentVida.h"
 #include "ComponentInteractive.h"
 #include "ComponentEnergy.h"
+#include "ComponentRagdoll.h" 
 
 #include "PhysicsManager.h"
 #include "PhysicActor.h"
+#include "PhysxBone.h"
 #include "AnimatedCoreModel.h"
 #include "Material.h"
 
 #define BLOOD_FADEOUT_TIME 2.5f
 #define SHOCK_WAVE_VELOCITY 2.5f
 #define DAMAGE_FORCE 100.0f
-#define SHOOT_POWER 30.0f
+#define SHOOT_POWER 34.0f
 
 #define ENERGY_FORCE   70.f
 #define ENERGY_GRENADE 35.f
@@ -226,7 +228,7 @@ bool CComponentPlayerController::Shoot()
 
         if(l_pUserData->GetEntity() != l_pPlayerEntity)
         {
-          l_pEM->InitLaser(l_vPosArma + INIT_SHOOT * l_vDir, l_vDir,20.f, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
+          l_pEM->InitLaser(l_vPosArma + INIT_SHOOT * l_vDir, l_vDir,SHOOT_POWER, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
         }
       }
 
@@ -248,11 +250,11 @@ bool CComponentPlayerController::Shoot()
 
         if(l_pUserData->GetEntity() != l_pPlayerEntity)
         {
-          l_pEM->InitLaser(l_vPosArma + INIT_SHOOT * l_vDir,l_vDir,20.f, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
+          l_pEM->InitLaser(l_vPosArma + INIT_SHOOT * l_vDir,l_vDir,SHOOT_POWER, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
         }
 
       }else{
-        l_pEM->InitLaser(l_vPosArma +INIT_SHOOT * l_vDir,l_vDir,20.f, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
+        l_pEM->InitLaser(l_vPosArma +INIT_SHOOT * l_vDir,l_vDir,SHOOT_POWER, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
       }
     }
     return true;
@@ -419,11 +421,7 @@ void CComponentPlayerController::Use()
 
 void CComponentPlayerController::Die()
 {
-  CComponentRagdoll *l_pRC = GetEntity()->GetComponent<CComponentRagdoll>();
-  if(l_pRC)
-  {
-    l_pRC->ApplyPhysics(true);
-  }
+  ActivateRagdoll();
 }
 
 void CComponentPlayerController::Respawn()
@@ -524,6 +522,65 @@ void CComponentPlayerController::SetGodMode(bool _bValue)
   }
 }
 
+void CComponentPlayerController::ActivateRagdoll()
+{
+  GetEntity()->DeleteComponent(CBaseComponent::ECT_PHYSX_CONTROLLER);
+
+  CComponentRagdoll *l_pRC = GetEntity()->GetComponent<CComponentRagdoll>();
+
+  if(l_pRC)
+  {
+    l_pRC->ApplyPhysics(true);
+  }
+}
+
+void CComponentPlayerController::ReceiveForce(SEvent _sEvent)
+{
+  Mat44f l_matBonePos;
+  CPhysxBone* l_pPhysxBone = 0;
+  CComponentRagdoll* l_pRagdoll = 0;
+  Vect3f l_vSenderPos;
+  Vect3f l_vDirection;
+
+  if(_sEvent.Msg == SEvent::REBRE_FORCE)
+  {
+    //if(!m_bDead)
+    //{
+      Die();
+      SEvent l_morir;
+      l_morir.Msg = SEvent::MORIR;
+      l_morir.Receiver = l_morir.Sender = GetEntity()->GetGUID();
+      
+      ENTITY_MANAGER->SendEvent(l_morir);
+    //}
+
+    l_pRagdoll = GetEntity()->GetComponent<CComponentRagdoll>();
+
+    if(l_pRagdoll)
+    {
+      l_vSenderPos = ENTITY_MANAGER->GetEntity(_sEvent.Sender)->GetComponent<CComponentObject3D>()->GetPosition();
+
+      l_pPhysxBone = l_pRagdoll->GetBone("Bip01 Spine");
+      assert(l_pPhysxBone);
+      l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
+      l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
+      l_pPhysxBone->GetPhysxActor()->AddForceAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
+
+      l_pPhysxBone = l_pRagdoll->GetBone("Bip01 Spine1");
+      assert(l_pPhysxBone);
+      l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
+      l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
+      l_pPhysxBone->GetPhysxActor()->AddForceAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
+
+      l_pPhysxBone = l_pRagdoll->GetBone("Bip01 Spine2");
+      assert(l_pPhysxBone);
+      l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
+      l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
+      l_pPhysxBone->GetPhysxActor()->AddForceAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
+    }
+  }
+}
+
 void CComponentPlayerController::ReceiveEvent(const SEvent& _Event)
 {
   if(_Event.Receiver == GetEntity()->GetGUID())
@@ -544,6 +601,16 @@ void CComponentPlayerController::ReceiveEvent(const SEvent& _Event)
       Vect3f l_vPos(_Event.Info[3].v.x, _Event.Info[3].v.y, _Event.Info[3].v.z);
     
       ENTITY_MANAGER->InitParticles("impacte ragdoll", l_vPos, Vect3f(.5f,.5f,.5f), 5.f);
+  
+    }else if(_Event.Msg == SEvent::REBRE_FORCE)
+    {
+      if(m_bGodMode)
+        return;
+
+      m_fBloodFadeOutTime = BLOOD_FADEOUT_TIME;
+      m_fBloodTime = 0.0f;
+
+      ReceiveForce(_Event);
   
     }else if(_Event.Msg == SEvent::MORIR)
     {

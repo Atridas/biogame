@@ -130,6 +130,7 @@
         <material_effect material_type="26"  effect="SpecularmapNormalTexturedDeferred" />
         <material_effect material_type="30"  effect="SpecularmapNormalmapTexturedDeferred" />
         <!--<material_effect material_type="150" effect="SpecularRadiosityNormalmapTexturedTechnique" />-->
+        <material_effect material_type="54"  effect="SpecularmapNormalmapTexturedDeferred" />
         <material_effect material_type="55"  effect="AnimatedSpecularmapNormalmapTexturedDeferred" />
       </material_effects> 
       

@@ -40,6 +40,7 @@ function recollir_arma(_self, _player)
     ComponentArma.add_to_entity(_player,"ARMA")
     tutorial_weapon()
     activate_entity("Lab_billboard_shootme")
+    deactivate_entity("Lab_billboard_weapon")
   end
 end
 

@@ -90,6 +90,8 @@ private:
   virtual void Release() { m_vPickUps.clear(); };
 
   void Die();
+  void ReceiveForce(SEvent _sEvent);
+  void ActivateRagdoll();
 
   bool m_bGodMode;
 
@@ -107,6 +109,7 @@ private:
 
   vector<string> m_vPickUps;
   int m_iNumUpdates;
+
 };
 
 #endif
