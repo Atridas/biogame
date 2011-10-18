@@ -24,6 +24,8 @@ public:
   void StopAll();
   void StopMusics();
   void StopSounds();
+  void PauseSamples();
+  void ResumeSamples();
   void SetMasterVolume(float _fVolume);
   void Pause(const string& _szMusic);
   void Resume(const string& _szMusic);

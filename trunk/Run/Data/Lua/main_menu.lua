@@ -41,6 +41,8 @@ State_Tutorial = {}
 
 State_Main_Menu_Inici["Enter"] = function(_self)
   RENDERER:set_unique_render_path(Main_Menu_Constants["Renderpath inici"])
+  
+  SOUND:stop_sounds()
 end
 
 -------------------------------------------------------------------------------------------------
@@ -192,12 +194,13 @@ end
 State_Paused["Enter"] = function(_self)
   RENDERER:activate_render_path("Pause")
   CORE:set_pause(true)
+  SOUND:pause_samples()
 end
 
 -------------------------------------------------------------------------------------------------
 State_Paused["Exit"] = function(_self)
   RENDERER:deactivate_render_path("Pause")
-
+  SOUND:resume_samples()
 end
 
 -------------------------------------------------------------------------------------------------
@@ -231,6 +234,8 @@ State_Tutorial["Enter"] = function(_self)
   RENDERER:activate_render_path(Main_Menu_Constants["Frames"][0])
   
   CORE:set_pause(true)
+  
+  SOUND:pause_samples()
 end
 
 -------------------------------------------------------------------------------------------------
@@ -238,6 +243,8 @@ State_Tutorial["Exit"] = function(_self)
   Main_Menu_Constants["Current frame"] = 0
   Main_Menu_Constants["Total frames"]  = 0
   Main_Menu_Constants["Frames"]        = {}
+  
+  SOUND:resume_samples()
 end
 
 -------------------------------------------------------------------------------------------------

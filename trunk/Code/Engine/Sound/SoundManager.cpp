@@ -348,6 +348,26 @@ void CSoundManager::StopSounds()
   }
 }
 
+void CSoundManager::PauseSamples()
+{
+  vector<SSoundChannel*>::iterator l_It;
+
+  for(l_It = m_vSamples.begin(); l_It != m_vSamples.end(); ++l_It)
+  {
+    BASS_ChannelPause((*l_It)->m_iHandle);
+  }
+}
+
+void CSoundManager::ResumeSamples()
+{
+  vector<SSoundChannel*>::iterator l_It;
+
+  for(l_It = m_vSamples.begin(); l_It != m_vSamples.end(); ++l_It)
+  {
+    BASS_ChannelPlay((*l_It)->m_iHandle,false);
+  }
+}
+
 void CSoundManager::SetMasterVolume(float _fVolume)
 {
   if(_fVolume > 1.0f)
