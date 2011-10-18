@@ -12,6 +12,11 @@
 #include "Material.h"
 #include "EffectManager.h"
 
+#include <boost/foreach.hpp>
+
+#define foreach         BOOST_FOREACH
+
+
 void CAnimatedInstanceModel::Initialize(CAnimatedCoreModel *_pAnimatedCoreModel)
 {
   if(_pAnimatedCoreModel != NULL)
@@ -46,6 +51,25 @@ void CAnimatedInstanceModel::Initialize(CAnimatedCoreModel *_pAnimatedCoreModel)
     //m_pEffectTechnique = RENDER_MANAGER->GetEffectManager()->GetEffectTechnique(l_szTechniqueName);
 
     SetOk(true);
+
+
+    m_szAnimationState = _pAnimatedCoreModel->m_szDefaultAnimationState;
+    if(m_szAnimationState != "")
+    {
+      map<string, CAnimatedCoreModel::SAnimationState>::iterator l_it = _pAnimatedCoreModel->m_AnimationStates.find(m_szAnimationState);
+      if(l_it != _pAnimatedCoreModel->m_AnimationStates.end())
+      {
+        foreach(CAnimatedCoreModel::SCycle cycle, l_it->second.Cycles)
+        {
+          float l_fWeight = (cycle.bFromParameter)? m_fAnimationParameter : ((cycle.bFromComplementaryParameter)? 1 - m_fAnimationParameter : 1);
+          l_fWeight *= cycle.fWeight;
+          m_pCalModel->getMixer()->blendCycle(cycle.iId,l_fWeight,l_it->second.fDefaultFadeIn);
+        }
+
+      } else {
+        LOGGER->AddNewLog(ELL_WARNING, "CAnimatedInstanceModel::Initialize Invalid default animation state %s", m_szAnimationState.c_str());
+      }
+    }
 
   }else
     LOGGER->AddNewLog(ELL_WARNING,"CAnimatedInstanceModel::Initialize L'AnimatedCoreModel proporcionat es NULL.");

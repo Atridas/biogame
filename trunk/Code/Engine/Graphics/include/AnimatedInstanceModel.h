@@ -28,7 +28,10 @@ public:
   CAnimatedInstanceModel(void): m_pCalModel(0),m_pAnimatedCoreModel(0),
                                 m_iCurrentCycle(0),m_iCurrentAnimationId(0),
                                 m_fCurrentAnimationTime(0),m_pVB(0),m_pIB(0),
-                                m_iNumVtxs(0),m_iNumFaces(0)//,m_pEffectTechnique(0)
+                                m_iNumVtxs(0),m_iNumFaces(0),
+                                m_szAnimationState(""),
+                                m_fAnimationParameter(0)
+                                //,m_pEffectTechnique(0)
                                 {};
   /**
    * Destructor.
@@ -109,6 +112,11 @@ public:
   CAnimatedCoreModel*       GetAnimatedCoreModel() {return m_pAnimatedCoreModel;};
   CalModel*       GetAnimatedCalModel() {return m_pCalModel;};
 
+
+  void SetAnimationState(const string& _szAnimationState);
+  void SetAnimationParameter(float _fAnimationParameter) {m_fAnimationParameter = _fAnimationParameter;};
+
+
   int GetAnimationId          (const std::string &AnimationName) const;
 
 private:
@@ -169,6 +177,9 @@ private:
    * Nombre de Cares del model.
   **/
   int                       m_iNumFaces;
+
+  string m_szAnimationState;
+  float  m_fAnimationParameter;
 };
 
 #endif

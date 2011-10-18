@@ -276,8 +276,8 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   
   if isMoving then
     animation:clear_cycle(Player_Constants["Idle"], 0.3)
-    --animation:clear_cycle('PointUpIdle',0.3)
-    --animation:clear_cycle('pointDownIdle',0.3)
+    animation:clear_cycle('PointUpIdle',0.3)
+    animation:clear_cycle('pointDownIdle',0.3)
     
     
     --animation:clear_all_cycles(0.3)
