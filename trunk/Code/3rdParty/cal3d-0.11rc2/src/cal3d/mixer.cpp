@@ -358,22 +358,6 @@ bool CalMixer::removeAction(int id)
 
 void CalMixer::updateAnimation(float deltaTime)
 {
-  // update the current animation time
-  if(m_animationDuration == 0.0f)
-  {
-    m_animationTime = 0.0f;
-  }
-  else
-  {
-    m_animationTime += deltaTime * m_timeFactor;
-    if(m_animationTime >= m_animationDuration || m_animationTime<0)
-    {
-      m_animationTime = (float) fmod(m_animationTime, m_animationDuration);
-    }
-	if (m_animationTime < 0)
-      m_animationTime += m_animationDuration;
-
-  }
 
   // update all active animation actions of this model
   std::list<CalAnimationAction *>::iterator iteratorAnimationAction;
@@ -438,6 +422,22 @@ void CalMixer::updateAnimation(float deltaTime)
   else
   {
     m_animationDuration = 0.0f;
+  }
+  
+  // update the current animation time
+  if(m_animationDuration == 0.0f)
+  {
+    m_animationTime = 0.0f;
+  }
+  else
+  {
+    m_animationTime += deltaTime * m_timeFactor;
+    if(m_animationTime >= m_animationDuration || m_animationTime<0)
+    {
+      m_animationTime = (float) fmod(m_animationTime, m_animationDuration);
+    }
+	  if (m_animationTime < 0)
+        m_animationTime += m_animationDuration;
   }
 }
 
