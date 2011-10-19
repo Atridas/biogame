@@ -24,15 +24,15 @@ State_Enemy_Idle["Enter"] = function(_enemic)
 
   local animation = _enemic:get_component(BaseComponent.animation)
   
-  animation:clear_all_cycles(0.0)
-  animation:play_cycle('idle', 0.3)
+  --animation:clear_all_cycles(0.0)
+  --animation:play_cycle('idle', 0.3)
+  animation:set_animation_state('idle')
 end
 
 -------------------------------------------------------------------------------------------------
 State_Enemy_Idle["Exit"] = function(_enemic)
-  
-  local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_cycle('idle',0.3)
+  --local animation = _enemic:get_component(BaseComponent.animation)
+  --animation:clear_cycle('idle',0.3)
 end
 
 -------------------------------------------------------------------------------------------------
@@ -81,8 +81,9 @@ end
 State_Enemy_Caminant["Enter"] = function(_enemic)
 
   local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_all_cycles(0.0)
-  animation:play_cycle('walk', 0.3)
+  --animation:clear_all_cycles(0.0)
+  --animation:play_cycle('walk', 0.3)
+  animation:set_animation_state('walk')
   
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
   ia_brain.time = 0
@@ -91,9 +92,9 @@ end
 -------------------------------------------------------------------------------------------------
 State_Enemy_Caminant["Exit"] = function(_enemic)
 
-  local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_cycle('walk',0.3)
-  animation:clear_cycle('idle',0.3)
+  --local animation = _enemic:get_component(BaseComponent.animation)
+  --animation:clear_cycle('walk',0.3)
+  --animation:clear_cycle('idle',0.3)
   
 end
 
@@ -145,13 +146,15 @@ State_Enemy_Caminant['Update'] = function(_enemic, _dt)
     moviment.movement = moviment.movement + direction * _dt * Enemy_Constants["Walk Speed"]
     
     local animation = _enemic:get_component(BaseComponent.animation)
-    animation:clear_cycle('idle',0.3)
-    animation:play_cycle('walk', 0.3)
+    --animation:clear_cycle('idle',0.3)
+    --animation:play_cycle('walk', 0.3)
+    animation:set_animation_state('walk')
   else
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Disparant')
     --local animation = _enemic:get_component(BaseComponent.animation)
     --animation:clear_cycle('walk',0.3)
     --animation:play_cycle('idle', 0.3)
+    return
   end
   object3d:set_yaw(angle);
   
@@ -187,9 +190,10 @@ end
 State_Enemy_Hit["Enter"] = function(_enemic)
 
   local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_all_cycles(0.0);
-  animation:play_cycle('idle', 0.3)
-  animation:play('impact', 0.3, 1.0,false)
+  --animation:clear_all_cycles(0.0);
+  --animation:play_cycle('idle', 0.3)
+  --animation:play('impact', 0.3, 1.0,false)
+  animation:set_animation_state('impact')
   
   local vida = _enemic:get_component(BaseComponent.vida)
   
@@ -233,93 +237,15 @@ end
 
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
--- Force ! --------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------
-
---State_Enemy_Hit_Force["Enter"] = function(_enemic)
---  --log('force')
---  local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
---  ia_brain.time = 0
---  ia_brain:recive_force(g_force_event)
---  ia_brain:die()
---end
---
----------------------------------------------------------------------------------------------------
---State_Enemy_Hit_Force["Exit"] = function(_enemic)
---
---  
---end
---
----------------------------------------------------------------------------------------------------
---State_Enemy_Hit_Force['Update'] = function(_enemic, _dt)
---
---  local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
---  ia_brain.time = ia_brain.time + _dt
---  
---  --_enemic:get_component(BaseComponent.physx_controller):set_position_from_ragdoll()
---  
---  if ia_brain.time > 10 then
---    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Mort')
---  end
---end
---
----------------------------------------------------------------------------------------------------
---State_Enemy_Hit_Force['Receive'] = function(_enemic, _event)
---  if _event.msg == Event.rebre_force then
---    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Hit_Force')
---  end
---end
-
--------------------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------
--- Morint!!!! -----------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------
-
---State_Enemy_Morint["Enter"] = function(_enemic)
---
---  local animation = _enemic:get_component(BaseComponent.animation)
---  animation:play('dead', 0.3,1.0,true)
---  
---  local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
---  ia_brain.time = 0
---end
---
----------------------------------------------------------------------------------------------------
---State_Enemy_Morint["Exit"] = function(_enemic)
---
---end
---
----------------------------------------------------------------------------------------------------
---State_Enemy_Morint['Update'] = function(_enemic, _dt)
---  local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
---  ia_brain.time = ia_brain.time + _dt
---  
---  if ia_brain.time > Enemy_Constants["Time Dying"] then
---    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Mort')
---  end
---end
---
----------------------------------------------------------------------------------------------------
---State_Enemy_Morint['Receive'] = function(_enemic, _event)
---  if _event.msg == Event.rebre_force then
---    --g_force_event = _event
---    _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
---    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Mort')
---  end
---end
-
--------------------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------
 -- Disparant!!!! --------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 
 State_Enemy_Disparant["Enter"] = function(_enemic)
   local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_all_cycles(0.0);
-  animation:play_cycle('shoot', 0.3)
+  --animation:clear_all_cycles(0.0);
+  --animation:play_cycle('shoot', 0.3)
+  animation:set_animation_state('shoot')
   
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
   ia_brain.time = 0
@@ -328,8 +254,8 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Enemy_Disparant["Exit"] = function(_enemic)
-  local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_cycle('shoot',0.3)
+  --local animation = _enemic:get_component(BaseComponent.animation)
+  --animation:clear_cycle('shoot',0.3)
 
 end
 
@@ -384,13 +310,7 @@ end
 -------------------------------------------------------------------------------------------------
 State_Enemy_Disparant['Receive'] = function(_enemic, _event)
   if _event.msg == Event.rebre_impacte then
-    --_enemic:get_component(BaseComponent.ia_brain):recive_shoot(_event)
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Hit')
-    --if _enemic:get_component(BaseComponent.ia_brain):recive_shoot(_event) then
-    --  _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Mort')
-    --else
-    --  _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Hit')
-    --end
   end
   if _event.msg == Event.morir then
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Mort')
@@ -415,24 +335,16 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Enemy_Mort["Exit"] = function(_enemic)
-  local animation = _enemic:get_component(BaseComponent.animation)
-  animation:stop('dead')
+  --local animation = _enemic:get_component(BaseComponent.animation)
+  --animation:stop('dead')
 end
 
 -------------------------------------------------------------------------------------------------
 State_Enemy_Mort['Update'] = function(_enemic, _dt)
-  --_enemic:get_component(BaseComponent.vida).set(100)
-  --_enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Idle')
+
 end
 
 -------------------------------------------------------------------------------------------------
 State_Enemy_Mort['Receive'] = function(_enemic, _event)
-  --if _event.msg == Event.rebre_impacte then
-  --  _enemic:get_component(BaseComponent.ia_brain):recive_shoot(_event)
-  --end
-  --if _event.msg == Event.rebre_force then
-    --g_force_event = _event
-  --  _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
-    --_enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Enemy_Mort')
-  --end
+
 end
