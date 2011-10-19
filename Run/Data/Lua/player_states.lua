@@ -28,6 +28,7 @@ Player_Constants["Dance"] = 'RiggleDance'
 Player_Constants["Temps Tocat"] = 0.3
 Player_Constants["Temps Morint"] = 0.0
 Player_Constants["Temps Grenade"] = 3
+Player_Constants["Min Aim Angle Covertura"] = 0.3
 --sons
 Player_Constants["So rebre impacte"] = 'impacte'
 Player_Constants["So disparar"] = 'disparar'
@@ -116,6 +117,10 @@ camera_player = function(_jugador, _dt, _multiplier)
   return pitch, yaw, object3d
 end
 
+function aim_angle_from_pitch(pitch)
+  return (pitch*1.75 + 1) * 0.5
+end
+
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 -- Neutre!!!! -----------------------------------------------------------------------------------
@@ -129,8 +134,10 @@ State_Player_Neutre['Enter'] = function(_jugador)
   local animation = _jugador:get_component(BaseComponent.animation)
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   player_controller.time = 0
-  animation:clear_all_cycles(0.3)
-  animation:play_cycle(Player_Constants["Idle"], 0.3)
+  --animation:clear_all_cycles(0.3)
+  --animation:play_cycle(Player_Constants["Idle"], 0.3)
+  animation:set_animation_state('idle')
+  animation:set_animation_parameter(0.5)
   mirilla:set_active(true)
 end
 
@@ -242,7 +249,7 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
     isBack = true
   end
   
-  local aim_angle = (pitch*1.75 + 1) * 0.5
+  local aim_angle = aim_angle_from_pitch(pitch)
   
   if isAiming then
     if ACTION_MANAGER:is_action_active('Shoot') then
@@ -275,21 +282,23 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   end
   
   if isMoving then
-    animation:clear_cycle(Player_Constants["Idle"], 0.3)
-    animation:clear_cycle('PointUpIdle',0.3)
-    animation:clear_cycle('pointDownIdle',0.3)
+    --animation:clear_cycle(Player_Constants["Idle"], 0.3)
+    --animation:clear_cycle('PointUpIdle',0.3)
+    --animation:clear_cycle('pointDownIdle',0.3)
     
     
     --animation:clear_all_cycles(0.3)
     
     if isRunning then
-      animation:stop_cycle(Player_Constants["Caminar enrere"],0.3)
-      animation:stop_cycle(Player_Constants["Caminar"],0.3)
-      animation:play_cycle(Player_Constants["Correr"],0.3)
-      animation:clear_cycle('pointWalkUp',0.3)
-      animation:clear_cycle('pointWalkDown',0.3)
-      animation:clear_cycle('PointUpIdle',0.3)
-      animation:clear_cycle('pointDownIdle',0.3)
+      --animation:stop_cycle(Player_Constants["Caminar enrere"],0.3)
+      --animation:stop_cycle(Player_Constants["Caminar"],0.3)
+      --animation:play_cycle(Player_Constants["Correr"],0.3)
+      --animation:clear_cycle('pointWalkUp',0.3)
+      --animation:clear_cycle('pointWalkDown',0.3)
+      --animation:clear_cycle('PointUpIdle',0.3)
+      --animation:clear_cycle('pointDownIdle',0.3)
+      animation:set_animation_state('run')
+      
       
       SOUND:play_sample('running')
       SOUND:stop_sample('walking')
@@ -298,23 +307,27 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
       SOUND:play_sample('walking')
       
       if isAiming then
-        animation:play_cycle('pointWalkUp',0.15,aim_angle)
-        animation:play_cycle('pointWalkDown',0.15,1-aim_angle)
-        animation:stop_cycle(Player_Constants["Caminar enrere"],0.15)
-        animation:stop_cycle(Player_Constants["Correr"],0.15)
-        animation:stop_cycle(Player_Constants["Caminar"],0.15)
+        animation:set_animation_parameter(aim_angle)
+        animation:set_animation_state('walk aim')
+        --animation:play_cycle('pointWalkUp',0.15,aim_angle)
+        --animation:play_cycle('pointWalkDown',0.15,1-aim_angle)
+        --animation:stop_cycle(Player_Constants["Caminar enrere"],0.15)
+        --animation:stop_cycle(Player_Constants["Correr"],0.15)
+        --animation:stop_cycle(Player_Constants["Caminar"],0.15)
       else
-        animation:stop_cycle('pointWalkUp',0.3)
-        animation:stop_cycle('pointWalkDown',0.3)
+        --animation:stop_cycle('pointWalkUp',0.3)
+        --animation:stop_cycle('pointWalkDown',0.3)
         
         if isBack then
-          animation:play_cycle(Player_Constants["Caminar enrere"],0.3)
-          animation:stop_cycle(Player_Constants["Caminar"],0.3)
-          animation:stop_cycle(Player_Constants["Correr"],0.3)
+          animation:set_animation_state('walk back')
+          --animation:play_cycle(Player_Constants["Caminar enrere"],0.3)
+          --animation:stop_cycle(Player_Constants["Caminar"],0.3)
+          --animation:stop_cycle(Player_Constants["Correr"],0.3)
         else
-          animation:stop_cycle(Player_Constants["Caminar enrere"],0.3)
-          animation:play_cycle(Player_Constants["Caminar"],0.3)
-          animation:stop_cycle(Player_Constants["Correr"],0.3)
+          animation:set_animation_state('walk')
+          --animation:stop_cycle(Player_Constants["Caminar enrere"],0.3)
+          --animation:play_cycle(Player_Constants["Caminar"],0.3)
+          --animation:stop_cycle(Player_Constants["Correr"],0.3)
         end
       
       end
@@ -325,21 +338,24 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
     SOUND:stop_sample('running')
     SOUND:stop_sample('walking')
     
-    animation:clear_cycle(Player_Constants["Caminar"],0.3)
-    animation:clear_cycle(Player_Constants["Caminar enrere"],0.3)
-    animation:clear_cycle(Player_Constants["Correr"],0.3)
-    animation:clear_cycle('pointWalkUp',0.3)
-    animation:clear_cycle('pointWalkDown',0.3)
+    --animation:clear_cycle(Player_Constants["Caminar"],0.3)
+    --animation:clear_cycle(Player_Constants["Caminar enrere"],0.3)
+    --animation:clear_cycle(Player_Constants["Correr"],0.3)
+    --animation:clear_cycle('pointWalkUp',0.3)
+    --animation:clear_cycle('pointWalkDown',0.3)
     
     if isAiming then
-      animation:play_cycle('PointUpIdle', 0.05, aim_angle)
-      animation:play_cycle('pointDownIdle', 0.05, 1 - aim_angle)
-      animation:stop_cycle(Player_Constants["Idle"], 0.15)
+      animation:set_animation_parameter(aim_angle)
+      animation:set_animation_state('aim')
+      --animation:play_cycle('PointUpIdle', 0.05, aim_angle)
+      --animation:play_cycle('pointDownIdle', 0.05, 1 - aim_angle)
+      --animation:stop_cycle(Player_Constants["Idle"], 0.15)
       
     else
-      animation:play_cycle(Player_Constants["Idle"], 0.3)
-      animation:stop_cycle('PointUpIdle',0.3)
-      animation:stop_cycle('pointDownIdle',0.3)
+      animation:set_animation_state('idle')
+      --animation:play_cycle(Player_Constants["Idle"], 0.3)
+      --animation:stop_cycle('PointUpIdle',0.3)
+      --animation:stop_cycle('pointDownIdle',0.3)
     end
   end
   
@@ -377,16 +393,17 @@ State_Player_Dance['Enter'] = function(_jugador)
   set_song(ComponentBGMController.rr)
   
   local animation = _jugador:get_component(BaseComponent.animation)
-  animation:clear_all_cycles(0.0)
-  animation:play_cycle(Player_Constants["Dance"], 0.3)
+  animation:set_animation_state('dance')
+  --animation:clear_all_cycles(0.0)
+  --animation:play_cycle(Player_Constants["Dance"], 0.3)
 end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Dance['Exit'] = function(_jugador)
   set_song(ComponentBGMController.init_level)
   
-  local animation = _jugador:get_component(BaseComponent.animation)
-  animation:clear_all_cycles(0.0)
+  --local animation = _jugador:get_component(BaseComponent.animation)
+  --animation:clear_all_cycles(0.0)
 end
 
 -------------------------------------------------------------------------------------------------
@@ -706,8 +723,10 @@ State_Player_Force['Enter'] = function(_jugador)
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
   --animation:play_cycle(Player_Constants["Escut Idle"], 0.3)
-  animation:clear_all_cycles(0.1)
-  animation:play_cycle(Player_Constants["Escut"], 0.1)
+  --animation:clear_all_cycles(0.1)
+  --animation:play_cycle(Player_Constants["Escut"], 0.1)
+  animation:set_animation_state('force')
+  
   player_controller.time = 0
   player_controller:force()
   SOUND:play_sample(Player_Constants["So force"])
@@ -723,6 +742,7 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Force['Update'] = function(_jugador, _dt)
+  camera_player(_jugador, _dt, Player_Constants["Apuntant Multiplier"])
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   
   player_controller.time = player_controller.time + _dt
@@ -753,8 +773,9 @@ State_Player_Force_Cobertura['Enter'] = function(_jugador)
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
   --animation:play_cycle(Player_Constants["Escut Idle"], 0.3)
-  animation:clear_all_cycles(0.1)
-  animation:play_cycle(Player_Constants["Escut"], 0.1)
+  --animation:clear_all_cycles(0.1)
+  --animation:play_cycle(Player_Constants["Escut"], 0.1)
+  animation:set_animation_state('force')
   player_controller.time = 0
   player_controller:force()
   SOUND:play_sample(Player_Constants["So force"])
@@ -770,6 +791,7 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Force_Cobertura['Update'] = function(_jugador, _dt)
+  camera_player(_jugador, _dt, Player_Constants["Apuntant Multiplier"])
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   
   player_controller.time = player_controller.time + _dt
@@ -802,7 +824,8 @@ State_Player_Morint['Enter'] = function(_jugador)
   
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   local animation = _jugador:get_component(BaseComponent.animation)
-  animation:play(Player_Constants["Morir"], 0.3, 1.0, true)
+  --animation:play(Player_Constants["Morir"], 0.3, 1.0, true)
+  animation:set_animation_state('die')
   player_controller.time = 0
   
 end
@@ -816,7 +839,7 @@ end
 State_Player_Morint['Update'] = function(_jugador, _dt)
   
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
-  local animation = _jugador:get_component(BaseComponent.animation)
+  --local animation = _jugador:get_component(BaseComponent.animation)
   local vida = _jugador:get_component(BaseComponent.vida)
   
   player_controller.time = player_controller.time + _dt
@@ -862,8 +885,8 @@ end
 -------------------------------------------------------------------------------------------------
 State_Player_Mort['Exit'] = function(_jugador)
   _jugador:get_component(BaseComponent.vida):set_active(true)
-  local animation = _jugador:get_component(BaseComponent.animation)
-  animation:stop(Player_Constants["Morir"])
+  --local animation = _jugador:get_component(BaseComponent.animation)
+  --animation:stop(Player_Constants["Morir"])
 end
 
 -------------------------------------------------------------------------------------------------
@@ -919,8 +942,9 @@ State_Player_Cobertura_Baixa['Enter'] = function(_jugador)
   --animation:play('CoverAvallDreta', 0.3, 1.0, false)
   
   --Nomes blend
-  animation:clear_all_cycles(0.3)
-  animation:play_cycle('CoverAvallDretaIdle', 0.3)
+  --animation:clear_all_cycles(0.3)
+  --animation:play_cycle('CoverAvallDretaIdle', 0.3)
+  animation:set_animation_state('cover down')
   
   player_controller.time = 0
   
@@ -1054,8 +1078,9 @@ State_Player_Cobertura_Alta['Enter'] = function(_jugador)
   
   
   --Nomes blend
-  animation:clear_all_cycles(0.3)
-  animation:play_cycle('CoverDretaIdle', 0.3)
+  --animation:clear_all_cycles(0.3)
+  --animation:play_cycle('CoverDretaIdle', 0.3)
+  animation:set_animation_state('cover up')
   
   player_controller.time = 0
   renderable_object.block_yaw = true
@@ -1106,8 +1131,9 @@ State_Player_Cobertura_Alta_Sortir['Enter'] = function(_jugador)
   --animation:play('CoverSortidaDreta',0.3,1.0,false)
   
   --Nomes blend
-  animation:clear_all_cycles(0.3)
-  animation:play_cycle(Player_Constants["Idle"],0.3)
+  --animation:clear_all_cycles(0.3)
+  --animation:play_cycle(Player_Constants["Idle"],0.3)
+  animation:set_animation_state('idle')
   
   _jugador:get_component(BaseComponent.renderable_object).block_yaw = true
   player_controller.time = 0
@@ -1161,8 +1187,10 @@ State_Player_Cobertura_Baixa_Apuntar['Enter'] = function(_jugador)
   local camera = _jugador:get_component(BaseComponent.thps_camera)
   
   --Nomes blend
-  animation:clear_all_cycles(0.2)
-  animation:play_cycle(Player_Constants["Apuntar"], 0.2)
+  --animation:clear_all_cycles(0.2)
+  --animation:play_cycle(Player_Constants["Apuntar"], 0.2)
+  animation:set_animation_parameter(0.5)
+  animation:set_animation_state('aim')
   
   --Amb animacio
   --animation:clear_all_cycles(0.3)
@@ -1205,6 +1233,7 @@ State_Player_Cobertura_Baixa_Apuntar['Update'] = function(_jugador, _dt)
   
   if not ACTION_MANAGER:is_action_active('Aim') then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Baixa')
+    return
   end   
     
   if ACTION_MANAGER:is_action_active('Shoot') then
@@ -1230,9 +1259,14 @@ State_Player_Cobertura_Baixa_Apuntar['Update'] = function(_jugador, _dt)
     --end
   end
   
-  --local aim_angle = (pitch*1.75 + 1) * 0.5
+  local aim_angle = aim_angle_from_pitch(pitch)
+  if aim_angle < Player_Constants["Min Aim Angle Covertura"] then
+    aim_angle = Player_Constants["Min Aim Angle Covertura"]
+  end
   --animation:play_cycle('PointUpIdle', 0.05, aim_angle)
   --animation:play_cycle('pointDownIdle', 0.05, 1 - aim_angle)
+  animation:set_animation_parameter(aim_angle)
+  animation:set_animation_state('aim')
   
   --local player_controller = _jugador:get_component(BaseComponent.player_controller)
 
