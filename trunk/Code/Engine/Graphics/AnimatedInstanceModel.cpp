@@ -61,7 +61,7 @@ void CAnimatedInstanceModel::Initialize(CAnimatedCoreModel *_pAnimatedCoreModel)
         {
           float l_fWeight = (cycle.bFromParameter)? m_fAnimationParameter : ((cycle.bFromComplementaryParameter)? 1 - m_fAnimationParameter : 1);
           l_fWeight *= cycle.fWeight;
-          m_pCalModel->getMixer()->blendCycle(cycle.iId,l_fWeight,l_it->second.fDefaultFadeIn);
+          m_pCalModel->getMixer()->blendCycle(cycle.iId,l_fWeight,0.f);
         }
 
       } else {
