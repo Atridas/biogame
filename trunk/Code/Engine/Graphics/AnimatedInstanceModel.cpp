@@ -254,7 +254,6 @@ void CAnimatedInstanceModel::RenderModelBySoftware(CRenderManager *_pRM)
 void CAnimatedInstanceModel::Update(float _fElapsedTime)
 {
   m_pCalModel->update(_fElapsedTime);
-  m_fCurrentAnimationTime += _fElapsedTime;
 }
 
 void CAnimatedInstanceModel::InitD3D(CRenderManager *_pRM)
@@ -275,8 +274,6 @@ void CAnimatedInstanceModel::ExecuteAction(int _iId, float _fTime, float _fWeigh
 {
   m_pCalModel->getMixer()->removeAction(_iId);
   m_pCalModel->getMixer()->executeAction(_iId,0,_fTime,_fWeight,_bAutoLock);
-  m_iCurrentAnimationId = _iId;
-  m_fCurrentAnimationTime = 0;
 }
 
 void CAnimatedInstanceModel::RemoveAction(int _iId)
@@ -287,7 +284,6 @@ void CAnimatedInstanceModel::RemoveAction(int _iId)
 void CAnimatedInstanceModel::BlendCycle(int _iId, float _fTime, float _fWeight)
 {
   m_pCalModel->getMixer()->blendCycle(_iId,_fWeight,_fTime);
-  m_iCurrentCycle = _iId;
 }
 
 void CAnimatedInstanceModel::BlendCycle(const std::string &AnimationName, float _fTime, float _fWeight)
@@ -300,12 +296,6 @@ int CAnimatedInstanceModel::GetAnimationId(const std::string &AnimationName) con
 {
   return m_pAnimatedCoreModel->GetCoreModel()->getCoreAnimationId(AnimationName);
 }
-
-void CAnimatedInstanceModel::ClearCycle(float _fTime)
-{
-  m_pCalModel->getMixer()->clearCycle(m_iCurrentCycle,_fTime);
-}
-
 
 void CAnimatedInstanceModel::ClearCycle(int _iId, float _fTime)
 {

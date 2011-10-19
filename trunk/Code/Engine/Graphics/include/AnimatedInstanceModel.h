@@ -26,8 +26,7 @@ public:
    * Constructor per defecte.
   **/
   CAnimatedInstanceModel(void): m_pCalModel(0),m_pAnimatedCoreModel(0),
-                                m_iCurrentCycle(0),m_iCurrentAnimationId(0),
-                                m_fCurrentAnimationTime(0),m_pVB(0),m_pIB(0),
+                                m_pVB(0),m_pIB(0),
                                 m_iNumVtxs(0),m_iNumFaces(0),
                                 m_szAnimationState(""),
                                 m_fAnimationParameter(0)
@@ -94,19 +93,8 @@ public:
    * Aquest mètode acabarà les animacions actives que tingués el model, fent que a final de cicle no es repeteixin més.
    * @param _fTime Temps fins a acabar-se.
   **/
-  void ClearCycle             (float _fTime);
   void ClearCycle             (int _iId, float _fTime);
   void ClearCycle             (const std::string &AnimationName, float _fTime);
-  /**
-   * Getter del cicle d'animació actual.
-   * @return Cicle d'animació actual.
-  **/
-  int GetCurrentCycle         () const              { return m_iCurrentCycle; };
-  /**
-   * Getter de l'animació actual.
-   * @return L'animació actual.
-  **/
-  int GetCurrentAction        () const              { return m_iCurrentAnimationId; };
 
   int GetAnimationCount       ();
   CAnimatedCoreModel*       GetAnimatedCoreModel() {return m_pAnimatedCoreModel;};
@@ -149,18 +137,6 @@ private:
    * Llista de materials del model.
   **/
   //vector<CEffectMaterial*>        m_vTextureList;
-  /**
-   * Cicle actual d'animació.
-  **/
-  int                       m_iCurrentCycle;
-  /**
-   * Animació actual.
-  **/
-  int                       m_iCurrentAnimationId;
-  /**
-   * Temps transcorregut des de l'inici de l'animació actual.
-  **/
-  float                     m_fCurrentAnimationTime;
   /**
    * VertexBuffer.
   **/

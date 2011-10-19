@@ -189,6 +189,8 @@ private:
   float m_fSpecIntensity;
   float m_fGlossiness;
 
+  int m_iCurrentAnimation;
+
   vector<CRenderableObject*>::iterator m_itCurrentMesh;
   vector<CRenderableAnimatedInstanceModel*>::iterator m_itCurrentAnimated;
 
