@@ -193,7 +193,7 @@ void CComponentIABrain::ReceiveForce(SEvent _sEvent)
         Vect3f l_vRayDir = (l_vSenderPos-l_vBonePos).Normalize();
         l_pUserData = l_pPM->RaycastClosestActor(l_vBonePos,l_vRayDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT),l_CInfo);
 
-        if(l_pUserData->GetEntity() != ENTITY_MANAGER->GetEntity(_sEvent.Sender))
+        if(!l_pUserData || l_pUserData->GetEntity() != ENTITY_MANAGER->GetEntity(_sEvent.Sender))
         {
           return;
         }

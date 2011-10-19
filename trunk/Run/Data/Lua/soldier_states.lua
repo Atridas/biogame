@@ -30,15 +30,15 @@ State_Soldier_Idle["Enter"] = function(_enemic)
 
   local animation = _enemic:get_component(BaseComponent.animation)
   
-  animation:clear_all_cycles(0.0)
-  animation:play_cycle('idle', 0.3)
+  --animation:clear_all_cycles(0.0)
+  --animation:play_cycle('idle', 0.3)
+  animation:set_animation_state('idle')
 end
 
 -------------------------------------------------------------------------------------------------
 State_Soldier_Idle["Exit"] = function(_enemic)
-  
-  local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_cycle('idle',0.3)
+  --local animation = _enemic:get_component(BaseComponent.animation)
+  --animation:clear_cycle('idle',0.3)
 end
 
 -------------------------------------------------------------------------------------------------
@@ -81,8 +81,9 @@ end
 State_Soldier_Buscant_Cobertura["Enter"] = function(_enemic)
 
   local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_all_cycles(0.0)
-  animation:play_cycle('run', 0.3)
+  --animation:clear_all_cycles(0.0)
+  --animation:play_cycle('run', 0.3)
+  animation:set_animation_state('run')
   
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
   
@@ -95,10 +96,8 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Soldier_Buscant_Cobertura["Exit"] = function(_enemic)
-
-  local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_cycle('run',0.3)
-  
+  --local animation = _enemic:get_component(BaseComponent.animation)
+  --animation:clear_cycle('run',0.3)
 end
 
 -------------------------------------------------------------------------------------------------
@@ -188,9 +187,10 @@ State_Soldier_Cobrint["Enter"] = function(_enemic)
 
   --animacio
   local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_all_cycles(0.0)
-  animation:play('CoverDownLeft', 0.3, 1.0, false)
-  animation:play_cycle('CoverDownLeftIdle', 0.3)
+  --animation:clear_all_cycles(0.0)
+  --animation:play('CoverDownLeft', 0.3, 1.0, false)
+  --animation:play_cycle('CoverDownLeftIdle', 0.3)
+  animation:set_animation_state('cover down')
   
   --temps de dispar
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
@@ -202,9 +202,8 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Soldier_Cobrint["Exit"] = function(_enemic)
-  
-  local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_cycle('CoverDownLeftIdle',0.3)
+  --local animation = _enemic:get_component(BaseComponent.animation)
+  --animation:clear_cycle('CoverDownLeftIdle',0.3)
 end
 
 -------------------------------------------------------------------------------------------------
@@ -266,15 +265,15 @@ State_Soldier_Disparant["Enter"] = function(_enemic)
   
   --disparem
   local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_all_cycles(0.0);
-  animation:play_cycle('shoot', 0.3)
+  --animation:clear_all_cycles(0.0);
+  --animation:play_cycle('shoot', 0.3)
+  animation:set_animation_state('shoot')
 end
 
 -------------------------------------------------------------------------------------------------
 State_Soldier_Disparant["Exit"] = function(_enemic)
-  local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_cycle('shoot',0.3)
-
+  --local animation = _enemic:get_component(BaseComponent.animation)
+  --animation:clear_cycle('shoot',0.3)
 end
 
 -------------------------------------------------------------------------------------------------
@@ -345,14 +344,14 @@ State_Soldier_Cobrint_Disparant["Enter"] = function(_enemic)
   
   --disparem
   local animation = _enemic:get_component(BaseComponent.animation)
-  animation:play_cycle('shoot', 0.3)
+  --animation:play_cycle('shoot', 0.3)
+  animation:set_animation_state('shoot')
 end
 
 -------------------------------------------------------------------------------------------------
 State_Soldier_Cobrint_Disparant["Exit"] = function(_enemic)
-  local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_cycle('shoot',0.3)
-
+  --local animation = _enemic:get_component(BaseComponent.animation)
+  --animation:clear_cycle('shoot',0.3)
 end
 
 -------------------------------------------------------------------------------------------------
@@ -403,9 +402,10 @@ end
 State_Soldier_Hit["Enter"] = function(_enemic)
 
   local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_all_cycles(0.0);
-  animation:play_cycle('idle', 0.3)
-  animation:play('impact', 0.3, 1.0,false)
+  --animation:clear_all_cycles(0.0);
+  --animation:play_cycle('idle', 0.3)
+  --animation:play('impact', 0.3, 1.0,false)
+  animation:set_animation_state('impact')
   
   local vida = _enemic:get_component(BaseComponent.vida)
   
@@ -423,8 +423,8 @@ State_Soldier_Hit["Exit"] = function(_enemic)
   local vida = _enemic:get_component(BaseComponent.vida)
   vida:set_active(true)
 
-  local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_cycle('idle', 0.3)
+  --local animation = _enemic:get_component(BaseComponent.animation)
+  --animation:clear_cycle('idle', 0.3)
   
 end
 
@@ -463,9 +463,10 @@ end
 State_Soldier_Hit_Cobertura["Enter"] = function(_enemic)
 
   local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_all_cycles(0.0);
-  animation:play_cycle('idle', 0.3)
-  animation:play('impact', 0.3, 1.0,false)
+  --animation:clear_all_cycles(0.0);
+  --animation:play_cycle('idle', 0.3)
+  --animation:play('impact', 0.3, 1.0,false)
+  animation:set_animation_state('impact')
   
   local vida = _enemic:get_component(BaseComponent.vida)
   
@@ -481,8 +482,8 @@ State_Soldier_Hit_Cobertura["Exit"] = function(_enemic)
   local vida = _enemic:get_component(BaseComponent.vida)
   vida:set_active(true)
 
-  local animation = _enemic:get_component(BaseComponent.animation)
-  animation:clear_cycle('idle', 0.3)
+  --local animation = _enemic:get_component(BaseComponent.animation)
+  --animation:clear_cycle('idle', 0.3)
   
 end
 
@@ -560,8 +561,8 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Soldier_Mort["Exit"] = function(_enemic)
-  local animation = _enemic:get_component(BaseComponent.animation)
-  animation:stop('dead')
+  --local animation = _enemic:get_component(BaseComponent.animation)
+  --animation:stop('dead')
 end
 
 -------------------------------------------------------------------------------------------------

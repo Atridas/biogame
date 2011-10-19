@@ -56,30 +56,24 @@
   <animation_states default="idle">
     <animation_state name="idle" default_fade_in="0.3" default_fade_out="0.3">
       <cycle name="idle"/>
-      <!--
-      <cycle name="idle"      weight="0.98"/>
-      <cycle name="walk"      weight="0.01"/>
-      <cycle name="walk back" weight="0.01"/>
-      -->
     </animation_state>
     <!-- -->
     <animation_state name="walk" default_fade_in="0.3" default_fade_out="0.3">
-      <cycle name="walk" weight="0.99" />
+      <cycle name="walk" weight="0.98" />
       <cycle name="run"  weight="0.01" />
-    </animation_state>
-    <!-- -->
-    <animation_state name="walk back" default_fade_in="0.3" default_fade_out="0.3">
-      <cycle name="walk back"/>
-      <!--
-      <cycle name="idle"      weight="0.01"/>
-      <cycle name="walk"      weight="0.01"/>
-      <cycle name="walk back" weight="0.98"/>
-      -->
+      <cycle name="pointWalkUp"   weight="0.01" weight_from_parameter="true"               fade_on_change="0.05"/>
+      <cycle name="pointWalkDown" weight="0.01" weight_from_complementary_parameter="true" fade_on_change="0.05"/>
     </animation_state>
     <!-- -->
     <animation_state name="run" default_fade_in="0.3" default_fade_out="0.3">
       <cycle name="walk" weight="0.01" />
-      <cycle name="run"  weight="0.99" />
+      <cycle name="run"  weight="0.98" />
+      <cycle name="pointWalkUp"   weight="0.01" weight_from_parameter="true"               fade_on_change="0.05"/>
+      <cycle name="pointWalkDown" weight="0.01" weight_from_complementary_parameter="true" fade_on_change="0.05"/>
+    </animation_state>
+    <!-- -->
+    <animation_state name="walk back" default_fade_in="0.3" default_fade_out="0.3">
+      <cycle name="walk back"/>
     </animation_state>
     <!-- -->
     <animation_state name="aim" default_fade_in="0.3" default_fade_out="0.3">
@@ -88,8 +82,10 @@
     </animation_state>
     <!-- -->
     <animation_state name="walk aim" default_fade_in="0.0" default_fade_out="0.0">
-      <cycle name="pointWalkUp" weight_from_parameter="true" fade_on_change="0.05"/>
-      <cycle name="pointWalkDown" weight_from_complementary_parameter="true" fade_on_change="0.05"/>
+      <cycle name="walk" weight="0.01" />
+      <cycle name="run"  weight="0.01" />
+      <cycle name="pointWalkUp"   weight="0.98" weight_from_parameter="true"               fade_on_change="0.05"/>
+      <cycle name="pointWalkDown" weight="0.98" weight_from_complementary_parameter="true" fade_on_change="0.05"/>
     </animation_state>
     <!-- -->
     <animation_state name="force" default_fade_in="0.0" default_fade_out="0.0">
@@ -120,11 +116,4 @@
       <cycle name="RiggleDance"/>
     </animation_state>
   </animation_states>
-  
-  <animation_changes>
-    <!--
-    <animation_change from="idle" to="walk" fade="1.5"/>
-    <animation_change from="idle" to="run"  fade="0.7"/>
-    -->
-  </animation_changes>
 </actor>

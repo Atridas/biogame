@@ -21,5 +21,33 @@
   <animation name="CoverDownLeftIdle" filename="Data/Animated Models/Militar/coverDownLeftIdle.CAF"/>
   <animation name="CoverDownIdle" filename="Data/Animated Models/Militar/coverDownIdle.CAF"/>
   
+
+  <animation_states default="idle">
+    <animation_state name="idle" default_fade_in="0.3" default_fade_out="0.3">
+      <cycle name="idle"/>
+    </animation_state>
+    <animation_state name="walk" default_fade_in="0.3" default_fade_out="0.3">
+      <cycle name="walk"/>
+    </animation_state>
+    <animation_state name="run" default_fade_in="0.3" default_fade_out="0.3">
+      <cycle name="run"/>
+    </animation_state>
+    <animation_state name="cover down" default_fade_in="0.3" default_fade_out="0.3">
+      <on_enter>
+        <action name="CoverDownLeft" fade_in="0.3" fade_out="0.3"/>
+      </on_enter>
+      <cycle name="CoverDownLeftIdle"/>
+    </animation_state>
+    <animation_state name="impact" default_fade_in="0.3" default_fade_out="0.3">
+      <on_enter>
+        <action name="impact" fade_in="0.3" fade_out="0.3"/>
+      </on_enter>
+      <cycle name="idle"/>
+    </animation_state>
+    <animation_state name="shoot" default_fade_in="0.3" default_fade_out="0.3">
+      <cycle name="shoot"/>
+    </animation_state>
+  </animation_states>
+  
   
 </actor>
