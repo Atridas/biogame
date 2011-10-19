@@ -517,13 +517,13 @@ void CPhysXProcess::Update(float _fElapsedTime)
   {
     if(g_pCharacter)
     {
-	    if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() == 1)
-	    {
-		    g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
-        g_pCharacter->GetAnimatedInstanceModel()->BlendCycle("idle",0.3f);
-       /* g_pCharacter->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetCoreModel()->getCoreAnimation(0);
-        CalCoreAnimation* l_pAnimation;*/
-	    }
+	    //if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() == 1)
+	    //{
+		  //  g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+      //  g_pCharacter->GetAnimatedInstanceModel()->BlendCycle("idle",0.3f);
+      // /* g_pCharacter->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetCoreModel()->getCoreAnimation(0);
+      //  CalCoreAnimation* l_pAnimation;*/
+	    //}
     }
   }
   else
@@ -537,22 +537,22 @@ void CPhysXProcess::Update(float _fElapsedTime)
       //if (CORE->GetActionManager()->IsActionActive("Run"))
       if (INPUT_MANAGER->IsDown(IDV_KEYBOARD,KEY_LSHIFT))
       {
-	      if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 6)
-	      {
-		      g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
-          g_pCharacter->GetAnimatedInstanceModel()->BlendCycle("run",0.3f);
-	      }
+	      //if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 6)
+	      //{
+		    //  g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+        //  g_pCharacter->GetAnimatedInstanceModel()->BlendCycle("run",0.3f);
+	      //}
       }
       else
       {
-        if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
-	      {
-          if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 5)
-          {
-		        g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
-            g_pCharacter->GetAnimatedInstanceModel()->BlendCycle("walk",0.3f);
-          }
-	      }
+        //if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+	      //{
+        //  if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 5)
+        //  {
+		    //    g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+        //    g_pCharacter->GetAnimatedInstanceModel()->BlendCycle("walk",0.3f);
+        //  }
+	      //}
 
         
       }
@@ -1066,16 +1066,16 @@ bool CPhysXProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, co
     if (g_pCharacter)
     {
       //g_pCharacter->SetPosition(Vect3f(l_ControllerPos.x,l_ControllerPos.y-ALTURA_TOTAL,l_ControllerPos.z));
-      if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 5)
-	    {
-		    g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
-		    g_pCharacter->GetAnimatedInstanceModel()->BlendCycle(5,0.3f);
-	    }
-      else
-      {
-        g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
-		    g_pCharacter->GetAnimatedInstanceModel()->BlendCycle(0,0.3f);
-      }
+      //if(g_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 5)
+	    //{
+		  //  g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+		  //  g_pCharacter->GetAnimatedInstanceModel()->BlendCycle(5,0.3f);
+	    //}
+      //else
+      //{
+      //  g_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+		  //  g_pCharacter->GetAnimatedInstanceModel()->BlendCycle(0,0.3f);
+      //}
     }
 
 

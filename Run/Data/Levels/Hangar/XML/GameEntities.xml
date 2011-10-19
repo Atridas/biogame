@@ -587,7 +587,7 @@
     <NavNode />
   </Entity>
   <Entity name="hang_nod_cob15">
-    <Object3D position="4.39589 0.701781 -2.54385" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="4.53612 0.701781 -2.36088" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode cobertura="baixa" />
   </Entity>
   <Entity name="hang_nod_cob16">
@@ -1334,28 +1334,44 @@
     <Object3D position="-4.06884 0.701781 -3.16873" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
+  <Entity name="hang_nod88">
+    <Object3D position="3.09606 0.701781 -0.929188" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod89">
+    <Object3D position="3.59645 0.701781 -3.26343" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod90">
+    <Object3D position="5.7534 0.701781 -3.77828" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
+  <Entity name="hang_nod91">
+    <Object3D position="5.8129 0.701781 -5.41039" yaw="0.0" pitch="0.0" roll="0.0" />
+    <NavNode />
+  </Entity>
   <Player position="-24.8545 1.0 -10.0431" yaw="0.0" />
   <Miner name="Miner01" position="-17.4714 1.30798 -4.51993" yaw="0.0" active="false" />
   <Miner name="Miner02" position="-16.7403 1.30798 -2.29115" yaw="0.0" active="false" />
   <Miner name="Miner03" position="-19.1808 1.30798 2.1796" yaw="0.0" active="false" />
   <Miner name="Miner06" position="-20.1307 1.30798 8.52421" yaw="0.0" active="false" />
-  <Militar name="Militar01" position="23.6684 1.0 12.5599" yaw="0.0" active="false" destiny="hang_nod_cob04" />
-  <Militar name="Militar02" position="23.6667 1.0 12.5558" yaw="0.0" active="false" destiny="hang_nod_cob14" />
-  <Militar name="Militar03" position="23.6667 1.0 12.5558" yaw="0.0" active="false" destiny="hang_nod_cob13" />
-  <Militar name="Militar04" position="23.6667 1.0 12.5558" yaw="0.0" active="false" destiny="hang_nod_cob12" />
-  <Militar name="Militar05" position="17.8155 1.0 -14.1107" yaw="0.0" active="false" destiny="hang_nod_cob10" />
-  <Militar name="Militar06" position="17.8155 1.0 -14.1107" yaw="0.0" active="false" destiny="hang_nod_cob00" />
-  <Militar name="Militar07" position="17.8155 1.0 -14.1107" yaw="0.0" active="false" destiny="hang_nod_cob09" />
-  <Militar name="Militar08" position="17.8137 1.0 -14.1143" yaw="0.0" active="false" destiny="hang_nod_cob02" />
-  <Militar name="Militar09" position="17.8155 1.0 -14.1107" yaw="0.0" active="false" destiny="hang_nod_cob16" />
-  <Militar name="Militar10" position="17.8155 1.0 -14.1107" yaw="0.0" active="false" destiny="hang_nod_cob35" />
+  <Militar name="Militar01" position="23.6684 1.37953 12.5599" yaw="0.0" active="false" destiny="hang_nod_cob04" />
+  <Militar name="Militar02" position="23.6667 1.37953 12.5558" yaw="0.0" active="false" destiny="hang_nod_cob14" />
+  <Militar name="Militar03" position="23.6667 1.37953 12.5558" yaw="0.0" active="false" destiny="hang_nod_cob13" />
+  <Militar name="Militar04" position="23.6667 1.37953 12.5558" yaw="0.0" active="false" destiny="hang_nod_cob12" />
+  <Militar name="Militar05" position="17.8155 1.33429 -14.1107" yaw="0.0" active="false" destiny="hang_nod_cob10" />
+  <Militar name="Militar06" position="17.8155 1.33429 -14.1107" yaw="0.0" active="false" destiny="hang_nod_cob00" />
+  <Militar name="Militar07" position="17.8155 1.33429 -14.1107" yaw="0.0" active="false" destiny="hang_nod_cob09" />
+  <Militar name="Militar08" position="17.8137 1.33429 -14.1143" yaw="0.0" active="false" destiny="hang_nod_cob02" />
+  <Militar name="Militar09" position="17.8155 1.33429 -14.1107" yaw="0.0" active="false" destiny="hang_nod_cob16" />
+  <Militar name="Militar10" position="17.8155 1.33429 -14.1107" yaw="0.0" active="false" destiny="hang_nod_cob35" />
   <Miner name="Miner09" position="-15.4361 1.30798 10.9142" yaw="0.0" active="false" />
   <Militar name="Militar11" position="-6.19832 1.21245 -6.69519" yaw="0.0" active="false" destiny="hang_nod_cob08" />
   <Militar name="Militar12" position="-5.5422 1.21245 -9.46614" yaw="0.0" active="false" destiny="hang_nod_cob15" />
   <Militar name="Militar13" position="-10.0594 1.21245 5.06477" yaw="0.0" active="false" destiny="hang_nod_cob05" />
   <Militar name="Militar14" position="2.97888 1.21245 8.30427" yaw="0.0" active="false" destiny="hang_nod_cob34" />
   <Militar name="Militar15" position="-4.10627 1.21245 -4.88131" yaw="0.0" active="false" destiny="hang_nod_cob03" />
-  <Militar name="Militar16" position="17.8155 1.0 -14.1107" yaw="0.0" active="false" destiny="hang_nod_cob36" />
+  <Militar name="Militar16" position="17.8155 1.33429 -14.1107" yaw="0.0" active="false" destiny="hang_nod_cob36" />
   <Militar name="Militar17" position="-12.2043 1.21245 3.76902" yaw="0.0" active="false" destiny="hang_nod_cob06" />
   <Militar name="Militar18" position="-25.6014 9.6784 -2.39952" yaw="0.0" active="false" destiny="hang_nod_cob33" />
   <Militar name="Militar19" position="-25.5893 9.6784 2.15897" yaw="0.0" active="false" destiny="hang_nod_cob23" />

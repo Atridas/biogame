@@ -68,7 +68,8 @@ void CViewer::Init()
   {
     m_pCharacter = (CRenderableAnimatedInstanceModel*)m_vAnimatedModels[0];
     m_fInitialCharacterYaw = m_pCharacter->GetYaw();
-	  m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0);
+	  //m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0);
+    m_iCurrentAnimation = 0;
 	  m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(0,0);
   }
 
@@ -379,17 +380,17 @@ void CViewer::ProcessFreeMode(const float _fElapsedTime)
   UpdatePosition(l_vPosDelta,l_fDeltaPitch,l_fDeltaYaw);
   UpdateCamera(l_fDeltaPitch, l_fDeltaYaw);
 
-  if (!m_bMoveFwd && !m_bMoveBack && !m_bMoveLeft && !m_bMoveLeft && !m_bMoveRight)
-  {
-    if(m_pCharacter)
-    {
-	    if(m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() == 1)
-	    {
-		    m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
-        m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(0,0.3f);
-	    }
-    }
-  }
+  //if (!m_bMoveFwd && !m_bMoveBack && !m_bMoveLeft && !m_bMoveLeft && !m_bMoveRight)
+  //{
+  //  if(m_pCharacter)
+  //  {
+	//    if(m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() == 1)
+	//    {
+	//	    m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+  //      m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(0,0.3f);
+	//    }
+  //  }
+  //}
 }
 
 void CViewer::ProcessMeshMode(const float _fElapsedTime)
@@ -596,17 +597,18 @@ void CViewer::SetNextAnimation()
   {
     CRenderableAnimatedInstanceModel* l_pRenderModel = (CRenderableAnimatedInstanceModel*)(*m_itCurrentAnimated);
     int l_iNumAnimations = l_pRenderModel->GetAnimatedInstanceModel()->GetAnimationCount();
-    int l_iCurrentCycle = l_pRenderModel->GetAnimatedInstanceModel()->GetCurrentCycle();
+    //int l_iCurrentCycle = l_pRenderModel->GetAnimatedInstanceModel()->GetCurrentCycle();
+    
+    l_pRenderModel->GetAnimatedInstanceModel()->ClearCycle(m_iCurrentAnimation,0.0f);
 
-    l_iCurrentCycle++;
+    m_iCurrentAnimation++;
 
-    if(l_iCurrentCycle >= l_iNumAnimations)
+    if(m_iCurrentAnimation >= l_iNumAnimations)
     {
-      l_iCurrentCycle = 0;
+      m_iCurrentAnimation = 0;
     }
 
-    l_pRenderModel->GetAnimatedInstanceModel()->ClearCycle(0.0f);
-    l_pRenderModel->GetAnimatedInstanceModel()->BlendCycle(l_iCurrentCycle,0.0f);
+    l_pRenderModel->GetAnimatedInstanceModel()->BlendCycle(m_iCurrentAnimation,0.0f);
   }
 }
 
@@ -616,17 +618,17 @@ void CViewer::SetPrevAnimation()
   {
     CRenderableAnimatedInstanceModel* l_pRenderModel = (CRenderableAnimatedInstanceModel*)(*m_itCurrentAnimated);
     int l_iNumAnimations = l_pRenderModel->GetAnimatedInstanceModel()->GetAnimationCount();
-    int l_iCurrentCycle = l_pRenderModel->GetAnimatedInstanceModel()->GetCurrentCycle();
+    //int l_iCurrentCycle = l_pRenderModel->GetAnimatedInstanceModel()->GetCurrentCycle();
+    l_pRenderModel->GetAnimatedInstanceModel()->ClearCycle(m_iCurrentAnimation, 0.0f);
 
-    l_iCurrentCycle--;
+    m_iCurrentAnimation--;
 
-    if(l_iCurrentCycle < 0)
+    if(m_iCurrentAnimation < 0)
     {
-      l_iCurrentCycle = l_iNumAnimations-1;
+      m_iCurrentAnimation = l_iNumAnimations-1;
     }
 
-    l_pRenderModel->GetAnimatedInstanceModel()->ClearCycle(0.0f);
-    l_pRenderModel->GetAnimatedInstanceModel()->BlendCycle(l_iCurrentCycle,0.0f);
+    l_pRenderModel->GetAnimatedInstanceModel()->BlendCycle(m_iCurrentAnimation,0.0f);
   }
 }
 
@@ -1224,53 +1226,53 @@ void CViewer::SetWalking()
 
 void CViewer::MoveFwd()
 {
-  if(m_pCharacter)
-  {
-	  if(m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
-	  {
-		  m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
-		  m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
-	  }
-  }
+  //if(m_pCharacter)
+  //{
+	//  if(m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+	//  {
+	//	  m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+	//	  m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
+	//  }
+  //}
 	m_bMoveFwd = true;
 }
 
 void CViewer::MoveBack()
 {
-  if(m_pCharacter)
-  {
-	  if (m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
-	  {
-		  m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
-          m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
-	  }
-  }
+  //if(m_pCharacter)
+  //{
+	//  if (m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+	//  {
+	//	  m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+  //        m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
+	//  }
+  //}
   m_bMoveBack = true;
 }
 
 void CViewer::MoveLeft()
 {
-  if(m_pCharacter)
-  {
-	  if (m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
-	  {
-		  m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
-          m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
-	  }
-  }
+  //if(m_pCharacter)
+  //{
+	//  if (m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+	//  {
+	//	  m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+  //        m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
+	//  }
+  //}
 	m_bMoveLeft = true;
 }
 
 void CViewer::MoveRight()
 {
-  if(m_pCharacter)
-  {
-	  if (m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
-	  {
-		  m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
-          m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
-	  }
-  }
+  //if(m_pCharacter)
+  //{
+	//  if (m_pCharacter->GetAnimatedInstanceModel()->GetCurrentCycle() != 1)
+	//  {
+	//	  m_pCharacter->GetAnimatedInstanceModel()->ClearCycle(0.3f);
+  //        m_pCharacter->GetAnimatedInstanceModel()->BlendCycle(1,0.3f);
+	//  }
+  //}
 	m_bMoveRight = true;
 }
 
@@ -1505,7 +1507,7 @@ void CViewer::ShowAnimatedModeInfo()
     l_SStream << "Yaw: " << (float)l_pAnimatedInstance->GetYaw() << endl;
     l_SStream << "Pitch: " << (float)l_pAnimatedInstance->GetPitch() << endl;
     l_SStream << "Roll: " << (float)l_pAnimatedInstance->GetRoll() << endl;
-    l_SStream << "Animacio: " << (int)l_pRenderModel->GetAnimatedInstanceModel()->GetCurrentCycle() << endl;
+    l_SStream << "Animacio: " << (int)m_iCurrentAnimation << endl;
 
     const vector<CMaterial*>& l_vMaterials = l_pAnimatedInstance->GetAnimatedInstanceModel()->GetAnimatedCoreModel()->GetMaterials();
     l_SStream << ShowMaterialProperties(l_vMaterials);
