@@ -413,10 +413,12 @@ void CAnimatedInstanceModel::SetAnimationParameter(float _fAnimationParameter)
     {
       continue;
     }
+    
+    float l_fBlendTime = (l_Cycle.fFadeOnChange < 0)? 0 : l_Cycle.fFadeOnChange;
 
     m_pCalModel->getMixer()->blendCycle(l_Cycle.iId,
                                         l_fFactor,
-                                        l_Cycle.fFadeOnChange);
+                                        l_fBlendTime);
   }
 };
 
@@ -451,8 +453,11 @@ void  CAnimatedInstanceModel::ExecuteAction(const SAction& _Action)
     {
       l_fWeight = _Action.fWeight;
     }
+    
+    float l_fBlendIn  = (_Action.fFadeIn  < 0)? 0 : _Action.fFadeIn;
+    float l_fBlendOut = (_Action.fFadeOut < 0)? 0 : _Action.fFadeOut;
 
-    l_pMixer->executeAction(_Action.iId, _Action.fFadeIn, _Action.fFadeOut, l_fWeight, _Action.bBlock);
+    l_pMixer->executeAction(_Action.iId, l_fBlendIn, l_fBlendOut, l_fWeight, _Action.bBlock);
   }
 }
 
@@ -469,6 +474,8 @@ void  CAnimatedInstanceModel::BlendCycle(const SCycle& _Cycle, float _fBlendTime
   {
     l_fWeight = _Cycle.fWeight;
   }
+
+  _fBlendTime = (_fBlendTime < 0)? 0 : _fBlendTime;
 
   m_pCalModel->getMixer()->blendCycle(_Cycle.iId, l_fWeight, _fBlendTime);
 }
