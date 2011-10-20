@@ -3,6 +3,10 @@
 #include <XML/XMLTreeNode.h>
 #include <cal3d\cal3d.h>
 
+#include <boost\foreach.hpp>
+
+#define foreach BOOST_FOREACH
+
 CAnimatedModelManager::CAnimatedModelManager()
 {
   CalLoader::setLoadingMode(LOADER_ROTATE_X_AXIS);
@@ -79,6 +83,16 @@ bool CAnimatedModelManager::Reload()
     }
   }
   return l_res;
+}
+
+void CAnimatedModelManager::ReloadAnimaionStates()
+{
+  TMapResource::iterator l_it  = m_Resources.begin();
+  TMapResource::iterator l_end = m_Resources.end();
+  for(; l_it != l_end; ++l_it)
+  {
+    l_it->second->ReloadAnimaionStates();
+  }
 }
 
 CAnimatedCoreModel* CAnimatedModelManager::GetCore(const std::string &_szName)

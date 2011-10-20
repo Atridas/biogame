@@ -140,13 +140,15 @@ public:
    * @return True si tot ha anat bé, false sino.
    * @see Load(const std::string &_szPath)
   **/
-  bool Reload                           ()                          { return ReloadTextures(); } //Release(); return Load(m_szPath);};
+  bool Reload                           ()                          { ReloadAnimaionStates(); return ReloadTextures(); } //Release(); return Load(m_szPath);};
   /**
    * Mètode de recàrrega desde fitxer.
    * Aquest mètode recarrega el model cal3d del nou fitxer especificat. Si la càrrega s'ha efectuat correctament quedarà en ok.
    * @return True si tot ha anat bé, false sino.
   **/
   bool Reload                           (const std::string &_szPath){ Release(); return Load( _szPath);};
+  
+  void ReloadAnimaionStates();
 
   int  GetAnimationCount                ();
 
@@ -221,6 +223,13 @@ private:
   map<string, map<string, SAnimationChange>> m_AnimationChanges;
 
   friend class CAnimatedInstanceModel;
+
+  void LoadAnimationStates(CXMLTreeNode& _xmlAnimationStates);
+  void LoadAnimationChanges(CXMLTreeNode& _xmlAnimationChanges);
+  bool LoadAnimationFromState(CXMLTreeNode &_xmlAnimation, CAnimatedCoreModel::SAnimation &Animation_);
+  bool LoadActionFromState(CXMLTreeNode &_xmlAction, CAnimatedCoreModel::SAction &Action_);
+  bool LoadAnimationState(CXMLTreeNode &_xmlAnimationState, CAnimatedCoreModel::SAnimationState &AnimationState_);
+  bool LoadAnimationChange(CXMLTreeNode &_xmlAnimationChange, CAnimatedCoreModel::SAnimationChange &AnimationChange_);
 };
 
 #endif
