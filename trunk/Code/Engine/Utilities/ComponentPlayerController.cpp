@@ -371,10 +371,16 @@ void CComponentPlayerController::Force()
 
       if(l_pPlayerEntity != l_pEntity)
       {
+        Vect3f l_v = l_vPos + Vect3f(0.0f,0.25f,0.0f);
+
         SEvent l_impacte;
         l_impacte.Msg = SEvent::REBRE_FORCE;
         l_impacte.Info[0].Type = SEventInfo::FLOAT;
         l_impacte.Info[0].f    = DAMAGE_FORCE;
+        l_impacte.Info[1].Type = SEventInfo::VECTOR;
+        l_impacte.Info[1].v.x    = l_v.x;
+        l_impacte.Info[1].v.y    = l_v.y;
+        l_impacte.Info[1].v.z    = l_v.z;
         l_impacte.Receiver = l_pEntity->GetGUID();
         l_impacte.Sender = l_pPlayerEntity->GetGUID();
 
@@ -549,8 +555,15 @@ void CComponentPlayerController::ReceiveForce(SEvent _sEvent)
   if(_sEvent.Msg == SEvent::REBRE_FORCE)
   {
 
+    if(_sEvent.Info[1].Type != SEventInfo::VECTOR)
+    {
+      return;
+    }
+
     l_pRagdoll = GetEntity()->GetComponent<CComponentRagdoll>();
-    l_vSenderPos = ENTITY_MANAGER->GetEntity(_sEvent.Sender)->GetComponent<CComponentObject3D>()->GetPosition();
+    l_vSenderPos = Vect3f(_sEvent.Info[1].v.x,_sEvent.Info[1].v.y,_sEvent.Info[1].v.z);
+
+    //l_vSenderPos = ENTITY_MANAGER->GetEntity(_sEvent.Sender)->GetComponent<CComponentObject3D>()->GetPosition();
 
     if(l_pRagdoll)
     {

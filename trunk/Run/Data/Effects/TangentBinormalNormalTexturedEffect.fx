@@ -7,3 +7,7 @@
 technique TangentBinormalNormalTexturedTechnique {
 	TECHNIQUE_BODY
 }
+
+technique AlphaTangentBinormalNormalTexturedTechnique {
+	ALPHA_TECHNIQUE_BODY
+}

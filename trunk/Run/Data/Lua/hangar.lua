@@ -62,7 +62,22 @@ function hang_porta(_self, _player)
       end
     end
     
-    --TODO: obrir porta, finalitzar pantalla.
+    --obrir porta, finalitzar pantalla.
+    local door = EM:get_entity("hangar_puerta_hangar")
+    
+    if door then
+      --Missatge
+      local l_message = EM:get_event()
+
+      l_message.msg = Event.obrir
+      l_message.sender = _self:get_guid()
+      l_message.receiver = door:get_guid()
+      l_message.dispatch_time = 0
+      
+      EM:send_event(l_message)
+    else
+      log('Error: "hangar_puerta_hangar" no trobada.')
+    end
     
     _self:delete_component(BaseComponent.interactive)
   end

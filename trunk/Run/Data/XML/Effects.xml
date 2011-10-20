@@ -6,14 +6,14 @@
   <effect name="Textured" texture_mask="34" file="Data/Effects/NormalTexturedEffect.fx" technique="NormalTexturedTechnique" alpha_technique="NormalTexturedAlphaTechnique" />
   <effect name="TexturedEnvironment" texture_mask="546" file="Data/Effects/NormalTexturedEnvironmentEffect.fx" technique="NormalTexturedEnvironmentTechnique" alpha_technique="NormalTexturedEnvironmentAlphaTechnique" />
   <effect name="NormalmapEnvironment" texture_mask="550" file="Data/Effects/NormalmapTexturedEnvironmentEffect.fx" technique="NormalmapTexturedEnvironmentTechnique" alpha_technique="NormalmapTexturedEnvironmentAlphaTechnique" />
-  <effect name="Normalmap" texture_mask="38" file="Data/Effects/TangentBinormalNormalTexturedEffect.fx" technique="TangentBinormalNormalTexturedTechnique" />
-  <effect name="SpecularTextured" texture_mask="50" file="Data/Effects/SpecularTexturedEffect.fx" technique="SpecularTexturedTechnique" />
-  <effect name="SpecularNormalmapTextured" texture_mask="54" file="Data/Effects/SpecularNormalmapTexturedEffect.fx" technique="SpecularNormalmapTexturedTechnique" />
-  <effect name="SpecularLightmapTextured" texture_mask="58" file="Data/Effects/SpecularLightmapTexturedEffect.fx" technique="SpecularLightmapTexturedTechnique" />
-  <effect name="SpecularLightmapNormalmapTextured" texture_mask="62" file="Data/Effects/SpecularLightmapNormalmapTexturedEffect.fx" technique="SpecularLightmapNormalmapTexturedTechnique" />
-  <effect name="SpecularRadiosityNormalmapTexturedTechnique" texture_mask="182" file="Data/Effects/SpecularRadiosityNormalmapTexturedTechnique.fx" technique="SpecularRadiosityNormalmapTexturedTechnique" />
-  <effect name="Lightmap" texture_mask="42" file="Data/Effects/LightmapNormalTexturedEffect.fx" technique="LightmapTechnique" />
-  <effect name="LightmapNormalmap" texture_mask="46" file="Data/Effects/LightmapNormalmapNormalTexturedEffect.fx" technique="LightmapNormalmapTechnique" />
+  <effect name="Normalmap" texture_mask="38" file="Data/Effects/TangentBinormalNormalTexturedEffect.fx" technique="TangentBinormalNormalTexturedTechnique" alpha_technique="AlphaTangentBinormalNormalTexturedTechnique" />
+  <effect name="SpecularTextured" texture_mask="50" file="Data/Effects/SpecularTexturedEffect.fx" technique="SpecularTexturedTechnique" alpha_technique="AlphaSpecularTexturedTechnique"/>
+  <effect name="SpecularNormalmapTextured" texture_mask="54" file="Data/Effects/SpecularNormalmapTexturedEffect.fx" technique="SpecularNormalmapTexturedTechnique" alpha_technique="AlphaSpecularNormalmapTexturedTechnique" />
+  <effect name="SpecularLightmapTextured" texture_mask="58" file="Data/Effects/SpecularLightmapTexturedEffect.fx" technique="SpecularLightmapTexturedTechnique" alpha_technique="AlphaSpecularLightmapNormalmapTexturedTechnique" />
+  <effect name="SpecularLightmapNormalmapTextured" texture_mask="62" file="Data/Effects/SpecularLightmapNormalmapTexturedEffect.fx" technique="SpecularLightmapNormalmapTexturedTechnique" alpha_technique="SpecularLightmapNormalmapTexturedAlphaTechnique"/>
+  <effect name="SpecularRadiosityNormalmapTexturedTechnique" texture_mask="182" file="Data/Effects/SpecularRadiosityNormalmapTexturedTechnique.fx" technique="SpecularRadiosityNormalmapTexturedTechnique" alpha_technique="SpecularRadiosityNormalmapTexturedAlphaTechnique"/>
+  <effect name="Lightmap" texture_mask="42" file="Data/Effects/LightmapNormalTexturedEffect.fx" technique="LightmapTechnique" alpha_technique="AlphaLightmapTechnique"/>
+  <effect name="LightmapNormalmap" texture_mask="46" file="Data/Effects/LightmapNormalmapNormalTexturedEffect.fx" technique="LightmapNormalmapTechnique" alpha_technique="AlphaLightmapNormalmapTechnique" />
   <effect name="RadiosityNormalmap" texture_mask="166" file="Data/Effects/RadiosityNormalMap.fx" technique="RadiosityNormalmapTechnique" alpha_technique="RadiosityNormalmapAlphaTechnique"/>
   <effect name="White" texture_mask="0" file="Data/Effects/WhiteEffect.fx" technique="WhiteTechnique" instanced_technique="WhiteInstancedTechnique" />
   <effect name="No" texture_mask="0" file="Data/Effects/NoEffect.fx" technique="NoTechnique" />

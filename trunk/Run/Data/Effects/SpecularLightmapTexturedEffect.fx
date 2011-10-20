@@ -9,3 +9,6 @@
 technique SpecularLightmapNormalmapTexturedTechnique {
 	TECHNIQUE_BODY
 }
+technique AlphaSpecularLightmapNormalmapTexturedTechnique {
+	ALPHA_TECHNIQUE_BODY
+}

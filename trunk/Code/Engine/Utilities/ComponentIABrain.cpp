@@ -180,8 +180,15 @@ void CComponentIABrain::ReceiveForce(SEvent _sEvent)
 
   if(_sEvent.Msg == SEvent::REBRE_FORCE)
   {
+    if(_sEvent.Info[1].Type != SEventInfo::VECTOR)
+    {
+      return;
+    }
+
     l_pRagdoll = GetEntity()->GetComponent<CComponentRagdoll>();
-    l_vSenderPos = ENTITY_MANAGER->GetEntity(_sEvent.Sender)->GetComponent<CComponentObject3D>()->GetPosition();
+    l_vSenderPos = Vect3f(_sEvent.Info[1].v.x,_sEvent.Info[1].v.y,_sEvent.Info[1].v.z);
+
+    //l_vSenderPos = ENTITY_MANAGER->GetEntity(_sEvent.Sender)->GetComponent<CComponentObject3D>()->GetPosition();
 
     if(l_pRagdoll)
     {

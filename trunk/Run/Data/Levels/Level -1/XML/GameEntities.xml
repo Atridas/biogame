@@ -206,7 +206,7 @@
     <RenderableObject animated="false" name="lvl1_Porta_planta-1_02" />
   </Entity>
   <Entity name="lvl1_key_blue">
-    <Object3D position="-31.6466 1.48068 0.266254" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-30.9871 1.0 0.191614" yaw="90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_key_blue" />
     <Trigger shape="box" size="0.166803 0.862473 0.582663" collision_group="pickup" onEnter="get_key_blue" />
     <Rotative yaw="0.5" />
@@ -1226,6 +1226,70 @@
     <Object3D position="20.1025 4.30009 18.6636" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Plane24" />
   </Entity>
+  <Entity name="lvl1_fluorescente_ences14">
+    <Object3D position="37.1048 -5.42611 -23.7275" yaw="45.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_florescent_ences" />
+  </Entity>
+  <Entity name="lvl1_fluorescente_ences15">
+    <Object3D position="27.2177 -5.42611 -23.7275" yaw="45.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_florescent_ences" />
+  </Entity>
+  <Entity name="lvl1_fluorescente_ences16">
+    <Object3D position="32.3738 -5.42611 -28.5894" yaw="45.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_florescent_ences" />
+  </Entity>
+  <Entity name="lvl1_fluorescente_ences17">
+    <Object3D position="27.2863 -5.42611 -28.5894" yaw="45.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_florescent_ences" />
+  </Entity>
+  <Entity name="lvl1_fluorescente_ences18">
+    <Object3D position="27.2863 -5.42611 -33.5877" yaw="45.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_florescent_ences" />
+  </Entity>
+  <Entity name="lvl1_fluorescente_ences19">
+    <Object3D position="32.3741 -5.42611 -33.5877" yaw="45.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_florescent_ences" />
+  </Entity>
+  <Entity name="lvl1_fluorescente_ences20">
+    <Object3D position="37.137 -5.42611 -33.5877" yaw="45.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_florescent_ences" />
+  </Entity>
+  <Entity name="lvl1_fluorescente_ences21">
+    <Object3D position="37.137 -5.42611 -38.5206" yaw="45.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_florescent_ences" />
+  </Entity>
+  <Entity name="lvl1_fluorescente_ences22">
+    <Object3D position="27.0028 -5.42611 -38.5206" yaw="45.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_florescent_ences" />
+  </Entity>
+  <Entity name="lvl1_fluorescente_apagat05">
+    <Object3D position="32.4109 -5.40069 -23.6298" yaw="45.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_florescent_apagat" />
+  </Entity>
+  <Entity name="lvl1_fluorescente_apagat06">
+    <Object3D position="37.0853 -5.40069 -28.5481" yaw="45.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_florescent_apagat" />
+  </Entity>
+  <Entity name="lvl1_fluorescente_apagat07">
+    <Object3D position="32.1827 -5.40069 -38.5325" yaw="45.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_florescent_apagat" />
+  </Entity>
+  <Entity name="lvl1_Plane26">
+    <Object3D position="22.661 4.45118 16.1159" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_Plane26" />
+  </Entity>
+  <Entity name="lvl1_Plane27">
+    <Object3D position="17.2815 4.45118 21.4988" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_Plane27" />
+  </Entity>
+  <Entity name="lvl1_Plane28">
+    <Object3D position="35.9561 4.45118 32.2156" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_Plane28" />
+  </Entity>
+  <Entity name="lvl1_Plane29">
+    <Object3D position="41.3357 4.45118 26.8327" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_Plane29" />
+  </Entity>
   <Entity name="lvl1_fluorescente_ences">
     <Object3D position="16.3098 4.34961 36.8101" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_florescent_ences" />
@@ -1376,6 +1440,7 @@
   <Entity name="lvl1_porta4">
     <Object3D position="25.8922 1.36475 38.8088" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_porta4" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_porta2">
     <Object3D position="27.9357 1.36474 37.5882" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -1470,18 +1535,6 @@
   <Entity name="lvl1_Plane18">
     <Object3D position="25.8772 5.02182 42.3172" yaw="-5.00896e-006" pitch="-5.00896e-006" roll="-5.00896e-006" />
     <RenderableObject animated="false" name="lvl1_Plane18" />
-  </Entity>
-  <Entity name="lvl1_LAVABO">
-    <Object3D position="26.8734 0.0 40.7155" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl1_LAVABO" />
-  </Entity>
-  <Entity name="lvl1_LAVABO01">
-    <Object3D position="27.8598 0.0 39.7292" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl1_LAVABO01" />
-  </Entity>
-  <Entity name="lvl1_LAVABO02">
-    <Object3D position="28.941 0.0 38.648" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl1_LAVABO02" />
   </Entity>
   <Entity name="lvl1_LAVABO03">
     <Object3D position="30.0508 0.0 37.5382" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -1605,10 +1658,22 @@
     <RenderableObject animated="false" name="lvl1_taquilla01" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
+  <Entity name="lvl1_LAVABO04">
+    <Object3D position="28.9596 0.0 38.6612" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_LAVABO04" />
+  </Entity>
+  <Entity name="lvl1_LAVABO05">
+    <Object3D position="27.8955 0.0 39.7163" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_LAVABO05" />
+  </Entity>
+  <Entity name="lvl1_LAVABO06">
+    <Object3D position="26.8019 0.0 40.7699" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_LAVABO06" />
+  </Entity>
   <Entity name="lvl1_key_yellow">
-    <Object3D position="13.1035 1.39046 46.5578" yaw="130.0" pitch="0.0" roll="0.0" />
+    <Object3D position="12.6652 1.09778 46.5314" yaw="-45.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_key_yellow" />
-    <Trigger shape="box" size="0.502306 0.862473 0.553562" collision_group="pickup" onEnter="get_key_yellow" />
+    <Trigger shape="box" size="0.529952 0.862473 0.529953" collision_group="pickup" onEnter="get_key_yellow" />
     <Rotative yaw="0.5" />
   </Entity>
   <Entity name="lvl1_escalas">
@@ -1712,14 +1777,6 @@
     <Object3D position="17.2005 0.52294 1.53829" yaw="50.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Caixa_estatica_petita41" />
     <PhysXMesh density="0" collision_group="escenari" />
-  </Entity>
-  <Entity name="lvl1_aguanta_llums28">
-    <Object3D position="-10.7429 3.0733 -2.07656" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl1_aguanta_llums28" />
-  </Entity>
-  <Entity name="lvl1_aguanta_llums29">
-    <Object3D position="-17.6091 3.0733 -2.07656" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl1_aguanta_llums29" />
   </Entity>
   <Entity name="lvl1_aguanta_llums30">
     <Object3D position="-24.4806 3.0733 -2.07656" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -2839,7 +2896,7 @@
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_key_purple">
-    <Object3D position="27.8712 -8.52869 -38.422" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="28.128 -8.29333 -38.4461" yaw="90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_key_purple" />
     <Trigger shape="box" size="0.166803 0.862473 0.582664" collision_group="pickup" onEnter="get_key_purple" />
     <Rotative yaw="0.5" />
@@ -2901,6 +2958,256 @@
     <Object3D position="5.22305 1.30378 -5.22712" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_porta09" />
     <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="lvl1_grenade">
+    <Object3D position="-27.3665 1.47331 0.143002" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="granada" />
+    <Trigger shape="box" size="1.05052 0.399226 1.05052" collision_group="pickup" onEnter="activate_grenades" />
+    <Rotative yaw="0.5" />
+  </Entity>
+  <Entity name="lvl2_lab_tub_Gros">
+    <Object3D position="-4.36474 3.66629 10.162" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_lab_tub_Gros" />
+  </Entity>
+  <Entity name="tub_gros">
+    <Object3D position="-6.407 2.5132 11.5058" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_gros" />
+  </Entity>
+  <Entity name="tub_gros01">
+    <Object3D position="-8.01759 2.5132 3.20359" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_gros01" />
+  </Entity>
+  <Entity name="tub_gros02">
+    <Object3D position="-3.0768 2.5132 8.22775" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_gros02" />
+  </Entity>
+  <Entity name="tub_rodo">
+    <Object3D position="-8.94648 3.3259 5.60317" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_rodo" />
+  </Entity>
+  <Entity name="lvl2_lab_tub_Gros03">
+    <Object3D position="-10.1397 3.65454 4.53416" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_lab_tub_Gros03" />
+  </Entity>
+  <Entity name="tub_rodo01">
+    <Object3D position="-5.58455 3.49985 9.40317" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_rodo01" />
+  </Entity>
+  <Entity name="tub_rodo02">
+    <Object3D position="-5.45997 3.34149 9.27859" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_rodo02" />
+  </Entity>
+  <Entity name="tub_rodo03">
+    <Object3D position="-4.71092 3.49985 8.52954" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_rodo03" />
+  </Entity>
+  <Entity name="tub_rodo04">
+    <Object3D position="-4.95459 3.2345 8.77321" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_rodo04" />
+  </Entity>
+  <Entity name="tub_rodo05">
+    <Object3D position="-5.07796 3.42133 8.89658" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_rodo05" />
+  </Entity>
+  <Entity name="tub_rodo06">
+    <Object3D position="-6.46964 3.42133 10.2883" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_rodo06" />
+  </Entity>
+  <Entity name="tub_rodo07">
+    <Object3D position="-6.79406 3.49985 10.6127" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_rodo07" />
+  </Entity>
+  <Entity name="tub_rodo08">
+    <Object3D position="-6.08452 3.34149 9.90314" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_rodo08" />
+  </Entity>
+  <Entity name="tub_rodo09">
+    <Object3D position="-6.56183 3.42133 10.3804" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_rodo09" />
+  </Entity>
+  <Entity name="tub_rodo10">
+    <Object3D position="-4.34254 3.49985 8.16116" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_rodo10" />
+  </Entity>
+  <Entity name="tub_rodo11">
+    <Object3D position="-5.81391 1.31152 11.1787" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_rodo11" />
+  </Entity>
+  <Entity name="tub_rodo12">
+    <Object3D position="-7.08268 1.31152 11.1605" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_rodo12" />
+  </Entity>
+  <Entity name="tub_rodo13">
+    <Object3D position="-11.3152 1.31152 7.16317" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_rodo13" />
+  </Entity>
+  <Entity name="tub_rodo14">
+    <Object3D position="-8.82757 1.31152 3.46051" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_rodo14" />
+  </Entity>
+  <Entity name="tub_rodo15">
+    <Object3D position="-7.48216 1.31152 3.37582" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_rodo15" />
+  </Entity>
+  <Entity name="tub_rodo16">
+    <Object3D position="-10.129 2.8758 5.103" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_rodo16" />
+  </Entity>
+  <Entity name="tub_rodo17">
+    <Object3D position="-4.91602 2.89518 9.78454" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_rodo17" />
+  </Entity>
+  <Entity name="tubs6">
+    <Object3D position="-6.51422 3.76524 8.04476" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tubs6" />
+  </Entity>
+  <Entity name="tubs07">
+    <Object3D position="-8.3594 3.8782 6.19958" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tubs07" />
+  </Entity>
+  <Entity name="tubs08">
+    <Object3D position="-5.46127 3.8782 9.09771" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tubs08" />
+  </Entity>
+  <Entity name="tubs09">
+    <Object3D position="-9.49325 3.76524 5.06573" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tubs09" />
+  </Entity>
+  <Entity name="tubs10">
+    <Object3D position="-5.66577 3.76524 8.89321" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tubs10" />
+  </Entity>
+  <Entity name="tub_rodo18">
+    <Object3D position="-5.86431 3.5148 8.68534" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_rodo18" />
+  </Entity>
+  <Entity name="roda">
+    <Object3D position="-6.46206 1.23845 11.0102" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="roda" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="roda01">
+    <Object3D position="-3.567 1.23845 7.71096" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="roda01" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="roda02">
+    <Object3D position="-8.14252 0.614057 3.51779" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="roda02" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="roda05">
+    <Object3D position="-8.14252 3.35893 3.51779" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="roda05" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="lvl2_lab_tub_Gros04">
+    <Object3D position="-11.5152 1.04761 5.98491" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_lab_tub_Gros04" />
+  </Entity>
+  <Entity name="tub_rodo19">
+    <Object3D position="-11.907 1.31152 6.55584" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="tub_rodo19" />
+  </Entity>
+  <Entity name="visagra01">
+    <Object3D position="-0.00124884 0.0 7.36992" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="visagra01" />
+  </Entity>
+  <Entity name="visagra02">
+    <Object3D position="-0.00124884 0.0 -7.40121" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="visagra02" />
+  </Entity>
+  <Entity name="visagra03">
+    <Object3D position="-7.38374 0.0 -0.0833267" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="visagra03" />
+  </Entity>
+  <Entity name="visagra04">
+    <Object3D position="7.36695 0.0 -0.083326" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="visagra04" />
+  </Entity>
+  <Entity name="visagra05">
+    <Object3D position="5.25121 0.0 5.21667" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="visagra05" />
+  </Entity>
+  <Entity name="visagra00">
+    <Object3D position="-5.24502 0.0 5.21747" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="visagra00" />
+  </Entity>
+  <Entity name="visagra06">
+    <Object3D position="19.4994 0.0 19.2622" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="visagra06" />
+  </Entity>
+  <Entity name="visagra07">
+    <Object3D position="-27.4114 0.0 -0.0833276" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="visagra07" />
+  </Entity>
+  <Entity name="visagra08">
+    <Object3D position="33.6646 -9.99438 -20.7082" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="visagra08" />
+  </Entity>
+  <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum01">
+    <Object3D position="7.3167 3.38817 -0.0326042" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum01" />
+  </Entity>
+  <Entity name="carcasa">
+    <Object3D position="7.54248 1.51153 -0.0287724" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="carcasa" />
+  </Entity>
+  <Entity name="carcasa01">
+    <Object3D position="-7.54328 1.51153 -0.0362644" yaw="180.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="carcasa01" />
+  </Entity>
+  <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum02">
+    <Object3D position="-7.3175 3.38817 -0.0324326" yaw="180.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum02" />
+  </Entity>
+  <Entity name="carcasa02">
+    <Object3D position="0.0419371 1.51153 -7.54283" yaw="-90.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="carcasa02" />
+  </Entity>
+  <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum03">
+    <Object3D position="0.0381052 3.38817 -7.31705" yaw="-90.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum03" />
+  </Entity>
+  <Entity name="carcasa03">
+    <Object3D position="0.0344451 1.51153 7.54377" yaw="90.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="carcasa03" />
+  </Entity>
+  <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum04">
+    <Object3D position="0.0382769 3.38817 7.31798" yaw="90.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum04" />
+  </Entity>
+  <Entity name="carcasa04">
+    <Object3D position="-5.33674 1.51153 5.33188" yaw="135.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="carcasa04" />
+  </Entity>
+  <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum05">
+    <Object3D position="-5.17438 3.38817 5.17493" yaw="135.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum05" />
+  </Entity>
+  <Entity name="carcasa05">
+    <Object3D position="5.31478 1.51153 -5.34791" yaw="-45.0001" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="carcasa05" />
+  </Entity>
+  <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum06">
+    <Object3D position="5.15242 3.38817 -5.19097" yaw="-45.0001" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum06" />
+  </Entity>
+  <Entity name="carcasa06">
+    <Object3D position="-5.34798 1.51153 -5.3125" yaw="-135.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="carcasa06" />
+  </Entity>
+  <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum07">
+    <Object3D position="-5.19104 3.38817 -5.15014" yaw="-135.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum07" />
+  </Entity>
+  <Entity name="carcasa07">
+    <Object3D position="5.3122 1.51153 5.35638" yaw="45.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="carcasa07" />
+  </Entity>
+  <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum08">
+    <Object3D position="5.15525 3.38817 5.19402" yaw="45.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum08" />
   </Entity>
   <Entity name="lvl1_door04">
     <Object3D position="7.3721 1.25049 0.010658" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -3319,12 +3626,6 @@
   <Entity name="lvl1_force_billboard">
     <Object3D position="30.6931 -8.35435 -38.4911" yaw="0.0" pitch="0.0" roll="0.0" />
     <Billboard core="dont use the force" />
-  </Entity>
-  <Entity name="lvl1_grenade">
-    <Object3D position="-27.3665 1.47331 0.143002" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="granada" />
-    <Trigger shape="box" size="1.05052 0.399226 1.05052" collision_group="pickup" onEnter="activate_grenades" />
-    <Rotative yaw="0.5" />
   </Entity>
   <Entity name="lvl1_trigger_force">
     <Object3D position="32.07 -7.55369 -38.9208" yaw="0.0" pitch="0.0" roll="0.0" />

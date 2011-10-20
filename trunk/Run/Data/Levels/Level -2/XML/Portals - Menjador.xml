@@ -3,7 +3,7 @@
   <Rooms>
     <Room name="Menjador">
       <Boundings>
-        <Box name="Menjador Bounding" size="38.327 9.08467 25.5518" position="13.7585 1.51416 26.6763" yaw="-25.9482" pitch="0.0" roll="0.0" />
+        <Box name="Menjador Bounding" size="38.327 15.508 27.883" position="13.7585 5.45615 26.6763" yaw="-25.9482" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
         <GameObject name="lvl2_menj_Plats_physc" />
@@ -296,6 +296,7 @@
         <GameObject name="lvl2_menj_light35" />
         <GameObject name="lvl2_menj_light36.Target" />
         <GameObject name="lvl2_menj_light36" />
+        <GameObject name="Plataforma" />
       </Objects>
     </Room>
   </Rooms>
