@@ -34,6 +34,7 @@ extern "C"
 #include "PhysicsManager.h"
 #include "LevelChanger.h"
 #include "Renderer.h"
+#include "AnimatedModelManager.h"
 
 #include "Utils/Object3D.h"
 #include "Utils/BaseControl.h"
@@ -238,6 +239,11 @@ void SetRenderPath(const string& _szRenderPath)
   CORE->GetRenderer()->SetUniqueRenderPath(_szRenderPath);
 }
 
+void ReloadAnimationStates()
+{
+  CORE->GetAnimatedModelManager()->ReloadAnimaionStates();
+}
+
 void CScriptManager::RegisterGUI() {
   module(m_pLS)
     [
@@ -363,6 +369,8 @@ void CScriptManager::RegisterLUAFunctions()
     ,def("set_new_level", &SetNewLevel)
     //activar un renderpath, desactivant la resta
     ,def("set_render_path", &SetRenderPath)
+    //recarregar els animation states
+    ,def("reload_animation_states", &ReloadAnimationStates)
   ];
 
   //Vect3f

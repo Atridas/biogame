@@ -821,13 +821,6 @@ State_Player_Cobertura_Baixa_Apuntar['Update'] = function(_jugador, _dt)
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Baixa')
     return
   end   
-    
-  if ACTION_MANAGER:is_action_active('Shoot') then
-    if player_controller:shoot() then
-      animation:play(Player_Constants["Disparar"], 0.3, 1.0, false)
-      SOUND:play_sample(Player_Constants["So disparar"])
-    end
-  end
   
   if ACTION_MANAGER:is_action_active('Grenade') then
     if player_controller:shoot_grenade(Player_Constants["Temps Grenade"]) then
@@ -849,8 +842,18 @@ State_Player_Cobertura_Baixa_Apuntar['Update'] = function(_jugador, _dt)
   if aim_angle < Player_Constants["Min Aim Angle Covertura"] then
     aim_angle = Player_Constants["Min Aim Angle Covertura"]
   end
+  
   animation:set_animation_parameter(aim_angle)
   animation:set_animation_state('aim')
+  
+  if ACTION_MANAGER:is_action_active('Shoot') then
+    if player_controller:shoot() then
+      --animation:play(Player_Constants["Disparar"], 0.3, 1.0, false)
+      animation:play('shootUp', 0.5, aim_angle, false)
+      animation:play('shootDown', 0.5, 1-aim_angle, false)
+      SOUND:play_sample(Player_Constants["So disparar"])
+    end
+  end
   
   --local player_controller = _jugador:get_component(BaseComponent.player_controller)
 

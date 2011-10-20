@@ -71,6 +71,10 @@ public:
 
   //CAnimatedInstanceModel* GetResourceByID(int _ID) {return m_Resources[_ID]->second;};
   
+  
+  void ReloadAnimaionStates();
+
+
 private:
   /**
    * Mètode per obtenir un AnimatedCoreModel.

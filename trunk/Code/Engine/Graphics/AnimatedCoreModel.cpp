@@ -38,16 +38,16 @@ void CAnimatedCoreModel::Release()
   m_vMaterials.clear();
 }
 
-bool LoadAnimationFromState(CXMLTreeNode &_xmlAnimation, CalCoreModel* _pCalCoreModel, CAnimatedCoreModel::SAnimation &Animation_)
+bool CAnimatedCoreModel::LoadAnimationFromState(CXMLTreeNode &_xmlAnimation, CAnimatedCoreModel::SAnimation &Animation_)
 {
   assert(strcmp(_xmlAnimation.GetName(), "cycle") == 0 || strcmp(_xmlAnimation.GetName(), "action") == 0);
 
   string l_szCycleName = _xmlAnimation.GetPszISOProperty("name");
-  Animation_.iId = _pCalCoreModel->getCoreAnimationId(l_szCycleName);
+  Animation_.iId = m_pCalCoreModel->getCoreAnimationId(l_szCycleName);
 
   if(Animation_.iId < 0)
   {
-    LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load Cicle \"%s\" no existeix", l_szCycleName.c_str());
+    LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::LoadAnimationFromState Cicle \"%s\" no existeix", l_szCycleName.c_str());
     return false;
   }
 
@@ -59,7 +59,7 @@ bool LoadAnimationFromState(CXMLTreeNode &_xmlAnimation, CalCoreModel* _pCalCore
 
   if(Animation_.bFromParameter && Animation_.bFromComplementaryParameter)
   {
-    LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load Cicle \"%s\" te \"weight_from_parameter\" i \"weight_from_complementary_parameter\" actius a la vegada", l_szCycleName.c_str());
+    LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::LoadAnimationFromState Cicle \"%s\" te \"weight_from_parameter\" i \"weight_from_complementary_parameter\" actius a la vegada", l_szCycleName.c_str());
     return false;
   }
   else if(Animation_.bFromParameter || Animation_.bFromComplementaryParameter)
@@ -70,11 +70,11 @@ bool LoadAnimationFromState(CXMLTreeNode &_xmlAnimation, CalCoreModel* _pCalCore
   return true;
 }
 
-bool LoadActionFromState(CXMLTreeNode &_xmlAction, CalCoreModel* _pCalCoreModel, CAnimatedCoreModel::SAction &Action_)
+bool CAnimatedCoreModel::LoadActionFromState(CXMLTreeNode &_xmlAction, CAnimatedCoreModel::SAction &Action_)
 {
   assert(strcmp(_xmlAction.GetName(), "action") == 0);
 
-  if(!LoadAnimationFromState(_xmlAction, _pCalCoreModel, Action_))
+  if(!LoadAnimationFromState(_xmlAction, Action_))
     return false;
   
   Action_.bBlock   = _xmlAction.GetBoolProperty("block", false, false);
@@ -84,12 +84,12 @@ bool LoadActionFromState(CXMLTreeNode &_xmlAction, CalCoreModel* _pCalCoreModel,
 
   if(Action_.bBlock && Action_.bStop)
   {
-    LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load action can not block and stop");
+    LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::LoadActionFromState action can not block and stop");
   }
   return true;
 }
 
-bool LoadAnimationState(CXMLTreeNode &_xmlAnimationState, CalCoreModel* _pCalCoreModel, CAnimatedCoreModel::SAnimationState &AnimationState_)
+bool CAnimatedCoreModel::LoadAnimationState(CXMLTreeNode &_xmlAnimationState, CAnimatedCoreModel::SAnimationState &AnimationState_)
 {
   assert(strcmp(_xmlAnimationState.GetName(), "animation_state") == 0);
 
@@ -105,16 +105,16 @@ bool LoadAnimationState(CXMLTreeNode &_xmlAnimationState, CalCoreModel* _pCalCor
     {
       CAnimatedCoreModel::SCycle l_Cycle;
 
-      if(LoadAnimationFromState(l_xmlCycle, _pCalCoreModel, l_Cycle))
+      if(LoadAnimationFromState(l_xmlCycle, l_Cycle))
       {
         AnimationState_.Cycles.insert(l_Cycle);
       }
 
-    } else if (!l_xmlCycle.IsComment() || 
-                strcmp(l_xmlCycle.GetName(), "on_enter") == 0 ||
+    } else if (!l_xmlCycle.IsComment() && 
+                strcmp(l_xmlCycle.GetName(), "on_enter") == 0 &&
                 strcmp(l_xmlCycle.GetName(), "on_exit") == 0)
     {
-      LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load S'ha trobat un element desconegut \"%s\"", l_xmlCycle.GetName());
+      LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::LoadAnimationState S'ha trobat un element desconegut \"%s\"", l_xmlCycle.GetName());
     }
   }
   
@@ -131,14 +131,14 @@ bool LoadAnimationState(CXMLTreeNode &_xmlAnimationState, CalCoreModel* _pCalCor
         {
           CAnimatedCoreModel::SAction l_Action;
 
-          if(LoadActionFromState(l_xmlAction, _pCalCoreModel, l_Action))
+          if(LoadActionFromState(l_xmlAction, l_Action))
           {
             AnimationState_.OnEnter.insert(l_Action);
           }
 
         } else if (!l_xmlAction.IsComment())
         {
-          LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load S'ha trobat un element desconegut \"%s\"", l_xmlAction.GetName());
+          LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::LoadAnimationState S'ha trobat un element desconegut \"%s\"", l_xmlAction.GetName());
         }
       }
     }
@@ -156,14 +156,14 @@ bool LoadAnimationState(CXMLTreeNode &_xmlAnimationState, CalCoreModel* _pCalCor
         {
           CAnimatedCoreModel::SAction l_Action;
 
-          if(LoadActionFromState(l_xmlAction, _pCalCoreModel, l_Action))
+          if(LoadActionFromState(l_xmlAction, l_Action))
           {
             AnimationState_.OnExit.insert(l_Action);
           }
 
         } else if (!l_xmlAction.IsComment())
         {
-          LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load S'ha trobat un element desconegut \"%s\"", l_xmlAction.GetName());
+          LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::LoadAnimationState S'ha trobat un element desconegut \"%s\"", l_xmlAction.GetName());
         }
       }
     }
@@ -172,7 +172,7 @@ bool LoadAnimationState(CXMLTreeNode &_xmlAnimationState, CalCoreModel* _pCalCor
   return true;
 }
 
-bool LoadAnimationChange(CXMLTreeNode &_xmlAnimationChange, CalCoreModel* _pCalCoreModel, CAnimatedCoreModel::SAnimationChange &AnimationChange_)
+bool CAnimatedCoreModel::LoadAnimationChange(CXMLTreeNode &_xmlAnimationChange, CAnimatedCoreModel::SAnimationChange &AnimationChange_)
 {
   assert(strcmp(_xmlAnimationChange.GetName(), "animation_change") == 0);
 
@@ -186,7 +186,7 @@ bool LoadAnimationChange(CXMLTreeNode &_xmlAnimationChange, CalCoreModel* _pCalC
     {
       CAnimatedCoreModel::SAction l_Action;
 
-      if(LoadActionFromState(l_xmlAction, _pCalCoreModel, l_Action))
+      if(LoadActionFromState(l_xmlAction, l_Action))
       {
         AnimationChange_.Actions.insert(l_Action);
       }
@@ -356,60 +356,20 @@ bool CAnimatedCoreModel::Load(const std::string &_szPath)
       }
     }
     
+
+
+    CXMLTreeNode l_xmlAnimationStates = l_treeActor.GetChild("animation_states");
+    if(l_xmlAnimationStates.Exists())
     {
-      CXMLTreeNode l_xmlAnimationStates = l_treeActor.GetChild("animation_states");
-
-      if(l_xmlAnimationStates.Exists())
-      {
-        m_szDefaultAnimationState = l_xmlAnimationStates.GetPszISOProperty("default", "", false);
-        int l_iNumChild = l_xmlAnimationStates.GetNumChildren();
-        for(int i = 0; i < l_iNumChild; ++i)
-        {
-          CXMLTreeNode l_xmlAnimationState = l_xmlAnimationStates(i);
-          if(strcmp(l_xmlAnimationState.GetName(), "animation_state") == 0)
-          {
-            string l_szName = l_xmlAnimationState.GetPszISOProperty("name");
-            SAnimationState l_AnimationState;
-          
-            if(LoadAnimationState(l_xmlAnimationState, m_pCalCoreModel, l_AnimationState))
-            {
-              m_AnimationStates[l_szName] = l_AnimationState;
-            }
-
-          } else if (!l_xmlAnimationState.IsComment())
-          {
-            LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load S'ha trobat un element desconegut \"%s\"", l_xmlAnimationState.GetName());
-          }
-        }
-      }
+      LoadAnimationStates(l_xmlAnimationStates);
     }
+    
+    CXMLTreeNode l_xmlAnimationChanges = l_treeActor.GetChild("animation_changes");
+    if(l_xmlAnimationChanges.Exists())
     {
-      CXMLTreeNode l_xmlAnimationChanges = l_treeActor.GetChild("animation_changes");
-
-      if(l_xmlAnimationChanges.Exists())
-      {
-        int l_iNumChild = l_xmlAnimationChanges.GetNumChildren();
-        for(int i = 0; i < l_iNumChild; ++i)
-        {
-          CXMLTreeNode l_xmlAnimationChange = l_xmlAnimationChanges(i);
-          if(strcmp(l_xmlAnimationChange.GetName(), "animation_change") == 0)
-          {
-            string l_szFrom = l_xmlAnimationChange.GetPszISOProperty("from");
-            string l_szTo = l_xmlAnimationChange.GetPszISOProperty("to");
-            SAnimationChange l_AnimationChange;
-          
-            if(LoadAnimationChange(l_xmlAnimationChange, m_pCalCoreModel, l_AnimationChange))
-            {
-              m_AnimationChanges[l_szFrom][l_szTo] = l_AnimationChange;
-            }
-
-          } else if (!l_xmlAnimationChange.IsComment())
-          {
-            LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::Load S'ha trobat un element desconegut \"%s\"", l_xmlAnimationChange.GetName());
-          }
-        }
-      }
+      LoadAnimationChanges(l_xmlAnimationChanges);
     }
+
     if(!LoadMesh())
     {
       Release();
@@ -431,6 +391,76 @@ bool CAnimatedCoreModel::Load(const std::string &_szPath)
   return IsOk();
 }
 
+void CAnimatedCoreModel::ReloadAnimaionStates()
+{
+  CXMLTreeNode l_treeActor;
+  if(l_treeActor.LoadFile(m_szPath.c_str()))
+  {
+    LOGGER->AddNewLog(ELL_INFORMATION, "CAnimatedCoreModel::ReloadAnimaionStates Loading \"%s\"", m_szPath.c_str());
+    CXMLTreeNode l_xmlAnimationStates = l_treeActor.GetChild("animation_states");
+    if(l_xmlAnimationStates.Exists())
+    {
+      LoadAnimationStates(l_xmlAnimationStates);
+    }
+    
+    CXMLTreeNode l_xmlAnimationChanges = l_treeActor.GetChild("animation_changes");
+    if(l_xmlAnimationChanges.Exists())
+    {
+      LoadAnimationChanges(l_xmlAnimationChanges);
+    }
+  } else 
+  {
+    LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::ReloadAnimaionStates No s'ha trobat l'arxiu \"%s\"", m_szPath.c_str());
+  }
+}
+
+void CAnimatedCoreModel::LoadAnimationStates(CXMLTreeNode& _xmlAnimationStates)
+{
+  m_szDefaultAnimationState = _xmlAnimationStates.GetPszISOProperty("default", "", false);
+  int l_iNumChild = _xmlAnimationStates.GetNumChildren();
+  for(int i = 0; i < l_iNumChild; ++i)
+  {
+    CXMLTreeNode l_xmlAnimationState = _xmlAnimationStates(i);
+    if(strcmp(l_xmlAnimationState.GetName(), "animation_state") == 0)
+    {
+      string l_szName = l_xmlAnimationState.GetPszISOProperty("name");
+      SAnimationState l_AnimationState;
+          
+      if(LoadAnimationState(l_xmlAnimationState, l_AnimationState))
+      {
+        m_AnimationStates[l_szName] = l_AnimationState;
+      }
+
+    } else if (!l_xmlAnimationState.IsComment())
+    {
+      LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::LoadAnimationStates S'ha trobat un element desconegut \"%s\"", l_xmlAnimationState.GetName());
+    }
+  }
+}
+
+void CAnimatedCoreModel::LoadAnimationChanges(CXMLTreeNode& _xmlAnimationChanges)
+{
+  int l_iNumChild = _xmlAnimationChanges.GetNumChildren();
+  for(int i = 0; i < l_iNumChild; ++i)
+  {
+    CXMLTreeNode l_xmlAnimationChange = _xmlAnimationChanges(i);
+    if(strcmp(l_xmlAnimationChange.GetName(), "animation_change") == 0)
+    {
+      string l_szFrom = l_xmlAnimationChange.GetPszISOProperty("from");
+      string l_szTo = l_xmlAnimationChange.GetPszISOProperty("to");
+      SAnimationChange l_AnimationChange;
+          
+      if(LoadAnimationChange(l_xmlAnimationChange, l_AnimationChange))
+      {
+        m_AnimationChanges[l_szFrom][l_szTo] = l_AnimationChange;
+      }
+
+    } else if (!l_xmlAnimationChange.IsComment())
+    {
+      LOGGER->AddNewLog(ELL_WARNING, "CAnimatedCoreModel::LoadAnimationChanges S'ha trobat un element desconegut \"%s\"", l_xmlAnimationChange.GetName());
+    }
+  }
+}
 
 bool CAnimatedCoreModel::LoadMesh()
 {
