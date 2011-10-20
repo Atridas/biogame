@@ -43,6 +43,13 @@
 #include "Renderer.h"
 #include "ShadowMapPreRendererStep.h"
 
+
+#include "SphereCamera.h"
+CObject3D     g_CameraPos;
+CCamera*      g_GlobalCamera;
+
+#define FES_UN_COLLO_DE_LLUMS
+
 bool CEntityProcess::Init()
 {
   //Mr.Merda Portàtil.
@@ -75,7 +82,10 @@ bool CEntityProcess::Init()
 
   // llum ----------------------------------------
   
+#ifdef FES_UN_COLLO_DE_LLUMS
+
   for(int i = -10; i <= 10; i++ )
+  {
     for(int j = -10; j <= 10; j++ )
     {
       COmniLight* l_mOL = CORE->GetLightManager()->CreateOmniLight(string("omni").append(i+10,'i').append(j+10,'j'),
@@ -85,7 +95,10 @@ bool CEntityProcess::Init()
                                                                       3.0f);
       l_mOL->SetActive(true);
     }
-  
+  }
+
+#endif
+
   //CSpotLight* l_pSpotLight = CORE->GetLightManager()->CreateSpotLight("FreeModeLight",
   //                                                                    Vect3f(0.0f,15.0f,0.0f),
   //                                                                    Vect3f(0.3f,-1.0f,0.0f),
@@ -123,6 +136,17 @@ bool CEntityProcess::Init()
 
   CORE->GetIAManager()->CompleteGraph();
 
+
+  g_CameraPos.SetPosition(Vect3f(0,5,0));
+  g_GlobalCamera = new CSphereCamera(
+                            .1f,
+                            100,
+                            55.0f * FLOAT_PI_VALUE/180.0f,
+                            ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
+                            &g_CameraPos,
+                            m_pPlayerEntity->GetComponent<CComponentObject3D>()
+                                    );
+
   SetOk(true);
   return IsOk();
 }
@@ -133,6 +157,7 @@ void CEntityProcess::Release()
 
   CHECKED_DELETE(m_pPActorPlane)
   CHECKED_DELETE(m_pUserData)
+  CHECKED_DELETE(g_GlobalCamera)
 }
 
 void CEntityProcess::Update(float _fElapsedTime)
@@ -220,37 +245,17 @@ void CEntityProcess::RenderINFO(CRenderManager* _pRM)
 
 bool CEntityProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _pcAction)
 {
-  if(strcmp(_pcAction, "Hangar") == 0)
+  if(strcmp(_pcAction, "Howto") == 0)
   {
-    //CORE->SetLoadLevel("Hangar");
-    CORE->GetLevelChanger()->SetNewLevel("Hangar");
-
-    //CORE->GetEntityManager()->Done();
-    //CORE->GetPortalManager()->Done();
-    //CORE->GetRenderableObjectsManager()->Done();
-    //CORE->GetStaticMeshManager()->Done();
-    //CORE->GetIAManager()->Done();
-    //
-    //string m_szPhysxFile = CORE->GetPhysicsManager()->GetConfigFileName();
-    //CORE->GetPhysicsManager()->Done();
-    //
-    //CORE->GetStaticMeshManager()->Load("Data/XML/StaticMeshes.xml");
-    //CORE->GetStaticMeshManager()->Load("Data/Levels/Hangar/XML/StaticMeshes.xml");
-    //CORE->GetRenderableObjectsManager()->Load("Data/Levels/Hangar/XML/RenderableObjects.xml");
-    //CORE->GetPortalManager()->Init("Data/Levels/Hangar/XML/Level.xml");
-    //CORE->GetPhysicsManager()->Init(m_szPhysxFile);
-    //if(CORE->GetPhysicsManager()->IsOk())
-    //{
-    //  CORE->GetPhysicsManager()->SetTriggerReport  (CORE->GetPhysicTriggerReport());
-    //  CORE->GetPhysicsManager()->SetCollisionReport(CORE->GetPhysicCollisionReport());
-    //}
-    //CORE->GetIAManager()->Init();
-    //CORE->GetEntityManager()->LoadEntitiesFromXML("Data/Levels/Hangar/XML/GameEntities.xml");
-    //
-    //CORE->GetIAManager()->CompleteGraph();
-    //
-    //m_pPlayerEntity = CORE->GetEntityManager()->GetEntity("Player");
-    //m_pCamera = m_pPlayerEntity->GetComponent<CComponent3rdPSCamera>()->GetCamera();
+    if(CORE->GetRenderer()->GetActiveCamera())
+    {
+      CORE->GetRenderer()->SetActiveCamera(0);
+    }
+    else
+    {
+      CORE->GetRenderer()->SetActiveCamera(g_GlobalCamera);
+    }
+    return true;
   }
   return false;
 }

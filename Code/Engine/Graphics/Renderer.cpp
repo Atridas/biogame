@@ -345,7 +345,12 @@ void CRenderer::Render(CProcess* _pProcess)
   CRenderManager* l_pRM = RENDER_MANAGER;
   CEffectManager* l_pEM = CORE->GetEffectManager();
 
-  m_pCamera = _pProcess->GetCamera();
+  if(m_pActiveCamera)
+  {
+    m_pCamera = m_pActiveCamera;
+  } else {
+    m_pCamera = _pProcess->GetCamera();
+  }
 
   l_pRM->BeginRendering();
 
