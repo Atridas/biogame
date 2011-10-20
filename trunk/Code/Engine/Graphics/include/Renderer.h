@@ -26,7 +26,7 @@ class CRenderer :
 
 public:
 
-  CRenderer() : m_szFileName(""), m_bRenderPathsChanged(false) {};
+  CRenderer() : m_szFileName(""), m_bRenderPathsChanged(false),m_pActiveCamera(0) {};
   ~CRenderer() {Done();};
 
   bool Init(const string& _szFileName);
@@ -37,6 +37,9 @@ public:
   void DeactivateRenderPath(const string& _szRenderPath);
   void SetUniqueRenderPath(const string&  _szRenderPath);
   void GetActiveRenderPaths(set<string>& _RenderPaths) const;
+  
+  void     SetActiveCamera(CCamera * _pActiveCamera) { m_pActiveCamera = _pActiveCamera; };
+  CCamera* GetActiveCamera() const                   { return m_pActiveCamera; };
 
   void Render(CProcess* _pProcess);
   void Update(float _fDeltaTime);
@@ -68,7 +71,7 @@ private:
 
   string m_szFileName;
 
-  CCamera* m_pCamera;
+  CCamera* m_pCamera, *m_pActiveCamera;
 
   map<string,CRenderTarget*> m_mapRenderTargets;
   string m_szDefaultRenderTarget;

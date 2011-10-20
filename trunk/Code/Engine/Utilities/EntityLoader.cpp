@@ -42,6 +42,7 @@
 #include "ComponentEnergy.h"
 #include "ComponentDelayedScript.h"
 
+#include "Renderer.h"
 #include "RenderableObject.h"
 #include "PhysicsManager.h"
 
@@ -683,8 +684,11 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
   l_pComponentPlayerController->m_bGrenadeActive = _bGrenadeActive;
   l_pComponentPlayerController->m_bShootActive   = _bShootActive;
   
-  CComponent3rdPSCamera::AddToEntity(l_pPlayer, 0.55f, 0.85f, 1.4f);
+  CComponent3rdPSCamera *l_pCompCamera = CComponent3rdPSCamera::AddToEntity(l_pPlayer, 0.55f, 0.85f, 1.4f);
   //CComponent3rdPSCamera::AddToEntity(l_pPlayer, 0.55f, 0.55f, 1.9f);
+  //CCamera* l_pCamera = l_pCompCamera->GetCamera();
+  //CORE->GetRenderer()->SetActiveCamera(l_pCamera);
+
 
   CComponentPhysXController::AddToEntity(l_pPlayer, l_fCapsuleRadius, l_fCapsuleHeigh, 45.0f, l_fCapsuleSkin, 0.5f, ECG_PERSONATGE );
   
