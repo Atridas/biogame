@@ -43,7 +43,7 @@
 	<mesh name="lvl2_menj_Papereras04" path="Data/Meshes/lvl2_menj_Papereras04.mesh" max="15.9729 0.217722 7.98596" min="15.3489 -0.652337 7.46101" />
 	<mesh name="lvl2_menj_Estractor" path="Data/Meshes/lvl2_menj_Estractor.mesh" max="3.12016 0.516202 2.1283" min="-3.12016 -0.516202 -2.1283" />
 	<mesh name="lvl2_menj_Altaveus03" path="Data/Meshes/lvl2_menj_Altaveus03.mesh" max="0.32814 0.201353 0.262192" min="-0.328138 -0.201353 -0.26219" />
-	<mesh name="lvl2_menj_Parets_menjador" path="Data/Meshes/lvl2_menj_Parets_menjador.mesh" max="20.4448 1.75079 18.6342" min="-20.4448 -1.75426 -18.6342" />
+	<mesh name="lvl2_menj_Parets_menjador" path="Data/Meshes/lvl2_menj_Parets_menjador.mesh" max="20.4448 10.5174 18.6342" min="-20.3361 -1.75426 -18.6342" />
 	<mesh name="lvl2_menj_cartell01" path="Data/Meshes/lvl2_menj_cartell01.mesh" max="1.06664 0.665216 2.16039" min="-1.06664 -0.665216 -2.16039" />
 	<mesh name="lvl2_menj_cartell02" path="Data/Meshes/lvl2_menj_cartell02.mesh" max="3.65077 0.635811 1.7819" min="-3.65077 -0.635812 -1.78189" />
 	<mesh name="lvl2_menj_cartell03" path="Data/Meshes/lvl2_menj_cartell03.mesh" max="0.609918 0.63577 1.03746" min="-0.609917 -0.63577 -1.03745" />
@@ -83,4 +83,5 @@
 	<mesh name="lvl2_menj_menj_llum_florescent17" path="Data/Meshes/lvl2_menj_menj_llum_florescent17.mesh" max="1.20441 0.0396335 0.0562134" min="-0.0262127 -0.0396328 -0.605618" />
 	<mesh name="lvl2_menj_menj_floresc10" path="Data/Meshes/lvl2_menj_menj_floresc10.mesh" max="0.744076 2.49151 0.420729" min="-0.744074 -0.115818 -0.420729" />
 	<mesh name="lvl2_menj_menj_llum_florescent15" path="Data/Meshes/lvl2_menj_menj_llum_florescent15.mesh" max="0.325285 -0.0329986 0.613842" min="-0.336546 -0.112265 -0.616783" />
+	<mesh name="Plataforma" path="Data/Meshes/Plataforma.mesh" max="2.29081 1.19645 3.02078" min="-2.11382 -1.65632 -2.56863" />
 </meshes>

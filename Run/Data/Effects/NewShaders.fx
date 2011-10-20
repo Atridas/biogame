@@ -196,6 +196,9 @@ PS_OUTPUT NewPS(TNEW_PS _in, float _fFace : VFACE)
 
     #if defined( NS_TEX0 )
       float4 l_DiffuseColor = tex2D(DiffuseTextureSampler,_in.UV);
+      //l_Output.Color = float4(l_DiffuseColor.a, l_DiffuseColor.a, l_DiffuseColor.a, 1.0);
+      //l_Output.Glow = float4(0,0,0,0);
+      //return l_Output;
       #if defined( NS_COLOR )
         l_DiffuseColor *= _in.Color;
       #endif
@@ -206,7 +209,8 @@ PS_OUTPUT NewPS(TNEW_PS _in, float _fFace : VFACE)
         float4 l_DiffuseColor = float4(0, 0, 0, 0);
       #endif
     #endif
-
+    
+    l_Output.Color.a = l_DiffuseColor.a;
 
     #if defined( NS_LIGHTING )
     
@@ -251,12 +255,12 @@ PS_OUTPUT NewPS(TNEW_PS _in, float _fFace : VFACE)
         float4 l_EnvColor = texCUBE(EnvironmentTextureSampler, l_ReflectionVector);
         //l_DiffuseColor += l_SpotlightFactor * l_EnvColor;
         //l_DiffuseColor = float4(l_SpotlightFactor, l_SpotlightFactor, l_SpotlightFactor, 1);
-        l_DiffuseColor += g_EnvironmentIntensity * l_SpecularTextureValue * l_EnvColor;
+        l_DiffuseColor.rgb += g_EnvironmentIntensity * l_SpecularTextureValue * l_EnvColor.rgb;
       #endif
                                                
     #endif
     
-    l_Output.Color = l_DiffuseColor;
+    l_Output.Color.rgb = l_DiffuseColor.rgb;
     //l_Output.DepthGlow.x = _in.ViewPosition.z;
     //l_Output.DepthGlow.w = 1;
     //
@@ -297,10 +301,16 @@ PS_OUTPUT NewPS(TNEW_PS _in, float _fFace : VFACE)
     #endif
   #endif
   
+  l_Output.Color.rgb = saturate(l_Output.Color.rgb);
+  //l_Output.Color.a = 0.5;
+  
 	return l_Output;
 }
 
-
+float4 caca() : COLOR0
+{
+  return float4(1,0,1,0);
+}
 
 #if defined( NS_CAL3D )
   #define TECHNIQUE_BODY \
@@ -350,6 +360,7 @@ PS_OUTPUT NewPS(TNEW_PS _in, float _fFace : VFACE)
     /*Vertex / Pixel shader*/                                     \
 		VertexShader = compile vs_3_0 NewVS();                \
 		PixelShader  = compile ps_3_0 NewPS();                \
+		/*PixelShader  = compile ps_3_0 caca();*/                \
 	}                                                       \
 	pass p1 {                                               \
 		/*Activamos el Zbuffer, el Zwrite y la funciÃ³n de Zâ€™s que queremos utilizar*/ \
@@ -366,6 +377,7 @@ PS_OUTPUT NewPS(TNEW_PS _in, float _fFace : VFACE)
     /*Vertex / Pixel shader*/                                     \
 		VertexShader = compile vs_3_0 NewVS();                \
 		PixelShader  = compile ps_3_0 NewPS();                \
+		/*PixelShader  = compile ps_3_0 caca();*/                \
 	}
   
 #endif

@@ -1,5 +1,6 @@
 #include "ComponentExplosive.h"
 #include "PhysicsManager.h"
+#include "ComponentObject3D.h"
 #include "Core.h"
 
 CComponentExplosive* CComponentExplosive::AddToEntity(CGameEntity *_pEntity)
@@ -46,10 +47,15 @@ void CComponentExplosive::Explode(Vect3f _vPos, float _fRadius)
     set<CGameEntity*>::iterator l_itEntityEnd = l_vImpactEntities.end();
 
     //missatge de força
+    Vect3f l_v = GetEntity()->GetComponent<CComponentObject3D>()->GetPosition();
     SEvent l_impacte;
     l_impacte.Msg = SEvent::REBRE_FORCE;
     l_impacte.Info[0].Type = SEventInfo::FLOAT;
     l_impacte.Info[0].f    = 100;
+    l_impacte.Info[1].Type = SEventInfo::VECTOR;
+    l_impacte.Info[1].v.x    = l_v.x;
+    l_impacte.Info[1].v.y    = l_v.y;
+    l_impacte.Info[1].v.z    = l_v.z;
     l_impacte.Sender = GetEntity()->GetGUID();
 
 

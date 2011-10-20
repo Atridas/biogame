@@ -61,4 +61,5 @@
 	<light type="spot" direction="-6.76348 -2.76509 -6.99196" angle="4.3" fall_off="20.8" name="lvl2_menj_light34" pos="20.6752 2.76509 22.0954" color="0.45098 0.560784 0.564706" att_start_range="0.0" att_end_range="23.6508" render_shadows="false" />
 	<light type="spot" direction="-6.76348 -2.02187 -6.99196" angle="4.3" fall_off="21.7" name="lvl2_menj_light35" pos="20.6752 2.76509 22.0954" color="0.45098 0.560784 0.564706" att_start_range="0.0" att_end_range="23.6508" render_shadows="false" />
 	<light type="spot" direction="-6.76348 -3.95711 -6.99196" angle="4.3" fall_off="21.7" name="lvl2_menj_light36" pos="20.6752 2.76509 22.0954" color="0.45098 0.560784 0.564706" att_start_range="0.0" att_end_range="23.6508" render_shadows="false" />
+	<light type="spot" direction="1.51349 -11.6105 -0.848501" angle="8.7" fall_off="41.2" name="lvl2_menj_Spot01" pos="-3.91295 11.6105 24.4447" color="0.0470588 0.262745 0.0588235" att_start_range="0.0" att_end_range="10.4063" render_shadows="false" />
 </lights>

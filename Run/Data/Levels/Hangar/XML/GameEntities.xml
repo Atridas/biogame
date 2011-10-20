@@ -20,12 +20,12 @@
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="hangar_mur divisor03">
-    <Object3D position="2.7577 0.0 5.08249" yaw="15.0" pitch="0.0" roll="0.0" />
+    <Object3D position="2.7577 0.0 5.08249" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="hangar_mur divisor03" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="hangar_mur divisor04">
-    <Object3D position="3.07745 0.0 3.78974" yaw="15.0" pitch="0.0" roll="0.0" />
+    <Object3D position="3.07745 0.0 3.78974" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="hangar_mur divisor04" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
@@ -365,7 +365,7 @@
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="hangar_Frigorific_DEF">
-    <Object3D position="16.265 1.48875 -14.91" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="16.4597 1.48875 -14.91" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="hangar_Frigorific_DEF" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
@@ -446,7 +446,7 @@
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="hangar_Frigorific_DEF02">
-    <Object3D position="23.0907 1.50608 13.6054" yaw="165.0" pitch="0.0" roll="0.0" />
+    <Object3D position="23.0907 1.50608 13.6054" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="hangar_Frigorific_DEF02" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
@@ -486,16 +486,142 @@
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="hangar_Fondo_frigo">
-    <Object3D position="16.8217 0.00487411 -14.7404" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="16.2889 0.015128 -14.7404" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="hangar_Fondo_frigo" />
   </Entity>
   <Entity name="hangar_Fondo_frigo01">
-    <Object3D position="22.4985 0.0470494 13.6139" yaw="164.71" pitch="0.0" roll="0.0" />
+    <Object3D position="22.4985 0.0607213 13.6139" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="hangar_Fondo_frigo01" />
   </Entity>
   <Entity name="hangar_puerta_hangar">
     <Object3D position="26.968 3.72415 -1.48836" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="hangar_puerta_hangar" />
+    <PhysXMesh density="0" collision_group="escenari" />
+    <StateMachine initial_state="State_Hangar_Porta_Closed" />
+  </Entity>
+  <Entity name="hangar_bido_verd">
+    <Object3D position="15.8146 0.0 -10.7229" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_verd" />
+    <PhysXMesh density="0" collision_group="escenari" />
+    <Destroyable onDestroy="bido_toxic" />
+  </Entity>
+  <Entity name="hangar_bido_verd01">
+    <Object3D position="6.52627 0.0 -6.10351" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_verd" />
+    <PhysXMesh density="0" collision_group="escenari" />
+    <Destroyable onDestroy="bido_toxic" />
+  </Entity>
+  <Entity name="hangar_bido_verd02">
+    <Object3D position="10.5009 0.0 6.10023" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_verd" />
+    <PhysXMesh density="0" collision_group="escenari" />
+    <Destroyable onDestroy="bido_toxic" />
+  </Entity>
+  <Entity name="hangar_bido_verd03">
+    <Object3D position="19.1918 0.0 11.7299" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_verd" />
+    <PhysXMesh density="0" collision_group="escenari" />
+    <Destroyable onDestroy="bido_toxic" />
+  </Entity>
+  <Entity name="hangar_Bido_vermell">
+    <Object3D position="3.4384 0.0 2.53783" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_vermell" />
+    <PhysXMesh density="0" collision_group="escenari" />
+    <Destroyable onDestroy="bido_explosiu" />
+    <Explosive />
+  </Entity>
+  <Entity name="hangar_Bido_vermell02">
+    <Object3D position="15.0949 0.0 11.73" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_vermell" />
+    <PhysXMesh density="0" collision_group="escenari" />
+    <Destroyable onDestroy="bido_explosiu" />
+    <Explosive />
+  </Entity>
+  <Entity name="hangar_Bido_vermell03">
+    <Object3D position="10.3853 0.0 6.86543" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_vermell" />
+    <PhysXMesh density="0" collision_group="escenari" />
+    <Destroyable onDestroy="bido_explosiu" />
+    <Explosive />
+  </Entity>
+  <Entity name="hangar_Bido_vermell05">
+    <Object3D position="-3.4454 0.0 0.363315" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_vermell" />
+    <PhysXMesh density="0" collision_group="escenari" />
+    <Destroyable onDestroy="bido_explosiu" />
+    <Explosive />
+  </Entity>
+  <Entity name="hangar_bido_verd04">
+    <Object3D position="23.2907 0.0 5.51813" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_verd" />
+    <PhysXMesh density="0" collision_group="escenari" />
+    <Destroyable onDestroy="bido_toxic" />
+  </Entity>
+  <Entity name="hangar_bido_verd05">
+    <Object3D position="13.8492 0.0 1.56041" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="global_bido_verd" />
+    <PhysXMesh density="0" collision_group="escenari" />
+    <Destroyable onDestroy="bido_toxic" />
+  </Entity>
+  <Entity name="hangar_cadena">
+    <Object3D position="27.3113 3.71293 5.28388" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_cadena" />
+  </Entity>
+  <Entity name="hangar_cadena_boxm">
+    <Object3D position="27.2835 7.26175 5.29193" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_cadena_boxm" />
+  </Entity>
+  <Entity name="hangar_Plane01">
+    <Object3D position="-1.93055 23.1406 27.2932" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Plane01" />
+  </Entity>
+  <Entity name="hangar_Plane02">
+    <Object3D position="-1.93055 16.036 18.5606" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Plane02" />
+  </Entity>
+  <Entity name="hangar_Plane03">
+    <Object3D position="-1.93055 11.9698 22.6041" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Plane03" />
+  </Entity>
+  <Entity name="hangar_Plane04">
+    <Object3D position="0.759394 11.606 -24.3419" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Plane04" />
+  </Entity>
+  <Entity name="hangar_Plane05">
+    <Object3D position="-1.93055 23.2344 -29.0311" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Plane05" />
+  </Entity>
+  <Entity name="hangar_Plane06">
+    <Object3D position="-13.8146 15.493 -28.4142" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Plane06" />
+  </Entity>
+  <Entity name="hangar_Plane07">
+    <Object3D position="37.6153 22.5491 -0.266212" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Plane07" />
+  </Entity>
+  <Entity name="hangar_Plane08">
+    <Object3D position="-35.4638 23.5089 -0.266212" yaw="-2.00358e-005" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Plane08" />
+  </Entity>
+  <Entity name="hangar_Plane09">
+    <Object3D position="-33.4041 17.0176 -1.87123" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Plane09" />
+  </Entity>
+  <Entity name="hangar_Plane10">
+    <Object3D position="31.0513 15.1689 -1.87123" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Plane10" />
+  </Entity>
+  <Entity name="hangar_Plane11">
+    <Object3D position="36.9105 12.1038 -5.06264" yaw="2.00358e-005" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Plane11" />
+  </Entity>
+  <Entity name="hangar_Plane12">
+    <Object3D position="34.3543 15.0862 -4.96133" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Plane12" />
+  </Entity>
+  <Entity name="hangar_finestres">
+    <Object3D position="0.0 0.0175781 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_finestres" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="hang_trig_enemics00">
@@ -1070,74 +1196,6 @@
     <Object3D position="4.64452 9.62857 13.5591" yaw="0.0" pitch="0.0" roll="0.0" />
     <EnemySpawner enemy_type="militar" spawn_time="20" total_enemy="2" active="false" />
   </Entity>
-  <Entity name="hangar_bido_verd">
-    <Object3D position="15.8146 0.0 -10.7229" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="global_bido_verd" />
-    <PhysXMesh density="0" collision_group="escenari" />
-    <Destroyable onDestroy="bido_toxic" />
-  </Entity>
-  <Entity name="hangar_bido_verd01">
-    <Object3D position="6.52627 0.0 -6.10351" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="global_bido_verd" />
-    <PhysXMesh density="0" collision_group="escenari" />
-    <Destroyable onDestroy="bido_toxic" />
-  </Entity>
-  <Entity name="hangar_bido_verd02">
-    <Object3D position="10.5009 0.0 6.10023" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="global_bido_verd" />
-    <PhysXMesh density="0" collision_group="escenari" />
-    <Destroyable onDestroy="bido_toxic" />
-  </Entity>
-  <Entity name="hangar_bido_verd03">
-    <Object3D position="19.1918 0.0 11.7299" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="global_bido_verd" />
-    <PhysXMesh density="0" collision_group="escenari" />
-    <Destroyable onDestroy="bido_toxic" />
-  </Entity>
-  <Entity name="hangar_Bido_vermell">
-    <Object3D position="3.4384 0.0 2.53783" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="global_bido_vermell" />
-    <PhysXMesh density="0" collision_group="escenari" />
-    <Destroyable onDestroy="bido_explosiu" />
-    <Explosive />
-  </Entity>
-  <Entity name="hangar_Bido_vermell02">
-    <Object3D position="15.0949 0.0 11.73" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="global_bido_vermell" />
-    <PhysXMesh density="0" collision_group="escenari" />
-    <Destroyable onDestroy="bido_explosiu" />
-    <Explosive />
-  </Entity>
-  <Entity name="hangar_Bido_vermell03">
-    <Object3D position="10.3853 0.0 6.86543" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="global_bido_vermell" />
-    <PhysXMesh density="0" collision_group="escenari" />
-    <Destroyable onDestroy="bido_explosiu" />
-    <Explosive />
-  </Entity>
-  <Entity name="hangar_Bido_vermell05">
-    <Object3D position="-3.4454 0.0 0.363315" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="global_bido_vermell" />
-    <PhysXMesh density="0" collision_group="escenari" />
-    <Destroyable onDestroy="bido_explosiu" />
-    <Explosive />
-  </Entity>
-  <Entity name="hangar_bido_verd04">
-    <Object3D position="23.2907 0.0 5.51813" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="global_bido_verd" />
-    <PhysXMesh density="0" collision_group="escenari" />
-    <Destroyable onDestroy="bido_toxic" />
-  </Entity>
-  <Entity name="hangar_bido_verd05">
-    <Object3D position="13.8492 0.0 1.56041" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="global_bido_verd" />
-    <PhysXMesh density="0" collision_group="escenari" />
-    <Destroyable onDestroy="bido_toxic" />
-  </Entity>
-  <Entity name="cadena_boxm">
-    <Object3D position="27.2835 7.26175 5.29193" yaw="-90.0" pitch="1.70755e-006" roll="-90.0" />
-    <RenderableObject animated="false" name="cadena_boxm" />
-  </Entity>
   <Entity name="hang_nod_top11">
     <Object3D position="4.3345 8.72209 -11.2358" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode maxDistance="3" />
@@ -1349,6 +1407,10 @@
   <Entity name="hang_nod91">
     <Object3D position="5.8129 0.701781 -5.41039" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
+  </Entity>
+  <Entity name="hangar_Plane13">
+    <Object3D position="4.2388 36.2041 -0.266212" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Plane13" />
   </Entity>
   <Player position="-24.8545 1.0 -10.0431" yaw="0.0" />
   <Miner name="Miner01" position="-17.4714 1.30798 -4.51993" yaw="0.0" active="false" />

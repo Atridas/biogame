@@ -8,3 +8,6 @@
 technique SpecularNormalmapTexturedTechnique {
 	TECHNIQUE_BODY
 }
+technique AlphaSpecularNormalmapTexturedTechnique {
+	ALPHA_TECHNIQUE_BODY
+}

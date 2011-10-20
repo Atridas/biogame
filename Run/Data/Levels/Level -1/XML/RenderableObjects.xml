@@ -49,7 +49,7 @@
 	<RenderableObject name="lvl1_Passadis03" class="StaticMesh" resource="lvl1_Passadis03" position="-14.9061 -7.15256e-007 0.0436254" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_habitacio_municio" class="StaticMesh" resource="lvl1_habitacio_municio" position="-30.3381 0.0 0.0704956" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Porta_planta-1_02" class="StaticMesh" resource="lvl1_Porta_planta-1_02" position="-27.3872 1.39148 0.00468683" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_key_blue" class="StaticMesh" resource="lvl1_key_blue" position="-31.6466 1.48068 0.266254" yaw="90.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_key_blue" class="StaticMesh" resource="lvl1_key_blue" position="-32.376 1.473 0.262" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_habitacio_claus" class="StaticMesh" resource="lvl1_habitacio_claus" position="-7.25854 0.0 7.34167" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_portal_claus" class="StaticMesh" resource="lvl1_portal_claus" position="-9.84117 2.05258 8.8713" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_claus_porta_sub1" class="StaticMesh" resource="lvl1_claus_porta_sub1" position="-10.0283 1.69531 4.39831" yaw="72.0063" pitch="0.0" roll="0.0" />
@@ -284,6 +284,15 @@
 	<RenderableObject name="lvl1_fluorescente_ences11" class="StaticMesh" resource="lvl1_florescent_ences" position="37.7571 4.30464 26.0285" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_fluorescente_ences12" class="StaticMesh" resource="lvl1_florescent_ences" position="20.5676 4.30464 22.4159" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_fluorescente_ences13" class="StaticMesh" resource="lvl1_florescent_ences" position="24.0945 4.30464 18.889" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_fluorescente_ences14" class="StaticMesh" resource="lvl1_florescent_ences" position="37.1048 -5.42611 -23.7275" yaw="45.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_fluorescente_ences15" class="StaticMesh" resource="lvl1_florescent_ences" position="27.2177 -5.42611 -23.7275" yaw="45.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_fluorescente_ences16" class="StaticMesh" resource="lvl1_florescent_ences" position="32.3738 -5.42611 -28.5894" yaw="45.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_fluorescente_ences17" class="StaticMesh" resource="lvl1_florescent_ences" position="27.2863 -5.42611 -28.5894" yaw="45.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_fluorescente_ences18" class="StaticMesh" resource="lvl1_florescent_ences" position="27.2863 -5.42611 -33.5877" yaw="45.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_fluorescente_ences19" class="StaticMesh" resource="lvl1_florescent_ences" position="32.3741 -5.42611 -33.5877" yaw="45.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_fluorescente_ences20" class="StaticMesh" resource="lvl1_florescent_ences" position="37.137 -5.42611 -33.5877" yaw="45.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_fluorescente_ences21" class="StaticMesh" resource="lvl1_florescent_ences" position="37.137 -5.42611 -38.5206" yaw="45.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_fluorescente_ences22" class="StaticMesh" resource="lvl1_florescent_ences" position="27.0028 -5.42611 -38.5206" yaw="45.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_fluorescente_ences" class="StaticMesh" resource="lvl1_florescent_ences" position="16.3098 4.34961 36.8101" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_fluorescente_ences01" class="StaticMesh" resource="lvl1_florescent_ences" position="21.6426 4.34961 42.143" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_fluorescente_ences02" class="StaticMesh" resource="lvl1_florescent_ences" position="11.1286 4.34961 41.9913" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -293,6 +302,9 @@
 	<RenderableObject name="lvl1_fluorescente_apagat02" class="StaticMesh" resource="lvl1_florescent_apagat" position="27.5638 4.30464 15.4443" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_fluorescente_apagat03" class="StaticMesh" resource="lvl1_florescent_apagat" position="29.0051 4.30464 24.0937" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_fluorescente_apagat04" class="StaticMesh" resource="lvl1_florescent_apagat" position="34.3497 4.30464 29.4382" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_fluorescente_apagat05" class="StaticMesh" resource="lvl1_florescent_apagat" position="32.4109 -5.40069 -23.6298" yaw="45.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_fluorescente_apagat06" class="StaticMesh" resource="lvl1_florescent_apagat" position="37.0853 -5.40069 -28.5481" yaw="45.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_fluorescente_apagat07" class="StaticMesh" resource="lvl1_florescent_apagat" position="32.1827 -5.40069 -38.5325" yaw="45.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_fluorescente_apagat" class="StaticMesh" resource="lvl1_florescent_apagat" position="16.1394 4.34961 42.5958" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_fluorescente_apagat01" class="StaticMesh" resource="lvl1_florescent_apagat" position="22.1354 4.34961 36.5998" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Box56" class="StaticMesh" resource="lvl1_Box56" position="27.7374 0.0 20.0923" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -308,6 +320,10 @@
 	<RenderableObject name="lvl1_caixa_llarga17" class="StaticMesh" resource="lvl1_caixa_llarga17" position="25.8895 0.487671 24.9438" yaw="-90.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_caixa_llarga18" class="StaticMesh" resource="lvl1_caixa_llarga18" position="30.8809 0.487671 31.0204" yaw="-90.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Plane24" class="StaticMesh" resource="lvl1_Plane24" position="20.1025 4.30009 18.6636" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_Plane26" class="StaticMesh" resource="lvl1_Plane26" position="22.661 4.45118 16.1159" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_Plane27" class="StaticMesh" resource="lvl1_Plane27" position="17.2815 4.45118 21.4988" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_Plane28" class="StaticMesh" resource="lvl1_Plane28" position="35.9561 4.45118 32.2156" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_Plane29" class="StaticMesh" resource="lvl1_Plane29" position="41.3357 4.45118 26.8327" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_barra_dutxes" class="StaticMesh" resource="lvl1_barra_dutxes" position="13.8944 0.0 45.1666" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Aixeta" class="StaticMesh" resource="lvl1_Aixeta" position="7.86244 1.23828 43.4722" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Aixeta01" class="StaticMesh" resource="lvl1_Aixeta01" position="9.13102 1.23828 44.7407" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -367,9 +383,6 @@
 	<RenderableObject name="lvl1_dutxa30" class="StaticMesh" resource="lvl1_dutxa30" position="22.0608 2.81181 46.0338" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Plane17" class="StaticMesh" resource="lvl1_Plane17" position="9.36054 5.37721 40.1752" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Plane18" class="StaticMesh" resource="lvl1_Plane18" position="25.8772 5.02182 42.3172" yaw="-5.00896e-006" pitch="-5.00896e-006" roll="-5.00896e-006" />
-	<RenderableObject name="lvl1_LAVABO" class="StaticMesh" resource="lvl1_LAVABO" position="26.8734 0.0 40.7155" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_LAVABO01" class="StaticMesh" resource="lvl1_LAVABO01" position="27.8598 0.0 39.7292" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_LAVABO02" class="StaticMesh" resource="lvl1_LAVABO02" position="28.941 0.0 38.648" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_LAVABO03" class="StaticMesh" resource="lvl1_LAVABO03" position="30.0508 0.0 37.5382" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Plane19" class="StaticMesh" resource="lvl1_Plane19" position="16.5266 0.0129118 50.8094" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Banc06" class="StaticMesh" resource="lvl1_Banc06" position="15.5474 0.421875 43.6625" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
@@ -390,7 +403,10 @@
 	<RenderableObject name="lvl1_taquilla" class="StaticMesh" resource="lvl1_taquilla" position="23.9197 0.0 30.4416" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_taquilla06" class="StaticMesh" resource="lvl1_taquilla06" position="17.6549 1.0 34.3518" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_taquilla01" class="StaticMesh" resource="lvl1_taquilla01" position="17.2654 1.0 34.7412" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_key_yellow" class="StaticMesh" resource="lvl1_key_yellow" position="13.1035 1.39046 46.5578" yaw="130.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_key_yellow" class="StaticMesh" resource="lvl1_key_yellow" position="13.006 1.392 46.845" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_LAVABO04" class="StaticMesh" resource="lvl1_LAVABO04" position="28.9596 0.0 38.6612" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_LAVABO05" class="StaticMesh" resource="lvl1_LAVABO05" position="27.8955 0.0 39.7163" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_LAVABO06" class="StaticMesh" resource="lvl1_LAVABO06" position="26.8019 0.0 40.7699" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_escalas" class="StaticMesh" resource="lvl1_escalas" position="26.1458 -1.5 0.0436258" yaw="0.0" pitch="0.0" roll="1.00179e-005" />
 	<RenderableObject name="lvl1_escala02" class="StaticMesh" resource="lvl1_escala02" position="19.8945 0.0 0.0436249" yaw="0.0" pitch="0.0" roll="1.00179e-005" />
 	<RenderableObject name="lvl1_Passadis04" class="StaticMesh" resource="lvl1_Passadis04" position="19.8945 0.0 0.0436249" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -415,8 +431,6 @@
 	<RenderableObject name="lvl1_Caixa_estatica_petita39" class="StaticMesh" resource="lvl1_Caixa_estatica_petita39" position="34.9567 -2.46012 -1.60717" yaw="50.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Caixa_estatica_petita40" class="StaticMesh" resource="lvl1_Caixa_estatica_petita40" position="21.129 0.52294 -1.45238" yaw="50.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Caixa_estatica_petita41" class="StaticMesh" resource="lvl1_Caixa_estatica_petita41" position="17.2005 0.52294 1.53829" yaw="50.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_aguanta_llums28" class="StaticMesh" resource="lvl1_aguanta_llums28" position="-10.7429 3.0733 -2.07656" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_aguanta_llums29" class="StaticMesh" resource="lvl1_aguanta_llums29" position="-17.6091 3.0733 -2.07656" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_aguanta_llums30" class="StaticMesh" resource="lvl1_aguanta_llums30" position="-24.4806 3.0733 -2.07656" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_armeria" class="StaticMesh" resource="lvl1_armeria" position="33.6163 -10.0 -23.6384" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_viga08" class="StaticMesh" resource="lvl1_viga08" position="24.951 -5.01891 -31.1149" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -642,7 +656,7 @@
 	<RenderableObject name="lvl1_Caixa_estatica_petita31" class="StaticMesh" resource="lvl1_Caixa_estatica_petita31" position="23.5914 -7.29284 -40.7617" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_caixa_llarga14" class="StaticMesh" resource="lvl1_caixa_llarga14" position="27.864 -5.53894 -36.1153" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_caixa_llarga15" class="StaticMesh" resource="lvl1_caixa_llarga15" position="37.6176 -7.29944 -36.1153" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_key_purple" class="StaticMesh" resource="lvl1_key_purple" position="27.8712 -8.52869 -38.422" yaw="90.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_key_purple" class="StaticMesh" resource="lvl1_key_purple" position="27.873 -8.493 -38.462" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Sala_central" class="StaticMesh" resource="lvl1_Sala_central" position="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Porta_planta-1_09" class="StaticMesh" resource="lvl1_Porta_planta-1_09" position="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Porta_planta-1_10" class="StaticMesh" resource="lvl1_Porta_planta-1_10" position="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -657,5 +671,68 @@
 	<RenderableObject name="lvl1_porta07" class="StaticMesh" resource="lvl1_porta07" position="-5.22713 1.30378 -5.22304" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_porta09" class="StaticMesh" resource="lvl1_porta09" position="5.22305 1.30378 -5.22712" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_grenade" class="StaticMesh" resource="granada" position="-27.3665 1.47331 0.143002" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_key_green" class="StaticMesh" resource="lvl1_key_green" position="0.12373 -1.65833 -20.2072" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_key_green" class="StaticMesh" resource="lvl1_key_green" position="6.36719 1.09778 -24.4431" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_key_green01" class="StaticMesh" resource="lvl1_key_green01" position="7.4153 1.09778 -24.4431" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_key_green02" class="StaticMesh" resource="lvl1_key_green02" position="8.46341 1.09778 -24.4431" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_key_green03" class="StaticMesh" resource="lvl1_key_green03" position="9.51152 1.09778 -24.4431" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_lab_tub_Gros" class="StaticMesh" resource="lvl2_lab_tub_Gros" position="-4.36474 3.66629 10.162" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_gros" class="StaticMesh" resource="tub_gros" position="-6.407 2.5132 11.5058" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_gros01" class="StaticMesh" resource="tub_gros01" position="-8.01759 2.5132 3.20359" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_gros02" class="StaticMesh" resource="tub_gros02" position="-3.0768 2.5132 8.22775" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_rodo" class="StaticMesh" resource="tub_rodo" position="-8.94648 3.3259 5.60317" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_lab_tub_Gros03" class="StaticMesh" resource="lvl2_lab_tub_Gros03" position="-10.1397 3.65454 4.53416" yaw="-45.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_rodo01" class="StaticMesh" resource="tub_rodo01" position="-5.58455 3.49985 9.40317" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_rodo02" class="StaticMesh" resource="tub_rodo02" position="-5.45997 3.34149 9.27859" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_rodo03" class="StaticMesh" resource="tub_rodo03" position="-4.71092 3.49985 8.52954" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_rodo04" class="StaticMesh" resource="tub_rodo04" position="-4.95459 3.2345 8.77321" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_rodo05" class="StaticMesh" resource="tub_rodo05" position="-5.07796 3.42133 8.89658" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_rodo06" class="StaticMesh" resource="tub_rodo06" position="-6.46964 3.42133 10.2883" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_rodo07" class="StaticMesh" resource="tub_rodo07" position="-6.79406 3.49985 10.6127" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_rodo08" class="StaticMesh" resource="tub_rodo08" position="-6.08452 3.34149 9.90314" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_rodo09" class="StaticMesh" resource="tub_rodo09" position="-6.56183 3.42133 10.3804" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_rodo10" class="StaticMesh" resource="tub_rodo10" position="-4.34254 3.49985 8.16116" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_rodo11" class="StaticMesh" resource="tub_rodo11" position="-5.81391 1.31152 11.1787" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_rodo12" class="StaticMesh" resource="tub_rodo12" position="-7.08268 1.31152 11.1605" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_rodo13" class="StaticMesh" resource="tub_rodo13" position="-11.3152 1.31152 7.16317" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_rodo14" class="StaticMesh" resource="tub_rodo14" position="-8.82757 1.31152 3.46051" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_rodo15" class="StaticMesh" resource="tub_rodo15" position="-7.48216 1.31152 3.37582" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_rodo16" class="StaticMesh" resource="tub_rodo16" position="-10.129 2.8758 5.103" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_rodo17" class="StaticMesh" resource="tub_rodo17" position="-4.91602 2.89518 9.78454" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tubs6" class="StaticMesh" resource="tubs6" position="-6.51422 3.76524 8.04476" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tubs07" class="StaticMesh" resource="tubs07" position="-8.3594 3.8782 6.19958" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tubs08" class="StaticMesh" resource="tubs08" position="-5.46127 3.8782 9.09771" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tubs09" class="StaticMesh" resource="tubs09" position="-9.49325 3.76524 5.06573" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tubs10" class="StaticMesh" resource="tubs10" position="-5.66577 3.76524 8.89321" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_rodo18" class="StaticMesh" resource="tub_rodo18" position="-5.86431 3.5148 8.68534" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="roda" class="StaticMesh" resource="roda" position="-6.46206 1.23845 11.0102" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="roda01" class="StaticMesh" resource="roda01" position="-3.567 1.23845 7.71096" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="roda02" class="StaticMesh" resource="roda02" position="-8.14252 0.614057 3.51779" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="roda05" class="StaticMesh" resource="roda05" position="-8.14252 3.35893 3.51779" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_lab_tub_Gros04" class="StaticMesh" resource="lvl2_lab_tub_Gros04" position="-11.5152 1.04761 5.98491" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="tub_rodo19" class="StaticMesh" resource="tub_rodo19" position="-11.907 1.31152 6.55584" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="visagra01" class="StaticMesh" resource="visagra01" position="-0.00124884 0.0 7.36992" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="visagra02" class="StaticMesh" resource="visagra02" position="-0.00124884 0.0 -7.40121" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="visagra03" class="StaticMesh" resource="visagra03" position="-7.38374 0.0 -0.0833267" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="visagra04" class="StaticMesh" resource="visagra04" position="7.36695 0.0 -0.083326" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="visagra05" class="StaticMesh" resource="visagra05" position="5.25121 0.0 5.21667" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="visagra00" class="StaticMesh" resource="visagra00" position="-5.24502 0.0 5.21747" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+	<RenderableObject name="visagra06" class="StaticMesh" resource="visagra06" position="19.4994 0.0 19.2622" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="visagra07" class="StaticMesh" resource="visagra07" position="-27.4114 0.0 -0.0833276" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="visagra08" class="StaticMesh" resource="visagra08" position="33.6646 -9.99438 -20.7082" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_lab_lab_Llum_emergengia_autoilum01" class="StaticMesh" resource="lvl2_lab_lab_Llum_emergengia_autoilum01" position="7.3167 3.38817 -0.0326042" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="carcasa" class="StaticMesh" resource="carcasa" position="7.54248 1.51153 -0.0287724" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="carcasa01" class="StaticMesh" resource="carcasa01" position="-7.54328 1.51153 -0.0362644" yaw="180.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_lab_lab_Llum_emergengia_autoilum02" class="StaticMesh" resource="lvl2_lab_lab_Llum_emergengia_autoilum02" position="-7.3175 3.38817 -0.0324326" yaw="180.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="carcasa02" class="StaticMesh" resource="carcasa02" position="0.0419371 1.51153 -7.54283" yaw="-90.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_lab_lab_Llum_emergengia_autoilum03" class="StaticMesh" resource="lvl2_lab_lab_Llum_emergengia_autoilum03" position="0.0381052 3.38817 -7.31705" yaw="-90.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="carcasa03" class="StaticMesh" resource="carcasa03" position="0.0344451 1.51153 7.54377" yaw="90.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_lab_lab_Llum_emergengia_autoilum04" class="StaticMesh" resource="lvl2_lab_lab_Llum_emergengia_autoilum04" position="0.0382769 3.38817 7.31798" yaw="90.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="carcasa04" class="StaticMesh" resource="carcasa04" position="-5.33674 1.51153 5.33188" yaw="135.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_lab_lab_Llum_emergengia_autoilum05" class="StaticMesh" resource="lvl2_lab_lab_Llum_emergengia_autoilum05" position="-5.17438 3.38817 5.17493" yaw="135.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="carcasa05" class="StaticMesh" resource="carcasa05" position="5.31478 1.51153 -5.34791" yaw="-45.0001" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_lab_lab_Llum_emergengia_autoilum06" class="StaticMesh" resource="lvl2_lab_lab_Llum_emergengia_autoilum06" position="5.15242 3.38817 -5.19097" yaw="-45.0001" pitch="0.0" roll="0.0" />
+	<RenderableObject name="carcasa06" class="StaticMesh" resource="carcasa06" position="-5.34798 1.51153 -5.3125" yaw="-135.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_lab_lab_Llum_emergengia_autoilum07" class="StaticMesh" resource="lvl2_lab_lab_Llum_emergengia_autoilum07" position="-5.19104 3.38817 -5.15014" yaw="-135.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="carcasa07" class="StaticMesh" resource="carcasa07" position="5.3122 1.51153 5.35638" yaw="45.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_lab_lab_Llum_emergengia_autoilum08" class="StaticMesh" resource="lvl2_lab_lab_Llum_emergengia_autoilum08" position="5.15525 3.38817 5.19402" yaw="45.0" pitch="0.0" roll="0.0" />
 </RenderableObjects>

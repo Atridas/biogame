@@ -4,8 +4,8 @@
 	<RenderableObject name="hangar_mur divisor" class="StaticMesh" resource="hangar_mur divisor" position="-3.47563 0.0 1.95046" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_mur divisor01" class="StaticMesh" resource="hangar_mur divisor01" position="18.4336 0.0 -6.32987" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_mur divisor02" class="StaticMesh" resource="hangar_mur divisor02" position="-3.05295 0.0 3.18323" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="hangar_mur divisor03" class="StaticMesh" resource="hangar_mur divisor03" position="2.7577 0.0 5.08249" yaw="15.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="hangar_mur divisor04" class="StaticMesh" resource="hangar_mur divisor04" position="3.07745 0.0 3.78974" yaw="15.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_mur divisor03" class="StaticMesh" resource="hangar_mur divisor03" position="2.7577 0.0 5.08249" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_mur divisor04" class="StaticMesh" resource="hangar_mur divisor04" position="3.07745 0.0 3.78974" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_mur divisor05" class="StaticMesh" resource="hangar_mur divisor05" position="6.48966 0.0 -7.04902" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_mur divisor06" class="StaticMesh" resource="hangar_mur divisor06" position="6.46393 0.0 -8.39256" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_mur divisor07" class="StaticMesh" resource="hangar_mur divisor07" position="18.711 0.0 -5.00007" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -74,7 +74,7 @@
 	<RenderableObject name="hangar_fluorescente_apagat14" class="StaticMesh" resource="hangar_florescent_apagat" position="4.58823 15.0359 -11.1997" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_fluorescente_apagat15" class="StaticMesh" resource="hangar_florescent_apagat" position="17.2789 15.0359 -11.1997" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_Bido" class="StaticMesh" resource="hangar_Bido" position="26.9315 0.00499561 -12.0301" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="hangar_Frigorific_DEF" class="StaticMesh" resource="hangar_Frigorific_DEF" position="16.265 1.48875 -14.91" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_Frigorific_DEF" class="StaticMesh" resource="hangar_Frigorific_DEF" position="16.4597 1.48875 -14.91" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_caixa_llums" class="StaticMesh" resource="hangar_caixa_llums" position="27.3683 1.22994 5.59868" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_Caixa_llarga07" class="StaticMesh" resource="hangar_Caixa_llarga07" position="14.7989 0.0170316 8.03433" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_Caixa_llarga08" class="StaticMesh" resource="hangar_Caixa_llarga08" position="16.7243 0.0170316 -10.6155" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -90,7 +90,7 @@
 	<RenderableObject name="hangar_Caixa_llarga11" class="StaticMesh" resource="hangar_Caixa_llarga11" position="13.1617 0.0170316 6.41503" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_Caixa_llarga12" class="StaticMesh" resource="hangar_Caixa_llarga12" position="15.0824 0.0170316 5.76829" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_Caixa_llarga13" class="StaticMesh" resource="hangar_Caixa_llarga13" position="11.8347 1.25 -6.29281" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="hangar_Frigorific_DEF02" class="StaticMesh" resource="hangar_Frigorific_DEF02" position="23.0907 1.50608 13.6054" yaw="165.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_Frigorific_DEF02" class="StaticMesh" resource="hangar_Frigorific_DEF02" position="23.0907 1.50608 13.6054" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_Base Hangar" class="StaticMesh" resource="hangar_Base Hangar" position="0.0 0.0175781 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_mur divisor10" class="StaticMesh" resource="hangar_mur divisor10" position="18.4336 0.0 -6.32987" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_mur divisor11" class="StaticMesh" resource="hangar_mur divisor11" position="18.4336 0.0 -6.32987" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -99,8 +99,8 @@
 	<RenderableObject name="hangar_mur divisor14" class="StaticMesh" resource="hangar_mur divisor14" position="18.4336 0.0 -6.32987" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_mur divisor15" class="StaticMesh" resource="hangar_mur divisor15" position="-3.47563 0.0 1.95046" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_plataforma" class="StaticMesh" resource="hangar_plataforma" position="0.101635 7.83345 -0.0224376" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="hangar_Fondo_frigo" class="StaticMesh" resource="hangar_Fondo_frigo" position="16.8217 0.00487411 -14.7404" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="hangar_Fondo_frigo01" class="StaticMesh" resource="hangar_Fondo_frigo01" position="22.4985 0.0470494 13.6139" yaw="164.71" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_Fondo_frigo" class="StaticMesh" resource="hangar_Fondo_frigo" position="16.2889 0.015128 -14.7404" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_Fondo_frigo01" class="StaticMesh" resource="hangar_Fondo_frigo01" position="22.4985 0.0607213 13.6139" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_puerta_hangar" class="StaticMesh" resource="hangar_puerta_hangar" position="26.968 3.72415 -1.48836" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_bido_verd" class="StaticMesh" resource="global_bido_verd" position="15.8146 0.0 -10.7229" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_bido_verd01" class="StaticMesh" resource="global_bido_verd" position="6.52627 0.0 -6.10351" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -112,4 +112,20 @@
 	<RenderableObject name="hangar_Bido_vermell02" class="StaticMesh" resource="global_bido_vermell" position="15.0949 0.0 11.73" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_Bido_vermell03" class="StaticMesh" resource="global_bido_vermell" position="10.3853 0.0 6.86543" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_Bido_vermell05" class="StaticMesh" resource="global_bido_vermell" position="-3.4454 0.0 0.363315" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_cadena" class="StaticMesh" resource="hangar_cadena" position="27.3113 3.71293 5.28388" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_cadena_boxm" class="StaticMesh" resource="hangar_cadena_boxm" position="27.2835 7.26175 5.29193" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_Plane01" class="StaticMesh" resource="hangar_Plane01" position="-1.93055 23.1406 27.2932" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_Plane02" class="StaticMesh" resource="hangar_Plane02" position="-1.93055 16.036 18.5606" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_Plane03" class="StaticMesh" resource="hangar_Plane03" position="-1.93055 11.9698 22.6041" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_Plane04" class="StaticMesh" resource="hangar_Plane04" position="0.759394 11.606 -24.3419" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_Plane05" class="StaticMesh" resource="hangar_Plane05" position="-1.93055 23.2344 -29.0311" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_Plane06" class="StaticMesh" resource="hangar_Plane06" position="-13.8146 15.493 -28.4142" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_Plane07" class="StaticMesh" resource="hangar_Plane07" position="37.6153 22.5491 -0.266212" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_Plane08" class="StaticMesh" resource="hangar_Plane08" position="-35.4638 23.5089 -0.266212" yaw="-2.00358e-005" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_Plane09" class="StaticMesh" resource="hangar_Plane09" position="-33.4041 17.0176 -1.87123" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_Plane10" class="StaticMesh" resource="hangar_Plane10" position="31.0513 15.1689 -1.87123" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_Plane11" class="StaticMesh" resource="hangar_Plane11" position="36.9105 12.1038 -5.06264" yaw="2.00358e-005" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_Plane12" class="StaticMesh" resource="hangar_Plane12" position="34.3543 15.0862 -4.96133" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_finestres" class="StaticMesh" resource="hangar_finestres" position="0.0 0.0175781 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_Plane13" class="StaticMesh" resource="hangar_Plane13" position="4.2388 36.2041 -0.266212" yaw="0.0" pitch="0.0" roll="0.0" />
 </RenderableObjects>

@@ -7,3 +7,7 @@
 technique LightmapTechnique {
 	TECHNIQUE_BODY
 }
+
+technique AlphaLightmapTechnique {
+	ALPHA_TECHNIQUE_BODY
+}

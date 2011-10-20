@@ -7,3 +7,7 @@
 technique SpecularTexturedTechnique {
 	TECHNIQUE_BODY
 }
+
+technique AlphaSpecularTexturedTechnique {
+	ALPHA_TECHNIQUE_BODY
+}

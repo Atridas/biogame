@@ -1235,6 +1235,11 @@
     <Object3D position="30.5091 3.09934 28.722" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_menj_menj_llum_florescent15" />
   </Entity>
+  <Entity name="Plataforma">
+    <Object3D position="-3.36713 1.67941 23.7012" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="Plataforma" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
   <Miner name="Miner_menjador00" position="0.524845 1.62554 22.3385" yaw="0.0" active="false" />
   <Militar name="Militar_menjador00" position="24.3474 1.6 33.1077" yaw="0.0" active="false" destiny="Menjador_Navnode_25" />
   <Militar name="Militar_menjador01" position="17.4814 1.6 25.9969" yaw="0.0" active="false" destiny="Menjador_Navnode_03" />
