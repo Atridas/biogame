@@ -21,6 +21,7 @@ extern "C"
 #include "ComponentPlayerController.h"
 #include "ComponentPhysXController.h"
 #include "ComponentPhysXBox.h"
+#include "ComponentPhysXMesh.h"
 #include "ComponentRenderableObject.h"
 #include "ComponentMovement.h"
 #include "ComponentAnimation.h"
@@ -308,6 +309,12 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .scope[def("add_to_entity", (CComponentPhysXBox*(*)(CGameEntity*,float,int))                                    &CComponentPhysXBox::AddToEntity)]
       .def("set_position",        &CComponentPhysXBox::SetPosition)
       .def("get_position",        &CComponentPhysXBox::GetPosition)
+
+    // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentPhysXMesh, CBaseComponent>("ComponentPhysXMesh")
+      .scope[def("add_to_entity", &CComponentPhysXMesh::AddToEntity)]
+      .def("set_position",        &CComponentPhysXMesh::SetPosition)
+      .def("get_position",        &CComponentPhysXMesh::GetPosition)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentRenderableObject, CBaseComponent>("ComponentRenderableObject")

@@ -1412,6 +1412,10 @@
     <Object3D position="4.2388 36.2041 -0.266212" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="hangar_Plane13" />
   </Entity>
+  <Entity name="hang_trig_end">
+    <Object3D position="28.3774 0.940297 0.0564675" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="1.80037 3.04376 11.6834" collision_group="trigger" onEnter="hang_final_nivell" />
+  </Entity>
   <Player position="-24.8545 1.0 -10.0431" yaw="0.0" />
   <Miner name="Miner01" position="-17.4714 1.30798 -4.51993" yaw="0.0" active="false" />
   <Miner name="Miner02" position="-16.7403 1.30798 -2.29115" yaw="0.0" active="false" />

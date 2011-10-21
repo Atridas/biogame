@@ -1074,6 +1074,20 @@ ENTITIES
       Vect3f GetPosition();
       
   Class:
+    ComponentPhysXMesh
+    CComponentPhysXMesh
+    
+    Methods:
+      add_to_entity
+      static CComponentPhysXBox* AddToEntity(CGameEntity *_pEntity, float _fDensity, int _iCollisionGroup)
+      
+      set_position
+      void SetPosition(Vect3f _vPos);
+      
+      get_position
+      Vect3f GetPosition();
+      
+  Class:
     ComponentRenderableObject
     CComponentRenderableObject
     

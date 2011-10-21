@@ -211,3 +211,15 @@ function hang_trig_enemics_enter07(_EntityTrigger, _Entity)
     EM:remove_entity(_EntityTrigger)
   end
 end
+
+function hang_final_nivell(_EntityTrigger, _Entity)
+  if _Entity:get_name() == "Player" then
+    local controller = EM:get_entity("LevelController")
+    if controller then
+      CORE:set_pause(true)
+      controller:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Main_Menu_Credits')
+    else
+      log("ERROR: No es pot acabar el joc! No hi ha LevelController !!!!!")
+    end
+  end
+end
