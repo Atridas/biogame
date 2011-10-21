@@ -53,6 +53,8 @@ public:
 
   CGameEntity* InitMilitar(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName = "", const bool _bActive = true, const string& _szOnDeathScript = "", const string& _szDestinyNode = "");
 
+  CGameEntity* InitVigia(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName = "", const bool _bActive = true);
+
   CGameEntity* InitLaser(const Vect3f& _vPosInit, const Vect3f& _vDir, float _fDany, uint32 _uiCollisionMask);
 
   CGameEntity* InitParticles(const string& _szCore, const Vect3f& _vPos, const Vect3f& _vSize, float _fTime = 0, const Vect3f& _vYdir = Vect3f(0,1,0));

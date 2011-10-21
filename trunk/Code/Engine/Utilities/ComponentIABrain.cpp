@@ -34,11 +34,11 @@ extern "C"
 
 #define SHOOT_POWER 10.0f
 
-CComponentIABrain* CComponentIABrain::AddToEntity(CGameEntity *_pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript, const string& _szDestinyNode)
+CComponentIABrain* CComponentIABrain::AddToEntity(CGameEntity *_pEntity, const string& _szPlayerEntityName, const string& _szOnDeathScript, const string& _szDestinyNode)
 {
   CComponentIABrain *l_pComp = new CComponentIABrain();
   assert(_pEntity && _pEntity->IsOk());
-  if(l_pComp->Init(_pEntity, _szPlayerEntityName, _szRagdollName, _szOnDeathScript, _szDestinyNode))
+  if(l_pComp->Init(_pEntity, _szPlayerEntityName, _szOnDeathScript, _szDestinyNode))
   {
     l_pComp->SetEntity(_pEntity);
     return l_pComp;
@@ -50,10 +50,8 @@ CComponentIABrain* CComponentIABrain::AddToEntity(CGameEntity *_pEntity, const s
   }
 }
 
-bool CComponentIABrain::Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szRagdollName, const string& _szOnDeathScript, const string& _szDestinyNode)
+bool CComponentIABrain::Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szOnDeathScript, const string& _szDestinyNode)
 {
-  m_szRagdollName = _szRagdollName;
-
   m_pPlayer = CORE->GetEntityManager()->GetEntity(_szPlayerEntityName);
 
   m_szOnDeathScript = _szOnDeathScript;
@@ -241,12 +239,6 @@ void CComponentIABrain::ReceiveForce(SEvent _sEvent)
 void CComponentIABrain::Update(float _fDeltaTime)
 {
   CComponentObject3D* l_pObject3D = GetEntity()->GetComponent<CComponentObject3D>();
-  //if(m_iNumUpdates < 3)
-  //  m_iNumUpdates++;
-  //if(m_iNumUpdates == 2)
-  //{
-  //  CComponentRagdoll::AddToEntity(GetEntity(), m_szRagdollName, ECG_RAGDOLL);
-  //}
 }
 
 void CComponentIABrain::ActivateRagdoll()

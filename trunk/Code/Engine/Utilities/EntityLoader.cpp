@@ -467,6 +467,21 @@ void LoadMilitar(CEntityManager* _pEM, CXMLTreeNode& _TreeMiner)
 
 }
 
+void LoadVigia(CEntityManager* _pEM, CXMLTreeNode& _TreeVigia)
+{
+  LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Vigia");
+
+  string l_szName          = _TreeVigia.GetPszISOProperty("name", "", false);
+  string l_szPlayerName    = _TreeVigia.GetPszISOProperty("player", "Player", false);
+  Vect3f l_vPosition       = _TreeVigia.GetVect3fProperty("position", Vect3f(0,0,0),true);
+  bool l_bActive           = _TreeVigia.GetBoolProperty("active", true, false);
+  
+  LOGGER->AddNewLog(ELL_INFORMATION, "\t\t\tVigia name \"%s\", pos %f,%f,%f, Player %s", l_szName.c_str(),
+                                      l_vPosition.x, l_vPosition.y, l_vPosition.z, l_szPlayerName.c_str());
+
+  CGameEntity* l_pEntity = _pEM->InitVigia(l_szPlayerName, l_vPosition, l_szName, l_bActive);
+}
+
 // -------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------
 // -------------------------------------------------------------------------------------------------------------
@@ -616,6 +631,9 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
         } else if(strcmp(l_TreeEntity.GetName(),"Militar") == 0)
         {
           LoadMilitar(this, l_TreeEntity);
+        }else if(strcmp(l_TreeEntity.GetName(),"Vigia") == 0)
+        {
+          LoadVigia(this, l_TreeEntity);
         } else if(!l_TreeEntity.IsComment())
         {
           LOGGER->AddNewLog(ELL_WARNING,"\tNode \"%s\" no reconegut!", l_TreeEntities.GetName());
@@ -763,6 +781,44 @@ CGameEntity* CEntityManager::InitMilitar(const string& _szPlayerName, const Vect
   return l_pMilitar;
 }
 
+CGameEntity* CEntityManager::InitVigia(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName, const bool _bActive)
+{
+  CGameEntity* l_pVigia = CreateEntity();
+
+  if(_szEntityName != "")
+  {
+    SetName(_szEntityName, l_pVigia);
+  }
+
+  CComponentObject3D *l_pComponentObject3D = CComponentObject3D::AddToEntity(l_pVigia);
+  l_pComponentObject3D->SetPosition(_vPosition);
+  //CComponentMovement::AddToEntity(l_pVigia);
+  //CComponentPhysXController::AddToEntity(l_peEnemy, _fRadius, 0.5f, 45.0f, 0.01f, 0.5f,  ECG_ENEMICS );
+  
+  stringstream l_szInstanceModelName("Vigia");
+
+  l_szInstanceModelName << " " << l_pVigia->GetGUID();
+  
+  CComponentRenderableObject *l_pComponentRenderableObject = CComponentRenderableObject::AddToEntityWithAnimatedModel(l_pVigia, l_szInstanceModelName.str(), "Vigia");
+  //l_pComponentRenderableObject->m_bBlockPitchRoll = true;
+  //l_pComponentRenderableObject->m_fHeightAdjustment = -1.5f;
+  //l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
+  l_pComponentRenderableObject->GetRenderableObject()->SetMat44(l_pComponentObject3D->GetMat44());
+
+  CComponentPhysXSphere::AddToEntity(l_pVigia,10.0f,0.2f,0.01f,GetCollisionGroup("objecte dinamic"));
+
+  CComponentVida::AddToEntity(l_pVigia, 100.f, 100.f);
+  //CComponentIABrain::AddToEntity(l_pVigia,_szPlayerName,_szRagdollModell, _szOnDeathScript, _szDestinyNode);
+  
+  //CComponentStateMachine::AddToEntity(l_pVigia, _szInitialState);
+
+  //CComponentCollisionReport::AddToEntity(l_pMilitar,"","","","enemy_on_start_colision","","",0.1f);
+
+  l_pVigia->SetActive(_bActive);
+
+  return l_pVigia;
+}
+
 CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f& _vPosition, float _fRadius,
                          const string& _szInitialState, const string& _szRenderableModel, const string& _szRagdollModell,
                          const string& _szEntityName, const string& _szOnDeathScript, const string& _szDestinyNode)
@@ -796,7 +852,7 @@ CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f
   //CComponentAnimation::AddToEntity(l_peEnemy);
   CComponentVida::AddToEntity(l_peEnemy, 100.f, 100.f);
   //Important IABrain despres de ComponentVida, sinó IABrain no te la informacio actualitzada de la vida
-  CComponentIABrain::AddToEntity(l_peEnemy,_szPlayerName,_szRagdollModell, _szOnDeathScript, _szDestinyNode);
+  CComponentIABrain::AddToEntity(l_peEnemy,_szPlayerName, _szOnDeathScript, _szDestinyNode);
   
 
   CComponentStateMachine::AddToEntity(l_peEnemy, _szInitialState);
