@@ -101,16 +101,18 @@ bool CPhysxBone::AddBoxActor(CXMLTreeNode _XMLObjects, CGameEntity* _pEntity)
   l_vMatActor = GetBoneLeftHandedAbsoluteTransformation(m_pCalBone);
   m_vMiddlePoint = l_fMiddlePoint;
 
+  Mat44f l_mTotal = m_vMatAnimatedModel*l_vMatActor;
+
   CPhysicUserData* l_pUserData = new CPhysicUserData(l_szName);
   l_pUserData->SetPaint(true);
   l_pUserData->SetColor(colGREEN);
   l_pUserData->SetEntity(_pEntity);
   CPhysicActor* l_pActor = new CPhysicActor(l_pUserData);
-  l_pActor->AddBoxSphape(Vect3f(l_vSize.x,l_vSize.z,l_vSize.y)*0.5f,m_vMatActor.GetPos(),l_fMiddlePoint,NULL,m_iCollisionGroup);
+  l_pActor->AddBoxSphape(Vect3f(l_vSize.x,l_vSize.z,l_vSize.y)*0.5f,l_mTotal.GetPos(),l_fMiddlePoint,NULL,m_iCollisionGroup);
   l_pActor->CreateBody(l_fDensity,1.0f,1.0f);
   l_pPM->AddPhysicActor(l_pActor);
   l_pActor->SetActorSolverIterationCount(75);
-  l_pActor->SetMat44(m_vMatAnimatedModel*l_vMatActor);
+  l_pActor->SetMat44(l_mTotal);
   //l_pActor->GetPhXActor()->raiseBodyFlag(NX_BF_KINEMATIC);
   //l_pActor->GetPhXActor()->putToSleep();
 
