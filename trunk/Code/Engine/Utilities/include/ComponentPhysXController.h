@@ -31,6 +31,10 @@ public:
   void SetPositionFromRagdoll();
   void SetHeight(float _fHeight);
 
+  //No utilitzar a excepció de casos extranys, moure amb el component movement
+  void   SetPosition(const Vect3f& _vPosition);
+  Vect3f GetPosition() const;
+
   virtual ~CComponentPhysXController(void) {Done();};
 
 protected:

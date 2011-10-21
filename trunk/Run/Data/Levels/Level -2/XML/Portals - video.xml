@@ -104,6 +104,8 @@
         <GameObject name="lvl2_videolvl2_videoSpot01.Target" />
         <GameObject name="lvl2_videoSpot02" />
         <GameObject name="lvl2_videolvl2_videoSpot02.Target" />
+        <GameObject name="lvl2_video_Llum_emergengia_autoilum01" />
+        <GameObject name="lvl2_video_carcasa" />
       </Objects>
     </Room>
   </Rooms>

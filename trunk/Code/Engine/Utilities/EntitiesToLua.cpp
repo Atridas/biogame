@@ -302,6 +302,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .scope[def("add_to_entity",      &CComponentPhysXController::AddToEntity)]
       .def("set_height",               &CComponentPhysXController::SetHeight)
       .def("set_position_from_ragdoll",&CComponentPhysXController::SetPositionFromRagdoll)
+      .def("get_position",             &CComponentPhysXController::GetPosition)
+      .def("set_position",             &CComponentPhysXController::SetPosition)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPhysXBox, CBaseComponent>("ComponentPhysXBox")

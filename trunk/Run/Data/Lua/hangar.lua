@@ -62,7 +62,7 @@ function hang_porta(_self, _player)
       end
     end
     
-    --obrir porta, finalitzar pantalla.
+    --obrir porta.
     local door = EM:get_entity("hangar_puerta_hangar")
     
     if door then

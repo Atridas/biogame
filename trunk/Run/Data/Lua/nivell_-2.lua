@@ -93,12 +93,13 @@ function salavideo_palanca(_self, _player)
       l_message.dispatch_time = 0
       
       EM:send_event(l_message)
+      
+      --desactivar billboard
+      deactivate_entity("lvl2_video_billboard_laseroff")
     else
       log('error, no es troba la porta')
     end
     
-    --activar el miner del passadís
-    activate_entity("pas_miner00")
     
     activate_cynematic_camera('lvl2_pass_CameraPassadis')
     
@@ -113,6 +114,11 @@ function salavideo_palanca(_self, _player)
 end
 
 function lvl2_deactivate_camera(_self)
+
+  --activar el miner del passadís
+  activate_entity("pas_miner00")
+  
+  
   deactivate_cynematic_camera()
   RENDERER:activate_render_path('aim_gui')
   
@@ -248,9 +254,41 @@ function activarMenjador04(_EntityTrigger, _Entity)
   end
 end
 
+--activar el montacàrregues
+function activate_elevator_2(_EntityTrigger, _Entity)
+  if _Entity:get_name() == "Player" then    
+    --activar montacàrregues.
+    local elevator = EM:get_entity("Plataforma")
+    
+    if elevator then
+      --Càmera
+      activate_cynematic_camera("lvl2_camera_elevator")
+      
+      --Desactivo player
+      _Entity:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Inactiu')
+      
+      --Missatge
+      local l_message = EM:get_event()
+
+      l_message.msg = Event.obrir
+      l_message.sender = elevator:get_guid()
+      l_message.receiver = elevator:get_guid()
+      l_message.dispatch_time = 0
+      
+      EM:send_event(l_message)
+    else
+      log('Error: "Plataforma" no trobada.')
+    end
+    
+    EM:remove_entity(_EntityTrigger)
+  end
+end
+
 --canviar de nivell
 function change_level_level_2(_EntityTrigger, _Entity)
   if _Entity:get_name() == "Player" then
+    deactivate_cynematic_camera()
+    
     set_new_level("Nivell -1")
   end
 end

@@ -424,7 +424,8 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Inactiu['Enter'] = function(_jugador)
-
+  local animation = _jugador:get_component(BaseComponent.animation)
+  animation:set_animation_state('idle')
 end
 
 -------------------------------------------------------------------------------------------------

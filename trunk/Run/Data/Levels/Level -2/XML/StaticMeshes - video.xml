@@ -8,7 +8,7 @@
 	<mesh name="lvl2_video_Box19" path="Data/Meshes/lvl2_video_Box19.mesh" max="0.57774 0.190645 0.538088" min="-0.678234 -0.197844 -0.530226" />
 	<mesh name="lvl2_video_Sala de videogililacia" path="Data/Meshes/lvl2_video_Sala de videogililacia.mesh" max="6.3841 2.5 7.06581" min="-6.77732 -2.5 -6.08477" />
 	<mesh name="lvl2_video_balla2" path="Data/Meshes/lvl2_video_balla2.mesh" max="0.734769 0.345991 0.676573" min="-0.734769 -0.345991 -0.676573" />
-	<mesh name="lvl2_video_marc" path="Data/Meshes/lvl2_video_marc.mesh" max="1.79179 1.6687 0.891498" min="-1.79984 -1.66822 -0.875995" />
+	<mesh name="lvl2_video_marc" path="Data/Meshes/lvl2_video_marc.mesh" max="1.79179 1.29959 0.891498" min="-1.79984 -1.66822 -0.875995" />
 	<mesh name="lvl2_video_llum1" path="Data/Meshes/lvl2_video_llum1.mesh" max="0.12377 1.22494 0.218279" min="-0.123771 -1.22494 -0.218279" />
 	<mesh name="lvl2_video_llum2" path="Data/Meshes/lvl2_video_llum2.mesh" max="0.12377 1.22494 0.218279" min="-0.123771 -1.22494 -0.218279" />
 	<mesh name="lvl2_video_tubos1" path="Data/Meshes/lvl2_video_tubos1.mesh" max="1.21956 1.91968 2.67029" min="-1.21956 -1.91968 -2.6703" />
@@ -35,4 +35,6 @@
 	<mesh name="lvl2_video_iluminacions_terra13" path="Data/Meshes/lvl2_video_iluminacions_terra13.mesh" max="0.0793991 0.0218422 0.0755138" min="-0.0793991 -0.0169232 -0.0755138" />
 	<mesh name="lvl2_video_iluminacions_terra14" path="Data/Meshes/lvl2_video_iluminacions_terra14.mesh" max="0.0793991 0.0218422 0.0755138" min="-0.0793991 -0.0169232 -0.0755138" />
 	<mesh name="lvl2_video_iluminacions_terra15" path="Data/Meshes/lvl2_video_iluminacions_terra15.mesh" max="0.0793996 0.0218422 0.0755134" min="-0.0793996 -0.0169232 -0.0755134" />
+	<mesh name="lvl2_video_Llum_emergengia_autoilum01" path="Data/Meshes/lvl2_video_Llum_emergengia_autoilum01.mesh" max="-0.0668778 -0.00116014 0.247429" min="-0.021445 -0.167435 -0.247428" />
+	<mesh name="lvl2_video_carcasa" path="Data/Meshes/lvl2_video_carcasa.mesh" max="-0.223876 1.87671 0.255852" min="-0.16795 1.70812 -0.263172" />
 </meshes>

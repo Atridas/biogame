@@ -58,6 +58,10 @@
       </Boundings>
       <Objects>
         <GameObject name="lvl1_habitacio_claus" />
+        <GameObject name="lvl1_portal_claus" />
+        <GameObject name="lvl1_claus_porta_sub1" />
+        <GameObject name="lvl1_claus_porta_sub2" />
+        <GameObject name="lvl1_portal_bidons" />
         <GameObject name="lvl1_porta_claus_light_bot_off" />
         <GameObject name="lvl1_porta_claus_light_bot_on" />
         <GameObject name="lvl1_porta_claus_light_left_off" />
@@ -66,10 +70,6 @@
         <GameObject name="lvl1_porta_claus_light_right_on" />
         <GameObject name="lvl1_porta_claus_light_top_off" />
         <GameObject name="lvl1_porta_claus_light_top_on" />
-        <GameObject name="lvl1_portal_claus" />
-        <GameObject name="lvl1_claus_porta_sub1" />
-        <GameObject name="lvl1_claus_porta_sub2" />
-        <GameObject name="lvl1_portal_bidons" />
       </Objects>
     </Room>
     <Room name="PassFinal">
@@ -336,6 +336,22 @@
         <GameObject name="lvl1_caixa_llarga17" />
         <GameObject name="lvl1_caixa_llarga18" />
         <GameObject name="lvl1_Plane24" />
+        <GameObject name="lvl1_fluorescente_ences14" />
+        <GameObject name="lvl1_fluorescente_ences15" />
+        <GameObject name="lvl1_fluorescente_ences16" />
+        <GameObject name="lvl1_fluorescente_ences17" />
+        <GameObject name="lvl1_fluorescente_ences18" />
+        <GameObject name="lvl1_fluorescente_ences19" />
+        <GameObject name="lvl1_fluorescente_ences20" />
+        <GameObject name="lvl1_fluorescente_ences21" />
+        <GameObject name="lvl1_fluorescente_ences22" />
+        <GameObject name="lvl1_fluorescente_apagat05" />
+        <GameObject name="lvl1_fluorescente_apagat06" />
+        <GameObject name="lvl1_fluorescente_apagat07" />
+        <GameObject name="lvl1_Plane26" />
+        <GameObject name="lvl1_Plane27" />
+        <GameObject name="lvl1_Plane28" />
+        <GameObject name="lvl1_Plane29" />
       </Objects>
     </Room>
     <Room name="Room04">
@@ -402,9 +418,6 @@
         <GameObject name="lvl1_dutxa30" />
         <GameObject name="lvl1_Plane17" />
         <GameObject name="lvl1_Plane18" />
-        <GameObject name="lvl1_LAVABO" />
-        <GameObject name="lvl1_LAVABO01" />
-        <GameObject name="lvl1_LAVABO02" />
         <GameObject name="lvl1_LAVABO03" />
         <GameObject name="lvl1_Plane19" />
         <GameObject name="lvl1_Banc06" />
@@ -433,6 +446,9 @@
         <GameObject name="lvl1_fluorescente_apagat01" />
         <GameObject name="lvl1_taquilla06" />
         <GameObject name="lvl1_taquilla01" />
+        <GameObject name="lvl1_LAVABO04" />
+        <GameObject name="lvl1_LAVABO05" />
+        <GameObject name="lvl1_LAVABO06" />
         <GameObject name="lvl1_key_yellow" />
       </Objects>
     </Room>
@@ -466,8 +482,6 @@
         <GameObject name="lvl1_Caixa_estatica_petita39" />
         <GameObject name="lvl1_Caixa_estatica_petita40" />
         <GameObject name="lvl1_Caixa_estatica_petita41" />
-        <GameObject name="lvl1_aguanta_llums28" />
-        <GameObject name="lvl1_aguanta_llums29" />
         <GameObject name="lvl1_aguanta_llums30" />
       </Objects>
     </Room>
@@ -724,6 +738,14 @@
         <GameObject name="lvl1_elice" />
         <GameObject name="lvl1_porta07" />
         <GameObject name="lvl1_porta09" />
+        <GameObject name="lvl1_carcasa01" />
+        <GameObject name="lvl1_carcasa02" />
+        <GameObject name="lvl1_carcasa03" />
+        <GameObject name="lvl1_carcasa04" />
+        <GameObject name="lvl1_carcasa05" />
+        <GameObject name="lvl1_carcasa06" />
+        <GameObject name="lvl1_carcasa07" />
+        <GameObject name="lvl1_carcasa" />
       </Objects>
     </Room>
   </Rooms>

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Entities>
+  <Entity name="Camera01">
+    <Object3D position="6.35256 3.06244 -4.94216" yaw="49.8975" pitch="0.0" roll="-84.0142" />
+    <CynematicCamera target="4.22965 2.77142 -3.15434" fov="65.4705" near="1.0" far="1000.0" />
+  </Entity>
   <Entity name="lvl1_habitacio_dormitori">
     <Object3D position="21.5363 2.38419e-007 21.3566" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_habitacio_dormitori" />
@@ -2959,6 +2963,38 @@
     <RenderableObject animated="false" name="lvl1_porta09" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
+  <Entity name="lvl1_carcasa01">
+    <Object3D position="-7.54328 1.51153 -0.0362644" yaw="180.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_carcasa01" />
+  </Entity>
+  <Entity name="lvl1_carcasa02">
+    <Object3D position="0.0419369 1.51153 -7.54283" yaw="-90.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_carcasa02" />
+  </Entity>
+  <Entity name="lvl1_carcasa03">
+    <Object3D position="0.0344453 1.51153 7.54377" yaw="90.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_carcasa03" />
+  </Entity>
+  <Entity name="lvl1_carcasa04">
+    <Object3D position="-5.33674 1.51153 5.33188" yaw="135.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_carcasa04" />
+  </Entity>
+  <Entity name="lvl1_carcasa05">
+    <Object3D position="5.31478 1.51153 -5.34791" yaw="-45.0001" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_carcasa05" />
+  </Entity>
+  <Entity name="lvl1_carcasa06">
+    <Object3D position="-5.34798 1.51153 -5.3125" yaw="-135.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_carcasa06" />
+  </Entity>
+  <Entity name="lvl1_carcasa07">
+    <Object3D position="5.3122 1.51153 5.35638" yaw="45.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_carcasa07" />
+  </Entity>
+  <Entity name="lvl1_carcasa">
+    <Object3D position="7.54248 1.51153 -0.0287724" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_carcasa" />
+  </Entity>
   <Entity name="lvl1_grenade">
     <Object3D position="-27.3665 1.47331 0.143002" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="granada" />
@@ -3149,61 +3185,29 @@
     <Object3D position="7.3167 3.38817 -0.0326042" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum01" />
   </Entity>
-  <Entity name="carcasa">
-    <Object3D position="7.54248 1.51153 -0.0287724" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="carcasa" />
-  </Entity>
-  <Entity name="carcasa01">
-    <Object3D position="-7.54328 1.51153 -0.0362644" yaw="180.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="carcasa01" />
-  </Entity>
   <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum02">
     <Object3D position="-7.3175 3.38817 -0.0324326" yaw="180.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum02" />
-  </Entity>
-  <Entity name="carcasa02">
-    <Object3D position="0.0419371 1.51153 -7.54283" yaw="-90.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="carcasa02" />
   </Entity>
   <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum03">
     <Object3D position="0.0381052 3.38817 -7.31705" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum03" />
   </Entity>
-  <Entity name="carcasa03">
-    <Object3D position="0.0344451 1.51153 7.54377" yaw="90.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="carcasa03" />
-  </Entity>
   <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum04">
     <Object3D position="0.0382769 3.38817 7.31798" yaw="90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum04" />
-  </Entity>
-  <Entity name="carcasa04">
-    <Object3D position="-5.33674 1.51153 5.33188" yaw="135.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="carcasa04" />
   </Entity>
   <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum05">
     <Object3D position="-5.17438 3.38817 5.17493" yaw="135.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum05" />
   </Entity>
-  <Entity name="carcasa05">
-    <Object3D position="5.31478 1.51153 -5.34791" yaw="-45.0001" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="carcasa05" />
-  </Entity>
   <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum06">
     <Object3D position="5.15242 3.38817 -5.19097" yaw="-45.0001" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum06" />
   </Entity>
-  <Entity name="carcasa06">
-    <Object3D position="-5.34798 1.51153 -5.3125" yaw="-135.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="carcasa06" />
-  </Entity>
   <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum07">
     <Object3D position="-5.19104 3.38817 -5.15014" yaw="-135.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum07" />
-  </Entity>
-  <Entity name="carcasa07">
-    <Object3D position="5.3122 1.51153 5.35638" yaw="45.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="carcasa07" />
   </Entity>
   <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum08">
     <Object3D position="5.15525 3.38817 5.19402" yaw="45.0" pitch="0.0" roll="0.0" />
@@ -3658,7 +3662,7 @@
   <Militar name="lvl1_militar02" position="34.2674 -0.412989 1.20565" yaw="0.0" active="false" destiny="lvl1_node_cobertura04" />
   <Militar name="lvl1_militar03" position="11.9294 1.6 1.55775" yaw="0.0" active="false" destiny="lvl1_node_cobertura02" />
   <Militar name="lvl1_militar04" position="14.1854 1.6 -1.38754" yaw="0.0" active="false" destiny="lvl1_node_cobertura03" />
-  <Militar name="lvl1_militar05" position="32.1479 -0.452075 1.39366" yaw="0.0" active="false" />
+  <Militar name="lvl1_militar05" position="32.1479 -0.452075 1.39366" yaw="0.0" active="false" destiny="lvl1_node_cobertura04" />
   <Militar name="lvl1_militar06" position="35.0941 -6.10473 -15.1002" yaw="0.0" active="false" />
   <Militar name="lvl1_militar07" position="23.544 -7.29258 -28.7595" yaw="0.0" active="false" />
   <Militar name="lvl1_militar08" position="37.915 -7.29258 -28.1546" yaw="0.0" active="false" />

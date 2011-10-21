@@ -35,4 +35,6 @@
 	<RenderableObject name="lvl2_video_iluminacions_terra13" class="StaticMesh" resource="lvl2_video_iluminacions_terra13" position="8.10072 -2.00769 10.0114" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_video_iluminacions_terra14" class="StaticMesh" resource="lvl2_video_iluminacions_terra14" position="8.09986 -2.00769 8.77293" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_video_iluminacions_terra15" class="StaticMesh" resource="lvl2_video_iluminacions_terra15" position="7.45745 -2.00769 7.0208" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_video_Llum_emergengia_autoilum01" class="StaticMesh" resource="lvl2_video_Llum_emergengia_autoilum01" position="6.93462 1.23904 3.54631" yaw="-66.5074" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_video_carcasa" class="StaticMesh" resource="lvl2_video_carcasa" position="7.02848 -0.637683 3.34064" yaw="-66.5074" pitch="0.0" roll="0.0" />
 </RenderableObjects>

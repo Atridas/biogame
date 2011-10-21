@@ -139,8 +139,8 @@
     <Trigger shape="box" size="7.13034 8.93156 10.1565" collision_group="trigger" onEnter="open_door" onExit="close_door" />
   </Entity>
   <Entity name="lvl2_pass_CameraPassadis">
-    <Object3D position="13.0235 2.78403 -7.93615" yaw="-20.0608" pitch="0.0" roll="-71.2517" />
-    <CynematicCamera target="15.837 0.0 -0.231486" fov="55.0" near="1.0" far="1000.0" />
+    <Object3D position="9.84518 2.78403 -10.1465" yaw="-48.3828" pitch="0.0" roll="-82.2449" />
+    <CynematicCamera target="16.46 1.57906 -4.27003" fov="55.0" near="1.0" far="1000.0" />
   </Entity>
   <Miner name="pas_miner00" position="20.8841 1.9223 5.44801" yaw="0.0" active="false" />
 </Entities>
