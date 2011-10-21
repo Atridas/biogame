@@ -18,6 +18,8 @@
 #include "LevelChanger.h"
 #include "ScriptManager.h"
 
+//#include "GraphDefines.h"
+
 #include "NivellInicial.h"
 
 void CGameProcess::Update(float _fElapsedTime)
@@ -58,6 +60,7 @@ void CGameProcess::Update(float _fElapsedTime)
 void CGameProcess::RenderINFO(CRenderManager* _pRM)
 {
   //CORE->GetPhysicsManager()->DebugRender(_pRM);
+  //CORE->GetIAManager()->GetGraph()->DebugRender(_pRM);
 }
 
 bool CGameProcess::Init()

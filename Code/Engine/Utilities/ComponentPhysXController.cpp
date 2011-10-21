@@ -113,6 +113,19 @@ void CComponentPhysXController::SetPositionFromRagdoll()
   }
 }
 
+void CComponentPhysXController::SetPosition(const Vect3f& _vPos)
+{
+  if(m_pPhysXController)
+    m_pPhysXController->SetPosition(_vPos);
+}
+
+Vect3f CComponentPhysXController::GetPosition() const
+{
+  if(m_pPhysXController)
+    return m_pPhysXController->GetPosition();
+
+  return Vect3f(0.0f);
+}
 
 void CComponentPhysXController::Release(void)
 {

@@ -20,6 +20,7 @@
     <file path="Data/Lua/door_states.lua" />
     <file path="Data/Lua/key_machine.lua" />
     <file path="Data/Lua/hangar_door.lua" />
+    <file path="Data/Lua/elevator.lua" />
     
   </files>
   <initscripts>

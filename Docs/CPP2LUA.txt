@@ -1053,6 +1053,12 @@ ENTITIES
       set_position_from_ragdoll
       void SetPositionFromRagdoll()
       
+      get_position
+      Vect3f GetPosition() const
+      
+      set_position
+      void SetPosition(const Vect3f& _vPos)
+      
   Class:
     ComponentPhysXBox
     CComponentPhysXBox
