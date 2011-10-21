@@ -51,7 +51,7 @@ public:
 	void							AddPlaneShape			(const Vect3f& normal, float distance, uint32 group = 0);
 
 	//---Trigger Function---
-	void							CreateBoxTrigger	(const Vect3f& size, uint32 group = 0);
+	void							CreateBoxTrigger	(const Vect3f& globalPos, const Vect3f& size, uint32 group = 0);
   void              ActivateAllTriggers();
 
   //---Activate---

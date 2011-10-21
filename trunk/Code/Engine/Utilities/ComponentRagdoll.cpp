@@ -31,15 +31,21 @@ CComponentRagdoll* CComponentRagdoll::AddToEntity(CGameEntity *_pEntity, const s
 
 bool CComponentRagdoll::Init(CGameEntity* _pEntity, const string& _szSkeletonFile, int _iCollisionGroup)
 {
+  CComponentObject3D* l_pO3D = _pEntity->GetComponent<CComponentObject3D>();
   CComponentRenderableObject* l_pCRO = _pEntity->GetComponent<CComponentRenderableObject>();
+
+  assert(l_pO3D);
+  assert(l_pCRO);
 
   m_pRAIM = dynamic_cast<CRenderableAnimatedInstanceModel*>(l_pCRO->GetRenderableObject());
 
   Mat44f l_mat44 = _pEntity->GetComponent<CComponentObject3D>()->GetMat44();
 
+  m_pRAIM->SetPosition(l_mat44.GetPos());
+
   m_pRagdoll = new CPhysxSkeleton(false);
   CalModel* l_pCalModel = m_pRAIM->GetAnimatedInstanceModel()->GetAnimatedCalModel();
-  bool l_bOk = m_pRagdoll->Init(_szSkeletonFile,l_pCalModel,l_mat44,_iCollisionGroup, _pEntity);
+  bool l_bOk = m_pRagdoll->Init(_szSkeletonFile,l_pCalModel,l_pO3D->GetMat44(),_iCollisionGroup, _pEntity);
 
   SetOk(l_bOk);
   return IsOk();

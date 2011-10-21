@@ -47,7 +47,7 @@ bool CComponentDoor::Init(CGameEntity* _pEntity, bool _bOpen, Vect3f _vSize, con
   m_pPhysXActor = new CPhysicActor(m_pPhysXData);
   m_pPhysXActor->CreateBody(100.0f);
 
-  m_pPhysXActor->AddBoxSphape(_vSize*0.5f,v3fZERO , v3fZERO, NULL, ECG_ESCENARI);
+  m_pPhysXActor->AddBoxSphape(_vSize*0.5f,m_pObject3D->GetMat44().GetPos() , v3fZERO, NULL, ECG_ESCENARI);
 
   CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXActor);
 

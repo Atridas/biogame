@@ -59,7 +59,7 @@ bool CComponentTrigger::Init(
 
   m_pPhysXActor = new CPhysicActor(m_pPhysXData);
 
-  m_pPhysXActor->CreateBoxTrigger(_vSize * .5f, _iCollisionGroup);
+  m_pPhysXActor->CreateBoxTrigger(m_pObject3D->GetMat44().GetPos(), _vSize * .5f, _iCollisionGroup);
 
   CORE->GetPhysicsManager()->AddPhysicActor(m_pPhysXActor);
   m_pPhysXActor->SetMat44( m_pObject3D->GetMat44() );

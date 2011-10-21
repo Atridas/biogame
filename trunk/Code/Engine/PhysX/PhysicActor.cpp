@@ -356,7 +356,7 @@ Vect3f CPhysicActor::GetRotation ()
 	return l_vRot;
 }
 
-void CPhysicActor::CreateBoxTrigger(const Vect3f& size, uint32 group)
+void CPhysicActor::CreateBoxTrigger(const Vect3f& globalPos, const Vect3f& size, uint32 group)
 {
 	assert(m_pPhXActorDesc);
 	NxBoxShapeDesc* boxDesc = new NxBoxShapeDesc();
@@ -365,6 +365,7 @@ void CPhysicActor::CreateBoxTrigger(const Vect3f& size, uint32 group)
 	m_vBoxDesc.push_back(boxDesc);
 	boxDesc->dimensions = NxVec3(size.x, size.y, size.z);
 	boxDesc->shapeFlags |= NX_TRIGGER_ENABLE;
+  m_pPhXActorDesc->globalPose.t = NxVec3(globalPos.x, globalPos.y, globalPos.z);
 	m_pPhXActorDesc->shapes.pushBack(boxDesc);
 }
 
