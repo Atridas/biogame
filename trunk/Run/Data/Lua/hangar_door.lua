@@ -7,8 +7,8 @@ Hangar_Door = {}
 
 Hangar_Door["Time"]       = 0
 Hangar_Door["Open Time"]  = 60
-Hangar_Door["Open Heigh"] = 2.0
-Hangar_Door["Open Speed"] = Hangar_Door["Open Time"] / Hangar_Door["Open Heigh"]
+Hangar_Door["Open Heigh"] = 2.3
+Hangar_Door["Open Speed"] = Hangar_Door["Open Heigh"] / Hangar_Door["Open Time"]
 
 
 -------------------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ end
 -------------------------------------------------------------------------------------------------
 State_Hangar_Porta_Closed['Receive'] = function(_entitat, _event)
   if _event.msg == Event.obrir then
-    log('OPEN RECEIVED')
+    --log('OPEN RECEIVED')
     _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Hangar_Porta_Opening')
     return
   end
@@ -56,7 +56,11 @@ end
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 State_Hangar_Porta_Opening['Enter'] = function(_entitat)
-  log('OPENING')
+
+  --Inicialitzem la porta posant-li un component de moviment
+  --ComponentMovement.add_to_entity(_entitat)
+  
+  --log('OPENING')
   Hangar_Door["Time"] = 0
   
   --TODO: so alarma
@@ -69,17 +73,16 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Hangar_Porta_Opening['Update'] = function(_entitat, _dt)
-  local object3d = _entitat:get_component(BaseComponent.object3d)
-  local position = object3d:get_position()
+  local physx = _entitat:get_component(BaseComponent.physx_actor)
+  local position = physx:get_position()
   
   Hangar_Door["Time"] = Hangar_Door["Time"] + _dt
   
-  object3d:set_position(position.x, position.y + Hangar_Door["Open Speed"] * _dt, position.z)
+  physx:set_position(Vect3f(position.x, position.y + Hangar_Door["Open Speed"] * _dt, position.z))
   
   --TODO: Rotar llums emergencia
   
   if Hangar_Door["Time"] >= Hangar_Door["Open Time"] then
-    log('S\'ACABA L\'OPENING')
     _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Hangar_Porta_Open')
     return
   end
@@ -96,7 +99,6 @@ end
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 State_Hangar_Porta_Open['Enter'] = function(_entitat)
-  log('OPEN')
   --TODO: El que es vulgui fer al final de nivell
 end
 

@@ -3,6 +3,9 @@
   <mesh filename="Data/Animated Models/Miner/Mesh.cmf"/>
   <material animated="true" vertex_type="787">
     <texture type="diffusse" filename="Data/Textures/DIF_MINER.tga"/>
+    <texture type="normalmap" filename="Data/Textures/miner_NRM.dds"/>
+    <texture type="specular" filename="Data/Textures/miner_SPEC.dds"/>
+    <property type="specularParams" glossiness="200.0" specular_level="10.0" />
     <!--texture type="normalmap" filename="Data/Textures/normal_eonita.jpg"/-->
   </material>
   <animation name="idle" filename="Data/Animated Models/Miner/idle.CAF"/>
