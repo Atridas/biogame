@@ -1223,6 +1223,29 @@ utility BioUtility "Eon-Utility" width:160 height:549
 						format "\n  %" (CloseTagXML "Entity") to:l_file
 					)
 				)
+				else if IsCamera l_instance then
+				(
+					if l_instance.name == undefined then
+					(
+						format "\n  %" (OpenTagXML "Entity") to:l_file
+					)
+					else
+					(
+						format "\n  %" (OpenTagParamXML "Entity" #(#("name",l_instance.name))) to:l_file
+					)
+					
+					format "\tEntitat Camera %\n" l_instance.name
+					
+					--Object3D
+					l_params = XMLEntityObject3D l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					--Camera
+					l_params = XMLEntityCamera l_instance &l_TagName
+					format "\n    %" (InlineTagParamXML l_TagName l_params) to:l_file
+					
+					format "\n  %" (CloseTagXML "Entity") to:l_file
+				)
 			)
 		)
 		

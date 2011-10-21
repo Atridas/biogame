@@ -45,8 +45,6 @@
 
 
 #include "SphereCamera.h"
-CObject3D     g_CameraPos;
-CCamera*      g_GlobalCamera;
 
 #define FES_UN_COLLO_DE_LLUMS
 
@@ -137,16 +135,6 @@ bool CEntityProcess::Init()
   CORE->GetIAManager()->CompleteGraph();
 
 
-  g_CameraPos.SetPosition(Vect3f(0,5,0));
-  g_GlobalCamera = new CSphereCamera(
-                            .1f,
-                            100,
-                            55.0f * FLOAT_PI_VALUE/180.0f,
-                            ((float)RENDER_MANAGER->GetScreenWidth())/((float)RENDER_MANAGER->GetScreenHeight()),
-                            &g_CameraPos,
-                            m_pPlayerEntity->GetComponent<CComponentObject3D>()
-                                    );
-
   SetOk(true);
   return IsOk();
 }
@@ -157,7 +145,6 @@ void CEntityProcess::Release()
 
   CHECKED_DELETE(m_pPActorPlane)
   CHECKED_DELETE(m_pUserData)
-  CHECKED_DELETE(g_GlobalCamera)
 }
 
 void CEntityProcess::Update(float _fElapsedTime)
@@ -249,11 +236,11 @@ bool CEntityProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, c
   {
     if(CORE->GetRenderer()->GetActiveCamera())
     {
-      CORE->GetRenderer()->SetActiveCamera(0);
+      CORE->GetScriptManager()->RunCode("deactivate_cynematic_camera()");
     }
     else
     {
-      CORE->GetRenderer()->SetActiveCamera(g_GlobalCamera);
+      CORE->GetScriptManager()->RunCode("activate_cynematic_camera('CameraDeProves')");
     }
     return true;
   }

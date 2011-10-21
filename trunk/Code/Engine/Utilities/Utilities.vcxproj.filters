@@ -163,6 +163,9 @@
     <Filter Include="EntitySystem\Components\ComponentDelayedScript">
       <UniqueIdentifier>{502367df-b121-40b5-8090-0c6a0386057d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EntitySystem\Components\ComponentCynematicCamera">
+      <UniqueIdentifier>{f5229f9f-89f2-4796-8559-0ab337717d06}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameObject.cpp">
@@ -332,6 +335,9 @@
     </ClCompile>
     <ClCompile Include="ComponentDelayedScript.cpp">
       <Filter>EntitySystem\Components\ComponentDelayedScript</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentCynematicCamera.cpp">
+      <Filter>EntitySystem\Components\ComponentCynematicCamera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -511,6 +517,9 @@
     </ClInclude>
     <ClInclude Include="include\ComponentDelayedScript.h">
       <Filter>EntitySystem\Components\ComponentDelayedScript</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ComponentCynematicCamera.h">
+      <Filter>EntitySystem\Components\ComponentCynematicCamera</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

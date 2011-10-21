@@ -745,3 +745,34 @@ function XMLEntityLight _instance &_TagName =
 	
 	return l_params
 )
+
+--Genera els paràmetres d'un tag XML d'entitat Camera. Conté:
+-- target
+-- fov
+-- near
+-- far
+function XMLEntityCamera _instance &_TagName =
+(
+	local l_params = #()
+	local l_ss
+	
+	_TagName = "CynematicCamera"
+	l_ss = "" as stringstream
+	l_aux = RHVectorToLH (_instance.target.pos)
+	format "% % %" l_aux.x l_aux.y l_aux.z to:l_ss
+	append l_params #("target", l_ss)
+	
+	l_ss = "" as stringstream
+	format "%" _instance.fov to:l_ss
+	append l_Params #("fov", l_ss)
+	
+	l_ss = "" as stringstream
+	format "%" _instance.nearclip to:l_ss
+	append l_Params #("near", l_ss)
+	
+	l_ss = "" as stringstream
+	format "%" _instance.farclip to:l_ss
+	append l_Params #("far", l_ss)
+	
+	return l_params
+)

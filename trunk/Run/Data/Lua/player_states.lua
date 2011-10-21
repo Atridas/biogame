@@ -37,6 +37,7 @@ Player_Constants["So force"] = 'force'
 
 State_Player_Neutre = {}
 State_Player_Dance  = {}
+State_Player_Inactiu  = {}
 State_Player_Apuntar = {}
 State_Player_Tocat = {}
 State_Player_Morint = {}
@@ -407,6 +408,37 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Player_Dance['Receive'] = function(_jugador, _event)
+
+  if _event.msg == Event.morir then
+    _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Morint')
+  end
+  
+end
+
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-- Inactiu!!!! ------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------
+
+
+-------------------------------------------------------------------------------------------------
+State_Player_Inactiu['Enter'] = function(_jugador)
+
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Inactiu['Exit'] = function(_jugador)
+
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Inactiu['Update'] = function(_jugador, _dt)
+  
+end
+
+-------------------------------------------------------------------------------------------------
+State_Player_Inactiu['Receive'] = function(_jugador, _event)
 
   if _event.msg == Event.morir then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Morint')

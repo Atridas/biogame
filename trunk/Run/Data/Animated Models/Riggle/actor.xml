@@ -81,7 +81,7 @@
       <cycle name="pointDownIdle" weight_from_complementary_parameter="true" fade_on_change="0.05"/>
     </animation_state>
     <!-- -->
-    <animation_state name="walk aim" default_fade_in="0.0" default_fade_out="0.0">
+    <animation_state name="walk aim" default_fade_in="0.0" default_fade_out="0.3">
       <cycle name="walk" weight="0.01" />
       <cycle name="run"  weight="0.01" />
       <cycle name="pointWalkUp"   weight="0.98" weight_from_parameter="true"               fade_on_change="0.05"/>
@@ -116,4 +116,9 @@
       <cycle name="RiggleDance"/>
     </animation_state>
   </animation_states>
+  
+  <animation_changes>
+    <animation_change from="walk aim" to="aim" fade="0.5" />
+    <animation_change from="aim" to="walk aim" fade="0.5" />
+  </animation_changes>
 </actor>

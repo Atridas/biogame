@@ -42,6 +42,17 @@ function IsEntityAnimatedModel _object =
 	return false
 )
 
+-- Comprova si l'objecte proporcionat és una entitat model animat
+function IsCamera _object =
+(
+	if classof _object == Targetcamera then
+	(
+		return true
+	)
+	
+	return false
+)
+
 -- Comprova si l'objecte proporcionat és una llum
 function IsLight _object =
 (
