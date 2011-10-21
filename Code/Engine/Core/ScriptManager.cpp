@@ -244,6 +244,11 @@ void ReloadAnimationStates()
   CORE->GetAnimatedModelManager()->ReloadAnimaionStates();
 }
 
+void DeactivateCynematicCamera()
+{
+  CORE->GetRenderer()->SetActiveCamera(0);
+}
+
 void CScriptManager::RegisterGUI() {
   module(m_pLS)
     [
@@ -371,6 +376,8 @@ void CScriptManager::RegisterLUAFunctions()
     ,def("set_render_path", &SetRenderPath)
     //recarregar els animation states
     ,def("reload_animation_states", &ReloadAnimationStates)
+
+    ,def("deactivate_cynematic_camera",&DeactivateCynematicCamera)
   ];
 
   //Vect3f

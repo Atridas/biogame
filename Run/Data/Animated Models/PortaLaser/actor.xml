@@ -11,12 +11,16 @@
     <texture type="diffusse" filename="Data/Textures/portal laser_diff.tga"/>
     <property type="specularParams" glossiness="200.0" specular_level="10.0" />
   </material>
-  <animation name="idleopen" filename="Data/Animated Models/PortaLaser/idle_closed.CAF"/>
+  <animation name="idleopen" filename="Data/Animated Models/PortaLaser/idle_opened.CAF"/>
   <animation name="idleclose" filename="Data/Animated Models/PortaLaser/idle_closed.CAF"/>
+  <animation name="opening" filename="Data/Animated Models/PortaLaser/opening.CAF"/>
   
   
   <animation_states default="closed">
     <animation_state name="opened" default_fade_in="2.0" default_fade_out="1.0">
+      <on_enter>
+        <action name="opening" fade_in="0.3" fade_out="0.0"/>
+      </on_enter>
       <cycle name="idleopen"/>
     </animation_state>
     <!-- -->

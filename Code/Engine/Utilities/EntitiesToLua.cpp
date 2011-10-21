@@ -50,6 +50,7 @@ extern "C"
 #include "OmniLight.h"
 #include "ComponentPhysxSphere.h"
 #include "ComponentBGMController.h"
+#include "ComponentCynematicCamera.h"
 
 
 #include "Utils/MemLeaks.h"
@@ -95,6 +96,28 @@ void SetSong(CComponentBGMController::EMusicState _song)
     l_pLC->GetComponent<CComponentBGMController>()->SetCurrentSong(_song);
 }
 
+
+void ActivateCynematicCamera(const string& _szCameraEntityName)
+{
+  CGameEntity* l_pEntityCamera = ENTITY_MANAGER->GetEntity(_szCameraEntityName);
+  if(l_pEntityCamera)
+  {
+    CComponentCynematicCamera * l_pCCynematicCamera = l_pEntityCamera->GetComponent<CComponentCynematicCamera>();
+    if(l_pCCynematicCamera)
+    {
+      l_pCCynematicCamera->ActivateCamera();
+    }
+    else
+    {
+      LOGGER->AddNewLog(ELL_WARNING, "ActivateCynematicCamera:: La entitat \"%s\" no té el component CynematicCamera", _szCameraEntityName.c_str());
+    }
+  }
+  else
+  {
+    LOGGER->AddNewLog(ELL_WARNING, "ActivateCynematicCamera:: Intentant accedir a la entitat inexistent \"%s\"", _szCameraEntityName.c_str());
+  }
+}
+
 // ----------------------------------------------------
 
 void RegisterEntitiesToLua(lua_State* _pLS)
@@ -103,6 +126,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     //globals
     def("god_mode", &SetGodMode)
     ,def("set_song", &SetSong)
+    ,def("activate_cynematic_camera", &ActivateCynematicCamera)
 
     //Entities
     ,class_<SEventInfo>("EventInfo")
@@ -175,7 +199,8 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("life_time",            CBaseComponent::ECT_LIFETIME),
           value("delayed_script",       CBaseComponent::ECT_DELAYED_SCRIPT),
           value("physx_sphere",         CBaseComponent::ECT_PHYSXSPHERE),
-          value("bgm",                  CBaseComponent::ECT_BGM)
+          value("bgm",                  CBaseComponent::ECT_BGM),
+          value("cynematic_camera",     CBaseComponent::ECT_CYNEMATIC_CAMERA)
       ]
       .def("get_type",     &CBaseComponent::GetType)
       .def("get_entity",   &CBaseComponent::GetEntity)
@@ -468,7 +493,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     ,class_<CComponentPhysXSphere, CBaseComponent>("ComponentPhysXSphere")
       .def("set_active",        &CComponentPhysXSphere::SetActive)
 
-
+      
       // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentBGMController, CBaseComponent>("ComponentBGMController")
       .def("set_active",        &CComponentBGMController::SetActive)
@@ -485,6 +510,12 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("rr",                  CComponentBGMController::EMS_RR)
       ]
 
+      // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentCynematicCamera, CBaseComponent>("ComponentCynematicCamera")
+      .def("get_camera",          &CComponentCynematicCamera::GetCamera)
+      .def("set_target_position", &CComponentCynematicCamera::SetTargetPosition)
+      .def("activate_camera",     &CComponentCynematicCamera::ActivateCamera)
+      .def("deactivate_camera",   &CComponentCynematicCamera::DeactivateCamera)
   ];
 }
 

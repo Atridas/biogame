@@ -17,6 +17,16 @@ GLOBALS
     
     set_render_path
     void SetRenderPath(const string& _szRenderPath)
+    
+    reload_animation_states
+    void ReloadAnimationStates()
+    
+    deactivate_cynematic_camera
+    void DeactivateCynematicCamera()
+    
+    activate_cynematic_camera
+    void ActivateCynematicCamera(const string& _szCameraEntityName)
+    
 
   Class:
 			Vect2f
@@ -198,6 +208,7 @@ ENGINE
       GUI_MANAGER
       ENGINE
       EFFECT_MANAGER
+      RENDERER
 	
   BASE:
     Class:
@@ -841,8 +852,11 @@ ENTITIES
       delayed_script
       CBaseComponent::ECT_DELAYED_SCRIPT
       
-      life_time
-      CBaseComponent::ECT_LIFETIME
+      bgm
+      CBaseComponent::ECT_BGM
+      
+      cynematic_camera
+      CBaseComponent::ECT_CYNEMATIC_CAMERA
       
     Methods:
       get_type
@@ -1444,7 +1458,55 @@ ENTITIES
       
       reset
       void Reset(float _fTime)
+
+  Class
+    ComponentBGMController
+    CComponentBGMController
+    
+    Methods:
+      set_current_song
+      void CComponentBGMController::SetCurrentSong(const EMusicState _eState, bool _bReset)
+    
+    Enum:
+      init_menu
+      CComponentBGMController::EMS_INIT_MENU
       
+      main_menu
+      CComponentBGMController::EMS_MAIN_MENU
+      
+      init_level
+      CComponentBGMController::EMS_INIT_LEVEL
+      explore
+      CComponentBGMController::EMS_EXPLORE
+      
+      battle
+      CComponentBGMController::EMS_BATTLE
+      
+      battle_end
+      CComponentBGMController::EMS_BATTLE_END
+      
+      battle_to_explore
+      CComponentBGMController::EMS_BATTLE_TO_EXPLORE
+      
+      rr
+      CComponentBGMController::EMS_RR)
+
+  Class
+    ComponentCynematicCamera
+    CComponentCynematicCamera
+    
+    Methods:
+      get_camera
+      CSphereCamera* GetCamera()
+      
+      set_target_position
+      void SetTargetPosition(const Vect3f& v)
+      
+      activate_camera
+      void ActivateCamera() const;
+      
+      deactivate_camera
+      void DeactivateCamera() const;
       
 IA
   Globals:

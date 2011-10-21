@@ -64,7 +64,8 @@ public:
     ECT_LIFETIME,
     ECT_DELAYED_SCRIPT,
     ECT_SOUND_LISTENER,
-    ECT_PHYSXSPHERE
+    ECT_PHYSXSPHERE,
+    ECT_CYNEMATIC_CAMERA
   };
   
   virtual Type GetType() = 0; //{return m_Type;};

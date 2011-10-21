@@ -99,9 +99,30 @@ function salavideo_palanca(_self, _player)
     
     --activar el miner del passadís
     activate_entity("pas_miner00")
+    
+    activate_cynematic_camera('lvl2_pass_CameraPassadis')
+    
+    ComponentDelayedScript.add_to_entity(_self, 4, 'lvl2_deactivate_camera')
+    RENDERER:deactivate_render_path('aim_gui')
+      
+    _player:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Inactiu')
+    
       
     _self:delete_component(BaseComponent.interactive)
   end
+end
+
+function lvl2_deactivate_camera(_self)
+  deactivate_cynematic_camera()
+  RENDERER:activate_render_path('aim_gui')
+  
+  local l_player = EM:get_entity("Player")
+  if l_player then
+    l_player:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+  else
+      log('error, no es troba el player')
+  end
+  --_self:delete_component(BaseComponent.delayed_script)
 end
 
 function lvl2_lab_update_light(_entity, _dt)

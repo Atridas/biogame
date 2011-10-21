@@ -16,6 +16,7 @@
 #include "EmiterManager.h"
 #include "Renderer.h"
 #include "LevelChanger.h"
+#include "ScriptManager.h"
 
 #include "NivellInicial.h"
 
@@ -123,30 +124,19 @@ void CGameProcess::Release()
 
 bool CGameProcess::ExecuteProcessAction(float _fDeltaSeconds, float _fDelta, const char* _szAction)
 {
-  //if(m_bMenuPrincipal && strcmp(_szAction, "Init -2") == 0)
-  //{
-  //  CORE->GetRenderer()->SetUniqueRenderPath("HDR");
-  //  CORE->GetRenderer()->ActivateRenderPath("Antialiasing");
-  //  CORE->GetLevelChanger()->SetNewLevel("Nivell -2");
-  //  m_bMenuPrincipal = false;
-  //  return true;
-  //}
-  //else if(m_bMenuPrincipal && strcmp(_szAction, "Init -1") == 0)
-  //{
-  //  CORE->GetRenderer()->SetUniqueRenderPath("HDR");
-  //  CORE->GetRenderer()->ActivateRenderPath("Antialiasing");
-  //  CORE->GetLevelChanger()->SetNewLevel("Nivell -1");
-  //  m_bMenuPrincipal = false;
-  //  return true;
-  //}
-  //else if(m_bMenuPrincipal && strcmp(_szAction, "Init Hangar") == 0)
-  //{
-  //  CORE->GetRenderer()->SetUniqueRenderPath("HDR");
-  //  CORE->GetRenderer()->ActivateRenderPath("Antialiasing");
-  //  CORE->GetLevelChanger()->SetNewLevel("Hangar");
-  //  m_bMenuPrincipal = false;
-  //  return true;
-  //}
   
+  if(strcmp(_szAction, "Howto") == 0)
+  {
+    if(CORE->GetRenderer()->GetActiveCamera())
+    {
+      CORE->GetScriptManager()->RunCode("deactivate_cynematic_camera()");
+    }
+    else
+    {
+      CORE->GetScriptManager()->RunCode("activate_cynematic_camera('lvl2_pass_CameraPassadis')");
+    }
+    return true;
+  }
+
 	return false;
 }
