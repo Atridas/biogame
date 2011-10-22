@@ -185,6 +185,7 @@ public:
   void SetEnvironmentIntensity(float _fEnvironmentIntensity) {if(_fEnvironmentIntensity != m_fEnvironmentIntensity) {m_fEnvironmentIntensity = _fEnvironmentIntensity; m_bEnvironmentUpdated = true;}};
   void SetSpriteSize(const Vect2f _vSpriteSize) {if(_vSpriteSize != m_vSpriteSize) { m_vSpriteSize = _vSpriteSize; m_bSpriteSizeUpdated = true; } };
   void SetCenterXY(float _fX, float _fY) {m_fCenterX = _fX; m_fCenterY = _fY; m_bCenterUpdated = true;};
+  
   void SetBrightPassThreshold (float _fBrightPassThreshold);
   void SetExposure            (float _fExposure);
   void SetGaussMultiplier     (float _fGaussMultiplier);
@@ -195,6 +196,17 @@ public:
   void SetGlowLuminanceScale  (float _fGlowLuminanceScale );
   void SetMaxGlowLuminance    (float _fMaxGlowLuminance   );
   void SetGlowFinalScale      (float _fGlowFinalScale     );
+
+  float GetBrightPassThreshold () const { return m_fBrightPassThreshold;};
+  float GetExposure            () const { return m_fExposure           ;};
+  float GetGaussMultiplier     () const { return m_fGaussMultiplier    ;};
+  float GetBloomFinalScale     () const { return m_fBloomFinalScale    ;};
+  float GetGlowToBloom         () const { return m_fGlowToBloom        ;};
+  float GetGlowLuminanceScale  () const { return m_fGlowLuminanceScale ;};
+  float GetMaxGlowLuminance    () const { return m_fMaxGlowLuminance   ;};
+  float GetGlowFinalScale      () const { return m_fGlowFinalScale     ;};
+  void GetMaxLuminanceLimits  (float &fMaxLuminanceLowerLimit_  , float &fMaxLuminanceUpperLimit_)   {fMaxLuminanceLowerLimit_   = m_fMaxLuminanceLowerLimit  ; fMaxLuminanceUpperLimit_   = m_fMaxLuminanceUpperLimit;  };
+  void GetSceneLuminanceLimits(float &fSceneLuminanceLowerLimit_, float &fSceneLuminanceUpperLimit_) {fSceneLuminanceLowerLimit_ = m_fSceneLuminanceLowerLimit; fSceneLuminanceUpperLimit_ = m_fSceneLuminanceUpperLimit;};
 
   void PrintHDRParams() const;
   

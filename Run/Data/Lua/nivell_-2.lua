@@ -276,6 +276,9 @@ function activate_elevator_2(_EntityTrigger, _Entity)
       l_message.dispatch_time = 0
       
       EM:send_event(l_message)
+      
+      
+      RENDERER:blend_parameter(Renderer.exposure, 0, 2.5)
     else
       log('Error: "Plataforma" no trobada.')
     end

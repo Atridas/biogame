@@ -1,4 +1,10 @@
 -------------------------------------------- FUNCIONS  -------------------------------------------
+-- Inici
+function init_level_menys_1()
+  RENDERER:blend_parameter(Renderer.exposure, 0.5, 3)
+end
+
+
 -- Granades
 function activate_grenades(_self, _actor)
   if _actor:get_name() == "Player" then
@@ -173,6 +179,7 @@ end
 --canviar de nivell
 function change_level_level_1(_EntityTrigger, _Entity)
   if _Entity:get_name() == "Player" then
+    RENDERER:blend_parameter(Renderer.exposure, 0, 0) --TODO millor
     set_new_level("Hangar")
   end
 end

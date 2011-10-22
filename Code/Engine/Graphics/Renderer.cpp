@@ -333,6 +333,120 @@ void CRenderer::Update(float _fDeltaTime)
   {
     m_vSceneRendererSteps[i]->Update(_fDeltaTime);
   }
+
+  CEffectManager* l_pEM = CORE->GetEffectManager();
+
+  set<EBlendParameters> l_ParametersToErase;
+
+  {
+    map<EBlendParameters, SBlendObjective>::iterator l_it  = m_BlendValueTime.begin();
+    map<EBlendParameters, SBlendObjective>::iterator l_end = m_BlendValueTime.end();
+    for(;l_it != l_end; ++l_it)
+    {
+      float l_fPrevValue, l_fAux;
+      switch(l_it->first)
+      {
+      case EBP_BRIGHT_PASS_THRESHOLD:
+        l_fPrevValue = l_pEM->GetBrightPassThreshold();
+        break;
+      case EBP_EXPOSURE:
+        l_fPrevValue = l_pEM->GetExposure();
+        break;
+      case EBP_GAUSS_MULTIPLIER:
+        l_fPrevValue = l_pEM->GetGaussMultiplier();
+        break;
+      case EBP_BLOOM_FINAL_SCALE:
+        l_fPrevValue = l_pEM->GetBloomFinalScale();
+        break;
+      case EBP_GLOW_TO_BLOOM:
+        l_fPrevValue = l_pEM->GetGlowToBloom();
+        break;
+      case EBP_GLOW_LUMINANCE_SCALE:
+        l_fPrevValue = l_pEM->GetGlowLuminanceScale();
+        break;
+      case EBP_MAX_GLOW_LUMINANCE:
+        l_fPrevValue = l_pEM->GetMaxGlowLuminance();
+        break;
+      case EBP_GLOW_FINAL_SCALE:
+        l_fPrevValue = l_pEM->GetGlowFinalScale();
+        break;
+      case EBP_MAX_LUMINANCE_LIMIT_MIN:
+        l_pEM->GetMaxLuminanceLimits(l_fPrevValue, l_fAux);
+        break;
+      case EBP_MAX_LUMINANCE_LIMIT_MAX:
+        l_pEM->GetMaxLuminanceLimits(l_fAux, l_fPrevValue);
+        break;
+      case EBP_SCENE_LUMINANCE_LIMIT_MIN:
+        l_pEM->GetSceneLuminanceLimits(l_fPrevValue, l_fAux);
+        break;
+      case EBP_SCENE_LUMINANCE_LIMIT_MAX:
+        l_pEM->GetSceneLuminanceLimits(l_fAux, l_fPrevValue);
+        break;
+      }
+
+
+      float l_fValue;
+      if(l_it->second.m_fTime <= _fDeltaTime)
+      {
+        l_fValue = l_it->second.m_fValue;
+        l_ParametersToErase.insert(l_it->first);
+      }
+      else
+      {
+        l_fValue = InterpolateNumber(l_fPrevValue, l_it->second.m_fValue, l_it->second.m_fTime, _fDeltaTime);
+        l_it->second.m_fTime -= _fDeltaTime;
+      }
+
+    
+      switch(l_it->first)
+      {
+      case EBP_BRIGHT_PASS_THRESHOLD:
+        l_pEM->SetBrightPassThreshold(l_fValue);
+        break;
+      case EBP_EXPOSURE:
+        l_pEM->SetExposure(l_fValue);
+        break;
+      case EBP_GAUSS_MULTIPLIER:
+        l_pEM->SetGaussMultiplier(l_fValue);
+        break;
+      case EBP_BLOOM_FINAL_SCALE:
+        l_pEM->SetBloomFinalScale(l_fValue);
+        break;
+      case EBP_GLOW_TO_BLOOM:
+        l_pEM->SetGlowToBloom(l_fValue);
+        break;
+      case EBP_GLOW_LUMINANCE_SCALE:
+        l_pEM->SetGlowLuminanceScale(l_fValue);
+        break;
+      case EBP_MAX_GLOW_LUMINANCE:
+        l_pEM->SetMaxGlowLuminance(l_fValue);
+        break;
+      case EBP_GLOW_FINAL_SCALE:
+        l_pEM->SetGlowFinalScale(l_fValue);
+        break;
+      case EBP_MAX_LUMINANCE_LIMIT_MIN:
+        l_pEM->SetMaxLuminanceLimits(l_fValue, l_fAux);
+        break;
+      case EBP_MAX_LUMINANCE_LIMIT_MAX:
+        l_pEM->SetMaxLuminanceLimits(l_fAux, l_fValue);
+        break;
+      case EBP_SCENE_LUMINANCE_LIMIT_MIN:
+        l_pEM->SetSceneLuminanceLimits(l_fValue, l_fAux);
+        break;
+      case EBP_SCENE_LUMINANCE_LIMIT_MAX:
+        l_pEM->SetSceneLuminanceLimits(l_fAux, l_fValue);
+        break;
+      }
+    }
+  }
+  
+  set<EBlendParameters>::iterator l_it  = l_ParametersToErase.begin();
+  set<EBlendParameters>::iterator l_end = l_ParametersToErase.end();
+
+  for(;l_it != l_end; ++l_it)
+  {
+    m_BlendValueTime.erase(*l_it);
+  }
 }
 
 void CRenderer::Render(CProcess* _pProcess)

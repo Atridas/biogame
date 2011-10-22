@@ -494,7 +494,7 @@ ENGINE
       Renderer
       CRenderer
       
-      Methods
+      Methods:
         activate_render_path
         void ActivateRenderPath  (const string& _szRenderPath)
         
@@ -507,6 +507,25 @@ ENGINE
         get_active_render_path
         void GetActiveRenderPaths(set<string>& _RenderPaths) const
         
+        blend_parameter
+        void BlendParameter(EBlendParameters _Parameter, float _fValue, float _fTime)
+        
+      Enums:
+        BlendParameters:
+          bright_pass_threshold 
+          exposure               
+          gauss_multiplier        
+          max_luminance_limit_min 
+          max_luminance_limit_max 
+          scene_luminance_limit_min
+          scene_luminance_limit_max
+          bloom_final_scale       
+          glow_to_bloom           
+          glow_luminance_scale    
+          max_glow_luminance      
+          glow_final_scale        
+          
+          
     Class:
       EffectManager
       CEffectManager
