@@ -775,15 +775,15 @@
       </input_samplers>
     </post_scene_renderer>
     
-    <post_scene_renderer name="tutorial movement" effect="Texture" size="0.33" aspect_ratio="true" position="0.33 0.2">
+    <post_scene_renderer name="tutorial movement" effect="TextureAlphaFactor" size="0.33" aspect_ratio="true" position="0.3 0.2">
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/tutorial_moviment.png"/>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/instruccions_movimientos.dds"/>
       </input_samplers>
     </post_scene_renderer>
     
-    <post_scene_renderer name="tutorial shoot" effect="Texture" size="0.40" aspect_ratio="true" position="0.3 0.2">
+    <post_scene_renderer name="tutorial shoot" effect="TextureAlphaFactor" size="0.33" aspect_ratio="true" position="0.3 0.2">
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/tutorial_dispar.png"/>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/instruccions_disparar.dds"/>
       </input_samplers>
     </post_scene_renderer>
     
@@ -793,15 +793,27 @@
       </input_samplers>
     </post_scene_renderer>
     
-    <post_scene_renderer name="tutorial life" effect="TextureAlphaFactor" size="0.45" aspect_ratio="false" position="0.2 0.1">
+    <post_scene_renderer name="file portrait" effect="TextureAlphaFactor" size="0.45" aspect_ratio="false" position="0.2 0.1">
       <input_samplers>
         <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/fitxa_riggle_1.dds"/>
       </input_samplers>
     </post_scene_renderer>
     
-    <post_scene_renderer name="tutorial energy" effect="TextureAlphaFactor" size="0.45" aspect_ratio="false" position="0.2 0.1">
+    <post_scene_renderer name="file resume" effect="TextureAlphaFactor" size="0.45" aspect_ratio="false" position="0.2 0.1">
       <input_samplers>
         <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/fitxa_riggle_2.dds"/>
+      </input_samplers>
+    </post_scene_renderer>
+    
+    <post_scene_renderer name="tutorial life" effect="TextureAlphaFactor" size="0.33" aspect_ratio="true" position="0.33 0.2">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/instruccions_vida.dds"/>
+      </input_samplers>
+    </post_scene_renderer>
+    
+    <post_scene_renderer name="tutorial energy" effect="TextureAlphaFactor" size="0.33" aspect_ratio="true" position="0.33 0.2">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/instruccions_energia.dds"/>
       </input_samplers>
     </post_scene_renderer>
     
@@ -823,21 +835,21 @@
       </input_samplers>
     </post_scene_renderer>
     
-    <post_scene_renderer name="tutorial key" effect="Texture" size="0.33" aspect_ratio="true" position="0.33 0.2">
+    <post_scene_renderer name="tutorial key" effect="TextureAlphaFactor" size="0.33" aspect_ratio="true" position="0.33 0.2">
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/tutorial_claus.png"/>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/instruccions_puertas.dds"/>
       </input_samplers>
     </post_scene_renderer>
     
-    <post_scene_renderer name="tutorial grenade" effect="Texture" size="0.33" aspect_ratio="true" position="0.33 0.2">
+    <post_scene_renderer name="tutorial grenade" effect="TextureAlphaFactor" size="0.33" aspect_ratio="true" position="0.33 0.2">
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/tutorial_granada.png"/>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/instruccions_granada.dds"/>
       </input_samplers>
     </post_scene_renderer>
     
-    <post_scene_renderer name="tutorial force" effect="Texture" size="0.33" aspect_ratio="true" position="0.33 0.2">
+    <post_scene_renderer name="tutorial force" effect="TextureAlphaFactor" size="0.33" aspect_ratio="true" position="0.33 0.2">
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/tutorial_force.png"/>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/instruccions_fuerza.dds"/>
       </input_samplers>
     </post_scene_renderer>
     
@@ -1052,6 +1064,16 @@
     
     <render_path name="tutorial interactive">
       <post_scene_renderer name="tutorial interactive"/>
+      <post_scene_renderer name="tutorial next"/>
+    </render_path>
+    
+    <render_path name="file portrait">
+      <post_scene_renderer name="file portrait"/>
+      <post_scene_renderer name="tutorial next"/>
+    </render_path>
+    
+    <render_path name="file resume">
+      <post_scene_renderer name="file resume"/>
       <post_scene_renderer name="tutorial next"/>
     </render_path>
     
