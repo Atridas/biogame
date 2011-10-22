@@ -190,6 +190,18 @@ GLOBALS
 
       const_at
       const Vect3f& at(int i) const
+      
+  Class:
+    Color
+    CColor
+    
+    Constructor:
+      constructor<>()
+      constructor<float, float, float, float>()
+    
+    Methods:
+      get_vect4f
+      const Vect4f& GetArgb() const
 
 ENGINE
   GETTERS DE MANAGERS:
@@ -427,6 +439,24 @@ ENGINE
       Methods:
         set_active
         void SetActive(bool _b)
+        
+        set_color
+        void SetColor(const CColor& _colColor)
+        
+        get_color
+        const CColor& GetColor() const
+        
+        set_start_att
+        void SetStartRangeAttenuation(const float _fStartRangeAttenuation)
+        
+        get_start_att
+        float GetStartRangeAttenuation() const
+        
+        set_end_att
+        void SetEndRangeAttenuation(const float _fEndRangeAttenuation)
+        
+        get_end_att
+        float GetEndRangeAttenuation() const
         
     Class:
       OmniLight
