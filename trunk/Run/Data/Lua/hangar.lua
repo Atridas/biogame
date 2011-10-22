@@ -1,4 +1,11 @@
 -------------------------------------------- FUNCIONS  -------------------------------------------
+
+function init_hangar()
+  RENDERER:blend_parameter(Renderer.exposure, 0.5, 3)
+  RENDERER:activate_render_path('hangar skybox')
+end
+
+
 function hang_porta(_self, _player)
   if _player:get_name() == "Player" then
   

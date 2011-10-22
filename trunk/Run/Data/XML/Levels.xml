@@ -28,7 +28,7 @@
     <Lights file="Data/Levels/Level -2/XML/Lights - video.xml"/>
   </Level>
   
-  <Level name="Nivell -1" render_path="canvi nivell -2 a -1">
+  <Level name="Nivell -1" render_path="canvi nivell -2 a -1" script="init_level_menys_1()">
     <StaticMesh file="Data/XML/StaticMeshes.xml"/>
     <StaticMesh file="Data/Levels/Level -1/XML/StaticMeshes.xml"/>
     
@@ -41,7 +41,7 @@
     <Lights file="Data/Levels/Level -1/XML/Lights.xml"/>
   </Level>
   
-  <Level name="Hangar" render_path="canvi nivell -1 a Hangar" script="RENDERER:activate_render_path('hangar skybox')">
+  <Level name="Hangar" render_path="canvi nivell -1 a Hangar" script="init_hangar()">
     <StaticMesh file="Data/XML/StaticMeshes.xml"/>
     <StaticMesh file="Data/Levels/Hangar/XML/StaticMeshes.xml"/>
     

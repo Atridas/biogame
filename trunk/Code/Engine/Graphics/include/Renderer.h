@@ -25,6 +25,30 @@ class CRenderer :
   };
 
 public:
+  enum EBlendParameters
+  {
+    EBP_BRIGHT_PASS_THRESHOLD    ,
+    EBP_EXPOSURE                 ,
+    EBP_GAUSS_MULTIPLIER         ,
+    EBP_MAX_LUMINANCE_LIMIT_MIN  ,
+    EBP_MAX_LUMINANCE_LIMIT_MAX  ,
+    EBP_SCENE_LUMINANCE_LIMIT_MIN,
+    EBP_SCENE_LUMINANCE_LIMIT_MAX,
+    EBP_BLOOM_FINAL_SCALE        ,
+    EBP_GLOW_TO_BLOOM            ,
+    EBP_GLOW_LUMINANCE_SCALE     ,
+    EBP_MAX_GLOW_LUMINANCE       ,
+    EBP_GLOW_FINAL_SCALE
+  };
+
+  struct SBlendObjective
+  {
+    float m_fValue, m_fTime;
+    SBlendObjective():m_fValue(0), m_fTime(5000000000.f){}
+    SBlendObjective(float _fValue, float _fTime):m_fValue(_fValue), m_fTime(_fTime){}
+  };
+
+public:
 
   CRenderer() : m_szFileName(""), m_bRenderPathsChanged(false),m_pActiveCamera(0) {};
   ~CRenderer() {Done();};
@@ -57,6 +81,10 @@ public:
     }
   }
 
+  void BlendParameter(EBlendParameters _Parameter, float _fValue, float _fTime)
+  { m_BlendValueTime[_Parameter] = SBlendObjective(_fValue, _fTime); };
+
+
 protected:
   virtual void Release();
 private:
@@ -84,6 +112,8 @@ private:
 
   map<string, SRenderPath*> m_mapRenderPaths;
   bool m_bRenderPathsChanged;
+
+  map<EBlendParameters, SBlendObjective> m_BlendValueTime;
 };
 
 #endif

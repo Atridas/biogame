@@ -657,7 +657,22 @@ void CScriptManager::RegisterLUAFunctions()
       .def("deactivate_render_path", &CRenderer::DeactivateRenderPath)
       .def("set_unique_render_path", &CRenderer::SetUniqueRenderPath)
       .def("get_active_render_path", &CRenderer::GetActiveRenderPaths)
-
+      .enum_("BlendParameters")
+      [
+        value("bright_pass_threshold"     ,CRenderer::EBP_BRIGHT_PASS_THRESHOLD    ),
+        value("exposure"                  ,CRenderer::EBP_EXPOSURE                 ),
+        value("gauss_multiplier"          ,CRenderer::EBP_GAUSS_MULTIPLIER         ),
+        value("max_luminance_limit_min"   ,CRenderer::EBP_MAX_LUMINANCE_LIMIT_MIN  ),
+        value("max_luminance_limit_max"   ,CRenderer::EBP_MAX_LUMINANCE_LIMIT_MAX  ),
+        value("scene_luminance_limit_min" ,CRenderer::EBP_SCENE_LUMINANCE_LIMIT_MIN),
+        value("scene_luminance_limit_max" ,CRenderer::EBP_SCENE_LUMINANCE_LIMIT_MAX),
+        value("bloom_final_scale"         ,CRenderer::EBP_BLOOM_FINAL_SCALE        ),
+        value("glow_to_bloom"             ,CRenderer::EBP_GLOW_TO_BLOOM            ),
+        value("glow_luminance_scale"      ,CRenderer::EBP_GLOW_LUMINANCE_SCALE     ),
+        value("max_glow_luminance"        ,CRenderer::EBP_MAX_GLOW_LUMINANCE       ),
+        value("glow_final_scale"          ,CRenderer::EBP_GLOW_FINAL_SCALE         )
+      ]
+      .def("blend_parameter", &CRenderer::BlendParameter)
   ];
 
   //EffectManager
