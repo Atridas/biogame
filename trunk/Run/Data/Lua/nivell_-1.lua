@@ -16,6 +16,11 @@ end
 function get_key_green(_self, _actor)
   if _actor:get_name() == "Player" then
     pick_up(_self, _actor, "lvl1_key_green")
+    
+    --obrir porta claus
+    send_open_door("lvl1_door_claus", _actor)
+    change_to_green("lvl1_Omni117")
+    
     tutorial_key()
   end
 end

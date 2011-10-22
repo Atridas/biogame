@@ -502,65 +502,65 @@
   <Entity name="hangar_bido_verd">
     <Object3D position="15.8146 0.0 -10.7229" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_verd" />
-    <PhysXMesh density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" />
   </Entity>
   <Entity name="hangar_bido_verd01">
     <Object3D position="6.52627 0.0 -6.10351" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_verd" />
-    <PhysXMesh density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" />
   </Entity>
   <Entity name="hangar_bido_verd02">
     <Object3D position="10.5009 0.0 6.10023" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_verd" />
-    <PhysXMesh density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" />
   </Entity>
   <Entity name="hangar_bido_verd03">
     <Object3D position="19.1918 0.0 11.7299" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_verd" />
-    <PhysXMesh density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" />
   </Entity>
   <Entity name="hangar_Bido_vermell">
     <Object3D position="3.4384 0.0 2.53783" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_vermell" />
-    <PhysXMesh density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_explosiu" />
     <Explosive />
   </Entity>
   <Entity name="hangar_Bido_vermell02">
     <Object3D position="15.0949 0.0 11.73" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_vermell" />
-    <PhysXMesh density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_explosiu" />
     <Explosive />
   </Entity>
   <Entity name="hangar_Bido_vermell03">
     <Object3D position="10.3853 0.0 6.86543" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_vermell" />
-    <PhysXMesh density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_explosiu" />
     <Explosive />
   </Entity>
   <Entity name="hangar_Bido_vermell05">
     <Object3D position="-3.4454 0.0 0.363315" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_vermell" />
-    <PhysXMesh density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_explosiu" />
     <Explosive />
   </Entity>
   <Entity name="hangar_bido_verd04">
     <Object3D position="23.2907 0.0 5.51813" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_verd" />
-    <PhysXMesh density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" />
   </Entity>
   <Entity name="hangar_bido_verd05">
     <Object3D position="13.8492 0.0 1.56041" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_verd" />
-    <PhysXMesh density="0" collision_group="escenari" />
+    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" />
   </Entity>
   <Entity name="hangar_cadena">
@@ -1421,10 +1421,10 @@
   <Miner name="Miner02" position="-16.7403 1.30798 -2.29115" yaw="0.0" active="false" />
   <Miner name="Miner03" position="-19.1808 1.30798 2.1796" yaw="0.0" active="false" />
   <Miner name="Miner06" position="-20.1307 1.30798 8.52421" yaw="0.0" active="false" />
-  <Militar name="Militar01" position="23.6684 1.37953 12.5599" yaw="0.0" active="false" destiny="hang_nod_cob04" />
-  <Militar name="Militar02" position="23.6667 1.37953 12.5558" yaw="0.0" active="false" destiny="hang_nod_cob14" />
-  <Militar name="Militar03" position="23.6667 1.37953 12.5558" yaw="0.0" active="false" destiny="hang_nod_cob13" />
-  <Militar name="Militar04" position="23.6667 1.37953 12.5558" yaw="0.0" active="false" destiny="hang_nod_cob12" />
+  <Militar name="Militar01" position="24.085 1.37953 12.3199" yaw="0.0" active="false" destiny="hang_nod_cob04" />
+  <Militar name="Militar02" position="24.0834 1.37953 12.3157" yaw="0.0" active="false" destiny="hang_nod_cob14" />
+  <Militar name="Militar03" position="24.0834 1.37953 12.3157" yaw="0.0" active="false" destiny="hang_nod_cob13" />
+  <Militar name="Militar04" position="24.0834 1.37953 12.3157" yaw="0.0" active="false" destiny="hang_nod_cob12" />
   <Militar name="Militar05" position="17.8155 1.33429 -14.1107" yaw="0.0" active="false" destiny="hang_nod_cob10" />
   <Militar name="Militar06" position="17.8155 1.33429 -14.1107" yaw="0.0" active="false" destiny="hang_nod_cob00" />
   <Militar name="Militar07" position="17.8155 1.33429 -14.1107" yaw="0.0" active="false" destiny="hang_nod_cob09" />
