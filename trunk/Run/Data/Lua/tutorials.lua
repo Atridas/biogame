@@ -10,8 +10,6 @@ function tutorial_proves()
       l_sm:get_state_machine():change_state('State_Tutorial')
     end
   end
-  
-  --SOUND:stop_sounds()
 end
 
 -- PLANTA -2
@@ -28,8 +26,6 @@ function tutorial_movement()
   --Desactivem els Billboards i objectes que inicialment no es poden usar
   deactivate_entity("Lab_billboard_weapon")
   deactivate_entity("Lab_billboard_shootme")
-  
-  --SOUND:stop_sounds()
 end
 
 function tutorial_interactive()
@@ -42,9 +38,6 @@ function tutorial_interactive()
       l_sm:get_state_machine():change_state('State_Tutorial')
     end
   end
-  --TODO: Activar Objecte interactuable File
-  
-  --SOUND:stop_sounds()
 end
 
 function tutorial_riggle()
@@ -52,15 +45,14 @@ function tutorial_riggle()
   if l_LvLC then
     local l_sm = l_LvLC:get_component(BaseComponent.state_machine)
     if l_sm and l_sm:get_state_machine():current_state() == 'State_Jugant' then
-      Main_Menu_Constants["Total frames"]  = 2
-      Main_Menu_Constants["Frames"][0]     = "tutorial life"
-      Main_Menu_Constants["Frames"][1]     = "tutorial energy"
+      Main_Menu_Constants["Total frames"]  = 4
+      Main_Menu_Constants["Frames"][0]     = "file portrait"
+      Main_Menu_Constants["Frames"][1]     = "file resume"
+      Main_Menu_Constants["Frames"][2]     = "tutorial life"
+      Main_Menu_Constants["Frames"][3]     = "tutorial energy"
       l_sm:get_state_machine():change_state('State_Tutorial')
     end
   end
-  --TODO: Activar Objecte interactuable Arma i Billboard Gun
-  
-  --SOUND:stop_sounds()
 end
 
 function tutorial_weapon()
@@ -73,9 +65,6 @@ function tutorial_weapon()
       l_sm:get_state_machine():change_state('State_Tutorial')
     end
   end
-  --TODO: Activar Objecte destructible Caixa de llums i BillBoard ShootMe
-
-  --SOUND:stop_sounds()
 end
 
 function tutorial_cover()
@@ -88,8 +77,6 @@ function tutorial_cover()
       l_sm:get_state_machine():change_state('State_Tutorial')
     end
   end
-  
-  --SOUND:stop_sounds()
 end
 
 function tutorial_barrel()
@@ -103,8 +90,6 @@ function tutorial_barrel()
       l_sm:get_state_machine():change_state('State_Tutorial')
     end
   end
-  
-  --SOUND:stop_sounds()
 end
 
 -- PLANTA -1
@@ -118,8 +103,6 @@ function tutorial_key()
       l_sm:get_state_machine():change_state('State_Tutorial')
     end
   end
-  
-  --SOUND:stop_sounds()
 end
 
 function tutorial_grenade()
@@ -132,8 +115,6 @@ function tutorial_grenade()
       l_sm:get_state_machine():change_state('State_Tutorial')
     end
   end
-  
-  --SOUND:stop_sounds()
 end
 
 function tutorial_force()
@@ -146,6 +127,4 @@ function tutorial_force()
       l_sm:get_state_machine():change_state('State_Tutorial')
     end
   end
-  
-  --SOUND:stop_sounds()
 end
