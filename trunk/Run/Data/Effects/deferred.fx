@@ -250,6 +250,10 @@ PS_OUTPUT NewPS(TNEW_PS _in)
       ZFunc = LessEqual;                                 \
       /*Deshabilitamos el alphablend*/                              \
       AlphaBlendEnable = false;                          \
+      /*Activem l'alpha test */                                   \
+      AlphaTestEnable = true;                            \
+      AlphaRef = 0.01;                                   \
+      AlphaFunc = GreaterEqual;                          \
       /*Tipo de culling que queremos utilizar*/                         \
       CullMode = CW;                                    \
       /*Vertex / Pixel shader*/                                  \
@@ -266,6 +270,10 @@ PS_OUTPUT NewPS(TNEW_PS _in)
       ZFunc = LessEqual;                                 \
       /*Deshabilitamos el alphablend*/                              \
       AlphaBlendEnable = false;                          \
+      /*Activem l'alpha test */                                   \
+      AlphaTestEnable = true;                            \
+      AlphaRef = 0.01;                                   \
+      AlphaFunc = GreaterEqual;                          \
       /*Tipo de culling que queremos utilizar*/                         \
       CullMode = CCW;                                    \
       /*Vertex / Pixel shader*/                                  \
