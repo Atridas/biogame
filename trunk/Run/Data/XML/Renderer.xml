@@ -1024,7 +1024,15 @@
     <render_path name="Cell shading" active="false">
       <post_scene_renderer name="Cell shading"/>
     </render_path>
-    <render_path name="Antialiasing" active="true">
+    <render_path name="Antialiasing" active="false">
+      <post_scene_renderer name="Antialiasing"/>
+    </render_path>
+    <render_path name="ZBlur" active="false">
+      <post_scene_renderer name="ZBlur"/>
+    </render_path>
+    
+    <render_path name="ProPostSceneEffects" active="true">
+      <post_scene_renderer name="ZBlur"/>
       <post_scene_renderer name="Antialiasing"/>
     </render_path>
     

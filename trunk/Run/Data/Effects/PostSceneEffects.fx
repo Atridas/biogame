@@ -244,6 +244,46 @@ float4 SimpleBlurPS(float2 _UV: TEXCOORD0) : COLOR
 }
 
 
+
+float BlurRadius(float _fDepth)
+{
+  if(_fDepth < g_NearBlurDepth)
+  {
+    return g_BlurRadius;
+  } else if(_fDepth > g_FarBlurDepth)
+  {
+    return g_BlurRadius;
+  } else if(_fDepth > g_FocalPlaneDepth)
+  {
+    return g_BlurRadius * (_fDepth - g_FocalPlaneDepth) / (g_FarBlurDepth - g_FocalPlaneDepth);
+  } else
+  {
+    return g_BlurRadius * (g_FocalPlaneDepth - _fDepth) / (g_FocalPlaneDepth - g_NearBlurDepth);
+  }
+}
+
+float4 ZBlurPS(float2 _UV: TEXCOORD0) : COLOR
+{
+  float l_XIncrementTexture = 1.0 / (float)(g_TextureWidth);
+  float l_YIncrementTexture = 1.0 / (float)(g_TextureHeight);
+  float2 l_PixelSize = float2(l_XIncrementTexture, l_YIncrementTexture);
+  
+  float4 l_FinalColor = float4(0,0,0,0);
+  
+  float l_BlurRadius = BlurRadius(tex2D(DepthTextureSampler, _UV).x);
+  
+  for(int i = 0; i < POISON_BLUR_KERNEL_SIZE; i++)
+  {
+    float2 l_Texel = _UV + l_PixelSize * g_PoissonBlurKernel[i] * l_BlurRadius;
+    float4 l_TexelColor = tex2D(PrevFilterSampler, l_Texel);
+    
+    l_FinalColor = l_FinalColor + l_TexelColor / POISON_BLUR_KERNEL_SIZE;
+  }
+  
+  return l_FinalColor;
+}
+
+
 technique SimpleBlurTechnique
 {
 	pass p0
@@ -253,5 +293,17 @@ technique SimpleBlurTechnique
 		AlphaBlendEnable = false;
 		CullMode = CCW;
 		PixelShader = compile ps_3_0 SimpleBlurPS();
+	}
+}
+
+technique ZBlurTechnique
+{
+	pass p0
+	{
+		ZEnable = false;
+		ZWriteEnable = false;
+		AlphaBlendEnable = false;
+		CullMode = CCW;
+		PixelShader = compile ps_3_0 ZBlurPS();
 	}
 }

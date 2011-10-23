@@ -97,7 +97,7 @@
     <effect name="CellShading" file="Data/Effects/PostSceneEffects.fx" technique="CellShadingTechnique" />
     <effect name="Antialiasing" file="Data/Effects/PostSceneEffects.fx" technique="AntialiasingTechnique" />
     <effect name="Blur" file="Data/Effects/PostSceneEffects.fx" technique="SimpleBlurTechnique" />
-    <effect name="ZBlur" file="Data/Effects/PostSceneEffects.fx" technique="SimpleBlurTechnique" />
+    <effect name="ZBlur" file="Data/Effects/PostSceneEffects.fx" technique="ZBlurTechnique" />
   </effects>
 
 
