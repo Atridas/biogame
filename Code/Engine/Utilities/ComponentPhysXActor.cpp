@@ -84,7 +84,7 @@ void CComponentPhysXActor::ReceiveEvent(const SEvent& _Event)
       assert(_Event.Info[3].Type == SEventInfo::VECTOR);
       Vect3f l_vPos(_Event.Info[3].v.x, _Event.Info[3].v.y, _Event.Info[3].v.z);
 
-      ENTITY_MANAGER->InitParticles(m_szParticulaImpacte, l_vPos, Vect3f(.5f,.5f,.5f), 5.f);
+      ENTITY_MANAGER->InitParticles(m_szParticulaImpacte, l_vPos, Vect3f(.01f,.01f,.01f), 5.f);
     }
   }
 }
