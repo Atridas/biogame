@@ -482,6 +482,16 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     m_bHDRParamsUpdated = false;
   }
 
+  if(m_bBlurParamsUpdated)
+  {
+    _pEffect->SetValue("BlurRadius"     ,   m_fBlurRadius     );
+    _pEffect->SetValue("NearBlurDepth"  ,   m_fNearBlurDepth  );
+    _pEffect->SetValue("FarBlurDepth"   ,   m_fFarBlurDepth   );
+    _pEffect->SetValue("FocalPlaneDepth",   m_fFocalPlaneDepth);
+    _pEffect->SetValue("BlurinessCutoff",   m_fBlurinessCutoff);
+    m_bBlurParamsUpdated = false;
+  }
+
   if(m_bSpriteSizeUpdated)
   {
     _pEffect->SetValue("SpriteSize",(FLOAT*)&m_vSpriteSize, 2);

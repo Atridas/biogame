@@ -674,11 +674,40 @@
     </post_scene_renderer>
     
     
+    <!-- post scenes -->
     
     
     
+  
+    <post_scene_renderer name="Blur" effect="Blur">
+      <input_samplers>
+        <input_sampler type="frame_buffer" index="0"/>
+      </input_samplers>
+    </post_scene_renderer>
+    
+    <post_scene_renderer name="ZBlur" effect="ZBlur">
+      <input_samplers>
+        <input_sampler type="frame_buffer" index="0"/>
+        <input_sampler type="texture" texture="RT1_RG_16F" index="2" />
+      </input_samplers>
+    </post_scene_renderer>
+  
+    <post_scene_renderer name="Cell shading" effect="CellShading">
+      <input_samplers>
+        <input_sampler type="frame_buffer" index="0"/>
+      </input_samplers>
+    </post_scene_renderer>
+    
+    <post_scene_renderer name="Antialiasing" effect="Antialiasing">
+      <input_samplers>
+        <input_sampler type="frame_buffer" index="0"/>
+        <input_sampler type="texture" texture="RT3_ARGB_8" index="1" />
+        <input_sampler type="texture" texture="RT1_RG_16F" index="2" />
+      </input_samplers>
+    </post_scene_renderer>
     
     
+    <!-- GUIS -->
     
 
     <post_scene_renderer name="shock_wave" effect="Shockwave" use_time="true" use_center="true">
@@ -857,20 +886,6 @@
     
     
     
-    
-  
-    <post_scene_renderer name="Cell shading" effect="CellShading">
-      <input_samplers>
-        <input_sampler type="frame_buffer" index="0"/>
-      </input_samplers>
-    </post_scene_renderer>
-    <post_scene_renderer name="Antialiasing" effect="Antialiasing">
-      <input_samplers>
-        <input_sampler type="frame_buffer" index="0"/>
-        <input_sampler type="texture" texture="RT3_ARGB_8" index="1" />
-        <input_sampler type="texture" texture="RT1_RG_16F" index="2" />
-      </input_samplers>
-    </post_scene_renderer>
     
     
     
@@ -1060,66 +1075,79 @@
     <render_path name="tutorial movement">
       <post_scene_renderer name="tutorial movement"/>
       <post_scene_renderer name="tutorial next"/>
+      <post_scene_renderer name="Blur"/>
     </render_path>
     
     <render_path name="tutorial interactive">
       <post_scene_renderer name="tutorial interactive"/>
       <post_scene_renderer name="tutorial next"/>
+      <post_scene_renderer name="Blur"/>
     </render_path>
     
     <render_path name="file portrait">
       <post_scene_renderer name="file portrait"/>
       <post_scene_renderer name="tutorial next"/>
+      <post_scene_renderer name="Blur"/>
     </render_path>
     
     <render_path name="file resume">
       <post_scene_renderer name="file resume"/>
       <post_scene_renderer name="tutorial next"/>
+      <post_scene_renderer name="Blur"/>
     </render_path>
     
     <render_path name="tutorial life">
       <post_scene_renderer name="tutorial life"/>
       <post_scene_renderer name="tutorial next"/>
+      <post_scene_renderer name="Blur"/>
     </render_path>
     
     <render_path name="tutorial energy">
       <post_scene_renderer name="tutorial energy"/>
       <post_scene_renderer name="tutorial next"/>
+      <post_scene_renderer name="Blur"/>
     </render_path>
     
     <render_path name="tutorial shoot">
       <post_scene_renderer name="tutorial shoot"/>
       <post_scene_renderer name="tutorial next"/>
+      <post_scene_renderer name="Blur"/>
     </render_path>
     
     <render_path name="tutorial cover">
       <post_scene_renderer name="tutorial cover"/>
       <post_scene_renderer name="tutorial next"/>
+      <post_scene_renderer name="Blur"/>
     </render_path>
     
     <render_path name="tutorial barrel explosive">
       <post_scene_renderer name="tutorial barrel explosive"/>
       <post_scene_renderer name="tutorial next"/>
+      <post_scene_renderer name="Blur"/>
     </render_path>
     
     <render_path name="tutorial barrel toxic">
       <post_scene_renderer name="tutorial barrel toxic"/>
       <post_scene_renderer name="tutorial next"/>
+      <post_scene_renderer name="Blur"/>
     </render_path>
     
     <render_path name="tutorial key">
       <post_scene_renderer name="tutorial key"/>
       <post_scene_renderer name="tutorial next"/>
+      <post_scene_renderer name="Blur"/>
     </render_path>
     
     <render_path name="tutorial grenade">
       <post_scene_renderer name="tutorial grenade"/>
       <post_scene_renderer name="tutorial next"/>
+      <post_scene_renderer name="Blur"/>
     </render_path>
     
     <render_path name="tutorial force">
       <post_scene_renderer name="tutorial force"/>
       <post_scene_renderer name="tutorial next"/>
+      <post_scene_renderer name="Blur"/>
     </render_path>
     
     

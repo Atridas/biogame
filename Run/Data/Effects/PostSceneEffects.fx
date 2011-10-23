@@ -218,3 +218,40 @@ technique AntialiasingTechnique
 		PixelShader = compile ps_3_0 AntialiasingPS();
 	}
 }
+
+
+
+// ------------------------------------------------
+
+
+float4 SimpleBlurPS(float2 _UV: TEXCOORD0) : COLOR
+{
+  float l_XIncrementTexture = 1.0 / (float)(g_TextureWidth);
+  float l_YIncrementTexture = 1.0 / (float)(g_TextureHeight);
+  float2 l_PixelSize = float2(l_XIncrementTexture, l_YIncrementTexture);
+  
+  float4 l_FinalColor = float4(0,0,0,0);
+  
+  for(int i = 0; i < POISON_BLUR_KERNEL_SIZE; i++)
+  {
+    float2 l_Texel = _UV + l_PixelSize * g_PoissonBlurKernel[i] * g_BlurRadius;
+    float4 l_TexelColor = tex2D(PrevFilterSampler, l_Texel);
+    
+    l_FinalColor = l_FinalColor + l_TexelColor / POISON_BLUR_KERNEL_SIZE;
+  }
+  
+  return l_FinalColor;
+}
+
+
+technique SimpleBlurTechnique
+{
+	pass p0
+	{
+		ZEnable = false;
+		ZWriteEnable = false;
+		AlphaBlendEnable = false;
+		CullMode = CCW;
+		PixelShader = compile ps_3_0 SimpleBlurPS();
+	}
+}

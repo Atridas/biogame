@@ -277,7 +277,7 @@ function activate_elevator_2(_EntityTrigger, _Entity)
       
       EM:send_event(l_message)
       
-      
+      RENDERER:deactivate_render_path("aim_gui")
       RENDERER:blend_parameter(Renderer.exposure, 0, 2.5)
     else
       log('Error: "Plataforma" no trobada.')
