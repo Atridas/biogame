@@ -1245,6 +1245,34 @@
     <Object3D position="-3.30974 11.7782 26.6878" yaw="-179.596" pitch="0.0" roll="-29.3046" />
     <CynematicCamera target="-3.28423 5.32695 23.067" fov="45.0" near="1.0" far="1000.0" />
   </Entity>
+  <Entity name="Menjador_gota01">
+    <Object3D position="26.195 2.756 25.351" yaw="180.0" pitch="-8.65142e-006" roll="-180.0" />
+    <Emiter core="goteo" volume="0.111965 0.111965 0.111965" />
+  </Entity>
+  <Entity name="Menjador_gota02">
+    <Object3D position="26.195 2.75 34.151" yaw="180.0" pitch="-8.65142e-006" roll="-180.0" />
+    <Emiter core="goteo" volume="0.111965 0.111965 0.111965" />
+  </Entity>
+  <Entity name="Menjador_gota03">
+    <Object3D position="11.871 2.75 40.889" yaw="180.0" pitch="-8.65142e-006" roll="-180.0" />
+    <Emiter core="goteo" volume="0.111965 0.111965 0.111965" />
+  </Entity>
+  <Entity name="Menjador_FumMenjar01">
+    <Object3D position="12.312 1.16506 25.237" yaw="-25.0" pitch="0.0" roll="0.0" />
+    <Emiter core="FumMenjar" volume="0.19446 0.19446 0.19446" />
+  </Entity>
+  <Entity name="Menjador_FumMenjar02">
+    <Object3D position="14.696 1.16506 24.09" yaw="-25.0" pitch="0.0" roll="0.0" />
+    <Emiter core="FumMenjar" volume="0.19446 0.19446 0.19446" />
+  </Entity>
+  <Entity name="Menjador_FumMenjar03">
+    <Object3D position="11.523 1.16506 25.613" yaw="-25.0" pitch="0.0" roll="0.0" />
+    <Emiter core="FumMenjar" volume="0.19446 0.19446 0.19446" />
+  </Entity>
+  <Entity name="Menjador_Campana_Extraccio">
+    <Object3D position="11.773 2.649 20.93" yaw="-115.0" pitch="-8.65142e-006" roll="-180.0" />
+    <Emiter core="campana_extrancio" volume="1.56773 0.330796 4.89994" />
+  </Entity>
   <Miner name="Miner_menjador00" position="0.524845 1.62554 22.3385" yaw="0.0" active="false" />
   <Militar name="Militar_menjador00" position="24.3474 1.6 33.1077" yaw="0.0" active="false" destiny="Menjador_Navnode_25" />
   <Militar name="Militar_menjador01" position="17.4814 1.6 25.9969" yaw="0.0" active="false" destiny="Menjador_Navnode_03" />

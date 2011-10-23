@@ -297,5 +297,21 @@
     <Object3D position="-6.08738 1.23645 -1.60702" yaw="0.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="2.84626 2.16962 4.02333" collision_group="trigger" onEnter="lvl2_got_there" />
   </Entity>
+  <Entity name="lab_home_capsula01">
+    <Object3D position="-8.20791 0.499869 0.749678" yaw="-180.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="true" name="Capsula" cycle="idle" />
+  </Entity>
+  <Entity name="lab_fum_proveta">
+    <Object3D position="-4.989 1.207 -2.778" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="fum_proveta" volume="0.0586747 0.0586747 0.0586747" />
+  </Entity>
+  <Entity name="lab_efecte_fred01">
+    <Object3D position="-5.803 0.1 -10.594" yaw="0.0" pitch="90.0" roll="0.0" />
+    <Emiter core="efecte_fred" volume="1.75107 0.152553 0.152553" />
+  </Entity>
+  <Entity name="lab_efecte_fred01">
+    <Object3D position="-14.734 0.1 -6.794" yaw="0.0" pitch="0.0" roll="-90.0" />
+    <Emiter core="efecte_fred" volume="0.134839 0.134839 1.72117" />
+  </Entity>
   <Player position="-11.6721 1.72829 -8.74864" yaw="0.0" shoot_active="false" force_active="false" grenade_active="false" />
 </Entities>

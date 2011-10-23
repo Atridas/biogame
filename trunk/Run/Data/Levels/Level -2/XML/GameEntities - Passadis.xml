@@ -142,5 +142,45 @@
     <Object3D position="9.84518 2.78403 -10.1465" yaw="-48.3828" pitch="0.0" roll="-82.2449" />
     <CynematicCamera target="16.46 1.57906 -4.27003" fov="55.0" near="1.0" far="1000.0" />
   </Entity>
+  <Entity name="pas_boira01">
+    <Object3D position="-1.21073 -0.0742362 -8.5076" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="6.21645 0.479595 4.39061" />
+  </Entity>
+  <Entity name="pas_boira02">
+    <Object3D position="5.17109 -0.0742362 -8.5076" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="6.33257 0.479595 4.39061" />
+  </Entity>
+  <Entity name="pas_boira03">
+    <Object3D position="11.9025 -0.0742362 -7.54132" yaw="25.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="6.33257 0.479595 4.39061" />
+  </Entity>
+  <Entity name="pas_boira04">
+    <Object3D position="16.947 0.246809 -1.97521" yaw="65.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="8.22371 0.479595 4.39061" />
+  </Entity>
+  <Entity name="pas_boira05">
+    <Object3D position="20.4441 0.271467 5.50426" yaw="65.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="8.22371 0.479595 4.39061" />
+  </Entity>
+  <Entity name="pas_boira06">
+    <Object3D position="8.80422 -0.94948 -0.872293" yaw="113.193" pitch="-12.626" roll="0.0345069" />
+    <Emiter core="boira" volume="8.22371 0.479595 4.39061" />
+  </Entity>
+  <Entity name="pas_vapor01">
+    <Object3D position="2.212 0.278 -6.421" yaw="0.0" pitch="0.0" roll="-85.0" />
+    <Emiter core="vapor" volume="0.0488691 0.0488691 0.0488691" />
+  </Entity>
+  <Entity name="pas_vapor02">
+    <Object3D position="7.813 1.571 -10.607" yaw="0.0" pitch="0.0" roll="110.0" />
+    <Emiter core="vapor" volume="0.0579358 0.0579358 0.0579358" />
+  </Entity>
+  <Entity name="pas_goteo01">
+    <Object3D position="8.462 3.458 -8.40601" yaw="180.0" pitch="-5.00896e-006" roll="-180.0" />
+    <Emiter core="goteo" volume="0.287217 0.200504 4.20279" />
+  </Entity>
+  <Entity name="pas_goteo02">
+    <Object3D position="20.608 3.43603 5.784" yaw="-115.0" pitch="-5.00896e-006" roll="180.0" />
+    <Emiter core="goteo" volume="0.287217 0.200504 4.20279" />
+  </Entity>
   <Miner name="pas_miner00" position="20.8841 1.9223 5.44801" yaw="0.0" active="false" />
 </Entities>
