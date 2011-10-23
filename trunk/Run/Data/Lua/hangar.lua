@@ -1,6 +1,7 @@
 -------------------------------------------- FUNCIONS  -------------------------------------------
 
 function init_hangar()
+  EFFECT_MANAGER:set_exposure(0)
   RENDERER:blend_parameter(Renderer.exposure, 0.5, 3)
   RENDERER:activate_render_path('hangar skybox')
 end

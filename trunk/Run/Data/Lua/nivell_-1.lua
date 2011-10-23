@@ -1,7 +1,9 @@
 -------------------------------------------- FUNCIONS  -------------------------------------------
 -- Inici
 function init_level_menys_1()
+  EFFECT_MANAGER:set_exposure(0)
   RENDERER:blend_parameter(Renderer.exposure, 0.5, 3)
+  RENDERER:activate_render_path("aim_gui")
 end
 
 
