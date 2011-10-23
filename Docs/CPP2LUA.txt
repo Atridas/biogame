@@ -556,9 +556,23 @@ ENGINE
         void SetGlowLuminanceScale  (float _fGlowLuminanceScale )
         
         print_hdr
-        oid PrintHDRParams() constah
-        la bona samaritana
+        oid PrintHDRParams() const
         
+        
+        set_blur_radius
+        void SetBlurRadius       (float)
+        
+        set_near_blur_depth
+        void SetNearBlurDepth    (float)
+        
+        set_far_blur_depth
+        void SetFarBlurDepth     (float)
+        
+        set_focal_plane_depth
+        void SetFocalPlaneDepth  (float)
+        
+        set_bluriness_cutoff
+        void SetBlurinessCutoff  (float)
         
   SOUND  
     Class:

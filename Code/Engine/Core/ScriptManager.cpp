@@ -689,6 +689,12 @@ void CScriptManager::RegisterLUAFunctions()
       .def("set_max_glow_luminance"     , &CEffectManager::SetMaxGlowLuminance    )
       .def("set_glow_final_scale"       , &CEffectManager::SetGlowFinalScale      )
       .def("print_hdr"                  , &CEffectManager::PrintHDRParams  )
+
+      .def("set_blur_radius"            , &CEffectManager::SetBlurRadius          )
+      .def("set_near_blur_depth"        , &CEffectManager::SetNearBlurDepth       )
+      .def("set_far_blur_depth"         , &CEffectManager::SetFarBlurDepth        )
+      .def("set_focal_plane_depth"      , &CEffectManager::SetFocalPlaneDepth     )
+      .def("set_bluriness_cutoff"       , &CEffectManager::SetBlurinessCutoff     )
   ];
 
 
