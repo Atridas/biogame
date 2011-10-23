@@ -126,6 +126,31 @@
   </SimpleEmiter>
   
   <SimpleEmiter id="efecte_fred"
+            emit_rate1="100.0"                   emit_rate2="120.0"
+            life1="5.0"                         life2="5.0"
+            awake_time1="1.0"                  awake_time2="1.0"
+            sleep_time1="0.0"                  sleep_time2="0.0"
+              
+            starting_angle1="-3.14159"         starting_angle2="3.14159"
+              
+            starting_speed1="0.0 0.1 -0.1"      starting_speed2="0.0 0.1 0.1"
+            acceleration1="0.0 0.0 0.0"        acceleration2="0.0 0.0 0.0"
+            starting_angular_speed1="-20"     starting_angular_speed2="20"
+            angular_acceleration1="0"       angular_acceleration2="0"
+              
+              
+            color1="1.0 1.0 1.0 0.0"          color2="1.0 1.0 1.0 0.0"
+            size1="0.3"                      size2="0.5"
+            texture="Data/Textures/particules/smoke.dds">
+
+    <Colors>
+      <Color        control_time1="2.0"       control_time2="3.0"   color1="1.0 1.0 1.0 0.5"          color2="1.0 1.0 1.0 0.5"/>
+      <Color        control_time1="5.0"       control_time2="5.0"   color1="1.0 1.0 1.0 0.0"          color2="1.0 1.0 1.0 0.0"/>
+    </Colors>
+  </SimpleEmiter>
+  
+  <!--original-->
+  <!--<SimpleEmiter id="efecte_fred"
             emit_rate1="70.0"                   emit_rate2="80.0"
             life1="5.0"                         life2="5.0"
             awake_time1="1.0"                  awake_time2="1.0"
@@ -149,18 +174,20 @@
       <Color        control_time1="3.0"       control_time2="1.0"   color1="1.0 1.0 1.0 0.2"          color2="1.0 1.0 1.0 0.2"/>
       <Color        control_time1="4.0"       control_time2="1.0"   color1="1.0 1.0 1.0 0.0"          color2="1.0 1.0 1.0 0.0"/>
     </Colors>
-  </SimpleEmiter>
+  </SimpleEmiter>-->
 	
 
-  <SimpleEmiter id="boira"                       emit_absolute="true"
-              emit_rate1="6.0"                   emit_rate2="8.0"
-              life1="25.0"                         life2="30.0"
+  <SimpleEmiter id="boira"                       
+              emit_rate1="0.1"                   emit_rate2="0.2"
+              life1="25.0"                       life2="25.0"
+              awake_time1="1.0"                  awake_time2="1.0"
+              sleep_time1="0.0"                  sleep_time2="0.0"
               
               starting_angle1="-3.14159"         starting_angle2="3.14159"
               
               starting_speed1="-0.1 0.02 -0.1"      starting_speed2="0.1 0.03 0.1"
               acceleration1="0.0 0.0 0.0"        acceleration2="0.0 0.0 0.0"
-              starting_angular_speed1="-10"     starting_angular_speed2="10"
+              starting_angular_speed1="-20"     starting_angular_speed2="20"
               angular_acceleration1="0.0"       angular_acceleration2="0.0"
               
               
@@ -169,10 +196,10 @@
               texture="Data/Textures/particules/DustPoof.dds">
 
     <Colors>
-      <Color        control_time1="0.5"      control_time2="0.7"   color1="0.30 0.30 0.30 0.06"     color2="0.30 0.30 0.30 0.08"/>
-      <Color        control_time1="3.0"      control_time2="3.5"   color1="0.30 0.30 0.30 0.12"     color2="0.30 0.30 0.30 0.14"/>
-      <Color        control_time1="20.0"     control_time2="20.5"  color1="0.30 0.30 0.30 0.06"     color2="0.30 0.30 0.30 0.08"/>
-      <Color        control_time1="24.0"     control_time2="24.5"  color1="0.30 0.30 0.30 0.0"      color2="0.30 0.30 0.30 0.0"/>
+      <Color        control_time1="0.5"      control_time2="0.7"   color1="0.70 0.70 0.70 0.06"     color2="0.70 0.70 0.70 0.08"/>
+      <Color        control_time1="5.0"      control_time2="5.5"   color1="0.70 0.70 0.70 0.12"     color2="0.70 0.70 0.70 0.14"/>
+      <Color        control_time1="20.0"     control_time2="20.5"  color1="0.70 0.70 0.70 0.06"     color2="0.70 0.70 0.70 0.08"/>
+      <Color        control_time1="25.0"     control_time2="24.5"  color1="0.70 0.70 0.70 0.0"      color2="0.70 0.70 0.70 0.0"/>
 
     </Colors>
   </SimpleEmiter>
@@ -285,7 +312,7 @@
   </SimpleEmiter>
 
   <SimpleEmiter id="ducha"                         emit_absolute="true"
-                emit_rate1="0.0"                   emit_rate2="0.0"
+                emit_rate1="10.0"                   emit_rate2="20.0"
                 life1="2.0"                         life2="2.0"
                 awake_time1="1.0"                  awake_time2="1.0"
                 sleep_time1="0.0"                  sleep_time2="0.0"
@@ -346,93 +373,144 @@
   </SimpleEmiter>
 
   <!--*********************************EMITERS GENERALS *************************************************-->
-  <SimpleEmiter id="impacte"
-              emit_rate1="500.0"                 emit_rate2="500.0"
-              life1="0.1"                        life2="0.1"
-              awake_time1="0.2"                  awake_time2="0.2"
+  <SimpleEmiter id="impacte"                     emit_absolute="true"
+              emit_rate1="80.0"                 emit_rate2="90.0"
+              life1="0.3"                        life2="0.3"
+              awake_time1="0.1"                  awake_time2="0.1"
               sleep_time1="5.0"                  sleep_time2="5.0"
               
               starting_angle1="-3.14159"         starting_angle2="3.14159"
               
-              starting_speed1="0.5 0.5 0.5"      starting_speed2="0.5 0.5 0.5"
+              starting_speed1="2.5 2.5 2.5"      starting_speed2="2.5 2.5 2.5"
               starting_direction_angle="180"
-              acceleration1="2.0 2.0 2.0"        acceleration2="2.0 2.0 2.0"
+              acceleration1="0.0 0.0 0.0"        acceleration2="0.0 0.0 0.0"
               acceleration_direction_angle="180"
               starting_angular_speed1="-10"     starting_angular_speed2="10"
               angular_acceleration1="0.0"        angular_acceleration2="0.0"
               
               
-              color1="1.0 1.0 1.0 0.8"          color2="1.0 1.0 1.0 0.8"
-              size1="0.2"                       size2="0.2"
-              texture="Data/Textures/gohan.png">
+              color1="1.0 0.2 0.2 1.0"          color2="1.0 0.2 0.2 1.0"
+              size1="0.08"                       size2="0.08"
+              texture="Data/Textures/particules/circle.dds">
     <Sizes>
       <Size   control_time1="0.3"       control_time2="0.3"        size1="0.02"          size2="0.02"/>
     </Sizes>
-
-    <Colors>
-      <Color   control_time1="0.3"       control_time2="0.3"        color1="1.0 1.0 1.0 0.0"         color2="1.0 1.0 1.0 0.0"/>
-    </Colors>
   </SimpleEmiter>
 
 
-  <SimpleEmiter id="impacte ragdoll"
-              emit_rate1="500.0"                 emit_rate2="500.0"
+<!--SURT LA SANG CAP A BAIX-->
+  <SimpleEmiter id="impacte ragdoll sang"            emit_absolute="true"
+                emit_rate1="150.0"                   emit_rate2="150.0"
+                life1="0.5"                         life2="0.5"
+                awake_time1="0.2"                  awake_time2="0.2"
+                sleep_time1="5.0"                  sleep_time2="5.0"
+              
+                starting_angle1="-3.14159"         starting_angle2="3.14159"
+              
+                starting_speed1="-1.5 -0.5 -1.5"      starting_speed2="1.5 0.5 1.5"
+                acceleration1="0.0 -5.0 0.0"        acceleration2="0.0 -7.0 0.0"
+                starting_angular_speed1="-45"     starting_angular_speed2="45"
+                angular_acceleration1="-0.0"       angular_acceleration2="0.0"
+              
+              
+                color1="1.0 0.0 0.0 0.2"          color2="1.0 0.0 0.0 0.3"
+                size1="0.04"                      size2="0.05"
+                texture="Data/Textures/particules/foam.dds">
+
+    <!--<Sizes>
+      <Size        control_time1="3.6"       control_time2="3.6"   size1="0.7"          size2="0.7"/>
+    </Sizes>-->
+  </SimpleEmiter>
+
+ 
+  <!--SURT UN NUVOL DE SANG-->  
+  <SimpleEmiter id="impacte ragdoll vapor"         emit_absolute="true"
+               emit_rate1="20.0"                   emit_rate2="40.0"
+               life1="0.3"                         life2="0.5"
+               awake_time1="0.2"                  awake_time2="0.2"
+               sleep_time1="5.0"                  sleep_time2="5.0"
+              
+               starting_angle1="-3.14159"         starting_angle2="3.14159"
+              
+               starting_speed1="-0.02 -0.02 -0.02"      starting_speed2="0.02 -0.02 0.02"
+               acceleration1="0.0 0.0 0.0"        acceleration2="0.0 0.0 0.0"
+               starting_angular_speed1="-45"     starting_angular_speed2="45"
+               angular_acceleration1="-0.0"       angular_acceleration2="0.0"
+              
+              
+               color1="1.0 0.0 0.0 1.0"          color2="1.0 0.0 0.0 1.0"
+               size1="0.3"                      size2="0.4"
+               texture="Data/Textures/particules/smoke.dds">
+
+    <Sizes>
+      <Size        control_time1="0.3"       control_time2="0.3"   size1="1.0"          size2="1.0"/>
+    </Sizes>
+    <Colors>
+      <Color        control_time1="0.3"       control_time2="0.3"   color1="1.0 0.0 0.0 0.0"          color2="1.0 0.0 0.0 0.0"/>
+    </Colors>
+
+  </SimpleEmiter>
+
+
+  <SimpleEmiter id="disparar"                   emit_absolute="true"
+              emit_rate1="20.0"                emit_rate2="20.0"
               life1="0.1"                        life2="0.1"
-              awake_time1="0.2"                  awake_time2="0.2"
+              awake_time1="0.1"                  awake_time2="0.1"
               sleep_time1="5.0"                  sleep_time2="5.0"
               
               starting_angle1="-3.14159"         starting_angle2="3.14159"
               
-              starting_speed1="0.5 0.5 0.5"      starting_speed2="0.5 0.5 0.5"
-              starting_direction_angle="180"
-              acceleration1="2.0 2.0 2.0"        acceleration2="2.0 2.0 2.0"
-              acceleration_direction_angle="180"
-              starting_angular_speed1="-10"     starting_angular_speed2="10"
-              angular_acceleration1="0.0"        angular_acceleration2="0.0"
-              
-              
-              color1="1.0 1.0 1.0 0.8"          color2="1.0 1.0 1.0 0.8"
-              size1="0.2"                       size2="0.2"
-              texture="Data/Textures/particules/amapola.png">
-    <Sizes>
-      <Size   control_time1="0.3"       control_time2="0.3"        size1="0.02"          size2="0.02"/>
-    </Sizes>
-
-    <Colors>
-      <Color   control_time1="0.3"       control_time2="0.3"        color1="1.0 1.0 1.0 0.0"         color2="1.0 1.0 1.0 0.0"/>
-    </Colors>
-  </SimpleEmiter>
-
-
-  <SimpleEmiter id="disparar"
-              emit_rate1="5000.0"                emit_rate2="5000.0"
-              life1="0.1"                        life2="1.0"
-              awake_time1="0.2"                  awake_time2="0.2"
-              sleep_time1="5.0"                  sleep_time2="5.0"
-              
-              starting_angle1="-3.14159"         starting_angle2="3.14159"
-              
-              starting_speed1="0.0 5.0 0.0"     starting_speed2="0.0 5.0 0.0"
+              starting_speed1="0.0 0.0 0.0"     starting_speed2="0.0 0.0 0.0"
               starting_direction_angle="15"
-              acceleration1="0.0 -5.0 0.0"       acceleration2="0.0 -5.0 0.0"
+              acceleration1="0.0 0.0 0.0"       acceleration2="0.0 0.0 0.0"
               starting_angular_speed1="-10"     starting_angular_speed2="10"
               angular_acceleration1="0.0"        angular_acceleration2="0.0"
               
               
               color1="1.0 1.0 1.0 0.8"          color2="1.0 1.0 1.0 0.8"
-              size1="0.2"                       size2="0.2"
-              texture="Data/Textures/particules/margarita.png">
+              size1="0.1"                       size2="0.1"
+              texture="Data/Textures/particules/circle.dds">
     <Sizes>
-      <Size   control_time1="0.3"       control_time2="0.3"        size1="0.02"          size2="0.02"/>
+      <Size   control_time1="0.1"       control_time2="0.1"        size1="0.5"          size2="0.7"/>
     </Sizes>
 
     <Colors>
-      <Color   control_time1="0.3"       control_time2="0.3"        color1="1.0 1.0 1.0 0.0"         color2="1.0 1.0 1.0 0.0"/>
+      <Color   control_time1="0.0"       control_time2="0.02"        color1="10.0 10.0 10.0 1.0"         color2="10.0 10.0 10.0 1.0"/>
+      <Color   control_time1="0.04 "       control_time2="0.06"        color1="8.0 8.0 0.8 1.0"         color2="8.0 8.0 0.5 1.0"/>
+      <Color   control_time1="0.1"       control_time2="0.13"        color1="0.96 0.5 0.05 1.0"      color2="0.86 0.4 0.1 1.0"/>
     </Colors>
   </SimpleEmiter>
   <!-- ····························································································· -->
   <!-- ····························································································· -->
   <!-- ····························································································· -->
+
+  <SimpleEmiter id="explosio gas toxic"          emit_absolute="true"
+              emit_rate1="50.0"                  emit_rate2="60.0"
+              life1="9.0"                        life2="9.0"
+              awake_time1="1.0"                  awake_time2="1.0"
+              sleep_time1="9.0"                  sleep_time2="9.0"
+              starting_angle1="-3.14159"         starting_angle2="3.14159"
+              
+              starting_speed1="-0.1 0.1 -0.1"      starting_speed2="0.1 0.2 0.1"
+              acceleration1="0.0 0.0 0.0"        acceleration2="0.0 0.0 0.0"
+              starting_angular_speed1="-10"       starting_angular_speed2="10"
+              angular_acceleration1="0.0"        angular_acceleration2="0.0"
+              
+              
+              color1="0.0 0.7 0.0 0.0"       color2="0.2 0.8 0.2 0.0"
+              size1="0.4"                      size2="0.5"
+              texture="Data/Textures/particules/smokepuff1.dds">
+    <Sizes>
+      <Size   control_time1="3.5"       control_time2="3.5"        size1="1.3"          size2="1.5"/>
+    </Sizes>
+    <Colors>
+      <Color        control_time1="0.4"       control_time2="3.5"   color1="0.0 0.7 0.0 0.4"       color2="0.2 0.8 0.2 0.4"/>
+      <Color        control_time1="7.0"       control_time2="7.5"   color1="0.0 0.7 0.0 0.4"       color2="0.2 0.8 0.2 0.4"/>
+      <Color        control_time1="9.0"       control_time2="9.0"   color1="0.0 0.7 0.0 0.0"       color2="0.2 0.8 0.2 0.0"/>
+    </Colors>
+
+  </SimpleEmiter>
+  
 	<SimpleEmiter id="explosio foc"
                 emit_rate1="300.0"                  emit_rate2="300.0"
                 life1="1.5"                        life2="1.5"
@@ -469,46 +547,8 @@
     </Sizes>
   </SimpleEmiter>
   
-	<SimpleEmiter id="explosio foc absolut"
-                emit_rate1="300.0"                  emit_rate2="300.0"
-                emit_absolute="true"
-                life1="1.5"                        life2="1.5"
-              
-                starting_angle1="-3.14159"         starting_angle2="3.14159"
-              
-                starting_speed1="0.0 1.0 0.0"     starting_speed2="0.0 0.6 0.0"
-                starting_direction_angle="0"
-                acceleration1="0.0 1.33 0.0"        acceleration2="0.0 1.3 0.0"
-                starting_angular_speed1="-45"     starting_angular_speed2="45"
-                angular_acceleration1="-0.0"       angular_acceleration2="0.0"
-                
-                awake_time1="0.1"                  awake_time2="0.1"
-                sleep_time1="2.0"                  sleep_time2="2.0"
-              
-                color1="10.0 10.0 10.0 1.0"          color2="10.0 10.0 10.0 1.0"
-                size1="0.6"                       size2="0.65"
-                texture="Data/Textures/particules/circle.dds">
-
-  
-
-    <Colors>
-      <Color   control_time1="0.0"       control_time2="0.1"        color1="10.0 10.0 10.0 1.0"         color2="10.0 10.0 10.0 1.0"/>
-      <Color   control_time1="0.1 "       control_time2="0.15"        color1="8.0 8.0 0.8 1.0"         color2="8.0 8.0 0.5 1.0"/>
-      <Color   control_time1="0.15"       control_time2="0.2"        color1="0.96 0.5 0.05 1.0"      color2="0.86 0.4 0.1 1.0"/>
-      <Color   control_time1="0.2"       control_time2="0.35"        color1="0.2 0.2 0.2 0.5"       color2="0.3 0.3 0.3 0.7"/>
-      <Color   control_time1="0.3"       control_time2="1.5"        color1="0.0 0.0 0.0 0.0"       color2="0.0 0.0 0.0 0.0"/>
-    </Colors>
-  
-    <Sizes>
-      <Size        control_time1="0.0"       control_time2="0.1"   size1="0.5"          size2="0.6"/>
-      <Size        control_time1="0.1"       control_time2="0.9"   size1="1.9"          size2="1.6"/>
-      <Size        control_time1="0.9"       control_time2="1.5"   size1="2.5"          size2="2.4"/>
-    </Sizes>
-  </SimpleEmiter>
 	
-
-  
-  <!-- ····························································································· -->
+	<!-- ····························································································· -->
   <!-- ····························································································· -->
   <!-- ····························································································· -->
   <!-- ····························································································· -->

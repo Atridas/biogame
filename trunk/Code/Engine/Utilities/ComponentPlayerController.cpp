@@ -204,7 +204,7 @@ bool CComponentPlayerController::Shoot()
 
     l_vPosArma -= l_vDirArma*0.1f;
   
-    l_pEM->InitParticles("disparar", l_vPosArma + l_vDirArma*INIT_PARTICLES, Vect3f(.25f,.5f,.25f), 2.5f, l_vDir);
+    l_pEM->InitParticles("disparar", l_vPosArma + l_vDirArma*INIT_PARTICLES, Vect3f(.01f,.01f,.01f), 2.5f, l_vDir);
 
     CPhysicsManager *l_pPM = PHYSICS_MANAGER;
 
@@ -288,7 +288,7 @@ bool CComponentPlayerController::ShootGrenade(float _fTime)
 
     l_vPosArma -= l_vDirArma*0.1f;
   
-    l_pEM->InitParticles("disparar", l_vPosArma + l_vDirArma*INIT_PARTICLES, Vect3f(.25f,.5f,.25f), 2.5f, l_vDir);
+    l_pEM->InitParticles("disparar", l_vPosArma + l_vDirArma*INIT_PARTICLES, Vect3f(.01f,.01f,.01f), 2.5f, l_vDir);
 
     CPhysicsManager *l_pPM = PHYSICS_MANAGER;
     Vect3f l_vPuntLlunya = l_vPos+100.f*l_vDir;
@@ -634,7 +634,9 @@ void CComponentPlayerController::ReceiveEvent(const SEvent& _Event)
       assert(_Event.Info[3].Type == SEventInfo::VECTOR);
       Vect3f l_vPos(_Event.Info[3].v.x, _Event.Info[3].v.y, _Event.Info[3].v.z);
     
-      ENTITY_MANAGER->InitParticles("impacte ragdoll", l_vPos, Vect3f(.5f,.5f,.5f), 5.f);
+      //ENTITY_MANAGER->InitParticles("impacte ragdoll", l_vPos, Vect3f(.5f,.5f,.5f), 5.f);
+      ENTITY_MANAGER->InitParticles("impacte ragdoll vapor", l_vPos, Vect3f(.5f,.5f,.5f), 5.f);
+      ENTITY_MANAGER->InitParticles("impacte ragdoll sang", l_vPos, Vect3f(.01f,.01f,.01f), 5.f);
   
     }else if(_Event.Msg == SEvent::REBRE_FORCE)
     {

@@ -94,7 +94,7 @@ void CComponentIABrain::Shoot(float _fShootPrecision)
   l_vDir.RotateY(l_fRandYaw);
   
   CEntityManager* l_pEM = ENTITY_MANAGER;
-  l_pEM->InitParticles("disparar", l_vPos, Vect3f(.5f,.5f,.5f), 2.5f, l_vDir);
+  l_pEM->InitParticles("disparar", l_vPos, Vect3f(.01f,.01f,.01f), 2.5f, l_vDir);
   l_pEM->InitLaser(l_vPos,l_vDir,SHOOT_POWER, CORE->GetPhysicsManager()->GetCollisionMask(ECG_RAY_SHOOT));
 
 }
@@ -157,7 +157,9 @@ void CComponentIABrain::ReceiveShoot(SEvent _sEvent)
     assert(_sEvent.Info[3].Type == SEventInfo::VECTOR);
     Vect3f l_vPos(_sEvent.Info[3].v.x, _sEvent.Info[3].v.y, _sEvent.Info[3].v.z);
     
-    ENTITY_MANAGER->InitParticles("impacte ragdoll", l_vPos, Vect3f(.5f,.5f,.5f), 5.f);
+    //ENTITY_MANAGER->InitParticles("impacte ragdoll", l_vPos, Vect3f(.5f,.5f,.5f), 5.f);
+    ENTITY_MANAGER->InitParticles("impacte ragdoll vapor", l_vPos, Vect3f(.05f,.05f,.05f), 5.f);
+    ENTITY_MANAGER->InitParticles("impacte ragdoll sang", l_vPos, Vect3f(.01f,.01f,.01f), 5.f);
   
   }
 
