@@ -604,7 +604,7 @@
                 
                 is_sprite="false"
                 
-                texture="Data/Textures/Gameplay/Gun.jpg"/>
+                texture="Data/Textures/Gameplay/gun.dds"/>
                 
   <Billboard    id="Shoot Me"                        
                 
