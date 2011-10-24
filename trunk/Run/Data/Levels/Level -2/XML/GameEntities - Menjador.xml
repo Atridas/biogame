@@ -1231,10 +1231,9 @@
     <Object3D position="30.5091 3.09934 28.722" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_menj_menj_llum_florescent15" />
   </Entity>
-  <Entity name="Plataforma">
-    <Object3D position="-3.36713 1.67941 23.7012" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="Plataforma" />
-    <PhysXMesh density="0" collision_group="escenari" />
+  <Entity name="lvl2_montacarregues">
+    <Object3D position="-3.36713 0.0297168 23.7012" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl2_montacarregues" />
     <StateMachine initial_state="State_Elevator_Idle" />
   </Entity>
   <Entity name="Elevator_activation">

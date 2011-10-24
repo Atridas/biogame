@@ -251,8 +251,8 @@ PS_OUTPUT NewPS(TNEW_PS _in)
       /*Deshabilitamos el alphablend*/                              \
       AlphaBlendEnable = false;                          \
       /*Activem l'alpha test */                                   \
-      AlphaTestEnable = true;                            \
-      AlphaRef = 0.01;                                   \
+      AlphaTestEnable = false;                            \
+      AlphaRef = 1;                                   \
       AlphaFunc = GreaterEqual;                          \
       /*Tipo de culling que queremos utilizar*/                         \
       CullMode = CW;                                    \
@@ -271,8 +271,8 @@ PS_OUTPUT NewPS(TNEW_PS _in)
       /*Deshabilitamos el alphablend*/                              \
       AlphaBlendEnable = false;                          \
       /*Activem l'alpha test */                                   \
-      AlphaTestEnable = true;                            \
-      AlphaRef = 0.01;                                   \
+      AlphaTestEnable = false;                            \
+      AlphaRef = 1;                                   \
       AlphaFunc = GreaterEqual;                          \
       /*Tipo de culling que queremos utilizar*/                         \
       CullMode = CCW;                                    \

@@ -3,7 +3,7 @@
   <Rooms>
     <Room name="PassInici">
       <Boundings>
-        <Box name="RoomSizeInici" size="4.94711 3.88874 15.3722" position="-0.0122204 1.71399 -14.8357" yaw="0.0" pitch="0.0" roll="0.0" />
+        <Box name="RoomSizeInici" size="5.95389 14.2722 18.3127" position="-0.0122204 -3.1013 -16.4631" yaw="0.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
         <GameObject name="lvl1_Passadis_inicial01" />
@@ -15,6 +15,8 @@
         <GameObject name="lvl1_aguanta_llums12" />
         <GameObject name="lvl1_Lum13" />
         <GameObject name="lvl1_aguanta_llums13" />
+        <GameObject name="lvl1_montacarregues" />
+        <GameObject name="lvl1_hueco_ascensor_entrada" />
       </Objects>
     </Room>
     <Room name="Pass03">
@@ -49,12 +51,60 @@
       <Objects>
         <GameObject name="lvl1_habitacio_municio" />
         <GameObject name="lvl1_Porta_planta-1_02" />
-        <GameObject name="lvl1_key_blue" />
+        <GameObject name="lvl1_lvl1_key_blue" />
+        <GameObject name="lvl1_cable_lampada_granada" />
+        <GameObject name="lvl1_lampada_granada_autoilum" />
+        <GameObject name="lvl1_ordinador" />
+        <GameObject name="lvl1_ordinador_autoilum" />
+        <GameObject name="lvl1_lampada_granada" />
+        <GameObject name="lvl1_Cadenas_sostre04" />
+        <GameObject name="lvl1_Cadenas_sostre05" />
+        <GameObject name="lvl1_Cadenas_sostre06" />
+        <GameObject name="lvl1_Cadenas_sostre13" />
+        <GameObject name="lvl1_Cadenas_sostre14" />
+        <GameObject name="lvl1_Cadenas_sostre15" />
+        <GameObject name="lvl1_grenade" />
+        <GameObject name="lvl1_lvl2_lab_Cadira_de_força" />
+        <GameObject name="lvl1_lvl2_lab_Edvac" />
+        <GameObject name="lvl1_lvl2_lab_Edvac01" />
+        <GameObject name="lvl1_lvl2_lab_Edvac02" />
+        <GameObject name="lvl1_lvl2_lab_Taula_DEF" />
+        <GameObject name="lvl1_lvl2_lab_tub_Gros05" />
+        <GameObject name="lvl1_lvl2_lab_tub_Gros06" />
+        <GameObject name="lvl1_lvl2_lab_tub_Gros07" />
+        <GameObject name="lvl1_lvl2_lab_tub_Gros08" />
+        <GameObject name="lvl1_roda06" />
+        <GameObject name="lvl1_roda07" />
+        <GameObject name="lvl1_roda09" />
+        <GameObject name="lvl1_tub_gros03" />
+        <GameObject name="lvl1_tub_gros04" />
+        <GameObject name="lvl1_tub_rodo20" />
+        <GameObject name="lvl1_tub_rodo21" />
+        <GameObject name="lvl1_tub_rodo22" />
+        <GameObject name="lvl1_tub_rodo23" />
+        <GameObject name="lvl1_tub_rodo24" />
+        <GameObject name="lvl1_tub_rodo25" />
+        <GameObject name="lvl1_tub_rodo26" />
+        <GameObject name="lvl1_tub_rodo27" />
+        <GameObject name="lvl1_tub_rodo28" />
+        <GameObject name="lvl1_tub_rodo30" />
+        <GameObject name="lvl1_tub_rodo31" />
+        <GameObject name="lvl1_tub_rodo32" />
+        <GameObject name="lvl1_tub_rodo33" />
+        <GameObject name="lvl1_tub_rodo34" />
+        <GameObject name="lvl1_tub_rodo35" />
+        <GameObject name="lvl1_tub_rodo36" />
+        <GameObject name="lvl1_tubs11" />
+        <GameObject name="lvl1_tubs12" />
+        <GameObject name="lvl1_tubs13" />
+        <GameObject name="lvl1_tubs14" />
+        <GameObject name="lvl1_tubs15" />
+        <GameObject name="lvl1_visagra07" />
       </Objects>
     </Room>
     <Room name="SalaControls">
       <Boundings>
-        <Box name="RoomSizeRoomClaus" size="6.24808 4.38677 8.50394" position="-7.33707 2.06297 7.41136" yaw="-45.0" pitch="0.0" roll="0.0" />
+        <Box name="RoomSizeRoomClaus" size="6.24808 4.38677 8.50394" position="-7.33707 2.06297 7.41136" yaw="45.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
         <GameObject name="lvl1_habitacio_claus" />
@@ -70,11 +120,46 @@
         <GameObject name="lvl1_porta_claus_light_right_on" />
         <GameObject name="lvl1_porta_claus_light_top_off" />
         <GameObject name="lvl1_porta_claus_light_top_on" />
+        <GameObject name="lvl1_tubs_claus01" />
+        <GameObject name="lvl1_tubs_claus02" />
+        <GameObject name="lvl1_tubs_claus00" />
+        <GameObject name="lvl1_roda" />
+        <GameObject name="lvl1_roda01" />
+        <GameObject name="lvl1_roda02" />
+        <GameObject name="lvl1_roda05" />
+        <GameObject name="lvl1_tub_gros" />
+        <GameObject name="lvl1_tub_gros01" />
+        <GameObject name="lvl1_tub_gros02" />
+        <GameObject name="lvl1_tub_rodo" />
+        <GameObject name="lvl1_tub_rodo01" />
+        <GameObject name="lvl1_tub_rodo02" />
+        <GameObject name="lvl1_tub_rodo03" />
+        <GameObject name="lvl1_tub_rodo04" />
+        <GameObject name="lvl1_tub_rodo05" />
+        <GameObject name="lvl1_tub_rodo06" />
+        <GameObject name="lvl1_tub_rodo07" />
+        <GameObject name="lvl1_tub_rodo08" />
+        <GameObject name="lvl1_tub_rodo09" />
+        <GameObject name="lvl1_tub_rodo10" />
+        <GameObject name="lvl1_tub_rodo11" />
+        <GameObject name="lvl1_tub_rodo12" />
+        <GameObject name="lvl1_tub_rodo13" />
+        <GameObject name="lvl1_tub_rodo14" />
+        <GameObject name="lvl1_tub_rodo15" />
+        <GameObject name="lvl1_tub_rodo16" />
+        <GameObject name="lvl1_tub_rodo17" />
+        <GameObject name="lvl1_tub_rodo18" />
+        <GameObject name="lvl1_tub_rodo19" />
+        <GameObject name="lvl1_tubs6" />
+        <GameObject name="lvl1_tubs07" />
+        <GameObject name="lvl1_tubs08" />
+        <GameObject name="lvl1_tubs09" />
+        <GameObject name="lvl1_tubs10" />
       </Objects>
     </Room>
     <Room name="PassFinal">
       <Boundings>
-        <Box name="RoomSizeFinal" size="4.9288 4.04311 15.3684" position="-0.029007 1.67459 15.0397" yaw="0.0" pitch="0.0" roll="0.0" />
+        <Box name="RoomSizeFinal" size="5.31354 12.8837 18.4704" position="-0.029007 6.09267 16.4582" yaw="0.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
         <GameObject name="lvl1_Passadis_final01" />
@@ -86,11 +171,13 @@
         <GameObject name="lvl1_Lum20" />
         <GameObject name="lvl1_aguanta_llums21" />
         <GameObject name="lvl1_Lum21" />
+        <GameObject name="lvl1_montacarregues01" />
+        <GameObject name="lvl1_hueco_ascensor2" />
       </Objects>
     </Room>
     <Room name="Pass01">
       <Boundings>
-        <Box name="RoomSizePass01" size="5.66496 4.39727 20.8539" position="12.6211 1.89219 12.3142" yaw="-45.0" pitch="0.0" roll="0.0" />
+        <Box name="RoomSizePass01" size="5.66496 4.39727 20.8539" position="12.6211 1.89219 12.3142" yaw="45.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
         <GameObject name="lvl1_Passadis01" />
@@ -106,11 +193,12 @@
         <GameObject name="lvl1_caixa_llarga16" />
         <GameObject name="lvl1_Caixa_estatica_petita36" />
         <GameObject name="lvl1_Caixa_estatica_petita37" />
+        <GameObject name="lvl1_visagra06" />
       </Objects>
     </Room>
     <Room name="Room03">
       <Boundings>
-        <Box name="RoomSizeRoom03" size="15.6751 8.18424 21.3881" position="29.306 3.18794 24.1956" yaw="-45.0" pitch="0.0" roll="0.0" />
+        <Box name="RoomSizeRoom03" size="15.6751 8.18424 21.3881" position="29.306 3.18794 24.1956" yaw="45.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
         <GameObject name="lvl1_escala_peque01" />
@@ -356,7 +444,7 @@
     </Room>
     <Room name="Room04">
       <Boundings>
-        <Box name="RoomSizeRoom04" size="14.2987 8.63202 21.4906" position="18.8738 2.69026 39.9325" yaw="45.0" pitch="0.0" roll="0.0" />
+        <Box name="RoomSizeRoom04" size="14.2987 8.63202 21.4906" position="18.8738 2.69026 39.9325" yaw="-45.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
         <GameObject name="lvl1_fluorescente_ences" />
@@ -715,14 +803,15 @@
         <GameObject name="lvl1_caixa_llarga14" />
         <GameObject name="lvl1_caixa_llarga15" />
         <GameObject name="lvl1_key_purple" />
+        <GameObject name="lvl1_visagra08" />
       </Objects>
     </Room>
     <Room name="SalaCentral">
       <Boundings>
         <Box name="RoomSizeCentral00" size="6.74554 8.57687 15.5031" position="-0.00137615 3.85108 -0.00928164" yaw="0.0" pitch="0.0" roll="0.0" />
-        <Box name="RoomSizeCentral01" size="5.93803 8.57687 15.5031" position="0.030407 3.85108 -0.00919962" yaw="-45.0" pitch="0.0" roll="0.0" />
-        <Box name="RoomSizeCentral02" size="6.85588 8.57687 15.5031" position="0.00213814 3.85108 -0.00911808" yaw="-90.0" pitch="0.0" roll="0.0" />
-        <Box name="RoomSizeCentral03" size="5.93803 8.57687 15.5031" position="-0.00595093 3.85108 -0.00939989" yaw="45.0" pitch="0.0" roll="0.0" />
+        <Box name="RoomSizeCentral01" size="5.93803 8.57687 15.5031" position="0.030407 3.85108 -0.00919962" yaw="45.0" pitch="0.0" roll="0.0" />
+        <Box name="RoomSizeCentral02" size="6.85588 8.57687 15.5031" position="0.00213814 3.85108 -0.00911808" yaw="90.0" pitch="0.0" roll="0.0" />
+        <Box name="RoomSizeCentral03" size="5.93803 8.57687 15.5031" position="-0.00595093 3.85108 -0.00939989" yaw="-45.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
         <GameObject name="lvl1_Sala_central" />
@@ -746,19 +835,32 @@
         <GameObject name="lvl1_carcasa06" />
         <GameObject name="lvl1_carcasa07" />
         <GameObject name="lvl1_carcasa" />
+        <GameObject name="lvl1_llum_emergencia_central01" />
+        <GameObject name="lvl1_llum_emergencia_central02" />
+        <GameObject name="lvl1_llum_emergencia_central03" />
+        <GameObject name="lvl1_llum_emergencia_central04" />
+        <GameObject name="lvl1_llum_emergencia_central05" />
+        <GameObject name="lvl1_llum_emergencia_central06" />
+        <GameObject name="lvl1_llum_emergencia_central07" />
+        <GameObject name="lvl1_llum_emergencia_central00" />
+        <GameObject name="lvl1_visagra04" />
+        <GameObject name="lvl1_visagra03" />
+        <GameObject name="lvl1_visagra02" />
+        <GameObject name="lvl1_visagra01" />
+        <GameObject name="lvl1_visagra05" />
       </Objects>
     </Room>
   </Rooms>
   <Portals>
-    <Portal name="PortalR03R04" roomA="Room03" roomB="Room04" size="0.628793 3.24569 2.46673" position="28.2098 1.23221 34.1674" yaw="-45.0" pitch="0.0" roll="0.0" />
-    <Portal name="PortalP01R03" roomA="Pass01" roomB="Room03" size="3.66242 3.39706 0.789786" position="19.4937 1.35503 19.278" yaw="-45.0" pitch="0.0" roll="0.0" />
-    <Portal name="PortalRCP01" roomA="SalaCentral" roomB="Pass01" size="3.66242 3.39706 0.789786" position="5.25939 1.35503 5.23637" yaw="-45.0" pitch="0.0" roll="0.0" />
-    <Portal name="PortalRCP04" roomA="SalaCentral" roomB="Pass04" size="3.66242 3.39706 0.789785" position="7.40228 1.35503 -0.155607" yaw="-90.0" pitch="0.0" roll="0.0" />
-    <Portal name="PortalRCPI" roomA="SalaCentral" roomB="PassInici" size="3.66242 3.39706 0.789785" position="0.149349 1.35503 -7.50984" yaw="-180.0" pitch="0.0" roll="0.0" />
-    <Portal name="PortalRCP03" roomA="SalaCentral" roomB="Pass03" size="3.66242 3.39706 0.789785" position="-7.36296 1.35503 -0.156072" yaw="90.0" pitch="0.0" roll="0.0" />
-    <Portal name="PortalRCPF" roomA="SalaCentral" roomB="PassFinal" size="3.66242 3.39706 0.789785" position="0.124609 1.35503 7.39967" yaw="-180.0" pitch="0.0" roll="0.0" />
-    <Portal name="PortalP03R01" roomA="Pass03" roomB="Room01" size="3.66242 3.39706 0.789785" position="-27.4283 1.35503 0.019357" yaw="90.0" pitch="0.0" roll="0.0" />
-    <Portal name="PortalP04R02" roomA="Pass04" roomB="Room02" size="3.66242 3.39706 0.789785" position="33.6818 -8.55704 -20.6985" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
-    <Portal name="PortalRCRCt01" roomA="SalaCentral" roomB="SalaControls" size="3.66242 3.39706 0.789785" position="-5.37087 1.35503 5.13457" yaw="-135.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalR03R04" roomA="Room03" roomB="Room04" size="0.628793 3.24569 2.46673" position="28.2098 1.23221 34.1674" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalP01R03" roomA="Pass01" roomB="Room03" size="3.66242 3.39706 0.789786" position="19.4937 1.35503 19.278" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalRCP01" roomA="SalaCentral" roomB="Pass01" size="3.66242 3.39706 0.789786" position="5.25939 1.35503 5.23637" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalRCP04" roomA="SalaCentral" roomB="Pass04" size="3.66242 3.39706 0.789785" position="7.40228 1.35503 -0.155607" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalRCPI" roomA="SalaCentral" roomB="PassInici" size="3.66242 3.39706 0.789785" position="0.149349 1.35503 -7.50984" yaw="180.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalRCP03" roomA="SalaCentral" roomB="Pass03" size="3.66242 3.39706 0.789785" position="-7.36296 1.35503 -0.156072" yaw="-90.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalRCPF" roomA="SalaCentral" roomB="PassFinal" size="3.66242 3.39706 0.789785" position="0.124609 1.35503 7.39967" yaw="180.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalP03R01" roomA="Pass03" roomB="Room01" size="3.66242 3.39706 0.789785" position="-27.4283 1.35503 0.019357" yaw="-90.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalP04R02" roomA="Pass04" roomB="Room02" size="3.66242 3.39706 0.789785" position="33.6818 -8.55704 -20.6985" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Portal name="PortalRCRCt01" roomA="SalaCentral" roomB="SalaControls" size="3.66242 3.39706 0.789785" position="-5.37087 1.35503 5.13457" yaw="135.0" pitch="0.0" roll="0.0" />
   </Portals>
 </PortalManager>

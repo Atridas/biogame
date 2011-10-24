@@ -201,5 +201,5 @@
 	<RenderableObject name="lvl2_menj_menj_llum_florescent17" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent17" position="10.0623 3.0267 24.1355" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
 	<RenderableObject name="lvl2_menj_menj_floresc10" class="StaticMesh" resource="lvl2_menj_menj_floresc10" position="10.6437 3.09934 23.8595" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_menj_menj_llum_florescent15" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent15" position="30.5091 3.09934 28.722" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="Plataforma" class="StaticMesh" resource="Plataforma" position="-3.36713 1.67941 23.7012" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_montacarregues" class="StaticMesh" resource="lvl2_montacarregues" position="-3.36713 0.0297168 23.7012" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
 </RenderableObjects>

@@ -243,7 +243,7 @@ end
 function activate_elevator_2(_EntityTrigger, _Entity)
   if _Entity:get_name() == "Player" then    
     --activar montacàrregues.
-    local elevator = EM:get_entity("Plataforma")
+    local elevator = EM:get_entity("lvl2_montacarregues")
     
     if elevator then
       --Càmera
@@ -265,7 +265,7 @@ function activate_elevator_2(_EntityTrigger, _Entity)
       RENDERER:deactivate_render_path("aim_gui")
       RENDERER:blend_parameter(Renderer.exposure, 0, 10)
     else
-      log('Error: "Plataforma" no trobada.')
+      log('Error: "lvl2_montacarregues" no trobada.')
     end
     
     EM:remove_entity(_EntityTrigger)

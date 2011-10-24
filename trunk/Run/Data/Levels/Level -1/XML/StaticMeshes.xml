@@ -26,9 +26,11 @@
 	<mesh name="lvl1_Lum11" path="Data/Meshes/lvl1_Lum11.mesh" max="0.0798299 0.0 0.0798302" min="-0.0798302 -0.569623 -0.0798302" />
 	<mesh name="lvl1_aguanta_llums11" path="Data/Meshes/lvl1_aguanta_llums11.mesh" max="0.0445364 0.0 0.22109" min="-0.130722 -0.37025 0.0450401" />
 	<mesh name="lvl1_Lum12" path="Data/Meshes/lvl1_Lum12.mesh" max="0.0798302 0.0 0.0798302" min="-0.0798299 -0.569623 -0.0798302" />
-	<mesh name="lvl1_aguanta_llums12" path="Data/Meshes/lvl1_aguanta_llums12.mesh" max="0.130722 0.0 -0.0450401" min="-0.0445364 -0.37025 -0.22109" />
+	<mesh name="lvl1_aguanta_llums12" path="Data/Meshes/lvl1_aguanta_llums12.mesh" max="0.130722 0.0 -0.0450401" min="-0.0445361 -0.37025 -0.22109" />
 	<mesh name="lvl1_Lum13" path="Data/Meshes/lvl1_Lum13.mesh" max="0.0798302 0.0 0.0798302" min="-0.0798299 -0.569623 -0.0798302" />
-	<mesh name="lvl1_aguanta_llums13" path="Data/Meshes/lvl1_aguanta_llums13.mesh" max="0.130722 0.0 -0.0450411" min="-0.0445364 -0.37025 -0.22109" />
+	<mesh name="lvl1_aguanta_llums13" path="Data/Meshes/lvl1_aguanta_llums13.mesh" max="0.130722 0.0 -0.0450411" min="-0.0445361 -0.37025 -0.22109" />
+	<mesh name="lvl1_montacarregues" path="Data/Meshes/lvl1_montacarregues.mesh" max="2.28941 2.84674 1.27068" min="-2.74328 -0.00602388 -1.26478" />
+	<mesh name="lvl1_hueco_ascensor_entrada" path="Data/Meshes/lvl1_hueco_ascensor_entrada.mesh" max="2.60598 6.69893 1.38834" min="-2.60238 -6.13411 -1.38145" />
 	<mesh name="lvl1_aguanta_llums22" path="Data/Meshes/lvl1_aguanta_llums22.mesh" max="0.22109 0.0 0.130722" min="0.0450401 -0.37025 -0.0445364" />
 	<mesh name="lvl1_Lum22" path="Data/Meshes/lvl1_Lum22.mesh" max="0.0798302 0.569623 0.0798299" min="-0.0798302 0.0 -0.0798299" />
 	<mesh name="lvl1_aguanta_llums23" path="Data/Meshes/lvl1_aguanta_llums23.mesh" max="-0.0450411 0.37025 0.130722" min="-0.22109 0.0 -0.0445364" />
@@ -44,26 +46,111 @@
 	<mesh name="lvl1_Caixa_estatica_petita33" path="Data/Meshes/lvl1_Caixa_estatica_petita33.mesh" max="0.541676 0.5 0.541677" min="-0.541676 -0.5 -0.541674" />
 	<mesh name="lvl1_caixa_llarga_dife10" path="Data/Meshes/lvl1_caixa_llarga_dife10.mesh" max="0.5 1.25 0.5" min="-0.5 -1.25 -0.5" />
 	<mesh name="lvl1_Caixa_estatica_petita34" path="Data/Meshes/lvl1_Caixa_estatica_petita34.mesh" max="0.5 0.5 0.500002" min="-0.500004 -0.5 -0.499998" />
-	<mesh name="lvl1_Caixa_estatica_petita35" path="Data/Meshes/lvl1_Caixa_estatica_petita35.mesh" max="1.39813 0.5 -0.122319" min="-1.39813 -0.5 0.122321" />
-	<mesh name="lvl1_Caixa_estatica_petita38" path="Data/Meshes/lvl1_Caixa_estatica_petita38.mesh" max="1.39813 0.5 -0.122319" min="-1.39813 -0.5 0.122321" />
+	<mesh name="lvl1_Caixa_estatica_petita35" path="Data/Meshes/lvl1_Caixa_estatica_petita35.mesh" max="0.500001 0.5 0.500002" min="-0.500001 -0.5 -0.499999" />
+	<mesh name="lvl1_Caixa_estatica_petita38" path="Data/Meshes/lvl1_Caixa_estatica_petita38.mesh" max="0.500001 0.5 0.500002" min="-0.500001 -0.5 -0.499999" />
 	<mesh name="lvl1_Passadis03" path="Data/Meshes/lvl1_Passadis03.mesh" max="7.50658 4.4 2.25" min="-12.5 -2.38419e-007 -2.25" />
 	<mesh name="lvl1_habitacio_municio" path="Data/Meshes/lvl1_habitacio_municio.mesh" max="2.93201 5.0 4.14388" min="-2.93201 0.0 -4.14388" />
 	<mesh name="lvl1_Porta_planta-1_02" path="Data/Meshes/lvl1_Porta_planta-1_02.mesh" max="0.243015 1.5495 1.44116" min="-0.283014 -1.39425 -1.44116" />
-	<mesh name="lvl1_key_blue" path="Data/Meshes/lvl1_key_blue.mesh" max="0.291331 0.431236 -0.0822525" min="-0.291331 -0.431236 0.0845509" />
+	<mesh name="lvl1_lvl1_key_blue" path="Data/Meshes/lvl1_lvl1_key_blue.mesh" max="0.0822525 0.431236 0.291331" min="-0.0845509 -0.431236 -0.291331" />
+	<mesh name="lvl1_cable_lampada_granada" path="Data/Meshes/lvl1_cable_lampada_granada.mesh" max="0.0293808 1.43301 0.0133999" min="-0.0293808 -1.43301 -0.0426163" />
+	<mesh name="lvl1_lampada_granada_autoilum" path="Data/Meshes/lvl1_lampada_granada_autoilum.mesh" max="0.285698 0.179001 0.285697" min="-0.285698 0.0 -0.285697" />
+	<mesh name="lvl1_ordinador" path="Data/Meshes/lvl1_ordinador.mesh" max="0.544447 1.21788 0.240357" min="-0.382023 0.0 -0.215166" />
+	<mesh name="lvl1_ordinador_autoilum" path="Data/Meshes/lvl1_ordinador_autoilum.mesh" max="0.241995 1.17247 0.0302162" min="0.067234 1.00343 -0.144278" />
+	<mesh name="lvl1_lampada_granada" path="Data/Meshes/lvl1_lampada_granada.mesh" max="0.302282 0.217546 0.302282" min="-0.302282 0.0 -0.302282" />
+	<mesh name="lvl1_Cadenas_sostre04" path="Data/Meshes/lvl1_Cadenas_sostre04.mesh" max="0.0601463 2.5983 0.062175" min="-0.0601463 0.0 -0.062175" />
+	<mesh name="lvl1_Cadenas_sostre05" path="Data/Meshes/lvl1_Cadenas_sostre05.mesh" max="0.0601463 2.5983 0.062175" min="-0.0601463 0.0 -0.062175" />
+	<mesh name="lvl1_Cadenas_sostre06" path="Data/Meshes/lvl1_Cadenas_sostre06.mesh" max="0.0601463 2.5983 0.062175" min="-0.0601463 0.0 -0.062175" />
+	<mesh name="lvl1_Cadenas_sostre13" path="Data/Meshes/lvl1_Cadenas_sostre13.mesh" max="0.0601463 2.5983 0.062175" min="-0.0601463 0.0 -0.062175" />
+	<mesh name="lvl1_Cadenas_sostre14" path="Data/Meshes/lvl1_Cadenas_sostre14.mesh" max="0.0601463 2.5983 0.062175" min="-0.0601463 0.0 -0.062175" />
+	<mesh name="lvl1_Cadenas_sostre15" path="Data/Meshes/lvl1_Cadenas_sostre15.mesh" max="0.0601463 2.5983 0.062175" min="-0.0601463 0.0 -0.062175" />
+	<mesh name="granada" path="Data/Meshes/granada.mesh" max="0.525259 0.199613 0.525259" min="-0.525259 -0.199613 -0.525259" />
+	<mesh name="lvl1_lvl2_lab_Cadira_de_força" path="Data/Meshes/lvl1_lvl2_lab_Cadira_de_força.mesh" max="0.477695 0.965604 0.400492" min="-0.541656 -0.515307 -0.386802" />
+	<mesh name="lvl1_lvl2_lab_Edvac" path="Data/Meshes/lvl1_lvl2_lab_Edvac.mesh" max="1.93729 3.2903 0.321535" min="-1.93729 0.0 -0.261535" />
+	<mesh name="lvl1_lvl2_lab_Edvac01" path="Data/Meshes/lvl1_lvl2_lab_Edvac01.mesh" max="1.93729 3.2903 0.261535" min="-1.93729 0.0 -0.321536" />
+	<mesh name="lvl1_lvl2_lab_Edvac02" path="Data/Meshes/lvl1_lvl2_lab_Edvac02.mesh" max="0.321537 3.2903 1.93729" min="-0.261536 0.0 -1.93729" />
+	<mesh name="lvl1_lvl2_lab_Taula_DEF" path="Data/Meshes/lvl1_lvl2_lab_Taula_DEF.mesh" max="0.458883 1.37225 0.440493" min="-0.458881 -0.462668 -0.795385" />
+	<mesh name="lvl1_lvl2_lab_tub_Gros05" path="Data/Meshes/lvl1_lvl2_lab_tub_Gros05.mesh" max="3.02222 0.330368 0.0849779" min="-3.03844 -0.330368 -0.0687582" />
+	<mesh name="lvl1_lvl2_lab_tub_Gros06" path="Data/Meshes/lvl1_lvl2_lab_tub_Gros06.mesh" max="3.03033 0.330368 0.0768676" min="-3.03033 -0.330368 -0.0768671" />
+	<mesh name="lvl1_lvl2_lab_tub_Gros07" path="Data/Meshes/lvl1_lvl2_lab_tub_Gros07.mesh" max="3.03033 0.330368 0.0768676" min="-3.03033 -0.330368 -0.0768671" />
+	<mesh name="lvl1_lvl2_lab_tub_Gros08" path="Data/Meshes/lvl1_lvl2_lab_tub_Gros08.mesh" max="3.03844 0.330368 0.0849781" min="-3.02222 -0.330368 -0.0687587" />
+	<mesh name="lvl1_roda06" path="Data/Meshes/lvl1_roda06.mesh" max="0.129156 0.20979 0.164324" min="-0.123194 -0.20979 -0.167218" />
+	<mesh name="lvl1_roda07" path="Data/Meshes/lvl1_roda07.mesh" max="0.128286 0.208375 0.163216" min="-0.122364 -0.208375 -0.166091" />
+	<mesh name="lvl1_roda09" path="Data/Meshes/lvl1_roda09.mesh" max="0.154079 0.224266 0.15543" min="-0.166397 -0.224266 -0.156047" />
+	<mesh name="lvl1_tub_gros03" path="Data/Meshes/lvl1_tub_gros03.mesh" max="0.542862 1.83993 0.389567" min="-0.346478 -3.0651 -0.554353" />
+	<mesh name="lvl1_tub_gros04" path="Data/Meshes/lvl1_tub_gros04.mesh" max="0.554352 1.83993 0.346478" min="-0.389566 -3.0651 -0.542862" />
+	<mesh name="lvl1_tub_rodo20" path="Data/Meshes/lvl1_tub_rodo20.mesh" max="0.20108 0.475317 1.99529" min="0.0853462 0.328738 -6.83089" />
+	<mesh name="lvl1_tub_rodo21" path="Data/Meshes/lvl1_tub_rodo21.mesh" max="2.9923 0.109674 0.0865939" min="-2.9923 -0.109674 -0.0865948" />
+	<mesh name="lvl1_tub_rodo22" path="Data/Meshes/lvl1_tub_rodo22.mesh" max="0.20108 0.475317 1.99529" min="0.0853462 0.328738 -6.83089" />
+	<mesh name="lvl1_tub_rodo23" path="Data/Meshes/lvl1_tub_rodo23.mesh" max="0.148365 0.350707 1.99529" min="0.0629711 0.242555 -6.83089" />
+	<mesh name="lvl1_tub_rodo24" path="Data/Meshes/lvl1_tub_rodo24.mesh" max="0.20108 0.475317 1.99529" min="0.0853462 0.328738 -6.83089" />
+	<mesh name="lvl1_tub_rodo25" path="Data/Meshes/lvl1_tub_rodo25.mesh" max="0.0815563 0.192786 1.99529" min="0.0346165 0.133334 -6.83089" />
+	<mesh name="lvl1_tub_rodo26" path="Data/Meshes/lvl1_tub_rodo26.mesh" max="0.0815563 0.192786 1.99529" min="0.0346165 0.133334 -6.83089" />
+	<mesh name="lvl1_tub_rodo27" path="Data/Meshes/lvl1_tub_rodo27.mesh" max="0.148365 0.350707 1.99529" min="0.0629711 0.242555 -6.83089" />
+	<mesh name="lvl1_tub_rodo28" path="Data/Meshes/lvl1_tub_rodo28.mesh" max="0.212009 3.31277 0.167392" min="-0.212009 -1.64707 -0.167393" />
+	<mesh name="lvl1_tub_rodo30" path="Data/Meshes/lvl1_tub_rodo30.mesh" max="0.142799 3.31277 0.112747" min="-0.142799 -1.64707 -0.112747" />
+	<mesh name="lvl1_tub_rodo31" path="Data/Meshes/lvl1_tub_rodo31.mesh" max="0.142799 3.31277 0.112747" min="-0.142799 -1.64707 -0.112747" />
+	<mesh name="lvl1_tub_rodo32" path="Data/Meshes/lvl1_tub_rodo32.mesh" max="0.250841 3.31277 0.198054" min="-0.250841 -1.64707 -0.198054" />
+	<mesh name="lvl1_tub_rodo33" path="Data/Meshes/lvl1_tub_rodo33.mesh" max="2.9923 0.0815582 0.064395" min="-2.9923 -0.0815582 -0.0643959" />
+	<mesh name="lvl1_tub_rodo34" path="Data/Meshes/lvl1_tub_rodo34.mesh" max="0.20108 0.475317 1.99529" min="0.0853462 0.328738 -6.83089" />
+	<mesh name="lvl1_tub_rodo35" path="Data/Meshes/lvl1_tub_rodo35.mesh" max="0.0815563 0.192786 1.99529" min="0.0346165 0.133334 -6.83089" />
+	<mesh name="lvl1_tub_rodo36" path="Data/Meshes/lvl1_tub_rodo36.mesh" max="0.0815563 0.192786 1.99529" min="0.0346146 0.133334 -6.83089" />
+	<mesh name="lvl1_tubs11" path="Data/Meshes/lvl1_tubs11.mesh" max="2.98641 0.0526557 0.0988166" min="-2.98641 -0.0526567 -0.098816" />
+	<mesh name="lvl1_tubs12" path="Data/Meshes/lvl1_tubs12.mesh" max="2.98641 0.110763 0.207863" min="-2.98641 -0.110765 -0.207863" />
+	<mesh name="lvl1_tubs13" path="Data/Meshes/lvl1_tubs13.mesh" max="2.98641 0.110763 0.207863" min="-2.98641 -0.110765 -0.207863" />
+	<mesh name="lvl1_tubs14" path="Data/Meshes/lvl1_tubs14.mesh" max="2.98641 0.0227647 0.0427217" min="-2.98641 -0.0227656 -0.042722" />
+	<mesh name="lvl1_tubs15" path="Data/Meshes/lvl1_tubs15.mesh" max="2.98641 0.0227647 0.0427217" min="-2.98641 -0.0227656 -0.042722" />
+	<mesh name="lvl1_visagra07" path="Data/Meshes/lvl1_visagra07.mesh" max="0.0614357 0.0190948 1.06265" min="-0.0614357 0.0 -1.06265" />
 	<mesh name="lvl1_habitacio_claus" path="Data/Meshes/lvl1_habitacio_claus.mesh" max="5.00341 4.0 5.00341" min="-5.00341 0.0 -5.00341" />
 	<mesh name="lvl1_portal_claus" path="Data/Meshes/lvl1_portal_claus.mesh" max="1.55562 1.85528 1.33086" min="-1.33554 -1.85295 -1.56023" />
-	<mesh name="lvl1_claus_porta_sub1" path="Data/Meshes/lvl1_claus_porta_sub1.mesh" max="1.00975 1.5723 -0.638575" min="-1.00975 -1.5723 0.638576" />
-	<mesh name="lvl1_claus_porta_sub2" path="Data/Meshes/lvl1_claus_porta_sub2.mesh" max="1.0494 1.5723 -0.602561" min="-1.0494 -1.5723 0.602562" />
+	<mesh name="lvl1_claus_porta_sub1" path="Data/Meshes/lvl1_claus_porta_sub1.mesh" max="0.719897 1.5723 0.647967" min="-0.67546 -1.5723 -0.751082" />
+	<mesh name="lvl1_claus_porta_sub2" path="Data/Meshes/lvl1_claus_porta_sub2.mesh" max="0.670251 1.5723 0.763073" min="-0.713805 -1.5723 -0.646896" />
 	<mesh name="lvl1_portal_bidons" path="Data/Meshes/lvl1_portal_bidons.mesh" max="2.41949 -0.0521083 2.16409" min="1.10138 -2.05962 0.945299" />
+	<mesh name="lvl1_tubs_claus01" path="Data/Meshes/lvl1_tubs_claus01.mesh" max="0.220556 3.02222 0.255219" min="-0.281598 -1.09087 -0.282225" />
+	<mesh name="lvl1_tubs_claus02" path="Data/Meshes/lvl1_tubs_claus02.mesh" max="2.19712 0.330368 2.18503" min="-2.19712 -0.330368 -2.18503" />
+	<mesh name="lvl1_tubs_claus00" path="Data/Meshes/lvl1_tubs_claus00.mesh" max="2.19712 0.330368 2.1965" min="-2.19712 -0.330368 -2.17356" />
+	<mesh name="lvl1_roda" path="Data/Meshes/lvl1_roda.mesh" max="0.21451 0.224266 0.0379162" min="-0.222714 -0.224266 -0.0611134" />
+	<mesh name="lvl1_roda01" path="Data/Meshes/lvl1_roda01.mesh" max="0.236635 0.341434 0.253329" min="-0.237574 -0.341434 -0.234577" />
+	<mesh name="lvl1_roda02" path="Data/Meshes/lvl1_roda02.mesh" max="0.206933 0.208375 0.0567827" min="-0.199311 -0.208375 -0.0352292" />
+	<mesh name="lvl1_roda05" path="Data/Meshes/lvl1_roda05.mesh" max="0.208338 0.20979 0.057168" min="-0.200664 -0.20979 -0.0354683" />
+	<mesh name="lvl1_tub_gros" path="Data/Meshes/lvl1_tub_gros.mesh" max="0.369428 1.51888 0.369429" min="-0.550703 -2.53027 -0.550703" />
+	<mesh name="lvl1_tub_gros01" path="Data/Meshes/lvl1_tub_gros01.mesh" max="0.369428 1.51888 0.369428" min="-0.550703 -2.53027 -0.550703" />
+	<mesh name="lvl1_tub_gros02" path="Data/Meshes/lvl1_tub_gros02.mesh" max="0.525674 1.51888 0.525674" min="-0.783614 -2.53027 -0.783615" />
+	<mesh name="lvl1_tub_rodo" path="Data/Meshes/lvl1_tub_rodo.mesh" max="2.17711 0.109674 2.17711" min="-2.17711 -0.109674 -2.17711" />
+	<mesh name="lvl1_tub_rodo01" path="Data/Meshes/lvl1_tub_rodo01.mesh" max="1.5457 0.475317 1.34316" min="-4.76982 0.328738 -4.97235" />
+	<mesh name="lvl1_tub_rodo02" path="Data/Meshes/lvl1_tub_rodo02.mesh" max="1.51035 0.350707 1.36092" min="-4.78564 0.242555 -4.93508" />
+	<mesh name="lvl1_tub_rodo03" path="Data/Meshes/lvl1_tub_rodo03.mesh" max="1.5457 0.475317 1.34316" min="-4.76982 0.328738 -4.97235" />
+	<mesh name="lvl1_tub_rodo04" path="Data/Meshes/lvl1_tub_rodo04.mesh" max="1.46556 0.192786 1.38342" min="-4.80569 0.133334 -4.88784" />
+	<mesh name="lvl1_tub_rodo05" path="Data/Meshes/lvl1_tub_rodo05.mesh" max="1.46556 0.192786 1.38342" min="-4.80569 0.133334 -4.88784" />
+	<mesh name="lvl1_tub_rodo06" path="Data/Meshes/lvl1_tub_rodo06.mesh" max="1.46556 0.192786 1.38342" min="-4.80569 0.133334 -4.88784" />
+	<mesh name="lvl1_tub_rodo07" path="Data/Meshes/lvl1_tub_rodo07.mesh" max="1.5457 0.475317 1.34316" min="-4.76982 0.328738 -4.97235" />
+	<mesh name="lvl1_tub_rodo08" path="Data/Meshes/lvl1_tub_rodo08.mesh" max="1.51035 0.350707 1.36092" min="-4.78564 0.242555 -4.93508" />
+	<mesh name="lvl1_tub_rodo09" path="Data/Meshes/lvl1_tub_rodo09.mesh" max="1.46556 0.192786 1.38342" min="-4.80569 0.133334 -4.88784" />
+	<mesh name="lvl1_tub_rodo10" path="Data/Meshes/lvl1_tub_rodo10.mesh" max="1.5457 0.475317 1.34316" min="-4.76982 0.328738 -4.97235" />
+	<mesh name="lvl1_tub_rodo11" path="Data/Meshes/lvl1_tub_rodo11.mesh" max="0.224659 2.73473 0.224659" min="-0.224658 -1.35967 -0.224659" />
+	<mesh name="lvl1_tub_rodo12" path="Data/Meshes/lvl1_tub_rodo12.mesh" max="0.14239 2.73473 0.142389" min="-0.142389 -1.35967 -0.14239" />
+	<mesh name="lvl1_tub_rodo13" path="Data/Meshes/lvl1_tub_rodo13.mesh" max="0.142389 2.73473 0.142389" min="-0.142389 -1.35967 -0.14239" />
+	<mesh name="lvl1_tub_rodo14" path="Data/Meshes/lvl1_tub_rodo14.mesh" max="0.142389 2.73473 0.14239" min="-0.142389 -1.35967 -0.14239" />
+	<mesh name="lvl1_tub_rodo15" path="Data/Meshes/lvl1_tub_rodo15.mesh" max="0.250124 2.73473 0.250124" min="-0.250124 -1.35967 -0.250124" />
+	<mesh name="lvl1_tub_rodo16" path="Data/Meshes/lvl1_tub_rodo16.mesh" max="1.86417 0.474547 1.86417" min="-1.86417 -0.147686 -1.86417" />
+	<mesh name="lvl1_tub_rodo17" path="Data/Meshes/lvl1_tub_rodo17.mesh" max="1.43625 0.580895 1.43625" min="-1.43625 -0.119002 -1.43625" />
+	<mesh name="lvl1_tub_rodo18" path="Data/Meshes/lvl1_tub_rodo18.mesh" max="2.16141 0.0815582 2.16141" min="-2.16141 -0.0815585 -2.16141" />
+	<mesh name="lvl1_tub_rodo19" path="Data/Meshes/lvl1_tub_rodo19.mesh" max="0.211402 2.73473 0.211401" min="-0.211401 -1.35967 -0.211401" />
+	<mesh name="lvl1_tubs6" path="Data/Meshes/lvl1_tubs6.mesh" max="2.16412 0.0526557 2.18158" min="-2.18158 -0.0526569 -2.16411" />
+	<mesh name="lvl1_tubs07" path="Data/Meshes/lvl1_tubs07.mesh" max="2.22195 0.110763 2.25869" min="-2.25869 -0.110765 -2.22195" />
+	<mesh name="lvl1_tubs08" path="Data/Meshes/lvl1_tubs08.mesh" max="2.22195 0.110763 2.25869" min="-2.25869 -0.110765 -2.22195" />
+	<mesh name="lvl1_tubs09" path="Data/Meshes/lvl1_tubs09.mesh" max="2.13437 0.0227647 2.14192" min="-2.14192 -0.0227656 -2.13437" />
+	<mesh name="lvl1_tubs10" path="Data/Meshes/lvl1_tubs10.mesh" max="2.13437 0.0227647 2.14192" min="-2.14192 -0.0227656 -2.13437" />
 	<mesh name="lvl1_Passadis_final01" path="Data/Meshes/lvl1_Passadis_final01.mesh" max="2.25 3.5 7.72481" min="-2.25 -6.55671e-007 -7.5" />
 	<mesh name="lvl1_aguanta_llums18" path="Data/Meshes/lvl1_aguanta_llums18.mesh" max="0.0445364 0.0 0.22109" min="-0.130722 -0.37025 0.0450411" />
 	<mesh name="lvl1_Lum18" path="Data/Meshes/lvl1_Lum18.mesh" max="0.0798299 0.0 0.0798302" min="-0.0798302 -0.569623 -0.0798302" />
 	<mesh name="lvl1_aguanta_llums19" path="Data/Meshes/lvl1_aguanta_llums19.mesh" max="0.0445364 0.0 0.22109" min="-0.130722 -0.37025 0.0450401" />
 	<mesh name="lvl1_Lum19" path="Data/Meshes/lvl1_Lum19.mesh" max="0.0798299 0.0 0.0798302" min="-0.0798302 -0.569623 -0.0798302" />
-	<mesh name="lvl1_aguanta_llums20" path="Data/Meshes/lvl1_aguanta_llums20.mesh" max="0.130722 0.0 -0.0450401" min="-0.0445364 -0.37025 -0.22109" />
+	<mesh name="lvl1_aguanta_llums20" path="Data/Meshes/lvl1_aguanta_llums20.mesh" max="0.130722 0.0 -0.0450401" min="-0.0445361 -0.37025 -0.22109" />
 	<mesh name="lvl1_Lum20" path="Data/Meshes/lvl1_Lum20.mesh" max="0.0798302 0.0 0.0798302" min="-0.0798299 -0.569623 -0.0798302" />
-	<mesh name="lvl1_aguanta_llums21" path="Data/Meshes/lvl1_aguanta_llums21.mesh" max="0.130722 0.0 -0.0450411" min="-0.0445364 -0.37025 -0.22109" />
+	<mesh name="lvl1_aguanta_llums21" path="Data/Meshes/lvl1_aguanta_llums21.mesh" max="0.130722 0.0 -0.0450411" min="-0.0445361 -0.37025 -0.22109" />
 	<mesh name="lvl1_Lum21" path="Data/Meshes/lvl1_Lum21.mesh" max="0.0798302 0.0 0.0798302" min="-0.0798299 -0.569623 -0.0798302" />
+	<mesh name="lvl1_montacarregues01" path="Data/Meshes/lvl1_montacarregues01.mesh" max="2.51635 2.84622 1.26773" min="-2.51635 -0.00655019 -1.26773" />
+	<mesh name="lvl1_hueco_ascensor2" path="Data/Meshes/lvl1_hueco_ascensor2.mesh" max="2.60597 6.13411 1.38145" min="-2.60239 -6.13411 -1.38834" />
 	<mesh name="lvl1_Passadis01" path="Data/Meshes/lvl1_Passadis01.mesh" max="6.89894 3.8 6.89894" min="-10.4298 -2.38419e-007 -10.4298" />
 	<mesh name="lvl1_Porta_planta-1_17" path="Data/Meshes/lvl1_Porta_planta-1_17.mesh" max="1.14138 1.47187 1.14138" min="-1.14138 -1.47187 -1.14138" />
 	<mesh name="lvl1_aguanta_llums14" path="Data/Meshes/lvl1_aguanta_llums14.mesh" max="0.167534 0.0 0.224513" min="-0.0363297 -0.37025 0.0208168" />
@@ -75,15 +162,16 @@
 	<mesh name="lvl1_aguanta_llums17" path="Data/Meshes/lvl1_aguanta_llums17.mesh" max="0.0363302 0.0 -0.0208173" min="-0.167534 -0.37025 -0.224513" />
 	<mesh name="lvl1_Lum17" path="Data/Meshes/lvl1_Lum17.mesh" max="0.0798302 0.0 0.0798302" min="-0.0798302 -0.569623 -0.0798302" />
 	<mesh name="lvl1_caixa_llarga16" path="Data/Meshes/lvl1_caixa_llarga16.mesh" max="1.23744 0.5 1.23744" min="-1.23744 -0.5 -1.23744" />
-	<mesh name="lvl1_Caixa_estatica_petita36" path="Data/Meshes/lvl1_Caixa_estatica_petita36.mesh" max="0.826736 0.5 0.693716" min="-0.826736 -0.5 -0.693713" />
-	<mesh name="lvl1_Caixa_estatica_petita37" path="Data/Meshes/lvl1_Caixa_estatica_petita37.mesh" max="0.826737 0.5 0.693716" min="-0.826736 -0.5 -0.693714" />
+	<mesh name="lvl1_Caixa_estatica_petita36" path="Data/Meshes/lvl1_Caixa_estatica_petita36.mesh" max="0.707108 0.5 0.707108" min="-0.707107 -0.5 -0.707106" />
+	<mesh name="lvl1_Caixa_estatica_petita37" path="Data/Meshes/lvl1_Caixa_estatica_petita37.mesh" max="0.707108 0.5 0.707108" min="-0.707107 -0.5 -0.707106" />
+	<mesh name="lvl1_visagra06" path="Data/Meshes/lvl1_visagra06.mesh" max="0.794847 0.0190948 0.794847" min="-0.794847 0.0 -0.794847" />
 	<mesh name="lvl1_escala_peque01" path="Data/Meshes/lvl1_escala_peque01.mesh" max="0.548008 2.77727 0.548008" min="-0.30052 0.0 -0.30052" />
 	<mesh name="lvl1_escala_peque02" path="Data/Meshes/lvl1_escala_peque02.mesh" max="0.548008 2.77727 0.548008" min="-0.30052 0.0 -0.30052" />
 	<mesh name="lvl1_escala_peque03" path="Data/Meshes/lvl1_escala_peque03.mesh" max="0.548008 2.77727 0.548008" min="-0.300522 0.0 -0.30052" />
 	<mesh name="lvl1_escala_peque04" path="Data/Meshes/lvl1_escala_peque04.mesh" max="0.54801 2.77727 0.548008" min="-0.30052 0.0 -0.30052" />
-	<mesh name="lvl1_escala_peque05" path="Data/Meshes/lvl1_escala_peque05.mesh" max="0.30052 2.77727 0.300522" min="-0.548006 0.0 -0.54801" />
-	<mesh name="lvl1_escala_peque06" path="Data/Meshes/lvl1_escala_peque06.mesh" max="0.300522 2.77727 0.300524" min="-0.548004 0.0 -0.548008" />
-	<mesh name="lvl1_escala_peque07" path="Data/Meshes/lvl1_escala_peque07.mesh" max="0.300522 2.77727 0.300522" min="-0.548004 0.0 -0.548008" />
+	<mesh name="lvl1_escala_peque05" path="Data/Meshes/lvl1_escala_peque05.mesh" max="0.30052 2.77727 0.300522" min="-0.548008 0.0 -0.548006" />
+	<mesh name="lvl1_escala_peque06" path="Data/Meshes/lvl1_escala_peque06.mesh" max="0.300522 2.77727 0.300522" min="-0.548008 0.0 -0.548008" />
+	<mesh name="lvl1_escala_peque07" path="Data/Meshes/lvl1_escala_peque07.mesh" max="0.300522 2.77727 0.300522" min="-0.548008 0.0 -0.548008" />
 	<mesh name="lvl1_escala_peque" path="Data/Meshes/lvl1_escala_peque.mesh" max="0.548006 2.77727 0.548008" min="-0.30052 0.0 -0.30052" />
 	<mesh name="lvl1_litera_pared12" path="Data/Meshes/lvl1_litera_pared12.mesh" max="1.13496 0.644229 1.12927" min="-1.09304 0.0 -1.08894" />
 	<mesh name="lvl1_litera_pared13" path="Data/Meshes/lvl1_litera_pared13.mesh" max="1.13496 0.644229 1.12927" min="-1.09304 0.0 -1.08894" />
@@ -158,9 +246,9 @@
 	<mesh name="lvl1_escala04" path="Data/Meshes/lvl1_escala04.mesh" max="0.30052 5.0 0.548008" min="-0.548008 0.0 -0.30052" />
 	<mesh name="lvl1_escala05" path="Data/Meshes/lvl1_escala05.mesh" max="0.30052 5.0 0.548008" min="-0.548008 0.0 -0.30052" />
 	<mesh name="lvl1_escala06" path="Data/Meshes/lvl1_escala06.mesh" max="0.30052 5.0 0.548008" min="-0.548008 0.0 -0.30052" />
-	<mesh name="lvl1_escala07" path="Data/Meshes/lvl1_escala07.mesh" max="0.548004 5.0 0.300522" min="-0.300522 0.0 -0.548008" />
-	<mesh name="lvl1_escala08" path="Data/Meshes/lvl1_escala08.mesh" max="0.548008 5.0 0.30052" min="-0.300518 0.0 -0.54801" />
-	<mesh name="lvl1_escala09" path="Data/Meshes/lvl1_escala09.mesh" max="0.548008 5.0 0.30052" min="-0.300518 0.0 -0.548008" />
+	<mesh name="lvl1_escala07" path="Data/Meshes/lvl1_escala07.mesh" max="0.548008 5.0 0.30052" min="-0.300522 0.0 -0.548008" />
+	<mesh name="lvl1_escala08" path="Data/Meshes/lvl1_escala08.mesh" max="0.548012 5.0 0.30052" min="-0.300522 0.0 -0.548008" />
+	<mesh name="lvl1_escala09" path="Data/Meshes/lvl1_escala09.mesh" max="0.548008 5.0 0.30052" min="-0.300522 0.0 -0.548008" />
 	<mesh name="lvl1_escala10" path="Data/Meshes/lvl1_escala10.mesh" max="0.548008 5.0 0.54801" min="-0.300522 0.0 -0.30052" />
 	<mesh name="lvl1_escala11" path="Data/Meshes/lvl1_escala11.mesh" max="0.548008 5.0 0.548008" min="-0.300518 0.0 -0.300522" />
 	<mesh name="lvl1_escala12" path="Data/Meshes/lvl1_escala12.mesh" max="0.548006 5.0 0.548008" min="-0.30052 0.0 -0.300522" />
@@ -290,8 +378,8 @@
 	<mesh name="lvl1_Plane22" path="Data/Meshes/lvl1_Plane22.mesh" max="4.68648 1.54743 4.68648" min="-0.702972 -1.54743 -0.702972" />
 	<mesh name="lvl1_Plane23" path="Data/Meshes/lvl1_Plane23.mesh" max="4.68648 1.54743 4.68647" min="-4.68648 -1.54743 -4.68647" />
 	<mesh name="lvl1_Plane25" path="Data/Meshes/lvl1_Plane25.mesh" max="1.26667 1.43158 1.26667" min="-1.26667 -1.43158 -1.26667" />
-	<mesh name="lvl1_caixa_llarga17" path="Data/Meshes/lvl1_caixa_llarga17.mesh" max="-1.23744 0.5 1.23744" min="1.23744 -0.5 -1.23744" />
-	<mesh name="lvl1_caixa_llarga18" path="Data/Meshes/lvl1_caixa_llarga18.mesh" max="-1.23743 0.5 1.23744" min="1.23744 -0.5 -1.23744" />
+	<mesh name="lvl1_caixa_llarga17" path="Data/Meshes/lvl1_caixa_llarga17.mesh" max="1.23744 0.5 1.23744" min="-1.23744 -0.5 -1.23744" />
+	<mesh name="lvl1_caixa_llarga18" path="Data/Meshes/lvl1_caixa_llarga18.mesh" max="1.23744 0.5 1.23743" min="-1.23744 -0.5 -1.23744" />
 	<mesh name="lvl1_Plane24" path="Data/Meshes/lvl1_Plane24.mesh" max="1.26667 1.43158 1.26667" min="-1.26667 -1.43158 -1.26667" />
 	<mesh name="lvl1_Plane26" path="Data/Meshes/lvl1_Plane26.mesh" max="4.68647 1.54743 0.702972" min="-0.702971 -1.54743 -4.68648" />
 	<mesh name="lvl1_Plane27" path="Data/Meshes/lvl1_Plane27.mesh" max="4.68647 1.54743 0.702972" min="-0.702971 -1.54743 -4.68648" />
@@ -316,7 +404,7 @@
 	<mesh name="lvl1_Aixeta15" path="Data/Meshes/lvl1_Aixeta15.mesh" max="0.137292 0.0450389 0.137291" min="-0.137293 -0.0450389 -0.137291" />
 	<mesh name="lvl1_dutxa15" path="Data/Meshes/lvl1_dutxa15.mesh" max="0.13884 0.116173 0.13884" min="-0.168413 -0.116173 -0.168411" />
 	<mesh name="lvl1_viga" path="Data/Meshes/lvl1_viga.mesh" max="4.8729 0.50822 4.8729" min="-4.8729 0.0 -4.8729" />
-	<mesh name="lvl1_Plane01" path="Data/Meshes/lvl1_Plane01.mesh" max="1.01758 0.669191 1.01758" min="-1.01758 -0.669191 -1.01758" />
+	<mesh name="lvl1_Plane01" path="Data/Meshes/lvl1_Plane01.mesh" max="-1.90735e-006 0.669191 1.38885" min="0.0 -0.669191 -1.4893" />
 	<mesh name="lvl1_Plane02" path="Data/Meshes/lvl1_Plane02.mesh" max="0.339285 1.2692 0.339283" min="-0.339285 -1.71233 -0.339283" />
 	<mesh name="lvl1_Plane03" path="Data/Meshes/lvl1_Plane03.mesh" max="0.339285 1.2692 0.339283" min="-0.339285 -1.71233 -0.339283" />
 	<mesh name="lvl1_Plane04" path="Data/Meshes/lvl1_Plane04.mesh" max="0.339285 1.2692 0.339283" min="-0.339285 -1.71233 -0.339283" />
@@ -324,7 +412,7 @@
 	<mesh name="lvl1_Banc04" path="Data/Meshes/lvl1_Banc04.mesh" max="1.90919 0.1 1.90919" min="-1.90918 -0.43 -1.90919" />
 	<mesh name="lvl1_taquilla07" path="Data/Meshes/lvl1_taquilla07.mesh" max="1.3645 1.0 1.3645" min="-1.3645 -1.0 -1.3645" />
 	<mesh name="lvl1_taquilla08" path="Data/Meshes/lvl1_taquilla08.mesh" max="1.3645 1.0 1.3645" min="-1.3645 -1.0 -1.3645" />
-	<mesh name="lvl1_taquilla10" path="Data/Meshes/lvl1_taquilla10.mesh" max="-1.3645 1.0 1.36647" min="1.38963 -1.0 -1.3645" />
+	<mesh name="lvl1_taquilla10" path="Data/Meshes/lvl1_taquilla10.mesh" max="1.36646 1.0 1.3645" min="-1.3645 -1.0 -1.38962" />
 	<mesh name="lvl1_taquilla11" path="Data/Meshes/lvl1_taquilla11.mesh" max="1.3645 1.0 1.38962" min="-1.36646 -1.0 -1.3645" />
 	<mesh name="lvl1_porta4" path="Data/Meshes/lvl1_porta4.mesh" max="0.551624 1.0 0.551624" min="-0.551624 -1.0 -0.551624" />
 	<mesh name="lvl1_porta2" path="Data/Meshes/lvl1_porta2.mesh" max="0.631575 1.0 0.454758" min="-0.631571 -1.0 -0.454758" />
@@ -348,15 +436,15 @@
 	<mesh name="lvl1_dutxa28" path="Data/Meshes/lvl1_dutxa28.mesh" max="0.168413 0.116173 0.168411" min="-0.13884 -0.116173 -0.13884" />
 	<mesh name="lvl1_dutxa29" path="Data/Meshes/lvl1_dutxa29.mesh" max="0.168413 0.116173 0.168411" min="-0.13884 -0.116173 -0.13884" />
 	<mesh name="lvl1_dutxa30" path="Data/Meshes/lvl1_dutxa30.mesh" max="0.168413 0.116173 0.168411" min="-0.13884 -0.116173 -0.13884" />
-	<mesh name="lvl1_Plane17" path="Data/Meshes/lvl1_Plane17.mesh" max="1.01758 0.669191 1.01758" min="-1.01758 -0.669191 -1.01758" />
-	<mesh name="lvl1_Plane18" path="Data/Meshes/lvl1_Plane18.mesh" max="2.0314 1.33591 2.0314" min="-2.0314 -1.33591 -2.0314" />
+	<mesh name="lvl1_Plane17" path="Data/Meshes/lvl1_Plane17.mesh" max="-0.125423 0.669191 1.4336" min="0.125427 -0.669191 -1.4336" />
+	<mesh name="lvl1_Plane18" path="Data/Meshes/lvl1_Plane18.mesh" max="1.90735e-006 1.33591 2.87283" min="0.0 -1.33591 -2.87283" />
 	<mesh name="lvl1_LAVABO03" path="Data/Meshes/lvl1_LAVABO03.mesh" max="0.501276 1.23192 0.501274" min="-0.417721 0.0 -0.417721" />
 	<mesh name="lvl1_Plane19" path="Data/Meshes/lvl1_Plane19.mesh" max="0.966261 0.0 0.966263" min="-0.966262 0.0 -0.966263" />
 	<mesh name="lvl1_Banc06" path="Data/Meshes/lvl1_Banc06.mesh" max="1.90918 0.1 1.90919" min="-1.90918 -0.43 -1.90919" />
 	<mesh name="lvl1_Banc09" path="Data/Meshes/lvl1_Banc09.mesh" max="0.166267 0.1 0.166267" min="-1.90918 -0.43 -1.90919" />
 	<mesh name="lvl1_Banc10" path="Data/Meshes/lvl1_Banc10.mesh" max="0.166267 0.1 0.166267" min="-1.90918 -0.43 -1.90919" />
-	<mesh name="lvl1_Banc08" path="Data/Meshes/lvl1_Banc08.mesh" max="1.90919 0.1 1.90919" min="-1.90919 -0.43 -1.90919" />
-	<mesh name="lvl1_Banc07" path="Data/Meshes/lvl1_Banc07.mesh" max="1.90919 0.1 1.90919" min="-1.90919 -0.43 -1.90919" />
+	<mesh name="lvl1_Banc08" path="Data/Meshes/lvl1_Banc08.mesh" max="1.90918 0.1 1.90919" min="-1.90918 -0.43 -1.90919" />
+	<mesh name="lvl1_Banc07" path="Data/Meshes/lvl1_Banc07.mesh" max="1.90918 0.1 1.90919" min="-1.90918 -0.43 -1.90919" />
 	<mesh name="lvl1_Plane11" path="Data/Meshes/lvl1_Plane11.mesh" max="4.68648 1.54743 4.68647" min="-4.68648 -1.54743 -4.68647" />
 	<mesh name="lvl1_Plane14" path="Data/Meshes/lvl1_Plane14.mesh" max="4.68648 1.54743 4.68648" min="-4.68648 -1.54743 -4.68648" />
 	<mesh name="lvl1_Plane12" path="Data/Meshes/lvl1_Plane12.mesh" max="4.68648 1.54743 4.68647" min="-4.68648 -1.54743 -4.68647" />
@@ -364,7 +452,7 @@
 	<mesh name="lvl1_taquilla09" path="Data/Meshes/lvl1_taquilla09.mesh" max="1.3645 1.0 1.3645" min="-1.3645 -1.0 -1.3645" />
 	<mesh name="lvl1_taquilla04" path="Data/Meshes/lvl1_taquilla04.mesh" max="2.55223 2.0 2.55223" min="-2.55223 0.0 -2.55223" />
 	<mesh name="lvl1_Plane05" path="Data/Meshes/lvl1_Plane05.mesh" max="0.506182 2.88741 1.20241" min="-1.20241 -3.20467 -0.50618" />
-	<mesh name="lvl1_Plane08" path="Data/Meshes/lvl1_Plane08.mesh" max="1.21723 1.3757 1.21724" min="-1.21723 -1.3757 -1.21724" />
+	<mesh name="lvl1_Plane08" path="Data/Meshes/lvl1_Plane08.mesh" max="1.72143 1.3757 5.72205e-006" min="-1.72143 -1.3757 -4.76837e-006" />
 	<mesh name="lvl1_Plane13" path="Data/Meshes/lvl1_Plane13.mesh" max="0.705599 1.54743 4.68647" min="-4.68648 -1.54743 -0.705597" />
 	<mesh name="lvl1_Plane16" path="Data/Meshes/lvl1_Plane16.mesh" max="4.68647 1.54743 4.68648" min="-4.68647 -1.54743 -4.68648" />
 	<mesh name="lvl1_taquilla" path="Data/Meshes/lvl1_taquilla.mesh" max="2.55223 2.0 2.55223" min="-2.55223 0.0 -2.55223" />
@@ -373,7 +461,7 @@
 	<mesh name="lvl1_LAVABO04" path="Data/Meshes/lvl1_LAVABO04.mesh" max="0.501274 1.23192 0.501274" min="-0.417721 0.0 -0.417721" />
 	<mesh name="lvl1_LAVABO05" path="Data/Meshes/lvl1_LAVABO05.mesh" max="0.501276 1.23192 0.501274" min="-0.417721 0.0 -0.417721" />
 	<mesh name="lvl1_LAVABO06" path="Data/Meshes/lvl1_LAVABO06.mesh" max="0.501274 1.23192 0.501274" min="-0.417721 0.0 -0.417721" />
-	<mesh name="lvl1_key_yellow" path="Data/Meshes/lvl1_key_yellow.mesh" max="0.0 0.431236 0.375885" min="0.0 -0.431236 -0.373581" />
+	<mesh name="lvl1_key_yellow" path="Data/Meshes/lvl1_key_yellow.mesh" max="0.23607 0.431236 0.253727" min="-0.24498 -0.431236 -0.236069" />
 	<mesh name="lvl1_escalas" path="Data/Meshes/lvl1_escalas.mesh" max="3.25126 1.5 2.25" min="-3.25126 -1.5 -2.25" />
 	<mesh name="lvl1_escala02" path="Data/Meshes/lvl1_escala02.mesh" max="16.0 -2.99655 -2.25" min="11.5 -10.0 -17.2675" />
 	<mesh name="lvl1_Passadis04" path="Data/Meshes/lvl1_Passadis04.mesh" max="16.0 4.8 2.25" min="-12.5 -10.0 -20.75" />
@@ -395,9 +483,9 @@
 	<mesh name="lvl1_aguanta_llums07" path="Data/Meshes/lvl1_aguanta_llums07.mesh" max="0.130722 0.0 -0.0450411" min="-0.0445366 -0.37025 -0.22109" />
 	<mesh name="lvl1_Lum08" path="Data/Meshes/lvl1_Lum08.mesh" max="0.0798302 0.0 0.0798302" min="-0.0798302 -0.569623 -0.0798302" />
 	<mesh name="lvl1_aguanta_llums08" path="Data/Meshes/lvl1_aguanta_llums08.mesh" max="0.130722 0.0 -0.0450406" min="-0.0445366 -0.37025 -0.22109" />
-	<mesh name="lvl1_Caixa_estatica_petita39" path="Data/Meshes/lvl1_Caixa_estatica_petita39.mesh" max="1.39813 0.5 -0.122318" min="-1.39813 -0.5 0.122324" />
-	<mesh name="lvl1_Caixa_estatica_petita40" path="Data/Meshes/lvl1_Caixa_estatica_petita40.mesh" max="1.39813 0.5 -0.122322" min="-1.39813 -0.5 0.12232" />
-	<mesh name="lvl1_Caixa_estatica_petita41" path="Data/Meshes/lvl1_Caixa_estatica_petita41.mesh" max="1.39813 0.5 -0.12232" min="-1.39813 -0.5 0.122321" />
+	<mesh name="lvl1_Caixa_estatica_petita39" path="Data/Meshes/lvl1_Caixa_estatica_petita39.mesh" max="0.5 0.5 0.500002" min="-0.5 -0.5 -0.499999" />
+	<mesh name="lvl1_Caixa_estatica_petita40" path="Data/Meshes/lvl1_Caixa_estatica_petita40.mesh" max="0.5 0.5 0.500002" min="-0.500002 -0.5 -0.499999" />
+	<mesh name="lvl1_Caixa_estatica_petita41" path="Data/Meshes/lvl1_Caixa_estatica_petita41.mesh" max="0.5 0.5 0.500001" min="-0.500002 -0.5 -0.499999" />
 	<mesh name="lvl1_aguanta_llums30" path="Data/Meshes/lvl1_aguanta_llums30.mesh" max="-0.0450401 0.0 0.0445364" min="-0.22109 -0.37025 -0.130722" />
 	<mesh name="lvl1_armeria" path="Data/Meshes/lvl1_armeria.mesh" max="8.14388 6.0 2.93201" min="-11.1439 0.0 -17.932" />
 	<mesh name="lvl1_viga08" path="Data/Meshes/lvl1_viga08.mesh" max="0.237833 0.789214 10.5043" min="-0.237833 0.0 -10.5043" />
@@ -623,7 +711,8 @@
 	<mesh name="lvl1_Caixa_estatica_petita31" path="Data/Meshes/lvl1_Caixa_estatica_petita31.mesh" max="0.541676 0.5 0.541676" min="-0.541676 -0.5 -0.541672" />
 	<mesh name="lvl1_caixa_llarga14" path="Data/Meshes/lvl1_caixa_llarga14.mesh" max="1.28882 0.5 0.607044" min="-1.28882 -0.5 -0.60704" />
 	<mesh name="lvl1_caixa_llarga15" path="Data/Meshes/lvl1_caixa_llarga15.mesh" max="1.33253 0.5 1.05801" min="-1.33253 -0.5 -1.05801" />
-	<mesh name="lvl1_key_purple" path="Data/Meshes/lvl1_key_purple.mesh" max="0.291332 0.431236 -0.0822525" min="-0.291332 -0.431236 0.0845509" />
+	<mesh name="lvl1_key_purple" path="Data/Meshes/lvl1_key_purple.mesh" max="0.0822525 0.431236 0.291332" min="-0.0845509 -0.431236 -0.291332" />
+	<mesh name="lvl1_visagra08" path="Data/Meshes/lvl1_visagra08.mesh" max="1.06265 0.0190945 0.0614338" min="-1.06265 0.0 -0.0614338" />
 	<mesh name="lvl1_Sala_central" path="Data/Meshes/lvl1_Sala_central.mesh" max="7.39104 7.91334 7.39104" min="-7.39104 -0.0313183 -7.39104" />
 	<mesh name="lvl1_Porta_planta-1_09" path="Data/Meshes/lvl1_Porta_planta-1_09.mesh" max="1.45497 2.94098 -7.12897" min="-1.42735 -0.00277019 -7.655" />
 	<mesh name="lvl1_Porta_planta-1_10" path="Data/Meshes/lvl1_Porta_planta-1_10.mesh" max="-4.07577 2.94098 -4.09531" min="-6.35854 -0.00277019 -6.37807" />
@@ -634,69 +723,30 @@
 	<mesh name="lvl1_Porta_planta-1_15" path="Data/Meshes/lvl1_Porta_planta-1_15.mesh" max="7.655 2.94098 1.45497" min="7.12897 -0.00277019 -1.42734" />
 	<mesh name="lvl1_Porta_planta-1_16" path="Data/Meshes/lvl1_Porta_planta-1_16.mesh" max="6.37807 2.94098 -4.07577" min="4.09531 -0.00277019 -6.35853" />
 	<mesh name="lvl1_terra_elevat" path="Data/Meshes/lvl1_terra_elevat.mesh" max="7.39104 0.116821 7.39104" min="-7.39104 0.0268216 -7.39104" />
-	<mesh name="lvl1_elice" path="Data/Meshes/lvl1_elice.mesh" max="3.26702 2.73942 3.2706" min="-3.27681 -0.23126 -3.27319" />
+	<mesh name="lvl1_elice" path="Data/Meshes/lvl1_elice.mesh" max="3.26702 2.73942 3.2706" min="-3.27681 -0.23126 -3.27318" />
 	<mesh name="lvl1_porta07" path="Data/Meshes/lvl1_porta07.mesh" max="0.812852 1.30378 0.812852" min="-0.812852 -1.30378 -0.812852" />
 	<mesh name="lvl1_porta09" path="Data/Meshes/lvl1_porta09.mesh" max="0.812853 1.30378 0.812852" min="-0.812853 -1.30378 -0.812852" />
-	<mesh name="lvl1_carcasa01" path="Data/Meshes/lvl1_carcasa01.mesh" max="-0.236904 1.87671 -0.233201" min="-0.154922 1.70812 0.22588" />
-	<mesh name="lvl1_carcasa02" path="Data/Meshes/lvl1_carcasa02.mesh" max="-0.236904 1.87671 0.22588" min="-0.154922 1.70812 -0.233201" />
-	<mesh name="lvl1_carcasa03" path="Data/Meshes/lvl1_carcasa03.mesh" max="-0.154922 1.87671 -0.233201" min="-0.236904 1.70812 0.22588" />
-	<mesh name="lvl1_carcasa04" path="Data/Meshes/lvl1_carcasa04.mesh" max="-0.195913 1.87671 -0.274191" min="-0.195913 1.70812 0.266871" />
-	<mesh name="lvl1_carcasa05" path="Data/Meshes/lvl1_carcasa05.mesh" max="-0.195913 1.87671 0.266871" min="-0.195913 1.70812 -0.274191" />
-	<mesh name="lvl1_carcasa06" path="Data/Meshes/lvl1_carcasa06.mesh" max="-0.466444 1.87671 -0.00366044" min="0.0746179 1.70812 -0.00365996" />
-	<mesh name="lvl1_carcasa07" path="Data/Meshes/lvl1_carcasa07.mesh" max="0.0746179 1.87671 -0.0036602" min="-0.466444 1.70812 -0.00366044" />
+	<mesh name="lvl1_carcasa01" path="Data/Meshes/lvl1_carcasa01.mesh" max="0.236904 1.87671 0.233201" min="0.154922 1.70812 -0.22588" />
+	<mesh name="lvl1_carcasa02" path="Data/Meshes/lvl1_carcasa02.mesh" max="0.22588 1.87671 0.236904" min="-0.233201 1.70812 0.154922" />
+	<mesh name="lvl1_carcasa03" path="Data/Meshes/lvl1_carcasa03.mesh" max="0.233201 1.87671 -0.154922" min="-0.22588 1.70812 -0.236904" />
+	<mesh name="lvl1_carcasa04" path="Data/Meshes/lvl1_carcasa04.mesh" max="0.327846 1.87671 0.0553508" min="-0.0501747 1.70812 -0.32267" />
+	<mesh name="lvl1_carcasa05" path="Data/Meshes/lvl1_carcasa05.mesh" max="0.0501747 1.87671 0.32267" min="-0.327847 1.70812 -0.0553508" />
+	<mesh name="lvl1_carcasa06" path="Data/Meshes/lvl1_carcasa06.mesh" max="0.32267 1.87671 0.327847" min="-0.0553508 1.70812 -0.0501747" />
+	<mesh name="lvl1_carcasa07" path="Data/Meshes/lvl1_carcasa07.mesh" max="0.0553513 1.87671 0.0501747" min="-0.32267 1.70812 -0.327847" />
 	<mesh name="lvl1_carcasa" path="Data/Meshes/lvl1_carcasa.mesh" max="-0.154922 1.87671 0.22588" min="-0.236904 1.70812 -0.233201" />
-	<mesh name="granada" path="Data/Meshes/granada.mesh" max="0.525259 0.199613 0.525259" min="-0.525259 -0.199613 -0.525259" />
+	<mesh name="lvl1_llum_emergencia_central01" path="Data/Meshes/lvl1_llum_emergencia_central01.mesh" max="0.223081 -0.00116014 -0.0108624" min="-0.223081 -0.167435 -0.0774603" />
+	<mesh name="lvl1_llum_emergencia_central02" path="Data/Meshes/lvl1_llum_emergencia_central02.mesh" max="0.150061 -0.00116014 0.150061" min="-0.184081 -0.167435 -0.184081" />
+	<mesh name="lvl1_llum_emergencia_central03" path="Data/Meshes/lvl1_llum_emergencia_central03.mesh" max="-0.0108624 -0.00116014 0.223081" min="-0.0774603 -0.167435 -0.223081" />
+	<mesh name="lvl1_llum_emergencia_central04" path="Data/Meshes/lvl1_llum_emergencia_central04.mesh" max="0.150061 -0.00116014 0.184081" min="-0.184081 -0.167435 -0.150061" />
+	<mesh name="lvl1_llum_emergencia_central05" path="Data/Meshes/lvl1_llum_emergencia_central05.mesh" max="0.223081 -0.00116014 0.0774603" min="-0.223081 -0.167435 0.0108624" />
+	<mesh name="lvl1_llum_emergencia_central06" path="Data/Meshes/lvl1_llum_emergencia_central06.mesh" max="0.184081 -0.00116014 0.184081" min="-0.150061 -0.167435 -0.150061" />
+	<mesh name="lvl1_llum_emergencia_central07" path="Data/Meshes/lvl1_llum_emergencia_central07.mesh" max="0.0774603 -0.00116014 0.223081" min="0.0108624 -0.167435 -0.223081" />
+	<mesh name="lvl1_llum_emergencia_central00" path="Data/Meshes/lvl1_llum_emergencia_central00.mesh" max="0.184081 -0.00116014 0.150061" min="-0.150061 -0.167435 -0.184081" />
+	<mesh name="lvl1_visagra04" path="Data/Meshes/lvl1_visagra04.mesh" max="0.0614347 0.0190948 1.06265" min="-0.0614347 0.0 -1.06265" />
+	<mesh name="lvl1_visagra03" path="Data/Meshes/lvl1_visagra03.mesh" max="0.0614347 0.0190948 1.06265" min="-0.0614347 0.0 -1.06265" />
+	<mesh name="lvl1_visagra02" path="Data/Meshes/lvl1_visagra02.mesh" max="1.06265 0.0190948 0.0614347" min="-1.06265 0.0 -0.0614347" />
+	<mesh name="lvl1_visagra01" path="Data/Meshes/lvl1_visagra01.mesh" max="1.06265 0.0190948 0.0614347" min="-1.06265 0.0 -0.0614347" />
+	<mesh name="lvl1_visagra05" path="Data/Meshes/lvl1_visagra05.mesh" max="0.794847 0.0190948 0.794847" min="-0.794847 0.0 -0.794847" />
 	<mesh name="lvl1_key_green" path="Data/Meshes/lvl1_key_green.mesh" max="0.291331 0.431236 0.0845509" min="-0.291331 -0.431236 -0.0822525" />
-	<mesh name="lvl2_lab_tub_Gros" path="Data/Meshes/lvl2_lab_tub_Gros.mesh" max="2.19712 0.330368 2.1965" min="-2.19712 -0.330368 -2.17356" />
-	<mesh name="tub_gros" path="Data/Meshes/tub_gros.mesh" max="0.369428 1.51888 0.369429" min="-0.550703 -2.53027 -0.550703" />
-	<mesh name="tub_gros01" path="Data/Meshes/tub_gros01.mesh" max="0.369428 1.51888 0.369428" min="-0.550703 -2.53027 -0.550703" />
-	<mesh name="tub_gros02" path="Data/Meshes/tub_gros02.mesh" max="0.525674 1.51888 0.525674" min="-0.783614 -2.53027 -0.783615" />
-	<mesh name="tub_rodo" path="Data/Meshes/tub_rodo.mesh" max="2.17711 0.109674 2.17711" min="-2.17711 -0.109674 -2.17711" />
-	<mesh name="lvl2_lab_tub_Gros03" path="Data/Meshes/lvl2_lab_tub_Gros03.mesh" max="0.00855446 0.330368 3.09865" min="-0.0085535 -0.330368 -3.09865" />
-	<mesh name="tub_rodo01" path="Data/Meshes/tub_rodo01.mesh" max="1.5457 0.475317 1.34316" min="-4.76982 0.328738 -4.97235" />
-	<mesh name="tub_rodo02" path="Data/Meshes/tub_rodo02.mesh" max="1.51035 0.350707 1.36092" min="-4.78564 0.242555 -4.93508" />
-	<mesh name="tub_rodo03" path="Data/Meshes/tub_rodo03.mesh" max="1.5457 0.475317 1.34316" min="-4.76982 0.328738 -4.97235" />
-	<mesh name="tub_rodo04" path="Data/Meshes/tub_rodo04.mesh" max="1.46556 0.192786 1.38342" min="-4.80569 0.133334 -4.88784" />
-	<mesh name="tub_rodo05" path="Data/Meshes/tub_rodo05.mesh" max="1.46556 0.192786 1.38342" min="-4.80569 0.133334 -4.88784" />
-	<mesh name="tub_rodo06" path="Data/Meshes/tub_rodo06.mesh" max="1.46556 0.192786 1.38342" min="-4.80569 0.133334 -4.88784" />
-	<mesh name="tub_rodo07" path="Data/Meshes/tub_rodo07.mesh" max="1.5457 0.475317 1.34316" min="-4.76982 0.328738 -4.97235" />
-	<mesh name="tub_rodo08" path="Data/Meshes/tub_rodo08.mesh" max="1.51035 0.350707 1.36092" min="-4.78564 0.242555 -4.93508" />
-	<mesh name="tub_rodo09" path="Data/Meshes/tub_rodo09.mesh" max="1.46556 0.192786 1.38342" min="-4.80569 0.133334 -4.88784" />
-	<mesh name="tub_rodo10" path="Data/Meshes/tub_rodo10.mesh" max="1.5457 0.475317 1.34316" min="-4.76982 0.328738 -4.97235" />
-	<mesh name="tub_rodo11" path="Data/Meshes/tub_rodo11.mesh" max="0.224659 2.73473 0.224659" min="-0.224658 -1.35967 -0.224659" />
-	<mesh name="tub_rodo12" path="Data/Meshes/tub_rodo12.mesh" max="0.14239 2.73473 0.142389" min="-0.142389 -1.35967 -0.14239" />
-	<mesh name="tub_rodo13" path="Data/Meshes/tub_rodo13.mesh" max="0.142389 2.73473 0.142389" min="-0.142389 -1.35967 -0.14239" />
-	<mesh name="tub_rodo14" path="Data/Meshes/tub_rodo14.mesh" max="0.142389 2.73473 0.14239" min="-0.142389 -1.35967 -0.14239" />
-	<mesh name="tub_rodo15" path="Data/Meshes/tub_rodo15.mesh" max="0.250124 2.73473 0.250124" min="-0.250124 -1.35967 -0.250124" />
-	<mesh name="tub_rodo16" path="Data/Meshes/tub_rodo16.mesh" max="1.86417 0.474547 1.86417" min="-1.86417 -0.147686 -1.86417" />
-	<mesh name="tub_rodo17" path="Data/Meshes/tub_rodo17.mesh" max="1.43625 0.580895 1.43625" min="-1.43625 -0.119002 -1.43625" />
-	<mesh name="tubs6" path="Data/Meshes/tubs6.mesh" max="2.16412 0.0526557 2.18158" min="-2.18158 -0.0526569 -2.16411" />
-	<mesh name="tubs07" path="Data/Meshes/tubs07.mesh" max="2.22195 0.110763 2.25869" min="-2.25869 -0.110765 -2.22195" />
-	<mesh name="tubs08" path="Data/Meshes/tubs08.mesh" max="2.22195 0.110763 2.25869" min="-2.25869 -0.110765 -2.22195" />
-	<mesh name="tubs09" path="Data/Meshes/tubs09.mesh" max="2.13437 0.0227647 2.14192" min="-2.14192 -0.0227656 -2.13437" />
-	<mesh name="tubs10" path="Data/Meshes/tubs10.mesh" max="2.13437 0.0227647 2.14192" min="-2.14192 -0.0227656 -2.13437" />
-	<mesh name="tub_rodo18" path="Data/Meshes/tub_rodo18.mesh" max="2.16141 0.0815582 2.16141" min="-2.16141 -0.0815585 -2.16141" />
-	<mesh name="roda" path="Data/Meshes/roda.mesh" max="0.21451 0.224266 0.0379162" min="-0.222714 -0.224266 -0.0611134" />
-	<mesh name="roda01" path="Data/Meshes/roda01.mesh" max="0.236635 0.341434 0.253329" min="-0.237574 -0.341434 -0.234577" />
-	<mesh name="roda02" path="Data/Meshes/roda02.mesh" max="0.206933 0.208375 0.0567827" min="-0.199311 -0.208375 -0.0352292" />
-	<mesh name="roda05" path="Data/Meshes/roda05.mesh" max="0.208338 0.20979 0.057168" min="-0.200664 -0.20979 -0.0354683" />
-	<mesh name="lvl2_lab_tub_Gros04" path="Data/Meshes/lvl2_lab_tub_Gros04.mesh" max="0.220556 3.02222 0.255219" min="-0.281598 -1.09087 -0.282225" />
-	<mesh name="tub_rodo19" path="Data/Meshes/tub_rodo19.mesh" max="0.14239 2.73473 0.142389" min="-0.142389 -1.35967 -0.14239" />
-	<mesh name="visagra01" path="Data/Meshes/visagra01.mesh" max="1.06265 0.0190948 0.0614347" min="-1.06265 0.0 -0.0614347" />
-	<mesh name="visagra02" path="Data/Meshes/visagra02.mesh" max="1.06265 0.0190948 0.0614347" min="-1.06265 0.0 -0.0614347" />
-	<mesh name="visagra03" path="Data/Meshes/visagra03.mesh" max="0.0614347 0.0190948 1.06265" min="-0.0614347 0.0 -1.06265" />
-	<mesh name="visagra04" path="Data/Meshes/visagra04.mesh" max="0.0614347 0.0190948 1.06265" min="-0.0614347 0.0 -1.06265" />
-	<mesh name="visagra05" path="Data/Meshes/visagra05.mesh" max="0.794847 0.0190948 0.794847" min="-0.794847 0.0 -0.794847" />
-	<mesh name="visagra00" path="Data/Meshes/visagra00.mesh" max="0.794847 0.0190948 0.794847" min="-0.794847 0.0 -0.794847" />
-	<mesh name="visagra06" path="Data/Meshes/visagra06.mesh" max="0.794847 0.0190948 0.794847" min="-0.794847 0.0 -0.794847" />
-	<mesh name="visagra07" path="Data/Meshes/visagra07.mesh" max="0.0614357 0.0190948 1.06265" min="-0.0614357 0.0 -1.06265" />
-	<mesh name="visagra08" path="Data/Meshes/visagra08.mesh" max="1.06265 0.0190945 0.0614357" min="-1.06265 0.0 -0.0614357" />
-	<mesh name="lvl2_lab_lab_Llum_emergengia_autoilum01" path="Data/Meshes/lvl2_lab_lab_Llum_emergengia_autoilum01.mesh" max="-0.0108624 -0.00116014 0.223081" min="-0.0774603 -0.167435 -0.223081" />
-	<mesh name="lvl2_lab_lab_Llum_emergengia_autoilum02" path="Data/Meshes/lvl2_lab_lab_Llum_emergengia_autoilum02.mesh" max="-0.0774603 -0.00116014 -0.223081" min="-0.0108624 -0.167435 0.223081" />
-	<mesh name="lvl2_lab_lab_Llum_emergengia_autoilum03" path="Data/Meshes/lvl2_lab_lab_Llum_emergengia_autoilum03.mesh" max="-0.0774603 -0.00116014 0.223081" min="-0.0108624 -0.167435 -0.223081" />
-	<mesh name="lvl2_lab_lab_Llum_emergengia_autoilum04" path="Data/Meshes/lvl2_lab_lab_Llum_emergengia_autoilum04.mesh" max="-0.0108624 -0.00116014 -0.223081" min="-0.0774603 -0.167435 0.223081" />
-	<mesh name="lvl2_lab_lab_Llum_emergengia_autoilum05" path="Data/Meshes/lvl2_lab_lab_Llum_emergengia_autoilum05.mesh" max="-0.0441613 -0.00116014 -0.25638" min="-0.0441618 -0.167435 0.25638" />
-	<mesh name="lvl2_lab_lab_Llum_emergengia_autoilum06" path="Data/Meshes/lvl2_lab_lab_Llum_emergengia_autoilum06.mesh" max="-0.0441608 -0.00116014 0.25638" min="-0.0441608 -0.167435 -0.25638" />
-	<mesh name="lvl2_lab_lab_Llum_emergengia_autoilum07" path="Data/Meshes/lvl2_lab_lab_Llum_emergengia_autoilum07.mesh" max="-0.300542 -0.00116014 0.0" min="0.212218 -0.167435 2.38419e-007" />
-	<mesh name="lvl2_lab_lab_Llum_emergengia_autoilum08" path="Data/Meshes/lvl2_lab_lab_Llum_emergengia_autoilum08.mesh" max="0.212218 -0.00116014 -2.38419e-007" min="-0.300541 -0.167435 -2.38419e-007" />
+	<mesh name="lvl1_visagra00" path="Data/Meshes/lvl1_visagra00.mesh" max="0.794847 0.0190948 0.794847" min="-0.794847 0.0 -0.794847" />
 </meshes>
