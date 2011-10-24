@@ -142,7 +142,7 @@ void CComponentIABrain::ReceiveShoot(SEvent _sEvent)
 
         Vect3f l_vDir(_sEvent.Info[1].v.x,_sEvent.Info[1].v.y,_sEvent.Info[1].v.z);
 
-        l_pActor->AddForceAtLocalPos(l_vDir,Vect3f(0.0f),SHOOT_POWER);
+        l_pActor->AddVelocityAtLocalPos(l_vDir,Vect3f(0.0f),SHOOT_POWER);
       }
 
     }else{
@@ -151,7 +151,7 @@ void CComponentIABrain::ReceiveShoot(SEvent _sEvent)
 
       Vect3f l_vDir(_sEvent.Info[1].v.x,_sEvent.Info[1].v.y,_sEvent.Info[1].v.z);
 
-      l_pActor->AddForceAtLocalPos(l_vDir,Vect3f(0.0f),SHOOT_POWER);
+      l_pActor->AddVelocityAtLocalPos(l_vDir,Vect3f(0.0f),SHOOT_POWER);
     }
 
     assert(_sEvent.Info[3].Type == SEventInfo::VECTOR);
@@ -220,19 +220,19 @@ void CComponentIABrain::ReceiveForce(SEvent _sEvent)
       assert(l_pPhysxBone);
       l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
       l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
-      l_pPhysxBone->GetPhysxActor()->AddForceAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
+      l_pPhysxBone->GetPhysxActor()->AddVelocityAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
 
       l_pPhysxBone = l_pRagdoll->GetBone("Bip01 Spine1");
       assert(l_pPhysxBone);
       l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
       l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
-      l_pPhysxBone->GetPhysxActor()->AddForceAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
+      l_pPhysxBone->GetPhysxActor()->AddVelocityAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
 
       l_pPhysxBone = l_pRagdoll->GetBone("Bip01 Spine2");
       assert(l_pPhysxBone);
       l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
       l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
-      l_pPhysxBone->GetPhysxActor()->AddForceAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
+      l_pPhysxBone->GetPhysxActor()->AddVelocityAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
     }
     
   }

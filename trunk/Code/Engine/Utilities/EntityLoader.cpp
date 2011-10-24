@@ -18,6 +18,7 @@
 #include "ComponentMirilla.h"
 #include "ComponentStateMachine.h"
 #include "ComponentIABrain.h"
+#include "ComponentIABrainVigia.h"
 #include "ComponentHighCover.h"
 #include "ComponentDoor.h"
 #include "ComponentShield.h"
@@ -654,7 +655,7 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
         } else if(strcmp(l_TreeEntity.GetName(),"Militar") == 0)
         {
           LoadMilitar(this, l_TreeEntity);
-        }else if(strcmp(l_TreeEntity.GetName(),"Vigia") == 0)
+        }else if(strcmp(l_TreeEntity.GetName(),"Robot") == 0)
         {
           LoadVigia(this, l_TreeEntity);
         } else if(!l_TreeEntity.IsComment())
@@ -715,7 +716,7 @@ CGameEntity* CEntityManager::InitPlayer(const string& _szEntityName, const Vect3
   CComponentRenderableObject * l_pComponentRenderableObject = 
                     CComponentRenderableObject::AddToEntityWithAnimatedModel(l_pPlayer, "Player Character", "riggle");
   l_pComponentRenderableObject->m_bBlockPitchRoll = true;
-  l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
+  l_pComponentRenderableObject->m_fYawAdjustment = FLOAT_PI_VALUE / 2;
   l_pComponentRenderableObject->m_fHeightAdjustment = -l_fTotalHeight;
 
 
@@ -831,9 +832,9 @@ CGameEntity* CEntityManager::InitVigia(const string& _szPlayerName, const Vect3f
   CComponentPhysXSphere::AddToEntity(l_pVigia,10.0f,0.2f,0.01f,GetCollisionGroup("objecte dinamic"));
 
   CComponentVida::AddToEntity(l_pVigia, 100.f, 100.f);
-  //CComponentIABrain::AddToEntity(l_pVigia,_szPlayerName,_szRagdollModell, _szOnDeathScript, _szDestinyNode);
+  CComponentIABrainVigia::AddToEntity(l_pVigia,_szPlayerName, "");
   
-  //CComponentStateMachine::AddToEntity(l_pVigia, _szInitialState);
+  CComponentStateMachine::AddToEntity(l_pVigia, "State_Vigia_Idle");
 
   //CComponentCollisionReport::AddToEntity(l_pMilitar,"","","","enemy_on_start_colision","","",0.1f);
 
@@ -867,7 +868,7 @@ CGameEntity* CEntityManager::InitEnemy(const string& _szPlayerName, const Vect3f
   CComponentRenderableObject *l_pComponentRenderableObject = CComponentRenderableObject::AddToEntityWithAnimatedModel(l_peEnemy, l_szInstanceModelName.str(), _szRenderableModel);
   l_pComponentRenderableObject->m_bBlockPitchRoll = true;
   l_pComponentRenderableObject->m_fHeightAdjustment = -1.5f;
-  l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
+  l_pComponentRenderableObject->m_fYawAdjustment = FLOAT_PI_VALUE / 2;
   l_pComponentRenderableObject->GetRenderableObject()->SetMat44(l_pComponentObject3D->GetMat44());
 
   //(new CComponentIAWalkToPlayer())->Init(l_peEnemy,"Player",2,"walk","impact");
@@ -1003,7 +1004,7 @@ CGameEntity* CEntityManager::InitGrenade(float _fLifeTime, const Vect3f& _vPos,c
   CComponentExplosive::AddToEntity(l_pGrenade);
   CComponentOmni::AddToEntity(l_pGrenade,Vect3f(0,0,0), CColor(1.0f,0.9f,0.5f), 1.f, 4.f);
 
-  l_pSphere->GetActor()->AddForceAtLocalPos(_vDir,Vect3f(0.0f),SHOOT_POWER);
+  l_pSphere->GetActor()->AddVelocityAtLocalPos(_vDir,Vect3f(0.0f),SHOOT_POWER);
   
 
 	return 0;

@@ -25,6 +25,7 @@ public:
   Vect3f GetPosition();
   //Vect3f GetRotation();
   void SetPosition(Vect3f _vPos);
+  void MovePosition(Vect3f _vPos);
   //void SetRotation(Vect3f _vRot);
 
   virtual void UpdatePostPhysX(float _fDeltaTime);

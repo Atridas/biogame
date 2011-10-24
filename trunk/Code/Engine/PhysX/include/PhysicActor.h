@@ -25,6 +25,7 @@ class NxCapsuleShapeDesc;
 class NxSphereShapeDesc;
 class NxPlaneShapeDesc;
 class CPhysicUserData;
+enum NxForceMode;
 //--------------------------
 
 class CPhysicActor
@@ -39,9 +40,13 @@ public:
   Vect3f						GetRotation				();
 	void							CreateBody				(float density, float angularDamping = 0.5f, float linearDamping = 0.5f);
 	void							SetGlobalPosition	(const Vect3f& pos = Vect3f(0.f,0.f,0.f));
+  void              MoveGlobalPosition	(const Vect3f& pos);
   void							SetRotation     	(const Vect3f& _vRot);
+  Vect3f            GetLinearVelocity();
 
-  void              AddForceAtLocalPos(Vect3f _vDirection, Vect3f _vLocalPos, float _fPower);
+  void              AddImpulseAtLocalPos(const Vect3f& _vDirection, const Vect3f& _vLocalPos, float _fPower);
+  void              AddVelocityAtLocalPos(const Vect3f& _vDirection, const Vect3f& _vLocalPos, float _fPower);
+  void              AddAcelerationAtLocalPos(const Vect3f& _vDirection, const Vect3f& _vLocalPos, float _fPower);
 
 	//---AddShape Functions-----
 	void							AddSphereShape		(float radius, const Vect3f& globalPos = v3fZERO, const Vect3f& localPos = v3fZERO, NxCCDSkeleton* skeleton = 0, uint32 group = 0);
@@ -77,6 +82,8 @@ private:
 	void							DeInit						();
 
 private:
+
+  void              AddForceAtLocalPos(const Vect3f& _vDirection, const Vect3f& _vLocalPos, float _fPower, NxForceMode _sForceMode);
 
 	CPhysicUserData*											m_pUserData;
 	NxActor*															m_pPhXActor;

@@ -345,7 +345,7 @@ void CComponentPlayerController::Force()
 
     Mat33f l_mRot;
     l_mRot.SetIdentity();
-    l_mRot.RotByAngleY(-m_pObject3D->GetYaw());
+    l_mRot.RotByAngleY(m_pObject3D->GetYaw());
 
     Vect3f l_vDir = l_mRot*Vect3f(1.0f,0.0f,0.0f);
 
@@ -466,7 +466,7 @@ CPhysicUserData* CComponentPlayerController::CheckCover(SCollisionInfo& _sCInfo)
 
   Mat33f l_mRot;
   l_mRot.SetIdentity();
-  l_mRot.RotByAngleY(-m_pObject3D->GetYaw());
+  l_mRot.RotByAngleY(m_pObject3D->GetYaw());
 
   Vect3f l_vDir = l_mRot*Vect3f(1.0f,0.0f,0.0f);
 
@@ -587,19 +587,19 @@ void CComponentPlayerController::ReceiveForce(SEvent _sEvent)
       assert(l_pPhysxBone);
       l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
       l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
-      l_pPhysxBone->GetPhysxActor()->AddForceAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
+      l_pPhysxBone->GetPhysxActor()->AddVelocityAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
 
       l_pPhysxBone = l_pRagdoll->GetBone("Bip01 Spine1");
       assert(l_pPhysxBone);
       l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
       l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
-      l_pPhysxBone->GetPhysxActor()->AddForceAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
+      l_pPhysxBone->GetPhysxActor()->AddVelocityAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
 
       l_pPhysxBone = l_pRagdoll->GetBone("Bip01 Spine2");
       assert(l_pPhysxBone);
       l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
       l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
-      l_pPhysxBone->GetPhysxActor()->AddForceAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
+      l_pPhysxBone->GetPhysxActor()->AddVelocityAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
 
     }else{
 

@@ -1139,6 +1139,9 @@ ENTITIES
       set_position
       void SetPosition(Vect3f _vPos);
       
+      move_position
+      void MovePosition(Vect3f _vPos);
+      
       get_position
       Vect3f GetPosition();
       
@@ -1152,6 +1155,9 @@ ENTITIES
       
       set_position
       void SetPosition(Vect3f _vPos);
+      
+      move_position
+      void MovePosition(Vect3f _vPos);
       
       get_position
       Vect3f GetPosition();

@@ -27,6 +27,7 @@ extern "C"
 #include "ComponentAnimation.h"
 #include "ComponentStateMachine.h"
 #include "ComponentIABrain.h"
+#include "ComponentIABrainVigia.h"
 #include "ScriptedStateMachine.h"
 #include "ComponentVida.h"
 #include "ComponentRagdoll.h"
@@ -184,6 +185,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
           value("state_machine",        CBaseComponent::ECT_STATE_MACHINE),
           value("animation",            CBaseComponent::ECT_ANIMATION),
           value("ia_brain",             CBaseComponent::ECT_IA_BRAIN),
+          value("ia_brain_vigia",       CBaseComponent::ECT_IA_BRAIN_VIGIA),
           value("ragdoll",              CBaseComponent::ECT_RAGDOLL),
           value("cover",                CBaseComponent::ECT_COVER),
           value("mirilla",              CBaseComponent::ECT_MIRILLA),
@@ -310,12 +312,14 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .scope[def("add_to_entity", (CComponentPhysXBox*(*)(CGameEntity*,float,float,float,float,float,float,float,int))&CComponentPhysXBox::AddToEntity)]
       .scope[def("add_to_entity", (CComponentPhysXBox*(*)(CGameEntity*,float,int))                                    &CComponentPhysXBox::AddToEntity)]
       .def("set_position",        &CComponentPhysXBox::SetPosition)
+      .def("move_position",       &CComponentPhysXMesh::MovePosition)
       .def("get_position",        &CComponentPhysXBox::GetPosition)
 
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPhysXMesh, CBaseComponent>("ComponentPhysXMesh")
       .scope[def("add_to_entity", &CComponentPhysXMesh::AddToEntity)]
       .def("set_position",        &CComponentPhysXMesh::SetPosition)
+      .def("move_position",       &CComponentPhysXMesh::MovePosition)
       .def("get_position",        &CComponentPhysXMesh::GetPosition)
       
     // ----------------------------------------------------------------------------------------------------
@@ -369,7 +373,18 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def_readwrite("time",           &CComponentIABrain::m_fTime)
       .def_readwrite("shooted",        &CComponentIABrain::m_bShooted)
       .def_readwrite("shoots",        &CComponentIABrain::m_iShoots)
-      
+    
+    // ----------------------------------------------------------------------------------------------------
+    ,class_<CComponentIABrainVigia, CBaseComponent>("ComponentIABrainVigia")
+      .scope[def("add_to_entity",      &CComponentIABrainVigia::AddToEntity)]
+      .def("shoot",                    &CComponentIABrainVigia::Shoot)
+      .def("fly",                      &CComponentIABrainVigia::Fly)
+      .def("set_target_position",      &CComponentIABrainVigia::SetTargetPosition)
+      .def_readonly("player",          &CComponentIABrainVigia::m_pPlayer)
+      .def_readwrite("time",           &CComponentIABrainVigia::m_fTime)
+      .def_readwrite("shooted",        &CComponentIABrainVigia::m_bShooted)
+      .def_readwrite("shoots",         &CComponentIABrainVigia::m_iShoots)
+
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentVida, CBaseComponent>("ComponentVida")
       .scope[def("add_to_entity",      &CComponentVida::AddToEntity)]

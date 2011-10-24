@@ -2,12 +2,15 @@
   <skeleton filename="Data/Animated Models/Vigia/skeleton.csf"/>
   <mesh filename="Data/Animated Models/Vigia/mesh.cmf"/>
   <material animated="true" vertex_type="799">
-    <texture type="diffusse" filename="Data/Textures/Color_Robot_vigia.tga"/>
-    <texture type="normalmap" filename="Data/Textures/Color_Robot_vigia_NRM.png"/>
-    <!--<texture type="specular" filename="Data/Textures/Color_Robot_vigia_SPEC.png"/>
-    <property type="specularParams" glossiness="200.0" specular_level="20.0" />-->
+    <texture type="diffusse" filename="Data/Textures/Color_Robot_vigia.dds"/>
+    <texture type="normalmap" filename="Data/Textures/Color_Robot_vigia_NRM.dds"/>
+    <texture type="glow" filename="Data/Textures/Color_Robot_vigia_GLOW.tga"/>
+    <property type="glowIntensity" value="2.0" />
+    <texture type="specular" filename="Data/Textures/Color_Robot_vigia_SPEC.dds"/>
+    <property type="specularParams" glossiness="200.0" specular_level="10.0" />
     
   </material>
+  <animation name="idle" filename="Data/Animated Models/Vigia/moviment.CAF"/>
   <animation name="moviment" filename="Data/Animated Models/Vigia/moviment.CAF"/>
   <animation name="shoot" filename="Data/Animated Models/Vigia/shoot.CAF"/>
   <animation name="obertura" filename="Data/Animated Models/Vigia/obertura.CAF"/>

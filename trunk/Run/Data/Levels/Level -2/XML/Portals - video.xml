@@ -3,7 +3,7 @@
   <Rooms>
     <Room name="Sala Video">
       <Boundings>
-        <Box name="Video Bounding" size="12.3023 5.87767 12.8626" position="4.43212 0.5691 9.11398" yaw="25.0" pitch="0.0" roll="0.0" />
+        <Box name="Video Bounding" size="12.3023 5.87767 12.8626" position="4.43212 0.5691 9.11398" yaw="-25.0" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
         <GameObject name="lvl2_video_Box20" />
@@ -110,6 +110,6 @@
     </Room>
   </Rooms>
   <Portals>
-    <Portal name="Porta Video" roomA="Sala Video" roomB="Passadis Video" size="5.70498 3.11871 1.50749" position="6.95914 -0.675806 3.30414" yaw="25.0" pitch="0.0" roll="0.0" />
+    <Portal name="Porta Video" roomA="Sala Video" roomB="Passadis Video" size="5.70498 3.11871 1.50749" position="6.95914 -0.675806 3.30414" yaw="-25.0" pitch="0.0" roll="0.0" />
   </Portals>
 </PortalManager>

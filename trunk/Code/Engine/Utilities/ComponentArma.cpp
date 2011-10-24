@@ -100,7 +100,7 @@ Vect3f CComponentArma::GetAimDirection()
     Mat44f l_mTransform = m_pRenderableObject->GetMat44();
     Mat33f l_mRot;
     l_mRot.SetIdentity();
-    l_mRot.RotByAnglesYXZ(l_mTransform.GetAngleY()-FLOAT_PI_VALUE,l_mTransform.GetAngleX(),l_mTransform.GetAngleZ());
+    l_mRot.SetRotByAnglesYXZ(-l_mTransform.GetAngleY()+FLOAT_PI_VALUE,l_mTransform.GetAngleX(),l_mTransform.GetAngleZ());
 
     return l_mRot*l_vDir;
   }

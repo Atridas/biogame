@@ -144,16 +144,7 @@ State_Soldier_Buscant_Cobertura['Update'] = function(_enemic, _dt)
   
   direction:normalize(1)
 
-  --Calculem l'angle
-  local aux = direction:get_proj_zx()
-  aux:normalize(1)
-  local cosinus = aux * Vect2f(0,1)
-  local y       = (direction ^ Vect3f(1,0,0)).y
-  
-  local angle = math.acos(cosinus);
-  if y < 0 then
-    angle = -angle
-  end
+  local angle = direction:get_angle_y() - math.pi/2
   
   moviment.movement = moviment.movement + direction * _dt * Enemy_Constants["Walk Speed"]
 
@@ -248,17 +239,7 @@ State_Soldier_Disparant["Enter"] = function(_enemic)
   local player_pos = ia_brain.player:get_component(BaseComponent.object_3d):get_position()
   
   local direction = (player_pos - object3d:get_position())
-  
-  --Calculem l'angle
-  local aux = direction:get_proj_zx()
-  aux:normalize(1)
-  local cosinus = aux * Vect2f(0,1)
-  local y       = (direction ^ Vect3f(1,0,0)).y
-  
-  local angle = math.acos(cosinus);
-  if y < 0 then
-    angle = -angle
-  end
+  local angle = direction:get_angle_y() - math.pi/2
   
   --face char
   object3d:set_yaw(angle);
@@ -327,17 +308,7 @@ State_Soldier_Cobrint_Disparant["Enter"] = function(_enemic)
   local player_pos = ia_brain.player:get_component(BaseComponent.object_3d):get_position()
   
   local direction = (player_pos - object3d:get_position())
-  
-  --Calculem l'angle
-  local aux = direction:get_proj_zx()
-  aux:normalize(1)
-  local cosinus = aux * Vect2f(0,1)
-  local y       = (direction ^ Vect3f(1,0,0)).y
-  
-  local angle = math.acos(cosinus);
-  if y < 0 then
-    angle = -angle
-  end
+  local angle = direction:get_angle_y() - math.pi/2
   
   --face char
   object3d:set_yaw(angle);

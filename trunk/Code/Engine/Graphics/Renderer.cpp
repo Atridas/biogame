@@ -721,6 +721,7 @@ void CRenderer::InitRenderVectors(CCamera* _pCamera,
   vector<CRenderableObject*> l_vOpaqueObjects;
   l_pPM->GetRenderedObjects(_pCamera, l_vOpaqueObjects, l_BlendQueue, l_EmiterQueue);
 
+
   vector<CRenderableObject*>::iterator l_it  = l_vOpaqueObjects.begin();
   vector<CRenderableObject*>::iterator l_end = l_vOpaqueObjects.end  ();
 
