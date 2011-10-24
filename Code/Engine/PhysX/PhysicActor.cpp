@@ -160,6 +160,22 @@ void CPhysicActor::SetLinearVelocity (const Vect3f& velocity)
 	}
 }
 
+void CPhysicActor::AddTorque(const Vect3f _vTorque)
+{
+	if (m_pPhXActor)
+	{
+		if (_vTorque != v3fZERO)
+		{
+      m_pPhXActor->addLocalTorque( NxVec3( _vTorque.x, _vTorque.y, _vTorque.z) );
+		}
+	}
+	else
+	{
+		//TODO log de error...
+
+	}
+}
+
 Vect3f CPhysicActor::GetLinearVelocity()
 {
   if (m_pPhXActor)
@@ -170,6 +186,17 @@ Vect3f CPhysicActor::GetLinearVelocity()
 
   return v3fZERO;
 
+}
+
+Vect3f CPhysicActor::GetAngularVelocity()
+{
+  if (m_pPhXActor)
+	{
+    NxVec3 l_nxVel = m_pPhXActor->getAngularVelocity();
+    return Vect3f(l_nxVel.x,l_nxVel.y,l_nxVel.z);
+	}
+
+  return v3fZERO;
 }
 
 void CPhysicActor::AddSphereShape	(float radius, const Vect3f& globalPos, const Vect3f& localPos, NxCCDSkeleton* skeleton, uint32 group)
