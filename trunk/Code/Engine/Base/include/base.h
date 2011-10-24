@@ -117,6 +117,17 @@ Mat33f GetRotationFromOrientationToOrientation(
                               const Vect3f& _vOriginalDir,    const Vect3f& _vOriginalUp, 
                               const Vect3f& _vDestinationDir, const Vect3f& _vDestinationUp);
 
+void GetFastestRotationFromDirToDir(const Vect3f& _vOriginalDir, const Vect3f& _vDestinationDir,
+                                          Vect3f& vAxis_, float& fAngle_);
+void GetRotationFromOrientationToOrientation(
+                              const Vect3f& _vOriginalDir,    const Vect3f& _vOriginalUp, 
+                              const Vect3f& _vDestinationDir, const Vect3f& _vDestinationUp,
+                                    Vect3f& vAxis_, float& fAngle_);
+
+void ConcatenateRotations(const Vect3f& _vAxis1, float _fAngle1, 
+                          const Vect3f& _vAxis2, float _fAngle2, 
+                          Vect3f& vAxis_, float& fAngle_);
+
 //Entrar números, mai funcions!!!!!!!
 #define SIMPLE_INTERPOLATION(a, b, t) ((a * (1-t)) + (b * t))
 

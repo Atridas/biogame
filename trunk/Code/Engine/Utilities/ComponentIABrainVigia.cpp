@@ -196,26 +196,44 @@ void CComponentIABrainVigia::Fly(bool _bFly)
 void CComponentIABrainVigia::LookAt(const Vect3f& _vPos)
 {
   CComponentObject3D* l_O3D = GetEntity()->GetComponent<CComponentObject3D>();
-
+  
   Vect3f l_vDirection = (_vPos - l_O3D->GetPosition()).Normalize();
-
+  
   Mat33f m = GetFastestRotationFromDirToDir(Vect3f(0,0,1), l_vDirection);
-
+  
   Mat44f m2(m);
-
+  
   m2.SetPos(l_O3D->GetPosition());
-
-  //Vect3f l_vRight = l_vDirection^Vect3f(0.0f,1.0f,0.0f);
-  //
-  //Vect3f l_vUp = l_vRight^l_vDirection;
-  //
-  //float l_fPitch = asinf(l_vDirection.y);
-  //float l_fYaw = l_vRight.GetAngleY() + FLOAT_PI_VALUE / 2.0f;
-  //
-  //l_O3D->SetPitch(l_fPitch);
-
+  
   l_O3D->SetMat44(m2);
 
+  /*
+  CComponentObject3D* l_O3D = GetEntity()->GetComponent<CComponentObject3D>();
+  Vect3f l_vDesiredDirection = (_vPos - l_O3D->GetPosition()).Normalize();
+
+  
+  CComponentPhysXSphere* l_pSphere = GetEntity()->GetComponent<CComponentPhysXSphere>();
+  
+  Mat44f m;
+  l_pSphere->GetActor()->GetMat44(m);
+  Vect4f l_vDirection = m * Vect4f(0,0,1,0);
+  
+  Vect3f l_vAxisRotation;
+  float  l_fAngleRotation;
+  GetFastestRotationFromDirToDir(Vect3f(l_vDirection.x, l_vDirection.y, l_vDirection.z),
+                                 -l_vDesiredDirection, 
+                                 l_vAxisRotation, l_fAngleRotation);
+  
+  Vect3f l_vAngularVelocity = l_pSphere->GetActor()->GetAngularVelocity();
+  Vect3f l_vAngularError = l_vAxisRotation * l_fAngleRotation;
+
+  
+  float l_tn = 1.3f;
+  float l_eps = 1.f;
+
+  Vect3f l_vTorque = (l_vAngularError - 2 * l_tn * l_eps * l_vAngularVelocity)/(l_tn*l_tn);
+
+  l_pSphere->GetActor()->AddTorque(l_vTorque);*/
 }
 
 void CComponentIABrainVigia::UpdatePostPhysX(float _fDeltaTime)
