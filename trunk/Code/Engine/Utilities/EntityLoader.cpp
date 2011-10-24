@@ -834,7 +834,7 @@ CGameEntity* CEntityManager::InitVigia(const string& _szPlayerName, const Vect3f
   CComponentVida::AddToEntity(l_pVigia, 100.f, 100.f);
   CComponentIABrainVigia::AddToEntity(l_pVigia,_szPlayerName, "");
   
-  CComponentStateMachine::AddToEntity(l_pVigia, "State_Vigia_Idle");
+  CComponentStateMachine::AddToEntity(l_pVigia, "State_Vigia_Patrol");
 
   //CComponentCollisionReport::AddToEntity(l_pMilitar,"","","","enemy_on_start_colision","","",0.1f);
 

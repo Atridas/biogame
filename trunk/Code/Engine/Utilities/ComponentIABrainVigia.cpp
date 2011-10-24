@@ -61,10 +61,22 @@ bool CComponentIABrainVigia::Init(CGameEntity* _pEntity, const string& _szPlayer
   m_fTargetHeight = 1.5f;
   m_vTargetPosition = Vect3f(2.0f,2.5f,2.0f);
 
+  m_PatrolZone.Init( Vect3f(0,1,0), Vect3f(5,3,5) );
+
   SetOk(true);
   return IsOk();
 }
 
+void CComponentIABrainVigia::ChooseNewPatrolPosition()
+{
+  float x = RandomNumber(m_PatrolZone.GetMin().x, m_PatrolZone.GetMax().x);
+  float y = RandomNumber(m_PatrolZone.GetMin().y, m_PatrolZone.GetMax().y);
+  float z = RandomNumber(m_PatrolZone.GetMin().z, m_PatrolZone.GetMax().z);
+
+  m_vPatrolDirection = Vect3f(x,y,z) - m_vPatrolPosition;
+  m_vPatrolDirection.Normalize();
+  m_vPatrolPosition  = Vect3f(x,y,z);
+}
 
 void CComponentIABrainVigia::Shoot(float _fShootPrecision)
 {

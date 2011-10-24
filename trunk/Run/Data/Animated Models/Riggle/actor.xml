@@ -120,5 +120,6 @@
   <animation_changes>
     <animation_change from="walk aim" to="aim" fade="0.5" />
     <animation_change from="aim" to="walk aim" fade="0.5" />
+    <animation_change from="aim" to="idle" fade="0.5" />
   </animation_changes>
 </actor>
