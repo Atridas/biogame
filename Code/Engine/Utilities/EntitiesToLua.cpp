@@ -376,14 +376,17 @@ void RegisterEntitiesToLua(lua_State* _pLS)
     
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentIABrainVigia, CBaseComponent>("ComponentIABrainVigia")
-      .scope[def("add_to_entity",      &CComponentIABrainVigia::AddToEntity)]
-      .def("shoot",                    &CComponentIABrainVigia::Shoot)
-      .def("fly",                      &CComponentIABrainVigia::Fly)
-      .def("set_target_position",      &CComponentIABrainVigia::SetTargetPosition)
-      .def_readonly("player",          &CComponentIABrainVigia::m_pPlayer)
-      .def_readwrite("time",           &CComponentIABrainVigia::m_fTime)
-      .def_readwrite("shooted",        &CComponentIABrainVigia::m_bShooted)
-      .def_readwrite("shoots",         &CComponentIABrainVigia::m_iShoots)
+      .scope[def("add_to_entity",         &CComponentIABrainVigia::AddToEntity)]
+      .def("shoot",                       &CComponentIABrainVigia::Shoot)
+      .def("fly",                         &CComponentIABrainVigia::Fly)
+      .def("set_target_position",         &CComponentIABrainVigia::SetTargetPosition)
+      .def("choose_new_patrol_position",  &CComponentIABrainVigia::ChooseNewPatrolPosition)
+      .def_readonly("player",             &CComponentIABrainVigia::m_pPlayer)
+      .def_readwrite("time",              &CComponentIABrainVigia::m_fTime)
+      .def_readwrite("shooted",           &CComponentIABrainVigia::m_bShooted)
+      .def_readwrite("shoots",            &CComponentIABrainVigia::m_iShoots)
+      .def_readwrite("patrol_position",   &CComponentIABrainVigia::m_vPatrolPosition)
+      .def_readwrite("patrol_direction",  &CComponentIABrainVigia::m_vPatrolDirection)
 
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentVida, CBaseComponent>("ComponentVida")

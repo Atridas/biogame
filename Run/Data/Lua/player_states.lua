@@ -136,7 +136,7 @@ State_Player_Neutre['Enter'] = function(_jugador)
   local player_controller = _jugador:get_component(BaseComponent.player_controller)
   player_controller.time = 0
   animation:set_animation_state('idle')
-  animation:set_animation_parameter(0.5)
+  --animation:set_animation_parameter(0.5)
   mirilla:set_active(true)
 end
 
@@ -811,7 +811,7 @@ State_Player_Cobertura_Baixa_Apuntar['Enter'] = function(_jugador)
   local camera = _jugador:get_component(BaseComponent.thps_camera)
   
   --Nomes blend
-  animation:set_animation_parameter(0.5)
+  --animation:set_animation_parameter(0.5)
   animation:set_animation_state('aim')
   
 	--mirilla:set_active(true)
