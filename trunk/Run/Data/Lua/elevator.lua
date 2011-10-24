@@ -41,7 +41,6 @@ State_Elevator_Idle['Receive'] = function(_entitat, _event)
     _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Elevator_Moving')
     return
   end
-  
 end
 
 -------------------------------------------------------------------------------------------------
@@ -55,7 +54,7 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Elevator_Moving['Exit'] = function(_entitat)
-
+  --TODO: aturar so montacàrregues
 end
 
 -------------------------------------------------------------------------------------------------
@@ -79,5 +78,8 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Elevator_Moving['Receive'] = function(_entitat, _event)
-  
+  if _event.msg == Event.tancar then
+    _entitat:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Elevator_Idle')
+    return
+  end
 end

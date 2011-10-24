@@ -1,11 +1,32 @@
 -------------------------------------------- FUNCIONS  -------------------------------------------
 -- Inici
-function init_level_menys_1()
-  EFFECT_MANAGER:set_exposure(0)
-  RENDERER:blend_parameter(Renderer.exposure, 0.5, 3)
-  RENDERER:activate_render_path("aim_gui")
-end
+function init_level_menys_1()  
+  local elevator = EM:get_entity("lvl1_montacarregues")
+  
+  if elevator then      
+    --activar l'ascensor
+    local l_message = EM:get_event()
 
+    l_message.msg = Event.obrir
+    l_message.sender = elevator:get_guid()
+    l_message.receiver = elevator:get_guid()
+    l_message.dispatch_time = 0
+    
+    EM:send_event(l_message)
+    
+    --canviar la càmara i desactivar el player
+    activate_cynematic_camera("lvl1_elevator_camera_init")
+    _Entity:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Inactiu')
+    
+    --fade in
+    EFFECT_MANAGER:set_exposure(0)
+    RENDERER:blend_parameter(Renderer.exposure, 0.5, 3)
+    
+    EM:remove_entity(_EntityTrigger)
+  else
+    log("Error: No es troba l'entitat: lvl1_montacarregues")
+  end
+end
 
 -- Granades
 function activate_grenades(_self, _actor)
@@ -178,6 +199,60 @@ function hack_door()
 end
 
 -------------------------------------------- TRIGGERS  -------------------------------------------
+--aturar l'ascensor d'entrada
+function lvl1_stop_elevator(_EntityTrigger, _Entity)
+  if _Entity:get_name() == "Player" then
+    local elevator = EM:get_entity("lvl1_montacarregues")
+    
+    if elevator then      
+      --aturar l'ascensor
+      local l_message = EM:get_event()
+
+      l_message.msg = Event.tancar
+      l_message.sender = elevator:get_guid()
+      l_message.receiver = elevator:get_guid()
+      l_message.dispatch_time = 0
+      
+      EM:send_event(l_message)
+      
+      --restaurar la càmara i el player
+      deactivate_cynematic_camera()
+      _Entity:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+      
+      EM:remove_entity(_EntityTrigger)
+    else
+      log("Error: No es troba l'entitat: lvl1_montacarregues")
+    end
+  end
+end
+
+--activar l'ascensor de sortida
+function lvl1_activate_elevator(_EntityTrigger, _Entity)
+  if _Entity:get_name() == "Player" then
+    local elevator = EM:get_entity("lvl1_montacarregues01")
+    
+    if elevator then      
+      --aturar l'ascensor
+      local l_message = EM:get_event()
+
+      l_message.msg = Event.obrir
+      l_message.sender = elevator:get_guid()
+      l_message.receiver = elevator:get_guid()
+      l_message.dispatch_time = 0
+      
+      EM:send_event(l_message)
+      
+      --canviar la càmara i desactivar el player
+      activate_cynematic_camera("lvl1_elevator_camera_exit")
+      _Entity:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Inactiu')
+      
+      EM:remove_entity(_EntityTrigger)
+    else
+      log("Error: No es troba l'entitat: lvl1_montacarregues01")
+    end
+  end
+end
+
 --canviar de nivell
 function change_level_level_1(_EntityTrigger, _Entity)
   if _Entity:get_name() == "Player" then
