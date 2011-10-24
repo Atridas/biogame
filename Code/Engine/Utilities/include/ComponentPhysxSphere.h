@@ -19,7 +19,7 @@ public:
 
   virtual void ReceiveEvent(const SEvent& _Event);
 
-  //const Vect3f& GetSize() { return m_vSize; };
+  float GetRadius() { return m_fRadius; };
 
   virtual void Reload();
   

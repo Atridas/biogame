@@ -17,6 +17,7 @@
     <file path="Data/Lua/enemy_constants.lua" />
     <file path="Data/Lua/soldier_states.lua" />
     <file path="Data/Lua/enemy_states.lua" />
+    <file path="Data/Lua/vigia_states.lua" />
     <file path="Data/Lua/door_states.lua" />
     <file path="Data/Lua/key_machine.lua" />
     <file path="Data/Lua/hangar_door.lua" />

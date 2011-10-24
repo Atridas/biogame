@@ -122,23 +122,9 @@ State_Enemy_Caminant['Update'] = function(_enemic, _dt)
   end
 
   local direction = (player_pos - ia_pos)
-  
-  dist_sq = direction:length_sq()
-  
+  local angle = direction:get_angle_y() - math.pi/2;
+
   direction:normalize(1)
-
-  --Calculem l'angle
-  local aux = direction:get_proj_zx()
-  aux:normalize(1)
-  local cosinus = aux * Vect2f(0,1)
-  local y       = (direction ^ Vect3f(1,0,0)).y
-  
-  local angle = math.acos(cosinus);
-  if y < 0 then
-    angle = -angle
-  end
-
-
   --log('pos: ' .. direction.x .. ' ' .. direction.y .. ' ' .. direction.z)
 
   
@@ -270,23 +256,9 @@ State_Enemy_Disparant['Update'] = function(_enemic, _dt)
   local player_pos = ia_brain.player:get_component(BaseComponent.object_3d):get_position()
   
   local direction = (player_pos - ia_pos)
+  local angle = direction:get_angle_y() - math.pi/2
 
-  direction:normalize(1)
-
-  --Calculem l'angle
-  local aux = direction:get_proj_zx()
-  aux:normalize(1)
-  local cosinus = aux * Vect2f(0,1)
-  local y       = (direction ^ Vect3f(1,0,0)).y
-  
-  local angle = math.acos(cosinus);
-  if y < 0 then
-    angle = -angle
-  end
-  
-  --if not ia_brain.shooted then
-    object3d:set_yaw(angle-0.2)
-  --end
+  object3d:set_yaw(angle-0.2)
   
   if ia_brain.time > Enemy_Constants["Time Shoot"] and not ia_brain.shooted then
     ia_brain:shoot(0.25)

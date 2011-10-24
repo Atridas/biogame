@@ -46,7 +46,7 @@
 
 #include "SphereCamera.h"
 
-#define FES_UN_COLLO_DE_LLUMS
+//#define FES_UN_COLLO_DE_LLUMS
 
 bool CEntityProcess::Init()
 {
@@ -114,12 +114,12 @@ bool CEntityProcess::Init()
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-  CGameEntity* l_pBichu = CORE->GetEntityManager()->CreateEntity();
-  CComponentObject3D::AddToEntity(l_pBichu);
-  CComponentRenderableObject *l_pCRO = CComponentRenderableObject::AddToEntityWithAnimatedModel(l_pBichu, "Capsula", "Capsula");
-  CComponentAnimation *l_pCA = l_pBichu->GetComponent<CComponentAnimation>();
-
-  l_pCA->PlayCycle("idle",1,1);
+  //CGameEntity* l_pBichu = CORE->GetEntityManager()->CreateEntity();
+  //CComponentObject3D::AddToEntity(l_pBichu);
+  //CComponentRenderableObject *l_pCRO = CComponentRenderableObject::AddToEntityWithAnimatedModel(l_pBichu, "Capsula", "Capsula");
+  //CComponentAnimation *l_pCA = l_pBichu->GetComponent<CComponentAnimation>();
+  //
+  //l_pCA->PlayCycle("idle",1,1);
 
   //l_pCRO->m_bBlockPitchRoll = true;
   //l_pCRO->m_fPitchAdjustment = 90.f;

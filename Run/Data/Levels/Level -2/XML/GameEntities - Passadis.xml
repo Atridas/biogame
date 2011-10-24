@@ -19,15 +19,15 @@
     <RenderableObject animated="false" name="lvl2_pass_viga3" />
   </Entity>
   <Entity name="lvl2_pass_pass_luz_florescente04">
-    <Object3D position="8.60228 2.11979 -0.410645" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+    <Object3D position="8.60228 2.11979 -0.410645" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="lvl2_pass_pass_luz_florescente04" />
   </Entity>
   <Entity name="HighCoverPas02">
-    <Object3D position="12.3813 0.904164 -4.42643" yaw="23.7764" pitch="0.0" roll="0.0" />
+    <Object3D position="12.3813 0.904164 -4.42643" yaw="-23.7764" pitch="0.0" roll="0.0" />
     <HighCover shape="box" size="1.60328 1.9508 0.242798" collision_group="cobertura" cover_size="0" />
   </Entity>
   <Entity name="HighCoverPas01">
-    <Object3D position="9.23894 0.904164 -5.81932" yaw="23.7764" pitch="0.0" roll="0.0" />
+    <Object3D position="9.23894 0.904164 -5.81932" yaw="-23.7764" pitch="0.0" roll="0.0" />
     <HighCover shape="box" size="1.56504 1.9508 0.242798" collision_group="cobertura" cover_size="0" />
   </Entity>
   <Entity name="lvl2_pass_marc_porta02">
@@ -44,7 +44,7 @@
     <RenderableObject animated="false" name="lvl2_pass_pass_fluor01" />
   </Entity>
   <Entity name="lvl2_pass_pass_luz_florescente03">
-    <Object3D position="18.8205 3.19273 1.96038" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+    <Object3D position="18.8205 3.19273 1.96038" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="lvl2_pass_pass_luz_florescente03" />
   </Entity>
   <Entity name="lvl2_pass_pass_fluor02">
@@ -52,7 +52,7 @@
     <RenderableObject animated="false" name="lvl2_pass_pass_fluor02" />
   </Entity>
   <Entity name="lvl2_pass_pass_luz_florescente02">
-    <Object3D position="16.3202 3.19273 -2.84484" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+    <Object3D position="16.3202 3.19273 -2.84484" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="lvl2_pass_pass_luz_florescente02" />
   </Entity>
   <Entity name="lvl2_pass_viga5">
@@ -79,7 +79,7 @@
     <RenderableObject animated="false" name="lvl2_pass_pass_fluor04" />
   </Entity>
   <Entity name="lvl2_pass_pass_luz_florescente00">
-    <Object3D position="-2.37452 3.19273 -8.59859" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+    <Object3D position="-2.37452 3.19273 -8.59859" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="lvl2_pass_pass_luz_florescente00" />
   </Entity>
   <Entity name="lvl2_pass_viga1">
@@ -88,7 +88,7 @@
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl2_pass_pass_luz_florescente01">
-    <Object3D position="3.43721 3.19273 -8.59859" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+    <Object3D position="3.43721 3.19273 -8.59859" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="lvl2_pass_pass_luz_florescente01" />
   </Entity>
   <Entity name="lvl2_pass_viga2">
@@ -125,21 +125,21 @@
     <RenderableObject animated="false" name="lvl2_pass_marc_porta01" />
   </Entity>
   <Entity name="Porta_Laser">
-    <Object3D position="15.9594 1.73938 -3.77328" yaw="64.0728" pitch="0.0" roll="0.0" />
+    <Object3D position="15.9594 1.73938 -3.77328" yaw="-64.0728" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="PortaLaser" />
     <Door open="false" size="2.29047 4.30355 5.02548" />
   </Entity>
   <Entity name="Porta_Videovigilancia">
-    <Object3D position="7.00888 -0.654852 3.36985" yaw="114.214" pitch="0.0" roll="0.0" />
+    <Object3D position="7.00888 -0.654852 3.36985" yaw="-114.214" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta" />
     <Door open="false" size="0.36806 2.62239 2.03725" />
   </Entity>
   <Entity name="Trigger_Porta_Video">
-    <Object3D position="7.94775 0.0 1.60195" yaw="23.0405" pitch="0.0" roll="0.0" />
+    <Object3D position="7.94775 0.0 1.60195" yaw="-23.0405" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="7.13034 8.93156 10.1565" collision_group="trigger" onEnter="open_door" onExit="close_door" />
   </Entity>
   <Entity name="lvl2_pass_CameraPassadis">
-    <Object3D position="9.84518 2.78403 -10.1465" yaw="-48.3828" pitch="0.0" roll="-82.2449" />
+    <Object3D position="9.84518 2.78403 -10.1465" yaw="48.3828" pitch="0.0" roll="-82.2449" />
     <CynematicCamera target="16.46 1.57906 -4.27003" fov="55.0" near="1.0" far="1000.0" />
   </Entity>
   <Entity name="pas_boira01">
@@ -151,19 +151,19 @@
     <Emiter core="boira" volume="6.33257 0.479595 4.39061" />
   </Entity>
   <Entity name="pas_boira03">
-    <Object3D position="11.9025 -0.0742362 -7.54132" yaw="25.0" pitch="0.0" roll="0.0" />
+    <Object3D position="11.9025 -0.0742362 -7.54132" yaw="-25.0" pitch="0.0" roll="0.0" />
     <Emiter core="boira" volume="6.33257 0.479595 4.39061" />
   </Entity>
   <Entity name="pas_boira04">
-    <Object3D position="16.947 0.246809 -1.97521" yaw="65.0" pitch="0.0" roll="0.0" />
+    <Object3D position="16.947 0.246809 -1.97521" yaw="-65.0" pitch="0.0" roll="0.0" />
     <Emiter core="boira" volume="8.22371 0.479595 4.39061" />
   </Entity>
   <Entity name="pas_boira05">
-    <Object3D position="20.4441 0.271467 5.50426" yaw="65.0" pitch="0.0" roll="0.0" />
+    <Object3D position="20.4441 0.271467 5.50426" yaw="-65.0" pitch="0.0" roll="0.0" />
     <Emiter core="boira" volume="8.22371 0.479595 4.39061" />
   </Entity>
   <Entity name="pas_boira06">
-    <Object3D position="8.80422 -0.94948 -0.872293" yaw="113.193" pitch="-12.626" roll="0.0345069" />
+    <Object3D position="8.80422 -0.94948 -0.872293" yaw="-113.193" pitch="-12.626" roll="0.0345069" />
     <Emiter core="boira" volume="8.22371 0.479595 4.39061" />
   </Entity>
   <Entity name="pas_vapor01">
@@ -175,11 +175,11 @@
     <Emiter core="vapor" volume="0.0579358 0.0579358 0.0579358" />
   </Entity>
   <Entity name="pas_goteo01">
-    <Object3D position="8.462 3.458 -8.40601" yaw="180.0" pitch="-5.00896e-006" roll="-180.0" />
+    <Object3D position="8.462 3.458 -8.40601" yaw="-180.0" pitch="-5.00896e-006" roll="-180.0" />
     <Emiter core="goteo" volume="0.287217 0.200504 4.20279" />
   </Entity>
   <Entity name="pas_goteo02">
-    <Object3D position="20.608 3.43603 5.784" yaw="-115.0" pitch="-5.00896e-006" roll="180.0" />
+    <Object3D position="20.608 3.43603 5.784" yaw="115.0" pitch="-5.00896e-006" roll="180.0" />
     <Emiter core="goteo" volume="0.287217 0.200504 4.20279" />
   </Entity>
   <Miner name="pas_miner00" position="20.8841 1.9223 5.44801" yaw="0.0" active="false" />

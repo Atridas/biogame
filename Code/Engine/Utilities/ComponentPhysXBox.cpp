@@ -166,7 +166,7 @@ void CComponentPhysXBox::ReceiveEvent(const SEvent& _Event)
 
     Vect3f l_vDirection = (GetEntity()->GetComponent<CComponentObject3D>()->GetPosition() - l_vSenderPos).Normalize();
 
-    m_pPhysXActor->AddForceAtLocalPos(l_vDirection,Vect3f(0.0f),20.0f);
+    m_pPhysXActor->AddVelocityAtLocalPos(l_vDirection,Vect3f(0.0f),20.0f);
 
   }else if(_Event.Msg == SEvent::REBRE_IMPACTE)
   {
@@ -174,7 +174,7 @@ void CComponentPhysXBox::ReceiveEvent(const SEvent& _Event)
     {
       Vect3f l_vDir(_Event.Info[1].v.x,_Event.Info[1].v.y,_Event.Info[1].v.z);
 
-      m_pPhysXActor->AddForceAtLocalPos(l_vDir,Vect3f(0.0f),SHOOT_POWER);
+      m_pPhysXActor->AddVelocityAtLocalPos(l_vDir,Vect3f(0.0f),SHOOT_POWER);
     }
   }
 }

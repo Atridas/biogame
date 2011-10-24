@@ -66,6 +66,15 @@ void CComponentPhysXActor::SetPosition(Vect3f _vPos)
     m_pPhysXActor->SetGlobalPosition(_vPos);
   }
 }
+
+void CComponentPhysXActor::MovePosition(Vect3f _vPos)
+{
+  if(m_pPhysXActor)
+  {
+    m_pPhysXActor->MoveGlobalPosition(_vPos);
+  }
+}
+
 /*
 void CComponentPhysXActor::SetRotation(Vect3f _vRot)
 {

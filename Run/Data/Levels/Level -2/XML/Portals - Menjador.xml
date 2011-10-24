@@ -3,7 +3,7 @@
   <Rooms>
     <Room name="Menjador">
       <Boundings>
-        <Box name="Menjador Bounding" size="38.327 15.508 27.883" position="13.7585 5.45615 26.6763" yaw="-25.9482" pitch="0.0" roll="0.0" />
+        <Box name="Menjador Bounding" size="38.327 15.508 27.883" position="13.7585 5.45615 26.6763" yaw="25.9482" pitch="0.0" roll="0.0" />
       </Boundings>
       <Objects>
         <GameObject name="lvl2_menj_Plats_physc" />
@@ -301,6 +301,6 @@
     </Room>
   </Rooms>
   <Portals>
-    <Portal name="Porta Menjador" roomA="Menjador" roomB="Passadis" size="5.0277 2.75072 2.10598" position="22.1182 1.22325 9.0359" yaw="-26.0241" pitch="0.0" roll="0.0" />
+    <Portal name="Porta Menjador" roomA="Menjador" roomB="Passadis" size="5.0277 2.75072 2.10598" position="22.1182 1.22325 9.0359" yaw="26.0241" pitch="0.0" roll="0.0" />
   </Portals>
 </PortalManager>

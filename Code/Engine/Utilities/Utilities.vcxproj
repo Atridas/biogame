@@ -94,6 +94,7 @@
     <ClCompile Include="ComponentExplosive.cpp" />
     <ClCompile Include="ComponentHighCover.cpp" />
     <ClCompile Include="ComponentIABrain.cpp" />
+    <ClCompile Include="ComponentIABrainVigia.cpp" />
     <ClCompile Include="ComponentIAWalkToPlayer.cpp" />
     <ClCompile Include="ComponentInteractive.cpp" />
     <ClCompile Include="ComponentLaser.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="include\ComponentExplosive.h" />
     <ClInclude Include="include\ComponentHighCover.h" />
     <ClInclude Include="include\ComponentIABrain.h" />
+    <ClInclude Include="include\ComponentIABrainVigia.h" />
     <ClInclude Include="include\ComponentIAWalkToPlayer.h" />
     <ClInclude Include="include\ComponentInteractive.h" />
     <ClInclude Include="include\ComponentLaser.h" />

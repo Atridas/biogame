@@ -129,7 +129,7 @@ void CComponentRagdoll::UpdatePrePhysX(float _fDeltaTime)
     Mat44f l_matTransform = m_pRAIM->GetMat44();
 
     l_matTransformMovement.SetIdentity();
-    l_matTransformMovement.RotByAngleY(-l_pObject3D->GetYaw() + FLOAT_PI_VALUE/2.0f);
+    l_matTransformMovement.RotByAngleY(l_pObject3D->GetYaw() + FLOAT_PI_VALUE/2.0f);
     l_matTransformMovement.Translate(l_pMovement->m_vMovement + l_matTransform.GetPos());
 
     m_pRagdoll->SetTransform(l_matTransformMovement);

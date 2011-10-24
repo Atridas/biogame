@@ -65,7 +65,7 @@ void CComponent3rdPSCamera::PostUpdate(float _fDeltaTime)
 
   m_CameraObject.SetPosition( m_pObject3D->GetPosition() );
   m_CameraObject.SetPitch( m_pObject3D->GetPitch() );
-  m_CameraObject.SetYaw  (  m_pObject3D->GetYaw() );
+  m_CameraObject.SetYaw  (  -m_pObject3D->GetYaw() );
 
   SCollisionInfo l_CInfo;
 

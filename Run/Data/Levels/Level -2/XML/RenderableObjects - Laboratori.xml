@@ -8,7 +8,7 @@
 	<RenderableObject name="lvl2_lab_Cable_Lampada" class="StaticMesh" resource="lvl2_lab_Cable_Lampada" position="-8.62757 3.87092 -2.66007" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_viga" class="StaticMesh" resource="lvl2_lab_viga" position="-9.74397 4.49129 -4.99318" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_vigueta" class="StaticMesh" resource="lvl2_lab_vigueta" position="-5.50403 4.08065 -4.88723" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl2_lab_viga_pilar" class="StaticMesh" resource="lvl2_lab_viga_pilar" position="-10.028 2.50687 -10.9012" yaw="5.00896e-006" pitch="5.00896e-006" roll="5.00896e-006" />
+	<RenderableObject name="lvl2_lab_viga_pilar" class="StaticMesh" resource="lvl2_lab_viga_pilar" position="-10.028 2.50687 -10.9012" yaw="-5.00896e-006" pitch="5.00896e-006" roll="5.00896e-006" />
 	<RenderableObject name="lvl2_lab_Lampada" class="StaticMesh" resource="lvl2_lab_Lampada" position="-8.62544 2.2259 -2.67209" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_Bido" class="StaticMesh" resource="lvl2_lab_Bido" position="-14.2968 0.0 0.0864077" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_Edvac" class="StaticMesh" resource="lvl2_lab_Edvac" position="-12.6636 0.0 -10.5702" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -26,9 +26,9 @@
 	<RenderableObject name="lvl2_lab_CAPSULA_trencada" class="StaticMesh" resource="lvl2_lab_CAPSULA_trencada" position="-11.3841 1.24775 0.500599" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_Lampada01" class="StaticMesh" resource="lvl2_lab_Lampada01" position="-10.1373 2.2259 -2.67209" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_Cable_Lampada01" class="StaticMesh" resource="lvl2_lab_Cable_Lampada01" position="-10.1365 3.87092 -2.66007" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl2_lab_Ordinador_DEF" class="StaticMesh" resource="lvl2_lab_Ordinador_DEF" position="-11.2085 0.0 -9.80329" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_lab_Ordinador_DEF" class="StaticMesh" resource="lvl2_lab_Ordinador_DEF" position="-11.2085 0.0 -9.80329" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_Frigorific_DEF" class="StaticMesh" resource="lvl2_lab_Frigorific_DEF" position="-6.14118 1.48875 -10.8481" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl2_lab_Ordinador_DEF01" class="StaticMesh" resource="lvl2_lab_Ordinador_DEF01" position="-13.3533 0.0 -7.54297" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_lab_Ordinador_DEF01" class="StaticMesh" resource="lvl2_lab_Ordinador_DEF01" position="-13.3533 0.0 -7.54297" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_tub_Gros" class="StaticMesh" resource="lvl2_lab_tub_Gros" position="-15.03 2.67862 -4.05831" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_tub_Gros02" class="StaticMesh" resource="lvl2_lab_tub_Gros02" position="-8.2359 3.8341 0.750329" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_Estanteria_01_DEF" class="StaticMesh" resource="lvl2_lab_Estanteria_01_DEF" position="-8.63694 0.225524 -10.613" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -49,9 +49,9 @@
 	<RenderableObject name="lvl2_lab_Vidre_cap02" class="StaticMesh" resource="lvl2_lab_Vidre_cap02" position="-8.23025 1.75906 0.45821" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_lab_fluorescent_apagat01" class="StaticMesh" resource="lvl2_lab_lab_fluorescent_apagat01" position="-7.26858 3.73603 -4.99925" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_lab_Llum_emergengia_autoilum01" class="StaticMesh" resource="lvl2_lab_lab_Llum_emergengia_autoilum01" position="-4.73019 3.26819 -7.74813" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl2_lab_lab_luz_florescente00" class="StaticMesh" resource="lvl2_lab_bombeta_florescent" position="-12.7607 3.6634 -5.00073" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
-	<RenderableObject name="lvl2_lab_lab_luz_florescente01" class="StaticMesh" resource="lvl2_lab_bombeta_florescent" position="-12.7607 3.6634 -8.5986" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
-	<RenderableObject name="lvl2_lab_lab_luz_florescente02" class="StaticMesh" resource="lvl2_lab_bombeta_florescent" position="-7.86563 3.6634 -1.23278" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+	<RenderableObject name="lvl2_lab_lab_luz_florescente00" class="StaticMesh" resource="lvl2_lab_bombeta_florescent" position="-12.7607 3.6634 -5.00073" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+	<RenderableObject name="lvl2_lab_lab_luz_florescente01" class="StaticMesh" resource="lvl2_lab_bombeta_florescent" position="-12.7607 3.6634 -8.5986" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+	<RenderableObject name="lvl2_lab_lab_luz_florescente02" class="StaticMesh" resource="lvl2_lab_bombeta_florescent" position="-7.86563 3.6634 -1.23278" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
 	<RenderableObject name="lvl2_lab_lab_fluorescente00" class="StaticMesh" resource="lvl2_lab_lab_fluorescente00" position="-12.1172 3.73603 -5.00521" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_lab_fluorescente01" class="StaticMesh" resource="lvl2_lab_lab_fluorescente01" position="-12.1172 3.73603 -8.60308" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_lab_fluorescente02" class="StaticMesh" resource="lvl2_lab_lab_fluorescente02" position="-7.22211 3.73603 -1.23727" yaw="0.0" pitch="0.0" roll="0.0" />

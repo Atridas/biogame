@@ -101,7 +101,7 @@ camera_player = function(_jugador, _dt, _multiplier)
   pitch = object3d:get_pitch()
   yaw   = object3d:get_yaw()
   
-  yaw = yaw - (vec.x * _dt) * vel * _multiplier
+  yaw = yaw + (vec.x * _dt) * vel * _multiplier
 
   pitch = pitch - (vec.y * _dt) * vel * _multiplier
   
@@ -171,9 +171,7 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   if ACTION_MANAGER:is_action_active('Cover') then
     player_controller.time = 0
     if player_controller:cover() then
-      if player_controller.cover_entity:get_component(BaseComponent.cover):get_cover_type() == ComponentCover.cover_high then
-        _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Alta')
-      else
+      if player_controller.cover_entity:get_component(BaseComponent.cover):get_cover_type() == ComponentCover.cover_low then
         _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Baixa')
       end
       return
@@ -211,7 +209,7 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   
   if ACTION_MANAGER:is_action_active('MoveLeft') then
     player_controller.time = 0
-    left = Vect3f(math.cos(yaw + math.pi / 2), 0, math.sin(yaw + math.pi / 2) )
+    left = Vect3f(math.sin(yaw), 0, math.cos(yaw) )
     moviment.movement = moviment.movement + left * (_dt) * speed
 
     isMoving = true
@@ -219,7 +217,7 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   
   if ACTION_MANAGER:is_action_active('MoveRight') then
     player_controller.time = 0
-    left = Vect3f(math.cos(yaw + math.pi / 2), 0, math.sin(yaw + math.pi / 2) )
+    left = Vect3f(math.sin(yaw), 0, math.cos(yaw) )
     moviment.movement = moviment.movement - left * (_dt) * speed
 
     isMoving = true
@@ -227,7 +225,7 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   
   if ACTION_MANAGER:is_action_active('MoveFwd') then
     player_controller.time = 0
-    direction = Vect3f(math.cos(yaw), 0, math.sin(yaw) )
+    direction = Vect3f(math.sin(yaw + math.pi / 2), 0, math.cos(yaw + math.pi / 2) )
     
     local anim
     
@@ -241,7 +239,7 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
     isMoving = true
   elseif ACTION_MANAGER:is_action_active('MoveBack') then
     player_controller.time = 0
-    direction = Vect3f(math.cos(yaw), 0, math.sin(yaw) )
+    direction = Vect3f(math.sin(yaw + math.pi / 2), 0, math.cos(yaw + math.pi / 2) )
     moviment.movement = moviment.movement - direction * (_dt) * speed
     
     isMoving = true
@@ -649,7 +647,7 @@ State_Player_Cobertura_Baixa['Enter'] = function(_jugador)
   moviment.movement = moviment.movement + player_controller.cover_position + player_controller.cover_normal * 0.0 - object3d:get_position()
   
   
-  renderable_object:set_yaw(-((player_controller.cover_normal):get_angle_y()) + math.pi)
+  renderable_object:set_yaw(((player_controller.cover_normal):get_angle_y()) + math.pi)
   
   --Nomes blend
   animation:set_animation_state('cover down')

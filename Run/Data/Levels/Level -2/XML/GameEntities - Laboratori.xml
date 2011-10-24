@@ -35,7 +35,7 @@
     <RenderableObject animated="false" name="lvl2_lab_vigueta" />
   </Entity>
   <Entity name="lvl2_lab_viga_pilar">
-    <Object3D position="-10.028 2.50687 -10.9012" yaw="5.00896e-006" pitch="5.00896e-006" roll="5.00896e-006" />
+    <Object3D position="-10.028 2.50687 -10.9012" yaw="-5.00896e-006" pitch="5.00896e-006" roll="5.00896e-006" />
     <RenderableObject animated="false" name="lvl2_lab_viga_pilar" />
   </Entity>
   <Entity name="lvl2_lab_Lampada">
@@ -114,7 +114,7 @@
     <RenderableObject animated="false" name="lvl2_lab_Cable_Lampada01" />
   </Entity>
   <Entity name="lvl2_lab_Ordinador_DEF">
-    <Object3D position="-11.2085 0.0 -9.80329" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="-11.2085 0.0 -9.80329" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_lab_Ordinador_DEF" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
@@ -123,7 +123,7 @@
     <RenderableObject animated="false" name="lvl2_lab_Frigorific_DEF" />
   </Entity>
   <Entity name="lvl2_lab_Ordinador_DEF01">
-    <Object3D position="-13.3533 0.0 -7.54297" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="-13.3533 0.0 -7.54297" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_lab_Ordinador_DEF01" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
@@ -213,7 +213,7 @@
     <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum01" />
   </Entity>
   <Entity name="lvl2_lab_lab_luz_florescente00">
-    <Object3D position="-12.7607 3.6634 -5.00073" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+    <Object3D position="-12.7607 3.6634 -5.00073" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="lvl2_lab_bombeta_florescent" />
   </Entity>
   <Entity name="lvl2_lab_lab_fluorescente00">
@@ -225,7 +225,7 @@
     <RenderableObject animated="false" name="lvl2_lab_lab_fluorescente01" />
   </Entity>
   <Entity name="lvl2_lab_lab_luz_florescente01">
-    <Object3D position="-12.7607 3.6634 -8.5986" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+    <Object3D position="-12.7607 3.6634 -8.5986" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="lvl2_lab_bombeta_florescent" />
   </Entity>
   <Entity name="lvl2_lab_lab_fluorescente02">
@@ -233,7 +233,7 @@
     <RenderableObject animated="false" name="lvl2_lab_lab_fluorescente02" />
   </Entity>
   <Entity name="lvl2_lab_lab_luz_florescente02">
-    <Object3D position="-7.86563 3.6634 -1.23278" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+    <Object3D position="-7.86563 3.6634 -1.23278" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
     <RenderableObject animated="false" name="lvl2_lab_bombeta_florescent" />
   </Entity>
   <Entity name="lvl2_lab_lab_fluorescent_apagat02">
@@ -286,7 +286,7 @@
     <Billboard core="GetHere" />
   </Entity>
   <Entity name="lab_home_capsula">
-    <Object3D position="-14.7525 0.499869 -4.02982" yaw="-90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-14.7525 0.499869 -4.02982" yaw="90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Capsula" cycle="idle" />
   </Entity>
   <Entity name="Lab_billboard_shootme">
@@ -298,7 +298,7 @@
     <Trigger shape="box" size="2.84626 2.16962 4.02333" collision_group="trigger" onEnter="lvl2_got_there" />
   </Entity>
   <Entity name="lab_home_capsula01">
-    <Object3D position="-8.20791 0.499869 0.749678" yaw="-180.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-8.20791 0.499869 0.749678" yaw="180.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Capsula" cycle="idle" />
   </Entity>
   <Entity name="lab_fum_proveta">
@@ -306,11 +306,11 @@
     <Emiter core="fum_proveta" volume="0.0586747 0.0586747 0.0586747" />
   </Entity>
   <Entity name="lab_efecte_fred01">
-    <Object3D position="-5.803 0.1 -10.594" yaw="0.0" pitch="90.0" roll="0.0" />
+    <Object3D position="-5.803 0.1 -10.594" yaw="0.0" pitch="0.0" roll="90.0" />
     <Emiter core="efecte_fred" volume="1.75107 0.152553 0.152553" />
   </Entity>
   <Entity name="lab_efecte_fred01">
-    <Object3D position="-14.734 0.1 -6.794" yaw="0.0" pitch="0.0" roll="-90.0" />
+    <Object3D position="-14.734 0.1 -6.794" yaw="0.0" pitch="-90.0" roll="0.0" />
     <Emiter core="efecte_fred" volume="0.134839 0.134839 1.72117" />
   </Entity>
   <Player position="-11.6721 1.72829 -8.74864" yaw="0.0" shoot_active="false" force_active="false" grenade_active="false" />

@@ -75,7 +75,7 @@
     <RenderableObject animated="false" name="lvl2_video_mars" />
   </Entity>
   <Entity name="lvl2_video_nuvols">
-    <Object3D position="4.44702 2.51588 9.07804" yaw="180.0" pitch="0.0" roll="0.0" />
+    <Object3D position="4.44702 2.51588 9.07804" yaw="-180.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_video_nuvols" />
     <PhysXMesh density="0" collision_group="escenari" />
     <Rotative yaw="0.1" />
@@ -153,11 +153,11 @@
     <Billboard core="Laser Off" />
   </Entity>
   <Entity name="lvl2_video_Llum_emergengia_autoilum01">
-    <Object3D position="6.93462 1.23904 3.54631" yaw="-66.5074" pitch="0.0" roll="0.0" />
+    <Object3D position="6.93462 1.23904 3.54631" yaw="66.5074" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_video_Llum_emergengia_autoilum01" />
   </Entity>
   <Entity name="lvl2_video_carcasa">
-    <Object3D position="7.02848 -0.637683 3.34064" yaw="-66.5074" pitch="0.0" roll="0.0" />
+    <Object3D position="7.02848 -0.637683 3.34064" yaw="66.5074" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_video_carcasa" />
   </Entity>
   <Miner name="Miner_video00" position="4.24393 1.04204 10.0279" yaw="0.0" active="false" />

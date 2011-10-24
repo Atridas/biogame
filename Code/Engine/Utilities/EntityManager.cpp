@@ -151,14 +151,14 @@ void CEntityManager::RemoveEntities()
     int l_iId = m_vDeleteEntities.top();
     m_vDeleteEntities.pop();
     assert(m_vEntities.size() > (uint32) l_iId);
-    for(uint32 i = 0; i < m_vFreeIDs.size(); ++i) assert(m_vFreeIDs[i] != l_iId);
-    //{
-    //  if(m_vFreeIDs[i] == l_iId)
-    //  {
-    //    LOGGER->AddNewLog(ELL_ERROR, "CEntityManager::RemoveEntity intentant eliminar una entitat ja eliminada.");
-    //    return;
-    //  }
-    //}
+    for(uint32 i = 0; i < m_vFreeIDs.size(); ++i) //assert(m_vFreeIDs[i] != l_iId);
+    {
+      if(m_vFreeIDs[i] == l_iId)
+      {
+        LOGGER->AddNewLog(ELL_ERROR, "CEntityManager::RemoveEntity intentant eliminar una entitat ja eliminada.");
+        return;
+      }
+    }
 
   
     map<string,int>::iterator l_it  = m_vNames.begin();

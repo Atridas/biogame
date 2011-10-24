@@ -41,7 +41,7 @@ void CInstanceMesh::InitFromXML(CXMLTreeNode& l_XMLObject)
     SetRoll(l_fRoll);
 
     //Generem la matriu 4x4 amb la info anterior.
-    InitMat44();
+    //InitMat44();
 
   }
 }

@@ -175,31 +175,31 @@
 	<RenderableObject name="lvl2_menj_fogons" class="StaticMesh" resource="lvl2_menj_fogons" position="11.521 0.5 20.5381" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_menj_menj_floresc_apagat00" class="StaticMesh" resource="lvl2_menj_menj_floresc_apagat00" position="14.5476 3.09934 28.5958" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_menj_menj_floresc_apagat01" class="StaticMesh" resource="lvl2_menj_menj_floresc_apagat01" position="4.85336 3.09934 25.7738" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl2_menj_menj_llum_florescent00" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent00" position="1.77145 3.0267 33.7667" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+	<RenderableObject name="lvl2_menj_menj_llum_florescent00" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent00" position="1.77145 3.0267 33.7667" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
 	<RenderableObject name="lvl2_menj_menj_floresc08" class="StaticMesh" resource="lvl2_menj_menj_floresc08" position="2.04748 3.09934 34.3481" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_menj_menj_floresc07" class="StaticMesh" resource="lvl2_menj_menj_floresc07" position="-0.643127 3.09934 28.4948" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl2_menj_menj_llum_florescent01" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent01" position="-0.919151 3.0267 27.9135" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+	<RenderableObject name="lvl2_menj_menj_llum_florescent01" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent01" position="-0.919151 3.0267 27.9135" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
 	<RenderableObject name="lvl2_menj_menj_floresc06" class="StaticMesh" resource="lvl2_menj_menj_floresc06" position="7.63609 3.09934 31.6725" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl2_menj_menj_llum_florescent02" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent02" position="7.36006 3.0267 31.0912" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+	<RenderableObject name="lvl2_menj_menj_llum_florescent02" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent02" position="7.36006 3.0267 31.0912" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
 	<RenderableObject name="lvl2_menj_menj_floresc_apagat02" class="StaticMesh" resource="lvl2_menj_menj_floresc_apagat02" position="5.19611 3.09934 40.8284" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_menj_menj_floresc_apagat03" class="StaticMesh" resource="lvl2_menj_menj_floresc_apagat03" position="24.1752 3.09934 31.6555" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_menj_menj_floresc_apagat04" class="StaticMesh" resource="lvl2_menj_menj_floresc_apagat04" position="30.5091 3.09934 28.722" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl2_menj_menj_llum_florescent03" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent03" position="10.3998 3.0267 37.5924" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+	<RenderableObject name="lvl2_menj_menj_llum_florescent03" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent03" position="10.3998 3.0267 37.5924" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
 	<RenderableObject name="lvl2_menj_menj_floresc05" class="StaticMesh" resource="lvl2_menj_menj_floresc05" position="10.6758 3.09934 38.1737" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl2_menj_menj_llum_florescent04" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent04" position="17.1193 3.0267 34.1487" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+	<RenderableObject name="lvl2_menj_menj_llum_florescent04" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent04" position="17.1193 3.0267 34.1487" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
 	<RenderableObject name="lvl2_menj_menj_floresc04" class="StaticMesh" resource="lvl2_menj_menj_floresc04" position="17.3953 3.09934 34.73" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl2_menj_menj_llum_florescent05" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent05" position="21.0283 3.0267 24.9328" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+	<RenderableObject name="lvl2_menj_menj_llum_florescent05" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent05" position="21.0283 3.0267 24.9328" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
 	<RenderableObject name="lvl2_menj_menj_floresc03" class="StaticMesh" resource="lvl2_menj_menj_floresc03" position="21.3043 3.09934 25.5141" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl2_menj_menj_llum_florescent06" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent06" position="18.1017 3.0267 18.6894" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+	<RenderableObject name="lvl2_menj_menj_llum_florescent06" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent06" position="18.1017 3.0267 18.6894" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
 	<RenderableObject name="lvl2_menj_menj_floresc02" class="StaticMesh" resource="lvl2_menj_menj_floresc02" position="18.3778 3.09934 19.2707" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl2_menj_menj_llum_florescent07" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent07" position="24.5262 3.0267 15.7795" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+	<RenderableObject name="lvl2_menj_menj_llum_florescent07" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent07" position="24.5262 3.0267 15.7795" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
 	<RenderableObject name="lvl2_menj_menj_floresc01" class="StaticMesh" resource="lvl2_menj_menj_floresc01" position="24.8022 3.09934 16.3608" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl2_menj_menj_llum_florescent08" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent08" position="27.3458 3.0267 21.8705" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+	<RenderableObject name="lvl2_menj_menj_llum_florescent08" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent08" position="27.3458 3.0267 21.8705" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
 	<RenderableObject name="lvl2_menj_menj_floresc00" class="StaticMesh" resource="lvl2_menj_menj_floresc00" position="27.6218 3.09934 22.4518" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl2_menj_menj_llum_florescent16" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent16" position="13.1442 3.0267 22.656" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+	<RenderableObject name="lvl2_menj_menj_llum_florescent16" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent16" position="13.1442 3.0267 22.656" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
 	<RenderableObject name="lvl2_menj_menj_floresc09" class="StaticMesh" resource="lvl2_menj_menj_floresc09" position="13.7255 3.09934 22.38" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl2_menj_menj_llum_florescent17" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent17" position="10.0623 3.0267 24.1355" yaw="1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
+	<RenderableObject name="lvl2_menj_menj_llum_florescent17" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent17" position="10.0623 3.0267 24.1355" yaw="-1.00179e-005" pitch="0.0" roll="-1.00179e-005" />
 	<RenderableObject name="lvl2_menj_menj_floresc10" class="StaticMesh" resource="lvl2_menj_menj_floresc10" position="10.6437 3.09934 23.8595" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_menj_menj_llum_florescent15" class="StaticMesh" resource="lvl2_menj_menj_llum_florescent15" position="30.5091 3.09934 28.722" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="Plataforma" class="StaticMesh" resource="Plataforma" position="-3.36713 1.67941 23.7012" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+	<RenderableObject name="Plataforma" class="StaticMesh" resource="Plataforma" position="-3.36713 1.67941 23.7012" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
 </RenderableObjects>

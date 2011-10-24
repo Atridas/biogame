@@ -160,6 +160,17 @@ void CPhysicActor::SetLinearVelocity (const Vect3f& velocity)
 	}
 }
 
+Vect3f CPhysicActor::GetLinearVelocity()
+{
+  if (m_pPhXActor)
+	{
+    NxVec3 l_nxVel = m_pPhXActor->getLinearVelocity();
+    return Vect3f(l_nxVel.x,l_nxVel.y,l_nxVel.z);
+	}
+
+  return v3fZERO;
+
+}
 
 void CPhysicActor::AddSphereShape	(float radius, const Vect3f& globalPos, const Vect3f& localPos, NxCCDSkeleton* skeleton, uint32 group)
 {
@@ -293,6 +304,17 @@ void CPhysicActor::SetGlobalPosition	(const Vect3f& pos)
   if(m_pPhXActor)
   {
     m_pPhXActor->setGlobalPosition(NxVec3(pos.x, pos.y, pos.z));
+  }
+}
+
+void CPhysicActor::MoveGlobalPosition(const Vect3f& pos)
+{
+  if(m_pPhXActor)
+  {
+    if(!m_pPhXActor->isDynamic())
+      return;
+
+    m_pPhXActor->moveGlobalPosition(NxVec3(pos.x, pos.y, pos.z));
   }
 }
 
@@ -467,16 +489,31 @@ void CPhysicActor::Activate(bool _bActivate)
   }
 }
 
-void CPhysicActor::AddForceAtLocalPos(Vect3f _vDirection, Vect3f _vLocalPos, float _fPower)
+void CPhysicActor::AddImpulseAtLocalPos(const Vect3f& _vDirection, const Vect3f& _vLocalPos, float _fPower)
+{
+  AddForceAtLocalPos( _vDirection, _vLocalPos, _fPower, NX_IMPULSE);
+}
+
+void CPhysicActor::AddVelocityAtLocalPos(const Vect3f& _vDirection, const Vect3f& _vLocalPos, float _fPower)
+{
+  AddForceAtLocalPos( _vDirection, _vLocalPos, _fPower, NX_VELOCITY_CHANGE);
+}
+
+void CPhysicActor::AddAcelerationAtLocalPos(const Vect3f& _vDirection, const Vect3f& _vLocalPos, float _fPower)
+{
+  AddForceAtLocalPos( _vDirection, _vLocalPos, _fPower, NX_ACCELERATION);
+}
+
+void CPhysicActor::AddForceAtLocalPos(const Vect3f& _vDirection, const Vect3f& _vLocalPos, float _fPower, NxForceMode _sForceMode)
 {
   if(m_pPhXActor)
   {
     NxVec3 l_vDirection(_vDirection.x,_vDirection.y,_vDirection.z);
     NxVec3 l_vLocalPos(_vLocalPos.x,_vLocalPos.y,_vLocalPos.z);
-    NxF32 l_fCoeff = m_pPhXActor->getMass() * _fPower;
-    if(l_vDirection.isFinite() && l_vLocalPos.isFinite() && NxMath::isFinite(l_fCoeff))
+
+    if(l_vDirection.isFinite() && l_vLocalPos.isFinite() && NxMath::isFinite(_fPower))
     {
-      m_pPhXActor->addForceAtLocalPos(l_vDirection*l_fCoeff, l_vLocalPos, NX_IMPULSE,true);
+      m_pPhXActor->addForceAtLocalPos(l_vDirection*_fPower, l_vLocalPos, _sForceMode,true);
     }
   }
 }

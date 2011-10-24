@@ -165,7 +165,7 @@
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="TriggerDummy">
-    <Object3D position="-25.1552 2.03947 33.689" yaw="-1.70755e-006" pitch="0.0" roll="0.0" />
+    <Object3D position="-25.1552 2.03947 33.689" yaw="1.70755e-006" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="8.04462 5.83092 10.3979" collision_group="trigger" onEnter="triggerDeProvesEntrar" onExit="triggerDeProvesSortir" />
   </Entity>
   <Entity name="LowCover01">
@@ -185,7 +185,7 @@
     <HighCover shape="box" size="1.96762 1.46503 1.96762" collision_group="cobertura" cover_size="2" />
   </Entity>
   <Entity name="LowCover05">
-    <Object3D position="-30.9704 0.499021 -1.5646" yaw="-30.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-30.9704 0.499021 -1.5646" yaw="30.0" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="0.998535 1.00687 0.998535" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="LowCover06">
@@ -193,11 +193,11 @@
     <LowCover shape="box" size="1.00877 1.00999 1.01209" collision_group="cobertura" cover_size="2" />
   </Entity>
   <Entity name="HighCover05">
-    <Object3D position="-31.272 0.736625 -8.26481" yaw="10.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-31.272 0.736625 -8.26481" yaw="-10.0" pitch="0.0" roll="0.0" />
     <HighCover shape="box" size="1.96762 1.46503 1.96762" collision_group="cobertura" cover_size="2" />
   </Entity>
   <Entity name="HighCover06">
-    <Object3D position="-31.3143 0.736625 -10.6122" yaw="-10.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-31.3143 0.736625 -10.6122" yaw="10.0" pitch="0.0" roll="0.0" />
     <HighCover shape="box" size="1.96762 1.46503 1.96762" collision_group="cobertura" cover_size="2" />
   </Entity>
   <Entity name="LowCover10">
@@ -205,7 +205,7 @@
     <LowCover shape="box" size="0.981774 1.00332 1.00093" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="HighCover01">
-    <Object3D position="-31.4767 1.00374 -2.44565" yaw="60.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-31.4767 1.00374 -2.44565" yaw="-60.0" pitch="0.0" roll="0.0" />
     <HighCover shape="box" size="0.998535 2.00141 0.998535" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="LowCover11">
@@ -237,20 +237,20 @@
     <Trigger shape="box" size="5.83067 5.83067 5.83067" collision_group="trigger" onEnter="triggerDeProvesEntrar" onExit="triggerDeProvesSortir" />
   </Entity>
   <Entity name="TriggerYaw">
-    <Object3D position="11.9221 3.1656 33.045" yaw="20.0" pitch="0.0" roll="0.0" />
+    <Object3D position="11.9221 3.1656 33.045" yaw="-20.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="5.91054 5.91054 5.91054" collision_group="trigger" onEnter="triggerDeProvesEntrar" onExit="triggerDeProvesSortir" />
     <Emiter core="vapor" volume="5.91054 5.91054 5.91054" />
   </Entity>
   <Entity name="HighCover10">
-    <Object3D position="-28.1834 1.00374 -3.20767" yaw="115.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-28.1834 1.00374 -3.20767" yaw="-115.0" pitch="0.0" roll="0.0" />
     <HighCover shape="box" size="0.998535 2.00141 0.998535" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="LowCover13">
-    <Object3D position="-28.6123 0.499021 -2.30047" yaw="25.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-28.6123 0.499021 -2.30047" yaw="-25.0" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="0.998535 1.00687 0.998535" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="LowCover14">
-    <Object3D position="-31.0164 0.505118 -6.6859" yaw="9.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-31.0164 0.505118 -6.6859" yaw="-9.0" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="1.00877 1.00999 1.01209" collision_group="cobertura" cover_size="2" />
   </Entity>
   <Entity name="Porta01">
@@ -522,12 +522,8 @@
     <RenderableObject animated="true" name="Porta1" />
     <Door open="false" open_time="2.0" close_time="1.0" size="0.976215 3.05175 2.56453" />
   </Entity>
-  <Entity name="CameraDeProves">
-    <Object3D position="-5.63975 7.03137 -30.167" yaw="-16.6236" pitch="8.53774e-007" roll="-75.2262" />
-    <CynematicCamera target="1.98783 0.0 -4.61928" fov="45.0" near="1.0" far="1000.0" />
-  </Entity>
   <Player position="-16.8764 2.0 -15.9165" yaw="0.0" />
   <Miner name="Miner" position="50.3014 2.0 39.1446" yaw="0.0" active="false" on_death="drop_tetera" />
   <Militar name="Militar" position="48.3709 2.0 -18.4613" yaw="0.0" active="false" destiny="navNodeCobertura" />
-  <Vigia name="RobotVigia" position="-10.8764 2.0 -15.9165" yaw="0.0" active="true" />
+  <Robot name="Robot" position="-10.0997 2.0 -15.7968" yaw="0.0" active="true" />
 </Entities>
