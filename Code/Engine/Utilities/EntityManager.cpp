@@ -132,14 +132,14 @@ void CEntityManager::RemoveEntity(const CGameEntity* _pEntity)
 void CEntityManager::RemoveEntity(int _iId)
 {
   assert(m_vEntities.size() > (uint32) _iId);
-  for(uint32 i = 0; i < m_vFreeIDs.size(); ++i) assert(m_vFreeIDs[i] != _iId);
-  //{
-  //  if(m_vFreeIDs[i] == _iId)
-  //  {
-  //    LOGGER->AddNewLog(ELL_ERROR, "CEntityManager::RemoveEntity intentant eliminar una entitat ja eliminada.");
-  //    return;
-  //  }
-  //}
+  for(uint32 i = 0; i < m_vFreeIDs.size(); ++i)// assert(m_vFreeIDs[i] != _iId);
+  {
+    if(m_vFreeIDs[i] == _iId)
+    {
+      LOGGER->AddNewLog(ELL_ERROR, "CEntityManager::RemoveEntity intentant eliminar una entitat ja eliminada.");
+      return;
+    }
+  }
 
   m_vDeleteEntities.push(_iId);
 }

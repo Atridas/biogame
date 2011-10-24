@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <Entities>
-  <Entity name="Camera01">
-    <Object3D position="6.35256 3.06244 -4.94216" yaw="49.8975" pitch="0.0" roll="-84.0142" />
-    <CynematicCamera target="4.22965 2.77142 -3.15434" fov="65.4705" near="1.0" far="1000.0" />
-  </Entity>
   <Entity name="lvl1_habitacio_dormitori">
     <Object3D position="21.5363 2.38419e-007 21.3566" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_habitacio_dormitori" />
@@ -26,7 +22,7 @@
     <RenderableObject animated="false" name="lvl1_cadenas31" />
   </Entity>
   <Entity name="lvl1_escala">
-    <Object3D position="26.8463 0.415649 12.4677" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="26.8463 0.415649 12.4677" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_escala" />
   </Entity>
   <Entity name="lvl1_cadenas203">
@@ -107,20 +103,30 @@
     <RenderableObject animated="false" name="lvl1_aguanta_llums11" />
   </Entity>
   <Entity name="lvl1_Lum12">
-    <Object3D position="2.16081 3.16121 -18.5536" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="2.16081 3.16121 -18.5536" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Lum12" />
   </Entity>
   <Entity name="lvl1_aguanta_llums12">
-    <Object3D position="2.13875 3.0733 -18.4167" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="2.13875 3.0733 -18.4167" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_aguanta_llums12" />
   </Entity>
   <Entity name="lvl1_Lum13">
-    <Object3D position="2.16081 3.16121 -11.1026" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="2.16081 3.16121 -11.1026" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Lum13" />
   </Entity>
   <Entity name="lvl1_aguanta_llums13">
-    <Object3D position="2.13875 3.0733 -10.9657" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="2.13875 3.0733 -10.9657" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_aguanta_llums13" />
+  </Entity>
+  <Entity name="lvl1_montacarregues">
+    <Object3D position="0.089489 -5.28232 -23.9213" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_montacarregues" />
+    <StateMachine initial_state="State_Elevator_Idle" />
+  </Entity>
+  <Entity name="lvl1_hueco_ascensor_entrada">
+    <Object3D position="-0.093854 -3.57925 -24.0001" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_hueco_ascensor_entrada" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_aguanta_llums22">
     <Object3D position="-18.0042 3.0733 2.16237" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -186,12 +192,12 @@
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Caixa_estatica_petita35">
-    <Object3D position="-12.3763 0.52294 -1.3914" yaw="50.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-12.3763 0.52294 -1.3914" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Caixa_estatica_petita35" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Caixa_estatica_petita38">
-    <Object3D position="-12.3718 0.52294 -0.383732" yaw="50.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-12.3718 0.52294 -0.383732" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Caixa_estatica_petita38" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
@@ -209,11 +215,214 @@
     <Object3D position="-27.3872 1.39148 0.00468683" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Porta_planta-1_02" />
   </Entity>
-  <Entity name="lvl1_key_blue">
-    <Object3D position="-30.9871 1.0 0.191614" yaw="90.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl1_key_blue" />
+  <Entity name="lvl1_lvl1_key_blue">
+    <Object3D position="-30.7743 1.0 -1.77139" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_lvl1_key_blue" />
     <Trigger shape="box" size="0.166803 0.862473 0.582663" collision_group="pickup" onEnter="get_key_blue" />
     <Rotative yaw="0.5" />
+  </Entity>
+  <Entity name="lvl1_cable_lampada_granada">
+    <Object3D position="-30.9919 3.58284 0.134059" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_cable_lampada_granada" />
+  </Entity>
+  <Entity name="lvl1_lampada_granada_autoilum">
+    <Object3D position="-30.9927 1.93783 0.122037" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_lampada_granada_autoilum" />
+  </Entity>
+  <Entity name="lvl1_ordinador">
+    <Object3D position="-31.0325 -0.00154449 -1.05108" yaw="-15.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_ordinador" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="lvl1_ordinador_autoilum">
+    <Object3D position="-31.048 -0.00154425 -1.07246" yaw="-15.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_ordinador_autoilum" />
+  </Entity>
+  <Entity name="lvl1_lampada_granada">
+    <Object3D position="-30.9927 1.93783 0.122036" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_lampada_granada" />
+  </Entity>
+  <Entity name="lvl1_Cadenas_sostre04">
+    <Object3D position="-31.1215 3.70759 -0.946302" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_Cadenas_sostre04" />
+  </Entity>
+  <Entity name="lvl1_Cadenas_sostre05">
+    <Object3D position="-29.5518 3.25122 3.22087" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_Cadenas_sostre05" />
+  </Entity>
+  <Entity name="lvl1_Cadenas_sostre06">
+    <Object3D position="-28.5431 3.70759 1.30437" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_Cadenas_sostre06" />
+  </Entity>
+  <Entity name="lvl1_Cadenas_sostre13">
+    <Object3D position="-29.1795 2.49909 -2.81447" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_Cadenas_sostre13" />
+  </Entity>
+  <Entity name="lvl1_Cadenas_sostre14">
+    <Object3D position="-32.3487 2.49909 2.20691" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_Cadenas_sostre14" />
+  </Entity>
+  <Entity name="lvl1_Cadenas_sostre15">
+    <Object3D position="-32.3487 2.26001 -1.80763" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_Cadenas_sostre15" />
+  </Entity>
+  <Entity name="lvl1_grenade">
+    <Object3D position="-27.3665 1.47331 0.143002" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="granada" />
+    <Trigger shape="box" size="1.05052 0.399226 1.05052" collision_group="pickup" onEnter="activate_grenades" />
+    <Rotative yaw="0.5" />
+  </Entity>
+  <Entity name="lvl1_lvl2_lab_Cadira_de_força">
+    <Object3D position="-31.1135 0.53444 0.100385" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_lvl2_lab_Cadira_de_força" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="lvl1_lvl2_lab_Edvac">
+    <Object3D position="-30.3838 0.00531006 -3.80711" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_lvl2_lab_Edvac" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="lvl1_lvl2_lab_Edvac01">
+    <Object3D position="-30.0849 0.00531006 3.96076" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_lvl2_lab_Edvac01" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="lvl1_lvl2_lab_Edvac02">
+    <Object3D position="-33.0044 0.00531006 -0.101209" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_lvl2_lab_Edvac02" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="lvl1_lvl2_lab_Taula_DEF">
+    <Object3D position="-31.2089 0.465715 1.52353" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_lvl2_lab_Taula_DEF" />
+    <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="lvl1_lvl2_lab_tub_Gros05">
+    <Object3D position="-30.4401 4.65139 -3.91272" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_lvl2_lab_tub_Gros05" />
+  </Entity>
+  <Entity name="lvl1_lvl2_lab_tub_Gros06">
+    <Object3D position="-30.336 4.66314 4.15027" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_lvl2_lab_tub_Gros06" />
+  </Entity>
+  <Entity name="lvl1_lvl2_lab_tub_Gros07">
+    <Object3D position="-30.336 3.91473 4.15027" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_lvl2_lab_tub_Gros07" />
+  </Entity>
+  <Entity name="lvl1_lvl2_lab_tub_Gros08">
+    <Object3D position="-30.4401 3.86068 -3.91272" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_lvl2_lab_tub_Gros08" />
+  </Entity>
+  <Entity name="lvl1_roda06">
+    <Object3D position="-28.2433 3.40919 -3.24528" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_roda06" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="lvl1_roda07">
+    <Object3D position="-28.2537 0.664316 -3.26188" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_roda07" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="lvl1_roda09">
+    <Object3D position="-32.4188 1.28871 3.26706" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_roda09" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="lvl1_tub_gros03">
+    <Object3D position="-32.7303 3.0987 3.65644" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_gros03" />
+  </Entity>
+  <Entity name="lvl1_tub_gros04">
+    <Object3D position="-27.9986 3.0987 -3.353" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_gros04" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo20">
+    <Object3D position="-28.9055 4.4967 2.75119" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo20" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo21">
+    <Object3D position="-30.3522 4.32275 -2.31306" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo21" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo22">
+    <Object3D position="-30.662 4.4967 2.75119" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo22" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo23">
+    <Object3D position="-30.4858 4.33834 2.75119" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo23" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo24">
+    <Object3D position="-29.4265 4.4967 2.75119" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo24" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo25">
+    <Object3D position="-29.7711 4.23135 2.75119" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo25" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo26">
+    <Object3D position="-29.9455 4.41818 2.75119" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo26" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo27">
+    <Object3D position="-31.369 4.33834 2.75119" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo27" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo28">
+    <Object3D position="-33.1192 1.64302 -3.7328" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo28" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo30">
+    <Object3D position="-32.9639 1.64302 2.93445" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo30" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo31">
+    <Object3D position="-33.1302 1.64302 -2.88489" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo31" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo32">
+    <Object3D position="-27.7418 1.64302 -2.85261" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo32" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo33">
+    <Object3D position="-30.3522 4.51166 2.04578" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo33" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo34">
+    <Object3D position="-32.3725 4.4967 2.75119" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo34" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo35">
+    <Object3D position="-31.9137 4.41818 2.75119" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo35" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo36">
+    <Object3D position="-32.044 4.41818 2.75119" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo36" />
+  </Entity>
+  <Entity name="lvl1_tubs11">
+    <Object3D position="-30.3588 4.76209 1.13328" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tubs11" />
+  </Entity>
+  <Entity name="lvl1_tubs12">
+    <Object3D position="-30.3588 4.87505 -1.47621" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tubs12" />
+  </Entity>
+  <Entity name="lvl1_tubs13">
+    <Object3D position="-30.3588 4.87505 2.62237" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tubs13" />
+  </Entity>
+  <Entity name="lvl1_tubs14">
+    <Object3D position="-30.3588 4.76209 -3.07971" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tubs14" />
+  </Entity>
+  <Entity name="lvl1_tubs15">
+    <Object3D position="-30.3588 4.76209 2.33316" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tubs15" />
+  </Entity>
+  <Entity name="lvl1_visagra07">
+    <Object3D position="-27.4114 0.0 -0.0833278" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_visagra07" />
   </Entity>
   <Entity name="lvl1_habitacio_claus">
     <Object3D position="-7.25854 0.0 7.34167" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -228,18 +437,162 @@
     <StateMachine initial_state="State_Key_AllOff" />
   </Entity>
   <Entity name="lvl1_claus_porta_sub1">
-    <Object3D position="-10.0283 1.69531 4.39831" yaw="72.0063" pitch="0.0" roll="0.0" />
+    <Object3D position="-10.0283 1.69531 4.39831" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_claus_porta_sub1" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_claus_porta_sub2">
-    <Object3D position="-4.07232 1.84569 9.83494" yaw="69.6144" pitch="0.0" roll="0.0" />
+    <Object3D position="-4.07232 1.84569 9.83494" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_claus_porta_sub2" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_portal_bidons">
     <Object3D position="-9.84117 2.05258 8.8713" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_portal_bidons" />
+  </Entity>
+  <Entity name="lvl1_tubs_claus01">
+    <Object3D position="-11.5152 1.04761 5.98491" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tubs_claus01" />
+  </Entity>
+  <Entity name="lvl1_tubs_claus02">
+    <Object3D position="-10.1397 3.65454 4.53416" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tubs_claus02" />
+  </Entity>
+  <Entity name="lvl1_tubs_claus00">
+    <Object3D position="-4.36474 3.66629 10.162" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tubs_claus00" />
+  </Entity>
+  <Entity name="lvl1_roda">
+    <Object3D position="-6.46206 1.23845 11.0102" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_roda" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="lvl1_roda01">
+    <Object3D position="-3.567 1.23845 7.71096" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_roda01" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="lvl1_roda02">
+    <Object3D position="-8.14252 0.614057 3.51779" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_roda02" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="lvl1_roda05">
+    <Object3D position="-8.14252 3.35893 3.51779" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_roda05" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="lvl1_tub_gros">
+    <Object3D position="-6.407 2.5132 11.5058" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_gros" />
+  </Entity>
+  <Entity name="lvl1_tub_gros01">
+    <Object3D position="-8.01759 2.5132 3.20359" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_gros01" />
+  </Entity>
+  <Entity name="lvl1_tub_gros02">
+    <Object3D position="-3.0768 2.5132 8.22775" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_gros02" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo">
+    <Object3D position="-8.94648 3.3259 5.60317" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo01">
+    <Object3D position="-5.58455 3.49985 9.40317" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo01" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo02">
+    <Object3D position="-5.45997 3.34149 9.27859" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo02" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo03">
+    <Object3D position="-4.71092 3.49985 8.52954" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo03" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo04">
+    <Object3D position="-4.95459 3.2345 8.77321" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo04" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo05">
+    <Object3D position="-5.07796 3.42133 8.89658" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo05" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo06">
+    <Object3D position="-6.46964 3.42133 10.2883" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo06" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo07">
+    <Object3D position="-6.79406 3.49985 10.6127" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo07" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo08">
+    <Object3D position="-6.08452 3.34149 9.90314" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo08" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo09">
+    <Object3D position="-6.56183 3.42133 10.3804" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo09" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo10">
+    <Object3D position="-4.34254 3.49985 8.16116" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo10" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo11">
+    <Object3D position="-5.81391 1.31152 11.1787" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo11" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo12">
+    <Object3D position="-7.08268 1.31152 11.1605" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo12" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo13">
+    <Object3D position="-11.3152 1.31152 7.16317" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo13" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo14">
+    <Object3D position="-8.82757 1.31152 3.46051" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo14" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo15">
+    <Object3D position="-7.48216 1.31152 3.37582" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo15" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo16">
+    <Object3D position="-10.129 2.8758 5.103" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo16" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo17">
+    <Object3D position="-4.91602 2.89518 9.78454" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo17" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo18">
+    <Object3D position="-5.86431 3.5148 8.68534" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo18" />
+  </Entity>
+  <Entity name="lvl1_tub_rodo19">
+    <Object3D position="-11.907 1.31152 6.55584" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tub_rodo19" />
+  </Entity>
+  <Entity name="lvl1_tubs6">
+    <Object3D position="-6.51422 3.76524 8.04476" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tubs6" />
+  </Entity>
+  <Entity name="lvl1_tubs07">
+    <Object3D position="-8.3594 3.8782 6.19958" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tubs07" />
+  </Entity>
+  <Entity name="lvl1_tubs08">
+    <Object3D position="-5.46127 3.8782 9.09771" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tubs08" />
+  </Entity>
+  <Entity name="lvl1_tubs09">
+    <Object3D position="-9.49325 3.76524 5.06573" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tubs09" />
+  </Entity>
+  <Entity name="lvl1_tubs10">
+    <Object3D position="-5.66577 3.76524 8.89321" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_tubs10" />
   </Entity>
   <Entity name="lvl1_Passadis_final01">
     <Object3D position="0.0194988 0.0 14.9084" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -263,20 +616,30 @@
     <RenderableObject animated="false" name="lvl1_Lum19" />
   </Entity>
   <Entity name="lvl1_aguanta_llums20">
-    <Object3D position="2.13874 3.0733 18.938" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="2.13874 3.0733 18.938" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_aguanta_llums20" />
   </Entity>
   <Entity name="lvl1_Lum20">
-    <Object3D position="2.16081 3.16121 11.35" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="2.16081 3.16121 11.35" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Lum20" />
   </Entity>
   <Entity name="lvl1_aguanta_llums21">
-    <Object3D position="2.13874 3.0733 11.4869" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="2.13874 3.0733 11.4869" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_aguanta_llums21" />
   </Entity>
   <Entity name="lvl1_Lum21">
-    <Object3D position="2.16081 3.16121 18.8011" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="2.16081 3.16121 18.8011" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Lum21" />
+  </Entity>
+  <Entity name="lvl1_montacarregues01">
+    <Object3D position="-0.109179 1.46562 24.0805" yaw="-3.46057e-005" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_montacarregues01" />
+    <StateMachine initial_state="State_Elevator_Idle" />
+  </Entity>
+  <Entity name="lvl1_hueco_ascensor2">
+    <Object3D position="-0.0915012 6.13397 24.0132" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_hueco_ascensor2" />
+    <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Passadis01">
     <Object3D position="14.081 -6.64616e-007 14.0495" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -284,7 +647,7 @@
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Porta_planta-1_17">
-    <Object3D position="19.5124 1.47257 19.2866" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="19.5124 1.47257 19.2866" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Porta_planta-1_17" />
   </Entity>
   <Entity name="lvl1_aguanta_llums14">
@@ -304,19 +667,19 @@
     <RenderableObject animated="false" name="lvl1_Lum15" />
   </Entity>
   <Entity name="lvl1_Lum16">
-    <Object3D position="17.7209 2.54268 14.6615" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="17.7209 2.54268 14.6615" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Lum16" />
   </Entity>
   <Entity name="lvl1_aguanta_llums16">
-    <Object3D position="17.8021 2.45477 14.7739" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="17.8021 2.45477 14.7739" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_aguanta_llums16" />
   </Entity>
   <Entity name="lvl1_aguanta_llums17">
-    <Object3D position="10.1779 2.45477 7.14972" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="10.1779 2.45477 7.14972" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_aguanta_llums17" />
   </Entity>
   <Entity name="lvl1_Lum17">
-    <Object3D position="10.0967 2.54268 7.03731" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="10.0967 2.54268 7.03731" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Lum17" />
   </Entity>
   <Entity name="lvl1_caixa_llarga16">
@@ -325,45 +688,49 @@
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Caixa_estatica_petita36">
-    <Object3D position="13.8521 0.529083 16.2801" yaw="5.0" pitch="0.0" roll="0.0" />
+    <Object3D position="13.8521 0.529083 16.2801" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Caixa_estatica_petita36" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Caixa_estatica_petita37">
-    <Object3D position="14.5614 0.529083 15.5647" yaw="5.0" pitch="0.0" roll="0.0" />
+    <Object3D position="14.5614 0.529083 15.5647" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Caixa_estatica_petita37" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
+  <Entity name="lvl1_visagra06">
+    <Object3D position="19.4994 0.0 19.2622" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_visagra06" />
+  </Entity>
   <Entity name="lvl1_escala_peque01">
-    <Object3D position="27.8673 0.257019 18.9709" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="27.8673 0.257019 18.9709" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_escala_peque01" />
   </Entity>
   <Entity name="lvl1_escala_peque02">
-    <Object3D position="25.1254 0.257019 21.7128" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="25.1254 0.257019 21.7128" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_escala_peque02" />
   </Entity>
   <Entity name="lvl1_escala_peque03">
-    <Object3D position="34.5168 0.257019 24.1739" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="34.5168 0.257019 24.1739" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_escala_peque03" />
   </Entity>
   <Entity name="lvl1_escala_peque04">
-    <Object3D position="31.6346 0.257019 27.0561" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="31.6346 0.257019 27.0561" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_escala_peque04" />
   </Entity>
   <Entity name="lvl1_escala_peque05">
-    <Object3D position="27.2313 0.257019 21.582" yaw="-7.46773e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="27.2313 0.257019 21.582" yaw="-3.46057e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_escala_peque05" />
   </Entity>
   <Entity name="lvl1_escala_peque06">
-    <Object3D position="32.6352 0.257019 28.0425" yaw="-7.46773e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="32.6352 0.257019 28.0425" yaw="-3.46057e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_escala_peque06" />
   </Entity>
   <Entity name="lvl1_escala_peque07">
-    <Object3D position="35.4548 0.257019 25.223" yaw="-7.46773e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="35.4548 0.257019 25.223" yaw="-3.46057e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_escala_peque07" />
   </Entity>
   <Entity name="lvl1_escala_peque">
-    <Object3D position="30.6084 0.257019 16.2298" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="30.6084 0.257019 16.2298" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_escala_peque" />
   </Entity>
   <Entity name="lvl1_litera_pared12">
@@ -455,51 +822,51 @@
     <RenderableObject animated="false" name="lvl1_litera_pared98" />
   </Entity>
   <Entity name="lvl1_litera_pared68">
-    <Object3D position="33.007 4.22528 17.8675" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="33.007 4.22528 17.8675" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_litera_pared68" />
   </Entity>
   <Entity name="lvl1_litera_pared69">
-    <Object3D position="33.007 0.348755 17.8675" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="33.007 0.348755 17.8675" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_litera_pared69" />
   </Entity>
   <Entity name="lvl1_litera_pared70">
-    <Object3D position="33.007 1.64093 17.8675" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="33.007 1.64093 17.8675" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_litera_pared70" />
   </Entity>
   <Entity name="lvl1_litera_pared71">
-    <Object3D position="33.007 2.93311 17.8675" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="33.007 2.93311 17.8675" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_litera_pared71" />
   </Entity>
   <Entity name="lvl1_litera_pared72">
-    <Object3D position="36.0107 4.22528 20.8712" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="36.0107 4.22528 20.8712" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_litera_pared72" />
   </Entity>
   <Entity name="lvl1_litera_pared73">
-    <Object3D position="36.0107 0.348755 20.8712" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="36.0107 0.348755 20.8712" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_litera_pared73" />
   </Entity>
   <Entity name="lvl1_litera_pared74">
-    <Object3D position="36.0107 1.64093 20.8712" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="36.0107 1.64093 20.8712" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_litera_pared74" />
   </Entity>
   <Entity name="lvl1_litera_pared75">
-    <Object3D position="36.0107 2.93311 20.8712" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="36.0107 2.93311 20.8712" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_litera_pared75" />
   </Entity>
   <Entity name="lvl1_litera_pared76">
-    <Object3D position="39.3166 4.22528 24.1771" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="39.3166 4.22528 24.1771" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_litera_pared76" />
   </Entity>
   <Entity name="lvl1_litera_pared77">
-    <Object3D position="39.3166 0.348755 24.1771" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="39.3166 0.348755 24.1771" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_litera_pared77" />
   </Entity>
   <Entity name="lvl1_litera_pared78">
-    <Object3D position="39.3166 1.64093 24.1771" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="39.3166 1.64093 24.1771" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_litera_pared78" />
   </Entity>
   <Entity name="lvl1_litera_pared79">
-    <Object3D position="39.3166 2.93311 24.1771" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="39.3166 2.93311 24.1771" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_litera_pared79" />
   </Entity>
   <Entity name="lvl1_litera_pared80">
@@ -644,43 +1011,43 @@
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_escala03">
-    <Object3D position="23.6225 0.415649 15.6915" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="23.6225 0.415649 15.6915" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_escala03" />
   </Entity>
   <Entity name="lvl1_escala04">
-    <Object3D position="18.3359 0.415649 23.452" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="18.3359 0.415649 23.452" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_escala04" />
   </Entity>
   <Entity name="lvl1_escala05">
-    <Object3D position="21.3633 0.415649 26.4793" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="21.3633 0.415649 26.4793" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_escala05" />
   </Entity>
   <Entity name="lvl1_escala06">
-    <Object3D position="24.296 0.415649 29.412" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="24.296 0.415649 29.412" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_escala06" />
   </Entity>
   <Entity name="lvl1_escala07">
-    <Object3D position="34.2612 0.415649 18.8877" yaw="-7.46773e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="34.2612 0.415649 18.8877" yaw="-3.46057e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_escala07" />
   </Entity>
   <Entity name="lvl1_escala08">
-    <Object3D position="37.3554 0.415649 21.9819" yaw="-7.46773e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="37.3554 0.415649 21.9819" yaw="-3.46057e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_escala08" />
   </Entity>
   <Entity name="lvl1_escala09">
-    <Object3D position="40.6106 0.415649 25.2371" yaw="-7.46773e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="40.6106 0.415649 25.2371" yaw="-3.46057e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_escala09" />
   </Entity>
   <Entity name="lvl1_escala10">
-    <Object3D position="38.0848 0.415649 29.6016" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="38.0848 0.415649 29.6016" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_escala10" />
   </Entity>
   <Entity name="lvl1_escala11">
-    <Object3D position="34.818 0.415649 32.8684" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="34.818 0.415649 32.8684" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_escala11" />
   </Entity>
   <Entity name="lvl1_escala12">
-    <Object3D position="31.76 0.415649 35.9263" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="31.76 0.415649 35.9263" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_escala12" />
   </Entity>
   <Entity name="lvl1_taquilla12">
@@ -820,99 +1187,99 @@
     <RenderableObject animated="false" name="lvl1_cadenas196" />
   </Entity>
   <Entity name="lvl1_cadenas136">
-    <Object3D position="33.78 0.396362 18.5984" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="33.78 0.396362 18.5984" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas136" />
   </Entity>
   <Entity name="lvl1_cadenas137">
-    <Object3D position="32.2966 0.396362 17.115" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="32.2966 0.396362 17.115" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas137" />
   </Entity>
   <Entity name="lvl1_cadenas138">
-    <Object3D position="32.2966 1.68854 17.115" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="32.2966 1.68854 17.115" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas138" />
   </Entity>
   <Entity name="lvl1_cadenas139">
-    <Object3D position="33.78 1.68854 18.5984" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="33.78 1.68854 18.5984" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas139" />
   </Entity>
   <Entity name="lvl1_cadenas140">
-    <Object3D position="32.2966 2.98071 17.115" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="32.2966 2.98071 17.115" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas140" />
   </Entity>
   <Entity name="lvl1_cadenas141">
-    <Object3D position="33.78 2.98071 18.5984" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="33.78 2.98071 18.5984" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas141" />
   </Entity>
   <Entity name="lvl1_cadenas142">
-    <Object3D position="32.2966 4.27289 17.115" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="32.2966 4.27289 17.115" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas142" />
   </Entity>
   <Entity name="lvl1_cadenas143">
-    <Object3D position="33.78 4.27289 18.5984" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="33.78 4.27289 18.5984" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas143" />
   </Entity>
   <Entity name="lvl1_cadenas144">
-    <Object3D position="36.7838 0.396362 21.6021" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="36.7838 0.396362 21.6021" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas144" />
   </Entity>
   <Entity name="lvl1_cadenas145">
-    <Object3D position="35.3003 0.396362 20.1187" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="35.3003 0.396362 20.1187" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas145" />
   </Entity>
   <Entity name="lvl1_cadenas146">
-    <Object3D position="35.3003 1.68854 20.1187" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="35.3003 1.68854 20.1187" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas146" />
   </Entity>
   <Entity name="lvl1_cadenas147">
-    <Object3D position="36.7838 1.68854 21.6021" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="36.7838 1.68854 21.6021" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas147" />
   </Entity>
   <Entity name="lvl1_cadenas148">
-    <Object3D position="35.3003 2.98071 20.1187" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="35.3003 2.98071 20.1187" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas148" />
   </Entity>
   <Entity name="lvl1_cadenas149">
-    <Object3D position="36.7838 2.98071 21.6021" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="36.7838 2.98071 21.6021" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas149" />
   </Entity>
   <Entity name="lvl1_cadenas150">
-    <Object3D position="35.3003 4.27289 20.1187" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="35.3003 4.27289 20.1187" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas150" />
   </Entity>
   <Entity name="lvl1_cadenas151">
-    <Object3D position="36.7838 4.27289 21.6021" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="36.7838 4.27289 21.6021" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas151" />
   </Entity>
   <Entity name="lvl1_cadenas152">
-    <Object3D position="40.0897 0.396362 24.9081" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="40.0897 0.396362 24.9081" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas152" />
   </Entity>
   <Entity name="lvl1_cadenas153">
-    <Object3D position="38.6062 0.396362 23.4246" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="38.6062 0.396362 23.4246" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas153" />
   </Entity>
   <Entity name="lvl1_cadenas154">
-    <Object3D position="38.6062 1.68854 23.4246" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="38.6062 1.68854 23.4246" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas154" />
   </Entity>
   <Entity name="lvl1_cadenas155">
-    <Object3D position="40.0897 1.68854 24.9081" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="40.0897 1.68854 24.9081" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas155" />
   </Entity>
   <Entity name="lvl1_cadenas156">
-    <Object3D position="38.6062 2.98071 23.4246" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="38.6062 2.98071 23.4246" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas156" />
   </Entity>
   <Entity name="lvl1_cadenas157">
-    <Object3D position="40.0897 2.98071 24.9081" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="40.0897 2.98071 24.9081" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas157" />
   </Entity>
   <Entity name="lvl1_cadenas158">
-    <Object3D position="38.6062 4.27289 23.4246" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="38.6062 4.27289 23.4246" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas158" />
   </Entity>
   <Entity name="lvl1_cadenas159">
-    <Object3D position="40.0897 4.27289 24.9081" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="40.0897 4.27289 24.9081" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_cadenas159" />
   </Entity>
   <Entity name="lvl1_cadenas160">
@@ -1213,16 +1580,16 @@
     <RenderableObject animated="false" name="lvl1_Plane23" />
   </Entity>
   <Entity name="lvl1_Plane25">
-    <Object3D position="40.6358 4.80742 27.6055" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="40.6221 4.80742 27.5918" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Plane25" />
   </Entity>
   <Entity name="lvl1_caixa_llarga17">
-    <Object3D position="25.8895 0.487671 24.9438" yaw="-90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="25.8895 0.487671 24.9438" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_caixa_llarga17" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_caixa_llarga18">
-    <Object3D position="30.8809 0.487671 31.0204" yaw="-90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="30.8809 0.487671 31.0204" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_caixa_llarga18" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
@@ -1231,51 +1598,51 @@
     <RenderableObject animated="false" name="lvl1_Plane24" />
   </Entity>
   <Entity name="lvl1_fluorescente_ences14">
-    <Object3D position="37.1048 -5.42611 -23.7275" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="37.1048 -5.42611 -23.7275" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_florescent_ences" />
   </Entity>
   <Entity name="lvl1_fluorescente_ences15">
-    <Object3D position="27.2177 -5.42611 -23.7275" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="27.2177 -5.42611 -23.7275" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_florescent_ences" />
   </Entity>
   <Entity name="lvl1_fluorescente_ences16">
-    <Object3D position="32.3738 -5.42611 -28.5894" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="32.3738 -5.42611 -28.5894" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_florescent_ences" />
   </Entity>
   <Entity name="lvl1_fluorescente_ences17">
-    <Object3D position="27.2863 -5.42611 -28.5894" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="27.2863 -5.42611 -28.5894" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_florescent_ences" />
   </Entity>
   <Entity name="lvl1_fluorescente_ences18">
-    <Object3D position="27.2863 -5.42611 -33.5877" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="27.2863 -5.42611 -33.5877" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_florescent_ences" />
   </Entity>
   <Entity name="lvl1_fluorescente_ences19">
-    <Object3D position="32.3741 -5.42611 -33.5877" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="32.3741 -5.42611 -33.5877" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_florescent_ences" />
   </Entity>
   <Entity name="lvl1_fluorescente_ences20">
-    <Object3D position="37.137 -5.42611 -33.5877" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="37.137 -5.42611 -33.5877" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_florescent_ences" />
   </Entity>
   <Entity name="lvl1_fluorescente_ences21">
-    <Object3D position="37.137 -5.42611 -38.5206" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="37.137 -5.42611 -38.5206" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_florescent_ences" />
   </Entity>
   <Entity name="lvl1_fluorescente_ences22">
-    <Object3D position="27.0028 -5.42611 -38.5206" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="27.0028 -5.42611 -38.5206" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_florescent_ences" />
   </Entity>
   <Entity name="lvl1_fluorescente_apagat05">
-    <Object3D position="32.4109 -5.40069 -23.6298" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="32.4109 -5.40069 -23.6298" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_florescent_apagat" />
   </Entity>
   <Entity name="lvl1_fluorescente_apagat06">
-    <Object3D position="37.0853 -5.40069 -28.5481" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="37.0853 -5.40069 -28.5481" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_florescent_apagat" />
   </Entity>
   <Entity name="lvl1_fluorescente_apagat07">
-    <Object3D position="32.1827 -5.40069 -38.5325" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="32.1827 -5.40069 -38.5325" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_florescent_apagat" />
   </Entity>
   <Entity name="lvl1_Plane26">
@@ -1287,11 +1654,11 @@
     <RenderableObject animated="false" name="lvl1_Plane27" />
   </Entity>
   <Entity name="lvl1_Plane28">
-    <Object3D position="35.9561 4.45118 32.2156" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="35.9561 4.45118 32.2156" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Plane28" />
   </Entity>
   <Entity name="lvl1_Plane29">
-    <Object3D position="41.3357 4.45118 26.8327" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="41.3357 4.45118 26.8327" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Plane29" />
   </Entity>
   <Entity name="lvl1_fluorescente_ences">
@@ -1396,7 +1763,7 @@
     <RenderableObject animated="false" name="lvl1_viga" />
   </Entity>
   <Entity name="lvl1_Plane01">
-    <Object3D position="15.5169 5.13815 34.0189" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="15.5376 5.13815 34.0396" yaw="45.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Plane01" />
   </Entity>
   <Entity name="lvl1_Plane02">
@@ -1417,7 +1784,7 @@
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Banc04">
-    <Object3D position="15.8636 0.421875 43.3463" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="15.8636 0.421875 43.3463" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Banc04" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
@@ -1432,7 +1799,7 @@
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_taquilla10">
-    <Object3D position="13.0002 1.0 40.8264" yaw="-90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="13.0002 1.0 40.8264" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_taquilla10" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
@@ -1461,11 +1828,11 @@
     <RenderableObject animated="false" name="lvl1_Plane07" />
   </Entity>
   <Entity name="lvl1_Plane09">
-    <Object3D position="22.1999 4.43662 46.0641" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="22.1999 4.43662 46.0558" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Plane09" />
   </Entity>
   <Entity name="lvl1_Plane10">
-    <Object3D position="13.4784 5.37721 36.0574" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="13.4824 5.37721 36.0406" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Plane10" />
   </Entity>
   <Entity name="lvl1_Plane15">
@@ -1533,11 +1900,11 @@
     <RenderableObject animated="false" name="lvl1_dutxa30" />
   </Entity>
   <Entity name="lvl1_Plane17">
-    <Object3D position="9.36054 5.37721 40.1752" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="9.37885 5.37721 40.1906" yaw="50.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Plane17" />
   </Entity>
   <Entity name="lvl1_Plane18">
-    <Object3D position="25.8772 5.02182 42.3172" yaw="-5.00896e-006" pitch="-5.00896e-006" roll="-5.00896e-006" />
+    <Object3D position="25.9038 5.02182 42.3439" yaw="45.0" pitch="-5.00896e-006" roll="-5.00896e-006" />
     <RenderableObject animated="false" name="lvl1_Plane18" />
   </Entity>
   <Entity name="lvl1_LAVABO03">
@@ -1549,27 +1916,27 @@
     <RenderableObject animated="false" name="lvl1_Plane19" />
   </Entity>
   <Entity name="lvl1_Banc06">
-    <Object3D position="15.5474 0.421875 43.6625" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="15.5474 0.421875 43.6625" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Banc06" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Banc09">
-    <Object3D position="17.4607 0.421875 37.0519" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="17.4607 0.421875 37.0519" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Banc09" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Banc10">
-    <Object3D position="17.142 0.421875 37.3707" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="17.142 0.421875 37.3707" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Banc10" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Banc08">
-    <Object3D position="21.7932 0.421875 34.5234" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="21.7932 0.421875 34.5234" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Banc08" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Banc07">
-    <Object3D position="22.1093 0.421875 34.2073" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="22.1093 0.421875 34.2073" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Banc07" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
@@ -1608,7 +1975,7 @@
     <RenderableObject animated="false" name="lvl1_Plane05" />
   </Entity>
   <Entity name="lvl1_Plane08">
-    <Object3D position="22.9005 4.84077 29.1447" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="22.8838 4.84077 29.1615" yaw="-45.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Plane08" />
   </Entity>
   <Entity name="lvl1_Plane13">
@@ -1653,12 +2020,12 @@
     <RenderableObject animated="false" name="lvl1_florescent_apagat" />
   </Entity>
   <Entity name="lvl1_taquilla06">
-    <Object3D position="17.6549 1.0 34.3518" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="17.6549 1.0 34.3518" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_taquilla06" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_taquilla01">
-    <Object3D position="17.2654 1.0 34.7412" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="17.2654 1.0 34.7412" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_taquilla01" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
@@ -1675,9 +2042,9 @@
     <RenderableObject animated="false" name="lvl1_LAVABO06" />
   </Entity>
   <Entity name="lvl1_key_yellow">
-    <Object3D position="12.6652 1.09778 46.5314" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="12.6652 1.09778 46.5314" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_key_yellow" />
-    <Trigger shape="box" size="0.529952 0.862473 0.529953" collision_group="pickup" onEnter="get_key_yellow" />
+    <Trigger shape="box" size="0.48105 0.862473 0.489796" collision_group="pickup" onEnter="get_key_yellow" />
     <Rotative yaw="0.5" />
   </Entity>
   <Entity name="lvl1_escalas">
@@ -1768,17 +2135,17 @@
     <RenderableObject animated="false" name="lvl1_aguanta_llums08" />
   </Entity>
   <Entity name="lvl1_Caixa_estatica_petita39">
-    <Object3D position="34.9567 -2.46012 -1.60717" yaw="50.0" pitch="0.0" roll="0.0" />
+    <Object3D position="34.9567 -2.46012 -1.60717" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Caixa_estatica_petita39" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Caixa_estatica_petita40">
-    <Object3D position="21.129 0.52294 -1.45238" yaw="50.0" pitch="0.0" roll="0.0" />
+    <Object3D position="21.129 0.52294 -1.45238" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Caixa_estatica_petita40" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Caixa_estatica_petita41">
-    <Object3D position="17.2005 0.52294 1.53829" yaw="50.0" pitch="0.0" roll="0.0" />
+    <Object3D position="17.2005 0.52294 1.53829" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Caixa_estatica_petita41" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
@@ -1787,7 +2154,7 @@
     <RenderableObject animated="false" name="lvl1_aguanta_llums30" />
   </Entity>
   <Entity name="lvl1_armeria">
-    <Object3D position="33.6163 -10.0 -23.6384" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="33.6163 -10.0 -23.6384" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_armeria" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
@@ -2268,177 +2635,177 @@
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_lat36">
-    <Object3D position="40.6176 -6.1641 -23.7073" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="40.6176 -6.1641 -23.7073" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_lat36" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Box38">
-    <Object3D position="39.9426 -10.011 -25.8769" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="39.9426 -10.011 -25.8769" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Box38" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Box39">
-    <Object3D position="41.2919 -10.011 -25.8769" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="41.2919 -10.011 -25.8769" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Box39" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_lat37">
-    <Object3D position="40.6176 -9.72252 -23.7073" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="40.6176 -9.72252 -23.7073" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_lat37" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_lat38">
-    <Object3D position="40.6176 -7.92604 -23.7073" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="40.6176 -7.92604 -23.7073" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_lat38" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_stan13">
-    <Object3D position="39.9426 -10.011 -21.5385" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="39.9426 -10.011 -21.5385" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_stan13" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Box40">
-    <Object3D position="41.2919 -10.011 -21.5379" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="41.2919 -10.011 -21.5379" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Box40" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_lat39">
-    <Object3D position="40.6176 -6.1641 -28.377" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="40.6176 -6.1641 -28.377" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_lat39" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Box41">
-    <Object3D position="39.9426 -10.011 -30.5466" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="39.9426 -10.011 -30.5466" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Box41" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Box42">
-    <Object3D position="41.2919 -10.011 -30.5466" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="41.2919 -10.011 -30.5466" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Box42" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_lat40">
-    <Object3D position="40.6176 -9.72252 -28.377" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="40.6176 -9.72252 -28.377" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_lat40" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_lat41">
-    <Object3D position="40.6176 -7.92604 -28.377" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="40.6176 -7.92604 -28.377" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_lat41" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_stan14">
-    <Object3D position="39.9426 -10.011 -26.2082" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="39.9426 -10.011 -26.2082" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_stan14" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Box43">
-    <Object3D position="41.2919 -10.011 -26.2075" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="41.2919 -10.011 -26.2075" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Box43" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_lat45">
-    <Object3D position="23.6442 -6.1641 -37.5272" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="23.6442 -6.1641 -37.5272" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_lat45" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Box47">
-    <Object3D position="22.9693 -10.011 -39.6968" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="22.9693 -10.011 -39.6968" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Box47" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Box48">
-    <Object3D position="24.3186 -10.011 -39.6968" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="24.3186 -10.011 -39.6968" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Box48" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_lat46">
-    <Object3D position="23.6442 -9.72252 -37.5272" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="23.6442 -9.72252 -37.5272" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_lat46" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_lat47">
-    <Object3D position="23.6442 -7.92604 -37.5272" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="23.6442 -7.92604 -37.5272" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_lat47" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_stan16">
-    <Object3D position="22.9693 -10.011 -35.3583" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="22.9693 -10.011 -35.3583" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_stan16" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Box49">
-    <Object3D position="24.3186 -10.011 -35.3577" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="24.3186 -10.011 -35.3577" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Box49" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_lat48">
-    <Object3D position="29.737 -6.1641 -40.7003" yaw="-180.0" pitch="0.0" roll="0.0" />
+    <Object3D position="29.737 -6.1641 -40.7003" yaw="180.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_lat48" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Box50">
-    <Object3D position="31.9066 -10.011 -41.3752" yaw="-180.0" pitch="0.0" roll="0.0" />
+    <Object3D position="31.9066 -10.011 -41.3752" yaw="180.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Box50" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Box51">
-    <Object3D position="31.9066 -10.011 -40.026" yaw="-180.0" pitch="0.0" roll="0.0" />
+    <Object3D position="31.9066 -10.011 -40.026" yaw="180.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Box51" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_lat49">
-    <Object3D position="29.737 -9.72252 -40.7003" yaw="-180.0" pitch="0.0" roll="0.0" />
+    <Object3D position="29.737 -9.72252 -40.7003" yaw="180.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_lat49" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_lat50">
-    <Object3D position="29.737 -7.92604 -40.7003" yaw="-180.0" pitch="0.0" roll="0.0" />
+    <Object3D position="29.737 -7.92604 -40.7003" yaw="180.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_lat50" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_stan17">
-    <Object3D position="27.5681 -10.011 -41.3752" yaw="-180.0" pitch="0.0" roll="0.0" />
+    <Object3D position="27.5681 -10.011 -41.3752" yaw="180.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_stan17" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Box52">
-    <Object3D position="27.5675 -10.011 -40.026" yaw="-180.0" pitch="0.0" roll="0.0" />
+    <Object3D position="27.5675 -10.011 -40.026" yaw="180.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Box52" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_lat51">
-    <Object3D position="25.1156 -6.1641 -40.7003" yaw="-180.0" pitch="0.0" roll="0.0" />
+    <Object3D position="25.1156 -6.1641 -40.7003" yaw="180.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_lat51" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Box53">
-    <Object3D position="27.2852 -10.011 -41.3752" yaw="-180.0" pitch="0.0" roll="0.0" />
+    <Object3D position="27.2852 -10.011 -41.3752" yaw="180.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Box53" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Box54">
-    <Object3D position="27.2852 -10.011 -40.026" yaw="-180.0" pitch="0.0" roll="0.0" />
+    <Object3D position="27.2852 -10.011 -40.026" yaw="180.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Box54" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_lat52">
-    <Object3D position="25.1156 -9.72252 -40.7003" yaw="-180.0" pitch="0.0" roll="0.0" />
+    <Object3D position="25.1156 -9.72252 -40.7003" yaw="180.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_lat52" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_lat53">
-    <Object3D position="25.1156 -7.92604 -40.7003" yaw="-180.0" pitch="0.0" roll="0.0" />
+    <Object3D position="25.1156 -7.92604 -40.7003" yaw="180.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_lat53" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_stan18">
-    <Object3D position="22.9467 -10.011 -41.3752" yaw="-180.0" pitch="0.0" roll="0.0" />
+    <Object3D position="22.9467 -10.011 -41.3752" yaw="180.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_stan18" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_Box55">
-    <Object3D position="22.9461 -10.011 -40.026" yaw="-180.0" pitch="0.0" roll="0.0" />
+    <Object3D position="22.9461 -10.011 -40.026" yaw="180.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Box55" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
@@ -2806,7 +3173,7 @@
     <RenderableObject animated="false" name="lvl1_aguanta_llums09" />
   </Entity>
   <Entity name="lvl1_Porta_planta-1_18">
-    <Object3D position="33.6668 -8.51429 -20.7054" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="33.6668 -8.51429 -20.7054" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Porta_planta-1_18" />
   </Entity>
   <Entity name="lvl1_porta_falsa">
@@ -2900,10 +3267,14 @@
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_key_purple">
-    <Object3D position="28.128 -8.29333 -38.4461" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="28.128 -8.29333 -38.4461" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_key_purple" />
     <Trigger shape="box" size="0.166803 0.862473 0.582664" collision_group="pickup" onEnter="get_key_purple" />
     <Rotative yaw="0.5" />
+  </Entity>
+  <Entity name="lvl1_visagra08">
+    <Object3D position="33.6646 -9.99438 -20.7082" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_visagra08" />
   </Entity>
   <Entity name="lvl1_Sala_central">
     <Object3D position="0.0 0.0 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -2931,15 +3302,15 @@
     <RenderableObject animated="false" name="lvl1_Porta_planta-1_13" />
   </Entity>
   <Entity name="lvl1_Porta_planta-1_14">
-    <Object3D position="0.0 0.0 0.0" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="0.0 0.0 0.0" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Porta_planta-1_14" />
   </Entity>
   <Entity name="lvl1_Porta_planta-1_15">
-    <Object3D position="0.0 0.0 0.0" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="0.0 0.0 0.0" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Porta_planta-1_15" />
   </Entity>
   <Entity name="lvl1_Porta_planta-1_16">
-    <Object3D position="0.0 0.0 0.0" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="0.0 0.0 0.0" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_Porta_planta-1_16" />
   </Entity>
   <Entity name="lvl1_terra_elevat">
@@ -2948,7 +3319,7 @@
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_elice">
-    <Object3D position="0.0 5.17398 0.0" yaw="0.000160287" pitch="0.0" roll="0.0" />
+    <Object3D position="0.0 5.17398 0.0" yaw="-0.000160287" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_elice" />
     <PhysXMesh density="0" collision_group="escenari" />
     <Rotative yaw="1.5" />
@@ -2959,259 +3330,97 @@
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_porta09">
-    <Object3D position="5.22305 1.30378 -5.22712" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="5.22305 1.30378 -5.22712" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_porta09" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_carcasa01">
-    <Object3D position="-7.54328 1.51153 -0.0362644" yaw="180.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-7.54328 1.51153 -0.0362644" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_carcasa01" />
   </Entity>
   <Entity name="lvl1_carcasa02">
-    <Object3D position="0.0419369 1.51153 -7.54283" yaw="-90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="0.0419369 1.51153 -7.54283" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_carcasa02" />
   </Entity>
   <Entity name="lvl1_carcasa03">
-    <Object3D position="0.0344453 1.51153 7.54377" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="0.0344453 1.51153 7.54377" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_carcasa03" />
   </Entity>
   <Entity name="lvl1_carcasa04">
-    <Object3D position="-5.33674 1.51153 5.33188" yaw="135.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-5.33674 1.51153 5.33188" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_carcasa04" />
   </Entity>
   <Entity name="lvl1_carcasa05">
-    <Object3D position="5.31478 1.51153 -5.34791" yaw="-45.0001" pitch="0.0" roll="0.0" />
+    <Object3D position="5.31478 1.51153 -5.34791" yaw="-2.00358e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_carcasa05" />
   </Entity>
   <Entity name="lvl1_carcasa06">
-    <Object3D position="-5.34798 1.51153 -5.3125" yaw="-135.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-5.34798 1.51153 -5.3125" yaw="-2.00358e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_carcasa06" />
   </Entity>
   <Entity name="lvl1_carcasa07">
-    <Object3D position="5.3122 1.51153 5.35638" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="5.3122 1.51153 5.35638" yaw="-2.00358e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_carcasa07" />
   </Entity>
   <Entity name="lvl1_carcasa">
     <Object3D position="7.54248 1.51153 -0.0287724" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_carcasa" />
   </Entity>
-  <Entity name="lvl1_grenade">
-    <Object3D position="-27.3665 1.47331 0.143002" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="granada" />
-    <Trigger shape="box" size="1.05052 0.399226 1.05052" collision_group="pickup" onEnter="activate_grenades" />
-    <Rotative yaw="0.5" />
+  <Entity name="lvl1_llum_emergencia_central01">
+    <Object3D position="0.0382767 3.38817 7.31798" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_llum_emergencia_central01" />
   </Entity>
-  <Entity name="lvl2_lab_tub_Gros">
-    <Object3D position="-4.36474 3.66629 10.162" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl2_lab_tub_Gros" />
+  <Entity name="lvl1_llum_emergencia_central02">
+    <Object3D position="5.15525 3.38817 5.19402" yaw="-2.00358e-005" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_llum_emergencia_central02" />
   </Entity>
-  <Entity name="tub_gros">
-    <Object3D position="-6.407 2.5132 11.5058" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_gros" />
-  </Entity>
-  <Entity name="tub_gros01">
-    <Object3D position="-8.01759 2.5132 3.20359" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_gros01" />
-  </Entity>
-  <Entity name="tub_gros02">
-    <Object3D position="-3.0768 2.5132 8.22775" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_gros02" />
-  </Entity>
-  <Entity name="tub_rodo">
-    <Object3D position="-8.94648 3.3259 5.60317" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_rodo" />
-  </Entity>
-  <Entity name="lvl2_lab_tub_Gros03">
-    <Object3D position="-10.1397 3.65454 4.53416" yaw="-45.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl2_lab_tub_Gros03" />
-  </Entity>
-  <Entity name="tub_rodo01">
-    <Object3D position="-5.58455 3.49985 9.40317" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_rodo01" />
-  </Entity>
-  <Entity name="tub_rodo02">
-    <Object3D position="-5.45997 3.34149 9.27859" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_rodo02" />
-  </Entity>
-  <Entity name="tub_rodo03">
-    <Object3D position="-4.71092 3.49985 8.52954" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_rodo03" />
-  </Entity>
-  <Entity name="tub_rodo04">
-    <Object3D position="-4.95459 3.2345 8.77321" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_rodo04" />
-  </Entity>
-  <Entity name="tub_rodo05">
-    <Object3D position="-5.07796 3.42133 8.89658" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_rodo05" />
-  </Entity>
-  <Entity name="tub_rodo06">
-    <Object3D position="-6.46964 3.42133 10.2883" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_rodo06" />
-  </Entity>
-  <Entity name="tub_rodo07">
-    <Object3D position="-6.79406 3.49985 10.6127" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_rodo07" />
-  </Entity>
-  <Entity name="tub_rodo08">
-    <Object3D position="-6.08452 3.34149 9.90314" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_rodo08" />
-  </Entity>
-  <Entity name="tub_rodo09">
-    <Object3D position="-6.56183 3.42133 10.3804" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_rodo09" />
-  </Entity>
-  <Entity name="tub_rodo10">
-    <Object3D position="-4.34254 3.49985 8.16116" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_rodo10" />
-  </Entity>
-  <Entity name="tub_rodo11">
-    <Object3D position="-5.81391 1.31152 11.1787" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_rodo11" />
-  </Entity>
-  <Entity name="tub_rodo12">
-    <Object3D position="-7.08268 1.31152 11.1605" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_rodo12" />
-  </Entity>
-  <Entity name="tub_rodo13">
-    <Object3D position="-11.3152 1.31152 7.16317" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_rodo13" />
-  </Entity>
-  <Entity name="tub_rodo14">
-    <Object3D position="-8.82757 1.31152 3.46051" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_rodo14" />
-  </Entity>
-  <Entity name="tub_rodo15">
-    <Object3D position="-7.48216 1.31152 3.37582" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_rodo15" />
-  </Entity>
-  <Entity name="tub_rodo16">
-    <Object3D position="-10.129 2.8758 5.103" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_rodo16" />
-  </Entity>
-  <Entity name="tub_rodo17">
-    <Object3D position="-4.91602 2.89518 9.78454" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_rodo17" />
-  </Entity>
-  <Entity name="tubs6">
-    <Object3D position="-6.51422 3.76524 8.04476" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tubs6" />
-  </Entity>
-  <Entity name="tubs07">
-    <Object3D position="-8.3594 3.8782 6.19958" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tubs07" />
-  </Entity>
-  <Entity name="tubs08">
-    <Object3D position="-5.46127 3.8782 9.09771" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tubs08" />
-  </Entity>
-  <Entity name="tubs09">
-    <Object3D position="-9.49325 3.76524 5.06573" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tubs09" />
-  </Entity>
-  <Entity name="tubs10">
-    <Object3D position="-5.66577 3.76524 8.89321" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tubs10" />
-  </Entity>
-  <Entity name="tub_rodo18">
-    <Object3D position="-5.86431 3.5148 8.68534" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_rodo18" />
-  </Entity>
-  <Entity name="roda">
-    <Object3D position="-6.46206 1.23845 11.0102" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="roda" />
-    <PhysXMesh density="0" collision_group="escenari" />
-  </Entity>
-  <Entity name="roda01">
-    <Object3D position="-3.567 1.23845 7.71096" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="roda01" />
-    <PhysXMesh density="0" collision_group="escenari" />
-  </Entity>
-  <Entity name="roda02">
-    <Object3D position="-8.14252 0.614057 3.51779" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="roda02" />
-    <PhysXMesh density="0" collision_group="escenari" />
-  </Entity>
-  <Entity name="roda05">
-    <Object3D position="-8.14252 3.35893 3.51779" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="roda05" />
-    <PhysXMesh density="0" collision_group="escenari" />
-  </Entity>
-  <Entity name="lvl2_lab_tub_Gros04">
-    <Object3D position="-11.5152 1.04761 5.98491" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl2_lab_tub_Gros04" />
-  </Entity>
-  <Entity name="tub_rodo19">
-    <Object3D position="-11.907 1.31152 6.55584" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="tub_rodo19" />
-  </Entity>
-  <Entity name="visagra01">
-    <Object3D position="-0.00124884 0.0 7.36992" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="visagra01" />
-  </Entity>
-  <Entity name="visagra02">
-    <Object3D position="-0.00124884 0.0 -7.40121" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="visagra02" />
-  </Entity>
-  <Entity name="visagra03">
-    <Object3D position="-7.38374 0.0 -0.0833267" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="visagra03" />
-  </Entity>
-  <Entity name="visagra04">
-    <Object3D position="7.36695 0.0 -0.083326" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="visagra04" />
-  </Entity>
-  <Entity name="visagra05">
-    <Object3D position="5.25121 0.0 5.21667" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="visagra05" />
-  </Entity>
-  <Entity name="visagra00">
-    <Object3D position="-5.24502 0.0 5.21747" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="visagra00" />
-  </Entity>
-  <Entity name="visagra06">
-    <Object3D position="19.4994 0.0 19.2622" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="visagra06" />
-  </Entity>
-  <Entity name="visagra07">
-    <Object3D position="-27.4114 0.0 -0.0833276" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="visagra07" />
-  </Entity>
-  <Entity name="visagra08">
-    <Object3D position="33.6646 -9.99438 -20.7082" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="visagra08" />
-  </Entity>
-  <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum01">
+  <Entity name="lvl1_llum_emergencia_central03">
     <Object3D position="7.3167 3.38817 -0.0326042" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum01" />
+    <RenderableObject animated="false" name="lvl1_llum_emergencia_central03" />
   </Entity>
-  <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum02">
-    <Object3D position="-7.3175 3.38817 -0.0324326" yaw="180.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum02" />
+  <Entity name="lvl1_llum_emergencia_central04">
+    <Object3D position="5.15242 3.38817 -5.19097" yaw="-2.00358e-005" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_llum_emergencia_central04" />
   </Entity>
-  <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum03">
-    <Object3D position="0.0381052 3.38817 -7.31705" yaw="-90.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum03" />
+  <Entity name="lvl1_llum_emergencia_central05">
+    <Object3D position="0.038105 3.38817 -7.31705" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_llum_emergencia_central05" />
   </Entity>
-  <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum04">
-    <Object3D position="0.0382769 3.38817 7.31798" yaw="90.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum04" />
+  <Entity name="lvl1_llum_emergencia_central06">
+    <Object3D position="-5.19104 3.38817 -5.15014" yaw="-2.00358e-005" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_llum_emergencia_central06" />
   </Entity>
-  <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum05">
-    <Object3D position="-5.17438 3.38817 5.17493" yaw="135.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum05" />
+  <Entity name="lvl1_llum_emergencia_central07">
+    <Object3D position="-7.3175 3.38817 -0.0324326" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_llum_emergencia_central07" />
   </Entity>
-  <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum06">
-    <Object3D position="5.15242 3.38817 -5.19097" yaw="-45.0001" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum06" />
+  <Entity name="lvl1_llum_emergencia_central00">
+    <Object3D position="-5.17438 3.38817 5.17493" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_llum_emergencia_central00" />
   </Entity>
-  <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum07">
-    <Object3D position="-5.19104 3.38817 -5.15014" yaw="-135.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum07" />
+  <Entity name="lvl1_visagra04">
+    <Object3D position="7.36695 0.0 -0.0833259" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_visagra04" />
   </Entity>
-  <Entity name="lvl2_lab_lab_Llum_emergengia_autoilum08">
-    <Object3D position="5.15525 3.38817 5.19402" yaw="45.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="lvl2_lab_lab_Llum_emergengia_autoilum08" />
+  <Entity name="lvl1_visagra03">
+    <Object3D position="-7.38374 0.0 -0.0833268" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_visagra03" />
+  </Entity>
+  <Entity name="lvl1_visagra02">
+    <Object3D position="-0.00124884 0.0 -7.40121" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_visagra02" />
+  </Entity>
+  <Entity name="lvl1_visagra01">
+    <Object3D position="-0.00124884 0.0 7.36992" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_visagra01" />
+  </Entity>
+  <Entity name="lvl1_visagra05">
+    <Object3D position="5.25121 0.0 5.21667" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_visagra05" />
+  </Entity>
+  <Entity name="lvl1_visagra00">
+    <Object3D position="-5.24502 0.0 5.21747" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="lvl1_visagra00" />
   </Entity>
   <Entity name="lvl1_door04">
     <Object3D position="7.3721 1.25049 0.010658" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -3219,17 +3428,17 @@
     <Door open="false" block="true" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" />
   </Entity>
   <Entity name="lvl1_door01">
-    <Object3D position="5.23365 1.25049 5.18079" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="5.23365 1.25049 5.18079" yaw="-45.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta1" />
     <Door open="false" block="true" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" />
   </Entity>
   <Entity name="lvl1_door_final">
-    <Object3D position="0.0924268 1.25049 7.32848" yaw="-90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="0.0924268 1.25049 7.32848" yaw="90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta1" />
     <Door open="false" block="true" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" />
   </Entity>
   <Entity name="lvl1_door_claus">
-    <Object3D position="-5.25321 1.25049 5.19391" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-5.25321 1.25049 5.19391" yaw="45.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta1" />
     <Door open="false" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" />
   </Entity>
@@ -3243,15 +3452,15 @@
     <Trigger shape="box" size="4.05259 3.57803 6.05252" collision_group="trigger" onEnter="open_door" onExit="close_door" />
   </Entity>
   <Entity name="lvl1_trigger_porta01">
-    <Object3D position="5.59769 1.66002 5.52761" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="5.59769 1.66002 5.52761" yaw="-45.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="4.05259 3.57803 6.05252" collision_group="trigger" onEnter="open_door" onExit="close_door" />
   </Entity>
   <Entity name="lvl1_trigger_porta_final">
-    <Object3D position="0.0669897 1.66002 8.22876" yaw="-90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="0.0669897 1.66002 8.22876" yaw="90.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="4.05259 3.57803 6.05252" collision_group="trigger" onEnter="open_door" onExit="close_door" />
   </Entity>
   <Entity name="lvl1_trigger_porta_claus">
-    <Object3D position="-6.58527 1.66002 6.64976" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-6.58527 1.66002 6.64976" yaw="45.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="7.43081 3.57803 6.444" collision_group="trigger" onEnter="open_door" onExit="close_door" />
   </Entity>
   <Entity name="lvl1_trigger_porta03">
@@ -3259,12 +3468,12 @@
     <Trigger shape="box" size="4.05259 3.57803 6.05252" collision_group="trigger" onEnter="open_door" onExit="close_door" />
   </Entity>
   <Entity name="lvl1_door_inici">
-    <Object3D position="-0.00534996 1.25049 -7.38634" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-0.00534996 1.25049 -7.38634" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta1" />
     <Door open="false" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" />
   </Entity>
   <Entity name="lvl1_trigger_porta_inici">
-    <Object3D position="-0.0239495 1.66002 -7.98522" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-0.0239495 1.66002 -7.98522" yaw="-90.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="4.05259 3.57803 6.05252" collision_group="trigger" onEnter="open_door" onExit="close_door" />
   </Entity>
   <Entity name="lvl1_low_cover">
@@ -3280,19 +3489,19 @@
     <LowCover shape="box" size="0.989871 0.973235 0.989871" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="lvl1_low_cover03">
-    <Object3D position="10.048 0.534512 8.63287" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="10.048 0.534512 8.63287" yaw="45.0" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="2.52574 0.973235 0.989871" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="lvl1_low_cover04">
-    <Object3D position="14.2153 0.534512 15.9192" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="14.2153 0.534512 15.9192" yaw="45.0" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="2.01369 0.973235 0.989871" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="lvl1_low_cover05">
-    <Object3D position="25.8934 0.534512 24.9563" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="25.8934 0.534512 24.9563" yaw="45.0" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="0.989871 0.973235 2.51655" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="lvl1_low_cover06">
-    <Object3D position="30.8763 0.534512 31.0141" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="30.8763 0.534512 31.0141" yaw="45.0" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="0.989871 0.973235 2.54511" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="lvl1_low_cover07">
@@ -3304,184 +3513,184 @@
     <LowCover shape="box" size="1.16206 0.973235 2.17989" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="lvl1_low_cover09">
-    <Object3D position="21.9574 0.534512 34.4087" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="21.9574 0.534512 34.4087" yaw="45.0" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="0.934295 0.973235 5.00761" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="lvl1_low_cover10">
-    <Object3D position="13.8833 0.534512 45.171" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="13.8833 0.534512 45.171" yaw="45.0" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="0.351282 0.973235 8.58783" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="lvl1_low_cover11">
-    <Object3D position="19.4207 0.534512 45.4775" yaw="-135.0" pitch="0.0" roll="0.0" />
+    <Object3D position="19.4207 0.534512 45.4775" yaw="135.0" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="0.323126 0.973235 7.03086" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="lvl1_low_cover12">
-    <Object3D position="12.4965 0.534512 40.6969" yaw="-135.0" pitch="0.0" roll="0.0" />
+    <Object3D position="12.4965 0.534512 40.6969" yaw="135.0" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="0.298157 0.973235 4.00651" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="lvl1_low_cover13">
-    <Object3D position="15.6475 0.534512 43.4712" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="15.6475 0.534512 43.4712" yaw="45.0" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="0.989871 0.973235 5.02991" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box01">
-    <Object3D position="26.1693 0.488159 22.8991" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="26.1693 0.488159 22.8991" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.26295 0.58866 1.07782" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box40">
-    <Object3D position="30.3185 0.488159 28.1653" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="30.3185 0.488159 28.1653" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.26295 0.58866 1.07782" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box41">
-    <Object3D position="31.5325 0.488159 29.39" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="31.5325 0.488159 29.39" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.26295 0.58866 1.07782" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box42">
-    <Object3D position="34.4394 0.488159 26.4686" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="34.4394 0.488159 26.4686" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.26295 0.58866 1.07782" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box43">
-    <Object3D position="33.1999 0.488159 25.2837" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="33.1999 0.488159 25.2837" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.26295 0.58866 1.07782" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box44">
-    <Object3D position="32.8943 0.488159 34.5658" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="32.8943 0.488159 34.5658" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.26295 0.58866 1.07782" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box45">
-    <Object3D position="35.9738 0.488159 31.4683" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="35.9738 0.488159 31.4683" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.26295 0.58866 1.07782" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box46">
-    <Object3D position="39.177 0.488159 28.2786" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="39.177 0.488159 28.2786" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.26295 0.58866 1.07782" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box47">
-    <Object3D position="29.3729 0.488159 17.2257" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="29.3729 0.488159 17.2257" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.26295 0.58866 1.07782" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box48">
-    <Object3D position="26.5337 0.488159 20.0907" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="26.5337 0.488159 20.0907" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.26295 0.58866 1.07782" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box49">
-    <Object3D position="23.8432 0.488159 22.772" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="23.8432 0.488159 22.772" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.26295 0.58866 1.07782" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box50">
-    <Object3D position="17.9808 0.488159 21.5655" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="17.9808 0.488159 21.5655" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.26295 0.58866 1.07782" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box51">
-    <Object3D position="22.4531 0.488159 17.0685" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="22.4531 0.488159 17.0685" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.26295 0.58866 1.07782" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box52">
-    <Object3D position="25.6743 0.488159 13.8885" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="25.6743 0.488159 13.8885" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.26295 0.58866 1.07782" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box53">
-    <Object3D position="22.6978 0.488159 27.5691" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="22.6978 0.488159 27.5691" yaw="-45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.26295 0.58866 1.07782" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box54">
-    <Object3D position="25.5914 0.488159 30.4626" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="25.5914 0.488159 30.4626" yaw="-45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.26295 0.58866 1.07782" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box55">
-    <Object3D position="19.8048 0.488159 24.6863" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="19.8048 0.488159 24.6863" yaw="-45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.26295 0.58866 1.07782" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box56">
-    <Object3D position="32.994 0.488159 17.8588" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="32.994 0.488159 17.8588" yaw="-45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.26295 0.58866 1.07782" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box57">
-    <Object3D position="36.033 0.488159 20.8834" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="36.033 0.488159 20.8834" yaw="-45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.26295 0.58866 1.07782" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box58">
-    <Object3D position="39.3118 0.488159 24.1835" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="39.3118 0.488159 24.1835" yaw="-45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.26295 0.58866 1.07782" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box59">
-    <Object3D position="27.0921 0.488159 21.4686" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="27.0921 0.488159 21.4686" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="0.781263 0.58866 0.503842" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box60">
-    <Object3D position="25.2611 0.488159 21.8486" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="25.2611 0.488159 21.8486" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="0.781263 0.58866 0.503842" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box61">
-    <Object3D position="23.4905 0.488159 15.5557" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="23.4905 0.488159 15.5557" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="0.781263 0.58866 0.503842" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box62">
-    <Object3D position="26.711 0.488159 12.3286" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="26.711 0.488159 12.3286" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="0.781263 0.58866 0.503842" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box63">
-    <Object3D position="30.7304 0.488159 16.3451" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="30.7304 0.488159 16.3451" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="0.781263 0.58866 0.503842" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box64">
-    <Object3D position="28.003 0.488159 19.0979" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="28.003 0.488159 19.0979" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="0.781263 0.58866 0.503842" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box65">
-    <Object3D position="34.6391 0.488159 24.2917" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="34.6391 0.488159 24.2917" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="0.781263 0.58866 0.503842" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box66">
-    <Object3D position="35.3285 0.488159 25.0959" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="35.3285 0.488159 25.0959" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="0.781263 0.58866 0.503842" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box67">
-    <Object3D position="32.5008 0.488159 27.9107" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="32.5008 0.488159 27.9107" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="0.781263 0.58866 0.503842" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box68">
-    <Object3D position="31.761 0.488159 27.1787" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="31.761 0.488159 27.1787" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="0.781263 0.58866 0.503842" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box69">
-    <Object3D position="34.9423 0.488159 32.9897" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="34.9423 0.488159 32.9897" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="0.781263 0.58866 0.503842" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box70">
-    <Object3D position="31.8851 0.488159 36.0538" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="31.8851 0.488159 36.0538" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="0.781263 0.58866 0.503842" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box71">
-    <Object3D position="38.2116 0.488159 29.734" yaw="-45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="38.2116 0.488159 29.734" yaw="45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="0.781263 0.58866 0.503842" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box72">
-    <Object3D position="24.1718 0.488159 29.5377" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="24.1718 0.488159 29.5377" yaw="-45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="0.781263 0.58866 0.503842" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box73">
-    <Object3D position="21.2377 0.488159 26.6044" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="21.2377 0.488159 26.6044" yaw="-45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="0.781263 0.58866 0.503842" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box74">
-    <Object3D position="18.217 0.488159 23.5654" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="18.217 0.488159 23.5654" yaw="-45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="0.781263 0.58866 0.503842" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box75">
-    <Object3D position="34.3644 0.488159 18.7953" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="34.3644 0.488159 18.7953" yaw="-45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="0.781263 0.58866 0.503842" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box76">
-    <Object3D position="37.4884 0.488159 21.8475" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="37.4884 0.488159 21.8475" yaw="-45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="0.781263 0.58866 0.503842" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="lvl1_physx_dummy_box77">
-    <Object3D position="40.7404 0.488159 25.1032" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Object3D position="40.7404 0.488159 25.1032" yaw="-45.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="0.781263 0.58866 0.503842" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="Change_Level_Trigger">
-    <Object3D position="-0.0492312 1.67603 22.1723" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Trigger shape="box" size="4.88198 4.70728 1.25509" collision_group="trigger" onEnter="change_level_level_1" />
+    <Object3D position="-0.0492312 10.8281 23.9834" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="5.01586 2.79679 2.61529" collision_group="trigger" onEnter="change_level_level_1" />
   </Entity>
   <Entity name="lvl1_node_cobertura">
     <Object3D position="-11.532 0.581445 0.181089" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -3608,15 +3817,15 @@
     <Trigger shape="box" size="1.70426 4.88858 3.29635" collision_group="trigger" onEnter="lvl1_trigger_magatzem02" />
   </Entity>
   <Entity name="lvl1_trigger_pass_mag">
-    <Object3D position="33.6761 -2.17017 -6.10439" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="33.6761 -2.17017 -6.10439" yaw="-90.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="1.70426 4.88858 5.11914" collision_group="trigger" onEnter="lvl1_trigger_pass_mag" />
   </Entity>
   <Entity name="lvl1_trigger_llits">
-    <Object3D position="36.0105 2.47924 28.2255" yaw="135.0" pitch="0.0" roll="0.0" />
+    <Object3D position="36.0105 2.47924 28.2255" yaw="-135.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="1.70425 4.88857 5.70447" collision_group="trigger" onEnter="lvl1_trigger_llits" />
   </Entity>
   <Entity name="lvl1_trigger_pas_llits">
-    <Object3D position="26.5163 2.47924 27.295" yaw="135.0" pitch="0.0" roll="0.0" />
+    <Object3D position="26.5163 2.47924 27.295" yaw="-135.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="1.70425 4.88857 7.73034" collision_group="trigger" onEnter="lvl1_trigger_pas_llits" />
   </Entity>
   <Entity name="lvl1_trigger_magatzem01">
@@ -3648,21 +3857,41 @@
     <NavNode maxDistance="5" />
   </Entity>
   <Entity name="lvl1_trigger_green_key">
-    <Object3D position="-0.0239495 1.66002 -11.8524" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-0.0239495 1.66002 -11.8524" yaw="-90.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="1.73412 3.57803 6.05252" collision_group="trigger" onEnter="activate_green_key" />
   </Entity>
   <Entity name="lvl1_node22">
     <Object3D position="29.5241 0.804861 32.5522" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode maxDistance="5" />
   </Entity>
-  <Player position="-0.315653 1.08272 -20.7719" yaw="90.0" force_active="false" grenade_active="false" />
+  <Entity name="Init_Level_Trigger">
+    <Object3D position="-0.0492312 -1.31314 -23.9823" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="5.01586 2.79679 2.61529" collision_group="trigger" onExit="lvl1_stop_elevator" />
+  </Entity>
+  <Entity name="lvl1_activate_elevator">
+    <Object3D position="-0.0492312 1.41611 24.8548" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="5.01586 2.79679 0.907294" collision_group="trigger" onEnter="lvl1_activate_elevator" />
+  </Entity>
+  <Entity name="lvl1_elevator_camera_init">
+    <Object3D position="2.38588 2.82159 -25.2281" yaw="-50.9592" pitch="0.0" roll="-55.118" />
+    <CynematicCamera target="0.150562 0.815232 -23.4153" fov="65.4705" near="1.0" far="1000.0" />
+  </Entity>
+  <Entity name="lvl1_elevator_camera_exit">
+    <Object3D position="2.3968 11.9339 25.2446" yaw="-114.135" pitch="8.53774e-007" roll="-31.0739" />
+    <CynematicCamera target="-0.299756 7.03052 24.0364" fov="65.4705" near="1.0" far="1000.0" />
+  </Entity>
+  <Entity name="lvl1_physXBox_elevator">
+    <Object3D position="-0.0492312 -0.0797765 -23.9823" yaw="0.0" pitch="0.0" roll="0.0" />
+    <PhysXBox fromRenderableObject="false" shape="box" size="5.01586 0.185986 2.61529" midpoint="0 0 0" density="0" collision_group="escenari" />
+  </Entity>
+  <Player position="-0.315653 -5.03087 -23.9926" yaw="-90.0" force_active="false" grenade_active="false" />
   <Miner name="lvl1_miner_green" position="0.0876412 1.6 4.76067" yaw="0.0" active="false" on_death="drop_key" />
   <Militar name="lvl1_militar00" position="-4.12491 1.6 1.10068" yaw="0.0" active="false" destiny="lvl1_node_cobertura" />
   <Militar name="lvl1_militar01" position="-1.84952 1.6 -1.15103" yaw="0.0" active="false" destiny="lvl1_node_cobertura01" />
   <Militar name="lvl1_militar02" position="34.2674 -0.412989 1.20565" yaw="0.0" active="false" destiny="lvl1_node_cobertura04" />
   <Militar name="lvl1_militar03" position="11.9294 1.6 1.55775" yaw="0.0" active="false" destiny="lvl1_node_cobertura02" />
   <Militar name="lvl1_militar04" position="14.1854 1.6 -1.38754" yaw="0.0" active="false" destiny="lvl1_node_cobertura03" />
-  <Militar name="lvl1_militar05" position="32.1479 -0.452075 1.39366" yaw="0.0" active="false" destiny="lvl1_node_cobertura04" />
+  <Militar name="lvl1_militar05" position="32.1479 -0.452075 1.39366" yaw="0.0" active="false" />
   <Militar name="lvl1_militar06" position="35.0941 -6.10473 -15.1002" yaw="0.0" active="false" />
   <Militar name="lvl1_militar07" position="23.544 -7.29258 -28.7595" yaw="0.0" active="false" />
   <Militar name="lvl1_militar08" position="37.915 -7.29258 -28.1546" yaw="0.0" active="false" />

@@ -169,8 +169,8 @@
 	<light type="omni" name="lvl1_Omni90" pos="27.1927 -5.47877 -23.6247" color="0.294118 0.258824 0.0509804" att_start_range="0.403802" att_end_range="8.18882" render_shadows="false" />
 	<light type="omni" name="lvl1_Omni91" pos="32.2636 -5.47877 -28.6161" color="0.294118 0.258824 0.0509804" att_start_range="0.403802" att_end_range="8.18882" render_shadows="false" />
 	<light type="omni" name="lvl1_Omni92" pos="27.2487 -5.47877 -28.6161" color="0.294118 0.258824 0.0509804" att_start_range="0.403802" att_end_range="8.18882" render_shadows="false" />
-	<light type="spot" direction="3.46089 -2.05103 2.75233" angle="14.2" fall_off="48.1" name="Spot02" pos="-7.23139 3.75024 7.40959" color="0.278431 0.560784 0.294118" att_start_range="0.0" att_end_range="4.91381" render_shadows="false" />
-	<light type="spot" direction="-3.07541 -2.05103 -3.20977" angle="14.2" fall_off="48.1" name="Spot03" pos="-7.23139 3.75024 7.40959" color="0.278431 0.560784 0.294118" att_start_range="0.0" att_end_range="4.91381" render_shadows="false" />
+	<light type="spot" direction="2.53536 -1.57031 2.26747" angle="14.2" fall_off="48.1" name="Spot02" pos="-7.23139 3.75024 7.40959" color="0.278431 0.560784 0.294118" att_start_range="0.0" att_end_range="5.8904" render_shadows="false" />
+	<light type="spot" direction="-2.34294 -1.31128 -2.62226" angle="14.2" fall_off="48.1" name="Spot03" pos="-7.23139 3.75024 7.40959" color="0.278431 0.560784 0.294118" att_start_range="0.0" att_end_range="5.7511" render_shadows="false" />
 	<light type="omni" name="lvl1_Omni93" pos="9.2614 1.66052 7.93905" color="0.345098 0.596078 0.631373" att_start_range="0.0" att_end_range="3.147" render_shadows="false" />
 	<light type="omni" name="lvl1_Omni94" pos="7.9845 1.66052 9.21881" color="0.345098 0.596078 0.631373" att_start_range="0.0" att_end_range="3.147" render_shadows="false" />
 	<light type="omni" name="lvl1_Omni95" pos="15.5502 1.66052 16.7528" color="0.345098 0.596078 0.631373" att_start_range="0.0" att_end_range="3.147" render_shadows="false" />
@@ -189,4 +189,25 @@
 	<light type="omni" name="lvl1_Omni115" pos="21.6474 5.12401 42.1" color="0.423529 0.439216 0.443137" att_start_range="0.403802" att_end_range="3.42838" render_shadows="false" />
 	<light type="omni" name="lvl1_Omni116" pos="0.0170488 3.08386 -6.37255" color="0.0941177 0.768628 0.0941177" att_start_range="0.0" att_end_range="1.20307" render_shadows="false" />
 	<light type="omni" name="lvl1_Omni117" pos="-4.62122 3.08386 4.59598" color="1.0 0.117647 0.117647" att_start_range="0.0" att_end_range="1.20307" render_shadows="false" />
+	<light type="spot" direction="0.0 -2.83179 0.0" angle="16.6" fall_off="54.2" name="lvl2_lab_Spot07" pos="-30.9922 2.1436 0.115969" color="0.596078 0.737255 0.713726" att_start_range="0.3283" att_end_range="6.57594" render_shadows="false" />
+	<light type="spot" direction="0.0 -2.83124 0.0" angle="10.0" fall_off="92.9" name="lvl2_lab_Spot08" pos="-30.9922 2.1436 0.115969" color="0.411765 0.509804 0.498039" att_start_range="0.403802" att_end_range="6.99673" render_shadows="false" />
+	<light type="omni" name="lvl1_Omni118" pos="-30.0302 2.40713 -2.99919" color="0.0392157 0.34902 0.0392157" att_start_range="0.0" att_end_range="2.99566" render_shadows="false" />
+	<light type="omni" name="lvl1_Omni119" pos="-30.0302 2.40713 3.15176" color="0.0392157 0.34902 0.0392157" att_start_range="0.0" att_end_range="2.99566" render_shadows="false" />
+	<light type="omni" name="lvl1_Omni120" pos="-32.2221 2.40713 -0.108576" color="0.0392157 0.34902 0.0392157" att_start_range="0.0" att_end_range="2.99566" render_shadows="false" />
+	<light type="omni" name="lvl1_Omni121" pos="-32.2975 2.72168 -0.633059" color="0.0784314 0.65098 0.0784314" att_start_range="0.0" att_end_range="0.697783" render_shadows="false" />
+	<light type="omni" name="lvl1_Omni122" pos="-32.2975 1.48584 1.31883" color="0.0784314 0.65098 0.0784314" att_start_range="0.0" att_end_range="0.697783" render_shadows="false" />
+	<light type="omni" name="lvl1_Omni123" pos="-30.5546 0.911224 3.28362" color="0.698039 0.0784314 0.690196" att_start_range="0.0" att_end_range="0.697783" render_shadows="false" />
+	<light type="omni" name="lvl1_Omni124" pos="-31.7498 1.53415 -3.13853" color="0.698039 0.0784314 0.690196" att_start_range="0.0" att_end_range="0.697783" render_shadows="false" />
+	<light type="omni" name="lvl1_Omni125" pos="-31.6045 2.72168 3.33025" color="0.0784314 0.65098 0.0784314" att_start_range="0.0" att_end_range="0.697783" render_shadows="false" />
+	<light type="omni" name="lvl1_Omni126" pos="-28.6682 0.860596 3.33025" color="0.0784314 0.65098 0.0784314" att_start_range="0.0" att_end_range="0.697783" render_shadows="false" />
+	<light type="omni" name="lvl1_Omni127" pos="-28.8635 2.72168 -3.22589" color="0.0784314 0.65098 0.0784314" att_start_range="0.0" att_end_range="0.697783" render_shadows="false" />
+	<light type="omni" name="lvl1_Omni128" pos="-28.8635 0.927734 -3.22589" color="0.0784314 0.65098 0.0784314" att_start_range="0.0" att_end_range="0.697783" render_shadows="false" />
+	<light type="omni" name="lvl1_Omni129" pos="-30.7502 1.13336 -0.979449" color="0.729412 0.705882 0.0784314" att_start_range="0.0" att_end_range="0.697783" render_shadows="false" />
+	<light type="omni" name="lvl1_Omni130" pos="-0.0605278 1.28603 -24.5109" color="0.0509804 0.435294 0.0509804" att_start_range="0.0" att_end_range="3.6547" render_shadows="false" />
+	<light type="omni" name="lvl1_Omni131" pos="-0.0605278 3.21875 24.7116" color="0.0509804 0.443137 0.0509804" att_start_range="0.0" att_end_range="3.6547" render_shadows="false" />
+	<light type="omni" name="lvl1_Omni132" pos="-29.8725 1.86365 -3.22589" color="0.733333 0.192157 0.192157" att_start_range="0.0" att_end_range="0.697783" render_shadows="false" />
+	<light type="omni" name="lvl1_Omni133" pos="-32.3485 1.86365 -1.67206" color="0.733333 0.192157 0.192157" att_start_range="0.0" att_end_range="0.697783" render_shadows="false" />
+	<light type="omni" name="lvl1_Omni134" pos="-29.5758 1.86365 3.30354" color="0.733333 0.192157 0.192157" att_start_range="0.0" att_end_range="0.697783" render_shadows="false" />
+	<light type="spot" direction="0.0392036 -3.14529 7.80133" angle="17.9" fall_off="31.8" name="Spot04" pos="-30.2467 4.59738 -3.75258" color="0.192157 0.501961 0.0392157" att_start_range="0.0" att_end_range="10.3278" render_shadows="false" />
+	<light type="spot" direction="-5.85947 -3.14529 -0.217102" angle="17.9" fall_off="31.8" name="Spot05" pos="-27.234 4.59738 -0.122012" color="0.192157 0.501961 0.0392157" att_start_range="0.0" att_end_range="10.3278" render_shadows="false" />
 </lights>

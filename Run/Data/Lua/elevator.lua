@@ -5,7 +5,8 @@ Elevator_Constants = {}
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
 
-Elevator_Constants["Speed"]  = 0.5
+Elevator_Constants["Speed"]           = 0.5
+Elevator_Constants["Final Position"]  = {}
 
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------
@@ -55,16 +56,20 @@ end
 -------------------------------------------------------------------------------------------------
 State_Elevator_Moving['Exit'] = function(_entitat)
   --TODO: aturar so montacàrregues
+  
+  --posar l'ascensor a la posició final
+  local position = Vect3f(Elevator_Constants["Final Position"][0], Elevator_Constants["Final Position"][1], Elevator_Constants["Final Position"][2])
+  _entitat:get_component(BaseComponent.object_3d):set_position(position)
 end
 
 -------------------------------------------------------------------------------------------------
 State_Elevator_Moving['Update'] = function(_entitat, _dt)
-  local physx = _entitat:get_component(BaseComponent.physx_actor)
-  local position = physx:get_position()
+  local object3d = _entitat:get_component(BaseComponent.object_3d)
+  local position = object3d:get_position()
   
-  physx:set_position(Vect3f(position.x, position.y + Elevator_Constants["Speed"] * _dt, position.z))
+  object3d:set_position(Vect3f(position.x, position.y + Elevator_Constants["Speed"] * _dt, position.z))
   
-  position = physx:get_position()
+  position = object3d:get_position()
   
   --Moviment del player!
   local player = EM:get_entity("Player")
@@ -72,7 +77,7 @@ State_Elevator_Moving['Update'] = function(_entitat, _dt)
   physx = player:get_component(BaseComponent.physx_controller)
   local player_position = physx:get_position()
   
-  physx:set_position(Vect3f(player_position.x, position.y, player_position.z))
+  physx:set_position(Vect3f(player_position.x, position.y + 1.50, player_position.z))
   
 end
 

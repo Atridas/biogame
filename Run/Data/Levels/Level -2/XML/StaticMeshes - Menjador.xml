@@ -83,5 +83,5 @@
 	<mesh name="lvl2_menj_menj_llum_florescent17" path="Data/Meshes/lvl2_menj_menj_llum_florescent17.mesh" max="1.20441 0.0396335 0.0562134" min="-0.0262127 -0.0396328 -0.605618" />
 	<mesh name="lvl2_menj_menj_floresc10" path="Data/Meshes/lvl2_menj_menj_floresc10.mesh" max="0.744076 2.49151 0.420729" min="-0.744074 -0.115818 -0.420729" />
 	<mesh name="lvl2_menj_menj_llum_florescent15" path="Data/Meshes/lvl2_menj_menj_llum_florescent15.mesh" max="0.325285 -0.0329986 0.613842" min="-0.336546 -0.112265 -0.616783" />
-	<mesh name="Plataforma" path="Data/Meshes/Plataforma.mesh" max="2.29081 1.19645 3.02078" min="-2.11382 -1.65632 -2.56863" />
+	<mesh name="lvl2_montacarregues" path="Data/Meshes/lvl2_montacarregues.mesh" max="2.29081 2.84614 3.02078" min="-2.11382 -0.00662923 -2.56863" />
 </meshes>

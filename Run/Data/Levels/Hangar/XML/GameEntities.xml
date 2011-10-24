@@ -156,7 +156,7 @@
     <RenderableObject animated="false" name="hangar_Cables_menjador" />
   </Entity>
   <Entity name="hangar_Cables_menjador01">
-    <Object3D position="4.71452 10.0604 -14.8264" yaw="5.00896e-006" pitch="5.00896e-006" roll="5.00896e-006" />
+    <Object3D position="4.71452 10.0604 -14.8264" yaw="-5.00896e-006" pitch="5.00896e-006" roll="5.00896e-006" />
     <RenderableObject animated="false" name="hangar_Cables_menjador01" />
   </Entity>
   <Entity name="hangar_Caixa_estatica_petita">
@@ -490,7 +490,7 @@
     <RenderableObject animated="false" name="hangar_Fondo_frigo" />
   </Entity>
   <Entity name="hangar_Fondo_frigo01">
-    <Object3D position="22.4985 0.0607213 13.6139" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="22.4985 0.0607213 13.6139" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="hangar_Fondo_frigo01" />
   </Entity>
   <Entity name="hangar_puerta_hangar">
@@ -584,15 +584,15 @@
     <RenderableObject animated="false" name="hangar_Plane03" />
   </Entity>
   <Entity name="hangar_Plane04">
-    <Object3D position="0.759394 11.606 -24.3419" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="0.759394 11.606 -24.3419" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="hangar_Plane04" />
   </Entity>
   <Entity name="hangar_Plane05">
-    <Object3D position="-1.93055 23.2344 -29.0311" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="-1.93055 23.2344 -29.0311" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="hangar_Plane05" />
   </Entity>
   <Entity name="hangar_Plane06">
-    <Object3D position="-13.8146 15.493 -28.4142" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="-13.8146 15.493 -28.4142" yaw="-1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="hangar_Plane06" />
   </Entity>
   <Entity name="hangar_Plane07">
@@ -600,7 +600,7 @@
     <RenderableObject animated="false" name="hangar_Plane07" />
   </Entity>
   <Entity name="hangar_Plane08">
-    <Object3D position="-35.4638 23.5089 -0.266212" yaw="-2.00358e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="-35.4638 23.5089 -0.266212" yaw="2.00358e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="hangar_Plane08" />
   </Entity>
   <Entity name="hangar_Plane09">
@@ -612,7 +612,7 @@
     <RenderableObject animated="false" name="hangar_Plane10" />
   </Entity>
   <Entity name="hangar_Plane11">
-    <Object3D position="36.9105 12.1038 -5.06264" yaw="2.00358e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="36.9105 12.1038 -5.06264" yaw="-2.00358e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="hangar_Plane11" />
   </Entity>
   <Entity name="hangar_Plane12">
@@ -801,127 +801,127 @@
     <LowCover shape="box" size="2.18896 0.984014 1.23183" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa01">
-    <Object3D position="14.8073 0.503855 8.01557" yaw="-75.0418" pitch="0.0" roll="0.0" />
+    <Object3D position="14.8073 0.503855 8.01557" yaw="75.0418" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="2.57182 0.984014 1.10088" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa02">
-    <Object3D position="15.561 0.503855 6.16305" yaw="-48.7693" pitch="0.0" roll="0.0" />
+    <Object3D position="15.561 0.503855 6.16305" yaw="48.7693" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="1.04173 0.984014 1.20536" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa03">
-    <Object3D position="19.9161 0.503855 9.72476" yaw="14.9048" pitch="0.0" roll="0.0" />
+    <Object3D position="19.9161 0.503855 9.72476" yaw="-14.9048" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="2.51045 0.984014 1.00444" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa04">
-    <Object3D position="20.1714 0.503855 11.6285" yaw="15.0864" pitch="0.0" roll="0.0" />
+    <Object3D position="20.1714 0.503855 11.6285" yaw="-15.0864" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="1.04173 0.984014 2.52309" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa05">
-    <Object3D position="24.2937 0.503855 5.63275" yaw="-49.0303" pitch="0.0" roll="0.0" />
+    <Object3D position="24.2937 0.503855 5.63275" yaw="49.0303" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="1.04173 0.984014 1.0441" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa06">
-    <Object3D position="22.6982 0.503855 -3.35775" yaw="-24.7989" pitch="0.0" roll="0.0" />
+    <Object3D position="22.6982 0.503855 -3.35775" yaw="24.7989" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="1.14573 0.984014 1.07173" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa07">
-    <Object3D position="21.512 0.503855 -3.40024" yaw="65.7876" pitch="0.0" roll="0.0" />
+    <Object3D position="21.512 0.503855 -3.40024" yaw="-65.7876" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="1.24402 0.984014 1.00444" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa10">
-    <Object3D position="16.7195 0.503855 -10.6092" yaw="9.62562" pitch="0.0" roll="0.0" />
+    <Object3D position="16.7195 0.503855 -10.6092" yaw="-9.62562" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="1.04173 0.984014 2.54886" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa11">
-    <Object3D position="15.138 0.503855 -11.6697" yaw="9.85852" pitch="0.0" roll="0.0" />
+    <Object3D position="15.138 0.503855 -11.6697" yaw="-9.85852" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="2.47758 0.984014 1.00444" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa12">
-    <Object3D position="11.3926 0.503855 -6.55475" yaw="30.7502" pitch="0.0" roll="0.0" />
+    <Object3D position="11.3926 0.503855 -6.55475" yaw="-30.7502" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="1.04173 0.984014 1.00444" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa13">
-    <Object3D position="13.1396 0.503855 -5.53806" yaw="30.0103" pitch="0.0" roll="0.0" />
+    <Object3D position="13.1396 0.503855 -5.53806" yaw="-30.0103" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="1.00682 0.984014 1.00444" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa15">
-    <Object3D position="5.667 0.503855 -2.08159" yaw="31.4461" pitch="0.0" roll="0.0" />
+    <Object3D position="5.667 0.503855 -2.08159" yaw="-31.4461" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="1.04173 0.984014 1.00444" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa16">
-    <Object3D position="6.67119 0.503855 -0.312003" yaw="30.4904" pitch="0.0" roll="0.0" />
+    <Object3D position="6.67119 0.503855 -0.312003" yaw="-30.4904" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="2.50773 0.984014 1.00444" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa17">
-    <Object3D position="14.502 0.503855 0.673509" yaw="-24.7151" pitch="0.0" roll="0.0" />
+    <Object3D position="14.502 0.503855 0.673509" yaw="24.7151" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="1.04173 0.984014 2.0661" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa20">
-    <Object3D position="23.9568 0.503855 3.28152" yaw="-0.0123761" pitch="0.0" roll="0.0" />
+    <Object3D position="23.9568 0.503855 3.28152" yaw="0.0123761" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="0.487274 0.984014 1.24937" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa21">
-    <Object3D position="22.2299 0.503855 -1.07116" yaw="-0.0123761" pitch="0.0" roll="0.0" />
+    <Object3D position="22.2299 0.503855 -1.07116" yaw="0.0123761" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="0.546557 0.984014 1.24937" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa22">
-    <Object3D position="18.7045 0.503855 -5.18013" yaw="-0.0123761" pitch="0.0" roll="0.0" />
+    <Object3D position="18.7045 0.503855 -5.18013" yaw="0.0123761" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="0.487274 0.984014 1.38957" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa23">
-    <Object3D position="18.4188 0.503855 -6.38797" yaw="-24.2348" pitch="0.0" roll="0.0" />
+    <Object3D position="18.4188 0.503855 -6.38797" yaw="24.2348" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="0.550976 0.984014 1.37772" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa24">
-    <Object3D position="6.49986 0.503855 -7.86493" yaw="-0.0123761" pitch="0.0" roll="0.0" />
+    <Object3D position="6.49986 0.503855 -7.86493" yaw="0.0123761" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="0.487274 0.984014 2.62178" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa25">
-    <Object3D position="2.95831 0.503855 4.31677" yaw="13.7509" pitch="0.0" roll="0.0" />
+    <Object3D position="2.95831 0.503855 4.31677" yaw="-13.7509" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="0.487274 0.984014 2.64117" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa26">
-    <Object3D position="-3.32351 0.503855 2.42453" yaw="-19.9634" pitch="0.0" roll="0.0" />
+    <Object3D position="-3.32351 0.503855 2.42453" yaw="19.9634" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="0.487274 0.984014 2.58965" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_alta">
-    <Object3D position="5.1463 1.00738 -1.24677" yaw="31.4461" pitch="0.0" roll="0.0" />
+    <Object3D position="5.1463 1.00738 -1.24677" yaw="-31.4461" pitch="0.0" roll="0.0" />
     <HighCover shape="box" size="1.08568 2.01105 1.00444" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_alta01">
-    <Object3D position="6.95281 1.00738 1.24001" yaw="0.130692" pitch="0.0" roll="0.0" />
+    <Object3D position="6.95281 1.00738 1.24001" yaw="-0.130692" pitch="0.0" roll="0.0" />
     <HighCover shape="box" size="1.08568 2.01105 1.00318" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_alta02">
-    <Object3D position="13.8667 1.00738 6.45955" yaw="-0.45227" pitch="0.0" roll="0.0" />
+    <Object3D position="13.8667 1.00738 6.45955" yaw="0.45227" pitch="0.0" roll="0.0" />
     <HighCover shape="box" size="1.58546 2.01105 1.23686" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_alta03">
-    <Object3D position="14.5235 1.00738 5.35645" yaw="40.5673" pitch="0.0" roll="0.0" />
+    <Object3D position="14.5235 1.00738 5.35645" yaw="-40.5673" pitch="0.0" roll="0.0" />
     <HighCover shape="box" size="1.41034 2.01105 1.20283" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_alta04">
-    <Object3D position="23.7342 1.00738 4.40463" yaw="0.388385" pitch="0.0" roll="0.0" />
+    <Object3D position="23.7342 1.00738 4.40463" yaw="-0.388385" pitch="0.0" roll="0.0" />
     <HighCover shape="box" size="1.08568 2.01105 1.01326" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_alta05">
-    <Object3D position="21.9995 1.00738 -2.2181" yaw="-89.5167" pitch="0.0" roll="0.0" />
+    <Object3D position="21.9995 1.00738 -2.2181" yaw="89.5167" pitch="0.0" roll="0.0" />
     <HighCover shape="box" size="1.08568 2.01105 1.00444" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_alta06">
-    <Object3D position="12.2787 1.00738 -6.04027" yaw="30.7938" pitch="0.0" roll="0.0" />
+    <Object3D position="12.2787 1.00738 -6.04027" yaw="-30.7938" pitch="0.0" roll="0.0" />
     <HighCover shape="box" size="1.00667 2.01105 1.00678" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_alta07">
-    <Object3D position="13.4989 1.00738 5.70023" yaw="40.5673" pitch="0.0" roll="0.0" />
+    <Object3D position="13.4989 1.00738 5.70023" yaw="-40.5673" pitch="0.0" roll="0.0" />
     <HighCover shape="box" size="0.296413 2.01105 0.646457" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa27">
-    <Object3D position="6.57588 0.503855 0.419242" yaw="0.15872" pitch="0.0" roll="0.0" />
+    <Object3D position="6.57588 0.503855 0.419242" yaw="-0.15872" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="0.324986 0.984014 0.639084" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_cobertura_baixa28">
-    <Object3D position="23.5141 0.503855 5.24155" yaw="-26.4191" pitch="0.0" roll="0.0" />
+    <Object3D position="23.5141 0.503855 5.24155" yaw="26.4191" pitch="0.0" roll="0.0" />
     <LowCover shape="box" size="0.301612 0.984014 0.890813" collision_group="cobertura" cover_size="1" />
   </Entity>
   <Entity name="hang_nod14">
@@ -969,11 +969,11 @@
     <PhysXBox fromRenderableObject="false" shape="box" size="9.01855 2.97691 0.244077" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="hangar_physx_box03">
-    <Object3D position="-9.13589 1.50853 13.3953" yaw="-90.3788" pitch="0.0" roll="0.0" />
+    <Object3D position="-9.13589 1.50853 13.3953" yaw="90.3788" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.56366 2.97691 0.244077" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="hangar_physx_box04">
-    <Object3D position="-4.00645 1.50853 0.0609112" yaw="-90.3788" pitch="0.0" roll="0.0" />
+    <Object3D position="-4.00645 1.50853 0.0609112" yaw="90.3788" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="2.56366 2.97691 0.244077" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
   <Entity name="hangar_physx_box05">

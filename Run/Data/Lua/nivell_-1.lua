@@ -16,13 +16,13 @@ function init_level_menys_1()
     
     --canviar la càmara i desactivar el player
     activate_cynematic_camera("lvl1_elevator_camera_init")
-    _Entity:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Inactiu')
+    EM:get_entity("Player"):get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Inactiu')
     
+    EM:get_entity("lvl1_physXBox_elevator"):set_active(false)
     --fade in
     EFFECT_MANAGER:set_exposure(0)
+    RENDERER:deactivate_render_path("aim_gui")
     RENDERER:blend_parameter(Renderer.exposure, 0.5, 3)
-    
-    EM:remove_entity(_EntityTrigger)
   else
     log("Error: No es troba l'entitat: lvl1_montacarregues")
   end
@@ -204,7 +204,11 @@ function lvl1_stop_elevator(_EntityTrigger, _Entity)
   if _Entity:get_name() == "Player" then
     local elevator = EM:get_entity("lvl1_montacarregues")
     
-    if elevator then      
+    if elevator then
+      local pbox = EM:get_entity("lvl1_physXBox_elevator")
+      pbox:set_active(true)
+      pbox = pbox:get_component(BaseComponent.physx_actor)
+      
       --aturar l'ascensor
       local l_message = EM:get_event()
 
@@ -217,7 +221,14 @@ function lvl1_stop_elevator(_EntityTrigger, _Entity)
       
       --restaurar la càmara i el player
       deactivate_cynematic_camera()
+      RENDERER:activate_render_path("aim_gui")
       _Entity:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+      
+      --posem l'ascensor al seu lloc
+      local elevator_position = elevator:get_component(BaseComponent.object_3d):get_position()
+      Elevator_Constants["Final Position"][0] = elevator_position.x
+      Elevator_Constants["Final Position"][1] = pbox:get_position().y
+      Elevator_Constants["Final Position"][2] = elevator_position.z
       
       EM:remove_entity(_EntityTrigger)
     else
@@ -242,10 +253,13 @@ function lvl1_activate_elevator(_EntityTrigger, _Entity)
       
       EM:send_event(l_message)
       
+      RENDERER:blend_parameter(Renderer.exposure, 0, 10)
+      
       --canviar la càmara i desactivar el player
       activate_cynematic_camera("lvl1_elevator_camera_exit")
       _Entity:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Inactiu')
       
+      RENDERER:deactivate_render_path("aim_gui")
       EM:remove_entity(_EntityTrigger)
     else
       log("Error: No es troba l'entitat: lvl1_montacarregues01")
@@ -256,7 +270,7 @@ end
 --canviar de nivell
 function change_level_level_1(_EntityTrigger, _Entity)
   if _Entity:get_name() == "Player" then
-    RENDERER:blend_parameter(Renderer.exposure, 0, 0) --TODO millor
+    deactivate_cynematic_camera()
     set_new_level("Hangar")
   end
 end
