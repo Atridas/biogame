@@ -80,6 +80,16 @@ void CComponentIABrainVigia::ChooseNewPatrolPosition()
 
 void CComponentIABrainVigia::Shoot(float _fShootPrecision)
 {
+  CComponentObject3D* l_O3D = GetEntity()->GetComponent<CComponentObject3D>();
+
+  Vect3f l_vPos = l_O3D->GetPosition();
+  Vect3f l_vPlayerPos = m_pPlayer->GetComponent<CComponentObject3D>()->GetPosition() + Vect3f(0.0f,0.5f,0.0f);
+
+  Vect3f l_vDir = (l_vPlayerPos - l_vPos).GetNormalized();
+
+  CEntityManager* l_pEM = ENTITY_MANAGER;
+  l_pEM->InitLaser(l_vPos,l_vDir,SHOOT_POWER, CORE->GetPhysicsManager()->GetCollisionMask(ECG_RAY_SHOOT));
+
   /*CComponentRenderableObject* l_pCR = GetEntity()->GetComponent<CComponentRenderableObject>();
   CRenderableAnimatedInstanceModel* l_pRAIM = dynamic_cast<CRenderableAnimatedInstanceModel*>(l_pCR->GetRenderableObject());
   CAnimatedInstanceModel *l_pAnimatedInstanceModel = l_pRAIM->GetAnimatedInstanceModel();
@@ -158,7 +168,6 @@ void CComponentIABrainVigia::ReceiveForce(SEvent _sEvent)
 
     l_vSenderPos = Vect3f(_sEvent.Info[1].v.x,_sEvent.Info[1].v.y,_sEvent.Info[1].v.z);
 
-    /* TODO, acabar comprovacio de force. El robot vigia hauria de tenir el seu propi grup de colisio i no usar objecte dinamic.
     Vect3f l_vRayDir = (l_vSenderPos-l_vPos).Normalize();
     l_pUserData = l_pPM->RaycastClosestActor(l_vPos,l_vRayDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT),l_CInfo);
 
@@ -168,7 +177,7 @@ void CComponentIABrainVigia::ReceiveForce(SEvent _sEvent)
     if(!l_pUserData || l_entity1 != l_entity2)
     {
       return;
-    }*/
+    }
 
     /* Morir?? millor treure vida al rebotar per les parets! mostrant xispes
     if(!m_bDead)

@@ -44,6 +44,28 @@
         
   -->
   
+  <SimpleEmiter id="electric"                    emit_absolute="true"
+              emit_rate1="10.0"                   emit_rate2="15.0"
+              life1="0.1"                        life2="0.15"
+              awake_time1="0.2"                  awake_time2="0.23"
+              sleep_time1="0.5"                  sleep_time2="0.55"
+              starting_angle1="0"         starting_angle2="90"
+              
+              is_sprite="true"
+              num_rows="4"
+              num_columns="4"
+              time_per_frame="0.03"
+              loop="true"
+              
+              color1="1.0 1.0 1.0 1.0"       color2="1.0 1.0 1.0 1.0"
+              size1="0.3"                      size2="0.3"
+              
+              texture="Data/Textures/particules/e_full.png">
+    <Sizes>
+      <Size   control_time1="0.05"       control_time2="0.05"        size1="0.2"          size2="0.4" />
+    </Sizes>
+  </SimpleEmiter>
+  
   <!--*********************************EMITERS LEVEL -2 *************************************************-->
 
    <SimpleEmiter id="vapor"                       emit_absolute="true"
