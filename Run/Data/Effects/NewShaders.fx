@@ -286,8 +286,8 @@ PS_OUTPUT NewPS(TNEW_PS _in, float _fFace : VFACE)
     #if defined( NS_TEX0 )
       if(g_GlowActive && _fFace > 0)
       {
-        l_Output.Glow  = tex2D(GlowTextureSampler,_in.UV);
-        l_Output.Glow *= g_GlowIntensity * l_Output.Glow.w;
+        float l_fGlowIntensity = tex2D(GlowTextureSampler,_in.UV).r * g_GlowIntensity;
+        l_Output.Glow = l_DiffuseColor * l_fGlowIntensity;
         #if defined( NS_COLOR )
           l_Output.Glow *= _in.Color;
         #endif
