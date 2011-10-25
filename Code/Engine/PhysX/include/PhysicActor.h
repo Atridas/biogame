@@ -42,13 +42,17 @@ public:
 	void							SetGlobalPosition	(const Vect3f& pos = Vect3f(0.f,0.f,0.f));
   void              MoveGlobalPosition	(const Vect3f& pos);
   void							SetRotation     	(const Vect3f& _vRot);
+  void							SetRotation     	(const Mat33f& _vRot);
   Vect3f            GetLinearVelocity();
   Vect3f            GetAngularVelocity();
+  Vect3f            GetAngularMomentum();
+  Mat33f            GetInertiaTensor();
 
   void              AddImpulseAtLocalPos(const Vect3f& _vDirection, const Vect3f& _vLocalPos, float _fPower);
   void              AddVelocityAtLocalPos(const Vect3f& _vDirection, const Vect3f& _vLocalPos, float _fPower);
   void              AddAcelerationAtLocalPos(const Vect3f& _vDirection, const Vect3f& _vLocalPos, float _fPower);
   void              AddTorque(const Vect3f _vTorque);
+  void              SetAngularVelocity(const Vect3f _vVelocity);
 
 	//---AddShape Functions-----
 	void							AddSphereShape		(float radius, const Vect3f& globalPos = v3fZERO, const Vect3f& localPos = v3fZERO, NxCCDSkeleton* skeleton = 0, uint32 group = 0);
