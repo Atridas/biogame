@@ -33,7 +33,7 @@ extern "C"
 #include "Utils\MemLeaks.h"
 #include "Utils\Logger.h"
 
-#define SHOOT_POWER 10.0f
+#define SHOOT_POWER 7.0f
 
 CComponentIABrainVigia* CComponentIABrainVigia::AddToEntity(CGameEntity *_pEntity, const string& _szPlayerEntityName, const string& _szOnDeathScript)
 {

@@ -128,4 +128,9 @@
 	<RenderableObject name="hangar_Plane12" class="StaticMesh" resource="hangar_Plane12" position="34.3543 15.0862 -4.96133" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_finestres" class="StaticMesh" resource="hangar_finestres" position="0.0 0.0175781 0.0" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_Plane13" class="StaticMesh" resource="hangar_Plane13" position="4.2388 36.2041 -0.266212" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_llum_gran" class="StaticMesh" resource="hangar_llum_gran" position="-9.94242 7.53283 -5.61795" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_llum_gran01" class="StaticMesh" resource="hangar_llum_gran01" position="10.0069 7.53283 -5.61795" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_llum_gran02" class="StaticMesh" resource="hangar_llum_gran02" position="10.0069 7.53283 6.95783" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_llum_gran03" class="StaticMesh" resource="hangar_llum_gran03" position="-9.95826 7.53283 6.95783" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_Montacarregues" class="StaticMesh" resource="Plataforma" position="-23.8202 -1.66239 -14.8628" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
 </RenderableObjects>

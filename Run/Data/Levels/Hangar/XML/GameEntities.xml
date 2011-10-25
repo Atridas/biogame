@@ -624,6 +624,31 @@
     <RenderableObject animated="false" name="hangar_finestres" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
+  <Entity name="hangar_Plane13">
+    <Object3D position="4.2388 36.2041 -0.266212" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_Plane13" />
+  </Entity>
+  <Entity name="hangar_llum_gran">
+    <Object3D position="-9.94242 7.53283 -5.61795" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_llum_gran" />
+  </Entity>
+  <Entity name="hangar_llum_gran01">
+    <Object3D position="10.0069 7.53283 -5.61795" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_llum_gran01" />
+  </Entity>
+  <Entity name="hangar_llum_gran02">
+    <Object3D position="10.0069 7.53283 6.95783" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_llum_gran02" />
+  </Entity>
+  <Entity name="hangar_llum_gran03">
+    <Object3D position="-9.95826 7.53283 6.95783" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_llum_gran03" />
+  </Entity>
+  <Entity name="hangar_Montacarregues">
+    <Object3D position="-23.8202 -1.66239 -14.8628" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="Plataforma" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
   <Entity name="hang_trig_enemics00">
     <Object3D position="-19.9091 1.50084 -10.3116" yaw="0.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="1.80037 3.04376 3.87849" collision_group="trigger" onEnter="hang_trig_enemics_enter00" />
@@ -1408,13 +1433,37 @@
     <Object3D position="5.8129 0.701781 -5.41039" yaw="0.0" pitch="0.0" roll="0.0" />
     <NavNode />
   </Entity>
-  <Entity name="hangar_Plane13">
-    <Object3D position="4.2388 36.2041 -0.266212" yaw="0.0" pitch="0.0" roll="0.0" />
-    <RenderableObject animated="false" name="hangar_Plane13" />
-  </Entity>
   <Entity name="hang_trig_end">
     <Object3D position="28.3774 0.940297 0.0564675" yaw="0.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="1.80037 3.04376 11.6834" collision_group="trigger" onEnter="hang_final_nivell" />
+  </Entity>
+  <Entity name="Hangar_vapor02">
+    <Object3D position="27.0998 2.65143 -5.48684" yaw="35.0" pitch="65.0" roll="8.0808e-006" />
+    <Emiter core="vapor" volume="0.0949468 0.0949468 0.0949468" />
+  </Entity>
+  <Entity name="Hangar_efecte_fred_01">
+    <Object3D position="22.7099 1.2644 13.4544" yaw="15.0" pitch="0.0" roll="0.0" />
+    <Emiter core="efecte_fred" volume="1.70385 2.80677 0.171407" />
+  </Entity>
+  <Entity name="Hangar_efecte_fred03">
+    <Object3D position="16.0955 1.41196 -14.7153" yaw="0.0" pitch="0.0" roll="90.0" />
+    <Emiter core="efecte_fred" volume="1.76078 0.148255 2.64846" />
+  </Entity>
+  <Entity name="Hangar_vapor01">
+    <Object3D position="8.11376 1.92946 -14.4674" yaw="0.0" pitch="0.0" roll="70.0" />
+    <Emiter core="vapor" volume="0.0656531 0.0656531 0.0656531" />
+  </Entity>
+  <Entity name="Hangar_vapor03">
+    <Object3D position="10.5303 4.87167 -14.4674" yaw="-30.6821" pitch="-27.034" roll="107.454" />
+    <Emiter core="vapor" volume="0.0656531 0.0656531 0.0656531" />
+  </Entity>
+  <Entity name="Hangar_vapor03">
+    <Object3D position="27.0288 6.32109 -9.74443" yaw="0.0" pitch="80.0" roll="0.0" />
+    <Emiter core="vapor" volume="0.112365 0.112365 0.112365" />
+  </Entity>
+  <Entity name="Hangar_vapor07">
+    <Object3D position="-21.6943 2.13781 13.7871" yaw="1.04227e-006" pitch="-35.0" roll="-50.0" />
+    <Emiter core="vapor" volume="0.0433467 0.0433467 0.0433467" />
   </Entity>
   <Player position="-24.8545 1.0 -10.0431" yaw="0.0" />
   <Miner name="Miner01" position="-17.4714 1.30798 -4.51993" yaw="0.0" active="false" />

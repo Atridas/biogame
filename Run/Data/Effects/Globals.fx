@@ -136,11 +136,11 @@ shared float g_GlowFinalScale            : GlowFinalScale;
 
 shared float2 g_PoissonBlurKernel[POISON_BLUR_KERNEL_SIZE] : PoissonBlurKernel;
 
-shared float g_BlurRadius       : BlurRadius     ;
-shared float g_NearBlurDepth    : NearBlurDepth  ;
-shared float g_FarBlurDepth     : FarBlurDepth   ;
-shared float g_FocalPlaneDepth  : FocalPlaneDepth;
-shared float g_BlurinessCutoff  : BlurinessCutoff;
+shared float g_BlurRadius           : BlurRadius         ;
+shared float g_NearBlurDepth        : NearBlurDepth      ;
+shared float g_FarBlurDepth         : FarBlurDepth       ;
+shared float g_NearFocalPlaneDepth  : NearFocalPlaneDepth;
+shared float g_FarFocalPlaneDepth   : FarFocalPlaneDepth ;
 
 
 

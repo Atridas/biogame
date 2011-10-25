@@ -484,11 +484,12 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
 
   if(m_bBlurParamsUpdated)
   {
-    _pEffect->SetValue("BlurRadius"     ,   m_fBlurRadius     );
-    _pEffect->SetValue("NearBlurDepth"  ,   m_fNearBlurDepth  );
-    _pEffect->SetValue("FarBlurDepth"   ,   m_fFarBlurDepth   );
-    _pEffect->SetValue("FocalPlaneDepth",   m_fFocalPlaneDepth);
-    _pEffect->SetValue("BlurinessCutoff",   m_fBlurinessCutoff);
+    _pEffect->SetValue("BlurRadius"     ,     m_fBlurRadius     );
+    _pEffect->SetValue("NearBlurDepth"  ,     m_fNearBlurDepth  );
+    _pEffect->SetValue("FarBlurDepth"   ,     m_fFarBlurDepth   );
+    _pEffect->SetValue("NearFocalPlaneDepth", m_fNearFocalPlaneDepth);
+    _pEffect->SetValue("FarFocalPlaneDepth",  m_fFarFocalPlaneDepth);
+    _pEffect->SetValue("BlurinessCutoff",     m_fBlurinessCutoff);
     m_bBlurParamsUpdated = false;
   }
 
