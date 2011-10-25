@@ -54,6 +54,7 @@ enum ECollisionGroup {
   ECG_CAMERA,
   ECG_RAGDOLL,
   ECG_RAGDOLL_PLAYER,
+  ECG_VIGIA,
 
   //aquest ha de ser l'últim sempre!!!!
   ECG_LAST_GROUP

@@ -940,6 +940,10 @@ int GetCollisionGroup(const string& _szGroup)
   {
     return ECG_RAY_IA_GRAPH;
   }
+  else if(_szGroup == "vigia")
+  {
+    return ECG_VIGIA;
+  }
   else
   {
     return 0;

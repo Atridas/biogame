@@ -829,12 +829,14 @@ CGameEntity* CEntityManager::InitVigia(const string& _szPlayerName, const Vect3f
   //l_pComponentRenderableObject->m_fYawAdjustment = -FLOAT_PI_VALUE / 2;
   l_pComponentRenderableObject->GetRenderableObject()->SetMat44(l_pComponentObject3D->GetMat44());
 
-  CComponentPhysXSphere::AddToEntity(l_pVigia,10.0f,0.2f,0.01f,GetCollisionGroup("objecte dinamic"));
+  CComponentPhysXSphere::AddToEntity(l_pVigia,10.0f,0.2f,0.01f,GetCollisionGroup("vigia"));
 
   CComponentVida::AddToEntity(l_pVigia, 100.f, 100.f);
   CComponentIABrainVigia::AddToEntity(l_pVigia,_szPlayerName, "");
   
   CComponentStateMachine::AddToEntity(l_pVigia, "State_Vigia_Patrol");
+
+  CComponentEmiter::AddToEntity(l_pVigia,"electric",Vect3f(0.3f,0.2f,0.5f));
 
   //CComponentCollisionReport::AddToEntity(l_pMilitar,"","","","enemy_on_start_colision","","",0.1f);
 
