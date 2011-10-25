@@ -175,6 +175,25 @@ void CComponentPlayerController::UpdatePostPhysX(float _fDeltaTime)
   //}
 }
 
+float CComponentPlayerController::AimDistance()
+{
+  CCamera* l_pCamera = GetEntity()->GetComponent<CComponent3rdPSCamera>(ECT_3RD_PERSON_SHOOTER_CAMERA)->GetCamera();
+  
+  Vect3f l_vPos = l_pCamera->GetEye();
+  Vect3f l_vDir = l_pCamera->GetDirection();
+  l_vDir.Normalize();
+
+  SCollisionInfo l_CInfo;
+  CPhysicUserData* l_pUserData = 0;
+  CPhysicsManager *l_pPM = PHYSICS_MANAGER;
+
+  l_pUserData = l_pPM->RaycastClosestActor(l_vPos,l_vDir,l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER),l_CInfo);
+
+  if(l_pUserData)
+    return l_CInfo.m_fDistance;
+  else
+    return 100;
+}
 
 bool CComponentPlayerController::Shoot()
 {

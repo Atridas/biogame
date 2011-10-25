@@ -1,5 +1,25 @@
 g_ibracetCount = 0
 
+-------------------------------------------- CONSTANTS -------------------------------------------
+GLOBALS = {}
+
+GLOBALS["Blur Radius Normal"] = 2
+GLOBALS["Blur tutorials"] = 5
+GLOBALS["Blur apuntant"] = 5
+
+GLOBALS["Blur normal near"]       = -15
+GLOBALS["Blur normal far"]        = 25
+GLOBALS["Blur normal near focal"] = 5
+GLOBALS["Blur normal far focal"]  = 15
+
+GLOBALS["Blur apuntant near"]       = 0.5
+GLOBALS["Blur apuntant far"]        = 2
+GLOBALS["Blur apuntant near focal"] = 0.7
+GLOBALS["Blur apuntant far focal"]  = 1.3
+
+GLOBALS["Blur blend time"] = 0.5
+
+
 -------------------------------------------- FUNCIONS  -------------------------------------------
 function activate_entity(_name)
   local l_entity = EM:get_entity(_name)

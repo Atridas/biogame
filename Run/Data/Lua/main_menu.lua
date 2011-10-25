@@ -235,7 +235,7 @@ State_Tutorial["Enter"] = function(_self)
   Main_Menu_Constants["Current frame"] = 0
   
   RENDERER:activate_render_path(Main_Menu_Constants["Frames"][0])
-  EFFECT_MANAGER:set_blur_radius(Main_Menu_Constants["Blur tutorials"])
+  EFFECT_MANAGER:set_blur_radius(GLOBALS["Blur tutorials"])
   
   CORE:set_pause(true)
   
@@ -248,7 +248,7 @@ State_Tutorial["Exit"] = function(_self)
   Main_Menu_Constants["Total frames"]  = 0
   Main_Menu_Constants["Frames"]        = {}
   
-  EFFECT_MANAGER:set_blur_radius(Main_Menu_Constants["Blur"])
+  EFFECT_MANAGER:set_blur_radius(GLOBALS["Blur Radius Normal"])
   
   SOUND:resume_samples()
 end
