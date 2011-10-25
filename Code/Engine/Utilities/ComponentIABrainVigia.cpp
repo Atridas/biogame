@@ -63,6 +63,8 @@ bool CComponentIABrainVigia::Init(CGameEntity* _pEntity, const string& _szPlayer
   m_vTargetPosition = Vect3f(2.0f,2.5f,2.0f);
 
   m_PatrolZone.Init( Vect3f(0,1,0), Vect3f(5,3,5) );
+  m_vPatrolDirection = Vect3f(0,0,1);
+  m_vPatrolPosition = m_vTargetPosition;
 
   SetOk(true);
   return IsOk();
@@ -203,21 +205,56 @@ void CComponentIABrainVigia::Fly(bool _bFly)
   m_bFly = _bFly;
 }
 
-void CComponentIABrainVigia::LookAt(const Vect3f& _vPos)
+void CComponentIABrainVigia::LookAt(float l_fTimeDelta)
 {
-  CComponentObject3D* l_O3D = GetEntity()->GetComponent<CComponentObject3D>();
+  const static float TAU_BLEND = .5f;
+
+  //CComponentObject3D* l_O3D = GetEntity()->GetComponent<CComponentObject3D>();
+  CComponentPhysXSphere* l_pSphere = GetEntity()->GetComponent<CComponentPhysXSphere>();
+  Mat44f m44;
+  l_pSphere->GetActor()->GetMat44(m44);
   
-  Vect3f l_vDirection = (_vPos - l_O3D->GetPosition()).Normalize();
+  Vect3f l_vDirection; // (_vPos - m44.GetTranslationVector()).Normalize();
   
-  Mat33f m = GetFastestRotationFromDirToDir(Vect3f(0,0,1), l_vDirection);
+  if(m_vPatrolDirection.SquaredLength() > 0)
+    l_vDirection = m_vPatrolDirection.GetNormalized();
+  else
+    l_vDirection = Vect3f(0,0,1);
+
+  float  l_fAngle;
+  Vect3f l_vAxis;
+  GetFastestRotationFromDirToDir(Vect3f(0,0,1), l_vDirection, l_vAxis, l_fAngle);
+
+
+  Quat4f l_qDesiredRotation(l_vAxis, l_fAngle);
+
+
+  Vect4f l_vCurrentDirection4 = m44 * Vect4f(0,0,1,0);
+  Vect3f l_vCurrentDirection(l_vCurrentDirection4.x, l_vCurrentDirection4.y, l_vCurrentDirection4.z);
+  GetFastestRotationFromDirToDir(Vect3f(0,0,1), l_vCurrentDirection, l_vAxis, l_fAngle);
+
+
+  Quat4f l_qCurrentRotation(l_vAxis, l_fAngle);
+
+  float d;
+  if(l_fTimeDelta < TAU_BLEND)
+    d = l_fTimeDelta / TAU_BLEND;
+  else
+    d = 1;
+  l_qCurrentRotation.Blend(d, l_qDesiredRotation);
+
+  l_qCurrentRotation.GetAxisAngle(l_vAxis, l_fAngle);
   
+  Mat33f m;
+  m.SetIdentity();
+  m.FromAxisAngle(l_vAxis, l_fAngle);
+
   Mat44f m2(m);
   
-  m2.SetPos(l_O3D->GetPosition());
+  m2.SetPos(m44.GetTranslationVector());
   
-  l_O3D->SetMat44(m2);
+  //l_O3D->SetMat44(m2);
   
-  CComponentPhysXSphere* l_pSphere = GetEntity()->GetComponent<CComponentPhysXSphere>();
   l_pSphere->GetActor()->SetMat44(m2);
   
 
@@ -331,7 +368,9 @@ void CComponentIABrainVigia::UpdatePostPhysX(float _fDeltaTime)
 
     }
 
-    LookAt(m_pPlayer->GetComponent<CComponentObject3D>()->GetPosition() + Vect3f(0.0f,0.5f,0.0f));
+    //m_vPatrolDirection = m_pPlayer->GetComponent<CComponentObject3D>()->GetPosition() + Vect3f(0.0f,0.5f,0.0f) - l_O3D->GetPosition();
+    //m_vPatrolDirection.Normalize();
+    LookAt(_fDeltaTime);
   }
 }
 

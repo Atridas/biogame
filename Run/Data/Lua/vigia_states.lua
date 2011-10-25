@@ -118,6 +118,8 @@ State_Vigia_Atac['Update'] = function(_enemic, _dt)
   
   local dist_sq = (ia_pos - player_pos):length_sq()
   
+  ia_brain_vigia.patrol_direction = player_pos - ia_pos
+  
   if dist_sq > Vigia_Constants["Distancia Atac"] then
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Vigia_Patrol')
     return
@@ -211,9 +213,12 @@ State_Vigia_Search_Node["Enter"] = function(_enemic)
   
   ia_brain_vigia.time = 0
   
+  log("dafuq")
+  
   ia_brain_vigia:choose_new_patrol_position()
-  --local animation = _enemic:get_component(BaseComponent.animation)
-  --animation:set_animation_state('idle')
+  --local ia_pos     = _enemic:get_component(BaseComponent.object_3d):get_position()
+  --ia_brain_vigia.patrol_direction = ia_brain_vigia.patrol_position - ia_pos
+  
 end
 
 -------------------------------------------------------------------------------------------------
