@@ -25,7 +25,7 @@ public:
 
   void SetTargetPosition(const Vect3f& _vPos) { m_vTargetPosition = _vPos;};
   void Fly(bool _bFly);
-  void LookAt(float l_fTimeDelta);
+  void LookAt(const Vect3f& _vPos, float l_fTimeDelta);
 
   virtual void UpdatePostPhysX(float _fDeltaTime);
 

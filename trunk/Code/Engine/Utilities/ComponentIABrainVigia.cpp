@@ -205,7 +205,7 @@ void CComponentIABrainVigia::Fly(bool _bFly)
   m_bFly = _bFly;
 }
 
-void CComponentIABrainVigia::LookAt(float l_fTimeDelta)
+void CComponentIABrainVigia::LookAt(const Vect3f& _vPos, float l_fTimeDelta)
 {
   const static float TAU_BLEND = .5f;
 
@@ -214,12 +214,12 @@ void CComponentIABrainVigia::LookAt(float l_fTimeDelta)
   Mat44f m44;
   l_pSphere->GetActor()->GetMat44(m44);
   
-  Vect3f l_vDirection; // (_vPos - m44.GetTranslationVector()).Normalize();
+  Vect3f l_vDirection = (_vPos - m44.GetTranslationVector()).Normalize();
   
-  if(m_vPatrolDirection.SquaredLength() > 0)
-    l_vDirection = m_vPatrolDirection.GetNormalized();
-  else
-    l_vDirection = Vect3f(0,0,1);
+  //if(m_vPatrolDirection.SquaredLength() > 0)
+  //  l_vDirection = m_vPatrolDirection.GetNormalized();
+  //else
+  //  l_vDirection = Vect3f(0,0,1);
 
   float  l_fAngle;
   Vect3f l_vAxis;
@@ -241,7 +241,10 @@ void CComponentIABrainVigia::LookAt(float l_fTimeDelta)
     d = l_fTimeDelta / TAU_BLEND;
   else
     d = 1;
+
   l_qCurrentRotation.Blend(d, l_qDesiredRotation);
+
+  //l_qCurrentRotation=l_qDesiredRotation;
 
   l_qCurrentRotation.GetAxisAngle(l_vAxis, l_fAngle);
   
@@ -370,7 +373,7 @@ void CComponentIABrainVigia::UpdatePostPhysX(float _fDeltaTime)
 
     //m_vPatrolDirection = m_pPlayer->GetComponent<CComponentObject3D>()->GetPosition() + Vect3f(0.0f,0.5f,0.0f) - l_O3D->GetPosition();
     //m_vPatrolDirection.Normalize();
-    LookAt(_fDeltaTime);
+    LookAt(m_pPlayer->GetComponent<CComponentObject3D>()->GetPosition() + Vect3f(0.0f,0.5f,0.0f), _fDeltaTime);
   }
 }
 
