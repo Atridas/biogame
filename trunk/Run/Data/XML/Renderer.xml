@@ -207,6 +207,11 @@
         <input_sampler type="texture" index="0" texture="Data/Textures/CubmapDeProves.dds" cube="true" />
       </input_samplers>
     </post_scene_renderer>
+    <post_scene_renderer name="hangar skybox" effect="Skybox" render_target="SKY">
+      <input_samplers>
+        <input_sampler type="texture" index="0" texture="Data/Textures/def_skybox.dds" cube="true" />
+      </input_samplers>
+    </post_scene_renderer>
    
     <post_scene_renderer name="deferred_ambient" effect="DeferredAmbientPass">
 
@@ -822,27 +827,27 @@
       </input_samplers>
     </post_scene_renderer>
     
-    <post_scene_renderer name="file portrait" effect="TextureAlphaFactor" size="0.45" aspect_ratio="false" position="0.2 0.1">
+    <post_scene_renderer name="file portrait" effect="TextureAlphaFactor" size_x="0.31" size_y="0.83" aspect_ratio="false" position="0.3 0.1">
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/fitxa_riggle_1.dds"/>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/FITXA_RIGGLE01.dds"/>
       </input_samplers>
     </post_scene_renderer>
     
-    <post_scene_renderer name="file resume" effect="TextureAlphaFactor" size="0.45" aspect_ratio="false" position="0.2 0.1">
+    <post_scene_renderer name="file resume" effect="TextureAlphaFactor" size_x="0.31" size_y="0.83" aspect_ratio="false" position="0.3 0.1">
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/fitxa_riggle_2.dds"/>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/FITXA_RIGGLE02.dds"/>
       </input_samplers>
     </post_scene_renderer>
     
-    <post_scene_renderer name="tutorial life" effect="TextureAlphaFactor" size="0.33" aspect_ratio="true" position="0.33 0.2">
+    <post_scene_renderer name="tutorial life" effect="TextureAlphaFactor" size_x="0.31" size_y="0.83" aspect_ratio="false" position="0.3 0.1">
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/instruccions_vida.dds"/>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/FITXA_RIGGLE03.dds"/>
       </input_samplers>
     </post_scene_renderer>
     
-    <post_scene_renderer name="tutorial energy" effect="TextureAlphaFactor" size="0.33" aspect_ratio="true" position="0.33 0.2">
+    <post_scene_renderer name="tutorial energy" effect="TextureAlphaFactor" size_x="0.31" size_y="0.83" aspect_ratio="false" position="0.3 0.1">
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/instruccions_energia.dds"/>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/FITXA_RIGGLE04.dds"/>
       </input_samplers>
     </post_scene_renderer>
     
@@ -898,11 +903,11 @@
     <render_path name="cuadros skybox" active="false">
       <post_scene_renderer name="cuadros skybox"/>
     </render_path>
-    <render_path name="test skybox" active="true">
+    <render_path name="test skybox" active="false">
       <post_scene_renderer name="test skybox"/>
     </render_path>
-    <render_path name="hangar skybox" active="false">
-      <post_scene_renderer name="cuadros skybox"/>
+    <render_path name="hangar skybox" active="true">
+      <post_scene_renderer name="hangar skybox"/>
     </render_path>
   
   

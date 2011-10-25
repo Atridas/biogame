@@ -81,10 +81,11 @@ public:
                     m_fMaxGlowLuminance(4.f),
                     m_fGlowFinalScale(1.f),
                     m_fBlurRadius(10.f),     
-                    m_fNearBlurDepth(2.f),  
-                    m_fFarBlurDepth(45.f),   
-                    m_fFocalPlaneDepth(5.f),
-                    m_fBlurinessCutoff(.75f)
+                    m_fNearBlurDepth(-15.f),  
+                    m_fFarBlurDepth(25.f),   
+                    m_fNearFocalPlaneDepth(.5f),
+                    m_fFarFocalPlaneDepth(15.f),
+                    m_fBlurinessCutoff(.25f)
                     {SetOk(true);};
 
   ~CEffectManager() {Done();};
@@ -219,14 +220,16 @@ public:
   void SetBlurRadius     (float _fBlurRadius     ) { if(_fBlurRadius      != m_fBlurRadius     ) { m_fBlurRadius      = _fBlurRadius     ; m_bBlurParamsUpdated = true; }};
   void SetNearBlurDepth  (float _fNearBlurDepth  ) { if(_fNearBlurDepth   != m_fNearBlurDepth  ) { m_fNearBlurDepth   = _fNearBlurDepth  ; m_bBlurParamsUpdated = true; }};
   void SetFarBlurDepth   (float _fFarBlurDepth   ) { if(_fFarBlurDepth    != m_fFarBlurDepth   ) { m_fFarBlurDepth    = _fFarBlurDepth   ; m_bBlurParamsUpdated = true; }};
-  void SetFocalPlaneDepth(float _fFocalPlaneDepth) { if(_fFocalPlaneDepth != m_fFocalPlaneDepth) { m_fFocalPlaneDepth = _fFocalPlaneDepth; m_bBlurParamsUpdated = true; }};
+  void SetNearFocalPlaneDepth(float _fNearFocalPlaneDepth) { if(_fNearFocalPlaneDepth != m_fNearFocalPlaneDepth) { m_fNearFocalPlaneDepth = _fNearFocalPlaneDepth; m_bBlurParamsUpdated = true; }};
+  void SetFarFocalPlaneDepth(float _fFarFocalPlaneDepth)   { if(_fFarFocalPlaneDepth != m_fFarFocalPlaneDepth)   { m_fFarFocalPlaneDepth  = _fFarFocalPlaneDepth ; m_bBlurParamsUpdated = true; }};
   void SetBlurinessCutoff(float _fBlurinessCutoff) { if(_fBlurinessCutoff != m_fBlurinessCutoff) { m_fBlurinessCutoff = _fBlurinessCutoff; m_bBlurParamsUpdated = true; }};
 
-  float GetBlurRadius     () const { return m_fBlurRadius     ;};
-  float GetNearBlurDepth  () const { return m_fNearBlurDepth  ;};
-  float GetFarBlurDepth   () const { return m_fFarBlurDepth   ;};
-  float GetFocalPlaneDepth() const { return m_fFocalPlaneDepth;};
-  float GetBlurinessCutoff() const { return m_fBlurinessCutoff;};
+  float GetBlurRadius     ()     const { return m_fBlurRadius     ;};
+  float GetNearBlurDepth  ()     const { return m_fNearBlurDepth  ;};
+  float GetFarBlurDepth   ()     const { return m_fFarBlurDepth   ;};
+  float GetNearFocalPlaneDepth() const { return m_fNearFocalPlaneDepth;};
+  float GetFarFocalPlaneDepth()  const { return m_fFarFocalPlaneDepth;};
+  float GetBlurinessCutoff()     const { return m_fBlurinessCutoff;};
   
   void ActivateCamera(const Mat44f& _mViewMatrix, const Mat44f& _mProjectionMatrix, const Vect3f& _vCameraEye, const Vect3f& _vCameraUp, const Vect3f& _vCameraRight);
 
@@ -279,11 +282,12 @@ private:
 
   float m_pfPoissonBlurKernel[32];
 
-  float m_fBlurRadius     ;
-  float m_fNearBlurDepth  ;
-  float m_fFarBlurDepth   ;
-  float m_fFocalPlaneDepth;
-  float m_fBlurinessCutoff;
+  float m_fBlurRadius         ;
+  float m_fNearBlurDepth      ;
+  float m_fFarBlurDepth       ;
+  float m_fNearFocalPlaneDepth;
+  float m_fFarFocalPlaneDepth ;
+  float m_fBlurinessCutoff    ;
 
   //Variables actualitzadeds al shader
   bool m_bWorldMatrixUpdated;

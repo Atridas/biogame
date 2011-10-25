@@ -253,12 +253,15 @@ float BlurRadius(float _fDepth)
   } else if(_fDepth > g_FarBlurDepth)
   {
     return g_BlurRadius;
-  } else if(_fDepth > g_FocalPlaneDepth)
+  } else if(_fDepth > g_FarFocalPlaneDepth)
   {
-    return g_BlurRadius * (_fDepth - g_FocalPlaneDepth) / (g_FarBlurDepth - g_FocalPlaneDepth);
+    return g_BlurRadius * (_fDepth - g_FarFocalPlaneDepth) / (g_FarBlurDepth - g_FarFocalPlaneDepth);
+  } else if(_fDepth < g_NearFocalPlaneDepth)
+  {
+    return g_BlurRadius * (g_NearFocalPlaneDepth - _fDepth) / (g_NearFocalPlaneDepth - g_NearBlurDepth);
   } else
   {
-    return g_BlurRadius * (g_FocalPlaneDepth - _fDepth) / (g_FocalPlaneDepth - g_NearBlurDepth);
+    return 0;
   }
 }
 

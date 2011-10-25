@@ -16,8 +16,8 @@ Main_Menu_Constants["Current frame"] = 0
 Main_Menu_Constants["Frames"]  = {}
 
 
-Main_Menu_Constants["Blur tutorials"] = 10
-Main_Menu_Constants["Blur"] = 4
+Main_Menu_Constants["Blur tutorials"] = 5
+Main_Menu_Constants["Blur"] = 2
 
 -------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------

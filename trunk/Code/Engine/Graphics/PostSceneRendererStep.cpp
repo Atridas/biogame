@@ -81,8 +81,25 @@ bool CPostSceneRendererStep::Init(CXMLTreeNode& _treePostSceneRenderer, const st
             m_iSize.y = (int)(m_iSize.x * RENDER_MANAGER->GetScreenHeight()/(float)RENDER_MANAGER->GetScreenWidth());
           }
         }
+        
+      } else if(_treePostSceneRenderer.ExistsProperty("size_x"))
+      {
+        float l_fSizeX = _treePostSceneRenderer.GetFloatProperty("size_x",1.0,false);
+        float l_fSizeY = _treePostSceneRenderer.GetFloatProperty("size_y",1.0,false);
 
-      }else{
+        if(_treePostSceneRenderer.GetBoolProperty("absolute_size",false,false))
+        {
+          m_iSize.x = (int) l_fSizeX;
+          m_iSize.y = (int) l_fSizeY;
+        }
+        else
+        {
+          m_iSize.x = (int) (l_fSizeX * RENDER_MANAGER->GetScreenWidth());
+          m_iSize.y = (int) (l_fSizeY * RENDER_MANAGER->GetScreenHeight());
+        }
+
+      } else
+      {
         m_iSize.x = RENDER_MANAGER->GetScreenWidth(); 
         m_iSize.y = RENDER_MANAGER->GetScreenHeight();
       }

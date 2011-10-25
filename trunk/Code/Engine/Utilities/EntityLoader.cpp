@@ -838,6 +838,8 @@ CGameEntity* CEntityManager::InitVigia(const string& _szPlayerName, const Vect3f
 
   CComponentEmiter::AddToEntity(l_pVigia,"electric",Vect3f(0.3f,0.2f,0.5f));
 
+  l_pVigia->GetComponent<CComponentEmiter>()->SetActive(false);
+
   //CComponentCollisionReport::AddToEntity(l_pMilitar,"","","","enemy_on_start_colision","","",0.1f);
 
   l_pVigia->SetActive(_bActive);
