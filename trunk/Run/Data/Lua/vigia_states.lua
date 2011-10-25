@@ -213,8 +213,6 @@ State_Vigia_Search_Node["Enter"] = function(_enemic)
   
   ia_brain_vigia.time = 0
   
-  log("dafuq")
-  
   ia_brain_vigia:choose_new_patrol_position()
   --local ia_pos     = _enemic:get_component(BaseComponent.object_3d):get_position()
   --ia_brain_vigia.patrol_direction = ia_brain_vigia.patrol_position - ia_pos

@@ -39,9 +39,12 @@ public:
     EBP_GLOW_LUMINANCE_SCALE     ,
     EBP_MAX_GLOW_LUMINANCE       ,
     EBP_GLOW_FINAL_SCALE         ,
-
+    
+    EBP_BLUR_RADIUS              ,
     EBP_NEAR_FOCAL_PLANE_DEPTH   ,
-    EBP_FAR_FOCAL_PLANE_DEPTH    
+    EBP_FAR_FOCAL_PLANE_DEPTH    ,
+    EBP_NEAR_BLUR_DEPTH          ,
+    EBP_FAR_BLUR_DEPTH    
   };
 
   struct SBlendObjective

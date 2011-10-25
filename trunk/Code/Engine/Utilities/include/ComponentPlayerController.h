@@ -53,6 +53,8 @@ public:
   bool Cover();
   void Use();
 
+  float AimDistance();
+
   bool IsReadyForce() const;
 
   bool HasPickUp(const string& _szPickUp);

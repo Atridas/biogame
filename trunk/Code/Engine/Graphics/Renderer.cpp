@@ -382,6 +382,22 @@ void CRenderer::Update(float _fDeltaTime)
       case EBP_SCENE_LUMINANCE_LIMIT_MAX:
         l_pEM->GetSceneLuminanceLimits(l_fAux, l_fPrevValue);
         break;
+        
+      case EBP_BLUR_RADIUS:
+        l_fPrevValue = l_pEM->GetBlurRadius();
+        break;
+      case EBP_NEAR_FOCAL_PLANE_DEPTH:
+        l_fPrevValue = l_pEM->GetNearFocalPlaneDepth();
+        break;
+      case EBP_FAR_FOCAL_PLANE_DEPTH:
+        l_fPrevValue = l_pEM->GetFarFocalPlaneDepth();
+        break;
+      case EBP_NEAR_BLUR_DEPTH:
+        l_fPrevValue = l_pEM->GetNearBlurDepth();
+        break;
+      case EBP_FAR_BLUR_DEPTH:
+        l_fPrevValue = l_pEM->GetFarBlurDepth();
+        break;
       }
 
 
@@ -435,6 +451,22 @@ void CRenderer::Update(float _fDeltaTime)
         break;
       case EBP_SCENE_LUMINANCE_LIMIT_MAX:
         l_pEM->SetSceneLuminanceLimits(l_fAux, l_fValue);
+        break;
+        
+      case EBP_BLUR_RADIUS:
+        l_pEM->SetBlurRadius(l_fValue);
+        break;
+      case EBP_NEAR_FOCAL_PLANE_DEPTH:
+        l_pEM->SetNearFocalPlaneDepth(l_fValue);
+        break;
+      case EBP_FAR_FOCAL_PLANE_DEPTH:
+        l_pEM->SetFarFocalPlaneDepth(l_fValue);
+        break;
+      case EBP_NEAR_BLUR_DEPTH:
+        l_pEM->SetNearBlurDepth(l_fValue);
+        break;
+      case EBP_FAR_BLUR_DEPTH:
+        l_pEM->SetFarBlurDepth(l_fValue);
         break;
       }
     }

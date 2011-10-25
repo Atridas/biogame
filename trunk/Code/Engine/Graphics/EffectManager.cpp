@@ -489,7 +489,6 @@ void CEffectManager::LoadShaderData(CEffect* _pEffect)
     _pEffect->SetValue("FarBlurDepth"   ,     m_fFarBlurDepth   );
     _pEffect->SetValue("NearFocalPlaneDepth", m_fNearFocalPlaneDepth);
     _pEffect->SetValue("FarFocalPlaneDepth",  m_fFarFocalPlaneDepth);
-    _pEffect->SetValue("BlurinessCutoff",     m_fBlurinessCutoff);
     m_bBlurParamsUpdated = false;
   }
 

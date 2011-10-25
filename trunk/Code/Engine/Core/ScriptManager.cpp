@@ -671,9 +671,12 @@ void CScriptManager::RegisterLUAFunctions()
         value("glow_luminance_scale"      ,CRenderer::EBP_GLOW_LUMINANCE_SCALE     ),
         value("max_glow_luminance"        ,CRenderer::EBP_MAX_GLOW_LUMINANCE       ),
         value("glow_final_scale"          ,CRenderer::EBP_GLOW_FINAL_SCALE         ),
-
+        
+        value("blur_radius"               ,CRenderer::EBP_BLUR_RADIUS              ),
         value("near_focal_plane_depth"    ,CRenderer::EBP_NEAR_FOCAL_PLANE_DEPTH   ),
-        value("far_focal_plane_depth"     ,CRenderer::EBP_FAR_FOCAL_PLANE_DEPTH    )
+        value("far_focal_plane_depth"     ,CRenderer::EBP_FAR_FOCAL_PLANE_DEPTH    ),
+        value("near_blur_depth"           ,CRenderer::EBP_NEAR_BLUR_DEPTH          ),
+        value("far_blur_depth"            ,CRenderer::EBP_FAR_BLUR_DEPTH           )
       ]
       .def("blend_parameter", &CRenderer::BlendParameter)
   ];
@@ -698,7 +701,6 @@ void CScriptManager::RegisterLUAFunctions()
       .def("set_far_blur_depth"         , &CEffectManager::SetFarBlurDepth        )
       .def("set_near_focal_plane_depth" , &CEffectManager::SetNearFocalPlaneDepth )
       .def("set_far_focal_plane_depth"  , &CEffectManager::SetFarFocalPlaneDepth  )
-      .def("set_bluriness_cutoff"       , &CEffectManager::SetBlurinessCutoff     )
   ];
 
 
