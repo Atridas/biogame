@@ -232,5 +232,8 @@
     <ClInclude Include="include\Utils\PriorityQueue.h">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="include\Math\Quaternion.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -16,6 +16,7 @@
 #include "PhysxBone.h"
 #include "PhysicActor.h"
 #include "cal3d\cal3d.h"
+#include "Math/Quaternion.h"
 
 extern "C"
 {
@@ -215,10 +216,15 @@ void CComponentIABrainVigia::LookAt(const Vect3f& _vPos)
   m2.SetPos(l_O3D->GetPosition());
   
   l_O3D->SetMat44(m2);
+  
+  CComponentPhysXSphere* l_pSphere = GetEntity()->GetComponent<CComponentPhysXSphere>();
+  l_pSphere->GetActor()->SetMat44(m2);
+  
 
   /*
   CComponentObject3D* l_O3D = GetEntity()->GetComponent<CComponentObject3D>();
-  Vect3f l_vDesiredDirection = (_vPos - l_O3D->GetPosition()).Normalize();
+  Vect3f l_vPos = l_O3D->GetPosition();
+  Vect3f l_vDesiredDirection = (_vPos - l_vPos).Normalize();
 
   
   CComponentPhysXSphere* l_pSphere = GetEntity()->GetComponent<CComponentPhysXSphere>();
@@ -230,19 +236,77 @@ void CComponentIABrainVigia::LookAt(const Vect3f& _vPos)
   Vect3f l_vAxisRotation;
   float  l_fAngleRotation;
   GetFastestRotationFromDirToDir(Vect3f(l_vDirection.x, l_vDirection.y, l_vDirection.z),
-                                 -l_vDesiredDirection, 
+                                 l_vDesiredDirection, 
                                  l_vAxisRotation, l_fAngleRotation);
   
   Vect3f l_vAngularVelocity = l_pSphere->GetActor()->GetAngularVelocity();
   Vect3f l_vAngularError = l_vAxisRotation * l_fAngleRotation;
 
   
-  float l_tn = 1.3f;
-  float l_eps = 1.f;
+  float l_tn = 0.4f;
+  float l_eps = 0;//1.f;
 
-  Vect3f l_vTorque = (l_vAngularError - 2 * l_tn * l_eps * l_vAngularVelocity)/(l_tn*l_tn);
+  //Vect3f l_vTorque = (l_vAngularError - 2 * l_tn * l_eps * l_vAngularVelocity)/(l_tn*l_tn);
 
-  l_pSphere->GetActor()->AddTorque(l_vTorque);*/
+  float  l_fAngleAngularVelocity = l_vAngularVelocity.Length();
+  Vect3f l_vAxisAngularVelocity;
+  if(l_fAngleAngularVelocity)
+    l_vAxisAngularVelocity  = l_vAngularVelocity.GetNormalized();
+  else
+    l_vAxisAngularVelocity  = Vect3f(0,0,0);
+
+  Vect3f l_vAxisTorque;
+  float  l_fAngleTorque;
+  ConcatenateRotations(l_vAxisRotation,        l_fAngleRotation, 
+                       l_vAxisAngularVelocity, l_fAngleAngularVelocity * (- 2.f * l_tn * l_eps), 
+                       l_vAxisTorque, l_fAngleTorque);
+  l_fAngleTorque /= (l_tn*l_tn);
+
+  l_pSphere->GetActor()->AddTorque(l_vAxisTorque * l_fAngleTorque);
+  */
+
+  /*
+  static const float l_fSpeedTau = .5f;
+  static const float l_fTorqueTau = .1f;
+
+  CComponentObject3D* l_O3D = GetEntity()->GetComponent<CComponentObject3D>();
+  Vect3f l_vPos = l_O3D->GetPosition();
+  Vect3f l_vDesiredDirection = (_vPos - l_vPos).Normalize();
+  
+  Quat4f l_qDesiredOritentation = ShortestArc( Vect3f(0,0,1), l_vDesiredDirection);
+  
+  CComponentPhysXSphere* l_pSphere = GetEntity()->GetComponent<CComponentPhysXSphere>();
+  
+  Mat44f m;
+  l_pSphere->GetActor()->GetMat44(m);
+  Mat33f m33(m.m00, m.m01, m.m02,
+             m.m10, m.m11, m.m12,
+             m.m20, m.m21, m.m22);
+  Quat4f l_qCurrentOrientation(m33);
+
+  Quat4f l_qDesiredInverted = l_qDesiredOritentation.GetInverted();
+  
+  ///////////////////
+  //Vect4f l_vCurrDir4 = m * Vect4f(0,0,1,0);
+  //Vect3f l_vCurrDir(l_vCurrDir4.x, l_vCurrDir4.y, l_vCurrDir4.z);
+  //Quat4f l_qOldCurrentOrientation = ShortestArc( Vect3f(0,0,1), l_vCurrDir);
+  ///////////////////
+
+  Quat4f l_qDesiredAngularSpeed = (l_qCurrentOrientation * l_qDesiredInverted + (Quat4f()*-1)) / (2.f * l_fSpeedTau);
+  Vect3f l_vDesiredAngularSpeed(l_qDesiredAngularSpeed.x, l_qDesiredAngularSpeed.y, l_qDesiredAngularSpeed.z);
+  
+  l_pSphere->GetActor()->SetAngularVelocity(l_vDesiredAngularSpeed);
+  
+
+  //Vect3f l_vDesiredAngularMomentum = l_pSphere->GetActor()->GetInertiaTensor() * l_vDesiredAngularSpeed;
+  //Vect3f l_vCurrentAngularMomentum = l_pSphere->GetActor()->GetAngularMomentum();
+  //
+  //
+  //Vect3f l_vDesiredTorque = (l_vDesiredAngularMomentum - l_vCurrentAngularMomentum) / l_fTorqueTau;
+  //
+  //l_pSphere->GetActor()->AddTorque(l_vDesiredTorque);
+
+  */
 }
 
 void CComponentIABrainVigia::UpdatePostPhysX(float _fDeltaTime)

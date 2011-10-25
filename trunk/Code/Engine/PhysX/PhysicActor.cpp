@@ -176,6 +176,23 @@ void CPhysicActor::AddTorque(const Vect3f _vTorque)
 	}
 }
 
+
+void CPhysicActor::SetAngularVelocity(const Vect3f _vVelocity)
+{
+	if (m_pPhXActor)
+	{
+		if (_vVelocity != v3fZERO)
+		{
+      m_pPhXActor->setAngularVelocity( NxVec3( _vVelocity.x, _vVelocity.y, _vVelocity.z) );
+		}
+	}
+	else
+	{
+		//TODO log de error...
+
+	}
+}
+
 Vect3f CPhysicActor::GetLinearVelocity()
 {
   if (m_pPhXActor)
@@ -197,6 +214,36 @@ Vect3f CPhysicActor::GetAngularVelocity()
 	}
 
   return v3fZERO;
+}
+
+
+Vect3f CPhysicActor::GetAngularMomentum()
+{
+  if (m_pPhXActor)
+	{
+    NxVec3 l_nxMom = m_pPhXActor->getAngularMomentum();
+    return Vect3f(l_nxMom.x,l_nxMom.y,l_nxMom.z);
+	}
+
+  return v3fZERO;
+}
+
+Mat33f CPhysicActor::GetInertiaTensor()
+{
+  if (m_pPhXActor)
+	{
+    NxMat33 l_nxTensor = m_pPhXActor->getGlobalInertiaTensor();
+    
+	  NxF32 m_aux[9];
+    l_nxTensor.getRowMajor(m_aux);
+
+    return Mat33f( m_aux[0], m_aux[1], m_aux[2],
+                   m_aux[4], m_aux[5], m_aux[6],
+                   m_aux[7], m_aux[8], m_aux[9]
+                 );
+	}
+
+  return m33fIDENTITY;
 }
 
 void CPhysicActor::AddSphereShape	(float radius, const Vect3f& globalPos, const Vect3f& localPos, NxCCDSkeleton* skeleton, uint32 group)
@@ -383,6 +430,29 @@ void CPhysicActor::SetRotation(const Vect3f& _vRot)
 
   SetMat44(l_rot44);
 
+}
+
+
+void CPhysicActor::SetRotation(const Mat33f& _vRot)
+{
+  
+  Mat44f l_rot44;
+  l_rot44.SetIdentity();
+  l_rot44.m00 = _vRot.m00;
+  l_rot44.m01 = _vRot.m01;
+  l_rot44.m02 = _vRot.m02;
+
+  l_rot44.m10 = _vRot.m10;
+  l_rot44.m11 = _vRot.m11;
+  l_rot44.m12 = _vRot.m12;
+
+  l_rot44.m20 = _vRot.m20;
+  l_rot44.m21 = _vRot.m21;
+  l_rot44.m22 = _vRot.m22;
+
+  l_rot44.Translate(GetPosition());
+  
+  SetMat44(l_rot44);
 }
 
 Vect3f CPhysicActor::GetPosition ()

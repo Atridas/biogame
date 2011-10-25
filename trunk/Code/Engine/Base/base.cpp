@@ -1,5 +1,5 @@
 #include "base.h"
-
+#include "Math/Quaternion.h"
 
 float Random01()
 {
@@ -20,9 +20,13 @@ int RandomNumber(int _iNumA, int _iNumB)
   if(_iNumA > _iNumB)
   {
     //ofuscar coses mola
-    _iNumA ^= _iNumB;
-    _iNumB ^= _iNumA;
-    _iNumA ^= _iNumB;
+    //_iNumA ^= _iNumB;
+    //_iNumB ^= _iNumA;
+    //_iNumA ^= _iNumB;
+    int auxA = _iNumA;
+    int auxB = _iNumB;
+    _iNumA = auxB;
+    _iNumB = auxA;
   }
   int l_iDiff = (_iNumB - _iNumA);
   l_iNumber = rand();
@@ -115,6 +119,7 @@ void ConcatenateRotations(const Vect3f& _vAxis1, float _fAngle1,
                           const Vect3f& _vAxis2, float _fAngle2, 
                           Vect3f& vAxis_, float& fAngle_)
 {
+  /*
   float qx1, qy1, qz1, qw1;
   float qx2, qy2, qz2, qw2;
   
@@ -138,15 +143,13 @@ void ConcatenateRotations(const Vect3f& _vAxis1, float _fAngle1,
 	vAxis_.z = qw2 * qz1 + qx2 * qy1 - qy2 * qx1 + qz2 * qw1;
 	fAngle_  = qw2 * qw1 - qx2 * qx1 - qy2 * qy1 - qz2 * qz1;
 
-  fAngle_ = 2 * acos(fAngle_);
-  if(fAngle_ != 0)
-  {
-    vAxis_ /= sin(fAngle_ * .5f);
-  }
-  else
-  {
-    vAxis_ = Vect3f(0,0,0);
-  }
+  */
+  Quat4f q1(_vAxis1, _fAngle1);
+  Quat4f q2(_vAxis2, _fAngle2);
+
+  Quat4f q3 = q2 * q1;
+
+  q3.GetAxisAngle(vAxis_, fAngle_);
 }
 
 //----------------------------------------------------------------------------------------------------
