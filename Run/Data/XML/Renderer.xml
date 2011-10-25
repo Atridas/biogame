@@ -821,9 +821,9 @@
       </input_samplers>
     </post_scene_renderer>
     
-    <post_scene_renderer name="tutorial interactive" effect="Texture" size="0.33" aspect_ratio="true" position="0.33 0.2">
+    <post_scene_renderer name="tutorial interactive" effect="TextureAlphaFactor" size="0.33" aspect_ratio="true" position="0.33 0.2">
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/tutorial_interactive.png"/>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/interactuables.dds"/>
       </input_samplers>
     </post_scene_renderer>
     
@@ -851,21 +851,21 @@
       </input_samplers>
     </post_scene_renderer>
     
-    <post_scene_renderer name="tutorial cover" effect="Texture" size="0.33" aspect_ratio="true" position="0.33 0.2">
+    <post_scene_renderer name="tutorial cover" effect="TextureAlphaFactor" size="0.33" aspect_ratio="true" position="0.33 0.2">
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/tutorial_cobertura.png"/>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/cobertura.dds"/>
       </input_samplers>
     </post_scene_renderer>
     
-    <post_scene_renderer name="tutorial barrel explosive" effect="Texture" size="0.33" aspect_ratio="true" position="0.33 0.2">
+    <post_scene_renderer name="tutorial barrel explosive" effect="TextureAlphaFactor" size="0.33" aspect_ratio="true" position="0.33 0.2">
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/tutorial_barril_explosiu.png"/>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/bidons_explosions.dds"/>
       </input_samplers>
     </post_scene_renderer>
     
-    <post_scene_renderer name="tutorial barrel toxic" effect="Texture" size="0.33" aspect_ratio="true" position="0.33 0.2">
+    <post_scene_renderer name="tutorial barrel toxic" effect="TextureAlphaFactor" size="0.33" aspect_ratio="true" position="0.33 0.2">
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/tutorial_barril_toxic.png"/>
+        <input_sampler type="texture" index="0" texture="Data/Textures/Gameplay/bidons_toxics.dds"/>
       </input_samplers>
     </post_scene_renderer>
     
