@@ -15,4 +15,22 @@
   <animation name="shoot" filename="Data/Animated Models/Vigia/shoot.CAF"/>
   <animation name="obertura" filename="Data/Animated Models/Vigia/obertura.CAF"/>
   <animation name="frenada" filename="Data/Animated Models/Vigia/frenada.CAF"/>
+
+  <animation_states default="shoot">
+      <animation_state name="moviment" default_fade_in="0.3" default_fade_out="0.3">
+        <cycle name="moviment"/>
+      </animation_state>
+      <!-- -->
+      <animation_state name="shoot" default_fade_in="0.3" default_fade_out="0.3">
+        <cycle name="shoot" />
+      </animation_state>
+      <!-- -->
+      <animation_state name="obertura" default_fade_in="0.3" default_fade_out="0.3">
+        <cycle name="obertura" />
+      </animation_state>
+      <!-- -->
+      <animation_state name="frenada" default_fade_in="0.3" default_fade_out="0.3">
+        <cycle name="frenada" />
+      </animation_state>
+  </animation_states>
 </actor>

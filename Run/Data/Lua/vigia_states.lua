@@ -28,6 +28,10 @@ State_Vigia_Patrol["Enter"] = function(_enemic)
 
   local ia_brain_vigia = _enemic:get_component(BaseComponent.ia_brain_vigia)
   
+  local animation = _enemic:get_component(BaseComponent.animation)
+  
+  animation:set_animation_state('shoot')
+  
   ia_brain_vigia:fly(true)
   
   ia_brain_vigia.time = 0
@@ -89,6 +93,10 @@ end
 State_Vigia_Atac["Enter"] = function(_enemic)
 
   local ia_brain_vigia = _enemic:get_component(BaseComponent.ia_brain_vigia)
+  
+  local animation = _enemic:get_component(BaseComponent.animation)
+  
+  animation:set_animation_state('frenada')
   
   ia_brain_vigia.time = 0
 
@@ -285,6 +293,9 @@ State_Vigia_Rebre_Impacte["Enter"] = function(_enemic)
 
   local ia_brain_vigia = _enemic:get_component(BaseComponent.ia_brain_vigia)
   local emiter = _enemic:get_component(BaseComponent.emiter)
+  local animation = _enemic:get_component(BaseComponent.animation)
+  
+  animation:set_animation_state('shoot')
   
   ia_brain_vigia.time = 0
   
@@ -369,6 +380,10 @@ State_Vigia_Mort["Enter"] = function(_enemic)
 
   local ia_brain_vigia = _enemic:get_component(BaseComponent.ia_brain_vigia)
   local emiter = _enemic:get_component(BaseComponent.emiter)
+  
+  local animation = _enemic:get_component(BaseComponent.animation)
+  
+  animation:set_animation_state('shoot')
   
   ia_brain_vigia:fly(false)
   
