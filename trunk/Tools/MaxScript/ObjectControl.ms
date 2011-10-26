@@ -275,7 +275,31 @@ function GetEnemiesEntities _entities =
 	for i = 1 to _entities.count do
 	(
 		l_property = GetUserProp _entities[i] "entity"
-		if l_property == "Miner" or l_property == "Militar" or l_property == "Robot" then
+		if l_property == "Miner" or l_property == "Militar" then
+		(
+			append l_enemies _entities[i]
+		)
+	)
+	
+	if l_enemies.count == 0 then
+	(
+		return undefined
+	)else
+	(
+		return l_enemies
+	)
+)
+
+-- Cerca les entitats d'enemics
+function GetEnemiesVigiesEntities _entities =
+(
+	local l_enemies = #()
+	local l_property = undefined
+	
+	for i = 1 to _entities.count do
+	(
+		l_property = GetUserProp _entities[i] "entity"
+		if l_property == "Vigia" then
 		(
 			append l_enemies _entities[i]
 		)

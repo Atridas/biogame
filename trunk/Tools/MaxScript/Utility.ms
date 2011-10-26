@@ -1268,6 +1268,17 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			)
 		)
 		
+		local l_vigies = GetEnemiesVigiesEntities _entities
+		if l_vigies != undefined then
+		(				
+			for i = 1 to l_vigies.count do
+			(
+				l_params = XMLEntityVigia l_vigies[i] _entities &l_TagName
+				format "\n  %" (InlineTagParamXML l_TagName l_params) to:l_file
+				format "\tVigia\n"
+			)
+		)
+		
 		-------------------------------------------------------
 		
 		format "\n%\n" (CloseTagXML "Entities") to:l_file

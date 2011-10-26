@@ -411,7 +411,7 @@ function XMLEntityPlayer _instance &_TagName =
 	return l_params
 )
 
---Genera els paràmetres d'un tag XML d'entitat Miner/Militar/Robot. Conté:
+--Genera els paràmetres d'un tag XML d'entitat Miner/Militar. Conté:
 -- name
 -- position
 -- yaw
@@ -475,6 +475,98 @@ function XMLEntityEnemy _instance &_TagName =
 		if (GetUserProp _instance "entity") != "Player" then
 		(
 			_TagName = GetUserProp _instance "entity"
+		)
+	)
+	
+	return l_params
+)
+
+--Genera els paràmetres d'un tag XML d'entitat Vigia. Conté:
+-- name
+-- position
+-- yaw
+-- zone_size
+-- zone_position
+-- zone_yaw
+-- [on_death]
+function XMLEntityVigia _instance _entities &_TagName =
+(
+	local l_params = #()
+	local l_aux
+	local l_tmp
+	local l_zona = undefined
+	
+	_TagName = "Vigia"
+	
+	if (GetUserProp _instance "entity") != undefined and (GetUserProp _instance "ZonaVigia") != undefined then
+	(
+		l_aux = GetUserProp _instance "ZonaVigia"
+		
+		
+		for i = 1 to _entities.count do
+		(
+			if _entities[i].name == l_aux then
+			(
+				l_zona = _entities[i]
+			)
+		)
+		
+		if l_zona != undefined then
+		(
+			--name
+			l_tmp = _instance.name
+			append l_params #("name",l_tmp)
+			
+			--position
+			l_aux = "" as stringStream
+			l_tmp = RHVectorToLH _instance.position
+			format "% % %" l_tmp.x l_tmp.y l_tmp.z to:l_aux
+			append l_params #("position",l_aux)
+			
+			--yaw
+			l_aux = "" as stringStream
+			l_tmp = GetYaw (_instance.transform)
+			format "%" l_tmp to:l_aux
+			append l_params #("yaw",l_aux)
+			
+			--active
+			local l_active = GetUserProp _instance "active"
+			if l_active == undefined then
+			(
+				l_active = "false"
+			)
+			l_aux = "" as stringStream
+			format "%" l_active to:l_aux
+			append l_params #("active", l_aux)
+			
+			--on_death
+			l_tmp = GetUserProp _instance "onDeath"
+			if l_tmp != undefined then
+			(
+				l_aux = "" as stringStream
+				format "%" l_tmp to:l_aux
+				append l_params #("on_death", l_aux)
+			)
+			
+			l_aux = "" as stringStream
+			local l_size = RHVectorToLH (DummySize l_zona)
+			format "% % %" l_size.x l_size.y l_size.z to:l_aux
+			append l_params #("zone_size", l_aux)
+			
+			l_aux = "" as stringStream
+			local l_translation = RHVectorToLH l_zona.transform.translation
+			format "% % %" l_translation.x l_translation.y l_translation.z to:l_aux
+			append l_params #("zone_position",l_aux)
+			
+			l_aux = "" as stringStream
+			local l_yaw = GetYaw l_zona.transform
+			format "%" l_yaw to:l_aux
+			append l_params #("zone_yaw",l_aux)
+			
+		)
+		else
+		(
+			format "no s'ha trobat la zona %\n" l_aux
 		)
 	)
 	

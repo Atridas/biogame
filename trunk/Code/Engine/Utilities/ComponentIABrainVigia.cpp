@@ -17,6 +17,7 @@
 #include "PhysicActor.h"
 #include "cal3d\cal3d.h"
 #include "Math/Quaternion.h"
+#include "RenderManager.h"
 
 extern "C"
 {
@@ -35,11 +36,11 @@ extern "C"
 
 #define SHOOT_POWER 7.0f
 
-CComponentIABrainVigia* CComponentIABrainVigia::AddToEntity(CGameEntity *_pEntity, const string& _szPlayerEntityName, const string& _szOnDeathScript)
+CComponentIABrainVigia* CComponentIABrainVigia::AddToEntity(CGameEntity *_pEntity, const string& _szPlayerEntityName, const Vect3f& _vZoneSize, const Mat44f& _mZoneTransform, const string& _szOnDeathScript)
 {
   CComponentIABrainVigia *l_pComp = new CComponentIABrainVigia();
   assert(_pEntity && _pEntity->IsOk());
-  if(l_pComp->Init(_pEntity, _szPlayerEntityName, _szOnDeathScript))
+  if(l_pComp->Init(_pEntity, _szPlayerEntityName, _vZoneSize, _mZoneTransform, _szOnDeathScript))
   {
     l_pComp->SetEntity(_pEntity);
     return l_pComp;
@@ -51,7 +52,7 @@ CComponentIABrainVigia* CComponentIABrainVigia::AddToEntity(CGameEntity *_pEntit
   }
 }
 
-bool CComponentIABrainVigia::Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szOnDeathScript)
+bool CComponentIABrainVigia::Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const Vect3f& _vZoneSize, const Mat44f& _mZoneTransform, const string& _szOnDeathScript)
 {
   m_pPlayer = CORE->GetEntityManager()->GetEntity(_szPlayerEntityName);
 
@@ -59,10 +60,11 @@ bool CComponentIABrainVigia::Init(CGameEntity* _pEntity, const string& _szPlayer
 
   m_bDead = false;
 
-  m_fTargetHeight = 1.5f;
-  m_vTargetPosition = Vect3f(2.0f,2.5f,2.0f);
+  m_vTargetPosition = _mZoneTransform.GetPos();
 
-  m_PatrolZone.Init( Vect3f(0,1,0), Vect3f(5,3,5) );
+  m_PatrolZone.GetBoundingBox()->Init( _vZoneSize );
+  m_PatrolZone.SetMat44(_mZoneTransform);
+
   m_vPatrolDirection = Vect3f(0,0,1);
   m_vPatrolPosition = m_vTargetPosition;
 
@@ -72,13 +74,19 @@ bool CComponentIABrainVigia::Init(CGameEntity* _pEntity, const string& _szPlayer
 
 void CComponentIABrainVigia::ChooseNewPatrolPosition()
 {
-  float x = RandomNumber(m_PatrolZone.GetMin().x, m_PatrolZone.GetMax().x);
-  float y = RandomNumber(m_PatrolZone.GetMin().y, m_PatrolZone.GetMax().y);
-  float z = RandomNumber(m_PatrolZone.GetMin().z, m_PatrolZone.GetMax().z);
+  CBoundingBox* l_pBB = m_PatrolZone.GetBoundingBox();
 
-  m_vPatrolDirection = Vect3f(x,y,z) - m_vPatrolPosition;
+  float x = RandomNumber(l_pBB->GetMin().x, l_pBB->GetMax().x);
+  float y = RandomNumber(l_pBB->GetMin().y, l_pBB->GetMax().y);
+  float z = RandomNumber(l_pBB->GetMin().z, l_pBB->GetMax().z);
+
+  Mat44f m = m_PatrolZone.GetMat44();
+  Vect4f l_NewPatrollPosition4 = m * Vect4f(x,y,z,1);
+  Vect3f l_NewPatrollPosition(l_NewPatrollPosition4.x, l_NewPatrollPosition4.y, l_NewPatrollPosition4.z);
+
+  m_vPatrolDirection = l_NewPatrollPosition - m_vPatrolPosition;
   m_vPatrolDirection.Normalize();
-  m_vPatrolPosition  = Vect3f(x,y,z);
+  m_vPatrolPosition  = l_NewPatrollPosition;
 }
 
 void CComponentIABrainVigia::Shoot(float _fShootPrecision)
@@ -384,6 +392,20 @@ void CComponentIABrainVigia::UpdatePostPhysX(float _fDeltaTime)
 
     LookAt(l_vPos + l_vDirection, _fDeltaTime);
   }
+}
+
+void CComponentIABrainVigia::DebugRender(CRenderManager* _pRM)
+{
+  Mat44f m;
+  //m.SetIdentity();
+  m_PatrolZone.GetMat44(m);
+  _pRM->SetTransform(m);
+  _pRM->DrawCube(m_PatrolZone.GetBoundingBox()->GetMiddlePoint(), m_PatrolZone.GetBoundingBox()->GetDimension(), colRED);
+
+  m.SetIdentity();
+  m.Translate(m_vPatrolPosition);
+  _pRM->SetTransform(m);
+  _pRM->DrawAxis();
 }
 
 void CComponentIABrainVigia::Die()
