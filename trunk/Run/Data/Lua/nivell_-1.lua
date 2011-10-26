@@ -223,6 +223,7 @@ function lvl1_stop_elevator(_EntityTrigger, _Entity)
       deactivate_cynematic_camera()
       RENDERER:activate_render_path("aim_gui")
       _Entity:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+      megacheat_level_1()
       
       --posem l'ascensor al seu lloc
       local elevator_position = elevator:get_component(BaseComponent.object_3d):get_position()
@@ -236,6 +237,12 @@ function lvl1_stop_elevator(_EntityTrigger, _Entity)
     end
   end
 end
+
+function megacheat_level_1()
+  EM:get_entity("Player"):get_component(BaseComponent.physx_controller):set_position( Vect3f( -0.31565, 0.973216474, -23.9925994873) )
+end
+
+
 
 --activar l'ascensor de sortida
 function lvl1_activate_elevator(_EntityTrigger, _Entity)
