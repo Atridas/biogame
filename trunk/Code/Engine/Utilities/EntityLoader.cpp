@@ -907,6 +907,7 @@ CGameEntity* CEntityManager::InitLaser(const Vect3f& _vPosInit, const Vect3f& _v
   l_pCRO->m_bRemoveRenderableObject = true;
   l_pComponentObject3D->SetMat44(l_mO3D);
   l_pCRO->GetRenderableObject()->SetMat44(l_mO3D);
+  l_pCRO->SetVisible(false);
 
   CComponentLifetime::AddToEntity(l_pLaser, 60);
   CComponentOmni::AddToEntity(l_pLaser,Vect3f(0,0,0), CColor(.5f,0,0), 1.f, 4.f);
@@ -1008,7 +1009,7 @@ CGameEntity* CEntityManager::InitGrenade(float _fLifeTime, const Vect3f& _vPos,c
   CComponentExplosive::AddToEntity(l_pGrenade);
   CComponentOmni::AddToEntity(l_pGrenade,Vect3f(0,0,0), CColor(1.0f,0.9f,0.5f), 1.f, 4.f);
 
-  l_pSphere->GetActor()->AddVelocityAtLocalPos(_vDir,Vect3f(0.0f),SHOOT_POWER);
+  l_pSphere->GetActor()->AddVelocityAtPos(_vDir,Vect3f(0.0f),SHOOT_POWER);
   
 
 	return 0;

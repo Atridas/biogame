@@ -674,7 +674,7 @@ CPhysicUserData* CPhysicsManager::RaycastClosestActor (const Vect3f posRay, cons
 	closestShape = m_pScene->raycastClosestShape(ray, NX_ALL_SHAPES, hit, impactMask);
 	if (!closestShape) 
 	{
-		//No hemos tokado a ningún objeto físico de la escena.
+		//No hemos tocado a ningún objeto físico de la escena.
 		return NULL;
 	}
 	NxActor* actor = &closestShape->getActor();
@@ -899,6 +899,10 @@ int GetCollisionGroup(const string& _szGroup)
   else if(_szGroup == "trigger")
   {
     return ECG_TRIGGERS;
+  }
+  else if(_szGroup == "trigger mal")
+  {
+    return ECG_MALGLOBAL;
   }
   else if(_szGroup == "cobertura")
   {

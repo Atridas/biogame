@@ -161,6 +161,11 @@ bool CComponentRenderableObject::ChangeInstance(const string& _szName)
   return false;
 }
 
+void CComponentRenderableObject::SetVisible(bool _bVisible)
+{
+  m_pRenderableObject->SetVisible(_bVisible);
+}
+
 void CComponentRenderableObject::Enable()
 {
   m_pRenderableObject->SetVisible(true);

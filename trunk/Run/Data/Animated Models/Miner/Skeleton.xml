@@ -7,7 +7,7 @@
     <bone name="Bip01 Spine" type="box" density="0.8" bounding_box_size="0.122694 0.654392 0.632955" bounding_box_middle_point="-0.020965 0.0 0.0"/>
     <bone name="Bip01 Spine1" type="box" density="0.8" bounding_box_size="0.124802 0.612046 0.601653" bounding_box_middle_point="-0.073283 0.0 0.0"/>
     <bone name="Bip01 Spine2" type="box" density="1.8" bounding_box_size="0.178240 0.466992 0.497108" bounding_box_middle_point="-0.098432 0.0 0.0"/>
-    <bone name="Bip01 Neck" type="box" density="1.8" bounding_box_size="0.093491 0.092920 0.093757" bounding_box_middle_point="-0.014064 -0.018574 0.005320"/>
+    <bone name="Bip01 Neck" type="box" density="1.8" bounding_box_size="0.103491 0.102920 0.103757" bounding_box_middle_point="-0.014064 -0.018574 0.005320"/>
     <bone name="Bip01 L Clavicle" type="box" density="1" bounding_box_size="0.254383 0.15895 0.19770" bounding_box_middle_point="-0.133625 0.0 0.0"/>
     <bone name="Bip01 L UpperArm" type="box" density="0.8" bounding_box_size="0.248619 0.228260 0.281680" bounding_box_middle_point="-0.135440 0.015622 -0.021220"/>
     <bone name="Bip01 L Forearm" type="box" density="0.8" bounding_box_size="0.448885 0.272399 0.291598" bounding_box_middle_point="-0.189922 -0.005194 -0.009714"/>
@@ -16,7 +16,7 @@
     <bone name="Bip01 R UpperArm" type="box" density="0.8" bounding_box_size="0.178470 0.228260 0.281680" bounding_box_middle_point="-0.056005 0.016114 0.021756"/>
     <bone name="Bip01 R Forearm" type="box" density="0.8" bounding_box_size="0.318496 0.156111 0.192791" bounding_box_middle_point="-0.094590 0.013160 0.020072"/>
     <bone name="Bip01 R Hand" type="box" density="0.8" bounding_box_size="0.355443 0.357828 0.344023" bounding_box_middle_point="0.034760 0.007774 0.004418"/>
-    <bone name="Bip01 Head" type="sphere" density="0.1" bounding_box_size="0.280420 0.193147 0.275773" bounding_box_middle_point="-0.126915 0.021115 -0.004631"/>
+    <bone name="Bip01 Head" type="box" density="0.8" bounding_box_size="0.280420 0.193147 0.275773" bounding_box_middle_point="-0.126915 0.021115 -0.004631"/>
     <!--<bone name="Bip01 HeadNub" type="box" density="0.5" bounding_box_size="0.000000 0.000000 0.000000" bounding_box_middle_point="1.905706 -0.452789 0.365780"/>-->
     <bone name="Bip01 L Thigh" type="box" density="0.8" bounding_box_size="0.400661 0.249025 0.253847" bounding_box_middle_point="-0.293320 0.0 0.0"/>
     <bone name="Bip01 L Calf" type="box" density="0.8" bounding_box_size="0.410225 0.192376 0.189165" bounding_box_middle_point="-0.278097 -0.015812 -0.001287"/>

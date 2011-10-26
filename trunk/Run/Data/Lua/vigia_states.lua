@@ -5,7 +5,7 @@ Vigia_Constants["Time Atac To Shoot"]    = 0.8
 Vigia_Constants["Time Search Node"]      = 0.3
 Vigia_Constants["Time Shoots"]           = 0.3
 Vigia_Constants["Time Rebre Impacte"]    = 0.5
-Vigia_Constants["Num Shoots"]            = 3
+Vigia_Constants["Num Shoots"]            = 6
 Vigia_Constants["Distancia Atac"] = 8 * 8
 
 
@@ -91,6 +91,8 @@ State_Vigia_Atac["Enter"] = function(_enemic)
   local ia_brain_vigia = _enemic:get_component(BaseComponent.ia_brain_vigia)
   
   ia_brain_vigia.time = 0
+
+  SOUND:play_sample("robot_move")
   
   --local animation = _enemic:get_component(BaseComponent.animation)
   --animation:set_animation_state('idle')
@@ -99,6 +101,7 @@ end
 -------------------------------------------------------------------------------------------------
 State_Vigia_Atac["Exit"] = function(_enemic)
 
+    
 end
 
 -------------------------------------------------------------------------------------------------
@@ -118,7 +121,7 @@ State_Vigia_Atac['Update'] = function(_enemic, _dt)
   
   local dist_sq = (ia_pos - player_pos):length_sq()
   
-  ia_brain_vigia.patrol_direction = player_pos - ia_pos
+  ia_brain_vigia.patrol_direction = player_pos - ia_pos + Vect3f(0, 0.5,0)
   
   if dist_sq > Vigia_Constants["Distancia Atac"] then
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Vigia_Patrol')
@@ -174,6 +177,12 @@ State_Vigia_Shoot['Update'] = function(_enemic, _dt)
 
     ia_brain_vigia:shoot(0)
     
+    local ia_pos     = _enemic:get_component(BaseComponent.object_3d):get_position()
+    local player_pos = ia_brain_vigia.player:get_component(BaseComponent.object_3d):get_position()
+    ia_brain_vigia.patrol_direction = player_pos - ia_pos + Vect3f(0, 0.5,0)
+    
+    SOUND:play_sample("robot_shoot")
+    
     ia_brain_vigia.time = 0
     
     ia_brain_vigia.shoots = ia_brain_vigia.shoots + 1
@@ -225,6 +234,7 @@ State_Vigia_Search_Node["Exit"] = function(_enemic)
   local ia_brain_vigia = _enemic:get_component(BaseComponent.ia_brain_vigia)
   
   ia_brain_vigia:set_target_position(ia_brain_vigia.patrol_position)
+  
 end
 
 -------------------------------------------------------------------------------------------------
@@ -248,9 +258,7 @@ State_Vigia_Search_Node['Update'] = function(_enemic, _dt)
       return
     end
   end
-  
-  
-  
+
 end
 
 -------------------------------------------------------------------------------------------------
@@ -301,11 +309,11 @@ end
 -------------------------------------------------------------------------------------------------
 State_Vigia_Rebre_Impacte['Update'] = function(_enemic, _dt)
   local ia_brain_vigia = _enemic:get_component(BaseComponent.ia_brain_vigia)
+  local vida = _enemic:get_component(BaseComponent.vida)
   
   ia_brain_vigia.time = ia_brain_vigia.time + _dt
   
   if ia_brain_vigia.time > Vigia_Constants["Time Rebre Impacte"] then
-    local vida = _enemic:get_component(BaseComponent.vida)
     
     if vida:get_hp() > 0 then
     
@@ -324,9 +332,13 @@ State_Vigia_Rebre_Impacte['Update'] = function(_enemic, _dt)
       --  _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Vigia_Atac')
       --  return
       --end
-    else
-      _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Vigia_Mort')
+      
     end
+  end
+  
+  if vida:get_hp() <= 0 then
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Vigia_Mort')
+    return
   end
   
   
@@ -361,6 +373,8 @@ State_Vigia_Mort["Enter"] = function(_enemic)
   ia_brain_vigia:fly(false)
   
   ia_brain_vigia.time = 0
+  
+  SOUND:play_sample("robot_die")
   
   emiter:set_active(true)
   
