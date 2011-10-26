@@ -240,6 +240,7 @@ end
 --activar l'ascensor de sortida
 function lvl1_activate_elevator(_EntityTrigger, _Entity)
   if _Entity:get_name() == "Player" then
+    god_mode(true)
     local elevator = EM:get_entity("lvl1_montacarregues01")
     
     if elevator then      

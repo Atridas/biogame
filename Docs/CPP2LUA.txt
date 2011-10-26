@@ -12,6 +12,9 @@ GLOBALS
     get_collision_group
     int GetCollisionGroup(const string& _szGroup)
     
+    set_song
+    void SetSong(CComponentBGMController::EMusicState _song)
+    
     set_new_level
     void SetNewLevel(const string& _szLevel)
     

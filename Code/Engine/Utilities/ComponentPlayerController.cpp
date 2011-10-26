@@ -94,11 +94,23 @@ void CComponentPlayerController::UpdatePostPhysX(float _fDeltaTime)
   CPostSceneRendererStep* l_pDamage = l_pRenderer->GetPostSceneRendererStep("damage_gui");
   CPostSceneRendererStep* l_pBlood  = l_pRenderer->GetPostSceneRendererStep("blood_gui");
 
-  float l_fHP = l_pComponentVida->GetHP();
-  float l_fMaxHP = l_pComponentVida->GetMaxHP();
+  float l_fHP = 100.f;
+  float l_fMaxHP = 100.f;
   
-  float l_fEnergy = l_pComponentEnergy->GetEnergy();
-  float l_fMaxEnergy = l_pComponentEnergy->GetMaxEnergy();
+  if(l_pComponentVida && !m_bGodMode)
+  {
+    l_fHP = l_pComponentVida->GetHP();
+    l_fMaxHP = l_pComponentVida->GetMaxHP();
+  }
+  
+  float l_fEnergy = 100.f;
+  float l_fMaxEnergy = 100.f;
+
+  if(l_pComponentEnergy && !m_bGodMode)
+  {
+    l_fEnergy = l_pComponentEnergy->GetEnergy();
+    l_fMaxEnergy = l_pComponentEnergy->GetMaxEnergy();
+  }
   
   float l_fMin = 0.0f;
   float l_fMax = 1.0f;
