@@ -5,7 +5,7 @@
 #include "base.h"
 #include "EntityDefines.h"
 
-#include "Utils\BoundingBox.h"
+#include "Utils\Object3D.h"
 
 class CGraphNode;
 class CComponentNavNode;
@@ -16,7 +16,7 @@ class CComponentIABrainVigia:
 public:
   ~CComponentIABrainVigia() {Done();}
 
-  static CComponentIABrainVigia* AddToEntity(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szOnDeathScript = "");
+  static CComponentIABrainVigia* AddToEntity(CGameEntity* _pEntity, const string& _szPlayerEntityName, const Vect3f& _vZoneSize, const Mat44f& _mZoneTransform, const string& _szOnDeathScript = "");
 
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_IA_BRAIN_VIGIA;};
   static CBaseComponent::Type GetStaticType() {return CBaseComponent::ECT_IA_BRAIN_VIGIA;};
@@ -28,6 +28,8 @@ public:
   void LookAt(const Vect3f& _vPos, float l_fTimeDelta);
 
   virtual void UpdatePostPhysX(float _fDeltaTime);
+  
+  virtual void DebugRender(CRenderManager*);
 
   void Shoot(float _fShootPrecision);
   void ReceiveShoot(SEvent _sEvent);
@@ -45,8 +47,8 @@ public:
 
 
 private:
-  CComponentIABrainVigia():m_pPlayer(0),m_fTime(0),m_bShooted(false),m_iShoots(0),m_fTargetHeight(0.0f),m_vTargetPosition(0.0f),m_bFly(false), m_szOnDeathScript(""), m_bDead(false) {};
-  bool Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const string& _szOnDeathScript = "");
+  CComponentIABrainVigia():m_pPlayer(0),m_fTime(0),m_bShooted(false),m_iShoots(0),m_vTargetPosition(0.0f),m_bFly(false), m_szOnDeathScript(""), m_bDead(false) {};
+  bool Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const Vect3f& _vZoneSize, const Mat44f& _mZoneTransform, const string& _szOnDeathScript = "");
 
   void Die();
   void RunScript();
@@ -59,10 +61,9 @@ private:
 
   string m_szOnDeathScript;
 
-  float m_fTargetHeight;
   Vect3f m_vTargetPosition;
   
-  CBoundingBox m_PatrolZone;
+  CObject3D m_PatrolZone;
 };
 
 #endif

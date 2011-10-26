@@ -493,12 +493,25 @@ void LoadVigia(CEntityManager* _pEM, CXMLTreeNode& _TreeVigia)
   string l_szName          = _TreeVigia.GetPszISOProperty("name", "", false);
   string l_szPlayerName    = _TreeVigia.GetPszISOProperty("player", "Player", false);
   Vect3f l_vPosition       = _TreeVigia.GetVect3fProperty("position", Vect3f(0,0,0),true);
+  float  l_fYaw            = _TreeVigia.GetFloatProperty( "yaw", 0, false) * FLOAT_PI_VALUE / 180.f;
   bool l_bActive           = _TreeVigia.GetBoolProperty("active", true, false);
+  
+  string l_szOnDeathScript = _TreeVigia.GetPszISOProperty("on_death", "", false);
+
+  
+  Vect3f l_vZoneSize       = _TreeVigia.GetVect3fProperty("zone_size", Vect3f(0,0,0),true);
+  Vect3f l_vZonePosition   = _TreeVigia.GetVect3fProperty("zone_position", Vect3f(0,0,0),true);
+  float  l_fZoneYaw        = _TreeVigia.GetFloatProperty( "zone_yaw", 0, false) * FLOAT_PI_VALUE / 180.f;
+
+  Mat44f l_mZoneMatrix;
+  l_mZoneMatrix.SetIdentity();
+  l_mZoneMatrix.SetFromAngleY(l_fZoneYaw);
+  l_mZoneMatrix.SetPos(l_vZonePosition);
   
   LOGGER->AddNewLog(ELL_INFORMATION, "\t\t\tVigia name \"%s\", pos %f,%f,%f, Player %s", l_szName.c_str(),
                                       l_vPosition.x, l_vPosition.y, l_vPosition.z, l_szPlayerName.c_str());
-
-  CGameEntity* l_pEntity = _pEM->InitVigia(l_szPlayerName, l_vPosition, l_szName, l_bActive);
+  
+  CGameEntity* l_pEntity = _pEM->InitVigia(l_szPlayerName, l_vPosition, l_vZoneSize, l_mZoneMatrix, l_fYaw, l_szName, l_bActive, l_szOnDeathScript);
 }
 
 // -------------------------------------------------------------------------------------------------------------
@@ -655,7 +668,7 @@ void CEntityManager::LoadEntitiesFromXML(const string& _szFile)
         } else if(strcmp(l_TreeEntity.GetName(),"Militar") == 0)
         {
           LoadMilitar(this, l_TreeEntity);
-        }else if(strcmp(l_TreeEntity.GetName(),"Robot") == 0)
+        }else if(strcmp(l_TreeEntity.GetName(),"Vigia") == 0)
         {
           LoadVigia(this, l_TreeEntity);
         } else if(!l_TreeEntity.IsComment())
@@ -805,7 +818,7 @@ CGameEntity* CEntityManager::InitMilitar(const string& _szPlayerName, const Vect
   return l_pMilitar;
 }
 
-CGameEntity* CEntityManager::InitVigia(const string& _szPlayerName, const Vect3f& _vPosition, const string& _szEntityName, const bool _bActive)
+CGameEntity* CEntityManager::InitVigia(const string& _szPlayerName, const Vect3f& _vPosition, const Vect3f& _vZoneSize, const Mat44f& _mZoneTransform, float _fYaw, const string& _szEntityName, const bool _bActive, const string& _szOnDeathScript)
 {
   CGameEntity* l_pVigia = CreateEntity();
 
@@ -816,6 +829,7 @@ CGameEntity* CEntityManager::InitVigia(const string& _szPlayerName, const Vect3f
 
   CComponentObject3D *l_pComponentObject3D = CComponentObject3D::AddToEntity(l_pVigia);
   l_pComponentObject3D->SetPosition(_vPosition);
+  l_pComponentObject3D->SetYaw(_fYaw);
   //CComponentMovement::AddToEntity(l_pVigia);
   //CComponentPhysXController::AddToEntity(l_peEnemy, _fRadius, 0.5f, 45.0f, 0.01f, 0.5f,  ECG_ENEMICS );
   
@@ -832,7 +846,7 @@ CGameEntity* CEntityManager::InitVigia(const string& _szPlayerName, const Vect3f
   CComponentPhysXSphere::AddToEntity(l_pVigia,10.0f,0.2f,0.01f,GetCollisionGroup("vigia"));
 
   CComponentVida::AddToEntity(l_pVigia, 100.f, 100.f);
-  CComponentIABrainVigia::AddToEntity(l_pVigia,_szPlayerName, "");
+  CComponentIABrainVigia::AddToEntity(l_pVigia,_szPlayerName, _vZoneSize, _mZoneTransform, _szOnDeathScript);
   
   CComponentStateMachine::AddToEntity(l_pVigia, "State_Vigia_Patrol");
 

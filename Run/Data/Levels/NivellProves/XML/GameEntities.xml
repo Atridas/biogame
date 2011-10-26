@@ -522,8 +522,12 @@
     <RenderableObject animated="true" name="Porta1" />
     <Door open="false" open_time="2.0" close_time="1.0" size="0.976215 3.05175 2.56453" />
   </Entity>
+  <Entity name="CameraDeProves">
+    <Object3D position="-5.63975 7.03137 -30.167" yaw="16.6236" pitch="8.53774e-007" roll="-75.2262" />
+    <CynematicCamera target="1.98783 0.0 -4.61928" fov="45.0" near="1.0" far="1000.0" />
+  </Entity>
   <Player position="-16.8764 2.0 -15.9165" yaw="0.0" />
   <Miner name="Miner" position="50.3014 2.0 39.1446" yaw="0.0" active="false" on_death="drop_tetera" />
   <Militar name="Militar" position="48.3709 2.0 -18.4613" yaw="0.0" active="false" destiny="navNodeCobertura" />
-  <Robot name="Robot" position="-10.0997 2.0 -15.7968" yaw="0.0" active="true" />
+  <Vigia name="Vigia" position="-8.54632 5.54307 15.7873" yaw="0.0" active="true" zone_size="17.5327 2.29355 14.3375" zone_position="10.2352 2.38702 3.8153" zone_yaw="35.0" />
 </Entities>
