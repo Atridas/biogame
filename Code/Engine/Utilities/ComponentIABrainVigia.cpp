@@ -207,7 +207,7 @@ void CComponentIABrainVigia::Fly(bool _bFly)
 
 void CComponentIABrainVigia::LookAt(const Vect3f& _vPos, float l_fTimeDelta)
 {
-  const static float TAU_BLEND = .5f;
+  const static float TAU_BLEND = .1f;
 
   //CComponentObject3D* l_O3D = GetEntity()->GetComponent<CComponentObject3D>();
   CComponentPhysXSphere* l_pSphere = GetEntity()->GetComponent<CComponentPhysXSphere>();
@@ -243,6 +243,7 @@ void CComponentIABrainVigia::LookAt(const Vect3f& _vPos, float l_fTimeDelta)
     d = 1;
 
   l_qCurrentRotation.Blend(d, l_qDesiredRotation);
+  l_qCurrentRotation.Normalize();
 
   //l_qCurrentRotation=l_qDesiredRotation;
 

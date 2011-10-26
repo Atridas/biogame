@@ -247,18 +247,24 @@ float4 SimpleBlurPS(float2 _UV: TEXCOORD0) : COLOR
 
 float BlurRadius(float _fDepth)
 {
-  if(_fDepth < g_NearBlurDepth)
+  if(_fDepth > g_FarFocalPlaneDepth)
   {
-    return g_BlurRadius;
-  } else if(_fDepth > g_FarBlurDepth)
-  {
-    return g_BlurRadius;
-  } else if(_fDepth > g_FarFocalPlaneDepth)
-  {
-    return g_BlurRadius * (_fDepth - g_FarFocalPlaneDepth) / (g_FarBlurDepth - g_FarFocalPlaneDepth);
+    if(_fDepth > g_FarBlurDepth)
+    {
+      return g_BlurRadius;
+    } else 
+    {
+      return g_BlurRadius * (_fDepth - g_FarFocalPlaneDepth) / (g_FarBlurDepth - g_FarFocalPlaneDepth);
+    }
   } else if(_fDepth < g_NearFocalPlaneDepth)
   {
-    return g_BlurRadius * (g_NearFocalPlaneDepth - _fDepth) / (g_NearFocalPlaneDepth - g_NearBlurDepth);
+    if(_fDepth < g_NearBlurDepth)
+    {
+      return g_BlurRadius;
+    } else
+    {
+      return g_BlurRadius * (g_NearFocalPlaneDepth - _fDepth) / (g_NearFocalPlaneDepth - g_NearBlurDepth);
+    }
   } else
   {
     return 0;

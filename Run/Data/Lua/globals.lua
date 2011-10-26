@@ -5,7 +5,7 @@ GLOBALS = {}
 
 GLOBALS["Blur Radius Normal"] = 2
 GLOBALS["Blur tutorials"] = 5
-GLOBALS["Blur apuntant"] = 5
+GLOBALS["Blur apuntant"] = 4
 
 GLOBALS["Blur normal near"]       = -15
 GLOBALS["Blur normal far"]        = 25
