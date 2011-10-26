@@ -222,9 +222,11 @@ end
 
 function hang_final_nivell(_EntityTrigger, _Entity)
   if _Entity:get_name() == "Player" then
+    god_mode(true)
     local controller = EM:get_entity("LevelController")
     if controller then
       CORE:set_pause(true)
+      set_song(ComponentBGMController.init_menu)
       controller:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Main_Menu_Credits')
     else
       log("ERROR: No es pot acabar el joc! No hi ha LevelController !!!!!")

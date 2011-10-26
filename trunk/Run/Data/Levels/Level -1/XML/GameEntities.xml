@@ -119,7 +119,7 @@
     <RenderableObject animated="false" name="lvl1_aguanta_llums13" />
   </Entity>
   <Entity name="lvl1_montacarregues">
-    <Object3D position="0.089489 -5.28232 -23.9213" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="0.089489 -6.93261 -23.9213" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_montacarregues" />
     <StateMachine initial_state="State_Elevator_Idle" />
   </Entity>
@@ -216,7 +216,7 @@
     <RenderableObject animated="false" name="lvl1_Porta_planta-1_02" />
   </Entity>
   <Entity name="lvl1_lvl1_key_blue">
-    <Object3D position="-30.7743 1.0 -1.77139" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-29.8682 1.0 0.733223" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_lvl1_key_blue" />
     <Trigger shape="box" size="0.166803 0.862473 0.582663" collision_group="pickup" onEnter="get_key_blue" />
     <Rotative yaw="0.5" />
@@ -267,7 +267,7 @@
     <RenderableObject animated="false" name="lvl1_Cadenas_sostre15" />
   </Entity>
   <Entity name="lvl1_grenade">
-    <Object3D position="-27.3665 1.47331 0.143002" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-27.3665 0.584151 0.143002" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="granada" />
     <Trigger shape="box" size="1.05052 0.399226 1.05052" collision_group="pickup" onEnter="activate_grenades" />
     <Rotative yaw="0.5" />
@@ -632,7 +632,7 @@
     <RenderableObject animated="false" name="lvl1_Lum21" />
   </Entity>
   <Entity name="lvl1_montacarregues01">
-    <Object3D position="-0.109179 1.46562 24.0805" yaw="-3.46057e-005" pitch="0.0" roll="0.0" />
+    <Object3D position="-0.109179 0.0457906 24.0805" yaw="-3.46057e-005" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl1_montacarregues01" />
     <StateMachine initial_state="State_Elevator_Idle" />
   </Entity>
@@ -3884,14 +3884,22 @@
     <Object3D position="-0.0492312 -0.0797765 -23.9823" yaw="0.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="5.01586 0.185986 2.61529" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
+  <Entity name="lvl1_particules_centre01">
+    <Object3D position="-0.0351863 1.85641 -0.0452077" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="pols" volume="1.82988 3.83132 1.82988" />
+  </Entity>
+  <Entity name="lvl1_peste_eonita01">
+    <Object3D position="26.83 0.384155 40.6823" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="peste_eonita" volume="0.144642 0.0809174 0.187034" />
+  </Entity>
   <Player position="-0.315653 -5.03087 -23.9926" yaw="-90.0" force_active="false" grenade_active="false" />
   <Miner name="lvl1_miner_green" position="0.0876412 1.6 4.76067" yaw="0.0" active="false" on_death="drop_key" />
-  <Militar name="lvl1_militar00" position="-4.12491 1.6 1.10068" yaw="0.0" active="false" destiny="lvl1_node_cobertura" />
-  <Militar name="lvl1_militar01" position="-1.84952 1.6 -1.15103" yaw="0.0" active="false" destiny="lvl1_node_cobertura01" />
+  <Militar name="lvl1_militar00" position="-5.62033 1.6 0.208153" yaw="0.0" active="false" destiny="lvl1_node_cobertura" />
+  <Militar name="lvl1_militar01" position="-3.34494 1.6 -0.313503" yaw="0.0" active="false" destiny="lvl1_node_cobertura01" />
   <Militar name="lvl1_militar02" position="34.2674 -0.412989 1.20565" yaw="0.0" active="false" destiny="lvl1_node_cobertura04" />
   <Militar name="lvl1_militar03" position="11.9294 1.6 1.55775" yaw="0.0" active="false" destiny="lvl1_node_cobertura02" />
   <Militar name="lvl1_militar04" position="14.1854 1.6 -1.38754" yaw="0.0" active="false" destiny="lvl1_node_cobertura03" />
-  <Militar name="lvl1_militar05" position="32.1479 -0.452075 1.39366" yaw="0.0" active="false" />
+  <Militar name="lvl1_militar05" position="32.1479 -0.452075 1.39366" yaw="0.0" active="false" destiny="lvl1_node_cobertura04" />
   <Militar name="lvl1_militar06" position="35.0941 -6.10473 -15.1002" yaw="0.0" active="false" />
   <Militar name="lvl1_militar07" position="23.544 -7.29258 -28.7595" yaw="0.0" active="false" />
   <Militar name="lvl1_militar08" position="37.915 -7.29258 -28.1546" yaw="0.0" active="false" />
@@ -3905,7 +3913,7 @@
   <Militar name="lvl1_militar17" position="7.51861 1.6 7.73389" yaw="0.0" active="false" destiny="lvl1_node_cobertura12" />
   <Militar name="lvl1_militar18" position="8.55488 1.6 6.17711" yaw="0.0" active="false" destiny="lvl1_node_cobertura13" />
   <Militar name="lvl1_militar19" position="12.8393 1.6 12.7073" yaw="0.0" active="false" destiny="lvl1_node_cobertura11" />
-  <Miner name="lvl1_miner00" position="-6.33889 1.6 0.0717691" yaw="0.0" active="false" />
+  <Miner name="lvl1_miner00" position="0.132524 1.6 0.0717691" yaw="0.0" active="false" />
   <Miner name="lvl1_miner01" position="21.3448 1.6 0.304681" yaw="0.0" active="false" />
   <Miner name="lvl1_miner02" position="30.8253 -7.32152 -23.8567" yaw="0.0" active="false" />
   <Miner name="lvl1_miner03" position="23.4583 -7.32152 -32.0792" yaw="0.0" active="false" />

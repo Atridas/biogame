@@ -9,6 +9,7 @@ Hangar_Door["Time"]       = 0
 Hangar_Door["Open Time"]  = 60
 Hangar_Door["Open Heigh"] = 2.3
 Hangar_Door["Open Speed"] = Hangar_Door["Open Heigh"] / Hangar_Door["Open Time"]
+Hangar_Door["Physx Box"] = "hang_physx_box_door"
 
 
 -------------------------------------------------------------------------------------------------
@@ -73,12 +74,12 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Hangar_Porta_Opening['Update'] = function(_entitat, _dt)
-  local physx = _entitat:get_component(BaseComponent.physx_actor)
-  local position = physx:get_position()
-  
   Hangar_Door["Time"] = Hangar_Door["Time"] + _dt
   
-  physx:set_position(Vect3f(position.x, position.y + Hangar_Door["Open Speed"] * _dt, position.z))
+  local object = _entitat:get_component(BaseComponent.object_3d)
+  local position = object:get_position()
+    
+  object:set_position(Vect3f(position.x, position.y + Hangar_Door["Open Speed"] * _dt, position.z))
   
   --TODO: Rotar llums emergencia
   
@@ -100,6 +101,7 @@ end
 -------------------------------------------------------------------------------------------------
 State_Hangar_Porta_Open['Enter'] = function(_entitat)
   --TODO: El que es vulgui fer al final de nivell
+  deactivate_entity(Hangar_Door["Physx Box"])
 end
 
 -------------------------------------------------------------------------------------------------

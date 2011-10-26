@@ -241,7 +241,8 @@ end
 
 --activar el montacàrregues
 function activate_elevator_2(_EntityTrigger, _Entity)
-  if _Entity:get_name() == "Player" then    
+  if _Entity:get_name() == "Player" then
+    god_mode(true)
     --activar montacàrregues.
     local elevator = EM:get_entity("lvl2_montacarregues")
     

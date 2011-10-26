@@ -51,7 +51,7 @@
 	<RenderableObject name="lvl1_Passadis03" class="StaticMesh" resource="lvl1_Passadis03" position="-14.9061 -7.15256e-007 0.0436254" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_habitacio_municio" class="StaticMesh" resource="lvl1_habitacio_municio" position="-30.3381 0.0 0.0704956" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Porta_planta-1_02" class="StaticMesh" resource="lvl1_Porta_planta-1_02" position="-27.3872 1.39148 0.00468683" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_lvl1_key_blue" class="StaticMesh" resource="lvl1_lvl1_key_blue" position="-30.7743 1.0 -1.77139" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_lvl1_key_blue" class="StaticMesh" resource="lvl1_lvl1_key_blue" position="-29.8682 1.0 0.733223" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_cable_lampada_granada" class="StaticMesh" resource="lvl1_cable_lampada_granada" position="-30.9919 3.58284 0.134059" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_lampada_granada_autoilum" class="StaticMesh" resource="lvl1_lampada_granada_autoilum" position="-30.9927 1.93783 0.122037" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_ordinador" class="StaticMesh" resource="lvl1_ordinador" position="-31.0325 -0.00154449 -1.05108" yaw="-15.0" pitch="0.0" roll="0.0" />
@@ -63,7 +63,7 @@
 	<RenderableObject name="lvl1_Cadenas_sostre13" class="StaticMesh" resource="lvl1_Cadenas_sostre13" position="-29.1795 2.49909 -2.81447" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Cadenas_sostre14" class="StaticMesh" resource="lvl1_Cadenas_sostre14" position="-32.3487 2.49909 2.20691" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_Cadenas_sostre15" class="StaticMesh" resource="lvl1_Cadenas_sostre15" position="-32.3487 2.26001 -1.80763" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl1_grenade" class="StaticMesh" resource="granada" position="-27.3665 1.47331 0.143002" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl1_grenade" class="StaticMesh" resource="granada" position="-27.3665 0.584151 0.143002" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_lvl2_lab_Cadira_de_força" class="StaticMesh" resource="lvl1_lvl2_lab_Cadira_de_força" position="-31.1135 0.53444 0.100385" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_lvl2_lab_Edvac" class="StaticMesh" resource="lvl1_lvl2_lab_Edvac" position="-30.3838 0.00531006 -3.80711" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl1_lvl2_lab_Edvac01" class="StaticMesh" resource="lvl1_lvl2_lab_Edvac01" position="-30.0849 0.00531006 3.96076" yaw="0.0" pitch="0.0" roll="0.0" />
