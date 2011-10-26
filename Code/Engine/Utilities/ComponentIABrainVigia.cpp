@@ -87,8 +87,9 @@ void CComponentIABrainVigia::Shoot(float _fShootPrecision)
 
   Vect3f l_vPos = l_O3D->GetPosition();
   Vect3f l_vPlayerPos = m_pPlayer->GetComponent<CComponentObject3D>()->GetPosition() + Vect3f(0.0f,0.5f,0.0f);
-
-  Vect3f l_vDir = (l_vPlayerPos - l_vPos).GetNormalized();
+  
+  //Vect3f l_vDir = (l_vPlayerPos - l_vPos).GetNormalized();
+  Vect3f l_vDir = (m_vPatrolDirection).GetNormalized();
 
   CEntityManager* l_pEM = ENTITY_MANAGER;
   l_pEM->InitLaser(l_vPos,l_vDir,SHOOT_POWER, CORE->GetPhysicsManager()->GetCollisionMask(ECG_RAY_SHOOT));
@@ -137,9 +138,11 @@ void CComponentIABrainVigia::ReceiveShoot(SEvent _sEvent)
 
       Vect3f l_vDir(_sEvent.Info[1].v.x,_sEvent.Info[1].v.y,_sEvent.Info[1].v.z);
 
+      Vect3f l_vColisionPoint(_sEvent.Info[3].v.x,_sEvent.Info[3].v.y,_sEvent.Info[3].v.z);
+
       CComponentPhysXSphere* l_pSphere = GetEntity()->GetComponent<CComponentPhysXSphere>();
       float l_fRadius = l_pSphere->GetRadius();
-      l_pActor->AddVelocityAtLocalPos(l_vDir, 2.0f*l_fRadius*Vect3f(Random01(),Random01(),Random01()) - l_fRadius, SHOOT_POWER);
+      l_pActor->AddForceAtPos(l_vDir, l_vColisionPoint, 50.0f, false);
 
     }else{
       LOGGER->AddNewLog(ELL_ERROR,"CComponentIABrain::ReciveShoot El missatge a Info[2] no es del tipus PTR");
@@ -196,7 +199,7 @@ void CComponentIABrainVigia::ReceiveForce(SEvent _sEvent)
 
     l_vDirection = (l_vPos - l_vSenderPos).Normalize();
     float l_fRadius = l_pSphere->GetRadius();
-    l_pSphere->GetActor()->AddVelocityAtLocalPos(l_vDirection, 2.0f*l_fRadius*Vect3f(Random01(),Random01(),Random01()) - l_fRadius, 50.0f);
+    l_pSphere->GetActor()->AddVelocityAtPos(l_vDirection, 2.0f*l_fRadius*Vect3f(Random01(),Random01(),Random01()) - l_fRadius, 50.0f);
   }
 }
 
@@ -216,10 +219,6 @@ void CComponentIABrainVigia::LookAt(const Vect3f& _vPos, float l_fTimeDelta)
   
   Vect3f l_vDirection = (_vPos - m44.GetTranslationVector()).Normalize();
   
-  //if(m_vPatrolDirection.SquaredLength() > 0)
-  //  l_vDirection = m_vPatrolDirection.GetNormalized();
-  //else
-  //  l_vDirection = Vect3f(0,0,1);
 
   float  l_fAngle;
   Vect3f l_vAxis;
@@ -227,6 +226,7 @@ void CComponentIABrainVigia::LookAt(const Vect3f& _vPos, float l_fTimeDelta)
 
 
   Quat4f l_qDesiredRotation(l_vAxis, l_fAngle);
+  l_qDesiredRotation.Normalize();
 
 
   Vect4f l_vCurrentDirection4 = m44 * Vect4f(0,0,1,0);
@@ -235,6 +235,7 @@ void CComponentIABrainVigia::LookAt(const Vect3f& _vPos, float l_fTimeDelta)
 
 
   Quat4f l_qCurrentRotation(l_vAxis, l_fAngle);
+  l_qCurrentRotation.Normalize();
 
   float d;
   if(l_fTimeDelta < TAU_BLEND)
@@ -364,17 +365,24 @@ void CComponentIABrainVigia::UpdatePostPhysX(float _fDeltaTime)
     {
       float l_tn = 0.3f;
       float l_eps = 0.25f;
-      l_pSphere->GetActor()->AddAcelerationAtLocalPos(Vect3f(0.0f,1.0f,0.0f),v3fZERO,((m_vTargetPosition.y - l_vPos.y) - 2.0f*l_tn*l_eps*l_vLinearVel.y)/(l_tn*l_tn) + 9.8f);
+      l_pSphere->GetActor()->AddAcelerationAtPos(Vect3f(0.0f,1.0f,0.0f),v3fZERO,((m_vTargetPosition.y - l_vPos.y) - 2.0f*l_tn*l_eps*l_vLinearVel.y)/(l_tn*l_tn) + 9.8f);
     
       l_eps = 1.0f;
-      l_pSphere->GetActor()->AddAcelerationAtLocalPos(Vect3f(1.0f,0.0f,0.0f),v3fZERO,((m_vTargetPosition.x - l_vPos.x) - 2.0f*l_tn*l_eps*l_vLinearVel.x)/(l_tn*l_tn));
-      l_pSphere->GetActor()->AddAcelerationAtLocalPos(Vect3f(0.0f,0.0f,1.0f),v3fZERO,((m_vTargetPosition.z - l_vPos.z) - 2.0f*l_tn*l_eps*l_vLinearVel.z)/(l_tn*l_tn));
+      l_pSphere->GetActor()->AddAcelerationAtPos(Vect3f(1.0f,0.0f,0.0f),v3fZERO,((m_vTargetPosition.x - l_vPos.x) - 2.0f*l_tn*l_eps*l_vLinearVel.x)/(l_tn*l_tn));
+      l_pSphere->GetActor()->AddAcelerationAtPos(Vect3f(0.0f,0.0f,1.0f),v3fZERO,((m_vTargetPosition.z - l_vPos.z) - 2.0f*l_tn*l_eps*l_vLinearVel.z)/(l_tn*l_tn));
 
     }
 
     //m_vPatrolDirection = m_pPlayer->GetComponent<CComponentObject3D>()->GetPosition() + Vect3f(0.0f,0.5f,0.0f) - l_O3D->GetPosition();
     //m_vPatrolDirection.Normalize();
-    LookAt(m_pPlayer->GetComponent<CComponentObject3D>()->GetPosition() + Vect3f(0.0f,0.5f,0.0f), _fDeltaTime);
+
+    Vect3f l_vDirection;
+    if(m_vPatrolDirection.SquaredLength() > 0)
+      l_vDirection = m_vPatrolDirection;
+    else
+      l_vDirection = Vect3f(0,0,1);
+
+    LookAt(l_vPos + l_vDirection, _fDeltaTime);
   }
 }
 

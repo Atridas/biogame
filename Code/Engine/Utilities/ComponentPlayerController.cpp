@@ -39,7 +39,7 @@
 
 #define INIT_SHOOT     0.5f
 #define INIT_GRENADE   0.5f
-#define INIT_PARTICLES 0.3f
+#define INIT_PARTICLES 1.7f
 
 CComponentPlayerController* CComponentPlayerController::AddToEntity(CGameEntity *_pEntity)
 {
@@ -233,9 +233,7 @@ bool CComponentPlayerController::Shoot()
     SCollisionInfo l_CInfo;
     CPhysicUserData* l_pUserData = 0;
 
-    l_vPosArma -= l_vDirArma*0.1f;
-  
-    l_pEM->InitParticles("disparar", l_vPosArma + l_vDirArma*INIT_PARTICLES, Vect3f(.01f,.01f,.01f), 2.5f, l_vDir);
+    l_vPosArma -= l_vDirArma;
 
     CPhysicsManager *l_pPM = PHYSICS_MANAGER;
 
@@ -260,6 +258,7 @@ bool CComponentPlayerController::Shoot()
         if(l_pUserData->GetEntity() != l_pPlayerEntity)
         {
           l_pEM->InitLaser(l_vPosArma + INIT_SHOOT * l_vDir, l_vDir,SHOOT_POWER, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
+          l_pEM->InitParticles("disparar", l_vPosArma + l_vDir*INIT_PARTICLES, Vect3f(.01f,.01f,.01f), 2.5f);
         }
       }
 
@@ -282,10 +281,12 @@ bool CComponentPlayerController::Shoot()
         if(l_pUserData->GetEntity() != l_pPlayerEntity)
         {
           l_pEM->InitLaser(l_vPosArma + INIT_SHOOT * l_vDir,l_vDir,SHOOT_POWER, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
+          l_pEM->InitParticles("disparar", l_vPosArma + l_vDir*INIT_PARTICLES, Vect3f(.01f,.01f,.01f), 2.5f);
         }
 
       }else{
         l_pEM->InitLaser(l_vPosArma +INIT_SHOOT * l_vDir,l_vDir,SHOOT_POWER, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
+        l_pEM->InitParticles("disparar", l_vPosArma + l_vDir*INIT_PARTICLES, Vect3f(.01f,.01f,.01f), 2.5f);
       }
     }
     return true;
@@ -618,19 +619,19 @@ void CComponentPlayerController::ReceiveForce(SEvent _sEvent)
       assert(l_pPhysxBone);
       l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
       l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
-      l_pPhysxBone->GetPhysxActor()->AddVelocityAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
+      l_pPhysxBone->GetPhysxActor()->AddVelocityAtPos(l_vDirection,Vect3f(0.0f),50.0f);
 
       l_pPhysxBone = l_pRagdoll->GetBone("Bip01 Spine1");
       assert(l_pPhysxBone);
       l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
       l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
-      l_pPhysxBone->GetPhysxActor()->AddVelocityAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
+      l_pPhysxBone->GetPhysxActor()->AddVelocityAtPos(l_vDirection,Vect3f(0.0f),50.0f);
 
       l_pPhysxBone = l_pRagdoll->GetBone("Bip01 Spine2");
       assert(l_pPhysxBone);
       l_pPhysxBone->GetPhysxActor()->GetMat44(l_matBonePos);
       l_vDirection = (l_matBonePos.GetPos() - l_vSenderPos).Normalize();
-      l_pPhysxBone->GetPhysxActor()->AddVelocityAtLocalPos(l_vDirection,Vect3f(0.0f),50.0f);
+      l_pPhysxBone->GetPhysxActor()->AddVelocityAtPos(l_vDirection,Vect3f(0.0f),50.0f);
 
     }else{
 

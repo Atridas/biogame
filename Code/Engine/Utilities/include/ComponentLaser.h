@@ -27,7 +27,7 @@ public:
 
   float m_fSpeed;
 protected:
-  CComponentLaser():m_fDamage(0),l_pCO3D(0),m_fSpeed(DEFAULT_LASER_SPEED) {};
+  CComponentLaser():m_fDamage(0),l_pCO3D(0),m_fSpeed(DEFAULT_LASER_SPEED),m_fTime(0.0f) {};
   bool Init(CGameEntity* _pEntity, const Vect3f& _vDir, float _fDamage, uint32 _uiCollisionMask);
   virtual void Release() {};
 private:
@@ -36,6 +36,7 @@ private:
   uint32 m_uiCollisionMask;
 
   CComponentObject3D * l_pCO3D;
+  float m_fTime;
 };
 
 #endif

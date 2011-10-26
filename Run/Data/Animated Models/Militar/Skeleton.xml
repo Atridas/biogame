@@ -20,7 +20,7 @@
     <bone name="Bip01 R Hand" type="box" density="0.8" bounding_box_size="0.356641 0.193438 0.205229" bounding_box_middle_point="-0.091321 -0.004039 -0.008327"/>
     <!--<bone name="Bip01 R Finger0" type="box" density="0.000000" bounding_box_size="0.000000 0.000000 0.000000" bounding_box_middle_point="0.323668 1.041286 -0.987796"/>-->
     <!--<bone name="Bip01 R Finger0Nub" type="box" density="0.000000" bounding_box_size="0.000000 0.000000 0.000000" bounding_box_middle_point="-0.423406 -1.001322 -1.007844"/>-->
-    <bone name="Bip01 Head" type="sphere" density="0.1" bounding_box_size="0.21853 0.200170 0.285195" bounding_box_middle_point="-0.146285 0.0 0.0"/>
+    <bone name="Bip01 Head" type="box" density="0.1" bounding_box_size="0.21853 0.200170 0.285195" bounding_box_middle_point="-0.146285 0.0 0.0"/>
     <!--<bone name="Bip01 HeadNub" type="box" density="0.000000" bounding_box_size="0.000000 0.000000 0.000000" bounding_box_middle_point="1.681890 -0.669569 0.070143"/>-->
     <bone name="Bip01 L Thigh" type="box" density="0.8" bounding_box_size="0.330796 0.167938 0.196916" bounding_box_middle_point="-0.217301  0.008899 0.006425"/>
     <bone name="Bip01 L Calf" type="box" density="0.8" bounding_box_size="0.465263 0.155285 0.180152" bounding_box_middle_point="-0.226480 -0.021244 -0.004507"/>

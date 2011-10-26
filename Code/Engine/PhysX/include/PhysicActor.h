@@ -48,9 +48,10 @@ public:
   Vect3f            GetAngularMomentum();
   Mat33f            GetInertiaTensor();
 
-  void              AddImpulseAtLocalPos(const Vect3f& _vDirection, const Vect3f& _vLocalPos, float _fPower);
-  void              AddVelocityAtLocalPos(const Vect3f& _vDirection, const Vect3f& _vLocalPos, float _fPower);
-  void              AddAcelerationAtLocalPos(const Vect3f& _vDirection, const Vect3f& _vLocalPos, float _fPower);
+  void              AddImpulseAtPos(const Vect3f& _vDirection, const Vect3f& _vPos, float _fPower, bool _bLocal = true);
+  void              AddVelocityAtPos(const Vect3f& _vDirection, const Vect3f& _vPos, float _fPower, bool _bLocal = true);
+  void              AddAcelerationAtPos(const Vect3f& _vDirection, const Vect3f& _vPos, float _fPower, bool _bLocal = true);
+  void              AddForceAtPos(const Vect3f& _vDirection, const Vect3f& _vPos, float _fPower, bool _bLocal = true);
   void              AddTorque(const Vect3f _vTorque);
   void              SetAngularVelocity(const Vect3f _vVelocity);
 
@@ -89,7 +90,7 @@ private:
 
 private:
 
-  void              AddForceAtLocalPos(const Vect3f& _vDirection, const Vect3f& _vLocalPos, float _fPower, NxForceMode _sForceMode);
+  void              AddForceAtPos(const Vect3f& _vDirection, const Vect3f& _vPos, float _fPower, NxForceMode _sForceMode, bool _bLocal);
 
 	CPhysicUserData*											m_pUserData;
 	NxActor*															m_pPhXActor;

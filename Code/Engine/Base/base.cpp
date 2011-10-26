@@ -239,7 +239,7 @@ void GetFastestRotationFromDirToDir(const Vect3f& _vOriginalDir, const Vect3f& _
   assert(abs(_vOriginalDir.SquaredLength() - 1.f) < 0.01f && abs(_vDestinationDir.SquaredLength() - 1.f) < 0.01f && "GetFastestRotationFromDirToDir _vOriginalDir i _vDestinationDir cal que siguin unitaris");
 
   float l_fAngleCos = _vOriginalDir * _vDestinationDir;
-  if(abs(l_fAngleCos) < 0.999f)
+  if(abs(l_fAngleCos) < One<float>() - Epsilon<float>())
   {
     //invertim si estem a més de 90º
     vAxis_ = _vOriginalDir ^_vDestinationDir;

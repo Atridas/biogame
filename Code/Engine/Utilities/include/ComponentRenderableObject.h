@@ -32,6 +32,8 @@ public:
 
   void SetYaw(float _fYaw);
 
+  void SetVisible(bool _bVisible);
+
   bool ChangeInstance(const string& _szName);
 
   bool m_bRemoveRenderableObject;

@@ -59,6 +59,7 @@ void CGameProcess::Update(float _fElapsedTime)
 
 void CGameProcess::RenderINFO(CRenderManager* _pRM)
 {
+  CORE->GetEmiterManager()->Render(_pRM);
   //CORE->GetPhysicsManager()->DebugRender(_pRM);
   //CORE->GetIAManager()->GetGraph()->DebugRender(_pRM);
 }

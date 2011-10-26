@@ -191,6 +191,11 @@ PS_OUTPUT NewPS(TNEW_PS _in)
   //  discard;
   
 
+  //l_DiffuseColor.rgb = float3(l_DiffuseColor.a, l_DiffuseColor.a, l_DiffuseColor.a);
+  //l_DiffuseColor.a = 1;
+  //if(l_DiffuseColor.a == 0)
+  //  discard;
+  
   float  l_SpotlightFactor = g_SpotlightFactor / g_SpotlightFactorMax;
   #if defined( NS_SPECULARMAP )
     if(g_SpecularActive)
@@ -255,8 +260,9 @@ PS_OUTPUT NewPS(TNEW_PS _in)
       /*Deshabilitamos el alphablend*/                              \
       AlphaBlendEnable = false;                          \
       /*Activem l'alpha test */                                   \
-      AlphaTestEnable = false;                            \
-      AlphaFunc = GreaterEqual;                          \
+      AlphaTestEnable = true;                            \
+      AlphaRef = 0;                                   \
+      AlphaFunc = Greater;                          \
       /*Tipo de culling que queremos utilizar*/                         \
       CullMode = CW;                                    \
       /*Vertex / Pixel shader*/                                  \
@@ -274,8 +280,9 @@ PS_OUTPUT NewPS(TNEW_PS _in)
       /*Deshabilitamos el alphablend*/                              \
       AlphaBlendEnable = false;                          \
       /*Activem l'alpha test */                                   \
-      AlphaTestEnable = false;                            \
-      AlphaFunc = GreaterEqual;                          \
+      AlphaTestEnable = true;                            \
+      AlphaRef = 0;                                   \
+      AlphaFunc = Greater;                          \
       /*Tipo de culling que queremos utilizar*/                         \
       CullMode = CCW;                                    \
       /*Vertex / Pixel shader*/                                  \

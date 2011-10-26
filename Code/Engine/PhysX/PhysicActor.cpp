@@ -586,31 +586,42 @@ void CPhysicActor::Activate(bool _bActivate)
   }
 }
 
-void CPhysicActor::AddImpulseAtLocalPos(const Vect3f& _vDirection, const Vect3f& _vLocalPos, float _fPower)
+void CPhysicActor::AddImpulseAtPos(const Vect3f& _vDirection, const Vect3f& _vPos, float _fPower, bool _bLocal)
 {
-  AddForceAtLocalPos( _vDirection, _vLocalPos, _fPower, NX_IMPULSE);
+  AddForceAtPos( _vDirection, _vPos, _fPower, NX_IMPULSE, _bLocal);
 }
 
-void CPhysicActor::AddVelocityAtLocalPos(const Vect3f& _vDirection, const Vect3f& _vLocalPos, float _fPower)
+void CPhysicActor::AddVelocityAtPos(const Vect3f& _vDirection, const Vect3f& _vPos, float _fPower, bool _bLocal)
 {
-  AddForceAtLocalPos( _vDirection, _vLocalPos, _fPower, NX_VELOCITY_CHANGE);
+  AddForceAtPos( _vDirection, _vPos, _fPower, NX_VELOCITY_CHANGE, _bLocal);
 }
 
-void CPhysicActor::AddAcelerationAtLocalPos(const Vect3f& _vDirection, const Vect3f& _vLocalPos, float _fPower)
+void CPhysicActor::AddAcelerationAtPos(const Vect3f& _vDirection, const Vect3f& _vPos, float _fPower, bool _bLocal)
 {
-  AddForceAtLocalPos( _vDirection, _vLocalPos, _fPower, NX_ACCELERATION);
+  AddForceAtPos( _vDirection, _vPos, _fPower, NX_ACCELERATION, _bLocal);
 }
 
-void CPhysicActor::AddForceAtLocalPos(const Vect3f& _vDirection, const Vect3f& _vLocalPos, float _fPower, NxForceMode _sForceMode)
+void CPhysicActor::AddForceAtPos(const Vect3f& _vDirection, const Vect3f& _vPos, float _fPower, bool _bLocal)
+{
+  AddForceAtPos( _vDirection, _vPos, _fPower, NX_FORCE, _bLocal);
+}
+
+void CPhysicActor::AddForceAtPos(const Vect3f& _vDirection, const Vect3f& _vPos, float _fPower, NxForceMode _sForceMode, bool _bLocal)
 {
   if(m_pPhXActor)
   {
     NxVec3 l_vDirection(_vDirection.x,_vDirection.y,_vDirection.z);
-    NxVec3 l_vLocalPos(_vLocalPos.x,_vLocalPos.y,_vLocalPos.z);
+    NxVec3 l_vPos(_vPos.x,_vPos.y,_vPos.z);
 
-    if(l_vDirection.isFinite() && l_vLocalPos.isFinite() && NxMath::isFinite(_fPower))
+    if(l_vDirection.isFinite() && l_vPos.isFinite() && NxMath::isFinite(_fPower))
     {
-      m_pPhXActor->addForceAtLocalPos(l_vDirection*_fPower, l_vLocalPos, _sForceMode,true);
+      if(_bLocal)
+      {
+        m_pPhXActor->addForceAtLocalPos(l_vDirection*_fPower, l_vPos, _sForceMode,true);
+      }else{
+        m_pPhXActor->addForceAtPos(l_vDirection*_fPower, l_vPos, _sForceMode,true);
+      }
+      
     }
   }
 }

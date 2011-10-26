@@ -1,9 +1,11 @@
 #include "ComponentLaser.h"
 #include "RenderManager.h"
 #include "ComponentObject3D.h"
+#include "ComponentRenderableObject.h"
 #include "Core.h"
 #include "PhysicsManager.h"
 
+#define LASER_RENDER_TIME 0.01f
 
 CComponentLaser* CComponentLaser::AddToEntity(CGameEntity *_pEntity, const Vect3f& _vDir, float _fDamage, uint32 _uiCollisionMask)
 {
@@ -77,6 +79,13 @@ void CComponentLaser::Update(float _fDeltaTime)
     l_vPos += m_vDir * l_fDistance;
     l_pCO3D->SetPosition(l_vPos);
   }
+
+  if(m_fTime >= LASER_RENDER_TIME)
+  {
+    GetEntity()->GetComponent<CComponentRenderableObject>()->SetVisible(true);
+  }
+
+  m_fTime += _fDeltaTime;
 }
 
 void CComponentLaser::DebugRender(CRenderManager* _pRM)

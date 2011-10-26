@@ -15,6 +15,10 @@
   <collision group1="personatge" group2="pickup" />
   <!--<collision group1="personatge" group2="ragdoll" />-->
   
+  <!-- Efectes de mals globals -->
+  <collision group1="trigger mal" group2="enemic" />
+  <collision group1="trigger mal" group2="personatge" />
+  
   <!-- Enemics -->
 	<collision group1="enemic" group2="objecte dinamic" />
 	<collision group1="enemic" group2="explosio" />
