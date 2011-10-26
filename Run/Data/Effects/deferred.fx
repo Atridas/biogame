@@ -187,15 +187,6 @@ PS_OUTPUT NewPS(TNEW_PS _in)
     float4 l_DiffuseColor = _in.Color;
   #endif
   
-  //if(l_DiffuseColor.a == 0)
-  //  discard;
-  
-
-  //l_DiffuseColor.rgb = float3(l_DiffuseColor.a, l_DiffuseColor.a, l_DiffuseColor.a);
-  //l_DiffuseColor.a = 1;
-  //if(l_DiffuseColor.a == 0)
-  //  discard;
-  
   float  l_SpotlightFactor = g_SpotlightFactor / g_SpotlightFactorMax;
   #if defined( NS_SPECULARMAP )
     if(g_SpecularActive)
