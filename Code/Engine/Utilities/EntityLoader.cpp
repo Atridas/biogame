@@ -1029,4 +1029,13 @@ CGameEntity* CEntityManager::InitGrenade(float _fLifeTime, const Vect3f& _vPos,c
 	return 0;
 }
 
-
+CGameEntity* CEntityManager::InitLifeOmni(float _fLifeTime, const CColor& _vColor, float _fStartRangeAtt, float _fEndRangeAtt,CGameEntity* l_pPlayer)
+{
+  CGameEntity * l_pOnmiForce = CORE->GetEntityManager()->CreateEntity();
+  CComponentObject3D* l_pCO3D = CComponentObject3D::AddToEntity(l_pOnmiForce);
+  CComponentObject3D* l_pPlayerObject3d = l_pPlayer->GetComponent<CComponentObject3D>();
+  l_pCO3D->SetPosition(l_pPlayerObject3d->GetPosition());
+  CComponentLifetime::AddToEntity(l_pOnmiForce,_fLifeTime,"");
+  CComponentOmni::AddToEntity(l_pOnmiForce,Vect3f(0.0, 0.0, 0.0),_vColor,_fStartRangeAtt,_fEndRangeAtt,"");
+  return l_pOnmiForce;
+}
