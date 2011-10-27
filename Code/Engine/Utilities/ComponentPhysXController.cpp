@@ -127,6 +127,12 @@ Vect3f CComponentPhysXController::GetPosition() const
   return Vect3f(0.0f);
 }
 
+void CComponentPhysXController::UseGravity(bool _bValue)
+{
+  if(m_pPhysXController)
+    m_pPhysXController->UseGravity(_bValue);
+}
+
 void CComponentPhysXController::Release(void)
 {
   //treure controller del physic manager

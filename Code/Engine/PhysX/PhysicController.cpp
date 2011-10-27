@@ -56,7 +56,8 @@ CPhysicController::CPhysicController(float radius, float height, float slope, fl
 																		 , m_fSkinWidth_Capsule(skinwidth)
 																		 , m_fStepOffset_Capsule(stepOffset)
 																		 , m_fGravity(gravity)
-																		 , m_uCollisionGroups(collisionGroups)
+																		 , m_uCollisionGroups(collisionGroups),
+                                     m_bUseGravity(true)
                                     
 {
 	assert(userData);
@@ -148,7 +149,14 @@ void CPhysicController::Move(const Vect3f& direction, float elapsedTime)
 {
 	assert (m_pPhXController!=NULL);
 
-	NxVec3 d(direction.x, direction.y+(m_fGravity*elapsedTime), direction.z);
+  float l_fDirectionY = direction.y;
+
+  if(m_bUseGravity)
+  {
+    l_fDirectionY += (m_fGravity*elapsedTime);
+  }
+
+	NxVec3 d(direction.x, l_fDirectionY, direction.z);
 	NxF32 sharpness = 1.0f;
 	NxU32 collisionFlags = 0;
   //NxU32 Collision = 0;

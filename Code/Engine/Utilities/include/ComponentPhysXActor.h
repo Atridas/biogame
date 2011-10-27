@@ -35,8 +35,8 @@ public:
 
   virtual void Reload() {};
 
+  void SetParticulaImpacte(const string& _szParticulaImpacte) { m_szParticulaImpacte = _szParticulaImpacte; };
 
-  string m_szParticulaImpacte;
 protected:
 
   CComponentPhysXActor():
@@ -57,6 +57,8 @@ protected:
   //Dades pròpies dels components
   CPhysicActor       * m_pPhysXActor;
   CPhysicUserData    * m_pPhysXData;
+
+  string m_szParticulaImpacte;
 };
 
 #endif

@@ -171,8 +171,8 @@ void CComponentPhysXSphere::Reload()
 
 void CComponentPhysXSphere::ReceiveEvent(const SEvent& _Event)
 {
-  /*CComponentPhysXActor::ReceiveEvent(_Event);
-  if(_Event.Msg == SEvent::REBRE_FORCE)
+  CComponentPhysXActor::ReceiveEvent(_Event);
+  /*if(_Event.Msg == SEvent::REBRE_FORCE)
   {
     Vect3f l_vSenderPos = ENTITY_MANAGER->GetEntity(_Event.Sender)->GetComponent<CComponentObject3D>()->GetPosition();
 

@@ -255,39 +255,20 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("force",                    &CComponentPlayerController::Force)
       .def("cover",                    &CComponentPlayerController::Cover)
       .def("use",                      &CComponentPlayerController::Use)
-      //.def("die",                      &CComponentPlayerController::Die)
       .def("respawn",                  &CComponentPlayerController::Respawn)
       .def("has_pickup",               &CComponentPlayerController::HasPickUp)
       .def("add_pickup",               &CComponentPlayerController::AddPickUp)
       .def("remove_pickup",            &CComponentPlayerController::RemovePickUp)
       .def("is_ready_force",           &CComponentPlayerController::IsReadyForce)
       .def("aim_distance",             &CComponentPlayerController::AimDistance)
+      .def("is_alive",                 &CComponentPlayerController::IsAlive)
       .def_readwrite("pos_inicial",    &CComponentPlayerController::m_vPosInicial)
       .def_readwrite("shoot_active",   &CComponentPlayerController::m_bShootActive)
       .def_readwrite("grenade_active", &CComponentPlayerController::m_bGrenadeActive)
       .def_readwrite("force_active",   &CComponentPlayerController::m_bForceActive)
-
-      /*.def_readwrite("move_fwd",   &CComponentPlayerController::m_szMoveForward)
-      .def_readwrite("move_back",  &CComponentPlayerController::m_szMoveBack)
-      .def_readwrite("move_left",  &CComponentPlayerController::m_szMoveLeft)
-      .def_readwrite("move_right", &CComponentPlayerController::m_szMoveRight)
-      
-      .def_readwrite("run",  &CComponentPlayerController::m_szRun)
-      .def_readwrite("walk", &CComponentPlayerController::m_szWalk)
-      
-      .def_readwrite("walk_speed", &CComponentPlayerController::m_fWalkSpeed)
-      .def_readwrite("run_speed",  &CComponentPlayerController::m_fRunSpeed)
-      .def_readwrite("yaw_speed",  &CComponentPlayerController::m_fYawSpeed)
-      .def_readwrite("pitch_speed", &CComponentPlayerController::m_fPitchSpeed)
-
-      .def_readwrite("min_pitch_angle", &CComponentPlayerController::m_fMaxPitchAngle)
-      .def_readwrite("max_pitch_angle", &CComponentPlayerController::m_fMinPitchAngle)*/
-
       .def_readwrite("speed", &CComponentPlayerController::m_fSpeed)
       .def_readwrite("current_animation", &CComponentPlayerController::m_szCurrentAnimation)
-
       .def_readwrite("time", &CComponentPlayerController::m_fTime)
-
       .def_readwrite("cover_normal", &CComponentPlayerController::m_vCoverNormal)
       .def_readwrite("cover_position", &CComponentPlayerController::m_vCoverPosition)
       .def_readwrite("cover_entity",&CComponentPlayerController::m_pCoverEntity)
@@ -307,6 +288,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("set_position_from_ragdoll",&CComponentPhysXController::SetPositionFromRagdoll)
       .def("get_position",             &CComponentPhysXController::GetPosition)
       .def("set_position",             &CComponentPhysXController::SetPosition)
+      .def("use_gravity",              &CComponentPhysXController::UseGravity)
       
     // ----------------------------------------------------------------------------------------------------
     ,class_<CComponentPhysXBox, CBaseComponent>("ComponentPhysXBox")

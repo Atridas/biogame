@@ -65,7 +65,7 @@ bool CComponentIABrainVigia::Init(CGameEntity* _pEntity, const string& _szPlayer
   m_PatrolZone.GetBoundingBox()->Init( _vZoneSize );
   m_PatrolZone.SetMat44(_mZoneTransform);
 
-  m_vPatrolDirection = Vect3f(0,0,1);
+  m_vPatrolDirection = m_vTargetPosition - _pEntity->GetComponent<CComponentObject3D>()->GetPosition();
   m_vPatrolPosition = m_vTargetPosition;
 
   SetOk(true);
@@ -151,6 +151,8 @@ void CComponentIABrainVigia::ReceiveShoot(SEvent _sEvent)
       CComponentPhysXSphere* l_pSphere = GetEntity()->GetComponent<CComponentPhysXSphere>();
       float l_fRadius = l_pSphere->GetRadius();
       l_pActor->AddForceAtPos(l_vDir, l_vColisionPoint, 50.0f, false);
+
+
 
     }else{
       LOGGER->AddNewLog(ELL_ERROR,"CComponentIABrain::ReciveShoot El missatge a Info[2] no es del tipus PTR");

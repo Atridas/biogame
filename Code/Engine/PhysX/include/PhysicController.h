@@ -56,6 +56,8 @@ public:
 	NxCapsuleControllerDesc*	GetPhXControllerDesc		() {return m_pPhXControllerDesc;}
 	void											CreateController				(NxController* controller, NxScene* scene);
 
+  void UseGravity(bool _bUseGravity) {m_bUseGravity = _bUseGravity;};
+
 private:
 
 	CPhysicUserData*	m_pUserData;
@@ -69,6 +71,8 @@ private:
 	float							m_fSlopeLimit_Capsule;
 	float							m_fSkinWidth_Capsule;
 	float							m_fStepOffset_Capsule;
+
+  bool m_bUseGravity;
 
 	//--- PhysX--
 	NxCapsuleControllerDesc*	m_pPhXControllerDesc;

@@ -647,6 +647,18 @@ void CComponentPlayerController::ReceiveForce(SEvent _sEvent)
   }
 }
 
+bool CComponentPlayerController::IsAlive()
+{
+  CComponentVida* l_pVida = GetEntity()->GetComponent<CComponentVida>();
+
+  if(l_pVida)
+  {
+    return l_pVida->GetHP() > 0;
+  }
+
+  return false;
+}
+
 void CComponentPlayerController::ReceiveEvent(const SEvent& _Event)
 {
   if(_Event.Receiver == GetEntity()->GetGUID())
