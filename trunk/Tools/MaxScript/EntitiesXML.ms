@@ -503,13 +503,7 @@ function XMLEntityVigia _instance _entities &_TagName =
 		l_aux = GetUserProp _instance "ZonaVigia"
 		
 		
-		for i = 1 to _entities.count do
-		(
-			if _entities[i].name == l_aux then
-			(
-				l_zona = _entities[i]
-			)
-		)
+		l_zona = GetObjectByName l_aux
 		
 		if l_zona != undefined then
 		(

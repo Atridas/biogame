@@ -3,6 +3,12 @@
 function init_level_menys_1()  
   local elevator = EM:get_entity("lvl1_montacarregues")
   
+  local l_player = EM:get_entity("Player")
+  
+  local physx_controller = l_player:get_component(BaseComponent.physx_controller)
+  
+  physx_controller:use_gravity(false)
+  
   if elevator then      
     --activar l'ascensor
     local l_message = EM:get_event()
@@ -16,9 +22,11 @@ function init_level_menys_1()
     
     --canviar la càmara i desactivar el player
     activate_cynematic_camera("lvl1_elevator_camera_init")
-    EM:get_entity("Player"):get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Inactiu')
+    l_player:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Inactiu')
     
-    EM:get_entity("lvl1_physXBox_elevator"):set_active(false)
+    --EM:get_entity("lvl1_physXBox_elevator"):set_active(false)
+	deactivate_entity("lvl1_physXBox_elevator")
+	
     --fade in
     EFFECT_MANAGER:set_exposure(0)
     RENDERER:deactivate_render_path("aim_gui")
@@ -202,12 +210,17 @@ end
 --aturar l'ascensor d'entrada
 function lvl1_stop_elevator(_EntityTrigger, _Entity)
   if _Entity:get_name() == "Player" then
+  
     local elevator = EM:get_entity("lvl1_montacarregues")
     
     if elevator then
       local pbox = EM:get_entity("lvl1_physXBox_elevator")
       pbox:set_active(true)
       pbox = pbox:get_component(BaseComponent.physx_actor)
+	  
+	  local physx_controller = _Entity:get_component(BaseComponent.physx_controller)
+  
+	  physx_controller:use_gravity(true)
       
       --aturar l'ascensor
       local l_message = EM:get_event()
@@ -223,7 +236,7 @@ function lvl1_stop_elevator(_EntityTrigger, _Entity)
       deactivate_cynematic_camera()
       RENDERER:activate_render_path("aim_gui")
       _Entity:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
-      megacheat_level_1()
+      --megacheat_level_1()
       
       --posem l'ascensor al seu lloc
       local elevator_position = elevator:get_component(BaseComponent.object_3d):get_position()
@@ -246,7 +259,7 @@ end
 
 --activar l'ascensor de sortida
 function lvl1_activate_elevator(_EntityTrigger, _Entity)
-  if _Entity:get_name() == "Player" then
+  if _Entity:get_name() == "Player" and _Entity:get_component(BaseComponent.player_controller):is_alive() then
     god_mode(true)
     local elevator = EM:get_entity("lvl1_montacarregues01")
     
@@ -286,6 +299,7 @@ end
 function activate_green_key(_EntityTrigger, _Entity)
   if _Entity:get_name() == "Player" then
     activate_entity("lvl1_miner_green")
+    activate_entity("Vigia01")
     
     --destrucció del trigger
     EM:remove_entity(_EntityTrigger)

@@ -3921,4 +3921,5 @@
   <Miner name="lvl1_miner05" position="28.0411 1.6 22.9145" yaw="0.0" active="false" />
   <Miner name="lvl1_miner06" position="29.9813 1.6 33.8244" yaw="0.0" active="false" />
   <Miner name="lvl1_miner07" position="0.0353594 1.6 21.0297" yaw="0.0" active="false" />
+  <Vigia name="Vigia01" position="2.84848 2.53381 3.85204" yaw="0.0" active="false" zone_size="9.43152 3.01768 9.43152" zone_position="-0.137274 3.49052 -0.0322998" zone_yaw="0.0" />
 </Entities>

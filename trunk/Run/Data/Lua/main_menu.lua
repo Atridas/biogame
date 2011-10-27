@@ -236,6 +236,7 @@ State_Tutorial["Enter"] = function(_self)
   
   RENDERER:activate_render_path(Main_Menu_Constants["Frames"][0])
   EFFECT_MANAGER:set_blur_radius(GLOBALS["Blur tutorials"])
+  RENDERER:deactivate_render_path('aim_gui')
   
   CORE:set_pause(true)
   
@@ -249,6 +250,7 @@ State_Tutorial["Exit"] = function(_self)
   Main_Menu_Constants["Frames"]        = {}
   
   EFFECT_MANAGER:set_blur_radius(GLOBALS["Blur Radius Normal"])
+  RENDERER:activate_render_path('aim_gui')
   
   SOUND:resume_samples()
 end

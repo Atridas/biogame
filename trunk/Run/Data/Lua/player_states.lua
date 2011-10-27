@@ -330,16 +330,16 @@ State_Player_Neutre['Update'] = function(_jugador, _dt)
   
   if isAiming then
     local dist = player_controller:aim_distance()
-    RENDERER:blend_parameter(Renderer.blur_radius           , GLOBALS["Blur apuntant"]                  , GLOBALS["Blur blend time"])
-    RENDERER:blend_parameter(Renderer.near_focal_plane_depth, dist * GLOBALS["Blur apuntant near focal"], GLOBALS["Blur blend time"])
-    RENDERER:blend_parameter(Renderer.far_focal_plane_depth , dist * GLOBALS["Blur apuntant far focal"] , GLOBALS["Blur blend time"])
-    RENDERER:blend_parameter(Renderer.near_blur_depth       , dist * GLOBALS["Blur apuntant near"]      , GLOBALS["Blur blend time"])
-    RENDERER:blend_parameter(Renderer.far_blur_depth        , dist * GLOBALS["Blur apuntant far"]       , GLOBALS["Blur blend time"])
+    RENDERER:blend_parameter(Renderer.blur_radius           , GLOBALS["Blur apuntant"]                           , GLOBALS["Blur blend time"])
+    RENDERER:blend_parameter(Renderer.near_focal_plane_depth, --[[dist * ]] GLOBALS["Blur apuntant near focal"], GLOBALS["Blur blend time"])
+    RENDERER:blend_parameter(Renderer.near_blur_depth       , --[[dist * ]] GLOBALS["Blur apuntant near"]      , GLOBALS["Blur blend time"])
+    RENDERER:blend_parameter(Renderer.far_focal_plane_depth ,     dist *    GLOBALS["Blur apuntant far focal"] , GLOBALS["Blur blend time"])
+    RENDERER:blend_parameter(Renderer.far_blur_depth        ,     dist *    GLOBALS["Blur apuntant far"]       , GLOBALS["Blur blend time"])
   else
     RENDERER:blend_parameter(Renderer.blur_radius           , GLOBALS["Blur Radius Normal"]      , GLOBALS["Blur blend time"])
     RENDERER:blend_parameter(Renderer.near_focal_plane_depth, GLOBALS["Blur normal near focal"]  , GLOBALS["Blur blend time"])
-    RENDERER:blend_parameter(Renderer.far_focal_plane_depth , GLOBALS["Blur normal far focal"]   , GLOBALS["Blur blend time"])
     RENDERER:blend_parameter(Renderer.near_blur_depth       , GLOBALS["Blur normal near"]        , GLOBALS["Blur blend time"])
+    RENDERER:blend_parameter(Renderer.far_focal_plane_depth , GLOBALS["Blur normal far focal"]   , GLOBALS["Blur blend time"])
     RENDERER:blend_parameter(Renderer.far_blur_depth        , GLOBALS["Blur normal far"]         , GLOBALS["Blur blend time"])
   end
   
@@ -919,10 +919,10 @@ State_Player_Cobertura_Baixa_Apuntar['Update'] = function(_jugador, _dt)
 
   local dist = player_controller:aim_distance()
   RENDERER:blend_parameter(Renderer.blur_radius           , GLOBALS["Blur apuntant"]                  , GLOBALS["Blur blend time"])
-  RENDERER:blend_parameter(Renderer.near_focal_plane_depth, dist * GLOBALS["Blur apuntant near focal"], GLOBALS["Blur blend time"])
-  RENDERER:blend_parameter(Renderer.far_focal_plane_depth , dist * GLOBALS["Blur apuntant far focal"] , GLOBALS["Blur blend time"])
-  RENDERER:blend_parameter(Renderer.near_blur_depth       , dist * GLOBALS["Blur apuntant near"]      , GLOBALS["Blur blend time"])
-  RENDERER:blend_parameter(Renderer.far_blur_depth        , dist * GLOBALS["Blur apuntant far"]       , GLOBALS["Blur blend time"])
+  RENDERER:blend_parameter(Renderer.near_focal_plane_depth, --[[dist *]] GLOBALS["Blur apuntant near focal"], GLOBALS["Blur blend time"])
+  RENDERER:blend_parameter(Renderer.far_focal_plane_depth , --[[dist *]] GLOBALS["Blur apuntant far focal"] , GLOBALS["Blur blend time"])
+  RENDERER:blend_parameter(Renderer.near_blur_depth       ,     dist *   GLOBALS["Blur apuntant near"]      , GLOBALS["Blur blend time"])
+  RENDERER:blend_parameter(Renderer.far_blur_depth        ,     dist *   GLOBALS["Blur apuntant far"]       , GLOBALS["Blur blend time"])
 
 end
 

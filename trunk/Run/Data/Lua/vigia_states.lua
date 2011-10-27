@@ -36,6 +36,9 @@ State_Vigia_Patrol["Enter"] = function(_enemic)
   
   ia_brain_vigia.time = 0
   
+  --local emiter = _enemic:get_component(BaseComponent.emiter)
+  --emiter:set_active(false)
+  
   --local animation = _enemic:get_component(BaseComponent.animation)
   --animation:set_animation_state('idle')
 end
@@ -47,6 +50,8 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Vigia_Patrol['Update'] = function(_enemic, _dt)
+  local emiter = _enemic:get_component(BaseComponent.emiter)
+  emiter:set_active(false)
   local ia_brain_vigia = _enemic:get_component(BaseComponent.ia_brain_vigia)
   
   ia_brain_vigia.time = ia_brain_vigia.time + _dt
@@ -81,6 +86,12 @@ State_Vigia_Patrol['Receive'] = function(_enemic, _event)
   --  _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
   --  _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Mort')
   end
+  if _event.msg == Event.morir then
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Vigia_Mort')
+	return
+  end
+  
+  
 end
 
 
@@ -102,6 +113,8 @@ State_Vigia_Atac["Enter"] = function(_enemic)
 
   SOUND:play_sample("robot_move")
   
+  local emiter = _enemic:get_component(BaseComponent.emiter)
+  emiter:set_active(false)
   --local animation = _enemic:get_component(BaseComponent.animation)
   --animation:set_animation_state('idle')
 end
@@ -150,6 +163,10 @@ State_Vigia_Atac['Receive'] = function(_enemic, _event)
   --  _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
   --  _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Mort')
   end
+  if _event.msg == Event.morir then
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Vigia_Mort')
+	return
+  end
 end
 
 
@@ -166,6 +183,8 @@ State_Vigia_Shoot["Enter"] = function(_enemic)
   ia_brain_vigia.time = 0
   ia_brain_vigia.shoots = 0
   
+  local emiter = _enemic:get_component(BaseComponent.emiter)
+  emiter:set_active(false)
   --local animation = _enemic:get_component(BaseComponent.animation)
   --animation:set_animation_state('idle')
 end
@@ -215,6 +234,10 @@ State_Vigia_Shoot['Receive'] = function(_enemic, _event)
   --  _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Vigia_Search_Node')
   end
+  if _event.msg == Event.morir then
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Vigia_Mort')
+	return
+  end
 end
 
 
@@ -231,6 +254,9 @@ State_Vigia_Search_Node["Enter"] = function(_enemic)
   ia_brain_vigia.time = 0
   
   ia_brain_vigia:choose_new_patrol_position()
+  
+  local emiter = _enemic:get_component(BaseComponent.emiter)
+  emiter:set_active(false)
   --local ia_pos     = _enemic:get_component(BaseComponent.object_3d):get_position()
   --ia_brain_vigia.patrol_direction = ia_brain_vigia.patrol_position - ia_pos
   
@@ -279,6 +305,10 @@ State_Vigia_Search_Node['Receive'] = function(_enemic, _event)
     --g_force_event = _event
   --  _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
   --  _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Mort')
+  end
+  if _event.msg == Event.morir then
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Vigia_Mort')
+	return
   end
 end
 
@@ -367,6 +397,10 @@ State_Vigia_Rebre_Impacte['Receive'] = function(_enemic, _event)
   --  _enemic:get_component(BaseComponent.ia_brain):recive_force(_event)
   --  _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Soldier_Mort')
   end
+  if _event.msg == Event.morir then
+    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Vigia_Mort')
+	return
+  end
 end
 
 
@@ -390,6 +424,7 @@ State_Vigia_Mort["Enter"] = function(_enemic)
   ia_brain_vigia.time = 0
   
   SOUND:play_sample("robot_die")
+  log("moro!!")
   
   emiter:set_active(true)
   
@@ -405,21 +440,21 @@ end
 -------------------------------------------------------------------------------------------------
 State_Vigia_Mort['Update'] = function(_enemic, _dt)
   
-  local ia_brain_vigia = _enemic:get_component(BaseComponent.ia_brain_vigia)
-  
-  ia_brain_vigia.time = ia_brain_vigia.time + _dt
-  
-  if ia_brain_vigia.time > 10 then
-    local vida = _enemic:get_component(BaseComponent.vida)
-    
-    vida:set(100)
-    
-    ia_brain_vigia:fly(true)
-    
-    _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Vigia_Search_Node')
-    
-    return
-  end
+  --local ia_brain_vigia = _enemic:get_component(BaseComponent.ia_brain_vigia)
+  --
+  --ia_brain_vigia.time = ia_brain_vigia.time + _dt
+  --
+  --if ia_brain_vigia.time > 10 then
+  --  local vida = _enemic:get_component(BaseComponent.vida)
+  --  
+  --  vida:set(100)
+  --  
+  --  ia_brain_vigia:fly(true)
+  --  
+  --  _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Vigia_Search_Node')
+  --  
+  --  return
+  --end
   
 end
 

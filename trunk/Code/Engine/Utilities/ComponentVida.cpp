@@ -92,8 +92,15 @@ void CComponentVida::Decrease(float _fAmount)
 
     m_fVida -= _fAmount;
 
-    if(m_fVida < 0.0f)
+    if(m_fVida <= 0.f)
+    {
       m_fVida = 0.0f;
+      SEvent l_morir;
+      l_morir.Msg = SEvent::MORIR;
+      l_morir.Receiver = l_morir.Sender = GetEntity()->GetGUID();
+      
+      CORE->GetEntityManager()->SendEvent(l_morir);
+    }
   }
 }
 
@@ -139,14 +146,6 @@ void CComponentVida::ReceiveEvent(const SEvent& _Event)
     }
       else return;
 
-    if(m_fVida <= 0.f)
-    {
-      SEvent l_morir;
-      l_morir.Msg = SEvent::MORIR;
-      l_morir.Receiver = l_morir.Sender = GetEntity()->GetGUID();
-      
-      CORE->GetEntityManager()->SendEvent(l_morir);
-    }
   }else /*if(_Event.Msg == SEvent::REBRE_FORCE)
   {
     if(m_fVida > 0.f)
@@ -168,6 +167,7 @@ void CComponentVida::ReceiveEvent(const SEvent& _Event)
   }else*/ if(_Event.Msg == SEvent::MORIR)
   {
     m_fVida = 0.0f;
+    m_bRegen = false;
   }
 }
 

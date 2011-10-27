@@ -4,8 +4,41 @@ function init_hangar()
   EFFECT_MANAGER:set_exposure(0)
   RENDERER:blend_parameter(Renderer.exposure, 0.5, 3)
   RENDERER:activate_render_path('hangar skybox')
-end
+  
+  local elevator = EM:get_entity("hangar_Montacarregues")
+  
+  local l_player = EM:get_entity("Player")
+  
+  local physx_controller = l_player:get_component(BaseComponent.physx_controller)
+  
+  physx_controller:use_gravity(false)
+  
+  if elevator then      
+    --activar l'ascensor
+    local l_message = EM:get_event()
 
+    l_message.msg = Event.obrir
+    l_message.sender = elevator:get_guid()
+    l_message.receiver = elevator:get_guid()
+    l_message.dispatch_time = 0
+    
+    EM:send_event(l_message)
+    
+    --canviar la càmara i desactivar el player
+    activate_cynematic_camera("hangar_elevator_camera")
+    l_player:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Inactiu')
+    
+    --EM:get_entity("lvl1_physXBox_elevator"):set_active(false)
+	deactivate_entity("hangar_physx_box_elevator")
+	
+    --fade in
+    EFFECT_MANAGER:set_exposure(0)
+    RENDERER:deactivate_render_path("aim_gui")
+    RENDERER:blend_parameter(Renderer.exposure, 0.5, 3)
+  else
+    log("Error: No es troba l'entitat: hangar_Montacarregues")
+  end
+end
 
 function hang_porta(_self, _player)
   if _player:get_name() == "Player" then
@@ -92,6 +125,51 @@ function hang_porta(_self, _player)
 end
 
 -------------------------------------------- TRIGGERS  -------------------------------------------
+--aturar l'ascensor d'entrada
+function hang_stop_elevator(_EntityTrigger, _Entity)
+  log("CATACROQUER")
+  if _Entity:get_name() == "Player" then
+  
+    local elevator = EM:get_entity("hangar_Montacarregues")
+    
+    if elevator then
+      local pbox = EM:get_entity("hangar_physx_box_elevator")
+      pbox:set_active(true)
+      pbox = pbox:get_component(BaseComponent.physx_actor)
+	  
+	  local physx_controller = _Entity:get_component(BaseComponent.physx_controller)
+  
+	  physx_controller:use_gravity(true)
+      
+      --aturar l'ascensor
+      local l_message = EM:get_event()
+
+      l_message.msg = Event.tancar
+      l_message.sender = elevator:get_guid()
+      l_message.receiver = elevator:get_guid()
+      l_message.dispatch_time = 0
+      
+      EM:send_event(l_message)
+      
+      --restaurar la càmara i el player
+      deactivate_cynematic_camera()
+      RENDERER:activate_render_path("aim_gui")
+      _Entity:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
+      --megacheat_level_1()
+      
+      --posem l'ascensor al seu lloc
+      local elevator_position = elevator:get_component(BaseComponent.object_3d):get_position()
+      Elevator_Constants["Final Position"][0] = elevator_position.x
+      Elevator_Constants["Final Position"][1] = pbox:get_position().y
+      Elevator_Constants["Final Position"][2] = elevator_position.z
+      
+      EM:remove_entity(_EntityTrigger)
+    else
+      log("Error: No es troba l'entitat: hangar_Montacarregues")
+    end
+  end
+end
+
 function hang_trig_enemics_enter00(_EntityTrigger, _Entity)
   if _Entity:get_name() == "Player" then
     activate_entity('Miner01')
@@ -221,11 +299,12 @@ function hang_trig_enemics_enter07(_EntityTrigger, _Entity)
 end
 
 function hang_final_nivell(_EntityTrigger, _Entity)
-  if _Entity:get_name() == "Player" then
+  if _Entity:get_name() == "Player" and _Entity:get_component(BaseComponent.player_controller):is_alive() then
     god_mode(true)
     local controller = EM:get_entity("LevelController")
     if controller then
       CORE:set_pause(true)
+      SOUND:stop_sounds()
       set_song(ComponentBGMController.init_menu)
       controller:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Main_Menu_Credits')
     else

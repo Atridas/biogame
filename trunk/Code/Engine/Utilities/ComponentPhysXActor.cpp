@@ -36,7 +36,7 @@ void CComponentPhysXActor::Enable()
 void CComponentPhysXActor::Disable()
 {
   m_pPhysXActor->Activate(false);
-  m_pPhysXActor->SetGlobalPosition(m_pPhysXActor->GetPosition() - Vect3f(0.0f,1000.0f,0.0f));
+  m_pPhysXActor->SetGlobalPosition(m_pObject3D->GetPosition() - Vect3f(0.0f,1000.0f,0.0f));
 }
 
 Vect3f CComponentPhysXActor::GetPosition()

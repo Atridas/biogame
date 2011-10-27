@@ -206,6 +206,7 @@ void CLevelChanger::Update(float _fElapsedTime)
       }
 
       l_pRenderer->ActivateRenderPath(l_pLevel->RenderPath);
+      l_pRenderer->SetActiveCamera(0);
       l_pCore->GetSoundManager()->StopSounds();
       m_bChanging = true;
     }

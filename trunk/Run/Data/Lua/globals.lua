@@ -4,18 +4,20 @@ g_ibracetCount = 0
 GLOBALS = {}
 
 GLOBALS["Blur Radius Normal"] = 2
-GLOBALS["Blur tutorials"] = 5
-GLOBALS["Blur apuntant"] = 4
+GLOBALS["Blur tutorials"] = 7
+GLOBALS["Blur apuntant"] = 3
 
 GLOBALS["Blur normal near"]       = -15
-GLOBALS["Blur normal far"]        = 25
 GLOBALS["Blur normal near focal"] = 5
 GLOBALS["Blur normal far focal"]  = 15
+GLOBALS["Blur normal far"]        = 25
 
-GLOBALS["Blur apuntant near"]       = 0.5
-GLOBALS["Blur apuntant far"]        = 2
-GLOBALS["Blur apuntant near focal"] = 0.7
-GLOBALS["Blur apuntant far focal"]  = 1.3
+
+
+GLOBALS["Blur apuntant near"]       = 1
+GLOBALS["Blur apuntant near focal"] = 5
+GLOBALS["Blur apuntant far focal"]  = 1.3 --proporcional
+GLOBALS["Blur apuntant far"]        = 2   --proporcional
 
 GLOBALS["Blur blend time"] = 0.5
 

@@ -63,6 +63,8 @@ public:
 
   void SetGodMode(bool _bValue);
 
+  bool IsAlive();
+
 private:
   CComponentPlayerController():
       m_bGodMode(false),

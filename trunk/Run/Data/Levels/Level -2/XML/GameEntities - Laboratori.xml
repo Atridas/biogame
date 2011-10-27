@@ -248,10 +248,10 @@
     <Light resource="lvl2_lab_Omni03" type="omni" script="lvl2_lab_update_light" />
   </Entity>
   <Entity name="lvl2_lab_panell">
-    <Object3D position="-4.50415 1.39148 -7.74447" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-4.69265 2.1521 -9.96352" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="lvl2_lab_panell" />
     <PhysXBox fromRenderableObject="true" density="0" collision_group="escenari" />
-    <Destroyable onDestroy="laboratori_obrir_porta" hitPoints="5" />
+    <Destroyable onDestroy="laboratori_obrir_porta" destroyedResource="lvl2_lab_panell" hitPoints="5" />
   </Entity>
   <Entity name="lvl2_lab_Omni05">
     <Light resource="lvl2_lab_Omni05" type="omni" script="lvl2_lab_update_light" />
@@ -290,7 +290,7 @@
     <RenderableObject animated="true" name="Capsula" cycle="idle" />
   </Entity>
   <Entity name="Lab_billboard_shootme">
-    <Object3D position="-4.97464 2.1153 -9.98825" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="-5.19281 2.7635 -9.98825" yaw="0.0" pitch="0.0" roll="0.0" />
     <Billboard core="Shoot Me" />
   </Entity>
   <Entity name="lab_got_here">

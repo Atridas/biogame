@@ -17,7 +17,9 @@
   
   <!-- Efectes de mals globals -->
   <collision group1="trigger mal" group2="enemic" />
+  <collision group1="trigger mal" group2="ragdoll" />
   <collision group1="trigger mal" group2="personatge" />
+  <collision group1="trigger mal" group2="ragdoll player" />
   
   <!-- Enemics -->
 	<collision group1="enemic" group2="objecte dinamic" />

@@ -57,6 +57,6 @@
 	<RenderableObject name="lvl2_lab_lab_fluorescente02" class="StaticMesh" resource="lvl2_lab_lab_fluorescente02" position="-7.22211 3.73603 -1.23727" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_lab_fluorescent_apagat02" class="StaticMesh" resource="lvl2_lab_lab_fluorescent_apagat02" position="-7.26858 3.73603 -8.59692" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_carpeta_eon" class="StaticMesh" resource="lvl2_lab_carpeta_eon" position="-4.88037 0.921331 -3.12124" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="lvl2_lab_panell" class="StaticMesh" resource="lvl2_lab_panell" position="-4.50415 1.39148 -7.74447" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="lvl2_lab_panell" class="StaticMesh" resource="lvl2_lab_panell" position="-4.69265 2.1521 -9.96352" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="lvl2_lab_radios_banc" class="StaticMesh" resource="lvl2_lab_radios_banc" position="-4.69115 1.93918 -1.39754" yaw="0.0" pitch="0.0" roll="0.0" />
 </RenderableObjects>

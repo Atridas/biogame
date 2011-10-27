@@ -6,4 +6,5 @@
   <mesh name="granada" path="Data/Meshes/granada.mesh" max="-0.0626906 0.0703703 0.0591007" min="0.0626902 -0.0703702 -0.0591011" />
   <mesh name="global_bido_verd" path="Data/Meshes/global_bido_verd.mesh" max="0.309999 0.938024 0.294828" min="-0.309999 0.0 -0.294828" />
   <mesh name="global_bido_vermell" path="Data/Meshes/global_bido_vermell.mesh" max="0.31 0.938024 0.294828" min="-0.31 0.0 -0.294828" />
+  <mesh name="global_bido_verd_trencat" path="Data/Meshes/global_bido_verd_trencat.mesh" max="0.309999 0.938024 0.294828" min="-0.309999 0.0 -0.294828" />
 </meshes>

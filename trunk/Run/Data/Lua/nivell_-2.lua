@@ -1,4 +1,13 @@
 -------------------------------------------- FUNCIONS  -------------------------------------------
+-- Inici
+function init_level_menys_2()  
+
+  EFFECT_MANAGER:set_exposure(0)
+  RENDERER:blend_parameter(Renderer.exposure, 0.5, 3)
+	
+  tutorial_movement()
+end
+
 function riggle_file(_self, _player)
   if _player:get_name() == "Player" then
   
@@ -46,6 +55,7 @@ end
 
 function laboratori_obrir_porta(_self)
   deactivate_entity("Lab_billboard_shootme")
+  EM:init_emiter("electric", _self:get_component(BaseComponent.object_3d):get_position(), Vect3f(0.2), 0, Vect3f(0,1,0))
   
   local l_door = EM:get_entity("Porta_Laboratori")
   if l_door then
@@ -93,17 +103,15 @@ function salavideo_palanca(_self, _player)
       
     _player:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Inactiu')
     
+    --activar el vigia del passadís
+    activate_entity("pas_vigia00")
+	SOUND:play_sample("robot_move")
       
     _self:delete_component(BaseComponent.interactive)
   end
 end
 
 function lvl2_deactivate_camera(_self)
-
-  --activar el miner del passadís
-  activate_entity("pas_miner00")
-  
-  
   deactivate_cynematic_camera()
   RENDERER:activate_render_path('aim_gui')
   
@@ -241,7 +249,7 @@ end
 
 --activar el montacàrregues
 function activate_elevator_2(_EntityTrigger, _Entity)
-  if _Entity:get_name() == "Player" then
+  if _Entity:get_name() == "Player" and _Entity:get_component(BaseComponent.player_controller):is_alive() then
     god_mode(true)
     --activar montacàrregues.
     local elevator = EM:get_entity("lvl2_montacarregues")

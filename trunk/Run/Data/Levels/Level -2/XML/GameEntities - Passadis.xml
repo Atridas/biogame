@@ -139,7 +139,7 @@
     <Trigger shape="box" size="7.13034 8.93156 10.1565" collision_group="trigger" onEnter="open_door" onExit="close_door" />
   </Entity>
   <Entity name="lvl2_pass_CameraPassadis">
-    <Object3D position="9.84518 2.78403 -10.1465" yaw="48.3828" pitch="0.0" roll="-82.2449" />
+    <Object3D position="9.84518 2.78403 -9.27171" yaw="52.9058" pitch="1.70755e-006" roll="-81.7327" />
     <CynematicCamera target="16.46 1.57906 -4.27003" fov="55.0" near="1.0" far="1000.0" />
   </Entity>
   <Entity name="pas_boira01">
@@ -182,5 +182,5 @@
     <Object3D position="20.608 3.43603 5.784" yaw="115.0" pitch="-5.00896e-006" roll="180.0" />
     <Emiter core="goteo" volume="0.287217 0.200504 4.20279" />
   </Entity>
-  <Miner name="pas_miner00" position="20.8841 1.9223 5.44801" yaw="0.0" active="false" />
+  <Vigia name="pas_vigia00" position="21.7256 1.9223 7.86293" yaw="0.0" active="false" zone_size="4.47815 2.06849 9.75582" zone_position="19.1152 1.56859 2.45708" zone_yaw="25.0" />
 </Entities>

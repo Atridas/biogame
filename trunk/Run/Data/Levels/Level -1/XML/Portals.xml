@@ -854,13 +854,13 @@
   <Portals>
     <Portal name="PortalR03R04" roomA="Room03" roomB="Room04" size="0.628793 3.24569 2.46673" position="28.2098 1.23221 34.1674" yaw="45.0" pitch="0.0" roll="0.0" />
     <Portal name="PortalP01R03" roomA="Pass01" roomB="Room03" size="3.66242 3.39706 0.789786" position="19.4937 1.35503 19.278" yaw="45.0" pitch="0.0" roll="0.0" />
-    <Portal name="PortalRCP01" roomA="SalaCentral" roomB="Pass01" size="3.66242 3.39706 0.789786" position="5.25939 1.35503 5.23637" yaw="45.0" pitch="0.0" roll="0.0" />
-    <Portal name="PortalRCP04" roomA="SalaCentral" roomB="Pass04" size="3.66242 3.39706 0.789785" position="7.40228 1.35503 -0.155607" yaw="90.0" pitch="0.0" roll="0.0" />
-    <Portal name="PortalRCPI" roomA="SalaCentral" roomB="PassInici" size="3.66242 3.39706 0.789785" position="0.149349 1.35503 -7.50984" yaw="180.0" pitch="0.0" roll="0.0" />
-    <Portal name="PortalRCP03" roomA="SalaCentral" roomB="Pass03" size="3.66242 3.39706 0.789785" position="-7.36296 1.35503 -0.156072" yaw="-90.0" pitch="0.0" roll="0.0" />
-    <Portal name="PortalRCPF" roomA="SalaCentral" roomB="PassFinal" size="3.66242 3.39706 0.789785" position="0.124609 1.35503 7.39967" yaw="180.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalRCP01" roomA="SalaCentral" roomB="Pass01" size="3.66242 3.39706 1.4471" position="5.25939 1.35503 5.23637" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalRCP04" roomA="SalaCentral" roomB="Pass04" size="3.66242 3.39706 2.04718" position="7.40228 1.35503 -0.155607" yaw="90.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalRCPI" roomA="SalaCentral" roomB="PassInici" size="3.66242 3.39706 1.49336" position="0.149349 1.35503 -7.50984" yaw="180.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalRCP03" roomA="SalaCentral" roomB="Pass03" size="3.66242 3.39706 1.2492" position="-7.36296 1.35503 -0.156072" yaw="-90.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalRCPF" roomA="SalaCentral" roomB="PassFinal" size="3.66242 3.39706 1.51986" position="0.124609 1.35503 7.39967" yaw="180.0" pitch="0.0" roll="0.0" />
     <Portal name="PortalP03R01" roomA="Pass03" roomB="Room01" size="3.66242 3.39706 0.789785" position="-27.4283 1.35503 0.019357" yaw="-90.0" pitch="0.0" roll="0.0" />
     <Portal name="PortalP04R02" roomA="Pass04" roomB="Room02" size="3.66242 3.39706 0.789785" position="33.6818 -8.55704 -20.6985" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
-    <Portal name="PortalRCRCt01" roomA="SalaCentral" roomB="SalaControls" size="3.66242 3.39706 0.789785" position="-5.37087 1.35503 5.13457" yaw="135.0" pitch="0.0" roll="0.0" />
+    <Portal name="PortalRCRCt01" roomA="SalaCentral" roomB="SalaControls" size="3.66242 3.39706 1.46371" position="-5.37087 1.35503 5.13457" yaw="135.0" pitch="0.0" roll="0.0" />
   </Portals>
 </PortalManager>
