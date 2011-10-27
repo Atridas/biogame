@@ -120,6 +120,17 @@ function hang_porta(_self, _player)
       log('Error: "hangar_puerta_hangar" no trobada.')
     end
     
+    --vigies
+    activate_entity('Vigia08')
+    activate_entity('Vigia09')
+    activate_entity('Vigia10')
+    activate_entity('Vigia11')
+    activate_entity('Vigia12')
+    activate_entity('Vigia13')
+    activate_entity('Vigia14')
+    activate_entity('Vigia15')
+    
+    
     _self:delete_component(BaseComponent.interactive)
   end
 end
@@ -205,6 +216,10 @@ function hang_trig_enemics_enter03(_EntityTrigger, _Entity)
     
     --upper
     activate_entity('Militar18')
+    
+    --vigies
+    activate_entity('Vigia01')
+    activate_entity('Vigia02')
     
     --destrucció del trigger
     EM:remove_entity(_EntityTrigger)
@@ -292,6 +307,13 @@ function hang_trig_enemics_enter07(_EntityTrigger, _Entity)
     --upper
     activate_entity('Militar22')
     activate_entity('Militar23')
+    
+    --vigies
+    activate_entity('Vigia03')
+    activate_entity('Vigia04')
+    activate_entity('Vigia05')
+    activate_entity('Vigia06')
+    activate_entity('Vigia07')
     
     --destrucció del trigger
     EM:remove_entity(_EntityTrigger)

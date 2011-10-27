@@ -3,6 +3,7 @@
 #include "EmiterManager.h"
 #include "EmiterInstance.h"
 #include "Core.h"
+#include <sstream>
 
 CComponentEmiter* CComponentEmiter::AddToEntity(CGameEntity* _pEntity, const string& _szCore, const Vect3f& _vVolume, int _iMaxParticles)
 {
@@ -30,8 +31,11 @@ bool CComponentEmiter::Init(CGameEntity* _pEntity, const string& _szCore, const 
     return false;
   }
 
-  m_szEmiterName  = "Entity Emiter ";
-  m_szEmiterName += _pEntity->GetGUID();
+  stringstream l_ss;
+  l_ss << "Entity Emiter " << _pEntity->GetGUID();
+  //m_szEmiterName  = "Entity Emiter ";
+  //m_szEmiterName += _pEntity->GetGUID();
+  m_szEmiterName = l_ss.str();
 
   m_pEmiterInstance = CORE->GetEmiterManager()->CreateEmiter(m_szEmiterName, _szCore, *l_pCO3D, _vVolume, _iMaxParticles);
   m_pEmiterInstance->SetReference(l_pCO3D);

@@ -6,7 +6,7 @@ Vigia_Constants["Time Search Node"]      = 0.3
 Vigia_Constants["Time Shoots"]           = 0.3
 Vigia_Constants["Time Rebre Impacte"]    = 0.5
 Vigia_Constants["Num Shoots"]            = 6
-Vigia_Constants["Distancia Atac"] = 8 * 8
+--Vigia_Constants["Distancia Atac"] = 8 * 8
 
 
 State_Vigia_Patrol        = {}
@@ -67,7 +67,9 @@ State_Vigia_Patrol['Update'] = function(_enemic, _dt)
   
   local dist_sq = (ia_pos - player_pos):length_sq()
   
-  if dist_sq < Vigia_Constants["Distancia Atac"] then
+  local atac_sq = ia_brain_vigia:get_atac_distance()
+  atac_sq = atac_sq * atac_sq
+  if dist_sq < atac_sq then
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Vigia_Atac')
     return
   end
@@ -144,7 +146,9 @@ State_Vigia_Atac['Update'] = function(_enemic, _dt)
   
   ia_brain_vigia.patrol_direction = player_pos - ia_pos + Vect3f(0, 0.5,0)
   
-  if dist_sq > Vigia_Constants["Distancia Atac"] then
+  local atac_sq = ia_brain_vigia:get_atac_distance()
+  atac_sq = atac_sq * atac_sq
+  if dist_sq > atac_sq then
     _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Vigia_Patrol')
     return
   end
@@ -284,7 +288,9 @@ State_Vigia_Search_Node['Update'] = function(_enemic, _dt)
     
     local dist_sq = (ia_pos - player_pos):length_sq()
     
-    if dist_sq > Vigia_Constants["Distancia Atac"] then
+    local atac_sq = ia_brain_vigia:get_atac_distance()
+    atac_sq = atac_sq * atac_sq
+    if dist_sq < atac_sq then
       _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Vigia_Patrol')
       return
     else
@@ -366,7 +372,9 @@ State_Vigia_Rebre_Impacte['Update'] = function(_enemic, _dt)
       _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Vigia_Search_Node')
       return
       
-      --if dist_sq > Vigia_Constants["Distancia Atac"] then
+      --local atac_sq = ia_brain_vigia:get_atac_distance()
+      --atac_sq = atac_sq * atac_sq
+      --if dist_sq < atac_sq then
       --  _enemic:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Vigia_Patrol')
       --  return
       --else
