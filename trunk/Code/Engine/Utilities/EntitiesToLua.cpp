@@ -240,6 +240,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("init_emiter",                       &CEntityManager::InitParticles)
       .def("init_trigger_with_emiter",          &CEntityManager::InitTriggerWithParticles)
       .def("init_pickup",                       &CEntityManager::InitPickUp)
+      .def("init_life_omni",                    &CEntityManager::InitLifeOmni)
   ];
 
   module(_pLS) [

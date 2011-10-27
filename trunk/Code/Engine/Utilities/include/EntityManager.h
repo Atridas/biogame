@@ -67,6 +67,8 @@ public:
 
   CGameEntity* InitGrenade(const Vect3f& _vPos,const Vect3f& _vDir, uint32 _uiCollisionMask);
 
+  CGameEntity* InitLifeOmni(float _fLifeTime, const CColor& _vColor, float _fStartRangeAtt, float _fEndRangeAtt, CGameEntity* l_pPlayer);
+
 protected:
   virtual void Release();
 
