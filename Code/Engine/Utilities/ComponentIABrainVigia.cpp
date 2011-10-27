@@ -67,6 +67,9 @@ bool CComponentIABrainVigia::Init(CGameEntity* _pEntity, const string& _szPlayer
 
   m_vPatrolDirection = m_vTargetPosition - _pEntity->GetComponent<CComponentObject3D>()->GetPosition();
   m_vPatrolPosition = m_vTargetPosition;
+  
+  m_PatrolZone.GetBoundingSphere()->Init( *m_PatrolZone.GetBoundingBox() );
+  m_fAtacDistance = m_PatrolZone.GetBoundingSphere()->GetRadius() * 2;
 
   SetOk(true);
   return IsOk();

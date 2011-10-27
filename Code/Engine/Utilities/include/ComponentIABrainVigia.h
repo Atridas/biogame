@@ -45,9 +45,13 @@ public:
   Vect3f       m_vPatrolPosition;
   Vect3f       m_vPatrolDirection;
 
+  float GetAtacDistance() const { return m_fAtacDistance; }
 
 private:
-  CComponentIABrainVigia():m_pPlayer(0),m_fTime(0),m_bShooted(false),m_iShoots(0),m_vTargetPosition(0.0f),m_bFly(false), m_szOnDeathScript(""), m_bDead(false) {};
+  CComponentIABrainVigia():
+       m_pPlayer(0),m_fTime(0),m_bShooted(false),m_iShoots(0),
+         m_vTargetPosition(0.0f),m_bFly(false), m_szOnDeathScript(""), m_bDead(false),
+         m_fAtacDistance(5.f) {};
   bool Init(CGameEntity* _pEntity, const string& _szPlayerEntityName, const Vect3f& _vZoneSize, const Mat44f& _mZoneTransform, const string& _szOnDeathScript = "");
 
   void Die();
@@ -63,6 +67,7 @@ private:
 
   Vect3f m_vTargetPosition;
   
+  float m_fAtacDistance;
   CObject3D m_PatrolZone;
 };
 

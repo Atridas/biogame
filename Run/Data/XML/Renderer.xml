@@ -209,7 +209,7 @@
     </post_scene_renderer>
     <post_scene_renderer name="hangar skybox" effect="Skybox" render_target="SKY">
       <input_samplers>
-        <input_sampler type="texture" index="0" texture="Data/Textures/def_skybox.dds" cube="true" />
+        <input_sampler type="texture" index="0" texture="Data/Textures/hangar_skybox.dds" cube="true" />
       </input_samplers>
     </post_scene_renderer>
    

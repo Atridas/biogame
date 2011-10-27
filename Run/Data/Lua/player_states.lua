@@ -682,6 +682,11 @@ State_Player_Cobertura_Baixa['Exit'] = function(_jugador)
   local renderable_object = _jugador:get_component(BaseComponent.renderable_object)
   renderable_object.block_yaw = false
   
+  RENDERER:blend_parameter(Renderer.blur_radius           , GLOBALS["Blur Radius Normal"]      , GLOBALS["Blur blend time"])
+  RENDERER:blend_parameter(Renderer.near_focal_plane_depth, GLOBALS["Blur normal near focal"]  , GLOBALS["Blur blend time"])
+  RENDERER:blend_parameter(Renderer.far_focal_plane_depth , GLOBALS["Blur normal far focal"]   , GLOBALS["Blur blend time"])
+  RENDERER:blend_parameter(Renderer.near_blur_depth       , GLOBALS["Blur normal near"]        , GLOBALS["Blur blend time"])
+  RENDERER:blend_parameter(Renderer.far_blur_depth        , GLOBALS["Blur normal far"]         , GLOBALS["Blur blend time"])
 end
 
 -------------------------------------------------------------------------------------------------
@@ -689,14 +694,23 @@ State_Player_Cobertura_Baixa['Update'] = function(_jugador, _dt)
 
   local pitch, yaw, object3d = camera_player(_jugador, _dt, Player_Constants["Apuntant Multiplier"])
   
+  local player_controller = _jugador:get_component(BaseComponent.player_controller)
+  
   if ACTION_MANAGER:is_action_active('Cover') then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Neutre')
   end
 
-  if ACTION_MANAGER:is_action_active('Aim') and _jugador:get_component(BaseComponent.player_controller).shoot_active then
+  if ACTION_MANAGER:is_action_active('Aim') and player_controller.shoot_active then
     _jugador:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Cobertura_Baixa_Apuntar')
     return
   end
+  
+  local dist = player_controller:aim_distance()
+  RENDERER:blend_parameter(Renderer.blur_radius           , GLOBALS["Blur apuntant"]                  , GLOBALS["Blur blend time"])
+  RENDERER:blend_parameter(Renderer.near_blur_depth       , --[[dist *]] GLOBALS["Blur apuntant near"]      , GLOBALS["Blur blend time"])
+  RENDERER:blend_parameter(Renderer.near_focal_plane_depth, --[[dist *]] GLOBALS["Blur apuntant near focal"], GLOBALS["Blur blend time"])
+  RENDERER:blend_parameter(Renderer.far_focal_plane_depth ,     dist *   GLOBALS["Blur apuntant far focal"] , GLOBALS["Blur blend time"])
+  RENDERER:blend_parameter(Renderer.far_blur_depth        ,     dist *   GLOBALS["Blur apuntant far"]       , GLOBALS["Blur blend time"])
 end
 
 -------------------------------------------------------------------------------------------------
@@ -789,7 +803,6 @@ end
 -------------------------------------------------------------------------------------------------
 State_Player_Cobertura_Alta_Sortir['Exit'] = function(_jugador)
   _jugador:get_component(BaseComponent.renderable_object).block_yaw = false
-  
 end
 
 -------------------------------------------------------------------------------------------------
@@ -921,9 +934,9 @@ State_Player_Cobertura_Baixa_Apuntar['Update'] = function(_jugador, _dt)
 
   local dist = player_controller:aim_distance()
   RENDERER:blend_parameter(Renderer.blur_radius           , GLOBALS["Blur apuntant"]                  , GLOBALS["Blur blend time"])
+  RENDERER:blend_parameter(Renderer.near_blur_depth       , --[[dist *]]   GLOBALS["Blur apuntant near"]      , GLOBALS["Blur blend time"])
   RENDERER:blend_parameter(Renderer.near_focal_plane_depth, --[[dist *]] GLOBALS["Blur apuntant near focal"], GLOBALS["Blur blend time"])
-  RENDERER:blend_parameter(Renderer.far_focal_plane_depth , --[[dist *]] GLOBALS["Blur apuntant far focal"] , GLOBALS["Blur blend time"])
-  RENDERER:blend_parameter(Renderer.near_blur_depth       ,     dist *   GLOBALS["Blur apuntant near"]      , GLOBALS["Blur blend time"])
+  RENDERER:blend_parameter(Renderer.far_focal_plane_depth ,     dist *   GLOBALS["Blur apuntant far focal"] , GLOBALS["Blur blend time"])
   RENDERER:blend_parameter(Renderer.far_blur_depth        ,     dist *   GLOBALS["Blur apuntant far"]       , GLOBALS["Blur blend time"])
 
 end
