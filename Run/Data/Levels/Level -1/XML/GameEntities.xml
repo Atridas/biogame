@@ -3425,27 +3425,27 @@
   <Entity name="lvl1_door04">
     <Object3D position="7.3721 1.25049 0.010658" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta1" />
-    <Door open="false" block="true" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" />
+    <Door open="false" block="true" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" type="Porta1" />
   </Entity>
   <Entity name="lvl1_door01">
     <Object3D position="5.23365 1.25049 5.18079" yaw="-45.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta1" />
-    <Door open="false" block="true" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" />
+    <Door open="false" block="true" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" type="Porta1" />
   </Entity>
   <Entity name="lvl1_door_final">
     <Object3D position="0.0924268 1.25049 7.32848" yaw="90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta1" />
-    <Door open="false" block="true" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" />
+    <Door open="false" block="true" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" type="Porta1" />
   </Entity>
   <Entity name="lvl1_door_claus">
     <Object3D position="-5.25321 1.25049 5.19391" yaw="45.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta1" />
-    <Door open="false" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" />
+    <Door open="false" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" type="Porta1" />
   </Entity>
   <Entity name="lvl1_door03">
     <Object3D position="-7.32329 1.25049 -0.00545454" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta1" />
-    <Door open="false" block="true" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" />
+    <Door open="false" block="true" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" type="Porta1" />
   </Entity>
   <Entity name="lvl1_trigger_porta04">
     <Object3D position="7.94197 1.66002 -0.0568679" yaw="0.0" pitch="0.0" roll="0.0" />
@@ -3470,7 +3470,7 @@
   <Entity name="lvl1_door_inici">
     <Object3D position="-0.00534996 1.25049 -7.38634" yaw="-90.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta1" />
-    <Door open="false" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" />
+    <Door open="false" open_time="2.0" close_time="1.0" size="0.514184 2.50021 2.15901" type="Porta1" />
   </Entity>
   <Entity name="lvl1_trigger_porta_inici">
     <Object3D position="-0.0239495 1.66002 -7.98522" yaw="-90.0" pitch="0.0" roll="0.0" />
@@ -3884,13 +3884,21 @@
     <Object3D position="-0.0492312 -0.0797765 -23.9823" yaw="0.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="5.01586 0.185986 2.61529" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="lvl1_particules_centre01">
-    <Object3D position="-0.0351863 1.85641 -0.0452077" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Emiter core="pols" volume="1.82988 3.83132 1.82988" />
-  </Entity>
   <Entity name="lvl1_peste_eonita01">
     <Object3D position="26.83 0.384155 40.6823" yaw="0.0" pitch="0.0" roll="0.0" />
     <Emiter core="peste_eonita" volume="0.144642 0.0809174 0.187034" />
+  </Entity>
+  <Entity name="lvl1_trigger_magatzem03">
+    <Object3D position="25.8396 -7.55369 -23.7787" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="1.70426 4.88858 3.29635" collision_group="trigger" onEnter="lvl1_trigger_magatzem03" />
+  </Entity>
+  <Entity name="lvl1_trigger_magatzem04">
+    <Object3D position="40.8474 -7.55369 -36.2896" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="4.16655 4.88857 1.82053" collision_group="trigger" onEnter="lvl1_trigger_magatzem04" />
+  </Entity>
+  <Entity name="lvl1_trigger_lavabo">
+    <Object3D position="24.2718 2.47924 34.112" yaw="-135.0" pitch="0.0" roll="0.0" />
+    <Trigger shape="box" size="1.70425 4.88857 14.8366" collision_group="trigger" onEnter="lvl1_trigger_lavabo" />
   </Entity>
   <Player position="-0.315653 -5.03087 -23.9926" yaw="-90.0" force_active="false" grenade_active="false" />
   <Miner name="lvl1_miner_green" position="0.0876412 1.6 4.76067" yaw="0.0" active="false" on_death="drop_key" />
@@ -3922,4 +3930,7 @@
   <Miner name="lvl1_miner06" position="29.9813 1.6 33.8244" yaw="0.0" active="false" />
   <Miner name="lvl1_miner07" position="0.0353594 1.6 21.0297" yaw="0.0" active="false" />
   <Vigia name="Vigia01" position="2.84848 2.53381 3.85204" yaw="0.0" active="false" zone_size="9.43152 3.01768 9.43152" zone_position="-0.137274 3.49052 -0.0322998" zone_yaw="0.0" />
+  <Vigia name="Vigia02" position="35.6054 -8.242 -28.5751" yaw="0.0" active="false" zone_size="3.0148 1.89245 10.1599" zone_position="23.0985 -7.85668 -28.5775" zone_yaw="0.0" />
+  <Vigia name="Vigia03" position="28.5331 -7.95131 -38.518" yaw="0.0" active="false" zone_size="8.33384 2.26858 2.90698" zone_position="36.8001 -7.62499 -39.1123" zone_yaw="0.0" />
+  <Vigia name="Vigia04" position="27.5858 1.10753 39.3331" yaw="0.0" active="false" zone_size="9.59253 2.78208 9.59253" zone_position="18.6598 3.12985 39.9232" zone_yaw="-45.0" />
 </Entities>

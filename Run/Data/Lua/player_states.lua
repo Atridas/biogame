@@ -477,7 +477,7 @@ State_Player_Force['Enter'] = function(_jugador)
   
   player_controller.time = 0
   player_controller:force()
-  EM:init_life_omni(0.2,Color(0.0,0.0,2.0, 1.0),2,10,_jugador)
+  --EM:init_life_omni(0.2,Color(0.0,0.0,2.0, 1.0),2,10,_jugador:get_component(BaseComponent.object_3d):get_position())
   SOUND:play_sample(Player_Constants["So force"])
 end
 
@@ -521,7 +521,7 @@ State_Player_Force_Cobertura['Enter'] = function(_jugador)
   animation:set_animation_state('force')
   player_controller.time = 0
   player_controller:force()
-  EM:init_life_omni(0.2,Color(0.0,0.0,2.0, 1.0),2,10,_jugador)
+  --EM:init_life_omni(0.2,Color(0.0,0.0,2.0, 1.0),2,10,_jugador:get_component(BaseComponent.object_3d):get_position())
   SOUND:play_sample(Player_Constants["So force"])
 end
 

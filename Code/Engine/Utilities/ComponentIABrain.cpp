@@ -85,6 +85,8 @@ void CComponentIABrain::Shoot(float _fShootPrecision)
   Mat44f l_mTransform = l_pRAIM->GetMat44()*l_vMat;
 
   // ------------------------------------------------------------------------------------------------------
+  Vect3f l_vBoneDir = l_mTransform.Get33RotationNormalized()*Vect3f(-1.0f,0.0f,0.0f);
+
   Vect3f l_vPos = l_mTransform.GetPos();
   Vect3f l_vDir = (l_vPlayerPos - l_vPos).GetNormalized();
   
@@ -94,7 +96,7 @@ void CComponentIABrain::Shoot(float _fShootPrecision)
   l_vDir.RotateY(l_fRandYaw);
   
   CEntityManager* l_pEM = ENTITY_MANAGER;
-  l_pEM->InitParticles("disparar", l_vPos, Vect3f(.01f,.01f,.01f), 2.5f, l_vDir);
+  l_pEM->InitParticles("disparar", l_vPos + l_vBoneDir*0.3f, Vect3f(.01f,.01f,.01f), 2.5f, l_vDir);
   l_pEM->InitLaser(l_vPos,l_vDir,SHOOT_POWER, CORE->GetPhysicsManager()->GetCollisionMask(ECG_RAY_SHOOT));
 
 }

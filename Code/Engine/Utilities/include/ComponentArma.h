@@ -6,6 +6,7 @@
 #include "EntityDefines.h"
 
 // -------------------------------------------------
+class CRenderManager;
 class CPhysxSkeleton;
 class CRenderableAnimatedInstanceModel;
 class CRenderableObject;
@@ -27,6 +28,8 @@ public:
   Vect3f GetAimDirection();
 
   virtual void Update(float _fDeltaTime);
+
+  virtual void DebugRender(CRenderManager* _pRM);
 
 protected:
   CComponentArma():m_pRenderableObject(0),m_pAnimatedModel(0) {};

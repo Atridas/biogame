@@ -19,7 +19,7 @@ public:
   CBaseComponent::Type GetType() {return CBaseComponent::ECT_DOOR;};
   static CComponentDoor::Type GetStaticType() {return CBaseComponent::ECT_DOOR;};
 
-  static CComponentDoor* AddToEntity(CGameEntity *_pEntity, bool _bOpen, Vect3f _vSize, const float _fOpenTime = 2.0f, const float _fCloseTime = 0.5f);
+  static CComponentDoor* AddToEntity(CGameEntity *_pEntity, bool _bOpen, Vect3f _vSize, const string& _szType, const float _fOpenTime = 2.0f, const float _fCloseTime = 0.5f);
 
   void Block(bool _bBlock) { m_bBlock = _bBlock; };
   bool IsBlocked() {return m_bBlock;};
@@ -29,6 +29,8 @@ public:
   float GetOpenTime() { return m_fOpenTime; };
   float GetCloseTime() { return m_fCloseTime; };
 
+  const string& GetType() const { return m_szType; };
+
 protected:
 
   virtual void Enable(void);
@@ -37,12 +39,13 @@ protected:
   virtual void Release();
 
 private:
-  bool Init(CGameEntity* _pEntity, bool _bOpen, Vect3f _vSize, const float _fOpenTime, const float _fCloseTime);
+  bool Init(CGameEntity* _pEntity, bool _bOpen, Vect3f _vSize, const string& _szType, const float _fOpenTime, const float _fCloseTime);
   CComponentDoor(): m_bBlock(false), m_fTime(0.0f), m_fOpenTime(2.0), m_fCloseTime(0.5),m_pPhysXActor(0),m_pPhysXData(0) {};
 
   bool m_bBlock;
   float m_fOpenTime;
   float m_fCloseTime;
+  string m_szType;
 
   Vect3f m_vSizeBox;
 

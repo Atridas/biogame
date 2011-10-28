@@ -263,6 +263,7 @@ function XMLEntityCover _instance &_TagName =
 
 --Genera els paràmetres d'un tag XML d'entitat Door. Conté:
 -- open
+-- type
 -- [block]
 -- [open_time]
 -- [close_time]
@@ -316,6 +317,16 @@ function XMLEntityDoor _instance &_TagName =
 	local l_size = RHVectorToLH (DummySize _instance)
 	format "% % %" l_size.x l_size.y l_size.z to:l_aux
 	append l_params #("size",l_aux)
+	
+	--type
+	local l_tmp = GetUserProp _instance "resource"
+	if l_tmp != undefined then
+	(
+		l_aux = "" as stringStream
+		format "%" l_tmp to:l_aux
+		append l_params #("type",l_aux)
+	)
+	
 	
 	return l_params
 )

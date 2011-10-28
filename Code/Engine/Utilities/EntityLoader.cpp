@@ -230,12 +230,13 @@ void LoadComponentDoor(CXMLTreeNode& _TreeComponent, CGameEntity* _pEntity)
   Vect3f l_vSize     = _TreeComponent.GetVect3fProperty("size", Vect3f(1.0f), false);
   float l_fOpenTime  = _TreeComponent.GetFloatProperty("open_time", 2.0f, false);
   float l_fCloseTime = _TreeComponent.GetFloatProperty("close_time", 0.5f, false);
+  string l_fType     = _TreeComponent.GetPszISOProperty("type", "", true);
 
   LOGGER->AddNewLog(ELL_INFORMATION, "\t\tCarregant Porta amb nom \"%s\" i estat \"%d\"",l_szName.c_str(), l_bOpen);
 
   //component porta
   CComponentDoor* l_pComponentDoor = 0;
-  if((l_pComponentDoor = CComponentDoor::AddToEntity(_pEntity, l_bOpen, l_vSize, l_fOpenTime, l_fCloseTime)) == 0)
+  if((l_pComponentDoor = CComponentDoor::AddToEntity(_pEntity, l_bOpen, l_vSize, l_fType, l_fOpenTime, l_fCloseTime)) == 0)
   {
     LOGGER->AddNewLog(ELL_WARNING,"\t\t\tError al crear el component.");
   }
@@ -1029,12 +1030,11 @@ CGameEntity* CEntityManager::InitGrenade(float _fLifeTime, const Vect3f& _vPos,c
 	return 0;
 }
 
-CGameEntity* CEntityManager::InitLifeOmni(float _fLifeTime, const CColor& _vColor, float _fStartRangeAtt, float _fEndRangeAtt,CGameEntity* l_pPlayer)
+CGameEntity* CEntityManager::InitLifeOmni(float _fLifeTime, const CColor& _vColor, float _fStartRangeAtt, float _fEndRangeAtt,const Vect3f& _vPos)
 {
   CGameEntity * l_pOnmiForce = CORE->GetEntityManager()->CreateEntity();
   CComponentObject3D* l_pCO3D = CComponentObject3D::AddToEntity(l_pOnmiForce);
-  CComponentObject3D* l_pPlayerObject3d = l_pPlayer->GetComponent<CComponentObject3D>();
-  l_pCO3D->SetPosition(l_pPlayerObject3d->GetPosition());
+  l_pCO3D->SetPosition(_vPos);
   CComponentLifetime::AddToEntity(l_pOnmiForce,_fLifeTime,"");
   CComponentOmni::AddToEntity(l_pOnmiForce,Vect3f(0.0, 0.0, 0.0),_vColor,_fStartRangeAtt,_fEndRangeAtt,"");
   return l_pOnmiForce;

@@ -20,6 +20,9 @@
     color(1/2): color inicial de la partícula
     size(1/2): tamany inicial de la partícula, en unitats
     texture: textura que usa la partícula
+    glow: si hi ha glow (false per defecte)
+    glow_intensity: intensitat de glow
+    glow_texture: textura de glow que usa la partícula
     
     Animacions per Sprite
       is_sprite: (boolean) indica si és un sprite o no
@@ -66,6 +69,27 @@
     </Sizes>
   </SimpleEmiter>
   
+  <SimpleEmiter id="electric_small"                    emit_absolute="true"
+              emit_rate1="10.0"                   emit_rate2="15.0"
+              life1="0.1"                        life2="0.15"
+              awake_time1="0.2"                  awake_time2="0.23"
+              sleep_time1="0.5"                  sleep_time2="0.55"
+              starting_angle1="0"         starting_angle2="90"
+              
+              is_sprite="true"
+              num_rows="4"
+              num_columns="4"
+              time_per_frame="0.03"
+              loop="true"
+              
+              color1="1.0 1.0 1.0 1.0"       color2="1.0 1.0 1.0 1.0"
+              size1="0.1"                      size2="0.1"
+              
+              texture="Data/Textures/particules/e_full.png">
+    <Sizes>
+      <Size   control_time1="0.05"       control_time2="0.05"        size1="0.05"          size2="0.1" />
+    </Sizes>
+  </SimpleEmiter>
   <!--*********************************EMITERS LEVEL -2 *************************************************-->
 
    <SimpleEmiter id="vapor"                       emit_absolute="true"
@@ -502,6 +526,32 @@
       <Color   control_time1="0.1"       control_time2="0.13"        color1="0.96 0.5 0.05 1.0"      color2="0.86 0.4 0.1 1.0"/>
     </Colors>
   </SimpleEmiter>
+  <SimpleEmiter id="Objecte Interactuable"                       
+              emit_rate1="5.0"                   emit_rate2="20.0"
+              emit_absolute="true"
+              life1="2.0"                         life2="2.0"
+              awake_time1="1.0"                  awake_time2="1.0"
+              sleep_time1="0.0"                  sleep_time2="0.0"
+              
+              starting_angle1="-3.14159"         starting_angle2="3.14159"
+              
+              starting_speed1="-0.15 0.0 -0.15"      starting_speed2="0.15 0.1 0.15"
+              acceleration1="0.0 0.1 0.0"        acceleration2="0.0 0.15 0.0"
+              starting_angular_speed1="-45"     starting_angular_speed2="45"
+              angular_acceleration1="-0.0"       angular_acceleration2="0.0"
+              
+              
+              color1="0.5 0.79 0.94 1.0"          color2="0.55 0.8 0.95 1.0"
+              size1="0.03"                      size2="0.05"
+              texture="Data/Textures/particules/circle.dds"
+              glow="true"
+              glow_intensity="1.5"
+              glow_texture="Data/Textures/particules/circle.dds">
+
+    <Colors>
+      <Color   control_time1="2.0"       control_time2="2.0"        color1="0.0 0.0 0.0 1.0"         color2="1.0 1.0 1.0 1.0"/>
+    </Colors>
+  </SimpleEmiter>
   <!-- ····························································································· -->
   <!-- ····························································································· -->
   <!-- ····························································································· -->
@@ -690,7 +740,7 @@
                 
                 texture="Data/Textures/Gameplay/laseroff.dds"/>
                 
-  <Billboard    id="Objecte Interactuable"                        
+  <!--Billboard    id="Objecte Interactuable"                        
                 
                 starting_angle1="0.0"             starting_angle2="0.0"
                 
@@ -699,7 +749,7 @@
                 
                 is_sprite="false"
                 
-                texture="Data/Textures/Gameplay/Billboard Interactuable.dds"/>
+                texture="Data/Textures/Gameplay/Billboard Interactuable.dds"/-->
   
   <Billboard    id="dont use the force"                        
                 

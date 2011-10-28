@@ -39,7 +39,7 @@
 
 #define INIT_SHOOT     0.5f
 #define INIT_GRENADE   0.5f
-#define INIT_PARTICLES 1.7f
+#define INIT_PARTICLES 1.5f
 
 CComponentPlayerController* CComponentPlayerController::AddToEntity(CGameEntity *_pEntity)
 {
@@ -76,8 +76,59 @@ bool CComponentPlayerController::Init(CGameEntity *_pEntity)
 
   m_vPickUps.clear();
 
+  m_pForceEmiter1 = ENTITY_MANAGER->InitParticles("electric_small", Vect3f( 1,0,0), Vect3f(.15f));
+  m_pForceEmiter2 = ENTITY_MANAGER->InitParticles("electric_small", Vect3f(-1,0,0), Vect3f(.15f));
+
   SetOk(true);
   return IsOk();
+}
+
+
+void CComponentPlayerController::Release() 
+{ 
+  m_vPickUps.clear(); 
+  ENTITY_MANAGER->RemoveEntity(m_pForceEmiter1);
+  ENTITY_MANAGER->RemoveEntity(m_pForceEmiter2);
+  m_pForceEmiter1 =
+  m_pForceEmiter2 = 0;
+};
+  
+void CComponentPlayerController::Update(float _fDeltaTime)
+{
+  CPhysxBone* l_pPhysxBone = 0;
+  CComponentRagdoll* l_pRagdoll = 0;
+
+  l_pRagdoll = GetEntity()->GetComponent<CComponentRagdoll>();
+
+  CComponentEnergy* l_pEnergy = GetEntity()->GetComponent<CComponentEnergy>();
+
+  if(l_pRagdoll && m_bForceActive && l_pEnergy && l_pEnergy->GetEnergy() >= ENERGY_FORCE)
+  {
+    m_pForceEmiter1->SetActive(true);
+    m_pForceEmiter2->SetActive(true);
+
+    l_pPhysxBone = l_pRagdoll->GetBone("Bip01 L UpperArm");
+
+    if(l_pPhysxBone)
+    {
+      Vect3f l_vPos = l_pPhysxBone->GetPhysxActor()->GetPosition();
+      m_pForceEmiter1->GetComponent<CComponentObject3D>()->SetPosition(l_vPos);
+    }
+
+    l_pPhysxBone = l_pRagdoll->GetBone("Bip01 L Forearm");
+
+    if(l_pPhysxBone)
+    {
+      Vect3f l_vPos = l_pPhysxBone->GetPhysxActor()->GetPosition();
+      m_pForceEmiter2->GetComponent<CComponentObject3D>()->SetPosition(l_vPos);
+    }
+
+  }
+  else
+  {
+    m_pForceEmiter1->SetActive(false);
+    m_pForceEmiter2->SetActive(false);
+  }
 }
 
 void CComponentPlayerController::UpdatePostPhysX(float _fDeltaTime)
@@ -225,7 +276,7 @@ bool CComponentPlayerController::Shoot()
     CCamera* l_pCamera = GetEntity()->GetComponent<CComponent3rdPSCamera>(ECT_3RD_PERSON_SHOOTER_CAMERA)->GetCamera();
     CComponentArma* l_pArma = GetEntity()->GetComponent<CComponentArma>();
 
-    Vect3f l_vPosArma = l_pArma->GetPosition();
+    Vect3f l_vPosArma = l_pArma->GetPosition() + Vect3f(0.0f,0.1f,0.0f);
     Vect3f l_vDirArma = l_pArma->GetAimDirection();
     Vect3f l_vPos = l_pCamera->GetEye();
     Vect3f l_vDir = l_pCamera->GetDirection().Normalize();
@@ -258,7 +309,8 @@ bool CComponentPlayerController::Shoot()
         if(l_pUserData->GetEntity() != l_pPlayerEntity)
         {
           l_pEM->InitLaser(l_vPosArma + INIT_SHOOT * l_vDir, l_vDir,SHOOT_POWER, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
-          l_pEM->InitParticles("disparar", l_vPosArma + l_vDir*INIT_PARTICLES, Vect3f(.01f,.01f,.01f), 2.5f);
+          l_pEM->InitParticles("disparar", l_vPosArma + l_vDirArma*INIT_PARTICLES, Vect3f(.01f,.01f,.01f), 2.5f);
+          ENTITY_MANAGER->InitLifeOmni(0.1f,CColor(1.0f,1.0f,0.5f, 1.0f),0.0f,2.5f,l_vPosArma + l_vDirArma*INIT_PARTICLES);
         }
       }
 
@@ -281,12 +333,14 @@ bool CComponentPlayerController::Shoot()
         if(l_pUserData->GetEntity() != l_pPlayerEntity)
         {
           l_pEM->InitLaser(l_vPosArma + INIT_SHOOT * l_vDir,l_vDir,SHOOT_POWER, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
-          l_pEM->InitParticles("disparar", l_vPosArma + l_vDir*INIT_PARTICLES, Vect3f(.01f,.01f,.01f), 2.5f);
+          l_pEM->InitParticles("disparar", l_vPosArma + l_vDirArma*INIT_PARTICLES, Vect3f(.01f,.01f,.01f), 2.5f);
+          ENTITY_MANAGER->InitLifeOmni(0.1f,CColor(1.0f,1.0f,0.5f, 1.0f),0.0f,2.5f,l_vPosArma + l_vDirArma*INIT_PARTICLES);
         }
 
       }else{
         l_pEM->InitLaser(l_vPosArma +INIT_SHOOT * l_vDir,l_vDir,SHOOT_POWER, l_pPM->GetCollisionMask(ECG_RAY_SHOOT_PLAYER));
-        l_pEM->InitParticles("disparar", l_vPosArma + l_vDir*INIT_PARTICLES, Vect3f(.01f,.01f,.01f), 2.5f);
+        l_pEM->InitParticles("disparar", l_vPosArma + l_vDirArma*INIT_PARTICLES, Vect3f(.01f,.01f,.01f), 2.5f);
+        ENTITY_MANAGER->InitLifeOmni(0.1f,CColor(1.0f,1.0f,0.5f, 1.0f),0.0f,2.5f,l_vPosArma + l_vDirArma*INIT_PARTICLES);
       }
     }
     return true;
@@ -380,6 +434,8 @@ void CComponentPlayerController::Force()
     l_mRot.RotByAngleY(m_pObject3D->GetYaw());
 
     Vect3f l_vDir = l_mRot*Vect3f(1.0f,0.0f,0.0f);
+
+    ENTITY_MANAGER->InitLifeOmni(0.2f,CColor(0.0f,0.0f,2.0f, 1.0f),2.0f,10.0f,l_vPos+1.2f*l_vDir);
 
     l_pPM->OverlapSphereActor(2.0f,l_vPos+3.0f*l_vDir,l_vImpactObjects,l_pPM->GetCollisionMask(ECG_FORCE));
 

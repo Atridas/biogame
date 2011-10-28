@@ -263,7 +263,7 @@
   <Entity name="Porta_Laboratori">
     <Object3D position="-4.52435 1.29745 -7.73442" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta" />
-    <Door open="false" size="0.241218 2.55448 2.57899" />
+    <Door open="false" size="0.241218 2.55448 2.57899" type="Porta" />
   </Entity>
   <Entity name="Lab_Trigger_Sortida">
     <Object3D position="0.8209 1.40201 -8.0917" yaw="0.0" pitch="0.0" roll="0.0" />
