@@ -21,6 +21,7 @@
 #include "ComponentInteractive.h"
 #include "ComponentEnergy.h"
 #include "ComponentRagdoll.h" 
+#include "SoundManager.h"
 
 #include "PhysicsManager.h"
 #include "PhysicActor.h"
@@ -186,12 +187,10 @@ void CComponentPlayerController::UpdatePostPhysX(float _fDeltaTime)
         l_fDamageAlpha = 1.0f;
       }
 
-      //l_pDamage->SetActive(true);
       l_pRenderer->ActivateRenderPath("damage_gui");
       l_pDamage->SetAlpha(l_fDamageAlpha);
     }else{
       l_pRenderer->DeactivateRenderPath("damage_gui");
-      //l_pDamage->SetActive(false);
     }
   }
 
@@ -199,13 +198,11 @@ void CComponentPlayerController::UpdatePostPhysX(float _fDeltaTime)
   {
     l_pBlood->SetAlpha(m_fBloodFadeOutTime/(float)BLOOD_FADEOUT_TIME);
     l_pRenderer->ActivateRenderPath("blood_gui");
-    //l_pBlood->SetActive(true);
 
     m_fBloodFadeOutTime -= _fDeltaTime;
 
   }else{
     l_pRenderer->DeactivateRenderPath("blood_gui");
-    //l_pBlood->SetActive(false);
     m_fBloodFadeOutTime = 0.0f;
   }
 
@@ -213,8 +210,6 @@ void CComponentPlayerController::UpdatePostPhysX(float _fDeltaTime)
 
 
   CPostSceneRendererStep* l_pShockWave = l_pRenderer->GetPostSceneRendererStep("shock_wave");
-  //CPostSceneRendererStep* l_pCaptureFrameBuffers = (CDrawQuadSceneEffect*)CORE->GetSceneEffectManager()->GetResource("capture_frame_buffer_scene_effect_with_post_fx");
-
   
   if(m_fForceTime < 3.f)
   {
@@ -225,17 +220,29 @@ void CComponentPlayerController::UpdatePostPhysX(float _fDeltaTime)
     if(m_fForceTime > 3.0f)
     {
       l_pRenderer->DeactivateRenderPath("shock_wave");
-      //l_pShockWave->SetActive(false);
-      //l_pCaptureFrameBuffers->SetActive(false);
     }
   }
 
-  //if(m_iNumUpdates < 3)
-  //  m_iNumUpdates++;
-  //if(m_iNumUpdates == 2)
-  //{
-  //  CComponentRagdoll::AddToEntity(GetEntity(), "Data/Animated Models/Riggle/Skeleton.xml", ECG_RAGDOLL_PLAYER);
-  //}
+  if(l_fHP > 0.0f && l_fHP < l_fMaxHP)
+  {
+    float l_fDamageVolume = 1.0f - (l_fHP/l_fMaxHP);
+
+    if(l_fDamageVolume > 1.0f)
+    {
+      l_fDamageVolume = 1.0f;
+    }
+
+    if(l_fDamageVolume < 0.0f)
+    {
+      l_fDamageVolume = 0.0f;
+    }
+
+    SOUND_MANAGER->PlaySample("heart_beat");
+    SOUND_MANAGER->SetSampleVolume("heart_beat",l_fDamageVolume);
+  }else{
+    SOUND_MANAGER->StopSample("heart_beat");
+  }
+
 }
 
 float CComponentPlayerController::AimDistance()

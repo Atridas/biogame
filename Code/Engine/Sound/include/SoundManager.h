@@ -15,9 +15,11 @@ public:
   bool Init(const string& _szFile);
   void PlaySample(const string& _szSample);
   void StopSample(const string& _szSample);
+  void SetSampleVolume(const string& _szSample, float _fVolume);
   void PlaySample3D(const string& _szSample, Vect3f _vPosition);
   void ChangeMusic(const string& _szMusic, unsigned long _ulFadeOutTimeMs, bool _bRestart = true);
   void PlayMusic(const string& _szMusic, bool _bRestart = true);
+  void StopMusic(const string& _szMusic);
   float GetMusicRemainingTime(const string& _szMusicName);
   void SetMusic3DPosition(const string& _szMusic, const Vect3f& _vSoundEmmiterPosition);
   void UpdateSound3DSystem(const Vect3f& _vListenerPosition, const Vect3f& _vListenerDirection);

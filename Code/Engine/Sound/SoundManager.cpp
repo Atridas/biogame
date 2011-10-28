@@ -196,6 +196,39 @@ void CSoundManager::PlaySample(const string& _szSample)
   }
 }
 
+void CSoundManager::SetSampleVolume(const string& _szSample, float _fVolume)
+{
+  BASS_SAMPLE l_Info;
+  HCHANNEL* l_pChannels;
+  DWORD l_iCount;
+
+  SSoundChannel* l_pSample = GetSample(_szSample);
+
+  if(l_pSample)
+  {
+    BASS_SampleGetInfo(l_pSample->m_iHandle, &l_Info);
+    l_pChannels = new HCHANNEL[l_Info.max*sizeof(HCHANNEL)];
+    l_iCount = BASS_SampleGetChannels(l_pSample->m_iHandle, l_pChannels);
+
+    for( int i = 0; i < l_iCount; i++)
+    {
+      BASS_ChannelSetAttribute(l_pChannels[i], BASS_ATTRIB_VOL, _fVolume);
+    }
+
+    delete[] l_pChannels;
+  }
+}
+
+void CSoundManager::StopMusic(const string& _szMusic)
+{
+  SSoundChannel* l_pMusic = GetMusic(_szMusic);
+
+  if(l_pMusic)
+  {
+    BASS_ChannelStop(l_pMusic->m_iHandle);
+  }
+}
+
 void CSoundManager::StopSample(const string& _szSample)
 {
   SSoundChannel* l_pSample = GetSample(_szSample);

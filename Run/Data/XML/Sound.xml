@@ -1,35 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <sounds>
   <sound name="bgm" file="./Data/Sounds/bgm.mp3" sound3D="false" type="music" loop="true" priority="1" volume="0.5"/>
-  <sound name="bgm2" file="./Data/Sounds/bgm2.mp3" sound3D="false" type="music" loop="true" priority="1" volume="1.0"/>
-  <sound name="bgm_main_menu_init" file="./Data/Sounds/bgm_main_menu_init_NL.wav" sound3D="false" type="music" loop="false" priority="1"        volume="0.6"/>
-  <sound name="bgm_main_menu" file="./Data/Sounds/bgm_main_menu_L.wav" sound3D="false" type="music" loop="false" priority="1"                   volume="0.6"/>
-  <sound name="bgm_init_level" file="./Data/Sounds/bgm_init_level_NL.wav" sound3D="false" type="music" loop="false" priority="1"                volume="0.6"/>
-  <sound name="bgm_explore" file="./Data/Sounds/bgm_explore_L.wav" sound3D="false" type="music" loop="false" priority="1"                       volume="0.6"/>
-  <sound name="bgm_battle" file="./Data/Sounds/bgm_battle_L.wav" sound3D="false" type="music" loop="false" priority="1"                         volume="0.6"/>
-  <sound name="bgm_battle_end" file="./Data/Sounds/bgm_battle_end_NL.wav" sound3D="false" type="music" loop="false" priority="1"                volume="0.6"/>
-  <sound name="bgm_battle_to_explore" file="./Data/Sounds/bgm_battle_to_explore_NL.wav" sound3D="false" type="music" loop="false" priority="1"  volume="0.6"/>
+  <sound name="bgm2" file="./Data/Sounds/bgm2.mp3" sound3D="false" type="music" loop="true" priority="1" volume="0.5"/>
+  <sound name="bgm_main_menu_init" file="./Data/Sounds/bgm_main_menu_init_NL.wav" sound3D="false" type="music" loop="false" priority="1"        volume="0.3"/>
+  <sound name="bgm_main_menu" file="./Data/Sounds/bgm_main_menu_L.wav" sound3D="false" type="music" loop="false" priority="1"                   volume="0.3"/>
+  <sound name="bgm_init_level" file="./Data/Sounds/bgm_init_level_NL.wav" sound3D="false" type="music" loop="false" priority="1"                volume="0.3"/>
+  <sound name="bgm_explore" file="./Data/Sounds/bgm_explore_L.wav" sound3D="false" type="music" loop="false" priority="1"                       volume="0.3"/>
+  <sound name="bgm_battle" file="./Data/Sounds/bgm_battle_L.wav" sound3D="false" type="music" loop="false" priority="1"                         volume="0.3"/>
+  <sound name="bgm_battle_end" file="./Data/Sounds/bgm_battle_end_NL.wav" sound3D="false" type="music" loop="false" priority="1"                volume="0.3"/>
+  <sound name="bgm_battle_to_explore" file="./Data/Sounds/bgm_battle_to_explore_NL.wav" sound3D="false" type="music" loop="false" priority="1"  volume="0.3"/>
   <sound name="music3d" file="./Data/Sounds/music3d.mp3" sound3D="true" type="music" loop="true" minDistance="1.0" maxDistance="100.0" priority="1" volume="1.0"/>
   <sound name="pipip" file="./Data/Sounds/pipipipipi.mp3" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />  
-  <sound name="disparar_enemic" file="./Data/Sounds/laser_short.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="100" volume="0.75"/>  
+  <sound name="disparar_enemic" file="./Data/Sounds/laser_short.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="100" volume="0.55"/>  
   <sound name="disparar_enemic_3d" file="./Data/Sounds/laser_short_mono.wav" sound3D="true" type="sample" loop="false" priority="1" maxSamples="100" />  
-  <sound name="disparar" file="./Data/Sounds/laser_short_3.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="20" />  
+  <sound name="disparar" file="./Data/Sounds/laser_short_3.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="20" volume="0.55"/>  
   <sound name="impacte" file="./Data/Sounds/impactedelaostia.mp3" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />  
-  <sound name="force" file="./Data/Sounds/shockwave.mp3" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />
-  <sound name="body_fall" file="./Data/Sounds/body_fall_mono2.wav" sound3D="true" type="sample" loop="false" priority="1" maxSamples="1" />
+  <sound name="force" file="./Data/Sounds/shockwave.mp3" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" volume="0.55"/>
+  <sound name="body_fall" file="./Data/Sounds/body_fall_mono2.wav" sound3D="true" type="sample" loop="false" priority="1" maxSamples="1" volume="0.75"/>
   <sound name="explosion" file="./Data/Sounds/explosion.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="20" />
-  <sound name="granada" file="./Data/Sounds/launcher.mp3" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" />
-  <sound name="running" file="./Data/Sounds/running.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="1" volume="1.0"/>
-  <sound name="walking" file="./Data/Sounds/walking.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="1" volume="1.0"/>
-  <sound name="robot_move"  file="./Data/Sounds/robot_move.wav"  sound3D="false" type="sample" loop="false" priority="1" maxSamples="1"  volume="0.3"/>
-  <sound name="robot_die"   file="./Data/Sounds/robot_die.wav"   sound3D="false" type="sample" loop="false" priority="1" maxSamples="1"  volume="0.3"/>
-  <sound name="robot_shoot" file="./Data/Sounds/robot_shoot.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="50" volume="0.3"/>
-  <sound name="hangar_door" file="./Data/Sounds/hangar_door.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="1" volume="1.0"/>
-  <sound name="elevator" file="./Data/Sounds/elevator.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="1" volume="1.0"/>
-  <sound name="elevator_arrival" file="./Data/Sounds/elevator_arrival.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="1" volume="1.0"/>
-  <sound name="elevator_arrival_hangar" file="./Data/Sounds/elevator_arrival_hangar.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="1" volume="1.0"/>
-  <sound name="obrir_porta_nova" file="./Data/Sounds/obrir_porta_nova.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="1" volume="0.5"/>
-  <sound name="tancar_porta_nova" file="./Data/Sounds/tancar_porta_nova.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="1" volume="0.5"/>
-  <sound name="obrir_porta" file="./Data/Sounds/obrir_porta.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="1" volume="0.5"/>
-  <sound name="tancar_porta" file="./Data/Sounds/tancar_porta.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="1" volume="0.5"/>
+  <sound name="granada" file="./Data/Sounds/launcher.mp3" sound3D="false" type="sample" loop="false" priority="1" maxSamples="10" volume="0.55"/>
+  <sound name="running" file="./Data/Sounds/running.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="1" volume="0.65"/>
+  <sound name="walking" file="./Data/Sounds/walking.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="1" volume="0.65"/>
+  <sound name="robot_move"  file="./Data/Sounds/robot_move.wav"  sound3D="false" type="sample" loop="false" priority="1" maxSamples="1"  volume="0.25"/>
+  <sound name="robot_die"   file="./Data/Sounds/robot_die.wav"   sound3D="false" type="sample" loop="false" priority="1" maxSamples="1"  volume="0.25"/>
+  <sound name="robot_shoot" file="./Data/Sounds/robot_shoot.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="50" volume="0.45"/>
+  <sound name="hangar_door" file="./Data/Sounds/hangar_door.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="1" volume="0.75"/>
+  <sound name="elevator" file="./Data/Sounds/elevator.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="1" volume="0.75"/>
+  <sound name="elevator_arrival" file="./Data/Sounds/elevator_arrival.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="1" volume="0.75"/>
+  <sound name="elevator_arrival_hangar" file="./Data/Sounds/elevator_arrival_hangar.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="1" volume="0.75"/>
+  <sound name="obrir_porta_nova" file="./Data/Sounds/obrir_porta_nova.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="1" volume="0.4"/>
+  <sound name="tancar_porta_nova" file="./Data/Sounds/tancar_porta_nova.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="1" volume="0.4"/>
+  <sound name="obrir_porta" file="./Data/Sounds/obrir_porta.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="1" volume="0.4"/>
+  <sound name="tancar_porta" file="./Data/Sounds/tancar_porta.wav" sound3D="false" type="sample" loop="false" priority="1" maxSamples="1" volume="0.4"/>
+  <sound name="heart_beat" file="./Data/Sounds/heart_beat.wav" sound3D="false" type="sample" loop="true" priority="1" maxSamples="1" volume="0.0"/>
 </sounds>
