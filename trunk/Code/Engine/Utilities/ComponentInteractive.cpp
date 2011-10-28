@@ -5,7 +5,7 @@
 #include "PhysicsManager.h"
 #include "ComponentObject3D.h"
 #include "ComponentPlayerController.h"
-#include "ComponentBillboard.h"
+#include "ComponentEmiter.h"
 #include "EmiterInstance.h"
 
 extern "C"
@@ -58,7 +58,7 @@ void CComponentInteractive::Release()
 {
   if(m_bBillboardActive)
   {
-    GetEntity()->DeleteComponent(CBaseComponent::ECT_BILLBOARD);
+    GetEntity()->DeleteComponent(CBaseComponent::ECT_EMITER);
     m_bBillboardActive = false;
   }
 }
@@ -139,15 +139,15 @@ void CComponentInteractive::Update(float _fDeltaTime)
 
   if(l_bPlayerFound && !m_bBillboardActive)
   {
-    CComponentBillboard *l_pCB = CComponentBillboard::AddToEntity(GetEntity(), "Objecte Interactuable");
+    CComponentEmiter *l_pCE = CComponentEmiter::AddToEntity(GetEntity(), "Objecte Interactuable", Vect3f(.5f,.5f,.5f));
     CObject3D l_Obj3D;
     l_Obj3D.SetPosition(Vect3f(0.f, m_fBillboardYOffset, 0.f));
-    l_pCB->GetBillboard()->SetOffset(l_Obj3D);
+    l_pCE->GetEmiter()->SetOffset(l_Obj3D);
     m_bBillboardActive = true;
   }
   else if(!l_bPlayerFound && m_bBillboardActive)
   {
-    GetEntity()->DeleteComponent(CBaseComponent::ECT_BILLBOARD);
+    GetEntity()->DeleteComponent(CBaseComponent::ECT_EMITER);
     m_bBillboardActive = false;
   }
 }

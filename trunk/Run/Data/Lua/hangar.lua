@@ -1,4 +1,17 @@
+GLOBALS_HANGAR = {}
+GLOBALS_HANGAR["Vigies 1a onada"] = 1 -- 2 maxim
+GLOBALS_HANGAR["Vigies 2a onada"] = 1 -- 6 maxim
+GLOBALS_HANGAR["Vigies 3a onada"] = 2 -- 8 maxim
+
+
 -------------------------------------------- FUNCIONS  -------------------------------------------
+
+function set_hard_mode()
+  GLOBALS_HANGAR["Vigies 1a onada"] = 2
+  GLOBALS_HANGAR["Vigies 2a onada"] = 6
+  GLOBALS_HANGAR["Vigies 3a onada"] = 8
+end
+
 
 function init_hangar()
   EFFECT_MANAGER:set_exposure(0)
@@ -35,6 +48,9 @@ function init_hangar()
     EFFECT_MANAGER:set_exposure(0)
     RENDERER:deactivate_render_path("aim_gui")
     RENDERER:blend_parameter(Renderer.exposure, 0.5, 3)
+    
+    SOUND:play_sample("elevator_arrival_hangar")
+    
   else
     log("Error: No es troba l'entitat: hangar_Montacarregues")
   end
@@ -116,19 +132,25 @@ function hang_porta(_self, _player)
       l_message.dispatch_time = 0
       
       EM:send_event(l_message)
+      
+      SOUND:play_sample("hangar_door")
+      
     else
       log('Error: "hangar_puerta_hangar" no trobada.')
     end
     
     --vigies
-    activate_entity('Vigia08')
-    activate_entity('Vigia09')
-    activate_entity('Vigia10')
-    activate_entity('Vigia11')
-    activate_entity('Vigia12')
-    activate_entity('Vigia13')
-    activate_entity('Vigia14')
-    activate_entity('Vigia15')
+    for v = 8, 8 + GLOBALS_HANGAR["Vigies 3a onada"]-1, 1 do
+      activate_entity('Vigia' .. v)
+    end
+    --activate_entity('Vigia8')
+    --activate_entity('Vigia9')
+    --activate_entity('Vigia10')
+    --activate_entity('Vigia11')
+    --activate_entity('Vigia12')
+    --activate_entity('Vigia13')
+    --activate_entity('Vigia14')
+    --activate_entity('Vigia15')
     
     
     _self:delete_component(BaseComponent.interactive)
@@ -218,8 +240,11 @@ function hang_trig_enemics_enter03(_EntityTrigger, _Entity)
     activate_entity('Militar18')
     
     --vigies
-    activate_entity('Vigia01')
-    activate_entity('Vigia02')
+    for v = 1, 1 + GLOBALS_HANGAR["Vigies 1a onada"]-1, 1 do
+      activate_entity('Vigia' .. v)
+    end
+    --activate_entity('Vigia1')
+    --activate_entity('Vigia2')
     
     --destrucció del trigger
     EM:remove_entity(_EntityTrigger)
@@ -309,11 +334,14 @@ function hang_trig_enemics_enter07(_EntityTrigger, _Entity)
     activate_entity('Militar23')
     
     --vigies
-    activate_entity('Vigia03')
-    activate_entity('Vigia04')
-    activate_entity('Vigia05')
-    activate_entity('Vigia06')
-    activate_entity('Vigia07')
+    for v = 3, 3 + GLOBALS_HANGAR["Vigies 2a onada"]-1, 1 do
+      activate_entity('Vigia' .. v)
+    end
+    --activate_entity('Vigia3')
+    --activate_entity('Vigia4')
+    --activate_entity('Vigia5')
+    --activate_entity('Vigia6')
+    --activate_entity('Vigia7')
     
     --destrucció del trigger
     EM:remove_entity(_EntityTrigger)

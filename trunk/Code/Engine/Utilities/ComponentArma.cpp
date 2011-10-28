@@ -12,6 +12,7 @@
 #include "RenderableAnimatedInstanceModel.h"
 #include "Core.h"
 #include "cal3d\cal3d.h"
+#include "RenderManager.h"
 
 
 CComponentArma* CComponentArma::AddToEntity(CGameEntity *_pEntity, const string& _szMeshName)
@@ -106,4 +107,14 @@ Vect3f CComponentArma::GetAimDirection()
   }
 
   return Vect3f(1.0f,0.0f,0.0f);
+}
+
+void CComponentArma::DebugRender(CRenderManager* _pRM)
+{
+  Mat44f mat;
+  mat.SetIdentity();
+
+  _pRM->SetTransform(mat);
+
+  _pRM->DrawLine(GetPosition(), GetPosition() + GetAimDirection()*3.0f, colRED);
 }

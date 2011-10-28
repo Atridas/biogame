@@ -59,6 +59,18 @@ function laboratori_obrir_porta(_self)
   
   local l_door = EM:get_entity("Porta_Laboratori")
   if l_door then
+    ComponentDelayedScript.add_to_entity(l_door, 1, 'laboratori_obrir_porta_retardat')
+    
+    --Mostrar tutorial d'objectes destructibles
+    tutorial_barrel()
+  else
+    log('error, no es troba la porta')
+  end
+end
+
+function laboratori_obrir_porta_retardat(_self)
+  local l_door = _self
+  if l_door then
     local l_message = EM:get_event()
 
     l_message.msg = Event.obrir
@@ -67,11 +79,6 @@ function laboratori_obrir_porta(_self)
     l_message.dispatch_time = 0
     
     EM:send_event(l_message)
-    
-    --Mostrar tutorial d'objectes destructibles
-    tutorial_barrel()
-  else
-    log('error, no es troba la porta')
   end
 end
 
@@ -273,6 +280,9 @@ function activate_elevator_2(_EntityTrigger, _Entity)
       
       RENDERER:deactivate_render_path("aim_gui")
       RENDERER:blend_parameter(Renderer.exposure, 0, 10)
+      
+      SOUND:play_sample("elevator")
+      
     else
       log('Error: "lvl2_montacarregues" no trobada.')
     end

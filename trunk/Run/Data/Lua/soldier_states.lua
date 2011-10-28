@@ -260,10 +260,22 @@ end
 -------------------------------------------------------------------------------------------------
 State_Soldier_Disparant['Update'] = function(_enemic, _dt)
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
+  local object3d = _enemic:get_component(BaseComponent.object_3d) 
+  
   ia_brain.time = ia_brain.time + _dt
+  
+  local ia_pos     = object3d:get_position()
+  local player_pos = ia_brain.player:get_component(BaseComponent.object_3d):get_position()
+  
+  local direction = (player_pos - ia_pos)
   
   if ia_brain.time > Enemy_Constants["Time Shoot"] and not ia_brain.shooted then
     ia_brain:shoot(0.05)
+    
+    if direction:length_sq() < 10*10  then
+      SOUND:play_sample("disparar_enemic")
+    end
+    
     ia_brain.shooted = true
   end
   
@@ -328,10 +340,22 @@ end
 -------------------------------------------------------------------------------------------------
 State_Soldier_Cobrint_Disparant['Update'] = function(_enemic, _dt)
   local ia_brain = _enemic:get_component(BaseComponent.ia_brain)
+  local object3d = _enemic:get_component(BaseComponent.object_3d) 
+  
   ia_brain.time = ia_brain.time + _dt
+  
+  local ia_pos     = object3d:get_position()
+  local player_pos = ia_brain.player:get_component(BaseComponent.object_3d):get_position()
+  
+  local direction = (player_pos - ia_pos)
   
   if ia_brain.time > Enemy_Constants["Time Shoot Cover"] and not ia_brain.shooted then
     ia_brain:shoot(0.05)
+    
+    if direction:length_sq() < 10*10  then
+      SOUND:play_sample("disparar_enemic")
+    end
+    
     ia_brain.shoots = ia_brain.shoots + 1
     ia_brain.shooted = true
   end

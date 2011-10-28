@@ -31,6 +31,9 @@ function init_level_menys_1()
     EFFECT_MANAGER:set_exposure(0)
     RENDERER:deactivate_render_path("aim_gui")
     RENDERER:blend_parameter(Renderer.exposure, 0.5, 3)
+    
+    SOUND:play_sample("elevator_arrival")
+    
   else
     log("Error: No es troba l'entitat: lvl1_montacarregues")
   end
@@ -245,6 +248,7 @@ function lvl1_stop_elevator(_EntityTrigger, _Entity)
       Elevator_Constants["Final Position"][2] = elevator_position.z
       
       EM:remove_entity(_EntityTrigger)
+      
     else
       log("Error: No es troba l'entitat: lvl1_montacarregues")
     end
@@ -282,6 +286,9 @@ function lvl1_activate_elevator(_EntityTrigger, _Entity)
       
       RENDERER:deactivate_render_path("aim_gui")
       EM:remove_entity(_EntityTrigger)
+      
+      SOUND:play_sample("elevator")
+      
     else
       log("Error: No es troba l'entitat: lvl1_montacarregues01")
     end
@@ -344,6 +351,33 @@ function lvl1_trigger_magatzem02(_EntityTrigger, _Entity)
       --destrucció del trigger
       EM:remove_entity(_EntityTrigger)
     end
+  end
+end
+
+function lvl1_trigger_magatzem03(_EntityTrigger, _Entity)
+  if _Entity:get_name() == "Player" then
+    activate_entity("Vigia02")
+      
+    --destrucció del trigger
+    EM:remove_entity(_EntityTrigger)
+  end
+end
+
+function lvl1_trigger_magatzem04(_EntityTrigger, _Entity)
+  if _Entity:get_name() == "Player" then
+    activate_entity("Vigia03")
+      
+    --destrucció del trigger
+    EM:remove_entity(_EntityTrigger)
+  end
+end
+
+function lvl1_trigger_lavabo(_EntityTrigger, _Entity)
+  if _Entity:get_name() == "Player" then
+    activate_entity("Vigia04")
+      
+    --destrucció del trigger
+    EM:remove_entity(_EntityTrigger)
   end
 end
 

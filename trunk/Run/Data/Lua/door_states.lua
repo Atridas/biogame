@@ -232,7 +232,14 @@ State_Porta_Opening['Enter'] = function(_entitat)
   local l_animation = _entitat:get_component(BaseComponent.animation)
   --l_animation:play(Porta_Constants["Open Animation"], 0.0, 1.0, true)
   l_animation:set_animation_state('opened')
+
+  local l_type = l_door:get_type()
   
+  if l_type == "Porta1" then
+    SOUND:play_sample("obrir_porta_nova")
+  elseif l_type == "Porta" then
+    SOUND:play_sample("obrir_porta")
+  end
 end
 
 -------------------------------------------------------------------------------------------------
@@ -338,6 +345,14 @@ State_Porta_Closing['Enter'] = function(_entitat)
   local l_animation = _entitat:get_component(BaseComponent.animation)
   --l_animation:play(Porta_Constants["Close Animation"], 0.0, 1.0,true)
   l_animation:set_animation_state('closed')
+  
+  local l_type = l_door:get_type()
+  
+  if l_type == "Porta1" then
+    SOUND:play_sample("tancar_porta_nova")
+  elseif l_type == "Porta" then
+    SOUND:play_sample("tancar_porta")
+  end
   
 end
 

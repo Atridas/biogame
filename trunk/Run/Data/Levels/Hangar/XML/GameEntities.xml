@@ -1501,19 +1501,19 @@
   <Militar name="Militar21" position="-0.224407 9.6784 -13.3049" yaw="0.0" active="false" destiny="hang_nod_cob24" />
   <Militar name="Militar22" position="9.11724 9.6784 12.781" yaw="0.0" active="false" destiny="hang_nod_cob32" />
   <Militar name="Militar23" position="12.4619 9.6784 -12.6845" yaw="0.0" active="false" destiny="hang_nod_cob27" />
-  <Vigia name="Vigia01" position="-3.4594 1.92006 8.73952" yaw="0.0" active="false" zone_size="8.5206 1.17928 8.5206" zone_position="-8.07499 1.49052 6.45874" zone_yaw="0.0" />
-  <Vigia name="Vigia02" position="-3.4594 0.936915 7.17423" yaw="0.0" active="false" zone_size="8.5206 1.17928 8.5206" zone_position="-8.07499 1.49052 6.45874" zone_yaw="0.0" />
-  <Vigia name="Vigia03" position="-16.7105 5.83689 13.4749" yaw="0.0" active="false" zone_size="16.2994 3.17542 23.1437" zone_position="12.9113 5.82481 1.02656" zone_yaw="0.0" />
-  <Vigia name="Vigia04" position="-16.5064 5.83689 13.4749" yaw="0.0" active="false" zone_size="16.2994 3.17542 23.1437" zone_position="12.9113 5.82481 1.02656" zone_yaw="0.0" />
-  <Vigia name="Vigia05" position="-15.7105 5.83689 13.4749" yaw="0.0" active="false" zone_size="16.2994 3.17542 23.1437" zone_position="12.9113 5.82481 1.02656" zone_yaw="0.0" />
-  <Vigia name="Vigia06" position="-16.1628 5.83689 13.4749" yaw="0.0" active="false" zone_size="16.2994 3.17542 23.1437" zone_position="12.9113 5.82481 1.02656" zone_yaw="0.0" />
-  <Vigia name="Vigia07" position="-16.8955 5.83689 13.4749" yaw="0.0" active="false" zone_size="16.2994 3.17542 23.1437" zone_position="12.9113 5.82481 1.02656" zone_yaw="0.0" />
-  <Vigia name="Vigia08" position="-16.3636 5.83689 13.4749" yaw="0.0" active="false" zone_size="16.2994 3.17542 23.1437" zone_position="12.9113 5.82481 1.02656" zone_yaw="0.0" />
-  <Vigia name="Vigia09" position="-16.0194 5.83689 13.4749" yaw="0.0" active="false" zone_size="16.2994 3.17542 23.1437" zone_position="12.9113 5.82481 1.02656" zone_yaw="0.0" />
-  <Vigia name="Vigia10" position="-16.7523 5.83689 13.4749" yaw="0.0" active="false" zone_size="16.2994 3.17542 23.1437" zone_position="12.9113 5.82481 1.02656" zone_yaw="0.0" />
-  <Vigia name="Vigia11" position="-16.2204 5.83689 13.4749" yaw="0.0" active="false" zone_size="16.2994 3.17542 23.1437" zone_position="12.9113 5.82481 1.02656" zone_yaw="0.0" />
-  <Vigia name="Vigia12" position="-15.4137 5.83689 13.4749" yaw="0.0" active="false" zone_size="16.2994 3.17542 23.1437" zone_position="12.9113 5.82481 1.02656" zone_yaw="0.0" />
-  <Vigia name="Vigia13" position="-15.9131 5.83689 13.4749" yaw="0.0" active="false" zone_size="16.2994 3.17542 23.1437" zone_position="12.9113 5.82481 1.02656" zone_yaw="0.0" />
-  <Vigia name="Vigia14" position="-16.2716 5.83689 13.4749" yaw="0.0" active="false" zone_size="16.2994 3.17542 23.1437" zone_position="12.9113 5.82481 1.02656" zone_yaw="0.0" />
-  <Vigia name="Vigia15" position="-16.1147 5.83689 13.4749" yaw="0.0" active="false" zone_size="16.2994 3.17542 23.1437" zone_position="12.9113 5.82481 1.02656" zone_yaw="0.0" />
+  <Vigia name="Vigia1" position="-3.4594 1.92006 8.73952" yaw="0.0" active="false" zone_size="8.5206 1.17928 8.5206" zone_position="-8.07499 1.49052 6.45874" zone_yaw="0.0" />
+  <Vigia name="Vigia2" position="-3.4594 0.936915 7.17423" yaw="0.0" active="false" zone_size="8.5206 1.17928 8.5206" zone_position="-8.07499 1.49052 6.45874" zone_yaw="0.0" />
+  <Vigia name="Vigia3" position="-14.0888 5.83689 13.2821" yaw="0.0" active="false" zone_size="12.8247 3.17542 23.1437" zone_position="10.5677 5.82481 1.02656" zone_yaw="0.0" />
+  <Vigia name="Vigia4" position="-12.7828 5.83689 13.2557" yaw="0.0" active="false" zone_size="12.8247 3.17542 23.1437" zone_position="10.5677 5.82481 1.02656" zone_yaw="0.0" />
+  <Vigia name="Vigia5" position="-18.5888 5.83689 13.5366" yaw="0.0" active="false" zone_size="12.8247 3.17542 23.1437" zone_position="10.5677 5.82481 1.02656" zone_yaw="0.0" />
+  <Vigia name="Vigia6" position="-13.7855 5.83689 12.1438" yaw="0.0" active="false" zone_size="12.8247 3.17542 23.1437" zone_position="10.5677 5.82481 1.02656" zone_yaw="0.0" />
+  <Vigia name="Vigia7" position="-16.8955 5.83689 12.4" yaw="0.0" active="false" zone_size="12.8247 3.17542 23.1437" zone_position="10.5677 5.82481 1.02656" zone_yaw="0.0" />
+  <Vigia name="Vigia8" position="-18.7848 5.83689 12.4" yaw="0.0" active="false" zone_size="12.8247 3.17542 23.1437" zone_position="10.5677 5.82481 1.02656" zone_yaw="0.0" />
+  <Vigia name="Vigia9" position="-12.9165 5.83689 12.4" yaw="0.0" active="false" zone_size="12.8247 3.17542 23.1437" zone_position="10.5677 5.82481 1.02656" zone_yaw="0.0" />
+  <Vigia name="Vigia10" position="-16.7523 5.83689 13.4749" yaw="0.0" active="false" zone_size="12.8247 3.17542 23.1437" zone_position="10.5677 5.82481 1.02656" zone_yaw="0.0" />
+  <Vigia name="Vigia11" position="-16.2204 5.83689 13.4749" yaw="0.0" active="false" zone_size="12.8247 3.17542 23.1437" zone_position="10.5677 5.82481 1.02656" zone_yaw="0.0" />
+  <Vigia name="Vigia12" position="-15.4137 5.83689 13.4749" yaw="0.0" active="false" zone_size="12.8247 3.17542 23.1437" zone_position="10.5677 5.82481 1.02656" zone_yaw="0.0" />
+  <Vigia name="Vigia13" position="-15.9131 5.83689 13.4749" yaw="0.0" active="false" zone_size="12.8247 3.17542 23.1437" zone_position="10.5677 5.82481 1.02656" zone_yaw="0.0" />
+  <Vigia name="Vigia14" position="-16.2716 5.83689 13.4749" yaw="0.0" active="false" zone_size="12.8247 3.17542 23.1437" zone_position="10.5677 5.82481 1.02656" zone_yaw="0.0" />
+  <Vigia name="Vigia15" position="-16.1147 5.83689 13.4749" yaw="0.0" active="false" zone_size="12.8247 3.17542 23.1437" zone_position="10.5677 5.82481 1.02656" zone_yaw="0.0" />
 </Entities>

@@ -20,6 +20,8 @@ public:
 
   static CComponentEmiter* AddToEntity(CGameEntity* _pEntity, const string& _szCore, const Vect3f& _vVolume, int _iMaxParticles = DEFAULT_MAX_PARTICLES_PER_EMITER);
   
+  CEmiterInstance* GetEmiter() const {return m_pEmiterInstance;};
+
   void ChangeCore(const string& _szCore);
   void ChangeVolume(const Vect3f& _vVolume);
   

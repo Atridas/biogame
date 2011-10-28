@@ -5,11 +5,11 @@
 #include "PhysicsManager.h"
 #include "Core.h"
 
-CComponentDoor* CComponentDoor::AddToEntity(CGameEntity *_pEntity, bool _bOpen, Vect3f _vSize, const float _fOpenTime, const float _fCloseTime)
+CComponentDoor* CComponentDoor::AddToEntity(CGameEntity *_pEntity, bool _bOpen, Vect3f _vSize, const string& _szType, const float _fOpenTime, const float _fCloseTime)
 {
   CComponentDoor *l_pComp = new CComponentDoor();
   assert(_pEntity && _pEntity->IsOk());
-  if(l_pComp->Init(_pEntity, _bOpen, _vSize, _fOpenTime, _fCloseTime))
+  if(l_pComp->Init(_pEntity, _bOpen, _vSize, _szType, _fOpenTime, _fCloseTime))
   {
     l_pComp->SetEntity(_pEntity);
     return l_pComp;
@@ -21,7 +21,7 @@ CComponentDoor* CComponentDoor::AddToEntity(CGameEntity *_pEntity, bool _bOpen, 
   }
 }
 
-bool CComponentDoor::Init(CGameEntity* _pEntity, bool _bOpen, Vect3f _vSize, const float _fOpenTime, const float _fCloseTime)
+bool CComponentDoor::Init(CGameEntity* _pEntity, bool _bOpen, Vect3f _vSize, const string& _szType, const float _fOpenTime, const float _fCloseTime)
 {
   m_vSizeBox = _vSize;
   m_fOpenTime = _fOpenTime;
@@ -54,6 +54,8 @@ bool CComponentDoor::Init(CGameEntity* _pEntity, bool _bOpen, Vect3f _vSize, con
   m_pPhysXActor->SetKinematic(true);
 
   m_pPhysXActor->SetMat44( m_pObject3D->GetMat44() );
+
+  m_szType = _szType;
 
   SetActive(!_bOpen);
 

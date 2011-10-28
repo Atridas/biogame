@@ -24,9 +24,10 @@ public:
 
   static CComponentPlayerController* AddToEntity(CGameEntity *_pEntity);
 
-  void UpdatePostPhysX(float _fDeltaTime);
-
   virtual ~CComponentPlayerController(void) {Done();};
+  
+  void Update(float _fDeltaTime);
+  void UpdatePostPhysX(float _fDeltaTime);
 
   virtual void ReceiveEvent(const SEvent& _Event);
 
@@ -91,7 +92,7 @@ private:
      
       {};
   bool Init(CGameEntity *_pEntity);
-  virtual void Release() { m_vPickUps.clear(); };
+  virtual void Release();
 
   void Die();
   void ReceiveForce(SEvent _sEvent);
@@ -114,6 +115,7 @@ private:
   vector<string> m_vPickUps;
   int m_iNumUpdates;
 
+  CGameEntity *m_pForceEmiter1, *m_pForceEmiter2;
 };
 
 #endif

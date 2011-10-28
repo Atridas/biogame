@@ -202,7 +202,7 @@ void CSoundManager::StopSample(const string& _szSample)
 
   if(l_pSample)
   {
-    BASS_ChannelStop(l_pSample->m_iHandle);
+    BASS_SampleStop(l_pSample->m_iHandle);
   }
 }
 
@@ -350,21 +350,56 @@ void CSoundManager::StopSounds()
 
 void CSoundManager::PauseSamples()
 {
+  BASS_SAMPLE l_Info;
+  HCHANNEL* l_pChannels;
+  DWORD l_iCount;
+
   vector<SSoundChannel*>::iterator l_It;
 
   for(l_It = m_vSamples.begin(); l_It != m_vSamples.end(); ++l_It)
   {
-    BASS_ChannelPause((*l_It)->m_iHandle);
+    BASS_SampleGetInfo((*l_It)->m_iHandle, &l_Info);
+    l_pChannels = new HCHANNEL[l_Info.max*sizeof(HCHANNEL)];
+    l_iCount = BASS_SampleGetChannels((*l_It)->m_iHandle, l_pChannels);
+
+    for( int i = 0; i < l_iCount; i++)
+    {
+        BASS_ChannelPause(l_pChannels[i]);
+    }
+
+    delete[] l_pChannels;
   }
+
 }
 
 void CSoundManager::ResumeSamples()
 {
+  BASS_SAMPLE l_Info;
+  HCHANNEL* l_pChannels;
+  DWORD l_iCount;
+
   vector<SSoundChannel*>::iterator l_It;
 
   for(l_It = m_vSamples.begin(); l_It != m_vSamples.end(); ++l_It)
   {
-    BASS_ChannelPlay((*l_It)->m_iHandle,false);
+    BASS_SampleGetInfo((*l_It)->m_iHandle, &l_Info);
+    l_pChannels = new HCHANNEL[l_Info.max*sizeof(HCHANNEL)];
+
+    if(l_pChannels)
+    {
+      l_iCount = BASS_SampleGetChannels((*l_It)->m_iHandle, l_pChannels);
+
+      for( int i = 0; i < l_iCount; i++)
+      {
+        if(BASS_ChannelIsActive(l_pChannels[i]) & BASS_ACTIVE_PAUSED)
+        {
+          BASS_ChannelPlay(l_pChannels[i],false);
+        }
+      }
+
+
+      delete[] l_pChannels;
+    }
   }
 }
 

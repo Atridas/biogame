@@ -430,6 +430,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
       .def("is_blocked",               &CComponentDoor::IsBlocked)
       .def("get_open_time",            &CComponentDoor::GetOpenTime)
       .def("get_close_time",           &CComponentDoor::GetCloseTime)
+      .def("get_type",                 (const string&(CComponentDoor::*)(void)const)&CComponentDoor::GetType)
       .def_readwrite("time",           &CComponentDoor::m_fTime)
 
     // ----------------------------------------------------------------------------------------------------
