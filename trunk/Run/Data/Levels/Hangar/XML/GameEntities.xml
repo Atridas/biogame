@@ -1472,6 +1472,11 @@
     <RenderableObject animated="false" name="hangar_Caixa_estatica_petita27" />
     <PhysXMesh density="0" collision_group="escenari" />
   </Entity>
+  <Entity name="hangar_terra_exterior">
+    <Object3D position="57.148 -0.271867 -0.111301" yaw="0.0" pitch="0.0" roll="0.0" />
+    <RenderableObject animated="false" name="hangar_terra_exterior" />
+    <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
   <Player position="-23.9149 -3.07833 -14.8018" yaw="-75.0" />
   <Miner name="Miner01" position="-17.4714 1.30798 -4.51993" yaw="0.0" active="false" />
   <Miner name="Miner02" position="-16.7403 1.30798 -2.29115" yaw="0.0" active="false" />

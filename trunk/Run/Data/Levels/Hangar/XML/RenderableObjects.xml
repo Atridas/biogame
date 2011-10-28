@@ -116,8 +116,9 @@
 	<RenderableObject name="hangar_llum_gran02" class="StaticMesh" resource="hangar_llum_gran02" position="10.0069 7.53283 6.95783" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_llum_gran03" class="StaticMesh" resource="hangar_llum_gran03" position="-9.95826 7.53283 6.95783" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_Montacarregues" class="StaticMesh" resource="hangar_Montacarregues" position="-23.8202 -4.78418 -14.8628" yaw="1.00179e-005" pitch="0.0" roll="0.0" />
-	<RenderableObject name="hangar_llum_exit" class="StaticMesh" resource="hangar_llum_exit" position="27.4121 7.88026 -4.7621" yaw="0.0" pitch="0.0" roll="0.0" />
-	<RenderableObject name="hangar_llum_exit01" class="StaticMesh" resource="hangar_llum_exit01" position="27.4121 7.88026 4.74151" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_llum_exit" class="StaticMesh" resource="hangar_llum_exit" position="27.4121 7.1275 -6.13467" yaw="0.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_llum_exit01" class="StaticMesh" resource="hangar_llum_exit01" position="27.4121 7.12454 5.81371" yaw="0.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_Caixa_estatica_petita26" class="StaticMesh" resource="hangar_Caixa_estatica_petita26" position="23.9589 0.0 4.42846" yaw="-50.0" pitch="0.0" roll="0.0" />
 	<RenderableObject name="hangar_Caixa_estatica_petita27" class="StaticMesh" resource="hangar_Caixa_estatica_petita27" position="21.9293 0.0215772 -2.22547" yaw="-25.0" pitch="0.0" roll="0.0" />
+	<RenderableObject name="hangar_terra_exterior" class="StaticMesh" resource="hangar_terra_exterior" position="57.148 -0.271867 -0.111301" yaw="0.0" pitch="0.0" roll="0.0" />
 </RenderableObjects>

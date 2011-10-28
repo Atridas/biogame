@@ -8,9 +8,8 @@
 	<light type="spot" direction="0.0529728 -10.4332 4.76837e-007" angle="69.4" fall_off="82.8" name="Spot10" pos="9.97317 9.16235 -5.62089" color="0.898039 0.905882 0.396078" att_start_range="0.0" att_end_range="16.4117" render_shadows="false" />
 	<light type="directional" direction="-40.7158 -22.4783 0.0512938" name="Spot11" pos="40.9506 23.1005 0.166263" color="0.521569 0.231373 0.0" att_start_range="0.0" att_end_range="81.0" render_shadows="false" />
 	<light type="directional" direction="41.3269 -21.2652 0.0512938" name="Spot12" pos="-41.0922 21.8874 0.166263" color="0.521569 0.231373 0.0" att_start_range="0.0" att_end_range="81.0" render_shadows="false" />
-	<light type="omni" name="Omni01" pos="-12.785 30.3679 25.9455" color="0.552941 0.690196 0.72549" att_start_range="0.0" att_end_range="25.1517" render_shadows="false" />
-	<light type="omni" name="Omni02" pos="26.7705 7.88965 4.73683" color="0.788235 0.133333 0.133333" att_start_range="0.0" att_end_range="1.62" render_shadows="false" />
-	<light type="omni" name="Omni03" pos="26.7705 7.88965 -4.73712" color="0.788235 0.133333 0.133333" att_start_range="0.0" att_end_range="1.62" render_shadows="false" />
+	<light type="omni" name="Omni02" pos="26.7705 7.13392 5.80903" color="0.788235 0.133333 0.133333" att_start_range="0.0" att_end_range="1.62" render_shadows="false" />
+	<light type="omni" name="Omni03" pos="26.7705 7.13689 -6.1097" color="0.788235 0.133333 0.133333" att_start_range="0.0" att_end_range="1.62" render_shadows="false" />
 	<light type="spot" direction="0.0 -2.11005 0.0" angle="10.0" fall_off="92.9" name="Hangar_Llums_florescents20" pos="-17.4279 14.7965 12.3639" color="0.490196 0.607843 0.592157" att_start_range="0.403802" att_end_range="9.02578" render_shadows="false" />
 	<light type="spot" direction="0.0 -2.11059 0.0" angle="16.6" fall_off="54.2" name="Hangar_Llums_florescents22" pos="-17.4279 14.7965 12.3639" color="0.745098 0.835294 0.819608" att_start_range="0.3283" att_end_range="8.02264" render_shadows="false" />
 	<light type="omni" name="Hangar_Llums_florescents24" pos="-17.4279 15.662 12.3516" color="0.160784 0.2 0.196078" att_start_range="0.0438021" att_end_range="3.60048" render_shadows="false" />
@@ -45,4 +44,12 @@
 	<light type="spot" direction="-10.0885 -2.81409 -2.37334" angle="12.6" fall_off="17.2" name="Spot15" pos="-11.9448 4.68689 -2.99805" color="1.0 0.101961 0.101961" att_start_range="0.403802" att_end_range="15.867" render_shadows="false" />
 	<light type="spot" direction="-5.24511 -1.73389 -9.04319" angle="16.0" fall_off="28.1" name="Spot16" pos="-1.965 3.36035 4.03852" color="1.0 0.101961 0.101961" att_start_range="0.403802" att_end_range="15.867" render_shadows="false" />
 	<light type="spot" direction="4.5154 -1.73389 10.8558" angle="16.0" fall_off="28.1" name="Spot17" pos="-1.65465 3.36035 1.86962" color="1.0 0.101961 0.101961" att_start_range="0.403802" att_end_range="15.867" render_shadows="false" />
+	<light type="omni" name="Omni01" pos="44.4439 3.16748 1.07448" color="1.0 1.0 1.0" att_start_range="0.0" att_end_range="17.8577" render_shadows="false" />
+	<light type="omni" name="Omni05" pos="44.4439 3.16748 -22.378" color="1.0 1.0 1.0" att_start_range="0.0" att_end_range="17.8577" render_shadows="false" />
+	<light type="omni" name="Omni06" pos="79.9128 3.16748 -22.378" color="1.0 1.0 1.0" att_start_range="0.0" att_end_range="31.6081" render_shadows="false" />
+	<light type="omni" name="Omni07" pos="79.9128 3.16748 19.1906" color="1.0 1.0 1.0" att_start_range="0.0" att_end_range="17.8577" render_shadows="false" />
+	<light type="omni" name="Omni08" pos="47.6885 3.16748 26.9308" color="1.0 1.0 1.0" att_start_range="0.0" att_end_range="17.8577" render_shadows="false" />
+	<light type="omni" name="Omni09" pos="61.2147 3.16748 -1.31694" color="1.0 1.0 1.0" att_start_range="0.0" att_end_range="31.6081" render_shadows="false" />
+	<light type="omni" name="Omni10" pos="61.2147 3.16748 -45.9148" color="1.0 1.0 1.0" att_start_range="0.0" att_end_range="31.6081" render_shadows="false" />
+	<light type="omni" name="Omni11" pos="66.785 3.16748 36.423" color="1.0 1.0 1.0" att_start_range="0.0" att_end_range="31.6081" render_shadows="false" />
 </lights>
