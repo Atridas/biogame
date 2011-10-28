@@ -101,4 +101,5 @@
 	<mesh name="hangar_llum_exit01" path="Data/Meshes/hangar_llum_exit01.mesh" max="0.0 0.22051 0.209717" min="-0.451292 -0.22051 -0.209717" />
 	<mesh name="hangar_Caixa_estatica_petita26" path="Data/Meshes/hangar_Caixa_estatica_petita26.mesh" max="1.39967 1.0 -0.122452" min="-1.39967 0.0 0.122456" />
 	<mesh name="hangar_Caixa_estatica_petita27" path="Data/Meshes/hangar_Caixa_estatica_petita27.mesh" max="1.16754 1.0 0.424951" min="-1.16754 0.0 -0.424949" />
+	<mesh name="hangar_terra_exterior" path="Data/Meshes/hangar_terra_exterior.mesh" max="30.1922 4.86321 65.782" min="-30.1921 -0.916256 -65.782" />
 </meshes>
