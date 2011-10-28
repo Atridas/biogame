@@ -98,6 +98,7 @@ void CComponentIABrain::Shoot(float _fShootPrecision)
   CEntityManager* l_pEM = ENTITY_MANAGER;
   l_pEM->InitParticles("disparar", l_vPos + l_vBoneDir*0.3f, Vect3f(.01f,.01f,.01f), 2.5f, l_vDir);
   l_pEM->InitLaser(l_vPos,l_vDir,SHOOT_POWER, CORE->GetPhysicsManager()->GetCollisionMask(ECG_RAY_SHOOT));
+  ENTITY_MANAGER->InitLifeOmni(0.1f,CColor(1.0f,1.0f,0.5f, 1.0f),0.0f,2.5f,l_vPos + l_vBoneDir*0.5f);
 
 }
 
