@@ -68,7 +68,7 @@ void CConsole::Render (CRenderManager* renderManager, CFontManager* fm )
 		fm->DrawDefaultText(10, h-25, colWHITE, total_text.c_str());
 
 		//Draw Info text:
-		std::string info = "[CONSOLE]              | AutoComplete: Tab | Reverse AutoComplete: LShift+Tab | History: Up | Reverse History: Down |";
+		std::string info = "[CONSOLE]              | AutoComplete: Tab | Reverse AutoComplete: LShift+Tab | History: Up | Reverse History: Down | Close: Type \"exit()\"";
 		uint32 dy = h-45;
 		fm->DrawDefaultText(10, dy, colWHITE, info.c_str());
 		std::string header = "______________________________________________________________________________________________________________________________________";
@@ -108,10 +108,16 @@ if( !m_bIsActive ) return;
 		m_sBuffer = ">";
 		m_uCursorPos = 1;
 	}
+  
+  /*
+  if( CORE->GetActionManager()->IsActionActive("Console") )
+	{
+    Toggle();
+    return;
+	}*/
 
 	CInputManager* im = CORE->GetInputManager();
 	assert(im);
-
 
 	if( im->IsUpDown(IDV_KEYBOARD, KEY_LEFT) )
 	{
