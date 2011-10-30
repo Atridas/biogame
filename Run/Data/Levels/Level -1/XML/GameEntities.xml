@@ -4108,6 +4108,10 @@
     <Object3D position="0.197629 2.02402 -6.38351" yaw="-0.771784" pitch="0.0" roll="-86.2188" />
     <CynematicCamera target="0.0196781 1.15088 6.82646" fov="45.0" near="1.0" far="1000.0" />
   </Entity>
+  <Entity name="lvl1_Interactive_Particle">
+    <Object3D position="-7.84128 0.605225 10.1243" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="Objecte Interactuable" volume="0.078536 0.078536 0.078536" />
+  </Entity>
   <Player position="-0.315653 -5.03087 -23.9926" yaw="-90.0" force_active="false" grenade_active="false" />
   <Miner name="lvl1_miner_green" position="0.0876412 1.6 4.76067" yaw="0.0" active="false" on_death="drop_key" />
   <Militar name="lvl1_militar00" position="-5.62033 1.6 0.208153" yaw="0.0" active="false" destiny="lvl1_node_cobertura" />
