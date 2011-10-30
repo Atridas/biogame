@@ -130,7 +130,7 @@
     <Door open="false" size="2.29047 4.30355 5.02548" type="PortaLaser" />
   </Entity>
   <Entity name="Porta_Videovigilancia">
-    <Object3D position="7.00888 -0.654852 3.36985" yaw="-114.214" pitch="0.0" roll="0.0" />
+    <Object3D position="7.00897 -0.654852 3.36965" yaw="-114.214" pitch="0.0" roll="0.0" />
     <RenderableObject animated="true" name="Porta" />
     <Door open="false" size="0.36806 2.62239 2.03725" type="Porta" />
   </Entity>
@@ -162,10 +162,6 @@
     <Object3D position="20.4441 0.271467 5.50426" yaw="-65.0" pitch="0.0" roll="0.0" />
     <Emiter core="boira" volume="8.22371 0.479595 4.39061" />
   </Entity>
-  <Entity name="pas_boira06">
-    <Object3D position="8.80422 -0.94948 -0.872293" yaw="-113.193" pitch="-12.626" roll="0.0345069" />
-    <Emiter core="boira" volume="8.22371 0.479595 4.39061" />
-  </Entity>
   <Entity name="pas_vapor01">
     <Object3D position="2.212 0.278 -6.421" yaw="0.0" pitch="0.0" roll="-85.0" />
     <Emiter core="vapor" volume="0.0488691 0.0488691 0.0488691" />
@@ -181,6 +177,10 @@
   <Entity name="pas_goteo02">
     <Object3D position="20.608 3.43603 5.784" yaw="115.0" pitch="-5.00896e-006" roll="180.0" />
     <Emiter core="goteo" volume="0.287217 0.200504 4.20279" />
+  </Entity>
+  <Entity name="pas_boira06">
+    <Object3D position="8.80422 -0.94948 -0.872293" yaw="-113.193" pitch="-12.626" roll="0.0345069" />
+    <Emiter core="boira" volume="8.22371 0.479595 4.39061" />
   </Entity>
   <Vigia name="pas_vigia00" position="21.7256 1.9223 7.86293" yaw="0.0" active="false" zone_size="4.47815 2.06849 9.75582" zone_position="19.1152 1.56859 2.45708" zone_yaw="25.0" />
 </Entities>
