@@ -83,11 +83,15 @@ void SetGodMode(bool _bGodMode)
   if(l_pPlayer)
   {
     l_pPlayer->GetComponent<CComponentPlayerController>()->SetGodMode(_bGodMode);
-    if(_bGodMode)
-    {
-      l_pPlayer->GetComponent<CComponentPlayerController>()->m_bForceActive = true;
-      l_pPlayer->GetComponent<CComponentPlayerController>()->m_bGrenadeActive = true;
-    }
+  }
+}
+
+void SetSemigodMode(bool _bGodMode)
+{
+  CGameEntity* l_pPlayer = ENTITY_MANAGER->GetEntity("Player");
+  if(l_pPlayer)
+  {
+    l_pPlayer->GetComponent<CComponentPlayerController>()->SetSemigodMode(_bGodMode);
   }
 }
 
@@ -127,6 +131,7 @@ void RegisterEntitiesToLua(lua_State* _pLS)
   module(_pLS) [
     //globals
     def("god_mode", &SetGodMode)
+    ,def("semigod_mode", &SetSemigodMode)
     ,def("set_song", &SetSong)
     ,def("activate_cynematic_camera", &ActivateCynematicCamera)
 
