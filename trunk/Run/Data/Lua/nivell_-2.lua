@@ -112,7 +112,7 @@ function salavideo_palanca(_self, _player)
     
     --activar el vigia del passadís
     activate_entity("pas_vigia00")
-	SOUND:play_sample("robot_move")
+    SOUND:play_sample("robot_move")
       
     _self:delete_component(BaseComponent.interactive)
   end
