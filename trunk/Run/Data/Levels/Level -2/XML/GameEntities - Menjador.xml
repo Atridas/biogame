@@ -8,7 +8,7 @@
   <Entity name="lvl2_menj_bido_vermell00">
     <Object3D position="4.09243 0.0 24.0841" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_vermell" />
-    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="100" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_explosiu" />
     <Explosive />
   </Entity>
@@ -565,65 +565,65 @@
   <Entity name="lvl2_menj_bido_vermell01">
     <Object3D position="33.5255 0.0 31.1549" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_vermell" />
-    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="100" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_explosiu" />
     <Explosive />
   </Entity>
   <Entity name="lvl2_menj_bido_verd00">
     <Object3D position="28.5492 0.0 29.7531" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_verd" />
-    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="100" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" destroyedResource="global_bido_verd_trencat" />
   </Entity>
   <Entity name="lvl2_menj_bido_vermell02">
     <Object3D position="27.8766 0.0 29.6178" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_vermell" />
-    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="100" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_explosiu" />
     <Explosive />
   </Entity>
   <Entity name="lvl2_menj_bido_verd01">
     <Object3D position="9.24693 0.0 25.4169" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_verd" />
-    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="100" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" destroyedResource="global_bido_verd_trencat" />
   </Entity>
   <Entity name="lvl2_menj_bido_vermell03">
     <Object3D position="17.7386 0.0 28.5294" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_vermell" />
-    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="100" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_explosiu" />
     <Explosive />
   </Entity>
   <Entity name="lvl2_menj_bido_verd02">
     <Object3D position="24.3544 0.0 29.8639" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_verd" />
-    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="100" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" destroyedResource="global_bido_verd_trencat" />
   </Entity>
   <Entity name="lvl2_menj_bido_verd03">
     <Object3D position="9.01941 0.0 28.2464" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_verd" />
-    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="100" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" destroyedResource="global_bido_verd_trencat" />
   </Entity>
   <Entity name="lvl2_menj_bido_vermell04">
     <Object3D position="9.66882 0.0 27.9152" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_vermell" />
-    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="100" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_explosiu" />
     <Explosive />
   </Entity>
   <Entity name="lvl2_menj_bido_verd04">
     <Object3D position="11.0087 0.0 31.6738" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_verd" />
-    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="100" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" destroyedResource="global_bido_verd_trencat" />
   </Entity>
   <Entity name="lvl2_menj_bido_verd05">
     <Object3D position="3.69763 0.0 24.6176" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_verd" />
-    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="100" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" destroyedResource="global_bido_verd_trencat" />
   </Entity>
   <Entity name="lvl2_menj_columna08">
@@ -956,7 +956,7 @@
   <Entity name="lvl2_menj_bido_verd06">
     <Object3D position="3.47045 0.0 35.1614" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="global_bido_verd" />
-    <PhysXBox fromRenderableObject="true" density="60" collision_group="objecte dinamic" />
+    <PhysXBox fromRenderableObject="true" density="100" collision_group="objecte dinamic" />
     <Destroyable onDestroy="bido_toxic" destroyedResource="global_bido_verd_trencat" />
   </Entity>
   <Entity name="lvl2_menj_menj_llum_florescent16">
