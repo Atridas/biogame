@@ -173,8 +173,9 @@ void CComponentPhysXBox::ReceiveEvent(const SEvent& _Event)
     if(_Event.Info[1].Type == SEventInfo::VECTOR)
     {
       Vect3f l_vDir(_Event.Info[1].v.x,_Event.Info[1].v.y,_Event.Info[1].v.z);
+      Vect3f l_vPos(_Event.Info[3].v.x,_Event.Info[3].v.y,_Event.Info[3].v.z);
 
-      m_pPhysXActor->AddVelocityAtPos(l_vDir,Vect3f(0.0f),SHOOT_POWER);
+      m_pPhysXActor->AddForceAtPos(l_vDir,l_vPos,SHOOT_POWER,false);
     }
   }
 }

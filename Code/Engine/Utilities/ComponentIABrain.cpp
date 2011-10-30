@@ -104,6 +104,8 @@ void CComponentIABrain::Shoot(float _fShootPrecision)
 
 void CComponentIABrain::ReceiveShoot(SEvent _sEvent)
 {
+  CComponentVida* l_pCV = GetEntity()->GetComponent<CComponentVida>();
+
   CPhysxBone* l_pHeadBone = 0;
   CPhysicActor* l_pActor = 0;
   CComponentRagdoll* l_pRagdoll = 0;
@@ -114,7 +116,7 @@ void CComponentIABrain::ReceiveShoot(SEvent _sEvent)
 
     assert(l_pRagdoll);
 
-    float l_fVida = GetEntity()->GetComponent<CComponentVida>()->GetHP();
+    float l_fVida = l_pCV->GetHP();
 
     if(l_fVida > 0.0f)
     {
@@ -144,8 +146,19 @@ void CComponentIABrain::ReceiveShoot(SEvent _sEvent)
         }
 
         Vect3f l_vDir(_sEvent.Info[1].v.x,_sEvent.Info[1].v.y,_sEvent.Info[1].v.z);
+        Vect3f l_vPos(_sEvent.Info[3].v.x,_sEvent.Info[3].v.y,_sEvent.Info[3].v.z);
 
-        l_pActor->AddVelocityAtPos(l_vDir,Vect3f(0.0f),SHOOT_POWER);
+        l_pActor->AddForceAtPos(l_vDir,l_vPos,SHOOT_POWER,false);
+      }
+
+      if(l_pCV->IsActive() && (l_fVida - _sEvent.Info[0].f) <= 0.0f)
+      {
+        ActivateRagdoll();
+
+        Vect3f l_vDir(_sEvent.Info[1].v.x,_sEvent.Info[1].v.y,_sEvent.Info[1].v.z);
+        Vect3f l_vPos(_sEvent.Info[3].v.x,_sEvent.Info[3].v.y,_sEvent.Info[3].v.z);
+
+        l_pActor->AddForceAtPos(l_vDir,l_vPos,SHOOT_POWER,false);
       }
 
     }else{
@@ -153,8 +166,9 @@ void CComponentIABrain::ReceiveShoot(SEvent _sEvent)
       l_pActor = (CPhysicActor*)_sEvent.Info[2].i;
 
       Vect3f l_vDir(_sEvent.Info[1].v.x,_sEvent.Info[1].v.y,_sEvent.Info[1].v.z);
+      Vect3f l_vPos(_sEvent.Info[3].v.x,_sEvent.Info[3].v.y,_sEvent.Info[3].v.z);
 
-      l_pActor->AddVelocityAtPos(l_vDir,Vect3f(0.0f),SHOOT_POWER);
+      l_pActor->AddForceAtPos(l_vDir,l_vPos,SHOOT_POWER,false);
     }
 
     assert(_sEvent.Info[3].Type == SEventInfo::VECTOR);
