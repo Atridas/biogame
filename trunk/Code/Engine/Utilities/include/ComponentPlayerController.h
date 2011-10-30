@@ -61,14 +61,16 @@ public:
   bool HasPickUp(const string& _szPickUp);
   void AddPickUp(const string& _szPickUp);
   bool RemovePickUp(const string& _szPickUp);
-
+  
   void SetGodMode(bool _bValue);
+  void SetSemigodMode(bool _bValue);
 
   bool IsAlive();
 
 private:
   CComponentPlayerController():
       m_bGodMode(false),
+      m_bSemigodMode(false),
 
       m_pObject3D(0), m_pMovement(0), m_pCoverEntity(0),
 
@@ -97,8 +99,9 @@ private:
   void Die();
   void ReceiveForce(SEvent _sEvent);
   void ActivateRagdoll();
-
+  
   bool m_bGodMode;
+  bool m_bSemigodMode;
 
   float m_fBloodFadeOutTime;
   float m_fBloodTime;

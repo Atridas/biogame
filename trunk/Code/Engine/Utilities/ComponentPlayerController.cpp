@@ -71,6 +71,8 @@ bool CComponentPlayerController::Init(CGameEntity *_pEntity)
   m_pAnimatedModel = dynamic_cast<CRenderableAnimatedInstanceModel*>(l_pComponentRO->GetRenderableObject());
   assert(m_pAnimatedModel); //TODO fer missatges d'error més elavorats
 
+  m_bGodMode     =
+  m_bSemigodMode =
   m_bShootActive   = 
   m_bGrenadeActive =
   m_bForceActive   = false;
@@ -614,11 +616,30 @@ void CComponentPlayerController::SetGodMode(bool _bValue)
   if(m_bGodMode)
   {
     LOGGER->AddNewLog(ELL_INFORMATION, "OVER 9000!!!!");
+    m_bForceActive = true;
+    m_bGrenadeActive = true;
     l_pVida->SetActive(false);
   }
   else
   {
     LOGGER->AddNewLog(ELL_INFORMATION, "God mode disabled.");
+    l_pVida->SetActive(true);
+  }
+}
+
+void CComponentPlayerController::SetSemigodMode(bool _bValue)
+{
+  m_bGodMode = false;
+  m_bSemigodMode = _bValue;
+  CComponentVida* l_pVida = GetEntity()->GetComponent<CComponentVida>();
+  if(m_bSemigodMode)
+  {
+    LOGGER->AddNewLog(ELL_INFORMATION, "OVER 4500!!!!");
+    l_pVida->SetActive(false);
+  }
+  else
+  {
+    LOGGER->AddNewLog(ELL_INFORMATION, "Semigod mode disabled.");
     l_pVida->SetActive(true);
   }
 }
@@ -732,7 +753,7 @@ void CComponentPlayerController::ReceiveEvent(const SEvent& _Event)
         AddPickUp(_Event.Info[0].str);
     }else if(_Event.Msg == SEvent::REBRE_IMPACTE)
     {
-      if(m_bGodMode)
+      if(m_bGodMode || m_bSemigodMode)
         return;
 
       m_fBloodFadeOutTime = BLOOD_FADEOUT_TIME;
@@ -747,14 +768,14 @@ void CComponentPlayerController::ReceiveEvent(const SEvent& _Event)
   
     }else if(_Event.Msg == SEvent::REBRE_FORCE)
     {
-      if(m_bGodMode)
+      if(m_bGodMode || m_bSemigodMode)
         return;
 
       ReceiveForce(_Event);
   
     }else if(_Event.Msg == SEvent::MORIR)
     {
-      if(m_bGodMode)
+      if(m_bGodMode || m_bSemigodMode)
         return;
 
       Die();
