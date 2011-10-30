@@ -144,6 +144,7 @@ State_Key_AllOff['Receive'] = function(_self, _event)
     local l_player = EM:get_entity(_event.sender)
     if l_player then
       if unlock(l_player, Key_Machine_Constants["KEY Top"], Key_Machine_Constants["DOOR Top"]) then
+        lvl1_activate_cynematic(1)
         _self:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Key_TopOn')
       end
     else
@@ -202,6 +203,7 @@ State_Key_TopOn['Receive'] = function(_self, _event)
     local l_player = EM:get_entity(_event.sender)
     if l_player then
       if unlock(l_player, Key_Machine_Constants["KEY Bot"], Key_Machine_Constants["DOOR Bot"]) then
+        lvl1_activate_cynematic(2)
         _self:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Key_BotOn')
       end
     else
@@ -246,6 +248,7 @@ State_Key_BotOn['Receive'] = function(_self, _event)
     local l_player = EM:get_entity(_event.sender)
     if l_player then
       if unlock(l_player, Key_Machine_Constants["KEY Right"], Key_Machine_Constants["DOOR Right"]) then
+        lvl1_activate_cynematic(3)
         _self:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Key_RightOn')
       end
     else
@@ -290,6 +293,7 @@ State_Key_RightOn['Receive'] = function(_self, _event)
     local l_player = EM:get_entity(_event.sender)
     if l_player then
       if unlock(l_player, Key_Machine_Constants["KEY Left"], Key_Machine_Constants["DOOR Left"]) then
+        lvl1_activate_cynematic(4)
         _self:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Key_LeftOn')
       end
     else

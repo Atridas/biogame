@@ -281,6 +281,8 @@ float4 ZBlurPS(float2 _UV: TEXCOORD0) : COLOR
   
   float l_BlurRadius = BlurRadius(tex2D(DepthTextureSampler, _UV).x);
   
+  //return float4(l_BlurRadius,l_BlurRadius,l_BlurRadius,1);
+  
   for(int i = 0; i < POISON_BLUR_KERNEL_SIZE; i++)
   {
     float2 l_Texel = _UV + l_PixelSize * g_PoissonBlurKernel[i] * l_BlurRadius;

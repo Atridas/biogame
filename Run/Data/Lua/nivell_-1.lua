@@ -25,7 +25,7 @@ function init_level_menys_1()
     l_player:get_component(BaseComponent.state_machine):get_state_machine():change_state('State_Player_Inactiu')
     
     --EM:get_entity("lvl1_physXBox_elevator"):set_active(false)
-	deactivate_entity("lvl1_physXBox_elevator")
+    deactivate_entity("lvl1_physXBox_elevator")
 	
     --fade in
     EFFECT_MANAGER:set_exposure(0)
@@ -156,6 +156,23 @@ function unlock(_player, _keyname, _doorname)
   end
   
   return false
+end
+
+function lvl1_activate_cynematic(_cynematic_num)
+  l_scripted_entity = EM:create_entity()
+  
+  ComponentDelayedScript.add_to_entity(l_scripted_entity, 3, "lvl1_deactivate_cynematic")
+  
+  activate_cynematic_camera("lvl1_camera_porta" .. _cynematic_num)
+  RENDERER:deactivate_render_path("aim_gui")
+  
+end
+
+function lvl1_deactivate_cynematic(_self)
+  deactivate_cynematic_camera()
+  RENDERER:activate_render_path("aim_gui")
+  
+  EM:remove_entity(_self)
 end
 
 --other

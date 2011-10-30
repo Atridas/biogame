@@ -579,11 +579,11 @@
     <StateMachine initial_state="State_Elevator_Idle" />
   </Entity>
   <Entity name="hangar_llum_exit">
-    <Object3D position="27.4121 7.88026 -4.7621" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="27.4121 7.1275 -6.13467" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="hangar_llum_exit" />
   </Entity>
   <Entity name="hangar_llum_exit01">
-    <Object3D position="27.4121 7.88026 4.74151" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Object3D position="27.4121 7.12454 5.81371" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="hangar_llum_exit01" />
   </Entity>
   <Entity name="hang_trig_enemics00">
@@ -1476,6 +1476,34 @@
     <Object3D position="57.148 -0.271867 -0.111301" yaw="0.0" pitch="0.0" roll="0.0" />
     <RenderableObject animated="false" name="hangar_terra_exterior" />
     <PhysXMesh density="0" collision_group="escenari" />
+  </Entity>
+  <Entity name="Hangar_vapor02">
+    <Object3D position="27.0998 2.65143 -5.48684" yaw="35.0" pitch="65.0" roll="8.0808e-006" />
+    <Emiter core="vapor" volume="0.0949468 0.0949468 0.0949468" />
+  </Entity>
+  <Entity name="Hangar_vapor01">
+    <Object3D position="8.11376 1.92946 -14.4674" yaw="0.0" pitch="0.0" roll="70.0" />
+    <Emiter core="vapor" volume="0.0656531 0.0656531 0.0656531" />
+  </Entity>
+  <Entity name="Hangar_vapor04">
+    <Object3D position="10.5303 4.87167 -14.4674" yaw="-30.6821" pitch="-27.034" roll="107.454" />
+    <Emiter core="vapor" volume="0.0656531 0.0656531 0.0656531" />
+  </Entity>
+  <Entity name="Hangar_vapor03">
+    <Object3D position="27.0288 6.32109 -9.74443" yaw="0.0" pitch="80.0" roll="0.0" />
+    <Emiter core="vapor" volume="0.112365 0.112365 0.112365" />
+  </Entity>
+  <Entity name="Hangar_vapor07">
+    <Object3D position="-21.6943 2.13781 13.7871" yaw="1.04227e-006" pitch="-35.0" roll="-50.0" />
+    <Emiter core="vapor" volume="0.0433467 0.0433467 0.0433467" />
+  </Entity>
+  <Entity name="hangar_efecte_fred01">
+    <Object3D position="16.6535 1.38114 -14.39" yaw="3.41509e-006" pitch="0.0" roll="90.0" />
+    <Emiter core="efecte_fred" volume="1.04005 0.0980859 2.3056" />
+  </Entity>
+  <Entity name="hangar_efecte_fred02">
+    <Object3D position="23.0696 1.38114 13.178" yaw="-3.41509e-006" pitch="2.13443e-007" roll="-90.0" />
+    <Emiter core="efecte_fred" volume="0.909212 0.085747 2.30064" />
   </Entity>
   <Player position="-23.9149 -3.07833 -14.8018" yaw="-75.0" />
   <Miner name="Miner01" position="-17.4714 1.30798 -4.51993" yaw="0.0" active="false" />

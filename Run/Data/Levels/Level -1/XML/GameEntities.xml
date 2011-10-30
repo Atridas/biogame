@@ -3884,10 +3884,6 @@
     <Object3D position="-0.0492312 -0.0797765 -23.9823" yaw="0.0" pitch="0.0" roll="0.0" />
     <PhysXBox fromRenderableObject="false" shape="box" size="5.01586 0.185986 2.61529" midpoint="0 0 0" density="0" collision_group="escenari" />
   </Entity>
-  <Entity name="lvl1_peste_eonita01">
-    <Object3D position="26.83 0.384155 40.6823" yaw="0.0" pitch="0.0" roll="0.0" />
-    <Emiter core="peste_eonita" volume="0.144642 0.0809174 0.187034" />
-  </Entity>
   <Entity name="lvl1_trigger_magatzem03">
     <Object3D position="25.8396 -7.55369 -23.7787" yaw="0.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="1.70426 4.88858 3.29635" collision_group="trigger" onEnter="lvl1_trigger_magatzem03" />
@@ -3899,6 +3895,218 @@
   <Entity name="lvl1_trigger_lavabo">
     <Object3D position="24.2718 2.47924 34.112" yaw="-135.0" pitch="0.0" roll="0.0" />
     <Trigger shape="box" size="1.70425 4.88857 14.8366" collision_group="trigger" onEnter="lvl1_trigger_lavabo" />
+  </Entity>
+  <Entity name="lvl1_boira_terra_elevat">
+    <Object3D position="-0.0605695 0.254092 -0.132707" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="12.4441 0.377812 12.4441" />
+  </Entity>
+  <Entity name="lvl1_boira_succionada">
+    <Object3D position="-0.0109177 1.25644 -0.00795233" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira_succionada" volume="2.85511 1.57317 2.85511" />
+  </Entity>
+  <Entity name="lvl1_claus_goteras01">
+    <Object3D position="-6.77016 3.80592 9.07917" yaw="-45.0" pitch="0.0" roll="180.0" />
+    <Emiter core="gotas" volume="1.77897 0.0568645 0.0767814" />
+  </Entity>
+  <Entity name="lvl1_claus_goteras02">
+    <Object3D position="-8.38245 3.80592 6.40123" yaw="-45.0" pitch="0.0" roll="-180.0" />
+    <Emiter core="gotas" volume="1.77897 0.0568645 0.0767814" />
+  </Entity>
+  <Entity name="lvl1_claus_goteras03">
+    <Object3D position="-8.90784 3.80592 8.28208" yaw="-45.0" pitch="0.0" roll="180.0" />
+    <Emiter core="gotas" volume="1.77897 0.0568645 0.0767814" />
+  </Entity>
+  <Entity name="lvl1_claus_goteras04">
+    <Object3D position="-5.12223 3.54237 7.94684" yaw="45.0" pitch="0.0" roll="-180.0" />
+    <Emiter core="gotas" volume="1.77897 0.0568645 0.0767814" />
+  </Entity>
+  <Entity name="lvl1_claus_vapor01">
+    <Object3D position="-11.5807 2.05676 6.14752" yaw="0.0" pitch="0.0" roll="95.0" />
+    <Emiter core="vapor2" volume="0.0208892 0.0208892 0.0208892" />
+  </Entity>
+  <Entity name="lvl1_claus_vapor02">
+    <Object3D position="-11.3216 2.05676 5.80199" yaw="-55.0" pitch="-75.0" roll="-1.31949e-005" />
+    <Emiter core="vapor2" volume="0.0208892 0.0208892 0.0208892" />
+  </Entity>
+  <Entity name="lvl1_claus_vapor04">
+    <Object3D position="-8.95437 3.82747 7.02447" yaw="100.0" pitch="-60.0" roll="-180.0" />
+    <Emiter core="vapor3" volume="0.0633597 0.0633597 0.0633597" />
+  </Entity>
+  <Entity name="lvl1_claus_vapor05">
+    <Object3D position="-7.74528 3.82747 5.38595" yaw="-180.0" pitch="-50.0" roll="-180.0" />
+    <Emiter core="vapor3" volume="0.0633597 0.0633597 0.0633597" />
+  </Entity>
+  <Entity name="lvl1_claus_vapor06">
+    <Object3D position="-5.77159 3.00478 10.6091" yaw="-0.1" pitch="0.0" roll="-120.0" />
+    <Emiter core="vapor" volume="0.0633597 0.0633597 0.0633597" />
+  </Entity>
+  <Entity name="lvl1_claus_vapor07">
+    <Object3D position="-4.64331 3.29417 9.54728" yaw="108.202" pitch="2.0172" roll="-155.051" />
+    <Emiter core="vapor" volume="0.0633597 0.0633597 0.0633597" />
+  </Entity>
+  <Entity name="lvl1_claus_vapor08">
+    <Object3D position="-3.67296 3.55824 9.41739" yaw="37.4537" pitch="27.034" roll="-149.318" />
+    <Emiter core="vapor3" volume="0.0633597 0.0633597 0.0633597" />
+  </Entity>
+  <Entity name="lvl1_claus_boira01">
+    <Object3D position="-7.44918 0.190929 7.16798" yaw="45.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="5.13551 0.543053 6.57582" />
+  </Entity>
+  <Entity name="lvl1_municio_goteras01">
+    <Object3D position="-29.2918 4.89451 1.79302" yaw="-180.0" pitch="-8.65142e-006" roll="-180.0" />
+    <Emiter core="gotas" volume="0.114291 0.0882838 2.15205" />
+  </Entity>
+  <Entity name="lvl1_municio_goteras02">
+    <Object3D position="-28.7554 4.89451 0.878601" yaw="-180.0" pitch="-8.65142e-006" roll="-180.0" />
+    <Emiter core="gotas" volume="0.114291 0.0882838 2.15205" />
+  </Entity>
+  <Entity name="lvl1_municio_goteras03">
+    <Object3D position="-32.2198 4.89451 -1.92528" yaw="-180.0" pitch="-8.65142e-006" roll="-180.0" />
+    <Emiter core="gotas" volume="0.114291 0.0882838 2.15205" />
+  </Entity>
+  <Entity name="lvl1_municio_goteras04">
+    <Object3D position="-32.2198 4.89451 0.725836" yaw="-180.0" pitch="-8.65142e-006" roll="-180.0" />
+    <Emiter core="gotas" volume="0.114291 0.0882838 2.15205" />
+  </Entity>
+  <Entity name="lvl1_municio_goteras05">
+    <Object3D position="-30.507 4.89451 -1.67257" yaw="-180.0" pitch="-8.65142e-006" roll="-180.0" />
+    <Emiter core="gotas" volume="0.114291 0.0882838 2.15205" />
+  </Entity>
+  <Entity name="lvl1_municio_vapor01">
+    <Object3D position="-31.3987 3.67398 -3.8342" yaw="9.85853e-007" pitch="30.0" roll="125.0" />
+    <Emiter core="vapor2" volume="0.0482869 0.0482869 0.0482869" />
+  </Entity>
+  <Entity name="lvl1_municio_vapor02">
+    <Object3D position="-29.3738 4.74586 1.07162" yaw="-0.098245" pitch="-39.507" roll="-152.427" />
+    <Emiter core="vapor2" volume="0.031852 0.031852 0.031852" />
+  </Entity>
+  <Entity name="lvl1_municio_vapor03">
+    <Object3D position="-32.8204 1.68207 2.90847" yaw="50.0" pitch="-80.0" roll="0.0" />
+    <Emiter core="vapor2" volume="0.0482869 0.0482869 0.0482869" />
+  </Entity>
+  <Entity name="lvl1_municio_vapor04">
+    <Object3D position="-32.9861 0.0820105 -2.77702" yaw="2.04906e-005" pitch="0.0" roll="45.0" />
+    <Emiter core="vapor2" volume="0.0482869 0.0482869 0.0482869" />
+  </Entity>
+  <Entity name="lvl1_municio_electricitat01">
+    <Object3D position="-32.6171 2.08623 -0.732827" yaw="-90.0" pitch="1.70755e-006" roll="-90.0" />
+    <Emiter core="electric2" volume="0.104322 0.104322 0.104322" />
+  </Entity>
+  <Entity name="lvl1_municio_electricitat02">
+    <Object3D position="-32.6114 1.7868 -0.640539" yaw="90.0" pitch="-55.0" roll="90.0" />
+    <Emiter core="electric" volume="0.104322 0.104322 0.104322" />
+  </Entity>
+  <Entity name="lvl1_municio_chispes01">
+    <Object3D position="-32.6114 1.96194 -0.658975" yaw="-90.0" pitch="1.70755e-006" roll="-90.0" />
+    <Emiter core="chispes" volume="0.104322 0.104322 0.104322" />
+  </Entity>
+  <Entity name="lvl1_municio_vapor05">
+    <Object3D position="-31.6105 3.9842 4.09816" yaw="-40.0" pitch="1.70755e-006" roll="-110.0" />
+    <Emiter core="vapor2" volume="0.0482869 0.0482869 0.0482869" />
+  </Entity>
+  <Entity name="lvl1_municio_boira">
+    <Object3D position="-30.0951 0.235615 0.0485318" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="4.39178 0.235519 6.85582" />
+  </Entity>
+  <Entity name="lvl1_Passadis4_boira01">
+    <Object3D position="11.2411 0.249933 0.0307162" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="7.49522 0.284409 3.96351" />
+  </Entity>
+  <Entity name="lvl1_Passadis4_boira02">
+    <Object3D position="18.808 0.249933 0.0484364" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="7.56234 0.284409 3.96351" />
+  </Entity>
+  <Entity name="lvl1_Passadis4_boira04">
+    <Object3D position="32.6775 -2.7459 0.0484364" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="6.19013 0.284409 3.96351" />
+  </Entity>
+  <Entity name="lvl1_Passadis4_boira03">
+    <Object3D position="26.1216 -0.938292 0.0495571" yaw="0.0" pitch="-25.0" roll="0.0" />
+    <Emiter core="boira" volume="6.56955 0.284409 3.96351" />
+  </Entity>
+  <Entity name="lvl1_Passadis4_boira05">
+    <Object3D position="33.775 -4.12937 -6.12525" yaw="-90.0" pitch="25.0" roll="-1.88407e-006" />
+    <Emiter core="boira" volume="7.56234 0.284409 3.96351" />
+  </Entity>
+  <Entity name="lvl1_Passadis4_boira06">
+    <Object3D position="33.775 -7.38972 -13.0775" yaw="-90.0" pitch="25.0" roll="-1.88407e-006" />
+    <Emiter core="boira" volume="7.56234 0.284409 3.96351" />
+  </Entity>
+  <Entity name="lvl1_armeria_boira01">
+    <Object3D position="36.9073 -9.68583 -23.8263" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="5.15228 0.328691 2.25326" />
+  </Entity>
+  <Entity name="lvl1_armeria_boira02">
+    <Object3D position="31.708 -9.68583 -23.8263" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="5.15228 0.328691 2.25326" />
+  </Entity>
+  <Entity name="lvl1_armeria_boira03">
+    <Object3D position="26.4084 -9.68583 -23.8263" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="5.15228 0.328691 2.25326" />
+  </Entity>
+  <Entity name="lvl1_armeria_boira04">
+    <Object3D position="27.8757 -9.68583 -28.5143" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="5.15228 0.328691 2.25326" />
+  </Entity>
+  <Entity name="lvl1_armeria_boira05">
+    <Object3D position="33.1792 -9.68583 -28.5143" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="5.15228 0.328691 2.25326" />
+  </Entity>
+  <Entity name="lvl1_armeria_boira06">
+    <Object3D position="38.6094 -9.68583 -28.5143" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="5.15228 0.328691 2.25326" />
+  </Entity>
+  <Entity name="lvl1_armeria_boira07">
+    <Object3D position="38.6094 -9.68583 -33.5196" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="5.15228 0.328691 2.25326" />
+  </Entity>
+  <Entity name="lvl1_armeria_boira08">
+    <Object3D position="33.1989 -9.68583 -33.5196" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="5.15228 0.328691 2.25326" />
+  </Entity>
+  <Entity name="lvl1_armeria_boira09">
+    <Object3D position="27.8212 -9.68583 -33.5196" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="5.15228 0.328691 2.25326" />
+  </Entity>
+  <Entity name="lvl1_armeria_boira10">
+    <Object3D position="27.8212 -9.68583 -38.4686" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="5.15228 0.328691 2.25326" />
+  </Entity>
+  <Entity name="lvl1_armeria_boira11">
+    <Object3D position="33.1767 -9.68583 -38.4686" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="5.15228 0.328691 2.25326" />
+  </Entity>
+  <Entity name="lvl1_armeria_boira12">
+    <Object3D position="38.6058 -9.68583 -38.4686" yaw="0.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="5.15228 0.328691 2.25326" />
+  </Entity>
+  <Entity name="lvl1_armeria_boira13">
+    <Object3D position="23.9419 -9.68583 -30.1849" yaw="-90.0" pitch="0.0" roll="0.0" />
+    <Emiter core="boira" volume="8.99075 0.328691 2.25326" />
+  </Entity>
+  <Entity name="lvl1_municio_chispes02">
+    <Object3D position="-32.6114 2.1406 -0.634902" yaw="-90.0" pitch="1.70755e-006" roll="-90.0" />
+    <Emiter core="chispes" volume="0.104322 0.104322 0.104322" />
+  </Entity>
+  <Entity name="lvl1_camera_claus">
+    <Object3D position="3.51614 2.02402 -3.28473" yaw="-46.1401" pitch="1.70755e-006" roll="-85.2868" />
+    <CynematicCamera target="-4.11983 1.15088 4.05325" fov="45.0" near="1.0" far="1000.0" />
+  </Entity>
+  <Entity name="lvl1_camera_porta1">
+    <Object3D position="4.92004 2.02402 0.266141" yaw="-90.9088" pitch="-3.4151e-006" roll="-85.4988" />
+    <CynematicCamera target="-6.16995 1.15088 0.0902245" fov="45.0" near="1.0" far="1000.0" />
+  </Entity>
+  <Entity name="lvl1_camera_porta2">
+    <Object3D position="-5.6682 2.02402 0.266141" yaw="90.8194" pitch="1.70755e-006" roll="-85.9403" />
+    <CynematicCamera target="6.63267 1.15088 0.0902245" fov="45.0" near="1.0" far="1000.0" />
+  </Entity>
+  <Entity name="lvl1_camera_porta3">
+    <Object3D position="-4.39325 2.02402 -4.23617" yaw="44.7942" pitch="1.70755e-006" roll="-86.0484" />
+    <CynematicCamera target="4.51224 1.15088 4.73352" fov="45.0" near="1.0" far="1000.0" />
+  </Entity>
+  <Entity name="lvl1_camera_porta4">
+    <Object3D position="0.197629 2.02402 -6.38351" yaw="-0.771784" pitch="0.0" roll="-86.2188" />
+    <CynematicCamera target="0.0196781 1.15088 6.82646" fov="45.0" near="1.0" far="1000.0" />
   </Entity>
   <Player position="-0.315653 -5.03087 -23.9926" yaw="-90.0" force_active="false" grenade_active="false" />
   <Miner name="lvl1_miner_green" position="0.0876412 1.6 4.76067" yaw="0.0" active="false" on_death="drop_key" />
