@@ -6,7 +6,7 @@ filein "Portalling.ms"
 fileIn "Particles.ms"
 fileIn "EntitiesXML.ms"
 
-utility BioUtility "Eon-Utility" width:160 height:549
+utility BioUtility "Eon-Utility" width:160 height:500
 (
 	button buttonPath "Set Path" pos:[8,8] width:144 height:24
 	label labelPath "Marian" pos:[8,46] width:137 height:24
@@ -14,17 +14,13 @@ utility BioUtility "Eon-Utility" width:160 height:549
 	checkbox checkTextures "Export Textures" pos:[13,90] width:115 height:16
 	checkbox checkNormalRadiosity "Normal Radiosity" pos:[13,106] width:112 height:17
 	dropdownList dropNivell "Nivell" pos:[11,125] width:131 height:40
-	GroupBox grp1 "Export" pos:[11,170] width:131 height:171
+	GroupBox grp1 "Export" pos:[11,170] width:131 height:150
 	button buttonMesh "Mesh" pos:[23,188] width:100 height:19
 	button buttonMeshManager "Mesh Manager" pos:[24,212] width:98 height:22
-	button buttonScene "Scene" pos:[27,305] width:94 height:22
+	button buttonScene "Scene" pos:[27,270] width:94 height:22
 	button buttonLight "Light" pos:[27,241] width:93 height:18
-	button buttonParticles "Particles" pos:[28,271] width:93 height:23
-	GroupBox grp3 "PhysX" pos:[14,360] width:130 height:119
-	dropdownList DropListPhysX "Type" pos:[33,385] width:95 height:40
-	button ButtonPhysX "Create" pos:[36,437] width:88 height:23
-	button ButtonEntities "Exportar Entitats" pos:[24,488] width:116 height:26
-	button ButtonNivell "Exportar Portals" pos:[24,520] width:114 height:23
+	button ButtonEntities "Exportar Entitats" pos:[24,350] width:116 height:26
+	button ButtonNivell "Exportar Portals" pos:[24,382] width:114 height:23
 	
 	-- Control de Paths
   
@@ -1440,7 +1436,6 @@ utility BioUtility "Eon-Utility" width:160 height:549
 	(
 		labelPath.text = g_DefaultPath
 		dropNivell.items = g_LevelArray
-		DropListPhysX.items = g_PhysXArray
 	)
 	on buttonPath pressed do
 	(
@@ -1627,6 +1622,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			ShowError "Problema inidentificat"
 		)
 	)
+	/*
 	on buttonParticles pressed do
 	(
 		
@@ -1681,6 +1677,7 @@ utility BioUtility "Eon-Utility" width:160 height:549
 			ShowMessage "Export de la Fisica finalitzat\n"
 		)
 	)
+	*/
 	on ButtonEntities pressed do
 	(
 		

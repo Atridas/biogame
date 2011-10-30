@@ -38,6 +38,9 @@ Key_Machine_Constants["DOOR Bot"]   = "lvl1_door04"
 Key_Machine_Constants["DOOR Right"] = "lvl1_door01"
 Key_Machine_Constants["DOOR Left"]  = "lvl1_door_final"
 
+-- Emisor de partícules
+Key_Machine_Constants["Emiter"] = "lvl1_Interactive_Particle"
+
 -- Temps
 Key_Machine_Constants["Last Door Waiting"] = 3.0
 Key_Machine_Constants["Last Door Waiting Count"] = 0.0
@@ -126,6 +129,8 @@ State_Key_AllOff["Enter"] = function(_self)
   if l_light then
     l_light:set_active(true)
   end
+  
+  activate_entity(Key_Machine_Constants["Emiter"])
 end
 
 -------------------------------------------------------------------------------------------------
@@ -328,7 +333,7 @@ end
 
 -------------------------------------------------------------------------------------------------
 State_Key_LeftOn["Exit"] = function(_self)
-  
+  deactivate_entity(Key_Machine_Constants["Emiter"])
 end
 
 -------------------------------------------------------------------------------------------------
@@ -386,8 +391,6 @@ State_Key_AllOn["Enter"] = function(_self)
   if l_light then
     l_light:set_active(false)
   end
-  
-  --TODO: Crear particules del centre
 end
 
 -------------------------------------------------------------------------------------------------
