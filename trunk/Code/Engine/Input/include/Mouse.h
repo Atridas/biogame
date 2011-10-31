@@ -34,6 +34,8 @@ public:
 	bool	              IsUpDown					(uint32 nBtn)		const		{ if (nBtn<3) return m_bIsUpDown[nBtn]; return false; }
 	bool	              IsDownUp					(uint32 nBtn)		const		{ if (nBtn<3) return m_bIsDownUp[nBtn]; return false; }
 
+  void SetSensitivity(float _fSensitivity) {m_fSensitivity = _fSensitivity;};
+
 private:
 	void                Release           ();
 

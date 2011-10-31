@@ -257,9 +257,13 @@ end
 --activar el montacàrregues
 function activate_elevator_2(_EntityTrigger, _Entity)
   if _Entity:get_name() == "Player" and _Entity:get_component(BaseComponent.player_controller):is_alive() then
-    god_mode(true)
+    semigod_mode(true)
     --activar montacàrregues.
     local elevator = EM:get_entity("lvl2_montacarregues")
+    
+    local physx_controller = _Entity:get_component(BaseComponent.physx_controller)
+    physx_controller:use_gravity(false)
+    
     
     if elevator then
       --Càmera

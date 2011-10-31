@@ -572,6 +572,13 @@ void CInputManager::InitString2Input ()
   m_String2Code.insert( PairString2Code("KEY_NULL", KEY_NULL) );
 }
 
+
+void CInputManager::SetMouseSensitivity(float _fSensitivity)
+{
+  if(m_pMouse)
+    m_pMouse->SetSensitivity(_fSensitivity);
+}
+
 //----------------------------------------------------------------------------
 // LUA BIND
 //----------------------------------------------------------------------------

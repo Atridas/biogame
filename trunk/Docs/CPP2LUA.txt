@@ -30,6 +30,8 @@ GLOBALS
     activate_cynematic_camera
     void ActivateCynematicCamera(const string& _szCameraEntityName)
     
+    set_mouse_sensitivity
+    void SetMouseSensitivity(float _fSensitivity)
 
   Class:
 			Vect2f

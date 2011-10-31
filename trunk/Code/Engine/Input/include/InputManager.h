@@ -59,6 +59,9 @@ public:
 
   uint32 GetCode(const string& _szCodeName) {return m_String2Code[_szCodeName];};
 
+  
+  void SetMouseSensitivity(float _fSensitivity);
+
 private:
 	void						Release													();
 
