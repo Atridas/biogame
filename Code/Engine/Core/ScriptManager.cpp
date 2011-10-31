@@ -45,6 +45,7 @@ extern "C"
 #include "InputManager.h"
 #include "ActionManager.h"
 #include "EffectManager.h"
+#include "InputManager.h"
 
 #include "EntitiesToLua.h"
 #include "IAToLua.h"
@@ -249,6 +250,11 @@ void DeactivateCynematicCamera()
   CORE->GetRenderer()->SetActiveCamera(0);
 }
 
+void SetMouseSensitivity(float _fSensitivity)
+{
+  CORE->GetInputManager()->SetMouseSensitivity(_fSensitivity);
+}
+
 void CScriptManager::RegisterGUI() {
   module(m_pLS)
     [
@@ -378,6 +384,8 @@ void CScriptManager::RegisterLUAFunctions()
     ,def("reload_animation_states", &ReloadAnimationStates)
 
     ,def("deactivate_cynematic_camera",&DeactivateCynematicCamera)
+
+    ,def("set_mouse_sensitivity", &SetMouseSensitivity)
   ];
 
   //Vect3f

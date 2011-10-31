@@ -6,7 +6,6 @@ function init_level_menys_1()
   local l_player = EM:get_entity("Player")
   
   local physx_controller = l_player:get_component(BaseComponent.physx_controller)
-  
   physx_controller:use_gravity(false)
   
   if elevator then      
@@ -283,6 +282,10 @@ function lvl1_activate_elevator(_EntityTrigger, _Entity)
   if _Entity:get_name() == "Player" and _Entity:get_component(BaseComponent.player_controller):is_alive() then
     god_mode(true)
     local elevator = EM:get_entity("lvl1_montacarregues01")
+    
+    local physx_controller = _Entity:get_component(BaseComponent.physx_controller)
+    physx_controller:use_gravity(false)
+    
     
     if elevator then      
       --aturar l'ascensor
